@@ -10,13 +10,16 @@ for a child of about six, and the subject-independent machinery behind it
 ## What is here
 
 **The activity: Mom goes shopping.** Mom's list shows a numeral. At the fruit
-shop the child drags fruit into a basket one at a time and decides when to go
-home. Three short trips make one visit:
+shop the child puts fruit into a basket one at a time and decides when to go
+home. The app opens straight into the game and a child never has to read:
+Mom says every line aloud, the buttons are pictures, a moving hand shows the
+first drag, and dragging or tapping a fruit both work. Three short trips make
+one visit:
 
 | Trip | The list shows | What it probes |
 | --- | --- | --- |
 | 1 | the numeral 5 and an apple | numeral reading, one-to-one counting, cardinality |
-| 2 | a different numeral, a different fruit, other fruit mixed in | the same skills away from the practised case (transfer) |
+| 2 | a different numeral and a different fruit | the same skills away from the practised case (transfer) |
 | 3 | no numeral: a picture of plates, "one pear for each plate" | quantity without numerals, which separates "can't count" from "can't read the numeral" |
 
 There are no scores and no failure screens. If the basket is wrong, Mom helps in
@@ -69,21 +72,21 @@ in the browser and assesses it on the device. Open it by double-clicking.
 
 ## Review it
 
-1. Open the app. The first screen is for a grown-up: tick the consent box and
-   start. The nickname is optional and never leaves the device.
+1. Open the app. It starts in the game; there is nothing to fill in.
 2. Play the three trips. Try both ways:
-   - count correctly, or take one too many and put it back before pressing
-     **Go home** (an unprompted fix still counts as independent);
-   - press **Go home** with the wrong amount, more than once, to see the help
-     steps.
-3. Open **For grown-ups** (top right). It shows what happened on each trip, how
-   each skill's reading moved, which mastery criteria are met, the plan for the
-   next visit, and the raw event record the readings were derived from.
-4. Nothing will be "Secure" yet. Press **Skip ahead 3 days**, go back, **Play
-   again**, and get the second visit right. Skills move to "Secure", two further
-   skills open, and the next visit uses bigger numbers with mixed fruit.
-5. Play a visit badly instead and the next plan drops to small numbers on an
-   uncluttered shelf.
+   - count correctly, or take one too many and put it back before tapping the
+     house (an unprompted fix still counts as independent);
+   - tap the house with the wrong amount, more than once, to see the help steps.
+3. Open **Grown-ups** (top right). It shows what happened on each trip, how
+   each skill's reading moved, the plan for the next visit, and the raw event
+   record the readings were derived from.
+4. With the API running, the record starts on the device only. Under **Your
+   data**, tick the consent box and choose **Agree and save** to move it to the
+   server. Nothing is sent before that.
+5. Nothing will be "Secure" yet. Press **Skip ahead 3 days**, go back, play
+   again, and get the second visit right. Skills move to "Secure", two further
+   skills open, and the next visit uses bigger numbers with other fruit mixed in.
+6. Play a visit badly instead and the next plan drops to small numbers.
 
 The skip-ahead control shifts this device's clock. The server only believes
 client dates when `OPENPATH_TRUST_CLIENT_CLOCK` is on (the default in debug,
@@ -161,6 +164,10 @@ the token belonging to that learner.
   are reasoned defaults, not calibrated against real children. They live in
   `shared/curriculum/` so they can be tuned without code changes.
 - Spoken prompts use the browser's built-in voice, in English only.
-- Authentication is one random token per learner, held on the family's device.
-  There are no parent or school accounts, and no verified parental consent flow.
+- Consent is a tick box in the grown-ups area, required before anything is
+  stored on a server. It is not verified. Authentication is one random token
+  per learner, held on the family's device; there are no parent or school
+  accounts.
+- Visits played before consent are uploaded when consent is given. A production
+  server dates them all at upload time, so their spacing in days is lost.
 - No offline queue beyond "retry unsent visits next time"; no mobile app yet.

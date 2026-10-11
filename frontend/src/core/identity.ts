@@ -1,6 +1,9 @@
 /**
  * Who is playing, as far as this device knows.
  *
+ * Play starts with a device-only record: a random ID and nothing else. The
+ * record moves to a server only after a grown-up agrees (see enrolOnServer).
+ *
  * The nickname never leaves the device: it is not sent to the server and is
  * not part of any evidence. The server (if there is one) knows only the
  * random learner ID. Whoever holds this record - the family - holds the link
@@ -16,7 +19,15 @@ export interface Identity {
   access_token?: string;
   /** Shown on this device only. */
   nickname: string;
-  consent: { given_by: "guardian"; confirmed_at: string };
+  /** Set once a grown-up has agreed to the record being kept on a server. */
+  consent: { given_by: "guardian"; confirmed_at: string } | null;
+}
+
+/** A learner record that exists only on this device. Nothing is sent anywhere. */
+export function createLocalIdentity(): Identity {
+  const identity: Identity = { learner_id: uuid(), nickname: "", consent: null };
+  setIdentity(identity);
+  return identity;
 }
 
 export const getIdentity = (): Identity | null => load<Identity | null>(KEY, null);

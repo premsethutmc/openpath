@@ -25,6 +25,22 @@ step's output is kept separately from the one before:
 Observations and skill states are derived data. `manage.py reassess` deletes
 and rebuilds them from events, so rules can improve without losing history.
 
+## Built for a six-year-old
+
+The child's side has no sign-up, no forms and nothing that must be read.
+
+- The app opens in the game. A device-only learner record is created silently.
+- Mom speaks every line, and each line is a handful of words.
+- Buttons are pictures (a shop, a house, an arrow) inside the scene.
+- On the first trip a hand drags one fruit to the basket, on a loop, until the
+  child tries it. It shows the mechanic, never the amount.
+- A fruit moves by dragging or by tapping, and the event records which.
+- The first visits have one kind of fruit per trip. Other fruit is mixed in
+  only once counting looks secure.
+
+Everything for adults (the profile, consent, export, erase, the reviewer
+clock) is behind one small "Grown-ups" button.
+
 ## What makes the assessment trustworthy
 
 | Concern | How it is handled |
@@ -49,7 +65,7 @@ skill is *ready* when its prerequisites look secure, regardless of who the
 learner is. The next visit is planned from the profile:
 
 - counting out a set is still new -> small numbers (2-4), uncluttered shelf;
-- still gathering evidence -> numbers up to 7, another fruit mixed into trip 2;
+- still gathering evidence -> numbers up to 7, one kind of fruit per trip;
 - looks secure -> numbers 6-10, another fruit mixed into every trip.
 
 Plans come from fixed rotation tables, not random numbers, so they are
@@ -88,8 +104,10 @@ round-trip for every profile view and no offline mode.
   family's device (nickname + ID + token). It can be downloaded as a recovery
   file and restored on another device. A school deployment would hold the same
   mapping in the school's own systems.
-- Consent is required to create a learner and is recorded with who gave it and
-  under which policy version.
+- Play starts on the device with nothing sent anywhere. The record moves to a
+  server only after a grown-up agrees in the grown-ups area; the server refuses
+  to create a learner without consent and records who gave it and under which
+  policy version. Visits recorded before then are uploaded at that point.
 - Export returns everything held; delete erases everything.
 - Pseudonymous is not anonymous. A long behavioural record can identify a
   person, so it is access-controlled like personal data.

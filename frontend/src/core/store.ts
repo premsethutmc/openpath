@@ -5,7 +5,7 @@
  */
 import { curriculum } from "./curriculum";
 import { ENGINE_VERSION, buildProfile, evaluateSession, planNextSession } from "./engine";
-import { type Identity, uuid } from "./identity";
+import type { Identity } from "./identity";
 import { now } from "./clock";
 import { load, remove, save } from "./storage";
 import type { DatedObservation, Overview, SessionResult, SessionUpload, Status } from "./types";
@@ -18,10 +18,13 @@ export interface EvidenceStore {
   erase(): Promise<void>;
 }
 
-/** Enrol a new pseudonymous learner. Consent has been confirmed by the caller. */
-export async function enrol(apiBase: string | null, nickname: string): Promise<Identity> {
-  const consent = { given_by: "guardian" as const, confirmed_at: new Date().toISOString() };
-  if (!apiBase) return { learner_id: uuid(), nickname, consent };
+/**
+ * Move a device-only record to the server, once a grown-up has agreed.
+ *
+ * Creates the pseudonymous learner, then queues every visit recorded on the
+ * device for upload. The nickname stays behind on the device.
+ */
+export async function enrolOnServer(apiBase: string, identity: Identity): Promise<Identity> {
   const response = await fetch(`${apiBase}/learners/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -29,7 +32,17 @@ export async function enrol(apiBase: string | null, nickname: string): Promise<I
   });
   if (!response.ok) throw new Error(`Could not create a learner record (${response.status}).`);
   const body = await response.json();
-  return { learner_id: body.learner_id, access_token: body.access_token, nickname, consent };
+  const enrolled: Identity = {
+    learner_id: body.learner_id,
+    access_token: body.access_token,
+    nickname: identity.nickname,
+    consent: { given_by: "guardian", confirmed_at: new Date().toISOString() },
+  };
+  const localKey = `openpath.sessions.${identity.learner_id}`;
+  const recorded = load<StoredSession[]>(localKey, []).map(({ index: _index, ...upload }) => upload);
+  save(`openpath.pending.${enrolled.learner_id}`, recorded);
+  remove(localKey);
+  return enrolled;
 }
 
 export function openStore(apiBase: string | null, identity: Identity): EvidenceStore {
@@ -119,7 +132,7 @@ class DeviceStore implements EvidenceStore {
       exported_at: new Date().toISOString(),
       engine_version: ENGINE_VERSION,
       learner_id: this.identity.learner_id,
-      consents: [this.identity.consent],
+      consents: this.identity.consent ? [this.identity.consent] : [],
       sessions: sessions.map((s) => ({ ...s, observations: evaluateSession(s.events).observations })),
       profile: this.compute(sessions, now()).profile,
     };

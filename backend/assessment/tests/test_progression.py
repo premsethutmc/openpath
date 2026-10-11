@@ -29,6 +29,7 @@ class ProfileTests(unittest.TestCase):
         first = plan["rounds"][0]
         self.assertEqual((first["target"], first["target_kind"], first["representation"]), (5, "apple", "numeral"))
         self.assertEqual(first["available"], {"apple": 8})
+        self.assertTrue(all(len(r["available"]) == 1 for r in plan["rounds"]), "one kind of fruit per trip")
 
     def test_one_perfect_session_masters_nothing(self):
         profile, _ = profile_for("one_perfect_session")

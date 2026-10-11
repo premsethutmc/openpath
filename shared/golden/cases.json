@@ -20,7 +20,6 @@
      },
      {
       "available": {
-       "apple": 4,
        "orange": 8
       },
       "id": "r2",
@@ -266,8 +265,7 @@
      },
      {
       "available": {
-       "apple": 9,
-       "pear": 4
+       "apple": 9
       },
       "id": "r2",
       "is_transfer": true,
@@ -1864,8 +1862,7 @@
      },
      {
       "available": {
-       "apple": 10,
-       "pear": 4
+       "apple": 10
       },
       "id": "r2",
       "is_transfer": true,
@@ -2651,8 +2648,7 @@
      },
      {
       "available": {
-       "apple": 10,
-       "pear": 4
+       "apple": 10
       },
       "id": "r2",
       "is_transfer": true,

@@ -1,10 +1,10 @@
 /** The grown-ups' view: what the evidence shows, why, and what comes next. */
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { now, offsetDays, resetClock, skipDays } from "../core/clock";
 import { curriculum } from "../core/curriculum";
 import type { Identity } from "../core/identity";
-import { download, recoveryFile } from "../core/recovery";
+import { download, recoveryFile, restoreFromFile } from "../core/recovery";
 import type { EvidenceStore } from "../core/store";
 import type { Criteria, EvidenceEvent, Overview, Profile, RoundSummary, SessionResult, SkillView, Status } from "../core/types";
 
@@ -94,7 +94,9 @@ function SkillRow({ skill, names }: { skill: SkillView; names: Map<string, strin
       <p className="skill-about">{skill.description}</p>
       <Dots skill={skill} />
       {seen && skill.status !== "mastered" && (
-        <ul className="criteria">
+        <details className="why">
+          <summary>What it takes to call this secure</summary>
+          <ul className="criteria">
           {CRITERIA.map(([key, label]) => (
             <li key={key} className={skill.criteria[key] ? "met" : ""}>
               <span aria-hidden="true">{skill.criteria[key] ? "✓" : "○"}</span>
@@ -102,7 +104,8 @@ function SkillRow({ skill, names }: { skill: SkillView; names: Map<string, strin
               <span className="sr-only">{skill.criteria[key] ? " (met)" : " (not yet)"}</span>
             </li>
           ))}
-        </ul>
+          </ul>
+        </details>
       )}
       {skill.next_review_at && (
         <p className="note">
@@ -126,9 +129,13 @@ export function ProfileView({
   lastResult,
   identity,
   store,
+  canUseServer,
   syncError,
   onBack,
   onRefresh,
+  onNickname,
+  onConsent,
+  onRestored,
   onErased,
 }: {
   overview: Overview;
@@ -137,15 +144,24 @@ export function ProfileView({
   lastResult: SessionResult | null;
   identity: Identity;
   store: EvidenceStore;
+  /** True when this build can keep the record on an OpenPath server. */
+  canUseServer: boolean;
   syncError: string | null;
   onBack: () => void;
   onRefresh: () => void;
+  onNickname: (nickname: string) => void;
+  onConsent: () => Promise<void>;
+  onRestored: (identity: Identity) => void;
   onErased: () => void;
 }) {
   const [events, setEvents] = useState<EvidenceEvent[] | null>(null);
   const [confirmErase, setConfirmErase] = useState(false);
   const [shown, setShown] = useState<{ title: string; text: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [problem, setProblem] = useState<string | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
 
   /** Hand the family a file, or show it as text where downloads are blocked. */
   const give = (title: string, filename: string, data: unknown) => {
@@ -175,8 +191,8 @@ export function ProfileView({
       </button>
       <h1>What {who === "This learner" ? "this learner" : who} has shown so far</h1>
       <p className="lede">
-        Each line below is a reading of the evidence about one skill, never a judgement of the child. Nothing is called
-        secure after one good visit: it takes repeated, varied success that is still there days later.
+        Each line is a reading of the evidence about one skill, never a judgement of the child. Nothing is called secure
+        after one good visit.
       </p>
       {syncError && (
         <p className="alert" role="alert">
@@ -275,10 +291,54 @@ export function ProfileView({
       <section>
         <h2>Your data</h2>
         <p>
-          {store.kind === "device"
-            ? "Everything is kept in this browser on this device. Nothing has been sent anywhere."
-            : "The record is kept on the OpenPath server under a random ID. The nickname stays on this device and is never sent."}
+          {store.kind === "server"
+            ? "The record is kept on the OpenPath server under a random ID. The nickname stays on this device and is never sent."
+            : "Everything is kept in this browser on this device. Nothing has been sent anywhere."}
         </p>
+        {canUseServer && store.kind === "device" && (
+          <div className="consent">
+            <h3>Keep the record on the OpenPath server</h3>
+            <p>This keeps it safe if this device is lost and lets you use more than one device. No name is sent.</p>
+            <label className="check">
+              <input id="consent" type="checkbox" checked={agreed} onChange={(event) => setAgreed(event.target.checked)} />
+              <span>
+                I am this child's parent or guardian. I agree to their play being stored on the OpenPath server as
+                learning evidence under a random ID. I can get a copy of it or erase it at any time.
+              </span>
+            </label>
+            <button
+              type="button"
+              className="primary"
+              disabled={saving}
+              onClick={async () => {
+                if (!agreed) {
+                  setProblem("Tick the box to agree first.");
+                  return;
+                }
+                setSaving(true);
+                setProblem(null);
+                try {
+                  await onConsent();
+                } catch (error) {
+                  setProblem((error as Error).message);
+                }
+                setSaving(false);
+              }}
+            >
+              {saving ? "Saving…" : "Agree and save"}
+            </button>
+          </div>
+        )}
+        {problem && (
+          <p className="alert" role="alert">
+            {problem}
+          </p>
+        )}
+        <label className="field">
+          <span>Nickname on this device (optional)</span>
+          <input id="nickname" value={identity.nickname} onChange={(event) => onNickname(event.target.value)} maxLength={24} autoComplete="off" />
+          <small>Only shown here. It is never sent or stored with the learning record.</small>
+        </label>
         <p className="note">
           Learner ID <code>{identity.learner_id}</code>
         </p>
@@ -297,12 +357,30 @@ export function ProfileView({
           >
             {__OPENPATH_EMBED__ ? "Show recovery file" : "Download recovery file"}
           </button>
+          <button type="button" className="secondary" onClick={() => fileInput.current?.click()}>
+            Restore from a recovery file
+          </button>
           {!confirmErase && (
             <button type="button" className="danger" onClick={() => setConfirmErase(true)}>
               Erase this learner
             </button>
           )}
         </div>
+        <input
+          ref={fileInput}
+          type="file"
+          accept="application/json,.json"
+          hidden
+          onChange={async (event) => {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            try {
+              onRestored(restoreFromFile(await file.text()));
+            } catch (error) {
+              setProblem((error as Error).message);
+            }
+          }}
+        />
         {confirmErase && (
           <div className="alert" role="alertdialog" aria-label="Confirm erasing">
             <p>This erases the learner and every recorded visit. It cannot be undone.</p>

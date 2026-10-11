@@ -44,8 +44,8 @@ const LANDSCAPE: Layout = {
     basket: { cx: 310, rows: [546, 486, 426], perRow: 6, spacing: 68, width: 470, y: 528 },
     dropZone: { x1: 40, y1: 372, x2: 580, y2: 640 },
     mom: { x: 690, y: 628, scale: 0.92 },
-    list: { x: 872, y: 425, w: 176, h: 196 },
-    button: { x: 872, y: 590 },
+    list: { x: 872, y: 410, w: 176, h: 196 },
+    button: { x: 872, y: 572 },
     floorY: 560,
   },
   home: {
@@ -68,9 +68,9 @@ const PORTRAIT: Layout = {
     shelfPanel: { y: 100, h: 320 },
     basket: { cx: 212, rows: [846, 786, 726], perRow: 6, spacing: 64, width: 430, y: 828 },
     dropZone: { x1: 0, y1: 650, x2: 430, y2: 1000 },
-    mom: { x: 520, y: 886, scale: 0.78 },
-    list: { x: 520, y: 552, w: 176, h: 196 },
-    button: { x: 510, y: 944 },
+    mom: { x: 520, y: 852, scale: 0.78 },
+    list: { x: 520, y: 540, w: 176, h: 196 },
+    button: { x: 520, y: 928 },
     floorY: 860,
   },
   home: {

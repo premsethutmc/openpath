@@ -38,14 +38,26 @@ const watchErrors = (page) => {
 const press = (page, label) => page.getByRole("button", { name: label, exact: true }).click();
 const basketCount = (page) => page.locator('.fruit[data-where="basket"]').count();
 
-async function enrol(page, nickname) {
+/**
+ * Open the app. It must land straight in the game, with nothing to fill in.
+ * Where a server is available, a grown-up then agrees to keep the record there.
+ */
+async function start(page, nickname = "") {
   await page.goto(URL);
-  await page.getByLabel(/Nickname/).fill(nickname);
-  // Starting without consent explains what is missing rather than doing nothing.
-  await press(page, "Start playing");
-  await page.getByText("Tick the box above to start").waitFor();
-  await page.getByRole("checkbox").check();
-  await press(page, "Start playing");
+  await phase(page, "list");
+  assert.equal(await page.locator("form, input").count(), 0, "the child's first screen has no form");
+
+  await press(page, "For grown-ups");
+  await page.waitForSelector(".path");
+  if (nickname) await page.getByLabel(/Nickname/).fill(nickname);
+  if (await page.locator("#consent").count()) {
+    await press(page, "Agree and save");
+    await page.getByText("Tick the box to agree first.").waitFor();
+    await page.locator("#consent").check();
+    await press(page, "Agree and save");
+    await page.getByText("kept on the OpenPath server").waitFor();
+  }
+  await press(page, "Back to the game");
   await phase(page, "list");
 }
 
@@ -101,16 +113,16 @@ test("a child who counts correctly plays all three trips with the mouse", async 
   const page = await browser.newPage({ viewport: { width: 1180, height: 760 } });
   const errors = watchErrors(page);
 
-  await page.goto(URL);
-  await shot(page, "01-welcome");
-  await enrol(page, "Asha");
+  await start(page, "Asha");
   await shot(page, "02-list-5-apples");
 
   // Trip 1: the list says 5 apples.
   await press(page, "Go to the shop");
   await phase(page, "shop");
+  await page.waitForSelector(".drag-cue");
   await shot(page, "03-shop");
   for (let i = 0; i < 6; i++) await dragIn(page, "apple");
+  assert.equal(await page.locator(".drag-cue").count(), 0, "the hand demo stops once the child has tried it");
   assert.equal(await basketCount(page), 6, "six apples dragged in");
   await dragOut(page); // notices one too many and puts it back, unprompted
   assert.equal(await basketCount(page), 5);
@@ -195,13 +207,16 @@ test("a child who needs help gets it step by step, on a phone with touch", async
   const client = await context.newCDPSession(page);
   const errors = watchErrors(page);
 
-  await enrol(page, "");
+  await start(page);
   await shot(page, "20-phone-list");
   await page.getByRole("button", { name: "Go to the shop", exact: true }).tap();
   await phase(page, "shop");
 
   // Takes every apple on the shelf, then says "done".
-  for (let i = 0; i < 8; i++) await touchDragIn(page, client, "apple");
+  // The first two by tapping, the rest by dragging: both must work.
+  for (let i = 0; i < 2; i++) await page.locator('.fruit[data-kind="apple"][data-where="shelf"]').first().tap();
+  assert.equal(await basketCount(page), 2, "a tap puts a fruit in the basket");
+  for (let i = 0; i < 6; i++) await touchDragIn(page, client, "apple");
   assert.equal(await basketCount(page), 8, "touch drags land in the basket");
   await shot(page, "21-phone-took-all");
   await page.getByRole("button", { name: "Go home", exact: true }).tap();
@@ -251,7 +266,7 @@ test("a child who needs help gets it step by step, on a phone with touch", async
 
 test("the game can be played with the keyboard alone", async () => {
   const page = await browser.newPage({ viewport: { width: 1024, height: 700 } });
-  await enrol(page, "");
+  await start(page);
   await page.getByRole("button", { name: "Go to the shop", exact: true }).press("Enter");
   await phase(page, "shop");
   for (let i = 0; i < 5; i++) {

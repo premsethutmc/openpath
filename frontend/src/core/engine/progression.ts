@@ -67,7 +67,7 @@ export function planNextSession(profile: Profile, sessionsCompleted: number): Se
   const [band, reason] = chooseBand(profile);
   const targets = BANDS[band][sessionsCompleted % BANDS[band].length];
   const kinds = KINDS[sessionsCompleted % KINDS.length];
-  const distractors = band !== "support";
+  const mixed = band === "stretch";
 
   const shelf = (kind: string, target: number, other: string | null): Record<string, number> => {
     const available: Record<string, number> = { [kind]: Math.max(target + 3, 8) };
@@ -95,9 +95,9 @@ export function planNextSession(profile: Profile, sessionsCompleted: number): Se
     band,
     reason,
     rounds: [
-      round("r1", 0, "numeral", false, band === "stretch" ? kinds[1] : null),
-      round("r2", 1, "numeral", true, distractors ? kinds[0] : null),
-      round("r3", 2, "set", true, band === "stretch" ? kinds[1] : null),
+      round("r1", 0, "numeral", false, mixed ? kinds[1] : null),
+      round("r2", 1, "numeral", true, mixed ? kinds[0] : null),
+      round("r3", 2, "set", true, mixed ? kinds[1] : null),
     ],
   };
 }

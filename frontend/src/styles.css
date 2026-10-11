@@ -88,6 +88,11 @@ button {
   gap: 10px;
   flex: 1;
   min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .speech-face {
@@ -101,9 +106,9 @@ button {
 .speech p {
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: clamp(1.25rem, 3.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.15;
   text-wrap: balance;
 }
 
@@ -159,18 +164,19 @@ button {
   background: var(--leaf);
 }
 
-.text-button {
+/* Small and quiet on purpose: this one is not for the child. */
+.grownups-button {
   min-height: 44px;
-  padding: 0 10px;
+  padding: 0 8px;
   border: 0;
   border-radius: 10px;
   background: none;
   color: var(--ink-soft);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   cursor: pointer;
 }
 
-.text-button:hover {
+.grownups-button:hover {
   background: var(--mist);
   color: var(--ink);
 }
@@ -236,8 +242,14 @@ button {
   transform-origin: center;
 }
 
-.fruit-art.hop {
-  animation: hop 0.45s ease-out;
+.drag-cue {
+  animation: drag-cue 2.6s ease-in-out infinite;
+}
+
+.invite-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: invite 1.6s ease-out infinite;
 }
 
 .fruit-ghost {
@@ -313,16 +325,35 @@ button {
 
 @keyframes scene-in {
   from {
+    opacity: 0.3;
+  }
+}
+
+@keyframes drag-cue {
+  0%,
+  18% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  72%,
+  88% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
     opacity: 0;
   }
 }
 
-@keyframes hop {
-  40% {
-    transform: translateY(-14px) rotate(-6deg);
+@keyframes invite {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
   }
-  70% {
-    transform: translateY(0) rotate(4deg);
+  to {
+    transform: scale(1.45);
+    opacity: 0;
   }
 }
 
@@ -375,13 +406,8 @@ button {
 
 @media (max-width: 560px) {
   .hud {
-    flex-wrap: wrap;
-    gap: 2px 8px;
-    padding: 6px 8px 2px;
-  }
-
-  .speech {
-    flex-basis: 100%;
+    gap: 6px;
+    padding: 6px 8px;
   }
 
   .speech-face {
@@ -389,13 +415,8 @@ button {
     height: 44px;
   }
 
-  .hud-tools {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .text-button {
-    min-height: 34px;
+  .progress {
+    display: none;
   }
 }
 
@@ -413,7 +434,8 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .scene,
   .fruit-art.extra,
-  .fruit-art.hop,
+  .drag-cue,
+  .invite-ring,
   .list-pulse,
   .mom-cheer,
   .mom-thinking,
@@ -820,11 +842,31 @@ th {
   margin-top: 8px;
 }
 
-.check.missing {
-  padding: 10px 12px;
-  margin-inline: -12px;
-  border-radius: 10px;
-  outline: 3px solid var(--tomato);
+.consent {
+  margin: 16px 0;
+  padding: 16px;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+}
+
+.consent .check {
+  margin: 12px 0;
+}
+
+.why {
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+}
+
+.why summary {
+  cursor: pointer;
+  color: var(--leaf-deep);
+  font-weight: 600;
+}
+
+.why .criteria {
+  margin-top: 6px;
 }
 
 .crash {

@@ -79,7 +79,9 @@ def plan_next_session(profile: dict, sessions_completed: int) -> dict:
     band, reason = choose_band(profile)
     targets = BANDS[band][sessions_completed % len(BANDS[band])]
     kinds = KINDS[sessions_completed % len(KINDS)]
-    distractors = band != "support"
+    # Other fruit is mixed in only once counting looks secure. Until then the
+    # shelf holds one kind, so the only thing to think about is "how many".
+    mixed = band == "stretch"
 
     def shelf(kind: str, target: int, other: str | None) -> dict:
         available = {kind: max(target + 3, 8)}
@@ -95,7 +97,7 @@ def plan_next_session(profile: dict, sessions_completed: int) -> dict:
             "target_kind": kinds[0],
             "representation": "numeral",
             "is_transfer": False,
-            "available": shelf(kinds[0], targets[0], kinds[1] if band == "stretch" else None),
+            "available": shelf(kinds[0], targets[0], kinds[1] if mixed else None),
         },
         {
             "id": "r2",
@@ -104,7 +106,7 @@ def plan_next_session(profile: dict, sessions_completed: int) -> dict:
             "target_kind": kinds[1],
             "representation": "numeral",
             "is_transfer": True,
-            "available": shelf(kinds[1], targets[1], kinds[0] if distractors else None),
+            "available": shelf(kinds[1], targets[1], kinds[0] if mixed else None),
         },
         {
             "id": "r3",
@@ -113,7 +115,7 @@ def plan_next_session(profile: dict, sessions_completed: int) -> dict:
             "target_kind": kinds[2],
             "representation": "set",
             "is_transfer": True,
-            "available": shelf(kinds[2], targets[2], kinds[1] if band == "stretch" else None),
+            "available": shelf(kinds[2], targets[2], kinds[1] if mixed else None),
         },
     ]
     return {"activity": "apple-shopping", "band": band, "reason": reason, "rounds": rounds}

@@ -10,11 +10,13 @@
  *    child is working unaided: either would do the counting for them.
  *  - "Go home" is always available, so stopping at the right amount is the
  *    child's own decision.
+ *  - Nothing needs reading: Mom speaks every line, buttons are pictures, and a
+ *    moving hand shows the first drag. Dragging or tapping a fruit both work.
  *  - Help arrives in steps (look again -> count together -> spots to fill) and
  *    is recorded, so the engine can tell independent success from supported.
  *  - This component records what happened. It never decides what it means.
  */
-import { type KeyboardEvent, type PointerEvent, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, type KeyboardEvent, type PointerEvent, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { now } from "../../core/clock";
 import { uuid } from "../../core/identity";
@@ -93,7 +95,7 @@ export function AppleShopping({
   const [phase, setPhase] = useState<Phase>("list");
   const [items, setItems] = useState<Item[]>([]);
   const [drag, setDrag] = useState<Drag | null>(null);
-  const [hopId, setHopId] = useState<string | null>(null);
+  const [touched, setTouched] = useState(false);
   const [hintLevel, setHintLevel] = useState(0);
   const [mood, setMood] = useState<Mood>("happy");
   const [line, setLine] = useState("");
@@ -125,6 +127,7 @@ export function AppleShopping({
     setRoundIndex(index);
     setItems(buildItems(next));
     setHintLevel(0);
+    setTouched(false);
     setCounted(null);
     setCountedPlates(0);
     setShowSpots(false);
@@ -132,9 +135,9 @@ export function AppleShopping({
     setBusy(false);
     setMood("happy");
     setPhase("list");
-    if (next.representation === "set") say(`Friends are coming for a picnic. We need one ${next.target_kind} for each plate.`);
-    else if (index === 0) say(`We need ${kinds}. Look at my list!`);
-    else say(`Today we need ${kinds}. Look at the list!`);
+    if (next.representation === "set") say(`A picnic! One ${next.target_kind} for each plate.`);
+    else if (index === 0) say(`We need ${kinds}!`);
+    else say(`Now we need ${kinds}!`);
   };
 
   // Start the session once. The guard keeps a development double-mount from
@@ -197,17 +200,18 @@ export function AppleShopping({
     return { x: point.x, y: point.y };
   };
 
-  const move = (item: Item, toBasket: boolean) => {
+  const move = (item: Item, toBasket: boolean, via: "drag" | "tap" | "key") => {
     if (toBasket === item.inBasket) return;
+    setTouched(true);
     orderCounter.current += 1;
     const order = orderCounter.current;
     setItems((current) => current.map((i) => (i.id === item.id ? { ...i, inBasket: toBasket, order } : i)));
     setCounted(null);
     if (toBasket) {
-      recorder.current!.record("item_added", { item: item.id, kind: item.kind });
+      recorder.current!.record("item_added", { item: item.id, kind: item.kind, via });
       play("drop");
     } else {
-      recorder.current!.record("item_removed", { item: item.id });
+      recorder.current!.record("item_removed", { item: item.id, via });
       play("lift");
     }
   };
@@ -237,10 +241,10 @@ export function AppleShopping({
     const zone = layout.shop.dropZone;
     const overBasket = drag.x >= zone.x1 && drag.x <= zone.x2 && drag.y >= zone.y1 && drag.y <= zone.y2;
     if (!drag.moved) {
-      setHopId(item.id);
-      later(() => setHopId(null), 450);
+      // A tap moves the fruit too: small hands on small screens drop things.
+      move(item, !item.inBasket, "tap");
     } else if (overBasket !== item.inBasket) {
-      move(item, overBasket);
+      move(item, overBasket, "drag");
     }
     setDrag(null);
   };
@@ -248,12 +252,12 @@ export function AppleShopping({
   const onItemKey = (item: Item) => (event: KeyboardEvent) => {
     if (!canPlay || (event.key !== "Enter" && event.key !== " ")) return;
     event.preventDefault();
-    move(item, !item.inBasket);
+    move(item, !item.inBasket, "key");
   };
 
   const countTogether = (total: number, others: number) => {
     setBusy(true);
-    say("Let's count them together.");
+    say("Let's count.");
     let at = 1700;
     for (let i = 1; i <= total; i++) {
       later(() => {
@@ -277,8 +281,8 @@ export function AppleShopping({
     }
     later(() => {
       const have = `We have ${total}.`;
-      const need = spec.representation === "set" ? `There are ${spec.target} plates. One ${spec.target_kind} for each plate!` : `The list says ${spec.target}.`;
-      say(`${have} ${need}${others ? ` And we only need ${plural}.` : ""}`);
+      const need = spec.representation === "set" ? `There are ${spec.target} plates.` : `The list says ${spec.target}.`;
+      say(`${have} ${need}${others ? ` Only ${plural}.` : ""}`);
       setListPulse(true);
       setBusy(false);
     }, at + 300);
@@ -291,7 +295,7 @@ export function AppleShopping({
   const check = () => {
     if (!canPlay) return;
     if (inBasket.length === 0) {
-      say(`First put some ${plural} in the basket.`);
+      say(`Put some ${plural} in first.`);
       return;
     }
     const counts: Record<string, number> = {};
@@ -309,14 +313,14 @@ export function AppleShopping({
       setMood("cheer");
       setPhase("celebrate");
       play("cheer");
-      say("That is just what we need. Let's go home!");
+      say("Just right! Let's go home.");
       later(() => {
         setPhase("home");
         setBusy(false);
         say(
           spec.representation === "set"
-            ? `One ${spec.target_kind} for every plate. Thank you!`
-            : `${spec.target} ${plural}, just like the list. Thank you!`,
+            ? `A ${spec.target_kind} on every plate. Thank you!`
+            : `${spec.target} ${plural}! Thank you!`,
         );
       }, 2400);
       return;
@@ -328,7 +332,7 @@ export function AppleShopping({
     setMood("thinking");
     play("nudge");
     if (level === 1) {
-      say(others ? `We only need ${plural} today. Let's look at the list again.` : "Hmm. Let's look at the list again.");
+      say(others ? `Only ${plural} today. Look at the list.` : "Hmm. Look at the list.");
       setListPulse(true);
       later(() => {
         setListPulse(false);
@@ -338,7 +342,7 @@ export function AppleShopping({
       countTogether(inBasket.length, others);
     } else {
       setShowSpots(true);
-      say(`Let's fill these spots. One ${spec.target_kind} in each, and nothing else.`);
+      say(`One ${spec.target_kind} in each ring.`);
       later(() => setMood("happy"), 2600);
     }
   };
@@ -347,8 +351,8 @@ export function AppleShopping({
     setPhase("shop");
     say(
       spec.representation === "set"
-        ? `Put one ${spec.target_kind} in the basket for each plate. Then press go home.`
-        : `Put the ${plural} in the basket. When we have what the list says, press go home.`,
+        ? `One ${spec.target_kind} for each plate. Then tap the house.`
+        : `Put ${plural} in the basket. Then tap the house.`,
     );
   };
 
@@ -361,7 +365,7 @@ export function AppleShopping({
     setMood("cheer");
     setPhase("done");
     play("cheer");
-    say("You were a great helper today. See you next time!");
+    say("All done! Thank you for helping.");
   };
 
   /* -------------------------------------------------------------- render */
@@ -393,12 +397,16 @@ export function AppleShopping({
         onKeyDown={onItemKey(item)}
       >
         <circle r={FRUIT_R + 12} fill="transparent" />
-        <g className={`fruit-art${hopId === item.id ? " hop" : ""}${extra ? " extra" : ""}`} opacity={dragging ? 0 : 1}>
+        <g className={`fruit-art${extra ? " extra" : ""}`} opacity={dragging ? 0 : 1}>
           <Fruit kind={item.kind} />
         </g>
       </g>
     );
   };
+
+  // The first trip shows a hand dragging one fruit, so the mechanic needs no words.
+  const cueItem = items.find((i) => !i.inBasket && i.kind === spec.target_kind);
+  const cueFrom = cueItem ? shelf[cueItem.slot] : undefined;
 
   const tableSpacing = Math.min(home.table.spacing, (home.table.width - 70) / Math.min(spec.target, home.table.perRow));
   const tableSpots = rowsOf(spec.target, home.table.perRow, tableSpacing, home.table.cx, home.table.rows);
@@ -407,37 +415,39 @@ export function AppleShopping({
   return (
     <div className="game">
       <header className="hud">
-        <div className="speech">
+        <button type="button" className="speech" onClick={() => speak(line)} aria-label={`Hear it again: ${line}`}>
           <svg className="speech-face" viewBox="-46 -264 92 92" aria-hidden="true">
             <Mom mood={mood} bag={false} />
           </svg>
           <p aria-live="polite">{line}</p>
-          <button type="button" className="icon-button" aria-label="Say it again" onClick={() => speak(line)} disabled={muted}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
-              <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
+        </button>
         <div className="hud-tools">
-          <span className="progress" aria-label={`Trip ${roundIndex + 1} of ${plan.rounds.length}`}>
+          <span className="progress" role="img" aria-label={`Trip ${roundIndex + 1} of ${plan.rounds.length}`}>
             {plan.rounds.map((round, i) => (
               <i key={round.id} className={i < roundIndex || phase === "done" ? "done" : i === roundIndex ? "now" : ""} />
             ))}
           </span>
           <button
             type="button"
-            className="text-button"
-            aria-pressed={muted}
+            className="icon-button"
+            aria-pressed={!muted}
+            aria-label={muted ? "Turn sound on" : "Turn sound off"}
             onClick={() => {
               setMuted(!muted);
               setMutedState(!muted);
             }}
           >
-            {muted ? "Sound off" : "Sound on"}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+              {muted ? (
+                <path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              ) : (
+                <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              )}
+            </svg>
           </button>
-          <button type="button" className="text-button" onClick={onGrownUps}>
-            For grown-ups
+          <button type="button" className="grownups-button" aria-label="For grown-ups" onClick={onGrownUps}>
+            Grown-ups
           </button>
         </div>
       </header>
@@ -513,6 +523,9 @@ export function AppleShopping({
               )}
 
               {phase === "celebrate" && <Sparkles cx={shop.basket.cx} cy={shop.basket.y - 70} spread={shop.basket.width / 2} />}
+              {phase === "shop" && roundIndex === 0 && !touched && !drag && cueFrom && (
+                <DragCue from={cueFrom} to={basketSlot(layout, 0)} kind={spec.target_kind} />
+              )}
               {phase === "shop" && (
                 <SceneButton x={shop.button.x} y={shop.button.y} label="Go home" icon="home" onPress={check} quiet={inBasket.length === 0} />
               )}
@@ -555,9 +568,9 @@ export function AppleShopping({
               </g>
               {phase === "done" && <Sparkles cx={home.table.cx} cy={home.table.rows[0] - 110} spread={home.table.width / 2.4} />}
 
-              {phase === "list" && <SceneButton x={home.button.x} y={home.button.y} label="Go to the shop" icon="go" onPress={goToShop} />}
-              {phase === "home" && <SceneButton x={home.button.x} y={home.button.y} label={isLast ? "All done" : "Next"} icon="go" onPress={next} />}
-              {phase === "done" && <SceneButton x={home.button.x} y={home.button.y} label="Play again" icon="again" onPress={onPlayAgain} />}
+              {phase === "list" && <SceneButton x={home.button.x} y={home.button.y} label="Go to the shop" icon="shop" onPress={goToShop} inviting />}
+              {phase === "home" && <SceneButton x={home.button.x} y={home.button.y} label={isLast ? "All done" : "Next"} icon="go" onPress={next} inviting />}
+              {phase === "done" && <SceneButton x={home.button.x} y={home.button.y} label="Play again" icon="again" onPress={onPlayAgain} inviting />}
             </g>
           )}
         </svg>
@@ -610,21 +623,54 @@ function Sparkles({ cx, cy, spread }: { cx: number; cy: number; spread: number }
 }
 
 const ICONS: Record<string, ReactNode> = {
-  home: <path d="M-15 2 L0 -13 L15 2 M-10 -1 V13 H10 V-1" fill="none" stroke="#FFFDF5" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />,
-  go: <path d="M-12 0 H12 M3 -10 L13 0 L3 10" fill="none" stroke="#FFFDF5" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />,
+  home: <path d="M-15 2 L0 -13 L15 2 M-10 -1 V13 H10 V-1" fill="none" stroke="#FFFDF5" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />,
+  go: <path d="M-12 0 H12 M3 -10 L13 0 L3 10" fill="none" stroke="#FFFDF5" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />,
+  shop: (
+    <path
+      d="M-14 -3 L-11 -13 H11 L14 -3 Z M-10 -3 V13 H10 V-3 M-3 13 V4 H4 V13"
+      fill="none"
+      stroke="#FFFDF5"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
   again: (
     <path
       d="M11 -7 A13 13 0 1 0 13 4 M12 -15 V-6 H3"
       fill="none"
       stroke="#FFFDF5"
-      strokeWidth="5"
+      strokeWidth="4.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
   ),
 };
 
-/** A big button that lives inside the scene, so it scales with everything else. */
+/** A hand that drags one fruit to the basket, on a loop, until the child tries it. */
+function DragCue({ from, to, kind }: { from: Point; to: Point; kind: string }) {
+  const travel = { "--dx": `${to.x - from.x}px`, "--dy": `${to.y - from.y}px` } as CSSProperties;
+  return (
+    <g transform={`translate(${from.x} ${from.y})`} pointerEvents="none" aria-hidden="true">
+      <g className="drag-cue" style={travel}>
+        <g opacity=".6">
+          <Fruit kind={kind} />
+        </g>
+        <g transform="translate(14 22) rotate(-18)">
+          <path
+            d="M-9 -30 a9 9 0 0 1 18 0 V-2 h8 a12 12 0 0 1 12 12 v16 a16 16 0 0 1 -16 16 h-18 a16 16 0 0 1 -16 -16 v-14 a9 9 0 0 1 12 -8 Z"
+            fill="#FFFDF5"
+            stroke={INK}
+            strokeWidth="5"
+            strokeLinejoin="round"
+          />
+        </g>
+      </g>
+    </g>
+  );
+}
+
+/** A big picture button that lives inside the scene, so it scales with everything else. */
 function SceneButton({
   x,
   y,
@@ -632,6 +678,7 @@ function SceneButton({
   icon,
   onPress,
   quiet = false,
+  inviting = false,
 }: {
   x: number;
   y: number;
@@ -639,15 +686,13 @@ function SceneButton({
   icon: keyof typeof ICONS;
   onPress: () => void;
   quiet?: boolean;
+  inviting?: boolean;
 }) {
   // Press on pointer-up rather than on the browser's synthesised click: after a
   // quick flick of a fruit, touch browsers swallow the next tap's click, and a
-  // child would press "Go home" and see nothing happen.
+  // child would press the button and see nothing happen.
   const armed = useRef(false);
   const pressedAt = useRef(0);
-  const textWidth = label.length * 15.5;
-  const width = textWidth + 124;
-  const left = -width / 2;
   return (
     <g
       className={`scene-button${quiet ? " quiet" : ""}`}
@@ -678,15 +723,13 @@ function SceneButton({
         }
       }}
     >
-      <rect x={left} y="-32" width={width} height="76" rx="38" fill="#14584E" />
-      <rect className="face" x={left} y="-40" width={width} height="76" rx="38" fill="#1F8A7A" />
-      <g className="face" transform={`translate(${left + 50} -2)`}>
-        {ICONS[icon]}
+      {inviting && <circle className="invite-ring" r="54" fill="none" stroke="#1F8A7A" strokeWidth="8" />}
+      <circle cy="8" r="54" fill="#14584E" />
+      <g className="face">
+        <circle r="54" fill="#1F8A7A" />
+        <g transform="scale(2)">{ICONS[icon]}</g>
       </g>
-      <text className="face" x={left + 82} y="8" fontSize="28" fontWeight="700" fill="#FFFDF5" textLength={textWidth} lengthAdjust="spacingAndGlyphs">
-        {label}
-      </text>
-      <rect className="focus-ring" x={-width / 2 - 7} y="-47" width={width + 14} height="98" rx="46" fill="none" stroke={INK} strokeWidth="4" />
+      <circle className="focus-ring" r="64" fill="none" stroke={INK} strokeWidth="4" />
     </g>
   );
 }
