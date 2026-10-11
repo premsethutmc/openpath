@@ -1,0 +1,14 @@
+# Local PostgreSQL only. The API and web app run directly on your machine (see README).
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: openpath
+      POSTGRES_USER: openpath
+      POSTGRES_PASSWORD: openpath
+    ports:
+      - "5432:5432"
+    volumes:
+      - openpath-db:/var/lib/postgresql/data
+volumes:
+  openpath-db:

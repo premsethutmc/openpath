@@ -1,0 +1,58 @@
+{
+  "version": "2026.10.1",
+  "domain": "math.early_number",
+  "title": "Early number",
+  "skills": [
+    {
+      "key": "math.number.numeral_recognition",
+      "name": "Reads numerals",
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "prerequisites": [],
+      "assessed": true
+    },
+    {
+      "key": "math.counting.one_to_one",
+      "name": "Counts one by one",
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "prerequisites": [],
+      "assessed": true
+    },
+    {
+      "key": "math.counting.cardinality",
+      "name": "Knows how many",
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "prerequisites": ["math.counting.one_to_one"],
+      "assessed": true
+    },
+    {
+      "key": "math.quantity.transfer",
+      "name": "Uses quantity in new situations",
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "prerequisites": ["math.counting.cardinality"],
+      "assessed": true
+    },
+    {
+      "key": "math.quantity.compare",
+      "name": "Compares two amounts",
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "prerequisites": ["math.counting.cardinality"],
+      "assessed": false
+    },
+    {
+      "key": "math.operations.combine_sets",
+      "name": "Puts two amounts together",
+      "description": "Joins two sets and finds how many there are altogether.",
+      "prerequisites": ["math.quantity.transfer", "math.number.numeral_recognition"],
+      "assessed": false
+    }
+  ],
+  "mastery_policy": {
+    "min_independent": 3,
+    "min_sessions": 2,
+    "min_contexts": 2,
+    "retention_gap_days": 3,
+    "window": 5,
+    "min_accuracy": 0.8,
+    "max_review_interval_days": 60
+  }
+}
