@@ -102,7 +102,7 @@ export class Sound {
   rustle() { this.noise(0.26, 0.03, 1400, 600, 0.7); }
   paper() { this.noise(0.05, 0.035, 4200, 3000, 1.2, "highpass"); this.noise(0.07, 0.03, 3600, 2400, 1.2, "highpass", 0.07); }
   pop() { this.tone(520, 940, 0.07, 0.06); }
-  chime() { [1047, 1319, 1568, 2093].forEach((f, i) => this.tone(f, null, 0.5, 0.03, "sine", i * 0.07)); }
+  chime() { [1047, 1319, 1568, 2093].forEach((f, i) => this.tone(f, null, 0.5, 0.011, "sine", i * 0.07)); }
   giggle() { [620, 700, 640, 560].forEach((f, i) => { this.tone(f, f * 0.82, 0.09, 0.05, "triangle", i * 0.115); this.tone(f * 2, f * 1.7, 0.07, 0.012, "sine", i * 0.115); }); }
   whoosh() { this.noise(0.5, 0.02, 500, 1500, 0.7); }
   chirp() {
