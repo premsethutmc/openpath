@@ -1,0 +1,6 @@
+node_modules/
+build/
+stills/
+tools/.sheet.html
+dist/*
+!dist/standalone.html
