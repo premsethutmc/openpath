@@ -59,11 +59,11 @@ jobs:
           DATABASE_URL: postgres://openpath:openpath@127.0.0.1:5432/openpath
         run: |
           python manage.py test 2>&1 | tee test-postgres.log
-          ../.github/scripts/require-tests.sh test-postgres.log "Backend on PostgreSQL, Python ${{ matrix.python }}"
+          ../.github/scripts/require-tests.sh test-postgres.log "Backend on PostgreSQL (Python ${{ matrix.python }})"
       - name: Tests on SQLite
         run: |
           python manage.py test 2>&1 | tee test-sqlite.log
-          ../.github/scripts/require-tests.sh test-sqlite.log "Backend on SQLite, Python ${{ matrix.python }}"
+          ../.github/scripts/require-tests.sh test-sqlite.log "Backend on SQLite (Python ${{ matrix.python }})"
       - name: Settings load with debug off
         env:
           DJANGO_DEBUG: "0"
