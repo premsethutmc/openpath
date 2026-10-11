@@ -59,6 +59,19 @@ What makes it move like a character rather than a puppet:
 - speech drives mouth shapes from phoneme timings, read from the audio clock so lips and sound cannot drift
 - footsteps, anklet, bangles, cloth and paper sounds are fired by the motion that causes them
 
+## What moves, and how
+
+Nothing in the scene crossfades between drawings.
+
+| | Elements |
+| --- | --- |
+| **Animated continuously** (computed every frame) | Her path and size as she approaches; hips, chest and head; both arms (two-bone reach with a bending mesh, so elbows curve); shoulders lifting; breathing in the torso; the saree skirt (a deforming sheet); gaze (the irises move inside the eyes); eyebrows; head turns (features slide across the face); the list's size and tilt, the apple's bounce; the camera, floor reflection, swing, garden, dust and light beams |
+| **Simulated** (physics, never the same twice) | Braid, hanging end of the saree, earrings, the bag swinging from her hand, the settle of body and hem when she stops |
+| **Swapped drawings** (frame sequences) | Mouth: 6 shapes, chosen by the speech sounds and eased in. Eyelids: open, half, closed, plus a smiling-shut shape; a blink is three frames. Hands: relaxed, open, gripping |
+| **Static** | The room's painted layers (they only shift with the camera); her face base, hair cap and jasmine; the torso drawing (it tilts, breathes and travels but does not twist); her feet (they lift and travel; there are no legs under the saree) |
+
+To record the scene as a video, frame by frame with its soundtrack: `npm run record` (needs ffmpeg).
+
 ## What is real and what is a placeholder
 
 | Part | Status |

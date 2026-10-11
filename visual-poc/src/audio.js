@@ -4,7 +4,9 @@
 const b64 = (uri) => { const s = atob(uri.slice(uri.indexOf(",") + 1)); const a = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return a.buffer; };
 
 export class Sound {
-  constructor(voices, url) { this.voices = voices; this.url = url; this.on = true; this.ctx = null; this.buffers = {}; this.playing = null; this.birdTimer = 0; }
+  constructor(voices, url) { this.voices = voices; this.url = url; this.on = true; this.ctx = null; this.buffers = {}; this.playing = null; this.birdTimer = 0; this.offline = false; this.sceneTime = 0; }
+  /** The moment sounds are scheduled against: the audio clock, or the scene clock when recording. */
+  get t() { return this.offline ? this.sceneTime : this.ctx.currentTime; }
 
   /** Must be called from a tap: browsers only allow sound after one. */
   async unlock() {
@@ -13,6 +15,7 @@ export class Sound {
       const AC = window.AudioContext || window.webkitAudioContext;
       this.ctx = new AC();
       this.master = this.ctx.createGain(); this.master.gain.value = this.on ? 1 : 0; this.master.connect(this.ctx.destination);
+      this.fx = this.ctx.createGain(); this.fx.gain.value = 5; this.fx.connect(this.master);
       if (this.ctx.state === "suspended") await this.ctx.resume().catch(() => {});
       await Promise.all(Object.entries(this.voices).map(async ([id, v]) => {
         const src = this.url(v.file);
@@ -20,6 +23,25 @@ export class Sound {
         this.buffers[id] = await new Promise((res, rej) => this.ctx.decodeAudioData(data, res, rej));
       }));
     } catch (e) { console.warn("sound unavailable", e); }
+  }
+  /** Recording: build the soundtrack off-line, scheduled against the scene clock, so it lines up with the frames. */
+  async unlockOffline(seconds) {
+    this.offline = true; this.sceneTime = 0;
+    this.ctx = new OfflineAudioContext(1, Math.ceil(44100 * seconds), 44100);
+    this.master = this.ctx.createGain(); this.master.connect(this.ctx.destination);
+      this.fx = this.ctx.createGain(); this.fx.gain.value = 5; this.fx.connect(this.master);
+    await Promise.all(Object.entries(this.voices).map(async ([id, v]) => {
+      const src = this.url(v.file);
+      const data = src.startsWith("data:") ? b64(src) : await (await fetch(src)).arrayBuffer();
+      this.buffers[id] = await new Promise((res, rej) => this.ctx.decodeAudioData(data, res, rej));
+    }));
+  }
+  async renderOffline() {
+    const buf = await this.ctx.startRendering(), f = buf.getChannelData(0), pcm = new Int16Array(f.length);
+    for (let i = 0; i < f.length; i++) pcm[i] = Math.max(-1, Math.min(1, f[i])) * 32767;
+    let bin = ""; const u8 = new Uint8Array(pcm.buffer);
+    for (let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+    return btoa(bin);
   }
   setOn(on) { this.on = on; if (this.master) this.master.gain.setTargetAtTime(on ? 1 : 0, this.ctx.currentTime, 0.03); }
   get now() { return this.ctx ? this.ctx.currentTime : 0; }
@@ -32,7 +54,7 @@ export class Sound {
     if (this.ctx && this.buffers[id]) {
       const src = this.ctx.createBufferSource(), g = this.ctx.createGain();
       src.buffer = this.buffers[id]; g.gain.value = 0.9; src.connect(g).connect(this.master);
-      line.t0 = this.ctx.currentTime + 0.03; src.start(line.t0); line.src = src;
+      line.t0 = this.t + 0.03; src.start(line.t0); line.src = src;
     }
     this.playing = line;
     return v;
@@ -41,7 +63,7 @@ export class Sound {
   /** Seconds into the current line, from the audio clock when there is one. */
   voiceTime(fallback) {
     const l = this.playing; if (!l) return -1;
-    return l.t0 !== null && this.ctx.state === "running" ? this.ctx.currentTime - l.t0 : fallback;
+    return l.t0 !== null && !this.offline && this.ctx.state === "running" ? this.ctx.currentTime - l.t0 : fallback;
   }
   /** Mouth shape for a moment in a line: [shape, openness, loudness]. */
   mouthAt(v, t) {
@@ -53,21 +75,21 @@ export class Sound {
 
   tone(f, f2, t, g, type = "sine", at = 0, pan = 0) {
     const a = this.ctx; if (!a || !this.on) return;
-    const o = a.createOscillator(), v = a.createGain(), t0 = a.currentTime + at;
+    const o = a.createOscillator(), v = a.createGain(), t0 = this.t + at;
     o.type = type; o.frequency.setValueAtTime(f, t0); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t0 + t);
     v.gain.setValueAtTime(0.0001, t0); v.gain.exponentialRampToValueAtTime(g, t0 + 0.006); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
     let out = v;
     if (pan && a.createStereoPanner) { const p = a.createStereoPanner(); p.pan.value = pan; v.connect(p); out = p; }
-    o.connect(v); out.connect(this.master); o.start(t0); o.stop(t0 + t + 0.05);
+    o.connect(v); out.connect(this.fx); o.start(t0); o.stop(t0 + t + 0.05);
   }
   noise(t, g, f, f2, q = 1, type = "bandpass", at = 0) {
     const a = this.ctx; if (!a || !this.on) return;
     const n = Math.floor(a.sampleRate * t), buf = a.createBuffer(1, n, a.sampleRate), d = buf.getChannelData(0);
     for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
-    const s = a.createBufferSource(), fl = a.createBiquadFilter(), v = a.createGain(), t0 = a.currentTime + at;
+    const s = a.createBufferSource(), fl = a.createBiquadFilter(), v = a.createGain(), t0 = this.t + at;
     s.buffer = buf; fl.type = type; fl.Q.value = q; fl.frequency.setValueAtTime(f, t0); if (f2) fl.frequency.exponentialRampToValueAtTime(f2, t0 + t);
     v.gain.setValueAtTime(0.0001, t0); v.gain.exponentialRampToValueAtTime(g, t0 + 0.015); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
-    s.connect(fl).connect(v).connect(this.master); s.start(t0);
+    s.connect(fl).connect(v).connect(this.fx); s.start(t0);
   }
 
   /** One footfall: a soft pat on the floor and her anklet answering it. `near` is 0..1 as she approaches. */

@@ -147,22 +147,25 @@ async function boot() {
     await S.wait(WALK - 2.2 - 0.28);
     await S.to(st, { walk: 0 }, 0.28, ease.out);
     amma.sp.squash.v += 60; amma.sp.hem.v += 60;              // she stops; the saree and braid carry on a little
+    run((async () => { await S.to(st, { chestDy: 5, lean: 1.6 }, 0.14, ease.out); await S.to(st, { chestDy: 0, lean: 0 }, 0.42, ease.back); })());
     phase = "greeting";
     await S.wait(0.35);
 
     /* 2. She smiles and waves. */
     await S.to(st.armL, { x: -116, y: 152 }, 0.16, ease.sine);  // a small dip first
-    st.handL = "hand-open"; st.mouth = "m-grin"; st.brow = 0.9;
+    st.mouth = "m-grin"; st.brow = 0.9;
     run(S.to(st, { lean: -2.5, headRot: -6, hipX: 5 }, 0.5, ease.back));
+    run((async () => { await S.wait(0.2); st.handL = "hand-open"; })());   // the palm opens as the hand comes up
     await S.to(st.armL, { x: -205, y: -240 }, 0.42, ease.back);
-    const wave = async (x, y, t) => { await S.to(st.armL, { x, y }, t, ease.sine); sound.bangles(); };
-    await wave(-250, -238, 0.2);
+    // each swing of the hand is answered by the head and the body, a beat behind
+    const wave = async (x, y, t, d) => { run(S.to(st, { lean: -2.5 + d * 1.4, headRot: -6 + d * 2.4, chestDy: -1.5 }, t + 0.06, ease.sine)); await S.to(st.armL, { x, y }, t, ease.sine); sound.bangles(); };
+    await wave(-250, -238, 0.2, -1);
     st.eye = "happy";
-    await wave(-170, -226, 0.27); await wave(-248, -240, 0.27); await wave(-172, -226, 0.27);
+    await wave(-170, -226, 0.27, 1); await wave(-248, -240, 0.27, -1); await wave(-172, -226, 0.27, 1);
     st.eye = "open"; blinkNow();
     await S.to(st.armL, { x: -205, y: -240 }, 0.15, ease.sine);
     st.mouth = "m-smile"; st.brow = 0.2;
-    run(S.to(st, { lean: 0, headRot: 0, hipX: 0 }, 0.6, ease.inOut));
+    run(S.to(st, { lean: 0, headRot: 0, hipX: 0, chestDy: 0 }, 0.6, ease.inOut));
     run((async () => { await S.wait(0.22); st.handL = "hand-relaxed"; })());
     await S.to(st.armL, { ...REST_L }, 0.55, ease.inOut);
 
@@ -177,10 +180,13 @@ async function boot() {
     st.handR = "hand-grip"; sound.rustle();
     await S.tween(0.14, (k) => amma.bag.scale.set(0.98 * (1 + 0.03 * Math.sin(k * Math.PI)), 0.98 * (1 - 0.05 * Math.sin(k * Math.PI))), ease.lin);
     amma.holdBag();
-    run(S.to(st, { lean: 0, hipX: 0, chestDy: 0, headRot: 0 }, 0.65, ease.back));
-    run((async () => { await S.wait(0.25); lookChild(); st.mouth = "m-grin"; await S.wait(0.5); st.mouth = "m-smile"; })());
-    await S.to(st.armR, { x: 126, y: 112 }, 0.65, ease.back);
-    await S.wait(0.2);
+    // she takes the weight first, then straightens, leaning a little away from the load before settling
+    run((async () => { await S.to(st, { lean: 9.5, chestDy: 11 }, 0.14, ease.out); await S.to(st, { lean: -2.6, hipX: 8, chestDy: 0, headRot: 0 }, 0.6, ease.inOut); await S.to(st, { lean: 0, hipX: 0 }, 0.5, ease.sine); })());
+    run((async () => { await S.wait(0.4); lookChild(); st.mouth = "m-grin"; await S.wait(0.55); st.mouth = "m-smile"; })());
+    await S.wait(0.12);
+    await S.to(st.armR, { x: 126, y: 100 }, 0.7, ease.inOut);
+    await S.to(st.armR, { y: 114 }, 0.26, ease.sine);
+    await S.wait(0.1);
 
     /* 4. She takes out the list and shows it. */
     phase = "list";
@@ -190,7 +196,7 @@ async function boot() {
     st.handL = "hand-grip"; amma.holdList(); sound.paper();
     await S.wait(0.08);
     run(S.to(st, { listScale: 1.12, listRot: -5 }, 0.6, ease.back));
-    run(S.to(st.armR, { x: 126, y: 112 }, 0.7, ease.inOut));
+    run(S.to(st.armR, { x: 126, y: 114 }, 0.7, ease.inOut));
     run((async () => { await S.wait(0.2); lookAt(-0.85, 0.2, -0.45, 0.1); await S.wait(0.55); lookChild(); st.brow = 0.8; blinkNow(); })());
     await S.to(st.armL, { x: -186, y: -34 }, 0.62, ease.back);
     sound.chime(); { const p = amma.toScene(amma.list, 0, 0); sparkle(p.x, p.y, 7); }
@@ -273,7 +279,7 @@ async function boot() {
   let time = 0, frames = 0, fpsT = 0;
   function frame(dt, draw = true) {
     dt = Math.min(dt, 1 / 20);
-    time += dt; clock.advance(dt);
+    time += dt; sound.sceneTime += dt; clock.advance(dt);
     look.x.step(dt); look.y.step(dt);
 
     // speech drives her mouth from the audio clock
@@ -327,7 +333,7 @@ async function boot() {
   el("sound")?.addEventListener("click", (e) => { sound.setOn(!sound.on); e.currentTarget.setAttribute("aria-pressed", sound.on); });
   el("loading").hidden = true; playBtn.hidden = false;
 
-  window.__poc = { frame, start: () => { playBtn.hidden = true; run(sequence()); }, st, cam, amma, tapAmma, tapList, get phase() { return phase; }, get time() { return time; } };
+  window.__poc = { frame, start: () => { playBtn.hidden = true; run(sequence()); }, record: async (secs) => { playBtn.hidden = true; await sound.unlockOffline(secs); run(sequence()); }, soundtrack: () => sound.renderOffline(), canvas, st, cam, amma, tapAmma, tapList, get phase() { return phase; }, get time() { return time; } };
 }
 
 boot().catch((e) => { console.error(e); const l = el("loading"); if (l) { l.hidden = false; l.textContent = "This scene could not start: " + e.message; } });

@@ -38,9 +38,9 @@ export class Amma {
       handL: new Spring(0, 160, 14), handR: new Spring(0, 160, 14),
       hem: new Spring(0, 60, 9), squash: new Spring(0, 190, 13),
       jhL: new Spring(0, 90, 6), jhR: new Spring(0, 90, 6), bag: new Spring(0, 0, 0),
-      brow: new Spring(0, 300, 26), list: new Spring(0, 120, 10),
+      brow: new Spring(0, 300, 26), list: new Spring(0, 120, 10), cheer: new Spring(0, 260, 20), mpop: new Spring(1, 520, 26), hpopL: new Spring(1, 520, 28), hpopR: new Spring(1, 520, 28),
     };
-    this.bagTheta = 0; this.bagOmega = 0;
+    this.bagTheta = 0; this.bagOmega = 0; this.bagBlend = 0; this.shoulderDy = 0; this.cheer = 0;
     this.prev = { hipX: 0, headX: null, headV: 0, gripX: null, gripV: 0, faL: null, faR: null, step: 0 };
     this.blink = { next: 1.6, t: -1 };
     this.build(atlas.ground);
@@ -86,7 +86,7 @@ export class Amma {
     this.tintable.push(this.pallu.mesh, this.skirt.mesh, this.braid.mesh);
     this.chests = [this.chestBack, this.chestMid, this.chestHead, this.chestFront];
 
-    this.part("torso", CHEST, this.chestBack);
+    this.torso = this.part("torso", CHEST, this.chestBack);
 
     // her left arm (viewer's right): carries the bag
     this.armR = new Strip(P, this.tex.arm, this.F.arm, 14); this.chestMid.addChild(this.armR.mesh); this.tintable.push(this.armR.mesh);
@@ -142,7 +142,11 @@ export class Amma {
   grip(side) { const h = side === "L" ? this.handL : this.handR; const a = h.rotation; return { x: h.position.x - Math.sin(a) * 30, y: h.position.y + Math.cos(a) * 30 }; }
 
   holdBag() {
-    this.st.bag = "held"; this.bagHeld.addChild(this.bag); this.bag.scale.set(0.86); this.bagTheta = 0; this.bagOmega = 0; this.prev.gripX = null;
+    // remember where the bag was sitting, so it travels into her grip instead of jumping there
+    const p = this.toScene(this.bag.parent, this.bag.x, this.bag.y);
+    this.bagFrom = { x: p.x, y: p.y }; this.bagBlend = 1;
+    this.st.bag = "held"; this.bagHeld.addChild(this.bag); this.bag.position.set(0, 0); this.bag.scale.set(0.86);
+    this.bagTheta = this.chestMid.rotation; this.bagOmega = 0; this.prev.gripX = null; this.prev.gripN = 0;
   }
   holdList() { this.st.list = "held"; this.listHeld.addChild(this.list); this.list.pivot.set(56, 74); this.list.position.set(0, 0); this.sp.list.snap(0); }
   reset() {
@@ -150,6 +154,7 @@ export class Amma {
     Object.assign(s, { walk: 0, phase: 0, hipX: 0, hipRot: 0, lean: 0, chestDy: 0, headRot: 0, yaw: 0, pitch: 0, gazeX: 0, gazeY: 0.08, eye: "open", brow: 0, browTilt: 0, mouth: "m-smile", cheeks: 0, handL: "hand-relaxed", handR: "hand-relaxed", handLRot: 0, handRRot: 0, bag: "stool", list: "bag", listScale: 0.62, listRot: 6, listPop: 0, fivePulse: 0, shade: 0 });
     s.armL = { ...REST_L }; s.armR = { ...REST_R };
     for (const k in this.sp) this.sp[k].snap(0);
+    this.sp.mpop.snap(1); this.sp.hpopL.snap(1); this.sp.hpopR.snap(1);
     this.sp.lx.snap(REST_L.x); this.sp.ly.snap(REST_L.y); this.sp.rx.snap(REST_R.x); this.sp.ry.snap(REST_R.y); this.sp.gy.snap(0.08);
     this.listSlot.addChild(this.list); this.list.pivot.set(0, 60); this.list.position.set(6, 112); this.list.rotation = 6 * DEG; this.list.scale.set(0.62);
     this.braidChain.ready = false; this.palluChain.ready = false; this.talk = null;
@@ -164,7 +169,8 @@ export class Amma {
   }
 
   arm(strip, hand, sx, tx, ty, side, dt, key, handId, handRot, lag) {
-    const sy = SHOULDER[1];
+    // the shoulder lifts a little when the hand goes above it, and with each breath
+    const sy = SHOULDER[1] - clamp((SHOULDER[1] - ty) / 140, 0, 1) * 8 + this.shoulderDy;
     // two candidate elbows; take the one that sits further out from the body
     const a = reach(sx, sy, tx, ty, UPPER, FORE, 1, { ...this.ik }), b = reach(sx, sy, tx, ty, UPPER, FORE, -1, this.ik);
     const k = (a.ex - b.ex) * side > 0 ? a : b;
@@ -185,7 +191,11 @@ export class Amma {
     if (this.prev[key] !== null && dt > 0) { let d = fa - this.prev[key]; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; w = d / dt; }
     this.prev[key] = fa;
     lag.t = clamp(-w * 0.07, -0.6, 0.6); lag.step(dt);
+    const pop = side < 0 ? this.sp.hpopL : this.sp.hpopR;
+    if (hand._id && hand._id !== handId) { pop.x = 0.8; pop.v = 0; }
+    pop.t = 1; const hp = pop.step(dt);
     this.retex(hand, handId);
+    const hs = (HAND_SCALE * hp) / this.F[handId].s; hand.scale.set(side < 0 ? hs : -hs, hs);
     hand.position.set(wx, wy);
     hand.rotation = fa - Math.PI / 2 + handRot * DEG + lag.x;
   }
@@ -240,9 +250,10 @@ export class Amma {
     let eye = s.eye;
     if (bl.t >= 0) { bl.t += dt; if (eye === "open") eye = bl.t < 0.04 ? "half" : bl.t < 0.11 ? "closed" : bl.t < 0.16 ? "half" : "open"; if (bl.t >= 0.16) bl.t = -1; }
     sp.brow.t = s.brow; const brow = sp.brow.step(dt);
+    sp.cheer.t = !this.talk && s.mouth === "m-grin" ? 1 : 0; this.cheer = clamp(sp.cheer.step(dt), 0, 1.2);
     for (const E of this.eyes) {
       const sd = E.side;
-      E.e.position.set(41 * sd + yw * 8, -96 + pt * 5); E.e.scale.set(1 - yw * 0.07 * sd, 1);
+      E.e.position.set(41 * sd + yw * 8, -96 + pt * 5 - this.cheer * 1.5); E.e.scale.set(1 - yw * 0.07 * sd, 1 - this.cheer * 0.09);
       if (E.state !== eye) {
         E.state = eye;
         const seen = eye === "open" || eye === "half";
@@ -259,9 +270,15 @@ export class Amma {
     // mouth: speech shapes while a line plays, otherwise the expression she is holding
     let mouthId = s.mouth, my = 1, mx = 1;
     if (this.talk) { mouthId = MOUTHS[this.talk.shape] || "m-smile"; if (this.talk.shape !== "rest" && this.talk.shape !== "m") { my = 0.62 + 0.5 * this.talk.open * (0.45 + 0.55 * this.talk.loud); mx = 0.94 + 0.06 * this.talk.open; } }
+    if (!this.talk && this.mouth._id !== mouthId) { sp.mpop.x = 0.72; sp.mpop.v = 0; }
+    sp.mpop.t = 1; const mp = sp.mpop.step(dt);
     this.retex(this.mouth, mouthId);
-    this.mouth.position.set(yw * 9, -23 + pt * 5);
-    const mk = 1 / this.F[mouthId].s; this.mouth.scale.set(mk * mx, mk * my);
+    this.mouth.position.set(yw * 9, -23 + pt * 5 - this.cheer * 1.2);
+    const mk = 1 / this.F[mouthId].s; this.mouth.scale.set(mk * mx * mp, mk * my * (0.6 + 0.4 * mp));
+
+    const ts = 1 / this.F.torso.s;
+    this.torso.scale.set(ts * (1 + breath * 0.007), ts * (1 - breath * 0.006));
+    this.shoulderDy = -breath * 1.6;
 
     // arms
     sp.lx.t = s.armL.x; sp.ly.t = s.armL.y; sp.rx.t = s.armR.x; sp.ry.t = s.armR.y;
@@ -272,14 +289,21 @@ export class Amma {
     // the bag hangs from her hand and swings with it
     if (s.bag === "held") {
       const g = this.grip("R");
-      this.bagHeld.position.set(g.x, g.y - 6);
+      let bx = g.x, by = g.y - 6;
+      if (this.bagBlend > 0) {
+        this.pt.set(this.bagFrom.x, this.bagFrom.y); const q = this.chestMid.toLocal(this.pt, this.scene, this.pt2);
+        const k = this.bagBlend * this.bagBlend * (3 - 2 * this.bagBlend);
+        bx = lerp(bx, q.x, k); by = lerp(by, q.y, k);
+        this.bagBlend = Math.max(0, this.bagBlend - dt / 0.24);
+      }
+      this.bagHeld.position.set(bx, by);
       const gp = this.toScene(this.chestMid, g.x, g.y, this.pt2), gxs = gp.x / s.s;
       let acc = 0;
-      if (this.prev.gripX !== null && dt > 0) { const v = (gxs - this.prev.gripX) / dt; acc = clamp((v - this.prev.gripV) / dt, -6000, 6000); this.prev.gripV = v; }
-      this.prev.gripX = gxs;
-      const L = 190;
-      this.bagOmega += (-(2600 / L) * Math.sin(this.bagTheta) - (acc / L) * Math.cos(this.bagTheta) - 2.6 * this.bagOmega) * dt;
-      this.bagTheta = clamp(this.bagTheta + this.bagOmega * dt, -0.6, 0.6);
+      if (this.prev.gripX !== null && dt > 0) { const v = (gxs - this.prev.gripX) / dt; if (this.prev.gripN > 1) acc = clamp((v - this.prev.gripV) / dt, -3500, 3500); this.prev.gripV = v; }
+      this.prev.gripX = gxs; this.prev.gripN = (this.prev.gripN || 0) + 1;
+      const L = 190;   // a loaded cloth bag: it swings, but heavily, and settles soon
+      this.bagOmega += (-(2600 / L) * Math.sin(this.bagTheta) - (acc / L) * 0.8 * Math.cos(this.bagTheta) - 4.2 * this.bagOmega) * dt;
+      this.bagTheta = clamp(this.bagTheta + this.bagOmega * dt, -0.45, 0.45);
       this.bagHeld.rotation = -chestRot * DEG + this.bagTheta;
     }
     if (s.list === "held") {

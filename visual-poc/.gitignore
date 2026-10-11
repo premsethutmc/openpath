@@ -4,3 +4,4 @@ stills/
 tools/.sheet.html
 dist/*
 !dist/standalone.html
+*.mp4

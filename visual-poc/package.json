@@ -8,6 +8,7 @@
     "build": "node tools/build.mjs",
     "art": "node tools/bake.mjs && python3 tools/pack.py",
     "voice": "python3 tools/voice.py",
+    "record": "node tools/record.mjs amma-at-home.mp4 17.5 60 1280x800",
     "stills": "node tools/shots.mjs stills 1280x800 0,2.3,4.5,5.9,8.25,9.3,10.35,11.3,12.6"
   },
   "devDependencies": {
