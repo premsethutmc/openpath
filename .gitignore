@@ -10,5 +10,6 @@ frontend/dist/
 frontend/e2e/shots/
 
 # Local
+*.log
 .env
 .DS_Store
