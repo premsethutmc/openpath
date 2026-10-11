@@ -44,9 +44,12 @@ python manage.py runserver            # http://127.0.0.1:8000
 
 # 2. Web app (second terminal)
 cd frontend
-npm install
+npm ci
 npm run dev                           # http://localhost:5173
 ```
+
+Both installs use lockfiles (`backend/requirements.txt`, `frontend/package-lock.json`),
+so everyone gets the versions CI tested.
 
 To use PostgreSQL (the intended database):
 
@@ -57,7 +60,8 @@ python manage.py migrate && python manage.py runserver
 ```
 
 `npm run build` writes the production web app to `frontend/dist/`; serve it from
-any static host with `/api` routed to Django.
+any static host with `/api` routed to Django. `npm run preview` does exactly that
+locally on http://localhost:4173, to check the built app rather than the dev build.
 
 **No backend at all:** `npm run build:standalone` writes
 `frontend/dist/openpath-standalone.html`, a single file that keeps all evidence
@@ -96,7 +100,28 @@ cd frontend && npm run e2e                  # a real browser plays the game; nee
 
 `npm run e2e` needs a Chromium for Playwright (`npx playwright install chromium`).
 It plays a full visit with the mouse, a struggling visit with touch at phone
-size, and a round with the keyboard alone.
+size, and a round with the keyboard alone. Point it elsewhere with `E2E_URL`,
+for example `E2E_URL=http://localhost:4173` for the production preview.
+
+### Continuous integration
+
+`.github/workflows/ci.yml` runs on every pull request and on pushes to `main`:
+
+| Job | What it checks |
+| --- | --- |
+| Backend tests | Clean install from `requirements.txt` on Python 3.10, 3.12 and 3.13; Django checks; migrations in sync; all tests on PostgreSQL 16 and again on SQLite |
+| Frontend | `npm ci`; typecheck; engine parity tests; production build; standalone build |
+| Browser end-to-end | Builds the app, starts Django (debug off) on PostgreSQL, serves the production build, and plays the game in Chromium. Screenshots are kept as a build artifact. |
+
+### Updating dependencies
+
+Direct dependencies live in `backend/requirements.in` and `frontend/package.json`.
+After changing either, regenerate the lockfile and commit it:
+
+```bash
+cd backend  && uv pip compile requirements.in --universal --python-version 3.10 -o requirements.txt
+cd frontend && npm install --package-lock-only
+```
 
 If you change an assessment rule, change it in `backend/assessment/`, port it to
 `frontend/src/core/engine/`, then run `python -m assessment.export_golden`. Both

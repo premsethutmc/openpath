@@ -106,7 +106,7 @@ limits, audit logging. These need product and legal decisions (see below).
 | Build | esbuild scripts (`npm run dev`, `build`) | Smallest thing that works. The dev server proxies `/api`, so there is no CORS to configure. Swapping in Vite later is contained to `scripts/`. |
 | API | Django 5.2 + Django REST Framework | |
 | Database | PostgreSQL 16 (SQLite fallback for a zero-setup look) | Events and details are JSON columns. |
-| Tests | Django test runner; Node's built-in runner; Playwright for end-to-end | |
+| Tests | Django test runner; Node's built-in runner; Playwright for end-to-end | All three run in GitHub Actions on every pull request. |
 | Mobile (later) | React Native / Expo | `core/` is plain TypeScript; only `storage.ts`, `sound.ts` and the file download in `recovery.ts` touch browser-only APIs. The game's SVG maps to `react-native-svg`. |
 
 ## Next steps
@@ -117,7 +117,7 @@ limits, audit logging. These need product and legal decisions (see below).
    shared infrastructure with a different task type.
 3. Review sessions: use `review_due` to bring back secure skills on schedule.
 4. Parent accounts with a real consent flow; school-held identity mapping.
-5. CI, a production deployment, and the Expo app.
+5. A production deployment, and the Expo app.
 
 ## Decisions for the product owner
 
