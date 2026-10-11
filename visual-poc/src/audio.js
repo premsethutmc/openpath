@@ -77,7 +77,8 @@ export class Sound {
     const a = this.ctx; if (!a || !this.on) return;
     const o = a.createOscillator(), v = a.createGain(), t0 = this.t + at;
     o.type = type; o.frequency.setValueAtTime(f, t0); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t0 + t);
-    v.gain.setValueAtTime(0.0001, t0); v.gain.exponentialRampToValueAtTime(g, t0 + 0.006); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
+    v.gain.value = 0.0001; v.gain.setValueAtTime(0.0001, t0);   // silent before the start too, or the first sample can click
+    v.gain.exponentialRampToValueAtTime(g, t0 + 0.006); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
     let out = v;
     if (pan && a.createStereoPanner) { const p = a.createStereoPanner(); p.pan.value = pan; v.connect(p); out = p; }
     o.connect(v); out.connect(this.fx); o.start(t0); o.stop(t0 + t + 0.05);
@@ -88,7 +89,8 @@ export class Sound {
     for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
     const s = a.createBufferSource(), fl = a.createBiquadFilter(), v = a.createGain(), t0 = this.t + at;
     s.buffer = buf; fl.type = type; fl.Q.value = q; fl.frequency.setValueAtTime(f, t0); if (f2) fl.frequency.exponentialRampToValueAtTime(f2, t0 + t);
-    v.gain.setValueAtTime(0.0001, t0); v.gain.exponentialRampToValueAtTime(g, t0 + 0.015); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
+    v.gain.value = 0.0001; v.gain.setValueAtTime(0.0001, t0);   // silent before the start too, or the first sample can click
+    v.gain.exponentialRampToValueAtTime(g, t0 + 0.015); v.gain.exponentialRampToValueAtTime(0.0001, t0 + t);
     s.connect(fl).connect(v).connect(this.fx); s.start(t0);
   }
 

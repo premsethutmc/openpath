@@ -333,7 +333,7 @@ async function boot() {
   el("sound")?.addEventListener("click", (e) => { sound.setOn(!sound.on); e.currentTarget.setAttribute("aria-pressed", sound.on); });
   el("loading").hidden = true; playBtn.hidden = false;
 
-  window.__poc = { frame, start: () => { playBtn.hidden = true; run(sequence()); }, record: async (secs) => { playBtn.hidden = true; await sound.unlockOffline(secs); run(sequence()); }, soundtrack: () => sound.renderOffline(), canvas, st, cam, amma, tapAmma, tapList, get phase() { return phase; }, get time() { return time; } };
+  window.__poc = { frame, start: () => { playBtn.hidden = true; run(sequence()); }, record: async (secs) => { playBtn.hidden = true; await sound.unlockOffline(secs); run(sequence()); }, soundtrack: () => sound.renderOffline(), canvas, sound, st, cam, amma, tapAmma, tapList, get phase() { return phase; }, get time() { return time; } };
 }
 
 boot().catch((e) => { console.error(e); const l = el("loading"); if (l) { l.hidden = false; l.textContent = "This scene could not start: " + e.message; } });
