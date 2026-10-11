@@ -1,4 +1,0 @@
-# Tested with Django 5.2.18, DRF 3.18.3, psycopg 3.2.13 on Python 3.13.
-Django>=5.2,<5.3
-djangorestframework>=3.16,<4
-psycopg[binary]>=3.2,<3.3

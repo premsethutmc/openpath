@@ -1,0 +1,5 @@
+# Direct dependencies. The pinned set that gets installed is requirements.txt:
+#   uv pip compile requirements.in --universal --python-version 3.10 -o requirements.txt
+Django>=5.2,<5.3
+djangorestframework>=3.16,<4
+psycopg[binary]>=3.2,<3.3
