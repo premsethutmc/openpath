@@ -819,3 +819,16 @@ th {
 .alert .actions {
   margin-top: 8px;
 }
+
+.check.missing {
+  padding: 10px 12px;
+  margin-inline: -12px;
+  border-radius: 10px;
+  outline: 3px solid var(--tomato);
+}
+
+.crash {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 32px 16px;
+}

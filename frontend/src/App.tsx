@@ -125,11 +125,18 @@ function Welcome({ onReady }: { onReady: (identity: Identity) => void }) {
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [needsConsent, setNeedsConsent] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+  const consentInput = useRef<HTMLInputElement>(null);
 
   const start = async (event: FormEvent) => {
     event.preventDefault();
-    if (!consent) return;
+    if (!consent) {
+      // A greyed-out button explains nothing; say what is missing instead.
+      setNeedsConsent(true);
+      consentInput.current?.focus();
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -154,8 +161,17 @@ function Welcome({ onReady }: { onReady: (identity: Identity) => void }) {
           <input id="nickname" value={nickname} onChange={(event) => setNickname(event.target.value)} maxLength={24} autoComplete="off" />
           <small>Stays on this device. It is never sent or stored with the learning record.</small>
         </label>
-        <label className="check">
-          <input id="consent" type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
+        <label className={`check${needsConsent && !consent ? " missing" : ""}`}>
+          <input
+            id="consent"
+            ref={consentInput}
+            type="checkbox"
+            checked={consent}
+            onChange={(event) => {
+              setConsent(event.target.checked);
+              setNeedsConsent(false);
+            }}
+          />
           <span>
             I am this child's parent or guardian. I agree to their play being recorded as learning evidence under a
             random ID
@@ -163,13 +179,18 @@ function Welcome({ onReady }: { onReady: (identity: Identity) => void }) {
             get a copy of it or erase it at any time.
           </span>
         </label>
+        {needsConsent && !consent && (
+          <p className="alert" role="alert">
+            Tick the box above to start. The game cannot record anything without a grown-up's agreement.
+          </p>
+        )}
         {error && (
           <p className="alert" role="alert">
             {error}
           </p>
         )}
         <div className="actions">
-          <button type="submit" className="primary" disabled={!consent || busy}>
+          <button type="submit" className="primary" disabled={busy}>
             {busy ? "Setting up…" : "Start playing"}
           </button>
           <button type="button" className="secondary" onClick={() => fileInput.current?.click()}>

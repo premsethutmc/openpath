@@ -45,12 +45,13 @@ export async function writeIndex(extraScript = "") {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (standalone) {
-    const result = await esbuild.build(options({ minify: true, write: false }));
+    // A classic script rather than a module: it runs anywhere an inline script can.
+    const result = await esbuild.build(options({ minify: true, write: false, format: "iife" }));
     const file = (suffix) => result.outputFiles.find((f) => f.path.endsWith(suffix)).text;
     const template = await readFile(`${root}/index.html`, "utf8");
     const html = template
       .replace("<!--styles-->", () => `<style>${file(".css")}</style>`)
-      .replace("<!--script-->", () => `<script type="module">${file(".js").replaceAll("</script", "<\\/script")}</script>`);
+      .replace("<!--script-->", () => `<script>${file(".js").replaceAll("</script", "<\\/script")}</script>`);
     await mkdir(`${root}/dist`, { recursive: true });
     await writeFile(`${root}/dist/openpath-standalone.html`, html);
     console.log(`wrote dist/openpath-standalone.html (${Math.round(html.length / 1024)} kB)`);

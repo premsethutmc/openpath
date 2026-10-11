@@ -11,7 +11,18 @@
     <!--styles-->
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><p class="loading">Getting the shop ready…</p></div>
+    <script>
+      // If the app cannot start, say so on the page instead of staying blank.
+      window.addEventListener("error", function (event) {
+        var root = document.getElementById("root");
+        if (!root || root.dataset.started) return;
+        var note = document.createElement("p");
+        note.className = "loading";
+        note.textContent = "OpenPath could not start: " + (event.message || "the page script failed to load") + ".";
+        root.replaceChildren(note);
+      });
+    </script>
     <!--script-->
   </body>
 </html>

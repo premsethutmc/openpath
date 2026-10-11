@@ -41,6 +41,9 @@ const basketCount = (page) => page.locator('.fruit[data-where="basket"]').count(
 async function enrol(page, nickname) {
   await page.goto(URL);
   await page.getByLabel(/Nickname/).fill(nickname);
+  // Starting without consent explains what is missing rather than doing nothing.
+  await press(page, "Start playing");
+  await page.getByText("Tick the box above to start").waitFor();
   await page.getByRole("checkbox").check();
   await press(page, "Start playing");
   await phase(page, "list");
