@@ -1,6 +1,8 @@
 # Implementation plan: OpenPath English
 
-*This plan is **Recommended** and awaits your approval. No milestone starts
+*Approved 12 October 2026 (A-36). D-1 approved, D-10 confirmed. E1 is under way; the other decisions are still open.*
+
+*Original status: this plan was **Recommended** and awaited your approval. No milestone starts
 until you approve its scope. Each one ends with a report and a request for
 approval (A-30). Each one leaves working, tested software (A-29).*
 
