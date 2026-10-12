@@ -1,0 +1,28 @@
+# Words and word parts kept out of the spelling word bank, its clues and its example sentences.
+# The learners are 10–15. This list is applied to every word, every clue and every example sentence
+# (whole words, lower case). It is a first screen, not a review: every generated item is still
+# candidate content until a person has checked it (see docs/english/WEB_APP.md).
+#
+# Sexual or anatomical
+sex sexual sexy sexually breast breasts nude naked genital genitals penis vagina erotic orgasm
+intercourse prostitute prostitution whore brothel porn pornography rape raped raping rapist
+seduce seduced seduction lust lustful mistress virgin virginity condom pregnant pregnancy
+abortion aroused arousal fetish homosexual lesbian bisexual buttocks bottom
+# Violence, weapons and death in detail
+kill killed killing killer murder murdered murderer suicide slaughter massacre stab stabbed
+stabbing strangle strangled torture tortured gun guns rifle pistol bullet bullets bomb bombs
+bombing explosive grenade corpse corpses execution executed behead hang hanged hanging gore
+bloody bleed bleeding wound wounded weapon weapons assassin assassinate terrorist terrorism
+# Drugs, alcohol, tobacco and gambling
+drug drugs cocaine heroin marijuana cannabis opium narcotic narcotics drunk drunken alcohol
+alcoholic liquor whisky whiskey vodka beer wine gin rum cigarette cigarettes cigar tobacco
+smoking gamble gambling gambler bet betting casino
+# Insults, slurs and crude words (SCOWL marks vulgar and offensive words; these add a margin)
+idiot idiotic stupid moron dumb fool foolish loser ugly fat fatty damn hell crap bastard bitch
+slave slavery
+# Religion and politics (kept out of generated sentences to stay neutral)
+god gods christ jesus allah church mosque temple pray prayer prayers bible koran quran
+# Medical distress
+cancer disease diseased tumour tumor vomit vomiting diarrhoea diarrhea
+# Added after reviewing a first sample of the bank (12 October 2026)
+caste castes butt butts bum bums divorce divorced nasty

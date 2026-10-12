@@ -166,6 +166,11 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
       if (!(item.a > 0)) problems.push(`item ${item.id} needs a positive discrimination`);
       if (item.passage && !passages.has(item.passage)) problems.push(`item ${item.id} uses unknown passage ${item.passage}`);
       const allowed = misconceptionIds(index, item.target);
+      if (item.generated) {
+        if (item.difficulty_source !== "feature_estimate") problems.push(`generated item ${item.id} must say its difficulty is a feature_estimate`);
+        if (!item.generated.sources?.length) problems.push(`generated item ${item.id} must name its lexical sources`);
+        if (!item.generated.word) problems.push(`generated item ${item.id} must name its word`);
+      } else if (item.difficulty_source === "feature_estimate") problems.push(`item ${item.id} has a feature_estimate difficulty but no generation record`);
       for (const tag of [...Object.values(item.distractor_tags ?? {}), ...Object.values(item.wrong ?? {}), ...(item.addresses ?? [])])
         if (!allowed.has(tag)) problems.push(`item ${item.id} uses misconception ${tag}, which ${item.target} does not list`);
       const n = item.options?.length ?? 0;
