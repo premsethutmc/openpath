@@ -39,6 +39,11 @@ export interface SimLearner {
   guess?: number;
   /** Day from which some capabilities drop (forgetting), and their new levels. */
   drop?: { fromDay: number; to: Partial<Record<Short, number>> };
+  /**
+   * Research only (tools/english/research/breadth.ts): true levels for capabilities beyond the 17
+   * skeleton ones. The frozen simulation's learners never set it, so their answers are unchanged.
+   */
+  coreLevel?: (cap: CapabilityId, day: number) => number;
 }
 
 const all = (v: number): Record<Short, number> => Object.fromEntries(Object.keys(CAP).map((k) => [k, v])) as Record<Short, number>;
@@ -103,13 +108,14 @@ const SHORT_OF = new Map(Object.entries(CAP).map(([k, v]) => [v as string, k as 
 
 export function trueLevel(l: SimLearner, cap: CapabilityId, day: number): number {
   const s = SHORT_OF.get(cap);
+  if (!s && l.coreLevel) return l.coreLevel(cap, day);
   if (!s) throw new Error(`no true level for ${cap}`);
   if (l.drop && day >= l.drop.fromDay && l.drop.to[s] !== undefined) return l.drop.to[s]!;
   return l.truth[s];
 }
 
-export function trueLevels(l: SimLearner, day: number): Record<CapabilityId, number> {
-  return Object.fromEntries(Object.values(CAP).map((c) => [c, trueLevel(l, c, day)]));
+export function trueLevels(l: SimLearner, day: number, extra: CapabilityId[] = []): Record<CapabilityId, number> {
+  return Object.fromEntries([...Object.values(CAP), ...(l.coreLevel ? extra : [])].map((c) => [c, trueLevel(l, c, day)]));
 }
 
 /** Research options (tools/english/research); unset, answers are exactly as in E1. */

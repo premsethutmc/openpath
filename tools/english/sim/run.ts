@@ -44,7 +44,7 @@ export function simEvaluator(ctx: Context, learner: SimLearner | null, day: () =
       const anchor = anchors.get(req.request_id);
       if (anchor) return { bands: anchor };
       if (!learner) return null;
-      const truth = trueLevels(learner, day());
+      const truth = trueLevels(learner, day(), [...ctx.index.leaves.values()].filter((c) => c.bands).map((c) => c.id));
       const allowed = (cap: string) => new Set((ctx.index.leaves.get(cap)?.misconceptions ?? []).map((m) => m.id));
       return {
         bands: truth,
