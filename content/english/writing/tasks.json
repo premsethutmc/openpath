@@ -1,0 +1,317 @@
+[
+ {
+  "kind": "writing",
+  "id": "wr.email.librarian",
+  "version": 1,
+  "format": "writing:email",
+  "genre": "functional email",
+  "prompt": "Write an email to your school librarian, Mrs. Rao, asking her to order a book you would like to read. Say what the book is, why you want it, and thank her. (60–120 words)",
+  "min_words": 60,
+  "max_words": 120,
+  "b": 4.5,
+  "band_window": [
+   2.5,
+   6.5
+  ],
+  "targets": [
+   "EN.WRT.TSK.task_response",
+   "EN.WRT.ORG.paragraphing",
+   "EN.WRT.ACC.grammar",
+   "EN.WRT.ACC.spelling",
+   "EN.SEN.CMP.run_ons"
+  ],
+  "secondary": [
+   "EN.GRM.PUN.commas",
+   "EN.SEN.CMB.subordination",
+   "EN.GRM.NOUN.articles",
+   "EN.GRM.VERB.sva",
+   "EN.GRM.VERB.aspect"
+  ],
+  "rubric": {
+   "EN.WRT.TSK.task_response": [
+    "Does what the task asks (purpose and reader)",
+    "Includes every required part",
+    "Keeps to the length asked for"
+   ],
+   "EN.WRT.ORG.paragraphing": [
+    "Groups related sentences into paragraphs",
+    "Each paragraph has one clear focus",
+    "Clear opening and ending"
+   ],
+   "EN.WRT.ACC.grammar": [
+    "Verb forms and agreement are correct",
+    "Articles and pronouns are used correctly",
+    "Errors do not get in the way of meaning"
+   ],
+   "EN.WRT.ACC.spelling": [
+    "Common words are spelled correctly",
+    "Longer and less common words are spelled correctly"
+   ],
+   "EN.SEN.CMP.run_ons": [
+    "Each sentence ends where it should",
+    "Clauses are joined with suitable words or punctuation, not just a comma"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.email.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 2.5,
+     "EN.WRT.ORG.paragraphing": 2,
+     "EN.WRT.ACC.grammar": 2.5,
+     "EN.WRT.ACC.spelling": 2.5,
+     "EN.SEN.CMP.run_ons": 2
+    },
+    "text": "dear mrs rao i want book about space becos my freind have it, i realy like it it is intresting. plz order it thankyou"
+   },
+   {
+    "id": "anc.email.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 4.5,
+     "EN.WRT.ORG.paragraphing": 4,
+     "EN.WRT.ACC.grammar": 4,
+     "EN.WRT.ACC.spelling": 5,
+     "EN.SEN.CMP.run_ons": 3.5
+    },
+    "text": "Dear Mrs. Rao,\n\nI am writing to ask if you can order a book for the library. The book is called The Secret of the Stars, it is about two children who build a telescope. My friend read it last month and she say it is very interesting. I like space and I want to learn more about planets, I think other students will also like it.\n\nThank you for your help.\nRavi"
+   },
+   {
+    "id": "anc.email.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 6,
+     "EN.WRT.ORG.paragraphing": 6,
+     "EN.WRT.ACC.grammar": 6,
+     "EN.WRT.ACC.spelling": 6.5,
+     "EN.SEN.CMP.run_ons": 6
+    },
+    "text": "Dear Mrs. Rao,\n\nI hope you are well. I would like to request a book for the school library. It is called The Secret of the Stars, and it tells the story of two children who build their own telescope.\n\nI am interested in this book because I want to become a scientist one day. Several of my classmates have also asked about it, so I think many students would borrow it.\n\nThank you very much for considering my request.\n\nYours sincerely,\nRavi Kumar, Class 8B"
+   },
+   {
+    "id": "anc.email.4",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 7.5,
+     "EN.WRT.ORG.paragraphing": 7,
+     "EN.WRT.ACC.grammar": 7.5,
+     "EN.WRT.ACC.spelling": 7.5,
+     "EN.SEN.CMP.run_ons": 7.5
+    },
+    "text": "Dear Mrs. Rao,\n\nI am writing to suggest a title for the library: The Secret of the Stars, a novel about two children who build a telescope from scrap materials and discover something unexpected in the night sky.\n\nAlthough it is fiction, the book explains real astronomy clearly, which makes it ideal for students who, like me, enjoy science but find textbooks rather dry. It was recommended at the recent inter-school science fair, and I suspect it would be popular with both younger and older readers.\n\nI would be grateful if you could consider ordering a copy. Thank you for everything you do to keep our library interesting.\n\nYours sincerely,\nRavi Kumar"
+   }
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.story.door",
+  "version": 1,
+  "format": "writing:story",
+  "genre": "narrative",
+  "prompt": "Write a short story (80–150 words) that begins: \"When I opened the door, I could not believe what I saw.\"",
+  "min_words": 80,
+  "max_words": 150,
+  "b": 5.0,
+  "band_window": [
+   3,
+   7
+  ],
+  "targets": [
+   "EN.WRT.TSK.task_response",
+   "EN.WRT.ORG.paragraphing",
+   "EN.WRT.ACC.grammar",
+   "EN.WRT.ACC.spelling",
+   "EN.SEN.CMP.run_ons"
+  ],
+  "secondary": [
+   "EN.GRM.PUN.commas",
+   "EN.SEN.CMB.subordination",
+   "EN.GRM.NOUN.articles",
+   "EN.GRM.VERB.sva",
+   "EN.GRM.VERB.aspect"
+  ],
+  "rubric": {
+   "EN.WRT.TSK.task_response": [
+    "Does what the task asks (purpose and reader)",
+    "Includes every required part",
+    "Keeps to the length asked for"
+   ],
+   "EN.WRT.ORG.paragraphing": [
+    "Groups related sentences into paragraphs",
+    "Each paragraph has one clear focus",
+    "Clear opening and ending"
+   ],
+   "EN.WRT.ACC.grammar": [
+    "Verb forms and agreement are correct",
+    "Articles and pronouns are used correctly",
+    "Errors do not get in the way of meaning"
+   ],
+   "EN.WRT.ACC.spelling": [
+    "Common words are spelled correctly",
+    "Longer and less common words are spelled correctly"
+   ],
+   "EN.SEN.CMP.run_ons": [
+    "Each sentence ends where it should",
+    "Clauses are joined with suitable words or punctuation, not just a comma"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.story.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 3,
+     "EN.WRT.ORG.paragraphing": 2,
+     "EN.WRT.ACC.grammar": 2.5,
+     "EN.WRT.ACC.spelling": 3,
+     "EN.SEN.CMP.run_ons": 2
+    },
+    "text": "when i open the door i see a big dog it was in my house it was wet and dirty i was scared then my mum come and she sed it is our naybors dog we take it back to there house and my mum was laughing the end"
+   },
+   {
+    "id": "anc.story.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 4.5,
+     "EN.WRT.ORG.paragraphing": 4.5,
+     "EN.WRT.ACC.grammar": 4,
+     "EN.WRT.ACC.spelling": 4.5,
+     "EN.SEN.CMP.run_ons": 4
+    },
+    "text": "When I opened the door, I could not believe what I saw. There was a small monkey sitting on our dining table, it was eating my sister's banana. I shouted and the monkey jumped onto the window. My mother came running from the kitchen with a broom.\n\nThe monkey looked at us and then it run away with the banana. We all start laughing. My sister was not happy because it was her banana, but I think it was the funniest thing that happend this year."
+   },
+   {
+    "id": "anc.story.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 6,
+     "EN.WRT.ORG.paragraphing": 6,
+     "EN.WRT.ACC.grammar": 6,
+     "EN.WRT.ACC.spelling": 6.5,
+     "EN.SEN.CMP.run_ons": 6
+    },
+    "text": "When I opened the door, I could not believe what I saw. Our living room, which my mother had cleaned that morning, was covered in feathers. Pillows lay torn open on the floor, and in the middle of the mess sat our puppy, Bruno, wagging his tail proudly.\n\nI knew my mother would be home in ten minutes. Quickly, I grabbed a broom and started sweeping, but every time I made a pile, Bruno jumped into it and scattered the feathers again.\n\nWhen my mother finally walked in, she stared at the room, then at me, and then at Bruno. To my surprise, she burst out laughing."
+   },
+   {
+    "id": "anc.story.4",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 7.5,
+     "EN.WRT.ORG.paragraphing": 7,
+     "EN.WRT.ACC.grammar": 7.5,
+     "EN.WRT.ACC.spelling": 7.5,
+     "EN.SEN.CMP.run_ons": 7.5
+    },
+    "text": "When I opened the door, I could not believe what I saw. My grandfather, who had not left his chair in months, was standing at the window, holding the curtain aside with one trembling hand.\n\n\"Look,\" he whispered. Outside, the neem tree he had planted forty years earlier was full of green parakeets, dozens of them, chattering as though they had come to deliver news.\n\nI had walked past that tree every day without noticing it. Now, seeing it through his eyes, I understood why he had refused to let anyone cut it down. Some things, he once told me, are worth waiting for."
+   }
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.opinion.phones",
+  "version": 1,
+  "format": "writing:opinion",
+  "genre": "persuasive",
+  "prompt": "Should students be allowed to use mobile phones at school? Write one or two paragraphs (80–150 words) giving your opinion and your reasons.",
+  "min_words": 80,
+  "max_words": 150,
+  "b": 5.5,
+  "band_window": [
+   3.5,
+   7.5
+  ],
+  "targets": [
+   "EN.WRT.TSK.task_response",
+   "EN.WRT.ORG.paragraphing",
+   "EN.WRT.ACC.grammar",
+   "EN.WRT.ACC.spelling",
+   "EN.SEN.CMP.run_ons"
+  ],
+  "secondary": [
+   "EN.GRM.PUN.commas",
+   "EN.SEN.CMB.subordination",
+   "EN.GRM.NOUN.articles",
+   "EN.GRM.VERB.sva",
+   "EN.GRM.VERB.aspect"
+  ],
+  "rubric": {
+   "EN.WRT.TSK.task_response": [
+    "Does what the task asks (purpose and reader)",
+    "Includes every required part",
+    "Keeps to the length asked for"
+   ],
+   "EN.WRT.ORG.paragraphing": [
+    "Groups related sentences into paragraphs",
+    "Each paragraph has one clear focus",
+    "Clear opening and ending"
+   ],
+   "EN.WRT.ACC.grammar": [
+    "Verb forms and agreement are correct",
+    "Articles and pronouns are used correctly",
+    "Errors do not get in the way of meaning"
+   ],
+   "EN.WRT.ACC.spelling": [
+    "Common words are spelled correctly",
+    "Longer and less common words are spelled correctly"
+   ],
+   "EN.SEN.CMP.run_ons": [
+    "Each sentence ends where it should",
+    "Clauses are joined with suitable words or punctuation, not just a comma"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.phones.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 2.5,
+     "EN.WRT.ORG.paragraphing": 2,
+     "EN.WRT.ACC.grammar": 2.5,
+     "EN.WRT.ACC.spelling": 3,
+     "EN.SEN.CMP.run_ons": 2
+    },
+    "text": "i think phones is good in school becuase we can call our parents and play games when we are bored but teachers dont like it they take it away i dont know why they are so angry about it it is not fair for us"
+   },
+   {
+    "id": "anc.phones.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 5,
+     "EN.WRT.ORG.paragraphing": 4.5,
+     "EN.WRT.ACC.grammar": 4.5,
+     "EN.WRT.ACC.spelling": 5.5,
+     "EN.SEN.CMP.run_ons": 4
+    },
+    "text": "I think students should not use mobile phones at school. First, phones distract students from their lessons, many students play games instead of listening to the teacher. Second, some students may use phones to copy in tests. Also phones are expensive and they can be stolen or broken.\n\nHowever, phones can be useful in emergency. Maybe students can keep their phones in the office and use it only when they need to call their parents. In conclusion, I believe phones should not be used in class."
+   },
+   {
+    "id": "anc.phones.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 6,
+     "EN.WRT.ORG.paragraphing": 6,
+     "EN.WRT.ACC.grammar": 6,
+     "EN.WRT.ACC.spelling": 6.5,
+     "EN.SEN.CMP.run_ons": 6
+    },
+    "text": "Many people argue about whether students should be allowed to use mobile phones at school. In my opinion, phones should be allowed, but only with clear rules.\n\nPhones can be powerful learning tools. Students can look up information, use dictionary apps and take photos of notes on the board. In an emergency, a phone also lets students contact their families quickly.\n\nOn the other hand, phones can be distracting, especially when students use social media during lessons. For this reason, schools should allow phones only at certain times, such as during research activities, and teachers should be able to collect them if they are misused."
+   },
+   {
+    "id": "anc.phones.4",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.task_response": 7.5,
+     "EN.WRT.ORG.paragraphing": 7.5,
+     "EN.WRT.ACC.grammar": 7.5,
+     "EN.WRT.ACC.spelling": 7.5,
+     "EN.SEN.CMP.run_ons": 7.5
+    },
+    "text": "Banning mobile phones in schools is tempting, but it treats a symptom rather than the cause. The real problem is not the device itself; it is that many students have never been taught to use it responsibly.\n\nA total ban also ignores how much learning now happens online. A student researching a history project or practising pronunciation with a language app is using a phone exactly as a library card or a dictionary was once used.\n\nTherefore, rather than banning phones, schools should teach digital self-discipline: phones stay silent and out of sight unless a teacher asks students to use them. Such a policy prepares students for adult life, where no one will confiscate their phones."
+   }
+  ],
+  "review": "draft-unreviewed"
+ }
+]

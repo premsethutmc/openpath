@@ -1,0 +1,13 @@
+{
+  "name": "@openpath/english-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenPath English: capability framework, learner composite, controlled updater and adaptive selection. One TypeScript core for device, simulator and server.",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "node --test test/"
+  },
+  "engines": { "node": ">=22.18" }
+}

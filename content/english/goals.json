@@ -1,0 +1,36 @@
+[
+ {
+  "id": "overall",
+  "name": "Get better at English overall",
+  "weights": {
+   "EN": 1
+  }
+ },
+ {
+  "id": "writing",
+  "name": "Write better essays and answers",
+  "weights": {
+   "EN": 0.2,
+   "EN.WRT": 1,
+   "EN.SEN": 1
+  }
+ },
+ {
+  "id": "reading",
+  "name": "Read harder books with confidence",
+  "weights": {
+   "EN": 0.2,
+   "EN.RDG": 1,
+   "EN.VOC": 0.8
+  }
+ },
+ {
+  "id": "grammar",
+  "name": "Fix my grammar mistakes",
+  "weights": {
+   "EN": 0.2,
+   "EN.GRM": 1,
+   "EN.WRT.ACC.grammar": 1
+  }
+ }
+]
