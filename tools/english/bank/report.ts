@@ -79,7 +79,7 @@ ${rec ? `<div class="note"><b>Recorded gaps: ${esc(rec.gates.join(", "))}</b><sp
     .join("");
   const warn = d.warnings.length ? `<ul>${d.warnings.map((w) => `<li><span class="mono">${esc(w.item ?? "")}</span> ${esc(w.message)}</li>`).join("")}</ul>` : "<p>None.</p>";
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Item bank coverage</title>
+<title>OpenPath English Item Bank</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
 <style>
 :root { --bg:#f7f8f9; --surface:#fff; --ink:#14181d; --ink-2:#4b5560; --line:#dfe3e8; --ok-bg:#e3f3e6; --ok:#1e6b2f; --miss-bg:#fdecd9; --miss:#8a4300; --note-bg:#eef3fa; --tick:#2a78d6; --band:#e9eef5;
