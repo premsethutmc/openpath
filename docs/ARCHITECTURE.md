@@ -1,5 +1,10 @@
 # Architecture and plan
 
+> **Superseded for platform matters (October 2026).** This document describes
+> the apple-shopping prototype as it was first built. For the platform's
+> direction and architecture, read [`README.md`](README.md) and the documents
+> it lists. This file is kept as the design record of the prototype.
+
 ## The one idea
 
 Every judgement about a learner must be re-derivable from stored raw evidence
