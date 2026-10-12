@@ -11,7 +11,7 @@
 import { type FrameworkIndex, ROOT, isSpecified } from "./framework.ts";
 import { clamp, daysBetween, inflate, normalQuantile } from "./model.ts";
 import { type Retention, retention } from "./retention.ts";
-import type { CapabilityId, Composite, Estimate, NodeState, Policy, SessionObservation } from "./types.ts";
+import type { CapabilityId, Composite, Estimate, Exposure, NodeState, Policy, SessionObservation } from "./types.ts";
 
 export const MODEL_VERSION = "composite@1";
 const MAX_TRACE = 40;
@@ -92,6 +92,8 @@ export interface DirectObservation {
   binary?: { b: number; correct: boolean; a?: number; c?: number };
   /** For judged evidence: the band and its noise (kept for retention checks). */
   band?: { value: number; noise: number };
+  /** fresh (default), variant or repeat. A repeat is recorded for retention only: it does not move the estimate. */
+  exposure?: Exposure;
   /** A judged band at or above the current estimate counts as success for misconception fading. */
   success?: boolean;
 }
@@ -116,6 +118,7 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const node = composite.nodes[o.capability];
   if (!node) throw new Error(`unknown capability ${o.capability}`);
   touch(node, o.at, index);
+  if (o.exposure === "repeat") return recordRepeat(composite, node, o);
   decayMisconceptions(node, o.at, p);
 
   const before = node.combined;
@@ -147,7 +150,7 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   }
   const sessions = (node.sessions ??= []);
   const lastSession = sessions[sessions.length - 1];
-  const ob: SessionObservation | null = o.binary ? { kind: "binary", b: o.binary.b, a: o.binary.a ?? 1.2, c: o.binary.c ?? 0, correct: o.binary.correct } : o.band ? { kind: "band", value: o.band.value, noise: o.band.noise } : null;
+  const ob = sessionObservation(o);
   if (lastSession && lastSession.session === o.session) {
     lastSession.level = level;
     lastSession.at = o.at;
@@ -174,6 +177,33 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
     capped: c.capped,
     inferred,
   };
+}
+
+function sessionObservation(o: DirectObservation): SessionObservation | null {
+  const exposure = o.exposure ?? "fresh";
+  if (o.binary) return { kind: "binary", b: o.binary.b, a: o.binary.a ?? 1.2, c: o.binary.c ?? 0, correct: o.binary.correct, exposure };
+  if (o.band) return { kind: "band", value: o.band.value, noise: o.band.noise, exposure };
+  return null;
+}
+
+/**
+ * A repeated item: the learner may remember the answer, so it must not move the
+ * ability estimate, add a context or count towards demonstrating. It is kept in
+ * the session record, where a retention check can use it (flagged as a repeat).
+ */
+function recordRepeat(composite: Composite, node: NodeState, o: DirectObservation): Applied {
+  const ob = sessionObservation(o);
+  const sessions = (node.sessions ??= []);
+  const last = sessions[sessions.length - 1];
+  if (last && last.session === o.session) {
+    last.at = o.at;
+    if (ob) (last.obs ??= []).push(ob);
+  } else sessions.push({ session: o.session, at: o.at, level: last ? last.level : null, obs: ob ? [ob] : [] });
+  node.evidence.push(o.decisionId);
+  if (node.evidence.length > MAX_EVIDENCE) node.evidence.shift();
+  composite.updatedAt = o.at;
+  const e = { mean: node.combined.mean, sd: Math.sqrt(node.combined.variance) };
+  return { before: e, after: e, capped: false, inferred: [] };
 }
 
 // ---------------------------------------------------------------- reading the composite

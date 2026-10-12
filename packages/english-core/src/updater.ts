@@ -12,11 +12,11 @@
  * reasons are always recorded.
  */
 import { applyDirect, createComposite, leafView } from "./composite.ts";
-import { type ContentIndex, contextOf, itemParams, scoreCode, wordCount } from "./content.ts";
+import { type ContentIndex, contextOf, familyOf, itemParams, scoreCode, wordCount } from "./content.ts";
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { bandUpdate, binaryUpdate } from "./model.ts";
-import type { Composite, Decision, EvidenceEvent, LedgerEvent, ProposalEvent, QualificationEvent, WritingTask } from "./types.ts";
+import type { Composite, Decision, EvidenceEvent, Exposure, LedgerEvent, ProposalEvent, QualificationEvent, WritingTask } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -66,8 +66,12 @@ export class Ledger {
   evaluators = new Map<string, QualificationEvent>();
   private revoked: Set<string>;
   private evidence = new Map<string, EvidenceEvent>();
+  /** The learner's history with each item and item family (decided here, from the ledger; never from the client). */
+  exposures = new Map<string, { count: number; lastAt: string }>();
+  familyExposures = new Map<string, { count: number; lastAt: string }>();
   private proposals = new Set<string>();
   private heldSurprise = new Map<string, { band: number; proposal: string }>();
+  private exposureOf = new Map<string, Exposure>();
 
   constructor(ctx: Context, learnerId: string, revoked: Set<string> = new Set()) {
     this.ctx = ctx;
@@ -128,10 +132,15 @@ export class Ledger {
     if (!item || item.version !== ev.item.version)
       return [{ id: `d:${ev.id}`, at: ev.at, source: ev.id, capability: null, verdict: "rejected", reasons: [`unknown item ${ev.item.id} v${ev.item.version}`] }];
     this.evidence.set(ev.id, ev);
+    const exposure: Exposure = this.exposures.has(item.id) ? "repeat" : this.familyExposures.has(familyOf(item)) ? "variant" : "fresh";
+    const bump = (m: Map<string, { count: number; lastAt: string }>, k: string) => m.set(k, { count: (m.get(k)?.count ?? 0) + 1, lastAt: ev.at });
+    bump(this.exposures, item.id);
+    bump(this.familyExposures, familyOf(item));
+    this.exposureOf.set(ev.id, exposure);
     if (item.kind === "writing") return []; // waits for an evaluator proposal
     const { correct, misconceptions } = scoreCode(item, ev.response);
     const id = `d:${ev.id}:${item.target}`;
-    const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions };
+    const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions, exposure };
     if (this.revoked.has(id)) return [{ id, at: ev.at, source: ev.id, capability: item.target, verdict: "revoked", reasons: ["revoked"], observation }];
     const params = itemParams(item);
     const applied = applyDirect(this.composite, this.ctx.index, {
@@ -143,6 +152,7 @@ export class Ledger {
       update: (e) => binaryUpdate(e, params, correct),
       misconceptions,
       binary: { b: item.b, correct, a: params.a, c: params.c },
+      exposure,
     });
     return [
       {
@@ -151,7 +161,10 @@ export class Ledger {
         source: ev.id,
         capability: item.target,
         verdict: "accepted",
-        reasons: [`scored by code: ${correct ? "right" : "wrong"} on an item of difficulty ${item.b}`],
+        reasons: [
+          `scored by code: ${correct ? "right" : "wrong"} on an item of difficulty ${item.b}`,
+          ...(exposure === "repeat" ? ["repeated item: recorded for retention only; the ability estimate is not changed"] : exposure === "variant" ? ["variant of an item seen before"] : []),
+        ],
         observation,
         before: applied.before,
         after: applied.after,
@@ -263,7 +276,10 @@ export class Ledger {
         }
       }
       const noise = Math.max(MIN_NOISE, q.noise * CONFIDENCE[j.confidence]) * noiseFactor;
-      const observation = { kind: "band" as const, value: j.band, noise, item: task.id, context: contextOf(task), misconceptions: tags };
+      const exposure = this.exposureOf.get(evidence.id) ?? "fresh";
+      if (exposure === "repeat") reasons.push("repeated task: recorded for retention only; the ability estimate is not changed");
+      else if (exposure === "variant") reasons.push("variant of a task seen before");
+      const observation = { kind: "band" as const, value: j.band, noise, item: task.id, context: contextOf(task), misconceptions: tags, exposure };
       if (this.revoked.has(id)) {
         out.push({ id, ...base, capability: j.capability, verdict: "revoked", reasons: [...reasons, "revoked"], observation });
         continue;
@@ -280,6 +296,7 @@ export class Ledger {
         band: { value: j.band, noise },
         misconceptions: tags,
         success: j.band >= view.mean,
+        exposure,
       });
       if (applied.capped) reasons.push(`check 10: change capped at ±${this.ctx.index.framework.policy.evaluator_max_shift} bands`);
       out.push({

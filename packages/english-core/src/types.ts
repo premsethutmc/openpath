@@ -76,9 +76,19 @@ export interface Framework {
 
 // ---------------------------------------------------------------- content
 
+/**
+ * How a learner has met an item before:
+ *   fresh   – never seen this item or any variant of it
+ *   variant – a different item from a family the learner has seen (e.g. a future generated variant)
+ *   repeat  – this very item again (allowed only for retention checks, after a minimum gap)
+ */
+export type Exposure = "fresh" | "variant" | "repeat";
+
 export interface CodeItem {
   id: string;
   version: number;
+  /** Items that are variants of one another share a family id (optional; default: the item's own id). */
+  family?: string;
   target: CapabilityId;
   /** "choice:…" (scored by option index) or "typed:…" (scored against accepted answers). */
   format: string;
@@ -111,6 +121,7 @@ export interface Anchor {
 export interface WritingTask {
   id: string;
   version: number;
+  family?: string;
   format: string; // "writing:email" etc.
   genre: string;
   prompt: string;
@@ -166,7 +177,7 @@ export interface BinaryTrace {
 }
 
 /** What was observed in a session, kept so a retention check can be judged on fresh evidence alone. */
-export type SessionObservation = { kind: "binary"; b: number; a: number; c: number; correct: boolean } | { kind: "band"; value: number; noise: number };
+export type SessionObservation = ({ kind: "binary"; b: number; a: number; c: number; correct: boolean } | { kind: "band"; value: number; noise: number }) & { exposure?: Exposure };
 
 export interface NodeState {
   /** Best estimate: direct evidence plus small, capped effects from coupled capabilities. */
@@ -267,6 +278,8 @@ export interface Decision {
     item: string;
     context: string;
     misconceptions: string[];
+    /** fresh, variant or repeat (decided by the ledger from the learner's own history, not by the client). */
+    exposure?: Exposure;
   };
   before?: { mean: number; sd: number };
   after?: { mean: number; sd: number };

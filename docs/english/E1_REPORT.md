@@ -15,11 +15,13 @@ hierarchy. Three rounds of review changes are included:
   - a hybrid assessment/learning scheduler
   - spaced retention checks by due date, judged on fresh evidence, with
     overdue mastery shown as not currently verified
+- **Final review:** fresh items, variants and flagged repeats are told apart,
+  so retention tracking no longer needs an unlimited supply of new questions.
 
 | | Result |
 |---|---|
-| **Acceptance tests** (does E1 do what was specified) | **47 of 47 automated tests pass.** E1-11 is CI; E1-12 is your review |
-| **Simulation measures** (frozen pass levels, frozen procedure) | **5 of 8 pass** (M4, M5, M6, M7, M8). M1, M2 and M3 miss; all three depend on the item bank (B3, E2). See the before/after table |
+| **Acceptance tests** (does E1 do what was specified) | **52 of 52 automated tests pass.** E1-11 is CI; E1-12 is your review |
+| **Simulation measures** (frozen pass levels, frozen procedure) | **5 of 8 pass** (M4, M5, M6, M7, M8). M1, M2 and M3 miss, for different reasons that were checked separately; the item bank is only part of the cause. See "Why M1, M2 and M3 miss" |
 | **Demonstration** | Two learners get different composites and different next activities. The same learner gets different, justified choices in assessment and learning mode. The same learner is shown before and after an overdue retention check. An invented quote is rejected, a restart gives identical state, and undo is exact |
 
 **Remaining blocker:** B3, the item bank, deferred to E2 as you decided. There
@@ -60,6 +62,7 @@ influence. Code-scored items never go near the evaluator.
 | E1-10 | Local-first: no network use, restart from files gives identical state | Pass |
 | E1-11 | Nothing else breaks | Existing suites unchanged and green locally: 49 engine tests and 19 app tests. CI runs all jobs |
 | E1-12 | You review the demonstration and report | **Waiting for you** |
+| E1-14 | Fresh, variant and repeated items (final review): the ledger decides the exposure; a repeat never moves the estimate; assessment and learning never repeat; a retention check falls back to an unseen variant, then a flagged repeat after 14 days | Pass (5 new tests) |
 | E1-13 | Two learners with different capabilities get different composites and different next activities | Pass. Compared at capability level: some grammar capability with L3 above L4, and some writing capability with L4 above L3, each by more than both uncertainties combined |
 
 ## The demonstration (`node tools/english/demo.ts`)
@@ -164,8 +167,8 @@ M1 is lower (0.73 → 0.64).
 - The forgetter is caught on all of them.
 - M5 passes on all of them.
 
-M1, M2 and M3 vary with which few guessable items a learner happens to get.
-That is the item-bank limit described below.
+The final review added a 10-seed comparison of the three modes and a
+per-learner check of M2. Both are in "Why M1, M2 and M3 miss" below.
 
 Thresholds have not changed. The analysis of the current results is in
 "Selection change" below. The notes immediately below explain the first-run
@@ -251,9 +254,10 @@ judged on its session's fresh evidence only: does that evidence favour the
 retained level over one band lower? This needed the session bookkeeping to keep
 each observation's item parameters (or judged band) and the session-end level.
 
-That is the only change in the updater files (`composite.ts`, `updater.ts`).
-Estimates, update arithmetic and evidence validation are unchanged, as the
-untouched E1-3, E1-5 and E1-6 tests confirm.
+That, and the repeat routing from the final review (below), are the only
+changes in the updater files (`composite.ts`, `updater.ts`). Estimates, update
+arithmetic and evidence validation are unchanged, as the untouched E1-3, E1-5
+and E1-6 tests confirm.
 
 ### Demonstration (step 10), Asha four weeks later
 
@@ -268,25 +272,131 @@ Asha answered correctly, so the check passed and the interval doubled from 7 to
 14 days. In the unit test where a check fails, the interval halves and the stage
 becomes *needs review*.
 
+## Final review: fresh items, variants and repeats
+
+**Did the architecture already make the distinction? No.** Selection excluded
+every item a learner had seen, for every purpose, including retention checks.
+A retention check therefore needed a brand-new item each time, and it was
+blocked once a capability's items ran out. The ledger would also have treated a
+repeated item as fresh evidence, counting the same question twice.
+
+**The smallest change that fixes it.** No item generator and no new items:
+
+- **Item families.** Items and writing tasks take an optional `family`. Items
+  that share one are variants of each other. Without a family, an item is its
+  own family, so the current bank is unchanged.
+- **The ledger decides the exposure, never the client.** When an answer
+  arrives, the ledger checks the learner's history:
+  - *repeat:* the same item was answered before
+  - *variant:* a different item from the same family was answered before
+  - *fresh:* neither
+
+  The exposure is stored on the decision, with a reason. It is folded
+  deterministically, so a rebuild gives the same flags.
+- **A repeat is retention evidence only.** It is added to that session's
+  retention record, so it can pass or fail a due check. It never changes the
+  estimate, the evidence count, the contexts, the demonstrations or the coupled
+  capabilities. A learner who remembers a question cannot inflate an ability
+  estimate.
+- **A variant is new evidence, flagged.** It updates the estimate like any
+  unseen item.
+- **Selection keeps fresh and retention items apart:**
+  - assessment and learning use only unseen items, as before; an unseen
+    variant counts as unseen
+  - a retention check prefers an unseen item, then an unseen variant, then a
+    **flagged repeat** of an item last seen at least **14 days** earlier
+    (`repeatAfterDays`, configurable)
+  - the explanation says when a check uses a repeat, and that it will not change
+    the estimate
+
+**One known limitation of repeats.** A learner may remember the answer to a
+repeated question, so a repeat can overstate retention. The 14-day gap reduces
+this, the flag makes it visible, and repeats never touch the estimate. Variants
+(E2 content) are the better tool, and the selection already prefers them.
+
+**Effect on the frozen simulation:**
+
+| | Before | After |
+|---|---|---|
+| Retention checks run | 156, all on unseen items | **195**: 162 unseen, 0 variants (the bank has no families yet), 33 flagged repeats |
+| Due checks blocked | 392 | **33** |
+| Overdue at the end with no unused item left | 32 learner-capability pairs | **0** (checked with repeats) |
+| M1–M8 | | **identical values**, 5 of 8 pass |
+
+The "before" column uses corrected counting. The earlier report said 45
+blocked checks, which was an undercount: when every overdue check was blocked,
+the notes were dropped. That reporting bug is fixed, and a test covers it.
+The demonstration is unchanged (Asha still had an unseen item).
+
+## Why M1, M2 and M3 miss (checked, not assumed)
+
+To separate noise from cause, I ran each mode over 10 seeds (the frozen seed
+plus 9 others). This is context only; the frozen procedure and pass levels are
+unchanged.
+
+| Mode | M1 mean (best) | M2 mean, seeds at ≥ 6 of 7 | M3 mean |
+|---|---|---|---|
+| Hybrid (the frozen procedure) | 0.61 (0.72) | 4.1, 2 of 10 | 3.9 of 8 |
+| Assessment only | 0.64 (0.77) | 5.0, 4 of 10 | 4.1 of 8 |
+| Learning only | 0.49 (0.64) | 5.0, 3 of 10 | 3.5 of 8 |
+
+**M2 (weakest strand).** No single cause. Checked learner by learner on the
+frozen seed:
+
+- **L10, the forgetter: a biased estimate.** Grammar truly fell from 5 to 3.5,
+  and the estimate is 4.43. Retention works: three of the four grammar
+  capabilities failed their check and show *needs review*. But the estimate is
+  still a long-run average of evidence from before and after the forgetting,
+  and time adds little uncertainty. L10 misses in 6–7 of 10 seeds in **every**
+  mode, so this is the model, not the bank or the selection. Fixing it would
+  change the updater, which I have not done (see decisions).
+- **L2: missing evidence.** The foundations strand is one capability with 9
+  items, all used. The learner is at 2.0; only one item is that easy. With
+  little informative evidence, the estimate stays near the 4.0 start (2.94). This
+  is a bank limit.
+- **L3: the selection policy.** L3 misses in 7 of 10 seeds under hybrid, but
+  in only 3 of 10 in either forced mode. Under hybrid, one sentence capability
+  (subordination) is underestimated by 1.4. This is a real, modest cost of the hybrid
+  mix.
+- **L8: noise.** The true gap is 0.75; the estimated gap is within one sd.
+
+On average the hybrid scheduler costs about 0.9 of a learner on M2 against
+either forced mode (4.1 against 5.0). The fall from 6/7 to 3/7 on the frozen
+seed is mostly noise on top of that, because the frozen seed was a good one for
+the earlier policy. The estimate on the true weakest strand is biased upward by
+0.2–0.27 in every mode, because weak learners are pulled toward the 4.0
+start.
+
+**M1 (profile after 40 items).** The policy is not the cause: assessment-only
+fails on all 10 seeds (best 0.77), and hybrid is close to it, because the first
+40 items are mostly assessment anyway. Forty items over 17 capabilities is
+about 2.4 answers each, many of them guessable multiple choice. Item format is
+a bank property; the 40-item budget is part of the measure.
+
+**M3 (pairs told apart).** Policy is not decisive (3.5–4.1 in every mode). The
+main cause is the deliberately conservative strand ranges from R3: M3 fell
+from 7 to 4 of 8 when they were introduced, and the pairs missing at strand
+level are told apart at capability level.
+
 ### What the current item bank prevents us from measuring reliably (B3, deferred to E2)
 
 Reported separately, from the frozen run:
 
-- **Exhaustion.** There are 126 items, and each learner uses 120. By the end,
-  about **12.7 of the 17 capabilities** have no unused item left for a learner.
-- **Retention.** **45** due retention checks could not run because no unused
-  item was left. At the end, **32** learner-capability pairs are overdue with
-  nothing left to check them with. Retention can be scheduled correctly but not
-  always verified.
-- **Learning.** In **346 of 368** learning choices (94%), at least one needed
+- **Exhaustion.** There are 126 items, and each learner uses 120 activities. By
+  the end, about **10.9 of the 17 capabilities** have no unused item left for a
+  learner.
+- **Retention.** With flagged repeats, 33 due checks are still blocked (the
+  item was seen under 14 days ago). Without repeats, 392 would be. Variants
+  (E2) will reduce reliance on repeats.
+- **Learning.** In **345 of 367** learning choices (94%), at least one needed
   capability had no unused item at a suitable difficulty. With 6–9 items per
   capability spread over bands 2–7.5, only one or two suit any given level.
 - **Ceiling.** The hardest items are around band 7–7.5, so a learner at 7.5
   (L7) is estimated at **6.4** on average.
 - **Guessing.** Reading, vocabulary breadth, context, commas and proofreading
-  have only four-option items, so each answer carries little information. That
-  caps M1, M2 and M3 in every mode: the forced-assessment best was 0.72, 6/7
-  and 6/8.
+  have only four-option items, so each answer carries little information. This
+  contributes to M1, M2 and M3, but it is not their only cause (see "Why M1,
+  M2 and M3 miss").
 
 All of this is E2's work: about 600 items, typed and short-answer formats for
 reading and vocabulary, harder items, and calibrated difficulties.
@@ -574,6 +684,14 @@ depth and content. Its contract is already fixed in code and enforced:
 ## Decisions needed before E2
 
 - **B1 and B2** are done (see "Hybrid scheduling and retention").
+- **Estimate lag after forgetting (L10, M2).** Retention correctly flags
+  forgetting, but the estimate keeps averaging older evidence. A possible fix
+  is to widen uncertainty when a retention check fails, so new evidence counts
+  more. That changes the updater, so it needs your approval. I suggest
+  deciding it with real learner data, not tuning it to the simulation.
+- **Hybrid probe rate.** The every-third-activity probe costs about one
+  learner on M2 (10-seed average). It is a configurable setting; keep it as
+  it is for E1, and revisit it with E2's larger bank.
 
 - **D-4.** An English educator (ideally two) to review the framework and items,
   and to score anchor responses so they become *trusted*. Today all 12 anchors

@@ -317,6 +317,8 @@ export interface BankLimits {
   learningRecsWithGap: number;
   learningGapsByCapability: Record<string, number>;
   retentionChecksBlocked: number;
+  /** Retention checks that ran, by the exposure of the item used (fresh, variant, flagged repeat). */
+  retentionChecksByExposure: Record<string, number>;
   overdueUnverifiableAtEnd: { learner: string; capability: string }[];
   ceilingLearner: { learner: string; trueLevel: number; meanEstimate: number };
 }
@@ -332,10 +334,12 @@ export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
   let learningRecs = 0;
   let learningRecsWithGap = 0;
   let blocked = 0;
+  const byExposure: Record<string, number> = { fresh: 0, variant: 0, repeat: 0 };
   for (const r of results)
     for (const rec of r.recommendations) {
+      if (rec.path === "retention_check") byExposure[rec.exposure] = (byExposure[rec.exposure] ?? 0) + 1;
       blocked += rec.retentionBlocked.length;
-      const learningGaps = rec.gaps.filter((g) => !rec.retentionBlocked.includes(g));
+      const learningGaps = rec.gaps;
       if (rec.mode === "learning") {
         learningRecs++;
         if (learningGaps.length) learningRecsWithGap++;
@@ -367,6 +371,7 @@ export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
     learningRecsWithGap,
     learningGapsByCapability: gapsByCap,
     retentionChecksBlocked: blocked,
+    retentionChecksByExposure: byExposure,
     overdueUnverifiableAtEnd: overdue,
     ceilingLearner: { learner: "L7", trueLevel: 7.5, meanEstimate: mean7 },
   };

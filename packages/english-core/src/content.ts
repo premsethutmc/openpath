@@ -27,6 +27,9 @@ export function targetsOf(item: Item): CapabilityId[] {
   return item.kind === "code" ? [item.target] : item.targets;
 }
 
+/** The family an item belongs to: variants of one another share it. */
+export const familyOf = (item: Item): string => item.family ?? item.id;
+
 export function contextOf(item: Item): string {
   return item.kind === "code" ? item.format : `${item.format}`;
 }

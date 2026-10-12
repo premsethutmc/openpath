@@ -76,7 +76,7 @@ export interface RunResult {
   /** Composite after each session, and the time it was taken. */
   sessions: { day: number; now: string; composite: Composite; items: number }[];
   items: number;
-  recommendations: { now: string; item: string; mode: string; reason: string; path: string; explanation: string; gaps: string[]; retentionBlocked: string[] }[];
+  recommendations: { now: string; item: string; mode: string; reason: string; path: string; explanation: string; gaps: string[]; retentionBlocked: string[]; exposure: string }[];
 }
 
 export async function runLearner(ctx: Context, learner: SimLearner, o: RunOptions): Promise<RunResult> {
@@ -115,6 +115,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
           goal: o.goal,
           now,
           seen,
+          exposures: ledger.exposures,
           recent,
           writingThisSession,
           writingAvailable: o.writing !== false,
@@ -124,7 +125,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
         });
         if (!rec.choice) break outer;
         itemId = rec.choice.item;
-        recommendations.push({ now, item: itemId, mode: rec.mode, reason: rec.schedule.reason, path: rec.path, explanation: rec.explanation, gaps: rec.bankGaps.map((g) => g.capability), retentionBlocked: rec.bankGaps.filter((g) => g.note.startsWith("retention check")).map((g) => g.capability) });
+        recommendations.push({ now, item: itemId, mode: rec.mode, reason: rec.schedule.reason, path: rec.path, explanation: rec.explanation, gaps: rec.bankGaps.filter((g) => !g.note.startsWith("retention check")).map((g) => g.capability), retentionBlocked: rec.bankGaps.filter((g) => g.note.startsWith("retention check")).map((g) => g.capability), exposure: rec.choice.exposure ?? "fresh" });
       }
       const item = ctx.content.items.get(itemId)!;
       const evId = `${learner.id}:e${n}`;

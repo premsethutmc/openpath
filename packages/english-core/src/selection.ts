@@ -11,6 +11,14 @@
  *               When none exists, step down: a prerequisite, then an easier item
  *               for the same capability. Every gap in the item bank is reported.
  *
+ * Fresh and retention items are kept apart. Assessment and learning only use
+ * items the learner has not seen (an unseen variant of a seen item counts as
+ * unseen, and the ledger flags it). A retention check prefers an unseen item,
+ * then an unseen variant, then, after `repeatAfterDays`, a flagged repeat of an
+ * item already done; the ledger records a repeat for the retention check only
+ * and never moves the estimate with it. So long-term retention tracking does
+ * not need an unlimited supply of new questions.
+ *
  * Targets come from the learner's goal. Where the goal sets none, the plan's
  * documented default ("the next band up") is used and named in every
  * recommendation; the engine never changes a target.
@@ -19,10 +27,10 @@
  * same choice (ties are broken by item or capability id).
  */
 import { type LeafView, leafView } from "./composite.ts";
-import { type ContentIndex, goalWeights, itemParams, targetsOf } from "./content.ts";
+import { type ContentIndex, familyOf, goalWeights, itemParams, targetsOf } from "./content.ts";
 import type { FrameworkIndex } from "./framework.ts";
-import { itemInformation, logistic, normalQuantile, pCorrect } from "./model.ts";
-import type { CapabilityId, Composite, Goal, Item } from "./types.ts";
+import { daysBetween, itemInformation, logistic, normalQuantile, pCorrect } from "./model.ts";
+import type { CapabilityId, Composite, Exposure, Goal, Item } from "./types.ts";
 
 export type Mode = "assessment" | "learning";
 export type Path = "assessment" | "retention_check" | "contradiction_probe" | "direct" | "prerequisite_step" | "easier_step" | "assessment_fallback" | "none";
@@ -39,8 +47,14 @@ export interface SchedulerConfig {
   initialAssessmentSd: number;
   retentionFirst: boolean;
   contradictionFirst: boolean;
+  /**
+   * A retention check may reuse an item the learner has already done, flagged as a repeat, once at least
+   * this many days have passed since they last saw it, and only when no unseen item or variant fits.
+   * Repeats are never used for assessment or learning, and never change the ability estimate.
+   */
+  repeatAfterDays: number;
 }
-export const HYBRID: SchedulerConfig = { probeEvery: 3, initialAssessmentSd: 0.9, retentionFirst: true, contradictionFirst: true };
+export const HYBRID: SchedulerConfig = { probeEvery: 3, initialAssessmentSd: 0.9, retentionFirst: true, contradictionFirst: true, repeatAfterDays: 14 };
 
 export interface Target {
   band: number;
@@ -60,6 +74,8 @@ export interface Scored {
   /** Predicted chance of success on the focus capability (or the first target). */
   p: number;
   reasons: string[];
+  /** For retention checks: whether the item is new to the learner, a variant of one they have seen, or a repeat. */
+  exposure?: Exposure;
 }
 
 export interface BankGap {
@@ -93,8 +109,13 @@ export interface SelectionInput {
   composite: Composite;
   goal: Goal;
   now: string;
-  /** Items already used for this learner (never repeated, so later evidence is on fresh items). */
+  /** Items already used for this learner: assessment and learning only ever use items outside this set. */
   seen: Set<string>;
+  /**
+   * The ledger's record of this learner's history with each item (Ledger.exposures). Lets a retention check
+   * fall back to a flagged variant or repeat. Without it, retention checks use unseen items only, as before.
+   */
+  exposures?: Map<string, { count: number; lastAt: string }>;
   /** Most recent items first, for variety. */
   recent: { item: string; targets: CapabilityId[]; format: string }[];
   /** Writing tasks already given in the current session. */
@@ -197,11 +218,13 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
 
   if (input.mode === "assessment") return { ...assess(), schedule: { policy: "explicit", reason: "explicit" } };
   if (input.mode === "learning") return { ...learn(), schedule: { policy: "explicit", reason: "explicit" } };
+  let blockedRetention: BankGap[] = [];
   return hybrid();
 
   // ------------------------------------------------------------ hybrid scheduler
   function hybrid(): Recommendation {
-    const tag = (r: Recommendation, reason: ScheduleReason, lead?: string): Recommendation => ({ ...r, schedule: { policy: "hybrid", reason }, explanation: lead ? `${lead} ${r.explanation}` : r.explanation });
+    // retention checks that are due but could not run are reported with whatever runs instead
+    const tag = (r: Recommendation, reason: ScheduleReason, lead?: string): Recommendation => ({ ...r, bankGaps: reason === "retention_check" ? r.bankGaps : [...blockedRetention, ...r.bankGaps], schedule: { policy: "hybrid", reason }, explanation: lead ? `${lead} ${r.explanation}` : r.explanation });
     if (cfg.retentionFirst) {
       const r = retentionCheck();
       if (r) return tag(r, "retention_check");
@@ -218,26 +241,42 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
 
   /** An overdue spaced-retention check, on the goal capability most overdue (weighted). */
   function retentionCheck(): Recommendation | null {
+    blockedRetention = [];
     const overdue = [...weights]
       .filter(([id, w]) => w > 0 && views.get(id)!.specified && views.get(id)!.retention.status === "overdue")
       .map(([id, w]) => ({ id, v: views.get(id)!, order: (w / maxW) * (1 + views.get(id)!.retention.overdueDays) }))
       .sort((a, b) => b.order - a.order || a.id.localeCompare(b.id));
-    const gaps: BankGap[] = [];
+    // Exposure tiers for retention: an unseen item, else an unseen variant of a seen item, else a repeat
+    // seen at least repeatAfterDays ago. The ledger decides the exposure again when the answer arrives.
+    const seenFamilies = new Set([...input.seen].map((id) => content.items.get(id)).filter((i): i is Item => !!i).map(familyOf));
+    const tierOf = (i: Item): Exposure => (input.seen.has(i.id) ? "repeat" : seenFamilies.has(familyOf(i)) ? "variant" : "fresh");
+    const rank: Record<Exposure, number> = { fresh: 0, variant: 1, repeat: 2 };
+    const repeatable = [...content.items.values()].filter((i) => {
+      if (i.kind !== "code" || !input.seen.has(i.id) || (input.only && !input.only.has(i.id))) return false;
+      const last = input.exposures?.get(i.id)?.lastAt;
+      return !!last && daysBetween(last, now) >= cfg.repeatAfterDays;
+    });
     for (const o of overdue) {
       const R = o.v.retention.level ?? o.v.mean;
       const atRetained: LeafView = { ...o.v, mean: R };
-      const pick = pool
+      const pick = [...pool, ...repeatable]
         .filter((i) => targetsOf(i).includes(o.id))
-        .map((i) => ({ i, p: predicted(i, atRetained) }))
-        .sort((a, b) => Math.abs(a.p - RETENTION_PROBE) - Math.abs(b.p - RETENTION_PROBE) || a.i.id.localeCompare(b.i.id))[0];
+        .map((i) => ({ i, p: predicted(i, atRetained), exposure: tierOf(i) }))
+        .sort((a, b) => rank[a.exposure] - rank[b.exposure] || Math.abs(a.p - RETENTION_PROBE) - Math.abs(b.p - RETENTION_PROBE) || a.i.id.localeCompare(b.i.id))[0];
       if (!pick) {
-        gaps.push({ ...gapFor(o.id), note: `retention check for ${o.v.name} is overdue, but the bank has no unused item for it` });
+        blockedRetention.push({ ...gapFor(o.id), note: `retention check for ${o.v.name} is overdue, but the bank has no unused item for it, and no used item was last seen ${cfg.repeatAfterDays} or more days ago` });
         continue;
       }
       const T = targetOf(o.id);
       const ret = o.v.retention;
-      const choice: Scored = { item: pick.i.id, kind: pick.i.kind, targets: targetsOf(pick.i), focus: o.id, score: o.order, parts: { overdueDays: ret.overdueDays, retainedLevel: R, information: relativeInformation(pick.i, o.v) }, p: pick.p, reasons: ["retention check"] };
       const day = (iso: string | null) => (iso ? iso.slice(0, 10) : "never");
+      const choice: Scored = { item: pick.i.id, kind: pick.i.kind, targets: targetsOf(pick.i), focus: o.id, score: o.order, parts: { overdueDays: ret.overdueDays, retainedLevel: R, information: relativeInformation(pick.i, o.v) }, p: pick.p, reasons: ["retention check", ...(pick.exposure === "fresh" ? [] : [`${pick.exposure} item`])], exposure: pick.exposure };
+      const seenNote =
+        pick.exposure === "repeat"
+          ? ` This is a repeat of an item last seen on ${day(input.exposures!.get(pick.i.id)!.lastAt)}: it counts towards the retention check only and does not change the estimate.`
+          : pick.exposure === "variant"
+            ? " This is a variant of an item seen before."
+            : "";
       return {
         mode: "assessment",
         schedule: { policy: "hybrid", reason: "retention_check" },
@@ -246,8 +285,8 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
         path: "retention_check",
         choice,
         alternatives: [],
-        bankGaps: gaps,
-        explanation: `Retention check: ${o.v.name} was ${ret.lastVerifiedAt ? `last verified on ${day(ret.lastVerifiedAt)}` : `first demonstrated on ${day(ret.firstDemonstratedAt)}`} at band ${R}; its check was due on ${day(ret.dueAt)} (${ret.overdueDays.toFixed(0)} days overdue), so it is not currently verified, even though the estimate is ${o.v.mean.toFixed(1)} ± ${o.v.sd.toFixed(1)}. This item tests the retained level (about ${Math.round(pick.p * 100)}% likely to succeed if still at band ${R}).`,
+        bankGaps: blockedRetention,
+        explanation: `Retention check: ${o.v.name} was ${ret.lastVerifiedAt ? `last verified on ${day(ret.lastVerifiedAt)}` : `first demonstrated on ${day(ret.firstDemonstratedAt)}`} at band ${R}; its check was due on ${day(ret.dueAt)} (${ret.overdueDays.toFixed(0)} days overdue), so it is not currently verified, even though the estimate is ${o.v.mean.toFixed(1)} ± ${o.v.sd.toFixed(1)}. This item tests the retained level (about ${Math.round(pick.p * 100)}% likely to succeed if still at band ${R}).${seenNote}`,
       };
     }
     return null;

@@ -187,7 +187,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   // 10 · an overdue retention check, before and after
   const t30 = at(30);
   const counter = ledgers.asha.events.filter((e) => e.kind === "evidence").length;
-  const beforeNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: t30, seen: seen.asha, recent: [], writingThisSession: 0, writingAvailable: false, activityIndex: counter });
+  const beforeNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: t30, seen: seen.asha, exposures: ledgers.asha.exposures, recent: [], writingThisSession: 0, writingAvailable: false, activityIndex: counter });
   const cap = beforeNext.choice!.focus!;
   const beforeView = leafView(ledgers.asha.composite, ctx.index, cap, t30);
   const status = (v: LeafView) => {
@@ -205,7 +205,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const checkDs = await append(stores.asha, ledgers.asha, { kind: "evidence", id: "asha:e-check", at: t30, session: "asha:s30", item: { id: item.id, version: item.version }, response: answer });
   seen.asha.add(item.id);
   const afterView = leafView(ledgers.asha.composite, ctx.index, cap, at(30, 1));
-  const afterNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: at(30, 1), seen: seen.asha, recent: [{ item: item.id, targets: [item.target], format: item.format }], writingThisSession: 0, writingAvailable: false, activityIndex: counter + 1 });
+  const afterNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: at(30, 1), seen: seen.asha, exposures: ledgers.asha.exposures, recent: [{ item: item.id, targets: [item.target], format: item.format }], writingThisSession: 0, writingAvailable: false, activityIndex: counter + 1 });
   const check = afterView.retention.checks[afterView.retention.checks.length - 1];
   say(`   Asha answers: ${checkDs[0].observation!.value ? "right" : "wrong"} → the check ${check?.passed ? "PASSES" : "FAILS"} on this fresh evidence (interval now ${check?.intervalAfter} days)`);
   say(`   AFTER   ${afterView.name}: ${status(afterView)}`);

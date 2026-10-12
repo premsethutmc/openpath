@@ -34,6 +34,15 @@ learner or guardian chooses goals; the system never infers them.
 > the documented default below, which is always named. The description below
 > is the original design and is kept for the record. The implemented rules are
 > in `packages/english-core/src/selection.ts` and `docs/english/E1_REPORT.md`.
+>
+> **Fresh, variant and repeated items (E1 final review).** Assessment and
+> learning use only items the learner has not seen. A due retention check
+> prefers an unseen item, then an unseen *variant* (an item sharing a
+> `family` with one already seen), then a flagged *repeat* of an item last
+> seen at least 14 days earlier. The ledger, not the client, decides each
+> answer's exposure. A repeat counts only towards the retention check and
+> never changes the estimate; a variant is new evidence, flagged. So
+> long-term retention tracking does not need an unlimited supply of new items.
 
 **Candidates.** Any item or activity whose targets include a weighted
 capability, and whose difficulty is within reach. An *activity* can be one item
