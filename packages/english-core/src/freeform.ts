@@ -166,48 +166,24 @@ export function criterionConsistency(band: number, criteria: unknown, required: 
   return { verdict: "ok" };
 }
 
-// ---------------------------------------------------------------- code-checkable grammar signals (v2)
-
-export interface GrammarSignal {
-  id: string;
-  pattern: string;
-  capabilities: CapabilityId[];
-  note: string;
-}
-
-/** Distinct grammar-signal patterns found in a text, per capability they bear on. */
-export function grammarHits(text: string, signals: GrammarSignal[], cap: CapabilityId): { id: string; match: string }[] {
-  const out: { id: string; match: string }[] = [];
-  for (const s of signals) {
-    if (!s.capabilities.includes(cap)) continue;
-    const m = text.match(new RegExp(s.pattern, "i"));
-    if (m) out.push({ id: s.id, match: m[0] });
-  }
-  return out;
-}
-
-/** The highest band a judgement may give when code has found clear errors of this kind (null: no constraint). */
-export function grammarCeiling(hits: number): number | null {
-  // Candidate limits (E3a), not calibrated: band 8 means accurate use, so one clear error of a listed kind
-  // allows at most 6.5, two at most 5.5, three or more at most 4.5. Only distinct patterns count.
-  if (hits >= 3) return 4.5;
-  if (hits === 2) return 5.5;
-  if (hits === 1) return 6.5;
-  return null;
-}
-
 // ---------------------------------------------------------------- text addressed to the evaluator
 
 const INSTRUCTION = [
-  /\bignore (?:all |the |any |your |previous |above )*(?:instructions|rubric|rules|prompt)/i,
-  /\b(?:give|award|score|mark|grade) (?:me|this|it|my (?:answer|work|essay|letter))\b[^.]{0,30}\b(?:band|score|mark|grade)?\s*\d/i,
-  /\byou are (?:an?|the) (?:ai|assistant|language model|model|evaluator|examiner|grader)\b/i,
+  // conservative on purpose: each pattern names the marking itself, so ordinary writing rarely matches
+  /\bignore (?:all |the |any |your |previous |above )*(?:instructions|rubric|marking scheme|prompt)\b/i,
+  /\b(?:give|award|score|mark|grade) (?:me|this|it|my (?:answer|work|essay|letter|story))\b[^.\n]{0,30}\b(?:band|score|grade|marks?)\s*(?:of\s*)?\d/i,
+  /\byou are (?:an? |the )(?:ai|language model|evaluator|examiner|grader|marker)\b/i,
   /\b(?:system|developer) (?:prompt|message|instructions?)\b/i,
-  /\b(?:assistant|system)\s*:/i,
-  /"(?:band|judgements|flags|criteria)"\s*:/i,
+  /^\s*(?:assistant|system)\s*:/im,
+  /"(?:band|judgements|flags|criteria|key_points)"\s*:/i,
 ];
 
-/** Text in a learner's response that is addressed to the evaluator rather than to the task (check 13). */
+/**
+ * Words in a response that could be read as an instruction to the marker (check 13). A match is a
+ * reason for a person to look, not evidence of manipulation: a story can quote such words, and a
+ * learner can write them without meaning harm. Known false positives are listed in
+ * docs/english/E3A_VALIDATION_LIMITS.md.
+ */
 export function instructionLike(text: string): string | null {
   for (const r of INSTRUCTION) {
     const m = text.match(r);

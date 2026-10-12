@@ -3,7 +3,6 @@
  * goals, and the small word lists used for code-checkable signals.
  */
 import type { FrameworkIndex } from "./framework.ts";
-import type { GrammarSignal } from "./freeform.ts";
 import { misconceptionIds } from "./framework.ts";
 import type { ItemParams } from "./model.ts";
 import type { AnchorReview, CapabilityId, CodeItem, Goal, Guard, Item, Passage, Response, ShortItem, WritingTask } from "./types.ts";
@@ -20,8 +19,6 @@ export interface ContentBundle {
    * answered (a choice index means the option the learner saw).
    */
   retired?: Item[];
-  /** Code-checkable grammar error patterns (E3, used for protocol v2 judgements only). */
-  grammarSignals?: GrammarSignal[];
 }
 
 export interface ContentIndex {
@@ -32,7 +29,6 @@ export interface ContentIndex {
   byCapability: Map<CapabilityId, Item[]>;
   /** Retired item versions, keyed `id@version` (see ContentBundle.retired). */
   retired?: Map<string, Item>;
-  grammarSignals?: GrammarSignal[];
 }
 
 export const versionKey = (id: string, version: number) => `${id}@${version}`;
@@ -313,7 +309,6 @@ export function indexContent(bundle: ContentBundle, index: FrameworkIndex): Cont
     misspellings: new Map(Object.entries(bundle.misspellings)),
     byCapability,
     retired: new Map((bundle.retired ?? []).map((i) => [versionKey(i.id, i.version), i])),
-    grammarSignals: bundle.grammarSignals ?? [],
   };
 }
 

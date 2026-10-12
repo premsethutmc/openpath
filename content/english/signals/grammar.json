@@ -1,9 +1,0 @@
-[
- {"id": "sva_dont", "pattern": "\\b(he|she|it) don't\\b", "capabilities": ["EN.GRM.VERB.sva", "EN.WRT.ACC.grammar"], "note": "Third-person singular with don't (she don't)."},
- {"id": "sva_was", "pattern": "\\b(we|they|you) was\\b", "capabilities": ["EN.GRM.VERB.sva", "EN.WRT.ACC.grammar"], "note": "A plural pronoun with was (they was)."},
- {"id": "past_after_did", "pattern": "\\b(did|didn't|did not) (went|came|saw|ate|took|gave|wrote|bought|brought|told|made|found|got|ran)\\b", "capabilities": ["EN.GRM.VERB.present_past_simple", "EN.WRT.ACC.grammar"], "note": "A past form after did (didn't went)."},
- {"id": "regularised_past", "pattern": "\\b(goed|buyed|catched|thinked|bringed|teached|runned|eated|taked)\\b", "capabilities": ["EN.GRM.VERB.present_past_simple", "EN.WRT.ACC.grammar"], "note": "A regularised irregular past (goed, buyed)."},
- {"id": "modal_to", "pattern": "\\b(can|must|should|could|might|will) to (go|do|be|have|see|come|make|get|play|eat|bring|take)\\b", "capabilities": ["EN.GRM.VERB.modals", "EN.WRT.ACC.grammar"], "note": "A modal followed by to (should to go)."},
- {"id": "double_comparative", "pattern": "\\bmore (better|worse|bigger|easier|happier|faster|smaller|taller)\\b", "capabilities": ["EN.GRM.MOD.comparatives", "EN.WRT.ACC.grammar"], "note": "A double comparative (more better)."},
- {"id": "plural_uncountable", "pattern": "\\b(informations|advices|furnitures|luggages)\\b", "capabilities": ["EN.GRM.NOUN.plurals_countability", "EN.WRT.ACC.grammar"], "note": "A plural of an uncountable noun (advices)."}
-]

@@ -1,7 +1,9 @@
 # Educator review proposal: trusted anchors for evaluation
 
-*12 October 2026 · proposal only (decision 6 of 12 October). No educator has been hired or
-contacted, and nothing has been spent.*
+*12 October 2026 · **planning document only** (E3a review, 12 October). The full programme
+below (928 answers) is **not commissioned**, and no educator is to be approached. A small exploratory
+pilot is designed at the end. It too waits for approval, and it is not enough to qualify an
+evaluator.*
 
 ## Why this is needed
 
@@ -129,3 +131,68 @@ Only then can E3b qualify a real evaluator.
 3. Whether OpenPath may approach educators (none has been contacted).
 
 Sources: [PayScale, English Teacher/Tutor (Vocational), India](https://www.payscale.com/research/IN/Job=English_Teacher%2FTutor_(Vocational)/Salary/5fb2c817/Mid-Career-English-Language).
+
+---
+
+## Exploratory pilot (design only; not commissioned)
+
+**Purpose.** Learn, cheaply, whether the rubrics and key points can be scored consistently by
+educators, how long scoring takes, and whether the tooling and review records work. The pilot is
+**not** a qualification set.
+
+### What would be scored: 48 answers
+
+| Part | Selection | Answers |
+|---|---|---|
+| Extended writing | 4 of the 8 tasks, one per genre: formal letter (`wr.letter.streetlight`), story (`wr.story.lost`), persuasive article (`wr.persuade.trees`), analytical paragraph (`wr.analytical.chart`) | 6 per task, spread across bands 2–8: **24** |
+| Short answers | 12 of the 40 items: 3 grammar, 2 vocabulary, 3 sentence, 2 writing, 2 reading | 2 per item (one meeting the key points, one borderline): **24** |
+
+- **Written** by one educator, at stated target bands, in a learner's voice, with no real names. No
+  children's data.
+- **Scored** independently by two other educators, with full criterion scores and quotes for
+  writing, and key-point marks for short answers.
+- **Adjudicated** by a third reading where the two differ by more than one band or on a key point.
+
+### What it would measure
+
+- **Agreement between educators:** per capability for writing (mean absolute difference, share within
+  one band), and per key point for short answers.
+- **Rubric problems:** criteria the educators read differently, and key points that are ambiguous.
+- **Time per answer**, so that any later programme is costed from real figures.
+- **OpenPath's candidate labels against educator scores:** do our intended bands match theirs?
+- **Research-only signals:** do the grammar diagnostic signals agree with the educators' judgements?
+  Recorded only; nothing changes in production.
+- **The tooling:** scoring sheets, review records and the content check that refuses a trusted anchor
+  without two independent scorings.
+
+### Limitations (why this cannot qualify an evaluator)
+
+- **Too few answers per capability.** About 6 responses per capability for the four tasks, fewer for
+  secondary capabilities, and 2 per short item. Noise and bias estimated from 6 responses carry a
+  standard error of about ±0.3 band or more, against the ±0.1 needed to apply the qualification
+  limits; agreement figures will have wide uncertainty.
+- **Only half the writing tasks** and less than a third of the short items are covered.
+- **Answers written by educators are not real learners' answers.** They will be cleaner and more
+  typical than real writing.
+- **Two or three educators are not a representative panel.**
+- **Difficulty is not calibrated.** Only real learners' responses can do that.
+- **Pilot answers should not become drift anchors.** Once used for study, they are known to the
+  team; any later programme should write fresh qualification and drift sets.
+
+### Workload and estimated cost
+
+| Task | Hours |
+|---|---|
+| Briefing on the rubrics (3 educators × 2 h) | 6 |
+| Writing 24 extended answers (about 18 min each) and 24 short answers (about 2 min each) | 8 |
+| Independent scoring by two educators (24 × 6 min and 24 × 1 min, each) | 6 |
+| Adjudication | 1.5 |
+| Debrief: rubric problems and timing (3 × 1 h) | 3 |
+| **Total** | **about 25** |
+
+At ₹600–1,500 per hour, that is about **₹15,000–37,500**, before taxes and fees, to be confirmed by
+quotes.
+
+### Decision needed (later)
+
+Whether to run the pilot, and when OpenPath may approach educators. Neither is approved now.

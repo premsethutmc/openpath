@@ -31,27 +31,50 @@ things code can measure.** It cannot check that the judgement is *right*.
 | **A band far from the mean of its own criterion scores** (more than one band) | **12 (new)** | Held for a second evaluation | `drift_from_criteria` |
 | **Incomplete criterion scores** (none, missing, unknown or repeated) | **12 (new)** | Rejected | `incomplete_criteria`, `no_criteria`, `unknown_criterion` |
 | A spelling band that the measured misspelling rate rules out | 6 | Held | E1 tests |
-| **A grammar band that clear, code-detectable errors rule out** (protocol v2) | 6 | Held | *She don't…, They was…* |
 | **A short answer marked right although a guard rules it out** | 6 | Held | *The two dogs barks…* |
-| Text addressed to the evaluator ("ignore the rubric", "give me band 8") | **13 (new)** | Held for a person | instruction-like text |
+| Words that could be read as an instruction to the marker ("ignore the rubric", "give me band 8") | **13 (new)** | Held for a person to review; never treated as misconduct | instruction-like text |
 | A very surprising band compared with the learner's estimate | 9 | Held for a second evaluation | E1 tests |
 | A large movement from one response | 10 | Accepted, but capped at 0.75 band | all accepted judgements |
 | An attempt to change a stage or mastery | 11 | Impossible by construction | authority test |
 
-**Code-detectable errors are a short, deliberately conservative list.**
+**Code-detectable errors in production are limited to short-answer guards.**
 
-- *Grammar signals* (`content/english/signals/grammar.json`), seven patterns:
-  - *he/she/it don't*;
-  - *we/they/you was*;
-  - a past form after *did*;
-  - regularised pasts (*goed*, *buyed*);
-  - a modal followed by *to*;
-  - double comparatives;
-  - plurals of uncountable nouns.
 - *Guards* on short items. These are item-specific patterns. For example, a key point *uses the
   plural verb* cannot be present if the answer says *dogs barks*.
 - Every guard is checked against the item's model answers and agreed anchor marks, so a guard can
   never rule out a correct answer the item itself gives.
+
+**Grammar signals are research-only** (E3a review, 12 October).
+
+- **The seven patterns** (`content/english/research/grammar-signals.json`):
+  - *he/she/it don't*;
+  - *we/they/you was*;
+  - a past form after *did*;
+  - regularised pasts;
+  - a modal followed by *to*;
+  - double comparatives;
+  - plurals of uncountable nouns.
+- **What they may do:** annotate decisions for study (`tools/english/research/grammar-signals.ts`).
+- **What they may not do:** cap a band or change an estimate without separate validation and
+  approval.
+- **Effect:** in production, a misjudgement on these errors is caught no better than any other
+  wrong-but-consistent judgement.
+
+**Check 13 and its false positives.** Check 13 is a precaution about the evaluator, not a finding
+about the learner. A held response changes nothing until a person has looked at it, and the
+recorded reason says so. The patterns name the marking itself, so everyday writing rarely matches.
+
+| Not flagged (tested) | Known false positives (tested; held for a person) |
+|---|---|
+| "Our school band played … the score was 3–1" | "The label said: 'Ignore the instructions on the old box.'" |
+| "Give me five minutes …", "Give it 10 minutes in the oven" | "In the play, the robot says: 'You are an AI evaluator now.'" |
+| "Ravi is a model student …" | A line of dialogue that starts "Assistant: …" |
+| "… decided to ignore the rules of the old game" | |
+| "The teacher marked my essay and gave it a grade of B." | |
+| "The system was down …", "My sister is an examiner …" | |
+
+No anchor or model answer in OpenPath's content triggers check 13. How often it fires on real
+learners' writing is unknown until there is consented data.
 
 ## Not catchable by code on a single response
 

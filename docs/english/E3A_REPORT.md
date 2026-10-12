@@ -1,6 +1,6 @@
 # E3a report: the free-form evaluation pipeline, with mock evaluators only
 
-*12 October 2026 · branch `feature/english-e3a` · not merged; awaiting your review. No live LLM is
+*12 October 2026 · branch `feature/english-e3a` · approved 12 October with the cleanup below. No live LLM is
 connected, no provider has been chosen, no API has been called or paid for, and no learner answer has
 left OpenPath. Scope and decisions: [`E3_SCOPE.md`](E3_SCOPE.md) (PR #10, decisions of 12 October).*
 
@@ -14,12 +14,40 @@ anchor is trusted.
 |---|---|
 | **Pipeline** | Extended writing (protocol `evaluate.v2`) and short written answers (`short.v1`), from request to proposal to the controlled updater. `evaluate.v1` is unchanged |
 | **Authority** | Evaluators propose evidence-backed observations only. Fields that try to set an estimate, score, stage or verdict are refused. Every accepted judgement is weighed by the evaluator's measured noise and capped at 0.75 band, and none can change a stage |
-| **New checks** | **12**, criterion–band consistency (approved): contradictions and incomplete criteria are rejected, and inconsistent bands held. **13**, text addressed to the evaluator is held for a person. **Check 6** gains conservative grammar signals for v2, and deterministic guards for short answers |
+| **New checks** | **12**, criterion–band consistency (approved): contradictions and incomplete criteria are rejected, and inconsistent bands held. **13**, words that could be read as an instruction to the marker are held for a person to review, without any judgement about the learner. **Check 6** gains deterministic guards for short answers. (Grammar-pattern ceilings were removed in review and are research-only.) |
 | **Short written answers** | 40 candidate items on 23 capabilities: grammar 15, vocabulary 5, sentences 7, writing 8, reading 5. Code decides right or wrong from the key points; the result enters through the same update as a code-scored item, with no guessing floor |
 | **Gateway (Django)** | Per-purpose consent, strict request checks, identifier removal (same rules and test cases as the core), and disabled, mock or replay adapters only. Every request is recorded with its provenance. Configuring any other adapter fails at start-up |
 | **Measurement harnesses** | Qualification (noise, bias, key-point agreement), the anchoring-bias test, and drift monitoring with hidden anchors, all proven on mock evaluators with known properties |
-| **Tests** | Core **104 of 104** (81 before, plus 23); backend **83 of 83** (70 before, plus 13). Both preserved simulation baselines reproduce exactly |
+| **Tests** | Core **105 of 105** (81 before, plus 24); backend **83 of 83** (70 before, plus 13). Both preserved simulation baselines reproduce exactly |
 | **Frozen simulation** | Unchanged (current bank 6 of 8; E1 and E2a baselines exact). Short answers are offered only when a caller says an evaluator is available, and the frozen simulation never says so |
+
+## Review cleanup (12 October)
+
+1. **Check 13 kept as a conservative safety flag.**
+   - The patterns were narrowed. "Ignore the rules", "give me five minutes" and "a model student" no
+     longer match.
+   - The reason recorded says it is a precaution about the evaluator, not a judgement about the
+     learner.
+   - Known false positives (quoted or innocent uses) are documented and tested; they are held for a
+     person and nothing is changed.
+2. **The seven grammar-pattern ceilings are removed from production.**
+   - The detectors are kept as a research-only diagnostic (`tools/english/research/grammar-signals.ts`,
+     `content/english/research/grammar-signals.json`). It only annotates decisions and never caps a
+     band or changes an estimate.
+   - Using them in production needs separate validation and approval.
+   - A misjudgement such as *She don't… They was…* called accurate is therefore now accepted by the
+     updater, and only flagged by the diagnostic.
+3. **Unchanged:**
+   - evaluators cannot set estimates, stages or verdicts;
+   - checks 1–12 and the guards;
+   - the consent gateway;
+   - item versioning;
+   - the frozen simulation baselines.
+4. **Educator proposal.** It stays a planning document; nothing is commissioned and no one is
+   approached. A small exploratory pilot (48 independently scored answers) is designed alongside it,
+   and is **not** sufficient to qualify an evaluator.
+5. **PR #10.** This branch is built on PR #10's branch, so the E3 scope and its decisions merge with it
+   (see the PR).
 
 ## What was built
 
@@ -45,10 +73,9 @@ The existing checks 1–11 apply to v2 unchanged. Added:
 | Check | Rule | Outcome |
 |---|---|---|
 | 4 (extended) | Criterion quotes and key-point quotes must appear in the learner's text | Rejected |
-| 6 (extended, v2) | Clear, code-detectable grammar errors cap the grammar band. One listed error pattern allows at most band 6.5, two at most 5.5, three or more at most 4.5 | Held |
 | 6 (short answers) | A guard that rules a key point out overrides an evaluator that marks it present | Held |
 | **12 (new, approved)** | The band must agree with the evaluator's own criterion scores | No criteria, missing, unknown or repeated criteria, an off-scale criterion, or a band outside the criteria's range by more than 0.5: **rejected**. Inside the range but more than one band from their mean: **held** |
-| **13 (new)** | Text addressed to the evaluator in the response ("ignore the rubric", "give me band 8", "you are an AI grader") | Held for a person, no update |
+| **13 (new)** | Words that could be read as an instruction to the marker ("ignore the rubric", "give me band 8", "you are an AI grader") | Held for a person to review, no update. The reason says it is a precaution about the evaluator, not a judgement about the learner |
 | 7 (short answers) | The evaluator must also be qualified on short-answer anchors (agreement ≥ 0.9) | Held |
 
 **How a short answer is scored.**
@@ -233,8 +260,7 @@ This is decision 5. The full table is in [`E3A_VALIDATION_LIMITS.md`](E3A_VALIDA
 - schema violations, attempts to set scores, and foreign capabilities;
 - invented quotes;
 - contradictions with the evaluator's own criterion scores, and incomplete criteria;
-- bands ruled out by measurable signals (misspelling rate, seven grammar patterns, short-answer
-  guards);
+- bands ruled out by measurable signals (misspelling rate, short-answer guards);
 - instruction-like text;
 - surprises, and large movements.
 
@@ -256,12 +282,12 @@ anchors.
    Outside development, the updater refuses every evaluator (check 7) until educators score anchors.
 3. **Writing-task anchors are not yet separated.** The 3–4 legacy anchors per task act as both
    examples and qualification data.
-4. **Candidate thresholds.** Criterion agreement (one band), range slack (0.5), the grammar ceilings,
+4. **Candidate thresholds.** Criterion agreement (one band), range slack (0.5),
    short-answer agreement (0.9), anchoring pull (0.3) and the drift window are reasoned choices, not
    calibrated. Changing any of them is a reported decision.
 5. **Pattern-based protections.**
-   - Check 13 catches common injection phrasings, not every one.
-   - The grammar signals are deliberately few (to avoid false alarms).
+   - Check 13 catches common phrasings addressed to a marker, not every one, and has known false
+     positives (quoted or innocent uses), which are held for a person, never treated as misconduct.
    - Names in running text, or written in lower case, are not removed.
 6. **Not built yet:**
    - self-consistency sampling;

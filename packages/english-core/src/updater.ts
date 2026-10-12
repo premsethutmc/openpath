@@ -13,7 +13,7 @@
  */
 import { applyDirect, createComposite, leafView } from "./composite.ts";
 import { type ContentIndex, binaryParams, contextOf, familyOf, itemParams, itemVersion, scoreCode, wordCount } from "./content.ts";
-import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency, grammarCeiling, grammarHits, instructionLike, isBandCriterion, isV2, parseShortProposal, shortCorrect } from "./freeform.ts";
+import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency, instructionLike, isBandCriterion, isV2, parseShortProposal, shortCorrect } from "./freeform.ts";
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
@@ -35,6 +35,14 @@ export interface Context {
    */
   researchBinaryUpdate?: (est: Estimate, p: ItemParams, correct: boolean) => Estimate;
 }
+
+/**
+ * Check 13 (E3): a safety flag on the evaluation, not a finding about the learner. Text that reads like
+ * an instruction to a marker may be quoted, discussed or written innocently (a story, a notice), so the
+ * response is held for a person to look at and nothing is changed; it is never recorded as misconduct.
+ */
+export const checkThirteen = (match: string) =>
+  `check 13: the response contains words that could be read as an instruction to the marker ("${match}"). It is held for a person to review before any automatic evaluation counts; this is a precaution about the evaluator, not a judgement about the learner, and nothing is changed`;
 
 /** Capabilities with a code-checkable signal (check 6). */
 export const SIGNALS = { spelling: "EN.WRT.ACC.spelling", task: "EN.WRT.TSK.task_response" };
@@ -213,7 +221,7 @@ export class Ledger {
     const text = evidence.response.text;
     // Check 13 (E3): text addressed to the evaluator is never taken at face value.
     const injected = instructionLike(text);
-    if (injected) return whole("held", [`check 13: the response contains text addressed to the evaluator ("${injected}"); held for human review, no update`]);
+    if (injected) return whole("held", [checkThirteen(injected)]);
     const v2 = isV2(ev.evaluator.prompt);
     const norm = v2 ? normaliseE3 : normalise;
     const normText = norm(text);
@@ -285,14 +293,6 @@ export class Ledger {
       if (j.capability === SIGNALS.spelling && ceiling !== null && j.band > ceiling + 1.5) {
         hold(`check 6: ${signals.misspelled.length} common misspellings in ${signals.words} words allow at most band ${ceiling}, but the proposal says ${j.band}`);
         continue;
-      }
-      if (v2) {
-        const hits = grammarHits(text, this.ctx.content.grammarSignals ?? [], j.capability);
-        const gc = grammarCeiling(hits.length);
-        if (gc !== null && j.band > gc) {
-          hold(`check 6: code found ${hits.length} clear error pattern(s) (${hits.map((h) => `"${h.match}"`).join(", ")}), which allow at most band ${gc}, but the proposal says ${j.band}`);
-          continue;
-        }
       }
       if (j.capability === SIGNALS.task && words < 0.5 * task.min_words && j.band > 4.5) {
         hold(`check 6: ${words} words for a task asking for at least ${task.min_words}; band ${j.band} is not credible`);
@@ -379,7 +379,7 @@ export class Ledger {
     if (f.safeguarding) return decide("rejected", ["check 8: safeguarding flag; no learning update, route to the safeguarding process"]);
     if (f.off_task || f.too_short || f.possibly_copied) return decide("rejected", [`check 8: response flagged as ${Object.entries(f).filter(([, v]) => v).map(([k]) => k.replace("_", " ")).join(", ")}; no update`]);
     const injected = instructionLike(text);
-    if (injected) return decide("held", [`check 13: the response contains text addressed to the evaluator ("${injected}"); held for human review, no update`]);
+    if (injected) return decide("held", [checkThirteen(injected)]);
     // Check 2: every key point marked exactly once, and no others.
     const ids = item.key_points.map((k) => k.id);
     const marked = p.key_points.map((k) => k.id);

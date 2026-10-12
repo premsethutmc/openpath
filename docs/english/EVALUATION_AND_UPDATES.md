@@ -133,11 +133,11 @@ and the reasons are always logged.
 | 10 | **Movement cap.** No single piece of evidence moves a mean by more than 0.75 bands (0.25 for inferred effects) | Accepted, but capped. The cap is logged |
 | 11 | **Status guard.** A single piece of evidence can never change a capability's stage to *demonstrated* or *mastered* on its own. Those come only from §5 of the composite rules | Enforced by construction |
 | 12 | **Criterion–band consistency** (E3, approved 12 Oct; protocol v2). Every rubric criterion is scored on the band scale with a verbatim quote, and the band agrees with them | Missing, unknown or repeated criteria, or a band outside their range by more than 0.5: rejected. More than one band from their mean: held |
-| 13 | **Text addressed to the evaluator** (E3). The response contains instructions such as "ignore the rubric" or "give me band 8" | Held for a person; no update |
+| 13 | **Possible instructions to the marker** (E3). The response contains words such as "ignore the rubric" or "give me band 8" | Held for a person to review; no update; a precaution, not a judgement about the learner |
 
 **E3a additions.** Protocol `evaluate.v1` is kept unchanged, so earlier evidence and the frozen
-simulation are interpreted as before. Protocol `evaluate.v2` requires criterion scores (check 12),
-and adds conservative code-checkable grammar signals to check 6. Short written answers (`short.v1`)
+simulation are interpreted as before. Protocol `evaluate.v2` requires criterion scores (check 12).
+Grammar-pattern signals are research-only and do not affect any decision (E3a review). Short written answers (`short.v1`)
 are marked key point by key point with quotes; code decides right or wrong, deterministic guards
 outrank the evaluator (check 6), and the result enters through the same update as a code-scored item
 of the same difficulty, with no guessing floor. See [`E3A_REPORT.md`](E3A_REPORT.md) and
