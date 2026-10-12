@@ -326,9 +326,10 @@ export interface BankLimits {
 }
 
 export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
-  const items = [...ctx.content.items.values()];
+  // the frozen simulation never offers short written responses (E3), so they are not part of its bank
+  const items = [...ctx.content.items.values()].filter((i) => i.kind !== "short");
   const perCapability = Object.values(CAP).map((cap) => {
-    const its = items.filter((i) => (i.kind === "code" ? i.target === cap : i.targets.includes(cap)));
+    const its = items.filter((i) => (i.kind === "writing" ? i.targets.includes(cap) : i.target === cap));
     const formats = [...new Set(its.map((i) => i.format))];
     return { capability: cap, name: ctx.index.names.get(cap)!, items: its.length, formats, guessable: its.every((i) => i.kind === "code" && guessingFloor(i) > LOW_GUESSING), maxDifficulty: Math.max(...its.map((i) => i.b)) };
   });
@@ -355,7 +356,7 @@ export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
     const now = r.sessions.at(-1)!.now;
     let n = 0;
     for (const cap of Object.values(CAP)) {
-      const left = items.filter((i) => !used.has(i.id) && (i.kind === "code" ? i.target === cap : i.targets.includes(cap))).length;
+      const left = items.filter((i) => !used.has(i.id) && (i.kind === "writing" ? i.targets.includes(cap) : i.target === cap)).length;
       if (left === 0) n++;
       if (left === 0 && leafView(r.ledger.composite, ctx.index, cap, now).retention.status === "overdue") overdue.push({ learner: r.learner.id, capability: ctx.index.names.get(cap)! });
     }

@@ -202,7 +202,7 @@ jobs:
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .
-      - name: Acceptance tests (E1, E2a and E2b)
+      - name: Acceptance tests (E1, E2 and E3a)
         working-directory: packages/english-core
         run: |
           npm test 2>&1 | tee test.log
@@ -211,6 +211,8 @@ jobs:
         run: node tools/english/sim/main.ts | tee -a "$GITHUB_STEP_SUMMARY"
       - name: End-to-end demonstration
         run: node tools/english/demo.ts
+      - name: E3a evaluation harness (mock evaluators only; no network)
+        run: node tools/english/e3/harness.ts | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Keep the simulation report
         if: always()
         uses: actions/upload-artifact@v7

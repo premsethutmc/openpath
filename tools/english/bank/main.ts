@@ -62,7 +62,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   writeFileSync(join(out, "bank-coverage.html"), renderBankReport(r.ctx, json, new Date().toISOString().slice(0, 10)));
   const items = r.coverage.reduce((s, c) => s + c.items, 0);
   const passing = r.coverage.filter((c) => c.gates.every((g) => g.pass)).length;
-  console.log(`Item bank: ${items} code-scored items on ${r.coverage.length} capabilities; ${r.pending.length} specified capabilities have no items yet (E2b).`);
+  console.log(`Item bank: ${items} code-scored items on ${r.coverage.length} capabilities; ${r.pending.length} specified capabilities have no items yet.`);
+  const shorts = [...r.ctx.content.items.values()].filter((i) => i.kind === "short");
+  console.log(`Short written responses (E3, evaluator-marked; not counted in the gates): ${shorts.length} items on ${new Set(shorts.map((i) => (i.kind === "short" ? i.target : ""))).size} capabilities.`);
   for (const c of r.coverage)
     console.log(`  ${c.gates.every((g) => g.pass) ? "PASS" : "GAPS"}  ${c.name.padEnd(44)} ${String(c.items).padStart(3)} items  ${c.gates.filter((g) => !g.pass).map((g) => g.id).join(" ") || "all gates"}`);
   const byGate = r.coverage[0]?.gates.map((g, k) => `${g.id} ${r.coverage.filter((c) => c.gates[k].pass).length}/${r.coverage.length}`).join(", ") ?? "";

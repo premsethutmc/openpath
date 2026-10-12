@@ -133,12 +133,90 @@ export interface CodeItem {
   difficulty_source?: "expert_estimate";
 }
 
+/**
+ * Which job an anchor does (E3). Prompt anchors are shown to evaluators as examples; qualification and
+ * drift anchors are used to check evaluators and are never shown to them. An anchor without a set is a
+ * legacy (E1–E2) candidate and is treated as before.
+ */
+export type AnchorSet = "prompt" | "qualification" | "drift";
+
+/** The record that makes an anchor trusted: independent scoring by at least two educators (E3, D-4). */
+export interface AnchorReview {
+  /** Internal scorer ids (never names in content files). */
+  scorers: string[];
+  /** Each scorer's independent scores, before agreement. */
+  independent: Record<string, Record<string, number | boolean>>;
+  /** How disagreements were settled, if any. */
+  adjudication?: string;
+  rubric_version: string;
+  date: string;
+}
+
 export interface Anchor {
   id: string;
   /** Agreed scores per capability. In E1 these are candidates written by OpenPath, not yet educator-scored. */
   scores: Record<CapabilityId, number>;
   trusted: boolean;
   text: string;
+  set?: AnchorSet;
+  review?: AnchorReview;
+}
+
+/** One thing a short written answer must contain to count as right. */
+export interface KeyPoint {
+  id: string;
+  text: string;
+  /** All required key points must be present for the answer to count as right. */
+  required: boolean;
+}
+
+/**
+ * A deterministic check on a short answer. If the response matches `forbids` (or fails to match
+ * `requires`), the named key point cannot be present, whatever an evaluator says.
+ */
+export interface Guard {
+  id: string;
+  key_point: string;
+  requires?: string;
+  forbids?: string;
+  note: string;
+}
+
+export interface ShortAnchor {
+  id: string;
+  /** Agreed marks per key point. */
+  marks: Record<string, boolean>;
+  trusted: boolean;
+  text: string;
+  set?: AnchorSet;
+  review?: AnchorReview;
+}
+
+/**
+ * A short written response (one to three sentences), marked by an evaluator against key points (E3).
+ * Code turns the marks into right or wrong, which enters the composite through the same update as a
+ * code-scored item of the same difficulty, with no guessing floor.
+ */
+export interface ShortItem {
+  id: string;
+  version: number;
+  family?: string;
+  target: CapabilityId;
+  format: string; // "short:rewrite", "short:explain", "short:combine", "short:complete"
+  prompt: string;
+  passage?: string;
+  a: number;
+  b: number;
+  max_words: number;
+  key_points: KeyPoint[];
+  model_answers: string[];
+  guards?: Guard[];
+  anchors: ShortAnchor[];
+  addresses?: string[];
+  review?: string;
+  step?: string;
+  rationale?: string;
+  difficulty_source?: "expert_estimate";
 }
 
 export interface WritingTask {
@@ -160,7 +238,7 @@ export interface WritingTask {
   review?: string;
 }
 
-export type Item = ({ kind: "code" } & CodeItem) | ({ kind: "writing" } & WritingTask);
+export type Item = ({ kind: "code" } & CodeItem) | ({ kind: "writing" } & WritingTask) | ({ kind: "short" } & ShortItem);
 
 export interface Passage {
   id: string;
@@ -276,6 +354,10 @@ export interface QualificationEvent {
   /** Which anchors it was measured against: educator-scored (trusted) or OpenPath's unreviewed candidates. */
   anchor_set: "trusted" | "candidates";
   detail: Record<string, { n: number; noise: number; bias: number }>;
+  /** Short written responses (E3): agreement with the agreed key-point marks. Absent if none were scored. */
+  short?: { n: number; agreement: number; qualified: boolean };
+  /** Anchoring-bias test (E3): may the learner's current estimates be shown to this evaluator? */
+  estimates_allowed?: boolean;
 }
 
 export interface RevokeEvent {

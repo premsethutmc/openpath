@@ -72,7 +72,7 @@ export function nextAfterTwoSessions(ctx: Context, r: RunResult): Recommendation
     .reverse()
     .map((id) => {
       const it = ctx.content.items.get(id)!;
-      return { item: id, targets: it.kind === "code" ? [it.target] : it.targets, format: it.format };
+      return { item: id, targets: it.kind === "writing" ? it.targets : [it.target], format: it.format };
     });
   return recommend({ index: ctx.index, content: ctx.content, composite: s.composite, goal: ctx.content.goals.get(PROTOCOL.goal)!, now: at(PROTOCOL.sessionDays[2]), seen: new Set(used), recent, writingThisSession: 0, writingAvailable: true }, 3);
 }

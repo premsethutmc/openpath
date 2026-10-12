@@ -10,6 +10,7 @@
 import type { Composite, CapabilityId, WritingTask } from "./types.ts";
 import type { FrameworkIndex } from "./framework.ts";
 import { leafView } from "./composite.ts";
+import type { ShortRequest, WritingRequestV2 } from "./freeform.ts";
 
 export const PROMPT_VERSION = "evaluate.v1";
 
@@ -35,7 +36,7 @@ export interface Judgement {
   capability: CapabilityId;
   band: number;
   confidence: "high" | "medium" | "low";
-  criteria?: { id: string; score: number; max: number }[];
+  criteria?: { id: string; score: number; max: number }[] | { id: string; band: number; quote: string }[];
   quotes: string[];
   misconceptions: string[];
   rationale: string;
@@ -50,11 +51,16 @@ export interface Proposal {
   surprise?: { capability: CapabilityId; note: string };
 }
 
+/** Every request an evaluator may receive: E1 writing (v1), E3 writing (v2), E3 short answers. */
+export type AnyEvaluationRequest = EvaluationRequest | WritingRequestV2 | ShortRequest;
+
 /** Any provider, model, human panel or stand-in. Returns the raw JSON it produced. */
 export interface Evaluator {
   id: string;
   model?: string;
   evaluate(request: EvaluationRequest): Promise<unknown>;
+  /** E3 protocols (v2 writing, short answers). Evaluators written before E3 need not support them. */
+  evaluateFreeform?(request: WritingRequestV2 | ShortRequest): Promise<unknown>;
 }
 
 /** Remove things that look like contact details before text leaves the device or server. */
@@ -147,8 +153,11 @@ export function parseProposal(body: unknown): Parsed {
     if (!Array.isArray(j.quotes) || !j.quotes.every((q) => typeof q === "string")) errors.push(`judgement ${i}: quotes must be a list of strings`);
     if (!Array.isArray(j.misconceptions) || !j.misconceptions.every((q) => typeof q === "string")) errors.push(`judgement ${i}: misconceptions must be a list of strings`);
     if (typeof j.rationale !== "string") errors.push(`judgement ${i}: rationale must be a string`);
-    if (j.criteria !== undefined && (!Array.isArray(j.criteria) || !j.criteria.every((c) => isObj(c) && typeof c.id === "string" && typeof c.score === "number" && typeof c.max === "number")))
-      errors.push(`judgement ${i}: criteria must be a list of {id, score, max}`);
+    // v1 criteria are {id, score, max}; v2 criteria (E3) are {id, band, quote} and are checked in full by check 12
+    const v1Criterion = (c: unknown) => isObj(c) && typeof c.id === "string" && typeof c.score === "number" && typeof c.max === "number";
+    const v2Criterion = (c: unknown) => isObj(c) && typeof c.id === "string" && typeof c.band === "number" && typeof c.quote === "string" && Object.keys(c).every((k) => ["id", "band", "quote"].includes(k));
+    if (j.criteria !== undefined && (!Array.isArray(j.criteria) || !(j.criteria.every(v1Criterion) || j.criteria.every(v2Criterion))))
+      errors.push(`judgement ${i}: criteria must be a list of {id, score, max} (protocol v1) or {id, band, quote} (protocol v2)`);
     judgements.push(j as unknown as Judgement);
   }
   if (!Array.isArray(body.not_observable) || !body.not_observable.every((x) => typeof x === "string")) errors.push("not_observable must be a list of strings");

@@ -5,7 +5,7 @@
 import type { FrameworkIndex } from "./framework.ts";
 import { misconceptionIds } from "./framework.ts";
 import type { ItemParams } from "./model.ts";
-import type { CapabilityId, CodeItem, Goal, Item, Passage, Response, WritingTask } from "./types.ts";
+import type { AnchorReview, CapabilityId, CodeItem, Goal, Guard, Item, Passage, Response, ShortItem, WritingTask } from "./types.ts";
 
 export interface ContentBundle {
   items: Item[];
@@ -41,7 +41,7 @@ export function itemVersion(content: ContentIndex, id: string, version: number):
 }
 
 export function targetsOf(item: Item): CapabilityId[] {
-  return item.kind === "code" ? [item.target] : item.targets;
+  return item.kind === "writing" ? item.targets : [item.target];
 }
 
 /** The family an item belongs to: variants of one another share it. */
@@ -85,6 +85,13 @@ export const LOW_GUESSING = 0.1;
 
 export function itemParams(item: CodeItem): ItemParams {
   return { a: item.a, b: item.b, c: guessingFloor(item) };
+}
+
+/** Response-model parameters for anything scored right or wrong: a code item, or a short written answer (no guessing floor). */
+export function binaryParams(item: Item): ItemParams | null {
+  if (item.kind === "code") return itemParams(item);
+  if (item.kind === "short") return { a: item.a, b: item.b, c: 0 };
+  return null;
 }
 
 /** The key a wrong answer is looked up by in `wrong`. */
@@ -184,6 +191,8 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
         if (n < 4) problems.push(`multi item ${item.id} needs at least 4 options`);
         if (!set.length || set.length >= n || new Set(set).size !== set.length || !set.every(isIndex)) problems.push(`multi item ${item.id} needs a valid answer_set (some, not all, options)`);
       } else problems.push(`item ${item.id} has unknown format ${item.format}`);
+    } else if (item.kind === "short") {
+      problems.push(...validateShort(item, index, passages));
     } else {
       const w = item as WritingTask;
       if (!w.targets.length) problems.push(`writing task ${w.id} has no targets`);
@@ -195,6 +204,7 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
           if (![...w.targets, ...w.secondary].includes(cap)) problems.push(`anchor ${a.id} scores ${cap}, which task ${w.id} does not target`);
           if (!(band >= 1 && band <= 8)) problems.push(`anchor ${a.id} has a score outside 1–8`);
         }
+      for (const a of w.anchors) problems.push(...anchorReviewProblems(a, `anchor ${a.id} (task ${w.id})`));
     }
   }
   for (const g of bundle.goals)
@@ -213,15 +223,76 @@ export function validateRetired(bundle: ContentBundle, index: FrameworkIndex): s
     const key = versionKey(r.id, r.version);
     if (seen.has(key)) problems.push(`retired version ${key} appears twice`);
     seen.add(key);
-    if (r.kind !== "code") problems.push(`retired version ${key}: only code-scored items can be retired`);
+    if (r.kind !== "code" && r.kind !== "short") problems.push(`retired version ${key}: only code-scored items and short written responses can be retired`);
     const c = current.get(r.id);
     if (!c) problems.push(`retired version ${key} has no current item`);
     else {
       if (!(r.version < c.version)) problems.push(`retired version ${key} is not older than the current version ${c.version}`);
-      if (r.kind === "code" && c.kind === "code" && r.target !== c.target) problems.push(`retired version ${key} targets a different capability from the current item`);
+      if (r.kind !== "writing" && c.kind !== "writing" && r.target !== c.target) problems.push(`retired version ${key} targets a different capability from the current item`);
     }
     // each retired version is validated as an item in its own right
     for (const p of validateContent({ ...bundle, items: [r], retired: [] }, index)) if (!p.startsWith("goal ")) problems.push(`retired ${key}: ${p}`);
+  }
+  return problems;
+}
+
+/** A trusted anchor must carry the record of independent scoring by at least two educators (E3). */
+export function anchorReviewProblems(a: { trusted: boolean; review?: AnchorReview }, label: string): string[] {
+  if (!a.trusted) return [];
+  const r = a.review;
+  if (!r) return [`${label} is marked trusted without a review record (two independent educator scorings)`];
+  const out: string[] = [];
+  if (new Set(r.scorers).size < 2) out.push(`${label} is marked trusted with fewer than two independent scorers`);
+  for (const s of r.scorers) if (!r.independent?.[s]) out.push(`${label}: scorer ${s} has no independent scores`);
+  if (!r.rubric_version || !r.date) out.push(`${label}: review record needs a rubric version and a date`);
+  return out;
+}
+
+const words = (s: string) => (s.match(/[A-Za-z0-9’']+/g) ?? []).length;
+
+/** Is a guard's condition met by this text (so the key point it names cannot be present)? */
+export function guardBlocks(g: Guard, text: string): boolean {
+  if (g.forbids && new RegExp(g.forbids, "i").test(text)) return true;
+  if (g.requires && !new RegExp(g.requires, "i").test(text)) return true;
+  return false;
+}
+
+export function validateShort(item: ShortItem, index: FrameworkIndex, passages: Set<string>): string[] {
+  const problems: string[] = [];
+  const p = (m: string) => problems.push(`short item ${item.id}: ${m}`);
+  if (!(item.b >= 1 && item.b <= 8)) p("difficulty outside 1–8");
+  if (!(item.a > 0)) p("needs a positive discrimination");
+  if (!item.format.startsWith("short:")) p(`format must start with short: (is ${item.format})`);
+  if (item.passage && !passages.has(item.passage)) p(`unknown passage ${item.passage}`);
+  const allowed = misconceptionIds(index, item.target);
+  for (const t of item.addresses ?? []) if (!allowed.has(t)) p(`misconception ${t} is not listed for ${item.target}`);
+  const ids = item.key_points.map((k) => k.id);
+  if (!ids.length) p("needs key points");
+  if (new Set(ids).size !== ids.length) p("key point ids must be unique");
+  if (!item.key_points.some((k) => k.required)) p("needs at least one required key point");
+  if (!item.model_answers.length) p("needs a model answer");
+  if (!(item.max_words >= 5 && item.max_words <= 80)) p("max_words must be between 5 and 80 (one to three sentences)");
+  for (const m of item.model_answers) if (words(m) > item.max_words) p(`model answer longer than ${item.max_words} words: "${m}"`);
+  for (const g of item.guards ?? []) {
+    if (!ids.includes(g.key_point)) p(`guard ${g.id} names unknown key point ${g.key_point}`);
+    if (!g.requires && !g.forbids) p(`guard ${g.id} needs requires or forbids`);
+    try {
+      if (g.requires) new RegExp(g.requires, "i");
+      if (g.forbids) new RegExp(g.forbids, "i");
+    } catch {
+      p(`guard ${g.id} has an invalid pattern`);
+      continue;
+    }
+    // a guard must never contradict the item's own model answers
+    for (const m of item.model_answers) if (guardBlocks(g, m)) p(`guard ${g.id} blocks the model answer "${m}"`);
+  }
+  if (item.anchors.length < 3) p("needs at least 3 anchor responses");
+  for (const a of item.anchors) {
+    const marked = Object.keys(a.marks).sort();
+    if (marked.join() !== [...ids].sort().join()) p(`anchor ${a.id} must mark every key point exactly once`);
+    // the agreed marks must agree with the deterministic guards
+    for (const g of item.guards ?? []) if (a.marks[g.key_point] && guardBlocks(g, a.text)) p(`anchor ${a.id} marks ${g.key_point} present, but guard ${g.id} rules it out`);
+    problems.push(...anchorReviewProblems(a, `anchor ${a.id} (short item ${item.id})`));
   }
   return problems;
 }

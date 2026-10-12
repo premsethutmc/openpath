@@ -3,7 +3,8 @@
 *12 October 2026. These began as planning documents. **E1 is implemented and
 merged** ([`E1_REPORT.md`](E1_REPORT.md)). The E2 scope was approved with
 decisions on 12 October (PR #7); E2a is merged ([`E2A_REPORT.md`](E2A_REPORT.md)), and E2b
-is reported in [`E2B_REPORT.md`](E2B_REPORT.md).*
+is merged ([`E2B_REPORT.md`](E2B_REPORT.md)). The E3 scope is proposed in
+[`E3_SCOPE.md`](E3_SCOPE.md).*
 
 | Label | Meaning |
 |---|---|
@@ -38,6 +39,14 @@ is reported in [`E2B_REPORT.md`](E2B_REPORT.md).*
 11. [`E2B_REPORT.md`](E2B_REPORT.md): what E2b built (item banks for the 39 core
     capabilities, writing tasks), coverage, simulation results and newly exposed
     weaknesses.
+12. [`E3_SCOPE.md`](E3_SCOPE.md): the E3 scope for evaluating free-form answers, with the
+    decisions of 12 October.
+13. [`E3A_REPORT.md`](E3A_REPORT.md): E3a, the evaluation pipeline with mock evaluators
+    only: tests, harness results, limitations and readiness for a real provider.
+14. [`E3A_VALIDATION_LIMITS.md`](E3A_VALIDATION_LIMITS.md): what deterministic validation
+    can and cannot catch.
+15. [`EDUCATOR_REVIEW_PROPOSAL.md`](EDUCATOR_REVIEW_PROPOSAL.md): trusted anchors — sample
+    answers, workload, qualifications and estimated cost (proposal only).
 
 ---
 

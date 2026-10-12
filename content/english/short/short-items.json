@@ -1,0 +1,2927 @@
+[
+ {
+  "kind": "short",
+  "id": "sht.sva.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "short:rewrite",
+  "prompt": "Rewrite this sentence so that it is about two dogs: 'The dog barks at the postman every morning.'",
+  "a": 1.3,
+  "b": 3.5,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses a plural subject (the dogs, two dogs)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Uses the plural verb bark, with no -s",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "The two dogs bark at the postman every morning.",
+   "The dogs bark at the postman every morning."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp2",
+    "forbids": "\\bdogs\\s+barks\\b",
+    "note": "'dogs barks' keeps the singular verb"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp1",
+    "requires": "\\bdogs\\b",
+    "note": "the subject must be plural"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.sva.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The two dogs bark at the postman every morning."
+   },
+   {
+    "id": "sht.sva.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "The two dogs barks at the postman every morning."
+   },
+   {
+    "id": "sht.sva.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "The dog bark at the postman every morning."
+   }
+  ],
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "plural_subject",
+  "rationale": "Produces agreement with a plural subject; the -s must be removed, not just recognised as wrong.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sva.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "short:complete",
+  "prompt": "Finish the sentence with the right form of be and your own ending: 'The box of old toys ...'",
+  "a": 1.3,
+  "b": 5.0,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses is or was, agreeing with 'box', not with 'toys'",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Completes the sentence sensibly",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "The box of old toys is in the cupboard.",
+   "The box of old toys was too heavy to lift."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\btoys\\s+(is|was)\\b",
+    "forbids": "\\btoys\\s+(are|were)\\b",
+    "note": "the verb must agree with 'box'"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.sva.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The box of old toys is under my bed."
+   },
+   {
+    "id": "sht.sva.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The box of old toys are under my bed."
+   },
+   {
+    "id": "sht.sva.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The box of old toys was given to my cousin."
+   }
+  ],
+  "addresses": [
+   "attraction_error"
+  ],
+  "step": "intervening",
+  "rationale": "Agreement across an intervening plural noun, produced in the learner's own sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.pps.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "short:rewrite",
+  "prompt": "Rewrite in the past, starting with 'Yesterday': 'Every day I go to the market and buy some fruit.'",
+  "a": 1.3,
+  "b": 3.25,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses went",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Uses bought",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Yesterday I went to the market and bought some fruit."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bwent\\b",
+    "note": "went is the past of go"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\bbought\\b",
+    "forbids": "\\bbuyed\\b",
+    "note": "bought is the past of buy"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.pps.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Yesterday I went to the market and bought some fruit."
+   },
+   {
+    "id": "sht.pps.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Yesterday I went to the market and buyed some fruit."
+   },
+   {
+    "id": "sht.pps.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Yesterday I go to the market and buy some fruit."
+   }
+  ],
+  "addresses": [
+   "regularised_past"
+  ],
+  "step": "irregular_common",
+  "rationale": "Two common irregular past forms produced in one sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.pps.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "short:rewrite",
+  "prompt": "This story is in the past, but two verbs slip into the present. Rewrite it correctly: 'We reached the beach at noon. The sea looks calm, so we decide to swim.'",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 25,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Changes looks to looked",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Changes decide to decided",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "We reached the beach at noon. The sea looked calm, so we decided to swim."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\blooked\\b",
+    "note": "looked is needed"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\bdecided\\b",
+    "note": "decided is needed"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.pps.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "We reached the beach at noon. The sea looked calm, so we decided to swim."
+   },
+   {
+    "id": "sht.pps.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "We reached the beach at noon. The sea looked calm, so we decide to swim."
+   },
+   {
+    "id": "sht.pps.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "We reach the beach at noon. The sea looks calm, so we decide to swim."
+   }
+  ],
+  "addresses": [
+   "tense_shift"
+  ],
+  "step": "consistency_less_common",
+  "rationale": "Keeps tense consistent across two sentences; both slips must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.con.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.conditionals",
+  "format": "short:complete",
+  "prompt": "Finish the sentence: 'If it rains tomorrow, ...'",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses will (or won't, or going to) and a verb in the result",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "The result makes sense",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "If it rains tomorrow, we will stay at home.",
+   "If it rains tomorrow, the match won't happen."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\b(will|won't|'ll|going to)\\b",
+    "forbids": "\\bwould\\b",
+    "note": "a first conditional uses will, not would"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.con.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "If it rains tomorrow, we will play indoors."
+   },
+   {
+    "id": "sht.con.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "If it rains tomorrow, we would play indoors."
+   },
+   {
+    "id": "sht.con.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "If it rains tomorrow, I will take my umbrella."
+   }
+  ],
+  "addresses": [
+   "conditional_mixup"
+  ],
+  "step": "first",
+  "rationale": "Produces the result clause of a first conditional.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.con.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.conditionals",
+  "format": "short:complete",
+  "prompt": "Finish the sentence about an imaginary situation: 'If I could fly, ...'",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses would, could or might and a verb in the result",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "The result makes sense",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "If I could fly, I would visit my grandmother every weekend."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\b(would|could|might|'d)\\b",
+    "forbids": "\\bwill\\b",
+    "note": "an imaginary result needs would, could or might"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.con.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "If I could fly, I would visit my grandmother every weekend."
+   },
+   {
+    "id": "sht.con.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "If I could fly, I will go to the moon."
+   },
+   {
+    "id": "sht.con.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "If I could fly, I'd go to school over the traffic."
+   }
+  ],
+  "addresses": [
+   "conditional_mixup"
+  ],
+  "step": "second",
+  "rationale": "Produces the result clause of a second conditional.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.con.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.conditionals",
+  "format": "short:combine",
+  "prompt": "Join these into one sentence starting with 'If': 'I didn't hear the alarm. I was late for school.'",
+  "a": 1.3,
+  "b": 7.0,
+  "max_words": 20,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses had heard in the if-clause",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Uses would not have been (or wouldn't have been) late in the result",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "If I had heard the alarm, I wouldn't have been late for school.",
+   "If I had heard the alarm, I would not have been late for school."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bhad heard\\b",
+    "note": "the if-clause needs had heard"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\bwould(n't| not)? have been\\b",
+    "note": "the result needs would have been"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.con.03.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "If I had heard the alarm, I wouldn't have been late for school."
+   },
+   {
+    "id": "sht.con.03.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "If I heard the alarm, I wouldn't be late for school."
+   },
+   {
+    "id": "sht.con.03.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "If I had heard the alarm, I won't have been late."
+   }
+  ],
+  "addresses": [
+   "conditional_mixup"
+  ],
+  "step": "third",
+  "rationale": "Builds a third conditional from two facts, reversing both.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.rsp.01",
+  "version": 1,
+  "target": "EN.GRM.CLS.reported_speech",
+  "format": "short:rewrite",
+  "prompt": "Report what Ravi said: 'I am tired.' Start with 'Ravi said that'.",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 10,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Changes I to he",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Changes am to was",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Ravi said that he was tired."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bhe\\b",
+    "note": "the pronoun must change to he"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\bwas\\b",
+    "forbids": "\\b(am|is) tired\\b",
+    "note": "am must change to was"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.rsp.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Ravi said that he was tired."
+   },
+   {
+    "id": "sht.rsp.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Ravi said that he is tired."
+   },
+   {
+    "id": "sht.rsp.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "Ravi said that I was tired."
+   }
+  ],
+  "addresses": [
+   "no_backshift",
+   "pronoun_not_changed"
+  ],
+  "step": "statements",
+  "rationale": "Pronoun and tense changes produced, not chosen.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.rsp.02",
+  "version": 1,
+  "target": "EN.GRM.CLS.reported_speech",
+  "format": "short:rewrite",
+  "prompt": "Report the question. Mira asked me: 'Where do you live?'",
+  "a": 1.3,
+  "b": 5.25,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses statement word order (where I lived), with no do or did",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Changes you to I and live to lived",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Mira asked me where I lived."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bwhere i live",
+    "forbids": "\\bwhere (do|did) (you|i)\\b",
+    "note": "a reported question keeps statement order"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\bwhere i lived\\b",
+    "note": "needs I and lived"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.rsp.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Mira asked me where I lived."
+   },
+   {
+    "id": "sht.rsp.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Mira asked me where did I live."
+   },
+   {
+    "id": "sht.rsp.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Mira asked me where I live."
+   }
+  ],
+  "addresses": [
+   "question_order_kept"
+  ],
+  "step": "questions",
+  "rationale": "A reported wh-question: word order, pronoun and tense together.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.rel.01",
+  "version": 1,
+  "target": "EN.GRM.CLS.relative_clauses",
+  "format": "short:combine",
+  "prompt": "Join into one sentence using who or which: 'I have a cousin. She plays the sitar.'",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses who (or that) for the person",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Does not repeat she",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "I have a cousin who plays the sitar."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\b(who|that)\\b",
+    "forbids": "\\bcousin,? which\\b",
+    "note": "which is not used for a person"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "forbids": "\\b(who|that) she\\b",
+    "note": "she must not be repeated"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.rel.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "I have a cousin who plays the sitar."
+   },
+   {
+    "id": "sht.rel.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "I have a cousin which plays the sitar."
+   },
+   {
+    "id": "sht.rel.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "I have a cousin who she plays the sitar."
+   }
+  ],
+  "addresses": [
+   "which_for_people",
+   "resumptive_pronoun"
+  ],
+  "step": "join_who_which",
+  "rationale": "Joins with a relative pronoun for a person, without a resumptive pronoun.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.rel.02",
+  "version": 1,
+  "target": "EN.GRM.CLS.relative_clauses",
+  "format": "short:combine",
+  "prompt": "Join into one sentence using whose: 'That is the girl. Her painting won the prize.'",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses whose before painting",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Leaves out her",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "That is the girl whose painting won the prize."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bwhose painting\\b",
+    "note": "whose must come before painting"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "forbids": "\\bher painting\\b",
+    "note": "her must be left out"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.rel.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "That is the girl whose painting won the prize."
+   },
+   {
+    "id": "sht.rel.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "That is the girl who her painting won the prize."
+   },
+   {
+    "id": "sht.rel.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "That's the girl whose painting won the prize."
+   }
+  ],
+  "addresses": [
+   "resumptive_pronoun"
+  ],
+  "step": "whose_where_commas",
+  "rationale": "Produces a whose clause, which replaces the possessive.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.pas.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.passive",
+  "format": "short:rewrite",
+  "prompt": "Rewrite in the passive, starting with 'The bridge': 'Workers built the bridge in 1920.'",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses was built",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Keeps the date",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "The bridge was built in 1920.",
+   "The bridge was built by workers in 1920."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bwas built\\b",
+    "note": "the passive needs was built"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.pas.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The bridge was built in 1920."
+   },
+   {
+    "id": "sht.pas.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The bridge built in 1920."
+   },
+   {
+    "id": "sht.pas.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The bridge was build in 1920."
+   }
+  ],
+  "addresses": [
+   "missing_be",
+   "wrong_participle"
+  ],
+  "step": "present_past",
+  "rationale": "Forms a past simple passive with an irregular participle.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.pas.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.passive",
+  "format": "short:rewrite",
+  "prompt": "Rewrite in the passive, starting with 'The results': 'The school will announce the results on Monday.'",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses will be announced",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Keeps 'on Monday'",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "The results will be announced on Monday.",
+   "The results will be announced by the school on Monday."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bwill be announced\\b",
+    "note": "the passive needs will be announced"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.pas.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The results will be announced on Monday."
+   },
+   {
+    "id": "sht.pas.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The results will announced on Monday."
+   },
+   {
+    "id": "sht.pas.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The results are announced on Monday."
+   }
+  ],
+  "addresses": [
+   "missing_be"
+  ],
+  "step": "other_tenses",
+  "rationale": "Forms a future passive.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.mod.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.modals",
+  "format": "short:complete",
+  "prompt": "Your friend has a toothache. Give advice in one sentence using should.",
+  "a": 1.3,
+  "b": 4.25,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses should with a bare verb (no to)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "The advice suits a toothache",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "You should see a dentist today."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bshould\\b",
+    "forbids": "\\bshould to\\b",
+    "note": "should takes a verb without to"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.mod.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "You should see a dentist today."
+   },
+   {
+    "id": "sht.mod.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "You should to see a dentist."
+   },
+   {
+    "id": "sht.mod.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "You should eat more sweets."
+   }
+  ],
+  "addresses": [
+   "modal_plus_to"
+  ],
+  "step": "obligation_advice",
+  "rationale": "Produces should for advice, with the bare infinitive.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.mod.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.modals",
+  "format": "short:explain",
+  "prompt": "Explain the difference in one or two sentences: 'You mustn't bring your phone' and 'You don't have to bring your phone'.",
+  "a": 1.3,
+  "b": 6.25,
+  "max_words": 35,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "mustn't means it is not allowed",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "don't have to means it is not necessary (you may choose)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Mustn't means you are not allowed to bring it; don't have to means it is not necessary, but you can if you want."
+  ],
+  "anchors": [
+   {
+    "id": "sht.mod.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Mustn't means you are not allowed to bring it; don't have to means it isn't necessary."
+   },
+   {
+    "id": "sht.mod.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "They both mean you cannot bring your phone."
+   },
+   {
+    "id": "sht.mod.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Mustn't means it's forbidden. Don't have to means you can choose."
+   }
+  ],
+  "addresses": [
+   "mustnt_dont_have_to"
+  ],
+  "step": "mustnt_dont_have_to",
+  "rationale": "Explains a meaning contrast in words; only an evaluator can judge it.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.wch.01",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "short:rewrite",
+  "prompt": "Rewrite the sentence, replacing 'nice' and 'went' with more precise words: 'We had a nice day and went home.'",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Replaces nice with a more precise adjective",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Replaces went with a more precise verb",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "We had a relaxing day and strolled home.",
+   "We had a sunny day and hurried home."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "forbids": "\\bnice\\b",
+    "note": "nice must be replaced"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "forbids": "\\bwent\\b",
+    "note": "went must be replaced"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.wch.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "We had a wonderful day and wandered home."
+   },
+   {
+    "id": "sht.wch.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "We had a good day and went home."
+   },
+   {
+    "id": "sht.wch.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "We had an exciting day and went home."
+   }
+  ],
+  "addresses": [
+   "vague_word"
+  ],
+  "step": "precise_replacement",
+  "rationale": "Produces precise replacements; code can only check that the general words are gone.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.wch.02",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "short:rewrite",
+  "prompt": "Make this sentence from a science report precise: 'The water got really hot after a while.'",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Gives a measured temperature",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Gives a measured time",
+    "required": true
+   },
+   {
+    "id": "kp3",
+    "text": "Leaves out informal words (got, really)",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "The water reached 80 °C after 5 minutes."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\d",
+    "note": "a temperature needs a number"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "\\d+\\s*(seconds?|minutes?|mins?|hours?)\\b",
+    "note": "a time needs a number and a unit"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.wch.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true,
+     "kp3": true
+    },
+    "text": "The temperature of the water rose to 95 °C after 8 minutes."
+   },
+   {
+    "id": "sht.wch.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false,
+     "kp3": false
+    },
+    "text": "The water got very hot after some time."
+   },
+   {
+    "id": "sht.wch.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true,
+     "kp3": true
+    },
+    "text": "The water became hot after 4 minutes."
+   }
+  ],
+  "addresses": [
+   "vague_word"
+  ],
+  "step": "precise_purpose",
+  "rationale": "Precise wording for a report; code checks only that numbers are present.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.aca.01",
+  "version": 1,
+  "target": "EN.VOC.BRD.academic",
+  "format": "short:complete",
+  "prompt": "Use the word 'result' in one sentence about a science experiment.",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 20,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses result to mean what happened at the end of the experiment",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Writes a complete sentence",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "The result of our experiment showed that plants need light."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bresults?\\b",
+    "note": "the word result must be used"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.aca.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The result of our experiment showed that plants need light."
+   },
+   {
+    "id": "sht.aca.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "I result the experiment."
+   },
+   {
+    "id": "sht.aca.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The result was that the ice melted faster in the sun."
+   }
+  ],
+  "addresses": [
+   "everyday_sense"
+  ],
+  "step": "cross_subject",
+  "rationale": "Uses an academic word in its subject sense, in the learner's own sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sim.01",
+  "version": 1,
+  "target": "EN.VOC.FIG.similes_metaphors",
+  "format": "short:explain",
+  "prompt": "'The classroom was an oven.' Explain in one sentence what this metaphor means.",
+  "a": 1.3,
+  "b": 4.25,
+  "max_words": 25,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Says the classroom was very hot",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Shows it is a comparison, not a real oven",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "It means the classroom was extremely hot, like the inside of an oven."
+  ],
+  "anchors": [
+   {
+    "id": "sht.sim.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "It means the classroom was extremely hot, like the inside of an oven."
+   },
+   {
+    "id": "sht.sim.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "The classroom had an oven in it for cooking."
+   },
+   {
+    "id": "sht.sim.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "It was really hot in the classroom."
+   }
+  ],
+  "addresses": [
+   "literal_reading"
+  ],
+  "step": "what_compared",
+  "rationale": "Explains a simple metaphor in words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sim.02",
+  "version": 1,
+  "target": "EN.VOC.FIG.similes_metaphors",
+  "format": "short:explain",
+  "prompt": "'Her words were a warm blanket.' What does this suggest about how the listener felt? Answer in one or two sentences.",
+  "a": 1.3,
+  "b": 6.0,
+  "max_words": 35,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "The listener felt comforted, safe or calmer",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Links this to what a warm blanket does",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "The listener felt comforted and safe, because her kind words made them feel the way a warm blanket does."
+  ],
+  "anchors": [
+   {
+    "id": "sht.sim.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The listener felt comforted and safe, as if wrapped in something warm."
+   },
+   {
+    "id": "sht.sim.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "She gave the listener a blanket because it was cold."
+   },
+   {
+    "id": "sht.sim.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "They felt better and less worried."
+   }
+  ],
+  "addresses": [
+   "literal_reading"
+  ],
+  "step": "less_familiar",
+  "rationale": "Interprets the feeling a less familiar metaphor creates.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sub.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "short:combine",
+  "prompt": "Join the two sentences with although: 'It was raining. We played outside.'",
+  "a": 1.3,
+  "b": 3.5,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses although to join the contrast",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Keeps both ideas, with no extra but",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Although it was raining, we played outside.",
+   "We played outside although it was raining."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\balthough\\b",
+    "note": "although must be used"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "forbids": "\\balthough\\b[^.]*\\bbut\\b",
+    "note": "although and but together double the link"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.sub.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Although it was raining, we played outside."
+   },
+   {
+    "id": "sht.sub.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Although it was raining, but we played outside."
+   },
+   {
+    "id": "sht.sub.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "It was raining, so we played outside."
+   }
+  ],
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "step": "unless_although_simple",
+  "rationale": "Joins a contrast with although, produced.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sub.02",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "short:complete",
+  "prompt": "Finish the sentence with a precaution: 'Take a torch in case ...'",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Gives something that might happen",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Uses a present-tense clause after in case (not will)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Take a torch in case the power goes off.",
+   "Take a torch in case it gets dark before we come back."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp2",
+    "forbids": "in case[^.]*\\bwill\\b",
+    "note": "in case takes the present, not will"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.sub.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Take a torch in case the power goes off."
+   },
+   {
+    "id": "sht.sub.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Take a torch in case the lights will go out."
+   },
+   {
+    "id": "sht.sub.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Take a torch in case so you can see."
+   }
+  ],
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "step": "purpose_precaution",
+  "rationale": "Completes a precaution clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.run.01",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "short:rewrite",
+  "prompt": "Fix this run-on sentence: 'The bus was late, we missed the start of the film.'",
+  "a": 1.3,
+  "b": 5.25,
+  "max_words": 20,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Separates or properly joins the two clauses (full stop, semicolon or a joining word)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Keeps both ideas",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "The bus was late, so we missed the start of the film.",
+   "The bus was late. We missed the start of the film.",
+   "Because the bus was late, we missed the start of the film."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "forbids": "^\\s*the bus was late, we\\b",
+    "note": "the comma splice is still there"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.run.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The bus was late, so we missed the start of the film."
+   },
+   {
+    "id": "sht.run.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The bus was late, we missed the start of the film."
+   },
+   {
+    "id": "sht.run.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "The bus was late; we missed the start of the film."
+   }
+  ],
+  "addresses": [
+   "comma_splice"
+  ],
+  "step": "repair",
+  "rationale": "Repairs a comma splice in the learner's own words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.coo.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "short:combine",
+  "prompt": "Join with the best joining word: 'I was hungry. There was no food in the house.'",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Uses but (or yet) to show the contrast",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "I was hungry, but there was no food in the house."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\b(but|yet)\\b",
+    "note": "a contrast needs but or yet"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.coo.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true
+    },
+    "text": "I was hungry, but there was no food in the house."
+   },
+   {
+    "id": "sht.coo.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false
+    },
+    "text": "I was hungry, so there was no food in the house."
+   },
+   {
+    "id": "sht.coo.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true
+    },
+    "text": "I was hungry but there was no food."
+   }
+  ],
+  "addresses": [
+   "wrong_coordinator"
+  ],
+  "step": "and_but_or_so",
+  "rationale": "Chooses and writes a contrast coordinator.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.emb.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.embedding",
+  "format": "short:combine",
+  "prompt": "Combine into one sentence starting with 'Hearing the bell': 'Arun heard the bell. Arun ran to the gate.'",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Starts with Hearing the bell",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "The subject straight after the phrase is Arun (or he), so it does not dangle",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Hearing the bell, Arun ran to the gate."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "^\\s*hearing the bell\\b",
+    "note": "must start with Hearing the bell"
+   },
+   {
+    "id": "g2",
+    "key_point": "kp2",
+    "requires": "^\\s*hearing the bell,?\\s*(arun|he)\\b(?!')",
+    "note": "the subject after the phrase must be Arun or he"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.emb.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Hearing the bell, Arun ran to the gate."
+   },
+   {
+    "id": "sht.emb.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Hearing the bell, the gate was where Arun ran."
+   },
+   {
+    "id": "sht.emb.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Hearing the bell, Arun's bag fell off."
+   }
+  ],
+  "addresses": [
+   "dangling_participle"
+  ],
+  "step": "participle",
+  "rationale": "Produces a participle opening that attaches to the right subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.cnx.01",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "short:complete",
+  "prompt": "Write a second sentence beginning with 'As a result' that follows from: 'Heavy rain flooded the main road.'",
+  "a": 1.3,
+  "b": 5.25,
+  "max_words": 20,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Begins with As a result",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Gives a sensible consequence of the flooding",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "As a result, the school buses could not run."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\bas a result\\b",
+    "note": "must begin with As a result"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.cnx.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "As a result, the school buses could not run."
+   },
+   {
+    "id": "sht.cnx.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "As a result, it rained heavily."
+   },
+   {
+    "id": "sht.cnx.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "However, the buses could not run."
+   }
+  ],
+  "addresses": [
+   "wrong_connective"
+  ],
+  "step": "exact_relationship",
+  "rationale": "Writes a result sentence that fits the connective.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.frg.01",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "short:rewrite",
+  "prompt": "Fix this so it is one complete sentence: 'We stayed inside. Because it was raining.'",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Joins the because-clause to the main clause",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "We stayed inside because it was raining.",
+   "Because it was raining, we stayed inside."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "forbids": "\\.\\s*because\\b",
+    "note": "the because-clause is still on its own"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.frg.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true
+    },
+    "text": "We stayed inside because it was raining."
+   },
+   {
+    "id": "sht.frg.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false
+    },
+    "text": "We stayed inside. Because it was raining."
+   },
+   {
+    "id": "sht.frg.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true
+    },
+    "text": "Because it was raining, we stayed inside."
+   }
+  ],
+  "addresses": [
+   "subordinate_fragment"
+  ],
+  "step": "obvious_fragments",
+  "rationale": "Repairs a subordinate-clause fragment.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.reg.01",
+  "version": 1,
+  "target": "EN.WRT.STY.register",
+  "format": "short:rewrite",
+  "prompt": "Rewrite this message for your head teacher: 'Hey! Can u let our class go on a trip pls?'",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 25,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Makes a polite, formal request (for example, Could you … or I would like to ask …)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Removes text-speak and slang (Hey, u, pls)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Could you please allow our class to go on a trip?",
+   "I would like to ask whether our class may go on a trip."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp2",
+    "forbids": "\\b(u|pls|plz|hey)\\b",
+    "note": "text-speak or slang remains"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.reg.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Could you please allow our class to go on a trip?"
+   },
+   {
+    "id": "sht.reg.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Hey, could u let our class go on a trip please?"
+   },
+   {
+    "id": "sht.reg.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "Our class wants a trip."
+   }
+  ],
+  "addresses": [
+   "text_speak"
+  ],
+  "step": "some_changes",
+  "rationale": "Changes register for an adult reader, in the learner's own words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.reg.02",
+  "version": 1,
+  "target": "EN.WRT.STY.register",
+  "format": "short:rewrite",
+  "prompt": "Rewrite this sentence from a formal letter of complaint so that it keeps a formal register: 'Your shop sold me a rubbish phone and I'm well annoyed.'",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 30,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "States the problem formally (for example, a faulty phone)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Expresses displeasure formally (for example, I am disappointed)",
+    "required": true
+   },
+   {
+    "id": "kp3",
+    "text": "No slang (rubbish, well annoyed)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "I am writing to complain that the phone I bought from your shop is faulty, and I am very disappointed."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp3",
+    "forbids": "\\b(rubbish|well annoyed)\\b",
+    "note": "slang remains"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.reg.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true,
+     "kp3": true
+    },
+    "text": "The phone I purchased from your store is defective, and I am dissatisfied with the service."
+   },
+   {
+    "id": "sht.reg.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false,
+     "kp3": false
+    },
+    "text": "Your shop sold me a faulty phone and I'm well annoyed."
+   },
+   {
+    "id": "sht.reg.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true,
+     "kp3": true
+    },
+    "text": "I am writing to complain that the phone I bought is faulty, and I am disappointed."
+   }
+  ],
+  "addresses": [
+   "register_mix"
+  ],
+  "step": "consistent",
+  "rationale": "Keeps a formal register throughout one sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.idv.01",
+  "version": 1,
+  "target": "EN.WRT.TSK.idea_development",
+  "format": "short:complete",
+  "prompt": "Add one sentence that gives a reason or an example for this idea: 'Our school should have a garden.'",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 25,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Gives a relevant reason or example",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Students could grow vegetables and learn how plants grow."
+  ],
+  "anchors": [
+   {
+    "id": "sht.idv.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true
+    },
+    "text": "Students could grow vegetables and learn how plants grow."
+   },
+   {
+    "id": "sht.idv.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false
+    },
+    "text": "My uncle has a red car."
+   },
+   {
+    "id": "sht.idv.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true
+    },
+    "text": "It would give us a cool, green place to read at lunchtime."
+   }
+  ],
+  "addresses": [
+   "irrelevant_detail"
+  ],
+  "step": "reason_example",
+  "rationale": "Develops an idea with one relevant reason; relevance can only be judged by reading.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.idv.02",
+  "version": 1,
+  "target": "EN.WRT.TSK.idea_development",
+  "format": "short:complete",
+  "prompt": "Develop this point in two sentences, explaining why it matters: 'Libraries are important.'",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 40,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Gives a specific reason, not a repeat of the point",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Explains the effect or importance of that reason",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Libraries give free books to families who cannot buy them. This means every child can read widely, whatever their family can afford."
+  ],
+  "anchors": [
+   {
+    "id": "sht.idv.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Libraries give free books to families who cannot buy them. This means every child can read widely."
+   },
+   {
+    "id": "sht.idv.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Libraries are very important. Everyone needs libraries."
+   },
+   {
+    "id": "sht.idv.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Libraries let students borrow books for free."
+   }
+  ],
+  "addresses": [
+   "listing_without_development"
+  ],
+  "step": "relevant_development",
+  "rationale": "Develops a point with a reason and its consequence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.per.01",
+  "version": 1,
+  "target": "EN.WRT.GEN.persuasive",
+  "format": "short:complete",
+  "prompt": "Write one or two sentences persuading your principal to allow a longer lunch break. Give a reason.",
+  "a": 1.3,
+  "b": 3.75,
+  "max_words": 40,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "States the position (a longer lunch break)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Gives a relevant reason",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Please allow a longer lunch break, because students need time to eat properly and rest before afternoon lessons."
+  ],
+  "anchors": [
+   {
+    "id": "sht.per.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Please allow a longer lunch break, because students need time to eat properly and rest."
+   },
+   {
+    "id": "sht.per.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "I like lunch."
+   },
+   {
+    "id": "sht.per.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "We should have a longer lunch break."
+   }
+  ],
+  "addresses": [
+   "opinion_without_reasons"
+  ],
+  "step": "opinion_reasons",
+  "rationale": "States a position with a supporting reason.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.per.02",
+  "version": 1,
+  "target": "EN.WRT.GEN.persuasive",
+  "format": "short:complete",
+  "prompt": "Write one or two sentences that answer this counter-argument: 'A longer school day would make students too tired.'",
+  "a": 1.3,
+  "b": 7.25,
+  "max_words": 45,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Acknowledges the concern",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Gives a reason or evidence that answers it",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "It is true that a longer day could be tiring; however, if the extra time is used for sport and clubs, students may go home more refreshed."
+  ],
+  "anchors": [
+   {
+    "id": "sht.per.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "It is true that a longer day could be tiring; however, if the extra hour is for sport, students may feel more refreshed."
+   },
+   {
+    "id": "sht.per.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "That is wrong because it is wrong."
+   },
+   {
+    "id": "sht.per.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "Students would not be tired, because the extra hour would be for games, not lessons."
+   }
+  ],
+  "addresses": [
+   "ignores_other_side"
+  ],
+  "step": "counter_language",
+  "rationale": "Concedes and rebuts in one or two sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.fun.01",
+  "version": 1,
+  "target": "EN.WRT.GEN.functional",
+  "format": "short:complete",
+  "prompt": "Write only the greeting and the closing of a short email to your cousin Anu, on two lines.",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 12,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "An informal greeting addressed to Anu",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "An informal closing",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Hi Anu,\nLove, Ravi"
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\banu\\b",
+    "note": "the greeting must name Anu"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.fun.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Hi Anu,\nSee you soon, Ravi"
+   },
+   {
+    "id": "sht.fun.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Dear Sir or Madam,\nYours faithfully, Ravi"
+   },
+   {
+    "id": "sht.fun.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Hi Anu,\nYours faithfully, Ravi Kumar"
+   }
+  ],
+  "addresses": [
+   "missing_conventions"
+  ],
+  "step": "informal_conventions",
+  "rationale": "Produces informal email conventions.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.fun.02",
+  "version": 1,
+  "target": "EN.WRT.GEN.functional",
+  "format": "short:complete",
+  "prompt": "Write a subject line for a formal letter to the Municipal Commissioner about broken street lights in your colony.",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 15,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Names the problem (broken street lights)",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "States the purpose formally (for example, Request to repair …, Complaint regarding …)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Subject: Request to repair broken street lights in Lake View Colony"
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "street ?lights?",
+    "note": "the problem must be named"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.fun.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Subject: Request to repair broken street lights in Lake View Colony"
+   },
+   {
+    "id": "sht.fun.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Lights!!!"
+   },
+   {
+    "id": "sht.fun.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Subject: Complaint regarding non-functional street lights"
+   }
+  ],
+  "addresses": [
+   "informal_in_formal"
+  ],
+  "step": "formal_layout",
+  "rationale": "Writes a precise, formal subject line.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.cau.01",
+  "version": 1,
+  "target": "EN.RDG.INF.cause_effect",
+  "format": "short:explain",
+  "prompt": "Why did Meena lose her kite? Answer in one sentence.",
+  "passage": "rdg.p1",
+  "a": 1.3,
+  "b": 3.5,
+  "max_words": 20,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "The string snapped (broke)",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "She lost it because the string snapped in the strong wind."
+  ],
+  "guards": [
+   {
+    "id": "g1",
+    "key_point": "kp1",
+    "requires": "\\b(snap|snapped|broke|broken|break|cut)\\b",
+    "note": "the answer must say the string broke"
+   }
+  ],
+  "anchors": [
+   {
+    "id": "sht.cau.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true
+    },
+    "text": "She lost it because the string snapped in the strong wind."
+   },
+   {
+    "id": "sht.cau.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false
+    },
+    "text": "Her brother took it."
+   },
+   {
+    "id": "sht.cau.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true
+    },
+    "text": "The string broke and the kite flew away."
+   }
+  ],
+  "addresses": [
+   "sequence_as_cause"
+  ],
+  "step": "different_sentences",
+  "rationale": "States a cause given in a different sentence, in the learner's words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.cau.02",
+  "version": 1,
+  "target": "EN.RDG.INF.cause_effect",
+  "format": "short:explain",
+  "prompt": "Why did everyone say that Lakshmi the goat had been cleverer than all of them? Answer in one or two sentences.",
+  "passage": "rdg.p9",
+  "a": 1.3,
+  "b": 5.75,
+  "max_words": 35,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "She refused to stay in her shed",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "The shed was blown away, so she was safe",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Because she refused to stay in her shed, and in the morning the shed had been blown away, so she was safe."
+  ],
+  "anchors": [
+   {
+    "id": "sht.cau.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Because she refused to stay in her shed, and in the morning the shed had blown away."
+   },
+   {
+    "id": "sht.cau.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Because she could open doors."
+   },
+   {
+    "id": "sht.cau.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": true
+    },
+    "text": "The shed was carried away by the wind."
+   }
+  ],
+  "addresses": [
+   "sequence_as_cause"
+  ],
+  "step": "inferred",
+  "rationale": "Links two facts into an inferred cause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.mot.01",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "short:explain",
+  "prompt": "Why did Kiran take a deep breath instead of shouting at Dev? Answer in one or two sentences.",
+  "passage": "rdg.p5",
+  "a": 1.3,
+  "b": 4.0,
+  "max_words": 35,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "She saw that Dev was sorry or upset",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "She chose to stay calm so as not to upset him more",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "She saw how sorry Dev was, so she decided to stay calm instead of making him feel worse."
+  ],
+  "anchors": [
+   {
+    "id": "sht.mot.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "She saw how sorry Dev was, so she decided to stay calm."
+   },
+   {
+    "id": "sht.mot.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "She was tired from making the volcano."
+   },
+   {
+    "id": "sht.mot.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "Because Dev was crying and said sorry."
+   }
+  ],
+  "addresses": [
+   "literal_only"
+  ],
+  "step": "from_actions",
+  "rationale": "Infers a motive from actions, in the learner's words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.mot.02",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "short:explain",
+  "prompt": "Why does Mr. Iyer put down his pen and look at Kavya for the first time? Answer in one or two sentences.",
+  "passage": "rdg.p3",
+  "a": 1.3,
+  "b": 7.25,
+  "max_words": 40,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Her honest, unexpected answer surprised or interested him",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "It was not the safe, rehearsed answer he expected",
+    "required": false
+   }
+  ],
+  "model_answers": [
+   "Her honest answer about wanting the magazine to be braver surprised him, because it was not the safe, rehearsed answer he expected."
+  ],
+  "anchors": [
+   {
+    "id": "sht.mot.02.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true
+    },
+    "text": "Her honest answer surprised him, because it was not the safe answer he expected."
+   },
+   {
+    "id": "sht.mot.02.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false
+    },
+    "text": "Because he had finished writing."
+   },
+   {
+    "id": "sht.mot.02.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": false
+    },
+    "text": "He was interested in what she said about the magazine."
+   }
+  ],
+  "addresses": [
+   "literal_only"
+  ],
+  "step": "subtle",
+  "rationale": "Infers a subtle change in a character from one action.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "short",
+  "id": "sht.sum.01",
+  "version": 1,
+  "target": "EN.RDG.SUM.summarise",
+  "format": "short:explain",
+  "prompt": "Summarise 'Why Do Cities Get Hotter?' in one or two sentences.",
+  "passage": "rdg.p2",
+  "a": 1.3,
+  "b": 5.5,
+  "max_words": 45,
+  "key_points": [
+   {
+    "id": "kp1",
+    "text": "Cities are hotter than the countryside",
+    "required": true
+   },
+   {
+    "id": "kp2",
+    "text": "Gives the main causes (dark surfaces, fewer plants, heat from machines)",
+    "required": true
+   },
+   {
+    "id": "kp3",
+    "text": "Says cities are trying to cool down",
+    "required": true
+   }
+  ],
+  "model_answers": [
+   "Cities are hotter than the countryside because of dark surfaces, fewer plants and heat from machines, and some cities are now trying to cool down."
+  ],
+  "anchors": [
+   {
+    "id": "sht.sum.01.a1",
+    "trusted": false,
+    "set": "prompt",
+    "marks": {
+     "kp1": true,
+     "kp2": true,
+     "kp3": true
+    },
+    "text": "Cities are hotter than the countryside because of dark roads, fewer plants and machines, and some are trying to cool down."
+   },
+   {
+    "id": "sht.sum.01.a2",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": false,
+     "kp2": false,
+     "kp3": false
+    },
+    "text": "Singapore has gardens on its roofs."
+   },
+   {
+    "id": "sht.sum.01.a3",
+    "trusted": false,
+    "set": "qualification",
+    "marks": {
+     "kp1": true,
+     "kp2": true,
+     "kp3": false
+    },
+    "text": "Cities are hotter because roads are dark and there are fewer trees."
+   }
+  ],
+  "addresses": [
+   "partial_summary"
+  ],
+  "step": "key_points",
+  "rationale": "Condenses a three-paragraph text into its key points.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ }
+]

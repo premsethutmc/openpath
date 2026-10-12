@@ -60,7 +60,7 @@ test("0.1.0 stays frozen; from E2b the runtime runs 0.2.0, and each version sees
   const v1 = loadContext({ framework: "0.1.0" });
   const skeleton = new Set([...v1.index.leaves.values()].filter((c) => c.tier === "skeleton").map((c) => c.id));
   for (const i of v1.content.items.values()) {
-    const caps = i.kind === "code" ? [i.target] : [...i.targets, ...i.secondary];
+    const caps = i.kind === "writing" ? [...i.targets, ...i.secondary] : [i.target];
     assert.ok(caps.every((c) => skeleton.has(c)), `${i.id} is visible to 0.1.0 only if 0.1.0 specifies its capabilities`);
   }
 });

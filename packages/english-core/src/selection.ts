@@ -27,7 +27,7 @@
  * same choice (ties are broken by item or capability id).
  */
 import { type LeafView, leafView } from "./composite.ts";
-import { type ContentIndex, familyOf, goalWeights, itemParams, targetsOf } from "./content.ts";
+import { type ContentIndex, binaryParams, familyOf, goalWeights, itemParams, targetsOf } from "./content.ts";
 import type { FrameworkIndex } from "./framework.ts";
 import { daysBetween, itemInformation, logistic, normalQuantile, pCorrect } from "./model.ts";
 import type { CapabilityId, Composite, Exposure, Goal, Item } from "./types.ts";
@@ -122,6 +122,11 @@ export interface SelectionInput {
   writingThisSession: number;
   /** Is an evaluator available for written answers right now (online, consented)? */
   writingAvailable: boolean;
+  /**
+   * Is an evaluator available for short written answers (E3)? Off unless set, so callers written before
+   * E3 (the frozen simulation, the demonstration) never see them.
+   */
+  shortAvailable?: boolean;
   /** Limit candidates to these items (used by experiments). */
   only?: Set<string>;
   /** "assessment" or "learning" force one mode (for testing); "hybrid" (default) uses the scheduler. */
@@ -182,13 +187,15 @@ export function defaultTarget(views: Map<string, LeafView>, weights: Map<string,
 }
 
 function predicted(item: Item, v: LeafView): number {
-  return item.kind === "code" ? pCorrect(v.mean, itemParams(item)) : logistic(v.mean - item.b);
+  const p = binaryParams(item);
+  return p ? pCorrect(v.mean, p) : logistic(v.mean - item.b);
 }
 
 /** Share of the current uncertainty (variance) about a capability that this item is expected to remove. */
 export function relativeInformation(item: Item, v: LeafView): number {
   const variance = v.sd * v.sd;
-  if (item.kind === "code") return 1 - 1 / (1 + variance * itemInformation(v.mean, itemParams(item)));
+  const p = binaryParams(item);
+  if (p) return 1 - 1 / (1 + variance * itemInformation(v.mean, p));
   return variance / (variance + WRITING_NOISE ** 2);
 }
 
@@ -216,6 +223,8 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   // Every item the learner could do now; `available` keeps those that serve the goal.
   const pool = [...content.items.values()].filter((item) => {
     if (input.seen.has(item.id) || (input.only && !input.only.has(item.id))) return false;
+    // short written answers need an evaluator too; they are offered only when the caller says one is available
+    if (item.kind === "short") return !!input.shortAvailable;
     return !(item.kind === "writing" && (!input.writingAvailable || input.writingThisSession >= 1));
   });
   const available = pool.filter((item) => targetsOf(item).some((t) => (weights.get(t) ?? 0) > 0 && views.get(t)!.specified));
