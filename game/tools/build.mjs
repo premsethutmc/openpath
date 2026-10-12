@@ -18,7 +18,7 @@ const css = readFileSync(join(root, "src/shell.css"), "utf8");
 const shell = readFileSync(join(root, "src/shell.html"), "utf8");
 const PIXI_FILE = "pixi-7.4.2.min.js";
 const fonts = `<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@600;800&family=Mukta+Malar:wght@400;600&display=swap" rel="stylesheet">`;
-const title = "Amma at Home";
+const title = "Amma's Home Scene";
 
 const mime = { webp: "image/webp", wav: "audio/wav" };
 const assets = {};
