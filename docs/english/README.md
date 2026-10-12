@@ -1,7 +1,9 @@
 # OpenPath English (ages 10–15): audit and plan
 
-*12 October 2026. Planning documents only. **Nothing here is implemented, and
-nothing will be until you approve the plan.***
+*12 October 2026. These began as planning documents. **E1 is implemented and
+merged** ([`E1_REPORT.md`](E1_REPORT.md)). The E2 scope was approved with
+decisions on 12 October (PR #7); E2a is reported in
+[`E2A_REPORT.md`](E2A_REPORT.md).*
 
 | Label | Meaning |
 |---|---|
@@ -25,6 +27,10 @@ nothing will be until you approve the plan.***
    activity selection and the ten-learner simulation.
 6. [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md): milestones, the
    end-to-end demonstration, acceptance tests and open decisions.
+7. [`E1_REPORT.md`](E1_REPORT.md): what E1 built, its acceptance results and
+   its known limitations.
+8. [`E2A_REPORT.md`](E2A_REPORT.md): what E2a built, its coverage gaps and
+   simulation results.
 
 ---
 
