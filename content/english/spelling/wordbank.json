@@ -44,15 +44,20 @@
    "exceptions": 7.5
   },
   "EN.FND.SPL.homophones": {
-   "common_pairs": 2.0,
-   "less_common": 5.25
+   "common_pairs": 1.75,
+   "there_their": 3.25,
+   "its_its": 4.25,
+   "less_common": 5.5,
+   "near_homophones": 6.5,
+   "demanding": 7.5
   },
   "EN.FND.SPL.morphological": {
-   "plain_affix": 2.0,
+   "plain_affix": 1.75,
    "double_at_join": 3.5,
-   "ful_ly_ment": 4.5,
+   "ful_ly_ment": 4.25,
    "able_ible": 5.5,
-   "tion_sion": 6.0
+   "tion_sion": 6.25,
+   "roots_rare": 7.5
   }
  },
  "counts": {

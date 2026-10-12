@@ -77,12 +77,11 @@ SOURCES = [
     },
 ]
 
-# Difficulty ladders (content/english/items/progressions.json): the band of each step.
-LADDER = {
-    "EN.FND.SPL.inflections": {"plain": 1.5, "es_plural": 2.5, "double_short": 3.0, "drop_e": 3.5, "y_to_i": 4.25, "stress_doubling": 5.75, "no_double_unstressed": 6.25, "exceptions": 7.5},
-    "EN.FND.SPL.homophones": {"common_pairs": 2.0, "less_common": 5.25},
-    "EN.FND.SPL.morphological": {"plain_affix": 2.0, "double_at_join": 3.5, "ful_ly_ment": 4.5, "able_ible": 5.5, "tion_sion": 6.0},
-}
+# Difficulty ladders (content/english/items/progressions.json): the band of each step, read from the
+# same file the hand-written items use, so generated and hand-written items sit on one ladder.
+SPELLING_CAPS = ("EN.FND.SPL.inflections", "EN.FND.SPL.homophones", "EN.FND.SPL.morphological")
+_PROGRESSIONS = json.loads((REPO / "content" / "english" / "items" / "progressions.json").read_text())["capabilities"]
+LADDER = {c: {s["id"]: s["band"] for s in _PROGRESSIONS[c]["steps"]} for c in SPELLING_CAPS}
 PER_STEP = 60  # at most this many words per step, the commonest first
 SIZES = (10, 20, 35)
 VOWELS = set("aeiou")
