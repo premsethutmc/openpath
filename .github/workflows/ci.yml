@@ -197,10 +197,12 @@ jobs:
         run: npm ci
       - name: Frozen framework versions are unchanged
         run: node tools/english/lock.ts --check
+      - name: Item bank checks (content, coverage gates, recorded gaps)
+        run: node tools/english/bank/main.ts | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .
-      - name: Acceptance tests (E1-1 to E1-13)
+      - name: Acceptance tests (E1 and E2a)
         working-directory: packages/english-core
         run: |
           npm test 2>&1 | tee test.log
@@ -214,5 +216,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: english-simulation-report
-          path: tools/english/out/simulation-*
+          path: |
+            tools/english/out/simulation-*
+            tools/english/out/bank-coverage.*
           if-no-files-found: ignore

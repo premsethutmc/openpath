@@ -11,7 +11,10 @@
   "answers": [
    "playing"
   ],
-  "review": "draft-unreviewed"
+  "step": "plain",
+  "rationale": "Adds -ing to a familiar verb with no change to the base.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -31,7 +34,11 @@
   "addresses": [
    "no_doubling"
   ],
-  "review": "draft-unreviewed"
+  "step": "double_short",
+  "rationale": "Doubles the final consonant of a short one-syllable verb (swim → swimming).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.infl.double"
  },
  {
   "kind": "code",
@@ -51,7 +58,10 @@
   "addresses": [
    "kept_silent_e"
   ],
-  "review": "draft-unreviewed"
+  "step": "drop_e",
+  "rationale": "Drops a silent e before -ing on a familiar verb (make → making).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -71,7 +81,11 @@
   "addresses": [
    "y_not_changed"
   ],
-  "review": "draft-unreviewed"
+  "step": "y_to_i",
+  "rationale": "Changes y to i before -ed after a consonant (carry → carried).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.infl.ytoi"
  },
  {
   "kind": "code",
@@ -91,7 +105,11 @@
   "addresses": [
    "no_doubling"
   ],
-  "review": "draft-unreviewed"
+  "step": "stress_doubling",
+  "rationale": "Two-syllable verb stressed on the last syllable doubles (begin → beginning).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.infl.stress"
  },
  {
   "kind": "code",
@@ -111,7 +129,11 @@
   "addresses": [
    "over_doubling"
   ],
-  "review": "draft-unreviewed"
+  "step": "no_double_unstressed",
+  "rationale": "Two-syllable verb stressed on the first syllable does not double; the over-doubling trap (visit → visited).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.infl.unstressed"
  },
  {
   "kind": "code",
@@ -133,7 +155,10 @@
    "0": "kept_silent_e",
    "1": "over_doubling"
   },
-  "review": "draft-unreviewed"
+  "step": "drop_e",
+  "rationale": "Recognises the silent-e rule among tempting spellings (hoping, not hopeing or hopping); choosing is a little easier than typing.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -157,7 +182,10 @@
   "addresses": [
    "y_not_changed"
   ],
-  "review": "draft-unreviewed"
+  "step": "y_to_i",
+  "rationale": "y to i before -est on an adjective, with plausible distractors.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -181,7 +209,10 @@
   "addresses": [
    "no_doubling"
   ],
-  "review": "draft-unreviewed"
+  "step": "stress_doubling",
+  "rationale": "Stress-dependent doubling in a less common verb (occur → occurred), with a near-miss distractor.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -199,7 +230,10 @@
    "very cold"
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "very_common",
+  "rationale": "A very common feeling word; distractors are clearly different.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -217,7 +251,10 @@
    "to take something and give it back later"
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "everyday_2k",
+  "rationale": "A common everyday verb; distractors are related actions, so the exact meaning is needed.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -235,7 +272,10 @@
    "very large"
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "everyday_3k",
+  "rationale": "An everyday-text adjective; distractors are other 'very …' qualities.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -253,7 +293,10 @@
    "unknown"
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "less_frequent",
+  "rationale": "A less frequent adjective from secondary reading; distractors share its un- shape.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -271,7 +314,10 @@
    "full of energy"
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "secondary",
+  "rationale": "A secondary-level word for a precise quality (care about details).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -289,7 +335,10 @@
    "lasting a very short time"
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "low_frequency",
+  "rationale": "A low-frequency literary word.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -310,7 +359,10 @@
   "distractor_tags": {
    "0": "sound_alike_confusion"
   },
-  "review": "draft-unreviewed"
+  "step": "everyday_2k",
+  "rationale": "A common adjective in a sentence, against a sound-alike (wild) and a word-class trap (width).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -331,7 +383,10 @@
   "distractor_tags": {
    "2": "sound_alike_confusion"
   },
-  "review": "draft-unreviewed"
+  "step": "less_frequent",
+  "rationale": "A less frequent academic noun chosen from look-alike words (hysteria, hypocrisy).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -352,7 +407,10 @@
   "distractor_tags": {
    "1": "sound_alike_confusion"
   },
-  "review": "draft-unreviewed"
+  "step": "secondary",
+  "rationale": "A secondary-level adjective chosen from look-alikes (impatient, important, imperial).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -366,7 +424,10 @@
   "answers": [
    "helpful"
   ],
-  "review": "draft-unreviewed"
+  "step": "familiar",
+  "rationale": "Adds -ful to a very familiar word where the sentence signals an adjective.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -386,7 +447,11 @@
   "addresses": [
    "wrong_word_class"
   ],
-  "review": "draft-unreviewed"
+  "step": "word_class_common",
+  "rationale": "Turns a familiar adjective into an adverb to say how something was done.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.suf.adverb"
  },
  {
   "kind": "code",
@@ -407,7 +472,10 @@
   "addresses": [
    "wrong_word_class"
   ],
-  "review": "draft-unreviewed"
+  "step": "noun_suffixes",
+  "rationale": "Forms a -ness noun after 'your'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -428,7 +496,11 @@
   "addresses": [
    "invented_derivation"
   ],
-  "review": "draft-unreviewed"
+  "step": "less_common",
+  "rationale": "Less regular noun formation (decide → decision), with an invented -ment trap.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.suf.sion"
  },
  {
   "kind": "code",
@@ -449,7 +521,10 @@
   "addresses": [
    "invented_derivation"
   ],
-  "review": "draft-unreviewed"
+  "step": "less_common",
+  "rationale": "Irregular derivation (able → ability), with an invented -ness trap.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -470,7 +545,11 @@
   "addresses": [
    "invented_derivation"
   ],
-  "review": "draft-unreviewed"
+  "step": "irregular_abstract",
+  "rationale": "Irregular, abstract derivation (maintain → maintenance), with a common misspelling trap.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.suf.irregular"
  },
  {
   "kind": "code",
@@ -493,7 +572,10 @@
    "1": "wrong_word_class",
    "2": "invented_derivation"
   },
-  "review": "draft-unreviewed"
+  "step": "word_class_common",
+  "rationale": "Chooses the adverb form of a familiar word among noun and invented forms.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -516,7 +598,10 @@
    "0": "wrong_word_class",
    "1": "wrong_word_class"
   },
-  "review": "draft-unreviewed"
+  "step": "less_common",
+  "rationale": "Chooses the noun among four forms of one word family in a longer sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -538,7 +623,10 @@
    "2": "wrong_word_class",
    "0": "invented_derivation"
   },
-  "review": "draft-unreviewed"
+  "step": "meaning_change",
+  "rationale": "Chooses an -able adjective whose meaning (can be afforded) fits the sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -556,7 +644,10 @@
    "very noisy"
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "definition_next",
+  "rationale": "The meaning is restated right after the word ('small enough to sit in my hand').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -577,7 +668,10 @@
   "distractor_tags": {
    "0": "ignores_context"
   },
-  "review": "draft-unreviewed"
+  "step": "synonym_clue",
+  "rationale": "A result clue (ate everything) in the same sentence; a near-meaning distractor (tired).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -595,7 +689,10 @@
    "very clever"
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "example_contrast",
+  "rationale": "A contrast clue ('Unlike his talkative sister') for an unfamiliar word.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -613,7 +710,10 @@
    "newly built"
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "across_sentences",
+  "rationale": "The clue after the semicolon describes an effect (it swayed); the word is low-frequency.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -631,7 +731,10 @@
    "completely wrong"
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "longer_text",
+  "rationale": "The clue is a whole situation (half the class understood yes, half no).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -655,7 +758,10 @@
   "addresses": [
    "ignores_context"
   ],
-  "review": "draft-unreviewed"
+  "step": "synonym_clue",
+  "rationale": "The clue (could hardly move) is in the same sentence; a literal distractor (wrapped).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -680,7 +786,10 @@
   "addresses": [
    "ignores_context"
   ],
-  "review": "draft-unreviewed"
+  "step": "example_contrast",
+  "rationale": "The context (an envelope) selects the right sense of a familiar word.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -704,7 +813,10 @@
   "addresses": [
    "ignores_context"
   ],
-  "review": "draft-unreviewed"
+  "step": "subtle_tone",
+  "rationale": "A contrast with 'fine words' signals a less common sense of a familiar word.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -721,7 +833,11 @@
   "wrong": {
    "a": "a_an_sound"
   },
-  "review": "draft-unreviewed"
+  "step": "a_an_letter",
+  "rationale": "a or an chosen by the first letter of a common noun.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.art.letter"
  },
  {
   "kind": "code",
@@ -735,7 +851,11 @@
   "answers": [
    "the"
   ],
-  "review": "draft-unreviewed"
+  "step": "first_mention",
+  "rationale": "Second mention: 'the' after 'a dog' in the sentence before.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.art.first"
  },
  {
   "kind": "code",
@@ -755,7 +875,11 @@
   "addresses": [
    "a_an_sound"
   ],
-  "review": "draft-unreviewed"
+  "step": "a_an_sound",
+  "rationale": "Silent h: 'an' depends on the sound, not the letter.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.art.sound"
  },
  {
   "kind": "code",
@@ -775,7 +899,10 @@
   "addresses": [
    "a_an_sound"
   ],
-  "review": "draft-unreviewed"
+  "step": "a_an_sound",
+  "rationale": "A 'you' sound takes 'a' (a university): sound, not letter.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -789,7 +916,10 @@
   "answers": [
    "the"
   ],
-  "review": "draft-unreviewed"
+  "step": "unique_the",
+  "rationale": "'the' for something unique (the sun).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -814,7 +944,10 @@
   "addresses": [
    "article_omission"
   ],
-  "review": "draft-unreviewed"
+  "step": "first_mention",
+  "rationale": "'a' before a job, which is often left out; simple distractors.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -839,7 +972,10 @@
   "addresses": [
    "article_with_uncountable"
   ],
-  "review": "draft-unreviewed"
+  "step": "zero_uncountable",
+  "rationale": "Uncountable noun: no a/an and no plural (some advice).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -861,7 +997,10 @@
    "3": "article_with_uncountable",
    "0": "article_omission"
   },
-  "review": "draft-unreviewed"
+  "step": "zero_uncountable",
+  "rationale": "An uncountable noun and a missing 'the' together in a longer sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -876,7 +1015,11 @@
    "is sleeping",
    "'s sleeping"
   ],
-  "review": "draft-unreviewed"
+  "step": "now_progressive",
+  "rationale": "Present progressive for an action happening now ('Be quiet!').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.asp.now"
  },
  {
   "kind": "code",
@@ -890,7 +1033,11 @@
   "answers": [
    "was reading"
   ],
-  "review": "draft-unreviewed"
+  "step": "past_progressive",
+  "rationale": "Past progressive for the longer action interrupted by a past simple event.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.asp.interrupted"
  },
  {
   "kind": "code",
@@ -907,7 +1054,10 @@
    "'ve lived",
    "'ve been living"
   ],
-  "review": "draft-unreviewed"
+  "step": "perfect_vs_past",
+  "rationale": "Present perfect for a situation continuing from 2019 until now.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -922,7 +1072,10 @@
    "had left",
    "had already left"
   ],
-  "review": "draft-unreviewed"
+  "step": "past_perfect",
+  "rationale": "Past perfect for an earlier past event ('By the time we arrived').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -946,7 +1099,10 @@
   "addresses": [
    "stative_progressive"
   ],
-  "review": "draft-unreviewed"
+  "step": "stative",
+  "rationale": "The stative verb 'know' is not used in the progressive.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -970,7 +1126,10 @@
   "addresses": [
    "perfect_with_finished_time"
   ],
-  "review": "draft-unreviewed"
+  "step": "perfect_vs_past",
+  "rationale": "A finished time ('yesterday') rules out the present perfect.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -988,7 +1147,10 @@
    "She has just finished her homework."
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "perfect_just",
+  "rationale": "Present perfect with 'just' and a past participle.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1006,7 +1168,11 @@
    "They have been waiting for an hour when the bus finally came."
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "perfect_progressive",
+  "rationale": "Past perfect progressive for an action continuing up to a past moment.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.asp.pastperfprog"
  },
  {
   "kind": "code",
@@ -1026,7 +1192,11 @@
   "addresses": [
    "third_person_s"
   ],
-  "review": "draft-unreviewed"
+  "step": "third_s",
+  "rationale": "Adds -s for a he/she/it subject (My brother likes).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sva.third"
  },
  {
   "kind": "code",
@@ -1040,7 +1210,11 @@
   "answers": [
    "are"
   ],
-  "review": "draft-unreviewed"
+  "step": "plural_subject",
+  "rationale": "An irregular plural subject (children) takes 'are'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sva.plural"
  },
  {
   "kind": "code",
@@ -1060,7 +1234,11 @@
   "addresses": [
    "attraction_error"
   ],
-  "review": "draft-unreviewed"
+  "step": "intervening",
+  "rationale": "An 'of' phrase between subject and verb pulls towards the wrong verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sva.of"
  },
  {
   "kind": "code",
@@ -1080,7 +1258,10 @@
   "addresses": [
    "attraction_error"
   ],
-  "review": "draft-unreviewed"
+  "step": "indefinite",
+  "rationale": "'Each of the students' takes a singular verb despite the plural noun.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1104,7 +1285,10 @@
   "addresses": [
    "third_person_s"
   ],
-  "review": "draft-unreviewed"
+  "step": "third_s",
+  "rationale": "Third-person -es with a spelling change (go → goes), recognised among errors.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1122,7 +1306,10 @@
    "My friends playing football every evening."
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "plural_subject",
+  "rationale": "A plural noun subject: no -s on the verb, among tempting forms.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1147,7 +1334,10 @@
   "addresses": [
    "attraction_error"
   ],
-  "review": "draft-unreviewed"
+  "step": "intervening",
+  "rationale": "The same pull across a longer phrase, among four sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1165,7 +1355,10 @@
    "Neither the teacher nor the students was ready."
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "either_neither",
+  "rationale": "With neither … nor, the verb agrees with the nearer subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1183,7 +1376,11 @@
    "I bought, apples bananas, and mangoes."
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "list",
+  "rationale": "Commas between list items, against misplaced commas.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.com.list"
  },
  {
   "kind": "code",
@@ -1207,7 +1404,10 @@
   "addresses": [
    "missing_intro_comma"
   ],
-  "review": "draft-unreviewed"
+  "step": "intro_clause",
+  "rationale": "A comma after a longer introductory clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1225,7 +1425,10 @@
    "My uncle, who lives in Delhi, is visiting us."
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "nonessential",
+  "rationale": "A pair of commas around extra information about a unique person.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1249,7 +1452,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "before_conjunction",
+  "rationale": "A comma before 'so' joining two clauses; a comma-splice distractor.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1267,7 +1473,10 @@
    "However the results were not, what we expected."
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "meaning_transition",
+  "rationale": "A comma after a sentence-opening 'However'; distractors misuse semicolons and commas.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1285,7 +1494,11 @@
    "On Monday, we have a test."
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "intro_word",
+  "rationale": "Spots a comma wrongly placed between subject and verb, among correct commas after introductory words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.com.wrong"
  },
  {
   "kind": "code",
@@ -1306,7 +1519,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "before_conjunction",
+  "rationale": "Spots a comma splice ('…, then I watched') among correct uses of commas.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1324,7 +1540,10 @@
    "Before you leave, switch off the fan."
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "restrictive",
+  "rationale": "Spots an unnecessary comma that splits a defining clause from its verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1346,7 +1565,11 @@
    "2": "fused_sentence",
    "3": "comma_splice"
   },
-  "review": "draft-unreviewed"
+  "step": "two_statements",
+  "rationale": "Two short statements with a full stop; distractors fuse, splice or miss a capital.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.run.two"
  },
  {
   "kind": "code",
@@ -1369,7 +1592,10 @@
    "2": "comma_splice",
    "3": "over_fragmenting"
   },
-  "review": "draft-unreviewed"
+  "step": "fused",
+  "rationale": "Chooses the correctly separated pair among fused, spliced and fragmented versions.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1395,7 +1621,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "splice",
+  "rationale": "Recognises that a comma with 'so' joins two clauses correctly, unlike a comma alone.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1422,7 +1651,10 @@
    "comma_splice",
    "over_fragmenting"
   ],
-  "review": "draft-unreviewed"
+  "step": "repair",
+  "rationale": "Subordination ('Because …,') as the correct join, against a splice, a fused sentence and a fragment.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1447,7 +1679,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "deliberate",
+  "rationale": "A semicolon joining two closely related clauses.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1472,7 +1707,10 @@
   "addresses": [
    "fused_sentence"
   ],
-  "review": "draft-unreviewed"
+  "step": "fused",
+  "rationale": "Repairs a fused sentence with a full stop.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1496,7 +1734,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "repair",
+  "rationale": "Repairs a comma splice by adding 'so'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1521,7 +1762,10 @@
   "addresses": [
    "comma_splice"
   ],
-  "review": "draft-unreviewed"
+  "step": "deliberate",
+  "rationale": "Chooses a repair that keeps both ideas and shows the contrast (although).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1543,7 +1787,11 @@
    "2": "wrong_relationship",
    "0": "wrong_relationship"
   },
-  "review": "draft-unreviewed"
+  "step": "because_but",
+  "rationale": "'because' for a clear cause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sub.because"
  },
  {
   "kind": "code",
@@ -1567,7 +1815,10 @@
   "addresses": [
    "wrong_relationship"
   ],
-  "review": "draft-unreviewed"
+  "step": "unless_although_simple",
+  "rationale": "'unless' for a condition, against 'because'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1592,7 +1843,10 @@
   "addresses": [
    "wrong_relationship"
   ],
-  "review": "draft-unreviewed"
+  "step": "contrast_time",
+  "rationale": "'Although' at the start of the sentence for a contrast.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1616,7 +1870,10 @@
   "addresses": [
    "wrong_relationship"
   ],
-  "review": "draft-unreviewed"
+  "step": "purpose_precaution",
+  "rationale": "'so that' for purpose.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1640,7 +1897,10 @@
   "addresses": [
    "wrong_relationship"
   ],
-  "review": "draft-unreviewed"
+  "step": "variety",
+  "rationale": "'Since' meaning 'because' at the start of a formal sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1663,7 +1923,10 @@
    "2": "wrong_relationship",
    "3": "dangling_subordinate"
   },
-  "review": "draft-unreviewed"
+  "step": "unless_although_simple",
+  "rationale": "Combines two short sentences with 'although' for an obvious contrast.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1689,7 +1952,10 @@
   "addresses": [
    "dangling_subordinate"
   ],
-  "review": "draft-unreviewed"
+  "step": "contrast_time",
+  "rationale": "A time relationship with the right tense (had closed by the time we arrived).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1711,7 +1977,11 @@
    "3": "wrong_relationship",
    "1": "dangling_subordinate"
   },
-  "review": "draft-unreviewed"
+  "step": "multi_clause",
+  "rationale": "Combines three ideas with subordination and a relative clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sub.three"
  },
  {
   "kind": "code",
@@ -1733,7 +2003,10 @@
    "2": "word_matching"
   },
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "short_fact",
+  "rationale": "A stated detail in the first sentence of a short story; one distractor repeats words from the text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1755,7 +2028,10 @@
    "3": "word_matching"
   },
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "paragraphs",
+  "rationale": "A stated place, with a distractor that reuses 'school'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1777,7 +2053,10 @@
    "0": "literal_only"
   },
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "obvious_feeling",
+  "rationale": "A feeling inferred from actions (walking slowly, kicking a stone).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1796,7 +2075,10 @@
   ],
   "answer": 2,
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "from_actions",
+  "rationale": "A motive inferred from a sequence of actions (seeing empty hands, bringing his kite).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1819,7 +2101,10 @@
    "0": "detail_as_main"
   },
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "gist_title",
+  "rationale": "The main idea of a short story, against details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1841,7 +2126,10 @@
    "1": "detail_as_main"
   },
   "passage": "rdg.p1",
-  "review": "draft-unreviewed"
+  "step": "gist_title",
+  "rationale": "The best title for a short story, against titles made from details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1863,7 +2151,10 @@
    "1": "word_matching"
   },
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "paragraphs",
+  "rationale": "A detail in the middle of an information paragraph; distractors are other details from the text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1885,7 +2176,10 @@
    "3": "word_matching"
   },
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "distractor",
+  "rationale": "A detail in the last paragraph, with a nearby distractor (gardens on roofs).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1904,7 +2198,10 @@
   ],
   "answer": 1,
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "reasons",
+  "rationale": "A purpose inferred from the explanation of how plants cool the air.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1926,7 +2223,10 @@
    "2": "literal_only"
   },
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "mixed",
+  "rationale": "The writer's attitude, inferred from the closing sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1949,7 +2249,10 @@
    "2": "detail_as_main"
   },
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "paragraph_main",
+  "rationale": "The main idea of one paragraph, against details from it.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1971,7 +2274,10 @@
    "3": "detail_as_main"
   },
   "passage": "rdg.p2",
-  "review": "draft-unreviewed"
+  "step": "multi_paragraph",
+  "rationale": "A summary sentence for a three-paragraph information text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -1990,7 +2296,10 @@
   ],
   "answer": 1,
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "paraphrase",
+  "rationale": "A detail embedded in a long sentence of a literary text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2012,7 +2321,10 @@
    "1": "word_matching"
   },
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "paraphrase",
+  "rationale": "A detail stated in different words, with a distractor that reuses the text's 'braver'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2034,7 +2346,10 @@
    "0": "literal_only"
   },
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "mixed",
+  "rationale": "A feeling behind a figurative description ('seemed to dissolve').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2056,7 +2371,10 @@
    "0": "literal_only"
   },
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "subtle",
+  "rationale": "An unstated reaction inferred from a small gesture.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2078,7 +2396,10 @@
    "3": "detail_as_main"
   },
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "central_theme",
+  "rationale": "What a literary passage is mainly about.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2100,7 +2421,10 @@
    "1": "detail_as_main"
   },
   "passage": "rdg.p3",
-  "review": "draft-unreviewed"
+  "step": "central_theme",
+  "rationale": "The central idea of a literary passage, stated abstractly.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2123,7 +2447,11 @@
    "1": "off_task",
    "2": "off_task"
   },
-  "review": "draft-unreviewed"
+  "step": "answers_question",
+  "rationale": "Picks the reply that answers a simple question, against on-topic replies that do not.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.tsk.reply"
  },
  {
   "kind": "code",
@@ -2149,7 +2477,10 @@
   "addresses": [
    "off_task"
   ],
-  "review": "draft-unreviewed"
+  "step": "main_parts",
+  "rationale": "Picks the note that does what a short task asks (the request and the details), against notes that are only on the topic.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2174,7 +2505,10 @@
   "addresses": [
    "off_task"
   ],
-  "review": "draft-unreviewed"
+  "step": "main_parts",
+  "rationale": "Picks the plan that covers every part of a two-part task.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2196,7 +2530,10 @@
    "2": "off_task",
    "3": "off_task"
   },
-  "review": "draft-unreviewed"
+  "step": "all_parts",
+  "rationale": "Picks the opening that suits a persuasive task.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2214,7 +2551,10 @@
    "the names of all the snacks you ate during the day"
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "audience_needs",
+  "rationale": "Judges which detail is least useful for a named audience.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2235,7 +2575,11 @@
   "distractor_tags": {
    "1": "no_paragraphs"
   },
-  "review": "draft-unreviewed"
+  "step": "main_parts",
+  "rationale": "Where a story's final part should start a new paragraph.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.org.break"
  },
  {
   "kind": "code",
@@ -2253,7 +2597,10 @@
    "Some people like football and some like cricket."
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "topic_sentence",
+  "rationale": "Chooses a topic sentence that states a paragraph's focus.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2278,7 +2625,10 @@
   "addresses": [
    "one_sentence_paragraphs"
   ],
-  "review": "draft-unreviewed"
+  "step": "topic_sentence",
+  "rationale": "Recognises one-sentence paragraphs as a problem.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2296,7 +2646,10 @@
    "my cousin's holiday in Mumbai"
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "unity",
+  "rationale": "Spots a paragraph that does not belong to the essay's focus.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2314,7 +2667,11 @@
    "Plastic was invented a long time ago."
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "linking",
+  "rationale": "Chooses a sentence that links two paragraphs.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.org.link"
  },
  {
   "kind": "code",
@@ -2335,7 +2692,10 @@
   "addresses": [
    "third_person_s"
   ],
-  "review": "draft-unreviewed"
+  "step": "basic",
+  "rationale": "A missing third-person -s in a simple sentence, found among correct sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2356,7 +2716,10 @@
   "addresses": [
    "tense_shift"
   ],
-  "review": "draft-unreviewed"
+  "step": "noticeable",
+  "rationale": "A tense error next to a time marker ('Yesterday … go').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2374,7 +2737,10 @@
    "She is a honest girl."
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "noticeable",
+  "rationale": "'a honest' inside a sentence: a/an by sound.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2392,7 +2758,10 @@
    "The palace was beautiful."
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "noticeable",
+  "rationale": "Present perfect with a finished time ('last year').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2410,7 +2779,10 @@
    "The teacher has given us one more day."
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "complex",
+  "rationale": "Agreement after 'Neither of'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2428,7 +2800,10 @@
    "Next time, I will ask more questions."
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "slips",
+  "rationale": "A mixed conditional ('If I would have known').",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2449,7 +2824,10 @@
   "addresses": [
    "phonetic_spelling"
   ],
-  "review": "draft-unreviewed"
+  "step": "very_common",
+  "rationale": "A very common word with an ie/ei slip.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2470,7 +2848,10 @@
   "addresses": [
    "phonetic_spelling"
   ],
-  "review": "draft-unreviewed"
+  "step": "common_longer",
+  "rationale": "A common longer word with a dropped syllable (libary).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2488,7 +2869,10 @@
    "grandmother"
   ],
   "answer": 1,
-  "review": "draft-unreviewed"
+  "step": "common_longer",
+  "rationale": "'i before e except after c' in a common verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2506,7 +2890,10 @@
    "holidays"
   ],
   "answer": 0,
-  "review": "draft-unreviewed"
+  "step": "less_common",
+  "rationale": "A frequently misspelled adverb (definitely).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2524,7 +2911,10 @@
    "goverment"
   ],
   "answer": 3,
-  "review": "draft-unreviewed"
+  "step": "less_common",
+  "rationale": "A silent letter in a long word (government).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  },
  {
   "kind": "code",
@@ -2542,6 +2932,9 @@
    "committee"
   ],
   "answer": 2,
-  "review": "draft-unreviewed"
+  "step": "rare",
+  "rationale": "Double letters in a long word, among other tricky words spelled correctly.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
  }
 ]

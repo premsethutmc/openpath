@@ -90,6 +90,14 @@ export function validateFramework(fw: Framework): string[] {
           for (const b of bands) need(Number(b) >= 1 && Number(b) <= 8, `capability ${c.id} has a band outside 1–8: ${b}`);
           need(Array.isArray(c.misconceptions), `skeleton capability ${c.id} has no misconception list`);
         }
+        // any capability that is specified at all must be specified completely (from 0.2.0, core ones too)
+        if (c.bands && c.tier !== "skeleton") {
+          need(c.description, `capability ${c.id} has band descriptors but no description`);
+          const bands = Object.keys(c.bands);
+          need(bands.length >= 3, `capability ${c.id} needs band descriptors for at least 3 bands`);
+          for (const b of bands) need(Number(b) >= 1 && Number(b) <= 8, `capability ${c.id} has a band outside 1–8: ${b}`);
+          need(Array.isArray(c.misconceptions) && c.misconceptions.length > 0, `capability ${c.id} has band descriptors but no misconception list`);
+        }
         const tags = new Set<string>();
         for (const m of c.misconceptions ?? []) {
           need(/^[a-z][a-z0-9_]*$/.test(m.id), `capability ${c.id} has a badly formed misconception id: ${m.id}`);

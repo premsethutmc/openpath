@@ -39,9 +39,20 @@ test("E1-5 revoking a decision equals never having applied it, and keeps the evi
   assert.deepEqual(strip(revoked.composite.nodes), strip(without.composite.nodes));
 });
 
-/** Decision ids differ when an event is removed, so compare estimates and evidence counts, not id lists. */
-function strip(nodes: Record<string, { evidence: string[] }>) {
-  return Object.fromEntries(Object.entries(nodes).map(([k, n]) => [k, { ...n, evidence: n.evidence.length }]));
+/**
+ * Decision ids differ when an event is removed, so compare estimates and evidence counts, not id lists.
+ * The exposure flag on session observations is left out: a revoked answer withdraws a scoring decision,
+ * but the learner still saw the item, so a later variant is (correctly) flagged as a variant, while in
+ * the history without that evidence it is fresh. Estimates, evidence counts and stages must match exactly.
+ * (Visible since E2a, whose bank has item families.)
+ */
+function strip(nodes: Record<string, { evidence: string[]; sessions?: { obs?: object[] }[] }>) {
+  return Object.fromEntries(
+    Object.entries(nodes).map(([k, n]) => [
+      k,
+      { ...n, evidence: n.evidence.length, sessions: n.sessions?.map((s) => ({ ...s, obs: s.obs?.map(({ exposure, ...o }: { exposure?: string }) => o) })) },
+    ]),
+  );
 }
 
 test("E1-10 local-first: a learner's state survives a restart from local files, identical to a full rebuild", async () => {

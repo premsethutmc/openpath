@@ -1,0 +1,2547 @@
+[
+ {
+  "kind": "code",
+  "id": "spl.infl.01",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of play: The boys are ___ football.",
+  "answers": [
+   "playing"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.02",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of swim: She is ___ in the lake.",
+  "answers": [
+   "swimming"
+  ],
+  "wrong": {
+   "swiming": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.03",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Write the -ing form of make: We are ___ a cake for Amma.",
+  "answers": [
+   "making"
+  ],
+  "wrong": {
+   "makeing": "kept_silent_e"
+  },
+  "addresses": [
+   "kept_silent_e"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.04",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write the past tense of carry: He ___ the heavy box upstairs.",
+  "answers": [
+   "carried"
+  ],
+  "wrong": {
+   "carryed": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.05",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of begin: Hurry, the film is ___!",
+  "answers": [
+   "beginning"
+  ],
+  "wrong": {
+   "begining": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.06",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 6.0,
+  "a": 1.3,
+  "prompt": "Write the past tense of visit: Last week they ___ their grandmother.",
+  "answers": [
+   "visited"
+  ],
+  "wrong": {
+   "visitted": "over_doubling"
+  },
+  "addresses": [
+   "over_doubling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.07",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "choice:spelling",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Which spelling is correct? She is ___ for good news. (hope + -ing)",
+  "options": [
+   "hopeing",
+   "hopping",
+   "hopinng",
+   "hoping"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "kept_silent_e",
+   "1": "over_doubling"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.08",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "choice:spelling",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Which spelling is correct? She was the ___ girl in the class. (happy + -est)",
+  "options": [
+   "happest",
+   "happiyest",
+   "happiest",
+   "happyest"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.09",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "choice:spelling",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which spelling is correct? The accident ___ late at night. (occur + -ed)",
+  "options": [
+   "occurrd",
+   "occurred",
+   "occured",
+   "ocurred"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.01",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "What does angry mean?",
+  "options": [
+   "very cross",
+   "very tired",
+   "very hungry",
+   "very cold"
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.02",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "What does borrow mean?",
+  "options": [
+   "to give something away for ever",
+   "to buy something",
+   "to lose something",
+   "to take something and give it back later"
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.03",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "What does ancient mean?",
+  "options": [
+   "very important",
+   "very far away",
+   "very old",
+   "very large"
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.04",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "What does reluctant mean?",
+  "options": [
+   "unlucky",
+   "unwilling",
+   "unable",
+   "unknown"
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.05",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "What does meticulous mean?",
+  "options": [
+   "very careful about details",
+   "very fast",
+   "easily annoyed",
+   "full of energy"
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.06",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "What does ephemeral mean?",
+  "options": [
+   "extremely beautiful",
+   "hard to understand",
+   "shared by everyone",
+   "lasting a very short time"
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.07",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:sentence_fit",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which word best completes the sentence? The road was so ___ that two buses could pass each other easily.",
+  "options": [
+   "wild",
+   "weird",
+   "wide",
+   "width"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "sound_alike_confusion"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.08",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:sentence_fit",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which word best completes the sentence? The scientist's ___ was confirmed by the experiment.",
+  "options": [
+   "hysteria",
+   "hypothesis",
+   "hypocrisy",
+   "hyphen"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "sound_alike_confusion"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.09",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:sentence_fit",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which word best completes the sentence? The judge remained ___ and did not favour either side.",
+  "options": [
+   "impartial",
+   "impatient",
+   "important",
+   "imperial"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "sound_alike_confusion"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.01",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Use a form of help: Thank you, you have been very ___.",
+  "answers": [
+   "helpful"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.02",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Use a form of quick: She finished the test ___.",
+  "answers": [
+   "quickly"
+  ],
+  "wrong": {
+   "quick": "wrong_word_class"
+  },
+  "addresses": [
+   "wrong_word_class"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.03",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Use a form of kind: Thank you for your ___.",
+  "answers": [
+   "kindness"
+  ],
+  "wrong": {
+   "kind": "wrong_word_class",
+   "kindly": "wrong_word_class"
+  },
+  "addresses": [
+   "wrong_word_class"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.04",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Use a form of decide: Choosing a school was a difficult ___.",
+  "answers": [
+   "decision"
+  ],
+  "wrong": {
+   "decidement": "invented_derivation",
+   "decide": "wrong_word_class"
+  },
+  "addresses": [
+   "invented_derivation"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.05",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 6.0,
+  "a": 1.3,
+  "prompt": "Use a form of able: The ___ to listen is important in a team.",
+  "answers": [
+   "ability"
+  ],
+  "wrong": {
+   "ableness": "invented_derivation",
+   "able": "wrong_word_class"
+  },
+  "addresses": [
+   "invented_derivation"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.06",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "typed:word_form",
+  "b": 7.0,
+  "a": 1.3,
+  "prompt": "Use a form of maintain: The old car needs regular ___.",
+  "answers": [
+   "maintenance"
+  ],
+  "wrong": {
+   "maintainance": "invented_derivation",
+   "maintainment": "invented_derivation"
+  },
+  "addresses": [
+   "invented_derivation"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.07",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "choice:word_form",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Which word fits? He spoke ___ to the new student.",
+  "options": [
+   "kind",
+   "kindness",
+   "kinded",
+   "kindly"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "wrong_word_class",
+   "1": "wrong_word_class",
+   "2": "invented_derivation"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.08",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "choice:word_form",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which word fits? Her ___ in the competition surprised everyone.",
+  "options": [
+   "successful",
+   "successfully",
+   "success",
+   "succeed"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "wrong_word_class",
+   "0": "wrong_word_class",
+   "1": "wrong_word_class"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.09",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "choice:word_form",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which word fits? The plan was not ___ with so little money.",
+  "options": [
+   "affordly",
+   "affordable",
+   "afford",
+   "affordability"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "wrong_word_class",
+   "0": "invented_derivation"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.01",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "\"The puppy was tiny, small enough to sit in my hand.\" What does tiny mean?",
+  "options": [
+   "very small",
+   "very soft",
+   "very young",
+   "very noisy"
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.02",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "\"After the long walk we were famished, so we ate everything on the table.\" What does famished mean?",
+  "options": [
+   "very tired",
+   "very happy",
+   "very late",
+   "very hungry"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "ignores_context"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.03",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "\"Unlike his talkative sister, Ravi was taciturn and rarely spoke at dinner.\" What does taciturn mean?",
+  "options": [
+   "easily upset",
+   "very polite",
+   "saying very little",
+   "very clever"
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.04",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "\"The old bridge was precarious; it swayed whenever a cart crossed it.\" What does precarious mean?",
+  "options": [
+   "very long",
+   "unsafe and likely to fall",
+   "very beautiful",
+   "newly built"
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.05",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "\"Her answer was so ambiguous that half the class thought she meant yes and the other half thought she meant no.\" What does ambiguous mean?",
+  "options": [
+   "could be understood in more than one way",
+   "very rude",
+   "very short",
+   "completely wrong"
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.06",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:replace_word",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "\"The shop was packed with people, so we could hardly move.\" Which word could replace packed without changing the meaning?",
+  "options": [
+   "wrapped",
+   "closed",
+   "decorated",
+   "crowded"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "ignores_context"
+  },
+  "addresses": [
+   "ignores_context"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.07",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:replace_word",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "\"Please address the envelope clearly.\" What does address mean here?",
+  "options": [
+   "deal with a problem",
+   "dress up",
+   "write the name and place on",
+   "make a speech to"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "ignores_context",
+   "0": "ignores_context"
+  },
+  "addresses": [
+   "ignores_context"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.08",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:replace_word",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "\"The minister's speech was full of fine words but offered few concrete plans.\" Which phrase could replace concrete?",
+  "options": [
+   "easy to read",
+   "specific and real",
+   "made of cement",
+   "very strong"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "ignores_context"
+  },
+  "addresses": [
+   "ignores_context"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write a or an: I ate ___ apple.",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write a, an or the: I saw a dog in the park. ___ dog was chasing a ball.",
+  "answers": [
+   "the"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write a or an: She waited for ___ hour.",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write a or an: He studies at ___ university in Chennai.",
+  "answers": [
+   "a"
+  ],
+  "wrong": {
+   "an": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 5.5,
+  "a": 1.3,
+  "prompt": "Write a, an or the: ___ sun rises in the east.",
+  "answers": [
+   "the"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.06",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "My mother is a teacher.",
+   "My mother is teacher.",
+   "My mother is an teacher.",
+   "My mother is the teachers."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "article_omission",
+   "2": "a_an_sound"
+  },
+  "addresses": [
+   "article_omission"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.07",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "Can you give me an advice?",
+   "Can you give me a advice?",
+   "Can you give me advices?",
+   "Can you give me some advice?"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "article_with_uncountable",
+   "1": "article_with_uncountable"
+  },
+  "addresses": [
+   "article_with_uncountable"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.08",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "A information about trip is on notice board.",
+   "The informations about trip are on the notice board.",
+   "Information about the trip is on the notice board.",
+   "An information about the trip is on the notice board."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "article_with_uncountable",
+   "0": "article_omission"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the right form of sleep: Be quiet! The baby ___.",
+  "answers": [
+   "is sleeping",
+   "'s sleeping"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write the right form of read: I ___ when the lights went out.",
+  "answers": [
+   "was reading"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write the right form of live: We ___ in Madurai since 2019.",
+  "answers": [
+   "have lived",
+   "have been living",
+   "'ve lived",
+   "'ve been living"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:cloze",
+  "b": 6.5,
+  "a": 1.3,
+  "prompt": "Write the right form of leave: By the time we arrived, the train ___.",
+  "answers": [
+   "had left",
+   "had already left"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "I am know the answer.",
+   "I know the answer.",
+   "I am knowing the answer.",
+   "I knowing the answer."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "stative_progressive"
+  },
+  "addresses": [
+   "stative_progressive"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.06",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "I saw that film yesterday.",
+   "I have seen that film yesterday.",
+   "I have saw that film yesterday.",
+   "I seeing that film yesterday."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "perfect_with_finished_time"
+  },
+  "addresses": [
+   "perfect_with_finished_time"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.07",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "She has just finish her homework.",
+   "She just has finishing her homework.",
+   "She is just finished her homework.",
+   "She has just finished her homework."
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.08",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "They were waited for an hour when the bus finally came.",
+   "They had waiting for an hour when the bus finally came.",
+   "They had been waiting for an hour when the bus finally came.",
+   "They have been waiting for an hour when the bus finally came."
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the right form of like: My brother ___ cricket.",
+  "answers": [
+   "likes"
+  ],
+  "wrong": {
+   "like": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write is or are: The children ___ in the garden.",
+  "answers": [
+   "are"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.3,
+  "prompt": "Write is or are: The box of pencils ___ on the table.",
+  "answers": [
+   "is"
+  ],
+  "wrong": {
+   "are": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 6.0,
+  "a": 1.3,
+  "prompt": "Write has or have: Each of the students ___ a library card.",
+  "answers": [
+   "has"
+  ],
+  "wrong": {
+   "have": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "She gos to school by bus.",
+   "She goes to school by bus.",
+   "She go to school by bus.",
+   "She going to school by bus."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.06",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "My friends play football every evening.",
+   "My friends plays football every evening.",
+   "My friends is playing football every evening.",
+   "My friends playing football every evening."
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.07",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "The list of names are on the wall.",
+   "The list of names were on the wall.",
+   "The list of names be on the wall.",
+   "The list of names is on the wall."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "attraction_error",
+   "1": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.08",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "Neither the teacher nor the students is ready.",
+   "Neither the teacher nor the students be ready.",
+   "Neither the teacher nor the students were ready.",
+   "Neither the teacher nor the students was ready."
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.01",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "options": [
+   "I bought apples bananas, and, mangoes.",
+   "I bought apples, bananas and mangoes.",
+   "I bought apples bananas and mangoes.",
+   "I bought, apples bananas, and mangoes."
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.02",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "options": [
+   "When the long football match finally ended, we walked home together.",
+   "When the long football match finally ended we walked home together.",
+   "When the long football match, finally ended we walked home together.",
+   "When, the long football match finally ended we walked home together."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "missing_intro_comma"
+  },
+  "addresses": [
+   "missing_intro_comma"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.03",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "options": [
+   "My uncle who lives in Delhi, is visiting us.",
+   "My uncle, who lives in Delhi is visiting us.",
+   "My, uncle who lives in Delhi is visiting us.",
+   "My uncle, who lives in Delhi, is visiting us."
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.04",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "options": [
+   "It was, raining so we stayed inside.",
+   "It was raining, we stayed inside.",
+   "It was raining, so we stayed inside.",
+   "It was raining so, we stayed inside."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "comma_splice"
+  },
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.05",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "options": [
+   "However; the results were not what we expected.",
+   "However, the results were not what we expected.",
+   "However the results, were not what we expected.",
+   "However the results were not, what we expected."
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.06",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:find_error",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which sentence uses a comma wrongly?",
+  "options": [
+   "The tall boy, ran to the gate.",
+   "Yes, I can come.",
+   "We need pens, paper and glue.",
+   "On Monday, we have a test."
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.07",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:find_error",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which sentence uses a comma wrongly?",
+  "options": [
+   "Although it was late, she kept reading.",
+   "Priya, can you help me?",
+   "The museum, which opened last year, is free.",
+   "I finished my homework, then I watched television."
+  ],
+  "answer": 3,
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.08",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:find_error",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence uses a comma wrongly?",
+  "options": [
+   "She was tired, but she kept going.",
+   "Our school, which is near the river, floods every year.",
+   "Students who finish early, may leave.",
+   "Before you leave, switch off the fan."
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.01",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "options": [
+   "I like dogs. my sister likes cats.",
+   "I like dogs. My sister likes cats.",
+   "I like dogs my sister likes cats.",
+   "I like dogs, my sister likes cats."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "fused_sentence",
+   "3": "comma_splice"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.02",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "options": [
+   "The bell rang. Everyone ran outside.",
+   "The bell rang everyone ran outside.",
+   "The bell rang, everyone ran outside.",
+   "The bell. Rang everyone ran outside."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "fused_sentence",
+   "2": "comma_splice",
+   "3": "over_fragmenting"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.03",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "options": [
+   "It was very hot we went swimming.",
+   "It was very hot, we went swimming.",
+   "It was very hot. So. We went swimming.",
+   "It was very hot, so we went swimming."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "fused_sentence",
+   "1": "comma_splice",
+   "2": "over_fragmenting"
+  },
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.04",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "options": [
+   "The road was flooded, the bus was late.",
+   "The road was flooded the bus was late.",
+   "Because the road was flooded, the bus was late.",
+   "Because the road was flooded. The bus was late."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "over_fragmenting",
+   "0": "comma_splice",
+   "1": "fused_sentence"
+  },
+  "addresses": [
+   "comma_splice",
+   "over_fragmenting"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.05",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "options": [
+   "The plan was simple; and, nobody followed it.",
+   "The plan was simple; nobody followed it.",
+   "The plan was simple, nobody followed it.",
+   "The plan was simple nobody followed it."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "comma_splice",
+   "3": "fused_sentence"
+  },
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.06",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:repair",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "How should this be corrected? \"We went to the market we bought vegetables.\"",
+  "options": [
+   "We went to the market. We bought vegetables.",
+   "We went to the market, we bought vegetables.",
+   "We went. To the market we bought vegetables.",
+   "We went to the market we, bought vegetables."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "comma_splice",
+   "2": "over_fragmenting"
+  },
+  "addresses": [
+   "fused_sentence"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.07",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:repair",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "How should this be corrected? \"My phone was broken, I could not call you.\"",
+  "options": [
+   "My phone was broken, I could, not call you.",
+   "My phone, was broken I could not call you.",
+   "My phone was broken I could not call you.",
+   "My phone was broken, so I could not call you."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "fused_sentence"
+  },
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.08",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:repair",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which correction keeps both ideas and shows how they connect? \"The experiment failed, the scientists learned a lot from it.\"",
+  "options": [
+   "The experiment failed. Although the scientists learned a lot from it.",
+   "The experiment failed the scientists learned a lot from it.",
+   "Although the experiment failed, the scientists learned a lot from it.",
+   "The experiment failed, the scientists, learned a lot from it."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "over_fragmenting",
+   "1": "fused_sentence"
+  },
+  "addresses": [
+   "comma_splice"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: I wore my raincoat ___ it was raining.",
+  "options": [
+   "although",
+   "because",
+   "but",
+   "or"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "wrong_relationship",
+   "0": "wrong_relationship"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.02",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: We will go to the beach ___ it rains.",
+  "options": [
+   "unless",
+   "because",
+   "so",
+   "and"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.03",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: ___ she was tired, she finished her homework.",
+  "options": [
+   "Because",
+   "So",
+   "Unless",
+   "Although"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "wrong_relationship",
+   "2": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.04",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining words: Speak slowly ___ everyone can understand you.",
+  "options": [
+   "unless",
+   "whereas",
+   "so that",
+   "even though"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.05",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: ___ the evidence was weak, the court could not convict him.",
+  "options": [
+   "Whereas",
+   "Since",
+   "Although",
+   "Unless"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.06",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:combine",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Which sentence best combines the ideas? \"The film was long. We enjoyed it.\"",
+  "options": [
+   "Although the film was long, we enjoyed it.",
+   "Because the film was long, we enjoyed it.",
+   "The film was long because we enjoyed it.",
+   "Although the film was long."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "wrong_relationship",
+   "2": "wrong_relationship",
+   "3": "dangling_subordinate"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.07",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:combine",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which sentence best combines the ideas? \"The shop closed. Then we arrived.\"",
+  "options": [
+   "The shop closed because we arrived.",
+   "When the shop closed.",
+   "We arrived although the shop closed.",
+   "The shop had closed by the time we arrived."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "wrong_relationship",
+   "1": "dangling_subordinate",
+   "2": "wrong_relationship"
+  },
+  "addresses": [
+   "dangling_subordinate"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.08",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:combine",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which sentence best combines the ideas? \"The library is small. It has an excellent collection. Students use it every day.\"",
+  "options": [
+   "The library is small, it has an excellent collection, students use it every day.",
+   "Although small and an excellent collection and students use it every day.",
+   "Although the library is small, it has an excellent collection, which students use every day.",
+   "Because the library is small, it has an excellent collection that students use every day."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "wrong_relationship",
+   "1": "dangling_subordinate"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q1",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.0,
+  "prompt": "What colours was Meena's new kite?",
+  "options": [
+   "green and yellow",
+   "red and yellow",
+   "red and blue",
+   "yellow and blue"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "word_matching"
+  },
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.0,
+  "prompt": "Where did Meena fly her kite?",
+  "options": [
+   "in the field behind her school",
+   "in front of her house",
+   "on the beach",
+   "in the school playground"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "word_matching"
+  },
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.0,
+  "prompt": "Why did Meena walk home slowly, kicking a stone?",
+  "options": [
+   "She was tired from running.",
+   "She was looking for her kite on the road.",
+   "She was playing a game with her brother.",
+   "She was sad about losing her kite."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "literal_only"
+  },
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q4",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 4.0,
+  "a": 1.0,
+  "prompt": "Why did Arjun bring his own kite?",
+  "options": [
+   "He wanted to fly it himself.",
+   "He wanted Meena to mend it.",
+   "He wanted to cheer his sister up.",
+   "He wanted to show that his kite was better."
+  ],
+  "answer": 2,
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.0,
+  "prompt": "What is the story mainly about?",
+  "options": [
+   "A boy who waits at the gate every day.",
+   "A girl loses her kite and her brother is kind to her.",
+   "How to make a paper kite.",
+   "A strong wind that blew over the coconut trees."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "detail_as_main",
+   "0": "detail_as_main"
+  },
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p1.q6",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.0,
+  "prompt": "Which title fits the story best?",
+  "options": [
+   "A Brother's Kindness",
+   "The Kite's Blue Tail",
+   "Saturday at School",
+   "How Wind Works"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main"
+  },
+  "passage": "rdg.p1",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q1",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_info",
+  "b": 4.0,
+  "a": 1.0,
+  "prompt": "According to the text, what do asphalt and concrete do?",
+  "options": [
+   "reflect sunlight back into the sky",
+   "cool the air through their leaves",
+   "produce heat of their own all day",
+   "absorb sunlight during the day and release heat at night"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "1": "word_matching"
+  },
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_info",
+  "b": 5.0,
+  "a": 1.0,
+  "prompt": "What have some people in Indian cities done to their roofs?",
+  "options": [
+   "made them of asphalt",
+   "fitted air conditioners on them",
+   "painted them white",
+   "covered them with gardens"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "word_matching"
+  },
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_info",
+  "b": 5.0,
+  "a": 1.0,
+  "prompt": "Why have some cities added gardens to tall buildings?",
+  "options": [
+   "to stop the walls from getting dirty",
+   "to bring back some of the cooling that plants provide",
+   "to grow food for the people who live there",
+   "because buildings look better with plants"
+  ],
+  "answer": 1,
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q4",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_info",
+  "b": 6.0,
+  "a": 1.0,
+  "prompt": "How does the writer seem to feel about the changes cities are making?",
+  "options": [
+   "hopeful that they can help",
+   "sure that they will fail",
+   "angry that they are too small",
+   "uninterested in them"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "literal_only"
+  },
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 5.0,
+  "a": 1.0,
+  "prompt": "What is the main idea of the second paragraph?",
+  "options": [
+   "It says that cars produce heat.",
+   "It describes how Singapore cools its buildings.",
+   "It explains how plants release water.",
+   "It explains the causes of the urban heat island effect."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "detail_as_main",
+   "2": "detail_as_main"
+  },
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q6",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 5.5,
+  "a": 1.0,
+  "prompt": "Which sentence best sums up the whole text?",
+  "options": [
+   "Singapore is the coolest city in the world.",
+   "Air conditioners make cities hotter at night.",
+   "Cities are warmer than the countryside for several reasons, and some are taking steps to cool down.",
+   "Asphalt and concrete are dark materials."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "detail_as_main"
+  },
+  "passage": "rdg.p2",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q1",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 5.5,
+  "a": 1.0,
+  "prompt": "What had Mr. Iyer written on Kavya's science project?",
+  "options": [
+   "nothing at all",
+   "the single word \"Ambitious\"",
+   "\"Excellent work\"",
+   "a long list of corrections"
+  ],
+  "answer": 1,
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 6.5,
+  "a": 1.0,
+  "prompt": "What did Kavya plan to talk about in her answer?",
+  "options": [
+   "teamwork and deadlines",
+   "why the magazine should be braver",
+   "her science project",
+   "Mr. Iyer's teaching"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "word_matching"
+  },
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 6.5,
+  "a": 1.0,
+  "prompt": "Why did Kavya's prepared sentences seem to \"dissolve\"?",
+  "options": [
+   "She had forgotten to rehearse.",
+   "The teachers asked her to stop speaking.",
+   "She did not want the job any more.",
+   "She suddenly felt nervous when her name was called."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "literal_only"
+  },
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q4",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 7.5,
+  "a": 1.0,
+  "prompt": "What does Mr. Iyer putting down his pen and looking at Kavya suggest?",
+  "options": [
+   "He has finished writing his notes.",
+   "He wants her to leave the room.",
+   "Her honest answer has caught his interest.",
+   "He is annoyed that she did not answer properly."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "literal_only"
+  },
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 6.5,
+  "a": 1.0,
+  "prompt": "What is the passage mainly about?",
+  "options": [
+   "The history of the school magazine.",
+   "A girl surprises herself and her interviewer by giving an honest answer.",
+   "How to prepare for a school interview.",
+   "A teacher who writes one-word comments on projects."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "detail_as_main"
+  },
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p3.q6",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 7.0,
+  "a": 1.0,
+  "prompt": "Which statement best expresses the central idea?",
+  "options": [
+   "Sometimes speaking honestly matters more than giving a rehearsed answer.",
+   "Teachers should look at students when they speak.",
+   "Science projects should be ambitious.",
+   "Interviews are always frightening."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main"
+  },
+  "passage": "rdg.p3",
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.01",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Your friend asks: \"What time does the cricket match start on Sunday?\" Which reply answers the question?",
+  "options": [
+   "I love cricket very much.",
+   "Sunday is my favourite day.",
+   "My brother plays cricket too.",
+   "It starts at four o'clock."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "off_task",
+   "1": "off_task",
+   "2": "off_task"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.02",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a note to your neighbour asking them to feed your cat while you are away.\" Which note does what the task asks?",
+  "options": [
+   "Dear Mrs. Das, we are going to Ooty on Friday. It will be cold there.",
+   "Dear Mrs. Das, do you have a cat? Cats are great pets.",
+   "Dear Mrs. Das, we are away from Friday to Sunday. Could you please feed Bella once a day? Her food is in the blue box by the door. Thank you!",
+   "Dear Mrs. Das, our cat Bella is very cute and loves to sleep in the sun."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "off_task",
+   "0": "off_task",
+   "1": "off_task"
+  },
+  "addresses": [
+   "off_task"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.03",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write an email to your teacher explaining why you missed the test and asking when you can take it.\" Which plan covers the whole task?",
+  "options": [
+   "Describe the test questions I found hard last time.",
+   "Say why I was absent, apologise, and ask when I can take the test.",
+   "Say why I was absent and describe my illness in detail.",
+   "Ask when the next holiday is."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "off_task",
+   "0": "off_task"
+  },
+  "addresses": [
+   "off_task"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.04",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a paragraph persuading your school to start a recycling club.\" Which opening sentence suits the task best?",
+  "options": [
+   "Our school throws away hundreds of plastic bottles every week, and a recycling club could change that.",
+   "Recycling is when you use things again.",
+   "Last week I went to the shop and bought a bottle of water.",
+   "There are many clubs in our school, such as the chess club."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "off_task",
+   "3": "off_task"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.05",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a short report for the school website about the science fair, for parents who could not attend.\" Which detail is least useful for these readers?",
+  "options": [
+   "which projects won prizes and why",
+   "how many students took part",
+   "when the projects will be on display again",
+   "the names of all the snacks you ate during the day"
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.01",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "A story has these sentences: (1) We packed our bags the night before. (2) The next morning we left at six. (3) Two weeks later, I still think about that trip. Where would a new paragraph best begin?",
+  "options": [
+   "before sentence 1",
+   "nowhere: it should all be one paragraph",
+   "before sentence 3",
+   "before sentence 2"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "no_paragraphs"
+  },
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.02",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "Which is the best topic sentence for a paragraph about why exercise is good for students?",
+  "options": [
+   "Exercise.",
+   "Regular exercise helps students in several important ways.",
+   "I go running every day.",
+   "Some people like football and some like cricket."
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.03",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "A student started a new paragraph for every sentence of a letter. What is the problem?",
+  "options": [
+   "Ideas that belong together are split up.",
+   "The letter is too short.",
+   "Letters should never have paragraphs.",
+   "There is no problem."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "no_paragraphs",
+   "3": "one_sentence_paragraphs"
+  },
+  "addresses": [
+   "one_sentence_paragraphs"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.04",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "An essay about school uniforms has paragraphs on cost, on comfort, and on \"my cousin's holiday in Mumbai\". Which paragraph should be changed or removed?",
+  "options": [
+   "cost",
+   "comfort",
+   "none of them",
+   "my cousin's holiday in Mumbai"
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.05",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence would best link a paragraph about the problems of plastic to a paragraph about solutions?",
+  "options": [
+   "In conclusion, plastic is bad.",
+   "Plastic bottles are often blue or clear.",
+   "Fortunately, there are practical ways to reduce our plastic waste.",
+   "Plastic was invented a long time ago."
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.01",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "She likes her teachers.",
+   "My sister walk to school every day.",
+   "She leaves at eight.",
+   "Her school is near the temple."
+  ],
+  "answer": 1,
+  "addresses": [
+   "third_person_s"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.02",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "Yesterday we go to the zoo.",
+   "We saw two tigers.",
+   "The elephants were having a bath.",
+   "It was a great day."
+  ],
+  "answer": 0,
+  "addresses": [
+   "tense_shift"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.03",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "Everyone trusts her.",
+   "She always tells the truth.",
+   "Her friends admire her.",
+   "She is a honest girl."
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.04",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "We took many photographs.",
+   "My father bought me a book about its history.",
+   "I have visited Mysore last year.",
+   "The palace was beautiful."
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.05",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "I hope we finish on time.",
+   "Neither of my friends have finished the project.",
+   "We started it two weeks ago.",
+   "The teacher has given us one more day."
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.06",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "options": [
+   "If I would have known, I would have helped.",
+   "She told me the news after the meeting.",
+   "I was surprised that nobody had mentioned it.",
+   "Next time, I will ask more questions."
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.01",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 2.5,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"My freind came to my house after school.\"",
+  "options": [
+   "house",
+   "after",
+   "school",
+   "freind"
+  ],
+  "answer": 3,
+  "addresses": [
+   "phonetic_spelling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.02",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"We went to the libary to find a book about birds.\"",
+  "options": [
+   "find",
+   "birds",
+   "libary",
+   "went"
+  ],
+  "answer": 2,
+  "addresses": [
+   "phonetic_spelling"
+  ],
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.03",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"I recieved a letter from my grandmother last week.\"",
+  "options": [
+   "week",
+   "recieved",
+   "letter",
+   "grandmother"
+  ],
+  "answer": 1,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.04",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"It was definately the best day of the holidays.\"",
+  "options": [
+   "definately",
+   "best",
+   "day",
+   "holidays"
+  ],
+  "answer": 0,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.05",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"The goverment announced a new plan for the city's parks.\"",
+  "options": [
+   "announced",
+   "plan",
+   "parks",
+   "goverment"
+  ],
+  "answer": 3,
+  "review": "draft-unreviewed"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.spl.06",
+  "version": 1,
+  "target": "EN.WRT.ACC.spelling",
+  "format": "choice:proofread",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which word is spelled wrongly? \"The committee praised the accommodation but criticised the unneccessary delays.\"",
+  "options": [
+   "accommodation",
+   "criticised",
+   "unneccessary",
+   "committee"
+  ],
+  "answer": 2,
+  "review": "draft-unreviewed"
+ }
+]

@@ -27,6 +27,8 @@ export interface Capability {
   misconceptions?: Misconception[];
   observable_through?: string[];
   needs?: string[];
+  /** Reference frameworks the capability relates to (indicative only; OpenPath's descriptors are the definitions). */
+  references?: { cefr?: string[]; cbse?: string };
 }
 
 export interface SubStrand {
@@ -70,8 +72,10 @@ export interface Framework {
   prior: { mean: number; sd: number };
   policy: Policy;
   strands: Strand[];
-  couplings: { a: CapabilityId; b: CapabilityId; strength: number }[];
-  prerequisites: { capability: CapabilityId; requires: CapabilityId }[];
+  couplings: { a: CapabilityId; b: CapabilityId; strength: number; status?: string }[];
+  prerequisites: { capability: CapabilityId; requires: CapabilityId; source?: string }[];
+  /** Reference frameworks (from 0.2.0): sources and how they are used. */
+  references?: Record<string, unknown>;
 }
 
 // ---------------------------------------------------------------- content
@@ -90,9 +94,14 @@ export interface CodeItem {
   /** Items that are variants of one another share a family id (optional; default: the item's own id). */
   family?: string;
   target: CapabilityId;
-  /** "choice:…" (scored by option index) or "typed:…" (scored against accepted answers). */
+  /**
+   * How it is answered and scored (always right or wrong, plus misconception tags):
+   *   "choice:…" one option, by index        "typed:…" a short typed answer, against accepted answers
+   *   "order:…"  put all options in order      "match:…" match each `left` entry to one option
+   *   "multi:…"  choose exactly the right set of options (the prompt says how many)
+   */
   format: string;
-  /** Difficulty on the band scale (initial expert estimate, to be calibrated later). */
+  /** Difficulty on the band scale: an expert estimate, not empirically calibrated. */
   b: number;
   /** Discrimination per band. */
   a: number;
@@ -103,11 +112,25 @@ export interface CodeItem {
   answers?: string[];
   /** Wrong option index (as a string) → misconception it suggests. */
   distractor_tags?: Record<string, string>;
-  /** Wrong typed answer (lower case) → misconception it suggests. */
+  /** order: the option indices in the correct order. */
+  answer_order?: number[];
+  /** match: the entries to match (each to one option). */
+  left?: string[];
+  /** match: for each `left` entry, the index of its option. */
+  answer_pairs?: number[];
+  /** multi: the indices of every correct option (the learner must choose exactly these). */
+  answer_set?: number[];
+  /** Wrong answer → misconception it suggests. Typed: the normalised answer; order, match, multi: the indices joined by commas (multi sorted). */
   wrong?: Record<string, string>;
   /** Misconceptions this item is designed to practise. */
   addresses?: string[];
   review?: string;
+  /** The step of the capability's difficulty ladder this item sits on (content/english/items/progressions.json). */
+  step?: string;
+  /** Why the item sits at this difficulty: what makes it harder or easier than its neighbours. */
+  rationale?: string;
+  /** Where the difficulty comes from. Always "expert_estimate" until calibrated from real responses. */
+  difficulty_source?: "expert_estimate";
 }
 
 export interface Anchor {
@@ -217,6 +240,9 @@ export interface Composite {
 export type Response =
   | { kind: "choice"; choice: number }
   | { kind: "typed"; text: string }
+  | { kind: "order"; order: number[] }
+  | { kind: "match"; pairs: number[] }
+  | { kind: "multi"; choices: number[] }
   | { kind: "writing"; text: string };
 
 export interface EvidenceEvent {

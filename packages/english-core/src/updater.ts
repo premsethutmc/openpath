@@ -15,8 +15,8 @@ import { applyDirect, createComposite, leafView } from "./composite.ts";
 import { type ContentIndex, contextOf, familyOf, itemParams, scoreCode, wordCount } from "./content.ts";
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
-import { bandUpdate, binaryUpdate } from "./model.ts";
-import type { Composite, Decision, EvidenceEvent, Exposure, LedgerEvent, ProposalEvent, QualificationEvent, WritingTask } from "./types.ts";
+import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
+import type { Composite, Decision, Estimate, EvidenceEvent, Exposure, LedgerEvent, ProposalEvent, QualificationEvent, WritingTask } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -27,6 +27,12 @@ export interface Context {
    * deployment fails closed until educator-scored anchors exist.
    */
   allowCandidateAnchors?: boolean;
+  /**
+   * Research only: an alternative update for right/wrong answers, so a candidate response model can
+   * be compared on identical histories (tools/english/research). Never set in production, where
+   * right/wrong answers always use `binaryUpdate`; leaving it unset changes nothing.
+   */
+  researchBinaryUpdate?: (est: Estimate, p: ItemParams, correct: boolean) => Estimate;
 }
 
 /** Capabilities with a code-checkable signal (check 6). */
@@ -149,7 +155,7 @@ export class Ledger {
       session: ev.session,
       context: observation.context,
       decisionId: id,
-      update: (e) => binaryUpdate(e, params, correct),
+      update: (e) => (this.ctx.researchBinaryUpdate ?? binaryUpdate)(e, params, correct),
       misconceptions,
       binary: { b: item.b, correct, a: params.a, c: params.c },
       exposure,

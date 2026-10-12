@@ -85,8 +85,13 @@ test("E1-13 and E1-10 the demonstration: Asha and Ben differ, the invented quote
     assert.notEqual(demo.next.asha.item, demo.next.ben.item);
     const c = ctx();
     const now = "2026-10-13T11:20:00.000Z";
-    const sentences = ["asha", "ben"].map((id) => estimate(c, { ledger: demo.ledgers[id], sessions: [{ now }] } as never, "EN.SEN", demo.ledgers[id].composite, now));
-    assert.ok(Math.abs(sentences[0].mean - sentences[1].mean) > 0.5, "sentence construction differs");
+    // The same standard as E1-13 (R3): compared at capability level, by more than both uncertainties
+    // combined, in the direction of the profiles. Ben is the weak-grammar learner. (The earlier
+    // strand-level check depended on which few items each learner happened to get; see E2A_REPORT.md.)
+    const grammar = c.index.leafIds.filter((id) => id.startsWith("EN.GRM.") && c.index.leaves.get(id)!.tier === "skeleton");
+    const rows = grammar.map((cap) => [leafView(demo.ledgers.asha.composite, c.index, cap, now), leafView(demo.ledgers.ben.composite, c.index, cap, now)]);
+    assert.ok(rows.some(([a, b]) => a.mean - b.mean > a.sd + b.sd), rows.map(([a, b]) => `${a.id}: ${a.mean.toFixed(2)}±${a.sd.toFixed(2)} vs ${b.mean.toFixed(2)}±${b.sd.toFixed(2)}`).join("; "));
+    assert.notDeepEqual(STRANDS.map((s) => estimate(c, { ledger: demo.ledgers.asha, sessions: [{ now }] } as never, s, demo.ledgers.asha.composite, now).mean), STRANDS.map((s) => estimate(c, { ledger: demo.ledgers.ben, sessions: [{ now }] } as never, s, demo.ledgers.ben.composite, now).mean));
     const rejected = demo.writingDecisions.find((d) => d.verdict === "rejected")!;
     assert.match(rejected.reasons.join(), /check 4: quote not found/);
     assert.equal(demo.writingDecisions.filter((d) => d.verdict === "accepted").length, 4);
