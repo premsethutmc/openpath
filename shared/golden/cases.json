@@ -1,0 +1,6097 @@
+{
+ "curriculum_version": "2026.10.1",
+ "histories": [
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "core",
+    "reason": "Gathering more evidence with numbers up to 7.",
+    "rounds": [
+     {
+      "available": {
+       "apple": 8
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 8
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "pear": 8
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": null,
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": null,
+      "name": "Reads numerals",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": null,
+      "key": "math.counting.one_to_one",
+      "last_observed_at": null,
+      "name": "Counts one by one",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": null,
+      "key": "math.counting.cardinality",
+      "last_observed_at": null,
+      "name": "Knows how many",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.one_to_one"
+      ]
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": null,
+      "key": "math.quantity.transfer",
+      "last_observed_at": null,
+      "name": "Uses quantity in new situations",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ]
+     }
+    ]
+   },
+   "name": "no_sessions_yet",
+   "now": "2026-10-05T09:05:00.000Z",
+   "observations": [],
+   "sessions_completed": 0
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "core",
+    "reason": "Gathering more evidence with numbers up to 7.",
+    "rounds": [
+     {
+      "available": {
+       "pear": 8
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 9
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 6,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 8
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:orange:3"
+      ],
+      "counts": {
+       "independent": 2,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-05T09:00:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 1,
+      "status": "developing",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 3,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": false,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-05T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": "2026-10-08T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 1,
+      "status": "secure_pending_retention",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:orange:3"
+      ],
+      "counts": {
+       "independent": 2,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-05T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 1,
+      "status": "developing",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 2,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.quantity.transfer",
+      "last_observed_at": "2026-10-05T09:00:00.000Z",
+      "name": "Uses quantity in new situations",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 1,
+      "status": "developing",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ]
+     }
+    ]
+   },
+   "name": "one_perfect_session",
+   "now": "2026-10-05T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    }
+   ],
+   "sessions_completed": 1
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "stretch",
+    "reason": "Counting out a set looks secure, so the numbers get bigger and other fruit is mixed in.",
+    "rounds": [
+     {
+      "available": {
+       "orange": 12,
+       "pear": 4
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 9,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 4,
+       "pear": 10
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 7,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 11,
+       "pear": 4
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 8,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [
+     "math.quantity.compare",
+     "math.operations.combine_sets"
+    ],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-05T11:24:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": "2026-10-08T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "secure_pending_retention",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-05T11:24:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": "2026-10-08T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "secure_pending_retention",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-05T11:24:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": "2026-10-08T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "secure_pending_retention",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": false,
+       "varied_contexts": true
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.quantity.transfer",
+      "last_observed_at": "2026-10-05T11:24:00.000Z",
+      "name": "Uses quantity in new situations",
+      "next_review_at": "2026-10-08T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "secure_pending_retention",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     }
+    ]
+   },
+   "name": "two_perfect_sessions_on_the_same_day",
+   "now": "2026-10-05T11:29:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T11:24:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    }
+   ],
+   "sessions_completed": 2
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "stretch",
+    "reason": "Counting out a set looks secure, so the numbers get bigger and other fruit is mixed in.",
+    "rounds": [
+     {
+      "available": {
+       "orange": 12,
+       "pear": 4
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 9,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 4,
+       "pear": 10
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 7,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 11,
+       "pear": 4
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 8,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [
+     "math.quantity.compare",
+     "math.operations.combine_sets"
+    ],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.quantity.transfer",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Uses quantity in new situations",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     }
+    ]
+   },
+   "name": "two_perfect_sessions_three_days_apart",
+   "now": "2026-10-08T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    }
+   ],
+   "sessions_completed": 2
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "core",
+    "reason": "Gathering more evidence with numbers up to 7.",
+    "rounds": [
+     {
+      "available": {
+       "pear": 8
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 10
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 7,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 8
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 5,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": false
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-14T09:00:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 4,
+      "status": "developing",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": false
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-14T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 4,
+      "status": "developing",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": false
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-14T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": false,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 4,
+      "status": "developing",
+      "waiting_on": [
+       "math.counting.one_to_one"
+      ]
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": null,
+      "key": "math.quantity.transfer",
+      "last_observed_at": null,
+      "name": "Uses quantity in new situations",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ]
+     }
+    ]
+   },
+   "name": "the_same_five_apples_every_time",
+   "now": "2026-10-14T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-11T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s3",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-11T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s3",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-11T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s3",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-14T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s4",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-14T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s4",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-14T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s4",
+     "skill": "math.number.numeral_recognition"
+    }
+   ],
+   "sessions_completed": 4
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "support",
+    "reason": "Counting out a set is still new, so the numbers stay small and the shelf is uncluttered.",
+    "rounds": [
+     {
+      "available": {
+       "orange": 8
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 4,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "pear": 8
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 8
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 2,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": null,
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": null,
+      "name": "Reads numerals",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 2
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": null,
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": null,
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "emerging",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 2
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": null,
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "emerging",
+      "waiting_on": [
+       "math.counting.one_to_one"
+      ]
+     },
+     {
+      "assessed": true,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": null,
+      "key": "math.quantity.transfer",
+      "last_observed_at": null,
+      "name": "Uses quantity in new situations",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ]
+     }
+    ]
+   },
+   "name": "only_ever_succeeds_with_help",
+   "now": "2026-10-08T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 2,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "supported",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 2,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "supported",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 2,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "supported",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 2,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "supported",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    }
+   ],
+   "sessions_completed": 2
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "core",
+    "reason": "Gathering more evidence with numbers up to 7.",
+    "rounds": [
+     {
+      "available": {
+       "pear": 8
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 10
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 7,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "orange": 8
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 5,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [
+     "math.operations.combine_sets"
+    ],
+    "review_due": [
+     "math.number.numeral_recognition",
+     "math.counting.one_to_one",
+     "math.counting.cardinality",
+     "math.quantity.transfer"
+    ],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": true,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": true,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 2,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": false,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-16T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": "2026-10-16T09:05:00.000Z",
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.6,
+      "review_due": true,
+      "sessions_with_success": 2,
+      "status": "needs_review",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 4,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.quantity.transfer",
+      "last_observed_at": "2026-10-08T09:00:00.000Z",
+      "name": "Uses quantity in new situations",
+      "next_review_at": "2026-10-14T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 1.0,
+      "review_due": true,
+      "sessions_with_success": 2,
+      "status": "mastered",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": false,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": [
+       "math.counting.cardinality"
+      ]
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     }
+    ]
+   },
+   "name": "retained_then_slips_twice",
+   "now": "2026-10-16T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-15T09:00:00.000Z",
+     "outcome": "not_yet",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s3",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-16T09:00:00.000Z",
+     "outcome": "not_yet",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s4",
+     "skill": "math.counting.cardinality"
+    }
+   ],
+   "sessions_completed": 4
+  },
+  {
+   "expected_plan": {
+    "activity": "apple-shopping",
+    "band": "stretch",
+    "reason": "Counting out a set looks secure, so the numbers get bigger and other fruit is mixed in.",
+    "rounds": [
+     {
+      "available": {
+       "apple": 4,
+       "pear": 13
+      },
+      "id": "r1",
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 10,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 11,
+       "pear": 4
+      },
+      "id": "r2",
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 8,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     {
+      "available": {
+       "apple": 4,
+       "orange": 10
+      },
+      "id": "r3",
+      "is_transfer": true,
+      "representation": "set",
+      "target": 7,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     }
+    ]
+   },
+   "expected_profile": {
+    "curriculum_version": "2026.10.1",
+    "ready_next": [
+     "math.quantity.compare",
+     "math.operations.combine_sets"
+    ],
+    "review_due": [],
+    "skills": [
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Sees a written numeral and knows which quantity it stands for.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.number.numeral_recognition",
+      "last_observed_at": "2026-10-12T09:00:00.000Z",
+      "name": "Reads numerals",
+      "next_review_at": "2026-10-24T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 3,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 9,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Pairs each object with exactly one count, without skipping or double counting.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.one_to_one",
+      "last_observed_at": "2026-10-12T09:00:00.000Z",
+      "name": "Counts one by one",
+      "next_review_at": "2026-10-24T09:00:00.000Z",
+      "prerequisites": [],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 3,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:5",
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "numeral:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 1,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Understands that the last number counted is the size of the set, and stops there.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.counting.cardinality",
+      "last_observed_at": "2026-10-12T09:00:00.000Z",
+      "name": "Knows how many",
+      "next_review_at": "2026-10-24T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.one_to_one"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.8,
+      "review_due": false,
+      "sessions_with_success": 3,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": true,
+      "contexts": [
+       "numeral:apple:6",
+       "numeral:orange:3",
+       "set:orange:3",
+       "set:pear:4"
+      ],
+      "counts": {
+       "independent": 6,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": true,
+       "multiple_sessions": true,
+       "recent_accuracy": true,
+       "retained_over_time": true,
+       "varied_contexts": true
+      },
+      "description": "Makes the right amount with unfamiliar numbers, different objects, and when no numeral is shown.",
+      "first_success_at": "2026-10-05T09:00:00.000Z",
+      "key": "math.quantity.transfer",
+      "last_observed_at": "2026-10-12T09:00:00.000Z",
+      "name": "Uses quantity in new situations",
+      "next_review_at": "2026-10-24T09:00:00.000Z",
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 1.0,
+      "review_due": false,
+      "sessions_with_success": 3,
+      "status": "mastered",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Tells which of two sets has more, fewer, or the same.",
+      "first_success_at": null,
+      "key": "math.quantity.compare",
+      "last_observed_at": null,
+      "name": "Compares two amounts",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.counting.cardinality"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     },
+     {
+      "assessed": false,
+      "contexts": [],
+      "counts": {
+       "independent": 0,
+       "not_yet": 0,
+       "supported": 0
+      },
+      "criteria": {
+       "enough_observations": false,
+       "multiple_sessions": false,
+       "recent_accuracy": false,
+       "retained_over_time": false,
+       "varied_contexts": false
+      },
+      "description": "Joins two sets and finds how many there are altogether.",
+      "first_success_at": null,
+      "key": "math.operations.combine_sets",
+      "last_observed_at": null,
+      "name": "Puts two amounts together",
+      "next_review_at": null,
+      "prerequisites": [
+       "math.quantity.transfer",
+       "math.number.numeral_recognition"
+      ],
+      "ready": true,
+      "recent_accuracy": 0.0,
+      "review_due": false,
+      "sessions_with_success": 0,
+      "status": "no_evidence",
+      "waiting_on": []
+     }
+    ]
+   },
+   "name": "one_slip_among_many_successes",
+   "now": "2026-10-12T09:05:00.000Z",
+   "observations": [
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s1",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s1",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s1",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-05T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s1",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s2",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s2",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:apple:6",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 6,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 6
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s2",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-08T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s2",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "max_hint_level": 1,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-11T09:00:00.000Z",
+     "outcome": "not_yet",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s3",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.cardinality",
+     "session": "s4",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.one_to_one",
+     "session": "s4",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:apple:5",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 5,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 5
+     },
+     "is_transfer": false,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r1",
+     "rule": "produce_set.numeral",
+     "session": "s4",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.cardinality",
+     "session": "s4",
+     "skill": "math.counting.cardinality"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.one_to_one",
+     "session": "s4",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.numeral",
+     "session": "s4",
+     "skill": "math.number.numeral_recognition"
+    },
+    {
+     "context": "numeral:orange:3",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 3,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 3
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r2",
+     "rule": "produce_set.transfer",
+     "session": "s4",
+     "skill": "math.quantity.transfer"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.one_to_one",
+     "session": "s4",
+     "skill": "math.counting.one_to_one"
+    },
+    {
+     "context": "set:pear:4",
+     "detail": {
+      "checks": 1,
+      "first_check_count": 4,
+      "first_error": null,
+      "max_hint_level": 0,
+      "self_corrected": false,
+      "target": 4
+     },
+     "is_transfer": true,
+     "observed_at": "2026-10-12T09:00:00.000Z",
+     "outcome": "independent",
+     "round": "r3",
+     "rule": "produce_set.transfer",
+     "session": "s4",
+     "skill": "math.quantity.transfer"
+    }
+   ],
+   "sessions_completed": 4
+  }
+ ],
+ "sessions": [
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i5",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 5,
+     "t": 5400,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 5
+      }
+     },
+     "round": "r1",
+     "seq": 6,
+     "t": 6300,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 7,
+     "t": 7200,
+     "type": "round_completed"
+    },
+    {
+     "data": {
+      "available": {
+       "apple": 4,
+       "orange": 8
+      },
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     "round": "r2",
+     "seq": 8,
+     "t": 8100,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i6",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 9,
+     "t": 9000,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i7",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 10,
+     "t": 9900,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i8",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 11,
+     "t": 10800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "orange": 3
+      }
+     },
+     "round": "r2",
+     "seq": 12,
+     "t": 11700,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r2",
+     "seq": 13,
+     "t": 12600,
+     "type": "round_completed"
+    },
+    {
+     "data": {
+      "available": {
+       "pear": 8
+      },
+      "is_transfer": true,
+      "representation": "set",
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     "round": "r3",
+     "seq": 14,
+     "t": 13500,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i9",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 15,
+     "t": 14400,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i10",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 16,
+     "t": 15300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i11",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 17,
+     "t": 16200,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i12",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 18,
+     "t": 17100,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "pear": 4
+      }
+     },
+     "round": "r3",
+     "seq": 19,
+     "t": 18000,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r3",
+     "seq": 20,
+     "t": 18900,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.numeral",
+      "skill": "math.number.numeral_recognition"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 3,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r2",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 3,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r2",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 3,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r2",
+      "rule": "produce_set.numeral",
+      "skill": "math.number.numeral_recognition"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 3,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r2",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r3",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r3",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 6300,
+      "first_check_count": 5,
+      "first_error": null,
+      "is_transfer": false,
+      "max_hint_level": 0,
+      "max_in_basket": 5,
+      "outcome": "independent",
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     },
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "numeral:orange:3",
+      "duration_ms": 4500,
+      "first_check_count": 3,
+      "first_error": null,
+      "is_transfer": true,
+      "max_hint_level": 0,
+      "max_in_basket": 3,
+      "outcome": "independent",
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r2",
+      "self_corrected": false,
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     },
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "set:pear:4",
+      "duration_ms": 5400,
+      "first_check_count": 4,
+      "first_error": null,
+      "is_transfer": true,
+      "max_hint_level": 0,
+      "max_in_basket": 4,
+      "outcome": "independent",
+      "problems": [],
+      "removals": 0,
+      "representation": "set",
+      "round": "r3",
+      "self_corrected": false,
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "right_first_time_in_all_three_rounds"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i5",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 5,
+     "t": 5400,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i6",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 6,
+     "t": 6300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i7",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 7,
+     "t": 7200,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i8",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 8,
+     "t": 8100,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 8
+      }
+     },
+     "round": "r1",
+     "seq": 9,
+     "t": 9000,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r1",
+     "seq": 10,
+     "t": 9900,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "item": "i1"
+     },
+     "round": "r1",
+     "seq": 11,
+     "t": 10800,
+     "type": "item_removed"
+    },
+    {
+     "data": {
+      "item": "i2"
+     },
+     "round": "r1",
+     "seq": 12,
+     "t": 11700,
+     "type": "item_removed"
+    },
+    {
+     "data": {
+      "item": "i3"
+     },
+     "round": "r1",
+     "seq": 13,
+     "t": 12600,
+     "type": "item_removed"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 5
+      }
+     },
+     "round": "r1",
+     "seq": 14,
+     "t": 13500,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 15,
+     "t": 14400,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 2,
+       "first_check_count": 8,
+       "first_error": "took_all",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "supported",
+      "round": "r1",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 2,
+       "first_check_count": 8,
+       "first_error": "took_all",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "supported",
+      "round": "r1",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 2,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 13500,
+      "first_check_count": 8,
+      "first_error": "took_all",
+      "is_transfer": false,
+      "max_hint_level": 1,
+      "max_in_basket": 8,
+      "outcome": "supported",
+      "problems": [],
+      "removals": 3,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "takes_every_apple_then_fixes_it_after_a_hint"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 3
+      }
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r1",
+     "seq": 5,
+     "t": 5400,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 6,
+     "t": 6300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 4
+      }
+     },
+     "round": "r1",
+     "seq": 7,
+     "t": 7200,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 2
+     },
+     "round": "r1",
+     "seq": 8,
+     "t": 8100,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "item": "i5",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 9,
+     "t": 9000,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 5
+      }
+     },
+     "round": "r1",
+     "seq": 10,
+     "t": 9900,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 11,
+     "t": 10800,
+     "type": "round_completed"
+    },
+    {
+     "data": {
+      "available": {
+       "apple": 4,
+       "orange": 8
+      },
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     "round": "r2",
+     "seq": 12,
+     "t": 11700,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i6",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 13,
+     "t": 12600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i7",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 14,
+     "t": 13500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i8",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 15,
+     "t": 14400,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i9",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 16,
+     "t": 15300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "orange": 4
+      }
+     },
+     "round": "r2",
+     "seq": 17,
+     "t": 16200,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r2",
+     "seq": 18,
+     "t": 17100,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "available": {
+       "pear": 8
+      },
+      "is_transfer": true,
+      "representation": "set",
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     "round": "r3",
+     "seq": 19,
+     "t": 18000,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i10",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 20,
+     "t": 18900,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i11",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 21,
+     "t": 19800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i12",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 22,
+     "t": 20700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i13",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 23,
+     "t": 21600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "pear": 4
+      }
+     },
+     "round": "r3",
+     "seq": 24,
+     "t": 22500,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r3",
+     "seq": 25,
+     "t": 23400,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 3,
+       "first_check_count": 3,
+       "first_error": "too_few",
+       "max_hint_level": 2,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "supported",
+      "round": "r1",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 3,
+       "first_check_count": 3,
+       "first_error": "too_few",
+       "max_hint_level": 2,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "supported",
+      "round": "r1",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 3,
+       "first_check_count": 3,
+       "first_error": "too_few",
+       "max_hint_level": 2,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "not_yet",
+      "round": "r1",
+      "rule": "produce_set.numeral_differential",
+      "skill": "math.number.numeral_recognition"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": "too_many",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "not_yet",
+      "round": "r2",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": "too_many",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "not_yet",
+      "round": "r2",
+      "rule": "produce_set.numeral_differential",
+      "skill": "math.number.numeral_recognition"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": "too_many",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "not_yet",
+      "round": "r2",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r3",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 4,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "independent",
+      "round": "r3",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 3,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 9900,
+      "first_check_count": 3,
+      "first_error": "too_few",
+      "is_transfer": false,
+      "max_hint_level": 2,
+      "max_in_basket": 5,
+      "outcome": "supported",
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 2,
+      "wrong_kind_adds": 0
+     },
+     {
+      "checks": 1,
+      "completed": false,
+      "context": "numeral:orange:3",
+      "duration_ms": 5400,
+      "first_check_count": 4,
+      "first_error": "too_many",
+      "is_transfer": true,
+      "max_hint_level": 1,
+      "max_in_basket": 4,
+      "outcome": "not_yet",
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r2",
+      "self_corrected": false,
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     },
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "set:pear:4",
+      "duration_ms": 5400,
+      "first_check_count": 4,
+      "first_error": null,
+      "is_transfer": true,
+      "max_hint_level": 0,
+      "max_in_basket": 4,
+      "outcome": "independent",
+      "problems": [],
+      "removals": 0,
+      "representation": "set",
+      "round": "r3",
+      "self_corrected": false,
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "misses_numerals_but_matches_a_pictured_set"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 2
+      }
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "available": {
+       "pear": 8
+      },
+      "is_transfer": true,
+      "representation": "set",
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set"
+     },
+     "round": "r3",
+     "seq": 5,
+     "t": 5400,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 6,
+     "t": 6300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 7,
+     "t": 7200,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i5",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 8,
+     "t": 8100,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i6",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 9,
+     "t": 9000,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i7",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 10,
+     "t": 9900,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i8",
+      "kind": "pear"
+     },
+     "round": "r3",
+     "seq": 11,
+     "t": 10800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "pear": 6
+      }
+     },
+     "round": "r3",
+     "seq": 12,
+     "t": 11700,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r3",
+     "seq": 13,
+     "t": 12600,
+     "type": "hint_shown"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 2,
+       "first_error": "too_few",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "not_yet",
+      "round": "r1",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 6,
+       "first_error": "too_many",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "not_yet",
+      "round": "r3",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "set:pear:4",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 6,
+       "first_error": "too_many",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 4
+      },
+      "is_transfer": true,
+      "outcome": "not_yet",
+      "round": "r3",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 1,
+      "completed": false,
+      "context": "numeral:apple:5",
+      "duration_ms": 3600,
+      "first_check_count": 2,
+      "first_error": "too_few",
+      "is_transfer": false,
+      "max_hint_level": 1,
+      "max_in_basket": 2,
+      "outcome": "not_yet",
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     },
+     {
+      "checks": 1,
+      "completed": false,
+      "context": "set:pear:4",
+      "duration_ms": 7200,
+      "first_check_count": 6,
+      "first_error": "too_many",
+      "is_transfer": true,
+      "max_hint_level": 1,
+      "max_in_basket": 6,
+      "outcome": "not_yet",
+      "problems": [],
+      "removals": 0,
+      "representation": "set",
+      "round": "r3",
+      "self_corrected": false,
+      "target": 4,
+      "target_kind": "pear",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "misses_everything_so_numeral_reading_stays_unjudged"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i5",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 5,
+     "t": 5400,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i6",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 6,
+     "t": 6300,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i1"
+     },
+     "round": "r1",
+     "seq": 7,
+     "t": 7200,
+     "type": "item_removed"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 5
+      }
+     },
+     "round": "r1",
+     "seq": 8,
+     "t": 8100,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 9,
+     "t": 9000,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": true,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": true,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "numeral:apple:5",
+      "detail": {
+       "checks": 1,
+       "first_check_count": 5,
+       "first_error": null,
+       "max_hint_level": 0,
+       "self_corrected": true,
+       "target": 5
+      },
+      "is_transfer": false,
+      "outcome": "independent",
+      "round": "r1",
+      "rule": "produce_set.numeral",
+      "skill": "math.number.numeral_recognition"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 8100,
+      "first_check_count": 5,
+      "first_error": null,
+      "is_transfer": false,
+      "max_hint_level": 0,
+      "max_in_basket": 6,
+      "outcome": "independent",
+      "problems": [],
+      "removals": 1,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": true,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "overshoots_and_self_corrects_before_checking"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 4,
+       "orange": 8
+      },
+      "is_transfer": true,
+      "representation": "numeral",
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set"
+     },
+     "round": "r2",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "orange"
+     },
+     "round": "r2",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r2",
+     "seq": 4,
+     "t": 4500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 1,
+       "orange": 3
+      }
+     },
+     "round": "r2",
+     "seq": 5,
+     "t": 5400,
+     "type": "check_requested"
+    },
+    {
+     "data": {
+      "level": 1
+     },
+     "round": "r2",
+     "seq": 6,
+     "t": 6300,
+     "type": "hint_shown"
+    },
+    {
+     "data": {
+      "item": "i4"
+     },
+     "round": "r2",
+     "seq": 7,
+     "t": 7200,
+     "type": "item_removed"
+    },
+    {
+     "data": {
+      "counts": {
+       "orange": 3
+      }
+     },
+     "round": "r2",
+     "seq": 8,
+     "t": 8100,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r2",
+     "seq": 9,
+     "t": 9000,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 2,
+       "first_check_count": 3,
+       "first_error": "wrong_kind",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "supported",
+      "round": "r2",
+      "rule": "produce_set.cardinality",
+      "skill": "math.counting.cardinality"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 2,
+       "first_check_count": 3,
+       "first_error": "wrong_kind",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "supported",
+      "round": "r2",
+      "rule": "produce_set.one_to_one",
+      "skill": "math.counting.one_to_one"
+     },
+     {
+      "context": "numeral:orange:3",
+      "detail": {
+       "checks": 2,
+       "first_check_count": 3,
+       "first_error": "wrong_kind",
+       "max_hint_level": 1,
+       "self_corrected": false,
+       "target": 3
+      },
+      "is_transfer": true,
+      "outcome": "supported",
+      "round": "r2",
+      "rule": "produce_set.transfer",
+      "skill": "math.quantity.transfer"
+     }
+    ],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 2,
+      "completed": true,
+      "context": "numeral:orange:3",
+      "duration_ms": 8100,
+      "first_check_count": 3,
+      "first_error": "wrong_kind",
+      "is_transfer": true,
+      "max_hint_level": 1,
+      "max_in_basket": 4,
+      "outcome": "supported",
+      "problems": [],
+      "removals": 1,
+      "representation": "numeral",
+      "round": "r2",
+      "self_corrected": false,
+      "target": 3,
+      "target_kind": "orange",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 1
+     }
+    ]
+   },
+   "name": "adds_a_wrong_fruit_then_fixes_it"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    }
+   ],
+   "expected": {
+    "integrity": "ok",
+    "observations": [],
+    "problems": [],
+    "rounds": [
+     {
+      "checks": 0,
+      "completed": false,
+      "context": "numeral:apple:5",
+      "duration_ms": 1800,
+      "first_check_count": null,
+      "first_error": null,
+      "is_transfer": false,
+      "max_hint_level": 0,
+      "max_in_basket": 2,
+      "outcome": null,
+      "problems": [],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 0,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "never_checks_so_there_is_no_evidence"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 5
+      }
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "inconsistent",
+    "observations": [],
+    "problems": [
+     "round r1: check reported 5 apple but replay gives 2 apple",
+     "round r1: round marked complete without a correct check"
+    ],
+    "rounds": [
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 3600,
+      "first_check_count": 2,
+      "first_error": "too_few",
+      "is_transfer": false,
+      "max_hint_level": 0,
+      "max_in_basket": 2,
+      "outcome": "not_yet",
+      "problems": [
+       "check reported 5 apple but replay gives 2 apple",
+       "round marked complete without a correct check"
+      ],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "tampered_check_is_rejected"
+  },
+  {
+   "events": [
+    {
+     "data": {
+      "available": {
+       "apple": 8
+      },
+      "is_transfer": false,
+      "representation": "numeral",
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set"
+     },
+     "round": "r1",
+     "seq": 0,
+     "t": 900,
+     "type": "round_started"
+    },
+    {
+     "data": {
+      "item": "i1",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 1,
+     "t": 1800,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i2",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 2,
+     "t": 2700,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i3",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 3,
+     "t": 3600,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "item": "i4",
+      "kind": "apple"
+     },
+     "round": "r1",
+     "seq": 4,
+     "t": 4500,
+     "type": "item_added"
+    },
+    {
+     "data": {
+      "counts": {
+       "apple": 4
+      }
+     },
+     "round": "r1",
+     "seq": 5,
+     "t": 5400,
+     "type": "check_requested"
+    },
+    {
+     "data": {},
+     "round": "r1",
+     "seq": 6,
+     "t": 6300,
+     "type": "round_completed"
+    }
+   ],
+   "expected": {
+    "integrity": "inconsistent",
+    "observations": [],
+    "problems": [
+     "round r1: round marked complete without a correct check"
+    ],
+    "rounds": [
+     {
+      "checks": 1,
+      "completed": true,
+      "context": "numeral:apple:5",
+      "duration_ms": 5400,
+      "first_check_count": 4,
+      "first_error": "too_few",
+      "is_transfer": false,
+      "max_hint_level": 0,
+      "max_in_basket": 4,
+      "outcome": "not_yet",
+      "problems": [
+       "round marked complete without a correct check"
+      ],
+      "removals": 0,
+      "representation": "numeral",
+      "round": "r1",
+      "self_corrected": false,
+      "target": 5,
+      "target_kind": "apple",
+      "task_type": "produce_set",
+      "wrong_checks": 1,
+      "wrong_kind_adds": 0
+     }
+    ]
+   },
+   "name": "completion_without_a_correct_check_is_rejected"
+  }
+ ]
+}
