@@ -133,7 +133,10 @@ export async function qualify(
   }
   const noise = all.length ? Math.sqrt(all.reduce((s, x) => s + x * x, 0) / all.length) : Infinity;
   const bias = all.length ? all.reduce((s, x) => s + x, 0) / all.length : 0;
-  const withinLimits = all.length > 0 && Object.values(detail).every((d) => d.noise <= QUALIFICATION.maxNoise && Math.abs(d.bias) <= QUALIFICATION.maxBias);
+  // A lean smaller than its own sampling error (2 standard errors) is not evidence of bias:
+  // with a dozen anchors, an unbiased evaluator would otherwise fail by chance about half the time.
+  const biasLimit = (d: { n: number; noise: number }) => Math.max(QUALIFICATION.maxBias, (2 * d.noise) / Math.sqrt(d.n));
+  const withinLimits = all.length > 0 && Object.values(detail).every((d) => d.noise <= QUALIFICATION.maxNoise && Math.abs(d.bias) <= biasLimit(d));
   return {
     kind: "qualification",
     id: `q:${evaluator.id}:${at}`,

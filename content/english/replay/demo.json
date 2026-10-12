@@ -1,0 +1,877 @@
+{
+ "_note": "Illustrative evaluator outputs written by OpenPath for the E1 demonstration. Not produced by an LLM.",
+ "wr.email.librarian@1:3b536de7": {
+  "evidence_id": "anchor:anc.email.1",
+  "item": {
+   "id": "wr.email.librarian",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "dear mrs rao i want book about space becos my freind have it"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "dear mrs rao i want book about space becos my freind have it"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 2,
+    "confidence": "medium",
+    "quotes": [
+     "dear mrs rao i want book about space becos my freind have it"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "dear mrs rao i want book about space becos my freind have it"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "dear mrs rao i want book about space becos my freind have it"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.email.librarian@1:93c4be0c": {
+  "evidence_id": "anchor:anc.email.2",
+  "item": {
+   "id": "wr.email.librarian",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 4,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 4.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 4,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 5.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 3,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.email.librarian@1:7fd46baf": {
+  "evidence_id": "anchor:anc.email.3",
+  "item": {
+   "id": "wr.email.librarian",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 6.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 5.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 7,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.email.librarian@1:9c2d0bd0": {
+  "evidence_id": "anchor:anc.email.4",
+  "item": {
+   "id": "wr.email.librarian",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 8,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 6.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 8,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 7,
+    "confidence": "medium",
+    "quotes": [
+     "Dear Mrs"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.story.door@1:108a50d4": {
+  "evidence_id": "anchor:anc.story.1",
+  "item": {
+   "id": "wr.story.door",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 3.5,
+    "confidence": "medium",
+    "quotes": [
+     "when i open the door i see a big dog it was in my house it w"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 2,
+    "confidence": "medium",
+    "quotes": [
+     "when i open the door i see a big dog it was in my house it w"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 3,
+    "confidence": "medium",
+    "quotes": [
+     "when i open the door i see a big dog it was in my house it w"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "when i open the door i see a big dog it was in my house it w"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 2,
+    "confidence": "medium",
+    "quotes": [
+     "when i open the door i see a big dog it was in my house it w"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.story.door@1:d1930ecb": {
+  "evidence_id": "anchor:anc.story.2",
+  "item": {
+   "id": "wr.story.door",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 4,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 4.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 4.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 4.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.story.door@1:6770286a": {
+  "evidence_id": "anchor:anc.story.3",
+  "item": {
+   "id": "wr.story.door",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 5.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 6.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 6.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.story.door@1:4e008005": {
+  "evidence_id": "anchor:anc.story.4",
+  "item": {
+   "id": "wr.story.door",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 7,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 8,
+    "confidence": "medium",
+    "quotes": [
+     "When I opened the door, I could not believe what I saw"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.opinion.phones@1:1c1f6e9e": {
+  "evidence_id": "anchor:anc.phones.1",
+  "item": {
+   "id": "wr.opinion.phones",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 2,
+    "confidence": "medium",
+    "quotes": [
+     "i think phones is good in school becuase we can call our par"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "i think phones is good in school becuase we can call our par"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 2.5,
+    "confidence": "medium",
+    "quotes": [
+     "i think phones is good in school becuase we can call our par"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 3.5,
+    "confidence": "medium",
+    "quotes": [
+     "i think phones is good in school becuase we can call our par"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 1.5,
+    "confidence": "medium",
+    "quotes": [
+     "i think phones is good in school becuase we can call our par"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.opinion.phones@1:69dc8662": {
+  "evidence_id": "anchor:anc.phones.2",
+  "item": {
+   "id": "wr.opinion.phones",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 5,
+    "confidence": "medium",
+    "quotes": [
+     "I think students should not use mobile phones at school"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 5,
+    "confidence": "medium",
+    "quotes": [
+     "I think students should not use mobile phones at school"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 4,
+    "confidence": "medium",
+    "quotes": [
+     "I think students should not use mobile phones at school"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "I think students should not use mobile phones at school"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 4,
+    "confidence": "medium",
+    "quotes": [
+     "I think students should not use mobile phones at school"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.opinion.phones@1:3be90060": {
+  "evidence_id": "anchor:anc.phones.3",
+  "item": {
+   "id": "wr.opinion.phones",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 6.5,
+    "confidence": "medium",
+    "quotes": [
+     "Many people argue about whether students should be allowed t"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 5.5,
+    "confidence": "medium",
+    "quotes": [
+     "Many people argue about whether students should be allowed t"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 6,
+    "confidence": "medium",
+    "quotes": [
+     "Many people argue about whether students should be allowed t"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 7,
+    "confidence": "medium",
+    "quotes": [
+     "Many people argue about whether students should be allowed t"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 5.5,
+    "confidence": "medium",
+    "quotes": [
+     "Many people argue about whether students should be allowed t"
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.opinion.phones@1:5388418b": {
+  "evidence_id": "anchor:anc.phones.4",
+  "item": {
+   "id": "wr.opinion.phones",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 8,
+    "confidence": "medium",
+    "quotes": [
+     "Banning mobile phones in schools is tempting, but it treats "
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "Banning mobile phones in schools is tempting, but it treats "
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 8,
+    "confidence": "medium",
+    "quotes": [
+     "Banning mobile phones in schools is tempting, but it treats "
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 7,
+    "confidence": "medium",
+    "quotes": [
+     "Banning mobile phones in schools is tempting, but it treats "
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 7.5,
+    "confidence": "medium",
+    "quotes": [
+     "Banning mobile phones in schools is tempting, but it treats "
+    ],
+    "misconceptions": [],
+    "rationale": "Illustrative recording."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  }
+ },
+ "wr.email.librarian@1:3b5b1542": {
+  "evidence_id": "asha:writing",
+  "item": {
+   "id": "wr.email.librarian",
+   "version": 1
+  },
+  "judgements": [
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "band": 3.5,
+    "confidence": "medium",
+    "criteria": [
+     {
+      "id": "boundaries_marked",
+      "score": 1,
+      "max": 3
+     }
+    ],
+    "quotes": [
+     "I want to ask you to order a book for our library, it is called The Secret of the Stars",
+     "I read the first chapter at my cousin's house I could not stop reading"
+    ],
+    "misconceptions": [
+     "comma_splice",
+     "fused_sentence"
+    ],
+    "rationale": "Three of five sentences join independent clauses with a comma or with nothing."
+   },
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "band": 5.5,
+    "confidence": "high",
+    "quotes": [
+     "I want to ask you to order a book for our library",
+     "Thank you for your help"
+    ],
+    "misconceptions": [],
+    "rationale": "Names the book, gives a reason and thanks the librarian."
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "band": 5,
+    "confidence": "medium",
+    "quotes": [
+     "In conclusion, I hope you will agree with my request"
+    ],
+    "misconceptions": [],
+    "rationale": "Clear opening, body and closing paragraphs."
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "band": 5,
+    "confidence": "medium",
+    "quotes": [
+     "The story is about two children who build a telescope"
+    ],
+    "misconceptions": [],
+    "rationale": "Verb forms and agreement mostly correct."
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "band": 6.5,
+    "confidence": "high",
+    "quotes": [
+     "Many students in my class like science"
+    ],
+    "misconceptions": [],
+    "rationale": "No spelling errors."
+   }
+  ],
+  "not_observable": [],
+  "flags": {
+   "off_task": false,
+   "too_short": false,
+   "possibly_copied": false,
+   "safeguarding": false
+  },
+  "surprise": {
+   "capability": "EN.SEN.CMP.run_ons",
+   "note": "Sentence boundaries weaker than other writing skills."
+  }
+ }
+}

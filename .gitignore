@@ -13,3 +13,6 @@ frontend/e2e/shots/
 *.log
 .env
 .DS_Store
+
+# English tools output
+tools/english/out/
