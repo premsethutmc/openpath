@@ -1,8 +1,9 @@
 # V1 implementation plan
 
-*Items F, G and I of the architecture instruction. This whole plan is
-**Recommended** and waits for your approval. No code will be written for it
-until you approve.*
+*Items F, G and I of the architecture instruction. You accepted the overall
+direction on 12 October (A-21). Each milestone is still approved on its own:
+its scope and acceptance tests are presented first, and when it is finished
+its result is reported and the next one waits for your approval (A-30).*
 
 | Label | Meaning |
 |---|---|
@@ -34,7 +35,7 @@ subject- or game-specific code in the core.*
 | **Retention and transfer** | Due checks appear in recommendations when the learner returns |
 | **Explanations** | "Why this next?" and "What is this based on?" pages: for guardians in the children's app, for the learner in the practice app |
 | **Privacy** | Export and delete covering everything. No cross-product view without a grant |
-| **Proof** | A simulation report of pretend learners going through both products over weeks. Then a small real try-out (O-13) |
+| **Checking** | Two separate things (A-27). 1. A **system-behaviour simulation**: pretend learners with scripted behaviour test that the software behaves consistently and handles edge cases. It says nothing about whether anyone learns. 2. **Real-learner validation**: a small try-out with real people (O-13). This is the only evidence of educational effect, and V1 starts it rather than concludes it |
 
 ### What V1 does not contain
 
@@ -61,12 +62,30 @@ The following are left out of V1 (item G):
 ## 2. Milestones (item F)
 
 Each milestone is a separate pull request. Each one can be tested on its own
-and leaves everything working. The existing 49 engine tests, 19 app tests, the
-Django tests and the browser end-to-end test stay green at every step.
+and leaves working, tested software (A-29). The existing 49 engine tests, 19
+app tests, the Django tests and the browser end-to-end test stay green at every
+step.
+
+**How every milestone runs (A-30):**
+
+1. Scope and acceptance tests are written up and sent to you.
+2. You approve them, or change them.
+3. I build, on its own branch, with its own pull request.
+4. I report the result against each acceptance test, with screenshots or a
+   report you can open.
+5. You approve the merge, and then the next milestone's scope.
+
+Nothing starts automatically.
+
+**The profile is visible from the start (A-25).** Each milestone adds to a
+**profile report**: a self-contained page that shows, for pretend learners and
+for learners on a local test database, every capability's stage, the
+reasons for it in plain words, and the evidence trail behind it. It is
+introduced in M1.
 
 ```mermaid
 flowchart LR
-    M0["M0<br/>Settle the<br/>starting point"] --> M1["M1<br/>Capability<br/>registry"]
+    M0["M0 ✔<br/>Settle the<br/>starting point"] --> M1["M1<br/>Capability registry<br/>+ observable profile"]
     M1 --> M2["M2<br/>General evidence<br/>+ 2nd task type"]
     M0 --> M3["M3<br/>Accounts, products,<br/>consent"]
     M2 --> M4["M4<br/>Goals and<br/>pathways"]
@@ -76,44 +95,34 @@ flowchart LR
     M5 --> M7["M7<br/>Practice app"]
     M6 --> M8["M8<br/>Explanations,<br/>export, delete"]
     M7 --> M8
-    M8 --> M9["M9<br/>Simulation report<br/>+ small try-out"]
+    M8 --> M9["M9<br/>Behaviour simulation<br/>+ real-learner try-out"]
 ```
 
 Sizes are relative: **S** is a few days of work, **M** is about a week, **L**
 is more than a week.
 
-### M0 · Settle the starting point (S)
+### M0 · Settle the starting point (S) · ✔ done 12 October
 
-**What changes:**
-
-- PR #1 is merged into `main` after your approval (O-1), so `main` holds the
-  platform seed.
-- Your call on `df50049` is applied (O-2).
+- PR #1 was merged into `main` (A-21) after its checks and diff were verified.
+- `df50049` was kept (A-22), after checking that nothing reaches a server
+  before guardian consent.
 - PRs #2 and #3 stay open and parked.
-- If you approve the layout (O-11), folders are moved, but no logic changes.
+- No folders were moved: none needed to be yet (A-24).
+- CI is green on `main`.
 
-**How you will know it works:** CI is green on `main`, and the apple-shopping
-game plays exactly as before.
+### M1 · Capability registry and observable profile (M)
 
-### M1 · Capability registry (M)
+**Full scope and acceptance tests:**
+[`milestones/M1_CAPABILITY_REGISTRY.md`](milestones/M1_CAPABILITY_REGISTRY.md).
+In short:
 
-**What changes:**
-
-- Frameworks and capabilities are loaded from versioned files into the
-  database.
-- Several frameworks can coexist, each with its own mastery policy.
-- Capability ids are permanent.
-- The early-number file becomes framework #1. A sample syllabus file becomes
-  framework #2.
-
-**Tests:**
-
-- Both frameworks load.
-- Prerequisites contain no loops.
-- Changing a framework version keeps old evidence readable.
-
-**How you will know it works:** a page lists both frameworks with their
-capabilities and links. Meena's profile is unchanged.
+- Several versioned capability frameworks can coexist: early number, plus a
+  draft TNPSC Group 1 polity sample.
+- Profiles are computed per framework.
+- Every capability state gets a plain-language explanation and your stage
+  names.
+- A profile report makes all of this visible.
+- The children's game behaves exactly as before.
 
 ### M2 · General evidence and a second task type (M)
 
@@ -121,7 +130,6 @@ capabilities and links. Meena's profile is unchanged.
 
 - Observations record product, activity version, rule version and framework
   version.
-- Stage names are mapped to your four (`CAPABILITY_MODEL.md` §2).
 - Confidence and misconception fields are added.
 - The `select_response` rule set is added: independent means right first
   time, supported means right after a hint, not yet means wrong.
@@ -240,24 +248,35 @@ self-contained file.
 **How you will know it works:** a click-through, and an exported file you can
 read.
 
-### M9 · Proof (M)
+### M9 · System-behaviour simulation and real-learner try-out (M)
 
 **What changes:**
 
-- **Simulation report.** About 100 pretend learners with different starting
-  points and behaviours (fast, slow, forgetful, guessing, careless) run
-  through both products over simulated weeks. The report shows:
-  - who reached *mastered*, and how long it took
-  - that nobody reached it from one session
-  - that forgetful learners were caught by retention checks
-  - that guessers stayed below *demonstrated*
-  - that every recommendation has a reason
+- **System-behaviour simulation (A-27).** About 100 pretend learners with
+  scripted behaviours (fast, slow, forgetful, guessing, careless, erratic,
+  absent for weeks, replaying the same session) run through both products
+  over simulated weeks. The simulation checks that the *software* behaves
+  correctly:
+  - nobody reaches *mastered* from one session
+  - forgetful patterns trigger retention checks and *needs review*
+  - guessing patterns do not reach *demonstrated*
+  - every recommendation has a reason
+  - identical histories always give identical profiles
+  - nothing crashes on gaps, duplicates or odd timing
+
+  Because the pretend learners only do what they were scripted to do, **the
+  simulation is not evidence that anyone learns**, and its report will say so
+  on its first page.
 - **Small try-out**, with your approval (O-13). Real adults use the practice
   app. Children play only after legal review and proper guardian consent
   (O-10).
 
-**How you will know it works:** the report, written for you, not for
-engineers.
+**How you will know it works:** the simulation report, written for you, not
+for engineers. Then, separately, a try-out plan stating what would count as
+evidence of real learning. For example: real learners' unaided success on
+*unseen* items rising between a first diagnostic and a check weeks later,
+compared against what we would expect without the practice. Whether
+OpenPath improves learning is decided by that, not by the simulation.
 
 ## 3. What can wait (item G)
 

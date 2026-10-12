@@ -176,8 +176,11 @@ flowchart TB
   They share only a thin client library for talking to the platform: send
   events, ask what to do next, sign in. A Practice app build will be checked
   automatically to confirm it contains none of the children's assets.
-- **Recommended repository layout** (moving existing folders needs your
-  approval, decision O-11):
+- **Target repository layout.** **Agreed (A-24):** restructuring is minimal and
+  happens only where it improves a boundary. So existing folders move only in
+  the milestone that genuinely needs it: `frontend/` stays where it is until
+  the practice app arrives (M7), and the shared client is extracted only then.
+  Nothing moves just to match this picture.
 
 ```
 backend/                Django: one module per platform area
@@ -244,7 +247,7 @@ content/
 | `backend/assessment/evaluate.py`, `rules/` | `assessment` | Unchanged in idea. Add a second task type |
 | `backend/assessment/mastery.py` | `profiles` | Policy per framework, a confidence summary and the status vocabulary (see `CAPABILITY_MODEL.md`) |
 | `backend/assessment/progression.py` | Split into `recommendations` (general) and the apple-shopping **round generator** | The shopping tables leave the platform |
-| `shared/curriculum/*.json` | `capabilities` + `content/frameworks` | Several frameworks, versioned, loaded into the database |
+| `shared/curriculum/*.json` | `capabilities` registry | Several frameworks, versioned. **Kept as checked files in M1**, validated by tests and locked by a fingerprint once published. They move into the database only if contributor editing later needs it |
 | `frontend/` | `apps/kids-web` | Shopping-shaped types move out of `core`. Talks to the platform through the shared client |
 | `frontend/src/core/engine` (TypeScript mirror) | Kids app only | Evaluation only, for offline play. Planning moves to the server |
 | `game/` (PRs #2 and #3) | `apps/kids-game` | Parked |

@@ -15,10 +15,15 @@ shopping game.*
 
 ---
 
-## 1. Where the code is today
+> **Update, 12 October 2026.** After this audit, PR #1 was merged into `main`
+> with your approval (decision A-21). `main` now holds the platform seed, and
+> the code links below point to `main`. PRs #2 and #3 remain open and
+> unmerged. Section 1 describes the repository as it was audited.
 
-`main` is empty apart from the first commit. All the work so far sits on three
-pull requests that have **not been merged**:
+## 1. Where the code was at the time of the audit
+
+`main` was empty apart from the first commit. All the work sat on three pull
+requests that had **not been merged**:
 
 ```mermaid
 flowchart LR
@@ -36,8 +41,7 @@ flowchart LR
 | `feature/visual-quality-poc` (PR #2) | Art and animation experiment for Amma's home | — | Accepted by you as the visual reference |
 | `feature/home-vertical-slice` (PR #3) | The playable home scene built on PR #2 | — | Playable preview. Not yet tried on a real Android phone |
 
-This audit branch is cut from `main`, so its pull request contains documents
-only. Links to code below point to the branch where the code lives.
+The audit's pull request (PR #4) contains documents only.
 
 ---
 
@@ -47,7 +51,7 @@ only. Links to code below point to the branch where the code lives.
 
 - **Pseudonymous learners.** A learner is a random ID and nothing else: no name,
   birth date, e-mail or school
-  ([`learners/models.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/learners/models.py)).
+  ([`learners/models.py`](https://github.com/premsethutmc/openpath/blob/main/backend/learners/models.py)).
 - **An access token per learner.** Only a hash of the token is stored, and enrolment is rate-limited.
 - **Consent records.** Each record notes who gave consent (guardian or school) and the policy version.
 - **Export and delete.** Export returns everything held about a learner as one file. Delete removes the learner and all their evidence.
@@ -74,22 +78,22 @@ domain-neutral.
 
 | Part | What it does | Shopping-specific? |
 |---|---|---|
-| [`evaluate.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/evaluate.py) | Splits a session into rounds and hands each round to the rule set registered for its *task type* | No |
-| [`rules/produce_set.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/rules/produce_set.py) | Rules for "build a set of N things" (the classic give-N task). Decides independent, supported or not yet for numeral reading, one-to-one counting, cardinality and transfer | It is maths-specific, which is correct for a rule set. Shopping is only its skin |
-| [`mastery.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/mastery.py) | Turns a skill's observations into a status with named criteria, from *no evidence* through *mastered* to *needs review*. One good session can never produce *mastered* | No, though its thresholds are tuned for young children |
-| [`progression.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/progression.py) | Builds the profile with prerequisites, then plans the next session | **Yes.** See section 4 |
-| [`scenarios.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/scenarios.py) | Scripted pretend learners for tests | Yes, which is acceptable for test helpers |
+| [`evaluate.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/evaluate.py) | Splits a session into rounds and hands each round to the rule set registered for its *task type* | No |
+| [`rules/produce_set.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/rules/produce_set.py) | Rules for "build a set of N things" (the classic give-N task). Decides independent, supported or not yet for numeral reading, one-to-one counting, cardinality and transfer | It is maths-specific, which is correct for a rule set. Shopping is only its skin |
+| [`mastery.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/mastery.py) | Turns a skill's observations into a status with named criteria, from *no evidence* through *mastered* to *needs review*. One good session can never produce *mastered* | No, though its thresholds are tuned for young children |
+| [`progression.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/progression.py) | Builds the profile with prerequisites, then plans the next session | **Yes.** See section 4 |
+| [`scenarios.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/scenarios.py) | Scripted pretend learners for tests | Yes, which is acceptable for test helpers |
 
 - **49 engine tests** pass. The engine imports nothing from Django, so it can
   be tested and reused on its own.
 - **A matching TypeScript copy** lets the children's app work offline
-  ([`frontend/src/core/engine`](https://github.com/premsethutmc/openpath/tree/feature/apple-shopping-prototype/frontend/src/core/engine)).
+  ([`frontend/src/core/engine`](https://github.com/premsethutmc/openpath/tree/main/frontend/src/core/engine)).
   Shared test cases in `shared/golden/cases.json` prove the two copies agree.
 
 ### 2.4 Capability definitions
 
 A single file,
-[`shared/curriculum/math-early-number.json`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/shared/curriculum/math-early-number.json).
+[`shared/curriculum/math-early-number.json`](https://github.com/premsethutmc/openpath/blob/main/shared/curriculum/math-early-number.json).
 
 - **Six skills:**
   - reads numerals
@@ -152,7 +156,7 @@ These are the places where shopping has leaked into what should be shared
 platform. They are listed from most to least important.
 
 1. **"What next" is a shopping plan.** `plan_next_session` in
-   [`progression.py`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/backend/assessment/progression.py)
+   [`progression.py`](https://github.com/premsethutmc/openpath/blob/main/backend/assessment/progression.py)
    returns three apple-shopping rounds: fixed tables of fruit kinds and target
    numbers, with a difficulty band chosen by looking at two counting skills by
    name. The *decision* ("practise cardinality with small numbers") and the
@@ -164,7 +168,7 @@ platform. They are listed from most to least important.
    apple-shopping activity.
 
 2. **"Core" types in the web app describe shopping.** In
-   [`frontend/src/core/types.ts`](https://github.com/premsethutmc/openpath/blob/feature/apple-shopping-prototype/frontend/src/core/types.ts),
+   [`frontend/src/core/types.ts`](https://github.com/premsethutmc/openpath/blob/main/frontend/src/core/types.ts),
    `RoundSpec` has `target_kind`, `available` (the shelf) and a task type that
    can only be `"produce_set"`. Any other activity would have to pretend to be
    shopping.
@@ -214,15 +218,24 @@ platform. They are listed from most to least important.
 ## 5. Smaller findings
 
 - **The older architecture document is out of date.**
-  `docs/ARCHITECTURE.md` on PR #1 describes the shopping prototype's design.
+  `docs/ARCHITECTURE.md` (from PR #1) describes the shopping prototype's design.
   It predates the new direction, and the documents in this folder supersede it
-  for platform matters.
-- **PR #1's last commit `df50049` has not been confirmed by you.** It opens
-  the children's app straight into the game, moves consent to the grown-ups'
-  area and keeps one kind of fruit per trip until counting looks secure. See
-  `DECISION_LOG.md`, decision O-2.
-- **PR #1's description is slightly stale.** It still refers to commit
-  `bb6e79e` as its latest.
+  for platform matters. It now carries a note saying so.
+- **PR #1's last commit `df50049` was unconfirmed at the time of the audit.**
+  It opens the children's app straight into the game, moves consent to the
+  grown-ups' area and keeps one kind of fruit per trip until counting looks
+  secure. You have since approved it, on condition that consent and privacy
+  are not bypassed (decision A-22).
+  - **Checked before merging:** the app makes no network request at all until
+    a guardian ticks the consent box and presses *Agree and save*. The server
+    refuses to create a learner without confirmed consent. Play before that
+    point stays in the browser.
+  - **A limitation that pre-dates this commit:** the *Grown-ups* button has no
+    adult check, so in principle a child could reach the consent box. Proper
+    guardian accounts and verified consent belong to M3 and the legal review
+    (O-10). Until then, no real children's data goes to a server.
+- **PR #1's description was slightly stale.** It referred to commit `bb6e79e`
+  as its latest. This was corrected before merging.
 - **The game is not wired to evidence.** That is by design for a visual proof
   of concept, but it means no learning evidence comes out of PRs #2 and #3
   today.

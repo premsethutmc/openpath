@@ -39,14 +39,24 @@ Each entry gives the date (2026) and the source.
 | A-18 | A modular monolith with logical module boundaries | Oct · master direction §9 |
 | A-19 | First objective: prove the complete adaptive loop, using shopping as one test and a second, different experience | Oct · master direction §10 |
 | A-20 | No code rewrites, purchases, major implementation commits or merges until the architecture and V1 plan are approved. This audit is a documentation-only pull request | Oct · master direction §12 |
+| A-21 | **The overall architectural direction is accepted** (R-1). PR #1 may be merged into `main` after its final checks and diff are verified. *Done 12 Oct: checks rechecked, then merged.* PRs #2 and #3 are **not** merged yet | 12 Oct · decision on O-1 |
+| A-22 | Commit `df50049` stays, for the prototype, provided the required consent and privacy protections are not bypassed (see `REPOSITORY_AUDIT.md` §5 for the check) | 12 Oct · decision on O-2 |
+| A-23 | The second product is a small **TNPSC Group 1 practice** experience | 12 Oct · decision on O-3 |
+| A-24 | Folders are restructured minimally, and only where it improves architectural boundaries. No unnecessary refactoring | 12 Oct · decision on O-11 |
+| A-25 | The living capability profile is the central product. It must be **observable and explainable early** in development, not only at the end | 12 Oct · additional requirement 1 |
+| A-26 | All learning experiences stay independent of the core engine | 12 Oct · additional requirement 2 |
+| A-27 | Simulation results are never presented as educational effectiveness. The pretend-learner simulation tests **system behaviour, consistency and edge cases**. Actual learning improvement must be validated with real learners | 12 Oct · additional requirements 3–4 |
+| A-28 | Keep the architecture simple: no premature microservices, marketplace or AI infrastructure | 12 Oct · additional requirement 5 |
+| A-29 | Every milestone leaves working, tested software | 12 Oct · additional requirement 6 |
+| A-30 | **No milestone starts automatically.** At the end of each milestone, the result is reported and approval is requested before the next one begins. Each milestone's scope and acceptance tests are presented for approval before it is implemented | 12 Oct · additional requirement 7 |
 
 ## B. Recommended, awaiting your approval
 
 | # | Recommendation | Where explained |
 |---|---|---|
-| R-1 | The platform architecture: modules, borders and the rules between them | `PLATFORM_ARCHITECTURE.md` |
+| R-1 | ~~The platform architecture: modules, borders and the rules between them~~ **Accepted 12 Oct → A-21** | `PLATFORM_ARCHITECTURE.md` |
 | R-2 | The minimum records and interfaces | `CAPABILITY_MODEL.md` §4–5 |
-| R-3 | The V1 scope and milestones M0–M9 | `V1_IMPLEMENTATION_PLAN.md` |
+| R-3 | The V1 scope and milestones M0–M9. Updated 12 Oct for A-25…A-30. M0 is done; each later milestone is approved separately (A-30) | `V1_IMPLEMENTATION_PLAN.md` |
 | R-4 | Keep the finer stages *developing* and *needs review* under your four stage names | `CAPABILITY_MODEL.md` §2 |
 | R-5 | Treat transfer as a property of evidence for every capability, not a separate skill | `CAPABILITY_MODEL.md` §3 |
 | R-6 | Confidence is an interpretable label with a stated reason, not a hidden score, in V1 | `CAPABILITY_MODEL.md` §3 |
@@ -54,12 +64,16 @@ Each entry gives the date (2026) and the source.
 | R-8 | One learner identity per product, linked only by an explicit, revocable grant | `PLATFORM_ARCHITECTURE.md` §4 |
 | R-9 | Keep the on-device engine copy for the children's app only, and for evaluation only | `REPOSITORY_AUDIT.md` §4 |
 | R-10 | Park Amma's home scene (PRs #2 and #3) as the visual reference. Do not extend its custom art pipeline | `PLATFORM_ARCHITECTURE.md` §6 |
+| R-11 | M1 scope and acceptance tests | [`milestones/M1_CAPABILITY_REGISTRY.md`](milestones/M1_CAPABILITY_REGISTRY.md) |
 
 ## C. Open: decisions for you
 
-Each entry gives the options and my recommendation.
+Each entry gives the options and my recommendation. Decided entries stay here
+for the record, with the outcome beside the title.
 
-**O-1 · What happens to the three open pull requests?**
+**Still open:** O-4, O-5, O-6, O-7, O-8, O-9, O-10, O-12, O-13, O-14.
+
+**O-1 · What happens to the three open pull requests?** — ✅ **Decided 12 Oct: (a), after verification → A-21.**
 
 - **Options:**
   - (a) Merge PR #1 into `main` now, and keep PRs #2 and #3 open and parked.
@@ -69,7 +83,7 @@ Each entry gives the options and my recommendation.
   and every later milestone builds on it. PRs #2 and #3 are a visual reference
   that V1 does not need.
 
-**O-2 · Keep or revert commit `df50049` on PR #1?**
+**O-2 · Keep or revert commit `df50049` on PR #1?** — ✅ **Decided 12 Oct: keep, provided consent is not bypassed → A-22.**
 
 - **What the commit does:**
   - The children's app opens straight into the game, with no start form.
@@ -78,7 +92,7 @@ Each entry gives the options and my recommendation.
   - It keeps one kind of fruit per trip until counting looks secure.
 - **Recommendation: keep.** It matches A-9 and does not weaken consent.
 
-**O-3 · Which second test experience?**
+**O-3 · Which second test experience?** — ✅ **Decided 12 Oct: (a) TNPSC Group 1 practice → A-23.**
 
 - **Options:**
   - (a) Exam-style practice: a small TNPSC Group 1 sample unit.
@@ -150,7 +164,7 @@ Each entry gives the options and my recommendation.
 - **Recommendation:** no real children's data on a server until a lawyer has
   reviewed the consent flow. Device-only play is unaffected.
 
-**O-11 · May I reorganise folders?**
+**O-11 · May I reorganise folders?** — ✅ **Decided 12 Oct: minimal, only where it improves boundaries → A-24.**
 
 - **What it involves:** moving `frontend/` → `apps/kids-web/` and `game/` →
   `apps/kids-game/`, and splitting backend apps into the modules. Moves only,
