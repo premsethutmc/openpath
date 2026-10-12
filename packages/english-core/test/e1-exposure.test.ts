@@ -21,10 +21,17 @@ const goal: Goal = { id: "g", name: "Agreement", weights: { [SVA]: 1 }, targets:
 const svaItems = (c: Context = ctx()) => [...c.content.items.values()].filter((i): i is CodeItem => i.kind === "code" && i.target === SVA);
 
 function answer(item: CodeItem, id: string, at: string, session: string, right = true): EvidenceEvent {
-  const response =
-    item.format.startsWith("choice:")
-      ? { kind: "choice" as const, choice: right ? item.answer! : (item.answer! + 1) % item.options!.length }
-      : { kind: "typed" as const, text: right ? item.answers![0] : "zzz" };
+  const kind = item.format.split(":")[0];
+  const response: EvidenceEvent["response"] =
+    kind === "choice"
+      ? { kind: "choice", choice: right ? item.answer! : (item.answer! + 1) % item.options!.length }
+      : kind === "multi"
+        ? { kind: "multi", choices: right ? item.answer_set! : [] }
+        : kind === "order"
+          ? { kind: "order", order: right ? item.answer_order! : [] }
+          : kind === "match"
+            ? { kind: "match", pairs: right ? item.answer_pairs! : [] }
+            : { kind: "typed", text: right ? item.answers![0] : "zzz" };
   return { kind: "evidence", id, at, session, item: { id: item.id, version: item.version }, response };
 }
 

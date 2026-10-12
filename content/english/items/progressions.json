@@ -1,0 +1,686 @@
+{
+ "review": "candidate-unvalidated",
+ "note": "Difficulty ladders (E2a): for each capability, the features that make its items harder, in order, each at a band on OpenPath's 1-8 scale and under one of the capability's band descriptors. Bands are expert estimates, not empirically calibrated. For review by English educators (D-4).",
+ "capabilities": {
+  "EN.FND.SPL.inflections": {
+   "steps": [
+    {
+     "id": "plain",
+     "band": 1.5,
+     "descriptor": "2",
+     "feature": "Adds -s, -ing or -ed with no change to the base (plays, jumped, playing)."
+    },
+    {
+     "id": "es_plural",
+     "band": 2.5,
+     "descriptor": "2",
+     "feature": "Adds -es after s, x, ch or sh (boxes, watches)."
+    },
+    {
+     "id": "double_short",
+     "band": 3.0,
+     "descriptor": "4",
+     "feature": "Doubles the final consonant of a short one-syllable word (swimming, running)."
+    },
+    {
+     "id": "drop_e",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Drops a silent e before a vowel suffix (making, hoping)."
+    },
+    {
+     "id": "y_to_i",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "Changes y to i after a consonant (carried, cried, happiest)."
+    },
+    {
+     "id": "stress_doubling",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Doubles in two-syllable words stressed on the last syllable (beginning, forgetting, occurred)."
+    },
+    {
+     "id": "no_double_unstressed",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Does not double when the stress is on the first syllable (visited, opening)."
+    },
+    {
+     "id": "exceptions",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Handles exceptions: -c to -ck (panicked, picnicking), ie to y (lying)."
+    }
+   ]
+  },
+  "EN.VOC.BRD.general": {
+   "steps": [
+    {
+     "id": "very_common",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Very common everyday words (first 1,000)."
+    },
+    {
+     "id": "everyday_2k",
+     "band": 3.0,
+     "descriptor": "4",
+     "feature": "Common everyday words (about the 2,000-word level)."
+    },
+    {
+     "id": "everyday_3k",
+     "band": 4.0,
+     "descriptor": "4",
+     "feature": "Words common in everyday texts (about the 3,000-word level)."
+    },
+    {
+     "id": "less_frequent",
+     "band": 5.0,
+     "descriptor": "6",
+     "feature": "Less frequent words met in secondary-school reading."
+    },
+    {
+     "id": "secondary",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "General words typical of secondary-level texts."
+    },
+    {
+     "id": "low_frequency",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "Low-frequency, precise general words."
+    },
+    {
+     "id": "rare_precise",
+     "band": 7.75,
+     "descriptor": "8",
+     "feature": "Rare words with precise meanings."
+    }
+   ]
+  },
+  "EN.VOC.MOR.suffixes": {
+   "steps": [
+    {
+     "id": "familiar",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "-ful, -ly and -er on very familiar words (helpful, teacher)."
+    },
+    {
+     "id": "word_class_common",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Chooses the noun, adjective or adverb form of a common word for its place (careful/carefully)."
+    },
+    {
+     "id": "noun_suffixes",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "Forms nouns with -ness, -ment and -tion on common words (kindness, invitation)."
+    },
+    {
+     "id": "less_common",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Less regular derivations (decide → decision, able → ability)."
+    },
+    {
+     "id": "meaning_change",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Recognises how a suffix changes meaning (-able: questionable, affordable)."
+    },
+    {
+     "id": "irregular_abstract",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Irregular, abstract derivations (maintenance, pronunciation, explanation)."
+    }
+   ]
+  },
+  "EN.VOC.CTX.context": {
+   "steps": [
+    {
+     "id": "definition_next",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "The meaning is stated or restated right next to the word."
+    },
+    {
+     "id": "synonym_clue",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "A nearby synonym or result in the same sentence."
+    },
+    {
+     "id": "example_contrast",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "An example or contrast clue (unlike …, in contrast)."
+    },
+    {
+     "id": "across_sentences",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Clues spread across two or more sentences."
+    },
+    {
+     "id": "longer_text",
+     "band": 6.5,
+     "descriptor": "6",
+     "feature": "The meaning follows from a whole situation or a result described later."
+    },
+    {
+     "id": "subtle_tone",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Subtle or indirect clues, including irony and a less common sense of a familiar word."
+    }
+   ]
+  },
+  "EN.GRM.NOUN.articles": {
+   "steps": [
+    {
+     "id": "a_an_letter",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "a or an chosen by the first letter of a common singular noun."
+    },
+    {
+     "id": "first_mention",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "a for first mention, the for something already mentioned; a before a job."
+    },
+    {
+     "id": "a_an_sound",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "a or an chosen by sound, not letter (an hour, a university)."
+    },
+    {
+     "id": "unique_the",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "the for something unique or known to everyone (the sun)."
+    },
+    {
+     "id": "zero_uncountable",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "No a/an with uncountable nouns (advice, information, furniture)."
+    },
+    {
+     "id": "generic_abstract",
+     "band": 6.75,
+     "descriptor": "6",
+     "feature": "General statements and abstract nouns (Tigers are …; Honesty is …)."
+    },
+    {
+     "id": "proper_idioms",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Articles with proper nouns (the Ganga, Mount Everest)."
+    }
+   ]
+  },
+  "EN.GRM.VERB.aspect": {
+   "steps": [
+    {
+     "id": "now_progressive",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Present progressive for an action happening now."
+    },
+    {
+     "id": "stative",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "Stative verbs (know, belong) are not used in the progressive."
+    },
+    {
+     "id": "past_progressive",
+     "band": 4.0,
+     "descriptor": "4",
+     "feature": "Past progressive for a longer action interrupted by a past event."
+    },
+    {
+     "id": "perfect_vs_past",
+     "band": 5.0,
+     "descriptor": "6",
+     "feature": "Present perfect for an unfinished period; past simple for a finished time."
+    },
+    {
+     "id": "perfect_just",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Present perfect with just, already and yet."
+    },
+    {
+     "id": "past_perfect",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Past perfect for an earlier past event (By the time we arrived, …)."
+    },
+    {
+     "id": "perfect_progressive",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Perfect progressive forms in narratives (had been waiting)."
+    }
+   ]
+  },
+  "EN.GRM.VERB.sva": {
+   "steps": [
+    {
+     "id": "third_s",
+     "band": 2.5,
+     "descriptor": "2",
+     "feature": "Adds -s or -es for a he/she/it subject in the simple present."
+    },
+    {
+     "id": "plural_subject",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Plural and irregular plural noun subjects (the children are)."
+    },
+    {
+     "id": "compound",
+     "band": 4.0,
+     "descriptor": "4",
+     "feature": "Two subjects joined by and take a plural verb."
+    },
+    {
+     "id": "intervening",
+     "band": 5.0,
+     "descriptor": "6",
+     "feature": "Agreement across a phrase between subject and verb (the box of pencils is)."
+    },
+    {
+     "id": "indefinite",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "Indefinite pronouns and each/every (Each of the students has)."
+    },
+    {
+     "id": "either_neither",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "either … or / neither … nor: agree with the nearer subject."
+    },
+    {
+     "id": "inverted_number",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Inverted order and 'the number of' / 'a number of'."
+    }
+   ]
+  },
+  "EN.GRM.PUN.commas": {
+   "steps": [
+    {
+     "id": "list",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Commas between items in a simple list."
+    },
+    {
+     "id": "intro_word",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "Commas after yes/no, names and introductory words; none between subject and verb."
+    },
+    {
+     "id": "intro_clause",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "A comma after an introductory phrase or clause."
+    },
+    {
+     "id": "nonessential",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "A pair of commas around non-essential information."
+    },
+    {
+     "id": "before_conjunction",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "A comma before a conjunction joining two clauses; not a comma alone (splice)."
+    },
+    {
+     "id": "restrictive",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "No commas around defining clauses; avoids unnecessary commas."
+    },
+    {
+     "id": "meaning_transition",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Commas that change meaning, and commas with sentence transitions (However, …)."
+    }
+   ]
+  },
+  "EN.SEN.CMP.run_ons": {
+   "steps": [
+    {
+     "id": "two_statements",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Two short statements separated by a full stop and capital letter."
+    },
+    {
+     "id": "fused",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "Finds and fixes a fused sentence (no punctuation between clauses)."
+    },
+    {
+     "id": "splice",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "Recognises a comma splice and a correct join with a conjunction."
+    },
+    {
+     "id": "repair",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "Repairs run-ons with a conjunction or subordination."
+    },
+    {
+     "id": "transitions",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Punctuates transitions (however, therefore) between clauses."
+    },
+    {
+     "id": "deliberate",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Chooses semicolons, dashes and subordination deliberately for effect."
+    }
+   ]
+  },
+  "EN.SEN.CMB.subordination": {
+   "steps": [
+    {
+     "id": "because_but",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Joins two ideas with because (or tells it from but) for an obvious link."
+    },
+    {
+     "id": "unless_although_simple",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "unless, if and although for a simple, clear relationship."
+    },
+    {
+     "id": "contrast_time",
+     "band": 4.75,
+     "descriptor": "4",
+     "feature": "although at the start of a sentence; time relationships with tense (by the time)."
+    },
+    {
+     "id": "purpose_precaution",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Purpose and precaution (so that, in case)."
+    },
+    {
+     "id": "variety",
+     "band": 6.5,
+     "descriptor": "6",
+     "feature": "Less common subordinators and positions (since meaning because, whereas)."
+    },
+    {
+     "id": "multi_clause",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Combines three or more ideas with subordination."
+    }
+   ]
+  },
+  "EN.RDG.LIT.locate_detail": {
+   "steps": [
+    {
+     "id": "short_fact",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "A stated fact in a very short, simple text."
+    },
+    {
+     "id": "paragraphs",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "A stated detail in a text of several paragraphs."
+    },
+    {
+     "id": "distractor",
+     "band": 4.75,
+     "descriptor": "4",
+     "feature": "A stated detail with nearby distracting details."
+    },
+    {
+     "id": "paraphrase",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "A detail asked in different words from the text."
+    },
+    {
+     "id": "dense",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "A precise detail in a dense or complex text."
+    }
+   ]
+  },
+  "EN.RDG.INF.motives": {
+   "steps": [
+    {
+     "id": "obvious_feeling",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "An obvious feeling shown by an action (crying → sad)."
+    },
+    {
+     "id": "from_actions",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "A motive or feeling inferred from a clear sequence of actions."
+    },
+    {
+     "id": "reasons",
+     "band": 5.0,
+     "descriptor": "4",
+     "feature": "Reasons and purposes inferred across a text."
+    },
+    {
+     "id": "mixed",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Mixed or changing feelings, and a writer's attitude, from detail and dialogue."
+    },
+    {
+     "id": "subtle",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Subtle, unstated motives and attitudes the reader must work out."
+    }
+   ]
+  },
+  "EN.RDG.SUM.main_idea": {
+   "steps": [
+    {
+     "id": "topic",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "The topic of a very short text."
+    },
+    {
+     "id": "gist_title",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "The gist or best title of a short story."
+    },
+    {
+     "id": "paragraph_main",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "The main idea of one paragraph, not a detail."
+    },
+    {
+     "id": "multi_paragraph",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "The main idea of a multi-paragraph text, and of each paragraph."
+    },
+    {
+     "id": "central_theme",
+     "band": 6.75,
+     "descriptor": "6",
+     "feature": "The central idea or theme of a literary text; what each part does."
+    },
+    {
+     "id": "implicit_claim",
+     "band": 7.75,
+     "descriptor": "8",
+     "feature": "An implicit central claim stated only indirectly."
+    }
+   ]
+  },
+  "EN.WRT.TSK.task_response": {
+   "steps": [
+    {
+     "id": "answers_question",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "A reply that answers a simple question."
+    },
+    {
+     "id": "main_parts",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "What a simple task needs (the main parts)."
+    },
+    {
+     "id": "all_parts",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "Every part of a multi-part task, with relevant content."
+    },
+    {
+     "id": "audience_needs",
+     "band": 6.5,
+     "descriptor": "6",
+     "feature": "Content and language suited to a named reader."
+    },
+    {
+     "id": "anticipates",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Anticipates what the reader will need to know."
+    }
+   ]
+  },
+  "EN.WRT.ORG.paragraphing": {
+   "steps": [
+    {
+     "id": "one_block",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Sees that writing in one block needs paragraphs."
+    },
+    {
+     "id": "main_parts",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "Paragraphs for the main parts, marked by changes of time or place."
+    },
+    {
+     "id": "topic_sentence",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "Topic sentences and sensible paragraph length."
+    },
+    {
+     "id": "unity",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Each paragraph has one focus; breaks follow changes of focus."
+    },
+    {
+     "id": "linking",
+     "band": 6.5,
+     "descriptor": "6",
+     "feature": "Linking sentences between paragraphs."
+    },
+    {
+     "id": "deliberate",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Paragraphing that follows an argument's moves or is used for effect."
+    }
+   ]
+  },
+  "EN.WRT.ACC.grammar": {
+   "steps": [
+    {
+     "id": "basic",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Finds and fixes basic errors in simple sentences (third-person -s)."
+    },
+    {
+     "id": "noticeable",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Finds and fixes common errors (tense with a time marker, a/an, perfect with finished time)."
+    },
+    {
+     "id": "complex",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Errors in more complex structures (agreement after pronouns, conditionals)."
+    },
+    {
+     "id": "slips",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "Rare slips in advanced structures (inversion, dangling participles, mixed conditionals)."
+    }
+   ]
+  },
+  "EN.WRT.ACC.spelling": {
+   "steps": [
+    {
+     "id": "very_common",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Misspellings of very common words."
+    },
+    {
+     "id": "common_longer",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Misspellings of common longer words."
+    },
+    {
+     "id": "less_common",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Misspellings of less common, frequently misspelled words."
+    },
+    {
+     "id": "rare",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Misspellings of rare words with double letters or silent letters."
+    }
+   ]
+  }
+ }
+}

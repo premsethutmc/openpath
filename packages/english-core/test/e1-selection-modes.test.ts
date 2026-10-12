@@ -102,7 +102,9 @@ test("easier step on the same capability when its prerequisite is not weak; no p
   assert.ok(["easier_step", "assessment_fallback"].includes(rec.path), rec.path);
   const placedHigh = createComposite(ctx().index, "y");
   place(placedHigh, SVA, 6.5, 0.4);
-  const easy = recommend(input(placedHigh, { ...goal, targets: { [SVA]: 8 } }, { mode: "learning", seen: new Set(["grm.sva.04", "grm.sva.07", "grm.sva.08"]) }));
+  // every SVA item from 5.5 up is used, so nothing suitable is left and only easier items remain
+  const hard = [...ctx().content.items.values()].filter((i) => i.kind === "code" && i.target === SVA && i.b >= 5.5).map((i) => i.id);
+  const easy = recommend(input(placedHigh, { ...goal, targets: { [SVA]: 8 } }, { mode: "learning", seen: new Set(hard) }));
   assert.equal(easy.path, "easier_step");
   assert.match(easy.explanation, /Easier step on the same capability/);
 });
