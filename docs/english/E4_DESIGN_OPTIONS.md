@@ -49,7 +49,7 @@ strands by more than a band. No tested response model fixes this without inflati
 **Option.**
 
 - Compute a person-fit statistic (the standardised log-likelihood *l_z*) on each learner's answers,
-  and flag the profile as *unreliable, check engagement* when it is low.
+  and flag the recent evidence as *potentially unreliable* when it is low.
 - Estimates are not changed.
 
 **Evidence (simulation).** It identifies the random guesser with an AUC of 0.95 on the E2a bank, and
