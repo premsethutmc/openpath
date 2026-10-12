@@ -126,14 +126,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "lieing",
    "lying",
    "liing",
+   "lieing",
    "lyeing"
   ],
-  "answer": 1,
+  "answer": 0,
   "distractor_tags": {
-   "0": "kept_silent_e"
+   "2": "kept_silent_e"
   }
  },
  {
@@ -187,9 +187,9 @@
   "review": "candidate-unvalidated",
   "options": [
    "making little noise",
-   "moving very fast",
+   "very wet",
    "very bright",
-   "very wet"
+   "moving very fast"
   ],
   "answer": 0
  },
@@ -251,17 +251,17 @@
    "polite"
   ],
   "options": [
+   "very slow",
    "easily broken",
-   "very big",
-   "not afraid",
    "having good manners",
-   "very slow"
+   "not afraid",
+   "very big"
   ],
   "answer_pairs": [
-   2,
-   0,
+   3,
    1,
-   3
+   4,
+   2
   ]
  },
  {
@@ -285,15 +285,15 @@
   ],
   "options": [
    "bright and clear",
-   "no longer used",
-   "very quiet",
    "honest and direct",
-   "hard-working and careful"
+   "very quiet",
+   "hard-working and careful",
+   "no longer used"
   ],
   "answer_pairs": [
+   1,
    3,
    4,
-   1,
    0
   ]
  },
@@ -330,8 +330,8 @@
   "review": "candidate-unvalidated",
   "options": [
    "found everywhere",
-   "very old",
    "hard to see",
+   "very old",
    "loved by everyone"
   ],
   "answer": 0
@@ -396,15 +396,15 @@
    "She is a ___ singer."
   ],
   "options": [
+   "beautifully",
    "beauty",
    "beautiful",
-   "beautifully",
    "beautify"
   ],
   "answer_pairs": [
-   2,
    0,
-   1
+   1,
+   2
   ]
  },
  {
@@ -470,12 +470,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "open to doubt",
+   "already answered",
    "full of questions",
    "able to ask questions",
-   "already answered"
+   "open to doubt"
   ],
-  "answer": 0
+  "answer": 3
  },
  {
   "kind": "code",
@@ -540,12 +540,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "happy",
    "sad",
-   "tired",
-   "late"
+   "happy",
+   "late",
+   "tired"
   ],
-  "answer": 0
+  "answer": 1
  },
  {
   "kind": "code",
@@ -568,12 +568,12 @@
   "options": [
    "loud and harsh",
    "small and quiet",
-   "slow and lazy",
-   "lively and playful"
+   "lively and playful",
+   "slow and lazy"
   ],
   "answer_pairs": [
-   2,
    3,
+   2,
    0
   ]
  },
@@ -596,15 +596,15 @@
    "indelible"
   ],
   "options": [
-   "impossible to forget",
-   "needing great effort",
+   "short and easy",
    "so beautiful it amazes you",
-   "short and easy"
+   "needing great effort",
+   "impossible to forget"
   ],
   "answer_pairs": [
-   1,
    2,
-   0
+   1,
+   3
   ]
  },
  {
@@ -621,14 +621,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "changing suddenly and unpredictably",
-   "very heavy",
+   "gentle and steady",
    "very late",
-   "gentle and steady"
+   "very heavy",
+   "changing suddenly and unpredictably"
   ],
-  "answer": 0,
+  "answer": 3,
   "distractor_tags": {
-   "1": "ignores_context"
+   "2": "ignores_context"
   }
  },
  {
@@ -645,12 +645,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "to limit or control",
    "to encourage",
+   "to report",
    "to measure",
-   "to report"
+   "to limit or control"
   ],
-  "answer": 0
+  "answer": 3
  },
  {
   "kind": "code",
@@ -666,12 +666,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "very generous",
-   "very small",
    "very sweet",
-   "very unfair"
+   "very small",
+   "very unfair",
+   "very generous"
   ],
-  "answer": 0
+  "answer": 3
  },
  {
   "kind": "code",
@@ -754,14 +754,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
+   "Tiger is in danger in many countries.",
    "The tigers are in danger in many countries.",
-   "Tigers are in danger in many countries.",
    "A tigers are in danger in many countries.",
-   "Tiger is in danger in many countries."
+   "Tigers are in danger in many countries."
   ],
-  "answer": 1,
+  "answer": 3,
   "distractor_tags": {
-   "3": "article_omission"
+   "0": "article_omission"
   }
  },
  {
@@ -922,12 +922,12 @@
   "review": "candidate-unvalidated",
   "family": "fam.asp.pastperfprog",
   "options": [
+   "When the doctor arrived, the patient had slept since hours.",
    "When the doctor arrived, the patient had been sleeping for hours.",
-   "When the doctor arrived, the patient has been sleeping for hours.",
    "When the doctor arrived, the patient was sleeping since hours.",
-   "When the doctor arrived, the patient had slept since hours."
+   "When the doctor arrived, the patient has been sleeping for hours."
   ],
-  "answer": 0
+  "answer": 1
  },
  {
   "kind": "code",
@@ -1071,11 +1071,11 @@
   "review": "candidate-unvalidated",
   "options": [
    "The number of students in our school have increased.",
-   "The number of students in our school has increased.",
    "A number of students has complained about the noise.",
+   "The number of students in our school has increased.",
    "The number of students are increasing every year."
   ],
-  "answer": 1,
+  "answer": 2,
   "distractor_tags": {
    "0": "attraction_error",
    "3": "attraction_error"
@@ -1096,12 +1096,12 @@
   "review": "candidate-unvalidated",
   "family": "fam.com.list",
   "options": [
-   "We saw lions tigers, and bears.",
    "We saw, lions tigers and bears.",
    "We saw lions, tigers and bears.",
+   "We saw lions tigers, and bears.",
    "We saw lions, tigers, bears, and."
   ],
-  "answer": 2
+  "answer": 1
  },
  {
   "kind": "code",
@@ -1118,12 +1118,12 @@
   "review": "candidate-unvalidated",
   "family": "fam.com.wrong",
   "options": [
+   "Well, I am not sure.",
    "No, thank you.",
-   "My friend, likes mangoes.",
    "Meena, please sit down.",
-   "Well, I am not sure."
+   "My friend, likes mangoes."
   ],
-  "answer": 1
+  "answer": 3
  },
  {
   "kind": "code",
@@ -1193,9 +1193,9 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "I wanted to play cricket with my friends after school but it rained all afternoon.",
-   "She bought a pen and a notebook.",
    "You can finish the project this week or you can ask the teacher for more time.",
+   "She bought a pen and a notebook.",
+   "I wanted to play cricket with my friends after school but it rained all afternoon.",
    "He was tired and hungry.",
    "I like tea but not coffee."
   ],
@@ -1218,12 +1218,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Students who arrive late must sign the register.",
+   "When we arrived the hall was already full.",
    "My mother who works in a bank is very busy.",
-   "However the plan worked in the end.",
-   "When we arrived the hall was already full."
+   "Students who arrive late must sign the register.",
+   "However the plan worked in the end."
   ],
-  "answer": 0
+  "answer": 2
  },
  {
   "kind": "code",
@@ -1240,11 +1240,11 @@
   "review": "candidate-unvalidated",
   "options": [
    "The students, who live far away, got a bus pass.",
-   "The students who live far away got a bus pass.",
    "The students who live far away, got a bus pass.",
-   "The students, who live far away got a bus pass."
+   "The students, who live far away got a bus pass.",
+   "The students who live far away got a bus pass."
   ],
-  "answer": 1
+  "answer": 3
  },
  {
   "kind": "code",
@@ -1261,14 +1261,14 @@
   "review": "candidate-unvalidated",
   "family": "fam.run.two",
   "options": [
-   "The cat sat on the mat. it was asleep.",
-   "The cat sat on the mat. It was asleep.",
    "The cat sat on the mat it was asleep.",
+   "The cat sat on the mat. It was asleep.",
+   "The cat sat on the mat. it was asleep.",
    "the cat sat on the mat. It was asleep."
   ],
   "answer": 1,
   "distractor_tags": {
-   "2": "fused_sentence"
+   "0": "fused_sentence"
   }
  },
  {
@@ -1314,13 +1314,13 @@
   "options": [
    "I love reading, my brother loves cricket.",
    "When it rains, the streets flood.",
-   "The shop was closed so we went home.",
    "Ravi plays the flute his sister sings.",
-   "She smiled and waved."
+   "She smiled and waved.",
+   "The shop was closed so we went home."
   ],
   "answer_set": [
    0,
-   3
+   2
   ]
  },
  {
@@ -1340,15 +1340,15 @@
    "comma_splice"
   ],
   "options": [
-   "The match was cancelled, however, we still went to the ground.",
-   "The match was cancelled; however, we still went to the ground.",
    "The match was cancelled however we still went to the ground.",
-   "The match was cancelled; however we still, went to the ground."
+   "The match was cancelled; however we still, went to the ground.",
+   "The match was cancelled; however, we still went to the ground.",
+   "The match was cancelled, however, we still went to the ground."
   ],
-  "answer": 1,
+  "answer": 2,
   "distractor_tags": {
-   "0": "comma_splice",
-   "2": "fused_sentence"
+   "3": "comma_splice",
+   "0": "fused_sentence"
   }
  },
  {
@@ -1365,15 +1365,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "It was getting dark; therefore, we turned back.",
    "It was getting dark, therefore we turned back.",
+   "It was getting dark, we turned back.",
    "Although it was getting dark, we kept walking.",
-   "It was getting dark we turned back.",
-   "It was getting dark, we turned back."
+   "It was getting dark; therefore, we turned back.",
+   "It was getting dark we turned back."
   ],
   "answer_set": [
-   0,
-   2
+   2,
+   3
   ]
  },
  {
@@ -1390,12 +1390,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "We trained for months – and we lost in the first round.",
    "We trained for months and, we lost in the first round.",
+   "We trained for months – and we lost in the first round.",
    "We trained for months, we lost in the first round.",
    "We trained for months we lost in the first round."
   ],
-  "answer": 0,
+  "answer": 1,
   "distractor_tags": {
    "2": "comma_splice",
    "3": "fused_sentence"
@@ -1416,12 +1416,12 @@
   "review": "candidate-unvalidated",
   "family": "fam.sub.because",
   "options": [
-   "because",
-   "although",
    "unless",
+   "although",
+   "because",
    "or"
   ],
-  "answer": 0,
+  "answer": 2,
   "distractor_tags": {
    "1": "wrong_relationship"
   }
@@ -1526,15 +1526,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Whereas my brother loves sport, I prefer music.",
-   "Unless you water the plants, they will die.",
    "Although he was hungry, so he ate.",
-   "Because it was cold, but we went out.",
-   "Since it was raining, so we stayed in."
+   "Unless you water the plants, they will die.",
+   "Since it was raining, so we stayed in.",
+   "Whereas my brother loves sport, I prefer music.",
+   "Because it was cold, but we went out."
   ],
   "answer_set": [
-   0,
-   1
+   1,
+   3
   ]
  },
  {
@@ -1552,15 +1552,15 @@
   "review": "candidate-unvalidated",
   "family": "fam.sub.three",
   "options": [
+   "Because we took the long road, the bridge was closed, but we arrived on time.",
    "Because the bridge was closed, we took the long road, but we still arrived on time.",
-   "Although the bridge was closed, we took the long road, so we arrived on time.",
    "The bridge was closed, we took the long road, we still arrived on time.",
-   "Because we took the long road, the bridge was closed, but we arrived on time."
+   "Although the bridge was closed, we took the long road, so we arrived on time."
   ],
-  "answer": 0,
+  "answer": 1,
   "distractor_tags": {
-   "1": "wrong_relationship",
-   "3": "wrong_relationship"
+   "3": "wrong_relationship",
+   "0": "wrong_relationship"
   }
  },
  {
@@ -1596,12 +1596,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
+   "behind the shop",
    "at home",
    "in the park",
-   "behind the shop",
    "under a tree"
   ],
-  "answer": 2
+  "answer": 0
  },
  {
   "kind": "code",
@@ -1618,12 +1618,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "happy",
-   "sad and worried",
    "angry with the cat",
-   "sleepy"
+   "happy",
+   "sleepy",
+   "sad and worried"
   ],
-  "answer": 1
+  "answer": 3
  },
  {
   "kind": "code",
@@ -1640,15 +1640,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Tara loses her dog and finds him again.",
-   "How to buy milk.",
    "A cat that lives in a shop.",
-   "Tara's walk to school."
+   "Tara's walk to school.",
+   "Tara loses her dog and finds him again.",
+   "How to buy milk."
   ],
-  "answer": 0,
+  "answer": 2,
   "distractor_tags": {
-   "1": "detail_as_main",
-   "2": "detail_as_main"
+   "3": "detail_as_main",
+   "0": "detail_as_main"
   }
  },
  {
@@ -1666,14 +1666,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
+   "A Brown Cat",
    "Bobby Comes Back",
-   "The Milk Van",
    "Tara's Shop",
-   "A Brown Cat"
+   "The Milk Van"
   ],
-  "answer": 0,
+  "answer": 1,
   "distractor_tags": {
-   "1": "detail_as_main"
+   "3": "detail_as_main"
   }
  },
  {
@@ -1715,11 +1715,11 @@
   "review": "candidate-unvalidated",
   "options": [
    "red paint",
+   "water",
    "vinegar",
-   "glue",
-   "water"
+   "glue"
   ],
-  "answer": 1,
+  "answer": 2,
   "distractor_tags": {
    "0": "word_matching"
   }
@@ -1739,14 +1739,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "She saw how sorry Dev was and did not want to upset him more.",
-   "She was tired after making the volcano.",
    "She wanted to blow the foam away.",
-   "She was practising for the judges."
+   "She was tired after making the volcano.",
+   "She was practising for the judges.",
+   "She saw how sorry Dev was and did not want to upset him more."
   ],
-  "answer": 0,
+  "answer": 3,
   "distractor_tags": {
-   "2": "literal_only"
+   "0": "literal_only"
   }
  },
  {
@@ -1764,16 +1764,16 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "proud",
    "guilty",
-   "happy",
    "bored",
+   "happy",
+   "frightened",
    "angry",
-   "frightened"
+   "proud"
   ],
   "answer_set": [
-   0,
-   2
+   2,
+   5
   ]
  },
  {
@@ -1791,12 +1791,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "to make Dev feel included and proud",
-   "because the judges asked who broke the volcano",
    "because Dev had made the volcano",
-   "to win a bigger prize"
+   "to win a bigger prize",
+   "to make Dev feel included and proud",
+   "because the judges asked who broke the volcano"
   ],
-  "answer": 0
+  "answer": 2
  },
  {
   "kind": "code",
@@ -1813,12 +1813,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "He was proud that Kiran had given him credit.",
    "He wanted to look taller than Kiran.",
+   "He was proud that Kiran had given him credit.",
    "His back hurt from holding the volcano.",
    "The judges told him to stand still."
   ],
-  "answer": 0,
+  "answer": 1,
   "distractor_tags": {
    "2": "literal_only"
   }
@@ -1838,15 +1838,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Kiran chooses to stay calm and fix the volcano with Dev.",
-   "Kiran finds some tape.",
    "Dev holds the pieces.",
+   "Kiran finds some tape.",
+   "Kiran chooses to stay calm and fix the volcano with Dev.",
    "The box is old."
   ],
-  "answer": 0,
+  "answer": 2,
   "distractor_tags": {
    "1": "detail_as_main",
-   "2": "detail_as_main"
+   "0": "detail_as_main"
   }
  },
  {
@@ -1886,11 +1886,11 @@
   "review": "candidate-unvalidated",
   "options": [
    "the angle of the dance",
+   "the number of scouts",
    "the length of the dance",
-   "the energy of the dance",
-   "the number of scouts"
+   "the energy of the dance"
   ],
-  "answer": 1,
+  "answer": 2,
   "distractor_tags": {
    "0": "word_matching"
   }
@@ -1910,12 +1910,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "impressed and admiring",
    "worried",
    "amused",
+   "impressed and admiring",
    "doubtful"
   ],
-  "answer": 0
+  "answer": 2
  },
  {
   "kind": "code",
@@ -1932,15 +1932,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
+   "how scientists study committees",
    "how a honeybee swarm chooses a new home",
    "how bees make honey",
-   "why the old queen leaves the colony",
-   "how scientists study committees"
+   "why the old queen leaves the colony"
   ],
-  "answer": 0,
+  "answer": 1,
   "distractor_tags": {
-   "1": "detail_as_main",
-   "2": "detail_as_main"
+   "2": "detail_as_main",
+   "3": "detail_as_main"
   }
  },
  {
@@ -1963,15 +1963,15 @@
    "Paragraph 3"
   ],
   "options": [
-   "How the swarm reaches agreement",
-   "Making honey for the winter",
+   "Scouts and their dances",
    "Why a colony needs a new home",
-   "Scouts and their dances"
+   "Making honey for the winter",
+   "How the swarm reaches agreement"
   ],
   "answer_pairs": [
-   2,
-   3,
-   0
+   1,
+   0,
+   3
   ]
  },
  {
@@ -1989,14 +1989,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "It had become a bank.",
-   "It had been filled in and paved over.",
    "It was hidden by the banyan tree's roots.",
-   "It was dry but still there."
+   "It was dry but still there.",
+   "It had been filled in and paved over.",
+   "It had become a bank."
   ],
-  "answer": 1,
+  "answer": 2,
   "distractor_tags": {
-   "0": "word_matching"
+   "3": "word_matching"
   }
  },
  {
@@ -2039,16 +2039,16 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "he still cared about it deeply",
-   "he did not want to talk about it",
-   "he had forgotten about it",
    "he was proud of its size",
+   "he still cared about it deeply",
    "he wanted to sell it",
-   "he found it funny"
+   "he had forgotten about it",
+   "he found it funny",
+   "he did not want to talk about it"
   ],
   "answer_set": [
-   0,
-   1
+   1,
+   5
   ]
  },
  {
@@ -2067,13 +2067,13 @@
   "review": "candidate-unvalidated",
   "options": [
    "to hint that the boy may have been the writer's grandfather, and that the house meant more to him than he ever said",
+   "to describe the daily life of children in the district",
    "to show that the woman had a very good memory",
-   "to explain why the house was falling down",
-   "to describe the daily life of children in the district"
+   "to explain why the house was falling down"
   ],
   "answer": 0,
   "distractor_tags": {
-   "1": "literal_only"
+   "2": "literal_only"
   }
  },
  {
@@ -2097,14 +2097,14 @@
   ],
   "options": [
    "shows how much the district has changed",
-   "explains how to read an old map",
    "introduces the map and the grandfather's silence about the house",
-   "gives the writer's new understanding of what the map means"
+   "gives the writer's new understanding of what the map means",
+   "explains how to read an old map"
   ],
   "answer_pairs": [
-   2,
+   1,
    0,
-   3
+   2
   ]
  },
  {
@@ -2122,14 +2122,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "A map can show what mattered to the person who made it, more than it records places.",
    "Old maps quickly become useless as places change.",
-   "People should visit their grandparents' home towns.",
-   "Banyan trees can live for a very long time."
+   "Banyan trees can live for a very long time.",
+   "A map can show what mattered to the person who made it, more than it records places.",
+   "People should visit their grandparents' home towns."
   ],
-  "answer": 0,
+  "answer": 2,
   "distractor_tags": {
-   "3": "detail_as_main"
+   "1": "detail_as_main"
   }
  },
  {
@@ -2149,14 +2149,14 @@
   "options": [
    "I like homework.",
    "It is in my bag.",
-   "Homework is hard.",
-   "My bag is blue."
+   "My bag is blue.",
+   "Homework is hard."
   ],
   "answer": 1,
   "distractor_tags": {
    "0": "off_task",
-   "2": "off_task",
-   "3": "off_task"
+   "3": "off_task",
+   "2": "off_task"
   }
  },
  {
@@ -2174,14 +2174,14 @@
   "review": "candidate-unvalidated",
   "options": [
    "the date and time",
-   "where the party is",
+   "how old your grandmother is",
    "what you got for your last birthday",
    "your favourite colour",
-   "how old your grandmother is"
+   "where the party is"
   ],
   "answer_set": [
    0,
-   1
+   4
   ]
  },
  {
@@ -2199,14 +2199,14 @@
   "review": "candidate-unvalidated",
   "options": [
    "ask for permission to start the club",
-   "explain when and where the club will meet",
-   "list your ten favourite books",
    "describe how you learned to read",
+   "list your ten favourite books",
+   "explain when and where the club will meet",
    "complain about the school library"
   ],
   "answer_set": [
    0,
-   1
+   3
   ]
  },
  {
@@ -2223,15 +2223,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Proceed to the circulation desk and present your identification.",
-   "Take the book to the desk and show your library card to the librarian.",
    "Libraries have existed for thousands of years.",
-   "Borrowing is an important part of literacy."
+   "Proceed to the circulation desk and present your identification.",
+   "Borrowing is an important part of literacy.",
+   "Take the book to the desk and show your library card to the librarian."
   ],
-  "answer": 1,
+  "answer": 3,
   "distractor_tags": {
-   "2": "off_task",
-   "3": "off_task"
+   "0": "off_task",
+   "2": "off_task"
   }
  },
  {
@@ -2248,15 +2248,15 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Our school is very famous, so you will find it easily.",
-   "Take bus 21 from outside the station to Gandhi Nagar (about 20 minutes); the school gate is opposite the bus stop. After 6 p.m. the buses are rare, so take an auto.",
    "The station is big and busy.",
-   "Come any time; everyone knows us."
+   "Come any time; everyone knows us.",
+   "Our school is very famous, so you will find it easily.",
+   "Take bus 21 from outside the station to Gandhi Nagar (about 20 minutes); the school gate is opposite the bus stop. After 6 p.m. the buses are rare, so take an auto."
   ],
-  "answer": 1,
+  "answer": 3,
   "distractor_tags": {
-   "0": "off_task",
-   "2": "off_task"
+   "2": "off_task",
+   "0": "off_task"
   }
  },
  {
@@ -2273,12 +2273,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
+   "Dear parents, we are sorry for any trouble the bus may cause. Thank you.",
    "From Monday 3 March, Bus 4 will leave school at 3.45 p.m. instead of 3.30 p.m., so every stop will be about 15 minutes later. Questions? Please call the school office.",
-   "The bus times are changing soon. Please be ready.",
    "Bus 4 will now leave at 3.45 p.m.",
-   "Dear parents, we are sorry for any trouble the bus may cause. Thank you."
+   "The bus times are changing soon. Please be ready."
   ],
-  "answer": 0
+  "answer": 1
  },
  {
   "kind": "code",
@@ -2537,11 +2537,11 @@
   "review": "candidate-unvalidated",
   "options": [
    "Not only did she win the race, but she also broke the record.",
-   "Having finished the exam, the papers were collected by the teacher.",
    "The results were announced on Friday.",
-   "Rarely do we see such dedication."
+   "Rarely do we see such dedication.",
+   "Having finished the exam, the papers were collected by the teacher."
   ],
-  "answer": 1
+  "answer": 3
  },
  {
   "kind": "code",
@@ -2751,12 +2751,12 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "She was happy and relieved to find him.",
-   "He was cold.",
    "She wanted to go home.",
-   "He was hungry."
+   "He was hungry.",
+   "He was cold.",
+   "She was happy and relieved to find him."
   ],
-  "answer": 0
+  "answer": 3
  },
  {
   "kind": "code",
@@ -2772,14 +2772,14 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "A cricket bat, please! Come at five o'clock.",
-   "A cricket bat, please!",
+   "My birthday is on Sunday.",
    "Come at five o'clock.",
-   "My birthday is on Sunday."
+   "A cricket bat, please!",
+   "A cricket bat, please! Come at five o'clock."
   ],
-  "answer": 0,
+  "answer": 3,
   "distractor_tags": {
-   "3": "off_task"
+   "0": "off_task"
   }
  },
  {
