@@ -9,9 +9,9 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildEvaluationRequest, createComposite, firstSentence, requestFingerprint, type WritingTask } from "../../packages/english-core/src/index.ts";
 import { ASHA_EMAIL } from "./demo-data.ts";
-import { CONTENT, loadContext } from "./load.ts";
+import { CONTENT, loadContext, FROZEN_FRAMEWORK } from "./load.ts";
 
-const ctx = loadContext({ allowCandidateAnchors: true });
+const ctx = loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK });
 const tasks = [...ctx.content.items.values()].filter((i) => i.kind === "writing") as WritingTask[];
 const blank = createComposite(ctx.index, "recording");
 const at = "2026-10-12T10:00:00.000Z";

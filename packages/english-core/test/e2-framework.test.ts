@@ -7,7 +7,7 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { Ledger, type Framework, leafView } from "../src/index.ts";
 import { LOCK_FILE, checkLock, frameworkFiles } from "../../../tools/english/lock.ts";
-import { RUNTIME_FRAMEWORK, loadContext, loadFramework, frameworkFile } from "../../../tools/english/load.ts";
+import { FROZEN_FRAMEWORK, RUNTIME_FRAMEWORK, loadContext, loadFramework, frameworkFile } from "../../../tools/english/load.ts";
 import { LEARNERS, CAP } from "../../../tools/english/sim/learners.ts";
 import { runLearner } from "../../../tools/english/sim/run.ts";
 
@@ -50,12 +50,19 @@ test("0.2.0 keeps the mathematics, the 17 skeleton definitions and the E1 relati
   assert.deepEqual(v2.prerequisites.map(({ capability, requires }) => ({ capability, requires })), v1.prerequisites);
 });
 
-test("0.1.0 is still frozen and is still the runtime default until E2b fills 0.2.0's bank", () => {
+test("0.1.0 stays frozen; from E2b the runtime runs 0.2.0, and each version sees only its own capabilities' items", () => {
   const lock = JSON.parse(readFileSync(LOCK_FILE, "utf8"));
   assert.deepEqual(checkLock(lock, frameworkFiles()), []);
   assert.ok(lock["en@0.1.0"]);
-  assert.equal(RUNTIME_FRAMEWORK, "0.1.0");
-  assert.equal(loadContext().index.key, "en@0.1.0");
+  assert.equal(RUNTIME_FRAMEWORK, "0.2.0");
+  assert.equal(FROZEN_FRAMEWORK, "0.1.0", "the frozen simulation and E1 demonstration stay on 0.1.0");
+  assert.equal(loadContext().index.key, "en@0.2.0");
+  const v1 = loadContext({ framework: "0.1.0" });
+  const skeleton = new Set([...v1.index.leaves.values()].filter((c) => c.tier === "skeleton").map((c) => c.id));
+  for (const i of v1.content.items.values()) {
+    const caps = i.kind === "code" ? [i.target] : [...i.targets, ...i.secondary];
+    assert.ok(caps.every((c) => skeleton.has(c)), `${i.id} is visible to 0.1.0 only if 0.1.0 specifies its capabilities`);
+  }
 });
 
 test("a learner's state carries over from 0.1.0 to 0.2.0 unchanged", async () => {

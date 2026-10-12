@@ -29,7 +29,7 @@ import {
 } from "../../packages/english-core/src/index.ts";
 import { ASHA, ASHA_EMAIL, BEN } from "./demo-data.ts";
 import { FileStore } from "./file-store.ts";
-import { CONTENT, REPO, loadContext } from "./load.ts";
+import { CONTENT, REPO, loadContext, FROZEN_FRAMEWORK } from "./load.ts";
 import { type SimLearner, respond } from "./sim/learners.ts";
 import { anchorRequest, at, writingTasks } from "./sim/run.ts";
 
@@ -50,7 +50,8 @@ const f = (x: number) => x.toFixed(2);
 const pad = (s: string, n: number) => (s.length >= n ? s.slice(0, n - 1) + "…" : s + " ".repeat(n - s.length));
 
 export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Promise<DemoResult> {
-  const ctx = loadContext({ allowCandidateAnchors: true }); // no educator-scored anchors exist yet (D-4)
+  // The E1 demonstration is defined on framework 0.1.0: its two learners have true levels for the 17 skeleton capabilities.
+  const ctx = loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK }); // no educator-scored anchors exist yet (D-4)
   const dir = opts.dir ?? join(REPO, "tools", "english", "out", "demo");
   rmSync(dir, { recursive: true, force: true });
   const lines: string[] = [];

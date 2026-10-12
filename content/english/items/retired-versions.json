@@ -1,0 +1,1668 @@
+[
+ {
+  "kind": "code",
+  "id": "voc.gen.05",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "What does meticulous mean?",
+  "options": [
+   "very careful about details",
+   "very fast",
+   "easily annoyed",
+   "full of energy"
+  ],
+  "answer": 0,
+  "step": "secondary",
+  "rationale": "A secondary-level word for a precise quality (care about details).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.04",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "\"The old bridge was precarious; it swayed whenever a cart crossed it.\" What does precarious mean?",
+  "options": [
+   "very long",
+   "unsafe and likely to fall",
+   "very beautiful",
+   "newly built"
+  ],
+  "answer": 1,
+  "step": "across_sentences",
+  "rationale": "The clue after the semicolon describes an effect (it swayed); the word is low-frequency.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.05",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "\"Her answer was so ambiguous that half the class thought she meant yes and the other half thought she meant no.\" What does ambiguous mean?",
+  "options": [
+   "could be understood in more than one way",
+   "very rude",
+   "very short",
+   "completely wrong"
+  ],
+  "answer": 0,
+  "step": "longer_text",
+  "rationale": "The clue is a whole situation (half the class understood yes, half no).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q1",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_info",
+  "b": 4.0,
+  "a": 1.0,
+  "prompt": "According to the text, what do asphalt and concrete do?",
+  "options": [
+   "reflect sunlight back into the sky",
+   "cool the air through their leaves",
+   "produce heat of their own all day",
+   "absorb sunlight during the day and release heat at night"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "1": "word_matching"
+  },
+  "passage": "rdg.p2",
+  "step": "paragraphs",
+  "rationale": "A detail in the middle of an information paragraph; distractors are other details from the text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p2.q6",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 5.5,
+  "a": 1.0,
+  "prompt": "Which sentence best sums up the whole text?",
+  "options": [
+   "Singapore is the coolest city in the world.",
+   "Air conditioners make cities hotter at night.",
+   "Cities are warmer than the countryside for several reasons, and some are taking steps to cool down.",
+   "Asphalt and concrete are dark materials."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "detail_as_main"
+  },
+  "passage": "rdg.p2",
+  "step": "multi_paragraph",
+  "rationale": "A summary sentence for a three-paragraph information text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.02",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 3.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a note to your neighbour asking them to feed your cat while you are away.\" Which note does what the task asks?",
+  "options": [
+   "Dear Mrs. Das, we are going to Ooty on Friday. It will be cold there.",
+   "Dear Mrs. Das, do you have a cat? Cats are great pets.",
+   "Dear Mrs. Das, we are away from Friday to Sunday. Could you please feed Bella once a day? Her food is in the blue box by the door. Thank you!",
+   "Dear Mrs. Das, our cat Bella is very cute and loves to sleep in the sun."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "off_task",
+   "0": "off_task",
+   "1": "off_task"
+  },
+  "addresses": [
+   "off_task"
+  ],
+  "step": "main_parts",
+  "rationale": "Picks the note that does what a short task asks (the request and the details), against notes that are only on the topic.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.04",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a paragraph persuading your school to start a recycling club.\" Which opening sentence suits the task best?",
+  "options": [
+   "Our school throws away hundreds of plastic bottles every week, and a recycling club could change that.",
+   "Recycling is when you use things again.",
+   "Last week I went to the shop and bought a bottle of water.",
+   "There are many clubs in our school, such as the chess club."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "off_task",
+   "3": "off_task"
+  },
+  "step": "all_parts",
+  "rationale": "Picks the opening that suits a persuasive task.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.04",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "An essay about school uniforms has paragraphs on cost, on comfort, and on \"my cousin's holiday in Mumbai\". Which paragraph should be changed or removed?",
+  "options": [
+   "cost",
+   "comfort",
+   "none of them",
+   "my cousin's holiday in Mumbai"
+  ],
+  "answer": 3,
+  "step": "unity",
+  "rationale": "Spots a paragraph that does not belong to the essay's focus.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.05",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence would best link a paragraph about the problems of plastic to a paragraph about solutions?",
+  "options": [
+   "In conclusion, plastic is bad.",
+   "Plastic bottles are often blue or clear.",
+   "Fortunately, there are practical ways to reduce our plastic waste.",
+   "Plastic was invented a long time ago."
+  ],
+  "answer": 2,
+  "step": "linking",
+  "rationale": "Chooses a sentence that links two paragraphs.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.org.link"
+ },
+ {
+  "kind": "code",
+  "id": "spl.infl.15",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "choice:spelling",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which spelling is correct? (lie + -ing) The cat was ___ in the sun.",
+  "step": "exceptions",
+  "rationale": "Exception: ie changes to y before -ing (lie → lying); the usual rules do not cover it.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "lieing",
+   "lying",
+   "liing",
+   "lyeing"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "kept_silent_e"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.10",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 1.5,
+  "a": 1.1,
+  "prompt": "What does quiet mean?",
+  "step": "very_common",
+  "rationale": "One of the first 1,000 words; the distractors are unrelated.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "making little noise",
+   "moving very fast",
+   "very bright",
+   "very wet"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.13",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "match:meaning",
+  "b": 4.5,
+  "a": 1.2,
+  "prompt": "Match each word to its meaning.",
+  "step": "everyday_3k",
+  "rationale": "Four everyday-text words matched at once to five meanings; all must be right, so guessing almost never succeeds.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "brave",
+   "fragile",
+   "enormous",
+   "polite"
+  ],
+  "options": [
+   "easily broken",
+   "very big",
+   "not afraid",
+   "having good manners",
+   "very slow"
+  ],
+  "answer_pairs": [
+   2,
+   0,
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.14",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "match:meaning",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "Match each word to its meaning.",
+  "step": "secondary",
+  "rationale": "Four secondary-level words matched at once; all must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "candid",
+   "diligent",
+   "obsolete",
+   "vivid"
+  ],
+  "options": [
+   "bright and clear",
+   "no longer used",
+   "very quiet",
+   "honest and direct",
+   "hard-working and careful"
+  ],
+  "answer_pairs": [
+   3,
+   4,
+   1,
+   0
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "voc.gen.16",
+  "version": 1,
+  "target": "EN.VOC.BRD.general",
+  "format": "choice:meaning",
+  "b": 7.75,
+  "a": 1.1,
+  "prompt": "What does ubiquitous mean?",
+  "step": "rare_precise",
+  "rationale": "A rare, precise word; 'found everywhere' must be told apart from nearby ideas.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "found everywhere",
+   "very old",
+   "hard to see",
+   "loved by everyone"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.12",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "match:word_form",
+  "b": 4.0,
+  "a": 1.2,
+  "prompt": "Match each sentence to the word that fits its gap.",
+  "step": "word_class_common",
+  "rationale": "Adverb, noun and adjective forms of one word for three gaps at once; all must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "She sang ___.",
+   "Her ___ filled the room.",
+   "She is a ___ singer."
+  ],
+  "options": [
+   "beauty",
+   "beautiful",
+   "beautifully",
+   "beautify"
+  ],
+  "answer_pairs": [
+   2,
+   0,
+   1
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "voc.suf.15",
+  "version": 1,
+  "target": "EN.VOC.MOR.suffixes",
+  "format": "choice:word_form",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "In 'The scientist's results were questionable', what does questionable mean?",
+  "step": "meaning_change",
+  "rationale": "Works out how -able changes meaning ('can be questioned') in an abstract use.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "open to doubt",
+   "full of questions",
+   "able to ask questions",
+   "already answered"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.09",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 1.75,
+  "a": 1.1,
+  "prompt": "\"Rina was glad, which means happy, when her aunt arrived.\" What does glad mean?",
+  "step": "definition_next",
+  "rationale": "The meaning is stated right after the word.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "happy",
+   "sad",
+   "tired",
+   "late"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.10",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "match:meaning_in_context",
+  "b": 4.0,
+  "a": 1.2,
+  "prompt": "Read: \"Our old dog was sluggish in the heat, moving slowly and sleeping all day. The kitten, in contrast, was frisky and chased everything. The parrot was raucous, screeching loudly at every visitor.\" Match each word to its meaning.",
+  "step": "example_contrast",
+  "rationale": "Each word has a synonym or contrast clue in the same short text; all three must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "sluggish",
+   "frisky",
+   "raucous"
+  ],
+  "options": [
+   "loud and harsh",
+   "small and quiet",
+   "slow and lazy",
+   "lively and playful"
+  ],
+  "answer_pairs": [
+   2,
+   3,
+   0
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.11",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "match:meaning_in_context",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "Read: \"The path up the hill was steep and arduous; we stopped often to rest. At the top, the view was so breathtaking that nobody spoke. Days later my legs still hurt, but the memory was indelible: I can still see that view now.\" Match each word to its meaning.",
+  "step": "across_sentences",
+  "rationale": "Three unfamiliar words, each with its clue in a different sentence; all must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "arduous",
+   "breathtaking",
+   "indelible"
+  ],
+  "options": [
+   "impossible to forget",
+   "needing great effort",
+   "so beautiful it amazes you",
+   "short and easy"
+  ],
+  "answer_pairs": [
+   1,
+   2,
+   0
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.12",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "\"The monsoon was capricious that year. One week the fields flooded; the next, the ground cracked in the sun. Farmers could not plan anything.\" What does capricious mean?",
+  "step": "across_sentences",
+  "rationale": "The clues are spread over two sentences (floods, then drought; no planning).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "changing suddenly and unpredictably",
+   "very heavy",
+   "very late",
+   "gentle and steady"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "ignores_context"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.13",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 6.75,
+  "a": 1.1,
+  "prompt": "\"The new rule was meant to curb littering. Within a month there were fewer wrappers on the ground, and the streets were noticeably cleaner.\" What does curb mean?",
+  "step": "longer_text",
+  "rationale": "The meaning must be inferred from the result described in the next sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "to limit or control",
+   "to encourage",
+   "to measure",
+   "to report"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "voc.ctx.14",
+  "version": 1,
+  "target": "EN.VOC.CTX.context",
+  "format": "choice:meaning_in_context",
+  "b": 7.75,
+  "a": 1.1,
+  "prompt": "\"What a magnanimous gift,\" said Arjun, looking at the single toffee his brother had left him from a whole box. From the way Arjun uses it, what does magnanimous normally mean?",
+  "step": "subtle_tone",
+  "rationale": "The clue is ironic: the learner must see that Arjun is joking and work out the word's normal meaning from the opposite situation.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "very generous",
+   "very small",
+   "very sweet",
+   "very unfair"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "grm.art.12",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence is a correct general statement about tigers?",
+  "step": "generic_abstract",
+  "rationale": "A general statement uses a plural noun with no article; 'the tigers' wrongly points to particular tigers.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "The tigers are in danger in many countries.",
+   "Tigers are in danger in many countries.",
+   "A tigers are in danger in many countries.",
+   "Tiger is in danger in many countries."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "article_omission"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "grm.asp.13",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 7.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "perfect_progressive",
+  "rationale": "Past perfect progressive with 'for' in a past narrative; distractors mix tenses and use 'since hours'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.asp.pastperfprog",
+  "options": [
+   "When the doctor arrived, the patient had been sleeping for hours.",
+   "When the doctor arrived, the patient has been sleeping for hours.",
+   "When the doctor arrived, the patient was sleeping since hours.",
+   "When the doctor arrived, the patient had slept since hours."
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "grm.sva.15",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 7.75,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "inverted_number",
+  "rationale": "'The number of' is singular and 'a number of' is plural; both traps appear.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "The number of students in our school have increased.",
+   "The number of students in our school has increased.",
+   "A number of students has complained about the noise.",
+   "The number of students are increasing every year."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "attraction_error",
+   "3": "attraction_error"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.09",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "step": "list",
+  "rationale": "Commas between three list items; the distractors misplace them.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.com.list",
+  "options": [
+   "We saw lions tigers, and bears.",
+   "We saw, lions tigers and bears.",
+   "We saw lions, tigers and bears.",
+   "We saw lions, tigers, bears, and."
+  ],
+  "answer": 2
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.10",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:find_error",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Which sentence uses a comma wrongly?",
+  "step": "intro_word",
+  "rationale": "Spots a comma between subject and verb among correct commas after no, a name and 'well'.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.com.wrong",
+  "options": [
+   "No, thank you.",
+   "My friend, likes mangoes.",
+   "Meena, please sit down.",
+   "Well, I am not sure."
+  ],
+  "answer": 1
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.13",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "multi:sentences",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Two of these sentences need a comma before the joining word. Choose both.",
+  "step": "before_conjunction",
+  "rationale": "Tells two full clauses joined by a conjunction (comma) from joined words or phrases (no comma).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "I wanted to play cricket with my friends after school but it rained all afternoon.",
+   "She bought a pen and a notebook.",
+   "You can finish the project this week or you can ask the teacher for more time.",
+   "He was tired and hungry.",
+   "I like tea but not coffee."
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.14",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "Which sentence does NOT need any comma?",
+  "step": "restrictive",
+  "rationale": "A defining clause needs no commas, unlike a non-defining clause about a unique person, an opening 'However' and an introductory clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Students who arrive late must sign the register.",
+   "My mother who works in a bank is very busy.",
+   "However the plan worked in the end.",
+   "When we arrived the hall was already full."
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "grm.com.15",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 7.5,
+  "a": 1.1,
+  "prompt": "Which sentence says that only some of the students got a bus pass: the ones who live far away?",
+  "step": "meaning_transition",
+  "rationale": "Commas change the meaning: with commas, all the students live far away; without them, only some do.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "The students, who live far away, got a bus pass.",
+   "The students who live far away got a bus pass.",
+   "The students who live far away, got a bus pass.",
+   "The students, who live far away got a bus pass."
+  ],
+  "answer": 1
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.09",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "step": "two_statements",
+  "rationale": "Two short statements with a full stop and capital letters.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.run.two",
+  "options": [
+   "The cat sat on the mat. it was asleep.",
+   "The cat sat on the mat. It was asleep.",
+   "The cat sat on the mat it was asleep.",
+   "the cat sat on the mat. It was asleep."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "fused_sentence"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.11",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "multi:sentences",
+  "b": 4.0,
+  "a": 1.1,
+  "prompt": "Two of these are run-on sentences. Choose both.",
+  "step": "splice",
+  "rationale": "Finds a comma splice and a fused sentence among correct sentences; both must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "I love reading, my brother loves cricket.",
+   "When it rains, the streets flood.",
+   "The shop was closed so we went home.",
+   "Ravi plays the flute his sister sings.",
+   "She smiled and waved."
+  ],
+  "answer_set": [
+   0,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.12",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "step": "transitions",
+  "rationale": "'however' between two clauses needs a semicolon or full stop; a comma makes a splice.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "addresses": [
+   "comma_splice"
+  ],
+  "options": [
+   "The match was cancelled, however, we still went to the ground.",
+   "The match was cancelled; however, we still went to the ground.",
+   "The match was cancelled however we still went to the ground.",
+   "The match was cancelled; however we still, went to the ground."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "comma_splice",
+   "2": "fused_sentence"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.13",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "multi:sentences",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Two of these are punctuated correctly. Choose both.",
+  "step": "transitions",
+  "rationale": "Picks the two correct joins (a semicolon with a transition, and subordination) from splices and a fused sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "It was getting dark; therefore, we turned back.",
+   "It was getting dark, therefore we turned back.",
+   "Although it was getting dark, we kept walking.",
+   "It was getting dark we turned back.",
+   "It was getting dark, we turned back."
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sen.run.14",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 7.5,
+  "a": 1.1,
+  "prompt": "A writer wants a sharp pause before a surprising result. Which is the best choice?",
+  "step": "deliberate",
+  "rationale": "Chooses a dash deliberately for effect, and a correct boundary.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "We trained for months – and we lost in the first round.",
+   "We trained for months and, we lost in the first round.",
+   "We trained for months, we lost in the first round.",
+   "We trained for months we lost in the first round."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "comma_splice",
+   "3": "fused_sentence"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.09",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "Choose the joining word: I was sad ___ my friend moved away.",
+  "step": "because_but",
+  "rationale": "'because' for an obvious cause.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sub.because",
+  "options": [
+   "because",
+   "although",
+   "unless",
+   "or"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "wrong_relationship"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.14",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "multi:sentences",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Two of these sentences use the joining word correctly. Choose both.",
+  "step": "variety",
+  "rationale": "Finds correct subordination with 'whereas' and 'unless' among sentences that double up joining words.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Whereas my brother loves sport, I prefer music.",
+   "Unless you water the plants, they will die.",
+   "Although he was hungry, so he ate.",
+   "Because it was cold, but we went out.",
+   "Since it was raining, so we stayed in."
+  ],
+  "answer_set": [
+   0,
+   1
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sen.sub.15",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:combine",
+  "b": 7.5,
+  "a": 1.1,
+  "prompt": "Which sentence best combines all three ideas? \"The bridge was closed. We took the long road. We still arrived on time.\"",
+  "step": "multi_clause",
+  "rationale": "Three ideas linked by a cause and then a contrast; distractors reverse a relationship or splice.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.sub.three",
+  "options": [
+   "Because the bridge was closed, we took the long road, but we still arrived on time.",
+   "Although the bridge was closed, we took the long road, so we arrived on time.",
+   "The bridge was closed, we took the long road, we still arrived on time.",
+   "Because we took the long road, the bridge was closed, but we arrived on time."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "wrong_relationship",
+   "3": "wrong_relationship"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p4.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.0,
+  "prompt": "Where did Tara find Bobby?",
+  "passage": "rdg.p4",
+  "step": "short_fact",
+  "rationale": "A stated place in a very short text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "at home",
+   "in the park",
+   "behind the shop",
+   "under a tree"
+  ],
+  "answer": 2
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p4.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.0,
+  "prompt": "How did Tara feel when she could not see Bobby?",
+  "passage": "rdg.p4",
+  "step": "obvious_feeling",
+  "rationale": "An obvious feeling shown by an action (she sat down and cried).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "happy",
+   "sad and worried",
+   "angry with the cat",
+   "sleepy"
+  ],
+  "answer": 1
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p4.q4",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 1.75,
+  "a": 1.0,
+  "prompt": "What is the story mostly about?",
+  "passage": "rdg.p4",
+  "step": "topic",
+  "rationale": "The topic of a very short story.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Tara loses her dog and finds him again.",
+   "How to buy milk.",
+   "A cat that lives in a shop.",
+   "Tara's walk to school."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main",
+   "2": "detail_as_main"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p4.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.0,
+  "prompt": "Which is the best title for the story?",
+  "passage": "rdg.p4",
+  "step": "topic",
+  "rationale": "The best title for a very short story, against titles built from details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Bobby Comes Back",
+   "The Milk Van",
+   "Tara's Shop",
+   "A Brown Cat"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 4.5,
+  "a": 1.0,
+  "prompt": "What did Kiran add at the fair to make the foam rush out?",
+  "passage": "rdg.p5",
+  "step": "distractor",
+  "rationale": "A detail in the last paragraph; 'red' from the earlier 'red foam' is a distractor.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "red paint",
+   "vinegar",
+   "glue",
+   "water"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "word_matching"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.0,
+  "prompt": "Why did Kiran take a deep breath instead of shouting?",
+  "passage": "rdg.p5",
+  "step": "from_actions",
+  "rationale": "A motive inferred from what she saw (Dev's face) and what she did.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "She saw how sorry Dev was and did not want to upset him more.",
+   "She was tired after making the volcano.",
+   "She wanted to blow the foam away.",
+   "She was practising for the judges."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "literal_only"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q4",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "multi:feelings",
+  "b": 4.0,
+  "a": 1.0,
+  "prompt": "Choose the two words that best describe how Dev felt at the end of the day.",
+  "passage": "rdg.p5",
+  "step": "from_actions",
+  "rationale": "Two feelings inferred from actions at the end (he stood up straight and smiled); 'guilty' fits only earlier in the story.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "proud",
+   "guilty",
+   "happy",
+   "bored",
+   "angry",
+   "frightened"
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q5",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 4.75,
+  "a": 1.0,
+  "prompt": "Why did Kiran tell the judges that her brother had helped her?",
+  "passage": "rdg.p5",
+  "step": "reasons",
+  "rationale": "A motive inferred across the story: she has forgiven Dev and wants him to share the success.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "to make Dev feel included and proud",
+   "because the judges asked who broke the volcano",
+   "because Dev had made the volcano",
+   "to win a bigger prize"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q6",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 5.5,
+  "a": 1.0,
+  "prompt": "Why did Dev stand up very straight for the rest of the day?",
+  "passage": "rdg.p5",
+  "step": "reasons",
+  "rationale": "A feeling inferred from a small action, linked to what Kiran said in the sentence before.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "He was proud that Kiran had given him credit.",
+   "He wanted to look taller than Kiran.",
+   "His back hurt from holding the volcano.",
+   "The judges told him to stand still."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "literal_only"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p5.q7",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 4.25,
+  "a": 1.0,
+  "prompt": "What is the most important idea in the third paragraph?",
+  "passage": "rdg.p5",
+  "step": "paragraph_main",
+  "rationale": "The main idea of one paragraph, against details from it.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Kiran chooses to stay calm and fix the volcano with Dev.",
+   "Kiran finds some tape.",
+   "Dev holds the pieces.",
+   "The box is old."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main",
+   "2": "detail_as_main"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p6.q2",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_info",
+  "b": 6.0,
+  "a": 1.0,
+  "prompt": "What tells the other bees how far away a site is?",
+  "passage": "rdg.p6",
+  "step": "paraphrase",
+  "rationale": "Asked in different words from the text ('how far away' for 'distance'), with a close distractor (the angle shows direction).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "the angle of the dance",
+   "the length of the dance",
+   "the energy of the dance",
+   "the number of scouts"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "word_matching"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p6.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_info",
+  "b": 6.0,
+  "a": 1.0,
+  "prompt": "What is the writer's attitude to the way bees choose a new home?",
+  "passage": "rdg.p6",
+  "step": "mixed",
+  "rationale": "The writer's attitude inferred from word choices and the closing comparison with committees.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "impressed and admiring",
+   "worried",
+   "amused",
+   "doubtful"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p6.q4",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 5.5,
+  "a": 1.0,
+  "prompt": "What is the text mainly about?",
+  "passage": "rdg.p6",
+  "step": "multi_paragraph",
+  "rationale": "The main idea of a three-paragraph information text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "how a honeybee swarm chooses a new home",
+   "how bees make honey",
+   "why the old queen leaves the colony",
+   "how scientists study committees"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "detail_as_main",
+   "2": "detail_as_main"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p6.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "match:headings",
+  "b": 5.75,
+  "a": 1.2,
+  "prompt": "Match each paragraph to the best heading.",
+  "passage": "rdg.p6",
+  "step": "multi_paragraph",
+  "rationale": "The main idea of each paragraph of a multi-paragraph text; all three must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "Paragraph 1",
+   "Paragraph 2",
+   "Paragraph 3"
+  ],
+  "options": [
+   "How the swarm reaches agreement",
+   "Making honey for the winter",
+   "Why a colony needs a new home",
+   "Scouts and their dances"
+  ],
+  "answer_pairs": [
+   2,
+   3,
+   0
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p7.q1",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 7.25,
+  "a": 1.0,
+  "prompt": "What had happened to the well by the time the writer visited?",
+  "passage": "rdg.p7",
+  "step": "dense",
+  "rationale": "A detail in a dense sentence that also mentions a nearby change (the school).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "It had become a bank.",
+   "It had been filled in and paved over.",
+   "It was hidden by the banyan tree's roots.",
+   "It was dry but still there."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "word_matching"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p7.q3",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "multi:feelings",
+  "b": 6.75,
+  "a": 1.0,
+  "prompt": "Choose the two phrases that best describe the grandfather's feelings about the house.",
+  "passage": "rdg.p7",
+  "step": "mixed",
+  "rationale": "Mixed feelings inferred from details (keeping and marking the map) and from his changing the subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "he still cared about it deeply",
+   "he did not want to talk about it",
+   "he had forgotten about it",
+   "he was proud of its size",
+   "he wanted to sell it",
+   "he found it funny"
+  ],
+  "answer_set": [
+   0,
+   1
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p7.q4",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 7.75,
+  "a": 1.0,
+  "prompt": "Why does the writer mention the boy who waited by the doorway every evening?",
+  "passage": "rdg.p7",
+  "step": "subtle",
+  "rationale": "An unstated link the writer leaves the reader to make.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "to hint that the boy may have been the writer's grandfather, and that the house meant more to him than he ever said",
+   "to show that the woman had a very good memory",
+   "to explain why the house was falling down",
+   "to describe the daily life of children in the district"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "literal_only"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p7.q5",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "match:headings",
+  "b": 7.0,
+  "a": 1.2,
+  "prompt": "Match each paragraph to what it does in the essay.",
+  "passage": "rdg.p7",
+  "step": "central_theme",
+  "rationale": "What each paragraph does in a reflective essay; all three must be right.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "left": [
+   "Paragraph 1",
+   "Paragraph 2",
+   "Paragraph 4"
+  ],
+  "options": [
+   "shows how much the district has changed",
+   "explains how to read an old map",
+   "introduces the map and the grandfather's silence about the house",
+   "gives the writer's new understanding of what the map means"
+  ],
+  "answer_pairs": [
+   2,
+   0,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p7.q6",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 7.75,
+  "a": 1.0,
+  "prompt": "What is the writer's central point?",
+  "passage": "rdg.p7",
+  "step": "implicit_claim",
+  "rationale": "The central claim is stated only indirectly in the final paragraph; one distractor is the view the writer rejects.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "A map can show what mattered to the person who made it, more than it records places.",
+   "Old maps quickly become useless as places change.",
+   "People should visit their grandparents' home towns.",
+   "Banyan trees can live for a very long time."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "detail_as_main"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.06",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "Your teacher asks: \"Where is your homework?\" Which reply answers the question?",
+  "step": "answers_question",
+  "rationale": "Picks the reply that answers a simple question.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.tsk.reply",
+  "options": [
+   "I like homework.",
+   "It is in my bag.",
+   "Homework is hard.",
+   "My bag is blue."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "off_task",
+   "2": "off_task",
+   "3": "off_task"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.07",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "multi:task_parts",
+  "b": 3.75,
+  "a": 1.1,
+  "prompt": "The task: \"Write a message inviting your friend to your birthday party.\" Choose the two details the message must include.",
+  "step": "main_parts",
+  "rationale": "Identifies what a simple invitation must contain; both are needed.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "the date and time",
+   "where the party is",
+   "what you got for your last birthday",
+   "your favourite colour",
+   "how old your grandmother is"
+  ],
+  "answer_set": [
+   0,
+   1
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.08",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "multi:task_parts",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "The task: \"Write a letter to your principal asking permission to start a reading club, and explain how it will run.\" Choose the two things the letter must do.",
+  "step": "all_parts",
+  "rationale": "Identifies both parts of a two-part formal task among plausible but off-task content.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "ask for permission to start the club",
+   "explain when and where the club will meet",
+   "list your ten favourite books",
+   "describe how you learned to read",
+   "complain about the school library"
+  ],
+  "answer_set": [
+   0,
+   1
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.09",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "The task: \"Write instructions for a younger student on how to borrow a book from the school library.\" Which sentence suits this reader best?",
+  "step": "audience_needs",
+  "rationale": "Chooses plain, step-by-step language for a young reader over formal wording.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Proceed to the circulation desk and present your identification.",
+   "Take the book to the desk and show your library card to the librarian.",
+   "Libraries have existed for thousands of years.",
+   "Borrowing is an important part of literacy."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "off_task",
+   "3": "off_task"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.10",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 7.0,
+  "a": 1.1,
+  "prompt": "The task: \"Reply to a visitor who emailed to ask how to reach your school from the railway station.\" Which reply gives the visitor what they need?",
+  "step": "anticipates",
+  "rationale": "Picks the reply that gives the route and anticipates a likely problem (arriving late).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Our school is very famous, so you will find it easily.",
+   "Take bus 21 from outside the station to Gandhi Nagar (about 20 minutes); the school gate is opposite the bus stop. After 6 p.m. the buses are rare, so take an auto.",
+   "The station is big and busy.",
+   "Come any time; everyone knows us."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "off_task",
+   "2": "off_task"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.11",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 7.5,
+  "a": 1.1,
+  "prompt": "The task: \"Write a notice for parents about a change to the school bus times.\" Which notice tells parents everything they will need to know?",
+  "step": "anticipates",
+  "rationale": "Judges completeness for the reader: what changes, from when, how it affects them, and whom to ask.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "From Monday 3 March, Bus 4 will leave school at 3.45 p.m. instead of 3.30 p.m., so every stop will be about 15 minutes later. Questions? Please call the school office.",
+   "The bus times are changing soon. Please be ready.",
+   "Bus 4 will now leave at 3.45 p.m.",
+   "Dear parents, we are sorry for any trouble the bus may cause. Thank you."
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.06",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 2.0,
+  "a": 1.1,
+  "prompt": "Ravi wrote his whole story as one long block of writing. What would help his reader most?",
+  "step": "one_block",
+  "rationale": "Recognises that a story written as one block needs paragraphs for its main parts.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "splitting it into paragraphs for the beginning, middle and end",
+   "writing it all in capital letters",
+   "making every sentence shorter",
+   "adding more 'and's"
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "wrt.gra.12",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 7.75,
+  "a": 1.1,
+  "prompt": "Which sentence has a grammar mistake?",
+  "step": "slips",
+  "rationale": "A dangling participle (the papers did not finish the exam) among correct advanced structures.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "Not only did she win the race, but she also broke the record.",
+   "Having finished the exam, the papers were collected by the teacher.",
+   "The results were announced on Friday.",
+   "Rarely do we see such dedication."
+  ],
+  "answer": 1
+ },
+ {
+  "kind": "code",
+  "id": "rdg.p4.q6",
+  "version": 1,
+  "target": "EN.RDG.INF.motives",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.0,
+  "prompt": "Why did Tara hug Bobby?",
+  "passage": "rdg.p4",
+  "step": "obvious_feeling",
+  "rationale": "A feeling shown by an action at the end of a very short story.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "She was happy and relieved to find him.",
+   "He was cold.",
+   "She wanted to go home.",
+   "He was hungry."
+  ],
+  "answer": 0
+ },
+ {
+  "kind": "code",
+  "id": "wrt.tsk.12",
+  "version": 1,
+  "target": "EN.WRT.TSK.task_response",
+  "format": "choice:task_fit",
+  "b": 3.0,
+  "a": 1.1,
+  "prompt": "Your aunt sends a message: \"What would you like for your birthday, and what time should I come?\" Which reply answers both questions?",
+  "step": "main_parts",
+  "rationale": "Picks the reply that answers both parts of a two-part question.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "options": [
+   "A cricket bat, please! Come at five o'clock.",
+   "A cricket bat, please!",
+   "Come at five o'clock.",
+   "My birthday is on Sunday."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "off_task"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "wrt.org.12",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "A paragraph about the advantages of mobile phones has just ended. Which sentence would best begin the next paragraph, about their disadvantages?",
+  "step": "linking",
+  "rationale": "Chooses a sentence that begins a new paragraph and links it to the one before.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "fam.org.link",
+  "options": [
+   "On the other hand, phones can also cause problems.",
+   "Phones are made in factories.",
+   "In conclusion, phones are good.",
+   "My phone is blue."
+  ],
+  "answer": 0
+ }
+]

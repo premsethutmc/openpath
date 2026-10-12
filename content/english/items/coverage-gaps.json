@@ -100,5 +100,239 @@
    "G8"
   ],
   "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate. This capability is assessed mainly through extended writing (E2b's writing tasks); its code-scored items are proxies (choosing, proofreading or organising others' text)."
+ },
+ "EN.FND.SPL.homophones": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.FND.SPL.morphological": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.BRD.academic": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.MOR.prefixes": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.CTX.multiple_meaning": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.REL.synonyms_antonyms": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.REL.collocations": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.FIG.similes_metaphors": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.FIG.phrasal_verbs": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.VOC.USE.word_choice": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.NOUN.plurals_countability": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.VERB.present_past_simple": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.VERB.modals": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.VERB.passive": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.VERB.conditionals": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.MOD.comparatives": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.PREP.time_place": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.CLS.questions": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.CLS.relative_clauses": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.CLS.reported_speech": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.PUN.capitalisation": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.PUN.end_punctuation": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.GRM.PUN.apostrophes": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.SEN.CMP.fragments": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.SEN.CMB.coordination": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.SEN.CMB.embedding": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.SEN.COH.connectives": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.LIT.sequence": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.INF.cause_effect": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.SUM.summarise": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.STR.nonfiction_structure": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.CRF.purpose_audience": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.RDG.CRT.fact_opinion": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.TSK.idea_development": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.ORG.sequencing": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.GEN.narrative": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.GEN.persuasive": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.GEN.functional": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
+ },
+ "EN.WRT.STY.register": {
+  "gates": [
+   "G8"
+  ],
+  "reason": "Retention runway (G8). With about 14 items, the bank covers the range, the formats and every ladder step (G1–G7 pass), but after typical use it cannot also serve 4 retention checks on unseen items at every level. This is not only a bank-size limit: assessment and learning use the same items near the learner's level that retention checks need, so even 48 evenly spaced items per capability give only 2–3 such checks at the ends of the range. If assessment and learning used one item per family (an E4 selection change), about 24 items per capability in families of three would pass. Until then the engine falls back to flagged repeats, at least 14 days apart, which never change the estimate."
  }
 }

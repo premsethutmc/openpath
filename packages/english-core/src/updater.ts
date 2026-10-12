@@ -12,7 +12,7 @@
  * reasons are always recorded.
  */
 import { applyDirect, createComposite, leafView } from "./composite.ts";
-import { type ContentIndex, contextOf, familyOf, itemParams, scoreCode, wordCount } from "./content.ts";
+import { type ContentIndex, contextOf, familyOf, itemParams, itemVersion, scoreCode, wordCount } from "./content.ts";
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
@@ -134,8 +134,9 @@ export class Ledger {
 
   private onEvidence(ev: EvidenceEvent): Decision[] {
     if (this.evidence.has(ev.id)) return [{ id: `d:${ev.id}`, at: ev.at, source: ev.id, capability: null, verdict: "ignored", reasons: ["this evidence was already recorded"] }];
-    const item = this.ctx.content.items.get(ev.item.id);
-    if (!item || item.version !== ev.item.version)
+    // the item as the learner saw it: answers to an earlier version are scored against that version
+    const item = itemVersion(this.ctx.content, ev.item.id, ev.item.version);
+    if (!item)
       return [{ id: `d:${ev.id}`, at: ev.at, source: ev.id, capability: null, verdict: "rejected", reasons: [`unknown item ${ev.item.id} v${ev.item.version}`] }];
     this.evidence.set(ev.id, ev);
     const exposure: Exposure = this.exposures.has(item.id) ? "repeat" : this.familyExposures.has(familyOf(item)) ? "variant" : "fresh";

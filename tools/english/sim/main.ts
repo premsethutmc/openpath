@@ -1,12 +1,13 @@
 /** node tools/english/sim/main.ts — run the ten-learner simulation twice, measure, write the report. */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { REPO, loadContext } from "../load.ts";
+import { FROZEN_FRAMEWORK, REPO, loadContext } from "../load.ts";
 import { CRITERIA, PROTOCOL } from "./criteria.ts";
 import { renderReport } from "./report.ts";
 import { bankLimits, fingerprint, measures, runAll } from "./simulate.ts";
 
-const ctx = loadContext({ allowCandidateAnchors: true }); // no educator-scored anchors exist yet (D-4)
+// The frozen procedure is defined on framework 0.1.0 (the 17 skeleton capabilities its simulated learners have).
+const ctx = loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK }); // no educator-scored anchors exist yet (D-4)
 const first = await runAll(ctx);
 const second = await runAll(ctx);
 const fps: [string, string] = [fingerprint(first), fingerprint(second)];

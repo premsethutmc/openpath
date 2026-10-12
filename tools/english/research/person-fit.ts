@@ -6,7 +6,7 @@
  * computed with the production 3PL model at each capability's final estimate.
  */
 import { itemParams, leafView, pCorrect } from "../../../packages/english-core/src/index.ts";
-import { loadContext } from "../load.ts";
+import { FROZEN_FRAMEWORK, loadContext } from "../load.ts";
 import { PROTOCOL } from "../sim/criteria.ts";
 import { LEARNERS } from "../sim/learners.ts";
 import { type RunResult, runLearner } from "../sim/run.ts";
@@ -34,7 +34,7 @@ export function lz(ctx: ReturnType<typeof loadContext>, r: RunResult): number {
 if (import.meta.url === `file://${process.argv[1]}`) {
   for (const bank of ["e1", "current"] as const)
     for (const sim of ["as frozen", "all learners slip 3%"]) {
-      const ctx = loadContext({ allowCandidateAnchors: true, bank });
+      const ctx = loadContext({ allowCandidateAnchors: true, bank, framework: FROZEN_FRAMEWORK });
       const goal = ctx.content.goals.get(PROTOCOL.goal)!;
       const by: Record<string, number[]> = {};
       for (const seed of SEEDS)

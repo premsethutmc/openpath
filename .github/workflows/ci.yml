@@ -202,7 +202,7 @@ jobs:
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .
-      - name: Acceptance tests (E1 and E2a)
+      - name: Acceptance tests (E1, E2a and E2b)
         working-directory: packages/english-core
         run: |
           npm test 2>&1 | tee test.log

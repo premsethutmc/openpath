@@ -11,7 +11,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { type CodeItem, type Context, gaussian, leafView, rng } from "../../../packages/english-core/src/index.ts";
-import { type Bank, REPO, loadContext } from "../load.ts";
+import { type Bank, FROZEN_FRAMEWORK, REPO, loadContext } from "../load.ts";
 import { PROTOCOL } from "../sim/criteria.ts";
 import { CAP, LEARNERS, trueLevel } from "../sim/learners.ts";
 import { type RunResult, runLearner } from "../sim/run.ts";
@@ -59,7 +59,7 @@ export interface Row {
 }
 
 export async function runConfig(bank: Bank, model: string, simulator: string, seed: number): Promise<Row> {
-  const ctx: Context = { ...loadContext({ allowCandidateAnchors: true, bank }), researchBinaryUpdate: MODELS[model] };
+  const ctx: Context = { ...loadContext({ allowCandidateAnchors: true, bank, framework: FROZEN_FRAMEWORK }), researchBinaryUpdate: MODELS[model] };
   const goal = ctx.content.goals.get(PROTOCOL.goal)!;
   const rs: RunResult[] = [];
   for (const l of LEARNERS)

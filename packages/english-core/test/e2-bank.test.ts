@@ -1,5 +1,5 @@
 /**
- * E2-4, E2-5, E2-6 (E2a scope: the 17 skeleton capabilities).
+ * E2-4, E2-5, E2-6 (E2a: the 17 skeleton capabilities; E2b: all 56 capabilities of 0.2.0).
  * The bank's content is well formed and candidate-marked; coverage gates are measured honestly, and
  * every gate a capability misses is recorded with a reason (no silent gaps, no stale ones).
  */
@@ -25,22 +25,23 @@ test("E2-6: all content passes the checker under the runtime framework and 0.2.0
     }
 });
 
-test("E2-4: every skeleton capability is covered, and every gate it misses is recorded with a reason", () => {
+test("E2-4: every specified capability is covered, and every gate it misses is recorded with a reason", () => {
   assert.deepEqual(r.mismatches, []);
-  assert.deepEqual(new Set(r.coverage.map((c) => c.capability)), new Set(Object.values(CAP)));
+  for (const cap of Object.values(CAP)) assert.ok(r.coverage.some((c) => c.capability === cap), cap);
+  assert.equal(r.coverage.length, 56);
   for (const c of r.coverage) {
-    // G1–G7 (count, families, both ends of the range, gaps, formats, every ladder step) pass for all 17
+    // G1–G7 (count, families, both ends of the range, gaps, formats, every ladder step) pass for all 56
     for (const g of c.gates.filter((x) => x.id !== "G8")) assert.ok(g.pass, `${c.name}: ${g.id} ${g.label} (${g.value})`);
     const rec = r.recorded[c.capability];
     if (!c.gates.every((g) => g.pass)) assert.ok(rec && rec.reason.length > 100, `${c.name}: gaps need a reason`);
   }
-  // the 39 core capabilities specified in 0.2.0 are reported as pending (E2b), not hidden
-  assert.equal(r.pending.length, 39);
+  // E2b: no specified capability is left without items
+  assert.equal(r.pending.length, 0);
 });
 
 test("difficulty progression: items sit on their ladder step, ladders are ordered and cover every band descriptor", () => {
   const prog = loadProgressions();
-  for (const cap of Object.values(CAP)) {
+  for (const cap of r.coverage.map((c) => c.capability)) {
     const steps = prog.capabilities[cap].steps;
     for (let k = 1; k < steps.length; k++) assert.ok(steps[k].band > steps[k - 1].band, `${cap}: ladder in order`);
     const bands = Object.keys(r.ctx.index.leaves.get(cap)!.bands!);
