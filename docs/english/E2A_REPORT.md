@@ -1,6 +1,6 @@
 # E2a report: framework, formats, tools, and depth for the 17 skeleton capabilities
 
-*12 October 2026 · branch `feature/english-e2a` · not merged; awaiting your review. E2b has not started.
+*12 October 2026 · branch `feature/english-e2a` · merged in PR #8 (12 October). E2b: [`E2B_REPORT.md`](E2B_REPORT.md).
 Scope and decisions: `E2_SCOPE.md` (PR #7, approved 12 October).*
 
 All content in this milestone (the 39 new capability specifications, every item, rationale,

@@ -2,8 +2,8 @@
 
 *12 October 2026. These began as planning documents. **E1 is implemented and
 merged** ([`E1_REPORT.md`](E1_REPORT.md)). The E2 scope was approved with
-decisions on 12 October (PR #7); E2a is reported in
-[`E2A_REPORT.md`](E2A_REPORT.md).*
+decisions on 12 October (PR #7); E2a is merged ([`E2A_REPORT.md`](E2A_REPORT.md)), and E2b
+is reported in [`E2B_REPORT.md`](E2B_REPORT.md).*
 
 | Label | Meaning |
 |---|---|
@@ -35,6 +35,9 @@ decisions on 12 October (PR #7); E2a is reported in
    failure, the slip-aware alternative and profile recovery (review of PR #8).
 10. [`E4_DESIGN_OPTIONS.md`](E4_DESIGN_OPTIONS.md): options recorded for E4, not
     scheduled.
+11. [`E2B_REPORT.md`](E2B_REPORT.md): what E2b built (item banks for the 39 core
+    capabilities, writing tasks), coverage, simulation results and newly exposed
+    weaknesses.
 
 ---
 
