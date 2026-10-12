@@ -1,6 +1,6 @@
 # E1 report: walking skeleton
 
-*12 October 2026 · branch `feature/english-e1` · not merged; awaiting your review.*
+*12 October 2026 · branch `feature/english-e1` · engineering acceptance granted; merged with M1, M2 and M3 recorded as known limitations, not passing results.*
 
 ## Summary
 
@@ -17,10 +17,13 @@ hierarchy. Three rounds of review changes are included:
     overdue mastery shown as not currently verified
 - **Final review:** fresh items, variants and flagged repeats are told apart,
   so retention tracking no longer needs an unlimited supply of new questions.
+- **Merge condition:** after a failed retention check, selection and
+  learner-facing summaries can no longer mistake historical mastery for
+  currently verified proficiency.
 
 | | Result |
 |---|---|
-| **Acceptance tests** (does E1 do what was specified) | **52 of 52 automated tests pass.** E1-11 is CI; E1-12 is your review |
+| **Acceptance tests** (does E1 do what was specified) | **55 of 55 automated tests pass.** E1-11 is CI; E1-12 is your review |
 | **Simulation measures** (frozen pass levels, frozen procedure) | **5 of 8 pass** (M4, M5, M6, M7, M8). M1, M2 and M3 miss, for different reasons that were checked separately; the item bank is only part of the cause. See "Why M1, M2 and M3 miss" |
 | **Demonstration** | Two learners get different composites and different next activities. The same learner gets different, justified choices in assessment and learning mode. The same learner is shown before and after an overdue retention check. An invented quote is rejected, a restart gives identical state, and undo is exact |
 
@@ -63,6 +66,7 @@ influence. Code-scored items never go near the evaluator.
 | E1-11 | Nothing else breaks | Existing suites unchanged and green locally: 49 engine tests and 19 app tests. CI runs all jobs |
 | E1-12 | You review the demonstration and report | **Waiting for you** |
 | E1-14 | Fresh, variant and repeated items (final review): the ledger decides the exposure; a repeat never moves the estimate; assessment and learning never repeat; a retention check falls back to an unseen variant, then a flagged repeat after 14 days | Pass (5 new tests) |
+| E1-15 | After a failed retention check, nothing reads history as current (merge condition): verification is explicit; the learner summary says *needs review* and labels history; learning is pitched at the level the check supports; the estimate is unchanged | Pass (3 new tests) |
 | E1-13 | Two learners with different capabilities get different composites and different next activities | Pass. Compared at capability level: some grammar capability with L3 above L4, and some writing capability with L4 above L3, each by more than both uncertainties combined |
 
 ## The demonstration (`node tools/english/demo.ts`)
@@ -319,7 +323,7 @@ this, the flag makes it visible, and repeats never touch the estimate. Variants
 | | Before | After |
 |---|---|---|
 | Retention checks run | 156, all on unseen items | **195**: 162 unseen, 0 variants (the bank has no families yet), 33 flagged repeats |
-| Due checks blocked | 392 | **33** |
+| Due checks blocked | 392 | **33** (0 after the merge-condition change below, which altered later trajectories) |
 | Overdue at the end with no unused item left | 32 learner-capability pairs | **0** (checked with repeats) |
 | M1–M8 | | **identical values**, 5 of 8 pass |
 
@@ -327,6 +331,51 @@ The "before" column uses corrected counting. The earlier report said 45
 blocked checks, which was an undercount: when every overdue check was blocked,
 the notes were dropped. That reporting bug is fixed, and a test covers it.
 The demonstration is unchanged (Asha still had an unseen item).
+
+## Merge condition: failed retention is never read as current proficiency
+
+You approved the merge with one requirement: after a failed retention check,
+selection and learner-facing summaries must not mistake historical mastery for
+currently verified proficiency, and the estimate and the retention status must
+stay explicitly distinguishable. The update mathematics are unchanged.
+
+**Already in place:** a failed check withdraws `mastered`, sets the stage to
+*needs review*, and keeps the earlier mastery in `masteredBefore`.
+
+**Gaps found and closed:**
+
+- **One explicit verification field.** Every capability view now carries
+  `verification`: its status (*not demonstrated*, *demonstrated*, *verified*,
+  *overdue* or *failed*), the level currently supported (always empty when
+  overdue or failed), the highest level ever shown (history only), and when it
+  was last verified. Consumers read proficiency from here. They do not read it
+  from `demonstrated` (cumulative) or from the estimate.
+- **Learner-facing summaries.** `summarise()` in `summary.ts` returns three
+  separate lines:
+  - the status (what is currently true)
+  - the estimate, labelled as OpenPath's best guess from all answers, old and
+    new
+  - the history, labelled "history, not a current result"
+
+  It says *mastered* or *confirmed* only while the status is verified. After a
+  failed check it says: "Needs review: the check on … did not confirm your
+  earlier level, so it is not currently confirmed." The demonstration now
+  shows this line before and after the retention check.
+- **Learning selection.** Before this change, learning mode boosted
+  *overdue* capabilities but not *failed* ones, and it pitched practice at the
+  estimate. That estimate still averages the evidence from before the
+  forgetting (the L10 lag). Now:
+  - a failed check counts as a retention need
+  - practice is pitched at the level the failed check supports
+  - the explanation says so and still quotes the estimate separately
+
+  The estimate itself is not changed.
+
+**Effect on the frozen simulation:**
+
+- M1–M8 keep the same pass or miss outcome (5 of 8).
+- The only value that changed is M4, at 79% either way (135 → 134 of 170).
+- Retention checks that could not run fell from 33 to 0.
 
 ## Why M1, M2 and M3 miss (checked, not assumed)
 
@@ -385,10 +434,11 @@ Reported separately, from the frozen run:
 - **Exhaustion.** There are 126 items, and each learner uses 120 activities. By
   the end, about **10.9 of the 17 capabilities** have no unused item left for a
   learner.
-- **Retention.** With flagged repeats, 33 due checks are still blocked (the
-  item was seen under 14 days ago). Without repeats, 392 would be. Variants
+- **Retention.** With flagged repeats, no due check is blocked in the frozen
+  run (197 checks: 167 unseen items, 30 flagged repeats). Without repeats, 392
+  would be blocked. Variants
   (E2) will reduce reliance on repeats.
-- **Learning.** In **345 of 367** learning choices (94%), at least one needed
+- **Learning.** In **346 of 371** learning choices (93%), at least one needed
   capability had no unused item at a suitable difficulty. With 6–9 items per
   capability spread over bands 2–7.5, only one or two suit any given level.
 - **Ceiling.** The hardest items are around band 7–7.5, so a learner at 7.5
@@ -684,14 +734,17 @@ depth and content. Its contract is already fixed in code and enforced:
 ## Decisions needed before E2
 
 - **B1 and B2** are done (see "Hybrid scheduling and retention").
-- **Estimate lag after forgetting (L10, M2).** Retention correctly flags
-  forgetting, but the estimate keeps averaging older evidence. A possible fix
-  is to widen uncertainty when a retention check fails, so new evidence counts
-  more. That changes the updater, so it needs your approval. I suggest
-  deciding it with real learner data, not tuning it to the simulation.
-- **Hybrid probe rate.** The every-third-activity probe costs about one
-  learner on M2 (10-seed average). It is a configurable setting; keep it as
-  it is for E1, and revisit it with E2's larger bank.
+- **Future investigation: time-sensitive capability estimates (L10).**
+  Recorded, not scheduled. Retention correctly flags forgetting, but the
+  estimate keeps averaging older evidence, and time adds little uncertainty.
+  The update mathematics stay as they are. Options such as widening
+  uncertainty after a failed check, or weighting evidence by age, are to be
+  studied with real learner data. They will not be tuned to improve synthetic
+  simulation scores. Until then, a failed check is handled through
+  verification status and selection (see "Merge condition").
+- **Assessment probe.** It stays configurable (`HYBRID.probeEvery`, currently
+  3; 0 turns it off). It costs about one learner on M2 (10-seed average).
+  Revisit it with E2's larger bank.
 
 - **D-4.** An English educator (ideally two) to review the framework and items,
   and to score anchor responses so they become *trusted*. Today all 12 anchors

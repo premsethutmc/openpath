@@ -23,7 +23,7 @@ import {
   buildEvaluationRequest,
   leafView,
   qualify,
-  recommend,
+  recommend, summarise,
   replayEvaluator,
   rng,
 } from "../../packages/english-core/src/index.ts";
@@ -197,6 +197,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   };
   say(`\n10 · Four weeks later (${t30.slice(0, 10)}): an overdue retention check`);
   say(`   BEFORE  ${beforeView.name}: ${status(beforeView)}`);
+  say(`           learner sees: ${summarise(beforeView).status} ${summarise(beforeView).estimate}`);
   say(`   Next activity [${beforeNext.schedule.reason}]: ${prompt(beforeNext.choice!.item)}`);
   say(`     ${beforeNext.explanation}`);
   const item = ctx.content.items.get(beforeNext.choice!.item)!;
@@ -209,6 +210,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const check = afterView.retention.checks[afterView.retention.checks.length - 1];
   say(`   Asha answers: ${checkDs[0].observation!.value ? "right" : "wrong"} → the check ${check?.passed ? "PASSES" : "FAILS"} on this fresh evidence (interval now ${check?.intervalAfter} days)`);
   say(`   AFTER   ${afterView.name}: ${status(afterView)}`);
+  say(`           learner sees: ${summarise(afterView).status} ${summarise(afterView).estimate}`);
   say(`   Next activity [${afterNext.schedule.reason}]: ${prompt(afterNext.choice!.item)}`);
   say(`     ${afterNext.explanation}`);
   return { ctx, ledgers, next, modes, writingDecisions: ds, reloadedIdentical, undoIdentical, retentionDemo: { capability: cap, before: beforeView, after: afterView, beforeNext, afterNext }, lines };

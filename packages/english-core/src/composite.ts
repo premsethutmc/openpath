@@ -232,7 +232,32 @@ export interface LeafView {
   masteredBefore: number | null;
   /** Spaced retention checks: previously demonstrated vs currently verified. */
   retention: Retention;
+  /**
+   * What the evidence currently supports, kept apart from the numerical estimate (mean, sd) and from
+   * history. Selection and learner-facing summaries read proficiency claims from here, never from
+   * `demonstrated` or the history alone.
+   */
+  verification: Verification;
   misconceptions: { id: string; strength: number }[];
+}
+
+export type VerificationStatus = "not_demonstrated" | "demonstrated" | "verified" | "overdue" | "failed";
+
+export interface Verification {
+  /**
+   * not_demonstrated: never shown at a level.
+   * demonstrated: shown recently, first retention check not yet due.
+   * verified: a retention check passed and the next is not yet due.
+   * overdue: a check is due and has not been taken; not currently verified.
+   * failed: the latest check failed; not currently verified.
+   */
+  status: VerificationStatus;
+  /** The level the evidence currently supports; always null when overdue or failed. */
+  currentLevel: number | null;
+  /** The highest level ever shown. History only: never a claim about now. */
+  historicalLevel: number | null;
+  /** When the current level was last verified (a passed check), if ever. */
+  verifiedAt: string | null;
 }
 
 export function isStruggling(node: NodeState, p: Policy): boolean {
@@ -283,8 +308,19 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
     mastered,
     masteredBefore: slipped || unverified ? masteredHist : null,
     retention: ret,
+    verification: verificationOf(node, ret, demonstrated, masteredHist),
     misconceptions,
   };
+}
+
+function verificationOf(node: NodeState, ret: Retention, demonstrated: number | null, masteredHist: number | null): Verification {
+  const shown = [...node.demonstrations.map((d) => d.level), ...(masteredHist !== null ? [masteredHist] : [])];
+  const historicalLevel = shown.length ? Math.max(...shown) : null;
+  const status: VerificationStatus =
+    ret.status === "none" ? "not_demonstrated" : ret.status === "overdue" ? "overdue" : ret.status === "failed" ? "failed" : ret.lastVerifiedAt ? "verified" : "demonstrated";
+  const current = status === "verified" || status === "demonstrated";
+  const currentLevel = current && ret.level !== null && demonstrated !== null ? Math.min(ret.level, demonstrated) : null;
+  return { status, currentLevel, historicalLevel, verifiedAt: ret.lastVerifiedAt };
 }
 
 export interface AggregateView {

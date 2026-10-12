@@ -43,6 +43,13 @@ learner or guardian chooses goals; the system never infers them.
 > answer's exposure. A repeat counts only towards the retention check and
 > never changes the estimate; a variant is new evidence, flagged. So
 > long-term retention tracking does not need an unlimited supply of new items.
+>
+> **After a failed retention check (E1 merge condition).** Learning mode
+> treats the capability as needing review and pitches practice at the level
+> the check supports, not at the estimate, which still includes older
+> evidence. Proficiency claims come from `LeafView.verification`, and
+> learner-facing text comes from `summarise()`, which keeps status, estimate
+> and history apart.
 
 **Candidates.** Any item or activity whose targets include a weighted
 capability, and whose difficulty is within reach. An *activity* can be one item

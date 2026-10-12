@@ -9,3 +9,4 @@ export * from "./updater.ts";
 export * from "./selection.ts";
 export * from "./store.ts";
 export * from "./retention.ts";
+export * from "./summary.ts";

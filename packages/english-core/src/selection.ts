@@ -199,6 +199,12 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   const { index, content, composite, goal, now } = input;
   const weights = goalWeights(goal, index);
   const views = new Map(index.leafIds.map((id) => [id, leafView(composite, index, id, now)]));
+  // Learning works from what is currently verified. After a failed retention check the estimate still
+  // averages older evidence, so practice is pitched at the lower level the check supports. The
+  // estimate itself is not changed; it is still reported, separately, in the explanation.
+  const working = (v: LeafView): LeafView =>
+    v.verification.status === "failed" && v.retention.level !== null && v.retention.level < v.mean ? { ...v, mean: v.retention.level } : v;
+  const lviews = new Map([...views].map(([id, v]) => [id, working(v)]));
   const cfg: SchedulerConfig = { ...HYBRID, ...input.scheduler };
   const fallbackTarget = defaultTarget(views, weights);
   const targetOf = (cap: CapabilityId) => resolveTarget(goal, index, cap, fallbackTarget);
@@ -389,15 +395,15 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   // ------------------------------------------------------------ learning
   function learn(): Recommendation {
     const caps = [...weights]
-      .filter(([id, w]) => w > 0 && views.get(id)!.specified)
+      .filter(([id, w]) => w > 0 && lviews.get(id)!.specified)
       .map(([id, w]) => {
-        const v = views.get(id)!;
+        const v = lviews.get(id)!;
         const T = targetOf(id);
         const n = need(v, T.band);
-        const weakPrereqs = (index.requires.get(id) ?? []).filter((p) => need(views.get(p)!, targetOf(p).band) >= WEAK_PREREQUISITE);
+        const weakPrereqs = (index.requires.get(id) ?? []).filter((p) => need(lviews.get(p)!, targetOf(p).band) >= WEAK_PREREQUISITE);
         const readiness = weakPrereqs.length ? 0.5 : 1;
         const misconception = Math.max(0, ...v.misconceptions.map((m) => m.strength));
-        const retention = v.retention.status === "overdue" ? 1 : 0;
+        const retention = v.verification.status === "overdue" || v.verification.status === "failed" ? 1 : 0;
         const uncertainty = Math.min(1, v.sd / prior);
         const priority = (w / maxW) * (n * readiness + 0.3 * misconception + 0.3 * retention + 0.2 * uncertainty);
         return { id, v, T, need: n, readiness, weakPrereqs, misconception, retention, uncertainty, priority };
@@ -407,7 +413,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
     const zoneOf = (v: LeafView) => (v.stage === "struggling" ? ZONE_STRUGGLING : ZONE);
     const forCap = (cap: CapabilityId) => pool.filter((i) => targetsOf(i).includes(cap));
     const suitable = (cap: CapabilityId) => {
-      const v = views.get(cap)!;
+      const v = lviews.get(cap)!;
       const [lo, hi] = zoneOf(v);
       return forCap(cap).filter((i) => {
         const p = predicted(i, v);
@@ -415,7 +421,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
       });
     };
     const bestFit = (cap: CapabilityId, items: Item[]) => {
-      const v = views.get(cap)!;
+      const v = lviews.get(cap)!;
       const tags = new Set(v.misconceptions.map((m) => m.id));
       return items
         .map((i) => {
@@ -450,12 +456,12 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
       gaps.push(gapFor(c.id));
       // (a) a prerequisite the framework defines, if it is itself still needed
       const pre = (index.requires.get(c.id) ?? [])
-        .filter((p) => views.get(p)!.specified)
-        .map((p) => ({ p, n: need(views.get(p)!, targetOf(p).band), items: suitable(p) }))
+        .filter((p) => lviews.get(p)!.specified)
+        .map((p) => ({ p, n: need(lviews.get(p)!, targetOf(p).band), items: suitable(p) }))
         .filter((x) => x.n >= PREREQUISITE_STEP_NEED && x.items.length)
         .sort((a, b) => b.n - a.n || a.p.localeCompare(b.p))[0];
       if (pre) {
-        const pv = views.get(pre.p)!;
+        const pv = lviews.get(pre.p)!;
         const pc = caps.find((x) => x.id === pre.p) ?? { ...c, id: pre.p, v: pv, need: pre.n, readiness: 1, misconception: 0, retention: 0, uncertainty: Math.min(1, pv.sd / prior) };
         choice = scoredFor(pc, bestFit(pre.p, pre.items), [`prerequisite step for ${c.v.name}`]);
         choice.focus = pre.p;
@@ -507,7 +513,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   }
 
   function gapFor(cap: CapabilityId): BankGap {
-    const v = views.get(cap)!;
+    const v = lviews.get(cap)!;
     const [lo, hi] = v.stage === "struggling" ? ZONE_STRUGGLING : ZONE;
     // typed-item difficulty that gives success probability p: b = mean − logit(p) / 1.3
     const b = (p: number) => Math.round((v.mean - Math.log(p / (1 - p)) / 1.3) * 10) / 10;
@@ -515,7 +521,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
     return {
       capability: cap,
       name: v.name,
-      estimate: { mean: v.mean, sd: v.sd },
+      estimate: { mean: views.get(cap)!.mean, sd: views.get(cap)!.sd },
       suitableDifficulty: [b(hi), b(lo)],
       unusedDifficulties: unused,
       note: `no unused item for ${v.name} at a suitable difficulty (about ${b(hi)}–${b(lo)}); unused items: ${unused.length ? unused.join(", ") : "none"}`,
@@ -523,12 +529,16 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   }
 
   function explainLearning(c: Scored, p: Path, top: { id: string; v: LeafView } | undefined, gaps: BankGap[]): string {
-    const v = views.get(c.focus!)!;
+    const v = lviews.get(c.focus!)!;
     const T = targetOf(c.focus!);
-    const head = `Learning: ${v.name} (${v.mean.toFixed(1)} ± ${v.sd.toFixed(1)}; ${Math.round(100 * need(v, T.band))}% likely below band ${T.band}). Target: ${T.note}.`;
+    const est = views.get(c.focus!)!;
+    const pitched = v.mean !== est.mean;
+    const head = pitched
+      ? `Learning: ${v.name} needs review: its retention check on ${est.retention.lastFailedAt!.slice(0, 10)} failed, so it is not currently verified, and practice is pitched at band ${v.mean} (what that check supports), not at the estimate ${est.mean.toFixed(1)} ± ${est.sd.toFixed(1)}, which still includes older evidence. ${Math.round(100 * need(v, T.band))}% likely below band ${T.band}. Target: ${T.note}.`
+      : `Learning: ${v.name} (${v.mean.toFixed(1)} ± ${v.sd.toFixed(1)}; ${Math.round(100 * need(v, T.band))}% likely below band ${T.band}). Target: ${T.note}.`;
     const fit = `This activity is at a suitable difficulty (about ${Math.round(c.p * 100)}% likely to succeed).`;
     if (p === "direct") {
-      const dependants = [...index.requires].filter(([cap, reqs]) => reqs.includes(c.focus!) && (weights.get(cap) ?? 0) > 0 && need(views.get(cap)!, targetOf(cap).band) >= PREREQUISITE_STEP_NEED).map(([cap]) => views.get(cap)!.name);
+      const dependants = [...index.requires].filter(([cap, reqs]) => reqs.includes(c.focus!) && (weights.get(cap) ?? 0) > 0 && need(lviews.get(cap)!, targetOf(cap).band) >= PREREQUISITE_STEP_NEED).map(([cap]) => lviews.get(cap)!.name);
       const extra = [
         dependants.length ? `the framework lists it as a prerequisite of ${dependants.join(" and ")}, which is also below target, so it comes first` : "",
         c.parts.misconception >= 0.3 ? "it also works on a mistake seen recently" : "",
@@ -539,7 +549,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
       return `${head} ${fit}${more ? " " + more[0].toUpperCase() + more.slice(1) + "." : ""}${skipped}`;
     }
     const gap = gaps[gaps.length - 1];
-    const need0 = top ? views.get(gap.capability)! : v;
+    const need0 = top ? lviews.get(gap.capability)! : v;
     if (p === "prerequisite_step")
       return `Learning: ${need0.name} is the most needed capability, but ${gap.note}. Prerequisite step: ${v.name} (${v.mean.toFixed(1)} ± ${v.sd.toFixed(1)}), which the framework lists as a prerequisite and which is itself below target. ${fit} Target: ${T.note}.`;
     return `Learning: ${need0.name} is the most needed capability, but ${gap.note}. Easier step on the same capability (about ${Math.round(c.p * 100)}% likely to succeed). Target: ${T.note}.`;
