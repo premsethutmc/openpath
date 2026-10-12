@@ -1,5 +1,10 @@
 # M1 · Capability registry and observable profile
 
+> **Superseded, 12 October 2026, before any code was written.** Its useful
+> parts (several versioned frameworks, strict validation, fingerprint locking)
+> carry into English milestone E1. See
+> [`../english/IMPLEMENTATION_PLAN.md`](../english/IMPLEMENTATION_PLAN.md).
+
 *Status: **Recommended. Awaiting your approval.** No M1 code has been written
 yet. When it is finished, I report against every acceptance test below and
 wait for your approval before M2 (A-30).*

@@ -49,8 +49,23 @@ Each entry gives the date (2026) and the source.
 | A-28 | Keep the architecture simple: no premature microservices, marketplace or AI infrastructure | 12 Oct · additional requirement 5 |
 | A-29 | Every milestone leaves working, tested software | 12 Oct · additional requirement 6 |
 | A-30 | **No milestone starts automatically.** At the end of each milestone, the result is reported and approval is requested before the next one begins. Each milestone's scope and acceptance tests are presented for approval before it is implemented | 12 Oct · additional requirement 7 |
+| A-31 | **Paused:** animation, character development, shopping-game polish and visual experimentation. The existing work and PRs are preserved, not deleted | 12 Oct · English direction |
+| A-32 | **First intended product: a comprehensive adaptive English-learning application for ages 10–15** | 12 Oct · English direction |
+| A-33 | Core IP priorities, in order: 1. a deep, hierarchical English capability framework; 2. a persistent learner-specific numerical composite (estimates, uncertainty, evidence, relationships); 3. an LLM-assisted evaluation pipeline returning structured proposed updates; 4. a controlled composite updater with local-first learner state; 5. adaptive activity selection from the composite and goals; 6. a ten-learner simulation that tests whether the engine distinguishes English strengths and weaknesses | 12 Oct · English direction |
+| A-34 | No training or fine-tuning of a foundation LLM. The LLM provider stays interchangeable | 12 Oct · English direction |
+| A-35 | Audit and propose the smallest coherent plan first. **Do not implement until the plan is approved** | 12 Oct · English direction |
 
 ## B. Recommended, awaiting your approval
+
+> **12 Oct, English direction.** The English plan's recommendations and
+> decisions D-1 to D-10 are in
+> [`english/IMPLEMENTATION_PLAN.md`](english/IMPLEMENTATION_PLAN.md) §6.
+> Changes to earlier entries:
+> - **A-23** (TNPSC as second product) is *paused*.
+> - **R-11** (the M1 proposal) is *superseded* by English milestone E1.
+> - **A-28** ("no AI infrastructure") is *refined*. The required LLM evaluator
+>   adapter and server gateway are in scope; nothing beyond them is.
+> - **R-3** (V1 plan M1–M9) is *paused* in favour of the English plan.
 
 | # | Recommendation | Where explained |
 |---|---|---|

@@ -1,5 +1,10 @@
 # V1 implementation plan
 
+> **Paused, 12 October 2026.** The first product is now the English-learning
+> app for ages 10–15 (A-32). Its plan is in
+> [`english/IMPLEMENTATION_PLAN.md`](english/IMPLEMENTATION_PLAN.md). This
+> document is kept for the record. Its principles (A-25 to A-30) still apply.
+
 *Items F, G and I of the architecture instruction. You accepted the overall
 direction on 12 October (A-21). Each milestone is still approved on its own:
 its scope and acceptance tests are presented first, and when it is finished
