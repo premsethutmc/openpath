@@ -1,1 +1,446 @@
-[]
+[
+ {
+  "kind": "writing",
+  "id": "wr.letter.streetlight",
+  "version": 1,
+  "format": "writing:formal_letter",
+  "genre": "formal letter of complaint",
+  "prompt": "You are Anita Rao, 14 Lake View Colony, Pune. The street lights in your colony have not worked for three weeks. Write a letter to the Municipal Commissioner describing the problem and asking for action. (100–120 words)",
+  "min_words": 100,
+  "max_words": 120,
+  "b": 5.5,
+  "band_window": [
+   3.5,
+   7.5
+  ],
+  "targets": [
+   "EN.WRT.GEN.functional",
+   "EN.WRT.STY.register",
+   "EN.WRT.TSK.task_response",
+   "EN.WRT.TSK.idea_development"
+  ],
+  "secondary": [
+   "EN.WRT.ACC.grammar",
+   "EN.WRT.ACC.spelling",
+   "EN.GRM.PUN.capitalisation"
+  ],
+  "rubric": {
+   "EN.WRT.GEN.functional": [
+    "Uses the layout and conventions of the form (for a formal letter: addresses, date, subject, salutation, closing)",
+    "Includes everything the reader needs to act",
+    "Purpose is clear from the opening"
+   ],
+   "EN.WRT.STY.register": [
+    "Keeps a register that suits the reader throughout",
+    "Avoids text-speak and slang in formal writing",
+    "Tone fits the purpose (polite, warm, objective or persuasive)"
+   ],
+   "EN.WRT.TSK.task_response": [
+    "Does what the task asks (purpose and reader)",
+    "Includes every required part",
+    "Keeps to the length asked for"
+   ],
+   "EN.WRT.TSK.idea_development": [
+    "Each main idea is developed with a reason, example or explanation",
+    "Details are relevant",
+    "Chooses the most telling details"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.letter.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 2.5,
+     "EN.WRT.STY.register": 2.5,
+     "EN.WRT.TSK.task_response": 3,
+     "EN.WRT.TSK.idea_development": 2.5,
+     "EN.WRT.ACC.grammar": 3,
+     "EN.WRT.ACC.spelling": 4,
+     "EN.GRM.PUN.capitalisation": 2
+    },
+    "text": "dear sir, the lights on our road is broken from many days. it is very dark and peoples are scared. plz repair it fast. thanking you anita"
+   },
+   {
+    "id": "anc.letter.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 5,
+     "EN.WRT.STY.register": 5,
+     "EN.WRT.TSK.task_response": 5,
+     "EN.WRT.TSK.idea_development": 4.5,
+     "EN.WRT.ACC.grammar": 4.5,
+     "EN.WRT.ACC.spelling": 6,
+     "EN.GRM.PUN.capitalisation": 6
+    },
+    "text": "14 Lake View Colony\nPune\n12 October 2026\n\nThe Municipal Commissioner\nPune Municipal Corporation\nPune\n\nSubject: Broken street lights\n\nDear Sir,\nI am writing to tell you that the street lights in our colony are not working since three weeks. At night the road is very dark and it is dangerous for old people and children. Last week a man fell off his scooter because he could not see a pothole. Please send someone to repair the lights as soon as possible.\n\nThank you.\nYours faithfully,\nAnita Rao"
+   },
+   {
+    "id": "anc.letter.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 7.5,
+     "EN.WRT.STY.register": 7,
+     "EN.WRT.TSK.task_response": 7,
+     "EN.WRT.TSK.idea_development": 7,
+     "EN.WRT.ACC.grammar": 7,
+     "EN.WRT.ACC.spelling": 7.5,
+     "EN.GRM.PUN.capitalisation": 7.5
+    },
+    "text": "14 Lake View Colony\nPune 411001\n12 October 2026\n\nThe Municipal Commissioner\nPune Municipal Corporation\nShivajinagar, Pune\n\nSubject: Request to repair the street lights in Lake View Colony\n\nSir,\nI am writing to draw your attention to the street lights in Lake View Colony, five of which have not worked for the past three weeks. As a result, the main road is completely dark after 7 p.m. Elderly residents no longer feel safe walking in the evening, and last week a scooter rider was hurt after hitting a pothole he could not see.\n\nI request you to have the lights repaired at the earliest and checked regularly in future.\n\nThank you for your attention to this matter.\n\nYours faithfully,\nAnita Rao"
+   }
+  ],
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.notice.quiz",
+  "version": 1,
+  "format": "writing:notice",
+  "genre": "notice",
+  "prompt": "You are Rohan Mehta, Secretary of the English Club. Write a notice for the school notice board about an English quiz. Give the date, time and place, say who can take part, and explain how to register. (40–60 words)",
+  "min_words": 40,
+  "max_words": 60,
+  "b": 4,
+  "band_window": [
+   2,
+   6
+  ],
+  "targets": [
+   "EN.WRT.GEN.functional",
+   "EN.WRT.TSK.task_response",
+   "EN.WRT.STY.register"
+  ],
+  "secondary": [
+   "EN.GRM.PUN.capitalisation",
+   "EN.GRM.PUN.end_punctuation"
+  ],
+  "rubric": {
+   "EN.WRT.GEN.functional": [
+    "Uses the layout and conventions of the form (for a formal letter: addresses, date, subject, salutation, closing)",
+    "Includes everything the reader needs to act",
+    "Purpose is clear from the opening"
+   ],
+   "EN.WRT.TSK.task_response": [
+    "Does what the task asks (purpose and reader)",
+    "Includes every required part",
+    "Keeps to the length asked for"
+   ],
+   "EN.WRT.STY.register": [
+    "Keeps a register that suits the reader throughout",
+    "Avoids text-speak and slang in formal writing",
+    "Tone fits the purpose (polite, warm, objective or persuasive)"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.notice.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 2.5,
+     "EN.WRT.TSK.task_response": 2.5,
+     "EN.WRT.STY.register": 3,
+     "EN.GRM.PUN.capitalisation": 2,
+     "EN.GRM.PUN.end_punctuation": 3
+    },
+    "text": "quiz!!! come to quiz on friday its fun. everyone come. rohan"
+   },
+   {
+    "id": "anc.notice.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 4.5,
+     "EN.WRT.TSK.task_response": 4,
+     "EN.WRT.STY.register": 4.5,
+     "EN.GRM.PUN.capitalisation": 5.5,
+     "EN.GRM.PUN.end_punctuation": 5
+    },
+    "text": "NOTICE\nEnglish Quiz\nThe English Club is having a quiz on Friday 20 October in the school hall. Students of classes 6 to 8 can take part. If you want to join, give your name to me. It will be fun!\nRohan\nSecretary, English Club"
+   },
+   {
+    "id": "anc.notice.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.functional": 7,
+     "EN.WRT.TSK.task_response": 6.5,
+     "EN.WRT.STY.register": 6.5,
+     "EN.GRM.PUN.capitalisation": 6.5,
+     "EN.GRM.PUN.end_punctuation": 6.5
+    },
+    "text": "GREEN VALLEY SCHOOL\nNOTICE\n12 October 2026\n\nINTER-HOUSE ENGLISH QUIZ\n\nThe English Club will hold an inter-house quiz on Friday, 20 October, from 2 p.m. to 3.30 p.m. in the School Hall. Students of Classes 6 to 8 may take part in teams of three. Interested students should register with the undersigned by 17 October.\n\nRohan Mehta\nSecretary, English Club"
+   }
+  ],
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.story.lost",
+  "version": 1,
+  "format": "writing:story",
+  "genre": "narrative",
+  "prompt": "Write a story that begins: 'The bag was not where I had left it.' (120–200 words)",
+  "min_words": 120,
+  "max_words": 200,
+  "b": 5,
+  "band_window": [
+   2.5,
+   7.5
+  ],
+  "targets": [
+   "EN.WRT.GEN.narrative",
+   "EN.WRT.ORG.sequencing",
+   "EN.VOC.USE.word_choice",
+   "EN.GRM.VERB.present_past_simple",
+   "EN.SEN.COH.connectives"
+  ],
+  "secondary": [
+   "EN.WRT.ACC.spelling",
+   "EN.WRT.ACC.grammar"
+  ],
+  "rubric": {
+   "EN.WRT.GEN.narrative": [
+    "Clear beginning, problem and resolution",
+    "Characters and setting are shown, not only told",
+    "Pace and detail are controlled for effect"
+   ],
+   "EN.WRT.ORG.sequencing": [
+    "Events or points come in a logical order",
+    "The reader can follow how one part leads to the next",
+    "The order suits the purpose"
+   ],
+   "EN.VOC.USE.word_choice": [
+    "Uses precise verbs, nouns and adjectives instead of general words",
+    "Word choice suits the purpose and tone",
+    "Advanced words are used correctly"
+   ],
+   "EN.GRM.VERB.present_past_simple": [
+    "Past forms, including irregular ones, are correct",
+    "Tense stays consistent"
+   ],
+   "EN.SEN.COH.connectives": [
+    "Connectives show how sentences and paragraphs relate",
+    "Connectives are varied and not overused"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.lost.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.narrative": 3,
+     "EN.WRT.ORG.sequencing": 3,
+     "EN.VOC.USE.word_choice": 2.5,
+     "EN.GRM.VERB.present_past_simple": 2.5,
+     "EN.SEN.COH.connectives": 2.5,
+     "EN.WRT.ACC.spelling": 5,
+     "EN.WRT.ACC.grammar": 3
+    },
+    "text": "The bag was not where I had left it. I look everywhere. I go to the class and the playground. I am very sad. Then my friend come and he say he have my bag. I am happy. The end."
+   },
+   {
+    "id": "anc.lost.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.narrative": 5,
+     "EN.WRT.ORG.sequencing": 5.5,
+     "EN.VOC.USE.word_choice": 4.5,
+     "EN.GRM.VERB.present_past_simple": 5,
+     "EN.SEN.COH.connectives": 5,
+     "EN.WRT.ACC.spelling": 6,
+     "EN.WRT.ACC.grammar": 5
+    },
+    "text": "The bag was not where I had left it. I had put it under the bench near the bus stop while I bought a samosa, and now it was gone. My books, my lunch and my new calculator were inside. I felt sick. I asked the samosa seller, but he did not see anything. Then I saw a small boy running down the street with a blue bag. I ran after him and shouted. When I caught up, he was crying. He said he thought someone forgot it and he was taking it to the police station. I felt bad for shouting. I thanked him and we walked back together. After that day, I never leave my bag anywhere."
+   },
+   {
+    "id": "anc.lost.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.narrative": 7,
+     "EN.WRT.ORG.sequencing": 7,
+     "EN.VOC.USE.word_choice": 7,
+     "EN.GRM.VERB.present_past_simple": 7.5,
+     "EN.SEN.COH.connectives": 7,
+     "EN.WRT.ACC.spelling": 7.5,
+     "EN.WRT.ACC.grammar": 7.5
+    },
+    "text": "The bag was not where I had left it. For a moment I simply stared at the empty space under the bench, as if staring hard enough might bring it back. Inside were my notebooks, my lunch and, worst of all, the drawings I had spent the whole holiday finishing for the art competition.\n\nI checked behind the bench, then under the next one, then along the platform, my heart thudding louder with every empty corner. Overhead, the announcer's voice echoed, calm and useless.\n\nIt was the tea-seller who finally pointed, without a word, towards the lost-property window. Behind the glass, perched on a pile of umbrellas, sat my bag. A cleaner had found it and handed it in only minutes before.\n\nWhen I unzipped it, the drawings were still there, a little creased at one corner. I smoothed them flat on my knee. That afternoon I won second prize, but what I remember most is the cleaner's shy smile when I went back to thank her."
+   }
+  ],
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.persuade.trees",
+  "version": 1,
+  "format": "writing:article",
+  "genre": "persuasive article",
+  "prompt": "Write an article for your school magazine persuading students and teachers that the school should plant more trees. Give reasons, and answer one objection someone might raise. (120–180 words)",
+  "min_words": 120,
+  "max_words": 180,
+  "b": 5.5,
+  "band_window": [
+   3,
+   8
+  ],
+  "targets": [
+   "EN.WRT.GEN.persuasive",
+   "EN.WRT.TSK.idea_development",
+   "EN.WRT.ORG.sequencing",
+   "EN.SEN.COH.connectives"
+  ],
+  "secondary": [
+   "EN.WRT.STY.register",
+   "EN.WRT.ACC.grammar"
+  ],
+  "rubric": {
+   "EN.WRT.GEN.persuasive": [
+    "States a clear position",
+    "Supports it with reasons and evidence",
+    "Addresses the reader and answers the other side"
+   ],
+   "EN.WRT.TSK.idea_development": [
+    "Each main idea is developed with a reason, example or explanation",
+    "Details are relevant",
+    "Chooses the most telling details"
+   ],
+   "EN.WRT.ORG.sequencing": [
+    "Events or points come in a logical order",
+    "The reader can follow how one part leads to the next",
+    "The order suits the purpose"
+   ],
+   "EN.SEN.COH.connectives": [
+    "Connectives show how sentences and paragraphs relate",
+    "Connectives are varied and not overused"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.trees.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.persuasive": 2.5,
+     "EN.WRT.TSK.idea_development": 2.5,
+     "EN.WRT.ORG.sequencing": 3,
+     "EN.SEN.COH.connectives": 2,
+     "EN.WRT.STY.register": 3.5,
+     "EN.WRT.ACC.grammar": 4
+    },
+    "text": "We should plant trees. Trees are good. Trees are green and nice. I like trees. Please plant more trees in the school. Thank you."
+   },
+   {
+    "id": "anc.trees.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.persuasive": 5,
+     "EN.WRT.TSK.idea_development": 5,
+     "EN.WRT.ORG.sequencing": 5.5,
+     "EN.SEN.COH.connectives": 5,
+     "EN.WRT.STY.register": 5,
+     "EN.WRT.ACC.grammar": 5.5
+    },
+    "text": "Plant More Trees!\n\nOur school should plant more trees. Firstly, trees give us shade. In summer our playground is very hot and students cannot play there in the afternoon. If we have more trees, it will be cooler. Secondly, trees make the air clean. There is a lot of traffic near our school, so we need clean air. Also, trees are homes for birds and squirrels and it is nice to see them. Some people say trees cost money, but saplings are cheap and students can look after them. So I think we should plant trees this monsoon. Let's do it together!"
+   },
+   {
+    "id": "anc.trees.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.GEN.persuasive": 7,
+     "EN.WRT.TSK.idea_development": 7,
+     "EN.WRT.ORG.sequencing": 7,
+     "EN.SEN.COH.connectives": 7,
+     "EN.WRT.STY.register": 7,
+     "EN.WRT.ACC.grammar": 7.5
+    },
+    "text": "Green Up Our Grounds\n\nOn a May afternoon, our playground is a sheet of hot concrete where nobody wants to play. It does not have to be this way. Planting trees around the grounds would make our school cooler, healthier and more beautiful.\n\nThe most urgent reason is heat. A large tree can make the air beneath it noticeably cooler, giving us shaded places to play and eat. Trees would also catch some of the dust from the busy road outside our gates.\n\nSome may argue that trees are expensive and need care. However, saplings cost little, and if each class adopted and watered its own tree, students would learn responsibility along the way.\n\nThe monsoon is the perfect time to plant. Let us ask the Principal to support a tree-planting week, so that the students who come after us can enjoy the shade we planted."
+   }
+  ],
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "writing",
+  "id": "wr.analytical.chart",
+  "version": 1,
+  "format": "writing:analytical_paragraph",
+  "genre": "analytical paragraph",
+  "prompt": "The table shows how students at Green Valley School travelled to school in 2015 and in 2025. Walking: 40% in 2015, 25% in 2025. Bus: 30%, 35%. Car: 10%, 30%. Bicycle: 20%, 10%. Write an analytical paragraph describing the main changes. (100–120 words)",
+  "min_words": 100,
+  "max_words": 120,
+  "b": 6,
+  "band_window": [
+   4,
+   8
+  ],
+  "targets": [
+   "EN.WRT.TSK.idea_development",
+   "EN.WRT.ORG.sequencing",
+   "EN.VOC.BRD.academic",
+   "EN.GRM.MOD.comparatives"
+  ],
+  "secondary": [
+   "EN.SEN.COH.connectives",
+   "EN.WRT.ACC.grammar"
+  ],
+  "rubric": {
+   "EN.WRT.TSK.idea_development": [
+    "Each main idea is developed with a reason, example or explanation",
+    "Details are relevant",
+    "Chooses the most telling details"
+   ],
+   "EN.WRT.ORG.sequencing": [
+    "Events or points come in a logical order",
+    "The reader can follow how one part leads to the next",
+    "The order suits the purpose"
+   ],
+   "EN.VOC.BRD.academic": [
+    "Uses academic words accurately (increase, decrease, proportion, overall)",
+    "Describes data precisely"
+   ],
+   "EN.GRM.MOD.comparatives": [
+    "Comparatives and superlatives are formed correctly",
+    "Comparisons are precise (from … to, twice as many, fewer/less)"
+   ]
+  },
+  "anchors": [
+   {
+    "id": "anc.chart.1",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.idea_development": 3,
+     "EN.WRT.ORG.sequencing": 3,
+     "EN.VOC.BRD.academic": 2.5,
+     "EN.GRM.MOD.comparatives": 3,
+     "EN.SEN.COH.connectives": 2.5,
+     "EN.WRT.ACC.grammar": 3
+    },
+    "text": "In 2015 40% students walk to school and in 2025 25% walk. Bus is 30% and 35%. Car is 10% and 30%. Bicycle is 20% and 10%. Car is more. Walking is less."
+   },
+   {
+    "id": "anc.chart.2",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.idea_development": 5,
+     "EN.WRT.ORG.sequencing": 5,
+     "EN.VOC.BRD.academic": 4.5,
+     "EN.GRM.MOD.comparatives": 4.5,
+     "EN.SEN.COH.connectives": 5,
+     "EN.WRT.ACC.grammar": 5
+    },
+    "text": "The table shows how students at Green Valley School travelled to school in 2015 and 2025. The biggest change is in cars. In 2015 only 10% came by car but in 2025 it was 30%, so it became three times more. Walking went down from 40% to 25% and cycling also went down from 20% to 10%. The bus went up a little, from 30% to 35%. Overall, more students come by car and less students walk or cycle. This may be because families live further away now."
+   },
+   {
+    "id": "anc.chart.3",
+    "trusted": false,
+    "scores": {
+     "EN.WRT.TSK.idea_development": 7,
+     "EN.WRT.ORG.sequencing": 7,
+     "EN.VOC.BRD.academic": 7,
+     "EN.GRM.MOD.comparatives": 7,
+     "EN.SEN.COH.connectives": 7,
+     "EN.WRT.ACC.grammar": 7
+    },
+    "text": "The table compares how students at Green Valley School travelled to school in 2015 and 2025. The most striking change is the rise in car journeys, which tripled from 10% to 30%. In contrast, the proportion of students who walked fell from 40% to 25%, and cycling halved from 20% to 10%. Bus travel, however, remained fairly stable, rising only slightly from 30% to 35%. Overall, the figures suggest a clear shift away from walking and cycling towards travelling by car. Consequently, the school may need to consider the effect on traffic near its gates and on students' fitness."
+   }
+  ],
+  "review": "candidate-unvalidated"
+ }
+]

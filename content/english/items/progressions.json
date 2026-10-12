@@ -1,6 +1,6 @@
 {
  "review": "candidate-unvalidated",
- "note": "Difficulty ladders (E2a): for each capability, the features that make its items harder, in order, each at a band on OpenPath's 1-8 scale and under one of the capability's band descriptors. Bands are expert estimates, not empirically calibrated. For review by English educators (D-4).",
+ "note": "Difficulty ladders (E2a for the 17 skeleton capabilities, E2b for the 39 core capabilities): for each capability, the features that make its items harder, in order, each at a band on OpenPath's 1-8 scale and under one of the capability's band descriptors. Bands are expert estimates, not empirically calibrated. For review by English educators (D-4).",
  "capabilities": {
   "EN.FND.SPL.inflections": {
    "steps": [
@@ -679,6 +679,1212 @@
      "band": 7.25,
      "descriptor": "8",
      "feature": "Misspellings of rare words with double letters or silent letters."
+    }
+   ]
+  },
+  "EN.FND.SPL.homophones": {
+   "steps": [
+    {
+     "id": "common_pairs",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Very common pairs and sets in short sentences (to/two/too, see/sea, sun/son)."
+    },
+    {
+     "id": "there_their",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "there/their/they're and your/you're in everyday sentences."
+    },
+    {
+     "id": "its_its",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "its/it's: possessive against contraction, the most persistent common confusion."
+    },
+    {
+     "id": "less_common",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Less common pairs and whose/who's (principal/principle, stationary/stationery)."
+    },
+    {
+     "id": "near_homophones",
+     "band": 6.5,
+     "descriptor": "6",
+     "feature": "Near-homophones that differ in one sound or in word class (accept/except, lose/loose, advice/advise)."
+    },
+    {
+     "id": "demanding",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Demanding pairs whose meanings are close (affect/effect, complement/compliment, discreet/discrete)."
+    }
+   ]
+  },
+  "EN.FND.SPL.morphological": {
+   "steps": [
+    {
+     "id": "plain_affix",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Adds a common prefix or suffix with no change at the join (unhappy, farmer, careless)."
+    },
+    {
+     "id": "double_at_join",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Keeps both letters where the prefix or suffix meets the same letter (misspell, unnatural, really)."
+    },
+    {
+     "id": "ful_ly_ment",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "-ful has one l, -ful + -ly keeps both l's (gratefully), -ment and the argue exception."
+    },
+    {
+     "id": "able_ible",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Chooses -able or -ible, which sound the same (comfortable, visible)."
+    },
+    {
+     "id": "tion_sion",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Chooses -tion, -sion or -ssion, and -ance or -ence (discussion, decision, difference)."
+    },
+    {
+     "id": "roots_rare",
+     "band": 7.5,
+     "descriptor": "8",
+     "feature": "Less common derived words, using roots and joins (irrelevant, occasionally, accommodate)."
+    }
+   ]
+  },
+  "EN.VOC.BRD.academic": {
+   "steps": [
+    {
+     "id": "instruction_words",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Classroom instruction words (underline, match, list)."
+    },
+    {
+     "id": "cross_subject",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Common cross-subject words recalled or matched in context (method, result, compare)."
+    },
+    {
+     "id": "instruction_differences",
+     "band": 4.75,
+     "descriptor": "4",
+     "feature": "Tells similar instructions apart and answers what is asked (describe, explain, compare)."
+    },
+    {
+     "id": "abstract_textbook",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "Abstract textbook words in their academic sense (factor, significant, evidence, evaluate)."
+    },
+    {
+     "id": "precise_use",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Precise academic words for reasoning (hypothesis, implication, criteria, consequently)."
+    }
+   ]
+  },
+  "EN.VOC.MOR.prefixes": {
+   "steps": [
+    {
+     "id": "un_re",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "un- and re- on familiar words (untie, reread, refill)."
+    },
+    {
+     "id": "common_prefixes",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Works out and forms words with dis-, mis-, pre- and over-."
+    },
+    {
+     "id": "negative_choice",
+     "band": 5.0,
+     "descriptor": "6",
+     "feature": "Chooses the right negative prefix: im-, il-, ir-, in-, un- (impossible, illegal, irregular)."
+    },
+    {
+     "id": "less_common",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "Less common prefixes on familiar words (sub-, inter-)."
+    },
+    {
+     "id": "academic",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Prefixes in abstract and academic words (counterproductive, semi-permanent, misconception)."
+    }
+   ]
+  },
+  "EN.VOC.CTX.multiple_meaning": {
+   "steps": [
+    {
+     "id": "two_everyday",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Two everyday meanings of a very common word (a bat, to bat; a hand, give a hand)."
+    },
+    {
+     "id": "sentence_fit",
+     "band": 3.25,
+     "descriptor": "4",
+     "feature": "Picks the meaning that fits the sentence for common words (light, record)."
+    },
+    {
+     "id": "less_common_senses",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "Less frequent everyday senses of familiar words (run a shop, do you mind)."
+    },
+    {
+     "id": "subject_meanings",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Subject-specific meanings of familiar words (table, current, solution, mouth of a river)."
+    },
+    {
+     "id": "figurative",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Less obvious and figurative senses (a sharp decline, address a problem, a cold look)."
+    }
+   ]
+  },
+  "EN.VOC.REL.synonyms_antonyms": {
+   "steps": [
+    {
+     "id": "common_opposites",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Very common opposites (big/small, hot/cold, open/close)."
+    },
+    {
+     "id": "syn_ant_context",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "A synonym or antonym for a common word in a sentence (begin/start, generous/selfish)."
+    },
+    {
+     "id": "less_common_words",
+     "band": 4.75,
+     "descriptor": "4",
+     "feature": "Synonyms and antonyms for less common words (narrow/wide, reluctant/unwilling)."
+    },
+    {
+     "id": "fit_meaning",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Chooses the near-synonym that fits the sentence's meaning (exhausted, fragile, snapped)."
+    },
+    {
+     "id": "fine_differences",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Fine differences in meaning and attitude between near-synonyms (determined/stubborn, thrifty/stingy, glance/stare)."
+    }
+   ]
+  },
+  "EN.VOC.REL.collocations": {
+   "steps": [
+    {
+     "id": "fixed_phrases",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Very common fixed phrases (thank you very much, good morning, take a seat)."
+    },
+    {
+     "id": "verb_noun",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Common verb–noun pairs, including make and do (do homework, make a mistake, take a photo)."
+    },
+    {
+     "id": "not_word_for_word",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "Verb–noun pairs that differ from a word-for-word translation (switch on the light, pay attention)."
+    },
+    {
+     "id": "adj_noun_adverb",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Adjective–noun and adverb collocations (heavy rain, strong argument, deeply sorry)."
+    },
+    {
+     "id": "academic_less_common",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Less common and academic collocations (draw a conclusion, pose a question, bitterly disappointed)."
+    }
+   ]
+  },
+  "EN.VOC.FIG.similes_metaphors": {
+   "steps": [
+    {
+     "id": "simple_similes",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Common simple similes read for their meaning, not literally (as cold as ice, runs like the wind)."
+    },
+    {
+     "id": "what_compared",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Says what a simile or simple metaphor compares and which quality is shared."
+    },
+    {
+     "id": "less_familiar",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Interprets less familiar metaphors and the feeling they create."
+    },
+    {
+     "id": "extended",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Extended or layered metaphors and how they shape a text's meaning."
+    }
+   ]
+  },
+  "EN.VOC.FIG.phrasal_verbs": {
+   "steps": [
+    {
+     "id": "literal",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Common phrasal verbs with literal meanings (sit down, get up)."
+    },
+    {
+     "id": "idiomatic_common",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Common idiomatic phrasal verbs (look after, give up, look for, find out)."
+    },
+    {
+     "id": "similar_choice",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Chooses between similar phrasal verbs with the same verb (put off, put up with, put out; call off)."
+    },
+    {
+     "id": "several_meanings",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Phrasal verbs with several meanings, chosen by context (pick up, make out, bring about)."
+    }
+   ]
+  },
+  "EN.VOC.USE.word_choice": {
+   "steps": [
+    {
+     "id": "general_words",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Recognises when a general word (nice, good, thing) says less than a precise one."
+    },
+    {
+     "id": "precise_replacement",
+     "band": 4.0,
+     "descriptor": "4",
+     "feature": "Replaces a general word with a more precise verb, noun or adjective."
+    },
+    {
+     "id": "precise_purpose",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Chooses wording that is precise and suits the purpose (report, story, notice)."
+    },
+    {
+     "id": "tone_effect",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Chooses words for tone and effect, and notices advanced words used wrongly."
+    }
+   ]
+  },
+  "EN.GRM.NOUN.plurals_countability": {
+   "steps": [
+    {
+     "id": "regular",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Regular plurals with -s and -es (cats, buses)."
+    },
+    {
+     "id": "y_and_irregular",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Consonant + y and common irregular plurals (babies, children, mice)."
+    },
+    {
+     "id": "many_much",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "many with countable and much with uncountable nouns, typed."
+    },
+    {
+     "id": "uncountable",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Common uncountable nouns treated as singular, with no plural (information, advice, furniture, news)."
+    },
+    {
+     "id": "both_ways_rare",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Nouns used both ways and less common plurals (two coffees; criteria, phenomena)."
+    }
+   ]
+  },
+  "EN.GRM.VERB.present_past_simple": {
+   "steps": [
+    {
+     "id": "habits_regular",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Present simple for habits and regular past forms (walks, walked)."
+    },
+    {
+     "id": "irregular_common",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Common irregular past forms (went, bought)."
+    },
+    {
+     "id": "did_questions_negatives",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "The base form after did and didn't in questions and negatives."
+    },
+    {
+     "id": "consistency_less_common",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Keeps tense consistent across a text; less common irregular forms (caught, chose, led)."
+    },
+    {
+     "id": "uncommon",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Uncommon irregular forms (sought, wept, forbade)."
+    }
+   ]
+  },
+  "EN.GRM.VERB.modals": {
+   "steps": [
+    {
+     "id": "can_ability",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "can and can't for ability."
+    },
+    {
+     "id": "modal_form",
+     "band": 3.0,
+     "descriptor": "4",
+     "feature": "A modal takes the bare verb: no to, no -s (She can swim, not She can to swim)."
+    },
+    {
+     "id": "obligation_advice",
+     "band": 4.25,
+     "descriptor": "4",
+     "feature": "must, should and may for obligation, advice and permission."
+    },
+    {
+     "id": "possibility_past",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "might and could for possibility, and could have for a missed possibility."
+    },
+    {
+     "id": "mustnt_dont_have_to",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "mustn't (not allowed) against don't have to (not necessary)."
+    },
+    {
+     "id": "deduction",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Deduction and nuance with past modals (must have, can't have, needn't have)."
+    }
+   ]
+  },
+  "EN.GRM.VERB.passive": {
+   "steps": [
+    {
+     "id": "recognise",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Understands who did the action in a simple passive with by."
+    },
+    {
+     "id": "present_past",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Forms the present and past simple passive (is cleaned, was built)."
+    },
+    {
+     "id": "other_tenses",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "Passives in other tenses and with modals (have been sold, will be announced, must be done)."
+    },
+    {
+     "id": "active_or_passive",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "Chooses the passive when the doer is unknown or unimportant; tells correct from broken passives."
+    },
+    {
+     "id": "reporting_focus",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Reporting passives (It is said that…, is believed to be…) and passives for focus in formal writing."
+    }
+   ]
+  },
+  "EN.GRM.VERB.conditionals": {
+   "steps": [
+    {
+     "id": "zero",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Understands zero-conditional sentences about routines and facts."
+    },
+    {
+     "id": "first",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Forms first conditionals, with the present (not will) in the if-clause."
+    },
+    {
+     "id": "second",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Forms second conditionals for imaginary situations (If I had…, I would…)."
+    },
+    {
+     "id": "third",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "Forms third conditionals about the past (If we had left…, we would have…)."
+    },
+    {
+     "id": "mixed",
+     "band": 7.75,
+     "descriptor": "8",
+     "feature": "Mixed conditionals linking a past condition to a present result."
+    }
+   ]
+  },
+  "EN.GRM.MOD.comparatives": {
+   "steps": [
+    {
+     "id": "er_est",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "-er and -est on short adjectives (taller, smallest)."
+    },
+    {
+     "id": "more_most_irregular",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "more and most with longer adjectives, and irregular forms (better, worst)."
+    },
+    {
+     "id": "spelling_as_as",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "Spelling changes (bigger, happiest) and as … as."
+    },
+    {
+     "id": "precise",
+     "band": 7.0,
+     "descriptor": "8",
+     "feature": "less/fewer, far + comparative, the more …, the more …, and irregular further."
+    }
+   ]
+  },
+  "EN.GRM.PREP.time_place": {
+   "steps": [
+    {
+     "id": "simple_place",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "in, on and under for simple places."
+    },
+    {
+     "id": "common_places",
+     "band": 3.0,
+     "descriptor": "4",
+     "feature": "at, in and on for common places (at the bus stop, in Chennai)."
+    },
+    {
+     "id": "time_in_on_at",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "at, on and in for times (at seven, on Monday, in June)."
+    },
+    {
+     "id": "since_for",
+     "band": 5.25,
+     "descriptor": "6",
+     "feature": "since (a point in time) against for (a length of time)."
+    },
+    {
+     "id": "by_until_during",
+     "band": 6.25,
+     "descriptor": "6",
+     "feature": "by against until, and during against while."
+    },
+    {
+     "id": "less_common",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Less common expressions (in time / on time, at the end / in the end)."
+    }
+   ]
+  },
+  "EN.GRM.CLS.questions": {
+   "steps": [
+    {
+     "id": "be_can",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Yes/no questions with be and can (Are you…? Can you…?)."
+    },
+    {
+     "id": "do_wh",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Wh- questions with do, does and did, with the right word order."
+    },
+    {
+     "id": "subject_tags",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "Subject questions (Who phoned?) against object questions, and question tags."
+    },
+    {
+     "id": "embedded",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Indirect and embedded questions, which keep statement word order."
+    }
+   ]
+  },
+  "EN.GRM.CLS.relative_clauses": {
+   "steps": [
+    {
+     "id": "understand",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Understands simple who and which clauses after a noun."
+    },
+    {
+     "id": "join_who_which",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Joins two sentences with who, which or that, without repeating the pronoun."
+    },
+    {
+     "id": "whose_where_commas",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "whose and where, and commas around non-defining clauses."
+    },
+    {
+     "id": "prep_reduced",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Relative clauses with prepositions (in which, to whom) and reduced forms (the man sitting there)."
+    }
+   ]
+  },
+  "EN.GRM.CLS.reported_speech": {
+   "steps": [
+    {
+     "id": "understand",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Understands simple reported statements and works out the original words."
+    },
+    {
+     "id": "statements",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Reports statements with tense and pronoun changes."
+    },
+    {
+     "id": "questions",
+     "band": 5.0,
+     "descriptor": "6",
+     "feature": "Reports questions with if/whether and statement word order."
+    },
+    {
+     "id": "commands",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "Reports commands and requests with told/asked + (not) to."
+    },
+    {
+     "id": "reporting_verbs",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Reporting verbs with their patterns (denied taking, advised me to, suggested going)."
+    }
+   ]
+  },
+  "EN.GRM.PUN.capitalisation": {
+   "steps": [
+    {
+     "id": "start_I_names",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Capitals at the start of a sentence and for I and names."
+    },
+    {
+     "id": "days_places",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Capitals for days, months, festivals, places and languages."
+    },
+    {
+     "id": "titles_orgs",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Capitals for titles, organisations and proper adjectives, and none on common nouns."
+    },
+    {
+     "id": "conventions",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Consistent conventions: inside quotations, titles before names, subjects against proper names."
+    }
+   ]
+  },
+  "EN.GRM.PUN.end_punctuation": {
+   "steps": [
+    {
+     "id": "full_stop",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "A full stop at the end of a simple statement."
+    },
+    {
+     "id": "question_exclamation",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Question marks and exclamation marks, including in short dialogue."
+    },
+    {
+     "id": "indirect_longer",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "No question mark on an indirect question; end marks in longer sentences."
+    },
+    {
+     "id": "quotations",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "End marks with quotations, inside or outside the quotation marks as the meaning requires."
+    }
+   ]
+  },
+  "EN.GRM.PUN.apostrophes": {
+   "steps": [
+    {
+     "id": "contractions",
+     "band": 1.75,
+     "descriptor": "2",
+     "feature": "Apostrophes in very common contractions (don't, I'm, isn't)."
+    },
+    {
+     "id": "singular_possession",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "'s for singular possession."
+    },
+    {
+     "id": "no_plural_apostrophe",
+     "band": 4.5,
+     "descriptor": "4",
+     "feature": "No apostrophe in plain plurals or ordinary verbs (mangoes, sells)."
+    },
+    {
+     "id": "plural_its",
+     "band": 5.75,
+     "descriptor": "6",
+     "feature": "s' for plural possession, and its against it's."
+    },
+    {
+     "id": "irregular_joint",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Irregular plural possession (children's) and joint possession (Ravi and Sita's)."
+    }
+   ]
+  },
+  "EN.SEN.CMP.fragments": {
+   "steps": [
+    {
+     "id": "simple_complete",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Recognises and writes simple complete sentences with a subject and a verb."
+    },
+    {
+     "id": "obvious_fragments",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Finds and fixes obvious fragments, such as a because- or when-clause on its own."
+    },
+    {
+     "id": "ing_which",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Avoids -ing and which fragments in longer writing."
+    },
+    {
+     "id": "deliberate",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Recognises fragments used deliberately for effect, and where they are acceptable."
+    }
+   ]
+  },
+  "EN.SEN.CMB.coordination": {
+   "steps": [
+    {
+     "id": "and_but",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Joins two simple ideas with and or but, and chooses so for an obvious result."
+    },
+    {
+     "id": "and_but_or_so",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Chooses and, but, or and so to show the right link."
+    },
+    {
+     "id": "yet_nor_paired",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "yet, nor and paired forms (either … or, neither … nor), and avoids long chains of and."
+    },
+    {
+     "id": "balance",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Balances coordination and subordination for clarity and rhythm."
+    }
+   ]
+  },
+  "EN.SEN.CMB.embedding": {
+   "steps": [
+    {
+     "id": "short_phrase",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Understands and makes a sentence with a short describing phrase (the girl in the red dress)."
+    },
+    {
+     "id": "who_which",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Combines two sentences with who or which, without a repeated pronoun."
+    },
+    {
+     "id": "participle",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Combines with participle phrases without dangling them."
+    },
+    {
+     "id": "concise",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Embeds several ideas in one controlled sentence without overloading it."
+    }
+   ]
+  },
+  "EN.SEN.COH.connectives": {
+   "steps": [
+    {
+     "id": "first_then",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "first, then, next and finally to order events."
+    },
+    {
+     "id": "also_however_so",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Common connectives for addition, contrast and result (also, however, so)."
+    },
+    {
+     "id": "exact_relationship",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Chooses the connective that shows the exact relationship (as a result, for instance, despite this)."
+    },
+    {
+     "id": "guide_argument",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Uses transitions to guide a reader through an argument, including conceding a point."
+    }
+   ]
+  },
+  "EN.RDG.LIT.sequence": {
+   "steps": [
+    {
+     "id": "three_events",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Orders three or four events or steps in a very short text."
+    },
+    {
+     "id": "several_paragraphs",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Orders events across a text of several paragraphs, using time words."
+    },
+    {
+     "id": "out_of_order",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Orders events when the text tells them out of order (flashbacks, earlier stories)."
+    },
+    {
+     "id": "complex",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Reconstructs complex timelines where the order of mention misleads."
+    }
+   ]
+  },
+  "EN.RDG.INF.cause_effect": {
+   "steps": [
+    {
+     "id": "because_stated",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Finds a cause stated with because or in the next sentence."
+    },
+    {
+     "id": "different_sentences",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Links a cause and effect stated in different sentences or paragraphs."
+    },
+    {
+     "id": "inferred",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Infers causes and effects that are not directly stated."
+    },
+    {
+     "id": "multiple_indirect",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Distinguishes multiple causes, remedies from causes, and causes from coincidences."
+    }
+   ]
+  },
+  "EN.RDG.SUM.summarise": {
+   "steps": [
+    {
+     "id": "main_event",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Recognises the main event or topic of a short text."
+    },
+    {
+     "id": "choose_summary",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Chooses the summary that covers the main points without small details or added opinion."
+    },
+    {
+     "id": "key_points",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Identifies the key points of a multi-paragraph text and leaves out examples."
+    },
+    {
+     "id": "condense_argument",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Condenses a text accurately, keeping the writer's line of thought or turning point."
+    }
+   ]
+  },
+  "EN.RDG.STR.nonfiction_structure": {
+   "steps": [
+    {
+     "id": "title_headings",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Uses the title and headings to tell what a text is about and where to look."
+    },
+    {
+     "id": "sequence_description",
+     "band": 3.5,
+     "descriptor": "4",
+     "feature": "Recognises sequence and description structures, and uses headings to find information."
+    },
+    {
+     "id": "compare_cause_problem",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Recognises compare-and-contrast, cause-and-effect and problem-and-solution structures and their signal words."
+    },
+    {
+     "id": "structure_purpose",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Explains how a text's structure supports its purpose."
+    }
+   ]
+  },
+  "EN.RDG.CRF.purpose_audience": {
+   "steps": [
+    {
+     "id": "text_type",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Tells whether a text is a story, a letter or instructions."
+    },
+    {
+     "id": "main_purpose",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Identifies the main purpose (inform, persuade, entertain, instruct), not just the topic."
+    },
+    {
+     "id": "audience_language",
+     "band": 6.0,
+     "descriptor": "6",
+     "feature": "Identifies the intended audience and how the language is chosen for it."
+    },
+    {
+     "id": "mixed_hidden",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Explains mixed or hidden purposes, such as an advertisement written to look like news."
+    }
+   ]
+  },
+  "EN.RDG.CRT.fact_opinion": {
+   "steps": [
+    {
+     "id": "simple",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Tells a simple fact from a simple opinion."
+    },
+    {
+     "id": "opinion_words",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Recognises opinion words (best, nicest, should, I think) in short texts."
+    },
+    {
+     "id": "claims_as_facts",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Distinguishes opinions presented as facts, including claims with numbers or certainty."
+    },
+    {
+     "id": "blend_persuade",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Evaluates how a writer blends fact and opinion to persuade."
+    }
+   ]
+  },
+  "EN.WRT.TSK.idea_development": {
+   "steps": [
+    {
+     "id": "list_ideas",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Recognises a reason or detail that adds to an idea, beyond a list."
+    },
+    {
+     "id": "reason_example",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Adds a reason or an example that is relevant to the idea."
+    },
+    {
+     "id": "relevant_development",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Develops a main idea with relevant explanation and spots irrelevant detail."
+    },
+    {
+     "id": "telling_detail",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Chooses the most telling detail and develops an argument in depth."
+    }
+   ]
+  },
+  "EN.WRT.ORG.sequencing": {
+   "steps": [
+    {
+     "id": "sensible_order",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Puts events in a sensible order."
+    },
+    {
+     "id": "follow_order",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Orders ideas in a paragraph so a reader can follow them, starting with the main idea."
+    },
+    {
+     "id": "logical_links",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Orders points logically, with clear links between them."
+    },
+    {
+     "id": "effective_order",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Arranges content in the most effective order for the purpose and reader."
+    }
+   ]
+  },
+  "EN.WRT.GEN.narrative": {
+   "steps": [
+    {
+     "id": "connected_events",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Recognises connected events and a sensible next event in a short story."
+    },
+    {
+     "id": "beginning_middle_end",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Recognises a story with a beginning, a middle and an ending that resolves it."
+    },
+    {
+     "id": "character_setting_problem",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Recognises showing character and setting, and a clear problem and resolution."
+    },
+    {
+     "id": "pace_viewpoint",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Recognises control of pace, viewpoint and detail for effect."
+    }
+   ]
+  },
+  "EN.WRT.GEN.persuasive": {
+   "steps": [
+    {
+     "id": "state_opinion",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "States an opinion, and tells an opinion with a reason from one without."
+    },
+    {
+     "id": "opinion_reasons",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Chooses relevant reasons for an opinion."
+    },
+    {
+     "id": "position_evidence_reader",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Supports a position with evidence and addresses the reader."
+    },
+    {
+     "id": "counter_language",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Answers counter-arguments and persuades through language without exaggerating."
+    }
+   ]
+  },
+  "EN.WRT.GEN.functional": {
+   "steps": [
+    {
+     "id": "greeting_message",
+     "band": 2.0,
+     "descriptor": "2",
+     "feature": "Greetings and closings for a short message."
+    },
+    {
+     "id": "informal_conventions",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "The main conventions of an informal email or notice (what, when, where; contact details)."
+    },
+    {
+     "id": "formal_layout",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Formal letter layout and register (subject line, salutation, Yours faithfully)."
+    },
+    {
+     "id": "well_judged",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Well-judged functional texts for real purposes: complete, precise and suited to the reader."
+    }
+   ]
+  },
+  "EN.WRT.STY.register": {
+   "steps": [
+    {
+     "id": "notice_reader",
+     "band": 2.25,
+     "descriptor": "2",
+     "feature": "Tells how to speak to a teacher from how to speak to a friend."
+    },
+    {
+     "id": "some_changes",
+     "band": 3.75,
+     "descriptor": "4",
+     "feature": "Changes wording for formal and informal readers."
+    },
+    {
+     "id": "consistent",
+     "band": 5.5,
+     "descriptor": "6",
+     "feature": "Keeps a suitable register throughout, and spots wording that breaks it."
+    },
+    {
+     "id": "precise_effect",
+     "band": 7.25,
+     "descriptor": "8",
+     "feature": "Adjusts register precisely for purpose, audience and effect (objective, warm, persuasive)."
     }
    ]
   }
