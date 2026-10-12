@@ -31,6 +31,10 @@ decisions on 12 October (PR #7); E2a is reported in
    its known limitations.
 8. [`E2A_REPORT.md`](E2A_REPORT.md): what E2a built, its coverage gaps and
    simulation results.
+9. [`E2A_RESPONSE_MODEL_REVIEW.md`](E2A_RESPONSE_MODEL_REVIEW.md): the guesser
+   failure, the slip-aware alternative and profile recovery (review of PR #8).
+10. [`E4_DESIGN_OPTIONS.md`](E4_DESIGN_OPTIONS.md): options recorded for E4, not
+    scheduled.
 
 ---
 

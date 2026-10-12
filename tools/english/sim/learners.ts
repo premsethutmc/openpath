@@ -112,9 +112,19 @@ export function trueLevels(l: SimLearner, day: number): Record<CapabilityId, num
   return Object.fromEntries(Object.values(CAP).map((c) => [c, trueLevel(l, c, day)]));
 }
 
+/** Research options (tools/english/research); unset, answers are exactly as in E1. */
+export interface ResponderOptions {
+  /** Chance that any learner answers carelessly wrong, whatever their level. */
+  slip?: number;
+  /** The item as it really is, if its true parameters differ from its labels. */
+  trueItem?: (item: CodeItem) => CodeItem;
+}
+
 /** How a simulated learner answers a code-scored item (the same response model the engine assumes, plus guessing). */
-export function respond(l: SimLearner, item: CodeItem, day: number, next: () => number): Response {
+export function respond(l: SimLearner, item: CodeItem, day: number, next: () => number, opts?: ResponderOptions): Response {
   const theta = trueLevel(l, item.target, day);
+  // a careless slip: answered as a wrong answer (no RNG draw unless slips are switched on, so E1 runs are unchanged)
+  if (opts?.slip && next() < opts.slip) return respondWrong(l, item, next);
   const guessing = l.guess && next() < l.guess;
   const k = formatKind(item.format);
   const correct = guessing ? (k === "choice" ? next() < 1 / (item.options?.length ?? 4) : k === "typed" ? next() < 0.05 : next() < guessingFloor(item)) : next() < pCorrect(theta, itemParams(item));
@@ -159,4 +169,15 @@ export function writeResponse(l: SimLearner, task: WritingTask, day: number): st
   const level = task.targets.reduce((s, t) => s + trueLevel(l, t, day), 0) / task.targets.length;
   const avg = (s: Record<string, number>) => Object.values(s).reduce((a, b) => a + b, 0) / Object.values(s).length;
   return [...task.anchors].sort((a, b) => Math.abs(avg(a.scores) - level) - Math.abs(avg(b.scores) - level))[0].text;
+}
+
+/** A wrong answer of the right shape (used for careless slips). */
+function respondWrong(l: SimLearner, item: CodeItem, next: () => number): Response {
+  const kind = formatKind(item.format);
+  if (kind === "choice") {
+    const wrong = item.options!.map((_, i) => i).filter((i) => i !== item.answer);
+    return { kind: "choice", choice: wrong[Math.floor(next() * wrong.length)] };
+  }
+  if (kind === "typed") return { kind: "typed", text: "(no answer)" };
+  return respondStructured(l, item, false, true, next);
 }

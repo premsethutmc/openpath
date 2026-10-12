@@ -8,6 +8,10 @@ difficulty label, ladder and passage) is **candidate content, unvalidated**. No 
 reviewed it yet (decision E2-A). Difficulty labels are **expert estimates, not empirically
 calibrated**.
 
+> **Review follow-up (12 October):** the guesser failure, a slip-aware alternative and the M1 decline
+> are investigated in [`E2A_RESPONSE_MODEL_REVIEW.md`](E2A_RESPONSE_MODEL_REVIEW.md). Production
+> mathematics are unchanged. E4 options are recorded in [`E4_DESIGN_OPTIONS.md`](E4_DESIGN_OPTIONS.md).
+
 ## Summary
 
 | | Result |

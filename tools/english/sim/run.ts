@@ -16,7 +16,7 @@ import {
   recommend,
   rng,
 } from "../../../packages/english-core/src/index.ts";
-import { type SimLearner, respond, trueLevels, writeResponse } from "./learners.ts";
+import { type ResponderOptions, type SimLearner, respond, trueLevels, writeResponse } from "./learners.ts";
 
 export const T0 = Date.UTC(2026, 9, 12, 10, 30); // 12 Oct 2026, 16:00 IST
 export const at = (day: number, minute = 0): string => new Date(T0 + day * 86_400_000 + minute * 60_000).toISOString();
@@ -68,6 +68,12 @@ export interface RunOptions {
   /** Stop early when this returns true (checked after each item). */
   stop?: (ledger: Ledger, now: string) => boolean;
   onItem?: (info: { session: number; n: number; item: string; rec: Recommendation | null; ledger: Ledger; now: string }) => void;
+  /**
+   * Research only: change the simulated learners' answers without telling the engine.
+   * `slip`: chance that any learner answers carelessly wrong. `trueItem`: the item as it really is
+   * (for example with a difficulty that differs from its label); the engine still sees the label.
+   */
+  responder?: ResponderOptions;
 }
 
 export interface RunResult {
@@ -130,7 +136,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
       const item = ctx.content.items.get(itemId)!;
       const evId = `${learner.id}:e${n}`;
       if (item.kind === "code") {
-        push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: respond(learner, item, d, next) });
+        push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: respond(learner, o.responder?.trueItem ? o.responder.trueItem(item) : item, d, next, o.responder) });
       } else {
         const text = writeResponse(learner, item, d);
         push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: { kind: "writing", text } });

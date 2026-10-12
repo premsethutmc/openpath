@@ -1,0 +1,646 @@
+{
+ "protocol": {
+  "sessionDays": [
+   0,
+   1,
+   8,
+   15,
+   16,
+   22
+  ],
+  "itemsPerSession": 20,
+  "earlyCheckAfterSessions": 2,
+  "goal": "overall",
+  "evaluatorNoise": 0.7,
+  "seed": 20261012
+ },
+ "criteria": {
+  "profileRecovery": {
+   "learners": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L8"
+   ],
+   "minMeanSpearman": 0.8
+  },
+  "weakestStrand": {
+   "learners": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L8",
+    "L10"
+   ],
+   "minCorrect": 6
+  },
+  "separation": [
+   {
+    "a": "L3",
+    "b": "L4",
+    "node": "EN.GRM"
+   },
+   {
+    "a": "L4",
+    "b": "L5",
+    "node": "EN.VOC"
+   },
+   {
+    "a": "L4",
+    "b": "L5",
+    "node": "EN.GRM"
+   },
+   {
+    "a": "L6",
+    "b": "L1",
+    "node": "EN.RDG.INF.motives"
+   },
+   {
+    "a": "L2",
+    "b": "L1",
+    "node": "EN.FND"
+   },
+   {
+    "a": "L8",
+    "b": "L1",
+    "node": "EN.SEN.CMP.run_ons"
+   },
+   {
+    "a": "L7",
+    "b": "L1",
+    "node": "EN"
+   },
+   {
+    "a": "L3",
+    "b": "L1",
+    "node": "EN.WRT"
+   }
+  ],
+  "coverage": {
+   "level": 0.8,
+   "min": 0.7,
+   "max": 0.9
+  },
+  "efficiency": {
+   "sdThreshold": 0.8,
+   "maxRatio": 0.7,
+   "randomSeeds": 5
+  },
+  "robustness": {
+   "guesserMaxError": 1,
+   "guesserMaxRange": 1.2,
+   "forgetterMinFlagged": 2,
+   "forgetterFlagAt": 4.3,
+   "forgetterMaxMastered": 4
+  },
+  "safety": {
+   "maxApplied": 0
+  },
+  "determinism": true
+ },
+ "fingerprint": "f66325454dfd2e24a2e84baf4d48ee21c98dc7462adffc204653dd43b02637fb",
+ "measures": [
+  {
+   "id": "M1",
+   "name": "Profile recovery after 40 items",
+   "value": "mean ρ = 0.64",
+   "passLevel": "≥ 0.8",
+   "pass": false,
+   "detail": [
+    "L2: ρ = 0.60",
+    "L3: ρ = 0.71",
+    "L4: ρ = 0.37",
+    "L5: ρ = 0.64",
+    "L6: ρ = 0.65",
+    "L8: ρ = 0.85",
+    "for context, after 120 items: mean: ρ = 0.74"
+   ]
+  },
+  {
+   "id": "M2",
+   "name": "Weakest strand named correctly",
+   "value": "3 of 7",
+   "passLevel": "≥ 6 of 7",
+   "pass": false,
+   "detail": [
+    "L2: true EN.FND, estimated EN.VOC ✗",
+    "L3: true EN.WRT, estimated EN.SEN ✗",
+    "L4: true EN.GRM, estimated EN.GRM",
+    "L5: true EN.VOC, estimated EN.VOC",
+    "L6: true EN.RDG, estimated EN.RDG",
+    "L8: true EN.SEN, estimated EN.GRM ✗",
+    "L10: true EN.GRM, estimated EN.SEN ✗"
+   ]
+  },
+  {
+   "id": "M3",
+   "name": "Pairs told apart on their distinguishing dimension",
+   "value": "5 of 8",
+   "passLevel": "all",
+   "pass": false,
+   "detail": [
+    "L3 vs L4 on EN.GRM: 4.64 vs 3.18, gap 1.46 vs needed 1.59 ✗",
+    "L4 vs L5 on EN.VOC: 5.07 vs 3.73, gap 1.34 vs needed 1.61 ✗",
+    "L4 vs L5 on EN.GRM: 3.18 vs 5.38, gap 2.20 vs needed 1.58",
+    "L6 vs L1 on EN.RDG.INF.motives: 2.97 vs 2.95, gap 0.02 vs needed 2.21 ✗",
+    "L2 vs L1 on EN.FND: 3.04 vs 4.83, gap 1.78 vs needed 1.34",
+    "L8 vs L1 on EN.SEN.CMP.run_ons: 3.33 vs 5.06, gap 1.73 vs needed 0.99",
+    "L7 vs L1 on EN: 6.34 vs 4.64, gap 1.71 vs needed 1.50",
+    "L3 vs L1 on EN.WRT: 3.82 vs 4.98, gap 1.16 vs needed 1.00"
+   ]
+  },
+  {
+   "id": "M4",
+   "name": "Honest uncertainty: 80% ranges containing the truth",
+   "value": "79% (134/170)",
+   "passLevel": "70–90%",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "id": "M5",
+   "name": "Efficiency: items to mean sd ≤ 0.8 on grammar",
+   "value": "adaptive 21.4 vs random 31.1 (ratio 0.69)",
+   "passLevel": "ratio ≤ 0.7",
+   "pass": true,
+   "detail": [
+    "L1: 22 vs 28.8",
+    "L2: 33 vs 31.0",
+    "L3: 20 vs 31.4",
+    "L4: 18 vs 32.8",
+    "L5: 18 vs 31.2",
+    "L6: 21 vs 29.0",
+    "L7: 21 vs 31.8",
+    "L8: 19 vs 30.8",
+    "L9: 23 vs 33.0",
+    "L10: 19 vs 31.6"
+   ]
+  },
+  {
+   "id": "M6",
+   "name": "Robustness: guesser and forgetter",
+   "value": "guesser ok; forgetter ok",
+   "passLevel": "both ok",
+   "pass": true,
+   "detail": [
+    "L9 guesser: largest strand error 0.66 (≤ 1), estimated range 0.51 (≤ 1.2)",
+    "L10 forgetter: 2 of 4 grammar capabilities flagged (needs review or ≤ 4.3); 0 reported mastered above 4",
+    "   Articles: 5.64 ± 0.72, demonstrated",
+    "   Progressive and perfect aspect: 4.48 ± 0.75, needs_review (mastered at 3.5 before)",
+    "   Subject–verb agreement: 4.38 ± 0.76, mastered",
+    "   Commas: 4.18 ± 0.88, needs_review (mastered at 3 before)"
+   ]
+  },
+  {
+   "id": "M7",
+   "name": "Safety: faulty evaluator output applied",
+   "value": "0 of 273 injected faults",
+   "passLevel": "0",
+   "pass": true,
+   "detail": [
+    "invent_quote: 30 cases, 0 applied (accepted+accepted+accepted+accepted+rejected ×24, accepted+accepted+accepted+held+rejected ×3, accepted+held+held+held+rejected ×3)",
+    "out_of_range: 30 cases, 0 applied (accepted+accepted+accepted+accepted+rejected ×24, accepted+accepted+accepted+held+rejected ×3, accepted+held+held+held+rejected ×3)",
+    "unknown_tag: 30 cases, 0 applied (accepted+accepted+accepted+accepted+accepted ×24, accepted+accepted+accepted+accepted+held ×3, accepted+held+held+held+held ×2, accepted+accepted+held+held+held ×1)",
+    "foreign_capability: 30 cases, 0 applied (accepted+accepted+accepted+accepted+accepted+rejected ×24, accepted+accepted+accepted+accepted+held+rejected ×3, accepted+held+held+held+held+rejected ×2, accepted+accepted+held+held+held+rejected ×1)",
+    "set_stage: 30 cases, 0 applied (rejected ×30)",
+    "bad_schema: 30 cases, 0 applied (rejected ×30)",
+    "off_task_flag: 30 cases, 0 applied (rejected ×30)",
+    "unqualified: 30 cases, 0 applied (held+held+held+held+held ×30)",
+    "drifting: 30 cases, 0 applied (held+held+held+held+held ×30)",
+    "inflate_spelling: 3 cases, 0 applied (accepted+accepted+accepted+accepted+held ×3)"
+   ]
+  },
+  {
+   "id": "M8",
+   "name": "Determinism: two runs identical",
+   "value": "identical",
+   "passLevel": "identical",
+   "pass": true,
+   "detail": [
+    "run 1 f66325454dfd2e24…",
+    "run 2 f66325454dfd2e24…"
+   ]
+  }
+ ],
+ "efficiency": [
+  {
+   "learner": "L1",
+   "adaptive": 22,
+   "random": 28.8
+  },
+  {
+   "learner": "L2",
+   "adaptive": 33,
+   "random": 31
+  },
+  {
+   "learner": "L3",
+   "adaptive": 20,
+   "random": 31.4
+  },
+  {
+   "learner": "L4",
+   "adaptive": 18,
+   "random": 32.8
+  },
+  {
+   "learner": "L5",
+   "adaptive": 18,
+   "random": 31.2
+  },
+  {
+   "learner": "L6",
+   "adaptive": 21,
+   "random": 29
+  },
+  {
+   "learner": "L7",
+   "adaptive": 21,
+   "random": 31.8
+  },
+  {
+   "learner": "L8",
+   "adaptive": 19,
+   "random": 30.8
+  },
+  {
+   "learner": "L9",
+   "adaptive": 23,
+   "random": 33
+  },
+  {
+   "learner": "L10",
+   "adaptive": 19,
+   "random": 31.6
+  }
+ ],
+ "safety": {
+  "total": 273,
+  "applied": 0,
+  "byCase": {
+   "invent_quote": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "accepted+accepted+accepted+accepted+rejected": 24,
+     "accepted+accepted+accepted+held+rejected": 3,
+     "accepted+held+held+held+rejected": 3
+    }
+   },
+   "out_of_range": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "accepted+accepted+accepted+accepted+rejected": 24,
+     "accepted+accepted+accepted+held+rejected": 3,
+     "accepted+held+held+held+rejected": 3
+    }
+   },
+   "unknown_tag": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "accepted+accepted+accepted+accepted+accepted": 24,
+     "accepted+accepted+accepted+accepted+held": 3,
+     "accepted+held+held+held+held": 2,
+     "accepted+accepted+held+held+held": 1
+    }
+   },
+   "foreign_capability": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "accepted+accepted+accepted+accepted+accepted+rejected": 24,
+     "accepted+accepted+accepted+accepted+held+rejected": 3,
+     "accepted+held+held+held+held+rejected": 2,
+     "accepted+accepted+held+held+held+rejected": 1
+    }
+   },
+   "set_stage": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "rejected": 30
+    }
+   },
+   "bad_schema": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "rejected": 30
+    }
+   },
+   "off_task_flag": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "rejected": 30
+    }
+   },
+   "unqualified": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "held+held+held+held+held": 30
+    }
+   },
+   "drifting": {
+    "cases": 30,
+    "applied": 0,
+    "outcomes": {
+     "held+held+held+held+held": 30
+    }
+   },
+   "inflate_spelling": {
+    "cases": 3,
+    "applied": 0,
+    "outcomes": {
+     "accepted+accepted+accepted+accepted+held": 3
+    }
+   }
+  }
+ },
+ "bankLimits": {
+  "bankSize": 126,
+  "perCapability": [
+   {
+    "capability": "EN.FND.SPL.inflections",
+    "name": "Spells inflected forms correctly",
+    "items": 9,
+    "formats": [
+     "typed:cloze",
+     "choice:spelling"
+    ],
+    "guessable": false,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.VOC.BRD.general",
+    "name": "General vocabulary breadth",
+    "items": 9,
+    "formats": [
+     "choice:meaning",
+     "choice:sentence_fit"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.VOC.MOR.suffixes",
+    "name": "Suffixes and word class",
+    "items": 9,
+    "formats": [
+     "typed:word_form",
+     "choice:word_form"
+    ],
+    "guessable": false,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.VOC.CTX.context",
+    "name": "Works out meaning from context",
+    "items": 8,
+    "formats": [
+     "choice:meaning_in_context",
+     "choice:replace_word"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.GRM.NOUN.articles",
+    "name": "Articles",
+    "items": 8,
+    "formats": [
+     "typed:cloze",
+     "choice:grammar"
+    ],
+    "guessable": false,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.GRM.VERB.aspect",
+    "name": "Progressive and perfect aspect",
+    "items": 8,
+    "formats": [
+     "typed:cloze",
+     "choice:grammar"
+    ],
+    "guessable": false,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.GRM.VERB.sva",
+    "name": "Subject–verb agreement",
+    "items": 8,
+    "formats": [
+     "typed:cloze",
+     "choice:grammar"
+    ],
+    "guessable": false,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.GRM.PUN.commas",
+    "name": "Commas",
+    "items": 8,
+    "formats": [
+     "choice:punctuation",
+     "choice:find_error"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.SEN.CMP.run_ons",
+    "name": "Avoids run-on sentences and comma splices",
+    "items": 11,
+    "formats": [
+     "choice:sentence_boundaries",
+     "choice:repair",
+     "writing:email",
+     "writing:story",
+     "writing:opinion"
+    ],
+    "guessable": false,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.SEN.CMB.subordination",
+    "name": "Subordination",
+    "items": 8,
+    "formats": [
+     "choice:joining_word",
+     "choice:combine"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.RDG.LIT.locate_detail",
+    "name": "Locates explicit detail",
+    "items": 6,
+    "formats": [
+     "choice:reading_story",
+     "choice:reading_info"
+    ],
+    "guessable": true,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.RDG.INF.motives",
+    "name": "Infers feelings and motives",
+    "items": 6,
+    "formats": [
+     "choice:reading_story",
+     "choice:reading_info"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7.5
+   },
+   {
+    "capability": "EN.RDG.SUM.main_idea",
+    "name": "Identifies the main idea",
+    "items": 6,
+    "formats": [
+     "choice:reading_story",
+     "choice:reading_info"
+    ],
+    "guessable": true,
+    "maxDifficulty": 7
+   },
+   {
+    "capability": "EN.WRT.TSK.task_response",
+    "name": "Responds to the task",
+    "items": 8,
+    "formats": [
+     "choice:task_fit",
+     "writing:email",
+     "writing:story",
+     "writing:opinion"
+    ],
+    "guessable": false,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.WRT.ORG.paragraphing",
+    "name": "Paragraphing",
+    "items": 8,
+    "formats": [
+     "choice:paragraph_break",
+     "writing:email",
+     "writing:story",
+     "writing:opinion"
+    ],
+    "guessable": false,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.WRT.ACC.grammar",
+    "name": "Grammatical accuracy in writing",
+    "items": 9,
+    "formats": [
+     "choice:proofread",
+     "writing:email",
+     "writing:story",
+     "writing:opinion"
+    ],
+    "guessable": false,
+    "maxDifficulty": 6.5
+   },
+   {
+    "capability": "EN.WRT.ACC.spelling",
+    "name": "Spelling in writing",
+    "items": 9,
+    "formats": [
+     "choice:proofread",
+     "writing:email",
+     "writing:story",
+     "writing:opinion"
+    ],
+    "guessable": false,
+    "maxDifficulty": 7
+   }
+  ],
+  "itemsUsedPerLearner": 120,
+  "exhaustedAtEnd": [
+   {
+    "learner": "L1",
+    "capabilities": 11
+   },
+   {
+    "learner": "L2",
+    "capabilities": 10
+   },
+   {
+    "learner": "L3",
+    "capabilities": 11
+   },
+   {
+    "learner": "L4",
+    "capabilities": 10
+   },
+   {
+    "learner": "L5",
+    "capabilities": 11
+   },
+   {
+    "learner": "L6",
+    "capabilities": 12
+   },
+   {
+    "learner": "L7",
+    "capabilities": 13
+   },
+   {
+    "learner": "L8",
+    "capabilities": 13
+   },
+   {
+    "learner": "L9",
+    "capabilities": 9
+   },
+   {
+    "learner": "L10",
+    "capabilities": 12
+   }
+  ],
+  "learningRecs": 371,
+  "learningRecsWithGap": 346,
+  "learningGapsByCapability": {
+   "Infers feelings and motives": 349,
+   "General vocabulary breadth": 297,
+   "Articles": 279,
+   "Locates explicit detail": 306,
+   "Works out meaning from context": 320,
+   "Suffixes and word class": 280,
+   "Progressive and perfect aspect": 283,
+   "Subject–verb agreement": 307,
+   "Spelling in writing": 336,
+   "Spells inflected forms correctly": 217,
+   "Responds to the task": 282,
+   "Subordination": 197,
+   "Grammatical accuracy in writing": 274,
+   "Identifies the main idea": 261,
+   "Avoids run-on sentences and comma splices": 199,
+   "Paragraphing": 211,
+   "Commas": 327
+  },
+  "retentionChecksBlocked": 0,
+  "retentionChecksByExposure": {
+   "fresh": 167,
+   "variant": 0,
+   "repeat": 30
+  },
+  "overdueUnverifiableAtEnd": [],
+  "ceilingLearner": {
+   "learner": "L7",
+   "trueLevel": 7.5,
+   "meanEstimate": 6.344144170455002
+  }
+ }
+}
