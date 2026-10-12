@@ -1,0 +1,18 @@
+{
+  "name": "openpath-game",
+  "private": true,
+  "version": "0.2.0",
+  "description": "OpenPath child experience: the home scene with Amma, playable on a touch screen.",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "playtest": "node tools/playtest.mjs playtest touch && node tools/playtest.mjs playtest-hands-off hands-off && node tools/playtest.mjs playtest-landscape touch \"Pixel 7 landscape\"",
+    "art": "node tools/bake.mjs && python3 tools/pack.py",
+    "voice": "python3 tools/voice.py",
+    "record": "node tools/record.mjs amma-at-home.mp4 17.5 60 1280x800"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "playwright": "^1.50.0"
+  }
+}

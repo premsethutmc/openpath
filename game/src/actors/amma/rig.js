@@ -1,7 +1,7 @@
 // Amma's rig: the baked layers assembled on bones, bending meshes and springs.
 // The script (story.js) only sets intentions on `st` (where the hand should be, how wide the smile);
 // this file turns them into weight, overlap and follow-through every frame.
-import { DEG, clamp, lerp, Spring, Strip, Grid, Chain, reach } from "./kit.js";
+import { DEG, clamp, lerp, Spring, Strip, Grid, Chain, reach } from "../../engine/kit.js";
 
 const CHEST = [0, -600], HEAD = [0, -770], HEAD_SCALE = 1.1;
 const SHOULDER = [88, -112];          // in chest space; mirrored for her right arm
