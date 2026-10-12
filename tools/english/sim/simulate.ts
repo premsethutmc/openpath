@@ -18,6 +18,8 @@ import {
   spellingCeiling,
   misspellingRate,
   type WritingTask,
+  LOW_GUESSING,
+  guessingFloor,
 } from "../../../packages/english-core/src/index.ts";
 import { CRITERIA, PROTOCOL } from "./criteria.ts";
 import { CAP, LEARNERS, type SimLearner, trueLevel, trueLevels, writeResponse } from "./learners.ts";
@@ -328,7 +330,7 @@ export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
   const perCapability = Object.values(CAP).map((cap) => {
     const its = items.filter((i) => (i.kind === "code" ? i.target === cap : i.targets.includes(cap)));
     const formats = [...new Set(its.map((i) => i.format))];
-    return { capability: cap, name: ctx.index.names.get(cap)!, items: its.length, formats, guessable: its.every((i) => i.kind === "code" && i.format.startsWith("choice:")), maxDifficulty: Math.max(...its.map((i) => i.b)) };
+    return { capability: cap, name: ctx.index.names.get(cap)!, items: its.length, formats, guessable: its.every((i) => i.kind === "code" && guessingFloor(i) > LOW_GUESSING), maxDifficulty: Math.max(...its.map((i) => i.b)) };
   });
   const gapsByCap: Record<string, number> = {};
   let learningRecs = 0;

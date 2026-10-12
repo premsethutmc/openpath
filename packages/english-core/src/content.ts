@@ -28,15 +28,64 @@ export function targetsOf(item: Item): CapabilityId[] {
 }
 
 /** The family an item belongs to: variants of one another share it. */
-export const familyOf = (item: Item): string => item.family ?? item.id;
+export const familyOf = (item: { id: string; family?: string }): string => item.family ?? item.id;
 
 export function contextOf(item: Item): string {
   return item.kind === "code" ? item.format : `${item.format}`;
 }
 
+const factorial = (n: number): number => (n <= 1 ? 1 : n * factorial(n - 1));
+/** Ordered selections of k from n: n! / (n − k)!. */
+const arrangements = (n: number, k: number): number => factorial(n) / factorial(n - k);
+const combinations = (n: number, k: number): number => arrangements(n, k) / factorial(k);
+
+/** The format family: "choice", "typed", "order", "match" or "multi". */
+export const formatKind = (format: string): string => format.split(":")[0];
+
+/**
+ * Chance of a right answer by blind guessing, used as the item's guessing floor (c). It follows from
+ * the format: one of n options 1/n; an order of n options 1/n!; matching k entries to n options
+ * 1/(n!/(n−k)!); choosing the right k of n options 1/C(n, k); a typed answer 0.
+ */
+export function guessingFloor(item: CodeItem): number {
+  const n = item.options?.length ?? 4;
+  switch (formatKind(item.format)) {
+    case "choice":
+      return 1 / n;
+    case "order":
+      return 1 / factorial(n);
+    case "match":
+      return 1 / arrangements(n, item.left?.length ?? n);
+    case "multi":
+      return 1 / combinations(n, item.answer_set?.length ?? 1);
+    default:
+      return 0;
+  }
+}
+
+/** Formats with a guessing floor at or below this are counted as non-guessable in coverage gates. */
+export const LOW_GUESSING = 0.1;
+
 export function itemParams(item: CodeItem): ItemParams {
-  const c = item.format.startsWith("choice:") ? 1 / (item.options?.length ?? 4) : 0;
-  return { a: item.a, b: item.b, c };
+  return { a: item.a, b: item.b, c: guessingFloor(item) };
+}
+
+/** The key a wrong answer is looked up by in `wrong`. */
+export function responseKey(response: Response): string {
+  switch (response.kind) {
+    case "choice":
+      return String(response.choice);
+    case "typed":
+      return normaliseAnswer(response.text);
+    case "order":
+      return response.order.join(",");
+    case "match":
+      return response.pairs.join(",");
+    case "multi":
+      return [...response.choices].sort((a, b) => a - b).join(",");
+    default:
+      return "";
+  }
 }
 
 export const normaliseAnswer = (s: string): string =>
@@ -46,17 +95,37 @@ export const normaliseAnswer = (s: string): string =>
     .replace(/\s+/g, " ")
     .replace(/^[\s"']+|[\s.!?"']+$/g, "");
 
+const sameList = (a: number[], b: number[]) => a.length === b.length && a.every((x, i) => x === b[i]);
+
 export function scoreCode(item: CodeItem, response: Response): { correct: boolean; misconceptions: string[] } {
-  if (item.format.startsWith("choice:")) {
-    if (response.kind !== "choice") throw new Error(`item ${item.id} expects a choice`);
-    const correct = response.choice === item.answer;
-    const tag = correct ? undefined : item.distractor_tags?.[String(response.choice)];
-    return { correct, misconceptions: tag ? [tag] : [] };
+  const kind = formatKind(item.format);
+  const expects = kind === "typed" ? "typed" : kind;
+  if (response.kind !== expects) throw new Error(`item ${item.id} expects a${expects === "order" ? "n" : ""} ${expects} answer`);
+  let correct: boolean;
+  switch (response.kind) {
+    case "choice":
+      correct = response.choice === item.answer;
+      if (!correct) {
+        const tag = item.distractor_tags?.[String(response.choice)];
+        return { correct, misconceptions: tag ? [tag] : [] };
+      }
+      return { correct, misconceptions: [] };
+    case "typed":
+      correct = (item.answers ?? []).some((a) => normaliseAnswer(a) === normaliseAnswer(response.text));
+      break;
+    case "order":
+      correct = sameList(response.order, item.answer_order ?? []);
+      break;
+    case "match":
+      correct = sameList(response.pairs, item.answer_pairs ?? []);
+      break;
+    case "multi":
+      correct = sameList([...new Set(response.choices)].sort((a, b) => a - b), [...(item.answer_set ?? [])].sort((a, b) => a - b));
+      break;
+    default:
+      throw new Error(`item ${item.id} cannot score a ${response.kind} response`);
   }
-  if (response.kind !== "typed") throw new Error(`item ${item.id} expects a typed answer`);
-  const given = normaliseAnswer(response.text);
-  const correct = (item.answers ?? []).some((a) => normaliseAnswer(a) === given);
-  const tag = correct ? undefined : item.wrong?.[given];
+  const tag = correct ? undefined : item.wrong?.[responseKey(response)];
   return { correct, misconceptions: tag ? [tag] : [] };
 }
 
@@ -75,11 +144,28 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
       const allowed = misconceptionIds(index, item.target);
       for (const tag of [...Object.values(item.distractor_tags ?? {}), ...Object.values(item.wrong ?? {}), ...(item.addresses ?? [])])
         if (!allowed.has(tag)) problems.push(`item ${item.id} uses misconception ${tag}, which ${item.target} does not list`);
-      if (item.format.startsWith("choice:")) {
-        if (!item.options || item.options.length < 2) problems.push(`choice item ${item.id} needs options`);
-        if (item.answer === undefined || item.answer < 0 || item.answer >= (item.options?.length ?? 0)) problems.push(`choice item ${item.id} has no valid answer`);
-      } else if (item.format.startsWith("typed:")) {
+      const n = item.options?.length ?? 0;
+      const isIndex = (i: unknown) => Number.isInteger(i) && (i as number) >= 0 && (i as number) < n;
+      const kind = formatKind(item.format);
+      if (kind === "choice") {
+        if (n < 2) problems.push(`choice item ${item.id} needs options`);
+        if (!isIndex(item.answer)) problems.push(`choice item ${item.id} has no valid answer`);
+      } else if (kind === "typed") {
         if (!item.answers?.length) problems.push(`typed item ${item.id} needs accepted answers`);
+      } else if (kind === "order") {
+        const o = item.answer_order ?? [];
+        if (n < 3) problems.push(`order item ${item.id} needs at least 3 options`);
+        if (o.length !== n || new Set(o).size !== n || !o.every(isIndex)) problems.push(`order item ${item.id} needs answer_order: every option index exactly once`);
+        if (o.every((x, i) => x === i)) problems.push(`order item ${item.id} shows its options already in the right order`);
+      } else if (kind === "match") {
+        const k = item.left?.length ?? 0;
+        const p = item.answer_pairs ?? [];
+        if (k < 3 || n < k) problems.push(`match item ${item.id} needs at least 3 entries and at least as many options`);
+        if (p.length !== k || new Set(p).size !== k || !p.every(isIndex)) problems.push(`match item ${item.id} needs answer_pairs: one distinct option per entry`);
+      } else if (kind === "multi") {
+        const set = item.answer_set ?? [];
+        if (n < 4) problems.push(`multi item ${item.id} needs at least 4 options`);
+        if (!set.length || set.length >= n || new Set(set).size !== set.length || !set.every(isIndex)) problems.push(`multi item ${item.id} needs a valid answer_set (some, not all, options)`);
       } else problems.push(`item ${item.id} has unknown format ${item.format}`);
     } else {
       const w = item as WritingTask;

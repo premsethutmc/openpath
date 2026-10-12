@@ -4,7 +4,7 @@
  * simulated learner answers.
  */
 import type { CapabilityId, CodeItem, Response, WritingTask } from "../../../packages/english-core/src/index.ts";
-import { pCorrect, itemParams } from "../../../packages/english-core/src/index.ts";
+import { formatKind, guessingFloor, itemParams, pCorrect } from "../../../packages/english-core/src/index.ts";
 
 export const CAP = {
   infl: "EN.FND.SPL.inflections",
@@ -116,7 +116,8 @@ export function trueLevels(l: SimLearner, day: number): Record<CapabilityId, num
 export function respond(l: SimLearner, item: CodeItem, day: number, next: () => number): Response {
   const theta = trueLevel(l, item.target, day);
   const guessing = l.guess && next() < l.guess;
-  const correct = guessing ? (item.format.startsWith("choice:") ? next() < 1 / (item.options?.length ?? 4) : next() < 0.05) : next() < pCorrect(theta, itemParams(item));
+  const k = formatKind(item.format);
+  const correct = guessing ? (k === "choice" ? next() < 1 / (item.options?.length ?? 4) : k === "typed" ? next() < 0.05 : next() < guessingFloor(item)) : next() < pCorrect(theta, itemParams(item));
   if (item.format.startsWith("choice:")) {
     if (correct) return { kind: "choice", choice: item.answer! };
     const wrong = item.options!.map((_, i) => i).filter((i) => i !== item.answer);
@@ -124,9 +125,33 @@ export function respond(l: SimLearner, item: CodeItem, day: number, next: () => 
     const pool = habitual.length && !guessing ? habitual : wrong;
     return { kind: "choice", choice: pool[Math.floor(next() * pool.length)] };
   }
-  if (correct) return { kind: "typed", text: item.answers![0] };
+  if (formatKind(item.format) === "typed") {
+    if (correct) return { kind: "typed", text: item.answers![0] };
+    const habitual = Object.entries(item.wrong ?? {}).find(([, tag]) => l.misconceptions.includes(tag));
+    return { kind: "typed", text: habitual && !guessing ? habitual[0] : "(no answer)" };
+  }
+  return respondStructured(l, item, correct, !!guessing, next);
+}
+
+/** Order, match and multi items (E2): the right answer, a habitual wrong answer, or a near-miss. */
+function respondStructured(l: SimLearner, item: CodeItem, correct: boolean, guessing: boolean, next: () => number): Response {
+  const kind = formatKind(item.format) as "order" | "match" | "multi";
+  const right = kind === "order" ? item.answer_order! : kind === "match" ? item.answer_pairs! : [...item.answer_set!].sort((a, b) => a - b);
+  const wrap = (xs: number[]): Response => (kind === "order" ? { kind, order: xs } : kind === "match" ? { kind, pairs: xs } : { kind, choices: xs });
+  if (correct) return wrap([...right]);
   const habitual = Object.entries(item.wrong ?? {}).find(([, tag]) => l.misconceptions.includes(tag));
-  return { kind: "typed", text: habitual && !guessing ? habitual[0] : "(no answer)" };
+  if (habitual && !guessing) return wrap(habitual[0].split(",").map(Number));
+  const xs = [...right];
+  if (kind === "multi") {
+    // swap one correct choice for a wrong one
+    const wrong = item.options!.map((_, i) => i).filter((i) => !right.includes(i));
+    xs[Math.floor(next() * xs.length)] = wrong[Math.floor(next() * wrong.length)];
+    return wrap(xs.sort((a, b) => a - b));
+  }
+  // order and match: swap two neighbouring entries
+  const i = Math.floor(next() * (xs.length - 1));
+  [xs[i], xs[i + 1]] = [xs[i + 1], xs[i]];
+  return wrap(xs);
 }
 
 /** A simulated written response: the candidate anchor closest to the learner's level for that task. */
