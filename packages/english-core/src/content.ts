@@ -13,6 +13,12 @@ export interface ContentBundle {
   goals: Goal[];
   /** Common misspellings (lower case) → correct spelling. */
   misspellings: Record<string, string>;
+  /**
+   * Earlier versions of code-scored items that have since been revised. They are never selected; they
+   * exist so that evidence recorded against an earlier version is still scored exactly as it was
+   * answered (a choice index means the option the learner saw).
+   */
+  retired?: Item[];
 }
 
 export interface ContentIndex {
@@ -21,6 +27,17 @@ export interface ContentIndex {
   goals: Map<string, Goal>;
   misspellings: Map<string, string>;
   byCapability: Map<CapabilityId, Item[]>;
+  /** Retired item versions, keyed `id@version` (see ContentBundle.retired). */
+  retired?: Map<string, Item>;
+}
+
+export const versionKey = (id: string, version: number) => `${id}@${version}`;
+
+/** The item exactly as a learner saw it: the current version, or a retired earlier one. */
+export function itemVersion(content: ContentIndex, id: string, version: number): Item | undefined {
+  const current = content.items.get(id);
+  if (current && current.version === version) return current;
+  return content.retired?.get(versionKey(id, version));
 }
 
 export function targetsOf(item: Item): CapabilityId[] {
@@ -186,8 +203,31 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
   return problems;
 }
 
+/** Retired versions: well formed, code-scored, older than the current version of the same item, and unique. */
+export function validateRetired(bundle: ContentBundle, index: FrameworkIndex): string[] {
+  const retired = bundle.retired ?? [];
+  const problems: string[] = [];
+  const current = new Map(bundle.items.map((i) => [i.id, i]));
+  const seen = new Set<string>();
+  for (const r of retired) {
+    const key = versionKey(r.id, r.version);
+    if (seen.has(key)) problems.push(`retired version ${key} appears twice`);
+    seen.add(key);
+    if (r.kind !== "code") problems.push(`retired version ${key}: only code-scored items can be retired`);
+    const c = current.get(r.id);
+    if (!c) problems.push(`retired version ${key} has no current item`);
+    else {
+      if (!(r.version < c.version)) problems.push(`retired version ${key} is not older than the current version ${c.version}`);
+      if (r.kind === "code" && c.kind === "code" && r.target !== c.target) problems.push(`retired version ${key} targets a different capability from the current item`);
+    }
+    // each retired version is validated as an item in its own right
+    for (const p of validateContent({ ...bundle, items: [r], retired: [] }, index)) if (!p.startsWith("goal ")) problems.push(`retired ${key}: ${p}`);
+  }
+  return problems;
+}
+
 export function indexContent(bundle: ContentBundle, index: FrameworkIndex): ContentIndex {
-  const problems = validateContent(bundle, index);
+  const problems = [...validateContent(bundle, index), ...validateRetired(bundle, index)];
   if (problems.length) throw new Error(`Invalid content:\n- ${problems.join("\n- ")}`);
   const byCapability = new Map<string, Item[]>();
   for (const item of bundle.items) for (const t of targetsOf(item)) byCapability.set(t, [...(byCapability.get(t) ?? []), item]);
@@ -197,6 +237,7 @@ export function indexContent(bundle: ContentBundle, index: FrameworkIndex): Cont
     goals: new Map(bundle.goals.map((g) => [g.id, g])),
     misspellings: new Map(Object.entries(bundle.misspellings)),
     byCapability,
+    retired: new Map((bundle.retired ?? []).map((i) => [versionKey(i.id, i.version), i])),
   };
 }
 

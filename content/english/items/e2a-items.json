@@ -115,7 +115,7 @@
  {
   "kind": "code",
   "id": "spl.infl.15",
-  "version": 1,
+  "version": 2,
   "target": "EN.FND.SPL.inflections",
   "format": "choice:spelling",
   "b": 7.0,
@@ -175,7 +175,7 @@
  {
   "kind": "code",
   "id": "voc.gen.10",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.BRD.general",
   "format": "choice:meaning",
   "b": 1.5,
@@ -234,7 +234,7 @@
  {
   "kind": "code",
   "id": "voc.gen.13",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.BRD.general",
   "format": "match:meaning",
   "b": 4.5,
@@ -267,7 +267,7 @@
  {
   "kind": "code",
   "id": "voc.gen.14",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.BRD.general",
   "format": "match:meaning",
   "b": 6.0,
@@ -318,7 +318,7 @@
  {
   "kind": "code",
   "id": "voc.gen.16",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.BRD.general",
   "format": "choice:meaning",
   "b": 7.75,
@@ -380,7 +380,7 @@
  {
   "kind": "code",
   "id": "voc.suf.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.MOR.suffixes",
   "format": "match:word_form",
   "b": 4.0,
@@ -459,7 +459,7 @@
  {
   "kind": "code",
   "id": "voc.suf.15",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.MOR.suffixes",
   "format": "choice:word_form",
   "b": 6.25,
@@ -529,7 +529,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.09",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "choice:meaning_in_context",
   "b": 1.75,
@@ -550,7 +550,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.10",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "match:meaning_in_context",
   "b": 4.0,
@@ -580,7 +580,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.11",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "match:meaning_in_context",
   "b": 6.0,
@@ -610,7 +610,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "choice:meaning_in_context",
   "b": 6.0,
@@ -621,9 +621,9 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "gentle and steady",
-   "very late",
-   "very heavy",
+   "gentle and steady all season",
+   "very late in arriving that year",
+   "very heavy from start to finish",
    "changing suddenly and unpredictably"
   ],
   "answer": 3,
@@ -634,7 +634,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.13",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "choice:meaning_in_context",
   "b": 6.75,
@@ -655,7 +655,7 @@
  {
   "kind": "code",
   "id": "voc.ctx.14",
-  "version": 1,
+  "version": 2,
   "target": "EN.VOC.CTX.context",
   "format": "choice:meaning_in_context",
   "b": 7.75,
@@ -743,7 +743,7 @@
  {
   "kind": "code",
   "id": "grm.art.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.NOUN.articles",
   "format": "choice:grammar",
   "b": 6.5,
@@ -910,7 +910,7 @@
  {
   "kind": "code",
   "id": "grm.asp.13",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.VERB.aspect",
   "format": "choice:grammar",
   "b": 7.5,
@@ -1059,7 +1059,7 @@
  {
   "kind": "code",
   "id": "grm.sva.15",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.VERB.sva",
   "format": "choice:grammar",
   "b": 7.75,
@@ -1084,7 +1084,7 @@
  {
   "kind": "code",
   "id": "grm.com.09",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.PUN.commas",
   "format": "choice:punctuation",
   "b": 2.0,
@@ -1106,7 +1106,7 @@
  {
   "kind": "code",
   "id": "grm.com.10",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.PUN.commas",
   "format": "choice:find_error",
   "b": 3.0,
@@ -1182,7 +1182,7 @@
  {
   "kind": "code",
   "id": "grm.com.13",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.PUN.commas",
   "format": "multi:sentences",
   "b": 6.0,
@@ -1207,7 +1207,7 @@
  {
   "kind": "code",
   "id": "grm.com.14",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.PUN.commas",
   "format": "choice:punctuation",
   "b": 7.0,
@@ -1228,7 +1228,7 @@
  {
   "kind": "code",
   "id": "grm.com.15",
-  "version": 1,
+  "version": 2,
   "target": "EN.GRM.PUN.commas",
   "format": "choice:punctuation",
   "b": 7.5,
@@ -1249,7 +1249,7 @@
  {
   "kind": "code",
   "id": "sen.run.09",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMP.run_ons",
   "format": "choice:sentence_boundaries",
   "b": 2.0,
@@ -1301,7 +1301,7 @@
  {
   "kind": "code",
   "id": "sen.run.11",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMP.run_ons",
   "format": "multi:sentences",
   "b": 4.0,
@@ -1326,7 +1326,7 @@
  {
   "kind": "code",
   "id": "sen.run.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMP.run_ons",
   "format": "choice:sentence_boundaries",
   "b": 6.0,
@@ -1354,7 +1354,7 @@
  {
   "kind": "code",
   "id": "sen.run.13",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMP.run_ons",
   "format": "multi:sentences",
   "b": 6.5,
@@ -1379,7 +1379,7 @@
  {
   "kind": "code",
   "id": "sen.run.14",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMP.run_ons",
   "format": "choice:sentence_boundaries",
   "b": 7.5,
@@ -1404,7 +1404,7 @@
  {
   "kind": "code",
   "id": "sen.sub.09",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMB.subordination",
   "format": "choice:joining_word",
   "b": 2.0,
@@ -1515,7 +1515,7 @@
  {
   "kind": "code",
   "id": "sen.sub.14",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMB.subordination",
   "format": "multi:sentences",
   "b": 6.25,
@@ -1540,7 +1540,7 @@
  {
   "kind": "code",
   "id": "sen.sub.15",
-  "version": 1,
+  "version": 2,
   "target": "EN.SEN.CMB.subordination",
   "format": "choice:combine",
   "b": 7.5,
@@ -1584,7 +1584,7 @@
  {
   "kind": "code",
   "id": "rdg.p4.q2",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.LIT.locate_detail",
   "format": "choice:reading_story",
   "b": 2.0,
@@ -1606,7 +1606,7 @@
  {
   "kind": "code",
   "id": "rdg.p4.q3",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 2.0,
@@ -1628,7 +1628,7 @@
  {
   "kind": "code",
   "id": "rdg.p4.q4",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "choice:reading_story",
   "b": 1.75,
@@ -1654,7 +1654,7 @@
  {
   "kind": "code",
   "id": "rdg.p4.q5",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "choice:reading_story",
   "b": 2.5,
@@ -1702,7 +1702,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q2",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.LIT.locate_detail",
   "format": "choice:reading_story",
   "b": 4.5,
@@ -1727,7 +1727,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q3",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 3.5,
@@ -1752,7 +1752,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q4",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "multi:feelings",
   "b": 4.0,
@@ -1779,7 +1779,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q5",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 4.75,
@@ -1801,7 +1801,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q6",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 5.5,
@@ -1826,7 +1826,7 @@
  {
   "kind": "code",
   "id": "rdg.p5.q7",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "choice:reading_story",
   "b": 4.25,
@@ -1838,10 +1838,10 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Dev holds the pieces.",
-   "Kiran finds some tape.",
+   "Dev holds the broken pieces while Kiran works.",
+   "Kiran finds some tape and an old box to use.",
    "Kiran chooses to stay calm and fix the volcano with Dev.",
-   "The box is old."
+   "The box they use for the repair is an old one."
   ],
   "answer": 2,
   "distractor_tags": {
@@ -1873,7 +1873,7 @@
  {
   "kind": "code",
   "id": "rdg.p6.q2",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.LIT.locate_detail",
   "format": "choice:reading_info",
   "b": 6.0,
@@ -1898,7 +1898,7 @@
  {
   "kind": "code",
   "id": "rdg.p6.q3",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_info",
   "b": 6.0,
@@ -1910,17 +1910,17 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "worried",
-   "amused",
+   "worried and uneasy",
+   "amused and joking",
    "impressed and admiring",
-   "doubtful"
+   "doubtful and suspicious"
   ],
   "answer": 2
  },
  {
   "kind": "code",
   "id": "rdg.p6.q4",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "choice:reading_info",
   "b": 5.5,
@@ -1946,7 +1946,7 @@
  {
   "kind": "code",
   "id": "rdg.p6.q5",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "match:headings",
   "b": 5.75,
@@ -1977,7 +1977,7 @@
  {
   "kind": "code",
   "id": "rdg.p7.q1",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.LIT.locate_detail",
   "format": "choice:reading_story",
   "b": 7.25,
@@ -2027,7 +2027,7 @@
  {
   "kind": "code",
   "id": "rdg.p7.q3",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "multi:feelings",
   "b": 6.75,
@@ -2054,7 +2054,7 @@
  {
   "kind": "code",
   "id": "rdg.p7.q4",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 7.75,
@@ -2067,9 +2067,9 @@
   "review": "candidate-unvalidated",
   "options": [
    "to hint that the boy may have been the writer's grandfather, and that the house meant more to him than he ever said",
-   "to describe the daily life of children in the district",
-   "to show that the woman had a very good memory",
-   "to explain why the house was falling down"
+   "to describe the daily life of children who grew up in the district long ago",
+   "to show that the woman from the next street had a remarkably good memory",
+   "to explain why the house had fallen down and only two walls remained"
   ],
   "answer": 0,
   "distractor_tags": {
@@ -2079,7 +2079,7 @@
  {
   "kind": "code",
   "id": "rdg.p7.q5",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "match:headings",
   "b": 7.0,
@@ -2110,7 +2110,7 @@
  {
   "kind": "code",
   "id": "rdg.p7.q6",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.SUM.main_idea",
   "format": "choice:reading_story",
   "b": 7.75,
@@ -2122,10 +2122,10 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Old maps quickly become useless as places change.",
-   "Banyan trees can live for a very long time.",
+   "Old maps quickly become useless, because the places they show change so much.",
+   "Banyan trees can live for a very long time, long after the buildings around them.",
    "A map can show what mattered to the person who made it, more than it records places.",
-   "People should visit their grandparents' home towns."
+   "People should visit their grandparents' home towns before it is too late."
   ],
   "answer": 2,
   "distractor_tags": {
@@ -2135,7 +2135,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.06",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "choice:task_fit",
   "b": 2.0,
@@ -2162,7 +2162,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.07",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "multi:task_parts",
   "b": 3.75,
@@ -2187,7 +2187,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.08",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "multi:task_parts",
   "b": 5.0,
@@ -2212,7 +2212,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.09",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "choice:task_fit",
   "b": 6.25,
@@ -2237,7 +2237,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.10",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "choice:task_fit",
   "b": 7.0,
@@ -2248,9 +2248,9 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "The station is big and busy.",
-   "Come any time; everyone knows us.",
-   "Our school is very famous, so you will find it easily.",
+   "The station is big and busy, so ask anyone there and they will tell you where our school is. See you soon!",
+   "Come any time you like; everyone in the town knows our school, so you will not get lost on the way.",
+   "Our school is very famous, so you will find it easily if you walk around near the station for a while.",
    "Take bus 21 from outside the station to Gandhi Nagar (about 20 minutes); the school gate is opposite the bus stop. After 6 p.m. the buses are rare, so take an auto."
   ],
   "answer": 3,
@@ -2262,7 +2262,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.11",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "choice:task_fit",
   "b": 7.5,
@@ -2273,17 +2273,17 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "Dear parents, we are sorry for any trouble the bus may cause. Thank you.",
+   "Dear parents, we are sorry for any trouble that the changes to the school bus may cause you and your children. Thank you.",
    "From Monday 3 March, Bus 4 will leave school at 3.45 p.m. instead of 3.30 p.m., so every stop will be about 15 minutes later. Questions? Please call the school office.",
-   "Bus 4 will now leave at 3.45 p.m.",
-   "The bus times are changing soon. Please be ready."
+   "Bus 4 will now leave school at 3.45 p.m. Please make sure your child is ready at the bus stop on time.",
+   "The bus times are changing soon, so please be ready for the new times. We will tell you more later. Thank you."
   ],
   "answer": 1
  },
  {
   "kind": "code",
   "id": "wrt.org.06",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.ORG.paragraphing",
   "format": "choice:paragraph_break",
   "b": 2.0,
@@ -2295,9 +2295,9 @@
   "review": "candidate-unvalidated",
   "options": [
    "splitting it into paragraphs for the beginning, middle and end",
-   "writing it all in capital letters",
-   "making every sentence shorter",
-   "adding more 'and's"
+   "writing the whole story again in capital letters",
+   "making every single sentence much shorter",
+   "adding more 'and's to join the sentences together"
   ],
   "answer": 0
  },
@@ -2525,7 +2525,7 @@
  {
   "kind": "code",
   "id": "wrt.gra.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.ACC.grammar",
   "format": "choice:proofread",
   "b": 7.75,
@@ -2739,7 +2739,7 @@
  {
   "kind": "code",
   "id": "rdg.p4.q6",
-  "version": 1,
+  "version": 2,
   "target": "EN.RDG.INF.motives",
   "format": "choice:reading_story",
   "b": 2.5,
@@ -2751,9 +2751,9 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "She wanted to go home.",
-   "He was hungry.",
-   "He was cold.",
+   "She wanted to go home for lunch.",
+   "He was hungry after running away.",
+   "He was cold and tired after running.",
    "She was happy and relieved to find him."
   ],
   "answer": 3
@@ -2761,7 +2761,7 @@
  {
   "kind": "code",
   "id": "wrt.tsk.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.TSK.task_response",
   "format": "choice:task_fit",
   "b": 3.0,
@@ -2772,9 +2772,9 @@
   "difficulty_source": "expert_estimate",
   "review": "candidate-unvalidated",
   "options": [
-   "My birthday is on Sunday.",
-   "Come at five o'clock.",
-   "A cricket bat, please!",
+   "My birthday is on Sunday, and I am so excited!",
+   "Come at five o'clock, and bring my cousins too!",
+   "A cricket bat, please! I can't wait for the party.",
    "A cricket bat, please! Come at five o'clock."
   ],
   "answer": 3,
@@ -2785,7 +2785,7 @@
  {
   "kind": "code",
   "id": "wrt.org.12",
-  "version": 1,
+  "version": 2,
   "target": "EN.WRT.ORG.paragraphing",
   "format": "choice:paragraph_break",
   "b": 6.0,
@@ -2798,9 +2798,9 @@
   "family": "fam.org.link",
   "options": [
    "On the other hand, phones can also cause problems.",
-   "Phones are made in factories.",
-   "In conclusion, phones are good.",
-   "My phone is blue."
+   "Phones are made in large factories in many countries.",
+   "In conclusion, phones are good for everyone who has one.",
+   "My phone is blue and has a cracked screen."
   ],
   "answer": 0
  },

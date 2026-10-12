@@ -58,6 +58,8 @@ export function loadBundle(bank: Bank = "current"): ContentBundle {
   ];
   return {
     items: [...items, ...writing],
+    // earlier versions of revised items, so evidence recorded against them is still scored as answered
+    retired: bank === "current" ? json<Item[]>(join(CONTENT, "items", "retired-versions.json")) : [],
     passages: json(join(bank === "e1" ? E1_BASELINE : bank === "e2a" ? E2A_BASELINE : join(CONTENT, "items"), "passages.json")),
     goals: json(join(CONTENT, "goals.json")),
     misspellings: json(join(CONTENT, "signals", "misspellings.json")),
@@ -72,7 +74,7 @@ export function viewFor(bundle: ContentBundle, index: FrameworkIndex): ContentBu
     return !!c && isSpecified(c);
   };
   const usable = (i: Item) => (i.kind === "code" ? ok(i.target) : [...i.targets, ...i.secondary].every(ok));
-  return { ...bundle, items: bundle.items.filter(usable) };
+  return { ...bundle, items: bundle.items.filter(usable), retired: (bundle.retired ?? []).filter(usable) };
 }
 
 export function loadContext(opts: { allowCandidateAnchors?: boolean; framework?: FrameworkVersion; bank?: Bank } = {}): Context {
