@@ -12,6 +12,9 @@ real learner data. The scheduler and the update mathematics are unchanged.*
 - Exact-posterior updating (C) is a research option only, needing separate mathematical review and
   approval.
 
+**Decisions of 12 October (E2b approval):** two high-priority investigations are added, F and G. The
+composite update mathematics are not to be changed merely to improve simulation scores.
+
 ## A · Keep item-family variants for retention checks
 
 **Problem (E2a, gate G8).**
@@ -103,3 +106,58 @@ Details: `E2A_RESPONSE_MODEL_REVIEW.md`. Kept here so it is not re-proposed with
 **Problem.** Retention correctly flags forgetting, but the estimate keeps averaging older evidence.
 
 **Requirement.** Study with real learner data. Do not tune to the simulation.
+
+## F · Sparse-evidence placement (high priority; from E2b)
+
+**Problem (E2b breadth simulation).**
+
+- With 56 capabilities, the frozen protocol's 120 items give each capability about 2 items, against
+  about 7 when there were 17.
+- Error on the 17 original capabilities rises from 0.60 to about 0.8 bands, and ρ falls from 0.58 to
+  0.47–0.51.
+- The weakest strand is named correctly 74–77% of the time, against 83%.
+- 240 items recover only part of the loss.
+
+**To investigate.**
+
+- **Hierarchical placement:** estimate strands and sub-strands first, from items that inform several
+  capabilities, then go down only where a strand is uncertain or matters for the goal.
+- **Adaptive branching:** stop measuring a branch once its uncertainty is low enough for the
+  decision at hand (what to teach next), instead of testing every capability equally.
+- **Order of placement:** which capabilities to place first, given the goal and the relationships in
+  the framework.
+- **What may be shown before a capability is placed** (see G).
+
+**Constraints.** Selection changes only. The update mathematics stay as they are. Judge against the
+frozen measures and the breadth simulation, without tuning to them; confirm with real learners.
+
+## G · Advanced-learner underestimation and overconfidence (high priority; from E2b)
+
+**Problem (E2b breadth simulation).**
+
+- For the advanced simulated learner (about 7.5 everywhere), core estimates after 120 items are 2.3
+  bands too low.
+- Only 6% of the 80% ranges contain the truth (18% after 240 items).
+- On the 17 original capabilities, the figure is 45% even on 0.1.0.
+- The frozen M4 passes only because it averages over all ten learners.
+
+**Likely causes, to confirm.**
+
+- Prior influence: with about 2 items per capability, estimates stay near the starting assumption
+  (mean 4).
+- The bank's ceiling: the hardest items stop at 7.5–7.75.
+- Whether the reported uncertainty reflects that little has been observed.
+
+**To investigate.**
+
+- **Starting assumptions against observations:** separate what is assumed from what is observed, in
+  the state and in everything shown to learners and guardians.
+- **Prior influence:** how much each estimate still owes to the prior, per capability.
+- **Uncertainty calibration:** coverage of the reported ranges by learner level, not only on average.
+- **A display rule:** a capability without enough direct evidence is shown as "not yet assessed" or
+  "early estimate", never as an established measurement. The verification states already distinguish
+  demonstrated from verified; this extends the idea to placement.
+- **Ceiling:** whether harder items or an explicit "at or above the top of the bank" result are needed.
+
+**Constraints.** The composite update mathematics stay unchanged unless a defect is shown and you
+approve a change after separate review (as for C). No tuning to simulation scores.

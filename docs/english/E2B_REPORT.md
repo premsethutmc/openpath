@@ -1,6 +1,6 @@
 # E2b report: item banks for the 39 core capabilities, and the writing tasks
 
-*12 October 2026 · branch `feature/english-e2b` · not merged; awaiting your review. E3 has not started,
+*12 October 2026 · branch `feature/english-e2b` · approved 12 October, with the cleanup below. E3 has not started,
 and no live LLM is connected. Scope and decisions: `E2_SCOPE.md` (PR #7) and your approval of E2a
 (12 October).*
 
@@ -24,7 +24,7 @@ unchanged.
 | **Coverage gates** | G1–G7 pass for **56 of 56** capabilities. G8 (the retention runway) passes for **0 of 56**, and every miss is recorded with its reason |
 | **Frozen simulation** | The E1 and E2a baselines reproduce exactly. On the current bank, still on 0.1.0: **6 of 8**, because M3 now passes. This is a re-draw of noise, not an improvement (see below) |
 | **Breadth simulation (new, research only)** | Running all 56 capabilities on 120 items gives about 2 items per capability. Accuracy falls, and an advanced learner's uncertainty is badly overstated as precision (see *Newly exposed weaknesses*) |
-| **Tests** | 78 of 78 pass (74 before, plus 4 new); one existing test updated for 56 capabilities |
+| **Tests** | 81 of 81 pass (74 before, plus 7 new); one existing test updated for 56 capabilities |
 
 ## What was built
 
@@ -104,14 +104,47 @@ in the current bank under 0.2.0, so neither baseline nor the frozen simulation s
   in a sentence) were left alone.
 - **Result.** New items now have keyed answers spread 63/75/70/85 across positions 1–4, and E2a items
   8/12/12/15. A new test fails the build if any position holds 40% or more.
-- **E2a content changed only in option order.** The preserved E2a baseline is untouched and still
+- **E2a content changed only in option order, under new item versions** (see §5). The preserved E2a baseline is untouched and still
   reproduces.
 - **Length cues.** In 53 new items the keyed option was much longer than the others, another
   test-wise cue. Their distractors were rewritten to similar lengths, keeping their meaning and tags.
   The 5 that remain are single-word options (*delicious* against *nice*), where length is not a cue.
-  11 E2a items and 9 E1 items still have this cue; I have not changed them.
+  After review, the same cue was fixed in 11 E2a items and 9 E1 items (see §5).
 
-### 5. Tools
+### 5. Cleanup after review (12 October): item versions and the remaining length cues
+
+**Decisions.**
+
+- Keep the E2a option reordering in this PR.
+- Fix the remaining answer-length cues in E1 and E2a items.
+- Preserve item versioning and how historical answers are interpreted.
+
+**Why versions matter here.** Evidence is stored as the raw answer (for a choice item, the index of
+the option the learner picked) with the item's id and version. The ledger re-scores it whenever it is
+rebuilt from the event log. Reordering options under the same version would silently re-mark old
+answers against the new order. Bumping the version alone would make old evidence "unknown" and drop
+it.
+
+**What changed.**
+
+- **68 revised items now have a new version:** the reordered E2a items, and the E1 and E2a items whose
+  distractors were rewritten. Every other existing item keeps its version and content.
+- **Each earlier version is kept, exactly as it was,** in `content/english/items/retired-versions.json`.
+- **The ledger scores an answer against the version the learner saw:** the current one, or a retired
+  earlier one (`itemVersion` in `content.ts`). An answer naming a version that never existed is
+  still rejected.
+- **Retired versions are never selected.** They are checked when content loads: well formed, older
+  than the current version, the same capability, and listed once.
+- **What did not change:** the scoring rules, the update mathematics and evidence validation.
+- **The keyed option is the same text in every revision.** Only presentation changed: option order,
+  and the wording of distractors.
+
+**Length cues.** 9 E1 and 11 E2a items had distractors much shorter than the keyed option. They were
+rewritten to similar lengths, keeping their meaning and misconception tags. No item in the bank now
+has a keyed option much longer than every distractor, apart from 5 single-word items where length is
+not a cue.
+
+### 6. Tools
 
 - `tools/english/research/breadth.ts` (research only): runs the engine on 0.2.0 with all 56
   capabilities. It needs true levels for the core capabilities, so it adds an optional
@@ -121,7 +154,7 @@ in the current bank under 0.2.0, so neither baseline nor the frozen simulation s
 
 ## Tests
 
-78 of 78 pass.
+81 of 81 pass.
 
 **New (`test/e2b-bank.test.ts`):**
 
@@ -138,6 +171,16 @@ in the current bank under 0.2.0, so neither baseline nor the frozen simulation s
 
 **Updated (`test/e2-bank.test.ts`):** "every skeleton capability is covered" becomes "every specified
 capability is covered". It now expects 56 capabilities and none pending, where it expected 39 pending.
+
+**New (`test/e2b-versions.test.ts`):**
+
+1. Every revised item has a new version. Its earlier version is kept, resolves by `id@version` and
+   is never selectable. The keyed option text is unchanged.
+2. An answer recorded against an earlier version is scored against that version, before and after a
+   ledger rebuild: the old key is right, and the new key is wrong for it. The current version scores
+   its own key. An unknown version is rejected.
+3. Retired versions are exactly the versions merged before the revision. Every unrevised item is
+   unchanged, and a retired version that is not older is refused.
 
 Both the E1 and E2a baselines still reproduce their fingerprints, passes and misses.
 
@@ -225,8 +268,8 @@ Full tables, per learner: `node tools/english/research/breadth.ts --seeds 5`.
 5. **Writing capabilities are evidenced mainly by proxies.** Until E3 connects an evaluator, the six
    core writing capabilities are measured by recognition items, plus the stand-in evaluator in
    simulation. Narrative in particular has no production format besides writing.
-6. **Earlier content has the same cues.** E2a's answer positions are fixed here. 11 E2a and 9 E1 items
-   still have a length cue (the keyed option much longer than the others); I have not changed them.
+6. **Earlier content had the same cues.** E2a's answer positions and the length cues in E1 and E2a
+   are fixed in this PR, under new item versions.
 
 ## Not done, by decision
 
@@ -237,11 +280,14 @@ Full tables, per learner: `node tools/english/research/breadth.ts --seeds 5`.
 - The answer-pattern check and the exact-posterior update stay E4 options
   ([`E4_DESIGN_OPTIONS.md`](E4_DESIGN_OPTIONS.md)).
 
-## Decisions for you
+## Decisions of 12 October
 
-1. Merge PR (E2b) as it stands, with G8 recorded for all 56 capabilities.
-2. Whether the E2a option reordering should stay in this PR, or move to its own.
-3. Whether to fix the remaining length cues in E1 and E2a items now, or leave them for educator
-   review.
-4. For E4, whether to add the breadth findings: how placement spreads items across 56 capabilities,
-   and overconfidence at the top of the range.
+- Merge after the cleanup, with G8 recorded as failed for all 56 capabilities. The gate is not
+  weakened.
+- The E2a option reordering stays in this PR.
+- The remaining length cues in E1 and E2a are fixed, preserving item versions and how historical
+  answers are interpreted (§5).
+- All content stays candidate and unvalidated.
+- Two high-priority E4 investigations are added: **F, sparse-evidence placement**, and **G,
+  advanced-learner underestimation and overconfidence** ([`E4_DESIGN_OPTIONS.md`](E4_DESIGN_OPTIONS.md)).
+- The composite update mathematics are not to be changed merely to improve simulation scores.
