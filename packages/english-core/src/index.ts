@@ -4,6 +4,8 @@ export * from "./model.ts";
 export * from "./content.ts";
 export * from "./composite.ts";
 export * from "./evaluation.ts";
+export * from "./freeform.ts";
+export * from "./freeform-evaluators.ts";
 export * from "./evaluators.ts";
 export * from "./updater.ts";
 export * from "./selection.ts";

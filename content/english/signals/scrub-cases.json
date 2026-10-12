@@ -1,0 +1,87 @@
+{
+ "note": "Shared by the core (TypeScript) and the gateway (Python): identifier removal and request hashing must agree exactly.",
+ "scrub": [
+  {
+   "input": "My name is Ravi Kumar and I am in class 8B.",
+   "expected": "My name is [name] and I am in class [removed]."
+  },
+  {
+   "input": "Dear Mrs. Rao,\nI would like to request a book.\n\nYours faithfully,\nAnita Rao",
+   "expected": "Dear Mrs [name],\nI would like to request a book.\n\nYours faithfully,\n[name]"
+  },
+  {
+   "input": "Call me on 98765 43210 or write to ravi.k@example.com.",
+   "expected": "Call me on [removed] or write to [removed]"
+  },
+  {
+   "input": "Hi Anu,\nLove, Ravi",
+   "expected": "Hi Anu,\nLove, [name]"
+  },
+  {
+   "input": "Thanks,\nPriya",
+   "expected": "Thanks,\n[name]"
+  },
+  {
+   "input": "From Monday 3 March, Bus 4 will leave at 3.45 p.m.",
+   "expected": "From Monday 3 March, Bus 4 will leave at 3.45 p.m."
+  },
+  {
+   "input": "This is Diwali week and our school is closed.",
+   "expected": "This is [name] week and our school is closed."
+  },
+  {
+   "input": "See my website https://example.com/me for photos.",
+   "expected": "See my website [removed] for photos."
+  },
+  {
+   "input": "The bus was late, so we missed the start of the film.",
+   "expected": "The bus was late, so we missed the start of the film."
+  },
+  {
+   "input": "Regards, Sam Patel",
+   "expected": "Regards, [name]"
+  },
+  {
+   "input": "my name is meena",
+   "expected": "my name is meena"
+  },
+  {
+   "input": "Dr Iyer said Grade 7 students may come.",
+   "expected": "Dr [name] said Grade [removed] students may come."
+  },
+  {
+   "input": "Ask @ravi_k on the class group.",
+   "expected": "Ask [removed] on the class group."
+  },
+  {
+   "input": "Ravi said that he was tired.",
+   "expected": "Ravi said that he was tired."
+  }
+ ],
+ "hashes": [
+  {
+   "text": "",
+   "fnv1a": "811c9dc5"
+  },
+  {
+   "text": "a",
+   "fnv1a": "e40c292c"
+  },
+  {
+   "text": "The bus was late.",
+   "fnv1a": "8a6de435"
+  },
+  {
+   "text": "Ravi said that he was tired.",
+   "fnv1a": "7b3684b5"
+  },
+  {
+   "text": "naïve café — “quotes”",
+   "fnv1a": "e969b9cb"
+  },
+  {
+   "text": "😀 emoji",
+   "fnv1a": "717a5bb6"
+  }
+ ]
+}

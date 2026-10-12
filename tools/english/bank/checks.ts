@@ -153,8 +153,24 @@ export function lint(ctx: Context, prog: Progressions): Problem[] {
   }
   const ids = new Set(items.map((i) => i.id));
   for (const i of items) if (i.family && i.family !== i.id && ids.has(i.family)) bad(i.id, `family id ${i.family} is also an item id`);
+  // E3: short written responses sit on the same ladders, with the same candidate marking
+  for (const i of shortItems(ctx)) {
+    if (!CANDIDATE_REVIEW.has(i.review ?? "")) bad(i.id, `review status must mark it as candidate content (is "${i.review ?? "missing"}")`);
+    if (i.difficulty_source !== "expert_estimate") bad(i.id, `difficulty_source must be "expert_estimate" (difficulty is not calibrated)`);
+    const step = prog.capabilities[i.target]?.steps.find((s) => s.id === i.step);
+    if (!step) bad(i.id, `step must name a step of ${i.target}'s difficulty ladder (is "${i.step ?? "missing"}")`);
+    else if (Math.abs(i.b - step.band) > GATES.maxStepDistance) bad(i.id, `difficulty ${i.b} is more than ${GATES.maxStepDistance} band from its step ${step.id} (band ${step.band})`);
+    if (!i.rationale || i.rationale.trim().length < 20) bad(i.id, "needs a rationale saying what makes it this difficult");
+    if (i.passage) {
+      const p = ctx.content.passages.get(i.passage)!;
+      if (Math.abs(i.b - p.band) > 2) bad(i.id, `difficulty ${i.b} is more than 2 bands from its passage's band ${p.band}`);
+    }
+  }
   return out;
 }
+
+export type Short = Extract<Item, { kind: "short" }>;
+export const shortItems = (ctx: Context): Short[] => [...ctx.content.items.values()].filter((i): i is Short => i.kind === "short");
 
 export function families(ctx: Context): Map<string, Code[]> {
   const out = new Map<string, Code[]>();

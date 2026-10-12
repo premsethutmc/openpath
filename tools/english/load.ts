@@ -56,10 +56,13 @@ export function loadBundle(bank: Bank = "current"): ContentBundle {
     // E2b: writing tasks for the core writing capabilities (candidate rubrics and anchors)
     ...(bank === "current" ? json<Item[]>(join(CONTENT, "writing", "e2b-tasks.json")) : []),
   ];
+  // E3: short written responses (candidate key points, guards and anchors); offered only when an evaluator is available
+  const short = bank === "current" ? json<Item[]>(join(CONTENT, "short", "short-items.json")) : [];
   return {
-    items: [...items, ...writing],
+    items: [...items, ...writing, ...short],
     // earlier versions of revised items, so evidence recorded against them is still scored as answered
     retired: bank === "current" ? json<Item[]>(join(CONTENT, "items", "retired-versions.json")) : [],
+    grammarSignals: json(join(CONTENT, "signals", "grammar.json")),
     passages: json(join(bank === "e1" ? E1_BASELINE : bank === "e2a" ? E2A_BASELINE : join(CONTENT, "items"), "passages.json")),
     goals: json(join(CONTENT, "goals.json")),
     misspellings: json(join(CONTENT, "signals", "misspellings.json")),
@@ -73,7 +76,7 @@ export function viewFor(bundle: ContentBundle, index: FrameworkIndex): ContentBu
     const c = index.leaves.get(cap);
     return !!c && isSpecified(c);
   };
-  const usable = (i: Item) => (i.kind === "code" ? ok(i.target) : [...i.targets, ...i.secondary].every(ok));
+  const usable = (i: Item) => (i.kind === "writing" ? [...i.targets, ...i.secondary].every(ok) : ok(i.target));
   return { ...bundle, items: bundle.items.filter(usable), retired: (bundle.retired ?? []).filter(usable) };
 }
 

@@ -137,15 +137,15 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
       const evId = `${learner.id}:e${n}`;
       if (item.kind === "code") {
         push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: respond(learner, o.responder?.trueItem ? o.responder.trueItem(item) : item, d, next, o.responder) });
-      } else {
+      } else if (item.kind === "writing") {
         const text = writeResponse(learner, item, d);
         push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: { kind: "writing", text } });
         const req = buildEvaluationRequest(item, evId, text, ledger.composite, ctx.index, now, "candidates");
         push({ kind: "proposal", id: `p:${evId}`, at: now, evidence: evId, evaluator: { id: evaluator.id, model: evaluator.model }, body: await evaluator.evaluate(req) });
         writingThisSession++;
-      }
+      } else throw new Error(`the simulation does not answer short written responses (${item.id}); they are offered only when shortAvailable is set`);
       seen.add(item.id);
-      recent.unshift({ item: item.id, targets: item.kind === "code" ? [item.target] : item.targets, format: item.format });
+      recent.unshift({ item: item.id, targets: item.kind === "writing" ? item.targets : [item.target], format: item.format });
       n++;
       o.onItem?.({ session: s, n, item: item.id, rec, ledger, now });
       if (o.stop?.(ledger, now)) break outer;
