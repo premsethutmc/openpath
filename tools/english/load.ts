@@ -6,7 +6,16 @@ import { type ContentBundle, type Context, type Framework, type Item, indexConte
 
 export const REPO = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const CONTENT = join(REPO, "content", "english");
-export const FRAMEWORK_FILE = join(CONTENT, "framework", "en-0.1.0.json");
+/**
+ * The framework version the engine runs on. 0.2.0 (E2a) specifies 39 more capabilities, but their items
+ * arrive in E2b; until the bank covers a version's specified capabilities, that version is validated,
+ * checked and migrated to, but is not the runtime default.
+ */
+export const RUNTIME_FRAMEWORK = "0.1.0";
+export const FRAMEWORK_VERSIONS = ["0.1.0", "0.2.0"] as const;
+export type FrameworkVersion = (typeof FRAMEWORK_VERSIONS)[number];
+export const frameworkFile = (version: string) => join(CONTENT, "framework", `en-${version}.json`);
+export const FRAMEWORK_FILE = frameworkFile(RUNTIME_FRAMEWORK);
 
 const json = <T>(path: string): T => JSON.parse(readFileSync(path, "utf8")) as T;
 
@@ -16,7 +25,12 @@ export function loadFramework(path = FRAMEWORK_FILE): Framework {
 
 export function loadBundle(): ContentBundle {
   return {
-    items: [...json<Item[]>(join(CONTENT, "items", "code-items.json")), ...json<Item[]>(join(CONTENT, "writing", "tasks.json"))],
+    items: [
+      ...json<Item[]>(join(CONTENT, "items", "code-items.json")),
+      // E2a: items added for the 17 skeleton capabilities (candidate content)
+      ...json<Item[]>(join(CONTENT, "items", "e2a-items.json")),
+      ...json<Item[]>(join(CONTENT, "writing", "tasks.json")),
+    ],
     passages: json(join(CONTENT, "items", "passages.json")),
     goals: json(join(CONTENT, "goals.json")),
     misspellings: json(join(CONTENT, "signals", "misspellings.json")),
@@ -24,8 +38,8 @@ export function loadBundle(): ContentBundle {
 }
 
 /** `allowCandidateAnchors` is for the simulator, demo and tests only: no educator-scored anchors exist yet (D-4). */
-export function loadContext(opts: { allowCandidateAnchors?: boolean } = {}): Context {
-  const index = indexFramework(loadFramework());
+export function loadContext(opts: { allowCandidateAnchors?: boolean; framework?: FrameworkVersion } = {}): Context {
+  const index = indexFramework(loadFramework(frameworkFile(opts.framework ?? RUNTIME_FRAMEWORK)));
   return { index, content: indexContent(loadBundle(), index), allowCandidateAnchors: opts.allowCandidateAnchors ?? false };
 }
 
