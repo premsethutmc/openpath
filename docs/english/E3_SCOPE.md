@@ -1,6 +1,6 @@
 # E3 scope proposal: evaluating free-form answers
 
-*12 October 2026 · proposal for your review · nothing implemented · no live LLM connected.*
+*12 October 2026 · **E3a approved with the decisions below** · no live LLM connected.*
 
 E3 adds the evaluation of answers that code cannot score: extended writing now, and short written
 answers if you want them. The design already agreed in [`EVALUATION_AND_UPDATES.md`](EVALUATION_AND_UPDATES.md)
@@ -12,6 +12,32 @@ stands:
 - children's writing leaves the device only with consent.
 
 This document proposes what E3 builds, in what order, and what needs your decision first.
+
+## Decisions of 12 October
+
+1. **E3a is approved**: build the provider-independent free-form evaluation pipeline with **mock
+   evaluators only**. No live LLM API calls, no API purchases, and no external transmission of learner
+   answers.
+2. **Short written responses (one to three sentences) are included**, alongside the longer writing
+   tasks. They must be able to provide evidence for relevant grammar, vocabulary, sentence-construction
+   and writing capabilities.
+3. **A new validation check is approved:** it holds or rejects an evaluator judgement whose proposed
+   band contradicts the evaluator's own rubric criterion scores. Contradictory, incomplete and
+   superficially plausible outputs must be tested.
+4. **The controlled updater keeps its authority.** Evaluators may propose evidence-backed judgements
+   but may not set learner estimates, stages or mastery.
+5. **Test misjudgements on genuine quotes:** an evaluator that quotes real learner text but draws the
+   wrong grammatical conclusion. Document which errors deterministic validation can catch and which
+   need trusted educator-scored examples.
+6. **Educator review:** prepare a separate proposal (sample answers, scoring workload, qualifications,
+   estimated cost). Do not hire or contact educators yet.
+7. **E3b stays separately gated.** Do not choose or connect a live provider, send learner answers
+   externally or incur API costs without further approval.
+8. **Preserve** the E1 and E2 simulation baselines, item versioning and historical evidence
+   compatibility.
+
+E3a is opened as a separate implementation PR and reported (tests, limitations, readiness for a real
+provider) before merge approval is requested.
 
 ## 1. The proposal in brief
 
