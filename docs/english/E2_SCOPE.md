@@ -1,6 +1,20 @@
 # E2 proposed scope: framework depth and an item bank for long-term use
 
-*12 October 2026 · proposal for approval · nothing is implemented until you approve it.*
+*12 October 2026 · **approved on 12 October with the decisions below** · E2a is delivered in its own PR and reported before E2b starts.*
+
+## Decisions (12 October)
+
+1. **Start without an English educator.** All new content, rubrics, difficulty labels and example answers stay explicitly marked as candidate and unvalidated.
+2. **About 780 high-quality items** across the 56 specified capabilities: a planning target, not a quota that overrides educational quality.
+3. **Hand-written variants** in E2. No automatic question generation.
+4. **CEFR and CBSE/NCERT as references**, preserving OpenPath's own 1–8 capability definitions.
+5. **E2a and E2b as separate implementation PRs.** E2a is completed and reported before E2b starts.
+6. **Preserve** the composite mathematics, evidence validation, learner-state compatibility and the frozen simulation thresholds.
+7. **Validate that difficulty progresses meaningfully** within each capability, without claiming the labels are empirically calibrated.
+8. **Report coverage gaps** where 14 items cannot cover a capability's range, formats and retention needs, rather than filling them with weak or redundant questions.
+9. **Re-run the frozen simulation after E2a** and report all eight measures, including regressions.
+
+E3 (LLM integration) has not started, and no live LLM is connected.
 
 ## Purpose
 
