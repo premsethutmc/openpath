@@ -3,7 +3,7 @@ import { type Context, type Recommendation, aggregate, leafView, recommend } fro
 import { CRITERIA, PROTOCOL } from "./criteria.ts";
 import { CAP } from "./learners.ts";
 import { type RunResult, at } from "./run.ts";
-import { type Measure, STRANDS, trueValue } from "./simulate.ts";
+import { type BankLimits, type Measure, STRANDS, trueValue } from "./simulate.ts";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const STRAND_NAMES: Record<string, string> = { "EN.FND": "Foundations", "EN.VOC": "Vocabulary", "EN.GRM": "Grammar", "EN.SEN": "Sentences", "EN.RDG": "Reading", "EN.WRT": "Writing" };
@@ -82,7 +82,7 @@ function itemLabel(ctx: Context, id: string): string {
   return it.kind === "writing" ? `Writing task: ${it.prompt.split("(")[0].trim()}` : it.prompt;
 }
 
-export function renderReport(ctx: Context, results: RunResult[], ms: Measure[], meta: { generatedAt: string; fingerprint: string }): string {
+export function renderReport(ctx: Context, results: RunResult[], ms: Measure[], meta: { generatedAt: string; fingerprint: string }, limits?: BankLimits): string {
   const passed = ms.filter((m) => m.pass).length;
   const byId = new Map(results.map((r) => [r.learner.id, r]));
   const pair = ["L3", "L4"].map((id) => byId.get(id)!);
@@ -191,14 +191,40 @@ details ul, details ol { margin: 6px 0 0; padding-left: 18px; font-size: 13px; c
   <div class="grid2">${learnerCards}</div>
 </section>
 
+${limits ? bankSection(limits) : ""}
 <section>
   <h2>Notes</h2>
   <div class="note">
     <p><strong>Where the measures differ from the plan's wording.</strong> M1, M2 and M5 apply the plan's proposed pass levels with changes recorded in criteria.ts before the run. Rank correlation is undefined for flat profiles. Only 7 learners have a unique weakest strand. A mean sd of 0.6 is not reachable with 8 items per capability, so the threshold is ${CRITERIA.efficiency.sdThreshold}.</p>
+    <p><strong>Third review: hybrid scheduling and retention.</strong> The automatic procedure is now the hybrid scheduler. In order, it gives: overdue retention checks; probes after contradictory evidence; measurement while uncertainty is high; an assessment probe every third activity; otherwise learning. Retention checks fall due by date, with intervals doubling after a pass and halving after a failure. Each check is judged on that session's fresh evidence. Mastery that is overdue for a check is shown as not currently verified.</p>
     <p><strong>Selection changed after the second review.</strong> Selection now has separate assessment and learning modes, a target-relative need term, relative information gain and a prerequisite-aware easier step. Under the same frozen procedure (automatic mode), measures that depend on broad re-measurement fell, because learning mode concentrates on needs. Forgetting is not yet re-checked by due date. See docs/english/E1_REPORT.md.</p>
     <p><strong>Strand ranges changed after review.</strong> Strand uncertainty was first combined as if each capability's error were independent, and its 80% ranges held the true value only 57–67% of the time. It is now a conservative bound (errors assumed to point the same way), which held it 77–90% of the time, and it is labelled as a summary, not a calibrated measurement. Pass levels are unchanged; with the wider ranges, M3 separates 4 of 8 pairs instead of 7.</p>
     <p><strong>One engine change during E1.</strong> Evaluator qualification now treats a lean smaller than its own sampling error (2 standard errors) as no evidence of bias. Without this, an unbiased stand-in evaluator failed qualification by chance with only 12 anchors per capability. The 0.3 limit itself is unchanged.</p>
   </div>
 </section>
 </div>`;
+}
+
+function bankSection(l: BankLimits): string {
+  const rows = l.perCapability
+    .map((c) => `<tr><td>${esc(c.name)}</td><td class="num">${c.items}</td><td>${esc(c.formats.join(", "))}</td><td>${c.guessable ? "yes" : "no"}</td><td class="num">${c.maxDifficulty}</td></tr>`)
+    .join("");
+  const exhausted = l.exhaustedAtEnd.reduce((s, x) => s + x.capabilities, 0) / l.exhaustedAtEnd.length;
+  const gaps = Object.entries(l.learningGapsByCapability)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4)
+    .map(([k]) => esc(k))
+    .join(", ");
+  return `<section>
+  <h2>What the current item bank prevents us from measuring reliably</h2>
+  <p class="muted">These limits come from the size and design of the E1 draft bank, not from the engine. Expanding and calibrating the bank is E2.</p>
+  <div class="note">
+    <p><strong>Exhaustion.</strong> ${l.bankSize} items in all, and each learner uses about ${l.itemsUsedPerLearner} in the 120-item protocol. By the end, on average ${exhausted.toFixed(1)} of the 17 capabilities have no unused item left. Later sessions can no longer choose freely.</p>
+    <p><strong>Retention.</strong> ${l.retentionChecksBlocked} due retention checks could not run because no unused item was left for the capability. At the end, ${l.overdueUnverifiableAtEnd.length} learner-capability pairs are overdue with nothing left to check them with.</p>
+    <p><strong>Learning.</strong> In ${l.learningRecsWithGap} of ${l.learningRecs} learning choices (${Math.round((100 * l.learningRecsWithGap) / Math.max(1, l.learningRecs))}%), at least one needed capability had no unused item at a suitable difficulty. Most often: ${gaps || "none"}.</p>
+    <p><strong>Ceiling.</strong> The hardest items sit around band 7 to 7.5, so a learner whose true level is 7.5 everywhere (L7) is estimated at ${l.ceilingLearner.meanEstimate.toFixed(1)} on average.</p>
+    <p><strong>Guessing.</strong> Reading, vocabulary breadth, context, commas, sentence and writing proofreading capabilities have only four-option items. A guess succeeds 25% of the time, so each answer carries little information. That limits how far profile recovery (M1), weakest strand (M2) and pair separation (M3) can go in any mode.</p>
+  </div>
+  <div class="scroll"><table><thead><tr><th>Capability</th><th class="num">Items</th><th>Formats</th><th>Choice only</th><th class="num">Hardest</th></tr></thead><tbody>${rows}</tbody></table></div>
+</section>`;
 }

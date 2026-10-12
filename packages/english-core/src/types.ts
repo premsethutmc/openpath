@@ -165,6 +165,9 @@ export interface BinaryTrace {
   atOrBelow: boolean;
 }
 
+/** What was observed in a session, kept so a retention check can be judged on fresh evidence alone. */
+export type SessionObservation = { kind: "binary"; b: number; a: number; c: number; correct: boolean } | { kind: "band"; value: number; noise: number };
+
 export interface NodeState {
   /** Best estimate: direct evidence plus small, capped effects from coupled capabilities. */
   combined: Estimate;
@@ -179,6 +182,12 @@ export interface NodeState {
   binary: BinaryTrace[];
   /** Highest demonstrated level per session, in order (used for mastery over time). */
   demonstrations: { session: string; at: string; level: number }[];
+  /**
+   * Every session with direct evidence on this capability, with the demonstrated
+   * level at the end of it (null if not demonstrated). Bookkeeping only: used to
+   * derive the retention schedule (retention.ts); estimates do not depend on it.
+   */
+  sessions?: { session: string; at: string; level: number | null; obs?: SessionObservation[] }[];
   /** Ids of the decisions that touched this capability (newest last, at most 50). */
   evidence: string[];
 }

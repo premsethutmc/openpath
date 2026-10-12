@@ -142,7 +142,7 @@ export class Ledger {
       decisionId: id,
       update: (e) => binaryUpdate(e, params, correct),
       misconceptions,
-      binary: { b: item.b, correct },
+      binary: { b: item.b, correct, a: params.a, c: params.c },
     });
     return [
       {
@@ -277,6 +277,7 @@ export class Ledger {
         decisionId: id,
         update: (e) => bandUpdate(e, j.band, noise),
         maxShift: this.ctx.index.framework.policy.evaluator_max_shift,
+        band: { value: j.band, noise },
         misconceptions: tags,
         success: j.band >= view.mean,
       });

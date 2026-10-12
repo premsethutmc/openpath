@@ -8,3 +8,4 @@ export * from "./evaluators.ts";
 export * from "./updater.ts";
 export * from "./selection.ts";
 export * from "./store.ts";
+export * from "./retention.ts";

@@ -6,27 +6,25 @@
 
 All six core parts now work end to end, through one shared TypeScript core, on
 the 17 skeleton capabilities of a framework that holds the full 121-capability
-hierarchy. Two rounds of review changes are included:
+hierarchy. Three rounds of review changes are included:
 
 - **R1–R6:** conservative strand ranges and a trusted-anchor guard.
-- **Selection:** separate assessment and learning modes, a target-relative
-  need term, relative information gain, and a prerequisite-aware easier step
-  that reports item-bank gaps.
+- **Selection:** separate assessment and learning modes, target-relative need,
+  relative information gain, and a prerequisite-aware easier step.
+- **B1 and B2:**
+  - a hybrid assessment/learning scheduler
+  - spaced retention checks by due date, judged on fresh evidence, with
+    overdue mastery shown as not currently verified
 
 | | Result |
 |---|---|
-| **Acceptance tests** (does E1 do what was specified) | **39 of 39 automated tests pass.** E1-11 is CI; E1-12 is your review |
-| **Simulation measures** (frozen pass levels, frozen procedure) | **3 of 8 pass** (M4, M7, M8). 5 miss. This is down from 5 of 8 before the selection change; see "Selection change" below |
-| **Demonstration** | Two learners get different composites and different next activities. The same learner gets different, justified choices in assessment and learning mode. An invented quote is rejected, a restart gives identical state, and undo is exact |
+| **Acceptance tests** (does E1 do what was specified) | **47 of 47 automated tests pass.** E1-11 is CI; E1-12 is your review |
+| **Simulation measures** (frozen pass levels, frozen procedure) | **5 of 8 pass** (M4, M5, M6, M7, M8). M1, M2 and M3 miss; all three depend on the item bank (B3, E2). See the before/after table |
+| **Demonstration** | Two learners get different composites and different next activities. The same learner gets different, justified choices in assessment and learning mode. The same learner is shown before and after an overdue retention check. An invented quote is rejected, a restart gives identical state, and undo is exact |
 
-**Blockers that remain before E1 can claim the simulation measures:**
-
-- the auto-mode policy (when to assess and when to teach)
-- retention checks scheduled by time, as the plan specifies
-- the item bank (E2)
-
-None of these is an architectural blocker. No LLM is called, nothing was bought,
-and existing code is untouched apart from one new CI job.
+**Remaining blocker:** B3, the item bank, deferred to E2 as you decided. There
+are no architectural blockers. No LLM is called, nothing was bought, and
+existing code is untouched apart from one new CI job.
 
 ## What was built, against the six priorities
 
@@ -125,27 +123,49 @@ gets a vocabulary item.
 The pass levels were committed in `tools/english/sim/criteria.ts` *before* the
 first run, in commit "freeze simulation pass levels".
 
-| | Measure | Result | Pass level |
-|---|---|---|---|
-Three columns of results:
+Four columns of results:
 
 - **First run:** the engine as first submitted.
 - **After R3:** the conservative strand ranges.
-- **Current:** after the selection change.
+- **After selection:** after the selection change.
+- **Current:** after B1 and B2.
 
-All three use the same frozen procedure: goal "overall", automatic mode, 6
-sessions of 20 items.
+All four use the same frozen procedure: goal "overall", the engine's own
+scheduling (now the hybrid scheduler), and 6 sessions of 20 items.
 
-| Measure | First run | After R3 | **Current** | Pass level |
-|---|---|---|---|---|
-| M1 Profile recovery after 40 items | 0.73 ✗ | 0.73 ✗ | **0.59 ✗** | ≥ 0.8 |
-| M2 Weakest strand named | 6/7 ✓ | 6/7 ✓ | **4/7 ✗** | ≥ 6/7 |
-| M3 Pairs told apart | 7/8 ✗ | 4/8 ✗ | **5/8 ✗** | all |
-| M4 Honest uncertainty | 78% ✓ | 78% ✓ | **78% ✓** | 70–90% |
-| M5 Efficiency vs random | 0.74 ✗ | 0.74 ✗ | **0.73 ✗** | ≤ 0.7 |
-| M6 Guesser and forgetter | ok ✓ | ok ✓ | **both not ok ✗** | both ok |
-| M7 Faulty evaluator output applied | 0/273 ✓ | 0/273 ✓ | **0/273 ✓** | 0 |
-| M8 Deterministic | ✓ | ✓ | **✓** | identical |
+| Measure | First run | After R3 | After selection | **Current (B1, B2)** | Pass level |
+|---|---|---|---|---|---|
+| M1 Profile recovery after 40 items | 0.73 ✗ | 0.73 ✗ | 0.59 ✗ | **0.64 ✗** | ≥ 0.8 |
+| M2 Weakest strand named | 6/7 ✓ | 6/7 ✓ | 4/7 ✗ | **3/7 ✗** | ≥ 6/7 |
+| M3 Pairs told apart | 7/8 ✗ | 4/8 ✗ | 5/8 ✗ | **5/8 ✗** | all |
+| M4 Honest uncertainty | 78% ✓ | 78% ✓ | 78% ✓ | **79% ✓** | 70–90% |
+| M5 Efficiency vs random | 0.74 ✗ | 0.74 ✗ | 0.73 ✗ | **0.69 ✓** | ≤ 0.7 |
+| M6 Guesser and forgetter | ok ✓ | ok ✓ | both not ok ✗ | **both ok ✓** | both ok |
+| M7 Faulty evaluator output applied | 0/273 ✓ | 0/273 ✓ | 0/273 ✓ | **0/273 ✓** | 0 |
+| M8 Deterministic | ✓ | ✓ | ✓ | **✓** | identical |
+| **Passing** | 5 | 5 | 3 | **5** | |
+
+**Compared with the previous round:**
+
+- **Improvements:**
+  - M5 now passes (0.73 → 0.69).
+  - M6 now passes: the forgetter is caught by failed retention checks, and
+    the guesser is within limits.
+  - M1 is up from 0.59 to 0.64.
+- **Regression:** M2 falls from 4/7 to 3/7.
+- **Unchanged:** M3 (5/8), M4, M7, M8.
+
+**Compared with the first run:** M5 and M6 pass, M2 regresses (6/7 → 3/7), and
+M1 is lower (0.73 → 0.64).
+
+**Context only, not the frozen seed.** Over 3 other seeds:
+
+- M2 is 4–5 of 7 and M1 is 0.36–0.61.
+- The forgetter is caught on all of them.
+- M5 passes on all of them.
+
+M1, M2 and M3 vary with which few guessable items a learner happens to get.
+That is the item-bank limit described below.
 
 Thresholds have not changed. The analysis of the current results is in
 "Selection change" below. The notes immediately below explain the first-run
@@ -186,6 +206,90 @@ uncalibrated E1 item bank can tell us**:
 7.5 who gets everything right is estimated at about 6.4 (L7), because the bank
 tops out around 7.5. More hard items fix this. (The second finding, optimistic
 strand uncertainty, was corrected in review: see R3.)
+
+## Hybrid scheduling and retention (third review: B1 and B2)
+
+### B1 · Hybrid scheduler
+
+This is an initial, configurable experimental setting, not a fixed product
+policy (`HYBRID` in `selection.ts`). It is now the engine's own scheduling. For
+each activity it chooses, in order:
+
+1. **An overdue retention check** on the most overdue goal capability. The item
+   is chosen to separate the retained level from one band lower.
+2. **A contradiction probe.** It fires when, in the latest session on a
+   capability, at least 2 items at or below the estimate were mostly missed, or
+   at least 2 items a band or more above it were mostly answered correctly. It
+   re-measures before building on the estimate.
+3. **Assessment** while goal uncertainty is high (sd above 0.9).
+4. **An assessment probe on every third activity** (`probeEvery: 3`;
+   configurable, and 0 turns it off).
+5. **Otherwise learning.**
+
+Explicit `assessment` and `learning` modes bypass the scheduler, for testing.
+Every recommendation records why it was scheduled.
+
+### B2 · Retention by due date
+
+- **The schedule:**
+  - the first check falls due 7 days after first demonstration
+  - a passed check doubles the interval, up to 60 days
+  - a failed check halves it, down to 2 days, and marks the capability *needs
+    review*
+  - a check counts if it is taken on the due day
+- **Overdue means not verified.** Past the due date the stage is *review due*,
+  and the mastery is *not currently verified*, however small the sd is. A test
+  shows sd 0.49 with mastery withdrawn.
+- **History is kept separately.** Previously demonstrated mastery stays in
+  `masteredBefore`, apart from the current `retention` status: first
+  demonstrated, last verified, due, interval, and the history of checks.
+
+**One genuine defect fixed, in my own first retention rule.** It judged a check
+by the cumulative demonstrated level. That level is dominated by weeks of older
+evidence, so the forgetter passed checks after forgetting. A check is now
+judged on its session's fresh evidence only: does that evidence favour the
+retained level over one band lower? This needed the session bookkeeping to keep
+each observation's item parameters (or judged band) and the session-end level.
+
+That is the only change in the updater files (`composite.ts`, `updater.ts`).
+Estimates, update arithmetic and evidence validation are unchanged, as the
+untouched E1-3, E1-5 and E1-6 tests confirm.
+
+### Demonstration (step 10), Asha four weeks later
+
+| | Before the check | After the check |
+|---|---|---|
+| General vocabulary breadth | 5.37 ± 1.00 | 5.45 ± 0.96 |
+| Stage | **review due** | **mastered at 3.5** |
+| Retention | overdue at band 3.5, due 20 Oct, 22 days late, never verified | current, verified 11 Nov, next due 25 Nov, interval 14 days |
+| Next activity | **retention check** on this capability, an item about 63% likely to succeed at the retained level | retention check on the next overdue capability (Locates explicit detail) |
+
+Asha answered correctly, so the check passed and the interval doubled from 7 to
+14 days. In the unit test where a check fails, the interval halves and the stage
+becomes *needs review*.
+
+### What the current item bank prevents us from measuring reliably (B3, deferred to E2)
+
+Reported separately, from the frozen run:
+
+- **Exhaustion.** There are 126 items, and each learner uses 120. By the end,
+  about **12.7 of the 17 capabilities** have no unused item left for a learner.
+- **Retention.** **45** due retention checks could not run because no unused
+  item was left. At the end, **32** learner-capability pairs are overdue with
+  nothing left to check them with. Retention can be scheduled correctly but not
+  always verified.
+- **Learning.** In **346 of 368** learning choices (94%), at least one needed
+  capability had no unused item at a suitable difficulty. With 6–9 items per
+  capability spread over bands 2–7.5, only one or two suit any given level.
+- **Ceiling.** The hardest items are around band 7–7.5, so a learner at 7.5
+  (L7) is estimated at **6.4** on average.
+- **Guessing.** Reading, vocabulary breadth, context, commas and proofreading
+  have only four-option items, so each answer carries little information. That
+  caps M1, M2 and M3 in every mode: the forced-assessment best was 0.72, 6/7
+  and 6/8.
+
+All of this is E2's work: about 600 items, typed and short-answer formats for
+reading and vocabulary, harder items, and calibrated difficulties.
 
 ## Selection change (second review, 12 October)
 
@@ -469,7 +573,7 @@ depth and content. Its contract is already fixed in code and enforced:
 
 ## Decisions needed before E2
 
-- **B1 and B2** (above): the automatic mode policy, and retention checks by due date.
+- **B1 and B2** are done (see "Hybrid scheduling and retention").
 
 - **D-4.** An English educator (ideally two) to review the framework and items,
   and to score anchor responses so they become *trusted*. Today all 12 anchors

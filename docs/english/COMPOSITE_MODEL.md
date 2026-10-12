@@ -88,7 +88,20 @@ band 3.5 with noise 0.8. Then:
 
 Without evidence, certainty fades slowly. `sd² grows by q · days`, up to the
 starting uncertainty, so a capability last seen months ago is reported as less
-certain. That is also what triggers retention checks (§5 and selection).
+certain.
+
+**Retention checks are scheduled by due date, not by uncertainty growth** (E1,
+third review).
+
+- **The first check** falls due 7 days after a capability is first
+  demonstrated.
+- **Each check** is judged on that session's fresh evidence alone: does it
+  favour the retained level over one band lower?
+- **A pass doubles the interval** (up to 60 days). **A failure halves it** (down
+  to 2 days) and marks the capability *needs review*.
+- **Past the due date**, mastery is *not currently verified* (stage *review
+  due*), however small the sd is. Previously demonstrated mastery is still
+  recorded separately.
 
 - The **mean does not decay automatically.** Forgetting is only concluded from
   evidence.

@@ -305,3 +305,69 @@ export async function measures(ctx: Context, results: RunResult[], determinismFi
 
 export { trueLevels };
 
+
+// ---------------------------------------------------------------- what the item bank prevents (reported separately)
+
+export interface BankLimits {
+  bankSize: number;
+  perCapability: { capability: string; name: string; items: number; formats: string[]; guessable: boolean; maxDifficulty: number }[];
+  itemsUsedPerLearner: number;
+  exhaustedAtEnd: { learner: string; capabilities: number }[];
+  learningRecs: number;
+  learningRecsWithGap: number;
+  learningGapsByCapability: Record<string, number>;
+  retentionChecksBlocked: number;
+  overdueUnverifiableAtEnd: { learner: string; capability: string }[];
+  ceilingLearner: { learner: string; trueLevel: number; meanEstimate: number };
+}
+
+export function bankLimits(ctx: Context, results: RunResult[]): BankLimits {
+  const items = [...ctx.content.items.values()];
+  const perCapability = Object.values(CAP).map((cap) => {
+    const its = items.filter((i) => (i.kind === "code" ? i.target === cap : i.targets.includes(cap)));
+    const formats = [...new Set(its.map((i) => i.format))];
+    return { capability: cap, name: ctx.index.names.get(cap)!, items: its.length, formats, guessable: its.every((i) => i.kind === "code" && i.format.startsWith("choice:")), maxDifficulty: Math.max(...its.map((i) => i.b)) };
+  });
+  const gapsByCap: Record<string, number> = {};
+  let learningRecs = 0;
+  let learningRecsWithGap = 0;
+  let blocked = 0;
+  for (const r of results)
+    for (const rec of r.recommendations) {
+      blocked += rec.retentionBlocked.length;
+      const learningGaps = rec.gaps.filter((g) => !rec.retentionBlocked.includes(g));
+      if (rec.mode === "learning") {
+        learningRecs++;
+        if (learningGaps.length) learningRecsWithGap++;
+      }
+      for (const g of learningGaps) gapsByCap[ctx.index.names.get(g)!] = (gapsByCap[ctx.index.names.get(g)!] ?? 0) + 1;
+    }
+  const overdue: BankLimits["overdueUnverifiableAtEnd"] = [];
+  const exhausted: BankLimits["exhaustedAtEnd"] = [];
+  for (const r of results) {
+    const used = new Set(r.recommendations.map((x) => x.item));
+    const now = r.sessions.at(-1)!.now;
+    let n = 0;
+    for (const cap of Object.values(CAP)) {
+      const left = items.filter((i) => !used.has(i.id) && (i.kind === "code" ? i.target === cap : i.targets.includes(cap))).length;
+      if (left === 0) n++;
+      if (left === 0 && leafView(r.ledger.composite, ctx.index, cap, now).retention.status === "overdue") overdue.push({ learner: r.learner.id, capability: ctx.index.names.get(cap)! });
+    }
+    exhausted.push({ learner: r.learner.id, capabilities: n });
+  }
+  const l7 = results.find((r) => r.learner.id === "L7")!;
+  const now7 = l7.sessions.at(-1)!.now;
+  const mean7 = Object.values(CAP).reduce((s, c) => s + leafView(l7.ledger.composite, ctx.index, c, now7).mean, 0) / Object.values(CAP).length;
+  return {
+    bankSize: items.length,
+    perCapability,
+    itemsUsedPerLearner: Math.round(results.reduce((s, r) => s + r.items, 0) / results.length),
+    exhaustedAtEnd: exhausted,
+    learningRecs,
+    learningRecsWithGap,
+    learningGapsByCapability: gapsByCap,
+    retentionChecksBlocked: blocked,
+    overdueUnverifiableAtEnd: overdue,
+    ceilingLearner: { learner: "L7", trueLevel: 7.5, meanEstimate: mean7 },
+  };
+}

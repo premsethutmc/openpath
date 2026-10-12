@@ -25,7 +25,22 @@ import { itemInformation, logistic, normalQuantile, pCorrect } from "./model.ts"
 import type { CapabilityId, Composite, Goal, Item } from "./types.ts";
 
 export type Mode = "assessment" | "learning";
-export type Path = "assessment" | "direct" | "prerequisite_step" | "easier_step" | "assessment_fallback" | "none";
+export type Path = "assessment" | "retention_check" | "contradiction_probe" | "direct" | "prerequisite_step" | "easier_step" | "assessment_fallback" | "none";
+/** Why the scheduler chose this kind of activity. */
+export type ScheduleReason = "explicit" | "retention_check" | "contradiction" | "initial_assessment" | "probe" | "learning";
+
+/**
+ * The hybrid scheduler's settings: an initial experimental configuration, not a fixed product policy.
+ * Priority: overdue retention checks, then contradictory evidence, then an initial assessment phase
+ * while uncertainty is high, then every `probeEvery`-th activity as an assessment probe, else learning.
+ */
+export interface SchedulerConfig {
+  probeEvery: number;
+  initialAssessmentSd: number;
+  retentionFirst: boolean;
+  contradictionFirst: boolean;
+}
+export const HYBRID: SchedulerConfig = { probeEvery: 3, initialAssessmentSd: 0.9, retentionFirst: true, contradictionFirst: true };
 
 export interface Target {
   band: number;
@@ -59,7 +74,10 @@ export interface BankGap {
 }
 
 export interface Recommendation {
+  /** The kind of activity chosen. */
   mode: Mode;
+  /** How it was scheduled: explicitly by the caller, or by the hybrid scheduler and why. */
+  schedule: { policy: "explicit" | "hybrid"; reason: ScheduleReason };
   goal: string;
   target: Target;
   path: Path;
@@ -85,12 +103,17 @@ export interface SelectionInput {
   writingAvailable: boolean;
   /** Limit candidates to these items (used by experiments). */
   only?: Set<string>;
-  /** Choose the mode explicitly; otherwise assessment while uncertainty on the goal is high. */
-  mode?: Mode;
+  /** "assessment" or "learning" force one mode (for testing); "hybrid" (default) uses the scheduler. */
+  mode?: Mode | "hybrid";
+  /** Number of activities this learner has done so far (the scheduler's probe counter). */
+  activityIndex?: number;
+  scheduler?: Partial<SchedulerConfig>;
 }
 
 const WRITING_NOISE = 0.9;
 const IDEAL = 0.7;
+/** A retention item about this likely to succeed at the retained level separates it best from one band lower. */
+const RETENTION_PROBE = 0.65;
 const ZONE: [number, number] = [0.55, 0.85];
 const ZONE_STRUGGLING: [number, number] = [0.7, 0.92];
 const ASSESSMENT_SD = 0.9;
@@ -106,7 +129,7 @@ function erf(x: number): number {
   return s * y;
 }
 
-export function chooseMode(views: Map<string, LeafView>, weights: Map<string, number>): Mode {
+export function chooseMode(views: Map<string, LeafView>, weights: Map<string, number>, threshold = ASSESSMENT_SD): Mode {
   let W = 0;
   let S = 0;
   for (const [id, w] of weights) {
@@ -115,7 +138,7 @@ export function chooseMode(views: Map<string, LeafView>, weights: Map<string, nu
     W += w;
     S += w * v.sd;
   }
-  return W > 0 && S / W > ASSESSMENT_SD ? "assessment" : "learning";
+  return W > 0 && S / W > threshold ? "assessment" : "learning";
 }
 
 /** The learner's target band for a capability: explicit (most specific id wins), else the documented default. */
@@ -155,7 +178,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   const { index, content, composite, goal, now } = input;
   const weights = goalWeights(goal, index);
   const views = new Map(index.leafIds.map((id) => [id, leafView(composite, index, id, now)]));
-  const mode = input.mode ?? chooseMode(views, weights);
+  const cfg: SchedulerConfig = { ...HYBRID, ...input.scheduler };
   const fallbackTarget = defaultTarget(views, weights);
   const targetOf = (cap: CapabilityId) => resolveTarget(goal, index, cap, fallbackTarget);
   const maxW = Math.max(...weights.values(), 1e-9);
@@ -172,8 +195,108 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
   const goalTargets = (item: Item) => targetsOf(item).filter((t) => (weights.get(t) ?? 0) > 0 && views.get(t)!.specified);
   const variety = (item: Item) => (goalTargets(item).some((t) => lastCaps.has(t)) ? -0.05 : 0) + (item.format === lastFormat ? -0.03 : 0);
 
-  if (mode === "assessment") return assess();
-  return learn();
+  if (input.mode === "assessment") return { ...assess(), schedule: { policy: "explicit", reason: "explicit" } };
+  if (input.mode === "learning") return { ...learn(), schedule: { policy: "explicit", reason: "explicit" } };
+  return hybrid();
+
+  // ------------------------------------------------------------ hybrid scheduler
+  function hybrid(): Recommendation {
+    const tag = (r: Recommendation, reason: ScheduleReason, lead?: string): Recommendation => ({ ...r, schedule: { policy: "hybrid", reason }, explanation: lead ? `${lead} ${r.explanation}` : r.explanation });
+    if (cfg.retentionFirst) {
+      const r = retentionCheck();
+      if (r) return tag(r, "retention_check");
+    }
+    if (cfg.contradictionFirst) {
+      const c = contradictionProbe();
+      if (c) return tag(c, "contradiction");
+    }
+    if (chooseMode(views, weights, cfg.initialAssessmentSd) === "assessment") return tag(assess(), "initial_assessment", "Starting out, so measuring first.");
+    if (cfg.probeEvery > 0 && (input.activityIndex ?? 0) % cfg.probeEvery === cfg.probeEvery - 1)
+      return tag(assess(), "probe", `Assessment probe (every ${cfg.probeEvery === 3 ? "third" : `${cfg.probeEvery}th`} activity), to keep the composite reliable.`);
+    return tag(learn(), "learning");
+  }
+
+  /** An overdue spaced-retention check, on the goal capability most overdue (weighted). */
+  function retentionCheck(): Recommendation | null {
+    const overdue = [...weights]
+      .filter(([id, w]) => w > 0 && views.get(id)!.specified && views.get(id)!.retention.status === "overdue")
+      .map(([id, w]) => ({ id, v: views.get(id)!, order: (w / maxW) * (1 + views.get(id)!.retention.overdueDays) }))
+      .sort((a, b) => b.order - a.order || a.id.localeCompare(b.id));
+    const gaps: BankGap[] = [];
+    for (const o of overdue) {
+      const R = o.v.retention.level ?? o.v.mean;
+      const atRetained: LeafView = { ...o.v, mean: R };
+      const pick = pool
+        .filter((i) => targetsOf(i).includes(o.id))
+        .map((i) => ({ i, p: predicted(i, atRetained) }))
+        .sort((a, b) => Math.abs(a.p - RETENTION_PROBE) - Math.abs(b.p - RETENTION_PROBE) || a.i.id.localeCompare(b.i.id))[0];
+      if (!pick) {
+        gaps.push({ ...gapFor(o.id), note: `retention check for ${o.v.name} is overdue, but the bank has no unused item for it` });
+        continue;
+      }
+      const T = targetOf(o.id);
+      const ret = o.v.retention;
+      const choice: Scored = { item: pick.i.id, kind: pick.i.kind, targets: targetsOf(pick.i), focus: o.id, score: o.order, parts: { overdueDays: ret.overdueDays, retainedLevel: R, information: relativeInformation(pick.i, o.v) }, p: pick.p, reasons: ["retention check"] };
+      const day = (iso: string | null) => (iso ? iso.slice(0, 10) : "never");
+      return {
+        mode: "assessment",
+        schedule: { policy: "hybrid", reason: "retention_check" },
+        goal: goal.id,
+        target: T,
+        path: "retention_check",
+        choice,
+        alternatives: [],
+        bankGaps: gaps,
+        explanation: `Retention check: ${o.v.name} was ${ret.lastVerifiedAt ? `last verified on ${day(ret.lastVerifiedAt)}` : `first demonstrated on ${day(ret.firstDemonstratedAt)}`} at band ${R}; its check was due on ${day(ret.dueAt)} (${ret.overdueDays.toFixed(0)} days overdue), so it is not currently verified, even though the estimate is ${o.v.mean.toFixed(1)} ± ${o.v.sd.toFixed(1)}. This item tests the retained level (about ${Math.round(pick.p * 100)}% likely to succeed if still at band ${R}).`,
+      };
+    }
+    return null;
+  }
+
+  /** Recent direct evidence that disagrees with the estimate: re-measure before teaching on top of it. */
+  function contradictionProbe(): Recommendation | null {
+    const contradicted = [...weights]
+      .filter(([id, w]) => w > 0 && views.get(id)!.specified)
+      .map(([id]) => ({ id, why: contradiction(id) }))
+      .filter((x): x is { id: string; why: string } => x.why !== null)
+      .sort((a, b) => a.id.localeCompare(b.id));
+    for (const c of contradicted) {
+      const items = available.filter((i) => targetsOf(i).includes(c.id));
+      if (!items.length) continue;
+      const v = views.get(c.id)!;
+      const best = items
+        .map((i) => ({ i, r: relativeInformation(i, v) }))
+        .sort((a, b) => b.r - a.r || a.i.id.localeCompare(b.i.id))[0];
+      const choice: Scored = { item: best.i.id, kind: best.i.kind, targets: goalTargets(best.i), focus: c.id, score: best.r, parts: { information: best.r }, p: predicted(best.i, v), reasons: ["contradictory evidence"] };
+      return {
+        mode: "assessment",
+        schedule: { policy: "hybrid", reason: "contradiction" },
+        goal: goal.id,
+        target: targetOf(c.id),
+        path: "contradiction_probe",
+        choice,
+        alternatives: [],
+        bankGaps: [],
+        explanation: `Contradictory evidence: ${c.why}. Re-measuring ${v.name} (${v.mean.toFixed(1)} ± ${v.sd.toFixed(1)}) before building on it; this item is expected to remove ${Math.round(100 * best.r)}% of the remaining uncertainty.`,
+      };
+    }
+    return null;
+  }
+
+  /** In the latest session on this capability: failing easy items, or passing hard ones, against the estimate. */
+  function contradiction(cap: CapabilityId): string | null {
+    const node = composite.nodes[cap];
+    const last = node.binary[node.binary.length - 1];
+    if (!last) return null;
+    const session = node.binary.filter((t) => t.session === last.session);
+    const easy = session.filter((t) => t.atOrBelow);
+    const hard = session.filter((t) => t.b >= node.direct.mean + 1);
+    const rate = (xs: typeof session) => xs.filter((t) => t.correct).length / xs.length;
+    const name = views.get(cap)!.name;
+    if (easy.length >= 2 && rate(easy) <= 1 / 3) return `${name}: ${easy.filter((t) => !t.correct).length} of ${easy.length} items at or below the estimate were missed in the latest session`;
+    if (hard.length >= 2 && rate(hard) >= 0.75) return `${name}: ${hard.filter((t) => t.correct).length} of ${hard.length} items a band or more above the estimate were answered correctly in the latest session`;
+    return null;
+  }
 
   // ------------------------------------------------------------ assessment
   function assess(): Recommendation {
@@ -201,7 +324,8 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
     scored.sort((a, b) => b.score - a.score || a.item.localeCompare(b.item));
     const choice = scored[0] ?? null;
     return {
-      mode,
+      mode: "assessment",
+      schedule: { policy: "explicit", reason: "explicit" },
       goal: goal.id,
       target: choice ? targetOf(choice.targets[0]) : fallbackTarget,
       path: choice ? "assessment" : "none",
@@ -234,8 +358,7 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
         const weakPrereqs = (index.requires.get(id) ?? []).filter((p) => need(views.get(p)!, targetOf(p).band) >= WEAK_PREREQUISITE);
         const readiness = weakPrereqs.length ? 0.5 : 1;
         const misconception = Math.max(0, ...v.misconceptions.map((m) => m.strength));
-        const daysSince = v.lastDirectAt ? (Date.parse(now) - Date.parse(v.lastDirectAt)) / 86_400_000 : 0;
-        const retention = v.demonstrated !== null && v.sd >= 0.75 && daysSince >= 7 ? 1 : 0;
+        const retention = v.retention.status === "overdue" ? 1 : 0;
         const uncertainty = Math.min(1, v.sd / prior);
         const priority = (w / maxW) * (n * readiness + 0.3 * misconception + 0.3 * retention + 0.2 * uncertainty);
         return { id, v, T, need: n, readiness, weakPrereqs, misconception, retention, uncertainty, priority };
@@ -323,17 +446,17 @@ export function recommend(input: SelectionInput, count = 1): Recommendation {
     if (!choice) {
       // Nothing usable for any needed capability: say so, and measure instead of stalling.
       const a = assess();
-      if (!a.choice) return { ...a, mode, path: "none", bankGaps: gaps };
+      if (!a.choice) return { ...a, path: "none", bankGaps: gaps };
       return {
         ...a,
-        mode,
         path: "assessment_fallback",
         bankGaps: gaps,
         explanation: `Learning: no unused activity at a suitable or easier difficulty for any capability on this goal (${gaps.length} item-bank gaps reported), so this is an assessment activity instead. ${a.explanation}`,
       };
     }
     return {
-      mode,
+      mode: "learning",
+      schedule: { policy: "explicit", reason: "explicit" },
       goal: goal.id,
       target: choice?.focus ? targetOf(choice.focus) : fallbackTarget,
       path,

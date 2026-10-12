@@ -64,7 +64,7 @@ export interface RunOptions {
   only?: Set<string>;
   writing?: boolean;
   /** Selection mode; omitted means the engine's automatic choice. */
-  mode?: "assessment" | "learning";
+  mode?: "assessment" | "learning" | "hybrid";
   /** Stop early when this returns true (checked after each item). */
   stop?: (ledger: Ledger, now: string) => boolean;
   onItem?: (info: { session: number; n: number; item: string; rec: Recommendation | null; ledger: Ledger; now: string }) => void;
@@ -76,7 +76,7 @@ export interface RunResult {
   /** Composite after each session, and the time it was taken. */
   sessions: { day: number; now: string; composite: Composite; items: number }[];
   items: number;
-  recommendations: { now: string; item: string; mode: string; explanation: string }[];
+  recommendations: { now: string; item: string; mode: string; reason: string; path: string; explanation: string; gaps: string[]; retentionBlocked: string[] }[];
 }
 
 export async function runLearner(ctx: Context, learner: SimLearner, o: RunOptions): Promise<RunResult> {
@@ -120,10 +120,11 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
           writingAvailable: o.writing !== false,
           only: o.only,
           mode: o.mode,
+          activityIndex: n,
         });
         if (!rec.choice) break outer;
         itemId = rec.choice.item;
-        recommendations.push({ now, item: itemId, mode: rec.mode, explanation: rec.explanation });
+        recommendations.push({ now, item: itemId, mode: rec.mode, reason: rec.schedule.reason, path: rec.path, explanation: rec.explanation, gaps: rec.bankGaps.map((g) => g.capability), retentionBlocked: rec.bankGaps.filter((g) => g.note.startsWith("retention check")).map((g) => g.capability) });
       }
       const item = ctx.content.items.get(itemId)!;
       const evId = `${learner.id}:e${n}`;

@@ -11,7 +11,11 @@ test("E1-8 selection is repeatable and every recommendation is explained", async
   const results = await runAll(c);
   for (const r of results) {
     assert.ok(r.recommendations.length > 0);
-    for (const rec of r.recommendations) assert.match(rec.explanation, /^(Assessment|Learning): .+Target: /);
+    for (const rec of r.recommendations) {
+      // every recommendation says what kind of activity it is and why it was scheduled
+      assert.match(rec.explanation, /(Assessment: |Learning: |Retention check: |Contradictory evidence: )/);
+      assert.ok(["initial_assessment", "probe", "learning", "retention_check", "contradiction"].includes(rec.reason), rec.reason);
+    }
   }
   const r = results[3];
   const s = r.sessions[1];

@@ -13,6 +13,8 @@ import { readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import {
   type Context,
+  type LeafView,
+  type Recommendation,
   type Decision,
   type LedgerEvent,
   Ledger,
@@ -39,6 +41,7 @@ export interface DemoResult {
   writingDecisions: Decision[];
   reloadedIdentical: boolean;
   undoIdentical: boolean;
+  retentionDemo: { capability: string; before: LeafView; after: LeafView; beforeNext: Recommendation; afterNext: Recommendation };
   lines: string[];
 }
 
@@ -88,7 +91,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
     for (let k = 0; k < 40; k++) {
       const day = k < 20 ? 0 : 1;
       const now = at(day, k % 20);
-      const rec = recommend({ index: ctx.index, content: ctx.content, composite: ledgers[l.id].composite, goal, now, seen: seen[l.id], recent: recent[l.id], writingThisSession: 1, writingAvailable: false });
+      const rec = recommend({ index: ctx.index, content: ctx.content, composite: ledgers[l.id].composite, goal, now, seen: seen[l.id], recent: recent[l.id], writingThisSession: 1, writingAvailable: false, activityIndex: k });
       const item = ctx.content.items.get(rec.choice!.item)!;
       if (item.kind !== "code") throw new Error("diagnostic expected a code item");
       const response = respond(l, item, day, next);
@@ -180,7 +183,35 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const undoIdentical = JSON.stringify(stripMeta(ledgers.asha.composite)) === JSON.stringify(stripMeta(before));
   const rv = leafView(ledgers.asha.composite, ctx.index, "EN.SEN.CMP.run_ons", nowW);
   say(`9 · Undid Asha's evaluation (${ds.filter((x) => x.verdict === "accepted").length} decisions revoked; the evidence and proposal stay in the log): run-ons back to ${f(rv.mean)} ± ${f(rv.sd)}; composite ${undoIdentical ? "identical to its state before the evaluation" : "NOT identical"}.`);
-  return { ctx, ledgers, next, modes, writingDecisions: ds, reloadedIdentical, undoIdentical, lines };
+
+  // 10 · an overdue retention check, before and after
+  const t30 = at(30);
+  const counter = ledgers.asha.events.filter((e) => e.kind === "evidence").length;
+  const beforeNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: t30, seen: seen.asha, recent: [], writingThisSession: 0, writingAvailable: false, activityIndex: counter });
+  const cap = beforeNext.choice!.focus!;
+  const beforeView = leafView(ledgers.asha.composite, ctx.index, cap, t30);
+  const status = (v: LeafView) => {
+    const r = v.retention;
+    const d = (x: string | null) => (x ? x.slice(0, 10) : "—");
+    return `estimate ${f(v.mean)} ± ${f(v.sd)} · stage ${v.stage.replace("_", " ")} · retention ${r.status}${r.level !== null ? ` at band ${r.level}` : ""} (first demonstrated ${d(r.firstDemonstratedAt)}, last verified ${d(r.lastVerifiedAt)}, due ${d(r.dueAt)}, interval ${r.intervalDays} days)${v.masteredBefore ? ` · mastered before at ${v.masteredBefore}, not currently verified` : v.mastered ? ` · mastered at ${v.mastered}` : ""}`;
+  };
+  say(`\n10 · Four weeks later (${t30.slice(0, 10)}): an overdue retention check`);
+  say(`   BEFORE  ${beforeView.name}: ${status(beforeView)}`);
+  say(`   Next activity [${beforeNext.schedule.reason}]: ${prompt(beforeNext.choice!.item)}`);
+  say(`     ${beforeNext.explanation}`);
+  const item = ctx.content.items.get(beforeNext.choice!.item)!;
+  if (item.kind !== "code") throw new Error("expected a code item for the retention check");
+  const answer = respond(ASHA, item, 30, rng(30));
+  const checkDs = await append(stores.asha, ledgers.asha, { kind: "evidence", id: "asha:e-check", at: t30, session: "asha:s30", item: { id: item.id, version: item.version }, response: answer });
+  seen.asha.add(item.id);
+  const afterView = leafView(ledgers.asha.composite, ctx.index, cap, at(30, 1));
+  const afterNext = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: at(30, 1), seen: seen.asha, recent: [{ item: item.id, targets: [item.target], format: item.format }], writingThisSession: 0, writingAvailable: false, activityIndex: counter + 1 });
+  const check = afterView.retention.checks[afterView.retention.checks.length - 1];
+  say(`   Asha answers: ${checkDs[0].observation!.value ? "right" : "wrong"} → the check ${check?.passed ? "PASSES" : "FAILS"} on this fresh evidence (interval now ${check?.intervalAfter} days)`);
+  say(`   AFTER   ${afterView.name}: ${status(afterView)}`);
+  say(`   Next activity [${afterNext.schedule.reason}]: ${prompt(afterNext.choice!.item)}`);
+  say(`     ${afterNext.explanation}`);
+  return { ctx, ledgers, next, modes, writingDecisions: ds, reloadedIdentical, undoIdentical, retentionDemo: { capability: cap, before: beforeView, after: afterView, beforeNext, afterNext }, lines };
 }
 
 async function append(store: FileStore, ledger: Ledger, e: LedgerEvent): Promise<Decision[]> {

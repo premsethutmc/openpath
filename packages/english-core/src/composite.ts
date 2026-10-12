@@ -10,7 +10,8 @@
  */
 import { type FrameworkIndex, ROOT, isSpecified } from "./framework.ts";
 import { clamp, daysBetween, inflate, normalQuantile } from "./model.ts";
-import type { CapabilityId, Composite, Estimate, NodeState, Policy } from "./types.ts";
+import { type Retention, retention } from "./retention.ts";
+import type { CapabilityId, Composite, Estimate, NodeState, Policy, SessionObservation } from "./types.ts";
 
 export const MODEL_VERSION = "composite@1";
 const MAX_TRACE = 40;
@@ -30,6 +31,7 @@ export function createComposite(index: FrameworkIndex, learnerId: string): Compo
       misconceptions: {},
       binary: [],
       demonstrations: [],
+      sessions: [],
       evidence: [],
     };
   }
@@ -86,8 +88,10 @@ export interface DirectObservation {
   /** Largest allowed change of the mean from this one observation (evaluator evidence). */
   maxShift?: number;
   misconceptions: string[];
-  /** For right/wrong items: difficulty and outcome (used for the struggling rule and misconception fading). */
-  binary?: { b: number; correct: boolean };
+  /** For right/wrong items: difficulty and outcome (used for the struggling rule and misconception fading); a and c are kept for retention checks. */
+  binary?: { b: number; correct: boolean; a?: number; c?: number };
+  /** For judged evidence: the band and its noise (kept for retention checks). */
+  band?: { value: number; noise: number };
   /** A judged band at or above the current estimate counts as success for misconception fading. */
   success?: boolean;
 }
@@ -141,6 +145,14 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
       last.at = o.at;
     } else node.demonstrations.push({ session: o.session, at: o.at, level });
   }
+  const sessions = (node.sessions ??= []);
+  const lastSession = sessions[sessions.length - 1];
+  const ob: SessionObservation | null = o.binary ? { kind: "binary", b: o.binary.b, a: o.binary.a ?? 1.2, c: o.binary.c ?? 0, correct: o.binary.correct } : o.band ? { kind: "band", value: o.band.value, noise: o.band.noise } : null;
+  if (lastSession && lastSession.session === o.session) {
+    lastSession.level = level;
+    lastSession.at = o.at;
+    if (ob) (lastSession.obs ??= []).push(ob);
+  } else sessions.push({ session: o.session, at: o.at, level, obs: ob ? [ob] : [] });
   node.evidence.push(o.decisionId);
   if (node.evidence.length > MAX_EVIDENCE) node.evidence.shift();
 
@@ -166,7 +178,12 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
 
 // ---------------------------------------------------------------- reading the composite
 
-export type Stage = "unassessed" | "struggling" | "developing" | "demonstrated" | "mastered" | "needs_review";
+/**
+ * review_due: demonstrated or mastered before, but its retention check is overdue, so it is not
+ * currently verified (whatever the numerical uncertainty). needs_review: a check failed, or the
+ * capability is no longer demonstrated at its mastered level.
+ */
+export type Stage = "unassessed" | "struggling" | "developing" | "demonstrated" | "mastered" | "review_due" | "needs_review";
 
 export interface LeafView {
   id: CapabilityId;
@@ -181,8 +198,10 @@ export interface LeafView {
   stage: Stage;
   demonstrated: number | null;
   mastered: number | null;
-  /** Mastered earlier, but not currently demonstrated at that level. */
+  /** Mastered earlier, but not currently verified at that level (slipped, check failed or check overdue). */
   masteredBefore: number | null;
+  /** Spaced retention checks: previously demonstrated vs currently verified. */
+  retention: Retention;
   misconceptions: { id: string; strength: number }[];
 }
 
@@ -204,11 +223,14 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
   const masteredHist = masteredLevel(node, p);
   // Mastery is reported only while the capability is still demonstrated at that level.
   const slipped = masteredHist !== null && (demonstrated === null || demonstrated < masteredHist);
-  const mastered = slipped ? null : masteredHist;
+  const ret = retention(node, p, now);
+  const unverified = ret.status === "overdue" || ret.status === "failed";
+  const mastered = slipped || unverified ? null : masteredHist;
   let stage: Stage;
   if (node.directN < 2) stage = "unassessed";
   else if (isStruggling(node, p)) stage = "struggling";
-  else if (slipped) stage = "needs_review";
+  else if (slipped || ret.status === "failed") stage = "needs_review";
+  else if (ret.status === "overdue") stage = "review_due";
   else if (mastered !== null) stage = "mastered";
   else if (demonstrated !== null) stage = "demonstrated";
   else stage = "developing";
@@ -229,7 +251,8 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
     stage,
     demonstrated,
     mastered,
-    masteredBefore: slipped ? masteredHist : null,
+    masteredBefore: slipped || unverified ? masteredHist : null,
+    retention: ret,
     misconceptions,
   };
 }
