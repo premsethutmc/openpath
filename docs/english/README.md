@@ -3,7 +3,8 @@
 *12 October 2026. These began as planning documents. **E1 is implemented and
 merged** ([`E1_REPORT.md`](E1_REPORT.md)). The E2 scope was approved with
 decisions on 12 October (PR #7); E2a is merged ([`E2A_REPORT.md`](E2A_REPORT.md)), and E2b
-is reported in [`E2B_REPORT.md`](E2B_REPORT.md).*
+is merged ([`E2B_REPORT.md`](E2B_REPORT.md)). The E3 scope is proposed in
+[`E3_SCOPE.md`](E3_SCOPE.md).*
 
 | Label | Meaning |
 |---|---|
@@ -38,6 +39,8 @@ is reported in [`E2B_REPORT.md`](E2B_REPORT.md).*
 11. [`E2B_REPORT.md`](E2B_REPORT.md): what E2b built (item banks for the 39 core
     capabilities, writing tasks), coverage, simulation results and newly exposed
     weaknesses.
+12. [`E3_SCOPE.md`](E3_SCOPE.md): proposed scope for evaluating free-form answers
+    (not implemented; no live LLM).
 
 ---
 
