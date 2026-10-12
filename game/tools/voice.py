@@ -15,6 +15,11 @@ VOICE, RATE, PITCH = "ta+f3", "132", "60"
 
 LINES = {
     # id: (Tamil, transliteration, meaning)
+    "greet": ("வணக்கம் செல்லம்!", "Vanakkam chellam!", "Hello, darling!"),
+    "whereBag": ("என் பை எங்கே?", "En pai enge?", "Where is my bag?"),
+    "there": ("அதோ!", "Atho!", "There it is!"),
+    "thanks": ("நன்றி செல்லம்!", "Nandri chellam!", "Thank you, darling!"),
+    "empty": ("பை காலியா இருக்கு!", "Pai kaaliyaa irukku!", "The bag is empty!"),
     "main": ("வா செல்லம், கடைக்குப் போகலாம்!", "Vaa chellam, kadaikku pogalaam!", "Come, darling, let's go to the shop!"),
     "enna": ("என்ன செல்லம்?", "Enna chellam?", "What is it, darling?"),
     "ithanai": ("இத்தனை ஆப்பிள் வேண்டும்!", "Ithanai apple vendum!", "We need this many apples!"),

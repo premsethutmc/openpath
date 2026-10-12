@@ -15,24 +15,24 @@ const browser = await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { execut
 // the stage is as tall as the window allows (minus the reviewer's desk), so size the window to get exactly WxH
 const page = await browser.newPage({ viewport: { width: w + 32, height: h + 170 }, deviceScaleFactor: 1 });
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
-await page.addInitScript(() => { window.__POC_MANUAL = true; });
+await page.addInitScript(() => { window.__GAME_MANUAL = true; });
 await page.goto("file://" + join(root, "dist/standalone.html"));
-await page.waitForFunction(() => window.__poc, null, { timeout: 30000 });
-const got = await page.evaluate(() => ({ w: window.__poc.canvas.width, h: window.__poc.canvas.height }));
+await page.waitForFunction(() => window.__game, null, { timeout: 30000 });
+const got = await page.evaluate(() => ({ w: window.__game.canvas.width, h: window.__game.canvas.height }));
 console.log("canvas", got.w + "x" + got.h, "frames", N);
-await page.evaluate(async (s) => { for (let i = 0; i < 20; i++) window.__poc.frame(1 / 60, false); await window.__poc.record(s + 1); }, +secs);
+await page.evaluate(async (s) => { for (let i = 0; i < 20; i++) window.__game.frame(1 / 60, false); await window.__game.record(s + 1); }, +secs);
 const sub = 60 / +fps;
 for (let i = 0; i < N; i++) {
   const data = await page.evaluate(async (sub) => {
-    for (let k = 0; k < sub; k++) { window.__poc.frame(1 / 60, k === sub - 1); if (k < sub - 1) await new Promise((r) => setTimeout(r, 0)); }
-    const url = window.__poc.canvas.toDataURL("image/jpeg", 0.94);
+    for (let k = 0; k < sub; k++) { window.__game.frame(1 / 60, k === sub - 1); if (k < sub - 1) await new Promise((r) => setTimeout(r, 0)); }
+    const url = window.__game.canvas.toDataURL("image/jpeg", 0.94);
     await new Promise((r) => setTimeout(r, 0));
     return url;
   }, sub);
   writeFileSync(join(tmp, `f${String(i).padStart(5, "0")}.jpg`), Buffer.from(data.slice(data.indexOf(",") + 1), "base64"));
   if (i % 120 === 0) console.log("frame", i);
 }
-const pcm = Buffer.from(await page.evaluate(() => window.__poc.soundtrack()), "base64");
+const pcm = Buffer.from(await page.evaluate(() => window.__game.soundtrack()), "base64");
 writeFileSync(join(tmp, "audio.pcm"), pcm);
 await browser.close();
 execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-framerate", fps, "-i", join(tmp, "f%05d.jpg"), "-f", "s16le", "-ar", "44100", "-ac", "1", "-i", join(tmp, "audio.pcm"),
