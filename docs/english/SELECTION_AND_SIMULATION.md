@@ -21,6 +21,36 @@ learner or guardian chooses goals; the system never infers them.
 
 ## 2. How the next activity is chosen
 
+> **Updated 12 October (E1 review).** Selection now has two explicit modes:
+>
+> - **Assessment** prefers the largest *share* of current uncertainty removed,
+>   on capabilities whose position against the target is unsettled.
+> - **Learning** prefers *target-relative need*, P(below target), adjusted for
+>   framework prerequisites, misconceptions, retention and uncertainty, at a
+>   suitable difficulty.
+>
+> When no suitable item exists, learning mode takes a prerequisite step, then
+> an easier step, and reports item-bank gaps. Targets are the learner's own, or
+> the documented default below, which is always named. The description below
+> is the original design and is kept for the record. The implemented rules are
+> in `packages/english-core/src/selection.ts` and `docs/english/E1_REPORT.md`.
+>
+> **Fresh, variant and repeated items (E1 final review).** Assessment and
+> learning use only items the learner has not seen. A due retention check
+> prefers an unseen item, then an unseen *variant* (an item sharing a
+> `family` with one already seen), then a flagged *repeat* of an item last
+> seen at least 14 days earlier. The ledger, not the client, decides each
+> answer's exposure. A repeat counts only towards the retention check and
+> never changes the estimate; a variant is new evidence, flagged. So
+> long-term retention tracking does not need an unlimited supply of new items.
+>
+> **After a failed retention check (E1 merge condition).** Learning mode
+> treats the capability as needing review and pitches practice at the level
+> the check supports, not at the estimate, which still includes older
+> evidence. Proficiency claims come from `LeafView.verification`, and
+> learner-facing text comes from `summarise()`, which keeps status, estimate
+> and history apart.
+
 **Candidates.** Any item or activity whose targets include a weighted
 capability, and whose difficulty is within reach. An *activity* can be one item
 or a set: for example, a reading passage with six questions, or a writing task.

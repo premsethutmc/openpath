@@ -1,0 +1,1621 @@
+{
+ "id": "en",
+ "version": "0.1.0",
+ "title": "OpenPath English, ages 10–15",
+ "status": "draft",
+ "review": {
+  "status": "draft",
+  "author": "OpenPath",
+  "licence": "internal",
+  "note": "Unreviewed draft for engine development (decision D-4). Descriptors are OpenPath's own wording; band alignment to CEFR is indicative only."
+ },
+ "scale": {
+  "min": 1,
+  "max": 8
+ },
+ "prior": {
+  "mean": 4.0,
+  "sd": 1.5
+ },
+ "policy": {
+  "time_variance_per_day": 0.0047,
+  "demonstrated_probability": 0.8,
+  "demonstrated_min_direct": 3,
+  "demonstrated_min_contexts": 2,
+  "mastery_gap_days": 7,
+  "struggling_window_sessions": 2,
+  "struggling_min_observations": 3,
+  "struggling_max_success": 0.4,
+  "evaluator_max_shift": 0.75,
+  "inferred_max_shift": 0.25,
+  "misconception_active": 0.3,
+  "misconception_gain": 0.5,
+  "misconception_fade_on_success": 0.7,
+  "misconception_half_life_days": 30
+ },
+ "strands": [
+  {
+   "id": "EN.FND",
+   "name": "Foundations of literacy",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.FND.PHON",
+     "name": "Phonics and decoding",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.FND.PHON.letter_sounds",
+       "name": "Letter–sound correspondence",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.PHON.digraphs_blends",
+       "name": "Digraphs and blends",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.PHON.vowel_patterns",
+       "name": "Vowel patterns",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.PHON.multisyllabic_decoding",
+       "name": "Decodes multisyllabic words",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.FND.WREC",
+     "name": "Word recognition",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.FND.WREC.high_frequency",
+       "name": "Recognises high-frequency words",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.WREC.irregular_words",
+       "name": "Recognises irregular words",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.WREC.recognition_speed",
+       "name": "Word recognition speed",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.FND.SPL",
+     "name": "Spelling",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.FND.SPL.regular_patterns",
+       "name": "Regular spelling patterns",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.SPL.inflections",
+       "name": "Spells inflected forms correctly",
+       "tier": "skeleton",
+       "description": "Spells words correctly when adding endings (-ed, -ing, -s/-es, -er/-est), applying doubling, dropping 'e' and changing 'y' to 'i'.",
+       "bands": {
+        "2": "Adds -s and -ing to simple words without changing the base.",
+        "4": "Applies doubling and silent-e rules to common one-syllable words.",
+        "6": "Applies the rules to two-syllable words, including stress-dependent doubling (begin → beginning).",
+        "8": "Handles exceptions and less common patterns reliably (panicked, travelling/traveling conventions)."
+       },
+       "misconceptions": [
+        {
+         "id": "no_doubling",
+         "description": "Does not double the final consonant (runing, stoped)."
+        },
+        {
+         "id": "kept_silent_e",
+         "description": "Keeps the silent e before a vowel suffix (makeing, hopeing)."
+        },
+        {
+         "id": "y_not_changed",
+         "description": "Does not change y to i (carryed, happyer)."
+        },
+        {
+         "id": "over_doubling",
+         "description": "Doubles where it should not (openning, visitted)."
+        }
+       ],
+       "observable_through": [
+        "typed:cloze",
+        "choice:spelling",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.SPL.homophones",
+       "name": "Homophones",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.SPL.morphological",
+       "name": "Morphological spelling (prefixes and suffixes)",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.SPL.commonly_confused",
+       "name": "Commonly confused spellings",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.FND.FLU",
+     "name": "Reading fluency",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.FND.FLU.accuracy",
+       "name": "Reads aloud accurately",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.FLU.rate",
+       "name": "Reads at a suitable rate",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.FND.FLU.prosody",
+       "name": "Reads with phrasing and expression",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.VOC",
+   "name": "Vocabulary",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.VOC.BRD",
+     "name": "Breadth",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.BRD.general",
+       "name": "General vocabulary breadth",
+       "tier": "skeleton",
+       "description": "Knows the meanings of common and moderately frequent English words; frequency band sets the difficulty.",
+       "bands": {
+        "2": "Knows very common everyday words (first 1,000).",
+        "4": "Knows most words in everyday texts (about 2,000–3,000 word families).",
+        "6": "Knows less frequent general words met in secondary-level reading.",
+        "8": "Knows low-frequency, precise general vocabulary."
+       },
+       "misconceptions": [
+        {
+         "id": "sound_alike_confusion",
+         "description": "Confuses a word with one that looks or sounds similar."
+        }
+       ],
+       "observable_through": [
+        "choice:meaning",
+        "typed:cloze"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.BRD.academic",
+       "name": "Academic vocabulary",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.VOC.MOR",
+     "name": "Word structure",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.MOR.prefixes",
+       "name": "Prefixes",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.MOR.suffixes",
+       "name": "Suffixes and word class",
+       "tier": "skeleton",
+       "description": "Uses suffixes to form and recognise words of different classes (-ness, -ful, -ly, -tion, -ment, -able, -ise/-ize).",
+       "bands": {
+        "2": "Recognises -ful, -ly and -er on familiar words.",
+        "4": "Chooses the right form of a word for its place in a sentence (happy/happiness/happily).",
+        "6": "Forms less common derivations and recognises how a suffix changes meaning.",
+        "8": "Handles irregular and abstract derivations (maintain → maintenance)."
+       },
+       "misconceptions": [
+        {
+         "id": "wrong_word_class",
+         "description": "Uses the right word family but the wrong word class (He spoke confident)."
+        },
+        {
+         "id": "invented_derivation",
+         "description": "Builds a form that does not exist (happyness, decidement)."
+        }
+       ],
+       "observable_through": [
+        "typed:word_form",
+        "choice:word_form"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.MOR.roots_families",
+       "name": "Roots and word families",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.VOC.CTX",
+     "name": "Meaning in context",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.CTX.context",
+       "name": "Works out meaning from context",
+       "tier": "skeleton",
+       "description": "Works out the meaning of an unfamiliar word or phrase from clues in the surrounding text.",
+       "bands": {
+        "2": "Uses a picture or an obvious definition next to the word.",
+        "4": "Uses a nearby synonym, example or contrast clue in a short text.",
+        "6": "Combines clues across sentences in a longer, less familiar text.",
+        "8": "Infers precise meaning from subtle or indirect clues, including tone."
+       },
+       "misconceptions": [
+        {
+         "id": "ignores_context",
+         "description": "Chooses a familiar meaning of the word that does not fit the text."
+        }
+       ],
+       "observable_through": [
+        "choice:meaning_in_context"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.CTX.multiple_meaning",
+       "name": "Multiple-meaning words",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.VOC.REL",
+     "name": "Word relations",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.REL.synonyms_antonyms",
+       "name": "Synonyms and antonyms",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.REL.shades_of_meaning",
+       "name": "Shades of meaning",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.REL.collocations",
+       "name": "Collocations",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.VOC.FIG",
+     "name": "Figurative and idiomatic language",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.FIG.similes_metaphors",
+       "name": "Similes and metaphors",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.FIG.idioms",
+       "name": "Idioms",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.FIG.phrasal_verbs",
+       "name": "Phrasal verbs",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.VOC.USE",
+     "name": "Productive use",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.VOC.USE.word_choice",
+       "name": "Precise word choice in writing",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.VOC.USE.register_words",
+       "name": "Register-appropriate words",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.GRM",
+   "name": "Grammar and usage",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.GRM.NOUN",
+     "name": "Nouns and determiners",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.NOUN.plurals_countability",
+       "name": "Plurals and countability",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.NOUN.articles",
+       "name": "Articles",
+       "tier": "skeleton",
+       "description": "Chooses a, an, the or no article correctly.",
+       "bands": {
+        "2": "Uses a/an with simple singular countable nouns.",
+        "4": "Distinguishes first mention from known reference (a dog … the dog).",
+        "6": "Handles uncountable and general/abstract nouns (Ø information, the environment).",
+        "8": "Controls articles with proper nouns, idioms and generic statements consistently."
+       },
+       "misconceptions": [
+        {
+         "id": "article_omission",
+         "description": "Leaves out a needed article (She is teacher)."
+        },
+        {
+         "id": "article_with_uncountable",
+         "description": "Uses a/an with uncountable nouns (an advice)."
+        },
+        {
+         "id": "a_an_sound",
+         "description": "Chooses a/an by spelling, not sound (a hour, an university)."
+        }
+       ],
+       "observable_through": [
+        "typed:cloze",
+        "choice:grammar",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.NOUN.quantifiers",
+       "name": "Quantifiers",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.NOUN.possessives",
+       "name": "Possessives",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.PRON",
+     "name": "Pronouns",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.PRON.forms_case",
+       "name": "Pronoun forms and case",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PRON.reference",
+       "name": "Clear pronoun reference",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.VERB",
+     "name": "Verbs",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.VERB.present_past_simple",
+       "name": "Present and past simple",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.aspect",
+       "name": "Progressive and perfect aspect",
+       "tier": "skeleton",
+       "description": "Uses progressive and perfect forms (is doing, was doing, has done, had done) for the right meanings.",
+       "bands": {
+        "2": "Uses present progressive for actions happening now.",
+        "4": "Chooses between past simple and past progressive for an interrupted action.",
+        "6": "Uses present perfect versus past simple appropriately (I have lived / I lived).",
+        "8": "Controls past perfect and perfect progressive in complex narratives."
+       },
+       "misconceptions": [
+        {
+         "id": "perfect_with_finished_time",
+         "description": "Uses present perfect with a finished time (I have seen him yesterday)."
+        },
+        {
+         "id": "stative_progressive",
+         "description": "Uses progressive with stative verbs (I am knowing)."
+        }
+       ],
+       "observable_through": [
+        "typed:cloze",
+        "choice:grammar",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.sva",
+       "name": "Subject–verb agreement",
+       "tier": "skeleton",
+       "description": "Makes verbs agree with their subjects, including when phrases come between them.",
+       "bands": {
+        "2": "Adds -s for he/she/it in the simple present.",
+        "4": "Agrees with plural and singular noun subjects in simple sentences.",
+        "6": "Agrees across intervening phrases (The box of pencils is …).",
+        "8": "Handles indefinite pronouns, collective nouns and inverted order."
+       },
+       "misconceptions": [
+        {
+         "id": "third_person_s",
+         "description": "Omits the -s for he/she/it (She go)."
+        },
+        {
+         "id": "attraction_error",
+         "description": "Agrees with the nearest noun instead of the subject (The list of names are)."
+        }
+       ],
+       "observable_through": [
+        "typed:cloze",
+        "choice:grammar",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.modals",
+       "name": "Modal verbs",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.passive",
+       "name": "Passive voice",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.conditionals",
+       "name": "Conditionals",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.future_forms",
+       "name": "Future forms",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.VERB.gerund_infinitive",
+       "name": "Gerunds and infinitives",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.MOD",
+     "name": "Modifiers",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.MOD.adj_adv_forms",
+       "name": "Adjective and adverb forms",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.MOD.comparatives",
+       "name": "Comparatives and superlatives",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.MOD.modifier_order",
+       "name": "Order of modifiers",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.PREP",
+     "name": "Prepositions",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.PREP.time_place",
+       "name": "Prepositions of time and place",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PREP.dependent",
+       "name": "Dependent prepositions",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.CLS",
+     "name": "Clauses and sentence types",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.CLS.questions",
+       "name": "Questions",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.CLS.negatives",
+       "name": "Negatives",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.CLS.relative_clauses",
+       "name": "Relative clauses",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.CLS.reported_speech",
+       "name": "Reported speech",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.CLS.subordinate_clauses",
+       "name": "Subordinate clauses",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.GRM.PUN",
+     "name": "Punctuation and mechanics",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.GRM.PUN.capitalisation",
+       "name": "Capitalisation",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PUN.end_punctuation",
+       "name": "End punctuation",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PUN.commas",
+       "name": "Commas",
+       "tier": "skeleton",
+       "description": "Uses commas for lists, after introductory parts, around extra information and before conjunctions joining clauses.",
+       "bands": {
+        "2": "Separates items in a simple list.",
+        "4": "Uses a comma after an introductory word or phrase.",
+        "6": "Places commas around non-essential information and before a joining conjunction.",
+        "8": "Uses commas precisely to avoid ambiguity, and avoids unnecessary ones."
+       },
+       "misconceptions": [
+        {
+         "id": "comma_splice",
+         "description": "Joins two complete sentences with only a comma."
+        },
+        {
+         "id": "missing_intro_comma",
+         "description": "Omits the comma after a long introductory part."
+        }
+       ],
+       "observable_through": [
+        "choice:punctuation",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PUN.apostrophes",
+       "name": "Apostrophes",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PUN.quotation_marks",
+       "name": "Quotation marks",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.GRM.PUN.semicolons_colons",
+       "name": "Semicolons and colons",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.SEN",
+   "name": "Sentence construction",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.SEN.CMP",
+     "name": "Completeness",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SEN.CMP.fragments",
+       "name": "Complete sentences, not fragments",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.CMP.run_ons",
+       "name": "Avoids run-on sentences and comma splices",
+       "tier": "skeleton",
+       "description": "Ends or joins independent clauses correctly when writing.",
+       "bands": {
+        "2": "Separates two short, simple statements with a full stop.",
+        "4": "Correctly joins or separates clauses in everyday writing, most of the time.",
+        "6": "Controls sentence boundaries in longer writing, including with transitions.",
+        "8": "Uses boundary choices (semicolon, dash, subordination) deliberately for effect."
+       },
+       "misconceptions": [
+        {
+         "id": "comma_splice",
+         "description": "Joins two independent clauses with only a comma."
+        },
+        {
+         "id": "fused_sentence",
+         "description": "Runs two independent clauses together with no punctuation."
+        },
+        {
+         "id": "over_fragmenting",
+         "description": "Splits dependent clauses off as sentences."
+        }
+       ],
+       "observable_through": [
+        "choice:sentence_boundaries",
+        "writing"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SEN.CMB",
+     "name": "Combining",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SEN.CMB.coordination",
+       "name": "Coordination",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.CMB.subordination",
+       "name": "Subordination",
+       "tier": "skeleton",
+       "description": "Joins ideas with subordinating words (because, although, when, unless, so that) to show how they relate.",
+       "bands": {
+        "2": "Joins two ideas with because or when.",
+        "4": "Chooses a subordinator that shows the right relationship (although vs because).",
+        "6": "Varies position and type of subordinate clauses for clarity.",
+        "8": "Uses subordination to manage complex relationships between several ideas."
+       },
+       "misconceptions": [
+        {
+         "id": "wrong_relationship",
+         "description": "Uses a joining word that states the wrong relationship (because for contrast)."
+        },
+        {
+         "id": "dangling_subordinate",
+         "description": "Leaves a subordinate clause without a main clause."
+        }
+       ],
+       "observable_through": [
+        "choice:combine",
+        "writing"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.CMB.embedding",
+       "name": "Embedding (relative and participle phrases)",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SEN.VAR",
+     "name": "Variety and control",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SEN.VAR.variety",
+       "name": "Sentence variety",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.VAR.emphasis_order",
+       "name": "Word order for emphasis",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.VAR.parallelism",
+       "name": "Parallel structure",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SEN.COH",
+     "name": "Cohesion",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SEN.COH.reference_across",
+       "name": "Reference across sentences",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.COH.connectives",
+       "name": "Connectives and transitions",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SEN.PRE",
+     "name": "Precision",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SEN.PRE.concision",
+       "name": "Concision",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.SEN.PRE.ambiguity",
+       "name": "Avoids ambiguity",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.RDG",
+   "name": "Reading comprehension",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.RDG.LIT",
+     "name": "Literal comprehension",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.LIT.locate_detail",
+       "name": "Locates explicit detail",
+       "tier": "skeleton",
+       "description": "Finds information stated directly in a text.",
+       "bands": {
+        "2": "Finds a stated fact in a short, simple text.",
+        "4": "Finds details in a text of several paragraphs, ignoring distractors.",
+        "6": "Locates and matches details expressed in different words from the question.",
+        "8": "Locates precise details in dense or complex texts."
+       },
+       "misconceptions": [
+        {
+         "id": "word_matching",
+         "description": "Picks an option because it repeats words from the text, not because it answers the question."
+        }
+       ],
+       "observable_through": [
+        "choice:reading"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.LIT.sequence",
+       "name": "Sequences events",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.INF",
+     "name": "Inference",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.INF.motives",
+       "name": "Infers feelings and motives",
+       "tier": "skeleton",
+       "description": "Infers characters' feelings, motives and attitudes from what they say and do.",
+       "bands": {
+        "2": "Names an obvious feeling shown by an action (crying → sad).",
+        "4": "Infers a motive from a clear sequence of actions.",
+        "6": "Infers mixed or changing feelings from dialogue and detail.",
+        "8": "Infers subtle, ironic or unstated motives and attitudes."
+       },
+       "misconceptions": [
+        {
+         "id": "literal_only",
+         "description": "Answers with what the text states rather than what it implies."
+        }
+       ],
+       "observable_through": [
+        "choice:reading"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.INF.cause_effect",
+       "name": "Cause and effect",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.INF.implied_meaning",
+       "name": "Implied meaning",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.INF.prediction",
+       "name": "Prediction",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.SUM",
+     "name": "Main idea",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.SUM.main_idea",
+       "name": "Identifies the main idea",
+       "tier": "skeleton",
+       "description": "Identifies what a text or paragraph is mainly about, as distinct from its details.",
+       "bands": {
+        "2": "Identifies the topic of a short text.",
+        "4": "Chooses the main idea of a paragraph over a detail.",
+        "6": "States the main idea of a multi-paragraph text.",
+        "8": "Identifies implicit main ideas and the writer's central claim."
+       },
+       "misconceptions": [
+        {
+         "id": "detail_as_main",
+         "description": "Chooses an interesting detail as the main idea."
+        }
+       ],
+       "observable_through": [
+        "choice:reading"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.SUM.summarise",
+       "name": "Summarises",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.STR",
+     "name": "Structure and features",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.STR.nonfiction_structure",
+       "name": "Non-fiction text structure",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.STR.text_features",
+       "name": "Text features",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.CRF",
+     "name": "Author's craft",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.CRF.purpose_audience",
+       "name": "Purpose and audience",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.CRF.tone_mood",
+       "name": "Tone and mood",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.CRF.viewpoint",
+       "name": "Narrative viewpoint",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.CRF.figurative_effect",
+       "name": "Effect of figurative language",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.CRT",
+     "name": "Critical reading",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.CRT.fact_opinion",
+       "name": "Fact and opinion",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.CRT.evaluate_argument",
+       "name": "Evaluates argument and evidence",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.RDG.CRT.compare_texts",
+       "name": "Compares texts",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.RDG.RNG",
+     "name": "Range",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.RDG.RNG.longer_texts",
+       "name": "Sustained comprehension of longer texts",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.WRT",
+   "name": "Writing",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.WRT.TSK",
+     "name": "Task and ideas",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.TSK.task_response",
+       "name": "Responds to the task",
+       "tier": "skeleton",
+       "description": "Writes what the task asks for: the right purpose, content and length for the reader.",
+       "bands": {
+        "2": "Writes a few relevant words or sentences on the topic.",
+        "4": "Addresses the main parts of a simple task.",
+        "6": "Addresses all parts of the task with relevant, developed content.",
+        "8": "Fulfils the task fully and precisely, anticipating the reader's needs."
+       },
+       "misconceptions": [
+        {
+         "id": "off_task",
+         "description": "Writes about the topic but does not do what the task asks."
+        }
+       ],
+       "observable_through": [
+        "writing",
+        "choice:task_fit"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.TSK.idea_development",
+       "name": "Develops ideas with detail",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.WRT.ORG",
+     "name": "Organisation",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.ORG.paragraphing",
+       "name": "Paragraphing",
+       "tier": "skeleton",
+       "description": "Groups sentences into paragraphs, each with a clear focus.",
+       "bands": {
+        "2": "Writes in one block.",
+        "4": "Uses paragraphs for the main parts (opening, body, ending).",
+        "6": "Each paragraph has a clear focus, often with a topic sentence.",
+        "8": "Paragraphing supports the argument or narrative deliberately."
+       },
+       "misconceptions": [
+        {
+         "id": "no_paragraphs",
+         "description": "Writes everything as one paragraph."
+        },
+        {
+         "id": "one_sentence_paragraphs",
+         "description": "Starts a new paragraph for every sentence."
+        }
+       ],
+       "observable_through": [
+        "writing",
+        "choice:paragraph_break"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.ORG.openings_closings",
+       "name": "Openings and closings",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.ORG.sequencing",
+       "name": "Logical sequencing",
+       "tier": "core",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.WRT.GEN",
+     "name": "Genres",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.GEN.narrative",
+       "name": "Narrative writing",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.GEN.descriptive",
+       "name": "Descriptive writing",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.GEN.informative",
+       "name": "Informative writing",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.GEN.persuasive",
+       "name": "Persuasive writing",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.GEN.functional",
+       "name": "Functional writing (letters, emails, notices)",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.GEN.summary_writing",
+       "name": "Summary writing",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.WRT.STY",
+     "name": "Style",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.STY.register",
+       "name": "Audience and register",
+       "tier": "core",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.STY.voice_tone",
+       "name": "Voice and tone",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.WRT.ACC",
+     "name": "Accuracy in writing",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.ACC.grammar",
+       "name": "Grammatical accuracy in writing",
+       "tier": "skeleton",
+       "description": "Writes with grammatical accuracy in their own extended writing.",
+       "bands": {
+        "2": "Simple sentences, frequent errors that sometimes block meaning.",
+        "4": "Errors are noticeable but rarely block meaning.",
+        "6": "Mostly accurate, with errors in more complex structures.",
+        "8": "Accurate across a range of structures; errors are rare slips."
+       },
+       "misconceptions": [
+        {
+         "id": "third_person_s",
+         "description": "Omits the -s for he/she/it."
+        },
+        {
+         "id": "tense_shift",
+         "description": "Shifts tense without reason."
+        },
+        {
+         "id": "article_omission",
+         "description": "Leaves out needed articles."
+        }
+       ],
+       "observable_through": [
+        "writing",
+        "choice:proofread"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.ACC.spelling",
+       "name": "Spelling in writing",
+       "tier": "skeleton",
+       "description": "Spells accurately in their own extended writing.",
+       "bands": {
+        "2": "Many common words misspelled.",
+        "4": "Common words mostly correct; errors in longer words.",
+        "6": "Few errors, mainly in less common words.",
+        "8": "Almost no errors."
+       },
+       "misconceptions": [
+        {
+         "id": "phonetic_spelling",
+         "description": "Spells by sound (becos, freind)."
+        }
+       ],
+       "observable_through": [
+        "writing",
+        "choice:proofread"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.ACC.punctuation",
+       "name": "Punctuation in writing",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.WRT.PRC",
+     "name": "Process",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.WRT.PRC.revising",
+       "name": "Revises for meaning",
+       "tier": "planned",
+       "weight": 1
+      },
+      {
+       "id": "EN.WRT.PRC.editing",
+       "name": "Edits own work",
+       "tier": "planned",
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.LIS",
+   "name": "Listening",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.LIS.GST",
+     "name": "Gist and detail",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.LIS.GST.main_idea",
+       "name": "Main idea",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.LIS.GST.detail",
+       "name": "Specific detail",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.LIS.INF",
+     "name": "Inference",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.LIS.INF.attitude",
+       "name": "Speaker attitude and purpose",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.LIS.INF.implied",
+       "name": "Implied meaning",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.LIS.FNC",
+     "name": "Functional listening",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.LIS.FNC.instructions",
+       "name": "Follows multi-step instructions",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.LIS.FNC.note_taking",
+       "name": "Note-taking",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.LIS.PHN",
+     "name": "Sound discrimination",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.LIS.PHN.sounds_stress",
+       "name": "Sounds, stress and intonation",
+       "tier": "planned",
+       "needs": [
+        "audio"
+       ],
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EN.SPK",
+   "name": "Speaking",
+   "weight": 1,
+   "substrands": [
+    {
+     "id": "EN.SPK.PRN",
+     "name": "Pronunciation",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SPK.PRN.intelligibility",
+       "name": "Intelligibility",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      },
+      {
+       "id": "EN.SPK.PRN.stress_intonation",
+       "name": "Word stress and intonation",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SPK.FLU",
+     "name": "Fluency",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SPK.FLU.pace",
+       "name": "Pace and pausing",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SPK.ACC",
+     "name": "Accuracy and range",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SPK.ACC.accuracy_range",
+       "name": "Accuracy and range in speech",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SPK.INT",
+     "name": "Interaction",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SPK.INT.interaction",
+       "name": "Asks and answers questions, takes turns",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      }
+     ]
+    },
+    {
+     "id": "EN.SPK.PRS",
+     "name": "Organised talk",
+     "weight": 1,
+     "capabilities": [
+      {
+       "id": "EN.SPK.PRS.organised_talk",
+       "name": "Short presentations and retelling",
+       "tier": "planned",
+       "needs": [
+        "speech"
+       ],
+       "weight": 1
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "couplings": [
+  {
+   "a": "EN.WRT.ACC.grammar",
+   "b": "EN.GRM.VERB.sva",
+   "strength": 0.4
+  },
+  {
+   "a": "EN.WRT.ACC.grammar",
+   "b": "EN.GRM.VERB.aspect",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.WRT.ACC.grammar",
+   "b": "EN.GRM.NOUN.articles",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.WRT.ACC.spelling",
+   "b": "EN.FND.SPL.inflections",
+   "strength": 0.4
+  },
+  {
+   "a": "EN.SEN.CMP.run_ons",
+   "b": "EN.GRM.PUN.commas",
+   "strength": 0.35
+  },
+  {
+   "a": "EN.SEN.CMP.run_ons",
+   "b": "EN.SEN.CMB.subordination",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.RDG.INF.motives",
+   "b": "EN.RDG.SUM.main_idea",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.RDG.LIT.locate_detail",
+   "b": "EN.RDG.SUM.main_idea",
+   "strength": 0.2
+  },
+  {
+   "a": "EN.VOC.CTX.context",
+   "b": "EN.VOC.BRD.general",
+   "strength": 0.4
+  },
+  {
+   "a": "EN.VOC.MOR.suffixes",
+   "b": "EN.VOC.BRD.general",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.VOC.BRD.general",
+   "b": "EN.RDG.INF.motives",
+   "strength": 0.25
+  },
+  {
+   "a": "EN.WRT.ORG.paragraphing",
+   "b": "EN.WRT.TSK.task_response",
+   "strength": 0.3
+  },
+  {
+   "a": "EN.FND.SPL.inflections",
+   "b": "EN.VOC.MOR.suffixes",
+   "strength": 0.3
+  }
+ ],
+ "prerequisites": [
+  {
+   "capability": "EN.RDG.SUM.main_idea",
+   "requires": "EN.RDG.LIT.locate_detail"
+  },
+  {
+   "capability": "EN.SEN.CMP.run_ons",
+   "requires": "EN.GRM.PUN.commas"
+  },
+  {
+   "capability": "EN.SEN.CMB.subordination",
+   "requires": "EN.SEN.CMP.run_ons"
+  },
+  {
+   "capability": "EN.RDG.SUM.summarise",
+   "requires": "EN.RDG.SUM.main_idea"
+  },
+  {
+   "capability": "EN.WRT.ORG.paragraphing",
+   "requires": "EN.WRT.TSK.task_response"
+  },
+  {
+   "capability": "EN.SEN.CMB.embedding",
+   "requires": "EN.SEN.CMB.subordination"
+  }
+ ]
+}

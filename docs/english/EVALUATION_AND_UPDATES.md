@@ -133,6 +133,13 @@ and the reasons are always logged.
 | 10 | **Movement cap.** No single piece of evidence moves a mean by more than 0.75 bands (0.25 for inferred effects) | Accepted, but capped. The cap is logged |
 | 11 | **Status guard.** A single piece of evidence can never change a capability's stage to *demonstrated* or *mastered* on its own. Those come only from §5 of the composite rules | Enforced by construction |
 
+**Repeated and varied items (E1 final review).** The updater, not the client,
+decides whether an answer is on a *fresh* item, a *variant* (an item sharing a
+`family` with one answered before) or a *repeat* of the same item. The
+decision records it. A repeat is kept as retention evidence for that session
+only and never changes the estimate, so a remembered answer cannot inflate it.
+A variant updates the estimate like any new item and is flagged.
+
 **Every decision is recorded:** the before and after values, the reasons and
 the inferred effects. That gives three guarantees:
 

@@ -1,0 +1,6 @@
+{
+  "name": "@openpath/english-tools",
+  "private": true,
+  "type": "module",
+  "description": "Node-side tools for OpenPath English: loading, framework lock, local file store, simulation and demonstration."
+}
