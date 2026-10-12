@@ -4,6 +4,14 @@
 mathematics. **None is implemented.** Each needs your approval, and most should be decided with
 real learner data. The scheduler and the update mathematics are unchanged.*
 
+**Decisions of 12 October (E2a approval):**
+
+- The composite update mathematics stay unchanged.
+- The slip-aware models are not adopted (D).
+- The answer-pattern consistency check (B) is an E4 investigation, not a production feature.
+- Exact-posterior updating (C) is a research option only, needing separate mathematical review and
+  approval.
+
 ## A · Keep item-family variants for retention checks
 
 **Problem (E2a, gate G8).**
@@ -33,7 +41,7 @@ real learner data. The scheduler and the update mathematics are unchanged.*
 - Families must be truly equivalent, which is an educator question.
 - How many variants per family E2b should aim for depends on this decision.
 
-## B · Consistency flag for disengaged or random answering
+## B · Answer-pattern consistency check (E4 investigation, not a production feature)
 
 **Problem (E2a review).** A learner who answers at random 30% of the time is pulled down on several
 strands by more than a band. No tested response model fixes this without inflating real gaps.
@@ -48,13 +56,17 @@ strands by more than a band. No tested response model fixes this without inflati
 0.94 when every learner also makes careless slips. That is 8 or 9 of 10 runs, at a 5% false-flag
 rate. On the E1 bank it manages only 0.75–0.79.
 
+**Requirement (12 October).** The check may only flag a pattern of answers as *potentially
+unreliable evidence*. It must not claim to know why: guessing, distraction, misreading or an
+unusual but genuine profile all look alike. It does not change estimates.
+
 **Questions.**
 
 - The threshold must come from real learners: adaptive testing shifts *l_z* upwards.
 - What the product shows the learner and the guardian.
 - Whether to pause adaptive selection while a profile is flagged.
 
-## C · Exact-posterior update for the same response model
+## C · Exact-posterior update for the same response model (research option only)
 
 **Finding (E2a review).** The one-step update moves the estimate a long way after a single wrong
 answer on informative items, and slightly overstates how much each answer tells us.
@@ -71,9 +83,11 @@ normal. This is a change to the update mathematics.
 - forgetter detection −0.3 capabilities;
 - with real slips in the simulator, its M1 gain disappears.
 
-**Question.** Decide with real response data, alongside difficulty calibration.
+**Status (12 October).** A research option only. Any change to the update mathematics needs a
+separate mathematical review and your approval. If it is ever taken further, decide with real
+response data, alongside difficulty calibration.
 
-## D · Slip-aware response model: evaluated, not recommended
+## D · Slip-aware response model: evaluated, not adopted (decision of 12 October)
 
 **Result.** A four-parameter model with slip 0.05 or 0.10:
 

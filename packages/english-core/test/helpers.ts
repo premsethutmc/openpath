@@ -1,9 +1,10 @@
 import { type Context, type EvidenceEvent, type LedgerEvent, Ledger, type QualificationEvent, type WritingTask } from "../src/index.ts";
-import { loadContext } from "../../../tools/english/load.ts";
+import { FROZEN_FRAMEWORK, loadContext } from "../../../tools/english/load.ts";
 
 let cached: Context | null = null;
 export function ctx(): Context {
-  return (cached ??= loadContext({ allowCandidateAnchors: true }));
+  // E1 acceptance tests are defined on framework 0.1.0 (the frozen 17-capability view).
+  return (cached ??= loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK }));
 }
 
 export const T = (minute: number, day = 0) => new Date(Date.UTC(2026, 9, 12, 10, 30) + day * 86_400_000 + minute * 60_000).toISOString();

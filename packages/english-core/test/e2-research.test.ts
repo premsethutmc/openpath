@@ -6,21 +6,26 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { binaryUpdate } from "../src/index.ts";
-import { REPO, loadContext } from "../../../tools/english/load.ts";
+import { FROZEN_FRAMEWORK, REPO, loadContext } from "../../../tools/english/load.ts";
 import { exactUpdate, slipUpdate } from "../../../tools/english/research/slip.ts";
 import { fingerprint, runAll } from "../../../tools/english/sim/simulate.ts";
 import { LEARNERS } from "../../../tools/english/sim/learners.ts";
 import { runLearner } from "../../../tools/english/sim/run.ts";
 
-test("the frozen simulation on the preserved E1 bank reproduces E1's results exactly", async () => {
-  const baseline = JSON.parse(readFileSync(join(REPO, "tools", "english", "baselines", "e1-simulation-results.json"), "utf8"));
-  const rs = await runAll(loadContext({ allowCandidateAnchors: true, bank: "e1" }));
-  assert.equal(fingerprint(rs), baseline.fingerprint);
-  assert.equal(loadContext({ bank: "e1" }).content.items.size, 126);
-});
+for (const [bank, file, items, passing] of [
+  ["e1", "e1-simulation-results.json", 126, ["M4", "M5", "M6", "M7", "M8"]],
+  ["e2a", "e2a-simulation-results.json", 250, ["M2", "M4", "M5", "M7", "M8"]],
+] as const)
+  test(`the frozen simulation on the preserved ${bank.toUpperCase()} bank reproduces its results exactly, with its recorded passes and misses`, async () => {
+    const baseline = JSON.parse(readFileSync(join(REPO, "tools", "english", "baselines", file), "utf8"));
+    const ctx = loadContext({ allowCandidateAnchors: true, bank, framework: FROZEN_FRAMEWORK });
+    assert.equal(ctx.content.items.size, items);
+    assert.equal(fingerprint(await runAll(ctx)), baseline.fingerprint);
+    assert.deepEqual(baseline.measures.filter((m: { pass: boolean }) => m.pass).map((m: { id: string }) => m.id), passing);
+  });
 
 test("the research response-model seam is off in production and changes nothing when unset", async () => {
-  const ctx = loadContext({ allowCandidateAnchors: true });
+  const ctx = loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK });
   assert.equal(ctx.researchBinaryUpdate, undefined);
   const goal = ctx.content.goals.get("overall")!;
   const o = { goal, sessionDays: [0, 1, 8], itemsPerSession: 15, seed: 3, evaluatorNoise: 0.7 };
