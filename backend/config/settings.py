@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "learners",
     "evidence",
+    "evaluation",
 ]
 
 MIDDLEWARE = [
@@ -79,4 +80,8 @@ REST_FRAMEWORK = {
 OPENPATH_CURRICULUM = REPO_DIR / "shared" / "curriculum" / "math-early-number.json"
 OPENPATH_TRUST_CLIENT_CLOCK = os.environ.get("OPENPATH_TRUST_CLIENT_CLOCK", "1" if DEBUG else "0") == "1"
 OPENPATH_CONSENT_POLICY_VERSION = "2026-10-prototype"
+# E3a free-form evaluation gateway. Only "disabled" (default), "mock" and "replay" exist; there is no live
+# provider adapter, and configuring one fails at start-up (decision of 12 October; E3b needs approval).
+OPENPATH_EVALUATION_ADAPTER = os.environ.get("OPENPATH_EVALUATION_ADAPTER", "disabled")
+OPENPATH_EVALUATION_REPLAY_FILE = os.environ.get("OPENPATH_EVALUATION_REPLAY_FILE") or None
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000

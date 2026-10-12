@@ -183,4 +183,12 @@ def export_learner(learner: Learner) -> dict:
             for s in learner.sessions.order_by("observed_at", "id")
         ],
         "profile": learner_profile(learner),
+        "purpose_consents": list(
+            learner.purpose_consents.values("purpose", "granted", "given_by", "policy_version", "recorded_at")
+        ),
+        "evaluations": list(
+            learner.evaluations.values(
+                "protocol", "item_id", "item_version", "fingerprint", "request", "adapter", "status", "reason", "proposal", "created_at"
+            )
+        ),
     }
