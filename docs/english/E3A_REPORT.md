@@ -78,7 +78,7 @@ Retired short-answer versions are supported in the same way as code items (E2b).
 - one to three key points, and model answers;
 - three candidate anchors: one prompt anchor and two qualification anchors.
 
-**Guards.** 30 items have deterministic guards (for example *dogs barks* rules out "uses the plural
+**Guards.** 29 items have deterministic guards (for example *dogs barks* rules out "uses the plural
 verb").
 
 - Content validation proves that no guard rules out an item's own model answer or agreed anchor
