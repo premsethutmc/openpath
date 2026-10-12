@@ -1,5 +1,11 @@
 # OpenPath documentation
 
+> **Current direction (12 Oct 2026):** the first product is an adaptive
+> English-learning app for ages 10–15. Start with
+> [`english/README.md`](english/README.md). The documents below set out the
+> platform principles, which still apply. Their V1 plan and M1 are paused or
+> superseded.
+
 Suggested reading order for the product owner:
 
 1. [`PRODUCT_VISION.md`](PRODUCT_VISION.md): what OpenPath is, in my words, for you to check.
