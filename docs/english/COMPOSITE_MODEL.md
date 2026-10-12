@@ -108,9 +108,16 @@ flowchart BT
     sum --> rdg
 ```
 
-- **A parent is the weighted average of its children.** Its uncertainty
-  combines the children's, so a parent with untested children shows wide
-  uncertainty.
+- **A parent is the weighted average of its children.** Its range is a
+  *conservative summary*, not a calibrated measurement. It is the weighted
+  average of the children's sds, which is what the sd would be if every
+  child's error pointed the same way.
+- **Why not combine them as independent?** That was the original rule, and it
+  was too narrow. Errors within a strand share causes: the pull of the
+  starting value, and coupled updates. In simulation, its "80%" ranges held
+  the true value only 57–67% of the time (E1 review, 12 Oct).
+- **Only capability-level estimates are measurements.** Aggregates carry
+  `calibrated: false` in the data.
 - **Weights come from the framework.** They are visible and changeable.
 - **Learner and guardian views show the shape across strands, with
   uncertainty.** An overall English figure exists for summaries only.

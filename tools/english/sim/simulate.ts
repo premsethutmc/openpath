@@ -140,7 +140,7 @@ export async function faultInjection(ctx: Context, results: RunResult[]): Promis
       const evId = `${r.learner.id}:fault:${task.id}`;
       const evidence: LedgerEvent = { kind: "evidence", id: evId, at: when, session: `${r.learner.id}:fault`, item: { id: task.id, version: task.version }, response: { kind: "writing", text } };
       const before = Ledger.rebuild(ctx, r.learner.id, [...base, evidence]);
-      const req = buildEvaluationRequest(task as WritingTask, evId, text, before.composite, ctx.index, when);
+      const req = buildEvaluationRequest(task as WritingTask, evId, text, before.composite, ctx.index, when, "candidates");
       for (const c of CASES) {
         if (c === "inflate_spelling" && spellingCeiling(misspellingRate(text, ctx.content).rate) === null) continue; // only a fault where code can see the misspellings
         const extra: LedgerEvent[] = [];
@@ -150,7 +150,7 @@ export async function faultInjection(ctx: Context, results: RunResult[]): Promis
         else if (c === "drifting") {
           evaluatorId = "mock:drifting";
           const drifter = simEvaluator(ctx, null, () => day, { id: evaluatorId, noise: 0.7, seed: 7, bias: 1.5 });
-          extra.push(await qualify(drifter, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, when), when, { drifting: true }));
+          extra.push(await qualify(drifter, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, when), when, { drifting: true, candidateAnchors: true }));
         } else faults = () => [c];
         const ev = simEvaluator(ctx, r.learner, () => day, { id: evaluatorId, noise: PROTOCOL.evaluatorNoise, seed: PROTOCOL.seed, faults });
         const pid = `p:${evId}:${c}`;

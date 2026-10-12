@@ -3,12 +3,12 @@ import { loadContext } from "../../../tools/english/load.ts";
 
 let cached: Context | null = null;
 export function ctx(): Context {
-  return (cached ??= loadContext());
+  return (cached ??= loadContext({ allowCandidateAnchors: true }));
 }
 
 export const T = (minute: number, day = 0) => new Date(Date.UTC(2026, 9, 12, 10, 30) + day * 86_400_000 + minute * 60_000).toISOString();
 
-export const qualified = (id = "eval:test", noise = 0.6): QualificationEvent => ({ kind: "qualification", id: `q:${id}`, at: T(-1), evaluator: id, noise, bias: 0, qualified: true, drifting: false, detail: {} });
+export const qualified = (id = "eval:test", noise = 0.6): QualificationEvent => ({ kind: "qualification", id: `q:${id}`, at: T(-1), evaluator: id, noise, bias: 0, qualified: true, drifting: false, anchor_set: "trusted", detail: {} });
 
 export const EMAIL = "Dear Mrs. Rao, I would like to ask you to order a book called The Secret of the Stars. It is about two children who build a telescope. I want to read it because I love space. Many of my friends also like science, so I think they will borrow it too. Thank you very much for your help. Yours sincerely, Ravi";
 

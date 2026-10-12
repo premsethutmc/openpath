@@ -23,9 +23,10 @@ export function loadBundle(): ContentBundle {
   };
 }
 
-export function loadContext(): Context {
+/** `allowCandidateAnchors` is for the simulator, demo and tests only: no educator-scored anchors exist yet (D-4). */
+export function loadContext(opts: { allowCandidateAnchors?: boolean } = {}): Context {
   const index = indexFramework(loadFramework());
-  return { index, content: indexContent(loadBundle(), index) };
+  return { index, content: indexContent(loadBundle(), index), allowCandidateAnchors: opts.allowCandidateAnchors ?? false };
 }
 
 export function readText(path: string): string {

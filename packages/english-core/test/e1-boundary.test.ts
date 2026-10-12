@@ -32,13 +32,13 @@ test("E1-7 swapping the stand-in evaluator for a replay of its recordings gives 
   for (const t of tasks) for (const a of t.anchors) await record(anchorRequest(c, t, a.id, T(0)));
   const replay = replayEvaluator("swap", recordings);
   const build = async (ev: typeof mock) => {
-    const events: LedgerEvent[] = [{ ...(await qualify(ev, tasks, (t, id) => anchorRequest(c, t, id, T(0)), T(-1))), evaluator: "evaluator", id: "q" }];
+    const events: LedgerEvent[] = [{ ...(await qualify(ev, tasks, (t, id) => anchorRequest(c, t, id, T(0)), T(-1), { candidateAnchors: true })), evaluator: "evaluator", id: "q" }];
     let ledger = Ledger.rebuild(c, "x", events);
     for (const [i, t] of tasks.entries()) {
       const text = writeResponse(learner, t, 0);
       const evidence: LedgerEvent = { kind: "evidence", id: `w${i}`, at: T(i * 2), session: "s", item: { id: t.id, version: t.version }, response: { kind: "writing", text } };
       ledger = Ledger.rebuild(c, "x", [...ledger.events, evidence]);
-      const req = buildEvaluationRequest(t, `w${i}`, text, ledger.composite, c.index, T(i * 2));
+      const req = buildEvaluationRequest(t, `w${i}`, text, ledger.composite, c.index, T(i * 2), "candidates");
       const body = ev === mock ? await record(req) : await ev.evaluate(req);
       ledger = Ledger.rebuild(c, "x", [...ledger.events, { kind: "proposal", id: `p${i}`, at: T(i * 2 + 1), evidence: `w${i}`, evaluator: { id: "evaluator" }, body }]);
     }
@@ -56,8 +56,32 @@ test("E1-7 the evaluation request carries standards, anchors, the response and c
   const ledger = new Ledger(c, "learner-123");
   const req = buildEvaluationRequest(t, "w1", "Email me at ravi@example.com or call 98765 43210. I want a book.", ledger.composite, c.index, T(0));
   assert.ok(req.targets.every((x) => Object.keys(x.band_descriptors).length >= 3 && x.criteria.length && typeof x.current.mean === "number"));
-  assert.ok(req.anchors.length >= 2 && req.anchors.length <= 3);
+  // by default only trusted (educator-scored) anchors are sent; none exist yet (D-4)
+  assert.equal(req.anchor_set, "trusted");
+  assert.ok(req.anchors.every((a) => a.trusted));
+  const dev = buildEvaluationRequest(t, "w1", "I want a book.", ledger.composite, c.index, T(0), "candidates");
+  assert.ok(dev.anchors.length >= 2 && dev.anchors.length <= 3);
   assert.doesNotMatch(JSON.stringify(req), /learner-123|ravi@example\.com|98765/);
   assert.match(req.response.text, /\[removed\]/);
   assert.equal(parseProposal({}).ok, false);
+});
+
+test("E1-7 fail closed: outside development, an evaluator qualified only on unreviewed candidate anchors cannot change a composite", async () => {
+  const dev = ctx();
+  const prod = { ...dev, allowCandidateAnchors: false };
+  const learner = LEARNERS[0];
+  const mock = simEvaluator(dev, learner, () => 0, { noise: 0.5, seed: 1 });
+  const q = await qualify(mock, writingTasks(dev), (t, id) => anchorRequest(dev, t, id, T(0)), T(-1), { candidateAnchors: true });
+  assert.equal(q.anchor_set, "candidates");
+  const strict = await qualify(mock, writingTasks(dev), (t, id) => anchorRequest(dev, t, id, T(0)), T(-1));
+  assert.equal(strict.qualified, false, "no trusted anchors exist yet, so strict qualification cannot pass");
+  const t = writingTasks(dev)[0];
+  const text = writeResponse(learner, t, 0);
+  const evidence: LedgerEvent = { kind: "evidence", id: "w", at: T(1), session: "s", item: { id: t.id, version: t.version }, response: { kind: "writing", text } };
+  const body = await mock.evaluate(buildEvaluationRequest(t, "w", text, new Ledger(dev, "x").composite, dev.index, T(1), "candidates"));
+  const events: LedgerEvent[] = [q, evidence, { kind: "proposal", id: "p", at: T(2), evidence: "w", evaluator: { id: mock.id }, body }];
+  const held = Ledger.rebuild(prod, "x", events).decisions.filter((d) => d.source === "p");
+  assert.ok(held.length > 0 && held.every((d) => d.verdict === "held"));
+  assert.match(held[0].reasons.join(), /trusted \(educator-scored\) anchors are required/);
+  assert.ok(Ledger.rebuild(dev, "x", events).decisions.some((d) => d.source === "p" && d.verdict === "accepted"), "the same proposal is accepted in development mode");
 });

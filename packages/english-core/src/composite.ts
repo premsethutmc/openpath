@@ -238,16 +238,27 @@ export interface AggregateView {
   id: string;
   name: string;
   mean: number;
+  /**
+   * A conservative summary range, NOT a calibrated measurement: the weighted
+   * mean of the leaves' sds, i.e. what the sd would be if every leaf's error
+   * pointed the same way. Errors within a strand are correlated (they share the
+   * pull of the starting value and coupled updates), so the independence
+   * formula was too narrow: its "80%" ranges held the true value only 57–67%
+   * of the time in simulation. This bound held it 77–90% of the time.
+   */
   sd: number;
+  /** Always false: aggregates are summaries for orientation, not measurements to report as calibrated. */
+  calibrated: false;
+  method: "weighted mean of leaves; sd = weighted mean of leaf sds (errors assumed fully correlated)";
   /** Leaves that count towards this value / all leaves under it. */
   coverage: { counted: number; total: number; assessed: number };
 }
 
 /**
- * Values for sub-strands, strands and the root, computed from leaves (weighted
- * mean; uncertainty combined assuming independence). Scope "specified" counts
- * only capabilities specified in this framework version; "all" counts every leaf.
- * Returns null for a node with nothing to count.
+ * Values for sub-strands, strands and the root, computed from leaves. Scope
+ * "specified" counts only capabilities specified in this framework version;
+ * "all" counts every leaf. Returns null for a node with nothing to count.
+ * Only leaf estimates are measurements; see AggregateView.sd.
  */
 export function aggregate(composite: Composite, index: FrameworkIndex, now: string, scope: "specified" | "all" = "specified"): Map<string, AggregateView | null> {
   const leaves = new Map(index.leafIds.map((id) => [id, leafView(composite, index, id, now)]));
@@ -267,8 +278,16 @@ export function aggregate(composite: Composite, index: FrameworkIndex, now: stri
     }
     const W = counted.reduce((s, x) => s + x.w, 0);
     const mean = counted.reduce((s, x) => s + (x.w / W) * leaves.get(x.id)!.mean, 0);
-    const variance = counted.reduce((s, x) => s + (x.w / W) ** 2 * leaves.get(x.id)!.sd ** 2, 0);
-    out.set(id, { id, name: index.names.get(id)!, mean, sd: Math.sqrt(variance), coverage: { counted: counted.length, total: all.length, assessed } });
+    const sd = counted.reduce((s, x) => s + (x.w / W) * leaves.get(x.id)!.sd, 0);
+    out.set(id, {
+      id,
+      name: index.names.get(id)!,
+      mean,
+      sd,
+      calibrated: false,
+      method: "weighted mean of leaves; sd = weighted mean of leaf sds (errors assumed fully correlated)",
+      coverage: { counted: counted.length, total: all.length, assessed },
+    });
   }
   return out;
 }

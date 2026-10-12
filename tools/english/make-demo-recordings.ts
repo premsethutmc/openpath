@@ -11,7 +11,7 @@ import { buildEvaluationRequest, createComposite, firstSentence, requestFingerpr
 import { ASHA_EMAIL } from "./demo-data.ts";
 import { CONTENT, loadContext } from "./load.ts";
 
-const ctx = loadContext();
+const ctx = loadContext({ allowCandidateAnchors: true });
 const tasks = [...ctx.content.items.values()].filter((i) => i.kind === "writing") as WritingTask[];
 const blank = createComposite(ctx.index, "recording");
 const at = "2026-10-12T10:00:00.000Z";
@@ -22,7 +22,7 @@ const recordings: Record<string, unknown> = {
 let k = 0;
 for (const task of tasks)
   for (const anchor of task.anchors) {
-    const req = buildEvaluationRequest(task, `anchor:${anchor.id}`, anchor.text, blank, ctx.index, at);
+    const req = buildEvaluationRequest(task, `anchor:${anchor.id}`, anchor.text, blank, ctx.index, at, "candidates");
     recordings[requestFingerprint(req)] = {
       evidence_id: `anchor:${anchor.id}`,
       item: { id: task.id, version: task.version },
@@ -39,7 +39,7 @@ for (const task of tasks)
     };
   }
 const email = tasks.find((t) => t.id === "wr.email.librarian")!;
-const req = buildEvaluationRequest(email, "asha:writing", ASHA_EMAIL, blank, ctx.index, at);
+const req = buildEvaluationRequest(email, "asha:writing", ASHA_EMAIL, blank, ctx.index, at, "candidates");
 recordings[requestFingerprint(req)] = {
   evidence_id: "asha:writing",
   item: { id: email.id, version: email.version },

@@ -25,6 +25,8 @@ export interface EvaluationRequest {
     misconceptions: { id: string; description: string }[];
     current: { mean: number; sd: number; misconceptions: string[] };
   }[];
+  /** Trusted anchors only, unless the caller explicitly allows OpenPath's unreviewed candidates (development and simulation). */
+  anchor_set: "trusted" | "candidates";
   anchors: { id: string; trusted: boolean; scores: Record<CapabilityId, number>; text: string }[];
   response: { text: string };
 }
@@ -71,6 +73,7 @@ export function buildEvaluationRequest(
   composite: Composite,
   index: FrameworkIndex,
   now: string,
+  anchorSet: "trusted" | "candidates" = "trusted",
 ): EvaluationRequest {
   const targets = task.targets.map((cap) => {
     const c = index.leaves.get(cap)!;
@@ -90,7 +93,8 @@ export function buildEvaluationRequest(
     return v.reduce((s, x) => s + x, 0) / v.length;
   };
   // Up to three anchors around the learner's current level, shown low to high.
-  const anchors = [...task.anchors]
+  const anchors = task.anchors
+    .filter((a) => a.trusted || anchorSet === "candidates")
     .sort((a, b) => Math.abs(avg(a) - centre) - Math.abs(avg(b) - centre) || a.id.localeCompare(b.id))
     .slice(0, 3)
     .sort((a, b) => avg(a) - avg(b))
@@ -98,6 +102,7 @@ export function buildEvaluationRequest(
   return {
     request_id: `req:${evidenceId}`,
     prompt_version: PROMPT_VERSION,
+    anchor_set: anchorSet,
     task: { id: task.id, version: task.version, genre: task.genre, prompt: task.prompt, min_words: task.min_words, max_words: task.max_words, band_window: task.band_window },
     targets,
     anchors,

@@ -24,7 +24,7 @@ export const at = (day: number, minute = 0): string => new Date(T0 + day * 86_40
 /** A request for scoring an anchor response (used to qualify evaluators). */
 export function anchorRequest(ctx: Context, task: WritingTask, anchorId: string, when: string): EvaluationRequest {
   const anchor = task.anchors.find((a) => a.id === anchorId)!;
-  return buildEvaluationRequest(task, `anchor:${anchorId}`, anchor.text, createComposite(ctx.index, "anchor"), ctx.index, when);
+  return buildEvaluationRequest(task, `anchor:${anchorId}`, anchor.text, createComposite(ctx.index, "anchor"), ctx.index, when, "candidates");
 }
 
 export function writingTasks(ctx: Context): WritingTask[] {
@@ -87,7 +87,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
     events.push(e);
     ledger.apply(e);
   };
-  if (o.writing !== false) push(await qualify(evaluator, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, at(day)), at(day, -1)));
+  if (o.writing !== false) push(await qualify(evaluator, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, at(day)), at(day, -1), { candidateAnchors: true }));
 
   const seen = new Set<string>();
   const recent: { item: string; targets: string[]; format: string }[] = [];
@@ -129,7 +129,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
       } else {
         const text = writeResponse(learner, item, d);
         push({ kind: "evidence", id: evId, at: now, session: `${learner.id}:s${s}`, item: { id: item.id, version: item.version }, response: { kind: "writing", text } });
-        const req = buildEvaluationRequest(item, evId, text, ledger.composite, ctx.index, now);
+        const req = buildEvaluationRequest(item, evId, text, ledger.composite, ctx.index, now, "candidates");
         push({ kind: "proposal", id: `p:${evId}`, at: now, evidence: evId, evaluator: { id: evaluator.id, model: evaluator.model }, body: await evaluator.evaluate(req) });
         writingThisSession++;
       }

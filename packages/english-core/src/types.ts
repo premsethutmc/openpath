@@ -220,6 +220,8 @@ export interface QualificationEvent {
   bias: number;
   qualified: boolean;
   drifting: boolean;
+  /** Which anchors it was measured against: educator-scored (trusted) or OpenPath's unreviewed candidates. */
+  anchor_set: "trusted" | "candidates";
   detail: Record<string, { n: number; noise: number; bias: number }>;
 }
 

@@ -46,7 +46,7 @@ const f = (x: number) => x.toFixed(2);
 const pad = (s: string, n: number) => (s.length >= n ? s.slice(0, n - 1) + "…" : s + " ".repeat(n - s.length));
 
 export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Promise<DemoResult> {
-  const ctx = loadContext();
+  const ctx = loadContext({ allowCandidateAnchors: true }); // no educator-scored anchors exist yet (D-4)
   const dir = opts.dir ?? join(REPO, "tools", "english", "out", "demo");
   rmSync(dir, { recursive: true, force: true });
   const lines: string[] = [];
@@ -62,8 +62,8 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   say("Two invented learners. The engine never sees their true levels; it only sees their answers.\n");
 
   // 1 · new learners, with an evaluator qualified against anchors
-  const qual = await qualify(evaluator, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, at(0, -1)), at(0, -1));
-  say(`1 · Evaluator "${evaluator.id}" scored ${Object.values(qual.detail).reduce((s, d) => s + d.n, 0)} anchor judgements: noise ${f(qual.noise)}, bias ${f(qual.bias)} → ${qual.qualified ? "qualified" : "NOT qualified"}`);
+  const qual = await qualify(evaluator, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, at(0, -1)), at(0, -1), { candidateAnchors: true });
+  say(`1 · Evaluator "${evaluator.id}" scored ${Object.values(qual.detail).reduce((s, d) => s + d.n, 0)} judgements on candidate anchors (not yet educator-scored): noise ${f(qual.noise)}, bias ${f(qual.bias)} → ${qual.qualified ? "qualified" : "NOT qualified"}`);
   const stores: Record<string, FileStore> = {};
   const ledgers: Record<string, Ledger> = {};
   for (const l of [ASHA, BEN]) {
@@ -99,7 +99,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
 
   // 3 · profiles side by side
   const now1 = at(1, 30);
-  say("3 · Composites after the diagnostic (strand values from the 17 assessed capabilities; mean ± sd)");
+  say("3 · Composites after the diagnostic. Strand values summarise the 17 assessed capabilities: mean ± a conservative summary range, not a calibrated measurement");
   say(`   ${pad("", 14)}${pad("Asha", 16)}${pad("Ben", 16)}`);
   const SHORT: Record<string, string> = { "EN.FND": "Foundations", "EN.VOC": "Vocabulary", "EN.GRM": "Grammar", "EN.SEN": "Sentences", "EN.RDG": "Reading", "EN.WRT": "Writing" };
   const ag = { asha: aggregate(ledgers.asha.composite, ctx.index, now1), ben: aggregate(ledgers.ben.composite, ctx.index, now1) };
@@ -112,7 +112,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const writing: LedgerEvent = { kind: "evidence", id: "asha:writing", at: nowW, session: "asha:s1", item: { id: task.id, version: task.version }, response: { kind: "writing", text: ASHA_EMAIL } };
   await append(stores.asha, ledgers.asha, writing);
   const before = structuredClone(ledgers.asha.composite);
-  const req = buildEvaluationRequest(task, "asha:writing", ASHA_EMAIL, ledgers.asha.composite, ctx.index, nowW);
+  const req = buildEvaluationRequest(task, "asha:writing", ASHA_EMAIL, ledgers.asha.composite, ctx.index, nowW, "candidates");
   say(`4 · Asha writes: "${task.prompt.split("(")[0].trim()}"`);
   say(`   Evaluation request ${req.prompt_version}: ${req.targets.length} target capabilities with band descriptors and rubric criteria, ${req.anchors.length} anchors (${req.anchors.map((a) => a.id).join(", ")}),`);
   say(`   her current estimates (e.g. run-ons ${req.targets.find((t) => t.capability === "EN.SEN.CMP.run_ons")!.current.mean} ± ${req.targets.find((t) => t.capability === "EN.SEN.CMP.run_ons")!.current.sd}), and her text with identifiers removed. No name or learner id is sent.\n`);

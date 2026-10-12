@@ -111,12 +111,14 @@ export async function qualify(
   tasks: WritingTask[],
   buildAnchorRequest: (task: WritingTask, anchorId: string) => EvaluationRequest,
   at: string,
-  opts: { trustedOnly?: boolean; drifting?: boolean } = {},
+  opts: { candidateAnchors?: boolean; drifting?: boolean } = {},
 ): Promise<QualificationEvent> {
   const diffs = new Map<string, number[]>();
+  let usedCandidates = false;
   for (const task of tasks)
     for (const anchor of task.anchors) {
-      if (opts.trustedOnly && !anchor.trusted) continue;
+      if (!opts.candidateAnchors && !anchor.trusted) continue;
+      if (!anchor.trusted) usedCandidates = true;
       const parsed = parseProposal(await evaluator.evaluate(buildAnchorRequest(task, anchor.id)));
       if (!parsed.ok) continue;
       for (const j of parsed.proposal.judgements) {
@@ -146,6 +148,7 @@ export async function qualify(
     bias,
     qualified: withinLimits,
     drifting: opts.drifting ? !withinLimits : false,
+    anchor_set: usedCandidates ? "candidates" : "trusted",
     detail,
   };
 }

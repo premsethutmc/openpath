@@ -6,7 +6,7 @@ import { CRITERIA, PROTOCOL } from "./criteria.ts";
 import { renderReport } from "./report.ts";
 import { fingerprint, measures, runAll } from "./simulate.ts";
 
-const ctx = loadContext();
+const ctx = loadContext({ allowCandidateAnchors: true }); // no educator-scored anchors exist yet (D-4)
 const first = await runAll(ctx);
 const second = await runAll(ctx);
 const fps: [string, string] = [fingerprint(first), fingerprint(second)];

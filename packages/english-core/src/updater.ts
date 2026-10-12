@@ -21,6 +21,12 @@ import type { Composite, Decision, EvidenceEvent, LedgerEvent, ProposalEvent, Qu
 export interface Context {
   index: FrameworkIndex;
   content: ContentIndex;
+  /**
+   * Development only: accept evaluators qualified against OpenPath's unreviewed
+   * candidate anchors (the simulator and demo). Off by default, so a real
+   * deployment fails closed until educator-scored anchors exist.
+   */
+  allowCandidateAnchors?: boolean;
 }
 
 /** Capabilities with a code-checkable signal (check 6). */
@@ -235,6 +241,10 @@ export class Ledger {
       // Check 7: the evaluator must be qualified against anchors and not drifting.
       if (!q || !q.qualified || q.drifting) {
         hold(`check 7: evaluator ${ev.evaluator.id} is ${!q ? "not qualified against anchors" : q.drifting ? "drifting from the anchors" : "not qualified"}`);
+        continue;
+      }
+      if (q.anchor_set !== "trusted" && !this.ctx.allowCandidateAnchors) {
+        hold(`check 7: evaluator ${ev.evaluator.id} was qualified only against unreviewed candidate anchors; trusted (educator-scored) anchors are required`);
         continue;
       }
       // Check 9: very surprising judgements need a second opinion.

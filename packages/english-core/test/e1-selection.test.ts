@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { Ledger, recommend } from "../src/index.ts";
-import { runAll, STRANDS, estimate } from "../../../tools/english/sim/simulate.ts";
+import { Ledger, aggregate, leafView, recommend } from "../src/index.ts";
+import { runAll, STRANDS, estimate, trueValue } from "../../../tools/english/sim/simulate.ts";
 import { nextAfterTwoSessions } from "../../../tools/english/sim/report.ts";
 import { runDemo } from "../../../tools/english/demo.ts";
 import { ctx } from "./helpers.ts";
@@ -26,16 +26,43 @@ test("E1-8 selection is repeatable and every recommendation is explained", async
 });
 
 test("E1-13 two learners with different English capabilities get different composites and different next activities (simulation: L3 vs L4)", async () => {
+  // Compared at capability level, where estimates are calibrated measurements (strand values are summaries only).
   const c = ctx();
   const results = await runAll(c);
   const [l3, l4] = ["L3", "L4"].map((id) => results.find((r) => r.learner.id === id)!);
-  const g3 = estimate(c, l3, "EN.GRM", l3.sessions[1].composite, l3.sessions[1].now);
-  const g4 = estimate(c, l4, "EN.GRM", l4.sessions[1].composite, l4.sessions[1].now);
-  assert.ok(g3.mean - g4.mean > g3.sd + g4.sd, `grammar after 40 items: L3 ${g3.mean.toFixed(2)}±${g3.sd.toFixed(2)} vs L4 ${g4.mean.toFixed(2)}±${g4.sd.toFixed(2)}`);
+  const at40 = (r: (typeof results)[number], cap: string) => leafView(r.sessions[1].composite, c.index, cap, r.sessions[1].now);
+  const separated = (cap: string, higher: typeof l3, lower: typeof l3) => {
+    const h = at40(higher, cap);
+    const l = at40(lower, cap);
+    assert.ok(h.mean - l.mean > h.sd + l.sd, `${cap} after 40 items: ${h.mean.toFixed(2)}±${h.sd.toFixed(2)} vs ${l.mean.toFixed(2)}±${l.sd.toFixed(2)}`);
+  };
+  separated("EN.GRM.VERB.sva", l3, l4); // L4 has weak grammar
+  separated("EN.WRT.ORG.paragraphing", l4, l3); // L3 is the weak writer
   const n3 = nextAfterTwoSessions(c, l3);
   const n4 = nextAfterTwoSessions(c, l4);
   assert.notEqual(n3.choice!.item, n4.choice!.item);
   assert.notDeepEqual(STRANDS.map((s) => estimate(c, l3, s).mean), STRANDS.map((s) => estimate(c, l4, s).mean));
+});
+
+test("strand values are labelled as uncalibrated summaries, and their ranges are not narrower than the evidence supports", async () => {
+  const c = ctx();
+  let inside = 0;
+  let n = 0;
+  for (const seed of [20261012, 7]) {
+    const results = await runAll(c, seed);
+    for (const r of results) {
+      const s = r.sessions[1];
+      const ag = aggregate(s.composite, c.index, s.now);
+      for (const st of STRANDS) {
+        const a = ag.get(st)!;
+        assert.equal(a.calibrated, false);
+        n++;
+        if (Math.abs(trueValue(r.learner, st, s.day) - a.mean) <= 1.2816 * a.sd) inside++;
+      }
+    }
+  }
+  // The independence formula held the truth in only 57-67% of "80%" ranges; the conservative bound must not fall back to that.
+  assert.ok(inside / n >= 0.75, `strand coverage ${(100 * inside / n).toFixed(0)}%`);
 });
 
 test("E1-13 and E1-10 the demonstration: Asha and Ben differ, the invented quote is rejected, state reloads and undo is exact, all offline", async () => {

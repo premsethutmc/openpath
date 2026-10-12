@@ -33,7 +33,7 @@ function dotPlot(rows: Row[], caption: string): string {
       const y = top + i * rowH + rowH / 2;
       const lo = x(r.mean - Z80 * r.sd);
       const hi = x(r.mean + Z80 * r.sd);
-      const tip = `${r.label}: estimate ${r.mean.toFixed(2)} ± ${r.sd.toFixed(2)} (80% range ${(r.mean - Z80 * r.sd).toFixed(1)}–${(r.mean + Z80 * r.sd).toFixed(1)}), true ${r.truth.toFixed(1)}`;
+      const tip = `${r.label}: estimate ${r.mean.toFixed(2)} ± ${r.sd.toFixed(2)} (range ${(r.mean - Z80 * r.sd).toFixed(1)}–${(r.mean + Z80 * r.sd).toFixed(1)}), true ${r.truth.toFixed(1)}`;
       return `<g class="row"><title>${esc(tip)}</title><rect x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" class="hit"/>
 <text x="0" y="${y + 4}" class="lab">${esc(r.label)}</text>
 <line x1="${lo}" x2="${hi}" y1="${y}" y2="${y}" class="range"/>
@@ -181,13 +181,13 @@ details ul, details ol { margin: 6px 0 0; padding-left: 18px; font-size: 13px; c
 <section>
   <h2>Two learners, two profiles, two next steps</h2>
   <p class="muted">After the same 40 items' worth of evidence, the engine holds different composites for a strong reader who writes weakly (L3) and a learner with rich vocabulary but weak grammar (L4), and recommends different next activities.</p>
-  <div class="legend"><span class="key"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="5" fill="var(--est)"/></svg>Estimate</span><span class="key"><svg width="30" height="16" aria-hidden="true"><line x1="3" x2="27" y1="8" y2="8" stroke="var(--range)" stroke-width="6" stroke-linecap="round"/></svg>80% range</span><span class="key"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>True level (hidden from the engine)</span><span>Scale: bands 1–8</span></div>
+  <div class="legend"><span class="key"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="5" fill="var(--est)"/></svg>Estimate</span><span class="key"><svg width="30" height="16" aria-hidden="true"><line x1="3" x2="27" y1="8" y2="8" stroke="var(--range)" stroke-width="6" stroke-linecap="round"/></svg>Summary range (conservative, not calibrated)</span><span class="key"><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>True level (hidden from the engine)</span><span>Scale: bands 1–8</span></div>
   <div class="grid2">${pairCards}</div>
 </section>
 
 <section>
   <h2>All ten learners after 120 items</h2>
-  <p class="muted">Strand values are computed from the 17 capabilities assessed in this version. Each card's table lists every capability with its stage and the misconceptions the engine currently holds. Hover a row for exact values.</p>
+  <p class="muted">Strand values are summaries of the 17 capabilities assessed in this version. Their ranges are conservative bounds, not calibrated measurements; only capability-level estimates are measurements. Each card's table lists every capability with its stage and the misconceptions the engine currently holds. Hover a row for exact values.</p>
   <div class="grid2">${learnerCards}</div>
 </section>
 
@@ -195,6 +195,7 @@ details ul, details ol { margin: 6px 0 0; padding-left: 18px; font-size: 13px; c
   <h2>Notes</h2>
   <div class="note">
     <p><strong>Where the measures differ from the plan's wording.</strong> M1, M2 and M5 apply the plan's proposed pass levels with changes recorded in criteria.ts before the run. Rank correlation is undefined for flat profiles. Only 7 learners have a unique weakest strand. A mean sd of 0.6 is not reachable with 8 items per capability, so the threshold is ${CRITERIA.efficiency.sdThreshold}.</p>
+    <p><strong>Strand ranges changed after review.</strong> Strand uncertainty was first combined as if each capability's error were independent, and its 80% ranges held the true value only 57–67% of the time. It is now a conservative bound (errors assumed to point the same way), which held it 77–90% of the time, and it is labelled as a summary, not a calibrated measurement. Pass levels are unchanged; with the wider ranges, M3 separates 4 of 8 pairs instead of 7.</p>
     <p><strong>One engine change during E1.</strong> Evaluator qualification now treats a lean smaller than its own sampling error (2 standard errors) as no evidence of bias. Without this, an unbiased stand-in evaluator failed qualification by chance with only 12 anchors per capability. The 0.3 limit itself is unchanged.</p>
   </div>
 </section>
