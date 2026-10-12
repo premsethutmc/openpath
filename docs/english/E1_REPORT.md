@@ -6,23 +6,27 @@
 
 All six core parts now work end to end, through one shared TypeScript core, on
 the 17 skeleton capabilities of a framework that holds the full 121-capability
-hierarchy.
+hierarchy. Two rounds of review changes are included:
 
-- **Acceptance tests.** All 32 automated tests pass, covering E1-1 to E1-13
-  except E1-11 (checked by CI) and E1-12 (your review). That count includes 2
-  tests added after your review.
-- **The demonstration** shows two learners getting different composites and
-  different next activities. An invented evaluator quote is rejected, state
-  survives a restart from local files, and an evaluation can be undone
-  exactly.
-- **The ten-learner simulation** passes **5 of 8** frozen measures. The 3
-  misses are reported below with their cause. Nothing was re-tuned to pass.
-  The simulation measures are separate from the acceptance tests:
-  acceptance test E1-9 checks that the simulation reports honestly, not that
-  every measure passes.
+- **R1–R6:** conservative strand ranges and a trusted-anchor guard.
+- **Selection:** separate assessment and learning modes, a target-relative
+  need term, relative information gain, and a prerequisite-aware easier step
+  that reports item-bank gaps.
 
-No architectural blocker was found. No LLM is called, nothing was bought, and
-existing code is untouched apart from one new CI job.
+| | Result |
+|---|---|
+| **Acceptance tests** (does E1 do what was specified) | **39 of 39 automated tests pass.** E1-11 is CI; E1-12 is your review |
+| **Simulation measures** (frozen pass levels, frozen procedure) | **3 of 8 pass** (M4, M7, M8). 5 miss. This is down from 5 of 8 before the selection change; see "Selection change" below |
+| **Demonstration** | Two learners get different composites and different next activities. The same learner gets different, justified choices in assessment and learning mode. An invented quote is rejected, a restart gives identical state, and undo is exact |
+
+**Blockers that remain before E1 can claim the simulation measures:**
+
+- the auto-mode policy (when to assess and when to teach)
+- retention checks scheduled by time, as the plan specifies
+- the item bank (E2)
+
+None of these is an architectural blocker. No LLM is called, nothing was bought,
+and existing code is untouched apart from one new CI job.
 
 ## What was built, against the six priorities
 
@@ -32,7 +36,7 @@ existing code is untouched apart from one new CI job.
 | 2 · Numerical composite | One estimate (mean and sd) for **every** capability in the hierarchy, kept twice. *Direct* comes only from the capability's own evidence and drives the stages. *Combined* adds capped, flagged effects from coupled capabilities and drives selection. It also holds contexts, misconceptions with fading strength, the evidence trail, mastery over time, and computed sub-strand and strand values |
 | 3 · LLM-assisted evaluation | `EvaluationRequest` carries the reference standards (band descriptors and rubric), up to 3 anchors near the learner's level, the learner's text with identifiers removed, and current estimates. There is a strict proposal schema, a versioned prompt (`content/english/prompts/evaluate.v1.md`), the `mock` and `replay` adapters, and anchor qualification for every evaluator |
 | 4 · Controlled updater, local-first | An append-only ledger becomes the composite and decision log through a deterministic fold. Eleven checks run on every proposal. Revoking a decision is exact. A `LearnerStore` interface has memory and local-file stores, and the browser store comes in E5 |
-| 5 · Adaptive selection | Goal-weighted scoring over information, fit, retention, misconceptions, struggling and variety. It has a diagnostic and a practice mode, and every choice is stored with a plain-language reason |
+| 5 · Adaptive selection | Two explicit modes. **Assessment** prefers the largest share of current uncertainty removed, on uncertain capabilities whose position against the target is unsettled. **Learning** prefers target-relative need (adjusted for prerequisites the framework defines, misconceptions, retention and uncertainty), at a suitable difficulty. When no suitable item exists, it takes a prerequisite step, then an easier step, then falls back to assessment, and reports every item-bank gap. Targets are the learner's own, or a named documented default. Every choice is stored with a plain-language reason |
 | 6 · Ten-learner simulation | 10 hidden profiles and 8 measures against pass levels committed before the first run, a fault-injection harness, and an HTML report |
 
 **The boundary between the evaluator and OpenPath.** An evaluator can only
@@ -52,12 +56,13 @@ influence. Code-scored items never go near the evaluator.
 | E1-5 | Rebuild from the ledger is exact, and revoking a decision equals never applying it | Pass (all 10 learners) |
 | E1-6 | Each of the 11 updater checks has its own test, and 0 of 273 injected faults are applied | Pass |
 | E1-7 | The core has no network code and no provider names. Swapping `mock` for `replay` gives identical decisions. The request carries no identity | Pass |
-| E1-8 | Selection is repeatable, and every recommendation is explained | Pass |
+| E1-8 | Selection is repeatable, and every recommendation is explained | Pass. Each explanation names its mode and target |
+| E1-8+ | Selection changes from the second review: relative information, target-relative need, learner targets never changed, documented default named, modes differ, prerequisite step, easier step, gap report, no invented prerequisites | Pass (7 new tests) |
 | E1-9 | The ten-learner simulation reports every measure honestly against frozen levels | Pass. The measures themselves are reported separately below, and 3 of 8 miss |
 | E1-10 | Local-first: no network use, restart from files gives identical state | Pass |
 | E1-11 | Nothing else breaks | Existing suites unchanged and green locally: 49 engine tests and 19 app tests. CI runs all jobs |
 | E1-12 | You review the demonstration and report | **Waiting for you** |
-| E1-13 | Two learners with different capabilities get different composites and different next activities | Pass. Compared at capability level after your review (see R3) |
+| E1-13 | Two learners with different capabilities get different composites and different next activities | Pass. Compared at capability level: some grammar capability with L3 above L4, and some writing capability with L4 above L3, each by more than both uncertainties combined |
 
 ## The demonstration (`node tools/english/demo.ts`)
 
@@ -67,16 +72,17 @@ days:
 - **Asha** reads well but writes in run-on sentences.
 - **Ben** has a rich vocabulary but weak grammar.
 
-Both start at 4.00 ± 1.50 on all 121 capabilities. After the 40 items:
+Both start at 4.00 ± 1.50 on all 121 capabilities. After the 40 items, in
+assessment mode first and then learning mode:
 
 | Strand | Asha | Ben |
 |---|---|---|
-| Foundations | 4.53 ± 0.85 | 5.79 ± 0.84 |
-| Vocabulary | 4.87 ± 0.91 | 5.64 ± 0.95 |
-| Grammar | 4.28 ± 0.92 | **3.51 ± 0.93** |
-| Sentences | **3.90 ± 1.04** | 5.38 ± 0.97 |
-| Reading | 5.51 ± 1.08 | 5.43 ± 1.08 |
-| Writing | 4.78 ± 1.04 | 4.90 ± 1.04 |
+| Foundations | 5.31 ± 0.74 | 4.75 ± 0.83 |
+| Vocabulary | 5.51 ± 0.88 | 5.38 ± 0.91 |
+| Grammar | 4.79 ± 0.88 | **3.94 ± 0.94** |
+| Sentences | **3.54 ± 1.23** | 4.68 ± 1.03 |
+| Reading | 4.99 ± 1.12 | 5.73 ± 1.05 |
+| Writing | 4.85 ± 1.04 | 4.82 ± 1.07 |
 
 Strand ± values are conservative summary ranges, not calibrated measurements
 (see R3).
@@ -84,21 +90,29 @@ Strand ± values are conservative summary ranges, not calibrated measurements
 **Asha's email is evaluated**, using an illustrative recorded proposal written
 by OpenPath, not an LLM. The updater:
 
-- **Accepted** run-ons at band 3.5 (3.56 ± 1.07 → 3.51 ± 0.47) and recorded the
-  *comma splice* and *fused sentence* misconceptions.
+- **Accepted** run-ons at band 3.5 (4.07 ± 1.22 → 3.59 ± 0.48) and recorded
+  *comma splice* and *fused sentence*.
 - **Accepted** task response and grammar.
-- **Accepted and capped** spelling (check 10, ±0.75).
-- **Rejected** the paragraphing judgement: *"check 4: quote not found in the
-  learner's response: 'In conclusion, I hope you will agree with my
-  request'"*.
-- Applied coupled effects as *inferred* changes only. These never count
-  towards a stage.
+- **Accepted and capped** spelling (check 10).
+- **Rejected** paragraphing: *"check 4: quote not found in the learner's
+  response"*.
+- Applied coupled effects as *inferred* changes only.
 
-**Next activities differ:**
+**The same learner, two modes (step 7b).**
 
-- **Asha:** inflected spelling practice (68% likely to succeed).
-- **Ben:** a vocabulary item, because his vocabulary estimate is still the most
-  uncertain.
+- **Assessment** chooses a main-idea question. *"Identifies the main idea
+  5.2 ± 1.2: this activity is expected to remove 15% of that uncertainty; 24%
+  likely already at band 6."*
+- **Learning** chooses a comma item. *"Commas (3.5 ± 1.1; 99% likely below
+  band 6)… about 82% likely to succeed. The framework lists it as a
+  prerequisite of Avoids run-on sentences and comma splices, which is also
+  below target, so it comes first."*
+- **The target** in both cases is the named default (band 6, the next band
+  above her median of 5.2), because no target has been set for her.
+
+**Next activities differ between learners.** Asha, in learning mode, gets
+commas. Ben is still in assessment mode, because his uncertainty is high, and
+gets a vocabulary item.
 
 **Restart and undo:**
 
@@ -113,14 +127,29 @@ first run, in commit "freeze simulation pass levels".
 
 | | Measure | Result | Pass level |
 |---|---|---|---|
-| ✗ | M1 Profile recovery after 40 items | mean ρ = 0.73 | ≥ 0.8 |
-| ✓ | M2 Weakest strand named | 6 of 7 | ≥ 6 of 7 |
-| ✗ | M3 Pairs told apart | 4 of 8 (7 of 8 before the strand-range correction) | all |
-| ✓ | M4 Honest uncertainty (80% ranges) | 78% | 70–90% |
-| ✗ | M5 Efficiency vs random | ratio 0.74 (23.1 vs 31.1 items) | ≤ 0.7 |
-| ✓ | M6 Guesser and forgetter | both ok | both ok |
-| ✓ | M7 Faulty evaluator output applied | 0 of 273 | 0 |
-| ✓ | M8 Deterministic | identical | identical |
+Three columns of results:
+
+- **First run:** the engine as first submitted.
+- **After R3:** the conservative strand ranges.
+- **Current:** after the selection change.
+
+All three use the same frozen procedure: goal "overall", automatic mode, 6
+sessions of 20 items.
+
+| Measure | First run | After R3 | **Current** | Pass level |
+|---|---|---|---|---|
+| M1 Profile recovery after 40 items | 0.73 ✗ | 0.73 ✗ | **0.59 ✗** | ≥ 0.8 |
+| M2 Weakest strand named | 6/7 ✓ | 6/7 ✓ | **4/7 ✗** | ≥ 6/7 |
+| M3 Pairs told apart | 7/8 ✗ | 4/8 ✗ | **5/8 ✗** | all |
+| M4 Honest uncertainty | 78% ✓ | 78% ✓ | **78% ✓** | 70–90% |
+| M5 Efficiency vs random | 0.74 ✗ | 0.74 ✗ | **0.73 ✗** | ≤ 0.7 |
+| M6 Guesser and forgetter | ok ✓ | ok ✓ | **both not ok ✗** | both ok |
+| M7 Faulty evaluator output applied | 0/273 ✓ | 0/273 ✓ | **0/273 ✓** | 0 |
+| M8 Deterministic | ✓ | ✓ | **✓** | identical |
+
+Thresholds have not changed. The analysis of the current results is in
+"Selection change" below. The notes immediately below explain the first-run
+misses.
 
 **Why the three misses happen.** I checked for engine defects before
 accepting these numbers. The uncertainty is honest (M4), and the spread of
@@ -157,6 +186,95 @@ uncalibrated E1 item bank can tell us**:
 7.5 who gets everything right is estimated at about 6.4 (L7), because the bank
 tops out around 7.5. More hard items fix this. (The second finding, optimistic
 strand uncertainty, was corrected in review: see R3.)
+
+## Selection change (second review, 12 October)
+
+### What was implemented, as approved
+
+1. **Assessment and learning are separate, explicit modes.** The caller can
+   choose the mode. Otherwise the engine assesses while goal-weighted
+   uncertainty is above sd 0.9, the same rule as before.
+2. **Target-relative need.** Need is P(capability below target) =
+   Φ((target − mean) / sd). Targets come from the learner's goal, and the most
+   specific one wins. Where none is set, the plan's documented default applies
+   (the next band above the learner's current median level) and is named in
+   every explanation. The engine never changes a target, and a test checks
+   this.
+3. **Information relative to current uncertainty.** Information is the share
+   of current variance an activity is expected to remove, 1 − var′/var.
+4. **A prerequisite-aware fallback.** When a needed capability has no unused
+   item at a suitable difficulty (55–85% predicted success, or 70–92% if the
+   learner is struggling), the engine tries these in order:
+   - a prerequisite, but only one the framework defines, and only if it is
+     itself below target (`prerequisite_step`)
+   - an easier item for the same capability (`easier_step`)
+   - the next capability
+
+   If nothing at all is usable, it assesses instead (`assessment_fallback`)
+   rather than stopping. Every gap is reported with the suitable difficulty
+   range and the difficulties the bank still has.
+
+The composite updater, evidence validation and conservative strand ranges are
+unchanged.
+
+**Two bugs found and fixed while testing:**
+
+- **Learning mode could return no activity.** When every remaining item was
+  too hard, learning mode returned nothing, so simulated learners stopped
+  early. The `assessment_fallback` path fixes this.
+- **Prerequisite items were missed.** They were only searched for among items
+  serving the learner's goal. They now come from the whole bank.
+
+### Improvements and regressions under the frozen procedure
+
+- **Improved:**
+  - M3 rises from 4 to 5 of 8.
+  - M5 improves slightly, from 0.74 to 0.73 (still a miss).
+  - The demo choices are now explained by need, target and prerequisites.
+- **Regressed:**
+  - M1 drops from 0.73 to 0.59.
+  - M2 drops from 6 to 4 of 7.
+  - M6 drops from passing to failing on both learners.
+
+**Diagnosis, from runs with each mode forced. These are not the frozen
+procedure.**
+
+| Mode | M1 | M2 | M3 | M5 (efficiency) | M6 |
+|---|---|---|---|---|---|
+| Assessment only | 0.72 | 6/7 ✓ | 6/8 | **0.65 ✓** (20.2 vs 31.1 items) | guesser ok, forgetter not |
+| Learning only | 0.60 | 7/7 ✓ | 5/8 | n/a | guesser ok, forgetter not |
+| Automatic (frozen) | 0.59 | 4/7 | 5/8 | 0.73 | both not ok |
+
+1. **Assessment mode measures well.** It is the best adaptive measurement so
+   far: M5 at 0.65 would pass. It is the mode for measuring.
+2. **The automatic policy hands over to learning after about 23 items.**
+   Learning mode then concentrates on the learner's needs, as specified, so
+   broad re-measurement stops. M1 and M2 measure exactly that breadth, so they
+   fall. As an exploration only, which I have not adopted, reserving 1 learning
+   item in 3 for assessment gave 0.65 / 7 of 7 / 7 of 8 / 0.68 on M1/M2/M3/M5.
+   M6 still missed.
+3. **Forgetting is not re-checked in any mode.** After L10's grammar drops,
+   three grammar capabilities stay *mastered* because nothing re-tests them.
+   The retention trigger waits for uncertainty to grow back above 0.75, and
+   time adds only about 0.005 variance a day. The approved plan specifies
+   checks **due after a time gap**, with the gap doubling after each success.
+   That schedule is not yet implemented.
+
+### Remaining blockers (decisions for you)
+
+- **B1 · Automatic mode policy.** When should the engine assess and when
+  should it teach? Options:
+  - (a) keep the current rule
+  - (b) reserve a share of learning items for assessment
+  - (c) assess at the start of every session until uncertainty on the goal is
+    low
+
+  This is a product decision, because it trades practice time for measurement.
+- **B2 · Retention checks by due date,** as the approved plan specifies, so
+  forgetting is detected (M6). Recommended before merge, because this is a
+  correctness gap against the plan.
+- **B3 · Item bank (E2).** It caps M1 and M3 in every mode, and is the cause
+  of the learning-mode gaps the engine now reports.
 
 ## Changes from the approved plan (all small)
 
@@ -351,8 +469,9 @@ depth and content. Its contract is already fixed in code and enforced:
 
 ## Decisions needed before E2
 
+- **B1 and B2** (above): the automatic mode policy, and retention checks by due date.
+
 - **D-4.** An English educator (ideally two) to review the framework and items,
   and to score anchor responses so they become *trusted*. Today all 12 anchors
   are OpenPath's candidates.
-- **R4:** approve the selection fix as a pre-merge change to E1, or schedule it for E4.
 - **Approval to merge E1** after your review (E1-12), and approval of E2's scope.

@@ -63,6 +63,8 @@ export interface RunOptions {
   order?: "adaptive" | "random";
   only?: Set<string>;
   writing?: boolean;
+  /** Selection mode; omitted means the engine's automatic choice. */
+  mode?: "assessment" | "learning";
   /** Stop early when this returns true (checked after each item). */
   stop?: (ledger: Ledger, now: string) => boolean;
   onItem?: (info: { session: number; n: number; item: string; rec: Recommendation | null; ledger: Ledger; now: string }) => void;
@@ -117,6 +119,7 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
           writingThisSession,
           writingAvailable: o.writing !== false,
           only: o.only,
+          mode: o.mode,
         });
         if (!rec.choice) break outer;
         itemId = rec.choice.item;

@@ -140,6 +140,13 @@ export interface Goal {
   name: string;
   /** Weights by capability, sub-strand or strand id. More specific ids override broader ones. */
   weights: Record<string, number>;
+  /**
+   * Target bands set by the learner (or guardian), by capability, sub-strand or
+   * strand id; most specific wins. Never changed by the engine. Where none is
+   * set, selection uses the plan's documented default ("the next band up") and
+   * says so in every recommendation.
+   */
+  targets?: Record<string, number>;
 }
 
 // ---------------------------------------------------------------- learner state

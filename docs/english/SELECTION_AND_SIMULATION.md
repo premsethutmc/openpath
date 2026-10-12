@@ -21,6 +21,20 @@ learner or guardian chooses goals; the system never infers them.
 
 ## 2. How the next activity is chosen
 
+> **Updated 12 October (E1 review).** Selection now has two explicit modes:
+>
+> - **Assessment** prefers the largest *share* of current uncertainty removed,
+>   on capabilities whose position against the target is unsettled.
+> - **Learning** prefers *target-relative need*, P(below target), adjusted for
+>   framework prerequisites, misconceptions, retention and uncertainty, at a
+>   suitable difficulty.
+>
+> When no suitable item exists, learning mode takes a prerequisite step, then
+> an easier step, and reports item-bank gaps. Targets are the learner's own, or
+> the documented default below, which is always named. The description below
+> is the original design and is kept for the record. The implemented rules are
+> in `packages/english-core/src/selection.ts` and `docs/english/E1_REPORT.md`.
+
 **Candidates.** Any item or activity whose targets include a weighted
 capability, and whose difficulty is within reach. An *activity* can be one item
 or a set: for example, a reading passage with six questions, or a writing task.

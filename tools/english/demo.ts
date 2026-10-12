@@ -35,6 +35,7 @@ export interface DemoResult {
   ctx: Context;
   ledgers: Record<string, Ledger>;
   next: Record<string, { item: string; explanation: string }>;
+  modes: Record<"assessment" | "learning", import("../../packages/english-core/src/index.ts").Recommendation>;
   writingDecisions: Decision[];
   reloadedIdentical: boolean;
   undoIdentical: boolean;
@@ -57,6 +58,10 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const recordings = JSON.parse(readFileSync(join(CONTENT, "replay", "demo.json"), "utf8"));
   const evaluator = replayEvaluator("replay:demo-recordings", recordings);
   const goal = ctx.content.goals.get("overall")!;
+  const prompt = (id: string) => {
+    const p = ctx.content.items.get(id)!.prompt;
+    return p.length > 90 ? p.slice(0, 89) + "…" : p;
+  };
 
   say("OpenPath English · E1 demonstration");
   say("Two invented learners. The engine never sees their true levels; it only sees their answers.\n");
@@ -77,7 +82,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   // 2 · diagnostic: 20 code-scored items each, chosen adaptively
   const seen: Record<string, Set<string>> = { asha: new Set(), ben: new Set() };
   const recent: Record<string, { item: string; targets: string[]; format: string }[]> = { asha: [], ben: [] };
-  say("2 · Diagnostic: two sessions of 20 items each (days 0 and 1), chosen one at a time by the selection engine");
+  say("2 · Two sessions of 20 items each (days 0 and 1), chosen one at a time by the selection engine (it starts in assessment mode)");
   for (const l of [ASHA, BEN]) {
     const next = rng(l.id === "asha" ? 11 : 22);
     for (let k = 0; k < 40; k++) {
@@ -136,17 +141,28 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   }
   say();
 
-  // 7 · next activities
+  // 7 · next activities (the engine chooses the mode)
   const next: DemoResult["next"] = {};
-  say("7 · Next activity for each learner");
+  say("7 · Next activity for each learner (mode chosen by the engine)");
   for (const l of [ASHA, BEN]) {
     const rec = recommend({ index: ctx.index, content: ctx.content, composite: ledgers[l.id].composite, goal, now: at(8), seen: seen[l.id], recent: [], writingThisSession: 0, writingAvailable: false });
     next[l.id] = { item: rec.choice!.item, explanation: rec.explanation };
-    const p = ctx.content.items.get(rec.choice!.item)!.prompt;
-    say(`   ${l.name}: ${p.length > 100 ? p.slice(0, 99) + "…" : p}`);
+    say(`   ${l.name} · ${rec.mode} mode · ${prompt(rec.choice!.item)}`);
     say(`     ${rec.explanation}`);
   }
   say(`   Different next activities: ${next.asha.item !== next.ben.item ? "yes" : "no"}\n`);
+
+  // 7b · the same learner in assessment mode and in learning mode
+  const modes: DemoResult["modes"] = {} as DemoResult["modes"];
+  say("7b · Same learner (Asha), same moment, the two modes");
+  for (const mode of ["assessment", "learning"] as const) {
+    const rec = recommend({ index: ctx.index, content: ctx.content, composite: ledgers.asha.composite, goal, now: at(8), seen: seen.asha, recent: [], writingThisSession: 0, writingAvailable: false, mode });
+    modes[mode] = rec;
+    say(`   ${mode.toUpperCase()} → ${prompt(rec.choice!.item)}   [path: ${rec.path}]`);
+    say(`     ${rec.explanation}`);
+    if (rec.bankGaps.length) say(`     Item-bank gaps reported: ${rec.bankGaps.length} (${rec.bankGaps.map((g) => g.name).join(", ")})`);
+  }
+  say(`   Different, justified choices: ${modes.assessment.choice!.item !== modes.learning.choice!.item ? "yes" : "no"}\n`);
 
   // 8 · close and reopen from local files
   for (const l of [ASHA, BEN]) await stores[l.id].saveSnapshot({ composite: ledgers[l.id].composite, decisions: ledgers[l.id].decisions });
@@ -164,7 +180,7 @@ export async function runDemo(opts: { dir?: string; quiet?: boolean } = {}): Pro
   const undoIdentical = JSON.stringify(stripMeta(ledgers.asha.composite)) === JSON.stringify(stripMeta(before));
   const rv = leafView(ledgers.asha.composite, ctx.index, "EN.SEN.CMP.run_ons", nowW);
   say(`9 · Undid Asha's evaluation (${ds.filter((x) => x.verdict === "accepted").length} decisions revoked; the evidence and proposal stay in the log): run-ons back to ${f(rv.mean)} ± ${f(rv.sd)}; composite ${undoIdentical ? "identical to its state before the evaluation" : "NOT identical"}.`);
-  return { ctx, ledgers, next, writingDecisions: ds, reloadedIdentical, undoIdentical, lines };
+  return { ctx, ledgers, next, modes, writingDecisions: ds, reloadedIdentical, undoIdentical, lines };
 }
 
 async function append(store: FileStore, ledger: Ledger, e: LedgerEvent): Promise<Decision[]> {
