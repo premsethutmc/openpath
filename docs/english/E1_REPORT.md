@@ -238,8 +238,8 @@ Every recommendation records why it was scheduled.
     review*
   - a check counts if it is taken on the due day
 - **Overdue means not verified.** Past the due date the stage is *review due*,
-  and the mastery is *not currently verified*, however small the sd is. A test
-  shows sd 0.49 with mastery withdrawn.
+  and the mastery is *not currently verified*, however small the sd is. In the test, mastery at band 5 is withdrawn
+  9 days after its due date while the sd is 0.56.
 - **History is kept separately.** Previously demonstrated mastery stays in
   `masteredBefore`, apart from the current `retention` status: first
   demonstrated, last verified, due, interval, and the history of checks.
@@ -364,7 +364,7 @@ procedure.**
    checks **due after a time gap**, with the gap doubling after each success.
    That schedule is not yet implemented.
 
-### Remaining blockers (decisions for you)
+### Remaining blockers at that point (B1 and B2 since resolved; see above)
 
 - **B1 · Automatic mode policy.** When should the engine assess and when
   should it teach? Options:
