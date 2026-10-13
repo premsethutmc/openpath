@@ -103,6 +103,7 @@ jobs:
           test -s dist-english/index.html
           test -s dist-english/assets/app.js
           test -s dist-english/sw.js
+          test -s dist-english/_headers
           test -s dist-english/licences/SCOWL-Copyright.txt
           test -s dist/index.html
           test -s dist/assets/app.js
@@ -221,6 +222,8 @@ jobs:
         run: node tools/english/bank/main.ts | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Generated spelling items match the word bank
         run: node tools/english/spelling/generate.ts --check
+      - name: Generated items' review record is consistent (approvals, exceptions, sheets)
+        run: node tools/english/spelling/review.ts --check
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .

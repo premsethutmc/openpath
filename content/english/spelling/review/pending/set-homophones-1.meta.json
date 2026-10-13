@@ -1,0 +1,9 @@
+{
+ "kind": "set",
+ "id": "set:homophones-1",
+ "name": "homophones-1",
+ "template": "homophone_context",
+ "wordbank": "ffa1cfe8",
+ "created": "2026-10-13",
+ "instructions": "As for a rule sample: ok or problem for every row, with a note for each problem. The set is approved only with every row reviewed."
+}

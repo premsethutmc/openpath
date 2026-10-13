@@ -1,0 +1,30 @@
+{
+ "version": 1,
+ "scope": "practice_content",
+ "statement": "Approval allows generated items to be offered as practice content. It does not mark them checked, and it never lets them change capability estimates; that needs separate validation of their assessment quality.",
+ "rules": [],
+ "sets": [],
+ "exceptions": [
+  {
+   "word": "parable",
+   "action": "exclude",
+   "reason": "The -able in parable is not a suffix, so the word does not belong to the -able/-ible pattern.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "yessed",
+   "action": "exclude",
+   "reason": "An unusual word (yes + -ed) that a learner aged 10\u201315 is unlikely to need.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "evillest",
+   "action": "exclude",
+   "reason": "An unusual, rarely used form (evil + -est).",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  }
+ ]
+}
