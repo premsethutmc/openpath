@@ -17,7 +17,7 @@ import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
-import type { Composite, Decision, Estimate, EvidenceEvent, Exposure, LedgerEvent, ProposalEvent, QualificationEvent, ShortItem, WritingTask } from "./types.ts";
+import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, isIndependentProvenance } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -89,6 +89,7 @@ export class Ledger {
   private proposals = new Set<string>();
   private heldSurprise = new Map<string, { band: number; proposal: string }>();
   private exposureOf = new Map<string, Exposure>();
+  private interventions = new Map<string, InterventionEvent>();
 
   constructor(ctx: Context, learnerId: string, revoked: Set<string> = new Set()) {
     this.ctx = ctx;
@@ -140,6 +141,14 @@ export class Ledger {
         return this.record([], event);
       case "revoke":
         return this.record([], event);
+      case "presented":
+      case "hint":
+      case "assisted_response":
+        // provenance: recorded for the learner record and rule-level projections; never an estimate change
+        return this.record([], event);
+      case "intervention":
+        this.interventions.set(event.id, event);
+        return this.record([], event);
     }
   }
 
@@ -159,6 +168,23 @@ export class Ledger {
     const { correct, misconceptions } = scoreCode(item, ev.response);
     const id = `d:${ev.id}:${item.target}`;
     const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions, exposure, ...(ev.use ? { use: ev.use } : {}) };
+    // An answer given with help (provenance@1 says so, or the teaching just displayed this item) is not
+    // evidence: it is kept, counts as seen, and changes no estimate. Legacy evidence (no provenance) is unchanged.
+    if (ev.provenance) {
+      const taught = ev.provenance.intervention ? this.interventions.get(ev.provenance.intervention)?.items?.includes(item.id) : false;
+      if (!isIndependentProvenance(ev.provenance) || taught)
+        return [
+          {
+            id,
+            at: ev.at,
+            source: ev.id,
+            capability: item.target,
+            verdict: "held",
+            reasons: [`scored by code: ${correct ? "right" : "wrong"}; answered with help (${taught ? "the item was shown in teaching" : `attempt ${ev.provenance.attempt}, ${ev.provenance.hints.length} hint(s)${ev.provenance.afterFeedback ? ", after feedback" : ""}`}), so it is recorded as assisted and no estimate is changed`],
+            observation,
+          },
+        ];
+    }
     // A generated item whose difficulty and quality have not been checked is not assessment evidence:
     // the answer is kept (and counts as seen) but no estimate changes until the item is checked.
     if (item.generated && !item.generated.checked)

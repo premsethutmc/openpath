@@ -366,7 +366,92 @@ export interface EvidenceEvent {
   item: { id: string; version: number };
   response: Response;
   use?: EvidenceUse;
+  /**
+   * How the answer was given (provenance@1). Absent on evidence recorded before the schema: its assistance
+   * status is then unknown, and rule-level statuses never treat it as confirmed independent performance.
+   */
+  provenance?: Provenance;
 }
+
+// ---------------------------------------------------------------- evidence provenance (docs/english/EVIDENCE_PROVENANCE.md)
+
+export interface Provenance {
+  schema: "provenance@1";
+  /** Id of the `presented` event for this question. */
+  presented?: string;
+  /** 1 for a first answer. */
+  attempt: number;
+  /** Ids of `hint` events shown for this item before this answer. */
+  hints: string[];
+  /** The learner had already seen feedback on this item. */
+  afterFeedback: boolean;
+  /** The intervention this answer follows, if any. */
+  intervention?: string;
+}
+
+/** What a question was shown for (the client's intent; the engine decides what the evidence shows). */
+export type PresentedPurpose = "assessment" | "practice" | "retention" | "transfer" | "teaching";
+
+export interface PresentedEvent {
+  kind: "presented";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  purpose?: PresentedPurpose;
+  intervention?: string;
+}
+
+export interface HintEvent {
+  kind: "hint";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  presented?: string;
+  /** 1 for the first, lightest hint. */
+  level: number;
+  /** Subject-defined hint type (for example "rule_reminder", "similar_example"). */
+  hintType: string;
+}
+
+/** A second or later attempt, or any answer given with help. Recorded; never changes an estimate. */
+export interface AssistedResponseEvent {
+  kind: "assisted_response";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  presented?: string;
+  response: Response;
+  attempt: number;
+  hints: string[];
+  afterFeedback: boolean;
+  intervention?: string;
+}
+
+/** Teaching delivered. Strategy ids are defined by the subject module. */
+export interface InterventionEvent {
+  kind: "intervention";
+  id: string;
+  at: string;
+  session: string;
+  capability: CapabilityId;
+  rule?: string;
+  strategy: string;
+  /** Content shown (for example a lesson id). */
+  content?: string;
+  /** Items displayed as part of the teaching: a first answer to one of these is not independent. */
+  items?: string[];
+  /** The planner decision that chose it, when there is one. */
+  decision?: string;
+  reason?: string;
+}
+
+export type ProvenanceEvent = PresentedEvent | HintEvent | AssistedResponseEvent | InterventionEvent;
+
+/** Confirmed independent: provenance present, a first attempt, no hints, no feedback first. (Teaching that displayed the item is checked by the reader, which can see the intervention.) */
+export const isIndependentProvenance = (p: Provenance | undefined): boolean => !!p && p.schema === "provenance@1" && p.attempt === 1 && p.hints.length === 0 && !p.afterFeedback;
 
 export interface ProposalEvent {
   kind: "proposal";
@@ -404,7 +489,7 @@ export interface RevokeEvent {
   reason: string;
 }
 
-export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent;
+export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent;
 
 export type Verdict = "accepted" | "held" | "rejected" | "revoked" | "ignored";
 

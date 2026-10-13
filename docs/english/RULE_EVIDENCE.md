@@ -24,7 +24,11 @@ Use: `projectRuleEvidence(ledger, content, englishInflections, engineView)`.
 
 ## What counts as evidence
 
-- **Independent:** the updater accepted the answer (a first answer to a hand-written item, not a repeat).
+- **Independent:** the updater accepted the answer, and its `provenance` (provenance@1) confirms a first,
+  unhelped attempt. See `EVIDENCE_PROVENANCE.md`.
+- **Unknown:** accepted evidence recorded without provenance (all records made before provenance@1).
+  Reported, never counted towards a status.
+- **Assisted:** hinted, later or helped answers (`assisted_response`, or evidence that says it was helped).
 - **Practice:** the updater held it (a generated item not yet checked by a person). Shown, never proficiency.
 - **Repeat:** an item seen before. Counted separately, never proficiency.
 - **New word:** no earlier evidence on the same answer word.
@@ -33,8 +37,7 @@ Use: `projectRuleEvidence(ledger, content, englishInflections, engineView)`.
   counted against the rule, never a misconception.
 - **Delayed check:** a session whose previous evidence on the rule is at least 7 days earlier.
 
-Assisted answers (hints, second tries) are not in the ledger on `main` (they are app events), so they are
-not yet a separate track; see limitations.
+Hints, helped answers and teaching are ledger events under provenance@1. The app does not write them yet.
 
 ## Rule status
 
@@ -112,7 +115,7 @@ result for this question bank, not a fault in the learners.
 - **Question supply.** Plain endings and -es have one reviewed question each; the 24 draft questions are
   unreviewed and used here only as a test fixture. With 2 delayed questions per rule, one slip can leave a
   delayed check too small to verify (the careless learner's silent e).
-- **Assisted attempts** are app events on `main`, not ledger events, so they are not yet a separate track.
+- **The app does not yet write provenance**, so everything it records today is "assistance unknown".
 - **Contrast items** rely on the `.contrast` family convention; no item in the current bank is marked.
 - **New words** are judged by the answer word; the same root in another form (hopped after hopping) counts
   as new.

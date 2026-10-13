@@ -22,6 +22,8 @@ import {
 import { CONTENT } from "../../../tools/english/load.ts";
 import { CAP, PROFILES, engineView, profileContext, runProfile } from "./rule-profiles.ts";
 
+/** A first, unaided answer under provenance@1. */
+const IND = { schema: "provenance@1" as const, attempt: 1, hints: [] as string[], afterFeedback: false };
 const project = (l: Ledger) => projectRuleEvidence(l, profileContext().content, englishInflections, engineView(l));
 const rulesOf = (l: Ledger) => project(l).capabilities[CAP].rules;
 const rule = (l: Ledger, id: string) => rulesOf(l).find((r) => r.rule === id)!;
@@ -88,7 +90,7 @@ test("R1-3 a provisionally resolved misconception keeps its history, and a recur
   const ctx = profileContext();
   const l = new Ledger(ctx, "recovers");
   const at = (day: number, min: number) => new Date(Date.parse("2026-10-14T09:00:00Z") + day * 86_400_000 + min * 60_000).toISOString();
-  const ans = (id: string, text: string, day: number, min: number, session: string) => l.apply({ kind: "evidence", id: `${id}-${day}-${min}`, at: at(day, min), session, item: { id, version: 1 }, response: { kind: "typed", text } });
+  const ans = (id: string, text: string, day: number, min: number, session: string) => l.apply({ kind: "evidence", id: `${id}-${day}-${min}`, at: at(day, min), session, item: { id, version: 1 }, response: { kind: "typed", text }, provenance: IND });
   ans("spl.infl.18", "choping", 0, 1, "d0");
   ans("spl.infl.19", "stoped", 0, 2, "d0");
   ans("spl.infl.22", "triming", 0, 3, "d0");
@@ -161,10 +163,10 @@ test("R1-8 missing evidence is not weakness: no answers or too few answers give 
   const l = new Ledger(ctx, "few");
   const t = (m: number) => new Date(Date.parse("2026-10-14T09:00:00Z") + m * 60_000).toISOString();
   const wrong = [["spl.infl.34", "tryed"], ["spl.infl.35", "babys"], ["spl.infl.36", "easyer"]];
-  for (const [i, [id, text]] of wrong.slice(0, 2).entries()) l.apply({ kind: "evidence", id: `f${i}`, at: t(i), session: "s", item: { id, version: 1 }, response: { kind: "typed", text } });
+  for (const [i, [id, text]] of wrong.slice(0, 2).entries()) l.apply({ kind: "evidence", id: `f${i}`, at: t(i), session: "s", item: { id, version: 1 }, response: { kind: "typed", text }, provenance: IND });
   assert.equal(rule(l, "y_to_i").status, "insufficient_evidence");
   assert.equal(rule(l, "plain").status, "insufficient_evidence"); // never asked
-  l.apply({ kind: "evidence", id: "f2", at: t(2), session: "s", item: { id: wrong[2][0], version: 1 }, response: { kind: "typed", text: wrong[2][1] } });
+  l.apply({ kind: "evidence", id: "f2", at: t(2), session: "s", item: { id: wrong[2][0], version: 1 }, response: { kind: "typed", text: wrong[2][1] }, provenance: IND });
   assert.equal(rule(l, "y_to_i").status, "weak");
   assert.equal(rule(l, "plain").status, "insufficient_evidence");
   // and in every profile, rules never asked about are insufficient evidence, never weak
@@ -207,7 +209,7 @@ const seq = (label: string, steps: [string, string, number, number, string][]) =
   const ctx = profileContext();
   const l = new Ledger(ctx, label);
   const at = (d: number, m: number) => new Date(Date.parse("2026-10-14T09:00:00Z") + d * 86_400_000 + m * 60_000).toISOString();
-  steps.forEach(([id, text, d, m, s], k) => l.apply({ kind: "evidence", id: `${label}${k}`, at: at(d, m), session: s, item: { id, version: ctx.content.items.get(id)!.version }, response: { kind: "typed", text } }));
+  steps.forEach(([id, text, d, m, s], k) => l.apply({ kind: "evidence", id: `${label}${k}`, at: at(d, m), session: s, item: { id, version: ctx.content.items.get(id)!.version }, response: { kind: "typed", text }, provenance: IND }));
   return l;
 };
 const shown: [string, string, number, number, string][] = [

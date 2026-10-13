@@ -102,7 +102,8 @@ export interface Run {
   answers: { id: string; text: string; correct: boolean; stage: string }[];
 }
 
-export function runProfile(name: string, through = "delayed"): Run {
+export function runProfile(name: string, opts: { through?: string; legacy?: boolean } = {}): Run {
+  const through = opts.through ?? "delayed";
   const ctx = profileContext();
   const policy = PROFILES[name];
   const l = new Ledger(ctx, name);
@@ -116,7 +117,7 @@ export function runProfile(name: string, through = "delayed"): Run {
     for (const id of s.items) {
       const item = ctx.content.items.get(id) as Code;
       const text = policy(id, seen, r, s.name);
-      const ev: EvidenceEvent = { kind: "evidence", id: `${name}-${k}`, at: new Date(T0 + s.day * DAY + (k + 1) * 60_000).toISOString(), session: s.name, item: { id, version: item.version }, response: { kind: "typed", text }, use: s.name.startsWith("practice") ? "practice" : s.name === "delayed" ? "retention" : "assessment" };
+      const ev: EvidenceEvent = { kind: "evidence", id: `${name}-${k}`, at: new Date(T0 + s.day * DAY + (k + 1) * 60_000).toISOString(), session: s.name, item: { id, version: item.version }, response: { kind: "typed", text }, use: s.name.startsWith("practice") ? "practice" : s.name === "delayed" ? "retention" : "assessment", ...(opts.legacy ? {} : { provenance: { schema: "provenance@1" as const, attempt: 1, hints: [], afterFeedback: false } }) };
       k++;
       l.apply(ev);
       events.push(ev);
