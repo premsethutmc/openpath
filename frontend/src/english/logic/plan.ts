@@ -54,7 +54,7 @@ export function todayPlan(s: AppState, c: AppContent, now: string, speech: boole
   const checked = sessionsOf(s, "spelling_check").some((x) => x.end !== null);
   if (!checked && spellingCheckQueue(s, c, now, speech).length)
     return [{ type: "spelling_check", title: "Spelling check", reason: "One word for each spelling pattern near your level, to see which patterns to work on first." }];
-  const review = reviewWords(s, c, now);
+  const review = reviewWords(s, c, now, speech);
   const n = review.due.length + review.confirm.length;
   if (n)
     steps.push({

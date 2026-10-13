@@ -17,7 +17,7 @@ import {
   automaticFlags,
   emptyReview,
   indexContent,
-  problemRateBound,
+  criticalRateBound,
   reviewProblems,
   reviewStatus,
   ruleDecision,
@@ -25,7 +25,7 @@ import {
   sampleRule,
 } from "../src/index.ts";
 import { CONTENT, loadBundle, loadContext, viewFor } from "../../../tools/english/load.ts";
-import { parseCsv, recordSheet, toCsv } from "../../../tools/english/spelling/review.ts";
+import { loadPilotSet, parseCsv, pilotItems, pilotSetProblems, recordSheet, toCsv } from "../../../tools/english/spelling/review.ts";
 import { GENERATOR } from "../../../tools/english/spelling/generate.ts";
 
 type Code = Extract<Item, { kind: "code" }>;
@@ -35,7 +35,7 @@ const committed = JSON.parse(readFileSync(join(CONTENT, "spelling", "review", "r
 const byTemplate = (t: string) => generated.filter((g) => g.generated!.template === t);
 const today = "2026-10-13";
 
-function approvedRule(template: string, problems: string[] = []): GeneratedReview {
+function approvedRule(template: string, minorExcluded: string[] = []): GeneratedReview {
   const r = emptyReview();
   const sample = sampleRule(generated, GENERATOR, template, 30, "t1");
   r.rules.push({
@@ -45,9 +45,9 @@ function approvedRule(template: string, problems: string[] = []): GeneratedRevie
     decision: "approved",
     by: "Tester",
     date: today,
-    sample: { seed: "t1", size: sample.length, population: byTemplate(template).length, items: sample.map((i) => ({ id: i.id, version: i.version })), problems: problems.map((id) => ({ id, note: "wrong" })) },
+    sample: { seed: "t1", size: sample.length, population: byTemplate(template).length, items: sample.map((i) => ({ id: i.id, version: i.version })), critical: [], minor: minorExcluded.map((id) => ({ id, note: "awkward wording", action: "exclude" as const })) },
   });
-  for (const id of problems) r.exceptions.push({ item: id, action: "exclude", reason: "wrong", by: "Tester", date: today });
+  for (const id of minorExcluded) r.exceptions.push({ item: id, action: "exclude", reason: "awkward wording", by: "Tester", date: today });
   return r;
 }
 
@@ -86,7 +86,7 @@ test("review status: exclusions win, then flags (unless allowed), then a reviewe
   assert.equal(st.get(flagged.id)!.status, "flagged");
   // an "allow" exception clears a flag; a set approval then covers it
   r.exceptions.push({ item: flagged.id, action: "allow", reason: "fine", by: "Tester", date: today });
-  r.sets.push({ id: "set:x", name: "x", decision: "approved", by: "Tester", date: today, items: [{ id: flagged.id, version: flagged.version }], problems: [] });
+  r.sets.push({ id: "set:x", name: "x", decision: "approved", by: "Tester", date: today, items: [{ id: flagged.id, version: flagged.version }], critical: [], minor: [] });
   assert.equal(reviewStatus(generated, r).get(flagged.id)!.status, "approved");
   // a set approval covers only the version reviewed
   assert.equal(reviewStatus([{ ...flagged, version: flagged.version + 1 }], r).get(flagged.id)!.status, "unreviewed");
@@ -117,19 +117,33 @@ test("approval never marks an item checked and never changes an estimate: the le
   assert.ok(l.decisions.every((d) => d.verdict === "held"));
 });
 
-test("a rule needs a large enough sample with few problems; problem items must be excluded", () => {
+test("a rule is approved only with no critical error in a large enough sample; every error is handled explicitly", () => {
   assert.equal(ruleDecision(600, MIN_SAMPLE - 1, 0).decision, "not_approved");
   assert.equal(ruleDecision(10, 10, 0).decision, "approved", "a small rule can be reviewed whole");
-  assert.equal(ruleDecision(600, 30, 1).decision, "approved");
-  assert.equal(ruleDecision(600, 30, 2).decision, "not_approved");
-  assert.equal(problemRateBound(30, 0), 0.1);
-  const r = approvedRule("add_ending", []);
-  r.rules[0].sample.problems.push({ id: r.rules[0].sample.items[0].id, note: "x" });
-  assert.ok(reviewProblems(r, generated, retired).some((p) => p.includes("no exclude exception")));
-  const tooMany = approvedRule("add_ending", r.rules[0].sample.items.slice(0, 3).map((x) => x.id));
-  assert.ok(reviewProblems(tooMany, generated, retired).some((p) => p.includes("recorded as approved")));
+  assert.equal(ruleDecision(600, 30, 0, 4).decision, "approved", "minor errors never block");
+  assert.equal(ruleDecision(600, 30, 1).decision, "not_approved", "one critical error blocks");
+  assert.equal(criticalRateBound(30), 0.1);
+  const r = approvedRule("add_ending");
+  const first = r.rules[0].sample.items[0].id;
+  // an approved rule with a critical error in its sample is refused, and the item must be excluded
+  r.rules[0].sample.critical.push({ id: first, category: "wrong_answer", note: "x" });
+  const p = reviewProblems(r, generated, retired);
+  assert.ok(p.some((x) => x.includes("recorded as approved")));
+  assert.ok(p.some((x) => x.includes("critical error on") && x.includes("no exclude exception")));
+  // categories are fixed
+  const bad = approvedRule("add_ending");
+  bad.rules[0].decision = "not_approved";
+  bad.rules[0].sample.critical.push({ id: first, category: "typo" as never, note: "x" });
+  bad.exceptions.push({ item: first, action: "exclude", reason: "x", by: "T", date: today });
+  assert.ok(reviewProblems(bad, generated, retired).some((x) => x.includes("unknown critical category")));
+  // a minor error is kept (recorded) or excluded (with an exception)
+  const minor = approvedRule("add_ending");
+  minor.rules[0].sample.minor.push({ id: first, note: "a bit stiff", action: "keep" });
+  assert.deepEqual(reviewProblems(minor, generated, retired), []);
+  minor.rules[0].sample.minor.push({ id: r.rules[0].sample.items[1].id, note: "odd word", action: "exclude" });
+  assert.ok(reviewProblems(minor, generated, retired).some((x) => x.includes("marked exclude but has no exclude exception")));
   const changedStatement = { ...emptyReview(), statement: "Approval makes items count." };
-  assert.ok(reviewProblems(changedStatement, generated, retired).some((p) => p.includes("statement")));
+  assert.ok(reviewProblems(changedStatement, generated, retired).some((x) => x.includes("statement")));
 });
 
 test("samples are deterministic, spread across patterns, and skip flagged items", () => {
@@ -149,26 +163,60 @@ test("samples are deterministic, spread across patterns, and skip flagged items"
   assert.ok(!sampleRule(generated, GENERATOR, "add_ending", 30, "s1", r).some((g) => g.generated!.word === word));
 });
 
-test("recording a filled sheet: approvals, exceptions, version checks and notes", () => {
+test("recording a filled sheet: critical blocks, minor is kept or excluded, versions and notes are checked", () => {
   const sample = sampleRule(generated, GENERATOR, "add_ending", 30, "s9");
   const meta = { kind: "rule" as const, id: `rule:${ruleId(GENERATOR, "add_ending")}:s9`, generator: GENERATOR, template: "add_ending", seed: "s9", population: 655, wordbank: "x", created: today, instructions: "" };
-  const rows = sample.map((g, k) => ({ id: g.id, version: String(g.version), verdict: k === 0 ? "problem" : "ok", note: k === 0 ? "the base word is unusual" : "" }));
-  const csv = parseCsv(toCsv(rows, ["id", "version", "verdict", "note"]));
+  const cols = ["id", "version", "verdict", "category", "note"];
+  const sheetOf = (f: (k: number) => Partial<Record<string, string>>) => parseCsv(toCsv(sample.map((g, k) => ({ id: g.id, version: String(g.version), verdict: "ok", category: "", note: "", ...f(k) })), cols));
   const kept = { path: "content/english/spelling/review/sheets/x.csv", sha256: "0".repeat(64) };
-  const { review, summary } = recordSheet(emptyReview(), generated, meta, csv, "Prem", today, kept);
-  assert.equal(review.rules[0].decision, "approved");
-  assert.match(summary, /approved/);
-  assert.deepEqual(review.exceptions.map((e) => [e.item, e.action]), [[sample[0].id, "exclude"]]);
+  // minor errors: approved; one kept with a note, one excluded
+  const minor = sheetOf((k) => (k === 0 ? { verdict: "minor-keep", note: "stiff wording" } : k === 1 ? { verdict: "minor-exclude", note: "unusual word" } : {}));
+  const ok = recordSheet(emptyReview(), generated, meta, minor, "Prem", today, kept);
+  assert.equal(ok.review.rules[0].decision, "approved");
+  assert.match(ok.summary, /does not prove every item is right/);
+  assert.deepEqual(ok.review.exceptions.map((e) => [e.item, e.action]), [[sample[1].id, "exclude"]]);
+  assert.equal(reviewStatus(generated, ok.review).get(sample[0].id)!.status, "approved", "a minor-keep item stays");
+  assert.equal(reviewStatus(generated, ok.review).get(sample[1].id)!.status, "excluded");
+  assert.deepEqual(reviewProblems(ok.review, generated, retired), []);
+  // one critical error: recorded, the rule is not approved, and the item is excluded
+  const crit = recordSheet(emptyReview(), generated, meta, sheetOf((k) => (k === 3 ? { verdict: "critical", category: "misleading_explanation", note: "the rule given is wrong" } : {})), "Prem", today, kept).review;
+  assert.equal(crit.rules[0].decision, "not_approved");
+  assert.equal(crit.rules[0].sample.critical[0].category, "misleading_explanation");
+  assert.equal(reviewStatus(generated, crit).get(sample[3].id)!.status, "excluded");
+  assert.equal(reviewStatus(generated, crit).get(sample[5].id)!.status, "unreviewed");
+  // what is refused
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf(() => ({ verdict: "" })), "Prem", today, kept), /verdict must be/);
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf(() => ({ verdict: "problem", note: "x" })), "Prem", today, kept), /verdict must be/, "the old two-way verdict is no longer accepted");
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf((k) => (k === 0 ? { verdict: "critical", note: "x" } : {})), "Prem", today, kept), /needs a category/);
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf((k) => (k === 0 ? { verdict: "minor-keep" } : {})), "Prem", today, kept), /write a note/);
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf(() => ({ version: "99" })), "Prem", today, kept), /make a new sheet/);
+  assert.throws(() => recordSheet(emptyReview(), generated, meta, sheetOf(() => ({})), " ", today, kept), /who reviewed/);
+});
+
+test("the pilot set: four suffix patterns, typed exercises only, consistent with the content; its per-word sheet approves only what was reviewed", () => {
+  const set = loadPilotSet();
+  assert.deepEqual(set.templates, ["add_ending", "hear_spell"], "typed answers only: no recognition exercises");
+  assert.deepEqual(pilotSetProblems(set, generated, committed), []);
+  assert.deepEqual(set.items, pilotItems(set, generated));
+  assert.equal(set.items.length, 2 * Object.values(set.patterns).flat().length);
+  for (const r of set.items) assert.equal(reviewStatus(generated, committed).get(r.id)!.status, "unreviewed", "nothing in the pilot set is approved without a review");
+  // a simulated review (in this test only): one critical, one minor-exclude, the rest ok
+  const words = Object.values(set.patterns).flat();
+  const byId = new Map(generated.map((g) => [g.id, g]));
+  const rows = words.map((w, k) => ({
+    word: w,
+    items: set.items.filter((r) => byId.get(r.id)!.generated!.word === w).map((r) => `${r.id}@${r.version}`).join("; "),
+    verdict: k === 0 ? "critical" : k === 1 ? "minor-exclude" : "ok",
+    category: k === 0 ? "ambiguous_answer" : "",
+    note: k < 2 ? "x" : "",
+  }));
+  const meta = { kind: "words" as const, id: "set:pilot-1", name: "pilot-1", wordbank: "x", created: today, instructions: "" };
+  const { review } = recordSheet(committed, generated, meta, parseCsv(toCsv(rows, ["word", "items", "verdict", "category", "note"])), "Prem", today, { path: "x", sha256: "0".repeat(64) });
+  const st = reviewStatus(generated, review);
+  const approved = set.items.filter((r) => st.get(r.id)!.status === "approved");
+  assert.equal(approved.length, set.items.length - 4, "both exercises of the two problem words are left out");
+  assert.equal(review.sets[0].critical.length, 2);
   assert.deepEqual(reviewProblems(review, generated, retired), []);
-  assert.throws(() => recordSheet(emptyReview(), generated, meta, csv.map((r) => ({ ...r, verdict: "" })), "Prem", today, kept), /verdict must be/);
-  assert.throws(() => recordSheet(emptyReview(), generated, meta, csv.map((r, k) => (k === 0 ? { ...r, note: "" } : r)), "Prem", today, kept), /write a note/);
-  assert.throws(() => recordSheet(emptyReview(), generated, meta, csv.map((r) => ({ ...r, version: "99" })), "Prem", today, kept), /make a new sheet/);
-  assert.throws(() => recordSheet(emptyReview(), generated, meta, csv, " ", today, kept), /who reviewed/);
-  // two problems in 30 is too many: recorded, but not approved, and both items are excluded
-  const two = csv.map((r, k) => (k < 2 ? { ...r, verdict: "problem", note: "wrong" } : r));
-  const no = recordSheet(emptyReview(), generated, meta, two, "Prem", today, kept).review;
-  assert.equal(no.rules[0].decision, "not_approved");
-  assert.equal(reviewStatus(generated, no).get(sample[5].id)!.status, "unreviewed");
 });
 
 test("CSV round trip keeps commas, quotes and line breaks", () => {

@@ -86,8 +86,10 @@ Updates are a new upload of a new pilot build. The app updates itself the next t
 
 ## Decisions for you
 
-1. Which host: Cloudflare with Access (recommended), GitHub Pages unlisted, or no hosting (a laptop on
-   the home Wi-Fi with `HOST=0.0.0.0 npm run english:preview`, with no offline install on phones).
+1. Which host, when families need access: Cloudflare with Access (recommended), GitHub Pages unlisted,
+   or no hosting. For your own first test no hosting is needed: a USB cable and Chrome's port forwarding
+   give the full installed, offline experience on your Android phone ([`WEB_APP.md`](WEB_APP.md),
+   "Trying it on Android").
 2. Who creates and owns the hosting account.
 3. How long trial summaries are kept, and where.
 

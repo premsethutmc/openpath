@@ -23,10 +23,31 @@ export const REVIEW_SCOPE = "practice_content" as const;
 export const REVIEW_STATEMENT =
   "Approval allows generated items to be offered as practice content. It does not mark them checked, and it never lets them change capability estimates; that needs separate validation of their assessment quality.";
 
-/** A rule is approved only from a sample of at least this many items (or the whole rule, if smaller)… */
+/** A rule is approved only from a sample of at least this many items (or the whole rule, if smaller), and only with no critical error in it. */
 export const MIN_SAMPLE = 20;
-/** …with at most this share of the sample found to have problems (each problem item becomes an exception). */
-export const MAX_PROBLEM_RATE = 0.05;
+
+/**
+ * Critical errors (any one blocks a rule's approval; the item is always excluded):
+ *   wrong_answer            the keyed answer is wrong
+ *   ambiguous_answer        another answer should also be accepted, or the prompt allows more than one
+ *   misleading_explanation  the feedback or teaching explanation would teach something false
+ *   inappropriate           unsuitable for learners aged 10–15
+ * Minor errors (harmless wording or presentation) never block, but each is handled explicitly: the item
+ * is kept as it is (recorded) or excluded.
+ */
+export const CRITICAL_CATEGORIES = ["wrong_answer", "ambiguous_answer", "misleading_explanation", "inappropriate"] as const;
+export type CriticalCategory = (typeof CRITICAL_CATEGORIES)[number];
+
+export interface CriticalError {
+  id: string;
+  category: CriticalCategory;
+  note: string;
+}
+export interface MinorError {
+  id: string;
+  note: string;
+  action: "keep" | "exclude";
+}
 
 export interface ItemRef {
   id: string;
@@ -40,7 +61,7 @@ export interface RuleApproval {
   decision: "approved" | "not_approved";
   by: string;
   date: string;
-  sample: { seed: string; size: number; population: number; items: ItemRef[]; problems: { id: string; note: string }[] };
+  sample: { seed: string; size: number; population: number; items: ItemRef[]; critical: CriticalError[]; minor: MinorError[] };
   /** The filled review sheet kept as the record of what was looked at. */
   sheet?: { path: string; sha256: string };
   /** Fingerprint of the word bank the sample was drawn from (provenance). */
@@ -54,8 +75,10 @@ export interface SetApproval {
   decision: "approved" | "not_approved";
   by: string;
   date: string;
+  /** The items approved: every row reviewed, minus critical errors and minor errors marked exclude. */
   items: ItemRef[];
-  problems: { id: string; note: string }[];
+  critical: CriticalError[];
+  minor: MinorError[];
   sheet?: { path: string; sha256: string };
   note?: string;
 }
@@ -199,19 +222,24 @@ export function sampleRule(items: Item[], generator: string, template: string, s
   return out;
 }
 
-/** Whether a sample result is enough to approve a rule. */
-export function ruleDecision(population: number, size: number, problems: number): { decision: "approved" | "not_approved"; reason: string } {
+/**
+ * Whether a sample result is enough to approve a rule: a large enough sample and no critical error. A
+ * critical error means the rule itself can make such errors, so it is fixed (a new generator version)
+ * and a new sample reviewed; excluding the one item found is not enough.
+ */
+export function ruleDecision(population: number, size: number, critical: number, minor = 0): { decision: "approved" | "not_approved"; reason: string } {
   const needed = Math.min(MIN_SAMPLE, population);
   if (size < needed) return { decision: "not_approved", reason: `the sample has ${size} items; at least ${needed} are needed` };
-  if (problems / size > MAX_PROBLEM_RATE) return { decision: "not_approved", reason: `${problems} of ${size} sampled items had problems (more than ${MAX_PROBLEM_RATE * 100}%); fix the rule and review a new sample` };
-  return { decision: "approved", reason: `${problems} of ${size} sampled items had problems (each is excluded)` };
+  if (critical) return { decision: "not_approved", reason: `${critical} critical error${critical === 1 ? "" : "s"} in ${size} sampled items; fix the rule and review a new sample` };
+  return { decision: "approved", reason: `no critical errors in ${size} sampled items${minor ? `; ${minor} minor, each kept or excluded as recorded` : ""}` };
 }
 
 /**
- * With no problems in a sample of n, the share of problem items in the whole rule is below about 3/n
- * with 95% confidence (the "rule of three"); a guide to what an approval does and does not show.
+ * With no critical error in a sample of n, the share of such errors in the whole rule is probably (95%)
+ * below about 3/n (the "rule of three"). A guide only: a clean sample does not prove every item is right,
+ * which is why item exclusions, version checks and learners' reports stay in place after approval.
  */
-export const problemRateBound = (n: number, problems: number) => (n ? Math.min(1, (problems + 3) / n) : 1);
+export const criticalRateBound = (n: number) => (n ? Math.min(1, 3 / n) : 1);
 
 /** Consistency of the review record against the content (run in CI). */
 export function reviewProblems(review: GeneratedReview, items: Item[], retired: Item[] = []): string[] {
@@ -232,11 +260,9 @@ export function reviewProblems(review: GeneratedReview, items: Item[], retired: 
     if (!date(r.date)) p.push(`${r.id}: invalid date`);
     for (const ref of r.sample.items) if (!known.get(ref.id)?.has(ref.version)) p.push(`${r.id}: sampled item ${ref.id} v${ref.version} is unknown`);
     if (r.sample.size !== r.sample.items.length) p.push(`${r.id}: sample size does not match its items`);
-    for (const pr of r.sample.problems) if (!r.sample.items.some((x) => x.id === pr.id)) p.push(`${r.id}: problem item ${pr.id} is not in the sample`);
-    const d = ruleDecision(r.sample.population, r.sample.size, r.sample.problems.length);
+    const d = ruleDecision(r.sample.population, r.sample.size, r.sample.critical.length, r.sample.minor.length);
     if (r.decision === "approved" && d.decision !== "approved") p.push(`${r.id}: recorded as approved, but ${d.reason}`);
-    for (const pr of r.sample.problems)
-      if (!review.exceptions.some((e) => e.item === pr.id && e.action === "exclude")) p.push(`${r.id}: problem item ${pr.id} has no exclude exception`);
+    p.push(...errorProblems(r.id, r.sample.items, r.sample.critical, r.sample.minor, review.exceptions));
   }
   for (const s of review.sets) {
     if (ids.has(s.id)) p.push(`review id ${s.id} is used twice`);
@@ -244,6 +270,8 @@ export function reviewProblems(review: GeneratedReview, items: Item[], retired: 
     if (!s.by?.trim()) p.push(`${s.id}: no reviewer`);
     if (!date(s.date)) p.push(`${s.id}: invalid date`);
     for (const ref of s.items) if (!known.get(ref.id)?.has(ref.version)) p.push(`${s.id}: item ${ref.id} v${ref.version} is unknown`);
+    p.push(...errorProblems(s.id, [...s.items, ...s.critical.map((x) => ({ id: x.id, version: 0 })), ...s.minor.map((x) => ({ id: x.id, version: 0 }))], s.critical, s.minor, review.exceptions));
+    for (const x of [...s.critical, ...s.minor.filter((m) => m.action === "exclude")]) if (s.items.some((r) => r.id === x.id)) p.push(`${s.id}: ${x.id} has an error marked for exclusion but is in the approved items`);
   }
   for (const e of review.exceptions) {
     const what = e.item ?? e.word ?? "?";
@@ -252,6 +280,25 @@ export function reviewProblems(review: GeneratedReview, items: Item[], retired: 
     if (e.word && !genWords.has(e.word.toLowerCase())) p.push(`exception ${e.word}: no generated item has this word`);
     if (e.word && e.action === "allow") p.push(`exception ${e.word}: "allow" applies to one item, not a whole word`);
     if (!e.reason?.trim() || !e.by?.trim() || !date(e.date)) p.push(`exception ${what}: needs a reason, a reviewer and a date`);
+  }
+  return p;
+}
+
+/** Every critical error and every minor error marked exclude must have an exclude exception; categories must be known. */
+function errorProblems(id: string, reviewed: ItemRef[], critical: CriticalError[], minor: MinorError[], exceptions: ReviewException[]): string[] {
+  const p: string[] = [];
+  const excluded = (item: string) => exceptions.some((e) => e.item === item && e.action === "exclude");
+  for (const c of critical) {
+    if (!reviewed.some((x) => x.id === c.id)) p.push(`${id}: critical error on ${c.id}, which was not reviewed`);
+    if (!CRITICAL_CATEGORIES.includes(c.category)) p.push(`${id}: ${c.id} has unknown critical category ${String(c.category)}`);
+    if (!c.note?.trim()) p.push(`${id}: critical error on ${c.id} has no note`);
+    if (!excluded(c.id)) p.push(`${id}: critical error on ${c.id} has no exclude exception`);
+  }
+  for (const m of minor) {
+    if (!reviewed.some((x) => x.id === m.id)) p.push(`${id}: minor error on ${m.id}, which was not reviewed`);
+    if (m.action !== "keep" && m.action !== "exclude") p.push(`${id}: minor error on ${m.id} must be kept or excluded`);
+    if (!m.note?.trim()) p.push(`${id}: minor error on ${m.id} has no note`);
+    if (m.action === "exclude" && !excluded(m.id)) p.push(`${id}: minor error on ${m.id} is marked exclude but has no exclude exception`);
   }
   return p;
 }

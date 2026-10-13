@@ -25,6 +25,55 @@
    "reason": "An unusual, rarely used form (evil + -est).",
    "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
    "date": "2026-10-13"
+  },
+  {
+   "word": "orgies",
+   "action": "exclude",
+   "reason": "Inappropriate for learners aged 10\u201315 (it passed the blocklist).",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "overdose",
+   "action": "exclude",
+   "reason": "Inappropriate: drug-related.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "flogging",
+   "action": "exclude",
+   "reason": "Inappropriate: violence.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "mugging",
+   "action": "exclude",
+   "reason": "Inappropriate: crime.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "insane",
+   "action": "exclude",
+   "reason": "Sensitive (used loosely about mental health).",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "flied",
+   "action": "exclude",
+   "reason": "Misleading: the past of fly is flew; flied is only a baseball term.",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
+  },
+  {
+   "word": "joyfuller",
+   "action": "exclude",
+   "reason": "Not standard English (more joyful).",
+   "by": "Claude (OpenPath assistant), pre-screen before the pilot review; a reviewer may reverse it",
+   "date": "2026-10-13"
   }
  ]
 }

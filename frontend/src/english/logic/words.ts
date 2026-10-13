@@ -19,7 +19,7 @@
  *   delayed retention    an independent recall at least RETENTION_GAP_HOURS after the learner last met
  *                        the word: passed if right, failed if wrong
  */
-import { RECALL_TEMPLATES } from "../../../../packages/english-core/src/index.ts";
+import { RECALL_TEMPLATES, itemVersion } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent, Code } from "./content.ts";
 import type { AttemptEvent } from "./events.ts";
 import type { AppState } from "./state.ts";
@@ -93,7 +93,7 @@ export function wordMastery(s: AppState, c: AppContent): Map<string, WordRecord>
   const attempts = [...s.sessions.values()].flatMap((x) => x.attempts).sort((a, b) => a.at.localeCompare(b.at) || a.id.localeCompare(b.id));
   const out = new Map<string, WordRecord>();
   for (const a of attempts) {
-    const item = c.ctx.content.items.get(a.item.id);
+    const item = itemVersion(c.ctx.content, a.item.id, a.item.version) ?? c.ctx.content.items.get(a.item.id); // the version answered
     if (!item || item.kind !== "code" || !item.generated) continue;
     const word = item.generated.word;
     const recall = RECALL_TEMPLATES.has(item.generated.template);

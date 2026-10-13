@@ -15,11 +15,17 @@
   difficulty levels are right. Two learners are too few. Every finding is an observation about a person,
   and is recorded as such.
 
+## First: try it yourself
+
+Use the preview build on your own Android phone for a few days, as a learner (see "Trying it on Android"
+in [`WEB_APP.md`](WEB_APP.md)), before involving any family. What you notice there decides what changes
+before the pilot.
+
 ## Needed before the first session
 
 | # | What | Who | Effort |
 |---|---|---|---|
-| 1 | **Review the four pilot sheets** and record them ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)): 3 rules × 30 items, plus 43 homophones | You, or a person you choose | About 1–1½ hours |
+| 1 | **Review the pilot sheet** (`pilot-1.csv`: 56 words, one row each) and record it ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)) | You, or a person you choose | About 20–30 minutes |
 | 2 | **Build the pilot version** (`npm run english:build:pilot`). It refuses if nothing is approved | Me | Minutes |
 | 3 | **Choose the hosting** ([`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md)), and set it up if approved; or run it from a laptop at home | You decide; set-up together | 30–45 minutes |
 | 4 | **Try it on each learner's actual phone** with the family: <ul><li>opens over HTTPS;</li><li>installs to the home screen;</li><li>works offline;</li><li>dictation voice works or not (Settings → Hearing words);</li><li>typing fits above the keyboard</li></ul> | You, with the family | 15 minutes each |

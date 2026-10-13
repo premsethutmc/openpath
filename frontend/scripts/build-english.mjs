@@ -2,6 +2,8 @@
  * Build the private OpenPath English web app (static files only; no server, no API).
  *
  *   node scripts/build-english.mjs           -> dist-english/ (development: unreviewed practice words included)
+ *   node scripts/build-english.mjs --preview -> dist-english/ with the pilot set's words, not yet reviewed (for the
+ *                                               product owner to try the pilot experience; labelled as unreviewed)
  *   node scripts/build-english.mjs --pilot   -> dist-english/ for a trial: only practice words from approved
  *                                               rules or reviewed sets (fails if none are approved)
  *
@@ -18,17 +20,18 @@ import * as esbuild from "esbuild";
 import { reviewStatus, reviewSummary } from "../../packages/english-core/src/index.ts";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const mode = process.argv.includes("--pilot") ? "pilot" : "development";
+const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes("--preview") ? "preview" : "development";
 {
   const items = JSON.parse(await readFile(`${root}/../content/english/spelling/generated-items.json`, "utf8"));
   const review = JSON.parse(await readFile(`${root}/../content/english/spelling/review/review.json`, "utf8"));
   const rows = reviewSummary(items, reviewStatus(items, review));
   const approved = rows.reduce((t, r) => t + r.approved, 0);
-  const offered = mode === "pilot" ? approved : approved + rows.reduce((t, r) => t + r.unreviewed, 0);
+  const pilotSet = JSON.parse(await readFile(`${root}/../content/english/spelling/review/pilot-set.json`, "utf8")).items.length;
+  const offered = mode === "pilot" ? approved : mode === "preview" ? pilotSet : approved + rows.reduce((t, r) => t + r.unreviewed, 0);
   console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)`);
   for (const r of rows) console.log(`  ${r.rule}: ${r.approved} approved, ${r.unreviewed} unreviewed, ${r.flagged} flagged, ${r.excluded} excluded`);
   if (mode === "pilot" && !approved) {
-    console.error("A pilot build needs at least one approved rule or reviewed set. Review a sample first: node tools/english/spelling/review.ts sheet --template add_ending");
+    console.error("A pilot build needs at least one approved rule or reviewed set. Review the pilot sheet first (content/english/spelling/review/pending/pilot-1.csv), then: node tools/english/spelling/review.ts record pilot-1.csv --by \"Your name\"");
     process.exit(1);
   }
 }

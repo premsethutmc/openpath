@@ -337,3 +337,168 @@ test("works offline once opened, and without speech the spelling questions use w
   assert.deepEqual(errors.filter((e) => !/Failed to load resource|ERR_INTERNET_DISCONNECTED/.test(e)), []);
   await context.close();
 });
+
+// ------------------------------------------------------------------ Android phone
+
+const ANDROID = {
+  viewport: { width: 412, height: 915 },
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  acceptDownloads: true,
+  userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36",
+};
+/** About what is left of a Pixel-sized screen with the on-screen keyboard open. */
+const KEYBOARD_OPEN = { width: 412, height: 470 };
+
+/** On a typed question: the answer box and Check button are on screen with the keyboard open, and Enter submits. */
+async function typeWithKeyboard(page, right) {
+  const id = await page.locator(".item").getAttribute("data-item");
+  const item = items.get(id);
+  if (!item.format.startsWith("typed")) return answer(page, right);
+  await page.setViewportSize(KEYBOARD_OPEN);
+  const box = page.locator(".ruled input");
+  await box.tap();
+  for (const [name, attr] of [["autocorrect", "off"], ["autocapitalize", "off"], ["spellcheck", "false"], ["autocomplete", "off"]]) assert.equal(await box.getAttribute(name), attr, `${name} is ${attr}: the keyboard must not correct spelling`);
+  const inView = async (loc) => {
+    const b = await loc.boundingBox();
+    return b && b.y >= 0 && b.y + b.height <= KEYBOARD_OPEN.height;
+  };
+  assert.ok(await inView(box), "the answer box is visible above the keyboard");
+  await page.keyboard.type(right ? item.answers[0] : "zzzq");
+  assert.ok(await inView(page.getByRole("button", { name: "Check", exact: true })), "Check is visible above the keyboard");
+  await page.keyboard.press("Enter");
+  await page.locator(".feedback").waitFor();
+  await page.setViewportSize(ANDROID.viewport); // the keyboard closes once the answer is checked
+  await fits(page);
+  return item;
+}
+
+async function finishOnAndroid(page, right = () => true) {
+  const asked = [];
+  for (let n = 0; n < 40; n++) {
+    await page.locator(".item, .lesson, .done").first().waitFor({ timeout: 8000 });
+    if (await page.locator(".done").count()) return asked;
+    if (await page.locator(".lesson").count()) {
+      await page.locator(".check .option").first().tap();
+      await page.getByRole("button", { name: "Start practising" }).tap();
+      continue;
+    }
+    asked.push(await typeWithKeyboard(page, right(n)));
+    await page.getByRole("button", { name: "Next" }).tap();
+    await page.locator(".feedback").waitFor({ state: "detached" });
+  }
+  throw new Error("the session did not end");
+}
+
+test("Android phone: assessment, plan, lesson, typed practice with the keyboard open, feedback, word mastery, reopen, a review a day later, export and import", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await createProfile(page, "Anil");
+  await tappable(page);
+  // 2. the initial assessment: placement, then the spelling check
+  await page.getByRole("button", { name: "Start" }).first().tap();
+  await finishOnAndroid(page, (n) => n % 3 !== 2);
+  await page.getByRole("button", { name: "Back to today" }).tap();
+  await page.getByRole("heading", { name: "Spelling check" }).waitFor();
+  await page.getByRole("button", { name: "Start" }).first().tap();
+  const check = await finishOnAndroid(page, (n) => n !== 0); // the first word misspelt
+  const missed = check[0].generated.word;
+  await page.getByRole("button", { name: "Back to today" }).tap();
+  // 3. a personalised plan, each step with its reason
+  await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
+  assert.ok((await page.locator(".plan li p").first().innerText()).length > 20, "each step says why");
+  await shot(page, "android-1-plan");
+  // 4–6. the explanation, typed practice, corrective feedback
+  await page.locator(".plan li", { hasText: "Spelling:" }).getByRole("button", { name: "Start" }).tap();
+  await page.locator(".lesson").waitFor();
+  await shot(page, "android-2-lesson");
+  await page.locator(".check .option").first().tap();
+  await page.getByRole("button", { name: "Start practising" }).tap();
+  await page.locator(".item").waitFor();
+  const wrong = await typeWithKeyboard(page, false);
+  await page.getByText("Not quite.").waitFor();
+  assert.match(await page.locator(".feedback").innerText(), new RegExp(`The answer is ${wrong.answers?.[0] ?? ""}`));
+  await shot(page, "android-3-feedback");
+  await page.getByRole("button", { name: "Next" }).tap();
+  await finishOnAndroid(page);
+  await page.getByRole("button", { name: "Back to today" }).tap();
+  // 7. word-level mastery
+  await page.getByRole("button", { name: "Progress" }).tap();
+  await page.locator(".words summary").tap();
+  assert.match(await page.locator(".words-table").innerText(), new RegExp(`${missed}\\s+Learning`));
+  await shot(page, "android-4-words");
+  // 8. close the app completely and open it again: nothing lost
+  const before = await page.locator(".word-counts").innerText();
+  await page.close();
+  const again = await context.newPage();
+  again.on("pageerror", (e) => errors.push(e.message));
+  await again.goto(URL);
+  await again.getByRole("heading", { name: "Today" }).waitFor();
+  await again.getByRole("button", { name: "Progress" }).tap();
+  assert.equal(await again.locator(".word-counts").innerText(), before);
+  // 10. a day later: the misspelt word comes back; written correctly, it is remembered a day later
+  await again.evaluate(() => localStorage.setItem("openpath-english-clock-offset-days", "1"));
+  await again.reload();
+  await again.getByRole("heading", { name: /^Review \d+ words?$/ }).waitFor();
+  await again.locator(".plan li", { hasText: "Review" }).getByRole("button", { name: "Start" }).tap();
+  await finishOnAndroid(again);
+  await again.getByRole("button", { name: "Back to today" }).tap();
+  await again.getByRole("button", { name: "Progress" }).tap();
+  await again.locator(".words summary").tap();
+  assert.match(await again.locator(".words-table").innerText(), new RegExp(`${missed}\\s+Remembered a day or more later`));
+  // 9. export, delete, import: the same word record comes back
+  const after = await again.locator(".word-counts").innerText();
+  await again.getByRole("button", { name: "Settings" }).tap();
+  const [download] = await Promise.all([again.waitForEvent("download"), again.getByRole("button", { name: "Export a backup" }).tap()]);
+  const path = await download.path();
+  again.once("dialog", (d) => d.accept());
+  await again.getByRole("button", { name: "Delete this learner from this device" }).tap();
+  await again.getByRole("heading", { name: "OpenPath English" }).waitFor();
+  await again.locator(".import input[type=file]").setInputFiles(path);
+  await again.getByRole("heading", { name: "Today" }).waitFor();
+  await again.getByRole("button", { name: "Progress" }).tap();
+  assert.equal(await again.locator(".word-counts").innerText(), after);
+  await fits(again);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Android phone over plain http on a home network: everything works and is kept, without offline install", async () => {
+  const { networkInterfaces } = await import("node:os");
+  const { spawn } = await import("node:child_process");
+  const lan = Object.values(networkInterfaces()).flat().find((a) => a && a.family === "IPv4" && !a.internal)?.address;
+  if (!lan) return; // no network interface to test with
+  const server = spawn(process.execPath, [new globalThis.URL("../scripts/preview-english.mjs", import.meta.url).pathname], { env: { ...process.env, HOST: "0.0.0.0", PORT: "4179" }, stdio: "ignore" });
+  try {
+    const url = `http://${lan}:4179/`;
+    for (let i = 0; i < 50; i++) {
+      try {
+        if ((await fetch(url)).ok) break;
+      } catch {}
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    const context = await browser.newContext(ANDROID);
+    const page = await context.newPage();
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto(url);
+    assert.equal(await page.evaluate(() => window.isSecureContext), false, "a plain-http address on the network is not a secure context");
+    assert.equal(await page.evaluate(() => "serviceWorker" in navigator), false, "so there is no offline install");
+    await page.getByLabel(/Name to show/).fill("Lan");
+    await page.getByRole("button", { name: "Create and start" }).tap();
+    await page.locator("#consent").check();
+    await page.getByRole("button", { name: "Create and start" }).tap();
+    await page.getByRole("button", { name: "Start" }).first().tap();
+    await page.locator(".item").waitFor();
+    await typeWithKeyboard(page, true);
+    await page.reload();
+    await page.getByText(/You stopped in the middle of/).waitFor(); // the answer was kept on the phone
+    assert.deepEqual(errors, []);
+    await context.close();
+  } finally {
+    server.kill();
+  }
+});

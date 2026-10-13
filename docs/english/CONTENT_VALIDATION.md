@@ -48,55 +48,71 @@ checksum), and the word bank it was drawn from.
    - There is no explanation for feedback, or no recorded source.
 
    **81 items are flagged today, all clue items** (`meaning_first_letter`).
-2. **A rule is approved** from a sample:
-   - **Sample:** at least 20 items (or the whole rule, if smaller), drawn deterministically and spread
-     across every pattern. Flagged and already-excluded items are left out.
-   - **Pass level:** at most 5% of the sample has problems.
-   - **Problem items:** each one is excluded.
-   - **What a pass shows:** with no problems in 30, the rule's problem rate is probably (95%) below
-     about 10% ("rule of three"). That is a screen, not a guarantee, so pilot learners can still report
-     a question ("Something wrong with this question?").
+2. **Every reviewed item gets one of four verdicts** (tightened on 13 October):
+
+   | Verdict | Meaning | Effect |
+   |---|---|---|
+   | `ok` | Nothing wrong | Approved |
+   | `critical` + category | `wrong_answer`, `ambiguous_answer` (another answer should count, or the prompt allows two), `misleading_explanation`, `inappropriate` | The item is excluded. **A rule with any critical error in its sample is not approved**: the generator is fixed (a new version) and a new sample reviewed |
+   | `minor-keep` | Harmless wording or presentation problem; keep the item | Approved; the note is recorded with the approval |
+   | `minor-exclude` | Minor, but better left out | The item is excluded; the rest is unaffected |
+
+   - **A rule is approved** only with at least 20 sampled items (or the whole rule, if smaller) and no
+     critical error. With no critical error in 30, critical errors are probably (95%) below about 10% of
+     the rule. That is a screen, not proof that every item is right, so item exclusions, version checks
+     and learners' "Something wrong with this question?" reports stay in force after approval.
+   - **A reviewed set** approves exactly the items marked `ok` or `minor-keep`, since each one was looked
+     at.
 3. **An approval lapses on its own** when the generator version changes (a rule) or an item's version
    changes (a set), so a later change to the generator is never covered by an earlier review.
 4. **CI checks the record** (`review.ts --check`). It refuses:
-   - an approval its sample does not justify;
-   - a problem item with no exclusion;
+   - an approval its sample does not justify (including any critical error);
+   - a critical or minor-exclude item with no exclusion, or an unknown category;
+   - a pilot set whose items no longer match its words (a changed version, an excluded word);
    - unknown items;
    - a missing reviewer or date;
    - any change to the statement that approval is practice-only.
 
-## How to review (about 1–1½ hours for the pilot)
+## The pilot content, and the one review it needs (about 20–30 minutes)
 
-Four blank sheets are in `content/english/spelling/review/pending/`:
+**What the first pilot offers** (`content/english/spelling/review/pilot-set.json`):
 
-| Sheet | Rows | What it decides |
-|---|---|---|
-| `rule-add_ending-p1.csv` | 30 | "Add -ing to *serve*": all 653 such items |
-| `rule-hear_spell-p1.csv` | 30 | Dictation: all 760 |
-| `rule-choose_spelling-p1.csv` | 30 | "Which spelling is correct?": all 549 |
-| `set-homophones-1.csv` | 43 | The 43 homophone sentences, each one individually |
+- **Four foundational suffix rules:** *-es* plurals, doubling the last letter, dropping the silent *e*,
+  and changing *y* to *i*.
+- **14 common words each,** 56 words in all.
+- **Typed answers only:** adding the ending, and dictation where the device has a voice. That makes
+  112 exercises.
+- **Left out on purpose:**
+  - choosing between spellings and homophone sentences (recognition, not recall);
+  - meaning clues (often adult or the wrong sense);
+  - every other pattern.
+- **Why 14 words:** a pattern needs 1 word for the spelling check, 8 for practice and 4 for a check with
+  new words.
 
-1. **Fill in the sheet.** Open it in any spreadsheet. For each row, write `ok` or `problem` in
-   *verdict*, and what is wrong in *note*. A problem is anything you would not show a 10–15-year-old:
-   - a wrong or doubtful answer;
-   - a second answer that should also count;
-   - an unsuitable or adult word or sentence;
-   - a confusing prompt;
-   - a difficulty clearly wrong for the pattern.
+I chose the words; choosing is not reviewing. **Nothing in the set is approved until a person reviews
+it.**
 
-   The *options* column marks the right answer in [brackets].
+**The review sheet** is `content/english/spelling/review/pending/pilot-1.csv`: one row per word.
+
+1. **Fill in the verdict column.** Each row shows:
+   - the "add the ending" prompt;
+   - the dictation word;
+   - the accepted answers;
+   - the explanation shown after an answer.
+
+   The verdict covers both exercises for that word: `ok`, `critical` (with a category and a note),
+   `minor-keep` or `minor-exclude` (with a note).
 2. **Save it as CSV and record it:**
-   `node tools/english/spelling/review.ts record path/to/filled.csv --by "Your name"`. The tool finds
-   the sheet's details in `pending/`, refuses a sheet with a blank verdict, a problem without a note or
-   an item that has since changed, and prints the decision.
-3. **Check the result:** `node tools/english/spelling/review.ts` shows the counts by rule;
-   `npm run english:build:pilot` builds the trial version.
+   `node tools/english/spelling/review.ts record path/to/pilot-1.csv --by "Your name"`.
+3. **Check the result:** `npm run english:build:pilot` now builds the trial version with exactly the
+   approved words.
 
-**Not recommended for the pilot: the clue template** (`meaning_first_letter`, 255 unflagged items). Its
-WordNet definitions are often written for adults, or use an unexpected sense: *undue* is clued as
-"not yet payable", *faction* as "a clique (often secret) that seeks power usually through intrigue". Leave
-it unreviewed, so it is not offered. Without it, learners on a device with no voice practise homophones
-only by choosing between spellings (recognition), not by writing them.
+The earlier sample sheets for whole rules are no longer needed for the pilot; the tool can still make
+them (`sheet --template …`).
+
+**Before the review,** `npm run english:build:preview` builds the same pilot words, labelled in Settings
+as not yet reviewed, so you can try the pilot experience yourself. Trying it is a good way to do the
+review.
 
 ## Pre-screen findings already acted on (13 October)
 
@@ -106,10 +122,16 @@ Before the sheets were drawn, I read samples of each template (Claude, the assis
   *parable* and "(cap…)" for *capable*, as though it were a recognisable word. It now gives the general
   guide with an example. The generator was changed and the 132 affected items moved to version 2; their
   version 1 is kept, so earlier answers still score as they were given.
-- **Three words are excluded**, recorded as exceptions in my name so that a reviewer can reverse them:
+- **Ten words are excluded** from every build, recorded as exceptions in my name so that a reviewer
+  can reverse them:
+  - *orgies*, *overdose*, *flogging*, *mugging*, *insane*: unsuitable for ages 10–15 (*orgies* got
+    past the blocklist);
+  - *flied*: the past of *fly* is *flew*;
+  - *joyfuller*: not standard English;
   - *parable*: its *-able* is not a suffix;
-  - *yessed* and *evillest*: unusual forms a learner is unlikely to need.
+  - *yessed* and *evillest*: unusual forms.
 - **Not yet fixed (a generator follow-up):**
+  - the blocklist missed *orgies*; the word bank should be screened again before any wider use;
   - the *-able/-ible* and *-tion/-sion* patterns record no base word, so their explanations cannot say
     which base word the ending follows;
   - the clue template's definitions need a child-suitable source.

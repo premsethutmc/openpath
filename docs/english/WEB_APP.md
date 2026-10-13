@@ -17,12 +17,54 @@ npm run english:preview     # -> http://localhost:4174
 - **On a phone, for a private trial on the same Wi-Fi:** `HOST=0.0.0.0 npm run english:preview`,
   then open `http://<computer's address>:4174` on the phone. Everything works, but browsers allow
   offline install only on `https` or `localhost`, so over plain `http` the app needs the network to open.
+- **Preview of the trial:** `npm run english:build:preview` offers exactly the pilot words (four suffix
+  rules, typed answers only), labelled in Settings as not yet reviewed.
 - **Trial version:** `npm run english:build:pilot` offers only practice words from approved rules or
   reviewed sets ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)); it refuses to build while nothing is
   approved. The development build (`npm run english:build`) also offers unreviewed words. Neither offers
   flagged or excluded ones. Settings shows which version is running.
 - **Hosting it properly** (for learners at home): see [`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md). It needs any static `https` host for the
   `dist-english/` folder. That is a deployment and cost decision, so none is set up.
+
+## Trying it on Android (private; nothing is deployed)
+
+You need a computer with Node 22.18 or later and this repository. Build once:
+
+```
+cd frontend && npm ci && npm run english:build:preview && npm run english:preview
+```
+
+**Recommended: a USB cable and Chrome's port forwarding.** The phone then opens the app as
+`http://localhost:4174`, which Chrome treats as secure. So it installs to the home screen and keeps
+working offline, and you can unplug and use it for days. Nothing is reachable from any other device.
+
+1. **On the phone:** Settings → About phone → tap *Build number* seven times; then Settings → System →
+   Developer options → turn on *USB debugging*.
+2. **Connect** the phone by USB and allow the computer when asked.
+3. **On the computer:** in Chrome, open `chrome://inspect/#devices` → *Port forwarding…* → add port
+   `4174` to `localhost:4174` → tick *Enable port forwarding* → Done. The phone appears in the list.
+   (With Android's platform tools, `adb reverse tcp:4174 tcp:4174` does the same.)
+4. **On the phone:** in Chrome, open `http://localhost:4174`. Create a learner, then Chrome's menu →
+   *Add to Home screen* (or *Install app*).
+5. **Unplug.** The app opens from the home screen without the computer, because its files are cached on
+   the phone. To update it later, rebuild, plug in again with forwarding on, and open it once.
+
+**Quickest look, no cable:** with the phone and computer on the same Wi-Fi, run
+`HOST=0.0.0.0 npm run english:preview` and open `http://<computer's address>:4174` on the phone.
+- Everything works and progress is kept on the phone.
+- It cannot be installed or used offline (plain `http`), and the computer must be running.
+- Anyone on the same Wi-Fi could open it while the server runs.
+
+**Things to notice as a learner:**
+- whether your keyboard still suggests or corrects words in the answer box (the app turns this off;
+  some keyboards may ignore that);
+- whether a dictation voice is offered (Settings → Hearing words);
+- how the daily plan reads;
+- how the explanations land;
+- what Progress → Words shows after a day or two.
+
+Use the note box (Settings, or after a session) for anything that gets in the way. Notes stay on the
+phone and appear in a trial summary.
 
 ## The journey
 

@@ -14,7 +14,8 @@
     "english:build": "node scripts/build-english.mjs",
     "english:preview": "node scripts/preview-english.mjs",
     "english:e2e": "node --test e2e/english.test.mjs",
-    "english:build:pilot": "node scripts/build-english.mjs --pilot"
+    "english:build:pilot": "node scripts/build-english.mjs --pilot",
+    "english:build:preview": "node scripts/build-english.mjs --preview"
   },
   "dependencies": {
     "react": "^19.2.0",

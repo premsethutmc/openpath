@@ -549,8 +549,10 @@ function Settings({ learner, repo, voice, onChanged, onLeave, onSwitch }: { lear
         <NoteBox learner={learner} screen="settings" label="Tell us about a problem, or anything that got in the way" />
         <p className="small">
           {c.contentMode === "pilot"
-            ? `Trial version: practice words come only from reviewed rules (${c.generated.length} practice questions).`
-            : `Development version: practice words include ones not yet reviewed (${c.generated.length} practice questions).`}
+            ? `Trial version: practice words have all been reviewed by a person (${c.generated.length} practice questions).`
+            : c.contentMode === "preview"
+              ? `Preview of the trial: the trial's practice words, not yet reviewed by a person (${c.generated.length} practice questions).`
+              : `Development version: practice words include ones not yet reviewed (${c.generated.length} practice questions).`}
         </p>
       </section>
       <section aria-labelledby="profile-title">

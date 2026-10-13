@@ -34,6 +34,7 @@ import generatedJson from "../../../../content/english/spelling/generated-items.
 import retiredGeneratedJson from "../../../../content/english/spelling/retired-generated.json";
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
 import reviewJson from "../../../../content/english/spelling/review/review.json";
+import pilotSetJson from "../../../../content/english/spelling/review/pilot-set.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
 
@@ -79,14 +80,18 @@ export const SPELLING = new Set<string>(GUIDED.spelling);
 
 /**
  * Which generated items a build offers (content validation, 13 October 2026):
- *   pilot        only items covered by an approved rule or reviewed set
+ *   pilot        only items covered by an approved rule or reviewed set (a person has reviewed them)
+ *   preview      the pilot set's items (pilot-set.json), reviewed or not: for the product owner to try
+ *                the pilot experience before the review; labelled as not yet reviewed
  *   development  approved and unreviewed items
  * Flagged and excluded items are never offered. Either way, generated items stay practice-only: an
  * approval never lets them change a capability estimate.
  */
-export type ContentMode = "pilot" | "development";
+export type ContentMode = "pilot" | "preview" | "development";
 declare const __OPENPATH_CONTENT__: string | undefined;
-export const BUILD_CONTENT_MODE: ContentMode = typeof __OPENPATH_CONTENT__ !== "undefined" && __OPENPATH_CONTENT__ === "pilot" ? "pilot" : "development";
+const built = typeof __OPENPATH_CONTENT__ !== "undefined" ? __OPENPATH_CONTENT__ : "development";
+export const BUILD_CONTENT_MODE: ContentMode = built === "pilot" || built === "preview" ? built : "development";
+const PILOT_SET = new Set((pilotSetJson as unknown as { items: { id: string; version: number }[] }).items.map((r) => `${r.id}@${r.version}`));
 
 export interface AppContent {
   ctx: Context;
@@ -133,6 +138,8 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
   const review = reviewStatus(generated, opts.review ?? (reviewJson as unknown as GeneratedReview));
   const offered = generated.filter((g) => {
     const st = review.get(g.id)?.status;
+    if (st === "flagged" || st === "excluded") return false;
+    if (mode === "preview") return PILOT_SET.has(`${g.id}@${g.version}`);
     return st === "approved" || (mode === "development" && st === "unreviewed");
   });
   const lessons = new Map((lessonsJson as unknown as { lessons: Lesson[] }).lessons.map((l) => [l.id, l]));

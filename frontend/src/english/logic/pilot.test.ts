@@ -12,7 +12,7 @@ import { type Code, loadContent } from "./content.ts";
 import type { AppEvent, AttemptEvent } from "./events.ts";
 import { Learner } from "./learner.ts";
 import { rightAnswer, wrongAnswer } from "./test-helpers.ts";
-import { spellingPracticeQueue } from "./select.ts";
+import { spellingPatterns, spellingPracticeQueue } from "./select.ts";
 import { fold } from "./state.ts";
 import { MemoryRepo } from "./store.ts";
 import { CONFIRM_AFTER_DAYS, wordMastery } from "./words.ts";
@@ -176,7 +176,7 @@ test("pilot content mode offers only approved practice words; flagged and exclud
   const review: GeneratedReview = emptyReview();
   const gen = "spelling-templates@1";
   const sample = sampleRule(content.generatedAll, gen, "add_ending", 30, "p1");
-  review.rules.push({ id: "rule:add_ending", generator: gen, template: "add_ending", decision: "approved", by: "Tester", date: "2026-10-13", sample: { seed: "p1", size: 30, population: 655, items: sample.map((i) => ({ id: i.id, version: i.version })), problems: [{ id: sample[0].id, note: "x" }] } });
+  review.rules.push({ id: "rule:add_ending", generator: gen, template: "add_ending", decision: "approved", by: "Tester", date: "2026-10-13", sample: { seed: "p1", size: 30, population: 655, items: sample.map((i) => ({ id: i.id, version: i.version })), critical: [], minor: [{ id: sample[0].id, note: "x", action: "exclude" }] } });
   review.exceptions.push({ item: sample[0].id, action: "exclude", reason: "x", by: "Tester", date: "2026-10-13" });
   const pilot = loadContent({ mode: "pilot", review });
   assert.ok(pilot.generated.length > 500);
@@ -255,4 +255,55 @@ test("an import with an unknown rating is refused", async () => {
 test("the committed review record is what the app reads", () => {
   const committed = JSON.parse(readFileSync(new URL("../../../../content/english/spelling/review/review.json", import.meta.url), "utf8")) as GeneratedReview;
   assert.deepEqual(loadContent({ mode: "pilot", review: committed }).generated.map((g) => g.id), loadContent({ mode: "pilot" }).generated.map((g) => g.id));
+});
+
+test("word memory moves a word up only when it is written: choosing the right spelling in a review does not count", () => {
+  const items = itemsFor(WORD);
+  const t0 = Date.parse("2026-10-13T09:00:00.000Z");
+  const at = (h: number) => new Date(t0 + h * HOUR).toISOString();
+  const attempt = (id: string, session: string, item: Code, correct: boolean, h: number): AttemptEvent => ({ kind: "attempt", id, at: at(h), session, item: { id: item.id, version: item.version }, response: correct ? rightAnswer(item) : wrongAnswer(item), correct, misconceptions: [], assisted: false, attempt: 1, use: "retention" });
+  const base: AppEvent[] = [
+    { kind: "profile", id: "p", at: at(0), name: "A", consent: { by: "guardian", scope: "this_device_only" }, app: "t" },
+    { kind: "session", id: "s1", at: at(0), session: "c", type: "spelling_check" },
+    attempt("a1", "c", items.add_ending, false, 0),
+    { kind: "session", id: "s2", at: at(25), session: "r1", type: "spelling_review" },
+    attempt("a2", "r1", items.choose_spelling, true, 25),
+  ];
+  const chose = fold(content, base).words.get(WORD)!;
+  assert.equal(chose.box, 0, "a chosen spelling does not move the word up");
+  assert.equal(chose.history.length, 2, "but it is recorded");
+  const wrote = fold(content, [...base, { kind: "session", id: "s3", at: at(26), session: "r2", type: "spelling_review" }, attempt("a3", "r2", items.hear_spell, true, 26)]).words.get(WORD)!;
+  assert.equal(wrote.box, 1, "writing it does");
+});
+
+test("older exercise versions: answers given to a retired version still count, as that version", () => {
+  const v2 = content.generatedAll.find((g) => g.version === 2 && g.generated!.template === "hear_spell")!;
+  assert.ok(v2, "the -able explanation change made version 2 items");
+  const v1 = content.ctx.content.retired?.get(`${v2.id}@1`) as Code | undefined;
+  assert.ok(v1, "version 1 is kept");
+  const t = "2026-10-13T09:00:00.000Z";
+  const events: AppEvent[] = [
+    { kind: "profile", id: "p", at: t, name: "A", consent: { by: "guardian", scope: "this_device_only" }, app: "t" },
+    { kind: "session", id: "s", at: t, session: "s1", type: "spelling_practice" },
+    { kind: "evidence", id: "e1", at: t, session: "s1", item: { id: v1!.id, version: 1 }, response: { kind: "typed", text: "zzzz" }, use: "practice" },
+    { kind: "attempt", id: "a1", at: t, session: "s1", item: { id: v1!.id, version: 1 }, response: { kind: "typed", text: "zzzz" }, correct: false, misconceptions: [], assisted: false, attempt: 1, use: "practice", evidence: "e1" },
+  ];
+  const s = fold(content, events);
+  assert.equal(s.ledger.decisions[0].verdict, "held", "rebuilt through the unchanged ledger; still practice only");
+  const w = wordMastery(s, content).get(v1!.generated!.word)!;
+  assert.equal(w.status, "learning");
+  assert.equal(w.attempts[0].item, v1!.id);
+  assert.ok(s.words.has(v1!.generated!.word));
+});
+
+test("preview build: exactly the pilot set (typed exercises, four suffix patterns), nothing flagged or excluded, and none of it marked approved", () => {
+  const preview = loadContent({ mode: "preview" });
+  const set = JSON.parse(readFileSync(new URL("../../../../content/english/spelling/review/pilot-set.json", import.meta.url), "utf8")) as { items: { id: string; version: number }[] };
+  assert.deepEqual(preview.generated.map((g) => g.id).sort(), set.items.map((r) => r.id).sort());
+  assert.ok(preview.generated.every((g) => ["add_ending", "hear_spell"].includes(g.generated!.template)), "typed answers only");
+  assert.deepEqual([...new Set(spellingPatterns(preview).map((p) => p.step))].sort(), ["double_short", "drop_e", "es_plural", "y_to_i"]);
+  for (const g of preview.generated) assert.equal(preview.review.get(g.id)!.status, "unreviewed");
+  // the excluded words are never offered, in any build
+  for (const mode of ["development", "preview", "pilot"] as const)
+    for (const w of ["orgies", "overdose", "flied", "joyfuller", "parable"]) assert.ok(!loadContent({ mode }).generated.some((g) => g.generated!.word === w), `${w} in ${mode}`);
 });

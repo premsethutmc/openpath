@@ -163,10 +163,10 @@ export function spellingPracticeQueue(s: AppState, c: AppContent, cap: string, s
 }
 
 /** The words a review would ask: words due in word memory (misspelt before), then a few words answered right earlier that are due a later check. */
-export function reviewWords(s: AppState, c: AppContent, now: string): { due: string[]; confirm: string[] } {
+export function reviewWords(s: AppState, c: AppContent, now: string, speech = true): { due: string[]; confirm: string[] } {
   const due = dueWords(s, now).slice(0, REVIEW_MAX).map((w) => w.word);
   const room = Math.min(CONFIRM_MAX, REVIEW_MAX - due.length);
-  const confirm = room > 0 ? confirmationsDue(wordMastery(s, c), now, new Set(s.words.keys())).map((w) => w.word).filter((w) => recallItemFor(s, c, w, true)).slice(0, room) : [];
+  const confirm = room > 0 ? confirmationsDue(wordMastery(s, c), now, new Set(s.words.keys())).map((w) => w.word).filter((w) => recallItemFor(s, c, w, speech)).slice(0, room) : [];
   return { due, confirm };
 }
 
@@ -179,7 +179,7 @@ function recallItemFor(s: AppState, c: AppContent, word: string, speech: boolean
 /** Review: each word through a recall item the learner has not done yet, if there is one (a chosen spelling, if no recall item is offered). */
 export function spellingReviewQueue(s: AppState, c: AppContent, now: string, speech: boolean): Planned[] {
   const out: Planned[] = [];
-  const { due, confirm } = reviewWords(s, c, now);
+  const { due, confirm } = reviewWords(s, c, now, speech);
   for (const w of [...due, ...confirm]) {
     const choice = recallItemFor(s, c, w, speech) ?? (due.includes(w) ? c.generated.find((g) => g.generated!.word === w && usable(g, speech)) : undefined);
     if (choice && !out.some((p) => p.item === choice.id)) out.push({ item: choice.id, use: "retention" });
