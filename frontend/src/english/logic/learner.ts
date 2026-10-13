@@ -6,7 +6,8 @@
 import type { EvidenceEvent, Item, Response } from "../../../../packages/english-core/src/index.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Lesson, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type SessionType } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type Rating, type SessionType } from "./events.ts";
+import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import type { Repo } from "./store.ts";
@@ -206,6 +207,22 @@ export class Learner {
 
   async flag(item: Item, note: string): Promise<void> {
     await this.add({ kind: "flag", id: this.nextId(), at: this.clock(), item: { id: item.id, version: item.version }, note: note.slice(0, 500) });
+  }
+
+  /** How a finished session felt (one tap; the latest rating for a session counts). */
+  async rate(session: string, rating: Rating): Promise<void> {
+    await this.add({ kind: "rating", id: this.nextId(), at: this.clock(), session, rating });
+  }
+
+  /** A note about a problem or anything that got in the way, kept with the record. */
+  async note(screen: string, text: string): Promise<void> {
+    const t = text.trim();
+    if (t) await this.add({ kind: "note", id: this.nextId(), at: this.clock(), screen, text: t.slice(0, 1000) });
+  }
+
+  /** The pilot summary: what a guardian shares with the OpenPath team, without the learner's name. */
+  pilotSummary(device: { speech: boolean; standalone?: boolean; width?: number }): PilotSummary {
+    return pilotSummary(this.state, this.content, this.clock(), device);
   }
 
   backup(): Backup {

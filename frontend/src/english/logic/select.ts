@@ -7,6 +7,7 @@ import { type EvidenceUse, type Goal, type Item, type LeafView, type Recommendat
 import { type AppContent, type Code, GUIDED, lessonId } from "./content.ts";
 import type { Planned } from "./events.ts";
 import { type AppState, type PatternStatus, type SessionState, dueWords, patternKey, patternStatus } from "./state.ts";
+import { CONFIRM_MAX, confirmationsDue, wordMastery } from "./words.ts";
 
 export const PLACEMENT_MIN = 12;
 export const PLACEMENT_MAX = 24;
@@ -161,14 +162,27 @@ export function spellingPracticeQueue(s: AppState, c: AppContent, cap: string, s
   return out;
 }
 
-/** Review: words due in word memory, each through an item the learner has not done yet if there is one. */
+/** The words a review would ask: words due in word memory (misspelt before), then a few words answered right earlier that are due a later check. */
+export function reviewWords(s: AppState, c: AppContent, now: string): { due: string[]; confirm: string[] } {
+  const due = dueWords(s, now).slice(0, REVIEW_MAX).map((w) => w.word);
+  const room = Math.min(CONFIRM_MAX, REVIEW_MAX - due.length);
+  const confirm = room > 0 ? confirmationsDue(wordMastery(s, c), now, new Set(s.words.keys())).map((w) => w.word).filter((w) => recallItemFor(s, c, w, true)).slice(0, room) : [];
+  return { due, confirm };
+}
+
+/** An item that asks the learner to write the word, one not done yet if there is one; dictation only with speech. */
+function recallItemFor(s: AppState, c: AppContent, word: string, speech: boolean): Code | undefined {
+  const items = c.generated.filter((g) => g.generated!.word === word && usable(g, speech) && TYPED.includes(g.generated!.template));
+  return items.sort((a, b) => Number(s.attempted.has(a.id)) - Number(s.attempted.has(b.id)) || TYPED.indexOf(a.generated!.template) - TYPED.indexOf(b.generated!.template))[0];
+}
+
+/** Review: each word through a recall item the learner has not done yet, if there is one (a chosen spelling, if no recall item is offered). */
 export function spellingReviewQueue(s: AppState, c: AppContent, now: string, speech: boolean): Planned[] {
   const out: Planned[] = [];
-  for (const w of dueWords(s, now).slice(0, REVIEW_MAX)) {
-    const items = c.generated.filter((g) => g.generated!.word === w.word && usable(g, speech) && TYPED.includes(g.generated!.template));
-    const ranked = items.sort((a, b) => Number(s.attempted.has(a.id)) - Number(s.attempted.has(b.id)) || TYPED.indexOf(a.generated!.template) - TYPED.indexOf(b.generated!.template));
-    const choice = ranked[0] ?? c.generated.find((g) => g.generated!.word === w.word && usable(g, speech));
-    if (choice) out.push({ item: choice.id, use: "retention" });
+  const { due, confirm } = reviewWords(s, c, now);
+  for (const w of [...due, ...confirm]) {
+    const choice = recallItemFor(s, c, w, speech) ?? (due.includes(w) ? c.generated.find((g) => g.generated!.word === w && usable(g, speech)) : undefined);
+    if (choice && !out.some((p) => p.item === choice.id)) out.push({ item: choice.id, use: "retention" });
   }
   return out;
 }

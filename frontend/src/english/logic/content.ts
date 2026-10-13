@@ -14,9 +14,12 @@ import {
   type Goal,
   type Item,
   type Passage,
+  type GeneratedReview,
+  type ItemReview,
   indexContent,
   indexFramework,
   isSpecified,
+  reviewStatus,
 } from "../../../../packages/english-core/src/index.ts";
 import frameworkJson from "../../../../content/english/framework/en-0.2.0.json";
 import codeItemsJson from "../../../../content/english/items/code-items.json";
@@ -30,6 +33,7 @@ import misspellingsJson from "../../../../content/english/signals/misspellings.j
 import generatedJson from "../../../../content/english/spelling/generated-items.json";
 import retiredGeneratedJson from "../../../../content/english/spelling/retired-generated.json";
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
+import reviewJson from "../../../../content/english/spelling/review/review.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
 
@@ -73,13 +77,29 @@ export type Area = keyof typeof GUIDED;
 export const GUIDED_ALL: string[] = [...GUIDED.spelling, ...GUIDED.grammar, ...GUIDED.vocabulary];
 export const SPELLING = new Set<string>(GUIDED.spelling);
 
+/**
+ * Which generated items a build offers (content validation, 13 October 2026):
+ *   pilot        only items covered by an approved rule or reviewed set
+ *   development  approved and unreviewed items
+ * Flagged and excluded items are never offered. Either way, generated items stay practice-only: an
+ * approval never lets them change a capability estimate.
+ */
+export type ContentMode = "pilot" | "development";
+declare const __OPENPATH_CONTENT__: string | undefined;
+export const BUILD_CONTENT_MODE: ContentMode = typeof __OPENPATH_CONTENT__ !== "undefined" && __OPENPATH_CONTENT__ === "pilot" ? "pilot" : "development";
+
 export interface AppContent {
   ctx: Context;
   index: FrameworkIndex;
   /** Hand-written, code-scored items (the bank E1–E2b built): placement and capability evidence. */
   handWritten: Set<string>;
-  /** Generated spelling items (practice until checked). */
+  /** Generated spelling items offered in this build (practice only; see ContentMode). */
   generated: Code[];
+  /** Every generated item, offered or not (old answers to any of them still rebuild exactly). */
+  generatedAll: Code[];
+  /** The review status of every generated item. */
+  review: Map<string, ItemReview>;
+  contentMode: ContentMode;
   lessons: Map<string, Lesson>;
   ladders: Map<string, LadderStep[]>;
   feedback: Map<string, string>;
@@ -92,7 +112,8 @@ export interface AppContent {
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
-export function loadContent(): AppContent {
+export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview } = {}): AppContent {
+  const mode = opts.mode ?? BUILD_CONTENT_MODE;
   const framework = frameworkJson as unknown as Framework;
   const index = indexFramework(framework);
   const ok = (cap: string) => {
@@ -109,6 +130,11 @@ export function loadContent(): AppContent {
     misspellings: misspellingsJson as unknown as Record<string, string>,
   };
   const content = indexContent(bundle, index);
+  const review = reviewStatus(generated, opts.review ?? (reviewJson as unknown as GeneratedReview));
+  const offered = generated.filter((g) => {
+    const st = review.get(g.id)?.status;
+    return st === "approved" || (mode === "development" && st === "unreviewed");
+  });
   const lessons = new Map((lessonsJson as unknown as { lessons: Lesson[] }).lessons.map((l) => [l.id, l]));
   const ladders = new Map(Object.entries((progressionsJson as unknown as { capabilities: Record<string, { steps: LadderStep[] }> }).capabilities).map(([k, v]) => [k, v.steps]));
   const feedback = new Map(Object.entries((feedbackJson as unknown as { misconceptions: Record<string, string> }).misconceptions));
@@ -118,7 +144,10 @@ export function loadContent(): AppContent {
     ctx: { index, content },
     index,
     handWritten: new Set(hand.map((i) => i.id)),
-    generated,
+    generated: offered,
+    generatedAll: generated,
+    review,
+    contentMode: mode,
     lessons,
     ladders,
     feedback,

@@ -6,6 +6,8 @@ import { type Current, Learner } from "../logic/learner.ts";
 import { patternTitle } from "../logic/plan.ts";
 import { patternKey, patternStatus } from "../logic/state.ts";
 import { ItemView } from "./ItemView.tsx";
+import { NoteBox } from "./Note.tsx";
+import { RATINGS, type Rating } from "../logic/events.ts";
 
 interface Props {
   learner: Learner;
@@ -244,11 +246,36 @@ function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLea
             Words to review in a day: <span className="written">{[...missed].join(", ")}</span>.
           </p>
         )}
+        {answered.length > 0 && <Rate learner={learner} session={ev.session} />}
         <button type="button" className="primary" onClick={onLeave} autoFocus>
           Back to today
         </button>
       </section>
     </main>
+  );
+}
+
+const RATING_WORDS: Record<Rating, string> = { too_easy: "Too easy", about_right: "About right", too_hard: "Too hard", confusing: "Confusing" };
+
+/** One optional tap on how the session felt, and an optional note: the pilot's usability record. */
+function Rate({ learner, session }: { learner: Learner; session: string }) {
+  const [rated, setRated] = useState<Rating | null>(null);
+  return (
+    <section className="rate" aria-labelledby="rate-title">
+      <h2 id="rate-title">How was that?</h2>
+      <div className="rate-options" role="group" aria-labelledby="rate-title">
+        {RATINGS.map((r) => (
+          <button key={r} type="button" className={`chip ${rated === r ? "is-on" : ""}`} aria-pressed={rated === r} onClick={async () => (await learner.rate(session, r), setRated(r))}>
+            {RATING_WORDS[r]}
+          </button>
+        ))}
+      </div>
+      {rated && <p className="small" role="status">Thanks. Saved on this device.</p>}
+      <details>
+        <summary>Something got in the way?</summary>
+        <NoteBox learner={learner} screen={`end:${learner.state.sessions.get(session)?.event.type ?? "session"}`} label="What happened?" />
+      </details>
+    </section>
   );
 }
 

@@ -140,6 +140,10 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   assert.ok(check.length >= 3);
   for (const i of check) assert.ok(i.generated, "the spelling check uses dictionary words");
   await page.getByText(/Words to review in a day/).waitFor();
+  // one optional tap on how it felt
+  await page.getByRole("button", { name: "Too hard" }).click();
+  await page.getByText("Thanks. Saved on this device.").waitFor();
+  assert.equal(await page.getByRole("button", { name: "Too hard" }).getAttribute("aria-pressed"), "true");
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan now offers spelling practice with a lesson
   await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
@@ -173,8 +177,54 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   assert.ok((await page.getByText("Not assessed yet").count()) > 0);
   await page.getByText(/recorded but not counted until checked/).first().waitFor();
   await page.getByText("Spelling patterns").waitFor();
+  // three levels of spelling progress, apart: overall level, patterns, words
+  await page.getByRole("heading", { name: "Overall spelling level" }).waitFor();
+  await page.getByRole("heading", { name: "Words", exact: true }).waitFor();
+  assert.match(await page.locator(".word-counts").innerText(), /learning/);
+  await page.getByText(/Word progress does not change your spelling level/).waitFor();
+  await page.locator(".words summary").click();
+  assert.ok((await page.locator(".words-table tbody tr").count()) >= check.length);
+  await fits(page);
   // nothing was sent anywhere, and nothing went wrong
   assert.deepEqual(foreign, [], "no request leaves this device");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("trial: a note and a summary to share, made on the device, without the learner's name", async () => {
+  const { context, page, errors, foreign } = await phone();
+  const head = (await page.request.get(URL)).headers();
+  assert.equal(head["x-frame-options"], "DENY");
+  assert.equal(head["x-robots-tag"], "noindex, nofollow");
+  assert.match(head["permissions-policy"], /microphone=\(\)/);
+  await createProfile(page, "Priya");
+  await page.getByRole("button", { name: "Start" }).first().click();
+  await finishSession(page);
+  await page.getByRole("button", { name: "About right" }).click();
+  await page.locator(".rate summary").click();
+  await page.getByLabel("What happened?").fill("Some questions used words she did not know.");
+  await page.getByRole("button", { name: "Save note" }).click();
+  await page.getByText("Note saved on this device.").waitFor();
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByText(/Development version: practice words include ones not yet reviewed/).waitFor();
+  await page.getByLabel(/Tell us about a problem/).fill("The Next button was below the keyboard.");
+  await page.getByRole("button", { name: "Save note" }).click();
+  await page.getByText("Note saved on this device.").waitFor();
+  await tappable(page);
+  await fits(page);
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Save a trial summary" }).click()]);
+  assert.match(download.suggestedFilename(), /^openpath-trial-summary-[0-9a-f]{8}-\d{4}-\d\d-\d\d\.json$/);
+  const text = readFileSync(await download.path(), "utf8");
+  const summary = JSON.parse(text);
+  assert.equal(summary.format, "openpath-english-pilot-summary");
+  assert.ok(!text.includes("Priya"), "the summary has no name");
+  assert.equal(summary.device.width, 390);
+  assert.equal(summary.usability.ratings.about_right, 1);
+  assert.deepEqual(summary.usability.notes.map((n) => n.screen), ["end:placement", "settings"]);
+  assert.equal(summary.sessions[0].type, "placement");
+  assert.ok(summary.activity.questions >= 12);
+  assert.deepEqual(foreign, [], "nothing is sent: the summary is a file on the device");
   assert.deepEqual(errors, []);
   await context.close();
 });

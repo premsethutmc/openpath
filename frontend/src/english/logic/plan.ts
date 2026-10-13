@@ -10,8 +10,8 @@
 import { leafView, recommend } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, GUIDED, lessonId } from "./content.ts";
 import type { SessionType } from "./events.ts";
-import { type AppState, dueWords, placementDone, sessionsOf } from "./state.ts";
-import { type PatternPlan, spellingCheckQueue, spellingPlan } from "./select.ts";
+import { type AppState, placementDone, sessionsOf } from "./state.ts";
+import { type PatternPlan, reviewWords, spellingCheckQueue, spellingPlan } from "./select.ts";
 
 export interface PlanStep {
   type: SessionType;
@@ -54,8 +54,20 @@ export function todayPlan(s: AppState, c: AppContent, now: string, speech: boole
   const checked = sessionsOf(s, "spelling_check").some((x) => x.end !== null);
   if (!checked && spellingCheckQueue(s, c, now, speech).length)
     return [{ type: "spelling_check", title: "Spelling check", reason: "One word for each spelling pattern near your level, to see which patterns to work on first." }];
-  const due = dueWords(s, now);
-  if (due.length) steps.push({ type: "spelling_review", title: `Review ${Math.min(due.length, 10)} word${due.length === 1 ? "" : "s"}`, reason: "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them.", count: due.length });
+  const review = reviewWords(s, c, now);
+  const n = review.due.length + review.confirm.length;
+  if (n)
+    steps.push({
+      type: "spelling_review",
+      title: `Review ${n} word${n === 1 ? "" : "s"}`,
+      reason: [
+        review.due.length ? "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them." : "",
+        review.confirm.length ? `${review.confirm.length === n ? "Words" : "And words"} you spelt correctly a few days ago, to check they have stuck.` : "",
+      ]
+        .filter(Boolean)
+        .join(" "),
+      count: n,
+    });
   const next = spellingPlan(s, c, now, speech)[0];
   if (next) steps.push(patternStep(c, next, s));
   const g = grammarOrVocabulary(s, c, now);

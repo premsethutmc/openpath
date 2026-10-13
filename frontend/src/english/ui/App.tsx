@@ -7,6 +7,8 @@ import { type CapabilityProgress, bandDescriptor, capabilityProgress } from "../
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { dueWords, patternStatus } from "../logic/state.ts";
+import { WORD_STATUS_LABEL, type WordStatus, statusCounts, wordMastery } from "../logic/words.ts";
+import { NoteBox, saveJson } from "./Note.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech, speak } from "./speech.ts";
 
@@ -308,7 +310,7 @@ function Today({ learner, onStart, onResume }: { learner: Learner; onStart: (s: 
             ))}
           </ul>
           <p className="small">
-            {words.filter((w) => !w.learned).length} words in your review list, {due} due now; {words.filter((w) => w.learned).length} learned.
+            {words.filter((w) => !w.learned).length} misspelt word{words.filter((w) => !w.learned).length === 1 ? "" : "s"} coming back for review, {due} due now. Progress shows every word you have met.
           </p>
         </section>
       )}
@@ -346,7 +348,51 @@ function Progress({ learner }: { learner: Learner }) {
       <p className="small">
         Levels are on OpenPath's scale of 1 to 8. They are estimates from your answers, shown with how sure we are. Questions and lessons are draft content that teachers have not reviewed yet.
       </p>
-      {groups.map(([name, list]) => (
+      <section aria-labelledby="spelling-title">
+        <h2 id="spelling-title">Spelling</h2>
+        <p className="small">Spelling progress is shown three ways, kept apart: your overall level, the patterns you are working on, and the words themselves.</p>
+        <h3 className="sub">Overall spelling level</h3>
+        <p className="small">From the questions written by OpenPath's authors. Practice words do not change this level yet.</p>
+        <ul className="caps">
+          {groups[0][1].map((r) => (
+            <CapRow key={r.id} r={r} learner={learner} />
+          ))}
+        </ul>
+        {patterns.length > 0 && (
+          <>
+            <h3 className="sub" id="patterns-title">
+              Spelling patterns
+            </h3>
+            <table className="patterns-table" aria-labelledby="patterns-title">
+              <thead>
+                <tr>
+                  <th scope="col">Pattern</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Practice</th>
+                  <th scope="col">New words</th>
+                </tr>
+              </thead>
+              <tbody>
+                {patterns.map((p) => {
+                  const last = p.transfers[p.transfers.length - 1];
+                  const prac = p.practice;
+                  return (
+                    <tr key={p.key}>
+                      <td>{patternTitle(learner.content, p.capability, p.step)}</td>
+                      <td>{STATUS_WORDS[patternStatus(p)]}</td>
+                      <td>{prac.length ? `${prac.filter((x) => x.correct).length}/${prac.length}` : "–"}</td>
+                      <td>{last ? `${last.right}/${last.total}` : "–"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <p className="small">"New words" is the latest check with words you had never seen: it shows whether the rule has stuck, not just the words practised.</p>
+          </>
+        )}
+        <Words learner={learner} />
+      </section>
+      {groups.slice(1).map(([name, list]) => (
         <section key={name} aria-label={name}>
           <h2>{name}</h2>
           <ul className="caps">
@@ -356,36 +402,6 @@ function Progress({ learner }: { learner: Learner }) {
           </ul>
         </section>
       ))}
-      {patterns.length > 0 && (
-        <section aria-labelledby="patterns-title">
-          <h2 id="patterns-title">Spelling patterns</h2>
-          <table className="patterns-table">
-            <thead>
-              <tr>
-                <th scope="col">Pattern</th>
-                <th scope="col">Status</th>
-                <th scope="col">Practice</th>
-                <th scope="col">New words</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patterns.map((p) => {
-                const last = p.transfers[p.transfers.length - 1];
-                const prac = p.practice;
-                return (
-                  <tr key={p.key}>
-                    <td>{patternTitle(learner.content, p.capability, p.step)}</td>
-                    <td>{STATUS_WORDS[patternStatus(p)]}</td>
-                    <td>{prac.length ? `${prac.filter((x) => x.correct).length}/${prac.length}` : "–"}</td>
-                    <td>{last ? `${last.right}/${last.total}` : "–"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <p className="small">"New words" is the latest check with words you had never seen: it shows whether the rule has stuck, not just the words practised.</p>
-        </section>
-      )}
       <section aria-labelledby="others-title">
         <h2 id="others-title">Everything else</h2>
         <p className="small">These areas are measured through "More practice" with the same engine, but are not taught here yet.</p>
@@ -401,6 +417,57 @@ function Progress({ learner }: { learner: Learner }) {
         </details>
       </section>
     </main>
+  );
+}
+
+const WORD_ORDER: WordStatus[] = ["mastered", "retained", "recalled", "learning", "met"];
+
+function Words({ learner }: { learner: Learner }) {
+  const words = wordMastery(learner.state, learner.content);
+  if (!words.size) return null;
+  const counts = statusCounts(words);
+  const list = [...words.values()].sort((a, b) => WORD_ORDER.indexOf(a.status) - WORD_ORDER.indexOf(b.status) || a.word.localeCompare(b.word));
+  return (
+    <div className="words" aria-labelledby="words-title">
+      <h3 className="sub" id="words-title">
+        Words
+      </h3>
+      <ul className="word-counts">
+        {WORD_ORDER.filter((st) => counts[st]).map((st) => (
+          <li key={st} className={`w-${st}`}>
+            <strong>{counts[st]}</strong> {WORD_STATUS_LABEL[st].toLowerCase()}
+          </li>
+        ))}
+      </ul>
+      <p className="small">
+        A word counts as written correctly only when you typed it yourself at the first try, without help. "Remembered" means you wrote it correctly again on a later day. Choosing between two spellings is recorded but is not the same as writing the word. Word progress does not change your spelling level.
+      </p>
+      <details>
+        <summary>All {words.size} words</summary>
+        <table className="words-table">
+          <thead>
+            <tr>
+              <th scope="col">Word</th>
+              <th scope="col">Status</th>
+              <th scope="col">Written</th>
+              <th scope="col">Later days</th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.map((w) => (
+              <tr key={w.word}>
+                <td className="written">{w.word}</td>
+                <td>{WORD_STATUS_LABEL[w.status]}</td>
+                <td>
+                  {w.independent.recall.right}✓ {w.independent.recall.wrong + w.independent.recognition.wrong}✗{w.assisted ? ` · ${w.assisted} with help` : ""}
+                </td>
+                <td>{w.retention.passed || w.retention.failed ? `${w.retention.passed}✓ ${w.retention.failed}✗` : "–"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </details>
+    </div>
   );
 }
 
@@ -432,18 +499,18 @@ function CapRow({ r, learner }: { r: CapabilityProgress; learner: Learner }) {
 
 function Settings({ learner, repo, voice, onChanged, onLeave, onSwitch }: { learner: Learner; repo: Repo; voice: SpeechSynthesisVoice | null; onChanged: () => void; onLeave: () => void; onSwitch: (id: string) => void }) {
   const [msg, setMsg] = useState<string | null>(null);
+  const [pilotMsg, setPilotMsg] = useState<string | null>(null);
   const download = () => {
     const b = learner.backup();
-    const blob = new Blob([JSON.stringify(b, null, 1)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `openpath-english-${b.profile.name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase() || "learner"}-${b.exported_at.slice(0, 10)}.json`;
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    saveJson(b, `openpath-english-${b.profile.name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase() || "learner"}-${b.exported_at.slice(0, 10)}.json`);
     setMsg("Backup saved to your downloads. Keep it private: it contains the name and every answer.");
   };
+  const summary = () => {
+    const p = learner.pilotSummary({ speech: !!voice && learner.state.speech, standalone: window.matchMedia?.("(display-mode: standalone)").matches, width: window.innerWidth });
+    saveJson(p, `openpath-trial-summary-${p.learner.code}-${p.made_at.slice(0, 10)}.json`);
+    setPilotMsg("Trial summary saved to your downloads. It has no name, but it has answers and your notes. Share it only if you choose to.");
+  };
+  const c = learner.content;
   return (
     <main className="page" aria-labelledby="settings-title">
       <h1 id="settings-title">Settings</h1>
@@ -471,6 +538,20 @@ function Settings({ learner, repo, voice, onChanged, onLeave, onSwitch }: { lear
         </button>
         {msg && <p role="status">{msg}</p>}
         <ImportBackup repo={repo} onImported={onSwitch} />
+      </section>
+      <section aria-labelledby="pilot-title">
+        <h2 id="pilot-title">Taking part in the trial</h2>
+        <p>If you are helping to try OpenPath English, you can save a summary of the learning so far to share with the OpenPath team. It has no name, but it has answers, timings and your notes. Nothing is sent: you choose whether to share the file.</p>
+        <button type="button" className="secondary" onClick={summary}>
+          Save a trial summary
+        </button>
+        {pilotMsg && <p role="status">{pilotMsg}</p>}
+        <NoteBox learner={learner} screen="settings" label="Tell us about a problem, or anything that got in the way" />
+        <p className="small">
+          {c.contentMode === "pilot"
+            ? `Trial version: practice words come only from reviewed rules (${c.generated.length} practice questions).`
+            : `Development version: practice words include ones not yet reviewed (${c.generated.length} practice questions).`}
+        </p>
       </section>
       <section aria-labelledby="profile-title">
         <h2 id="profile-title">Learner</h2>

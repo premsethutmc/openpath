@@ -99,12 +99,34 @@ export interface FlagEvent {
   note: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | FlagEvent | LedgerEvent;
+/** How a session felt, tapped at its end (optional; for the pilot's usability record). */
+export type Rating = "too_easy" | "about_right" | "too_hard" | "confusing";
+export const RATINGS: Rating[] = ["too_easy", "about_right", "too_hard", "confusing"];
+
+export interface RatingEvent {
+  kind: "rating";
+  id: string;
+  at: string;
+  session: string;
+  rating: Rating;
+}
+
+/** A note from the learner or a guardian: a problem, a question, anything that got in the way. */
+export interface NoteEvent {
+  kind: "note";
+  id: string;
+  at: string;
+  /** Where it was written (a screen name), so a problem can be traced to a step of the journey. */
+  screen: string;
+  text: string;
+}
+
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | FlagEvent | RatingEvent | NoteEvent | LedgerEvent;
 
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => e.kind === "evidence" || e.kind === "proposal" || e.kind === "qualification" || e.kind === "revoke";
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "evidence"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "rating", "note", "evidence"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
 export function eventProblem(e: unknown): string | null {
@@ -114,6 +136,8 @@ export function eventProblem(e: unknown): string | null {
   if (typeof x.id !== "string" || !x.id) return "an event has no id";
   if (typeof x.at !== "string" || Number.isNaN(Date.parse(x.at))) return `event ${x.id} has no valid time`;
   if ((x.kind === "evidence" || x.kind === "attempt") && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
-  if ((x.kind === "evidence" || x.kind === "attempt" || x.kind === "session" || x.kind === "session_end") && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if ((x.kind === "evidence" || x.kind === "attempt" || x.kind === "session" || x.kind === "session_end" || x.kind === "rating") && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if (x.kind === "rating" && !RATINGS.includes(x.rating as Rating)) return `event ${x.id} has an unknown rating`;
+  if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
   return null;
 }

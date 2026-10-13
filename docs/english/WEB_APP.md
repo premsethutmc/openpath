@@ -17,7 +17,11 @@ npm run english:preview     # -> http://localhost:4174
 - **On a phone, for a private trial on the same Wi-Fi:** `HOST=0.0.0.0 npm run english:preview`,
   then open `http://<computer's address>:4174` on the phone. Everything works, but browsers allow
   offline install only on `https` or `localhost`, so over plain `http` the app needs the network to open.
-- **Hosting it properly** (for learners at home) needs any static `https` host for the
+- **Trial version:** `npm run english:build:pilot` offers only practice words from approved rules or
+  reviewed sets ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)); it refuses to build while nothing is
+  approved. The development build (`npm run english:build`) also offers unreviewed words. Neither offers
+  flagged or excluded ones. Settings shows which version is running.
+- **Hosting it properly** (for learners at home): see [`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md). It needs any static `https` host for the
   `dist-english/` folder. That is a deployment and cost decision, so none is set up.
 
 ## The journey
@@ -40,6 +44,31 @@ npm run english:preview     # -> http://localhost:4174
    practice, later checks, and practice words recorded but not counted.
 7. **Coming back.** Reopening resumes any unfinished session at the same question. Misspelt words
    return after 1, 3, 7 and 14 days.
+
+## Three levels of spelling progress, kept apart (13 October)
+
+| Level | What it is | Where it comes from | Changes the engine's estimates? |
+|---|---|---|---|
+| **Word mastery** | Per word: met, learning, written correctly, remembered a day or more later, remembered over a week | Every attempt at a generated item (`logic/words.ts`). Independent recall (typing the word unaided, first try), recognition (choosing), mistakes, assisted attempts (after a wrong first try) and delayed retention (an unaided recall at least 20 hours after last meeting the word) are counted separately | **No** |
+| **Pattern mastery** | Per spelling pattern: needs work, practising, ready for a check, secure, check again | Practice, then checks with words never seen before (`patternStatus`) | **No** |
+| **Spelling proficiency** | The engine's estimate for the three spelling capabilities, with its uncertainty | Hand-written items only, through the unchanged composite updater | Yes (it *is* the estimate) |
+
+- **Words answered right first time get a later check too.** Up to 3 per review: after 3 days, then
+  7 days once remembered. So retention is measured for those words as well, not only for misspelt ones
+  (which return after 1, 3, 7 and 14 days, as before).
+- **Mastered** means remembered on later days at least twice since the last mistake, with the checks
+  at least a week apart. A mistake sends the word back to *learning*.
+
+## Trial features (13 October)
+
+- **One tap at the end of a session:** too easy, about right, too hard or confusing. It is optional.
+- **Notes** at the end of a session and in Settings ("Tell us about a problem").
+- **Trial summary** (Settings → Save a trial summary):
+  - a file made on the device with no name (the learner is a short code);
+  - sessions, timings, the three levels of spelling progress, ratings, notes and reported questions;
+  - nothing is sent. `tools/english/pilot/report.ts` turns summaries into one report.
+- **Response headers** for static hosts (`_headers`): no framing, no indexing; no camera, microphone or
+  location. The preview server applies them, so the browser tests run under them.
 
 ## How it uses the engine
 
@@ -101,6 +130,11 @@ npm run english:preview     # -> http://localhost:4174
   that consented sync can be added later.
 - **Writing and short answers are not offered**: E3b and live evaluation stay disabled.
 - **Bundle size:** about 2.7 MB of script (about 350 kB compressed), mostly content.
+- **Generated items are approved for practice only.** No generated item counts towards a capability
+  estimate until its assessment quality is validated (difficulty and discrimination from real answers),
+  which needs separate approval. Nothing is approved yet: the pilot sheets are waiting for a reviewer.
+- **The clue template is not recommended for the pilot** (adult or off-sense definitions). Without it,
+  and without a device voice, homophones are practised only by choosing.
 - **Not yet tried with learners.** Placement length, plan order and the display thresholds are
   initial settings, not tuned.
 
@@ -126,5 +160,20 @@ npm run english:preview     # -> http://localhost:4174
   - offline use;
   - no request to any other site;
   - no sideways scrolling and tap-sized buttons.
-- **CI:** these tests run, plus `generate.ts --check`. A separate workflow rebuilds the word bank from
+- `frontend/src/english/logic/pilot.test.ts` (13 October): 7 tests:
+  - each rule of word mastery;
+  - confirmation checks;
+  - word mastery leaves every estimate unchanged;
+  - pilot content mode;
+  - ratings, notes and the trial summary (no name), and the report tool.
+- `packages/english-core/test/w2-review.test.ts`: 9 tests:
+  - automatic flags;
+  - review status order;
+  - lapsing approvals;
+  - approval leaves the ledger identical;
+  - sample rules;
+  - recording a sheet;
+  - CSV.
+- The browser tests add a sixth: rating, notes, the trial summary download and the response headers.
+- **CI:** these tests run, plus `generate.ts --check` and `review.ts --check`. A separate workflow rebuilds the word bank from
   the pinned sources when the pipeline changes.
