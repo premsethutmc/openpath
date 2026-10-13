@@ -1,0 +1,1976 @@
+{
+ "status": "candidate: written by OpenPath for the first web version; not yet reviewed by educators",
+ "review": "candidate-unvalidated",
+ "lessons": [
+  {
+   "id": "EN.FND.SPL.inflections#plain",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "plain",
+   "title": "Adding -s, -ed and -ing",
+   "rule": "Most words just take the ending. The base word does not change: play → plays, played, playing.",
+   "examples": [
+    {
+     "text": "jump → jumps, jumped, jumping"
+    },
+    {
+     "text": "rain → rains, rained, raining"
+    }
+   ],
+   "tip": "Say the base word first, then add the ending you hear.",
+   "check": {
+    "prompt": "Which is correct? (walk + -ing)",
+    "options": [
+     "walkking",
+     "walking",
+     "walkeing"
+    ],
+    "answer": 1,
+    "explain": "walk + -ing = walking. Nothing changes in walk."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#es_plural",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "es_plural",
+   "title": "Adding -es",
+   "rule": "Words ending in s, x, z, ch or sh add -es, because you can hear an extra syllable: box → boxes, watch → watches.",
+   "examples": [
+    {
+     "text": "bus → buses"
+    },
+    {
+     "text": "wish → wishes",
+     "note": "you can hear 'wish-iz'"
+    }
+   ],
+   "tip": "If you can hear an extra 'iz' sound at the end, write -es.",
+   "check": {
+    "prompt": "Which is correct? (church + -s/-es)",
+    "options": [
+     "churchs",
+     "churches",
+     "churchies"
+    ],
+    "answer": 1,
+    "explain": "church ends in ch, so it takes -es: churches."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#double_short",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "double_short",
+   "title": "Doubling the last letter (short words)",
+   "rule": "In a one-syllable word with one short vowel and one final consonant, double the consonant before -ing, -ed, -er or -est: run → running, stop → stopped, big → bigger.",
+   "examples": [
+    {
+     "text": "swim → swimming"
+    },
+    {
+     "text": "hop → hopped",
+     "note": "not hoped, which comes from hope"
+    }
+   ],
+   "tip": "Two consonants keep the vowel short: hopping (short o), hoping (long o).",
+   "check": {
+    "prompt": "Which is correct? (sit + -ing)",
+    "options": [
+     "siting",
+     "sitting",
+     "sitteing"
+    ],
+    "answer": 1,
+    "explain": "sit has one short vowel and one final consonant, so the t doubles: sitting."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#drop_e",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "drop_e",
+   "title": "Dropping the silent e",
+   "rule": "If a word ends in a silent e, drop the e before an ending that starts with a vowel (-ing, -ed, -er): make → making, hope → hoping.",
+   "examples": [
+    {
+     "text": "ride → riding"
+    },
+    {
+     "text": "dance → dancing"
+    }
+   ],
+   "tip": "Keep the e before an ending that starts with a consonant: hope → hopeful.",
+   "check": {
+    "prompt": "Which is correct? (write + -ing)",
+    "options": [
+     "writeing",
+     "writting",
+     "writing"
+    ],
+    "answer": 2,
+    "explain": "write ends in a silent e, which is dropped before -ing: writing."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#y_to_i",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "y_to_i",
+   "title": "Changing y to i",
+   "rule": "If a word ends in a consonant + y, change the y to i before -ed, -er, -est or -es: carry → carried, happy → happiest, baby → babies.",
+   "examples": [
+    {
+     "text": "cry → cried"
+    },
+    {
+     "text": "busy → busier"
+    }
+   ],
+   "tip": "Keep the y before -ing (crying), and after a vowel (play → played).",
+   "check": {
+    "prompt": "Which is correct? (try + -ed)",
+    "options": [
+     "tryed",
+     "tried",
+     "tride"
+    ],
+    "answer": 1,
+    "explain": "try ends in consonant + y, so the y changes to i: tried."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#stress_doubling",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "stress_doubling",
+   "title": "Doubling in longer words",
+   "rule": "In a longer word, double the last consonant only if the last syllable is stressed: begin → beginning, forget → forgetting, prefer → preferred.",
+   "examples": [
+    {
+     "text": "admit → admitted",
+     "note": "ad-MIT: stress at the end"
+    },
+    {
+     "text": "regret → regretting"
+    }
+   ],
+   "tip": "Say the word aloud and listen for which syllable is strongest.",
+   "check": {
+    "prompt": "Which is correct? (occur + -ed)",
+    "options": [
+     "occured",
+     "occurred",
+     "ocurred"
+    ],
+    "answer": 1,
+    "explain": "oc-CUR is stressed on the last syllable, so the r doubles: occurred."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#no_double_unstressed",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "no_double_unstressed",
+   "title": "When not to double",
+   "rule": "If the stress is on the first syllable, do not double: visit → visited, open → opening, offer → offered.",
+   "examples": [
+    {
+     "text": "happen → happened",
+     "note": "HAP-pen: stress at the start"
+    },
+    {
+     "text": "cover → covering"
+    }
+   ],
+   "tip": "Compare: preFER → preferred, but OFfer → offered.",
+   "check": {
+    "prompt": "Which is correct? (garden + -ing)",
+    "options": [
+     "gardenning",
+     "gardening",
+     "gardining"
+    ],
+    "answer": 1,
+    "explain": "GAR-den is stressed on the first syllable, so the n does not double: gardening."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.inflections#exceptions",
+   "capability": "EN.FND.SPL.inflections",
+   "step": "exceptions",
+   "title": "Tricky endings",
+   "rule": "Three patterns to learn: ie becomes y before -ing (lie → lying); add k after a final c (panic → panicked); and in British spelling, a final l after one vowel doubles (travel → travelled).",
+   "examples": [
+    {
+     "text": "die → dying"
+    },
+    {
+     "text": "picnic → picnicking"
+    },
+    {
+     "text": "cancel → cancelled",
+     "note": "American spelling: canceled"
+    }
+   ],
+   "tip": "OpenPath teaches British spelling, and also accepts American spellings as correct.",
+   "check": {
+    "prompt": "Which is correct? (tie + -ing)",
+    "options": [
+     "tieing",
+     "tying",
+     "tiing"
+    ],
+    "answer": 1,
+    "explain": "tie ends in ie, which becomes y before -ing: tying."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#plain_affix",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "plain_affix",
+   "title": "Adding prefixes and suffixes",
+   "rule": "A prefix goes at the start and a suffix at the end. Usually neither part changes: un + happy = unhappy, care + less = careless.",
+   "examples": [
+    {
+     "text": "re + build = rebuild"
+    },
+    {
+     "text": "kind + ness = kindness"
+    }
+   ],
+   "tip": "Spell the two parts separately, then join them.",
+   "check": {
+    "prompt": "Which is correct? (dis + agree)",
+    "options": [
+     "disagree",
+     "dissagree",
+     "disagre"
+    ],
+    "answer": 0,
+    "explain": "dis + agree = disagree. Nothing is added or dropped."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#double_at_join",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "double_at_join",
+   "title": "Double letters where parts join",
+   "rule": "When the prefix ends with the same letter the word starts with, keep both: mis + spell = misspell, un + natural = unnatural. The same with -ly after l: real + ly = really.",
+   "examples": [
+    {
+     "text": "il + legal = illegal"
+    },
+    {
+     "text": "usual + ly = usually"
+    }
+   ],
+   "tip": "A double letter at a join is not a mistake: both parts keep all their letters.",
+   "check": {
+    "prompt": "Which is correct? (un + necessary)",
+    "options": [
+     "unecessary",
+     "unnecessary",
+     "unneccessary"
+    ],
+    "answer": 1,
+    "explain": "un ends in n and necessary starts with n, so both stay: unnecessary."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#ful_ly_ment",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "ful_ly_ment",
+   "title": "-ful, -ly and -ment",
+   "rule": "The suffix -ful has only one l (hopeful). Adding -ly keeps both parts (careful → carefully). -ment joins without changing the word (move → movement), except argue → argument.",
+   "examples": [
+    {
+     "text": "help + ful = helpful"
+    },
+    {
+     "text": "happy + ly = happily",
+     "note": "y changes to i"
+    }
+   ],
+   "tip": "Full has two l's; the suffix -ful has one.",
+   "check": {
+    "prompt": "Which is correct? (beauty + ful)",
+    "options": [
+     "beautyful",
+     "beautiful",
+     "beautifull"
+    ],
+    "answer": 1,
+    "explain": "beauty ends in consonant + y, which changes to i, and -ful has one l: beautiful."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#able_ible",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "able_ible",
+   "title": "-able or -ible",
+   "rule": "-able and -ible sound the same. -able usually follows a whole word (read → readable, comfort → comfortable); -ible usually follows a part that is not a word on its own (vis → visible, poss → possible).",
+   "examples": [
+    {
+     "text": "depend → dependable"
+    },
+    {
+     "text": "terrible, horrible",
+     "note": "terr and horr are not words"
+    }
+   ],
+   "tip": "It is a guide, not a rule: learn the common -ible words by heart.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "washible",
+     "washable",
+     "washeble"
+    ],
+    "answer": 1,
+    "explain": "wash is a whole word, so -able: washable."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#tion_sion",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "tion_sion",
+   "title": "-tion, -sion or -ssion",
+   "rule": "-tion is the most common ending (station, action). -sion often comes after l, n or r, or makes a 'zh' sound (tension, vision). -ssion often comes from words ending in -ss or -mit (discuss → discussion, permit → permission).",
+   "examples": [
+    {
+     "text": "act → action"
+    },
+    {
+     "text": "decide → decision"
+    }
+   ],
+   "tip": "Think of a related word: discuss → discussion, invade → invasion.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "discution",
+     "discusion",
+     "discussion"
+    ],
+    "answer": 2,
+    "explain": "discuss ends in -ss, so the noun is discussion."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.morphological#roots_rare",
+   "capability": "EN.FND.SPL.morphological",
+   "step": "roots_rare",
+   "title": "Long words from roots",
+   "rule": "Long words are built from parts. Spell each part: ir + relevant = irrelevant, occasion + al + ly = occasionally, accommodate has two c's and two m's.",
+   "examples": [
+    {
+     "text": "ir + regular = irregular"
+    },
+    {
+     "text": "necessary: one collar (c), two sleeves (ss)"
+    }
+   ],
+   "tip": "Break a long word into its parts and spell one part at a time.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "accomodate",
+     "acommodate",
+     "accommodate"
+    ],
+    "answer": 2,
+    "explain": "accommodate has a double c and a double m."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#common_pairs",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "common_pairs",
+   "title": "Words that sound the same",
+   "rule": "Homophones sound the same but have different spellings and meanings: to / two / too, see / sea, son / sun. The meaning of the sentence tells you which one to write.",
+   "examples": [
+    {
+     "text": "I have two cats. I like cats too. I go to school."
+    },
+    {
+     "text": "We swam in the sea. I can see you."
+    }
+   ],
+   "tip": "Ask: what does this word mean here?",
+   "check": {
+    "prompt": "Which word fits? The ___ is shining.",
+    "options": [
+     "son",
+     "sun"
+    ],
+    "answer": 1,
+    "explain": "sun is the star in the sky; son is a boy in a family."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#there_their",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "there_their",
+   "title": "there, their and they're",
+   "rule": "there = a place (over there; there is). their = belonging to them (their bags). they're = they are. Also: your = belonging to you; you're = you are.",
+   "examples": [
+    {
+     "text": "They're putting their bags over there."
+    },
+    {
+     "text": "You're late for your class."
+    }
+   ],
+   "tip": "Try saying 'they are' or 'you are': if it fits, use the apostrophe.",
+   "check": {
+    "prompt": "Which word fits? ___ going to the park.",
+    "options": [
+     "There",
+     "Their",
+     "They're"
+    ],
+    "answer": 2,
+    "explain": "They are going: they're."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#its_its",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "its_its",
+   "title": "its or it's",
+   "rule": "it's = it is or it has. its = belonging to it, with no apostrophe (like his and hers).",
+   "examples": [
+    {
+     "text": "It's raining.",
+     "note": "it is"
+    },
+    {
+     "text": "The dog wagged its tail.",
+     "note": "belonging to the dog"
+    }
+   ],
+   "tip": "Say 'it is'. If it makes sense, write it's; if not, write its.",
+   "check": {
+    "prompt": "Which word fits? The cat licked ___ paw.",
+    "options": [
+     "it's",
+     "its"
+    ],
+    "answer": 1,
+    "explain": "The paw belongs to the cat, so its, with no apostrophe."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#less_common",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "less_common",
+   "title": "Less common sound-alike words",
+   "rule": "Some pairs need their meaning learned: whose (belonging to whom) / who's (who is); principal (head, main) / principle (a rule); stationary (not moving) / stationery (paper and pens).",
+   "examples": [
+    {
+     "text": "Whose bag is this? Who's coming?"
+    },
+    {
+     "text": "Buy stationery: e for envelope."
+    }
+   ],
+   "tip": "Link one spelling to a memory hook: stationEry, Envelope.",
+   "check": {
+    "prompt": "Which word fits? ___ turn is it?",
+    "options": [
+     "Who's",
+     "Whose"
+    ],
+    "answer": 1,
+    "explain": "The turn belongs to someone: whose."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#near_homophones",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "near_homophones",
+   "title": "Words that sound nearly the same",
+   "rule": "Some words sound nearly alike: accept (agree to take) / except (but not); lose (not win, not keep) / loose (not tight); advice (a noun) / advise (a verb).",
+   "examples": [
+    {
+     "text": "Everyone came except Ravi."
+    },
+    {
+     "text": "Can you give me some advice? I advise you to rest."
+    }
+   ],
+   "tip": "advice and advise: the noun has c, the verb has s.",
+   "check": {
+    "prompt": "Which word fits? My shoe is ___.",
+    "options": [
+     "lose",
+     "loose"
+    ],
+    "answer": 1,
+    "explain": "loose means not tight; lose means to stop having something."
+   }
+  },
+  {
+   "id": "EN.FND.SPL.homophones#demanding",
+   "capability": "EN.FND.SPL.homophones",
+   "step": "demanding",
+   "title": "Close meanings",
+   "rule": "Some pairs are close in meaning: affect is usually a verb (to change something), effect is usually a noun (a result). complement = something that completes; compliment = praise.",
+   "examples": [
+    {
+     "text": "The rain affected the match. It had a big effect."
+    },
+    {
+     "text": "She paid me a compliment."
+    }
+   ],
+   "tip": "Affect is an Action (verb); Effect is an End result (noun).",
+   "check": {
+    "prompt": "Which word fits? The medicine had a strong ___.",
+    "options": [
+     "affect",
+     "effect"
+    ],
+    "answer": 1,
+    "explain": "a strong result: a noun, so effect."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.present_past_simple#habits_regular",
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "step": "habits_regular",
+   "title": "Present simple and regular past",
+   "rule": "Use the present simple for habits and facts (I walk to school), and add -ed for most past actions (Yesterday I walked).",
+   "examples": [
+    {
+     "text": "Every day she plays cricket."
+    },
+    {
+     "text": "Last week we visited Amma."
+    }
+   ],
+   "tip": "Time words help: every day → present; yesterday, last week → past.",
+   "check": {
+    "prompt": "Choose the right verb: Yesterday we ___ to the park.",
+    "options": [
+     "walk",
+     "walked",
+     "walks"
+    ],
+    "answer": 1,
+    "explain": "Yesterday tells you it is the past: walked."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.present_past_simple#irregular_common",
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "step": "irregular_common",
+   "title": "Common irregular past forms",
+   "rule": "Many common verbs do not take -ed in the past: go → went, buy → bought, see → saw, eat → ate.",
+   "examples": [
+    {
+     "text": "We went to the market and bought mangoes."
+    },
+    {
+     "text": "I saw a film and ate popcorn."
+    }
+   ],
+   "tip": "Learn these by heart; never write goed or buyed.",
+   "check": {
+    "prompt": "Choose the right verb: She ___ a new bag last week.",
+    "options": [
+     "buyed",
+     "bought",
+     "buy"
+    ],
+    "answer": 1,
+    "explain": "buy is irregular: bought."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.present_past_simple#did_questions_negatives",
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "step": "did_questions_negatives",
+   "title": "Questions and negatives with did",
+   "rule": "After did and didn't, use the base form of the verb: Did you go? I didn't see it. (Not: Did you went?)",
+   "examples": [
+    {
+     "text": "Did she finish her homework?"
+    },
+    {
+     "text": "We didn't watch TV."
+    }
+   ],
+   "tip": "did already shows the past, so the verb stays in its base form.",
+   "check": {
+    "prompt": "Choose: Did you ___ the match?",
+    "options": [
+     "saw",
+     "see",
+     "seen"
+    ],
+    "answer": 1,
+    "explain": "After did, use the base form: see."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.present_past_simple#consistency_less_common",
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "step": "consistency_less_common",
+   "title": "Keeping the tense steady",
+   "rule": "When you tell a story in the past, keep it in the past: She opened the door and saw a dog. Learn less common irregular forms: catch → caught, choose → chose, lead → led.",
+   "examples": [
+    {
+     "text": "He caught the ball and threw it back."
+    },
+    {
+     "text": "They chose a leader who led them well."
+    }
+   ],
+   "tip": "Read your sentences again and check every verb is in the same time.",
+   "check": {
+    "prompt": "Choose: The team ___ the cup last year.",
+    "options": [
+     "win",
+     "won",
+     "wins"
+    ],
+    "answer": 1,
+    "explain": "last year is the past: won."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.present_past_simple#uncommon",
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "step": "uncommon",
+   "title": "Uncommon irregular forms",
+   "rule": "Some irregular verbs are rare but appear in books: seek → sought, weep → wept, forbid → forbade, bear → bore.",
+   "examples": [
+    {
+     "text": "They sought help from the teacher."
+    },
+    {
+     "text": "She wept with joy."
+    }
+   ],
+   "tip": "If you are unsure, check a dictionary: it lists irregular past forms.",
+   "check": {
+    "prompt": "Choose: The king ___ anyone to enter.",
+    "options": [
+     "forbidded",
+     "forbade",
+     "forbid"
+    ],
+    "answer": 1,
+    "explain": "forbid → forbade in the past."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#third_s",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "third_s",
+   "title": "He, she, it + -s",
+   "rule": "In the present simple, add -s or -es to the verb after he, she, it or one person or thing: she plays, he watches, the dog runs.",
+   "examples": [
+    {
+     "text": "My brother goes to school by bus."
+    },
+    {
+     "text": "It rains a lot in July."
+    }
+   ],
+   "tip": "I, you, we, they: no -s (they play).",
+   "check": {
+    "prompt": "Choose: She ___ to music every evening.",
+    "options": [
+     "listen",
+     "listens"
+    ],
+    "answer": 1,
+    "explain": "she → add -s: listens."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#plural_subject",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "plural_subject",
+   "title": "Plural subjects",
+   "rule": "A plural subject takes a plural verb: the children are, the mice run, my friends live nearby.",
+   "examples": [
+    {
+     "text": "The children are in the garden."
+    },
+    {
+     "text": "These shoes look new."
+    }
+   ],
+   "tip": "Find the subject first, then match the verb to it.",
+   "check": {
+    "prompt": "Choose: The people ___ waiting.",
+    "options": [
+     "is",
+     "are"
+    ],
+    "answer": 1,
+    "explain": "people is plural: are."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#compound",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "compound",
+   "title": "Two subjects with and",
+   "rule": "Two subjects joined by and take a plural verb: Ravi and Meena are friends.",
+   "examples": [
+    {
+     "text": "My sister and I walk to school."
+    },
+    {
+     "text": "Bread and butter is…",
+     "note": "but a single dish can be singular"
+    }
+   ],
+   "tip": "and adds the subjects together, so the verb is plural.",
+   "check": {
+    "prompt": "Choose: Tom and his dog ___ in the park.",
+    "options": [
+     "is",
+     "are"
+    ],
+    "answer": 1,
+    "explain": "Tom and his dog = two: are."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#intervening",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "intervening",
+   "title": "Words between subject and verb",
+   "rule": "The verb agrees with the subject, not with a noun just before it: The box of pencils is on the table. The list of names is long.",
+   "examples": [
+    {
+     "text": "The colour of the flowers is bright."
+    },
+    {
+     "text": "The boys in the team are tired."
+    }
+   ],
+   "tip": "Cover the words between: 'The box … is'.",
+   "check": {
+    "prompt": "Choose: The bag of apples ___ heavy.",
+    "options": [
+     "is",
+     "are"
+    ],
+    "answer": 0,
+    "explain": "The subject is the bag (one): is."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#indefinite",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "indefinite",
+   "title": "Each, every, everyone",
+   "rule": "each, every, everyone, nobody and somebody take a singular verb: Each of the students has a book. Everyone is here.",
+   "examples": [
+    {
+     "text": "Every child needs sleep."
+    },
+    {
+     "text": "Nobody knows the answer."
+    }
+   ],
+   "tip": "Each of the… is still one at a time: singular.",
+   "check": {
+    "prompt": "Choose: Each of the players ___ a shirt.",
+    "options": [
+     "have",
+     "has"
+    ],
+    "answer": 1,
+    "explain": "each → singular: has."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#either_neither",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "either_neither",
+   "title": "either … or, neither … nor",
+   "rule": "With either … or and neither … nor, the verb agrees with the nearer subject: Neither the teacher nor the students were late. Either the students or the teacher is coming.",
+   "examples": [
+    {
+     "text": "Either my parents or my aunt is coming."
+    },
+    {
+     "text": "Neither the dog nor the cats were hungry."
+    }
+   ],
+   "tip": "Look at the subject closest to the verb.",
+   "check": {
+    "prompt": "Choose: Neither Priya nor her brothers ___ at home.",
+    "options": [
+     "is",
+     "are"
+    ],
+    "answer": 1,
+    "explain": "The nearer subject, brothers, is plural: are."
+   }
+  },
+  {
+   "id": "EN.GRM.VERB.sva#inverted_number",
+   "capability": "EN.GRM.VERB.sva",
+   "step": "inverted_number",
+   "title": "Inverted order; a number of",
+   "rule": "When the verb comes first, find the subject after it: There are many birds. Here comes the bus. 'A number of' is plural; 'the number of' is singular.",
+   "examples": [
+    {
+     "text": "A number of students were absent."
+    },
+    {
+     "text": "The number of students is growing."
+    }
+   ],
+   "tip": "Turn the sentence round: many birds are there.",
+   "check": {
+    "prompt": "Choose: There ___ three books on the desk.",
+    "options": [
+     "is",
+     "are"
+    ],
+    "answer": 1,
+    "explain": "The subject is three books: are."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#a_an_letter",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "a_an_letter",
+   "title": "a or an",
+   "rule": "Use an before a word that starts with a vowel (a, e, i, o, u) and a before a consonant: an apple, an egg, a ball, a cat.",
+   "examples": [
+    {
+     "text": "an umbrella, an orange"
+    },
+    {
+     "text": "a pencil, a dog"
+    }
+   ],
+   "tip": "Say it aloud: 'an apple' is easier to say than 'a apple'.",
+   "check": {
+    "prompt": "Choose: She ate ___ egg.",
+    "options": [
+     "a",
+     "an"
+    ],
+    "answer": 1,
+    "explain": "egg starts with a vowel: an egg."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#first_mention",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "first_mention",
+   "title": "a first, then the",
+   "rule": "Use a when you first mention something, then the when you mention it again: I saw a dog. The dog was big. Use a before a job: She is a teacher.",
+   "examples": [
+    {
+     "text": "We bought a kite. The kite was red."
+    },
+    {
+     "text": "My uncle is a doctor."
+    }
+   ],
+   "tip": "a = one of many; the = the one we both know about.",
+   "check": {
+    "prompt": "Choose: My father is ___ engineer.",
+    "options": [
+     "the",
+     "an",
+     "—"
+    ],
+    "answer": 1,
+    "explain": "Use a or an before a job: an engineer."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#a_an_sound",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "a_an_sound",
+   "title": "a or an by sound",
+   "rule": "Choose a or an by the first sound, not the first letter: an hour (silent h), an MP; a university, a one-rupee coin (they start with 'yoo' and 'w' sounds).",
+   "examples": [
+    {
+     "text": "an honest boy"
+    },
+    {
+     "text": "a uniform, a European city"
+    }
+   ],
+   "tip": "Listen to the sound at the start, not the letter.",
+   "check": {
+    "prompt": "Choose: We waited for ___ hour.",
+    "options": [
+     "a",
+     "an"
+    ],
+    "answer": 1,
+    "explain": "hour starts with a vowel sound (the h is silent): an hour."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#unique_the",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "unique_the",
+   "title": "the for one of a kind",
+   "rule": "Use the for things there is only one of, or that everyone knows: the sun, the moon, the sky, the Prime Minister.",
+   "examples": [
+    {
+     "text": "The sun rises in the east."
+    },
+    {
+     "text": "Close the door, please.",
+     "note": "the door we both know"
+    }
+   ],
+   "tip": "If there is only one, it is the.",
+   "check": {
+    "prompt": "Choose: ___ moon is bright tonight.",
+    "options": [
+     "A",
+     "The"
+    ],
+    "answer": 1,
+    "explain": "There is only one moon: the moon."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#zero_uncountable",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "zero_uncountable",
+   "title": "No a with uncountable nouns",
+   "rule": "Some nouns cannot be counted: advice, information, furniture, homework, water. Do not use a or an with them: some advice, a piece of information.",
+   "examples": [
+    {
+     "text": "She gave me some good advice."
+    },
+    {
+     "text": "We need new furniture."
+    }
+   ],
+   "tip": "If you cannot put a number in front of it, do not use a or an.",
+   "check": {
+    "prompt": "Choose: Can you give me ___ information?",
+    "options": [
+     "an",
+     "some"
+    ],
+    "answer": 1,
+    "explain": "information is uncountable: some information."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#generic_abstract",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "generic_abstract",
+   "title": "General statements",
+   "rule": "For general statements about all of something, use no article with plurals and abstract nouns: Tigers are strong. Honesty is important.",
+   "examples": [
+    {
+     "text": "Dogs are loyal."
+    },
+    {
+     "text": "Music makes me happy."
+    }
+   ],
+   "tip": "Talking about all of them, in general? No article.",
+   "check": {
+    "prompt": "Choose: ___ honesty is the best policy.",
+    "options": [
+     "The",
+     "—",
+     "An"
+    ],
+    "answer": 1,
+    "explain": "A general, abstract idea: no article."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.articles#proper_idioms",
+   "capability": "EN.GRM.NOUN.articles",
+   "step": "proper_idioms",
+   "title": "Articles with names",
+   "rule": "Most names of people, cities and countries have no article (Delhi, India), but rivers, oceans and some countries do: the Ganga, the Indian Ocean, the United States. Mountains do not: Mount Everest.",
+   "examples": [
+    {
+     "text": "We sailed on the Ganga."
+    },
+    {
+     "text": "They climbed Mount Everest."
+    }
+   ],
+   "tip": "Rivers, seas and oceans take the.",
+   "check": {
+    "prompt": "Choose: ___ Pacific is the largest ocean.",
+    "options": [
+     "—",
+     "The",
+     "A"
+    ],
+    "answer": 1,
+    "explain": "Oceans take the: the Pacific."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.plurals_countability#regular",
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "step": "regular",
+   "title": "Regular plurals",
+   "rule": "Most nouns add -s for more than one; nouns ending in s, x, ch or sh add -es: cats, books, buses, boxes.",
+   "examples": [
+    {
+     "text": "one bench, two benches"
+    },
+    {
+     "text": "one toy, many toys"
+    }
+   ],
+   "tip": "Listen for the extra 'iz' sound: -es.",
+   "check": {
+    "prompt": "Choose: two ___",
+    "options": [
+     "glasss",
+     "glasses",
+     "glass"
+    ],
+    "answer": 1,
+    "explain": "glass ends in s, so add -es: glasses."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.plurals_countability#y_and_irregular",
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "step": "y_and_irregular",
+   "title": "-ies and irregular plurals",
+   "rule": "Consonant + y becomes -ies (baby → babies). Some plurals are irregular: child → children, mouse → mice, man → men, foot → feet.",
+   "examples": [
+    {
+     "text": "one city, two cities"
+    },
+    {
+     "text": "one tooth, many teeth"
+    }
+   ],
+   "tip": "Never write childs or mouses.",
+   "check": {
+    "prompt": "Choose: three ___",
+    "options": [
+     "childs",
+     "children",
+     "childrens"
+    ],
+    "answer": 1,
+    "explain": "child is irregular: children."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.plurals_countability#many_much",
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "step": "many_much",
+   "title": "many or much",
+   "rule": "Use many with things you can count (many books) and much with things you cannot count (much water). A lot of works with both.",
+   "examples": [
+    {
+     "text": "How many apples? How much milk?"
+    },
+    {
+     "text": "There isn't much time."
+    }
+   ],
+   "tip": "Can you count it? many. Can't count it? much.",
+   "check": {
+    "prompt": "Choose: How ___ sugar do you want?",
+    "options": [
+     "many",
+     "much"
+    ],
+    "answer": 1,
+    "explain": "sugar cannot be counted: much."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.plurals_countability#uncountable",
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "step": "uncountable",
+   "title": "Uncountable nouns",
+   "rule": "Some nouns have no plural and take a singular verb: information, advice, furniture, news, luggage. The news is good.",
+   "examples": [
+    {
+     "text": "The furniture is new."
+    },
+    {
+     "text": "Two pieces of advice"
+    }
+   ],
+   "tip": "To count them, use 'a piece of' or 'an item of'.",
+   "check": {
+    "prompt": "Choose: The news ___ exciting.",
+    "options": [
+     "are",
+     "is"
+    ],
+    "answer": 1,
+    "explain": "news is uncountable and singular: is."
+   }
+  },
+  {
+   "id": "EN.GRM.NOUN.plurals_countability#both_ways_rare",
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "step": "both_ways_rare",
+   "title": "Both ways, and rare plurals",
+   "rule": "Some nouns can be both: coffee (the drink) / two coffees (cups). Some plurals come from Latin or Greek: criterion → criteria, phenomenon → phenomena.",
+   "examples": [
+    {
+     "text": "Two coffees, please."
+    },
+    {
+     "text": "The criteria are clear."
+    }
+   ],
+   "tip": "criteria and phenomena are plurals: they take are.",
+   "check": {
+    "prompt": "Choose: one ___, two phenomena",
+    "options": [
+     "phenomena",
+     "phenomenon",
+     "phenomenons"
+    ],
+    "answer": 1,
+    "explain": "The singular is phenomenon."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.capitalisation#start_I_names",
+   "capability": "EN.GRM.PUN.capitalisation",
+   "step": "start_I_names",
+   "title": "Capitals: starts, I and names",
+   "rule": "Use a capital letter at the start of a sentence, for the word I, and for names of people and pets.",
+   "examples": [
+    {
+     "text": "My friend Arjun and I play chess."
+    },
+    {
+     "text": "Our cat is called Tiger."
+    }
+   ],
+   "tip": "I is always a capital, wherever it is in the sentence.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "yesterday i met sita.",
+     "Yesterday I met Sita.",
+     "Yesterday i met Sita."
+    ],
+    "answer": 1,
+    "explain": "Capitals for the start, for I and for the name Sita."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.capitalisation#days_places",
+   "capability": "EN.GRM.PUN.capitalisation",
+   "step": "days_places",
+   "title": "Capitals: days, months, places",
+   "rule": "Days, months, festivals, cities, countries, rivers and languages start with a capital: Monday, June, Diwali, Chennai, India, Hindi.",
+   "examples": [
+    {
+     "text": "We visit Kerala every December."
+    },
+    {
+     "text": "She speaks Tamil and English."
+    }
+   ],
+   "tip": "Seasons do not take capitals: summer, winter.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "We go to mumbai in may.",
+     "We go to Mumbai in May.",
+     "We go to Mumbai in may."
+    ],
+    "answer": 1,
+    "explain": "Mumbai (a city) and May (a month) both need capitals."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.capitalisation#titles_orgs",
+   "capability": "EN.GRM.PUN.capitalisation",
+   "step": "titles_orgs",
+   "title": "Capitals: titles and organisations",
+   "rule": "Use capitals for titles (Dr Rao, Principal Mehta), organisations (Indian Railways) and adjectives from names (Indian, French). Do not capitalise ordinary nouns: my school, the river.",
+   "examples": [
+    {
+     "text": "Dr Sharma works at City Hospital."
+    },
+    {
+     "text": "We went to the river near our school."
+    }
+   ],
+   "tip": "Is it the name of one particular thing? Capital. A general word? No capital.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "My School is near the River.",
+     "My school is near the river.",
+     "my school is near the River."
+    ],
+    "answer": 1,
+    "explain": "school and river are ordinary nouns here: no capitals."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.capitalisation#conventions",
+   "capability": "EN.GRM.PUN.capitalisation",
+   "step": "conventions",
+   "title": "Capitals: finer points",
+   "rule": "Start quoted speech with a capital (She said, \"We are late.\"). Capitalise a title before a name (Uncle Ravi) but not alone (my uncle). Capitalise the main words of book titles.",
+   "examples": [
+    {
+     "text": "He asked, \"Where is the station?\""
+    },
+    {
+     "text": "Ask your aunt. Ask Aunt Leela."
+    }
+   ],
+   "tip": "A title used as part of a name gets a capital.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "My Uncle lives in Pune.",
+     "My uncle lives in Pune."
+    ],
+    "answer": 1,
+    "explain": "uncle is not part of a name here: no capital."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.apostrophes#contractions",
+   "capability": "EN.GRM.PUN.apostrophes",
+   "step": "contractions",
+   "title": "Apostrophes in short forms",
+   "rule": "An apostrophe shows where letters are missing: do not → don't, I am → I'm, is not → isn't, it is → it's.",
+   "examples": [
+    {
+     "text": "I can't come; I'm busy."
+    },
+    {
+     "text": "We're ready."
+    }
+   ],
+   "tip": "Put the apostrophe exactly where the letters were taken out.",
+   "check": {
+    "prompt": "Which is correct? (did not)",
+    "options": [
+     "did'nt",
+     "didn't",
+     "didnt'"
+    ],
+    "answer": 1,
+    "explain": "The o of not is missing: didn't."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.apostrophes#singular_possession",
+   "capability": "EN.GRM.PUN.apostrophes",
+   "step": "singular_possession",
+   "title": "'s for belonging",
+   "rule": "Add 's to show that something belongs to one person or thing: the girl's bag, Ravi's bike, the dog's bowl.",
+   "examples": [
+    {
+     "text": "my sister's room"
+    },
+    {
+     "text": "the teacher's desk"
+    }
+   ],
+   "tip": "Ask: whose is it? The answer gets 's.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "Meenas pencil",
+     "Meena's pencil",
+     "Meenas' pencil"
+    ],
+    "answer": 1,
+    "explain": "The pencil belongs to Meena: Meena's."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.apostrophes#no_plural_apostrophe",
+   "capability": "EN.GRM.PUN.apostrophes",
+   "step": "no_plural_apostrophe",
+   "title": "No apostrophe in plain plurals",
+   "rule": "A plain plural or a verb never needs an apostrophe: mangoes for sale (not mango's), she sells books (not sell's).",
+   "examples": [
+    {
+     "text": "Bananas: ₹40 a dozen"
+    },
+    {
+     "text": "He likes cars."
+    }
+   ],
+   "tip": "If nothing belongs to anything, there is no apostrophe.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "Fresh tomato's for sale",
+     "Fresh tomatoes for sale"
+    ],
+    "answer": 1,
+    "explain": "A plain plural has no apostrophe: tomatoes."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.apostrophes#plural_its",
+   "capability": "EN.GRM.PUN.apostrophes",
+   "step": "plural_its",
+   "title": "Plural belonging, and its",
+   "rule": "For a plural ending in s, put the apostrophe after the s: the girls' bags (several girls). its (belonging to it) has no apostrophe; it's means it is.",
+   "examples": [
+    {
+     "text": "the students' books (many students)"
+    },
+    {
+     "text": "The tree lost its leaves."
+    }
+   ],
+   "tip": "One girl: girl's. Many girls: girls'.",
+   "check": {
+    "prompt": "Which is correct? (bags of several boys)",
+    "options": [
+     "the boy's bags",
+     "the boys' bags",
+     "the boys bag's"
+    ],
+    "answer": 1,
+    "explain": "Several boys, so the apostrophe comes after the s: boys'."
+   }
+  },
+  {
+   "id": "EN.GRM.PUN.apostrophes#irregular_joint",
+   "capability": "EN.GRM.PUN.apostrophes",
+   "step": "irregular_joint",
+   "title": "Irregular plurals and joint belonging",
+   "rule": "Plurals that do not end in s take 's: the children's toys, the people's choice. For two owners of one thing, put 's on the second: Ravi and Sita's house.",
+   "examples": [
+    {
+     "text": "the women's team"
+    },
+    {
+     "text": "Amma and Appa's car"
+    }
+   ],
+   "tip": "children is already plural, so just add 's.",
+   "check": {
+    "prompt": "Which is correct?",
+    "options": [
+     "the childrens' park",
+     "the children's park",
+     "the childrens park"
+    ],
+    "answer": 1,
+    "explain": "children is plural without s, so add 's: children's."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#very_common",
+   "capability": "EN.VOC.BRD.general",
+   "step": "very_common",
+   "title": "Everyday words",
+   "rule": "The most common words are the ones you meet every day. Knowing them well, including their different meanings, makes reading easier.",
+   "examples": [
+    {
+     "text": "big, small, fast, quiet"
+    },
+    {
+     "text": "begin, finish, find, carry"
+    }
+   ],
+   "tip": "When you meet a new word, say it, read the sentence again, and try using it.",
+   "check": {
+    "prompt": "Which word means the opposite of 'early'?",
+    "options": [
+     "late",
+     "soon",
+     "fast"
+    ],
+    "answer": 0,
+    "explain": "early ↔ late."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#everyday_2k",
+   "capability": "EN.VOC.BRD.general",
+   "step": "everyday_2k",
+   "title": "Common words",
+   "rule": "Words like 'borrow', 'journey' and 'gentle' are common in stories and everyday talk. The sentence around a word often shows its meaning.",
+   "examples": [
+    {
+     "text": "May I borrow your pen? (use it and give it back)"
+    },
+    {
+     "text": "a long journey (a trip from one place to another)"
+    }
+   ],
+   "tip": "Look at the words around a new word for clues.",
+   "check": {
+    "prompt": "'She spoke in a gentle voice.' gentle means:",
+    "options": [
+     "loud",
+     "soft and kind",
+     "angry"
+    ],
+    "answer": 1,
+    "explain": "A gentle voice is soft and kind."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#everyday_3k",
+   "capability": "EN.VOC.BRD.general",
+   "step": "everyday_3k",
+   "title": "Words in everyday texts",
+   "rule": "Newspapers, notices and school books use words like 'urgent', 'ancient' and 'encourage'. Learn them with an example sentence.",
+   "examples": [
+    {
+     "text": "The ancient temple is a thousand years old."
+    },
+    {
+     "text": "Teachers encourage us to read."
+    }
+   ],
+   "tip": "Keep a list of new words with a sentence for each.",
+   "check": {
+    "prompt": "'This is urgent' means it must be done:",
+    "options": [
+     "later",
+     "quickly",
+     "slowly"
+    ],
+    "answer": 1,
+    "explain": "urgent: it needs attention now."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#less_frequent",
+   "capability": "EN.VOC.BRD.general",
+   "step": "less_frequent",
+   "title": "Less frequent words",
+   "rule": "Secondary-school reading brings words like 'reluctant', 'abundant' and 'vivid'. Notice them, guess from context, then check.",
+   "examples": [
+    {
+     "text": "He was reluctant to leave (he did not want to)."
+    },
+    {
+     "text": "an abundant harvest (a very large one)"
+    }
+   ],
+   "tip": "Guess, then check in a dictionary.",
+   "check": {
+    "prompt": "'a vivid dream' is a dream that is:",
+    "options": [
+     "clear and bright",
+     "short",
+     "frightening"
+    ],
+    "answer": 0,
+    "explain": "vivid means very clear and bright."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#secondary",
+   "capability": "EN.VOC.BRD.general",
+   "step": "secondary",
+   "title": "Words in textbooks",
+   "rule": "Textbooks use general words such as 'significant', 'evident' and 'sufficient'. They make writing more precise.",
+   "examples": [
+    {
+     "text": "a significant change (an important one)"
+    },
+    {
+     "text": "sufficient food (enough food)"
+    }
+   ],
+   "tip": "Try replacing the word with a simpler one to check you understand it.",
+   "check": {
+    "prompt": "'sufficient' means:",
+    "options": [
+     "too much",
+     "enough",
+     "too little"
+    ],
+    "answer": 1,
+    "explain": "sufficient = enough."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#low_frequency",
+   "capability": "EN.VOC.BRD.general",
+   "step": "low_frequency",
+   "title": "Precise words",
+   "rule": "Less common words carry exact meanings: 'meticulous' (very careful about details), 'candid' (honest and direct).",
+   "examples": [
+    {
+     "text": "a meticulous drawing"
+    },
+    {
+     "text": "a candid answer"
+    }
+   ],
+   "tip": "Use a precise word only when you are sure of its meaning.",
+   "check": {
+    "prompt": "'a meticulous worker' is:",
+    "options": [
+     "careless",
+     "very careful",
+     "very fast"
+    ],
+    "answer": 1,
+    "explain": "meticulous: very careful about every detail."
+   }
+  },
+  {
+   "id": "EN.VOC.BRD.general#rare_precise",
+   "capability": "EN.VOC.BRD.general",
+   "step": "rare_precise",
+   "title": "Rare words",
+   "rule": "Rare words like 'ephemeral' (lasting a very short time) are worth learning when they say exactly what you mean.",
+   "examples": [
+    {
+     "text": "Fame can be ephemeral."
+    },
+    {
+     "text": "an ubiquitous app (found everywhere)"
+    }
+   ],
+   "tip": "Learn rare words in families: ubiquitous, ubiquity.",
+   "check": {
+    "prompt": "'ephemeral' means:",
+    "options": [
+     "lasting a short time",
+     "very old",
+     "very large"
+    ],
+    "answer": 0,
+    "explain": "ephemeral: lasting only a short time."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.prefixes#un_re",
+   "capability": "EN.VOC.MOR.prefixes",
+   "step": "un_re",
+   "title": "un- and re-",
+   "rule": "un- means not or the opposite (unhappy, untie). re- means again or back (redo, refill, return).",
+   "examples": [
+    {
+     "text": "unlock = open what was locked"
+    },
+    {
+     "text": "rewrite = write again"
+    }
+   ],
+   "tip": "Cover the prefix to find the base word.",
+   "check": {
+    "prompt": "'reread' means:",
+    "options": [
+     "not read",
+     "read again",
+     "read before"
+    ],
+    "answer": 1,
+    "explain": "re- means again."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.prefixes#common_prefixes",
+   "capability": "EN.VOC.MOR.prefixes",
+   "step": "common_prefixes",
+   "title": "dis-, mis-, pre-, over-",
+   "rule": "dis- means not or the opposite (disagree), mis- means wrongly (misspell), pre- means before (preview), over- means too much (overcooked).",
+   "examples": [
+    {
+     "text": "misunderstand = understand wrongly"
+    },
+    {
+     "text": "preheat = heat before"
+    }
+   ],
+   "tip": "Knowing the prefix gives you half the meaning.",
+   "check": {
+    "prompt": "'overeat' means:",
+    "options": [
+     "eat too much",
+     "eat again",
+     "not eat"
+    ],
+    "answer": 0,
+    "explain": "over- means too much."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.prefixes#negative_choice",
+   "capability": "EN.VOC.MOR.prefixes",
+   "step": "negative_choice",
+   "title": "Choosing the negative prefix",
+   "rule": "im- comes before b, m and p (impossible, immature), il- before l (illegal), ir- before r (irregular), and in- or un- elsewhere (incorrect, unkind).",
+   "examples": [
+    {
+     "text": "im + polite = impolite"
+    },
+    {
+     "text": "ir + responsible = irresponsible"
+    }
+   ],
+   "tip": "Look at the first letter of the base word.",
+   "check": {
+    "prompt": "The opposite of 'legal' is:",
+    "options": [
+     "unlegal",
+     "illegal",
+     "inlegal"
+    ],
+    "answer": 1,
+    "explain": "legal starts with l, so il-: illegal."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.prefixes#less_common",
+   "capability": "EN.VOC.MOR.prefixes",
+   "step": "less_common",
+   "title": "sub- and inter-",
+   "rule": "sub- means under or below (subway, submarine). inter- means between (international, interact).",
+   "examples": [
+    {
+     "text": "a submarine travels under the sea"
+    },
+    {
+     "text": "an inter-school match is between schools"
+    }
+   ],
+   "tip": "inter- between; intra- within.",
+   "check": {
+    "prompt": "'international' means:",
+    "options": [
+     "inside one nation",
+     "between nations",
+     "under a nation"
+    ],
+    "answer": 1,
+    "explain": "inter- means between."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.prefixes#academic",
+   "capability": "EN.VOC.MOR.prefixes",
+   "step": "academic",
+   "title": "Prefixes in longer words",
+   "rule": "Academic words often have prefixes: counter- (against: counterattack), semi- (half: semicircle), mis- (wrongly: misconception).",
+   "examples": [
+    {
+     "text": "semi-final: the round before the final"
+    },
+    {
+     "text": "counterproductive: working against the aim"
+    }
+   ],
+   "tip": "Split the word: semi + circle.",
+   "check": {
+    "prompt": "A 'semicircle' is:",
+    "options": [
+     "a full circle",
+     "half a circle",
+     "two circles"
+    ],
+    "answer": 1,
+    "explain": "semi- means half."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#familiar",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "familiar",
+   "title": "-ful, -ly and -er",
+   "rule": "-ful means full of (helpful), -ly often makes an adverb that says how (quickly), and -er can mean a person who does something (teacher, player).",
+   "examples": [
+    {
+     "text": "careful → carefully"
+    },
+    {
+     "text": "bake → baker"
+    }
+   ],
+   "tip": "The suffix often tells you what kind of word it is.",
+   "check": {
+    "prompt": "A 'singer' is:",
+    "options": [
+     "a song",
+     "a person who sings",
+     "a way of singing"
+    ],
+    "answer": 1,
+    "explain": "-er: a person who does it."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#word_class_common",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "word_class_common",
+   "title": "The right form for the place",
+   "rule": "Use an adjective to describe a noun (a careful driver) and an adverb to describe a verb (she drives carefully).",
+   "examples": [
+    {
+     "text": "He is quick. He runs quickly."
+    },
+    {
+     "text": "a happy child; she smiled happily"
+    }
+   ],
+   "tip": "Describing how someone does something? Use the -ly word.",
+   "check": {
+    "prompt": "Choose: She spoke ___.",
+    "options": [
+     "confident",
+     "confidently",
+     "confidence"
+    ],
+    "answer": 1,
+    "explain": "It describes how she spoke: an adverb, confidently."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#noun_suffixes",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "noun_suffixes",
+   "title": "Making nouns",
+   "rule": "-ness, -ment and -tion make nouns: kind → kindness, enjoy → enjoyment, invite → invitation.",
+   "examples": [
+    {
+     "text": "happy → happiness"
+    },
+    {
+     "text": "move → movement"
+    }
+   ],
+   "tip": "If you can put 'the' in front of it, it is probably a noun.",
+   "check": {
+    "prompt": "The noun from 'improve' is:",
+    "options": [
+     "improvement",
+     "improveness",
+     "improvation"
+    ],
+    "answer": 0,
+    "explain": "improve + -ment = improvement."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#less_common",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "less_common",
+   "title": "Less regular forms",
+   "rule": "Some word families change more: decide → decision, able → ability, explain → explanation.",
+   "examples": [
+    {
+     "text": "describe → description"
+    },
+    {
+     "text": "strong → strength"
+    }
+   ],
+   "tip": "Learn the noun with the verb: decide, decision.",
+   "check": {
+    "prompt": "The noun from 'decide' is:",
+    "options": [
+     "decidement",
+     "decision",
+     "decidation"
+    ],
+    "answer": 1,
+    "explain": "decide → decision."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#meaning_change",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "meaning_change",
+   "title": "How a suffix changes meaning",
+   "rule": "A suffix can change meaning: -able means can be (washable), -less means without (fearless), -ish means a little (reddish).",
+   "examples": [
+    {
+     "text": "questionable: can be questioned (doubtful)"
+    },
+    {
+     "text": "affordable: can be afforded"
+    }
+   ],
+   "tip": "Read the suffix as part of the meaning.",
+   "check": {
+    "prompt": "'fearless' means:",
+    "options": [
+     "full of fear",
+     "without fear",
+     "causing fear"
+    ],
+    "answer": 1,
+    "explain": "-less means without."
+   }
+  },
+  {
+   "id": "EN.VOC.MOR.suffixes#irregular_abstract",
+   "capability": "EN.VOC.MOR.suffixes",
+   "step": "irregular_abstract",
+   "title": "Irregular abstract nouns",
+   "rule": "Some abstract nouns change their spelling: maintain → maintenance, pronounce → pronunciation, explain → explanation.",
+   "examples": [
+    {
+     "text": "pronounce → pronunciation (no o after n)"
+    },
+    {
+     "text": "maintain → maintenance"
+    }
+   ],
+   "tip": "Learn the noun's spelling separately from the verb's.",
+   "check": {
+    "prompt": "The noun from 'pronounce' is:",
+    "options": [
+     "pronounciation",
+     "pronunciation",
+     "pronouncement only"
+    ],
+    "answer": 1,
+    "explain": "pronunciation: the o in -noun- drops."
+   }
+  },
+  {
+   "id": "EN.VOC.REL.synonyms_antonyms#common_opposites",
+   "capability": "EN.VOC.REL.synonyms_antonyms",
+   "step": "common_opposites",
+   "title": "Opposites",
+   "rule": "Antonyms are words with opposite meanings: big / small, hot / cold, open / close, early / late.",
+   "examples": [
+    {
+     "text": "The bag is heavy; the box is light."
+    },
+    {
+     "text": "Push the door, then pull it."
+    }
+   ],
+   "tip": "Learn opposites in pairs.",
+   "check": {
+    "prompt": "The opposite of 'empty' is:",
+    "options": [
+     "full",
+     "open",
+     "clean"
+    ],
+    "answer": 0,
+    "explain": "empty ↔ full."
+   }
+  },
+  {
+   "id": "EN.VOC.REL.synonyms_antonyms#syn_ant_context",
+   "capability": "EN.VOC.REL.synonyms_antonyms",
+   "step": "syn_ant_context",
+   "title": "Same and opposite in a sentence",
+   "rule": "Synonyms have the same or nearly the same meaning: begin / start, big / large. In a sentence, choose the one that keeps the meaning.",
+   "examples": [
+    {
+     "text": "The film will begin (start) at six."
+    },
+    {
+     "text": "a generous (kind, giving) person ↔ a selfish one"
+    }
+   ],
+   "tip": "Swap the word in and read the sentence again.",
+   "check": {
+    "prompt": "A word that means the same as 'start':",
+    "options": [
+     "finish",
+     "begin",
+     "stop"
+    ],
+    "answer": 1,
+    "explain": "start = begin."
+   }
+  },
+  {
+   "id": "EN.VOC.REL.synonyms_antonyms#less_common_words",
+   "capability": "EN.VOC.REL.synonyms_antonyms",
+   "step": "less_common_words",
+   "title": "Less common pairs",
+   "rule": "Learn synonyms and opposites for less common words: narrow ↔ wide, reluctant = unwilling, ancient ↔ modern.",
+   "examples": [
+    {
+     "text": "a narrow road ↔ a wide road"
+    },
+    {
+     "text": "He was reluctant (unwilling) to go."
+    }
+   ],
+   "tip": "Think of a sentence where both words fit.",
+   "check": {
+    "prompt": "A word that means the same as 'reluctant':",
+    "options": [
+     "eager",
+     "unwilling",
+     "quick"
+    ],
+    "answer": 1,
+    "explain": "reluctant = unwilling."
+   }
+  },
+  {
+   "id": "EN.VOC.REL.synonyms_antonyms#fit_meaning",
+   "capability": "EN.VOC.REL.synonyms_antonyms",
+   "step": "fit_meaning",
+   "title": "The word that fits",
+   "rule": "Near-synonyms are not always interchangeable. Tired and exhausted are close, but exhausted is much stronger; a fragile vase breaks easily.",
+   "examples": [
+    {
+     "text": "After the race, she was exhausted."
+    },
+    {
+     "text": "Handle the fragile glass with care."
+    }
+   ],
+   "tip": "Ask which word fits the strength and situation of the sentence.",
+   "check": {
+    "prompt": "After running 20 km, he was ___.",
+    "options": [
+     "sleepy",
+     "exhausted",
+     "bored"
+    ],
+    "answer": 1,
+    "explain": "Very tired after great effort: exhausted."
+   }
+  },
+  {
+   "id": "EN.VOC.REL.synonyms_antonyms#fine_differences",
+   "capability": "EN.VOC.REL.synonyms_antonyms",
+   "step": "fine_differences",
+   "title": "Fine differences",
+   "rule": "Some near-synonyms show an attitude: determined (good) / stubborn (not so good); thrifty (careful with money) / stingy (unwilling to share). glance (a quick look) / stare (a long look).",
+   "examples": [
+    {
+     "text": "She is determined to win."
+    },
+    {
+     "text": "Don't stare; it's rude."
+    }
+   ],
+   "tip": "Ask: does the word praise or criticise?",
+   "check": {
+    "prompt": "Which word praises someone careful with money?",
+    "options": [
+     "stingy",
+     "thrifty",
+     "greedy"
+    ],
+    "answer": 1,
+    "explain": "thrifty praises; stingy criticises."
+   }
+  }
+ ]
+}

@@ -158,7 +158,21 @@ export class Ledger {
     if (item.kind !== "code") return []; // a written answer (extended or short) waits for an evaluator proposal
     const { correct, misconceptions } = scoreCode(item, ev.response);
     const id = `d:${ev.id}:${item.target}`;
-    const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions, exposure };
+    const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions, exposure, ...(ev.use ? { use: ev.use } : {}) };
+    // A generated item whose difficulty and quality have not been checked is not assessment evidence:
+    // the answer is kept (and counts as seen) but no estimate changes until the item is checked.
+    if (item.generated && !item.generated.checked)
+      return [
+        {
+          id,
+          at: ev.at,
+          source: ev.id,
+          capability: item.target,
+          verdict: "held",
+          reasons: [`scored by code: ${correct ? "right" : "wrong"}; generated item (${item.generated.template}, "${item.generated.word}") not yet checked by a person, so it is recorded as practice and no estimate is changed`],
+          observation,
+        },
+      ];
     if (this.revoked.has(id)) return [{ id, at: ev.at, source: ev.id, capability: item.target, verdict: "revoked", reasons: ["revoked"], observation }];
     const params = itemParams(item);
     const applied = applyDirect(this.composite, this.ctx.index, {

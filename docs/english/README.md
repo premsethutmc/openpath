@@ -47,6 +47,11 @@ is merged ([`E2B_REPORT.md`](E2B_REPORT.md)). The E3 scope is proposed in
     can and cannot catch.
 15. [`EDUCATOR_REVIEW_PROPOSAL.md`](EDUCATOR_REVIEW_PROPOSAL.md): trusted anchors — sample
     answers, workload, qualifications and estimated cost (proposal only).
+16. [`WEB_EXPERIENCE_PROPOSAL.md`](WEB_EXPERIENCE_PROPOSAL.md): proposal for the first usable private
+    web experience (placement, teaching, practice, feedback, progress, persistence) and a
+    dictionary-driven spelling module.
+17. [`WEB_APP.md`](WEB_APP.md): the private web app as built — how to launch it, the journey, what
+    is usable and what is incomplete.
 
 ---
 

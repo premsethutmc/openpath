@@ -1,0 +1,10 @@
+# Words kept out of the generated spelling items after a first review of a sample of the bank
+# (12 October 2026). Reason: too rare, archaic or specialised for learners aged 10–15, so a
+# homophone group or misspelling built on them would test vocabulary rather than spelling.
+# This is a short review list, not a word bank: the bank itself comes from SCOWL, CMUdict and
+# Open English WordNet by rule.
+sic lass mete mien franc wrest hale feint faze pique nay neigh roe lye quay cede whet berth
+dyeing wheeled bough canvass mantel peddle ascent assent caste chute sealing billed idol
+mane lessen holy wholly navel naval discrete suite cite bye weakly matt jamb
+yeses consensuses cruxes squirrelling devilled interred abetted abetting
+eviller perilled minored faceted lazies busies harries jollies ivories readies dirties daemon demon spacial trafficking libelled legged tinned grosses

@@ -1,0 +1,182 @@
+import { type FormEvent, useEffect, useRef, useState } from "react";
+import type { Item, Passage, Response } from "../../../../packages/english-core/src/index.ts";
+import { speak } from "./speech.ts";
+
+interface Props {
+  item: Item;
+  passage?: Passage;
+  voice: SpeechSynthesisVoice | null;
+  locked: boolean;
+  onSubmit: (r: Response) => void;
+}
+
+/** One question, in whichever format it uses. Typed answers never get autocorrect or spellcheck. */
+export function ItemView({ item, passage, voice, locked, onSubmit }: Props) {
+  if (item.kind !== "code") return null;
+  const kind = item.format.split(":")[0];
+  return (
+    <div className="item" data-format={item.format} data-item={item.id}>
+      {passage && (
+        <details className="passage" open>
+          <summary>Read: {passage.title}</summary>
+          {passage.text.split(/\n+/).map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </details>
+      )}
+      <Prompt text={item.prompt} />
+      {kind === "typed" && <Typed key={item.id} speakText={item.speak} voice={voice} locked={locked} onSubmit={onSubmit} />}
+      {kind === "choice" && <Choice key={item.id} options={item.options!} locked={locked} onSubmit={onSubmit} />}
+      {kind === "multi" && <Multi key={item.id} options={item.options!} locked={locked} onSubmit={onSubmit} />}
+      {kind === "order" && <Order key={item.id} options={item.options!} locked={locked} onSubmit={onSubmit} />}
+      {kind === "match" && <Match key={item.id} left={item.left!} options={item.options!} locked={locked} onSubmit={onSubmit} />}
+    </div>
+  );
+}
+
+function Prompt({ text }: { text: string }) {
+  const parts = text.split(/(___+)/);
+  return (
+    <p className="prompt" id="prompt">
+      {parts.map((p, i) => (/^_+$/.test(p) ? <span key={i} className="gap" aria-label="blank" /> : <span key={i}>{p}</span>))}
+    </p>
+  );
+}
+
+function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voice: SpeechSynthesisVoice | null; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [text, setText] = useState("");
+  const input = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (speakText) speak(speakText, voice);
+    input.current?.focus();
+  }, [speakText, voice]);
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    if (text.trim() && !locked) onSubmit({ kind: "typed", text });
+  };
+  return (
+    <form className="answer" onSubmit={submit}>
+      {speakText && (
+        <button type="button" className="listen" onClick={() => speak(speakText, voice)} aria-label="Hear the word again">
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+            <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          Hear it again
+        </button>
+      )}
+      <label className="ruled">
+        <span className="sr-only">Your answer</span>
+        <input
+          ref={input}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          disabled={locked}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
+          enterKeyHint="done"
+          aria-describedby="prompt"
+          name="answer"
+        />
+      </label>
+      <button type="submit" className="primary" disabled={locked || !text.trim()}>
+        Check
+      </button>
+    </form>
+  );
+}
+
+function Choice({ options, locked, onSubmit }: { options: string[]; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [pick, setPick] = useState<number | null>(null);
+  return (
+    <div className="answer">
+      <div className="options" role="radiogroup" aria-labelledby="prompt">
+        {options.map((o, i) => (
+          <button key={i} type="button" role="radio" aria-checked={pick === i} className="option" disabled={locked} onClick={() => setPick(i)}>
+            {o}
+          </button>
+        ))}
+      </div>
+      <button type="button" className="primary" disabled={locked || pick === null} onClick={() => pick !== null && onSubmit({ kind: "choice", choice: pick })}>
+        Check
+      </button>
+    </div>
+  );
+}
+
+function Multi({ options, locked, onSubmit }: { options: string[]; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [picked, setPicked] = useState<number[]>([]);
+  const toggle = (i: number) => setPicked((p) => (p.includes(i) ? p.filter((x) => x !== i) : [...p, i]));
+  return (
+    <div className="answer">
+      <div className="options" role="group" aria-labelledby="prompt">
+        {options.map((o, i) => (
+          <button key={i} type="button" role="checkbox" aria-checked={picked.includes(i)} className="option" disabled={locked} onClick={() => toggle(i)}>
+            {o}
+          </button>
+        ))}
+      </div>
+      <button type="button" className="primary" disabled={locked || !picked.length} onClick={() => onSubmit({ kind: "multi", choices: picked })}>
+        Check
+      </button>
+    </div>
+  );
+}
+
+function Order({ options, locked, onSubmit }: { options: string[]; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [order, setOrder] = useState<number[]>([]);
+  return (
+    <div className="answer">
+      <p className="built" aria-live="polite">
+        {order.length ? order.map((i) => options[i]).join(" ") : <span className="hint">Tap the parts in order.</span>}
+      </p>
+      <div className="options chips">
+        {options.map((o, i) => (
+          <button key={i} type="button" className="option chip" disabled={locked || order.includes(i)} onClick={() => setOrder([...order, i])}>
+            {o}
+          </button>
+        ))}
+      </div>
+      <div className="row">
+        <button type="button" className="quiet" disabled={locked || !order.length} onClick={() => setOrder(order.slice(0, -1))}>
+          Undo
+        </button>
+        <button type="button" className="primary" disabled={locked || order.length !== options.length} onClick={() => onSubmit({ kind: "order", order })}>
+          Check
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Match({ left, options, locked, onSubmit }: { left: string[]; options: string[]; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [pairs, setPairs] = useState<(number | null)[]>(left.map(() => null));
+  return (
+    <div className="answer">
+      <div className="match">
+        {left.map((l, i) => (
+          <label key={i} className="pair">
+            <span>{l}</span>
+            <select
+              value={pairs[i] ?? ""}
+              disabled={locked}
+              onChange={(e) => setPairs(pairs.map((p, k) => (k === i ? (e.target.value === "" ? null : Number(e.target.value)) : p)))}
+            >
+              <option value="">Choose…</option>
+              {options.map((o, k) => (
+                <option key={k} value={k}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+      </div>
+      <button type="button" className="primary" disabled={locked || pairs.some((p) => p === null)} onClick={() => onSubmit({ kind: "match", pairs: pairs as number[] })}>
+        Check
+      </button>
+    </div>
+  );
+}

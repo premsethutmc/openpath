@@ -1,0 +1,130 @@
+# OpenPath English: the private web app (first version)
+
+*12 October 2026. Built on the decisions of 12 October on PR #12. All lessons, questions and
+difficulty levels are candidate content; nothing is sent off the device; no evaluator, provider or
+account is involved.*
+
+## Launching it
+
+```
+cd frontend
+npm ci                      # once
+npm run english:build       # -> frontend/dist-english/ (static files)
+npm run english:preview     # -> http://localhost:4174
+```
+
+- **On this computer:** open http://localhost:4174. It installs for offline use on the first visit.
+- **On a phone, for a private trial on the same Wi-Fi:** `HOST=0.0.0.0 npm run english:preview`,
+  then open `http://<computer's address>:4174` on the phone. Everything works, but browsers allow
+  offline install only on `https` or `localhost`, so over plain `http` the app needs the network to open.
+- **Hosting it properly** (for learners at home) needs any static `https` host for the
+  `dist-english/` folder. That is a deployment and cost decision, so none is set up.
+
+## The journey
+
+1. **Start or resume.** A display name (kept on the device only), who is setting up (a guardian, or a
+   learner of 16 or over), and consent that progress stays in this browser. Earlier learners on the
+   device are listed to carry on; the last one opens automatically.
+2. **Placement** (12–24 questions, can be paused). The engine's assessment mode on the
+   hand-written items, over the 13 guided capabilities.
+3. **Spelling check.** One unseen dictionary word per spelling pattern near the learner's level.
+4. **Today's plan**, each step with its reason: words due for review; the next spelling pattern
+   (lesson, then practice) or, once practised well, a check with new words; one grammar or
+   vocabulary capability chosen by the engine's learning mode. "More practice" reaches all 56
+   capabilities through the engine, with no teaching.
+5. **Practice and feedback.** Right or wrong, the correct answer, and an explanation tied to the
+   mistake. A wrong answer can be tried again, as practice only. A "something wrong with this
+   question?" note is kept with the record.
+6. **Progress.** Per capability: *not assessed yet*, *early estimate* (a range) or *measured*; what is
+   verified (shown, confirmed, check due, needs review); and the evidence by kind: independent,
+   practice, later checks, and practice words recorded but not counted.
+7. **Coming back.** Reopening resumes any unfinished session at the same question. Misspelt words
+   return after 1, 3, 7 and 14 days.
+
+## How it uses the engine
+
+- **One scoring system.** Every answer is an evidence event in the engine's own ledger. The composite,
+  updater, selection, retention and verification are the E1–E3a core, unchanged. The app's state is
+  rebuilt from the event list by a fold, and the tests check that its estimates equal a ledger rebuilt
+  from the evidence alone.
+- **Generated spelling items are held** (decision 3). They are made by rule from SCOWL, CMUdict and
+  Open English WordNet, and each records its sources. Until a person has checked an item, an answer to
+  it is kept but changes no estimate (core `updater.ts`). The spelling module uses these answers for its
+  own scheduling: word memory, pattern status and transfer checks. Capability estimates come only from
+  hand-written items, which are mixed into practice and transfer checks. Generated items are never used
+  for placement.
+- **Evidence says why it was collected** (decision 8): `assessment` (placement, engine probes, transfer
+  checks), `practice` (first unaided attempts), or `retention` (word reviews, engine retention checks).
+  Hints and second tries are never evidence. This is recorded only; the mathematics is unchanged.
+- **Display rule.** A capability is *measured* only with at least 4 direct observations, at least 2 of
+  them independent, and sd ≤ 0.9. Otherwise it is an *early estimate*, shown as a range.
+
+## What is usable now
+
+| Part | State |
+|---|---|
+| Profiles, consent, resume, multiple learners per device | Done |
+| Storage in IndexedDB, one transaction per answer; resume after reload or close | Done (tested in a browser) |
+| Export and import of a whole profile (checksummed JSON), and deleting a learner | Done |
+| Offline use once opened (service worker; app files only) | Done on `localhost` or `https` |
+| Placement over the guided capabilities | Done |
+| Spelling: check, plan, lessons, practice, feedback, word review (1/3/7/14 days), transfer checks on unseen words | Done |
+| Grammar (6 capabilities) and vocabulary (4): lesson, then the engine's scheduler | Done |
+| More practice on all 56 capabilities | Done (no teaching) |
+| Progress with the display rule and evidence by kind | Done |
+| On-device speech for dictation, local voices only; written clues otherwise | Done (no audio leaves the device) |
+| Phone layout | Done (tested at 390 × 844) |
+
+**Content:** 76 lessons (every ladder step of the 13 guided capabilities), feedback for their
+33 misconceptions, 818 dictionary words and 2,348 generated items, plus the 780 hand-written items.
+
+## What is incomplete or limited
+
+- **Nothing is reviewed by educators.** Lessons, feedback, items and difficulty levels are candidate.
+  Generated items stay held until someone checks them; no checking workflow exists yet beyond the
+  `generated.checked` field.
+- **The hand-written bank is thin per capability** (about 15–19 items each). A learner who practises
+  one grammar capability a lot will run out of unseen items. After that, the engine falls back to its
+  own rules: an easier step, a prerequisite, or an assessment.
+- **Spelling estimates move slowly.** They change only through hand-written items: placement, about
+  one per practice session, and transfer checks. Most spelling practice shapes the plan but not the level.
+- **Regular spelling patterns** (silent letters, vowel teams) are not taught. Framework 0.2.0 does not
+  specify that capability (EN.FND.SPL.regular_patterns is "planned").
+- **Homophones:** only 45 generated words. Groups come from American pronunciations, with American-only
+  mergers removed. The common confusions (there/their, its/it's) come from hand-written items.
+- **Dictionary sentences and meanings** come from WordNet: written for adults, some stilted, and
+  screened only by a blocklist.
+- **Commonness** uses SCOWL's UK frequency tag, which is coarse; wordfreq is not used (decision 4).
+- **Speech:** many desktop browsers and headless test browsers have no local English voice; then
+  dictation is not offered. Indian English voices are rare.
+- **No sync, accounts or server storage** (decision 6). The event format and export are designed so
+  that consented sync can be added later.
+- **Writing and short answers are not offered**: E3b and live evaluation stay disabled.
+- **Bundle size:** about 2.7 MB of script (about 350 kB compressed), mostly content.
+- **Not yet tried with learners.** Placement length, plan order and the display thresholds are
+  initial settings, not tuned.
+
+## Tests
+
+- `frontend/src/english/logic/learner.test.ts`: 15 tests covering the journey without a browser:
+  - placement limits and its use of hand-written items;
+  - composite equality with a ledger-only rebuild;
+  - persistence and resume, and export and import;
+  - lessons, assisted attempts and word memory;
+  - transfer checks, speech off, guided and explore sessions;
+  - the display rule and determinism.
+- `packages/english-core/test/w1-generated.test.ts`: 7 tests:
+  - generated items are valid and reproducible;
+  - unchecked items are held;
+  - checked items update exactly like hand-written ones;
+  - histories without `use` are unchanged.
+- `frontend/e2e/english.test.mjs`: 5 tests in Chromium at phone size, against the production build:
+  - the whole journey;
+  - resume after a reload;
+  - export, delete and import;
+  - review the next day;
+  - offline use;
+  - no request to any other site;
+  - no sideways scrolling and tap-sized buttons.
+- **CI:** these tests run, plus `generate.ts --check`. A separate workflow rebuilds the word bank from
+  the pinned sources when the pipeline changes.
