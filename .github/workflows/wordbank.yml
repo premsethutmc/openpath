@@ -1,0 +1,39 @@
+name: Spelling word bank
+
+# Rebuilds the word bank from the three pinned sources and checks it matches the committed file.
+# Runs only when the pipeline or its lists change (or by hand), since it clones and indexes the sources.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - tools/english/spelling/build_wordbank.py
+      - content/english/spelling/blocklist.txt
+      - content/english/spelling/exclusions.txt
+      - content/english/items/progressions.json
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    name: Rebuild from SCOWL, CMUdict and Open English WordNet
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Fetch the sources at their pinned commits
+        run: |
+          set -e
+          fetch() { git init -q "$1" && git -C "$1" fetch -q --depth 1 "$2" "$3" && git -C "$1" checkout -q FETCH_HEAD; }
+          pin() { grep -oP "\"$1\": \"\K[0-9a-f]{40}" tools/english/spelling/build_wordbank.py; }
+          fetch /tmp/scowl https://github.com/en-wl/wordlist "$(pin scowl)"
+          fetch /tmp/cmudict https://github.com/cmusphinx/cmudict "$(pin cmudict)"
+          fetch /tmp/oewn https://github.com/globalwordnet/english-wordnet "$(pin oewn)"
+      - name: Build SCOWL's database
+        run: make -C /tmp/scowl
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: The committed bank matches a fresh build
+        run: python3 tools/english/spelling/build_wordbank.py --scowl /tmp/scowl --cmudict /tmp/cmudict --oewn /tmp/oewn --check

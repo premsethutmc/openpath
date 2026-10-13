@@ -96,8 +96,14 @@ jobs:
         run: npm run build
       - name: Standalone build
         run: npm run build:standalone
+      - name: English web app build
+        run: npm run english:build
       - name: Build outputs exist
         run: |
+          test -s dist-english/index.html
+          test -s dist-english/assets/app.js
+          test -s dist-english/sw.js
+          test -s dist-english/licences/SCOWL-Copyright.txt
           test -s dist/index.html
           test -s dist/assets/app.js
           test -s dist/assets/app.css
@@ -170,9 +176,23 @@ jobs:
         run: |
           npm run e2e 2>&1 | tee e2e.log
           ../.github/scripts/require-tests.sh e2e.log "Browser end-to-end"
+      - name: Serve the English web app (static, no API)
+        working-directory: frontend
+        run: |
+          npm run english:build
+          nohup npm run english:preview > ../english-web.log 2>&1 &
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4174/
+      - name: English web app in a phone-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots
+        run: |
+          npm run english:e2e 2>&1 | tee english-e2e.log
+          ../.github/scripts/require-tests.sh english-e2e.log "English web app end-to-end"
       - name: Show server logs
         if: failure()
-        run: tail -n 60 api.log web.log
+        run: tail -n 60 api.log web.log english-web.log
       - name: Keep the screenshots
         if: always()
         uses: actions/upload-artifact@v7
@@ -199,10 +219,12 @@ jobs:
         run: node tools/english/lock.ts --check
       - name: Item bank checks (content, coverage gates, recorded gaps)
         run: node tools/english/bank/main.ts | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Generated spelling items match the word bank
+        run: node tools/english/spelling/generate.ts --check
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .
-      - name: Acceptance tests (E1, E2 and E3a)
+      - name: Acceptance tests (E1, E2, E3a and the web app's generated items)
         working-directory: packages/english-core
         run: |
           npm test 2>&1 | tee test.log

@@ -10,7 +10,10 @@
     "preview": "node scripts/preview.mjs",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.english.json",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
-    "e2e": "node --test e2e/play.test.mjs"
+    "e2e": "node --test e2e/play.test.mjs",
+    "english:build": "node scripts/build-english.mjs",
+    "english:preview": "node scripts/preview-english.mjs",
+    "english:e2e": "node --test e2e/english.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

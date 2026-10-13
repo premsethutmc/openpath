@@ -1,7 +1,8 @@
 # Proposal: the first usable private OpenPath English web experience
 
-*12 October 2026 · proposal for your review · nothing implemented. No live LLM, no external transmission
-of learner writing, and no spending are assumed or needed.*
+*12 October 2026 · proposal · **decided 13 October** (see "Decisions recorded" below; the build is
+described in [`WEB_APP.md`](WEB_APP.md)). No live LLM, no external transmission of learner writing,
+and no spending are assumed or needed.*
 
 ## 1. What this is
 
@@ -303,6 +304,36 @@ flowchart TB
 5. **Persistence:** device-only in v1, or device plus consented backup and sync.
 6. **Which grammar and sentence capabilities come first** after spelling (proposed: present and past
    simple, agreement, articles, run-ons, capital letters, apostrophes).
+
+## Decisions recorded (13 October 2026)
+
+Implementation of the first private, mobile-friendly web application is approved, as one PR rather
+than W1–W5 separately.
+
+1. **One scoring system.** The existing composite engine and 56-capability framework; no separate
+   scoring for spelling.
+2. **Spelling is the first complete module:** diagnosis, personalised plan, teaching, practice,
+   feedback, retention and transfer checks on unseen words.
+3. **Exception to E2-3 granted:** deterministic generation of spelling exercises from validated
+   lexical data, keeping source provenance, answer correctness, spelling variants and item versions.
+   Generated items are **not** calibrated assessment evidence until their difficulty and quality are
+   checked.
+4. **Sources:** SCOWL, CMUdict and Open English WordNet, with their licences and attribution kept.
+   wordfreq and Tatoeba are **deferred** pending a redistribution and licence review. No dataset is
+   downloaded or bundled blindly.
+5. **Speech:** device text-to-speech only; no audio uploads or speech recognition; an accessible
+   alternative when speech is unavailable.
+6. **Persistence:** local, with export, import and reliable resume. Designed for later consented sync;
+   no accounts or remote learner data now.
+7. **Scope of teaching:** placement, objective practice and the composite profile across the
+   framework; guided teaching for spelling, foundational grammar and vocabulary only. Other
+   capabilities are reachable through the engine without claiming to be taught.
+8. **Honesty of estimates:** weakly supported estimates shown as early or uncertain; independent
+   assessment, assisted practice and retention evidence kept distinct.
+9. **A complete journey:** open, start or resume, placement, plan, learn, practise, feedback,
+   progress, return.
+10. **Still off:** E3b and live LLM evaluation, paid providers, external transmission of answers,
+    educator commissioning.
 
 Sources:
 
