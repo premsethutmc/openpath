@@ -200,3 +200,53 @@ test("R1-10 capability estimates are byte-identical with the projection, and rep
     assert.deepEqual(project(run.ledger), first, `${name}: projection is not repeatable`);
   }
 });
+
+// ---------------------------------------------------------------- review fixes (PR #15 review)
+
+const seq = (label: string, steps: [string, string, number, number, string][]) => {
+  const ctx = profileContext();
+  const l = new Ledger(ctx, label);
+  const at = (d: number, m: number) => new Date(Date.parse("2026-10-14T09:00:00Z") + d * 86_400_000 + m * 60_000).toISOString();
+  steps.forEach(([id, text, d, m, s], k) => l.apply({ kind: "evidence", id: `${label}${k}`, at: at(d, m), session: s, item: { id, version: ctx.content.items.get(id)!.version }, response: { kind: "typed", text } }));
+  return l;
+};
+const shown: [string, string, number, number, string][] = [
+  ["spl.infl.18", "chopping", 0, 1, "a"],
+  ["spl.infl.19", "stopped", 0, 2, "a"],
+  ["spl.infl.22", "trimming", 0, 3, "a"],
+  ["spl.infl.21", "digging", 0, 4, "a"],
+  ["spl.infl.24", "jumping", 0, 5, "a"],
+];
+
+test("R1-11 practice earlier in the same session is not delayed recall: the check after it does not verify", () => {
+  const l = seq("practice-then-check", [...shown, ["gen.infl.add_ending.batting", "batting", 9, 1, "b"], ["gen.infl.add_ending.cutting", "cutting", 9, 2, "b"], ["spl.infl.20", "bigger", 9, 3, "b"], ["spl.infl.23", "wettest", 9, 4, "b"]]);
+  const d = rule(l, "double_short");
+  assert.equal(d.status, "demonstrated");
+  assert.equal(d.retention.state, "not_checked");
+  assert.equal(d.history.firstVerifiedAt, null);
+  // the same answers in a session of their own, 9 days on, do verify
+  const clean = rule(seq("check-alone", [...shown, ["spl.infl.20", "bigger", 9, 3, "b"], ["spl.infl.23", "wettest", 9, 4, "b"]]), "double_short");
+  assert.equal(clean.status, "verified");
+});
+
+test("R1-12 a delayed check is judged on the whole session: an error after two right answers fails it, and nothing was ever 'verified'", () => {
+  const d = rule(seq("partial", [...shown, ["spl.infl.20", "bigger", 9, 1, "b"], ["spl.infl.23", "wettest", 9, 2, "b"], ["spl.infl.11", "runing", 9, 3, "b"]]), "double_short");
+  assert.equal(d.status, "needs_reconfirmation");
+  assert.equal(d.history.firstVerifiedAt, null);
+  assert.ok(!d.history.statusChanges.some((c) => c.status === "verified"));
+});
+
+test("R1-13 a misconception that was 'not confirmed' and is seen again goes back to 'suspected', with both events in its history", () => {
+  const l = seq("seen-again", [
+    ["spl.infl.18", "choping", 0, 1, "a"],
+    ["spl.infl.19", "stopped", 0, 2, "a"],
+    ["spl.infl.22", "trimming", 1, 1, "b"],
+    ["spl.infl.24", "jumping", 1, 2, "b"],
+    ["spl.infl.21", "digging", 1, 3, "b"],
+    ["spl.infl.20", "biggr", 2, 1, "c"],
+    ["spl.infl.23", "wetst", 2, 2, "c"],
+    ["spl.infl.11", "runing", 2, 3, "c"],
+  ]);
+  const m = rule(l, "double_short").misconceptions.find((x) => x.tag === "no_doubling")!;
+  assert.deepEqual(m.history.map((h) => h.state), ["suspected", "not_confirmed", "suspected"]);
+});

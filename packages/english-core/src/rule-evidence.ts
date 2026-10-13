@@ -184,7 +184,10 @@ export interface RuleObservation {
   track: Track;
   /** The word was new to the learner (no earlier evidence on the same word). */
   newWord: boolean;
-  /** First evidence in this session on this rule, at least delayedGapDays after the rule's previous evidence. */
+  /**
+   * In a session whose first evidence on this rule came at least delayedGapDays after the rule's previous
+   * evidence, and before any practice or repeat on the rule in that session.
+   */
   delayed: boolean;
   correct: boolean;
   signature: Signature;
@@ -200,6 +203,8 @@ export function ruleObservations(events: readonly LedgerEvent[], decisions: read
   const wordsSeen = new Set<string>();
   const lastByRule = new Map<string, { at: string; session: string }>();
   const delayedSessions = new Set<string>();
+  /** Sessions in which the rule was practised (held item or repeat): later answers there are not delayed recall. */
+  const practisedSessions = new Set<string>();
   const out: RuleObservation[] = [];
   for (const e of events) {
     if (e.kind !== "evidence") continue;
@@ -216,10 +221,11 @@ export function ruleObservations(events: readonly LedgerEvent[], decisions: read
     const prev = lastByRule.get(key);
     const sessionKey = `${key}@${ev.session}`;
     if (prev && prev.session !== ev.session && Date.parse(ev.at) - Date.parse(prev.at) >= policy.delayedGapDays * DAY) delayedSessions.add(sessionKey);
-    const delayed = delayedSessions.has(sessionKey);
-    lastByRule.set(key, { at: ev.at, session: ev.session });
     const correct = d.observation.value === 1;
     const track: Track = d.verdict === "held" ? "practice" : d.observation.exposure === "repeat" ? "repeat" : "independent";
+    if (track !== "independent") practisedSessions.add(sessionKey);
+    const delayed = delayedSessions.has(sessionKey) && !practisedSessions.has(sessionKey);
+    lastByRule.set(key, { at: ev.at, session: ev.session });
     out.push({
       evidence: ev.id,
       decision: d.id,
@@ -365,6 +371,10 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     return "emerging";
   };
 
+  // a delayed check is judged once, at its session's last observation on this rule, never part-way through
+  const lastInSession = new Map<string, number>();
+  obs.forEach((o, i) => lastInSession.set(o.session, i));
+
   for (let i = 0; i < obs.length; i++) {
     const o = obs[i];
     // ---- delayed checks: the first observation of a delayed session opens one
@@ -380,10 +390,10 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
         if (o.role === "apply" && o.newWord) check.applications++;
         if (isError(o)) check.ruleErrors++;
       }
-      if (check.afterDemonstration) {
-        if (check.ruleErrors > 0) check.passed = false;
-        else if (check.applications >= p.delayedMinApplications) check.passed = true;
-      }
+    }
+    {
+      const check = f.checks.find((c) => c.session === o.session);
+      if (check && check.afterDemonstration && lastInSession.get(o.session) === i) check.passed = check.ruleErrors > 0 ? false : check.applications >= p.delayedMinApplications ? true : null;
     }
     // ---- tracks
     if (o.track === "practice") {
@@ -425,6 +435,7 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
           m.recurrences++;
           setMisc(m, "active", o, "the error came back after it had stopped");
         } else if (m.state === "improving") setMisc(m, "active", o, "the error came back while improving");
+        else if (!enough && m.state === "not_confirmed") setMisc(m, "suspected", o, "seen again after it had not been confirmed");
         else if (enough) setMisc(m, "active", o, `${items.size} errors with this signature on different items, ${Math.round(share * 100)}% of recent errors on this rule`);
       }
     } else if (o.track === "independent" && o.correct && o.signature.kind !== "slip") {
