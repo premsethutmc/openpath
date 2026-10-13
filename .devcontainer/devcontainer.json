@@ -1,0 +1,18 @@
+{
+  // OpenPath English preview in a GitHub Codespace (private; for the product owner's own test).
+  // Builds the preview of the pilot (pilot words, labelled as not yet reviewed) and serves it on port
+  // 4174. Ports are private by default: only you, signed in to GitHub, can open the address.
+  // Do not make the port public: nothing here needs it.
+  "name": "OpenPath English preview",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "hostRequirements": { "cpus": 2 },
+  "postCreateCommand": "cd frontend && npm ci && npm run english:build:preview",
+  "postStartCommand": "bash .devcontainer/start-preview.sh",
+  "forwardPorts": [4174],
+  "portsAttributes": {
+    "4174": { "label": "OpenPath English (preview)", "onAutoForward": "notify" }
+  },
+  "customizations": {
+    "codespaces": { "openFiles": ["docs/english/WEB_APP.md"] }
+  }
+}

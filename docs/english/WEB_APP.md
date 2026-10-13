@@ -49,6 +49,19 @@ working offline, and you can unplug and use it for days. Nothing is reachable fr
 5. **Unplug.** The app opens from the home screen without the computer, because its files are cached on
    the phone. To update it later, rebuild, plug in again with forwarding on, and open it once.
 
+**Through a GitHub Codespace (no cable, private HTTPS):** the repository has a `.devcontainer` that builds
+the preview and starts it on port 4174 when a codespace starts.
+1. On github.com, signed in: open the branch, then **Code → Codespaces → Create codespace on
+   english/pilot-readiness**.
+2. When it has started, open the **Ports** tab, and copy the address for port 4174 (`https://…-4174.app.github.dev`). Leave
+   its visibility **Private**.
+3. On the phone, open that address in Chrome while signed in to GitHub, then *Add to Home screen*.
+
+A private port opens only for you. The codespace uses your monthly free allowance while it runs and stops
+after a period of inactivity (30 minutes by default). The installed app keeps working offline from the
+phone's cache, and progress stays on the phone. To pick up a newer build, start the codespace again and
+open the address once.
+
 **Quickest look, no cable:** with the phone and computer on the same Wi-Fi, run
 `HOST=0.0.0.0 npm run english:preview` and open `http://<computer's address>:4174` on the phone.
 - Everything works and progress is kept on the phone.
