@@ -468,7 +468,7 @@ export function redactText(text: string, pupil: { id: string; name: string }): s
   // whole words in any alphabet (Zoë, José, Ananyā); one-letter names would erase ordinary words, and the name
   // field itself is replaced directly
   if (name.length >= 2) out = out.replace(new RegExp(`(?<![\\p{L}\\p{N}\\p{M}])${escape(name)}(?![\\p{L}\\p{N}\\p{M}])`, "giu"), "Pupil A");
-  return out.replace(/[\w.+-]+@[\w-]+\.[\w.]+/gu, "[email]");
+  return out.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}/gu, "[email]");
 }
 
 /** Redact every string value (never keys or numbers), so no name can break the JSON. */

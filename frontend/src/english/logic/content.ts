@@ -28,6 +28,7 @@ import progressionsJson from "../../../../content/english/items/progressions.jso
 import goalsJson from "../../../../content/english/goals.json";
 import misspellingsJson from "../../../../content/english/signals/misspellings.json";
 import generatedJson from "../../../../content/english/spelling/generated-items.json";
+import dictationJson from "../../../../content/english/spelling/dictation-bank.json";
 import retiredGeneratedJson from "../../../../content/english/spelling/retired-generated.json";
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
@@ -38,6 +39,13 @@ import pilotPassagesJson from "../../../../content/english/pilot/passages.json";
 import pilotManifestJson from "../../../../content/english/pilot/manifest.json";
 
 export type Code = Extract<Item, { kind: "code" }>;
+
+/**
+ * A dictation question (content/english/spelling/dictation-bank.json): the app says `speak`, can say `sentence`
+ * (never shown, it contains the word), and the learner types the spelling. Every item is candidate content
+ * prepared for OpenPath and awaiting independent educator review.
+ */
+export type DictationItem = Code & { speak: string; sentence?: string; scoring: string; provenance: { prepared_by: string; prepared_on: string; reviewed_by: string | null; note: string } };
 
 export interface Lesson {
   id: string; // `${capability}#${step}`
@@ -119,6 +127,8 @@ export interface AppContent {
   handWritten: Set<string>;
   /** Generated spelling items (practice until checked). */
   generated: Code[];
+  /** The dictation bank: the primary spelling assessment (hear the word, type it). Not part of `handWritten`. */
+  dictation: { version: string; status: string; items: DictationItem[] };
   lessons: Map<string, Lesson>;
   ladders: Map<string, LadderStep[]>;
   feedback: Map<string, string>;
@@ -145,12 +155,15 @@ export function loadContent(): AppContent {
   // the pilot's new candidate questions are hand-written candidates like the rest of the bank (awaiting review)
   const hand = [...(codeItemsJson as unknown as Item[]), ...(e2aItemsJson as unknown as Item[]), ...(e2bItemsJson as unknown as Item[]), ...(pilotItemsJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target));
   const generated = (generatedJson as unknown as Code[]).filter((i) => ok(i.target));
+  const dictationDoc = dictationJson as unknown as { version: string; status: string; items: DictationItem[] };
+  const dictation = { version: dictationDoc.version, status: dictationDoc.status, items: dictationDoc.items.filter((i) => ok(i.target)) };
   const j = journeyJson as unknown as { review: string; capability: string; rule: string; items: Code[]; independent: { assessOrder: string[] }; guided: string[]; strategies: StrategyContent[] };
   const journey: JourneyContent = { review: j.review, capability: j.capability, rule: j.rule, items: j.items, assessOrder: j.independent.assessOrder, guided: j.guided, strategies: j.strategies };
   const bundle: ContentBundle = {
     // the journey's provisional questions are in the bank (so the engine can score them) but not in `handWritten`:
     // placement, practice and checks never use them, only the doubling journey does
-    items: [...hand, ...generated, ...journey.items],
+    // dictation items are scored by the engine like any question, but only the spelling assessment selects them
+    items: [...hand, ...generated, ...journey.items, ...dictation.items],
     retired: [...(retiredJson as unknown as Item[]), ...(retiredGeneratedJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target)),
     passages: [...(passagesJson as unknown as Passage[]), ...(pilotPassagesJson as unknown as Passage[])],
     goals: goalsJson as unknown as Goal[],
@@ -167,6 +180,7 @@ export function loadContent(): AppContent {
     index,
     handWritten: new Set(hand.map((i) => i.id)),
     generated,
+    dictation,
     lessons,
     ladders,
     feedback,

@@ -25,13 +25,13 @@ function candidate(c: AppContent, x: Scored, best?: Scored): TracedCandidate {
   return out;
 }
 
-export function selectionTrace(s: AppState, c: AppContent, inp: SelectionInput, r: Recommendation, use: string, excluded: Map<string, string>): SelectionTrace {
+export function selectionTrace(s: AppState, c: AppContent, inp: SelectionInput, r: Recommendation, use: string, excluded: Map<string, string>, pool: Iterable<string> = c.handWritten): SelectionTrace {
   const goalCaps = new Set(Object.keys(inp.goal.weights));
   const inGoal = (id: string) => {
     const it = c.ctx.content.items.get(id);
     return !!it && it.kind === "code" && goalCaps.has(it.target);
   };
-  const handWritten = [...c.handWritten].filter(inGoal);
+  const handWritten = [...pool].filter(inGoal);
   const unseen = handWritten.filter((id) => !inp.seen.has(id));
   const count = (why: string) => handWritten.filter((id) => excluded.get(id) === why).length;
   const capsInPlay = [...new Set([r.choice, ...r.alternatives].filter((x): x is Scored => !!x).flatMap((x) => (x.focus ? [x.focus] : x.targets)))].slice(0, 4);

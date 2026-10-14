@@ -190,6 +190,113 @@ export function guidedLesson(s: AppState, c: AppContent, cap: string, now: strin
   return step && c.lessons.has(lessonId(cap, step)) ? lessonId(cap, step) : undefined;
 }
 
+// ------------------------------------------------------------------ the spelling assessment (dictation)
+
+/** The spelling capabilities that have dictation words. */
+export const DICTATION_CAPS = ["EN.FND.SPL.inflections", "EN.FND.SPL.morphological"];
+
+/**
+ * Settings of the adaptive spelling assessment. The ±1 band window is an initial targeting hypothesis (to be
+ * checked against real answers), not a law: when nothing is left inside it, the window widens to ±2 and says so.
+ */
+export const SPELLING_ASSESS = { min: 8, max: 14, stopSd: 0.6, window: 1, followUpWindow: 1.5, wideWindow: 2 };
+
+const dictationWord = (i: Item) => (i.kind === "code" && i.answers?.[0] ? i.answers[0].toLowerCase() : "");
+
+/** Words the learner has already met: in dictation or generated practice, or as the answer to a question already asked. */
+function wordsMet(s: AppState, c: AppContent): Set<string> {
+  const out = new Set(s.wordsSeen);
+  for (const id of s.ledger.exposures.keys()) {
+    const it = c.ctx.content.items.get(id);
+    if (it?.kind === "code" && SPELLING_CAPS.has(it.target)) for (const a of it.answers ?? []) out.add(a.toLowerCase());
+  }
+  for (const a of s.events) if (a.kind === "attempt") {
+    const it = c.ctx.content.items.get(a.item.id);
+    if (it?.kind === "code" && it.answers) for (const w of it.answers) out.add(w.toLowerCase());
+  }
+  return out;
+}
+const SPELLING_CAPS = new Set<string>(GUIDED.spelling);
+
+export type SpellingAssessStop = "max" | "enough" | "insufficient";
+
+export interface SpellingAssessChoice {
+  next: Next | null;
+  stop: SpellingAssessStop | null;
+  /** Why the session stopped, in words (recorded with the session). */
+  note?: string;
+}
+
+/**
+ * The next dictation word, chosen after the last answer:
+ *   1. a follow-up: after a wrong answer that matches a known rule error (a suspected misconception), a different
+ *      word on the same pattern, to see whether the error recurs;
+ *   2. otherwise words within ±1 band of the current estimate, patterns not yet tested in this session first;
+ *   3. nothing within ±1: widen to ±2 (recorded); nothing at all: stop and report insufficient content.
+ * Among what is left, the existing engine chooses (recommend: information at the current estimate), so every
+ * answer changes the next choice through the Learner Vector. Words already met are never asked again.
+ */
+export function spellingAssessNext(s: AppState, c: AppContent, session: SessionState, now: string): SpellingAssessChoice {
+  const S = SPELLING_ASSESS;
+  const n = session.answered.length;
+  const est = DICTATION_CAPS.map((cap) => ({ cap, v: view(s, c, cap, now) }));
+  if (n >= S.max) return { next: null, stop: "max", note: `asked the maximum of ${S.max} words` };
+  if (n >= S.min && est.every(({ v }) => v.sd <= S.stopSd)) return { next: null, stop: "enough", note: `both spelling estimates are within ±${S.stopSd} (one sd) after ${n} words` };
+  const met = wordsMet(s, c);
+  const pool = c.dictation.items.filter((i) => !s.ledger.exposures.has(i.id) && !met.has(dictationWord(i)));
+  const excluded = new Map<string, "seen_word">(c.dictation.items.filter((i) => !pool.includes(i)).map((i) => [i.id, "seen_word"]));
+  const theta = new Map(est.map(({ cap, v }) => [cap, v.mean]));
+  const near = (i: Item, w: number) => i.kind === "code" && Math.abs(i.b - theta.get(i.target)!) <= w + 1e-9;
+  const tested = new Set(session.answered.map((a) => c.ctx.content.items.get(a.item.id)).filter((i): i is Code => i?.kind === "code").map((i) => `${i.target}#${i.step}`));
+  const testedPatterns = [...tested];
+  // 1. follow-up on a suspected rule error from the last answer
+  const last = session.answered.at(-1);
+  const lastItem = last ? (c.ctx.content.items.get(last.item.id) as Code | undefined) : undefined;
+  const tag = last && !last.correct ? last.misconceptions[0] : undefined;
+  const followedUp = tag && session.answered.slice(0, -1).some((a) => a.misconceptions.includes(tag));
+  let only: Code[] = [];
+  let rule: NonNullable<SelectionTrace["spelling"]>["rule"] = "near_estimate";
+  const reasons: string[] = [];
+  let followUp: { misconception: string; after: string } | undefined;
+  if (tag && lastItem && !followedUp) {
+    only = pool.filter((i) => i.target === lastItem.target && (i.step === lastItem.step || Object.values(i.wrong ?? {}).includes(tag)) && near(i, S.followUpWindow));
+    if (only.length) {
+      rule = "follow_up";
+      followUp = { misconception: tag, after: dictationWord(lastItem) || lastItem.id };
+      reasons.push(`follow-up: "${followUp.after}" was misspelt in a way that suggests ${tag.replace(/_/g, " ")}; a different word on the same pattern checks whether it recurs (one error is only a suspicion)`);
+    } else reasons.push(`no unused word on the same pattern within ±${S.followUpWindow} for a follow-up on ${tag.replace(/_/g, " ")}`);
+  }
+  if (!only.length) {
+    const inWindow = pool.filter((i) => near(i, S.window));
+    const untested = inWindow.filter((i) => !tested.has(`${i.target}#${i.step}`));
+    if (untested.length) {
+      only = untested;
+      rule = "untested_pattern";
+      reasons.push(`within ±${S.window} band of the estimate; patterns not yet tested in this session first (coverage)`);
+    } else if (inWindow.length) {
+      only = inWindow;
+      rule = "near_estimate";
+      reasons.push(`within ±${S.window} band of the estimate; every pattern there has been tested once, so another word near the estimate`);
+    } else {
+      const wide = pool.filter((i) => near(i, S.wideWindow));
+      if (wide.length) {
+        only = wide;
+        rule = "widened";
+        reasons.push(`no unused word within ±${S.window} band of the estimate; widened to ±${S.wideWindow}`);
+      }
+    }
+  }
+  if (!only.length) return { next: null, stop: "insufficient", note: `no unused dictation word within ±${S.wideWindow} bands of the estimates (${est.map(({ cap, v }) => `${cap} ${v.mean.toFixed(2)}`).join(", ")}): more reviewed words are needed` };
+  const caps = [...new Set(only.map((i) => i.target))];
+  const goal: Goal = { id: "spelling-assessment", name: "Spelling", weights: Object.fromEntries(caps.map((cap) => [cap, 1])) };
+  const inp = input(s, c, goal, now, "assessment", new Set(only.map((i) => i.id)));
+  const r = recommend(inp);
+  if (!r.choice) return { next: null, stop: "insufficient", note: "the engine found no question to ask among the eligible words" };
+  const trace = selectionTrace(s, c, inp, r, "assess", excluded, c.dictation.items.map((i) => i.id));
+  trace.spelling = { estimates: est.map(({ cap, v }) => ({ cap, mean: v.mean, sd: v.sd })).map(({ cap, mean, sd }) => ({ capability: cap, mean: Math.round(mean * 1000) / 1000, sd: Math.round(sd * 1000) / 1000 })), rule, reasons, window: rule === "widened" ? S.wideWindow : rule === "follow_up" ? S.followUpWindow : S.window, testedPatterns, ...(followUp ? { followUp } : {}) };
+  return { next: { item: c.ctx.content.items.get(r.choice.item)!, use: "assessment", why: r.explanation, trace }, stop: null };
+}
+
 // ------------------------------------------------------------------ spelling
 
 const TYPED = ["add_ending", "hear_spell", "meaning_first_letter"];

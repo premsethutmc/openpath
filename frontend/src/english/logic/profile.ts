@@ -263,7 +263,9 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const ver = v.verification;
     if (standing === "shown" || standing === "confirmed")
       strengths.push(`${standing === "confirmed" ? "Shown on their own, and still right at a later check" : "Shown on their own, on fresh questions"}${ver.currentLevel !== null ? `, at about level ${ver.currentLevel} of 8 (a level shown, not a ceiling: harder questions may still be wrong)` : ""}${x.validated ? "" : ". On draft questions, not yet reviewed by a teacher"}.`);
-    if (ver.historicalLevel !== null && standing !== "shown" && standing !== "confirmed") strengths.push("Shown earlier; not currently confirmed.");
+    // never claimed when the learner's own answers were mostly wrong (the engine's floor can "demonstrate" level 1
+    // from wrong answers alone): the same rule as for "shown" (PC-11)
+    if (ver.historicalLevel !== null && standing !== "shown" && standing !== "confirmed" && standing !== "found_hard" && x.e.independentRight * 2 >= x.e.independent) strengths.push("Shown earlier; not currently confirmed.");
     const difficulties: string[] = [];
     if (standing === "improving")
       strengths.push(`Improving in practice straight after a lesson (${x.e.afterTeachingRight} of ${x.e.afterTeaching} right). Not yet shown on their own: fresh questions without help come next.`);
@@ -337,7 +339,7 @@ const CHILD: Record<Activity["kind"], string> = {
 
 /** Map the plan onto sessions the app can run, worded for a child. Nothing is offered that cannot be delivered. */
 function activities(s: AppState, c: AppContent, now: string, speech: boolean, plan: DevelopmentPlan, caps: CapabilityProfile[], teach: Map<string, { title: string; step: PlanStep } | null>): Activity[] {
-  // the initial assessment is the existing starting point: placement, then the spelling check
+  // the initial assessment is the existing starting point: placement, then the spelling check (dictation)
   // too little evidence anywhere (for example a starting point stopped after a few answers): the starting point again
   const first = plan.today.find((r) => r.action === "initial_assessment");
   if (first)
@@ -352,7 +354,7 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
       },
     ];
   const initial = todayPlan(s, c, now, speech);
-  if (!placementDone(s) || !sessionsOf(s, "spelling_check").some((x) => x.end !== null) && initial[0]?.type === "spelling_check")
+  if (!placementDone(s) || (initial[0]?.type === "spelling_assess" && !sessionsOf(s, "spelling_assess").some((x) => x.end !== null)))
     return initial.slice(0, 1).map((step) => ({ kind: "start", label: CHILD.start, title: step.title, line: step.reason, step, recommendation: plan.today.find((r) => r.action === "initial_assessment") ?? null }));
   const name = (id: string) => caps.find((x) => x.id === id)!;
   const out: (Activity & { priority: number })[] = [];

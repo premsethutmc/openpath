@@ -55,7 +55,7 @@ async function arun() {
   await l.start({ type: "placement" });
   await run(l, (i) => i % 3 !== 0);
   const first = l.profile().activities[0];
-  await l.start(first.step);
+  await l.start(first.step, first.step.type === "spelling_assess" ? { delivery: "adult_reader" } : {});
   await run(l, (i) => i % 2 === 0);
   await l.start({ type: "spelling_check" });
   await run(l, (i) => i % 2 === 1);
@@ -100,7 +100,7 @@ test("a plan trace records what Today offered at the moment each session was sta
   await l.start({ type: "placement" });
   await run(l, () => true);
   const offered = l.profile().activities;
-  await l.start(offered[0].step);
+  await l.start(offered[0].step, offered[0].step.type === "spelling_assess" ? { delivery: "adult_reader" } : {});
   const plan = traces(l.events).filter((t) => t.plan).at(-1)!.plan!;
   assert.deepEqual(plan.offered.map((o) => o.title), offered.map((a) => a.title));
   assert.equal(plan.startedRank, 0);

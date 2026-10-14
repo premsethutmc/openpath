@@ -10,6 +10,7 @@ import { parseBackup } from "./backup.ts";
 import { GUIDED, GUIDED_ALL, loadContent, type Code } from "./content.ts";
 import { isLedgerEvent } from "./events.ts";
 import { Learner } from "./learner.ts";
+import type { PlanStep } from "./plan.ts";
 import { capabilityProgress } from "./progress.ts";
 import { PLACEMENT_MAX, PLACEMENT_MIN } from "./select.ts";
 import { MemoryRepo } from "./store.ts";
@@ -82,6 +83,12 @@ async function runSession(l: Learner, policy: (item: Item, i: number) => boolean
   throw new Error("session did not end");
 }
 
+/** The spelling check (dictation), answered right: an adult reads the words when the device cannot. */
+async function finishSpellingAssessment(l: Learner) {
+  await l.start({ type: "spelling_assess" }, { delivery: l.speech ? "device_voice" : "adult_reader" });
+  await runSession(l, () => true);
+}
+
 async function newLearner(clock = testClock(), repo = new MemoryRepo()) {
   const l = await Learner.create(content, repo, "Asha", "guardian", clock, "p-test");
   return { l, repo, clock };
@@ -116,7 +123,7 @@ test("placement uses the engine's assessment mode on hand-written items only, an
   for (const e of evidence) assert.equal((e as { use?: string }).use, "assessment");
   const caps = new Set(asked.map((i) => (i as Code).target));
   for (const c of caps) assert.ok(GUIDED_ALL.includes(c), c);
-  assert.equal(l.plan()[0].type, "spelling_check");
+  assert.equal(l.plan()[0].type, "spelling_assess");
 });
 
 test("composite integration: the app's estimates are exactly the engine's, rebuilt from the evidence alone", async () => {
@@ -177,6 +184,7 @@ test("spelling: a lesson comes first, practice uses unseen words, and generated 
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => false); // every pattern looks like it needs work
   const step = l.plan().find((p) => p.type === "spelling_practice")!;
@@ -240,6 +248,7 @@ test("word memory: due words come back after 1, 3, 7 and 14 days until learned; 
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, (_i, n) => n !== 0); // exactly one word misspelt
   const word = [...l.state.words.keys()][0];
@@ -266,9 +275,11 @@ test("transfer: practise a pattern well, then a check with words never seen; pas
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => false);
-  let step = l.plan().find((p) => p.type === "spelling_practice")!;
+  // a pattern with plenty of unused words (some patterns have only two or three left for a transfer check)
+  let step: PlanStep = { type: "spelling_practice", title: "", reason: "", capability: "EN.FND.SPL.inflections", step: "double_short" };
   const key = `${step.capability}#${step.step}`;
   await l.start(step);
   await runSession(l, () => true);
@@ -280,7 +291,7 @@ test("transfer: practise a pattern well, then a check with words never seen; pas
   await l.start(check);
   const asked = await runSession(l, () => true);
   const words = asked.filter((i) => (i as Code).generated).map((i) => (i as Code).generated!.word);
-  assert.ok(words.length >= 3);
+  assert.ok(words.length >= 3, `${key}: ${asked.map((i) => i.id).join(" ")}`);
   for (const w of words) assert.ok(!seen.has(w), `${w} was never seen before`);
   for (const i of asked) assert.ok(!(i as Code).generated || ["add_ending", "hear_spell", "meaning_first_letter", "homophone_context"].includes((i as Code).generated!.template));
   assert.equal(patternStatus(l.state.patterns.get(key)), "secure");
@@ -295,6 +306,7 @@ test("without on-device speech, no dictation item is ever chosen", async () => {
     l.speechAvailable = speech;
     await l.start({ type: "placement" });
     await runSession(l, () => true);
+    await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
     await l.start({ type: "spelling_check" });
     const a = await runSession(l, () => false);
     await l.start(l.plan().find((p) => p.type === "spelling_practice")!);
@@ -310,6 +322,7 @@ test("grammar and vocabulary: a lesson, then the engine's own scheduler; evidenc
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => true);
   const g = l.plan().find((p) => p.type === "guided")!;

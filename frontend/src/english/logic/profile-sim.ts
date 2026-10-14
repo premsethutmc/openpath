@@ -31,7 +31,8 @@ export type Policy = (item: Code, n: number) => boolean;
  * `retry`: after a wrong first answer, try once more and get it right (an assisted answer, never evidence).
  */
 export async function runSession(l: Learner, step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, policy: Policy, opts: { retry?: boolean } = {}): Promise<{ asked: string[]; right: number }> {
-  let cur = await l.start(step);
+  // the spelling check (dictation): the device says the words when it can, otherwise an adult reads them
+  let cur = await l.start(step, step.type === "spelling_assess" ? { delivery: l.speech ? "device_voice" : "adult_reader" } : {});
   const asked: string[] = [];
   let right = 0;
   for (let guard = 0; guard < 60; guard++) {
@@ -52,7 +53,7 @@ export async function runSession(l: Learner, step: Pick<PlanStep, "type" | "capa
   throw new Error("the session did not end");
 }
 
-/** The start: placement, then the spelling check, answered by the policy. */
+/** The start: placement, then the spelling check (dictation), answered by the policy. */
 export async function start(l: Learner, policy: Policy): Promise<void> {
   for (let k = 0; k < 2; k++) {
     const a = l.profile().activities[0];

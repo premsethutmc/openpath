@@ -7,12 +7,12 @@ import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type Pre
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType, type TraceEvent } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
-import { type Next, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
+import { type Next, SPELLING_ASSESS, spellingAssessNext, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
 import { now as perfNow, record } from "./telemetry.ts";
 import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
@@ -44,6 +44,10 @@ export class Learner {
   state: AppState;
   /** Whether on-device speech works here (set by the interface after checking the device's voices). */
   speechAvailable = false;
+  /** The device's voice, if any (set by the interface): recorded with spelling sessions, name and language only. */
+  voiceInfo: { name: string; lang: string; local: boolean } | null = null;
+  /** Why the last spelling assessment stopped (recorded as a trace when it ends). */
+  private spellingStop: { stop: string; note?: string } | null = null;
 
   private constructor(content: AppContent, repo: Repo, profileId: string, events: AppEvent[], clock: Clock) {
     this.content = content;
@@ -143,7 +147,12 @@ export class Learner {
     return { profile, overview: parentOverview(profile, previous, firstStandings(this.content, this.events)) };
   }
 
-  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">): Promise<Current> {
+  /** Speech as it is now: whether a local voice was found, whether hearing words is on, and the voice. */
+  speechRecord(): SpeechRecord {
+    return { available: this.speechAvailable, enabled: this.state.speech, voice: this.speechAvailable ? this.voiceInfo : null };
+  }
+
+  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, opts: { delivery?: "device_voice" | "adult_reader" } = {}): Promise<Current> {
     if (this.state.open) await this.stop();
     const now = this.clock();
     const s = this.state;
@@ -157,6 +166,13 @@ export class Learner {
       case "placement":
         extra = { length: 24 };
         break;
+      case "spelling_assess": {
+        // dictation needs the words said aloud: by the device's voice, or by an adult reading them (recorded)
+        const delivery = opts.delivery ?? "device_voice";
+        if (delivery === "device_voice" && !this.speech) throw new Error("the spelling assessment needs speech on this device, or an adult to read the words");
+        extra = { length: SPELLING_ASSESS.max, delivery };
+        break;
+      }
       case "explore":
         extra = { length: EXPLORE_LENGTH };
         break;
@@ -185,7 +201,8 @@ export class Learner {
         extra = { capability: step.capability, step: step.step };
         break;
     }
-    await this.add({ ...base, ...(queue ? { queue } : {}), ...extra });
+    const speech = step.type.startsWith("spelling_") ? { speech: this.speechRecord() } : {};
+    await this.add({ ...base, ...(queue ? { queue } : {}), ...extra, ...speech });
     return this.current();
   }
 
@@ -200,6 +217,11 @@ export class Learner {
     if (next) record({ name: "select_ms", ms: perfNow() - t });
     const total = session.event.queue?.length ?? session.event.length ?? 0;
     if (!lesson && !next) {
+      if (session.event.type === "spelling_assess" && this.spellingStop) {
+        const s = this.spellingStop;
+        await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), session: session.event.session, selection: { selector: "engine", use: "assess", spelling: { estimates: [], rule: s.stop === "insufficient" ? "insufficient" : "near_estimate", reasons: [`stopped: ${s.note ?? s.stop}`], window: 0, testedPatterns: [] } } });
+        this.spellingStop = null;
+      }
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
       return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total };
     }
@@ -232,6 +254,11 @@ export class Learner {
         return exploreNext(s, this.content, session, now);
       case "check":
         return checkNext(s, this.content, session, now);
+      case "spelling_assess": {
+        const choice = spellingAssessNext(s, this.content, session, now);
+        this.spellingStop = choice.stop ? { stop: choice.stop, note: choice.note } : null;
+        return choice.next;
+      }
       default:
         return null;
     }
@@ -478,6 +505,7 @@ export class Learner {
     return {
       placement: "Finding your starting point",
       spelling_check: "Spelling check",
+      spelling_assess: "Spelling check: hear and spell",
       spelling_practice: "Spelling practice",
       spelling_review: "Word review",
       spelling_transfer: "Check with new words",

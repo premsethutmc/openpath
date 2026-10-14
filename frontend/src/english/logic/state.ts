@@ -131,7 +131,7 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
         if (!item || item.kind !== "code" || !SPELLING.has(item.target) || !item.step) break;
         const type = st.event.type;
         const p = pattern(item.target, item.step);
-        if (type === "spelling_check") {
+        if (type === "spelling_check" || type === "spelling_assess") {
           p.check.total++;
           if (e.correct) p.check.right++;
         } else if (type === "spelling_practice") p.practice.push({ at: e.at, correct: e.correct });
@@ -143,6 +143,9 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
           const word = item.generated.word;
           s.wordsSeen.add(word);
           memory(s, word, p.key, e, type === "spelling_review");
+        } else if (item.format === "typed:dictation" && item.answers?.[0]) {
+          // a dictation word is never asked again in a check (word review uses generated practice words only)
+          s.wordsSeen.add(item.answers[0].toLowerCase());
         }
         break;
       }

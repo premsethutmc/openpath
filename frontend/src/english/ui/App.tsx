@@ -23,6 +23,7 @@ import { PathView } from "./PathView.tsx";
 import { ProgressView } from "./ProgressView.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech } from "./speech.ts";
+import { SpellingIntro } from "./SpellingIntro.tsx";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
 const clock = () => {
@@ -56,7 +57,7 @@ const LAST = "openpath-english-last-profile";
 const MODE = "openpath-english-mode";
 
 type Mode = "device" | "account";
-type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" };
+type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" } | { name: "spelling-intro" };
 type Tab = "home" | "journey" | "progress" | "me";
 const TABS: { id: Tab; label: string; ico: string }[] = [
   { id: "home", label: "Home", ico: "🏠" },
@@ -117,6 +118,7 @@ export function App() {
       const l = await Learner.open(content, r, id, clock);
       record({ name: "load_ms", ms: perfNow() - t });
       l.speechAvailable = !!voice;
+      l.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
       store.set(LAST, id);
       setLearner(l);
       setTab("home");
@@ -170,7 +172,10 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (learner) learner.speechAvailable = !!voice;
+    if (learner) {
+      learner.speechAvailable = !!voice;
+      learner.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
+    }
     changed();
   }, [voice, learner, changed]);
 
@@ -313,6 +318,7 @@ export function App() {
             throw e;
           }
           l.speechAvailable = !!voice;
+      l.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
           store.set(LAST, l.profileId);
           setLearner(l);
           setTab("home");
@@ -323,11 +329,15 @@ export function App() {
 
   if (!learner) return <p className="loading">Opening OpenPath English…</p>;
 
-  const start = async (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">) => {
-    await learner.start(step);
+  const start = async (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, opts?: { delivery?: "device_voice" | "adult_reader" }) => {
+    // the spelling check needs the words to be heard: check the sound (or arrange an adult reader) first
+    if (step.type === "spelling_assess" && !opts?.delivery) return setScreen({ name: "spelling-intro" });
+    await learner.start(step, opts);
     setScreen({ name: "app" });
     setInSession(true);
   };
+
+  if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
 
   if (screen.name === "intro")
     return <CheckIntro name={learner.state.profile?.name ?? "Your"} onReady={() => start({ type: "placement" })} onLater={() => setScreen({ name: "app" })} />;

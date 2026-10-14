@@ -27,7 +27,7 @@ def _route(request) -> str:
     return (match.url_name or match.view_name or "unnamed")[:60] if match else "unmatched"
 
 
-EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}")
 QUOTED = re.compile(r"'[^']*'|\"[^\"]*\"")
 
 

@@ -12,7 +12,8 @@ export const APP_VERSION = "openpath-english-web@1";
 
 export type SessionType =
   | "placement" // independent: where to start
-  | "spelling_check" // independent: which spelling patterns need work (generated words, so practice-only)
+  | "spelling_check" // (before dictation) a fixed list of generated words; practice-only. Kept so earlier records replay
+  | "spelling_assess" // independent: dictation (hear the word, type it), each word chosen after the last answer
   | "spelling_practice" // one pattern: lesson, then practice
   | "spelling_review" // words due for review (word memory)
   | "spelling_transfer" // unseen words with a practised pattern
@@ -54,6 +55,19 @@ export interface SessionEvent {
   lesson?: string;
   /** For a check: why it was asked (a first or another look: "assess"; the fresh check after teaching: "confirm"; a later check: "retention"). */
   purpose?: "assess" | "confirm" | "retention";
+  /** Spelling sessions: whether the device could speak when the session began (decides which questions can be asked). */
+  speech?: SpeechRecord;
+  /** The spelling assessment: who says the words (the device's voice, or an adult reading them aloud). */
+  delivery?: "device_voice" | "adult_reader";
+}
+
+/** Speech as it was when a spelling session began. The voice's name and language only: nothing about the person. */
+export interface SpeechRecord {
+  /** A local English voice was found on this device. */
+  available: boolean;
+  /** Hearing words is switched on in Me. */
+  enabled: boolean;
+  voice: { name: string; lang: string; local: boolean } | null;
 }
 
 export interface SessionEndEvent {
@@ -154,6 +168,15 @@ export interface SelectionTrace {
   bankGaps?: { capability: string; suitable: [number, number]; unused: number[]; note: string }[];
   explanation?: string;
   queue?: { position: number; length: number; reason: string };
+  /** The spelling assessment: the targeting and coverage rules applied before the engine chose among what was left. */
+  spelling?: {
+    estimates: { capability: string; mean: number; sd: number }[];
+    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient";
+    reasons: string[];
+    window: number;
+    testedPatterns: string[];
+    followUp?: { misconception: string; after: string };
+  };
   planner?: { action: string; itemRole?: string; strategy?: string; diagnosis: string; detail: string; reason: string; policy: string };
 }
 

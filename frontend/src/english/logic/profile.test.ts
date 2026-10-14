@@ -235,8 +235,10 @@ test("D: shown, then wrong at a later check: refreshing it comes first", async (
   clock.days(10);
   let p = l.profile();
   assert.equal(cap(l, SVA).standing, "check_due");
-  assert.deepEqual([p.plan.today[0].action, p.activities[0].kind, p.activities[0].step.purpose], ["retention_check", "check_learned", "retention"]);
-  await runSession(l, p.activities[0].step, () => false);
+  // other capabilities (spelling, now measured by dictation) may also be due: take the later check on SVA
+  const sva = p.activities.find((a) => a.step.capability === SVA)!;
+  assert.deepEqual([p.plan.today.find((r) => r.capability === SVA)?.action, sva.kind, sva.step.purpose], ["retention_check", "check_learned", "retention"]);
+  await runSession(l, sva.step, () => false);
   p = l.profile();
   assert.equal(cap(l, SVA).standing, "not_kept");
   assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability], ["refresh", SVA]);

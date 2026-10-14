@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { leafView } from "../../../../packages/english-core/src/index.ts";
 import { loadContent } from "./content.ts";
-import { buildReport, diagnose } from "./diagnostics.ts";
+import { buildReport, diagnose, redactText } from "./diagnostics.ts";
 import { Learner } from "./learner.ts";
 import { respond } from "./profile-sim.ts";
 import { spellingCheckQueue, spellingPatterns } from "./select.ts";
@@ -105,7 +105,7 @@ test("CURRENT BEHAVIOUR (finding L6): unreviewed (candidate) questions can make 
   for (let k = 0; k < 6; k++) {
     const a = l.profile().activities[0];
     if (!a) break;
-    await l.start(a.step);
+    await l.start(a.step, a.step.type === "spelling_assess" ? { delivery: "adult_reader" } : {});
     for (let i = 0; i < 30; i++) {
       const cur = await l.current();
       if (cur.lesson) {
@@ -120,16 +120,23 @@ test("CURRENT BEHAVIOUR (finding L6): unreviewed (candidate) questions can make 
   assert.ok(shown.length > 0 && shown.every((x) => x.basis.validated === 0), `${shown.length} shown on draft questions only`);
 });
 
-test("KNOWN DEFECT (finding D1): report redaction must not replace version identifiers such as en@0.2.0", { todo: "awaiting approval: tooling fix" }, async () => {
+test("FIXED (finding D1): report redaction keeps version identifiers such as en@0.2.0, and still removes emails", async () => {
   const l = await Learner.create(c, new MemoryRepo(), "Arun", "guardian", () => NOW, "p-r");
   const d = await diagnose(c, { pupil: { id: l.profileId, name: "Arun" }, events: l.events, now: NOW });
   assert.equal(buildReport(d).json.versions.framework, c.index.key);
+  assert.equal(redactText("write to a.parent@example.co.uk or arun@school.org; framework en@0.2.0, policy development-policy@0-draft", { id: "x", name: "Zz" }), "write to [email] or [email]; framework en@0.2.0, policy development-policy@0-draft");
 });
 
-test("KNOWN DEFECT (finding D2): the record must say whether speech was available when a spelling queue was built", { todo: "awaiting approval: record speech with the queue" }, async () => {
+test("FIXED (finding D2): every spelling session records whether speech was available, switched on, and the voice", async () => {
   const l = await placed();
   l.speechAvailable = false;
   await l.start({ type: "spelling_check" });
   const session = [...l.events].reverse().find((e) => e.kind === "session")!;
-  assert.ok("speech" in session, "the session event records speech availability");
+  assert.ok(session.kind === "session" && session.speech, "the session event records speech availability");
+  assert.deepEqual(session.kind === "session" && session.speech, { available: false, enabled: true, voice: null });
+  l.speechAvailable = true;
+  l.voiceInfo = { name: "Test voice", lang: "en-GB", local: true };
+  await l.start({ type: "spelling_assess" });
+  const next = [...l.events].reverse().find((e) => e.kind === "session")!;
+  assert.deepEqual(next.kind === "session" && [next.delivery, next.speech], ["device_voice", { available: true, enabled: true, voice: { name: "Test voice", lang: "en-GB", local: true } }]);
 });

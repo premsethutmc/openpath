@@ -216,7 +216,7 @@ class DeveloperAuditView(DeveloperBase):
 # ---------------------------------------------------------------- telemetry from the app
 
 METRICS = {"answer_ms", "save_ms", "rebuild_ms", "select_ms", "load_ms", "save_failed", "runtime_error", "engine_error"}
-EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}")  # version keys such as en@0.2.0 are kept
 VERSION = re.compile(r"^(?:[0-9a-f]{7,40}|dev|unknown)$")
 DAILY_METRICS_PER_ACCOUNT = 5000
 

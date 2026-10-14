@@ -53,9 +53,11 @@ export function todayPlan(s: AppState, c: AppContent, now: string, speech: boole
   if (!placementDone(s))
     return [{ type: "placement", title: "Find your starting point", reason: "About 15–20 questions on spelling, grammar and vocabulary, so the plan starts in the right place. You can stop and carry on later." }];
   const steps: PlanStep[] = [];
-  const checked = sessionsOf(s, "spelling_check").some((x) => x.end !== null);
-  if (!checked && spellingCheckQueue(s, c, now, speech).length)
-    return [{ type: "spelling_check", title: "Spelling check", reason: "One word for each spelling pattern near your level, to see which patterns to work on first." }];
+  // the spelling check is dictation: hear a word, type it; each word is chosen after the last answer. It is offered
+  // whether or not this device can speak: without speech the app explains why, and an adult can read the words.
+  const assessed = sessionsOf(s, "spelling_assess").some((x) => x.end !== null);
+  if (!assessed && c.dictation.items.length)
+    return [{ type: "spelling_assess", title: "Spelling check: hear and spell", reason: "Hear a word, then type it. Each next word is chosen from your answers so far, near your level." }];
   const due = dueWords(s, now);
   if (due.length) steps.push({ type: "spelling_review", title: `Review ${Math.min(due.length, 10)} word${due.length === 1 ? "" : "s"}`, reason: "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them.", count: due.length });
   const next = spellingPlan(s, c, now, speech)[0];

@@ -91,7 +91,7 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
             <span aria-hidden="true">{AREA_EMOJI[areaWord(item.target)] ?? "🧠"}</span> {areaWord(item.target)}
           </span>
         )}
-        <ItemView key={`${item.id}:${retry}`} item={item} passage={passage} voice={voice} locked={locked || busy} onSubmit={submit} />
+        <ItemView key={`${item.id}:${retry}`} item={item} passage={passage} voice={voice} locked={locked || busy} onSubmit={submit} delivery={cur.session.event.delivery} />
         {feedback && <FeedbackPanel fb={retry === "done" && retryFeedback ? retryFeedback : feedback} retried={retry === "done"} />}
         {feedback && noticed && (
           <div className="noticed" data-noticed={noticed.kind}>
@@ -101,7 +101,7 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
         )}
         {feedback && (
           <div className="after">
-            {!feedback.correct && retry === "none" && (
+            {!feedback.correct && retry === "none" && item.format !== "typed:dictation" && (
               <button type="button" className="quiet" onClick={() => setRetry("trying")}>
                 Try again (practice only)
               </button>

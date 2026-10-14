@@ -27,7 +27,7 @@ let buffer: Metric[] = [];
 let sender: ((batch: Metric[]) => Promise<void>) | null = null;
 let flushing = false;
 
-const EMAIL = /[\w.+-]+@[\w-]+\.[\w.]+/g;
+const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}/g; // a domain ending in letters: version keys such as en@0.2.0 are kept
 
 /** A technical detail: first line only, emails removed, short. */
 export function scrub(detail: unknown): string {
