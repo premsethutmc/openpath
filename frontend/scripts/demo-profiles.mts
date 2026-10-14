@@ -131,7 +131,7 @@ const checks: [string, boolean][] = [
   ["E: help is not mastery: the spelling rule is not offered as secure, help is shown apart, an adult is asked", !caps("E", "profile").includes(INF) && /Needed help[\s\S]*right with help/.test(get("E", "profile").overview) && get("E", "profile").recommendations.some((r) => r.capability === INF && r.action === "human_review")],
   ["F: an initial assessment only; nothing called hard", acts("F", "profile").length === 1 && /Find your starting point/.test(acts("F", "profile")[0].title) && /Found hard so far\s*Nothing/.test(get("F", "profile").overview)],
   ["every recommendation the child can start carries the evidence ids behind it, except first looks", captured.every((c) => c.recommendations.filter((r) => r.action !== "assess" && r.action !== "initial_assessment").every((r) => r.evidence.length > 0))],
-  ["L: the reading lesson shows, then practice shows its passage with a practice or diagnosis question (never a reserved one)", readingPractice.passage === 1 && (/^plt\.main\.(09|10|11)$/.test(readingPractice.item) || /^rdg\./.test(readingPractice.item))],
+  ["L: the reading lesson shows, then practice shows its passage with a practice question (never a first-check or reserved one)", readingPractice.passage === 1 && /^plt\.main\.(09|1[0-7])$/.test(readingPractice.item)],
   ["no screen shows a percentile, IQ, ranking or probability", captured.every((c) => !/percentile|\bIQ\b|rank|probabilit|%/i.test(c.overview))],
   ["phone layout: no sideways scrolling, every button tappable, no page errors", problems.length === 0],
 ];

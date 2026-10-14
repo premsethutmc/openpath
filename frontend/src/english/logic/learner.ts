@@ -3,7 +3,7 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import type { EvidenceEvent, HintEvent, Item, PresentedPurpose, Response } from "../../../../packages/english-core/src/index.ts";
+import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
@@ -12,7 +12,7 @@ import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
-import { type Next, EXPLORE_LENGTH, GUIDED_LENGTH, checkNext, exploreNext, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
+import { type Next, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
 
 export type Clock = () => string;
@@ -117,7 +117,7 @@ export class Learner {
         break;
       case "guided": {
         const lesson = step.lesson ?? guidedLesson(s, c, step.capability!, now);
-        extra = { length: GUIDED_LENGTH, capability: step.capability, ...(lesson ? { lesson } : {}) };
+        extra = { length: guidedLength(c, step.capability!), capability: step.capability, ...(lesson ? { lesson } : {}) };
         break;
       }
       case "spelling_check":
@@ -237,7 +237,7 @@ export class Learner {
         item: { id: item.id, version: item.version },
         response,
         use: opts.use,
-        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}) },
+        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY] },
       };
       await this.add(ev);
     } else {

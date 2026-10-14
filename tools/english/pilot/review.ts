@@ -4,6 +4,7 @@
  *   node tools/english/pilot/review.ts export [dir]        a CSV (opens in Excel or Google Sheets) and an HTML page to read
  *   node tools/english/pilot/review.ts import <file.csv>   record the decisions in content/english/pilot/reviews.json
  *   node tools/english/pilot/review.ts report [--check]    write (or check) docs/english/PILOT_CONTENT_REPORT.md
+ *   node tools/english/pilot/review.ts status              print what is approved, rejected, to revise, to discuss, outstanding
  *
  * Every question, passage, lesson and prerequisite of the pilot is one row, with a fingerprint of its exact
  * content. An imported decision is recorded with the reviewer, date, content version and that fingerprint; a row
@@ -60,7 +61,7 @@ interface Lesson {
 }
 export interface PoolInfo {
   pool: "diagnosis" | "practice" | "confirmation" | "retention";
-  origin: "existing" | "new-pr24";
+  origin: "existing" | "new-pr24" | "new-pr25";
   unfamiliar?: boolean;
 }
 export interface Manifest {
@@ -117,9 +118,11 @@ export interface ReviewRow {
   rationale: string;
   status: string;
   fingerprint: string;
+  /** The current review state of this exact content: outstanding, approved, rejected, revise, discuss, or re-review (changed since the decision). */
+  review_status: string;
 }
 export const REVIEW_COLUMNS = ["decision", "issues", "comment", "reviewer", "date"] as const;
-export const ROW_COLUMNS: (keyof ReviewRow)[] = ["kind", "id", "version", "capability", "skill", "use", "difficulty", "format", "passage", "content", "key", "misconceptions", "rationale", "status", "fingerprint"];
+export const ROW_COLUMNS: (keyof ReviewRow)[] = ["kind", "id", "version", "capability", "skill", "use", "difficulty", "format", "passage", "content", "key", "misconceptions", "rationale", "status", "fingerprint", "review_status"];
 
 const USE_WORDS: Record<string, string> = {
   diagnosis: "diagnosis (first checks)",
@@ -127,6 +130,8 @@ const USE_WORDS: Record<string, string> = {
   confirmation: "confirmation after teaching only",
   retention: "later (retention) check only",
 };
+
+const ORIGIN_WORDS: Record<PoolInfo["origin"], string> = { existing: "existing question", "new-pr24": "new in PR #24 (AI-assisted draft)", "new-pr25": "new in PR #25: practice only (AI-assisted draft)" };
 
 function keyOf(i: Item): string {
   if (i.answers) return i.answers.join(" | ");
@@ -136,8 +141,17 @@ function keyOf(i: Item): string {
   return "";
 }
 
-/** Every reviewable row: questions, passages, lessons and prerequisite edges, in a stable order. */
-export function reviewRows(p: Pilot): ReviewRow[] {
+/**
+ * Every reviewable row: questions, passages, lessons and prerequisite edges, in a stable order. With the recorded
+ * reviews, each row also says its current review state (the fingerprint never includes it).
+ */
+export function reviewRows(p: Pilot, reviews: ReviewRecord[] = []): ReviewRow[] {
+  const rows = contentRows(p);
+  const states = reviewStates(rows, reviews);
+  return rows.map((r) => ({ ...r, review_status: stateWords(states.get(`${r.kind}|${r.id}`)!) }));
+}
+
+function contentRows(p: Pilot): ReviewRow[] {
   const rows: ReviewRow[] = [];
   const pool = (id: string) => p.manifest.pools[id];
   for (const i of p.items) {
@@ -158,15 +172,18 @@ export function reviewRows(p: Pilot): ReviewRow[] {
       key: keyOf(i),
       misconceptions: tags,
       rationale: i.rationale ?? "",
-      status: `${i.review ?? "candidate"}; ${info?.origin === "new-pr24" ? "new in PR #24 (AI-assisted draft)" : "existing question"}`,
+      status: `${i.review ?? "candidate"}; ${ORIGIN_WORDS[info?.origin ?? "existing"]}`,
       fingerprint: fingerprint(i),
+      review_status: "",
     });
   }
   const used = new Set(p.items.map((i) => i.passage).filter((x): x is string => !!x));
   for (const id of [...used].sort()) {
     const ps = p.passages.get(id)!;
-    const caps = [...new Set(p.items.filter((i) => i.passage === id).map((i) => i.target))];
-    rows.push({ kind: "passage", id, version: "", capability: caps.join(" "), skill: caps.map((c) => p.names.get(c) ?? c).join(", "), use: "", difficulty: String(ps.band), format: "passage", passage: ps.title, content: ps.text, key: "", misconceptions: "", rationale: "", status: id.startsWith("plt.") ? "new in PR #24 (AI-assisted draft)" : "existing passage", fingerprint: fingerprint(ps) });
+    const on = p.items.filter((i) => i.passage === id);
+    const caps = [...new Set(on.map((i) => i.target))];
+    const origin = !id.startsWith("plt.") ? "existing passage" : on.every((i) => pool(i.id)?.origin === "new-pr25") ? "new in PR #25: practice only (AI-assisted draft)" : "new in PR #24 (AI-assisted draft)";
+    rows.push({ kind: "passage", id, version: "", capability: caps.join(" "), skill: caps.map((c) => p.names.get(c) ?? c).join(", "), use: "", difficulty: String(ps.band), format: "passage", passage: ps.title, content: ps.text, key: "", misconceptions: "", rationale: "", status: origin, fingerprint: fingerprint(ps), review_status: "" });
   }
   for (const l of p.lessons)
     rows.push({
@@ -185,9 +202,10 @@ export function reviewRows(p: Pilot): ReviewRow[] {
       rationale: "",
       status: l.capability.startsWith("EN.RDG") ? "new in PR #24 (AI-assisted draft)" : "existing lesson, examples revised in PR #24",
       fingerprint: fingerprint(l),
+      review_status: "",
     });
   for (const e of p.prerequisites)
-    rows.push({ kind: "prerequisite", id: `${e.capability} requires ${e.requires}`, version: "", capability: e.capability, skill: `${p.names.get(e.capability)} requires ${p.names.get(e.requires)}`, use: "planning", difficulty: "", format: "prerequisite", passage: "", content: `Is ${p.names.get(e.requires)} a prerequisite of ${p.names.get(e.capability)}? The plan checks it first when ${p.names.get(e.capability)} is found hard.`, key: "", misconceptions: "", rationale: e.source ?? "", status: "candidate (OpenPath's own; no reference states it)", fingerprint: fingerprint(e) });
+    rows.push({ kind: "prerequisite", id: `${e.capability} requires ${e.requires}`, version: "", capability: e.capability, skill: `${p.names.get(e.capability)} requires ${p.names.get(e.requires)}`, use: "planning", difficulty: "", format: "prerequisite", passage: "", content: `Is ${p.names.get(e.requires)} a prerequisite of ${p.names.get(e.capability)}? The plan checks it first when ${p.names.get(e.capability)} is found hard.`, key: "", misconceptions: "", rationale: e.source ?? "", status: "candidate (OpenPath's own; no reference states it)", fingerprint: fingerprint(e), review_status: "" });
   return rows;
 }
 
@@ -283,11 +301,68 @@ export function importReviews(csv: string, current: ReviewRow[], contentVersion:
 }
 
 /** The latest decision per row that still matches the current content (older or stale decisions do not count). */
-export function currentDecisions(rows: ReviewRow[], reviews: ReviewRecord[]): Map<string, ReviewRecord> {
+export function currentDecisions(rows: Pick<ReviewRow, "kind" | "id" | "fingerprint">[], reviews: ReviewRecord[]): Map<string, ReviewRecord> {
   const out = new Map<string, ReviewRecord>();
   const fp = new Map(rows.map((r) => [`${r.kind}|${r.id}`, r.fingerprint]));
   for (const r of reviews) if (fp.get(`${r.kind}|${r.id}`) === r.fingerprint) out.set(`${r.kind}|${r.id}`, r);
   return out;
+}
+
+/**
+ * Where each row stands:
+ *   outstanding  no decision on this exact content (never reviewed)
+ *   re-review    decided once, but the content has changed since: the old decision no longer counts
+ *   approve / reject / revise / discuss   the latest decision on this exact content
+ * Only "approve" on the current fingerprint counts as approved; everything else is not approved.
+ */
+export type ReviewState = { state: "outstanding" } | { state: "re-review"; was: ReviewRecord } | { state: ReviewRecord["decision"]; record: ReviewRecord };
+
+export function reviewStates(rows: Pick<ReviewRow, "kind" | "id" | "fingerprint">[], reviews: ReviewRecord[]): Map<string, ReviewState> {
+  const current = currentDecisions(rows, reviews);
+  const out = new Map<string, ReviewState>();
+  for (const r of rows) {
+    const key = `${r.kind}|${r.id}`;
+    const now = current.get(key);
+    const older = reviews.filter((x) => `${x.kind}|${x.id}` === key).at(-1);
+    out.set(key, now ? { state: now.decision, record: now } : older ? { state: "re-review", was: older } : { state: "outstanding" });
+  }
+  return out;
+}
+
+function stateWords(s: ReviewState): string {
+  if (s.state === "outstanding") return "outstanding: not reviewed";
+  if (s.state === "re-review") return `re-review: changed since ${s.was.decision} by ${s.was.reviewer} on ${s.was.date}`;
+  const r = s.record;
+  const words = { approve: "approved", reject: "rejected", revise: "revise", discuss: "discuss" }[r.decision];
+  return `${words} by ${r.reviewer} on ${r.date}${r.issues.length ? ` (${r.issues.join("; ")})` : ""}`;
+}
+
+const STATE_ORDER = ["approve", "reject", "revise", "discuss", "re-review", "outstanding"] as const;
+const STATE_HEAD: Record<(typeof STATE_ORDER)[number], string> = { approve: "Approved", reject: "Rejected", revise: "To revise", discuss: "To discuss", "re-review": "Changed since a decision (re-review)", outstanding: "Outstanding (not reviewed)" };
+
+/** The review status: counts by state and kind, then every row that is not simply outstanding, with the decision. */
+export function reviewStatus(rows: ReviewRow[], reviews: ReviewRecord[]): string[] {
+  const states = reviewStates(rows, reviews);
+  const kinds = ["question", "passage", "lesson", "prerequisite"] as const;
+  const of = (st: string, k?: string) => rows.filter((r) => states.get(`${r.kind}|${r.id}`)!.state === st && (!k || r.kind === k));
+  const lines: string[] = [];
+  lines.push("| State | " + kinds.map((k) => `${k}s`).join(" | ") + " | total |", "|---|" + kinds.map(() => "---").join("|") + "|---|");
+  for (const st of STATE_ORDER) lines.push(`| ${STATE_HEAD[st]} | ${kinds.map((k) => of(st, k).length).join(" | ")} | ${of(st).length} |`);
+  lines.push("");
+  for (const st of STATE_ORDER.filter((x) => x !== "outstanding")) {
+    const list = of(st);
+    if (!list.length) continue;
+    lines.push(`**${STATE_HEAD[st]}:**`, "");
+    for (const r of list) {
+      const s = states.get(`${r.kind}|${r.id}`)!;
+      const rec = "record" in s ? s.record : "was" in s ? s.was : null;
+      lines.push(`- ${r.kind} \`${r.id}\`${rec ? `: ${rec.reviewer}, ${rec.date}${rec.issues.length ? `; ${rec.issues.join(", ")}` : ""}${rec.comment ? `; "${rec.comment.replace(/\s+/g, " ")}"` : ""}` : ""}`);
+    }
+    lines.push("");
+  }
+  const out = of("outstanding").length;
+  lines.push(out ? `${out} of ${rows.length} rows have no decision on their current content.` : "Every row has a decision on its current content.", "");
+  return lines;
 }
 
 // ---------------------------------------------------------------- HTML for reading
@@ -297,7 +372,7 @@ export function exportHtml(p: Pilot, rows: ReviewRow[]): string {
   const caps = p.manifest.capabilities;
   const section = (cap: string) => {
     const r = rows.filter((x) => x.capability.split(" ").includes(cap));
-    const block = (x: ReviewRow) => `<article class="${x.kind}"><h4>${esc(x.kind)} <code>${esc(x.id)}</code>${x.version ? ` v${esc(x.version)}` : ""}</h4><p class="meta">${[x.use, x.difficulty && `difficulty ${x.difficulty}`, x.format, x.status].filter(Boolean).map(esc).join(" · ")}</p>${x.passage && x.kind === "question" ? `<p class="meta">Passage: ${esc(x.passage)}</p>` : ""}<pre>${esc(x.content)}</pre>${x.key ? `<p><b>Key:</b> ${esc(x.key)}</p>` : ""}${x.misconceptions ? `<p><b>Wrong answers tagged:</b> ${esc(x.misconceptions)}</p>` : ""}${x.rationale ? `<p class="meta">${esc(x.rationale)}</p>` : ""}<p class="meta">fingerprint ${esc(x.fingerprint)}</p></article>`;
+    const block = (x: ReviewRow) => `<article class="${x.kind}"><h4>${esc(x.kind)} <code>${esc(x.id)}</code>${x.version ? ` v${esc(x.version)}` : ""}</h4><p class="meta">${[x.use, x.difficulty && `difficulty ${x.difficulty}`, x.format, x.status].filter(Boolean).map(esc).join(" · ")}</p>${x.passage && x.kind === "question" ? `<p class="meta">Passage: ${esc(x.passage)}</p>` : ""}<pre>${esc(x.content)}</pre>${x.key ? `<p><b>Key:</b> ${esc(x.key)}</p>` : ""}${x.misconceptions ? `<p><b>Wrong answers tagged:</b> ${esc(x.misconceptions)}</p>` : ""}${x.rationale ? `<p class="meta">${esc(x.rationale)}</p>` : ""}<p class="meta">fingerprint ${esc(x.fingerprint)} · <b>review: ${esc(x.review_status)}</b></p></article>`;
     return `<h2>${esc(p.names.get(cap) ?? cap)}</h2><p class="meta">${esc(cap)}</p>${["lesson", "passage", "question"].map((k) => r.filter((x) => x.kind === k)).map((list) => list.map(block).join("")).join("")}`;
   };
   return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pilot content for review</title>
@@ -321,7 +396,7 @@ const POOLS = ["diagnosis", "practice", "confirmation", "retention"] as const;
 export const READY_MIN = { diagnosis: 3, confirmation: 4, retention: 4 };
 
 export function report(p: Pilot, reviews: ReviewRecord[]): string {
-  const rows = reviewRows(p);
+  const rows = reviewRows(p, reviews);
   const decided = currentDecisions(rows, reviews);
   const pool = (id: string) => p.manifest.pools[id]?.pool;
   const lines: string[] = [];
@@ -330,6 +405,8 @@ export function report(p: Pilot, reviews: ReviewRecord[]): string {
   lines.push("**Software readiness** means the app can run diagnosis → teaching → a fresh confirming check → a later check on this content. **Educational validation** means an educator has approved the content. They are reported separately: the first can be yes while the second is no.", "");
   const approvedAll = [...decided.values()].filter((r) => r.decision === "approve").length;
   lines.push(`Review decisions recorded: ${decided.size} of ${rows.length} rows (${approvedAll} approved). Approval in the app is not automatic.`, "");
+  lines.push("## Review status", "", "Only an educator's \"approve\" on the exact current content counts. A row that changed after its decision needs review again. Nothing here is applied to the app: approved content still has to be marked validated in a separate, visible change.", "");
+  lines.push(...reviewStatus(rows, reviews));
   for (const cap of p.manifest.capabilities) {
     const items = p.items.filter((i) => i.target === cap);
     const lessons = p.lessons.filter((l) => l.capability === cap);
@@ -343,25 +420,30 @@ export function report(p: Pilot, reviews: ReviewRecord[]): string {
     }
     const passages = new Set(items.map((i) => i.passage).filter(Boolean));
     lines.push("");
-    const easy = (u: keyof typeof READY_MIN) => items.filter((i) => pool(i.id) === u && i.b <= 4).length;
+    // what a check can count at the easier levels: questions, but one per reading passage (passage@1)
+    const easy = (u: keyof typeof READY_MIN) => {
+      const list = items.filter((i) => pool(i.id) === u && i.b <= 4);
+      return list.filter((i) => !i.passage).length + new Set(list.map((i) => i.passage).filter(Boolean)).size;
+    };
     const lessonSteps = new Set(lessons.map((l) => l.step));
     const easySteps = [...new Set(items.filter((i) => i.b <= 4 && i.step).map((i) => i.step!))];
     const untaught = easySteps.filter((s) => !lessonSteps.has(s));
-    lines.push(`- Questions: ${items.length} (${items.filter((i) => p.manifest.pools[i.id]?.origin === "new-pr24").length} new candidates)${passages.size ? `, on ${passages.size} passages` : ""}.`);
+    lines.push(`- Questions: ${items.length} (${items.filter((i) => p.manifest.pools[i.id]?.origin !== "existing").length} new candidates)${passages.size ? `, on ${passages.size} passages` : ""}.`);
     lines.push(`- Teaching: ${lessons.length} lesson${lessons.length === 1 ? "" : "s"} (${lessons.map((l) => l.step).join(", ") || "none"}).${untaught.length ? ` Steps used at the easier levels with no lesson: ${untaught.join(", ")}.` : ""}`);
     lines.push(`- Awaiting review: ${capRows.length - approved} of ${capRows.length} rows (questions, passages, lessons, prerequisites); approved: ${approved}.`);
     const gaps: string[] = [];
     for (const u of Object.keys(READY_MIN) as (keyof typeof READY_MIN)[]) if (easy(u) < READY_MIN[u]) gaps.push(`only ${easy(u)} ${u} question${easy(u) === 1 ? "" : "s"} at difficulty ≤ 4 (needs ${READY_MIN[u]})`);
     if (!lessons.length) gaps.push("no teaching");
+    if (passages.size) lines.push(`- Counted answers available at difficulty ≤ 4 (one per passage): diagnosis ${easy("diagnosis")}, confirmation ${easy("confirmation")}, later check ${easy("retention")}.`);
     if (items.filter((i) => pool(i.id) === "confirmation" || pool(i.id) === "retention").length < 12) gaps.push("enough reserved questions for one confirming check and one later check, not for repeated cycles");
-    if (cap.startsWith("EN.RDG")) gaps.push("the older reading questions come two per passage; only one per passage is asked in a session, and the engine still treats them as independent");
+    if (cap.startsWith("EN.RDG")) gaps.push("the older reading questions come two per passage: only the first answer on a passage counts (passage@1), so they supply one counted answer per passage");
     if (items.some((i) => i.b > 4.25) && !items.some((i) => (pool(i.id) === "confirmation" || pool(i.id) === "retention") && i.b > 4.25))
       gaps.push("no confirmation or later-check questions above difficulty 4: older or stronger learners cannot be confirmed at their level");
     lines.push(`- Outstanding gaps: ${gaps.length ? gaps.join("; ") : "none found by the checks"}.`);
     const softwareReady = (Object.keys(READY_MIN) as (keyof typeof READY_MIN)[]).every((u) => easy(u) >= READY_MIN[u]) && lessons.length > 0;
     lines.push(`- **Software ready for supervised testing:** ${softwareReady ? "yes, at difficulty ≤ 4" : "no"}. **Educationally validated:** ${approved === capRows.length ? "yes" : `no (${approved} of ${capRows.length} approved)`}. **Approved for children:** no.`, "");
   }
-  lines.push("## Not covered by this report", "", "- Whether any question, passage or lesson is correct, clear or suitable: that is the educator's review.", "- Safeguarding, consent, data protection and the session protocol for supervised testing (see PILOT_READINESS_DOUBLING.md).", "");
+  lines.push("## Not covered by this report", "", "- Whether any question, passage or lesson is correct, clear or suitable: that is the educator's review.", "- Safeguarding, consent, data protection and the session protocol for supervised testing: see PILOT_PROTOCOL.md (a draft awaiting the responsible adults' agreement).", "- The educator decisions that remain open: see EDUCATOR_DECISION_PACK.md.", "");
   return lines.join("\n");
 }
 
@@ -370,8 +452,8 @@ export function report(p: Pilot, reviews: ReviewRecord[]): string {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const [cmd, arg] = process.argv.slice(2);
   const p = loadPilot();
-  const rows = reviewRows(p);
   const reviews: ReviewRecord[] = existsSync(REVIEWS) ? read<ReviewRecord[]>(REVIEWS) : [];
+  const rows = reviewRows(p, reviews);
   if (cmd === "export") {
     const dir = arg ?? join(REPO, "docs", "english", "review", "pilot");
     mkdirSync(dir, { recursive: true });
@@ -400,5 +482,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       writeFileSync(REPORT, text);
       console.log(`wrote ${REPORT}`);
     }
-  } else console.log("usage: review.ts export [dir] | import <file.csv> | report [--check]");
+  } else if (cmd === "status") {
+    console.log(reviewStatus(rows, reviews).join("\n"));
+  } else console.log("usage: review.ts export [dir] | import <file.csv> | report [--check] | status");
 }

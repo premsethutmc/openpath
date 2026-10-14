@@ -80,7 +80,7 @@ test("PC-4 review status and provenance: every new question is a candidate await
   for (const i of pilotItems as Code[]) {
     assert.equal(i.review, "candidate-unvalidated", i.id);
     assert.equal(i.evidence_status, undefined, `${i.id}: no validation status is set by this PR`);
-    assert.equal(c.pilot.pools.get(i.id)?.origin, "new-pr24", i.id);
+    assert.ok(["new-pr24", "new-pr25"].includes(c.pilot.pools.get(i.id)?.origin ?? ""), i.id);
   }
   for (const i of bank) assert.ok(pool(i.id), `${i.id} has a reserved use`);
   assert.match((manifest as { status: string }).status, /awaiting educator review/);
@@ -89,7 +89,11 @@ test("PC-4 review status and provenance: every new question is a candidate await
 
 test("PC-5 enough reserved questions at the easier levels for diagnosis, confirmation and a later check", () => {
   for (const cap of CAPS) {
-    const at = (p: string) => bank.filter((i) => i.target === cap && pool(i.id) === p && i.b <= 4).length;
+    // counted answers: one per reading passage (passage@1, PR #25)
+    const at = (p: string) => {
+      const list = bank.filter((i) => i.target === cap && pool(i.id) === p && i.b <= 4);
+      return list.filter((i) => !i.passage).length + new Set(list.map((i) => i.passage).filter(Boolean)).size;
+    };
     assert.ok(at("diagnosis") >= 3, `${cap}: diagnosis ${at("diagnosis")}`);
     assert.ok(at("confirmation") >= 4, `${cap}: confirmation ${at("confirmation")}`);
     assert.ok(at("retention") >= 4, `${cap}: retention ${at("retention")}`);
@@ -122,7 +126,7 @@ test("PC-7 selection keeps each reserved question for its use", () => {
   for (const i of bank) {
     const p = pool(i.id)!;
     assert.equal(assess.has(i.id), p === "diagnosis", `${i.id} for a first check`);
-    assert.equal(practice.has(i.id), p === "diagnosis" || p === "practice", `${i.id} in teaching`);
+    assert.equal(practice.has(i.id), p === "practice", `${i.id} in teaching: practice questions only, never diagnosis (PR #25)`);
     assert.equal(confirm.has(i.id), p === "confirmation", `${i.id} for confirmation`);
     assert.equal(retention.has(i.id), p === "retention", `${i.id} for a later check`);
   }

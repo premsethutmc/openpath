@@ -157,7 +157,10 @@ export function CapabilityCard({ cap }: { cap: CapabilityProfile }) {
         {cap.evidence.practiceOnly ? "; practice words are recorded but not counted until checked" : ""}.{cap.basis.draft ? " All on draft questions." : ""}
       </p>
       {cap.passages > 0 && cap.passages < cap.evidence.independent && (
-        <p className="small note">{`These ${cap.evidence.independent} answers come from ${cap.passages} reading passage${cap.passages === 1 ? "" : "s"}. Answers on the same passage are not fully independent, so treat them as fewer pieces of evidence.`}</p>
+        <p className="small note">{`These ${cap.evidence.independent} answers come from ${cap.passages} reading passage${cap.passages === 1 ? "" : "s"}. Answers on the same passage are not fully independent, so treat them as fewer pieces of evidence. (They were recorded before only one answer per passage was counted.)`}</p>
+      )}
+      {(cap.evidence.samePassage ?? 0) > 0 && (
+        <p className="small note">{`${cap.evidence.samePassage} answer${cap.evidence.samePassage === 1 ? " was" : "s were"} on a passage already counted for this skill. ${cap.evidence.samePassage === 1 ? "It is" : "They are"} kept for a teacher to look at, but only the first answer on each passage counts.`}</p>
       )}
       {cap.strengths.map((t, i) => (
         <p key={`s${i}`} className="small strength">

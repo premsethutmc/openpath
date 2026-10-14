@@ -47,6 +47,9 @@ export interface EvidenceSummary {
   afterTeachingRight: number;
   /** Repeated questions: kept for later checks, never new evidence. */
   repeats: number;
+  /** Answers on a reading passage already counted for this capability (passage@1): kept for diagnosis, not counted. Optional: absent means none. */
+  samePassage?: number;
+  samePassageRight?: number;
 }
 
 export interface CapabilitySnapshot {
@@ -201,6 +204,7 @@ export function evidenceLine(c: CapabilitySnapshot): string {
   if (e.afterTeaching) parts.push(`${answers(e.afterTeaching, e.afterTeachingRight)} in practice straight after a lesson (not counted as independent)`);
   if (e.practiceOnly) parts.push(`${e.practiceOnly} practice word${e.practiceOnly === 1 ? "" : "s"} (not counted)`);
   if (e.repeats) parts.push(`${e.repeats} repeated question${e.repeats === 1 ? "" : "s"} (not new evidence)`);
+  if (e.samePassage) parts.push(`${answers(e.samePassage, e.samePassageRight ?? 0)} on a passage already counted (not counted again)`);
   return parts.length ? parts.join("; ") : "no answers yet";
 }
 

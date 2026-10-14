@@ -406,7 +406,18 @@ export interface Provenance {
   afterFeedback: boolean;
   /** The intervention this answer follows, if any. */
   intervention?: string;
+  /**
+   * Evidence policies in force when the answer was recorded (a version boundary, set by the app that recorded it).
+   * "passage@1": a second answer on a reading passage already counted for this capability is held (updater.ts,
+   * docs/english/READING_EVIDENCE_DEPENDENCE.md). Absent on every answer recorded before the policy: those replay
+   * exactly as they were scored, so no historical result changes.
+   */
+  policies?: EvidencePolicy[];
 }
+
+/** Evidence policies an answer can be recorded under. */
+export type EvidencePolicy = "passage@1";
+export const PASSAGE_POLICY: EvidencePolicy = "passage@1";
 
 /** What a question was shown for (the client's intent; the engine decides what the evidence shows). */
 export type PresentedPurpose = "assessment" | "practice" | "retention" | "transfer" | "teaching";
@@ -538,6 +549,12 @@ export interface Decision {
      * retention check. Absent: no teaching on this capability earlier in the session.
      */
     setting?: "after_teaching";
+    /**
+     * Passage dependence (passage@1): the reading passage this answer shares with an answer already counted on
+     * this capability, and that answer's decision. The answer is held: kept for diagnosis and reporting, changing no
+     * estimate. Absent on every answer the rule does not hold.
+     */
+    samePassage?: { passage: string; counted: string };
   };
   before?: { mean: number; sd: number };
   after?: { mean: number; sd: number };

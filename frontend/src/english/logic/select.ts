@@ -12,6 +12,8 @@ export const PLACEMENT_MIN = 12;
 export const PLACEMENT_MAX = 24;
 export const PLACEMENT_SD = 0.9;
 export const GUIDED_LENGTH = 6;
+/** Practice after a reading lesson: three questions, each on its own passage (reading takes longer than a sentence). */
+export const READING_PRACTICE_LENGTH = 3;
 export const EXPLORE_LENGTH = 10;
 export const PRACTICE_LENGTH = 8;
 export const REVIEW_MAX = 10;
@@ -27,13 +29,16 @@ const view = (s: AppState, c: AppContent, cap: string, now: string): LeafView =>
 
 /** What a question may be used for, by the reason it is asked. Questions without a pool may be used for anything. */
 export type Use = "assess" | "practice" | "confirm" | "retention";
-const ALLOWED: Record<Use, Pool[]> = { assess: ["diagnosis"], practice: ["diagnosis", "practice"], confirm: ["confirmation"], retention: ["retention"] };
+// Each pool serves one use only: practice (teaching and "more practice") never draws on diagnosis, so teaching cannot
+// use up or give away the questions a first check needs (PR #25; before, practice could draw on diagnosis too).
+const ALLOWED: Record<Use, Pool[]> = { assess: ["diagnosis"], practice: ["practice"], confirm: ["confirmation"], retention: ["retention"] };
 
 /**
  * The hand-written questions this use may draw on. Three rules, all about selection (no scoring changes):
  *   pools        a pilot question reserved for one use is never taken for another
  *   passages     at most one question per reading passage in a session (two questions on one passage are not
- *                independent evidence)
+ *                independent evidence), and never a passage the learner has already answered on for the same
+ *                capability (under passage@1 that answer would be held, so asking it would waste the child's time)
  *   seen words   a fresh or later check never asks a spelling word the learner has already met in practice
  */
 export function onlyFor(s: AppState, c: AppContent, use: Use, session?: SessionState): Set<string> {
@@ -43,12 +48,18 @@ export function onlyFor(s: AppState, c: AppContent, use: Use, session?: SessionS
     const i = c.ctx.content.items.get(a.item.id);
     if (i?.kind === "code" && i.passage) used.add(i.passage);
   }
+  // passages the learner has already answered on, by capability: under passage@1 a second answer there would be held
+  const answered = new Set<string>();
+  for (const id of s.ledger.exposures.keys()) {
+    const i = c.ctx.content.items.get(id);
+    if (i?.kind === "code" && i.passage) answered.add(`${i.passage}#${i.target}`);
+  }
   const out = new Set<string>();
   for (const id of c.handWritten) {
     const pool = c.pilot.pools.get(id);
     if (pool && !allowed.includes(pool.pool)) continue;
     const i = c.ctx.content.items.get(id);
-    if (i?.kind === "code" && i.passage && used.has(i.passage)) continue;
+    if (i?.kind === "code" && i.passage && (used.has(i.passage) || answered.has(`${i.passage}#${i.target}`))) continue;
     if ((use === "confirm" || use === "retention") && i?.kind === "code" && i.format.startsWith("typed") && i.answers?.[0] && s.wordsSeen.has(i.answers[0].toLowerCase())) continue;
     out.add(id);
   }
@@ -132,7 +143,13 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
 /** More practice: the engine's hybrid scheduler on every specified capability (no teaching). */
 export function exploreNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? EXPLORE_LENGTH)) return null;
-  return nextFrom(recommend(input(s, c, c.overallGoal, now, "hybrid", onlyFor(s, c, "assess", session))), c);
+  return nextFrom(recommend(input(s, c, c.overallGoal, now, "hybrid", onlyFor(s, c, "practice", session))), c);
+}
+
+/** How many questions a lesson's practice asks: fewer for reading, where each question needs its own passage. */
+export function guidedLength(c: AppContent, cap: string): number {
+  const reading = [...(c.ctx.content.byCapability.get(cap) ?? [])].some((i) => i.kind === "code" && !!i.passage);
+  return reading ? READING_PRACTICE_LENGTH : GUIDED_LENGTH;
 }
 
 /** The step a guided session's lesson teaches: the step of the first activity the engine would choose. */
@@ -168,10 +185,15 @@ function unseenWords(s: AppState, c: AppContent, cap: string, step: string, spee
     .sort((a, b) => Math.abs(a.b - band) - Math.abs(b.b - band) || fnv1a(a.id).localeCompare(fnv1a(b.id)));
 }
 
-function unseenHandWritten(s: AppState, c: AppContent, cap: string, step: string): Code | undefined {
-  // the spelling module never uses questions reserved for a confirming or later check, or for teaching
-  const pool = (id: string) => c.pilot.pools.get(id)?.pool;
-  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && c.handWritten.has(i.id) && i.step === step && !s.ledger.exposures.has(i.id) && (pool(i.id) ?? "diagnosis") === "diagnosis").sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
+function unseenHandWritten(s: AppState, c: AppContent, cap: string, step: string, use: "assess" | "practice"): Code | undefined {
+  // the spelling module's checks use diagnosis questions and its practice uses practice questions; never one
+  // reserved for a confirming or later check. Questions outside the pilot have no pool and serve either.
+  const want: Pool = use === "assess" ? "diagnosis" : "practice";
+  const ok = (id: string) => {
+    const pool = c.pilot.pools.get(id)?.pool;
+    return pool === undefined || pool === want;
+  };
+  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && c.handWritten.has(i.id) && i.step === step && !s.ledger.exposures.has(i.id) && ok(i.id)).sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
 }
 
 /** Spelling patterns (capability and ladder step) that have generated words. */
@@ -204,7 +226,7 @@ export function spellingPracticeQueue(s: AppState, c: AppContent, cap: string, s
     used.add(pick.generated!.word);
     out.push({ item: pick.id, use: "practice" });
   }
-  const hand = unseenHandWritten(s, c, cap, step);
+  const hand = unseenHandWritten(s, c, cap, step, "practice");
   if (hand && out.length >= 3) out.splice(3, 0, { item: hand.id, use: "practice" });
   return out;
 }
@@ -226,7 +248,7 @@ export function spellingTransferQueue(s: AppState, c: AppContent, cap: string, s
   const templates = cap === "EN.FND.SPL.homophones" ? ["homophone_context", "meaning_first_letter"] : ["hear_spell", "add_ending", "meaning_first_letter"];
   const words = unseenWords(s, c, cap, step, speech, templates).slice(0, TRANSFER_WORDS);
   const out: Planned[] = words.map((w) => ({ item: w.id, use: "assessment" as const }));
-  const hand = unseenHandWritten(s, c, cap, step);
+  const hand = unseenHandWritten(s, c, cap, step, "assess");
   if (hand) out.push({ item: hand.id, use: "assessment" });
   return out;
 }

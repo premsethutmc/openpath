@@ -34,6 +34,9 @@ lesson examples were changed. Lessons are teaching text, not evidence, and are r
 
 ## 2. Reading: several questions on one passage
 
+> **Updated in PR #25:** the engine now counts only the first answer on a passage for each skill (passage@1), for
+> answers recorded from PR #25 on. Older records are unchanged. See READING_EVIDENCE_DEPENDENCE.md.
+
 Two questions on one passage are not independent pieces of evidence. A child who misreads the passage gets both
 wrong. The engine counts them as two independent answers. The scoring engine is **unchanged**; three conservative
 measures limit the problem instead:
@@ -104,7 +107,7 @@ node tools/english/pilot/review.ts report         # regenerates PILOT_CONTENT_RE
 ## 5. Behaviour changes in the app (selection only; no scoring changes)
 
 - **Placement and first checks** use diagnosis questions. Practice during teaching uses diagnosis and practice
-  questions. The check after teaching uses confirmation questions only. A later check uses retention questions only.
+  questions (**changed in PR #25:** practice questions only, so teaching cannot use up first-check questions). The check after teaching uses confirmation questions only. A later check uses retention questions only.
   Capabilities outside the pilot are unaffected.
 - **The legacy spelling module** uses diagnosis questions only.
 - **Spelling words:** a confirming or later check never asks a spelling word the child has already met in practice.
@@ -114,6 +117,8 @@ node tools/english/pilot/review.ts report         # regenerates PILOT_CONTENT_RE
   (its prior), and the profile called it shown.
 
 ## 6. Remaining blockers before supervised testing with children
+
+> **Superseded:** the current list is in PILOT_READINESS.md (PR #25).
 
 1. **Educator review of all 201 rows.** None are approved.
 2. **Supply.**

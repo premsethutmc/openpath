@@ -17,7 +17,7 @@ import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
-import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, isIndependentProvenance } from "./types.ts";
+import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, PASSAGE_POLICY, isIndependentProvenance } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -92,6 +92,11 @@ export class Ledger {
   private interventions = new Map<string, InterventionEvent>();
   /** session#capability → time of the first teaching (intervention) on that capability in that session. */
   private taughtInSession = new Map<string, string>();
+  /**
+   * passage#capability → the decision that counted an answer on that reading passage for that capability (any
+   * accepted answer that moved the estimate, under any policy). Used by passage@1 only.
+   */
+  private passageCounted = new Map<string, string>();
 
   constructor(ctx: Context, learnerId: string, revoked: Set<string> = new Set()) {
     this.ctx = ctx;
@@ -219,6 +224,25 @@ export class Ledger {
         },
       ];
     if (this.revoked.has(id)) return [{ id, at: ev.at, source: ev.id, capability: item.target, verdict: "revoked", reasons: ["revoked"], observation }];
+    // Passage dependence (passage@1, recorded with the answer): answers on one reading passage are not independent,
+    // so only the first counted answer on a passage changes this capability's estimate. A later fresh answer on the
+    // same passage is held: kept, with its score and misconceptions, for diagnosis and reporting. Answers recorded
+    // before the policy carry no mark and replay exactly as before. A repeated item keeps its existing handling.
+    const passageKey = item.passage ? `${item.passage}#${item.target}` : null;
+    const counted = passageKey ? this.passageCounted.get(passageKey) : undefined;
+    if (counted && exposure !== "repeat" && ev.provenance?.policies?.includes(PASSAGE_POLICY))
+      return [
+        {
+          id,
+          at: ev.at,
+          source: ev.id,
+          capability: item.target,
+          verdict: "held",
+          reasons: [`scored by code: ${correct ? "right" : "wrong"}; same reading passage (${item.passage}) as an answer already counted for this skill, so it is recorded for diagnosis and reporting and no estimate is changed (passage@1)`],
+          observation: { ...observation, samePassage: { passage: item.passage!, counted } },
+        },
+      ];
+    if (passageKey && !counted && exposure !== "repeat") this.passageCounted.set(passageKey, id);
     const params = itemParams(item);
     // teaching on this capability earlier in this session: the answer counts for the estimate, not for demonstrating
     const taughtAt = this.taughtInSession.get(`${ev.session}#${item.target}`);

@@ -99,6 +99,7 @@ type Collected = { e: EvidenceSummary; ids: string[]; lastAt: string | null; las
  *   repeats         a question seen before (the engine keeps it for later checks only)
  *   unknown         accepted with no provenance (recorded before help was tracked)
  *   assisted / provisional / practiceOnly   held by the ledger, as before
+ *   samePassage     held by the ledger under passage@1: a reading passage already counted for this capability
  */
 function evidenceByCapability(s: AppState, c: AppContent) {
   const out = new Map<string, Collected>();
@@ -143,7 +144,11 @@ function evidenceByCapability(s: AppState, c: AppContent) {
       if (item.evidence_status === "validated") x.validated++;
       else x.draft++;
     } else if (d.verdict === "held") {
-      if (item.evidence_status === "provisional" && d.reasons.some((r) => r.includes("provisional item"))) {
+      if (d.observation.samePassage) {
+        // passage@1: a second answer on a passage already counted for this skill; kept for diagnosis, not counted
+        x.e.samePassage = (x.e.samePassage ?? 0) + 1;
+        x.e.samePassageRight = (x.e.samePassageRight ?? 0) + right;
+      } else if (item.evidence_status === "provisional" && d.reasons.some((r) => r.includes("provisional item"))) {
         x.e.provisional++;
         x.e.provisionalRight += right;
       } else if (item.generated && !item.generated.checked) x.e.practiceOnly++;

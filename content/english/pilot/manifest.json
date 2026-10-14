@@ -1,5 +1,5 @@
 {
- "version": "pilot-content@1",
+ "version": "pilot-content@2",
  "capabilities": [
   "EN.FND.SPL.inflections",
   "EN.GRM.VERB.sva",
@@ -8,7 +8,7 @@
   "EN.RDG.SUM.main_idea"
  ],
  "status": "candidate: awaiting educator review. Nothing here is approved.",
- "note": "Five-capability pilot content (PR #24). New questions and passages were drafted with AI assistance by the developer and are candidates only; existing questions are unchanged and keep their ids. Each question is reserved for one use (diagnosis, practice during teaching, confirmation after teaching, or a later retention check), so a confirming or later check never uses a question the learner was taught or practised.",
+ "note": "Five-capability pilot content (PR #24). New questions and passages were drafted with AI assistance by the developer and are candidates only; existing questions are unchanged and keep their ids. Each question is reserved for one use (diagnosis, practice during teaching, confirmation after teaching, or a later retention check), so a confirming or later check never uses a question the learner was taught or practised. pilot-content@2 (PR #25) adds practice questions for every capability (and their passages for reading), so practice during teaching never draws on diagnosis questions, and two main-idea diagnosis questions on their own passages (with only one answer per passage counted, the existing ones gave two first-check answers at the easier levels); no existing question changed.",
  "pools": {
   "grm.art.01": {
    "pool": "diagnosis",
@@ -587,6 +587,146 @@
   "spl.infl.17": {
    "pool": "diagnosis",
    "origin": "existing"
+  },
+  "plt.infl.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.22": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.22": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.12": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.13": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.14": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.12": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.13": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.14": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.18": {
+   "pool": "diagnosis",
+   "origin": "new-pr25"
+  },
+  "plt.main.19": {
+   "pool": "diagnosis",
+   "origin": "new-pr25"
   }
  }
 }
