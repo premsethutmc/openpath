@@ -32,6 +32,7 @@ import { type AppContent, type Code, GUIDED } from "./content.ts";
 import type { AppEvent } from "./events.ts";
 import { type PlanStep, patternTitle, todayPlan } from "./plan.ts";
 import { capabilityProgress, type CapabilityProgress } from "./progress.ts";
+import { misconceptionFindings } from "./misconceptions.ts";
 import { type Use, onlyFor, spellingPlan } from "./select.ts";
 import { type AppState, dueWords, fold, placementDone, sessionsOf } from "./state.ts";
 import { parentReport } from "./journey.ts";
@@ -245,6 +246,7 @@ const day = (iso: string | null | undefined) => (iso ? iso.slice(0, 10) : "");
 export function learnerProfile(s: AppState, c: AppContent, now: string, speech = false, opts: { activities?: boolean } = {}): LearnerProfile {
   const progress = new Map(capabilityProgress(s, c, now).map((r) => [r.id, r]));
   const ev = evidenceByCapability(s, c);
+  const findings = misconceptionFindings(s, c);
   const doubling = parentReport(s, c, now);
   const teach = new Map<string, { title: string; step: PlanStep } | null>();
   const snapshots: CapabilityProfile[] = [];
@@ -272,7 +274,13 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     if (standing === "found_hard") difficulties.push(`Found hard so far: ${x.e.independentRight} of ${x.e.independent} right on their own.`);
     if (x.e.afterTeaching > 0 && standing !== "improving")
       difficulties.push(`Practice straight after a lesson: ${x.e.afterTeachingRight} of ${x.e.afterTeaching} right. Recorded, but it never counts as shown on their own.`);
-    for (const m of v.misconceptions) difficulties.push(`A pattern in wrong answers: ${m.id.replace(/_/g, " ")}.`);
+    // one wrong answer is a suspicion, not a pattern: say which (misconceptions.ts); a resolved one is not a difficulty
+    for (const m of v.misconceptions) {
+      const f = findings.find((x) => x.capability === id && x.misconception === m.id);
+      const what = m.id.replace(/_/g, " ");
+      if (!f || f.status === "resolved") continue;
+      difficulties.push(f.status === "supported" ? `A pattern in wrong answers: ${what} (on ${new Set(f.errors.map((e) => e.item)).size} different questions).` : `Possibly ${what}: one wrong answer so far, not yet a pattern.`);
+    }
     const paused = id === c.journey.capability && doubling.support ? `Doubling letters: ${doubling.support}` : null;
     if (id === c.journey.capability && doubling.started) difficulties.push(`Doubling letters (provisional questions, not counted): ${doubling.status}`);
     const retention =

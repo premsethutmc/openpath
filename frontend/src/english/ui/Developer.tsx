@@ -430,6 +430,13 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
         ))}
       </Section>
       <Section title="Misconceptions and skill gaps" count={d.misconceptions_and_gaps.length}>
+        {d.misconception_findings.length > 0 && (
+          <Table
+            label="Misconception status"
+            head={["misconception", "skill", "status", "why", "errors on", "right since on", "not counted"]}
+            rows={d.misconception_findings.map((f) => [f.misconception, f.capability, <b>{f.status}</b>, f.reason, f.errors.map((e) => e.item).join(", ") || "–", f.laterRight.map((e) => e.item).join(", ") || "–", f.notCounted])}
+          />
+        )}
         {d.misconceptions_and_gaps.length ? (
           <Table label="Misconceptions" head={["skill", "standing", "patterns in wrong answers", "difficulties and notes"]} rows={d.misconceptions_and_gaps.map((g) => [g.name, g.standing, g.misconceptions.map((m: { id: string; strength: number }) => `${m.id} (${m.strength})`).join(", ") || "–", [...g.difficulties, ...g.notes].join("; ") || "–"])} />
         ) : (
@@ -506,6 +513,13 @@ function SelectionView({ t }: { t: SelectionTrace }) {
     );
   return (
     <div className="small dev-trace">
+      {t.spelling && (
+        <p>
+          <b>Spelling rule:</b> {t.spelling.rule.replace(/_/g, " ")}
+          {t.spelling.window ? ` (±${t.spelling.window} band)` : ""}. {t.spelling.reasons.join(" ")}
+          {t.spelling.estimates.length ? ` Estimates then: ${t.spelling.estimates.map((e) => `${e.capability.split(".").pop()} ${e.mean}±${e.sd}`).join(", ")}.` : ""}
+        </p>
+      )}
       <p>
         <b>Knew:</b> {(t.knew ?? []).map((k) => `${k.capability} ${k.mean}±${k.sd} (${k.n} answers, ${k.stage})`).join("; ") || "–"}
       </p>
@@ -580,6 +594,7 @@ function Timeline({ entries }: { entries: TimelineEntry[] }) {
                 {e.answer && (
                   <p className="small">
                     Answer: “{e.answer.text}”{e.answer.misconceptions.length ? ` [${e.answer.misconceptions.join(", ")}]` : ""}
+                    {e.answer.errorKind ? ` · looks like: ${e.answer.errorKind.replace(/_/g, " ")}` : ""}
                     {e.answer.tries > 1 ? ` · ${e.answer.tries} tries` : ""}
                   </p>
                 )}

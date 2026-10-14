@@ -39,7 +39,7 @@ const bandOf = (id: string) => {
 };
 const templateOf = (id: string) => (c.ctx.content.items.get(id) as { generated?: { template: string } }).generated?.template;
 
-test("CURRENT BEHAVIOUR (finding S1): spelling-check answers never change the Learner Vector, though recorded as assessment", async () => {
+test("OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S1): spelling-check answers never change the Learner Vector, though recorded as assessment", async () => {
   const l = await placed();
   const caps = ["EN.FND.SPL.inflections", "EN.FND.SPL.morphological", "EN.FND.SPL.homophones"];
   const before = caps.map((cap) => leafView(l.state.ledger.composite, c.index, cap, NOW).mean);
@@ -57,7 +57,7 @@ test("CURRENT BEHAVIOUR (finding S1): spelling-check answers never change the Le
   assert.deepEqual(caps.map((cap) => leafView(l.state.ledger.composite, c.index, cap, NOW).mean), before, "every answer wrong, estimates unchanged");
 });
 
-test("CURRENT BEHAVIOUR (finding S2): the spelling check asks every pattern up to two bands above the estimate, however far below", async () => {
+test("OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S2): the spelling check asks every pattern up to two bands above the estimate, however far below", async () => {
   const l = await placed();
   const v = leafView(l.state.ledger.composite, c.index, "EN.FND.SPL.inflections", NOW);
   const queue = spellingCheckQueue(l.state, c, NOW, true).filter((p) => c.ctx.content.items.get(p.item)!.kind === "code" && (c.ctx.content.items.get(p.item) as { target: string }).target === "EN.FND.SPL.inflections");
@@ -66,14 +66,14 @@ test("CURRENT BEHAVIOUR (finding S2): the spelling check asks every pattern up t
   assert.equal(queue[0].item, "gen.infl.add_ending.seeing", "the first word is the easiest pattern's");
 });
 
-test("CURRENT BEHAVIOUR (finding S3): with speech available, the check still prefers 'add an ending' over hear-and-type", async () => {
+test("OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S3): with speech available, the check still prefers 'add an ending' over hear-and-type", async () => {
   const l = await placed();
   const withSpeech = spellingCheckQueue(l.state, c, NOW, true).map((p) => templateOf(p.item));
   const dictation = withSpeech.filter((t) => t === "hear_spell").length;
   assert.ok(dictation <= 2 && withSpeech.filter((t) => t === "add_ending").length >= 8, `templates: ${withSpeech.join(", ")}`);
 });
 
-test("CURRENT BEHAVIOUR (finding S4): without speech, a definition clue replaces dictation in the spelling check", async () => {
+test("OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S4): without speech, a definition clue replaces dictation in the spelling check", async () => {
   const l = await placed();
   const noSpeech = spellingCheckQueue(l.state, c, NOW, false).map((p) => templateOf(p.item));
   assert.ok(noSpeech.includes("meaning_first_letter"));

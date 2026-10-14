@@ -6,18 +6,18 @@
  "items": [
   {
    "kind": "code",
-   "id": "spl.dict.jumped",
+   "id": "spl.dict.pointed",
    "version": 1,
-   "family": "spl.dict.jumped",
+   "family": "spl.dict.pointed",
    "target": "EN.FND.SPL.inflections",
    "format": "typed:dictation",
    "b": 1.5,
    "a": 1.3,
    "prompt": "Listen to the word, then type how it is spelt.",
-   "speak": "jumped",
-   "sentence": "The cat jumped onto the wall.",
+   "speak": "pointed",
+   "sentence": "She pointed at the map.",
    "answers": [
-    "jumped"
+    "pointed"
    ],
    "step": "plain",
    "difficulty_source": "author_estimate",
@@ -168,18 +168,18 @@
   },
   {
    "kind": "code",
-   "id": "spl.dict.watches",
+   "id": "spl.dict.brushes",
    "version": 1,
-   "family": "spl.dict.watches",
+   "family": "spl.dict.brushes",
    "target": "EN.FND.SPL.inflections",
    "format": "typed:dictation",
    "b": 2.5,
    "a": 1.3,
    "prompt": "Listen to the word, then type how it is spelt.",
-   "speak": "watches",
-   "sentence": "My grandfather collects old watches.",
+   "speak": "brushes",
+   "sentence": "The artist washed her brushes after painting.",
    "answers": [
-    "watches"
+    "brushes"
    ],
    "step": "es_plural",
    "difficulty_source": "author_estimate",
@@ -1530,21 +1530,21 @@
   },
   {
    "kind": "code",
-   "id": "spl.dict.finally",
+   "id": "spl.dict.totally",
    "version": 1,
-   "family": "spl.dict.finally",
+   "family": "spl.dict.totally",
    "target": "EN.FND.SPL.morphological",
    "format": "typed:dictation",
    "b": 3.5,
    "a": 1.3,
    "prompt": "Listen to the word, then type how it is spelt.",
-   "speak": "finally",
-   "sentence": "The rain finally stopped.",
+   "speak": "totally",
+   "sentence": "I totally forgot about the test.",
    "answers": [
-    "finally"
+    "totally"
    ],
    "wrong": {
-    "finaly": "dropped_double_at_join"
+    "totaly": "dropped_double_at_join"
    },
    "addresses": [
     "dropped_double_at_join"
@@ -1728,21 +1728,21 @@
   },
   {
    "kind": "code",
-   "id": "spl.dict.beautiful",
+   "id": "spl.dict.powerful",
    "version": 1,
-   "family": "spl.dict.beautiful",
+   "family": "spl.dict.powerful",
    "target": "EN.FND.SPL.morphological",
    "format": "typed:dictation",
-   "b": 4.5,
+   "b": 4.25,
    "a": 1.3,
    "prompt": "Listen to the word, then type how it is spelt.",
-   "speak": "beautiful",
-   "sentence": "What a beautiful sunset.",
+   "speak": "powerful",
+   "sentence": "The storm was very powerful.",
    "answers": [
-    "beautiful"
+    "powerful"
    ],
    "wrong": {
-    "beautifull": "full_suffix"
+    "powerfull": "full_suffix"
    },
    "addresses": [
     "full_suffix"

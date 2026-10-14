@@ -127,6 +127,8 @@ export interface AppContent {
   handWritten: Set<string>;
   /** Generated spelling items (practice until checked). */
   generated: Code[];
+  /** Words OpenPath knows (word bank entries and single-word answer keys): to tell a different word from a misspelling. */
+  words: Set<string>;
   /** The dictation bank: the primary spelling assessment (hear the word, type it). Not part of `handWritten`. */
   dictation: { version: string; status: string; items: DictationItem[] };
   lessons: Map<string, Lesson>;
@@ -170,6 +172,8 @@ export function loadContent(): AppContent {
     misspellings: misspellingsJson as unknown as Record<string, string>,
   };
   const content = indexContent(bundle, index);
+  const words = new Set((wordbankJson as unknown as { entries: { word: string }[] }).entries.map((e) => e.word.toLowerCase()));
+  for (const it of bundle.items) if (it.kind === "code") for (const w of it.answers ?? []) if (/^[a-z]+$/i.test(w)) words.add(w.toLowerCase());
   const lessons = new Map((lessonsJson as unknown as { lessons: Lesson[] }).lessons.map((l) => [l.id, l]));
   const ladders = new Map(Object.entries((progressionsJson as unknown as { capabilities: Record<string, { steps: LadderStep[] }> }).capabilities).map(([k, v]) => [k, v.steps]));
   const feedback = new Map(Object.entries((feedbackJson as unknown as { misconceptions: Record<string, string> }).misconceptions));
@@ -180,6 +184,7 @@ export function loadContent(): AppContent {
     index,
     handWritten: new Set(hand.map((i) => i.id)),
     generated,
+    words,
     dictation,
     lessons,
     ladders,

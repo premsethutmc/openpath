@@ -14,6 +14,7 @@ import { itemVersion, leafView, scoreCode, type CodeItem, type Decision, type It
 import type { AppContent } from "./content.ts";
 import { type AppEvent, type AttemptEvent, type PlanTrace, type SelectionTrace, type TraceEvent, eventProblem } from "./events.ts";
 import { Learner } from "./learner.ts";
+import { type ErrorKind, type MisconceptionFinding, classifyError, misconceptionFindings } from "./misconceptions.ts";
 import { learnerProfile } from "./profile.ts";
 import { placementDone, fold } from "./state.ts";
 import { MemoryRepo } from "./store.ts";
@@ -53,7 +54,7 @@ export interface TimelineQuestion {
   /** What the engine knew and weighed when it chose this question, as recorded then; null when not recorded. */
   selection: SelectionTrace | null;
   selectionStatus: "recorded" | typeof NOT_RECORDED;
-  answer: { correct: boolean; kind: string; text: string; misconceptions: string[]; tries: number } | null;
+  answer: { correct: boolean; kind: string; text: string; misconceptions: string[]; tries: number; errorKind?: ErrorKind } | null;
   /** How the first, unhelped answer moved the Learner Vector (the ledger's own decision). */
   effect: { capability: string | null; verdict: string; reasons: string[]; before: { mean: number; sd: number } | null; after: { mean: number; sd: number } | null; inferred: { capability: string; shift: number }[] } | null;
   /** Difficulty minus the estimate just before the answer (positive: harder than the learner's estimate). */
@@ -89,6 +90,8 @@ export interface Diagnosis {
   learner_vector: Any[];
   evidence: { capability: string; name: string; answers: Any[] }[];
   misconceptions_and_gaps: Any[];
+  /** Each misconception as a hypothesis: suspected (one error), supported (several questions) or resolved. */
+  misconception_findings: MisconceptionFinding[];
   independent_vs_assisted: Record<string, { n: number; right: number }>;
   retention: Any[];
   today: Any[];
@@ -181,6 +184,10 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
     last_event_at: events.at(-1)?.at ?? null,
   };
 
+  /** A wrong typed spelling: what kind of error it looks like (a heuristic; scoring is unchanged). */
+  const errorKindOf = (it: Any, a: AttemptEvent): ErrorKind | undefined =>
+    !a.correct && it?.kind === "code" && String(it.target).startsWith("EN.FND.SPL") && String(it.format).startsWith("typed") && a.response.kind === "typed" && it.answers?.[0] ? classifyError(it.answers[0], a.response.text, a.misconceptions.length > 0, c.words) : undefined;
+
   // ------------------------------------------------------------ evidence per answer
   const answersByCap = new Map<string, Any[]>();
   for (const a of attempts) {
@@ -202,6 +209,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
       key: keyText(it),
       correct: a.correct,
       misconceptions: a.misconceptions,
+      ...(errorKindOf(it, a) ? { error_kind: errorKindOf(it, a) } : {}),
       evidence_kind: classify(a),
       estimate_change: d?.before && d?.after ? { from: r2(d.before.mean), to: r2(d.after.mean), sd_from: r2(d.before.sd), sd_to: r2(d.after.sd) } : null,
     };
@@ -334,7 +342,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
         purpose: e.purpose ?? "unknown",
         selection: tr?.selection ?? null,
         selectionStatus: tr?.selection ? "recorded" : NOT_RECORDED,
-        answer: firstTry ? { correct: firstTry.correct, kind: classify(firstTry), text: short(answerText(it, firstTry.response), 60), misconceptions: firstTry.misconceptions, tries: tries.length } : null,
+        answer: firstTry ? { correct: firstTry.correct, kind: classify(firstTry), text: short(answerText(it, firstTry.response), 60), misconceptions: firstTry.misconceptions, tries: tries.length, ...(errorKindOf(it, firstTry) ? { errorKind: errorKindOf(it, firstTry) } : {}) } : null,
         effect: d ? { capability: d.capability, verdict: d.verdict, reasons: d.reasons, before: d.before ? { mean: r2(d.before.mean), sd: r2(d.before.sd) } : null, after: d.after ? { mean: r2(d.after.mean), sd: r2(d.after.sd) } : null, inferred: (d.inferred ?? []).slice(0, 5).map((x) => ({ capability: x.capability, shift: r2(x.shift) })) } : null,
         difficultyVsEstimate: d?.before && it?.kind === "code" ? r2(it.b - d.before.mean) : null,
         next: null,
@@ -419,6 +427,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
     placement_done: placementDone(s),
     learner_vector: caps.map(({ answers: _a, difficulties: _d, content_left, ...x }) => ({ ...x, content_left })),
     evidence: withEvidence.map((x) => ({ capability: x.id, name: x.name, answers: x.answers })),
+    misconception_findings: misconceptionFindings(s, c),
     misconceptions_and_gaps: caps
       .filter((x) => x.misconceptions.length || x.difficulties.length || x.standing === "found_hard" || x.standing === "not_kept")
       .map((x) => ({ capability: x.id, name: x.name, standing: x.standing, misconceptions: x.misconceptions, difficulties: x.difficulties, notes: x.notes })),
@@ -493,6 +502,7 @@ function fmtSel(t: SelectionTrace | null): string[] {
   if (t.selector === "queue") return [`        why chosen: position ${t.queue?.position} of ${t.queue?.length} in ${t.queue?.reason}`];
   if (t.selector === "planner") return [`        why chosen: the rule planner chose "${t.planner?.action}"${t.planner?.itemRole ? ` (${t.planner.itemRole} item)` : ""}; diagnosis ${t.planner?.diagnosis}: ${short(t.planner?.reason ?? "", 160)}`];
   const L: string[] = [];
+  if (t.spelling) L.push(`        spelling rule: ${t.spelling.rule.replace(/_/g, " ")}${t.spelling.window ? ` (±${t.spelling.window} band)` : ""}: ${t.spelling.reasons.join(" ")}`);
   L.push(`        knew: ${(t.knew ?? []).map((k) => `${k.capability} ${k.mean}±${k.sd} (${k.n} answers, ${k.stage})`).join("; ") || "–"}`);
   if (t.candidates) L.push(`        candidates on the goal: ${t.candidates.eligible} eligible of ${t.candidates.unseen} unseen (kept out: ${t.candidates.excludedReserved} reserved for another use, ${t.candidates.excludedPassage} passage rule, ${t.candidates.excludedSeenWord} word already seen); ${t.candidates.seen} already seen`);
   L.push(`        engine: mode ${t.mode}, path ${t.path}, schedule ${t.schedule}; target band ${t.target?.band} (${t.target?.source})`);
@@ -531,10 +541,11 @@ export function reportText(d: Diagnosis): string {
   for (const x of d.evidence) {
     P(`   ${x.name}:`);
     for (const r of x.answers)
-      P(`     ${r.correct ? "✓" : "✗"} ${r.item} (b ${r.difficulty}${r.difficulty_vs_estimate_before != null ? `, ${r.difficulty_vs_estimate_before >= 0 ? "+" : ""}${r.difficulty_vs_estimate_before}` : ""}, ${r.evidence_kind}${r.pool ? `, ${r.pool}` : ""}) "${short(r.answer, 40)}"${r.correct ? "" : ` key "${short(r.key, 40)}"`}${r.misconceptions.length ? ` [${r.misconceptions.join(", ")}]` : ""}${r.estimate_change ? ` → ${r.estimate_change.from}→${r.estimate_change.to}` : ""}`);
+      P(`     ${r.correct ? "✓" : "✗"}${r.error_kind ? ` [${r.error_kind.replace("_", " ")}]` : ""} ${r.item} (b ${r.difficulty}${r.difficulty_vs_estimate_before != null ? `, ${r.difficulty_vs_estimate_before >= 0 ? "+" : ""}${r.difficulty_vs_estimate_before}` : ""}, ${r.evidence_kind}${r.pool ? `, ${r.pool}` : ""}) "${short(r.answer, 40)}"${r.correct ? "" : ` key "${short(r.key, 40)}"`}${r.misconceptions.length ? ` [${r.misconceptions.join(", ")}]` : ""}${r.estimate_change ? ` → ${r.estimate_change.from}→${r.estimate_change.to}` : ""}`);
   }
   P();
   P(`4. MISCONCEPTIONS AND SKILL GAPS`);
+  for (const f of d.misconception_findings) P(`   ${f.misconception} on ${f.capability}: ${f.status.toUpperCase()} (${f.reason}; errors on ${f.errors.map((e) => e.item).join(", ") || "none counted"}${f.laterRight.length ? `; right since on ${f.laterRight.map((e) => e.item).join(", ")}` : ""})`);
   if (!d.misconceptions_and_gaps.length) P(`   None found yet.`);
   for (const g of d.misconceptions_and_gaps) P(`   ${g.name} (${g.standing}): ${[...g.misconceptions.map((m: Any) => `pattern ${m.id} (strength ${m.strength})`), ...g.difficulties, ...g.notes].join("; ") || "–"}`);
   P();
