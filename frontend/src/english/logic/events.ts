@@ -17,7 +17,8 @@ export type SessionType =
   | "spelling_review" // words due for review (word memory)
   | "spelling_transfer" // unseen words with a practised pattern
   | "guided" // a grammar or vocabulary capability: lesson, then adaptive practice
-  | "explore"; // any capability, through the existing engine (no teaching)
+  | "explore" // any capability, through the existing engine (no teaching)
+  | "doubling_journey"; // the adaptive consonant-doubling journey: diagnose, teach, guided practice, independent reassessment
 
 export interface Planned {
   item: string;
@@ -101,10 +102,14 @@ export interface FlagEvent {
 
 export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | FlagEvent | LedgerEvent;
 
-export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => e.kind === "evidence" || e.kind === "proposal" || e.kind === "qualification" || e.kind === "revoke";
+const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
+/** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
+export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "evidence"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
+const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
 export function eventProblem(e: unknown): string | null {
@@ -113,7 +118,7 @@ export function eventProblem(e: unknown): string | null {
   if (typeof x.kind !== "string" || !KINDS.has(x.kind)) return `unknown event kind ${String(x.kind)}`;
   if (typeof x.id !== "string" || !x.id) return "an event has no id";
   if (typeof x.at !== "string" || Number.isNaN(Date.parse(x.at))) return `event ${x.id} has no valid time`;
-  if ((x.kind === "evidence" || x.kind === "attempt") && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
-  if ((x.kind === "evidence" || x.kind === "attempt" || x.kind === "session" || x.kind === "session_end") && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if (ITEM_KINDS.has(x.kind) && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
+  if (SESSION_KINDS.has(x.kind) && typeof x.session !== "string") return `event ${x.id} names no session`;
   return null;
 }

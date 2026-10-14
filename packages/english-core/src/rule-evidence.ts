@@ -191,6 +191,8 @@ export interface RuleObservation {
   track: Track;
   /** Hints shown before this answer. */
   hints: number;
+  /** Attempt number at this item (1 for a first answer). */
+  attempt: number;
   /** The intervention this answer belongs to or follows, if recorded. */
   intervention?: string;
   /** The word was new to the learner (no earlier evidence on the same word). */
@@ -283,7 +285,7 @@ export function ruleRecord(
       const fresh = newWordOf(r.item);
       touch(r.key, e.at, e.session, true);
       const { correct } = scoreCode(r.item, e.response);
-      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature: subject.classify(r.item, e.response, correct), hints: e.hints.length, ...(e.intervention ? { intervention: e.intervention } : {}) });
+      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature: subject.classify(r.item, e.response, correct), hints: e.hints.length, attempt: e.attempt, ...(e.intervention ? { intervention: e.intervention } : {}) });
       continue;
     }
     if (e.kind !== "evidence") continue;
@@ -324,6 +326,7 @@ export function ruleRecord(
       correct,
       signature: subject.classify(item, ev.response, correct),
       hints: prov?.hints.length ?? 0,
+      attempt: prov?.attempt ?? 1,
       ...(prov?.intervention ? { intervention: prov.intervention } : {}),
     });
   }
@@ -354,7 +357,8 @@ export interface InterventionSummary {
   at: string;
   strategy: string;
   content?: string;
-  during: { right: number; total: number; hints: number };
+  /** Answers during it: all of them are assisted. rightFirstTry: right at the first try with no hint; rightWithHelp: right after a hint or a retry. */
+  during: { right: number; total: number; hints: number; items: number; rightFirstTry: number; rightWithHelp: number };
   /** Independent answers on the rule after it and before the next intervention on the rule. */
   independentAfter: { right: number; total: number; newWordRight: number; newWordTotal: number };
 }
@@ -392,6 +396,8 @@ export interface RuleState {
   succeedsWithHelp: boolean;
   /** Each recorded intervention on this rule: what happened during it, and the next independent answers after it. */
   interventions: InterventionSummary[];
+  /** Time of the latest answer of any kind on this rule (null if none). */
+  lastEvidenceAt: string | null;
   repeats: number;
   slips: number;
   inconsistent: boolean;
@@ -602,7 +608,14 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
       at: iv.at,
       strategy: iv.strategy,
       ...(iv.content ? { content: iv.content } : {}),
-      during: { right: during.filter((o) => o.correct).length, total: during.length, hints: during.reduce((t, o) => t + o.hints, 0) },
+      during: {
+        right: during.filter((o) => o.correct).length,
+        total: during.length,
+        hints: during.reduce((t, o) => t + o.hints, 0),
+        items: new Set(during.map((o) => o.item)).size,
+        rightFirstTry: during.filter((o) => o.correct && o.attempt === 1 && o.hints === 0).length,
+        rightWithHelp: during.filter((o) => o.correct && (o.attempt > 1 || o.hints > 0)).length,
+      },
       independentAfter: { right: after.filter((o) => o.correct).length, total: after.length, newWordRight: nw.filter((o) => o.correct).length, newWordTotal: nw.length },
     };
   });
@@ -634,6 +647,7 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     unknown: { right: f.unknownRight, total: f.unknownTotal },
     succeedsWithHelp,
     interventions: ivSummaries,
+    lastEvidenceAt: obs.at(-1)?.at ?? null,
     repeats: f.repeats,
     slips: f.slips,
     inconsistent: inconsistentNow(f, p),

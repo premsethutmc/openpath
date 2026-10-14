@@ -218,6 +218,3 @@ test("E10 historical assistance status unknown: nothing confirmed, engine number
   assert.equal(JSON.stringify(legacy.composite), JSON.stringify(runProfile("never_doubles").ledger.composite));
 });
 
-test.todo("planner (proposal, not implemented): after a failed teaching block, choose a different strategy and reassess independently");
-test.todo("planner (proposal, not implemented): after the configured number of failed strategies, recommend human support");
-test.todo("planner (proposal, not implemented): schedule a delayed retention check after a rule is demonstrated");

@@ -32,6 +32,7 @@ import retiredGeneratedJson from "../../../../content/english/spelling/retired-g
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
+import journeyJson from "../../../../content/english/web/doubling-journey.json";
 
 export type Code = Extract<Item, { kind: "code" }>;
 
@@ -73,6 +74,28 @@ export type Area = keyof typeof GUIDED;
 export const GUIDED_ALL: string[] = [...GUIDED.spelling, ...GUIDED.grammar, ...GUIDED.vocabulary];
 export const SPELLING = new Set<string>(GUIDED.spelling);
 
+/** One teaching strategy for the doubling journey (provisional content from doubling-journey.json). */
+export interface StrategyContent {
+  id: string;
+  name: string;
+  lesson: { title: string; steps: string[]; examples: { text: string; note?: string }[]; tip?: string };
+  /** Hint templates by level (1 = lightest), with {base}, {last} and {ending}. */
+  hints: string[];
+}
+
+export interface JourneyContent {
+  review: string;
+  capability: string;
+  rule: string;
+  /** Provisional hand-written questions added for the journey (drafts awaiting educator review). */
+  items: Code[];
+  /** Independent questions, in the order they are used (unseen ones only). */
+  assessOrder: string[];
+  /** Generated practice words for guided practice (practice-only). */
+  guided: string[];
+  strategies: StrategyContent[];
+}
+
 export interface AppContent {
   ctx: Context;
   index: FrameworkIndex;
@@ -89,6 +112,8 @@ export interface AppContent {
   guidedGoal: Goal;
   /** Every specified capability, for "more practice". */
   overallGoal: Goal;
+  /** The adaptive consonant-doubling journey (MVP slice). */
+  journey: JourneyContent;
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
@@ -101,8 +126,12 @@ export function loadContent(): AppContent {
   };
   const hand = [...(codeItemsJson as unknown as Item[]), ...(e2aItemsJson as unknown as Item[]), ...(e2bItemsJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target));
   const generated = (generatedJson as unknown as Code[]).filter((i) => ok(i.target));
+  const j = journeyJson as unknown as { review: string; capability: string; rule: string; items: Code[]; independent: { assessOrder: string[] }; guided: string[]; strategies: StrategyContent[] };
+  const journey: JourneyContent = { review: j.review, capability: j.capability, rule: j.rule, items: j.items, assessOrder: j.independent.assessOrder, guided: j.guided, strategies: j.strategies };
   const bundle: ContentBundle = {
-    items: [...hand, ...generated],
+    // the journey's provisional questions are in the bank (so the engine can score them) but not in `handWritten`:
+    // placement, practice and checks never use them, only the doubling journey does
+    items: [...hand, ...generated, ...journey.items],
     retired: [...(retiredJson as unknown as Item[]), ...(retiredGeneratedJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target)),
     passages: passagesJson as unknown as Passage[],
     goals: goalsJson as unknown as Goal[],
@@ -126,6 +155,7 @@ export function loadContent(): AppContent {
     wordSources: (wordbankJson as unknown as { sources: WordSource[] }).sources,
     guidedGoal,
     overallGoal,
+    journey,
   };
 }
 

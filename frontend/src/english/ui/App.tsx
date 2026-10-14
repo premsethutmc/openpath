@@ -7,6 +7,7 @@ import { type CapabilityProgress, bandDescriptor, capabilityProgress } from "../
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { dueWords, patternStatus } from "../logic/state.ts";
+import { Journey, ParentSummary } from "./Journey.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech, speak } from "./speech.ts";
 
@@ -105,6 +106,18 @@ export function App() {
       />
     );
 
+  if (inSession && learner.state.open?.event.type === "doubling_journey")
+    return (
+      <Journey
+        learner={learner}
+        voice={learner.state.speech ? voice : null}
+        onChanged={changed}
+        onLeave={() => {
+          setInSession(false);
+          changed();
+        }}
+      />
+    );
   if (inSession)
     return (
       <Session
@@ -132,6 +145,10 @@ export function App() {
             setInSession(true);
           }}
           onResume={() => setInSession(true)}
+          onJourney={async () => {
+            await learner.startJourney();
+            setInSession(true);
+          }}
         />
       )}
       {tab === "progress" && <Progress learner={learner} />}
@@ -256,7 +273,7 @@ const STATUS_WORDS: Record<string, string> = {
   secure: "secure",
 };
 
-function Today({ learner, onStart, onResume }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void }) {
+function Today({ learner, onStart, onResume, onJourney }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void }) {
   const now = learner.clock();
   const plan = learner.plan();
   const open = learner.state.open;
@@ -296,6 +313,13 @@ function Today({ learner, onStart, onResume }: { learner: Learner; onStart: (s: 
           </li>
         ))}
       </ol>
+      <section className="journey-card" aria-labelledby="journey-card-title">
+        <h2 id="journey-card-title">Doubling letters (new, adaptive)</h2>
+        <p>hop → hopping, stop → stopped. A few questions on your own, then teaching that changes if it is not working, then new words on your own.</p>
+        <button type="button" className="secondary" onClick={onJourney}>
+          {learner.doublingReport().started ? "Go on with doubling letters" : "Try doubling letters"}
+        </button>
+      </section>
       {spelling.length > 0 && (
         <section aria-labelledby="spelling-plan">
           <h2 id="spelling-plan">Your spelling plan</h2>
@@ -346,6 +370,7 @@ function Progress({ learner }: { learner: Learner }) {
       <p className="small">
         Levels are on OpenPath's scale of 1 to 8. They are estimates from your answers, shown with how sure we are. Questions and lessons are draft content that teachers have not reviewed yet.
       </p>
+      {learner.doublingReport().started && <ParentSummary report={learner.doublingReport()} />}
       {groups.map(([name, list]) => (
         <section key={name} aria-label={name}>
           <h2>{name}</h2>

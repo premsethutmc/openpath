@@ -1,0 +1,327 @@
+{
+ "review": "candidate-unvalidated",
+ "note": "MVP vertical slice: one adaptive journey for consonant doubling (EN.FND.SPL.inflections#double_short). Everything here is provisional and awaits educator review: the 8 assessment questions (drafts spl.infl.18-25), the three strategy lessons and the hint wording. The questions are hand-written candidates like the rest of the bank; the guided-practice words are generated items and stay practice-only.",
+ "capability": "EN.FND.SPL.inflections",
+ "rule": "double_short",
+ "items": [
+  {
+   "kind": "code",
+   "id": "spl.infl.18",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 2.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of chop: Dad is ___ the onions.",
+   "answers": [
+    "chopping"
+   ],
+   "wrong": {
+    "choping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "One short vowel, one final consonant: double before -ing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.19",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of stop: The bus ___ outside the school.",
+   "answers": [
+    "stopped"
+   ],
+   "wrong": {
+    "stoped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Doubles before -ed.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.20",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Add -er to big: An elephant is ___ than a horse.",
+   "answers": [
+    "bigger"
+   ],
+   "wrong": {
+    "biger": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Doubles before -er, not only -ing and -ed.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.21",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:correction",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "One word in this sentence is wrong. Type the correct word: \"The dog was diging in the garden.\"",
+   "answers": [
+    "digging"
+   ],
+   "wrong": {
+    "diging": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Proofreading: spot the missing double letter.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.22",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of trim: Grandpa is ___ the hedge.",
+   "answers": [
+    "trimming"
+   ],
+   "wrong": {
+    "triming": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Less familiar word; same rule.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.23",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Add -est to wet: Today was the ___ day of the monsoon.",
+   "answers": [
+    "wettest"
+   ],
+   "wrong": {
+    "wetest": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Less familiar ending (-est); same rule.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.24",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 2.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of jump: The frog is ___ into the pond.",
+   "answers": [
+    "jumping"
+   ],
+   "wrong": {
+    "jumpping": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two final consonants: nothing doubles.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.25",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:correction",
+   "b": 3.25,
+   "a": 1.3,
+   "prompt": "One word in this sentence is wrong. Type the correct word: \"It rainned all afternoon.\"",
+   "answers": [
+    "rained"
+   ],
+   "wrong": {
+    "rainned": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Proofreading: an unwanted double letter (two vowels before n).",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast"
+  }
+ ],
+ "independent": {
+  "assessOrder": [
+   "spl.infl.02",
+   "spl.infl.18",
+   "spl.infl.24",
+   "spl.infl.19",
+   "spl.infl.22",
+   "spl.infl.21",
+   "spl.infl.20",
+   "spl.infl.11",
+   "spl.infl.23",
+   "spl.infl.25"
+  ],
+  "note": "Assessment, reassessment and retention questions are taken in this order, unseen ones only. Reassessment and retention use only items where the rule applies; contrasts (24, 25) are used in assessment."
+ },
+ "guided": [
+  "gen.infl.add_ending.clapping",
+  "gen.infl.add_ending.cutting",
+  "gen.infl.add_ending.dipped",
+  "gen.infl.add_ending.fitting",
+  "gen.infl.add_ending.jogging",
+  "gen.infl.add_ending.mapping",
+  "gen.infl.add_ending.shopping",
+  "gen.infl.add_ending.sitting",
+  "gen.infl.add_ending.skipped",
+  "gen.infl.add_ending.spinning",
+  "gen.infl.add_ending.winning",
+  "gen.infl.add_ending.zipping"
+ ],
+ "strategies": [
+  {
+   "id": "worked_examples",
+   "name": "Rule and worked examples",
+   "lesson": {
+    "title": "Doubling the last letter",
+    "steps": [
+     "Look at the end of the word.",
+     "One vowel, then one consonant? Double the consonant before -ing, -ed, -er or -est.",
+     "Two consonants at the end, or two vowels before the last letter? Just add the ending."
+    ],
+    "examples": [
+     {
+      "text": "stop → stopped",
+      "note": "one vowel (o), one consonant (p): double"
+     },
+     {
+      "text": "swim → swimming",
+      "note": "one vowel (i), one consonant (m): double"
+     },
+     {
+      "text": "jump → jumping",
+      "note": "two consonants (mp): no change"
+     }
+    ],
+    "tip": "hopping comes from hop; hoping comes from hope."
+   },
+   "hints": [
+    "Look at the end of the word: one vowel, then one consonant?",
+    "{base} ends in one vowel and one consonant ({last}). What happens to the {last}?",
+    "Double it: {base} + {last} + {ending}."
+   ]
+  },
+  {
+   "id": "sound_first",
+   "name": "Listen for the short vowel",
+   "lesson": {
+    "title": "Listen to the vowel",
+    "steps": [
+     "Say the word out loud.",
+     "Do you hear a short vowel, as in cat, sit, hop or cup?",
+     "A short vowel before one consonant needs a double letter to stay short: tap → tapping."
+    ],
+    "examples": [
+     {
+      "text": "hop → hopping",
+      "note": "short o: double p"
+     },
+     {
+      "text": "hope → hoping",
+      "note": "long o: no double"
+     },
+     {
+      "text": "tap → tapping, tape → taping",
+      "note": "short a doubles; long a does not"
+     }
+    ],
+    "tip": "The double letter is a guard that keeps the vowel short."
+   },
+   "hints": [
+    "Say {base} out loud. Is the vowel short, as in cat or sit?",
+    "The short vowel needs a guard: the {last} doubles.",
+    "{base} + {last} + {ending}."
+   ]
+  },
+  {
+   "id": "word_building",
+   "name": "Build the word in parts",
+   "lesson": {
+    "title": "Build the word in three parts",
+    "steps": [
+     "Part 1: the root word (hop).",
+     "Part 2: an extra copy of the last letter, only if the root ends in one vowel + one consonant (p).",
+     "Part 3: the ending (-ing). Put them together: hop + p + ing = hopping."
+    ],
+    "examples": [
+     {
+      "text": "chop + p + ing = chopping",
+      "note": "o then p: add a p"
+     },
+     {
+      "text": "rain + ed = rained",
+      "note": "two vowels (ai): nothing extra"
+     },
+     {
+      "text": "jump + ing = jumping",
+      "note": "two consonants (mp): nothing extra"
+     }
+    ],
+    "tip": "Sort first: does it need the extra letter or not?"
+   },
+   "hints": [
+    "Split it: {base} | ? | {ending}. Does {base} end in one vowel and one consonant?",
+    "Yes, so the middle part is another {last}.",
+    "{base} + {last} + {ending}."
+   ]
+  }
+ ]
+}

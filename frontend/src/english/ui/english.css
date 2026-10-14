@@ -712,3 +712,63 @@ details summary {
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------- doubling journey */
+.journey-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-big);
+  padding: 1rem;
+  margin: 0 0 1.25rem;
+}
+.journey-card p {
+  margin: 0 0 0.75rem;
+}
+.journey .kicker {
+  font-weight: 600;
+  color: var(--ink);
+}
+.journey .why-this {
+  color: var(--muted);
+}
+.journey .steps {
+  padding-left: 1.4rem;
+}
+.journey .steps li {
+  margin: 0.35rem 0;
+}
+.hints {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 1rem 0.75rem 2rem;
+  background: var(--desk);
+  border-radius: var(--radius-small);
+}
+.hints li {
+  margin: 0.25rem 0;
+}
+.parent {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-big);
+  background: var(--paper);
+}
+.parent dl {
+  margin: 0;
+}
+.parent dt {
+  font-weight: 700;
+  color: var(--ink-strong);
+  margin-top: 0.75rem;
+}
+.parent dd {
+  margin: 0.15rem 0 0;
+}
+.parent dd ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.2rem;
+}
+.parent .support {
+  color: var(--margin);
+  font-weight: 600;
+}

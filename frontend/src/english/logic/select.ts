@@ -123,7 +123,7 @@ function unseenWords(s: AppState, c: AppContent, cap: string, step: string, spee
 }
 
 function unseenHandWritten(s: AppState, c: AppContent, cap: string, step: string): Code | undefined {
-  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && i.step === step && !s.ledger.exposures.has(i.id)).sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
+  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && c.handWritten.has(i.id) && i.step === step && !s.ledger.exposures.has(i.id)).sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
 }
 
 /** Spelling patterns (capability and ladder step) that have generated words. */

@@ -20,6 +20,7 @@ const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
   ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json"].flatMap((f) => JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8")).map((i) => [i.id, i])),
 );
+for (const i of JSON.parse(readFileSync(new globalThis.URL("web/doubling-journey.json", CONTENT), "utf8")).items) items.set(i.id, i);
 
 let browser;
 before(async () => {
@@ -285,5 +286,91 @@ test("works offline once opened, and without speech the spelling questions use w
   await shot(page, "7-offline");
   await context.setOffline(false);
   assert.deepEqual(errors.filter((e) => !/Failed to load resource|ERR_INTERNET_DISCONNECTED/.test(e)), []);
+  await context.close();
+});
+
+/** Type an answer to the journey question on screen: right, or the form without doubling. */
+async function journeyAnswer(page, right) {
+  const id = await page.locator(".item").getAttribute("data-item");
+  const item = items.get(id);
+  assert.ok(item, `unknown item ${id}`);
+  const wrong = item.generated ? item.generated.base + item.generated.join.replace("-", "") : (Object.entries(item.wrong ?? {}).find(([, t]) => t === "no_doubling")?.[0] ?? item.answers[0]);
+  await page.locator(".ruled input").fill(right ? item.answers[0] : wrong);
+  await page.getByRole("button", { name: "Check", exact: true }).click();
+  await page.locator(".feedback").waitFor();
+  return id;
+}
+
+test("the doubling journey on a phone: check, diagnosis, a lesson, help that is marked as help, a new approach, independent words, summary", async () => {
+  const { context, page, errors, foreign } = await phone();
+  await createProfile(page, "Ravi");
+  await page.getByRole("button", { name: "Try doubling letters" }).click();
+  // two independent questions, both wrong (never doubles)
+  for (let k = 0; k < 2; k++) {
+    await page.locator('[data-step="question"][data-purpose="assessment"]').waitFor();
+    if (k === 0) await shot(page, "j1-check");
+    await journeyAnswer(page, false);
+    await next(page);
+  }
+  // first teaching approach
+  await page.locator('[data-step="teach"][data-strategy="worked_examples"]').waitFor();
+  await shot(page, "j2-lesson");
+  await fits(page);
+  await tappable(page);
+  await page.getByRole("button", { name: "Practise with help" }).click();
+  // guided practice: wrong, then a hint, then right with help
+  for (let k = 0; k < 4; k++) {
+    await page.locator('[data-step="guided"]').waitFor();
+    await journeyAnswer(page, false);
+    await page.getByRole("button", { name: "Show a hint" }).click();
+    await page.locator(".hints li").first().waitFor();
+    if (k === 0) await shot(page, "j3-hint");
+    await journeyAnswer(page, true);
+    await page.getByText("Right, with help.").waitFor();
+    await next(page);
+  }
+  // reassessment on new words: still wrong
+  for (let k = 0; k < 2; k++) {
+    await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
+    await journeyAnswer(page, false);
+    await next(page);
+  }
+  // a different approach
+  await page.locator('[data-step="teach"][data-strategy="sound_first"]').waitFor();
+  await page.getByText("Let's try a different way").waitFor();
+  await shot(page, "j4-new-approach");
+  await page.getByRole("button", { name: "Practise with help" }).click();
+  for (let k = 0; k < 4; k++) {
+    await page.locator('[data-step="guided"]').waitFor();
+    await journeyAnswer(page, true);
+    await next(page);
+  }
+  for (let k = 0; k < 2; k++) {
+    await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
+    if (k === 0) await shot(page, "j5-new-word");
+    await journeyAnswer(page, true);
+    await next(page);
+  }
+  // summary: progress, not mastery; parent view
+  await page.locator('[data-step="summary"][data-outcome="improved_after_teaching"]').waitFor();
+  const text = await page.locator(".parent").innerText();
+  await shot(page, "j6-summary");
+  await fits(page);
+  assert.match(text, /not yet mastery/);
+  assert.match(text, /After "Rule and worked examples": 0 of 2 new words right without help/);
+  assert.match(text, /After "Listen for the short vowel": 2 of 2 new words right without help/);
+  assert.match(text, /Yes: 2 approaches tried/);
+  assert.match(text, /4 right after a hint or second try/);
+  assert.match(text, /provisional/);
+  assert.doesNotMatch(text, /%|probability|mastered/i);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Progress" }).click();
+  await page.locator(".parent").waitFor();
+  // after a reload, the same summary (rebuilt from the stored events)
+  await page.reload();
+  await page.getByRole("button", { name: "Progress" }).click();
+  assert.equal(await page.locator(".parent").innerText(), text);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
   await context.close();
 });

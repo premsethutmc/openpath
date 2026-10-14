@@ -63,3 +63,12 @@ export const englishInflections: SubjectRules = {
     return { kind: "unclassified", form: key };
   },
 };
+
+/**
+ * Teaching strategies per rule, in the order the planner tries them (MVP: doubling only). The ids are the
+ * English module's; the lesson text for each lives in content/english/web/doubling-journey.json and is
+ * provisional (not yet reviewed by an educator). No strategy is assumed to work for every learner.
+ */
+export const INFLECTION_STRATEGIES: Record<string, string[]> = {
+  double_short: ["worked_examples", "sound_first", "word_building"],
+};

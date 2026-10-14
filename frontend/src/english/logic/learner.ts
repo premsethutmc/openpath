@@ -3,9 +3,10 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import type { EvidenceEvent, Item, Response } from "../../../../packages/english-core/src/index.ts";
+import type { EvidenceEvent, HintEvent, Item, PresentedPurpose, Response } from "../../../../packages/english-core/src/index.ts";
+import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
-import { type AppContent, type Lesson, lessonId } from "./content.ts";
+import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
 import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type SessionType } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
@@ -131,7 +132,8 @@ export class Learner {
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
       return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total };
     }
-    return { session, lesson, next, done: session.answered.length, total };
+    if (next) await this.present(next.item, next.use);
+    return { session: this.state.open ?? session, lesson, next, done: session.answered.length, total };
   }
 
   private nextQuestion(session: SessionState): Next | null {
@@ -156,32 +158,86 @@ export class Learner {
     }
   }
 
+  /** A lesson read before practice: recorded for the app, and as a teaching intervention for the engine. */
   async finishLesson(lesson: string, checkCorrect: boolean): Promise<void> {
-    await this.add({ kind: "lesson", id: this.nextId(), at: this.clock(), lesson, checkCorrect });
+    const at = this.clock();
+    await this.add({ kind: "lesson", id: this.nextId(), at, lesson, checkCorrect });
+    const l = this.content.lessons.get(lesson);
+    const session = this.state.open?.event.session;
+    if (l && session) await this.add({ kind: "intervention", id: this.nextId(), at, session, capability: l.capability, rule: l.step, strategy: "lesson", content: lesson });
+  }
+
+  // ------------------------------------------------------------------ provenance
+
+  /** Record that a question was shown (once per item and session); returns the event id. */
+  async present(item: Item, purpose: PresentedPurpose, intervention?: string): Promise<string> {
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    const prior = this.events.find((e) => e.kind === "presented" && e.session === session.event.session && e.item.id === item.id);
+    if (prior) return prior.id;
+    const id = this.nextId();
+    await this.add({ kind: "presented", id, at: this.clock(), session: session.event.session, item: { id: item.id, version: item.version }, purpose, ...(intervention ? { intervention } : {}) });
+    return id;
+  }
+
+  private presentedId(session: string, item: string): string | undefined {
+    return this.events.find((e) => e.kind === "presented" && e.session === session && e.item.id === item)?.id;
+  }
+
+  private hintsFor(session: string, item: string): HintEvent[] {
+    return this.events.filter((e): e is HintEvent => e.kind === "hint" && e.session === session && e.item.id === item);
   }
 
   /**
    * Answer the current question. The first, unaided answer to an item in a session is evidence for the
    * engine; any later try (after feedback, or with a hint) is assisted practice and is recorded only as such.
    */
-  async answer(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"] }): Promise<Feedback> {
+  async answer(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    const sid = session.event.session;
     const fb = feedbackFor(this.content, item, response);
     const prior = session.attempts.filter((a) => a.item.id === item.id);
-    const first = !prior.some((a) => !a.assisted) && !opts.assisted;
+    const hints = this.hintsFor(sid, item.id).map((h) => h.id);
+    // independent only if: no earlier try at this item in the session, no hint, not marked as helped
+    const first = !prior.length && !opts.assisted && !hints.length;
     const at = this.clock();
+    const presented = this.presentedId(sid, item.id);
     let evidence: string | undefined;
     if (first) {
       evidence = `${this.profileId}:e${this.events.length + 1}`;
-      const ev: EvidenceEvent = { kind: "evidence", id: evidence, at, session: session.event.session, item: { id: item.id, version: item.version }, response, use: opts.use };
+      const ev: EvidenceEvent = {
+        kind: "evidence",
+        id: evidence,
+        at,
+        session: sid,
+        item: { id: item.id, version: item.version },
+        response,
+        use: opts.use,
+        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}) },
+      };
       await this.add(ev);
+    } else {
+      // a later or helped try: recorded in the ledger as assisted, never as evidence
+      await this.add({
+        kind: "assisted_response",
+        id: `${this.profileId}:a${this.events.length + 1}`,
+        at,
+        session: sid,
+        item: { id: item.id, version: item.version },
+        ...(presented ? { presented } : {}),
+        response,
+        attempt: prior.length + 1,
+        hints,
+        afterFeedback: prior.length > 0,
+        ...(opts.intervention ? { intervention: opts.intervention } : {}),
+      });
     }
     const attempt: AttemptEvent = {
       kind: "attempt",
       id: this.nextId(),
       at,
-      session: session.event.session,
+      session: sid,
       item: { id: item.id, version: item.version },
       response,
       correct: fb.correct,
@@ -193,6 +249,62 @@ export class Learner {
     };
     await this.add(attempt);
     return fb;
+  }
+
+  // ------------------------------------------------------------------ the doubling journey
+
+  /** Start the adaptive consonant-doubling journey (an unfinished session is ended as stopped first). */
+  async startJourney(): Promise<JourneyView> {
+    if (this.state.open) await this.stop();
+    await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
+    return this.journey();
+  }
+
+  /** Where the open journey is. Records the question as presented when the step is a question. */
+  async journey(): Promise<JourneyView> {
+    const session = this.state.open;
+    if (!session || session.event.type !== "doubling_journey") throw new Error("no journey is open");
+    const v = journeyView(this.state, this.content, session, this.clock());
+    if (v.step.kind === "question") await this.present(v.step.item, v.step.purpose === "reassess" ? "assessment" : v.step.purpose);
+    if (v.step.kind === "guided") await this.present(v.step.item, "teaching", v.step.intervention);
+    return journeyView(this.state, this.content, this.state.open!, this.clock());
+  }
+
+  /** Answer an independent journey question (no hints exist for these). */
+  async answerJourney(item: Item, response: Response, purpose: "assessment" | "reassess" | "retention"): Promise<Feedback> {
+    const block = this.events.filter((e) => e.kind === "intervention" && e.session === this.state.open?.event.session).at(-1)?.id;
+    return this.answer(item, response, { use: purpose === "retention" ? "retention" : "assessment", ...(purpose === "reassess" && block ? { intervention: block } : {}) });
+  }
+
+  /** The teaching step was shown: recorded as an intervention with its strategy. */
+  async teach(strategy: StrategyContent, reason: string): Promise<void> {
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    await this.add({ kind: "intervention", id: this.nextId(), at: this.clock(), session: session.event.session, capability: this.content.journey.capability, rule: this.content.journey.rule, strategy: strategy.id, content: `doubling-journey:${strategy.id}`, reason });
+  }
+
+  /** Show the next hint level for a guided item; returns its text. */
+  async hint(item: Code, strategy: StrategyContent): Promise<string> {
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    const level = this.hintsFor(session.event.session, item.id).length + 1;
+    await this.add({ kind: "hint", id: this.nextId(), at: this.clock(), session: session.event.session, item: { id: item.id, version: item.version }, ...(this.presentedId(session.event.session, item.id) ? { presented: this.presentedId(session.event.session, item.id)! } : {}), level, hintType: `${strategy.id}:${level}` });
+    return hintText(strategy, item, level);
+  }
+
+  /** A guided-practice answer: always assisted (it is part of teaching), never evidence. */
+  async answerGuided(item: Item, response: Response, intervention: string): Promise<Feedback> {
+    return this.answer(item, response, { assisted: true, use: "practice", intervention });
+  }
+
+  async finishJourney(): Promise<void> {
+    const open = this.state.open;
+    if (open && open.event.type === "doubling_journey") await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "finished" });
+  }
+
+  /** The parent-facing summary of the doubling journey so far. */
+  doublingReport(): ParentReport {
+    return parentReport(this.state, this.content, this.clock());
   }
 
   async stop(): Promise<void> {
@@ -226,6 +338,7 @@ export class Learner {
       spelling_transfer: "Check with new words",
       guided: "Practice",
       explore: "More practice",
+      doubling_journey: "Doubling letters",
     }[type];
   }
 }
