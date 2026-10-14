@@ -18,7 +18,8 @@ export type SessionType =
   | "spelling_transfer" // unseen words with a practised pattern
   | "guided" // a grammar or vocabulary capability: lesson, then adaptive practice
   | "explore" // any capability, through the existing engine (no teaching)
-  | "doubling_journey"; // the adaptive consonant-doubling journey: diagnose, teach, guided practice, independent reassessment
+  | "doubling_journey" // the adaptive consonant-doubling journey: diagnose, teach, guided practice, independent reassessment
+  | "check"; // a few independent questions on one capability, chosen by the development plan (assess, reassess or a later check)
 
 export interface Planned {
   item: string;
@@ -48,6 +49,8 @@ export interface SessionEvent {
   capability?: string;
   step?: string;
   lesson?: string;
+  /** For a check: why it was asked (a first look or another look: "assess"; a later check: "retention"). */
+  purpose?: "assess" | "retention";
 }
 
 export interface SessionEndEvent {

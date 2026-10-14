@@ -21,6 +21,8 @@ export interface PlanStep {
   step?: string;
   lesson?: string;
   count?: number;
+  /** For a check session: assess (first or another look) or retention (a later check). */
+  purpose?: "assess" | "retention";
   /** The engine's own explanation, for a guardian who wants the detail. */
   detail?: string;
 }

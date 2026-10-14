@@ -10,8 +10,9 @@ import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId
 import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type SessionType } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
+import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
-import { type Next, EXPLORE_LENGTH, GUIDED_LENGTH, exploreNext, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
+import { type Next, EXPLORE_LENGTH, GUIDED_LENGTH, checkNext, exploreNext, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
 
 export type Clock = () => string;
@@ -82,7 +83,21 @@ export class Learner {
   }
 
   /** Start a session for a plan step (or "explore"). An unfinished session is ended as stopped first. */
-  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson">): Promise<Current> {
+  /** The unified learner profile and development plan, rebuilt from the record. */
+  profile(): LearnerProfile {
+    return learnerProfile(this.state, this.content, this.clock(), this.speech);
+  }
+
+  /** The parent overview: the profile now, compared with the record before the last activity and with the first measurements. */
+  overview(): { profile: LearnerProfile; overview: ParentOverview } {
+    const now = this.clock();
+    const profile = learnerProfile(this.state, this.content, now, this.speech);
+    const before = beforeLastActivity(this.events);
+    const previous = before ? learnerProfile(fold(this.content, before), this.content, before.at(-1)!.at, this.speech, { activities: false }) : null;
+    return { profile, overview: parentOverview(profile, previous, firstStandings(this.content, this.events)) };
+  }
+
+  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">): Promise<Current> {
     if (this.state.open) await this.stop();
     const now = this.clock();
     const s = this.state;
@@ -96,6 +111,9 @@ export class Learner {
         break;
       case "explore":
         extra = { length: EXPLORE_LENGTH };
+        break;
+      case "check":
+        extra = { length: CHECK_LENGTH, capability: step.capability, purpose: step.purpose ?? "assess" };
         break;
       case "guided": {
         const lesson = step.lesson ?? guidedLesson(s, c, step.capability!, now);
@@ -156,6 +174,8 @@ export class Learner {
         return guidedNext(s, this.content, session, now);
       case "explore":
         return exploreNext(s, this.content, session, now);
+      case "check":
+        return checkNext(s, this.content, session, now);
       default:
         return null;
     }
@@ -387,6 +407,7 @@ export class Learner {
       guided: "Practice",
       explore: "More practice",
       doubling_journey: "Doubling letters",
+      check: "A few questions",
     }[type];
   }
 }

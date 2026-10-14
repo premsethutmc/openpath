@@ -83,6 +83,21 @@ export function guidedNext(s: AppState, c: AppContent, session: SessionState, no
   return nextFrom(recommend(input(s, c, focusGoal(session.event.capability!), now, "hybrid")), c);
 }
 
+/**
+ * A check on one capability (from the development plan): the engine's own selection, focused on that capability,
+ * hand-written items only. "assess" uses assessment mode; "retention" uses the hybrid scheduler, which puts an
+ * overdue retention check first. No teaching; every first answer is independent evidence as usual.
+ */
+export function checkNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
+  if (session.answered.length >= (session.event.length ?? 4)) return null;
+  const cap = session.event.capability;
+  if (!cap) return null;
+  const retention = session.event.purpose === "retention";
+  const next = nextFrom(recommend(input(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment")), c);
+  if (!next || next.item.kind !== "code" || next.item.target !== cap) return null; // only this capability
+  return retention ? next : { ...next, use: "assessment" };
+}
+
 /** More practice: the engine's hybrid scheduler on every specified capability (no teaching). */
 export function exploreNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? EXPLORE_LENGTH)) return null;
