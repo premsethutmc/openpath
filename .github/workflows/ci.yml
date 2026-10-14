@@ -215,6 +215,15 @@ jobs:
         run: |
           npm run english:e2e-developer 2>&1 | tee english-developer-e2e.log
           ../.github/scripts/require-tests.sh english-developer-e2e.log "Developer diagnostics end-to-end"
+      - name: Spelling check by dictation in a phone-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4175
+          E2E_SHOTS: e2e/shots/spelling
+          E2E_CLAIM_CMD: cd ../backend && python manage.py developer issue-claim
+        run: |
+          npm run english:e2e-spelling 2>&1 | tee english-spelling-e2e.log
+          ../.github/scripts/require-tests.sh english-spelling-e2e.log "Spelling check end-to-end"
       - name: Show server logs
         if: failure()
         run: tail -n 60 api.log web.log english-web.log english-api-web.log
