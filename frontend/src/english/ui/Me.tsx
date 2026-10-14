@@ -2,7 +2,7 @@
  * Me: the learner's own choices (who is learning, goal), hearing words, keeping the record safe, switching or
  * removing the learner, and the parent account. The privacy note says exactly where this record is kept.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { parseBackup } from "../logic/backup.ts";
 import type { Learner } from "../logic/learner.ts";
 import type { Repo } from "../logic/store.ts";
@@ -20,6 +20,7 @@ export function Me({
   onRemoved,
   onSignOut,
   onDeleteAccount,
+  diagnostics,
 }: {
   learner: Learner;
   repo: Repo;
@@ -31,6 +32,8 @@ export function Me({
   onRemoved: () => void;
   onSignOut: () => Promise<void>;
   onDeleteAccount: (password: string) => Promise<void>;
+  /** Account mode: whether this learner's record is shared for developer diagnostics, and whether this parent is a developer. */
+  diagnostics?: { shared: () => Promise<boolean>; share: (on: boolean) => Promise<boolean>; developer: boolean };
 }) {
   const [msg, setMsg] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
@@ -146,6 +149,7 @@ export function Me({
           {onServer ? "Delete this learner and their record" : "Delete this learner from this device"}
         </button>
       </section>
+      {onServer && diagnostics && <DiagnosticsSection name={name} diagnostics={diagnostics} />}
       {onServer && <AccountSection email={account} onSignOut={onSignOut} onDelete={onDeleteAccount} />}
       <section aria-labelledby="about-title">
         <h2 id="about-title">About this version</h2>
@@ -210,6 +214,51 @@ function Choose({ band, goal, onSave, onCancel }: { band: (typeof BANDS)[number]
         Cancel
       </button>
     </div>
+  );
+}
+
+function DiagnosticsSection({ name, diagnostics }: { name: string; diagnostics: NonNullable<Parameters<typeof Me>[0]["diagnostics"]> }) {
+  const [shared, setShared] = useState<boolean | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
+  useEffect(() => {
+    diagnostics.shared().then(setShared, () => setShared(null));
+  }, [diagnostics]);
+  return (
+    <section aria-labelledby="diag-title" className="stack">
+      <h2 id="diag-title">Help improve OpenPath</h2>
+      <p className="small">
+        Off unless you turn it on. When on, OpenPath's developers can read {name}'s answers and progress (read-only, and every look is logged) to check that the app is choosing and judging questions properly. Your email is never shown to them. Turn it off at any time.
+      </p>
+      <label className="dev-check">
+        <input
+          type="checkbox"
+          checked={!!shared}
+          disabled={shared === null}
+          onChange={async (e) => {
+            const on = e.target.checked;
+            setProblem(null);
+            setShared(on); // shown at once; put back if the server refuses
+            try {
+              setShared(await diagnostics.share(on));
+            } catch (err) {
+              setShared(!on);
+              setProblem((err as Error).message);
+            }
+          }}
+        />
+        Share {name}'s record for diagnostics
+      </label>
+      {problem && (
+        <p className="warning" role="alert">
+          {problem}
+        </p>
+      )}
+      {diagnostics.developer && (
+        <a className="link" href="/developer">
+          Open developer diagnostics
+        </a>
+      )}
+    </section>
   );
 }
 

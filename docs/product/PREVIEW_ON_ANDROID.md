@@ -1,4 +1,4 @@
-# Try OpenPath on your Android phone (private preview of PR #26)
+# Try OpenPath on your Android phone (private preview)
 
 This runs the real application in a GitHub Codespace that belongs to you:
 - the React English app;
@@ -12,8 +12,8 @@ test names and email addresses only; this is not for real children.
 
 On a computer, or in your phone's browser with "Desktop site" turned on:
 
-1. Open **https://codespaces.new/premsethutmc/openpath?ref=product/ux-integration-v1**
-   - Or: the repository page → **Code** → **Codespaces** → choose branch `product/ux-integration-v1` → **Create
+1. Open **https://codespaces.new/premsethutmc/openpath?ref=product/developer-diagnostics**
+   - Or: the repository page → **Code** → **Codespaces** → choose branch `product/developer-diagnostics` (or `product/ux-integration-v1` for PR #26 without diagnostics) → **Create
      codespace**.
 2. Keep the default machine (2 cores) and press **Create codespace**.
 3. Wait while it builds. It does three things:
@@ -27,6 +27,9 @@ On a computer, or in your phone's browser with "Desktop site" turned on:
    ```
    The same address is in the **PORTS** tab, on the row labelled **OpenPath (app + API)**, port 4175. Its visibility
    must say **Private**. Leave it private.
+
+   The log then prints a one-time **developer code** for the diagnostics at `…/developer` (see
+   [DEVELOPER_DIAGNOSTICS.md](DEVELOPER_DIAGNOSTICS.md)).
 
 **Copy that address: it is your preview URL.** It is unique to your codespace; nobody else's address works for you.
 
@@ -53,7 +56,17 @@ safe to run again, and it prints the address. The logs are in `/tmp/openpath/api
 6. **Me → Switch learner** to add Meera or go back to Arun. **Me → Sign out**, then sign in again: everything is still
    there, on any device where you sign in.
 
-## 4. Things to know
+## 4. Developer diagnostics
+
+Open `…/developer` (your preview address plus `/developer`), sign in, and enter the one-time code from the log.
+Choose **Pupils → Arun** to see what the engine knows and why, and **Generate Diagnostic Report → Copy Report** to
+paste it into ChatGPT or Claude. Details: [DEVELOPER_DIAGNOSTICS.md](DEVELOPER_DIAGNOSTICS.md).
+
+If your codespace was created for PR #26, open a terminal in it and run `git fetch && git checkout
+product/developer-diagnostics && bash .devcontainer/start-preview.sh`, or create a new codespace on this branch.
+The script rebuilds the app when the commit changes, migrates the database, and prints a code.
+
+## 5. Things to know
 
 **Stopping and costs:**
 - The codespace stops by itself after 30 minutes without use. Restart it from github.com/codespaces, and the app

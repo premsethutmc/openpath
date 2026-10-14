@@ -93,6 +93,22 @@ export function App() {
   const [tick, setTick] = useState(0);
   const changed = useCallback(() => setTick((t) => t + 1), []);
   const [reset] = useState(resetLink);
+  const [developer, setDeveloper] = useState(false);
+  useEffect(() => {
+    if (mode !== "account") return setDeveloper(false);
+    api.developerStatus().then((d) => setDeveloper(d.developer), () => setDeveloper(false));
+  }, [mode, email, api]);
+  const diagnostics = useMemo(
+    () =>
+      learner && mode === "account"
+        ? {
+            developer,
+            shared: async () => !!(await api.pupils()).find((p) => p.id === learner.profileId)?.shared_for_diagnostics,
+            share: async (on: boolean) => !!(await api.shareForDiagnostics(learner.profileId, on)).shared_for_diagnostics,
+          }
+        : undefined,
+    [learner, mode, developer, api],
+  );
 
   const openLearner = async (r: Repo, id: string) => {
     setProblem(null);
@@ -380,6 +396,7 @@ export function App() {
           onOpen={(id) => openLearner(repo, id)}
           onRemoved={toPicker}
           onSignOut={signOut}
+          diagnostics={diagnostics}
           onDeleteAccount={async (password) => {
             await api.deleteAccount(password);
             setSender(null);

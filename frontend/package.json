@@ -16,7 +16,8 @@
     "english:e2e": "node --test e2e/english.test.mjs",
     "english:demo-journeys": "node scripts/demo-journeys.mjs",
     "english:demo-profiles": "node --import tsx scripts/demo-profiles.mts",
-    "english:e2e-accounts": "node --test e2e/accounts.test.mjs"
+    "english:e2e-accounts": "node --test e2e/accounts.test.mjs",
+    "english:e2e-developer": "node --test e2e/developer.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

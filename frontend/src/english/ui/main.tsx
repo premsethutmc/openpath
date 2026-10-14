@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
+import { Developer } from "./Developer.tsx";
 import { installBrowserHooks, record } from "../logic/telemetry.ts";
 import "./english.css";
 
@@ -31,13 +32,12 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
   }
 }
 
+installBrowserHooks();
 const root = document.getElementById("root")!;
 root.dataset.started = "1";
-createRoot(root).render(
-  <CrashScreen>
-    <App />
-  </CrashScreen>,
-);
+// the developer diagnostics live at /developer (the server decides who may use them)
+const developer = location.pathname === "/developer" || location.pathname.startsWith("/developer/");
+createRoot(root).render(<CrashScreen>{developer ? <Developer /> : <App />}</CrashScreen>);
 
 // Offline use: a service worker keeps the app's own files (never any learner data, which stays in IndexedDB).
 if ("serviceWorker" in navigator && location.protocol !== "file:" && !location.search.includes("no-sw")) {

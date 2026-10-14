@@ -1272,3 +1272,268 @@ h3.strand {
 .field .field-error {
   margin: 0.35rem 0 0;
 }
+
+/* ---------------------------------------------------------------- /developer: diagnostics (founder only) */
+.dev {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  font-size: 15px;
+}
+.dev-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 14px 0;
+}
+.dev-brand {
+  font-weight: 800;
+  color: var(--brand);
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+.dev-badge {
+  font-size: 0.8rem;
+  background: var(--peach);
+  color: var(--peach-text);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+}
+.dev-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg);
+}
+.dev-nav button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.dev-nav button[aria-current="page"] {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+}
+.dev-main {
+  padding-top: 8px;
+}
+.dev-main h1 {
+  font-size: 1.4rem;
+  margin: 4px 0;
+}
+.dev-main h3 {
+  font-size: 1rem;
+  margin: 12px 0 4px;
+}
+.dev-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.dev-small {
+  width: auto;
+  padding: 6px 14px;
+}
+.dev-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+.dev-card p {
+  margin: 6px 0;
+}
+.dev-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+.dev-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dev-stat b {
+  font-size: 1.25rem;
+}
+.dev-stat.warn b {
+  color: var(--wrong);
+}
+.dev-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 4px 0;
+}
+.dev-section > summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dev-count {
+  margin-left: auto;
+  font-size: 0.8rem;
+  background: var(--lilac);
+  color: var(--violet-text);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.dev-body {
+  padding: 0 14px 14px;
+}
+.dev-table {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 6px 0;
+}
+.dev-table table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.dev-table th,
+.dev-table td {
+  text-align: left;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.dev-table th {
+  white-space: nowrap;
+  color: var(--muted);
+}
+.dev-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.dev-list button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.dev-issues {
+  padding-left: 18px;
+}
+.dev-issues li {
+  margin: 4px 0;
+}
+.dev-issues .sev-high b,
+.dev-issues .sev-medium b {
+  color: var(--wrong);
+}
+.dev-timeline,
+.dev-events {
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+.dev-timeline li,
+.dev-events li {
+  margin: 4px 0;
+}
+.dev-session {
+  margin-top: 12px !important;
+  list-style: square;
+}
+.dev-missing {
+  color: var(--peach-text);
+}
+.dev-trace p {
+  margin: 4px 0;
+}
+.dev-events pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.75rem;
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 8px;
+}
+.dev-report textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: 0.75rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--ink);
+  padding: 8px;
+}
+.dev-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dev-row button {
+  flex: 1 1 140px;
+}
+.dev-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dev-foot {
+  margin-top: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+.dev input:not([type="checkbox"]) {
+  width: 100%;
+  box-sizing: border-box;
+}
+/* grid and flex children may shrink below their content, so wide tables scroll inside their box on a phone */
+.dev .stack > *,
+.dev-main > *,
+.dev-section,
+.dev-body,
+.dev-card {
+  min-width: 0;
+  max-width: 100%;
+}
+.dev-body,
+.dev-card {
+  overflow-wrap: anywhere;
+}
+.dev-table td,
+.dev-table th {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.dev-table td:first-child {
+  min-width: 9em;
+}

@@ -388,7 +388,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
   for (const n of nextQuestions) {
     const f = n.first;
     if (f?.difficulty_vs_estimate != null && Math.abs(f.difficulty_vs_estimate) > 2.5)
-      flag("medium", "targeting", `${n.activity}: the next question (${f.item}, difficulty ${f.difficulty}) is ${Math.abs(f.difficulty_vs_estimate)} levels ${f.difficulty_vs_estimate > 0 ? "above" : "below"} the estimate for ${f.capability}${n.selection?.bankGaps?.length ? `; the engine reports a bank gap: ${n.selection.bankGaps[0].note}` : ""}`);
+      flag("medium", "targeting", `${n.activity}: the next question (${f.item}, difficulty ${f.difficulty}) is ${Math.abs(f.difficulty_vs_estimate)} levels ${f.difficulty_vs_estimate > 0 ? "above" : "below"} the estimate for ${f.capability}${n.selection?.selector === "queue" ? " (chosen by the fixed spelling list, not the engine's ranking)" : ""}${n.selection?.bankGaps?.length ? `; the engine reports a bank gap: ${n.selection.bankGaps[0].note}` : ""}`);
     if (n.error) flag("high", "next question", `${n.activity}: starting it on a copy failed: ${n.error}`);
   }
   for (const q of qs) if (q.difficultyVsEstimate != null && Math.abs(q.difficultyVsEstimate) > 3) flag("low", "targeting (past)", `${q.item} on ${q.capability} was ${q.difficultyVsEstimate > 0 ? "+" : ""}${q.difficultyVsEstimate} levels from the estimate when asked (${q.at.slice(0, 16)})`);
@@ -568,4 +568,36 @@ export function reportText(d: Diagnosis): string {
   P();
   P(`The JSON version of this report has every field above in full.`);
   return L.join("\n");
+}
+
+// ------------------------------------------------------------------ question-bank coverage (content only; no pupil data)
+
+export interface CoverageRow {
+  capability: string;
+  name: string;
+  /** Hand-written questions the engine may choose, by difficulty band 1–8 (floor of b). */
+  bands: number[];
+  handWritten: number;
+  generated: number;
+  pools: Record<string, number>;
+  validated: number;
+  lesson: boolean;
+}
+
+export function bankCoverage(c: AppContent): CoverageRow[] {
+  const rows = new Map<string, CoverageRow>();
+  for (const id of c.index.leafIds) rows.set(id, { capability: id, name: c.index.names.get(id) ?? id, bands: [0, 0, 0, 0, 0, 0, 0, 0], handWritten: 0, generated: 0, pools: {}, validated: 0, lesson: [...c.lessons.keys()].some((k) => k.startsWith(`${id}#`)) });
+  for (const it of c.ctx.content.items.values()) {
+    if (it.kind !== "code") continue;
+    const row = rows.get(it.target);
+    if (!row) continue;
+    if (c.handWritten.has(it.id)) {
+      row.handWritten++;
+      row.bands[Math.min(7, Math.max(0, Math.floor(it.b) - 1))]++;
+      const p = c.pilot.pools.get(it.id)?.pool;
+      if (p) row.pools[p] = (row.pools[p] ?? 0) + 1;
+      if (it.evidence_status === "validated") row.validated++;
+    } else if (it.generated) row.generated++;
+  }
+  return [...rows.values()];
 }

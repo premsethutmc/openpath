@@ -5,4 +5,4 @@ cd "$(dirname "$0")/.."
 python3 -m pip install --user --quiet -r backend/requirements.txt
 cd frontend
 npm ci
-npm run english:build
+npm run english:build && git rev-parse --short HEAD > dist-english/BUILD
