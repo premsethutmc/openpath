@@ -233,7 +233,9 @@ export function ParentSummary({ report }: { report: ParentReport }) {
         <dt>Where things stand</dt>
         <dd>{report.status}</dd>
         <dt>Difficulty seen</dt>
-        <dd>{report.difficulty.length ? <ul>{report.difficulty.map((d, i) => <li key={i}>{d}</li>)}</ul> : "None on these questions."}</dd>
+        <dd>
+          <Difficulty lines={report.difficulty} />
+        </dd>
         <dt>Help received</dt>
         <dd>
           {a.strategies.length
@@ -261,3 +263,29 @@ export function ParentSummary({ report }: { report: ParentReport }) {
   );
 }
 
+
+/** Difficulty lines: what was seen without help first, then help-only attempts folded into one line (all listed on request). */
+function Difficulty({ lines }: { lines: ParentReport["difficulty"] }) {
+  if (!lines.length) return <>None on these questions.</>;
+  const own = lines.filter((d) => d.kind !== "assisted");
+  const helped = lines.filter((d) => d.kind === "assisted");
+  const shown = own.slice(0, 4);
+  const item = (d: ParentReport["difficulty"][number], i: number) => (
+    <li key={i} data-kind={d.kind} data-evidence={d.evidence.join(" ")}>
+      {d.text}
+    </li>
+  );
+  return (
+    <>
+      <ul>{shown.map(item)}</ul>
+      {(own.length > shown.length || helped.length > 0) && (
+        <details>
+          <summary>
+            {[own.length > shown.length ? `${own.length - shown.length} more answer${own.length - shown.length > 1 ? "s" : ""} on their own` : "", helped.length ? `${helped.length} word${helped.length > 1 ? "s" : ""} practised with help` : ""].filter(Boolean).join("; ")}
+          </summary>
+          <ul>{[...own.slice(4), ...helped].map(item)}</ul>
+        </details>
+      )}
+    </>
+  );
+}

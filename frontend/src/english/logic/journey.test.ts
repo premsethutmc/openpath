@@ -8,81 +8,14 @@
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import type { Item, Response } from "../../../../packages/english-core/src/index.ts";
-import { type Code, loadContent } from "./content.ts";
+import { loadContent } from "./content.ts";
 import { Learner } from "./learner.ts";
 import { doublingRule, journeyView } from "./journey.ts";
 import { fold } from "./state.ts";
+import { noDouble, right, runJourney, strategiesTaught, testClock } from "./journey-sim.ts";
 import { MemoryRepo } from "./store.ts";
 
 const content = loadContent();
-const DAY = 86_400_000;
-
-function testClock(start = "2026-10-14T09:00:00.000Z") {
-  let t = Date.parse(start);
-  const clock = () => new Date((t += 60_000)).toISOString();
-  clock.days = (n: number) => (t += n * DAY);
-  return clock;
-}
-
-/** The right answer, or the form a learner who does not double would write. */
-const right = (item: Item): Response => ({ kind: "typed", text: (item as Code).answers![0] });
-function noDouble(item: Item): Response {
-  const c = item as Code;
-  if (c.generated) return { kind: "typed", text: c.generated.base! + c.generated.join!.replace("-", "") };
-  const tagged = Object.entries(c.wrong ?? {}).find(([, tag]) => tag === "no_doubling")?.[0];
-  return tagged ? { kind: "typed", text: tagged } : right(item); // contrast items: not doubling is right
-}
-
-interface Behaviour {
-  /** Independent questions: right? */
-  independent: (item: Code, l: Learner) => boolean;
-  /** Guided practice: the number of hints after which the learner gets it right (0 = first try; Infinity = never). */
-  guided: (item: Code, l: Learner) => number;
-}
-
-const strategiesTaught = (l: Learner) => l.events.filter((e) => e.kind === "intervention").map((e) => (e as { strategy: string }).strategy);
-
-interface Trace {
-  steps: string[];
-  outcome: string | undefined;
-  decision: string;
-  diagnosis: string;
-}
-
-async function runJourney(l: Learner, b: Behaviour): Promise<Trace> {
-  const t = await runJourney0(l, b);
-  if (process.env.TRACE) console.log(l.profileId, JSON.stringify(t));
-  return t;
-}
-async function runJourney0(l: Learner, b: Behaviour): Promise<Trace> {
-  const steps: string[] = [];
-  await l.startJourney();
-  for (let guard = 0; guard < 200; guard++) {
-    const v = await l.journey();
-    const s = v.step;
-    if (s.kind === "summary") {
-      await l.finishJourney();
-      return { steps, outcome: v.decision.outcome, decision: v.decision.action, diagnosis: v.decision.diagnosis.kind };
-    }
-    if (s.kind === "teach") {
-      steps.push(`teach:${s.strategy.id}`);
-      await l.teach(s.strategy, v.decision.reason);
-    } else if (s.kind === "question") {
-      const ok = b.independent(s.item, l);
-      steps.push(`${s.purpose}:${s.item.id}:${ok ? "right" : "wrong"}`);
-      await l.answerJourney(s.item, ok ? right(s.item) : noDouble(s.item), s.purpose);
-    } else {
-      const need = b.guided(s.item, l);
-      const tries = s.attempts.length;
-      const hints = s.hints.length;
-      if (tries > hints) await l.hint(s.item, s.strategy); // the last try was wrong: ask for the next hint
-      else await l.answerGuided(s.item, hints >= need ? right(s.item) : noDouble(s.item), s.intervention);
-      if (tries === 0) steps.push(`guided:${s.item.id}`);
-    }
-  }
-  throw new Error("journey did not finish");
-}
 
 async function newLearner(name: string, clock = testClock()) {
   const repo = new MemoryRepo();
@@ -135,7 +68,7 @@ test("Learner B fails at first, responds to teaching and succeeds on unfamiliar 
   assert.equal(r.differentStrategyNeeded, false);
   assert.equal(r.retention, "not_shown");
   assert.match(r.status, /not yet mastery/);
-  assert.ok(r.difficulty.some((d) => d.includes("swiming")));
+  assert.ok(r.difficulty.some((d) => d.kind === "independent" && d.text.includes("swiming") && d.evidence.length === 1));
   await assertReplay(l, repo);
 });
 
@@ -172,6 +105,7 @@ test("Learner D succeeds only after hints: helped answers are never evidence and
   assert.ok(rule.assisted.total >= 24);
   const r = l.doublingReport();
   assert.ok(r.assistance.rightWithHelp >= 12 && r.assistance.rightFirstTry === 0);
+  assert.equal(r.assistance.hints, 12, "one hint per word, counted once");
   assert.match(r.status, /with help/);
   assert.ok(r.afterTeaching.every((x) => x.right === 0));
   await assertReplay(l, repo);
@@ -190,6 +124,7 @@ test("Learner E repeatedly fails: three different approaches, then the app stops
   assert.equal(guided, 12, "four guided words per approach, three approaches");
   const r = l.doublingReport();
   assert.ok(r.support && /teacher or parent/.test(r.support));
+  assert.equal(r.assistance.hints, 36, "12 words x 3 hints, each hint counted once");
   // starting again does not restart the same teaching: the rule stays paused for support
   const again = await runJourney(l, { independent: () => false, guided: never });
   assert.deepEqual(again.steps, []);

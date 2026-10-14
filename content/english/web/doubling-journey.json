@@ -1,6 +1,6 @@
 {
  "review": "candidate-unvalidated",
- "note": "MVP vertical slice: one adaptive journey for consonant doubling (EN.FND.SPL.inflections#double_short). Everything here is provisional and awaits educator review: the 8 assessment questions (drafts spl.infl.18-25), the three strategy lessons and the hint wording. The questions are hand-written candidates like the rest of the bank; the guided-practice words are generated items and stay practice-only.",
+ "note": "MVP vertical slice: one adaptive journey for consonant doubling (EN.FND.SPL.inflections#double_short). Everything here is provisional and awaits educator review: the 8 assessment questions (drafts spl.infl.18-25), the three strategy lessons and the hint wording. The questions are hand-written candidates like the rest of the bank; the guided-practice words are generated items and stay practice-only. Content-validation gate: every journey question added here carries evidence_status \"provisional\", so answers to it are recorded and shown at rule level as provisional, but never change the capability estimate.",
  "capability": "EN.FND.SPL.inflections",
  "rule": "double_short",
  "items": [
@@ -26,7 +26,8 @@
    "rationale": "One short vowel, one final consonant: double before -ing.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -50,7 +51,8 @@
    "rationale": "Doubles before -ed.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -74,7 +76,8 @@
    "rationale": "Doubles before -er, not only -ing and -ed.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -98,7 +101,8 @@
    "rationale": "Proofreading: spot the missing double letter.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -122,7 +126,8 @@
    "rationale": "Less familiar word; same rule.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -146,7 +151,8 @@
    "rationale": "Less familiar ending (-est); same rule.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double"
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -170,7 +176,8 @@
    "rationale": "Two final consonants: nothing doubles.",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double.contrast"
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
   },
   {
    "kind": "code",
@@ -194,7 +201,8 @@
    "rationale": "Proofreading: an unwanted double letter (two vowels before n).",
    "difficulty_source": "expert_estimate",
    "review": "candidate-unvalidated",
-   "family": "fam.infl.double.contrast"
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
   }
  ],
  "independent": {

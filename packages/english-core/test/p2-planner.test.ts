@@ -11,7 +11,7 @@ const rule = (name: string): RuleState => {
   return projectRuleEvidence(l, profileContext().content, englishInflections, engineView(l)).capabilities[CAP].rules.find((r) => r.rule === "double_short")!;
 };
 const base = { strategies: INFLECTION_STRATEGIES.double_short, now: "2026-10-23T12:00:00.000Z", sessionStartedAt: "2026-10-23T11:00:00.000Z", session: "new", available: { apply: 4, contrast: 1, guided: 8 }, answeredThisSession: 0, guidedThisBlock: 0 };
-const iv = (strategy: string, right: number, total: number) => ({ id: strategy, at: "2026-10-23T11:30:00.000Z", strategy, during: { right: 0, total: 4, hints: 4, items: 4, rightFirstTry: 0, rightWithHelp: 0 }, independentAfter: { right, total, newWordRight: right, newWordTotal: total } });
+const iv = (strategy: string, right: number, total: number) => ({ id: strategy, at: "2026-10-23T11:30:00.000Z", strategy, during: { right: 0, total: 4, hints: 4, items: 4, rightFirstTry: 0, rightWithHelp: 0 }, independentAfter: { right, total, newWordRight: right, newWordTotal: total, lastAt: total ? "2026-10-23T11:40:00.000Z" : null } });
 
 test("P2-1 a weak rule with an active misconception is taught with the first strategy", () => {
   const d = planRule({ ...base, rule: rule("never_doubles") });

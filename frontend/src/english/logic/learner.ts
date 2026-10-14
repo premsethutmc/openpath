@@ -16,6 +16,9 @@ import { type AppState, type SessionState, fold } from "./state.ts";
 
 export type Clock = () => string;
 
+/** A journey session idle for longer than this is ended when the journey is next opened. */
+export const JOURNEY_IDLE_MS = 6 * 3_600_000;
+
 export interface Current {
   session: SessionState;
   /** A lesson to read first (shown once per lesson). */
@@ -253,26 +256,59 @@ export class Learner {
 
   // ------------------------------------------------------------------ the doubling journey
 
-  /** Start the adaptive consonant-doubling journey (an unfinished session is ended as stopped first). */
+  /**
+   * Open the adaptive consonant-doubling journey. An open journey is resumed, not restarted. When there is
+   * nothing to do (shown, paused for support, out of questions) no session is created: the summary is shown
+   * from the record as it stands, so opening the journey repeatedly never adds events.
+   */
   async startJourney(): Promise<JourneyView> {
-    if (this.state.open) await this.stop();
+    let open = this.state.open;
+    // an open journey left idle for hours is ended, so a return days later is a new session (delayed checks depend on it)
+    if (open?.event.type === "doubling_journey" && Date.parse(this.clock()) - Date.parse(this.lastActivity(open.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      open = this.state.open;
+    }
+    if (open?.event.type === "doubling_journey") return this.journey();
+    const preview = this.journeyPreview();
+    if (preview.step.kind === "summary") return preview;
+    if (open) await this.stop();
     await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
     return this.journey();
   }
 
-  /** Where the open journey is. Records the question as presented when the step is a question. */
+  /** What the journey would do now, without recording anything (a session that does not exist yet). */
+  journeyPreview(): JourneyView {
+    const now = this.clock();
+    const virtual = { event: { kind: "session" as const, id: "preview", at: now, session: "preview", type: "doubling_journey" as const }, attempts: [], answered: [], end: null };
+    return journeyView(this.state, this.content, virtual, now);
+  }
+
+  /** Where the journey is. Records a question as presented (once). With no journey open: the preview, which is a summary. */
   async journey(): Promise<JourneyView> {
     const session = this.state.open;
-    if (!session || session.event.type !== "doubling_journey") throw new Error("no journey is open");
+    if (!session || session.event.type !== "doubling_journey") return this.journeyPreview();
+    if (Date.parse(this.clock()) - Date.parse(this.lastActivity(session.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      return this.startJourney();
+    }
     const v = journeyView(this.state, this.content, session, this.clock());
+    // the journey has ended: close the session now, not when a button is pressed (the app may simply be closed)
+    if (v.step.kind === "summary") {
+      await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
+      return v;
+    }
     if (v.step.kind === "question") await this.present(v.step.item, v.step.purpose === "reassess" ? "assessment" : v.step.purpose);
     if (v.step.kind === "guided") await this.present(v.step.item, "teaching", v.step.intervention);
     return journeyView(this.state, this.content, this.state.open!, this.clock());
   }
 
+  private lastActivity(session: string): string {
+    return this.events.filter((e) => "session" in e && e.session === session).at(-1)?.at ?? this.clock();
+  }
+
   /** Answer an independent journey question (no hints exist for these). */
   async answerJourney(item: Item, response: Response, purpose: "assessment" | "reassess" | "retention"): Promise<Feedback> {
-    const block = this.events.filter((e) => e.kind === "intervention" && e.session === this.state.open?.event.session).at(-1)?.id;
+    const block = this.events.filter((e) => e.kind === "intervention" && e.capability === this.content.journey.capability && e.rule === this.content.journey.rule).at(-1)?.id;
     return this.answer(item, response, { use: purpose === "retention" ? "retention" : "assessment", ...(purpose === "reassess" && block ? { intervention: block } : {}) });
   }
 

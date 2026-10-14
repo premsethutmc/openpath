@@ -18,6 +18,9 @@ import {
   leafView,
   planRule,
   projectRuleEvidence,
+  ruleRecord,
+  type EvidenceEvent,
+  type AssistedResponseEvent,
 } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent, Code, StrategyContent } from "./content.ts";
 import type { AttemptEvent } from "./events.ts";
@@ -48,14 +51,14 @@ export function doublingRule(s: AppState, c: AppContent, now: string): RuleState
 const code = (c: AppContent, id: string) => c.ctx.content.items.get(id) as Code;
 const isContrast = (i: Code) => englishInflections.roleOf(i) === "contrast";
 
-/** Interventions recorded in a session, oldest first. */
-function interventionsIn(s: AppState, session: string): InterventionEvent[] {
-  return s.events.filter((e): e is InterventionEvent => e.kind === "intervention" && e.session === session);
+/** Teaching interventions on the journey's rule, in any session, oldest first. */
+function ruleInterventions(s: AppState, c: AppContent): InterventionEvent[] {
+  return s.events.filter((e): e is InterventionEvent => e.kind === "intervention" && e.capability === c.journey.capability && e.rule === c.journey.rule);
 }
 
-/** Guided-practice attempts on an item after an intervention. */
-function guidedAttempts(session: SessionState, item: string): AttemptEvent[] {
-  return session.attempts.filter((a) => a.item.id === item && a.assisted);
+/** Assisted attempts at an item since a time, in any session (a block can continue after leaving and returning). */
+function guidedAttempts(s: AppState, item: string, since: string): AttemptEvent[] {
+  return s.events.filter((e): e is AttemptEvent => e.kind === "attempt" && e.assisted && e.item.id === item && e.at >= since);
 }
 
 /** A guided item is finished when answered right, or answered after the last hint level. */
@@ -67,12 +70,13 @@ export function journeyView(s: AppState, c: AppContent, session: SessionState, n
   const rule = doublingRule(s, c, now);
   const seen = (id: string) => s.ledger.exposures.has(id);
   const unseen = c.journey.assessOrder.filter((id) => !seen(id)).map((id) => code(c, id));
-  const ivs = interventionsIn(s, session.event.session);
-  const block = ivs.at(-1);
-  const hintsFor = (item: string) => s.events.filter((e): e is HintEvent => e.kind === "hint" && e.session === session.event.session && e.item.id === item);
-  // guided items of the current block: those attempted after its intervention
-  const blockGuided = block ? [...new Set(session.attempts.filter((a) => a.assisted && a.at >= block.at && c.journey.guided.includes(a.item.id)).map((a) => a.item.id))] : [];
-  const unfinished = blockGuided.find((id) => !guidedFinished(guidedAttempts(session, id), hintsFor(id).length, policy));
+  const block = ruleInterventions(s, c).at(-1);
+  const since = block?.at ?? session.event.at;
+  const hintsFor = (item: string) => s.events.filter((e): e is HintEvent => e.kind === "hint" && e.item.id === item && e.at >= since);
+  // guided items of the current block: those attempted after its intervention, in this or an earlier session
+  const blockGuided: string[] = [];
+  for (const e of s.events) if (block && e.kind === "attempt" && e.assisted && e.at >= block.at && c.journey.guided.includes(e.item.id) && !blockGuided.includes(e.item.id)) blockGuided.push(e.item.id);
+  const unfinished = blockGuided.find((id) => !guidedFinished(guidedAttempts(s, id, since), hintsFor(id).length, policy));
   const finishedCount = blockGuided.length - (unfinished ? 1 : 0);
   const guidedLeft = c.journey.guided.filter((id) => !s.attempted.has(id));
 
@@ -92,12 +96,12 @@ export function journeyView(s: AppState, c: AppContent, session: SessionState, n
   let step: JourneyStep = { kind: "summary" };
   switch (decision.action) {
     case "assess":
-      step = { kind: "question", purpose: "assessment", item: unseen[0] };
+      step = unseen[0] ? { kind: "question", purpose: "assessment", item: unseen[0] } : { kind: "summary" };
       break;
     case "reassess":
     case "retention_check": {
-      const item = unseen.find((i) => !isContrast(i))!;
-      step = { kind: "question", purpose: decision.action === "reassess" ? "reassess" : "retention", item };
+      const item = unseen.find((i) => !isContrast(i));
+      step = item ? { kind: "question", purpose: decision.action === "reassess" ? "reassess" : "retention", item } : { kind: "summary" };
       break;
     }
     case "teach":
@@ -105,7 +109,11 @@ export function journeyView(s: AppState, c: AppContent, session: SessionState, n
       break;
     case "guided_practice": {
       const id = unfinished ?? guidedLeft[0];
-      step = { kind: "guided", item: code(c, id), strategy: strategy(decision.strategy), intervention: block!.id, attempts: guidedAttempts(session, id), hints: hintsFor(id) };
+      if (!block || !id) {
+        step = { kind: "summary" }; // cannot happen with the planner's checks; never crash
+        break;
+      }
+      step = { kind: "guided", item: code(c, id), strategy: strategy(decision.strategy), intervention: block.id, attempts: guidedAttempts(s, id, since), hints: hintsFor(id) };
       break;
     }
     default:
@@ -125,11 +133,22 @@ export function hintText(strategy: StrategyContent, item: Code, level: number): 
 
 // ------------------------------------------------------------------ the parent summary
 
+export interface ReportLine {
+  kind: "pattern" | "independent" | "assisted" | "unknown" | "slip";
+  text: string;
+  /** Ids of the ledger events the line rests on. */
+  evidence: string[];
+}
+
 export interface ParentReport {
   skill: string;
   started: boolean;
-  /** What the learner found hard, from their own independent answers (no probabilities). */
-  difficulty: string[];
+  /**
+   * What the learner found hard. Every line names how the answers were given (from their provenance) and the
+   * ledger events behind it: independent first answers, answers with help (hints, retries, guided practice),
+   * answers recorded before provenance existed (help unknown), or a pattern across independent answers.
+   */
+  difficulty: ReportLine[];
   assistance: { hints: number; guidedAnswers: number; rightFirstTry: number; rightWithHelp: number; strategies: string[] };
   /** For each teaching approach: independent answers on new words after it. */
   afterTeaching: { strategy: string; right: number; total: number }[];
@@ -157,13 +176,7 @@ export function parentReport(s: AppState, c: AppContent, now: string, policy: Pl
   const rule = doublingRule(s, c, now);
   const journeySessions = [...s.sessions.values()].filter((x) => x.event.type === "doubling_journey");
   const name = (id: string) => c.journey.strategies.find((x) => x.id === id)?.name ?? id.replace(/_/g, " ");
-  const wrong = journeySessions.flatMap((x) => x.answered.filter((a) => !a.correct));
-  const difficulty = wrong.map((a) => {
-    const item = c.ctx.content.items.get(a.item.id) as Code | undefined;
-    const typed = a.response.kind === "typed" ? a.response.text : "";
-    return `Wrote "${typed}" for "${item?.answers?.[0] ?? ""}" without help.`;
-  });
-  const misc = rule.misconceptions.filter((m) => m.state === "active" || m.state === "improving").map((m) => `Pattern seen: ${m.tag === "no_doubling" ? "not doubling the last letter" : m.tag === "over_doubling" ? "doubling where it should not" : m.tag.replace(/_/g, " ")} (${m.errors.length} times on different words).`);
+  const difficulty = difficultyLines(s, c, rule);
   const ivs = rule.interventions;
   const retention: ParentReport["retention"] = rule.retention.state === "confirmed" ? "confirmed" : rule.retention.state === "failed" ? "failed" : rule.history.firstDemonstratedAt ? "pending" : "not_shown";
   const retentionDue = retention === "pending" && rule.lastEvidenceAt ? new Date(Date.parse(rule.lastEvidenceAt) + policy.retentionGapDays * 86_400_000).toISOString() : null;
@@ -173,12 +186,13 @@ export function parentReport(s: AppState, c: AppContent, now: string, policy: Pl
   if (rule.status === "weak" && helpOnly) status = "Right with help in practice, not yet without help.";
   if (rule.status !== "demonstrated" && rule.status !== "verified" && ivs.at(-1) && ivs.at(-1)!.independentAfter.newWordTotal >= policy.reassessItems && ivs.at(-1)!.independentAfter.newWordRight >= policy.reassessPassMin)
     status = "Right on new words without help after teaching. Progress, not yet mastery: more answers and a check after a week are needed.";
+  if ((rule.status === "demonstrated" || rule.status === "verified") && rule.evidenceBasis.provisional > 0) status += " (on provisional questions: a demonstration, not a verified result)";
   const firstShown = rule.history.firstDemonstratedAt;
   if (rule.status === "needs_reconfirmation" && firstShown) status = `First shown on ${firstShown.slice(0, 10)}; not remembered at the check after a week. Needs refreshing.`;
   return {
     skill: "Doubling the last consonant before an ending (hop → hopping, stop → stopped, big → bigger)",
     started: journeySessions.length > 0,
-    difficulty: [...misc, ...difficulty],
+    difficulty,
     assistance: {
       hints: rule.assisted.hints,
       guidedAnswers: ivs.reduce((t, iv) => t + iv.during.items, 0),
@@ -194,4 +208,41 @@ export function parentReport(s: AppState, c: AppContent, now: string, policy: Pl
     support: failed >= policy.maxStrategiesBeforeHuman ? `${failed} different approaches have not yet worked. We recommend a teacher or parent works on this with them; the app has paused this rule rather than repeating it.` : null,
     provisional: "The questions, lessons and hints in this journey are provisional: not yet reviewed by an educator. This is a record of what happened, not a mastery certificate.",
   };
+}
+
+const PATTERN: Record<string, string> = { no_doubling: "not doubling the last letter", over_doubling: "doubling where it should not" };
+
+/** Difficulty lines, each from the rule-level observations (provenance tracks) and the ledger events behind them. */
+function difficultyLines(s: AppState, c: AppContent, rule: RuleState): ReportLine[] {
+  const { observations } = ruleRecord(s.ledger.events, s.ledger.decisions, c.ctx.content, englishInflections);
+  const obs = observations.filter((o) => o.capability === c.journey.capability && o.rule === c.journey.rule);
+  const byId = new Map(s.ledger.events.filter((e): e is EvidenceEvent | AssistedResponseEvent => e.kind === "evidence" || e.kind === "assisted_response").map((e) => [e.id, e]));
+  const typed = (id: string) => {
+    const r = byId.get(id)?.response;
+    return r?.kind === "typed" ? r.text : "";
+  };
+  const want = (item: string) => (c.ctx.content.items.get(item) as Code | undefined)?.answers?.[0] ?? "";
+  const lines: ReportLine[] = [];
+  for (const m of rule.misconceptions.filter((x) => x.state === "active" || x.state === "improving"))
+    lines.push({ kind: "pattern", text: `Pattern in answers given without help: ${PATTERN[m.tag] ?? m.tag.replace(/_/g, " ")} (${m.errors.length} times, on different words).`, evidence: [...m.errors] });
+  for (const o of obs.filter((x) => !x.correct && (x.track === "independent" || x.track === "unknown")))
+    lines.push(
+      o.signature.kind === "slip"
+        ? { kind: "slip", text: `Wrote "${typed(o.evidence)}" for "${want(o.item)}": letters swapped, the rule itself was applied.`, evidence: [o.evidence] }
+        : o.track === "independent"
+          ? { kind: "independent", text: `Wrote "${typed(o.evidence)}" for "${want(o.item)}", on their own (no hint, first try).`, evidence: [o.evidence] }
+          : { kind: "unknown", text: `Wrote "${typed(o.evidence)}" for "${want(o.item)}" (recorded before help was tracked: whether help was given is unknown).`, evidence: [o.evidence] },
+    );
+  // assisted: one line per word, from the first wrong try to how it ended
+  const assisted = obs.filter((x) => x.track === "assisted");
+  for (const item of [...new Set(assisted.map((x) => x.item))]) {
+    const tries = assisted.filter((x) => x.item === item);
+    const firstWrong = tries.find((x) => !x.correct);
+    if (!firstWrong) continue;
+    const right = tries.find((x) => x.correct);
+    const hints = Math.max(0, ...tries.map((x) => x.hints));
+    const end = right ? (hints ? `right after ${hints} hint${hints > 1 ? "s" : ""}` : "right at a later try") : "not right, even with help";
+    lines.push({ kind: "assisted", text: `With help (practice): wrote "${typed(firstWrong.evidence)}" for "${want(item)}", then ${end}.`, evidence: tries.map((x) => x.evidence) });
+  }
+  return lines;
 }

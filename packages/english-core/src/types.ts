@@ -125,6 +125,15 @@ export interface CodeItem {
   /** Misconceptions this item is designed to practise. */
   addresses?: string[];
   review?: string;
+  /**
+   * Content-validation gate (MVP correctness pass).
+   *   "provisional": unreviewed content used for demonstration and practice. Answers are recorded and shown
+   *                  at rule level, marked provisional, but never change the capability estimate.
+   *   "validated":   approved by an educator under the review process.
+   *   absent:        the existing candidate bank, which has updated estimates since E1; unchanged here
+   *                  (changing it would alter historical estimates and needs a separate decision).
+   */
+  evidence_status?: "provisional" | "validated";
   /** The step of the capability's difficulty ladder this item sits on (content/english/items/progressions.json). */
   step?: string;
   /** Why the item sits at this difficulty: what makes it harder or easier than its neighbours. */

@@ -185,6 +185,19 @@ export class Ledger {
           },
         ];
     }
+    // The content-validation gate: provisional (unreviewed demonstration) content never changes an estimate.
+    if (item.evidence_status === "provisional")
+      return [
+        {
+          id,
+          at: ev.at,
+          source: ev.id,
+          capability: item.target,
+          verdict: "held",
+          reasons: [`scored by code: ${correct ? "right" : "wrong"}; provisional item, not yet validated by an educator: recorded for demonstration and practice, and no estimate is changed`],
+          observation,
+        },
+      ];
     // A generated item whose difficulty and quality have not been checked is not assessment evidence:
     // the answer is kept (and counts as seen) but no estimate changes until the item is checked.
     if (item.generated && !item.generated.checked)

@@ -149,8 +149,8 @@ export function planRule(input: PlannerInput): PlannerDecision {
     return out({ action: "reassess", strategy, diagnosis: diagnose(r, last), reason: "Now without help, on a word not used in the teaching." });
   }
 
-  // 4. The latest block worked in this session: end here, without claiming mastery.
-  if (last?.passed && last.intervention.at >= input.sessionStartedAt)
+  // 4. The latest block's reassessment was passed in this session: end here, without claiming mastery.
+  if (last?.passed && (last.intervention.independentAfter.lastAt ?? "") >= input.sessionStartedAt)
     return out({
       action: "done",
       outcome: "improved_after_teaching",

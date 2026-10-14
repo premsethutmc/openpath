@@ -47,6 +47,7 @@ export function App() {
   const [learner, setLearner] = useState<Learner | null>(null);
   const [tab, setTab] = useState<Tab>("today");
   const [inSession, setInSession] = useState(false);
+  const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [tick, setTick] = useState(0);
   const changed = useCallback(() => setTick((t) => t + 1), []);
@@ -81,6 +82,7 @@ export function App() {
     setLearner(l);
     setTab("today");
     setInSession(false);
+    setInJourney(false);
   };
 
   const leave = async () => {
@@ -106,13 +108,14 @@ export function App() {
       />
     );
 
-  if (inSession && learner.state.open?.event.type === "doubling_journey")
+  if (inJourney || (inSession && learner.state.open?.event.type === "doubling_journey"))
     return (
       <Journey
         learner={learner}
         voice={learner.state.speech ? voice : null}
         onChanged={changed}
         onLeave={() => {
+          setInJourney(false);
           setInSession(false);
           changed();
         }}
@@ -144,10 +147,10 @@ export function App() {
             await learner.start(step);
             setInSession(true);
           }}
-          onResume={() => setInSession(true)}
+          onResume={() => (learner.state.open?.event.type === "doubling_journey" ? setInJourney(true) : setInSession(true))}
           onJourney={async () => {
             await learner.startJourney();
-            setInSession(true);
+            setInJourney(true);
           }}
         />
       )}
@@ -316,6 +319,7 @@ function Today({ learner, onStart, onResume, onJourney }: { learner: Learner; on
       <section className="journey-card" aria-labelledby="journey-card-title">
         <h2 id="journey-card-title">Doubling letters (new, adaptive)</h2>
         <p>hop → hopping, stop → stopped. A few questions on your own, then teaching that changes if it is not working, then new words on your own.</p>
+        <p className="small">Demonstration content: the questions, lessons and hints are provisional and not yet reviewed by an educator. They do not change your levels.</p>
         <button type="button" className="secondary" onClick={onJourney}>
           {learner.doublingReport().started ? "Go on with doubling letters" : "Try doubling letters"}
         </button>

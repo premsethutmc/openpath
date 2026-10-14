@@ -20,7 +20,7 @@
  *
  * Deterministic: the same events, decisions, content and policy always give the same projection.
  */
-import { type ContentIndex, itemVersion, scoreCode } from "./content.ts";
+import { type ContentIndex, type ContentStatus, contentStatus, itemVersion, scoreCode } from "./content.ts";
 import { type CapabilityId, type Decision, type EvidenceEvent, type InterventionEvent, type Item, type LedgerEvent, type Response, isIndependentProvenance } from "./types.ts";
 
 // ---------------------------------------------------------------- what a subject module supplies
@@ -193,6 +193,8 @@ export interface RuleObservation {
   hints: number;
   /** Attempt number at this item (1 for a first answer). */
   attempt: number;
+  /** What the item's answers can stand for (the content-validation gate). */
+  content: ContentStatus;
   /** The intervention this answer belongs to or follows, if recorded. */
   intervention?: string;
   /** The word was new to the learner (no earlier evidence on the same word). */
@@ -285,7 +287,7 @@ export function ruleRecord(
       const fresh = newWordOf(r.item);
       touch(r.key, e.at, e.session, true);
       const { correct } = scoreCode(r.item, e.response);
-      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature: subject.classify(r.item, e.response, correct), hints: e.hints.length, attempt: e.attempt, ...(e.intervention ? { intervention: e.intervention } : {}) });
+      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature: subject.classify(r.item, e.response, correct), hints: e.hints.length, attempt: e.attempt, content: contentStatus(r.item), ...(e.intervention ? { intervention: e.intervention } : {}) });
       continue;
     }
     if (e.kind !== "evidence") continue;
@@ -302,7 +304,7 @@ export function ruleRecord(
     const track: Track =
       prov && (!isIndependentProvenance(prov) || taught)
         ? "assisted"
-        : d.verdict === "held"
+        : d.verdict === "held" && contentStatus(item) !== "provisional"
           ? "practice"
           : d.observation.exposure === "repeat"
             ? "repeat"
@@ -327,6 +329,7 @@ export function ruleRecord(
       signature: subject.classify(item, ev.response, correct),
       hints: prov?.hints.length ?? 0,
       attempt: prov?.attempt ?? 1,
+      content: contentStatus(item),
       ...(prov?.intervention ? { intervention: prov.intervention } : {}),
     });
   }
@@ -360,7 +363,7 @@ export interface InterventionSummary {
   /** Answers during it: all of them are assisted. rightFirstTry: right at the first try with no hint; rightWithHelp: right after a hint or a retry. */
   during: { right: number; total: number; hints: number; items: number; rightFirstTry: number; rightWithHelp: number };
   /** Independent answers on the rule after it and before the next intervention on the rule. */
-  independentAfter: { right: number; total: number; newWordRight: number; newWordTotal: number };
+  independentAfter: { right: number; total: number; newWordRight: number; newWordTotal: number; lastAt: string | null };
 }
 
 export interface DelayedCheck {
@@ -398,6 +401,11 @@ export interface RuleState {
   interventions: InterventionSummary[];
   /** Time of the latest answer of any kind on this rule (null if none). */
   lastEvidenceAt: string | null;
+  /**
+   * Which content the independent answers behind the status came from. A status resting on any provisional
+   * answer is a demonstration only: the claim guard never treats such a rule as verified.
+   */
+  evidenceBasis: { validated: number; candidate: number; provisional: number };
   repeats: number;
   slips: number;
   inconsistent: boolean;
@@ -406,6 +414,13 @@ export interface RuleState {
   history: { firstEmergingAt: string | null; firstDemonstratedAt: string | null; firstVerifiedAt: string | null; lastVerifiedAt: string | null; statusChanges: { at: string; status: RuleStatus; evidence: string }[] };
   misconceptions: MisconceptionRecord[];
 }
+
+/** Hints actually shown: each answer lists every hint before it, so count the most per item and session, not their sum. */
+const hintsShown = (obs: readonly RuleObservation[]) => {
+  const most = new Map<string, number>();
+  for (const o of obs) most.set(`${o.session}#${o.item}`, Math.max(most.get(`${o.session}#${o.item}`) ?? 0, o.hints));
+  return [...most.values()].reduce((t, n) => t + n, 0);
+};
 
 const isError = (o: RuleObservation) => !o.correct && o.signature.kind !== "slip";
 const errorKind = (o: RuleObservation, i: number) => (o.signature.kind === "misconception" ? `tag:${o.signature.tag}` : `unclassified:${i}`);
@@ -514,7 +529,6 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
       if (o.correct) f.practiceRight++;
     } else if (o.track === "assisted") {
       f.assistedTotal++;
-      f.hints += o.hints;
       if (o.correct) f.assistedRight++;
     } else if (o.track === "unknown") {
       f.unknownTotal++;
@@ -611,12 +625,12 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
       during: {
         right: during.filter((o) => o.correct).length,
         total: during.length,
-        hints: during.reduce((t, o) => t + o.hints, 0),
+        hints: hintsShown(during),
         items: new Set(during.map((o) => o.item)).size,
         rightFirstTry: during.filter((o) => o.correct && o.attempt === 1 && o.hints === 0).length,
         rightWithHelp: during.filter((o) => o.correct && (o.attempt > 1 || o.hints > 0)).length,
       },
-      independentAfter: { right: after.filter((o) => o.correct).length, total: after.length, newWordRight: nw.filter((o) => o.correct).length, newWordTotal: nw.length },
+      independentAfter: { right: after.filter((o) => o.correct).length, total: after.length, newWordRight: nw.filter((o) => o.correct).length, newWordTotal: nw.length, lastAt: after.at(-1)?.at ?? null },
     };
   });
   const lastCheck = [...f.checks].reverse().find((c) => c.passed !== null);
@@ -643,11 +657,16 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     allTime: rateOf(f.apps.filter((o) => o.correct).length, f.apps.length),
     contrast: { right: f.contrastRight, total: f.contrastTotal, lastCorrect: f.lastContrast },
     practice: { right: f.practiceRight, total: f.practiceTotal },
-    assisted: { right: f.assistedRight, total: f.assistedTotal, hints: f.hints },
+    assisted: { right: f.assistedRight, total: f.assistedTotal, hints: hintsShown(obs.filter((o) => o.track === "assisted")) },
     unknown: { right: f.unknownRight, total: f.unknownTotal },
     succeedsWithHelp,
     interventions: ivSummaries,
     lastEvidenceAt: obs.at(-1)?.at ?? null,
+    evidenceBasis: {
+      validated: obs.filter((o) => o.track === "independent" && o.content === "validated").length,
+      candidate: obs.filter((o) => o.track === "independent" && o.content === "candidate").length,
+      provisional: obs.filter((o) => o.track === "independent" && o.content === "provisional").length,
+    },
     repeats: f.repeats,
     slips: f.slips,
     inconsistent: inconsistentNow(f, p),
@@ -679,23 +698,27 @@ export interface CapabilityClaim {
   /** Does the rule evidence support the engine's "mastered at band M" label as it stands? */
   engineMasteryLabelSupported: boolean;
   /** Rules required at or below the engine's level that are not verified, and why. */
-  unverified: { rule: string; requiredFromBand: number; status: RuleStatus }[];
+  /** provisional: the rule's status rests on provisional content, so it is a demonstration, not verification. */
+  unverified: { rule: string; requiredFromBand: number; status: RuleStatus; provisional?: boolean }[];
   summary: string;
 }
 
+/** Verified, and not resting on any provisional (unreviewed demonstration) answer. */
+export const countsAsVerified = (r: RuleState): boolean => r.status === "verified" && (r.evidenceBasis?.provisional ?? 0) === 0;
+
 export function capabilityClaim(engine: EngineLabel, rules: readonly RuleState[], capability: CapabilityId): CapabilityClaim {
   const bands = [...new Set(rules.map((r) => r.requiredFromBand))].sort((a, b) => a - b);
-  const unverifiedBands = rules.filter((r) => r.status !== "verified").map((r) => r.requiredFromBand);
+  const unverifiedBands = rules.filter((r) => !countsAsVerified(r)).map((r) => r.requiredFromBand);
   const firstGap = unverifiedBands.length ? Math.min(...unverifiedBands) : Infinity;
   const through = bands.filter((b) => b < firstGap).at(-1) ?? null;
   const ceiling = firstGap === Infinity ? Infinity : firstGap - 0.5;
   const M = engine.mastered;
   const supported = M === null || through === null ? null : Math.min(M, ceiling);
   const level = M ?? engine.demonstrated ?? 0;
-  const unverified = rules.filter((r) => r.status !== "verified" && r.requiredFromBand <= Math.max(level, bands[0] ?? 0)).map((r) => ({ rule: r.rule, requiredFromBand: r.requiredFromBand, status: r.status }));
+  const unverified = rules.filter((r) => !countsAsVerified(r) && r.requiredFromBand <= Math.max(level, bands[0] ?? 0)).map((r) => ({ rule: r.rule, requiredFromBand: r.requiredFromBand, status: r.status, ...(r.status === "verified" ? { provisional: true } : {}) }));
   const labelOk = M !== null && supported === M;
   const fmt = (b: number) => b.toFixed(1);
-  const why = unverified.map((u) => `${u.rule} (${u.status.replace(/_/g, " ")}, needed from band ${fmt(u.requiredFromBand)})`).join("; ");
+  const why = unverified.map((u) => `${u.rule} (${u.provisional ? "shown on provisional questions only" : u.status.replace(/_/g, " ")}, needed from band ${fmt(u.requiredFromBand)})`).join("; ");
   const summary =
     M === null
       ? `The engine reports no mastery level.${unverified.length ? ` Rules not yet verified: ${why}.` : ""}`
