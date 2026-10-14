@@ -64,6 +64,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "family.observability.MetricsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -103,6 +104,8 @@ REST_FRAMEWORK = {
         "account-login": os.environ.get("OPENPATH_ACCOUNT_RATE", "60/hour"),
         "account-reset": os.environ.get("OPENPATH_ACCOUNT_RATE", "10/hour"),
         "account-password": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
+        "developer-claim": "10/hour",
+        "telemetry": "600/hour",
     },
     # Rate limits are keyed on the client address. Behind N trusted proxies, set OPENPATH_NUM_PROXIES=N so the
     # address is read from the right place in X-Forwarded-For; 0 ignores that (client-controlled) header entirely.
@@ -161,3 +164,20 @@ OPENPATH_MAX_EVENT_BYTES = 32_000
 OPENPATH_MAX_REQUEST_BYTES = 20_000_000  # an import of a large device record; refused before the body is read
 OPENPATH_LOGIN_FAILURES_PER_EMAIL = 10
 OPENPATH_LOGIN_FAILURE_WINDOW = 15 * 60
+
+
+# ---------------------------------------------------------------- diagnostics and observability
+def _commit() -> str:
+    if os.environ.get("OPENPATH_COMMIT"):
+        return os.environ["OPENPATH_COMMIT"][:40]
+    try:
+        import subprocess
+
+        out = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO_DIR, capture_output=True, text=True, timeout=2)
+        return out.stdout.strip() or "unknown"
+    except Exception:
+        return "unknown"
+
+
+OPENPATH_COMMIT = _commit()
+OPENPATH_CLAIM_TTL_HOURS = 24

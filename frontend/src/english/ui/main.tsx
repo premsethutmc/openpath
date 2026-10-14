@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
+import { installBrowserHooks, record } from "../logic/telemetry.ts";
 import "./english.css";
 
 /** A learner should never be left looking at a blank screen. */
@@ -11,6 +12,7 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
   }
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("OpenPath English stopped:", error, info.componentStack);
+    record({ name: "runtime_error", ok: false, detail: error });
   }
   render() {
     if (!this.state.error) return this.props.children;

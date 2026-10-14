@@ -26,6 +26,7 @@ from django.core.validators import validate_email
 from django.db import IntegrityError, transaction
 from django.db.models import Count, Max, Q
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -270,6 +271,7 @@ def _pupil_json(p: Pupil, count: int | None = None, last_at=None) -> dict:
         "created_at": p.created_at.isoformat(),
         "last_at": last_at.isoformat() if last_at else None,
         "events": count if count is not None else p.events.filter(subject="english").count(),
+        "shared_for_diagnostics": p.shared_for_diagnostics,
     }
 
 
@@ -330,8 +332,22 @@ class PupilView(AccountBase):
 
     def patch(self, request, pupil_id):
         pupil = _owned(request, pupil_id)
-        pupil.display_name = _display_name(request.data)
-        Pupil.objects.filter(pk=pupil.pk).update(display_name=pupil.display_name)
+        changes = {}
+        if "display_name" in request.data:
+            changes["display_name"] = _display_name(request.data)
+        if "shared_for_diagnostics" in request.data:
+            share = request.data["shared_for_diagnostics"]
+            if not isinstance(share, bool):
+                raise ValidationError({"shared_for_diagnostics": "true or false"})
+            changes["shared_for_diagnostics"] = share
+            changes["shared_at"] = timezone.now() if share else None
+            from .developer import audit
+
+            audit(request.user, "share_on" if share else "share_off", pupil=pupil.pk)
+        if not changes:
+            raise ValidationError({"detail": "Nothing to change."})
+        Pupil.objects.filter(pk=pupil.pk).update(**changes)
+        pupil.refresh_from_db()
         return Response(_pupil_json(pupil))
 
     def delete(self, request, pupil_id):

@@ -9,6 +9,7 @@
  */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Api, ApiError, ServerRepo } from "../logic/account.ts";
+import { now as perfNow, record, setSender } from "../logic/telemetry.ts";
 import { type AppContent, loadContent } from "../logic/content.ts";
 import type { LearnerBand, LearnerGoal } from "../logic/events.ts";
 import { Learner } from "../logic/learner.ts";
@@ -96,7 +97,9 @@ export function App() {
   const openLearner = async (r: Repo, id: string) => {
     setProblem(null);
     try {
+      const t = perfNow();
       const l = await Learner.open(content, r, id, clock);
+      record({ name: "load_ms", ms: perfNow() - t });
       l.speechAvailable = !!voice;
       store.set(LAST, id);
       setLearner(l);
@@ -111,6 +114,8 @@ export function App() {
   };
 
   const chooseRepo = async (r: Repo, m: Mode, reopen: boolean) => {
+    // measurements go to the server only for a signed-in parent account; on a device they are dropped
+    setSender(m === "account" ? async (batch) => void (await api.telemetry(batch)) : null);
     setRepo(r);
     setMode(m);
     const list = await r.profiles();
@@ -174,6 +179,7 @@ export function App() {
     } catch (e) {
       if (!(e instanceof ApiError && (e.status === 401 || e.status === 403))) throw e;
     }
+    setSender(null);
     store.set(MODE, null);
     setEmail(null);
     setLearner(null);
@@ -376,6 +382,7 @@ export function App() {
           onSignOut={signOut}
           onDeleteAccount={async (password) => {
             await api.deleteAccount(password);
+            setSender(null);
             store.set(MODE, null);
             setEmail(null);
             setLearner(null);

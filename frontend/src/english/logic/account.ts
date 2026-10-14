@@ -10,6 +10,7 @@
  * keeps the events, never a score in their place.
  */
 import type { AppEvent } from "./events.ts";
+import { APP_BUILD, type Metric } from "./telemetry.ts";
 import type { ProfileSummary, Repo } from "./store.ts";
 
 export interface AccountInfo {
@@ -24,6 +25,35 @@ export interface PupilSummary {
   created_at: string;
   last_at: string | null;
   events: number;
+  /** The parent let developers inspect this record for diagnostics (off unless they turn it on). */
+  shared_for_diagnostics?: boolean;
+}
+
+/** What the developer dashboard reads. Everything here is read-only and every read is audited by the server. */
+export interface DeveloperPupil {
+  id: string;
+  display_name: string;
+  own: boolean;
+  created_at: string;
+  events: number;
+}
+
+export interface Percentiles {
+  count: number;
+  p50?: number;
+  p95?: number;
+  max?: number;
+}
+
+export interface DeveloperOverview {
+  generated_at: string;
+  server: { commit: string; debug: boolean; database: string };
+  app_versions_seen: string[];
+  counts: Record<string, number> & { events_by_kind: Record<string, number> };
+  api_last_7_days: Record<string, Percentiles & { client_errors: number; server_errors: number }>;
+  app_last_7_days: Record<string, Percentiles & { failures: number }>;
+  recent_server_errors: { at: string; route: string; method: string; error: string }[];
+  recent_app_errors: { at: string; name: string; detail: string; app_version: string }[];
 }
 
 /** A refusal from the API, with Django's message(s) in plain words. */
@@ -144,6 +174,33 @@ export class Api {
   }
   exportPupil(id: string) {
     return this.request<unknown>("GET", `/pupils/${id}/export/`);
+  }
+  shareForDiagnostics(id: string, on: boolean) {
+    return this.request<PupilSummary>("PATCH", `/pupils/${id}/`, { shared_for_diagnostics: on });
+  }
+
+  telemetry(metrics: Metric[]) {
+    return this.request<{ stored: number }>("POST", "/telemetry/", { app_version: APP_BUILD, metrics });
+  }
+
+  // developer diagnostics (an explicit grant is needed; the server refuses everyone else)
+  developerStatus() {
+    return this.request<{ developer: boolean; commit: string }>("GET", "/developer/status/");
+  }
+  claimDeveloper(code: string) {
+    return this.request<{ developer: boolean }>("POST", "/developer/claim/", { code });
+  }
+  developerOverview() {
+    return this.request<DeveloperOverview>("GET", "/developer/overview/");
+  }
+  async developerPupils(): Promise<DeveloperPupil[]> {
+    return (await this.request<{ pupils: DeveloperPupil[] }>("GET", "/developer/pupils/")).pupils;
+  }
+  developerPupilEvents(id: string) {
+    return this.request<{ pupil: { id: string; display_name: string; own: boolean }; count: number; events: AppEvent[] }>("GET", `/developer/pupils/${id}/events/`);
+  }
+  async developerAudit() {
+    return (await this.request<{ entries: { at: string; action: string; pupil: string | null; detail: string }[] }>("GET", "/developer/audit/")).entries;
   }
 }
 

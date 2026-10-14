@@ -114,6 +114,70 @@ export interface PreferencesEvent {
   goal: LearnerGoal;
 }
 
+// ------------------------------------------------------------------ decision traces (diagnostics)
+
+/** One candidate the engine weighed: its score parts and reasons, exactly as the engine returned them. */
+export interface TracedCandidate {
+  item: string;
+  capability: string | null;
+  difficulty: number | null;
+  score: number;
+  p: number;
+  parts: Record<string, number>;
+  reasons: string[];
+  /** Alternatives only: why it was not chosen. */
+  whyNot?: string;
+}
+
+/**
+ * Why a question was asked, recorded when it was first shown (never reconstructed afterwards). Durations are not
+ * part of the record (it stays the same for the same answers); they are measured separately as telemetry.
+ * selector "engine": the engine's own decision (recommend), with what it knew and what it weighed.
+ * selector "queue": a fixed list planned when the session started (spelling sessions); the position is recorded.
+ * selector "planner": the doubling journey's rule planner (planRule), with its action, diagnosis and reason.
+ */
+export interface SelectionTrace {
+  selector: "engine" | "queue" | "planner";
+  /** The pool rule in force: assess, practice, confirm, retention, or the fixed queue. */
+  use: string;
+  mode?: string;
+  schedule?: string;
+  path?: string;
+  goal?: string;
+  target?: { band: number; source: string; note: string };
+  /** The estimates of the capabilities in play at that moment (mean, sd, direct answers, stage). */
+  knew?: { capability: string; mean: number; sd: number; n: number; stage: string }[];
+  /** Questions on the goal's capabilities that could be asked, and how many each rule kept out. */
+  candidates?: { eligible: number; unseen: number; excludedReserved: number; excludedPassage: number; excludedSeenWord: number; seen: number };
+  chosen?: TracedCandidate;
+  alternatives?: TracedCandidate[];
+  bankGaps?: { capability: string; suitable: [number, number]; unused: number[]; note: string }[];
+  explanation?: string;
+  queue?: { position: number; length: number; reason: string };
+  planner?: { action: string; itemRole?: string; strategy?: string; diagnosis: string; detail: string; reason: string; policy: string };
+}
+
+/** What Today offered when a session was started, and which activity was started (recorded at that moment). */
+export interface PlanTrace {
+  offered: { title: string; kind: string; action: string | null; capability: string | null; priority: number | null; why: string }[];
+  started: { type: string; capability?: string; purpose?: string; step?: string };
+  /** Index in `offered`, or null when started from Journey, More practice or the onboarding. */
+  startedRank: number | null;
+  standings: Record<string, string>;
+}
+
+export interface TraceEvent {
+  kind: "trace";
+  id: string;
+  at: string;
+  session?: string;
+  /** For a selection: the item and the `presented` event it explains. */
+  item?: { id: string; version: number };
+  presented?: string;
+  selection?: SelectionTrace;
+  plan?: PlanTrace;
+}
+
 export interface FlagEvent {
   kind: "flag";
   id: string;
@@ -122,14 +186,14 @@ export interface FlagEvent {
   note: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | LedgerEvent;
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | TraceEvent | LedgerEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "trace", "evidence", "presented", "hint", "assisted_response", "intervention"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention"]);
 

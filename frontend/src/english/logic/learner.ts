@@ -7,13 +7,15 @@ import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type Pre
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type Planned, type ProfileEvent, type SessionType } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
 import { type Next, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
+import { now as perfNow, record } from "./telemetry.ts";
+import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
 
 export type Clock = () => string;
 
@@ -73,9 +75,44 @@ export class Learner {
   }
 
   private async add(e: AppEvent): Promise<void> {
-    await this.repo.append(this.profileId, e); // stored before the state moves on
+    let t = perfNow();
+    try {
+      await this.repo.append(this.profileId, e); // stored before the state moves on
+    } catch (err) {
+      record({ name: "save_failed", ok: false, detail: `${e.kind}: ${err instanceof Error ? err.name : "error"}` });
+      throw err;
+    }
+    record({ name: "save_ms", ms: perfNow() - t });
     this.events = [...this.events, e];
-    this.state = fold(this.content, this.events);
+    if (e.kind === "trace") {
+      // a trace explains a decision; it is never evidence and fold ignores it, so nothing needs rebuilding
+      this.state = { ...this.state, events: this.events };
+      return;
+    }
+    t = perfNow();
+    try {
+      this.state = fold(this.content, this.events);
+    } catch (err) {
+      record({ name: "engine_error", ok: false, detail: err });
+      throw err;
+    }
+    record({ name: "rebuild_ms", ms: perfNow() - t });
+  }
+
+  /** Record why a question was shown, right after it was first shown. */
+  private async traceSelection(presented: string, item: { id: string; version: number }, selection: SelectionTrace): Promise<void> {
+    const session = this.state.open?.event.session;
+    await this.add({ kind: "trace", id: this.nextId(), at: this.clock(), ...(session ? { session } : {}), item, presented, selection });
+  }
+
+  /** Record what Today offered and which activity was started, just before the session starts. */
+  private planTraceFor(started: PlanTrace["started"]): PlanTrace | null {
+    try {
+      return planTrace(this.profile(), started);
+    } catch (err) {
+      record({ name: "engine_error", ok: false, detail: err });
+      return null; // a missing trace never stops a learner from starting
+    }
   }
 
   plan(): PlanStep[] {
@@ -102,6 +139,8 @@ export class Learner {
     const now = this.clock();
     const s = this.state;
     const c = this.content;
+    const plan = this.planTraceFor({ type: step.type, ...(step.capability ? { capability: step.capability } : {}), ...(step.purpose ? { purpose: step.purpose } : {}), ...(step.step ? { step: step.step } : {}) });
+    if (plan) await this.add({ kind: "trace", id: this.nextId(), at: now, plan });
     const base = { kind: "session" as const, id: this.nextId(), at: now, session: `s:${this.events.length + 1}`, type: step.type };
     let queue: Planned[] | undefined;
     let extra: Record<string, unknown> = {};
@@ -147,13 +186,19 @@ export class Learner {
     if (!session) throw new Error("no session is open");
     const lessonId = session.event.lesson;
     const lesson = lessonId && !this.state.lessons.has(lessonId) ? (this.content.lessons.get(lessonId) ?? null) : null;
+    const t = perfNow();
     const next = lesson ? null : this.nextQuestion(session);
+    if (next) record({ name: "select_ms", ms: perfNow() - t });
     const total = session.event.queue?.length ?? session.event.length ?? 0;
     if (!lesson && !next) {
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
       return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total };
     }
-    if (next) await this.present(next.item, next.use);
+    if (next) {
+      const fresh = !this.presentedId(session.event.session, next.item.id);
+      const presented = await this.present(next.item, next.use);
+      if (fresh && next.trace) await this.traceSelection(presented, { id: next.item.id, version: next.item.version }, next.trace);
+    }
     return { session: this.state.open ?? session, lesson, next, done: session.answered.length, total };
   }
 
@@ -161,10 +206,12 @@ export class Learner {
     const now = this.clock();
     const answered = new Set(session.answered.map((a) => a.item.id));
     if (session.event.queue) {
-      const q = session.event.queue.find((p) => !answered.has(p.item));
-      if (!q) return null;
+      const queue = session.event.queue;
+      const at = queue.findIndex((p) => !answered.has(p.item));
+      if (at < 0) return null;
+      const q = queue[at];
       const item = this.content.ctx.content.items.get(q.item);
-      return item ? { item, use: q.use, why: "" } : null;
+      return item ? { item, use: q.use, why: "", trace: queueTrace(session.event.type, at + 1, queue.length, q.use) } : null;
     }
     const s = this.state;
     switch (session.event.type) {
@@ -216,6 +263,13 @@ export class Learner {
    * engine; any later try (after feedback, or with a hint) is assisted practice and is recorded only as such.
    */
   async answer(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
+    const t = perfNow();
+    const fb = await this.record(item, response, opts);
+    record({ name: "answer_ms", ms: perfNow() - t });
+    return fb;
+  }
+
+  private async record(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
     const sid = session.event.session;
@@ -292,6 +346,8 @@ export class Learner {
     const preview = this.journeyPreview();
     if (preview.step.kind === "summary") return preview;
     if (open) await this.stop();
+    const plan = this.planTraceFor({ type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
+    if (plan) await this.add({ kind: "trace", id: this.nextId(), at: this.clock(), plan });
     await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
     return this.journey();
   }
@@ -311,14 +367,21 @@ export class Learner {
       await this.stop();
       return this.startJourney();
     }
+    const t = perfNow();
     const v = journeyView(this.state, this.content, session, this.clock());
+    record({ name: "select_ms", ms: perfNow() - t });
     // the journey has ended: close the session now, not when a button is pressed (the app may simply be closed)
     if (v.step.kind === "summary") {
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
       return v;
     }
-    if (v.step.kind === "question") await this.present(v.step.item, v.step.purpose === "reassess" ? "assessment" : v.step.purpose);
-    if (v.step.kind === "guided") await this.present(v.step.item, "teaching", v.step.intervention);
+    if (v.step.kind === "question" || v.step.kind === "guided") {
+      const item = v.step.item;
+      const purpose = v.step.kind === "guided" ? "teaching" : v.step.purpose === "reassess" ? "assessment" : v.step.purpose;
+      const fresh = !this.presentedId(session.event.session, item.id);
+      const presented = await this.present(item, purpose, v.step.kind === "guided" ? v.step.intervention : undefined);
+      if (fresh) await this.traceSelection(presented, { id: item.id, version: item.version }, plannerTrace(v.decision, v.step.kind === "guided" ? "practice" : v.step.purpose));
+    }
     return journeyView(this.state, this.content, this.state.open!, this.clock());
   }
 

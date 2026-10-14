@@ -6,6 +6,7 @@
  * Everything it needs is in the bundle: the engine, the framework, the item bank, the generated
  * spelling items, lessons and feedback. The licence notices of the word sources are copied alongside.
  */
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -14,6 +15,16 @@ import * as esbuild from "esbuild";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const out = `${root}/dist-english`;
 const licences = `${root}/../content/english/spelling/licences`;
+
+// the build's commit, shown in diagnostics reports (OPENPATH_COMMIT wins, e.g. in CI); never a secret
+const commit = (() => {
+  if (process.env.OPENPATH_COMMIT) return process.env.OPENPATH_COMMIT.slice(0, 40);
+  try {
+    return execFileSync("git", ["rev-parse", "--short", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
+  } catch {
+    return "unknown";
+  }
+})();
 
 await rm(out, { recursive: true, force: true });
 await mkdir(`${out}/assets`, { recursive: true });
@@ -28,7 +39,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"' },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit) },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);

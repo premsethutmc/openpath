@@ -30,6 +30,10 @@ class Pupil(models.Model):
     display_name = models.CharField(max_length=40, help_text="A first name or nickname, as the parent typed it.")
     consent_policy = models.CharField(max_length=40)
     created_at = models.DateTimeField(auto_now_add=True)
+    # The parent's explicit choice to let OpenPath's authorised developers inspect this record (diagnostics).
+    # Off by default: a developer sees only their own account's pupils unless a parent shares one.
+    shared_for_diagnostics = models.BooleanField(default=False)
+    shared_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ["created_at", "id"]
@@ -56,3 +60,72 @@ class PupilEvent(models.Model):
         if not self._state.adding:
             raise ValueError("pupil events are append-only")
         super().save(*args, **kwargs)
+
+
+# ---------------------------------------------------------------- developer diagnostics and observability
+
+
+class DeveloperAccess(models.Model):
+    """An explicit grant of developer diagnostics to one account. Knowing the URL or an email grants nothing."""
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="developer_access")
+    granted_at = models.DateTimeField(auto_now_add=True)
+    granted_via = models.CharField(max_length=40, help_text="claim code, or the management command")
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def active(self) -> bool:
+        return self.revoked_at is None
+
+
+class DeveloperClaim(models.Model):
+    """A one-time code that turns the signed-in account into a developer. Only its hash is stored."""
+
+    code_hash = models.CharField(max_length=64, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+    used_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+
+
+class DiagnosticAccessLog(models.Model):
+    """Every developer read of diagnostics, and every grant, claim and share change."""
+
+    at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    action = models.CharField(max_length=40)
+    pupil = models.UUIDField(null=True, blank=True)
+    detail = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ["-at", "-id"]
+
+
+class ApiMetric(models.Model):
+    """One API request: which endpoint (its route name, never the path with ids), how long, and the status."""
+
+    at = models.DateTimeField(auto_now_add=True, db_index=True)
+    route = models.CharField(max_length=60)
+    method = models.CharField(max_length=8)
+    status = models.PositiveSmallIntegerField()
+    ms = models.FloatField()
+
+
+class ServerError(models.Model):
+    """An unhandled server error: the route and the error's class and first line. No request body, no ids."""
+
+    at = models.DateTimeField(auto_now_add=True, db_index=True)
+    route = models.CharField(max_length=60)
+    method = models.CharField(max_length=8)
+    error = models.CharField(max_length=200)
+
+
+class ClientMetric(models.Model):
+    """A measurement sent by the app (save latency, rebuild and selection time, a failed save, a runtime error)."""
+
+    at = models.DateTimeField(auto_now_add=True, db_index=True)
+    name = models.CharField(max_length=40)
+    ms = models.FloatField(null=True, blank=True)
+    ok = models.BooleanField(default=True)
+    app_version = models.CharField(max_length=40, blank=True)
+    detail = models.CharField(max_length=200, blank=True)

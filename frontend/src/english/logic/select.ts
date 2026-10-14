@@ -5,7 +5,8 @@
  */
 import { type EvidenceUse, type Goal, type Item, type LeafView, type Recommendation, type SelectionInput, fnv1a, leafView, recommend } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED, type Pool, lessonId } from "./content.ts";
-import type { Planned } from "./events.ts";
+import type { Planned, SelectionTrace } from "./events.ts";
+import { selectionTrace } from "./trace.ts";
 import { type AppState, type PatternStatus, type SessionState, dueWords, patternKey, patternStatus } from "./state.ts";
 
 export const PLACEMENT_MIN = 12;
@@ -23,6 +24,8 @@ export interface Next {
   item: Item;
   use: EvidenceUse;
   why: string;
+  /** What the engine knew and weighed when it chose this item (recorded with the question when it is shown). */
+  trace?: SelectionTrace;
 }
 
 const view = (s: AppState, c: AppContent, cap: string, now: string): LeafView => leafView(s.ledger.composite, c.index, cap, now);
@@ -42,6 +45,11 @@ const ALLOWED: Record<Use, Pool[]> = { assess: ["diagnosis"], practice: ["practi
  *   seen words   a fresh or later check never asks a spelling word the learner has already met in practice
  */
 export function onlyFor(s: AppState, c: AppContent, use: Use, session?: SessionState): Set<string> {
+  return eligibility(s, c, use, session).only;
+}
+
+/** onlyFor, with every excluded question and the rule that excluded it (for decision traces). */
+export function eligibility(s: AppState, c: AppContent, use: Use, session?: SessionState): { only: Set<string>; excluded: Map<string, "reserved" | "passage" | "seen_word"> } {
   const allowed = ALLOWED[use];
   const used = new Set<string>();
   if (session) for (const a of session.attempts) {
@@ -55,15 +63,25 @@ export function onlyFor(s: AppState, c: AppContent, use: Use, session?: SessionS
     if (i?.kind === "code" && i.passage) answered.add(`${i.passage}#${i.target}`);
   }
   const out = new Set<string>();
+  const excluded = new Map<string, "reserved" | "passage" | "seen_word">();
   for (const id of c.handWritten) {
     const pool = c.pilot.pools.get(id);
-    if (pool && !allowed.includes(pool.pool)) continue;
+    if (pool && !allowed.includes(pool.pool)) {
+      excluded.set(id, "reserved");
+      continue;
+    }
     const i = c.ctx.content.items.get(id);
-    if (i?.kind === "code" && i.passage && (used.has(i.passage) || answered.has(`${i.passage}#${i.target}`))) continue;
-    if ((use === "confirm" || use === "retention") && i?.kind === "code" && i.format.startsWith("typed") && i.answers?.[0] && s.wordsSeen.has(i.answers[0].toLowerCase())) continue;
+    if (i?.kind === "code" && i.passage && (used.has(i.passage) || answered.has(`${i.passage}#${i.target}`))) {
+      excluded.set(id, "passage");
+      continue;
+    }
+    if ((use === "confirm" || use === "retention") && i?.kind === "code" && i.format.startsWith("typed") && i.answers?.[0] && s.wordsSeen.has(i.answers[0].toLowerCase())) {
+      excluded.set(id, "seen_word");
+      continue;
+    }
     out.add(id);
   }
-  return out;
+  return { only: out, excluded };
 }
 
 function input(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"], only: Set<string> = onlyFor(s, c, "assess")): SelectionInput {
@@ -101,6 +119,19 @@ export function useOf(r: Recommendation): EvidenceUse {
 
 const nextFrom = (r: Recommendation, c: AppContent): Next | null => (r.choice ? { item: c.ctx.content.items.get(r.choice.item)!, use: useOf(r), why: r.explanation } : null);
 
+/**
+ * Ask the engine, exactly as before, and keep what it decided and why (the decision trace). The trace is a record
+ * of the engine's own output; it never changes the choice.
+ */
+function decide(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"], use: Use, session?: SessionState): Next | null {
+  const elig = eligibility(s, c, use, session);
+  const inp = input(s, c, goal, now, mode, elig.only);
+  const r = recommend(inp);
+  const next = nextFrom(r, c);
+  if (next) next.trace = selectionTrace(s, c, inp, r, use, elig.excluded);
+  return next;
+}
+
 export function meanGuidedSd(s: AppState, c: AppContent, now: string): number {
   const caps = [...GUIDED.spelling, ...GUIDED.grammar, ...GUIDED.vocabulary];
   return caps.reduce((t, cap) => t + view(s, c, cap, now).sd, 0) / caps.length;
@@ -111,8 +142,7 @@ export function placementNext(s: AppState, c: AppContent, session: SessionState,
   const n = session.answered.length;
   if (n >= PLACEMENT_MAX) return null;
   if (n >= PLACEMENT_MIN && meanGuidedSd(s, c, now) <= PLACEMENT_SD) return null;
-  const r = recommend(input(s, c, c.guidedGoal, now, "assessment", onlyFor(s, c, "assess", session)));
-  const next = nextFrom(r, c);
+  const next = decide(s, c, c.guidedGoal, now, "assessment", "assess", session);
   return next ? { ...next, use: "assessment" } : null;
 }
 
@@ -121,7 +151,7 @@ export const focusGoal = (cap: string): Goal => ({ id: `focus:${cap}`, name: cap
 /** Grammar or vocabulary: the engine's hybrid scheduler on one capability (retention checks, probes and practice). */
 export function guidedNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? GUIDED_LENGTH)) return null;
-  return nextFrom(recommend(input(s, c, focusGoal(session.event.capability!), now, "hybrid", onlyFor(s, c, "practice", session))), c);
+  return decide(s, c, focusGoal(session.event.capability!), now, "hybrid", "practice", session);
 }
 
 /**
@@ -135,7 +165,7 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
   if (!cap) return null;
   const retention = session.event.purpose === "retention";
   const use: Use = retention ? "retention" : session.event.purpose === "confirm" ? "confirm" : "assess";
-  const next = nextFrom(recommend(input(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment", onlyFor(s, c, use, session))), c);
+  const next = decide(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment", use, session);
   if (!next || next.item.kind !== "code" || next.item.target !== cap) return null; // only this capability
   return retention ? next : { ...next, use: "assessment" };
 }
@@ -143,7 +173,7 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
 /** More practice: the engine's hybrid scheduler on every specified capability (no teaching). */
 export function exploreNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? EXPLORE_LENGTH)) return null;
-  return nextFrom(recommend(input(s, c, c.overallGoal, now, "hybrid", onlyFor(s, c, "practice", session))), c);
+  return decide(s, c, c.overallGoal, now, "hybrid", "practice", session);
 }
 
 /** How many questions a lesson's practice asks: fewer for reading, where each question needs its own passage. */

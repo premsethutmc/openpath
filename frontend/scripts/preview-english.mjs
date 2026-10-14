@@ -59,6 +59,12 @@ http
       return;
     }
     const path = normalize(decodeURIComponent(new URL(request.url, "http://x").pathname));
+    // the developer dashboard is the same app at /developer; without a trailing slash so relative asset paths resolve
+    if (path.length > 1 && path.endsWith("/") && path.startsWith("/developer")) {
+      response.writeHead(301, { Location: "/developer" });
+      response.end();
+      return;
+    }
     let file = join(dist, path);
     if (!file.startsWith(dist) || !existsSync(file) || statSync(file).isDirectory()) file = join(dist, "index.html");
     response.writeHead(200, {
