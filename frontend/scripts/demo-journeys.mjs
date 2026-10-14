@@ -1,5 +1,5 @@
 /**
- * Reproducible demonstration of the doubling journey for seven synthetic learners (A–G), in a real browser at
+ * Reproducible demonstration of the doubling journey for eight synthetic learners (A–H), in a real browser at
  * phone size, against the production build. Writes screenshots of the child-facing screens and the parent
  * summary, plus an index page, to out/journey-demo/.
  *
@@ -9,11 +9,12 @@
  * The learners answer by fixed rules (no randomness), so every run gives the same screens. They show how the
  * software behaves, not how real children learn. All journey content is provisional.
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 
 const URL = process.env.E2E_URL ?? "http://127.0.0.1:4174";
 const OUT = new globalThis.URL("../out/journey-demo/", import.meta.url).pathname;
+rmSync(OUT, { recursive: true, force: true }); // no screenshots left over from an earlier run
 mkdirSync(OUT, { recursive: true });
 const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
@@ -34,7 +35,10 @@ const LEARNERS = {
   E: { label: "Repeatedly fails; the app stops and recommends support", independent: (i) => contrast(i), guided: () => Infinity },
   F: { label: "Succeeds, then fails the check seven days later", independent: () => true, guided: () => 0, returnAfterDays: 7, onReturn: (i) => contrast(i) },
   G: { label: "Applies the rule but makes a typing slip (two letters swapped) on the first word", independent: () => true, guided: () => 0, slipFirst: true },
+  H: { label: "Doubles every final consonant, including where it must not", independent: () => true, guided: () => 0, overDouble: true },
 };
+/** The over-doubled form tagged on a contrast item (jump → jumpping); elsewhere the right answer. */
+const overDouble = (i) => Object.entries(i.wrong ?? {}).find(([, t]) => t === "over_doubling")?.[0] ?? right(i);
 /** The right answer with its last two letters swapped: a slip, not a rule error. */
 const slip = (i) => { const a = right(i); return a.slice(0, -2) + a.at(-1) + a.at(-2); };
 
@@ -91,10 +95,15 @@ async function run(key, L) {
       if (kind === "question") {
         const purpose = await step.first().getAttribute("data-purpose");
         const first = !seen.has("answered") && (seen.add("answered"), true);
-        await page.locator(".ruled input").fill(L.slipFirst && first ? slip(item) : independent(item, taught) ? right(item) : noDouble(item));
+        await page.locator(".ruled input").fill(L.slipFirst && first ? slip(item) : L.overDouble ? overDouble(item) : independent(item, taught) ? right(item) : noDouble(item));
         await page.getByRole("button", { name: "Check", exact: true }).click();
         await page.locator(".feedback").waitFor();
-        await firstOf(`${phase}-${purpose}`, `${phase}-${purpose}`, purpose === "assessment" ? "A question on their own (no hints), with feedback" : purpose === "reassess" ? "A new word on their own after teaching" : "The check a week later (no hints)");
+        const contrastItem = contrast(item);
+        await firstOf(
+          `${phase}-${purpose}${purpose === "reassess" && contrastItem ? "-contrast" : ""}`,
+          `${phase}-${purpose}${purpose === "reassess" && contrastItem ? "-contrast" : ""}`,
+          purpose === "assessment" ? "A question on their own (no hints), with feedback" : purpose === "reassess" ? (contrastItem ? "After teaching: a new word that must NOT double" : "A new word on their own after teaching") : "The check a week later (no hints)",
+        );
         await page.getByRole("button", { name: "Next" }).click();
         await page.locator(".feedback").waitFor({ state: "detached" });
         continue;
@@ -106,12 +115,19 @@ async function run(key, L) {
         await page.getByRole("button", { name: "Check", exact: true }).click();
         await page.locator(".feedback").waitFor();
         if (await page.getByRole("button", { name: "Next" }).count()) break;
-        await page.getByRole("button", { name: "Show a hint" }).click();
+        await page.getByRole("button", { name: /^Show a (hint|worked example)$/ }).click();
         await page.locator(".hints li").nth(hints).waitFor();
         await page.locator(".feedback").waitFor({ state: "detached" });
         await firstOf("hint", "guided-hint", "Practice with help, after a hint (never counted as on their own)");
+        if (hints === 2) await firstOf("worked", "guided-worked-example", "The third hint is a labelled worked example that shows the answer; what follows is help, not evidence");
       }
       await firstOf("guided", "guided-done", "Practice with help: the outcome of one word");
+      if (await page.locator('[data-step="guided"] .hints li[data-worked]').count()) {
+        await page.getByRole("button", { name: "Next" }).click();
+        await page.locator(".feedback").waitFor({ state: "detached" });
+        if (await page.locator('[data-step="guided"] .try-first').count()) await firstOf("try-first", "guided-after-worked-example", "After a worked example: the next word is new and tried once without a hint");
+        continue;
+      }
       await page.getByRole("button", { name: "Next" }).click();
       await page.locator(".feedback").waitFor({ state: "detached" });
     }
@@ -164,7 +180,7 @@ await browser.close();
 
 const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doubling journey demo</title>
 <style>body{font:16px system-ui,sans-serif;margin:24px;color:#222}h2{margin-top:2rem}.row{display:flex;gap:16px;overflow-x:auto}figure{margin:0;flex:0 0 260px}img{width:260px;border:1px solid #ccc;border-radius:8px}figcaption{font-size:13px;color:#555}.warn{background:#fff4d6;padding:12px;border-radius:8px}</style>
-<h1>OpenPath: the consonant-doubling journey, seven synthetic learners</h1>
+<h1>OpenPath: the consonant-doubling journey, eight synthetic learners</h1>
 <p class="warn">Demonstration only. The learners are synthetic and answer by fixed rules; this shows how the software behaves, not how children learn. All questions, lessons and hints in the journey are provisional and not yet reviewed by an educator.</p>
 ${index.map((l) => `<h2>Learner ${l.key}: ${l.label}</h2><div class="row">${l.shots.map((s) => `<figure><img src="${s.file}" alt="${s.caption}"><figcaption>${s.caption}</figcaption></figure>`).join("")}</div>`).join("\n")}`;
 writeFileSync(OUT + "index.html", html);
@@ -178,9 +194,11 @@ const checks = [
   ["B: independent errors only, no assisted lines, progress not mastery", kinds("B").has("independent") && !kinds("B").has("assisted") && /not yet mastery/.test(text("B"))],
   ["C: assisted lines kept apart from independent ones; a second approach recorded", kinds("C").has("assisted") && kinds("C").has("independent") && /Yes: 2 approaches tried/.test(text("C"))],
   ["D: right only with help; no independent success claimed", /12 right after a hint/.test(text("D")) && /0 right at the first try/.test(text("D")) && /not yet without help/.test(text("D"))],
-  ["E: three approaches, then support recommended; 36 hints counted once", /Yes: 3 approaches tried/.test(text("E")) && /36 hints used/.test(text("E")) && /recommend a teacher or parent/.test(text("E"))],
+  ["E: three approaches, then support recommended; 36 hints counted once, 12 of them worked examples", /Yes: 3 approaches tried/.test(text("E")) && /36 hints used, of which 12 were worked examples showing the answer/.test(text("E")) && /recommend a teacher or parent/.test(text("E"))],
   ["F: retention failed after 7 days, earlier progress kept", /Not kept: wrong at the check after a week/.test(text("F")) && /First shown on/.test(text("F"))],
-  ["G: a slip is shown as a slip, not as a rule error", kinds("G").has("slip") && !kinds("G").has("independent") && !kinds("G").has("pattern")],
+  ["G: a slip is shown as a slip, not as a rule error; no lesson was given", kinds("G").has("slip") && !kinds("G").has("independent") && !kinds("G").has("pattern") && /No teaching yet/.test(text("G")) && /Shown without help on new words today/.test(text("G"))],
+  ["H: never passes a reassessment (every 'must not double' word wrong); the question gap is reported, not hidden", /2 of 2 new words right without help, and 0 of 1 words that must not double/.test(text("H")) && !/1 of 1 words that must not double/.test(text("H")) && /not a result about the learner/.test(text("H")) && /also doubles where it should not/.test(text("H"))],
+  ["B and C: each approach that worked was checked on a word that must not double", /1 of 1 words that must not double/.test(text("B")) && /2 of 2 new words right without help, and 1 of 1 words that must not double/.test(text("C"))],
   ["no summary shows a probability or percentage", index.every((l) => !/%|probabilit/i.test(l.parent.text))],
 ];
 writeFileSync(OUT + "verification.json", JSON.stringify(checks.map(([what, pass]) => ({ what, pass })), null, 1));

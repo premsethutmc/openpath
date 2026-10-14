@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Response } from "../../../../packages/english-core/src/index.ts";
 import type { Feedback } from "../logic/feedback.ts";
-import { type JourneyView, type ParentReport, hintText } from "../logic/journey.ts";
+import { type JourneyView, type ParentReport, hintText, revealsAnswer } from "../logic/journey.ts";
 import type { Learner } from "../logic/learner.ts";
 import { ItemView } from "./ItemView.tsx";
 
@@ -110,7 +110,10 @@ export function Journey({ learner, voice, onLeave, onChanged }: Props) {
   if (step.kind === "guided") {
     const finished = !!feedback && (feedback.correct || step.hints.length >= 3);
     const waiting = !!feedback && !feedback.correct && step.hints.length < 3;
-    const shownHints = step.hints.map((h) => hintText(step.strategy, step.item, h.level));
+    const shownHints = step.hints.map((h) => ({ text: hintText(step.strategy, step.item, h.level), worked: revealsAnswer(h) }));
+    const lastLevel = step.hints.length + 1 >= step.strategy.hints.length;
+    // after a worked example on the previous word, this new word is tried once without a hint
+    const tryFirst = step.afterReveal && step.attempts.length === 0;
     const submit = (r: Response) =>
       act(async () => {
         const fb = await learner.answerGuided(step.item, r, step.intervention);
@@ -123,17 +126,36 @@ export function Journey({ learner, voice, onLeave, onChanged }: Props) {
         {bar}
         <section className="sheet" data-step="guided">
           <p className="kicker">Practice with help: this does not count as doing it on your own</p>
+          {tryFirst && <p className="try-first">A new word: try it yourself first.</p>}
           <ItemView key={`${step.item.id}:${step.attempts.length}`} item={step.item} voice={voice} locked={busy || finished || waiting} onSubmit={submit} />
           {shownHints.length > 0 && (
             <ol className="hints" aria-label="Hints">
-              {shownHints.map((h, i) => (
-                <li key={i}>{h}</li>
-              ))}
+              {shownHints.map((h, i) =>
+                h.worked ? (
+                  <li key={i} className="worked" data-worked="true">
+                    <strong>Worked example: this shows the answer.</strong> {h.text.replace(/^Worked example \(this shows the answer\): /, "")}
+                  </li>
+                ) : (
+                  <li key={i}>{h.text}</li>
+                ),
+              )}
             </ol>
           )}
           {feedback && (
             <div className={`feedback ${feedback.correct ? "right" : "wrong"}`} role="status" aria-live="polite">
-              <p className="verdict">{feedback.correct ? (step.hints.length || step.attempts.length > 0 ? "Right, with help." : "Right.") : finished ? "Not this time." : "Not yet. A hint might help."}</p>
+              <p className="verdict">
+                {feedback.correct
+                  ? step.revealed
+                    ? "Right, after seeing the worked example. Next, a new word."
+                    : step.hints.length || step.attempts.length > 0
+                      ? "Right, with help."
+                      : "Right."
+                  : finished
+                    ? "Not this time."
+                    : lastLevel
+                      ? "Not yet. A worked example can show you how."
+                      : "Not yet. A hint might help."}
+              </p>
               {finished && !feedback.correct && (
                 <p>
                   The answer is <strong className="written">{feedback.answer}</strong>.
@@ -142,9 +164,9 @@ export function Journey({ learner, voice, onLeave, onChanged }: Props) {
             </div>
           )}
           <div className="after">
-            {!finished && step.hints.length < 3 && (
+            {!finished && !tryFirst && step.hints.length < 3 && (
               <button type="button" className={waiting ? "primary" : "quiet"} disabled={busy} onClick={() => act(async () => (await learner.hint(step.item, step.strategy), await refresh()))}>
-                {waiting ? "Show a hint" : "I'd like a hint"}
+                {lastLevel ? "Show a worked example" : waiting ? "Show a hint" : "I'd like a hint"}
               </button>
             )}
             {finished && (
@@ -239,11 +261,26 @@ export function ParentSummary({ report }: { report: ParentReport }) {
         <dt>Help received</dt>
         <dd>
           {a.strategies.length
-            ? `${a.strategies.length} lesson${a.strategies.length > 1 ? "s" : ""} (${a.strategies.join("; ")}). Practice with help: ${a.rightFirstTry} right at the first try, ${a.rightWithHelp} right after a hint or second try, ${a.hints} hint${a.hints === 1 ? "" : "s"} used.`
+            ? `${a.strategies.length} lesson${a.strategies.length > 1 ? "s" : ""} (${a.strategies.join("; ")}). Practice with help: ${a.rightFirstTry} right at the first try, ${a.rightWithHelp} right after a hint or second try, ${a.hints} hint${a.hints === 1 ? "" : "s"} used${a.workedExamples ? `, of which ${a.workedExamples} ${a.workedExamples === 1 ? "was a worked example" : "were worked examples"} showing the answer` : ""}.`
             : "None: every answer so far was given without help."}
         </dd>
         <dt>On their own after teaching</dt>
-        <dd>{report.afterTeaching.length ? <ul>{report.afterTeaching.map((x, i) => <li key={i}>{`After "${x.strategy}": ${x.right} of ${x.total} new words right without help.`}</li>)}</ul> : "No teaching yet."}</dd>
+        <dd>
+          {report.afterTeaching.length ? (
+            <ul>
+              {report.afterTeaching.map((x, i) => (
+                <li key={i} data-after-teaching={x.finished ? (x.worked ? "worked" : "not_yet") : "unfinished"}>
+                  {x.total + x.contrastTotal === 0
+                    ? `After "${x.strategy}": not checked yet.`
+                    : `After "${x.strategy}": ${x.right} of ${x.total} new words right without help, and ${x.contrastRight} of ${x.contrastTotal} words that must not double.${x.finished ? "" : " Check not finished."}`}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            "No teaching yet."
+          )}
+          {report.questionGap && <p className="question-gap">{report.questionGap}</p>}
+        </dd>
         <dt>Different approach needed</dt>
         <dd>{report.differentStrategyNeeded ? `Yes: ${a.strategies.length} approaches tried.` : report.afterTeaching.length ? "No." : "Not applicable."}</dd>
         <dt>Remembered later</dt>

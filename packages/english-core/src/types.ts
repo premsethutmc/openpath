@@ -422,6 +422,8 @@ export interface HintEvent {
   level: number;
   /** Subject-defined hint type (for example "rule_reminder", "similar_example"). */
   hintType: string;
+  /** The hint showed the answer (a worked example). Any later response to the item is assisted, never independent. */
+  revealsAnswer?: true;
 }
 
 /** A second or later attempt, or any answer given with help. Recorded; never changes an estimate. */

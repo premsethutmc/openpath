@@ -134,13 +134,19 @@ Q_NOTES = {
     "spl.infl.j11": ("Copy of bank item spl.infl.11 for the journey.", "None expected."),
     "spl.infl.23": ("Superlative -est; monsoon context.", "Context suits learners in South Asia; check it suits your pupils. 'wetest' is the tagged error."),
     "spl.infl.24": ("Contrast: two final consonants (mp), so no doubling.", "Tests only clusters. It does not test w/x/y endings, unstressed syllables or vowel teams after teaching (see Overgeneralisation)."),
-    "spl.infl.25": ("Contrast: vowel team (ai), so no doubling. Correction format.", "As 21: format may confuse. The only contrast with a vowel team."),
+    "spl.infl.25": ("Contrast: vowel team (ai), so no doubling. Correction format.", "As 21: format may confuse."),
+    "spl.infl.26": ("NEW contrast for the check after teaching: two final consonants (lt).", "None expected. 'melted' is a less common past tense for younger pupils."),
+    "spl.infl.27": ("NEW contrast: vowel team (oo).", "None expected."),
+    "spl.infl.28": ("NEW contrast: two final consonants (st); -est ending.", "None expected."),
+    "spl.infl.29": ("NEW contrast: vowel team (ou).", "None expected."),
+    "spl.infl.30": ("NEW contrast: vowel team (ea).", "'ea' has a short sound in some words (head, bread); here it is long. A child taught 'listen for the short vowel' may hesitate."),
+    "spl.infl.31": ("NEW contrast: two final consonants (rk); -er ending.", "None expected."),
 }
 q_rows = []
 for n, qid in enumerate(order, start=1):
     i = ITEMS[qid]
     contrast = i["family"].endswith(".contrast")
-    use = "Diagnostic check only (contrast questions are not used after teaching)" if contrast else "Diagnostic check, reassessment after teaching, or the delayed check (whichever comes first, unseen only)"
+    use = "Diagnostic check, or the 'must not double' word in the reassessment after each lesson (unseen only)" if contrast else "Diagnostic check, reassessment after teaching, or the delayed check (whichever comes first, unseen only)"
     wrong = "; ".join(f"{w} → {t.replace('_', ' ')}" for w, t in i.get("wrong", {}).items())
     note, risk = Q_NOTES[qid]
     q_rows.append(
@@ -188,7 +194,7 @@ L_META = {
         "Same pattern rule as worked_examples, so the same overgeneralisation (w/x/y, unstressed final syllables, consonant suffixes).",
     ),
 }
-FOLLOW_UP = "The app's check: 2 unseen 'must double' questions on the learner's own, no hints. No contrast question is asked after teaching, so a learner who now doubles everything would still pass."
+FOLLOW_UP = "The app's check: 3 unseen questions on the learner's own, no hints: a word that must double, a word that must NOT double, then another that must double. All must be right for the lesson to count as having worked, so a learner who now doubles everything does not pass."
 l_rows = []
 for s in journey["strategies"]:
     les = s["lesson"]
@@ -217,17 +223,21 @@ sheet(
 )
 
 # ---------------------------------------------------------------- Hints
+WORKED = "REVISED: now a labelled worked example that shows the answer. The app records that the answer was shown; the answer typed after it is help, never independent, and the next word is new and tried once without a hint. Please check the wording."
 H_FLAGS = {
-    ("worked_examples", 3): "Gives the answer: the child only has to join three parts. Is level 3 meant to be a model answer?",
+    ("worked_examples", 3): WORKED,
     ("sound_first", 2): "States as a fact that a short vowel 'needs a guard'. True for these one-syllable words; overgeneralises beyond them.",
-    ("sound_first", 3): "Gives the answer.",
-    ("word_building", 3): "Gives the answer.",
+    ("sound_first", 3): WORKED + " This one no longer mentions the short vowel.",
+    ("word_building", 3): WORKED,
     ("sound_first", 1): "Relies on hearing vowel length, which varies by accent and is hard for some children.",
 }
 
 
 def render(t, base="clap", ending="ing"):
-    return t.replace("{base}", base).replace("{last}", base[-1]).replace("{ending}", ending)
+    word = base + (base[-1] if not base.endswith(("e",)) else "") + ending
+    shown = t.replace("{base}", base).replace("{last}", base[-1]).replace("{ending}", ending).replace("{word}", word)
+    # the app shows the worked example under a bold label
+    return shown.replace("Worked example (this shows the answer): ", "[Worked example: this shows the answer.] ")
 
 
 h_rows = []
@@ -301,6 +311,12 @@ W = [
     ("Child", "Lesson: why this", "Shown before, but not remembered after a delay. A short refresher with the approach that helped before.", P, ""),
     ("Child", "Practice label", "Practice with help: this does not count as doing it on your own", J, ""),
     ("Child", "Feedback", "Not yet. A hint might help.", J, ""),
+    ("Child", "Feedback", "Not yet. A worked example can show you how.", J, "NEW: before the third hint."),
+    ("Child", "Hint button", "Show a worked example", J, "NEW: the third hint button."),
+    ("Child", "Worked example label", "Worked example: this shows the answer.", J, "NEW."),
+    ("Child", "Feedback", "Right, after seeing the worked example. Next, a new word.", J, "NEW."),
+    ("Child", "Practice label", "A new word: try it yourself first.", J, "NEW: the word after a worked example; no hint until one try."),
+    ("Child", "Lesson: why this", "Doubled a letter where it should not be doubled: teaching when to double, and when not to.", P, "NEW: for a learner whose only errors are doubling where it should not."),
     ("Child", "Summary", "You doubled the letter correctly on new words, on your own. We'll check again in about a week to see if it has stuck.", J, ""),
     ("Child", "Summary", "After the lesson you got new words right on your own. That's real progress. A few more, and a check in a week, will show it is secure.", J, ""),
     ("Child", "Summary", "This one is tricky, and that's fine. We've tried three different ways; next, it's best to work on it with a grown-up. You can carry on with other practice.", J, "Check tone: encouraging, not discouraging?"),
@@ -314,7 +330,6 @@ W = [
     ("Parent", "Where things stand", "Shown without help, and still right after at least a week.", JT, "Always followed by the provisional note below while content is provisional."),
     ("Parent", "Where things stand", " (on provisional questions: a demonstration, not a verified result)", JT, ""),
     ("Parent", "Where things stand", "Right with help in practice, not yet without help.", JT, ""),
-    ("Parent", "Where things stand", "Right on new words without help after teaching. Progress, not yet mastery: more answers and a check after a week are needed.", JT, ""),
     ("Parent", "Where things stand", "First shown on {date}; not remembered at the check after a week. Needs refreshing.", JT, ""),
     ("Parent", "Difficulty: pattern", "Pattern in answers given without help: {error} ({n} times, on different words).", JT, ""),
     ("Parent", "Difficulty: on their own", 'Wrote "{typed}" for "{answer}", on their own (no hint, first try).', JT, "Also used for answers at the delayed check; it does not say which answers were at the check."),
@@ -322,8 +337,15 @@ W = [
     ("Parent", "Difficulty: with help", 'With help (practice): wrote "{typed}" for "{answer}", then {right after N hints | right at a later try | not right, even with help}.', JT, ""),
     ("Parent", "Difficulty: unknown", 'Wrote "{typed}" for "{answer}" (recorded before help was tracked: whether help was given is unknown).', JT, ""),
     ("Parent", "Help received", "{n} lesson(s) ({names}). Practice with help: {a} right at the first try, {b} right after a hint or second try, {h} hints used.", J, ""),
+    ("Parent", "Help received", ", of which {w} were worked examples showing the answer", J, "NEW: appended when a worked example was shown."),
+    ("Parent", "Difficulty: with help", "right only after a worked example showed the answer", JT, "NEW: end of a 'with help' line."),
+    ("Parent", "Difficulty: with help", "not right, even after a worked example showed the answer", JT, "NEW."),
+    ("Parent", "Where things stand", "Doubles correctly where it is needed, but also doubles where it should not. Not yet shown without help.", JT, "NEW: over-doubling."),
+    ("Parent", "Where things stand", "Right on new words without help after teaching, including a word that must not double. Progress, not yet mastery: more answers and a check after a week are needed.", JT, "REVISED: now says a 'must not double' word was included."),
+    ("Parent", "Question gap", "The check after the last lesson could not be finished: no unused {'must not double'} question is left. This is a gap in the app's questions, not a result about the learner; more reviewed questions are needed.", JT, "NEW."),
     ("Parent", "Help received", "None: every answer so far was given without help.", J, ""),
-    ("Parent", "After teaching", 'After "{strategy}": {right} of {total} new words right without help.', J, ""),
+    ("Parent", "After teaching", 'After "{strategy}": {right} of {total} new words right without help, and {c} of {ct} words that must not double.{ Check not finished.}', J, "REVISED: now includes the 'must not double' word."),
+    ("Parent", "After teaching", 'After "{strategy}": not checked yet.', J, "NEW."),
     ("Parent", "Remembered later", "Not yet: it first needs to be shown securely on its own, then checked again after a week.", J, ""),
     ("Parent", "Remembered later", "Pending: not yet checked after a delay.", J, ""),
     ("Parent", "Remembered later", "Confirmed: still right after at least a week.", J, ""),
@@ -332,10 +354,12 @@ W = [
     ("Parent", "Footer", "The questions, lessons and hints in this journey are provisional: not yet reviewed by an educator. This is a record of what happened, not a mastery certificate.", JT, ""),
 ]
 w_rows = []
+# rows whose text the app assembles from parts: the fragment that must appear literally in the source
+PROBES = {", of which {w} were worked examples showing the answer": "were worked examples\"} showing the answer"}
 for who, where, text, src, flag in W:
     probe = text
     probe = probe.split('"{')[0] if '"{' in probe else probe
-    for piece in [p for p in probe.replace("{", "|").replace("}", "|").split("|") if len(p.strip()) > 12][:1] or [probe]:
+    for piece in ([PROBES[text]] if text in PROBES else [p for p in probe.replace("{", "|").replace("}", "|").split("|") if len(p.strip()) > 12][:1] or [probe]):
         if piece.strip() not in SOURCES[src] and piece.strip().replace("'", "\\'") not in SOURCES[src]:
             sys.exit(f"wording drifted: {piece.strip()!r} not found in {src}")
     w_rows.append([who, where, text, src, flag])
@@ -364,13 +388,13 @@ O = [
      "Only endings that start with a vowel: sad → sadly, ship → shipment, wet → wetness do not double.",
      "'…before an ending that starts with a vowel (-ing, -ed, -er, -est)'."),
     ("OG-6", "Hints, level 3 (all three strategies)",
-     "Double it: {base} + {last} + {ending}.",
-     "Not an overgeneralisation but a validity risk: the hint gives the answer, so 'right after 3 hints' shows little.",
-     "Keep as a model answer and treat as 'shown the answer' in the parent report, or remove level 3."),
+     "Worked example (this shows the answer): … = {word}.",
+     "ADDRESSED (pending your review): level 3 is now a labelled worked example. The app records that the answer was shown, reports it to the parent as such, never counts what follows as independent, and makes the next word a new one tried without a hint first.",
+     "Check the new wording on the Hints sheet."),
     ("OG-7", "Journey design: practice words and the check after teaching",
-     "All 12 practice words double; the 2 questions after teaching always double.",
-     "A child who learns 'always double' passes the check after teaching. Over-doubling would only show at the next diagnostic question.",
-     "Add at least one 'must not double' word to practice and to the check after teaching (content change, needs approval)."),
+     "All 12 practice words double. The check after teaching now includes a 'must not double' word (new contrasts spl.infl.26–31).",
+     "PARTLY ADDRESSED (pending your review): a child who learns 'always double' no longer passes the check after teaching. Practice itself still contains only doubling words.",
+     "Decide whether practice also needs 'must not double' words (content change, needs approval)."),
     ("OG-8", "Question rationale texts (internal, not shown to children): spl.infl.18 'One short vowel, one final consonant: double before -ing.'",
      "One short vowel, one final consonant: double…",
      "Same as OG-1 to OG-3; internal only.",

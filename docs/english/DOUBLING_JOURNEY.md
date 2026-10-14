@@ -14,8 +14,8 @@ reviewed by an educator. Synthetic tests show the software behaves as specified,
 | 1. Check | "On your own: no hints" question | `presented`, `evidence` with provenance (attempt 1, no hints) | Yes |
 | 2. Diagnosis | (decided by the planner from the rule state) | – | – |
 | 3. Teaching | Lesson for the chosen strategy, with why it was chosen | `intervention` (strategy, content) | – |
-| 4. Guided practice | "Practice with help: this does not count as doing it on your own"; hints in three levels | `presented`, `hint` (level, type), `assisted_response` | **Never** |
-| 5. Reassessment | "New word, on your own: no hints" | `evidence` with provenance | Yes |
+| 4. Guided practice | "Practice with help: this does not count as doing it on your own"; two hints, then a labelled worked example that shows the answer; the next word is new and tried once without a hint | `presented`, `hint` (level, type; the worked example with `revealsAnswer`), `assisted_response` | **Never** |
+| 5. Reassessment | "New word, on your own: no hints": a word that doubles, one that must not, another that doubles | `evidence` with provenance | Yes |
 | 6. If it did not work | "Let's try a different way": the next strategy | `intervention` | – |
 | 7. Summary | Learner line plus "For a parent or teacher" | `session_end` | – |
 | Later (7+ days) | "A week later: has it stuck? No hints" | `evidence` | Yes (delayed check) |
@@ -32,10 +32,11 @@ policy (`planner-policy@0-draft`):
 
 | Setting | Draft | Meaning |
 |---|---|---|
-| `diagnosticMax` | 5 | Independent questions before teaching, at most (fewer once a misconception is active) |
+| `diagnosticMax` | 5 | Independent questions before teaching, at most (fewer once a misconception is active). Slips do not count, and the limit alone leads to teaching only after a rule error |
 | `guidedItems` | 4 | Guided-practice words per teaching block |
 | `hintLevels` | 3 | Hint levels per guided word |
 | `reassessItems` / `reassessPassMin` | 2 / 2 | New words in the reassessment, and how many must be right for the block to count as having worked |
+| `reassessContrastItems` | 1 | New words that must NOT double in the reassessment; all must be right (added for pilot blocker B) |
 | `maxStrategiesBeforeHuman` | 3 | Failed approaches before the app stops and recommends a teacher or parent |
 | `retentionGapDays` / `retentionItems` | 7 / 2 | When the delayed check is offered, and its size |
 

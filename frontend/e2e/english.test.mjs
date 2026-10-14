@@ -318,23 +318,45 @@ test("the doubling journey on a phone: check, diagnosis, a lesson, help that is 
   await fits(page);
   await tappable(page);
   await page.getByRole("button", { name: "Practise with help" }).click();
-  // guided practice: wrong, then a hint, then right with help
-  for (let k = 0; k < 4; k++) {
+  // guided practice, first word: wrong after two hints, then the third level is a labelled worked example that shows the answer
+  await page.locator('[data-step="guided"]').waitFor();
+  for (let h = 0; h < 2; h++) {
+    await journeyAnswer(page, false);
+    await page.getByRole("button", { name: "Show a hint" }).click();
+    await page.locator(".hints li").nth(h).waitFor();
+    await page.locator(".feedback").waitFor({ state: "detached" });
+    if (h === 0) await shot(page, "j3-hint");
+  }
+  await journeyAnswer(page, false);
+  await page.getByRole("button", { name: "Show a worked example" }).click();
+  const worked = page.locator('.hints li[data-worked="true"]');
+  await worked.waitFor();
+  assert.match(await worked.innerText(), /^Worked example: this shows the answer\. .+ = clapping\.$/);
+  await shot(page, "j3b-worked-example");
+  await fits(page);
+  await journeyAnswer(page, true);
+  await page.getByText("Right, after seeing the worked example. Next, a new word.").waitFor();
+  await next(page);
+  // the next word is new, and is tried once without a hint before any help is offered
+  await page.locator('[data-step="guided"] .try-first').waitFor();
+  assert.equal(await page.getByRole("button", { name: /hint|worked example/i }).count(), 0);
+  for (let k = 1; k < 4; k++) {
     await page.locator('[data-step="guided"]').waitFor();
     await journeyAnswer(page, false);
     await page.getByRole("button", { name: "Show a hint" }).click();
     await page.locator(".hints li").first().waitFor();
-    if (k === 0) await shot(page, "j3-hint");
     await journeyAnswer(page, true);
     await page.getByText("Right, with help.").waitFor();
     await next(page);
   }
-  // reassessment on new words: still wrong
-  for (let k = 0; k < 2; k++) {
+  // reassessment on new words: a word that doubles, one that must not, another that doubles; the doubling ones still wrong
+  const purposes = [];
+  for (let k = 0; k < 3; k++) {
     await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
-    await journeyAnswer(page, false);
+    purposes.push(items.get(await journeyAnswer(page, false)).family);
     await next(page);
   }
+  assert.deepEqual(purposes, ["fam.infl.double", "fam.infl.double.contrast", "fam.infl.double"]);
   // a different approach
   await page.locator('[data-step="teach"][data-strategy="sound_first"]').waitFor();
   await page.getByText("Let's try a different way").waitFor();
@@ -345,7 +367,7 @@ test("the doubling journey on a phone: check, diagnosis, a lesson, help that is 
     await journeyAnswer(page, true);
     await next(page);
   }
-  for (let k = 0; k < 2; k++) {
+  for (let k = 0; k < 3; k++) {
     await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
     if (k === 0) await shot(page, "j5-new-word");
     await journeyAnswer(page, true);
@@ -357,8 +379,11 @@ test("the doubling journey on a phone: check, diagnosis, a lesson, help that is 
   await shot(page, "j6-summary");
   await fits(page);
   assert.match(text, /not yet mastery/);
-  assert.match(text, /After "Rule and worked examples": 0 of 2 new words right without help/);
-  assert.match(text, /After "Listen for the short vowel": 2 of 2 new words right without help/);
+  assert.match(text, /After "Rule and worked examples": 0 of 2 new words right without help, and 1 of 1 words that must not double/);
+  assert.match(text, /After "Listen for the short vowel": 2 of 2 new words right without help, and 1 of 1 words that must not double/);
+  assert.match(text, /of which 1 was a worked example showing the answer/);
+  const assisted = await page.locator('.parent li[data-kind="assisted"]').allTextContents();
+  assert.ok(assisted.some((t) => /wrote "claping" for "clapping", then right only after a worked example showed the answer/.test(t)), assisted.join(" | "));
   assert.match(text, /Yes: 2 approaches tried/);
   assert.match(text, /4 right after a hint or second try/);
   assert.match(text, /provisional/);

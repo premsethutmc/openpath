@@ -26,9 +26,24 @@ export function noDouble(item: Item): Response {
   return tagged ? { kind: "typed", text: tagged } : right(item); // contrast items: not doubling is right
 }
 
+/** The form a learner who doubles every final consonant would write: the tagged over-doubled form on contrasts, the right answer elsewhere. */
+export function overDouble(item: Item): Response {
+  const c = item as Code;
+  const tagged = Object.entries(c.wrong ?? {}).find(([, tag]) => tag === "over_doubling")?.[0];
+  return tagged ? { kind: "typed", text: tagged } : right(item);
+}
+
+/** A typing slip: the right answer with its last two letters swapped (the rule itself applied). */
+export function slip(item: Item): Response {
+  const a = (item as Code).answers![0];
+  return { kind: "typed", text: a.slice(0, -2) + a.at(-1) + a.at(-2) };
+}
+
 export interface Behaviour {
   /** Independent questions: right? */
   independent: (item: Code, l: Learner) => boolean;
+  /** Independent questions: the exact response, when right/wrong is not enough (slips, over-doubling). Overrides `independent`. */
+  respond?: (item: Code, l: Learner) => Response;
   /** Guided practice: the number of hints after which the learner gets it right (0 = first try; Infinity = never). */
   guided: (item: Code, l: Learner) => number;
 }
@@ -71,9 +86,11 @@ export async function stepJourney(l: Learner, b: Behaviour, v: JourneyView, step
       steps.push(`teach:${s.strategy.id}`);
       await l.teach(s.strategy, v.decision.reason);
     } else if (s.kind === "question") {
-      const ok = b.independent(s.item, l);
-      steps.push(`${s.purpose}:${s.item.id}:${ok ? "right" : "wrong"}`);
-      await l.answerJourney(s.item, ok ? right(s.item) : noDouble(s.item), s.purpose);
+      const response = b.respond ? b.respond(s.item, l) : b.independent(s.item, l) ? right(s.item) : noDouble(s.item);
+      const text = response.kind === "typed" ? response.text : "";
+      const label = text === s.item.answers![0] ? "right" : text === (slip(s.item) as { text: string }).text ? "slip" : "wrong";
+      steps.push(`${s.purpose}:${s.item.id}:${label}`);
+      await l.answerJourney(s.item, response, s.purpose);
     } else {
       const need = b.guided(s.item, l);
       const tries = s.attempts.length;
@@ -88,7 +105,7 @@ export async function stepJourney(l: Learner, b: Behaviour, v: JourneyView, step
 
 const contrast = (i: Code) => (i.family ?? "").endsWith(".contrast");
 
-/** The six demonstration learners. F also returns after `returnAfterDays` and answers the retention check. */
+/** The demonstration learners. F also returns after `returnAfterDays` and answers the retention check. */
 export const LEARNERS: Record<string, { label: string; behaviour: (l: Learner) => Behaviour; returnAfterDays?: number; returnBehaviour?: Behaviour }> = {
   A: { label: "Understands doubling and succeeds on their own", behaviour: () => ({ independent: () => true, guided: () => 0 }) },
   B: { label: "Fails at first, responds to teaching, then succeeds on unfamiliar words", behaviour: (l) => ({ independent: () => strategiesTaught(l).length > 0, guided: () => 0 }) },
@@ -96,4 +113,9 @@ export const LEARNERS: Record<string, { label: string; behaviour: (l: Learner) =
   D: { label: "Succeeds only after hints", behaviour: () => ({ independent: (i) => contrast(i), guided: () => 1 }) },
   E: { label: "Repeatedly fails; the app stops and recommends support", behaviour: () => ({ independent: (i) => contrast(i), guided: () => Infinity }) },
   F: { label: "Succeeds, then fails the check a week later", behaviour: () => ({ independent: () => true, guided: () => 0 }), returnAfterDays: 8, returnBehaviour: { independent: (i) => contrast(i), guided: () => 0 } },
+  G: {
+    label: "Applies the rule but makes one typing slip (two letters swapped) on the first word",
+    behaviour: (l) => ({ independent: () => true, guided: () => 0, respond: (i) => (l.events.some((e) => e.kind === "evidence") ? right(i) : slip(i)) }),
+  },
+  H: { label: "Doubles every final consonant, including where it must not", behaviour: () => ({ independent: () => true, guided: () => 0, respond: overDouble }) },
 };

@@ -14,16 +14,16 @@ and can never support a claim that the child has mastered the rule.
 
 Your decisions are the only route to "validated". Nothing is switched without a named reviewer and a date in the workbook.
 
-## What to review (97 rows)
+## What to review (115 rows)
 
 | Sheet | Rows | Please check |
 |---|---|---|
-| Questions | 10 | One right answer; the root word or meaning is clear; the sentence suits 7–11-year-olds; application (must double) or contrast (must not double) is labelled correctly; the ambiguity risks we list |
+| Questions | 16 | Six are new (spl.infl.26–31): words that must not double, asked in the check after each lesson. One right answer; the root word or meaning is clear; the sentence suits 7–11-year-olds; application (must double) or contrast (must not double) is labelled correctly; the ambiguity risks we list |
 | Lessons | 3 | The learning objective; whether the explanation is accurate; the misconception it could create; whether the check after teaching would notice it |
-| Hints | 9 | Each of 3 levels for 3 lessons. Level 3 gives the answer: is that acceptable? |
+| Hints | 9 | Each of 3 levels for 3 lessons. Level 3 is now a labelled worked example that shows the answer: please check its wording |
 | Practice words | 12 | Prompt and answer; whether all-doubling practice is a problem |
 | Thresholds | 15 | Whether the draft numbers (4 practice words, 2 of 2 new words right, 3 approaches before a person, 7 days) seem sensible for children. Your view is recorded; changing them is a separate decision |
-| Parent wording | 40 | Every sentence a child or parent sees in the journey: accurate, clear, not discouraging |
+| Parent wording | 52 | Every sentence a child or parent sees in the journey: accurate, clear, not discouraging |
 | Overgeneralisation | 8 | Statements we think are too broad (below) |
 
 ## The main concern: the rule is stated too broadly
@@ -37,10 +37,12 @@ are accurate for the one-syllable words the journey uses, but they state the rul
 - **Only endings that start with a vowel:** sad → sadly, ship → shipment.
 - **qu:** quit → quitting doubles although two vowel letters come before the t.
 
-We also flag two design issues: every practice word and every question after teaching *does* double, so a child who learns
-"always double" would pass the check after teaching; and hint level 3 gives the answer.
+Two design issues flagged earlier have since been changed, pending your review: the check after each lesson now includes a
+word that must not double (so a child who learns "always double" no longer passes it), and hint level 3 is now a labelled
+worked example, recorded as showing the answer. Practice words still all double.
 
-Please decide each flag. We suggest fixes on the sheet, but none has been applied: changing lesson wording is your call.
+Please decide each flag. We suggest fixes on the sheet. None of the lesson-wording fixes (OG-1 to OG-5, OG-8) has been
+applied: changing lesson wording is your call.
 
 ## How to fill it in
 

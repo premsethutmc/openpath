@@ -319,12 +319,24 @@ export class Learner {
     await this.add({ kind: "intervention", id: this.nextId(), at: this.clock(), session: session.event.session, capability: this.content.journey.capability, rule: this.content.journey.rule, strategy: strategy.id, content: `doubling-journey:${strategy.id}`, reason });
   }
 
-  /** Show the next hint level for a guided item; returns its text. */
+  /** Show the next hint level for a guided item; returns its text. The last level is a worked example that shows the answer. */
   async hint(item: Code, strategy: StrategyContent): Promise<string> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
     const level = this.hintsFor(session.event.session, item.id).length + 1;
-    await this.add({ kind: "hint", id: this.nextId(), at: this.clock(), session: session.event.session, item: { id: item.id, version: item.version }, ...(this.presentedId(session.event.session, item.id) ? { presented: this.presentedId(session.event.session, item.id)! } : {}), level, hintType: `${strategy.id}:${level}` });
+    // the last level is a worked example that shows the answer: recorded as such, so nothing after it is ever independent
+    const worked = level >= strategy.hints.length;
+    await this.add({
+      kind: "hint",
+      id: this.nextId(),
+      at: this.clock(),
+      session: session.event.session,
+      item: { id: item.id, version: item.version },
+      ...(this.presentedId(session.event.session, item.id) ? { presented: this.presentedId(session.event.session, item.id)! } : {}),
+      level,
+      hintType: worked ? `${strategy.id}:worked_example` : `${strategy.id}:${level}`,
+      ...(worked ? { revealsAnswer: true as const } : {}),
+    });
     return hintText(strategy, item, level);
   }
 

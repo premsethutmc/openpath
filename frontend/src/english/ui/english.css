@@ -772,3 +772,18 @@ details summary {
   color: var(--margin);
   font-weight: 600;
 }
+.hints li.worked {
+  border-left: 4px solid var(--focus);
+  padding: 0.35rem 0.6rem;
+  background: var(--paper);
+}
+.journey .try-first {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+.parent .question-gap {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid var(--margin);
+  background: var(--wrong-wash);
+}

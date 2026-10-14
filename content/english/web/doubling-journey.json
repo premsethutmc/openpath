@@ -1,6 +1,6 @@
 {
  "review": "candidate-unvalidated",
- "note": "MVP vertical slice: one adaptive journey for consonant doubling (EN.FND.SPL.inflections#double_short). Everything here is provisional and awaits educator review: the 8 assessment questions (drafts spl.infl.18-25), the three strategy lessons and the hint wording. The questions are hand-written candidates like the rest of the bank; the guided-practice words are generated items and stay practice-only. Content-validation gate: every journey question added here carries evidence_status \"provisional\", so answers to it are recorded and shown at rule level as provisional, but never change the capability estimate.",
+ "note": "MVP vertical slice: one adaptive journey for consonant doubling (EN.FND.SPL.inflections#double_short). Everything here is provisional and awaits educator review: the 8 assessment questions (drafts spl.infl.18-25), the three strategy lessons and the hint wording. The questions are hand-written candidates like the rest of the bank; the guided-practice words are generated items and stay practice-only. Content-validation gate: every journey question added here carries evidence_status \"provisional\", so answers to it are recorded and shown at rule level as provisional, but never change the capability estimate. The last hint level of each strategy is a worked example that shows the answer; it is recorded as revealing the answer.",
  "capability": "EN.FND.SPL.inflections",
  "rule": "double_short",
  "items": [
@@ -253,6 +253,156 @@
    "review": "candidate-unvalidated",
    "family": "fam.infl.double.contrast",
    "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.26",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 2.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of melt: The ice cream ___ in the sun.",
+   "answers": [
+    "melted"
+   ],
+   "wrong": {
+    "meltted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two final consonants (lt): nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.27",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 2.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of cook: Yesterday we ___ rice for dinner.",
+   "answers": [
+    "cooked"
+   ],
+   "wrong": {
+    "cookked": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two vowel letters (oo) before the last consonant: nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.28",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Add -est to fast: The cheetah is the ___ animal on land.",
+   "answers": [
+    "fastest"
+   ],
+   "wrong": {
+    "fasttest": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two final consonants (st): nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.29",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of shout: The children ___ for joy.",
+   "answers": [
+    "shouted"
+   ],
+   "wrong": {
+    "shoutted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two vowel letters (ou) before the last consonant: nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.30",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of dream: The cat is ___ by the fire.",
+   "answers": [
+    "dreaming"
+   ],
+   "wrong": {
+    "dreamming": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two vowel letters (ea) before the last consonant: nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.31",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Add -er to dark: The sky grew ___ as the storm came closer.",
+   "answers": [
+    "darker"
+   ],
+   "wrong": {
+    "darkker": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Two final consonants (rk): nothing doubles. Contrast for the reassessment after teaching: provisional until educator-approved.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double.contrast",
+   "evidence_status": "provisional"
   }
  ],
  "independent": {
@@ -266,9 +416,15 @@
    "spl.infl.20",
    "spl.infl.j11",
    "spl.infl.23",
-   "spl.infl.25"
+   "spl.infl.25",
+   "spl.infl.26",
+   "spl.infl.27",
+   "spl.infl.28",
+   "spl.infl.29",
+   "spl.infl.30",
+   "spl.infl.31"
   ],
-  "note": "Assessment, reassessment and retention questions are taken in this order, unseen ones only. Reassessment and retention use only items where the rule applies; contrasts (24, 25) are used in assessment. Every journey question is provisional (evidence_status). swim and run are journey copies (spl.infl.j02, j11) of bank items spl.infl.02 and 11, so the bank items keep their status; a word the learner has already answered elsewhere counts as seen."
+  "note": "Assessment, reassessment and retention questions are taken in this order, unseen ones only. The delayed check uses only items where the rule applies; the reassessment after teaching asks an apply item, a contrast, then an apply item. Every journey question is provisional (evidence_status). swim and run are journey copies (spl.infl.j02, j11) of bank items spl.infl.02 and 11, so the bank items keep their status; a word the learner has already answered elsewhere counts as seen. Contrasts 26-31 were added so that every reassessment includes an unfamiliar item where the rule must not be applied; they are provisional like the rest."
  },
  "guided": [
   "gen.infl.add_ending.clapping",
@@ -314,7 +470,7 @@
    "hints": [
     "Look at the end of the word: one vowel, then one consonant?",
     "{base} ends in one vowel and one consonant ({last}). What happens to the {last}?",
-    "Double it: {base} + {last} + {ending}."
+    "Worked example (this shows the answer): {base} ends in one vowel and one consonant, so the {last} doubles: {base} + {last} + {ending} = {word}."
    ]
   },
   {
@@ -346,7 +502,7 @@
    "hints": [
     "Say {base} out loud. Is the vowel short, as in cat or sit?",
     "The short vowel needs a guard: the {last} doubles.",
-    "{base} + {last} + {ending}."
+    "Worked example (this shows the answer): say {base}, then double the {last} and add the ending: {base} + {last} + {ending} = {word}."
    ]
   },
   {
@@ -378,7 +534,7 @@
    "hints": [
     "Split it: {base} | ? | {ending}. Does {base} end in one vowel and one consonant?",
     "Yes, so the middle part is another {last}.",
-    "{base} + {last} + {ending}."
+    "Worked example (this shows the answer): {base} | {last} | {ending} = {word}."
    ]
   }
  ]

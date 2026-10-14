@@ -20,7 +20,8 @@ prepares the educator review and re-verifies the journey in a browser.
    - the 40 lines of child and parent wording.
    - Questions may stay provisional for a supervised session (they change no levels), but each must still be approved as
      suitable before a child sees it.
-2. **Your decision on three behaviours found in this pass** (planner and content changes, not made here):
+2. ~~Your decision on three behaviours found in this pass~~ **Resolved on branch `english/pilot-blockers`; see
+   "Pilot blockers A–C" below.** Originally:
    - **P-1.** A child who makes one typing slip and is otherwise always right is taught a lesson they did not need.
      The slip is correctly not counted, so after the 5 diagnostic questions only 3 count (4 are needed), and the planner
      teaches. The screen says "Not yet right on new words: teaching the rule", which is untrue for that child. Seen with
@@ -34,6 +35,40 @@ prepares the educator review and re-verifies the journey in a browser.
 4. **Data-protection review** of the above for the country of the pilot (rules on children's data differ).
 5. **A session protocol:** device, how long, what is observed, how sessions are stopped, and how observations are recorded
    (not from the app's own estimates).
+
+## Pilot blockers A–C (branch `english/pilot-blockers`)
+
+| Blocker | Change | Evidence | Closed? |
+|---|---|---|---|
+| **A. Typing slip** (P-1) | Slips no longer count towards the 5-question diagnostic limit, so another question is asked instead. The limit alone leads to teaching only after a real rule error. If questions run out, the result is "not enough answers yet", reported as a gap in the questions, not as a learning problem. | Learner G: one slip, then six questions, then "shown on new words"; no lesson, no misconception, the slip reported as a slip. A learner whose every answer is a slip: all 16 questions asked once, never taught, status "Not enough answers yet to say". Planner test P2-7. | **Yes** |
+| **B. Contrast after teaching** (OG-7) | Six new provisional contrast questions (spl.infl.26–31). Each reassessment asks a word that doubles, one that must not, and another that doubles. A lesson counts as having worked only if all three are right. If no unseen contrast is left, the planner reports a content gap. New policy setting `reassessContrastItems: 1`; no existing threshold changed. | Learner H, who doubles everything: right on every "must double" word, wrong on every contrast, so no lesson counts as having worked. B, C and the refresher after F's failed check all include a contrast. Planner tests P2-5 and P2-6. Browser test checks the order. | **Yes** for the check after teaching. Practice words still all double (see below). |
+| **C. Final hint** (OG-6) | Level 3 is now labelled "Worked example: this shows the answer." The event records `revealsAnswer` and hint type `worked_example`. The answer typed after it is assisted, never evidence, and is reported to the parent as "right only after a worked example showed the answer". The next word is new and tried once before any hint is offered. If the reveal was on the last practice word, the next step is the independent reassessment. | Unit test of the event, the assisted answer, the next word and the report. Browser test of the label, the reveal and "try it yourself first". Learner E: 36 hints, of which 12 worked examples. | **Yes** |
+
+The capability estimate, mastery thresholds and rule-evidence policy are unchanged. Every new question is provisional,
+and R-8 now covers all eight learners: a full journey and a return 30 days later leave the estimate untouched and never
+allow a verified claim.
+
+### New findings (not fixed: each needs your decision)
+
+- **N-1. Not enough "must double" questions for some learners (content gap).** A learner diagnosed only after the full
+  5 questions and then taught three times needs 10 unseen "must double" questions. There are 8. Learner H reaches this:
+  the third lesson's check cannot finish. The app reports it as a gap in the questions, not as a result, and makes no
+  claim. It is not a safety problem, but the third approach goes unchecked for such learners. Fix: at least 2 more
+  educator-approved "must double" questions (content work).
+- **N-2. Over-doubling looks "improving" after right "must double" answers.** The rule-evidence model counts any correct
+  "must double" answer as recovery from any misconception on the rule, including doubling where it should not. The
+  parent report does not rely on that state: it says "also doubles where it should not". Changing it is a change to the
+  mastery model and needs separate review.
+- **N-3. The delayed check still uses only "must double" words**, so a learner could pass it while over-doubling. This was
+  outside the approved scope; the reassessment after teaching is covered.
+- **N-4. Practice words still all double** (the rest of OG-7). The reviewer is asked whether practice needs contrast words.
+
+### Stage decisions after A–C
+
+Unchanged. Internal demonstration is **GO**. Adult usability testing is **GO with conditions**. Supervised testing with
+children is still **NO-GO**: the three behaviour blockers are closed, but educator approval (now 115 rows), safeguarding and
+consent, the data-protection review and a session protocol are still outstanding. N-1 should be fixed, or explicitly
+accepted, before children use it. Public release is **NO-GO**.
 
 ## What stage 4 (public release) also needs
 
@@ -62,6 +97,20 @@ slip. The demo now checks each parent summary and fails if any check fails.
 
 ## Test results
 
+After blockers A–C (`english/pilot-blockers`):
+
+| Check | Result |
+|---|---|
+| Core tests | 153 pass, 0 fail (4 new planner tests) |
+| Frontend tests | 60 pass, 0 fail (new: G, all-slips, H, worked example; F extended to its refresher) |
+| Typecheck (core, web app) | clean |
+| Browser tests, phone size, production build | 6 pass, 0 fail (the journey test now drives the worked example and the three-part check) |
+| Phone-size demo, 8 learners, 55 screenshots | 11 of 11 parent-summary checks pass |
+| Framework lock, generated items, bank gates, E3 harness | unchanged |
+| Ten-learner simulation | output identical to `main` |
+
+Earlier, at pilot preparation (PR #20):
+
 | Check | Result |
 |---|---|
 | Core tests (`packages/english-core`) | 149 pass, 0 fail |
@@ -82,7 +131,7 @@ slip. The demo now checks each parent summary and fails if any check fails.
 | D | Right only after a hint | "0 right at the first try, 12 right after a hint"; "Right with help in practice, not yet without help"; adult help recommended | Yes |
 | E | Never right | 3 approaches, 36 hints (each counted once), adult help recommended | Yes |
 | F | Right, then wrong after 7 days | "Not kept: wrong at the check after a week. Earlier progress is still recorded"; first-shown date kept | Yes |
-| G | One slip, otherwise right | "letters swapped, the rule itself was applied"; no pattern, no rule error | Yes (but see P-1: an unneeded lesson was given) |
+| G | One slip, otherwise right | "letters swapped, the rule itself was applied"; no pattern, no rule error | Yes. At PR #20 an unneeded lesson was given (P-1); since blocker A, none is |
 
 Every summary carries the provisional note and shows no percentages or probabilities.
 

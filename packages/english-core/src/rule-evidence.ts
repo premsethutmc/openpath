@@ -362,8 +362,11 @@ export interface InterventionSummary {
   content?: string;
   /** Answers during it: all of them are assisted. rightFirstTry: right at the first try with no hint; rightWithHelp: right after a hint or a retry. */
   during: { right: number; total: number; hints: number; items: number; rightFirstTry: number; rightWithHelp: number };
-  /** Independent answers on the rule after it and before the next intervention on the rule. */
-  independentAfter: { right: number; total: number; newWordRight: number; newWordTotal: number; lastAt: string | null };
+  /**
+   * Independent answers on the rule after it and before the next intervention on the rule. newWord*: new words
+   * where the rule applies; contrast*: items where it must not be applied (slips excluded from both).
+   */
+  independentAfter: { right: number; total: number; newWordRight: number; newWordTotal: number; contrastRight: number; contrastTotal: number; lastAt: string | null };
 }
 
 export interface DelayedCheck {
@@ -617,6 +620,7 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     const during = obs.filter((o) => o.track === "assisted" && o.intervention === iv.id);
     const after = obs.filter((o) => o.track === "independent" && o.signature.kind !== "slip" && o.at > iv.at && (!next || o.at < next));
     const nw = after.filter((o) => o.newWord && o.role === "apply");
+    const ct = after.filter((o) => o.role === "contrast");
     return {
       id: iv.id,
       at: iv.at,
@@ -630,7 +634,7 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
         rightFirstTry: during.filter((o) => o.correct && o.attempt === 1 && o.hints === 0).length,
         rightWithHelp: during.filter((o) => o.correct && (o.attempt > 1 || o.hints > 0)).length,
       },
-      independentAfter: { right: after.filter((o) => o.correct).length, total: after.length, newWordRight: nw.filter((o) => o.correct).length, newWordTotal: nw.length, lastAt: after.at(-1)?.at ?? null },
+      independentAfter: { right: after.filter((o) => o.correct).length, total: after.length, newWordRight: nw.filter((o) => o.correct).length, newWordTotal: nw.length, contrastRight: ct.filter((o) => o.correct).length, contrastTotal: ct.length, lastAt: after.at(-1)?.at ?? null },
     };
   });
   const lastCheck = [...f.checks].reverse().find((c) => c.passed !== null);

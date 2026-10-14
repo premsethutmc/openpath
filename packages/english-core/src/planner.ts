@@ -23,6 +23,11 @@ export interface PlannerPolicy {
   reassessItems: number;
   /** Correct reassessment answers (out of reassessItems) for a block to count as having worked. */
   reassessPassMin: number;
+  /**
+   * Unfamiliar contrast items (the rule must NOT be applied) in each reassessment. All of them must be right for
+   * the block to count as having worked, so a learner who applies the rule everywhere cannot pass.
+   */
+  reassessContrastItems: number;
   /** Guided practice items in a teaching block (assisted; never evidence). */
   guidedItems: number;
   /** Hint levels offered in guided practice. */
@@ -40,6 +45,7 @@ export const PLANNER_POLICY_DRAFT: PlannerPolicy = {
   diagnosticMax: 5,
   reassessItems: 2,
   reassessPassMin: 2,
+  reassessContrastItems: 1,
   guidedItems: 4,
   hintLevels: 3,
   maxStrategiesBeforeHuman: 3,
@@ -62,6 +68,8 @@ export type ActionKind = "assess" | "teach" | "guided_practice" | "reassess" | "
 
 export interface PlannerDecision {
   action: ActionKind;
+  /** For reassess: which kind of unfamiliar item to ask next (apply the rule, or a contrast where it must not be applied). */
+  itemRole?: "apply" | "contrast";
   /** The strategy to teach (teach), or the one being practised (guided_practice, reassess). */
   strategy?: string;
   diagnosis: { kind: DiagnosisKind; detail: string };
@@ -90,6 +98,11 @@ export interface PlannerInput {
   available: { apply: number; contrast: number; guided: number };
   /** Independent answers given in this session so far, and guided answers given in the current block. */
   answeredThisSession: number;
+  /**
+   * Of those, recognised slips (the rule was applied; another letter was wrong). A slip is not evidence about the
+   * rule, so it does not use up the diagnostic budget: another item is asked instead.
+   */
+  slipsThisSession?: number;
   guidedThisBlock: number;
   policy?: PlannerPolicy;
 }
@@ -98,8 +111,9 @@ const DAY = 86_400_000;
 
 export function blockResults(rule: RuleState, policy: PlannerPolicy = PLANNER_POLICY_DRAFT): BlockResult[] {
   return rule.interventions.map((iv) => {
-    const complete = iv.independentAfter.newWordTotal >= policy.reassessItems;
-    return { intervention: iv, complete, passed: complete && iv.independentAfter.newWordRight >= policy.reassessPassMin };
+    const a = iv.independentAfter;
+    const complete = a.newWordTotal >= policy.reassessItems && a.contrastTotal >= policy.reassessContrastItems;
+    return { intervention: iv, complete, passed: complete && a.newWordRight >= policy.reassessPassMin && a.contrastRight >= a.contrastTotal };
   });
 }
 
@@ -145,8 +159,16 @@ export function planRule(input: PlannerInput): PlannerDecision {
     const strategy = last.intervention.strategy;
     if (input.guidedThisBlock < p.guidedItems && input.available.guided > 0)
       return out({ action: "guided_practice", strategy, diagnosis: diagnose(r, last), reason: "Practice with help available. These answers are practice: they never count as independent evidence." });
+    // apply, then a contrast, then the remaining apply items: both using and withholding the rule are checked
+    const after = last.intervention.independentAfter;
+    const needContrast = after.contrastTotal < p.reassessContrastItems && after.newWordTotal >= 1;
+    const needApply = after.newWordTotal < p.reassessItems;
+    if (needContrast || !needApply) {
+      if (input.available.contrast === 0) return gap("unfamiliar 'must not double' question for the reassessment", diagnose(r, last));
+      return out({ action: "reassess", itemRole: "contrast", strategy, diagnosis: diagnose(r, last), reason: "Now without help, on a word not used in the teaching." });
+    }
     if (input.available.apply === 0) return gap("unfamiliar question for the reassessment", diagnose(r, last));
-    return out({ action: "reassess", strategy, diagnosis: diagnose(r, last), reason: "Now without help, on a word not used in the teaching." });
+    return out({ action: "reassess", itemRole: "apply", strategy, diagnosis: diagnose(r, last), reason: "Now without help, on a word not used in the teaching." });
   }
 
   // 4. The latest block's reassessment was passed in this session: end here, without claiming mastery.
@@ -172,13 +194,23 @@ export function planRule(input: PlannerInput): PlannerDecision {
 
   // 7. Not yet taught: gather independent evidence, then teach.
   const active = r.misconceptions.find((m) => m.state === "active");
-  const enough = r.status === "weak" || !!active || input.answeredThisSession >= p.diagnosticMax;
+  // the diagnostic budget counts answers that are evidence about the rule (slips excluded), and on its own it only
+  // leads to teaching once there is at least one rule error: a learner who has made none is asked another question
+  const counted = input.answeredThisSession - (input.slipsThisSession ?? 0);
+  const applyErrors = r.current.total - r.current.right;
+  const contrastErrors = r.contrast.total - r.contrast.right;
+  const enough = r.status === "weak" || !!active || (counted >= p.diagnosticMax && applyErrors + contrastErrors > 0);
   if (!enough && (r.status === "insufficient_evidence" || r.status === "emerging" || r.status === "inconsistent")) {
     if (input.available.apply + input.available.contrast === 0) return gap("question for the check", { kind: "insufficient_evidence", detail: "not enough answers yet" });
     return out({ action: "assess", diagnosis: { kind: r.status === "inconsistent" ? "inconsistent" : "insufficient_evidence", detail: `${r.current.total} independent answer(s) on new words so far` }, reason: "Finding out, without help, what is already known." });
   }
   const strategy = worked.at(-1)?.intervention.strategy ?? untried[0];
-  return out({ action: "teach", strategy, diagnosis: diagnose(r, last), reason: active ? "The same mistake appeared on different words: teaching the rule." : "Not yet right on new words: teaching the rule." });
+  const reason = active
+    ? "The same mistake appeared on different words: teaching the rule."
+    : applyErrors === 0 && contrastErrors > 0
+      ? "Doubled a letter where it should not be doubled: teaching when to double, and when not to."
+      : "Not yet right on new words: teaching the rule.";
+  return out({ action: "teach", strategy, diagnosis: diagnose(r, last), reason });
 }
 
 function diagnose(r: RuleState, last: BlockResult | undefined): PlannerDecision["diagnosis"] {
