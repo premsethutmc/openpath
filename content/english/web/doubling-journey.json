@@ -6,6 +6,56 @@
  "items": [
   {
    "kind": "code",
+   "id": "spl.infl.j02",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of swim: She is ___ in the lake.",
+   "answers": [
+    "swimming"
+   ],
+   "wrong": {
+    "swiming": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Doubles the final consonant of a short one-syllable verb (swim → swimming). Journey copy of spl.infl.02: provisional until educator-approved. The bank item spl.infl.02 is unchanged.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.infl.j11",
+   "version": 1,
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of run: Look, the dog is ___ after the ball.",
+   "step": "double_short",
+   "rationale": "Doubles the final consonant of a short one-syllable verb (run → running). Journey copy of spl.infl.11: provisional until educator-approved. The bank item spl.infl.11 is unchanged.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "family": "fam.infl.double",
+   "addresses": [
+    "no_doubling"
+   ],
+   "answers": [
+    "running"
+   ],
+   "wrong": {
+    "runing": "no_doubling"
+   },
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
    "id": "spl.infl.18",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
@@ -207,18 +257,18 @@
  ],
  "independent": {
   "assessOrder": [
-   "spl.infl.02",
+   "spl.infl.j02",
    "spl.infl.18",
    "spl.infl.24",
    "spl.infl.19",
    "spl.infl.22",
    "spl.infl.21",
    "spl.infl.20",
-   "spl.infl.11",
+   "spl.infl.j11",
    "spl.infl.23",
    "spl.infl.25"
   ],
-  "note": "Assessment, reassessment and retention questions are taken in this order, unseen ones only. Reassessment and retention use only items where the rule applies; contrasts (24, 25) are used in assessment."
+  "note": "Assessment, reassessment and retention questions are taken in this order, unseen ones only. Reassessment and retention use only items where the rule applies; contrasts (24, 25) are used in assessment. Every journey question is provisional (evidence_status). swim and run are journey copies (spl.infl.j02, j11) of bank items spl.infl.02 and 11, so the bank items keep their status; a word the learner has already answered elsewhere counts as seen."
  },
  "guided": [
   "gen.infl.add_ending.clapping",

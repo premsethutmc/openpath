@@ -49,7 +49,7 @@ rule and worked examples; listen for the short vowel; build the word in parts.
 
 | Content | Count | Where |
 |---|---|---|
-| Independent questions where doubling applies | 8 (spl.infl.02, 11, 18–23) | Bank and `doubling-journey.json` |
+| Independent questions where doubling applies | 8 (spl.infl.j02, j11, 18–23) | Bank and `doubling-journey.json` |
 | Contrast questions (must not double) | 2 (spl.infl.24, 25) | `doubling-journey.json` |
 | Strategy lessons | 3 | `doubling-journey.json` |
 | Hint templates | 9 (3 levels × 3 strategies) | `doubling-journey.json` |
@@ -61,8 +61,8 @@ learner who needs all three approaches and then a retention check.
 
 ## Limits
 
-- Provisional content throughout. The 8 journey questions added for it are gated (below); the 2 bank
-  questions it also uses (spl.infl.02, 11) are candidate bank items and update the estimate as before.
+- Provisional content throughout. All 10 journey questions are gated (below). swim and run are journey copies
+  (spl.infl.j02, j11) of bank items spl.infl.02 and 11, which are unchanged (see PILOT_READINESS_DOUBLING.md).
 - Only doubling. The other seven inflection rules are untouched.
 - Existing sessions now record provenance too (questions shown, first answers, retries, lessons as
   interventions), but have no hints.
@@ -80,7 +80,7 @@ Now every content item can carry `evidence_status`:
 
 | Status | Source | Estimate | Rule level | Claims |
 |---|---|---|---|---|
-| `provisional` | The 8 journey questions | Never changes (decision "held", reason given) | Counted as independent, marked provisional | A rule resting on any provisional answer is never treated as verified |
+| `provisional` | The 10 journey questions (8 in PR #19; swim and run copies since pilot prep) | Never changes (decision "held", reason given) | Counted as independent, marked provisional | A rule resting on any provisional answer is never treated as verified |
 | absent (candidate) | The existing 780-item bank | Updates, as since E1 (unchanged) | Counted | As before |
 | `validated` | None yet | Updates | Counted | Can verify |
 
@@ -117,7 +117,7 @@ the content provisional.
 
 | # | Content | Items | What to check |
 |---|---|---|---|
-| 1 | Independent questions | spl.infl.18 chop, 19 stop, 20 big, 21 dig (fix the spelling), 22 trim, 23 wet, plus bank items spl.infl.02 swim, 11 run | One right answer; root word or meaning given; vocabulary and sentences suitable for the age group; difficulty |
+| 1 | Independent questions | spl.infl.18 chop, 19 stop, 20 big, 21 dig (fix the spelling), 22 trim, 23 wet, plus spl.infl.j02 swim, j11 run (journey copies of bank items 02, 11) | One right answer; root word or meaning given; vocabulary and sentences suitable for the age group; difficulty |
 | 2 | Contrast questions | spl.infl.24 jump, 25 rain (fix the spelling) | That they test when not to double; wording |
 | 3 | Lessons | worked_examples, sound_first, word_building | Accuracy (including the "short vowel" explanation and its exceptions), clarity, age-appropriateness |
 | 4 | Hints | 9 templates (3 levels × 3 strategies) | Level 3 shows the join: whether that gives away too much |
@@ -125,4 +125,4 @@ the content provisional.
 | 6 | Draft policy | `planner-policy@0-draft`, `rule-evidence-policy@0-draft` | Whether 4 guided words, 2 of 2 new words, 3 approaches before support and 7 days are sensible for children |
 | 7 | Parent wording | Status lines, "Recommended" text | That it is accurate and not discouraging |
 
-The 24-question review sheet prepared earlier covers rows 1–2 except the two bank items.
+The full review package is `review/doubling-educator-review.xlsx` with `review/EDUCATOR_REVIEW_DOUBLING.md`.

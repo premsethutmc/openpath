@@ -157,23 +157,36 @@ test("R-7 opening the journey repeatedly never duplicates events", async () => {
   assert.equal(kinds(l).filter((k) => k === "presented").length, 1);
 });
 
-test("R-8 the provisional journey questions never change the capability estimate", async () => {
-  const { l } = await newLearner("gate");
-  const before = JSON.stringify(l.state.ledger.composite.nodes[content.journey.capability].direct);
-  await l.startJourney();
-  for (let k = 0; k < 5; k++) {
-    const v = await l.journey();
-    if (v.step.kind !== "question") break;
-    const provisional = v.step.item.evidence_status === "provisional";
-    const was = JSON.stringify(l.state.ledger.composite.nodes[content.journey.capability].direct);
-    await l.answerJourney(v.step.item, right(v.step.item), v.step.purpose);
-    const now = JSON.stringify(l.state.ledger.composite.nodes[content.journey.capability].direct);
-    if (provisional) assert.equal(now, was, `${v.step.item.id} is provisional: no estimate change`);
-    else assert.notEqual(now, was, `${v.step.item.id} is a candidate bank item: it updates the estimate, as before`);
+test("R-8 every journey question is provisional: no journey answer ever reaches the official estimate or supports a validated claim", async () => {
+  for (const id of content.journey.assessOrder) assert.equal((content.ctx.content.items.get(id) as { evidence_status?: string }).evidence_status, "provisional", id);
+  for (const id of content.journey.assessOrder) assert.ok(!content.handWritten.has(id), `${id} is not used outside the journey`);
+  // the bank items the journey copies keep their status
+  for (const id of ["spl.infl.02", "spl.infl.11"]) assert.equal((content.ctx.content.items.get(id) as { evidence_status?: string }).evidence_status, undefined, id);
+  const cap = content.journey.capability;
+  for (const [key, L] of Object.entries(LEARNERS)) {
+    const clock = testClock();
+    const { l } = await newLearner(`gate-${key}`, content, clock);
+    const initial = JSON.stringify(l.state.ledger.composite.nodes[cap]);
+    await runJourney(l, L.behaviour(l));
+    clock.days(30);
+    await runJourney(l, L.behaviour(l));
+    assert.equal(JSON.stringify(l.state.ledger.composite.nodes[cap]), initial, `${key}: the estimate is untouched`);
+    const accepted = l.state.ledger.decisions.filter((d) => d.verdict === "accepted");
+    assert.equal(accepted.length, 0, `${key}: no journey answer is accepted as estimate evidence`);
+    const rule = doublingRule(l.state, content, l.clock());
+    assert.equal(countsAsVerified(rule), false, `${key}: never a validated rule`);
   }
-  assert.notEqual(JSON.stringify(l.state.ledger.composite.nodes[content.journey.capability].direct), before);
-  const held = l.state.ledger.decisions.filter((d) => d.verdict === "held" && d.reasons[0].includes("provisional item"));
-  assert.equal(held.length, 4);
+});
+
+test("R-8b a word already answered on the bank item is not asked again through its journey copy", async () => {
+  const { l } = await newLearner("twin");
+  await l.start({ type: "explore" });
+  await l.answer(content.ctx.content.items.get("spl.infl.02")!, { kind: "typed", text: "swimming" }, { use: "assessment" });
+  await l.stop();
+  await l.startJourney();
+  const v = await l.journey();
+  assert.equal(v.step.kind, "question");
+  assert.notEqual(v.step.kind === "question" && v.step.item.id, "spl.infl.j02");
 });
 
 test("R-9 a finished journey is closed when its summary appears, even if the app is then simply closed; a return a week later is a new session with a real delayed check", async () => {

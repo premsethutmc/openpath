@@ -1,5 +1,5 @@
 /**
- * Reproducible demonstration of the doubling journey for six synthetic learners (A–F), in a real browser at
+ * Reproducible demonstration of the doubling journey for seven synthetic learners (A–G), in a real browser at
  * phone size, against the production build. Writes screenshots of the child-facing screens and the parent
  * summary, plus an index page, to out/journey-demo/.
  *
@@ -27,13 +27,16 @@ const noDouble = (i) => (i.generated ? i.generated.base + i.generated.join.repla
 
 /** Each learner: independent(item, taught) and guided(item, taught) → hints needed (0 first try, Infinity never). */
 const LEARNERS = {
-  A: { label: "Understands doubling and succeeds on their own", independent: () => true, guided: () => 0 },
+  A: { label: "Understands doubling and succeeds on their own; still right 30 days later", independent: () => true, guided: () => 0, returnAfterDays: 30, onReturn: () => true },
   B: { label: "Fails at first, responds to teaching, then succeeds on unfamiliar words", independent: (_, t) => t.length > 0, guided: () => 0 },
   C: { label: "The first explanation does not work; a different approach does", independent: (i, t) => t.includes("sound_first") || contrast(i), guided: (_, t) => (t.includes("sound_first") ? 0 : Infinity) },
   D: { label: "Succeeds only after hints", independent: (i) => contrast(i), guided: () => 1 },
   E: { label: "Repeatedly fails; the app stops and recommends support", independent: (i) => contrast(i), guided: () => Infinity },
-  F: { label: "Succeeds, then fails the check a week later", independent: () => true, guided: () => 0, returnAfterDays: 8, onReturn: (i) => contrast(i) },
+  F: { label: "Succeeds, then fails the check seven days later", independent: () => true, guided: () => 0, returnAfterDays: 7, onReturn: (i) => contrast(i) },
+  G: { label: "Applies the rule but makes a typing slip (two letters swapped) on the first word", independent: () => true, guided: () => 0, slipFirst: true },
 };
+/** The right answer with its last two letters swapped: a slip, not a rule error. */
+const slip = (i) => { const a = right(i); return a.slice(0, -2) + a.at(-1) + a.at(-2); };
 
 const PHONE = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -87,7 +90,8 @@ async function run(key, L) {
       const item = items.get(id);
       if (kind === "question") {
         const purpose = await step.first().getAttribute("data-purpose");
-        await page.locator(".ruled input").fill(independent(item, taught) ? right(item) : noDouble(item));
+        const first = !seen.has("answered") && (seen.add("answered"), true);
+        await page.locator(".ruled input").fill(L.slipFirst && first ? slip(item) : independent(item, taught) ? right(item) : noDouble(item));
         await page.getByRole("button", { name: "Check", exact: true }).click();
         await page.locator(".feedback").waitFor();
         await firstOf(`${phase}-${purpose}`, `${phase}-${purpose}`, purpose === "assessment" ? "A question on their own (no hints), with feedback" : purpose === "reassess" ? "A new word on their own after teaching" : "The check a week later (no hints)");
@@ -123,22 +127,35 @@ async function run(key, L) {
     await page.getByRole("heading", { name: "Today" }).waitFor();
     await page.getByRole("button", { name: /doubling letters/ }).click();
     for (let k = 0; k < 2; k++) {
-      await page.locator('[data-step="question"][data-purpose="retention"]').waitFor({ timeout: 8000 }).catch(async (e) => { await page.screenshot({ path: OUT + "debug.png", fullPage: true }); const ev = await page.evaluate(async () => { const name = (await indexedDB.databases())[0].name; const db = await new Promise((r) => { const q = indexedDB.open(name); q.onsuccess = () => r(q.result); }); return await new Promise((r) => { const q = db.transaction("events").objectStore("events").getAll(); q.onsuccess = () => r(q.result.map((x) => x.event ?? x)); }); }); console.log(JSON.stringify(ev.slice(-8).map((e) => [e.kind, e.at, e.session, e.item?.id, e.provenance ? "prov" : ""]))); throw e; });
+      await page.locator('[data-step="question"][data-purpose="retention"]').waitFor({ timeout: 8000 });
       const item = items.get(await page.locator(".item").getAttribute("data-item"));
       await page.locator(".ruled input").fill(L.onReturn(item) ? right(item) : noDouble(item));
       await page.getByRole("button", { name: "Check", exact: true }).click();
       await page.locator(".feedback").waitFor();
-      if (k === 0) await shot("return-retention", "A week later: the check, on their own");
+      if (k === 0) await shot("return-retention", `${L.returnAfterDays} days later: the check, on their own`);
       await page.getByRole("button", { name: "Next" }).click();
       await page.locator(".feedback").waitFor({ state: "detached" });
     }
-    await page.getByRole("button", { name: "Save and leave" }).click();
+    if (await page.locator('[data-step="summary"]').count()) {
+      await shot("return-summary", `Summary after the check ${L.returnAfterDays} days later`);
+      await page.getByRole("button", { name: "Back to today" }).click();
+    } else await page.getByRole("button", { name: "Save and leave" }).click();
     await page.getByRole("button", { name: "Progress" }).click();
     await page.locator(".parent").waitFor();
-    await shot("return-parent", "Parent summary after the failed check: earlier progress kept, retention failed");
+    await shot("return-parent", `Parent summary after the check ${L.returnAfterDays} days later`);
   }
+  // what the parent summary says, line by line, with how each answer was given (for the verification record)
+  if (!(await page.locator(".parent").count())) {
+    if (await page.getByRole("button", { name: "Back to today" }).count()) await page.getByRole("button", { name: "Back to today" }).click();
+    await page.getByRole("button", { name: "Progress" }).click();
+  }
+  await page.locator(".parent").waitFor();
+  const parent = await page.locator(".parent").evaluate((el) => ({
+    text: el.innerText,
+    lines: [...el.querySelectorAll("li[data-kind]")].map((li) => ({ kind: li.getAttribute("data-kind"), evidence: li.getAttribute("data-evidence"), text: li.textContent })),
+  }));
   if (errors.length) throw new Error(`learner ${key}: ${errors.join("; ")}`);
-  index.push({ key, label: L.label, shots });
+  index.push({ key, label: L.label, shots, parent });
   await context.close();
 }
 
@@ -147,8 +164,26 @@ await browser.close();
 
 const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doubling journey demo</title>
 <style>body{font:16px system-ui,sans-serif;margin:24px;color:#222}h2{margin-top:2rem}.row{display:flex;gap:16px;overflow-x:auto}figure{margin:0;flex:0 0 260px}img{width:260px;border:1px solid #ccc;border-radius:8px}figcaption{font-size:13px;color:#555}.warn{background:#fff4d6;padding:12px;border-radius:8px}</style>
-<h1>OpenPath: the consonant-doubling journey, six synthetic learners</h1>
+<h1>OpenPath: the consonant-doubling journey, seven synthetic learners</h1>
 <p class="warn">Demonstration only. The learners are synthetic and answer by fixed rules; this shows how the software behaves, not how children learn. All questions, lessons and hints in the journey are provisional and not yet reviewed by an educator.</p>
 ${index.map((l) => `<h2>Learner ${l.key}: ${l.label}</h2><div class="row">${l.shots.map((s) => `<figure><img src="${s.file}" alt="${s.caption}"><figcaption>${s.caption}</figcaption></figure>`).join("")}</div>`).join("\n")}`;
 writeFileSync(OUT + "index.html", html);
+writeFileSync(OUT + "parent-reports.json", JSON.stringify(index.map(({ key, label, parent }) => ({ key, label, ...parent })), null, 1));
+// the verification record: what each parent summary must and must not say
+const kinds = (k) => new Set(index.find((l) => l.key === k).parent.lines.map((x) => x.kind));
+const text = (k) => index.find((l) => l.key === k).parent.text;
+const checks = [
+  ["every summary states the content is provisional", index.every((l) => /provisional: not yet reviewed by an educator/.test(l.parent.text))],
+  ["A: no difficulty lines, no help, retention confirmed after 30 days, not called verified", kinds("A").size === 0 && /None: every answer/.test(text("A")) && /Confirmed: still right after at least a week/.test(text("A")) && /not a verified result/.test(text("A"))],
+  ["B: independent errors only, no assisted lines, progress not mastery", kinds("B").has("independent") && !kinds("B").has("assisted") && /not yet mastery/.test(text("B"))],
+  ["C: assisted lines kept apart from independent ones; a second approach recorded", kinds("C").has("assisted") && kinds("C").has("independent") && /Yes: 2 approaches tried/.test(text("C"))],
+  ["D: right only with help; no independent success claimed", /12 right after a hint/.test(text("D")) && /0 right at the first try/.test(text("D")) && /not yet without help/.test(text("D"))],
+  ["E: three approaches, then support recommended; 36 hints counted once", /Yes: 3 approaches tried/.test(text("E")) && /36 hints used/.test(text("E")) && /recommend a teacher or parent/.test(text("E"))],
+  ["F: retention failed after 7 days, earlier progress kept", /Not kept: wrong at the check after a week/.test(text("F")) && /First shown on/.test(text("F"))],
+  ["G: a slip is shown as a slip, not as a rule error", kinds("G").has("slip") && !kinds("G").has("independent") && !kinds("G").has("pattern")],
+  ["no summary shows a probability or percentage", index.every((l) => !/%|probabilit/i.test(l.parent.text))],
+];
+writeFileSync(OUT + "verification.json", JSON.stringify(checks.map(([what, pass]) => ({ what, pass })), null, 1));
+for (const [what, pass] of checks) console.log(`${pass ? "PASS" : "FAIL"}  ${what}`);
+if (checks.some(([, pass]) => !pass)) process.exitCode = 1;
 console.log(`wrote ${index.reduce((t, l) => t + l.shots.length, 0)} screenshots and index.html to ${OUT}`);

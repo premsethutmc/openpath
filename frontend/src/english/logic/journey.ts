@@ -68,7 +68,13 @@ function guidedFinished(attempts: AttemptEvent[], hints: number, policy: Planner
 
 export function journeyView(s: AppState, c: AppContent, session: SessionState, now: string, policy: PlannerPolicy = PLANNER_POLICY_DRAFT): JourneyView {
   const rule = doublingRule(s, c, now);
-  const seen = (id: string) => s.ledger.exposures.has(id);
+  // seen: this item, or any item whose answer is the same word (journey copies of bank items share words with them)
+  const wordOf = (id: string) => {
+    const i = c.ctx.content.items.get(id);
+    return i?.kind === "code" ? (i.generated?.word ?? i.answers?.[0] ?? id) : id;
+  };
+  const answeredWords = new Set([...s.ledger.exposures.keys()].map(wordOf));
+  const seen = (id: string) => s.ledger.exposures.has(id) || answeredWords.has(wordOf(id));
   const unseen = c.journey.assessOrder.filter((id) => !seen(id)).map((id) => code(c, id));
   const block = ruleInterventions(s, c).at(-1);
   const since = block?.at ?? session.event.at;

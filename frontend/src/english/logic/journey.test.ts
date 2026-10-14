@@ -41,7 +41,7 @@ const evidenceIds = (l: Learner) => new Set(l.events.filter((e) => e.kind === "e
 test("Learner A understands doubling: independent questions only, shown on new words, no teaching, retention pending", async () => {
   const { l, repo } = await newLearner("A");
   const t = await runJourney(l, { independent: () => true, guided: () => 0 });
-  assert.deepEqual(t.steps, ["assessment:spl.infl.02:right", "assessment:spl.infl.18:right", "assessment:spl.infl.24:right", "assessment:spl.infl.19:right", "assessment:spl.infl.22:right"]);
+  assert.deepEqual(t.steps, ["assessment:spl.infl.j02:right", "assessment:spl.infl.18:right", "assessment:spl.infl.24:right", "assessment:spl.infl.19:right", "assessment:spl.infl.22:right"]);
   assert.equal(t.outcome, "shown_independently");
   const r = l.doublingReport();
   assert.equal(doublingRule(l.state, content, l.clock()).status, "demonstrated");
@@ -57,7 +57,7 @@ test("Learner B fails at first, responds to teaching and succeeds on unfamiliar 
   const { l, repo } = await newLearner("B");
   const taught = () => strategiesTaught(l).length > 0;
   const t = await runJourney(l, { independent: () => taught(), guided: () => 0 });
-  assert.deepEqual(t.steps.slice(0, 3), ["assessment:spl.infl.02:wrong", "assessment:spl.infl.18:wrong", "teach:worked_examples"]);
+  assert.deepEqual(t.steps.slice(0, 3), ["assessment:spl.infl.j02:wrong", "assessment:spl.infl.18:wrong", "teach:worked_examples"]);
   assert.equal(t.steps.filter((s) => s.startsWith("guided:")).length, 4);
   assert.deepEqual(t.steps.slice(-2), ["reassess:spl.infl.19:right", "reassess:spl.infl.22:right"]);
   assert.equal(t.outcome, "improved_after_teaching");
@@ -160,6 +160,21 @@ test("Learner F returns after seven days and fails retention: status changes, ea
   const next = await l.journey();
   assert.equal(next.step.kind, "teach");
   assert.equal(next.decision.diagnosis.kind, "retrieval_difficulty");
+  await assertReplay(l, repo);
+});
+
+test("a slip (two letters swapped) is reported as a slip: no pattern, no rule error, evidence linked", async () => {
+  const { l, repo } = await newLearner("G");
+  await l.startJourney();
+  const v = await l.journey();
+  if (v.step.kind !== "question") throw new Error("expected a question");
+  const a = (v.step.item as { answers: string[] }).answers[0];
+  await l.answerJourney(v.step.item, { kind: "typed", text: a.slice(0, -2) + a.at(-1) + a.at(-2) }, "assessment");
+  const r = l.doublingReport();
+  assert.deepEqual(r.difficulty.map((d) => d.kind), ["slip"]);
+  assert.match(r.difficulty[0].text, /letters swapped, the rule itself was applied/);
+  assert.equal(r.difficulty[0].evidence.length, 1);
+  assert.ok(l.events.some((e) => e.id === r.difficulty[0].evidence[0] && e.kind === "evidence"));
   await assertReplay(l, repo);
 });
 
