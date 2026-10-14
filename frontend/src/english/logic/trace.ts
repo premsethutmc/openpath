@@ -19,7 +19,7 @@ function candidate(c: AppContent, x: Scored, best?: Scored): TracedCandidate {
     score: r3(x.score),
     p: r3(x.p),
     parts: Object.fromEntries(Object.entries(x.parts).map(([k, v]) => [k, r3(v)])),
-    reasons: x.reasons,
+    reasons: x.reasons.slice(0, 3).map((r) => r.slice(0, 160)),
   };
   if (best) out.whyNot = x.score < best.score ? `lower score (${r3(x.score)} < ${r3(best.score)})` : `equal score (${r3(x.score)}); the engine's tie-break chose the other`;
   return out;
@@ -34,7 +34,7 @@ export function selectionTrace(s: AppState, c: AppContent, inp: SelectionInput, 
   const handWritten = [...c.handWritten].filter(inGoal);
   const unseen = handWritten.filter((id) => !inp.seen.has(id));
   const count = (why: string) => handWritten.filter((id) => excluded.get(id) === why).length;
-  const capsInPlay = [...new Set([r.choice, ...r.alternatives].filter((x): x is Scored => !!x).flatMap((x) => (x.focus ? [x.focus] : x.targets)))].slice(0, 6);
+  const capsInPlay = [...new Set([r.choice, ...r.alternatives].filter((x): x is Scored => !!x).flatMap((x) => (x.focus ? [x.focus] : x.targets)))].slice(0, 4);
   return {
     selector: "engine",
     use,
@@ -56,9 +56,9 @@ export function selectionTrace(s: AppState, c: AppContent, inp: SelectionInput, 
       seen: handWritten.length - unseen.length,
     },
     chosen: r.choice ? candidate(c, r.choice) : undefined,
-    alternatives: r.alternatives.slice(0, 6).map((x) => candidate(c, x, r.choice ?? undefined)),
-    bankGaps: r.bankGaps.slice(0, 4).map((g) => ({ capability: g.capability, suitable: g.suitableDifficulty, unused: g.unusedDifficulties.slice(0, 12), note: g.note })),
-    explanation: r.explanation,
+    alternatives: r.alternatives.slice(0, 4).map((x) => candidate(c, x, r.choice ?? undefined)),
+    bankGaps: r.bankGaps.slice(0, 3).map((g) => ({ capability: g.capability, suitable: g.suitableDifficulty, unused: g.unusedDifficulties.slice(0, 8), note: g.note.slice(0, 200) })),
+    explanation: r.explanation.slice(0, 400),
   };
 }
 
@@ -79,7 +79,7 @@ export function planTrace(profile: LearnerProfile, started: PlanTrace["started"]
     action: a.recommendation?.action ?? null,
     capability: a.step.capability ?? null,
     priority: a.recommendation?.priority ?? null,
-    why: a.recommendation?.why ?? a.step.reason,
+    why: (a.recommendation?.why ?? a.step.reason ?? "").slice(0, 300),
   }));
   const rank = profile.activities.findIndex((a) => a.step.type === started.type && (a.step.capability ?? undefined) === started.capability && (a.step.purpose ?? undefined) === (started.purpose ?? undefined));
   return {

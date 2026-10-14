@@ -7,7 +7,7 @@ import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type Pre
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType, type TraceEvent } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
@@ -102,7 +102,16 @@ export class Learner {
   /** Record why a question was shown, right after it was first shown. */
   private async traceSelection(presented: string, item: { id: string; version: number }, selection: SelectionTrace): Promise<void> {
     const session = this.state.open?.event.session;
-    await this.add({ kind: "trace", id: this.nextId(), at: this.clock(), ...(session ? { session } : {}), item, presented, selection });
+    await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), ...(session ? { session } : {}), item, presented, selection });
+  }
+
+  /** Traces are diagnostic: one that cannot be saved is measured (save_failed) and never stops the learner. */
+  private async addTrace(e: TraceEvent): Promise<void> {
+    try {
+      await this.add(e);
+    } catch {
+      /* recorded as save_failed by add() */
+    }
   }
 
   /** Record what Today offered and which activity was started, just before the session starts. */
@@ -140,7 +149,7 @@ export class Learner {
     const s = this.state;
     const c = this.content;
     const plan = this.planTraceFor({ type: step.type, ...(step.capability ? { capability: step.capability } : {}), ...(step.purpose ? { purpose: step.purpose } : {}), ...(step.step ? { step: step.step } : {}) });
-    if (plan) await this.add({ kind: "trace", id: this.nextId(), at: now, plan });
+    if (plan) await this.addTrace({ kind: "trace", id: this.nextId(), at: now, plan });
     const base = { kind: "session" as const, id: this.nextId(), at: now, session: `s:${this.events.length + 1}`, type: step.type };
     let queue: Planned[] | undefined;
     let extra: Record<string, unknown> = {};
@@ -347,7 +356,7 @@ export class Learner {
     if (preview.step.kind === "summary") return preview;
     if (open) await this.stop();
     const plan = this.planTraceFor({ type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
-    if (plan) await this.add({ kind: "trace", id: this.nextId(), at: this.clock(), plan });
+    if (plan) await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), plan });
     await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
     return this.journey();
   }

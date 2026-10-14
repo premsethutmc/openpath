@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
-from family.developer import audit, issue_claim
+from family.developer import audit, expire_unused_claims, issue_claim
 from family.models import DeveloperAccess
 
 
@@ -38,9 +38,10 @@ class Command(BaseCommand):
             raise CommandError("No account with that email.")
         if action == "grant":
             access, _ = DeveloperAccess.objects.update_or_create(user=user, defaults={"granted_via": "management command", "revoked_at": None})
-            audit(user, "granted_by_command")
+            audit(user, "granted_by_command", detail="by a server operator (manage.py)")
             self.stdout.write(f"{email}: developer access granted")
         else:
             DeveloperAccess.objects.filter(user=user, revoked_at__isnull=True).update(revoked_at=timezone.now())
-            audit(user, "revoked_by_command")
+            expire_unused_claims()  # a code still in an old log cannot bring the access back
+            audit(user, "revoked_by_command", detail="by a server operator (manage.py)")
             self.stdout.write(f"{email}: developer access revoked")

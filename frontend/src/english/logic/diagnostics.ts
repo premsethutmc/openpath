@@ -12,7 +12,7 @@
  */
 import { itemVersion, leafView, scoreCode, type CodeItem, type Decision, type Item, type Response } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent } from "./content.ts";
-import type { AppEvent, AttemptEvent, PlanTrace, SelectionTrace, TraceEvent } from "./events.ts";
+import { type AppEvent, type AttemptEvent, type PlanTrace, type SelectionTrace, type TraceEvent, eventProblem } from "./events.ts";
 import { Learner } from "./learner.ts";
 import { learnerProfile } from "./profile.ts";
 import { placementDone, fold } from "./state.ts";
@@ -118,8 +118,19 @@ const tally = <T,>(xs: T[], key: (x: T) => string): Record<string, number> => {
 const AREA = (id: string) => (id.startsWith("EN.FND.SPL") ? "spelling" : id.startsWith("EN.GRM") || id.startsWith("EN.SEN") ? "grammar" : id.startsWith("EN.VOC") ? "vocabulary" : id.startsWith("EN.RDG") ? "reading" : "other");
 
 /** Run the whole diagnostic. Read-only: the input events are never changed and nothing is saved. */
+/** A trace whose shape the dashboard can show (traces come from any app version, or from a shared family's record). */
+function wellFormed(e: TraceEvent): boolean {
+  const t = e.selection;
+  if (t && (typeof t !== "object" || !["engine", "queue", "planner"].includes(t.selector) || (t.alternatives !== undefined && !Array.isArray(t.alternatives)) || (t.knew !== undefined && !Array.isArray(t.knew)) || (t.chosen !== undefined && !Array.isArray(t.chosen?.reasons)) || (t.bankGaps !== undefined && !Array.isArray(t.bankGaps)))) return false;
+  const p = e.plan;
+  if (p && (typeof p !== "object" || !Array.isArray(p.offered) || typeof p.standings !== "object" || p.standings === null)) return false;
+  return true;
+}
+
 export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<Diagnosis> {
-  const events = input.events;
+  // events the app itself would refuse on import, and malformed traces, are left out and reported, never trusted
+  const rejected = input.events.map((e) => [e, eventProblem(e) ?? (e.kind === "trace" && !wellFormed(e) ? `trace ${e.id} is malformed` : null)] as const).filter(([, p]) => p);
+  const events = rejected.length ? input.events.filter((e) => !rejected.some(([r]) => r === e)) : input.events;
   const now = input.now;
   const s = fold(c, events);
   const profile = learnerProfile(s, c, now);
@@ -341,6 +352,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
   // ------------------------------------------------------------ consistency checks
   const issues: Issue[] = [];
   const flag = (severity: Issue["severity"], check: string, detail: string) => issues.push({ severity, check, detail });
+  if (rejected.length) flag("high", "malformed events", `${rejected.length} event(s) left out of this diagnosis: ${rejected.slice(0, 3).map(([, p]) => p).join("; ")}`);
   for (const a of attempts) {
     const it = item(a.item.id);
     if (!it || it.kind !== "code") {
@@ -451,22 +463,29 @@ const escape = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /** Replace the pupil's name and record id everywhere (answers included), and any email-like text. */
 export function redactText(text: string, pupil: { id: string; name: string }): string {
-  let out = text.split(pupil.id).join("pupil-A");
+  let out = pupil.id ? text.split(pupil.id).join("pupil-A") : text;
   const name = pupil.name.trim();
-  if (name.length >= 2) out = out.replace(new RegExp(`\\b${escape(name)}\\b`, "gi"), "Pupil A");
-  return out.replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, "[email]");
+  // whole words in any alphabet (Zoë, José, Ananyā); one-letter names would erase ordinary words, and the name
+  // field itself is replaced directly
+  if (name.length >= 2) out = out.replace(new RegExp(`(?<![\\p{L}\\p{N}\\p{M}])${escape(name)}(?![\\p{L}\\p{N}\\p{M}])`, "giu"), "Pupil A");
+  return out.replace(/[\w.+-]+@[\w-]+\.[\w.]+/gu, "[email]");
+}
+
+/** Redact every string value (never keys or numbers), so no name can break the JSON. */
+function redactValue<T>(v: T, who: { id: string; name: string }): T {
+  if (typeof v === "string") return redactText(v, who) as T;
+  if (Array.isArray(v)) return v.map((x) => redactValue(x, who)) as T;
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, redactValue(x, who)])) as T;
+  return v;
 }
 
 export function buildReport(d: Diagnosis, opts: ReportOptions = { redact: true }): Report {
   const json = { ...structuredClone(d), redacted: opts.redact };
-  let text = reportText(json);
-  let out = json;
-  if (opts.redact) {
-    const who = { id: d.pupil.id, name: d.pupil.label };
-    out = JSON.parse(redactText(JSON.stringify(json), who));
-    text = redactText(text, who);
-  }
-  return { text, json: out };
+  if (!opts.redact) return { text: reportText(json), json };
+  const who = { id: d.pupil.id, name: d.pupil.label };
+  const out = redactValue(json, who);
+  out.pupil = { ...out.pupil, label: "Pupil A", id: "pupil-A" };
+  return { text: reportText(out), json: out };
 }
 
 function fmtSel(t: SelectionTrace | null): string[] {

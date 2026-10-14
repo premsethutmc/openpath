@@ -124,6 +124,8 @@ class ClientMetric(models.Model):
     """A measurement sent by the app (save latency, rebuild and selection time, a failed save, a runtime error)."""
 
     at = models.DateTimeField(auto_now_add=True, db_index=True)
+    # who sent it, so a flood from one account can be found and removed (kept only as long as the metric)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE, related_name="+")
     name = models.CharField(max_length=40)
     ms = models.FloatField(null=True, blank=True)
     ok = models.BooleanField(default=True)

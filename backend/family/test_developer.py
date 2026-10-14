@@ -155,7 +155,7 @@ class TelemetryAndErrorTests(DevTestCase):
     def test_the_app_reports_measurements_from_a_fixed_list_with_scrubbed_details(self):
         self.assertIn(APIClient().post("/api/telemetry/", {"metrics": [{"name": "save_ms", "ms": 12}]}, format="json").status_code, (401, 403))
         p = self.parent("asha@example.org")
-        r = p.post("/api/telemetry/", {"app_version": "abc123", "metrics": [{"name": "save_ms", "ms": 12.5}, {"name": "made_up", "ms": 1}, {"name": "runtime_error", "ok": False, "detail": "x is undefined near asha@example.org"}, {"name": "rebuild_ms", "ms": True}]}, format="json")
+        r = p.post("/api/telemetry/", {"app_version": "abc1234", "metrics": [{"name": "save_ms", "ms": 12.5}, {"name": "made_up", "ms": 1}, {"name": "runtime_error", "ok": False, "detail": "x is undefined near asha@example.org"}, {"name": "rebuild_ms", "ms": True}]}, format="json")
         self.assertEqual(r.json()["stored"], 3)
         self.assertEqual(sorted(ClientMetric.objects.values_list("name", flat=True)), ["rebuild_ms", "runtime_error", "save_ms"])
         self.assertEqual(ClientMetric.objects.get(name="runtime_error").detail, "x is undefined near [email]")
@@ -163,7 +163,7 @@ class TelemetryAndErrorTests(DevTestCase):
         self.assertEqual(p.post("/api/telemetry/", {"metrics": [{"name": "save_ms"}] * 51}, format="json").status_code, 400)
         o = self.developer().get("/api/developer/overview/").json()
         self.assertEqual(o["app_last_7_days"]["save_ms"]["p50"], 12.5)
-        self.assertEqual(o["app_versions_seen"], ["abc123"])
+        self.assertEqual(o["app_versions_seen"], ["abc1234"])
 
     def test_api_requests_are_timed_by_route_name_never_by_path(self):
         c = self.parent("asha@example.org")
@@ -183,3 +183,33 @@ class TelemetryAndErrorTests(DevTestCase):
         o = self.developer().get("/api/developer/overview/").json()
         self.assertEqual(o["recent_server_errors"][0]["route"], "pupils")
         self.assertEqual(o["api_last_7_days"]["GET pupils"]["server_errors"], 1)
+
+
+class ReviewFixTests(DevTestCase):
+    def test_a_new_code_or_a_revoke_ends_every_earlier_unused_code(self):
+        first = self.code()
+        second = self.code()
+        a = self.parent("a@example.org")
+        self.assertEqual(a.post("/api/developer/claim/", {"code": first}, format="json").status_code, 400, "replaced by the newer code")
+        self.assertEqual(a.post("/api/developer/claim/", {"code": second}, format="json").status_code, 200)
+        spare = self.code()
+        call_command("developer", "revoke", "a@example.org", stdout=StringIO())
+        self.assertEqual(a.post("/api/developer/claim/", {"code": spare}, format="json").status_code, 400, "an old code cannot undo a revoke")
+        self.assertEqual(a.get("/api/developer/overview/").status_code, 403)
+        self.assertEqual(DiagnosticAccessLog.objects.get(action="revoked_by_command").detail, "by a server operator (manage.py)")
+
+    def test_telemetry_versions_are_checked_and_each_account_is_capped(self):
+        p = self.parent("asha@example.org")
+        p.post("/api/telemetry/", {"app_version": "<script>x</script>", "metrics": [{"name": "save_ms", "ms": 1}]}, format="json")
+        p.post("/api/telemetry/", {"app_version": "8e1eaf7", "metrics": [{"name": "save_ms", "ms": 1}]}, format="json")
+        self.assertEqual(sorted(ClientMetric.objects.values_list("app_version", flat=True)), ["8e1eaf7", "other"])
+        with mock.patch("family.developer.DAILY_METRICS_PER_ACCOUNT", 2):
+            self.assertEqual(p.post("/api/telemetry/", {"metrics": [{"name": "save_ms", "ms": 1}]}, format="json").json()["stored"], 0)
+        self.assertEqual(ClientMetric.objects.count(), 2)
+
+    def test_server_errors_keep_no_quoted_values_or_emails(self):
+        c = self.parent("asha@example.org")
+        c.raise_request_exception = False
+        with mock.patch("family.views.PupilsView.get", side_effect=ValueError("invalid literal for int(): 'Arun Kumar' from a@b.org")):
+            c.get("/api/pupils/")
+        self.assertEqual(ServerError.objects.get().error, "ValueError: invalid literal for int(): '…' from [email]")

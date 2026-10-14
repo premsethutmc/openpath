@@ -235,3 +235,49 @@ test("the doubling journey records its rule planner's decision with each questio
   await l.journey();
   assert.equal(l.events.length, again, "reopening the same question records nothing new");
 });
+
+test("redaction works for names in any alphabet and never breaks the JSON", async () => {
+  for (const name of ["Zoë", "José", "Ananyā", "True", "Null", "Id"]) {
+    const l = await Learner.create(content, new MemoryRepo(), name, "guardian", testClock(), `pupil-${name}`);
+    await l.start({ type: "placement" });
+    const cur = await l.current();
+    await l.answer(cur.next!.item, { kind: "typed", text: `${name.toLowerCase()} wrote this` } as Response, { use: cur.next!.use });
+    const d = await diagnose(content, { pupil: { id: l.profileId, name }, events: l.events, now: "2026-10-14T09:00:00.000Z" });
+    const r = buildReport(d);
+    const strings: string[] = [];
+    const walk = (v: unknown): void => {
+      if (typeof v === "string") strings.push(v);
+      else if (v && typeof v === "object") Object.values(v).forEach(walk);
+    };
+    walk(r.json);
+    const word = new RegExp(`(?<![\\p{L}])${name}(?![\\p{L}])`, "iu");
+    assert.ok(!word.test(r.text) && !strings.some((x) => word.test(x)), name);
+    assert.equal(r.json.pupil.label, "Pupil A");
+    assert.equal(r.json.read_only, true, `${name}: keys and values intact`);
+  }
+});
+
+test("a malformed or foreign event is left out and reported, and cannot break the diagnosis", async () => {
+  const { l } = await arun();
+  const bad = [...l.events, { kind: "trace", id: "x:1", at: "2026-10-13T12:00:00.000Z", presented: "nope", selection: { selector: "engine", alternatives: "boom" } } as unknown as AppEvent, { kind: "mystery", id: "x:2", at: "2026-10-13T12:00:00.000Z" } as unknown as AppEvent];
+  const d = await diagnose(content, { pupil: { id: l.profileId, name: "Arun" }, events: bad, now: "2026-10-14T09:00:00.000Z" });
+  const issue = d.issues.find((i) => i.check === "malformed events");
+  assert.ok(issue && issue.detail.startsWith("2 event(s)"), issue?.detail ?? "no issue");
+  assert.ok(buildReport(d).text.length > 0);
+});
+
+test("a trace that cannot be saved never stops the learner", async () => {
+  const repo = new MemoryRepo();
+  const l = await Learner.create(content, repo, "Arun", "guardian", testClock(), "p-t");
+  const append = repo.append.bind(repo);
+  repo.append = async (id, e) => {
+    if (e.kind === "trace") throw new Error("too large");
+    return append(id, e);
+  };
+  const cur = await l.start({ type: "placement" });
+  assert.ok(cur.next, "the session started and a question is shown");
+  await l.answer(cur.next.item, answerFor(cur.next.item, true), { use: cur.next.use });
+  assert.equal(l.events.filter((e) => e.kind === "trace").length, 0);
+  const d = await diagnose(content, { pupil: { id: "p-t", name: "Arun" }, events: l.events, now: "2026-10-14T09:00:00.000Z" });
+  assert.equal(d.timeline.find((e) => e.kind === "question")?.selectionStatus, NOT_RECORDED);
+});

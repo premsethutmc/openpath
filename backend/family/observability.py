@@ -5,6 +5,7 @@ the status and the duration; never the path (it contains pupil ids) or any body.
 the route and the error's class and first line. Old rows are pruned, so the tables stay small.
 """
 
+import re
 import time
 from datetime import timedelta
 
@@ -24,6 +25,10 @@ def prune() -> None:
 def _route(request) -> str:
     match = getattr(request, "resolver_match", None)
     return (match.url_name or match.view_name or "unnamed")[:60] if match else "unmatched"
+
+
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+QUOTED = re.compile(r"'[^']*'|\"[^\"]*\"")
 
 
 class MetricsMiddleware:
@@ -48,7 +53,9 @@ class MetricsMiddleware:
     def process_exception(self, request, exception):
         if request.path.startswith("/api/"):
             try:
-                first = str(exception).splitlines()[0][:120] if str(exception) else ""
+                first = str(exception).splitlines()[0][:160] if str(exception) else ""
+                # values quoted in messages may be user input; emails are never kept
+                first = EMAIL.sub("[email]", QUOTED.sub("'…'", first))[:120]
                 ServerError.objects.create(route=_route(request), method=request.method[:8], error=f"{type(exception).__name__}: {first}"[:200])
             except Exception:
                 pass

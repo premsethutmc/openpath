@@ -55,8 +55,13 @@ def hash_code(code: str) -> str:
     return hashlib.sha256(re.sub(r"[^A-Z0-9]", "", code.upper()).encode()).hexdigest()
 
 
+def expire_unused_claims() -> int:
+    return DeveloperClaim.objects.filter(used_at__isnull=True, expires_at__gt=timezone.now()).update(expires_at=timezone.now())
+
+
 def issue_claim(hours: int | None = None) -> str:
-    """A new one-time code, e.g. 'K7QX-M2PA-9RTD' (60 bits). Only its hash is stored."""
+    """A new one-time code, e.g. 'K7QX-M2PA-9RTD' (60 bits). Only its hash is stored. Earlier unused codes stop working."""
+    expire_unused_claims()
     raw = "".join(secrets.choice(ALPHABET) for _ in range(12))
     DeveloperClaim.objects.create(code_hash=hash_code(raw), expires_at=timezone.now() + timedelta(hours=hours or settings.OPENPATH_CLAIM_TTL_HOURS))
     return "-".join(raw[i : i + 4] for i in range(0, 12, 4))
@@ -157,7 +162,7 @@ class DeveloperOverviewView(DeveloperBase):
             {
                 "generated_at": now.isoformat(),
                 "server": {"commit": settings.OPENPATH_COMMIT, "debug": settings.DEBUG, "database": settings.DATABASES["default"]["ENGINE"].rsplit(".", 1)[-1]},
-                "app_versions_seen": sorted(set(ClientMetric.objects.filter(at__gte=week).exclude(app_version="").values_list("app_version", flat=True))),
+                "app_versions_seen": sorted(ClientMetric.objects.filter(at__gte=week).exclude(app_version="").values_list("app_version", flat=True).distinct().order_by()[:20]),
                 "counts": {
                     "accounts": User.objects.count(),
                     "developers": DeveloperAccess.objects.filter(revoked_at__isnull=True).count(),
@@ -212,6 +217,8 @@ class DeveloperAuditView(DeveloperBase):
 
 METRICS = {"answer_ms", "save_ms", "rebuild_ms", "select_ms", "load_ms", "save_failed", "runtime_error", "engine_error"}
 EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+VERSION = re.compile(r"^(?:[0-9a-f]{7,40}|dev|unknown)$")
+DAILY_METRICS_PER_ACCOUNT = 5000
 
 
 class TelemetryView(AccountBase):
@@ -226,6 +233,9 @@ class TelemetryView(AccountBase):
         if not isinstance(metrics, list) or not metrics or len(metrics) > 50:
             raise ValidationError({"metrics": "Send 1 to 50 measurements."})
         version = str(data.get("app_version") or "")[:40]
+        version = version if VERSION.match(version) else "other"
+        if ClientMetric.objects.filter(user=request.user, at__gte=timezone.now() - timedelta(days=1)).count() >= DAILY_METRICS_PER_ACCOUNT:
+            return Response({"stored": 0}, status=status.HTTP_202_ACCEPTED)  # enough from this account today
         rows = []
         for m in metrics:
             if not isinstance(m, dict) or m.get("name") not in METRICS:
@@ -233,7 +243,7 @@ class TelemetryView(AccountBase):
             ms = m.get("ms")
             ms = float(ms) if isinstance(ms, (int, float)) and not isinstance(ms, bool) and 0 <= ms < 600_000 else None
             detail = EMAIL.sub("[email]", str(m.get("detail") or ""))[:200]
-            rows.append(ClientMetric(name=m["name"], ms=ms, ok=m.get("ok") is not False, app_version=version, detail=detail))
+            rows.append(ClientMetric(user=request.user, name=m["name"], ms=ms, ok=m.get("ok") is not False, app_version=version, detail=detail))
         ClientMetric.objects.bulk_create(rows)
         return Response({"stored": len(rows)}, status=status.HTTP_202_ACCEPTED)
 

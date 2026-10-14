@@ -19,7 +19,7 @@ provisional: these diagnostics are for checking the software, not for approving 
    account. Create the account in the app first if you have none. Once you are a developer, **Me → Open developer
    diagnostics** links there too.
 4. Enter the code once. That account is now a developer until the grant is revoked. A new code is printed every
-   time the codespace starts. Unused codes expire after 24 hours.
+   time the codespace starts, and it replaces any earlier unused code. Unused codes expire after 24 hours.
 
 If you need a code without restarting, run `cd backend && python3 manage.py developer issue-claim` in the codespace.
 `developer list`, `developer grant <email>` and `developer revoke <email>` also exist. None of this is needed for
@@ -120,6 +120,8 @@ the browser from a copy, and a test checks that the record and the stored copy a
 - Codes:
   - are 60-bit random values, stored only as a SHA-256 hash;
   - are single-use (row-locked) and expire after 24 hours;
+  - stop working when a newer code is issued or any developer is revoked, so a code left in an old log cannot
+    restore revoked access;
   - are claimed by a signed-in account, with CSRF protection and a throttle of 10 attempts an hour.
 - Every refusal is audited.
 - Knowing the URL, or registering with an email such as `admin@…`, grants nothing. Tests cover this.
@@ -137,10 +139,20 @@ when, what, and which pupil.
 - It is accepted only from signed-in parents.
 - Metric names come from a fixed list, durations must be numbers, and details are short.
 - Emails are scrubbed on the client and again on the server.
+- The app version must look like a commit id (anything else is stored as "other").
+- Each account is limited to 240 requests an hour and 5,000 measurements a day. Rows keep the sending account, so a
+  flood can be found and removed.
 - Request bodies, answers and names are never recorded.
 - Server metrics record route names, never paths (paths contain pupil ids). Server errors record only the exception
-  class and its first line.
+  class and its first line, with quoted values and emails removed.
 - Rows older than 14 days are pruned.
+
+**Untrusted records:** a shared pupil's record comes from another family. Events the app would refuse on import, and
+malformed traces, are left out of the diagnosis and reported as a "malformed events" issue. Nothing is rendered as
+HTML.
+
+**Traces never block a learner:** a trace that cannot be saved is measured as `save_failed` and the session carries
+on. Traces are capped in size (about 2 KB each).
 
 **Never:**
 - PostgreSQL is not exposed.
@@ -177,6 +189,6 @@ Until this exists, **Copy Report** is the complete alternative and needs no term
 
 | Test file | Number of tests | What it covers |
 |---|---|---|
-| `backend/family/test_developer.py` | 14 | Authorisation (signed out, ordinary parent, likely emails); single use, hashing and expiry of codes; CSRF; revoke; cross-family scope and sharing; read-only (405, data unchanged); audit; no contact details in health; the telemetry whitelist and scrubbing; route names, never paths; server error capture |
-| `frontend/src/english/logic/diagnostics.test.ts` | 10 | Each trace is recorded with its question and matches the engine's state at that moment; queue positions; plan traces; journey planner traces; traces change nothing; the diagnosis equals `leafView` and ledger decisions; "not recorded" labelling; reports are read-only; redaction; failed saves are measured |
+| `backend/family/test_developer.py` | 17 | Authorisation (signed out, ordinary parent, likely emails); single use, hashing and expiry of codes; CSRF; revoke; cross-family scope and sharing; read-only (405, data unchanged); audit; no contact details in health; the telemetry whitelist and scrubbing; route names, never paths; server error capture; newer codes and revokes end older codes; telemetry version check and per-account cap; quoted values removed from errors |
+| `frontend/src/english/logic/diagnostics.test.ts` | 13 | Each trace is recorded with its question and matches the engine's state at that moment; queue positions; plan traces; journey planner traces; traces change nothing; the diagnosis equals `leafView` and ledger decisions; "not recorded" labelling; reports are read-only; redaction, including names in any alphabet and names such as "True"; failed saves are measured; malformed events are left out and reported; a trace that cannot be saved never stops a session |
 | `frontend/e2e/developer.test.mjs` | 2 | On a phone, with the real API: an ordinary parent at `/developer` is refused; the founder claims a code, sees health, opens Arun, sees every question traced, copies a redacted report, and downloads it; the record is unchanged; another family's pupil is visible only while shared; question bank; audit |
