@@ -62,8 +62,12 @@ export interface CapabilitySnapshot {
   evidenceIds: string[];
   lastAt: string | null;
   content: {
-    /** Unseen questions the app can ask on this capability (reviewed or candidate). */
+    /** Unseen questions the app can ask on this capability for a first or another look (reviewed or candidate). */
     assess: number;
+    /** Unseen questions reserved for the fresh check after teaching, when the capability has reserved pools (else assess applies). */
+    confirm?: number;
+    /** Unseen questions reserved for a later (retention) check, when the capability has reserved pools (else assess applies). */
+    retain?: number;
     /** A teaching activity the app can deliver (its title), or null when there is none. */
     teach: string | null;
     /**
@@ -209,6 +213,9 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
   const out: DevelopmentRecommendation[] = [];
   const ev = (c: CapabilitySnapshot) => ({ capability: c.id, summary: `${c.name}: ${STANDING_WORDS[c.standing]} (${evidenceLine(c)})`, ids: c.evidenceIds });
   const canAssess = (c: CapabilitySnapshot) => ({ available: c.content.assess > 0, note: c.content.assess > 0 ? `${c.content.assess} unused question${c.content.assess === 1 ? "" : "s"} available` : `No unused questions left for ${c.name}: more reviewed questions are needed` });
+  const avail = (c: CapabilitySnapshot, n: number, what: string) => ({ available: n > 0, note: n > 0 ? `${n} unused ${what} question${n === 1 ? "" : "s"} available` : `No unused ${what} questions left for ${c.name}: more reviewed questions are needed` });
+  const canConfirm = (c: CapabilitySnapshot) => avail(c, c.content.confirm ?? c.content.assess, "confirmation");
+  const canRetain = (c: CapabilitySnapshot) => avail(c, c.content.retain ?? c.content.assess, "later-check");
   const canTeach = (c: CapabilitySnapshot) => ({ available: !!c.content.teach, note: c.content.teach ? `Teaching available: ${c.content.teach}` : `No lessons for ${c.name} in the app yet` });
   const add = (r: DevelopmentRecommendation) => out.push(r);
   const review = (c: CapabilitySnapshot, priority: number, why: string, changeIf: string, extra: DevelopmentRecommendation["evidence"] = []) =>
@@ -236,11 +243,11 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
     switch (c.standing) {
       case "not_kept":
         if (c.content.teach) add({ action: "refresh", capability: c.id, priority: 100, what: `Refresh ${c.name}`, why: `${c.name} was shown before, but was not right at a later check. Refreshing it comes first, before anything new.`, evidence: [ev(c)], changeIf: "Right again on new questions after the refresher: then a later check.", content: canTeach(c) });
-        else if (c.content.assess) add({ action: "refresh", capability: c.id, priority: 100, what: `Check ${c.name} again`, why: `${c.name} was shown before, but was not right at a later check. There is no lesson for it in the app, so a few new questions show where things stand.`, evidence: [ev(c)], changeIf: "Right on the new questions: it is shown again; wrong: a teacher or parent is asked to help.", content: canAssess(c) });
+        else if (c.content.retain ?? c.content.assess) add({ action: "refresh", capability: c.id, priority: 100, what: `Check ${c.name} again`, why: `${c.name} was shown before, but was not right at a later check. There is no lesson for it in the app, so a few new questions show where things stand.`, evidence: [ev(c)], changeIf: "Right on the new questions: it is shown again; wrong: a teacher or parent is asked to help.", content: canRetain(c) });
         else review(c, 95, `${c.name} was not kept at a later check, and the app has no lesson or unused question for a refresher.`, "New questions or a lesson for it.");
         continue;
       case "check_due":
-        if (c.content.assess) add({ action: "retention_check", capability: c.id, priority: 90, what: `Check ${c.name} again`, why: `${c.name} was shown earlier and is due for a check, to see whether it has lasted.`, evidence: [ev(c)], changeIf: "Right at the check: confirmed, next check later. Wrong: a refresher.", content: canAssess(c) });
+        if (c.content.retain ?? c.content.assess) add({ action: "retention_check", capability: c.id, priority: 90, what: `Check ${c.name} again`, why: `${c.name} was shown earlier and is due for a check, to see whether it has lasted.`, evidence: [ev(c)], changeIf: "Right at the check: confirmed, next check later. Wrong: a refresher.", content: canRetain(c) });
         else review(c, 30, `${c.name} is due for a check, but every question for it has been used.`, "More reviewed questions for it.");
         continue;
       case "shown":
@@ -249,8 +256,8 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
     }
     if (c.standing === "improving") {
       // right in practice straight after a lesson: a fresh check without help, before anything else is built on it
-      if (c.content.assess)
-        add({ action: "confirm", capability: c.id, priority: 82, what: `Check ${c.name} on fresh questions`, why: `Right in practice straight after the lesson (${answers(e.afterTeaching, e.afterTeachingRight)}). That shows improvement, not independent mastery: a few fresh questions without help, outside the lesson, will show whether it holds.`, evidence: [ev(c)], changeIf: "Right on the fresh questions: shown (and a later check is scheduled). Wrong: more teaching, or a different approach.", content: canAssess(c) });
+      if (c.content.confirm ?? c.content.assess)
+        add({ action: "confirm", capability: c.id, priority: 82, what: `Check ${c.name} on fresh questions`, why: `Right in practice straight after the lesson (${answers(e.afterTeaching, e.afterTeachingRight)}). That shows improvement, not independent mastery: a few fresh questions without help, outside the lesson, will show whether it holds.`, evidence: [ev(c)], changeIf: "Right on the fresh questions: shown (and a later check is scheduled). Wrong: more teaching, or a different approach.", content: canConfirm(c) });
       else review(c, 66, `${c.name} improved in practice after the lesson, but there are no unused questions to confirm it without help.`, "More reviewed questions for it.");
       continue;
     }

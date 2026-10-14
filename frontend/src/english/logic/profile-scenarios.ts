@@ -168,6 +168,25 @@ SCENARIOS.push(
   },
 );
 
+SCENARIOS.push({
+  key: "L",
+  label: "The pilot journey on a reading skill (main idea): diagnosis, a lesson with practice, a fresh confirming check, a later check",
+  stages: ["diagnosis", "after_lesson", "confirmed", "later"],
+  run: async (l, clock, upTo) => {
+    await start(l, all);
+    for (let k = 0; k < 2; k++) await check(l, RDG_DETAIL, all); // the prerequisite, shown
+    await check(l, RDG_MAIN, () => false); // diagnosis: found hard
+    if (upTo === "diagnosis") return;
+    await runSession(l, l.profile().activities.find((a) => a.step.capability === RDG_MAIN)!.step, all); // lesson and practice
+    if (upTo === "after_lesson") return;
+    await runSession(l, l.profile().activities.find((a) => a.step.capability === RDG_MAIN)!.step, all); // the fresh check
+    if (upTo === "confirmed") return;
+    clock.days(10);
+    const later = l.profile().activities.find((a) => a.step.capability === RDG_MAIN);
+    if (later) await runSession(l, later.step, all); // the later check, from the retention questions
+  },
+});
+
 /** Build one scenario up to a stage, as a fresh learner with its own id. */
 export async function buildScenario(content: AppContent, s: Scenario, upTo: string): Promise<Learner> {
   const clock = testClock();

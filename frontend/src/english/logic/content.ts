@@ -33,6 +33,9 @@ import wordbankJson from "../../../../content/english/spelling/wordbank.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
 import journeyJson from "../../../../content/english/web/doubling-journey.json";
+import pilotItemsJson from "../../../../content/english/pilot/items.json";
+import pilotPassagesJson from "../../../../content/english/pilot/passages.json";
+import pilotManifestJson from "../../../../content/english/pilot/manifest.json";
 
 export type Code = Extract<Item, { kind: "code" }>;
 
@@ -96,6 +99,19 @@ export interface JourneyContent {
   strategies: StrategyContent[];
 }
 
+/**
+ * What a question is reserved for (five-capability pilot, PR #24). Diagnosis: placement, first checks and more
+ * practice. Practice: only during teaching. Confirmation: only the fresh check after teaching. Retention: only a
+ * later check. Questions without a pool (every other capability) can be used for anything, as before.
+ */
+export type Pool = "diagnosis" | "practice" | "confirmation" | "retention";
+export interface PoolInfo {
+  pool: Pool;
+  origin: "existing" | "new-pr24";
+  /** A less familiar example of the pattern: a transfer check. */
+  unfamiliar?: boolean;
+}
+
 export interface AppContent {
   ctx: Context;
   index: FrameworkIndex;
@@ -114,6 +130,8 @@ export interface AppContent {
   overallGoal: Goal;
   /** The adaptive consonant-doubling journey (MVP slice). */
   journey: JourneyContent;
+  /** Pilot content: what each question on the five pilot capabilities is reserved for, and the content version. */
+  pilot: { version: string; capabilities: string[]; pools: Map<string, PoolInfo> };
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
@@ -124,7 +142,8 @@ export function loadContent(): AppContent {
     const c = index.leaves.get(cap);
     return !!c && isSpecified(c);
   };
-  const hand = [...(codeItemsJson as unknown as Item[]), ...(e2aItemsJson as unknown as Item[]), ...(e2bItemsJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target));
+  // the pilot's new candidate questions are hand-written candidates like the rest of the bank (awaiting review)
+  const hand = [...(codeItemsJson as unknown as Item[]), ...(e2aItemsJson as unknown as Item[]), ...(e2bItemsJson as unknown as Item[]), ...(pilotItemsJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target));
   const generated = (generatedJson as unknown as Code[]).filter((i) => ok(i.target));
   const j = journeyJson as unknown as { review: string; capability: string; rule: string; items: Code[]; independent: { assessOrder: string[] }; guided: string[]; strategies: StrategyContent[] };
   const journey: JourneyContent = { review: j.review, capability: j.capability, rule: j.rule, items: j.items, assessOrder: j.independent.assessOrder, guided: j.guided, strategies: j.strategies };
@@ -133,7 +152,7 @@ export function loadContent(): AppContent {
     // placement, practice and checks never use them, only the doubling journey does
     items: [...hand, ...generated, ...journey.items],
     retired: [...(retiredJson as unknown as Item[]), ...(retiredGeneratedJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target)),
-    passages: passagesJson as unknown as Passage[],
+    passages: [...(passagesJson as unknown as Passage[]), ...(pilotPassagesJson as unknown as Passage[])],
     goals: goalsJson as unknown as Goal[],
     misspellings: misspellingsJson as unknown as Record<string, string>,
   };
@@ -156,6 +175,10 @@ export function loadContent(): AppContent {
     guidedGoal,
     overallGoal,
     journey,
+    pilot: (() => {
+      const m = pilotManifestJson as unknown as { version: string; capabilities: string[]; pools: Record<string, PoolInfo> };
+      return { version: m.version, capabilities: m.capabilities, pools: new Map(Object.entries(m.pools)) };
+    })(),
   };
 }
 

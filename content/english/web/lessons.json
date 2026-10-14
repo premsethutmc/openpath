@@ -7,25 +7,25 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "plain",
    "title": "Adding -s, -ed and -ing",
-   "rule": "Most words just take the ending. The base word does not change: play → plays, played, playing.",
+   "rule": "Most words just take the ending. The base word does not change: look → looks, looked, looking.",
    "examples": [
     {
-     "text": "jump → jumps, jumped, jumping"
+     "text": "kick → kicks, kicked, kicking"
     },
     {
-     "text": "rain → rains, rained, raining"
+     "text": "help → helps, helped, helping"
     }
    ],
    "tip": "Say the base word first, then add the ending you hear.",
    "check": {
-    "prompt": "Which is correct? (walk + -ing)",
+    "prompt": "Which is correct? (paint + -ing)",
     "options": [
-     "walkking",
-     "walking",
-     "walkeing"
+     "paintting",
+     "painting",
+     "painteing"
     ],
     "answer": 1,
-    "explain": "walk + -ing = walking. Nothing changes in walk."
+    "explain": "paint + -ing = painting. Nothing changes in paint."
    }
   },
   {
@@ -33,14 +33,14 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "es_plural",
    "title": "Adding -es",
-   "rule": "Words ending in s, x, z, ch or sh add -es, because you can hear an extra syllable: box → boxes, watch → watches.",
+   "rule": "Words ending in s, x, z, ch or sh add -es, because you can hear an extra syllable: fox → foxes, catch → catches.",
    "examples": [
     {
-     "text": "bus → buses"
+     "text": "dress → dresses"
     },
     {
-     "text": "wish → wishes",
-     "note": "you can hear 'wish-iz'"
+     "text": "brush → brushes",
+     "note": "you can hear 'brush-iz'"
     }
    ],
    "tip": "If you can hear an extra 'iz' sound at the end, write -es.",
@@ -60,10 +60,10 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "double_short",
    "title": "Doubling the last letter (short words)",
-   "rule": "In a one-syllable word with one short vowel and one final consonant, double the consonant before -ing, -ed, -er or -est: run → running, stop → stopped, big → bigger.",
+   "rule": "In a one-syllable word with one short vowel and one final consonant, double the consonant before -ing, -ed, -er or -est: plan → planning, drop → dropped, thin → thinner.",
    "examples": [
     {
-     "text": "swim → swimming"
+     "text": "grab → grabbing"
     },
     {
      "text": "hop → hopped",
@@ -87,7 +87,7 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "drop_e",
    "title": "Dropping the silent e",
-   "rule": "If a word ends in a silent e, drop the e before an ending that starts with a vowel (-ing, -ed, -er): make → making, hope → hoping.",
+   "rule": "If a word ends in a silent e, drop the e before an ending that starts with a vowel (-ing, -ed, -er): bake → baking, smile → smiling.",
    "examples": [
     {
      "text": "ride → riding"
@@ -113,10 +113,10 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "y_to_i",
    "title": "Changing y to i",
-   "rule": "If a word ends in a consonant + y, change the y to i before -ed, -er, -est or -es: carry → carried, happy → happiest, baby → babies.",
+   "rule": "If a word ends in a consonant + y, change the y to i before -ed, -er, -est or -es: hurry → hurried, funny → funniest, lady → ladies.",
    "examples": [
     {
-     "text": "cry → cried"
+     "text": "fry → fried"
     },
     {
      "text": "busy → busier"
@@ -139,7 +139,7 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "stress_doubling",
    "title": "Doubling in longer words",
-   "rule": "In a longer word, double the last consonant only if the last syllable is stressed: begin → beginning, forget → forgetting, prefer → preferred.",
+   "rule": "In a longer word, double the last consonant only if the last syllable is stressed: permit → permitted, refer → referred.",
    "examples": [
     {
      "text": "admit → admitted",
@@ -151,14 +151,14 @@
    ],
    "tip": "Say the word aloud and listen for which syllable is strongest.",
    "check": {
-    "prompt": "Which is correct? (occur + -ed)",
+    "prompt": "Which is correct? (commit + -ed)",
     "options": [
-     "occured",
-     "occurred",
-     "ocurred"
+     "comited",
+     "committed",
+     "commited"
     ],
     "answer": 1,
-    "explain": "oc-CUR is stressed on the last syllable, so the r doubles: occurred."
+    "explain": "com-MIT is stressed on the last syllable, so the t doubles: committed."
    }
   },
   {
@@ -166,7 +166,7 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "no_double_unstressed",
    "title": "When not to double",
-   "rule": "If the stress is on the first syllable, do not double: visit → visited, open → opening, offer → offered.",
+   "rule": "If the stress is on the first syllable, do not double: limit → limited, enter → entering, offer → offered.",
    "examples": [
     {
      "text": "happen → happened",
@@ -193,13 +193,13 @@
    "capability": "EN.FND.SPL.inflections",
    "step": "exceptions",
    "title": "Tricky endings",
-   "rule": "Three patterns to learn: ie becomes y before -ing (lie → lying); add k after a final c (panic → panicked); and in British spelling, a final l after one vowel doubles (travel → travelled).",
+   "rule": "Three patterns to learn: ie becomes y before -ing (die → dying); add k after a final c (mimic → mimicked); and in British spelling, a final l after one vowel doubles (travel → travelled).",
    "examples": [
     {
      "text": "die → dying"
     },
     {
-     "text": "picnic → picnicking"
+     "text": "mimic → mimicking"
     },
     {
      "text": "cancel → cancelled",
@@ -664,10 +664,10 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "third_s",
    "title": "He, she, it + -s",
-   "rule": "In the present simple, add -s or -es to the verb after he, she, it or one person or thing: she plays, he watches, the dog runs.",
+   "rule": "In the present simple, add -s or -es to the verb after he, she, it or one person or thing: she sings, he fixes, the dog barks.",
    "examples": [
     {
-     "text": "My brother goes to school by bus."
+     "text": "My aunt teaches music."
     },
     {
      "text": "It rains a lot in July."
@@ -689,10 +689,10 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "plural_subject",
    "title": "Plural subjects",
-   "rule": "A plural subject takes a plural verb: the children are, the mice run, my friends live nearby.",
+   "rule": "A plural subject takes a plural verb: the mice run, the trees grow, my cousins live nearby.",
    "examples": [
     {
-     "text": "The children are in the garden."
+     "text": "The birds are on the roof."
     },
     {
      "text": "These shoes look new."
@@ -714,7 +714,7 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "compound",
    "title": "Two subjects with and",
-   "rule": "Two subjects joined by and take a plural verb: Ravi and Meena are friends.",
+   "rule": "Two subjects joined by and take a plural verb: Anil and Sara are friends.",
    "examples": [
     {
      "text": "My sister and I walk to school."
@@ -740,7 +740,7 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "intervening",
    "title": "Words between subject and verb",
-   "rule": "The verb agrees with the subject, not with a noun just before it: The box of pencils is on the table. The list of names is long.",
+   "rule": "The verb agrees with the subject, not with a noun just before it: The jar of sweets is empty. The cup of tea is hot.",
    "examples": [
     {
      "text": "The colour of the flowers is bright."
@@ -751,13 +751,13 @@
    ],
    "tip": "Cover the words between: 'The box … is'.",
    "check": {
-    "prompt": "Choose: The bag of apples ___ heavy.",
+    "prompt": "Choose: The basket of eggs ___ full.",
     "options": [
      "is",
      "are"
     ],
     "answer": 0,
-    "explain": "The subject is the bag (one): is."
+    "explain": "The subject is the basket (one): is."
    }
   },
   {
@@ -765,13 +765,13 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "indefinite",
    "title": "Each, every, everyone",
-   "rule": "each, every, everyone, nobody and somebody take a singular verb: Each of the students has a book. Everyone is here.",
+   "rule": "each, every, everyone, nobody and somebody take a singular verb: Each of the girls has a ticket. Everyone is here.",
    "examples": [
     {
      "text": "Every child needs sleep."
     },
     {
-     "text": "Nobody knows the answer."
+     "text": "Somebody is at the door."
     }
    ],
    "tip": "Each of the… is still one at a time: singular.",
@@ -790,7 +790,7 @@
    "capability": "EN.GRM.VERB.sva",
    "step": "either_neither",
    "title": "either … or, neither … nor",
-   "rule": "With either … or and neither … nor, the verb agrees with the nearer subject: Neither the teacher nor the students were late. Either the students or the teacher is coming.",
+   "rule": "With either … or and neither … nor, the verb agrees with the nearer subject: Neither the driver nor the passengers were hurt. Either the girls or their father is coming.",
    "examples": [
     {
      "text": "Either my parents or my aunt is coming."
@@ -818,10 +818,10 @@
    "rule": "When the verb comes first, find the subject after it: There are many birds. Here comes the bus. 'A number of' is plural; 'the number of' is singular.",
    "examples": [
     {
-     "text": "A number of students were absent."
+     "text": "A number of shops were closed."
     },
     {
-     "text": "The number of students is growing."
+     "text": "The number of cars is growing."
     }
    ],
    "tip": "Turn the sentence round: many birds are there.",
@@ -840,10 +840,10 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "a_an_letter",
    "title": "a or an",
-   "rule": "Use an before a word that starts with a vowel (a, e, i, o, u) and a before a consonant: an apple, an egg, a ball, a cat.",
+   "rule": "Use an before a word that starts with a vowel (a, e, i, o, u) and a before a consonant: an orange, an egg, a ball, a cat.",
    "examples": [
     {
-     "text": "an umbrella, an orange"
+     "text": "an inkpot, an onion"
     },
     {
      "text": "a pencil, a dog"
@@ -865,7 +865,7 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "first_mention",
    "title": "a first, then the",
-   "rule": "Use a when you first mention something, then the when you mention it again: I saw a dog. The dog was big. Use a before a job: She is a teacher.",
+   "rule": "Use a when you first mention something, then the when you mention it again: I found a shell. The shell was pink. Use a before a job: He is a farmer.",
    "examples": [
     {
      "text": "We bought a kite. The kite was red."
@@ -891,10 +891,10 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "a_an_sound",
    "title": "a or an by sound",
-   "rule": "Choose a or an by the first sound, not the first letter: an hour (silent h), an MP; a university, a one-rupee coin (they start with 'yoo' and 'w' sounds).",
+   "rule": "Choose a or an by the first sound, not the first letter: an honour (silent h), an MP; a unicorn, a one-rupee coin (they start with 'yoo' and 'w' sounds).",
    "examples": [
     {
-     "text": "an honest boy"
+     "text": "an honour"
     },
     {
      "text": "a uniform, a European city"
@@ -902,13 +902,13 @@
    ],
    "tip": "Listen to the sound at the start, not the letter.",
    "check": {
-    "prompt": "Choose: We waited for ___ hour.",
+    "prompt": "Choose: She wore ___ uniform.",
     "options": [
      "a",
      "an"
     ],
-    "answer": 1,
-    "explain": "hour starts with a vowel sound (the h is silent): an hour."
+    "answer": 0,
+    "explain": "uniform starts with a 'yoo' sound: a uniform."
    }
   },
   {
@@ -916,10 +916,10 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "unique_the",
    "title": "the for one of a kind",
-   "rule": "Use the for things there is only one of, or that everyone knows: the sun, the moon, the sky, the Prime Minister.",
+   "rule": "Use the for things there is only one of, or that everyone knows: the moon, the sky, the Prime Minister.",
    "examples": [
     {
-     "text": "The sun rises in the east."
+     "text": "The sky is clear today."
     },
     {
      "text": "Close the door, please.",
@@ -942,24 +942,24 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "zero_uncountable",
    "title": "No a with uncountable nouns",
-   "rule": "Some nouns cannot be counted: advice, information, furniture, homework, water. Do not use a or an with them: some advice, a piece of information.",
+   "rule": "Some nouns cannot be counted: luggage, bread, water, news, rice. Do not use a or an with them: some luggage, a piece of bread.",
    "examples": [
     {
-     "text": "She gave me some good advice."
+     "text": "We bought some bread."
     },
     {
-     "text": "We need new furniture."
+     "text": "There is a lot of traffic today."
     }
    ],
    "tip": "If you cannot put a number in front of it, do not use a or an.",
    "check": {
-    "prompt": "Choose: Can you give me ___ information?",
+    "prompt": "Choose: I need ___ help.",
     "options": [
      "an",
      "some"
     ],
     "answer": 1,
-    "explain": "information is uncountable: some information."
+    "explain": "help is uncountable here: some help."
    }
   },
   {
@@ -967,22 +967,22 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "generic_abstract",
    "title": "General statements",
-   "rule": "For general statements about all of something, use no article with plurals and abstract nouns: Tigers are strong. Honesty is important.",
+   "rule": "For general statements about all of something, use no article with plurals and abstract nouns: Elephants are strong. Kindness is important.",
    "examples": [
     {
      "text": "Dogs are loyal."
     },
     {
-     "text": "Music makes me happy."
+     "text": "Patience is useful."
     }
    ],
    "tip": "Talking about all of them, in general? No article.",
    "check": {
-    "prompt": "Choose: ___ honesty is the best policy.",
+    "prompt": "Choose: ___ kindness matters.",
     "options": [
      "The",
      "—",
-     "An"
+     "A"
     ],
     "answer": 1,
     "explain": "A general, abstract idea: no article."
@@ -993,13 +993,13 @@
    "capability": "EN.GRM.NOUN.articles",
    "step": "proper_idioms",
    "title": "Articles with names",
-   "rule": "Most names of people, cities and countries have no article (Delhi, India), but rivers, oceans and some countries do: the Ganga, the Indian Ocean, the United States. Mountains do not: Mount Everest.",
+   "rule": "Most names of people, cities and countries have no article (Delhi, India), but rivers, oceans and some countries do: the Yamuna, the Indian Ocean, the United States. Mountains do not: Mount Abu.",
    "examples": [
     {
-     "text": "We sailed on the Ganga."
+     "text": "We sailed on the Yamuna."
     },
     {
-     "text": "They climbed Mount Everest."
+     "text": "We visited Mount Abu."
     }
    ],
    "tip": "Rivers, seas and oceans take the.",
@@ -1970,6 +1970,153 @@
     ],
     "answer": 1,
     "explain": "thrifty praises; stingy criticises."
+   }
+  },
+  {
+   "id": "EN.RDG.LIT.locate_detail#short_fact",
+   "capability": "EN.RDG.LIT.locate_detail",
+   "step": "short_fact",
+   "title": "Finding a fact",
+   "rule": "To answer a who, what, where or when question, find the sentence that answers it. The answer is written in the text.",
+   "examples": [
+    {
+     "text": "Text: \"Ravi keeps his cricket bat under his bed.\" Question: Where is the bat? Answer: under his bed.",
+     "note": "worked example: the sentence tells us"
+    },
+    {
+     "text": "Where needs a place. Who needs a person. When needs a time."
+    }
+   ],
+   "tip": "Read the question first, then look back in the text for the answer.",
+   "check": {
+    "prompt": "Text: \"Nisha's cat is called Snowy. Snowy is black.\" What colour is Snowy?",
+    "options": [
+     "white",
+     "black",
+     "grey"
+    ],
+    "answer": 1,
+    "explain": "The text says 'Snowy is black'. The name sounds white, but the text tells us the colour."
+   }
+  },
+  {
+   "id": "EN.RDG.LIT.locate_detail#paragraphs",
+   "capability": "EN.RDG.LIT.locate_detail",
+   "step": "paragraphs",
+   "title": "Finding details in a longer text",
+   "rule": "In a longer text, use the question to find the right paragraph first, then the right sentence.",
+   "examples": [
+    {
+     "text": "Question: What did they eat for lunch? Look for the paragraph about lunch, then the sentence with the food.",
+     "note": "worked example"
+    }
+   ],
+   "tip": "Look for a word from the question, then read the whole sentence around it.",
+   "check": {
+    "prompt": "Text: \"In the morning we swam in the river. In the afternoon we ate rice and dal under a tree.\" What did they eat?",
+    "options": [
+     "fish",
+     "rice and dal",
+     "fruit"
+    ],
+    "answer": 1,
+    "explain": "The afternoon sentence tells us: rice and dal."
+   }
+  },
+  {
+   "id": "EN.RDG.LIT.locate_detail#distractor",
+   "capability": "EN.RDG.LIT.locate_detail",
+   "step": "distractor",
+   "title": "Words that look right",
+   "rule": "Some answers repeat words from the text but do not answer the question. Check that your answer really answers it.",
+   "examples": [
+    {
+     "text": "Text: \"The party was planned for Sunday, but it rained, so it was held on Monday.\" When was the party held? Answer: Monday. Sunday was only the plan.",
+     "note": "worked example"
+    }
+   ],
+   "tip": "Ask: does this answer the question, or does it just use the same words?",
+   "check": {
+    "prompt": "Text: \"We wanted to go to the beach, but the car broke down, so we went to the park.\" Where did they go?",
+    "options": [
+     "the beach",
+     "the park",
+     "the garage"
+    ],
+    "answer": 1,
+    "explain": "They wanted the beach, but they went to the park."
+   }
+  },
+  {
+   "id": "EN.RDG.SUM.main_idea#topic",
+   "capability": "EN.RDG.SUM.main_idea",
+   "step": "topic",
+   "title": "What is it mostly about?",
+   "rule": "The topic is what the whole text is about. Choose the answer that fits every sentence, not just one.",
+   "examples": [
+    {
+     "text": "A text gives a dog's name, what it eats and where it sleeps. It is mostly about the dog, not about its food.",
+     "note": "worked example"
+    }
+   ],
+   "tip": "A detail is true, but too small. The topic covers everything.",
+   "check": {
+    "prompt": "Text: \"Our school has a big library. It has books about animals, space and stories. We can borrow two books a week.\" What is it mostly about?",
+    "options": [
+     "books about space",
+     "our school library",
+     "borrowing two books"
+    ],
+    "answer": 1,
+    "explain": "Every sentence is about the library; the others are details."
+   }
+  },
+  {
+   "id": "EN.RDG.SUM.main_idea#gist_title",
+   "capability": "EN.RDG.SUM.main_idea",
+   "step": "gist_title",
+   "title": "Choosing the best title",
+   "rule": "A good title fits the whole story. A title made from one detail is usually too small.",
+   "examples": [
+    {
+     "text": "Story: a boy loses his shoe, looks everywhere, and his dog brings it back. Best title: The Dog Who Found the Shoe, not A Red Shoe.",
+     "note": "worked example"
+    }
+   ],
+   "tip": "Say the story in one sentence. The best title matches that sentence.",
+   "check": {
+    "prompt": "Text: \"Ana's balloon flew away. She cried. Her friend shared his balloon, and they played together.\" Best title?",
+    "options": [
+     "A Red Balloon",
+     "A Kind Friend",
+     "Playing Outside"
+    ],
+    "answer": 1,
+    "explain": "The story is about the friend's kindness."
+   }
+  },
+  {
+   "id": "EN.RDG.SUM.main_idea#paragraph_main",
+   "capability": "EN.RDG.SUM.main_idea",
+   "step": "paragraph_main",
+   "title": "The main idea of a paragraph",
+   "rule": "Each paragraph has one big idea. The other sentences give details about it. Find the idea the other sentences support.",
+   "examples": [
+    {
+     "text": "\"Frogs live in many places. Some live in ponds, some in trees, and some even in deserts.\" Main idea: frogs live in many places.",
+     "note": "worked example"
+    }
+   ],
+   "tip": "If you can say 'for example' before a sentence, it is a detail.",
+   "check": {
+    "prompt": "Text: \"Plants need light. Without light, their leaves turn yellow. A plant left in a dark cupboard soon dies.\" Main idea?",
+    "options": [
+     "Leaves turn yellow.",
+     "Plants need light.",
+     "Cupboards are dark."
+    ],
+    "answer": 1,
+    "explain": "The other sentences show why plants need light."
    }
   }
  ]

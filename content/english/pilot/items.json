@@ -1,0 +1,1520 @@
+[
+ {
+  "kind": "code",
+  "id": "plt.infl.01",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of read: Mum is ___ a book.",
+  "answers": [
+   "reading"
+  ],
+  "step": "plain",
+  "rationale": "Adds -ing with no change to the base (read → reading).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.plain"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.02",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the plural of dish: Please wash the ___.",
+  "answers": [
+   "dishes"
+  ],
+  "step": "es_plural",
+  "rationale": "Adds -es after sh (dish → dishes).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.es"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.03",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the past tense of fill: She ___ the bottle with water.",
+  "answers": [
+   "filled"
+  ],
+  "step": "plain",
+  "rationale": "Adds -ed with no change to the base; the double l is already in fill.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.plain"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.04",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the plural of glass: Put the ___ on the table.",
+  "answers": [
+   "glasses"
+  ],
+  "step": "es_plural",
+  "rationale": "Adds -es after s (glass → glasses).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.es"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.05",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of nod: The teacher is ___ her head.",
+  "answers": [
+   "nodding"
+  ],
+  "wrong": {
+   "noding": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "step": "double_short",
+  "rationale": "One short vowel, one final consonant: the d doubles (nod → nodding).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.double"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.06",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of bite: The puppy keeps ___ my shoe.",
+  "answers": [
+   "biting"
+  ],
+  "wrong": {
+   "biteing": "kept_silent_e",
+   "bitting": "over_doubling"
+  },
+  "addresses": [
+   "kept_silent_e",
+   "over_doubling"
+  ],
+  "step": "drop_e",
+  "rationale": "Drops the silent e before -ing (bite → biting); bitting is a doubling trap.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.drope"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.07",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Write the past tense of copy: He ___ the date into his notebook.",
+  "answers": [
+   "copied"
+  ],
+  "wrong": {
+   "copyed": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "step": "y_to_i",
+  "rationale": "Consonant + y: y changes to i before -ed (copy → copied).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.ytoi"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.08",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Add -er to tidy: My room is ___ than my brother's room.",
+  "answers": [
+   "tidier"
+  ],
+  "wrong": {
+   "tidyer": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "step": "y_to_i",
+  "rationale": "Consonant + y: y changes to i before -er (tidy → tidier).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.ytoi"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.09",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write the past tense of jot: She ___ down the phone number.",
+  "answers": [
+   "jotted"
+  ],
+  "wrong": {
+   "joted": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "step": "double_short",
+  "rationale": "An unfamiliar word with the doubling pattern (jot → jotted): transfer.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.double"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.10",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of sing: The birds are ___ in the tree.",
+  "answers": [
+   "singing"
+  ],
+  "step": "plain",
+  "rationale": "Adds -ing with no change (sing → singing).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.plain"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.11",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the plural of peach: We picked six ___.",
+  "answers": [
+   "peaches"
+  ],
+  "step": "es_plural",
+  "rationale": "Adds -es after ch (peach → peaches).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.es"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.12",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of pat: She is ___ the cat gently.",
+  "answers": [
+   "patting"
+  ],
+  "wrong": {
+   "pating": "no_doubling"
+  },
+  "addresses": [
+   "no_doubling"
+  ],
+  "step": "double_short",
+  "rationale": "One short vowel, one final consonant: the t doubles (pat → patting).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.double"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.13",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write the -ing form of skate: We went ___ on the frozen lake.",
+  "answers": [
+   "skating"
+  ],
+  "wrong": {
+   "skateing": "kept_silent_e"
+  },
+  "addresses": [
+   "kept_silent_e"
+  ],
+  "step": "drop_e",
+  "rationale": "Drops the silent e before -ing (skate → skating).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.drope"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.14",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Write the past tense of reply: She ___ to my letter.",
+  "answers": [
+   "replied"
+  ],
+  "wrong": {
+   "replyed": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "step": "y_to_i",
+  "rationale": "Consonant + y: y changes to i before -ed (reply → replied).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.ytoi"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.15",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Add -est to lucky: He was the ___ player in the game.",
+  "answers": [
+   "luckiest"
+  ],
+  "wrong": {
+   "luckyest": "y_not_changed"
+  },
+  "addresses": [
+   "y_not_changed"
+  ],
+  "step": "y_to_i",
+  "rationale": "Consonant + y: y changes to i before -est (lucky → luckiest).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.ytoi"
+ },
+ {
+  "kind": "code",
+  "id": "plt.infl.16",
+  "version": 1,
+  "target": "EN.FND.SPL.inflections",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.3,
+  "prompt": "Write the -ing form of glide: The eagle was ___ over the hills.",
+  "answers": [
+   "gliding"
+  ],
+  "wrong": {
+   "glideing": "kept_silent_e",
+   "glidding": "over_doubling"
+  },
+  "addresses": [
+   "kept_silent_e",
+   "over_doubling"
+  ],
+  "step": "drop_e",
+  "rationale": "An unfamiliar word with the silent-e pattern (glide → gliding): transfer.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.infl.drope"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the right form of eat: My cat ___ fish every day.",
+  "answers": [
+   "eats"
+  ],
+  "wrong": {
+   "eat": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "third_s",
+  "rationale": "Adds -s for a he/she/it subject (my cat eats).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.third"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "The dogs barks at night.",
+   "The dogs bark at night.",
+   "The dogs is barking at night.",
+   "The dogs barking at night."
+  ],
+  "answer": 1,
+  "step": "plural_subject",
+  "rationale": "A plural subject takes no -s; tempting forms add -s or drop the helping verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the right form of drink: My grandfather ___ tea every morning.",
+  "answers": [
+   "drinks"
+  ],
+  "wrong": {
+   "drink": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "third_s",
+  "rationale": "Adds -s for a he/she/it subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.third"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the present simple form of wash: Leela ___ her hands before lunch.",
+  "answers": [
+   "washes"
+  ],
+  "wrong": {
+   "wash": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "third_s",
+  "rationale": "Third-person -es after sh, for a habit.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.third"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write is or are: The mangoes ___ ripe now.",
+  "answers": [
+   "are"
+  ],
+  "step": "plural_subject",
+  "rationale": "A plural noun subject takes are.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.plural"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.06",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Write is or are: Nina and her sister ___ at the library.",
+  "answers": [
+   "are"
+  ],
+  "step": "compound",
+  "rationale": "Two subjects joined by and take a plural verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.compound"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.07",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.3,
+  "prompt": "Write is or are: The plate of biscuits ___ on the shelf.",
+  "answers": [
+   "is"
+  ],
+  "wrong": {
+   "are": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "step": "intervening",
+  "rationale": "The subject is the plate (one); of biscuits pulls towards are.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.of"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.08",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "The keys to the cupboard is lost.",
+   "The keys to the cupboard are lost.",
+   "The keys to the cupboard was lost.",
+   "The keys to the cupboard be lost."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "step": "intervening",
+  "rationale": "The subject is the keys (plural); the nearer singular noun tempts is.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.09",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write the right form of sleep: The baby ___ in the afternoon.",
+  "answers": [
+   "sleeps"
+  ],
+  "wrong": {
+   "sleep": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "third_s",
+  "rationale": "Adds -s for a he/she/it subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.third"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.10",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write the present simple form of catch: Our goalkeeper ___ every ball.",
+  "answers": [
+   "catches"
+  ],
+  "wrong": {
+   "catch": "third_person_s"
+  },
+  "addresses": [
+   "third_person_s"
+  ],
+  "step": "third_s",
+  "rationale": "Third-person -es after ch.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.third"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.11",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write was or were: The puppies ___ asleep in the basket.",
+  "answers": [
+   "were"
+  ],
+  "step": "plural_subject",
+  "rationale": "A plural subject takes were in the past.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.plural"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.12",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "My uncle and my aunt lives in Kochi.",
+   "My uncle and my aunt live in Kochi.",
+   "My uncle and my aunt is living in Kochi.",
+   "My uncle and my aunt living in Kochi."
+  ],
+  "answer": 1,
+  "step": "compound",
+  "rationale": "Two subjects joined by and take a plural verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.13",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.3,
+  "prompt": "Write is or are: The pile of books ___ about to fall.",
+  "answers": [
+   "is"
+  ],
+  "wrong": {
+   "are": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "step": "intervening",
+  "rationale": "The subject is the pile (one).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.sva.of"
+ },
+ {
+  "kind": "code",
+  "id": "plt.sva.14",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write has or have: The girls in the choir ___ new uniforms.",
+  "answers": [
+   "have"
+  ],
+  "wrong": {
+   "has": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ],
+  "step": "intervening",
+  "rationale": "The subject is the girls (plural); the nearer singular noun choir tempts has.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write a or an: There is ___ ant on the table.",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_letter",
+  "rationale": "an before a vowel sound (an ant).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.letter"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write a, an or the: Ravi bought a new bag. ___ bag is blue.",
+  "answers": [
+   "the"
+  ],
+  "step": "first_mention",
+  "rationale": "Second mention of a noun already introduced with a.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.first"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write a or an: I saw ___ owl in the tree.",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_letter",
+  "rationale": "an before a vowel sound (an owl).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.letter"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write a or an: She drew ___ star.",
+  "answers": [
+   "a"
+  ],
+  "wrong": {
+   "an": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_letter",
+  "rationale": "a before a consonant sound (a star).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.letter"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write a, an or the: We found a puppy near the gate. ___ puppy was hungry.",
+  "answers": [
+   "the"
+  ],
+  "step": "first_mention",
+  "rationale": "Second mention: the puppy we already know about.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.first"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.06",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "My aunt is nurse.",
+   "My aunt is a nurse.",
+   "My aunt is an nurse.",
+   "My aunt is the nurses."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "article_omission"
+  },
+  "addresses": [
+   "article_omission"
+  ],
+  "step": "first_mention",
+  "rationale": "a before a job, which is often left out.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.07",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write a or an: This is ___ useful tool.",
+  "answers": [
+   "a"
+  ],
+  "wrong": {
+   "an": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_sound",
+  "rationale": "useful starts with a 'yoo' sound, so a (not an): sound, not letter.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.sound"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.08",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Which sentence is correct?",
+  "options": [
+   "I have a homework to finish.",
+   "I have homeworks to finish.",
+   "I have some homework to finish.",
+   "I have an homework to finish."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "article_with_uncountable",
+   "3": "article_with_uncountable"
+  },
+  "addresses": [
+   "article_with_uncountable"
+  ],
+  "step": "zero_uncountable",
+  "rationale": "homework is uncountable: no a/an and no plural.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.09",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Write a or an: Can I have ___ ice cream?",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_letter",
+  "rationale": "an before a vowel sound (an ice cream).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.letter"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.10",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Write a or an: There is ___ rabbit in the garden.",
+  "answers": [
+   "a"
+  ],
+  "wrong": {
+   "an": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_letter",
+  "rationale": "a before a consonant sound (a rabbit).",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.letter"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.11",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Write a, an or the: I got a letter today. ___ letter was from Nani.",
+  "answers": [
+   "the"
+  ],
+  "step": "first_mention",
+  "rationale": "Second mention: the letter already introduced.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.first"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.12",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Write a, an or the: Her father is ___ artist.",
+  "answers": [
+   "an"
+  ],
+  "wrong": {
+   "a": "a_an_sound",
+   "the": "article_omission"
+  },
+  "addresses": [
+   "a_an_sound",
+   "article_omission"
+  ],
+  "step": "first_mention",
+  "rationale": "A job takes a or an; artist starts with a vowel sound.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.13",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 4.0,
+  "a": 1.3,
+  "prompt": "Write a or an: We went on ___ one-day trip.",
+  "answers": [
+   "a"
+  ],
+  "wrong": {
+   "an": "a_an_sound"
+  },
+  "addresses": [
+   "a_an_sound"
+  ],
+  "step": "a_an_sound",
+  "rationale": "one starts with a 'w' sound, so a: sound, not letter.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated",
+  "family": "plt.fam.art.sound"
+ },
+ {
+  "kind": "code",
+  "id": "plt.art.14",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write a, an or some: Could you get me ___ sugar from the shop?",
+  "answers": [
+   "some"
+  ],
+  "wrong": {
+   "a": "article_with_uncountable"
+  },
+  "addresses": [
+   "article_with_uncountable"
+  ],
+  "step": "zero_uncountable",
+  "rationale": "sugar is uncountable here: some, not a.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.01",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Where did Sam plant the beans?",
+  "passage": "plt.p01",
+  "options": [
+   "in the school garden",
+   "in a pot by the window",
+   "under a tree",
+   "in a field"
+  ],
+  "answer": 1,
+  "step": "short_fact",
+  "rationale": "A stated place in a four-sentence text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.02",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "typed:short_answer",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "Where does Joy get on the bus?",
+  "passage": "plt.p02",
+  "answers": [
+   "at the post office",
+   "the post office",
+   "post office",
+   "at post office"
+  ],
+  "step": "short_fact",
+  "rationale": "A stated place, typed.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.03",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "What did Grandpa use to keep them dry?",
+  "passage": "plt.p03",
+  "options": [
+   "a plastic bag",
+   "his black umbrella",
+   "a big watermelon",
+   "the roof of a shop"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "word_matching"
+  },
+  "step": "paragraphs",
+  "rationale": "A detail in the second paragraph; one option repeats a word from the text but does not answer.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.04",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "On which day did the club go to the museum?",
+  "passage": "plt.p04",
+  "options": [
+   "Tuesday",
+   "Friday",
+   "Monday",
+   "Saturday"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "word_matching",
+   "0": "word_matching"
+  },
+  "step": "distractor",
+  "rationale": "The planned day (Friday) is a distractor; the trip moved to Monday.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.05",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "What colour was the kitten?",
+  "passage": "plt.p05",
+  "options": [
+   "blue",
+   "black",
+   "grey",
+   "white"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "word_matching"
+  },
+  "step": "short_fact",
+  "rationale": "A stated colour; blue is the bowl, not the kitten.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.06",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "typed:short_answer",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "How many goals did our team score?",
+  "passage": "plt.p06",
+  "answers": [
+   "three",
+   "3",
+   "3 goals",
+   "three goals"
+  ],
+  "step": "short_fact",
+  "rationale": "A stated number, typed.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.07",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "What did the keeper feed the tortoises?",
+  "passage": "plt.p07",
+  "options": [
+   "bananas and nuts",
+   "lettuce and pumpkin",
+   "grass and leaves",
+   "neem leaves"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "word_matching"
+  },
+  "step": "paragraphs",
+  "rationale": "A detail in the second paragraph; neem repeats a word from the text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.08",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "Where was the pencil box in the end?",
+  "passage": "plt.p08",
+  "options": [
+   "in the classroom",
+   "inside his bag",
+   "under his desk",
+   "on the kitchen table"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "word_matching"
+  },
+  "step": "distractor",
+  "rationale": "Places he only looked in, or thought of, are distractors.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.09",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "What did Maya bring in?",
+  "passage": "plt.p09",
+  "options": [
+   "the chairs",
+   "the clothes",
+   "the plants",
+   "the dog"
+  ],
+  "answer": 1,
+  "step": "short_fact",
+  "rationale": "Practice: a stated detail.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.10",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "Who helped Raj learn to ride?",
+  "passage": "plt.p10",
+  "options": [
+   "his father",
+   "his older sister",
+   "his friend",
+   "his teacher"
+  ],
+  "answer": 1,
+  "step": "paragraphs",
+  "rationale": "Practice: a detail in the second paragraph.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.det.11",
+  "version": 1,
+  "target": "EN.RDG.LIT.locate_detail",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "On which day did Mina return the book?",
+  "passage": "plt.p11",
+  "options": [
+   "Monday",
+   "Thursday",
+   "Friday",
+   "in two weeks"
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "word_matching"
+  },
+  "step": "distractor",
+  "rationale": "Practice: Monday and 'two weeks' are in the text but do not answer.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.01",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "What is this text mostly about?",
+  "passage": "plt.p12",
+  "options": [
+   "birds that build nests",
+   "a mango tree and how it helps us",
+   "hot summer days",
+   "how to make a nest"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "detail_as_main",
+   "2": "detail_as_main"
+  },
+  "step": "topic",
+  "rationale": "The topic of a short text, against details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.02",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Which is the best title for the story?",
+  "passage": "plt.p13",
+  "options": [
+   "Flour and Sugar",
+   "Ben's Late Cake",
+   "The Oven",
+   "Eggs for Breakfast"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "detail_as_main",
+   "2": "detail_as_main"
+  },
+  "step": "gist_title",
+  "rationale": "The best title fits the whole story; the others are details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.03",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "What is the second paragraph mainly about?",
+  "passage": "plt.p14",
+  "options": [
+   "how camels store fat",
+   "how camels keep the sand out",
+   "how long camels live",
+   "where camels sleep"
+  ],
+  "answer": 1,
+  "step": "paragraph_main",
+  "rationale": "The main idea of one paragraph; one option is the other paragraph's idea.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.04",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "What is the main idea of the second paragraph?",
+  "passage": "plt.p15",
+  "options": [
+   "Walking is good exercise.",
+   "The roads are busy, so the council is making them safer.",
+   "A guard will stand at the main gate.",
+   "Buses are expensive."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "detail_as_main"
+  },
+  "step": "paragraph_main",
+  "rationale": "A paragraph's main idea against one of its details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.05",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "What is this text mostly about?",
+  "passage": "plt.p16",
+  "options": [
+   "the colour of toothpaste",
+   "how to look after your teeth",
+   "the morning",
+   "how to sleep well"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "detail_as_main",
+   "2": "detail_as_main"
+  },
+  "step": "topic",
+  "rationale": "The topic of a short instruction text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.06",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Which is the best title for the story?",
+  "passage": "plt.p17",
+  "options": [
+   "The Nest Was High",
+   "Saving a Baby Bird",
+   "Lalita's Father",
+   "Bird Food"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "detail_as_main",
+   "3": "detail_as_main"
+  },
+  "step": "gist_title",
+  "rationale": "The best title fits the whole story.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.07",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "What is the second paragraph mainly about?",
+  "passage": "plt.p18",
+  "options": [
+   "how bees carry nectar",
+   "how people have used honey",
+   "why sugar is sweet",
+   "how to cure a sore throat"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "detail_as_main"
+  },
+  "step": "paragraph_main",
+  "rationale": "A paragraph's main idea; one option is the other paragraph's idea, one a detail.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.08",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 3.5,
+  "a": 1.3,
+  "prompt": "What is the main idea of the second paragraph?",
+  "passage": "plt.p19",
+  "options": [
+   "Crows came first.",
+   "More and more kinds of birds came to drink.",
+   "A kingfisher visited once.",
+   "The class keeps a list."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "2": "detail_as_main",
+   "0": "detail_as_main"
+  },
+  "step": "paragraph_main",
+  "rationale": "A paragraph's main idea against its details.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.09",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.0,
+  "a": 1.3,
+  "prompt": "What is this text mostly about?",
+  "passage": "plt.p20",
+  "options": [
+   "birds on rooftops",
+   "kite flying in our city",
+   "the month of January",
+   "how to cut a kite string"
+  ],
+  "answer": 1,
+  "step": "topic",
+  "rationale": "Practice: the topic of a short text.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.10",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_story",
+  "b": 2.5,
+  "a": 1.3,
+  "prompt": "Which is the best title for the story?",
+  "passage": "plt.p21",
+  "options": [
+   "Covered Ears",
+   "Practice Pays Off",
+   "The School Gate",
+   "Every Evening"
+  ],
+  "answer": 1,
+  "step": "gist_title",
+  "rationale": "Practice: the best title for a short story.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ },
+ {
+  "kind": "code",
+  "id": "plt.main.11",
+  "version": 1,
+  "target": "EN.RDG.SUM.main_idea",
+  "format": "choice:reading_info",
+  "b": 3.0,
+  "a": 1.3,
+  "prompt": "What is the second paragraph mainly about?",
+  "passage": "plt.p22",
+  "options": [
+   "snakes have no ears",
+   "how snakes feel movements in the ground",
+   "how people walk",
+   "where snakes live"
+  ],
+  "answer": 1,
+  "step": "paragraph_main",
+  "rationale": "Practice: the main idea of a paragraph.",
+  "difficulty_source": "expert_estimate",
+  "review": "candidate-unvalidated"
+ }
+]

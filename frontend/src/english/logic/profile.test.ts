@@ -100,26 +100,28 @@ test("B: a hard capability with an unmeasured prerequisite: the prerequisite is 
   assert.equal(p.activities[0].step.capability, RDG_DETAIL);
   assert.match(cap(l, RDG_MAIN).notes[0], /may reflect/i);
   assert.ok(!p.plan.all.some((r) => r.capability === RDG_MAIN), "main idea is not worked on while its prerequisite is unknown");
-  // the prerequisite is shown: main idea is now its own difficulty; there are no reading lessons, so a person is asked
+  // the prerequisite is shown: main idea is now its own difficulty, taught with the pilot's reading lessons (PR #24)
   await check(l, RDG_DETAIL, all);
   p = l.profile();
   assert.ok(["shown", "confirmed"].includes(cap(l, RDG_DETAIL).standing));
-  assert.ok(p.plan.forAdults.some((r) => r.capability === RDG_MAIN && !r.content.available));
-  assert.ok(!p.activities.some((a) => a.step.capability === RDG_MAIN), "nothing undeliverable is offered to the child");
+  assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability], ["teach", RDG_MAIN]);
+  const teach = p.activities.find((a) => a.step.capability === RDG_MAIN)!;
+  assert.deepEqual([teach.kind, teach.step.type, teach.step.lesson], ["keep_learning", "guided", `${RDG_MAIN}#topic`], "the first reading lesson in the sequence");
   const { overview } = l.overview();
   assert.ok(overview.changes.some((t) => /Locating details|locate|detail/i.test(t) && /→/.test(t)), overview.changes.join(" | "));
   assert.ok(overview.changes.some((t) => /No longer planned: Check .* first/.test(t)));
   await assertReplay(l, repo);
 });
 
-test("B2: a hard capability whose prerequisite is also hard and has no lessons: the prerequisite goes to an adult first", async () => {
+test("B2: a hard capability whose prerequisite is also hard: the prerequisite is taught first, never the dependent skill", async () => {
   const { l } = await newLearner("B2");
   await start(l, all);
   await check(l, RDG_MAIN, () => false);
   await check(l, RDG_DETAIL, () => false);
   const p = l.profile();
-  assert.deepEqual(p.plan.forAdults.map((r) => r.capability).slice(0, 1), [RDG_DETAIL]);
-  assert.ok(!p.activities.some((a) => a.step.capability === RDG_MAIN || a.step.capability === RDG_DETAIL));
+  assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability, p.plan.today[0].because], ["teach_prerequisite", RDG_DETAIL, RDG_MAIN]);
+  assert.deepEqual([p.activities[0].kind, p.activities[0].step.capability, p.activities[0].step.lesson], ["keep_learning", RDG_DETAIL, `${RDG_DETAIL}#short_fact`]);
+  assert.ok(!p.activities.some((a) => a.step.capability === RDG_MAIN), "the dependent skill waits for its prerequisite");
 });
 
 test("C / G: wrong on their own, a lesson, right in practice straight after it: 'improving, awaiting confirmation', never 'shown'; the next step is a fresh check", async () => {
@@ -138,7 +140,7 @@ test("C / G: wrong on their own, a lesson, right in practice straight after it: 
   assert.notEqual(leafView(l.state.ledger.composite, content.index, SVA, l.clock()).verification.status, "demonstrated");
   assert.match(sva.strengths[0], /Not yet shown on their own/);
   assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability], ["confirm", SVA]);
-  assert.deepEqual([p.activities[0].kind, p.activities[0].step.type, p.activities[0].step.capability, p.activities[0].step.purpose], ["show_what_you_know", "check", SVA, "assess"]);
+  assert.deepEqual([p.activities[0].kind, p.activities[0].step.type, p.activities[0].step.capability, p.activities[0].step.purpose], ["show_what_you_know", "check", SVA, "confirm"]);
   const { overview } = l.overview();
   assert.ok(overview.improving.some((x) => x.id === SVA));
   assert.ok(!overview.shown.some((x) => x.id === SVA));

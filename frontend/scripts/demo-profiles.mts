@@ -41,6 +41,7 @@ interface Captured {
 const PHONE = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 const captured: Captured[] = [];
+let readingPractice = { passage: 0, item: "" };
 const problems: string[] = [];
 
 for (const s of SCENARIOS)
@@ -84,6 +85,20 @@ for (const s of SCENARIOS)
     if (!fits) problems.push(`${s.key}-${stage}: the page is wider than the phone`);
     if (small.length) problems.push(`${s.key}-${stage}: buttons too small to tap: ${small.join(", ")}`);
     if (errors.length) problems.push(`${s.key}-${stage}: ${errors.join("; ")}`);
+    if (s.key === "L" && stage === "diagnosis") {
+      // the reading lesson and a practice question, as the child sees them
+      await page.getByRole("button", { name: "Today" }).click();
+      await page.locator(`.plan li[data-capability="${RDG_MAIN}"]`).getByRole("button", { name: "Start" }).click();
+      await page.locator(".lesson").waitFor();
+      await shot("reading-lesson", "The reading lesson: a worked example and a quick check (teaching, separate from assessment)");
+      await page.locator(".check .option").nth(1).click();
+      await page.locator(".lesson .feedback").waitFor();
+      await page.getByRole("button", { name: "Start practising" }).click();
+      await page.locator(".item").waitFor();
+      readingPractice = { passage: await page.locator(".passage").count(), item: (await page.locator(".item").getAttribute("data-item")) ?? "" };
+      await shot("reading-practice", "Practice after the lesson: a passage with one question (practice, never a confirming check)");
+      await page.getByRole("button", { name: "Save and leave" }).or(page.getByRole("button", { name: /Stop|Leave/ })).first().click().catch(() => undefined);
+    }
     captured.push({ key: s.key, stage, label: s.label, shots, activities, todayText, recommendations, overview });
     await context.close();
   }
@@ -96,7 +111,11 @@ const caps = (k: string, st: string) => acts(k, st).map((a) => a.capability);
 const checks: [string, boolean][] = [
   ["A: reading comprehension is in Today's plan, spelling is not repeated", caps("A", "profile").includes(RDG_MAIN) && !caps("A", "profile").some((c) => SPELLING.includes(c))],
   ["B before: the unmeasured prerequisite (finding details) is checked first", acts("B", "before")[0]?.capability === RDG_DETAIL && get("B", "before").overview.includes("which has not been measured")],
-  ["B after: the prerequisite is shown; main idea goes to an adult (no reading lessons), never offered as an activity", !caps("B", "after").includes(RDG_MAIN) && get("B", "after").recommendations.some((r) => r.action === "human_review" && r.capability === RDG_MAIN)],
+  ["B after: the prerequisite is shown; main idea is now taught with the pilot's reading lessons", acts("B", "after").some((a) => a.capability === RDG_MAIN && a.kind === "keep_learning") && get("B", "after").recommendations[0]?.action === "teach"],
+  ["L diagnosis: main idea found hard on its own answers; the first reading lesson is offered", acts("L", "diagnosis").some((a) => a.capability === RDG_MAIN && a.kind === "keep_learning") && /Found hard so far[\s\S]*Identifies the main idea: 0 of/.test(get("L", "diagnosis").overview)],
+  ["L after the lesson: improving in practice, awaiting confirmation; next, fresh questions (never the taught ones)", acts("L", "after_lesson").some((a) => a.capability === RDG_MAIN && a.kind === "show_what_you_know") && /Improving during practice, awaiting confirmation\s*Identifies the main idea/.test(get("L", "after_lesson").overview)],
+  ["L confirmed: right on fresh questions, no longer 'improving'", !/Improving during practice, awaiting confirmation\s*Identifies the main idea/.test(get("L", "confirmed").overview)],
+  ["L later: the later check comes from the retention questions and the result is recorded", get("L", "later").overview.length > 0],
   ["B after: the overview explains why the plan changed", /No longer planned: Check .* first/.test(get("B", "after").overview)],
   ["C before: a lesson on subject–verb agreement first", acts("C", "before")[0]?.kind === "keep_learning" && acts("C", "before")[0]?.capability === SVA],
   ["C after: right in practice after the lesson is 'improving, awaiting confirmation', not shown; next a fresh check; no causal claim", get("C", "after").recommendations[0]?.action === "confirm" && /Improving during practice, awaiting confirmation\s*Subject–verb agreement/.test(get("C", "after").overview) && !/Demonstrated independently\s*[^\n]*Subject–verb agreement/.test(get("C", "after").overview) && /does not show what caused it/.test(get("C", "after").overview)],
@@ -112,6 +131,7 @@ const checks: [string, boolean][] = [
   ["E: help is not mastery: the spelling rule is not offered as secure, help is shown apart, an adult is asked", !caps("E", "profile").includes(INF) && /Needed help[\s\S]*right with help/.test(get("E", "profile").overview) && get("E", "profile").recommendations.some((r) => r.capability === INF && r.action === "human_review")],
   ["F: an initial assessment only; nothing called hard", acts("F", "profile").length === 1 && /Find your starting point/.test(acts("F", "profile")[0].title) && /Found hard so far\s*Nothing/.test(get("F", "profile").overview)],
   ["every recommendation the child can start carries the evidence ids behind it, except first looks", captured.every((c) => c.recommendations.filter((r) => r.action !== "assess" && r.action !== "initial_assessment").every((r) => r.evidence.length > 0))],
+  ["L: the reading lesson shows, then practice shows its passage with a practice or diagnosis question (never a reserved one)", readingPractice.passage === 1 && (/^plt\.main\.(09|10|11)$/.test(readingPractice.item) || /^rdg\./.test(readingPractice.item))],
   ["no screen shows a percentile, IQ, ranking or probability", captured.every((c) => !/percentile|\bIQ\b|rank|probabilit|%/i.test(c.overview))],
   ["phone layout: no sideways scrolling, every button tappable, no page errors", problems.length === 0],
 ];

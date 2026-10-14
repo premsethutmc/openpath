@@ -4,7 +4,7 @@
  * pattern (a separate scheduling layer: it decides what to practise, never how answers are scored).
  */
 import { type EvidenceUse, type Goal, type Item, type LeafView, type Recommendation, type SelectionInput, fnv1a, leafView, recommend } from "../../../../packages/english-core/src/index.ts";
-import { type AppContent, type Code, GUIDED, lessonId } from "./content.ts";
+import { type AppContent, type Code, GUIDED, type Pool, lessonId } from "./content.ts";
 import type { Planned } from "./events.ts";
 import { type AppState, type PatternStatus, type SessionState, dueWords, patternKey, patternStatus } from "./state.ts";
 
@@ -25,7 +25,37 @@ export interface Next {
 
 const view = (s: AppState, c: AppContent, cap: string, now: string): LeafView => leafView(s.ledger.composite, c.index, cap, now);
 
-function input(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"]): SelectionInput {
+/** What a question may be used for, by the reason it is asked. Questions without a pool may be used for anything. */
+export type Use = "assess" | "practice" | "confirm" | "retention";
+const ALLOWED: Record<Use, Pool[]> = { assess: ["diagnosis"], practice: ["diagnosis", "practice"], confirm: ["confirmation"], retention: ["retention"] };
+
+/**
+ * The hand-written questions this use may draw on. Three rules, all about selection (no scoring changes):
+ *   pools        a pilot question reserved for one use is never taken for another
+ *   passages     at most one question per reading passage in a session (two questions on one passage are not
+ *                independent evidence)
+ *   seen words   a fresh or later check never asks a spelling word the learner has already met in practice
+ */
+export function onlyFor(s: AppState, c: AppContent, use: Use, session?: SessionState): Set<string> {
+  const allowed = ALLOWED[use];
+  const used = new Set<string>();
+  if (session) for (const a of session.attempts) {
+    const i = c.ctx.content.items.get(a.item.id);
+    if (i?.kind === "code" && i.passage) used.add(i.passage);
+  }
+  const out = new Set<string>();
+  for (const id of c.handWritten) {
+    const pool = c.pilot.pools.get(id);
+    if (pool && !allowed.includes(pool.pool)) continue;
+    const i = c.ctx.content.items.get(id);
+    if (i?.kind === "code" && i.passage && used.has(i.passage)) continue;
+    if ((use === "confirm" || use === "retention") && i?.kind === "code" && i.format.startsWith("typed") && i.answers?.[0] && s.wordsSeen.has(i.answers[0].toLowerCase())) continue;
+    out.add(id);
+  }
+  return out;
+}
+
+function input(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"], only: Set<string> = onlyFor(s, c, "assess")): SelectionInput {
   const recent = [...s.sessions.values()]
     .flatMap((x) => x.answered)
     .sort((a, b) => b.at.localeCompare(a.at))
@@ -46,7 +76,7 @@ function input(s: AppState, c: AppContent, goal: Goal, now: string, mode: Select
     writingThisSession: 0,
     writingAvailable: false,
     shortAvailable: false,
-    only: c.handWritten,
+    only,
     mode,
     activityIndex: s.events.filter((e) => e.kind === "evidence").length,
   };
@@ -70,7 +100,7 @@ export function placementNext(s: AppState, c: AppContent, session: SessionState,
   const n = session.answered.length;
   if (n >= PLACEMENT_MAX) return null;
   if (n >= PLACEMENT_MIN && meanGuidedSd(s, c, now) <= PLACEMENT_SD) return null;
-  const r = recommend(input(s, c, c.guidedGoal, now, "assessment"));
+  const r = recommend(input(s, c, c.guidedGoal, now, "assessment", onlyFor(s, c, "assess", session)));
   const next = nextFrom(r, c);
   return next ? { ...next, use: "assessment" } : null;
 }
@@ -80,7 +110,7 @@ export const focusGoal = (cap: string): Goal => ({ id: `focus:${cap}`, name: cap
 /** Grammar or vocabulary: the engine's hybrid scheduler on one capability (retention checks, probes and practice). */
 export function guidedNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? GUIDED_LENGTH)) return null;
-  return nextFrom(recommend(input(s, c, focusGoal(session.event.capability!), now, "hybrid")), c);
+  return nextFrom(recommend(input(s, c, focusGoal(session.event.capability!), now, "hybrid", onlyFor(s, c, "practice", session))), c);
 }
 
 /**
@@ -93,7 +123,8 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
   const cap = session.event.capability;
   if (!cap) return null;
   const retention = session.event.purpose === "retention";
-  const next = nextFrom(recommend(input(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment")), c);
+  const use: Use = retention ? "retention" : session.event.purpose === "confirm" ? "confirm" : "assess";
+  const next = nextFrom(recommend(input(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment", onlyFor(s, c, use, session))), c);
   if (!next || next.item.kind !== "code" || next.item.target !== cap) return null; // only this capability
   return retention ? next : { ...next, use: "assessment" };
 }
@@ -101,12 +132,12 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
 /** More practice: the engine's hybrid scheduler on every specified capability (no teaching). */
 export function exploreNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? EXPLORE_LENGTH)) return null;
-  return nextFrom(recommend(input(s, c, c.overallGoal, now, "hybrid")), c);
+  return nextFrom(recommend(input(s, c, c.overallGoal, now, "hybrid", onlyFor(s, c, "assess", session))), c);
 }
 
 /** The step a guided session's lesson teaches: the step of the first activity the engine would choose. */
 export function guidedLesson(s: AppState, c: AppContent, cap: string, now: string): string | undefined {
-  const r = recommend(input(s, c, focusGoal(cap), now, "hybrid"));
+  const r = recommend(input(s, c, focusGoal(cap), now, "hybrid", onlyFor(s, c, "practice")));
   const item = r.choice ? c.ctx.content.items.get(r.choice.item) : undefined;
   const step = item?.kind === "code" ? item.step : undefined;
   return step && c.lessons.has(lessonId(cap, step)) ? lessonId(cap, step) : undefined;
@@ -138,7 +169,9 @@ function unseenWords(s: AppState, c: AppContent, cap: string, step: string, spee
 }
 
 function unseenHandWritten(s: AppState, c: AppContent, cap: string, step: string): Code | undefined {
-  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && c.handWritten.has(i.id) && i.step === step && !s.ledger.exposures.has(i.id)).sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
+  // the spelling module never uses questions reserved for a confirming or later check, or for teaching
+  const pool = (id: string) => c.pilot.pools.get(id)?.pool;
+  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && !i.generated && c.handWritten.has(i.id) && i.step === step && !s.ledger.exposures.has(i.id) && (pool(i.id) ?? "diagnosis") === "diagnosis").sort((a, b) => a.b - b.b || a.id.localeCompare(b.id))[0];
 }
 
 /** Spelling patterns (capability and ladder step) that have generated words. */

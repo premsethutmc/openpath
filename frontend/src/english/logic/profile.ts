@@ -32,7 +32,7 @@ import { type AppContent, type Code, GUIDED } from "./content.ts";
 import type { AppEvent } from "./events.ts";
 import { type PlanStep, patternTitle, todayPlan } from "./plan.ts";
 import { capabilityProgress, type CapabilityProgress } from "./progress.ts";
-import { spellingPlan } from "./select.ts";
+import { type Use, onlyFor, spellingPlan } from "./select.ts";
 import { type AppState, dueWords, fold, placementDone, sessionsOf } from "./state.ts";
 import { parentReport } from "./journey.ts";
 
@@ -50,6 +50,8 @@ export interface CapabilityProfile extends CapabilitySnapshot {
   lastAssessedAt: string | null;
   /** Content the evidence came from: every independent answer so far is on draft (unreviewed) questions unless validated. */
   basis: { validated: number; draft: number };
+  /** Reading: how many different passages the independent answers came from (answers on one passage are not fully independent). */
+  passages: number;
   /** For shown or confirmed: the level the engine currently supports (1–8); always reported with "shown". */
   shownLevel: number | null;
   /** Notes from the plan (for example a possible unmeasured prerequisite). */
@@ -84,7 +86,7 @@ export const CHECK_LENGTH = 4;
 
 const none = (): EvidenceSummary => ({ independent: 0, independentRight: 0, assisted: 0, assistedRight: 0, unknown: 0, provisional: 0, provisionalRight: 0, practiceOnly: 0, afterTeaching: 0, afterTeachingRight: 0, repeats: 0 });
 
-type Collected = { e: EvidenceSummary; ids: string[]; lastAt: string | null; lastPracticeAt: string | null; validated: number; draft: number };
+type Collected = { e: EvidenceSummary; ids: string[]; lastAt: string | null; lastPracticeAt: string | null; validated: number; draft: number; passages: Set<string> };
 
 /** Evidence on every capability, by kind, from the ledger's own decisions and assisted responses. */
 /**
@@ -102,7 +104,7 @@ function evidenceByCapability(s: AppState, c: AppContent) {
   const out = new Map<string, Collected>();
   const get = (cap: string) => {
     let x = out.get(cap);
-    if (!x) out.set(cap, (x = { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0 }));
+    if (!x) out.set(cap, (x = { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0, passages: new Set() }));
     return x;
   };
   const evidence = new Map(s.ledger.events.filter((e) => e.kind === "evidence").map((e) => [e.id, e]));
@@ -134,6 +136,7 @@ function evidenceByCapability(s: AppState, c: AppContent) {
         continue;
       }
       x.e.independent++;
+      if (item.passage) x.passages.add(item.passage);
       x.e.independentRight += right;
       x.ids.push(d.source);
       x.lastAt = d.at;
@@ -162,9 +165,13 @@ function evidenceByCapability(s: AppState, c: AppContent) {
 }
 
 /** Unseen questions the app can ask on a capability: the hand-written bank, not provisional or generated items. */
-function unseenQuestions(s: AppState, c: AppContent, cap: string): number {
-  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i) => c.handWritten.has(i.id) && !s.ledger.exposures.has(i.id)).length;
+function unseenQuestions(s: AppState, c: AppContent, cap: string, use: Use = "assess"): number {
+  const allowed = onlyFor(s, c, use);
+  return [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i) => allowed.has(i.id) && !s.ledger.exposures.has(i.id)).length;
 }
+
+/** Does this capability have questions reserved by purpose (the pilot)? Then confirmation and later checks use their own pools. */
+const hasPools = (c: AppContent, cap: string) => c.pilot.capabilities.includes(cap);
 
 /** A teaching activity the app can deliver for a capability: a spelling pattern with words left, or a grammar/vocabulary lesson. */
 function teachingFor(s: AppState, c: AppContent, cap: string, now: string, speech: boolean): { title: string; step: PlanStep } | null {
@@ -174,11 +181,13 @@ function teachingFor(s: AppState, c: AppContent, cap: string, now: string, speec
     const title = patternTitle(c, p.cap, p.step);
     return { title: `Spelling lesson and practice: ${title}`, step: { type: "spelling_practice", title: `Spelling: ${title}`, reason: "", capability: p.cap, step: p.step } };
   }
-  if ([...GUIDED.grammar, ...GUIDED.vocabulary].includes(cap as never) && [...c.lessons.values()].some((l) => l.capability === cap)) {
-    const name = c.index.names.get(cap) ?? cap;
-    return { title: `Lesson and practice: ${name}`, step: { type: "guided", title: name, reason: "", capability: cap } };
-  }
-  return null;
+  const lessons = [...c.lessons.values()].filter((l) => l.capability === cap);
+  if (!lessons.length) return null;
+  const name = c.index.names.get(cap) ?? cap;
+  if ([...GUIDED.grammar, ...GUIDED.vocabulary].includes(cap as never)) return { title: `Lesson and practice: ${name}`, step: { type: "guided", title: name, reason: "", capability: cap } };
+  // other capabilities with lessons (the pilot's reading sequence): the next lesson not yet read, in order
+  const lesson = lessons.find((l) => !s.lessons.has(l.id)) ?? lessons.at(-1)!;
+  return { title: `Lesson and practice: ${lesson.title}`, step: { type: "guided", title: name, reason: "", capability: cap, lesson: lesson.id } };
 }
 
 /** Spelling: words of a pattern misspelt in the spelling check, or a recent mistake pointing to it (practice-only answers). */
@@ -196,7 +205,9 @@ function practiceSignal(s: AppState, c: AppContent, cap: string, now: string, sp
  */
 function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: CapabilityProgress["certainty"], minDirect: number, demonstratedOutsideLessons: boolean): Standing {
   const e = x.e;
-  const qualified = e.independent >= minDirect && demonstratedOutsideLessons;
+  // never "shown" while the learner's own answers say the opposite: the engine can support a low level after wrong
+  // answers on harder questions (its prior), but a parent reading "shown" after 0 of 4 right would be misled
+  const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e);
   switch (v.verification.status) {
     case "failed":
       return "not_kept";
@@ -236,7 +247,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const pr = progress.get(id);
     if (!pr) return; // specified capabilities only
     const v = pr.view;
-    const x = ev.get(id) ?? { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0 };
+    const x = ev.get(id) ?? { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0, passages: new Set<string>() };
     // an engine demonstration counts here only if it happened in a session with no lesson on this capability
     const lessonOn = (session: string) => (s.sessions.get(session)?.event.lesson ?? "").split("#")[0] === id;
     const outside = s.ledger.composite.nodes[id].demonstrations.some((d) => !lessonOn(d.session));
@@ -277,7 +288,12 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       evidence: x.e,
       evidenceIds: x.ids.slice(-5),
       lastAt: x.lastAt,
-      content: { assess: unseenQuestions(s, c, id), teach: t?.title ?? null, practiceSignal: practiceSignal(s, c, id, now, speech) },
+      content: {
+        assess: unseenQuestions(s, c, id),
+        ...(hasPools(c, id) ? { confirm: unseenQuestions(s, c, id, "confirm"), retain: unseenQuestions(s, c, id, "retention") } : {}),
+        teach: t?.title ?? null,
+        practiceSignal: practiceSignal(s, c, id, now, speech),
+      },
       paused,
       estimate: { certainty: pr.certainty, headline: pr.headline, range: pr.range, verification: pr.verification },
       strengths,
@@ -286,6 +302,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       lastAssessedAt: v.lastDirectAt ?? x.lastAt,
       basis: { validated: x.validated, draft: x.draft },
       shownLevel: standing === "shown" || standing === "confirmed" ? ver.currentLevel : null,
+      passages: x.passages.size,
       notes: [],
       next: null,
     });
@@ -338,7 +355,7 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
     if (!r.capability) continue;
     const cap = name(r.capability);
     const area = areaWord(cap.id);
-    const check = (kind: Activity["kind"], line: string, purpose: "assess" | "retention"): Activity & { priority: number } => ({
+    const check = (kind: Activity["kind"], line: string, purpose: "assess" | "confirm" | "retention"): Activity & { priority: number } => ({
       kind,
       label: CHILD[kind],
       title: `${area}: ${cap.name}`,
@@ -361,7 +378,7 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
         out.push(check("check_learned", "Something you learned before: let's see if it has stuck.", "retention"));
         break;
       case "confirm":
-        out.push(check("show_what_you_know", "New questions on what you just practised, on your own.", "assess"));
+        out.push(check("show_what_you_know", "New questions on what you just practised, on your own.", "confirm"));
         break;
       case "assess":
       case "next_capability":

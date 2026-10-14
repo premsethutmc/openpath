@@ -49,8 +49,8 @@ export interface SessionEvent {
   capability?: string;
   step?: string;
   lesson?: string;
-  /** For a check: why it was asked (a first look or another look: "assess"; a later check: "retention"). */
-  purpose?: "assess" | "retention";
+  /** For a check: why it was asked (a first or another look: "assess"; the fresh check after teaching: "confirm"; a later check: "retention"). */
+  purpose?: "assess" | "confirm" | "retention";
 }
 
 export interface SessionEndEvent {
