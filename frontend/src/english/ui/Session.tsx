@@ -271,6 +271,9 @@ function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLea
     extra = st === "secure" ? `"${patternTitle(learner.content, ev.capability, ev.step)}" works with new words too. That pattern is secure.` : "Not secure yet with new words. A little more practice, then another check.";
   }
   const teaching = TEACHING.has(ev.type) || !!ev.lesson;
+  // answers the engine accepted as evidence (held ones are kept but not counted)
+  const evidenceIds = new Set(answered.map((a) => (a as { evidence?: string }).evidence).filter(Boolean));
+  const counted = learner.state.ledger.decisions.filter((d) => evidenceIds.has(d.source) && d.observation && d.verdict === "accepted").length;
   return (
     <main className="session done" aria-labelledby="done-title">
       <section className="sheet">
@@ -295,7 +298,10 @@ function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLea
               <b>
                 <span aria-hidden="true">🔎</span> Answers on your own
               </b>
-              <p>{ev.purpose === "retention" ? "A later check: it shows what has stuck since you learned it." : "These count as evidence. One check is never the whole story: OpenPath looks for patterns over several days."}</p>
+              <p>
+                {ev.purpose === "retention" ? "A later check: it shows what has stuck since you learned it. " : ""}
+                {counted === answered.length ? "Every answer here counts as evidence." : `${counted} of ${answered.length} answers here count as evidence; the others were kept but not counted (for example a passage already counted, or a practice word).`} One check is never the whole story: OpenPath looks for patterns across several answers.
+              </p>
             </div>
           )
         )}

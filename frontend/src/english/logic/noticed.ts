@@ -29,7 +29,9 @@ export function noticedFor(s: AppState): Noticed | null {
   const right = attempt.correct;
   if (!attempt.evidence || attempt.assisted)
     return { kind: "help", title: "Practice with help", text: "Second tries and hints help you learn. They are kept as practice, not as evidence of what you can do on your own." };
-  if (!decision) return { kind: "practice", title: "Practice", text: "This answer is kept as practice." };
+  if (!decision) return { kind: "practice", title: "Kept, not counted", text: "This answer is kept in the record, but it does not count as evidence." };
+  if (decision.verdict === "revoked" || decision.verdict === "rejected" || decision.verdict === "ignored")
+    return { kind: "practice", title: "Kept, not counted", text: "This answer is kept in the record, but it does not count as evidence." };
   const o = decision.observation;
   if (decision.verdict === "held") {
     if (o?.samePassage) return { kind: "same_passage", title: "Same story as before", text: "OpenPath already counted an answer on this passage for this skill, so this one is kept for a teacher but not counted again." };
@@ -50,7 +52,7 @@ export function noticedFor(s: AppState): Noticed | null {
     kind: "independent",
     title: right ? "Answered on your own" : "One answer is not a verdict",
     text: right
-      ? "You answered this on your own, so it counts as evidence. OpenPath needs several answers, on different days, before it says a skill is shown."
-      : "This counts as one piece of evidence. OpenPath looks at patterns across several answers, never at one mistake.",
+      ? "You answered this on your own, so it counts as evidence. OpenPath needs several answers, in different kinds of question, before it says a skill is shown."
+      : "This counts as one piece of evidence. One answer moves the estimate a little; patterns across several answers matter much more.",
   };
 }

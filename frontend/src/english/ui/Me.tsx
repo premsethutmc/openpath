@@ -29,7 +29,7 @@ export function Me({
   onSwitch: () => void;
   onOpen: (id: string) => void;
   onRemoved: () => void;
-  onSignOut: () => void;
+  onSignOut: () => Promise<void>;
   onDeleteAccount: (password: string) => Promise<void>;
 }) {
   const [msg, setMsg] = useState<string | null>(null);
@@ -95,7 +95,7 @@ export function Me({
           </b>
           <p>
             {onServer
-              ? `${name}'s answers are kept in the parent account ${account ?? ""}, so they are there on any device after signing in. Only that account can see them. No adverts, no tracking, and nothing is sent to AI marking.`
+              ? `${name}'s answers are kept in the parent account ${account ?? ""}, so they are there on any device after signing in. In the app, only this account can see them; OpenPath's administrators can reach the server where they are kept. No adverts, no tracking, and nothing is sent to AI marking.`
               : `${name}'s answers stay in this browser on this device. Nothing is sent anywhere: no account, no adverts, no tracking, no AI marking.`}
           </p>
         </div>
@@ -135,8 +135,12 @@ export function Me({
           className="danger"
           onClick={async () => {
             if (!window.confirm(`Delete ${name} and all their progress${onServer ? " from your account" : " from this device"}? This cannot be undone. Download a copy first if you want to keep it.`)) return;
-            await repo.remove(learner.profileId);
-            onRemoved();
+            try {
+              await repo.remove(learner.profileId);
+              onRemoved();
+            } catch (e) {
+              setMsg(`Not deleted: ${(e as Error).message}`);
+            }
           }}
         >
           {onServer ? "Delete this learner and their record" : "Delete this learner from this device"}
@@ -209,17 +213,23 @@ function Choose({ band, goal, onSave, onCancel }: { band: (typeof BANDS)[number]
   );
 }
 
-function AccountSection({ email, onSignOut, onDelete }: { email: string | null; onSignOut: () => void; onDelete: (password: string) => Promise<void> }) {
+function AccountSection({ email, onSignOut, onDelete }: { email: string | null; onSignOut: () => Promise<void>; onDelete: (password: string) => Promise<void> }) {
   const [deleting, setDeleting] = useState(false);
+  const [outProblem, setOutProblem] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [problem, setProblem] = useState<string | null>(null);
   return (
     <section aria-labelledby="account-title" className="stack">
       <h2 id="account-title">Parent account</h2>
       <p>Signed in as {email}.</p>
-      <button type="button" className="secondary" onClick={onSignOut}>
+      <button type="button" className="secondary" onClick={() => onSignOut().catch((e: Error) => setOutProblem(`Not signed out yet: ${e.message}`))}>
         Sign out
       </button>
+      {outProblem && (
+        <p className="warning" role="alert">
+          {outProblem}
+        </p>
+      )}
       {!deleting ? (
         <button type="button" className="danger" onClick={() => setDeleting(true)}>
           Delete the account

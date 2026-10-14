@@ -103,8 +103,8 @@ export type LearnerBand = "early" | "school" | "older";
 export type LearnerGoal = "confidence" | "grammar" | "spelling" | "reading";
 
 /**
- * The learner's own choices. They shape the wording and which strand the Journey shows first. They never change a
- * question's difficulty, an estimate or the plan: the answers decide those.
+ * The learner's own choices, kept with the record. The goal orders the Journey; neither choice changes a question's
+ * difficulty, an estimate or the plan (the answers decide those), and neither adapts wording or content yet.
  */
 export interface PreferencesEvent {
   kind: "preferences";

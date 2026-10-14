@@ -19,10 +19,11 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import default_token_generator
+from django.core.cache import cache
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from django.db.models import Count, Max, Q
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -31,7 +32,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.exceptions import PermissionDenied, ValidationError
+from rest_framework.exceptions import APIException, Throttled, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
@@ -69,15 +70,45 @@ def _account(user) -> dict:
     return {"authenticated": True, "email": user.email, "pupils": user.pupils.count()}
 
 
-class AccountBase(APIView):
+class FamilyView(APIView):
+    """Common to every family endpoint: a cap on request size (checked before the body is read) and no caching."""
+
     authentication_classes = [SessionAuthentication]
+
+    def initial(self, request, *args, **kwargs):
+        try:
+            length = int(request.META.get("CONTENT_LENGTH") or 0)
+        except ValueError:
+            length = 0
+        if length > settings.OPENPATH_MAX_REQUEST_BYTES:
+            raise RequestTooLarge()
+        super().initial(request, *args, **kwargs)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        response = super().finalize_response(request, response, *args, **kwargs)
+        response["Cache-Control"] = "no-store"
+        return response
+
+
+class RequestTooLarge(APIException):
+    status_code = 413
+    default_detail = "This request is too large."
+
+
+class AccountBase(FamilyView):
     permission_classes = [IsAuthenticated]
 
 
-class ThrottledPublic(APIView):
-    """Endpoints used before signing in: CSRF-checked, rate-limited, no authentication needed."""
+class SensitiveAccountBase(AccountBase):
+    """Checks the password again (change, delete): rate-limited, so a stolen session cannot guess it."""
 
-    authentication_classes = [SessionAuthentication]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "account-password"
+
+
+class ThrottledPublic(FamilyView):
+    """Endpoints used before signing in: CSRF-checked, rate-limited per endpoint, no authentication needed."""
+
     permission_classes = [AllowAny]
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = "account"
@@ -89,10 +120,9 @@ class ThrottledPublic(APIView):
 
 
 @method_decorator(ensure_csrf_cookie, name="dispatch")
-class AccountView(APIView):
+class AccountView(FamilyView):
     """Who is signed in (and a CSRF cookie for the requests that follow)."""
 
-    authentication_classes = [SessionAuthentication]
     permission_classes = [AllowAny]
 
     def get(self, request):
@@ -103,6 +133,8 @@ class AccountView(APIView):
 
 
 class RegisterView(ThrottledPublic):
+    throttle_scope = "account-register"
+
     def post(self, request):
         email = _email(request.data)
         password = _field(request.data, "password")
@@ -115,18 +147,30 @@ class RegisterView(ThrottledPublic):
             validate_password(password, user=candidate)
         except DjangoValidationError as e:
             raise ValidationError({"password": list(e.messages)})
-        user = User.objects.create_user(username=email, email=email, password=password)
+        try:
+            with transaction.atomic():
+                user = User.objects.create_user(username=email, email=email, password=password)
+        except IntegrityError:  # registered at the same moment by another request
+            raise ValidationError({"email": "This email cannot be used to register. If you already have an account, sign in or reset your password."})
         login(request._request, user, backend="django.contrib.auth.backends.ModelBackend")
         return Response(_account(user), status=status.HTTP_201_CREATED)
 
 
 class LoginView(ThrottledPublic):
+    throttle_scope = "account-login"
+
     def post(self, request):
         email = _field(request.data, "email").strip().lower()
         password = _field(request.data, "password")
+        # failed sign-ins are also counted per email, whatever address they come from
+        key = f"family:login-failures:{email}"
+        if cache.get(key, 0) >= settings.OPENPATH_LOGIN_FAILURES_PER_EMAIL:
+            raise Throttled(detail="Too many attempts for this email. Wait a while, or reset the password.")
         user = authenticate(request._request, username=email, password=password)
         if user is None:
+            cache.set(key, cache.get(key, 0) + 1, settings.OPENPATH_LOGIN_FAILURE_WINDOW)
             raise ValidationError({"detail": "That email and password do not match an account."})
+        cache.delete(key)
         login(request._request, user)
         return Response(_account(user))
 
@@ -139,6 +183,8 @@ class LogoutView(AccountBase):
 
 class PasswordResetView(ThrottledPublic):
     """Always answers the same way, so it cannot be used to find out who has an account."""
+
+    throttle_scope = "account-reset"
 
     def post(self, request):
         email = _field(request.data, "email").strip().lower()
@@ -159,6 +205,8 @@ class PasswordResetView(ThrottledPublic):
 
 
 class PasswordResetConfirmView(ThrottledPublic):
+    throttle_scope = "account-reset"
+
     def post(self, request):
         try:
             pk = force_str(urlsafe_base64_decode(_field(request.data, "uid")))
@@ -178,7 +226,7 @@ class PasswordResetConfirmView(ThrottledPublic):
         return Response({"detail": "Password changed. Sign in with the new password."})
 
 
-class DeleteAccountView(AccountBase):
+class DeleteAccountView(SensitiveAccountBase):
     """Deletes the parent, every pupil and every pupil's whole record. Needs the password again."""
 
     def post(self, request):
@@ -190,7 +238,7 @@ class DeleteAccountView(AccountBase):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ChangePasswordView(AccountBase):
+class ChangePasswordView(SensitiveAccountBase):
     def post(self, request):
         if not request.user.check_password(_field(request.data, "current_password")):
             raise ValidationError({"current_password": "That password is not right."})
@@ -303,7 +351,7 @@ class PupilEventsView(AccountBase):
     def post(self, request, pupil_id):
         subject = _subject(request.data.get("subject"))
         seq = request.data.get("seq")
-        if not isinstance(seq, int) or seq < 0:
+        if not isinstance(seq, int) or isinstance(seq, bool) or seq < 0:
             raise ValidationError({"seq": "Give the event's position in the record."})
         event = _check_event(request.data.get("event"))
         with transaction.atomic():

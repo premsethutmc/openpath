@@ -96,7 +96,17 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["learners.auth.IsThisLearner"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"],
-    "DEFAULT_THROTTLE_RATES": {"enrol": "60/hour", "account": os.environ.get("OPENPATH_ACCOUNT_RATE", "30/hour")},
+    "DEFAULT_THROTTLE_RATES": {
+        "enrol": "60/hour",
+        "account": os.environ.get("OPENPATH_ACCOUNT_RATE", "30/hour"),
+        "account-register": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
+        "account-login": os.environ.get("OPENPATH_ACCOUNT_RATE", "60/hour"),
+        "account-reset": os.environ.get("OPENPATH_ACCOUNT_RATE", "10/hour"),
+        "account-password": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
+    },
+    # Rate limits are keyed on the client address. Behind N trusted proxies, set OPENPATH_NUM_PROXIES=N so the
+    # address is read from the right place in X-Forwarded-For; 0 ignores that (client-controlled) header entirely.
+    "NUM_PROXIES": int(os.environ.get("OPENPATH_NUM_PROXIES", "0")),
     "UNAUTHENTICATED_USER": None,
 }
 
@@ -128,6 +138,11 @@ SESSION_COOKIE_AGE = 14 * 24 * 3600
 CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if o]
 PASSWORD_RESET_TIMEOUT = 2 * 3600
 OPENPATH_PASSWORD_RESET_URL = os.environ.get("OPENPATH_PASSWORD_RESET_URL", "http://localhost:4174/#reset")
+# Behind a proxy that terminates HTTPS and sets X-Forwarded-Proto (set only when that proxy is trusted).
+if os.environ.get("OPENPATH_BEHIND_HTTPS_PROXY") == "1":
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
 DEFAULT_FROM_EMAIL = os.environ.get("DJANGO_DEFAULT_FROM_EMAIL", "OpenPath <no-reply@localhost>")
 if os.environ.get("DJANGO_EMAIL_HOST"):
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -136,8 +151,13 @@ if os.environ.get("DJANGO_EMAIL_HOST"):
     EMAIL_HOST_USER = os.environ.get("DJANGO_EMAIL_HOST_USER", "")
     EMAIL_HOST_PASSWORD = os.environ.get("DJANGO_EMAIL_HOST_PASSWORD", "")
     EMAIL_USE_TLS = True
+    if not DEBUG and "OPENPATH_PASSWORD_RESET_URL" not in os.environ:
+        raise RuntimeError("Set OPENPATH_PASSWORD_RESET_URL so reset emails link to the real app.")
 else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 OPENPATH_MAX_PUPILS_PER_PARENT = 12
-OPENPATH_MAX_EVENTS_PER_PUPIL = 200_000
+OPENPATH_MAX_EVENTS_PER_PUPIL = 100_000
 OPENPATH_MAX_EVENT_BYTES = 32_000
+OPENPATH_MAX_REQUEST_BYTES = 20_000_000  # an import of a large device record; refused before the body is read
+OPENPATH_LOGIN_FAILURES_PER_EMAIL = 10
+OPENPATH_LOGIN_FAILURE_WINDOW = 15 * 60

@@ -84,19 +84,24 @@ export class Api {
     }
     if (!res.ok) {
       const { message, fields } = messageOf(json, res.status);
+      // signed out (session ended, or signed out on another device): say so plainly
+      if ((res.status === 401 || res.status === 403) && /credentials|authenticat/i.test(message)) throw new ApiError(res.status, "You are signed out. Sign in again to carry on; everything saved before is kept.", fields);
       throw new ApiError(res.status, message, fields);
     }
     return json as T;
   }
 
-  /** Whether this app has a server with accounts, and who is signed in. A static build has none: device-only use. */
-  async status(): Promise<{ available: boolean; account: AccountInfo }> {
+  /**
+   * Whether this app has a server with accounts, and who is signed in. A static build has none: device-only use.
+   * `unreachable` means the server could not be reached at all (offline?), which is not the same as having none.
+   */
+  async status(): Promise<{ available: boolean; unreachable: boolean; account: AccountInfo }> {
     try {
       const a = await this.request<AccountInfo & { accounts?: boolean }>("GET", "/account/");
-      if (!a || typeof a.authenticated !== "boolean" || a.accounts === false) return { available: false, account: { authenticated: false } };
-      return { available: true, account: a };
-    } catch {
-      return { available: false, account: { authenticated: false } };
+      if (!a || typeof a.authenticated !== "boolean" || a.accounts === false) return { available: false, unreachable: false, account: { authenticated: false } };
+      return { available: true, unreachable: false, account: a };
+    } catch (e) {
+      return { available: false, unreachable: e instanceof ApiError && (e.status === 0 || e.status >= 500), account: { authenticated: false } };
     }
   }
 

@@ -74,8 +74,8 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
       </ol>
       {activities.length === 0 && (
         <div className="tile">
-          <b>Nothing new to do today</b>
-          <p>Everything that can be checked has been. A grown-up can see why on the Progress page, and More practice is always open.</p>
+          <b>Nothing on the plan right now</b>
+          <p>Either everything that can be checked has been, or the app has no more questions or lessons for what comes next. A grown-up can see why on the Progress page, and More practice is always open.</p>
         </div>
       )}
       <div className="tile mint">

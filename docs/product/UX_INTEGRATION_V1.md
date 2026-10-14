@@ -7,7 +7,7 @@ educational behaviour on those screens comes from the existing engine. Parents c
 keep each pupil's record on the server.
 
 This PR adds no scoring system, no second learner model and no new subject. The scoring maths, thresholds and frozen
-simulation are unchanged: the simulation output is byte-identical. Content stays provisional, and the app says so.
+simulation are unchanged: the simulation output is byte-identical. All content is still draft, awaiting educator review, and the app says so.
 
 ## 1. Prototype against the existing app
 
@@ -79,8 +79,9 @@ The tests are PI-1 to PI-8 (PR #25), UX-1 to UX-4 and AC-4.
 | Passwords | Django's hasher (PBKDF2 by default) and validators: at least 10 characters, not common, not numeric, not like the email |
 | Sessions | `django.contrib.sessions`: HttpOnly, SameSite=Lax, Secure by default when not in debug |
 | CSRF | Django's CSRF, enforced on every change *including* register and sign-in |
-| Recovery | Django's reset-token generator, by email. The answer never reveals whether an email has an account. A reset signs out every other session |
-| Rate limits | DRF throttles on register, sign-in and reset |
+| Recovery | Django's reset-token generator, by email. The reset answer is the same whether or not the email has an account (registration still reveals it; see the blockers). A reset signs out every other session. The link's token is removed from the address bar as soon as it is read |
+| Rate limits | DRF throttles per endpoint (register, sign-in, reset, password re-checks), keyed on the client address (`OPENPATH_NUM_PROXIES` decides how `X-Forwarded-For` is trusted; 0 ignores it), plus at most 10 failed sign-ins per email in 15 minutes from any address |
+| Limits | Requests over 20 MB are refused before the body is read (413); events up to 32 KB; at most 100,000 events per pupil and subject; responses are `Cache-Control: no-store` |
 | Nothing home-made | No password handling is written by hand |
 
 **Models:**
@@ -140,9 +141,9 @@ as CI does.
   until an engine exists.
 - The pupil identity, accounts and authorisation are subject-neutral.
 
-## 5. What remains provisional, and is labelled
+## 5. What remains draft, and is labelled
 
-- **Content.** Every question, lesson and passage is draft, awaiting educator review (PR #25 report). The welcome
+- **Content.** Every question, lesson and passage is draft (candidate), awaiting educator review (PR #25 report). The welcome
   screen, the Journey, Progress and Me all say so.
 - **Development rules.** They remain `development-policy@0-draft`.
 - **Learner choices.** "Who is learning" and the goal are recorded choices. They do not adapt wording or content yet;
@@ -159,5 +160,12 @@ cd frontend && npm run english:build && PORT=4175 API_TARGET=http://127.0.0.1:80
 npm run english:preview        # http://127.0.0.1:4174
 ```
 
-Over plain http on localhost with `DJANGO_DEBUG=0`, also set `OPENPATH_SECURE_COOKIES=0`. That is for local testing
+Over plain http on localhost with `DJANGO_DEBUG=0`, also set `OPENPATH_SECURE_COOKIES=0`.
+
+An independent review of this PR (by a separate agent that had not written it) found no high-severity problems. Its
+medium findings were fixed in this PR: the rate-limit bypass through `X-Forwarded-For`, the missing request-size cap,
+the HTTPS-proxy setting, a sign-out that could fail silently, and the silent fall-back to device-only mode when the
+server is unreachable. It also found two over-claims in the on-screen wording ("on different days", "never at one
+mistake") and labels for revoked or rejected answers; those were fixed too. The findings that remain are in
+PRODUCTION_BLOCKERS.md. That is for local testing
 only. The settings needed for a real deployment are in PRODUCTION_BLOCKERS.md.

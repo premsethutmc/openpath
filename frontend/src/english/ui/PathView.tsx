@@ -15,7 +15,7 @@ export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: 
     <main className="page" aria-labelledby="journey-title">
       <p className="eyebrow">Your English journey</p>
       <h1 id="journey-title" className="hero">
-        A path made for you <span aria-hidden="true">🗺️</span>
+        Your learning path <span aria-hidden="true">🗺️</span>
       </h1>
       <p className="sub">Each skill goes the same way: a first check, a lesson with practice, a fresh check on your own, and a later check to see what has stuck.</p>
       {!started && (

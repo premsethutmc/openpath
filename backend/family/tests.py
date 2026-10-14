@@ -127,10 +127,28 @@ class AccountTests(FamilyTestCase):
 
     def test_sign_in_attempts_are_rate_limited(self):
         client = APIClient()
-        with mock.patch.object(ScopedRateThrottle, "THROTTLE_RATES", {"account": "3/hour"}):
+        with mock.patch.object(ScopedRateThrottle, "THROTTLE_RATES", {"account-login": "3/hour"}):
             codes = [client.post("/api/account/login/", {"email": "x@example.org", "password": "guess-number-%d" % i}, format="json").status_code for i in range(5)]
         self.assertEqual(codes[:3], [400, 400, 400])
         self.assertEqual(codes[3:], [429, 429])
+
+    def test_failed_sign_ins_are_limited_per_email_whatever_the_address(self):
+        self.parent()
+        codes = []
+        for i in range(12):
+            client = APIClient(REMOTE_ADDR=f"10.0.0.{i}", HTTP_X_FORWARDED_FOR=f"203.0.113.{i}")
+            codes.append(client.post("/api/account/login/", {"email": "asha.parent@example.org", "password": "guess-number-%d" % i}, format="json").status_code)
+        self.assertEqual(codes[:10], [400] * 10)
+        self.assertEqual(codes[10:], [429, 429])
+
+    def test_oversized_requests_are_refused_before_reading_and_responses_are_not_cached(self):
+        client = self.parent()
+        arun = self.pupil(client)
+        with self.settings(OPENPATH_MAX_REQUEST_BYTES=1000):
+            r = client.put(f"/api/pupils/{arun}/events/", {"subject": "english", "events": [event(n) for n in range(50)]}, format="json")
+        self.assertEqual(r.status_code, 413)
+        self.assertEqual(client.get("/api/pupils/")["Cache-Control"], "no-store")
+        self.assertEqual(self.append(client, arun, True, event(0)).status_code, 400, "a boolean is not a position")
 
     def test_changing_the_password_keeps_this_session_and_signs_out_others(self):
         here = self.parent()

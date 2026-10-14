@@ -8,7 +8,7 @@
  * Every screen reads the learner's state, which is rebuilt from the append-only event list by the engine.
  */
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Api, ServerRepo } from "../logic/account.ts";
+import { Api, ApiError, ServerRepo } from "../logic/account.ts";
 import { type AppContent, loadContent } from "../logic/content.ts";
 import type { LearnerBand, LearnerGoal } from "../logic/events.ts";
 import { Learner } from "../logic/learner.ts";
@@ -51,9 +51,11 @@ const store = {
   },
 };
 const LAST = "openpath-english-last-profile";
+/** "account" while a parent is signed in on this device: if the server is then unreachable, say so, never fall back silently. */
+const MODE = "openpath-english-mode";
 
 type Mode = "device" | "account";
-type Screen = { name: "loading" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" };
+type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" };
 type Tab = "home" | "journey" | "progress" | "me";
 const TABS: { id: Tab; label: string; ico: string }[] = [
   { id: "home", label: "Home", ico: "🏠" },
@@ -62,10 +64,11 @@ const TABS: { id: Tab; label: string; ico: string }[] = [
   { id: "me", label: "Me", ico: "👤" },
 ];
 
-/** A reset link from the email: #reset?uid=…&token=… */
+/** A reset link from the email: #reset?uid=…&token=…, read once and removed from the address bar and history. */
 const resetLink = () => {
   const m = location.hash.match(/^#reset\?(.*)$/);
   if (!m) return null;
+  history.replaceState(null, "", location.pathname + location.search);
   const q = new URLSearchParams(m[1]);
   return q.get("uid") && q.get("token") ? { uid: q.get("uid")!, token: q.get("token")! } : null;
 };
@@ -122,8 +125,10 @@ export function App() {
       const [status, local] = await Promise.all([api.status(), openRepo()]);
       setDeviceRepo(local);
       setAccounts(status.available);
+      if (status.unreachable && store.get(MODE) === "account") return setScreen({ name: "unreachable" });
       if (reset && status.available) return setScreen({ name: "auth", mode: "reset" });
       if (status.account.authenticated) {
+        store.set(MODE, "account");
         setEmail(status.account.email ?? null);
         return chooseRepo(new ServerRepo(api), "account", true);
       }
@@ -156,13 +161,20 @@ export function App() {
   };
 
   const signedIn = async (info: { email?: string }) => {
+    store.set(MODE, "account");
     setEmail(info.email ?? null);
     store.set(LAST, null);
     await chooseRepo(new ServerRepo(api), "account", false);
   };
 
+  /** Signed out only when the server says so (or the session had already ended): never just in appearance. */
   const signOut = async () => {
-    await api.logout().catch(() => undefined);
+    try {
+      await api.logout();
+    } catch (e) {
+      if (!(e instanceof ApiError && (e.status === 401 || e.status === 403))) throw e;
+    }
+    store.set(MODE, null);
     setEmail(null);
     setLearner(null);
     store.set(LAST, null);
@@ -173,6 +185,24 @@ export function App() {
   };
 
   if (screen.name === "loading") return <p className="loading">Opening OpenPath English…</p>;
+
+  if (screen.name === "unreachable")
+    return (
+      <main className="welcome" aria-labelledby="unreachable-title">
+        <header className="top">
+          <Brand />
+        </header>
+        <div className="page">
+          <h1 id="unreachable-title" className="hero">
+            OpenPath can't be reached
+          </h1>
+          <p className="sub">Your account's records are kept safely on OpenPath's server. Check the internet connection, then try again.</p>
+          <button type="button" className="primary" onClick={() => location.reload()}>
+            Try again
+          </button>
+        </div>
+      </main>
+    );
 
   if (screen.name === "welcome")
     return (
@@ -202,18 +232,11 @@ export function App() {
       <ParentAuth
         mode={screen.mode}
         setMode={(m) => setScreen({ name: "auth", mode: m })}
-        onBack={() => {
-          if (reset) history.replaceState(null, "", location.pathname);
-          setScreen({ name: "welcome" });
-        }}
+        onBack={() => setScreen({ name: "welcome" })}
         onRegister={async (e, p) => signedIn(await api.register(e, p))}
         onLogin={async (e, p) => signedIn(await api.login(e, p))}
         onForgot={async (e) => (await api.requestReset(e)).detail}
-        onReset={async (p) => {
-          const msg = (await api.confirmReset(reset!.uid, reset!.token, p)).detail;
-          history.replaceState(null, "", location.pathname);
-          return msg;
-        }}
+        onReset={async (p) => (await api.confirmReset(reset!.uid, reset!.token, p)).detail}
       />
     );
 
@@ -258,8 +281,15 @@ export function App() {
         onCancel={() => (profiles.length || mode === "account" ? setScreen({ name: "pupils" }) : setScreen({ name: "welcome" }))}
         onCreate={async (name, by, band: LearnerBand, goal: LearnerGoal) => {
           const id = mode === "account" ? (await api.createPupil(name.trim() || "Learner")).id : undefined;
-          const l = await Learner.create(content, repo, name, by, clock, id, mode === "account" ? "parent_account" : "this_device_only");
-          await l.setPreferences(band, goal);
+          let l: Learner;
+          try {
+            l = await Learner.create(content, repo, name, by, clock, id, mode === "account" ? "parent_account" : "this_device_only");
+            await l.setPreferences(band, goal);
+          } catch (e) {
+            // never leave an empty pupil behind in the account
+            if (id) await api.deletePupil(id).catch(() => undefined);
+            throw e;
+          }
           l.speechAvailable = !!voice;
           store.set(LAST, l.profileId);
           setLearner(l);
@@ -346,10 +376,12 @@ export function App() {
           onSignOut={signOut}
           onDeleteAccount={async (password) => {
             await api.deleteAccount(password);
+            store.set(MODE, null);
             setEmail(null);
             setLearner(null);
             store.set(LAST, null);
             setRepo(deviceRepo);
+            setProfiles(deviceRepo ? await deviceRepo.profiles() : []);
             setMode("device");
             setScreen({ name: "welcome" });
           }}
