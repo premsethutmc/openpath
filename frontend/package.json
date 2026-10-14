@@ -14,7 +14,8 @@
     "english:build": "node scripts/build-english.mjs",
     "english:preview": "node scripts/preview-english.mjs",
     "english:e2e": "node --test e2e/english.test.mjs",
-    "english:demo-journeys": "node scripts/demo-journeys.mjs"
+    "english:demo-journeys": "node scripts/demo-journeys.mjs",
+    "english:demo-profiles": "node --import tsx scripts/demo-profiles.mts"
   },
   "dependencies": {
     "react": "^19.2.0",

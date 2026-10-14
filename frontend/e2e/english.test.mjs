@@ -399,3 +399,53 @@ test("the doubling journey on a phone: check, diagnosis, a lesson, help that is 
   assert.deepEqual(foreign, []);
   await context.close();
 });
+
+test("one learner, many skills on a phone: a plan from the evidence, child labels, a check, and the parent overview that explains it", async () => {
+  const { context, page, errors, foreign } = await phone();
+  await createProfile(page, "Nila");
+  // before anything: only the starting point
+  assert.equal(await page.locator(".plan li").count(), 1);
+  assert.equal(await page.locator('.plan li[data-activity="start"]').count(), 1);
+  await page.getByRole("button", { name: "Start" }).first().click();
+  await finishSession(page, () => true);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Start" }).first().click(); // the spelling check
+  await finishSession(page, () => true);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  // the plan: at most three activities, each with a child-facing label, no numbers about the child
+  const plan = page.locator(".plan li");
+  const n = await plan.count();
+  assert.ok(n >= 1 && n <= 3, `${n} activities`);
+  const labels = await page.locator(".plan .kicker").allTextContents();
+  for (const l of labels) assert.ok(["Keep learning", "Check something you learned", "Try a new skill", "Show what you know", "Let's begin"].includes(l), l);
+  assert.doesNotMatch(await page.locator(".plan").innerText(), /%|band|estimate|probabilit/i);
+  await shot(page, "p1-today-plan");
+  await fits(page);
+  await tappable(page);
+  // a check from the plan: a few independent questions on one skill
+  const first = page.locator('.plan li[data-activity="show_what_you_know"], .plan li[data-activity="new_skill"]').first();
+  const capability = await first.getAttribute("data-capability");
+  await first.getByRole("button", { name: "Start" }).click();
+  const asked = await finishSession(page, () => false);
+  assert.ok(asked.length >= 1 && asked.length <= 4);
+  for (const i of asked) assert.equal(i.target, capability, "the check stays on its skill");
+  await page.getByRole("button", { name: "Back to today" }).click();
+  // the grown-up link leads to the overview: what is shown, unsure, hard, helped, next, and why the plan changed
+  await page.getByRole("button", { name: "For a grown-up: why these?" }).click();
+  await page.locator(".overview").waitFor();
+  for (const part of ["shown", "uncertain", "hard", "helped", "retention", "improved", "next", "changes", "not-checked"]) assert.equal(await page.locator(`.overview [data-part="${part}"]`).count(), 1, part);
+  const overview = await page.locator(".overview").innerText();
+  assert.match(overview, /Why the plan changed/);
+  assert.match(overview, /not a weakness|says nothing about how well/);
+  assert.doesNotMatch(overview, /percentile|\bIQ\b|rank|%/i);
+  await shot(page, "p2-overview");
+  await fits(page);
+  // the same overview after a reload: rebuilt from the stored record
+  const text = await page.locator(".overview").innerText();
+  await page.reload();
+  await page.getByRole("button", { name: "Progress" }).click();
+  assert.equal(await page.locator(".overview").innerText(), text);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});

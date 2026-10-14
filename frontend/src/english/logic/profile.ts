@@ -265,6 +265,19 @@ const CHILD: Record<Activity["kind"], string> = {
 /** Map the plan onto sessions the app can run, worded for a child. Nothing is offered that cannot be delivered. */
 function activities(s: AppState, c: AppContent, now: string, speech: boolean, plan: DevelopmentPlan, caps: CapabilityProfile[], teach: Map<string, { title: string; step: PlanStep } | null>): Activity[] {
   // the initial assessment is the existing starting point: placement, then the spelling check
+  // too little evidence anywhere (for example a starting point stopped after a few answers): the starting point again
+  const first = plan.today.find((r) => r.action === "initial_assessment");
+  if (first)
+    return [
+      {
+        kind: "start",
+        label: CHILD.start,
+        title: "Find your starting point",
+        line: "A few questions on spelling, grammar and words, so the plan starts in the right place. You can stop and carry on later.",
+        step: { type: "placement", title: "Find your starting point", reason: first.why },
+        recommendation: first,
+      },
+    ];
   const initial = todayPlan(s, c, now, speech);
   if (!placementDone(s) || !sessionsOf(s, "spelling_check").some((x) => x.end !== null) && initial[0]?.type === "spelling_check")
     return initial.slice(0, 1).map((step) => ({ kind: "start", label: CHILD.start, title: step.title, line: step.reason, step, recommendation: plan.today.find((r) => r.action === "initial_assessment") ?? null }));

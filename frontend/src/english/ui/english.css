@@ -746,25 +746,30 @@ details summary {
 .hints li {
   margin: 0.25rem 0;
 }
-.parent {
+.parent,
+.overview {
   margin: 1.25rem 0;
   padding: 1rem;
   border: 1px solid var(--rule);
   border-radius: var(--radius-big);
   background: var(--paper);
 }
-.parent dl {
+.parent dl,
+.overview dl {
   margin: 0;
 }
-.parent dt {
+.parent dt,
+.overview dt {
   font-weight: 700;
   color: var(--ink-strong);
   margin-top: 0.75rem;
 }
-.parent dd {
+.parent dd,
+.overview dd {
   margin: 0.15rem 0 0;
 }
-.parent dd ul {
+.parent dd ul,
+.overview dd ul {
   margin: 0.25rem 0 0;
   padding-left: 1.2rem;
 }
@@ -786,4 +791,34 @@ details summary {
   padding: 0.5rem 0.75rem;
   border-left: 4px solid var(--margin);
   background: var(--wrong-wash);
+}
+.plan .kicker {
+  margin: 0 0 0.15rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.overview dd ul,
+.overview .recs {
+  margin: 0.25rem 0;
+  padding-left: 1.2rem;
+}
+.overview .recs > li {
+  margin-bottom: 0.5rem;
+}
+.overview details summary {
+  color: var(--ink);
+}
+.cap .strength {
+  color: var(--right);
+}
+.cap .note,
+.overview .note {
+  font-style: italic;
+}
+h3.strand {
+  margin: 1rem 0 0.25rem;
+  font-size: 1rem;
+  color: var(--muted);
 }

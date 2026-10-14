@@ -1,13 +1,13 @@
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { parseBackup } from "../logic/backup.ts";
-import { type AppContent, GUIDED, loadContent } from "../logic/content.ts";
+import { type AppContent, loadContent } from "../logic/content.ts";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
-import { type CapabilityProgress, bandDescriptor, capabilityProgress } from "../logic/progress.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { dueWords, patternStatus } from "../logic/state.ts";
 import { Journey, ParentSummary } from "./Journey.tsx";
+import { CapabilityCard, ParentOverviewView } from "./Profile.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech, speak } from "./speech.ts";
 
@@ -152,6 +152,7 @@ export function App() {
             await learner.startJourney();
             setInJourney(true);
           }}
+          onWhy={() => setTab("progress")}
         />
       )}
       {tab === "progress" && <Progress learner={learner} />}
@@ -276,9 +277,9 @@ const STATUS_WORDS: Record<string, string> = {
   secure: "secure",
 };
 
-function Today({ learner, onStart, onResume, onJourney }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void }) {
+function Today({ learner, onStart, onResume, onJourney, onWhy }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void }) {
   const now = learner.clock();
-  const plan = learner.plan();
+  const activities = learner.profile().activities;
   const open = learner.state.open;
   const s = learner.state;
   const words = [...s.words.values()];
@@ -298,24 +299,25 @@ function Today({ learner, onStart, onResume, onJourney }: { learner: Learner; on
         </section>
       )}
       <ol className="plan">
-        {plan.map((p, i) => (
-          <li key={`${p.type}:${p.capability ?? ""}:${p.step ?? ""}`}>
+        {activities.map((a, i) => (
+          <li key={`${a.step.type}:${a.step.capability ?? ""}:${a.step.step ?? ""}`} data-activity={a.kind} data-capability={a.step.capability ?? ""}>
             <div>
-              <h2>{p.title}</h2>
-              <p>{p.reason}</p>
-              {p.detail && (
-                <details>
-                  <summary>Why this, in detail</summary>
-                  <p className="small">{p.detail}</p>
-                </details>
-              )}
+              <p className="kicker">{a.label}</p>
+              <h2>{a.title}</h2>
+              <p>{a.line}</p>
             </div>
-            <button type="button" className={i === 0 && !open ? "primary" : "secondary"} onClick={() => onStart(p)}>
+            <button type="button" className={i === 0 && !open ? "primary" : "secondary"} onClick={() => onStart(a.step)}>
               Start
             </button>
           </li>
         ))}
       </ol>
+      {activities.length === 0 && <p>Nothing new to do today: everything that can be checked has been. A grown-up can see why on the Progress page.</p>}
+      <p className="small">
+        <button type="button" className="link" onClick={onWhy}>
+          For a grown-up: why these?
+        </button>
+      </p>
       <section className="journey-card" aria-labelledby="journey-card-title">
         <h2 id="journey-card-title">Doubling letters (new, adaptive)</h2>
         <p>hop → hopping, stop → stopped. A few questions on your own, then teaching that changes if it is not working, then new words on your own.</p>
@@ -355,36 +357,37 @@ function Today({ learner, onStart, onResume, onJourney }: { learner: Learner; on
 
 // ------------------------------------------------------------------ progress
 
-const CERTAINTY: Record<string, string> = { not_assessed: "Not assessed yet", early: "Early estimate", measured: "Measured" };
-
 function Progress({ learner }: { learner: Learner }) {
-  const now = learner.clock();
-  const rows = capabilityProgress(learner.state, learner.content, now);
-  const groups: [string, CapabilityProgress[]][] = [
-    ["Spelling", rows.filter((r) => (GUIDED.spelling as readonly string[]).includes(r.id))],
-    ["Grammar", rows.filter((r) => (GUIDED.grammar as readonly string[]).includes(r.id))],
-    ["Vocabulary", rows.filter((r) => (GUIDED.vocabulary as readonly string[]).includes(r.id))],
-  ];
-  const others = rows.filter((r) => !r.guided);
+  const { profile, overview } = learner.overview();
   const s = learner.state;
   const patterns = [...s.patterns.values()];
+  const checked = profile.capabilities.filter((x) => x.standing !== "not_checked");
+  const unchecked = profile.capabilities.filter((x) => x.standing === "not_checked");
+  const strands = [...new Set(checked.map((x) => x.strand))];
   return (
     <main className="page" aria-labelledby="progress-title">
       <h1 id="progress-title">Progress</h1>
       <p className="small">
         Levels are on OpenPath's scale of 1 to 8. They are estimates from your answers, shown with how sure we are. Questions and lessons are draft content that teachers have not reviewed yet.
       </p>
+      <ParentOverviewView profile={profile} overview={overview} />
       {learner.doublingReport().started && <ParentSummary report={learner.doublingReport()} />}
-      {groups.map(([name, list]) => (
-        <section key={name} aria-label={name}>
-          <h2>{name}</h2>
-          <ul className="caps">
-            {list.map((r) => (
-              <CapRow key={r.id} r={r} learner={learner} />
-            ))}
-          </ul>
-        </section>
-      ))}
+      <section aria-labelledby="profile-title">
+        <h2 id="profile-title">Every skill with answers so far</h2>
+        {strands.map((st) => (
+          <section key={st} aria-label={st}>
+            <h3 className="strand">{st}</h3>
+            <ul className="caps">
+              {checked
+                .filter((x) => x.strand === st)
+                .map((x) => (
+                  <CapabilityCard key={x.id} cap={x} />
+                ))}
+            </ul>
+          </section>
+        ))}
+        {checked.length === 0 && <p>No answers yet.</p>}
+      </section>
       {patterns.length > 0 && (
         <section aria-labelledby="patterns-title">
           <h2 id="patterns-title">Spelling patterns</h2>
@@ -416,44 +419,18 @@ function Progress({ learner }: { learner: Learner }) {
         </section>
       )}
       <section aria-labelledby="others-title">
-        <h2 id="others-title">Everything else</h2>
-        <p className="small">These areas are measured through "More practice" with the same engine, but are not taught here yet.</p>
+        <h2 id="others-title">Not checked yet</h2>
+        <p className="small">No answers yet: nothing is known about these, and that is not a weakness. The plan checks them when it is useful.</p>
         <details>
-          <summary>
-            {others.filter((r) => r.certainty !== "not_assessed").length} of {others.length} assessed so far
-          </summary>
+          <summary>{unchecked.length} skills not checked yet</summary>
           <ul className="caps">
-            {others.map((r) => (
-              <CapRow key={r.id} r={r} learner={learner} />
+            {unchecked.map((x) => (
+              <CapabilityCard key={x.id} cap={x} />
             ))}
           </ul>
         </details>
       </section>
     </main>
-  );
-}
-
-function CapRow({ r, learner }: { r: CapabilityProgress; learner: Learner }) {
-  const e = r.evidence;
-  const parts = [e.assessment && `${e.assessment} independent`, e.practice && `${e.practice} practice`, e.retention && `${e.retention} later check${e.retention === 1 ? "" : "s"}`].filter(Boolean);
-  const desc = r.band !== null ? bandDescriptor(learner.content, r.id, r.band) : null;
-  return (
-    <li className={`cap c-${r.certainty}`}>
-      <div className="cap-head">
-        <h3>{r.name}</h3>
-        <span className="certainty">{CERTAINTY[r.certainty]}</span>
-      </div>
-      <p>{r.headline}</p>
-      {desc && <p className="small">At this band: {desc}</p>}
-      {r.certainty !== "not_assessed" && <p className="small">{r.verification}</p>}
-      {r.history && <p className="small">{r.history}</p>}
-      {(parts.length > 0 || e.generatedPractice > 0) && (
-        <p className="small evidence">
-          Evidence: {parts.length ? parts.join(", ") : "none that counts yet"}
-          {e.generatedPractice ? `; ${e.generatedPractice} practice word${e.generatedPractice === 1 ? "" : "s"} recorded but not counted until checked` : ""}.
-        </p>
-      )}
-    </li>
   );
 }
 
