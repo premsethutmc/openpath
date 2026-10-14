@@ -203,9 +203,31 @@ export const SPELLING_ASSESS = { min: 8, max: 14, stopSd: 0.6, window: 1, follow
 
 const dictationWord = (i: Item) => (i.kind === "code" && i.answers?.[0] ? i.answers[0].toLowerCase() : "");
 
-/** Words the learner has already met: in dictation or generated practice, or as the answer to a question already asked. */
+/**
+ * Words the learner has already met: in dictation or generated practice, as the answer to a question already asked,
+ * or written anywhere in a question shown or a lesson read (its prompt, options, passage or examples).
+ */
 function wordsMet(s: AppState, c: AppContent): Set<string> {
   const out = new Set(s.wordsSeen);
+  const bank = dictationWords(c);
+  const scan = (text: string | undefined) => {
+    for (const w of (text ?? "").toLowerCase().match(/[a-z]+/g) ?? []) if (bank.has(w)) out.add(w);
+  };
+  for (const e of s.events) {
+    if (e.kind === "presented") {
+      const it = c.ctx.content.items.get(e.item.id);
+      if (it?.kind === "code" && it.format !== "typed:dictation") {
+        scan(it.prompt);
+        scan(it.explain);
+        // what its feedback can show: the lesson rule for its pattern, and the notes on its listed wrong answers
+        if (it.step) scan(c.lessons.get(lessonId(it.target, it.step))?.rule);
+        for (const tag of [...Object.values(it.wrong ?? {}), ...Object.values(it.distractor_tags ?? {})]) scan(c.feedback.get(`${it.target}#${tag}`));
+        for (const o of it.options ?? []) scan(o);
+        for (const l of it.left ?? []) scan(l);
+        if (it.passage) scan(c.ctx.content.passages.get(it.passage)?.text);
+      }
+    } else if (e.kind === "lesson") scan(JSON.stringify(c.lessons.get(e.lesson) ?? ""));
+  }
   for (const id of s.ledger.exposures.keys()) {
     const it = c.ctx.content.items.get(id);
     if (it?.kind === "code" && SPELLING_CAPS.has(it.target)) for (const a of it.answers ?? []) out.add(a.toLowerCase());
@@ -217,6 +239,12 @@ function wordsMet(s: AppState, c: AppContent): Set<string> {
   return out;
 }
 const SPELLING_CAPS = new Set<string>(GUIDED.spelling);
+const dictationWordCache = new WeakMap<AppContent, Set<string>>();
+function dictationWords(c: AppContent): Set<string> {
+  let w = dictationWordCache.get(c);
+  if (!w) dictationWordCache.set(c, (w = new Set(c.dictation.items.map((i) => dictationWord(i)))));
+  return w;
+}
 
 export type SpellingAssessStop = "max" | "enough" | "insufficient";
 
@@ -258,13 +286,22 @@ export function spellingAssessNext(s: AppState, c: AppContent, session: SessionS
   let rule: NonNullable<SelectionTrace["spelling"]>["rule"] = "near_estimate";
   const reasons: string[] = [];
   let followUp: { misconception: string; after: string } | undefined;
-  if (tag && lastItem && !followedUp) {
-    only = pool.filter((i) => i.target === lastItem.target && (i.step === lastItem.step || Object.values(i.wrong ?? {}).includes(tag)) && near(i, S.followUpWindow));
+  if (tag && lastItem && !followedUp && lastItem.format === "typed:dictation") {
+    // best: words where the same error can happen (they list it); otherwise the same pattern, said honestly
+    const nearby = pool.filter((i) => i.target === lastItem.target && near(i, S.followUpWindow));
+    const sameError = nearby.filter((i) => Object.values(i.wrong ?? {}).includes(tag));
+    const samePattern = nearby.filter((i) => i.step === lastItem.step);
+    only = sameError.length ? sameError : samePattern;
+    const what = tag.replace(/_/g, " ");
     if (only.length) {
       rule = "follow_up";
       followUp = { misconception: tag, after: dictationWord(lastItem) || lastItem.id };
-      reasons.push(`follow-up: "${followUp.after}" was misspelt in a way that suggests ${tag.replace(/_/g, " ")}; a different word on the same pattern checks whether it recurs (one error is only a suspicion)`);
-    } else reasons.push(`no unused word on the same pattern within ±${S.followUpWindow} for a follow-up on ${tag.replace(/_/g, " ")}`);
+      reasons.push(
+        sameError.length
+          ? `follow-up: "${followUp.after}" was misspelt in a way that suggests ${what}; a different word where the same error can happen checks whether it recurs (one error is only a suspicion)`
+          : `follow-up: "${followUp.after}" was misspelt in a way that suggests ${what}; no unused word can show that error again, so a word on the same pattern instead (it cannot confirm or rule out ${what})`,
+      );
+    } else reasons.push(`no unused word within ±${S.followUpWindow} to follow up ${what}: it stays a suspicion`);
   }
   if (!only.length) {
     const inWindow = pool.filter((i) => near(i, S.window));

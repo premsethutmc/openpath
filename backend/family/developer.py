@@ -37,7 +37,7 @@ from .views import AccountBase
 
 User = get_user_model()
 ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"  # no 0/O, 1/I
-ASSESSMENT_SESSIONS = ["placement", "check", "spelling_check", "spelling_transfer"]
+ASSESSMENT_SESSIONS = ["placement", "check", "spelling_check", "spelling_assess", "spelling_transfer"]
 
 
 def is_developer(user) -> bool:

@@ -213,8 +213,7 @@ function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: Cap
   const e = x.e;
   // never "shown" while the learner's own answers say the opposite: the engine can support a low level after wrong
   // answers on harder questions (its prior), but a parent reading "shown" after 0 of 4 right would be misled
-  // (PC-11) and never while most of their own answers are wrong, even when the Beta test cannot yet call it hard
-  const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e) && e.independentRight * 2 >= e.independent;
+  const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e);
   switch (v.verification.status) {
     case "failed":
       return "not_kept";
@@ -279,7 +278,8 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     for (const m of v.misconceptions) {
       const f = findings.find((x) => x.capability === id && x.misconception === m.id);
       const what = m.id.replace(/_/g, " ");
-      if (!f || f.status === "resolved") continue;
+      // resolved, or seen only in practice (nothing counted): not a difficulty to report
+      if (!f || f.status === "resolved" || !f.errors.length) continue;
       difficulties.push(f.status === "supported" ? `A pattern in wrong answers: ${what} (on ${new Set(f.errors.map((e) => e.item)).size} different questions).` : `Possibly ${what}: one wrong answer so far, not yet a pattern.`);
     }
     const paused = id === c.journey.capability && doubling.support ? `Doubling letters: ${doubling.support}` : null;
@@ -363,7 +363,7 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
       },
     ];
   const initial = todayPlan(s, c, now, speech);
-  if (!placementDone(s) || (initial[0]?.type === "spelling_assess" && !sessionsOf(s, "spelling_assess").some((x) => x.end !== null)))
+  if (!placementDone(s) || (initial[0]?.type === "spelling_assess" && !sessionsOf(s, "spelling_assess").some((x) => x.end?.reason === "finished")))
     return initial.slice(0, 1).map((step) => ({ kind: "start", label: CHILD.start, title: step.title, line: step.reason, step, recommendation: plan.today.find((r) => r.action === "initial_assessment") ?? null }));
   const name = (id: string) => caps.find((x) => x.id === id)!;
   const out: (Activity & { priority: number })[] = [];

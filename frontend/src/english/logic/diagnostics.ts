@@ -24,7 +24,7 @@ import { APP_BUILD, muted } from "./telemetry.ts";
 type Any = any;
 
 export const NOT_RECORDED = "decision details not recorded (this happened before decision tracing existed)";
-const ASSESS = new Set(["placement", "check", "spelling_check", "spelling_transfer"]);
+const ASSESS = new Set(["placement", "check", "spelling_check", "spelling_assess", "spelling_transfer"]);
 const r2 = (x: number) => Math.round(x * 100) / 100;
 const short = (t: string, n = 90) => (t.length > n ? `${t.slice(0, n - 1)}…` : t);
 

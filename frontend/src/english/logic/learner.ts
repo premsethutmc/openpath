@@ -3,7 +3,7 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
+import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
@@ -12,7 +12,7 @@ import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
-import { type Next, SPELLING_ASSESS, spellingAssessNext, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
+import { type Next, DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
 import { now as perfNow, record } from "./telemetry.ts";
 import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
@@ -219,7 +219,12 @@ export class Learner {
     if (!lesson && !next) {
       if (session.event.type === "spelling_assess" && this.spellingStop) {
         const s = this.spellingStop;
-        await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), session: session.event.session, selection: { selector: "engine", use: "assess", spelling: { estimates: [], rule: s.stop === "insufficient" ? "insufficient" : "near_estimate", reasons: [`stopped: ${s.note ?? s.stop}`], window: 0, testedPatterns: [] } } });
+        const now = this.clock();
+        const estimates = DICTATION_CAPS.map((cap) => {
+          const v = leafView(this.state.ledger.composite, this.content.index, cap, now);
+          return { capability: cap, mean: Math.round(v.mean * 1000) / 1000, sd: Math.round(v.sd * 1000) / 1000 };
+        });
+        await this.addTrace({ kind: "trace", id: this.nextId(), at: now, session: session.event.session, selection: { selector: "engine", use: "assess", spelling: { estimates, rule: s.stop === "insufficient" ? "insufficient" : "stopped", reasons: [`stopped: ${s.note ?? s.stop}`], window: 0, testedPatterns: [] } } });
         this.spellingStop = null;
       }
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
@@ -305,9 +310,23 @@ export class Learner {
     return fb;
   }
 
+  /** A dictation session that needs the device's voice, on a device that cannot speak now (it was lost, or switched off). */
+  speechLost(): boolean {
+    const ev = this.state.open?.event;
+    return ev?.type === "spelling_assess" && ev.delivery === "device_voice" && !this.speech;
+  }
+
+  /** Go on with an adult reading the words: the device-voice session ends (stopped) and a new one records the adult. */
+  async continueWithAdultReader(): Promise<Current> {
+    await this.stop();
+    return this.start({ type: "spelling_assess" }, { delivery: "adult_reader" });
+  }
+
   private async record(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    // a word that could not be heard is never recorded as an answer to it
+    if (item.kind === "code" && item.format === "typed:dictation" && this.speechLost()) throw new Error("this device cannot say the word now: an adult can read the words, or stop for now");
     const sid = session.event.session;
     const fb = feedbackFor(this.content, item, response);
     const prior = session.attempts.filter((a) => a.item.id === item.id);

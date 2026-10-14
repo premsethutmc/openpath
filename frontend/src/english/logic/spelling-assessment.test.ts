@@ -11,6 +11,7 @@ import { leafView, scoreCode } from "../../../../packages/english-core/src/index
 import { type Code, loadContent } from "./content.ts";
 import type { TraceEvent } from "./events.ts";
 import { Learner } from "./learner.ts";
+import { feedbackFor, mentionsDictationWord } from "./feedback.ts";
 import { classifyError, misconceptionFindings } from "./misconceptions.ts";
 import { respond } from "./profile-sim.ts";
 import { DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext } from "./select.ts";
@@ -85,10 +86,59 @@ test("bank: 60–100 common words on spelling patterns, every one a candidate wi
 });
 
 test("scoring: the exact spelling is right (capitals, spaces and a full stop ignored); a rule error is wrong and tagged", () => {
-  const it = bank.find((i) => i.id === "spl.dict.stopped")!;
+  const it = bank.find((i) => i.answers![0] === "stopped")!;
+  assert.match(it.id, /^spl\.dict\.\d{3}$/, "the id does not spell the word (it is in the page source)");
   for (const text of ["stopped", " Stopped ", "STOPPED."]) assert.equal(scoreCode(it, { kind: "typed", text }).correct, true, text);
   assert.deepEqual(scoreCode(it, { kind: "typed", text: "stoped" }), { correct: false, misconceptions: ["no_doubling"] });
   assert.deepEqual(scoreCode(it, { kind: "typed", text: "stopt" }), { correct: false, misconceptions: [] });
+});
+
+test("no feedback on a dictation word shows another word of the check (right, or any listed wrong spelling)", () => {
+  for (const it of bank)
+    for (const text of [it.answers![0], ...Object.keys(it.wrong ?? {}), "zzzz"]) {
+      const fb = feedbackFor(c, it, { kind: "typed", text });
+      assert.ok(!mentionsDictationWord(c, `${fb.explanation} ${fb.variantNote ?? ""}`, it), `${it.answers![0]} / ${text}: "${fb.explanation}"`);
+    }
+});
+
+test("words already shown elsewhere are not asked: in a question's prompt, or in a lesson that was read", async () => {
+  const l = await learner(() => true);
+  const words = new Set(bank.map((i) => i.answers![0]));
+  // a hand-written question whose prompt contains a dictation word, shown to this learner
+  const shown = [...c.handWritten].map((id) => c.ctx.content.items.get(id) as Code).find((i) => (i.prompt.toLowerCase().match(/[a-z]+/g) ?? []).some((w) => words.has(w)))!;
+  assert.ok(shown, "such a question exists in the bank");
+  const word = (shown.prompt.toLowerCase().match(/[a-z]+/g) ?? []).find((w) => words.has(w))!;
+  await l.start({ type: "explore" });
+  await l.present(shown, "practice");
+  await l.stop();
+  const asked = await assess(l, () => null);
+  assert.ok(!asked.some((a) => a.item.answers![0] === word), `"${word}" was shown in ${shown.id}, so it is never dictated`);
+});
+
+test("a check left unfinished is offered again; a finished one is not", async () => {
+  const l = await learner(() => true);
+  await l.start({ type: "spelling_assess" });
+  const cur = await l.current();
+  await l.answer(cur.next!.item, { kind: "typed", text: (cur.next!.item as Code).answers![0] }, { use: "assessment" });
+  await l.stop();
+  assert.equal(l.plan()[0].type, "spelling_assess", "stopped after one word: offered again");
+  await assess(l, () => null);
+  assert.notEqual(l.plan()[0]?.type, "spelling_assess");
+  const stop = [...l.events].reverse().find((e): e is TraceEvent => e.kind === "trace" && !!e.selection?.spelling && !e.item)!;
+  assert.ok(["stopped", "insufficient"].includes(stop.selection!.spelling!.rule) && stop.selection!.spelling!.estimates.length === 2, "the stop is recorded with the final estimates");
+});
+
+test("speech lost during the check: no unheard word is recorded; an adult reader can take over (recorded)", async () => {
+  const l = await learner(() => true);
+  await l.start({ type: "spelling_assess" });
+  const cur = await l.current();
+  l.speechAvailable = false; // reopened on a device without a voice
+  assert.equal(l.speechLost(), true);
+  await assert.rejects(l.answer(cur.next!.item, { kind: "typed", text: "anything" }, { use: "assessment" }), /cannot say the word/);
+  const next = await l.continueWithAdultReader();
+  assert.ok(next.next);
+  const sessions = l.events.filter((e) => e.kind === "session" && e.type === "spelling_assess");
+  assert.deepEqual(sessions.map((e) => e.kind === "session" && e.delivery), ["device_voice", "adult_reader"]);
 });
 
 test("evidence: dictation answers count as independent evidence and move the estimate; generated practice words still do not", async () => {

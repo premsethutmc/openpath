@@ -52,6 +52,23 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
   if (cur.lesson) return <LessonView lesson={cur.lesson} title={title} onLeave={onLeave} onDone={async (ok) => (await learner.finishLesson(cur.lesson!.id, ok), refresh())} />;
   if (!cur.next) return <Done learner={learner} cur={cur} onLeave={onLeave} />;
 
+  // the device can no longer say the words (no voice now, or hearing words switched off): never ask a word unheard
+  if (learner.speechLost())
+    return (
+      <main className="session" aria-labelledby="lost-title">
+        <section className="sheet stack">
+          <h1 id="lost-title">The words can't be heard on this device now</h1>
+          <p>This spelling check uses the device's voice, which is not available here (no English voice, or hearing words is switched off in Me). Your answers so far are saved.</p>
+          <button type="button" className="primary" onClick={() => void learner.continueWithAdultReader().then(refresh, (e: Error) => setError(e.message))}>
+            Go on with an adult reading the words
+          </button>
+          <button type="button" className="secondary" onClick={onLeave}>
+            Stop for now
+          </button>
+        </section>
+      </main>
+    );
+
   const item = cur.next.item;
   const passage = item.kind === "code" && item.passage ? learner.content.ctx.content.passages.get(item.passage) : undefined;
   const submit = async (r: Response) => {

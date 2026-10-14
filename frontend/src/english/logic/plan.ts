@@ -55,7 +55,7 @@ export function todayPlan(s: AppState, c: AppContent, now: string, speech: boole
   const steps: PlanStep[] = [];
   // the spelling check is dictation: hear a word, type it; each word is chosen after the last answer. It is offered
   // whether or not this device can speak: without speech the app explains why, and an adult can read the words.
-  const assessed = sessionsOf(s, "spelling_assess").some((x) => x.end !== null);
+  const assessed = sessionsOf(s, "spelling_assess").some((x) => x.end?.reason === "finished");
   if (!assessed && c.dictation.items.length)
     return [{ type: "spelling_assess", title: "Spelling check: hear and spell", reason: "Hear a word, then type it. Each next word is chosen from your answers so far, near your level." }];
   const due = dueWords(s, now);

@@ -171,7 +171,7 @@ export interface SelectionTrace {
   /** The spelling assessment: the targeting and coverage rules applied before the engine chose among what was left. */
   spelling?: {
     estimates: { capability: string; mean: number; sd: number }[];
-    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient";
+    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient" | "stopped";
     reasons: string[];
     window: number;
     testedPatterns: string[];

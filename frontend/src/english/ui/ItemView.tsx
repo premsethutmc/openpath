@@ -109,7 +109,11 @@ function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word
     setPlays((n) => n + 1);
   };
   useEffect(() => {
-    if (delivery === "device_voice" && voice) playWord();
+    // first time: the word, a sentence with it, the word again (a sentence settles words that sound like others)
+    if (delivery === "device_voice" && voice) {
+      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice);
+      setPlays(1);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

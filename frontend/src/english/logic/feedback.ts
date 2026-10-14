@@ -27,12 +27,20 @@ export function correctAnswer(item: Item): string {
   return "";
 }
 
+/** Does this text contain any dictation word other than the item's own? */
+export function mentionsDictationWord(c: AppContent, text: string, own: Item): boolean {
+  const words = new Set(text.toLowerCase().match(/[a-z]+/g) ?? []);
+  return c.dictation.items.some((d) => d.id !== own.id && words.has(d.answers![0].toLowerCase()));
+}
+
 export function feedbackFor(c: AppContent, item: Item, response: Response): Feedback {
   if (item.kind !== "code") throw new Error("only code-scored items are offered");
   const { correct, misconceptions } = scoreCode(item, response);
   const misconceptionText = misconceptions.map((m) => c.feedback.get(`${item.target}#${m}`)).find(Boolean);
   const lesson = item.step ? c.lessons.get(lessonId(item.target, item.step)) : undefined;
-  const explanation = (correct ? item.explain : misconceptionText ? `${misconceptionText}${item.explain ? ` ${item.explain}` : ""}` : item.explain) ?? lesson?.rule ?? "";
+  let explanation = (correct ? item.explain : misconceptionText ? `${misconceptionText}${item.explain ? ` ${item.explain}` : ""}` : item.explain) ?? lesson?.rule ?? "";
+  // dictation: the rule's examples could be words still to come in the check, so only the pattern's name is given
+  if (item.format === "typed:dictation") explanation = lesson && !mentionsDictationWord(c, lesson.title, item) ? `This word follows the pattern "${lesson.title}".` : "";
   let variantNote: string | null = null;
   if (correct && response.kind === "typed" && item.answers && item.answers.length > 1) {
     const typed = response.text.trim().toLowerCase();

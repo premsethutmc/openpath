@@ -159,13 +159,15 @@ test("with a voice: hear the word, repeat it, hear it in a sentence, type it; a 
     assert.equal(item.format, "typed:dictation");
     const word = item.answers[0];
     // the word is said as soon as it is shown, and never written on the screen
-    await page.waitForFunction((w) => window.__spoken.includes(w), word);
+    // said at once: the word, a sentence with it, the word again
+    await page.waitForFunction((w) => window.__spoken.some((x) => x === w || x.startsWith(`${w}. `)), word);
     assert.ok(!(await page.locator("main").innerText()).toLowerCase().includes(word), `${word} is not shown before the answer`);
     if (k === 0) {
       await page.getByRole("button", { name: "Repeat the word" }).click();
       await page.getByRole("button", { name: "Hear it in a sentence" }).click();
       const said = await spoken(page);
-      assert.equal(said.filter((s) => s === word).length, 2, "played, then repeated");
+      assert.equal(said.at(-3), `${word}. ${item.sentence} ${word}.`, "first: the word, the sentence, the word");
+      assert.equal(said.at(-2), word, "Repeat says the word alone");
       assert.equal(said.at(-1), `${word}. ${item.sentence} ${word}.`, "the sentence, between two sayings of the word");
       await fits(page);
       await shot(page, "dictation-question");
