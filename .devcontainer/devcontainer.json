@@ -1,0 +1,25 @@
+{
+  // OpenPath (PR #26) in a GitHub Codespace, for the product owner's own hands-on test on a phone.
+  // The real app: React English app + Django API + PostgreSQL 16, on one private HTTPS address (port 4175).
+  // Ports are private: only you, signed in to GitHub, can open the address. Do not make the port public.
+  // Development settings with a random secret per codespace; no production secrets, no real children's data.
+  "name": "OpenPath preview (app + API + PostgreSQL)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "shutdownAction": "stopCompose",
+  "hostRequirements": { "cpus": 2 },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/start-preview.sh",
+  "forwardPorts": [4175],
+  "portsAttributes": {
+    "4175": { "label": "OpenPath (app + API)", "onAutoForward": "notify" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "ignore" },
+  "customizations": {
+    "codespaces": { "openFiles": ["docs/product/PREVIEW_ON_ANDROID.md"] }
+  }
+}
