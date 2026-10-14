@@ -66,6 +66,15 @@ If your codespace was created for PR #26, open a terminal in it and run `git fet
 product/developer-diagnostics && bash .devcontainer/start-preview.sh`, or create a new codespace on this branch.
 The script rebuilds the app when the commit changes, migrates the database, and prints a code.
 
+The script also restarts the API and the app server if they are running different code. Before this fix, servers
+left running from PR #26 kept answering after a branch switch, so `/developer` stayed on "Checking access…". After
+starting, the script checks that the API answering on port 4175 has the developer routes. Your database and every
+pupil's history are kept: nothing is reset, and migrations only add tables.
+
+**If `/developer` shows an error instead of loading:** it now says what failed and offers **Retry**. "The API
+server is older than this page" means the API is still running older code: run `bash .devcontainer/start-preview.sh`
+in the codespace, then press Retry. Requests give up after 15 seconds, so the page never waits for ever.
+
 ## 5. Things to know
 
 **Stopping and costs:**

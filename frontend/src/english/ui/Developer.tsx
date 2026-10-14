@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Api, ApiError, type DeveloperOverview, type DeveloperPupil } from "../logic/account.ts";
 import { type AppContent, loadContent } from "../logic/content.ts";
+import { type Access, checkAccess } from "../logic/developer-access.ts";
 import { type Diagnosis, type Report, type TimelineEntry, NOT_RECORDED, bankCoverage, buildReport, diagnose } from "../logic/diagnostics.ts";
 import type { AppEvent, SelectionTrace } from "../logic/events.ts";
 import { APP_BUILD } from "../logic/telemetry.ts";
@@ -57,17 +58,15 @@ function Section({ title, children, open = false, count }: { title: string; chil
 
 export function Developer() {
   const api = useMemo(() => new Api(), []);
-  const [phase, setPhase] = useState<"loading" | "no-server" | "signed-out" | "not-developer" | "ready">("loading");
-  const [commit, setCommit] = useState<string>("");
+  const [access, setAccess] = useState<Access | { phase: "loading" }>({ phase: "loading" });
   const [view, setView] = useState<View>({ name: "overview" });
+  const phase = access.phase;
+  const commit = access.phase === "ready" || access.phase === "not-developer" ? access.commit : "";
 
+  // checkAccess never throws and every request has a time limit, so this always ends in a definite state
   const check = async () => {
-    const s = await api.status();
-    if (!s.available) return setPhase("no-server");
-    if (!s.account.authenticated) return setPhase("signed-out");
-    const d = await api.developerStatus();
-    setCommit(d.commit);
-    setPhase(d.developer ? "ready" : "not-developer");
+    setAccess({ phase: "loading" });
+    setAccess(await checkAccess(api, APP_BUILD));
   };
   useEffect(() => {
     document.title = "OpenPath · Developer diagnostics";
@@ -83,7 +82,22 @@ export function Developer() {
         </a>
         <span className="dev-badge">Developer diagnostics · read-only</span>
       </header>
-      {phase === "loading" && <p className="loading">Checking access…</p>}
+      {phase === "loading" && (
+        <p className="loading" role="status">
+          Checking access…
+        </p>
+      )}
+      {access.phase === "error" && (
+        <div className="dev-card stack" role="alert">
+          <h1>{access.title}</h1>
+          <p>{access.message}</p>
+          <p className="small">Detail: {access.detail}</p>
+          <button type="button" className="primary" onClick={() => void check()}>
+            Retry
+          </button>
+        </div>
+      )}
+      {access.phase === "ready" && access.mismatch && <p className="warning">{access.mismatch}</p>}
       {phase === "no-server" && <p className="warning">This copy of OpenPath has no account server, so there are no diagnostics to show. Open the Codespaces preview instead.</p>}
       {phase === "signed-out" && <SignIn api={api} onDone={check} />}
       {phase === "not-developer" && <Claim api={api} onDone={check} />}
@@ -213,7 +227,7 @@ function useLoad<T>(f: () => Promise<T>, deps: unknown[] = []): { data: T | null
 
 function Overview({ api }: { api: Api }) {
   const { data: o, problem, reload } = useLoad<DeveloperOverview>(() => api.developerOverview());
-  if (problem) return <p className="warning">{problem}</p>;
+  if (problem) return <Problem message={problem} onRetry={reload} />;
   if (!o) return <p className="loading">Loading…</p>;
   const c = o.counts;
   const errors = o.recent_server_errors.length + o.recent_app_errors.length;
@@ -254,6 +268,17 @@ function Overview({ api }: { api: Api }) {
   );
 }
 
+function Problem({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div className="dev-card stack" role="alert">
+      <p className="warning">{message}</p>
+      <button type="button" className="secondary" onClick={onRetry}>
+        Retry
+      </button>
+    </div>
+  );
+}
+
 function Stat({ label, value, note, warn }: { label: string; value: ReactNode; note?: string; warn?: boolean }) {
   return (
     <div className={`dev-stat${warn ? " warn" : ""}`}>
@@ -265,8 +290,8 @@ function Stat({ label, value, note, warn }: { label: string; value: ReactNode; n
 }
 
 function Pupils({ api, onOpen }: { api: Api; onOpen: (id: string) => void }) {
-  const { data, problem } = useLoad<DeveloperPupil[]>(() => api.developerPupils());
-  if (problem) return <p className="warning">{problem}</p>;
+  const { data, problem, reload } = useLoad<DeveloperPupil[]>(() => api.developerPupils());
+  if (problem) return <Problem message={problem} onRetry={reload} />;
   if (!data) return <p className="loading">Loading…</p>;
   return (
     <div className="stack">
@@ -293,6 +318,11 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
   const content = useMemo<AppContent>(() => loadContent(), []);
   const [state, setState] = useState<{ name: string; own: boolean; events: AppEvent[]; d: Diagnosis } | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
+  const reload = () => {
+    setProblem(null);
+    setAttempt((n) => n + 1);
+  };
   useEffect(() => {
     let live = true;
     void (async () => {
@@ -307,8 +337,8 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
     return () => {
       live = false;
     };
-  }, [api, id, content, serverCommit]);
-  if (problem) return <p className="warning">{problem}</p>;
+  }, [api, id, content, serverCommit, attempt]);
+  if (problem) return <Problem message={problem} onRetry={reload} />;
   if (!state) return <p className="loading">Replaying the record through the OpenPath engine…</p>;
   const { d } = state;
   const own = d.learner_vector.filter((x) => d.evidence.some((e) => e.capability === x.id));
@@ -701,8 +731,8 @@ function Coverage() {
 }
 
 function Audit({ api }: { api: Api }) {
-  const { data, problem } = useLoad(() => api.developerAudit());
-  if (problem) return <p className="warning">{problem}</p>;
+  const { data, problem, reload } = useLoad(() => api.developerAudit());
+  if (problem) return <Problem message={problem} onRetry={reload} />;
   if (!data) return <p className="loading">Loading…</p>;
   return (
     <div className="stack">

@@ -25,6 +25,13 @@ If you need a code without restarting, run `cd backend && python3 manage.py deve
 `developer list`, `developer grant <email>` and `developer revoke <email>` also exist. None of this is needed for
 routine use.
 
+**If it does not load:**
+- Every request has a 15-second limit (2 minutes for importing a whole record).
+- `/developer` always ends in a definite state: sign in, enter the code, the dashboard, or an error. An error says
+  which step failed (for example `developer status: HTTP 404 (/developer/status/)`) and has a **Retry** button.
+- A 404 there means the API is older than the page. `start-preview.sh` now finds and replaces such servers.
+- If the page and the API were built from different commits, a warning shows both.
+
 ## 2. What it shows
 
 **Health:**

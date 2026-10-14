@@ -28,13 +28,24 @@ export OPENPATH_SECURE_COOKIES=1
 export OPENPATH_PASSWORD_RESET_URL="$URL/#reset"
 export OPENPATH_COMMIT="$(git -C "$ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# after a git checkout or pull, stop servers still running the old code so they restart with the new one
-if [ -f "$LOGS/running-commit" ] && [ "$(cat "$LOGS/running-commit")" != "$OPENPATH_COMMIT" ]; then
+# Servers left running from another commit (after a git checkout or pull, or started by an older copy of this
+# script that recorded no commit) would serve old API code behind a new app. Stop them unless they are known to be
+# running this exact commit; they are started again below. The database is not touched.
+stop_servers() {
   pkill -f "manage.py runserver 127.0.0.1:8000" || true
   pkill -f "scripts/preview-english.mjs" || true
-  sleep 1
+  for _ in $(seq 1 20); do port_open 8000 || port_open 4175 || break; sleep 0.25; done
+}
+if [ "$(cat "$LOGS/running-commit" 2>/dev/null)" != "$OPENPATH_COMMIT" ]; then
+  stop_servers
 fi
 echo "$OPENPATH_COMMIT" > "$LOGS/running-commit"
+
+# HTTP status of a GET (000 when there is no answer within 5 seconds)
+http_status() { python3 -c "import sys,urllib.request,urllib.error
+try: print(urllib.request.urlopen(sys.argv[1], timeout=5).status)
+except urllib.error.HTTPError as e: print(e.code)
+except Exception: print('000')" "$1"; }
 
 cd "$ROOT/backend"
 for _ in $(seq 1 60); do
@@ -56,6 +67,21 @@ if ! port_open 4175; then
 fi
 for _ in $(seq 1 60); do
   if port_open 4175 && port_open 8000; then
+    # the API behind the app must be this commit's: the developer route exists (403 when signed out, never 404)
+    API_STATUS="$(http_status http://127.0.0.1:4175/api/developer/status/)"
+    if [ "$API_STATUS" != "403" ] && [ "$API_STATUS" != "401" ]; then
+      sleep 0.5
+      API_STATUS="$(http_status http://127.0.0.1:4175/api/developer/status/)"
+    fi
+    if [ "$API_STATUS" = "404" ]; then
+      if [ -n "${OPENPATH_PREVIEW_RESTARTED:-}" ]; then
+        echo "The API on port 4175 still has no developer routes after a restart; see $LOGS/api.log" >&2
+        exit 1
+      fi
+      echo "The API answering on port 4175 is older code (no developer routes). Stopping it and starting again." >&2
+      stop_servers
+      OPENPATH_PREVIEW_RESTARTED=1 exec bash "$0"
+    fi
     echo
     echo "OpenPath is running. Open on your phone (sign in to GitHub when asked):"
     echo "  $URL"

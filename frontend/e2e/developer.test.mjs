@@ -252,3 +252,48 @@ test("the founder: Arun's assessment, a developer code, then everything the engi
   await ravi.context.close();
   await context.close();
 });
+
+test("/developer never hangs: an older API, a dropped or stalled request and an ended session each give a message and Retry", async () => {
+  const { context, page, errors } = await device();
+  await register(page, `retry.${run}@example.org`);
+  // through the app's own origin (the preview proxy), with the signed-in session cookie
+  const account = await api(page, "GET", "/account/");
+  assert.equal(account.status, 200);
+  assert.equal(account.json.authenticated, true);
+  const status = await api(page, "GET", "/developer/status/");
+  assert.equal(status.status, 200);
+  assert.equal(status.json.developer, false);
+  assert.match(status.json.commit, /^[0-9a-f]{7,40}$|^unknown$/);
+
+  const STATUS = "**/api/developer/status/";
+  // 1. the API behind the app is older code without the developer routes (Django's HTML 404)
+  await page.route(STATUS, (r) => r.fulfill({ status: 404, contentType: "text/html", body: "<h1>Not Found</h1>" }));
+  await page.goto(`${URL}/developer`);
+  await page.getByRole("heading", { name: "The API server is older than this page" }).waitFor({ timeout: 20000 });
+  await page.getByText("developer status: HTTP 404 (/developer/status/)").waitFor();
+  await fits(page);
+  await shot(page, "error-old-api");
+  // 2. the request is dropped
+  await page.unroute(STATUS);
+  await page.route(STATUS, (r) => r.abort("connectionreset"));
+  await page.getByRole("button", { name: "Retry" }).click();
+  await page.getByRole("heading", { name: "OpenPath's server can't be reached" }).waitFor({ timeout: 20000 });
+  // 3. the request never answers: given up at the time limit (15 s)
+  await page.unroute(STATUS);
+  await page.route(STATUS, () => undefined); // never fulfilled
+  await page.getByRole("button", { name: "Retry" }).click();
+  await page.getByText("Checking access…").waitFor();
+  await page.getByRole("heading", { name: "The server did not answer" }).waitFor({ timeout: 25000 });
+  await shot(page, "error-timeout");
+  // 4. the session ended
+  await page.unroute(STATUS);
+  await page.route(STATUS, (r) => r.fulfill({ status: 403, contentType: "application/json", body: JSON.stringify({ detail: "Authentication credentials were not provided." }) }));
+  await page.getByRole("button", { name: "Retry" }).click();
+  await page.getByRole("heading", { name: "Sign in" }).waitFor({ timeout: 20000 });
+  // 5. everything answers again: the real API, after a reload
+  await page.unroute(STATUS);
+  await page.reload();
+  await page.getByRole("heading", { name: "Developer access" }).waitFor({ timeout: 20000 });
+  assert.deepEqual(errors.filter((e) => !/net::ERR|status of (404|403)|Failed to fetch|aborted/i.test(e)), [], "no uncaught errors");
+  await context.close();
+});

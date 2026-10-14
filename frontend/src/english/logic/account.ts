@@ -56,16 +56,28 @@ export interface DeveloperOverview {
   recent_app_errors: { at: string; name: string; detail: string; app_version: string }[];
 }
 
-/** A refusal from the API, with Django's message(s) in plain words. */
+/**
+ * A refusal from the API, with Django's message(s) in plain words. `reason` says what kind of failure it was:
+ * "http" (the server answered with an error status), "network" (no answer: offline, or the server is down), or
+ * "timeout" (no answer within the time limit). Network and timeout failures have status 0.
+ */
 export class ApiError extends Error {
   readonly status: number;
   readonly fields: Record<string, string>;
-  constructor(status: number, message: string, fields: Record<string, string> = {}) {
+  readonly reason: "http" | "network" | "timeout";
+  readonly path: string;
+  constructor(status: number, message: string, fields: Record<string, string> = {}, reason: "http" | "network" | "timeout" = status ? "http" : "network", path = "") {
     super(message);
     this.status = status;
     this.fields = fields;
+    this.reason = reason;
+    this.path = path;
   }
 }
+
+/** How long a request may take before it is given up (ms). Imports of a whole record get longer. */
+export const REQUEST_TIMEOUT_MS = 15_000;
+export const IMPORT_TIMEOUT_MS = 120_000;
 
 type Fetch = (input: string, init?: RequestInit) => Promise<Response>;
 
@@ -88,24 +100,57 @@ export class Api {
   private readonly base: string;
   private readonly fetchImpl: Fetch;
   private readonly cookie: (name: string) => string;
-  constructor(opts: { base?: string; fetch?: Fetch; cookie?: (name: string) => string } = {}) {
+  private readonly timeoutMs: number;
+  constructor(opts: { base?: string; fetch?: Fetch; cookie?: (name: string) => string; timeoutMs?: number } = {}) {
     this.base = opts.base ?? "/api";
     this.fetchImpl = opts.fetch ?? ((input, init) => fetch(input, init));
     this.cookie = opts.cookie ?? readCookie;
+    this.timeoutMs = opts.timeoutMs ?? REQUEST_TIMEOUT_MS;
   }
 
-  async request<T>(method: string, path: string, body?: unknown): Promise<T> {
+  /**
+   * One request. It always settles: an answer, an error status, no connection, or no answer within the time limit
+   * (the request is then aborted), so no screen can wait for ever.
+   */
+  async request<T>(method: string, path: string, body?: unknown, timeoutMs = this.timeoutMs): Promise<T> {
     const headers: Record<string, string> = { Accept: "application/json" };
     if (body !== undefined) headers["Content-Type"] = "application/json";
     if (method !== "GET") headers["X-CSRFToken"] = this.cookie("csrftoken");
-    let res: Response;
+    const abort = new AbortController();
+    let timedOut = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const expired = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        timedOut = true;
+        abort.abort();
+        reject(new ApiError(0, `OpenPath's server did not answer within ${Math.round(timeoutMs / 1000)} seconds. Check the connection and try again.`, {}, "timeout", path));
+      }, timeoutMs);
+    });
     try {
-      res = await this.fetchImpl(`${this.base}${path}`, { method, headers, credentials: "same-origin", body: body === undefined ? undefined : JSON.stringify(body) });
-    } catch {
-      throw new ApiError(0, messageOf(null, 0).message);
+      let res: Response;
+      try {
+        res = await Promise.race([this.fetchImpl(`${this.base}${path}`, { method, headers, credentials: "same-origin", signal: abort.signal, body: body === undefined ? undefined : JSON.stringify(body) }), expired]);
+      } catch (e) {
+        if (e instanceof ApiError) throw e;
+        if (timedOut) throw new ApiError(0, `OpenPath's server did not answer within ${Math.round(timeoutMs / 1000)} seconds. Check the connection and try again.`, {}, "timeout", path);
+        throw new ApiError(0, messageOf(null, 0).message, {}, "network", path);
+      }
+      return await this.read<T>(res, path, expired);
+    } finally {
+      clearTimeout(timer);
+      expired.catch(() => undefined);
     }
+  }
+
+  private async read<T>(res: Response, path: string, expired: Promise<never>): Promise<T> {
     if (res.status === 204) return undefined as T;
-    const text = await res.text();
+    let text = "";
+    try {
+      text = await Promise.race([res.text(), expired]);
+    } catch (e) {
+      if (e instanceof ApiError) throw e;
+      throw new ApiError(0, messageOf(null, 0).message, {}, "network", path);
+    }
     let json: unknown = null;
     try {
       json = text ? JSON.parse(text) : null;
@@ -115,8 +160,8 @@ export class Api {
     if (!res.ok) {
       const { message, fields } = messageOf(json, res.status);
       // signed out (session ended, or signed out on another device): say so plainly
-      if ((res.status === 401 || res.status === 403) && /credentials|authenticat/i.test(message)) throw new ApiError(res.status, "You are signed out. Sign in again to carry on; everything saved before is kept.", fields);
-      throw new ApiError(res.status, message, fields);
+      if ((res.status === 401 || res.status === 403) && /credentials|authenticat/i.test(message)) throw new ApiError(res.status, "You are signed out. Sign in again to carry on; everything saved before is kept.", fields, "http", path);
+      throw new ApiError(res.status, message, fields, "http", path);
     }
     return json as T;
   }
@@ -125,13 +170,14 @@ export class Api {
    * Whether this app has a server with accounts, and who is signed in. A static build has none: device-only use.
    * `unreachable` means the server could not be reached at all (offline?), which is not the same as having none.
    */
-  async status(): Promise<{ available: boolean; unreachable: boolean; account: AccountInfo }> {
+  async status(): Promise<{ available: boolean; unreachable: boolean; account: AccountInfo; error?: ApiError }> {
     try {
       const a = await this.request<AccountInfo & { accounts?: boolean }>("GET", "/account/");
       if (!a || typeof a.authenticated !== "boolean" || a.accounts === false) return { available: false, unreachable: false, account: { authenticated: false } };
       return { available: true, unreachable: false, account: a };
     } catch (e) {
-      return { available: false, unreachable: e instanceof ApiError && (e.status === 0 || e.status >= 500), account: { authenticated: false } };
+      const unreachable = e instanceof ApiError && (e.status === 0 || e.status >= 500);
+      return { available: false, unreachable, account: { authenticated: false }, ...(unreachable ? { error: e as ApiError } : {}) };
     }
   }
 
@@ -170,7 +216,7 @@ export class Api {
     return this.request<{ count: number }>("POST", `/pupils/${id}/events/`, { subject: "english", seq, event });
   }
   importEvents(id: string, events: AppEvent[]) {
-    return this.request<{ count: number }>("PUT", `/pupils/${id}/events/`, { subject: "english", events });
+    return this.request<{ count: number }>("PUT", `/pupils/${id}/events/`, { subject: "english", events }, IMPORT_TIMEOUT_MS);
   }
   exportPupil(id: string) {
     return this.request<unknown>("GET", `/pupils/${id}/export/`);
