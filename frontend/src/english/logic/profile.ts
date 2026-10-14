@@ -213,7 +213,8 @@ function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: Cap
   const e = x.e;
   // never "shown" while the learner's own answers say the opposite: the engine can support a low level after wrong
   // answers on harder questions (its prior), but a parent reading "shown" after 0 of 4 right would be misled
-  const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e);
+  // (PC-11) and never while most of their own answers are wrong, even when the Beta test cannot yet call it hard
+  const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e) && e.independentRight * 2 >= e.independent;
   switch (v.verification.status) {
     case "failed":
       return "not_kept";

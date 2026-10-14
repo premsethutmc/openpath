@@ -20,7 +20,7 @@ const SHOTS = process.env.E2E_SHOTS;
 if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
-  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json"].flatMap((f) => JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8")).map((i) => [i.id, i])),
+  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json", "spelling/dictation-bank.json"].flatMap((f) => ((j) => (Array.isArray(j) ? j : j.items))(JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8"))).map((i) => [i.id, i])),
 );
 const PASSWORD = "a-long-family-passphrase";
 const run = Date.now().toString(36);
@@ -87,10 +87,21 @@ async function answer(page, right = true) {
   return item;
 }
 
+
+/** The spelling check (dictation) starts with a sound check: start it with the device's voice, or with an adult reading. */
+async function startSpellingIfAsked(page) {
+  if (!(await page.locator(".spelling-intro").count())) return false;
+  const own = page.getByRole("button", { name: "Start the spelling check" });
+  if (await own.count()) await own.click();
+  else await page.getByRole("button", { name: "An adult will read the words aloud" }).click();
+  await page.locator(".spelling-intro").waitFor({ state: "detached" });
+  return true;
+}
 async function finishSession(page, right = () => true, onFirst) {
   const asked = [];
   for (let n = 0; n < 40; n++) {
-    await page.locator(".item, .lesson, .done").first().waitFor({ timeout: 10000 });
+    await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 10000 });
+    if (await startSpellingIfAsked(page)) continue;
     if (await page.locator(".done").count()) return asked;
     if (await page.locator(".lesson").count()) {
       if (onFirst) await onFirst("lesson");
@@ -187,7 +198,8 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.locator(".item").waitFor();
   await shot(page, "assessment-question");
   await fits(page);
-  const placement = await finishSession(page, (n) => n % 3 !== 2, async (what) => {
+  // mostly wrong, so that after the spelling check (all wrong) the plan teaches a spelling pattern
+  const placement = await finishSession(page, (n) => n % 3 === 0, async (what) => {
     if (what === "feedback") await shot(page, "assessment-feedback");
   });
   assert.ok(placement.length >= 12 && placement.length <= 24, `${placement.length} questions`);

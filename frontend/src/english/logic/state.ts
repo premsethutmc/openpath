@@ -144,8 +144,11 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
           s.wordsSeen.add(word);
           memory(s, word, p.key, e, type === "spelling_review");
         } else if (item.format === "typed:dictation" && item.answers?.[0]) {
-          // a dictation word is never asked again in a check (word review uses generated practice words only)
-          s.wordsSeen.add(item.answers[0].toLowerCase());
+          // a dictation word is never asked again in a check; a misspelt one comes back in word review when the app has
+          // a practice item for that word (word review asks practice words, never the check's own question again)
+          const word = item.answers[0].toLowerCase();
+          s.wordsSeen.add(word);
+          if (practiceWords(content).has(word)) memory(s, word, p.key, e, type === "spelling_review");
         }
         break;
       }
@@ -161,6 +164,14 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
     if (gen.length && done) pattern(st.event.capability, st.event.step).transfers.push({ at: gen[gen.length - 1].at, right: gen.filter((a) => a.correct).length, total: gen.length });
   }
   return s;
+}
+
+const practiceWordCache = new WeakMap<AppContent, Set<string>>();
+/** Words that have generated practice items (word review can ask them). */
+function practiceWords(content: AppContent): Set<string> {
+  let w = practiceWordCache.get(content);
+  if (!w) practiceWordCache.set(content, (w = new Set(content.generated.map((g) => g.generated!.word))));
+  return w;
 }
 
 /** Word memory: a misspelt word starts at box 0; a correct review on or after its due day moves it up; a wrong one sends it back. */

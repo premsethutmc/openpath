@@ -20,7 +20,7 @@ const SHOTS = process.env.E2E_SHOTS;
 if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
-  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json"].flatMap((f) => JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8")).map((i) => [i.id, i])),
+  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json", "spelling/dictation-bank.json"].flatMap((f) => ((j) => (Array.isArray(j) ? j : j.items))(JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8"))).map((i) => [i.id, i])),
 );
 for (const i of JSON.parse(readFileSync(new globalThis.URL("web/doubling-journey.json", CONTENT), "utf8")).items) items.set(i.id, i);
 
@@ -105,11 +105,22 @@ async function next(page) {
   await page.locator(".feedback").waitFor({ state: "detached" });
 }
 
+/** The spelling check (dictation) starts with a sound check: start it with the device's voice, or with an adult reading. */
+async function startSpellingIfAsked(page) {
+  if (!(await page.locator(".spelling-intro").count())) return false;
+  const own = page.getByRole("button", { name: "Start the spelling check" });
+  if (await own.count()) await own.click();
+  else await page.getByRole("button", { name: "An adult will read the words aloud" }).click();
+  await page.locator(".spelling-intro").waitFor({ state: "detached" });
+  return true;
+}
+
 /** Work through the open session to its end. */
 async function finishSession(page, right = () => true) {
   const asked = [];
   for (let n = 0; n < 40; n++) {
-    await page.locator(".item, .lesson, .done").first().waitFor({ timeout: 8000 }).catch(async (e) => { console.log("STALL:", (await page.locator("body").innerText()).slice(0, 600)); throw e; });
+    await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 8000 }).catch(async (e) => { console.log("STALL:", (await page.locator("body").innerText()).slice(0, 600)); throw e; });
+    if (await startSpellingIfAsked(page)) continue;
     if (await page.locator(".done").count()) return asked;
     if (await page.locator(".lesson").count()) {
       await page.locator(".check .option").first().click();
@@ -134,18 +145,18 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await page.locator(".item").waitFor();
   await shot(page, "2-question");
   await fits(page);
-  const placement = await finishSession(page, (n) => n % 3 !== 2);
+  // a learner who finds spelling hard: wrong in placement and in the spelling check, so the plan teaches spelling
+  const placement = await finishSession(page, () => false);
   assert.ok(placement.length >= 12 && placement.length <= 24, `${placement.length} placement questions`);
   for (const i of placement) assert.ok(!i.generated, "placement uses hand-written items only");
   await page.getByText(/Your starting point is set/).waitFor();
   await page.getByRole("button", { name: "Back to today" }).click();
-  // the spelling check
-  await page.getByRole("heading", { name: "Spelling check" }).waitFor();
+  // the spelling check: dictation (hear the word, type it), each word chosen after the last answer
+  await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await page.getByRole("button", { name: "Start" }).first().click();
   const check = await finishSession(page, () => false);
-  assert.ok(check.length >= 3);
-  for (const i of check) assert.ok(i.generated, "the spelling check uses dictionary words");
-  await page.getByText(/Words to review in a day/).waitFor();
+  assert.ok(check.length >= 8);
+  for (const i of check) assert.equal(i.format, "typed:dictation", "the spelling check is dictation, never a substitute");
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan now offers spelling practice with a lesson
   await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
@@ -256,21 +267,21 @@ test("words come back for review the next day", async () => {
   await page.getByRole("button", { name: "Start" }).first().click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("button", { name: "Start" }).first().click(); // spelling check
-  await finishSession(page, (n) => n !== 0);
+  await page.getByRole("button", { name: "Start" }).first().click(); // spelling check (dictation)
+  await finishSession(page, () => false); // misspelt words with practice items come back for review
   await page.getByRole("button", { name: "Back to today" }).click();
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "nothing due today");
   await page.evaluate(() => localStorage.setItem("openpath-english-clock-offset-days", "1"));
   await page.reload();
-  await page.getByRole("heading", { name: "Review 1 word" }).waitFor();
-  await page.locator(".plan li", { hasText: "Review 1 word" }).getByRole("button", { name: "Start" }).click();
+  await page.getByRole("heading", { name: /^Review \d+ words?$/ }).waitFor();
+  await page.locator(".plan li", { hasText: /Review \d+ word/ }).getByRole("button", { name: "Start" }).click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "reviewed; next due in 3 days");
   await context.close();
 });
 
-test("works offline once opened, and without speech the spelling questions use written clues", async () => {
+test("works offline once opened; without speech the spelling check says why and an adult can read the words", async () => {
   const { context, page, errors } = await phone();
   await createProfile(page, "Sam");
   await page.evaluate(async () => {
@@ -290,8 +301,10 @@ test("works offline once opened, and without speech the spelling questions use w
     await finishSession(page);
     await page.getByRole("button", { name: "Back to today" }).click();
     await page.getByRole("button", { name: "Start" }).first().click();
-    const asked = await finishSession(page, () => false);
-    assert.ok(asked.every((i) => !i.generated || i.generated.template !== "hear_spell"));
+    await page.getByText("This device can't say the words aloud.").waitFor();
+    await shot(page, "6b-no-speech");
+    const asked = await finishSession(page, () => false); // an adult reads the words
+    assert.ok(asked.length > 0 && asked.every((i) => i.format === "typed:dictation"), "no written clue or other substitute");
   }
   await shot(page, "7-offline");
   await context.setOffline(false);

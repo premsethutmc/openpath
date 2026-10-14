@@ -18,7 +18,7 @@ rmSync(OUT, { recursive: true, force: true }); // no screenshots left over from 
 mkdirSync(OUT, { recursive: true });
 const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
-  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json"].flatMap((f) => JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8")).map((i) => [i.id, i])),
+  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json", "spelling/dictation-bank.json"].flatMap((f) => ((j) => (Array.isArray(j) ? j : j.items))(JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8"))).map((i) => [i.id, i])),
 );
 for (const i of JSON.parse(readFileSync(new globalThis.URL("web/doubling-journey.json", CONTENT), "utf8")).items) items.set(i.id, i);
 
