@@ -59,7 +59,8 @@ function decayMisconceptions(node: NodeState, at: string, p: Policy): void {
 }
 
 export function demonstratedLevel(node: NodeState, p: Policy): number | null {
-  if (node.directN < p.demonstrated_min_direct || node.contexts.length < p.demonstrated_min_contexts) return null;
+  // the counts are of qualifying answers (equal to directN and contexts when no answer followed teaching)
+  if ((node.qualifyingN ?? node.directN) < p.demonstrated_min_direct || (node.qualifyingContexts ?? node.contexts).length < p.demonstrated_min_contexts) return null;
   const z = normalQuantile(p.demonstrated_probability);
   const level = Math.floor((node.direct.mean - z * Math.sqrt(node.direct.variance)) * 2) / 2;
   return level >= 1 ? Math.min(level, 8) : null;
@@ -96,6 +97,11 @@ export interface DirectObservation {
   exposure?: Exposure;
   /** A judged band at or above the current estimate counts as success for misconception fading. */
   success?: boolean;
+  /**
+   * false: answered after teaching on this capability in the same session. The estimate is updated exactly as
+   * for any answer, but the answer cannot demonstrate, master or serve as a retention check. Default true.
+   */
+  qualifying?: boolean;
 }
 
 export interface Applied {
@@ -127,8 +133,20 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const d = capShift(node.direct, o.update(node.direct), o.maxShift);
   node.combined = c.est;
   node.direct = d.est;
+  const qualifies = o.qualifying !== false;
+  // the qualifying counts are kept only once an answer has followed teaching: until then they equal directN and
+  // contexts, and the node is byte-identical to one recorded before this distinction existed
+  if (!qualifies && node.qualifyingN === undefined) {
+    node.qualifiedLevel = demonstratedLevel(node, p);
+    node.qualifyingN = node.directN;
+    node.qualifyingContexts = [...node.contexts];
+  }
   node.directN += 1;
   if (!node.contexts.includes(o.context)) node.contexts.push(o.context);
+  if (qualifies && node.qualifyingN !== undefined) {
+    node.qualifyingN += 1;
+    if (!node.qualifyingContexts!.includes(o.context)) node.qualifyingContexts!.push(o.context);
+  }
   node.lastDirectAt = o.at;
   if (o.binary) {
     node.binary.push({ session: o.session, at: o.at, b: o.binary.b, correct: o.binary.correct, atOrBelow });
@@ -140,7 +158,9 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
     const prev = node.misconceptions[tag]?.strength ?? 0;
     node.misconceptions[tag] = { strength: prev + (1 - prev) * p.misconception_gain, at: o.at };
   }
-  const level = demonstratedLevel(node, p);
+  // only a qualifying answer can demonstrate; after teaching, the level stays as of the last qualifying answer
+  const level = qualifies ? demonstratedLevel(node, p) : null;
+  if (qualifies && node.qualifiedLevel !== undefined) node.qualifiedLevel = level;
   if (level !== null) {
     const last = node.demonstrations[node.demonstrations.length - 1];
     if (last && last.session === o.session) {
@@ -152,10 +172,11 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const lastSession = sessions[sessions.length - 1];
   const ob = sessionObservation(o);
   if (lastSession && lastSession.session === o.session) {
-    lastSession.level = level;
+    if (qualifies) lastSession.level = level;
+    else lastSession.teaching = true;
     lastSession.at = o.at;
     if (ob) (lastSession.obs ??= []).push(ob);
-  } else sessions.push({ session: o.session, at: o.at, level, obs: ob ? [ob] : [] });
+  } else sessions.push({ session: o.session, at: o.at, level, obs: ob ? [ob] : [], ...(qualifies ? {} : { teaching: true as const }) });
   node.evidence.push(o.decisionId);
   if (node.evidence.length > MAX_EVIDENCE) node.evidence.shift();
 
@@ -274,7 +295,8 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
   const days = daysBetween(node.asOf, now);
   const combined = node.asOf ? inflate(node.combined, days, p.time_variance_per_day, priorVariance(index)) : node.combined;
   const direct = node.asOf ? inflate(node.direct, days, p.time_variance_per_day, priorVariance(index)) : node.direct;
-  const demonstrated = demonstratedLevel(node, p);
+  // as of the latest qualifying answer: answers after teaching move the estimate but not what is demonstrated
+  const demonstrated = node.qualifiedLevel !== undefined ? node.qualifiedLevel : demonstratedLevel(node, p);
   const masteredHist = masteredLevel(node, p);
   // Mastery is reported only while the capability is still demonstrated at that level.
   const slipped = masteredHist !== null && (demonstrated === null || demonstrated < masteredHist);

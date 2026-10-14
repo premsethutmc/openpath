@@ -4,7 +4,9 @@
  * the same learner can be shown before and after new evidence. Deterministic: the same stage gives the same
  * events. Synthetic learners show software behaviour, not educational effectiveness.
  */
+import type { EvidenceEvent } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent } from "./content.ts";
+import type { AppEvent } from "./events.ts";
 import { runJourney, testClock } from "./journey-sim.ts";
 import { Learner } from "./learner.ts";
 import { respond, runSession, start } from "./profile-sim.ts";
@@ -15,6 +17,7 @@ export const RDG_DETAIL = "EN.RDG.LIT.locate_detail";
 export const SVA = "EN.GRM.VERB.sva";
 export const INF = "EN.FND.SPL.inflections";
 export const SPELLING = ["EN.FND.SPL.inflections", "EN.FND.SPL.morphological", "EN.FND.SPL.homophones"];
+export const ARTICLES = "EN.GRM.NOUN.articles";
 
 const all = () => true;
 type Clock = ReturnType<typeof testClock>;
@@ -26,6 +29,15 @@ export interface Scenario {
   /** Stage names, in order; a history stops after the named stage. */
   stages: string[];
   run: (l: Learner, clock: Clock, upTo: string) => Promise<void>;
+  /** The record as an older app would have stored it (K): applied to the events before export. */
+  transform?: (events: AppEvent[]) => AppEvent[];
+}
+
+/** G's start: wrong on articles on their own, then the lesson and practice the plan offers, all right. */
+async function lessonThenPractice(l: Learner) {
+  await start(l, (i) => i.target !== ARTICLES);
+  await check(l, ARTICLES, () => false);
+  await runSession(l, l.profile().activities[0].step, all); // keep learning: the lesson, then practice
 }
 
 export const SCENARIOS: Scenario[] = [
@@ -57,7 +69,7 @@ export const SCENARIOS: Scenario[] = [
   },
   {
     key: "C",
-    label: "Finds subject–verb agreement hard, then improves after the lesson",
+    label: "Finds subject–verb agreement hard; after the lesson, right in practice (awaiting confirmation)",
     stages: ["before", "after"],
     run: async (l, _c, upTo) => {
       await start(l, (i) => i.target !== SVA);
@@ -101,6 +113,60 @@ export const SCENARIOS: Scenario[] = [
     },
   },
 ];
+
+SCENARIOS.push(
+  {
+    key: "G",
+    label: "Wrong on their own, a lesson, then right in practice straight after it: improving, not shown",
+    stages: ["after_lesson"],
+    run: async (l) => lessonThenPractice(l),
+  },
+  {
+    key: "H",
+    label: "As G, then right on fresh questions in a separate check",
+    stages: ["before", "after"],
+    run: async (l, _c, upTo) => {
+      await lessonThenPractice(l);
+      if (upTo === "before") return;
+      await runSession(l, l.profile().activities[0].step, all); // the fresh check the plan asked for
+    },
+  },
+  {
+    key: "I",
+    label: "Shown after a lesson and a fresh check, then wrong at the check ten days later",
+    stages: ["due", "after"],
+    run: async (l, clock, upTo) => {
+      await lessonThenPractice(l);
+      await runSession(l, l.profile().activities[0].step, all);
+      clock.days(10);
+      if (upTo === "due") return;
+      await check(l, ARTICLES, () => false, "retention");
+    },
+  },
+  {
+    key: "J",
+    label: "Wrong first time on every question, right on the second try (help)",
+    stages: ["profile"],
+    run: async (l) => {
+      await start(l, all);
+      await runSession(l, { type: "check", capability: ARTICLES, purpose: "assess" }, () => false, { retry: true });
+    },
+  },
+  {
+    key: "K",
+    label: "G's record as an older app stored it: no provenance and no record of the lesson",
+    stages: ["profile"],
+    run: async (l) => lessonThenPractice(l),
+    transform: (events) =>
+      events
+        .filter((e) => e.kind !== "intervention")
+        .map((e) => {
+          if (e.kind !== "evidence") return e;
+          const { provenance: _p, ...rest } = e as EvidenceEvent;
+          return rest as AppEvent;
+        }),
+  },
+);
 
 /** Build one scenario up to a stage, as a fresh learner with its own id. */
 export async function buildScenario(content: AppContent, s: Scenario, upTo: string): Promise<Learner> {

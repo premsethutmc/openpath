@@ -822,3 +822,8 @@ h3.strand {
   font-size: 1rem;
   color: var(--muted);
 }
+.more-entry {
+  display: block;
+  width: 100%;
+  margin: 1rem 0 0.5rem;
+}

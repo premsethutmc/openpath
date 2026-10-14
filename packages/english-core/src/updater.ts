@@ -90,6 +90,8 @@ export class Ledger {
   private heldSurprise = new Map<string, { band: number; proposal: string }>();
   private exposureOf = new Map<string, Exposure>();
   private interventions = new Map<string, InterventionEvent>();
+  /** session#capability → time of the first teaching (intervention) on that capability in that session. */
+  private taughtInSession = new Map<string, string>();
 
   constructor(ctx: Context, learnerId: string, revoked: Set<string> = new Set()) {
     this.ctx = ctx;
@@ -148,6 +150,10 @@ export class Ledger {
         return this.record([], event);
       case "intervention":
         this.interventions.set(event.id, event);
+        if (event.capability) {
+          const key = `${event.session}#${event.capability}`;
+          if (!this.taughtInSession.has(key)) this.taughtInSession.set(key, event.at);
+        }
         return this.record([], event);
     }
   }
@@ -214,6 +220,10 @@ export class Ledger {
       ];
     if (this.revoked.has(id)) return [{ id, at: ev.at, source: ev.id, capability: item.target, verdict: "revoked", reasons: ["revoked"], observation }];
     const params = itemParams(item);
+    // teaching on this capability earlier in this session: the answer counts for the estimate, not for demonstrating
+    const taughtAt = this.taughtInSession.get(`${ev.session}#${item.target}`);
+    const afterTeaching = taughtAt !== undefined && taughtAt <= ev.at;
+    if (afterTeaching) (observation as { setting?: "after_teaching" }).setting = "after_teaching";
     const applied = applyDirect(this.composite, this.ctx.index, {
       capability: item.target,
       at: ev.at,
@@ -224,6 +234,7 @@ export class Ledger {
       misconceptions,
       binary: { b: item.b, correct, a: params.a, c: params.c },
       exposure,
+      ...(afterTeaching ? { qualifying: false } : {}),
     });
     return [
       {
@@ -235,6 +246,7 @@ export class Ledger {
         reasons: [
           `scored by code: ${correct ? "right" : "wrong"} on an item of difficulty ${item.b}`,
           ...(exposure === "repeat" ? ["repeated item: recorded for retention only; the ability estimate is not changed"] : exposure === "variant" ? ["variant of an item seen before"] : []),
+          ...(afterTeaching ? ["answered after teaching on this capability in the same session: it updates the estimate, but cannot demonstrate, master or count as a later check"] : []),
         ],
         observation,
         before: applied.before,

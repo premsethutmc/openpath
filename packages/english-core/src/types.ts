@@ -335,7 +335,17 @@ export interface NodeState {
    * level at the end of it (null if not demonstrated). Bookkeeping only: used to
    * derive the retention schedule (retention.ts); estimates do not depend on it.
    */
-  sessions?: { session: string; at: string; level: number | null; obs?: SessionObservation[] }[];
+  sessions?: { session: string; at: string; level: number | null; obs?: SessionObservation[]; teaching?: true }[];
+  /**
+   * Qualifying evidence (teaching-setting provenance, PR #23): answers given after teaching on this capability in
+   * the same session still update the estimate exactly as before, but they never count towards demonstrating,
+   * mastery or a retention check. These counts are of qualifying answers only; for records with no teaching in a
+   * session they equal directN and contexts, so older records read exactly as before.
+   */
+  qualifyingN?: number;
+  qualifyingContexts?: string[];
+  /** The demonstrated level as of the latest qualifying answer (what the view reports between them). */
+  qualifiedLevel?: number | null;
   /** Ids of the decisions that touched this capability (newest last, at most 50). */
   evidence: string[];
 }
@@ -522,6 +532,12 @@ export interface Decision {
     exposure?: Exposure;
     /** Why the answer was collected, as recorded with the evidence. */
     use?: EvidenceUse;
+    /**
+     * after_teaching: answered, without help, in the same session after teaching on this capability (an
+     * intervention event). It updates the estimate as before but cannot demonstrate, master or count as a
+     * retention check. Absent: no teaching on this capability earlier in the session.
+     */
+    setting?: "after_teaching";
   };
   before?: { mean: number; sd: number };
   after?: { mean: number; sd: number };

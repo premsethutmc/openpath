@@ -23,6 +23,7 @@ import {
   type Standing,
   explainPlanChange,
   foundHard,
+  improvingInPractice,
   leafView,
   planDevelopment,
   scoreCode,
@@ -49,6 +50,8 @@ export interface CapabilityProfile extends CapabilitySnapshot {
   lastAssessedAt: string | null;
   /** Content the evidence came from: every independent answer so far is on draft (unreviewed) questions unless validated. */
   basis: { validated: number; draft: number };
+  /** For shown or confirmed: the level the engine currently supports (1–8); always reported with "shown". */
+  shownLevel: number | null;
   /** Notes from the plan (for example a possible unmeasured prerequisite). */
   notes: string[];
   /** The plan's recommendation for this capability, if any. */
@@ -79,27 +82,55 @@ export interface LearnerProfile {
 const SUBJECT = "English";
 export const CHECK_LENGTH = 4;
 
-const none = (): EvidenceSummary => ({ independent: 0, independentRight: 0, assisted: 0, assistedRight: 0, unknown: 0, provisional: 0, provisionalRight: 0, practiceOnly: 0 });
+const none = (): EvidenceSummary => ({ independent: 0, independentRight: 0, assisted: 0, assistedRight: 0, unknown: 0, provisional: 0, provisionalRight: 0, practiceOnly: 0, afterTeaching: 0, afterTeachingRight: 0, repeats: 0 });
+
+type Collected = { e: EvidenceSummary; ids: string[]; lastAt: string | null; lastPracticeAt: string | null; validated: number; draft: number };
 
 /** Evidence on every capability, by kind, from the ledger's own decisions and assisted responses. */
+/**
+ * Every answer on a capability, sorted by what it can stand for:
+ *
+ *   independent     accepted, provenance@1, a fresh question, and not after teaching in the same session
+ *   afterTeaching   accepted and unhelped, but in the same session after a lesson on this capability: marked by the
+ *                   ledger ("after_teaching"), or, for records made before that mark existed, answered in a session
+ *                   that opened with a lesson on this capability. Never relabelled independent.
+ *   repeats         a question seen before (the engine keeps it for later checks only)
+ *   unknown         accepted with no provenance (recorded before help was tracked)
+ *   assisted / provisional / practiceOnly   held by the ledger, as before
+ */
 function evidenceByCapability(s: AppState, c: AppContent) {
-  const out = new Map<string, { e: EvidenceSummary; ids: string[]; lastAt: string | null; validated: number; draft: number }>();
+  const out = new Map<string, Collected>();
   const get = (cap: string) => {
     let x = out.get(cap);
-    if (!x) out.set(cap, (x = { e: none(), ids: [], lastAt: null, validated: 0, draft: 0 }));
+    if (!x) out.set(cap, (x = { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0 }));
     return x;
   };
   const evidence = new Map(s.ledger.events.filter((e) => e.kind === "evidence").map((e) => [e.id, e]));
+  // sessions that opened with a lesson, by the lesson's capability (for records made before the after-teaching mark)
+  const lessonSession = (session: string | undefined, cap: string) => {
+    const lesson = session ? s.sessions.get(session)?.event.lesson : undefined;
+    return !!lesson && lesson.split("#")[0] === cap;
+  };
   for (const d of s.ledger.decisions) {
     if (!d.capability || !d.observation || d.observation.kind !== "binary") continue;
     const item = c.ctx.content.items.get(d.observation.item);
     if (!item || item.kind !== "code" || item.target !== d.capability) continue; // direct decisions only
     const x = get(d.capability);
     const right = d.observation.value === 1 ? 1 : 0;
-    const source = evidence.get(d.source) as { provenance?: unknown } | undefined;
+    const source = evidence.get(d.source) as { provenance?: unknown; session?: string } | undefined;
     if (d.verdict === "accepted") {
       if (!source?.provenance) {
         x.e.unknown++;
+        continue;
+      }
+      if (d.observation.exposure === "repeat") {
+        x.e.repeats++;
+        continue;
+      }
+      if (d.observation.setting === "after_teaching" || lessonSession(source.session, d.capability)) {
+        x.e.afterTeaching++;
+        x.e.afterTeachingRight += right;
+        x.lastPracticeAt = d.at;
         continue;
       }
       x.e.independent++;
@@ -158,19 +189,31 @@ function practiceSignal(s: AppState, c: AppContent, cap: string, now: string, sp
   return `${patternTitle(c, p.cap, p.step)}: ${p.reasons.find((r) => /misspelt|mistake/.test(r))}`;
 }
 
-function standingOf(v: ReturnType<typeof leafView>, e: EvidenceSummary, certainty: CapabilityProgress["certainty"]): Standing {
+/**
+ * The standing, from the engine's verification and the evidence by kind. "Shown" and "confirmed" also need at least
+ * the framework's demonstrated_min_direct qualifying (independent) answers: an engine demonstration that could rest
+ * on answers recorded before after-teaching tracking, or without provenance, is not reported as shown.
+ */
+function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: CapabilityProgress["certainty"], minDirect: number, demonstratedOutsideLessons: boolean): Standing {
+  const e = x.e;
+  const qualified = e.independent >= minDirect && demonstratedOutsideLessons;
   switch (v.verification.status) {
     case "failed":
       return "not_kept";
     case "overdue":
       return "check_due";
     case "verified":
-      return "confirmed";
+      if (qualified) return "confirmed";
+      break;
     case "demonstrated":
-      return "shown";
+      if (qualified) return "shown";
+      break;
   }
-  if (e.independent + e.unknown === 0) return "not_checked";
+  if (e.independent + e.unknown + e.afterTeaching === 0) return "not_checked";
+  // practice straight after a lesson, more recent than any independent answer: improving, awaiting confirmation
+  if (improvingInPractice(e) && (x.lastAt === null || (x.lastPracticeAt ?? "") > x.lastAt)) return "improving";
   if (foundHard(e)) return "found_hard";
+  if (e.independent === 0) return "uncertain";
   return certainty === "measured" ? "developing" : "uncertain";
 }
 
@@ -193,17 +236,24 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const pr = progress.get(id);
     if (!pr) return; // specified capabilities only
     const v = pr.view;
-    const x = ev.get(id) ?? { e: none(), ids: [], lastAt: null, validated: 0, draft: 0 };
-    const standing = standingOf(v, x.e, pr.certainty);
+    const x = ev.get(id) ?? { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0 };
+    // an engine demonstration counts here only if it happened in a session with no lesson on this capability
+    const lessonOn = (session: string) => (s.sessions.get(session)?.event.lesson ?? "").split("#")[0] === id;
+    const outside = s.ledger.composite.nodes[id].demonstrations.some((d) => !lessonOn(d.session));
+    const standing = standingOf(v, x, pr.certainty, c.index.framework.policy.demonstrated_min_direct, outside);
     const t = teachingFor(s, c, id, now, speech);
     teach.set(id, t);
     const strengths: string[] = [];
     const ver = v.verification;
     if (standing === "shown" || standing === "confirmed")
-      strengths.push(`${standing === "confirmed" ? "Shown on their own, and still right at a later check" : "Shown on their own"}${x.validated ? "" : " (on draft questions, not yet reviewed by a teacher)"}.`);
+      strengths.push(`${standing === "confirmed" ? "Shown on their own, and still right at a later check" : "Shown on their own, on fresh questions"}${ver.currentLevel !== null ? `, at about level ${ver.currentLevel} of 8 (a level shown, not a ceiling: harder questions may still be wrong)` : ""}${x.validated ? "" : ". On draft questions, not yet reviewed by a teacher"}.`);
     if (ver.historicalLevel !== null && standing !== "shown" && standing !== "confirmed") strengths.push("Shown earlier; not currently confirmed.");
     const difficulties: string[] = [];
+    if (standing === "improving")
+      strengths.push(`Improving in practice straight after a lesson (${x.e.afterTeachingRight} of ${x.e.afterTeaching} right). Not yet shown on their own: fresh questions without help come next.`);
     if (standing === "found_hard") difficulties.push(`Found hard so far: ${x.e.independentRight} of ${x.e.independent} right on their own.`);
+    if (x.e.afterTeaching > 0 && standing !== "improving")
+      difficulties.push(`Practice straight after a lesson: ${x.e.afterTeachingRight} of ${x.e.afterTeaching} right. Recorded, but it never counts as shown on their own.`);
     for (const m of v.misconceptions) difficulties.push(`A pattern in wrong answers: ${m.id.replace(/_/g, " ")}.`);
     const paused = id === c.journey.capability && doubling.support ? `Doubling letters: ${doubling.support}` : null;
     if (id === c.journey.capability && doubling.started) difficulties.push(`Doubling letters (provisional questions, not counted): ${doubling.status}`);
@@ -235,6 +285,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       retention,
       lastAssessedAt: v.lastDirectAt ?? x.lastAt,
       basis: { validated: x.validated, draft: x.draft },
+      shownLevel: standing === "shown" || standing === "confirmed" ? ver.currentLevel : null,
       notes: [],
       next: null,
     });
@@ -309,6 +360,9 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
       case "retention_check":
         out.push(check("check_learned", "Something you learned before: let's see if it has stuck.", "retention"));
         break;
+      case "confirm":
+        out.push(check("show_what_you_know", "New questions on what you just practised, on your own.", "assess"));
+        break;
       case "assess":
       case "next_capability":
         out.push(check("new_skill", "Something new: a few questions to see what you already know.", "assess"));
@@ -340,14 +394,22 @@ export function beforeLastActivity(events: AppEvent[]): AppEvent[] | null {
   return start > 0 ? events.slice(0, start) : null;
 }
 
-const RANK: Partial<Record<Standing, number>> = { found_hard: 0, uncertain: 1, developing: 2, shown: 3, confirmed: 4 };
+const RANK: Partial<Record<Standing, number>> = { found_hard: 0, uncertain: 1, improving: 1.5, developing: 2, shown: 3, confirmed: 4 };
 
 export interface ParentOverview {
+  /** Demonstrated independently: shown (or confirmed) on fresh questions without help. */
   shown: CapabilityProfile[];
+  /** Improving during practice straight after a lesson, awaiting confirmation on fresh questions. */
+  improving: CapabilityProfile[];
+  /** Insufficient evidence: some answers, not enough to say; or measured but not yet shown. */
   uncertain: CapabilityProfile[];
   hard: CapabilityProfile[];
+  /** Needed help: answers given with hints, second tries or guided help. */
   helped: CapabilityProfile[];
-  retention: CapabilityProfile[];
+  /** Due for a later (retention) check. */
+  due: CapabilityProfile[];
+  /** Not retained at a later check. */
+  notKept: CapabilityProfile[];
   notChecked: CapabilityProfile[];
   /** Change over time, from the record itself; never a claim about what caused it. */
   improved: string[];
@@ -369,10 +431,12 @@ export function parentOverview(p: LearnerProfile, previous: LearnerProfile | nul
   const provisional = caps.filter((x) => x.evidence.provisional > 0).map((x) => `${x.name}: ${x.evidence.provisionalRight} of ${x.evidence.provisional} right on provisional questions. These are shown for information and never count towards a level.`);
   return {
     shown: caps.filter((x) => x.standing === "shown" || x.standing === "confirmed"),
+    improving: caps.filter((x) => x.standing === "improving"),
     uncertain: caps.filter((x) => x.standing === "uncertain" || x.standing === "developing"),
     hard: caps.filter((x) => x.standing === "found_hard"),
     helped: caps.filter((x) => x.evidence.assisted > 0),
-    retention: caps.filter((x) => x.standing === "check_due" || x.standing === "not_kept"),
+    due: caps.filter((x) => x.standing === "check_due"),
+    notKept: caps.filter((x) => x.standing === "not_kept"),
     notChecked: caps.filter((x) => x.standing === "not_checked"),
     improved,
     changes: previous ? explainPlanChange({ plan: previous.plan, capabilities: previous.capabilities }, { plan: p.plan, capabilities: p.capabilities }) : ["This is the first plan: there is no earlier activity to compare with."],

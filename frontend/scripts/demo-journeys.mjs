@@ -63,6 +63,7 @@ async function run(key, L) {
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Create and start" }).click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("button", { name: /doubling letters/ }).click();
 
   const taught = [];
@@ -141,7 +142,8 @@ async function run(key, L) {
     await page.evaluate((d) => localStorage.setItem("openpath-english-clock-offset-days", String(d)), L.returnAfterDays);
     await page.reload();
     await page.getByRole("heading", { name: "Today" }).waitFor();
-    await page.getByRole("button", { name: /doubling letters/ }).click();
+    await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("button", { name: /doubling letters/ }).click();
     for (let k = 0; k < 2; k++) {
       await page.locator('[data-step="question"][data-purpose="retention"]').waitFor({ timeout: 8000 });
       const item = items.get(await page.locator(".item").getAttribute("data-item"));

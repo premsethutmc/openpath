@@ -13,7 +13,8 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 import { loadContent } from "../src/english/logic/content.ts";
-import { INF, RDG_DETAIL, RDG_MAIN, SCENARIOS, SPELLING, SVA, buildScenario } from "../src/english/logic/profile-scenarios.ts";
+import { exportBackup } from "../src/english/logic/backup.ts";
+import { ARTICLES, INF, RDG_DETAIL, RDG_MAIN, SCENARIOS, SPELLING, SVA, buildScenario } from "../src/english/logic/profile-scenarios.ts";
 
 const URL = process.env.E2E_URL ?? "http://127.0.0.1:4174";
 const OUT = new globalThis.URL("../out/profile-demo/", import.meta.url).pathname;
@@ -32,6 +33,7 @@ interface Captured {
   label: string;
   shots: Shot[];
   activities: { kind: string; capability: string; title: string }[];
+  todayText: string;
   recommendations: { action: string; capability: string; evidence: string }[];
   overview: string;
 }
@@ -46,7 +48,8 @@ for (const s of SCENARIOS)
     const l = await buildScenario(content, s, stage);
     const now = l.clock();
     const file = `${OUT}backups/${s.key}-${stage}.json`;
-    writeFileSync(file, JSON.stringify(l.backup(), null, 1));
+    const events = s.transform ? s.transform(l.events) : l.events;
+    writeFileSync(file, JSON.stringify(exportBackup(events, content.index.key, now), null, 1));
     const context = await browser.newContext(PHONE);
     const page = await context.newPage();
     const errors: string[] = [];
@@ -66,6 +69,7 @@ for (const s of SCENARIOS)
     };
     await shot("today", "Today: what the child sees");
     const activities = await page.locator(".plan li").evaluateAll((els) => els.map((e) => ({ kind: e.getAttribute("data-activity") ?? "", capability: e.getAttribute("data-capability") ?? "", title: e.querySelector("h2")?.textContent ?? "" })));
+    const todayText = await page.locator("main").innerText();
     const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
     const small = await page.evaluate(() => [...document.querySelectorAll("button")].filter((b) => !b.classList.contains("link") && (b as HTMLElement).offsetParent !== null && b.getBoundingClientRect().height < 40).map((b) => b.textContent));
     await page.getByRole("button", { name: "Progress" }).click();
@@ -80,7 +84,7 @@ for (const s of SCENARIOS)
     if (!fits) problems.push(`${s.key}-${stage}: the page is wider than the phone`);
     if (small.length) problems.push(`${s.key}-${stage}: buttons too small to tap: ${small.join(", ")}`);
     if (errors.length) problems.push(`${s.key}-${stage}: ${errors.join("; ")}`);
-    captured.push({ key: s.key, stage, label: s.label, shots, activities, recommendations, overview });
+    captured.push({ key: s.key, stage, label: s.label, shots, activities, todayText, recommendations, overview });
     await context.close();
   }
 await browser.close();
@@ -95,10 +99,17 @@ const checks: [string, boolean][] = [
   ["B after: the prerequisite is shown; main idea goes to an adult (no reading lessons), never offered as an activity", !caps("B", "after").includes(RDG_MAIN) && get("B", "after").recommendations.some((r) => r.action === "human_review" && r.capability === RDG_MAIN)],
   ["B after: the overview explains why the plan changed", /No longer planned: Check .* first/.test(get("B", "after").overview)],
   ["C before: a lesson on subject–verb agreement first", acts("C", "before")[0]?.kind === "keep_learning" && acts("C", "before")[0]?.capability === SVA],
-  ["C after: no more remediation; the change is shown, with no causal claim", !get("C", "after").recommendations.some((r) => r.action === "teach" && r.capability === SVA) && /does not show what caused it/.test(get("C", "after").overview)],
+  ["C after: right in practice after the lesson is 'improving, awaiting confirmation', not shown; next a fresh check; no causal claim", get("C", "after").recommendations[0]?.action === "confirm" && /Improving during practice, awaiting confirmation\s*Subject–verb agreement/.test(get("C", "after").overview) && !/Demonstrated independently\s*[^\n]*Subject–verb agreement/.test(get("C", "after").overview) && /does not show what caused it/.test(get("C", "after").overview)],
+  ["G: after the lesson and right practice, Articles is improving (not shown) and the child's next activity is fresh questions on it", acts("G", "after_lesson")[0]?.capability === ARTICLES && acts("G", "after_lesson")[0]?.kind === "show_what_you_know" && /Improving during practice, awaiting confirmation\s*Articles/.test(get("G", "after_lesson").overview)],
+  ["H: right on fresh questions after the lesson: Articles moves on by the existing rules (no more confirmation or teaching)", !get("H", "after").recommendations.some((r) => r.capability === ARTICLES && (r.action === "confirm" || r.action === "teach")) && !/Improving during practice, awaiting confirmation\s*Articles/.test(get("H", "after").overview)],
+  ["I: shown, then wrong at the check ten days later: refreshing Articles comes first", acts("I", "due")[0]?.kind === "check_learned" && get("I", "after").recommendations[0]?.action === "refresh" && get("I", "after").recommendations[0]?.capability === ARTICLES && /Not kept at a later check\s*Articles/.test(get("I", "after").overview)],
+  ["J: second tries are help, not independent: listed under 'Needed help'; only the first answers count on their own (4 wrong at the check)", /Needed help\s*Articles: right with help 4 of 4 times; on their own 2 of 6/.test(get("J", "profile").overview)],
+  ["'shown' always states the level shown (J: Articles at level 3 after 4 wrong on harder questions), never an unqualified claim", captured.every((c) => !/Demonstrated independently\s*\n(?!Nothing)[^\n]*\.\n/.test(c.overview) || /level \d/.test(c.overview)) && /Articles: at about level 3 of 8/.test(get("J", "profile").overview)],
+  ["K: an old record (no provenance, no lesson record) is never relabelled independent or shown", !/Demonstrated independently\s*[^\n]*Articles/.test(get("K", "profile").overview) && !/Improving during practice, awaiting confirmation\s*Articles/.test(get("K", "profile").overview)],
+  ["one Today plan: no second plan, no doubling card, a single 'More practice' entry", captured.every((c) => !/Spelling patterns|Your spelling plan|Doubling letters \(new/.test(c.todayText) && /More practice/.test(c.todayText))],
   ["D due: a check of what was learned comes first", acts("D", "due")[0]?.kind === "check_learned" && acts("D", "due")[0]?.capability === SVA],
   ["D after: refreshing it comes first", get("D", "after").recommendations[0]?.action === "refresh" && get("D", "after").recommendations[0]?.capability === SVA],
-  ["E: help is not mastery: the spelling rule is not offered as secure, help is shown apart, an adult is asked", !caps("E", "profile").includes(INF) && /Where help was needed[\s\S]*right with help/.test(get("E", "profile").overview) && get("E", "profile").recommendations.some((r) => r.capability === INF && r.action === "human_review")],
+  ["E: help is not mastery: the spelling rule is not offered as secure, help is shown apart, an adult is asked", !caps("E", "profile").includes(INF) && /Needed help[\s\S]*right with help/.test(get("E", "profile").overview) && get("E", "profile").recommendations.some((r) => r.capability === INF && r.action === "human_review")],
   ["F: an initial assessment only; nothing called hard", acts("F", "profile").length === 1 && /Find your starting point/.test(acts("F", "profile")[0].title) && /Found hard so far\s*Nothing/.test(get("F", "profile").overview)],
   ["every recommendation the child can start carries the evidence ids behind it, except first looks", captured.every((c) => c.recommendations.filter((r) => r.action !== "assess" && r.action !== "initial_assessment").every((r) => r.evidence.length > 0))],
   ["no screen shows a percentile, IQ, ranking or probability", captured.every((c) => !/percentile|\bIQ\b|rank|probabilit|%/i.test(c.overview))],

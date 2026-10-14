@@ -4,9 +4,9 @@
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { type CapabilitySnapshot, type EvidenceSummary, type Standing, explainPlanChange, foundHard, planDevelopment } from "../src/index.ts";
+import { type CapabilitySnapshot, type EvidenceSummary, type Standing, explainPlanChange, foundHard, improvingInPractice, planDevelopment } from "../src/index.ts";
 
-const none: EvidenceSummary = { independent: 0, independentRight: 0, assisted: 0, assistedRight: 0, unknown: 0, provisional: 0, provisionalRight: 0, practiceOnly: 0 };
+const none: EvidenceSummary = { independent: 0, independentRight: 0, assisted: 0, assistedRight: 0, unknown: 0, provisional: 0, provisionalRight: 0, practiceOnly: 0, afterTeaching: 0, afterTeachingRight: 0, repeats: 0 };
 let order = 0;
 function cap(id: string, standing: Standing, e: Partial<EvidenceSummary> = {}, more: Partial<CapabilitySnapshot> = {}): CapabilitySnapshot {
   return { id, name: id.split(".").at(-1)!, strand: id.split(".").slice(0, 2).join("."), order: order++, standing, evidence: { ...none, ...e }, evidenceIds: e.independent ? [`${id}:e1`] : [], lastAt: null, content: { assess: 5, teach: null }, ...more };
@@ -111,7 +111,7 @@ test("D1-11 the change explanation names the standing that changed and the actio
   order = 0;
   const after = [...shownSpelling(), cap("EN.RDG.LIT.locate_detail", "shown", { independent: 5, independentRight: 5 }), cap("EN.RDG.SUM.main_idea", "found_hard", { independent: 4, independentRight: 0 })];
   const lines = explainPlanChange({ plan: planDevelopment({ capabilities: before, requires }), capabilities: before }, { plan: planDevelopment({ capabilities: after, requires }), capabilities: after });
-  assert.match(lines[0], /locate_detail: not checked yet → shown on their own/);
+  assert.match(lines[0], /locate_detail: not checked yet \(no answers\) → shown on their own, on fresh questions/);
   assert.ok(lines.some((l) => /No longer planned: Check locate_detail first/.test(l)));
   assert.ok(lines.some((l) => /Now planned: Ask a teacher or parent to look at main_idea/.test(l)));
 });
@@ -120,4 +120,22 @@ test("D1-12 'found hard' needs enough independent answers: two wrong answers are
   assert.equal(foundHard({ independent: 2, independentRight: 0 }), false);
   assert.equal(foundHard({ independent: 3, independentRight: 0 }), true);
   assert.equal(foundHard({ independent: 6, independentRight: 3 }), false);
+});
+
+test("D1-13 right in practice straight after a lesson: 'improving', and the next step is a fresh check without help, never progression", () => {
+  order = 0;
+  const caps = [...shownSpelling(), cap("EN.RDG.LIT.locate_detail", "improving", { independent: 5, independentRight: 0, afterTeaching: 5, afterTeachingRight: 5 }), cap("EN.RDG.SUM.main_idea", "not_checked")];
+  const plan = planDevelopment({ capabilities: caps, requires });
+  assert.deepEqual([plan.today[0].action, plan.today[0].capability], ["confirm", "EN.RDG.LIT.locate_detail"]);
+  assert.match(plan.today[0].why, /not independent mastery/);
+  assert.ok(!plan.all.some((r) => r.action === "next_capability"), "nothing is built on practice straight after a lesson");
+  order = 0;
+  const exhausted = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "improving", { independent: 5, afterTeaching: 5, afterTeachingRight: 5 }, { content: { assess: 0, teach: "lesson" } })], requires });
+  assert.ok(exhausted.forAdults.some((r) => r.capability === "EN.GRM.VERB.sva"));
+});
+
+test("D1-14 'improving in practice' needs enough practice answers, mostly right", () => {
+  assert.equal(improvingInPractice({ afterTeaching: 2, afterTeachingRight: 2 }), false);
+  assert.equal(improvingInPractice({ afterTeaching: 5, afterTeachingRight: 5 }), true);
+  assert.equal(improvingInPractice({ afterTeaching: 6, afterTeachingRight: 3 }), false);
 });

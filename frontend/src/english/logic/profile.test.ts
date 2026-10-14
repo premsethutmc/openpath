@@ -13,6 +13,7 @@ import { onCaps, runSession, start } from "./profile-sim.ts";
 import { MemoryRepo } from "./store.ts";
 import { fold } from "./state.ts";
 import { learnerProfile } from "./profile.ts";
+import { leafView } from "../../../../packages/english-core/src/index.ts";
 
 const content = loadContent();
 const all = () => true;
@@ -121,7 +122,7 @@ test("B2: a hard capability whose prerequisite is also hard and has no lessons: 
   assert.ok(!p.activities.some((a) => a.step.capability === RDG_MAIN || a.step.capability === RDG_DETAIL));
 });
 
-test("C: improves after teaching: the plan changes from teaching to new areas, and the change is explained without a causal claim", async () => {
+test("C / G: wrong on their own, a lesson, right in practice straight after it: 'improving, awaiting confirmation', never 'shown'; the next step is a fresh check", async () => {
   const { l, repo } = await newLearner("C");
   await start(l, (i) => i.target !== SVA);
   await check(l, SVA, () => false);
@@ -130,12 +131,97 @@ test("C: improves after teaching: the plan changes from teaching to new areas, a
   assert.deepEqual([p.activities[0].kind, p.activities[0].step.type, p.activities[0].step.capability], ["keep_learning", "guided", SVA]);
   await runSession(l, p.activities[0].step, all); // the lesson, then practice, all right
   p = l.profile();
-  assert.ok(["shown", "developing", "uncertain"].includes(cap(l, SVA).standing));
-  assert.ok(!p.plan.today.some((r) => r.capability === SVA && r.action === "teach"), "no more remediation");
+  const sva = cap(l, SVA);
+  assert.equal(sva.standing, "improving");
+  assert.ok(sva.evidence.afterTeaching >= 3 && sva.evidence.afterTeachingRight === sva.evidence.afterTeaching);
+  assert.equal(sva.evidence.independentRight, 0, "practice after the lesson is never counted as independent");
+  assert.notEqual(leafView(l.state.ledger.composite, content.index, SVA, l.clock()).verification.status, "demonstrated");
+  assert.match(sva.strengths[0], /Not yet shown on their own/);
+  assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability], ["confirm", SVA]);
+  assert.deepEqual([p.activities[0].kind, p.activities[0].step.type, p.activities[0].step.capability, p.activities[0].step.purpose], ["show_what_you_know", "check", SVA, "assess"]);
   const { overview } = l.overview();
+  assert.ok(overview.improving.some((x) => x.id === SVA));
+  assert.ok(!overview.shown.some((x) => x.id === SVA));
   assert.ok(overview.changes.some((t) => /No longer planned: Learn Subject–verb agreement/.test(t)));
-  assert.ok(overview.improved.some((t) => /Subject–verb agreement: found hard so far on .*, .* now/.test(t)), overview.improved.join(" | "));
+  assert.ok(overview.improved.some((t) => /Subject–verb agreement: found hard so far on .*, improving in practice, awaiting confirmation now/.test(t)), overview.improved.join(" | "));
   await assertReplay(l, repo);
+});
+
+test("H: after the lesson, right on fresh questions in a separate check: the skill can be shown by the existing rules", async () => {
+  const { l, repo } = await newLearner("H");
+  await start(l, (i) => i.target !== SVA);
+  await check(l, SVA, () => false);
+  await runSession(l, l.profile().activities[0].step, all); // lesson and practice
+  await runSession(l, l.profile().activities[0].step, all); // the fresh check the plan asked for
+  const sva = cap(l, SVA);
+  assert.ok(["shown", "developing"].includes(sva.standing), sva.standing);
+  assert.ok(sva.evidence.independentRight >= 3);
+  if (sva.standing === "shown") assert.ok(sva.shownLevel !== null && /at about level \d/.test(sva.strengths[0]), "shown always carries the level shown");
+  assert.ok(!l.profile().plan.all.some((r) => r.capability === SVA && (r.action === "confirm" || r.action === "teach")));
+  await assertReplay(l, repo);
+});
+
+test("I: shown after teaching and a fresh check, then wrong at the check ten days later: refreshing comes first", async () => {
+  const clock = testClock();
+  const { l, repo } = await newLearner("I", clock);
+  await start(l, (i) => i.target !== SVA);
+  await check(l, SVA, () => false);
+  await runSession(l, l.profile().activities[0].step, all);
+  await runSession(l, l.profile().activities[0].step, all);
+  if (cap(l, SVA).standing !== "shown") await check(l, SVA, all);
+  assert.equal(cap(l, SVA).standing, "shown");
+  clock.days(10);
+  assert.equal(cap(l, SVA).standing, "check_due");
+  await check(l, SVA, () => false, "retention");
+  const p = l.profile();
+  assert.equal(cap(l, SVA).standing, "not_kept");
+  assert.deepEqual([p.plan.today[0].action, p.plan.today[0].capability], ["refresh", SVA]);
+  await assertReplay(l, repo);
+});
+
+test("J: second attempts and hints add no independent proficiency: the estimate and independent counts match a learner who never retried", async () => {
+  const retried = await newLearner("J1");
+  const plain = await newLearner("J2");
+  for (const x of [retried, plain]) await start(x.l, all);
+  await runSession(retried.l, { type: "check", capability: SVA, purpose: "assess" }, () => false, { retry: true });
+  await runSession(plain.l, { type: "check", capability: SVA, purpose: "assess" }, () => false);
+  // the same estimate: the retries are held. (They take extra minutes on the test clock, and the engine grows
+  // uncertainty with time, so the numbers agree to well within 0.001 rather than to the last digit.)
+  const ra = retried.l.state.ledger.composite.nodes[SVA].direct;
+  const pa = plain.l.state.ledger.composite.nodes[SVA].direct;
+  assert.ok(Math.abs(ra.mean - pa.mean) < 1e-3 && Math.abs(ra.variance - pa.variance) < 1e-3, `${JSON.stringify(ra)} vs ${JSON.stringify(pa)}`);
+  assert.equal(retried.l.state.ledger.decisions.filter((d) => d.capability === SVA && d.verdict === "accepted").length, plain.l.state.ledger.decisions.filter((d) => d.capability === SVA && d.verdict === "accepted").length);
+  const a = cap(retried.l, SVA);
+  const b = cap(plain.l, SVA);
+  assert.deepEqual([a.evidence.independent, a.evidence.independentRight], [b.evidence.independent, b.evidence.independentRight]);
+  assert.ok(a.evidence.assisted > 0 && a.evidence.assistedRight === a.evidence.assisted, "the retries are recorded as help");
+  assert.equal(a.standing, b.standing);
+});
+
+test("K: historical records without provenance, or from before lessons were tracked, are never relabelled independent", async () => {
+  const { l } = await newLearner("K");
+  await start(l, (i) => i.target !== SVA);
+  await check(l, SVA, () => false);
+  await runSession(l, l.profile().activities[0].step, all); // lesson and practice
+  // the same record as an older app would have stored it: no interventions (before lessons were tracked)
+  const beforeTracking = l.events.filter((e) => e.kind !== "intervention");
+  const p1 = learnerProfile(fold(content, beforeTracking), content, l.clock());
+  const k1 = p1.capabilities.find((x) => x.id === SVA)!;
+  assert.ok(k1.evidence.afterTeaching > 0, "answers in a session that opened with a lesson are practice after teaching");
+  assert.ok(!["shown", "confirmed"].includes(k1.standing), k1.standing);
+  // and with no provenance at all: assistance unknown, never independent, never shown
+  const noProvenance = beforeTracking.map((e) => {
+    if (e.kind !== "evidence") return e;
+    const { provenance: _p, ...rest } = e;
+    return rest;
+  });
+  const p2 = learnerProfile(fold(content, noProvenance as typeof beforeTracking), content, l.clock());
+  const k2 = p2.capabilities.find((x) => x.id === SVA)!;
+  assert.equal(k2.evidence.independent, 0);
+  assert.ok(k2.evidence.unknown > 0);
+  assert.ok(!["shown", "confirmed", "found_hard"].includes(k2.standing), k2.standing);
+  // the engine's own estimate for the old record is unchanged by this release (historical interpretation preserved)
+  assert.equal(fold(content, noProvenance as typeof beforeTracking).ledger.decisions.filter((d) => d.observation?.setting).length, 0);
 });
 
 test("D: shown, then wrong at a later check: refreshing it comes first", async () => {

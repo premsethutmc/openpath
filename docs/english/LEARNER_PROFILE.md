@@ -138,13 +138,13 @@ checks pass.
    - three activities a day.
 5. **Questions run out.** At 4 per check, a capability's 12–19 questions last 3–4 checks. Exhaustion is reported to an
    adult, but more questions are needed for longer use.
-6. **"Shown" can follow a single lesson session.** Practice answers after a lesson are first, unhelped answers, so the
-   engine counts them (existing behaviour). The later check guards this, but a reviewer should decide whether answers
-   given just after teaching should count.
+6. ~~"Shown" can follow a single lesson session.~~ **Fixed in PR #23**: practice straight after a lesson is
+   "improving, awaiting confirmation"; only fresh independent answers outside a lesson can establish "shown". See
+   `EVIDENCE_AFTER_TEACHING.md`.
 7. **A stopped starting point counts as "done"** in the existing app. The new plan now detects too little evidence and
    offers it again; the older spelling gating still follows the old rule.
-8. **The Today page still lists older sections** (the doubling card, the spelling plan, "More practice") below the three
-   activities. For children these should probably move behind a "More" link: a design decision for you.
+8. ~~The Today page still lists older sections.~~ **Fixed in PR #23**: Today shows only the plan; the doubling
+   journey, spelling patterns and "questions from anywhere" are behind one "More practice" entry.
 9. **No accounts, no multi-device sync, no teacher view:** by design for now. The pilot would run on one device per
    child.
 10. **Only English.** The plan is subject-neutral, but no other subject has a framework or content.

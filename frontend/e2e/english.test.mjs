@@ -144,7 +144,12 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan now offers spelling practice with a lesson
   await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
-  await page.getByText("Your spelling plan").waitFor();
+  // one plan on Today; the spelling patterns list lives behind "More practice"
+  assert.equal(await page.getByText("Spelling patterns").count(), 0);
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("heading", { name: "Spelling patterns" }).waitFor();
+  await page.getByRole("button", { name: /Back to today/ }).click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
   await shot(page, "3-plan");
   await page.locator(".plan li", { hasText: "Spelling:" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".lesson").waitFor();
@@ -304,6 +309,7 @@ async function journeyAnswer(page, right) {
 test("the doubling journey on a phone: check, diagnosis, a lesson, help that is marked as help, a new approach, independent words, summary", async () => {
   const { context, page, errors, foreign } = await phone();
   await createProfile(page, "Ravi");
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("button", { name: "Try doubling letters" }).click();
   // two independent questions, both wrong (never doubles)
   for (let k = 0; k < 2; k++) {
@@ -419,6 +425,18 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   const labels = await page.locator(".plan .kicker").allTextContents();
   for (const l of labels) assert.ok(["Keep learning", "Check something you learned", "Try a new skill", "Show what you know", "Let's begin"].includes(l), l);
   assert.doesNotMatch(await page.locator(".plan").innerText(), /%|band|estimate|probabilit/i);
+  // one plan: the older sections are behind a single "More practice" entry, and work from there
+  const today = await page.locator("main").innerText();
+  assert.doesNotMatch(today, /Spelling patterns|Your spelling plan|Doubling letters \(new/);
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("heading", { name: "More practice", level: 1 }).waitFor();
+  await page.getByRole("button", { name: "Try doubling letters" }).waitFor();
+  await page.getByRole("button", { name: "Start more practice" }).waitFor();
+  await shot(page, "p1b-more-practice");
+  await fits(page);
+  await tappable(page);
+  await page.getByRole("button", { name: /Back to today/ }).click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
   await shot(page, "p1-today-plan");
   await fits(page);
   await tappable(page);
@@ -433,7 +451,7 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   // the grown-up link leads to the overview: what is shown, unsure, hard, helped, next, and why the plan changed
   await page.getByRole("button", { name: "For a grown-up: why these?" }).click();
   await page.locator(".overview").waitFor();
-  for (const part of ["shown", "uncertain", "hard", "helped", "retention", "improved", "next", "changes", "not-checked"]) assert.equal(await page.locator(`.overview [data-part="${part}"]`).count(), 1, part);
+  for (const part of ["shown", "improving", "uncertain", "hard", "helped", "due", "not-kept", "improved", "next", "changes", "not-checked"]) assert.equal(await page.locator(`.overview [data-part="${part}"]`).count(), 1, part);
   const overview = await page.locator(".overview").innerText();
   assert.match(overview, /Why the plan changed/);
   assert.match(overview, /not a weakness|says nothing about how well/);

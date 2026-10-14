@@ -12,10 +12,35 @@ export function ParentOverviewView({ profile, overview }: { profile: LearnerProf
     <section className="overview" aria-labelledby="overview-title">
       <h2 id="overview-title">Overview for a parent or teacher</h2>
       <dl>
-        <dt>Shown on their own</dt>
-        <dd data-part="shown">{o.shown.length ? names(o.shown) : "Nothing yet."}</dd>
-        <dt>Not sure yet</dt>
-        <dd data-part="uncertain">{o.uncertain.length ? `${names(o.uncertain)}. A few more answers will tell.` : "Nothing."}</dd>
+        <dt>Demonstrated independently</dt>
+        <dd data-part="shown">
+          {o.shown.length ? (
+            <>
+              <ul>
+                {o.shown.map((x) => (
+                  <li key={x.id}>{`${x.name}${x.shownLevel !== null ? `: at about level ${x.shownLevel} of 8` : ""}.`}</li>
+                ))}
+              </ul>
+              <p className="small">Shown on fresh questions, without help, outside a lesson. The level is what has been shown, not a ceiling: harder questions at that skill may still be wrong.</p>
+            </>
+          ) : (
+            "Nothing yet."
+          )}
+        </dd>
+        <dt>Improving during practice, awaiting confirmation</dt>
+        <dd data-part="improving">
+          {o.improving.length ? (
+            <ul>
+              {o.improving.map((x) => (
+                <li key={x.id}>{`${x.name}: ${x.evidence.afterTeachingRight} of ${x.evidence.afterTeaching} right in practice straight after a lesson. That is improvement, not yet independent: fresh questions without help come next.`}</li>
+              ))}
+            </ul>
+          ) : (
+            "Nothing at the moment."
+          )}
+        </dd>
+        <dt>Insufficient evidence</dt>
+        <dd data-part="uncertain">{o.uncertain.length ? `${names(o.uncertain)}. Not enough answers on their own to say yet.` : "Nothing."}</dd>
         <dt>Found hard so far</dt>
         <dd data-part="hard">
           {o.hard.length ? (
@@ -36,10 +61,12 @@ export function ParentOverviewView({ profile, overview }: { profile: LearnerProf
             "Nothing."
           )}
         </dd>
-        <dt>Where help was needed</dt>
+        <dt>Needed help</dt>
         <dd data-part="helped">{o.helped.length ? <ul>{o.helped.map((x) => <li key={x.id}>{`${x.name}: right with help ${x.evidence.assistedRight} of ${x.evidence.assisted} times; on their own ${x.evidence.independentRight} of ${x.evidence.independent}. Help is recorded, but only answers on their own show what is secure.`}</li>)}</ul> : "No help used so far."}</dd>
-        <dt>Remembered later</dt>
-        <dd data-part="retention">{o.retention.length ? <ul>{o.retention.map((x) => <li key={x.id}>{`${x.name}: ${x.retention}`}</li>)}</ul> : "Nothing due for a check."}</dd>
+        <dt>Due for a later check</dt>
+        <dd data-part="due">{o.due.length ? <ul>{o.due.map((x) => <li key={x.id}>{`${x.name}: ${x.retention}`}</li>)}</ul> : "Nothing due."}</dd>
+        <dt>Not kept at a later check</dt>
+        <dd data-part="not-kept">{o.notKept.length ? <ul>{o.notKept.map((x) => <li key={x.id}>{`${x.name}: ${x.retention}`}</li>)}</ul> : "Nothing."}</dd>
         <dt>What has changed</dt>
         <dd data-part="improved">
           {o.improved.length ? <ul>{o.improved.map((t, i) => <li key={i}>{t}</li>)}</ul> : "No change to report yet."}
@@ -86,7 +113,7 @@ export function ParentOverviewView({ profile, overview }: { profile: LearnerProf
         </ul>
       )}
       <p className="small">
-        Every question so far is draft content that teachers have not reviewed yet, so "shown" means shown on draft questions, not a validated result. This describes answers and how sure we are about them. It is not a score of ability or potential, and it is never compared with other
+        Every question so far is draft content that teachers have not reviewed yet, so "shown" means shown on draft questions, not a validated result. The rules behind the plan and these labels are drafts too (development-policy@0-draft), not yet reviewed by an educator. This describes answers and how sure we are about them. It is not a score of ability or potential, and it is never compared with other
         children.
       </p>
     </section>
@@ -124,6 +151,7 @@ export function CapabilityCard({ cap }: { cap: CapabilityProfile }) {
         {cap.subject} · {cap.strand} · <strong>{STANDING_WORDS[cap.standing]}</strong>
       </p>
       <p>{cap.estimate.headline}</p>
+      {cap.evidence.afterTeaching > 0 && <p className="small note">{`This estimate includes ${cap.evidence.afterTeaching} answer${cap.evidence.afterTeaching === 1 ? "" : "s"} given straight after a lesson. They can raise the estimate but never make the skill "shown".`}</p>}
       <p className="small evidence">
         Evidence: {evidenceLine(cap)}
         {cap.evidence.practiceOnly ? "; practice words are recorded but not counted until checked" : ""}.{cap.basis.draft ? " All on draft questions." : ""}

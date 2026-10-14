@@ -278,13 +278,10 @@ const STATUS_WORDS: Record<string, string> = {
 };
 
 function Today({ learner, onStart, onResume, onJourney, onWhy }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void }) {
-  const now = learner.clock();
+  const [more, setMore] = useState(false);
   const activities = learner.profile().activities;
   const open = learner.state.open;
-  const s = learner.state;
-  const words = [...s.words.values()];
-  const due = dueWords(s, now).length;
-  const spelling: PatternPlan[] = s.sessions.size > 1 ? spellingPlan(s, learner.content, now, learner.speech).slice(0, 4) : [];
+  if (more) return <MorePractice learner={learner} onStart={onStart} onJourney={onJourney} onBack={() => setMore(false)} />;
   return (
     <main className="page" aria-labelledby="today-title">
       <h1 id="today-title">Today</h1>
@@ -313,11 +310,34 @@ function Today({ learner, onStart, onResume, onJourney, onWhy }: { learner: Lear
         ))}
       </ol>
       {activities.length === 0 && <p>Nothing new to do today: everything that can be checked has been. A grown-up can see why on the Progress page.</p>}
+      <button type="button" className="secondary more-entry" onClick={() => setMore(true)}>
+        More practice
+      </button>
       <p className="small">
         <button type="button" className="link" onClick={onWhy}>
           For a grown-up: why these?
         </button>
       </p>
+    </main>
+  );
+}
+
+/** Extra practice, apart from Today's plan: the doubling journey, spelling patterns and questions from anywhere. Nothing here is a second plan. */
+function MorePractice({ learner, onStart, onJourney, onBack }: { learner: Learner; onStart: (s: PlanStep) => void; onJourney: () => void; onBack: () => void }) {
+  const now = learner.clock();
+  const s = learner.state;
+  const words = [...s.words.values()];
+  const due = dueWords(s, now).length;
+  const spelling: PatternPlan[] = s.sessions.size > 1 ? spellingPlan(s, learner.content, now, learner.speech).slice(0, 4) : [];
+  return (
+    <main className="page" aria-labelledby="more-practice-title">
+      <p>
+        <button type="button" className="link" onClick={onBack}>
+          ← Back to today
+        </button>
+      </p>
+      <h1 id="more-practice-title">More practice</h1>
+      <p className="small">Extra things to try. Today's list chooses what matters most; these are for when you want more.</p>
       <section className="journey-card" aria-labelledby="journey-card-title">
         <h2 id="journey-card-title">Doubling letters (new, adaptive)</h2>
         <p>hop → hopping, stop → stopped. A few questions on your own, then teaching that changes if it is not working, then new words on your own.</p>
@@ -328,7 +348,7 @@ function Today({ learner, onStart, onResume, onJourney, onWhy }: { learner: Lear
       </section>
       {spelling.length > 0 && (
         <section aria-labelledby="spelling-plan">
-          <h2 id="spelling-plan">Your spelling plan</h2>
+          <h2 id="spelling-plan">Spelling patterns</h2>
           <ul className="patterns">
             {spelling.map((p) => (
               <li key={`${p.cap}#${p.step}`}>
@@ -342,15 +362,13 @@ function Today({ learner, onStart, onResume, onJourney, onWhy }: { learner: Lear
           </p>
         </section>
       )}
-      {s.sessions.size > 0 && (
-        <section className="more" aria-labelledby="more-title">
-          <h2 id="more-title">More practice</h2>
-          <p>Ten questions from any part of English: reading, writing, sentences and more. These areas have no lessons yet; the questions find out what to teach next.</p>
-          <button type="button" className="secondary" onClick={() => onStart({ type: "explore", title: "More practice", reason: "" })}>
-            Start more practice
-          </button>
-        </section>
-      )}
+      <section className="more" aria-labelledby="more-title">
+        <h2 id="more-title">Questions from anywhere</h2>
+        <p>Ten questions from any part of English: reading, writing, sentences and more.</p>
+        <button type="button" className="secondary" onClick={() => onStart({ type: "explore", title: "More practice", reason: "" })}>
+          Start more practice
+        </button>
+      </section>
     </main>
   );
 }

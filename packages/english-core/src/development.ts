@@ -20,12 +20,16 @@ import { betaCdf } from "./rule-evidence.ts";
  * Where the evidence on a capability stands, in plain categories (derived by the caller from the engine):
  * not_checked: no independent answers; uncertain: some, not enough to say; developing: measured, not yet
  * shown; found_hard: most independent answers wrong; shown / confirmed: the engine's demonstrated / verified;
- * check_due: a retention check is overdue; not_kept: the latest retention check failed.
+ * check_due: a retention check is overdue; not_kept: the latest retention check failed; improving: right in
+ * practice straight after a lesson, awaiting independent confirmation on fresh questions (never "shown").
  */
-export type Standing = "not_checked" | "uncertain" | "developing" | "found_hard" | "shown" | "confirmed" | "check_due" | "not_kept";
+export type Standing = "not_checked" | "uncertain" | "developing" | "found_hard" | "improving" | "shown" | "confirmed" | "check_due" | "not_kept";
 
 export interface EvidenceSummary {
-  /** First answers, no help, on reviewed or candidate content: the only answers that move an estimate. */
+  /**
+   * Qualifying independent answers: first answers, no help, fresh (not repeated) questions on reviewed or candidate
+   * content, and not after teaching in the same session. Only these can establish "shown".
+   */
   independent: number;
   independentRight: number;
   /** Answers given with help: hints, second tries, guided practice. Recorded, never evidence of independence. */
@@ -38,6 +42,11 @@ export interface EvidenceSummary {
   provisionalRight: number;
   /** Answers on practice-only content (generated words not yet checked). */
   practiceOnly: number;
+  /** First answers without help, given in the same session after a lesson on this capability: improvement, not independence. */
+  afterTeaching: number;
+  afterTeachingRight: number;
+  /** Repeated questions: kept for later checks, never new evidence. */
+  repeats: number;
 }
 
 export interface CapabilitySnapshot {
@@ -75,6 +84,7 @@ export type DevelopmentAction =
   | "teach_prerequisite"
   | "teach"
   | "independent_check"
+  | "confirm"
   | "reassess"
   | "continue"
   | "next_capability"
@@ -133,14 +143,25 @@ export function foundHard(e: Pick<EvidenceSummary, "independent" | "independentR
   return betaCdf(p.hardRate, 1 + e.independentRight, 1 + e.independent - e.independentRight) >= p.hardProbability;
 }
 
+/**
+ * Right in practice straight after a lesson: the same draft test as "found hard", the other way round
+ * (at least hardMinAnswers answers and P(rate > hardRate) ≥ hardProbability). It shows improvement only.
+ */
+export function improvingInPractice(e: Pick<EvidenceSummary, "afterTeaching" | "afterTeachingRight">, p: DevelopmentPolicy = DEVELOPMENT_POLICY_DRAFT): boolean {
+  if (e.afterTeaching < p.hardMinAnswers) return false;
+  return betaCdf(p.hardRate, 1 + e.afterTeaching - e.afterTeachingRight, 1 + e.afterTeachingRight) >= p.hardProbability;
+}
+
+/** The standings in the words a parent reads. */
 export const STANDING_WORDS: Record<Standing, string> = {
-  not_checked: "not checked yet",
-  uncertain: "not sure yet",
-  developing: "developing",
+  not_checked: "not checked yet (no answers)",
+  uncertain: "not enough evidence yet",
+  developing: "measured, not yet shown on their own",
   found_hard: "found hard so far",
-  shown: "shown on their own",
-  confirmed: "shown and still right later",
-  check_due: "due for a check",
+  improving: "improving in practice, awaiting confirmation",
+  shown: "shown on their own, on fresh questions",
+  confirmed: "shown, and still right at a later check",
+  check_due: "due for a later check",
   not_kept: "not kept at a later check",
 };
 
@@ -173,7 +194,9 @@ export function evidenceLine(c: CapabilitySnapshot): string {
   if (e.assisted) parts.push(`${e.assistedRight} of ${e.assisted} right with help`);
   if (e.provisional) parts.push(`${answers(e.provisional, e.provisionalRight)} on provisional questions (not counted)`);
   if (e.unknown) parts.push(`${e.unknown} recorded before help was tracked`);
+  if (e.afterTeaching) parts.push(`${answers(e.afterTeaching, e.afterTeachingRight)} in practice straight after a lesson (not counted as independent)`);
   if (e.practiceOnly) parts.push(`${e.practiceOnly} practice word${e.practiceOnly === 1 ? "" : "s"} (not counted)`);
+  if (e.repeats) parts.push(`${e.repeats} repeated question${e.repeats === 1 ? "" : "s"} (not new evidence)`);
   return parts.length ? parts.join("; ") : "no answers yet";
 }
 
@@ -223,6 +246,13 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
       case "shown":
       case "confirmed":
         continue; // shown: nothing to do until a check is due
+    }
+    if (c.standing === "improving") {
+      // right in practice straight after a lesson: a fresh check without help, before anything else is built on it
+      if (c.content.assess)
+        add({ action: "confirm", capability: c.id, priority: 82, what: `Check ${c.name} on fresh questions`, why: `Right in practice straight after the lesson (${answers(e.afterTeaching, e.afterTeachingRight)}). That shows improvement, not independent mastery: a few fresh questions without help, outside the lesson, will show whether it holds.`, evidence: [ev(c)], changeIf: "Right on the fresh questions: shown (and a later check is scheduled). Wrong: more teaching, or a different approach.", content: canAssess(c) });
+      else review(c, 66, `${c.name} improved in practice after the lesson, but there are no unused questions to confirm it without help.`, "More reviewed questions for it.");
+      continue;
     }
     if (c.paused) {
       review(c, 88, c.paused, "An adult has worked on it with the learner; the activity can then be tried again.");

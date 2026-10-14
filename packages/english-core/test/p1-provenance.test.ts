@@ -78,7 +78,11 @@ test("P1-2 provenance events never change an estimate", () => {
   const richEvents = rich.events.filter((e) => !(e.kind === "evidence" && e.item.id === "spl.infl.11"));
   const a = plain.ledger();
   const b = Ledger.rebuild(ctx, "rich", richEvents);
-  assert.equal(nodes(b), nodes(a));
+  // the estimates are identical. (Since PR #23 the answers after the teaching in the same session are marked
+  // "after_teaching" and kept out of demonstrations and retention checks, so that bookkeeping may differ.)
+  const est = (l: typeof a) => JSON.stringify(Object.fromEntries(Object.entries(l.composite.nodes).map(([k, n]) => [k, { combined: n.combined, direct: n.direct, directN: n.directN, contexts: n.contexts, misconceptions: n.misconceptions }])));
+  assert.equal(est(b), est(a));
+  assert.ok(b.decisions.filter((d) => d.verdict === "accepted").every((d) => d.observation?.setting === "after_teaching"));
 });
 
 test("P1-3 an evidence event that says it was helped is held: no estimate change, tracked as assisted", () => {
