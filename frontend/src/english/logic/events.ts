@@ -31,8 +31,11 @@ export interface ProfileEvent {
   id: string;
   at: string;
   name: string;
-  /** Who agreed to keep the record on this device, and that it stays here. */
-  consent: { by: "learner" | "guardian"; scope: "this_device_only" };
+  /**
+   * Who agreed to keep the record, and where it is kept: on this device only, or in a parent's account (the parent
+   * agreed when creating the account and again when adding this pupil).
+   */
+  consent: { by: "learner" | "guardian"; scope: "this_device_only" | "parent_account" };
   app: string;
 }
 
@@ -95,6 +98,22 @@ export interface SettingsEvent {
   speech: boolean;
 }
 
+/** Who is learning and what they want from it, as chosen at the start (and changed in "Me"). */
+export type LearnerBand = "early" | "school" | "older";
+export type LearnerGoal = "confidence" | "grammar" | "spelling" | "reading";
+
+/**
+ * The learner's own choices. They shape the wording and which strand the Journey shows first. They never change a
+ * question's difficulty, an estimate or the plan: the answers decide those.
+ */
+export interface PreferencesEvent {
+  kind: "preferences";
+  id: string;
+  at: string;
+  band: LearnerBand;
+  goal: LearnerGoal;
+}
+
 export interface FlagEvent {
   kind: "flag";
   id: string;
@@ -103,14 +122,14 @@ export interface FlagEvent {
   note: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | FlagEvent | LedgerEvent;
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | LedgerEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "evidence", "presented", "hint", "assisted_response", "intervention"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention"]);
 

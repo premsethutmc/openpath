@@ -4,6 +4,8 @@
  *   npm run english:build && npm run english:preview &
  *   E2E_URL=http://127.0.0.1:4174 npm run english:e2e
  *
+ * Device-only use (no account server). Accounts are covered by e2e/accounts.test.mjs.
+ *
  * Covers the whole journey (create a profile, placement, plan, lesson, practice with feedback, progress,
  * return later), persistence across reloads, export and import, offline use, mobile layout, and that
  * the page makes no request to any other site.
@@ -62,15 +64,18 @@ async function tappable(page) {
   assert.deepEqual(small, [], "buttons are at least about 44 px tall");
 }
 
+/** The prototype's onboarding, on this device (the static build has no account server): name and who is learning, goal and consent, then Home. */
 async function createProfile(page, name = "Asha") {
   await page.goto(URL);
-  await page.getByRole("heading", { name: "OpenPath English" }).waitFor();
+  await page.getByRole("button", { name: "Let's begin" }).click();
   await fits(page);
   await page.getByLabel(/Name to show/).fill(name);
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
   await page.getByText("Tick the box to agree").waitFor();
   await page.locator("#consent").check();
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
 }
 
@@ -220,7 +225,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("button", { name: "Progress" }).click();
   const before = await page.locator("main").innerText();
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Export a backup" }).click()]);
   const path = await download.path();
   const backup = JSON.parse(readFileSync(path, "utf8"));
@@ -229,7 +234,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   assert.ok(backup.events.some((e) => e.kind === "evidence"));
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Delete this learner from this device" }).click();
-  await page.getByRole("heading", { name: "OpenPath English" }).waitFor();
+  await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
   assert.equal(await page.getByText("Meena").count(), 0, "deleted from this device");
   await page.locator(".import input[type=file]").setInputFiles(path);
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -238,7 +243,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   const strip = (t) => t.replace(/\d{4}-\d\d-\d\d/g, "DATE");
   assert.equal(strip(await page.locator("main").innerText()), strip(before));
   // a damaged file is refused with a reason
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   await page.locator(".import input[type=file]").setInputFiles({ name: "bad.json", mimeType: "application/json", buffer: Buffer.from('{"format":"openpath-english-backup","version":1,"events":[{"kind":"profile"}]}') });
   await page.getByText(/damaged/).waitFor();
   assert.deepEqual(errors, []);
@@ -276,11 +281,11 @@ test("works offline once opened, and without speech the spelling questions use w
   await context.setOffline(true);
   await page.reload();
   await page.getByRole("heading", { name: "Today" }).waitFor();
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   const speech = await page.locator("#speech-title + p").innerText();
   if (/no built-in English voice/.test(speech)) {
     // no on-device voice in this browser: no dictation questions, ever
-    await page.getByRole("button", { name: "Today" }).click();
+    await page.getByRole("button", { name: "Home", exact: true }).click();
     await page.getByRole("button", { name: "Start" }).first().click();
     await finishSession(page);
     await page.getByRole("button", { name: "Back to today" }).click();
@@ -422,7 +427,7 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   const plan = page.locator(".plan li");
   const n = await plan.count();
   assert.ok(n >= 1 && n <= 3, `${n} activities`);
-  const labels = await page.locator(".plan .kicker").allTextContents();
+  const labels = (await page.locator(".plan .kicker").allTextContents()).map((l) => l.replace(/^Your next adventure · /, ""));
   for (const l of labels) assert.ok(["Keep learning", "Check something you learned", "Try a new skill", "Show what you know", "Let's begin"].includes(l), l);
   assert.doesNotMatch(await page.locator(".plan").innerText(), /%|band|estimate|probabilit/i);
   // one plan: the older sections are behind a single "More practice" entry, and work from there

@@ -87,7 +87,7 @@ for (const s of SCENARIOS)
     if (errors.length) problems.push(`${s.key}-${stage}: ${errors.join("; ")}`);
     if (s.key === "L" && stage === "diagnosis") {
       // the reading lesson and a practice question, as the child sees them
-      await page.getByRole("button", { name: "Today" }).click();
+      await page.getByRole("button", { name: "Home", exact: true }).click();
       await page.locator(`.plan li[data-capability="${RDG_MAIN}"]`).getByRole("button", { name: "Start" }).click();
       await page.locator(".lesson").waitFor();
       await shot("reading-lesson", "The reading lesson: a worked example and a quick check (teaching, separate from assessment)");

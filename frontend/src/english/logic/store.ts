@@ -14,7 +14,7 @@ export interface ProfileSummary {
 }
 
 export interface Repo {
-  readonly kind: "indexeddb" | "memory";
+  readonly kind: "indexeddb" | "memory" | "server";
   profiles(): Promise<ProfileSummary[]>;
   load(profile: string): Promise<AppEvent[]>;
   append(profile: string, event: AppEvent): Promise<void>;

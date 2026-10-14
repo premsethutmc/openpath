@@ -16,3 +16,4 @@ export * from "./rule-evidence.ts";
 export * from "./subject-english-inflections.ts";
 export * from "./planner.ts";
 export * from "./development.ts";
+export * from "./word-features.ts";

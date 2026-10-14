@@ -58,10 +58,12 @@ async function run(key, L) {
     shots.push({ file, caption });
   };
   await page.goto(URL);
+  await page.getByRole("button", { name: "Let's begin" }).click();
   await page.getByLabel(/Name to show/).fill(`Learner ${key}`);
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
   await page.locator("#consent").check();
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
   await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("button", { name: /doubling letters/ }).click();

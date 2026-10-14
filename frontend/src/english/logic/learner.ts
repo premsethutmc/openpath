@@ -7,7 +7,7 @@ import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, type Pre
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type SessionType } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type Planned, type ProfileEvent, type SessionType } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
@@ -58,9 +58,9 @@ export class Learner {
     return new Learner(content, repo, profileId, events, clock);
   }
 
-  static async create(content: AppContent, repo: Repo, name: string, by: "learner" | "guardian", clock: Clock, id = newProfileId()): Promise<Learner> {
+  static async create(content: AppContent, repo: Repo, name: string, by: "learner" | "guardian", clock: Clock, id = newProfileId(), scope: ProfileEvent["consent"]["scope"] = "this_device_only"): Promise<Learner> {
     const l = new Learner(content, repo, id, [], clock);
-    await l.add({ kind: "profile", id, at: clock(), name: name.trim() || "Learner", consent: { by, scope: "this_device_only" }, app: APP_VERSION });
+    await l.add({ kind: "profile", id, at: clock(), name: name.trim() || "Learner", consent: { by, scope }, app: APP_VERSION });
     return l;
   }
 
@@ -378,6 +378,11 @@ export class Learner {
   async stop(): Promise<void> {
     const open = this.state.open;
     if (open) await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "stopped" });
+  }
+
+  /** Who is learning and their goal: recorded as the learner's choice; never used for scoring or the plan. */
+  async setPreferences(band: LearnerBand, goal: LearnerGoal): Promise<void> {
+    await this.add({ kind: "preferences", id: this.nextId(), at: this.clock(), band, goal });
   }
 
   async setSpeech(on: boolean): Promise<void> {

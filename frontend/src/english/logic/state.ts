@@ -4,7 +4,7 @@
  */
 import { Ledger, type LedgerEvent } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, SPELLING, lessonId } from "./content.ts";
-import { type AppEvent, type AttemptEvent, type FlagEvent, type LessonEvent, type ProfileEvent, type SessionEndEvent, type SessionEvent, isLedgerEvent } from "./events.ts";
+import { type AppEvent, type AttemptEvent, type FlagEvent, type LessonEvent, type PreferencesEvent, type ProfileEvent, type SessionEndEvent, type SessionEvent, isLedgerEvent } from "./events.ts";
 
 const DAY = 86_400_000;
 /** Word memory: Leitner boxes, reviewed after 1, 3, 7 and 14 days; a word answered from memory after the last box is learned. */
@@ -51,6 +51,8 @@ export interface AppState {
   words: Map<string, WordMemory>;
   patterns: Map<string, PatternRecord>;
   speech: boolean;
+  /** The learner's band and goal (null until chosen). Wording and Journey order only: never scoring or the plan. */
+  preferences: PreferencesEvent | null;
   flags: FlagEvent[];
   /** Items with any attempt (assisted or not), for "unseen word" choices. */
   attempted: Set<string>;
@@ -78,6 +80,7 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
     words: new Map(),
     patterns: new Map(),
     speech: true,
+    preferences: null,
     flags: [],
     attempted: new Set(),
     wordsSeen: new Set(),
@@ -95,6 +98,9 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
         break;
       case "settings":
         s.speech = e.speech;
+        break;
+      case "preferences":
+        s.preferences = e;
         break;
       case "flag":
         s.flags.push(e);

@@ -3,7 +3,9 @@ import type { Response } from "../../../../packages/english-core/src/index.ts";
 import type { Code, Lesson } from "../logic/content.ts";
 import type { Feedback } from "../logic/feedback.ts";
 import { type Current, Learner } from "../logic/learner.ts";
+import { type Noticed, noticedFor } from "../logic/noticed.ts";
 import { patternTitle } from "../logic/plan.ts";
+import { areaWord } from "../logic/profile.ts";
 import { patternKey, patternStatus } from "../logic/state.ts";
 import { ItemView } from "./ItemView.tsx";
 
@@ -17,6 +19,7 @@ interface Props {
 export function Session({ learner, voice, onLeave, onChanged }: Props) {
   const [cur, setCur] = useState<Current | null>(null);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [noticed, setNoticed] = useState<Noticed | null>(null);
   const [retry, setRetry] = useState<"none" | "trying" | "done">("none");
   const [retryFeedback, setRetryFeedback] = useState<Feedback | null>(null);
   const [busy, setBusy] = useState(false);
@@ -27,6 +30,7 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
     try {
       setCur(await learner.current());
       setFeedback(null);
+      setNoticed(null);
       setRetry("none");
       setRetryFeedback(null);
       setReporting(false);
@@ -58,6 +62,8 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
         setRetryFeedback(await learner.answer(item, r, { assisted: true, use: cur.next!.use }));
         setRetry("done");
       } else setFeedback(await learner.answer(item, r, { use: cur.next!.use }));
+      // what the engine did with this answer, from its own decision
+      setNoticed(noticedFor(learner.state));
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -80,8 +86,19 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
         </div>
       </header>
       <section className="sheet">
+        {item.kind === "code" && (
+          <span className="pill">
+            <span aria-hidden="true">{AREA_EMOJI[areaWord(item.target)] ?? "🧠"}</span> {areaWord(item.target)}
+          </span>
+        )}
         <ItemView key={`${item.id}:${retry}`} item={item} passage={passage} voice={voice} locked={locked || busy} onSubmit={submit} />
         {feedback && <FeedbackPanel fb={retry === "done" && retryFeedback ? retryFeedback : feedback} retried={retry === "done"} />}
+        {feedback && noticed && (
+          <div className="noticed" data-noticed={noticed.kind}>
+            <b>What OpenPath noticed: {noticed.title.toLowerCase()}</b>
+            <p>{noticed.text}</p>
+          </div>
+        )}
         {feedback && (
           <div className="after">
             {!feedback.correct && retry === "none" && (
@@ -99,6 +116,9 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
               autoFocus
             >
               Next
+              <span className="arrow" aria-hidden="true">
+                →
+              </span>
             </button>
           </div>
         )}
@@ -117,10 +137,17 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
   );
 }
 
+const AREA_EMOJI: Record<string, string> = { Spelling: "✍️", Grammar: "🧩", Words: "💬", Reading: "📚", Sentences: "🧱", Writing: "📝", "Reading basics": "🔤" };
+
 function FeedbackPanel({ fb, retried }: { fb: Feedback; retried: boolean }) {
   return (
     <div className={`feedback ${fb.correct ? "right" : "wrong"}`} role="status" aria-live="polite">
-      <p className="verdict">{fb.correct ? (retried ? "Right this time." : "Right.") : retried ? "Not yet. The answer is below." : "Not quite."}</p>
+      <p className="verdict">
+        <span className="em" aria-hidden="true">
+          {fb.correct ? "🌟" : "💡"}
+        </span>
+        {fb.correct ? (retried ? "Right this time." : "Right. Nicely spotted!") : retried ? "Not yet. The answer is below." : "Not quite. Here's why."}
+      </p>
       {!fb.correct && (
         <p>
           The answer is <strong className="written">{fb.answer}</strong>.
@@ -167,9 +194,12 @@ function LessonView({ lesson, title, onDone, onLeave }: { lesson: Lesson; title:
         <button type="button" className="quiet back" onClick={onLeave}>
           Save and leave
         </button>
-        <p className="kicker">{title}: a short lesson</p>
+        <p className="kicker">Lesson · {title}</p>
       </header>
       <article className="sheet lesson">
+        <span className="pill">
+          <span aria-hidden="true">📖</span> Discover
+        </span>
         <h1 id="lesson-title">{lesson.title}</h1>
         <p className="rule">{lesson.rule}</p>
         <ul className="examples">
@@ -180,7 +210,12 @@ function LessonView({ lesson, title, onDone, onLeave }: { lesson: Lesson; title:
             </li>
           ))}
         </ul>
-        {lesson.tip && <p className="tip">{lesson.tip}</p>}
+        {lesson.tip && (
+          <p className="tip">
+            <span aria-hidden="true">✨ </span>
+            {lesson.tip}
+          </p>
+        )}
         <section className="check" aria-labelledby="check-title">
           <h2 id="check-title">Quick check</h2>
           <p className="prompt">{lesson.check.prompt}</p>
@@ -215,6 +250,8 @@ function LessonView({ lesson, title, onDone, onLeave }: { lesson: Lesson; title:
   );
 }
 
+const TEACHING = new Set(["guided", "spelling_practice", "doubling_journey"]);
+
 function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLeave: () => void }) {
   const answered = cur.session.answered;
   const right = answered.filter((a) => a.correct).length;
@@ -233,17 +270,50 @@ function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLea
     const st = patternStatus(learner.state.patterns.get(patternKey(ev.capability, ev.step)));
     extra = st === "secure" ? `"${patternTitle(learner.content, ev.capability, ev.step)}" works with new words too. That pattern is secure.` : "Not secure yet with new words. A little more practice, then another check.";
   }
+  const teaching = TEACHING.has(ev.type) || !!ev.lesson;
   return (
     <main className="session done" aria-labelledby="done-title">
       <section className="sheet">
-        <h1 id="done-title">{Learner.sessionTitle(ev.type)}: done</h1>
+        <p className="confetti" aria-hidden="true">
+          {teaching ? "🌱✨" : "🏆✨"}
+        </p>
+        <h1 id="done-title" className="hero">
+          {Learner.sessionTitle(ev.type)}: done
+        </h1>
         <p className="big">{line}</p>
         {extra && <p>{extra}</p>}
+        {teaching ? (
+          <div className="tile mint">
+            <b>
+              <span aria-hidden="true">🌱</span> Learning, not mastered yet
+            </b>
+            <p>You practised this today. Practice straight after a lesson shows improvement; a fresh check on your own, on another day, will show whether it has stuck.</p>
+          </div>
+        ) : (
+          ev.type === "check" && (
+            <div className="tile mint">
+              <b>
+                <span aria-hidden="true">🔎</span> Answers on your own
+              </b>
+              <p>{ev.purpose === "retention" ? "A later check: it shows what has stuck since you learned it." : "These count as evidence. One check is never the whole story: OpenPath looks for patterns over several days."}</p>
+            </div>
+          )
+        )}
         {missed.size > 0 && (
           <p>
             Words to review in a day: <span className="written">{[...missed].join(", ")}</span>.
           </p>
         )}
+        <div className="stats">
+          <div className="stat">
+            <b>{answered.length}</b>
+            <small>question{answered.length === 1 ? "" : "s"}</small>
+          </div>
+          <div className="stat">
+            <b>{right}</b>
+            <small>right first time</small>
+          </div>
+        </div>
         <button type="button" className="primary" onClick={onLeave} autoFocus>
           Back to today
         </button>

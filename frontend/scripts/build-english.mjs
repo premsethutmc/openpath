@@ -58,14 +58,15 @@ await writeFile(
 const files = ["./", "index.html", `assets/app.js?v=${version}`, `assets/app.css?v=${version}`, "manifest.webmanifest", "icon.svg", ...notices.map((f) => `licences/${f}`)];
 await writeFile(
   `${out}/sw.js`,
-  `// OpenPath English offline cache (app files only; learner data stays in IndexedDB).
+  `// OpenPath English offline cache (app files only; learner data stays in IndexedDB or the account server, never here).
 const CACHE = "openpath-english-${version}";
 const FILES = ${JSON.stringify(files)};
 self.addEventListener("install", (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener("activate", (e) => e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k.startsWith("openpath-english-") && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
-  if (e.request.method !== "GET" || url.origin !== location.origin) return;
+  // never the account API: a pupil's record must not be cached, and must always be current
+  if (e.request.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/")) return;
   e.respondWith(
     caches.match(e.request, { ignoreSearch: url.pathname.endsWith("/") || url.pathname.endsWith("index.html") }).then((hit) => {
       const net = fetch(e.request).then((res) => { if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone())); return res; }).catch(() => hit || caches.match("index.html"));
