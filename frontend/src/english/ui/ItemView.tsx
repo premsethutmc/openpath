@@ -120,15 +120,18 @@ function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check" }: { 
 export function Dictation({ word, sentence, say, voice, delivery, locked, onSubmit, onPlay, submitLabel }: { word: string; sentence?: string; say?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void; onPlay?: () => void; submitLabel?: string }) {
   const [plays, setPlays] = useState(0);
   const [adultSees, setAdultSees] = useState(false);
+  // the voice did not start (Android Chrome can refuse or drop speech it did not get from a tap): ask for a tap
+  const [silent, setSilent] = useState(false);
+  const heard = (ok: boolean) => setSilent(!ok);
   const playWord = () => {
-    speak(word, voice);
+    speak(word, voice, heard);
     setPlays((n) => n + 1);
     onPlay?.();
   };
   useEffect(() => {
     // first time: the word, a sentence with it, the word again (a sentence settles words that sound like others)
     if (delivery === "device_voice" && voice) {
-      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice);
+      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice, heard);
       setPlays(1);
       onPlay?.();
     }
@@ -138,8 +141,13 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
     <div className="dictation-controls">
       {delivery === "device_voice" ? (
         <div className="row listen-row">
-          <button type="button" className="listen" onClick={playWord} data-plays={plays}>
-            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? "Repeat the word" : "Play the word"}
+          {silent && (
+            <p className="tile peach no-sound" role="status">
+              No sound? Turn the volume up, then tap “Play the word”.
+            </p>
+          )}
+          <button type="button" className={silent ? "listen primary" : "listen"} onClick={playWord} data-plays={plays}>
+            <span aria-hidden="true">{plays && !silent ? "🔁" : "▶️"}</span> {plays && !silent ? "Repeat the word" : "Play the word"}
           </button>
           {sentence && (
             <button
