@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { REPORT, REPO, ROW_COLUMNS, approvedForPilot, currentDecisions, exportCsv, exportHtml, importReviews, loadPilot, parseCsv, report, reviewRows, reviewStates, reviewStatus, type ReviewRecord } from "../../../tools/english/pilot/review.ts";
+import { PILOT_PACKAGE, REPORT, REPO, ROW_COLUMNS, approvedForPilot, exportPilotHtml, pilotPackageRows, currentDecisions, exportCsv, exportHtml, importReviews, loadPilot, parseCsv, report, reviewRows, reviewStates, reviewStatus, type ReviewRecord } from "../../../tools/english/pilot/review.ts";
 
 const p = loadPilot();
 const committedReviews: ReviewRecord[] = JSON.parse(readFileSync(join(REPO, "content", "english", "pilot", "reviews.json"), "utf8"));
@@ -196,4 +196,29 @@ test("PR-9 a pilot build shows only allowlisted questions with an educator appro
   assert.deepEqual(approvedForPilot(p, reviews), [`${listed[0].id}@${listed[0].version}`, `${dictation.id}@${dictation.version}`].sort());
   // a later decision replaces an earlier one
   assert.deepEqual(approvedForPilot(p, [...reviews, rec(listed[0], "discuss")]), [`${dictation.id}@${dictation.version}`]);
+});
+
+test("PR-10 the educator review package: exactly the pilot questions, current, and its CSV imports with every decision kind", () => {
+  const pkg = pilotPackageRows(p, committedReviews);
+  assert.equal(pkg.length, p.allowlist.length, "one row per allowlisted question");
+  assert.equal(pkg.filter((r) => r.use.includes("pilot allowlist: dictation")).length, p.allowlist.filter((a) => a.use === "dictation").length);
+  for (const r of pkg) assert.ok(r.id && r.version && r.skill && r.difficulty && r.key && r.content && r.fingerprint, `${r.id} has every field`);
+  assert.equal(readFileSync(join(PILOT_PACKAGE, "pilot-questions-review.csv"), "utf8"), exportCsv(pkg), "run: node tools/english/pilot/review.ts export-pilot");
+  assert.equal(readFileSync(join(PILOT_PACKAGE, "pilot-questions-review.html"), "utf8"), exportPilotHtml(p, pkg), "run: node tools/english/pilot/review.ts export-pilot");
+  // an educator fills in the package's own CSV; "request correction" is recorded as "revise" and needs a reason
+  const fresh = pilotPackageRows(p);
+  const [a, b, c, d] = fresh;
+  const filled = fill(exportCsv(fresh), {
+    [`question|${a.id}`]: ["approve", "", "", "R. Educator", "2026-11-02"],
+    [`question|${b.id}`]: ["reject", "not age-appropriate", "", "R. Educator", "2026-11-02"],
+    [`question|${c.id}`]: ["Request correction", "", "The sentence gives the spelling away.", "R. Educator", "2026-11-02"],
+  });
+  const ok = importReviews(filled, reviewRows(p), p.manifest.version);
+  assert.deepEqual(ok.problems, []);
+  assert.deepEqual(ok.records.map((r) => r.decision), ["approve", "reject", "revise"]);
+  assert.deepEqual(approvedForPilot(p, ok.records), [`${a.id}@${a.version}`], "only the approved question, at its version");
+  const noReason = importReviews(fill(exportCsv(fresh), { [`question|${d.id}`]: ["request correction", "", "", "R. Educator", "2026-11-02"] }), reviewRows(p), p.manifest.version);
+  assert.match(noReason.problems.join(" "), /say why/);
+  const noName = importReviews(fill(exportCsv(fresh), { [`question|${d.id}`]: ["approve", "", "", "", "2026-11-02"] }), reviewRows(p), p.manifest.version);
+  assert.match(noName.problems.join(" "), /reviewer's name/);
 });

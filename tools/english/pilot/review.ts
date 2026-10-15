@@ -4,6 +4,9 @@
  *   node tools/english/pilot/review.ts export [dir]        a CSV (opens in Excel or Google Sheets) and an HTML page to read
  *   node tools/english/pilot/review.ts import <file.csv>   record the decisions in content/english/pilot/reviews.json
  *   node tools/english/pilot/review.ts report [--check]    write (or check) docs/english/PILOT_CONTENT_REPORT.md
+ *   node tools/english/pilot/review.ts export-pilot [dir]  the educator review package: only the questions a pilot build may
+ *                                                         show (placement and dictation), as a CSV and a printable page
+ *                                                         (default docs/product/pilot/educator-review/; --check: is it current?)
  *   node tools/english/pilot/review.ts status              print what is approved, rejected, to revise, to discuss, outstanding
  *   node tools/english/pilot/review.ts approved            list what a pilot build would show (allowlisted and approved)
  *
@@ -128,6 +131,8 @@ export function fingerprint(x: unknown): string {
 }
 
 export const DECISIONS = ["approve", "reject", "revise", "discuss"] as const;
+/** Words an educator may write for a decision, as recorded ("request correction" is recorded as "revise"). */
+export const DECISION_ALIASES: Record<string, (typeof DECISIONS)[number]> = { approved: "approve", rejected: "reject", "request correction": "revise", correction: "revise", correct: "revise" };
 export const ISSUES = ["incorrect answer", "ambiguous", "wrong difficulty", "wrong skill", "not age-appropriate", "duplicate", "cultural or context", "other"] as const;
 
 export interface ReviewRow {
@@ -315,7 +320,7 @@ export function importReviews(csv: string, current: ReviewRow[], contentVersion:
   table.slice(1).forEach((row, n) => {
     const get = (name: string) => (row[col(name)] ?? "").trim();
     const line = n + 2;
-    const decision = get("decision").toLowerCase();
+    const decision = DECISION_ALIASES[get("decision").toLowerCase().replace(/\s+/g, " ")] ?? get("decision").toLowerCase();
     if (!decision) return;
     const label = `row ${line} (${get("kind")} ${get("id")})`;
     if (!(DECISIONS as readonly string[]).includes(decision)) return void problems.push(`${label}: decision must be one of ${DECISIONS.join(", ")} (is "${decision}")`);
@@ -440,6 +445,47 @@ ${caps.map(section).join("\n")}
 ${p.allowlisted.length ? `<h2>Other questions a pilot build may show (pilot allowlist)</h2><p class="meta">Placement questions on the other guided skills, and the dictation words. Each needs its own approval.</p>${rows.filter((x) => x.kind === "question" && !caps.includes(x.capability)).concat(rows.filter((x) => x.kind === "question" && caps.includes(x.capability) && p.allowlisted.some((i) => i.id === x.id))).map((x) => `<article class="question"><h4>question <code>${esc(x.id)}</code> v${esc(x.version)}</h4><p class="meta">${[x.capability, x.use, `difficulty ${x.difficulty}`, x.format].map(esc).join(" · ")}</p><pre>${esc(x.content)}</pre>${x.key ? `<p><b>Key:</b> ${esc(x.key)}</p>` : ""}<p class="meta">fingerprint ${esc(x.fingerprint)} · <b>review: ${esc(x.review_status)}</b></p></article>`).join("")}` : ""}`;
 }
 
+// ---------------------------------------------------------------- the educator review package (pilot questions only)
+
+export const PILOT_PACKAGE = join(REPO, "docs", "product", "pilot", "educator-review");
+
+/**
+ * The questions a pilot build may show, in review order: dictation batch 1 (difficulty ≤ 4.5), dictation batch 2,
+ * then placement by skill and difficulty. These are ordinary review rows: the CSV imports with `review.ts import`.
+ */
+export function pilotPackageRows(p: Pilot, reviews: ReviewRecord[] = []): (ReviewRow & { section: string })[] {
+  const rows = new Map(reviewRows(p, reviews).filter((r) => r.kind === "question").map((r) => [r.id, r]));
+  const listed = p.allowlist.map((a) => ({ a, r: rows.get(a.id)! })).filter((x) => x.r && x.r.version === String(x.a.version));
+  const dictation = listed.filter((x) => x.a.use === "dictation").sort((x, y) => Number(x.r.difficulty) - Number(y.r.difficulty) || x.r.key.localeCompare(y.r.key));
+  const placement = listed.filter((x) => x.a.use === "placement").sort((x, y) => x.r.skill.localeCompare(y.r.skill) || Number(x.r.difficulty) - Number(y.r.difficulty) || x.r.id.localeCompare(y.r.id));
+  return [
+    ...dictation.map((x) => ({ ...x.r, section: Number(x.r.difficulty) <= 4.5 ? "Dictation words, batch 1 (difficulty 4.5 or below)" : "Dictation words, batch 2 (difficulty above 4.5)" })),
+    ...placement.map((x) => ({ ...x.r, section: `Placement: ${x.r.skill}` })),
+  ];
+}
+
+export function exportPilotHtml(p: Pilot, rows: (ReviewRow & { section: string })[]): string {
+  const sections = [...new Set(rows.map((r) => r.section))];
+  let n = 0;
+  const card = (x: ReviewRow) => {
+    n++;
+    const lines = x.content.split("\n");
+    return `<article><h3><span class="n">${n}.</span> <code>${esc(x.id)}</code> · version ${esc(x.version)}</h3>
+<p class="meta">${esc(x.skill)} · difficulty ${esc(x.difficulty)} (author's estimate, 1 easy to 8 hard) · ${esc(x.format)}</p>
+<div class="q">${lines.map((l) => `<p>${esc(l)}</p>`).join("")}</div>
+<p><b>Expected answer:</b> ${esc(x.key)}</p>
+${x.misconceptions ? `<p class="meta"><b>Wrong answers the app recognises:</b> ${esc(x.misconceptions)}</p>` : ""}
+<p class="meta">Current review: ${esc(x.review_status)} · fingerprint ${esc(x.fingerprint)}</p>
+<p class="decide">Decision: ☐ approve &nbsp; ☐ reject &nbsp; ☐ request correction &nbsp; Reason: ______________________________</p></article>`;
+  };
+  return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpenPath pilot questions: educator review</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;margin:16px;max-width:52rem;color:#222}h2{margin-top:2.5rem;border-bottom:2px solid #ccd;break-before:page}article{border:1px solid #dde;border-radius:8px;padding:8px 12px;margin:10px 0;break-inside:avoid}h3{margin:0;font-size:1rem}.n{color:#777}.q{background:#f6f7fb;border-radius:6px;padding:4px 10px}.q p{margin:4px 0}.meta{color:#555;font-size:13px;margin:2px 0}.decide{font-size:14px;border-top:1px dashed #ccd;padding-top:6px}.warn{background:#fff4d6;padding:10px;border-radius:8px}@media print{body{margin:0}}</style>
+<h1>OpenPath pilot questions: educator review</h1>
+<p class="warn">Content version ${esc(p.manifest.version)}. ${rows.length} questions: ${rows.filter((r) => r.section.startsWith("Dictation")).length} dictation words and ${rows.filter((r) => r.section.startsWith("Placement")).length} placement questions. <b>Nothing here is approved.</b> A pilot build shows a question to a child only after an educator approves that exact version. Record decisions in <code>pilot-questions-review.csv</code> (one row per question, same order and numbering as this page). The instructions are in EDUCATOR_REVIEW_GUIDE.md.</p>
+<p>Contents: ${sections.map((s) => `${esc(s)} (${rows.filter((r) => r.section === s).length})`).join(" · ")}</p>
+${sections.map((s) => `<h2>${esc(s)}</h2>${rows.filter((r) => r.section === s).map(card).join("")}`).join("\n")}`;
+}
+
 // ---------------------------------------------------------------- the readiness report
 
 const BANDS: [string, number, number][] = [
@@ -517,6 +563,25 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     writeFileSync(join(dir, "pilot-review.csv"), exportCsv(rows));
     writeFileSync(join(dir, "pilot-review.html"), exportHtml(p, rows));
     console.log(`wrote ${rows.length} rows (${rows.filter((r) => r.kind === "question").length} questions, ${rows.filter((r) => r.kind === "passage").length} passages, ${rows.filter((r) => r.kind === "lesson").length} lessons, ${rows.filter((r) => r.kind === "prerequisite").length} prerequisites) to ${dir}`);
+  } else if (cmd === "export-pilot") {
+    const check = arg === "--check";
+    const dir = check || !arg ? PILOT_PACKAGE : arg;
+    const pkg = pilotPackageRows(p, reviews);
+    const files: [string, string][] = [
+      ["pilot-questions-review.csv", exportCsv(pkg)],
+      ["pilot-questions-review.html", exportPilotHtml(p, pkg)],
+    ];
+    if (check) {
+      const stale = files.filter(([f, t]) => !existsSync(join(dir, f)) || readFileSync(join(dir, f), "utf8") !== t);
+      if (stale.length) {
+        console.log(`educator review package is out of date (${stale.map(([f]) => f).join(", ")}): run \`node tools/english/pilot/review.ts export-pilot\``);
+        process.exitCode = 1;
+      } else console.log("educator review package is up to date");
+    } else {
+      mkdirSync(dir, { recursive: true });
+      for (const [f, t] of files) writeFileSync(join(dir, f), t);
+      console.log(`wrote ${pkg.length} questions (${pkg.filter((r) => r.section.startsWith("Dictation")).length} dictation, ${pkg.filter((r) => r.section.startsWith("Placement")).length} placement) to ${dir}`);
+    }
   } else if (cmd === "import") {
     if (!arg) throw new Error("usage: import <file.csv>");
     const { records, problems } = importReviews(readFileSync(arg, "utf8"), rows, p.manifest.version);
@@ -545,5 +610,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.log(list.length ? list.join("\n") : "nothing approved for the pilot: a pilot build would show no questions");
   } else if (cmd === "status") {
     console.log(reviewStatus(rows, reviews).join("\n"));
-  } else console.log("usage: review.ts export [dir] | import <file.csv> | report [--check] | status | approved");
+  } else console.log("usage: review.ts export [dir] | export-pilot [dir|--check] | import <file.csv> | report [--check] | status | approved");
 }

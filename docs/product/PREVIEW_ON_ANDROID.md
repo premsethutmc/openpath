@@ -12,8 +12,8 @@ test names and email addresses only; this is not for real children.
 
 On a computer, or in your phone's browser with "Desktop site" turned on:
 
-1. Open **https://codespaces.new/premsethutmc/openpath?ref=product/developer-diagnostics**
-   - Or: the repository page → **Code** → **Codespaces** → choose branch `product/developer-diagnostics` (or `product/ux-integration-v1` for PR #26 without diagnostics) → **Create
+1. Open **https://codespaces.new/premsethutmc/openpath?ref=main**
+   - Or: the repository page → **Code** → **Codespaces** → choose branch `main` → **Create
      codespace**.
 2. Keep the default machine (2 cores) and press **Create codespace**.
 3. Wait while it builds. It does three things:
@@ -62,8 +62,8 @@ Open `…/developer` (your preview address plus `/developer`), sign in, and ente
 Choose **Pupils → Arun** to see what the engine knows and why, and **Generate Diagnostic Report → Copy Report** to
 paste it into ChatGPT or Claude. Details: [DEVELOPER_DIAGNOSTICS.md](DEVELOPER_DIAGNOSTICS.md).
 
-If your codespace was created for PR #26, open a terminal in it and run `git fetch && git checkout
-product/developer-diagnostics && bash .devcontainer/start-preview.sh`, or create a new codespace on this branch.
+If your codespace was created on an older branch, open a terminal in it and run `git fetch && git checkout main &&
+git pull && bash .devcontainer/start-preview.sh`, or create a new codespace on `main`.
 The script rebuilds the app when the commit changes, migrates the database, and prints a code.
 
 The script also restarts the API and the app server if they are running different code. Before this fix, servers
