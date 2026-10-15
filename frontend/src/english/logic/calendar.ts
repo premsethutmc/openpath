@@ -28,10 +28,14 @@ function formatter(zone: string): Intl.DateTimeFormat | null {
   }
 }
 
-/** The time zone to judge calendar days in for this record, and where it came from. */
-export function dayBasis(s: AppState | null, override?: string | null): DayBasis {
-  // the latest preferences event that records a zone (a later change of band or goal without one does not drop it)
-  const recorded = s ? [...s.events].reverse().find((e) => e.kind === "preferences" && !!(e as { timeZone?: string }).timeZone) : undefined;
+/**
+ * The time zone to judge calendar days in, and where it came from: the zone in effect at `at` (the latest preferences
+ * event recording a zone at or before that moment), so a zone recorded later never re-dates earlier answers and replay
+ * is deterministic. Without `at`, the latest recorded zone. An explicit override (tests, a reviewed school setting)
+ * comes first.
+ */
+export function dayBasis(s: AppState | null, override?: string | null, at?: string): DayBasis {
+  const recorded = s ? [...s.events].reverse().find((e) => e.kind === "preferences" && !!(e as { timeZone?: string }).timeZone && (at === undefined || e.at <= at)) : undefined;
   const zone = override || (recorded as { timeZone?: string } | undefined)?.timeZone || null;
   if (!zone) return { zone: "UTC", source: "fallback_no_zone" };
   return formatter(zone) ? { zone, source: "recorded" } : { zone: "UTC", source: "fallback_invalid_zone" };

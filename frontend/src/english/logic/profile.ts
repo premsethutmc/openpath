@@ -304,7 +304,11 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const history = ver.historicalLevel !== null ? gateHistory(s, c, id, now, singleFormatAt) : { claims: [], first: null, highest: null };
     // a later check due or failed is reported only for a level the gate supported (within the engine's retention tolerance)
     const late = ver.status === "overdue" || ver.status === "failed";
-    const retainedClaim = late && v.retention.level !== null && supportedAtLeast(history, v.retention.level - RETENTION.tolerance);
+    // a check that is due is a fact about time: reported whenever the gate supported any level before (the pupil was
+    // shown at that level). A failed check is judged by the engine at its retained level, so "not kept" is reported
+    // only when the gate supported a level within the engine's retention tolerance of it.
+    const retainedClaim =
+      ver.status === "overdue" ? history.first !== null : ver.status === "failed" && v.retention.level !== null && supportedAtLeast(history, v.retention.level - RETENTION.tolerance);
     // a later check is due (or failed) on a level the gate never supported: that level is still only a claim to test
     const unsupported = late && !retainedClaim ? (v.retention.level ?? ver.historicalLevel) : null;
     // the gate reported for the skill: at the engine's estimate (what is missing for it), or the unsupported late claim

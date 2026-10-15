@@ -13,10 +13,9 @@
  *                            supported claim (profile.ts)
  *   verified mastery         demonstrated, with the gate's evidence on educator-approved questions (profile.ts)
  *
- * Lessons: a lesson moves earlier answers out of the current claim's window. For spelling, lessons and answers both
- * carry a pattern (ladder step), so a lesson supersedes only answers on its own pattern and on patterns that share a
- * misconception with it in the content; elsewhere, and whenever the pattern is unknown, a lesson supersedes every
- * earlier answer on the skill (the conservative rule).
+ * Lessons: a lesson moves every earlier answer on the skill out of the current claim's window (the conservative
+ * rule). A narrower spelling scope (by shared misconception tags) exists behind LESSON_SCOPE and is off until an
+ * educator reviews it.
  *
  * Qualifying answers (the only ones the gate reads): accepted by the ledger, with provenance, first and unaided,
  * on a fresh question, not after teaching, and on the skill itself. Assisted answers, practice-only words,
@@ -25,7 +24,7 @@
  */
 import type { Decision } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent, Code } from "./content.ts";
-import { MASTERY_GATE, SPELLING_PATTERN_SCOPE } from "./mastery-policy.ts";
+import { LESSON_SCOPE, MASTERY_GATE } from "./mastery-policy.ts";
 import type { AppState } from "./state.ts";
 
 const SPELLING_PREFIX = "EN.FND.SPL.";
@@ -126,7 +125,7 @@ function patternTags(c: AppContent, cap: string): Map<string, Set<string>> {
  * known pattern of the skill).
  */
 export function affectedPatterns(c: AppContent, cap: string, step: string | null): Set<string> | null {
-  if (!SPELLING_PATTERN_SCOPE || !cap.startsWith(SPELLING_PREFIX) || !step) return null;
+  if (!LESSON_SCOPE.spellingPatternTags || !cap.startsWith(SPELLING_PREFIX) || !step) return null;
   const ladder = c.ladders.get(cap);
   if (!ladder?.some((x) => x.id === step)) return null;
   const tags = patternTags(c, cap);

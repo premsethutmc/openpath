@@ -36,12 +36,12 @@ export const MASTERY_GATE = {
 } as const;
 
 /**
- * Lesson scope for the gate's window (investigated 15 October; see MASTERY_RULES.md §2b). Spelling lessons and
- * answers both carry a ladder pattern, so a spelling lesson supersedes only earlier answers on its pattern and on
- * patterns sharing a misconception with it in the content. false: every lesson supersedes the whole skill (the
- * earlier, conservative rule). Other skills always use the whole-skill rule.
+ * Lesson scope for the gate's window (MASTERY_RULES.md §6b and §8). When on, a spelling lesson supersedes only earlier
+ * answers on its pattern and on patterns sharing a misconception tag with it in the content. OFF (the whole-skill
+ * rule) until an educator reviews the pattern relations: shared tags are error labels on candidate questions, not a
+ * validated relation between patterns. Other skills always use the whole-skill rule. Mutable for tests only.
  */
-export const SPELLING_PATTERN_SCOPE = true;
+export const LESSON_SCOPE: { spellingPatternTags: boolean } = { spellingPatternTags: false };
 
 /** The stricter misconception resolution. */
 export const RESOLUTION = {

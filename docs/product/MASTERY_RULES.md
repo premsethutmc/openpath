@@ -185,8 +185,8 @@ window. The plan probes near the slip; it does not teach.
 | "After teaching" mark | per capability and session (unchanged) |
 | Relations between patterns | none explicit. The ladder gives order and band only. The only content-level link is the misconception tags that questions list |
 
-**Change (smallest defensible):**
-- **Spelling only:** a lesson supersedes earlier answers on its own pattern and on patterns whose questions share a
+**Change (built in round two; switched OFF in the final review, see §8):**
+- **Spelling only, when switched on:** a lesson supersedes earlier answers on its own pattern and on patterns whose questions share a
   misconception tag with it, according to the content.
   - The doubling lesson reaches every doubling-related pattern: double_short, stress_doubling, no_double_unstressed,
     drop_e and exceptions.
@@ -194,7 +194,8 @@ window. The plan probes near the slip; it does not teach.
 - **Unchanged elsewhere:** every other skill, any lesson whose step is not a known pattern, and any answer without a
   pattern keep the whole-skill rule. Grammar steps (for example third-person -s and plural subjects) are too
   interdependent to separate without an educator's say.
-- **Switch:** `SPELLING_PATTERN_SCOPE` in `mastery-policy.ts` turns this off.
+- **Switch:** `LESSON_SCOPE.spellingPatternTags` in `mastery-policy.ts`. It is **off**: every lesson supersedes the
+  whole skill until an educator reviews the pattern relations.
 - **What it does not change:** answers in the same session after a lesson still never count (that mark is
   per capability), and nothing is erased. Superseded answers are counted in the gate (`superseded`) and remain in the
   record and the estimate.
@@ -205,8 +206,9 @@ window. The plan probes near the slip; it does not teach.
   pupil, account or school stores a time zone.
 - **Evaluation:** `logic/calendar.ts` computes a calendar day when a rule is evaluated, in the pupil's or school's IANA
   zone when the record has one, otherwise in UTC. An invalid zone also falls back to UTC.
-- **Source of the zone:** an optional `timeZone` on the latest `preferences` event that has one (a later change of
-  band or goal without it does not drop it). Every misconception finding records which
+- **Source of the zone:** an optional `timeZone` on a `preferences` event. Each finding uses the zone **in effect at
+  its last error**: the latest such event at or before that moment. A zone recorded later never re-dates earlier
+  answers. The precedence policy is in §8. Every misconception finding records which
   basis was used (`days`), and its reason says "UTC days (no time zone recorded)" or "days in Asia/Kolkata".
 - **Not yet done:** recording the zone (from the device, or a school setting) is a separate decision. Until then
   every record uses UTC, exactly as before.
@@ -218,17 +220,16 @@ window. The plan probes near the slip; it does not teach.
 - A shown level is never "confirmed" before the delayed check.
 - The evidence check for a higher level asks only unused questions at that level, never the easy words that showed
   the lower one.
-- A lesson changes the claim only for the patterns it taught or relates to.
+- A lesson supersedes earlier answers on the whole skill (the pattern scope is off, see §8).
 - A supported misconception does not remove a level that other answers support; it is reported beside it.
 - Pupil A is unchanged: same standings, labels, Today and plan.
 
 ## 7. Limitations and open questions
 
-- **Teaching scope is by content tags, for spelling only.** The pattern relation comes from the misconception tags
-  questions list. That is the content's own statement of what can go wrong, but no educator has reviewed it as a
-  relation between patterns. Grammar and the other skills keep the whole-skill rule.
-- **The level can move.** The gate tests candidates at or below the engine's current proposal. If the estimate falls,
-  so does the highest candidate. The lower level is not kept beyond what the recent evidence supports.
+- **Teaching scope is whole-skill.** A lesson on one spelling pattern sets aside earlier answers on every pattern of
+  that skill until a fresh check. The narrower scope is built but off (§8).
+- **The level follows the estimate down.** The gate tests candidates at or below the engine's current proposal. §8
+  shows this only happens after wrong answers at or near the level, where the cap is justified.
 - **One slip can cap the level well below history** (see 6a) until it leaves the 6-answer window or newer answers
   replace it. This is the approved contradiction rule applied at every candidate level.
 - **Contradictions linger.** A contradiction stays until 6 newer qualifying answers replace it.
@@ -237,3 +238,25 @@ window. The plan probes near the slip; it does not teach.
   check range, the 0.5 grid and priority 50. They need educator review and real answers.
 - **No real device testing.** Nothing here was tested on a real Android phone or in the Codespace. The browser tests
   use Chromium at phone size, locally and in CI.
+
+## 8. Final bounded review (15 October)
+
+| # | Issue | Severity | Evidence | Decision |
+|---|---|---|---|---|
+| 1a | Can a falling estimate suppress a level that valid, recent, independent evidence still supports? | Low, no change | **Time passing:** the engine's demonstrated level is not inflated over time. **Errors far above the level:** three wrong at 6.25–6.5 leave the estimate at 4.5 and the shown level at 3.5. **Estimate falls:** only after wrong answers at or near the level. Three wrong at exactly 3.5 after showing 3.5 bring the estimate to 3, and 3 is shown. The gate alone would still allow 3.5: it has no "wrong at the level" test, only contradictions at ≤ L − 1 | Keep the estimate as the ceiling. It is the only part that weighs failures at the level. 3.5 is kept as history ("Earlier shown at about level 3.5 …") |
+| 1b | Earlier evidence too old for a current claim | Medium, **fixed** | Shown at 3.5 against an estimate of 4.5. Thirty days later the engine's check is overdue. "Check due" needed a gate-supported level within 0.5 of the engine's retained 4.5, so the pupil read "developing", and the history line wrongly said the recent evidence no longer supports it | "Check due" is now reported whenever the gate supported any level before (the check is due either way). "Not kept" keeps the tolerance, because the engine judges the failed check at its own retained level. No level is reported as current while the check is overdue |
+| 1c | Newer answers displace older evidence | None | Six newer right answers on easy words push the at-level answers out of the window. Shown now drops to the level the recent answers support (1.5), with 3.5 as history and a check planned at the estimate | Working as designed |
+| 2 | Are shared misconception tags enough to reset evidence across spelling patterns? | Medium, **switched off** | The tags are error labels authored on candidate, unreviewed questions. They were not designed as relations between patterns. They link patterns through a handful of distractors: the doubling lesson reaches drop_e only because 5 drop-e questions and 8 double-short questions list an over-doubling error such as "writting" or "jumpping". "Jumpping" is a double-short distractor, though "jump" is not a double-short word. Absence of a tag does not show two patterns are independent. No educator has reviewed any of it | `LESSON_SCOPE.spellingPatternTags = false`. Every lesson supersedes the whole skill (the conservative rule). The code, the switch and its tests (run with the switch on) are kept for educator review |
+| 3a | Time-zone precedence | Policy, part built | No zone is stored anywhere today. Timestamps are UTC (`toISOString`; Django `TIME_ZONE = "UTC"`) | **Recommended precedence:** (1) a school time zone set by the school's administrator, then (2) a pupil time zone set by the guardian in settings, then (3) UTC. **Never** the current device location, and never inferred after the fact. Each zone is recorded as a dated event and applies only from then on. **Built:** the zone in effect at each finding's last error is used, so a zone recorded later never re-dates earlier answers, and replay is deterministic. **Not built:** writing a zone, and a school setting. Both need a decision |
+| 3b | Can a later calendar day stand in for the 7-day retention interval? | None (verified) | Calendar days are used only by misconception resolution. Retention is the engine's day count. "Confirmed" uses a 6.5-day minimum between the first supported claim and the passed check. A test shows a pupil right again the next calendar day (UTC, Kolkata, New York) stays "shown", never "confirmed" | No change |
+
+**Unresolved educational assumptions (for educator review, not tuning):**
+- **Difficulty estimates:** question difficulties are author estimates; none is calibrated.
+- **Draft thresholds:** the window of 6; at level = L − 0.25; 2 right at level; contradiction at ≤ L − 1; resolution
+  at the hardest error − 0.5 with a later day; dictation diversity of 2 words on 2 patterns; the 0.5 level grid.
+- **Pattern relations:** whether a lesson on one spelling pattern bears on another (§6b).
+- **Easy slips:** whether a single easy slip should cap the current level as far as the contradiction rule does.
+- **Failures at the level:** whether wrong answers at the level should be an explicit gate condition, rather than
+  acting only through the engine's estimate.
+
+**Pupil A:** replay unchanged. Pupil A has no skill with an engine level, so none of these rules applies.

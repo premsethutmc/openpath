@@ -9,7 +9,7 @@ import { type DayBasis, calendarDay, dayBasis } from "./calendar.ts";
 import { type Code, loadContent } from "./content.ts";
 import { diagnose } from "./diagnostics.ts";
 import { affectedPatterns, candidateLevels } from "./mastery.ts";
-import { MASTERY_GATE } from "./mastery-policy.ts";
+import { LESSON_SCOPE, MASTERY_GATE } from "./mastery-policy.ts";
 import { CAP, DICTATION_SCENARIOS, type Day, ESTIMATE_4_SHOWN_3, MASTERY_SCENARIOS, finding, history, judge } from "./mastery-scenarios.ts";
 import { misconceptionFindings } from "./misconceptions.ts";
 import { learnerProfile } from "./profile.ts";
@@ -112,7 +112,18 @@ test("a demonstrated level is never retention-confirmed before the delayed check
   assert.equal(next.profile.levels.confirmed, null);
 });
 
-test("lesson scope: a spelling lesson supersedes earlier answers on its pattern and patterns sharing a misconception; unrelated patterns keep theirs", async () => {
+test("lesson scope is OFF by default: every lesson supersedes earlier answers on the whole skill (conservative, until an educator reviews pattern relations)", async () => {
+  assert.equal(LESSON_SCOPE.spellingPatternTags, false);
+  assert.equal(affectedPatterns(c, CAP, "y_to_i"), null);
+  const base: Day[] = [{ answers: [["hurried", true], ["happier", true], ["studied", true], ["stopped", true], ["dropped", true], ["grabbed", true]] }];
+  const yLesson = judge((await history([...base, { lesson: "y_to_i", answers: [] }], c)).l, c);
+  assert.equal(yLesson.gate!.window.length, 0, "every earlier answer is history for the claim");
+  assert.equal(yLesson.gate!.superseded, 6);
+});
+
+test("lesson scope when switched on (behind LESSON_SCOPE, for educator review): a spelling lesson supersedes earlier answers on its pattern and patterns sharing a misconception tag; unrelated patterns keep theirs", async () => {
+  LESSON_SCOPE.spellingPatternTags = true;
+  try {
   // from the content's own misconception tags: the doubling lesson reaches every pattern where a doubling error
   // (missing or extra) is listed; y to i shares none
   const doubling = affectedPatterns(c, CAP, "double_short")!;
@@ -130,6 +141,9 @@ test("lesson scope: a spelling lesson supersedes earlier answers on its pattern 
   assert.equal(yLesson.gate!.window.length, 3, "the three doubling answers stand");
   const dLesson = judge((await history([...base, { lesson: "double_short", answers: [] }], c)).l, c);
   assert.ok(dLesson.gate!.window.every((a) => a.pattern === "y_to_i"));
+  } finally {
+    LESSON_SCOPE.spellingPatternTags = false;
+  }
 });
 
 test("calendar days: UTC by default for every existing record; the pupil's time zone when recorded, across midnight and daylight saving", async () => {
@@ -178,9 +192,15 @@ test("misconception resolution across midnight: a later day in Kolkata, the same
   const localRight = calendarDay(times.at(-1)!, { zone: "Asia/Kolkata", source: "recorded" });
   assert.equal(local.status, localRight > localErr ? "resolved" : "improving");
   assert.equal(JSON.stringify(l.events), stored, "no timestamp rewritten");
-  // a time zone recorded in the pupil's preferences is used without being asked for
-  const withZone = fold(c, [...l.events, { kind: "preferences", id: "tz", at: l.clock(), band: "school", goal: "spelling", timeZone: "Asia/Kolkata" }]);
-  assert.equal(misconceptionFindings(withZone, c).find((f) => f.misconception === "no_doubling")!.days.zone, "Asia/Kolkata");
+  // a zone recorded AFTER the answers never re-dates them: they keep the basis in effect when they were given (UTC)
+  const later = fold(c, [...l.events, { kind: "preferences", id: "tz", at: l.clock(), band: "school", goal: "spelling", timeZone: "Asia/Kolkata" }]);
+  const lf = misconceptionFindings(later, c).find((f) => f.misconception === "no_doubling")!;
+  assert.deepEqual([lf.days.zone, lf.status], ["UTC", inUtc.status]);
+  // a zone recorded BEFORE the answers is the one in effect for them, without being asked for
+  const first = l.events.findIndex((e) => e.kind === "session");
+  const before = fold(c, [...l.events.slice(0, first), { kind: "preferences", id: "tz0", at: l.events[first].at, band: "school", goal: "spelling", timeZone: "Asia/Kolkata" }, ...l.events.slice(first)]);
+  const bf = misconceptionFindings(before, c).find((f) => f.misconception === "no_doubling")!;
+  assert.deepEqual([bf.days.zone, bf.status], ["Asia/Kolkata", local.status]);
 });
 
 test("existing results where the refinement does not apply are unchanged (same level as the engine, same standing); replay is identical", async () => {
@@ -242,4 +262,52 @@ test("review fixes: the recorded time zone survives a later preferences change w
   assert.equal(dayBasis(s).zone, "Asia/Kolkata");
   assert.equal(dayBasis(s, "").zone, "Asia/Kolkata");
   assert.equal(dayBasis(fold(c, l.events)).zone, "UTC", "every existing record: UTC");
+});
+
+// ------------------------------------------------------------------ final bounded review (15 October)
+
+const BASE: Day[] = [{ answers: [["stopped", true], ["dropped", true], ["smiling", true], ["writing", true], ["hurried", true], ["happier", true]] }];
+
+test("review 1: the estimate does not fall from time passing or from errors far above the level; the level shown stays", async () => {
+  const base = judge((await history(BASE, c)).l, c);
+  assert.deepEqual([base.profile.levels.estimated, base.profile.levels.demonstrated], [4.5, 3.5]);
+  // wrong on three words far harder than the level (6.25–6.5): not contradictions, and the estimate does not move
+  const hard = judge((await history([...BASE, { answers: [["committed", false], ["limited", false], ["ordered", false]] }], c)).l, c);
+  assert.deepEqual([hard.profile.levels.estimated, hard.profile.levels.demonstrated], [4.5, 3.5]);
+});
+
+test("review 1: when the estimate falls after wrong answers AT the level, the cap is doing real work the gate alone does not", async () => {
+  // three wrong at exactly 3.5 after showing 3.5: the gate's window still has 3 right at ≥ 3.25 and no wrong at
+  // ≤ 2.5, so the gate alone would keep 3.5; the engine's estimate falls to 3, and 3 is what is shown
+  const { l } = await history([...BASE, { answers: [["closing", false], ["saving", false], ["chasing", false]] }], c);
+  const j = judge(l, c);
+  assert.deepEqual([j.profile.levels.estimated, j.profile.levels.demonstrated, j.profile.levels.historical], [3, 3, 3.5]);
+  const { masteryGate, qualifyingAnswers } = await import("./mastery.ts");
+  assert.equal(masteryGate(l.state, c, CAP, 3.5, l.clock(), true, qualifyingAnswers(l.state, c, CAP)).passed, true, "the gate by itself would still allow 3.5");
+  assert.ok(j.profile.strengths.some((t) => /Earlier shown at about level 3\.5 .*history/.test(t)), "3.5 is kept as history");
+});
+
+test("review 1 (fix): a later check that is due is reported for a level the gate supported, even below the engine's retained level", async () => {
+  // shown at 3.5 against an estimate of 4.5; thirty days later the check is overdue: "check due", not "developing"
+  const j = judge((await history([...BASE, { gap: 30, answers: [] }], c)).l, c);
+  assert.equal(j.engineStatus, "overdue");
+  assert.equal(j.standing, "check_due");
+  assert.equal(j.profile.levels.demonstrated, null, "no current level while the check is overdue");
+  assert.equal(j.profile.levels.historical, 3.5);
+  assert.ok(j.profile.strengths.some((t) => /Shown earlier, at about level 3\.5 .*a later check is due/.test(t)), j.profile.strengths.join(" | "));
+  // and never for a level the gate never supported (one easy pattern only)
+  const never = judge((await history([...DICTATION_SCENARIOS.find((x) => x[0] === "D3")![2], { gap: 30, answers: [] }], c)).l, c);
+  assert.notEqual(never.standing, "check_due");
+});
+
+test("review 3: a later calendar day never substitutes for the seven-day retention interval", async () => {
+  // shown on day 1; right again the next calendar day (in UTC and in Kolkata): shown, never confirmed
+  const days: Day[] = [...ESTIMATE_4_SHOWN_3, { answers: [["planned", true], ["closing", true], ["grabbed", true]] }];
+  for (const zone of [null, "Asia/Kolkata", "America/New_York"]) {
+    const { l } = await history(days, c);
+    const s = zone ? fold(c, [{ kind: "preferences" as const, id: "tz", at: "2026-09-01T00:00:00.000Z", band: "school" as const, goal: "spelling" as const, timeZone: zone }, ...l.events]) : l.state;
+    const cap = learnerProfile(s, c, l.clock()).capabilities.find((x) => x.id === CAP)!;
+    assert.equal(cap.standing, "shown", String(zone));
+    assert.equal(cap.levels.confirmed, null);
+  }
 });

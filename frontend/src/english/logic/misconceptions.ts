@@ -79,7 +79,8 @@ export function probes(item: Code | undefined, tag: string): boolean {
 const fmt = (x: number) => (Number.isInteger(x) ? String(x) : String(Math.round(x * 100) / 100));
 
 export function misconceptionFindings(s: AppState, c: AppContent, opts: { timeZone?: string | null } = {}): MisconceptionFinding[] {
-  const basis = dayBasis(s, opts.timeZone);
+  // calendar days in the zone in effect at the finding's last error (calendar.ts), UTC when none is recorded
+  let basis = dayBasis(s, opts.timeZone);
   const dayOf = (iso: string) => calendarDay(iso, basis);
   const item = (id: string) => c.ctx.content.items.get(id) as Code | undefined;
   const bOf = (d: Decision) => item(d.observation!.item)?.b ?? 0;
@@ -102,11 +103,13 @@ export function misconceptionFindings(s: AppState, c: AppContent, opts: { timeZo
   }
   const out: MisconceptionFinding[] = [];
   for (const { capability, tag, errors, notCounted } of byKey.values()) {
+    basis = dayBasis(s, opts.timeZone);
     if (!errors.length) {
       out.push({ capability, misconception: tag, support: "suspected", status: "suspected", errors: [], laterRight: [], needed: null, below: null, notCounted, days: basis, reason: `seen only in practice, with help or after teaching (${notCounted}): not counted as evidence of a misconception` });
       continue;
     }
     const last = errors.reduce((a, b) => (a.at >= b.at ? a : b));
+    basis = dayBasis(s, opts.timeZone, last.at);
     const distinctErrors = new Set(errors.map((d) => d.observation!.item));
     const support: MisconceptionSupport = distinctErrors.size >= 2 ? "supported" : "suspected";
     const hardest = Math.max(...errors.map(bOf));
