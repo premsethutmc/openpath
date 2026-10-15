@@ -160,16 +160,10 @@ function MyWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
         <span aria-hidden="true">📝 </span>My Words
       </h2>
       <p>Practise words supplied by a parent.</p>
-      {!learner.keepsParentContent ? (
-        <p className="small">A parent's lists are kept on the device only, so My Words is for learners saved on this device, not in a parent account.</p>
-      ) : (
-        <>
-          {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
-          <button type="button" className="secondary" onClick={onOpen}>
-            {n ? "Open My Words" : "Add a word list"}
-          </button>
-        </>
-      )}
+      {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {n ? "Open My Words" : "Add a word list"}
+      </button>
     </section>
   );
 }

@@ -177,25 +177,32 @@ export class Learner {
     return wordLists(this.events);
   }
 
-  /** Parent-supplied content (My Words lists, My Books text) stays on this device: it is offered only for a record
-   * kept on the device, never for a learner whose record is saved in a parent account on the server. */
-  get keepsParentContent(): boolean {
-    return this.repo.kind !== "server";
+  /**
+   * Where parent-supplied content (My Words lists, My Books text) is kept: with the rest of this learner's record. On
+   * a device-only record that is this browser on this device; for a learner in a parent account it is the learner's
+   * record in that account on OpenPath's server, which only that parent can open (a developer looking at a pupil a
+   * parent chose to share for diagnostics sees parent content redacted: backend/family/developer.py).
+   */
+  get contentPlace(): "device" | "account" {
+    return this.repo.kind === "server" ? "account" : "device";
   }
-  private guardPrivate(what: string) {
-    if (!this.keepsParentContent) throw new Error(`${what} keeps a parent's words on this device only, so it is not available for a learner saved in a parent account`);
+  /** One saved event must fit the server's limit for a single event (backend OPENPATH_MAX_EVENT_BYTES, 32,000). */
+  private fits(e: AppEvent, what: string, limit = 30_000) {
+    const bytes = new TextEncoder().encode(JSON.stringify(e)).length;
+    if (bytes > limit) throw new Error(`${what} is too large to save (${Math.ceil(bytes / 1000)} KB; at most ${limit / 1000} KB). Split it into two.`);
   }
 
   /** Save a word list (new, or a new version of an existing one). Words must already be checked (parseWords). */
   async saveWordList(name: string, words: ListWord[], id?: string): Promise<string> {
     this.guard("My Words");
-    this.guardPrivate("My Words");
     const n = name.trim().slice(0, LIST_LIMITS.nameLength);
     if (!n) throw new Error("give the list a name");
     if (!words.length) throw new Error("the list has no words");
     if (words.length > LIST_LIMITS.words) throw new Error(`a list holds at most ${LIST_LIMITS.words} words`);
     const listId = id ?? `list:${this.events.length + 1}`;
-    await this.add({ kind: "word_list", id: this.nextId(), at: this.clock(), list: { id: listId, name: n, words } });
+    const e: AppEvent = { kind: "word_list", id: this.nextId(), at: this.clock(), list: { id: listId, name: n, words } };
+    this.fits(e, "This list");
+    await this.add(e);
     return listId;
   }
 

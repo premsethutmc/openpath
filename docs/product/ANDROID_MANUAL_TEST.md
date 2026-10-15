@@ -170,6 +170,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A9.4 | Finish the list; go back to My Words | The list shows practised, right and "to review" counts |
 | A9.5 | Close Chrome and reopen; open My Words | The list and its progress are still there |
 | A9.6 | **Edit**, change the name, save; then **Delete** | The new name shows; after Delete the list is gone |
+| A9.7 | (App address, signed in as a parent) Make a list for a learner in the account; sign in on a second phone | The My Words screen says the list is saved in the learner's record in your parent account; the second phone shows the list and its progress |
 
 ## Part B: safety testing of the empty pilot build (pilot address)
 

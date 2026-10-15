@@ -98,13 +98,59 @@ test("MW-5 a list must have a name and words; a pilot build offers no My Words",
   await assert.rejects(pilot.saveWordList("Week 1", parseWords("cat").words), PilotRefusal);
 });
 
-test("MW-6 a parent's lists stay on the device: not offered for a learner saved in a parent account", async () => {
+test("MW-6 a learner in a parent account: lists are saved in the learner's record (on the server), practised and reloaded like on a device; an oversized list is refused before saving", async () => {
   const repo = new MemoryRepo();
-  Object.defineProperty(repo, "kind", { value: "server" });
-  const l = await Learner.create(c, repo, "Account pupil", "guardian", testClock(), "p-acc");
-  assert.equal(l.keepsParentContent, false);
-  await assert.rejects(l.saveWordList("Week 1", parseWords("cat").words), /on this device only/);
-  assert.equal(l.events.filter((e) => e.kind === "word_list").length, 0);
+  Object.defineProperty(repo, "kind", { value: "server" }); // the ServerRepo stores the same append-only events
+  const clock = testClock();
+  const l = await Learner.create(c, repo, "Account pupil", "guardian", clock, "p-acc");
+  assert.equal(l.contentPlace, "account");
+  const id = await l.saveWordList("Week 1", parseWords("cat, because").words);
+  await l.startSpelling({ type: "list", id });
+  assert.ok((await l.answerSpelling("cat", 1)).correct);
+  const again = await Learner.open(c, repo, "p-acc", clock);
+  assert.equal(again.wordLists()[0].name, "Week 1");
+  assert.equal(sourceProgress(again.spelling(), again.spellingWords({ type: "list", id }), clock()).practised, 1, "progress follows the learner's record");
+  assert.ok(again.events.filter((e) => e.kind === "spell_answer").every((e) => e.kind === "spell_answer" && e.source.type === "list" && e.source.id === id));
+  // the server takes one event of at most 32,000 bytes: a list that would not fit is refused with a reason, nothing saved
+  const huge = Array.from({ length: LIST_LIMITS.words }, (_, i) => ({ id: `w${i}`.padEnd(30, "a"), word: `w${i}`.padEnd(30, "a"), variants: ["b".repeat(30), "c".repeat(30), "d".repeat(30), "e".repeat(30)] }));
+  const before = again.events.length;
+  await assert.rejects(again.saveWordList("Huge", huge), /too large to save/);
+  assert.equal(again.events.length, before);
   const d = await Learner.create(c, new MemoryRepo(), "Device pupil", "guardian", testClock(), "p-dev");
-  assert.equal(d.keepsParentContent, true);
+  assert.equal(d.contentPlace, "device");
+});
+
+test("MW-7 editing or deleting a list never changes other progress: the Bee, other lists, and the answers already given", async () => {
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "Many Lists", "guardian", clock, "p-many");
+  // some Spelling Bee practice first
+  await l.startSpelling();
+  for (let k = 0; k < 3; k++) await l.answerSpelling(l.spellingSession()!.word!.word, 1);
+  await l.stopSpelling();
+  const bee = () => sourceProgress(l.spelling(), l.spellingWords(), clock());
+  const beeBefore = bee();
+  const a = await l.saveWordList("A", parseWords("castle, listen, island").words);
+  const b = await l.saveWordList("B", parseWords("castle, because").words);
+  for (const id of [a, b]) {
+    await l.startSpelling({ type: "list", id });
+    while (l.spellingSession()?.word) await l.answerSpelling(l.spellingSession()!.word!.word === "listen" ? "lisen" : l.spellingSession()!.word!.word, 1);
+  }
+  const progress = (id: string) => sourceProgress(l.spelling(), l.spellingWords({ type: "list", id }), clock());
+  const bBefore = progress(b);
+  const answersBefore = l.events.filter((e) => e.kind === "spell_answer").length;
+  // the same word in two lists is two separate histories: "castle" in A is not "castle" in B
+  assert.equal(l.spelling().words.size, 3 + 3 + 2);
+  // edit A: drop "listen" (the misspelt one), keep the rest: A's remaining words keep their history
+  await l.saveWordList("A", parseWords("castle, island").words, a);
+  assert.deepEqual([progress(a).total, progress(a).practised, progress(a).reviewList], [2, 2, 0]);
+  // delete A: B, the Bee and every answer already given are untouched
+  await l.deleteWordList(a);
+  assert.deepEqual(progress(b), bBefore);
+  assert.deepEqual(bee(), beeBefore);
+  assert.equal(l.events.filter((e) => e.kind === "spell_answer").length, answersBefore);
+  // a new list with the same words starts fresh (it is a different list), and the old answers stay traceable to A
+  const a2 = await l.saveWordList("A again", parseWords("castle, island").words);
+  assert.notEqual(a2, a);
+  assert.equal(progress(a2).practised, 0);
+  assert.ok(l.events.some((e) => e.kind === "spell_answer" && e.source.id === a));
 });

@@ -151,6 +151,57 @@ class ScopeAndReadOnlyTests(DevTestCase):
             self.assertNotIn(secret, text)
 
 
+class ParentContentTests(DevTestCase):
+    """My Words lists live in the pupil's record: the parent's own account only; redacted in a shared record."""
+
+    def add(self, c, pid, kind, **fields):
+        n = c.get(f"/api/pupils/{pid}/events/?subject=english").json()["count"]
+        body = {"kind": kind, "id": f"{pid}:{n + 1}", "at": "2026-10-15T10:00:00Z", **fields}
+        r = c.post(f"/api/pupils/{pid}/events/", {"subject": "english", "seq": n, "event": body}, format="json")
+        self.assertEqual(r.status_code, 201, r.content)
+
+    def lists(self, c, pid):
+        self.add(c, pid, "word_list", list={"id": "list:4", "name": "Week 3 spellings", "words": [{"id": "because", "word": "because", "variants": []}, {"id": "colour", "word": "colour", "variants": ["color"]}]})
+        self.add(c, pid, "spell_session", session="sp:5", source={"type": "list", "id": "list:4"}, words=["because", "colour"], delivery="device_voice")
+        self.add(c, pid, "spell_answer", session="sp:5", source={"type": "list", "id": "list:4"}, word={"id": "because", "text": "because"}, response="becuase", correct=False, plays=1, review=False)
+        self.add(c, pid, "spell_answer", session="sp:5", source={"type": "bank", "id": "spelling-bee"}, word={"id": "bee.friend", "text": "friend", "level": 1}, response="friend", correct=True, plays=1, review=False)
+
+    def test_a_parents_list_is_theirs_alone_and_redacted_when_a_pupil_is_shared_for_diagnostics(self):
+        other = self.parent("ravi@example.org")
+        meera = self.pupil(other, "Meera")
+        self.lists(other, meera)
+        # the parent reads it back in full, on any device (the same account)
+        full = other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"]
+        self.assertEqual(full[3]["list"]["words"][0]["word"], "because")
+        # another family: nothing at all
+        stranger = self.parent("stranger@example.org")
+        self.assertEqual(stranger.get(f"/api/pupils/{meera}/events/?subject=english").status_code, 404)
+        self.assertEqual(stranger.get(f"/api/pupils/{meera}/export/").status_code, 404)
+        # a developer, once the parent shares Meera for diagnostics: the shape, never the words
+        dev = self.developer()
+        other.patch(f"/api/pupils/{meera}/", {"shared_for_diagnostics": True}, format="json")
+        seen = dev.get(f"/api/developer/pupils/{meera}/events/").json()["events"]
+        text = json.dumps(seen)
+        self.assertNotIn("because", text)
+        self.assertNotIn("becuase", text)
+        self.assertNotIn("colour", text)
+        self.assertNotIn("Week 3", text)
+        self.assertEqual(seen[3]["list"]["words"], [])
+        self.assertEqual(seen[3]["redacted"], "a parent's word list of 2 words")
+        self.assertEqual(seen[4]["words"][0], seen[5]["word"]["id"], "the same word keeps the same pseudonym")
+        self.assertEqual((seen[5]["correct"], seen[5]["source"]), (False, {"type": "list", "id": "list:4"}), "right or wrong and the source stay")
+        self.assertEqual(seen[6]["word"]["text"], "friend", "the preloaded Spelling Bee words are not parent content")
+        # nothing in the stored record changed
+        self.assertEqual(other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"], full)
+
+    def test_a_developers_own_pupils_are_shown_in_full(self):
+        dev = self.developer()
+        arun = self.pupil(dev, "Arun")
+        self.lists(dev, arun)
+        seen = dev.get(f"/api/developer/pupils/{arun}/events/").json()["events"]
+        self.assertEqual(seen[3]["list"]["words"][1]["variants"], ["color"])
+
+
 class TelemetryAndErrorTests(DevTestCase):
     def test_the_app_reports_measurements_from_a_fixed_list_with_scrubbed_details(self):
         self.assertIn(APIClient().post("/api/telemetry/", {"metrics": [{"name": "save_ms", "ms": 12}]}, format="json").status_code, (401, 403))

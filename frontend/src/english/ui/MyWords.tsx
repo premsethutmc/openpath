@@ -26,7 +26,8 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
       <h1 id="mywords-title" className="hero">
         My Words
       </h1>
-      <p className="sub">Type, paste or upload the words to practise. They stay on this device. When the learner practises, each word is only spoken, never shown.</p>
+      <p className="sub">Type, paste or upload the words to practise. When the learner practises, each word is only spoken, never shown.</p>
+      <p className="small where-kept">{keptWhere(learner)}</p>
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         New word list
       </button>
@@ -70,6 +71,13 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
       )}
     </main>
   );
+}
+
+/** Where a parent's lists are saved, said plainly before anything is typed. */
+export function keptWhere(learner: Learner, what = "Lists"): string {
+  return learner.contentPlace === "account"
+    ? `${what} are saved in ${learner.state.profile?.name ?? "this learner"}'s record in your parent account, so they are on any device you sign in on. Only your account can open them. Deleting removes it from this screen; it stays in the learner's record until the learner is deleted.`
+    : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting removes it from this screen; it stays in the learner's record until the learner is deleted.`;
 }
 
 function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordList | null; onDone: () => void }) {
