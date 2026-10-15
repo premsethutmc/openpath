@@ -11,7 +11,10 @@
 /** C′: the evidence gate before a skill is described as demonstrated at level L. */
 export const MASTERY_GATE = {
   version: "mastery-gate@0-draft",
-  /** Only the latest this-many qualifying independent answers after the most recent lesson on the skill count. */
+  /**
+   * Only the latest this-many qualifying independent answers count, leaving out answers that a later lesson
+   * superseded (spelling: on its pattern or related ones; otherwise the whole skill; see SPELLING_PATTERN_SCOPE).
+   */
   window: 6,
   /** A right answer is "at level" on a question of difficulty ≥ L − atLevelBelow. */
   atLevelBelow: 0.25,
@@ -32,6 +35,14 @@ export const MASTERY_GATE = {
   checkLength: 4,
 } as const;
 
+/**
+ * Lesson scope for the gate's window (investigated 15 October; see MASTERY_RULES.md §2b). Spelling lessons and
+ * answers both carry a ladder pattern, so a spelling lesson supersedes only earlier answers on its pattern and on
+ * patterns sharing a misconception with it in the content. false: every lesson supersedes the whole skill (the
+ * earlier, conservative rule). Other skills always use the whole-skill rule.
+ */
+export const SPELLING_PATTERN_SCOPE = true;
+
 /** The stricter misconception resolution. */
 export const RESOLUTION = {
   version: "misconception-resolution@0-draft",
@@ -39,7 +50,10 @@ export const RESOLUTION = {
   minRight: 2,
   /** …each on a question of difficulty ≥ (the hardest matching error's difficulty − belowHardest)… */
   belowHardest: 0.5,
-  /** …with at least one on a later calendar day (UTC) than the last matching error. */
+  /**
+   * …with at least one on a later calendar day than the last matching error: in the pupil's (or school's) time zone
+   * when the record has one, otherwise UTC (every record so far).
+   */
   laterDay: true,
 } as const;
 

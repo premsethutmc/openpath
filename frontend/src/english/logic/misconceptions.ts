@@ -24,10 +24,11 @@
  * are listed apart and never support a misconception. Every status lists the answers that produced it.
  *
  * Nothing is stored: the statuses are recomputed from the record, so historical evidence keeps its meaning.
- * Calendar days are UTC days (the record does not hold the pupil's time zone). The thresholds are drafts.
+ * Calendar days are the pupil's when the record holds a time zone, otherwise UTC (calendar.ts). The thresholds are drafts.
  */
 import type { Decision } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent, Code } from "./content.ts";
+import { type DayBasis, basisWords, calendarDay, dayBasis } from "./calendar.ts";
 import { RESOLUTION } from "./mastery-policy.ts";
 import type { AppState } from "./state.ts";
 
@@ -63,6 +64,8 @@ export interface MisconceptionFinding {
   notCounted: number;
   /** Why it has this status, in words. */
   reason: string;
+  /** How "a later day" was judged: the pupil's time zone, or UTC as the fallback. */
+  days: DayBasis;
 }
 
 const independent = (d: Decision) => d.verdict === "accepted" && d.observation?.kind === "binary" && d.observation.setting !== "after_teaching" && d.observation.exposure !== "repeat";
@@ -73,10 +76,11 @@ export function probes(item: Code | undefined, tag: string): boolean {
   return Object.values(item.wrong ?? {}).includes(tag) || Object.values(item.distractor_tags ?? {}).includes(tag) || (item.addresses ?? []).includes(tag);
 }
 
-const utcDay = (iso: string) => iso.slice(0, 10);
 const fmt = (x: number) => (Number.isInteger(x) ? String(x) : String(Math.round(x * 100) / 100));
 
-export function misconceptionFindings(s: AppState, c: AppContent): MisconceptionFinding[] {
+export function misconceptionFindings(s: AppState, c: AppContent, opts: { timeZone?: string | null } = {}): MisconceptionFinding[] {
+  const basis = dayBasis(s, opts.timeZone);
+  const dayOf = (iso: string) => calendarDay(iso, basis);
   const item = (id: string) => c.ctx.content.items.get(id) as Code | undefined;
   const bOf = (d: Decision) => item(d.observation!.item)?.b ?? 0;
   const ans = (d: Decision, extra: Partial<FindingAnswer> = {}): FindingAnswer => ({ decision: d.id, item: d.observation!.item, at: d.at, b: bOf(d), ...extra });
@@ -99,7 +103,7 @@ export function misconceptionFindings(s: AppState, c: AppContent): Misconception
   const out: MisconceptionFinding[] = [];
   for (const { capability, tag, errors, notCounted } of byKey.values()) {
     if (!errors.length) {
-      out.push({ capability, misconception: tag, support: "suspected", status: "suspected", errors: [], laterRight: [], needed: null, below: null, notCounted, reason: `seen only in practice, with help or after teaching (${notCounted}): not counted as evidence of a misconception` });
+      out.push({ capability, misconception: tag, support: "suspected", status: "suspected", errors: [], laterRight: [], needed: null, below: null, notCounted, days: basis, reason: `seen only in practice, with help or after teaching (${notCounted}): not counted as evidence of a misconception` });
       continue;
     }
     const last = errors.reduce((a, b) => (a.at >= b.at ? a : b));
@@ -119,7 +123,7 @@ export function misconceptionFindings(s: AppState, c: AppContent): Misconception
       laterRight.push(ans(d, { atLevel: bOf(d) >= needed - 1e-9 }));
     }
     const atLevel = laterRight.filter((a) => a.atLevel);
-    const laterDay = atLevel.some((a) => utcDay(a.at) > utcDay(last.at));
+    const laterDay = atLevel.some((a) => dayOf(a.at) > dayOf(last.at));
     const what = support === "supported" ? `errors on ${distinctErrors.size} different questions` : "one error";
     let status: MisconceptionStatus;
     let reason: string;
@@ -127,7 +131,7 @@ export function misconceptionFindings(s: AppState, c: AppContent): Misconception
     if (atLevel.length >= RESOLUTION.minRight && (!RESOLUTION.laterDay || laterDay)) {
       status = "resolved";
       reason = `${what} (hardest at difficulty ${fmt(hardest)}), then ${atLevel.length} right answers on different questions at difficulty ${fmt(needed)} or harder, including on a later day, with no matching error since`;
-    } else if (laterRight.length >= RESOLUTION.minRight && atLevel.length < RESOLUTION.minRight && (!RESOLUTION.laterDay || laterRight.some((a) => utcDay(a.at) > utcDay(last.at)))) {
+    } else if (laterRight.length >= RESOLUTION.minRight && atLevel.length < RESOLUTION.minRight && (!RESOLUTION.laterDay || laterRight.some((a) => dayOf(a.at) > dayOf(last.at)))) {
       status = "resolved_below";
       below = hardest;
       reason = `${what} at difficulty up to ${fmt(hardest)}; since then right on ${laterRight.length} questions that test it, but only ${atLevel.length} at difficulty ${fmt(needed)} or harder: resolved below level ${fmt(hardest)}, the harder form is not yet shown`;
@@ -141,7 +145,8 @@ export function misconceptionFindings(s: AppState, c: AppContent): Misconception
       status = support;
       reason = support === "supported" ? `errors that match it on ${distinctErrors.size} different questions` : "one error that matches it: a suspicion, not enough to call it a pattern";
     }
-    out.push({ capability, misconception: tag, support, status, errors: errors.map((d) => ans(d)), laterRight, needed, below, notCounted, reason });
+    if (status === "resolved" || status === "resolved_below" || (status === "improving" && laterRight.length >= RESOLUTION.minRight)) reason += ` (${basisWords(basis)})`;
+    out.push({ capability, misconception: tag, support, status, errors: errors.map((d) => ans(d)), laterRight, needed, below, notCounted, reason, days: basis });
   }
   return out.sort((a, b) => a.capability.localeCompare(b.capability) || a.misconception.localeCompare(b.misconception));
 }

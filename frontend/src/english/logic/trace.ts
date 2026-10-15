@@ -87,7 +87,7 @@ export function planTrace(profile: LearnerProfile, started: PlanTrace["started"]
     started,
     startedRank: rank >= 0 ? rank : null,
     standings: Object.fromEntries(profile.capabilities.filter((x) => x.standing !== "not_checked").map((x) => [x.id, x.standing])),
-    ...(profile.capabilities.some((x) => x.notYetShown) ? { gaps: Object.fromEntries(profile.capabilities.filter((x) => x.notYetShown).map((x) => [x.id, x.notYetShown!.slice(0, 400)])) } : {}),
+    ...(profile.capabilities.some((x) => x.notYetShown || x.higherNotYetShown) ? { gaps: Object.fromEntries(profile.capabilities.filter((x) => x.notYetShown || x.higherNotYetShown).map((x) => [x.id, (x.notYetShown ?? x.higherNotYetShown)!.slice(0, 400)])) } : {}),
     ...(target ? { target } : {}),
   };
 }

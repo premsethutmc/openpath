@@ -13,15 +13,15 @@ import { DICTATION_SCENARIOS, MASTERY_SCENARIOS, RESOLUTION_SCENARIOS, finding, 
 const c = loadContent();
 
 console.log("## Mastery (C′): what the profile reports for each history\n");
-console.log("| Scenario | Answers (qualifying) | Engine level | Reported | Evidence gate |");
-console.log("|---|---|---|---|---|");
+console.log("| Scenario | Answers (qualifying) | Estimated (engine) | Shown now | Reported | Evidence gate at the estimate |");
+console.log("|---|---|---|---|---|---|");
 for (const [id, name, days] of [...MASTERY_SCENARIOS, ...DICTATION_SCENARIOS]) {
   const { l } = await history(days, c);
   const j = judge(l, c);
   const e = j.profile.evidence;
   const g = j.gate;
   const gate = !g ? "no level to test" : g.passed ? `passes: ${g.atLevel.length} right at ≥ ${g.level - 0.25} on different questions${g.singleFormat ? `, ${g.words} words on ${g.patterns.length} patterns (dictation only)` : ""}; no recent error on easier questions` : `not yet: ${g.missing.join(" ")}`;
-  console.log(`| ${id} ${name} | ${e.independentRight} of ${e.independent} right | ${j.engineLevel ?? "none"} | ${j.standing}${j.mastery ? ` (${j.mastery})` : ""} | ${gate} |`);
+  console.log(`| ${id} ${name} | ${e.independentRight} of ${e.independent} right | ${j.engineLevel ?? "none"} | ${j.profile.levels.demonstrated ?? "–"} | ${j.standing}${j.mastery ? ` (${j.mastery})` : ""} | ${gate} |`);
 }
 
 console.log("\n## Misconception resolution\n");

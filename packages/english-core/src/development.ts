@@ -99,6 +99,11 @@ export interface EvidenceGap {
   why: string;
   /** Unused questions at the difficulty needed (diagnostic, fresh_check). */
   available: number;
+  /**
+   * A lower level is already shown (this one): the gap is between it and the estimate. The shown level stands; the
+   * plan collects evidence for the higher one, after more pressing work.
+   */
+  shownBelow?: number;
 }
 
 export type DevelopmentAction =
@@ -274,8 +279,15 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
         else review(c, 30, `${c.name} is due for a check, but every question for it has been used.`, "More reviewed questions for it.");
         continue;
       case "shown":
-      case "confirmed":
-        continue; // shown: nothing to do until a check is due
+      case "confirmed": {
+        // shown at a lower level than the estimate: collect evidence for the higher level (never easier questions);
+        // nothing for an adult if no question is left, since the lower level already stands
+        const g = c.evidenceGap;
+        if (g && g.shownBelow !== undefined && g.available > 0)
+          add({ action: "evidence_check", capability: c.id, priority: 50, what: `Show ${c.name} at about level ${g.level}`, why: `${c.name} is shown at about level ${g.shownBelow}, and that stands. The estimate suggests about level ${g.level}, which is not shown yet: ${g.missing} Next: ${g.why}.`, evidence: [ev(c)], changeIf: `Right on the new questions, with no errors on easier ones: shown at about level ${g.level}. Wrong: level ${g.shownBelow} still stands.`, content: { available: true, note: `${g.available} unused question${g.available === 1 ? "" : "s"} at the difficulty needed` } });
+        else if (g && g.shownBelow !== undefined) note(c.id, `The estimate suggests about level ${g.level}, above the level shown (${g.shownBelow}), but no unused question is left at that difficulty.`);
+        continue; // otherwise nothing to do until a check is due
+      }
     }
     // the engine demonstrates a level that the evidence rule does not yet support: collect what is missing (never
     // by repeating easy questions; the caller counts only unused questions at the difficulty needed)

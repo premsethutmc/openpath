@@ -159,3 +159,20 @@ test("D1-12 an evidence gap (the engine demonstrates, the caller's rule does not
   const without = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "developing", { independent: 6, independentRight: 4 }, { content: { assess: 5, teach: "lesson" } })], requires });
   assert.equal(without.all.find((x) => x.capability === "EN.GRM.VERB.sva")!.action, "continue", "without a gap the plan is exactly as before");
 });
+
+test("D1-13 shown at a lower level than the estimate: the shown level stands, evidence for the higher one comes after more pressing work; no content means a note, not an adult", () => {
+  order = 0;
+  const gap = { level: 4, kind: "diagnostic" as const, missing: "1 recent right answer at level 4 or harder; 2 are needed.", why: "new questions at difficulty 3.75 to 5", available: 3, shownBelow: 3 };
+  const plan = planDevelopment({ capabilities: [cap("EN.FND.SPL.inflections", "shown", { independent: 6, independentRight: 5 }, { evidenceGap: gap }), cap("EN.GRM.VERB.sva", "uncertain", { independent: 2, independentRight: 1 })], requires });
+  const r = plan.all.find((x) => x.capability === "EN.FND.SPL.inflections")!;
+  assert.equal(r.action, "evidence_check");
+  assert.match(r.why, /shown at about level 3, and that stands/);
+  assert.ok(r.priority < plan.all.find((x) => x.capability === "EN.GRM.VERB.sva")!.priority);
+  order = 0;
+  const none = planDevelopment({ capabilities: [cap("EN.FND.SPL.inflections", "shown", { independent: 6, independentRight: 5 }, { evidenceGap: { ...gap, available: 0 } })], requires });
+  assert.ok(!none.all.some((x) => x.capability === "EN.FND.SPL.inflections"));
+  assert.match(none.notes["EN.FND.SPL.inflections"][0], /no unused question is left/);
+  order = 0;
+  const plain = planDevelopment({ capabilities: [cap("EN.FND.SPL.inflections", "shown", { independent: 6, independentRight: 5 })], requires });
+  assert.ok(!plain.all.some((x) => x.capability === "EN.FND.SPL.inflections"), "without a gap: nothing until a check is due, as before");
+});

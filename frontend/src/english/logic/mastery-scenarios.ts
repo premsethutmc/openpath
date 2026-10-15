@@ -16,7 +16,8 @@ export const CAP = "EN.FND.SPL.inflections";
 /** One answer: the word (dictation word, or a hand-written fill-in answer), right / wrong / the typed text, and options. */
 export type Answer = [word: string, outcome: boolean | string, opts?: { assisted?: boolean }];
 export interface Day {
-  lesson?: boolean;
+  /** A lesson first: true is the doubling lesson (double_short); a string names the step taught. */
+  lesson?: boolean | string;
   answers: Answer[];
   /** Days since the previous session (default 1). */
   gap?: number;
@@ -44,7 +45,7 @@ export async function history(days: Day[], c: AppContent = loadContent(), start 
   for (const day of days) {
     t += (day.gap ?? 1) * 86_400_000;
     await l.start({ type: "spelling_assess" });
-    if (day.lesson) await l.finishLesson(`${CAP}#double_short`, true);
+    if (day.lesson) await l.finishLesson(`${CAP}#${day.lesson === true ? "double_short" : day.lesson}`, true);
     for (const [w, ok, o] of day.answers) {
       const it = word(w);
       await l.answer(it, { kind: "typed", text: ok === true ? w : ok === false ? `${w}x` : ok }, { use: "assessment", ...(o?.assisted ? { assisted: true } : {}) });
@@ -77,6 +78,9 @@ export const DICTATION_SCENARIOS: [string, string, Day[]][] = [
   ["D2", "dictation only, right on six words, but those at the level claimed are all one pattern", [{ answers: [["stopped", true], ["smiling", true], ["hurried", true], ["happier", true], ["writing", true], ["dropped", true]] }]],
   ["D3", "dictation only, right on six words of one easy pattern", [{ answers: [["stopped", true], ["dropped", true], ["shopping", true], ["clapped", true], ["grabbed", true], ["planned", true]] }]],
 ];
+
+/** The engine estimates 4; the recent answers support 3 (one right answer above 3.25), so 3 is shown and 4 is not yet. */
+export const ESTIMATE_4_SHOWN_3: Day[] = [{ answers: [["stopped", true], ["churches", true], ["dropped", true], ["shopping", true], ["happier", true], ["admitted", false]] }];
 
 export const RESOLUTION_SCENARIOS: [string, string, Day[]][] = [
   ["R1", "error on a hard word (admitted, 5.75), then right on 2 easy words (stopped, clapped: 3.0) the next day", [{ answers: [["admitted", "admited"]] }, { answers: [["stopped", true], ["clapped", true]] }]],

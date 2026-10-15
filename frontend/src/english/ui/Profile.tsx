@@ -167,6 +167,11 @@ export function CapabilityCard({ cap }: { cap: CapabilityProfile }) {
           {cap.notYetShown}
         </p>
       )}
+      {cap.higherNotYetShown && (
+        <p className="small note gate" data-gate="higher-not-yet">
+          {cap.higherNotYetShown}
+        </p>
+      )}
       {cap.strengths.map((t, i) => (
         <p key={`s${i}`} className="small strength">
           {t}

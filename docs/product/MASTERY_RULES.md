@@ -33,7 +33,8 @@ provenance. It never reads:
 - repeated questions;
 - answers straight after teaching.
 
-**The rule.** The engine's demonstrated level L may be called shown only when:
+**The rule.** A level L at or below the engine's demonstrated level may be called shown only when (since the second
+round, the highest such L is reported; see §6a):
 
 1. **Recent answers only.** The window is the latest **6** qualifying answers after the most recent lesson or teaching
    on the skill. Older answers stay in the record and in the estimate. They no longer decide the current claim.
@@ -123,21 +124,116 @@ Pupil A's recorded journey was replayed through the new code:
 - 24 placement answers, plus the 10 answered words of the older spelling check (practice-only);
 - the replay is from a local copy of the export, which is not in the repository.
 
-**Result:** the standings, mastery labels, Today and the plan are **identical** before and after. Pupil A has no
+**Result:** the standings, mastery labels, Today and the plan are **identical** before and after (both rounds). Pupil A has no
 "shown" skill, so no gate applies. All 13 skills with answers are "not enough evidence yet". The older check's words
 are practice-only, so they do not count as evidence of a misconception.
 
-## 6. Limitations and open questions
+## 6. Refinements (15 October, second round)
 
-- **Teaching resets the window.** "After the most recent lesson on that skill" is at skill level. A lesson on one
-  spelling pattern therefore starts a new window for the whole skill: the claim waits for a fresh check, the estimate
-  does not change, and the history is labelled "shown earlier". Per-pattern windows would need a further decision.
-- **The level can move.** The gate tests the level the engine demonstrates now. A pupil who keeps answering right can
-  see L rise, and then needs answers at the new level. An alternative would be to report the highest level the gate
-  supports, which may be lower than the engine's. That is not implemented; it is open for a decision.
+### 6a. Estimated level vs the highest level shown now
+
+The engine still proposes its level (**estimated**). The gate is now evaluated at each candidate level at or below it,
+on the engine's own half-band grid (estimate, estimate − 0.5, … down to 1). The **highest level that passes every
+requirement** is reported as shown now:
+- the same 6-answer window;
+- independence, at-level right answers on different questions and words;
+- no contradiction;
+- dictation diversity.
+
+Nothing is rounded down without that evidence: every candidate must pass on its own answers. If none passes, nothing is
+shown.
+
+The profile, diagnostics and dashboard now keep four levels apart (`CapabilityProfile.levels`):
+
+| Level | Meaning |
+|---|---|
+| estimated | the engine's proposal now |
+| demonstrated | the highest level the gate supports now; "shown" and `shownLevel` |
+| historical | the highest level the gate supported at any earlier time; always labelled as history ("Shown earlier, at about level 5 (date); not currently shown", or "Earlier shown at about level 5 …: history, not a current result") |
+| confirmed | the highest level, up to the one shown now, that the gate supported at least 7 days before the passed later check; a level first supported in the check itself is shown, not yet confirmed |
+
+When the level shown is below the estimate, the shown level stands and the plan adds an `evidence_check` for the
+estimate:
+- questions at estimate − 0.25 to estimate + 1, unused, never words already met (even when the estimate's gap is a slip,
+  the check stays at the higher level and never probes below the level already shown);
+- priority 50, so after more pressing work;
+- if no such question is left: a note, not a request to an adult, because the lower level already stands.
+
+**What changed in the scenarios:**
+
+| Scenario | Estimated | Before this round | Now |
+|---|---|---|---|
+| S4: right on easy words, wrong at harder | 3 | not shown | **shown at 2.5** (2 right at ≥ 2.25; no wrong at ≤ 1.5); 3 not yet shown |
+| D2: dictation, at-level words one pattern | 4.5 | not shown | **shown at 3.5** (2 patterns at ≥ 3.25); 4.5 not yet shown |
+| New: estimate 4, shown 3 (`ESTIMATE_4_SHOWN_3`) | 4 | not shown | **shown at 3**; 4 not yet shown; an evidence check at 3.75–5 is planned |
+| S1, S3, S5, S6, D1 | — | shown at the engine's level | unchanged |
+| S2, D3 | — | not shown | unchanged (no level passes) |
+
+**An easy slip caps the level only as far as the approved rule says.** One wrong answer at difficulty d contradicts
+levels from d + 1 up. S3 (shown at 5) followed by one wrong answer at 1.5 is shown at 2 until the slip leaves the
+window. The plan probes near the slip; it does not teach.
+
+### 6b. Lesson scope: investigation and change
+
+**How lessons and evidence are tracked:**
+
+| What | Granularity |
+|---|---|
+| Lessons | per pattern: lesson ids are `capability#step`; the teaching intervention records `capability` and `rule` (the step), including the doubling journey (`double_short`) |
+| Questions | every one carries a `step` (all 2,500+ spelling items, and every grammar, vocabulary and reading item) |
+| Ledger decisions and the estimate | per **capability**: the engine has no per-pattern estimate, and patterns are content tags on questions |
+| "After teaching" mark | per capability and session (unchanged) |
+| Relations between patterns | none explicit. The ladder gives order and band only. The only content-level link is the misconception tags that questions list |
+
+**Change (smallest defensible):**
+- **Spelling only:** a lesson supersedes earlier answers on its own pattern and on patterns whose questions share a
+  misconception tag with it, according to the content.
+  - The doubling lesson reaches every doubling-related pattern: double_short, stress_doubling, no_double_unstressed,
+    drop_e and exceptions.
+  - "y to i", "plain", "-es" and "plain affix" share none, so they are only themselves.
+- **Unchanged elsewhere:** every other skill, any lesson whose step is not a known pattern, and any answer without a
+  pattern keep the whole-skill rule. Grammar steps (for example third-person -s and plural subjects) are too
+  interdependent to separate without an educator's say.
+- **Switch:** `SPELLING_PATTERN_SCOPE` in `mastery-policy.ts` turns this off.
+- **What it does not change:** answers in the same session after a lesson still never count (that mark is
+  per capability), and nothing is erased. Superseded answers are counted in the gate (`superseded`) and remain in the
+  record and the estimate.
+
+### 6c. Calendar days
+
+- **Storage:** every timestamp is stored and replayed as UTC (`toISOString`). Django uses `TIME_ZONE = "UTC"`. No
+  pupil, account or school stores a time zone.
+- **Evaluation:** `logic/calendar.ts` computes a calendar day when a rule is evaluated, in the pupil's or school's IANA
+  zone when the record has one, otherwise in UTC. An invalid zone also falls back to UTC.
+- **Source of the zone:** an optional `timeZone` on the latest `preferences` event that has one (a later change of
+  band or goal without it does not drop it). Every misconception finding records which
+  basis was used (`days`), and its reason says "UTC days (no time zone recorded)" or "days in Asia/Kolkata".
+- **Not yet done:** recording the zone (from the device, or a school setting) is a separate decision. Until then
+  every record uses UTC, exactly as before.
+- **Tests:** midnight in Kolkata and New York, and both London daylight-saving changes in 2026.
+- **History:** no stored timestamp is rewritten.
+
+### 6d. Safeguards (tested)
+
+- A shown level is never "confirmed" before the delayed check.
+- The evidence check for a higher level asks only unused questions at that level, never the easy words that showed
+  the lower one.
+- A lesson changes the claim only for the patterns it taught or relates to.
+- A supported misconception does not remove a level that other answers support; it is reported beside it.
+- Pupil A is unchanged: same standings, labels, Today and plan.
+
+## 7. Limitations and open questions
+
+- **Teaching scope is by content tags, for spelling only.** The pattern relation comes from the misconception tags
+  questions list. That is the content's own statement of what can go wrong, but no educator has reviewed it as a
+  relation between patterns. Grammar and the other skills keep the whole-skill rule.
+- **The level can move.** The gate tests candidates at or below the engine's current proposal. If the estimate falls,
+  so does the highest candidate. The lower level is not kept beyond what the recent evidence supports.
+- **One slip can cap the level well below history** (see 6a) until it leaves the 6-answer window or newer answers
+  replace it. This is the approved contradiction rule applied at every candidate level.
 - **Contradictions linger.** A contradiction stays until 6 newer qualifying answers replace it.
-- **Calendar days are UTC.** The record does not hold the pupil's time zone.
-- **The thresholds are drafts.** These are 6, 0.25, 2, 1, 0.5, the diversity of 2 words and 2 patterns, and
-  L + 1 for the check range. They need educator review and real answers.
+- **Calendar days are UTC** until a time zone is recorded (see 6c).
+- **The thresholds are drafts.** These are 6, 0.25, 2, 1, 0.5, the diversity of 2 words and 2 patterns, the L + 1
+  check range, the 0.5 grid and priority 50. They need educator review and real answers.
 - **No real device testing.** Nothing here was tested on a real Android phone or in the Codespace. The browser tests
   use Chromium at phone size, locally and in CI.

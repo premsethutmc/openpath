@@ -35,14 +35,15 @@ async function assertReplay(l: Learner, repo: MemoryRepo) {
   assert.deepEqual(b.plan.today, a.plan.today);
 }
 
-test("S1–S6: the gate decides what is called shown; the engine's estimate and level are untouched and stay visible", async () => {
-  const expected: Record<string, { standing: string; passed: boolean }> = {
-    S1: { standing: "shown", passed: true },
-    S2: { standing: "developing", passed: false },
-    S3: { standing: "shown", passed: true },
-    S4: { standing: "developing", passed: false },
-    S5: { standing: "shown", passed: true },
-    S6: { standing: "shown", passed: true },
+test("S1–S6: the gate decides what is called shown, and at which level; the engine's estimate and level are untouched and stay visible", async () => {
+  // passed: at the engine's own level. S4 is shown at the lower level its answers support (2.5), not at the estimate (3)
+  const expected: Record<string, { standing: string; passed: boolean; shown: number | null }> = {
+    S1: { standing: "shown", passed: true, shown: 3 },
+    S2: { standing: "developing", passed: false, shown: null },
+    S3: { standing: "shown", passed: true, shown: 5 },
+    S4: { standing: "shown", passed: false, shown: 2.5 },
+    S5: { standing: "shown", passed: true, shown: 2.5 },
+    S6: { standing: "shown", passed: true, shown: 3.5 },
   };
   for (const [id, , days] of MASTERY_SCENARIOS) {
     const { l, repo } = await history(days, c);
@@ -51,7 +52,9 @@ test("S1–S6: the gate decides what is called shown; the engine's estimate and 
     assert.equal(j.gate!.level, j.engineLevel, `${id}: the gate tests the engine's own level`);
     assert.equal(j.standing, expected[id].standing, `${id}: ${j.gate!.missing.join(" ")}`);
     assert.equal(j.gate!.passed, expected[id].passed, id);
-    if (!j.gate!.passed) {
+    assert.equal(j.profile.levels.demonstrated, expected[id].shown, id);
+    assert.equal(j.profile.levels.estimated, j.engineLevel, `${id}: the estimate is the engine's, unchanged`);
+    if (expected[id].shown === null) {
       // estimated ability, demonstrated performance and verified mastery are three different things
       assert.equal(j.mastery, null, `${id}: no mastery claim of any kind`);
       assert.match(j.profile.notYetShown!, new RegExp(`estimate supports about level ${j.engineLevel}, but it is not called shown yet`));
@@ -60,6 +63,8 @@ test("S1–S6: the gate decides what is called shown; the engine's estimate and 
     } else {
       assert.equal(j.mastery, "provisional", `${id}: shown on draft questions is provisional`);
       assert.equal(j.profile.notYetShown, null);
+      assert.equal(j.profile.shownLevel, expected[id].shown);
+      assert.equal(j.profile.higherNotYetShown !== null, expected[id].shown! < j.engineLevel!, `${id}: the gap to the estimate is said when there is one`);
     }
     await assertReplay(l, repo);
   }
@@ -99,15 +104,29 @@ test("improvement after teaching: answers before the latest lesson are history f
   const j = judge(l, c);
   const lesson = l.events.find((e) => e.kind === "lesson")!;
   assert.equal(j.gate!.since, lesson.at);
-  assert.ok(j.gate!.window.every((a) => a.at > lesson.at), "only answers after the lesson count for the current claim");
+  // the lesson taught doubling: earlier answers on doubling patterns are history; earlier answers on unrelated
+  // patterns (y to i) keep their place in the window
+  const before = j.gate!.window.filter((a) => a.at < lesson.at);
+  assert.ok(before.every((a) => a.pattern === "y_to_i"), `before the lesson, only unrelated patterns stay: ${before.map((a) => a.pattern).join(", ")}`);
+  assert.ok(j.gate!.superseded >= 4, "the doubling answers before the lesson are superseded");
   assert.equal(qualifyingAnswers(l.state, c, CAP).length, 10, "all ten answers are still in the record");
   assert.equal(j.standing, "shown");
-  // a lesson with nothing on their own since: the claim waits for a fresh check (the estimate stays as it was)
+  // a lesson on doubling with nothing on their own since: the doubling answers are history, but the answers on
+  // unrelated patterns still support a level, which stands (a lesson changes the claim only where it taught)
   const t = judge((await history([...scenario("S3"), { lesson: true, answers: [] }], c)).l, c);
-  assert.equal(t.standing === "shown" || t.standing === "confirmed", false);
-  assert.equal(t.gate!.next!.kind, "fresh_check");
-  assert.match(t.gate!.missing[0], /No answers on their own since the lesson/);
-  assert.ok(t.profile.strengths.includes("Shown earlier; not currently confirmed."), "it passed the gate before the lesson: history, labelled as history");
+  assert.ok(t.gate!.superseded > 0);
+  assert.ok(t.gate!.window.every((a) => !["double_short", "stress_doubling", "exceptions"].includes(a.pattern ?? "")), "no doubling answer from before the lesson");
+  // a lesson on the very patterns of every answer: nothing stands, the claim waits for a fresh check
+  const all = judge((await history([{ answers: [["stopped", true], ["dropped", true], ["shopping", true], ["clapped", true], ["grabbed", true], ["forgotten", true]] }, { lesson: true, answers: [] }], c)).l, c);
+  assert.notEqual(all.standing, "shown");
+  assert.equal(all.profile.levels.demonstrated, null);
+  assert.equal(all.gate!.next!.kind, "fresh_check");
+  assert.match(all.gate!.missing[0], /No answers on their own since the lesson/);
+  // a lesson whose pattern is not known: the conservative rule, every earlier answer on the skill is history
+  const unknown = judge((await history([...scenario("S3"), { lesson: "not_a_known_step", answers: [] }], c)).l, c);
+  assert.equal(unknown.gate!.window.length, 0);
+  assert.notEqual(unknown.standing, "shown");
+  assert.ok(unknown.profile.strengths.some((x) => /^Shown earlier, at about level 5 .*not currently shown/.test(x)), unknown.profile.strengths.join(" | "));
 });
 
 test("repeated questions and repeated words never count twice", async () => {
@@ -163,12 +182,16 @@ test("later-day retention: confirmed needs the existing retention check; a check
   assert.equal(kept.standing, "confirmed");
   const lost = judge((await history([...scenario("S3"), { gap: 8, answers: [["admitted", false], ["regretted", false], ["happier", false]] }], c)).l, c);
   assert.equal(lost.standing, "not_kept");
-  // S4 never passed the gate: ten days later its engine level is overdue, but "check due" would claim it was shown
+  // D3 never passed the gate at any level: ten days later its engine level is overdue, but "check due" would claim it
+  // was shown
+  const s2 = judge((await history([...scenario("D3"), { gap: 10, answers: [] }], c)).l, c);
+  assert.equal(s2.engineStatus, "overdue");
+  assert.equal(s2.standing, "developing");
+  assert.ok(s2.gate && !s2.gate.passed, "the unsupported level is still tested, and its gap reported");
+  assert.ok(!s2.profile.strengths.some((t) => /Shown earlier/.test(t)));
+  // S4 was shown at 2.5 (within the retention tolerance of the engine's 3): its later check is due
   const s4 = judge((await history([...scenario("S4"), { gap: 10, answers: [] }], c)).l, c);
-  assert.equal(s4.engineStatus, "overdue");
-  assert.equal(s4.standing, "developing");
-  assert.ok(s4.gate && !s4.gate.passed, "the unsupported level is still tested, and its gap reported");
-  assert.ok(!s4.profile.strengths.includes("Shown earlier; not currently confirmed."));
+  assert.equal(s4.standing, "check_due");
 });
 
 test("candidate vs educator-approved content: C′ met on draft questions stays provisional; verified needs approved questions behind the claim", async () => {
@@ -193,12 +216,16 @@ test("dictation alone can demonstrate direct spelling, with word and pattern div
   assert.equal(d1.gate!.singleFormat, true);
   assert.ok(d1.gate!.words >= MASTERY_GATE.singleFormat.minWords && d1.gate!.patterns.length >= MASTERY_GATE.singleFormat.minPatterns);
   assert.equal(d1.mastery, "provisional", "candidate words: provisional even though C′ is met");
+  // D2: at the estimate (4.5) the right answers are all one pattern; at 3.5 they span two: shown at 3.5
   const d2 = judge((await history(scenario("D2"), c)).l, c);
-  assert.notEqual(d2.standing, "shown");
+  assert.equal(d2.standing, "shown");
+  assert.deepEqual([d2.profile.levels.estimated, d2.profile.levels.demonstrated], [4.5, 3.5]);
   assert.match(d2.gate!.missing.join(" "), /Shown by dictation only: .* 1 spelling pattern/);
   assert.deepEqual(d2.gate!.next && (d2.gate!.next as { avoidPatterns?: string[] }).avoidPatterns, d2.gate!.patterns, "the next words come from other patterns");
+  // D3: one pattern at every level: nothing shown, however many words are right
   const d3 = judge((await history(scenario("D3"), c)).l, c);
   assert.notEqual(d3.standing, "shown");
+  assert.equal(d3.profile.levels.demonstrated, null);
 });
 
 test("R1–R4: two right answers resolve a misconception only at the difficulty of the error and on a later day; every status lists its answers", async () => {
@@ -306,7 +333,7 @@ test("historical records: the rules are recomputed from the record, nothing is w
 });
 
 test("practice-only words (generated, not yet checked) are recorded but never enter the evidence gate", async () => {
-  const { l } = await history(scenario("S4"), c);
+  const { l } = await history(scenario("S2"), c);
   const before = qualifyingAnswers(l.state, c, CAP).length;
   let cur = await l.start({ type: "spelling_practice", capability: CAP, step: "stress_doubling" });
   let n = 0;
@@ -325,12 +352,12 @@ test("practice-only words (generated, not yet checked) are recorded but never en
 });
 
 test("review fixes: confirmed needs the retention gap after the first claim the gate supported, not after the engine's own first level", async () => {
-  // day 1: the engine demonstrates 4.5 from one pattern, the gate does not support it; 8 days later the gate passes for
-  // the first time in the very session the engine treats as its later check
-  const { l } = await history([...scenario("D2"), { gap: 8, answers: [["forgotten", true], ["opened", true]] }], c);
+  // day 1: the engine demonstrates a level from one easy pattern, which the gate supports at no level; 8 days later
+  // the gate supports a level for the first time in the very session the engine treats as its later check
+  const { l } = await history([...scenario("D3"), { gap: 8, answers: [["forgotten", true], ["opened", true]] }], c);
   const j = judge(l, c);
   assert.equal(j.engineStatus, "verified");
-  assert.equal(j.gate!.passed, true);
+  assert.ok(j.profile.levels.demonstrated !== null);
   assert.equal(j.standing, "shown", "first supported now: shown, with a first later check still to come");
   assert.match(j.profile.retention, /First check from 2026-10-(1[7-9]|2\d)/, "at least the gap after the first supported claim (10 October)");
 });

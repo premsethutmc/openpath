@@ -137,6 +137,11 @@ export interface PreferencesEvent {
   at: string;
   band: LearnerBand;
   goal: LearnerGoal;
+  /**
+   * Optional IANA time zone of the pupil or school, for calendar-day rules (calendar.ts). Not written by the app yet;
+   * records without it use UTC days. Timestamps themselves stay UTC.
+   */
+  timeZone?: string;
 }
 
 // ------------------------------------------------------------------ decision traces (diagnostics)
