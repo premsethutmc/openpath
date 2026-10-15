@@ -229,7 +229,7 @@ export class Learner {
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
   async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice"): Promise<void> {
-    this.guard("the Spelling Bee");
+    this.guardSpelling(source);
     const open = this.spelling().open;
     if (open) await this.stopSpelling();
     const plan = planSession(this.spelling(), this.spellingWords(source), this.clock());
@@ -248,8 +248,8 @@ export class Learner {
 
   /** Answer the current word. Returns whether it was right and the word (to show its spelling now, after the answer). */
   async answerSpelling(response: string, plays: number): Promise<{ correct: boolean; word: SpellWord }> {
-    this.guard("the Spelling Bee");
     const cur = this.spellingSession();
+    if (cur) this.guardSpelling(cur.source);
     if (!cur?.word) throw new Error("no spelling word is waiting for an answer");
     const w = cur.word;
     const before = this.spelling().words.get(wordKey(w.source, w.id));
@@ -288,6 +288,12 @@ export class Learner {
   /** In a pilot build, refuse anything outside the boundary before it is recorded or shown. */
   private guard(what: string): void {
     if (this.content.gate) throw new PilotRefusal(what);
+  }
+
+  /** In a pilot build only the Spelling Bee's approved words may be practised (never a parent's list or book). */
+  private guardSpelling(source: SpellSource): void {
+    if (!this.content.gate) return;
+    if (source.type !== "bank" || !this.spellingWords(source).length) throw new PilotRefusal(source.type === "bank" ? "the Spelling Bee (no approved words in this build)" : "practice on a parent's own words");
   }
 
   async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts: { delivery?: "device_voice" | "adult_reader"; length?: number } = {}): Promise<Current> {

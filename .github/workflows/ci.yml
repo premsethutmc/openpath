@@ -283,6 +283,20 @@ jobs:
         run: |
           if node scripts/build-english.mjs --pilot --no-approvals --out=dist-english-pilot; then echo "the pilot build must fail closed"; exit 1; fi
           node scripts/build-english.mjs --pilot --out=dist-english-pilot
+      - name: Serve the pilot build made from the recorded approvals
+        working-directory: frontend
+        run: |
+          node scripts/build-english.mjs --pilot --out=dist-english-pilot-approved
+          PORT=4178 DIST=dist-english-pilot-approved nohup npm run english:preview > ../english-pilot-approved-web.log 2>&1 &
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4178/
+      - name: Spelling Bee in the approved pilot build, in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4178
+          E2E_SHOTS: e2e/shots/pilot-bee
+        run: |
+          npm run english:e2e-pilot-bee 2>&1 | tee english-pilot-bee-e2e.log
+          ../.github/scripts/require-tests.sh english-pilot-bee-e2e.log "Pilot Spelling Bee end-to-end"
       - name: Serve a pilot build with nothing approved (test build)
         working-directory: frontend
         run: |
@@ -306,7 +320,7 @@ jobs:
           ../.github/scripts/require-tests.sh english-demo-e2e.log "Private demo end-to-end"
       - name: Show server logs
         if: failure()
-        run: tail -n 60 api.log web.log english-web.log english-api-web.log english-pilot-web.log
+        run: tail -n 60 api.log web.log english-web.log english-api-web.log english-pilot-web.log english-pilot-approved-web.log
       - name: Keep the screenshots
         if: always()
         uses: actions/upload-artifact@v7

@@ -420,6 +420,40 @@ export function reviewStatus(rows: ReviewRow[], reviews: ReviewRecord[]): string
  * current content (fingerprint), and `passage:id` for each approved passage. Nothing else is ever approved here:
  * an empty list means a pilot build shows nothing. The app applies the same allowlist again at run time.
  */
+/** A Spelling Bee entry (content/english/spelling/spelling-bee.json), as far as pilot approval is concerned. */
+export interface BeeEntry {
+  id: string;
+  level: number;
+  item?: { id: string; version: number };
+  word?: string;
+  sentence?: string;
+  approval?: { status: string; scope: string; authority: string; provenance: string; recorded_at: string };
+}
+export const SPELLING_BEE = join(CONTENT, "spelling", "spelling-bee.json");
+
+/**
+ * The Spelling Bee's own words (not taken from the dictation bank) that a pilot build may use: `bee:<id>` for each
+ * entry with a recorded owner approval for pilot use that also passes the automated content checks (one plain word,
+ * used once in a complete sentence of 12 words or fewer, at a level from 1 to 5). The 79 reused words are not listed:
+ * they follow their dictation question's approval. `problems` names any approved entry that fails the checks.
+ */
+export function beeApprovedForPilot(entries: BeeEntry[]): { keys: string[]; problems: string[] } {
+  const keys: string[] = [];
+  const problems: string[] = [];
+  for (const e of entries.filter((x) => !x.item)) {
+    const a = e.approval;
+    const approved = a?.status === "owner-approved" && /\bpilot\b/.test(a.scope ?? "") && a.authority === "product-owner" && !!a.provenance && !Number.isNaN(Date.parse(a.recorded_at));
+    if (!approved) continue;
+    const word = e.word ?? "";
+    const sentence = e.sentence ?? "";
+    const uses = (sentence.match(new RegExp(`\\b${word}\\b`, "gi")) ?? []).length;
+    const checked = /^[a-z]+$/.test(word) && uses === 1 && sentence.split(/\s+/).length <= 12 && /[.?!]$/.test(sentence) && e.level >= 1 && e.level <= 5;
+    if (checked) keys.push(`bee:${e.id}`);
+    else problems.push(`${e.id} is approved but fails the content checks`);
+  }
+  return { keys, problems };
+}
+
 export function approvedForPilot(p: Pilot, reviews: ReviewRecord[]): string[] {
   const rows = contentRows(p);
   const decided = currentDecisions(rows, reviews);

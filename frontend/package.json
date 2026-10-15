@@ -20,6 +20,7 @@
     "english:e2e-developer": "node --test e2e/developer.test.mjs",
     "english:e2e-spelling": "node --test e2e/spelling.test.mjs",
     "english:e2e-pilot": "node --test e2e/pilot.test.mjs",
+    "english:e2e-pilot-bee": "node --test e2e/pilot-bee.test.mjs",
     "english:e2e-demo": "node --test e2e/demo.test.mjs",
     "english:e2e-bee": "node --test e2e/bee.test.mjs",
     "english:e2e-mywords": "node --test e2e/mywords.test.mjs",
