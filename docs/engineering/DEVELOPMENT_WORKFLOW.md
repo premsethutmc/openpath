@@ -71,6 +71,24 @@
 
    `protection.json` holds the check names exactly as they appear on a PR's checks tab.
 
+## CI must fail when tests fail
+
+Until `129f840`, failing backend tests produced green checks: the backend and frontend jobs' own `defaults.run`
+replaced the workflow's `shell: bash`, so `pipefail` was off and `tests | tee log` returned tee's status. Guards now:
+
+- **Every job names `shell: bash`,** so steps run with `-eo pipefail`.
+- **Every job starts with a self-check** that fails the job if `pipefail` is off.
+- **The self-check also runs `.github/scripts/test-require-tests.sh`,** which proves `require-tests.sh` rejects:
+  - Django `FAILED (…)` results;
+  - Node `# fail N` and `ℹ fail N` results;
+  - runs with no tests.
+- **`require-tests.sh` itself fails** on any reported failure, whatever the pipe's exit status.
+- **All six checks are required.** The browser job is skipped only when the backend or frontend check has already
+  failed, and that check is required too, so a skip can never satisfy protection.
+
+When changing the workflow: keep `shell: bash` in any new job-level `defaults.run`, and pipe test output only
+through `tee` followed by `require-tests.sh`.
+
 ## Content and the pilot
 
 - **No approval is ever automatic.** Educator decisions enter only through the review tools:

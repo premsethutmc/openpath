@@ -45,6 +45,11 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v7
+      - name: CI self-check (a failing test must fail this job)
+        run: |
+          # this step's shell must have pipefail, or `tests | tee log` reports success when tests fail
+          if (false | true); then echo "::error title=CI self-check::pipefail is off in this job"; exit 1; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/test-require-tests.sh"
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
@@ -83,6 +88,11 @@ jobs:
         working-directory: frontend
     steps:
       - uses: actions/checkout@v7
+      - name: CI self-check (a failing test must fail this job)
+        run: |
+          # this step's shell must have pipefail, or `tests | tee log` reports success when tests fail
+          if (false | true); then echo "::error title=CI self-check::pipefail is off in this job"; exit 1; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/test-require-tests.sh"
       - uses: actions/setup-node@v7
         with:
           node-version: 22
@@ -144,6 +154,11 @@ jobs:
       OPENPATH_ACCOUNT_RATE: "1000/hour"
     steps:
       - uses: actions/checkout@v7
+      - name: CI self-check (a failing test must fail this job)
+        run: |
+          # this step's shell must have pipefail, or `tests | tee log` reports success when tests fail
+          if (false | true); then echo "::error title=CI self-check::pipefail is off in this job"; exit 1; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/test-require-tests.sh"
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -263,6 +278,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
+      - name: CI self-check (a failing test must fail this job)
+        run: |
+          # this step's shell must have pipefail, or `tests | tee log` reports success when tests fail
+          if (false | true); then echo "::error title=CI self-check::pipefail is off in this job"; exit 1; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/test-require-tests.sh"
       - uses: actions/setup-node@v7
         with:
           # 22.18+ runs TypeScript directly; no build step and no new dependencies.
