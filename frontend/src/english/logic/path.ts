@@ -97,7 +97,11 @@ export function learningPath(profile: LearnerProfile, pilot: string[], lessonsRe
       standing: cap.standing,
       stages: stagesOf(cap, taught),
       // a level shown on draft questions is never presented as verified, even to the child
-      line: cap.mastery === "provisional" ? `${LINES[cap.standing]} (The questions are still being checked by teachers.)` : LINES[cap.standing],
+      line: cap.mastery === "provisional"
+        ? `${LINES[cap.standing]} (The questions are still being checked by teachers.)`
+        : cap.notYetShown && cap.gate
+          ? `Your answers suggest about level ${cap.gate.level}, but more answers on your own at that level are needed before it counts as shown.`
+          : LINES[cap.standing],
       start,
       later: !start && cap.next ? `${cap.next.what}. ${cap.next.content.available ? "It comes up on Today when it is most useful." : cap.next.content.note + "."}` : null,
     };

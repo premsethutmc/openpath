@@ -10,9 +10,11 @@ import { spellingPlan } from "../logic/select.ts";
 import type { PlanStep } from "../logic/plan.ts";
 import { speak } from "./speech.ts";
 
-type Start = (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, opts?: { delivery?: "device_voice" | "adult_reader" }) => Promise<void>;
+type Step = Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">;
+type Start = (step: Step, opts?: { delivery?: "device_voice" | "adult_reader" }) => Promise<void>;
 
-export function SpellingIntro({ learner, voice, onStart, onBack, onChanged }: { learner: Learner; voice: SpeechSynthesisVoice | null; onStart: Start; onBack: () => void; onChanged: () => void }) {
+/** `step`: the whole spelling check, or a short evidence check on one skill (it keeps its skill and difficulty range). */
+export function SpellingIntro({ learner, voice, step = { type: "spelling_assess" }, onStart, onBack, onChanged }: { learner: Learner; voice: SpeechSynthesisVoice | null; step?: Step; onStart: Start; onBack: () => void; onChanged: () => void }) {
   const [tested, setTested] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
   const hasVoice = !!voice;
@@ -41,7 +43,7 @@ export function SpellingIntro({ learner, voice, onStart, onBack, onChanged }: { 
               <span aria-hidden="true">🔊</span> Test the sound
             </button>
             {tested && <p className="small">Did you hear “garden”? If not, check the volume and that the phone is not on silent, then test again.</p>}
-            <button type="button" className="primary" onClick={go(() => onStart({ type: "spelling_assess" }, { delivery: "device_voice" }))}>
+            <button type="button" className="primary" onClick={go(() => onStart(step, { delivery: "device_voice" }))}>
               Start the spelling check
             </button>
           </>
@@ -67,7 +69,7 @@ export function SpellingIntro({ learner, voice, onStart, onBack, onChanged }: { 
             <b>This device can't say the words aloud.</b>
             <p>No English voice was found on this phone or browser, so OpenPath cannot read the words for this check. Some phones need a text-to-speech voice installed or switched on in their settings; after that, open OpenPath again.</p>
             <p>You can still do the check if an adult reads each word aloud. The app shows the word to the adult only when they ask, and records that an adult read the words.</p>
-            <button type="button" className="primary" onClick={go(() => onStart({ type: "spelling_assess" }, { delivery: "adult_reader" }))}>
+            <button type="button" className="primary" onClick={go(() => onStart(step, { delivery: "adult_reader" }))}>
               An adult will read the words aloud
             </button>
             {practice && (

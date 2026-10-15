@@ -139,3 +139,23 @@ test("D1-14 'improving in practice' needs enough practice answers, mostly right"
   assert.equal(improvingInPractice({ afterTeaching: 5, afterTeachingRight: 5 }), true);
   assert.equal(improvingInPractice({ afterTeaching: 6, afterTeachingRight: 3 }), false);
 });
+
+test("D1-12 an evidence gap (the engine demonstrates, the caller's rule does not yet allow 'shown'): collect the missing evidence, say why, never invent content", () => {
+  order = 0;
+  const gap = { level: 3, kind: "diagnostic" as const, missing: "1 recent right answer at level 3 or harder; 2 are needed.", why: "1 more right answer at difficulty 2.75 or harder on new questions", available: 4 };
+  const plan = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "developing", { independent: 6, independentRight: 4 }, { content: { assess: 5, teach: "lesson" }, evidenceGap: gap })], requires });
+  const r = plan.all.find((x) => x.capability === "EN.GRM.VERB.sva")!;
+  assert.equal(r.action, "evidence_check");
+  assert.match(r.why, /supports about level 3, but it cannot be called shown yet: 1 recent right answer/);
+  assert.match(r.why, /Next: 1 more right answer at difficulty 2\.75/);
+  assert.ok(plan.today.some((x) => x.action === "evidence_check"));
+  order = 0;
+  const none2 = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "developing", { independent: 6, independentRight: 4 }, { content: { assess: 5, teach: null }, evidenceGap: { ...gap, available: 0 } })], requires });
+  assert.deepEqual(none2.forAdults.map((x) => [x.action, x.capability]), [["human_review", "EN.GRM.VERB.sva"]], "no question at the difficulty needed: content gap for an adult");
+  order = 0;
+  const practice = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "developing", { independent: 6, independentRight: 4 }, { content: { assess: 5, teach: "lesson" }, evidenceGap: { ...gap, kind: "practice", why: "2 recent errors on easier questions: practice comes before another check" } })], requires });
+  assert.equal(practice.all.find((x) => x.capability === "EN.GRM.VERB.sva")!.action, "continue");
+  order = 0;
+  const without = planDevelopment({ capabilities: [...shownSpelling(), cap("EN.GRM.VERB.sva", "developing", { independent: 6, independentRight: 4 }, { content: { assess: 5, teach: "lesson" } })], requires });
+  assert.equal(without.all.find((x) => x.capability === "EN.GRM.VERB.sva")!.action, "continue", "without a gap the plan is exactly as before");
+});

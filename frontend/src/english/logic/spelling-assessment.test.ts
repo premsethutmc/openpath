@@ -209,14 +209,15 @@ test("follow-up: a rule error is followed by a different word on the same patter
   assert.notEqual(next.item.id, asked[k].item.id, "a different word");
   const tag = asked[k].item.wrong![asked[k].text];
   const f = misconceptionFindings(l.state, c).find((x) => x.misconception === tag)!;
-  assert.equal(f.status, "suspected", "one error, then right on the follow-up: a suspicion only");
+  assert.equal(f.support, "suspected", "one error: the evidence for it is a suspicion only");
+  assert.ok(["suspected", "improving"].includes(f.status), `right on the follow-up at most makes it improving, never resolved (${f.status})`);
   // the parent never reads it as a pattern: "possibly" while the engine still lists it, nothing once it fades
   const said = l.profile().capabilities.find((x) => x.id === asked[k].item.target)!.difficulties.join(" ");
   assert.doesNotMatch(said, /A pattern in wrong answers/);
   if (leafView(l.state.ledger.composite, c.index, asked[k].item.target, l.clock()).misconceptions.some((m) => m.id === tag)) assert.match(said, /Possibly .*one wrong answer so far, not yet a pattern/);
 });
 
-test("misconceptions: suspected after one error, supported after errors on two questions, resolved after two later right answers", async () => {
+test("misconceptions: suspected after one error, supported after errors on two questions; two later right answers the same day only make it improving, resolved needs a later day", async () => {
   const l = await learner((b) => b <= 3.5);
   const doubling = bank.filter((i) => i.step === "double_short");
   const run = async (items: Code[], text: (it: Code) => string) => {
@@ -232,7 +233,12 @@ test("misconceptions: suspected after one error, supported after errors on two q
   await run(doubling.slice(1, 2), (it) => ruleError(it, "no_doubling")!);
   assert.equal(status(), "supported");
   await run(doubling.slice(2, 4), (it) => it.answers![0]);
-  assert.equal(status(), "resolved");
+  assert.equal(status(), "improving", "right twice straight after: improving, not yet resolved");
+  (l.clock as unknown as { days: (n: number) => void }).days?.(1);
+  await run(doubling.slice(4, 5), (it) => it.answers![0]);
+  assert.equal(status(), "resolved", "right again on a later day, at the difficulty of the errors");
+  const f = misconceptionFindings(l.state, c).find((x) => x.misconception === "no_doubling")!;
+  assert.equal(f.support, "supported", "the evidence that it was a pattern is kept after it is resolved");
   // a typo is not a rule error, so it never supports a misconception
   assert.equal(classifyError("stopped", "stopepd", false, c.words), "possible_typo");
   assert.equal(classifyError("stopped", "stoppex", false, c.words), "possible_typo", "x is next to d on the keyboard");

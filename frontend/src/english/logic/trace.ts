@@ -4,7 +4,7 @@
  */
 import { type PlannerDecision, type Recommendation, type Scored, type SelectionInput, leafView } from "../../../../packages/english-core/src/index.ts";
 import type { AppContent } from "./content.ts";
-import type { PlanTrace, SelectionTrace, TracedCandidate } from "./events.ts";
+import type { EvidenceTarget, PlanTrace, SelectionTrace, TracedCandidate } from "./events.ts";
 import type { LearnerProfile } from "./profile.ts";
 import type { AppState } from "./state.ts";
 
@@ -72,7 +72,7 @@ export function queueTrace(type: string, position: number, length: number, use: 
   return { selector: "queue", use, queue: { position, length, reason: reason[type] ?? "a fixed list planned when the session started" } };
 }
 
-export function planTrace(profile: LearnerProfile, started: PlanTrace["started"]): PlanTrace {
+export function planTrace(profile: LearnerProfile, started: PlanTrace["started"], target?: EvidenceTarget): PlanTrace {
   const offered = profile.activities.map((a) => ({
     title: a.title,
     kind: a.kind,
@@ -87,6 +87,8 @@ export function planTrace(profile: LearnerProfile, started: PlanTrace["started"]
     started,
     startedRank: rank >= 0 ? rank : null,
     standings: Object.fromEntries(profile.capabilities.filter((x) => x.standing !== "not_checked").map((x) => [x.id, x.standing])),
+    ...(profile.capabilities.some((x) => x.notYetShown) ? { gaps: Object.fromEntries(profile.capabilities.filter((x) => x.notYetShown).map((x) => [x.id, x.notYetShown!.slice(0, 400)])) } : {}),
+    ...(target ? { target } : {}),
   };
 }
 

@@ -1,9 +1,9 @@
 # Proposal C: a mastery rule that tells old mistakes from recent improvement
 
-**Status:** for decision. **Nothing here is implemented.**
+**Status:** approved on 15 October and **implemented**; see `MASTERY_RULES.md` for the rules as built and the
+before-and-after results. This document is kept as the record of the proposal.
 
-**Reproduce:** `node --import tsx scripts/mastery-scenarios.mts` (from `frontend/`). It runs each history through the
-app's own engine and profile. The two candidate rules are written out in the script and are used nowhere else.
+**Reproduce (now the production rules):** `node --import tsx scripts/mastery-scenarios.mts` (from `frontend/`).
 
 ## The problem
 

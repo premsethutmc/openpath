@@ -58,9 +58,19 @@ function decayMisconceptions(node: NodeState, at: string, p: Policy): void {
   }
 }
 
-export function demonstratedLevel(node: NodeState, p: Policy): number | null {
+/**
+ * Enough different contexts to demonstrate: at least demonstrated_min_contexts, or (only where the policy names
+ * this capability in single_format_demonstration) one of the formats it allows on its own.
+ */
+function enoughContexts(contexts: string[], p: Policy, id?: CapabilityId): boolean {
+  if (contexts.length >= p.demonstrated_min_contexts) return true;
+  const alone = id ? p.single_format_demonstration?.[id] : undefined;
+  return !!alone && contexts.some((x) => alone.includes(x));
+}
+
+export function demonstratedLevel(node: NodeState, p: Policy, id?: CapabilityId): number | null {
   // the counts are of qualifying answers (equal to directN and contexts when no answer followed teaching)
-  if ((node.qualifyingN ?? node.directN) < p.demonstrated_min_direct || (node.qualifyingContexts ?? node.contexts).length < p.demonstrated_min_contexts) return null;
+  if ((node.qualifyingN ?? node.directN) < p.demonstrated_min_direct || !enoughContexts(node.qualifyingContexts ?? node.contexts, p, id)) return null;
   const z = normalQuantile(p.demonstrated_probability);
   const level = Math.floor((node.direct.mean - z * Math.sqrt(node.direct.variance)) * 2) / 2;
   return level >= 1 ? Math.min(level, 8) : null;
@@ -137,7 +147,7 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   // the qualifying counts are kept only once an answer has followed teaching: until then they equal directN and
   // contexts, and the node is byte-identical to one recorded before this distinction existed
   if (!qualifies && node.qualifyingN === undefined) {
-    node.qualifiedLevel = demonstratedLevel(node, p);
+    node.qualifiedLevel = demonstratedLevel(node, p, o.capability);
     node.qualifyingN = node.directN;
     node.qualifyingContexts = [...node.contexts];
   }
@@ -159,7 +169,7 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
     node.misconceptions[tag] = { strength: prev + (1 - prev) * p.misconception_gain, at: o.at };
   }
   // only a qualifying answer can demonstrate; after teaching, the level stays as of the last qualifying answer
-  const level = qualifies ? demonstratedLevel(node, p) : null;
+  const level = qualifies ? demonstratedLevel(node, p, o.capability) : null;
   if (qualifies && node.qualifiedLevel !== undefined) node.qualifiedLevel = level;
   if (level !== null) {
     const last = node.demonstrations[node.demonstrations.length - 1];
@@ -296,7 +306,7 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
   const combined = node.asOf ? inflate(node.combined, days, p.time_variance_per_day, priorVariance(index)) : node.combined;
   const direct = node.asOf ? inflate(node.direct, days, p.time_variance_per_day, priorVariance(index)) : node.direct;
   // as of the latest qualifying answer: answers after teaching move the estimate but not what is demonstrated
-  const demonstrated = node.qualifiedLevel !== undefined ? node.qualifiedLevel : demonstratedLevel(node, p);
+  const demonstrated = node.qualifiedLevel !== undefined ? node.qualifiedLevel : demonstratedLevel(node, p, id);
   const masteredHist = masteredLevel(node, p);
   // Mastery is reported only while the capability is still demonstrated at that level.
   const slipped = masteredHist !== null && (demonstrated === null || demonstrated < masteredHist);

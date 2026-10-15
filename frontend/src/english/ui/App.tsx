@@ -57,7 +57,7 @@ const LAST = "openpath-english-last-profile";
 const MODE = "openpath-english-mode";
 
 type Mode = "device" | "account";
-type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" } | { name: "spelling-intro" };
+type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" } | { name: "spelling-intro"; step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target"> };
 type Tab = "home" | "journey" | "progress" | "me";
 const TABS: { id: Tab; label: string; ico: string }[] = [
   { id: "home", label: "Home", ico: "🏠" },
@@ -329,15 +329,15 @@ export function App() {
 
   if (!learner) return <p className="loading">Opening OpenPath English…</p>;
 
-  const start = async (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, opts?: { delivery?: "device_voice" | "adult_reader" }) => {
+  const start = async (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts?: { delivery?: "device_voice" | "adult_reader" }) => {
     // the spelling check needs the words to be heard: check the sound (or arrange an adult reader) first
-    if (step.type === "spelling_assess" && !opts?.delivery) return setScreen({ name: "spelling-intro" });
+    if (step.type === "spelling_assess" && !opts?.delivery) return setScreen({ name: "spelling-intro", step });
     await learner.start(step, opts);
     setScreen({ name: "app" });
     setInSession(true);
   };
 
-  if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
+  if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} step={screen.step} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
 
   if (screen.name === "intro")
     return <CheckIntro name={learner.state.profile?.name ?? "Your"} onReady={() => start({ type: "placement" })} onLater={() => setScreen({ name: "app" })} />;

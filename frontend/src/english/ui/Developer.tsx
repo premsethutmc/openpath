@@ -434,8 +434,8 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
         {d.misconception_findings.length > 0 && (
           <Table
             label="Misconception status"
-            head={["misconception", "skill", "status", "why", "errors on", "right since on", "not counted"]}
-            rows={d.misconception_findings.map((f) => [f.misconception, f.capability, <b>{f.status}</b>, f.reason, f.errors.map((e) => e.item).join(", ") || "–", f.laterRight.map((e) => e.item).join(", ") || "–", f.notCounted])}
+            head={["misconception", "skill", "status", "evidence for it", "why", "errors on", "right since on", "not counted"]}
+            rows={d.misconception_findings.map((f) => [f.misconception, f.capability, <b>{f.status.replace("_", " ")}</b>, f.support, f.reason, f.errors.map((e) => `${e.item} (b ${e.b})`).join(", ") || "–", f.laterRight.map((e) => `${e.item} (b ${e.b}${e.atLevel ? "" : ", easier"})`).join(", ") || "–", f.notCounted])}
           />
         )}
         {d.misconceptions_and_gaps.length ? (
@@ -449,7 +449,7 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
         <p className="small">independent: counted, fresh, unhelped. after_teaching: unhelped but after a lesson in the same session (moves the estimate, cannot demonstrate). held_*: kept but changes no estimate. assisted: a later try or with help.</p>
       </Section>
       <Section title="Demonstration and retention" count={d.retention.length}>
-        <Table label="Retention" head={["skill", "standing", "demonstrated", "qualifying", "verification", "later check"]} rows={d.retention.map((x) => [x.name, x.standing, x.demonstrated_level ?? "–", `${x.qualifying_answers} in ${x.contexts} formats`, x.verification, x.retention.status === "none" ? "not scheduled" : `${x.retention.status}, due ${String(x.retention.due ?? "").slice(0, 10)}, ${x.retention.checks} done`])} />
+        <Table label="Retention" head={["skill", "standing", "mastery", "engine level", "evidence gate (C′)", "qualifying", "verification", "later check"]} rows={d.retention.map((x) => [x.name, x.standing, x.mastery ?? "–", x.demonstrated_level ?? "–", x.gate === "not passed" ? `not passed: ${x.gate_missing.join(" ")}` : x.gate, `${x.qualifying_answers} in ${x.contexts} formats`, x.verification, x.retention.status === "none" ? "not scheduled" : `${x.retention.status}, due ${String(x.retention.due ?? "").slice(0, 10)}, ${x.retention.checks} done`])} />
       </Section>
       <Section title="Missing evidence and content shortages">
         <ul>

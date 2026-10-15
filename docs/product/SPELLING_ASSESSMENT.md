@@ -111,25 +111,26 @@ Start: inflections 3.96 ± 0.86, morphological 3.79 ± 0.84 (after placement)
 | # | Word (pattern, band b) | Why this word (recorded rule and reason) | Typed | Result and evidence | Estimate before → after | Misconception status after |
 |---|---|---|---|---|---|---|
 | 1 | arriving (inflections/drop_e, b 3.75) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | arriveing | wrong (rule error: kept silent e); independent, counted | 3.96 ± 0.86 → 3.54 ± 0.75 | kept silent e: suspected |
-| 2 | writing (inflections/drop_e, b 3.5) | follow up: follow-up: "arriving" was misspelt in a way that suggests kept silent e; a different word where the same error can happen checks whether it recurs (one error is only a suspicion) | writing | right; independent, counted | 3.54 ± 0.75 → 3.83 ± 0.67 | kept silent e: suspected |
+| 2 | writing (inflections/drop_e, b 3.5) | follow up: follow-up: "arriving" was misspelt in a way that suggests kept silent e; a different word where the same error can happen checks whether it recurs (one error is only a suspicion) | writing | right; independent, counted | 3.54 ± 0.75 → 3.83 ± 0.67 | kept silent e: improving |
 | 3 | usually (morphological/double_at_join, b 3.75) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | usually | right; independent, counted | 3.76 ± 0.83 → 4.10 ± 0.73 | – |
 | 4 | powerful (morphological/ful_ly_ment, b 4.25) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | powerful | right; independent, counted | 4.10 ± 0.73 → 4.41 ± 0.66 | – |
-| 5 | studied (inflections/y_to_i, b 4.25) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | studied | right; independent, counted | 4.03 ± 0.66 → 4.30 ± 0.61 | kept silent e: suspected |
+| 5 | studied (inflections/y_to_i, b 4.25) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | studied | right; independent, counted | 4.03 ± 0.66 → 4.30 ± 0.61 | kept silent e: improving |
 | 6 | excitement (morphological/ful_ly_ment, b 4.5) | near estimate: within ±1 band of the estimate; every pattern there has been tested once, so another word near the estimate | excitement | right; independent, counted | 4.49 ± 0.65 → 4.73 ± 0.60 | – |
 | 7 | possible (morphological/able_ible, b 5.5) | untested pattern: within ±1 band of the estimate; patterns not yet tested in this session first (coverage) | possibe | wrong; independent, counted | 4.73 ± 0.60 → 4.61 ± 0.57 | – |
-| 8 | worried (inflections/y_to_i, b 4.25) | near estimate: within ±1 band of the estimate; every pattern there has been tested once, so another word near the estimate | worried | right; independent, counted | 4.34 ± 0.60 → 4.53 ± 0.56 | kept silent e: suspected |
+| 8 | worried (inflections/y_to_i, b 4.25) | near estimate: within ±1 band of the estimate; every pattern there has been tested once, so another word near the estimate | worried | right; independent, counted | 4.34 ± 0.60 → 4.53 ± 0.56 | kept silent e: improving |
 
 Stopped: stopped: both spelling estimates are within ±0.6 (one sd) after 8 words
 End: inflections 4.53 ± 0.56, morphological 4.67 ± 0.57
-Spells inflected forms correctly: shown; 4 of 6 right on their own; Shown on their own, on fresh questions, at about level 3.5 of 8 (a level shown, not a ceiling: harder questions may still be wrong). On draft questions, not yet reviewed by a teacher.
-Morphological spelling (prefixes and suffixes): shown; 4 of 6 right on their own; Shown on their own, on fresh questions, at about level 4 of 8 (a level shown, not a ceiling: harder questions may still be wrong). On draft questions, not yet reviewed by a teacher.
+Spells inflected forms correctly: shown; 4 of 6 right on their own; Provisionally shown on their own, on fresh questions, at about level 3.5 of 8: on draft questions not yet approved by an educator, so not a verified result. Possibly kept silent e (one wrong answer): improving, right 1 time since, not yet resolved.
+Morphological spelling (prefixes and suffixes): shown; 4 of 6 right on their own; Provisionally shown on their own, on fresh questions, at about level 4 of 8: on draft questions not yet approved by an educator, so not a verified result.
 Today next: Grammar: Capitalisation | Spelling: Homophones | Words: General vocabulary breadth
 
 **What the demonstration shows:**
 - The rule error on "arriving" lowered the estimate.
 - The **follow-up** ("writing", a word where the same silent-e error can happen) came next, with its recorded
   reason. The right answer raised the estimate.
-- The misconception stays **suspected**: one error, then one right answer.
+- The misconception is **improving**, not resolved: one error, then one right answer (resolving it needs two right
+  answers at the error's difficulty, one on a later day; see `MASTERY_RULES.md`).
 - Later words track the rising estimate, and an error at band 5.5 brings it down a little.
 - Uncertainty falls with each answer, and the check stops when it is small enough.
 
@@ -174,9 +175,9 @@ Only rule errors can support a misconception. Every wrong answer is still wrong 
 differently would change scoring and needs approval.
 
 **One reporting fix:** "Shown earlier; not currently confirmed" was listed as a strength after 0 of 6 right. The
-engine can "demonstrate" level 1 from wrong answers alone once two formats have been used, which dictation now makes
-common. The line is no longer listed while most of the pupil's own answers are wrong. Only the strength text
-changes, not the standing or the plan. Please confirm it, or I will revert it.
+engine can "demonstrate" level 1 from wrong answers alone once it has enough answers. The line is no longer listed
+while most of the pupil's own answers are wrong (approved and kept). Since C′ it also needs the earlier claim to have
+passed the evidence gate when it was made.
 
 ## 6. Policy decisions
 
@@ -210,9 +211,13 @@ changes, not the standing or the plan. Please confirm it, or I will revert it.
 **Kept as approved:** "Shown earlier; not currently confirmed" is not listed as a strength while most answers are
 wrong.
 
-**C. Not implemented.** The lifetime 50% rule is rejected. A rule that tells old mistakes from recent improvement is
-proposed, with worked examples, in `MASTERY_RULE_PROPOSAL.md`. That document also has the audit of misconception
-resolution: two right answers on **easier** words currently resolve an error on a harder word.
+**C′, the stricter misconception resolution and dictation alone: approved and implemented (15 October).** The
+lifetime 50% rule was rejected and is not implemented. The rules, their thresholds (drafts, configurable in
+`frontend/src/english/logic/mastery-policy.ts`) and before-and-after results are in `MASTERY_RULES.md`. In short:
+"shown" now also needs the C′ evidence gate; a misconception is resolved only by right answers at the difficulty of the
+error with one on a later day (otherwise "improving" or "resolved below level X"); and dictation alone can demonstrate
+direct spelling, with word and pattern diversity instead of a second question format. Every dictation word is still a
+candidate, so spelling mastery stays provisional even when C′ is met.
 
 ## 7. History and the older check
 

@@ -81,6 +81,24 @@ export interface CapabilitySnapshot {
   };
   /** A finer-grained activity for this capability has paused and asked for an adult (its reason), if any. */
   paused?: string | null;
+  /**
+   * The engine demonstrates a level, but the caller's evidence rule does not yet allow calling it shown: what is
+   * missing and how to collect it. Optional: absent means no such rule (the plan is exactly as before).
+   */
+  evidenceGap?: EvidenceGap | null;
+}
+
+export interface EvidenceGap {
+  /** The level the engine demonstrates (the claim not yet supported). */
+  level: number;
+  /** diagnostic: new questions at a chosen difficulty; fresh_check: the first answers on their own since teaching; practice: teaching first. */
+  kind: "diagnostic" | "fresh_check" | "practice";
+  /** What evidence is missing, in plain words. */
+  missing: string;
+  /** What the next activity is for, in plain words. */
+  why: string;
+  /** Unused questions at the difficulty needed (diagnostic, fresh_check). */
+  available: number;
 }
 
 export type DevelopmentAction =
@@ -96,6 +114,7 @@ export type DevelopmentAction =
   | "continue"
   | "next_capability"
   | "assess"
+  | "evidence_check"
   | "human_review";
 
 export interface DevelopmentRecommendation {
@@ -257,6 +276,16 @@ export function planDevelopment(input: DevelopmentInput): DevelopmentPlan {
       case "shown":
       case "confirmed":
         continue; // shown: nothing to do until a check is due
+    }
+    // the engine demonstrates a level that the evidence rule does not yet support: collect what is missing (never
+    // by repeating easy questions; the caller counts only unused questions at the difficulty needed)
+    const g = c.evidenceGap;
+    if (g && !c.paused && (c.standing === "uncertain" || c.standing === "developing" || c.standing === "improving")) {
+      const why = `The estimate for ${c.name} supports about level ${g.level}, but it cannot be called shown yet: ${g.missing}`;
+      if (g.kind === "practice" && c.content.teach) add({ action: "continue", capability: c.id, priority: 74, what: `Practise ${c.name}`, why: `${why} ${g.why[0].toUpperCase()}${g.why.slice(1)}.`, evidence: [ev(c)], changeIf: "Right on new questions on their own after practice, with no errors on easier ones: shown.", content: canTeach(c) });
+      else if (g.available > 0) add({ action: "evidence_check", capability: c.id, priority: 74, what: `Show ${c.name} at about level ${g.level}`, why: `${why} Next: ${g.why}.`, evidence: [ev(c)], changeIf: "Right on the new questions, with no errors on easier ones: shown. Wrong: the level is not claimed, and the plan adjusts.", content: { available: true, note: `${g.available} unused question${g.available === 1 ? "" : "s"} at the difficulty needed` } });
+      else review(c, 45, `${why} There are no unused questions at the difficulty needed (${g.why}).`, "More reviewed questions at that difficulty.");
+      continue;
     }
     if (c.standing === "improving") {
       // right in practice straight after a lesson: a fresh check without help, before anything else is built on it

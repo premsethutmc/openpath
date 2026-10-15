@@ -5,9 +5,10 @@
  */
 import { type EvidenceUse, type Goal, type Item, type LeafView, type Recommendation, type SelectionInput, fnv1a, leafView, recommend } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED, type Pool, lessonId } from "./content.ts";
-import type { Planned, SelectionTrace } from "./events.ts";
+import type { EvidenceTarget, Planned, SelectionTrace } from "./events.ts";
 import { misconceptionFindings } from "./misconceptions.ts";
 import { selectionTrace } from "./trace.ts";
+import { DICTATION_CAPS, MASTERY_GATE } from "./mastery-policy.ts";
 import { type AppState, type PatternStatus, type SessionState, dueWords, patternKey, patternStatus } from "./state.ts";
 
 export const PLACEMENT_MIN = 12;
@@ -124,9 +125,10 @@ const nextFrom = (r: Recommendation, c: AppContent): Next | null => (r.choice ? 
  * Ask the engine, exactly as before, and keep what it decided and why (the decision trace). The trace is a record
  * of the engine's own output; it never changes the choice.
  */
-function decide(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"], use: Use, session?: SessionState): Next | null {
+function decide(s: AppState, c: AppContent, goal: Goal, now: string, mode: SelectionInput["mode"], use: Use, session?: SessionState, keep?: (id: string) => boolean): Next | null {
   const elig = eligibility(s, c, use, session);
-  const inp = input(s, c, goal, now, mode, elig.only);
+  const only = keep ? new Set([...elig.only].filter(keep)) : elig.only;
+  const inp = input(s, c, goal, now, mode, only);
   const r = recommend(inp);
   const next = nextFrom(r, c);
   if (next) next.trace = selectionTrace(s, c, inp, r, use, elig.excluded);
@@ -166,9 +168,40 @@ export function checkNext(s: AppState, c: AppContent, session: SessionState, now
   if (!cap) return null;
   const retention = session.event.purpose === "retention";
   const use: Use = retention ? "retention" : session.event.purpose === "confirm" ? "confirm" : "assess";
-  const next = decide(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment", use, session);
+  // an evidence check (C′): only unused questions on this capability in the difficulty range that can fill the gap
+  const target = session.event.target;
+  const met = target ? wordsMet(s, c) : null;
+  const keep = target ? (id: string) => {
+    const i = c.ctx.content.items.get(id);
+    return i?.kind === "code" && i.target === cap && inRange(i, target) && !metWord(i, met!);
+  } : undefined;
+  const next = decide(s, c, focusGoal(cap), now, retention ? "hybrid" : "assessment", use, session, keep);
   if (!next || next.item.kind !== "code" || next.item.target !== cap) return null; // only this capability
+  if (target && next.trace) next.trace.evidenceTarget = target;
   return retention ? next : { ...next, use: "assessment" };
+}
+
+/** A typed spelling question whose word the learner has already met (it could not count as a new word). */
+const metWord = (i: Code, met: Set<string>) => i.target.startsWith("EN.FND.SPL.") && i.format.startsWith("typed") && !!i.answers?.[0] && met.has(i.answers[0].toLowerCase());
+
+const inRange = (i: { b: number }, t: EvidenceTarget) => (t.atLeast === undefined || i.b >= t.atLeast - 1e-9) && (t.atMost === undefined || i.b <= t.atMost + 1e-9);
+
+/**
+ * Unused questions an evidence check can ask on a capability, within the difficulty range that can fill the gap
+ * (mastery.ts): dictation words where the skill has them (direct spelling), otherwise the hand-written bank for this
+ * use. Only fresh questions: never one already asked, and never a word already met, so easy questions are not
+ * repeated to make up a count.
+ */
+export function evidenceCheckPool(s: AppState, c: AppContent, cap: string, target: EvidenceTarget, use: Use): { type: "spelling_assess" | "check"; items: Code[] } {
+  if (DICTATION_CAPS.includes(cap)) {
+    const met = wordsMet(s, c);
+    const items = c.dictation.items.filter((i) => i.target === cap && !s.ledger.exposures.has(i.id) && !met.has(dictationWord(i)) && inRange(i, target));
+    if (items.length) return { type: "spelling_assess", items };
+  }
+  const allowed = onlyFor(s, c, use);
+  const met = wordsMet(s, c);
+  const items = [...(c.ctx.content.byCapability.get(cap) ?? [])].filter((i): i is Code => i.kind === "code" && allowed.has(i.id) && !s.ledger.exposures.has(i.id) && inRange(i, target) && !metWord(i, met));
+  return { type: "check", items };
 }
 
 /** More practice: the engine's hybrid scheduler on every specified capability (no teaching). */
@@ -194,7 +227,7 @@ export function guidedLesson(s: AppState, c: AppContent, cap: string, now: strin
 // ------------------------------------------------------------------ the spelling assessment (dictation)
 
 /** The spelling capabilities that have dictation words. */
-export const DICTATION_CAPS = ["EN.FND.SPL.inflections", "EN.FND.SPL.morphological"];
+export { DICTATION_CAPS };
 
 /**
  * Settings of the adaptive spelling assessment. The ±1 band window is an initial targeting hypothesis (to be
@@ -266,6 +299,7 @@ export interface SpellingAssessChoice {
  * answer changes the next choice through the Learner Vector. Words already met are never asked again.
  */
 export function spellingAssessNext(s: AppState, c: AppContent, session: SessionState, now: string): SpellingAssessChoice {
+  if (session.event.capability) return evidenceDictationNext(s, c, session, now);
   const S = SPELLING_ASSESS;
   const n = session.answered.length;
   const est = DICTATION_CAPS.map((cap) => ({ cap, v: view(s, c, cap, now) }));
@@ -332,6 +366,41 @@ export function spellingAssessNext(s: AppState, c: AppContent, session: SessionS
   if (!r.choice) return { next: null, stop: "insufficient", note: "the engine found no question to ask among the eligible words" };
   const trace = selectionTrace(s, c, inp, r, "assess", excluded, c.dictation.items.map((i) => i.id));
   trace.spelling = { estimates: est.map(({ cap, v }) => ({ cap, mean: v.mean, sd: v.sd })).map(({ cap, mean, sd }) => ({ capability: cap, mean: Math.round(mean * 1000) / 1000, sd: Math.round(sd * 1000) / 1000 })), rule, reasons, window: rule === "widened" ? S.wideWindow : rule === "follow_up" ? S.followUpWindow : S.window, testedPatterns, ...(followUp ? { followUp } : {}) };
+  return { next: { item: c.ctx.content.items.get(r.choice.item)!, use: "assessment", why: r.explanation, trace }, stop: null };
+}
+
+/**
+ * An evidence check by dictation on one skill (chosen by the plan to fill a C′ gap): unused words on that skill in
+ * the target difficulty range, patterns not yet shown (and not yet asked in this check) first; the engine chooses
+ * among them. It stops after its length, or when no such word is left (recorded as insufficient content).
+ */
+function evidenceDictationNext(s: AppState, c: AppContent, session: SessionState, now: string): SpellingAssessChoice {
+  const cap = session.event.capability!;
+  const target: EvidenceTarget = session.event.target ?? { why: "an evidence check on one skill" };
+  const n = session.answered.length;
+  const length = session.event.length ?? MASTERY_GATE.checkLength;
+  if (n >= length) return { next: null, stop: "max", note: `asked the ${length} words of this evidence check` };
+  const met = wordsMet(s, c);
+  const pool = c.dictation.items.filter((i) => i.target === cap && !s.ledger.exposures.has(i.id) && !met.has(dictationWord(i)) && inRange(i, target));
+  const range = `${target.atLeast ?? "any"}–${target.atMost ?? "any"}`;
+  if (!pool.length) return { next: null, stop: "insufficient", note: `no unused dictation word on ${cap} at difficulty ${range}: more reviewed words are needed` };
+  const tested = session.answered.map((a) => c.ctx.content.items.get(a.item.id)).filter((i): i is Code => i?.kind === "code").map((i) => i.step ?? "");
+  const avoid = new Set([...(target.avoidPatterns ?? []), ...tested]);
+  const other = pool.filter((i) => !avoid.has(i.step ?? ""));
+  const only = other.length ? other : pool;
+  const inp = input(s, c, focusGoal(cap), now, "assessment", new Set(only.map((i) => i.id)));
+  const r = recommend(inp);
+  if (!r.choice) return { next: null, stop: "insufficient", note: "the engine found no question to ask among the eligible words" };
+  const v = view(s, c, cap, now);
+  const trace = selectionTrace(s, c, inp, r, "assess", new Map(), c.dictation.items.map((i) => i.id));
+  trace.spelling = {
+    estimates: [{ capability: cap, mean: Math.round(v.mean * 1000) / 1000, sd: Math.round(v.sd * 1000) / 1000 }],
+    rule: "evidence_gap",
+    reasons: [`evidence check: ${target.why}`, `unused words at difficulty ${range}${other.length ? (avoid.size ? `; patterns not yet shown or asked first (not ${[...avoid].filter(Boolean).join(", ")})` : "") : "; every pattern there was already shown or asked, so the same pattern again"}`],
+    window: 0,
+    testedPatterns: [...new Set(tested)],
+  };
+  trace.evidenceTarget = target;
   return { next: { item: c.ctx.content.items.get(r.choice.item)!, use: "assessment", why: r.explanation, trace }, stop: null };
 }
 
@@ -481,9 +550,11 @@ export function spellingPlan(s: AppState, c: AppContent, now: string, speech: bo
       priority += 2;
       reasons.push(`${wrongInChecks} words with this pattern were misspelt in spelling checks`);
     } else if (wrongInChecks === 1) reasons.push("one error with this pattern in a check so far: a suspicion, so the next check looks again before any teaching");
-    const linkedTo = (status: string) =>
-      findings.filter((f) => f.capability === p.cap && f.status === status && (MISCONCEPTION_STEPS[f.misconception] ?? []).includes(p.step)).map((f) => f.misconception.replace(/_/g, " "));
-    const supported = linkedTo("supported");
+    const linked = (ok: (f: (typeof findings)[number]) => boolean) =>
+      findings.filter((f) => f.capability === p.cap && ok(f) && (MISCONCEPTION_STEPS[f.misconception] ?? []).includes(p.step)).map((f) => f.misconception.replace(/_/g, " "));
+    const linkedTo = (status: string) => linked((f) => f.status === status);
+    // supported by errors on separate questions, and not resolved (improving keeps it: one right answer is not enough)
+    const supported = linked((f) => f.support === "supported" && (f.status === "supported" || f.status === "improving"));
     if (supported.length) {
       priority += 1.5;
       reasons.push(`a pattern in mistakes on separate questions points here (${supported.join(", ")})`);

@@ -162,6 +162,11 @@ export function CapabilityCard({ cap }: { cap: CapabilityProfile }) {
       {(cap.evidence.samePassage ?? 0) > 0 && (
         <p className="small note">{`${cap.evidence.samePassage} answer${cap.evidence.samePassage === 1 ? " was" : "s were"} on a passage already counted for this skill. ${cap.evidence.samePassage === 1 ? "It is" : "They are"} kept for a teacher to look at, but only the first answer on each passage counts.`}</p>
       )}
+      {cap.notYetShown && (
+        <p className="small note gate" data-gate="not-yet">
+          {cap.notYetShown}
+        </p>
+      )}
       {cap.strengths.map((t, i) => (
         <p key={`s${i}`} className="small strength">
           {t}

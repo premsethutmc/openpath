@@ -59,6 +59,17 @@ export interface SessionEvent {
   speech?: SpeechRecord;
   /** The spelling assessment: who says the words (the device's voice, or an adult reading them aloud). */
   delivery?: "device_voice" | "adult_reader";
+  /** An evidence check chosen by the plan: the difficulty of questions that can fill the gap, and why (mastery.ts). */
+  target?: EvidenceTarget;
+}
+
+/** Which questions an evidence check asks: unused ones in this difficulty range, other spelling patterns first. */
+export interface EvidenceTarget {
+  atLeast?: number;
+  atMost?: number;
+  /** Spelling patterns already shown at level: others are preferred (dictation-only diversity). */
+  avoidPatterns?: string[];
+  why: string;
 }
 
 /** Speech as it was when a spelling session began. The voice's name and language only: nothing about the person. */
@@ -171,13 +182,15 @@ export interface SelectionTrace {
   /** The spelling assessment: the targeting and coverage rules applied before the engine chose among what was left. */
   spelling?: {
     estimates: { capability: string; mean: number; sd: number }[];
-    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient" | "stopped";
+    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient" | "stopped" | "evidence_gap";
     reasons: string[];
     window: number;
     testedPatterns: string[];
     followUp?: { misconception: string; after: string };
   };
   planner?: { action: string; itemRole?: string; strategy?: string; diagnosis: string; detail: string; reason: string; policy: string };
+  /** An evidence check: the difficulty range it was restricted to, and why (the evidence the plan is collecting). */
+  evidenceTarget?: EvidenceTarget;
 }
 
 /** What Today offered when a session was started, and which activity was started (recorded at that moment). */
@@ -187,6 +200,10 @@ export interface PlanTrace {
   /** Index in `offered`, or null when started from Journey, More practice or the onboarding. */
   startedRank: number | null;
   standings: Record<string, string>;
+  /** Skills the engine demonstrates but the evidence gate does not yet support: what is missing (C′). Optional: older traces have none. */
+  gaps?: Record<string, string>;
+  /** The evidence check started, if any: its difficulty range and why. */
+  target?: EvidenceTarget;
 }
 
 export interface TraceEvent {

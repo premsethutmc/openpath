@@ -50,6 +50,12 @@ export interface Policy {
   demonstrated_probability: number;
   demonstrated_min_direct: number;
   demonstrated_min_contexts: number;
+  /**
+   * Optional, per capability: question formats (contexts) that may demonstrate on their own, without a second
+   * format. Absent in every framework file; an app sets it for direct spelling (dictation), where the app's own
+   * evidence gate asks for diversity of words and patterns instead. Leaving it out changes nothing.
+   */
+  single_format_demonstration?: Record<CapabilityId, string[]>;
   mastery_gap_days: number;
   struggling_window_sessions: number;
   struggling_min_observations: number;

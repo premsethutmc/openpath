@@ -9,7 +9,7 @@
  */
 import { leafView, recommend } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, GUIDED, lessonId } from "./content.ts";
-import type { SessionType } from "./events.ts";
+import type { EvidenceTarget, SessionType } from "./events.ts";
 import { type AppState, dueWords, placementDone, sessionsOf } from "./state.ts";
 import { type PatternPlan, spellingCheckQueue, spellingPlan } from "./select.ts";
 
@@ -25,6 +25,8 @@ export interface PlanStep {
   purpose?: "assess" | "confirm" | "retention";
   /** The engine's own explanation, for a guardian who wants the detail. */
   detail?: string;
+  /** An evidence check: which questions can fill the gap (mastery.ts). */
+  target?: EvidenceTarget;
 }
 
 const STEP_TITLES: Record<string, string> = {
@@ -55,7 +57,8 @@ export function todayPlan(s: AppState, c: AppContent, now: string, speech: boole
   const steps: PlanStep[] = [];
   // the spelling check is dictation: hear a word, type it; each word is chosen after the last answer. It is offered
   // whether or not this device can speak: without speech the app explains why, and an adult can read the words.
-  const assessed = sessionsOf(s, "spelling_assess").some((x) => x.end?.reason === "finished");
+  // the whole spelling check (not an evidence check on one skill, which also uses dictation)
+  const assessed = sessionsOf(s, "spelling_assess").some((x) => !x.event.capability && x.end?.reason === "finished");
   if (!assessed && c.dictation.items.length)
     return [{ type: "spelling_assess", title: "Spelling check: hear and spell", reason: "Hear a word, then type it. Each next word is chosen from your answers so far, near your level." }];
   const due = dueWords(s, now);

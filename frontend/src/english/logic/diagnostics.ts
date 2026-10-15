@@ -234,6 +234,23 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
       engine_stage: v.stage,
       demonstrated_level: v.demonstrated,
       shown_level_reported: x.shownLevel,
+      // C′: the engine's level is called shown only when this gate passes (mastery.ts); every answer it read is listed
+      mastery_gate: x.gate
+        ? {
+            policy: x.gate.policy,
+            level: x.gate.level,
+            passed: x.gate.passed,
+            since_teaching: x.gate.since,
+            single_format: x.gate.singleFormat,
+            window: x.gate.window.map((a) => ({ decision: a.decision, item: a.item, at: a.at, difficulty: a.b, correct: a.correct, ...(a.repeatedWord ? { repeated_word: true } : {}) })),
+            right_at_level: x.gate.atLevel.map((a) => a.item),
+            contradictions: x.gate.contradictions.map((a) => a.item),
+            patterns: x.gate.patterns,
+            missing: x.gate.missing,
+            next: x.gate.next,
+          }
+        : null,
+      not_yet_shown: x.notYetShown,
       verification: v.verification,
       retention: { status: v.retention.status, due: v.retention.dueAt, checks: v.retention.checks.length },
       qualifying_answers: node.qualifyingN ?? node.directN ?? 0,
@@ -434,7 +451,7 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
       .filter((x) => x.misconceptions.length || x.difficulties.length || x.standing === "found_hard" || x.standing === "not_kept")
       .map((x) => ({ capability: x.id, name: x.name, standing: x.standing, misconceptions: x.misconceptions, difficulties: x.difficulties, notes: x.notes })),
     independent_vs_assisted: kinds,
-    retention: caps.filter((x) => x.answers.length).map((x) => ({ capability: x.id, name: x.name, standing: x.standing, demonstrated_level: x.demonstrated_level, qualifying_answers: x.qualifying_answers, contexts: x.contexts.length, verification: x.verification.status, retention: x.retention })),
+    retention: caps.filter((x) => x.answers.length).map((x) => ({ capability: x.id, name: x.name, standing: x.standing, mastery: x.mastery, demonstrated_level: x.demonstrated_level, gate: x.mastery_gate ? (x.mastery_gate.passed ? "passed" : "not passed") : "no level", gate_missing: x.mastery_gate?.missing ?? [], qualifying_answers: x.qualifying_answers, contexts: x.contexts.length, verification: x.verification.status, retention: x.retention })),
     today,
     plan,
     next_questions: nextQuestions,
@@ -547,14 +564,14 @@ export function reportText(d: Diagnosis): string {
   }
   P();
   P(`4. MISCONCEPTIONS AND SKILL GAPS`);
-  for (const f of d.misconception_findings) P(`   ${f.misconception} on ${f.capability}: ${f.status.toUpperCase()} (${f.reason}; errors on ${f.errors.map((e) => e.item).join(", ") || "none counted"}${f.laterRight.length ? `; right since on ${f.laterRight.map((e) => e.item).join(", ")}` : ""})`);
+  for (const f of d.misconception_findings) P(`   ${f.misconception} on ${f.capability}: ${f.status.toUpperCase().replace("_", " ")}${f.status !== f.support ? ` (evidence for it: ${f.support})` : ""} (${f.reason}; errors on ${f.errors.map((e) => `${e.item} b${e.b}`).join(", ") || "none counted"}${f.laterRight.length ? `; right since on ${f.laterRight.map((e) => `${e.item} b${e.b}${e.atLevel ? "" : " (easier)"}`).join(", ")}` : ""})`);
   if (!d.misconceptions_and_gaps.length) P(`   None found yet.`);
   for (const g of d.misconceptions_and_gaps) P(`   ${g.name} (${g.standing}): ${[...g.misconceptions.map((m: Any) => `pattern ${m.id} (strength ${m.strength})`), ...g.difficulties, ...g.notes].join("; ") || "–"}`);
   P();
   P(`5. DEMONSTRATION AND RETENTION`);
   const dem = d.retention.filter((x) => x.demonstrated_level !== null || x.verification !== "not_demonstrated");
   if (!dem.length) P(`   No skill has enough independent evidence to be demonstrated yet.`);
-  for (const x of dem) P(`   ${x.name}: demonstrated at level ${x.demonstrated_level ?? "–"} on ${x.qualifying_answers} qualifying answers in ${x.contexts} formats; ${x.verification}; later check ${x.retention.status === "none" ? "not scheduled" : `due ${String(x.retention.due).slice(0, 10)} (${x.retention.status})`}, ${x.retention.checks} done`);
+  for (const x of dem) P(`   ${x.name}: engine level ${x.demonstrated_level ?? "–"} on ${x.qualifying_answers} qualifying answers in ${x.contexts} formats; evidence gate (C′) ${x.gate}${x.gate_missing.length ? ` — ${x.gate_missing.join(" ")}` : ""}; reported ${x.standing}${x.mastery ? ` (${x.mastery})` : ""}; ${x.verification}; later check ${x.retention.status === "none" ? "not scheduled" : `due ${String(x.retention.due).slice(0, 10)} (${x.retention.status})`}, ${x.retention.checks} done`);
   P();
   P(`6. TODAY (${d.plan.policy})`);
   for (const t of d.today) P(`   • ${t.title} [${t.kind}; action ${t.planner_action}, priority ${t.priority}]\n     why: ${t.why}\n     would change if: ${t.would_change_if ?? "–"}`);

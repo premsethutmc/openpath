@@ -60,7 +60,7 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
         {activities.map((a, i) => {
           const first = i === 0 && !open;
           return (
-            <li key={`${a.step.type}:${a.step.capability ?? ""}:${a.step.step ?? ""}`} className={first ? "adventure" : ""} data-activity={a.kind} data-capability={a.step.capability ?? ""}>
+            <li key={`${a.step.type}:${a.step.capability ?? ""}:${a.step.step ?? ""}`} className={first ? "adventure" : ""} data-activity={a.kind} data-action={a.recommendation?.action ?? ""} data-capability={a.step.capability ?? ""}>
               <p className="kicker">{first ? `Your next adventure · ${a.label}` : a.label}</p>
               <h2>{a.title}</h2>
               <p>{a.line}</p>

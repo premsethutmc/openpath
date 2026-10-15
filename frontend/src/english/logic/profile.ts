@@ -18,7 +18,9 @@ import {
   type CapabilitySnapshot,
   type DevelopmentPlan,
   type DevelopmentRecommendation,
+  type EvidenceGap,
   type EvidenceSummary,
+  RETENTION,
   STANDING_WORDS,
   type Standing,
   explainPlanChange,
@@ -29,11 +31,13 @@ import {
   scoreCode,
 } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED } from "./content.ts";
-import type { AppEvent } from "./events.ts";
+import type { AppEvent, EvidenceTarget } from "./events.ts";
 import { type PlanStep, patternTitle, todayPlan } from "./plan.ts";
 import { capabilityProgress, type CapabilityProgress } from "./progress.ts";
-import { misconceptionFindings } from "./misconceptions.ts";
-import { type Use, onlyFor, spellingPlan } from "./select.ts";
+import { findingLine, misconceptionFindings } from "./misconceptions.ts";
+import { type MasteryGate, gatePassedBefore, masteryGate, qualifyingAnswers } from "./mastery.ts";
+import { MASTERY_GATE } from "./mastery-policy.ts";
+import { type Use, evidenceCheckPool, onlyFor, spellingPlan } from "./select.ts";
 import { type AppState, dueWords, fold, placementDone, sessionsOf } from "./state.ts";
 import { parentReport } from "./journey.ts";
 
@@ -59,6 +63,13 @@ export interface CapabilityProfile extends CapabilitySnapshot {
   mastery: "verified" | "provisional" | null;
   /** Why mastery is provisional (or verified), in words. */
   masteryNote: string | null;
+  /**
+   * The C′ evidence gate for the level the engine currently demonstrates (null when it demonstrates none). "Shown"
+   * needs it to pass; when it does not, `notYetShown` says what is missing and the plan collects it.
+   */
+  gate: MasteryGate | null;
+  /** The engine supports a level, but it is not called shown yet: why, in plain words (null otherwise). */
+  notYetShown: string | null;
   /** Reading: how many different passages the independent answers came from (answers on one passage are not fully independent). */
   passages: number;
   /** For shown or confirmed: the level the engine currently supports (1–8); always reported with "shown". */
@@ -217,21 +228,27 @@ function practiceSignal(s: AppState, c: AppContent, cap: string, now: string, sp
  * the framework's demonstrated_min_direct qualifying (independent) answers: an engine demonstration that could rest
  * on answers recorded before after-teaching tracking, or without provenance, is not reported as shown.
  */
-function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: CapabilityProgress["certainty"], minDirect: number, demonstratedOutsideLessons: boolean): Standing {
+function standingOf(v: ReturnType<typeof leafView>, x: Collected, certainty: CapabilityProgress["certainty"], minDirect: number, demonstratedOutsideLessons: boolean, gate: MasteryGate | null, shownBefore: boolean, retainedSinceClaim: boolean): Standing {
   const e = x.e;
   // never "shown" while the learner's own answers say the opposite: the engine can support a low level after wrong
   // answers on harder questions (its prior), but a parent reading "shown" after 0 of 4 right would be misled
   const qualified = e.independent >= minDirect && demonstratedOutsideLessons && !foundHard(e);
   switch (v.verification.status) {
+    // a later check is reported only for a claim that passed the evidence gate when it was made
     case "failed":
-      return "not_kept";
+      if (shownBefore) return "not_kept";
+      break;
     case "overdue":
-      return "check_due";
+      if (shownBefore) return "check_due";
+      break;
+    // C′: the engine's level is called shown (or confirmed, after a passed later check) only if the gate passes now
+    // confirmed also needs the passed later check to come at least the retention gap after the first claim the gate
+    // supported (the engine counts from its own first demonstration, which the gate may not have supported)
     case "verified":
-      if (qualified) return "confirmed";
+      if (qualified && gate?.passed) return retainedSinceClaim ? "confirmed" : "shown";
       break;
     case "demonstrated":
-      if (qualified) return "shown";
+      if (qualified && gate?.passed) return "shown";
       break;
   }
   if (e.independent + e.unknown + e.afterTeaching === 0) return "not_checked";
@@ -265,20 +282,42 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const x = ev.get(id) ?? { e: none(), ids: [], lastAt: null, lastPracticeAt: null, validated: 0, draft: 0, passages: new Set<string>() };
     // an engine demonstration counts here only if it happened in a session with no lesson on this capability
     const lessonOn = (session: string) => (s.sessions.get(session)?.event.lesson ?? "").split("#")[0] === id;
-    const outside = s.ledger.composite.nodes[id].demonstrations.some((d) => !lessonOn(d.session));
-    const standing = standingOf(v, x, pr.certainty, c.index.framework.policy.demonstrated_min_direct, outside);
+    const node = s.ledger.composite.nodes[id];
+    const outside = node.demonstrations.some((d) => !lessonOn(d.session));
+    const policy = c.index.framework.policy;
+    const ver = v.verification;
+    // C′ on the level the engine demonstrates now; and, for a later check, whether an earlier claim passed it then
+    const answers = ver.currentLevel !== null || ver.historicalLevel !== null ? qualifyingAnswers(s, c, id) : [];
+    const singleFormatAt = (at: string) => new Set(answers.filter((a) => a.at <= at).map((a) => a.format)).size < policy.demonstrated_min_contexts;
+    const singleNow = (node.qualifyingContexts ?? node.contexts).length < policy.demonstrated_min_contexts;
+    const current = ver.currentLevel !== null ? masteryGate(s, c, id, ver.currentLevel, now, singleNow, answers) : null;
+    // the first claim the gate supported (any level): history ("shown earlier") and the start of the retention gap
+    const before = ver.historicalLevel !== null ? gatePassedBefore(s, c, id, now, singleFormatAt) : null;
+    // a later check due or failed is reported only for a level the gate supported (within the engine's retention tolerance)
+    const late = ver.status === "overdue" || ver.status === "failed";
+    const retainedClaim = late && v.retention.level !== null ? gatePassedBefore(s, c, id, now, singleFormatAt, v.retention.level - RETENTION.tolerance) : null;
+    // a later check is due (or failed) on a level the gate never supported: that level is still only a claim to test
+    const unsupported = !current && !retainedClaim && late ? (v.retention.level ?? ver.historicalLevel) : null;
+    const gate = current ?? (unsupported !== null ? masteryGate(s, c, id, unsupported, now, singleNow, answers) : null);
+    const gapMs = (policy.mastery_gap_days - 0.5) * 86_400_000;
+    const retainedSinceClaim = !!before && !!ver.verifiedAt && Date.parse(ver.verifiedAt) - Date.parse(before.at) >= gapMs;
+    const standing = standingOf(v, x, pr.certainty, policy.demonstrated_min_direct, outside, gate, !!retainedClaim, retainedSinceClaim);
+    // the first check is due the retention gap after the first supported claim (or the engine's own date, if later)
+    const firstCheckDue = before ? [v.retention.dueAt ?? "", new Date(Date.parse(before.at) + policy.mastery_gap_days * 86_400_000).toISOString()].sort().at(-1)! : v.retention.dueAt;
     const t = teachingFor(s, c, id, now, speech);
     teach.set(id, t);
     const strengths: string[] = [];
-    const ver = v.verification;
     const shownNow = standing === "shown" || standing === "confirmed";
-    const verifiedNeeds = c.index.framework.policy.demonstrated_min_direct;
-    const mastery = shownNow ? (x.validated >= verifiedNeeds ? "verified" : "provisional") : null;
+    const verifiedNeeds = policy.demonstrated_min_direct;
+    // verified: the answers behind the claim are on educator-approved questions (overall, and the right answers at level)
+    const validatedAtLevel = gate ? gate.atLevel.filter((a) => a.validated).length : 0;
+    const mastery = shownNow ? (x.validated >= verifiedNeeds && validatedAtLevel >= MASTERY_GATE.atLevelMin ? "verified" : "provisional") : null;
     const masteryNote = !shownNow
       ? null
       : mastery === "verified"
-        ? `Verified: ${x.validated} of the independent answers are on educator-approved questions.`
-        : `Provisional: shown on draft questions that an educator has not yet approved (${x.validated} of the ${verifiedNeeds} independent answers on approved questions needed for a verified result).`;
+        ? `Verified: ${x.validated} of the independent answers, and ${validatedAtLevel} of the right answers at the level shown, are on educator-approved questions.`
+        : `Provisional: shown on draft questions that an educator has not yet approved (${x.validated} of the ${verifiedNeeds} independent answers, and ${validatedAtLevel} of the ${MASTERY_GATE.atLevelMin} right answers at level, on approved questions are needed for a verified result).`;
+    const notYetShown = gate && !gate.passed && !shownNow ? `The estimate supports about level ${gate.level}, but it is not called shown yet: ${gate.missing.join(" ")}` : null;
     if (shownNow)
       strengths.push(
         mastery === "verified"
@@ -287,7 +326,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       );
     // never claimed when the learner's own answers were mostly wrong (the engine's floor can "demonstrate" level 1
     // from wrong answers alone): the same rule as for "shown" (PC-11)
-    if (ver.historicalLevel !== null && standing !== "shown" && standing !== "confirmed" && standing !== "found_hard" && x.e.independentRight * 2 >= x.e.independent) strengths.push("Shown earlier; not currently confirmed.");
+    if (before && standing !== "shown" && standing !== "confirmed" && standing !== "found_hard" && x.e.independentRight * 2 >= x.e.independent) strengths.push("Shown earlier; not currently confirmed.");
     const difficulties: string[] = [];
     if (standing === "improving")
       strengths.push(`Improving in practice straight after a lesson (${x.e.afterTeachingRight} of ${x.e.afterTeaching} right). Not yet shown on their own: fresh questions without help come next.`);
@@ -297,10 +336,14 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     // one wrong answer is a suspicion, not a pattern: say which (misconceptions.ts); a resolved one is not a difficulty
     for (const m of v.misconceptions) {
       const f = findings.find((x) => x.capability === id && x.misconception === m.id);
-      const what = m.id.replace(/_/g, " ");
       // resolved, or seen only in practice (nothing counted): not a difficulty to report
-      if (!f || f.status === "resolved" || !f.errors.length) continue;
-      difficulties.push(f.status === "supported" ? `A pattern in wrong answers: ${what} (on ${new Set(f.errors.map((e) => e.item)).size} different questions).` : `Possibly ${what}: one wrong answer so far, not yet a pattern.`);
+      const line = f ? findingLine(f) : null;
+      if (line) difficulties.push(line);
+    }
+    // a misconception the engine no longer holds active, but that is not resolved by the stricter rule, stays visible
+    for (const f of findings) if (f.capability === id && !v.misconceptions.some((m) => m.id === f.misconception) && (f.status === "improving" || f.status === "resolved_below")) {
+      const line = findingLine(f);
+      if (line) difficulties.push(line);
     }
     const paused = id === c.journey.capability && doubling.support ? `Doubling letters: ${doubling.support}` : null;
     if (id === c.journey.capability && doubling.started) difficulties.push(`Doubling letters (provisional questions, not counted): ${doubling.status}`);
@@ -312,7 +355,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
           : standing === "confirmed"
             ? `Confirmed on ${day(ver.verifiedAt)}; next check from ${day(v.retention.dueAt)}.`
             : standing === "shown"
-              ? `First check from ${day(v.retention.dueAt)}.`
+              ? `First check from ${day(firstCheckDue)}.`
               : "Not applicable yet: it first needs to be shown.";
     snapshots.push({
       id,
@@ -331,7 +374,8 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
         practiceSignal: practiceSignal(s, c, id, now, speech),
       },
       paused,
-      estimate: { certainty: pr.certainty, headline: pr.headline, range: pr.range, verification: pr.verification },
+      // the engine's own status line claims a band; when the evidence gate does not support it, say that instead
+      estimate: { certainty: pr.certainty, headline: pr.headline, range: pr.range, verification: notYetShown ?? pr.verification },
       strengths,
       difficulties,
       retention,
@@ -339,10 +383,13 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       basis: { validated: x.validated, draft: x.draft },
       mastery,
       masteryNote,
+      gate,
+      notYetShown,
       shownLevel: standing === "shown" || standing === "confirmed" ? ver.currentLevel : null,
       passages: x.passages.size,
       notes: [],
       next: null,
+      evidenceGap: gate && !gate.passed && gate.next && !shownNow ? evidenceGapOf(s, c, id, gate, !!t) : null,
     });
   });
   const plan = planDevelopment({ capabilities: snapshots, requires: c.index.requires });
@@ -351,6 +398,40 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     p.next = plan.all.find((r) => r.capability === p.id) ?? null;
   }
   return { at: now, capabilities: snapshots, plan, activities: opts.activities === false ? [] : activities(s, c, now, speech, plan, snapshots, teach) };
+}
+
+/** The purpose of an evidence check: the fresh check after teaching, or another look. */
+const gatePurpose = (g: MasteryGate): "assess" | "confirm" => (g.next?.kind === "fresh_check" && g.since ? "confirm" : "assess");
+
+/** The evidence check that can fill a gate's gap: the difficulty range, and which session (dictation or a check). */
+function gateTarget(g: MasteryGate): EvidenceTarget {
+  const n = g.next!;
+  if (n.kind === "practice") return { atLeast: g.level - MASTERY_GATE.atLevelBelow, atMost: g.level + MASTERY_GATE.diagnosticAbove, why: n.why };
+  return { ...(n.atLeast !== undefined ? { atLeast: Math.round(n.atLeast * 100) / 100 } : {}), ...(n.atMost !== undefined ? { atMost: Math.round(n.atMost * 100) / 100 } : {}), ...(n.kind === "diagnostic" && n.avoidPatterns?.length ? { avoidPatterns: n.avoidPatterns } : {}), why: n.why };
+}
+
+/** For the plan: what is missing and how many unused questions can fill it (practice falls back to a check without a lesson). */
+function evidenceGapOf(s: AppState, c: AppContent, cap: string, g: MasteryGate, canTeach: boolean): EvidenceGap {
+  const n = g.next!;
+  const kind = n.kind === "practice" && canTeach ? "practice" : n.kind === "practice" ? "diagnostic" : n.kind;
+  const pool = evidenceCheckPool(s, c, cap, gateTarget(g), gatePurpose(g));
+  // practice was the next step, but there is no lesson for this skill: new questions at the level instead, said so
+  const why = n.kind === "practice" && !canTeach ? `${n.why.replace(/: practice comes before another check$/, "")}; there is no lesson for it in the app, so new questions at difficulty ${Math.round((g.level - MASTERY_GATE.atLevelBelow) * 100) / 100} to ${g.level + MASTERY_GATE.diagnosticAbove} instead` : n.why;
+  return { level: g.level, kind, missing: g.missing.join(" "), why, available: pool.items.length };
+}
+
+/** The session for an evidence check on a capability (null when nothing can be asked). */
+function evidenceStep(s: AppState, c: AppContent, cap: CapabilityProfile): PlanStep | null {
+  const g = cap.gate;
+  if (!g || g.passed || !g.next) return null;
+  const target = gateTarget(g);
+  const purpose = gatePurpose(g);
+  const pool = evidenceCheckPool(s, c, cap.id, target, purpose);
+  if (!pool.items.length) return null;
+  const title = `${areaWord(cap.id)}: ${cap.name}`;
+  return pool.type === "spelling_assess"
+    ? { type: "spelling_assess", title: `${title}: hear and spell`, reason: "A few new words at your level, to show it on your own.", capability: cap.id, purpose, target }
+    : { type: "check", title, reason: "A few new questions at your level, to show it on your own.", capability: cap.id, purpose, target };
 }
 
 /** Short, child-friendly area names. */
@@ -385,7 +466,7 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
       },
     ];
   const initial = todayPlan(s, c, now, speech);
-  if (!placementDone(s) || (initial[0]?.type === "spelling_assess" && !sessionsOf(s, "spelling_assess").some((x) => x.end?.reason === "finished")))
+  if (!placementDone(s) || (initial[0]?.type === "spelling_assess" && !sessionsOf(s, "spelling_assess").some((x) => !x.event.capability && x.end?.reason === "finished")))
     return initial.slice(0, 1).map((step) => ({ kind: "start", label: CHILD.start, title: step.title, line: step.reason, step, recommendation: plan.today.find((r) => r.action === "initial_assessment") ?? null }));
   const name = (id: string) => caps.find((x) => x.id === id)!;
   const out: (Activity & { priority: number })[] = [];
@@ -418,6 +499,12 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
       case "confirm":
         out.push(check("show_what_you_know", "New questions on what you just practised, on your own.", "confirm"));
         break;
+      case "evidence_check": {
+        // C′: questions at the difficulty that can fill the gap, by dictation where the skill has unused words
+        const step = evidenceStep(s, c, cap);
+        if (step) out.push({ kind: "show_what_you_know", label: CHILD.show_what_you_know, title: step.title, line: step.reason, step: { ...step, reason: r.why }, recommendation: r, priority: r.priority });
+        break;
+      }
       case "assess":
       case "next_capability":
         out.push(check("new_skill", "Something new: a few questions to see what you already know.", "assess"));

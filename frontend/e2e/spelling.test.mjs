@@ -263,3 +263,86 @@ test("without a voice: the check explains why, an adult can read the words (reco
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("an evidence gap (C′): Today offers a check at the level, Progress and Journey say why it is not yet shown, and the check stays in range", async () => {
+  const { context, page, errors } = await device({ voice: true });
+  await register(page, `evidence.${run}@example.org`, "Mira");
+  // a pupil who is right up to about 3.6 and slips on some easier questions (the same rule as the unit test)
+  const h = (s) => [...s].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
+  const right = (item) => item.b <= 3.6 && h(item.id) % 3 !== 0;
+  const answerAll = async () => {
+    for (let k = 0; k < 30; k++) {
+      await page.locator(".item, .done").first().waitFor({ timeout: 10000 });
+      if (await page.locator(".done").count()) break;
+      const item = items.get(await page.locator(".item").getAttribute("data-item"));
+      await type(page, item, right(item));
+    }
+    await page.getByRole("button", { name: "Back to today" }).click();
+  };
+  await answerAll(); // placement
+  await page.locator(".plan li", { hasText: "Spelling check: hear and spell" }).getByRole("button", { name: "Start" }).click();
+  await page.getByRole("button", { name: "Start the spelling check" }).click();
+  await answerAll();
+  // Today: a check to collect the missing evidence
+  const offer = page.locator('.plan li[data-action="evidence_check"]').first();
+  await offer.waitFor({ timeout: 10000 });
+  const cap = await offer.getAttribute("data-capability");
+  await fits(page);
+  await shot(page, "today-evidence-check");
+  // Progress: the estimate is reported, the level is not called shown, and the card says what is missing
+  await page.getByRole("button", { name: "Progress", exact: true }).click();
+  const card = page.locator(`.caps li[data-capability="${cap}"]`).first();
+  await card.waitFor();
+  assert.ok(!["shown", "confirmed"].includes(await card.getAttribute("data-standing")));
+  assert.match(await card.locator('[data-gate="not-yet"]').innerText(), /The estimate supports about level [\d.]+, but it is not called shown yet/);
+  const name = (await card.locator("h3").innerText()).trim();
+  assert.ok(!(await page.locator('[data-part="shown"]').innerText()).includes(name), "not listed as demonstrated");
+  await fits(page);
+  await shot(page, "progress-not-yet-shown");
+  // Journey (pilot skills only)
+  await page.getByRole("button", { name: "Journey", exact: true }).click();
+  const onPath = page.locator(`.path > li[data-capability="${cap}"]`);
+  if (await onPath.count()) assert.match(await onPath.innerText(), /more answers on your own at that level are needed/);
+  // start it: by dictation where the skill has words at that level, otherwise a short check
+  await page.getByRole("button", { name: "Home", exact: true }).click();
+  await page.locator(`.plan li[data-action="evidence_check"][data-capability="${cap}"]`).getByRole("button", { name: "Start" }).click();
+  if (await page.locator(".spelling-intro").count()) await page.getByRole("button", { name: "Start the spelling check" }).click();
+  await answerAll();
+  // the record: the session carries the range and why; every question asked is in range and new
+  const pupil = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.name === "Mira") ?? (await api(page, "GET", "/pupils/")).json.pupils[0];
+  const events = (await api(page, "GET", `/pupils/${pupil.id}/events/?subject=english`)).json.events;
+  const session = events.filter((e) => e.kind === "session" && e.capability === cap && e.target).at(-1);
+  assert.ok(session, "the evidence check is recorded with its target");
+  assert.match(session.target.why, /level/);
+  const plan = events.filter((e) => e.kind === "trace" && e.plan).at(-1).plan;
+  assert.deepEqual(plan.target, session.target);
+  assert.ok(plan.gaps?.[cap], "the gap that led to it is in the plan trace");
+  const asked = events.filter((e) => e.kind === "evidence" && e.session === session.session).map((e) => items.get(e.item.id));
+  assert.ok(asked.length > 0);
+  for (const it of asked) assert.ok(it.b >= session.target.atLeast - 1e-9 && it.b <= session.target.atMost + 1e-9, `${it.id} (b ${it.b}) within ${session.target.atLeast}–${session.target.atMost}`);
+  const before = new Set(events.filter((e) => e.kind === "evidence" && e.session !== session.session).map((e) => e.item.id));
+  assert.ok(asked.every((it) => !before.has(it.id)), "never a question asked before");
+  // the developer dashboard shows the same standing, and the gate behind it
+  await page.getByRole("button", { name: "Progress", exact: true }).click();
+  const standing = await page.locator(`.caps li[data-capability="${cap}"]`).first().getAttribute("data-standing");
+  await shot(page, "progress-after-evidence-check");
+  if (CLAIM) {
+    const code = execSync(CLAIM, { encoding: "utf8" }).trim().split("\n").at(-1).trim();
+    await page.goto(`${URL}/developer`);
+    await page.getByLabel("Developer code").fill(code);
+    await page.getByRole("button", { name: "Unlock diagnostics" }).click();
+    await page.getByRole("button", { name: "Pupils" }).click();
+    await page.locator(".dev-list button", { hasText: "Mira" }).click();
+    await page.getByRole("heading", { name: "Mira" }).waitFor({ timeout: 30000 });
+    await page.locator("summary", { hasText: "Demonstration and retention" }).click();
+    const row = page.getByRole("region", { name: "Retention" }).locator("tbody tr", { hasText: name });
+    await row.waitFor();
+    const cells = await row.locator("td").allInnerTexts();
+    assert.equal(cells[1], standing, "the dashboard's standing is the profile's");
+    assert.equal(cells[4].startsWith("passed"), ["shown", "confirmed"].includes(standing), `gate column "${cells[4]}" agrees with "${standing}"`);
+    await fits(page);
+    await shot(page, "dashboard-evidence-gate");
+  }
+  assert.deepEqual(errors, []);
+  await context.close();
+});

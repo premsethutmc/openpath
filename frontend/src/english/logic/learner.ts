@@ -7,7 +7,7 @@ import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
 import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
@@ -16,6 +16,7 @@ import { type Next, DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext, EXPLORE
 import { type AppState, type SessionState, fold } from "./state.ts";
 import { now as perfNow, record } from "./telemetry.ts";
 import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
+import { MASTERY_GATE } from "./mastery-policy.ts";
 
 export type Clock = () => string;
 
@@ -119,9 +120,9 @@ export class Learner {
   }
 
   /** Record what Today offered and which activity was started, just before the session starts. */
-  private planTraceFor(started: PlanTrace["started"]): PlanTrace | null {
+  private planTraceFor(started: PlanTrace["started"], target?: EvidenceTarget): PlanTrace | null {
     try {
-      return planTrace(this.profile(), started);
+      return planTrace(this.profile(), started, target);
     } catch (err) {
       record({ name: "engine_error", ok: false, detail: err });
       return null; // a missing trace never stops a learner from starting
@@ -152,12 +153,12 @@ export class Learner {
     return { available: this.speechAvailable, enabled: this.state.speech, voice: this.speechAvailable ? this.voiceInfo : null };
   }
 
-  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose">, opts: { delivery?: "device_voice" | "adult_reader" } = {}): Promise<Current> {
+  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts: { delivery?: "device_voice" | "adult_reader"; length?: number } = {}): Promise<Current> {
     if (this.state.open) await this.stop();
     const now = this.clock();
     const s = this.state;
     const c = this.content;
-    const plan = this.planTraceFor({ type: step.type, ...(step.capability ? { capability: step.capability } : {}), ...(step.purpose ? { purpose: step.purpose } : {}), ...(step.step ? { step: step.step } : {}) });
+    const plan = this.planTraceFor({ type: step.type, ...(step.capability ? { capability: step.capability } : {}), ...(step.purpose ? { purpose: step.purpose } : {}), ...(step.step ? { step: step.step } : {}) }, step.target);
     if (plan) await this.addTrace({ kind: "trace", id: this.nextId(), at: now, plan });
     const base = { kind: "session" as const, id: this.nextId(), at: now, session: `s:${this.events.length + 1}`, type: step.type };
     let queue: Planned[] | undefined;
@@ -170,14 +171,15 @@ export class Learner {
         // dictation needs the words said aloud: by the device's voice, or by an adult reading them (recorded)
         const delivery = opts.delivery ?? "device_voice";
         if (delivery === "device_voice" && !this.speech) throw new Error("the spelling assessment needs speech on this device, or an adult to read the words");
-        extra = { length: SPELLING_ASSESS.max, delivery };
+        // an evidence check on one skill (C′) is short and restricted to the difficulty that can fill the gap
+        extra = step.capability ? { length: opts.length ?? MASTERY_GATE.checkLength, delivery, capability: step.capability, purpose: step.purpose ?? "assess", ...(step.target ? { target: step.target } : {}) } : { length: SPELLING_ASSESS.max, delivery };
         break;
       }
       case "explore":
         extra = { length: EXPLORE_LENGTH };
         break;
       case "check":
-        extra = { length: CHECK_LENGTH, capability: step.capability, purpose: step.purpose ?? "assess" };
+        extra = { length: CHECK_LENGTH, capability: step.capability, purpose: step.purpose ?? "assess", ...(step.target ? { target: step.target } : {}) };
         break;
       case "guided": {
         const lesson = step.lesson ?? guidedLesson(s, c, step.capability!, now);
@@ -318,8 +320,14 @@ export class Learner {
 
   /** Go on with an adult reading the words: the device-voice session ends (stopped) and a new one records the adult. */
   async continueWithAdultReader(): Promise<Current> {
+    const ev = this.state.open?.event;
+    const asked = this.state.open?.answered.length ?? 0;
     await this.stop();
-    return this.start({ type: "spelling_assess" }, { delivery: "adult_reader" });
+    // the same check (an evidence check keeps its skill, purpose and difficulty range, and only its words still to ask)
+    return this.start(
+      { type: "spelling_assess", ...(ev?.capability ? { capability: ev.capability, purpose: ev.purpose, target: ev.target } : {}) },
+      { delivery: "adult_reader", ...(ev?.capability ? { length: Math.max(1, (ev.length ?? MASTERY_GATE.checkLength) - asked) } : {}) },
+    );
   }
 
   private async record(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {

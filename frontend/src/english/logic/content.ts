@@ -18,6 +18,7 @@ import {
   indexFramework,
   isSpecified,
 } from "../../../../packages/english-core/src/index.ts";
+import { SINGLE_FORMAT_DEMONSTRATION } from "./mastery-policy.ts";
 import frameworkJson from "../../../../content/english/framework/en-0.2.0.json";
 import codeItemsJson from "../../../../content/english/items/code-items.json";
 import e2aItemsJson from "../../../../content/english/items/e2a-items.json";
@@ -148,7 +149,10 @@ export interface AppContent {
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
 export function loadContent(): AppContent {
-  const framework = frameworkJson as unknown as Framework;
+  // direct spelling may be demonstrated by dictation alone (approved correction): the framework file is unchanged,
+  // the allowance is added here for the app only, and the app's evidence gate asks for word and pattern diversity
+  const fw = frameworkJson as unknown as Framework;
+  const framework: Framework = { ...fw, policy: { ...fw.policy, single_format_demonstration: SINGLE_FORMAT_DEMONSTRATION } };
   const index = indexFramework(framework);
   const ok = (cap: string) => {
     const c = index.leaves.get(cap);
