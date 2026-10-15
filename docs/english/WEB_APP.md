@@ -17,12 +17,17 @@ npm run english:preview     # -> http://localhost:4174
 - **On a phone, for a private trial on the same Wi-Fi:** `HOST=0.0.0.0 npm run english:preview`,
   then open `http://<computer's address>:4174` on the phone. Everything works, but browsers allow
   offline install only on `https` or `localhost`, so over plain `http` the app needs the network to open.
-- **Preview of the trial:** `npm run english:build:preview` offers exactly the pilot words (four suffix
-  rules, typed answers only), labelled in Settings as not yet reviewed.
-- **Trial version:** `npm run english:build:pilot` offers only practice words from approved rules or
-  reviewed sets ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)); it refuses to build while nothing is
-  approved. The development build (`npm run english:build`) also offers unreviewed words. Neither offers
-  flagged or excluded ones. Settings shows which version is running.
+- **Which build pupils may see:** only the pilot build. `npm run english:build` (development) and
+  `english:build:preview` are internal: they offer every activity, lessons, and unreviewed practice
+  words, and must never be put in front of pupils. Me shows which version is running.
+- **Preview of the trial (internal):** `npm run english:build:preview` offers exactly the pilot words (four
+  suffix rules, typed answers only), labelled as not yet reviewed.
+- **Pilot version:** `npm run english:build:pilot` enforces the pilot content-safety boundary: only the
+  starting check and the dictation spelling check, and only questions on
+  `content/english/pilot/allowlist.json` that an educator has approved at that exact version
+  (`node tools/english/pilot/review.ts approved`). No lessons, no practice words, no ratings or notes, no
+  developer tools. It refuses to build while nothing is approved. No build offers flagged or excluded
+  practice words ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)).
 - **Hosting it properly** (for learners at home): see [`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md). It needs any static `https` host for the
   `dist-english/` folder. That is a deployment and cost decision, so none is set up.
 

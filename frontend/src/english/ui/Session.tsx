@@ -143,7 +143,7 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
         )}
         <footer className="item-foot">
           {generated && <span className="tag">Practice word, made from a dictionary. It helps your spelling plan but does not change your level yet.</span>}
-          {!reporting ? (
+          {learner.content.gate ? null : !reporting ? (
             <button type="button" className="link" onClick={() => setReporting(true)}>
               Something wrong with this question?
             </button>
@@ -339,7 +339,7 @@ function Done({ learner, cur, onLeave }: { learner: Learner; cur: Current; onLea
             <small>right first time</small>
           </div>
         </div>
-        {answered.length > 0 && <Rate learner={learner} session={ev.session} />}
+        {answered.length > 0 && !learner.content.gate && <Rate learner={learner} session={ev.session} />}
         <button type="button" className="primary" onClick={onLeave} autoFocus>
           Back to today
         </button>

@@ -550,16 +550,20 @@ export class Learner {
   }
 
   async flag(item: Item, note: string): Promise<void> {
+    // the pilot records nothing a child writes in their own words (information sheet); the supervisor logs questions on paper
+    this.guard("reporting a question with a note");
     await this.add({ kind: "flag", id: this.nextId(), at: this.clock(), item: { id: item.id, version: item.version }, note: note.slice(0, 500) });
   }
 
   /** How a finished session felt (one tap; the latest rating for a session counts). */
   async rate(session: string, rating: Rating): Promise<void> {
+    this.guard("session ratings"); // not part of what the pilot records (information sheet)
     await this.add({ kind: "rating", id: this.nextId(), at: this.clock(), session, rating });
   }
 
   /** A note about a problem or anything that got in the way, kept with the record. */
   async note(screen: string, text: string): Promise<void> {
+    this.guard("free-text notes");
     const t = text.trim();
     if (t) await this.add({ kind: "note", id: this.nextId(), at: this.clock(), screen, text: t.slice(0, 1000) });
   }

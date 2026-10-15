@@ -145,3 +145,25 @@ test("PB-7 the allowlist holds placement candidates and dictation words only, ne
     assert.equal(a.use === "dictation", it.format === "typed:dictation", a.id);
   }
 });
+
+test("PB-8 a pilot build collects nothing beyond answers: no ratings, notes or written question reports; older ones still replay", async () => {
+  const c = loadContent({ mode: "pilot", approved: approve(10, 0) });
+  const l = await Learner.create(c, new MemoryRepo(), "Pilot", "guardian", testClock(), "p-data");
+  await l.start({ type: "placement" });
+  const item = (await l.current()).next!.item;
+  const before = l.events.length;
+  await assert.rejects(l.rate(l.state.open!.event.session, "about_right"), PilotRefusal);
+  await assert.rejects(l.note("settings", "Asha found it hard"), PilotRefusal);
+  await assert.rejects(l.flag(item, "a note"), PilotRefusal);
+  assert.equal(l.events.length, before, "nothing recorded");
+  // a record from a development build with a rating and a note still opens and rebuilds in a pilot build
+  const dev = loadContent({ mode: "development" });
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const d = await Learner.create(dev, repo, "Dev", "guardian", clock, "p-old");
+  await d.start({ type: "placement" });
+  await d.rate(d.state.open!.event.session, "too_hard");
+  await d.note("settings", "older note");
+  const again = await Learner.open(c, repo, "p-old", clock);
+  assert.equal(again.events.filter((e) => e.kind === "rating" || e.kind === "note").length, 2);
+});
