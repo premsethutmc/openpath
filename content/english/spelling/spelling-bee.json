@@ -9,7 +9,8 @@
    "4": "Advanced",
    "5": "Challenging"
   },
-  "reuse": "Entries with an \"item\" are the existing dictation questions (word, sentence and difficulty come from content/english/spelling/dictation-bank.json, not copied here). Levels follow the dictation bank's difficulty estimates (b), in order."
+  "reuse": "Entries with an \"item\" are the existing dictation questions (word, sentence and difficulty come from content/english/spelling/dictation-bank.json, not copied here). Levels: see levels_rule.",
+  "levels_rule": "Levels follow the spelling rule each word tests, in order of the rule's difficulty band (the dictation bank's b for reused words). A rule is kept at one level where 20 words per level allows it; both halves of the multi-syllable vowel-suffix rule (double when the last syllable is stressed: preferred; do not when it is unstressed: gardening) are at level 4, so they are practised together. Rules split across two neighbouring levels to keep 20 per level: plain_affix (1-2: unlock, the Year 1 prefix un-, is at level 1 in place of laugh), drop_e (2-3), y_to_i (3-4) and able_ible (4-5). Level 1 holds the Year 1-2 common exception words, plain -ed/-ing and unlock; laugh (irregular augh) is at level 2. Changes of 15 October 2026 are listed in docs/product/SPELLING_BEE_WORD_REVIEW.md."
  },
  "words": [
   {
@@ -18,7 +19,16 @@
    "word": "friend",
    "sentence": "My best friend lives next door.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.because",
@@ -26,7 +36,16 @@
    "word": "because",
    "sentence": "We stayed inside because it was raining.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.said",
@@ -34,7 +53,16 @@
    "word": "said",
    "sentence": "She said goodbye at the gate.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.school",
@@ -42,7 +70,16 @@
    "word": "school",
    "sentence": "We walk to school every morning.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.people",
@@ -50,7 +87,16 @@
    "word": "people",
    "sentence": "Many people came to the fair.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.again",
@@ -58,7 +104,16 @@
    "word": "again",
    "sentence": "Please read the story again.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.water",
@@ -66,7 +121,16 @@
    "word": "water",
    "sentence": "Drink some water after the race.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.after",
@@ -74,7 +138,16 @@
    "word": "after",
    "sentence": "We played football after lunch.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.every",
@@ -82,7 +155,16 @@
    "word": "every",
    "sentence": "He brushes his teeth every night.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.little",
@@ -90,7 +172,16 @@
    "word": "little",
    "sentence": "The little puppy chased its tail.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.house",
@@ -98,15 +189,16 @@
    "word": "house",
    "sentence": "Their house has a red door.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
-  },
-  {
-   "id": "bee.laugh",
-   "level": 1,
-   "word": "laugh",
-   "sentence": "The joke made everyone laugh.",
-   "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.many",
@@ -114,7 +206,16 @@
    "word": "many",
    "sentence": "There are many stars in the sky.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.animal",
@@ -122,7 +223,16 @@
    "word": "animal",
    "sentence": "A giraffe is a very tall animal.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.around",
@@ -130,7 +240,16 @@
    "word": "around",
    "sentence": "We walked around the lake.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.together",
@@ -138,7 +257,16 @@
    "word": "together",
    "sentence": "We built the model together.",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.helping",
@@ -177,6 +305,32 @@
    "status": "owner-approved (as dictation question spl.dict.002 version 1)"
   },
   {
+   "id": "bee.unlock",
+   "level": 1,
+   "item": {
+    "id": "spl.dict.047",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.047 version 1)"
+  },
+  {
+   "id": "bee.laugh",
+   "level": 2,
+   "word": "laugh",
+   "sentence": "The joke made everyone laugh.",
+   "variants": [],
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
+  },
+  {
    "id": "bee.darkness",
    "level": 2,
    "item": {
@@ -202,15 +356,6 @@
     "version": 1
    },
    "status": "owner-approved (as dictation question spl.dict.049 version 1)"
-  },
-  {
-   "id": "bee.unlock",
-   "level": 2,
-   "item": {
-    "id": "spl.dict.047",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.047 version 1)"
   },
   {
    "id": "bee.payment",
@@ -618,15 +763,6 @@
    "status": "owner-approved (as dictation question spl.dict.066 version 1)"
   },
   {
-   "id": "bee.valuable",
-   "level": 4,
-   "item": {
-    "id": "spl.dict.067",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.067 version 1)"
-  },
-  {
    "id": "bee.opened",
    "level": 4,
    "item": {
@@ -663,24 +799,6 @@
    "status": "owner-approved (as dictation question spl.dict.032 version 1)"
   },
   {
-   "id": "bee.responsible",
-   "level": 4,
-   "item": {
-    "id": "spl.dict.068",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.068 version 1)"
-  },
-  {
-   "id": "bee.attention",
-   "level": 4,
-   "item": {
-    "id": "spl.dict.069",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.069 version 1)"
-  },
-  {
    "id": "bee.committed",
    "level": 4,
    "item": {
@@ -688,24 +806,6 @@
     "version": 1
    },
    "status": "owner-approved (as dictation question spl.dict.033 version 1)"
-  },
-  {
-   "id": "bee.competition",
-   "level": 4,
-   "item": {
-    "id": "spl.dict.071",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.071 version 1)"
-  },
-  {
-   "id": "bee.education",
-   "level": 4,
-   "item": {
-    "id": "spl.dict.072",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.072 version 1)"
   },
   {
    "id": "bee.entered",
@@ -717,6 +817,96 @@
    "status": "owner-approved (as dictation question spl.dict.040 version 1)"
   },
   {
+   "id": "bee.gardening",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.042",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.042 version 1)"
+  },
+  {
+   "id": "bee.happened",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.037",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.037 version 1)"
+  },
+  {
+   "id": "bee.offering",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.038",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.038 version 1)"
+  },
+  {
+   "id": "bee.ordered",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.041",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.041 version 1)"
+  },
+  {
+   "id": "bee.limited",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.039",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.039 version 1)"
+  },
+  {
+   "id": "bee.valuable",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.067",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.067 version 1)"
+  },
+  {
+   "id": "bee.responsible",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.068",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.068 version 1)"
+  },
+  {
+   "id": "bee.attention",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.069",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.069 version 1)"
+  },
+  {
+   "id": "bee.competition",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.071",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.071 version 1)"
+  },
+  {
+   "id": "bee.education",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.072",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.072 version 1)"
+  },
+  {
    "id": "bee.explosion",
    "level": 5,
    "item": {
@@ -726,24 +916,6 @@
    "status": "owner-approved (as dictation question spl.dict.070 version 1)"
   },
   {
-   "id": "bee.gardening",
-   "level": 5,
-   "item": {
-    "id": "spl.dict.042",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.042 version 1)"
-  },
-  {
-   "id": "bee.happened",
-   "level": 5,
-   "item": {
-    "id": "spl.dict.037",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.037 version 1)"
-  },
-  {
    "id": "bee.information",
    "level": 5,
    "item": {
@@ -751,24 +923,6 @@
     "version": 1
    },
    "status": "owner-approved (as dictation question spl.dict.074 version 1)"
-  },
-  {
-   "id": "bee.offering",
-   "level": 5,
-   "item": {
-    "id": "spl.dict.038",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.038 version 1)"
-  },
-  {
-   "id": "bee.ordered",
-   "level": 5,
-   "item": {
-    "id": "spl.dict.041",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.041 version 1)"
   },
   {
    "id": "bee.television",
@@ -787,15 +941,6 @@
     "version": 1
    },
    "status": "owner-approved (as dictation question spl.dict.073 version 1)"
-  },
-  {
-   "id": "bee.limited",
-   "level": 5,
-   "item": {
-    "id": "spl.dict.039",
-    "version": 1
-   },
-   "status": "owner-approved (as dictation question spl.dict.039 version 1)"
   },
   {
    "id": "bee.accidentally",
@@ -858,7 +1003,16 @@
    "sentence": "Clap along to the rhythm of the song.",
    "say": "RITH-um",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.embarrass",
@@ -867,7 +1021,16 @@
    "sentence": "Please don't embarrass me in front of my friends.",
    "say": "em-BARR-us",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.accommodate",
@@ -876,7 +1039,16 @@
    "sentence": "The hotel can accommodate fifty guests.",
    "say": "uh-KOM-uh-date",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.mischievous",
@@ -885,7 +1057,16 @@
    "sentence": "The mischievous kitten hid my sock.",
    "say": "MISS-chiv-us (three syllables)",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   },
   {
    "id": "bee.definitely",
@@ -894,7 +1075,16 @@
    "sentence": "I will definitely come to your party.",
    "say": "DEF-in-it-lee",
    "variants": [],
-   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+   "status": "owner-approved (provisional, for pilot use, subject to the automated content checks): product owner, 15 October 2026; not an educator review or a validation; separate from the 291 question approvals",
+   "approval": {
+    "status": "owner-approved",
+    "scope": "pilot (provisional)",
+    "authority": "product-owner",
+    "reviewer": "Product owner (premsethutmc)",
+    "date": "2026-10-15",
+    "provenance": "Founder instruction, 15 October 2026: the product owner provisionally approves the 21 additional Spelling Bee words for pilot use, subject to the automated content checks. Owner approval means permission to use these words in the product; it is not an educator review or an independent validation.",
+    "recorded_at": "2026-10-15T15:05:27.560Z"
+   }
   }
  ]
 }

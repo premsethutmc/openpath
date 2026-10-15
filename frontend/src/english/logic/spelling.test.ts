@@ -42,8 +42,9 @@ test("SB-1 exactly 100 preloaded words, 20 at each of five levels, unique, each 
   }
 });
 
-test("SB-2 provenance: 79 are the owner-approved dictation questions (same words); the 21 new ones are marked new, not approved", () => {
-  const entries = (beeJson as unknown as { words: { id: string; item?: { id: string; version: number }; status: string }[] }).words;
+test("SB-2 provenance: 79 are the owner-approved dictation questions (same words); the 21 new ones are owner-approved separately (provisional, pilot use)", () => {
+  type Approval = { status: string; scope: string; authority: string; reviewer: string; date: string; provenance: string; recorded_at: string };
+  const entries = (beeJson as unknown as { words: { id: string; item?: { id: string; version: number }; status: string; approval?: Approval }[] }).words;
   const approved = new Set((reviews as { id: string; version: string; authority?: string }[]).filter((r) => r.authority === "product-owner").map((r) => `${r.id}@${r.version}`));
   const reused = entries.filter((e) => e.item);
   assert.equal(reused.length, 79);
@@ -55,14 +56,44 @@ test("SB-2 provenance: 79 are the owner-approved dictation questions (same words
   }
   const fresh = entries.filter((e) => !e.item);
   assert.equal(fresh.length, 21);
-  for (const e of fresh) assert.match(e.status, /not part of the owner-approved 291/, e.id);
-  // levels follow the dictation bank's difficulty estimates, in order
-  const b = (id: string) => c.dictation.items.find((i) => i.id === id)!.b;
-  for (let L = 1; L < 5; L++) {
-    const hi = Math.max(...reused.filter((e) => byId.get(e.id)!.level === L).map((e) => b(e.item!.id)));
-    const lo = Math.min(...reused.filter((e) => byId.get(e.id)!.level === L + 1).map((e) => b(e.item!.id)));
-    assert.ok(hi <= lo, `level ${L} is not harder than level ${L + 1}`);
+  for (const e of fresh) {
+    // the founder's provisional approval of 15 October 2026, recorded as such: never as an educator review
+    assert.match(e.status, /^owner-approved \(provisional, for pilot use/, e.id);
+    assert.match(e.status, /not an educator review or a validation; separate from the 291/, e.id);
+    const a = e.approval!;
+    assert.deepEqual([a.status, a.scope, a.authority, a.date], ["owner-approved", "pilot (provisional)", "product-owner", "2026-10-15"], e.id);
+    assert.match(a.provenance, /^Founder instruction, 15 October 2026: .*21 additional Spelling Bee words.*not an educator review/);
+    assert.ok(!Number.isNaN(Date.parse(a.recorded_at)) && a.recorded_at.startsWith("2026-10-15T"));
+    assert.ok(!(reviews as { id: string }[]).some((r) => r.id === e.id), "kept apart from the 291 question approvals");
   }
+  assert.ok(entries.filter((e) => e.item).every((e) => !e.approval), "the 79 keep their own (question) approval");
+});
+
+test("SB-12 levels follow the spelling rule each word tests (15 October 2026 levels)", () => {
+  const entries = (beeJson as unknown as { words: { id: string; item?: { id: string } }[] }).words;
+  const item = (e: { item?: { id: string } }) => c.dictation.items.find((i) => i.id === e.item!.id)!;
+  const reused = entries.filter((e) => e.item).map((e) => ({ word: byId.get(e.id)!.word, level: byId.get(e.id)!.level!, rule: item(e).step as string, b: item(e).b as number }));
+  const levelsOf = (rule: string) => [...new Set(reused.filter((r) => r.rule === rule).map((r) => r.level))].sort();
+  // each rule at one level, except the three splits that 20 words per level forces (documented in the content's policy)
+  const split = new Set(["plain_affix", "drop_e", "y_to_i", "able_ible"]);
+  for (const rule of new Set(reused.map((r) => r.rule))) {
+    const ls = levelsOf(rule);
+    if (split.has(rule)) assert.equal(ls.length, 2, `${rule} spans two neighbouring levels`), assert.equal(ls[1] - ls[0], 1);
+    else assert.equal(ls.length, 1, `${rule} is at one level, not ${ls.join(" and ")}`);
+  }
+  // both halves of the multi-syllable vowel-suffix rule are practised together, at level 4
+  assert.deepEqual(levelsOf("stress_doubling"), [4]);
+  assert.deepEqual(levelsOf("no_double_unstressed"), [4]);
+  for (const w of ["opened", "entered", "happened", "ordered", "offering", "limited", "gardening"]) assert.equal(reused.find((r) => r.word === w)!.level, 4, w);
+  // the progression still rises: each level's typical (median) rule band is above the one before
+  const median = (L: number) => {
+    const bs = reused.filter((r) => r.level === L).map((r) => r.b).sort((x, y) => x - y);
+    return bs[Math.floor(bs.length / 2)];
+  };
+  for (let L = 1; L < 5; L++) assert.ok(median(L) < median(L + 1), `level ${L} is easier than level ${L + 1}`);
+  // the founder's changes: laugh to level 2; unlock (the Year 1 prefix un-) to level 1 to keep 20 each
+  assert.equal(byId.get("bee.laugh")!.level, 2);
+  assert.equal(byId.get("bee.unlock")!.level, 1);
 });
 
 test("SB-3 scoring: capital letters, spaces and a final full stop do not matter; listed variants are accepted; anything else is wrong", () => {

@@ -68,14 +68,18 @@ browser test checks this for every word asked.
 **Five levels of 20:** Beginner, Elementary, Intermediate, Advanced and Challenging.
 
 **Where they come from:**
-- **79 are the existing dictation questions,** now owner-approved. Their word and sentence come from the dictation
-  bank, not a copy, and their levels follow the bank's difficulty estimates, in order.
-- **21 are new,** chosen for the Spelling Bee and marked in the file as not part of the 291 and awaiting the owner's
-  review:
-  - 16 everyday words for Beginner: friend, because, said, school, people, again, water, after, every, little,
-    house, laugh, many, animal, around, together;
+- **79 are the existing dictation questions,** owner-approved as part of the 291. Their word and sentence come from
+  the dictation bank, not a copy.
+- **21 are new,** owner-approved separately on 15 October 2026, provisionally, for pilot use, subject to the automated
+  checks. This is recorded on each entry. It is not an educator review, and the 291 are untouched.
+  - 16 everyday words: friend, because, said, school, people, again, water, after, every, little, house, many, animal,
+    around and together at Beginner, and laugh at Elementary;
   - 5 for Challenging: rhythm, embarrass, accommodate, mischievous, definitely, with pronunciation hints for an
     adult reader.
+
+**Levels follow the spelling rule each word tests** (15 October 2026), in order of the rule's difficulty. Paired rules
+are at one level; four rules are split across neighbouring levels to keep 20 per level. See
+[SPELLING_BEE_WORD_REVIEW.md](SPELLING_BEE_WORD_REVIEW.md).
 
 **Spelling policy:**
 - British spelling.
@@ -163,7 +167,7 @@ first utterance (`e2e/bee.test.mjs`); real Android behaviour is §A8.0 of the ph
 **Closing the browser.** A browser test closes the whole browser (a persistent profile) mid-session and starts it
 again: Home offers **Carry on** at the same word.
 
-**The 21 new words** are set out for review in [SPELLING_BEE_WORD_REVIEW.md](SPELLING_BEE_WORD_REVIEW.md), with an
+**The 21 new words, their approval and the level changes** are in [SPELLING_BEE_WORD_REVIEW.md](SPELLING_BEE_WORD_REVIEW.md), with an
 audit of the whole bank.
 
 **To check on a physical phone** (see ANDROID_MANUAL_TEST.md §A8):
