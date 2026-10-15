@@ -149,3 +149,39 @@ test("another phone signed in to the same account sees the list and its progress
   assert.deepEqual((await api(other.page, "GET", "/pupils/")).json.pupils, []);
   await other.context.close();
 });
+
+test("deleting a list in a parent account: gone from the server record, from another phone, and a stale phone cannot bring it back", async () => {
+  assert.ok(zoeId, "runs after the first test");
+  // a second phone opens Zoe's lists before the deletion (it holds an old copy)
+  const stale = await phone();
+  await signIn(stale.page, PARENT);
+  await stale.page.getByRole("button", { name: /Zoe/ }).click();
+  await stale.page.getByRole("button", { name: "Open My Words" }).click();
+  const staleCard = stale.page.locator(".word-lists li", { hasText: "Week 5" });
+  await staleCard.waitFor();
+  // the first phone deletes the list
+  const first = await phone();
+  await signIn(first.page, PARENT);
+  await first.page.getByRole("button", { name: /Zoe/ }).click();
+  await first.page.getByRole("button", { name: "Open My Words" }).click();
+  await first.page.locator(".word-lists li", { hasText: "Week 5" }).getByRole("button", { name: "Delete" }).click();
+  await first.page.getByText("No lists yet.").waitFor();
+  // the server record: no words, no typed answers; the answers themselves kept (right/wrong), without the words
+  const events = (await api(first.page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events;
+  const text = JSON.stringify(events);
+  for (const secret of ["colour", "color", "because", "island", "Week 5"]) assert.ok(!text.includes(secret), `"${secret}" is still in the server record`);
+  assert.equal(events.filter((e) => e.kind === "spell_answer" && e.source.type === "list").length, 3);
+  const exported = JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/export/`)).json);
+  assert.ok(!exported.includes("because"), "nor in the account export");
+  // the stale phone tries to practise its old copy: refused, and nothing is written back
+  await staleCard.getByRole("button", { name: "Practise" }).click();
+  await stale.page.getByText(/changed on another device/).waitFor();
+  assert.ok(!JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events).includes("because"));
+  // opening Zoe again on that phone: the list is gone there too
+  await stale.page.goto(URL); // the app reopens the learner it last showed, loading the record afresh
+  await stale.page.getByRole("button", { name: "Add a word list" }).click();
+  await stale.page.getByText("No lists yet.").waitFor();
+  await first.context.close();
+  await stale.context.close();
+});
+

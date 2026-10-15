@@ -274,6 +274,8 @@ export interface SpellSessionEvent {
   /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
   level?: number;
   delivery: "device_voice" | "adult_reader";
+  /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface SpellAnswerEvent {
   kind: "spell_answer";
@@ -289,6 +291,8 @@ export interface SpellAnswerEvent {
   plays: number;
   /** Asked again because it was misspelt before (a review), not for the first time. */
   review: boolean;
+  /** Its source was deleted: the word and the answer are removed, right/wrong kept (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface SpellEndEvent {
   kind: "spell_end";
@@ -309,6 +313,8 @@ export interface WordListEvent {
   id: string;
   at: string;
   list: { id: string; name: string; words: ListWord[] };
+  /** The list was deleted: this saved version's name and words are removed (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface WordListDeleteEvent {
   kind: "word_list_delete";

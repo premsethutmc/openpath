@@ -4,6 +4,7 @@
  * the next question appears, and a closed tab or a reload resumes exactly where it stopped.
  */
 import type { AppEvent, ProfileEvent } from "./events.ts";
+import { type ScrubSource, scrubEvents } from "./scrub.ts";
 
 export interface ProfileSummary {
   id: string;
@@ -21,6 +22,8 @@ export interface Repo {
   /** Replace a profile's whole record (import). */
   replaceAll(profile: string, events: AppEvent[]): Promise<void>;
   remove(profile: string): Promise<void>;
+  /** Remove a deleted list's content from the stored record, in place (logic/scrub.ts). Returns events changed. */
+  scrub(profile: string, source: ScrubSource): Promise<number>;
 }
 
 const summaryOf = (profile: string, events: AppEvent[]): ProfileSummary => {
@@ -45,6 +48,11 @@ export class MemoryRepo implements Repo {
   }
   async remove(profile: string) {
     this.data.delete(profile);
+  }
+  async scrub(profile: string, source: ScrubSource) {
+    const r = scrubEvents(this.data.get(profile) ?? [], source);
+    this.data.set(profile, structuredClone(r.events));
+    return r.changed;
   }
 }
 
@@ -117,6 +125,20 @@ export class IndexedDbRepo implements Repo {
     events.forEach((event, seq) => store.add({ profile, seq, event }));
     tx.objectStore("profiles").put(summaryOf(profile, events));
     await done(tx);
+  }
+
+  /** Rewrite, in one transaction, only the events whose content changes; keys (and so the order) stay the same. */
+  async scrub(profile: string, source: ScrubSource) {
+    const tx = this.tx(["events"], "readwrite");
+    const store = tx.objectStore("events");
+    const rows = ((await req(store.index("profile").getAll(IDBKeyRange.only(profile)))) as { profile: string; seq: number; event: AppEvent }[]).sort((a, b) => a.seq - b.seq);
+    const r = scrubEvents(
+      rows.map((x) => x.event),
+      source,
+    );
+    rows.forEach((row, i) => r.events[i] !== row.event && store.put({ ...row, event: r.events[i] }));
+    await done(tx);
+    return r.changed;
   }
 
   async remove(profile: string) {

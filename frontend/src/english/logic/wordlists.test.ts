@@ -3,6 +3,7 @@
  * deleting lists in the learner's record; practising them with the shared spelling engine. Synthetic learners only.
  */
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { parseBackup } from "./backup.ts";
 import { loadContent } from "./content.ts";
@@ -153,4 +154,52 @@ test("MW-7 editing or deleting a list never changes other progress: the Bee, oth
   assert.notEqual(a2, a);
   assert.equal(progress(a2).practised, 0);
   assert.ok(l.events.some((e) => e.kind === "spell_answer" && e.source.id === a));
+});
+
+test("MW-8 deleting a list removes its words from the stored record (every version, every answer), keeps the learning history without them, and changes nothing else", async () => {
+  // the same rules as the server (backend/family/scrub.py), on the shared fixture
+  const { scrubEvents } = await import("./scrub.ts");
+  const fixture = JSON.parse(readFileSync(new URL("../../../../backend/family/fixtures/scrub-fixture.json", import.meta.url), "utf8"));
+  const r = scrubEvents(fixture.before, fixture.source);
+  assert.deepEqual(JSON.parse(JSON.stringify(r.events)), fixture.after);
+  assert.equal(r.changed, fixture.changed);
+  assert.equal(scrubEvents(r.events, fixture.source).changed, 0, "idempotent");
+  // in the app, with a device record
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const l = await Learner.create(c, repo, "Deleting", "guardian", clock, "p-del");
+  await l.startSpelling();
+  await l.answerSpelling(l.spellingSession()!.word!.word, 1);
+  await l.stopSpelling();
+  const keep = await l.saveWordList("Keep", parseWords("because, island").words);
+  const gone = await l.saveWordList("Week 3", parseWords("castle, colour/color").words);
+  await l.saveWordList("Week 3 (more)", parseWords("castle, colour/color, wednesday").words, gone); // two saved versions
+  for (const id of [keep, gone]) {
+    await l.startSpelling({ type: "list", id });
+    while (l.spellingSession()?.word) await l.answerSpelling(l.spellingSession()!.word!.word === "castle" ? "casle" : l.spellingSession()!.word!.word, 1);
+  }
+  await l.startSpelling({ type: "list", id: gone }); // an open session on the list being deleted
+  const progress = (src?: { type: "list"; id: string }) => sourceProgress(l.spelling(), src ? l.spellingWords(src) : l.spellingWords(), clock());
+  const before = { bee: progress(), keep: progress({ type: "list", id: keep }), answers: l.events.filter((e) => e.kind === "spell_answer").length, count: l.events.length };
+  await l.deleteWordList(gone);
+  const stored = await repo.load("p-del");
+  const text = JSON.stringify(stored);
+  for (const secret of ["castle", "casle", "colour", "color", "wednesday", "Week 3"]) assert.ok(!text.includes(secret), `"${secret}" is gone from the stored record`);
+  assert.ok(text.includes("because") && text.includes("island"), "the other list is untouched");
+  // learning history kept without the words: the same answers, right/wrong and times, the words as removed-1, removed-2, …
+  const answers = stored.filter((e) => e.kind === "spell_answer");
+  assert.equal(answers.length, before.answers);
+  const removed = answers.filter((e) => e.kind === "spell_answer" && e.source.id === gone);
+  assert.ok(removed.length > 0 && removed.every((e) => e.kind === "spell_answer" && /^removed-\d+$/.test(e.word.id) && e.word.text === "" && e.response === "" && e.scrubbed));
+  assert.equal(removed.filter((e) => e.kind === "spell_answer" && !e.correct).length, 1, "the misspelling is still counted, without its letters");
+  // nothing else moved; the record only grew by the session stop and the deletion
+  assert.deepEqual(progress(), before.bee);
+  assert.deepEqual(progress({ type: "list", id: keep }), before.keep);
+  assert.equal(stored.length, before.count + 2);
+  assert.deepEqual(l.wordLists().map((x) => x.id), [keep]);
+  // reopening (or a backup) does not bring it back
+  const again = await Learner.open(c, repo, "p-del", clock);
+  assert.deepEqual(again.wordLists().map((x) => x.id), [keep]);
+  assert.ok(!JSON.stringify(again.backup()).includes("castle"));
+  assert.ok(parseBackup(JSON.stringify(again.backup())).ok);
 });
