@@ -1755,7 +1755,7 @@ h3.sub {
   font-weight: 600;
   margin-bottom: 6px;
 }
-.my-words input:not([type="file"]),
+.my-words input:not([type="file"]):not([type="checkbox"]),
 .my-words textarea {
   width: 100%;
   box-sizing: border-box;
@@ -1815,6 +1815,66 @@ h3.sub {
 .list-review .problems {
   margin-top: 10px;
   color: var(--wrong-ink);
+}
+
+/* My Books */
+.book-review .review-group {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 12px 0;
+  padding: 8px 12px;
+  min-width: 0;
+}
+.book-review .review-group legend {
+  font-weight: 700;
+  padding: 0 4px;
+}
+.book-review .review-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.book-review .review-group li {
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+}
+.book-review .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.book-review .row .link {
+  min-height: 44px;
+}
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  overflow-wrap: anywhere;
+}
+.check input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  margin-top: 2px;
+}
+.book-quote {
+  display: block;
+  margin: 6px 0;
+  padding: 8px 12px;
+  border-left: 4px solid var(--border);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+.book-quiz .options .option {
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.book-quiz .feedback {
+  margin-top: 16px;
+}
+.notes {
+  padding-left: 18px;
 }
 
 /* the voice did not start: ask for a tap (Dictation) */

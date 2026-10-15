@@ -86,7 +86,7 @@ class DeveloperBase(AccountBase):
 def redact_parent_content(body: dict) -> dict:
     """A parent's own material in another family's shared record, as a developer sees it: its shape, not its words.
 
-    My Words lists (and, with My Books, book text) are the parent's own content, saved in the pupil's record so the
+    My Words lists and My Books text are the parent's own content, saved in the pupil's record so the
     parent can use them on any device. Sharing a pupil for diagnostics shares how the app behaved, not that content:
     list words, and the spellings asked from a list and the answers to them, are blanked. Counts, times, ids and
     right/wrong stay, so the diagnostics still work. A developer's own pupils are shown in full.
@@ -96,6 +96,15 @@ def redact_parent_content(body: dict) -> dict:
         words = body["list"].get("words")
         n = len(words) if isinstance(words, list) else 0
         return {**body, "list": {**body["list"], "name": "(a parent's list)", "words": []}, "redacted": f"a parent's word list of {n} words"}
+    if kind == "book" and isinstance(body.get("book"), dict):
+        text = body["book"].get("text")
+        n = len(text) if isinstance(text, str) else 0
+        return {**body, "book": {**body["book"], "title": "(a parent's book)", "text": ""}, "redacted": f"a parent's book text of {n} characters"}
+    if kind == "book_review" and isinstance(body.get("approved"), list):
+        # activity ids name the word ("s:castle", "v:castle"); sentence numbers ("c:who:4:Mia") name a character
+        return {**body, "approved": [_pseudonym(a) for a in body["approved"]], "redacted": "approved activities from a parent's book"}
+    if kind == "book_answer":
+        return {**body, "question": _pseudonym(body.get("question")), "response": "", "redacted": "an answer about a parent's book"}
     source = body.get("source")
     if isinstance(source, dict) and source.get("type") in PARENT_SOURCES:
         # a parent's words are their own ids (the word in lower case): replace each with a stable pseudonym, so the
@@ -112,7 +121,7 @@ def _pseudonym(word_id) -> str:
     return "w-" + hashlib.sha256(f"openpath-parent-word:{word_id}".encode()).hexdigest()[:12]
 
 
-PARENT_SOURCES = {"list"}
+PARENT_SOURCES = {"list", "book"}
 
 
 def visible_pupils(user):

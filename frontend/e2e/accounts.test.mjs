@@ -192,8 +192,9 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.getByRole("button", { name: "Build my path" }).click();
   await page.locator(".plan li").first().waitFor();
   await shot(page, "check-intro");
-  // My Words is offered to a pupil in a parent account too (e2e/parent-content.test.mjs follows it through)
+  // My Words and My Books are offered to a pupil in a parent account too (e2e/parent-content.test.mjs follows them through)
   await page.getByRole("button", { name: "Add a word list" }).waitFor();
+  await page.getByRole("button", { name: "Add a book" }).waitFor();
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
   // … Arun completes the first assessment
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();

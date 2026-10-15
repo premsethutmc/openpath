@@ -43,9 +43,9 @@ from .models import ACTIVE_SUBJECTS, Pupil, PupilEvent
 from .scrub import SOURCES as SCRUB_SOURCES
 from .scrub import deleted_sources, revives_deleted, scrub_events
 
-# events that could bring a deleted list back, and the events that record a deletion
-REVIVING_KINDS = {"word_list", "spell_session", "spell_answer"}
-DELETE_KINDS = {"word_list_delete"}
+# events that could bring a deleted list or book back, and the events that record a deletion
+REVIVING_KINDS = {"word_list", "spell_session", "spell_answer", "book", "book_review", "book_answer"}
+DELETE_KINDS = {"word_list_delete", "book_delete"}
 
 User = get_user_model()
 
@@ -308,7 +308,9 @@ def _check_event(event) -> dict:
         raise ValidationError({"event": "An event needs a kind."})
     if not isinstance(event.get("id"), str) or not event["id"]:
         raise ValidationError({"event": "An event needs an id."})
-    if len(json.dumps(event)) > settings.OPENPATH_MAX_EVENT_BYTES:
+    limit = settings.OPENPATH_MAX_BOOK_EVENT_BYTES if kind == "book" else settings.OPENPATH_MAX_EVENT_BYTES
+    # measured as UTF-8, as the app measures it (json.dumps would otherwise count “ as the six characters \u201c)
+    if len(json.dumps(event, ensure_ascii=False).encode()) > limit:
         raise ValidationError({"event": "This event is too large."})
     return event
 
@@ -430,7 +432,7 @@ class PupilScrubView(AccountBase):
         subject = _subject(request.data.get("subject"))
         source = request.data.get("source")
         if not isinstance(source, dict) or source.get("type") not in SCRUB_SOURCES or not isinstance(source.get("id"), str) or not source["id"]:
-            raise ValidationError({"source": "Name the list to remove: {type: \"list\", id}."})
+            raise ValidationError({"source": "Name the list or book to remove: {type: \"list\" or \"book\", id}."})
         src = {"type": source["type"], "id": source["id"]}
         with transaction.atomic():
             pupil = get_object_or_404(Pupil.objects.select_for_update(), pk=pupil_id, parent=request.user)

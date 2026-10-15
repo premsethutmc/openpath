@@ -161,6 +161,7 @@ else:
 OPENPATH_MAX_PUPILS_PER_PARENT = 12
 OPENPATH_MAX_EVENTS_PER_PUPIL = 100_000
 OPENPATH_MAX_EVENT_BYTES = 32_000
+OPENPATH_MAX_BOOK_EVENT_BYTES = 140_000  # one My Books text (at most 30,000 characters), saved as a single "book" event
 OPENPATH_MAX_REQUEST_BYTES = 20_000_000  # an import of a large device record; refused before the body is read
 OPENPATH_LOGIN_FAILURES_PER_EMAIL = 10
 OPENPATH_LOGIN_FAILURE_WINDOW = 15 * 60

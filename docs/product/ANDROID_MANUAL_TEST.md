@@ -173,6 +173,20 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A9.7 | (App address, signed in as a parent) Make a list for a learner in the account; sign in on a second phone | The My Words screen says the list is saved in the learner's record in your parent account; the second phone shows the list and its progress |
 | A9.8 | (Parent account, two phones) Open the learner's My Words on phone 2; delete the list on phone 1; then tap **Practise** on phone 2 | Phone 2 says the record changed on another device; after opening the learner again the list is gone |
 
+### A10. My Books (a parent's own book text)
+
+| # | Do | Expect |
+|---|---|---|
+| A10.1 ★ | On Home, tap **Add a book**, then **Add a book**. Copy a page of a story from another app and paste it into the text box; give it a title; tap **Find activities** | Spelling words and questions from that text appear, all unticked |
+| A10.2 ★ | Tap the file box and pick a small `.txt` story from the phone's Downloads | Its text fills the box; the phone's file picker opens and closes normally |
+| A10.3 ★ | Save without ticking anything | The book says "Approved: 0 spelling words · 0 questions"; no Practise or Questions buttons |
+| A10.4 ★ | **Review**, tick a few spelling words and questions, save; tap **Practise spelling** | The real voice says each word and then the book's sentence; the word is never written on the screen |
+| A10.5 | **Answer questions** | Only the ticked questions; after each, right or "Not quite." with the answer |
+| A10.6 | Close Chrome and reopen; open My Books | The book, its ticks and its progress are still there |
+| A10.7 | **Review**, change one word in the text, **Find activities** | Every tick is cleared: the changed text needs a new review |
+| A10.8 | (App address, signed in as a parent) Add a book for a learner in the account and approve some activities; sign in on a second phone | The My Books screen says books are saved in the learner's record in your parent account; the second phone shows the book, its approvals and progress |
+| A10.9 | **Delete** a book, then close Chrome and reopen My Books | The book is gone and does not come back; the Spelling Bee and word lists are unchanged |
+
 ## Part B: safety testing of the empty pilot build (pilot address)
 
 This build is made with no approvals (`--no-approvals`), so it must not show **any** question, lesson or practice. If anything appears,

@@ -85,10 +85,10 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
 }
 
 /** Where a parent's lists are saved, said plainly before anything is typed. */
-export function keptWhere(learner: Learner, what = "Lists"): string {
+export function keptWhere(learner: Learner, what = "Lists", content = "its words"): string {
   return learner.contentPlace === "account"
-    ? `${what} are saved in ${learner.state.profile?.name ?? "this learner"}'s record in your parent account, so they are on any device you sign in on. Only your account can open them. Deleting one removes its words from the learner's record; the learner's answers stay, without the words.`
-    : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting one removes its words from the learner's record; the learner's answers stay, without the words.`;
+    ? `${what} are saved in ${learner.state.profile?.name ?? "this learner"}'s record in your parent account, so they are on any device you sign in on. Only your account can open them. Deleting one removes ${content} from the learner's record; the learner's answers stay, without the words.`
+    : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting one removes ${content} from the learner's record; the learner's answers stay, without the words.`;
 }
 
 function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordList | null; onDone: () => void }) {
