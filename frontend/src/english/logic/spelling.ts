@@ -262,3 +262,13 @@ export function sessionView(s: SpellSessionState): { next: string | null; positi
   const right = s.answers.filter((a) => a.correct).length;
   return { next, position: s.answers.length + (next ? 1 : 0), total: s.event.words.length, right, wrong: s.answers.length - right };
 }
+
+/**
+ * Text shown while a word is being asked must never contain that word (a parent's list may hold "listen", "word" or
+ * "again"): the first option without it as a whole word, else the last option (written to be safe, e.g. a symbol).
+ */
+export function avoiding(word: string, ...options: string[]): string {
+  const w = word.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const has = (t: string) => new RegExp(`(^|[^a-z'’])${w}($|[^a-z'’])`, "i").test(t);
+  return options.find((o) => !has(o)) ?? options.at(-1)!;
+}

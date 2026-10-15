@@ -25,6 +25,8 @@ import { Session } from "./Session.tsx";
 import { detectSpeech } from "./speech.ts";
 import { SpellingIntro } from "./SpellingIntro.tsx";
 import { SpellingBee } from "./SpellingBee.tsx";
+import { MyWords } from "./MyWords.tsx";
+import type { SpellSource } from "../logic/events.ts";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
 const clock = () => {
@@ -89,7 +91,9 @@ export function App() {
   const [learner, setLearner] = useState<Learner | null>(null);
   const [tab, setTab] = useState<Tab>("home");
   const [inSession, setInSession] = useState(false);
-  const [inBee, setInBee] = useState(false);
+  // a spelling session's source (the Bee's words or a list) and where to go back to; My Words is its own screen
+  const [bee, setBee] = useState<{ source: SpellSource; title: string; back: "home" | "mywords" } | null>(null);
+  const [inMyWords, setInMyWords] = useState(false);
   const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -126,7 +130,8 @@ export function App() {
       setTab("home");
       setInSession(false);
       setInJourney(false);
-      setInBee(false);
+      setBee(null);
+      setInMyWords(false);
       setScreen({ name: "app" });
     } catch (e) {
       setProblem((e as Error).message);
@@ -343,10 +348,14 @@ export function App() {
 
   if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} step={screen.step} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
 
-  if (inBee)
+  if (bee)
     return (
       <SpellingBee
+        key={`${bee.source.type}:${bee.source.id}`}
         learner={learner}
+        source={bee.source}
+        title={bee.title}
+        backTo={bee.back === "mywords" ? "My Words" : "Home"}
         voice={learner.state.speech ? voice : null}
         speechOff={!!voice && !learner.state.speech}
         onTurnSpeechOn={async () => {
@@ -355,7 +364,20 @@ export function App() {
         }}
         onChanged={changed}
         onLeave={() => {
-          setInBee(false);
+          setInMyWords(bee.back === "mywords");
+          setBee(null);
+          changed();
+        }}
+      />
+    );
+  if (inMyWords)
+    return (
+      <MyWords
+        learner={learner}
+        onChanged={changed}
+        onPractise={(l) => setBee({ source: { type: "list", id: l.id }, title: l.name, back: "mywords" })}
+        onLeave={() => {
+          setInMyWords(false);
           changed();
         }}
       />
@@ -410,7 +432,8 @@ export function App() {
             setInJourney(true);
           }}
           onWhy={() => setTab("progress")}
-          onBee={() => setInBee(true)}
+          onBee={() => setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" })}
+          onMyWords={() => setInMyWords(true)}
         />
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}

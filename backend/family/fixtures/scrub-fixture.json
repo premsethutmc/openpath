@@ -1,0 +1,460 @@
+{
+ "about": "One synthetic record before and after deleting list:3 (frontend logic/scrub.ts and backend family/scrub.py must both produce `after`).",
+ "source": {
+  "type": "list",
+  "id": "list:3"
+ },
+ "changed": 7,
+ "before": [
+  {
+   "kind": "profile",
+   "id": "p:1",
+   "at": "2026-10-15T10:00:00.000Z",
+   "name": "Synthetic Learner"
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:2",
+   "at": "2026-10-15T10:01:00.000Z",
+   "session": "sp:2",
+   "source": {
+    "type": "bank",
+    "id": "spelling-bee"
+   },
+   "words": [
+    "bee.friend"
+   ],
+   "level": 1,
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:3",
+   "at": "2026-10-15T10:02:00.000Z",
+   "session": "sp:2",
+   "source": {
+    "type": "bank",
+    "id": "spelling-bee"
+   },
+   "word": {
+    "id": "bee.friend",
+    "text": "friend",
+    "level": 1
+   },
+   "response": "freind",
+   "correct": false,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "word_list",
+   "id": "p:4",
+   "at": "2026-10-15T10:03:00.000Z",
+   "list": {
+    "id": "list:3",
+    "name": "Week 3",
+    "words": [
+     {
+      "id": "castle",
+      "word": "castle",
+      "variants": []
+     },
+     {
+      "id": "colour",
+      "word": "colour",
+      "variants": [
+       "color"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "kind": "word_list",
+   "id": "p:5",
+   "at": "2026-10-15T10:04:00.000Z",
+   "list": {
+    "id": "list:4",
+    "name": "Week 4",
+    "words": [
+     {
+      "id": "because",
+      "word": "because",
+      "variants": []
+     }
+    ]
+   }
+  },
+  {
+   "kind": "word_list",
+   "id": "p:6",
+   "at": "2026-10-15T10:05:00.000Z",
+   "list": {
+    "id": "list:3",
+    "name": "Week 3 (more)",
+    "words": [
+     {
+      "id": "castle",
+      "word": "castle",
+      "variants": []
+     },
+     {
+      "id": "colour",
+      "word": "colour",
+      "variants": [
+       "color"
+      ]
+     },
+     {
+      "id": "island",
+      "word": "island",
+      "variants": []
+     }
+    ]
+   }
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:7",
+   "at": "2026-10-15T10:06:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "words": [
+    "colour",
+    "castle",
+    "island"
+   ],
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:8",
+   "at": "2026-10-15T10:07:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "colour",
+    "text": "colour"
+   },
+   "response": "color",
+   "correct": true,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:9",
+   "at": "2026-10-15T10:08:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "castle",
+    "text": "castle"
+   },
+   "response": "casle",
+   "correct": false,
+   "plays": 2,
+   "review": false
+  },
+  {
+   "kind": "spell_end",
+   "id": "p:10",
+   "at": "2026-10-15T10:09:00.000Z",
+   "session": "sp:7",
+   "reason": "stopped"
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:11",
+   "at": "2026-10-15T10:10:00.000Z",
+   "session": "sp:11",
+   "source": {
+    "type": "list",
+    "id": "list:4"
+   },
+   "words": [
+    "because"
+   ],
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:12",
+   "at": "2026-10-15T10:11:00.000Z",
+   "session": "sp:11",
+   "source": {
+    "type": "list",
+    "id": "list:4"
+   },
+   "word": {
+    "id": "because",
+    "text": "because"
+   },
+   "response": "because",
+   "correct": true,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:13",
+   "at": "2026-10-15T10:12:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "words": [
+    "castle"
+   ],
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:14",
+   "at": "2026-10-15T10:13:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "castle",
+    "text": "castle"
+   },
+   "response": "castle",
+   "correct": true,
+   "plays": 1,
+   "review": true
+  },
+  {
+   "kind": "word_list_delete",
+   "id": "p:15",
+   "at": "2026-10-15T10:14:00.000Z",
+   "list": "list:3"
+  }
+ ],
+ "after": [
+  {
+   "kind": "profile",
+   "id": "p:1",
+   "at": "2026-10-15T10:00:00.000Z",
+   "name": "Synthetic Learner"
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:2",
+   "at": "2026-10-15T10:01:00.000Z",
+   "session": "sp:2",
+   "source": {
+    "type": "bank",
+    "id": "spelling-bee"
+   },
+   "words": [
+    "bee.friend"
+   ],
+   "level": 1,
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:3",
+   "at": "2026-10-15T10:02:00.000Z",
+   "session": "sp:2",
+   "source": {
+    "type": "bank",
+    "id": "spelling-bee"
+   },
+   "word": {
+    "id": "bee.friend",
+    "text": "friend",
+    "level": 1
+   },
+   "response": "freind",
+   "correct": false,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "word_list",
+   "id": "p:4",
+   "at": "2026-10-15T10:03:00.000Z",
+   "list": {
+    "id": "list:3",
+    "name": "",
+    "words": []
+   },
+   "scrubbed": true
+  },
+  {
+   "kind": "word_list",
+   "id": "p:5",
+   "at": "2026-10-15T10:04:00.000Z",
+   "list": {
+    "id": "list:4",
+    "name": "Week 4",
+    "words": [
+     {
+      "id": "because",
+      "word": "because",
+      "variants": []
+     }
+    ]
+   }
+  },
+  {
+   "kind": "word_list",
+   "id": "p:6",
+   "at": "2026-10-15T10:05:00.000Z",
+   "list": {
+    "id": "list:3",
+    "name": "",
+    "words": []
+   },
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:7",
+   "at": "2026-10-15T10:06:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "words": [
+    "removed-1",
+    "removed-2",
+    "removed-3"
+   ],
+   "delivery": "device_voice",
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:8",
+   "at": "2026-10-15T10:07:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "removed-1",
+    "text": ""
+   },
+   "response": "",
+   "correct": true,
+   "plays": 1,
+   "review": false,
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:9",
+   "at": "2026-10-15T10:08:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "removed-2",
+    "text": ""
+   },
+   "response": "",
+   "correct": false,
+   "plays": 2,
+   "review": false,
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_end",
+   "id": "p:10",
+   "at": "2026-10-15T10:09:00.000Z",
+   "session": "sp:7",
+   "reason": "stopped"
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:11",
+   "at": "2026-10-15T10:10:00.000Z",
+   "session": "sp:11",
+   "source": {
+    "type": "list",
+    "id": "list:4"
+   },
+   "words": [
+    "because"
+   ],
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:12",
+   "at": "2026-10-15T10:11:00.000Z",
+   "session": "sp:11",
+   "source": {
+    "type": "list",
+    "id": "list:4"
+   },
+   "word": {
+    "id": "because",
+    "text": "because"
+   },
+   "response": "because",
+   "correct": true,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:13",
+   "at": "2026-10-15T10:12:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "words": [
+    "removed-2"
+   ],
+   "delivery": "device_voice",
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:14",
+   "at": "2026-10-15T10:13:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "list",
+    "id": "list:3"
+   },
+   "word": {
+    "id": "removed-2",
+    "text": ""
+   },
+   "response": "",
+   "correct": true,
+   "plays": 1,
+   "review": true,
+   "scrubbed": true
+  },
+  {
+   "kind": "word_list_delete",
+   "id": "p:15",
+   "at": "2026-10-15T10:14:00.000Z",
+   "list": "list:3"
+  }
+ ]
+}

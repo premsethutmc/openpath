@@ -6,13 +6,18 @@
 import { useEffect, useRef, useState } from "react";
 import type { SpellSource } from "../logic/events.ts";
 import type { Learner } from "../logic/learner.ts";
-import { BANK, LEVEL_NAMES, type SpellWord, levelOf, sourceProgress } from "../logic/spelling.ts";
+import { BANK, LEVEL_NAMES, type SpellWord, avoiding, levelOf, sourceKey, sourceProgress } from "../logic/spelling.ts";
 import { Dictation } from "./ItemView.tsx";
 
 type Result = { correct: boolean; word: SpellWord; typed: string };
 
-export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave, onChanged, source = BANK, title = "Spelling Bee" }: { learner: Learner; voice: SpeechSynthesisVoice | null; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; onLeave: () => void; onChanged: () => void; source?: SpellSource; title?: string }) {
-  const [session, setSession] = useState<string | null>(learner.spellingSession()?.session ?? null);
+export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave, onChanged, source = BANK, title = "Spelling Bee", backTo = "Home" }: { learner: Learner; voice: SpeechSynthesisVoice | null; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; onLeave: () => void; onChanged: () => void; source?: SpellSource; title?: string; backTo?: string }) {
+  // an unfinished session carries on only if it is on this source (a list's session never continues as the Bee's)
+  const mine = () => {
+    const s = learner.spellingSession();
+    return s && sourceKey(s.source) === sourceKey(source) ? s : null;
+  };
+  const [session, setSession] = useState<string | null>(mine()?.session ?? null);
   const [result, setResult] = useState<Result | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -35,11 +40,11 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
   };
   // open the session to carry on, or start one
   useEffect(() => {
-    if (!learner.spellingSession()) void begin();
+    if (!mine()) void begin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cur = learner.spellingSession();
+  const cur = mine();
   const words = learner.spellingWords(source);
   const st = learner.spelling();
   const done = session ? st.sessions.get(session) : undefined;
@@ -62,6 +67,17 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
     setResult(null);
   };
 
+  // while a word is asked, no text on the page may contain it (a parent's list can hold any word): see avoiding()
+  const asking = !result && cur?.word ? cur.word.word : null;
+  const safe = (...options: string[]) => (asking ? avoiding(asking, ...options) : options[0]);
+  useEffect(() => {
+    if (!asking) return;
+    const was = document.title;
+    document.title = avoiding(asking, "OpenPath English", "OpenPath", "…");
+    return () => {
+      document.title = was;
+    };
+  }, [asking]);
   const counts = cur ?? (done ? { position: done.answers.length, total: done.event.words.length, right: done.answers.filter((a) => a.correct).length, wrong: done.answers.filter((a) => !a.correct).length, level: done.event.level } : null);
   // after a session, the level it moved to; during one, the level it was planned at
   const level = cur ? cur.level : done && leveled ? levelOf(st, source) : undefined;
@@ -72,21 +88,18 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
     <main className="page bee" aria-labelledby="bee-title">
       <p>
         <button type="button" className="link" onClick={onLeave}>
-          ← Home
+          {safe(`← ${backTo}`, "← Back", "←")}
         </button>
       </p>
       <p className="eyebrow">
         <span aria-hidden="true">🐝 </span>
-        {title}
-        {leveled && level !== undefined ? ` · Level ${level}: ${LEVEL_NAMES[level]}` : ""}
+        {safe(`${title}${leveled && level !== undefined ? ` · Level ${level}: ${LEVEL_NAMES[level]}` : ""}`, `${title}${leveled && level !== undefined ? ` · Level ${level}` : ""}`, leveled && level !== undefined ? `Level ${level}` : "", "")}
       </p>
       {counts && (
-        <div className="bee-progress" aria-label="This session">
-          <span>
-            Word {Math.min(position, counts.total)} of {counts.total}
-          </span>
+        <div className="bee-progress" aria-label={safe("This session", "Progress", "…")}>
+          <span>{safe(`Word ${Math.min(position, counts.total)} of ${counts.total}`, `${Math.min(position, counts.total)} / ${counts.total}`)}</span>
           <span className="bee-score">
-            <span aria-label="right">✓ {counts.right}</span> <span aria-label="not yet">✗ {counts.wrong}</span>
+            <span aria-label={safe("right", "correct", "✓")}>✓ {counts.right}</span> <span aria-label={safe("not yet", "missed", "✗")}>✗ {counts.wrong}</span>
           </span>
           <div className="bar" aria-hidden="true">
             <i style={{ width: `${Math.round((100 * (counts.right + counts.wrong)) / Math.max(1, counts.total))}%` }} />
@@ -104,19 +117,19 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
       ) : cur?.word ? (
         <section className="bee-ask" aria-labelledby="bee-title">
           <h1 id="bee-title" className="hero">
-            Listen, then type the word you hear.
+            {safe("Listen, then type the word you hear.", "Type what you hear.", "Spell it.", "🔊 ⌨️")}
           </h1>
           {!voice && (
             <div className="tile peach" role="note">
               {speechOff ? (
                 <>
-                  <p>Hearing words is switched off.</p>
+                  <p>{safe("Hearing words is switched off.", "Speech is off.", "🔇")}</p>
                   <button type="button" className="secondary" onClick={() => void onTurnSpeechOn()}>
-                    Switch hearing words on
+                    {safe("Switch hearing words on", "Turn speech on", "🔊")}
                   </button>
                 </>
               ) : (
-                <p>This device can't say words aloud. An adult can read each word to you.</p>
+                <p>{safe("This device can't say words aloud. An adult can read each word to you.", "An adult reads this one aloud.", "🔊 ✋")}</p>
               )}
             </div>
           )}
@@ -128,22 +141,30 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
             voice={voice}
             delivery={delivery}
             locked={busy}
-            submitLabel="Submit"
+            labels={{
+              play: safe("Play the word", "Play", "▶"),
+              repeat: safe("Repeat the word", "Replay", "Again", "🔁"),
+              sentence: safe("Hear it in a sentence", "In a sentence", "Example", "💬"),
+              submit: safe("Submit", "Check", "Done", "✓"),
+              answer: safe("Your answer", "Answer", "Spelling", "✎"),
+              adultLead: safe("For the adult:", "Adult:", "👤"),
+              adult: safe("read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.", "Read it aloud, then hide it.", "Read aloud.", "🔊"),
+              show: safe("Show the word to read aloud", "Show it to read aloud", "Show", "👁"),
+              noSound: safe(`No sound? Turn the volume up, then tap “${safe("Play the word", "Play", "▶")}”.`, `No sound? Tap “${safe("Play the word", "Play", "▶")}”.`, "🔇 ▶"),
+            }}
             onPlay={() => (plays.current += 1)}
             onSubmit={(r) => r.kind === "typed" && void submit(r.text)}
           />
         </section>
       ) : done ? (
-        <Summary learner={learner} sessionId={done.event.session} source={source} onAgain={begin} onLeave={onLeave} busy={busy} />
+        <Summary learner={learner} sessionId={done.event.session} source={source} onAgain={begin} onLeave={onLeave} busy={busy} backTo={backTo} />
       ) : (
         <h1 id="bee-title" className="hero">
           Getting your words ready…
         </h1>
       )}
-      {!result && cur?.word && leveled && (
-        <p className="small bee-note">
-          {sourceProgress(st, words, learner.clock()).practised} of {words.length} words practised. Practice levels show how the practice is going; they are not a test result.
-        </p>
+      {!result && cur?.word && leveled && safe(`${sourceProgress(st, words, learner.clock()).practised} of ${words.length} words practised. Practice levels show how the practice is going; they are not a test result.`, "") && (
+        <p className="small bee-note">{safe(`${sourceProgress(st, words, learner.clock()).practised} of ${words.length} words practised. Practice levels show how the practice is going; they are not a test result.`, "")}</p>
       )}
     </main>
   );
@@ -175,7 +196,7 @@ function Feedback({ result, last, onNext }: { result: Result; last: boolean; onN
   );
 }
 
-function Summary({ learner, sessionId, source, onAgain, onLeave, busy }: { learner: Learner; sessionId: string; source: SpellSource; onAgain: () => void; onLeave: () => void; busy: boolean }) {
+function Summary({ learner, sessionId, source, onAgain, onLeave, busy, backTo }: { learner: Learner; sessionId: string; source: SpellSource; onAgain: () => void; onLeave: () => void; busy: boolean; backTo: string }) {
   const st = learner.spelling();
   const s = st.sessions.get(sessionId)!;
   const words = learner.spellingWords(source);
@@ -204,7 +225,7 @@ function Summary({ learner, sessionId, source, onAgain, onLeave, busy }: { learn
         Another {Math.min(10, p.total)} words
       </button>
       <button type="button" className="secondary" onClick={onLeave}>
-        Back to home
+        {backTo === "Home" ? "Back to home" : `Back to ${backTo}`}
       </button>
     </section>
   );

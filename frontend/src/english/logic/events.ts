@@ -274,6 +274,8 @@ export interface SpellSessionEvent {
   /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
   level?: number;
   delivery: "device_voice" | "adult_reader";
+  /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface SpellAnswerEvent {
   kind: "spell_answer";
@@ -289,6 +291,8 @@ export interface SpellAnswerEvent {
   plays: number;
   /** Asked again because it was misspelt before (a review), not for the first time. */
   review: boolean;
+  /** Its source was deleted: the word and the answer are removed, right/wrong kept (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface SpellEndEvent {
   kind: "spell_end";
@@ -297,7 +301,28 @@ export interface SpellEndEvent {
   session: string;
   reason: "finished" | "stopped";
 }
-export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent;
+/** A parent's word list (My Words, logic/wordlists.ts): the whole list each time it is saved. */
+export interface ListWord {
+  /** Stable within the list: the word in lower case, so practice history follows the word through edits. */
+  id: string;
+  word: string;
+  variants: string[];
+}
+export interface WordListEvent {
+  kind: "word_list";
+  id: string;
+  at: string;
+  list: { id: string; name: string; words: ListWord[] };
+  /** The list was deleted: this saved version's name and words are removed (logic/scrub.ts). */
+  scrubbed?: boolean;
+}
+export interface WordListDeleteEvent {
+  kind: "word_list_delete";
+  id: string;
+  at: string;
+  list: string;
+}
+export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent;
 
 export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
@@ -306,7 +331,7 @@ const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke",
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end"]);
 
@@ -321,6 +346,8 @@ export function eventProblem(e: unknown): string | null {
   if (SESSION_KINDS.has(x.kind) && typeof x.session !== "string") return `event ${x.id} names no session`;
   if (x.kind === "rating" && !RATINGS.includes(x.rating as Rating)) return `event ${x.id} has an unknown rating`;
   if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
+  if (x.kind === "word_list" && (typeof (x.list as { id?: unknown } | undefined)?.id !== "string" || !Array.isArray((x.list as { words?: unknown }).words))) return `event ${x.id} is a word list without words`;
+  if (x.kind === "word_list_delete" && typeof x.list !== "string") return `event ${x.id} names no word list`;
   if (x.kind.startsWith("spell_") && x.kind !== "spell_end" && !["bank", "list", "book"].includes((x.source as { type?: string } | undefined)?.type ?? "")) return `event ${x.id} names no spelling source`;
   if (x.kind === "spell_answer" && (typeof (x.word as { id?: unknown } | undefined)?.id !== "string" || typeof x.correct !== "boolean" || typeof x.response !== "string")) return `event ${x.id} is a spelling answer without a word or result`;
   return null;

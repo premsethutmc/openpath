@@ -1729,6 +1729,94 @@ h3.sub {
   border-bottom: 1px solid var(--line);
 }
 
+/* ------------------------------------------------------------------ My Words (MyWords.tsx) */
+.hub-card.plain {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.hub-card.plain h2 {
+  color: var(--ink);
+}
+.hub-card.plain p,
+.hub-card.plain .small {
+  color: var(--muted);
+}
+.hub-card.plain button {
+  margin-top: 10px;
+  width: 100%;
+}
+.my-words .field {
+  display: block;
+  margin: 14px 0;
+}
+.my-words .field > span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.my-words input:not([type="file"]),
+.my-words textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+}
+.my-words input[type="file"] {
+  max-width: 100%;
+}
+.my-words > button {
+  width: 100%;
+  margin: 8px 0;
+}
+.word-lists {
+  list-style: none;
+  padding: 0;
+}
+.word-lists li h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+.word-lists .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.word-lists .row button {
+  flex: 1 1 auto;
+  min-height: 44px;
+}
+.chips {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--lilac);
+  border-radius: 999px;
+  padding: 2px 4px 2px 12px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.chips li button.link {
+  min-width: 36px;
+  min-height: 36px;
+}
+.list-review .problems {
+  margin-top: 10px;
+  color: var(--wrong-ink);
+}
+
 /* the voice did not start: ask for a tap (Dictation) */
 .listen-row .no-sound {
   flex: 1 1 100%;

@@ -160,6 +160,19 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A8.5 | Lock the phone mid-session; unlock; or close Chrome and reopen | Home offers **Carry on Spelling Bee** at the same word |
 | A8.6 | Finish 10 words | A summary; Home and Progress show words practised; the next session starts with the misspelt word |
 
+### A9. My Words (a parent's own list)
+
+| # | Do | Expect |
+|---|---|---|
+| A9.1 ★ | On Home, tap **Add a word list**, then **New word list**. Name it, type `colour/color, because, b4` and tap **Check the words** | 2 words ready; "Not added (1)" says "b4" has numbers |
+| A9.2 ★ | Tap the file box (**Or add words from a .txt or .csv file**) and pick a small `.txt` or `.csv` of words from the phone's Downloads | Its words are added to the list and checked; the phone's file picker opens and closes normally |
+| A9.3 ★ | Remove one word, **Save the list**, then **Practise** | The real voice says each word; the word is never written on the screen; "color" is accepted for colour |
+| A9.4 | Finish the list; go back to My Words | The list shows practised, right and "to review" counts |
+| A9.5 | Close Chrome and reopen; open My Words | The list and its progress are still there |
+| A9.6 | **Edit**, change the name, save; then **Delete** | The new name shows; after Delete the list is gone, and stays gone after closing and reopening Chrome |
+| A9.7 | (App address, signed in as a parent) Make a list for a learner in the account; sign in on a second phone | The My Words screen says the list is saved in the learner's record in your parent account; the second phone shows the list and its progress |
+| A9.8 | (Parent account, two phones) Open the learner's My Words on phone 2; delete the list on phone 1; then tap **Practise** on phone 2 | Phone 2 says the record changed on another device; after opening the learner again the list is gone |
+
 ## Part B: safety testing of the empty pilot build (pilot address)
 
 This build is made with no approvals (`--no-approvals`), so it must not show **any** question, lesson or practice. If anything appears,
