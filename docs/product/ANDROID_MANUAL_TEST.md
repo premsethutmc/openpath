@@ -21,9 +21,9 @@ Do not mix them up: each part tests a different version, for a different reason.
 
 | Part | Version of the app | Purpose | When |
 |---|---|---|---|
-| **A. Adult testing of the development build** | Development (app address, port 4175). Every activity; questions **not approved** | Does the phone work: speech, adult reader, keyboard, sessions, resuming, saving, export and deletion | Now |
-| **B. Safety testing of the empty pilot build** | Pilot test build with **nothing approved** (pilot address, port 4177) | The pilot version shows **nothing** unapproved, even through typed addresses | Now |
-| **C. Full adult testing of the educator-approved pilot build** | The real pilot build, made only from **educator-approved** questions (pilot address, rebuilt) | What children would actually use: only approved questions, only the two checks, on this phone | Only after an educator has approved questions |
+| **A. Adult testing of the development build** | Development (app address, port 4175). Every activity; it includes questions that are **not approved** | Does the phone work: speech, adult reader, keyboard, sessions, resuming, saving, export and deletion | Now |
+| **B. Safety testing of the empty pilot build** | Pilot test build made with **no approvals at all** (`--no-approvals`; pilot address, port 4177) | The pilot version shows **nothing** unapproved, even through typed addresses | Now |
+| **C. Full adult testing of the approved pilot build** | The real pilot build, made only from **approved** questions (pilot address, rebuilt). Today these are the 291 questions the product owner approved; no educator has reviewed them yet | What children would actually use: only approved questions, only the two checks, on this phone | Now possible (the owner approval is recorded) |
 
 A phone may be used with children only when **every ★ step in A, B and C** has passed on it. No child uses the
 development build, and nobody uses either pilot build before Part C has passed.
@@ -35,15 +35,15 @@ The app is not put on the internet. It runs in your private GitHub Codespace
 
 | Address | What it is | How to get it |
 |---|---|---|
-| **App address** (port 4175) | The full app in its internal "development" version. It has every activity, and its questions are **not** approved. Adults only. | Printed when the codespace starts: `https://<name>-4175.app.github.dev` |
-| **Pilot address** (port 4177), for Part B | The pilot test build, with nothing approved, so it must show **no questions at all** | In the codespace terminal, run `cd frontend && node scripts/build-english.mjs --pilot --allow-empty --out=dist-english-pilot && PORT=4177 DIST=dist-english-pilot HOST=0.0.0.0 node scripts/preview-english.mjs`. The PORTS tab then shows 4177, which must be **Private**. |
+| **App address** (port 4175) | The full app in its internal "development" version. It has every activity, including questions that are **not** approved. Adults only. | Printed when the codespace starts: `https://<name>-4175.app.github.dev` |
+| **Pilot address** (port 4177), for Part B | The pilot test build made with no approvals, so it must show **no questions at all** | In the codespace terminal, run `cd frontend && node scripts/build-english.mjs --pilot --no-approvals --allow-empty --out=dist-english-pilot && PORT=4177 DIST=dist-english-pilot HOST=0.0.0.0 node scripts/preview-english.mjs`. The PORTS tab then shows 4177, which must be **Private**. |
 
-**For Part C, after an educator's decisions have been imported** ([pilot/EDUCATOR_REVIEW_GUIDE.md](pilot/EDUCATOR_REVIEW_GUIDE.md)):
+**For Part C** (the recorded approvals: today the product owner's approval of 291 questions, plus any educator decisions imported later, see [pilot/EDUCATOR_REVIEW_GUIDE.md](pilot/EDUCATOR_REVIEW_GUIDE.md)):
 1. Run `node tools/english/pilot/review.ts approved`, print the list, and give it to the testers. It is the list of
-   exact question versions an educator approved.
+   exact question versions that are approved, and by whom.
 2. Stop the server on 4177.
-3. Run `node scripts/build-english.mjs --pilot --out=dist-english-pilot` **without** `--allow-empty`. It refuses to
-   build if nothing is approved.
+3. Run `node scripts/build-english.mjs --pilot --out=dist-english-pilot` **without** `--no-approvals` or `--allow-empty`.
+   It refuses to build if nothing is approved.
 4. Start the server on 4177 again, with the same command as for Part B.
 
 The same pilot address then serves the approved pilot build.
@@ -92,7 +92,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 
 | # | Do | Expect |
 |---|---|---|
-| A2.1 ★ | Press **I'm ready** (or **Start** on Home). Answer 6 questions, at least 2 of them typed | Each question fits the screen. After **Check**, a right or wrong message appears. **Next** moves on |
+| A2.1 ★ | On Home, press **Start** next to the starting check. Answer 6 questions, at least 2 of them typed | Each question fits the screen. After **Check**, a right or wrong message appears. **Next** moves on |
 | A2.2 ★ | On a typed question, watch the keyboard | The keyboard does not cover the answer box or **Check** |
 | A2.3 | Press the keyboard's Enter (or ✓) key instead of Check | It checks the answer |
 | A2.4 | Finish the check | "Back to today" appears. Home then offers the spelling check |
@@ -172,7 +172,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 
 ## Part B: safety testing of the empty pilot build (pilot address)
 
-Nothing is approved in this build, so it must not show **any** question, lesson or practice. If anything appears,
+This build is made with no approvals (`--no-approvals`), so it must not show **any** question, lesson or practice. If anything appears,
 stop and report it: that is a safety failure, not a phone problem.
 
 | # | Do | Expect |
@@ -180,20 +180,20 @@ stop and report it: that is a safety failure, not a phone problem.
 | B1 ★ | Open the **pilot address**. Press **Let's begin** (this version has no accounts), name **TEST2**, agree, **Build my path** | It goes straight to Home, with no starting check offered |
 | B2 ★ | Look at Home | "Nothing to do in the app right now". No Start button, no "More practice" |
 | B3 ★ | Open **Journey** | No buttons to start a lesson, practice or check. It says only the starting check and spelling check are open in the pilot |
-| B4 ★ | Open **Me** and scroll down | "Pilot version: only educator-approved questions are shown". There is no box for typing notes |
+| B4 ★ | Open **Me** and scroll down | "Pilot version: only approved questions are shown". There is no box for typing notes |
 | B5 ★ | Type the pilot address followed by `/developer` | "Not available here". No pupil information |
 | B6 | Reload, and close and reopen Chrome | Still nothing to do; no question appears |
 | B7 | **Me → Delete this learner from this device** | TEST2 is gone |
 
-## Part C: full adult testing of the educator-approved pilot build (pilot address, rebuilt)
+## Part C: full adult testing of the approved pilot build (pilot address, rebuilt)
 
-**Only after an educator has approved questions** and the pilot build has been rebuilt (see "Before you start").
+**Only after questions have been approved** (the product owner's approval of 291 is recorded) and the pilot build has been rebuilt (see "Before you start").
 Have the printed list of approved questions ready. This is the version children would use, so test it as fully as
 Part A.
 
 | # | Do | Expect |
 |---|---|---|
-| C1 ★ | Open the pilot address. **Let's begin**, name **TEST3**, agree, **Build my path** | The starting check is offered ("I'm ready"). In **Me**: "Pilot version: only educator-approved questions are shown" |
+| C1 ★ | Open the pilot address. **Let's begin**, name **TEST3**, agree, **Build my path** | Home offers the starting check (**Start**). In **Me**: "Pilot version: only approved questions are shown" |
 | C2 ★ | Do the whole starting check, with at least 2 typed answers. Watch the keyboard on each typed question | As A2.1–A2.3: each question fits, Check and Next work, and the keyboard does not cover the answer box or Check |
 | C3 ★ | After the check, look at the end screen | No "How was that?" rating, and no "Something wrong with this question?" link at any point |
 | C4 ★ | Start the spelling check and do it to the end, with the phone's voice | As A3.1–A3.5 and A4.1–A4.2: every word heard, never shown before Check, and no keyboard suggestions |
@@ -256,7 +256,7 @@ Part A.
 | C10 | | |
 
 **Decision for this phone** (tick one):
-- ☐ **Not yet:** Parts A and B passed. Part C waits for educator approvals.
+- ☐ **Not yet:** Parts A and B passed; Part C not yet done.
 - ☐ **Ready for supervised use with children:** every ★ in A, B **and** C passed.
 - ☐ **Adult reader only:** every ★ passed except speech (A3 or C4), so an adult must read the words aloud.
 - ☐ **Not ready:** any other ★ failed. Do not use this phone.
