@@ -60,7 +60,7 @@ test("My Words: type, paste and upload a list, see problems, edit, save, practis
         this.text = text;
       }
     };
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
   });
   const page = await context.newPage();
   const errors = [];
