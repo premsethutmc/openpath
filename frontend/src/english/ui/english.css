@@ -1816,3 +1816,9 @@ h3.sub {
   margin-top: 10px;
   color: var(--wrong-ink);
 }
+
+/* the voice did not start: ask for a tap (Dictation) */
+.listen-row .no-sound {
+  flex: 1 1 100%;
+  margin: 0;
+}

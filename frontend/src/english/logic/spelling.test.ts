@@ -35,6 +35,9 @@ test("SB-1 exactly 100 preloaded words, 20 at each of five levels, unique, each 
   for (const w of words) {
     assert.match(w.word, /^[a-z]+$/, w.id);
     assert.ok(w.sentence && w.sentence.toLowerCase().includes(w.word), `${w.id}: the sentence uses the word`);
+    // the word once, as a whole word (not inside another word), in a short sentence a child can follow by ear
+    assert.equal((w.sentence!.match(new RegExp(`\\b${w.word}\\b`, "gi")) ?? []).length, 1, `${w.id}: the word once in its sentence`);
+    assert.ok(w.sentence!.split(/\s+/).length <= 12 && /[.?!]$/.test(w.sentence!), `${w.id}: a short, complete sentence`);
     assert.deepEqual(w.variants, [], `${w.id}: British spelling, no variants in the preloaded bank`);
   }
 });

@@ -35,16 +35,29 @@ export function detectSpeech(timeoutMs = 1500): Promise<SpeechState> {
   });
 }
 
-export function speak(text: string, voice: SpeechSynthesisVoice | null): void {
-  if (!voice || typeof window === "undefined" || !("speechSynthesis" in window)) return;
+/**
+ * Say `text` with the local voice. `heard` is told whether speech actually started: Chrome on Android can refuse speech
+ * that was not started by a tap ("not-allowed"), or drop the first utterance after the page loads, without any error
+ * the page would otherwise see. Callers use it to ask the learner to tap Play instead of waiting in silence.
+ */
+export function speak(text: string, voice: SpeechSynthesisVoice | null, heard?: (started: boolean) => void, waitMs = 2500): void {
+  if (!voice || typeof window === "undefined" || !("speechSynthesis" in window)) return heard?.(false);
   const synth = window.speechSynthesis;
-  synth.cancel();
-  const say = (rate: number) => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.voice = voice;
-    u.lang = voice.lang;
-    u.rate = rate;
-    synth.speak(u);
+  // cancel only when something is queued: on some Android versions cancel() straight before speak() drops the new one
+  if (synth.speaking || synth.pending) synth.cancel();
+  let settled = false;
+  const settle = (ok: boolean) => {
+    if (settled) return;
+    settled = true;
+    heard?.(ok);
   };
-  say(0.8);
+  const u = new SpeechSynthesisUtterance(text);
+  u.voice = voice;
+  u.lang = voice.lang;
+  u.rate = 0.8;
+  u.onstart = () => settle(true);
+  u.onerror = () => settle(false);
+  synth.resume?.(); // a voice left paused (for example after the tab was in the background) stays silent otherwise
+  synth.speak(u);
+  if (heard) setTimeout(() => settle(false), waitMs);
 }

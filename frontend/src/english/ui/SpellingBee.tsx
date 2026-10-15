@@ -150,6 +150,7 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
               adultLead: safe("For the adult:", "Adult:", "👤"),
               adult: safe("read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.", "Read it aloud, then hide it.", "Read aloud.", "🔊"),
               show: safe("Show the word to read aloud", "Show it to read aloud", "Show", "👁"),
+              noSound: safe(`No sound? Turn the volume up, then tap “${safe("Play the word", "Play", "▶")}”.`, `No sound? Tap “${safe("Play the word", "Play", "▶")}”.`, "🔇 ▶"),
             }}
             onPlay={() => (plays.current += 1)}
             onSubmit={(r) => r.kind === "typed" && void submit(r.text)}
