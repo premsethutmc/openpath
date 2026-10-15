@@ -9,6 +9,8 @@
  *                                                         (default docs/product/pilot/educator-review/; --check: is it current?)
  *   node tools/english/pilot/review.ts status              print what is approved, rejected, to revise, to discuss, outstanding
  *   node tools/english/pilot/review.ts approved            list what a pilot build would show (allowlisted and approved)
+ *   node tools/english/pilot/review.ts owner-approve …     record the product owner's approval of exactly the allowlisted
+ *                                                         questions (authority "product-owner"; not an educator review)
  *
  * Rows: every question, passage, lesson and prerequisite of the five pilot capabilities, and every question on the
  * pilot allowlist (content/english/pilot/allowlist.json: the placement questions and dictation words a pilot build
@@ -300,6 +302,12 @@ export interface ReviewRecord {
   comment: string;
   reviewer: string;
   date: string;
+  /** Who approved: an educator's review (the default, and every record imported from a review sheet), or the product
+   * owner's permission to use the content. Owner approval is not an educator review or a validation. */
+  authority?: "educator" | "product-owner";
+  /** For owner approvals: the instruction it records, and when it was recorded (ISO time). */
+  provenance?: string;
+  recorded_at?: string;
 }
 
 /**
@@ -337,7 +345,7 @@ export function importReviews(csv: string, current: ReviewRow[], contentVersion:
       .filter(Boolean);
     for (const i of issues) if (!(ISSUES as readonly string[]).includes(i)) problems.push(`${label}: unknown issue "${i}" (use ${ISSUES.join(", ")})`);
     if ((decision === "reject" || decision === "revise") && !get("comment") && !issues.length) return void problems.push(`${label}: say why (an issue or a comment) when rejecting or asking for a revision`);
-    records.push({ kind: cur.kind, id: cur.id, version: cur.version, fingerprint: cur.fingerprint, content_version: contentVersion, decision: decision as ReviewRecord["decision"], issues, comment: get("comment"), reviewer, date });
+    records.push({ kind: cur.kind, id: cur.id, version: cur.version, fingerprint: cur.fingerprint, content_version: contentVersion, decision: decision as ReviewRecord["decision"], issues, comment: get("comment"), reviewer, date, authority: "educator" });
   });
   return { records, problems };
 }
@@ -375,7 +383,7 @@ function stateWords(s: ReviewState): string {
   if (s.state === "outstanding") return "outstanding: not reviewed";
   if (s.state === "re-review") return `re-review: changed since ${s.was.decision} by ${s.was.reviewer} on ${s.was.date}`;
   const r = s.record;
-  const words = { approve: "approved", reject: "rejected", revise: "revise", discuss: "discuss" }[r.decision];
+  const words = { approve: r.authority === "product-owner" ? "owner-approved" : "approved", reject: "rejected", revise: "revise", discuss: "discuss" }[r.decision];
   return `${words} by ${r.reviewer} on ${r.date}${r.issues.length ? ` (${r.issues.join("; ")})` : ""}`;
 }
 
@@ -424,6 +432,28 @@ export function approvedForPilot(p: Pilot, reviews: ReviewRecord[]): string[] {
   }
   for (const r of rows) if (r.kind === "passage" && ok("passage", r.id)) out.push(`passage:${r.id}`);
   return out.sort();
+}
+
+/**
+ * The product owner's approval of exactly the questions on the pilot allowlist (placement and dictation), at their
+ * current fingerprints: permission to use them in the product. Refuses unless the allowlist and the content agree
+ * (every listed question exists at its listed version). Never touches any other content, and is not an educator
+ * review: the records say so (authority "product-owner").
+ */
+export function ownerApproval(p: Pilot, by: string, provenance: string, recordedAt: string, expect: { placement: number; dictation: number }): { records: ReviewRecord[]; problems: string[] } {
+  const problems: string[] = [];
+  const rows = new Map(contentRows(p).filter((r) => r.kind === "question").map((r) => [r.id, r]));
+  const count = (use: string) => p.allowlist.filter((a) => a.use === use).length;
+  if (count("placement") !== expect.placement) problems.push(`the allowlist has ${count("placement")} placement questions, not ${expect.placement}`);
+  if (count("dictation") !== expect.dictation) problems.push(`the allowlist has ${count("dictation")} dictation questions, not ${expect.dictation}`);
+  const records: ReviewRecord[] = [];
+  for (const a of p.allowlist) {
+    const r = rows.get(a.id);
+    if (!r) problems.push(`${a.id} is on the allowlist but not in the content`);
+    else if (r.version !== String(a.version)) problems.push(`${a.id} is version ${r.version} in the content, ${a.version} on the allowlist`);
+    else records.push({ kind: "question", id: r.id, version: r.version, fingerprint: r.fingerprint, content_version: p.manifest.version, decision: "approve", issues: [], comment: "Owner approval: permission to use in the product. Not an educator review or a validation.", reviewer: by, date: recordedAt.slice(0, 10), authority: "product-owner", provenance, recorded_at: recordedAt });
+  }
+  return { records: problems.length ? [] : records, problems };
 }
 
 // ---------------------------------------------------------------- HTML for reading
@@ -608,7 +638,21 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     // what a pilot build would show (build-english.mjs --pilot compiles exactly this list)
     const list = approvedForPilot(p, reviews);
     console.log(list.length ? list.join("\n") : "nothing approved for the pilot: a pilot build would show no questions");
+  } else if (cmd === "owner-approve") {
+    // node tools/english/pilot/review.ts owner-approve "<who>" "<the instruction, as given>" <placement count> <dictation count>
+    const [, who, instruction, placement, dictation] = process.argv.slice(2);
+    if (!who || !instruction || !placement || !dictation) throw new Error('usage: owner-approve "<who>" "<instruction>" <placement count> <dictation count>');
+    if (reviews.some((r) => r.authority === "product-owner")) throw new Error("owner approvals are already recorded; nothing changed");
+    const { records, problems } = ownerApproval(p, who, instruction, new Date().toISOString(), { placement: Number(placement), dictation: Number(dictation) });
+    for (const x of problems) console.log(`PROBLEM  ${x}`);
+    if (problems.length) {
+      console.log("Nothing recorded: the counts or identities do not match the allowlist.");
+      process.exitCode = 1;
+    } else {
+      writeFileSync(REVIEWS, JSON.stringify([...reviews, ...records], null, 1) + "\n");
+      console.log(`recorded owner approval of ${records.length} questions in ${REVIEWS}`);
+    }
   } else if (cmd === "status") {
     console.log(reviewStatus(rows, reviews).join("\n"));
-  } else console.log("usage: review.ts export [dir] | export-pilot [dir|--check] | import <file.csv> | report [--check] | status | approved");
+  } else console.log("usage: review.ts export [dir] | export-pilot [dir|--check] | import <file.csv> | report [--check] | status | approved | owner-approve <who> <instruction> <placement> <dictation>");
 }

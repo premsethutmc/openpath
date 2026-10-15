@@ -176,8 +176,10 @@ test("PR-7 unreviewed or changed content never becomes validated: approval is re
   assert.deepEqual(JSON.parse(readFileSync(join(REPO, "content", "english", "pilot", "reviews.json"), "utf8")), committedReviews);
 });
 
-test("PR-9 a pilot build shows only allowlisted questions with an educator approval on their exact current content", () => {
-  assert.deepEqual(approvedForPilot(p, committedReviews), [], "nothing is approved in the committed record");
+test("PR-9 a pilot build shows only allowlisted questions with an approval on their exact current content", () => {
+  // the committed record: the product owner's approval of exactly the 291 allowlisted questions, and nothing else
+  assert.ok(committedReviews.length > 0 && committedReviews.every((r) => r.authority === "product-owner" && r.decision === "approve" && r.recorded_at && r.provenance));
+  assert.deepEqual(approvedForPilot(p, committedReviews), p.allowlist.map((a) => `${a.id}@${a.version}`).sort(), "exactly the allowlist");
   const fresh = reviewRows(p);
   const byId = new Map(fresh.filter((r) => r.kind === "question").map((r) => [r.id, r]));
   const listed = p.allowlist.map((a) => byId.get(a.id)!);

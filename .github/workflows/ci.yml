@@ -254,14 +254,15 @@ jobs:
         run: |
           npm run english:e2e-spelling 2>&1 | tee english-spelling-e2e.log
           ../.github/scripts/require-tests.sh english-spelling-e2e.log "Spelling check end-to-end"
-      - name: A pilot build refuses to build with no educator approvals
+      - name: A pilot build refuses to build with no approvals, and builds from the recorded ones
         working-directory: frontend
         run: |
-          if node scripts/build-english.mjs --pilot --out=dist-english-pilot; then echo "the pilot build must fail closed"; exit 1; fi
+          if node scripts/build-english.mjs --pilot --no-approvals --out=dist-english-pilot; then echo "the pilot build must fail closed"; exit 1; fi
+          node scripts/build-english.mjs --pilot --out=dist-english-pilot
       - name: Serve a pilot build with nothing approved (test build)
         working-directory: frontend
         run: |
-          node scripts/build-english.mjs --pilot --allow-empty --out=dist-english-pilot
+          node scripts/build-english.mjs --pilot --no-approvals --allow-empty --out=dist-english-pilot
           PORT=4177 DIST=dist-english-pilot nohup npm run english:preview > ../english-pilot-web.log 2>&1 &
           curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4177/
       - name: Pilot content-safety boundary in a phone-sized browser

@@ -27,8 +27,12 @@ const approve = (n: number, m: number) => [...placementIds.slice(0, n), ...dicta
 
 const presentedIn = (l: Learner) => l.events.filter((e): e is Extract<AppEvent, { kind: "presented" }> => e.kind === "presented").map((e) => `${e.item.id}@${e.item.version}`);
 
-test("PB-1 nothing is approved in the committed record, so the pilot build shows nothing (fail closed)", async () => {
-  assert.equal(reviews.length, 0, "the committed review record has no decisions: nothing was marked approved automatically");
+test("PB-1 a pilot build with no approvals compiled in shows nothing (fail closed); the committed record holds only the owner's approval of the 291", async () => {
+  const records = reviews as { id: string; version: string; decision: string; authority?: string }[];
+  assert.equal(records.length, PILOT_ALLOWLIST.items.length, "one decision per allowlisted question");
+  assert.ok(records.every((r) => r.decision === "approve" && r.authority === "product-owner"), "owner approvals only: no educator decision is claimed");
+  assert.deepEqual(new Set(records.map((r) => `${r.id}@${r.version}`)), new Set(PILOT_ALLOWLIST.items.map((a) => `${a.id}@${a.version}`)), "exactly the allowlisted questions, nothing else");
+  // a build compiles the approvals in (build-english.mjs); without them nothing is shown
   const c = loadContent({ mode: "pilot" });
   assert.ok(c.gate);
   assert.equal(c.gate.allowed.size, 0);

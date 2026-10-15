@@ -6,11 +6,13 @@
  *                                               product owner to try the pilot experience; labelled as unreviewed)
  *   node scripts/build-english.mjs --pilot   -> dist-english/ for a supervised pilot: the content-safety boundary
  *                                               (content.ts PilotGate). Only placement and the dictation spelling
- *                                               check; only allowlisted questions with an educator approval of that
- *                                               exact id and version (tools/english/pilot/review.ts approved); no
+ *                                               check; only allowlisted questions with a recorded approval (product
+ *                                               owner or educator) of that exact id and version
+ *                                               (tools/english/pilot/review.ts approved); no
  *                                               lessons, no generated practice, no developer dashboard. Fails if
  *                                               nothing is approved, unless --allow-empty (a test build that shows
- *                                               nothing, to check the boundary fails closed).
+ *                                               nothing, to check the boundary fails closed). --no-approvals ignores
+ *                                               the recorded approvals (for that test).
  *
  * Flagged and excluded practice words are never included in any build. See tools/english/spelling/review.ts.
  *
@@ -38,14 +40,15 @@ const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes(
   console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)${mode === "pilot" ? ": a pilot build offers no generated practice" : ""}`);
   for (const r of rows) console.log(`  ${r.rule}: ${r.approved} approved, ${r.unreviewed} unreviewed, ${r.flagged} flagged, ${r.excluded} excluded`);
 }
-// the pilot boundary: the educator approvals compiled into the build (never inferred, never automatic)
+// the pilot boundary: the recorded approvals (product owner or educator) compiled into the build (never inferred)
 let pilotApproved = [];
 if (mode === "pilot") {
-  pilotApproved = approvedForPilot(loadPilot(), JSON.parse(await readFile(REVIEWS, "utf8")));
+  // --no-approvals: a test build that ignores every recorded approval, to prove the boundary fails closed
+  pilotApproved = process.argv.includes("--no-approvals") ? [] : approvedForPilot(loadPilot(), JSON.parse(await readFile(REVIEWS, "utf8")));
   const questions = pilotApproved.filter((k) => !k.startsWith("passage:")).length;
-  console.log(`pilot boundary: ${questions} allowlisted question${questions === 1 ? "" : "s"} approved by an educator; placement and the dictation spelling check only`);
+  console.log(`pilot boundary: ${questions} allowlisted question${questions === 1 ? "" : "s"} approved (by the product owner or an educator); placement and the dictation spelling check only`);
   if (!questions && !process.argv.includes("--allow-empty")) {
-    console.error("A pilot build needs educator approvals: export the review sheet (node tools/english/pilot/review.ts export), have an educator record decisions, import them (review.ts import <file.csv>), then build again. Use --allow-empty only for a test build that shows nothing.");
+    console.error("A pilot build needs approved questions: record approvals (node tools/english/pilot/review.ts import <file.csv>, or the product owner's owner-approve), then build again. Use --allow-empty only for a test build that shows nothing.");
     process.exit(1);
   }
 }
