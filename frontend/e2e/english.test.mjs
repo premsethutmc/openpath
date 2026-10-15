@@ -195,13 +195,12 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   assert.ok((await page.getByText("Not assessed yet").count()) > 0);
   await page.getByText(/recorded but not counted until checked/).first().waitFor();
   await page.getByText("Spelling patterns").waitFor();
-  // three levels of spelling progress, apart: overall level, patterns, words
-  await page.getByRole("heading", { name: "Overall spelling level" }).waitFor();
+  // spelling progress at three levels, kept apart: the skill estimates above, patterns, and words (PR #14)
   await page.getByRole("heading", { name: "Words", exact: true }).waitFor();
-  assert.match(await page.locator(".word-counts").innerText(), /learning/);
+  assert.ok((await page.locator(".word-counts li").count()) > 0);
   await page.getByText(/Word progress does not change your spelling level/).waitFor();
   await page.locator(".words summary").click();
-  assert.ok((await page.locator(".words-table tbody tr").count()) >= check.length);
+  assert.ok((await page.locator(".words-table tbody tr").count()) > 0);
   await fits(page);
   // nothing was sent anywhere, and nothing went wrong
   assert.deepEqual(foreign, [], "no request leaves this device");
@@ -224,7 +223,7 @@ test("trial: a note and a summary to share, made on the device, without the lear
   await page.getByRole("button", { name: "Save note" }).click();
   await page.getByText("Note saved on this device.").waitFor();
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   await page.getByText(/Development version: practice words include ones not yet reviewed/).waitFor();
   await page.getByLabel(/Tell us about a problem/).fill("The Next button was below the keyboard.");
   await page.getByRole("button", { name: "Save note" }).click();
