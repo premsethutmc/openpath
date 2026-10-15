@@ -96,7 +96,8 @@ export function learningPath(profile: LearnerProfile, pilot: string[], lessonsRe
       area: areaWord(cap.id),
       standing: cap.standing,
       stages: stagesOf(cap, taught),
-      line: LINES[cap.standing],
+      // a level shown on draft questions is never presented as verified, even to the child
+      line: cap.mastery === "provisional" ? `${LINES[cap.standing]} (The questions are still being checked by teachers.)` : LINES[cap.standing],
       start,
       later: !start && cap.next ? `${cap.next.what}. ${cap.next.content.available ? "It comes up on Today when it is most useful." : cap.next.content.note + "."}` : null,
     };

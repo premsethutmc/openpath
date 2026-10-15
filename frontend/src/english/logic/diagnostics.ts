@@ -225,6 +225,8 @@ export async function diagnose(c: AppContent, input: DiagnosticInput): Promise<D
       name: x.name,
       area: x.strand,
       standing: x.standing,
+      mastery: x.mastery,
+      mastery_note: x.masteryNote,
       certainty: x.estimate.certainty,
       estimate: { mean: r2(v.mean), sd: r2(v.sd), range_80: [r2(v.mean - 1.2816 * v.sd), r2(v.mean + 1.2816 * v.sd)] },
       direct: { mean: r2(v.direct.mean), sd: r2(v.direct.sd), n: v.direct.n },
@@ -533,7 +535,7 @@ export function reportText(d: Diagnosis): string {
   const own = d.learner_vector.filter((x) => d.evidence.some((e) => e.capability === x.id));
   if (!own.length) P(`   No answers yet.`);
   for (const x of own.sort((a, b) => a.area.localeCompare(b.area) || b.estimate.mean - a.estimate.mean))
-    P(`   ${x.name.padEnd(44).slice(0, 44)} ${String(x.estimate.mean).padStart(5)} ± ${String(x.estimate.sd).padEnd(4)} ${String(x.certainty).padEnd(11)} ${String(x.standing).padEnd(11)} ${x.evidence.independentRight}/${x.evidence.independent} indep${x.evidence.afterTeaching ? `, ${x.evidence.afterTeachingRight}/${x.evidence.afterTeaching} after lesson` : ""}${x.evidence.assisted ? `, ${x.evidence.assistedRight}/${x.evidence.assisted} helped` : ""}`);
+    P(`   ${x.name.padEnd(44).slice(0, 44)} ${String(x.estimate.mean).padStart(5)} ± ${String(x.estimate.sd).padEnd(4)} ${String(x.certainty).padEnd(11)} ${(x.mastery ? `${x.standing}(${x.mastery === "verified" ? "verified" : "provisional"})` : String(x.standing)).padEnd(11)} ${x.evidence.independentRight}/${x.evidence.independent} indep${x.evidence.afterTeaching ? `, ${x.evidence.afterTeachingRight}/${x.evidence.afterTeaching} after lesson` : ""}${x.evidence.assisted ? `, ${x.evidence.assistedRight}/${x.evidence.assisted} helped` : ""}`);
   const moved = d.unknown_and_shortages.moved_only_by_related_skills as string[];
   if (moved.length) P(`   Moved only through related skills: ${moved.slice(0, 8).join("; ")}${moved.length > 8 ? ` (+${moved.length - 8})` : ""}`);
   P();

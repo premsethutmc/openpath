@@ -51,6 +51,14 @@ export interface CapabilityProfile extends CapabilitySnapshot {
   lastAssessedAt: string | null;
   /** Content the evidence came from: every independent answer so far is on draft (unreviewed) questions unless validated. */
   basis: { validated: number; draft: number };
+  /**
+   * For a shown or confirmed capability: "verified" when enough of its independent answers are on educator-approved
+   * (validated) questions, otherwise "provisional" (shown on draft questions, not a verified result). Null otherwise.
+   * The plan may sequence on a provisional level; nothing presents it as verified. Recomputed from the record.
+   */
+  mastery: "verified" | "provisional" | null;
+  /** Why mastery is provisional (or verified), in words. */
+  masteryNote: string | null;
   /** Reading: how many different passages the independent answers came from (answers on one passage are not fully independent). */
   passages: number;
   /** For shown or confirmed: the level the engine currently supports (1–8); always reported with "shown". */
@@ -263,8 +271,20 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     teach.set(id, t);
     const strengths: string[] = [];
     const ver = v.verification;
-    if (standing === "shown" || standing === "confirmed")
-      strengths.push(`${standing === "confirmed" ? "Shown on their own, and still right at a later check" : "Shown on their own, on fresh questions"}${ver.currentLevel !== null ? `, at about level ${ver.currentLevel} of 8 (a level shown, not a ceiling: harder questions may still be wrong)` : ""}${x.validated ? "" : ". On draft questions, not yet reviewed by a teacher"}.`);
+    const shownNow = standing === "shown" || standing === "confirmed";
+    const verifiedNeeds = c.index.framework.policy.demonstrated_min_direct;
+    const mastery = shownNow ? (x.validated >= verifiedNeeds ? "verified" : "provisional") : null;
+    const masteryNote = !shownNow
+      ? null
+      : mastery === "verified"
+        ? `Verified: ${x.validated} of the independent answers are on educator-approved questions.`
+        : `Provisional: shown on draft questions that an educator has not yet approved (${x.validated} of the ${verifiedNeeds} independent answers on approved questions needed for a verified result).`;
+    if (shownNow)
+      strengths.push(
+        mastery === "verified"
+          ? `${standing === "confirmed" ? "Shown on their own, and still right at a later check" : "Shown on their own, on fresh questions"}${ver.currentLevel !== null ? `, at about level ${ver.currentLevel} of 8 (a level shown, not a ceiling: harder questions may still be wrong)` : ""}. Verified on educator-approved questions.`
+          : `Provisionally shown on their own${standing === "confirmed" ? ", and still right at a later check" : ", on fresh questions"}${ver.currentLevel !== null ? `, at about level ${ver.currentLevel} of 8` : ""}: on draft questions not yet approved by an educator, so not a verified result.`,
+      );
     // never claimed when the learner's own answers were mostly wrong (the engine's floor can "demonstrate" level 1
     // from wrong answers alone): the same rule as for "shown" (PC-11)
     if (ver.historicalLevel !== null && standing !== "shown" && standing !== "confirmed" && standing !== "found_hard" && x.e.independentRight * 2 >= x.e.independent) strengths.push("Shown earlier; not currently confirmed.");
@@ -317,6 +337,8 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       retention,
       lastAssessedAt: v.lastDirectAt ?? x.lastAt,
       basis: { validated: x.validated, draft: x.draft },
+      mastery,
+      masteryNote,
       shownLevel: standing === "shown" || standing === "confirmed" ? ver.currentLevel : null,
       passages: x.passages.size,
       notes: [],

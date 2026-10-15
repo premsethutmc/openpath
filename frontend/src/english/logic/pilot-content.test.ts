@@ -211,5 +211,5 @@ test("PC-11 a skill is never reported as shown while its own answers are mostly 
   const cap = l.profile().capabilities.find((x) => x.id === MAIN)!;
   assert.equal(cap.evidence.independentRight, 0);
   assert.equal(cap.standing, "found_hard");
-  assert.deepEqual(cap.strengths.filter((t) => /Shown on their own/.test(t)), []);
+  assert.deepEqual(cap.strengths.filter((t) => /shown on their own/i.test(t)), []);
 });

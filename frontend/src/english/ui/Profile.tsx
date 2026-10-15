@@ -12,13 +12,13 @@ export function ParentOverviewView({ profile, overview }: { profile: LearnerProf
     <section className="overview" aria-labelledby="overview-title">
       <h2 id="overview-title">Overview for a parent or teacher</h2>
       <dl>
-        <dt>Demonstrated independently</dt>
+        <dt>Demonstrated independently{o.shown.some((x) => x.mastery !== "verified") ? " (provisional unless marked verified)" : ""}</dt>
         <dd data-part="shown">
           {o.shown.length ? (
             <>
               <ul>
                 {o.shown.map((x) => (
-                  <li key={x.id}>{`${x.name}${x.shownLevel !== null ? `: at about level ${x.shownLevel} of 8` : ""}.`}</li>
+                  <li key={x.id} data-mastery={x.mastery ?? ""}>{`${x.name}${x.shownLevel !== null ? `: at about level ${x.shownLevel} of 8` : ""}${x.mastery === "verified" ? " (verified on educator-approved questions)" : " (provisional: on draft questions, not yet approved by an educator)"}.`}</li>
                 ))}
               </ul>
               <p className="small">Shown on fresh questions, without help, outside a lesson. The level is what has been shown, not a ceiling: harder questions at that skill may still be wrong.</p>

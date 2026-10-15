@@ -178,36 +178,41 @@ engine can "demonstrate" level 1 from wrong answers alone once two formats have 
 common. The line is no longer listed while most of the pupil's own answers are wrong. Only the strength text
 changes, not the standing or the plan. Please confirm it, or I will revert it.
 
-## 6. Awaiting approval
+## 6. Policy decisions
 
-These change the wider mastery or teaching policy. **None has been changed**, beyond labelling.
+**A. Approved and implemented (15 October): unreviewed questions cannot establish verified mastery.**
+- Every "shown" or "confirmed" capability now carries `mastery`:
+  - **provisional:** shown on draft questions;
+  - **verified:** at least 3 independent answers on educator-approved questions.
 
-**A. Unreviewed questions cannot verify mastery.**
-- **Proposal:** "shown" or "confirmed" needs at least 3 qualifying answers on approved questions. Otherwise the
-  profile shows a provisional level ("shown on draft questions, awaiting review"), with the reason.
-- **Data:** no stored data changes and nothing is relabelled. It is recomputed from history when the profile is
-  read.
-- **Effect:**
-  - all subjects;
-  - no pupil can be verified until an educator approves questions (0 are approved today);
-  - recommended: the plan treats "shown on draft" as shown for sequencing.
-- **Today:** "On draft questions, not yet reviewed by a teacher" is already appended.
+  It also carries a `masteryNote` saying why.
+- **Where it appears:**
+  - parents read "Provisionally shown … not a verified result";
+  - the overview marks each item provisional or verified;
+  - the Journey path tells the child "the questions are still being checked by teachers";
+  - Progress, the developer dashboard and reports show it.
+- **What does not change:**
+  - provisional evidence still updates the estimates, and the planner still sequences on it;
+  - no history is relabelled. The status is recomputed from the record, so approving a question later makes earlier
+    answers on it count as verified evidence.
+- **Today:** no question is approved, so every mastery is provisional.
 
-**C. Never "shown" while most of the pupil's own answers are wrong.** Testing found a skill reported "shown" at a low
-level with 2 of 6 right. The engine demonstrates a low level from wrong answers on harder words, and the existing
-"found hard" test needs more answers before it fires.
-- **Proposal:** add "at least half of the independent answers right" to "shown" and "confirmed".
-- **Not implemented:** it was briefly, then reverted, because it changes standings across all subjects. Counted over
-  all time, it would also stop a pupil who was wrong before teaching and right afterwards (say 0 of 5, then 4 of 4)
-  from ever being shown.
-- **Better option for review:** count only answers since the last teaching, or the most recent N.
+**B. Approved and implemented (15 October): one error is a suspicion to probe, not a reason to teach.**
+- **One tagged error:** the misconception is suspected, and the spelling check's next word is a follow-up that probes
+  it. The spelling plan gives it no teaching priority. Its reason says "a suspicion, so the next check looks again
+  before any teaching".
+- **One misspelt word in a check:** no teaching priority either. This was +2 before.
+- **When teaching becomes possible:** corroborating errors on separate questions ("supported"), or 2 or more misspelt
+  words on the pattern, may lead to targeted teaching.
+- **Statuses and evidence:** suspected, supported and resolved are kept with their evidence (which questions, and
+  when) in the dashboard, the reports and `misconceptions.ts`.
 
-**B. Only supported misconceptions drive teaching.**
-- **Proposal:** a suspected misconception triggers a follow-up question, not a lesson.
-- **Data:** derived from history.
-- **Effect:**
-  - Today lists can change for existing pupils;
-  - in the spelling plan, one misspelt word currently marks a pattern "needs work".
+**Kept as approved:** "Shown earlier; not currently confirmed" is not listed as a strength while most answers are
+wrong.
+
+**C. Not implemented.** The lifetime 50% rule is rejected. A rule that tells old mistakes from recent improvement is
+proposed, with worked examples, in `MASTERY_RULE_PROPOSAL.md`. That document also has the audit of misconception
+resolution: two right answers on **easier** words currently resolve an error on a harder word.
 
 ## 7. History and the older check
 

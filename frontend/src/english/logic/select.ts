@@ -6,6 +6,7 @@
 import { type EvidenceUse, type Goal, type Item, type LeafView, type Recommendation, type SelectionInput, fnv1a, leafView, recommend } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED, type Pool, lessonId } from "./content.ts";
 import type { Planned, SelectionTrace } from "./events.ts";
+import { misconceptionFindings } from "./misconceptions.ts";
 import { selectionTrace } from "./trace.ts";
 import { type AppState, type PatternStatus, type SessionState, dueWords, patternKey, patternStatus } from "./state.ts";
 
@@ -456,6 +457,7 @@ export interface PatternPlan {
 /** Every spelling pattern with its status and why it comes where it does. Highest priority first. */
 export function spellingPlan(s: AppState, c: AppContent, now: string, speech: boolean): PatternPlan[] {
   const out: PatternPlan[] = [];
+  const findings = misconceptionFindings(s, c);
   for (const p of spellingPatterns(c)) {
     const v = view(s, c, p.cap, now);
     const rec = s.patterns.get(patternKey(p.cap, p.step));
@@ -473,16 +475,21 @@ export function spellingPlan(s: AppState, c: AppContent, now: string, speech: bo
       priority += 1.5;
       reasons.push(status === "check_again" ? "the last check with new words did not go well yet" : "already started");
     }
-    if (rec && rec.check.total > rec.check.right) {
+    // one error is a suspicion to probe, not a reason to teach; errors on separate words may lead to teaching
+    const wrongInChecks = rec ? rec.check.total - rec.check.right : 0;
+    if (wrongInChecks >= 2) {
       priority += 2;
-      reasons.push("a word with this pattern was misspelt in the spelling check");
-    }
-    const tags = new Set(v.misconceptions.map((m) => m.id));
-    const linked = Object.entries(MISCONCEPTION_STEPS).filter(([m, steps]) => tags.has(m) && steps.includes(p.step)).map(([m]) => m);
-    if (linked.length) {
+      reasons.push(`${wrongInChecks} words with this pattern were misspelt in spelling checks`);
+    } else if (wrongInChecks === 1) reasons.push("one error with this pattern in a check so far: a suspicion, so the next check looks again before any teaching");
+    const linkedTo = (status: string) =>
+      findings.filter((f) => f.capability === p.cap && f.status === status && (MISCONCEPTION_STEPS[f.misconception] ?? []).includes(p.step)).map((f) => f.misconception.replace(/_/g, " "));
+    const supported = linkedTo("supported");
+    if (supported.length) {
       priority += 1.5;
-      reasons.push(`a recent mistake points here (${linked.join(", ").replace(/_/g, " ")})`);
+      reasons.push(`a pattern in mistakes on separate questions points here (${supported.join(", ")})`);
     }
+    const suspected = linkedTo("suspected");
+    if (suspected.length) reasons.push(`possibly ${suspected.join(", ")} (one error so far): to be probed, not yet taught`);
     if (rec && rec.check.total && rec.check.right === rec.check.total && status === "not_started") {
       priority -= 2;
       reasons.push("spelt correctly in the spelling check");

@@ -378,13 +378,14 @@ function PupilDiagnostics({ api, id, serverCommit, onBack }: { api: Api; id: str
       <Section title="Learner Vector (skills with answers)" open count={own.length}>
         <Table
           label="Learner Vector"
-          head={["skill", "estimate ± sd", "80% range", "certainty", "standing", "engine stage", "independent", "after lesson", "helped"]}
+          head={["skill", "estimate ± sd", "80% range", "certainty", "standing", "mastery", "engine stage", "independent", "after lesson", "helped"]}
           rows={own.map((x) => [
             <span title={x.id}>{x.name}</span>,
             `${x.estimate.mean} ± ${x.estimate.sd}`,
             `${x.estimate.range_80[0]}–${x.estimate.range_80[1]}`,
             x.certainty,
             x.standing,
+            x.mastery ? <span title={x.mastery_note ?? ""}>{x.mastery}</span> : "–",
             x.engine_stage,
             `${x.evidence.independentRight}/${x.evidence.independent}`,
             `${x.evidence.afterTeachingRight}/${x.evidence.afterTeaching}`,

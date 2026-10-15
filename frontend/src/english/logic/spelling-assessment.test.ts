@@ -14,7 +14,7 @@ import { Learner } from "./learner.ts";
 import { feedbackFor, mentionsDictationWord } from "./feedback.ts";
 import { classifyError, misconceptionFindings } from "./misconceptions.ts";
 import { respond } from "./profile-sim.ts";
-import { DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext } from "./select.ts";
+import { DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext, spellingPlan } from "./select.ts";
 import { fold } from "./state.ts";
 import { MemoryRepo } from "./store.ts";
 
@@ -312,4 +312,61 @@ test("simulated pupils (model check, not validity): the estimate moves towards e
   }
   // printed for the record; the numbers depend on the model's own assumptions
   console.log(rows.join("\n"));
+});
+
+// ------------------------------------------------------------------ approved policy A and B
+
+test("A: a skill shown on draft questions is provisional, never presented as verified; approved questions make it verified", async () => {
+  const run = async (content: typeof c) => {
+    let t = Date.parse("2026-10-15T09:00:00.000Z");
+    const l = await Learner.create(content, new MemoryRepo(), "Sim", "guardian", () => new Date((t += 30_000)).toISOString(), "a");
+    l.speechAvailable = true;
+    await l.start({ type: "placement" });
+    for (let i = 0; i < 40; i++) {
+      const cur = await l.current();
+      if (!cur.next) break;
+      await l.answer(cur.next.item, respond(cur.next.item, true), { use: cur.next.use });
+    }
+    let cur = await l.start({ type: "spelling_assess" });
+    while (cur.next) {
+      await l.answer(cur.next.item, { kind: "typed", text: (cur.next.item as Code).answers![0] }, { use: "assessment" });
+      cur = await l.current();
+    }
+    return l.profile().capabilities.find((x) => x.id === "EN.FND.SPL.inflections")!;
+  };
+  const draft = await run(c);
+  assert.ok(["shown", "confirmed"].includes(draft.standing), draft.standing);
+  assert.equal(draft.mastery, "provisional");
+  assert.match(draft.masteryNote!, /not yet approved/);
+  assert.ok(draft.strengths.some((t) => /Provisionally shown.*not a verified result/.test(t)));
+  assert.ok(!draft.strengths.some((t) => /Verified/.test(t)));
+  // the same answers on questions an educator has approved: verified (a copy of the content; nothing on disk changes)
+  const approved = structuredClone(c);
+  for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === "EN.FND.SPL.inflections") (it as Code).evidence_status = "validated";
+  const verified = await run(approved);
+  assert.equal(verified.standing, draft.standing, "the standing and the plan are unchanged: only the claim differs");
+  assert.equal(verified.mastery, "verified");
+  assert.ok(verified.strengths.some((t) => /Verified on educator-approved questions/.test(t)));
+});
+
+test("B: one misspelt word is a suspicion to probe, not a reason to teach; errors on separate words may lead to teaching", async () => {
+  const l = await learner((b) => b <= 3.5);
+  const doubling = bank.filter((i) => i.step === "double_short");
+  const reasonsFor = () => spellingPlan(l.state, c, l.clock(), true).find((p) => p.cap === "EN.FND.SPL.inflections" && p.step === "double_short")!;
+  await l.start({ type: "spelling_assess" });
+  await l.answer(doubling[0], { kind: "typed", text: Object.keys(doubling[0].wrong!)[0] }, { use: "assessment" });
+  await l.stop();
+  const one = reasonsFor();
+  assert.ok(one.reasons.some((r) => /a suspicion/.test(r)) && one.reasons.some((r) => /to be probed, not yet taught/.test(r)), one.reasons.join(" | "));
+  assert.ok(!one.reasons.some((r) => /misspelt|mistakes on separate/.test(r)), "nothing that the plan reads as a reason to teach");
+  await l.start({ type: "spelling_assess" });
+  await l.answer(doubling[1], { kind: "typed", text: Object.keys(doubling[1].wrong!)[0] }, { use: "assessment" });
+  await l.stop();
+  const two = reasonsFor();
+  assert.ok(two.reasons.some((r) => /2 words with this pattern were misspelt/.test(r)) && two.reasons.some((r) => /mistakes on separate questions points here \(no doubling\)/.test(r)), two.reasons.join(" | "));
+  assert.ok(two.priority > one.priority + 3, "corroborated: a reason to teach");
+  // the statuses keep their evidence: which questions, when
+  const f = misconceptionFindings(l.state, c).find((x) => x.misconception === "no_doubling")!;
+  assert.equal(f.status, "supported");
+  assert.deepEqual(f.errors.map((e) => e.item), [doubling[0].id, doubling[1].id]);
 });

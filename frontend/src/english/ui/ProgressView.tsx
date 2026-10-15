@@ -32,7 +32,7 @@ export function ProgressView({ learner }: { learner: Learner }) {
         </div>
         <div className="stat">
           <b>{shown}</b>
-          <small>shown on your own</small>
+          <small>shown on your own{checked.some((x) => x.mastery === "provisional") ? " (on draft questions)" : ""}</small>
         </div>
       </div>
       <section aria-labelledby="profile-title">
