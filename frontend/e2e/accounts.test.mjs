@@ -195,6 +195,8 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   // a parent's word lists stay on the device: My Words is not offered for a pupil saved in the account
   await page.getByText(/My Words is for learners saved on this device, not in a parent account/).waitFor();
   assert.equal(await page.getByRole("button", { name: /Add a word list|Open My Words/ }).count(), 0);
+  await page.getByText(/My Books is for learners saved on this device, not in a parent account/).waitFor();
+  assert.equal(await page.getByRole("button", { name: /Add a book|Open My Books/ }).count(), 0);
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
   // … Arun completes the first assessment
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();

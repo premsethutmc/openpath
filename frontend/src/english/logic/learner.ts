@@ -21,6 +21,7 @@ import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
 import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
+import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
 
@@ -167,7 +168,8 @@ export class Learner {
       const l = this.wordLists().find((x) => x.id === source.id);
       return l ? listWords(l) : [];
     }
-    return [];
+    const b = this.books().find((x) => x.id === source.id);
+    return b ? bookWords(b, this.bookActivities(b)) : [];
   }
 
   // ------------------------------------------------------------------ My Words (logic/wordlists.ts)
@@ -204,6 +206,72 @@ export class Learner {
     const open = this.spelling().open;
     if (open?.event.source.type === "list" && open.event.source.id === id) await this.stopSpelling();
     await this.add({ kind: "word_list_delete", id: this.nextId(), at: this.clock(), list: id });
+  }
+
+  // ------------------------------------------------------------------ My Books (logic/books.ts)
+
+  private bookCache: { n: number; books: Book[] } | null = null;
+  private extractions = new Map<string, Extraction>();
+
+  /** The parent's books, newest first. */
+  books(): Book[] {
+    if (this.bookCache?.n !== this.events.length) this.bookCache = { n: this.events.length, books: books(this.events) };
+    return this.bookCache.books;
+  }
+
+  /** Every activity found in a book's text (approved or not: for the parent's review only). */
+  bookActivities(b: Pick<Book, "text">): Extraction {
+    const text = tidyText(b.text);
+    let ex = this.extractions.get(text);
+    if (!ex) this.extractions.set(text, (ex = extract(text)));
+    return ex;
+  }
+
+  /** The approved questions of a book, in the order to ask them, and how many have been answered. */
+  bookQuestions(id: string, size = 10) {
+    const b = this.books().find((x) => x.id === id);
+    if (!b) return { plan: [] as BookQuestion[], progress: { total: 0, answered: 0, right: 0 } };
+    return questionPlan(approvedActivities(b, this.bookActivities(b)).questions, this.events, id, size);
+  }
+
+  /**
+   * Save a book and the parent's review: the text (when new or changed) and the activities approved for exactly this
+   * text. Ids that are not activities of this text are ignored. Approving nothing is allowed: the learner then sees
+   * nothing from the book.
+   */
+  async saveBook(title: string, text: string, approved: string[], id?: string): Promise<string> {
+    this.guard("My Books");
+    this.guardPrivate("My Books");
+    const t = title.trim().slice(0, BOOK_LIMITS.titleLength);
+    const body = tidyText(text);
+    if (!t) throw new Error("give the book a title");
+    if (!body) throw new Error("the book has no text");
+    if (body.length > BOOK_LIMITS.chars) throw new Error(`the text has ${body.length.toLocaleString("en-GB")} characters; My Books takes up to ${BOOK_LIMITS.chars.toLocaleString("en-GB")}`);
+    const bookId = id ?? `book:${this.events.length + 1}`;
+    const old = this.books().find((b) => b.id === bookId);
+    if (!old || old.title !== t || tidyText(old.text) !== body) await this.add({ kind: "book", id: this.nextId(), at: this.clock(), book: { id: bookId, title: t, text: body } });
+    const ex = this.bookActivities({ text: body });
+    const known = new Set([...ex.spelling, ...ex.vocabulary, ...ex.comprehension].map((a) => a.id));
+    await this.add({ kind: "book_review", id: this.nextId(), at: this.clock(), book: bookId, fingerprint: ex.fingerprint, approved: [...new Set(approved)].filter((a) => known.has(a)).sort() });
+    return bookId;
+  }
+
+  /** Remove a book (its answers stay in the record). An open spelling session on it is ended. */
+  async deleteBook(id: string): Promise<void> {
+    const open = this.spelling().open;
+    if (open?.event.source.type === "book" && open.event.source.id === id) await this.stopSpelling();
+    await this.add({ kind: "book_delete", id: this.nextId(), at: this.clock(), book: id });
+  }
+
+  /** Answer one of a book's approved questions. Practice only: never engine evidence. */
+  async answerBookQuestion(bookId: string, questionId: string, response: string): Promise<{ correct: boolean; answer: string }> {
+    this.guard("My Books");
+    const b = this.books().find((x) => x.id === bookId);
+    const q = b && approvedActivities(b, this.bookActivities(b)).questions.find((x) => x.id === questionId);
+    if (!q) throw new Error("this question is not approved for the learner");
+    const correct = response === q.answer;
+    await this.add({ kind: "book_answer", id: this.nextId(), at: this.clock(), book: bookId, question: questionId, response, correct });
+    return { correct, answer: q.answer };
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */

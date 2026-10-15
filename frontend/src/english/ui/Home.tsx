@@ -25,7 +25,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void }) {
+export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -47,6 +47,7 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMy
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
       <BeeCard learner={learner} onBee={onBee} />
       <MyWordsCard learner={learner} onOpen={onMyWords} />
+      <MyBooksCard learner={learner} onOpen={onMyBooks} />
       <h2 className="section-title general-title">General English</h2>
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
@@ -167,6 +168,29 @@ function MyWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
           {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
           <button type="button" className="secondary" onClick={onOpen}>
             {n ? "Open My Words" : "Add a word list"}
+          </button>
+        </>
+      )}
+    </section>
+  );
+}
+
+function MyBooksCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const n = learner.books().length;
+  return (
+    <section className="hub-card plain" aria-labelledby="mybooks-card-title">
+      <h2 id="mybooks-card-title">
+        <span aria-hidden="true">📚 </span>My Books
+      </h2>
+      <p>Spelling and questions from a book you supply, checked by a parent first.</p>
+      {!learner.keepsParentContent ? (
+        <p className="small">A book's text is kept on the device only, so My Books is for learners saved on this device, not in a parent account.</p>
+      ) : (
+        <>
+          {n > 0 && <p className="small">{n === 1 ? "1 book saved" : `${n} books saved`}</p>}
+          <button type="button" className="secondary" onClick={onOpen}>
+            {n ? "Open My Books" : "Add a book"}
           </button>
         </>
       )}

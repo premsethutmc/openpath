@@ -316,7 +316,40 @@ export interface WordListDeleteEvent {
   at: string;
   list: string;
 }
-export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent;
+/** My Books (logic/books.ts): a parent's book text, the activities the parent approved for it, and the answers. */
+export interface BookEvent {
+  kind: "book";
+  id: string;
+  at: string;
+  /** The whole text each time it is saved (only when the title or text changed). */
+  book: { id: string; title: string; text: string };
+}
+export interface BookReviewEvent {
+  kind: "book_review";
+  id: string;
+  at: string;
+  book: string;
+  /** The fingerprint of the text the parent reviewed: the approvals count only while the text is the same. */
+  fingerprint: string;
+  /** The activity ids the parent approved; everything else stays hidden from the learner. */
+  approved: string[];
+}
+export interface BookAnswerEvent {
+  kind: "book_answer";
+  id: string;
+  at: string;
+  book: string;
+  question: string;
+  response: string;
+  correct: boolean;
+}
+export interface BookDeleteEvent {
+  kind: "book_delete";
+  id: string;
+  at: string;
+  book: string;
+}
+export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent | BookEvent | BookReviewEvent | BookAnswerEvent | BookDeleteEvent;
 
 export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
@@ -325,7 +358,7 @@ const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke",
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end"]);
 
@@ -342,6 +375,13 @@ export function eventProblem(e: unknown): string | null {
   if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
   if (x.kind === "word_list" && (typeof (x.list as { id?: unknown } | undefined)?.id !== "string" || !Array.isArray((x.list as { words?: unknown }).words))) return `event ${x.id} is a word list without words`;
   if (x.kind === "word_list_delete" && typeof x.list !== "string") return `event ${x.id} names no word list`;
+  if (x.kind === "book") {
+    const b = x.book as { id?: unknown; title?: unknown; text?: unknown } | undefined;
+    if (typeof b?.id !== "string" || typeof b.title !== "string" || typeof b.text !== "string") return `event ${x.id} is a book without its text`;
+  }
+  if (x.kind === "book_review" && (typeof x.book !== "string" || typeof x.fingerprint !== "string" || !Array.isArray(x.approved) || !(x.approved as unknown[]).every((a) => typeof a === "string"))) return `event ${x.id} is a book review without its approvals`;
+  if (x.kind === "book_answer" && (typeof x.book !== "string" || typeof x.question !== "string" || typeof x.correct !== "boolean")) return `event ${x.id} is a book answer without its question`;
+  if (x.kind === "book_delete" && typeof x.book !== "string") return `event ${x.id} names no book`;
   if (x.kind.startsWith("spell_") && x.kind !== "spell_end" && !["bank", "list", "book"].includes((x.source as { type?: string } | undefined)?.type ?? "")) return `event ${x.id} names no spelling source`;
   if (x.kind === "spell_answer" && (typeof (x.word as { id?: unknown } | undefined)?.id !== "string" || typeof x.correct !== "boolean" || typeof x.response !== "string")) return `event ${x.id} is a spelling answer without a word or result`;
   return null;
