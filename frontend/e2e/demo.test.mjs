@@ -189,3 +189,63 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("spoken words behind the demo login: the app asks the browser's voice to say each dictation word (playback only, no microphone)", async () => {
+  // headless Chromium has no voices: a stand-in voice records what the app asks it to say (as in e2e/spelling.test.mjs)
+  const context = await browser.newContext(ANDROID);
+  await context.addInitScript(() => {
+    const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
+    window.__spoken = [];
+    window.SpeechSynthesisUtterance = class {
+      constructor(text) {
+        this.text = text;
+      }
+    };
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  const spoken = () => page.evaluate(() => window.__spoken.slice());
+  await page.goto(URL_ + "/login");
+  await page.locator("#password").fill(PASSWORD);
+  await page.getByRole("button", { name: "Log in" }).click();
+  const app = await page.request.get(URL_ + "/");
+  assert.match(app.headers()["permissions-policy"], /microphone=\(\)/, "the microphone stays off: dictation only plays speech");
+  await page.getByRole("button", { name: "Let's begin" }).click();
+  await page.getByLabel(/Name to show/).fill("Voice Learner");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.getByRole("button", { name: "I'm ready" }).click();
+  await finish(page, () => true);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
+  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".spelling-intro").waitFor();
+  await page.getByRole("button", { name: "Test the sound" }).click();
+  assert.deepEqual(await spoken(), ["Ready? Here is a test word: garden."]);
+  await page.getByRole("button", { name: "Start the spelling check" }).click();
+  for (let k = 0; k < 3; k++) {
+    await page.locator(".item").waitFor();
+    const item = items.get(await page.locator(".item").getAttribute("data-item"));
+    assert.equal(item.format, "typed:dictation");
+    const word = item.answers[0];
+    // said by itself as soon as it is shown (the word, its sentence, the word), and never written on the screen
+    await page.waitForFunction((w) => window.__spoken.some((x) => x === w || x.startsWith(`${w}. `)), word);
+    assert.ok(!(await page.locator("main").innerText()).toLowerCase().includes(word), `${word} is not shown before the answer`);
+    if (k === 0) {
+      await page.getByRole("button", { name: "Repeat the word" }).click();
+      assert.equal((await spoken()).at(-1), word, "Repeat says the word again");
+    }
+    await page.locator(".ruled input").fill(word);
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+    await page.locator(".feedback").waitFor();
+    await page.getByRole("button", { name: "Next" }).click();
+    await page.locator(".feedback").waitFor({ state: "detached" });
+  }
+  assert.ok((await spoken()).length >= 5);
+  assert.deepEqual(errors, []);
+  await context.close();
+});

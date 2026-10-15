@@ -28,11 +28,11 @@ let clock = Date.parse("2026-10-15T10:00:00Z");
 const servers = [];
 
 /** A server on a free port, with its own clock and login limits. */
-async function start(overrides = {}, limits) {
+async function start(overrides = {}, limits, extra = {}) {
   const { problems, config } = configFromEnv({ DEMO_PASSWORD_HASH: hashText, DEMO_SESSION_SECRET: SECRET, DEMO_DIST: dist, DEMO_SESSION_HOURS: "2", ...overrides });
   assert.deepEqual(problems, []);
   const logs = [];
-  const server = createDemoServer(config, { now: () => clock, log: (l) => logs.push(l), ...(limits ? { limits } : {}) });
+  const server = createDemoServer(config, { now: () => clock, log: (l) => logs.push(l), ...(limits ? { limits } : {}), ...extra });
   await new Promise((r) => server.listen(0, "127.0.0.1", r));
   servers.push(server);
   const base = `http://127.0.0.1:${server.address().port}`;
@@ -167,6 +167,31 @@ test("DS-6 login attempts are limited per client and in total, even for the righ
   // the window passes
   clock += 16 * 60_000;
   assert.equal((await login(PASSWORD)).status, 303);
+});
+
+test("DS-10 a burst of simultaneous guesses cannot pass the limits, and passwords are checked one at a time", async () => {
+  let running = 0;
+  let most = 0;
+  const verify = async (password, parsed) => {
+    running++;
+    most = Math.max(most, running);
+    try {
+      return await verifyPassword(password, parsed);
+    } finally {
+      running--;
+    }
+  };
+  const one = await start({}, undefined, { verify });
+  const burst = await Promise.all(Array.from({ length: 40 }, () => one.login("wrong").then((r) => r.status)));
+  assert.equal(burst.filter((s) => s === 401).length, 5, "exactly the per-client limit is checked");
+  assert.equal(burst.filter((s) => s === 429).length, 35);
+  assert.equal(most, 1, "never more than one scrypt check at once (32 MB each)");
+  // many clients at once: at most the queue is accepted; the rest are turned away at once
+  const many = await start({}, { perClient: 5, total: 30, windowMs: 15 * 60_000, queue: 8 }, { verify });
+  const spread = await Promise.all(Array.from({ length: 40 }, (_, i) => many.login("wrong", { "x-forwarded-for": `198.51.100.${i + 1}` }).then((r) => r.status)));
+  assert.ok(spread.filter((s) => s === 401).length <= 8, `${spread.filter((s) => s === 401).length} checked`);
+  assert.equal(spread.filter((s) => s === 401).length + spread.filter((s) => s === 429).length, 40);
+  assert.equal(most, 1);
 });
 
 test("DS-7 headers: HTTPS only, HSTS, no framing, no indexing, no permissions; logs never hold secrets", async () => {

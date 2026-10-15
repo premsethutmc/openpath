@@ -91,8 +91,17 @@ The demo changes no build mode or safety check, and it makes no approvals.
 **Limits on logging in:**
 - 5 failed attempts per client in 15 minutes, and 30 in total, before logging in is refused, even with the right
   password, until the window passes.
-- The client is identified by the last `X-Forwarded-For` entry, the one Render's proxy adds, which a client cannot
-  forge.
+- An attempt counts from the moment it arrives, not when its check ends. Passwords are checked one at a time (each
+  check uses 32 MB), with at most 8 waiting, and anything more is turned away at once. A burst of simultaneous
+  guesses therefore cannot get past the limits or exhaust the free instance's 512 MB. Test DS-10 covers this; before
+  this correction, 40 simultaneous guesses were all checked.
+- **The client is identified by the last `X-Forwarded-For` entry.** Render does not document its proxy headers, and
+  reports conflict on which entry is the real client. So the per-client limit may group visitors together, or let a
+  client choose its own label. **The total limit (30 per 15 minutes) does not depend on any header,** and it is the
+  guarantee: at most about 2,900 guesses a day, against a passphrase of four or five random words.
+- **Trade-off, deliberately kept:** someone who finds the address can lock the owner out for 15 minutes at a time, by
+  making failed attempts. For an unlisted, unindexed, owner-only demo this is accepted, in favour of a strict limit
+  on guessing. If it ever happens, wait, or redeploy, which also resets the counters.
 
 **HTTPS:**
 - Plain HTTP requests are redirected to HTTPS.
@@ -113,6 +122,12 @@ The demo changes no build mode or safety check, and it makes no approvals.
 - **Logs** record only the method, path, status and time: never cookies, form bodies, passwords or query strings.
 - **Logout and login posts from other sites are refused** (an Origin and `Sec-Fetch-Site` check).
 - **Build files are never served:** `_headers` and `BUILD`, and the build's caching service worker.
+
+## Sound
+
+The spelling check only **plays** speech. It uses the phone's own text-to-speech voice (`speechSynthesis`, with
+local voices only). No feature records sound, so the server keeps the microphone (and the camera) switched off in
+`Permissions-Policy`. Playing speech needs no permission. No audio files are loaded.
 
 ## Data in the demo
 
@@ -204,7 +219,7 @@ no build. It never starts open.
 ## Tests
 
 **Automated, run in CI:**
-- **`frontend/scripts/demo-server.test.mjs` (DS-1 to DS-9):**
+- **`frontend/scripts/demo-server.test.mjs` (DS-1 to DS-10):**
   - nothing is served before logging in;
   - a wrong password is refused, and the right one works;
   - logout revokes the session;
@@ -213,7 +228,8 @@ no build. It never starts open.
   - headers and the HTTPS redirect;
   - logs hold no secrets;
   - the server refuses to start without configuration;
-  - no secret is in the built app.
+  - no secret is in the built app;
+  - a burst of simultaneous guesses cannot pass the limits, and passwords are checked one at a time (DS-10).
 - **`frontend/e2e/demo.test.mjs`:** the real development build behind the login, in Chromium emulating a 412×915
   Android phone. It covers:
   - the login wall;
@@ -224,6 +240,10 @@ no build. It never starts open.
   - logout and erase;
   - no sideways scrolling;
   - no requests to other sites.
+
+  A second test uses a stand-in voice to check that the app asks the browser to say each dictation word, and Repeat,
+  without ever showing the word. The microphone stays off. Headless Chromium has no real voice, so actual sound is
+  checked only on the phone.
 
 **Still to do on a real Android phone** (not done; emulation is not a phone):
 - open the Render address and log in;

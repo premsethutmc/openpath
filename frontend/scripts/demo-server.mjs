@@ -91,10 +91,12 @@ export function configFromEnv(env = process.env) {
 }
 
 /**
- * The request handler. `now` and `log` are injectable for tests. Limits: 5 failed logins per client and 30 in total
- * per 15 minutes.
+ * The request handler. `now`, `log` and `verify` are injectable for tests. Limits: 5 failed logins per client and 30
+ * in total per 15 minutes. An attempt counts from the moment it arrives (not when its check ends), and passwords are
+ * checked one at a time (each scrypt check holds 32 MB), with at most `queue` attempts waiting: so a burst of
+ * simultaneous guesses can neither get past the limits nor exhaust the instance's memory.
  */
-export function createDemoServer(config, { now = () => Date.now(), log = (line) => console.log(line), limits = { perClient: 5, total: 30, windowMs: 15 * 60_000 } } = {}) {
+export function createDemoServer(config, { now = () => Date.now(), log = (line) => console.log(line), limits = { perClient: 5, total: 30, windowMs: 15 * 60_000, queue: 8 }, verify = verifyPassword } = {}) {
   const dist = realpathSync(config.dist);
   // the signing key depends on the password hash too: a new password ends every session
   const key = createHmac("sha256", config.secret).update(`openpath-demo-session|${config.hashText}`).digest();
@@ -102,6 +104,9 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
   const revoked = new Map(); // session id -> expiry
   const failures = new Map(); // client -> [times]
   let totalFailures = [];
+  const inFlight = new Map(); // client -> attempts being checked now
+  let totalInFlight = 0;
+  let checking = Promise.resolve(); // password checks run one after another
 
   const sign = (payload) => createHmac("sha256", key).update(payload).digest("base64url");
   const issue = () => {
@@ -133,10 +138,12 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
   };
   const cookie = (value, maxAge) => [`${cookieName}=${value}`, "Path=/", "HttpOnly", "SameSite=Strict", `Max-Age=${maxAge}`, ...(config.allowHttp ? [] : ["Secure"])].join("; ");
 
-  // Render's proxy appends the client address to X-Forwarded-For: the last entry is the one a client cannot forge
+  // the client, for the per-client limit: the last X-Forwarded-For entry. Render does not document its proxy headers,
+  // so this label may group visitors or be chosen by one; the total limit, which needs no header, is the guarantee
   const client = (req) => (config.allowHttp ? req.socket.remoteAddress : ((req.headers["x-forwarded-for"] ?? "").split(",").pop().trim() || req.socket.remoteAddress)) ?? "unknown";
   const recent = (times) => times.filter((t) => t > now() - limits.windowMs);
-  const blocked = (who) => recent(failures.get(who) ?? []).length >= limits.perClient || recent(totalFailures).length >= limits.total;
+  // attempts still being checked count as failures until they are known not to be
+  const blocked = (who) => recent(failures.get(who) ?? []).length + (inFlight.get(who) ?? 0) >= limits.perClient || recent(totalFailures).length + totalInFlight >= limits.total;
   const fail = (who) => {
     failures.set(who, [...recent(failures.get(who) ?? []), now()]);
     totalFailures = [...recent(totalFailures), now()];
@@ -214,16 +221,32 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       if (req.method !== "POST") return text(res, 405, "Method not allowed", { Allow: "GET, POST" });
       if (!sameOrigin(req)) return text(res, 403, "Forbidden");
       const who = client(req);
-      if (blocked(who)) return page(res, 429, loginPage("Too many attempts. Wait 15 minutes and try again."), { "Retry-After": String(Math.ceil(limits.windowMs / 1000)) });
-      let form;
+      const tooMany = () => page(res, 429, loginPage("Too many attempts. Wait 15 minutes and try again."), { "Retry-After": String(Math.ceil(limits.windowMs / 1000)) });
+      if (blocked(who) || totalInFlight >= (limits.queue ?? 8)) return tooMany();
+      // reserve the attempt now, before anything is awaited
+      inFlight.set(who, (inFlight.get(who) ?? 0) + 1);
+      totalInFlight++;
+      let ok = false;
       try {
-        form = await readForm(req);
+        const form = await readForm(req);
+        const password = form.get("password") ?? "";
+        const turn = checking.then(() => verify(password, config.hash));
+        checking = turn.then(
+          () => undefined,
+          () => undefined,
+        );
+        ok = await turn;
       } catch {
-        return text(res, 413, "Too large");
+        ok = false;
+      } finally {
+        const n = (inFlight.get(who) ?? 1) - 1;
+        if (n > 0) inFlight.set(who, n);
+        else inFlight.delete(who);
+        totalInFlight--;
       }
-      const ok = await verifyPassword(form.get("password") ?? "", config.hash);
       if (!ok) {
         fail(who);
+        if (res.destroyed) return;
         return page(res, 401, loginPage("That password is not right."));
       }
       failures.delete(who);
