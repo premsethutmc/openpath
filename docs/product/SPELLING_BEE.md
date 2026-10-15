@@ -124,8 +124,17 @@ Session starts and ends are saved too. From these, the app rebuilds:
 - **Progress:** a Spelling Bee section shows the level and a table by level: words practised, and right out of
   answers.
 
-**Pilot builds:** a pilot build offers no Spelling Bee. It is not on the pilot allowlist, and 21 of its words are
-not approved. Adding it to a pilot is a separate decision.
+**Pilot builds include the Spelling Bee** (practice only, never engine evidence). Each word goes in only through a
+recorded approval:
+- **The 79 reused words:** each follows its dictation question's approval in the pilot gate (allowlisted and
+  approved).
+- **The 21 new words:** each needs its owner approval for pilot use and must pass the content checks. The build
+  compiles only those (`beeApprovedForPilot` in `tools/english/pilot/review.ts`).
+- **No approvals (`--no-approvals`):** no Spelling Bee, so the boundary still fails closed.
+- **Parent material:** a parent's own words (My Words, My Books) are never offered in a pilot build.
+
+A pilot learner opens the Bee straight from Home, with no starting check first (`e2e/pilot-bee.test.mjs`, against a
+pilot build made from the recorded approvals).
 
 ## Tests
 
@@ -142,7 +151,7 @@ not approved. Adding it to a pilot is a separate decision.
 - the summary counts;
 - no effect on the engine;
 - a backup round trip;
-- no Spelling Bee in a pilot build.
+- in a pilot build: all 100 approved words, none without approvals, only the 79 if the new words' approvals are missing, and an approved word that fails the checks left out (SB-10).
 
 **Browser tests (`e2e/bee.test.mjs`)**, on Chromium emulating an Android phone 412 px wide (not a physical phone):
 - from Home to the Bee with no starting check;
