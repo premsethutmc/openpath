@@ -123,6 +123,16 @@ jobs:
           test -s dist/assets/app.js
           test -s dist/assets/app.css
           test -s dist/openpath-standalone.html
+      - name: Private demo server (login wall, sessions, limits) and no secret in the built app
+        env:
+          # sentinel values: the English build must never read or embed them
+          DEMO_PASSWORD_HASH: sentinel-demo-password-hash-must-not-appear
+          DEMO_SESSION_SECRET: sentinel-demo-session-secret-must-not-appear
+          DEMO_SENTINEL: sentinel-demo-
+        run: |
+          npm run english:build
+          node --test scripts/demo-server.test.mjs 2>&1 | tee demo-server.log
+          ../.github/scripts/require-tests.sh demo-server.log "Private demo server"
 
   e2e:
     name: Browser end-to-end (production build, API, PostgreSQL)
@@ -262,6 +272,13 @@ jobs:
         run: |
           npm run english:e2e-pilot 2>&1 | tee english-pilot-e2e.log
           ../.github/scripts/require-tests.sh english-pilot-e2e.log "Pilot boundary end-to-end"
+      - name: Private demo behind its login, in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_SHOTS: e2e/shots/demo
+        run: |
+          npm run english:e2e-demo 2>&1 | tee english-demo-e2e.log
+          ../.github/scripts/require-tests.sh english-demo-e2e.log "Private demo end-to-end"
       - name: Show server logs
         if: failure()
         run: tail -n 60 api.log web.log english-web.log english-api-web.log english-pilot-web.log
