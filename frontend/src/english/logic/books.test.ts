@@ -16,6 +16,7 @@ import { MemoryRepo } from "./store.ts";
 
 const c = loadContent({ mode: "development" });
 const STORY = readFileSync(new URL("./fixtures/book-lantern.txt", import.meta.url), "utf8");
+const ROBOT = readFileSync(new URL("./fixtures/book-robot.txt", import.meta.url), "utf8");
 
 test("MB-1 everything comes from the text: words, sentences, choices and answers; the same text gives the same activities", () => {
   const ex = extract(STORY);
@@ -45,8 +46,9 @@ test("MB-2 names: written with a capital mid-sentence, never in lower case, used
   const ex = extract(STORY);
   assert.deepEqual(ex.names, ["Mia", "Tom", "Patel"]);
   const who = ex.comprehension.filter((q) => q.type === "who");
-  assert.deepEqual(who.map((q) => q.answer), ["Mia", "Tom", "Patel"]);
-  assert.ok(who.every((q) => q.options.length === 3 && q.options.every((o) => ex.names.includes(o))));
+  // "Patel" is always "Mrs. Patel" in the book, so the question and its choices use the whole name
+  assert.deepEqual(who.map((q) => q.answer), ["Mia", "Tom", "Mrs. Patel"]);
+  assert.ok(who.every((q) => q.options.length === 3 && q.options.every((o) => ["Mia", "Tom", "Mrs. Patel"].includes(o))));
   // a text with fewer than 3 names says why there are no "who" questions
   const two = extract(STORY.replace(/Patel/g, "Smith").replace(/Mrs\. Smith/g, "the old woman").replace(/\bSmith\b/g, "the woman"));
   assert.equal(two.comprehension.filter((q) => q.type === "who").length, 0);
@@ -117,16 +119,90 @@ test("MB-4 nothing reaches the learner until approved; approvals are for this ex
   assert.deepEqual(reopened.books(), []);
 });
 
-test("MB-5 private to the device, limits, and no My Books in a pilot build", async () => {
+test("MB-5 a learner in a parent account keeps books with their record; limits; no My Books in a pilot build", async () => {
   const server = new MemoryRepo();
-  Object.defineProperty(server, "kind", { value: "server" });
-  const acc = await Learner.create(c, server, "Account pupil", "guardian", testClock(), "p-acc");
-  await assert.rejects(acc.saveBook("A book", STORY, []), /on this device only/);
-  assert.equal(acc.events.filter((e) => e.kind === "book").length, 0, "the text never reached the server's record");
+  Object.defineProperty(server, "kind", { value: "server" }); // the ServerRepo stores the same append-only events
+  const clock = testClock();
+  const acc = await Learner.create(c, server, "Account pupil", "guardian", clock, "p-acc");
+  assert.equal(acc.contentPlace, "account");
+  const ex = extract(STORY);
+  const id = await acc.saveBook("A book", STORY, [ex.spelling[0].id, ex.vocabulary[0].id]);
+  const again = await Learner.open(c, server, "p-acc", clock);
+  assert.equal(again.spellingWords({ type: "book", id }).length, 1, "approvals reload with the record");
+  assert.equal(again.bookQuestions(id).plan.length, 1);
+  // the longest text allowed, all in 3-byte characters, still fits one book event on the server
+  const widest = "“".repeat(BOOK_LIMITS.chars - 10) + " the end";
+  await again.saveBook("Wide", widest, []);
   const l = await Learner.create(c, new MemoryRepo(), "L", "guardian", testClock(), "p-l3");
   await assert.rejects(l.saveBook(" ", STORY, []), /title/);
   await assert.rejects(l.saveBook("Empty", "  \n ", []), /no text/);
   await assert.rejects(l.saveBook("Long", "word ".repeat(BOOK_LIMITS.chars), []), /up to 30,000/);
   const pilot = await Learner.create(loadContent({ mode: "pilot" }), new MemoryRepo(), "P", "guardian", testClock(), "p-p3");
   await assert.rejects(pilot.saveBook("A book", STORY, []), PilotRefusal);
+});
+
+test("MB-6 quality (rule version 2): accurate skill labels and none of the known giveaways, on two different stories", () => {
+  const MARKER = /^["'“‘(]*(?:then|finally|at last|later|afterwards|next|in the end|eventually|when they returned|one day|on the first)\b/i;
+  for (const text of [STORY, ROBOT]) {
+    const ex = extract(text);
+    const flat = sentencesOf(text).map((x) => x.text).join(" ");
+    const opening = sentencesOf(text).find((x) => x.words.length >= 6)!.text;
+    // labels: what each activity actually practises; nothing claims to be inferential comprehension
+    for (const q of ex.vocabulary) assert.equal(q.skill, "vocabulary-in-context");
+    for (const q of ex.comprehension) assert.equal(q.skill, q.type === "who" ? "literal-comprehension" : "sequencing");
+    assert.ok(![...ex.vocabulary, ...ex.comprehension].some((q) => /infer/i.test(q.skill)));
+    // vocabulary: no other choice is used in the book right next to a word beside the gap (it would probably fit too)
+    for (const q of ex.vocabulary) {
+      const [before, after] = q.text!.split("_____");
+      const prev = (before.match(/([A-Za-z'’]+)\W*$/) ?? [])[1];
+      const next = (after.match(/^\W*([A-Za-z'’]+)/) ?? [])[1];
+      for (const o of q.options.filter((o) => o !== q.answer)) {
+        assert.ok(!(prev && new RegExp(`\\b${prev} ${o}\\b`, "i").test(flat)), `${q.id}: "${prev} ${o}" is in the book`);
+        assert.ok(!(next && new RegExp(`\\b${o} ${next}\\b`, "i").test(flat)), `${q.id}: "${o} ${next}" is in the book`);
+      }
+    }
+    // who: no he/she word to narrow the names, and no bare surname after a title
+    for (const q of ex.comprehension.filter((q) => q.type === "who")) {
+      assert.ok(!/\b(he|she|him|her|his|hers|himself|herself)\b/i.test(q.text!), `${q.id}: ${q.text}`);
+      assert.ok(!/\b(Mr|Mrs|Ms|Miss|Dr)\.? _____/.test(q.text!), `${q.id}: ${q.text}`);
+    }
+    // which comes first: never the opening line, never a sentence that starts with a time word
+    for (const q of ex.comprehension.filter((q) => q.type === "order")) for (const o of q.options) assert.ok(o !== opening && !MARKER.test(o), `${q.id}: ${o}`);
+  }
+  // the second story: dialogue, a teacher always called "Mr. Okafor", and he/she sentences
+  const robot = extract(ROBOT);
+  assert.deepEqual(robot.comprehension.filter((q) => q.type === "who").map((q) => q.answer), ["Bolt", "Priya", "Daniel", "Grace", "Mr. Okafor"]);
+});
+
+
+test("MB-7 one engine for every source: editing or deleting a book never changes the Bee, a list, or answers already given", async () => {
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "Three Sources", "guardian", clock, "p-three");
+  await l.startSpelling();
+  await l.answerSpelling(l.spellingSession()!.word!.word, 1);
+  await l.stopSpelling();
+  const list = await l.saveWordList("Week 1", (await import("./wordlists.ts")).parseWords("castle, because").words);
+  await l.startSpelling({ type: "list", id: list });
+  await l.answerSpelling("castle", 1);
+  const ex = extract(STORY);
+  const id = await l.saveBook("The Lantern", STORY, ex.spelling.slice(0, 3).map((s) => s.id));
+  await l.startSpelling({ type: "book", id });
+  const first = l.spellingSession()!.word!.word;
+  await l.answerSpelling(`${first}x`, 1);
+  // every answer names its source; the same scoring (checkSpelling) marked all three
+  const answers = l.events.filter((e) => e.kind === "spell_answer") as Extract<(typeof l.events)[number], { kind: "spell_answer" }>[];
+  assert.deepEqual(answers.map((a) => a.source.type), ["bank", "list", "book"]);
+  const progress = () => [l.spellingWords(), l.spellingWords({ type: "list", id: list })].map((w) => sourceProgress(l.spelling(), w, clock()));
+  const before = progress();
+  // edit the text (approvals must be given again); the book's words keep their history, nothing else moves
+  const edited = STORY.replace("steep hill", "steep, windy hill");
+  await l.saveBook("The Lantern", edited, extract(edited).spelling.slice(0, 3).map((s) => s.id), id);
+  const bookProgress = sourceProgress(l.spelling(), l.spellingWords({ type: "book", id }), clock());
+  assert.deepEqual([bookProgress.practised, bookProgress.reviewList], [1, 1], "the misspelt book word is still on the review list");
+  assert.deepEqual(progress(), before);
+  // delete the book: the open session on it ends; the Bee, the list and every answer stay
+  await l.deleteBook(id);
+  assert.equal(l.spellingSession(), null);
+  assert.deepEqual(progress(), before);
+  assert.equal(l.events.filter((e) => e.kind === "spell_answer").length, answers.length);
 });

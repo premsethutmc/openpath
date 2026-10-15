@@ -6,7 +6,8 @@
  */
 import { type ChangeEvent, type ReactElement, useMemo, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
-import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, tidyText } from "../logic/books.ts";
+import { type Book, type BookQuestion, type BookSkill, type Extraction, BOOK_LIMITS, SKILL_LABELS, approvedActivities, bookWords, tidyText } from "../logic/books.ts";
+import { keptWhere } from "./MyWords.tsx";
 import { sourceProgress } from "../logic/spelling.ts";
 
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
@@ -27,7 +28,8 @@ export function MyBooks({ learner, onSpelling, onQuestions, onLeave, onChanged }
       <h1 id="mybooks-title" className="hero">
         My Books
       </h1>
-      <p className="sub">Paste the text of a book the learner is reading. OpenPath finds spelling words and questions in that text; you choose which ones the learner sees. The text stays on this device.</p>
+      <p className="sub">Paste the text of a book the learner is reading. OpenPath finds spelling words and questions in that text; you choose which ones the learner sees.</p>
+      <p className="small where-kept">{keptWhere(learner, "Books")}</p>
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         Add a book
       </button>
@@ -70,7 +72,7 @@ export function MyBooks({ learner, onSpelling, onQuestions, onLeave, onChanged }
                     type="button"
                     className="quiet"
                     onClick={async () => {
-                      if (!window.confirm(`Delete "${b.title}" from this device? The learner's answers stay in their record.`)) return;
+                      if (!window.confirm(`Delete "${b.title}"? It leaves My Books; its text and the learner's answers stay in the learner's record until the learner is deleted.`)) return;
                       await learner.deleteBook(b.id);
                       onChanged();
                     }}
@@ -175,10 +177,13 @@ function BookEditor({ learner, book, onDone }: { learner: Learner; book: Book | 
 }
 
 function Review({ ex, chosen, toggle, setAll, stale }: { ex: Extraction; chosen: Set<string>; toggle: (id: string) => void; setAll: (ids: string[], on: boolean) => void; stale: boolean }) {
-  const groups: { key: string; title: string; ids: string[]; body: (id: string) => ReactElement }[] = [
+  const questions = [...ex.vocabulary, ...ex.comprehension];
+  const of = (skill: BookSkill) => questions.filter((q) => q.skill === skill);
+  const preview = (id: string) => <QuestionPreview q={questions.find((x) => x.id === id)!} />;
+  const groups: { key: BookSkill; title: string; note: string; ids: string[]; body: (id: string) => ReactElement }[] = [
     {
       key: "spelling",
-      title: "Spelling words",
+      ...SKILL_LABELS.spelling,
       ids: ex.spelling.map((s) => s.id),
       body: (id) => {
         const s = ex.spelling.find((x) => x.id === id)!;
@@ -190,14 +195,16 @@ function Review({ ex, chosen, toggle, setAll, stale }: { ex: Extraction; chosen:
         );
       },
     },
-    { key: "vocabulary", title: "Vocabulary: fill the gap", ids: ex.vocabulary.map((q) => q.id), body: (id) => <QuestionPreview q={ex.vocabulary.find((x) => x.id === id)!} /> },
-    { key: "comprehension", title: "Comprehension: from the story", ids: ex.comprehension.map((q) => q.id), body: (id) => <QuestionPreview q={ex.comprehension.find((x) => x.id === id)!} /> },
+    ...(["vocabulary-in-context", "literal-comprehension", "sequencing"] as const).map((key) => ({ key, ...SKILL_LABELS[key], ids: of(key).map((q) => q.id), body: preview })),
   ];
   return (
     <section className="tile book-review" aria-labelledby="book-review-title" aria-live="polite">
       <h2 id="book-review-title">
         Found {plural(ex.spelling.length, "spelling word")}, {plural(ex.vocabulary.length + ex.comprehension.length, "question")}
       </h2>
+      <p className="small">
+        Four kinds, named for what they practise. None of them is inferential comprehension (reasons, feelings, predictions): these rules cannot write those.
+      </p>
       <p className="small">
         From {plural(ex.words, "word")} in {plural(ex.sentences, "sentence")}. Tick what the learner may see; anything not ticked stays hidden. Check each one: the rules can make a poor question (for example, a gap two choices could fill).
       </p>
@@ -216,9 +223,10 @@ function Review({ ex, chosen, toggle, setAll, stale }: { ex: Extraction; chosen:
             <legend>
               {g.title} ({g.ids.filter((i) => chosen.has(i)).length} of {g.ids.length} ticked)
             </legend>
+            <p className="small">{g.note}</p>
             <div className="row">
               <button type="button" className="link" onClick={() => setAll(g.ids, true)}>
-                Tick all {g.title.split(":")[0].toLowerCase()}
+                Tick all: {g.title.toLowerCase()}
               </button>
               <button type="button" className="link" onClick={() => setAll(g.ids, false)}>
                 Untick all
@@ -298,7 +306,9 @@ export function BookQuestions({ learner, book, onLeave, onChanged }: { learner: 
   return (
     <main className="page book-quiz" aria-labelledby="quiz-title">
       {back}
-      <p className="eyebrow">{book.title}</p>
+      <p className="eyebrow">
+        {book.title} · {SKILL_LABELS[q.skill].title}
+      </p>
       <p className="small">
         Question {k + 1} of {plan.length}
       </p>

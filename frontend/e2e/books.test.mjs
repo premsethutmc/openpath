@@ -69,7 +69,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
         this.text = text;
       }
     };
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
   });
   const page = await context.newPage();
   const errors = [];
@@ -101,7 +101,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await page.getByRole("button", { name: "Find activities" }).click();
   const found = page.locator(".book-review h2");
   assert.match(await found.innerText(), /Found 20 spelling words, \d+ questions/);
-  assert.match(await page.locator(".book-review").innerText(), /Spelling words \(0 of 20 ticked\)/);
+  assert.match(await page.locator(".book-review").innerText(), /Spelling practice \(0 of 20 ticked\)/);
   await fits(page);
   await shot(page, "1-review");
   // 3. saved without approving anything: the learner gets nothing from it
@@ -118,7 +118,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
     await spellBoxes.nth(i).check();
     chosen.push((await spellBoxes.nth(i).getAttribute("data-activity")).slice(2));
   }
-  await page.getByRole("button", { name: "Tick all vocabulary" }).click();
+  await page.getByRole("button", { name: "Tick all: vocabulary in context" }).click();
   await page.locator('input[data-activity^="c:"]').first().check();
   const nv = await page.locator('input[data-activity^="v:"]').count();
   await page.getByRole("button", { name: `Save and approve ${3 + nv + 1} activities` }).click();
@@ -157,6 +157,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await page.getByText(`Question 1 of ${asked}`).waitFor();
   await shot(page, "3-question");
   for (let k = 0; k < asked; k++) {
+    assert.match(await page.locator(".eyebrow").innerText(), /· (VOCABULARY IN CONTEXT|LITERAL COMPREHENSION|SENTENCE SEQUENCING)$/i, "each question says what it practises");
     const prompt = await page.locator("#quiz-title").innerText();
     const text = (await page.locator("blockquote.book-quote").count()) ? await page.locator("blockquote.book-quote").innerText() : "";
     const options = await page.locator(".options .option").allInnerTexts();
@@ -181,7 +182,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await page.getByLabel(/The book's text/).fill(STORY.replace("steep hill", "steep, windy hill"));
   await page.getByText(/The text was changed: press "Find activities" again/).waitFor();
   await page.getByRole("button", { name: "Find activities" }).click();
-  assert.match(await page.locator(".book-review").innerText(), /Spelling words \(0 of 20 ticked\)/);
+  assert.match(await page.locator(".book-review").innerText(), /Spelling practice \(0 of 20 ticked\)/);
   await page.getByRole("button", { name: "Save without approving anything" }).click();
   assert.match(await card.innerText(), /Approved: 0 spelling words · 0 questions/);
   // 9. delete

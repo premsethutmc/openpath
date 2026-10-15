@@ -5,15 +5,18 @@
  *
  *   - Spelling: words from the book, chosen for tricky letter patterns and length, each with the book's own sentence
  *     (spoken after the word). Practised with the Spelling Bee's engine, source {type: "book", id}.
- *   - Vocabulary (fill the gap): one of the book's sentences with a longer word taken out; the choices are that word and
- *     three other words from the same book with the same ending (-ed, -ing, -ly, -s, or other).
- *   - Comprehension, from what the book says:
- *       "who": one of the book's sentences with a character's name taken out; the choices are names from the book.
- *       "order": two of the book's sentences, far apart; which comes first in the book.
+ *   - Vocabulary in context (fill the gap): one of the book's sentences with a longer word taken out; the choices are
+ *     that word and three other words from the same book with the same ending (-ed, -ing, -ly, -s, or other). The
+ *     sentence shown is enough to answer: it practises words in context, it does not check reading of the book.
+ *   - Literal comprehension ("who"): one of the book's sentences with a character's name taken out; the choices are
+ *     names from the book. It needs the book (or the story) to answer.
+ *   - Sentence sequencing ("which comes first"): two of the book's sentences, far apart. It needs the book.
  *
- * What it cannot do: explain meanings (no dictionary), ask about feelings, reasons or themes, or read photos or PDFs
- * (no OCR). The rules can still make a poor activity (a gap two choices could fill, a capitalised word that is not a
- * name), which is why nothing reaches the learner until the parent has approved it.
+ * None of these is inferential comprehension (reasons, feelings, predictions, themes): that needs understanding the
+ * rules below do not have (see docs/product/MY_BOOKS.md for the options). Nor can they explain meanings (no dictionary)
+ * or read photos or PDFs (no OCR). The rules avoid the known giveaways (rule version 2: see extract()), but can still
+ * make a poor activity (a gap two choices could fill, a capitalised word that is not a name), which is why nothing
+ * reaches the learner until the parent has approved it.
  *
  * Approvals are tied to the text: they are saved with the text's fingerprint, and if the text changes they no longer
  * count, so the parent reviews again.
@@ -23,7 +26,7 @@ import type { SpellWord } from "./spelling.ts";
 
 export const BOOK_LIMITS = { chars: 30_000, fileBytes: 200_000, titleLength: 80, minWords: 30, spelling: 20, vocabulary: 10, who: 5, order: 3 } as const;
 /** Part of the fingerprint: a change to the rules below makes earlier approvals stop counting. */
-export const EXTRACTION_VERSION = 1;
+export const EXTRACTION_VERSION = 2;
 
 export interface Sentence {
   index: number;
@@ -43,10 +46,19 @@ export interface SpellingCandidate {
   sentence?: string;
   count: number;
 }
+/** What an activity practises, named accurately (none is inferential comprehension). */
+export type BookSkill = "spelling" | "vocabulary-in-context" | "literal-comprehension" | "sequencing";
+export const SKILL_LABELS: Record<BookSkill, { title: string; note: string }> = {
+  spelling: { title: "Spelling practice", note: "Words from the book, spoken with the book's sentence." },
+  "vocabulary-in-context": { title: "Vocabulary in context", note: "Fill the gap. The sentence shown is enough to answer; it does not check that the book was read." },
+  "literal-comprehension": { title: "Literal comprehension", note: "Who did this in the book? Answered from what the book says, not by reasoning beyond it." },
+  sequencing: { title: "Sentence sequencing", note: "Which of two sentences comes first in the book." },
+};
 export interface BookQuestion {
   /** "v:<word>", "c:who:<sentence>:<name>" or "c:order:<sentence>:<sentence>" */
   id: string;
   kind: "vocabulary" | "comprehension";
+  skill: Exclude<BookSkill, "spelling">;
   type: "gap" | "who" | "order";
   prompt: string;
   /** The book's sentence with a gap, for gap and who questions. */
@@ -114,6 +126,11 @@ export function sentencesOf(text: string): Sentence[] {
   return out;
 }
 
+/** A sentence that starts with a time or order word gives a "which comes first" answer away. */
+const SEQUENCE_MARKER = /^["'“‘(]*(?:then|finally|at last|later|afterwards|after that|next|in the end|eventually|at the end|that (?:evening|night|morning|afternoon)|the next|the following|when (?:they|she|he|we) (?:returned|got back)|meanwhile|one day|once upon a time|on the (?:first|last|final))\b/i;
+/** A he/she word in a "who" sentence can narrow the names down without reading the book. */
+const GENDERED = /\b(?:he|she|him|her|his|hers|himself|herself)\b/i;
+const TITLE_BEFORE = /\b(?:Mr|Mrs|Ms|Miss|Mister|Dr|Doctor|Sir|Aunt|Uncle|Captain|Professor|Prof)\.? $/;
 const plain = (w: string) => /^[A-Za-z]+$/.test(w);
 const TRICKY = [/([a-z])\1/, /ough|augh/, /tion|sion|cian/, /ie|ei/, /ph/, /^kn|^wr|^gn|mb$|bt/, /gh/, /ould/, /ture$/, /[ct]ious$/, /ous$/, /(?:ible|able)$/, /(?:ence|ance)$/, /(?:ery|ary)$/, /dge/, /qu/, /c[eiy]/, /[^aeiou]le$/, /y[^aeiouy]/];
 const ending = (w: string) => (/ing$/.test(w) ? "ing" : /ed$/.test(w) ? "ed" : /ly$/.test(w) ? "ly" : /[^s]s$/.test(w) && !/(?:ous|us|is)$/.test(w) ? "s" : "other");
@@ -130,6 +147,7 @@ const byAlpha = (a: string, b: string) => a.localeCompare(b, "en", { sensitivity
 export function extract(rawText: string): Extraction {
   const text = tidyText(rawText);
   const sentences = sentencesOf(text);
+  const flat = sentences.map((x) => x.text).join(" ");
   const total = sentences.reduce((n, s) => n + words(s), 0);
   const notes: string[] = [];
   const empty: Extraction = { fingerprint: fingerprint(text), words: total, sentences: sentences.length, names: [], spelling: [], vocabulary: [], comprehension: [], notes };
@@ -173,39 +191,59 @@ export function extract(rawText: string): Extraction {
     if (vocabulary.length >= BOOK_LIMITS.vocabulary) break;
     const s = firstUse.get(w);
     if (!s || words(s) < 5) continue;
+    // the words either side of the gap: a choice the book itself uses next to one of them would probably fit too
+    const [before, after] = withGap(s.text, w).split(gap);
+    const prev = (before.match(/([A-Za-z'’]+)\W*$/) ?? [])[1];
+    const next = (after.match(/^\W*([A-Za-z'’]+)/) ?? [])[1];
+    const fitsToo = (o: string) => (!!prev && occurrences(flat, `${prev} ${o}`, "gi") > 0) || (!!next && occurrences(flat, `${o} ${next}`, "gi") > 0);
     const others = pool
-      .filter((o) => o !== w && ending(o) === ending(w) && stem(o) !== stem(w) && occurrences(s.text, o, "gi") === 0)
+      .filter((o) => o !== w && ending(o) === ending(w) && stem(o) !== stem(w) && occurrences(s.text, o, "gi") === 0 && !fitsToo(o))
       .sort((a, b) => Math.abs(a.length - w.length) - Math.abs(b.length - w.length) || byAlpha(a, b))
       .slice(0, 3);
     if (others.length < 3) continue;
-    vocabulary.push({ id: `v:${w}`, kind: "vocabulary", type: "gap", prompt: "Which word from the book fills the gap?", text: withGap(s.text, w), options: [w, ...others].sort(byAlpha), answer: w });
+    vocabulary.push({ id: `v:${w}`, kind: "vocabulary", skill: "vocabulary-in-context", type: "gap", prompt: "Which word from the book fills the gap?", text: withGap(s.text, w), options: [w, ...others].sort(byAlpha), answer: w });
   }
   if (!vocabulary.length) notes.push("No gap-filling questions: the text needs more long words that share an ending (-ed, -ing, -ly, -s).");
 
   // comprehension, "who": a sentence with one name taken out; the choices are the book's most used names
   const comprehension: BookQuestion[] = [];
+  // a name always written after a title is that whole name ("Mrs. Patel"): a bare surname after "Mrs." would stand out
+  const full = new Map(
+    names.map((n) => {
+      const titled = [...flat.matchAll(new RegExp(`\\b(?:Mr|Mrs|Ms|Miss|Mister|Dr|Doctor|Sir|Aunt|Uncle|Captain|Professor|Prof)\\.? ${escape(n)}(?![A-Za-z])`, "g"))].map((m) => m[0]);
+      return [n, titled.length === uses(n) && titled.length ? titled[0] : n];
+    }),
+  );
+  let gendered = 0;
   if (names.length >= 3) {
     for (const n of names.slice(0, BOOK_LIMITS.who)) {
-      const fits = sentences.filter((s) => words(s) >= 5 && words(s) <= 30 && occurrences(s.text, n) === 1);
-      const s = fits.find((x) => x.words[0].text === n) ?? fits[0];
+      const shown = full.get(n)!;
+      const fits = sentences.filter((s) => words(s) >= 5 && words(s) <= 30 && occurrences(s.text, shown) === 1 && (shown !== n || !TITLE_BEFORE.test(s.text.slice(0, s.text.search(new RegExp(`(?<![A-Za-z'’])${escape(n)}(?![A-Za-z])`))))));
+      // no he/she words: "_____ sighed, but he followed her" leaves only the boys' names
+      const fair = fits.filter((x) => !GENDERED.test(x.text));
+      gendered += fits.length && !fair.length ? 1 : 0;
+      const s = fair.find((x) => x.text.startsWith(shown)) ?? fair[0];
       if (!s) continue;
-      const choices = [n, ...names.filter((o) => o !== n && !occurrences(s.text, o)).slice(0, 3)];
+      const choices = [shown, ...names.filter((o) => o !== n && !occurrences(s.text, o)).map((o) => full.get(o)!).slice(0, 3)];
       if (choices.length < 3) continue;
-      comprehension.push({ id: `c:who:${s.index}:${n}`, kind: "comprehension", type: "who", prompt: "Who is missing from this sentence in the book?", text: withGap(s.text, n), options: choices.sort(byAlpha), answer: n });
+      comprehension.push({ id: `c:who:${s.index}:${n}`, kind: "comprehension", skill: "literal-comprehension", type: "who", prompt: "Who is missing from this sentence in the book?", text: withGap(s.text, shown), options: choices.sort(byAlpha), answer: shown });
     }
+    if (gendered) notes.push(`${gendered} name${gendered === 1 ? " has" : "s have"} no "who" question: every sentence about ${gendered === 1 ? "it" : "them"} has a he/she word, which would give the answer away.`);
   } else notes.push(`No "who" questions: ${names.length ? `only ${names.length} name${names.length === 1 ? " was" : "s were"} found (${names.join(", ")})` : "no names were found"}; at least 3 are needed.`);
 
   // comprehension, "order": two sentences far apart; which comes first
-  const usable = sentences.filter((s) => words(s) >= 6 && words(s) <= 30);
+  // not the opening sentence (a story's first line is easy to guess), and no sentence that starts with a time word
+  const opening = sentences.find((s) => words(s) >= 6)?.index;
+  const usable = sentences.filter((s) => words(s) >= 6 && words(s) <= 30 && s.index !== opening && !SEQUENCE_MARKER.test(s.text));
   if (usable.length >= 6) {
     const m = usable.length;
     for (let k = 0; k < BOOK_LIMITS.order; k++) {
       const a = usable[Math.floor((k * m) / 6)];
       const b = usable[Math.floor(((k + 3) * m) / 6)];
       if (!a || !b || b.index - a.index < 2) continue;
-      comprehension.push({ id: `c:order:${a.index}:${b.index}`, kind: "comprehension", type: "order", prompt: "Which of these comes first in the book?", options: k % 2 ? [a.text, b.text] : [b.text, a.text], answer: a.text });
+      comprehension.push({ id: `c:order:${a.index}:${b.index}`, kind: "comprehension", skill: "sequencing", type: "order", prompt: "Which of these comes first in the book?", options: k % 2 ? [a.text, b.text] : [b.text, a.text], answer: a.text });
     }
-  } else notes.push("No \"which comes first\" questions: the text needs at least 6 sentences of 6 to 30 words.");
+  } else notes.push("No \"which comes first\" questions: the text needs at least 6 sentences of 6 to 30 words (not counting the opening sentence or ones that start with a time word such as \"Then\").");
 
   return { ...empty, names, spelling, vocabulary, comprehension };
 }
