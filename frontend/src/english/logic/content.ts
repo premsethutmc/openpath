@@ -14,9 +14,12 @@ import {
   type Goal,
   type Item,
   type Passage,
+  type GeneratedReview,
+  type ItemReview,
   indexContent,
   indexFramework,
   isSpecified,
+  reviewStatus,
 } from "../../../../packages/english-core/src/index.ts";
 import { SINGLE_FORMAT_DEMONSTRATION } from "./mastery-policy.ts";
 import frameworkJson from "../../../../content/english/framework/en-0.2.0.json";
@@ -32,6 +35,8 @@ import generatedJson from "../../../../content/english/spelling/generated-items.
 import dictationJson from "../../../../content/english/spelling/dictation-bank.json";
 import retiredGeneratedJson from "../../../../content/english/spelling/retired-generated.json";
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
+import reviewJson from "../../../../content/english/spelling/review/review.json";
+import pilotSetJson from "../../../../content/english/spelling/review/pilot-set.json";
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
 import journeyJson from "../../../../content/english/web/doubling-journey.json";
@@ -121,17 +126,37 @@ export interface PoolInfo {
   unfamiliar?: boolean;
 }
 
+/**
+ * Which generated items a build offers (content validation, 13 October 2026):
+ *   pilot        only items covered by an approved rule or reviewed set (a person has reviewed them)
+ *   preview      the pilot set's items (pilot-set.json), reviewed or not: for the product owner to try
+ *                the pilot experience before the review; labelled as not yet reviewed
+ *   development  approved and unreviewed items
+ * Flagged and excluded items are never offered. Either way, generated items stay practice-only: an
+ * approval never lets them change a capability estimate.
+ */
+export type ContentMode = "pilot" | "preview" | "development";
+declare const __OPENPATH_CONTENT__: string | undefined;
+const built = typeof __OPENPATH_CONTENT__ !== "undefined" ? __OPENPATH_CONTENT__ : "development";
+export const BUILD_CONTENT_MODE: ContentMode = built === "pilot" || built === "preview" ? built : "development";
+const PILOT_SET = new Set((pilotSetJson as unknown as { items: { id: string; version: number }[] }).items.map((r) => `${r.id}@${r.version}`));
+
 export interface AppContent {
   ctx: Context;
   index: FrameworkIndex;
   /** Hand-written, code-scored items (the bank E1–E2b built): placement and capability evidence. */
   handWritten: Set<string>;
-  /** Generated spelling items (practice until checked). */
+  /** Generated spelling items offered in this build (practice only; see ContentMode). */
   generated: Code[];
   /** Words OpenPath knows (word bank entries and single-word answer keys): to tell a different word from a misspelling. */
   words: Set<string>;
   /** The dictation bank: the primary spelling assessment (hear the word, type it). Not part of `handWritten`. */
   dictation: { version: string; status: string; items: DictationItem[] };
+  /** Every generated item, offered or not (old answers to any of them still rebuild exactly). */
+  generatedAll: Code[];
+  /** The review status of every generated item. */
+  review: Map<string, ItemReview>;
+  contentMode: ContentMode;
   lessons: Map<string, Lesson>;
   ladders: Map<string, LadderStep[]>;
   feedback: Map<string, string>;
@@ -148,7 +173,8 @@ export interface AppContent {
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
-export function loadContent(): AppContent {
+export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview } = {}): AppContent {
+  const mode = opts.mode ?? BUILD_CONTENT_MODE;
   // direct spelling may be demonstrated by dictation alone (approved correction): the framework file is unchanged,
   // the allowance is added here for the app only, and the app's evidence gate asks for word and pattern diversity
   const fw = frameworkJson as unknown as Framework;
@@ -178,6 +204,13 @@ export function loadContent(): AppContent {
   const content = indexContent(bundle, index);
   const words = new Set((wordbankJson as unknown as { entries: { word: string }[] }).entries.map((e) => e.word.toLowerCase()));
   for (const it of bundle.items) if (it.kind === "code") for (const w of it.answers ?? []) if (/^[a-z]+$/i.test(w)) words.add(w.toLowerCase());
+  const review = reviewStatus(generated, opts.review ?? (reviewJson as unknown as GeneratedReview));
+  const offered = generated.filter((g) => {
+    const st = review.get(g.id)?.status;
+    if (st === "flagged" || st === "excluded") return false;
+    if (mode === "preview") return PILOT_SET.has(`${g.id}@${g.version}`);
+    return st === "approved" || (mode === "development" && st === "unreviewed");
+  });
   const lessons = new Map((lessonsJson as unknown as { lessons: Lesson[] }).lessons.map((l) => [l.id, l]));
   const ladders = new Map(Object.entries((progressionsJson as unknown as { capabilities: Record<string, { steps: LadderStep[] }> }).capabilities).map(([k, v]) => [k, v.steps]));
   const feedback = new Map(Object.entries((feedbackJson as unknown as { misconceptions: Record<string, string> }).misconceptions));
@@ -187,7 +220,10 @@ export function loadContent(): AppContent {
     ctx: { index, content },
     index,
     handWritten: new Set(hand.map((i) => i.id)),
-    generated,
+    generated: offered,
+    generatedAll: generated,
+    review,
+    contentMode: mode,
     words,
     dictation,
     lessons,

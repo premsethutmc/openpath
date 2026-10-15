@@ -1,1 +1,4226 @@
-[]
+[
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.payable",
+  "version": 1,
+  "family": "gen.word.payable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "payable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "payable",
+  "answers": [
+   "payable"
+  ],
+  "wrong": {
+   "payible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.payable",
+  "version": 1,
+  "family": "gen.word.payable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "payable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "payible",
+   "payable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.payable",
+  "version": 1,
+  "family": "gen.word.payable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "payable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"subject to or requiring payment especially as specified\". It starts with \"p\" and has 7 letters.",
+  "answers": [
+   "payable"
+  ],
+  "wrong": {
+   "payible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.tenable",
+  "version": 1,
+  "family": "gen.word.tenable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "tenable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "tenable",
+  "answers": [
+   "tenable"
+  ],
+  "wrong": {
+   "tenible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.tenable",
+  "version": 1,
+  "family": "gen.word.tenable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "tenable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "tenable",
+   "tenible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.tenable",
+  "version": 1,
+  "family": "gen.word.tenable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "tenable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"based on sound reasoning or evidence\". It starts with \"t\" and has 7 letters.",
+  "answers": [
+   "tenable"
+  ],
+  "wrong": {
+   "tenible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.capable",
+  "version": 1,
+  "family": "gen.word.capable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "capable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "capable",
+  "answers": [
+   "capable"
+  ],
+  "wrong": {
+   "capible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.capable",
+  "version": 1,
+  "family": "gen.word.capable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "capable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "capible",
+   "capable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.capable",
+  "version": 1,
+  "family": "gen.word.capable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "capable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"(usually followed by ‘of’) having capacity or ability\". It starts with \"c\" and has 7 letters.",
+  "answers": [
+   "capable"
+  ],
+  "wrong": {
+   "capible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.curable",
+  "version": 1,
+  "family": "gen.word.curable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "curable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "curable",
+  "answers": [
+   "curable"
+  ],
+  "wrong": {
+   "curible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.curable",
+  "version": 1,
+  "family": "gen.word.curable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "curable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "curible",
+   "curable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.curable",
+  "version": 1,
+  "family": "gen.word.curable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "curable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"able to be cured or healed\". It starts with \"c\" and has 7 letters.",
+  "answers": [
+   "curable"
+  ],
+  "wrong": {
+   "curible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.taxable",
+  "version": 1,
+  "family": "gen.word.taxable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "taxable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "taxable",
+  "answers": [
+   "taxable"
+  ],
+  "wrong": {
+   "taxible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.taxable",
+  "version": 1,
+  "family": "gen.word.taxable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "taxable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "taxable",
+   "taxible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.taxable",
+  "version": 1,
+  "family": "gen.word.taxable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "taxable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"(of goods or funds) subject to taxation\". It starts with \"t\" and has 7 letters.",
+  "answers": [
+   "taxable"
+  ],
+  "wrong": {
+   "taxible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.viable",
+  "version": 1,
+  "family": "gen.word.viable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "viable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "viable",
+  "answers": [
+   "viable"
+  ],
+  "wrong": {
+   "viible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.viable",
+  "version": 1,
+  "family": "gen.word.viable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "viable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "viible",
+   "viable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.viable",
+  "version": 1,
+  "family": "gen.word.viable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "viable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being done with means at hand and circumstances as they are\". It starts with \"v\" and has 6 letters.",
+  "answers": [
+   "viable"
+  ],
+  "wrong": {
+   "viible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.notable",
+  "version": 1,
+  "family": "gen.word.notable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "notable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "notable",
+  "answers": [
+   "notable"
+  ],
+  "wrong": {
+   "notible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.notable",
+  "version": 1,
+  "family": "gen.word.notable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "notable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "notable",
+   "notible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.notable",
+  "version": 1,
+  "family": "gen.word.notable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "notable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"widely known and esteemed\". It starts with \"n\" and has 7 letters.",
+  "answers": [
+   "notable"
+  ],
+  "wrong": {
+   "notible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.liable",
+  "version": 1,
+  "family": "gen.word.liable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "liable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "liable",
+  "answers": [
+   "liable"
+  ],
+  "wrong": {
+   "liible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.liable",
+  "version": 1,
+  "family": "gen.word.liable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "liable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "liable",
+   "liible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.liable",
+  "version": 1,
+  "family": "gen.word.liable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "liable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"at risk of or subject to experiencing something usually unpleasant\". It starts with \"l\" and has 6 letters.",
+  "answers": [
+   "liable"
+  ],
+  "wrong": {
+   "liible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.parable",
+  "version": 1,
+  "family": "gen.word.parable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "parable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "parable",
+  "answers": [
+   "parable"
+  ],
+  "wrong": {
+   "parible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.parable",
+  "version": 1,
+  "family": "gen.word.parable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "parable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "parible",
+   "parable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.parable",
+  "version": 1,
+  "family": "gen.word.parable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "parable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"a short moral story (often with animal characters)\". It starts with \"p\" and has 7 letters.",
+  "answers": [
+   "parable"
+  ],
+  "wrong": {
+   "parible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.advisable",
+  "version": 1,
+  "family": "gen.word.advisable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "advisable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "advisable",
+  "answers": [
+   "advisable"
+  ],
+  "wrong": {
+   "advisible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.advisable",
+  "version": 1,
+  "family": "gen.word.advisable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "advisable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "advisible",
+   "advisable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.advisable",
+  "version": 1,
+  "family": "gen.word.advisable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "advisable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"worthy of being recommended or suggested; prudent or wise\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "advisable"
+  ],
+  "wrong": {
+   "advisible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.readable",
+  "version": 1,
+  "family": "gen.word.readable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "readable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "readable",
+  "answers": [
+   "readable"
+  ],
+  "wrong": {
+   "readible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.readable",
+  "version": 1,
+  "family": "gen.word.readable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "readable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "readable",
+   "readible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.readable",
+  "version": 1,
+  "family": "gen.word.readable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "readable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"easily deciphered\". It starts with \"r\" and has 8 letters.",
+  "answers": [
+   "readable"
+  ],
+  "wrong": {
+   "readible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.workable",
+  "version": 1,
+  "family": "gen.word.workable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "workable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "workable",
+  "answers": [
+   "workable"
+  ],
+  "wrong": {
+   "workible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.workable",
+  "version": 1,
+  "family": "gen.word.workable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "workable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "workable",
+   "workible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.workable",
+  "version": 1,
+  "family": "gen.word.workable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "workable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being done with means at hand and circumstances as they are\". It starts with \"w\" and has 8 letters.",
+  "answers": [
+   "workable"
+  ],
+  "wrong": {
+   "workible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.laudable",
+  "version": 1,
+  "family": "gen.word.laudable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "laudable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "laudable",
+  "answers": [
+   "laudable"
+  ],
+  "wrong": {
+   "laudible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.laudable",
+  "version": 1,
+  "family": "gen.word.laudable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "laudable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "laudable",
+   "laudible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.laudable",
+  "version": 1,
+  "family": "gen.word.laudable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "laudable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"worthy of high praise\". It starts with \"l\" and has 8 letters.",
+  "answers": [
+   "laudable"
+  ],
+  "wrong": {
+   "laudible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.variable",
+  "version": 1,
+  "family": "gen.word.variable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "variable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "variable",
+  "answers": [
+   "variable"
+  ],
+  "wrong": {
+   "variible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.variable",
+  "version": 1,
+  "family": "gen.word.variable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "variable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "variable",
+   "variible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.variable",
+  "version": 1,
+  "family": "gen.word.variable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "variable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"liable to or capable of change\". It starts with \"v\" and has 8 letters.",
+  "answers": [
+   "variable"
+  ],
+  "wrong": {
+   "variible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.drinkable",
+  "version": 1,
+  "family": "gen.word.drinkable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "drinkable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "drinkable",
+  "answers": [
+   "drinkable"
+  ],
+  "wrong": {
+   "drinkible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.drinkable",
+  "version": 1,
+  "family": "gen.word.drinkable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "drinkable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "drinkible",
+   "drinkable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.drinkable",
+  "version": 1,
+  "family": "gen.word.drinkable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "drinkable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"suitable for drinking\". It starts with \"d\" and has 9 letters.",
+  "answers": [
+   "drinkable"
+  ],
+  "wrong": {
+   "drinkible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.valuable",
+  "version": 1,
+  "family": "gen.word.valuable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "valuable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "valuable",
+  "answers": [
+   "valuable"
+  ],
+  "wrong": {
+   "valuible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.valuable",
+  "version": 1,
+  "family": "gen.word.valuable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "valuable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "valuable",
+   "valuible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.valuable",
+  "version": 1,
+  "family": "gen.word.valuable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "valuable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"having great material or monetary value especially for use or exchange\". It starts with \"v\" and has 8 letters.",
+  "answers": [
+   "valuable"
+  ],
+  "wrong": {
+   "valuible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.removable",
+  "version": 1,
+  "family": "gen.word.removable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "removable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "removable",
+  "answers": [
+   "removable"
+  ],
+  "wrong": {
+   "removible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.removable",
+  "version": 1,
+  "family": "gen.word.removable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "removable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "removable",
+   "removible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.removable",
+  "version": 1,
+  "family": "gen.word.removable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "removable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being removed or taken away or dismissed\". It starts with \"r\" and has 9 letters.",
+  "answers": [
+   "removable"
+  ],
+  "wrong": {
+   "removible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.bearable",
+  "version": 1,
+  "family": "gen.word.bearable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "bearable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "bearable",
+  "answers": [
+   "bearable"
+  ],
+  "wrong": {
+   "bearible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.bearable",
+  "version": 1,
+  "family": "gen.word.bearable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "bearable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "bearable",
+   "bearible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.bearable",
+  "version": 1,
+  "family": "gen.word.bearable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "bearable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being borne though unpleasant\". It starts with \"b\" and has 8 letters.",
+  "answers": [
+   "bearable"
+  ],
+  "wrong": {
+   "bearible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.callable",
+  "version": 1,
+  "family": "gen.word.callable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "callable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "callable",
+  "answers": [
+   "callable"
+  ],
+  "wrong": {
+   "callible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.callable",
+  "version": 1,
+  "family": "gen.word.callable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "callable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "callible",
+   "callable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.callable",
+  "version": 1,
+  "family": "gen.word.callable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "callable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"subject to a demand for payment before due date\". It starts with \"c\" and has 8 letters.",
+  "answers": [
+   "callable"
+  ],
+  "wrong": {
+   "callible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.palatable",
+  "version": 1,
+  "family": "gen.word.palatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "palatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "palatable",
+  "answers": [
+   "palatable"
+  ],
+  "wrong": {
+   "palatible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.palatable",
+  "version": 1,
+  "family": "gen.word.palatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "palatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "palatible",
+   "palatable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.palatable",
+  "version": 1,
+  "family": "gen.word.palatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "palatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"acceptable to the taste or mind\". It starts with \"p\" and has 9 letters.",
+  "answers": [
+   "palatable"
+  ],
+  "wrong": {
+   "palatible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.printable",
+  "version": 1,
+  "family": "gen.word.printable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "printable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "printable",
+  "answers": [
+   "printable"
+  ],
+  "wrong": {
+   "printible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.printable",
+  "version": 1,
+  "family": "gen.word.printable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "printable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "printible",
+   "printable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.printable",
+  "version": 1,
+  "family": "gen.word.printable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "printable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"fit for publication because free of material that is morally or legally objectionable\". It starts with \"p\" and has 9 letters.",
+  "answers": [
+   "printable"
+  ],
+  "wrong": {
+   "printible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.reputable",
+  "version": 1,
+  "family": "gen.word.reputable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "reputable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "reputable",
+  "answers": [
+   "reputable"
+  ],
+  "wrong": {
+   "reputible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.reputable",
+  "version": 1,
+  "family": "gen.word.reputable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "reputable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "reputible",
+   "reputable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.reputable",
+  "version": 1,
+  "family": "gen.word.reputable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "reputable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"having a good reputation\". It starts with \"r\" and has 9 letters.",
+  "answers": [
+   "reputable"
+  ],
+  "wrong": {
+   "reputible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.suitable",
+  "version": 1,
+  "family": "gen.word.suitable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "suitable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "suitable",
+  "answers": [
+   "suitable"
+  ],
+  "wrong": {
+   "suitible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.suitable",
+  "version": 1,
+  "family": "gen.word.suitable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "suitable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "suitible",
+   "suitable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.suitable",
+  "version": 1,
+  "family": "gen.word.suitable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "suitable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"meant or adapted for an occasion or use\". It starts with \"s\" and has 8 letters.",
+  "answers": [
+   "suitable"
+  ],
+  "wrong": {
+   "suitible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.laughable",
+  "version": 1,
+  "family": "gen.word.laughable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "laughable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "laughable",
+  "answers": [
+   "laughable"
+  ],
+  "wrong": {
+   "laughible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.laughable",
+  "version": 1,
+  "family": "gen.word.laughable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "laughable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "laughible",
+   "laughable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.laughable",
+  "version": 1,
+  "family": "gen.word.laughable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "laughable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"so unreasonable as to invite derision\". It starts with \"l\" and has 9 letters.",
+  "answers": [
+   "laughable"
+  ],
+  "wrong": {
+   "laughible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.countable",
+  "version": 1,
+  "family": "gen.word.countable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "countable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "countable",
+  "answers": [
+   "countable"
+  ],
+  "wrong": {
+   "countible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.countable",
+  "version": 1,
+  "family": "gen.word.countable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "countable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "countible",
+   "countable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.countable",
+  "version": 1,
+  "family": "gen.word.countable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "countable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"that can be counted\". It starts with \"c\" and has 9 letters.",
+  "answers": [
+   "countable"
+  ],
+  "wrong": {
+   "countible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.reliable",
+  "version": 1,
+  "family": "gen.word.reliable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "reliable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "reliable",
+  "answers": [
+   "reliable"
+  ],
+  "wrong": {
+   "reliible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.reliable",
+  "version": 1,
+  "family": "gen.word.reliable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "reliable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "reliible",
+   "reliable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.reliable",
+  "version": 1,
+  "family": "gen.word.reliable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "reliable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"worthy of reliance or trust\". It starts with \"r\" and has 8 letters.",
+  "answers": [
+   "reliable"
+  ],
+  "wrong": {
+   "reliible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.available",
+  "version": 1,
+  "family": "gen.word.available",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "available",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "available",
+  "answers": [
+   "available"
+  ],
+  "wrong": {
+   "availible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.available",
+  "version": 1,
+  "family": "gen.word.available",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "available",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "availible",
+   "available"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.available",
+  "version": 1,
+  "family": "gen.word.available",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "available",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"obtainable or accessible and ready for use or service\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "available"
+  ],
+  "wrong": {
+   "availible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.desirable",
+  "version": 1,
+  "family": "gen.word.desirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "desirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "desirable",
+  "answers": [
+   "desirable"
+  ],
+  "wrong": {
+   "desirible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.desirable",
+  "version": 1,
+  "family": "gen.word.desirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "desirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "desirable",
+   "desirible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.desirable",
+  "version": 1,
+  "family": "gen.word.desirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "desirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"worth having or seeking or achieving\". It starts with \"d\" and has 9 letters.",
+  "answers": [
+   "desirable"
+  ],
+  "wrong": {
+   "desirible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.allowable",
+  "version": 1,
+  "family": "gen.word.allowable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "allowable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "allowable",
+  "answers": [
+   "allowable"
+  ],
+  "wrong": {
+   "allowible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.allowable",
+  "version": 1,
+  "family": "gen.word.allowable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "allowable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "allowible",
+   "allowable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.allowable",
+  "version": 1,
+  "family": "gen.word.allowable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "allowable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"deductible according to the tax laws\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "allowable"
+  ],
+  "wrong": {
+   "allowible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.excusable",
+  "version": 1,
+  "family": "gen.word.excusable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "excusable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "excusable",
+  "answers": [
+   "excusable"
+  ],
+  "wrong": {
+   "excusible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.excusable",
+  "version": 1,
+  "family": "gen.word.excusable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "excusable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "excusible",
+   "excusable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.excusable",
+  "version": 1,
+  "family": "gen.word.excusable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "excusable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being overlooked\". It starts with \"e\" and has 9 letters.",
+  "answers": [
+   "excusable"
+  ],
+  "wrong": {
+   "excusible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.arguable",
+  "version": 1,
+  "family": "gen.word.arguable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "arguable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "arguable",
+  "answers": [
+   "arguable"
+  ],
+  "wrong": {
+   "arguible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.arguable",
+  "version": 1,
+  "family": "gen.word.arguable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "arguable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "arguible",
+   "arguable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.arguable",
+  "version": 1,
+  "family": "gen.word.arguable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "arguable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being supported by argument\". It starts with \"a\" and has 8 letters.",
+  "answers": [
+   "arguable"
+  ],
+  "wrong": {
+   "arguible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.admirable",
+  "version": 1,
+  "family": "gen.word.admirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "admirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "admirable",
+  "answers": [
+   "admirable"
+  ],
+  "wrong": {
+   "admirible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.admirable",
+  "version": 1,
+  "family": "gen.word.admirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "admirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "admirable",
+   "admirible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.admirable",
+  "version": 1,
+  "family": "gen.word.admirable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "admirable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"inspiring admiration or approval\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "admirable"
+  ],
+  "wrong": {
+   "admirible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.probable",
+  "version": 1,
+  "family": "gen.word.probable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "probable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "probable",
+  "answers": [
+   "probable"
+  ],
+  "wrong": {
+   "probible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.probable",
+  "version": 1,
+  "family": "gen.word.probable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "probable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "probable",
+   "probible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.probable",
+  "version": 1,
+  "family": "gen.word.probable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "probable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"likely but not certain to be or become true or real\". It starts with \"p\" and has 8 letters.",
+  "answers": [
+   "probable"
+  ],
+  "wrong": {
+   "probible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.provable",
+  "version": 1,
+  "family": "gen.word.provable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "provable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "provable",
+  "answers": [
+   "provable"
+  ],
+  "wrong": {
+   "provible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.provable",
+  "version": 1,
+  "family": "gen.word.provable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "provable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "provible",
+   "provable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.provable",
+  "version": 1,
+  "family": "gen.word.provable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "provable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being demonstrated or proved\". It starts with \"p\" and has 8 letters.",
+  "answers": [
+   "provable"
+  ],
+  "wrong": {
+   "provible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.definable",
+  "version": 1,
+  "family": "gen.word.definable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "definable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "definable",
+  "answers": [
+   "definable"
+  ],
+  "wrong": {
+   "definible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.definable",
+  "version": 1,
+  "family": "gen.word.definable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "definable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "definable",
+   "definible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.definable",
+  "version": 1,
+  "family": "gen.word.definable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "definable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being defined, limited, or explained\". It starts with \"d\" and has 9 letters.",
+  "answers": [
+   "definable"
+  ],
+  "wrong": {
+   "definible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.debatable",
+  "version": 1,
+  "family": "gen.word.debatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "debatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "debatable",
+  "answers": [
+   "debatable"
+  ],
+  "wrong": {
+   "debatible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.debatable",
+  "version": 1,
+  "family": "gen.word.debatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "debatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "debatable",
+   "debatible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.debatable",
+  "version": 1,
+  "family": "gen.word.debatable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "debatable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"open to doubt or debate\". It starts with \"d\" and has 9 letters.",
+  "answers": [
+   "debatable"
+  ],
+  "wrong": {
+   "debatible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.alterable",
+  "version": 1,
+  "family": "gen.word.alterable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "alterable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "alterable",
+  "answers": [
+   "alterable"
+  ],
+  "wrong": {
+   "alterible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.alterable",
+  "version": 1,
+  "family": "gen.word.alterable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "alterable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "alterible",
+   "alterable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.alterable",
+  "version": 1,
+  "family": "gen.word.alterable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "alterable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of being changed or altered in some characteristic\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "alterable"
+  ],
+  "wrong": {
+   "alterible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.incurable",
+  "version": 1,
+  "family": "gen.word.incurable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "incurable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "incurable",
+  "answers": [
+   "incurable"
+  ],
+  "wrong": {
+   "incurible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.incurable",
+  "version": 1,
+  "family": "gen.word.incurable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "incurable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "incurible",
+   "incurable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.incurable",
+  "version": 1,
+  "family": "gen.word.incurable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "incurable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"incapable of being cured\". It starts with \"i\" and has 9 letters.",
+  "answers": [
+   "incurable"
+  ],
+  "wrong": {
+   "incurible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.miserable",
+  "version": 1,
+  "family": "gen.word.miserable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "miserable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "miserable",
+  "answers": [
+   "miserable"
+  ],
+  "wrong": {
+   "miserible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.miserable",
+  "version": 1,
+  "family": "gen.word.miserable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "miserable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "miserible",
+   "miserable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.miserable",
+  "version": 1,
+  "family": "gen.word.miserable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "miserable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"very unhappy; full of misery\". It starts with \"m\" and has 9 letters.",
+  "answers": [
+   "miserable"
+  ],
+  "wrong": {
+   "miserible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.agreeable",
+  "version": 1,
+  "family": "gen.word.agreeable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "agreeable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "agreeable",
+  "answers": [
+   "agreeable"
+  ],
+  "wrong": {
+   "agreeible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.agreeable",
+  "version": 1,
+  "family": "gen.word.agreeable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "agreeable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "agreeible",
+   "agreeable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.agreeable",
+  "version": 1,
+  "family": "gen.word.agreeable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "agreeable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"conforming to your own liking or feelings or nature\". It starts with \"a\" and has 9 letters.",
+  "answers": [
+   "agreeable"
+  ],
+  "wrong": {
+   "agreeible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.enjoyable",
+  "version": 1,
+  "family": "gen.word.enjoyable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "enjoyable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "enjoyable",
+  "answers": [
+   "enjoyable"
+  ],
+  "wrong": {
+   "enjoyible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.enjoyable",
+  "version": 1,
+  "family": "gen.word.enjoyable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "enjoyable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "enjoyible",
+   "enjoyable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.enjoyable",
+  "version": 1,
+  "family": "gen.word.enjoyable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "enjoyable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"affording satisfaction or pleasure\". It starts with \"e\" and has 9 letters.",
+  "answers": [
+   "enjoyable"
+  ],
+  "wrong": {
+   "enjoyible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.renewable",
+  "version": 1,
+  "family": "gen.word.renewable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "renewable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "renewable",
+  "answers": [
+   "renewable"
+  ],
+  "wrong": {
+   "renewible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.renewable",
+  "version": 1,
+  "family": "gen.word.renewable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "renewable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "renewable",
+   "renewible"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.renewable",
+  "version": 1,
+  "family": "gen.word.renewable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 6,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "renewable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"that can be renewed or extended\". It starts with \"r\" and has 9 letters.",
+  "answers": [
+   "renewable"
+  ],
+  "wrong": {
+   "renewible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.playable",
+  "version": 1,
+  "family": "gen.word.playable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "playable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "playable",
+  "answers": [
+   "playable"
+  ],
+  "wrong": {
+   "playible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.playable",
+  "version": 1,
+  "family": "gen.word.playable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "playable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "playible",
+   "playable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.playable",
+  "version": 1,
+  "family": "gen.word.playable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "playable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"capable of or suitable for being played or played on\". It starts with \"p\" and has 8 letters.",
+  "answers": [
+   "playable"
+  ],
+  "wrong": {
+   "playible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.hear_spell.portable",
+  "version": 1,
+  "family": "gen.word.portable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.5,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "hear_spell",
+   "word": "portable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:dictation",
+  "prompt": "Listen, then type the word you hear.",
+  "speak": "portable",
+  "answers": [
+   "portable"
+  ],
+  "wrong": {
+   "portible": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.choose_spelling.portable",
+  "version": 1,
+  "family": "gen.word.portable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.25,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "choose_spelling",
+   "word": "portable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "choice:spelling",
+  "prompt": "Which spelling is correct?",
+  "options": [
+   "portible",
+   "portable"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "suffix_by_sound"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "gen.mor.meaning_first_letter.portable",
+  "version": 1,
+  "family": "gen.word.portable",
+  "target": "EN.FND.SPL.morphological",
+  "b": 5.75,
+  "a": 1.1,
+  "step": "able_ible",
+  "difficulty_source": "feature_estimate",
+  "review": "candidate-generated",
+  "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "generated": {
+   "generator": "spelling-templates@1",
+   "template": "meaning_first_letter",
+   "word": "portable",
+   "sources": [
+    "oewn",
+    "scowl"
+   ]
+  },
+  "format": "typed:clue",
+  "prompt": "Write the word that means \"easily or conveniently transported\". It starts with \"p\" and has 8 letters.",
+  "answers": [
+   "portable"
+  ],
+  "wrong": {
+   "portible": "suffix_by_sound"
+  }
+ }
+]

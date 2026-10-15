@@ -7,6 +7,7 @@ import { parseBackup } from "../logic/backup.ts";
 import type { Learner } from "../logic/learner.ts";
 import type { Repo } from "../logic/store.ts";
 import { BANDS, GOALS } from "./Onboarding.tsx";
+import { NoteBox, saveJson } from "./Note.tsx";
 import { speak } from "./speech.ts";
 
 export function Me({
@@ -128,6 +129,7 @@ export function Me({
         {msg && <p role="status">{msg}</p>}
         {!onServer && <ImportBackup repo={repo} onImported={onOpen} />}
       </section>
+      {!onServer && <TrialSection learner={learner} voice={voice} />}
       <section aria-labelledby="profile-title" className="stack">
         <h2 id="profile-title">Learner</h2>
         <button type="button" className="secondary" onClick={onSwitch}>
@@ -214,6 +216,39 @@ function Choose({ band, goal, onSave, onCancel }: { band: (typeof BANDS)[number]
         Cancel
       </button>
     </div>
+  );
+}
+
+/**
+ * The trial record (PR #14): a summary without the learner's name to share with the OpenPath team, and notes about
+ * problems. Notes are free text, so the pilot build (content mode "pilot") does not offer them: a pupil code must be the
+ * only identifier in a pilot record.
+ */
+function TrialSection({ learner, voice }: { learner: Learner; voice: SpeechSynthesisVoice | null }) {
+  const [msg, setMsg] = useState<string | null>(null);
+  const c = learner.content;
+  const summary = () => {
+    const p = learner.pilotSummary({ speech: !!voice && learner.state.speech, standalone: window.matchMedia?.("(display-mode: standalone)").matches, width: window.innerWidth });
+    saveJson(p, `openpath-trial-summary-${p.learner.code}-${p.made_at.slice(0, 10)}.json`);
+    setMsg("Trial summary saved to your downloads. It has no name, but it has answers. Share it only if you choose to.");
+  };
+  return (
+    <section aria-labelledby="trial-title">
+      <h2 id="trial-title">Taking part in the trial</h2>
+      <p>If you are helping to try OpenPath English, you can save a summary of the learning so far to share with the OpenPath team. It has no name, but it has answers and timings. Nothing is sent: you choose whether to share it.</p>
+      <button type="button" className="secondary" onClick={summary}>
+        Save a trial summary
+      </button>
+      {msg && <p role="status">{msg}</p>}
+      {c.contentMode !== "pilot" && <NoteBox learner={learner} screen="settings" label="Tell us about a problem, or anything that got in the way" />}
+      <p className="small">
+        {c.contentMode === "pilot"
+          ? "Pilot version: only educator-approved questions are shown, and only the starting point and the spelling check by dictation."
+          : c.contentMode === "preview"
+            ? `Preview of the trial: the trial's practice words, not yet reviewed by a person (${c.generated.length} practice questions).`
+            : `Development version: practice words include ones not yet reviewed (${c.generated.length} practice questions); excluded words are never offered.`}
+      </p>
+    </section>
   );
 }
 

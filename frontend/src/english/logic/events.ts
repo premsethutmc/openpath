@@ -231,16 +231,38 @@ export interface FlagEvent {
   note: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | TraceEvent | LedgerEvent;
+/** How a session felt, tapped at its end (optional; for the pilot's usability record). */
+export type Rating = "too_easy" | "about_right" | "too_hard" | "confusing";
+export const RATINGS: Rating[] = ["too_easy", "about_right", "too_hard", "confusing"];
+
+export interface RatingEvent {
+  kind: "rating";
+  id: string;
+  at: string;
+  session: string;
+  rating: Rating;
+}
+
+/** A note from the learner or a guardian: a problem, a question, anything that got in the way. */
+export interface NoteEvent {
+  kind: "note";
+  id: string;
+  at: string;
+  /** Where it was written (a screen name), so a problem can be traced to a step of the journey. */
+  screen: string;
+  text: string;
+}
+
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "trace", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
-const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention"]);
+const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
 export function eventProblem(e: unknown): string | null {
@@ -251,5 +273,7 @@ export function eventProblem(e: unknown): string | null {
   if (typeof x.at !== "string" || Number.isNaN(Date.parse(x.at))) return `event ${x.id} has no valid time`;
   if (ITEM_KINDS.has(x.kind) && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
   if (SESSION_KINDS.has(x.kind) && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if (x.kind === "rating" && !RATINGS.includes(x.rating as Rating)) return `event ${x.id} has an unknown rating`;
+  if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
   return null;
 }

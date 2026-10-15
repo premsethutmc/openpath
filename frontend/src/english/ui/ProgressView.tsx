@@ -9,6 +9,7 @@ import { patternStatus } from "../logic/state.ts";
 import { STATUS_WORDS } from "./Home.tsx";
 import { ParentSummary } from "./Journey.tsx";
 import { CapabilityCard, ParentOverviewView } from "./Profile.tsx";
+import { Words } from "./Words.tsx";
 
 export function ProgressView({ learner }: { learner: Learner }) {
   const { profile, overview } = learner.overview();
@@ -86,6 +87,7 @@ export function ProgressView({ learner }: { learner: Learner }) {
           <p className="small">"New words" is the latest check with words you had never seen: it shows whether the rule has stuck, not just the words practised.</p>
         </section>
       )}
+      <Words learner={learner} />
       <section className="panel" aria-labelledby="grownups-title">
         <h2 id="grownups-title">For parents and teachers</h2>
         <p className="small">Strengths, gaps, how good the evidence is, and what comes next: never a single score, and never compared with other children.</p>

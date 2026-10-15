@@ -1,7 +1,13 @@
 /**
  * Build the private OpenPath English web app (static files only; no server, no API).
  *
- *   node scripts/build-english.mjs     -> dist-english/
+ *   node scripts/build-english.mjs           -> dist-english/ (development: unreviewed practice words included)
+ *   node scripts/build-english.mjs --preview -> dist-english/ with the pilot set's words, not yet reviewed (for the
+ *                                               product owner to try the pilot experience; labelled as unreviewed)
+ *   node scripts/build-english.mjs --pilot   -> dist-english/ for a trial: only practice words from approved
+ *                                               rules or reviewed sets (fails if none are approved)
+ *
+ * Flagged and excluded practice words are never included in either. See tools/english/spelling/review.ts.
  *
  * Everything it needs is in the bundle: the engine, the framework, the item bank, the generated
  * spelling items, lessons and feedback. The licence notices of the word sources are copied alongside.
@@ -12,7 +18,24 @@ import { copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promi
 import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 
+import { reviewStatus, reviewSummary } from "../../packages/english-core/src/index.ts";
+
 const root = fileURLToPath(new URL("..", import.meta.url));
+const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes("--preview") ? "preview" : "development";
+{
+  const items = JSON.parse(await readFile(`${root}/../content/english/spelling/generated-items.json`, "utf8"));
+  const review = JSON.parse(await readFile(`${root}/../content/english/spelling/review/review.json`, "utf8"));
+  const rows = reviewSummary(items, reviewStatus(items, review));
+  const approved = rows.reduce((t, r) => t + r.approved, 0);
+  const pilotSet = JSON.parse(await readFile(`${root}/../content/english/spelling/review/pilot-set.json`, "utf8")).items.length;
+  const offered = mode === "pilot" ? approved : mode === "preview" ? pilotSet : approved + rows.reduce((t, r) => t + r.unreviewed, 0);
+  console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)`);
+  for (const r of rows) console.log(`  ${r.rule}: ${r.approved} approved, ${r.unreviewed} unreviewed, ${r.flagged} flagged, ${r.excluded} excluded`);
+  if (mode === "pilot" && !approved) {
+    console.error("A pilot build needs at least one approved rule or reviewed set. Review the pilot sheet first (content/english/spelling/review/pending/pilot-1.csv), then: node tools/english/spelling/review.ts record pilot-1.csv --by \"Your name\"");
+    process.exit(1);
+  }
+}
 const out = `${root}/dist-english`;
 const licences = `${root}/../content/english/spelling/licences`;
 
@@ -39,7 +62,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit) },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode) },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);
@@ -63,6 +86,25 @@ await writeFile(
 await writeFile(
   `${out}/manifest.webmanifest`,
   JSON.stringify({ name: "OpenPath English", short_name: "OpenPath", start_url: "./", scope: "./", display: "standalone", background_color: "#eef2f7", theme_color: "#1f3a93", icons: [{ src: "icon.svg", sizes: "any", type: "image/svg+xml" }] }, null, 1),
+);
+
+// Response headers for static hosts that read a _headers file (Cloudflare Pages, Netlify); the preview
+// server applies the same file. The page's own CSP is a meta tag; these add what a meta tag cannot.
+await writeFile(
+  `${out}/_headers`,
+  `/*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+/sw.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+`,
 );
 
 // Offline: cache the app's own files on first visit; serve them from the cache, refreshing in the background.

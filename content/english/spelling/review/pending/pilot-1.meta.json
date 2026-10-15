@@ -1,0 +1,8 @@
+{
+ "kind": "words",
+ "id": "set:pilot-1",
+ "name": "pilot-1",
+ "wordbank": "ffa1cfe8",
+ "created": "2026-10-13",
+ "instructions": "One row per word; the verdict covers every exercise listed for the word (adding the ending, and dictation). In verdict write one of: ok; critical (with category wrong_answer, ambiguous_answer, misleading_explanation or inappropriate, and a note); minor-keep (a harmless wording or presentation problem; the item stays; note what it is); minor-exclude (a minor problem, but leave the item out; note it). Only words marked ok or minor-keep are approved."
+}

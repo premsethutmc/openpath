@@ -2,7 +2,7 @@
  * The app's state, derived from the event list by a deterministic fold (like the engine's ledger).
  * Nothing here is stored: reopening the app, importing a backup or moving devices all rebuild it.
  */
-import { Ledger, type LedgerEvent } from "../../../../packages/english-core/src/index.ts";
+import { Ledger, type LedgerEvent, RECALL_TEMPLATES, itemVersion } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, SPELLING, lessonId } from "./content.ts";
 import { type AppEvent, type AttemptEvent, type FlagEvent, type LessonEvent, type PreferencesEvent, type ProfileEvent, type SessionEndEvent, type SessionEvent, isLedgerEvent } from "./events.ts";
 
@@ -127,7 +127,8 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
         st.attempts.push(e);
         if (e.assisted) break;
         st.answered.push(e);
-        const item = content.ctx.content.items.get(e.item.id);
+        // the version answered (an older version is still scored as it was answered)
+        const item = itemVersion(content.ctx.content, e.item.id, e.item.version) ?? content.ctx.content.items.get(e.item.id);
         if (!item || item.kind !== "code" || !SPELLING.has(item.target) || !item.step) break;
         const type = st.event.type;
         const p = pattern(item.target, item.step);
@@ -142,13 +143,13 @@ export function fold(content: AppContent, events: AppEvent[]): AppState {
         if (item.generated) {
           const word = item.generated.word;
           s.wordsSeen.add(word);
-          memory(s, word, p.key, e, type === "spelling_review");
+          memory(s, word, p.key, e, type === "spelling_review", RECALL_TEMPLATES.has(item.generated.template));
         } else if (item.format === "typed:dictation" && item.answers?.[0]) {
           // a dictation word is never asked again in a check; a misspelt one comes back in word review when the app has
           // a practice item for that word (word review asks practice words, never the check's own question again)
           const word = item.answers[0].toLowerCase();
           s.wordsSeen.add(word);
-          if (practiceWords(content).has(word)) memory(s, word, p.key, e, type === "spelling_review");
+          if (practiceWords(content).has(word)) memory(s, word, p.key, e, type === "spelling_review", true);
         }
         break;
       }
@@ -174,8 +175,12 @@ function practiceWords(content: AppContent): Set<string> {
   return w;
 }
 
-/** Word memory: a misspelt word starts at box 0; a correct review on or after its due day moves it up; a wrong one sends it back. */
-function memory(s: AppState, word: string, pattern: string, e: AttemptEvent, review: boolean): void {
+/**
+ * Word memory: a misspelt word starts at box 0; a correct review on or after its due day moves it up; a
+ * wrong one sends it back. Only a written (recall) answer moves a word up: choosing the right spelling
+ * from options is recorded, but it is not remembering how to write the word.
+ */
+function memory(s: AppState, word: string, pattern: string, e: AttemptEvent, review: boolean, recall: boolean): void {
   let m = s.words.get(word);
   if (!m) {
     if (e.correct) return; // only words the learner has got wrong are kept for review
@@ -192,7 +197,7 @@ function memory(s: AppState, word: string, pattern: string, e: AttemptEvent, rev
     m.due = addDays(e.at, REVIEW_DAYS[0]);
     return;
   }
-  if (review && Date.parse(e.at) >= Date.parse(m.due) - DUE_EARLY_MS) {
+  if (review && recall && Date.parse(e.at) >= Date.parse(m.due) - DUE_EARLY_MS) {
     if (m.box >= REVIEW_DAYS.length - 1) m.learned = true;
     else {
       m.box += 1;

@@ -32,13 +32,13 @@ import {
 } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED } from "./content.ts";
 import type { AppEvent, EvidenceTarget } from "./events.ts";
-import { type PlanStep, patternTitle, todayPlan } from "./plan.ts";
+import { type PlanStep, patternTitle, reviewStep, todayPlan } from "./plan.ts";
 import { capabilityProgress, type CapabilityProgress } from "./progress.ts";
 import { findingLine, misconceptionFindings } from "./misconceptions.ts";
 import { type MasteryGate, demonstratedNow, gateHistory, masteryGate, qualifyingAnswers, supportedAtLeast } from "./mastery.ts";
 import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type Use, evidenceCheckPool, onlyFor, spellingPlan } from "./select.ts";
-import { type AppState, dueWords, fold, placementDone, sessionsOf } from "./state.ts";
+import { type AppState, fold, placementDone, sessionsOf } from "./state.ts";
 import { parentReport } from "./journey.ts";
 
 export interface CapabilityProfile extends CapabilitySnapshot {
@@ -553,12 +553,9 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
         out.push(check("show_what_you_know", "A few questions on your own, to see where you are.", "assess"));
     }
   }
-  const due = dueWords(s, now);
-  if (due.length) {
-    const n = Math.min(due.length, 10);
-    const step: PlanStep = { type: "spelling_review", title: `Review ${n} word${n === 1 ? "" : "s"}`, reason: "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them.", count: due.length };
-    out.push({ kind: "check_learned", label: CHILD.check_learned, title: step.title, line: step.reason, step, recommendation: null, priority: 89 });
-  }
+  // word review: misspelt words due again, and words spelt right a few days ago due a check (one implementation: plan.ts)
+  const step = reviewStep(s, c, now, speech);
+  if (step) out.push({ kind: "check_learned", label: CHILD.check_learned, title: step.title, line: step.reason, step, recommendation: null, priority: 89 });
   return out
     .sort((a, b) => b.priority - a.priority)
     .slice(0, 3)

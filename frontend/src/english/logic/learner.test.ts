@@ -12,8 +12,9 @@ import { isLedgerEvent } from "./events.ts";
 import { Learner } from "./learner.ts";
 import type { PlanStep } from "./plan.ts";
 import { capabilityProgress } from "./progress.ts";
-import { PLACEMENT_MAX, PLACEMENT_MIN } from "./select.ts";
+import { PLACEMENT_MAX, PLACEMENT_MIN, reviewWords } from "./select.ts";
 import { MemoryRepo } from "./store.ts";
+import { rightAnswer, wrongAnswer } from "./test-helpers.ts";
 import { REVIEW_DAYS, patternStatus } from "./state.ts";
 
 const content = loadContent();
@@ -30,40 +31,6 @@ function testClock(start = "2026-10-13T09:00:00.000Z") {
     t += n * DAY;
   };
   return clock;
-}
-
-export function rightAnswer(item: Item): Response {
-  if (item.kind !== "code") throw new Error("code items only");
-  switch (item.format.split(":")[0]) {
-    case "choice":
-      return { kind: "choice", choice: item.answer! };
-    case "typed":
-      return { kind: "typed", text: item.answers![0] };
-    case "order":
-      return { kind: "order", order: item.answer_order! };
-    case "match":
-      return { kind: "match", pairs: item.answer_pairs! };
-    case "multi":
-      return { kind: "multi", choices: item.answer_set! };
-  }
-  throw new Error(item.format);
-}
-
-export function wrongAnswer(item: Item): Response {
-  if (item.kind !== "code") throw new Error("code items only");
-  switch (item.format.split(":")[0]) {
-    case "choice":
-      return { kind: "choice", choice: (item.answer! + 1) % item.options!.length };
-    case "typed":
-      return { kind: "typed", text: Object.keys(item.wrong ?? {})[0] ?? "zzzz" };
-    case "order":
-      return { kind: "order", order: [...item.answer_order!].reverse() };
-    case "match":
-      return { kind: "match", pairs: [...item.answer_pairs!].reverse() };
-    case "multi":
-      return { kind: "multi", choices: [0] };
-  }
-  throw new Error(item.format);
 }
 
 /** Run the open session to its end, answering with `policy` (true = right). Returns the items asked. */
@@ -267,7 +234,9 @@ test("word memory: due words come back after 1, 3, 7 and 14 days until learned; 
   }
   assert.equal(l.state.words.get(word)!.learned, true);
   clock.days(30);
-  assert.ok(!l.plan().some((p) => p.type === "spelling_review"));
+  const later = reviewWords(l.state, content, l.clock());
+  assert.deepEqual(later.due, [], "a learned word is not due again");
+  assert.ok(!later.confirm.includes(word));
 });
 
 test("transfer: practise a pattern well, then a check with words never seen; passing makes it secure", async () => {
