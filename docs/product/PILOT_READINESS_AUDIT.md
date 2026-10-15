@@ -2,6 +2,10 @@
 
 **Status:** audit only. Nothing has been merged or deployed, and no code or threshold was changed.
 
+**Update:** decisions and the next steps are in [PILOT_DECISIONS.md](PILOT_DECISIONS.md). It recommends a device-only
+set-up, adds a backup report script, corrects the consent wording, and finds that the stack also offers *orgies*,
+*overdose*, *flogging*, *mugging* and *insane* as practice words.
+
 **Subject:** the English app as of `830264a` (PR #28, the tip of the stack).
 
 **Scope:** a first supervised pilot with 5–10 pupils, focused on spelling by dictation.

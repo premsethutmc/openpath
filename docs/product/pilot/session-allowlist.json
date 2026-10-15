@@ -1,0 +1,1482 @@
+{
+ "version": "pilot-allowlist@0-proposal",
+ "status": "PROPOSAL: not enforced by the app, and nothing in it is approved",
+ "rule": "In a pupil session, only items listed here AND recorded as approved by the educator (reviews file, matching id and version) may be shown. Anything else is refused. Until approvals exist, nothing may be shown.",
+ "sessions_allowed": [
+  "placement",
+  "spelling_assess"
+ ],
+ "sessions_refused": [
+  "spelling_practice",
+  "spelling_review",
+  "spelling_transfer",
+  "spelling_check",
+  "guided",
+  "explore",
+  "doubling_journey",
+  "check (non-dictation evidence checks)"
+ ],
+ "lessons_allowed": [],
+ "generated_practice_allowed": [],
+ "items": [
+  {
+   "id": "spl.hom.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.17",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.hom.18",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.infl.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.infl.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.15",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.infl.17",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.17",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.18",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.mor.19",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.art.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.art.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.12",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.art.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.plu.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.apo.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.cap.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.pps.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.sva.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "plt.sva.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "grm.sva.15",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.10",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.17",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.13",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.05",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.14",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.gen.16",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.pre.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.12",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.15",
+   "version": 2,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.16",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.suf.17",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.01",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.02",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.03",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.04",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.05",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.06",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.07",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.08",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.09",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.10",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.11",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.12",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.13",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.14",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "voc.syn.15",
+   "version": 1,
+   "use": "placement"
+  },
+  {
+   "id": "spl.dict.003",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.004",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.001",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.002",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.045",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.046",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.049",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.047",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.048",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.007",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.009",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.006",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.005",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.008",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.013",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.011",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.012",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.015",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.010",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.014",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.016",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.022",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.019",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.021",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.018",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.050",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.017",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.020",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.052",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.053",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.051",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.054",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.055",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.024",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.023",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.059",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.056",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.025",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.058",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.057",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.026",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.027",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.061",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.060",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.028",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.065",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.062",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.064",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.063",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.030",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.035",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.029",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.066",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.067",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.036",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.034",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.031",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.032",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.068",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.069",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.033",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.071",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.072",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.040",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.070",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.042",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.037",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.074",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.038",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.041",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.075",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.073",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.039",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.077",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.076",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.078",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.044",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.079",
+   "version": 1,
+   "use": "dictation"
+  },
+  {
+   "id": "spl.dict.043",
+   "version": 1,
+   "use": "dictation"
+  }
+ ],
+ "counts": {
+  "placement": 212,
+  "dictation": 79
+ }
+}

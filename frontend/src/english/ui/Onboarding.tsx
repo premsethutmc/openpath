@@ -188,7 +188,7 @@ export function ParentAuth({
           <Field label="Password" type="password" value={password} onChange={setPassword} error={field("password")} autoComplete="new-password" hint="At least 10 characters, not a common password." />
           <label className="inline consent">
             <input id="account-consent" type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} />
-            <span>I am a parent or guardian. I agree that OpenPath keeps my email and my children's learning records on its server, only to show their learning to me. They are not shared, and I can export or delete them at any time.</span>
+            <span>I am a parent or guardian. I agree that OpenPath keeps my email and my children's learning records on its server, to show their learning to me. OpenPath's developers read a child's record only if I turn on sharing for diagnostics for that child in Me (every look is logged), and the app sends performance measurements that never include answers or names. Records are not sold or given to anyone else, and I can export or delete them at any time.</span>
           </label>
           {field("consent") && (
             <p className="field-error" role="alert">
