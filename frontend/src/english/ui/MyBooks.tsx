@@ -4,7 +4,7 @@
  * learner may see and saves. The learner practises the approved spelling words with the Spelling Bee's screen and
  * answers the approved questions here. The text stays in this learner's record on this device.
  */
-import { type ChangeEvent, useMemo, useState } from "react";
+import { type ChangeEvent, type ReactElement, useMemo, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, tidyText } from "../logic/books.ts";
 import { sourceProgress } from "../logic/spelling.ts";
@@ -175,7 +175,7 @@ function BookEditor({ learner, book, onDone }: { learner: Learner; book: Book | 
 }
 
 function Review({ ex, chosen, toggle, setAll, stale }: { ex: Extraction; chosen: Set<string>; toggle: (id: string) => void; setAll: (ids: string[], on: boolean) => void; stale: boolean }) {
-  const groups: { key: string; title: string; ids: string[]; body: (id: string) => JSX.Element }[] = [
+  const groups: { key: string; title: string; ids: string[]; body: (id: string) => ReactElement }[] = [
     {
       key: "spelling",
       title: "Spelling words",
