@@ -84,7 +84,9 @@ test("PC-4 review status and provenance: every new question is a candidate await
   }
   for (const i of bank) assert.ok(pool(i.id), `${i.id} has a reserved use`);
   assert.match((manifest as { status: string }).status, /awaiting educator review/);
-  assert.deepEqual(reviews, [], "no review decisions are recorded until an educator makes them");
+  // the only decisions recorded are the product owner's approvals of the allowlisted questions (15 October 2026):
+  // no educator decision is claimed, and no question is marked validated (the "review" fields above are unchanged)
+  assert.ok((reviews as { authority?: string; decision: string }[]).every((r) => r.authority === "product-owner" && r.decision === "approve"));
 });
 
 test("PC-5 enough reserved questions at the easier levels for diagnosis, confirmation and a later check", () => {

@@ -52,7 +52,7 @@ function Prompt({ text }: { text: string }) {
   );
 }
 
-function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voice: SpeechSynthesisVoice | null; locked: boolean; onSubmit: (r: Response) => void }) {
+function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check" }: { speakText?: string; voice: SpeechSynthesisVoice | null; locked: boolean; onSubmit: (r: Response) => void; submitLabel?: string }) {
   const [text, setText] = useState("");
   const input = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -107,7 +107,7 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
         />
       </label>
       <button type="submit" className="primary" disabled={locked || !text.trim()}>
-        Check
+        {submitLabel}
       </button>
     </form>
   );
@@ -117,18 +117,23 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
  * Hear the word, then type it. The word and its sentence are only ever spoken (or, for an adult reading aloud,
  * shown to the adult on request and hidden again): never displayed to the learner before the answer is checked.
  */
-function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word: string; sentence?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void }) {
+export function Dictation({ word, sentence, say, voice, delivery, locked, onSubmit, onPlay, submitLabel }: { word: string; sentence?: string; say?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void; onPlay?: () => void; submitLabel?: string }) {
   const [plays, setPlays] = useState(0);
   const [adultSees, setAdultSees] = useState(false);
+  // the voice did not start (Android Chrome can refuse or drop speech it did not get from a tap): ask for a tap
+  const [silent, setSilent] = useState(false);
+  const heard = (ok: boolean) => setSilent(!ok);
   const playWord = () => {
-    speak(word, voice);
+    speak(word, voice, heard);
     setPlays((n) => n + 1);
+    onPlay?.();
   };
   useEffect(() => {
     // first time: the word, a sentence with it, the word again (a sentence settles words that sound like others)
     if (delivery === "device_voice" && voice) {
-      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice);
+      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice, heard);
       setPlays(1);
+      onPlay?.();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -136,11 +141,23 @@ function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word
     <div className="dictation-controls">
       {delivery === "device_voice" ? (
         <div className="row listen-row">
-          <button type="button" className="listen" onClick={playWord} data-plays={plays}>
-            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? "Repeat the word" : "Play the word"}
+          {silent && (
+            <p className="tile peach no-sound" role="status">
+              No sound? Turn the volume up, then tap “Play the word”.
+            </p>
+          )}
+          <button type="button" className={silent ? "listen primary" : "listen"} onClick={playWord} data-plays={plays}>
+            <span aria-hidden="true">{plays && !silent ? "🔁" : "▶️"}</span> {plays && !silent ? "Repeat the word" : "Play the word"}
           </button>
           {sentence && (
-            <button type="button" className="listen" onClick={() => speak(`${word}. ${sentence} ${word}.`, voice)}>
+            <button
+              type="button"
+              className="listen"
+              onClick={() => {
+                speak(`${word}. ${sentence} ${word}.`, voice);
+                onPlay?.();
+              }}
+            >
               <span aria-hidden="true">💬</span> Hear it in a sentence
             </button>
           )}
@@ -160,6 +177,7 @@ function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word
             <>
               <p className="adult-word">
                 Say: <b>{word}</b>
+                {say && <span className="small"> ({say})</span>}
               </p>
               {sentence && <p>Sentence: “{sentence}”</p>}
               <button type="button" className="primary" onClick={() => setAdultSees(false)}>
@@ -169,7 +187,7 @@ function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word
           )}
         </div>
       )}
-      {!adultSees && <Typed voice={voice} locked={locked} onSubmit={onSubmit} />}
+      {!adultSees && <Typed voice={voice} locked={locked} onSubmit={onSubmit} submitLabel={submitLabel} />}
     </div>
   );
 }

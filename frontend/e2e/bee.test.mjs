@@ -1,0 +1,252 @@
+/**
+ * End-to-end: the Spelling Bee on an Android-sized phone (Chromium emulating 412×915; not a physical phone), against
+ * the production build in device-only mode.
+ *
+ *   npm run english:build && npm run english:preview &
+ *   E2E_URL=http://127.0.0.1:4174 npm run english:e2e-bee
+ *
+ * Speech: headless Chromium has no voices, so a stand-in speechSynthesis records what the app asks it to say. The test
+ * learns each word only from that speech, which checks the word was requested aloud; it never reads it from the page.
+ */
+import assert from "node:assert/strict";
+import { mkdirSync, mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { after, before, test } from "node:test";
+import { chromium } from "playwright";
+
+const URL = process.env.E2E_URL ?? "http://127.0.0.1:4174";
+const SHOTS = process.env.E2E_SHOTS;
+if (SHOTS) mkdirSync(SHOTS, { recursive: true });
+const shot = async (page, name) => SHOTS && page.screenshot({ path: `${SHOTS}/bee-${name}.png`, fullPage: true });
+const ANDROID = {
+  viewport: { width: 412, height: 915 },
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36",
+};
+
+let browser;
+before(async () => {
+  browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+});
+after(() => browser?.close());
+
+/** A phone-sized browser context with a stand-in voice. drop: how many utterances the voice silently drops (as
+ * Android Chrome can with speech not started by a tap). profile: a folder for a persistent browser profile, so the
+ * whole browser can be closed and started again with the same storage. */
+async function phone({ drop = 0, profile = null } = {}) {
+  const context = profile ? await chromium.launchPersistentContext(profile, { ...ANDROID, executablePath: process.env.CHROMIUM_PATH || undefined }) : await browser.newContext(ANDROID);
+  if (drop) await context.addInitScript((n) => (window.__drop = n), drop);
+  await context.addInitScript(() => {
+    const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
+    window.__spoken = [];
+    window.SpeechSynthesisUtterance = class {
+      constructor(text) {
+        this.text = text;
+      }
+    };
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+  });
+  const errors = [];
+  const foreign = [];
+  const watch = (p) => {
+    p.on("pageerror", (e) => errors.push(e.message));
+    p.on("request", (r) => {
+      const u = new globalThis.URL(r.url());
+      if (!["127.0.0.1", "localhost"].includes(u.hostname) && u.protocol !== "data:" && u.protocol !== "blob:") foreign.push(r.url());
+    });
+  };
+  context.on("page", watch);
+  context.pages().forEach(watch); // a persistent browser opens with a tab already there
+  const page = context.pages()[0] ?? (await context.newPage());
+  return { context, page, errors, foreign };
+}
+
+async function fits(page) {
+  const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
+  assert.ok(sw <= w, `page is ${sw}px wide on a ${w}px screen`);
+}
+/** Every visible button can be tapped comfortably (44 px), except small text links. */
+async function tappable(page) {
+  const small = await page.evaluate(() => [...document.querySelectorAll("button")].filter((b) => !b.classList.contains("link") && b.offsetParent !== null).map((b) => ({ t: b.textContent.trim().slice(0, 30), h: b.getBoundingClientRect().height })).filter((b) => b.h < 44));
+  assert.deepEqual(small, []);
+}
+const spoken = (page) => page.evaluate(() => window.__spoken.slice());
+/** The word now being asked, from what the app asked the voice to say ("word. sentence word."). */
+async function heard(page, before) {
+  await page.waitForFunction((n) => window.__spoken.length > n, before);
+  const said = (await spoken(page)).at(-1);
+  return said.split(".")[0].trim();
+}
+/** The word must not be anywhere in the page (text or attributes) before it is answered. */
+async function notInPage(page, word) {
+  const html = (await page.evaluate(() => document.body.outerHTML)).toLowerCase();
+  assert.ok(!new RegExp(`\\b${word.toLowerCase()}\\b`).test(html), `"${word}" is in the page before it was answered`);
+}
+
+async function newLearner(page, name) {
+  await page.goto(URL);
+  await page.getByRole("button", { name: "Let's begin" }).click();
+  await page.getByLabel(/Name to show/).fill(name);
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+}
+
+/** Click a button that moves to the next word, and return that word (from what the app then asks the voice to say). */
+async function advance(page, name) {
+  const n = (await spoken(page)).length;
+  await page.getByRole("button", { name }).click();
+  return heard(page, n);
+}
+/** Type an answer and submit it. */
+async function submit(page, text) {
+  await page.locator(".ruled input").fill(text);
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.locator(".bee-feedback").waitFor();
+}
+
+test("Spelling Bee on an Android-sized phone: straight from Home, hear, type, feedback, progress, resume, review", async () => {
+  const { context, page, errors, foreign } = await phone();
+  await newLearner(page, "Bee Tester");
+  // 1. Home: the Spelling Bee first, with no starting check needed; General English still there, below
+  await page.getByRole("heading", { name: "Spelling Bee" }).waitFor();
+  await page.getByText("100 words ready to practise").waitFor();
+  await page.getByRole("heading", { name: "General English" }).waitFor();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().waitFor();
+  await fits(page);
+  await tappable(page);
+  await shot(page, "1-home");
+  // 2. Start: the first word is said at once, and its spelling is nowhere in the page
+  const first = await advance(page, "Start Spelling Bee");
+  await page.getByText("Word 1 of 10").waitFor();
+  assert.ok(first.length > 1);
+  await notInPage(page, first);
+  // Repeat says the word again, by itself
+  await page.getByRole("button", { name: "Repeat the word" }).click();
+  assert.equal((await spoken(page)).at(-1), first);
+  await fits(page);
+  await tappable(page);
+  await shot(page, "2-word");
+  // 3. right (capital letters and a space do not matter): feedback with the spelling
+  await submit(page, first.toUpperCase() + " ");
+  await page.getByRole("heading", { name: "Right!" }).waitFor();
+  assert.match(await page.locator(".bee-feedback").innerText(), new RegExp(first, "i"));
+  // 4. wrong: the spelling is shown, with what was typed, and it goes on the review list
+  const second = await advance(page, "Next word");
+  await page.getByText("Word 2 of 10").waitFor();
+  await notInPage(page, second);
+  await submit(page, `${second}x`);
+  await page.getByRole("heading", { name: "Not quite." }).waitFor();
+  const fb = await page.locator(".bee-feedback").innerText();
+  assert.match(fb, new RegExp(`The spelling is ${second}`, "i"));
+  assert.match(fb, /review list/);
+  await fits(page);
+  assert.match(await page.locator(".bee-progress").innerText(), /Word 2 of 10/, "the counter stays on the answered word");
+  await shot(page, "3-feedback-wrong");
+  // 5. two more, then a reload in the middle: Home offers to carry on at the same word
+  let w = await advance(page, "Next word");
+  assert.match(await page.locator(".bee-progress").innerText(), /Word 3 of 10[\s\S]*✓ 1[\s\S]*✗ 1/);
+  for (let k = 0; k < 2; k++) {
+    await notInPage(page, w);
+    await submit(page, w);
+    w = await advance(page, "Next word");
+  }
+  const fifth = w;
+  await page.reload();
+  const resumed = await advance(page, /Carry on Spelling Bee \(word 5 of 10\)/);
+  assert.equal(resumed, fifth, "the same word after a reload");
+  w = resumed;
+  // 6. finish: the session ends by itself after 10 words, with a summary
+  for (let k = 0; k < 6; k++) {
+    await submit(page, w);
+    if (k < 5) w = await advance(page, "Next word");
+    else await page.getByRole("button", { name: "See how you did" }).click();
+  }
+  await page.getByRole("heading", { name: "Session complete" }).waitFor();
+  assert.match(await page.locator(".bee-done").innerText(), /9 of 10 right \(90%\)[\s\S]*10 of 100 words practised[\s\S]*1 word on your review list/);
+  await fits(page);
+  await tappable(page);
+  await shot(page, "4-done");
+  // 7. Home and Progress show the progress
+  await page.getByRole("button", { name: "Back to home" }).click();
+  assert.match(await page.locator(".bee-card").innerText(), /10 of 100 practised · 1 to review/);
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Progress" }).click();
+  await page.locator(".bee-progress-card").waitFor();
+  assert.match(await page.locator(".bee-progress-card").innerText(), /10 of 100 words practised/);
+  await fits(page);
+  await shot(page, "5-progress");
+  // 8. close the tab and open the app again (as after closing the browser): the record is still there, and the next
+  //    session starts with the misspelt word
+  await page.close();
+  const again = await context.newPage();
+  await again.goto(URL);
+  assert.equal(await advance(again, "Start Spelling Bee"), second, "the misspelt word comes back first");
+  assert.deepEqual(foreign, [], "nothing is sent anywhere: the words and answers stay on the device");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("General English is unchanged: the starting check is still there, separate from the Spelling Bee", async () => {
+  const { context, page, errors } = await phone();
+  await newLearner(page, "General Learner");
+  await page.locator(".plan li", { hasText: "Find your starting point" }).getByRole("button", { name: "Start" }).click();
+  await page.locator(".item").waitFor();
+  assert.equal(await page.locator(".bee-progress").count(), 0);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Android Chrome can drop the first word's speech: the learner is asked to tap Play, and the tap plays it", async () => {
+  const { context, page, errors } = await phone({ drop: 1 });
+  await newLearner(page, "Quiet Phone");
+  const first = await advance(page, "Start Spelling Bee");
+  // the voice was asked for the word but never started: after a moment, a clear prompt instead of silence
+  await page.locator(".no-sound").waitFor();
+  assert.match(await page.locator(".no-sound").innerText(), /No sound\? Turn the volume up, then tap “Play the word”/);
+  await notInPage(page, first);
+  const n = (await spoken(page)).length;
+  await page.getByRole("button", { name: "Play the word" }).click();
+  await page.waitForFunction((k) => window.__spoken.length > k, n);
+  assert.equal((await spoken(page)).at(-1), first, "the tap says the same word");
+  await page.locator(".no-sound").waitFor({ state: "detached" });
+  await page.getByRole("button", { name: "Repeat the word" }).waitFor();
+  await shot(page, "6-no-sound");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Closing the whole browser and starting it again: the Spelling Bee carries on at the same word, and on by keyboard alone", async () => {
+  const profile = mkdtempSync(join(tmpdir(), "openpath-bee-"));
+  try {
+    let { context, page } = await phone({ profile });
+    await newLearner(page, "Restart Tester");
+    let w = await advance(page, "Start Spelling Bee");
+    await submit(page, w);
+    w = await advance(page, "Next word");
+    await submit(page, `${w}x`);
+    const third = await advance(page, "Next word");
+    await context.close(); // the browser process ends
+    ({ context, page } = await phone({ profile }));
+    await page.goto(URL);
+    assert.equal(await advance(page, /Carry on Spelling Bee \(word 3 of 10\)/), third, "the same word after a browser restart");
+    assert.match(await page.locator(".bee-progress").innerText(), /Word 3 of 10[\s\S]*✓ 1[\s\S]*✗ 1/);
+    // and on, with the keyboard only: Repeat, type, Enter to submit, Enter again for the next word (no extra taps)
+    await page.getByRole("button", { name: "Repeat the word" }).click();
+    assert.equal((await spoken(page)).at(-1), third);
+    await page.locator(".ruled input").fill(third);
+    await page.locator(".ruled input").press("Enter");
+    await page.getByRole("heading", { name: "Right!" }).waitFor();
+    const n = (await spoken(page)).length;
+    await page.keyboard.press("Enter");
+    await page.waitForFunction((k) => window.__spoken.length > k, n);
+    await page.getByText("Word 4 of 10").waitFor();
+    await context.close();
+  } finally {
+    rmSync(profile, { recursive: true, force: true });
+  }
+});
+

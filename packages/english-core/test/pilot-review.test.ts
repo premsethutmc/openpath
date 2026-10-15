@@ -176,8 +176,10 @@ test("PR-7 unreviewed or changed content never becomes validated: approval is re
   assert.deepEqual(JSON.parse(readFileSync(join(REPO, "content", "english", "pilot", "reviews.json"), "utf8")), committedReviews);
 });
 
-test("PR-9 a pilot build shows only allowlisted questions with an educator approval on their exact current content", () => {
-  assert.deepEqual(approvedForPilot(p, committedReviews), [], "nothing is approved in the committed record");
+test("PR-9 a pilot build shows only allowlisted questions with an approval on their exact current content", () => {
+  // the committed record: the product owner's approval of exactly the 291 allowlisted questions, and nothing else
+  assert.ok(committedReviews.length > 0 && committedReviews.every((r) => r.authority === "product-owner" && r.decision === "approve" && r.recorded_at && r.provenance));
+  assert.deepEqual(approvedForPilot(p, committedReviews), p.allowlist.map((a) => `${a.id}@${a.version}`).sort(), "exactly the allowlist");
   const fresh = reviewRows(p);
   const byId = new Map(fresh.filter((r) => r.kind === "question").map((r) => [r.id, r]));
   const listed = p.allowlist.map((a) => byId.get(a.id)!);
@@ -196,6 +198,34 @@ test("PR-9 a pilot build shows only allowlisted questions with an educator appro
   assert.deepEqual(approvedForPilot(p, reviews), [`${listed[0].id}@${listed[0].version}`, `${dictation.id}@${dictation.version}`].sort());
   // a later decision replaces an earlier one
   assert.deepEqual(approvedForPilot(p, [...reviews, rec(listed[0], "discuss")]), [`${dictation.id}@${dictation.version}`]);
+});
+
+test("PR-11 the owner approval record: 212 placement and 79 dictation questions, by stable id and current fingerprint, and no educator review claimed", () => {
+  const uses = (u: string) => p.allowlist.filter((a) => a.use === u);
+  assert.equal(uses("placement").length, 212);
+  assert.equal(uses("dictation").length, 79);
+  // one record per allowlisted question: no extra records (for example generated practice questions), none missing
+  assert.equal(committedReviews.length, 291);
+  const allow = new Map(p.allowlist.map((a) => [a.id, a]));
+  assert.equal(new Set(committedReviews.map((r) => r.id)).size, 291, "one record per question id");
+  const current = new Map(reviewRows(p).filter((r) => r.kind === "question").map((r) => [r.id, r]));
+  for (const r of committedReviews) {
+    assert.ok(allow.has(r.id), `${r.id} is an allowlisted (placement or dictation) question`);
+    assert.equal(String(r.version), String(allow.get(r.id)!.version), `${r.id}: the approved version is the allowlisted one`);
+    assert.equal(r.fingerprint, current.get(r.id)!.fingerprint, `${r.id}: approved on its exact current content`);
+    // what the record claims, and what it must not
+    assert.equal(r.authority, "product-owner");
+    assert.match(r.reviewer, /^Product owner/);
+    assert.match(r.comment, /Not an educator review/);
+    assert.match(r.provenance ?? "", /^Founder instruction, 15 October 2026/);
+    assert.ok(!Number.isNaN(Date.parse(r.recorded_at ?? "")) && Date.parse(r.recorded_at!) <= Date.now(), "recorded at a real time, not in the future");
+  }
+  assert.ok(!committedReviews.some((r) => r.authority === "educator"), "no educator review is claimed");
+  // the 2,348 generated spelling questions keep their own status: none of them has an approval record
+  const generated = JSON.parse(readFileSync(join(REPO, "content", "english", "spelling", "generated-items.json"), "utf8")) as { id: string }[];
+  const genIds = new Set(generated.map((i) => i.id));
+  assert.ok(genIds.size > 2000);
+  assert.ok(!committedReviews.some((r) => genIds.has(r.id) || r.id.startsWith("gen.")), "no generated question is approved");
 });
 
 test("PR-10 the educator review package: exactly the pilot questions, current, and its CSV imports with every decision kind", () => {

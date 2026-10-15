@@ -133,7 +133,7 @@ async function addLearner(page, name) {
   await page.getByRole("button", { name: /Understand grammar/ }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "I'm ready" }).waitFor();
+  await page.locator(".plan li").first().waitFor();
 }
 
 async function homeAfterSession(page) {
@@ -165,7 +165,7 @@ test("the founder: Arun's assessment, a developer code, then everything the engi
   const { context, page, errors } = await device();
   await register(page, FOUNDER);
   await addLearner(page, "Arun");
-  await page.getByRole("button", { name: "I'm ready" }).click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page, (n) => n % 3 !== 2);
   await page.getByText(/Your starting point is set/).waitFor();
 
@@ -234,7 +234,6 @@ test("the founder: Arun's assessment, a developer code, then everything the engi
   // Ravi shares Meera from Me; now (and only now) the founder can see her
   const meera = { id: meeraId };
   assert.equal((await api(page, "GET", `/developer/pupils/${meera.id}/events/`)).status, 404);
-  await ravi.page.getByRole("button", { name: "Look around first" }).click();
   await ravi.page.getByRole("button", { name: "Me", exact: true }).click();
   await ravi.page.getByLabel(/Share Meera's record for diagnostics/).check();
   await ravi.page.waitForFunction(() => document.querySelector("#diag-title"));

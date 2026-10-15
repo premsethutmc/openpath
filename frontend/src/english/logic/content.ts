@@ -33,6 +33,7 @@ import goalsJson from "../../../../content/english/goals.json";
 import misspellingsJson from "../../../../content/english/signals/misspellings.json";
 import generatedJson from "../../../../content/english/spelling/generated-items.json";
 import dictationJson from "../../../../content/english/spelling/dictation-bank.json";
+import spellingBeeJson from "../../../../content/english/spelling/spelling-bee.json";
 import retiredGeneratedJson from "../../../../content/english/spelling/retired-generated.json";
 import wordbankJson from "../../../../content/english/spelling/wordbank.json";
 import reviewJson from "../../../../content/english/spelling/review/review.json";
@@ -158,7 +159,8 @@ export const PILOT_ALLOWLIST = pilotAllowlistJson as unknown as PilotAllowlist;
 
 /**
  * The pilot content-safety boundary. In a pilot build every pupil-facing question passes all of:
- *   1. its activity is allowed (placement or the dictation spelling check; nothing else),
+ *   1. its activity is allowed (placement or the dictation spelling check; nothing else), or it is a Spelling Bee
+ *      word the gate allows (`bee` below: practice, never engine evidence),
  *   2. that exact question version is approved by an educator (compiled into the build from the review records),
  *   3. it is on the pilot allowlist, at that version,
  *   4. it exists in the content, is hand-written or dictation (never generated, journey or retired content), and any
@@ -169,6 +171,12 @@ export interface PilotGate {
   sessions: ReadonlySet<string>;
   /** `id@version` of every question a pupil may be shown. */
   allowed: ReadonlySet<string>;
+  /**
+   * The Spelling Bee words a pupil may be asked (practice only; never engine evidence): a reused dictation word only if
+   * its question is allowed above, a new word only if the build compiled its owner approval for pilot use (`bee:<id>`,
+   * build-english.mjs, which also runs the content checks). Empty with no approvals: no Spelling Bee (fail closed).
+   */
+  bee: ReadonlySet<string>;
 }
 
 export interface AppContent {
@@ -290,7 +298,11 @@ function pilotGate(items: ReadonlyMap<string, Item>, handWritten: Set<string>, d
     if (it.passage && !approved.has(`passage:${it.passage}`)) continue;
     allowed.add(key);
   }
-  return { sessions: new Set(PILOT_ALLOWLIST.sessions_allowed.filter((x) => x === "placement" || x === "spelling_assess")), allowed };
+  const bee = new Set<string>();
+  for (const e of (spellingBeeJson as unknown as { words: { id: string; item?: { id: string; version: number } }[] }).words) {
+    if (e.item ? allowed.has(`${e.item.id}@${e.item.version}`) : approved.has(`bee:${e.id}`)) bee.add(e.id);
+  }
+  return { sessions: new Set(PILOT_ALLOWLIST.sessions_allowed.filter((x) => x === "placement" || x === "spelling_assess")), allowed, bee };
 }
 
 /** Whether a pupil may start this activity here: always outside a pilot build; in one, only an allowed activity with approved questions. */

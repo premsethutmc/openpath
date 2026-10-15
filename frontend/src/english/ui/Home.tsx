@@ -8,6 +8,7 @@ import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { dueWords } from "../logic/state.ts";
+import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 
 const STATUS_WORDS: Record<string, string> = {
   not_started: "not started",
@@ -24,7 +25,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void }) {
+export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -44,6 +45,9 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
+      <BeeCard learner={learner} onBee={onBee} />
+      <h2 className="section-title general-title">General English</h2>
+      <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
         <section className="resume" aria-label="Unfinished activity">
           <p>
@@ -116,6 +120,31 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
         </button>
       </p>
     </main>
+  );
+}
+
+/** The Spelling Bee, first on Home: it needs no starting check. Hidden in a pilot build (not on the pilot allowlist). */
+function BeeCard({ learner, onBee }: { learner: Learner; onBee: () => void }) {
+  const words = learner.spellingWords();
+  if (!words.length) return null;
+  const p = sourceProgress(learner.spelling(), words, learner.clock());
+  const open = learner.spellingSession();
+  return (
+    <section className="hub-card bee-card" aria-labelledby="bee-card-title">
+      <h2 id="bee-card-title">
+        <span aria-hidden="true">🐝 </span>Spelling Bee
+      </h2>
+      <p>{words.length} words ready to practise</p>
+      {p.practised > 0 && (
+        <p className="small">
+          Level {p.level}: {LEVEL_NAMES[p.level ?? 1]} · {p.practised} of {p.total} practised{p.reviewList ? ` · ${p.reviewList} to review` : ""}
+        </p>
+      )}
+      <button type="button" className="primary light" onClick={onBee}>
+        {open ? `Carry on Spelling Bee (word ${open.position} of ${open.total})` : "Start Spelling Bee"}
+        <Arrow />
+      </button>
+    </section>
   );
 }
 

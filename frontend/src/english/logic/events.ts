@@ -253,16 +253,62 @@ export interface NoteEvent {
   text: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent;
+/**
+ * Spelling practice (logic/spelling.ts): the Spelling Bee's preloaded words, and later a parent's word lists and books.
+ * Kept in the learner's own record like everything else (so backups, export and deletion include them), but never
+ * evidence for the engine: spelling practice never changes a capability estimate or a mastery claim.
+ */
+export interface SpellSource {
+  /** bank: the preloaded Spelling Bee words; list: a parent's word list; book: words from a parent's book. */
+  type: "bank" | "list" | "book";
+  id: string;
+}
+export interface SpellSessionEvent {
+  kind: "spell_session";
+  id: string;
+  at: string;
+  session: string;
+  source: SpellSource;
+  /** The words planned for this session, in order (word ids within the source). */
+  words: string[];
+  /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
+  level?: number;
+  delivery: "device_voice" | "adult_reader";
+}
+export interface SpellAnswerEvent {
+  kind: "spell_answer";
+  id: string;
+  at: string;
+  session: string;
+  source: SpellSource;
+  /** The word as it was asked: its id, its spelling at the time, and its level, if any. */
+  word: { id: string; text: string; level?: number };
+  response: string;
+  correct: boolean;
+  /** How many times the word was played (the first playing included); 0 when an adult read it. */
+  plays: number;
+  /** Asked again because it was misspelt before (a review), not for the first time. */
+  review: boolean;
+}
+export interface SpellEndEvent {
+  kind: "spell_end";
+  id: string;
+  at: string;
+  session: string;
+  reason: "finished" | "stopped";
+}
+export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent;
+
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
-const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating"]);
+const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
 export function eventProblem(e: unknown): string | null {
@@ -275,5 +321,7 @@ export function eventProblem(e: unknown): string | null {
   if (SESSION_KINDS.has(x.kind) && typeof x.session !== "string") return `event ${x.id} names no session`;
   if (x.kind === "rating" && !RATINGS.includes(x.rating as Rating)) return `event ${x.id} has an unknown rating`;
   if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
+  if (x.kind.startsWith("spell_") && x.kind !== "spell_end" && !["bank", "list", "book"].includes((x.source as { type?: string } | undefined)?.type ?? "")) return `event ${x.id} names no spelling source`;
+  if (x.kind === "spell_answer" && (typeof (x.word as { id?: unknown } | undefined)?.id !== "string" || typeof x.correct !== "boolean" || typeof x.response !== "string")) return `event ${x.id} is a spelling answer without a word or result`;
   return null;
 }

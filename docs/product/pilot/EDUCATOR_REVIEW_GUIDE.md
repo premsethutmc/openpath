@@ -1,5 +1,10 @@
 # Reviewing the pilot questions: guide for the educator
 
+> **Update, 15 October 2026:** the product owner has approved all 291 questions for use in OpenPath
+> (`authority: "product-owner"` in `content/english/pilot/reviews.json`; see SPELLING_BEE.md). That is permission to
+> use them, not an educator review. An educator's review is still welcome and is recorded alongside, as
+> `authority: "educator"`. The review sheet shows each question's current state.
+
 **What you are asked to do:** decide, question by question, whether each question may be shown to children in the
 supervised pilot.
 

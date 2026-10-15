@@ -5,12 +5,15 @@
  *   node scripts/build-english.mjs --preview -> dist-english/ with the pilot set's words, not yet reviewed (for the
  *                                               product owner to try the pilot experience; labelled as unreviewed)
  *   node scripts/build-english.mjs --pilot   -> dist-english/ for a supervised pilot: the content-safety boundary
- *                                               (content.ts PilotGate). Only placement and the dictation spelling
- *                                               check; only allowlisted questions with an educator approval of that
- *                                               exact id and version (tools/english/pilot/review.ts approved); no
+ *                                               (content.ts PilotGate). Only placement, the dictation spelling
+ *                                               check and the Spelling Bee (practice); only allowlisted questions
+ *                                               with a recorded approval (product owner or educator) of that exact
+ *                                               id and version (tools/english/pilot/review.ts approved), and Spelling
+ *                                               Bee words that are approved for pilot use and pass the checks; no
  *                                               lessons, no generated practice, no developer dashboard. Fails if
  *                                               nothing is approved, unless --allow-empty (a test build that shows
- *                                               nothing, to check the boundary fails closed).
+ *                                               nothing, to check the boundary fails closed). --no-approvals ignores
+ *                                               the recorded approvals (for that test).
  *
  * Flagged and excluded practice words are never included in any build. See tools/english/spelling/review.ts.
  *
@@ -24,7 +27,7 @@ import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 
 import { reviewStatus, reviewSummary } from "../../packages/english-core/src/index.ts";
-import { REVIEWS, approvedForPilot, loadPilot } from "../../tools/english/pilot/review.ts";
+import { REVIEWS, SPELLING_BEE, approvedForPilot, beeApprovedForPilot, loadPilot } from "../../tools/english/pilot/review.ts";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes("--preview") ? "preview" : "development";
@@ -38,14 +41,24 @@ const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes(
   console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)${mode === "pilot" ? ": a pilot build offers no generated practice" : ""}`);
   for (const r of rows) console.log(`  ${r.rule}: ${r.approved} approved, ${r.unreviewed} unreviewed, ${r.flagged} flagged, ${r.excluded} excluded`);
 }
-// the pilot boundary: the educator approvals compiled into the build (never inferred, never automatic)
+// the pilot boundary: the recorded approvals (product owner or educator) compiled into the build (never inferred)
 let pilotApproved = [];
 if (mode === "pilot") {
-  pilotApproved = approvedForPilot(loadPilot(), JSON.parse(await readFile(REVIEWS, "utf8")));
+  // --no-approvals: a test build that ignores every recorded approval, to prove the boundary fails closed
+  pilotApproved = process.argv.includes("--no-approvals") ? [] : approvedForPilot(loadPilot(), JSON.parse(await readFile(REVIEWS, "utf8")));
   const questions = pilotApproved.filter((k) => !k.startsWith("passage:")).length;
-  console.log(`pilot boundary: ${questions} allowlisted question${questions === 1 ? "" : "s"} approved by an educator; placement and the dictation spelling check only`);
+  console.log(`pilot boundary: ${questions} allowlisted question${questions === 1 ? "" : "s"} approved (by the product owner or an educator); placement and the dictation spelling check only`);
+  // the Spelling Bee's own words (those not taken from the dictation bank): a recorded owner approval for pilot use,
+  // and the automated content checks, or the word stays out (the 79 reused words follow their question's approval)
+  if (!process.argv.includes("--no-approvals")) {
+    const bee = JSON.parse(await readFile(SPELLING_BEE, "utf8")).words;
+    const r = beeApprovedForPilot(bee);
+    for (const p of r.problems) console.error(`spelling bee: ${p}; left out`);
+    pilotApproved = [...pilotApproved, ...r.keys];
+    console.log(`pilot Spelling Bee: ${r.keys.length} of ${bee.filter((e) => !e.item).length} new words approved for pilot use and checked; the other ${bee.filter((e) => e.item).length} follow their dictation question's approval`);
+  }
   if (!questions && !process.argv.includes("--allow-empty")) {
-    console.error("A pilot build needs educator approvals: export the review sheet (node tools/english/pilot/review.ts export), have an educator record decisions, import them (review.ts import <file.csv>), then build again. Use --allow-empty only for a test build that shows nothing.");
+    console.error("A pilot build needs approved questions: record approvals (node tools/english/pilot/review.ts import <file.csv>, or the product owner's owner-approve), then build again. Use --allow-empty only for a test build that shows nothing.");
     process.exit(1);
   }
 }

@@ -18,6 +18,8 @@ import { type AppState, type SessionState, fold } from "./state.ts";
 import { now as perfNow, record } from "./telemetry.ts";
 import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
 import { MASTERY_GATE } from "./mastery-policy.ts";
+import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
+import type { SpellSource } from "./events.ts";
 
 export type Clock = () => string;
 
@@ -38,7 +40,7 @@ export interface Current {
 /** Something a pilot build does not allow (content.ts PilotGate): refused, never shown. */
 export class PilotRefusal extends Error {
   constructor(what: string) {
-    super(`Not available in the pilot: ${what}. Only the starting check and the spelling check, with educator-approved questions, are open.`);
+    super(`Not available in the pilot: ${what}. Only the starting check and the spelling check, with approved questions, are open.`);
     this.name = "PilotRefusal";
   }
 }
@@ -148,6 +150,60 @@ export class Learner {
     return learnerProfile(this.state, this.content, this.clock(), this.speech);
   }
 
+  // ------------------------------------------------------------------ spelling practice (logic/spelling.ts)
+
+  private spellCache: { n: number; st: SpellingState } | null = null;
+  /** Spelling practice as it stands, rebuilt from the record (cached until the next event). */
+  spelling(): SpellingState {
+    if (this.spellCache?.n !== this.events.length) this.spellCache = { n: this.events.length, st: spellingState(this.events) };
+    return this.spellCache.st;
+  }
+
+  /** The words of a spelling source. The Spelling Bee's preloaded words now; a parent's lists and books later. */
+  spellingWords(source: SpellSource = BANK): SpellWord[] {
+    if (source.type === "bank") return bankWords(this.content);
+    return [];
+  }
+
+  /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
+  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice"): Promise<void> {
+    this.guardSpelling(source);
+    const open = this.spelling().open;
+    if (open) await this.stopSpelling();
+    const plan = planSession(this.spelling(), this.spellingWords(source), this.clock());
+    if (!plan.ids.length) throw new Error("there are no words to practise in this list");
+    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery });
+  }
+
+  /** The open spelling session: the word to ask next (null when it is done) and the counts so far. */
+  spellingSession(): { source: SpellSource; session: string; delivery: "device_voice" | "adult_reader"; level?: number; word: SpellWord | null; position: number; total: number; right: number; wrong: number } | null {
+    const open = this.spelling().open;
+    if (!open) return null;
+    const v = sessionView(open);
+    const word = v.next ? (this.spellingWords(open.event.source).find((w) => w.id === v.next) ?? null) : null;
+    return { source: open.event.source, session: open.event.session, delivery: open.event.delivery, level: open.event.level, word, position: v.position, total: v.total, right: v.right, wrong: v.wrong };
+  }
+
+  /** Answer the current word. Returns whether it was right and the word (to show its spelling now, after the answer). */
+  async answerSpelling(response: string, plays: number): Promise<{ correct: boolean; word: SpellWord }> {
+    const cur = this.spellingSession();
+    if (cur) this.guardSpelling(cur.source);
+    if (!cur?.word) throw new Error("no spelling word is waiting for an answer");
+    const w = cur.word;
+    const before = this.spelling().words.get(wordKey(w.source, w.id));
+    const correct = checkSpelling(w, response);
+    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null });
+    // the session ends by itself after its last word
+    const after = this.spellingSession();
+    if (after && !after.word) await this.add({ kind: "spell_end", id: this.nextId(), at: this.clock(), session: cur.session, reason: "finished" });
+    return { correct, word: w };
+  }
+
+  async stopSpelling(): Promise<void> {
+    const open = this.spelling().open;
+    if (open) await this.add({ kind: "spell_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "stopped" });
+  }
+
   /** The parent overview: the profile now, compared with the record before the last activity and with the first measurements. */
   overview(): { profile: LearnerProfile; overview: ParentOverview } {
     const now = this.clock();
@@ -170,6 +226,12 @@ export class Learner {
   /** In a pilot build, refuse anything outside the boundary before it is recorded or shown. */
   private guard(what: string): void {
     if (this.content.gate) throw new PilotRefusal(what);
+  }
+
+  /** In a pilot build only the Spelling Bee's approved words may be practised (never a parent's list or book). */
+  private guardSpelling(source: SpellSource): void {
+    if (!this.content.gate) return;
+    if (source.type !== "bank" || !this.spellingWords(source).length) throw new PilotRefusal(source.type === "bank" ? "the Spelling Bee (no approved words in this build)" : "practice on a parent's own words");
   }
 
   async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts: { delivery?: "device_voice" | "adult_reader"; length?: number } = {}): Promise<Current> {

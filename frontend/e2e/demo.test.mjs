@@ -130,7 +130,7 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
   // 4. placement: questions, feedback after each, Next moves on, and the session ends by itself
-  await page.getByRole("button", { name: "I'm ready" }).click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".item").waitFor();
   // a reload in the middle of the session carries on (deep state survives a refresh)
   const first = await page.locator(".item").getAttribute("data-item");
@@ -143,7 +143,7 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await page.getByRole("button", { name: "Back to today" }).click();
   // 5. automatic progression: the plan moves on to the spelling check (dictation), here with an adult reading
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   const check = await finish(page, (n) => n % 2 === 0);
   assert.ok(check.length >= 8 && check.every((i) => i.format === "typed:dictation"), "the spelling check is dictation");
   await page.getByRole("button", { name: "Back to today" }).click();
@@ -201,7 +201,7 @@ test("spoken words behind the demo login: the app asks the browser's voice to sa
         this.text = text;
       }
     };
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
   });
   const page = await context.newPage();
   const errors = [];
@@ -218,11 +218,11 @@ test("spoken words behind the demo login: the app asks the browser's voice to sa
   await page.getByRole("button", { name: "Build my path" }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "I'm ready" }).click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finish(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".spelling-intro").waitFor();
   await page.getByRole("button", { name: "Test the sound" }).click();
   assert.deepEqual(await spoken(), ["Ready? Here is a test word: garden."]);

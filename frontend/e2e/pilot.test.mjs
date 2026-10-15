@@ -82,7 +82,7 @@ test("pilot build with nothing approved: no question, lesson, practice or journe
   await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Progress" }).click();
   await nothingShown(page);
   await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Me", exact: true }).click();
-  await page.getByText(/Pilot version: only educator-approved questions are shown/).waitFor();
+  await page.getByText(/Pilot version: only approved questions are shown/).waitFor();
   assert.equal(await page.getByLabel(/Tell us about a problem/).count(), 0, "no free-text notes in a pilot build");
   await fits(page);
 

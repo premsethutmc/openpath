@@ -243,7 +243,7 @@ function TrialSection({ learner, voice }: { learner: Learner; voice: SpeechSynth
       {c.contentMode !== "pilot" && <NoteBox learner={learner} screen="settings" label="Tell us about a problem, or anything that got in the way" />}
       <p className="small">
         {c.contentMode === "pilot"
-          ? "Pilot version: only educator-approved questions are shown, and only the starting point and the spelling check by dictation."
+          ? "Pilot version: only approved questions are shown (approved by the product owner, not yet reviewed by teachers), and only the starting point, the spelling check by dictation and the Spelling Bee (practice)."
           : c.contentMode === "preview"
             ? `Preview of the trial: the trial's practice words, not yet reviewed by a person (${c.generated.length} practice questions).`
             : `Development version: practice words include ones not yet reviewed (${c.generated.length} practice questions); excluded words are never offered.`}
