@@ -162,7 +162,7 @@ Results as run locally on the candidate:
 | App unit tests (`frontend`, including pilot-boundary PB-1 to PB-7) | 201/201 |
 | English core tests (including review tool PR-1 to PR-9) | 203/203 |
 | Core typecheck | clean |
-| Backend tests on PostgreSQL | 116 of 123 pass. The 7 failures are all in the `evaluation` app and fail identically on `main` (`a0df477`) with this sandbox's Python packages. CI uses the pinned requirements. |
+| Backend tests on PostgreSQL | 124/124 after the merge-gate corrections. Before them, 7 `evaluation` tests failed everywhere, on `main` too: the gateway refused the capability `name` that every request carries. This was not an environment difference. CI reported them as passing because the backend and frontend jobs had lost `pipefail` (section 3). |
 | `family` app tests (accounts, pupils, export, deletion, diagnostics) | 40/40 |
 | Database migrations | `makemigrations --check` shows no changes; `migrate --check` shows all 20 applied. The test run creates the database from every migration. |
 | Browser, development build (`english.test.mjs`) | 9/9: the whole journey, trial, resume, export and import, word review, offline and no speech, the doubling journey, many skills, and the Android-sized keyboard test |
@@ -183,3 +183,11 @@ CI on the pull request is the authority. Its results are recorded in the pull re
 - No real Android device was used. The "Android" browser test is an emulated 412×915 viewport with a
   Pixel user agent in Chromium.
 - No Codespace was used.
+
+## 3. Merge-gate corrections (after `c7f7eed`)
+
+| Commit | Correction |
+|---|---|
+| `c5d9399` | Pilot builds record no session ratings, free-text notes or written question reports (the information sheet promises nothing a child writes is recorded). `Learner.rate`, `note` and `flag` refuse in a pilot build. Older records that contain them still replay. Test PB-8. WEB_APP.md says which build pupils may see. |
+| `129f840` | **CI masked backend failures.** The backend and frontend jobs set their own `defaults.run` (working-directory), which replaces the workflow's `shell: bash`. Their steps ran under `bash -e` without `pipefail`, so `manage.py test \| tee` returned tee's status, and `require-tests.sh` reported "Ran 123 tests" as passed. Both jobs now name the shell again, and `require-tests.sh` also fails on `FAILED (` or a non-zero `# fail`. On this commit CI went red on the backend, which proves the masking. |
+| `0470a78` | The E3a gateway's identifier check refused the key `name` anywhere, including the capability name the core sends in `target` and `targets`. It now allows `name` only there, as a string; anywhere else it is still refused (new test). The backend suite passes: 124/124. |
