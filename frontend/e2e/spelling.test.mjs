@@ -58,7 +58,7 @@ async function device({ voice }) {
       window.SpeechSynthesisUtterance = Utterance;
       Object.defineProperty(window, "speechSynthesis", {
         configurable: true,
-        value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false },
+        value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false },
       });
     });
   else

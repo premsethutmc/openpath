@@ -161,16 +161,10 @@ function MyWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
         <span aria-hidden="true">📝 </span>My Words
       </h2>
       <p>Practise words supplied by a parent.</p>
-      {!learner.keepsParentContent ? (
-        <p className="small">A parent's lists are kept on the device only, so My Words is for learners saved on this device, not in a parent account.</p>
-      ) : (
-        <>
-          {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
-          <button type="button" className="secondary" onClick={onOpen}>
-            {n ? "Open My Words" : "Add a word list"}
-          </button>
-        </>
-      )}
+      {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {n ? "Open My Words" : "Add a word list"}
+      </button>
     </section>
   );
 }
@@ -184,16 +178,10 @@ function MyBooksCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
         <span aria-hidden="true">📚 </span>My Books
       </h2>
       <p>Spelling and questions from a book you supply, checked by a parent first.</p>
-      {!learner.keepsParentContent ? (
-        <p className="small">A book's text is kept on the device only, so My Books is for learners saved on this device, not in a parent account.</p>
-      ) : (
-        <>
-          {n > 0 && <p className="small">{n === 1 ? "1 book saved" : `${n} books saved`}</p>}
-          <button type="button" className="secondary" onClick={onOpen}>
-            {n ? "Open My Books" : "Add a book"}
-          </button>
-        </>
-      )}
+      {n > 0 && <p className="small">{n === 1 ? "1 book saved" : `${n} books saved`}</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {n ? "Open My Books" : "Add a book"}
+      </button>
     </section>
   );
 }

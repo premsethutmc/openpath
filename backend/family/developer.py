@@ -83,6 +83,38 @@ class DeveloperBase(AccountBase):
         return response
 
 
+def redact_parent_content(body: dict) -> dict:
+    """A parent's own material in another family's shared record, as a developer sees it: its shape, not its words.
+
+    My Words lists (and, with My Books, book text) are the parent's own content, saved in the pupil's record so the
+    parent can use them on any device. Sharing a pupil for diagnostics shares how the app behaved, not that content:
+    list words, and the spellings asked from a list and the answers to them, are blanked. Counts, times, ids and
+    right/wrong stay, so the diagnostics still work. A developer's own pupils are shown in full.
+    """
+    kind = body.get("kind")
+    if kind == "word_list" and isinstance(body.get("list"), dict):
+        words = body["list"].get("words")
+        n = len(words) if isinstance(words, list) else 0
+        return {**body, "list": {**body["list"], "name": "(a parent's list)", "words": []}, "redacted": f"a parent's word list of {n} words"}
+    source = body.get("source")
+    if isinstance(source, dict) and source.get("type") in PARENT_SOURCES:
+        # a parent's words are their own ids (the word in lower case): replace each with a stable pseudonym, so the
+        # same word is still the same word, without saying which word it is
+        if kind == "spell_answer":
+            word = body.get("word") if isinstance(body.get("word"), dict) else {}
+            return {**body, "word": {**word, "id": _pseudonym(word.get("id")), "text": ""}, "response": "", "redacted": "a word from a parent's own material"}
+        if kind == "spell_session" and isinstance(body.get("words"), list):
+            return {**body, "words": [_pseudonym(w) for w in body["words"]], "redacted": "words from a parent's own material"}
+    return body
+
+
+def _pseudonym(word_id) -> str:
+    return "w-" + hashlib.sha256(f"openpath-parent-word:{word_id}".encode()).hexdigest()[:12]
+
+
+PARENT_SOURCES = {"list"}
+
+
 def visible_pupils(user):
     """The pupils a developer may inspect: their own, and pupils their parents chose to share for diagnostics."""
     return Pupil.objects.filter(Q(parent=user) | Q(shared_for_diagnostics=True))
@@ -204,7 +236,10 @@ class DeveloperPupilEventsView(DeveloperBase):
         pupil = get_object_or_404(visible_pupils(request.user), pk=pupil_id)
         audit(request.user, "pupil_events", pupil=pupil.pk)
         bodies = list(PupilEvent.objects.filter(pupil=pupil, subject="english").order_by("seq").values_list("body", flat=True))
-        return Response({"pupil": {"id": str(pupil.pk), "display_name": pupil.display_name, "own": pupil.parent_id == request.user.pk}, "count": len(bodies), "events": bodies})
+        own = pupil.parent_id == request.user.pk
+        if not own:
+            bodies = [redact_parent_content(b) for b in bodies]
+        return Response({"pupil": {"id": str(pupil.pk), "display_name": pupil.display_name, "own": own}, "count": len(bodies), "events": bodies})
 
 
 class DeveloperAuditView(DeveloperBase):

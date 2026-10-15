@@ -260,6 +260,14 @@ jobs:
         run: |
           npm run english:e2e-accounts 2>&1 | tee english-accounts-e2e.log
           ../.github/scripts/require-tests.sh english-accounts-e2e.log "English parent accounts end-to-end"
+      - name: A parent's own material in a parent account (phone-sized browser)
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4175
+          E2E_SHOTS: e2e/shots/parent-content
+        run: |
+          npm run english:e2e-parent-content 2>&1 | tee english-parent-content-e2e.log
+          ../.github/scripts/require-tests.sh english-parent-content-e2e.log "Parent content in an account end-to-end"
       - name: Developer diagnostics in a phone-sized browser
         working-directory: frontend
         env:

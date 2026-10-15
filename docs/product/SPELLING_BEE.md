@@ -154,6 +154,18 @@ not approved. Adding it to a pilot is a separate decision.
 - no requests to other sites;
 - General English still works.
 
+**If the first word is not heard.** Chrome on Android can refuse speech that a tap did not start, or drop the first
+utterance after the page loads, without telling the page. The app watches for the voice to start. If it has not
+started within 2.5 seconds, or reports an error, a "No sound? Turn the volume up, then tap “Play the word”" box appears
+and the Play button is highlighted. A tap always starts speech. This is tested with a stand-in voice that drops the
+first utterance (`e2e/bee.test.mjs`); real Android behaviour is §A8.0 of the phone checklist.
+
+**Closing the browser.** A browser test closes the whole browser (a persistent profile) mid-session and starts it
+again: Home offers **Carry on** at the same word.
+
+**The 21 new words** are set out for review in [SPELLING_BEE_WORD_REVIEW.md](SPELLING_BEE_WORD_REVIEW.md), with an
+audit of the whole bank.
+
 **To check on a physical phone** (see ANDROID_MANUAL_TEST.md §A8):
 - the real voice says each word;
 - Repeat works after the browser has been idle;

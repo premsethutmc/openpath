@@ -9,7 +9,9 @@
  * learns each word only from that speech, which checks the word was requested aloud; it never reads it from the page.
  */
 import assert from "node:assert/strict";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
 
@@ -31,8 +33,12 @@ before(async () => {
 });
 after(() => browser?.close());
 
-async function phone() {
-  const context = await browser.newContext(ANDROID);
+/** A phone-sized browser context with a stand-in voice. drop: how many utterances the voice silently drops (as
+ * Android Chrome can with speech not started by a tap). profile: a folder for a persistent browser profile, so the
+ * whole browser can be closed and started again with the same storage. */
+async function phone({ drop = 0, profile = null } = {}) {
+  const context = profile ? await chromium.launchPersistentContext(profile, { ...ANDROID, executablePath: process.env.CHROMIUM_PATH || undefined }) : await browser.newContext(ANDROID);
+  if (drop) await context.addInitScript((n) => (window.__drop = n), drop);
   await context.addInitScript(() => {
     const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
     window.__spoken = [];
@@ -41,18 +47,20 @@ async function phone() {
         this.text = text;
       }
     };
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => window.__spoken.push(u.text), cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
   });
   const errors = [];
   const foreign = [];
-  context.on("page", (p) => {
+  const watch = (p) => {
     p.on("pageerror", (e) => errors.push(e.message));
     p.on("request", (r) => {
       const u = new globalThis.URL(r.url());
       if (!["127.0.0.1", "localhost"].includes(u.hostname) && u.protocol !== "data:" && u.protocol !== "blob:") foreign.push(r.url());
     });
-  });
-  const page = await context.newPage();
+  };
+  context.on("page", watch);
+  context.pages().forEach(watch); // a persistent browser opens with a tab already there
+  const page = context.pages()[0] ?? (await context.newPage());
   return { context, page, errors, foreign };
 }
 
@@ -203,3 +211,44 @@ test("General English is unchanged: the starting check is still there, separate 
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("Android Chrome can drop the first word's speech: the learner is asked to tap Play, and the tap plays it", async () => {
+  const { context, page, errors } = await phone({ drop: 1 });
+  await newLearner(page, "Quiet Phone");
+  const first = await advance(page, "Start Spelling Bee");
+  // the voice was asked for the word but never started: after a moment, a clear prompt instead of silence
+  await page.locator(".no-sound").waitFor();
+  assert.match(await page.locator(".no-sound").innerText(), /No sound\? Turn the volume up, then tap “Play the word”/);
+  await notInPage(page, first);
+  const n = (await spoken(page)).length;
+  await page.getByRole("button", { name: "Play the word" }).click();
+  await page.waitForFunction((k) => window.__spoken.length > k, n);
+  assert.equal((await spoken(page)).at(-1), first, "the tap says the same word");
+  await page.locator(".no-sound").waitFor({ state: "detached" });
+  await page.getByRole("button", { name: "Repeat the word" }).waitFor();
+  await shot(page, "6-no-sound");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Closing the whole browser and starting it again: the Spelling Bee carries on at the same word", async () => {
+  const profile = mkdtempSync(join(tmpdir(), "openpath-bee-"));
+  try {
+    let { context, page } = await phone({ profile });
+    await newLearner(page, "Restart Tester");
+    let w = await advance(page, "Start Spelling Bee");
+    await submit(page, w);
+    w = await advance(page, "Next word");
+    await submit(page, `${w}x`);
+    const third = await advance(page, "Next word");
+    await context.close(); // the browser process ends
+    ({ context, page } = await phone({ profile }));
+    await page.goto(URL);
+    assert.equal(await advance(page, /Carry on Spelling Bee \(word 3 of 10\)/), third, "the same word after a browser restart");
+    assert.match(await page.locator(".bee-progress").innerText(), /Word 3 of 10[\s\S]*✓ 1[\s\S]*✗ 1/);
+    await context.close();
+  } finally {
+    rmSync(profile, { recursive: true, force: true });
+  }
+});
+

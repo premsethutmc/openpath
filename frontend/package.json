@@ -24,6 +24,7 @@
     "english:e2e-bee": "node --test e2e/bee.test.mjs",
     "english:e2e-mywords": "node --test e2e/mywords.test.mjs",
     "english:e2e-books": "node --test e2e/books.test.mjs",
+    "english:e2e-parent-content": "node --test e2e/parent-content.test.mjs",
     "english:demo-server": "node scripts/demo-server.mjs",
     "english:demo-hash-password": "node scripts/demo-hash-password.mjs",
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",

@@ -152,6 +152,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 
 | # | Do | Expect |
 |---|---|---|
+| A8.0 ★ | **First word after a cold start.** Close Chrome completely (swipe it away), reopen the app, and tap **Start Spelling Bee** straight away | The first word is heard within about 2 seconds. If it is not, a "No sound? Turn the volume up, then tap “Play the word”" box appears, and tapping **Play the word** says it. Note which happened: either passes, but silence with no box is a failure |
 | A8.1 ★ | Make a new learner. On Home, tap **Start Spelling Bee** | The first word is spoken at once (the word, a sentence, the word again). The word is not written anywhere on the screen |
 | A8.2 ★ | Tap **Repeat the word**; wait a minute, then tap it again | The word is heard each time |
 | A8.3 ★ | Type the word with no suggestions appearing, and tap **Submit** | "Right!" and the spelling; **Next word** says the next one |
@@ -169,6 +170,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A9.4 | Finish the list; go back to My Words | The list shows practised, right and "to review" counts |
 | A9.5 | Close Chrome and reopen; open My Words | The list and its progress are still there |
 | A9.6 | **Edit**, change the name, save; then **Delete** | The new name shows; after Delete the list is gone |
+| A9.7 | (App address, signed in as a parent) Make a list for a learner in the account; sign in on a second phone | The My Words screen says the list is saved in the learner's record in your parent account; the second phone shows the list and its progress |
 
 ### A10. My Books (a parent's own book text)
 

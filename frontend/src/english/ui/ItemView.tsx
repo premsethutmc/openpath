@@ -127,6 +127,8 @@ export interface DictationLabels {
   adultLead: string;
   adult: string;
   show: string;
+  /** Shown when the voice did not start: asks for a tap on the play button. */
+  noSound: string;
 }
 const DICTATION_LABELS: DictationLabels = {
   play: "Play the word",
@@ -137,21 +139,25 @@ const DICTATION_LABELS: DictationLabels = {
   adultLead: "For the adult:",
   adult: "read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.",
   show: "Show the word to read aloud",
+  noSound: "No sound? Turn the volume up, then tap “Play the word”.",
 };
 
 export function Dictation({ word, sentence, say, voice, delivery, locked, onSubmit, onPlay, labels }: { word: string; sentence?: string; say?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void; onPlay?: () => void; labels?: Partial<DictationLabels> }) {
   const L = { ...DICTATION_LABELS, ...labels };
   const [plays, setPlays] = useState(0);
   const [adultSees, setAdultSees] = useState(false);
+  // the voice did not start (Android Chrome can refuse or drop speech it did not get from a tap): ask for a tap
+  const [silent, setSilent] = useState(false);
+  const heard = (ok: boolean) => setSilent(!ok);
   const playWord = () => {
-    speak(word, voice);
+    speak(word, voice, heard);
     setPlays((n) => n + 1);
     onPlay?.();
   };
   useEffect(() => {
     // first time: the word, a sentence with it, the word again (a sentence settles words that sound like others)
     if (delivery === "device_voice" && voice) {
-      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice);
+      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice, heard);
       setPlays(1);
       onPlay?.();
     }
@@ -161,8 +167,13 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
     <div className="dictation-controls">
       {delivery === "device_voice" ? (
         <div className="row listen-row">
-          <button type="button" className="listen" onClick={playWord} data-plays={plays}>
-            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? L.repeat : L.play}
+          {silent && (
+            <p className="tile peach no-sound" role="status">
+              {L.noSound}
+            </p>
+          )}
+          <button type="button" className={silent ? "listen primary" : "listen"} onClick={playWord} data-plays={plays}>
+            <span aria-hidden="true">{plays && !silent ? "🔁" : "▶️"}</span> {plays && !silent ? L.repeat : L.play}
           </button>
           {sentence && (
             <button

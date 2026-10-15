@@ -192,11 +192,9 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.getByRole("button", { name: "Build my path" }).click();
   await page.locator(".plan li").first().waitFor();
   await shot(page, "check-intro");
-  // a parent's word lists stay on the device: My Words is not offered for a pupil saved in the account
-  await page.getByText(/My Words is for learners saved on this device, not in a parent account/).waitFor();
-  assert.equal(await page.getByRole("button", { name: /Add a word list|Open My Words/ }).count(), 0);
-  await page.getByText(/My Books is for learners saved on this device, not in a parent account/).waitFor();
-  assert.equal(await page.getByRole("button", { name: /Add a book|Open My Books/ }).count(), 0);
+  // My Words and My Books are offered to a pupil in a parent account too (e2e/parent-content.test.mjs follows them through)
+  await page.getByRole("button", { name: "Add a word list" }).waitFor();
+  await page.getByRole("button", { name: "Add a book" }).waitFor();
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
   // … Arun completes the first assessment
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();

@@ -1877,3 +1877,8 @@ h3.sub {
   padding-left: 18px;
 }
 
+/* the voice did not start: ask for a tap (Dictation) */
+.listen-row .no-sound {
+  flex: 1 1 100%;
+  margin: 0;
+}
