@@ -275,10 +275,16 @@ export class Learner {
     return bookId;
   }
 
-  /** Remove a book (its answers stay in the record). An open spelling session on it is ended. */
+  /**
+   * Delete a book for real (logic/scrub.ts), as for a word list: an open spelling session on it is ended; its title,
+   * text and approvals are removed from the stored record (device or server); answers stay without the book's words;
+   * then the deletion is recorded. If the content cannot be removed, nothing is deleted.
+   */
   async deleteBook(id: string): Promise<void> {
     const open = this.spelling().open;
     if (open?.event.source.type === "book" && open.event.source.id === id) await this.stopSpelling();
+    await this.repo.scrub(this.profileId, { type: "book", id });
+    await this.reload();
     await this.add({ kind: "book_delete", id: this.nextId(), at: this.clock(), book: id });
   }
 

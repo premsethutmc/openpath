@@ -1,0 +1,311 @@
+{
+ "about": "One synthetic record before and after deleting book:2 (frontend logic/scrub.ts and backend family/scrub.py must both produce `after`).",
+ "source": {
+  "type": "book",
+  "id": "book:2"
+ },
+ "changed": 8,
+ "before": [
+  {
+   "kind": "profile",
+   "id": "p:1",
+   "at": "2026-10-15T11:00:00.000Z",
+   "name": "Synthetic Learner"
+  },
+  {
+   "kind": "book",
+   "id": "p:2",
+   "at": "2026-10-15T11:01:00.000Z",
+   "book": {
+    "id": "book:2",
+    "title": "The Lantern on the Hill",
+    "text": "Mia lived in a narrow house at the bottom of a steep hill. Tom followed her through the gate."
+   }
+  },
+  {
+   "kind": "book_review",
+   "id": "p:3",
+   "at": "2026-10-15T11:02:00.000Z",
+   "book": "book:2",
+   "fingerprint": "371a85c4",
+   "approved": [
+    "s:narrow",
+    "v:through",
+    "c:who:1:Mia"
+   ]
+  },
+  {
+   "kind": "book",
+   "id": "p:4",
+   "at": "2026-10-15T11:03:00.000Z",
+   "book": {
+    "id": "book:9",
+    "title": "Another Story",
+    "text": "Grace designed a colourful poster for the classroom wall."
+   }
+  },
+  {
+   "kind": "book",
+   "id": "p:5",
+   "at": "2026-10-15T11:04:00.000Z",
+   "book": {
+    "id": "book:2",
+    "title": "The Lantern",
+    "text": "Mia lived in a narrow house at the bottom of a steep hill. Tom followed her through the gate. The end."
+   }
+  },
+  {
+   "kind": "book_review",
+   "id": "p:6",
+   "at": "2026-10-15T11:05:00.000Z",
+   "book": "book:2",
+   "fingerprint": "a1b2c3d4",
+   "approved": [
+    "s:narrow",
+    "c:who:1:Mia"
+   ]
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:7",
+   "at": "2026-10-15T11:06:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "book",
+    "id": "book:2"
+   },
+   "words": [
+    "narrow"
+   ],
+   "delivery": "device_voice"
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:8",
+   "at": "2026-10-15T11:07:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "book",
+    "id": "book:2"
+   },
+   "word": {
+    "id": "narrow",
+    "text": "narrow"
+   },
+   "response": "narow",
+   "correct": false,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "spell_end",
+   "id": "p:9",
+   "at": "2026-10-15T11:08:00.000Z",
+   "session": "sp:7",
+   "reason": "finished"
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:10",
+   "at": "2026-10-15T11:09:00.000Z",
+   "book": "book:2",
+   "question": "c:who:1:Mia",
+   "response": "Mia",
+   "correct": true
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:11",
+   "at": "2026-10-15T11:10:00.000Z",
+   "book": "book:2",
+   "question": "v:through",
+   "response": "steep",
+   "correct": false
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:12",
+   "at": "2026-10-15T11:11:00.000Z",
+   "book": "book:9",
+   "question": "v:colourful",
+   "response": "colourful",
+   "correct": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:13",
+   "at": "2026-10-15T11:12:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "book",
+    "id": "book:9"
+   },
+   "word": {
+    "id": "poster",
+    "text": "poster"
+   },
+   "response": "poster",
+   "correct": true,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "book_delete",
+   "id": "p:14",
+   "at": "2026-10-15T11:13:00.000Z",
+   "book": "book:2"
+  }
+ ],
+ "after": [
+  {
+   "kind": "profile",
+   "id": "p:1",
+   "at": "2026-10-15T11:00:00.000Z",
+   "name": "Synthetic Learner"
+  },
+  {
+   "kind": "book",
+   "id": "p:2",
+   "at": "2026-10-15T11:01:00.000Z",
+   "book": {
+    "id": "book:2",
+    "title": "",
+    "text": ""
+   },
+   "scrubbed": true
+  },
+  {
+   "kind": "book_review",
+   "id": "p:3",
+   "at": "2026-10-15T11:02:00.000Z",
+   "book": "book:2",
+   "fingerprint": "",
+   "approved": [],
+   "scrubbed": true
+  },
+  {
+   "kind": "book",
+   "id": "p:4",
+   "at": "2026-10-15T11:03:00.000Z",
+   "book": {
+    "id": "book:9",
+    "title": "Another Story",
+    "text": "Grace designed a colourful poster for the classroom wall."
+   }
+  },
+  {
+   "kind": "book",
+   "id": "p:5",
+   "at": "2026-10-15T11:04:00.000Z",
+   "book": {
+    "id": "book:2",
+    "title": "",
+    "text": ""
+   },
+   "scrubbed": true
+  },
+  {
+   "kind": "book_review",
+   "id": "p:6",
+   "at": "2026-10-15T11:05:00.000Z",
+   "book": "book:2",
+   "fingerprint": "",
+   "approved": [],
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_session",
+   "id": "p:7",
+   "at": "2026-10-15T11:06:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "book",
+    "id": "book:2"
+   },
+   "words": [
+    "removed-1"
+   ],
+   "delivery": "device_voice",
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:8",
+   "at": "2026-10-15T11:07:00.000Z",
+   "session": "sp:7",
+   "source": {
+    "type": "book",
+    "id": "book:2"
+   },
+   "word": {
+    "id": "removed-1",
+    "text": ""
+   },
+   "response": "",
+   "correct": false,
+   "plays": 1,
+   "review": false,
+   "scrubbed": true
+  },
+  {
+   "kind": "spell_end",
+   "id": "p:9",
+   "at": "2026-10-15T11:08:00.000Z",
+   "session": "sp:7",
+   "reason": "finished"
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:10",
+   "at": "2026-10-15T11:09:00.000Z",
+   "book": "book:2",
+   "question": "removed-question-1",
+   "response": "",
+   "correct": true,
+   "scrubbed": true
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:11",
+   "at": "2026-10-15T11:10:00.000Z",
+   "book": "book:2",
+   "question": "removed-question-2",
+   "response": "",
+   "correct": false,
+   "scrubbed": true
+  },
+  {
+   "kind": "book_answer",
+   "id": "p:12",
+   "at": "2026-10-15T11:11:00.000Z",
+   "book": "book:9",
+   "question": "v:colourful",
+   "response": "colourful",
+   "correct": true
+  },
+  {
+   "kind": "spell_answer",
+   "id": "p:13",
+   "at": "2026-10-15T11:12:00.000Z",
+   "session": "sp:13",
+   "source": {
+    "type": "book",
+    "id": "book:9"
+   },
+   "word": {
+    "id": "poster",
+    "text": "poster"
+   },
+   "response": "poster",
+   "correct": true,
+   "plays": 1,
+   "review": false
+  },
+  {
+   "kind": "book_delete",
+   "id": "p:14",
+   "at": "2026-10-15T11:13:00.000Z",
+   "book": "book:2"
+  }
+ ]
+}

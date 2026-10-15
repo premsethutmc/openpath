@@ -14,6 +14,7 @@ const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? o
 
 export function MyBooks({ learner, onSpelling, onQuestions, onLeave, onChanged }: { learner: Learner; onSpelling: (b: Book) => void; onQuestions: (b: Book) => void; onLeave: () => void; onChanged: () => void }) {
   const [editing, setEditing] = useState<Book | "new" | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
   if (editing) return <BookEditor learner={learner} book={editing === "new" ? null : editing} onDone={() => (setEditing(null), onChanged())} />;
   const list = learner.books();
   const st = learner.spelling();
@@ -29,7 +30,12 @@ export function MyBooks({ learner, onSpelling, onQuestions, onLeave, onChanged }
         My Books
       </h1>
       <p className="sub">Paste the text of a book the learner is reading. OpenPath finds spelling words and questions in that text; you choose which ones the learner sees.</p>
-      <p className="small where-kept">{keptWhere(learner, "Books")}</p>
+      <p className="small where-kept">{keptWhere(learner, "Books", "its text")}</p>
+      {problem && (
+        <p className="warning" role="alert">
+          {problem}
+        </p>
+      )}
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         Add a book
       </button>
@@ -72,8 +78,13 @@ export function MyBooks({ learner, onSpelling, onQuestions, onLeave, onChanged }
                     type="button"
                     className="quiet"
                     onClick={async () => {
-                      if (!window.confirm(`Delete "${b.title}"? It leaves My Books; its text and the learner's answers stay in the learner's record until the learner is deleted.`)) return;
-                      await learner.deleteBook(b.id);
+                      if (!window.confirm(`Delete "${b.title}"? Its text, and the activities found in it, are removed from the learner's record. The learner's answers stay, without the book's words.`)) return;
+                      try {
+                        setProblem(null);
+                        await learner.deleteBook(b.id);
+                      } catch (e) {
+                        setProblem(`The book was not deleted: ${e instanceof Error ? e.message : "it could not be removed"}. Try again.`);
+                      }
                       onChanged();
                     }}
                   >

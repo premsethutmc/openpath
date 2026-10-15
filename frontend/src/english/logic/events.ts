@@ -329,6 +329,8 @@ export interface BookEvent {
   at: string;
   /** The whole text each time it is saved (only when the title or text changed). */
   book: { id: string; title: string; text: string };
+  /** The book was deleted: this saved version's title and text are removed (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface BookReviewEvent {
   kind: "book_review";
@@ -339,6 +341,8 @@ export interface BookReviewEvent {
   fingerprint: string;
   /** The activity ids the parent approved; everything else stays hidden from the learner. */
   approved: string[];
+  /** The book was deleted: approvals and fingerprint removed (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface BookAnswerEvent {
   kind: "book_answer";
@@ -348,6 +352,8 @@ export interface BookAnswerEvent {
   question: string;
   response: string;
   correct: boolean;
+  /** The book was deleted: the question id is "removed-question-n" and the answer removed (logic/scrub.ts). */
+  scrubbed?: boolean;
 }
 export interface BookDeleteEvent {
   kind: "book_delete";

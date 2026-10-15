@@ -1,5 +1,19 @@
 # My Books
 
+> **Position: an early content-ingestion prototype.** My Books shows that OpenPath can take supplied text, find
+> activities in it with fixed rules, and have an adult approve them before a learner sees them. It is deliberately
+> small, and it is **not** the institutional curriculum platform. The future institutional product will cover:
+> - school-specific curriculum ingestion, organised by subject and grade;
+> - chapter and concept extraction, and curriculum synthesis;
+> - learning objectives, and annual and weekly lesson planning;
+> - teacher-reviewed assessments;
+> - individual learner progress and class-level analytics.
+>
+> None of that is in this PR, and My Books should not grow into a large parent-focused application. It shares the
+> learner record and the spelling engine with the rest of the app. In line with the product direction (one shared
+> learning foundation, lightweight products and optional modules), it adds no large assets: no textbooks, audio or AI
+> models. My Words and My Books together add at most about 21 KB of minified code, to a single bundle of about 3.4 MB that is mostly question content. Code splitting would need a change to the build, which is not worth it for this size yet.
+
 A parent supplies the text of a book the learner is reading. OpenPath finds activities **in that text only**, and the
 parent ticks the ones the learner may see.
 
@@ -42,8 +56,7 @@ or a name left out because every sentence about it has "he" or "she".
   approvals are saved with the text's fingerprint and stop counting when the text changes.
 - Changing only the title keeps the ticks.
 
-**Delete** removes the book from My Books, after a confirmation. Its text and the learner's answers stay in the
-learner's record until the learner is deleted, and the confirmation says so.
+**Delete**, after a confirmation, deletes the book for real. See "Deleting a book" below.
 
 ## For the learner
 
@@ -117,30 +130,52 @@ Version 2 removes every problem the checks find; `books.test.ts` MB-6 keeps it t
 - **A capitalised word that is not a person** (a place or a ship, used twice) can become a "name".
 - **There are no questions about why, how someone felt, or what will happen.**
 
-## Richer comprehension (proposal; nothing added)
+## Future capabilities (not part of this prototype)
 
-Inferential questions need something that understands the text. The options are:
+These are recorded as possible later work only. None is being built, and none is planned for the student app in this
+PR.
 
-| Option | What it gives | Cost | Privacy | Effort |
-|---|---|---|---|---|
-| **A. Parent-written questions** | The parent types a question, the right answer and two or three wrong ones; the learner answers them like the others. Real inference, written by a person who knows the child | None | Unchanged (saved like the book) | Small: a form in the review screen and a question type, about 1–2 days |
-| **B. On-device language model** (an open model running in the browser, for example with WebLLM or transformers.js) | Generated why/how/feeling questions, still reviewed by the parent | No running cost; a 0.5–2 GB download per device | Text never leaves the device | Large. Slow or impossible on mid-range Android phones; quality varies |
-| **C. Server-side generation with the Claude API** through OpenPath's existing backend | Good why/how/feeling questions with answers grounded in quoted text, reviewed by the parent | Small per book (see below) plus an Anthropic API account. **A paid service, so it needs founder approval** | **Book text leaves the device** and goes to the API. It needs consent wording, a decision about copyrighted text, and a key stored as a Render secret | Medium: one endpoint, prompt and validation, about 3–5 days |
-| **D. Self-hosted open model on a server** | Like C | A GPU server (tens to hundreds of dollars a month) | Text leaves the device, but stays on OpenPath's servers | Large: hosting and operations |
+- **Teacher- or parent-written questions** (the next small step, if wanted): an adult types a question, the right
+  answer and two or three wrong ones, and the learner answers it like the others. It costs nothing, keeps the text
+  where it is, and can include real inferential questions written by someone who knows the child or the class.
+- **Richer comprehension generation**, a separate capability: why, how and feeling questions, summaries, and meanings.
+  It needs something that understands text. That could be a language model on the device (a large download, and slow
+  on mid-range phones), a self-hosted model (a GPU server), or a paid API through a backend (book text leaves the
+  device). Each is a founder decision about cost, privacy and copyright. **No Claude API, other paid AI API, large
+  local model or new backend infrastructure is added.** If it is ever built, it belongs with the future institutional
+  content work above, as an optional module, with mandatory adult review kept.
 
-**Cost of C, using published prices.** A 30,000-character book is about 8,000 input tokens. Generating about 10
-questions is about 2,000–3,000 output tokens.
-- **Claude Haiku 5.5** ($0.10 per million input tokens and $0.50 per million output, for prompts under 100,000
-  tokens): about **$0.002 per book**, roughly 500 books per dollar.
-- **Claude Sonnet 5.5** ($2 per million input and $10 per million output): about **$0.05 per book**.
-- The Batch API halves both.
+## Deleting a book
 
-Source: [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing). Prices change, so check them before
-deciding.
+The same principles and the same code as deleting a word list (`logic/scrub.ts` and `backend/family/scrub.py`). They
+are tested against a shared fixture, `backend/family/fixtures/scrub-fixture-book.json`.
 
-**Recommendation:** add A first. It is free, keeps all text where it is, and gives real inferential questions now.
-Decide C separately, as a founder decision about a paid service and about book text leaving the device. Parent review
-stays mandatory with every option.
+**What happens, in order:**
+1. An open spelling session on the book is ended.
+2. The book's content is removed from the stored record, in place: in IndexedDB on a device, or by the server
+   (`POST /api/pupils/<id>/events/scrub/`, the pupil's own parent only) for a parent account.
+3. The deletion is recorded (`book_delete`).
+
+If step 2 fails, nothing is deleted and the screen says so.
+
+**Retention policy:**
+
+| Kind of data | What happens |
+|---|---|
+| **Source content:** the title and text, in every saved version | Removed: `{id, title: "", text: ""}`, marked `scrubbed` |
+| **Generated activities and approvals:** the parent's approved activity ids, which name words and characters, and the text's fingerprint | Removed: `approved: []`, `fingerprint: ""`. Activities are only ever computed from the text, so none can be shown again |
+| **Historical assessment evidence:** the learner's answers to the book's questions and its spelling words | Kept without the book's words. Question ids become `removed-question-1`, …, word ids `removed-1`, …, and answers become empty. Right/wrong and times stay, so the learner's history of having practised, and how it went, is intact |
+| **Everything else:** the Spelling Bee, word lists, other books, General English | Untouched. No event is added or removed by the scrub |
+| **Copies outside the record:** backup files exported earlier, server database backups and logs, browser storage files | **Not erased**, because they cannot be reached from here. They expire on their own schedule. Deletion is immediate in the record the app and server use, not a guaranteed physical erasure everywhere |
+
+**Where the deleted book can no longer be found:**
+- the stored record;
+- a backup or account export made after the deletion;
+- developer diagnostics (which redacted book text anyway);
+- another family's access (refused anyway).
+
+**Other devices:** a device that loaded the record earlier cannot write back a new version, review, answer or spelling
+practice for a deleted book. The server answers 409 and asks it to open the learner again.
 
 ## What is saved, and where
 
@@ -175,7 +210,7 @@ Spelling answers are `spell_answer` events with the book as their source.
 
 ## Tests
 
-**Unit tests (`logic/books.test.ts`, MB-1 to MB-7):**
+**Unit tests (`logic/books.test.ts`, MB-1 to MB-8):**
 - Everything comes from the text, and the result is deterministic.
 - Name rules, including whole titled names.
 - Short-text notes and sentence splitting.
@@ -187,8 +222,20 @@ Spelling answers are `spell_answer` events with the book as their source.
 - **Account-backed learner:** books save and reload, and the widest allowed text fits.
 - **Quality rules (MB-6):** no he/she giveaways, no lone surnames, no opening line or time-word sequencing, no
   neighbour-fitting choices, and accurate skill labels with nothing called inferential. Checked on both stories.
+- **Deletion (MB-8):**
+  - the rules match the shared fixture, and running them again changes nothing;
+  - the title, text, approvals and activity ids leave the stored record, and every answer is kept;
+  - the Spelling Bee and the other book are unchanged;
+  - neither reopening nor a backup brings the book back.
 - **One engine (MB-7):** Bee, list and book answers are all scored by the same function and name their source.
   Editing or deleting a book changes no other progress and loses no answer.
+
+**Backend (`family/test_scrub.py`, book):**
+- the server's rules match the fixture;
+- only the pupil's own parent can delete;
+- the record and the export hold no book text, approval or question id;
+- the other book is kept;
+- a stale device gets 409 for a new version, review, answer or spelling answer.
 
 **Backend (`family/test_developer.py`):**
 - book text redacted for a developer;
@@ -201,10 +248,12 @@ Spelling answers are `spell_answer` events with the book as their source.
   - a PDF is refused;
   - review, and save without approving;
   - approve, practise spelling, answer questions with each kind labelled;
-  - progress, reload, a changed text, delete;
+  - progress, reload, a changed text;
+  - delete: IndexedDB then holds no title, sentence or approved word of the story, and a reload does not bring it back;
   - nothing is requested from another site.
 - **`e2e/parent-content.test.mjs`** (parent account): a book is approved and practised; Zoe's server record holds the
-  whole text and the approvals; a second phone shows the book and its progress; another family gets "not found".
+  whole text and the approvals; a second phone shows the book and its progress; another family gets "not found";
+  after the book is deleted, neither the server record nor the account export holds its text or approvals.
 
 All browser tests run on Chromium emulating an Android phone. **Not tested on a physical phone** (ANDROID_MANUAL_TEST.md
 §A10).
@@ -214,7 +263,7 @@ All browser tests run on Chromium emulating an Android phone. **Not tested on a 
 - **Text only:** pasted, or `.txt`; up to 30,000 characters per book; no OCR, PDF or Word.
 - **Activities:** deterministic and literal, with the problems above. No inferential questions, no meanings.
 - **Long review list** for a long text.
-- **A deleted book's text** stays in the learner's record until the learner is deleted. Erasing it sooner needs a new
-  endpoint that scrubs stored events (founder decision).
-- **One book per learner:** a parent with two children adds it for each. Sharing would need a parent-level store or a
-  "copy to another learner" action.
+- **Deletion:** removes the book from the record, exports and diagnostics, but not from backup files made earlier or
+  storage backups (see "Deleting a book").
+- **One book per learner:** a parent with two children adds it for each. Copying to another child is a possible
+  future enhancement, as for word lists.

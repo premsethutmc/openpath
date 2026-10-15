@@ -188,6 +188,26 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   // 9. delete
   await card.getByRole("button", { name: "Delete" }).click();
   await page.getByText("No books yet.").waitFor();
+  // deleted for real: no sentence, title or approved activity of the story is left in the browser's stored record,
+  // the answers are kept without the book's words, and a reload does not bring the book back
+  const stored = await page.evaluate(async () => {
+    const db = await new Promise((resolve, reject) => {
+      const r = indexedDB.open("openpath-english");
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+    });
+    const rows = await new Promise((resolve) => {
+      const r = db.transaction("events").objectStore("events").getAll();
+      r.onsuccess = () => resolve(r.result);
+    });
+    return JSON.stringify(rows);
+  });
+  for (const secret of ["Lantern", "narrow house", "steep", ...chosen]) assert.ok(!stored.includes(secret), `"${secret}" is still stored`);
+  assert.match(stored, /"book_delete"/);
+  assert.match(stored, /"removed-question-1"/);
+  await page.reload();
+  await page.getByRole("button", { name: "Add a book" }).click();
+  await page.getByText("No books yet.").waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, [], "nothing is sent to another site");
   await context.close();

@@ -265,6 +265,10 @@ export function books(events: readonly AppEvent[]): Book[] {
   const out = new Map<string, Book>();
   for (const e of events) {
     if (e.kind === "book") {
+      if (e.scrubbed) {
+        out.delete(e.book.id); // deleted: its text was removed from the record (logic/scrub.ts)
+        continue;
+      }
       const old = out.get(e.book.id);
       const fp = fingerprint(tidyText(e.book.text));
       const same = old?.fingerprint === fp;

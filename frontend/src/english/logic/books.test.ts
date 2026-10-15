@@ -206,3 +206,37 @@ test("MB-7 one engine for every source: editing or deleting a book never changes
   assert.deepEqual(progress(), before);
   assert.equal(l.events.filter((e) => e.kind === "spell_answer").length, answers.length);
 });
+
+test("MB-8 deleting a book removes its text, approvals and activities from the stored record, keeps answers without its words, and changes nothing else", async () => {
+  const { scrubEvents } = await import("./scrub.ts");
+  const fixture = JSON.parse(readFileSync(new URL("../../../../backend/family/fixtures/scrub-fixture-book.json", import.meta.url), "utf8"));
+  const r = scrubEvents(fixture.before, fixture.source);
+  assert.deepEqual(JSON.parse(JSON.stringify(r.events)), fixture.after, "the same rules as the server (backend/family/scrub.py)");
+  assert.equal(r.changed, fixture.changed);
+  assert.equal(scrubEvents(r.events, fixture.source).changed, 0, "idempotent");
+  // in the app
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const l = await Learner.create(c, repo, "Book Deleter", "guardian", clock, "p-bdel");
+  await l.startSpelling();
+  await l.answerSpelling(l.spellingSession()!.word!.word, 1);
+  await l.stopSpelling();
+  const other = await l.saveBook("The Robot Who Forgot", ROBOT, [extract(ROBOT).spelling[0].id]);
+  const ex = extract(STORY);
+  const id = await l.saveBook("The Lantern on the Hill", STORY, [...ex.spelling.slice(0, 2).map((s) => s.id), ex.vocabulary[0].id]);
+  await l.startSpelling({ type: "book", id });
+  while (l.spellingSession()?.word) await l.answerSpelling(`${l.spellingSession()!.word!.word}x`, 1);
+  await l.answerBookQuestion(id, ex.vocabulary[0].id, ex.vocabulary[0].answer);
+  const progress = () => [sourceProgress(l.spelling(), l.spellingWords(), clock()), sourceProgress(l.spelling(), l.spellingWords({ type: "book", id: other }), clock())];
+  const before = { progress: progress(), answers: l.events.filter((e) => e.kind === "spell_answer" || e.kind === "book_answer").length };
+  await l.deleteBook(id);
+  const text = JSON.stringify(await repo.load("p-bdel"));
+  for (const secret of ["Lantern", "narrow house", "steep hill", ...ex.spelling.slice(0, 2).map((s) => s.word), ex.vocabulary[0].id]) assert.ok(!text.includes(secret), `"${secret}" is gone`);
+  assert.ok(text.includes("Mr. Okafor carried"), "the other book is kept");
+  assert.equal(JSON.parse(text).filter((e: { kind: string }) => e.kind === "spell_answer" || e.kind === "book_answer").length, before.answers, "every answer kept");
+  assert.deepEqual(progress(), before.progress, "the Spelling Bee and the other book unchanged");
+  assert.deepEqual(l.books().map((b) => b.id), [other]);
+  const again = await Learner.open(c, repo, "p-bdel", clock);
+  assert.deepEqual(again.books().map((b) => b.id), [other], "reopening does not bring it back");
+  assert.ok(!JSON.stringify(again.backup()).includes("Lantern"), "nor a backup made after the deletion");
+});

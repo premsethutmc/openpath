@@ -183,7 +183,7 @@ test("another phone signed in to the same account sees the list, the book and th
   await other.context.close();
 });
 
-test("deleting a list in a parent account: gone from the server record, from another phone, and a stale phone cannot bring it back", async () => {
+test("deleting a list and a book in a parent account: gone from the server record and export, from another phone, and a stale phone cannot bring the list back", async () => {
   assert.ok(zoeId, "runs after the first test");
   // a second phone opens Zoe's lists before the deletion (it holds an old copy)
   const stale = await phone();
@@ -214,6 +214,14 @@ test("deleting a list in a parent account: gone from the server record, from ano
   await stale.page.goto(URL); // the app reopens the learner it last showed, loading the record afresh
   await stale.page.getByRole("button", { name: "Add a word list" }).click();
   await stale.page.getByText("No lists yet.").waitFor();
+  // the book too: deleted on the first phone, and nothing of its text or approvals is left on the server
+  await first.page.getByRole("button", { name: "← Home" }).click();
+  await first.page.getByRole("button", { name: "Open My Books" }).click();
+  await first.page.locator(".books li", { hasText: "The Lantern on the Hill" }).getByRole("button", { name: "Delete" }).click();
+  await first.page.getByText("No books yet.").waitFor();
+  const afterBook = JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events);
+  for (const secret of ["Lantern", "narrow house", "steep", '"s:', '"v:']) assert.ok(!afterBook.includes(secret), `"${secret}" is still in the server record`);
+  assert.ok(!JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/export/`)).json).includes("narrow house"), "nor in the account export");
   await first.context.close();
   await stale.context.close();
 });

@@ -185,6 +185,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A10.6 | Close Chrome and reopen; open My Books | The book, its ticks and its progress are still there |
 | A10.7 | **Review**, change one word in the text, **Find activities** | Every tick is cleared: the changed text needs a new review |
 | A10.8 | (App address, signed in as a parent) Add a book for a learner in the account and approve some activities; sign in on a second phone | The My Books screen says books are saved in the learner's record in your parent account; the second phone shows the book, its approvals and progress |
+| A10.9 | **Delete** a book, then close Chrome and reopen My Books | The book is gone and does not come back; the Spelling Bee and word lists are unchanged |
 
 ## Part B: safety testing of the empty pilot build (pilot address)
 

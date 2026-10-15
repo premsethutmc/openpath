@@ -73,3 +73,45 @@ class ScrubApiTests(DevTestCase):
         self.assertNotIn("castle", json.dumps(self.events(asha, zoe)))
         # practice on another list carries on as normal
         self.assertEqual(post({**answer, "source": {"type": "list", "id": "list:4"}, "word": {"id": "because", "text": "because"}, "response": "because"}).status_code, 201)
+
+
+BOOK = json.loads((Path(__file__).parent / "fixtures" / "scrub-fixture-book.json").read_text())
+BOOK_SECRETS = ["Lantern", "narrow house", "steep", "narow", "c:who:1:Mia", "s:narrow", "v:through", "371a85c4"]
+
+
+class BookScrubTests(DevTestCase):
+    def events(self, c, pid):
+        return c.get(f"/api/pupils/{pid}/events/?subject=english").json()["events"]
+
+    def test_the_server_rules_match_the_apps_for_a_book(self):
+        after, changed = scrub_events(BOOK["before"], BOOK["source"])
+        self.assertEqual(after, BOOK["after"])
+        self.assertEqual(changed, BOOK["changed"])
+        self.assertEqual(scrub_events(after, BOOK["source"]), (after, 0))
+
+    def test_deleting_a_book_removes_its_text_and_approvals_keeps_answers_and_cannot_be_revived(self):
+        asha = self.parent("asha.book@example.org")
+        zoe = asha.post("/api/pupils/", {"display_name": "Zoe", "consent": True}, format="json").json()["id"]
+        for n, e in enumerate(BOOK["before"]):
+            self.assertEqual(asha.post(f"/api/pupils/{zoe}/events/", {"subject": "english", "seq": n, "event": e}, format="json").status_code, 201)
+        self.assertEqual(self.parent("other.book@example.org").post(f"/api/pupils/{zoe}/events/scrub/", {"source": {"type": "book", "id": "book:2"}}, format="json").status_code, 404)
+        self.assertEqual(asha.post(f"/api/pupils/{zoe}/events/scrub/", {"source": {"type": "book", "id": "book:2"}}, format="json").json(), {"scrubbed": 8})
+        stored = self.events(asha, zoe)
+        self.assertEqual(stored, BOOK["after"])
+        export = json.dumps(asha.get(f"/api/pupils/{zoe}/export/").json())
+        for secret in BOOK_SECRETS:
+            self.assertNotIn(secret, json.dumps(stored))
+            self.assertNotIn(secret, export)
+        self.assertIn("colourful poster", json.dumps(stored), "the other book is kept")
+        self.assertEqual([e["correct"] for e in stored if e["kind"] == "book_answer"], [True, False, True], "answers kept, right/wrong intact")
+        # a stale device: no new version, review, answer or practice for the deleted book
+        n = len(BOOK["before"])
+
+        def post(event):
+            return asha.post(f"/api/pupils/{zoe}/events/", {"subject": "english", "seq": n, "event": {"id": f"stale:{n}", "at": "2026-10-15T12:00:00Z", **event}}, format="json")
+
+        self.assertEqual(post({"kind": "book", "book": {"id": "book:2", "title": "The Lantern", "text": "Mia lived in a narrow house."}}).status_code, 409)
+        self.assertEqual(post({"kind": "book_review", "book": "book:2", "fingerprint": "x", "approved": ["s:narrow"]}).status_code, 409)
+        self.assertEqual(post({"kind": "book_answer", "book": "book:2", "question": "c:who:1:Mia", "response": "Mia", "correct": True}).status_code, 409)
+        self.assertEqual(post({"kind": "spell_answer", "session": "sp:7", "source": {"type": "book", "id": "book:2"}, "word": {"id": "narrow", "text": "narrow"}, "response": "narrow", "correct": True, "plays": 1, "review": False}).status_code, 409)
+        self.assertEqual(post({"kind": "book_answer", "book": "book:9", "question": "v:colourful", "response": "colourful", "correct": True}).status_code, 201)
