@@ -43,6 +43,7 @@ import journeyJson from "../../../../content/english/web/doubling-journey.json";
 import pilotItemsJson from "../../../../content/english/pilot/items.json";
 import pilotPassagesJson from "../../../../content/english/pilot/passages.json";
 import pilotManifestJson from "../../../../content/english/pilot/manifest.json";
+import pilotAllowlistJson from "../../../../content/english/pilot/allowlist.json";
 
 export type Code = Extract<Item, { kind: "code" }>;
 
@@ -127,19 +128,48 @@ export interface PoolInfo {
 }
 
 /**
- * Which generated items a build offers (content validation, 13 October 2026):
- *   pilot        only items covered by an approved rule or reviewed set (a person has reviewed them)
- *   preview      the pilot set's items (pilot-set.json), reviewed or not: for the product owner to try
- *                the pilot experience before the review; labelled as not yet reviewed
- *   development  approved and unreviewed items
- * Flagged and excluded items are never offered. Either way, generated items stay practice-only: an
+ * What a build offers (content validation, 13 October 2026; the pilot boundary, 15 October 2026):
+ *   pilot        the content-safety boundary (PilotGate below): only the placement check and the dictation
+ *                spelling check, and only questions that are on the pilot allowlist AND approved by an educator
+ *                (that exact id and version). No lessons, no generated practice words, no other activity.
+ *   preview      internal: the generated pilot set's items (pilot-set.json), reviewed or not, for the product
+ *                owner to try practice before the review; labelled as not yet reviewed. Not for pupils.
+ *   development  internal: approved and unreviewed generated items, every activity.
+ * Flagged and excluded generated items are never offered in any mode. Generated items stay practice-only: an
  * approval never lets them change a capability estimate.
  */
 export type ContentMode = "pilot" | "preview" | "development";
 declare const __OPENPATH_CONTENT__: string | undefined;
 const built = typeof __OPENPATH_CONTENT__ !== "undefined" ? __OPENPATH_CONTENT__ : "development";
 export const BUILD_CONTENT_MODE: ContentMode = built === "pilot" || built === "preview" ? built : "development";
+/** The educator approvals compiled into a pilot build (build-english.mjs --pilot): `id@version` and `passage:id`. */
+declare const __OPENPATH_PILOT_APPROVED__: string[] | undefined;
+const BUILD_PILOT_APPROVED: string[] = typeof __OPENPATH_PILOT_APPROVED__ !== "undefined" ? __OPENPATH_PILOT_APPROVED__ : [];
 const PILOT_SET = new Set((pilotSetJson as unknown as { items: { id: string; version: number }[] }).items.map((r) => `${r.id}@${r.version}`));
+
+/** The pilot allowlist (content/english/pilot/allowlist.json): candidates only, never approvals. */
+export interface PilotAllowlist {
+  version: string;
+  sessions_allowed: SessionKind[];
+  items: { id: string; version: number; use: "placement" | "dictation" }[];
+}
+type SessionKind = "placement" | "spelling_assess";
+export const PILOT_ALLOWLIST = pilotAllowlistJson as unknown as PilotAllowlist;
+
+/**
+ * The pilot content-safety boundary. In a pilot build every pupil-facing question passes all of:
+ *   1. its activity is allowed (placement or the dictation spelling check; nothing else),
+ *   2. that exact question version is approved by an educator (compiled into the build from the review records),
+ *   3. it is on the pilot allowlist, at that version,
+ *   4. it exists in the content, is hand-written or dictation (never generated, journey or retired content), and any
+ *      passage it uses is approved too.
+ * Anything missing, unknown, excluded or unreviewed is refused. With no approvals, nothing is shown (fail closed).
+ */
+export interface PilotGate {
+  sessions: ReadonlySet<string>;
+  /** `id@version` of every question a pupil may be shown. */
+  allowed: ReadonlySet<string>;
+}
 
 export interface AppContent {
   ctx: Context;
@@ -170,10 +200,12 @@ export interface AppContent {
   journey: JourneyContent;
   /** Pilot content: what each question on the five pilot capabilities is reserved for, and the content version. */
   pilot: { version: string; capabilities: string[]; pools: Map<string, PoolInfo> };
+  /** The pilot content-safety boundary: set in a pilot build (and only there), null otherwise. */
+  gate: PilotGate | null;
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */
-export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview } = {}): AppContent {
+export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview; approved?: Iterable<string> } = {}): AppContent {
   const mode = opts.mode ?? BUILD_CONTENT_MODE;
   // direct spelling may be demonstrated by dictation alone (approved correction): the framework file is unchanged,
   // the allowance is added here for the app only, and the app's evidence gate asks for word and pattern diversity
@@ -212,6 +244,8 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
     return st === "approved" || (mode === "development" && st === "unreviewed");
   });
   const lessons = new Map((lessonsJson as unknown as { lessons: Lesson[] }).lessons.map((l) => [l.id, l]));
+  const handWritten = new Set(hand.map((i) => i.id));
+  const gate = mode === "pilot" ? pilotGate(content.items, handWritten, new Set(dictation.items.map((i) => i.id)), new Set(opts.approved ?? BUILD_PILOT_APPROVED)) : null;
   const ladders = new Map(Object.entries((progressionsJson as unknown as { capabilities: Record<string, { steps: LadderStep[] }> }).capabilities).map(([k, v]) => [k, v.steps]));
   const feedback = new Map(Object.entries((feedbackJson as unknown as { misconceptions: Record<string, string> }).misconceptions));
   const guidedGoal: Goal = { id: "guided", name: "Spelling, grammar and vocabulary", weights: Object.fromEntries(GUIDED_ALL.map((c) => [c, 1])) };
@@ -219,16 +253,18 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
   return {
     ctx: { index, content },
     index,
-    handWritten: new Set(hand.map((i) => i.id)),
-    generated: offered,
+    // in a pilot build the selection pools hold only what the gate allows; every item stays in the bank for scoring
+    // (an old record still rebuilds exactly), and no lesson, feedback text or generated word is offered
+    handWritten: gate ? new Set([...handWritten].filter((id) => gate.allowed.has(`${id}@${content.items.get(id)!.version}`))) : handWritten,
+    generated: gate ? [] : offered,
     generatedAll: generated,
     review,
     contentMode: mode,
     words,
-    dictation,
-    lessons,
+    dictation: gate ? { ...dictation, items: dictation.items.filter((i) => gate.allowed.has(`${i.id}@${i.version}`)) } : dictation,
+    lessons: gate ? new Map() : lessons,
     ladders,
-    feedback,
+    feedback: gate ? new Map() : feedback,
     goals: content.goals,
     wordSources: (wordbankJson as unknown as { sources: WordSource[] }).sources,
     guidedGoal,
@@ -238,7 +274,37 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
       const m = pilotManifestJson as unknown as { version: string; capabilities: string[]; pools: Record<string, PoolInfo> };
       return { version: m.version, capabilities: m.capabilities, pools: new Map(Object.entries(m.pools)) };
     })(),
+    gate,
   };
+}
+
+/** Allowed = allowlisted ∩ approved (exact version) ∩ present in the bank as hand-written or dictation, with any passage approved. */
+function pilotGate(items: ReadonlyMap<string, Item>, handWritten: Set<string>, dictation: Set<string>, approved: Set<string>): PilotGate {
+  const allowed = new Set<string>();
+  for (const a of PILOT_ALLOWLIST.items) {
+    const key = `${a.id}@${a.version}`;
+    if (!approved.has(key)) continue;
+    const it = items.get(a.id);
+    if (!it || it.kind !== "code" || it.version !== a.version || it.generated) continue;
+    if (!(a.use === "dictation" ? dictation.has(a.id) && it.format === "typed:dictation" : handWritten.has(a.id))) continue;
+    if (it.passage && !approved.has(`passage:${it.passage}`)) continue;
+    allowed.add(key);
+  }
+  return { sessions: new Set(PILOT_ALLOWLIST.sessions_allowed.filter((x) => x === "placement" || x === "spelling_assess")), allowed };
+}
+
+/** Whether a pupil may start this activity here: always outside a pilot build; in one, only an allowed activity with approved questions. */
+export function activityAllowed(c: AppContent, type: string): boolean {
+  if (!c.gate) return true;
+  if (!c.gate.sessions.has(type)) return false;
+  if (type === "placement") return c.handWritten.size > 0;
+  if (type === "spelling_assess") return c.dictation.items.length > 0;
+  return false;
+}
+
+/** Whether a question may be shown to a pupil here (always outside a pilot build). */
+export function itemAllowed(c: AppContent, item: Pick<Item, "id" | "version">): boolean {
+  return !c.gate || c.gate.allowed.has(`${item.id}@${item.version}`);
 }
 
 export const lessonId = (capability: string, step: string) => `${capability}#${step}`;

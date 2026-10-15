@@ -5,8 +5,14 @@
  *   node tools/english/pilot/review.ts import <file.csv>   record the decisions in content/english/pilot/reviews.json
  *   node tools/english/pilot/review.ts report [--check]    write (or check) docs/english/PILOT_CONTENT_REPORT.md
  *   node tools/english/pilot/review.ts status              print what is approved, rejected, to revise, to discuss, outstanding
+ *   node tools/english/pilot/review.ts approved            list what a pilot build would show (allowlisted and approved)
  *
- * Every question, passage, lesson and prerequisite of the pilot is one row, with a fingerprint of its exact
+ * Rows: every question, passage, lesson and prerequisite of the five pilot capabilities, and every question on the
+ * pilot allowlist (content/english/pilot/allowlist.json: the placement questions and dictation words a pilot build
+ * may show). This is the one review record for hand-written and dictation content; generated practice words have
+ * their own rule-and-sample review (tools/english/spelling/review.ts) and are never shown in a pilot build.
+ *
+ * Every row has a fingerprint of its exact
  * content. An imported decision is recorded with the reviewer, date, content version and that fingerprint; a row
  * whose content has changed since export is refused as stale. Nothing here changes content or marks anything
  * approved in the app: a recorded "approve" is the educator's decision, applied to content separately and visibly.
@@ -42,6 +48,9 @@ interface Item extends Json {
   distractor_tags?: Record<string, string>;
   rationale?: string;
   review?: string;
+  explain?: string;
+  speak?: string;
+  sentence?: string;
 }
 interface Passage {
   id: string;
@@ -71,9 +80,19 @@ export interface Manifest {
   pools: Record<string, PoolInfo>;
 }
 
+export interface AllowlistEntry {
+  id: string;
+  version: number;
+  use: "placement" | "dictation";
+}
+
 export interface Pilot {
   manifest: Manifest;
+  /** The questions of the five pilot capabilities (the coverage report is about these). */
   items: Item[];
+  /** Questions on the pilot allowlist that are not already in `items` (other placement skills, the dictation bank). */
+  allowlisted: Item[];
+  allowlist: AllowlistEntry[];
   passages: Map<string, Passage>;
   lessons: Lesson[];
   prerequisites: { capability: string; requires: string; source?: string }[];
@@ -84,13 +103,22 @@ export interface Pilot {
 export function loadPilot(content = CONTENT): Pilot {
   const manifest = read<Manifest>(join(content, "pilot", "manifest.json"));
   const all = [...read<Item[]>(join(content, "items", "code-items.json")), ...read<Item[]>(join(content, "items", "e2a-items.json")), ...read<Item[]>(join(content, "items", "e2b-items.json")), ...read<Item[]>(join(content, "pilot", "items.json"))];
-  const items = all.filter((i) => manifest.capabilities.includes(i.target)).sort((a, b) => a.target.localeCompare(b.target) || a.b - b.b || a.id.localeCompare(b.id));
+  const order = (a: Item, b: Item) => a.target.localeCompare(b.target) || a.b - b.b || a.id.localeCompare(b.id);
+  const items = all.filter((i) => manifest.capabilities.includes(i.target)).sort(order);
+  const allowlist = existsSync(join(content, "pilot", "allowlist.json")) ? read<{ items: AllowlistEntry[] }>(join(content, "pilot", "allowlist.json")).items : [];
+  const bank = new Map([...all, ...read<{ items: Item[] }>(join(content, "spelling", "dictation-bank.json")).items].map((i) => [i.id, i]));
+  const inItems = new Set(items.map((i) => i.id));
+  const allowlisted = allowlist
+    .filter((a) => !inItems.has(a.id))
+    .map((a) => bank.get(a.id))
+    .filter((i): i is Item => !!i)
+    .sort(order);
   const passages = new Map([...read<Passage[]>(join(content, "items", "passages.json")), ...read<Passage[]>(join(content, "pilot", "passages.json"))].map((p) => [p.id, p]));
   const lessons = read<{ lessons: Lesson[] }>(join(content, "web", "lessons.json")).lessons.filter((l) => manifest.capabilities.includes(l.capability));
   const fw = read<{ prerequisites: { capability: string; requires: string; source?: string }[]; strands: { substrands: { capabilities: { id: string; name: string }[] }[] }[] }>(join(content, "framework", "en-0.2.0.json"));
   const names = new Map(fw.strands.flatMap((s) => s.substrands.flatMap((ss) => ss.capabilities.map((c) => [c.id, c.name] as [string, string]))));
   const prerequisites = fw.prerequisites.filter((p) => manifest.capabilities.includes(p.capability) || manifest.capabilities.includes(p.requires));
-  return { manifest, items, passages, lessons, prerequisites, names };
+  return { manifest, items, allowlisted, allowlist, passages, lessons, prerequisites, names };
 }
 
 /** A short fingerprint of exactly what the reviewer sees (canonical JSON, sorted keys). */
@@ -154,8 +182,10 @@ export function reviewRows(p: Pilot, reviews: ReviewRecord[] = []): ReviewRow[] 
 function contentRows(p: Pilot): ReviewRow[] {
   const rows: ReviewRow[] = [];
   const pool = (id: string) => p.manifest.pools[id];
-  for (const i of p.items) {
+  const listed = new Map(p.allowlist.map((a) => [a.id, a]));
+  for (const i of [...p.items, ...p.allowlisted]) {
     const info = pool(i.id);
+    const pilotUse = listed.get(i.id)?.version === i.version ? `; pilot allowlist: ${listed.get(i.id)!.use}` : "";
     const passage = i.passage ? p.passages.get(i.passage) : undefined;
     const tags = [...Object.entries(i.wrong ?? {}).map(([w, t]) => `"${w}" → ${t}`), ...Object.entries(i.distractor_tags ?? {}).map(([k, t]) => `"${i.options?.[Number(k)]}" → ${t}`)].join("; ");
     rows.push({
@@ -164,11 +194,18 @@ function contentRows(p: Pilot): ReviewRow[] {
       version: String(i.version),
       capability: i.target,
       skill: p.names.get(i.target) ?? i.target,
-      use: info ? `${USE_WORDS[info.pool]}${info.unfamiliar ? "; unfamiliar example (transfer)" : ""}` : "not reserved",
+      use: (info ? `${USE_WORDS[info.pool]}${info.unfamiliar ? "; unfamiliar example (transfer)" : ""}` : "not reserved") + pilotUse,
       difficulty: String(i.b),
       format: i.format,
       passage: passage ? `${passage.id}: ${passage.title}` : "",
-      content: [i.prompt, ...(i.left ? [`Match: ${i.left.join(" / ")}`] : []), ...(i.options ? [`Options: ${i.options.map((o, k) => `(${k + 1}) ${o}`).join("  ")}`] : [])].join("\n"),
+      content: [
+        i.prompt,
+        ...(i.speak ? [`Said aloud: "${i.speak}"`] : []),
+        ...(i.sentence ? [`Sentence said aloud (never shown): "${i.sentence}"`] : []),
+        ...(i.left ? [`Match: ${i.left.join(" / ")}`] : []),
+        ...(i.options ? [`Options: ${i.options.map((o, k) => `(${k + 1}) ${o}`).join("  ")}`] : []),
+        ...(i.explain ? [`Shown after answering: ${i.explain}`] : []),
+      ].join("\n"),
       key: keyOf(i),
       misconceptions: tags,
       rationale: i.rationale ?? "",
@@ -177,7 +214,7 @@ function contentRows(p: Pilot): ReviewRow[] {
       review_status: "",
     });
   }
-  const used = new Set(p.items.map((i) => i.passage).filter((x): x is string => !!x));
+  const used = new Set([...p.items, ...p.allowlisted].map((i) => i.passage).filter((x): x is string => !!x));
   for (const id of [...used].sort()) {
     const ps = p.passages.get(id)!;
     const on = p.items.filter((i) => i.passage === id);
@@ -365,6 +402,25 @@ export function reviewStatus(rows: ReviewRow[], reviews: ReviewRecord[]): string
   return lines;
 }
 
+/**
+ * What a pilot build may show: `id@version` for each allowlisted question with an educator "approve" on its exact
+ * current content (fingerprint), and `passage:id` for each approved passage. Nothing else is ever approved here:
+ * an empty list means a pilot build shows nothing. The app applies the same allowlist again at run time.
+ */
+export function approvedForPilot(p: Pilot, reviews: ReviewRecord[]): string[] {
+  const rows = contentRows(p);
+  const decided = currentDecisions(rows, reviews);
+  const ok = (kind: ReviewRow["kind"], id: string) => decided.get(`${kind}|${id}`)?.decision === "approve";
+  const byId = new Map(rows.filter((r) => r.kind === "question").map((r) => [r.id, r]));
+  const out: string[] = [];
+  for (const a of p.allowlist) {
+    const r = byId.get(a.id);
+    if (r && r.version === String(a.version) && ok("question", a.id)) out.push(`${a.id}@${a.version}`);
+  }
+  for (const r of rows) if (r.kind === "passage" && ok("passage", r.id)) out.push(`passage:${r.id}`);
+  return out.sort();
+}
+
 // ---------------------------------------------------------------- HTML for reading
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -380,7 +436,8 @@ export function exportHtml(p: Pilot, rows: ReviewRow[]): string {
 <h1>OpenPath: five-capability pilot content for educator review</h1>
 <p class="warn">Content version ${esc(p.manifest.version)}. Everything here is a candidate awaiting review: nothing is approved. Record decisions in the CSV (one row per item) and return it; decisions are recorded with your name, the date and a fingerprint of exactly what you reviewed.</p>
 ${p.prerequisites.length ? `<h2>Prerequisite assumptions</h2>${rows.filter((x) => x.kind === "prerequisite").map((x) => `<article><pre>${esc(x.content)}</pre><p class="meta">${esc(x.status)} · ${esc(x.rationale)}</p></article>`).join("")}` : ""}
-${caps.map(section).join("\n")}`;
+${caps.map(section).join("\n")}
+${p.allowlisted.length ? `<h2>Other questions a pilot build may show (pilot allowlist)</h2><p class="meta">Placement questions on the other guided skills, and the dictation words. Each needs its own approval.</p>${rows.filter((x) => x.kind === "question" && !caps.includes(x.capability)).concat(rows.filter((x) => x.kind === "question" && caps.includes(x.capability) && p.allowlisted.some((i) => i.id === x.id))).map((x) => `<article class="question"><h4>question <code>${esc(x.id)}</code> v${esc(x.version)}</h4><p class="meta">${[x.capability, x.use, `difficulty ${x.difficulty}`, x.format].map(esc).join(" · ")}</p><pre>${esc(x.content)}</pre>${x.key ? `<p><b>Key:</b> ${esc(x.key)}</p>` : ""}<p class="meta">fingerprint ${esc(x.fingerprint)} · <b>review: ${esc(x.review_status)}</b></p></article>`).join("")}` : ""}`;
 }
 
 // ---------------------------------------------------------------- the readiness report
@@ -482,7 +539,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       writeFileSync(REPORT, text);
       console.log(`wrote ${REPORT}`);
     }
+  } else if (cmd === "approved") {
+    // what a pilot build would show (build-english.mjs --pilot compiles exactly this list)
+    const list = approvedForPilot(p, reviews);
+    console.log(list.length ? list.join("\n") : "nothing approved for the pilot: a pilot build would show no questions");
   } else if (cmd === "status") {
     console.log(reviewStatus(rows, reviews).join("\n"));
-  } else console.log("usage: review.ts export [dir] | import <file.csv> | report [--check] | status");
+  } else console.log("usage: review.ts export [dir] | import <file.csv> | report [--check] | status | approved");
 }

@@ -19,6 +19,7 @@
     "english:e2e-accounts": "node --test e2e/accounts.test.mjs",
     "english:e2e-developer": "node --test e2e/developer.test.mjs",
     "english:e2e-spelling": "node --test e2e/spelling.test.mjs",
+    "english:e2e-pilot": "node --test e2e/pilot.test.mjs",
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",
     "english:build:pilot": "node scripts/build-english.mjs --pilot",
     "english:build:preview": "node scripts/build-english.mjs --preview"

@@ -1,7 +1,6 @@
 {
- "version": "pilot-allowlist@0-proposal",
- "status": "PROPOSAL: not enforced by the app, and nothing in it is approved",
- "rule": "In a pupil session, only items listed here AND recorded as approved by the educator (reviews file, matching id and version) may be shown. Anything else is refused. Until approvals exist, nothing may be shown.",
+ "version": "pilot-allowlist@1",
+ "status": "Candidates only. Nothing here is approved: a pilot build shows a question only with a recorded educator approval of that exact id and version.",
  "sessions_allowed": [
   "placement",
   "spelling_assess"
@@ -14,7 +13,7 @@
   "guided",
   "explore",
   "doubling_journey",
-  "check (non-dictation evidence checks)"
+  "check"
  ],
  "lessons_allowed": [],
  "generated_practice_allowed": [],

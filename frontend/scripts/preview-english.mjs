@@ -15,7 +15,8 @@ import http from "node:http";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const dist = fileURLToPath(new URL("../dist-english", import.meta.url));
+// DIST serves another build folder (the pilot boundary's browser test serves a pilot build from dist-english-pilot)
+const dist = fileURLToPath(new URL(`../${process.env.DIST ?? "dist-english"}`, import.meta.url));
 const port = Number(process.env.PORT ?? 4174);
 const host = process.env.HOST ?? "127.0.0.1";
 const api = process.env.API_TARGET ? new URL(process.env.API_TARGET) : null;

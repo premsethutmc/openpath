@@ -63,6 +63,21 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
     e.preventDefault();
     if (text.trim() && !locked) onSubmit({ kind: "typed", text });
   };
+  // with the on-screen keyboard open (a phone's screen roughly halves), keep the answer box and Check above it: the
+  // dictation check's adult panel sits above the box and could otherwise push Check under the keyboard
+  const keepInView = () => {
+    if (document.activeElement !== input.current) return;
+    input.current?.form?.querySelector<HTMLElement>('button[type="submit"]')?.scrollIntoView({ block: "nearest" });
+  };
+  useEffect(() => {
+    const vv = window.visualViewport;
+    vv?.addEventListener("resize", keepInView);
+    window.addEventListener("resize", keepInView);
+    return () => {
+      vv?.removeEventListener("resize", keepInView);
+      window.removeEventListener("resize", keepInView);
+    };
+  }, []);
   return (
     <form className="answer" onSubmit={submit}>
       {speakText && (
@@ -86,6 +101,7 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
           autoCapitalize="off"
           spellCheck={false}
           enterKeyHint="done"
+          onFocus={() => setTimeout(keepInView, 300)}
           aria-describedby="prompt"
           name="answer"
         />

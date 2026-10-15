@@ -358,6 +358,73 @@ test("works offline once opened; without speech the spelling check says why and 
   await context.close();
 });
 
+// ------------------------------------------------------------------ Android-sized phone (emulated; not a real device)
+
+const ANDROID = {
+  viewport: { width: 412, height: 915 },
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36",
+};
+/** About what is left of a Pixel-sized screen with the on-screen keyboard open. */
+const KEYBOARD_OPEN = { width: 412, height: 470 };
+
+/** On a typed question: the answer box and Check button are on screen with the keyboard open, and Enter submits (PR #14). */
+async function typeWithKeyboard(page, right) {
+  const id = await page.locator(".item").getAttribute("data-item");
+  const item = items.get(id);
+  if (!item.format.startsWith("typed")) return { item: await answer(page, right), typed: false };
+  await page.setViewportSize(KEYBOARD_OPEN);
+  const box = page.locator(".ruled input");
+  await box.tap();
+  await page.waitForTimeout(400); // the keyboard takes a moment to open
+  for (const [name, attr] of [["autocorrect", "off"], ["autocapitalize", "off"], ["spellcheck", "false"], ["autocomplete", "off"]]) assert.equal(await box.getAttribute(name), attr, `${name} is ${attr}: the keyboard must not correct spelling`);
+  const inView = async (loc) => {
+    const b = await loc.boundingBox();
+    return b && b.y >= 0 && b.y + b.height <= KEYBOARD_OPEN.height + 1; // a fraction of a pixel is still on screen
+  };
+  assert.ok(await inView(box), `the answer box is visible above the keyboard (${id})`);
+  await page.keyboard.type(right ? item.answers[0] : "zzzq");
+  assert.ok(await inView(page.getByRole("button", { name: "Check", exact: true })), `Check is visible above the keyboard (${id})`);
+  await page.keyboard.press("Enter");
+  await page.locator(".feedback").waitFor();
+  await page.setViewportSize(ANDROID.viewport); // the keyboard closes once the answer is checked
+  await fits(page);
+  return { item, typed: true };
+}
+
+test("Android-sized phone (emulated): placement and the dictation check with the keyboard open, Enter submits, a rating tap", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await createProfile(page, "Anil");
+  await tappable(page);
+  let typed = 0;
+  for (const type of ["placement", "spelling"]) {
+    await page.getByRole("button", { name: "Start" }).first().tap();
+    for (let n = 0; n < 40; n++) {
+      await page.locator(".item, .done, .spelling-intro").first().waitFor({ timeout: 8000 });
+      if (await startSpellingIfAsked(page)) continue;
+      if (await page.locator(".done").count()) break;
+      const r = await typeWithKeyboard(page, n % 3 !== 2);
+      if (r.typed) typed++;
+      if (type === "spelling") assert.equal(r.item.format, "typed:dictation");
+      await page.getByRole("button", { name: "Next" }).tap();
+      await page.locator(".feedback").waitFor({ state: "detached" });
+    }
+    await page.locator(".done").waitFor();
+    if (type === "placement") await page.getByRole("button", { name: "About right" }).tap();
+    await fits(page);
+    await page.getByRole("button", { name: "Back to today" }).tap();
+  }
+  assert.ok(typed >= 5, `typed answers were checked with the keyboard open (${typed})`);
+  await shot(page, "android-1-after-checks");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
 /** Type an answer to the journey question on screen: right, or the form without doubling. */
 async function journeyAnswer(page, right) {
   const id = await page.locator(".item").getAttribute("data-item");

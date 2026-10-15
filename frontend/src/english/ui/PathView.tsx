@@ -40,7 +40,7 @@ export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: 
               ))}
             </ol>
             <p>{k.line}</p>
-            {k.start ? (
+            {k.start && learner.allows(k.start.step.type) ? (
               <button type="button" className="secondary" onClick={() => onStart(k.start!.step)}>
                 {k.start.label}
                 <span className="arrow" aria-hidden="true">
@@ -53,7 +53,11 @@ export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: 
           </li>
         ))}
       </ol>
-      <p className="small">These are the five skills of the current pilot. Other skills appear on Progress once they have answers. Every lesson and question here is draft content awaiting teacher review.</p>
+      {learner.content.gate ? (
+        <p className="small">In the pilot version, only the starting check and the spelling check are open, with teacher-approved questions. Lessons and practice are not part of the pilot.</p>
+      ) : (
+        <p className="small">These are the five skills of the current pilot. Other skills appear on Progress once they have answers. Every lesson and question here is draft content awaiting teacher review.</p>
+      )}
     </main>
   );
 }

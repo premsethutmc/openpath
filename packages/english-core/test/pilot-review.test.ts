@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { REPORT, REPO, ROW_COLUMNS, currentDecisions, exportCsv, exportHtml, importReviews, loadPilot, parseCsv, report, reviewRows, reviewStates, reviewStatus, type ReviewRecord } from "../../../tools/english/pilot/review.ts";
+import { REPORT, REPO, ROW_COLUMNS, approvedForPilot, currentDecisions, exportCsv, exportHtml, importReviews, loadPilot, parseCsv, report, reviewRows, reviewStates, reviewStatus, type ReviewRecord } from "../../../tools/english/pilot/review.ts";
 
 const p = loadPilot();
 const committedReviews: ReviewRecord[] = JSON.parse(readFileSync(join(REPO, "content", "english", "pilot", "reviews.json"), "utf8"));
@@ -30,7 +30,10 @@ function fill(text: string, by: Record<string, string[]>): string {
 
 test("PR-1 the export has one row per question, passage, lesson and prerequisite, and survives a CSV round trip exactly", () => {
   const kinds = (k: string) => rows.filter((r) => r.kind === k).length;
-  assert.equal(kinds("question"), p.items.length);
+  // the five pilot capabilities' questions, and every other question on the pilot allowlist (placement and dictation)
+  assert.equal(kinds("question"), p.items.length + p.allowlisted.length);
+  const ids = new Set(rows.filter((r) => r.kind === "question").map((r) => r.id));
+  for (const a of p.allowlist) assert.ok(ids.has(a.id), `allowlisted ${a.id} has a review row`);
   assert.equal(kinds("lesson"), p.lessons.length);
   assert.equal(kinds("prerequisite"), p.prerequisites.length);
   assert.equal(kinds("passage"), new Set(p.items.map((i) => i.passage).filter(Boolean)).size);
@@ -171,4 +174,26 @@ test("PR-7 unreviewed or changed content never becomes validated: approval is re
   const dir = mkdtempSync(join(tmpdir(), "review-"));
   assert.ok(dir);
   assert.deepEqual(JSON.parse(readFileSync(join(REPO, "content", "english", "pilot", "reviews.json"), "utf8")), committedReviews);
+});
+
+test("PR-9 a pilot build shows only allowlisted questions with an educator approval on their exact current content", () => {
+  assert.deepEqual(approvedForPilot(p, committedReviews), [], "nothing is approved in the committed record");
+  const fresh = reviewRows(p);
+  const byId = new Map(fresh.filter((r) => r.kind === "question").map((r) => [r.id, r]));
+  const listed = p.allowlist.map((a) => byId.get(a.id)!);
+  const dictation = p.allowlist.find((a) => a.use === "dictation")!;
+  const notListed = fresh.find((r) => r.kind === "question" && !p.allowlist.some((a) => a.id === r.id))!;
+  assert.ok(notListed, "some pilot-capability questions (practice, confirmation pools) are not on the allowlist");
+  const rec = (r: { kind: ReviewRecord["kind"]; id: string; version: string; fingerprint: string }, decision: ReviewRecord["decision"], fp = r.fingerprint): ReviewRecord => ({ kind: r.kind, id: r.id, version: r.version, fingerprint: fp, content_version: p.manifest.version, decision, issues: [], comment: "", reviewer: "R. Educator", date: "2026-11-02" });
+  const reviews = [
+    rec(listed[0], "approve"),
+    rec(listed[1], "reject"),
+    rec(listed[2], "approve", "0000000000000000"), // approved, but the content changed since: does not count
+    rec(listed[3], "revise"),
+    rec(byId.get(dictation.id)!, "approve"),
+    rec(notListed, "approve"), // approved, but not on the allowlist: never shown in a pilot build
+  ];
+  assert.deepEqual(approvedForPilot(p, reviews), [`${listed[0].id}@${listed[0].version}`, `${dictation.id}@${dictation.version}`].sort());
+  // a later decision replaces an earlier one
+  assert.deepEqual(approvedForPilot(p, [...reviews, rec(listed[0], "discuss")]), [`${dictation.id}@${dictation.version}`]);
 });

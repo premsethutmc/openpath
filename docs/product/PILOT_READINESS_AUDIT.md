@@ -6,6 +6,10 @@
 set-up, adds a backup report script, corrects the consent wording, and finds that the stack also offers *orgies*,
 *overdose*, *flogging*, *mugging* and *insane* as practice words.
 
+**Later update (release candidate):** the dictation and placement review lists are now rows of the one pilot review
+sheet (`node tools/english/pilot/review.ts export`); `pilot/dictation-review.csv` was retired. The pilot build
+enforces the allowlist and educator approvals; see `docs/engineering/INTEGRATION_AUDIT.md`.
+
 **Subject:** the English app as of `830264a` (PR #28, the tip of the stack).
 
 **Scope:** a first supervised pilot with 5–10 pupils, focused on spelling by dictation.

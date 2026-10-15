@@ -30,7 +30,7 @@ import {
   planDevelopment,
   scoreCode,
 } from "../../../../packages/english-core/src/index.ts";
-import { type AppContent, type Code, GUIDED } from "./content.ts";
+import { type AppContent, type Code, GUIDED, activityAllowed } from "./content.ts";
 import type { AppEvent, EvidenceTarget } from "./events.ts";
 import { type PlanStep, patternTitle, reviewStep, todayPlan } from "./plan.ts";
 import { capabilityProgress, type CapabilityProgress } from "./progress.ts";
@@ -426,7 +426,7 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     p.notes = plan.notes[p.id] ?? [];
     p.next = plan.all.find((r) => r.capability === p.id) ?? null;
   }
-  return { at: now, capabilities: snapshots, plan, activities: opts.activities === false ? [] : activities(s, c, now, speech, plan, snapshots, teach) };
+  return { at: now, capabilities: snapshots, plan, activities: opts.activities === false ? [] : activities(s, c, now, speech, plan, snapshots, teach).filter((a) => activityAllowed(c, a.step.type)) };
 }
 
 /** The purpose of an evidence check: the fresh check after teaching, or another look. */

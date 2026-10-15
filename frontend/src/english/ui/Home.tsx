@@ -27,9 +27,10 @@ const Arrow = () => (
 export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
+  // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
   const activities = profile.activities;
   const open = learner.state.open;
-  if (more) return <MorePractice learner={learner} onStart={onStart} onJourney={onJourney} onBack={() => setMore(false)} />;
+  if (more && !learner.content.gate) return <MorePractice learner={learner} onStart={onStart} onJourney={onJourney} onBack={() => setMore(false)} />;
   const now = learner.clock();
   const dueChecks = profile.capabilities.filter((x) => x.standing === "check_due");
   const words = dueWords(learner.state, now).length;
@@ -43,7 +44,7 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
-      {open && (
+      {open && learner.allows(open.event.type) && (
         <section className="resume" aria-label="Unfinished activity">
           <p>
             You stopped in the middle of <strong>{Learner.sessionTitle(open.event.type).toLowerCase()}</strong> ({open.answered.length} answered).
@@ -72,10 +73,16 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
           );
         })}
       </ol>
-      {activities.length === 0 && (
+      {activities.length === 0 && !learner.content.gate && (
         <div className="tile">
           <b>Nothing on the plan right now</b>
           <p>Either everything that can be checked has been, or the app has no more questions or lessons for what comes next. A grown-up can see why on the Progress page, and More practice is always open.</p>
+        </div>
+      )}
+      {activities.length === 0 && learner.content.gate && (
+        <div className="tile" data-pilot="nothing-open">
+          <b>Nothing to do in the app right now</b>
+          <p>This is the pilot version: it has only the starting check and the spelling check, with questions a teacher has approved. There is nothing more to do here today. Thank you!</p>
         </div>
       )}
       <div className="tile mint">
@@ -98,9 +105,11 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy }: { learner
           <small>skill{checked === 1 ? "" : "s"} with answers</small>
         </div>
       </div>
-      <button type="button" className="secondary more-entry" onClick={() => setMore(true)}>
-        More practice
-      </button>
+      {!learner.content.gate && (
+        <button type="button" className="secondary more-entry" onClick={() => setMore(true)}>
+          More practice
+        </button>
+      )}
       <p className="small" style={{ textAlign: "center" }}>
         <button type="button" className="link" onClick={onWhy}>
           For a grown-up: why these?

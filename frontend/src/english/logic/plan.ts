@@ -8,7 +8,7 @@
  *   5. one grammar or vocabulary capability, chosen by the engine's learning mode
  */
 import { leafView, recommend } from "../../../../packages/english-core/src/index.ts";
-import { type AppContent, GUIDED, lessonId } from "./content.ts";
+import { type AppContent, GUIDED, activityAllowed, lessonId } from "./content.ts";
 import type { EvidenceTarget, SessionType } from "./events.ts";
 import { type AppState, placementDone, sessionsOf } from "./state.ts";
 import { type PatternPlan, reviewWords, spellingCheckQueue, spellingPlan } from "./select.ts";
@@ -52,6 +52,11 @@ export function patternTitle(c: AppContent, cap: string, step: string): string {
 }
 
 export function todayPlan(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep[] {
+  // a pilot build offers only what its boundary allows (content.ts PilotGate); elsewhere this filter keeps everything
+  return planSteps(s, c, now, speech).filter((x) => activityAllowed(c, x.type));
+}
+
+function planSteps(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep[] {
   if (!placementDone(s))
     return [{ type: "placement", title: "Find your starting point", reason: "About 15–20 questions on spelling, grammar and vocabulary, so the plan starts in the right place. You can stop and carry on later." }];
   const steps: PlanStep[] = [];

@@ -6,7 +6,7 @@
 import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
-import { type AppContent, type Code, type Lesson, type StrategyContent, lessonId } from "./content.ts";
+import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
 import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
@@ -33,6 +33,14 @@ export interface Current {
   done: number;
   /** Fixed sessions know their length; adaptive ones give an upper bound. */
   total: number;
+}
+
+/** Something a pilot build does not allow (content.ts PilotGate): refused, never shown. */
+export class PilotRefusal extends Error {
+  constructor(what: string) {
+    super(`Not available in the pilot: ${what}. Only the starting check and the spelling check, with educator-approved questions, are open.`);
+    this.name = "PilotRefusal";
+  }
 }
 
 export const newProfileId = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`);
@@ -154,7 +162,19 @@ export class Learner {
     return { available: this.speechAvailable, enabled: this.state.speech, voice: this.speechAvailable ? this.voiceInfo : null };
   }
 
+  /** Whether this activity can be started here (in a pilot build: only allowed activities with approved questions). */
+  allows(type: SessionType): boolean {
+    return activityAllowed(this.content, type);
+  }
+
+  /** In a pilot build, refuse anything outside the boundary before it is recorded or shown. */
+  private guard(what: string): void {
+    if (this.content.gate) throw new PilotRefusal(what);
+  }
+
   async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts: { delivery?: "device_voice" | "adult_reader"; length?: number } = {}): Promise<Current> {
+    // the pilot boundary is checked first: a refused activity records nothing and ends nothing
+    if (!activityAllowed(this.content, step.type)) throw new PilotRefusal(step.type === "placement" || step.type === "spelling_assess" ? `${step.type} (no educator-approved questions yet)` : step.type);
     if (this.state.open) await this.stop();
     const now = this.clock();
     const s = this.state;
@@ -213,6 +233,11 @@ export class Learner {
   async current(): Promise<Current> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    // a session the pilot does not allow (resumed from an older or imported record) is ended, never continued
+    if (!activityAllowed(this.content, session.event.type)) {
+      await this.stop();
+      return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total: session.answered.length };
+    }
     const lessonId = session.event.lesson;
     const lesson = lessonId && !this.state.lessons.has(lessonId) ? (this.content.lessons.get(lessonId) ?? null) : null;
     const t = perfNow();
@@ -250,7 +275,7 @@ export class Learner {
       if (at < 0) return null;
       const q = queue[at];
       const item = this.content.ctx.content.items.get(q.item);
-      return item ? { item, use: q.use, why: "", trace: queueTrace(session.event.type, at + 1, queue.length, q.use) } : null;
+      return item && itemAllowed(this.content, item) ? { item, use: q.use, why: "", trace: queueTrace(session.event.type, at + 1, queue.length, q.use) } : null;
     }
     const s = this.state;
     switch (session.event.type) {
@@ -274,6 +299,7 @@ export class Learner {
 
   /** A lesson read before practice: recorded for the app, and as a teaching intervention for the engine. */
   async finishLesson(lesson: string, checkCorrect: boolean): Promise<void> {
+    this.guard("lessons");
     const at = this.clock();
     await this.add({ kind: "lesson", id: this.nextId(), at, lesson, checkCorrect });
     const l = this.content.lessons.get(lesson);
@@ -287,6 +313,8 @@ export class Learner {
   async present(item: Item, purpose: PresentedPurpose, intervention?: string): Promise<string> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    // the last line of the pilot boundary: nothing unapproved is ever recorded as shown
+    if (!itemAllowed(this.content, item) || !activityAllowed(this.content, session.event.type)) throw new PilotRefusal(`question ${item.id} version ${item.version}`);
     const prior = this.events.find((e) => e.kind === "presented" && e.session === session.event.session && e.item.id === item.id);
     if (prior) return prior.id;
     const id = this.nextId();
@@ -334,6 +362,7 @@ export class Learner {
   private async record(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    if (!itemAllowed(this.content, item)) throw new PilotRefusal(`question ${item.id} version ${item.version}`);
     // a word that could not be heard is never recorded as an answer to it
     if (item.kind === "code" && item.format === "typed:dictation" && this.speechLost()) throw new Error("this device cannot say the word now: an adult can read the words, or stop for now");
     const sid = session.event.session;
@@ -400,6 +429,7 @@ export class Learner {
    * from the record as it stands, so opening the journey repeatedly never adds events.
    */
   async startJourney(): Promise<JourneyView> {
+    this.guard("the doubling journey");
     let open = this.state.open;
     // an open journey left idle for hours is ended, so a return days later is a new session (delayed checks depend on it)
     if (open?.event.type === "doubling_journey" && Date.parse(this.clock()) - Date.parse(this.lastActivity(open.event.session)) > JOURNEY_IDLE_MS) {
@@ -425,6 +455,7 @@ export class Learner {
 
   /** Where the journey is. Records a question as presented (once). With no journey open: the preview, which is a summary. */
   async journey(): Promise<JourneyView> {
+    this.guard("the doubling journey");
     const session = this.state.open;
     if (!session || session.event.type !== "doubling_journey") return this.journeyPreview();
     if (Date.parse(this.clock()) - Date.parse(this.lastActivity(session.event.session)) > JOURNEY_IDLE_MS) {
@@ -461,6 +492,7 @@ export class Learner {
 
   /** The teaching step was shown: recorded as an intervention with its strategy. */
   async teach(strategy: StrategyContent, reason: string): Promise<void> {
+    this.guard("teaching");
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
     await this.add({ kind: "intervention", id: this.nextId(), at: this.clock(), session: session.event.session, capability: this.content.journey.capability, rule: this.content.journey.rule, strategy: strategy.id, content: `doubling-journey:${strategy.id}`, reason });
@@ -468,6 +500,7 @@ export class Learner {
 
   /** Show the next hint level for a guided item; returns its text. The last level is a worked example that shows the answer. */
   async hint(item: Code, strategy: StrategyContent): Promise<string> {
+    this.guard("hints");
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
     const level = this.hintsFor(session.event.session, item.id).length + 1;

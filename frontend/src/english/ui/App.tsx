@@ -322,7 +322,8 @@ export function App() {
           store.set(LAST, l.profileId);
           setLearner(l);
           setTab("home");
-          setScreen({ name: "intro" });
+          // a pilot build with no approved placement questions has no starting check to offer
+          setScreen(l.allows("placement") ? { name: "intro" } : { name: "app" });
         }}
       />
     );

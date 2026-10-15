@@ -4,10 +4,15 @@
  *   node scripts/build-english.mjs           -> dist-english/ (development: unreviewed practice words included)
  *   node scripts/build-english.mjs --preview -> dist-english/ with the pilot set's words, not yet reviewed (for the
  *                                               product owner to try the pilot experience; labelled as unreviewed)
- *   node scripts/build-english.mjs --pilot   -> dist-english/ for a trial: only practice words from approved
- *                                               rules or reviewed sets (fails if none are approved)
+ *   node scripts/build-english.mjs --pilot   -> dist-english/ for a supervised pilot: the content-safety boundary
+ *                                               (content.ts PilotGate). Only placement and the dictation spelling
+ *                                               check; only allowlisted questions with an educator approval of that
+ *                                               exact id and version (tools/english/pilot/review.ts approved); no
+ *                                               lessons, no generated practice, no developer dashboard. Fails if
+ *                                               nothing is approved, unless --allow-empty (a test build that shows
+ *                                               nothing, to check the boundary fails closed).
  *
- * Flagged and excluded practice words are never included in either. See tools/english/spelling/review.ts.
+ * Flagged and excluded practice words are never included in any build. See tools/english/spelling/review.ts.
  *
  * Everything it needs is in the bundle: the engine, the framework, the item bank, the generated
  * spelling items, lessons and feedback. The licence notices of the word sources are copied alongside.
@@ -19,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 
 import { reviewStatus, reviewSummary } from "../../packages/english-core/src/index.ts";
+import { REVIEWS, approvedForPilot, loadPilot } from "../../tools/english/pilot/review.ts";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes("--preview") ? "preview" : "development";
@@ -28,15 +34,25 @@ const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes(
   const rows = reviewSummary(items, reviewStatus(items, review));
   const approved = rows.reduce((t, r) => t + r.approved, 0);
   const pilotSet = JSON.parse(await readFile(`${root}/../content/english/spelling/review/pilot-set.json`, "utf8")).items.length;
-  const offered = mode === "pilot" ? approved : mode === "preview" ? pilotSet : approved + rows.reduce((t, r) => t + r.unreviewed, 0);
-  console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)`);
+  const offered = mode === "pilot" ? 0 : mode === "preview" ? pilotSet : approved + rows.reduce((t, r) => t + r.unreviewed, 0);
+  console.log(`content mode: ${mode}; ${offered} of ${items.length} practice questions offered (${approved} approved)${mode === "pilot" ? ": a pilot build offers no generated practice" : ""}`);
   for (const r of rows) console.log(`  ${r.rule}: ${r.approved} approved, ${r.unreviewed} unreviewed, ${r.flagged} flagged, ${r.excluded} excluded`);
-  if (mode === "pilot" && !approved) {
-    console.error("A pilot build needs at least one approved rule or reviewed set. Review the pilot sheet first (content/english/spelling/review/pending/pilot-1.csv), then: node tools/english/spelling/review.ts record pilot-1.csv --by \"Your name\"");
+}
+// the pilot boundary: the educator approvals compiled into the build (never inferred, never automatic)
+let pilotApproved = [];
+if (mode === "pilot") {
+  pilotApproved = approvedForPilot(loadPilot(), JSON.parse(await readFile(REVIEWS, "utf8")));
+  const questions = pilotApproved.filter((k) => !k.startsWith("passage:")).length;
+  console.log(`pilot boundary: ${questions} allowlisted question${questions === 1 ? "" : "s"} approved by an educator; placement and the dictation spelling check only`);
+  if (!questions && !process.argv.includes("--allow-empty")) {
+    console.error("A pilot build needs educator approvals: export the review sheet (node tools/english/pilot/review.ts export), have an educator record decisions, import them (review.ts import <file.csv>), then build again. Use --allow-empty only for a test build that shows nothing.");
     process.exit(1);
   }
 }
-const out = `${root}/dist-english`;
+// --out=<folder> builds elsewhere (a pilot test build beside the development one); the default is dist-english
+const outName = process.argv.find((a) => a.startsWith("--out="))?.slice(6) ?? "dist-english";
+if (!/^dist-english[a-z0-9-]*$/.test(outName)) throw new Error("--out must name a dist-english* folder");
+const out = `${root}/${outName}`;
 const licences = `${root}/../content/english/spelling/licences`;
 
 // the build's commit, shown in diagnostics reports (OPENPATH_COMMIT wins, e.g. in CI); never a secret
@@ -58,11 +74,11 @@ await esbuild.build({
   format: "esm",
   target: ["es2022", "safari15"],
   jsx: "automatic",
-  outdir: "dist-english/assets",
+  outdir: `${outName}/assets`,
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode) },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved) },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);
@@ -129,4 +145,4 @@ self.addEventListener("fetch", (e) => {
 });
 `,
 );
-console.log(`wrote dist-english/ (version ${version}, app.js ${Math.round(js.length / 1024)} kB)`);
+console.log(`wrote ${outName}/ (version ${version}, app.js ${Math.round(js.length / 1024)} kB)`);

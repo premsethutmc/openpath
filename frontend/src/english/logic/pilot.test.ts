@@ -179,7 +179,7 @@ test("words spelt right are checked again after a few days, so retention is meas
   for (const d of l.state.ledger.decisions.filter((d) => d.observation && (content.ctx.content.items.get(d.observation.item) as Code).generated)) assert.equal(d.verdict, "held");
 });
 
-test("pilot content mode offers only approved practice words; flagged and excluded ones are never offered", () => {
+test("practice-word review: approvals and exclusions are applied; a pilot build offers no generated practice at all (pilot boundary)", () => {
   const pilotNone = loadContent({ mode: "pilot" });
   assert.equal(pilotNone.generated.length, 0, "nothing is approved in the committed record yet");
   assert.equal(pilotNone.generatedAll.length, content.generatedAll.length, "every item still rebuilds old answers");
@@ -191,16 +191,23 @@ test("pilot content mode offers only approved practice words; flagged and exclud
   const sample = sampleRule(content.generatedAll, gen, "add_ending", 30, "p1");
   review.rules.push({ id: "rule:add_ending", generator: gen, template: "add_ending", decision: "approved", by: "Tester", date: "2026-10-13", sample: { seed: "p1", size: 30, population: 655, items: sample.map((i) => ({ id: i.id, version: i.version })), critical: [], minor: [{ id: sample[0].id, note: "x", action: "exclude" }] } });
   review.exceptions.push({ item: sample[0].id, action: "exclude", reason: "x", by: "Tester", date: "2026-10-13" });
+  // the review record is read: the rule's items are approved, the excepted one is excluded
+  const dev = loadContent({ mode: "development", review });
+  const approved = dev.generatedAll.filter((g) => dev.review.get(g.id)?.status === "approved");
+  assert.ok(approved.length > 500);
+  assert.ok(approved.every((g) => g.generated!.template === "add_ending"));
+  assert.equal(dev.review.get(sample[0].id)?.status, "excluded");
+  assert.ok(!dev.generated.some((g) => g.id === sample[0].id), "an excluded item is not offered, in any build");
+  // spelling practice in a development build only uses what is offered
+  const s = fold(dev, [{ kind: "profile", id: "p", at: "2026-10-13T09:00:00.000Z", name: "A", consent: { by: "guardian", scope: "this_device_only" }, app: "t" }]);
+  const g = approved[1];
+  const queue = spellingPracticeQueue(s, dev, g.target, g.step!, true);
+  const offered = new Set(dev.generated.map((x) => x.id));
+  for (const p of queue) assert.ok(offered.has(p.item) || dev.handWritten.has(p.item), p.item);
+  // a pilot build: spelling practice is disabled, so even approved practice words are not offered
   const pilot = loadContent({ mode: "pilot", review });
-  assert.ok(pilot.generated.length > 500);
-  assert.ok(pilot.generated.every((g) => g.generated!.template === "add_ending"));
-  assert.ok(!pilot.generated.some((g) => g.id === sample[0].id), "an excluded item is not offered");
-  // spelling practice in a pilot build only uses what is offered
-  const s = fold(pilot, [{ kind: "profile", id: "p", at: "2026-10-13T09:00:00.000Z", name: "A", consent: { by: "guardian", scope: "this_device_only" }, app: "t" }]);
-  const g = pilot.generated[0];
-  const queue = spellingPracticeQueue(s, pilot, g.target, g.step!, true);
-  const offered = new Set(pilot.generated.map((x) => x.id));
-  for (const p of queue) assert.ok(offered.has(p.item) || pilot.handWritten.has(p.item), p.item);
+  assert.equal(pilot.generated.length, 0);
+  assert.equal(spellingPracticeQueue(fold(pilot, s.events), pilot, g.target, g.step!, true).filter((p) => (pilot.ctx.content.items.get(p.item) as Code).generated).length, 0);
 });
 
 test("trial record: ratings and notes are kept, exported and imported; the trial summary has no name and keeps the three spelling levels apart", async () => {

@@ -72,7 +72,7 @@ export function SpellingIntro({ learner, voice, step = { type: "spelling_assess"
             <button type="button" className="primary" onClick={go(() => onStart(step, { delivery: "adult_reader" }))}>
               An adult will read the words aloud
             </button>
-            {practice && (
+            {practice && learner.allows("spelling_practice") && (
               <button type="button" className="secondary" onClick={go(() => onStart({ type: "spelling_practice", capability: practice.cap, step: practice.step }))}>
                 Spelling practice instead (does not count as the check)
               </button>
