@@ -75,7 +75,6 @@ async function createProfile(page, name = "Asha") {
   await page.getByText("Tick the box to agree").waitFor();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
 }
 
@@ -141,7 +140,7 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await tappable(page);
   // placement
   await page.getByRole("heading", { name: "Find your starting point" }).waitFor();
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".item").waitFor();
   await shot(page, "2-question");
   await fits(page);
@@ -153,7 +152,7 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await page.getByRole("button", { name: "Back to today" }).click();
   // the spelling check: dictation (hear the word, type it), each word chosen after the last answer
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   const check = await finishSession(page, () => false);
   assert.ok(check.length >= 8);
   for (const i of check) assert.equal(i.format, "typed:dictation", "the spelling check is dictation, never a substitute");
@@ -215,7 +214,7 @@ test("trial: a note and a summary to share, made on the device, without the lear
   assert.equal(head["x-robots-tag"], "noindex, nofollow");
   assert.match(head["permissions-policy"], /microphone=\(\)/);
   await createProfile(page, "Priya");
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page);
   await page.getByRole("button", { name: "About right" }).click();
   await page.locator(".rate summary").click();
@@ -249,7 +248,7 @@ test("trial: a note and a summary to share, made on the device, without the lear
 test("reliable resume: a reload in the middle of a session carries on at the same question", async () => {
   const { context, page, errors } = await phone();
   await createProfile(page, "Ravi");
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   for (let i = 0; i < 3; i++) {
     await page.locator(".item").waitFor();
     await answer(page, true);
@@ -276,7 +275,7 @@ test("reliable resume: a reload in the middle of a session carries on at the sam
 test("export, delete and import: the backup brings back exactly the same progress", async () => {
   const { context, page, errors } = await phone();
   await createProfile(page, "Meena");
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page, (n) => n % 2 === 0);
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("button", { name: "Progress" }).click();
@@ -309,10 +308,10 @@ test("export, delete and import: the backup brings back exactly the same progres
 test("words come back for review the next day", async () => {
   const { context, page } = await phone();
   await createProfile(page, "Kiran");
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("button", { name: "Start" }).first().click(); // spelling check (dictation)
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click(); // spelling check (dictation)
   await finishSession(page, () => false); // misspelt words with practice items come back for review
   await page.getByRole("button", { name: "Back to today" }).click();
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "nothing due today");
@@ -342,10 +341,10 @@ test("works offline once opened; without speech the spelling check says why and 
   if (/no built-in English voice/.test(speech)) {
     // no on-device voice in this browser: no dictation questions, ever
     await page.getByRole("button", { name: "Home", exact: true }).click();
-    await page.getByRole("button", { name: "Start" }).first().click();
+    await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
     await finishSession(page);
     await page.getByRole("button", { name: "Back to today" }).click();
-    await page.getByRole("button", { name: "Start" }).first().click();
+    await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
     await page.getByText("This device can't say the words aloud.").waitFor();
     await shot(page, "6b-no-speech");
     const asked = await finishSession(page, () => false); // an adult reads the words
@@ -402,7 +401,7 @@ test("Android-sized phone (emulated): placement and the dictation check with the
   await tappable(page);
   let typed = 0;
   for (const type of ["placement", "spelling"]) {
-    await page.getByRole("button", { name: "Start" }).first().tap();
+    await page.locator(".plan li").getByRole("button", { name: "Start" }).first().tap();
     for (let n = 0; n < 40; n++) {
       await page.locator(".item, .done, .spelling-intro").first().waitFor({ timeout: 8000 });
       if (await startSpellingIfAsked(page)) continue;
@@ -542,10 +541,10 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   // before anything: only the starting point
   assert.equal(await page.locator(".plan li").count(), 1);
   assert.equal(await page.locator('.plan li[data-activity="start"]').count(), 1);
-  await page.getByRole("button", { name: "Start" }).first().click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("button", { name: "Start" }).first().click(); // the spelling check
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click(); // the spelling check
   await finishSession(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan: at most three activities, each with a child-facing label, no numbers about the child

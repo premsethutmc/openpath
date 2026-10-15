@@ -146,7 +146,7 @@ async function addLearner(page, name, goal = /Understand grammar/) {
   await page.getByRole("button", { name: goal }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "I'm ready" }).waitFor();
+  await page.locator(".plan li").first().waitFor();
 }
 
 const progressText = async (page) => {
@@ -190,11 +190,11 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.locator("#consent").check();
   await shot(page, "goal");
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "I'm ready" }).waitFor();
+  await page.locator(".plan li").first().waitFor();
   await shot(page, "check-intro");
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
   // … Arun completes the first assessment
-  await page.getByRole("button", { name: "I'm ready" }).click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".item").waitFor();
   await shot(page, "assessment-question");
   await fits(page);
@@ -221,7 +221,7 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await shot(page, "home");
   await fits(page);
   await tappable(page);
-  await page.getByRole("button", { name: "Start" }).first().click(); // the spelling check
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click(); // the spelling check
   await finishSession(page, () => false);
   await page.getByRole("button", { name: "Back to today" }).click();
   // … Arun completes a lesson (the plan now teaches a spelling pattern)
@@ -282,7 +282,6 @@ test("two pupils of one parent keep separate records, and switching between them
   const { context, page, errors } = await device();
   await signIn(page, PARENT);
   await addLearner(page, "Meera", /Get better at spelling/);
-  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("button", { name: "Progress", exact: true }).click();
   await page.getByText("No answers yet", { exact: true }).waitFor();
   const pupils = (await api(page, "GET", "/pupils/")).json.pupils;
@@ -355,7 +354,6 @@ test("deleting a pupil, then the account, removes the records from the server", 
   await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
   assert.equal((await api(page, "GET", `/pupils/${before[0].id}/events/`)).status, 404);
   await addLearner(page, "Temp");
-  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("button", { name: "Me", exact: true }).click();
   await page.getByRole("button", { name: "Delete the account" }).click();
   await page.getByLabel("Your password, to confirm").fill(PASSWORD);

@@ -18,12 +18,13 @@ import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { Home } from "./Home.tsx";
 import { Journey } from "./Journey.tsx";
 import { ImportBackup, Me } from "./Me.tsx";
-import { AddLearner, type AuthMode, Brand, CheckIntro, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
+import { AddLearner, type AuthMode, Brand, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
 import { PathView } from "./PathView.tsx";
 import { ProgressView } from "./ProgressView.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech } from "./speech.ts";
 import { SpellingIntro } from "./SpellingIntro.tsx";
+import { SpellingBee } from "./SpellingBee.tsx";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
 const clock = () => {
@@ -57,7 +58,7 @@ const LAST = "openpath-english-last-profile";
 const MODE = "openpath-english-mode";
 
 type Mode = "device" | "account";
-type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" } | { name: "spelling-intro"; step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target"> };
+type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "app" } | { name: "spelling-intro"; step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target"> };
 type Tab = "home" | "journey" | "progress" | "me";
 const TABS: { id: Tab; label: string; ico: string }[] = [
   { id: "home", label: "Home", ico: "🏠" },
@@ -88,6 +89,7 @@ export function App() {
   const [learner, setLearner] = useState<Learner | null>(null);
   const [tab, setTab] = useState<Tab>("home");
   const [inSession, setInSession] = useState(false);
+  const [inBee, setInBee] = useState(false);
   const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -124,6 +126,7 @@ export function App() {
       setTab("home");
       setInSession(false);
       setInJourney(false);
+      setInBee(false);
       setScreen({ name: "app" });
     } catch (e) {
       setProblem((e as Error).message);
@@ -322,8 +325,8 @@ export function App() {
           store.set(LAST, l.profileId);
           setLearner(l);
           setTab("home");
-          // a pilot build with no approved placement questions has no starting check to offer
-          setScreen(l.allows("placement") ? { name: "intro" } : { name: "app" });
+          // straight to Home: the Spelling Bee needs no starting check, and General English's starting check is on Home
+          setScreen({ name: "app" });
         }}
       />
     );
@@ -340,8 +343,23 @@ export function App() {
 
   if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} step={screen.step} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
 
-  if (screen.name === "intro")
-    return <CheckIntro name={learner.state.profile?.name ?? "Your"} onReady={() => start({ type: "placement" })} onLater={() => setScreen({ name: "app" })} />;
+  if (inBee)
+    return (
+      <SpellingBee
+        learner={learner}
+        voice={learner.state.speech ? voice : null}
+        speechOff={!!voice && !learner.state.speech}
+        onTurnSpeechOn={async () => {
+          await learner.setSpeech(true);
+          changed();
+        }}
+        onChanged={changed}
+        onLeave={() => {
+          setInBee(false);
+          changed();
+        }}
+      />
+    );
 
   if (inJourney || (inSession && learner.state.open?.event.type === "doubling_journey"))
     return (
@@ -392,6 +410,7 @@ export function App() {
             setInJourney(true);
           }}
           onWhy={() => setTab("progress")}
+          onBee={() => setInBee(true)}
         />
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}

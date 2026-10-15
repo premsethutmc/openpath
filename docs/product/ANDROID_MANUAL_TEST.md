@@ -148,6 +148,17 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A7.5 ★ | **Me → Delete this learner from this device**, and confirm | TEST1 is gone. Reopening the app does not bring it back |
 | A7.6 | Note for the pilot | Clearing Chrome's data for the site also deletes everything not exported |
 
+### A8. Spelling Bee (no starting check needed)
+
+| # | Do | Expect |
+|---|---|---|
+| A8.1 ★ | Make a new learner. On Home, tap **Start Spelling Bee** | The first word is spoken at once (the word, a sentence, the word again). The word is not written anywhere on the screen |
+| A8.2 ★ | Tap **Repeat the word**; wait a minute, then tap it again | The word is heard each time |
+| A8.3 ★ | Type the word with no suggestions appearing, and tap **Submit** | "Right!" and the spelling; **Next word** says the next one |
+| A8.4 | Misspell a word on purpose | "Not quite.", the right spelling, what was typed, and "review list" |
+| A8.5 | Lock the phone mid-session; unlock; or close Chrome and reopen | Home offers **Carry on Spelling Bee** at the same word |
+| A8.6 | Finish 10 words | A summary; Home and Progress show words practised; the next session starts with the misspelt word |
+
 ## Part B: safety testing of the empty pilot build (pilot address)
 
 Nothing is approved in this build, so it must not show **any** question, lesson or practice. If anything appears,
@@ -212,6 +223,10 @@ Part A.
 | A7.2–A7.3 | | |
 | A7.4 ★ | | |
 | A7.5 ★ | | |
+| A8.1 ★ | | |
+| A8.2 ★ | | |
+| A8.3 ★ | | |
+| A8.4–A8.6 | | |
 | B1 ★ | | |
 | B2 ★ | | |
 | B3 ★ | | |

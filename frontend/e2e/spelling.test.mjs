@@ -104,7 +104,7 @@ async function register(page, email, name) {
   await page.getByRole("button", { name: /Get better at spelling/ }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.getByRole("button", { name: "I'm ready" }).click();
+  await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
 }
 
 /** Placement: right on easier questions only (a pupil around band 3–4). */

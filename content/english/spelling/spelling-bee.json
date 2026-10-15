@@ -1,0 +1,900 @@
+{
+ "version": "spelling-bee@1",
+ "policy": {
+  "spelling": "British English. Each word has one accepted spelling unless variants are listed; the 79 reused dictation words were chosen to have none, and the 21 new words have the same spelling in British and American English.",
+  "levels": {
+   "1": "Beginner",
+   "2": "Elementary",
+   "3": "Intermediate",
+   "4": "Advanced",
+   "5": "Challenging"
+  },
+  "reuse": "Entries with an \"item\" are the existing dictation questions (word, sentence and difficulty come from content/english/spelling/dictation-bank.json, not copied here). Levels follow the dictation bank's difficulty estimates (b), in order."
+ },
+ "words": [
+  {
+   "id": "bee.friend",
+   "level": 1,
+   "word": "friend",
+   "sentence": "My best friend lives next door.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.because",
+   "level": 1,
+   "word": "because",
+   "sentence": "We stayed inside because it was raining.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.said",
+   "level": 1,
+   "word": "said",
+   "sentence": "She said goodbye at the gate.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.school",
+   "level": 1,
+   "word": "school",
+   "sentence": "We walk to school every morning.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.people",
+   "level": 1,
+   "word": "people",
+   "sentence": "Many people came to the fair.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.again",
+   "level": 1,
+   "word": "again",
+   "sentence": "Please read the story again.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.water",
+   "level": 1,
+   "word": "water",
+   "sentence": "Drink some water after the race.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.after",
+   "level": 1,
+   "word": "after",
+   "sentence": "We played football after lunch.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.every",
+   "level": 1,
+   "word": "every",
+   "sentence": "He brushes his teeth every night.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.little",
+   "level": 1,
+   "word": "little",
+   "sentence": "The little puppy chased its tail.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.house",
+   "level": 1,
+   "word": "house",
+   "sentence": "Their house has a red door.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.laugh",
+   "level": 1,
+   "word": "laugh",
+   "sentence": "The joke made everyone laugh.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.many",
+   "level": 1,
+   "word": "many",
+   "sentence": "There are many stars in the sky.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.animal",
+   "level": 1,
+   "word": "animal",
+   "sentence": "A giraffe is a very tall animal.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.around",
+   "level": 1,
+   "word": "around",
+   "sentence": "We walked around the lake.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.together",
+   "level": 1,
+   "word": "together",
+   "sentence": "We built the model together.",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.helping",
+   "level": 1,
+   "item": {
+    "id": "spl.dict.003",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.003 version 1)"
+  },
+  {
+   "id": "bee.looked",
+   "level": 1,
+   "item": {
+    "id": "spl.dict.004",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.004 version 1)"
+  },
+  {
+   "id": "bee.pointed",
+   "level": 1,
+   "item": {
+    "id": "spl.dict.001",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.001 version 1)"
+  },
+  {
+   "id": "bee.talked",
+   "level": 1,
+   "item": {
+    "id": "spl.dict.002",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.002 version 1)"
+  },
+  {
+   "id": "bee.darkness",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.045",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.045 version 1)"
+  },
+  {
+   "id": "bee.replay",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.046",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.046 version 1)"
+  },
+  {
+   "id": "bee.unfair",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.049",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.049 version 1)"
+  },
+  {
+   "id": "bee.unlock",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.047",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.047 version 1)"
+  },
+  {
+   "id": "bee.payment",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.048",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.048 version 1)"
+  },
+  {
+   "id": "bee.brushes",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.007",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.007 version 1)"
+  },
+  {
+   "id": "bee.foxes",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.009",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.009 version 1)"
+  },
+  {
+   "id": "bee.matches",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.006",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.006 version 1)"
+  },
+  {
+   "id": "bee.wishes",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.005",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.005 version 1)"
+  },
+  {
+   "id": "bee.churches",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.008",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.008 version 1)"
+  },
+  {
+   "id": "bee.clapped",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.013",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.013 version 1)"
+  },
+  {
+   "id": "bee.dropped",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.011",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.011 version 1)"
+  },
+  {
+   "id": "bee.shopping",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.012",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.012 version 1)"
+  },
+  {
+   "id": "bee.sitting",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.015",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.015 version 1)"
+  },
+  {
+   "id": "bee.stopped",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.010",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.010 version 1)"
+  },
+  {
+   "id": "bee.grabbed",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.014",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.014 version 1)"
+  },
+  {
+   "id": "bee.planned",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.016",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.016 version 1)"
+  },
+  {
+   "id": "bee.chasing",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.022",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.022 version 1)"
+  },
+  {
+   "id": "bee.closing",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.019",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.019 version 1)"
+  },
+  {
+   "id": "bee.saving",
+   "level": 2,
+   "item": {
+    "id": "spl.dict.021",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.021 version 1)"
+  },
+  {
+   "id": "bee.smiling",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.018",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.018 version 1)"
+  },
+  {
+   "id": "bee.totally",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.050",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.050 version 1)"
+  },
+  {
+   "id": "bee.writing",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.017",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.017 version 1)"
+  },
+  {
+   "id": "bee.arriving",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.020",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.020 version 1)"
+  },
+  {
+   "id": "bee.meanness",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.052",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.052 version 1)"
+  },
+  {
+   "id": "bee.unnoticed",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.053",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.053 version 1)"
+  },
+  {
+   "id": "bee.usually",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.051",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.051 version 1)"
+  },
+  {
+   "id": "bee.dissatisfied",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.054",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.054 version 1)"
+  },
+  {
+   "id": "bee.naturally",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.055",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.055 version 1)"
+  },
+  {
+   "id": "bee.happier",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.024",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.024 version 1)"
+  },
+  {
+   "id": "bee.hurried",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.023",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.023 version 1)"
+  },
+  {
+   "id": "bee.peaceful",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.059",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.059 version 1)"
+  },
+  {
+   "id": "bee.powerful",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.056",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.056 version 1)"
+  },
+  {
+   "id": "bee.studied",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.025",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.025 version 1)"
+  },
+  {
+   "id": "bee.thankful",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.058",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.058 version 1)"
+  },
+  {
+   "id": "bee.wonderful",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.057",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.057 version 1)"
+  },
+  {
+   "id": "bee.worried",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.026",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.026 version 1)"
+  },
+  {
+   "id": "bee.easiest",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.027",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.027 version 1)"
+  },
+  {
+   "id": "bee.enjoyment",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.061",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.061 version 1)"
+  },
+  {
+   "id": "bee.excitement",
+   "level": 3,
+   "item": {
+    "id": "spl.dict.060",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.060 version 1)"
+  },
+  {
+   "id": "bee.families",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.028",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.028 version 1)"
+  },
+  {
+   "id": "bee.horrible",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.065",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.065 version 1)"
+  },
+  {
+   "id": "bee.possible",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.062",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.062 version 1)"
+  },
+  {
+   "id": "bee.reasonable",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.064",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.064 version 1)"
+  },
+  {
+   "id": "bee.terrible",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.063",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.063 version 1)"
+  },
+  {
+   "id": "bee.admitted",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.030",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.030 version 1)"
+  },
+  {
+   "id": "bee.forbidden",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.035",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.035 version 1)"
+  },
+  {
+   "id": "bee.forgotten",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.029",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.029 version 1)"
+  },
+  {
+   "id": "bee.sensible",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.066",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.066 version 1)"
+  },
+  {
+   "id": "bee.valuable",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.067",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.067 version 1)"
+  },
+  {
+   "id": "bee.opened",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.036",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.036 version 1)"
+  },
+  {
+   "id": "bee.permitted",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.034",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.034 version 1)"
+  },
+  {
+   "id": "bee.preferred",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.031",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.031 version 1)"
+  },
+  {
+   "id": "bee.regretted",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.032",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.032 version 1)"
+  },
+  {
+   "id": "bee.responsible",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.068",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.068 version 1)"
+  },
+  {
+   "id": "bee.attention",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.069",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.069 version 1)"
+  },
+  {
+   "id": "bee.committed",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.033",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.033 version 1)"
+  },
+  {
+   "id": "bee.competition",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.071",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.071 version 1)"
+  },
+  {
+   "id": "bee.education",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.072",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.072 version 1)"
+  },
+  {
+   "id": "bee.entered",
+   "level": 4,
+   "item": {
+    "id": "spl.dict.040",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.040 version 1)"
+  },
+  {
+   "id": "bee.explosion",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.070",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.070 version 1)"
+  },
+  {
+   "id": "bee.gardening",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.042",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.042 version 1)"
+  },
+  {
+   "id": "bee.happened",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.037",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.037 version 1)"
+  },
+  {
+   "id": "bee.information",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.074",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.074 version 1)"
+  },
+  {
+   "id": "bee.offering",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.038",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.038 version 1)"
+  },
+  {
+   "id": "bee.ordered",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.041",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.041 version 1)"
+  },
+  {
+   "id": "bee.television",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.075",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.075 version 1)"
+  },
+  {
+   "id": "bee.confusion",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.073",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.073 version 1)"
+  },
+  {
+   "id": "bee.limited",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.039",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.039 version 1)"
+  },
+  {
+   "id": "bee.accidentally",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.077",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.077 version 1)"
+  },
+  {
+   "id": "bee.necessary",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.076",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.076 version 1)"
+  },
+  {
+   "id": "bee.disappearance",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.078",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.078 version 1)"
+  },
+  {
+   "id": "bee.panicking",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.044",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.044 version 1)"
+  },
+  {
+   "id": "bee.independence",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.079",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.079 version 1)"
+  },
+  {
+   "id": "bee.mimicked",
+   "level": 5,
+   "item": {
+    "id": "spl.dict.043",
+    "version": 1
+   },
+   "status": "owner-approved (as dictation question spl.dict.043 version 1)"
+  },
+  {
+   "id": "bee.rhythm",
+   "level": 5,
+   "word": "rhythm",
+   "sentence": "Clap along to the rhythm of the song.",
+   "say": "RITH-um",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.embarrass",
+   "level": 5,
+   "word": "embarrass",
+   "sentence": "Please don't embarrass me in front of my friends.",
+   "say": "em-BARR-us",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.accommodate",
+   "level": 5,
+   "word": "accommodate",
+   "sentence": "The hotel can accommodate fifty guests.",
+   "say": "uh-KOM-uh-date",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.mischievous",
+   "level": 5,
+   "word": "mischievous",
+   "sentence": "The mischievous kitten hid my sock.",
+   "say": "MISS-chiv-us (three syllables)",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  },
+  {
+   "id": "bee.definitely",
+   "level": 5,
+   "word": "definitely",
+   "sentence": "I will definitely come to your party.",
+   "say": "DEF-in-it-lee",
+   "variants": [],
+   "status": "new: chosen for the Spelling Bee on 15 October 2026; not part of the owner-approved 291; awaiting the product owner's review"
+  }
+ ]
+}

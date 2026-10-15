@@ -21,6 +21,7 @@
     "english:e2e-spelling": "node --test e2e/spelling.test.mjs",
     "english:e2e-pilot": "node --test e2e/pilot.test.mjs",
     "english:e2e-demo": "node --test e2e/demo.test.mjs",
+    "english:e2e-bee": "node --test e2e/bee.test.mjs",
     "english:demo-server": "node scripts/demo-server.mjs",
     "english:demo-hash-password": "node scripts/demo-hash-password.mjs",
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",

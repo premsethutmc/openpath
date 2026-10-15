@@ -10,6 +10,7 @@ import { STATUS_WORDS } from "./Home.tsx";
 import { ParentSummary } from "./Journey.tsx";
 import { CapabilityCard, ParentOverviewView } from "./Profile.tsx";
 import { Words } from "./Words.tsx";
+import { SpellingProgress } from "./SpellingBee.tsx";
 
 export function ProgressView({ learner }: { learner: Learner }) {
   const { profile, overview } = learner.overview();
@@ -25,6 +26,7 @@ export function ProgressView({ learner }: { learner: Learner }) {
       <h1 id="progress-title" className="hero">
         Your progress <span aria-hidden="true">🌱</span>
       </h1>
+      <SpellingProgress learner={learner} />
       <p className="sub">We separate what you've tried from what you've shown on your own. Levels are estimates on OpenPath's scale of 1 to 8, with how sure we are.</p>
       <div className="stats" aria-label="Summary">
         <div className="stat">
