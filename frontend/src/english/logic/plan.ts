@@ -8,10 +8,10 @@
  *   5. one grammar or vocabulary capability, chosen by the engine's learning mode
  */
 import { leafView, recommend } from "../../../../packages/english-core/src/index.ts";
-import { type AppContent, GUIDED, lessonId } from "./content.ts";
-import type { SessionType } from "./events.ts";
-import { type AppState, dueWords, placementDone, sessionsOf } from "./state.ts";
-import { type PatternPlan, spellingCheckQueue, spellingPlan } from "./select.ts";
+import { type AppContent, GUIDED, activityAllowed, lessonId } from "./content.ts";
+import type { EvidenceTarget, SessionType } from "./events.ts";
+import { type AppState, placementDone, sessionsOf } from "./state.ts";
+import { type PatternPlan, reviewWords, spellingCheckQueue, spellingPlan } from "./select.ts";
 
 export interface PlanStep {
   type: SessionType;
@@ -21,8 +21,12 @@ export interface PlanStep {
   step?: string;
   lesson?: string;
   count?: number;
+  /** For a check session: assess (first or another look) or retention (a later check). */
+  purpose?: "assess" | "confirm" | "retention";
   /** The engine's own explanation, for a guardian who wants the detail. */
   detail?: string;
+  /** An evidence check: which questions can fill the gap (mastery.ts). */
+  target?: EvidenceTarget;
 }
 
 const STEP_TITLES: Record<string, string> = {
@@ -48,19 +52,45 @@ export function patternTitle(c: AppContent, cap: string, step: string): string {
 }
 
 export function todayPlan(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep[] {
+  // a pilot build offers only what its boundary allows (content.ts PilotGate); elsewhere this filter keeps everything
+  return planSteps(s, c, now, speech).filter((x) => activityAllowed(c, x.type));
+}
+
+function planSteps(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep[] {
   if (!placementDone(s))
     return [{ type: "placement", title: "Find your starting point", reason: "About 15–20 questions on spelling, grammar and vocabulary, so the plan starts in the right place. You can stop and carry on later." }];
   const steps: PlanStep[] = [];
-  const checked = sessionsOf(s, "spelling_check").some((x) => x.end !== null);
-  if (!checked && spellingCheckQueue(s, c, now, speech).length)
-    return [{ type: "spelling_check", title: "Spelling check", reason: "One word for each spelling pattern near your level, to see which patterns to work on first." }];
-  const due = dueWords(s, now);
-  if (due.length) steps.push({ type: "spelling_review", title: `Review ${Math.min(due.length, 10)} word${due.length === 1 ? "" : "s"}`, reason: "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them.", count: due.length });
+  // the spelling check is dictation: hear a word, type it; each word is chosen after the last answer. It is offered
+  // whether or not this device can speak: without speech the app explains why, and an adult can read the words.
+  // the whole spelling check (not an evidence check on one skill, which also uses dictation)
+  const assessed = sessionsOf(s, "spelling_assess").some((x) => !x.event.capability && x.end?.reason === "finished");
+  if (!assessed && c.dictation.items.length)
+    return [{ type: "spelling_assess", title: "Spelling check: hear and spell", reason: "Hear a word, then type it. Each next word is chosen from your answers so far, near your level." }];
+  const review = reviewStep(s, c, now, speech);
+  if (review) steps.push(review);
   const next = spellingPlan(s, c, now, speech)[0];
   if (next) steps.push(patternStep(c, next, s));
   const g = grammarOrVocabulary(s, c, now);
   if (g) steps.push(g);
   return steps;
+}
+
+/** Word review: misspelt words due again, and words spelt right a few days ago that are due a check (PR #14). */
+export function reviewStep(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep | null {
+  const review = reviewWords(s, c, now, speech);
+  const n = review.due.length + review.confirm.length;
+  if (!n) return null;
+  return {
+    type: "spelling_review",
+    title: `Review ${n} word${n === 1 ? "" : "s"}`,
+    reason: [
+      review.due.length ? "Words you misspelt before, coming back after 1, 3, 7 and 14 days until you remember them." : "",
+      review.confirm.length ? `${review.confirm.length === n ? "Words" : "And words"} you spelt correctly a few days ago, to check they have stuck.` : "",
+    ]
+      .filter(Boolean)
+      .join(" "),
+    count: n,
+  };
 }
 
 function patternStep(c: AppContent, p: PatternPlan, s: AppState): PlanStep {

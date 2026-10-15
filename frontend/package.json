@@ -13,7 +13,16 @@
     "e2e": "node --test e2e/play.test.mjs",
     "english:build": "node scripts/build-english.mjs",
     "english:preview": "node scripts/preview-english.mjs",
-    "english:e2e": "node --test e2e/english.test.mjs"
+    "english:e2e": "node --test e2e/english.test.mjs",
+    "english:demo-journeys": "node scripts/demo-journeys.mjs",
+    "english:demo-profiles": "node --import tsx scripts/demo-profiles.mts",
+    "english:e2e-accounts": "node --test e2e/accounts.test.mjs",
+    "english:e2e-developer": "node --test e2e/developer.test.mjs",
+    "english:e2e-spelling": "node --test e2e/spelling.test.mjs",
+    "english:e2e-pilot": "node --test e2e/pilot.test.mjs",
+    "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",
+    "english:build:pilot": "node scripts/build-english.mjs --pilot",
+    "english:build:preview": "node scripts/build-english.mjs --preview"
   },
   "dependencies": {
     "react": "^19.2.0",

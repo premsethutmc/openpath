@@ -54,6 +54,8 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
   let lastFailed = false;
   for (const s of node.sessions ?? []) {
     if (Date.parse(s.at) > Date.parse(now)) break;
+    // a session with teaching on this capability is neither a first demonstration nor a retention check
+    if (s.teaching) continue;
     if (out.firstDemonstratedAt === null) {
       if (s.level === null) continue;
       out.firstDemonstratedAt = s.at;

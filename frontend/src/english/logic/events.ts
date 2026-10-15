@@ -12,12 +12,15 @@ export const APP_VERSION = "openpath-english-web@1";
 
 export type SessionType =
   | "placement" // independent: where to start
-  | "spelling_check" // independent: which spelling patterns need work (generated words, so practice-only)
+  | "spelling_check" // (before dictation) a fixed list of generated words; practice-only. Kept so earlier records replay
+  | "spelling_assess" // independent: dictation (hear the word, type it), each word chosen after the last answer
   | "spelling_practice" // one pattern: lesson, then practice
   | "spelling_review" // words due for review (word memory)
   | "spelling_transfer" // unseen words with a practised pattern
   | "guided" // a grammar or vocabulary capability: lesson, then adaptive practice
-  | "explore"; // any capability, through the existing engine (no teaching)
+  | "explore" // any capability, through the existing engine (no teaching)
+  | "doubling_journey" // the adaptive consonant-doubling journey: diagnose, teach, guided practice, independent reassessment
+  | "check"; // a few independent questions on one capability, chosen by the development plan (assess, reassess or a later check)
 
 export interface Planned {
   item: string;
@@ -29,8 +32,11 @@ export interface ProfileEvent {
   id: string;
   at: string;
   name: string;
-  /** Who agreed to keep the record on this device, and that it stays here. */
-  consent: { by: "learner" | "guardian"; scope: "this_device_only" };
+  /**
+   * Who agreed to keep the record, and where it is kept: on this device only, or in a parent's account (the parent
+   * agreed when creating the account and again when adding this pupil).
+   */
+  consent: { by: "learner" | "guardian"; scope: "this_device_only" | "parent_account" };
   app: string;
 }
 
@@ -47,6 +53,32 @@ export interface SessionEvent {
   capability?: string;
   step?: string;
   lesson?: string;
+  /** For a check: why it was asked (a first or another look: "assess"; the fresh check after teaching: "confirm"; a later check: "retention"). */
+  purpose?: "assess" | "confirm" | "retention";
+  /** Spelling sessions: whether the device could speak when the session began (decides which questions can be asked). */
+  speech?: SpeechRecord;
+  /** The spelling assessment: who says the words (the device's voice, or an adult reading them aloud). */
+  delivery?: "device_voice" | "adult_reader";
+  /** An evidence check chosen by the plan: the difficulty of questions that can fill the gap, and why (mastery.ts). */
+  target?: EvidenceTarget;
+}
+
+/** Which questions an evidence check asks: unused ones in this difficulty range, other spelling patterns first. */
+export interface EvidenceTarget {
+  atLeast?: number;
+  atMost?: number;
+  /** Spelling patterns already shown at level: others are preferred (dictation-only diversity). */
+  avoidPatterns?: string[];
+  why: string;
+}
+
+/** Speech as it was when a spelling session began. The voice's name and language only: nothing about the person. */
+export interface SpeechRecord {
+  /** A local English voice was found on this device. */
+  available: boolean;
+  /** Hearing words is switched on in Me. */
+  enabled: boolean;
+  voice: { name: string; lang: string; local: boolean } | null;
 }
 
 export interface SessionEndEvent {
@@ -91,6 +123,106 @@ export interface SettingsEvent {
   speech: boolean;
 }
 
+/** Who is learning and what they want from it, as chosen at the start (and changed in "Me"). */
+export type LearnerBand = "early" | "school" | "older";
+export type LearnerGoal = "confidence" | "grammar" | "spelling" | "reading";
+
+/**
+ * The learner's own choices, kept with the record. The goal orders the Journey; neither choice changes a question's
+ * difficulty, an estimate or the plan (the answers decide those), and neither adapts wording or content yet.
+ */
+export interface PreferencesEvent {
+  kind: "preferences";
+  id: string;
+  at: string;
+  band: LearnerBand;
+  goal: LearnerGoal;
+  /**
+   * Optional IANA time zone of the pupil or school, for calendar-day rules (calendar.ts). Not written by the app yet;
+   * records without it use UTC days. Timestamps themselves stay UTC.
+   */
+  timeZone?: string;
+}
+
+// ------------------------------------------------------------------ decision traces (diagnostics)
+
+/** One candidate the engine weighed: its score parts and reasons, exactly as the engine returned them. */
+export interface TracedCandidate {
+  item: string;
+  capability: string | null;
+  difficulty: number | null;
+  score: number;
+  p: number;
+  parts: Record<string, number>;
+  reasons: string[];
+  /** Alternatives only: why it was not chosen. */
+  whyNot?: string;
+}
+
+/**
+ * Why a question was asked, recorded when it was first shown (never reconstructed afterwards). Durations are not
+ * part of the record (it stays the same for the same answers); they are measured separately as telemetry.
+ * selector "engine": the engine's own decision (recommend), with what it knew and what it weighed.
+ * selector "queue": a fixed list planned when the session started (spelling sessions); the position is recorded.
+ * selector "planner": the doubling journey's rule planner (planRule), with its action, diagnosis and reason.
+ */
+export interface SelectionTrace {
+  selector: "engine" | "queue" | "planner";
+  /** The pool rule in force: assess, practice, confirm, retention, or the fixed queue. */
+  use: string;
+  mode?: string;
+  schedule?: string;
+  path?: string;
+  goal?: string;
+  target?: { band: number; source: string; note: string };
+  /** The estimates of the capabilities in play at that moment (mean, sd, direct answers, stage). */
+  knew?: { capability: string; mean: number; sd: number; n: number; stage: string }[];
+  /** Questions on the goal's capabilities that could be asked, and how many each rule kept out. */
+  candidates?: { eligible: number; unseen: number; excludedReserved: number; excludedPassage: number; excludedSeenWord: number; seen: number };
+  chosen?: TracedCandidate;
+  alternatives?: TracedCandidate[];
+  bankGaps?: { capability: string; suitable: [number, number]; unused: number[]; note: string }[];
+  explanation?: string;
+  queue?: { position: number; length: number; reason: string };
+  /** The spelling assessment: the targeting and coverage rules applied before the engine chose among what was left. */
+  spelling?: {
+    estimates: { capability: string; mean: number; sd: number }[];
+    rule: "follow_up" | "untested_pattern" | "near_estimate" | "widened" | "insufficient" | "stopped" | "evidence_gap";
+    reasons: string[];
+    window: number;
+    testedPatterns: string[];
+    followUp?: { misconception: string; after: string };
+  };
+  planner?: { action: string; itemRole?: string; strategy?: string; diagnosis: string; detail: string; reason: string; policy: string };
+  /** An evidence check: the difficulty range it was restricted to, and why (the evidence the plan is collecting). */
+  evidenceTarget?: EvidenceTarget;
+}
+
+/** What Today offered when a session was started, and which activity was started (recorded at that moment). */
+export interface PlanTrace {
+  offered: { title: string; kind: string; action: string | null; capability: string | null; priority: number | null; why: string }[];
+  started: { type: string; capability?: string; purpose?: string; step?: string };
+  /** Index in `offered`, or null when started from Journey, More practice or the onboarding. */
+  startedRank: number | null;
+  standings: Record<string, string>;
+  /** Skills the engine demonstrates but the evidence gate does not yet support: what is missing (C′). Optional: older traces have none. */
+  gaps?: Record<string, string>;
+  /** The evidence check started, if any: its difficulty range and why. */
+  target?: EvidenceTarget;
+}
+
+export interface TraceEvent {
+  kind: "trace";
+  id: string;
+  at: string;
+  session?: string;
+  /** For a selection: the item and the `presented` event it explains. */
+  item?: { id: string; version: number };
+  presented?: string;
+  selection?: SelectionTrace;
+  plan?: PlanTrace;
+}
+
 export interface FlagEvent {
   kind: "flag";
   id: string;
@@ -99,12 +231,38 @@ export interface FlagEvent {
   note: string;
 }
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | FlagEvent | LedgerEvent;
+/** How a session felt, tapped at its end (optional; for the pilot's usability record). */
+export type Rating = "too_easy" | "about_right" | "too_hard" | "confusing";
+export const RATINGS: Rating[] = ["too_easy", "about_right", "too_hard", "confusing"];
 
-export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => e.kind === "evidence" || e.kind === "proposal" || e.kind === "qualification" || e.kind === "revoke";
+export interface RatingEvent {
+  kind: "rating";
+  id: string;
+  at: string;
+  session: string;
+  rating: Rating;
+}
+
+/** A note from the learner or a guardian: a problem, a question, anything that got in the way. */
+export interface NoteEvent {
+  kind: "note";
+  id: string;
+  at: string;
+  /** Where it was written (a screen name), so a problem can be traced to a step of the journey. */
+  screen: string;
+  text: string;
+}
+
+export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent;
+
+const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
+/** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
+export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "flag", "evidence"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention"]);
+const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
+const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
 export function eventProblem(e: unknown): string | null {
@@ -113,7 +271,9 @@ export function eventProblem(e: unknown): string | null {
   if (typeof x.kind !== "string" || !KINDS.has(x.kind)) return `unknown event kind ${String(x.kind)}`;
   if (typeof x.id !== "string" || !x.id) return "an event has no id";
   if (typeof x.at !== "string" || Number.isNaN(Date.parse(x.at))) return `event ${x.id} has no valid time`;
-  if ((x.kind === "evidence" || x.kind === "attempt") && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
-  if ((x.kind === "evidence" || x.kind === "attempt" || x.kind === "session" || x.kind === "session_end") && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if (ITEM_KINDS.has(x.kind) && (!x.item || typeof (x.item as { id?: unknown }).id !== "string")) return `event ${x.id} names no item`;
+  if (SESSION_KINDS.has(x.kind) && typeof x.session !== "string") return `event ${x.id} names no session`;
+  if (x.kind === "rating" && !RATINGS.includes(x.rating as Rating)) return `event ${x.id} has an unknown rating`;
+  if (x.kind === "note" && (typeof x.text !== "string" || typeof x.screen !== "string")) return `event ${x.id} is a note without text`;
   return null;
 }

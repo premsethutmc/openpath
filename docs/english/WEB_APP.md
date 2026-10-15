@@ -17,8 +17,72 @@ npm run english:preview     # -> http://localhost:4174
 - **On a phone, for a private trial on the same Wi-Fi:** `HOST=0.0.0.0 npm run english:preview`,
   then open `http://<computer's address>:4174` on the phone. Everything works, but browsers allow
   offline install only on `https` or `localhost`, so over plain `http` the app needs the network to open.
-- **Hosting it properly** (for learners at home) needs any static `https` host for the
+- **Which build pupils may see:** only the pilot build. `npm run english:build` (development) and
+  `english:build:preview` are internal: they offer every activity, lessons, and unreviewed practice
+  words, and must never be put in front of pupils. Me shows which version is running.
+- **Preview of the trial (internal):** `npm run english:build:preview` offers exactly the pilot words (four
+  suffix rules, typed answers only), labelled as not yet reviewed.
+- **Pilot version:** `npm run english:build:pilot` enforces the pilot content-safety boundary: only the
+  starting check and the dictation spelling check, and only questions on
+  `content/english/pilot/allowlist.json` that an educator has approved at that exact version
+  (`node tools/english/pilot/review.ts approved`). No lessons, no practice words, no ratings or notes, no
+  developer tools. It refuses to build while nothing is approved. No build offers flagged or excluded
+  practice words ([`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md)).
+- **Hosting it properly** (for learners at home): see [`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md). It needs any static `https` host for the
   `dist-english/` folder. That is a deployment and cost decision, so none is set up.
+
+## Trying it on Android (private; nothing is deployed)
+
+You need a computer with Node 22.18 or later and this repository. Build once:
+
+```
+cd frontend && npm ci && npm run english:build:preview && npm run english:preview
+```
+
+**Recommended: a USB cable and Chrome's port forwarding.** The phone then opens the app as
+`http://localhost:4174`, which Chrome treats as secure. So it installs to the home screen and keeps
+working offline, and you can unplug and use it for days. Nothing is reachable from any other device.
+
+1. **On the phone:** Settings → About phone → tap *Build number* seven times; then Settings → System →
+   Developer options → turn on *USB debugging*.
+2. **Connect** the phone by USB and allow the computer when asked.
+3. **On the computer:** in Chrome, open `chrome://inspect/#devices` → *Port forwarding…* → add port
+   `4174` to `localhost:4174` → tick *Enable port forwarding* → Done. The phone appears in the list.
+   (With Android's platform tools, `adb reverse tcp:4174 tcp:4174` does the same.)
+4. **On the phone:** in Chrome, open `http://localhost:4174`. Create a learner, then Chrome's menu →
+   *Add to Home screen* (or *Install app*).
+5. **Unplug.** The app opens from the home screen without the computer, because its files are cached on
+   the phone. To update it later, rebuild, plug in again with forwarding on, and open it once.
+
+**Through a GitHub Codespace (no cable, private HTTPS):** the repository has a `.devcontainer` that builds
+the preview and starts it on port 4174 when a codespace starts.
+1. On github.com, signed in: open the branch, then **Code → Codespaces → Create codespace on
+   english/pilot-readiness**.
+2. When it has started, open the **Ports** tab, and copy the address for port 4174 (`https://…-4174.app.github.dev`). Leave
+   its visibility **Private**.
+3. On the phone, open that address in Chrome while signed in to GitHub, then *Add to Home screen*.
+
+A private port opens only for you. The codespace uses your monthly free allowance while it runs and stops
+after a period of inactivity (30 minutes by default). The installed app keeps working offline from the
+phone's cache, and progress stays on the phone. To pick up a newer build, start the codespace again and
+open the address once.
+
+**Quickest look, no cable:** with the phone and computer on the same Wi-Fi, run
+`HOST=0.0.0.0 npm run english:preview` and open `http://<computer's address>:4174` on the phone.
+- Everything works and progress is kept on the phone.
+- It cannot be installed or used offline (plain `http`), and the computer must be running.
+- Anyone on the same Wi-Fi could open it while the server runs.
+
+**Things to notice as a learner:**
+- whether your keyboard still suggests or corrects words in the answer box (the app turns this off;
+  some keyboards may ignore that);
+- whether a dictation voice is offered (Settings → Hearing words);
+- how the daily plan reads;
+- how the explanations land;
+- what Progress → Words shows after a day or two.
+
+Use the note box (Settings, or after a session) for anything that gets in the way. Notes stay on the
+phone and appear in a trial summary.
 
 ## The journey
 
@@ -40,6 +104,31 @@ npm run english:preview     # -> http://localhost:4174
    practice, later checks, and practice words recorded but not counted.
 7. **Coming back.** Reopening resumes any unfinished session at the same question. Misspelt words
    return after 1, 3, 7 and 14 days.
+
+## Three levels of spelling progress, kept apart (13 October)
+
+| Level | What it is | Where it comes from | Changes the engine's estimates? |
+|---|---|---|---|
+| **Word mastery** | Per word: met, learning, written correctly, remembered a day or more later, remembered over a week | Every attempt at a generated item (`logic/words.ts`). Independent recall (typing the word unaided, first try), recognition (choosing), mistakes, assisted attempts (after a wrong first try) and delayed retention (an unaided recall at least 20 hours after last meeting the word) are counted separately | **No** |
+| **Pattern mastery** | Per spelling pattern: needs work, practising, ready for a check, secure, check again | Practice, then checks with words never seen before (`patternStatus`) | **No** |
+| **Spelling proficiency** | The engine's estimate for the three spelling capabilities, with its uncertainty | Hand-written items only, through the unchanged composite updater | Yes (it *is* the estimate) |
+
+- **Words answered right first time get a later check too.** Up to 3 per review: after 3 days, then
+  7 days once remembered. So retention is measured for those words as well, not only for misspelt ones
+  (which return after 1, 3, 7 and 14 days, as before).
+- **Mastered** means remembered on later days at least twice since the last mistake, with the checks
+  at least a week apart. A mistake sends the word back to *learning*.
+
+## Trial features (13 October)
+
+- **One tap at the end of a session:** too easy, about right, too hard or confusing. It is optional.
+- **Notes** at the end of a session and in Settings ("Tell us about a problem").
+- **Trial summary** (Settings → Save a trial summary):
+  - a file made on the device with no name (the learner is a short code);
+  - sessions, timings, the three levels of spelling progress, ratings, notes and reported questions;
+  - nothing is sent. `tools/english/pilot/report.ts` turns summaries into one report.
+- **Response headers** for static hosts (`_headers`): no framing, no indexing; no camera, microphone or
+  location. The preview server applies them, so the browser tests run under them.
 
 ## How it uses the engine
 
@@ -101,6 +190,11 @@ npm run english:preview     # -> http://localhost:4174
   that consented sync can be added later.
 - **Writing and short answers are not offered**: E3b and live evaluation stay disabled.
 - **Bundle size:** about 2.7 MB of script (about 350 kB compressed), mostly content.
+- **Generated items are approved for practice only.** No generated item counts towards a capability
+  estimate until its assessment quality is validated (difficulty and discrimination from real answers),
+  which needs separate approval. Nothing is approved yet: the pilot sheets are waiting for a reviewer.
+- **The clue template is not recommended for the pilot** (adult or off-sense definitions). Without it,
+  and without a device voice, homophones are practised only by choosing.
 - **Not yet tried with learners.** Placement length, plan order and the display thresholds are
   initial settings, not tuned.
 
@@ -126,5 +220,20 @@ npm run english:preview     # -> http://localhost:4174
   - offline use;
   - no request to any other site;
   - no sideways scrolling and tap-sized buttons.
-- **CI:** these tests run, plus `generate.ts --check`. A separate workflow rebuilds the word bank from
+- `frontend/src/english/logic/pilot.test.ts` (13 October): 7 tests:
+  - each rule of word mastery;
+  - confirmation checks;
+  - word mastery leaves every estimate unchanged;
+  - pilot content mode;
+  - ratings, notes and the trial summary (no name), and the report tool.
+- `packages/english-core/test/w2-review.test.ts`: 9 tests:
+  - automatic flags;
+  - review status order;
+  - lapsing approvals;
+  - approval leaves the ledger identical;
+  - sample rules;
+  - recording a sheet;
+  - CSV.
+- The browser tests add a sixth: rating, notes, the trial summary download and the response headers.
+- **CI:** these tests run, plus `generate.ts --check` and `review.ts --check`. A separate workflow rebuilds the word bank from
   the pinned sources when the pipeline changes.

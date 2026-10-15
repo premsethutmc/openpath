@@ -334,3 +334,17 @@ export function goalWeights(goal: Goal, index: FrameworkIndex): Map<CapabilityId
 }
 
 export const wordCount = (text: string): number => (text.match(/[A-Za-z’']+/g) ?? []).length;
+
+/**
+ * What an item's answers can stand for. validated: educator-approved; candidate: the existing unreviewed bank
+ * (updates estimates, as since E1); provisional: unreviewed demonstration content (never updates estimates);
+ * practice: a generated item not yet checked by a person.
+ */
+export type ContentStatus = "validated" | "candidate" | "provisional" | "practice";
+export function contentStatus(item: Item): ContentStatus {
+  if (item.kind !== "code") return "candidate";
+  if (item.generated && !item.generated.checked) return "practice";
+  if (item.evidence_status === "provisional") return "provisional";
+  if (item.evidence_status === "validated") return "validated";
+  return "candidate";
+}

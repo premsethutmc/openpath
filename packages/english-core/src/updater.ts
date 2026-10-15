@@ -17,7 +17,7 @@ import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
-import type { Composite, Decision, Estimate, EvidenceEvent, Exposure, LedgerEvent, ProposalEvent, QualificationEvent, ShortItem, WritingTask } from "./types.ts";
+import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, PASSAGE_POLICY, isIndependentProvenance } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -89,6 +89,14 @@ export class Ledger {
   private proposals = new Set<string>();
   private heldSurprise = new Map<string, { band: number; proposal: string }>();
   private exposureOf = new Map<string, Exposure>();
+  private interventions = new Map<string, InterventionEvent>();
+  /** session#capability → time of the first teaching (intervention) on that capability in that session. */
+  private taughtInSession = new Map<string, string>();
+  /**
+   * passage#capability → the decision that counted an answer on that reading passage for that capability (any
+   * accepted answer that moved the estimate, under any policy). Used by passage@1 only.
+   */
+  private passageCounted = new Map<string, string>();
 
   constructor(ctx: Context, learnerId: string, revoked: Set<string> = new Set()) {
     this.ctx = ctx;
@@ -140,6 +148,18 @@ export class Ledger {
         return this.record([], event);
       case "revoke":
         return this.record([], event);
+      case "presented":
+      case "hint":
+      case "assisted_response":
+        // provenance: recorded for the learner record and rule-level projections; never an estimate change
+        return this.record([], event);
+      case "intervention":
+        this.interventions.set(event.id, event);
+        if (event.capability) {
+          const key = `${event.session}#${event.capability}`;
+          if (!this.taughtInSession.has(key)) this.taughtInSession.set(key, event.at);
+        }
+        return this.record([], event);
     }
   }
 
@@ -159,6 +179,36 @@ export class Ledger {
     const { correct, misconceptions } = scoreCode(item, ev.response);
     const id = `d:${ev.id}:${item.target}`;
     const observation = { kind: "binary" as const, value: correct ? 1 : 0, item: item.id, context: contextOf(item), misconceptions, exposure, ...(ev.use ? { use: ev.use } : {}) };
+    // An answer given with help (provenance@1 says so, or the teaching just displayed this item) is not
+    // evidence: it is kept, counts as seen, and changes no estimate. Legacy evidence (no provenance) is unchanged.
+    if (ev.provenance) {
+      const taught = ev.provenance.intervention ? this.interventions.get(ev.provenance.intervention)?.items?.includes(item.id) : false;
+      if (!isIndependentProvenance(ev.provenance) || taught)
+        return [
+          {
+            id,
+            at: ev.at,
+            source: ev.id,
+            capability: item.target,
+            verdict: "held",
+            reasons: [`scored by code: ${correct ? "right" : "wrong"}; answered with help (${taught ? "the item was shown in teaching" : `attempt ${ev.provenance.attempt}, ${ev.provenance.hints.length} hint(s)${ev.provenance.afterFeedback ? ", after feedback" : ""}`}), so it is recorded as assisted and no estimate is changed`],
+            observation,
+          },
+        ];
+    }
+    // The content-validation gate: provisional (unreviewed demonstration) content never changes an estimate.
+    if (item.evidence_status === "provisional")
+      return [
+        {
+          id,
+          at: ev.at,
+          source: ev.id,
+          capability: item.target,
+          verdict: "held",
+          reasons: [`scored by code: ${correct ? "right" : "wrong"}; provisional item, not yet validated by an educator: recorded for demonstration and practice, and no estimate is changed`],
+          observation,
+        },
+      ];
     // A generated item whose difficulty and quality have not been checked is not assessment evidence:
     // the answer is kept (and counts as seen) but no estimate changes until the item is checked.
     if (item.generated && !item.generated.checked)
@@ -174,7 +224,30 @@ export class Ledger {
         },
       ];
     if (this.revoked.has(id)) return [{ id, at: ev.at, source: ev.id, capability: item.target, verdict: "revoked", reasons: ["revoked"], observation }];
+    // Passage dependence (passage@1, recorded with the answer): answers on one reading passage are not independent,
+    // so only the first counted answer on a passage changes this capability's estimate. A later fresh answer on the
+    // same passage is held: kept, with its score and misconceptions, for diagnosis and reporting. Answers recorded
+    // before the policy carry no mark and replay exactly as before. A repeated item keeps its existing handling.
+    const passageKey = item.passage ? `${item.passage}#${item.target}` : null;
+    const counted = passageKey ? this.passageCounted.get(passageKey) : undefined;
+    if (counted && exposure !== "repeat" && ev.provenance?.policies?.includes(PASSAGE_POLICY))
+      return [
+        {
+          id,
+          at: ev.at,
+          source: ev.id,
+          capability: item.target,
+          verdict: "held",
+          reasons: [`scored by code: ${correct ? "right" : "wrong"}; same reading passage (${item.passage}) as an answer already counted for this skill, so it is recorded for diagnosis and reporting and no estimate is changed (passage@1)`],
+          observation: { ...observation, samePassage: { passage: item.passage!, counted } },
+        },
+      ];
+    if (passageKey && !counted && exposure !== "repeat") this.passageCounted.set(passageKey, id);
     const params = itemParams(item);
+    // teaching on this capability earlier in this session: the answer counts for the estimate, not for demonstrating
+    const taughtAt = this.taughtInSession.get(`${ev.session}#${item.target}`);
+    const afterTeaching = taughtAt !== undefined && taughtAt <= ev.at;
+    if (afterTeaching) (observation as { setting?: "after_teaching" }).setting = "after_teaching";
     const applied = applyDirect(this.composite, this.ctx.index, {
       capability: item.target,
       at: ev.at,
@@ -185,6 +258,7 @@ export class Ledger {
       misconceptions,
       binary: { b: item.b, correct, a: params.a, c: params.c },
       exposure,
+      ...(afterTeaching ? { qualifying: false } : {}),
     });
     return [
       {
@@ -196,6 +270,7 @@ export class Ledger {
         reasons: [
           `scored by code: ${correct ? "right" : "wrong"} on an item of difficulty ${item.b}`,
           ...(exposure === "repeat" ? ["repeated item: recorded for retention only; the ability estimate is not changed"] : exposure === "variant" ? ["variant of an item seen before"] : []),
+          ...(afterTeaching ? ["answered after teaching on this capability in the same session: it updates the estimate, but cannot demonstrate, master or count as a later check"] : []),
         ],
         observation,
         before: applied.before,

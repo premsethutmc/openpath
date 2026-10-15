@@ -46251,7 +46251,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.payable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.payable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46260,7 +46260,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46283,7 +46283,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.payable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.payable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46292,7 +46292,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46316,7 +46316,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.payable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.payable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46325,7 +46325,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "payable ends in -able. -able usually follows a whole word you can recognise (pay…).",
+  "explain": "payable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -46347,7 +46347,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.tenable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.tenable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46356,7 +46356,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46379,7 +46379,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.tenable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.tenable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46388,7 +46388,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46412,7 +46412,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.tenable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.tenable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46421,7 +46421,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise (ten…).",
+  "explain": "tenable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -46443,7 +46443,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.capable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.capable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46452,7 +46452,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46475,7 +46475,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.capable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.capable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46484,7 +46484,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46508,7 +46508,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.capable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.capable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46517,7 +46517,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "capable ends in -able. -able usually follows a whole word you can recognise (cap…).",
+  "explain": "capable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -46635,7 +46635,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.curable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.curable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46644,7 +46644,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46667,7 +46667,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.curable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.curable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46676,7 +46676,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46700,7 +46700,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.curable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.curable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46709,7 +46709,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "curable ends in -able. -able usually follows a whole word you can recognise (cur…).",
+  "explain": "curable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -46731,7 +46731,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.taxable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.taxable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46740,7 +46740,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46763,7 +46763,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.taxable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.taxable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46772,7 +46772,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46796,7 +46796,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.taxable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.taxable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46805,7 +46805,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise (tax…).",
+  "explain": "taxable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -46827,7 +46827,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.viable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.viable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -46836,7 +46836,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -46859,7 +46859,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.viable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.viable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -46868,7 +46868,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -46892,7 +46892,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.viable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.viable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -46901,7 +46901,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "viable ends in -able. -able usually follows a whole word you can recognise (vi…).",
+  "explain": "viable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47019,7 +47019,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.notable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.notable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47028,7 +47028,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47051,7 +47051,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.notable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.notable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47060,7 +47060,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47084,7 +47084,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.notable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.notable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47093,7 +47093,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "notable ends in -able. -able usually follows a whole word you can recognise (not…).",
+  "explain": "notable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47115,7 +47115,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.liable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.liable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47124,7 +47124,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47147,7 +47147,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.liable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.liable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47156,7 +47156,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47180,7 +47180,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.liable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.liable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47189,7 +47189,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "liable ends in -able. -able usually follows a whole word you can recognise (li…).",
+  "explain": "liable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47211,7 +47211,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.parable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.parable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47220,7 +47220,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47243,7 +47243,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.parable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.parable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47252,7 +47252,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47276,7 +47276,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.parable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.parable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47285,7 +47285,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "parable ends in -able. -able usually follows a whole word you can recognise (par…).",
+  "explain": "parable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47307,7 +47307,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.advisable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.advisable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47316,7 +47316,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47339,7 +47339,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.advisable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.advisable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47348,7 +47348,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47372,7 +47372,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.advisable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.advisable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -47381,7 +47381,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise (advis…).",
+  "explain": "advisable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47403,7 +47403,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.readable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.readable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47412,7 +47412,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47435,7 +47435,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.readable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.readable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47444,7 +47444,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47468,7 +47468,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.readable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.readable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47477,7 +47477,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "readable ends in -able. -able usually follows a whole word you can recognise (read…).",
+  "explain": "readable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47499,7 +47499,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.workable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.workable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47508,7 +47508,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47531,7 +47531,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.workable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.workable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47540,7 +47540,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47564,7 +47564,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.workable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.workable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47573,7 +47573,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "workable ends in -able. -able usually follows a whole word you can recognise (work…).",
+  "explain": "workable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47691,7 +47691,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.laudable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laudable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47700,7 +47700,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47723,7 +47723,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.laudable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laudable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47732,7 +47732,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47756,7 +47756,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.laudable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laudable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47765,7 +47765,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise (laud…).",
+  "explain": "laudable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47787,7 +47787,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.variable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.variable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47796,7 +47796,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47819,7 +47819,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.variable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.variable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -47828,7 +47828,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47852,7 +47852,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.variable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.variable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47861,7 +47861,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "variable ends in -able. -able usually follows a whole word you can recognise (vari…).",
+  "explain": "variable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47883,7 +47883,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.drinkable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.drinkable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -47892,7 +47892,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -47915,7 +47915,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.drinkable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.drinkable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47924,7 +47924,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -47948,7 +47948,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.drinkable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.drinkable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -47957,7 +47957,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise (drink…).",
+  "explain": "drinkable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -47979,7 +47979,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.valuable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.valuable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -47988,7 +47988,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48011,7 +48011,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.valuable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.valuable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -48020,7 +48020,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48044,7 +48044,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.valuable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.valuable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48053,7 +48053,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise (valu…).",
+  "explain": "valuable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48075,7 +48075,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.removable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.removable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48084,7 +48084,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48107,7 +48107,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.removable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.removable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48116,7 +48116,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48140,7 +48140,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.removable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.removable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -48149,7 +48149,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "removable ends in -able. -able usually follows a whole word you can recognise (remov…).",
+  "explain": "removable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48171,7 +48171,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.bearable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.bearable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48180,7 +48180,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48203,7 +48203,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.bearable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.bearable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -48212,7 +48212,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48236,7 +48236,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.bearable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.bearable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48245,7 +48245,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise (bear…).",
+  "explain": "bearable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48363,7 +48363,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.callable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.callable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48372,7 +48372,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48395,7 +48395,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.callable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.callable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -48404,7 +48404,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48428,7 +48428,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.callable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.callable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48437,7 +48437,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "callable ends in -able. -able usually follows a whole word you can recognise (call…).",
+  "explain": "callable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48555,7 +48555,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.palatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.palatable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48564,7 +48564,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48587,7 +48587,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.palatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.palatable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48596,7 +48596,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48620,7 +48620,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.palatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.palatable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -48629,7 +48629,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise (palat…).",
+  "explain": "palatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48651,7 +48651,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.printable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.printable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48660,7 +48660,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48683,7 +48683,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.printable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.printable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48692,7 +48692,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48716,7 +48716,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.printable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.printable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -48725,7 +48725,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "printable ends in -able. -able usually follows a whole word you can recognise (print…).",
+  "explain": "printable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48747,7 +48747,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.reputable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reputable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48756,7 +48756,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48779,7 +48779,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.reputable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reputable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48788,7 +48788,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48812,7 +48812,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.reputable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reputable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -48821,7 +48821,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise (reput…).",
+  "explain": "reputable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48843,7 +48843,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.suitable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.suitable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48852,7 +48852,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48875,7 +48875,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.suitable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.suitable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -48884,7 +48884,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -48908,7 +48908,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.suitable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.suitable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48917,7 +48917,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise (suit…).",
+  "explain": "suitable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -48939,7 +48939,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.laughable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laughable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -48948,7 +48948,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -48971,7 +48971,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.laughable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laughable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -48980,7 +48980,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49004,7 +49004,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.laughable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.laughable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49013,7 +49013,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise (laugh…).",
+  "explain": "laughable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49035,7 +49035,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.countable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.countable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49044,7 +49044,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49067,7 +49067,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.countable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.countable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49076,7 +49076,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49100,7 +49100,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.countable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.countable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49109,7 +49109,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "countable ends in -able. -able usually follows a whole word you can recognise (count…).",
+  "explain": "countable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49131,7 +49131,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.reliable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reliable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49140,7 +49140,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49163,7 +49163,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.reliable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reliable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -49172,7 +49172,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49196,7 +49196,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.reliable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.reliable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49205,7 +49205,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise (reli…).",
+  "explain": "reliable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49323,7 +49323,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.available",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.available",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49332,7 +49332,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49355,7 +49355,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.available",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.available",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49364,7 +49364,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49388,7 +49388,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.available",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.available",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49397,7 +49397,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "available ends in -able. -able usually follows a whole word you can recognise (avail…).",
+  "explain": "available ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49515,7 +49515,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.desirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.desirable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49524,7 +49524,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49547,7 +49547,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.desirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.desirable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49556,7 +49556,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49580,7 +49580,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.desirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.desirable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49589,7 +49589,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise (desir…).",
+  "explain": "desirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49611,7 +49611,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.allowable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.allowable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49620,7 +49620,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49643,7 +49643,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.allowable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.allowable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49652,7 +49652,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49676,7 +49676,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.allowable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.allowable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49685,7 +49685,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise (allow…).",
+  "explain": "allowable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49707,7 +49707,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.excusable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.excusable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49716,7 +49716,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49739,7 +49739,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.excusable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.excusable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49748,7 +49748,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49772,7 +49772,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.excusable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.excusable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49781,7 +49781,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise (excus…).",
+  "explain": "excusable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49803,7 +49803,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.arguable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.arguable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49812,7 +49812,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49835,7 +49835,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.arguable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.arguable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -49844,7 +49844,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49868,7 +49868,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.arguable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.arguable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49877,7 +49877,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise (argu…).",
+  "explain": "arguable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -49899,7 +49899,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.admirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.admirable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -49908,7 +49908,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -49931,7 +49931,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.admirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.admirable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -49940,7 +49940,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -49964,7 +49964,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.admirable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.admirable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -49973,7 +49973,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise (admir…).",
+  "explain": "admirable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50091,7 +50091,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.probable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.probable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50100,7 +50100,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50123,7 +50123,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.probable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.probable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -50132,7 +50132,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -50156,7 +50156,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.probable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.probable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50165,7 +50165,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "probable ends in -able. -able usually follows a whole word you can recognise (prob…).",
+  "explain": "probable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50187,7 +50187,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.provable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.provable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50196,7 +50196,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50219,7 +50219,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.provable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.provable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -50228,7 +50228,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -50252,7 +50252,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.provable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.provable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50261,7 +50261,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "provable ends in -able. -able usually follows a whole word you can recognise (prov…).",
+  "explain": "provable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50475,7 +50475,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.definable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.definable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50484,7 +50484,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50507,7 +50507,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.definable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.definable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50516,7 +50516,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -50540,7 +50540,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.definable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.definable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -50549,7 +50549,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "definable ends in -able. -able usually follows a whole word you can recognise (defin…).",
+  "explain": "definable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50571,7 +50571,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.debatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.debatable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50580,7 +50580,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50603,7 +50603,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.debatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.debatable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50612,7 +50612,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -50636,7 +50636,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.debatable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.debatable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -50645,7 +50645,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise (debat…).",
+  "explain": "debatable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50763,7 +50763,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.alterable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.alterable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50772,7 +50772,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50795,7 +50795,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.alterable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.alterable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50804,7 +50804,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -50828,7 +50828,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.alterable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.alterable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -50837,7 +50837,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise (alter…).",
+  "explain": "alterable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -50955,7 +50955,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.incurable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.incurable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -50964,7 +50964,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -50987,7 +50987,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.incurable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.incurable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -50996,7 +50996,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51020,7 +51020,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.incurable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.incurable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -51029,7 +51029,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise (incur…).",
+  "explain": "incurable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51147,7 +51147,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.miserable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.miserable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51156,7 +51156,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51179,7 +51179,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.miserable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.miserable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51188,7 +51188,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51212,7 +51212,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.miserable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.miserable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -51221,7 +51221,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise (miser…).",
+  "explain": "miserable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51243,7 +51243,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.agreeable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.agreeable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51252,7 +51252,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51275,7 +51275,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.agreeable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.agreeable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51284,7 +51284,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51308,7 +51308,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.agreeable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.agreeable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -51317,7 +51317,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise (agree…).",
+  "explain": "agreeable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51339,7 +51339,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.enjoyable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.enjoyable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51348,7 +51348,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51371,7 +51371,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.enjoyable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.enjoyable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51380,7 +51380,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51404,7 +51404,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.enjoyable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.enjoyable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -51413,7 +51413,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise (enjoy…).",
+  "explain": "enjoyable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51435,7 +51435,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.renewable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.renewable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51444,7 +51444,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51467,7 +51467,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.renewable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.renewable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51476,7 +51476,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51500,7 +51500,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.renewable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.renewable",
   "target": "EN.FND.SPL.morphological",
   "b": 6,
@@ -51509,7 +51509,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise (renew…).",
+  "explain": "renewable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51627,7 +51627,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.playable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.playable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51636,7 +51636,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51659,7 +51659,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.playable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.playable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -51668,7 +51668,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51692,7 +51692,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.playable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.playable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51701,7 +51701,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "playable ends in -able. -able usually follows a whole word you can recognise (play…).",
+  "explain": "playable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",
@@ -51723,7 +51723,7 @@
  {
   "kind": "code",
   "id": "gen.mor.hear_spell.portable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.portable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.5,
@@ -51732,7 +51732,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (hear_spell); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "hear_spell",
@@ -51755,7 +51755,7 @@
  {
   "kind": "code",
   "id": "gen.mor.choose_spelling.portable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.portable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.25,
@@ -51764,7 +51764,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (choose_spelling); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "choose_spelling",
@@ -51788,7 +51788,7 @@
  {
   "kind": "code",
   "id": "gen.mor.meaning_first_letter.portable",
-  "version": 1,
+  "version": 2,
   "family": "gen.word.portable",
   "target": "EN.FND.SPL.morphological",
   "b": 5.75,
@@ -51797,7 +51797,7 @@
   "difficulty_source": "feature_estimate",
   "review": "candidate-generated",
   "rationale": "Generated (meaning_first_letter); difficulty from the ladder step \"able_ible\", word length and commonness, not calibrated.",
-  "explain": "portable ends in -able. -able usually follows a whole word you can recognise (port…).",
+  "explain": "portable ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.",
   "generated": {
    "generator": "spelling-templates@1",
    "template": "meaning_first_letter",

@@ -1,0 +1,525 @@
+{
+ "id": "pilot-1",
+ "purpose": "The first pilot's spelling content: four foundational suffix rules, practised only by typing the word (adding the ending, and dictation where the device has a voice). Approved for practice only after a person reviews every word on the pilot sheet.",
+ "templates": [
+  "add_ending",
+  "hear_spell"
+ ],
+ "chosen_by": "Claude (OpenPath assistant), 13 October 2026: common words with both typed exercise types, unusual or unsuitable words left out. Choosing is not reviewing: nothing here is approved until a person records the sheet.",
+ "patterns": {
+  "EN.FND.SPL.inflections#es_plural": [
+   "boxes",
+   "inches",
+   "bushes",
+   "wishes",
+   "classes",
+   "dresses",
+   "benches",
+   "coaches",
+   "passes",
+   "pushes",
+   "taxes",
+   "lunches",
+   "torches",
+   "touches"
+  ],
+  "EN.FND.SPL.inflections#double_short": [
+   "batting",
+   "running",
+   "cutting",
+   "fitting",
+   "jogging",
+   "mapping",
+   "sitting",
+   "winning",
+   "clapping",
+   "shipping",
+   "shopping",
+   "swimming",
+   "spinning",
+   "dripping"
+  ],
+  "EN.FND.SPL.inflections#drop_e": [
+   "caring",
+   "coming",
+   "diving",
+   "facing",
+   "hiding",
+   "liking",
+   "living",
+   "making",
+   "racing",
+   "riding",
+   "saving",
+   "taking",
+   "timing",
+   "dancing"
+  ],
+  "EN.FND.SPL.inflections#y_to_i": [
+   "dried",
+   "copied",
+   "married",
+   "applied",
+   "hobbies",
+   "ponies",
+   "duties",
+   "lazier",
+   "busier",
+   "emptied",
+   "tastier",
+   "juicier",
+   "replied",
+   "sillier"
+  ]
+ },
+ "items": [
+  {
+   "id": "gen.infl.add_ending.boxes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.boxes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.inches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.inches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.bushes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.bushes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.wishes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.wishes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.classes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.classes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.dresses",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.dresses",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.benches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.benches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.coaches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.coaches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.passes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.passes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.pushes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.pushes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.taxes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.taxes",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.lunches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.lunches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.torches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.torches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.touches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.touches",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.batting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.batting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.running",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.running",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.cutting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.cutting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.fitting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.fitting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.jogging",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.jogging",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.mapping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.mapping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.sitting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.sitting",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.winning",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.winning",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.clapping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.clapping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.shipping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.shipping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.shopping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.shopping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.swimming",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.swimming",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.spinning",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.spinning",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.dripping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.dripping",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.caring",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.caring",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.coming",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.coming",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.diving",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.diving",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.facing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.facing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.hiding",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.hiding",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.liking",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.liking",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.living",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.living",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.making",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.making",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.racing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.racing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.riding",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.riding",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.saving",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.saving",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.taking",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.taking",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.timing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.timing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.dancing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.dancing",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.dried",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.dried",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.copied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.copied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.married",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.married",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.applied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.applied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.hobbies",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.hobbies",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.ponies",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.ponies",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.duties",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.duties",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.lazier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.lazier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.busier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.busier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.emptied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.emptied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.tastier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.tastier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.juicier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.juicier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.replied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.replied",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.add_ending.sillier",
+   "version": 1
+  },
+  {
+   "id": "gen.infl.hear_spell.sillier",
+   "version": 1
+  }
+ ]
+}

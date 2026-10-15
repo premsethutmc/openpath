@@ -1,6 +1,9 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
+import { Developer } from "./Developer.tsx";
+import { BUILD_CONTENT_MODE } from "../logic/content.ts";
+import { installBrowserHooks, record } from "../logic/telemetry.ts";
 import "./english.css";
 
 /** A learner should never be left looking at a blank screen. */
@@ -11,6 +14,7 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
   }
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("OpenPath English stopped:", error, info.componentStack);
+    record({ name: "runtime_error", ok: false, detail: error });
   }
   render() {
     if (!this.state.error) return this.props.children;
@@ -29,13 +33,22 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
   }
 }
 
+installBrowserHooks();
 const root = document.getElementById("root")!;
 root.dataset.started = "1";
-createRoot(root).render(
-  <CrashScreen>
-    <App />
-  </CrashScreen>,
+// the developer diagnostics live at /developer (the server decides who may use them)
+const developer = location.pathname === "/developer" || location.pathname.startsWith("/developer/");
+// a pilot build is for pupils: the developer tools are not part of it, whoever opens the address
+const NotInPilot = () => (
+  <main className="welcome" data-pilot-refused="developer">
+    <h1>Not available here</h1>
+    <p>This is the pilot version of OpenPath. The developer tools are not part of it.</p>
+    <a className="primary" href="/">
+      Go to OpenPath
+    </a>
+  </main>
 );
+createRoot(root).render(<CrashScreen>{developer ? BUILD_CONTENT_MODE === "pilot" ? <NotInPilot /> : <Developer /> : <App />}</CrashScreen>);
 
 // Offline use: a service worker keeps the app's own files (never any learner data, which stays in IndexedDB).
 if ("serviceWorker" in navigator && location.protocol !== "file:" && !location.search.includes("no-sw")) {

@@ -1,14 +1,29 @@
-import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
-import { parseBackup } from "../logic/backup.ts";
-import { type AppContent, GUIDED, loadContent } from "../logic/content.ts";
+/**
+ * OpenPath English: the prototype's screens on the real engine.
+ *
+ * Two ways to keep a record, with the same Learner, engine and screens:
+ *   a parent account   the record is on OpenPath's server (ServerRepo), for any device after signing in
+ *   this device only   the record is in this browser (IndexedDB), as before; used when there is no account server
+ *
+ * Every screen reads the learner's state, which is rebuilt from the append-only event list by the engine.
+ */
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Api, ApiError, ServerRepo } from "../logic/account.ts";
+import { now as perfNow, record, setSender } from "../logic/telemetry.ts";
+import { type AppContent, loadContent } from "../logic/content.ts";
+import type { LearnerBand, LearnerGoal } from "../logic/events.ts";
 import { Learner } from "../logic/learner.ts";
-import { type PlanStep, patternTitle } from "../logic/plan.ts";
-import { type CapabilityProgress, bandDescriptor, capabilityProgress } from "../logic/progress.ts";
-import { type PatternPlan, spellingPlan } from "../logic/select.ts";
+import type { PlanStep } from "../logic/plan.ts";
 import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
-import { dueWords, patternStatus } from "../logic/state.ts";
+import { Home } from "./Home.tsx";
+import { Journey } from "./Journey.tsx";
+import { ImportBackup, Me } from "./Me.tsx";
+import { AddLearner, type AuthMode, Brand, CheckIntro, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
+import { PathView } from "./PathView.tsx";
+import { ProgressView } from "./ProgressView.tsx";
 import { Session } from "./Session.tsx";
-import { detectSpeech, speak } from "./speech.ts";
+import { detectSpeech } from "./speech.ts";
+import { SpellingIntro } from "./SpellingIntro.tsx";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
 const clock = () => {
@@ -20,44 +35,132 @@ const clock = () => {
   }
   return new Date(Date.now() + days * 86_400_000).toISOString();
 };
+const store = {
+  get(k: string) {
+    try {
+      return localStorage.getItem(k);
+    } catch {
+      return null;
+    }
+  },
+  set(k: string, v: string | null) {
+    try {
+      if (v === null) localStorage.removeItem(k);
+      else localStorage.setItem(k, v);
+    } catch {
+      /* a private window may refuse; nothing depends on it */
+    }
+  },
+};
 const LAST = "openpath-english-last-profile";
-const remember = (id: string | null) => {
-  try {
-    if (id) localStorage.setItem(LAST, id);
-    else localStorage.removeItem(LAST);
-  } catch {
-    /* a private window may refuse; nothing depends on it */
-  }
-};
-const lastProfile = () => {
-  try {
-    return localStorage.getItem(LAST);
-  } catch {
-    return null;
-  }
-};
+/** "account" while a parent is signed in on this device: if the server is then unreachable, say so, never fall back silently. */
+const MODE = "openpath-english-mode";
 
-type Tab = "today" | "progress" | "settings";
+type Mode = "device" | "account";
+type Screen = { name: "loading" } | { name: "unreachable" } | { name: "welcome" } | { name: "auth"; mode: AuthMode } | { name: "pupils" } | { name: "add" } | { name: "intro" } | { name: "app" } | { name: "spelling-intro"; step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target"> };
+type Tab = "home" | "journey" | "progress" | "me";
+const TABS: { id: Tab; label: string; ico: string }[] = [
+  { id: "home", label: "Home", ico: "🏠" },
+  { id: "journey", label: "Journey", ico: "🗺️" },
+  { id: "progress", label: "Progress", ico: "📈" },
+  { id: "me", label: "Me", ico: "👤" },
+];
+
+/** A reset link from the email: #reset?uid=…&token=…, read once and removed from the address bar and history. */
+const resetLink = () => {
+  const m = location.hash.match(/^#reset\?(.*)$/);
+  if (!m) return null;
+  history.replaceState(null, "", location.pathname + location.search);
+  const q = new URLSearchParams(m[1]);
+  return q.get("uid") && q.get("token") ? { uid: q.get("uid")!, token: q.get("token")! } : null;
+};
 
 export function App() {
   const content = useMemo<AppContent>(() => loadContent(), []);
+  const api = useMemo(() => new Api(), []);
+  const [screen, setScreen] = useState<Screen>({ name: "loading" });
+  const [accounts, setAccounts] = useState(false);
+  const [mode, setMode] = useState<Mode>("device");
+  const [email, setEmail] = useState<string | null>(null);
   const [repo, setRepo] = useState<Repo | null>(null);
+  const [deviceRepo, setDeviceRepo] = useState<Repo | null>(null);
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [learner, setLearner] = useState<Learner | null>(null);
-  const [tab, setTab] = useState<Tab>("today");
+  const [tab, setTab] = useState<Tab>("home");
   const [inSession, setInSession] = useState(false);
+  const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
   const changed = useCallback(() => setTick((t) => t + 1), []);
+  const [reset] = useState(resetLink);
+  const [developer, setDeveloper] = useState(false);
+  useEffect(() => {
+    if (mode !== "account") return setDeveloper(false);
+    api.developerStatus().then((d) => setDeveloper(d.developer), () => setDeveloper(false));
+  }, [mode, email, api]);
+  const diagnostics = useMemo(
+    () =>
+      learner && mode === "account"
+        ? {
+            developer,
+            shared: async () => !!(await api.pupils()).find((p) => p.id === learner.profileId)?.shared_for_diagnostics,
+            share: async (on: boolean) => !!(await api.shareForDiagnostics(learner.profileId, on)).shared_for_diagnostics,
+          }
+        : undefined,
+    [learner, mode, developer, api],
+  );
+
+  const openLearner = async (r: Repo, id: string) => {
+    setProblem(null);
+    try {
+      const t = perfNow();
+      const l = await Learner.open(content, r, id, clock);
+      record({ name: "load_ms", ms: perfNow() - t });
+      l.speechAvailable = !!voice;
+      l.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
+      store.set(LAST, id);
+      setLearner(l);
+      setTab("home");
+      setInSession(false);
+      setInJourney(false);
+      setScreen({ name: "app" });
+    } catch (e) {
+      setProblem((e as Error).message);
+      setScreen({ name: "pupils" });
+    }
+  };
+
+  const chooseRepo = async (r: Repo, m: Mode, reopen: boolean) => {
+    // measurements go to the server only for a signed-in parent account; on a device they are dropped
+    setSender(m === "account" ? async (batch) => void (await api.telemetry(batch)) : null);
+    setRepo(r);
+    setMode(m);
+    const list = await r.profiles();
+    setProfiles(list);
+    const last = store.get(LAST);
+    if (reopen && last && list.some((p) => p.id === last)) return openLearner(r, last);
+    setScreen(list.length || m === "account" ? { name: "pupils" } : { name: "add" });
+  };
 
   useEffect(() => {
     void (async () => {
-      const r = await openRepo();
-      setRepo(r);
-      const list = await r.profiles();
-      setProfiles(list);
-      const last = lastProfile();
-      if (last && list.some((p) => p.id === last)) await openProfile(r, last);
+      const [status, local] = await Promise.all([api.status(), openRepo()]);
+      setDeviceRepo(local);
+      setAccounts(status.available);
+      if (status.unreachable && store.get(MODE) === "account") return setScreen({ name: "unreachable" });
+      if (reset && status.available) return setScreen({ name: "auth", mode: "reset" });
+      if (status.account.authenticated) {
+        store.set(MODE, "account");
+        setEmail(status.account.email ?? null);
+        return chooseRepo(new ServerRepo(api), "account", true);
+      }
+      const last = store.get(LAST);
+      const localProfiles = await local.profiles();
+      if (last && localProfiles.some((p) => p.id === last)) return chooseRepo(local, "device", true);
+      setRepo(local);
+      setProfiles(localProfiles);
+      setScreen({ name: "welcome" });
       try {
         await navigator.storage?.persist?.();
       } catch {
@@ -69,42 +172,190 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (learner) learner.speechAvailable = !!voice;
+    if (learner) {
+      learner.speechAvailable = !!voice;
+      learner.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
+    }
     changed();
   }, [voice, learner, changed]);
 
-  const openProfile = async (r: Repo, id: string) => {
-    const l = await Learner.open(content, r, id, clock);
-    l.speechAvailable = !!voice;
-    remember(id);
-    setLearner(l);
-    setTab("today");
-    setInSession(false);
-  };
-
-  const leave = async () => {
-    remember(null);
+  const toPicker = async () => {
     setLearner(null);
+    store.set(LAST, null);
     if (repo) setProfiles(await repo.profiles());
+    setScreen({ name: "pupils" });
   };
 
-  if (!repo) return <p className="loading">Opening OpenPath English…</p>;
-  if (!learner)
+  const signedIn = async (info: { email?: string }) => {
+    store.set(MODE, "account");
+    setEmail(info.email ?? null);
+    store.set(LAST, null);
+    await chooseRepo(new ServerRepo(api), "account", false);
+  };
+
+  /** Signed out only when the server says so (or the session had already ended): never just in appearance. */
+  const signOut = async () => {
+    try {
+      await api.logout();
+    } catch (e) {
+      if (!(e instanceof ApiError && (e.status === 401 || e.status === 403))) throw e;
+    }
+    setSender(null);
+    store.set(MODE, null);
+    setEmail(null);
+    setLearner(null);
+    store.set(LAST, null);
+    setRepo(deviceRepo);
+    setProfiles(deviceRepo ? await deviceRepo.profiles() : []);
+    setMode("device");
+    setScreen({ name: "auth", mode: "login" });
+  };
+
+  if (screen.name === "loading") return <p className="loading">Opening OpenPath English…</p>;
+
+  if (screen.name === "unreachable")
+    return (
+      <main className="welcome" aria-labelledby="unreachable-title">
+        <header className="top">
+          <Brand />
+        </header>
+        <div className="page">
+          <h1 id="unreachable-title" className="hero">
+            OpenPath can't be reached
+          </h1>
+          <p className="sub">Your account's records are kept safely on OpenPath's server. Check the internet connection, then try again.</p>
+          <button type="button" className="primary" onClick={() => location.reload()}>
+            Try again
+          </button>
+        </div>
+      </main>
+    );
+
+  if (screen.name === "welcome")
     return (
       <Welcome
-        repo={repo}
-        profiles={profiles}
-        onOpen={(id) => openProfile(repo, id)}
-        onCreate={async (name, by) => {
-          const l = await Learner.create(content, repo, name, by, clock);
+        accounts={accounts}
+        privateWindow={deviceRepo?.kind === "memory"}
+        onBegin={() => (accounts ? setScreen({ name: "auth", mode: "register" }) : deviceRepo && chooseRepo(deviceRepo, "device", false))}
+        onSignIn={() => setScreen({ name: "auth", mode: "login" })}
+        onDevice={() => deviceRepo && chooseRepo(deviceRepo, "device", false)}
+        extra={
+          deviceRepo && (
+            <ImportBackup
+              repo={deviceRepo}
+              onImported={(id) => {
+                setRepo(deviceRepo);
+                setMode("device");
+                void openLearner(deviceRepo, id);
+              }}
+            />
+          )
+        }
+      />
+    );
+
+  if (screen.name === "auth")
+    return (
+      <ParentAuth
+        mode={screen.mode}
+        setMode={(m) => setScreen({ name: "auth", mode: m })}
+        onBack={() => setScreen({ name: "welcome" })}
+        onRegister={async (e, p) => signedIn(await api.register(e, p))}
+        onLogin={async (e, p) => signedIn(await api.login(e, p))}
+        onForgot={async (e) => (await api.requestReset(e)).detail}
+        onReset={async (p) => (await api.confirmReset(reset!.uid, reset!.token, p)).detail}
+      />
+    );
+
+  if (!repo) return <p className="loading">Opening OpenPath English…</p>;
+
+  if (screen.name === "pupils")
+    return (
+      <>
+        {problem && (
+          <p className="warning" role="alert" style={{ maxWidth: 440, margin: "0 auto" }}>
+            {problem}
+          </p>
+        )}
+        <PupilPicker
+          profiles={profiles}
+          account={mode === "account" ? email : null}
+          onOpen={(id) => openLearner(repo, id)}
+          onAdd={() => setScreen({ name: "add" })}
+          onSignOut={mode === "account" ? signOut : undefined}
+          extra={
+            mode === "device" ? (
+              <>
+                <ImportBackup repo={repo} onImported={(id) => openLearner(repo, id)} />
+                {accounts && (
+                  <p className="small" style={{ textAlign: "center" }}>
+                    <button type="button" className="link" onClick={() => setScreen({ name: "auth", mode: "login" })}>
+                      Sign in to a parent account instead
+                    </button>
+                  </p>
+                )}
+              </>
+            ) : null
+          }
+        />
+      </>
+    );
+
+  if (screen.name === "add")
+    return (
+      <AddLearner
+        mode={mode}
+        onCancel={() => (profiles.length || mode === "account" ? setScreen({ name: "pupils" }) : setScreen({ name: "welcome" }))}
+        onCreate={async (name, by, band: LearnerBand, goal: LearnerGoal) => {
+          const id = mode === "account" ? (await api.createPupil(name.trim() || "Learner")).id : undefined;
+          let l: Learner;
+          try {
+            l = await Learner.create(content, repo, name, by, clock, id, mode === "account" ? "parent_account" : "this_device_only");
+            await l.setPreferences(band, goal);
+          } catch (e) {
+            // never leave an empty pupil behind in the account
+            if (id) await api.deletePupil(id).catch(() => undefined);
+            throw e;
+          }
           l.speechAvailable = !!voice;
-          remember(l.profileId);
+      l.voiceInfo = voice ? { name: voice.name.slice(0, 60), lang: voice.lang, local: voice.localService } : null;
+          store.set(LAST, l.profileId);
           setLearner(l);
-          setTab("today");
+          setTab("home");
+          // a pilot build with no approved placement questions has no starting check to offer
+          setScreen(l.allows("placement") ? { name: "intro" } : { name: "app" });
         }}
       />
     );
 
+  if (!learner) return <p className="loading">Opening OpenPath English…</p>;
+
+  const start = async (step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts?: { delivery?: "device_voice" | "adult_reader" }) => {
+    // the spelling check needs the words to be heard: check the sound (or arrange an adult reader) first
+    if (step.type === "spelling_assess" && !opts?.delivery) return setScreen({ name: "spelling-intro", step });
+    await learner.start(step, opts);
+    setScreen({ name: "app" });
+    setInSession(true);
+  };
+
+  if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} step={screen.step} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
+
+  if (screen.name === "intro")
+    return <CheckIntro name={learner.state.profile?.name ?? "Your"} onReady={() => start({ type: "placement" })} onLater={() => setScreen({ name: "app" })} />;
+
+  if (inJourney || (inSession && learner.state.open?.event.type === "doubling_journey"))
+    return (
+      <Journey
+        learner={learner}
+        voice={learner.state.speech ? voice : null}
+        onChanged={changed}
+        onLeave={() => {
+          setInJourney(false);
+          setInSession(false);
+          changed();
+        }}
+      />
+    );
   if (inSession)
     return (
       <Session
@@ -118,404 +369,69 @@ export function App() {
       />
     );
 
+  const name = learner.state.profile?.name ?? "Learner";
   return (
-    <div className="shell" data-tick={tick}>
+    <div className="shell" data-tick={tick} data-mode={mode}>
       <header className="top">
-        <p className="brand">OpenPath English</p>
-        <p className="who">{learner.state.profile?.name}</p>
+        <Brand />
+        <p className="who">
+          <span className="sr-only">Learning now: </span>
+          {name}
+          <span className="avatar" aria-hidden="true">
+            {avatarFor(learner.profileId)}
+          </span>
+        </p>
       </header>
-      {tab === "today" && (
-        <Today
+      {tab === "home" && (
+        <Home
           learner={learner}
-          onStart={async (step) => {
-            await learner.start(step);
-            setInSession(true);
+          onStart={start}
+          onResume={() => (learner.state.open?.event.type === "doubling_journey" ? setInJourney(true) : setInSession(true))}
+          onJourney={async () => {
+            await learner.startJourney();
+            setInJourney(true);
           }}
-          onResume={() => setInSession(true)}
+          onWhy={() => setTab("progress")}
         />
       )}
-      {tab === "progress" && <Progress learner={learner} />}
-      {tab === "settings" && <Settings learner={learner} repo={repo} voice={voice} onChanged={changed} onLeave={leave} onSwitch={(id) => openProfile(repo, id)} />}
-      <nav className="tabs" aria-label="Sections">
-        {(["today", "progress", "settings"] as Tab[]).map((t) => (
-          <button key={t} type="button" aria-current={tab === t ? "page" : undefined} onClick={() => setTab(t)}>
-            {{ today: "Today", progress: "Progress", settings: "Settings" }[t]}
+      {tab === "journey" && <PathView learner={learner} onStart={start} />}
+      {tab === "progress" && <ProgressView learner={learner} />}
+      {tab === "me" && (
+        <Me
+          learner={learner}
+          repo={repo}
+          voice={voice}
+          account={mode === "account" ? email : null}
+          onChanged={changed}
+          onSwitch={toPicker}
+          onOpen={(id) => openLearner(repo, id)}
+          onRemoved={toPicker}
+          onSignOut={signOut}
+          diagnostics={diagnostics}
+          onDeleteAccount={async (password) => {
+            await api.deleteAccount(password);
+            setSender(null);
+            store.set(MODE, null);
+            setEmail(null);
+            setLearner(null);
+            store.set(LAST, null);
+            setRepo(deviceRepo);
+            setProfiles(deviceRepo ? await deviceRepo.profiles() : []);
+            setMode("device");
+            setScreen({ name: "welcome" });
+          }}
+        />
+      )}
+      <nav className="nav" aria-label="Sections">
+        {TABS.map((t) => (
+          <button key={t.id} type="button" aria-current={tab === t.id ? "page" : undefined} onClick={() => (setTab(t.id), scrollTo(0, 0))}>
+            <span className="ico" aria-hidden="true">
+              {t.ico}
+            </span>
+            {t.label}
           </button>
         ))}
       </nav>
     </div>
-  );
-}
-
-// ------------------------------------------------------------------ welcome
-
-function Welcome({ repo, profiles, onOpen, onCreate }: { repo: Repo; profiles: ProfileSummary[]; onOpen: (id: string) => void; onCreate: (name: string, by: "learner" | "guardian") => void }) {
-  const [name, setName] = useState("");
-  const [by, setBy] = useState<"learner" | "guardian">("guardian");
-  const [agree, setAgree] = useState(false);
-  const [problem, setProblem] = useState<string | null>(null);
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!agree) return setProblem("Tick the box to agree that progress is kept on this device.");
-    onCreate(name, by);
-  };
-  return (
-    <main className="welcome">
-      <h1>OpenPath English</h1>
-      <p className="lede">Spelling, grammar and vocabulary, a little each day. It starts by finding out where you are, then builds a plan.</p>
-      {repo.kind === "memory" && <p className="warning">This browser is not letting OpenPath save anything (a private window, perhaps). You can try it, but progress will be lost when the page closes.</p>}
-      {profiles.length > 0 && (
-        <section aria-labelledby="resume-title">
-          <h2 id="resume-title">Carry on</h2>
-          <ul className="profiles">
-            {profiles.map((p) => (
-              <li key={p.id}>
-                <button type="button" className="profile" onClick={() => onOpen(p.id)}>
-                  <span className="written">{p.name}</span>
-                  <span className="small">last used {p.lastAt.slice(0, 10)}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      <form className="new" onSubmit={submit} aria-labelledby="new-title">
-        <h2 id="new-title">{profiles.length ? "Add a learner" : "Start"}</h2>
-        <label>
-          Name to show (only on this device)
-          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={40} autoComplete="off" placeholder="For example, Asha" />
-        </label>
-        <fieldset>
-          <legend>Who is setting this up?</legend>
-          <label className="inline">
-            <input type="radio" name="by" checked={by === "guardian"} onChange={() => setBy("guardian")} /> A parent or guardian
-          </label>
-          <label className="inline">
-            <input type="radio" name="by" checked={by === "learner"} onChange={() => setBy("learner")} /> The learner (16 or over)
-          </label>
-        </fieldset>
-        <label className="inline consent">
-          <input id="consent" type="checkbox" checked={agree} onChange={(e) => (setAgree(e.target.checked), setProblem(null))} />
-          <span>I agree that answers and progress are kept in this browser on this device only. Nothing is sent anywhere. I can export or delete them at any time.</span>
-        </label>
-        {problem && (
-          <p className="warning" role="alert">
-            {problem}
-          </p>
-        )}
-        <button type="submit" className="primary">
-          Create and start
-        </button>
-      </form>
-      <ImportBackup repo={repo} onImported={onOpen} />
-      <p className="small">A private early version. All lessons and questions are draft content that teachers have not reviewed yet, and every level is an estimate.</p>
-    </main>
-  );
-}
-
-function ImportBackup({ repo, onImported }: { repo: Repo; onImported: (id: string) => void }) {
-  const [msg, setMsg] = useState<string | null>(null);
-  return (
-    <section className="import" aria-labelledby="import-title">
-      <h2 id="import-title">Bring progress from another device</h2>
-      <label className="file">
-        Choose a backup file (.json)
-        <input
-          type="file"
-          accept="application/json,.json"
-          onChange={async (e) => {
-            const f = e.target.files?.[0];
-            if (!f) return;
-            const parsed = parseBackup(await f.text());
-            if (!parsed.ok) return setMsg(parsed.error);
-            const existing = (await repo.profiles()).find((p) => p.id === parsed.backup.profile.id);
-            if (existing && !window.confirm(`${existing.name} is already on this device. Replace it with the backup from ${parsed.backup.exported_at.slice(0, 10)}?`)) return;
-            await repo.replaceAll(parsed.backup.profile.id, parsed.backup.events);
-            setMsg(null);
-            onImported(parsed.backup.profile.id);
-          }}
-        />
-      </label>
-      {msg && (
-        <p className="warning" role="alert">
-          {msg}
-        </p>
-      )}
-    </section>
-  );
-}
-
-// ------------------------------------------------------------------ today
-
-const STATUS_WORDS: Record<string, string> = {
-  not_started: "not started",
-  needs_work: "needs work",
-  practising: "practising",
-  ready_for_check: "ready for a check",
-  check_again: "practise, then check again",
-  secure: "secure",
-};
-
-function Today({ learner, onStart, onResume }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void }) {
-  const now = learner.clock();
-  const plan = learner.plan();
-  const open = learner.state.open;
-  const s = learner.state;
-  const words = [...s.words.values()];
-  const due = dueWords(s, now).length;
-  const spelling: PatternPlan[] = s.sessions.size > 1 ? spellingPlan(s, learner.content, now, learner.speech).slice(0, 4) : [];
-  return (
-    <main className="page" aria-labelledby="today-title">
-      <h1 id="today-title">Today</h1>
-      {open && (
-        <section className="resume">
-          <p>
-            You stopped in the middle of <strong>{Learner.sessionTitle(open.event.type).toLowerCase()}</strong> ({open.answered.length} answered).
-          </p>
-          <button type="button" className="primary" onClick={onResume}>
-            Carry on
-          </button>
-        </section>
-      )}
-      <ol className="plan">
-        {plan.map((p, i) => (
-          <li key={`${p.type}:${p.capability ?? ""}:${p.step ?? ""}`}>
-            <div>
-              <h2>{p.title}</h2>
-              <p>{p.reason}</p>
-              {p.detail && (
-                <details>
-                  <summary>Why this, in detail</summary>
-                  <p className="small">{p.detail}</p>
-                </details>
-              )}
-            </div>
-            <button type="button" className={i === 0 && !open ? "primary" : "secondary"} onClick={() => onStart(p)}>
-              Start
-            </button>
-          </li>
-        ))}
-      </ol>
-      {spelling.length > 0 && (
-        <section aria-labelledby="spelling-plan">
-          <h2 id="spelling-plan">Your spelling plan</h2>
-          <ul className="patterns">
-            {spelling.map((p) => (
-              <li key={`${p.cap}#${p.step}`}>
-                <span>{patternTitle(learner.content, p.cap, p.step)}</span>
-                <span className={`status s-${p.status}`}>{STATUS_WORDS[p.status]}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="small">
-            {words.filter((w) => !w.learned).length} words in your review list, {due} due now; {words.filter((w) => w.learned).length} learned.
-          </p>
-        </section>
-      )}
-      {s.sessions.size > 0 && (
-        <section className="more" aria-labelledby="more-title">
-          <h2 id="more-title">More practice</h2>
-          <p>Ten questions from any part of English: reading, writing, sentences and more. These areas have no lessons yet; the questions find out what to teach next.</p>
-          <button type="button" className="secondary" onClick={() => onStart({ type: "explore", title: "More practice", reason: "" })}>
-            Start more practice
-          </button>
-        </section>
-      )}
-    </main>
-  );
-}
-
-// ------------------------------------------------------------------ progress
-
-const CERTAINTY: Record<string, string> = { not_assessed: "Not assessed yet", early: "Early estimate", measured: "Measured" };
-
-function Progress({ learner }: { learner: Learner }) {
-  const now = learner.clock();
-  const rows = capabilityProgress(learner.state, learner.content, now);
-  const groups: [string, CapabilityProgress[]][] = [
-    ["Spelling", rows.filter((r) => (GUIDED.spelling as readonly string[]).includes(r.id))],
-    ["Grammar", rows.filter((r) => (GUIDED.grammar as readonly string[]).includes(r.id))],
-    ["Vocabulary", rows.filter((r) => (GUIDED.vocabulary as readonly string[]).includes(r.id))],
-  ];
-  const others = rows.filter((r) => !r.guided);
-  const s = learner.state;
-  const patterns = [...s.patterns.values()];
-  return (
-    <main className="page" aria-labelledby="progress-title">
-      <h1 id="progress-title">Progress</h1>
-      <p className="small">
-        Levels are on OpenPath's scale of 1 to 8. They are estimates from your answers, shown with how sure we are. Questions and lessons are draft content that teachers have not reviewed yet.
-      </p>
-      {groups.map(([name, list]) => (
-        <section key={name} aria-label={name}>
-          <h2>{name}</h2>
-          <ul className="caps">
-            {list.map((r) => (
-              <CapRow key={r.id} r={r} learner={learner} />
-            ))}
-          </ul>
-        </section>
-      ))}
-      {patterns.length > 0 && (
-        <section aria-labelledby="patterns-title">
-          <h2 id="patterns-title">Spelling patterns</h2>
-          <table className="patterns-table">
-            <thead>
-              <tr>
-                <th scope="col">Pattern</th>
-                <th scope="col">Status</th>
-                <th scope="col">Practice</th>
-                <th scope="col">New words</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patterns.map((p) => {
-                const last = p.transfers[p.transfers.length - 1];
-                const prac = p.practice;
-                return (
-                  <tr key={p.key}>
-                    <td>{patternTitle(learner.content, p.capability, p.step)}</td>
-                    <td>{STATUS_WORDS[patternStatus(p)]}</td>
-                    <td>{prac.length ? `${prac.filter((x) => x.correct).length}/${prac.length}` : "–"}</td>
-                    <td>{last ? `${last.right}/${last.total}` : "–"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <p className="small">"New words" is the latest check with words you had never seen: it shows whether the rule has stuck, not just the words practised.</p>
-        </section>
-      )}
-      <section aria-labelledby="others-title">
-        <h2 id="others-title">Everything else</h2>
-        <p className="small">These areas are measured through "More practice" with the same engine, but are not taught here yet.</p>
-        <details>
-          <summary>
-            {others.filter((r) => r.certainty !== "not_assessed").length} of {others.length} assessed so far
-          </summary>
-          <ul className="caps">
-            {others.map((r) => (
-              <CapRow key={r.id} r={r} learner={learner} />
-            ))}
-          </ul>
-        </details>
-      </section>
-    </main>
-  );
-}
-
-function CapRow({ r, learner }: { r: CapabilityProgress; learner: Learner }) {
-  const e = r.evidence;
-  const parts = [e.assessment && `${e.assessment} independent`, e.practice && `${e.practice} practice`, e.retention && `${e.retention} later check${e.retention === 1 ? "" : "s"}`].filter(Boolean);
-  const desc = r.band !== null ? bandDescriptor(learner.content, r.id, r.band) : null;
-  return (
-    <li className={`cap c-${r.certainty}`}>
-      <div className="cap-head">
-        <h3>{r.name}</h3>
-        <span className="certainty">{CERTAINTY[r.certainty]}</span>
-      </div>
-      <p>{r.headline}</p>
-      {desc && <p className="small">At this band: {desc}</p>}
-      {r.certainty !== "not_assessed" && <p className="small">{r.verification}</p>}
-      {r.history && <p className="small">{r.history}</p>}
-      {(parts.length > 0 || e.generatedPractice > 0) && (
-        <p className="small evidence">
-          Evidence: {parts.length ? parts.join(", ") : "none that counts yet"}
-          {e.generatedPractice ? `; ${e.generatedPractice} practice word${e.generatedPractice === 1 ? "" : "s"} recorded but not counted until checked` : ""}.
-        </p>
-      )}
-    </li>
-  );
-}
-
-// ------------------------------------------------------------------ settings
-
-function Settings({ learner, repo, voice, onChanged, onLeave, onSwitch }: { learner: Learner; repo: Repo; voice: SpeechSynthesisVoice | null; onChanged: () => void; onLeave: () => void; onSwitch: (id: string) => void }) {
-  const [msg, setMsg] = useState<string | null>(null);
-  const download = () => {
-    const b = learner.backup();
-    const blob = new Blob([JSON.stringify(b, null, 1)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `openpath-english-${b.profile.name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase() || "learner"}-${b.exported_at.slice(0, 10)}.json`;
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    setMsg("Backup saved to your downloads. Keep it private: it contains the name and every answer.");
-  };
-  return (
-    <main className="page" aria-labelledby="settings-title">
-      <h1 id="settings-title">Settings</h1>
-      <section aria-labelledby="speech-title">
-        <h2 id="speech-title">Hearing words</h2>
-        {voice ? (
-          <>
-            <p>This device has its own voice ({voice.name}), so some spelling questions read the word aloud. The word is spoken by the device; nothing is recorded or sent.</p>
-            <label className="inline">
-              <input type="checkbox" checked={learner.state.speech} onChange={async (e) => (await learner.setSpeech(e.target.checked), onChanged())} /> Use spoken words
-            </label>
-            <button type="button" className="secondary" onClick={() => speak("necessary", voice)}>
-              Test the voice
-            </button>
-          </>
-        ) : (
-          <p>This device has no built-in English voice that works offline, so spelling questions use written clues instead (add the ending, meanings, choosing the spelling). Nothing is missing from the plan.</p>
-        )}
-      </section>
-      <section aria-labelledby="backup-title">
-        <h2 id="backup-title">Keep progress safe</h2>
-        <p>Progress lives only in this browser. Clearing the browser's data deletes it. Export a backup now and then, and import it to carry on on another device.</p>
-        <button type="button" className="primary" onClick={download}>
-          Export a backup
-        </button>
-        {msg && <p role="status">{msg}</p>}
-        <ImportBackup repo={repo} onImported={onSwitch} />
-      </section>
-      <section aria-labelledby="profile-title">
-        <h2 id="profile-title">Learner</h2>
-        <button type="button" className="secondary" onClick={onLeave}>
-          Switch learner
-        </button>
-        <button
-          type="button"
-          className="danger"
-          onClick={async () => {
-            if (!window.confirm(`Delete ${learner.state.profile?.name} and all their progress from this device? This cannot be undone. Export a backup first if you want to keep it.`)) return;
-            await repo.remove(learner.profileId);
-            onLeave();
-          }}
-        >
-          Delete this learner from this device
-        </button>
-      </section>
-      <section aria-labelledby="about-title">
-        <h2 id="about-title">About this version</h2>
-        <p>A private early version of OpenPath English. It works offline once opened. It uses no accounts, adverts, tracking or AI marking, and nothing leaves this device.</p>
-        <p>Lessons, questions and difficulty levels are draft content written or generated by OpenPath and not yet reviewed by teachers. Levels are estimates, shown with how sure they are.</p>
-        <h3>Word lists and dictionaries</h3>
-        <p className="small">The spelling practice words are made by rule from these openly licensed sources:</p>
-        <ul className="credits">
-          {learner.content.wordSources.map((s) => (
-            <li key={s.id}>
-              <a href={s.url} rel="noreferrer" target="_blank">
-                {s.name}
-              </a>
-              . {s.licence}. Used for {s.used_for}.{" "}
-              <a href={`licences/${s.notice.split("/").pop()}`} target="_blank" rel="noreferrer">
-                Licence text
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className="small">
-          Meanings and example sentences are from Open English WordNet (CC BY 4.0), used unchanged except that a word may be replaced by a blank. Princeton WordNet licence:{" "}
-          <a href="licences/WordNet-LICENSE.txt" target="_blank" rel="noreferrer">
-            text
-          </a>
-          .
-        </p>
-      </section>
-    </main>
   );
 }

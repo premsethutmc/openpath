@@ -8,12 +8,21 @@ interface Props {
   voice: SpeechSynthesisVoice | null;
   locked: boolean;
   onSubmit: (r: Response) => void;
+  /** Dictation: who says the word (the device, or an adult reading it aloud). */
+  delivery?: "device_voice" | "adult_reader";
 }
 
 /** One question, in whichever format it uses. Typed answers never get autocorrect or spellcheck. */
-export function ItemView({ item, passage, voice, locked, onSubmit }: Props) {
+export function ItemView({ item, passage, voice, locked, onSubmit, delivery }: Props) {
   if (item.kind !== "code") return null;
   const kind = item.format.split(":")[0];
+  if (item.format === "typed:dictation")
+    return (
+      <div className="item dictation" data-format={item.format} data-item={item.id}>
+        <Prompt text={item.prompt} />
+        <Dictation key={item.id} word={item.speak ?? ""} sentence={(item as { sentence?: string }).sentence} voice={voice} delivery={delivery ?? "device_voice"} locked={locked} onSubmit={onSubmit} />
+      </div>
+    );
   return (
     <div className="item" data-format={item.format} data-item={item.id}>
       {passage && (
@@ -54,6 +63,21 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
     e.preventDefault();
     if (text.trim() && !locked) onSubmit({ kind: "typed", text });
   };
+  // with the on-screen keyboard open (a phone's screen roughly halves), keep the answer box and Check above it: the
+  // dictation check's adult panel sits above the box and could otherwise push Check under the keyboard
+  const keepInView = () => {
+    if (document.activeElement !== input.current) return;
+    input.current?.form?.querySelector<HTMLElement>('button[type="submit"]')?.scrollIntoView({ block: "nearest" });
+  };
+  useEffect(() => {
+    const vv = window.visualViewport;
+    vv?.addEventListener("resize", keepInView);
+    window.addEventListener("resize", keepInView);
+    return () => {
+      vv?.removeEventListener("resize", keepInView);
+      window.removeEventListener("resize", keepInView);
+    };
+  }, []);
   return (
     <form className="answer" onSubmit={submit}>
       {speakText && (
@@ -77,6 +101,7 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
           autoCapitalize="off"
           spellCheck={false}
           enterKeyHint="done"
+          onFocus={() => setTimeout(keepInView, 300)}
           aria-describedby="prompt"
           name="answer"
         />
@@ -85,6 +110,67 @@ function Typed({ speakText, voice, locked, onSubmit }: { speakText?: string; voi
         Check
       </button>
     </form>
+  );
+}
+
+/**
+ * Hear the word, then type it. The word and its sentence are only ever spoken (or, for an adult reading aloud,
+ * shown to the adult on request and hidden again): never displayed to the learner before the answer is checked.
+ */
+function Dictation({ word, sentence, voice, delivery, locked, onSubmit }: { word: string; sentence?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void }) {
+  const [plays, setPlays] = useState(0);
+  const [adultSees, setAdultSees] = useState(false);
+  const playWord = () => {
+    speak(word, voice);
+    setPlays((n) => n + 1);
+  };
+  useEffect(() => {
+    // first time: the word, a sentence with it, the word again (a sentence settles words that sound like others)
+    if (delivery === "device_voice" && voice) {
+      speak(sentence ? `${word}. ${sentence} ${word}.` : word, voice);
+      setPlays(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div className="dictation-controls">
+      {delivery === "device_voice" ? (
+        <div className="row listen-row">
+          <button type="button" className="listen" onClick={playWord} data-plays={plays}>
+            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? "Repeat the word" : "Play the word"}
+          </button>
+          {sentence && (
+            <button type="button" className="listen" onClick={() => speak(`${word}. ${sentence} ${word}.`, voice)}>
+              <span aria-hidden="true">💬</span> Hear it in a sentence
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="tile peach adult-reader">
+          {!adultSees ? (
+            <>
+              <p>
+                <b>For the adult:</b> read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.
+              </p>
+              <button type="button" className="secondary" onClick={() => setAdultSees(true)}>
+                Show the word to read aloud
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="adult-word">
+                Say: <b>{word}</b>
+              </p>
+              {sentence && <p>Sentence: “{sentence}”</p>}
+              <button type="button" className="primary" onClick={() => setAdultSees(false)}>
+                Hide it: the learner types now
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {!adultSees && <Typed voice={voice} locked={locked} onSubmit={onSubmit} />}
+    </div>
   );
 }
 

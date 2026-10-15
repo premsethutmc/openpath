@@ -15,14 +15,20 @@ _SHORT_KEYS = {"request_id", "prompt_version", "item", "target", "key_points", "
 _FORBIDDEN = {"learner", "learner_id", "name", "email", "phone", "school", "token"}
 
 
-def _walk_keys(value):
+# The one place "name" is content, not identity: the capability's name in `target` (short.v1) and in each of
+# `targets` (evaluate.v2), which the core always sends (english-core evaluation.ts). Everywhere else it is refused.
+_CAPABILITY_NAME_PATHS = {("target",), ("targets", "*")}
+
+
+def _walk_keys(value, path=()):
     if isinstance(value, dict):
         for k, v in value.items():
-            yield k
-            yield from _walk_keys(v)
+            if not (k == "name" and path in _CAPABILITY_NAME_PATHS and isinstance(v, str)):
+                yield k
+            yield from _walk_keys(v, path + (k,))
     elif isinstance(value, list):
         for v in value:
-            yield from _walk_keys(v)
+            yield from _walk_keys(v, path + ("*",))
 
 
 def validate_request(req) -> dict:

@@ -1,0 +1,732 @@
+{
+ "version": "pilot-content@2",
+ "capabilities": [
+  "EN.FND.SPL.inflections",
+  "EN.GRM.VERB.sva",
+  "EN.GRM.NOUN.articles",
+  "EN.RDG.LIT.locate_detail",
+  "EN.RDG.SUM.main_idea"
+ ],
+ "status": "candidate: awaiting educator review. Nothing here is approved.",
+ "note": "Five-capability pilot content (PR #24). New questions and passages were drafted with AI assistance by the developer and are candidates only; existing questions are unchanged and keep their ids. Each question is reserved for one use (diagnosis, practice during teaching, confirmation after teaching, or a later retention check), so a confirming or later check never uses a question the learner was taught or practised. pilot-content@2 (PR #25) adds practice questions for every capability (and their passages for reading), so practice during teaching never draws on diagnosis questions, and two main-idea diagnosis questions on their own passages (with only one answer per passage counted, the existing ones gave two first-check answers at the easier levels); no existing question changed.",
+ "pools": {
+  "grm.art.01": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.02": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.03": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.04": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.05": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.06": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.07": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.08": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.09": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.10": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.11": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.12": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.13": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.14": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.15": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.art.16": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.01": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.02": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.03": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.04": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.05": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.06": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.07": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.08": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.09": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.10": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.11": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.12": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.13": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.14": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.15": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "grm.sva.16": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "plt.art.01": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.art.02": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.art.03": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.art.04": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.art.05": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.art.06": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.art.07": {
+   "pool": "confirmation",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.art.08": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.art.09": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.art.10": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.art.11": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.art.12": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.art.13": {
+   "pool": "retention",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.art.14": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.det.01": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.det.02": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.det.03": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.det.04": {
+   "pool": "confirmation",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.det.05": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.det.06": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.det.07": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.det.08": {
+   "pool": "retention",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.det.09": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.det.10": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.det.11": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.infl.01": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.infl.02": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.infl.03": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.04": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.05": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.06": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.07": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.08": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.infl.09": {
+   "pool": "confirmation",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.infl.10": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.11": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.12": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.13": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.14": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.15": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.infl.16": {
+   "pool": "retention",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.main.01": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.main.02": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.main.03": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.main.04": {
+   "pool": "confirmation",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.main.05": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.main.06": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.main.07": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.main.08": {
+   "pool": "retention",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.main.09": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.main.10": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.main.11": {
+   "pool": "practice",
+   "origin": "new-pr24"
+  },
+  "plt.sva.01": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.sva.02": {
+   "pool": "diagnosis",
+   "origin": "new-pr24"
+  },
+  "plt.sva.03": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.sva.04": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.sva.05": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.sva.06": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.sva.07": {
+   "pool": "confirmation",
+   "origin": "new-pr24"
+  },
+  "plt.sva.08": {
+   "pool": "confirmation",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "plt.sva.09": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.sva.10": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.sva.11": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.sva.12": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.sva.13": {
+   "pool": "retention",
+   "origin": "new-pr24"
+  },
+  "plt.sva.14": {
+   "pool": "retention",
+   "origin": "new-pr24",
+   "unfamiliar": true
+  },
+  "rdg.p1.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p1.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p1.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p1.q6": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p2.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p2.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p2.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p2.q6": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p3.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p3.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p3.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p3.q6": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p4.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p4.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p4.q4": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p4.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p5.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p5.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p5.q7": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p6.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p6.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p6.q4": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p6.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p7.q1": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p7.q2": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p7.q5": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "rdg.p7.q6": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.01": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.02": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.03": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.04": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.05": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.06": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.07": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.08": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.09": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.10": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.11": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.12": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.13": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.14": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.15": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.16": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "spl.infl.17": {
+   "pool": "diagnosis",
+   "origin": "existing"
+  },
+  "plt.infl.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.infl.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.sva.22": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.18": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.19": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.20": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.21": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.art.22": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.12": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.13": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.14": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.det.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.12": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.13": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.14": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.15": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.16": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.17": {
+   "pool": "practice",
+   "origin": "new-pr25"
+  },
+  "plt.main.18": {
+   "pool": "diagnosis",
+   "origin": "new-pr25"
+  },
+  "plt.main.19": {
+   "pool": "diagnosis",
+   "origin": "new-pr25"
+  }
+ }
+}

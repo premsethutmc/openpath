@@ -1,0 +1,2474 @@
+{
+ "version": "dictation-bank@1",
+ "status": "candidate: awaiting independent educator review",
+ "ages": "10-15",
+ "description": "Dictation (hear the word, then type it): the primary spelling assessment. Common, age-appropriate words on the spelling patterns of EN.FND.SPL.inflections and EN.FND.SPL.morphological. Each item has a context sentence that is spoken, never shown. Difficulty bands are provisional estimates.",
+ "items": [
+  {
+   "kind": "code",
+   "id": "spl.dict.001",
+   "version": 1,
+   "family": "spl.dict.001",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 1.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "pointed",
+   "sentence": "She pointed at the map.",
+   "answers": [
+    "pointed"
+   ],
+   "step": "plain",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.002",
+   "version": 1,
+   "family": "spl.dict.002",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 1.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "talked",
+   "sentence": "We talked about the match all evening.",
+   "answers": [
+    "talked"
+   ],
+   "step": "plain",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.003",
+   "version": 1,
+   "family": "spl.dict.003",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 1.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "helping",
+   "sentence": "Thank you for helping me tidy up.",
+   "answers": [
+    "helping"
+   ],
+   "step": "plain",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.004",
+   "version": 1,
+   "family": "spl.dict.004",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 1.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "looked",
+   "sentence": "She looked out of the window.",
+   "answers": [
+    "looked"
+   ],
+   "step": "plain",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.005",
+   "version": 1,
+   "family": "spl.dict.005",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 2.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "wishes",
+   "sentence": "He made three wishes on his birthday.",
+   "answers": [
+    "wishes"
+   ],
+   "step": "es_plural",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the es plural pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.006",
+   "version": 1,
+   "family": "spl.dict.006",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 2.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "matches",
+   "sentence": "Our team won both matches this week.",
+   "answers": [
+    "matches"
+   ],
+   "step": "es_plural",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the es plural pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.007",
+   "version": 1,
+   "family": "spl.dict.007",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 2.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "brushes",
+   "sentence": "The artist washed her brushes after painting.",
+   "answers": [
+    "brushes"
+   ],
+   "step": "es_plural",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the es plural pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.008",
+   "version": 1,
+   "family": "spl.dict.008",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 2.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "churches",
+   "sentence": "The town has two old churches.",
+   "answers": [
+    "churches"
+   ],
+   "step": "es_plural",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the es plural pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.009",
+   "version": 1,
+   "family": "spl.dict.009",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 2.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "foxes",
+   "sentence": "We saw two foxes in the park at night.",
+   "answers": [
+    "foxes"
+   ],
+   "step": "es_plural",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the es plural pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.010",
+   "version": 1,
+   "family": "spl.dict.010",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "stopped",
+   "sentence": "The bus stopped outside the school.",
+   "answers": [
+    "stopped"
+   ],
+   "wrong": {
+    "stoped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.011",
+   "version": 1,
+   "family": "spl.dict.011",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "dropped",
+   "sentence": "I dropped my keys on the floor.",
+   "answers": [
+    "dropped"
+   ],
+   "wrong": {
+    "droped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.012",
+   "version": 1,
+   "family": "spl.dict.012",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "shopping",
+   "sentence": "We went shopping for new shoes.",
+   "answers": [
+    "shopping"
+   ],
+   "wrong": {
+    "shoping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.013",
+   "version": 1,
+   "family": "spl.dict.013",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "clapped",
+   "sentence": "Everyone clapped at the end of the show.",
+   "answers": [
+    "clapped"
+   ],
+   "wrong": {
+    "claped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.014",
+   "version": 1,
+   "family": "spl.dict.014",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "grabbed",
+   "sentence": "She grabbed her coat and ran outside.",
+   "answers": [
+    "grabbed"
+   ],
+   "wrong": {
+    "grabed": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.015",
+   "version": 1,
+   "family": "spl.dict.015",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "sitting",
+   "sentence": "He was sitting at the back of the class.",
+   "answers": [
+    "sitting"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.016",
+   "version": 1,
+   "family": "spl.dict.016",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "planned",
+   "sentence": "We planned a trip to the seaside.",
+   "answers": [
+    "planned"
+   ],
+   "step": "double_short",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double short pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.017",
+   "version": 1,
+   "family": "spl.dict.017",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "writing",
+   "sentence": "I am writing a letter to my cousin.",
+   "answers": [
+    "writing"
+   ],
+   "wrong": {
+    "writeing": "kept_silent_e",
+    "writting": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.018",
+   "version": 1,
+   "family": "spl.dict.018",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "smiling",
+   "sentence": "The baby was smiling at everyone.",
+   "answers": [
+    "smiling"
+   ],
+   "wrong": {
+    "smileing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.019",
+   "version": 1,
+   "family": "spl.dict.019",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "closing",
+   "sentence": "The shop is closing in ten minutes.",
+   "answers": [
+    "closing"
+   ],
+   "wrong": {
+    "closeing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.020",
+   "version": 1,
+   "family": "spl.dict.020",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "arriving",
+   "sentence": "The train is arriving at platform two.",
+   "answers": [
+    "arriving"
+   ],
+   "wrong": {
+    "arriveing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.021",
+   "version": 1,
+   "family": "spl.dict.021",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "saving",
+   "sentence": "She is saving her money for a bike.",
+   "answers": [
+    "saving"
+   ],
+   "wrong": {
+    "saveing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.022",
+   "version": 1,
+   "family": "spl.dict.022",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "chasing",
+   "sentence": "The dog was chasing its tail.",
+   "answers": [
+    "chasing"
+   ],
+   "wrong": {
+    "chaseing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the drop e pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.023",
+   "version": 1,
+   "family": "spl.dict.023",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "hurried",
+   "sentence": "We hurried to catch the bus.",
+   "answers": [
+    "hurried"
+   ],
+   "wrong": {
+    "hurryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.024",
+   "version": 1,
+   "family": "spl.dict.024",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "happier",
+   "sentence": "She looked happier after the holiday.",
+   "answers": [
+    "happier"
+   ],
+   "wrong": {
+    "happyer": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.025",
+   "version": 1,
+   "family": "spl.dict.025",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "studied",
+   "sentence": "He studied hard for the test.",
+   "answers": [
+    "studied"
+   ],
+   "wrong": {
+    "studyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.026",
+   "version": 1,
+   "family": "spl.dict.026",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "worried",
+   "sentence": "Mum was worried when we were late.",
+   "answers": [
+    "worried"
+   ],
+   "wrong": {
+    "worryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.027",
+   "version": 1,
+   "family": "spl.dict.027",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "easiest",
+   "sentence": "This is the easiest puzzle in the book.",
+   "answers": [
+    "easiest"
+   ],
+   "wrong": {
+    "easyest": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.028",
+   "version": 1,
+   "family": "spl.dict.028",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 4.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "families",
+   "sentence": "Many families came to the school fair.",
+   "answers": [
+    "families"
+   ],
+   "wrong": {
+    "familys": "y_not_changed",
+    "familyes": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the y to i pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.029",
+   "version": 1,
+   "family": "spl.dict.029",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "forgotten",
+   "sentence": "I have forgotten my password again.",
+   "answers": [
+    "forgotten"
+   ],
+   "wrong": {
+    "forgoten": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.030",
+   "version": 1,
+   "family": "spl.dict.030",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "admitted",
+   "sentence": "He admitted that he had broken the vase.",
+   "answers": [
+    "admitted"
+   ],
+   "wrong": {
+    "admited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.031",
+   "version": 1,
+   "family": "spl.dict.031",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "preferred",
+   "sentence": "She preferred the blue jumper to the red one.",
+   "answers": [
+    "preferred"
+   ],
+   "wrong": {
+    "prefered": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.032",
+   "version": 1,
+   "family": "spl.dict.032",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "regretted",
+   "sentence": "I regretted not bringing an umbrella.",
+   "answers": [
+    "regretted"
+   ],
+   "wrong": {
+    "regreted": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.033",
+   "version": 1,
+   "family": "spl.dict.033",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "committed",
+   "sentence": "The team committed to training every week.",
+   "answers": [
+    "committed"
+   ],
+   "wrong": {
+    "commited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.034",
+   "version": 1,
+   "family": "spl.dict.034",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "permitted",
+   "sentence": "Phones are not permitted during the exam.",
+   "answers": [
+    "permitted"
+   ],
+   "wrong": {
+    "permited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.035",
+   "version": 1,
+   "family": "spl.dict.035",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "forbidden",
+   "sentence": "Running in the corridor is forbidden.",
+   "answers": [
+    "forbidden"
+   ],
+   "wrong": {
+    "forbiden": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the stress doubling pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.036",
+   "version": 1,
+   "family": "spl.dict.036",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "opened",
+   "sentence": "She opened the door very slowly.",
+   "answers": [
+    "opened"
+   ],
+   "wrong": {
+    "openned": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.037",
+   "version": 1,
+   "family": "spl.dict.037",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "happened",
+   "sentence": "Nobody knew what had happened.",
+   "answers": [
+    "happened"
+   ],
+   "wrong": {
+    "happenned": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.038",
+   "version": 1,
+   "family": "spl.dict.038",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "offering",
+   "sentence": "The café is offering free drinks today.",
+   "answers": [
+    "offering"
+   ],
+   "wrong": {
+    "offerring": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.039",
+   "version": 1,
+   "family": "spl.dict.039",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "limited",
+   "sentence": "There is only a limited number of tickets.",
+   "answers": [
+    "limited"
+   ],
+   "wrong": {
+    "limitted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.040",
+   "version": 1,
+   "family": "spl.dict.040",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "entered",
+   "sentence": "He entered the room without knocking.",
+   "answers": [
+    "entered"
+   ],
+   "wrong": {
+    "enterred": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.041",
+   "version": 1,
+   "family": "spl.dict.041",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "ordered",
+   "sentence": "We ordered pizza for dinner.",
+   "answers": [
+    "ordered"
+   ],
+   "wrong": {
+    "orderred": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.042",
+   "version": 1,
+   "family": "spl.dict.042",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "gardening",
+   "sentence": "My aunt loves gardening at the weekend.",
+   "answers": [
+    "gardening"
+   ],
+   "wrong": {
+    "gardenning": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the no double unstressed pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.043",
+   "version": 1,
+   "family": "spl.dict.043",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "mimicked",
+   "sentence": "The parrot mimicked my voice perfectly.",
+   "answers": [
+    "mimicked"
+   ],
+   "step": "exceptions",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the exceptions pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.044",
+   "version": 1,
+   "family": "spl.dict.044",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:dictation",
+   "b": 7.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "panicking",
+   "sentence": "Stay calm and stop panicking.",
+   "answers": [
+    "panicking"
+   ],
+   "step": "exceptions",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the exceptions pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.045",
+   "version": 1,
+   "family": "spl.dict.045",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "darkness",
+   "sentence": "The room was in total darkness.",
+   "answers": [
+    "darkness"
+   ],
+   "step": "plain_affix",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain affix pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.046",
+   "version": 1,
+   "family": "spl.dict.046",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "replay",
+   "sentence": "Can we replay the last level?",
+   "answers": [
+    "replay"
+   ],
+   "step": "plain_affix",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain affix pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.047",
+   "version": 1,
+   "family": "spl.dict.047",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "unlock",
+   "sentence": "You need a code to unlock the door.",
+   "answers": [
+    "unlock"
+   ],
+   "step": "plain_affix",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain affix pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.048",
+   "version": 1,
+   "family": "spl.dict.048",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 2.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "payment",
+   "sentence": "The shop accepts payment by card.",
+   "answers": [
+    "payment"
+   ],
+   "step": "plain_affix",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain affix pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.049",
+   "version": 1,
+   "family": "spl.dict.049",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "unfair",
+   "sentence": "It is unfair to blame him for everything.",
+   "answers": [
+    "unfair"
+   ],
+   "step": "plain_affix",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the plain affix pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.050",
+   "version": 1,
+   "family": "spl.dict.050",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "totally",
+   "sentence": "I totally forgot about the test.",
+   "answers": [
+    "totally"
+   ],
+   "wrong": {
+    "totaly": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.051",
+   "version": 1,
+   "family": "spl.dict.051",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 3.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "usually",
+   "sentence": "I usually walk to school.",
+   "answers": [
+    "usually"
+   ],
+   "wrong": {
+    "usualy": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.052",
+   "version": 1,
+   "family": "spl.dict.052",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 3.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "meanness",
+   "sentence": "Her meanness upset everyone.",
+   "answers": [
+    "meanness"
+   ],
+   "wrong": {
+    "meaness": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.053",
+   "version": 1,
+   "family": "spl.dict.053",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 3.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "unnoticed",
+   "sentence": "He slipped out of the room unnoticed.",
+   "answers": [
+    "unnoticed"
+   ],
+   "wrong": {
+    "unoticed": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.054",
+   "version": 1,
+   "family": "spl.dict.054",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "dissatisfied",
+   "sentence": "The customer was dissatisfied with the service.",
+   "answers": [
+    "dissatisfied"
+   ],
+   "wrong": {
+    "disatisfied": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.055",
+   "version": 1,
+   "family": "spl.dict.055",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "naturally",
+   "sentence": "She is naturally good at drawing.",
+   "answers": [
+    "naturally"
+   ],
+   "wrong": {
+    "naturaly": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the double at join pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.056",
+   "version": 1,
+   "family": "spl.dict.056",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "powerful",
+   "sentence": "The storm was very powerful.",
+   "answers": [
+    "powerful"
+   ],
+   "wrong": {
+    "powerfull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.057",
+   "version": 1,
+   "family": "spl.dict.057",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "wonderful",
+   "sentence": "We had a wonderful time at the beach.",
+   "answers": [
+    "wonderful"
+   ],
+   "wrong": {
+    "wonderfull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.058",
+   "version": 1,
+   "family": "spl.dict.058",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "thankful",
+   "sentence": "I am thankful for your help.",
+   "answers": [
+    "thankful"
+   ],
+   "wrong": {
+    "thankfull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.059",
+   "version": 1,
+   "family": "spl.dict.059",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "peaceful",
+   "sentence": "The lake was calm and peaceful.",
+   "answers": [
+    "peaceful"
+   ],
+   "wrong": {
+    "peacefull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.060",
+   "version": 1,
+   "family": "spl.dict.060",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "excitement",
+   "sentence": "The children could hardly hide their excitement.",
+   "answers": [
+    "excitement"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.061",
+   "version": 1,
+   "family": "spl.dict.061",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 4.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "enjoyment",
+   "sentence": "Reading gives me a lot of enjoyment.",
+   "answers": [
+    "enjoyment"
+   ],
+   "step": "ful_ly_ment",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the ful ly ment pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.062",
+   "version": 1,
+   "family": "spl.dict.062",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "possible",
+   "sentence": "Is it possible to finish by six?",
+   "answers": [
+    "possible"
+   ],
+   "wrong": {
+    "possable": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.063",
+   "version": 1,
+   "family": "spl.dict.063",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "terrible",
+   "sentence": "There was a terrible storm last night.",
+   "answers": [
+    "terrible"
+   ],
+   "wrong": {
+    "terrable": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.064",
+   "version": 1,
+   "family": "spl.dict.064",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "reasonable",
+   "sentence": "That sounds like a reasonable price.",
+   "answers": [
+    "reasonable"
+   ],
+   "wrong": {
+    "reasonible": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.065",
+   "version": 1,
+   "family": "spl.dict.065",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "horrible",
+   "sentence": "The medicine had a horrible taste.",
+   "answers": [
+    "horrible"
+   ],
+   "wrong": {
+    "horrable": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.066",
+   "version": 1,
+   "family": "spl.dict.066",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "sensible",
+   "sentence": "Wearing a helmet is a sensible idea.",
+   "answers": [
+    "sensible"
+   ],
+   "wrong": {
+    "sensable": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.067",
+   "version": 1,
+   "family": "spl.dict.067",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "valuable",
+   "sentence": "The museum keeps many valuable paintings.",
+   "answers": [
+    "valuable"
+   ],
+   "wrong": {
+    "valuible": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.068",
+   "version": 1,
+   "family": "spl.dict.068",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "responsible",
+   "sentence": "Who is responsible for feeding the fish?",
+   "answers": [
+    "responsible"
+   ],
+   "wrong": {
+    "responsable": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "able_ible",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the able ible pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.069",
+   "version": 1,
+   "family": "spl.dict.069",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "attention",
+   "sentence": "Please pay attention to the instructions.",
+   "answers": [
+    "attention"
+   ],
+   "wrong": {
+    "attension": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.070",
+   "version": 1,
+   "family": "spl.dict.070",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "explosion",
+   "sentence": "We heard a loud explosion in the film.",
+   "answers": [
+    "explosion"
+   ],
+   "wrong": {
+    "explotion": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.071",
+   "version": 1,
+   "family": "spl.dict.071",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "competition",
+   "sentence": "She won first prize in the competition.",
+   "answers": [
+    "competition"
+   ],
+   "wrong": {
+    "competision": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.072",
+   "version": 1,
+   "family": "spl.dict.072",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "education",
+   "sentence": "Education is important for everyone.",
+   "answers": [
+    "education"
+   ],
+   "wrong": {
+    "educasion": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.073",
+   "version": 1,
+   "family": "spl.dict.073",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "confusion",
+   "sentence": "There was some confusion about the date.",
+   "answers": [
+    "confusion"
+   ],
+   "wrong": {
+    "confution": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.074",
+   "version": 1,
+   "family": "spl.dict.074",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "information",
+   "sentence": "The website has information about the trip.",
+   "answers": [
+    "information"
+   ],
+   "wrong": {
+    "informasion": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.075",
+   "version": 1,
+   "family": "spl.dict.075",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "television",
+   "sentence": "We watched the news on television.",
+   "answers": [
+    "television"
+   ],
+   "wrong": {
+    "televition": "suffix_by_sound"
+   },
+   "addresses": [
+    "suffix_by_sound"
+   ],
+   "step": "tion_sion",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the tion sion pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.076",
+   "version": 1,
+   "family": "spl.dict.076",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 7.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "necessary",
+   "sentence": "Is it necessary to bring a packed lunch?",
+   "answers": [
+    "necessary"
+   ],
+   "step": "roots_rare",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the roots rare pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.077",
+   "version": 1,
+   "family": "spl.dict.077",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 7.0,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "accidentally",
+   "sentence": "I accidentally deleted my homework.",
+   "answers": [
+    "accidentally"
+   ],
+   "step": "roots_rare",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the roots rare pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.078",
+   "version": 1,
+   "family": "spl.dict.078",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 7.25,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "disappearance",
+   "sentence": "The disappearance of the cat worried everyone.",
+   "answers": [
+    "disappearance"
+   ],
+   "step": "roots_rare",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the roots rare pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  },
+  {
+   "kind": "code",
+   "id": "spl.dict.079",
+   "version": 1,
+   "family": "spl.dict.079",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:dictation",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Listen to the word, then type how it is spelt.",
+   "speak": "independence",
+   "sentence": "Learning to cook gave him more independence.",
+   "answers": [
+    "independence"
+   ],
+   "step": "roots_rare",
+   "difficulty_source": "author_estimate",
+   "rationale": "Dictation of a common word on the roots rare pattern; difficulty provisional, from the pattern's band and the word's length and familiarity, not calibrated.",
+   "review": "candidate-unvalidated",
+   "scoring": "Right only if the typed word is exactly the spelling given (capital letters, spaces and a final full stop are ignored). No alternative spellings are accepted; words with accepted variant spellings were left out.",
+   "provenance": {
+    "prepared_by": "Claude (AI assistant), for OpenPath",
+    "prepared_on": "2026-10-14",
+    "reviewed_by": null,
+    "note": "Candidate content: not reviewed by an educator. Prepared content is never marked reviewed automatically."
+   }
+  }
+ ]
+}

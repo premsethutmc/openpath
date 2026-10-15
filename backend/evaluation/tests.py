@@ -166,6 +166,19 @@ class ValidationAndScrubbingTests(GatewayTestCase):
         self.assertNotIn("@example", stored)
         self.assertNotIn("Ravi", json.dumps(r.data["proposal"]))
 
+    def test_a_capability_name_is_allowed_but_a_name_anywhere_else_is_refused(self):
+        # the core sends each target's capability name; that is content, not a learner's name
+        self.assertEqual(self.evaluate(short_request()).status_code, 503)  # accepted, then refused by the disabled adapter
+        for req in (
+            {**short_request(), "item": {**short_request()["item"], "name": "Asha"}},
+            {**short_request(), "response": {"text": "x", "name": "Asha"}},
+            {**short_request(), "target": {**short_request()["target"], "learner": {"name": "Asha"}}},
+            {**short_request(), "anchors": [{"name": "Asha"}]},
+        ):
+            r = self.evaluate(req)
+            self.assertEqual(r.status_code, 400, req)
+            self.assertIn("identifying", str(r.data))
+
     def test_requests_are_checked_strictly(self):
         bad = [
             {**short_request(), "prompt_version": "evaluate.v1"},

@@ -10,9 +10,11 @@ import { parseBackup } from "./backup.ts";
 import { GUIDED, GUIDED_ALL, loadContent, type Code } from "./content.ts";
 import { isLedgerEvent } from "./events.ts";
 import { Learner } from "./learner.ts";
+import type { PlanStep } from "./plan.ts";
 import { capabilityProgress } from "./progress.ts";
-import { PLACEMENT_MAX, PLACEMENT_MIN } from "./select.ts";
+import { PLACEMENT_MAX, PLACEMENT_MIN, reviewWords } from "./select.ts";
 import { MemoryRepo } from "./store.ts";
+import { rightAnswer, wrongAnswer } from "./test-helpers.ts";
 import { REVIEW_DAYS, patternStatus } from "./state.ts";
 
 const content = loadContent();
@@ -31,40 +33,6 @@ function testClock(start = "2026-10-13T09:00:00.000Z") {
   return clock;
 }
 
-export function rightAnswer(item: Item): Response {
-  if (item.kind !== "code") throw new Error("code items only");
-  switch (item.format.split(":")[0]) {
-    case "choice":
-      return { kind: "choice", choice: item.answer! };
-    case "typed":
-      return { kind: "typed", text: item.answers![0] };
-    case "order":
-      return { kind: "order", order: item.answer_order! };
-    case "match":
-      return { kind: "match", pairs: item.answer_pairs! };
-    case "multi":
-      return { kind: "multi", choices: item.answer_set! };
-  }
-  throw new Error(item.format);
-}
-
-export function wrongAnswer(item: Item): Response {
-  if (item.kind !== "code") throw new Error("code items only");
-  switch (item.format.split(":")[0]) {
-    case "choice":
-      return { kind: "choice", choice: (item.answer! + 1) % item.options!.length };
-    case "typed":
-      return { kind: "typed", text: Object.keys(item.wrong ?? {})[0] ?? "zzzz" };
-    case "order":
-      return { kind: "order", order: [...item.answer_order!].reverse() };
-    case "match":
-      return { kind: "match", pairs: [...item.answer_pairs!].reverse() };
-    case "multi":
-      return { kind: "multi", choices: [0] };
-  }
-  throw new Error(item.format);
-}
-
 /** Run the open session to its end, answering with `policy` (true = right). Returns the items asked. */
 async function runSession(l: Learner, policy: (item: Item, i: number) => boolean, opts: { lessonCheck?: boolean } = {}): Promise<Item[]> {
   const asked: Item[] = [];
@@ -80,6 +48,12 @@ async function runSession(l: Learner, policy: (item: Item, i: number) => boolean
     asked.push(item);
   }
   throw new Error("session did not end");
+}
+
+/** The spelling check (dictation), answered right: an adult reads the words when the device cannot. */
+async function finishSpellingAssessment(l: Learner) {
+  await l.start({ type: "spelling_assess" }, { delivery: l.speech ? "device_voice" : "adult_reader" });
+  await runSession(l, () => true);
 }
 
 async function newLearner(clock = testClock(), repo = new MemoryRepo()) {
@@ -116,7 +90,7 @@ test("placement uses the engine's assessment mode on hand-written items only, an
   for (const e of evidence) assert.equal((e as { use?: string }).use, "assessment");
   const caps = new Set(asked.map((i) => (i as Code).target));
   for (const c of caps) assert.ok(GUIDED_ALL.includes(c), c);
-  assert.equal(l.plan()[0].type, "spelling_check");
+  assert.equal(l.plan()[0].type, "spelling_assess");
 });
 
 test("composite integration: the app's estimates are exactly the engine's, rebuilt from the evidence alone", async () => {
@@ -177,6 +151,7 @@ test("spelling: a lesson comes first, practice uses unseen words, and generated 
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => false); // every pattern looks like it needs work
   const step = l.plan().find((p) => p.type === "spelling_practice")!;
@@ -240,6 +215,7 @@ test("word memory: due words come back after 1, 3, 7 and 14 days until learned; 
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, (_i, n) => n !== 0); // exactly one word misspelt
   const word = [...l.state.words.keys()][0];
@@ -258,7 +234,9 @@ test("word memory: due words come back after 1, 3, 7 and 14 days until learned; 
   }
   assert.equal(l.state.words.get(word)!.learned, true);
   clock.days(30);
-  assert.ok(!l.plan().some((p) => p.type === "spelling_review"));
+  const later = reviewWords(l.state, content, l.clock());
+  assert.deepEqual(later.due, [], "a learned word is not due again");
+  assert.ok(!later.confirm.includes(word));
 });
 
 test("transfer: practise a pattern well, then a check with words never seen; passing makes it secure", async () => {
@@ -266,9 +244,11 @@ test("transfer: practise a pattern well, then a check with words never seen; pas
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => false);
-  let step = l.plan().find((p) => p.type === "spelling_practice")!;
+  // a pattern with plenty of unused words (some patterns have only two or three left for a transfer check)
+  let step: PlanStep = { type: "spelling_practice", title: "", reason: "", capability: "EN.FND.SPL.inflections", step: "double_short" };
   const key = `${step.capability}#${step.step}`;
   await l.start(step);
   await runSession(l, () => true);
@@ -280,7 +260,7 @@ test("transfer: practise a pattern well, then a check with words never seen; pas
   await l.start(check);
   const asked = await runSession(l, () => true);
   const words = asked.filter((i) => (i as Code).generated).map((i) => (i as Code).generated!.word);
-  assert.ok(words.length >= 3);
+  assert.ok(words.length >= 3, `${key}: ${asked.map((i) => i.id).join(" ")}`);
   for (const w of words) assert.ok(!seen.has(w), `${w} was never seen before`);
   for (const i of asked) assert.ok(!(i as Code).generated || ["add_ending", "hear_spell", "meaning_first_letter", "homophone_context"].includes((i as Code).generated!.template));
   assert.equal(patternStatus(l.state.patterns.get(key)), "secure");
@@ -295,6 +275,7 @@ test("without on-device speech, no dictation item is ever chosen", async () => {
     l.speechAvailable = speech;
     await l.start({ type: "placement" });
     await runSession(l, () => true);
+    await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
     await l.start({ type: "spelling_check" });
     const a = await runSession(l, () => false);
     await l.start(l.plan().find((p) => p.type === "spelling_practice")!);
@@ -310,6 +291,7 @@ test("grammar and vocabulary: a lesson, then the engine's own scheduler; evidenc
   const { l } = await newLearner(clock);
   await l.start({ type: "placement" });
   await runSession(l, () => true);
+  await finishSpellingAssessment(l); // the dictation check comes first now; the older check is still tested below
   await l.start({ type: "spelling_check" });
   await runSession(l, () => true);
   const g = l.plan().find((p) => p.type === "guided")!;

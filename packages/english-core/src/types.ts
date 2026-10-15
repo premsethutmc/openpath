@@ -50,6 +50,12 @@ export interface Policy {
   demonstrated_probability: number;
   demonstrated_min_direct: number;
   demonstrated_min_contexts: number;
+  /**
+   * Optional, per capability: question formats (contexts) that may demonstrate on their own, without a second
+   * format. Absent in every framework file; an app sets it for direct spelling (dictation), where the app's own
+   * evidence gate asks for diversity of words and patterns instead. Leaving it out changes nothing.
+   */
+  single_format_demonstration?: Record<CapabilityId, string[]>;
   mastery_gap_days: number;
   struggling_window_sessions: number;
   struggling_min_observations: number;
@@ -125,6 +131,15 @@ export interface CodeItem {
   /** Misconceptions this item is designed to practise. */
   addresses?: string[];
   review?: string;
+  /**
+   * Content-validation gate (MVP correctness pass).
+   *   "provisional": unreviewed content used for demonstration and practice. Answers are recorded and shown
+   *                  at rule level, marked provisional, but never change the capability estimate.
+   *   "validated":   approved by an educator under the review process.
+   *   absent:        the existing candidate bank, which has updated estimates since E1; unchanged here
+   *                  (changing it would alter historical estimates and needs a separate decision).
+   */
+  evidence_status?: "provisional" | "validated";
   /** The step of the capability's difficulty ladder this item sits on (content/english/items/progressions.json). */
   step?: string;
   /** Why the item sits at this difficulty: what makes it harder or easier than its neighbours. */
@@ -326,7 +341,17 @@ export interface NodeState {
    * level at the end of it (null if not demonstrated). Bookkeeping only: used to
    * derive the retention schedule (retention.ts); estimates do not depend on it.
    */
-  sessions?: { session: string; at: string; level: number | null; obs?: SessionObservation[] }[];
+  sessions?: { session: string; at: string; level: number | null; obs?: SessionObservation[]; teaching?: true }[];
+  /**
+   * Qualifying evidence (teaching-setting provenance, PR #23): answers given after teaching on this capability in
+   * the same session still update the estimate exactly as before, but they never count towards demonstrating,
+   * mastery or a retention check. These counts are of qualifying answers only; for records with no teaching in a
+   * session they equal directN and contexts, so older records read exactly as before.
+   */
+  qualifyingN?: number;
+  qualifyingContexts?: string[];
+  /** The demonstrated level as of the latest qualifying answer (what the view reports between them). */
+  qualifiedLevel?: number | null;
   /** Ids of the decisions that touched this capability (newest last, at most 50). */
   evidence: string[];
 }
@@ -366,7 +391,105 @@ export interface EvidenceEvent {
   item: { id: string; version: number };
   response: Response;
   use?: EvidenceUse;
+  /**
+   * How the answer was given (provenance@1). Absent on evidence recorded before the schema: its assistance
+   * status is then unknown, and rule-level statuses never treat it as confirmed independent performance.
+   */
+  provenance?: Provenance;
 }
+
+// ---------------------------------------------------------------- evidence provenance (docs/english/EVIDENCE_PROVENANCE.md)
+
+export interface Provenance {
+  schema: "provenance@1";
+  /** Id of the `presented` event for this question. */
+  presented?: string;
+  /** 1 for a first answer. */
+  attempt: number;
+  /** Ids of `hint` events shown for this item before this answer. */
+  hints: string[];
+  /** The learner had already seen feedback on this item. */
+  afterFeedback: boolean;
+  /** The intervention this answer follows, if any. */
+  intervention?: string;
+  /**
+   * Evidence policies in force when the answer was recorded (a version boundary, set by the app that recorded it).
+   * "passage@1": a second answer on a reading passage already counted for this capability is held (updater.ts,
+   * docs/english/READING_EVIDENCE_DEPENDENCE.md). Absent on every answer recorded before the policy: those replay
+   * exactly as they were scored, so no historical result changes.
+   */
+  policies?: EvidencePolicy[];
+}
+
+/** Evidence policies an answer can be recorded under. */
+export type EvidencePolicy = "passage@1";
+export const PASSAGE_POLICY: EvidencePolicy = "passage@1";
+
+/** What a question was shown for (the client's intent; the engine decides what the evidence shows). */
+export type PresentedPurpose = "assessment" | "practice" | "retention" | "transfer" | "teaching";
+
+export interface PresentedEvent {
+  kind: "presented";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  purpose?: PresentedPurpose;
+  intervention?: string;
+}
+
+export interface HintEvent {
+  kind: "hint";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  presented?: string;
+  /** 1 for the first, lightest hint. */
+  level: number;
+  /** Subject-defined hint type (for example "rule_reminder", "similar_example"). */
+  hintType: string;
+  /** The hint showed the answer (a worked example). Any later response to the item is assisted, never independent. */
+  revealsAnswer?: true;
+}
+
+/** A second or later attempt, or any answer given with help. Recorded; never changes an estimate. */
+export interface AssistedResponseEvent {
+  kind: "assisted_response";
+  id: string;
+  at: string;
+  session: string;
+  item: { id: string; version: number };
+  presented?: string;
+  response: Response;
+  attempt: number;
+  hints: string[];
+  afterFeedback: boolean;
+  intervention?: string;
+}
+
+/** Teaching delivered. Strategy ids are defined by the subject module. */
+export interface InterventionEvent {
+  kind: "intervention";
+  id: string;
+  at: string;
+  session: string;
+  capability: CapabilityId;
+  rule?: string;
+  strategy: string;
+  /** Content shown (for example a lesson id). */
+  content?: string;
+  /** Items displayed as part of the teaching: a first answer to one of these is not independent. */
+  items?: string[];
+  /** The planner decision that chose it, when there is one. */
+  decision?: string;
+  reason?: string;
+}
+
+export type ProvenanceEvent = PresentedEvent | HintEvent | AssistedResponseEvent | InterventionEvent;
+
+/** Confirmed independent: provenance present, a first attempt, no hints, no feedback first. (Teaching that displayed the item is checked by the reader, which can see the intervention.) */
+export const isIndependentProvenance = (p: Provenance | undefined): boolean => !!p && p.schema === "provenance@1" && p.attempt === 1 && p.hints.length === 0 && !p.afterFeedback;
 
 export interface ProposalEvent {
   kind: "proposal";
@@ -404,7 +527,7 @@ export interface RevokeEvent {
   reason: string;
 }
 
-export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent;
+export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent;
 
 export type Verdict = "accepted" | "held" | "rejected" | "revoked" | "ignored";
 
@@ -426,6 +549,18 @@ export interface Decision {
     exposure?: Exposure;
     /** Why the answer was collected, as recorded with the evidence. */
     use?: EvidenceUse;
+    /**
+     * after_teaching: answered, without help, in the same session after teaching on this capability (an
+     * intervention event). It updates the estimate as before but cannot demonstrate, master or count as a
+     * retention check. Absent: no teaching on this capability earlier in the session.
+     */
+    setting?: "after_teaching";
+    /**
+     * Passage dependence (passage@1): the reading passage this answer shares with an answer already counted on
+     * this capability, and that answer's decision. The answer is held: kept for diagnosis and reporting, changing no
+     * estimate. Absent on every answer the rule does not hold.
+     */
+    samePassage?: { passage: string; counted: string };
   };
   before?: { mean: number; sd: number };
   after?: { mean: number; sd: number };

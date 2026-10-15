@@ -52,6 +52,12 @@ is merged ([`E2B_REPORT.md`](E2B_REPORT.md)). The E3 scope is proposed in
     dictionary-driven spelling module.
 17. [`WEB_APP.md`](WEB_APP.md): the private web app as built — how to launch it, the journey, what
     is usable and what is incomplete.
+18. [`CONTENT_VALIDATION.md`](CONTENT_VALIDATION.md): approving generation rules and reviewed sets of
+    spelling items, exceptions and automatic flags (practice use only).
+19. [`DEPLOYMENT_PROPOSAL.md`](DEPLOYMENT_PROPOSAL.md): free static hosting options for private HTTPS
+    access, and their privacy implications (proposal only).
+20. [`PILOT_PLAN.md`](PILOT_PLAN.md): a 1–2 learner pilot — what is needed, how learning and
+    usability will be observed, and a guardian information sheet.
 
 ---
 

@@ -69,3 +69,24 @@ test("E1-4 a capability known only through couplings stays unassessed, however s
   assert.equal(coupled.stage, "unassessed");
   assert.equal(coupled.demonstrated, null);
 });
+
+test("E1-4b one question format demonstrates only where the policy allows it for that capability (direct spelling); without it, two formats are still required", () => {
+  const { index } = ctx();
+  const run = (policy: typeof index.framework.policy) => {
+    const ix = { ...index, framework: { ...index.framework, policy } };
+    const c = createComposite(ix, "x");
+    for (let k = 0; k < 8; k++)
+      applyDirect(c, ix, { capability: "EN.FND.SPL.inflections", at: T(k, 0), session: "s1", context: "typed:dictation", decisionId: `d${k}`, update: (e) => bandUpdate(e, 6, 0.5), misconceptions: [] });
+    for (let k = 0; k < 8; k++)
+      applyDirect(c, ix, { capability: "EN.GRM.VERB.sva", at: T(k, 0), session: "s1", context: "typed:dictation", decisionId: `g${k}`, update: (e) => bandUpdate(e, 6, 0.5), misconceptions: [] });
+    return { spl: leafView(c, ix, "EN.FND.SPL.inflections", T(9, 0)).demonstrated, sva: leafView(c, ix, "EN.GRM.VERB.sva", T(9, 0)).demonstrated, node: c.nodes["EN.FND.SPL.inflections"] };
+  };
+  const before = run(index.framework.policy);
+  assert.equal(before.spl, null, "no allowance: one format never demonstrates");
+  const allowed = run({ ...index.framework.policy, single_format_demonstration: { "EN.FND.SPL.inflections": ["typed:dictation"] } });
+  assert.ok(allowed.spl !== null && allowed.spl >= 1, "the allowed format demonstrates on its own for that capability");
+  assert.equal(allowed.sva, null, "only for the capability named: grammar still needs two formats");
+  assert.deepEqual(allowed.node.binary, before.node.binary, "the estimate's evidence is identical: only what may be called demonstrated differs");
+  const other = run({ ...index.framework.policy, single_format_demonstration: { "EN.FND.SPL.inflections": ["typed:cloze"] } });
+  assert.equal(other.spl, null, "only the format named");
+});

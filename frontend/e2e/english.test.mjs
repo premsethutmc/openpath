@@ -4,6 +4,8 @@
  *   npm run english:build && npm run english:preview &
  *   E2E_URL=http://127.0.0.1:4174 npm run english:e2e
  *
+ * Device-only use (no account server). Accounts are covered by e2e/accounts.test.mjs.
+ *
  * Covers the whole journey (create a profile, placement, plan, lesson, practice with feedback, progress,
  * return later), persistence across reloads, export and import, offline use, mobile layout, and that
  * the page makes no request to any other site.
@@ -18,8 +20,9 @@ const SHOTS = process.env.E2E_SHOTS;
 if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const CONTENT = new globalThis.URL("../../content/english/", import.meta.url);
 const items = new Map(
-  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json"].flatMap((f) => JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8")).map((i) => [i.id, i])),
+  ["items/code-items.json", "items/e2a-items.json", "items/e2b-items.json", "spelling/generated-items.json", "pilot/items.json", "spelling/dictation-bank.json"].flatMap((f) => ((j) => (Array.isArray(j) ? j : j.items))(JSON.parse(readFileSync(new globalThis.URL(f, CONTENT), "utf8"))).map((i) => [i.id, i])),
 );
+for (const i of JSON.parse(readFileSync(new globalThis.URL("web/doubling-journey.json", CONTENT), "utf8")).items) items.set(i.id, i);
 
 let browser;
 before(async () => {
@@ -61,15 +64,18 @@ async function tappable(page) {
   assert.deepEqual(small, [], "buttons are at least about 44 px tall");
 }
 
+/** The prototype's onboarding, on this device (the static build has no account server): name and who is learning, goal and consent, then Home. */
 async function createProfile(page, name = "Asha") {
   await page.goto(URL);
-  await page.getByRole("heading", { name: "OpenPath English" }).waitFor();
+  await page.getByRole("button", { name: "Let's begin" }).click();
   await fits(page);
   await page.getByLabel(/Name to show/).fill(name);
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
   await page.getByText("Tick the box to agree").waitFor();
   await page.locator("#consent").check();
-  await page.getByRole("button", { name: "Create and start" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.getByRole("button", { name: "Look around first" }).click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
 }
 
@@ -99,11 +105,22 @@ async function next(page) {
   await page.locator(".feedback").waitFor({ state: "detached" });
 }
 
+/** The spelling check (dictation) starts with a sound check: start it with the device's voice, or with an adult reading. */
+async function startSpellingIfAsked(page) {
+  if (!(await page.locator(".spelling-intro").count())) return false;
+  const own = page.getByRole("button", { name: "Start the spelling check" });
+  if (await own.count()) await own.click();
+  else await page.getByRole("button", { name: "An adult will read the words aloud" }).click();
+  await page.locator(".spelling-intro").waitFor({ state: "detached" });
+  return true;
+}
+
 /** Work through the open session to its end. */
 async function finishSession(page, right = () => true) {
   const asked = [];
   for (let n = 0; n < 40; n++) {
-    await page.locator(".item, .lesson, .done").first().waitFor({ timeout: 8000 }).catch(async (e) => { console.log("STALL:", (await page.locator("body").innerText()).slice(0, 600)); throw e; });
+    await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 8000 }).catch(async (e) => { console.log("STALL:", (await page.locator("body").innerText()).slice(0, 600)); throw e; });
+    if (await startSpellingIfAsked(page)) continue;
     if (await page.locator(".done").count()) return asked;
     if (await page.locator(".lesson").count()) {
       await page.locator(".check .option").first().click();
@@ -128,22 +145,27 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await page.locator(".item").waitFor();
   await shot(page, "2-question");
   await fits(page);
-  const placement = await finishSession(page, (n) => n % 3 !== 2);
+  // a learner who finds spelling hard: wrong in placement and in the spelling check, so the plan teaches spelling
+  const placement = await finishSession(page, () => false);
   assert.ok(placement.length >= 12 && placement.length <= 24, `${placement.length} placement questions`);
   for (const i of placement) assert.ok(!i.generated, "placement uses hand-written items only");
   await page.getByText(/Your starting point is set/).waitFor();
   await page.getByRole("button", { name: "Back to today" }).click();
-  // the spelling check
-  await page.getByRole("heading", { name: "Spelling check" }).waitFor();
+  // the spelling check: dictation (hear the word, type it), each word chosen after the last answer
+  await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await page.getByRole("button", { name: "Start" }).first().click();
   const check = await finishSession(page, () => false);
-  assert.ok(check.length >= 3);
-  for (const i of check) assert.ok(i.generated, "the spelling check uses dictionary words");
-  await page.getByText(/Words to review in a day/).waitFor();
+  assert.ok(check.length >= 8);
+  for (const i of check) assert.equal(i.format, "typed:dictation", "the spelling check is dictation, never a substitute");
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan now offers spelling practice with a lesson
   await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
-  await page.getByText("Your spelling plan").waitFor();
+  // one plan on Today; the spelling patterns list lives behind "More practice"
+  assert.equal(await page.getByText("Spelling patterns").count(), 0);
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("heading", { name: "Spelling patterns" }).waitFor();
+  await page.getByRole("button", { name: /Back to today/ }).click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
   await shot(page, "3-plan");
   await page.locator(".plan li", { hasText: "Spelling:" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".lesson").waitFor();
@@ -173,8 +195,53 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   assert.ok((await page.getByText("Not assessed yet").count()) > 0);
   await page.getByText(/recorded but not counted until checked/).first().waitFor();
   await page.getByText("Spelling patterns").waitFor();
+  // spelling progress at three levels, kept apart: the skill estimates above, patterns, and words (PR #14)
+  await page.getByRole("heading", { name: "Words", exact: true }).waitFor();
+  assert.ok((await page.locator(".word-counts li").count()) > 0);
+  await page.getByText(/Word progress does not change your spelling level/).waitFor();
+  await page.locator(".words summary").click();
+  assert.ok((await page.locator(".words-table tbody tr").count()) > 0);
+  await fits(page);
   // nothing was sent anywhere, and nothing went wrong
   assert.deepEqual(foreign, [], "no request leaves this device");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("trial: a note and a summary to share, made on the device, without the learner's name", async () => {
+  const { context, page, errors, foreign } = await phone();
+  const head = (await page.request.get(URL)).headers();
+  assert.equal(head["x-frame-options"], "DENY");
+  assert.equal(head["x-robots-tag"], "noindex, nofollow");
+  assert.match(head["permissions-policy"], /microphone=\(\)/);
+  await createProfile(page, "Priya");
+  await page.getByRole("button", { name: "Start" }).first().click();
+  await finishSession(page);
+  await page.getByRole("button", { name: "About right" }).click();
+  await page.locator(".rate summary").click();
+  await page.getByLabel("What happened?").fill("Some questions used words she did not know.");
+  await page.getByRole("button", { name: "Save note" }).click();
+  await page.getByText("Note saved on this device.").waitFor();
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
+  await page.getByText(/Development version: practice words include ones not yet reviewed/).waitFor();
+  await page.getByLabel(/Tell us about a problem/).fill("The Next button was below the keyboard.");
+  await page.getByRole("button", { name: "Save note" }).click();
+  await page.getByText("Note saved on this device.").waitFor();
+  await tappable(page);
+  await fits(page);
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Save a trial summary" }).click()]);
+  assert.match(download.suggestedFilename(), /^openpath-trial-summary-[0-9a-f]{8}-\d{4}-\d\d-\d\d\.json$/);
+  const text = readFileSync(await download.path(), "utf8");
+  const summary = JSON.parse(text);
+  assert.equal(summary.format, "openpath-english-pilot-summary");
+  assert.ok(!text.includes("Priya"), "the summary has no name");
+  assert.equal(summary.device.width, 390);
+  assert.equal(summary.usability.ratings.about_right, 1);
+  assert.deepEqual(summary.usability.notes.map((n) => n.screen), ["end:placement", "settings"]);
+  assert.equal(summary.sessions[0].type, "placement");
+  assert.ok(summary.activity.questions >= 12);
+  assert.deepEqual(foreign, [], "nothing is sent: the summary is a file on the device");
   assert.deepEqual(errors, []);
   await context.close();
 });
@@ -214,7 +281,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("button", { name: "Progress" }).click();
   const before = await page.locator("main").innerText();
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Export a backup" }).click()]);
   const path = await download.path();
   const backup = JSON.parse(readFileSync(path, "utf8"));
@@ -223,7 +290,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   assert.ok(backup.events.some((e) => e.kind === "evidence"));
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Delete this learner from this device" }).click();
-  await page.getByRole("heading", { name: "OpenPath English" }).waitFor();
+  await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
   assert.equal(await page.getByText("Meena").count(), 0, "deleted from this device");
   await page.locator(".import input[type=file]").setInputFiles(path);
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -232,7 +299,7 @@ test("export, delete and import: the backup brings back exactly the same progres
   const strip = (t) => t.replace(/\d{4}-\d\d-\d\d/g, "DATE");
   assert.equal(strip(await page.locator("main").innerText()), strip(before));
   // a damaged file is refused with a reason
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   await page.locator(".import input[type=file]").setInputFiles({ name: "bad.json", mimeType: "application/json", buffer: Buffer.from('{"format":"openpath-english-backup","version":1,"events":[{"kind":"profile"}]}') });
   await page.getByText(/damaged/).waitFor();
   assert.deepEqual(errors, []);
@@ -245,21 +312,21 @@ test("words come back for review the next day", async () => {
   await page.getByRole("button", { name: "Start" }).first().click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("button", { name: "Start" }).first().click(); // spelling check
-  await finishSession(page, (n) => n !== 0);
+  await page.getByRole("button", { name: "Start" }).first().click(); // spelling check (dictation)
+  await finishSession(page, () => false); // misspelt words with practice items come back for review
   await page.getByRole("button", { name: "Back to today" }).click();
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "nothing due today");
   await page.evaluate(() => localStorage.setItem("openpath-english-clock-offset-days", "1"));
   await page.reload();
-  await page.getByRole("heading", { name: "Review 1 word" }).waitFor();
-  await page.locator(".plan li", { hasText: "Review 1 word" }).getByRole("button", { name: "Start" }).click();
+  await page.getByRole("heading", { name: /^Review \d+ words?$/ }).waitFor();
+  await page.locator(".plan li", { hasText: /Review \d+ word/ }).getByRole("button", { name: "Start" }).click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "reviewed; next due in 3 days");
   await context.close();
 });
 
-test("works offline once opened, and without speech the spelling questions use written clues", async () => {
+test("works offline once opened; without speech the spelling check says why and an adult can read the words", async () => {
   const { context, page, errors } = await phone();
   await createProfile(page, "Sam");
   await page.evaluate(async () => {
@@ -270,20 +337,263 @@ test("works offline once opened, and without speech the spelling questions use w
   await context.setOffline(true);
   await page.reload();
   await page.getByRole("heading", { name: "Today" }).waitFor();
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Me", exact: true }).click();
   const speech = await page.locator("#speech-title + p").innerText();
   if (/no built-in English voice/.test(speech)) {
     // no on-device voice in this browser: no dictation questions, ever
-    await page.getByRole("button", { name: "Today" }).click();
+    await page.getByRole("button", { name: "Home", exact: true }).click();
     await page.getByRole("button", { name: "Start" }).first().click();
     await finishSession(page);
     await page.getByRole("button", { name: "Back to today" }).click();
     await page.getByRole("button", { name: "Start" }).first().click();
-    const asked = await finishSession(page, () => false);
-    assert.ok(asked.every((i) => !i.generated || i.generated.template !== "hear_spell"));
+    await page.getByText("This device can't say the words aloud.").waitFor();
+    await shot(page, "6b-no-speech");
+    const asked = await finishSession(page, () => false); // an adult reads the words
+    assert.ok(asked.length > 0 && asked.every((i) => i.format === "typed:dictation"), "no written clue or other substitute");
   }
   await shot(page, "7-offline");
   await context.setOffline(false);
   assert.deepEqual(errors.filter((e) => !/Failed to load resource|ERR_INTERNET_DISCONNECTED/.test(e)), []);
+  await context.close();
+});
+
+// ------------------------------------------------------------------ Android-sized phone (emulated; not a real device)
+
+const ANDROID = {
+  viewport: { width: 412, height: 915 },
+  deviceScaleFactor: 2.625,
+  isMobile: true,
+  hasTouch: true,
+  userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36",
+};
+/** About what is left of a Pixel-sized screen with the on-screen keyboard open. */
+const KEYBOARD_OPEN = { width: 412, height: 470 };
+
+/** On a typed question: the answer box and Check button are on screen with the keyboard open, and Enter submits (PR #14). */
+async function typeWithKeyboard(page, right) {
+  const id = await page.locator(".item").getAttribute("data-item");
+  const item = items.get(id);
+  if (!item.format.startsWith("typed")) return { item: await answer(page, right), typed: false };
+  await page.setViewportSize(KEYBOARD_OPEN);
+  const box = page.locator(".ruled input");
+  await box.tap();
+  await page.waitForTimeout(400); // the keyboard takes a moment to open
+  for (const [name, attr] of [["autocorrect", "off"], ["autocapitalize", "off"], ["spellcheck", "false"], ["autocomplete", "off"]]) assert.equal(await box.getAttribute(name), attr, `${name} is ${attr}: the keyboard must not correct spelling`);
+  const inView = async (loc) => {
+    const b = await loc.boundingBox();
+    return b && b.y >= 0 && b.y + b.height <= KEYBOARD_OPEN.height + 1; // a fraction of a pixel is still on screen
+  };
+  assert.ok(await inView(box), `the answer box is visible above the keyboard (${id})`);
+  await page.keyboard.type(right ? item.answers[0] : "zzzq");
+  assert.ok(await inView(page.getByRole("button", { name: "Check", exact: true })), `Check is visible above the keyboard (${id})`);
+  await page.keyboard.press("Enter");
+  await page.locator(".feedback").waitFor();
+  await page.setViewportSize(ANDROID.viewport); // the keyboard closes once the answer is checked
+  await fits(page);
+  return { item, typed: true };
+}
+
+test("Android-sized phone (emulated): placement and the dictation check with the keyboard open, Enter submits, a rating tap", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await createProfile(page, "Anil");
+  await tappable(page);
+  let typed = 0;
+  for (const type of ["placement", "spelling"]) {
+    await page.getByRole("button", { name: "Start" }).first().tap();
+    for (let n = 0; n < 40; n++) {
+      await page.locator(".item, .done, .spelling-intro").first().waitFor({ timeout: 8000 });
+      if (await startSpellingIfAsked(page)) continue;
+      if (await page.locator(".done").count()) break;
+      const r = await typeWithKeyboard(page, n % 3 !== 2);
+      if (r.typed) typed++;
+      if (type === "spelling") assert.equal(r.item.format, "typed:dictation");
+      await page.getByRole("button", { name: "Next" }).tap();
+      await page.locator(".feedback").waitFor({ state: "detached" });
+    }
+    await page.locator(".done").waitFor();
+    if (type === "placement") await page.getByRole("button", { name: "About right" }).tap();
+    await fits(page);
+    await page.getByRole("button", { name: "Back to today" }).tap();
+  }
+  assert.ok(typed >= 5, `typed answers were checked with the keyboard open (${typed})`);
+  await shot(page, "android-1-after-checks");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+/** Type an answer to the journey question on screen: right, or the form without doubling. */
+async function journeyAnswer(page, right) {
+  const id = await page.locator(".item").getAttribute("data-item");
+  const item = items.get(id);
+  assert.ok(item, `unknown item ${id}`);
+  const wrong = item.generated ? item.generated.base + item.generated.join.replace("-", "") : (Object.entries(item.wrong ?? {}).find(([, t]) => t === "no_doubling")?.[0] ?? item.answers[0]);
+  await page.locator(".ruled input").fill(right ? item.answers[0] : wrong);
+  await page.getByRole("button", { name: "Check", exact: true }).click();
+  await page.locator(".feedback").waitFor();
+  return id;
+}
+
+test("the doubling journey on a phone: check, diagnosis, a lesson, help that is marked as help, a new approach, independent words, summary", async () => {
+  const { context, page, errors, foreign } = await phone();
+  await createProfile(page, "Ravi");
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("button", { name: "Try doubling letters" }).click();
+  // two independent questions, both wrong (never doubles)
+  for (let k = 0; k < 2; k++) {
+    await page.locator('[data-step="question"][data-purpose="assessment"]').waitFor();
+    if (k === 0) await shot(page, "j1-check");
+    await journeyAnswer(page, false);
+    await next(page);
+  }
+  // first teaching approach
+  await page.locator('[data-step="teach"][data-strategy="worked_examples"]').waitFor();
+  await shot(page, "j2-lesson");
+  await fits(page);
+  await tappable(page);
+  await page.getByRole("button", { name: "Practise with help" }).click();
+  // guided practice, first word: wrong after two hints, then the third level is a labelled worked example that shows the answer
+  await page.locator('[data-step="guided"]').waitFor();
+  for (let h = 0; h < 2; h++) {
+    await journeyAnswer(page, false);
+    await page.getByRole("button", { name: "Show a hint" }).click();
+    await page.locator(".hints li").nth(h).waitFor();
+    await page.locator(".feedback").waitFor({ state: "detached" });
+    if (h === 0) await shot(page, "j3-hint");
+  }
+  await journeyAnswer(page, false);
+  await page.getByRole("button", { name: "Show a worked example" }).click();
+  const worked = page.locator('.hints li[data-worked="true"]');
+  await worked.waitFor();
+  assert.match(await worked.innerText(), /^Worked example: this shows the answer\. .+ = clapping\.$/);
+  await shot(page, "j3b-worked-example");
+  await fits(page);
+  await journeyAnswer(page, true);
+  await page.getByText("Right, after seeing the worked example. Next, a new word.").waitFor();
+  await next(page);
+  // the next word is new, and is tried once without a hint before any help is offered
+  await page.locator('[data-step="guided"] .try-first').waitFor();
+  assert.equal(await page.getByRole("button", { name: /hint|worked example/i }).count(), 0);
+  for (let k = 1; k < 4; k++) {
+    await page.locator('[data-step="guided"]').waitFor();
+    await journeyAnswer(page, false);
+    await page.getByRole("button", { name: "Show a hint" }).click();
+    await page.locator(".hints li").first().waitFor();
+    await journeyAnswer(page, true);
+    await page.getByText("Right, with help.").waitFor();
+    await next(page);
+  }
+  // reassessment on new words: a word that doubles, one that must not, another that doubles; the doubling ones still wrong
+  const purposes = [];
+  for (let k = 0; k < 3; k++) {
+    await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
+    purposes.push(items.get(await journeyAnswer(page, false)).family);
+    await next(page);
+  }
+  assert.deepEqual(purposes, ["fam.infl.double", "fam.infl.double.contrast", "fam.infl.double"]);
+  // a different approach
+  await page.locator('[data-step="teach"][data-strategy="sound_first"]').waitFor();
+  await page.getByText("Let's try a different way").waitFor();
+  await shot(page, "j4-new-approach");
+  await page.getByRole("button", { name: "Practise with help" }).click();
+  for (let k = 0; k < 4; k++) {
+    await page.locator('[data-step="guided"]').waitFor();
+    await journeyAnswer(page, true);
+    await next(page);
+  }
+  for (let k = 0; k < 3; k++) {
+    await page.locator('[data-step="question"][data-purpose="reassess"]').waitFor();
+    if (k === 0) await shot(page, "j5-new-word");
+    await journeyAnswer(page, true);
+    await next(page);
+  }
+  // summary: progress, not mastery; parent view
+  await page.locator('[data-step="summary"][data-outcome="improved_after_teaching"]').waitFor();
+  const text = await page.locator(".parent").innerText();
+  await shot(page, "j6-summary");
+  await fits(page);
+  assert.match(text, /not yet mastery/);
+  assert.match(text, /After "Rule and worked examples": 0 of 2 new words right without help, and 1 of 1 words that must not double/);
+  assert.match(text, /After "Listen for the short vowel": 2 of 2 new words right without help, and 1 of 1 words that must not double/);
+  assert.match(text, /of which 1 was a worked example showing the answer/);
+  const assisted = await page.locator('.parent li[data-kind="assisted"]').allTextContents();
+  assert.ok(assisted.some((t) => /wrote "claping" for "clapping", then right only after a worked example showed the answer/.test(t)), assisted.join(" | "));
+  assert.match(text, /Yes: 2 approaches tried/);
+  assert.match(text, /4 right after a hint or second try/);
+  assert.match(text, /provisional/);
+  assert.doesNotMatch(text, /%|probability|mastered/i);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Progress" }).click();
+  await page.locator(".parent").waitFor();
+  // after a reload, the same summary (rebuilt from the stored events)
+  await page.reload();
+  await page.getByRole("button", { name: "Progress" }).click();
+  assert.equal(await page.locator(".parent").innerText(), text);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});
+
+test("one learner, many skills on a phone: a plan from the evidence, child labels, a check, and the parent overview that explains it", async () => {
+  const { context, page, errors, foreign } = await phone();
+  await createProfile(page, "Nila");
+  // before anything: only the starting point
+  assert.equal(await page.locator(".plan li").count(), 1);
+  assert.equal(await page.locator('.plan li[data-activity="start"]').count(), 1);
+  await page.getByRole("button", { name: "Start" }).first().click();
+  await finishSession(page, () => true);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  await page.getByRole("button", { name: "Start" }).first().click(); // the spelling check
+  await finishSession(page, () => true);
+  await page.getByRole("button", { name: "Back to today" }).click();
+  // the plan: at most three activities, each with a child-facing label, no numbers about the child
+  const plan = page.locator(".plan li");
+  const n = await plan.count();
+  assert.ok(n >= 1 && n <= 3, `${n} activities`);
+  const labels = (await page.locator(".plan .kicker").allTextContents()).map((l) => l.replace(/^Your next adventure · /, ""));
+  for (const l of labels) assert.ok(["Keep learning", "Check something you learned", "Try a new skill", "Show what you know", "Let's begin"].includes(l), l);
+  assert.doesNotMatch(await page.locator(".plan").innerText(), /%|band|estimate|probabilit/i);
+  // one plan: the older sections are behind a single "More practice" entry, and work from there
+  const today = await page.locator("main").innerText();
+  assert.doesNotMatch(today, /Spelling patterns|Your spelling plan|Doubling letters \(new/);
+  await page.getByRole("button", { name: "More practice", exact: true }).click();
+  await page.getByRole("heading", { name: "More practice", level: 1 }).waitFor();
+  await page.getByRole("button", { name: "Try doubling letters" }).waitFor();
+  await page.getByRole("button", { name: "Start more practice" }).waitFor();
+  await shot(page, "p1b-more-practice");
+  await fits(page);
+  await tappable(page);
+  await page.getByRole("button", { name: /Back to today/ }).click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await shot(page, "p1-today-plan");
+  await fits(page);
+  await tappable(page);
+  // a check from the plan: a few independent questions on one skill
+  const first = page.locator('.plan li[data-activity="show_what_you_know"], .plan li[data-activity="new_skill"]').first();
+  const capability = await first.getAttribute("data-capability");
+  await first.getByRole("button", { name: "Start" }).click();
+  const asked = await finishSession(page, () => false);
+  assert.ok(asked.length >= 1 && asked.length <= 4);
+  for (const i of asked) assert.equal(i.target, capability, "the check stays on its skill");
+  await page.getByRole("button", { name: "Back to today" }).click();
+  // the grown-up link leads to the overview: what is shown, unsure, hard, helped, next, and why the plan changed
+  await page.getByRole("button", { name: "For a grown-up: why these?" }).click();
+  await page.locator(".overview").waitFor();
+  for (const part of ["shown", "improving", "uncertain", "hard", "helped", "due", "not-kept", "improved", "next", "changes", "not-checked"]) assert.equal(await page.locator(`.overview [data-part="${part}"]`).count(), 1, part);
+  const overview = await page.locator(".overview").innerText();
+  assert.match(overview, /Why the plan changed/);
+  assert.match(overview, /not a weakness|says nothing about how well/);
+  assert.doesNotMatch(overview, /percentile|\bIQ\b|rank|%/i);
+  await shot(page, "p2-overview");
+  await fits(page);
+  // the same overview after a reload: rebuilt from the stored record
+  const text = await page.locator(".overview").innerText();
+  await page.reload();
+  await page.getByRole("button", { name: "Progress" }).click();
+  assert.equal(await page.locator(".overview").innerText(), text);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
   await context.close();
 });

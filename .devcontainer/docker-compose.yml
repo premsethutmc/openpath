@@ -1,0 +1,20 @@
+# The Codespace: the app container shares the database container's network, so PostgreSQL is on localhost:5432.
+# The database lives in a named volume, so pupils and their answers survive stopping and restarting the codespace.
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: openpath
+      POSTGRES_USER: openpath
+      POSTGRES_PASSWORD: openpath
+    volumes:
+      - openpath-preview-db:/var/lib/postgresql/data
+volumes:
+  openpath-preview-db:

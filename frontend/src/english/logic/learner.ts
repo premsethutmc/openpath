@@ -3,17 +3,26 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import type { EvidenceEvent, Item, Response } from "../../../../packages/english-core/src/index.ts";
+import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
+import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
-import { type AppContent, type Lesson, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type Planned, type SessionType } from "./events.ts";
+import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
+import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
+import { CHECK_LENGTH, type LearnerProfile, type ParentOverview, beforeLastActivity, firstStandings, learnerProfile, parentOverview } from "./profile.ts";
 import type { Repo } from "./store.ts";
-import { type Next, EXPLORE_LENGTH, GUIDED_LENGTH, exploreNext, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
+import { type Next, DICTATION_CAPS, SPELLING_ASSESS, spellingAssessNext, EXPLORE_LENGTH, checkNext, exploreNext, guidedLength, guidedLesson, guidedNext, placementNext, spellingCheckQueue, spellingPracticeQueue, spellingReviewQueue, spellingTransferQueue } from "./select.ts";
 import { type AppState, type SessionState, fold } from "./state.ts";
+import { now as perfNow, record } from "./telemetry.ts";
+import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
+import { MASTERY_GATE } from "./mastery-policy.ts";
 
 export type Clock = () => string;
+
+/** A journey session idle for longer than this is ended when the journey is next opened. */
+export const JOURNEY_IDLE_MS = 6 * 3_600_000;
 
 export interface Current {
   session: SessionState;
@@ -24,6 +33,14 @@ export interface Current {
   done: number;
   /** Fixed sessions know their length; adaptive ones give an upper bound. */
   total: number;
+}
+
+/** Something a pilot build does not allow (content.ts PilotGate): refused, never shown. */
+export class PilotRefusal extends Error {
+  constructor(what: string) {
+    super(`Not available in the pilot: ${what}. Only the starting check and the spelling check, with educator-approved questions, are open.`);
+    this.name = "PilotRefusal";
+  }
 }
 
 export const newProfileId = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`);
@@ -37,6 +54,10 @@ export class Learner {
   state: AppState;
   /** Whether on-device speech works here (set by the interface after checking the device's voices). */
   speechAvailable = false;
+  /** The device's voice, if any (set by the interface): recorded with spelling sessions, name and language only. */
+  voiceInfo: { name: string; lang: string; local: boolean } | null = null;
+  /** Why the last spelling assessment stopped (recorded as a trace when it ends). */
+  private spellingStop: { stop: string; note?: string } | null = null;
 
   private constructor(content: AppContent, repo: Repo, profileId: string, events: AppEvent[], clock: Clock) {
     this.content = content;
@@ -53,9 +74,9 @@ export class Learner {
     return new Learner(content, repo, profileId, events, clock);
   }
 
-  static async create(content: AppContent, repo: Repo, name: string, by: "learner" | "guardian", clock: Clock, id = newProfileId()): Promise<Learner> {
+  static async create(content: AppContent, repo: Repo, name: string, by: "learner" | "guardian", clock: Clock, id = newProfileId(), scope: ProfileEvent["consent"]["scope"] = "this_device_only"): Promise<Learner> {
     const l = new Learner(content, repo, id, [], clock);
-    await l.add({ kind: "profile", id, at: clock(), name: name.trim() || "Learner", consent: { by, scope: "this_device_only" }, app: APP_VERSION });
+    await l.add({ kind: "profile", id, at: clock(), name: name.trim() || "Learner", consent: { by, scope }, app: APP_VERSION });
     return l;
   }
 
@@ -68,9 +89,53 @@ export class Learner {
   }
 
   private async add(e: AppEvent): Promise<void> {
-    await this.repo.append(this.profileId, e); // stored before the state moves on
+    let t = perfNow();
+    try {
+      await this.repo.append(this.profileId, e); // stored before the state moves on
+    } catch (err) {
+      record({ name: "save_failed", ok: false, detail: `${e.kind}: ${err instanceof Error ? err.name : "error"}` });
+      throw err;
+    }
+    record({ name: "save_ms", ms: perfNow() - t });
     this.events = [...this.events, e];
-    this.state = fold(this.content, this.events);
+    if (e.kind === "trace") {
+      // a trace explains a decision; it is never evidence and fold ignores it, so nothing needs rebuilding
+      this.state = { ...this.state, events: this.events };
+      return;
+    }
+    t = perfNow();
+    try {
+      this.state = fold(this.content, this.events);
+    } catch (err) {
+      record({ name: "engine_error", ok: false, detail: err });
+      throw err;
+    }
+    record({ name: "rebuild_ms", ms: perfNow() - t });
+  }
+
+  /** Record why a question was shown, right after it was first shown. */
+  private async traceSelection(presented: string, item: { id: string; version: number }, selection: SelectionTrace): Promise<void> {
+    const session = this.state.open?.event.session;
+    await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), ...(session ? { session } : {}), item, presented, selection });
+  }
+
+  /** Traces are diagnostic: one that cannot be saved is measured (save_failed) and never stops the learner. */
+  private async addTrace(e: TraceEvent): Promise<void> {
+    try {
+      await this.add(e);
+    } catch {
+      /* recorded as save_failed by add() */
+    }
+  }
+
+  /** Record what Today offered and which activity was started, just before the session starts. */
+  private planTraceFor(started: PlanTrace["started"], target?: EvidenceTarget): PlanTrace | null {
+    try {
+      return planTrace(this.profile(), started, target);
+    } catch (err) {
+      record({ name: "engine_error", ok: false, detail: err });
+      return null; // a missing trace never stops a learner from starting
+    }
   }
 
   plan(): PlanStep[] {
@@ -78,11 +143,44 @@ export class Learner {
   }
 
   /** Start a session for a plan step (or "explore"). An unfinished session is ended as stopped first. */
-  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson">): Promise<Current> {
+  /** The unified learner profile and development plan, rebuilt from the record. */
+  profile(): LearnerProfile {
+    return learnerProfile(this.state, this.content, this.clock(), this.speech);
+  }
+
+  /** The parent overview: the profile now, compared with the record before the last activity and with the first measurements. */
+  overview(): { profile: LearnerProfile; overview: ParentOverview } {
+    const now = this.clock();
+    const profile = learnerProfile(this.state, this.content, now, this.speech);
+    const before = beforeLastActivity(this.events);
+    const previous = before ? learnerProfile(fold(this.content, before), this.content, before.at(-1)!.at, this.speech, { activities: false }) : null;
+    return { profile, overview: parentOverview(profile, previous, firstStandings(this.content, this.events)) };
+  }
+
+  /** Speech as it is now: whether a local voice was found, whether hearing words is on, and the voice. */
+  speechRecord(): SpeechRecord {
+    return { available: this.speechAvailable, enabled: this.state.speech, voice: this.speechAvailable ? this.voiceInfo : null };
+  }
+
+  /** Whether this activity can be started here (in a pilot build: only allowed activities with approved questions). */
+  allows(type: SessionType): boolean {
+    return activityAllowed(this.content, type);
+  }
+
+  /** In a pilot build, refuse anything outside the boundary before it is recorded or shown. */
+  private guard(what: string): void {
+    if (this.content.gate) throw new PilotRefusal(what);
+  }
+
+  async start(step: Pick<PlanStep, "type" | "capability" | "step" | "lesson" | "purpose" | "target">, opts: { delivery?: "device_voice" | "adult_reader"; length?: number } = {}): Promise<Current> {
+    // the pilot boundary is checked first: a refused activity records nothing and ends nothing
+    if (!activityAllowed(this.content, step.type)) throw new PilotRefusal(step.type === "placement" || step.type === "spelling_assess" ? `${step.type} (no educator-approved questions yet)` : step.type);
     if (this.state.open) await this.stop();
     const now = this.clock();
     const s = this.state;
     const c = this.content;
+    const plan = this.planTraceFor({ type: step.type, ...(step.capability ? { capability: step.capability } : {}), ...(step.purpose ? { purpose: step.purpose } : {}), ...(step.step ? { step: step.step } : {}) }, step.target);
+    if (plan) await this.addTrace({ kind: "trace", id: this.nextId(), at: now, plan });
     const base = { kind: "session" as const, id: this.nextId(), at: now, session: `s:${this.events.length + 1}`, type: step.type };
     let queue: Planned[] | undefined;
     let extra: Record<string, unknown> = {};
@@ -90,12 +188,23 @@ export class Learner {
       case "placement":
         extra = { length: 24 };
         break;
+      case "spelling_assess": {
+        // dictation needs the words said aloud: by the device's voice, or by an adult reading them (recorded)
+        const delivery = opts.delivery ?? "device_voice";
+        if (delivery === "device_voice" && !this.speech) throw new Error("the spelling assessment needs speech on this device, or an adult to read the words");
+        // an evidence check on one skill (C′) is short and restricted to the difficulty that can fill the gap
+        extra = step.capability ? { length: opts.length ?? MASTERY_GATE.checkLength, delivery, capability: step.capability, purpose: step.purpose ?? "assess", ...(step.target ? { target: step.target } : {}) } : { length: SPELLING_ASSESS.max, delivery };
+        break;
+      }
       case "explore":
         extra = { length: EXPLORE_LENGTH };
         break;
+      case "check":
+        extra = { length: CHECK_LENGTH, capability: step.capability, purpose: step.purpose ?? "assess", ...(step.target ? { target: step.target } : {}) };
+        break;
       case "guided": {
         const lesson = step.lesson ?? guidedLesson(s, c, step.capability!, now);
-        extra = { length: GUIDED_LENGTH, capability: step.capability, ...(lesson ? { lesson } : {}) };
+        extra = { length: guidedLength(c, step.capability!), capability: step.capability, ...(lesson ? { lesson } : {}) };
         break;
       }
       case "spelling_check":
@@ -115,7 +224,8 @@ export class Learner {
         extra = { capability: step.capability, step: step.step };
         break;
     }
-    await this.add({ ...base, ...(queue ? { queue } : {}), ...extra });
+    const speech = step.type.startsWith("spelling_") ? { speech: this.speechRecord() } : {};
+    await this.add({ ...base, ...(queue ? { queue } : {}), ...extra, ...speech });
     return this.current();
   }
 
@@ -123,25 +233,49 @@ export class Learner {
   async current(): Promise<Current> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    // a session the pilot does not allow (resumed from an older or imported record) is ended, never continued
+    if (!activityAllowed(this.content, session.event.type)) {
+      await this.stop();
+      return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total: session.answered.length };
+    }
     const lessonId = session.event.lesson;
     const lesson = lessonId && !this.state.lessons.has(lessonId) ? (this.content.lessons.get(lessonId) ?? null) : null;
+    const t = perfNow();
     const next = lesson ? null : this.nextQuestion(session);
+    if (next) record({ name: "select_ms", ms: perfNow() - t });
     const total = session.event.queue?.length ?? session.event.length ?? 0;
     if (!lesson && !next) {
+      if (session.event.type === "spelling_assess" && this.spellingStop) {
+        const s = this.spellingStop;
+        const now = this.clock();
+        const estimates = DICTATION_CAPS.map((cap) => {
+          const v = leafView(this.state.ledger.composite, this.content.index, cap, now);
+          return { capability: cap, mean: Math.round(v.mean * 1000) / 1000, sd: Math.round(v.sd * 1000) / 1000 };
+        });
+        await this.addTrace({ kind: "trace", id: this.nextId(), at: now, session: session.event.session, selection: { selector: "engine", use: "assess", spelling: { estimates, rule: s.stop === "insufficient" ? "insufficient" : "stopped", reasons: [`stopped: ${s.note ?? s.stop}`], window: 0, testedPatterns: [] } } });
+        this.spellingStop = null;
+      }
       await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
       return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total };
     }
-    return { session, lesson, next, done: session.answered.length, total };
+    if (next) {
+      const fresh = !this.presentedId(session.event.session, next.item.id);
+      const presented = await this.present(next.item, next.use);
+      if (fresh && next.trace) await this.traceSelection(presented, { id: next.item.id, version: next.item.version }, next.trace);
+    }
+    return { session: this.state.open ?? session, lesson, next, done: session.answered.length, total };
   }
 
   private nextQuestion(session: SessionState): Next | null {
     const now = this.clock();
     const answered = new Set(session.answered.map((a) => a.item.id));
     if (session.event.queue) {
-      const q = session.event.queue.find((p) => !answered.has(p.item));
-      if (!q) return null;
+      const queue = session.event.queue;
+      const at = queue.findIndex((p) => !answered.has(p.item));
+      if (at < 0) return null;
+      const q = queue[at];
       const item = this.content.ctx.content.items.get(q.item);
-      return item ? { item, use: q.use, why: "" } : null;
+      return item && itemAllowed(this.content, item) ? { item, use: q.use, why: "", trace: queueTrace(session.event.type, at + 1, queue.length, q.use) } : null;
     }
     const s = this.state;
     switch (session.event.type) {
@@ -151,37 +285,129 @@ export class Learner {
         return guidedNext(s, this.content, session, now);
       case "explore":
         return exploreNext(s, this.content, session, now);
+      case "check":
+        return checkNext(s, this.content, session, now);
+      case "spelling_assess": {
+        const choice = spellingAssessNext(s, this.content, session, now);
+        this.spellingStop = choice.stop ? { stop: choice.stop, note: choice.note } : null;
+        return choice.next;
+      }
       default:
         return null;
     }
   }
 
+  /** A lesson read before practice: recorded for the app, and as a teaching intervention for the engine. */
   async finishLesson(lesson: string, checkCorrect: boolean): Promise<void> {
-    await this.add({ kind: "lesson", id: this.nextId(), at: this.clock(), lesson, checkCorrect });
+    this.guard("lessons");
+    const at = this.clock();
+    await this.add({ kind: "lesson", id: this.nextId(), at, lesson, checkCorrect });
+    const l = this.content.lessons.get(lesson);
+    const session = this.state.open?.event.session;
+    if (l && session) await this.add({ kind: "intervention", id: this.nextId(), at, session, capability: l.capability, rule: l.step, strategy: "lesson", content: lesson });
+  }
+
+  // ------------------------------------------------------------------ provenance
+
+  /** Record that a question was shown (once per item and session); returns the event id. */
+  async present(item: Item, purpose: PresentedPurpose, intervention?: string): Promise<string> {
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    // the last line of the pilot boundary: nothing unapproved is ever recorded as shown
+    if (!itemAllowed(this.content, item) || !activityAllowed(this.content, session.event.type)) throw new PilotRefusal(`question ${item.id} version ${item.version}`);
+    const prior = this.events.find((e) => e.kind === "presented" && e.session === session.event.session && e.item.id === item.id);
+    if (prior) return prior.id;
+    const id = this.nextId();
+    await this.add({ kind: "presented", id, at: this.clock(), session: session.event.session, item: { id: item.id, version: item.version }, purpose, ...(intervention ? { intervention } : {}) });
+    return id;
+  }
+
+  private presentedId(session: string, item: string): string | undefined {
+    return this.events.find((e) => e.kind === "presented" && e.session === session && e.item.id === item)?.id;
+  }
+
+  private hintsFor(session: string, item: string): HintEvent[] {
+    return this.events.filter((e): e is HintEvent => e.kind === "hint" && e.session === session && e.item.id === item);
   }
 
   /**
    * Answer the current question. The first, unaided answer to an item in a session is evidence for the
    * engine; any later try (after feedback, or with a hint) is assisted practice and is recorded only as such.
    */
-  async answer(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"] }): Promise<Feedback> {
+  async answer(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
+    const t = perfNow();
+    const fb = await this.record(item, response, opts);
+    record({ name: "answer_ms", ms: perfNow() - t });
+    return fb;
+  }
+
+  /** A dictation session that needs the device's voice, on a device that cannot speak now (it was lost, or switched off). */
+  speechLost(): boolean {
+    const ev = this.state.open?.event;
+    return ev?.type === "spelling_assess" && ev.delivery === "device_voice" && !this.speech;
+  }
+
+  /** Go on with an adult reading the words: the device-voice session ends (stopped) and a new one records the adult. */
+  async continueWithAdultReader(): Promise<Current> {
+    const ev = this.state.open?.event;
+    const asked = this.state.open?.answered.length ?? 0;
+    await this.stop();
+    // the same check (an evidence check keeps its skill, purpose and difficulty range, and only its words still to ask)
+    return this.start(
+      { type: "spelling_assess", ...(ev?.capability ? { capability: ev.capability, purpose: ev.purpose, target: ev.target } : {}) },
+      { delivery: "adult_reader", ...(ev?.capability ? { length: Math.max(1, (ev.length ?? MASTERY_GATE.checkLength) - asked) } : {}) },
+    );
+  }
+
+  private async record(item: Item, response: Response, opts: { assisted?: boolean; use: Next["use"]; intervention?: string }): Promise<Feedback> {
     const session = this.state.open;
     if (!session) throw new Error("no session is open");
+    if (!itemAllowed(this.content, item)) throw new PilotRefusal(`question ${item.id} version ${item.version}`);
+    // a word that could not be heard is never recorded as an answer to it
+    if (item.kind === "code" && item.format === "typed:dictation" && this.speechLost()) throw new Error("this device cannot say the word now: an adult can read the words, or stop for now");
+    const sid = session.event.session;
     const fb = feedbackFor(this.content, item, response);
     const prior = session.attempts.filter((a) => a.item.id === item.id);
-    const first = !prior.some((a) => !a.assisted) && !opts.assisted;
+    const hints = this.hintsFor(sid, item.id).map((h) => h.id);
+    // independent only if: no earlier try at this item in the session, no hint, not marked as helped
+    const first = !prior.length && !opts.assisted && !hints.length;
     const at = this.clock();
+    const presented = this.presentedId(sid, item.id);
     let evidence: string | undefined;
     if (first) {
       evidence = `${this.profileId}:e${this.events.length + 1}`;
-      const ev: EvidenceEvent = { kind: "evidence", id: evidence, at, session: session.event.session, item: { id: item.id, version: item.version }, response, use: opts.use };
+      const ev: EvidenceEvent = {
+        kind: "evidence",
+        id: evidence,
+        at,
+        session: sid,
+        item: { id: item.id, version: item.version },
+        response,
+        use: opts.use,
+        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY] },
+      };
       await this.add(ev);
+    } else {
+      // a later or helped try: recorded in the ledger as assisted, never as evidence
+      await this.add({
+        kind: "assisted_response",
+        id: `${this.profileId}:a${this.events.length + 1}`,
+        at,
+        session: sid,
+        item: { id: item.id, version: item.version },
+        ...(presented ? { presented } : {}),
+        response,
+        attempt: prior.length + 1,
+        hints,
+        afterFeedback: prior.length > 0,
+        ...(opts.intervention ? { intervention: opts.intervention } : {}),
+      });
     }
     const attempt: AttemptEvent = {
       kind: "attempt",
       id: this.nextId(),
       at,
-      session: session.event.session,
+      session: sid,
       item: { id: item.id, version: item.version },
       response,
       correct: fb.correct,
@@ -195,9 +421,128 @@ export class Learner {
     return fb;
   }
 
+  // ------------------------------------------------------------------ the doubling journey
+
+  /**
+   * Open the adaptive consonant-doubling journey. An open journey is resumed, not restarted. When there is
+   * nothing to do (shown, paused for support, out of questions) no session is created: the summary is shown
+   * from the record as it stands, so opening the journey repeatedly never adds events.
+   */
+  async startJourney(): Promise<JourneyView> {
+    this.guard("the doubling journey");
+    let open = this.state.open;
+    // an open journey left idle for hours is ended, so a return days later is a new session (delayed checks depend on it)
+    if (open?.event.type === "doubling_journey" && Date.parse(this.clock()) - Date.parse(this.lastActivity(open.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      open = this.state.open;
+    }
+    if (open?.event.type === "doubling_journey") return this.journey();
+    const preview = this.journeyPreview();
+    if (preview.step.kind === "summary") return preview;
+    if (open) await this.stop();
+    const plan = this.planTraceFor({ type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
+    if (plan) await this.addTrace({ kind: "trace", id: this.nextId(), at: this.clock(), plan });
+    await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: "doubling_journey", capability: this.content.journey.capability, step: this.content.journey.rule });
+    return this.journey();
+  }
+
+  /** What the journey would do now, without recording anything (a session that does not exist yet). */
+  journeyPreview(): JourneyView {
+    const now = this.clock();
+    const virtual = { event: { kind: "session" as const, id: "preview", at: now, session: "preview", type: "doubling_journey" as const }, attempts: [], answered: [], end: null };
+    return journeyView(this.state, this.content, virtual, now);
+  }
+
+  /** Where the journey is. Records a question as presented (once). With no journey open: the preview, which is a summary. */
+  async journey(): Promise<JourneyView> {
+    this.guard("the doubling journey");
+    const session = this.state.open;
+    if (!session || session.event.type !== "doubling_journey") return this.journeyPreview();
+    if (Date.parse(this.clock()) - Date.parse(this.lastActivity(session.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      return this.startJourney();
+    }
+    const t = perfNow();
+    const v = journeyView(this.state, this.content, session, this.clock());
+    record({ name: "select_ms", ms: perfNow() - t });
+    // the journey has ended: close the session now, not when a button is pressed (the app may simply be closed)
+    if (v.step.kind === "summary") {
+      await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
+      return v;
+    }
+    if (v.step.kind === "question" || v.step.kind === "guided") {
+      const item = v.step.item;
+      const purpose = v.step.kind === "guided" ? "teaching" : v.step.purpose === "reassess" ? "assessment" : v.step.purpose;
+      const fresh = !this.presentedId(session.event.session, item.id);
+      const presented = await this.present(item, purpose, v.step.kind === "guided" ? v.step.intervention : undefined);
+      if (fresh) await this.traceSelection(presented, { id: item.id, version: item.version }, plannerTrace(v.decision, v.step.kind === "guided" ? "practice" : v.step.purpose));
+    }
+    return journeyView(this.state, this.content, this.state.open!, this.clock());
+  }
+
+  private lastActivity(session: string): string {
+    return this.events.filter((e) => "session" in e && e.session === session).at(-1)?.at ?? this.clock();
+  }
+
+  /** Answer an independent journey question (no hints exist for these). */
+  async answerJourney(item: Item, response: Response, purpose: "assessment" | "reassess" | "retention"): Promise<Feedback> {
+    const block = this.events.filter((e) => e.kind === "intervention" && e.capability === this.content.journey.capability && e.rule === this.content.journey.rule).at(-1)?.id;
+    return this.answer(item, response, { use: purpose === "retention" ? "retention" : "assessment", ...(purpose === "reassess" && block ? { intervention: block } : {}) });
+  }
+
+  /** The teaching step was shown: recorded as an intervention with its strategy. */
+  async teach(strategy: StrategyContent, reason: string): Promise<void> {
+    this.guard("teaching");
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    await this.add({ kind: "intervention", id: this.nextId(), at: this.clock(), session: session.event.session, capability: this.content.journey.capability, rule: this.content.journey.rule, strategy: strategy.id, content: `doubling-journey:${strategy.id}`, reason });
+  }
+
+  /** Show the next hint level for a guided item; returns its text. The last level is a worked example that shows the answer. */
+  async hint(item: Code, strategy: StrategyContent): Promise<string> {
+    this.guard("hints");
+    const session = this.state.open;
+    if (!session) throw new Error("no session is open");
+    const level = this.hintsFor(session.event.session, item.id).length + 1;
+    // the last level is a worked example that shows the answer: recorded as such, so nothing after it is ever independent
+    const worked = level >= strategy.hints.length;
+    await this.add({
+      kind: "hint",
+      id: this.nextId(),
+      at: this.clock(),
+      session: session.event.session,
+      item: { id: item.id, version: item.version },
+      ...(this.presentedId(session.event.session, item.id) ? { presented: this.presentedId(session.event.session, item.id)! } : {}),
+      level,
+      hintType: worked ? `${strategy.id}:worked_example` : `${strategy.id}:${level}`,
+      ...(worked ? { revealsAnswer: true as const } : {}),
+    });
+    return hintText(strategy, item, level);
+  }
+
+  /** A guided-practice answer: always assisted (it is part of teaching), never evidence. */
+  async answerGuided(item: Item, response: Response, intervention: string): Promise<Feedback> {
+    return this.answer(item, response, { assisted: true, use: "practice", intervention });
+  }
+
+  async finishJourney(): Promise<void> {
+    const open = this.state.open;
+    if (open && open.event.type === "doubling_journey") await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "finished" });
+  }
+
+  /** The parent-facing summary of the doubling journey so far. */
+  doublingReport(): ParentReport {
+    return parentReport(this.state, this.content, this.clock());
+  }
+
   async stop(): Promise<void> {
     const open = this.state.open;
     if (open) await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "stopped" });
+  }
+
+  /** Who is learning and their goal: recorded as the learner's choice; never used for scoring or the plan. */
+  async setPreferences(band: LearnerBand, goal: LearnerGoal): Promise<void> {
+    await this.add({ kind: "preferences", id: this.nextId(), at: this.clock(), band, goal });
   }
 
   async setSpeech(on: boolean): Promise<void> {
@@ -205,7 +550,27 @@ export class Learner {
   }
 
   async flag(item: Item, note: string): Promise<void> {
+    // the pilot records nothing a child writes in their own words (information sheet); the supervisor logs questions on paper
+    this.guard("reporting a question with a note");
     await this.add({ kind: "flag", id: this.nextId(), at: this.clock(), item: { id: item.id, version: item.version }, note: note.slice(0, 500) });
+  }
+
+  /** How a finished session felt (one tap; the latest rating for a session counts). */
+  async rate(session: string, rating: Rating): Promise<void> {
+    this.guard("session ratings"); // not part of what the pilot records (information sheet)
+    await this.add({ kind: "rating", id: this.nextId(), at: this.clock(), session, rating });
+  }
+
+  /** A note about a problem or anything that got in the way, kept with the record. */
+  async note(screen: string, text: string): Promise<void> {
+    this.guard("free-text notes");
+    const t = text.trim();
+    if (t) await this.add({ kind: "note", id: this.nextId(), at: this.clock(), screen, text: t.slice(0, 1000) });
+  }
+
+  /** The pilot summary: what a guardian shares with the OpenPath team, without the learner's name. */
+  pilotSummary(device: { speech: boolean; standalone?: boolean; width?: number }): PilotSummary {
+    return pilotSummary(this.state, this.content, this.clock(), device);
   }
 
   backup(): Backup {
@@ -221,11 +586,14 @@ export class Learner {
     return {
       placement: "Finding your starting point",
       spelling_check: "Spelling check",
+      spelling_assess: "Spelling check: hear and spell",
       spelling_practice: "Spelling practice",
       spelling_review: "Word review",
       spelling_transfer: "Check with new words",
       guided: "Practice",
       explore: "More practice",
+      doubling_journey: "Doubling letters",
+      check: "A few questions",
     }[type];
   }
 }

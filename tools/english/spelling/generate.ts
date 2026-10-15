@@ -105,7 +105,7 @@ export function explanation(e: WordEntry): string {
       return `${b} + -${s} = ${w}. The base keeps all its letters (a final e stays before a consonant ending).`;
     case "able_ible":
       return w.endsWith("able")
-        ? `${w} ends in -able. -able usually follows a whole word you can recognise (${w.slice(0, -4)}…).`
+        ? `${w} ends in -able. -able usually follows a whole word you can recognise, as in read → readable; -ible usually follows a part that is not a word on its own.`
         : `${w} ends in -ible. -ible usually follows a part that is not a word on its own.`;
     case "tion_sion":
       return w.endsWith("ssion") ? `${w} ends in -ssion (as in mission, passion).` : w.endsWith("sion") ? `${w} ends in -sion, often after l, n, r or a "zh" sound (vision).` : `${w} ends in -tion, the commonest of these endings.`;
