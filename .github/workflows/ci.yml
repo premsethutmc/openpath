@@ -40,6 +40,8 @@ jobs:
           --health-retries 10
     defaults:
       run:
+        # a job's defaults.run replaces the workflow's: name the shell again, or `tests | tee log` hides failures
+        shell: bash
         working-directory: backend
     steps:
       - uses: actions/checkout@v7
@@ -76,6 +78,8 @@ jobs:
     runs-on: ubuntu-24.04
     defaults:
       run:
+        # a job's defaults.run replaces the workflow's: name the shell again, or `tests | tee log` hides failures
+        shell: bash
         working-directory: frontend
     steps:
       - uses: actions/checkout@v7

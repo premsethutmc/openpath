@@ -17,6 +17,12 @@ else
   count=$(grep -oE '^(#|ℹ) pass [0-9]+' "$log" | tail -n 1 | grep -oE '[0-9]+' || true)
 fi
 
+# a failure in the log fails the step too, whatever the pipe's exit status was
+if grep -qE '^FAILED \(|^(#|ℹ) fail [1-9]' "$log"; then
+  echo "::error title=${title}::Tests failed"
+  exit 1
+fi
+
 if [ "${count:-0}" -eq 0 ]; then
   echo "::error title=${title}::No tests ran"
   exit 1
