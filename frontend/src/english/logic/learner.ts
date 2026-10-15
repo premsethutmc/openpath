@@ -177,9 +177,19 @@ export class Learner {
     return wordLists(this.events);
   }
 
+  /** Parent-supplied content (My Words lists, My Books text) stays on this device: it is offered only for a record
+   * kept on the device, never for a learner whose record is saved in a parent account on the server. */
+  get keepsParentContent(): boolean {
+    return this.repo.kind !== "server";
+  }
+  private guardPrivate(what: string) {
+    if (!this.keepsParentContent) throw new Error(`${what} keeps a parent's words on this device only, so it is not available for a learner saved in a parent account`);
+  }
+
   /** Save a word list (new, or a new version of an existing one). Words must already be checked (parseWords). */
   async saveWordList(name: string, words: ListWord[], id?: string): Promise<string> {
     this.guard("My Words");
+    this.guardPrivate("My Words");
     const n = name.trim().slice(0, LIST_LIMITS.nameLength);
     if (!n) throw new Error("give the list a name");
     if (!words.length) throw new Error("the list has no words");

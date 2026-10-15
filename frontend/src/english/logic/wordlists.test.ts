@@ -97,3 +97,14 @@ test("MW-5 a list must have a name and words; a pilot build offers no My Words",
   const pilot = await Learner.create(loadContent({ mode: "pilot" }), new MemoryRepo(), "P", "guardian", testClock(), "p-p2");
   await assert.rejects(pilot.saveWordList("Week 1", parseWords("cat").words), PilotRefusal);
 });
+
+test("MW-6 a parent's lists stay on the device: not offered for a learner saved in a parent account", async () => {
+  const repo = new MemoryRepo();
+  Object.defineProperty(repo, "kind", { value: "server" });
+  const l = await Learner.create(c, repo, "Account pupil", "guardian", testClock(), "p-acc");
+  assert.equal(l.keepsParentContent, false);
+  await assert.rejects(l.saveWordList("Week 1", parseWords("cat").words), /on this device only/);
+  assert.equal(l.events.filter((e) => e.kind === "word_list").length, 0);
+  const d = await Learner.create(c, new MemoryRepo(), "Device pupil", "guardian", testClock(), "p-dev");
+  assert.equal(d.keepsParentContent, true);
+});

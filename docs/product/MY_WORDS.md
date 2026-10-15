@@ -54,7 +54,9 @@ count towards the list.
   is saved. Deleting adds a `word_list_delete` event.
 - Answers are the Spelling Bee's `spell_answer` events, with the source `{type: "list", id}`: every answer can be traced
   to the list it came from.
-- **On this device only.** Nothing is sent anywhere, and parent lists never go into the shared content bank. They are
+- **On this device only.** My Words is offered only for a learner whose record is kept on this device. For a learner
+  saved in a parent account (whose record is stored on the server) the Home card explains this and offers nothing, so
+  a parent's words never reach the server. Nothing is sent anywhere, and parent lists never go into the shared content bank. They are
   included in **Export a backup** and erased when the learner is deleted.
 - Older records open unchanged.
 - **Pilot builds:** My Words is not offered.
@@ -67,10 +69,10 @@ same component, with the list's name as its title.
 
 ## Tests
 
-**Unit tests (`logic/wordlists.test.ts`, MW-1 to MW-5; `logic/spelling.test.ts` SB-11):** separators, quotes and a
+**Unit tests (`logic/wordlists.test.ts`, MW-1 to MW-6; `logic/spelling.test.ts` SB-11):** separators, quotes and a
 byte-order mark; every kind of problem reported, and every entry either kept or reported; variants and the list text
 round trip; save, practise with variants, progress per list, editing keeps history, reload, backup, delete; a name and
-words are required; no My Words in a pilot build; screen wording never contains the word being asked.
+words are required; no My Words in a pilot build; not offered for a learner saved in a parent account (MW-6); screen wording never contains the word being asked.
 
 **Browser test (`e2e/mywords.test.mjs`)**, on Chromium emulating an Android phone 412 px wide (not a physical phone):
 type and paste a list with mistakes, see each problem; upload a CSV; remove a word; save; practise all four words with
