@@ -52,7 +52,7 @@ function Prompt({ text }: { text: string }) {
   );
 }
 
-function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check" }: { speakText?: string; voice: SpeechSynthesisVoice | null; locked: boolean; onSubmit: (r: Response) => void; submitLabel?: string }) {
+function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check", answerLabel = "Your answer" }: { speakText?: string; voice: SpeechSynthesisVoice | null; locked: boolean; onSubmit: (r: Response) => void; submitLabel?: string; answerLabel?: string }) {
   const [text, setText] = useState("");
   const input = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -90,7 +90,7 @@ function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check" }: { 
         </button>
       )}
       <label className="ruled">
-        <span className="sr-only">Your answer</span>
+        <span className="sr-only">{answerLabel}</span>
         <input
           ref={input}
           value={text}
@@ -117,7 +117,30 @@ function Typed({ speakText, voice, locked, onSubmit, submitLabel = "Check" }: { 
  * Hear the word, then type it. The word and its sentence are only ever spoken (or, for an adult reading aloud,
  * shown to the adult on request and hidden again): never displayed to the learner before the answer is checked.
  */
-export function Dictation({ word, sentence, say, voice, delivery, locked, onSubmit, onPlay, submitLabel }: { word: string; sentence?: string; say?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void; onPlay?: () => void; submitLabel?: string }) {
+/** Labels for the dictation controls; the Spelling Bee passes wording that never contains the word being asked. */
+export interface DictationLabels {
+  play: string;
+  repeat: string;
+  sentence: string;
+  submit: string;
+  answer: string;
+  adultLead: string;
+  adult: string;
+  show: string;
+}
+const DICTATION_LABELS: DictationLabels = {
+  play: "Play the word",
+  repeat: "Repeat the word",
+  sentence: "Hear it in a sentence",
+  submit: "Check",
+  answer: "Your answer",
+  adultLead: "For the adult:",
+  adult: "read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.",
+  show: "Show the word to read aloud",
+};
+
+export function Dictation({ word, sentence, say, voice, delivery, locked, onSubmit, onPlay, labels }: { word: string; sentence?: string; say?: string; voice: SpeechSynthesisVoice | null; delivery: "device_voice" | "adult_reader"; locked: boolean; onSubmit: (r: Response) => void; onPlay?: () => void; labels?: Partial<DictationLabels> }) {
+  const L = { ...DICTATION_LABELS, ...labels };
   const [plays, setPlays] = useState(0);
   const [adultSees, setAdultSees] = useState(false);
   const playWord = () => {
@@ -139,7 +162,7 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
       {delivery === "device_voice" ? (
         <div className="row listen-row">
           <button type="button" className="listen" onClick={playWord} data-plays={plays}>
-            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? "Repeat the word" : "Play the word"}
+            <span aria-hidden="true">{plays ? "🔁" : "▶️"}</span> {plays ? L.repeat : L.play}
           </button>
           {sentence && (
             <button
@@ -150,7 +173,7 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
                 onPlay?.();
               }}
             >
-              <span aria-hidden="true">💬</span> Hear it in a sentence
+              <span aria-hidden="true">💬</span> {L.sentence}
             </button>
           )}
         </div>
@@ -159,10 +182,10 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
           {!adultSees ? (
             <>
               <p>
-                <b>For the adult:</b> read the word aloud, then the sentence, then the word again. Keep the screen away from the learner while it is shown.
+                <b>{L.adultLead}</b> {L.adult}
               </p>
               <button type="button" className="secondary" onClick={() => setAdultSees(true)}>
-                Show the word to read aloud
+                {L.show}
               </button>
             </>
           ) : (
@@ -179,7 +202,7 @@ export function Dictation({ word, sentence, say, voice, delivery, locked, onSubm
           )}
         </div>
       )}
-      {!adultSees && <Typed voice={voice} locked={locked} onSubmit={onSubmit} submitLabel={submitLabel} />}
+      {!adultSees && <Typed voice={voice} locked={locked} onSubmit={onSubmit} submitLabel={L.submit} answerLabel={L.answer} />}
     </div>
   );
 }

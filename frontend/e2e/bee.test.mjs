@@ -72,10 +72,22 @@ async function heard(page, before) {
   const said = (await spoken(page)).at(-1);
   return said.split(".")[0].trim();
 }
-/** The word must not be anywhere in the page (text or attributes) before it is answered. */
+/** Everything a person or a screen reader can perceive: visible text, accessible labels and descriptions, titles,
+ * placeholders, values, alt text, data attributes and the tab title (class and id names are internal styling hooks). */
+const perceivable = (page) =>
+  page.evaluate(() => {
+    const parts = [document.title, document.body.innerText];
+    for (const el of document.body.querySelectorAll("*")) {
+      for (const a of el.attributes) if (/^(aria-|data-)|^(title|alt|placeholder|value|label|content)$/.test(a.name)) parts.push(a.value);
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) parts.push(el.value);
+    }
+    for (const el of document.querySelectorAll(".sr-only")) parts.push(el.textContent);
+    return parts.join("\n").toLowerCase();
+  });
+/** The word must not be perceivable anywhere in the page before it is answered. */
 async function notInPage(page, word) {
-  const html = (await page.evaluate(() => document.body.outerHTML)).toLowerCase();
-  assert.ok(!new RegExp(`\\b${word.toLowerCase()}\\b`).test(html), `"${word}" is in the page before it was answered`);
+  const m = new RegExp(`.{0,60}\\b${word.toLowerCase()}\\b.{0,30}`).exec(await perceivable(page));
+  assert.ok(!m, `"${word}" can be seen before it was answered: ${m?.[0]}`);
 }
 
 async function newLearner(page, name) {

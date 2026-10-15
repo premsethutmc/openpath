@@ -20,6 +20,7 @@ import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
 import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
 import type { SpellSource } from "./events.ts";
+import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
 
 export type Clock = () => string;
 
@@ -162,7 +163,37 @@ export class Learner {
   /** The words of a spelling source. The Spelling Bee's preloaded words now; a parent's lists and books later. */
   spellingWords(source: SpellSource = BANK): SpellWord[] {
     if (source.type === "bank") return bankWords(this.content);
+    if (source.type === "list") {
+      const l = this.wordLists().find((x) => x.id === source.id);
+      return l ? listWords(l) : [];
+    }
     return [];
+  }
+
+  // ------------------------------------------------------------------ My Words (logic/wordlists.ts)
+
+  /** The parent's saved word lists, newest first. */
+  wordLists(): WordList[] {
+    return wordLists(this.events);
+  }
+
+  /** Save a word list (new, or a new version of an existing one). Words must already be checked (parseWords). */
+  async saveWordList(name: string, words: ListWord[], id?: string): Promise<string> {
+    this.guard("My Words");
+    const n = name.trim().slice(0, LIST_LIMITS.nameLength);
+    if (!n) throw new Error("give the list a name");
+    if (!words.length) throw new Error("the list has no words");
+    if (words.length > LIST_LIMITS.words) throw new Error(`a list holds at most ${LIST_LIMITS.words} words`);
+    const listId = id ?? `list:${this.events.length + 1}`;
+    await this.add({ kind: "word_list", id: this.nextId(), at: this.clock(), list: { id: listId, name: n, words } });
+    return listId;
+  }
+
+  /** Remove a list (its practice history stays in the record). An open session on it is ended. */
+  async deleteWordList(id: string): Promise<void> {
+    const open = this.spelling().open;
+    if (open?.event.source.type === "list" && open.event.source.id === id) await this.stopSpelling();
+    await this.add({ kind: "word_list_delete", id: this.nextId(), at: this.clock(), list: id });
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */

@@ -231,6 +231,14 @@ jobs:
         run: |
           npm run english:e2e-bee 2>&1 | tee english-bee-e2e.log
           ../.github/scripts/require-tests.sh english-bee-e2e.log "Spelling Bee end-to-end"
+      - name: My Words in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/mywords
+        run: |
+          npm run english:e2e-mywords 2>&1 | tee english-mywords-e2e.log
+          ../.github/scripts/require-tests.sh english-mywords-e2e.log "My Words end-to-end"
       - name: Serve the English web app with its account API
         working-directory: frontend
         run: |

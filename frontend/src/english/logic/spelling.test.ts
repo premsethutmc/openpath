@@ -193,3 +193,14 @@ test("SB-10 a pilot build offers no Spelling Bee (it is not on the pilot allowli
   const l = await Learner.create(pilot, new MemoryRepo(), "P", "guardian", testClock(), "p-pilot");
   await assert.rejects(l.startSpelling(), PilotRefusal);
 });
+
+test("SB-11 text shown while a word is asked never contains that word (whole words; any capital letters)", async () => {
+  const { avoiding } = await import("./spelling.ts");
+  assert.equal(avoiding("listen", "Listen, then type the word you hear.", "Type what you hear."), "Type what you hear.");
+  assert.equal(avoiding("word", "Repeat the word", "Replay"), "Replay");
+  assert.equal(avoiding("again", "Replay", "Again"), "Replay");
+  assert.equal(avoiding("hear", "Type what you hear.", "Spell it."), "Spell it.");
+  assert.equal(avoiding("ear", "Type what you hear."), "Type what you hear.", "part of a longer word is not the word");
+  assert.equal(avoiding("don't", "Don't stop", "Go on"), "Go on");
+  assert.equal(avoiding("x", "x", "🔁"), "🔁");
+});
