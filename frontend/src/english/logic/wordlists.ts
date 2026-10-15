@@ -89,6 +89,10 @@ export function wordLists(events: readonly AppEvent[]): WordList[] {
   const lists = new Map<string, WordList>();
   for (const e of events) {
     if (e.kind === "word_list") {
+      if (e.scrubbed) {
+        lists.delete(e.list.id); // deleted: its content was removed from the record (logic/scrub.ts)
+        continue;
+      }
       const old = lists.get(e.list.id);
       lists.set(e.list.id, { id: e.list.id, name: e.list.name, words: e.list.words, created: old?.created ?? e.at, updated: e.at });
     } else if (e.kind === "word_list_delete") lists.delete(e.list);

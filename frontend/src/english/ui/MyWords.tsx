@@ -11,6 +11,7 @@ import { LIST_LIMITS, type ListWord, type Parsed, type WordList, listText, listW
 
 export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: Learner; onPractise: (l: WordList) => void; onLeave: () => void; onChanged: () => void }) {
   const [editing, setEditing] = useState<WordList | "new" | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
   if (editing) return <ListEditor learner={learner} list={editing === "new" ? null : editing} onDone={() => (setEditing(null), onChanged())} />;
   const lists = learner.wordLists();
   const st = learner.spelling();
@@ -31,6 +32,11 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         New word list
       </button>
+      {problem && (
+        <p className="warning" role="alert">
+          {problem}
+        </p>
+      )}
       {lists.length === 0 ? (
         <p className="tile">No lists yet. A list can be this week's spelling words from school.</p>
       ) : (
@@ -56,8 +62,13 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
                     type="button"
                     className="quiet"
                     onClick={async () => {
-                      if (!window.confirm(`Delete the list "${l.name}"? Its practice history stays in the learner's record.`)) return;
-                      await learner.deleteWordList(l.id);
+                      if (!window.confirm(`Delete the list "${l.name}"? Its words are removed from the learner's record. The learner's answers stay, without the words.`)) return;
+                      try {
+                        setProblem(null);
+                        await learner.deleteWordList(l.id);
+                      } catch (e) {
+                        setProblem(`The list was not deleted: ${e instanceof Error ? e.message : "it could not be removed"}. Nothing was changed; try again.`);
+                      }
                       onChanged();
                     }}
                   >
@@ -76,8 +87,8 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
 /** Where a parent's lists are saved, said plainly before anything is typed. */
 export function keptWhere(learner: Learner, what = "Lists"): string {
   return learner.contentPlace === "account"
-    ? `${what} are saved in ${learner.state.profile?.name ?? "this learner"}'s record in your parent account, so they are on any device you sign in on. Only your account can open them. Deleting removes it from this screen; it stays in the learner's record until the learner is deleted.`
-    : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting removes it from this screen; it stays in the learner's record until the learner is deleted.`;
+    ? `${what} are saved in ${learner.state.profile?.name ?? "this learner"}'s record in your parent account, so they are on any device you sign in on. Only your account can open them. Deleting one removes its words from the learner's record; the learner's answers stay, without the words.`
+    : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting one removes its words from the learner's record; the learner's answers stay, without the words.`;
 }
 
 function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordList | null; onDone: () => void }) {

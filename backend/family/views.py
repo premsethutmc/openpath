@@ -40,6 +40,12 @@ from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
 from .models import ACTIVE_SUBJECTS, Pupil, PupilEvent
+from .scrub import SOURCES as SCRUB_SOURCES
+from .scrub import deleted_sources, revives_deleted, scrub_events
+
+# events that could bring a deleted list back, and the events that record a deletion
+REVIVING_KINDS = {"word_list", "spell_session", "spell_answer"}
+DELETE_KINDS = {"word_list_delete"}
 
 User = get_user_model()
 
@@ -383,6 +389,16 @@ class PupilEventsView(AccountBase):
                 )
             if count >= settings.OPENPATH_MAX_EVENTS_PER_PUPIL:
                 raise ValidationError({"detail": "This record is full."})
+            if event["kind"] in REVIVING_KINDS:
+                deleted = deleted_sources(
+                    PupilEvent.objects.filter(pupil=pupil, subject=subject, kind__in=DELETE_KINDS).values_list("body", flat=True)
+                )
+                if deleted and revives_deleted(event, deleted):
+                    # a device that loaded the record before the list was deleted elsewhere: never let it come back
+                    return Response(
+                        {"detail": "This was deleted on another device. Open the learner again to carry on.", "count": count},
+                        status=status.HTTP_409_CONFLICT,
+                    )
             PupilEvent.objects.create(pupil=pupil, subject=subject, seq=seq, kind=event["kind"], occurred_at=_occurred_at(event), body=event)
         return Response({"count": count + 1}, status=status.HTTP_201_CREATED)
 
@@ -403,6 +419,31 @@ class PupilEventsView(AccountBase):
                 PupilEvent(pupil=pupil, subject=subject, seq=i, kind=e["kind"], occurred_at=at, body=e) for i, (e, at) in enumerate(checked)
             )
         return Response({"count": len(checked)}, status=status.HTTP_201_CREATED)
+
+
+class PupilScrubView(AccountBase):
+    """Delete a parent's own material for real: remove its content from this pupil's stored record (family/scrub.py).
+
+    Only the pupil's own parent can do it (404 for anyone else). Bodies are rewritten in place; positions, ids and times
+    stay, so the record's order and every other event are untouched.
+    """
+
+    def post(self, request, pupil_id):
+        subject = _subject(request.data.get("subject"))
+        source = request.data.get("source")
+        if not isinstance(source, dict) or source.get("type") not in SCRUB_SOURCES or not isinstance(source.get("id"), str) or not source["id"]:
+            raise ValidationError({"source": "Name the list to remove: {type: \"list\", id}."})
+        src = {"type": source["type"], "id": source["id"]}
+        with transaction.atomic():
+            pupil = get_object_or_404(Pupil.objects.select_for_update(), pk=pupil_id, parent=request.user)
+            rows = list(PupilEvent.objects.filter(pupil=pupil, subject=subject).order_by("seq"))
+            scrubbed, changed = scrub_events([r.body for r in rows], src)
+            dirty = [r for r, body in zip(rows, scrubbed) if body is not r.body]
+            for r, body in zip(rows, scrubbed):
+                if body is not r.body:
+                    r.body = body
+            PupilEvent.objects.bulk_update(dirty, ["body"])
+        return Response({"scrubbed": changed})
 
 
 class PupilExportView(AccountBase):

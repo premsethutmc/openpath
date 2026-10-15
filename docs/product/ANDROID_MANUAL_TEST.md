@@ -169,8 +169,9 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A9.3 ★ | Remove one word, **Save the list**, then **Practise** | The real voice says each word; the word is never written on the screen; "color" is accepted for colour |
 | A9.4 | Finish the list; go back to My Words | The list shows practised, right and "to review" counts |
 | A9.5 | Close Chrome and reopen; open My Words | The list and its progress are still there |
-| A9.6 | **Edit**, change the name, save; then **Delete** | The new name shows; after Delete the list is gone |
+| A9.6 | **Edit**, change the name, save; then **Delete** | The new name shows; after Delete the list is gone, and stays gone after closing and reopening Chrome |
 | A9.7 | (App address, signed in as a parent) Make a list for a learner in the account; sign in on a second phone | The My Words screen says the list is saved in the learner's record in your parent account; the second phone shows the list and its progress |
+| A9.8 | (Parent account, two phones) Open the learner's My Words on phone 2; delete the list on phone 1; then tap **Practise** on phone 2 | Phone 2 says the record changed on another device; after opening the learner again the list is gone |
 
 ### A10. My Books (a parent's own book text)
 

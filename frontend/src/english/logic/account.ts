@@ -9,6 +9,7 @@
  * the engine and every screen work unchanged. The engine replays the events to build the Learner Vector; the server
  * keeps the events, never a score in their place.
  */
+import type { ScrubSource } from "./scrub.ts";
 import type { AppEvent } from "./events.ts";
 import { APP_BUILD, type Metric } from "./telemetry.ts";
 import type { ProfileSummary, Repo } from "./store.ts";
@@ -218,6 +219,11 @@ export class Api {
   importEvents(id: string, events: AppEvent[]) {
     return this.request<{ count: number }>("PUT", `/pupils/${id}/events/`, { subject: "english", events }, IMPORT_TIMEOUT_MS);
   }
+  /** Remove a deleted list's content from a pupil's stored record (only this parent's pupils). */
+  scrub(id: string, source: ScrubSource) {
+    return this.request<{ scrubbed: number }>("POST", `/pupils/${id}/events/scrub/`, { subject: "english", source });
+  }
+
   exportPupil(id: string) {
     return this.request<unknown>("GET", `/pupils/${id}/export/`);
   }
@@ -290,5 +296,10 @@ export class ServerRepo implements Repo {
   async remove(profile: string): Promise<void> {
     await this.api.deletePupil(profile);
     this.counts.delete(profile);
+  }
+
+  /** The server removes the content itself (backend/family/scrub.py), with the same rules as on a device. */
+  async scrub(profile: string, source: ScrubSource): Promise<number> {
+    return (await this.api.scrub(profile, source)).scrubbed;
   }
 }

@@ -231,7 +231,7 @@ test("Android Chrome can drop the first word's speech: the learner is asked to t
   await context.close();
 });
 
-test("Closing the whole browser and starting it again: the Spelling Bee carries on at the same word", async () => {
+test("Closing the whole browser and starting it again: the Spelling Bee carries on at the same word, and on by keyboard alone", async () => {
   const profile = mkdtempSync(join(tmpdir(), "openpath-bee-"));
   try {
     let { context, page } = await phone({ profile });
@@ -246,6 +246,16 @@ test("Closing the whole browser and starting it again: the Spelling Bee carries 
     await page.goto(URL);
     assert.equal(await advance(page, /Carry on Spelling Bee \(word 3 of 10\)/), third, "the same word after a browser restart");
     assert.match(await page.locator(".bee-progress").innerText(), /Word 3 of 10[\s\S]*✓ 1[\s\S]*✗ 1/);
+    // and on, with the keyboard only: Repeat, type, Enter to submit, Enter again for the next word (no extra taps)
+    await page.getByRole("button", { name: "Repeat the word" }).click();
+    assert.equal((await spoken(page)).at(-1), third);
+    await page.locator(".ruled input").fill(third);
+    await page.locator(".ruled input").press("Enter");
+    await page.getByRole("heading", { name: "Right!" }).waitFor();
+    const n = (await spoken(page)).length;
+    await page.keyboard.press("Enter");
+    await page.waitForFunction((k) => window.__spoken.length > k, n);
+    await page.getByText("Word 4 of 10").waitFor();
     await context.close();
   } finally {
     rmSync(profile, { recursive: true, force: true });

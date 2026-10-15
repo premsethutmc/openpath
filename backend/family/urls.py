@@ -14,6 +14,7 @@ urlpatterns = [
     path("pupils/", views.PupilsView.as_view(), name="pupils"),
     path("pupils/<uuid:pupil_id>/", views.PupilView.as_view(), name="pupil"),
     path("pupils/<uuid:pupil_id>/events/", views.PupilEventsView.as_view(), name="pupil-events"),
+    path("pupils/<uuid:pupil_id>/events/scrub/", views.PupilScrubView.as_view(), name="pupil-events-scrub"),
     path("pupils/<uuid:pupil_id>/export/", views.PupilExportView.as_view(), name="pupil-export"),
     path("telemetry/", developer.TelemetryView.as_view(), name="telemetry"),
     path("developer/status/", developer.DeveloperStatusView.as_view(), name="developer-status"),

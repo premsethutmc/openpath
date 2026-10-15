@@ -24,8 +24,8 @@ says, for every entry left out, what it was and why:
 Empty lines and empty entries between commas are ignored and counted. **Nothing valid is dropped without a reason
 being shown.**
 
-**Save the list** keeps it. **Edit** reopens it with its words in the box; **Delete** removes it (after a
-confirmation).
+**Save the list** keeps it. **Edit** reopens it with its words in the box. **Delete**, after a confirmation, deletes it
+for real: see "Deleting a list" below.
 
 ## For the learner
 
@@ -52,7 +52,7 @@ count towards the list.
 ## What is saved, and where
 
 - A list is a `word_list` event in the learner's own record: the whole list (id, name, words and variants) each time it
-  is saved. Deleting adds a `word_list_delete` event.
+  is saved. Deleting removes the list's content from the record (below) and then adds a `word_list_delete` event.
 - Answers are the Spelling Bee's `spell_answer` events, with the source `{type: "list", id}`: every answer can be traced
   to the list it came from.
 - **Where lists are kept.** The same place as the rest of the learner's record, and the My Words screen says which,
@@ -71,14 +71,48 @@ count towards the list.
   - **Shared content bank.** Lists never go into one.
 - **Backup, delete and limits.**
   - Lists are included in **Export a backup** (device) and the account export (parent account).
-  - Deleting a list removes it from My Words. Like every event in OpenPath's append-only record, it stays in the
-    learner's record until the learner is deleted, and the screen says so.
   - One saved list must fit the server's single-event limit (32,000 bytes); 200 ordinary words use about a third of
     it. A list that would not fit is refused before anything is saved, with a reason.
 - **No change to accounts.** No new login, database table, setting or service: the existing pupil record is used
   as it is.
 - Older records open unchanged.
 - **Pilot builds:** My Words is not offered.
+
+## Deleting a list
+
+Deleting a list removes the parent's words from the learner's stored record, keeps the learning that happened (without
+the words), and changes nothing else. The same rules run on the device (`logic/scrub.ts`) and on the server
+(`backend/family/scrub.py`). A shared fixture, `backend/family/fixtures/scrub-fixture.json`, holds one record before
+and after, and both are tested against it.
+
+**What happens, in order:**
+1. An open practice session on the list is ended.
+2. The list's content is removed from the stored record, in place: in IndexedDB on a device, or by the server
+   (`POST /api/pupils/<id>/events/scrub/`, the pupil's own parent only) for a parent account.
+3. The record is read again and the deletion is recorded (`word_list_delete`).
+
+If step 2 fails (for example, offline), nothing is deleted and the screen says so.
+
+**Retention policy:**
+
+| Kind of data | What happens |
+|---|---|
+| **Source content** the parent supplied: the list's name and words, in **every** saved version of the list | Removed. Each version becomes `{id, name: "", words: []}` marked `scrubbed` |
+| **Historical learning evidence:** the practice sessions and answers on that list | Kept without the content. Each word becomes `removed-1`, `removed-2`, … (the same word stays the same number); the spelling and the typed answer become empty; right/wrong, times, plays and review flags stay. The learner's history of having practised, and how it went, is intact |
+| **Everything else:** the Spelling Bee, other lists, General English | Untouched. Only events whose source is this list change, and no event is added or removed by the scrub, so the record's order stays the same on every device |
+| **Copies outside the current record** | **Not reachable, so not erased.** A backup file the parent exported earlier still holds the list, and importing it into a new learner would bring it back. The server's database backups and write-ahead log, and the browser's own storage files, keep old data until they expire or are compacted on their own schedule. Deletion is immediate in the record the app and the server use, **not** a guaranteed physical erasure from those copies |
+
+**Where the deleted words can no longer be found:**
+- the learner's record on the device, or on the server;
+- **Export a backup** made after the deletion, and the account export;
+- developer diagnostics;
+- another family's access (which was refused anyway).
+
+**Other devices:**
+- **Opening the learner** on another phone loads the record afresh, so the list is gone there too.
+- **A phone that loaded the record before the deletion** cannot bring the list back. The server refuses any new
+  practice on, or new version of, a deleted list (409 "deleted on another device"), and that phone is asked to open
+  the learner again. A new list is a new list: deleting never stops a parent typing the same words again.
 
 ## One engine
 
@@ -103,16 +137,18 @@ made and practised; the record on the server holds the list and three answers tr
 to the same account sees the list and its progress; another family gets "not found" for the pupil, its record and its
 export. **Backend (`family/test_developer.py` ParentContentTests):** the parent reads the list in full; a stranger
 gets 404; a developer sees a shared pupil's list redacted and its words pseudonymised; a developer's own pupil in full;
-the stored record is unchanged.
+the stored record is unchanged. **Deletion:** MW-8 (the shared fixture, idempotence, every version and answer
+emptied, other progress unchanged, reopening and backup); `family/test_scrub.py` (the server's rules match the
+fixture; only the parent can scrub; the record, export and developer view hold no deleted word; a stale device gets
+409); browser tests on a device (IndexedDB holds no deleted word after deletion and reload) and in a parent account
+(the server record and export hold no deleted word; a stale second phone is refused, and opening the learner again
+shows the list gone).
 
-## Not done (founder decisions)
+## Future enhancement: copying a list to another child
 
-- **One list for several children:** a list belongs to one learner. A parent with two children types it for each.
-  Sharing a list across a parent's learners needs either a parent-level store (a new table and endpoints on the
-  existing account API) or a "copy to another learner" action that writes the same event into the other learner's
-  record (no backend change). The second is the smaller step.
-- **Erasing a deleted list's words from the server** before the learner is deleted needs a new endpoint that scrubs
-  stored events; the record is append-only today.
+A list belongs to one learner, so a parent with two children types it for each. A later "copy to another child" action
+would write the list into the other child's record as a new list: the words only, never the first child's practice
+history. That needs no backend change. It is not built in this PR.
 
 **To check on a physical phone** (ANDROID_MANUAL_TEST.md §A9): the phone's file picker, the real voice, and that
 nothing is lost after closing Chrome.

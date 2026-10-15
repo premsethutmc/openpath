@@ -139,6 +139,26 @@ test("My Words: type, paste and upload a list, see problems, edit, save, practis
   await page.getByRole("button", { name: "← My Words" }).click();
   await card.getByRole("button", { name: "Delete" }).click();
   await page.getByText("No lists yet.").waitFor();
+  // deleted for real: the list's words and the typed answers are gone from the browser's stored record (every row),
+  // and a reload does not bring the list back
+  const stored = await page.evaluate(async () => {
+    const db = await new Promise((resolve, reject) => {
+      const r = indexedDB.open("openpath-english");
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+    });
+    const rows = await new Promise((resolve) => {
+      const r = db.transaction("events").objectStore("events").getAll();
+      r.onsuccess = () => resolve(r.result);
+    });
+    return JSON.stringify(rows);
+  });
+  for (const secret of ["colour", "color", "because", "becuase", "castle", "listen", "Week 3 spellings"]) assert.ok(!stored.includes(secret), `"${secret}" is still stored`);
+  assert.match(stored, /"word_list_delete"/);
+  assert.match(stored, /"removed-1"/, "the answers are kept, without their words");
+  await page.reload();
+  await page.getByRole("button", { name: "Add a word list" }).click();
+  await page.getByText("No lists yet.").waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });

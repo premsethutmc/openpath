@@ -208,10 +208,17 @@ export class Learner {
     return listId;
   }
 
-  /** Remove a list (its practice history stays in the record). An open session on it is ended. */
+  /**
+   * Delete a list for real (logic/scrub.ts): an open session on it is ended; every saved version of the list is
+   * emptied in the stored record (on this device, or on the server for a parent account); its practice history is
+   * kept without the words; then the deletion is recorded. Nothing else changes. If the content cannot be removed
+   * (for example, offline), nothing is deleted and the error says so.
+   */
   async deleteWordList(id: string): Promise<void> {
     const open = this.spelling().open;
     if (open?.event.source.type === "list" && open.event.source.id === id) await this.stopSpelling();
+    await this.repo.scrub(this.profileId, { type: "list", id });
+    await this.reload();
     await this.add({ kind: "word_list_delete", id: this.nextId(), at: this.clock(), list: id });
   }
 
@@ -284,6 +291,14 @@ export class Learner {
     const correct = response === q.answer;
     await this.add({ kind: "book_answer", id: this.nextId(), at: this.clock(), book: bookId, question: questionId, response, correct });
     return { correct, answer: q.answer };
+  }
+
+  /** Read the stored record again (after it was changed in place) and rebuild everything from it. */
+  private async reload(): Promise<void> {
+    this.events = await this.repo.load(this.profileId);
+    this.state = fold(this.content, this.events);
+    this.spellCache = null;
+    this.bookCache = null;
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
