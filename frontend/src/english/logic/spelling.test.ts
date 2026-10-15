@@ -3,7 +3,9 @@
  * learner's record (resume, reload, backup). Synthetic learners only.
  */
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
+import { REVIEWS, type BeeEntry, approvedForPilot, beeApprovedForPilot, loadPilot } from "../../../../tools/english/pilot/review.ts";
 import { loadContent } from "./content.ts";
 import type { AppEvent, SpellAnswerEvent } from "./events.ts";
 import { Learner, PilotRefusal } from "./learner.ts";
@@ -221,9 +223,40 @@ test("SB-9 in the app: a session without placement, answers recorded, the sessio
   assert.ok(parsed.ok, parsed.ok ? "" : parsed.error);
 });
 
-test("SB-10 a pilot build offers no Spelling Bee (it is not on the pilot allowlist)", async () => {
-  const pilot = loadContent({ mode: "pilot" });
-  assert.equal(bankWords(pilot).length, 0);
-  const l = await Learner.create(pilot, new MemoryRepo(), "P", "guardian", testClock(), "p-pilot");
-  await assert.rejects(l.startSpelling(), PilotRefusal);
+test("SB-10 a pilot build: the Spelling Bee's approved words, and only those; none without approvals (fail closed)", async () => {
+  // what build-english.mjs --pilot compiles: the recorded question approvals, and the Bee's own approved, checked words
+  const p = loadPilot();
+  const records = JSON.parse(readFileSync(REVIEWS, "utf8"));
+  const entries = (beeJson as unknown as { words: BeeEntry[] }).words;
+  const bee = beeApprovedForPilot(entries);
+  assert.deepEqual(bee.problems, []);
+  assert.equal(bee.keys.length, 21, "the 21 new words: owner-approved for pilot use and passing the checks");
+  const approved = [...approvedForPilot(p, records), ...bee.keys];
+  const pilot = loadContent({ mode: "pilot", approved });
+  const words = bankWords(pilot);
+  assert.equal(words.length, 100, "all 100 words in a pilot build with the recorded approvals");
+  for (let L = 1; L <= 5; L++) assert.equal(words.filter((w) => w.level === L).length, 20);
+  // a pilot learner opens the Spelling Bee directly: no placement first; practice only, never engine evidence
+  const clock = testClock();
+  const l = await Learner.create(pilot, new MemoryRepo(), "Pilot Pupil", "guardian", clock, "p-pilot");
+  await l.startSpelling();
+  const cur = l.spellingSession()!;
+  assert.equal(cur.total, 10);
+  assert.equal(cur.word!.level, 1);
+  assert.ok((await l.answerSpelling(cur.word!.word, 1)).correct);
+  assert.equal(l.events.filter((e) => e.kind === "evidence").length, 0);
+  // never a parent's own words in a pilot build
+  await assert.rejects(l.startSpelling({ type: "list", id: "list:1" }), PilotRefusal);
+  // without the Bee's own approvals, only the 79 reused words (each following its question's approval)
+  assert.equal(bankWords(loadContent({ mode: "pilot", approved: approvedForPilot(p, records) })).length, 79);
+  // an approved new word that fails the content checks is left out
+  const broken = entries.map((e) => (e.id === "bee.friend" ? { ...e, sentence: "No friend here, friend." } : e));
+  assert.deepEqual(beeApprovedForPilot(broken).problems, ["bee.friend is approved but fails the content checks"]);
+  // a word without a recorded approval is never compiled in
+  assert.ok(!beeApprovedForPilot(entries.map((e) => ({ ...e, approval: undefined }))).keys.length);
+  // no approvals at all (the --no-approvals test build): no Spelling Bee
+  const empty = loadContent({ mode: "pilot", approved: [] });
+  assert.equal(bankWords(empty).length, 0);
+  const e = await Learner.create(empty, new MemoryRepo(), "P", "guardian", testClock(), "p-empty");
+  await assert.rejects(e.startSpelling(), PilotRefusal);
 });

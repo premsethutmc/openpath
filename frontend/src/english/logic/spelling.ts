@@ -73,9 +73,10 @@ interface BeeEntry {
  * source of truth). A pilot build offers no Spelling Bee (it is not on the pilot allowlist), so none is returned there.
  */
 export function bankWords(c: AppContent): SpellWord[] {
-  if (c.gate) return [];
   const doc = beeJson as unknown as { words: BeeEntry[] };
-  return doc.words.map((e) => {
+  // a pilot build: only the words its gate allows (approved for pilot use; none without approvals)
+  const entries = c.gate ? doc.words.filter((e) => c.gate!.bee.has(e.id)) : doc.words;
+  return entries.map((e) => {
     if (e.item) {
       const it = c.ctx.content.items.get(e.item.id) as (Code & Partial<DictationItem>) | undefined;
       if (!it || it.version !== e.item.version || !it.answers?.length) throw new Error(`spelling bee: ${e.id} refers to a missing question ${e.item.id}@${e.item.version}`);

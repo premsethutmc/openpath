@@ -10,8 +10,8 @@
 - **How it relates to the 291:** it is kept apart from the 291 question approvals in `content/english/pilot/reviews.json`,
   which are unchanged. None of the 2,348 generated practice questions is approved.
 - **The checks it depends on:** `logic/spelling.test.ts` SB-1, SB-2 and SB-12 run in CI.
-- **Pilot builds do not include the Spelling Bee yet.** Adding it to the pilot allowlist is a separate change, not
-  made here.
+- **Pilot builds include the Spelling Bee:** a pilot build compiles these 21 approvals only for words that pass the
+  checks, and with no approvals it offers no Spelling Bee (see SPELLING_BEE.md).
 
 **Reference lists.** "CEW" means a *common exception word* in the English National Curriculum (Years 1–2). "Y5/6 list"
 means its statutory spelling list for Years 5 and 6.
