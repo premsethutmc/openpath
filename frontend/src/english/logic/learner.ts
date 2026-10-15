@@ -255,7 +255,13 @@ export class Learner {
     if (body.length > BOOK_LIMITS.chars) throw new Error(`the text has ${body.length.toLocaleString("en-GB")} characters; My Books takes up to ${BOOK_LIMITS.chars.toLocaleString("en-GB")}`);
     const bookId = id ?? `book:${this.events.length + 1}`;
     const old = this.books().find((b) => b.id === bookId);
-    if (!old || old.title !== t || tidyText(old.text) !== body) await this.add({ kind: "book", id: this.nextId(), at: this.clock(), book: { id: bookId, title: t, text: body } });
+    if (!old || old.title !== t || tidyText(old.text) !== body) {
+      const e: AppEvent = { kind: "book", id: this.nextId(), at: this.clock(), book: { id: bookId, title: t, text: body } };
+      // a book event has its own, larger server limit (backend OPENPATH_MAX_BOOK_EVENT_BYTES, 140,000): 30,000 characters
+      // of text are at most 120,000 bytes
+      this.fits(e, "This book", 138_000);
+      await this.add(e);
+    }
     const ex = this.bookActivities({ text: body });
     const known = new Set([...ex.spelling, ...ex.vocabulary, ...ex.comprehension].map((a) => a.id));
     await this.add({ kind: "book_review", id: this.nextId(), at: this.clock(), book: bookId, fingerprint: ex.fingerprint, approved: [...new Set(approved)].filter((a) => known.has(a)).sort() });

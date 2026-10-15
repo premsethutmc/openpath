@@ -302,7 +302,9 @@ def _check_event(event) -> dict:
         raise ValidationError({"event": "An event needs a kind."})
     if not isinstance(event.get("id"), str) or not event["id"]:
         raise ValidationError({"event": "An event needs an id."})
-    if len(json.dumps(event)) > settings.OPENPATH_MAX_EVENT_BYTES:
+    limit = settings.OPENPATH_MAX_BOOK_EVENT_BYTES if kind == "book" else settings.OPENPATH_MAX_EVENT_BYTES
+    # measured as UTF-8, as the app measures it (json.dumps would otherwise count “ as the six characters \u201c)
+    if len(json.dumps(event, ensure_ascii=False).encode()) > limit:
         raise ValidationError({"event": "This event is too large."})
     return event
 

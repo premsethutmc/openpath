@@ -194,6 +194,36 @@ class ParentContentTests(DevTestCase):
         # nothing in the stored record changed
         self.assertEqual(other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"], full)
 
+    def test_a_parents_book_is_redacted_for_a_developer_and_fits_its_own_size_limit(self):
+        other = self.parent("books@example.org")
+        meera = self.pupil(other, "Meera")
+        text = "Mia lived in a narrow house at the bottom of a steep hill. " * 1500  # about 88,000 characters
+        self.add(other, meera, "book", book={"id": "book:4", "title": "The Lantern on the Hill", "text": text})
+        self.add(other, meera, "book_review", book="book:4", fingerprint="371a85c4", approved=["s:narrow", "v:steep", "c:who:1:Mia"])
+        self.add(other, meera, "book_answer", book="book:4", question="c:who:1:Mia", response="Mia", correct=True)
+        self.add(other, meera, "spell_answer", session="sp:8", source={"type": "book", "id": "book:4"}, word={"id": "narrow", "text": "narrow"}, response="narow", correct=False, plays=1, review=False)
+        # any other kind of event keeps the ordinary limit
+        n = other.get(f"/api/pupils/{meera}/events/?subject=english").json()["count"]
+        big = {"kind": "note", "id": f"{meera}:{n + 1}", "at": "2026-10-15T10:00:00Z", "text": "x" * 40_000}
+        self.assertEqual(other.post(f"/api/pupils/{meera}/events/", {"subject": "english", "seq": n, "event": big}, format="json").status_code, 400)
+        too_big = {"kind": "book", "id": f"{meera}:{n + 1}", "at": "2026-10-15T10:00:00Z", "book": {"id": "book:9", "title": "Too long", "text": "y" * 150_000}}
+        self.assertEqual(other.post(f"/api/pupils/{meera}/events/", {"subject": "english", "seq": n, "event": too_big}, format="json").status_code, 400)
+        # the widest book the app allows (30,000 characters, each 3 bytes in UTF-8) fits
+        n = other.get(f"/api/pupils/{meera}/events/?subject=english").json()["count"]
+        wide = {"kind": "book", "id": f"{meera}:{n + 1}", "at": "2026-10-15T10:00:00Z", "book": {"id": "book:10", "title": "Wide", "text": "“" * 30_000}}
+        self.assertEqual(other.post(f"/api/pupils/{meera}/events/", {"subject": "english", "seq": n, "event": wide}, format="json").status_code, 201)
+        # the parent reads it back in full; a stranger gets nothing; a developer gets the shape only
+        self.assertEqual(other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"][3]["book"]["text"], text)
+        self.assertEqual(self.parent("stranger2@example.org").get(f"/api/pupils/{meera}/events/?subject=english").status_code, 404)
+        dev = self.developer()
+        other.patch(f"/api/pupils/{meera}/", {"shared_for_diagnostics": True}, format="json")
+        seen = dev.get(f"/api/developer/pupils/{meera}/events/").json()["events"]
+        shown = json.dumps(seen)
+        for secret in ["narrow", "steep", "Lantern", "Mia lived", "narow", "who:1:Mia"]:
+            self.assertNotIn(secret, shown)
+        self.assertEqual(seen[3]["redacted"], f"a parent's book text of {len(text)} characters")
+        self.assertEqual((seen[5]["correct"], seen[6]["correct"]), (True, False))
+
     def test_a_developers_own_pupils_are_shown_in_full(self):
         dev = self.developer()
         arun = self.pupil(dev, "Arun")

@@ -2,14 +2,15 @@
  * End-to-end: a parent's own material for a learner in a parent ACCOUNT (records on OpenPath's server), on a phone-sized
  * browser (Chromium emulating an Android phone; not a physical phone). My Words: the parent is told where lists are
  * kept, makes a list, the learner practises it, the progress belongs to that learner; another phone signed in to the
- * same account sees the list and its progress; another family cannot read any of it. Device-only learners are covered
- * by e2e/mywords.test.mjs.
+ * same account sees the list and its progress; another family cannot read any of it. My Books the same way: the text is
+ * saved with the learner's record, the parent's ticks decide what the learner sees, and the second phone has both.
+ * Device-only learners are covered by e2e/mywords.test.mjs and e2e/books.test.mjs.
  *
  *   (API on 8000, the app with the API on 4175)
  *   E2E_URL=http://127.0.0.1:4175 npm run english:e2e-parent-content
  */
 import assert from "node:assert/strict";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
 
@@ -19,6 +20,7 @@ if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const shot = async (page, name) => SHOTS && page.screenshot({ path: `${SHOTS}/parent-content-${name}.png`, fullPage: true });
 const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.625, isMobile: true, hasTouch: true };
 const PASSWORD = "a-long-family-passphrase";
+const STORY = readFileSync(new globalThis.URL("../src/english/logic/fixtures/book-lantern.txt", import.meta.url), "utf8");
 const run = Date.now().toString(36);
 const PARENT = `lists.${run}@example.org`;
 const OTHER = `stranger.${run}@example.org`;
@@ -93,7 +95,7 @@ async function advance(page, name) {
 
 let zoeId = null;
 
-test("My Words in a parent account: told where lists are kept, saved to the learner's record, practised, progress kept", async () => {
+test("My Words and My Books in a parent account: told where they are kept, saved to the learner's record, practised, progress kept", async () => {
   const { context, page, errors } = await phone();
   await register(page, PARENT);
   await addLearner(page, "Zoe");
@@ -128,11 +130,39 @@ test("My Words in a parent account: told where lists are kept, saved to the lear
   const answers = events.filter((e) => e.kind === "spell_answer");
   assert.equal(answers.length, 3);
   assert.ok(answers.every((e) => e.source.type === "list" && e.source.id === list.list.id));
+  // My Books: told where the text is kept; two spelling words and the vocabulary questions approved
+  await page.getByRole("button", { name: "← Home" }).click();
+  await page.getByRole("button", { name: "Add a book" }).click();
+  assert.match(await page.locator(".where-kept").innerText(), /Books are saved in Zoe's record in your parent account/);
+  await page.getByRole("button", { name: "Add a book" }).click();
+  await page.getByLabel("Title").fill("The Lantern on the Hill");
+  await page.getByLabel(/The book's text/).fill(STORY);
+  await page.getByRole("button", { name: "Find activities" }).click();
+  await page.locator('input[data-activity^="s:"]').nth(0).check();
+  await page.locator('input[data-activity^="s:"]').nth(1).check();
+  await page.getByRole("button", { name: "Tick all: vocabulary in context" }).click();
+  const nv = await page.locator('input[data-activity^="v:"]').count();
+  await page.getByRole("button", { name: `Save and approve ${2 + nv} activities` }).click();
+  const book = page.locator(".books li", { hasText: "The Lantern on the Hill" });
+  assert.match(await book.innerText(), new RegExp(`Approved: 2 spelling words · ${nv} questions`));
+  w = await advance(page, "Practise spelling");
+  for (let k = 0; k < 2; k++) {
+    await page.locator(".ruled input").fill(w);
+    await page.getByRole("button", { name: "Submit" }).click();
+    await page.getByRole("heading", { name: "Right!" }).waitFor();
+    if (k < 1) w = await advance(page, "Next word");
+    else await page.getByRole("button", { name: "See how you did" }).click();
+  }
+  await page.getByRole("button", { name: "Back to My Books" }).click();
+  assert.match(await book.innerText(), /spelling practised 2 of 2/);
+  const after = (await api(page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events;
+  assert.equal(after.find((e) => e.kind === "book").book.text.length, STORY.trim().length, "the whole text, in Zoe's record");
+  assert.equal(after.filter((e) => e.kind === "book_review").at(-1).approved.length, 2 + nv);
   assert.deepEqual(errors, []);
   await context.close();
 });
 
-test("another phone signed in to the same account sees the list and its progress; another family sees nothing", async () => {
+test("another phone signed in to the same account sees the list, the book and their progress; another family sees nothing", async () => {
   assert.ok(zoeId, "runs after the first test");
   const second = await phone();
   await signIn(second.page, PARENT);
@@ -140,6 +170,9 @@ test("another phone signed in to the same account sees the list and its progress
   await second.page.getByRole("button", { name: "Open My Words" }).click();
   assert.match(await second.page.locator(".word-lists li", { hasText: "Week 5" }).innerText(), /practised 3 of 3 · 2 of 3 right · 1 to review/);
   await shot(second.page, "2-second-phone");
+  await second.page.getByRole("button", { name: "← Home" }).click();
+  await second.page.getByRole("button", { name: "Open My Books" }).click();
+  assert.match(await second.page.locator(".books li", { hasText: "The Lantern on the Hill" }).innerText(), /Approved: 2 spelling words · \d+ questions · spelling practised 2 of 2/);
   assert.deepEqual(second.errors, []);
   await second.context.close();
   // another family: the pupil, the record and the export are all refused

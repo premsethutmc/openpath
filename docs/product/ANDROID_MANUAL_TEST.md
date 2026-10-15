@@ -183,6 +183,7 @@ This version contains unapproved questions and every activity. **Adults only.** 
 | A10.5 | **Answer questions** | Only the ticked questions; after each, right or "Not quite." with the answer |
 | A10.6 | Close Chrome and reopen; open My Books | The book, its ticks and its progress are still there |
 | A10.7 | **Review**, change one word in the text, **Find activities** | Every tick is cleared: the changed text needs a new review |
+| A10.8 | (App address, signed in as a parent) Add a book for a learner in the account and approve some activities; sign in on a second phone | The My Books screen says books are saved in the learner's record in your parent account; the second phone shows the book, its approvals and progress |
 
 ## Part B: safety testing of the empty pilot build (pilot address)
 
