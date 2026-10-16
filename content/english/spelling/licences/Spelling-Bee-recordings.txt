@@ -1,0 +1,11 @@
+OpenPath Spelling Bee recordings (content/english/spelling/audio/*.mp3, served as audio/*.mp3)
+
+The 200 recordings of the Spelling Bee's 100 words were made offline with Piper text-to-speech
+(https://github.com/rhasspy/piper, MIT licence), using the voice "Southern English Female (low)"
+(en-gb-southern_english_female-low). That voice was trained on the dataset "Open-source Multi-speaker
+Corpora of the English Accents in the British Isles" (OpenSLR 83, https://www.openslr.org/83/), which is
+licensed under the Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0).
+
+The recordings are shared under CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+How they were made, with the exact tools and settings: tools/english/audio/generate.ts and
+content/english/spelling/audio/bee-audio.json.

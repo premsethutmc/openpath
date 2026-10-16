@@ -65,6 +65,7 @@ const TYPES = {
   ".json": "application/json",
   ".webmanifest": "application/manifest+json",
   ".svg": "image/svg+xml",
+  ".mp3": "audio/mpeg",
   ".txt": "text/plain; charset=utf-8",
 };
 // the app's own CSP (english.html) plus what only a header can say
@@ -324,7 +325,8 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       ...base(),
       "Content-Type": TYPES[extname(file)] ?? "application/octet-stream",
       // private: never kept by shared caches; the page itself is always checked (it names the current assets)
-      "Cache-Control": html ? "no-store" : "private, max-age=3600",
+      // recordings are named by their content hash, so they never change: kept for a year by this browser only
+      "Cache-Control": html ? "no-store" : /^[\\/]audio[\\/]/.test(rel) ? "private, max-age=31536000, immutable" : "private, max-age=3600",
       ...(html ? { "Content-Security-Policy": APP_CSP } : {}),
     });
     if (req.method === "HEAD") return res.end();

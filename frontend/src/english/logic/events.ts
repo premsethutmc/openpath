@@ -273,7 +273,8 @@ export interface SpellSessionEvent {
   words: string[];
   /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
   level?: number;
-  delivery: "device_voice" | "adult_reader";
+  /** recording: the Spelling Bee's recorded audio; device_voice: the device's own voice; adult_reader: an adult reads. */
+  delivery: "recording" | "device_voice" | "adult_reader";
   /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
   scrubbed?: boolean;
 }

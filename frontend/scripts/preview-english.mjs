@@ -28,6 +28,7 @@ const TYPES = {
   ".json": "application/json",
   ".webmanifest": "application/manifest+json",
   ".svg": "image/svg+xml",
+  ".mp3": "audio/mpeg",
   ".txt": "text/plain; charset=utf-8",
   ".md": "text/plain; charset=utf-8",
 };

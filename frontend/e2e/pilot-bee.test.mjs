@@ -1,8 +1,8 @@
 /**
  * End-to-end: the Spelling Bee in a PILOT build made from the recorded approvals (build-english.mjs --pilot), on an
  * Android-sized phone (Chromium emulating 412×915; not a physical phone). A pilot learner opens the Spelling Bee
- * straight from Home, with no starting check first; all 100 approved words are there; the word is spoken and never
- * shown before the answer; the session survives a reload. The pilot boundary still holds: no parent's own words
+ * straight from Home, with no starting check first; all 100 approved words are there; the word's recording plays and the word is
+ * never shown before the answer; the session survives a reload. The pilot boundary still holds: no parent's own words
  * (My Words, My Books), no generated practice, nothing sent to another site.
  *
  *   node scripts/build-english.mjs --pilot --out=dist-english-pilot-approved
@@ -13,6 +13,7 @@ import assert from "node:assert/strict";
 import { mkdirSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
+import { clickFor, install, notInPage as hidden, spoken } from "./lib/bee.mjs";
 
 const URL = process.env.E2E_URL ?? "http://127.0.0.1:4178";
 const SHOTS = process.env.E2E_SHOTS;
@@ -26,30 +27,13 @@ before(async () => {
 });
 after(() => browser?.close());
 
-const spoken = (page) => page.evaluate(() => window.__spoken.slice());
-async function advance(page, name) {
-  const n = (await spoken(page)).length;
-  await page.getByRole("button", { name }).click();
-  await page.waitForFunction((k) => window.__spoken.length > k, n);
-  return (await spoken(page)).at(-1).split(".")[0].trim();
-}
-async function notInPage(page, word) {
-  const html = (await page.evaluate(() => document.title + document.body.outerHTML)).toLowerCase();
-  assert.ok(!new RegExp(`\\b${word.toLowerCase()}\\b`).test(html), `"${word}" is in the page before it was answered`);
-}
+/** The word the app asks for next (from the recording it plays, e2e/lib/bee.mjs). */
+const advance = async (page, name) => (await clickFor(page, name)).word;
+const notInPage = (page, word) => hidden(page, assert, word);
 
 test("pilot build: a pilot learner opens the Spelling Bee straight from Home; the approved 100 words; the boundary holds", async () => {
   const context = await browser.newContext(ANDROID);
-  await context.addInitScript(() => {
-    const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
-    window.__spoken = [];
-    window.SpeechSynthesisUtterance = class {
-      constructor(text) {
-        this.text = text;
-      }
-    };
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { getVoices: () => [v], speak: (u) => { window.__spoken.push(u.text); setTimeout(() => u.onstart?.(), 0); }, cancel: () => undefined, addEventListener: () => undefined, removeEventListener: () => undefined, speaking: false, pending: false } });
-  });
+  await install(context);
   const page = await context.newPage();
   const errors = [];
   const foreign = [];
@@ -75,8 +59,8 @@ test("pilot build: a pilot learner opens the Spelling Bee straight from Home; th
   const first = await advance(page, "Start Spelling Bee");
   await page.getByText("Word 1 of 10").waitFor();
   await notInPage(page, first);
-  await page.getByRole("button", { name: "Repeat the word" }).click();
-  assert.equal((await spoken(page)).at(-1), first);
+  assert.equal(await advance(page, "Hear it again"), first, "the speaker plays the same word again");
+  assert.deepEqual(await spoken(page), [], "recordings, not the device's voice");
   await page.locator(".ruled input").fill(first);
   await page.getByRole("button", { name: "Submit" }).click();
   await page.getByRole("heading", { name: "Right!" }).waitFor();

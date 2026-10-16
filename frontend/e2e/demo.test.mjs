@@ -169,6 +169,12 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   assert.ok(!/\/login$/.test(page.url()), "the developer page is behind the same login");
   await page.goto(URL_ + "/");
   await page.getByRole("heading", { name: "Today" }).waitFor();
+  // the Spelling Bee's recordings: served behind the same login, as MP3, cached for a year (content-hash names)
+  const clip = `/audio/${JSON.parse(readFileSync(new globalThis.URL("../../content/english/spelling/audio/bee-audio-files.json", import.meta.url), "utf8"))["bee.friend"].full}`;
+  const audio = await page.request.get(URL_ + clip);
+  assert.equal(audio.status(), 200);
+  assert.equal(audio.headers()["content-type"], "audio/mpeg");
+  assert.match(audio.headers()["cache-control"], /max-age=31536000, immutable/);
   // 8. logout: back to the login page, and the app is closed again
   await page.goto(URL_ + "/logout");
   await fits(page);
@@ -178,6 +184,7 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await page.goto(URL_ + "/");
   assert.match(page.url(), /\/login$/);
   assert.equal((await page.request.get(URL_ + "/assets/app.js")).status(), 401);
+  assert.equal((await page.request.get(URL_ + clip)).status(), 401, "and so are the recordings");
   // 9. logging in again finds the demo learner (kept in this browser), until "log out and erase"
   await page.locator("#password").fill(PASSWORD);
   await page.getByRole("button", { name: "Log in" }).click();

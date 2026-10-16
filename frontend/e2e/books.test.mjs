@@ -64,6 +64,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await context.addInitScript(() => {
     const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
     window.__spoken = [];
+    window.__beeAdvanceMs = 600000; // these tests tap Next themselves (e2e/bee.test.mjs checks the automatic next word)
     window.SpeechSynthesisUtterance = class {
       constructor(text) {
         this.text = text;
@@ -139,8 +140,10 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
     await page.getByRole("button", { name: "Submit" }).click();
     await page.getByRole("heading", { name: k === 1 ? "Not quite." : "Right!" }).waitFor();
     // spoken as "word. sentence word." (or the word alone): the sentence is the book's own
-    const mid = said === w ? "" : said.slice(w.length + 2, said.length - w.length - 2);
-    assert.ok(said === w || (said.startsWith(`${w}. `) && FLAT.includes(mid)), `the sentence spoken is from the book: ${said}`);
+    // spoken as "word. sentence word." (or "word." alone): the sentence is the book's own
+    const alone = said === `${w}.`;
+    const mid = alone ? "" : said.slice(w.length + 2, said.length - w.length - 2);
+    assert.ok(alone || (said.startsWith(`${w}. `) && FLAT.includes(mid)), `the sentence spoken is from the book: ${said}`);
     if (mid) withSentence++;
     if (k < 2) w = await advance(page, "Next word");
     else await page.getByRole("button", { name: "See how you did" }).click();
