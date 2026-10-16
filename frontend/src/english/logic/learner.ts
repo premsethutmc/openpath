@@ -19,7 +19,7 @@ import { now as perfNow, record } from "./telemetry.ts";
 import { planTrace, plannerTrace, queueTrace } from "./trace.ts";
 import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
-import type { SpellSessionEvent, SpellSource } from "./events.ts";
+import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
@@ -308,7 +308,7 @@ export class Learner {
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
-  async startSpelling(source: SpellSource = BANK, delivery: SpellSessionEvent["delivery"] = "device_voice"): Promise<void> {
+  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice"): Promise<void> {
     this.guardSpelling(source);
     const open = this.spelling().open;
     if (open) await this.stopSpelling();
@@ -318,7 +318,7 @@ export class Learner {
   }
 
   /** The open spelling session: the word to ask next (null when it is done) and the counts so far. */
-  spellingSession(): { source: SpellSource; session: string; delivery: SpellSessionEvent["delivery"]; level?: number; word: SpellWord | null; position: number; total: number; right: number; wrong: number } | null {
+  spellingSession(): { source: SpellSource; session: string; delivery: "device_voice" | "adult_reader"; level?: number; word: SpellWord | null; position: number; total: number; right: number; wrong: number } | null {
     const open = this.spelling().open;
     if (!open) return null;
     const v = sessionView(open);

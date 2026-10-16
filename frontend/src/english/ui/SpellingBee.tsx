@@ -3,8 +3,7 @@
  * One screen for every spelling source (logic/spelling.ts); the word's spelling is never in the page before the answer
  * is submitted (it is only heard, or, if nothing can be heard at all, shown to a grown-up who asks for it).
  *
- * Built for a child alone with a phone: the word plays by itself (a recording for the Spelling Bee's words, the
- * device's voice for a parent's own); one big speaker button plays it again as often as wanted, or starts it when the
+ * Built for a child alone with a phone: the word is said by itself with the browser's own voice; one big speaker button plays it again as often as wanted, or starts it when the
  * browser wants a tap first; Submit; the answer is shown and the next word follows by itself. No settings, no
  * explanations about voices. See wordPlayer.ts for how sound is played and what happens when it cannot be.
  */
@@ -12,7 +11,8 @@ import { type FormEvent, useEffect, useRef, useState } from "react";
 import type { SpellSource } from "../logic/events.ts";
 import type { Learner } from "../logic/learner.ts";
 import { BANK, LEVEL_NAMES, type SpellWord, avoiding, levelOf, sourceKey, sourceProgress } from "../logic/spelling.ts";
-import { type PlayOutcome, onPlaying, playWord, prefetch, stopWord } from "./wordPlayer.ts";
+import { speechPossible } from "./speech.ts";
+import { type PlayOutcome, onPlaying, onVoicesChanged, playWord, stopWord } from "./wordPlayer.ts";
 
 type Result = { correct: boolean; word: SpellWord; typed: string };
 
@@ -33,8 +33,7 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
   const [problem, setProblem] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const plays = useRef(0);
-  // the Spelling Bee's words have recordings; a parent's own words are said by the device's voice
-  const delivery = source.type === "bank" ? "recording" : "device_voice";
+  const delivery = "device_voice";
 
   const begin = async () => {
     setProblem(null);
@@ -148,11 +147,6 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
           <BeeAsk
             key={`${cur.session}:${cur.position}`}
             word={cur.word}
-            next={(() => {
-              const o = st.open;
-              const id = o ? o.event.words[o.answers.length + 1] : undefined;
-              return id ? words.find((w) => w.id === id) : undefined;
-            })()}
             voice={voice}
             autoplay={!speechOff}
             speechOff={speechOff}
@@ -188,7 +182,7 @@ type Status = "loading" | "playing" | "ready" | "tap" | "failed";
  * again; the speaker then plays the word alone, as often as wanted. If the browser wants a tap first, the speaker
  * asks for one; if nothing can be heard at all, a grown-up can be shown the word, as a last resort only.
  */
-function BeeAsk({ word, next, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, onPlay, onSubmit }: { word: SpellWord; next?: SpellWord; voice: SpeechSynthesisVoice | null; autoplay: boolean; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; busy: boolean; safe: (...options: string[]) => string; onPlay: () => void; onSubmit: (typed: string) => void }) {
+function BeeAsk({ word, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, onPlay, onSubmit }: { word: SpellWord; voice: SpeechSynthesisVoice | null; autoplay: boolean; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; busy: boolean; safe: (...options: string[]) => string; onPlay: () => void; onSubmit: (typed: string) => void }) {
   const [status, setStatus] = useState<Status>(autoplay ? "loading" : "ready");
   const [heardOnce, setHeardOnce] = useState(false);
   const [failures, setFailures] = useState(0);
@@ -198,12 +192,11 @@ function BeeAsk({ word, next, voice, autoplay, speechOff, onTurnSpeechOn, busy, 
   const full = word.sentence ? `${word.word}. ${word.sentence} ${word.word}.` : `${word.word}.`;
   const play = async (kind: "full" | "word") => {
     setStatus("loading");
-    const r: PlayOutcome = await playWord({ url: word.audio?.[kind], text: kind === "full" ? full : `${word.word}.` }, voice);
+    const r: PlayOutcome = await playWord(kind === "full" ? full : `${word.word}.`, voice);
     if (r === "played") {
       onPlay();
       setHeardOnce(true);
-      setStatus("playing");
-      prefetch(next?.audio?.full);
+      setStatus((s) => (s === "loading" ? "playing" : s));
     } else if (r === "blocked") setStatus("tap");
     else {
       setFailures((n) => n + 1);
@@ -217,6 +210,13 @@ function BeeAsk({ word, next, voice, autoplay, speechOff, onTurnSpeechOn, busy, 
     input.current?.focus({ preventScroll: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // voices that arrive late: if the word has not been heard yet and speech failed, try again once they are listed
+  useEffect(() => {
+    if (heardOnce || status !== "failed") return;
+    return onVoicesChanged(() => void play("full"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [heardOnce, status]);
+  const noSpeech = !speechPossible();
   const speaker = () => void play(heardOnce ? "word" : "full");
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -252,7 +252,7 @@ function BeeAsk({ word, next, voice, autoplay, speechOff, onTurnSpeechOn, busy, 
           </button>
         )}
       </div>
-      {failures >= 2 && !adult && (
+      {(failures >= 2 || noSpeech) && !adult && (
         <p className="small">
           <button type="button" className="link" onClick={() => setAdult(true)}>
             {safe("Still can't hear it? A grown-up can read it to you", "Ask a grown-up to read it", "👤")}

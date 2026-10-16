@@ -1,7 +1,7 @@
 /**
  * End-to-end: the Spelling Bee in a PILOT build made from the recorded approvals (build-english.mjs --pilot), on an
  * Android-sized phone (Chromium emulating 412×915; not a physical phone). A pilot learner opens the Spelling Bee
- * straight from Home, with no starting check first; all 100 approved words are there; the word's recording plays and the word is
+ * straight from Home, with no starting check first; all 100 approved words are there; the word is said and is
  * never shown before the answer; the session survives a reload. The pilot boundary still holds: no parent's own words
  * (My Words, My Books), no generated practice, nothing sent to another site.
  *
@@ -13,7 +13,7 @@ import assert from "node:assert/strict";
 import { mkdirSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
-import { clickFor, install, notInPage as hidden, spoken } from "./lib/bee.mjs";
+import { clickFor, install, notInPage as hidden, overlaps } from "./lib/bee.mjs";
 
 const URL = process.env.E2E_URL ?? "http://127.0.0.1:4178";
 const SHOTS = process.env.E2E_SHOTS;
@@ -27,7 +27,7 @@ before(async () => {
 });
 after(() => browser?.close());
 
-/** The word the app asks for next (from the recording it plays, e2e/lib/bee.mjs). */
+/** The word the app asks the voice to say next (e2e/lib/bee.mjs). */
 const advance = async (page, name) => (await clickFor(page, name)).word;
 const notInPage = (page, word) => hidden(page, assert, word);
 
@@ -60,7 +60,7 @@ test("pilot build: a pilot learner opens the Spelling Bee straight from Home; th
   await page.getByText("Word 1 of 10").waitFor();
   await notInPage(page, first);
   assert.equal(await advance(page, "Hear it again"), first, "the speaker plays the same word again");
-  assert.deepEqual(await spoken(page), [], "recordings, not the device's voice");
+  assert.equal(await overlaps(page), 0);
   await page.locator(".ruled input").fill(first);
   await page.getByRole("button", { name: "Submit" }).click();
   await page.getByRole("heading", { name: "Right!" }).waitFor();

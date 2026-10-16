@@ -1,13 +1,13 @@
 /**
  * End-to-end: the Spelling Bee on an Android-sized phone (Chromium emulating 412×915; not a physical phone), against
- * the production build in device-only mode, with its REAL recordings played by the browser's audio element.
+ * the production build in device-only mode. Words are said with the browser's own speech (speechSynthesis), replaced by
+ * a stand-in that behaves like the ones on phones (e2e/lib/bee.mjs): an empty voice list, voices that arrive late,
+ * speech refused without a tap, speech that fails or stays silent, or no speech at all.
  *
  *   npm run english:build && npm run english:preview &
  *   E2E_URL=http://127.0.0.1:4174 npm run english:e2e-bee
  *
- * Which word is being asked is learnt only from the recording the app plays (its file, through the manifest), never
- * from the page; see e2e/lib/bee.mjs. Chromium's autoplay rules are real here too: one test runs a browser that
- * refuses any sound not started by a tap.
+ * Which word is being asked is learnt only from what the app asks the voice to say, never from the page.
  */
 import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, rmSync } from "node:fs";
@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
-import { CLIPS, after as afterAction, asked, audioEvents, clickFor, install, notInPage, played, spoken, waitEnded, wordAfter } from "./lib/bee.mjs";
+import { after as afterAction, asked, clickFor, install, notInPage, overlaps, said, spoken, wordAfter } from "./lib/bee.mjs";
 
 const URL = process.env.E2E_URL ?? "http://127.0.0.1:4174";
 const SHOTS = process.env.E2E_SHOTS;
@@ -38,10 +38,10 @@ before(async () => {
 });
 after(() => browser?.close());
 
-/** A phone-sized browser context with the audio spy. profile: a folder for a persistent profile (a real browser restart). */
-async function phone({ advanceMs, profile = null, on = browser, dropSpeech = 0, strictAutoplay = false, voices = true } = {}) {
+/** A phone-sized browser context with the stand-in voice (options: e2e/lib/bee.mjs). profile: a persistent profile (a real browser restart). */
+async function phone({ profile = null, on = browser, ...speech } = {}) {
   const context = profile ? await chromium.launchPersistentContext(profile, { ...ANDROID, executablePath: process.env.CHROMIUM_PATH || undefined }) : await on.newContext(ANDROID);
-  await install(context, { advanceMs, dropSpeech, strictAutoplay, voices });
+  await install(context, speech);
   const errors = [];
   const foreign = [];
   const watch = (p) => {
@@ -80,9 +80,11 @@ async function submit(page, text) {
   await page.getByRole("button", { name: "Submit" }).click();
   await page.locator(".bee-feedback").waitFor();
 }
-const speaker = (page) => page.locator(".bee-speaker");
 
-test("Spelling Bee: straight from Home, the real recording plays by itself, repeat, sentence, feedback, resume, review", async () => {
+const speaker = (page) => page.locator(".bee-speaker");
+const noDeviceMessage = async (page) => assert.ok(!/can't say words|cannot say words|voice|settings/i.test(await page.locator("main").innerText()), "no message about the device, its voices or settings");
+
+test("Spelling Bee: straight from Home, the word is said by itself, repeat, sentence, feedback, resume, review", async () => {
   const { context, page, errors, foreign } = await phone();
   await newLearner(page, "Bee Tester");
   // 1. Home: the Spelling Bee first, with no starting check needed; General English still there, below
@@ -92,36 +94,30 @@ test("Spelling Bee: straight from Home, the real recording plays by itself, repe
   await fits(page);
   await tappable(page);
   await shot(page, "1-home");
-  // 2. Start: the first word's full recording (word, sentence, word) plays by itself, for real, to its end
+  // 2. Start: the word, its sentence and the word again are said by themselves, with the listed local English voice
   const first = await clickFor(page, "Start Spelling Bee");
-  assert.equal(first.via, "recording");
-  assert.equal(first.kind, "full", "the first time: the word, its sentence, the word again");
+  assert.match(first.script, new RegExp(`^${first.word}\\. .+ ${first.word}\\.$`), "the first time: the word, its sentence, the word again");
+  assert.equal(first.voice, "Test English (UK)");
   await page.getByText("Word 1 of 10").waitFor();
-  const events = await waitEnded(page, first.file);
-  assert.ok(events.some(([ev, f]) => ev === "playing" && f === first.file), "the browser really played it");
-  const end = events.find(([ev, f]) => ev === "ended" && f === first.file);
-  assert.ok(Math.abs(end[2] - first.ms) < 400, `it played to its end (${end[2]} ms of ${first.ms} ms)`);
-  // the spelling is nowhere in the page, and the recording's address does not spell it
   await notInPage(page, assert, first.word);
-  assert.ok(!first.file.includes(first.word), "the file name is a content hash, not the word");
   await page.getByLabel("Hear it again").waitFor();
   await fits(page);
   await tappable(page);
   await shot(page, "2-word");
-  // 3. the speaker again: the word alone; again and again; "Hear it in a sentence": the full recording
+  // 3. Repeat: the speaker again says the word alone, as often as wanted; "Hear it in a sentence" says it all again
   for (let k = 0; k < 3; k++) {
     const again = await afterAction(page, () => speaker(page).click());
-    assert.deepEqual([again.id, again.kind], [first.id, "word"], "the same word, alone");
+    assert.deepEqual([again.word, again.script], [first.word, `${first.word}.`], "the same word, alone");
   }
   const sentence = await clickFor(page, "Hear it in a sentence");
-  assert.deepEqual([sentence.id, sentence.kind], [first.id, "full"]);
+  assert.equal(sentence.script, first.script);
   // 4. right (capital letters and a space do not matter): feedback with the spelling
   await submit(page, first.word.toUpperCase() + " ");
   await page.getByRole("heading", { name: "Right!" }).waitFor();
   assert.match(await page.locator(".bee-feedback").innerText(), new RegExp(first.word, "i"));
   // 5. wrong: the spelling is shown, with what was typed, and it goes on the review list
   const second = await clickFor(page, "Next word");
-  assert.notEqual(second.id, first.id);
+  assert.notEqual(second.word, first.word);
   await page.getByText("Word 2 of 10").waitFor();
   await notInPage(page, assert, second.word);
   await submit(page, `${second.word}x`);
@@ -131,7 +127,7 @@ test("Spelling Bee: straight from Home, the real recording plays by itself, repe
   assert.match(fb, /review list/);
   assert.match(await page.locator(".bee-progress").innerText(), /Word 2 of 10/, "the counter stays on the answered word");
   await shot(page, "3-feedback-wrong");
-  // 6. two more, then a reload in the middle: Home offers to carry on, at the same word, with its recording
+  // 6. two more, then a reload in the middle: Home offers to carry on, at the same word
   let w = await clickFor(page, "Next word");
   for (let k = 0; k < 2; k++) {
     await notInPage(page, assert, w.word);
@@ -141,7 +137,7 @@ test("Spelling Bee: straight from Home, the real recording plays by itself, repe
   const fifth = w;
   await page.reload();
   const resumed = await clickFor(page, /Carry on Spelling Bee \(word 5 of 10\)/);
-  assert.equal(resumed.id, fifth.id, "the same word after a reload");
+  assert.equal(resumed.word, fifth.word, "the same word after a reload");
   w = resumed;
   // 7. finish: the session ends by itself after 10 words, with a summary
   for (let k = 0; k < 6; k++) {
@@ -163,125 +159,53 @@ test("Spelling Bee: straight from Home, the real recording plays by itself, repe
   await page.close();
   const again = await context.newPage();
   await again.goto(URL);
-  assert.equal((await clickFor(again, "Start Spelling Bee")).id, second.id, "the misspelt word comes back first");
-  assert.deepEqual(await spoken(again), [], "the device's voice was never needed: every word was a recording");
+  assert.equal((await clickFor(again, "Start Spelling Bee")).word, second.word, "the misspelt word comes back first");
+  assert.equal(await overlaps(again), 0);
   assert.deepEqual(foreign, [], "nothing is sent anywhere");
   assert.deepEqual(errors, []);
   await context.close();
 });
 
-test("the next word comes by itself; the old recording stops first; locking the screen stops the sound", async () => {
-  const { context, page, errors } = await phone({ advanceMs: null }); // the app's own timing
+test("the next word comes by itself; the old word is stopped first, never spoken over; locking the screen stops it", async () => {
+  const { context, page, errors } = await phone({ advanceMs: null, speakMs: 4000 }); // the app's own timing; long speech
   await newLearner(page, "Auto Advance");
   const first = await clickFor(page, "Start Spelling Bee");
-  // answer while the long recording is still playing: it stops at once, and the next word follows without a tap
-  await page.waitForFunction((f) => window.__audioEvents.some(([ev, src]) => ev === "playing" && src === f), first.file);
+  // answer while the word is still being said: it stops at once, and the next word follows without a tap
+  await page.getByLabel("Hear it again").waitFor();
+  assert.equal(await page.evaluate(() => window.speechSynthesis.speaking), true);
   const n = await asked(page);
   await page.locator(".bee-answer input").fill(first.word);
   await page.locator(".bee-answer input").press("Enter");
   await page.getByRole("heading", { name: "Right!" }).waitFor();
-  assert.ok((await audioEvents(page)).some(([ev, f]) => ev === "pause" && f === first.file), "the first word's recording stopped when the answer was given");
+  assert.equal(await page.evaluate(() => window.speechSynthesis.speaking), false, "the first word stopped when the answer was given");
   const second = await wordAfter(page, n); // no Next tap: it came by itself
-  assert.notEqual(second.id, first.id);
+  assert.notEqual(second.word, first.word);
   await page.getByText("Word 2 of 10").waitFor();
-  const ev = await audioEvents(page);
-  const lastFirst = ev.map(([e, f], i) => (f === first.file ? i : -1)).filter((i) => i >= 0).at(-1);
-  const firstSecond = ev.findIndex(([e, f]) => e === "playing" && f === second.file);
-  assert.ok(lastFirst < firstSecond || firstSecond === -1, "nothing of the old word is heard after the new one starts");
-  // the phone locks: the sound stops
-  await page.waitForFunction((f) => window.__audioEvents.some(([e, src]) => e === "playing" && src === f), second.file);
+  // tapping the speaker again and again while it speaks: each tap replaces the last, nothing is said over anything
+  await page.getByLabel("Hear it again").waitFor();
+  for (let k = 0; k < 4; k++) await speaker(page).click();
+  await page.getByLabel("Hear it again").waitFor();
+  assert.equal(await overlaps(page), 0, "speech never overlapped");
+  // the phone locks: the speech stops
   await page.evaluate(() => {
     Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "hidden" });
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  assert.equal(await page.evaluate(() => window.__audio.paused), true);
+  assert.equal(await page.evaluate(() => window.speechSynthesis.speaking), false);
   assert.deepEqual(errors, []);
   await context.close();
 });
 
-test("a phone that refuses sound no tap started: the speaker asks for one tap, and the tap plays the word", async () => {
-  // Chrome on a phone refuses sound that no recent tap started (a fresh page, or a word started by a timer). Headless
-  // Chromium does not, even with --autoplay-policy flags, so the spy applies that rule, using the browser's real record
-  // of taps (navigator.userActivation); the recording itself still plays for real.
-  const { context, page, errors } = await phone({ advanceMs: 6500, strictAutoplay: true }); // the tap's activation lasts about 5 s
-  await newLearner(page, "Strict Phone");
-  const first = await clickFor(page, "Start Spelling Bee");
-  await submit(page, first.word);
-  // the next word starts from a timer after the activation has run out: refused
-  const second = await wordAfter(page, await asked(page));
-  await page.getByText("Word 2 of 10").waitFor();
-  assert.ok((await audioEvents(page)).some(([ev, f, why]) => ev === "rejected" && f === second.file && why === "NotAllowedError"));
-  // no technical message: the big speaker says "Tap to hear the word"
-  await page.getByLabel("Tap to hear the word").waitFor();
-  await notInPage(page, assert, second.word);
-  await shot(page, "5-tap");
-  const tapped = await afterAction(page, () => speaker(page).click());
-  assert.equal(tapped.id, second.id, "the tap plays the word being asked");
-  assert.equal(tapped.kind, "full", "the first hearing is the word, its sentence and the word again");
-  await waitEnded(page, tapped.file);
-  await page.getByLabel("Hear it again").waitFor();
-  // a reload (a fresh page: no tap yet): the word waits for a tap, then plays
-  await page.reload();
-  const resumed = await clickFor(page, /Carry on Spelling Bee \(word 2 of 10\)/);
-  assert.equal(resumed.id, second.id);
-  assert.deepEqual(errors, []);
-  await context.close();
-});
-
-test("a recording that cannot load: the device's voice says it instead; if nothing can be heard, a grown-up can read it", async () => {
-  const { context, page, errors } = await phone({ dropSpeech: 100 });
-  // the network fails for recordings only
-  await context.route("**/audio/*.mp3", (r) => r.abort("failed"));
-  await newLearner(page, "No Network");
-  const n0 = await asked(page);
-  await page.getByRole("button", { name: "Start Spelling Bee" }).click();
-  const first = await wordAfter(page, n0);
-  assert.equal(first.via, "recording");
-  // the recording was asked for, failed, and the voice was asked for the same word (it then stays silent here)
-  const said = await wordAfter(page, n0 + 1);
-  assert.equal(said.via, "voice");
-  assert.match(said.script, new RegExp(`^${first.word}\\. .+ ${first.word}\\.$`), "the voice says the word, its sentence and the word");
-  await page.getByLabel("Tap to try again").waitFor();
-  await notInPage(page, assert, first.word);
-  // a second try fails too: only then is a grown-up offered, as a small link, never as the first thing
-  await afterAction(page, () => speaker(page).click());
-  await page.getByRole("button", { name: /A grown-up can read it to you/ }).waitFor();
-  await notInPage(page, assert, first.word);
-  await shot(page, "6-failed");
-  // the network is back: one tap plays the recording
-  await context.unroute("**/audio/*.mp3");
-  const back = await afterAction(page, () => speaker(page).click());
-  assert.equal(back.via, "recording");
-  assert.equal(back.id, first.id);
-  await waitEnded(page, back.file);
-  assert.deepEqual(errors, []);
-  await context.close();
-});
-
-test("a slow network: the speaker shows it is getting the word, then the word plays", async () => {
-  const { context, page, errors } = await phone();
-  await context.route("**/audio/*.mp3", async (r) => {
-    await new Promise((res) => setTimeout(res, 1500));
-    await r.continue();
-  });
-  await newLearner(page, "Slow Network");
-  const first = await clickFor(page, "Start Spelling Bee");
-  await page.getByLabel("Getting the word…").waitFor();
-  await waitEnded(page, first.file);
-  await page.getByLabel("Hear it again").waitFor();
-  assert.deepEqual(errors, []);
-  await context.close();
-});
-
-test("a phone that lists no voices (like Chrome on many Samsung phones): the Bee plays its recordings, and a parent's list is still spoken", async () => {
-  const { context, page, errors } = await phone({ voices: false });
+test("an empty voice list (like Chrome on many Samsung phones): the word is still said, with the browser's default voice", async () => {
+  const { context, page, errors } = await phone({ voices: "none" });
   await newLearner(page, "Samsung Phone");
-  // the Spelling Bee: recordings, no message about the device
   const first = await clickFor(page, "Start Spelling Bee");
-  assert.equal(first.via, "recording");
-  await waitEnded(page, first.file);
-  assert.ok(!/can't say words|cannot say words|An adult can read/i.test(await page.locator("main").innerText()), "no message about the device's voice");
-  // a parent's list: no voice is listed, so the app asks the phone's default voice (no voice chosen) to say each word
+  assert.equal(first.voice, null, "no voice chosen: the browser's default speaks");
+  assert.equal(first.lang, "en-GB");
+  await page.getByLabel("Hear it again").waitFor();
+  await noDeviceMessage(page);
+  assert.equal((await afterAction(page, () => speaker(page).click())).word, first.word, "Repeat works too");
+  // a parent's list is said the same way
   await page.getByRole("button", { name: "← Home" }).click();
   await page.getByRole("button", { name: "Add a word list" }).click();
   await page.getByRole("button", { name: "New word list" }).click();
@@ -290,11 +214,129 @@ test("a phone that lists no voices (like Chrome on many Samsung phones): the Bee
   await page.getByRole("button", { name: "Check the words" }).click();
   await page.getByRole("button", { name: "Save the list" }).click();
   const w = await clickFor(page, "Practise");
-  assert.equal(w.via, "voice");
   assert.ok(["castle", "island"].includes(w.word));
+  assert.equal(w.voice, null);
   await page.getByLabel("Hear it again").waitFor();
   await notInPage(page, assert, w.word);
-  assert.ok(!/can't say words|An adult can read/i.test(await page.locator("main").innerText()));
+  await noDeviceMessage(page);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("voices that arrive late: the first word is said straight away with the default voice, later ones with the listed voice", async () => {
+  const { context, page, errors } = await phone({ voices: "later" });
+  await newLearner(page, "Slow Voices");
+  const first = await clickFor(page, "Start Spelling Bee");
+  assert.equal(first.voice, null, "not waiting for a voice list: said at once with the default voice");
+  await page.getByLabel("Hear it again").waitFor();
+  await page.evaluate(() => window.__listVoices());
+  const again = await afterAction(page, () => speaker(page).click());
+  assert.equal(again.word, first.word);
+  assert.equal(again.voice, "Test English (UK)", "once listed, the local English voice is used");
+  await noDeviceMessage(page);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("voices that arrive late after speech failed: the word is tried again by itself when they arrive", async () => {
+  const { context, page, errors } = await phone({ voices: "later", failures: 1 }); // the default voice fails before the list
+  await newLearner(page, "Late Voices");
+  await page.getByRole("button", { name: "Start Spelling Bee" }).click();
+  await page.getByLabel("Tap to try again").waitFor();
+  const n = await asked(page);
+  await page.evaluate(() => window.__listVoices());
+  const w = await wordAfter(page, n); // no tap: said when the voices arrived
+  assert.equal(w.voice, "Test English (UK)");
+  await page.getByLabel("Hear it again").waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("speech refused because no tap started it: the speaker asks for one tap, and that tap says the word", async () => {
+  // Chrome on a phone refuses speech no recent tap started (a fresh page, or a word started by a timer). The stand-in
+  // applies that rule: speech within 5 s of a real tap or key press only.
+  const { context, page, errors } = await phone({ advanceMs: 6500, needsTap: true });
+  await newLearner(page, "Strict Phone");
+  const first = await clickFor(page, "Start Spelling Bee");
+  await submit(page, first.word);
+  // the next word starts from a timer after the tap has expired: refused, with no technical message
+  await page.getByText("Word 2 of 10").waitFor();
+  await page.getByLabel("Tap to hear the word").waitFor();
+  assert.ok((await said(page)).some((s) => s.outcome === "not-allowed"));
+  await noDeviceMessage(page);
+  await shot(page, "5-tap");
+  const tapped = await afterAction(page, () => speaker(page).click());
+  assert.notEqual(tapped.word, first.word);
+  assert.match(tapped.script, new RegExp(`^${tapped.word}\\. `), "the first hearing is the word, its sentence and the word again");
+  await notInPage(page, assert, tapped.word);
+  await page.getByLabel("Hear it again").waitFor();
+  // a reload (a fresh page, no tap yet): Carry on is a tap, so the word is said
+  await page.reload();
+  assert.equal((await clickFor(page, /Carry on Spelling Bee \(word 2 of 10\)/)).word, tapped.word);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("speech that fails: one tap tries again; only after two failures is a grown-up offered, as a small link", async () => {
+  // each play tries the listed voice and then the default one, so 4 failures are two failed plays
+  const { context, page, errors } = await phone({ failures: 4 });
+  await newLearner(page, "Failing Voice");
+  await page.getByRole("button", { name: "Start Spelling Bee" }).click();
+  await page.getByLabel("Tap to try again").waitFor();
+  assert.equal(await page.getByRole("button", { name: /A grown-up can read it to you/ }).count(), 0, "not offered after one failure");
+  await speaker(page).click();
+  await page.getByRole("button", { name: /A grown-up can read it to you/ }).waitFor();
+  await shot(page, "6-failed");
+  // the answer box is there all along; the next tap works (the voice recovered)
+  assert.equal(await page.locator(".bee-answer input").isEnabled(), true);
+  const w = await afterAction(page, () => speaker(page).click());
+  await notInPage(page, assert, w.word);
+  await page.getByLabel("Hear it again").waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("a listed voice that fails: the same tap tries the browser's default voice", async () => {
+  const { context, page, errors } = await phone({ voiceFails: true });
+  await newLearner(page, "Broken Voice");
+  const first = await clickFor(page, "Start Spelling Bee");
+  assert.equal(first.voice, null, "said with the default voice");
+  const attempts = await said(page);
+  assert.deepEqual(attempts.slice(0, 2).map((s) => [s.voice, s.outcome]), [["Test English (UK)", "synthesis-failed"], [null, "spoken"]]);
+  await page.getByLabel("Hear it again").waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("speech that stays silent (a cold start): the speaker asks for a tap, and the tap says the word", async () => {
+  const { context, page, errors } = await phone({ silent: 1 });
+  await newLearner(page, "Cold Start");
+  await page.getByRole("button", { name: "Start Spelling Bee" }).click();
+  await page.getByLabel(/Tap to (try again|hear the word)/).waitFor({ timeout: 6000 });
+  const w = await afterAction(page, () => speaker(page).click());
+  await page.getByLabel("Hear it again").waitFor();
+  await notInPage(page, assert, w.word);
+  assert.equal(await overlaps(page), 0, "the silent one was cleared, not left to start later over the next");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("a browser with no speech at all: a small grown-up link straight away; the child can still type and go on", async () => {
+  const { context, page, errors } = await phone({ noSpeech: true });
+  await newLearner(page, "No Speech");
+  await page.getByRole("button", { name: "Start Spelling Bee" }).click();
+  await page.getByText("Word 1 of 10").waitFor();
+  const link = page.getByRole("button", { name: /A grown-up can read it to you/ });
+  await link.waitFor();
+  await noDeviceMessage(page);
+  await shot(page, "7-no-speech");
+  await link.click();
+  await page.getByRole("button", { name: "Show the word to read aloud" }).click();
+  const word = (await page.locator(".adult-word b").innerText()).trim();
+  await page.getByRole("button", { name: /Hide it/ }).click();
+  await notInPage(page, assert, word);
+  await submit(page, word);
+  await page.getByRole("heading", { name: "Right!" }).waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });
@@ -323,14 +365,14 @@ test("Closing the whole browser and starting it again: the Spelling Bee carries 
     ({ context, page } = await phone({ profile }));
     await page.goto(URL);
     const resumed = await clickFor(page, /Carry on Spelling Bee \(word 3 of 10\)/);
-    assert.equal(resumed.id, third.id, "the same word after a browser restart");
+    assert.equal(resumed.word, third.word, "the same word after a browser restart");
     assert.match(await page.locator(".bee-progress").innerText(), /Word 3 of 10[\s\S]*✓ 1[\s\S]*✗ 1/);
     // and on, with the keyboard only: type, Enter to submit, Enter again for the next word
     await page.locator(".bee-answer input").fill(third.word);
     await page.locator(".bee-answer input").press("Enter");
     await page.getByRole("heading", { name: "Right!" }).waitFor();
     const fourth = await afterAction(page, () => page.keyboard.press("Enter"));
-    assert.notEqual(fourth.id, third.id);
+    assert.notEqual(fourth.word, third.word);
     await page.getByText("Word 4 of 10").waitFor();
     await context.close();
   } finally {
@@ -338,8 +380,4 @@ test("Closing the whole browser and starting it again: the Spelling Bee carries 
   }
 });
 
-test("every recording the app can ask for is one of the 200 checked recordings", () => {
-  assert.equal(CLIPS.size, 200);
-  assert.ok([...CLIPS.values()].every((c) => c.ms > 0 && c.word.length > 0));
-  void played;
-});
+void spoken;

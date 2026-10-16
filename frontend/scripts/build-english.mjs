@@ -28,7 +28,6 @@ import * as esbuild from "esbuild";
 
 import { reviewStatus, reviewSummary } from "../../packages/english-core/src/index.ts";
 import { REVIEWS, SPELLING_BEE, approvedForPilot, beeApprovedForPilot, loadPilot } from "../../tools/english/pilot/review.ts";
-import { AUDIO_DIR, checkBeeAudio, readManifest } from "../../tools/english/audio/bee-audio.ts";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const mode = process.argv.includes("--pilot") ? "pilot" : process.argv.includes("--preview") ? "preview" : "development";
@@ -105,23 +104,6 @@ await writeFile(
   template.replace("<!--styles-->", `<link rel="stylesheet" href="assets/app.css?v=${version}" />`).replace("<!--script-->", `<script type="module" src="assets/app.js?v=${version}"></script>`),
 );
 
-// the Spelling Bee's recordings: every word must have both, each saying exactly its current script, or the build fails
-// (tools/english/audio/bee-audio.ts). Copied as static files, fetched only when a word is played; never in app.js.
-const beeAudio = readManifest();
-const audioProblems = checkBeeAudio(beeAudio);
-if (audioProblems.length) {
-  console.error(`Spelling Bee recordings: ${audioProblems.length} problem${audioProblems.length === 1 ? "" : "s"} (make them again: tools/english/audio/generate.ts)\n${audioProblems.join("\n")}`);
-  process.exit(1);
-}
-await mkdir(`${out}/audio`, { recursive: true });
-let audioBytes = 0;
-for (const clips of Object.values(beeAudio.clips))
-  for (const c of [clips.word, clips.full]) {
-    await copyFile(`${AUDIO_DIR}/${c.file}`, `${out}/audio/${c.file}`);
-    audioBytes += c.bytes;
-  }
-console.log(`Spelling Bee recordings: ${Object.keys(beeAudio.clips).length} words, ${2 * Object.keys(beeAudio.clips).length} files, ${Math.round(audioBytes / 1024)} KB (served on demand)`);
-
 await mkdir(`${out}/licences`, { recursive: true });
 const notices = await readdir(licences);
 for (const f of notices) await copyFile(`${licences}/${f}`, `${out}/licences/${f}`);
@@ -151,8 +133,6 @@ await writeFile(
   Cache-Control: no-cache
 /index.html
   Cache-Control: no-cache
-/audio/*
-  Cache-Control: public, max-age=31536000, immutable
 `,
 );
 
@@ -169,8 +149,6 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   // never the account API: a pupil's record must not be cached, and must always be current
   if (e.request.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/")) return;
-  // nor recordings: the browser's own media cache handles them (and the partial requests audio players make)
-  if (url.pathname.includes("/audio/")) return;
   e.respondWith(
     caches.match(e.request, { ignoreSearch: url.pathname.endsWith("/") || url.pathname.endsWith("index.html") }).then((hit) => {
       const net = fetch(e.request).then((res) => { if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone())); return res; }).catch(() => hit || caches.match("index.html"));

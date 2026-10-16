@@ -138,25 +138,20 @@ pilot build made from the recorded approvals).
 
 ## Tests
 
-**Recordings (`logic/bee-audio.test.ts` BA-1 to BA-3):**
-- all 100 approved words have both recordings, present, intact (sha256), MP3, saying exactly the word and its
-  sentence, and named so the name never spells the word;
-- the app plays each word's own files, in development and pilot builds;
-- the build's check fails on a missing word, a missing or damaged file, a stale script, or a word-named file.
-
-**Real audio in the browser (`e2e/bee.test.mjs`, Chromium playing the real MP3s):**
-- the first recording plays by itself, to its end;
-- the speaker repeats it, and "Hear it in a sentence" plays the long version;
-- moving on, submitting or locking the screen stops the old sound;
-- the next word comes by itself;
-- a phone that refuses sound no tap started (Chrome's rule applied with the browser's real record of taps, because
-  headless Chromium does not enforce it): one tap plays it;
-- a recording that cannot load: the voice instead, then "Tap to try again", then the grown-up link, then the recording
-  again once the network is back;
-- a slow network;
-- a phone that lists no voices (Samsung-like): recordings for the Bee, and a parent's list still spoken;
-- reload, a full browser restart, and keyboard-only use.
-
+**Speech in the browser (`e2e/bee.test.mjs`, with a stand-in speechSynthesis that behaves like a phone's):**
+- the word, its sentence and the word again are said by themselves; the speaker repeats the word, and "Hear it in a
+  sentence" says it all again;
+- **an empty voice list** (Samsung-like): the word is still said, with no voice chosen (the browser's default), for the
+  Bee and for a parent's list;
+- **delayed initialisation:** voices that are listed late are used from then on; the first word does not wait for them;
+  if speech failed before they arrived, the word is tried again by itself when they arrive;
+- **playback failures:** speech refused without a tap ("not-allowed"); speech that errors; a listed voice that errors
+  (the same tap retries with the default voice); speech that stays silent (a cold start); no speechSynthesis at all;
+- **manual retry:** in each case one tap on the speaker says the word; only after two failed tries (or at once, when
+  the browser has no speech) does a small grown-up link appear, and the child can type all along;
+- **no overlap:** a new word, Submit, repeated taps and the screen locking stop the old speech first; the stand-in
+  counts any utterance started over another, and there are none;
+- the next word comes by itself; reload, a full browser restart and keyboard-only use.
 
 **Unit tests (`logic/spelling.test.ts`):**
 - 100 words, 20 per level, unique;
@@ -187,38 +182,32 @@ pilot build made from the recorded approvals).
 - no requests to other sites;
 - General English still works.
 
-**Sound: recorded audio (16 October 2026).** The 100 words are no longer spoken by the phone's text-to-speech. Each word
-has two MP3 recordings, made offline with free tools, in one consistent British English voice:
-- the word, its sentence and the word again, which plays by itself when a word appears and from **Hear it in a sentence**;
-- the word alone, which plays from the big speaker button.
-
-They are 200 files and about 3.0 MB in all: a median of 23 KB for a sentence recording and 6 KB for a word, mono MP3 at
-32 kbit/s. They are served as static files beside the app, fetched only when played (and the next word's ahead of time),
-and cached by the browser. They are not part of app.js, not in PostgreSQL, and use no external service. The build
-fails if any word lacks a recording, or if a recording no longer matches its word and sentence
-(`tools/english/audio/bee-audio.ts`). How they are made: `tools/english/audio/generate.ts`. Licence:
-`content/english/spelling/licences/Spelling-Bee-recordings.txt` (CC BY-SA 4.0).
+**Sound: the browser's own voice (16 October 2026).** Words are said with the browser's speech synthesis
+(`ui/wordPlayer.ts`). No recordings, audio files or external services are used.
+- **No voice list is required.** A listed local English voice (British first) is used when there is one, looked up again
+  on every play, so voices that arrive late are used from then on. Otherwise no voice is chosen and the browser's
+  default speaks (language en-GB). A network voice is never chosen on purpose.
+- **One word at a time.** Anything still speaking is cancelled before a new word, on Submit, when the next word comes,
+  and when the phone locks. Events from an older utterance are ignored.
+- **Every play is checked.** If speech has not started within 3 s, or reports an error, the play counts as refused or
+  failed (and a late start is cancelled). A listed voice that errors is tried once more with the default voice.
 
 **What the child sees.**
-- A big speaker button, the answer box and **Submit**. Each word plays by itself.
-- **The speaker:** a tap plays the word again, as often as wanted.
-- **If the phone refuses sound until a tap** (Chrome's autoplay rule), the speaker says **Tap to hear the word**.
-- **If a recording cannot load** (offline, slow, missing):
-  - the phone's own voice says the word instead, when it can;
-  - otherwise the speaker says **Tap to try again**;
-  - only after two failed tries does a small link offer a grown-up reading.
+- A big speaker button, the answer box and **Submit**. Each word is said by itself when it appears.
+- **The speaker:** a tap says the word again, as often as wanted; **Hear it in a sentence** says the sentence again.
+- **If the phone refuses speech until a tap** (Chrome's autoplay rule), the speaker says **Tap to hear the word**; if
+  speech failed, **Tap to try again**. One tap retries.
+- **If speech genuinely fails** (two failed tries, or a browser without speech at all), a small link appears:
+  "Still can't hear it? A grown-up can read it to you". There are no settings to visit and no messages about voices.
 - **After Submit:** the answer is shown and the next word comes by itself. Right answers show for 1.6 s and wrong ones
   for 3.5 s; **Next word** skips the wait.
-- **Stopping sound:** a new word, Submit or the phone locking stops the sound first.
-- **No messages about the device's voice.**
 
-**Why Android showed "This device can't say words aloud".** The app spoke only through the browser's speech
-synthesis, and only with a voice that the browser *listed* as a local English voice, found within 1.5 s. Chrome on
-many Android phones, Samsung's among them, lists no voices (or lists them late) while still speaking with the phone's
-default engine. So the app decided the phone could not speak and fell back to "an adult reads". This is most likely,
-but it was not confirmed on the founder's phone. The recordings remove the dependency for the 100 words. For a parent's
-own words (My Words, My Books), the app now asks the phone's default voice to speak even when no voice is listed
-(`speakAny` in `ui/speech.ts`), and tells whether speech actually started.
+**Why Android showed "This device can't say words aloud".** The app spoke only with a voice that the browser *listed*
+as a local English voice, found within 1.5 s. Chrome on many Android phones, Samsung's among them, lists no voices (or
+lists them late) while still speaking with the phone's default engine. So the app decided the phone could not speak and
+fell back to "an adult reads". This is the most likely cause, but it was not confirmed on the founder's phone. The
+Spelling Bee, My Words and My Books now always try to speak, with or without a listed voice. (The General English
+starting check still uses its own voice check, unchanged.)
 
 **Closing the browser.** A browser test closes the whole browser (a persistent profile) mid-session and starts it
 again: Home offers **Carry on** at the same word.

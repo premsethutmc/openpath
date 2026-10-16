@@ -22,7 +22,6 @@ import { normaliseAnswer } from "../../../../packages/english-core/src/index.ts"
 import type { AppContent, Code, DictationItem } from "./content.ts";
 import type { AppEvent, SpellAnswerEvent, SpellEndEvent, SpellSessionEvent, SpellSource } from "./events.ts";
 import beeJson from "../../../../content/english/spelling/spelling-bee.json";
-import beeAudioJson from "../../../../content/english/spelling/audio/bee-audio-files.json";
 
 export const SPELLING = {
   sessionSize: 10,
@@ -56,17 +55,7 @@ export interface SpellWord {
   source: SpellSource;
   /** Where the word comes from and whether it is approved, in words (shown to adults only). */
   status: string;
-  /**
-   * Recordings (the Spelling Bee's words): `full` says the word, its sentence and the word again; `word` the word alone.
-   * Paths relative to the app, named by content hash (never the word); fetched only when played. Words from a parent's
-   * list or book have none, and are spoken by the device's voice instead.
-   */
-  audio?: { word: string; full: string };
 }
-
-/** The recordings' files, by Spelling Bee word id (audio/bee-audio-files.json, the app's copy of bee-audio.json; checked by the build). */
-const AUDIO = beeAudioJson as unknown as Record<string, { word: string; full: string }>;
-const audioFor = (id: string) => (AUDIO[id] ? { word: `audio/${AUDIO[id].word}`, full: `audio/${AUDIO[id].full}` } : undefined);
 
 interface BeeEntry {
   id: string;
@@ -81,7 +70,7 @@ interface BeeEntry {
 
 /**
  * The Spelling Bee's 100 words. Reused dictation questions take their word and sentence from the dictation bank (one
- * source of truth). A pilot build offers only the words its gate allows (approved for pilot use). Each has recordings.
+ * source of truth). A pilot build offers only the words its gate allows (approved for pilot use).
  */
 export function bankWords(c: AppContent): SpellWord[] {
   const doc = beeJson as unknown as { words: BeeEntry[] };
@@ -91,9 +80,9 @@ export function bankWords(c: AppContent): SpellWord[] {
     if (e.item) {
       const it = c.ctx.content.items.get(e.item.id) as (Code & Partial<DictationItem>) | undefined;
       if (!it || it.version !== e.item.version || !it.answers?.length) throw new Error(`spelling bee: ${e.id} refers to a missing question ${e.item.id}@${e.item.version}`);
-      return { id: e.id, word: it.answers[0], variants: it.answers.slice(1), sentence: it.sentence, level: e.level, source: BANK, status: e.status, audio: audioFor(e.id) };
+      return { id: e.id, word: it.answers[0], variants: it.answers.slice(1), sentence: it.sentence, level: e.level, source: BANK, status: e.status };
     }
-    return { id: e.id, word: e.word!, variants: e.variants ?? [], sentence: e.sentence, say: e.say, level: e.level, source: BANK, status: e.status, audio: audioFor(e.id) };
+    return { id: e.id, word: e.word!, variants: e.variants ?? [], sentence: e.sentence, say: e.say, level: e.level, source: BANK, status: e.status };
   });
 }
 

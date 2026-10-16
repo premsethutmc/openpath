@@ -1,120 +1,138 @@
 /**
  * Shared helpers for the Spelling Bee browser tests.
  *
- * Audio is REAL: the app's own <audio> element plays the real MP3 recordings in Chromium (headless Chromium decodes
- * MP3 and fires "playing" and "ended" like a browser on a phone). The test only watches: it wraps
- * HTMLMediaElement.prototype.play to note which file was asked for and what happened (a spy; playback is untouched),
- * and learns which word is being asked from the recording's file name, through the manifest
- * (content/english/spelling/audio/bee-audio.json) - never from the page.
+ * Words are said with the browser's own speech (speechSynthesis). Headless Chromium has no voices and no sound, so a
+ * stand-in speechSynthesis replaces it before the app loads. It behaves like the ones on phones, as configured:
  *
- * Speech synthesis (a parent's own words) is a stand-in that records what it was asked to say: headless Chromium has
- * no voices. It proves the app asked for the right text, not that a phone's voice says it.
+ *   voices        "en" (one local en-GB voice listed), "none" (an empty voice list, like many Samsung phones), or
+ *                 "later": the list is empty until the test calls window.__listVoices(), then the voice appears and
+ *                 "voiceschanged" fires (voices that load late)
+ *   needsTap      refuse speech ("not-allowed") unless a real tap or key press came in the last 5 s, the rule Chrome on a
+ *                 phone applies (navigator.userActivation cannot be used to judge it here: Playwright's own page
+ *                 evaluations count as user gestures)
+ *   failures      the next N utterances fail with "synthesis-failed"
+ *   voiceFails    every utterance with a chosen voice fails (the default voice still works)
+ *   silent        the next N utterances are silently dropped: no start, no error (a cold start on some phones)
+ *   noSpeech      the browser has no speechSynthesis at all
+ *   speakMs       how long each utterance "speaks" for
+ *
+ * It records what it was asked to say (text, chosen voice, language, what happened) and counts overlaps: speak() called
+ * while another utterance is still speaking and was not cancelled first. It proves what the app asked for, not that a
+ * phone's voice says it. Which word is being asked is learnt only from what the app asked to be said, never from the page.
  */
-import { readFileSync } from "node:fs";
 
-const manifest = JSON.parse(readFileSync(new URL("../../../content/english/spelling/audio/bee-audio.json", import.meta.url), "utf8"));
-/** file name -> { id, kind, word, script, ms } */
-export const CLIPS = new Map();
-for (const [id, c] of Object.entries(manifest.clips)) for (const kind of ["word", "full"]) CLIPS.set(c[kind].file, { id, kind, word: c[kind].script.split(".")[0].trim(), script: c[kind].script, ms: c[kind].ms });
-
-/**
- * Install the spies and stand-ins before the app loads. advanceMs: how long the answer stays before the next word
- * (window.__beeAdvanceMs; null leaves the app's own timing). dropSpeech: utterances the stand-in voice silently drops.
- */
-export async function install(context, { advanceMs = 600_000, dropSpeech = 0, voices = true, strictAutoplay = false } = {}) {
+export async function install(context, { advanceMs = 600_000, voices = "en", needsTap = false, failures = 0, voiceFails = false, silent = 0, noSpeech = false, speakMs = 300 } = {}) {
   await context.addInitScript(
-    ({ advanceMs, dropSpeech, voices, strictAutoplay }) => {
+    ({ advanceMs, voices, needsTap, failures, voiceFails, silent, noSpeech, speakMs }) => {
       if (advanceMs !== null) window.__beeAdvanceMs = advanceMs;
-      window.__drop = dropSpeech;
-      window.__spoken = [];
-      window.__played = [];
-      window.__asked = [];
-      window.__audioEvents = [];
-      // the spy: note each play() and its outcome; the real play() still does the work
-      const play = HTMLMediaElement.prototype.play;
-      HTMLMediaElement.prototype.play = function () {
-        const file = (this.src || "").split("/").pop();
-        window.__played.push(file);
-        window.__asked.push(["recording", file]);
-        window.__audio = this;
-        if (!this.__watched) {
-          this.__watched = true;
-          for (const ev of ["playing", "ended", "pause", "error"]) this.addEventListener(ev, () => window.__audioEvents.push([ev, (this.src || "").split("/").pop(), Math.round(this.currentTime * 1000)]));
-        }
-        // headless Chromium plays any sound; a phone's Chrome refuses sound that no recent tap started. strictAutoplay
-        // applies that rule with the browser's own record of taps (navigator.userActivation, set by real clicks)
-        if (strictAutoplay && !navigator.userActivation?.isActive) {
-          window.__audioEvents.push(["rejected", file, "NotAllowedError"]);
-          return Promise.reject(new DOMException("play() can only be started by a tap", "NotAllowedError"));
-        }
-        const p = play.call(this);
-        p.catch((e) => window.__audioEvents.push(["rejected", file, e.name]));
-        return p;
-      };
+      window.__said = [];
+      window.__overlaps = 0;
+      window.__fail = failures;
+      window.__silent = silent;
+      if (noSpeech) {
+        // as in a browser without it: the names are not there at all
+        delete window.speechSynthesis;
+        delete Window.prototype.speechSynthesis;
+        delete window.SpeechSynthesisUtterance;
+        delete window.SpeechSynthesisErrorEvent;
+        return;
+      }
+      let lastTap = -1e9;
+      for (const t of ["pointerdown", "keydown", "click"]) window.addEventListener(t, (e) => e.isTrusted && (lastTap = performance.now()), true);
       const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
+      let listed = voices === "en";
+      const listeners = new Set();
+      window.__listVoices = () => {
+        listed = true;
+        listeners.forEach((f) => f(new Event("voiceschanged")));
+      };
       window.SpeechSynthesisUtterance = class {
         constructor(text) {
           this.text = text;
+          this.voice = null;
+          this.lang = "";
         }
       };
-      Object.defineProperty(window, "speechSynthesis", {
-        configurable: true,
-        value: {
-          getVoices: () => (voices ? [v] : []),
-          speak: (u) => {
-            window.__spoken.push(u.text);
-            window.__asked.push(["voice", u.text]);
-            if (!(window.__drop > 0 && window.__drop--)) setTimeout(() => u.onstart?.(), 0);
-          },
-          cancel: () => undefined,
-          resume: () => undefined,
-          addEventListener: () => undefined,
-          removeEventListener: () => undefined,
-          speaking: false,
-          pending: false,
+      let current = null; // the utterance speaking now
+      let timer = null;
+      const synth = {
+        speaking: false,
+        pending: false,
+        getVoices: () => (listed ? [v] : []),
+        addEventListener: (t, f) => t === "voiceschanged" && listeners.add(f),
+        removeEventListener: (t, f) => listeners.delete(f),
+        resume: () => undefined,
+        cancel: () => {
+          if (!current) return;
+          const u = current;
+          current = null;
+          clearTimeout(timer);
+          synth.speaking = false;
+          u.onerror?.({ error: "interrupted" });
         },
-      });
+        speak: (u) => {
+          const rec = { text: u.text, voice: u.voice ? u.voice.name : null, lang: u.lang, outcome: "" };
+          window.__said.push(rec);
+          if (current) window.__overlaps++;
+          const fail = (error) => {
+            rec.outcome = error;
+            setTimeout(() => u.onerror?.({ error }), 5);
+          };
+          if (needsTap && performance.now() - lastTap > 5000) return fail("not-allowed");
+          if (voiceFails && u.voice) return fail("synthesis-failed");
+          if (window.__fail > 0) {
+            window.__fail--;
+            return fail("synthesis-failed");
+          }
+          if (window.__silent > 0) {
+            window.__silent--;
+            rec.outcome = "dropped";
+            return;
+          }
+          rec.outcome = "spoken";
+          current = u;
+          synth.speaking = true;
+          setTimeout(() => current === u && u.onstart?.(), 5);
+          timer = setTimeout(() => {
+            if (current !== u) return;
+            current = null;
+            synth.speaking = false;
+            u.onend?.();
+          }, speakMs);
+        },
+      };
+      Object.defineProperty(window, "speechSynthesis", { configurable: true, value: synth });
     },
-    { advanceMs, dropSpeech, voices, strictAutoplay },
+    { advanceMs, voices, needsTap, failures, voiceFails, silent, noSpeech, speakMs },
   );
 }
 
-/** How many words have been asked for so far (recordings played plus things said). */
-export const asked = (page) => page.evaluate(() => window.__asked.length);
-export const played = (page) => page.evaluate(() => window.__played.slice());
-export const spoken = (page) => page.evaluate(() => window.__spoken.slice());
-export const audioEvents = (page) => page.evaluate(() => window.__audioEvents.slice());
+/** Everything the app asked to be said: [{ text, voice, lang, outcome }]. */
+export const said = (page) => page.evaluate(() => window.__said.slice());
+/** Only the texts that were actually spoken. */
+export const spoken = (page) => page.evaluate(() => window.__said.filter((s) => s.outcome === "spoken").map((s) => s.text));
+export const overlaps = (page) => page.evaluate(() => window.__overlaps);
+export const asked = (page) => page.evaluate(() => window.__said.length);
 
-/** The word asked for right after the first `n` requests (waits for it): from the recording's file, or from what the voice was asked to say. */
+/** The word in the first utterance spoken after the first `n` requests (waits for it). */
 export async function wordAfter(page, n) {
-  await page.waitForFunction((k) => window.__asked.length > k, n);
-  const [via, value] = await page.evaluate((k) => window.__asked[k], n);
-  if (via === "recording") {
-    const c = CLIPS.get(value);
-    if (!c) throw new Error(`played ${value}, which is not a Spelling Bee recording`);
-    return { ...c, via, file: value };
-  }
-  return { word: value.split(".")[0].trim(), via, script: value };
+  await page.waitForFunction((k) => window.__said.slice(k).some((s) => s.outcome === "spoken"), n);
+  const s = await page.evaluate((k) => window.__said.slice(k).find((x) => x.outcome === "spoken"), n);
+  return { word: s.text.split(".")[0].trim(), script: s.text, voice: s.voice, lang: s.lang };
 }
 
-/** Do something, then return the word it made the app ask for. */
+/** Do something, then return the word it made the app say. */
 export async function after(page, action) {
   const n = await asked(page);
   await action();
   return wordAfter(page, n);
 }
 
-/** Click a button by name and return the word asked for next. */
+/** Click a button by name and return the word said next. */
 export const clickFor = (page, name) => after(page, () => page.getByRole("button", { name }).click());
 
 /** The word must not be anywhere in the page (text, attributes, title) before it is answered. */
 export async function notInPage(page, assert, word) {
   const html = (await page.evaluate(() => document.title + document.body.outerHTML)).toLowerCase();
   assert.ok(!new RegExp(`\\b${word.toLowerCase()}\\b`).test(html), `"${word}" is in the page before it was answered`);
-}
-
-/** Wait until the shared audio element has played a file to its end; returns its events. */
-export async function waitEnded(page, file, timeout = 15_000) {
-  await page.waitForFunction((f) => window.__audioEvents.some(([ev, src]) => ev === "ended" && src === f), file, { timeout });
-  return audioEvents(page);
 }
