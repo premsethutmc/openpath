@@ -1,0 +1,138 @@
+<title>Adaptive Spelling Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>/*CSS*/</style>
+<main class="page">
+  <header>
+    <h1>Adaptive Spelling Prototype</h1>
+    <p class="lede">A friendly spelling game on top, careful evidence underneath. Try it in the phone: listen, type letter by letter, wait for a clue or ask for one, get a word wrong on purpose.</p>
+    <div class="status"><span>Phase 1 · design prototype</span><span class="warn">Not in the app · nothing merged or deployed</span></div>
+  </header>
+
+  <section aria-labelledby="try">
+    <h2 id="try">Try it</h2>
+    <p class="small" style="margin-bottom:14px">Sample words: friend, preferred, necessary, their. The word is spoken with your browser's voice after your first tap. Use “4× faster” to see the clue timing without waiting. Try “prefered” for preferred, “there” for their, “neccessary” for necessary.</p>
+    <div id="prototype"></div>
+  </section>
+
+  <section aria-labelledby="journey">
+    <h2 id="journey">The learner's journey</h2>
+    <pre class="mermaid">
+flowchart TD
+  A[Word opens] --> B[Word is said by itself<br/>or one tap: Tap to hear]
+  B --> C[Child types, letter by letter<br/>thinking timer runs quietly]
+  C -->|8 s| D[Offer: hear it in a sentence]
+  C -->|15 s| E[Offer: what it means]
+  C -->|25 s| F[Offer: first letter]
+  F -->|only when asked| G[One more letter<br/>never the whole word]
+  D --> C
+  E --> C
+  F --> C
+  G --> C
+  C --> H{Submit: right?}
+  H -->|yes| I[Yes! The word<br/>next word comes by itself]
+  H -->|no, first time| J{Same slip on 2+ words?}
+  J -->|yes| K[Targeted help<br/>One letter is doubled]
+  J -->|no| L[Left-to-right help<br/>The start is right: pref...]
+  J -->|a real word that sounds the same| M[A different word<br/>sentence and meaning]
+  K --> N[Try again]
+  L --> N
+  M --> N
+  N --> H2{Submit: right?}
+  H2 -->|yes| I
+  H2 -->|no| O[Write it together<br/>word shown, child copies it]
+  O --> I
+  I --> P[(Evidence record:<br/>independent, assisted or guided)]
+    </pre>
+  </section>
+
+  <section aria-labelledby="timer">
+    <h2 id="timer">Timer and clues</h2>
+    <div class="prose">
+      <p><b>Recommended default.</b> A thin ring around the clue button (the light bulb) fills slowly towards the next offer. There are no numbers, no countdown and no warning sounds. The ring measures active thinking time only. It pauses while the word is being said, while feedback is on screen, when the app is hidden or the phone is locked, and when a grown-up pauses it. It does not reset when a clue is taken; the next offer simply waits at least 7 seconds. Offers also wait until the child has stopped typing for 3 seconds, so a child who is working is never interrupted.</p>
+      <p>The bulb can be tapped at any time. The timer decides only when OpenPath gently <i>offers</i> help (the bulb glows and a small bubble asks “Want the first letter?”). Nothing is ever given automatically, and the whole word is never revealed by a clue.</p>
+    </div>
+    <div class="table-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Active time</th><th>Level</th><th>What the child gets, if they tap</th><th>Counts as</th></tr></thead>
+        <tbody>
+          <tr><td class="num">0 s</td><td>0 · Independent</td><td>The word is said (for words that sound like others, such as <i>their</i>, the sentence too, because the word alone is ambiguous)</td><td><span class="pill yes">independent</span></td></tr>
+          <tr><td class="num">8 s</td><td>1 · Context</td><td>The sentence is said, and shown with the word blanked out</td><td><span class="pill yes">independent</span> sentence reveals no letters</td></tr>
+          <tr><td class="num">15 s</td><td>2 · Meaning</td><td>A short meaning: “liked one thing more than another”</td><td><span class="pill yes">independent</span> meaning reveals no letters</td></tr>
+          <tr><td class="num">25 s</td><td>3 · First letter</td><td>A letter pattern: <code>p _ _ _ _ _ _ _ _</code></td><td><span class="pill part">assisted</span></td></tr>
+          <tr><td class="num">on request</td><td>4 · More letters</td><td>One more letter per tap, at least 4 s apart; at most all but the last letter</td><td><span class="pill part">assisted</span>, or <span class="pill no">guided</span> once half the letters are shown</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:10px">These timings are starting hypotheses, not validated thresholds. A grown-up can choose “Give more time” (all offers 60% later) or “Only when asked” (no offers, no ring), and can hide the ring.</p>
+    <div class="table-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Option explored</th><th>Choice</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Count upward, or a progress ring</td><td>Ring, no digits</td><td>Seconds invite comparison and pressure. A ring that fills towards “help is here” reads as a friendly promise.</td></tr>
+          <tr><td>Always visible, or only when help is ready</td><td>Visible, very faint until an offer</td><td>A ring that suddenly appears is a surprise that pulls attention. A faint one that brightens is predictable.</td></tr>
+          <tr><td>Reset or continue after a clue</td><td>Continue, next offer ≥ 7 s later</td><td>Resetting would look like a penalty for asking. Continuing with a gap stops clues piling up.</td></tr>
+          <tr><td>Pause during audio</td><td>Yes, and during feedback and when hidden</td><td>Listening is not thinking time lost; a locked phone is not slowness.</td></tr>
+          <tr><td>Configurable for accessibility</td><td>Yes, by a grown-up</td><td>Some children type slowly or use assistive input. Timing must never stand in for ability.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="input">
+    <h2 id="input">How the input stops whole-word suggestions</h2>
+    <div class="prose">
+      <p>The child types with the phone's own keyboard into a real text box that sits invisibly over the letter tiles. OpenPath keeps its own copy of the answer and, after every change, compares the box with that copy:</p>
+      <ul>
+        <li><b>One new letter at the end</b> is accepted (this is how ordinary typing and Android composition arrive).</li>
+        <li><b>Letters removed from the end</b> are accepted (Backspace, or Backspace held down).</li>
+        <li><b>Anything else is rejected</b> and the box returns to the child's own letters: a paste or drop, a tapped keyboard suggestion, autocorrect replacing the word, several letters at once, or a letter put in the middle. The cursor is kept at the end.</li>
+      </ul>
+      <p>Comparing values works the same for every keyboard. Key events are not used, because Android keyboards report most keys as “Unidentified”. The browser's own hints are also set: autocomplete, autocorrect, capitalisation and spell check are all off.</p>
+      <p>A rejection is never counted against the child. The tiles give a small shake. After two rejections a quiet line says “Type one letter at a time”. Each rejection is recorded only for diagnosis, as <code>rejectedInputs</code>.</p>
+      <p><b>Not yet verified on a real phone.</b> Samsung Keyboard and Gboard may still show a suggestion strip; they ignore some of the browser's hints. The prototype's keyboard buttons send the same events a phone does, and the unit tests cover them. Real behaviour still has to be checked on the Samsung phone before anything is built.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="evidence">
+    <h2 id="evidence">The evidence record for one word</h2>
+    <div class="prose">
+      <p>One compact record per word, shown live in the prototype under “What OpenPath records”. It is a proposed new event, <code>spell_attempt_v2</code>. Today's Spelling Bee answers are not evidence for the learning engine, and this design keeps it that way: no mastery calculation changes in this phase.</p>
+    </div>
+    <div class="table-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th>Field</th><th>Today</th><th>What exists, what is missing</th></tr></thead>
+        <tbody>
+          <tr><td>Target word and capability</td><td><span class="pill part">partly</span></td><td><code>spell_answer</code> has the word's id, spelling and level. 79 of the 100 Bee words link to a dictation item with a capability, but <code>bankWords</code> drops that link.</td></tr>
+          <tr><td>Letters entered and revisions</td><td><span class="pill no">missing</span></td><td>Only the final typed answer is kept.</td></tr>
+          <tr><td>First independent answer</td><td><span class="pill part">partly</span></td><td>The Bee allows one answer per word, so it is always the first; there are no retries.</td></tr>
+          <tr><td>Active thinking time</td><td><span class="pill no">missing</span></td><td>Left out deliberately: <code>events.ts</code> says durations are not recorded. Needs your decision.</td></tr>
+          <tr><td>Audio repetitions</td><td><span class="pill yes">yes</span></td><td><code>plays</code> on <code>spell_answer</code>.</td></tr>
+          <tr><td>Clues requested, letters revealed</td><td><span class="pill no">missing</span></td><td>None for the Bee. The engine's <code>hint</code> event (level, type, reveals-answer) exists for the doubling journey and is a good model.</td></tr>
+          <tr><td>Final correctness</td><td><span class="pill yes">yes</span></td><td>Exact match after normalising.</td></tr>
+          <tr><td>Independent or assisted</td><td><span class="pill part">engine only</span></td><td>The engine splits <code>evidence</code> from <code>assisted_response</code>; the Bee has no such split.</td></tr>
+          <tr><td>Possible error patterns</td><td><span class="pill part">engine only</span></td><td>The engine tags only wrong forms an author listed (<code>prefered → no_doubling</code>), plus a typo check. It calls a misconception supported after 2 different questions. The Bee does not analyse answers. The prototype compares letters directly.</td></tr>
+          <tr><td>Needs a later re-check</td><td><span class="pill part">partly</span></td><td>The Bee's review list (0, 1, 3, 7 days) is triggered by wrong answers only. Words finished with help would need to join it.</td></tr>
+          <tr><td>Rejected keyboard input</td><td><span class="pill no">missing</span></td><td>New. For diagnosis only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="decide">
+    <h2 id="decide">Decisions for you</h2>
+    <ol class="decisions">
+      <li><div><b>The timer as a faint ring on the clue button</b>No numbers; it pauses automatically and continues after a clue. The alternatives are above.</div></li>
+      <li><div><b>Offer timings of 8, 15 and 25 seconds as the starting point</b>Plus “Give more time” and “Only when asked” for grown-ups.</div></li>
+      <li><div><b>Sentence and meaning still count as independent</b>Neither reveals letters. From the first letter on, a word counts as assisted. Once half its letters are shown, it counts as guided practice, not assessment.</div></li>
+      <li><div><b>Recording active thinking time</b>This reverses today's rule of not recording durations. It would be used for help timing and reports only, never for mastery or ability.</div></li>
+      <li><div><b>Two tries, then “write it together”</b>The word is shown and copied once. The alternative is a third try with more letters.</div></li>
+      <li><div><b>Where meanings come from</b>Each word needs a child-friendly meaning. Either write and review them, or start from the word bank's dictionary glosses (337 of 818 words have one; adult wording).</div></li>
+      <li><div><b>Targeted help after the same slip on 2 different words</b>This is the same bar the engine already uses for a supported misconception. With less evidence, help goes left to right.</div></li>
+      <li><div><b>Revealed letters shown as a pattern above the answer</b>This shows the word's length from the first-letter clue on. The alternative is filling letters into the child's answer, which mixes the child's letters with given ones.</div></li>
+      <li><div><b>Words that sound alike say their sentence from the start</b>For example <i>their</i>, <i>there</i> and <i>they're</i>.</div></li>
+      <li><div><b>The grown-up view lives under Progress</b>It is not on the child's screen.</div></li>
+      <li><div><b>A real-phone check of letter-by-letter input before any build</b>On Samsung Keyboard and Gboard.</div></li>
+    </ol>
+  </section>
+</main>
+<script>/*JS*/</script>
