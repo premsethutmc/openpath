@@ -1,0 +1,21 @@
+name: E003 actual-ledger research
+on:
+  push:
+    branches: [research/e003-actual-ledger-comparison]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  e003:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+      - name: Compare baseline and robust using actual ledger
+        run: node tools/english/research/e003.ts | tee e003-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e003-actual-ledger-results
+          path: e003-results.json

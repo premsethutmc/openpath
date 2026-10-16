@@ -392,3 +392,18 @@ jobs:
             tools/english/out/simulation-*
             tools/english/out/bank-coverage.*
           if-no-files-found: ignore
+
+  research-e003:
+    name: E003 actual-ledger comparison (research only)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22.18.0"
+      - name: Execute paired synthetic comparison
+        run: node tools/english/research/e003.ts | tee e003-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e003-actual-ledger-results
+          path: e003-results.json
