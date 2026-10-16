@@ -201,3 +201,47 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px s
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ------------------------------------------------------------------ round 2: start, counting, letters without length */
+.start { min-height: 700px; display: grid; align-content: center; justify-items: center; gap: 16px; padding: 24px; text-align: center; }
+.start-kicker { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--violet-text); }
+.start h2 { font-size: 26px; }
+.start-btn { min-width: 220px; font-size: 24px; padding: 18px 28px; }
+.clue-letters { align-items: center; }
+.clue-letters .clue-tag.starts { width: auto; height: auto; font-size: 12px; margin-right: 6px; }
+.clue-letters .more { width: auto; font-size: 26px; color: var(--sun); }
+.link-btn { justify-self: start; border: 0; background: none; padding: 4px 0; font: 700 16px var(--ui); color: var(--violet-text); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.badge { display: inline-block; font-size: 13px; font-weight: 800; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+.badge.big { font-size: 17px; padding: 6px 14px; }
+.c-independent { background: var(--mint); color: var(--mint-text); }
+.c-assisted { background: var(--sun-wash); color: var(--sun); }
+.c-guided { background: var(--lilac); color: var(--violet-text); }
+.c-not_completed { background: var(--line); color: var(--muted); }
+.gu-word { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.gu-detail { display: block; width: 100%; }
+.gu-note { background: var(--card); border: 1px dashed var(--border); border-radius: 12px; padding: 8px 12px; }
+.counted { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; }
+.try-list { border-top: 1px solid var(--line); padding-top: 8px; }
+.open-child { display: inline-flex; margin-top: 14px; }
+.open-child a { font-weight: 800; color: #fff; background: var(--violet); padding: 10px 18px; border-radius: 14px; text-decoration: none; }
+
+/* on a phone: the prototype is the screen itself, without the drawn phone around it */
+@media (max-width: 520px) {
+  .phone { max-width: none; padding: 0; background: none; box-shadow: none; border-radius: 0; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); width: calc(100% + 2 * max(16px, env(safe-area-inset-left, 0px))); }
+  .phone-screen { border-radius: 0; }
+  .phone-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 6px; }
+  .phone-bar button { color: var(--muted); }
+  .phone-bar button.on { background: var(--lilac); color: var(--violet-text); }
+}
+/* "#child": only the child's screen */
+.child-only .page > header,
+.child-only .page > section:not(:has(#prototype)),
+.child-only .page > section > h2,
+.child-only .page > section > p,
+.child-only .controls { display: none; }
+.child-only .page { padding-block: 0; max-width: 520px; }
+.child-only .phone { max-width: none; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.child-only .phone-screen { border-radius: 0; }
+.child-only .phone-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 6px; }
+.child-only .phone-bar button { color: var(--muted); }
+.child-only .phone-bar button.on { background: var(--lilac); color: var(--violet-text); }

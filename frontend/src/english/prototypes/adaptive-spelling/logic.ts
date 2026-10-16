@@ -131,8 +131,10 @@ export function takeClue(c: ClueState, word: string, activeSec: number): ClueSta
   return { level: 4, revealed: Math.min(c.revealed + 1, maxReveal(word)), lastClueAt: activeSec };
 }
 
-/** The letter pattern shown once letters are revealed: "p r e _ _ _ _ _ _". */
-export const pattern = (word: string, revealed: number) => [...word].map((ch, i) => (i < revealed ? ch : "_"));
+/** The letters given so far, from the start: shown as "p r e …", open-ended, so the word's length is never shown. */
+export const givenLetters = (word: string, revealed: number) => [...word.slice(0, revealed)];
+/** Exactly which letters were given (position in the word and letter), for the evidence record. */
+export const revealedList = (word: string, revealed: number) => givenLetters(word, revealed).map((letter, index) => ({ index, letter }));
 
 /* ------------------------------------------------------------------ after a wrong answer */
 
@@ -212,8 +214,18 @@ export interface PastSlip {
   pattern: PatternId;
 }
 
-/** Different words with the same slip before it counts as "supported" (the same bar as misconceptions.ts). */
-export const SUPPORTED_AFTER = 2;
+/**
+ * Different words with the same slip before it is treated as a possible learning difficulty (and gets targeted help).
+ * The same bar as "supported" in misconceptions.ts. It is never a confirmed misconception: only a reason to help.
+ */
+export const REPEATED_AFTER = 2;
+
+/** How many different words show this slip (this word included). */
+export const wordsWithSlip = (pattern: PatternId, word: string, history: PastSlip[]) => {
+  const words = new Set(history.filter((h) => h.pattern === pattern).map((h) => h.word));
+  words.add(word);
+  return words.size;
+};
 
 export type Help =
   | { kind: "targeted"; pattern: PatternId; keep: number; marker: number | null }
@@ -221,7 +233,7 @@ export type Help =
   | { kind: "from_start"; keep: number };
 
 /**
- * The help after a wrong answer. A slip shared by at least two different words (this one included) gets targeted help;
+ * The help after a wrong answer. A slip repeated across at least two different words (a possible difficulty) gets targeted help;
  * otherwise ordinary left-to-right help: the right letters from the start are kept and the child carries on from there.
  * A real word that sounds the same is said plainly ("a different word"), with its sentence and meaning.
  */
@@ -231,9 +243,7 @@ export function helpAfterWrong(w: PrototypeWord, answer: string, history: PastSl
   const keep = rightFromStart(w.word, answer);
   for (const p of found) {
     if (p !== "missed_double" && p !== "extra_double") continue;
-    const words = new Set(history.filter((h) => h.pattern === p).map((h) => h.word));
-    words.add(w.word);
-    if (words.size >= SUPPORTED_AFTER) {
+    if (wordsWithSlip(p, w.word, history) >= REPEATED_AFTER) {
       // the marker: the position in the word where the doubled letter is
       const t = w.word.toLowerCase();
       let marker: number | null = null;
@@ -249,43 +259,51 @@ export function helpAfterWrong(w: PrototypeWord, answer: string, history: PastSl
 
 /* ------------------------------------------------------------------ evidence */
 
+/**
+ * How a word was completed. Decided by what the child was given, never by a share of letters and never by time:
+ *   independent    right at the first Submit, with no letters given (hearing the sentence or meaning gives no letters);
+ *   assisted       right after any letter was given, or after help following a wrong answer;
+ *   guided         the word was shown and the child copied it (practice, not assessment);
+ *   not_completed  not yet right.
+ */
 export type Completion = "independent" | "assisted" | "guided" | "not_completed";
 
 export interface WordEvidence {
   kind: "spell_attempt_v2";
   word: { id: string; text: string; capability: string[]; item?: string };
-  /** Every submitted answer, in order, with how it was typed. */
-  attempts: { answer: string; correct: boolean; atActiveMs: number; lettersAdded: number; lettersRemoved: number; afterHelp: Help["kind"] | null }[];
-  /** The first answer submitted before any letter clue or help, if there was one. */
+  completion: Completion;
+  /** Every submitted answer, in order, with how it was typed and what help came before it. */
+  attempts: { answer: string; correct: boolean; atActiveMs: number; lettersAdded: number; lettersRemoved: number; afterHelp: Help["kind"] | "copy" | null }[];
+  /** The first answer submitted before any letter or help, if there was one. */
   independentAnswer: string | null;
-  /** Time spent actively attempting: paused while the word is being said, while feedback shows, and while the app is hidden. */
-  activeMs: number;
+  /** Exactly which letters were given: position in the word, and the letter. */
+  lettersRevealed: { index: number; letter: string }[];
+  /** Whether the child asked to see where in the word to look (positions are shown only on request). */
+  positionsShown: boolean;
+  /** Clues taken, in order: 1 sentence, 2 meaning, 3 first letter, 4 another letter. */
+  clues: { level: number; atActiveMs: number }[];
   /** Times the word was heard (the first included). */
   plays: number;
-  /** Clue levels taken, with when (active ms). */
-  clues: { level: number; atActiveMs: number }[];
-  lettersRevealed: number;
-  /** Changes the input rejected (paste, suggestion, autocorrect). Recorded for diagnosis only; never held against the child. */
+  /** Active thinking time: paused while the word is said, during feedback and while the app is hidden. Used only to time
+   * offers of help and for a grown-up's information. Never used for mastery: slower is not worse. */
+  timing: { activeMs: number; usedFor: "offering help only" };
+  /** Changes the input rejected (paste, suggestion, autocorrect). For diagnosis only; never held against the child. */
   rejectedInputs: { reason: RejectReason; count: number }[];
   finalCorrect: boolean;
-  completion: Completion;
-  /** Plausible slips in the wrong answers, with whether earlier words support them. Never proof of a misconception. */
-  possiblePatterns: { pattern: PatternId; support: "this_word" | "supported" }[];
-  /** Ask the word again later, unassisted. */
+  /** Slips in the wrong answers. "possible_difficulty" once the same slip is seen in 2+ different words. Never a confirmed misconception. */
+  possibleDifficulties: { pattern: PatternId; seenInWords: number; status: "seen_once" | "possible_difficulty" }[];
+  /** Ask the word again later, with no help. */
   reassess: { needed: boolean; when: "next_session" | null; reason: string | null };
 }
 
-/** How the word was completed: letters revealed (half or more is guided practice), help after a wrong answer, or neither. */
-export function completionOf(e: Pick<WordEvidence, "attempts" | "lettersRevealed" | "finalCorrect" | "clues">, word: string): Completion {
+export function completionOf(e: { attempts: WordEvidence["attempts"]; lettersRevealed: number; finalCorrect: boolean; copied: boolean }): Completion {
   if (!e.finalCorrect) return "not_completed";
-  if (e.lettersRevealed >= Math.ceil(word.length / 2)) return "guided";
-  const first = e.attempts[0];
-  const letterClue = e.clues.some((c) => c.level >= 3);
-  if (e.attempts.length === 1 && first.correct && !letterClue) return "independent";
+  if (e.copied) return "guided";
+  if (e.attempts.length === 1 && e.attempts[0].correct && e.lettersRevealed === 0) return "independent";
   return "assisted";
 }
 
 export function reassessOf(c: Completion): WordEvidence["reassess"] {
   if (c === "independent") return { needed: false, when: null, reason: null };
-  return { needed: true, when: "next_session", reason: c === "not_completed" ? "not yet spelt" : `completed ${c === "guided" ? "as guided practice" : "with help"}` };
+  return { needed: true, when: "next_session", reason: c === "not_completed" ? "not yet spelt" : c === "guided" ? "copied with guidance" : "spelt with help" };
 }

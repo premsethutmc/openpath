@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { type ClueState, SAMPLE_WORDS, completionOf, helpAfterWrong, helpOffer, judgeChange, maxReveal, nextClue, pattern, slips, takeClue } from "./logic.ts";
+import { type ClueState, SAMPLE_WORDS, completionOf, givenLetters, helpAfterWrong, helpOffer, judgeChange, maxReveal, nextClue, revealedList, slips, takeClue } from "./logic.ts";
 
 const W = Object.fromEntries(SAMPLE_WORDS.map((w) => [w.word, w]));
 
@@ -39,7 +39,7 @@ test("clues: offered at 8, 15 and 25 active seconds, never while typing, spaced 
   assert.deepEqual([c.level, c.revealed], [3, 1]);
   assert.equal(nextClue(c, w), 4);
   assert.equal(helpOffer(c, w, 100, 100), false, "more letters are never pushed");
-  assert.deepEqual(pattern(w, c.revealed).join(""), "p________");
+  assert.deepEqual(givenLetters(w, c.revealed), ["p"], "only the given letters: the length is never shown");
 });
 
 test("clues: letters never reveal the whole word", () => {
@@ -48,6 +48,7 @@ test("clues: letters never reveal the whole word", () => {
   assert.equal(c.revealed, maxReveal("their"));
   assert.equal(c.revealed, 4);
   assert.equal(nextClue(c, "their"), null);
+  assert.deepEqual(revealedList("their", 2), [{ index: 0, letter: "t" }, { index: 1, letter: "h" }], "exactly which letters were given");
 });
 
 test("slips: doubling, homophones, swaps; unrecognised falls back to 'other'", () => {
@@ -67,12 +68,14 @@ test("help: left-to-right without support; targeted once two different words sha
   assert.deepEqual(helpAfterWrong(W.their, "there", []), { kind: "other_word" });
 });
 
-test("completion: independent, assisted, guided", () => {
+test("completion: decided by what was given, never by a share of letters or by time", () => {
   const ok = { answer: "x", correct: true, atActiveMs: 0, lettersAdded: 0, lettersRemoved: 0, afterHelp: null };
   const bad = { ...ok, correct: false };
-  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 0, finalCorrect: true, clues: [{ level: 1, atActiveMs: 0 }, { level: 2, atActiveMs: 0 }] }, "friend"), "independent", "sentence and meaning do not reveal letters");
-  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 1, finalCorrect: true, clues: [{ level: 3, atActiveMs: 0 }] }, "friend"), "assisted");
-  assert.equal(completionOf({ attempts: [bad, ok], lettersRevealed: 0, finalCorrect: true, clues: [] }, "friend"), "assisted");
-  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 3, finalCorrect: true, clues: [{ level: 4, atActiveMs: 0 }] }, "friend"), "guided");
-  assert.equal(completionOf({ attempts: [bad, bad], lettersRevealed: 0, finalCorrect: false, clues: [] }, "friend"), "not_completed");
+  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 0, finalCorrect: true, copied: false }), "independent", "sentence and meaning give no letters");
+  assert.equal(completionOf({ attempts: [{ ...ok, atActiveMs: 120_000 }], lettersRevealed: 0, finalCorrect: true, copied: false }), "independent", "slow is still independent");
+  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 1, finalCorrect: true, copied: false }), "assisted");
+  assert.equal(completionOf({ attempts: [ok], lettersRevealed: 5, finalCorrect: true, copied: false }), "assisted", "no 50% threshold: many letters is still assisted");
+  assert.equal(completionOf({ attempts: [bad, ok], lettersRevealed: 0, finalCorrect: true, copied: false }), "assisted");
+  assert.equal(completionOf({ attempts: [bad, bad, ok], lettersRevealed: 0, finalCorrect: true, copied: true }), "guided", "copied after the word was shown");
+  assert.equal(completionOf({ attempts: [bad, bad], lettersRevealed: 0, finalCorrect: false, copied: false }), "not_completed");
 });

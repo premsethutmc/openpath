@@ -26,13 +26,14 @@ before(async () => {
 });
 after(() => browser?.close());
 
-async function open({ width = 1100 } = {}) {
-  const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 2, reducedMotion: "reduce" });
+async function open({ width = 1100, hash = "", mobile = false } = {}) {
+  const context = await browser.newContext({ viewport: { width, height: mobile ? 800 : 1000 }, deviceScaleFactor: 2, reducedMotion: "reduce", isMobile: mobile, hasTouch: mobile });
   await install(context, { advanceMs: null, speakMs: 400 });
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(`file://${file}`);
+  await page.goto(`file://${file}${hash}`);
+  await page.getByTestId("start-btn").click();
   await page.getByTestId("answer").waitFor();
   return { context, page, errors };
 }
@@ -97,6 +98,7 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   await page.getByTestId("clue").click();
   await page.getByTestId("pattern").waitFor();
   assert.equal(await page.locator(".clue-letters .given").count(), 1);
+  assert.equal(await page.locator(".clue-letters .blank").count(), 0, "the word's length is not shown");
   await shot(page, "05-first-letter");
   // 5. more letters only on request, with a pause between them; never the whole word
   await page.waitForFunction(() => !document.querySelector("[data-testid=clue]").disabled, null, { timeout: 5000 });
@@ -111,9 +113,11 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   await shot(page, "08-success");
   const ev = await evidence(page);
   assert.equal(ev.completion, "assisted");
-  assert.equal(ev.lettersRevealed, 2);
+  assert.deepEqual(ev.lettersRevealed, [{ index: 0, letter: "f" }, { index: 1, letter: "r" }], "exactly which letters were given");
+  assert.equal(await page.getByTestId("counted").getAttribute("data-completion"), "assisted");
   assert.deepEqual(ev.clues.map((c) => c.level), [1, 2, 3, 4]);
-  assert.ok(ev.activeMs > 0 && ev.plays >= 1);
+  assert.ok(ev.timing.activeMs > 0 && ev.plays >= 1);
+  assert.equal(ev.timing.usedFor, "offering help only");
   // 7. preferred, with earlier doubling slips: "prefered" gets targeted help, keeping the right start
   await page.getByTestId("seed").check();
   await page.getByTestId("word-preferred").click();
@@ -122,7 +126,11 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   await page.getByTestId("help").waitFor();
   assert.equal(await page.getByTestId("help").getAttribute("data-help"), "targeted");
   assert.match(await page.getByTestId("help").innerText(), /doubled/);
+  assert.equal(await page.getByTestId("positions").count(), 0, "positions only when asked");
   await shot(page, "07-wrong-targeted-help");
+  await page.getByTestId("show-where").click();
+  await page.getByTestId("positions").waitFor();
+  await shot(page, "07a-show-me-where");
   await page.getByTestId("try-again").click();
   assert.equal(await tiles(page), "prefer", "the right start is kept");
   await type(page, "red");
@@ -131,8 +139,10 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   const ev2 = await evidence(page);
   assert.equal(ev2.completion, "assisted");
   assert.equal(ev2.independentAnswer, "prefered");
-  assert.deepEqual(ev2.possiblePatterns, [{ pattern: "missed_double", support: "supported" }]);
-  assert.deepEqual(ev2.reassess, { needed: true, when: "next_session", reason: "completed with help" });
+  assert.deepEqual(ev2.possibleDifficulties, [{ pattern: "missed_double", seenInWords: 3, status: "possible_difficulty" }]);
+  assert.equal(ev2.positionsShown, true);
+  assert.deepEqual(ev2.lettersRevealed, []);
+  assert.deepEqual(ev2.reassess, { needed: true, when: "next_session", reason: "spelt with help" });
   // 8. their: "there" is a different word; twice wrong, then written together (guided)
   await page.getByTestId("word-their").click();
   await type(page, "there");
@@ -148,6 +158,7 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   await page.getByRole("button", { name: "Submit" }).click();
   await page.getByTestId("right").waitFor();
   assert.equal((await evidence(page)).completion, "guided");
+  assert.equal(await page.getByTestId("counted").getAttribute("data-completion"), "guided");
   // 9. necessary, right first time: independent
   await page.getByTestId("word-necessary").click();
   await type(page, "necessary");
@@ -157,10 +168,12 @@ test("the full journey: listening, typing, clues offered in time, letters reveal
   // 10. the grown-up view
   await page.getByTestId("tab-grown-up").click();
   const gu = await page.getByTestId("grown-up").innerText();
-  assert.match(gu, /4\s*words tried/);
-  assert.match(gu, /1 of 4\s*spelt on their own/);
-  assert.match(gu, /Doubling a letter/);
-  assert.match(gu, /their/);
+  assert.match(gu, /1\s*on their own\s*2\s*with help\s*1\s*copied with guidance/);
+  assert.match(gu, /friend\s*With help\s*Letters given: f, r/);
+  assert.match(gu, /their\s*Copied with guidance/);
+  assert.match(gu, /necessary\s*On their own/);
+  assert.match(gu, /Doubling a letter[\s\S]*worth practising/);
+  assert.match(gu, /not a diagnosis/);
   await shot(page, "10-grown-up-view");
   assert.deepEqual(errors, []);
   await context.close();
@@ -174,9 +187,9 @@ test("the timer pauses while the word is said and when the page is hidden; offer
     Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "hidden" });
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  const a = (await evidence(page)).activeMs;
+  const a = (await evidence(page)).timing.activeMs;
   await page.waitForTimeout(1500);
-  assert.equal((await evidence(page)).activeMs, a, "no thinking time counted while hidden");
+  assert.equal((await evidence(page)).timing.activeMs, a, "no thinking time counted while hidden");
   await page.evaluate(() => {
     Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "visible" });
     document.dispatchEvent(new Event("visibilitychange"));
@@ -189,16 +202,33 @@ test("the timer pauses while the word is said and when the page is hidden; offer
     await page.keyboard.press("Backspace");
     await page.waitForTimeout(250);
   }
-  assert.ok((await evidence(page)).activeMs >= 8000, "past 8 s of thinking time");
+  assert.ok((await evidence(page)).timing.activeMs >= 8000, "past 8 s of thinking time");
   assert.equal(await page.getByTestId("offer").count(), 0, "no offer while typing");
   await page.getByTestId("offer").waitFor({ timeout: 5000 });
   await context.close();
 });
 
-test("the page fits a phone: no sideways scrolling at 390 px", async () => {
-  const { context, page } = await open({ width: 390 });
-  const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
-  const wide = await page.evaluate(() => [...document.querySelectorAll("body *")].filter((e) => e.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 4).map((e) => `${e.tagName}.${e.className}`));
-  assert.ok(sw <= w, `${sw} > ${w}: ${wide.join(", ")}`);
-  await context.close();
-});
+for (const width of [360, 390, 412]) {
+  test(`on a ${width} px phone: no sideways scrolling; the child's screen fills the width; typing and Submit work`, async () => {
+    for (const hash of ["", "#child"]) {
+      const { context, page, errors } = await open({ width, hash, mobile: true });
+      const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
+      const wide = await page.evaluate(() => [...document.querySelectorAll("body *")].filter((e) => e.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 4).map((e) => `${e.tagName}.${e.className}`));
+      assert.ok(sw <= w, `${hash || "page"}: ${sw} > ${w}: ${wide.join(", ")}`);
+      const box = await page.locator(".phone-screen").boundingBox();
+      assert.ok(box.width >= width - 1, `the screen fills the phone (${box.width} of ${width})`);
+      const speaker = await page.getByTestId("speaker").boundingBox();
+      assert.ok(speaker.width >= 100, "the big speaker button");
+      await page.getByTestId("answer").tap();
+      await page.keyboard.type("friend", { delay: 20 }); // the first word
+      await page.getByRole("button", { name: "Submit" }).tap();
+      await page.getByTestId("right").waitFor();
+      if (hash) {
+        assert.equal(await page.locator(".controls").isVisible(), false, "child screen only");
+        if (SHOTS && width === 390) await page.screenshot({ path: `${SHOTS}/11-child-only-390.png` });
+      }
+      assert.deepEqual(errors, []);
+      await context.close();
+    }
+  });
+}

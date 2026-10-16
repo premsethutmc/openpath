@@ -4,13 +4,14 @@
 <main class="page">
   <header>
     <h1>Adaptive Spelling Prototype</h1>
-    <p class="lede">A friendly spelling game on top, careful evidence underneath. Try it in the phone: listen, type letter by letter, wait for a clue or ask for one, get a word wrong on purpose.</p>
-    <div class="status"><span>Phase 1 · design prototype</span><span class="warn">Not in the app · nothing merged or deployed</span></div>
+    <p class="lede">A friendly spelling game on top, careful evidence underneath. Press Start, listen, type letter by letter, wait for a clue or ask for one, and get a word wrong on purpose.</p>
+    <div class="status"><span>Phase 1 · design prototype · round 2</span><span class="warn">Not in the app · nothing merged or deployed</span></div>
+    <p class="open-child"><a href="#child">Open the child's screen only</a></p>
   </header>
 
   <section aria-labelledby="try">
     <h2 id="try">Try it</h2>
-    <p class="small" style="margin-bottom:14px">Sample words: friend, preferred, necessary, their. The word is spoken with your browser's voice after your first tap. Use “4× faster” to see the clue timing without waiting. Try “prefered” for preferred, “there” for their, “neccessary” for necessary.</p>
+    <p class="small" style="margin-bottom:14px">Sample words: friend, preferred, necessary, their. Words are spoken with your phone's own voice. Use “4× faster” to see the clue timing without waiting. Try “prefered” for preferred and “there” for their. The panel beside the phone shows how each word counts and the full record.</p>
     <div id="prototype"></div>
   </section>
 
@@ -23,7 +24,7 @@ flowchart TD
   C -->|8 s| D[Offer: hear it in a sentence]
   C -->|15 s| E[Offer: what it means]
   C -->|25 s| F[Offer: first letter]
-  F -->|only when asked| G[One more letter<br/>never the whole word]
+  F -->|only when asked| G[One more letter<br/>never the whole word, never its length]
   D --> C
   E --> C
   F --> C
@@ -31,7 +32,7 @@ flowchart TD
   C --> H{Submit: right?}
   H -->|yes| I[Yes! The word<br/>next word comes by itself]
   H -->|no, first time| J{Same slip on 2+ words?}
-  J -->|yes| K[Targeted help<br/>One letter is doubled]
+  J -->|yes: a possible difficulty| K[Targeted help<br/>One letter is doubled<br/>Show me where, if asked]
   J -->|no| L[Left-to-right help<br/>The start is right: pref...]
   J -->|a real word that sounds the same| M[A different word<br/>sentence and meaning]
   K --> N[Try again]
@@ -41,7 +42,7 @@ flowchart TD
   H2 -->|yes| I
   H2 -->|no| O[Write it together<br/>word shown, child copies it]
   O --> I
-  I --> P[(Evidence record:<br/>independent, assisted or guided)]
+  I --> P[(Evidence record:<br/>on their own, with help,<br/>or copied with guidance)]
     </pre>
   </section>
 
@@ -55,15 +56,15 @@ flowchart TD
       <table>
         <thead><tr><th>Active time</th><th>Level</th><th>What the child gets, if they tap</th><th>Counts as</th></tr></thead>
         <tbody>
-          <tr><td class="num">0 s</td><td>0 · Independent</td><td>The word is said (for words that sound like others, such as <i>their</i>, the sentence too, because the word alone is ambiguous)</td><td><span class="pill yes">independent</span></td></tr>
-          <tr><td class="num">8 s</td><td>1 · Context</td><td>The sentence is said, and shown with the word blanked out</td><td><span class="pill yes">independent</span> sentence reveals no letters</td></tr>
-          <tr><td class="num">15 s</td><td>2 · Meaning</td><td>A short meaning: “liked one thing more than another”</td><td><span class="pill yes">independent</span> meaning reveals no letters</td></tr>
-          <tr><td class="num">25 s</td><td>3 · First letter</td><td>A letter pattern: <code>p _ _ _ _ _ _ _ _</code></td><td><span class="pill part">assisted</span></td></tr>
-          <tr><td class="num">on request</td><td>4 · More letters</td><td>One more letter per tap, at least 4 s apart; at most all but the last letter</td><td><span class="pill part">assisted</span>, or <span class="pill no">guided</span> once half the letters are shown</td></tr>
+          <tr><td class="num">0 s</td><td>0 · On their own</td><td>The word is said (for words that sound like others, such as <i>their</i>, the sentence too, because the word alone is ambiguous)</td><td><span class="pill yes">on their own</span></td></tr>
+          <tr><td class="num">8 s</td><td>1 · Context</td><td>The sentence is said, and shown with the word blanked out</td><td><span class="pill yes">on their own</span> no letters given</td></tr>
+          <tr><td class="num">15 s</td><td>2 · Meaning</td><td>A short meaning: “liked one thing more than another”</td><td><span class="pill yes">on their own</span> no letters given</td></tr>
+          <tr><td class="num">25 s</td><td>3 · First letter</td><td>“Starts with <code>p …</code>”: the letter, open-ended, so the word's length stays hidden</td><td><span class="pill part">with help</span></td></tr>
+          <tr><td class="num">on request</td><td>4 · More letters</td><td>One more letter per tap, at least 4 s apart; never the whole word</td><td><span class="pill part">with help</span>; each letter and its position recorded</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="small" style="margin-top:10px">These timings are starting hypotheses, not validated thresholds. A grown-up can choose “Give more time” (all offers 60% later) or “Only when asked” (no offers, no ring), and can hide the ring.</p>
+    <p class="small" style="margin-top:10px">A word is <b>copied with guidance</b> only when, after two tries, the word is shown and the child copies it. There is no percentage threshold. Thinking time is recorded, but only to time offers of help; a slower answer never counts against the child. These timings are starting hypotheses, not validated thresholds. A grown-up can choose “Give more time” (all offers 60% later) or “Only when asked” (no offers, no ring), and can hide the ring.</p>
     <div class="table-wrap" style="margin-top:16px">
       <table>
         <thead><tr><th>Option explored</th><th>Choice</th><th>Why</th></tr></thead>
@@ -123,12 +124,10 @@ flowchart TD
     <ol class="decisions">
       <li><div><b>The timer as a faint ring on the clue button</b>No numbers; it pauses automatically and continues after a clue. The alternatives are above.</div></li>
       <li><div><b>Offer timings of 8, 15 and 25 seconds as the starting point</b>Plus “Give more time” and “Only when asked” for grown-ups.</div></li>
-      <li><div><b>Sentence and meaning still count as independent</b>Neither reveals letters. From the first letter on, a word counts as assisted. Once half its letters are shown, it counts as guided practice, not assessment.</div></li>
-      <li><div><b>Recording active thinking time</b>This reverses today's rule of not recording durations. It would be used for help timing and reports only, never for mastery or ability.</div></li>
+      <li><div><b>Sentence and meaning still count as on their own</b>Neither gives letters. Any letter given makes the word “with help”, and exactly which letters were given is recorded.</div></li>
       <li><div><b>Two tries, then “write it together”</b>The word is shown and copied once. The alternative is a third try with more letters.</div></li>
       <li><div><b>Where meanings come from</b>Each word needs a child-friendly meaning. Either write and review them, or start from the word bank's dictionary glosses (337 of 818 words have one; adult wording).</div></li>
-      <li><div><b>Targeted help after the same slip on 2 different words</b>This is the same bar the engine already uses for a supported misconception. With less evidence, help goes left to right.</div></li>
-      <li><div><b>Revealed letters shown as a pattern above the answer</b>This shows the word's length from the first-letter clue on. The alternative is filling letters into the child's answer, which mixes the child's letters with given ones.</div></li>
+      <li><div><b>Targeted help after the same slip on 2 different words</b>It is treated as a possible difficulty, never a confirmed misconception. With less evidence, help goes left to right.</div></li>
       <li><div><b>Words that sound alike say their sentence from the start</b>For example <i>their</i>, <i>there</i> and <i>they're</i>.</div></li>
       <li><div><b>The grown-up view lives under Progress</b>It is not on the child's screen.</div></li>
       <li><div><b>A real-phone check of letter-by-letter input before any build</b>On Samsung Keyboard and Gboard.</div></li>

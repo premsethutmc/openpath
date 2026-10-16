@@ -17,14 +17,17 @@ import {
   type WordEvidence,
   clueReady,
   completionOf,
+  givenLetters,
   helpAfterWrong,
   helpOffer,
   judgeChange,
   nextClue,
-  pattern,
+  REPEATED_AFTER,
   reassessOf,
+  revealedList,
   slips,
   takeClue,
+  wordsWithSlip,
 } from "./logic.ts";
 
 /* ------------------------------------------------------------------ speech (the browser's own voice) */
@@ -106,7 +109,9 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
   const rejected = useRef(new Map<RejectReason, number>());
   const attempts = useRef<WordEvidence["attempts"]>([]);
   const clues = useRef<WordEvidence["clues"]>([]);
-  const patterns = useRef(new Map<PatternId, "this_word" | "supported">());
+  const difficulties = useRef(new Map<PatternId, number>()); // slip -> different words it has been seen in
+  const copied = useRef(false);
+  const [positionsShown, setPositionsShown] = useState(false);
 
   // the timer: active thinking time only (paused while the word is said, during feedback, when hidden or paused)
   const [hidden, setHidden] = useState(typeof document !== "undefined" && document.visibilityState === "hidden");
@@ -217,28 +222,28 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
 
   const evidence = useMemo((): WordEvidence => {
     const finalCorrect = phase === "right";
-    const base = { attempts: attempts.current, lettersRevealed: clue.revealed, finalCorrect, clues: clues.current };
-    const completion = completionOf(base, w.word);
+    const completion = completionOf({ attempts: attempts.current, lettersRevealed: clue.revealed, finalCorrect, copied: copied.current });
     const firstHelp = attempts.current.findIndex((a) => a.afterHelp !== null);
     const firstLetterClue = clues.current.find((c) => c.level >= 3);
     const ind = attempts.current[0] && !(firstLetterClue && firstLetterClue.atActiveMs <= attempts.current[0].atActiveMs) && firstHelp !== 0 ? attempts.current[0].answer : null;
     return {
       kind: "spell_attempt_v2",
       word: { id: w.id, text: w.word, capability: w.capability, ...(w.item ? { item: w.item } : {}) },
+      completion,
       attempts: attempts.current,
       independentAnswer: ind,
-      activeMs: Math.round(active * 1000),
-      plays: plays.current,
+      lettersRevealed: revealedList(w.word, clue.revealed),
+      positionsShown,
       clues: clues.current,
-      lettersRevealed: clue.revealed,
+      plays: plays.current,
+      timing: { activeMs: Math.round(active * 1000), usedFor: "offering help only" },
       rejectedInputs: [...rejected.current].map(([reason, count]) => ({ reason, count })),
       finalCorrect,
-      completion: phase === "answering" && !finalCorrect ? "not_completed" : completion,
-      possiblePatterns: [...patterns.current].map(([pattern, support]) => ({ pattern, support })),
-      reassess: reassessOf(phase === "answering" ? "not_completed" : completion),
+      possibleDifficulties: [...difficulties.current].map(([pattern, n]) => ({ pattern, seenInWords: n, status: n >= REPEATED_AFTER ? "possible_difficulty" : "seen_once" })),
+      reassess: reassessOf(completion),
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, clue, Math.floor(active), typed, speaking, shake]);
+  }, [phase, clue, Math.floor(active), typed, speaking, shake, positionsShown]);
   useEffect(() => onEvidence(evidence), [evidence, onEvidence]);
 
   const submit = (e: FormEvent) => {
@@ -246,7 +251,7 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
     const answer = typed.trim();
     if (!answer || speaking) return;
     const correct = answer.toLowerCase() === w.word;
-    attempts.current.push({ answer, correct, atActiveMs: Math.round(active * 1000), lettersAdded: added.current, lettersRemoved: removed.current, afterHelp: phase === "copy" ? "from_start" : (help?.kind ?? null) });
+    attempts.current.push({ answer, correct, atActiveMs: Math.round(active * 1000), lettersAdded: added.current, lettersRemoved: removed.current, afterHelp: phase === "copy" ? "copy" : (help?.kind ?? null) });
     added.current = 0;
     removed.current = 0;
     stopSaying();
@@ -258,7 +263,7 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
     }
     const found = slips(w, answer);
     const h = helpAfterWrong(w, answer, history);
-    for (const p of found) patterns.current.set(p, h.kind === "targeted" && h.pattern === p ? "supported" : patterns.current.get(p) ?? "this_word");
+    for (const p of found) if (p !== "other" && p !== "swapped_letters") difficulties.current.set(p, wordsWithSlip(p, w.word, history));
     onSlips(found.map((p) => ({ word: w.word, pattern: p })));
     const wrongs = attempts.current.filter((a) => !a.correct).length;
     if (wrongs >= 2 || phase === "copy") {
@@ -267,7 +272,7 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
       setHelp(null);
       setTyped("");
       if (input.current) input.current.value = "";
-      setClue((c) => ({ ...c, revealed: w.word.length }));
+      copied.current = true;
       void say(`${w.word}. Let's write it together.`);
       return;
     }
@@ -289,7 +294,7 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
     return () => clearTimeout(t);
   }, [phase, onNext]);
 
-  const letters = pattern(w.word, clue.revealed);
+  const letters = givenLetters(w.word, clue.revealed);
   const blanked = w.sentence.replace(new RegExp(`\\b${w.word}\\b`, "i"), "_____");
   const label = speaking ? "Listening…" : plays.current > 1 ? "Hear it again" : "Hear the word";
   const offerText = upcoming === 1 ? "Hear it in a sentence?" : upcoming === 2 ? "Want to know what it means?" : "Want the first letter?";
@@ -333,12 +338,14 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
             </p>
           )}
           {clue.revealed > 0 && (
-            <div className="clue-letters" aria-label={`Clue: ${letters.join(" ")}`} data-testid="pattern">
+            <div className="clue-letters" aria-label={`Clue: it starts ${letters.join(" ")}`} data-testid="pattern">
+              <span className="clue-tag starts">Starts with</span>
               {letters.map((ch, i) => (
-                <span key={i} className={ch === "_" ? "blank" : "given"}>
-                  {ch === "_" ? "" : ch}
+                <span key={i} className="given">
+                  {ch}
                 </span>
               ))}
+              <span className="more" aria-hidden="true">…</span>
             </div>
           )}
         </div>
@@ -358,13 +365,19 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
             <>
               <p className="help-title">So close!</p>
               <p>{help.pattern === "missed_double" ? "One letter in this word is doubled. Listen for it." : "This word has one letter fewer. Listen carefully."}</p>
-              <div className="clue-letters spot" aria-hidden="true">
-                {[...w.word].map((ch, i) => (
-                  <span key={i} className={i < help.keep ? "given" : help.marker !== null && (i === help.marker || i === help.marker + 1) ? "spot-mark" : "blank"}>
-                    {i < help.keep ? ch : ""}
-                  </span>
-                ))}
-              </div>
+              {positionsShown ? (
+                <div className="clue-letters spot" aria-hidden="true" data-testid="positions">
+                  {[...w.word].map((ch, i) => (
+                    <span key={i} className={i < help.keep ? "given" : help.marker !== null && (i === help.marker || i === help.marker + 1) ? "spot-mark" : "blank"}>
+                      {i < help.keep ? ch : ""}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <button type="button" className="link-btn" onClick={() => setPositionsShown(true)} data-testid="show-where">
+                  Show me where
+                </button>
+              )}
             </>
           ) : (
             <>
@@ -469,59 +482,70 @@ function WordScreen({ w, index, total, history, settings, paused, onEvidence, on
 
 /* ------------------------------------------------------------------ grown-up view */
 
+export const COUNTED: Record<WordEvidence["completion"], { label: string; rule: string }> = {
+  independent: { label: "On their own", rule: "Right at the first try, with no letters given. Hearing the sentence or meaning gives no letters, so it still counts. Time taken does not matter." },
+  assisted: { label: "With help", rule: "Right after letters were given or after help with a wrong answer. Exactly which letters were given is recorded." },
+  guided: { label: "Copied with guidance", rule: "After two tries the word was shown and copied. Practice, not a test of spelling." },
+  not_completed: { label: "Not yet", rule: "Not spelt yet. Nothing is decided until the word is finished." },
+};
+
 function GrownUp({ done, slipsSeen, settings, setSettings }: { done: WordEvidence[]; slipsSeen: PastSlip[]; settings: Settings; setSettings: (s: Settings) => void }) {
-  const attempted = done.length;
-  const independent = done.filter((e) => e.completion === "independent").length;
-  const assisted = done.filter((e) => e.completion === "assisted" || e.completion === "guided").length;
-  const counts = new Map<PatternId, Set<string>>();
+  const finished = done.filter((e) => e.completion !== "not_completed");
+  const n = (c: WordEvidence["completion"]) => finished.filter((e) => e.completion === c).length;
+  const words = new Map<PatternId, Set<string>>();
   for (const s of slipsSeen) {
     if (s.pattern === "other" || s.pattern === "swapped_letters") continue;
-    counts.set(s.pattern, (counts.get(s.pattern) ?? new Set()).add(s.word));
+    words.set(s.pattern, (words.get(s.pattern) ?? new Set()).add(s.word));
   }
-  const difficulties = [...counts].sort((a, b) => b[1].size - a[1].size).slice(0, 3);
-  const again = done.filter((e) => e.reassess.needed);
+  const tricky = [...words].sort((a, b) => b[1].size - a[1].size).slice(0, 3);
   return (
     <div className="gu" data-testid="grown-up">
       <h2>This week</h2>
       <div className="gu-stats">
         <div>
-          <b>{attempted}</b>
-          <span>words tried</span>
+          <b>{n("independent")}</b>
+          <span>on their own</span>
         </div>
         <div>
-          <b>{attempted ? `${independent} of ${attempted}` : "–"}</b>
-          <span>spelt on their own</span>
+          <b>{n("assisted")}</b>
+          <span>with help</span>
         </div>
         <div>
-          <b>{assisted}</b>
-          <span>finished with help</span>
+          <b>{n("guided")}</b>
+          <span>copied with guidance</span>
         </div>
       </div>
-      <h3>Tricky spots</h3>
-      {difficulties.length ? (
+      <h3>Words</h3>
+      {finished.length ? (
         <ul className="gu-list">
-          {difficulties.map(([p, words]) => (
+          {finished.map((e) => (
+            <li key={e.word.id} className="gu-word">
+              <b>{e.word.text}</b>
+              <span className={`badge c-${e.completion}`}>{COUNTED[e.completion].label}</span>
+              {e.lettersRevealed.length > 0 && <span className="small gu-detail">Letters given: {e.lettersRevealed.map((l) => l.letter).join(", ")}</span>}
+              {e.reassess.needed && <span className="small gu-detail">Try again next time</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="small">No words finished yet.</p>
+      )}
+      <h3>Possibly tricky</h3>
+      {tricky.length ? (
+        <ul className="gu-list">
+          {tricky.map(([p, ws]) => (
             <li key={p}>
               {PATTERN_TEXT[p].parent}
-              <span className="small"> · {[...words].join(", ")}{words.size >= 2 ? "" : " (seen once, not a pattern yet)"}</span>
+              <span className="small gu-detail">
+                {[...ws].join(", ")} · {ws.size >= REPEATED_AFTER ? "seen in more than one word: worth practising" : "seen once: not a pattern yet"}
+              </span>
             </li>
           ))}
         </ul>
       ) : (
         <p className="small">Nothing yet.</p>
       )}
-      <h3>To try again</h3>
-      {again.length ? (
-        <ul className="gu-list">
-          {again.map((e) => (
-            <li key={e.word.id}>
-              <b>{e.word.text}</b> <span className="small">· {e.reassess.reason}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="small">Nothing yet.</p>
-      )}
+      <p className="small gu-note">These are possible difficulties, not a diagnosis. Thinking time is recorded only to time offers of help; a slower answer never counts against your child.</p>
       <h3>Help settings</h3>
       <div className="gu-settings">
         <label>
@@ -541,6 +565,19 @@ function GrownUp({ done, slipsSeen, settings, setSettings }: { done: WordEvidenc
   );
 }
 
+function Start({ onStart }: { onStart: () => void }) {
+  return (
+    <div className="start" data-testid="start">
+      <p className="start-kicker">Spelling Bee</p>
+      <h2>Listen, then spell the word.</h2>
+      <button type="button" className="primary start-btn" onClick={onStart} data-testid="start-btn">
+        Start
+      </button>
+      <p className="small">Turn the sound up.</p>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ the prototype, with demo controls */
 
 function App() {
@@ -548,6 +585,7 @@ function App() {
   const [index, setIndex] = useState(0);
   const [run, setRun] = useState(0); // remount key
   const [view, setView] = useState<"child" | "grown-up">("child");
+  const [started, setStarted] = useState(false);
   const [settings, setSettings] = useState<Settings>({ speed: 1, ringVisible: true, timing: "normal" });
   const [paused, setPaused] = useState(false);
   const [seeded, setSeeded] = useState(false);
@@ -573,6 +611,7 @@ function App() {
     setIndex(k);
     setRun((r) => r + 1);
     setView("child");
+    setStarted(true);
   };
   const reset = () => {
     stopSaying();
@@ -595,7 +634,9 @@ function App() {
           </button>
         </div>
         <div className="phone-screen">
-          {view === "child" ? (
+          {view === "child" && !started ? (
+            <Start onStart={() => setStarted(true)} />
+          ) : view === "child" ? (
             <WordScreen
               key={`${w.id}:${run}`}
               w={w}
@@ -616,6 +657,23 @@ function App() {
       </div>
 
       <aside className="controls" aria-label="Demo controls">
+        <section className="counted" data-testid="counted" data-completion={current?.completion ?? ""}>
+          <h3>How this word counts</h3>
+          {current ? (
+            <>
+              <p>
+                <span className={`badge big c-${current.completion}`}>{COUNTED[current.completion].label}</span>
+              </p>
+              <p className="small">{COUNTED[current.completion].rule}</p>
+              <p className="small">
+                Letters given: {current.lettersRevealed.length ? current.lettersRevealed.map((l) => `${l.letter} (position ${l.index + 1})`).join(", ") : "none"} · Thinking time {Math.round(current.timing.activeMs / 1000)} s (help timing only)
+              </p>
+            </>
+          ) : (
+            <p className="small">Press Start in the phone.</p>
+          )}
+          <p className="small try-list">To see each kind: spell <b>necessary</b> straight away (on their own); take the first letter on <b>friend</b> (with help); type “there” then “thier” for <b>their</b> (copied with guidance).</p>
+        </section>
         <section>
           <h3>Word</h3>
           <div className="chips">
@@ -676,5 +734,9 @@ function App() {
   );
 }
 
+// "#child" shows only the child's screen, full size, for trying on a phone
+const childOnly = () => document.documentElement.classList.toggle("child-only", location.hash === "#child");
+childOnly();
+window.addEventListener("hashchange", childOnly);
 const mount = document.getElementById("prototype");
 if (mount) createRoot(mount).render(<App />);
