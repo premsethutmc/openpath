@@ -87,6 +87,10 @@ A repeat of the error after provisional resolution makes it active again and cou
 
 ## The claim guard
 
+Since Assessment Evidence v1 ([`ASSESSMENT_EVIDENCE_V1.md`](ASSESSMENT_EVIDENCE_V1.md)), a rule counts as verified for a
+claim only if every independent answer behind it is on educator-validated content (`countsAsVerified`); answers on
+the unreviewed candidate bank no longer support a claim. Rule statuses themselves are unchanged.
+
 `capabilityClaim` reports the engine's own label unchanged, then:
 
 - the highest band up to which every required rule is verified;

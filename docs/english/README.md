@@ -58,6 +58,9 @@ is merged ([`E2B_REPORT.md`](E2B_REPORT.md)). The E3 scope is proposed in
     access, and their privacy implications (proposal only).
 20. [`PILOT_PLAN.md`](PILOT_PLAN.md): a 1–2 learner pilot — what is needed, how learning and
     usability will be observed, and a guardian information sheet.
+21. [`ASSESSMENT_EVIDENCE_V1.md`](ASSESSMENT_EVIDENCE_V1.md): spelling evidence foundation — item identity, word
+    families, assessment roles, evidence eligibility, the provisional diagnostic bank, the evidence audit
+    ([`evidence/EVIDENCE_AUDIT.md`](evidence/EVIDENCE_AUDIT.md)) and the research-engine boundary (off).
 
 ---
 

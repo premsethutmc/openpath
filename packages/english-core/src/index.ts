@@ -18,3 +18,5 @@ export * from "./planner.ts";
 export * from "./development.ts";
 export * from "./word-features.ts";
 export * from "./generated-review.ts";
+export * from "./item-evidence.ts";
+export * from "./research-boundary.ts";

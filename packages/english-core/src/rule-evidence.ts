@@ -55,6 +55,11 @@ export interface SubjectRules {
   roleOf(item: Item): "apply" | "contrast";
   /** The word the item asks for, to tell words the learner has met from new ones. */
   wordOf(item: Item): string | null;
+  /**
+   * Optional (Assessment Evidence v1): the item's lemma, so that every form of one base word (stop, stopped,
+   * stopping) is one word family. Absent: the word itself is used, as before.
+   */
+  lemmaOf?(item: Item): string | null;
   classify(item: Item, response: Response, correct: boolean): Signature;
 }
 
@@ -95,6 +100,15 @@ export interface RuleEvidencePolicy {
   /** Transfer gap: practice on unreviewed items at least this often right, over at least this many answers, while new words are weak. */
   transferGapPracticeMin: number;
   transferGapPracticeRate: number;
+  /**
+   * Assessment Evidence v1 (optional; absent = the behaviour before it, unchanged):
+   *   independence "lemma": an application counts as new only on a lemma the learner has not met in any form
+   *     (stopped after stopping is not new), and a contrast lemma counts once; "word" (default): the exact word.
+   *   verifiedRequiresValidated: "verified" needs every independent answer behind the status to be on
+   *     educator-validated content; otherwise the status stays "demonstrated", with the reason.
+   */
+  independence?: "word" | "lemma";
+  verifiedRequiresValidated?: boolean;
 }
 
 export const RULE_EVIDENCE_POLICY_DRAFT: RuleEvidencePolicy = {
@@ -120,6 +134,18 @@ export const RULE_EVIDENCE_POLICY_DRAFT: RuleEvidencePolicy = {
   resolveMinContrastCorrect: 1,
   transferGapPracticeMin: 4,
   transferGapPracticeRate: 0.8,
+};
+
+/**
+ * Assessment Evidence v1 policy (draft, NOT the default): lemma-level independence and verification only on
+ * educator-validated content. The planner and the app keep using RULE_EVIDENCE_POLICY_DRAFT until the owner approves
+ * a switch (docs/english/ASSESSMENT_EVIDENCE_V1.md): switching changes rule statuses on existing histories.
+ */
+export const RULE_EVIDENCE_POLICY_V1_DRAFT: RuleEvidencePolicy = {
+  ...RULE_EVIDENCE_POLICY_DRAFT,
+  version: "rule-evidence-policy@1-draft",
+  independence: "lemma",
+  verifiedRequiresValidated: true,
 };
 
 // ---------------------------------------------------------------- the rate of correct application (Beta posterior)
@@ -199,6 +225,25 @@ export interface RuleObservation {
   intervention?: string;
   /** The word was new to the learner (no earlier evidence on the same word). */
   newWord: boolean;
+  /** Assessment Evidence v1 (additive; never changes the default policy's results): */
+  /** The lemma (base word) the item asks about, or the word itself when no lemma is known. */
+  lemma: string | null;
+  /** lemma:<lemma>: every form of one base word. */
+  lexemeFamily: string | null;
+  /** The item's production exposure family (its `family`, or its own id). */
+  exposureFamily: string;
+  /** Typed (production) or chosen (recognition). */
+  mode: "production" | "recognition";
+  /** No earlier evidence on any form of this lemma. */
+  newLemma: boolean;
+  /** An intervention on this rule came earlier in the ledger. */
+  afterInstruction: boolean;
+  /** The item is educator-validated (content "validated"). Owner approval never sets this. */
+  educatorValidated: boolean;
+  /** The misconception tag of a listed wrong answer, if any. */
+  misconception: string | null;
+  /** One piece of independent evidence per rule and lemma: repeated answers on one lemma share this key. */
+  independenceKey: string;
   /**
    * In a session whose first evidence on this rule came at least delayedGapDays after the rule's previous
    * evidence, and before any practice or repeat on the rule in that session.
@@ -237,6 +282,8 @@ export function ruleRecord(
   for (const d of decisions) if (d.capability && !decisionOf.has(d.source)) decisionOf.set(d.source, d);
   const caps = new Set(subject.capabilities());
   const wordsSeen = new Set<string>();
+  const lemmasSeen = new Set<string>();
+  const taughtRules = new Set<string>();
   const lastByRule = new Map<string, { at: string; session: string }>();
   const delayedSessions = new Set<string>();
   /** Sessions in which the rule was practised, helped, hinted or taught: later answers there are not delayed recall. */
@@ -266,6 +313,23 @@ export function ruleRecord(
     if (word !== null) wordsSeen.add(word);
     return fresh;
   };
+  /** Assessment Evidence v1 fields for one answer (computed before the answer's own lemma is marked as seen). */
+  const v1 = (item: Item, key: string, signature: Signature) => {
+    const lemma = subject.lemmaOf?.(item) ?? subject.wordOf(item);
+    const newLemma = lemma === null ? false : !lemmasSeen.has(lemma);
+    if (lemma !== null) lemmasSeen.add(lemma);
+    return {
+      lemma,
+      lexemeFamily: lemma === null ? null : `lemma:${lemma}`,
+      exposureFamily: item.family ?? item.id,
+      mode: (item.kind === "code" && item.format.startsWith("typed") ? "production" : "recognition") as "production" | "recognition",
+      newLemma,
+      afterInstruction: taughtRules.has(key),
+      educatorValidated: contentStatus(item) === "validated",
+      misconception: signature.kind === "misconception" ? signature.tag : null,
+      independenceKey: `${key}#${lemma ?? item.id}`,
+    };
+  };
 
   for (const e of events) {
     if (e.kind === "intervention") {
@@ -273,6 +337,7 @@ export function ruleRecord(
       if (e.rule && caps.has(e.capability)) {
         ruleInterventions.push({ id: e.id, at: e.at, session: e.session, capability: e.capability, rule: e.rule, strategy: e.strategy, ...(e.content ? { content: e.content } : {}) });
         touch(`${e.capability}#${e.rule}`, e.at, e.session, true);
+        taughtRules.add(`${e.capability}#${e.rule}`);
       }
       continue;
     }
@@ -287,7 +352,8 @@ export function ruleRecord(
       const fresh = newWordOf(r.item);
       touch(r.key, e.at, e.session, true);
       const { correct } = scoreCode(r.item, e.response);
-      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature: subject.classify(r.item, e.response, correct), hints: e.hints.length, attempt: e.attempt, content: contentStatus(r.item), ...(e.intervention ? { intervention: e.intervention } : {}) });
+      const signature = subject.classify(r.item, e.response, correct);
+      out.push({ evidence: e.id, decision: "", at: e.at, session: e.session, item: r.item.id, version: r.item.version, capability: r.item.target, rule: r.rule, role: subject.roleOf(r.item), track: "assisted", newWord: fresh, delayed: false, correct, signature, hints: e.hints.length, attempt: e.attempt, content: contentStatus(r.item), ...(e.intervention ? { intervention: e.intervention } : {}), ...v1(r.item, r.key, signature) });
       continue;
     }
     if (e.kind !== "evidence") continue;
@@ -297,7 +363,12 @@ export function ruleRecord(
     if (!item || item.kind !== "code" || !d || !caps.has(item.target)) continue;
     const newWord = newWordOf(item);
     const rule = subject.ruleOf(item);
-    if (!rule || (d.verdict !== "accepted" && d.verdict !== "held") || d.observation?.kind !== "binary") continue;
+    if (!rule || (d.verdict !== "accepted" && d.verdict !== "held") || d.observation?.kind !== "binary") {
+      // a lemma answered here is met, whether or not the answer is rule evidence (same as words above)
+      const lemma = subject.lemmaOf?.(item) ?? subject.wordOf(item);
+      if (lemma !== null) lemmasSeen.add(lemma);
+      continue;
+    }
     const correct = d.observation.value === 1;
     const prov = ev.provenance;
     const taught = prov?.intervention ? !!interventions.get(prov.intervention)?.items?.includes(item.id) : false;
@@ -312,6 +383,7 @@ export function ruleRecord(
               ? "independent"
               : "unknown";
     const delayed = touch(`${item.target}#${rule}`, ev.at, ev.session, track !== "independent" && track !== "unknown");
+    const signature = subject.classify(item, ev.response, correct);
     out.push({
       evidence: ev.id,
       decision: d.id,
@@ -326,11 +398,12 @@ export function ruleRecord(
       newWord,
       delayed,
       correct,
-      signature: subject.classify(item, ev.response, correct),
+      signature,
       hints: prov?.hints.length ?? 0,
       attempt: prov?.attempt ?? 1,
       content: contentStatus(item),
       ...(prov?.intervention ? { intervention: prov.intervention } : {}),
+      ...v1(item, `${item.target}#${rule}`, signature),
     });
   }
   return { observations: out, interventions: ruleInterventions };
@@ -491,6 +564,8 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     m.history.push({ at: o.at, state, evidence: o.evidence, reason });
   };
 
+  /** Under verifiedRequiresValidated, every independent answer behind the status must be on validated content. */
+  const allValidated = () => f.indep.every((o) => o.content === "validated");
   const statusNow = (): RuleStatus => {
     const lastCheck = [...f.checks].reverse().find((c) => c.passed !== null);
     if (lastCheck && lastCheck.passed === false) return "needs_reconfirmation";
@@ -498,9 +573,11 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
     const activeMisc = [...misc.values()].some((m) => m.state === "active");
     if (weakNow(f, p) || (activeMisc && currentRate(f, p).total >= p.minApplications)) return "weak";
     if (currentRate(f, p).total < p.minApplications) return "insufficient_evidence";
-    if (demonstratedNow(f, p)) return lastCheck && lastCheck.passed ? "verified" : "demonstrated";
+    if (demonstratedNow(f, p)) return lastCheck && lastCheck.passed && (!p.verifiedRequiresValidated || allValidated()) ? "verified" : "demonstrated";
     return "emerging";
   };
+  const lemmaMode = p.independence === "lemma";
+  const contrastLemmas = new Set<string>();
 
   // a delayed check is judged once, at its session's last observation on this rule, never part-way through
   const lastInSession = new Map<string, number>();
@@ -538,13 +615,15 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
       if (o.correct) f.unknownRight++;
     } else if (o.track === "repeat") f.repeats++;
     else if (o.signature.kind === "slip") f.slips++;
+    else if (lemmaMode && o.role === "contrast" && o.lemma !== null && contrastLemmas.has(o.lemma)) f.repeats++; // the same contrast lemma again: not independent
     else {
       f.indep.push(o);
       if (o.role === "contrast") {
+        if (o.lemma !== null) contrastLemmas.add(o.lemma);
         f.contrastTotal++;
         if (o.correct) f.contrastRight++;
         f.lastContrast = o.correct;
-      } else if (o.newWord) f.apps.push(o);
+      } else if (lemmaMode ? o.newLemma : o.newWord) f.apps.push(o);
     }
     // ---- misconception records (this rule's evidence only)
     if (o.signature.kind === "misconception") {
@@ -649,6 +728,7 @@ export function ruleState(def: RuleDef, obs: readonly RuleObservation[], p = RUL
   if (f.unknownTotal) reasons.push(`${f.unknownTotal} answer(s) recorded without assistance status: not counted`);
   if ((status === "demonstrated" || status === "emerging") && f.contrastTotal === 0) reasons.push("no contrast question answered yet");
   if (status === "demonstrated" && retention === "not_checked") reasons.push("not yet checked after a delay");
+  if (status === "demonstrated" && p.verifiedRequiresValidated && retention === "confirmed" && !allValidated()) reasons.push("kept after a delay, but on questions not yet validated by an educator: not verified");
 
   return {
     rule: def.id,
@@ -702,13 +782,17 @@ export interface CapabilityClaim {
   /** Does the rule evidence support the engine's "mastered at band M" label as it stands? */
   engineMasteryLabelSupported: boolean;
   /** Rules required at or below the engine's level that are not verified, and why. */
-  /** provisional: the rule's status rests on provisional content, so it is a demonstration, not verification. */
+  /** provisional: the rule is "verified" but rests on unvalidated (candidate or provisional) content, so it is a demonstration, not verification. */
   unverified: { rule: string; requiredFromBand: number; status: RuleStatus; provisional?: boolean }[];
   summary: string;
 }
 
-/** Verified, and not resting on any provisional (unreviewed demonstration) answer. */
-export const countsAsVerified = (r: RuleState): boolean => r.status === "verified" && (r.evidenceBasis?.provisional ?? 0) === 0;
+/**
+ * Verified, and resting only on educator-validated answers (Assessment Evidence v1). Before v1 this excluded only
+ * provisional answers, so a "verified" rule on the unreviewed candidate bank could support a mastery claim; now no
+ * unreviewed question (candidate, provisional or generated) can. The rule's own status is unchanged.
+ */
+export const countsAsVerified = (r: RuleState): boolean => r.status === "verified" && (r.evidenceBasis?.provisional ?? 0) === 0 && (r.evidenceBasis?.candidate ?? 0) === 0;
 
 export function capabilityClaim(engine: EngineLabel, rules: readonly RuleState[], capability: CapabilityId): CapabilityClaim {
   const bands = [...new Set(rules.map((r) => r.requiredFromBand))].sort((a, b) => a - b);
@@ -722,7 +806,7 @@ export function capabilityClaim(engine: EngineLabel, rules: readonly RuleState[]
   const unverified = rules.filter((r) => !countsAsVerified(r) && r.requiredFromBand <= Math.max(level, bands[0] ?? 0)).map((r) => ({ rule: r.rule, requiredFromBand: r.requiredFromBand, status: r.status, ...(r.status === "verified" ? { provisional: true } : {}) }));
   const labelOk = M !== null && supported === M;
   const fmt = (b: number) => b.toFixed(1);
-  const why = unverified.map((u) => `${u.rule} (${u.provisional ? "shown on provisional questions only" : u.status.replace(/_/g, " ")}, needed from band ${fmt(u.requiredFromBand)})`).join("; ");
+  const why = unverified.map((u) => `${u.rule} (${u.provisional ? "shown only on questions not yet validated by an educator" : u.status.replace(/_/g, " ")}, needed from band ${fmt(u.requiredFromBand)})`).join("; ");
   const summary =
     M === null
       ? `The engine reports no mastery level.${unverified.length ? ` Rules not yet verified: ${why}.` : ""}`
