@@ -1,0 +1,3416 @@
+{
+ "version": 1,
+ "id": "spelling-diagnostic-bank",
+ "status": "provisional: authored 16 October 2026 by Claude (OpenPath assistant) for educator review. Nothing here is approved or validated, and no item is offered to learners.",
+ "review": "candidate-unvalidated",
+ "availability": "review_only",
+ "note": "Diagnostic questions for six spelling principles plus exceptions and derivational contrasts. Each item's role, lemma and transformation are recorded in item-evidence.json. Items are not loaded by the app or the engine's default content; they become available only through a separate, approved change.",
+ "items": [
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.01",
+   "version": 1,
+   "family": "lex.look",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of look: She ___ out of the window.",
+   "answers": [
+    "looked"
+   ],
+   "wrong": {
+    "lookked": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: look + ed = looked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.02",
+   "version": 1,
+   "family": "lex.help",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of help: He is ___ in the kitchen.",
+   "answers": [
+    "helping"
+   ],
+   "wrong": {
+    "helpping": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: help + ing = helping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.03",
+   "version": 1,
+   "family": "lex.start",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of start: The film ___ at seven o'clock.",
+   "answers": [
+    "started"
+   ],
+   "wrong": {
+    "startted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: start + ed = started.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.04",
+   "version": 1,
+   "family": "lex.talk",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of talk: The girls are ___ on the phone.",
+   "answers": [
+    "talking"
+   ],
+   "wrong": {
+    "talkking": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: talk + ing = talking.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.05",
+   "version": 1,
+   "family": "lex.fast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Add -er to fast: A cheetah runs ___ than a lion.",
+   "answers": [
+    "faster"
+   ],
+   "wrong": {
+    "fastter": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: fast + er = faster.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.06",
+   "version": 1,
+   "family": "lex.play",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of play: We ___ cricket after school.",
+   "answers": [
+    "played"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: play + ed = played.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.07",
+   "version": 1,
+   "family": "lex.gasp",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of gasp: We ___ when the balloon popped.",
+   "answers": [
+    "gasped"
+   ],
+   "wrong": {
+    "gaspped": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: gasp + ed = gasped.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.08",
+   "version": 1,
+   "family": "lex.drift",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of drift: The boat was ___ out to sea.",
+   "answers": [
+    "drifting"
+   ],
+   "wrong": {
+    "driftting": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: drift + ing = drifting.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.09",
+   "version": 1,
+   "family": "lex.mend",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of mend: Dad ___ the torn bag.",
+   "answers": [
+    "mended"
+   ],
+   "wrong": {
+    "mendded": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: mend + ed = mended.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.10",
+   "version": 1,
+   "family": "lex.tilt",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of tilt: He ___ his head to listen.",
+   "answers": [
+    "tilted"
+   ],
+   "wrong": {
+    "tiltted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: tilt + ed = tilted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.11",
+   "version": 1,
+   "family": "lex.honk",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of honk: The driver ___ the horn.",
+   "answers": [
+    "honked"
+   ],
+   "wrong": {
+    "honkked": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: honk + ed = honked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.12",
+   "version": 1,
+   "family": "lex.lift",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of lift: She is ___ the heavy box.",
+   "answers": [
+    "lifting"
+   ],
+   "wrong": {
+    "liftting": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: lift + ing = lifting.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.13",
+   "version": 1,
+   "family": "lex.kick",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of kick: He ___ the ball over the wall.",
+   "answers": [
+    "kicked"
+   ],
+   "wrong": {
+    "kickked": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: kick + ed = kicked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.14",
+   "version": 1,
+   "family": "lex.sniff",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of sniff: The dog was ___ the ground.",
+   "answers": [
+    "sniffing"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: sniff + ing = sniffing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.15",
+   "version": 1,
+   "family": "lex.grin.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of grin: The clown was ___ at the children.",
+   "answers": [
+    "grinning"
+   ],
+   "wrong": {
+    "grining": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "plain",
+   "rationale": "contrast for the default rule: short vowel + one consonant, so the ending is not simply added",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.16",
+   "version": 1,
+   "family": "lex.shake.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of shake: The puppy was ___ with excitement.",
+   "answers": [
+    "shaking"
+   ],
+   "wrong": {
+    "shakeing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "plain",
+   "rationale": "contrast for the default rule: the silent e goes",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.17",
+   "version": 1,
+   "family": "lex.marry.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 1.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of marry: They ___ in the spring.",
+   "answers": [
+    "married"
+   ],
+   "wrong": {
+    "marryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "plain",
+   "rationale": "contrast for the default rule: y changes to i",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.18",
+   "version": 1,
+   "family": "lex.look",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 1.75,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? They ___ everywhere for the lost cat. (look + -ed)",
+   "options": [
+    "lookt",
+    "looked",
+    "lookked"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "2": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: look + ed = looked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.pl.19",
+   "version": 1,
+   "family": "lex.blow",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 1.75,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The wind was ___ hard all night. (blow + -ing)",
+   "options": [
+    "blowing",
+    "blowwing",
+    "bloing"
+   ],
+   "answer": 0,
+   "distractor_tags": {
+    "1": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "plain",
+   "rationale": "Applies the rule: blow + ing = blowing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.01",
+   "version": 1,
+   "family": "lex.hop",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of hop: The rabbit is ___ across the garden.",
+   "answers": [
+    "hopping"
+   ],
+   "wrong": {
+    "hoping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: hop + ing = hopping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.02",
+   "version": 1,
+   "family": "lex.plan",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of plan: We ___ a trip to the hills.",
+   "answers": [
+    "planned"
+   ],
+   "wrong": {
+    "planed": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: plan + ed = planned.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.03",
+   "version": 1,
+   "family": "lex.sit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of sit: Grandpa is ___ in his favourite chair.",
+   "answers": [
+    "sitting"
+   ],
+   "wrong": {
+    "siting": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: sit + ing = sitting.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.04",
+   "version": 1,
+   "family": "lex.drop",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of drop: She ___ her pencil on the floor.",
+   "answers": [
+    "dropped"
+   ],
+   "wrong": {
+    "droped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: drop + ed = dropped.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.05",
+   "version": 1,
+   "family": "lex.hot",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Add -er to hot: Today is ___ than yesterday.",
+   "answers": [
+    "hotter"
+   ],
+   "wrong": {
+    "hoter": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: hot + er = hotter.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.06",
+   "version": 1,
+   "family": "lex.get",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of get: It is ___ dark outside.",
+   "answers": [
+    "getting"
+   ],
+   "wrong": {
+    "geting": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: get + ing = getting.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.07",
+   "version": 1,
+   "family": "lex.plod",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of plod: The tired donkey was ___ up the hill.",
+   "answers": [
+    "plodding"
+   ],
+   "wrong": {
+    "ploding": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: plod + ing = plodding.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.08",
+   "version": 1,
+   "family": "lex.skim",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of skim: He ___ the article to find the date.",
+   "answers": [
+    "skimmed"
+   ],
+   "wrong": {
+    "skimed": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: skim + ed = skimmed.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.09",
+   "version": 1,
+   "family": "lex.throb",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of throb: My bruised toe was ___ all night.",
+   "answers": [
+    "throbbing"
+   ],
+   "wrong": {
+    "throbing": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: throb + ing = throbbing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.10",
+   "version": 1,
+   "family": "lex.prod",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of prod: He ___ the campfire with a stick.",
+   "answers": [
+    "prodded"
+   ],
+   "wrong": {
+    "proded": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: prod + ed = prodded.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.11",
+   "version": 1,
+   "family": "lex.slam",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of slam: The wind ___ the door shut.",
+   "answers": [
+    "slammed"
+   ],
+   "wrong": {
+    "slamed": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: slam + ed = slammed.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.12",
+   "version": 1,
+   "family": "lex.flap",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of flap: The flag was ___ in the wind.",
+   "answers": [
+    "flapping"
+   ],
+   "wrong": {
+    "flaping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: flap + ing = flapping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.13",
+   "version": 1,
+   "family": "lex.spot",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of spot: We ___ a deer in the forest.",
+   "answers": [
+    "spotted"
+   ],
+   "wrong": {
+    "spoted": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: spot + ed = spotted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.14",
+   "version": 1,
+   "family": "lex.wag",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of wag: The puppy was ___ its tail.",
+   "answers": [
+    "wagging"
+   ],
+   "wrong": {
+    "waging": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: wag + ing = wagging.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.15",
+   "version": 1,
+   "family": "lex.help.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of help: She ___ her brother with his homework.",
+   "answers": [
+    "helped"
+   ],
+   "wrong": {
+    "helpped": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "two final consonants: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.16",
+   "version": 1,
+   "family": "lex.sleep.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of sleep: The baby is ___ upstairs.",
+   "answers": [
+    "sleeping"
+   ],
+   "wrong": {
+    "sleepping": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "two vowel letters: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.17",
+   "version": 1,
+   "family": "lex.float.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of float: The leaf ___ down the river.",
+   "answers": [
+    "floated"
+   ],
+   "wrong": {
+    "floatted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "two vowel letters: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.18",
+   "version": 1,
+   "family": "lex.snow.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the -ing form of snow: Look, it is ___ in the mountains!",
+   "answers": [
+    "snowing"
+   ],
+   "wrong": {
+    "snowwing": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "w is never doubled",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.19",
+   "version": 1,
+   "family": "lex.fix.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Write the past tense of fix: Dad ___ the broken chair.",
+   "answers": [
+    "fixed"
+   ],
+   "wrong": {
+    "fixxed": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "x is never doubled",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.20",
+   "version": 1,
+   "family": "lex.hop.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.0,
+   "a": 1.3,
+   "prompt": "Add -s to hop: The frog ___ onto the rock.",
+   "answers": [
+    "hops"
+   ],
+   "wrong": {
+    "hopps": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "consonant suffix -s: no doubling (same lemma as hop + -ing)",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.21",
+   "version": 1,
+   "family": "lex.hop",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.0,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The frog was ___ along the path. (hop + -ing)",
+   "options": [
+    "hoping",
+    "hopping",
+    "hopeing",
+    "hopinng"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: hop + ing = hopping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.22",
+   "version": 1,
+   "family": "lex.walk.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.0,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? We ___ along the beach. (walk + -ed)",
+   "options": [
+    "walked",
+    "walkked",
+    "walkd"
+   ],
+   "answer": 0,
+   "distractor_tags": {
+    "1": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Contrast: walk + ed = walked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ds.23",
+   "version": 1,
+   "family": "lex.hum",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.0,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The bee was ___ softly in the flowers. (hum + -ing)",
+   "options": [
+    "huming",
+    "humming",
+    "humeing"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "double_short",
+   "rationale": "Applies the rule: hum + ing = humming.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.01",
+   "version": 1,
+   "family": "lex.bake",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of bake: Amma is ___ bread for the party.",
+   "answers": [
+    "baking"
+   ],
+   "wrong": {
+    "bakeing": "kept_silent_e",
+    "bakking": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: bake + ing = baking.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.02",
+   "version": 1,
+   "family": "lex.ride",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of ride: She is ___ her new bicycle.",
+   "answers": [
+    "riding"
+   ],
+   "wrong": {
+    "rideing": "kept_silent_e",
+    "ridding": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: ride + ing = riding.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.03",
+   "version": 1,
+   "family": "lex.use",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of use: He is ___ a ruler to draw lines.",
+   "answers": [
+    "using"
+   ],
+   "wrong": {
+    "useing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: use + ing = using.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.04",
+   "version": 1,
+   "family": "lex.dance",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of dance: We ___ at my cousin's wedding.",
+   "answers": [
+    "danced"
+   ],
+   "wrong": {
+    "danceed": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: dance + ed = danced.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.05",
+   "version": 1,
+   "family": "lex.hope",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of hope: We are ___ for sunshine tomorrow.",
+   "answers": [
+    "hoping"
+   ],
+   "wrong": {
+    "hopeing": "kept_silent_e",
+    "hopping": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: hope + ing = hoping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.06",
+   "version": 1,
+   "family": "lex.large",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Add -er to large: An elephant is ___ than a horse.",
+   "answers": [
+    "larger"
+   ],
+   "wrong": {
+    "largeer": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: large + er = larger.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.07",
+   "version": 1,
+   "family": "lex.graze",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of graze: The cows were ___ in the field.",
+   "answers": [
+    "grazing"
+   ],
+   "wrong": {
+    "grazeing": "kept_silent_e",
+    "grazzing": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: graze + ing = grazing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.08",
+   "version": 1,
+   "family": "lex.wade",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of wade: We ___ across the shallow stream.",
+   "answers": [
+    "waded"
+   ],
+   "wrong": {
+    "wadeed": "kept_silent_e",
+    "wadded": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: wade + ed = waded.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.09",
+   "version": 1,
+   "family": "lex.nudge",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of nudge: She ___ me gently with her elbow.",
+   "answers": [
+    "nudged"
+   ],
+   "wrong": {
+    "nudgeed": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: nudge + ed = nudged.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.10",
+   "version": 1,
+   "family": "lex.squeeze",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of squeeze: He was ___ a lemon into the juice.",
+   "answers": [
+    "squeezing"
+   ],
+   "wrong": {
+    "squeezeing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: squeeze + ing = squeezing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.11",
+   "version": 1,
+   "family": "lex.stroke",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of stroke: She sat on the step, ___ the kitten.",
+   "answers": [
+    "stroking"
+   ],
+   "wrong": {
+    "strokeing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: stroke + ing = stroking.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.12",
+   "version": 1,
+   "family": "lex.wipe",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of wipe: He ___ the table clean.",
+   "answers": [
+    "wiped"
+   ],
+   "wrong": {
+    "wipeed": "kept_silent_e",
+    "wipped": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: wipe + ed = wiped.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.13",
+   "version": 1,
+   "family": "lex.bounce",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of bounce: The ball kept ___ down the steps.",
+   "answers": [
+    "bouncing"
+   ],
+   "wrong": {
+    "bounceing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: bounce + ing = bouncing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.14",
+   "version": 1,
+   "family": "lex.juggle",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of juggle: The clown was ___ five balls.",
+   "answers": [
+    "juggling"
+   ],
+   "wrong": {
+    "juggleing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: juggle + ing = juggling.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.15",
+   "version": 1,
+   "family": "lex.flee.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of flee: The deer were ___ from the fire.",
+   "answers": [
+    "fleeing"
+   ],
+   "step": "drop_e",
+   "rationale": "ee: the e is not silent, so it stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.16",
+   "version": 1,
+   "family": "lex.canoe.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of canoe: We went ___ on the river.",
+   "answers": [
+    "canoeing"
+   ],
+   "step": "drop_e",
+   "rationale": "oe: the e stays before -ing",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.17",
+   "version": 1,
+   "family": "lex.dye.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of dye: She is ___ the cloth blue.",
+   "answers": [
+    "dyeing"
+   ],
+   "step": "drop_e",
+   "rationale": "keeps e to differ from dying (die)",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.18",
+   "version": 1,
+   "family": "lex.free.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of free: The keeper is ___ the bird from the net.",
+   "answers": [
+    "freeing"
+   ],
+   "step": "drop_e",
+   "rationale": "ee: the e stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.19",
+   "version": 1,
+   "family": "lex.tiptoe.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of tiptoe: She was ___ past the sleeping baby.",
+   "answers": [
+    "tiptoeing"
+   ],
+   "step": "drop_e",
+   "rationale": "oe: the e stays before -ing",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.20",
+   "version": 1,
+   "family": "lex.skate",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.5,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The children were ___ on the ice. (skate + -ing)",
+   "options": [
+    "skateing",
+    "skating",
+    "skatting"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "kept_silent_e",
+    "2": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: skate + ing = skating.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.21",
+   "version": 1,
+   "family": "lex.smile",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.5,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The baby was ___ at her mother. (smile + -ing)",
+   "options": [
+    "smileing",
+    "smiling",
+    "smilling"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "kept_silent_e",
+    "2": "over_doubling"
+   },
+   "addresses": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "step": "drop_e",
+   "rationale": "Applies the rule: smile + ing = smiling.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.de.22",
+   "version": 1,
+   "family": "lex.see.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 3.5,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? We are ___ my grandparents tomorrow. (see + -ing)",
+   "options": [
+    "seing",
+    "seeing",
+    "seeeing"
+   ],
+   "answer": 1,
+   "step": "drop_e",
+   "rationale": "Contrast: see + ing = seeing.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.01",
+   "version": 1,
+   "family": "lex.fly",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the plural of fly: Two ___ were buzzing at the window.",
+   "answers": [
+    "flies"
+   ],
+   "wrong": {
+    "flys": "y_not_changed",
+    "flyes": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: fly + es = flies.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.02",
+   "version": 1,
+   "family": "lex.study",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of study: She ___ hard for the test.",
+   "answers": [
+    "studied"
+   ],
+   "wrong": {
+    "studyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: study + ed = studied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.03",
+   "version": 1,
+   "family": "lex.happy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -er to happy: I am ___ now that the holidays have begun.",
+   "answers": [
+    "happier"
+   ],
+   "wrong": {
+    "happyer": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: happy + er = happier.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.04",
+   "version": 1,
+   "family": "lex.party",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the plural of party: We went to two birthday ___ this week.",
+   "answers": [
+    "parties"
+   ],
+   "wrong": {
+    "partys": "y_not_changed",
+    "partyes": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: party + es = parties.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.05",
+   "version": 1,
+   "family": "lex.dry",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of dry: Amma ___ the clothes in the sun.",
+   "answers": [
+    "dried"
+   ],
+   "wrong": {
+    "dryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: dry + ed = dried.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.06",
+   "version": 1,
+   "family": "lex.easy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -est to easy: This is the ___ puzzle in the book.",
+   "answers": [
+    "easiest"
+   ],
+   "wrong": {
+    "easyest": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: easy + est = easiest.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.07",
+   "version": 1,
+   "family": "lex.pity",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of pity: We ___ the soaked, shivering puppy.",
+   "answers": [
+    "pitied"
+   ],
+   "wrong": {
+    "pityed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: pity + ed = pitied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.08",
+   "version": 1,
+   "family": "lex.ferry",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of ferry: The boat ___ people across the river.",
+   "answers": [
+    "ferried"
+   ],
+   "wrong": {
+    "ferryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: ferry + ed = ferried.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.09",
+   "version": 1,
+   "family": "lex.envy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of envy: He ___ his friend's new bicycle.",
+   "answers": [
+    "envied"
+   ],
+   "wrong": {
+    "envyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: envy + ed = envied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.10",
+   "version": 1,
+   "family": "lex.scurry",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of scurry: The mouse ___ under the cupboard.",
+   "answers": [
+    "scurried"
+   ],
+   "wrong": {
+    "scurryed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: scurry + ed = scurried.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.11",
+   "version": 1,
+   "family": "lex.deny",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of deny: He ___ breaking the window.",
+   "answers": [
+    "denied"
+   ],
+   "wrong": {
+    "denyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: deny + ed = denied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.12",
+   "version": 1,
+   "family": "lex.supply",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of supply: The school ___ the paper and pencils.",
+   "answers": [
+    "supplied"
+   ],
+   "wrong": {
+    "supplyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: supply + ed = supplied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.13",
+   "version": 1,
+   "family": "lex.fancy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -er to fancy: Her new shoes are ___ than mine.",
+   "answers": [
+    "fancier"
+   ],
+   "wrong": {
+    "fancyer": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: fancy + er = fancier.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.14",
+   "version": 1,
+   "family": "lex.spy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of spy: We ___ a nest high in the tree.",
+   "answers": [
+    "spied"
+   ],
+   "wrong": {
+    "spyed": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: spy + ed = spied.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.15",
+   "version": 1,
+   "family": "lex.stay.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of stay: We ___ at our aunt's house.",
+   "answers": [
+    "stayed"
+   ],
+   "step": "y_to_i",
+   "rationale": "vowel before y: y stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.16",
+   "version": 1,
+   "family": "lex.obey.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of obey: The dog ___ every command.",
+   "answers": [
+    "obeyed"
+   ],
+   "step": "y_to_i",
+   "rationale": "vowel before y: y stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.17",
+   "version": 1,
+   "family": "lex.cry.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of cry: The baby was ___ all night.",
+   "answers": [
+    "crying"
+   ],
+   "step": "y_to_i",
+   "rationale": "y stays before -ing (same lemma as cried)",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.18",
+   "version": 1,
+   "family": "lex.study.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of study: She is ___ for her exams.",
+   "answers": [
+    "studying"
+   ],
+   "step": "y_to_i",
+   "rationale": "y stays before -ing (same lemma as studied)",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.19",
+   "version": 1,
+   "family": "lex.annoy.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of annoy: The buzzing fly ___ me.",
+   "answers": [
+    "annoyed"
+   ],
+   "step": "y_to_i",
+   "rationale": "vowel before y: y stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.20",
+   "version": 1,
+   "family": "lex.delay.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -ed to delay: The train was ___ by fog.",
+   "answers": [
+    "delayed"
+   ],
+   "step": "y_to_i",
+   "rationale": "vowel before y: y stays",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.21",
+   "version": 1,
+   "family": "lex.tiny",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 4.25,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The puppy was the ___ in the litter. (tiny + -est)",
+   "options": [
+    "tinyest",
+    "tiniest",
+    "tinest"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: tiny + est = tiniest.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.22",
+   "version": 1,
+   "family": "lex.play.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 4.25,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The children ___ in the park all day. (play + -ed)",
+   "options": [
+    "plaied",
+    "played",
+    "playd"
+   ],
+   "answer": 1,
+   "step": "y_to_i",
+   "rationale": "Contrast: play + ed = played.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.yi.23",
+   "version": 1,
+   "family": "lex.puppy",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 4.25,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The ___ on the farm were tiny. (puppy + -es)",
+   "options": [
+    "puppys",
+    "puppies",
+    "puppyes"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "y_not_changed",
+    "2": "y_not_changed"
+   },
+   "addresses": [
+    "y_not_changed"
+   ],
+   "step": "y_to_i",
+   "rationale": "Applies the rule: puppy + es = puppies.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.01",
+   "version": 1,
+   "family": "lex.prefer",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of prefer: She ___ the blue dress to the red one.",
+   "answers": [
+    "preferred"
+   ],
+   "wrong": {
+    "prefered": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: prefer + ed = preferred.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.02",
+   "version": 1,
+   "family": "lex.admit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of admit: He ___ that he was wrong.",
+   "answers": [
+    "admitted"
+   ],
+   "wrong": {
+    "admited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: admit + ed = admitted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.03",
+   "version": 1,
+   "family": "lex.regret",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of regret: I ___ not taking my umbrella.",
+   "answers": [
+    "regretted"
+   ],
+   "wrong": {
+    "regreted": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: regret + ed = regretted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.04",
+   "version": 1,
+   "family": "lex.upset",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of upset: The news about the flood was ___.",
+   "answers": [
+    "upsetting"
+   ],
+   "wrong": {
+    "upseting": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: upset + ing = upsetting.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.05",
+   "version": 1,
+   "family": "lex.control",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of control: The pilot ___ the plane carefully.",
+   "answers": [
+    "controlled"
+   ],
+   "wrong": {
+    "controled": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: control + ed = controlled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.06",
+   "version": 1,
+   "family": "lex.submit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of submit: We ___ our project on time.",
+   "answers": [
+    "submitted"
+   ],
+   "wrong": {
+    "submited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: submit + ed = submitted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.07",
+   "version": 1,
+   "family": "lex.compel",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of compel: The storm ___ us to stay indoors.",
+   "answers": [
+    "compelled"
+   ],
+   "wrong": {
+    "compeled": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: compel + ed = compelled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.08",
+   "version": 1,
+   "family": "lex.propel",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of propel: Strong winds ___ the boat forward.",
+   "answers": [
+    "propelled"
+   ],
+   "wrong": {
+    "propeled": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: propel + ed = propelled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.09",
+   "version": 1,
+   "family": "lex.expel",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of expel: The volcano ___ clouds of hot ash.",
+   "answers": [
+    "expelled"
+   ],
+   "wrong": {
+    "expeled": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: expel + ed = expelled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.10",
+   "version": 1,
+   "family": "lex.outwit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of outwit: The clever fox ___ the hunters.",
+   "answers": [
+    "outwitted"
+   ],
+   "wrong": {
+    "outwited": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: outwit + ed = outwitted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.11",
+   "version": 1,
+   "family": "lex.repel",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of repel: The two magnets ___ each other.",
+   "answers": [
+    "repelled"
+   ],
+   "wrong": {
+    "repeled": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: repel + ed = repelled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.12",
+   "version": 1,
+   "family": "lex.overlap",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of overlap: The tiles on the roof were ___.",
+   "answers": [
+    "overlapping"
+   ],
+   "wrong": {
+    "overlaping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: overlap + ing = overlapping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.13",
+   "version": 1,
+   "family": "lex.embed",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Add -ed to embed: A small stone was ___ in the wall.",
+   "answers": [
+    "embedded"
+   ],
+   "wrong": {
+    "embeded": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: embed + ed = embedded.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.14",
+   "version": 1,
+   "family": "lex.unwrap",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of unwrap: She was ___ her birthday present.",
+   "answers": [
+    "unwrapping"
+   ],
+   "wrong": {
+    "unwraping": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: unwrap + ing = unwrapping.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.15",
+   "version": 1,
+   "family": "lex.credit.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Add -ed to credit: The prize money was ___ to her account.",
+   "answers": [
+    "credited"
+   ],
+   "wrong": {
+    "creditted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "stress on the first syllable: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.16",
+   "version": 1,
+   "family": "lex.gallop.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the -ing form of gallop: The horse was ___ across the field.",
+   "answers": [
+    "galloping"
+   ],
+   "wrong": {
+    "gallopping": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "stress on the first syllable: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.17",
+   "version": 1,
+   "family": "lex.pocket.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 5.75,
+   "a": 1.3,
+   "prompt": "Write the past tense of pocket: He ___ the coin he found.",
+   "answers": [
+    "pocketed"
+   ],
+   "wrong": {
+    "pocketted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "stress on the first syllable: no doubling",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.18",
+   "version": 1,
+   "family": "lex.begin",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 5.75,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? Hurry, the match is ___! (begin + -ing)",
+   "options": [
+    "begining",
+    "beginning",
+    "beginnning"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: begin + ing = beginning.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.19",
+   "version": 1,
+   "family": "lex.visit.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 5.75,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? Our class ___ the museum last week. (visit + -ed)",
+   "options": [
+    "visitted",
+    "visited",
+    "visted"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Contrast: visit + ed = visited.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.sd.20",
+   "version": 1,
+   "family": "lex.refer",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 5.75,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The doctor ___ her to a specialist. (refer + -ed)",
+   "options": [
+    "refered",
+    "referred",
+    "refferred"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "stress_doubling",
+   "rationale": "Applies the rule: refer + ed = referred.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.01",
+   "version": 1,
+   "family": "lex.happen",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of happen: What ___ at school today?",
+   "answers": [
+    "happened"
+   ],
+   "wrong": {
+    "happenned": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: happen + ed = happened.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.02",
+   "version": 1,
+   "family": "lex.garden",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of garden: My grandmother loves ___.",
+   "answers": [
+    "gardening"
+   ],
+   "wrong": {
+    "gardenning": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: garden + ing = gardening.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.03",
+   "version": 1,
+   "family": "lex.listen",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of listen: Are you ___ to the story?",
+   "answers": [
+    "listening"
+   ],
+   "wrong": {
+    "listenning": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: listen + ing = listening.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.04",
+   "version": 1,
+   "family": "lex.enter",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of enter: They ___ the classroom quietly.",
+   "answers": [
+    "entered"
+   ],
+   "wrong": {
+    "enterred": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: enter + ed = entered.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.05",
+   "version": 1,
+   "family": "lex.budget",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of budget: We ___ carefully for the school trip.",
+   "answers": [
+    "budgeted"
+   ],
+   "wrong": {
+    "budgetted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: budget + ed = budgeted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.06",
+   "version": 1,
+   "family": "lex.target",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of target: The poster ___ young readers.",
+   "answers": [
+    "targeted"
+   ],
+   "wrong": {
+    "targetted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: target + ed = targeted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.07",
+   "version": 1,
+   "family": "lex.blossom",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of blossom: The mango tree ___ in spring.",
+   "answers": [
+    "blossomed"
+   ],
+   "wrong": {
+    "blossommed": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: blossom + ed = blossomed.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.08",
+   "version": 1,
+   "family": "lex.sharpen",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of sharpen: He ___ his pencil before the test.",
+   "answers": [
+    "sharpened"
+   ],
+   "wrong": {
+    "sharpenned": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: sharpen + ed = sharpened.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.09",
+   "version": 1,
+   "family": "lex.profit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of profit: The shop ___ from the festival crowds.",
+   "answers": [
+    "profited"
+   ],
+   "wrong": {
+    "profitted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: profit + ed = profited.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.10",
+   "version": 1,
+   "family": "lex.inherit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of inherit: She ___ her grandmother's ring.",
+   "answers": [
+    "inherited"
+   ],
+   "wrong": {
+    "inheritted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: inherit + ed = inherited.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.11",
+   "version": 1,
+   "family": "lex.exhibit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of exhibit: The museum ___ old coins.",
+   "answers": [
+    "exhibited"
+   ],
+   "wrong": {
+    "exhibitted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: exhibit + ed = exhibited.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.12",
+   "version": 1,
+   "family": "lex.deposit",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the past tense of deposit: He ___ the money in the bank.",
+   "answers": [
+    "deposited"
+   ],
+   "wrong": {
+    "depositted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: deposit + ed = deposited.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.13",
+   "version": 1,
+   "family": "lex.rivet",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Add -ed to rivet: We were ___ by the story.",
+   "answers": [
+    "riveted"
+   ],
+   "wrong": {
+    "rivetted": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: rivet + ed = riveted.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.14",
+   "version": 1,
+   "family": "lex.glisten",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of glisten: The lake was ___ in the sun.",
+   "answers": [
+    "glistening"
+   ],
+   "wrong": {
+    "glistenning": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: glisten + ing = glistening.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.15",
+   "version": 1,
+   "family": "lex.occur.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of occur: Earthquakes are ___ more often here.",
+   "answers": [
+    "occurring"
+   ],
+   "wrong": {
+    "occuring": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "stress on the last syllable: double",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.16",
+   "version": 1,
+   "family": "lex.patrol.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Write the -ing form of patrol: Guards were ___ the gate all night.",
+   "answers": [
+    "patrolling"
+   ],
+   "wrong": {
+    "patroling": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "stress on the last syllable: double",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.17",
+   "version": 1,
+   "family": "lex.equip.contrast",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 6.25,
+   "a": 1.3,
+   "prompt": "Add -ed to equip: The ship was ___ for a long voyage.",
+   "answers": [
+    "equipped"
+   ],
+   "wrong": {
+    "equiped": "no_doubling"
+   },
+   "addresses": [
+    "no_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "stress on the last syllable: double",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.18",
+   "version": 1,
+   "family": "lex.open",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 6.25,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The shop ___ at nine o'clock. (open + -ed)",
+   "options": [
+    "openned",
+    "opened",
+    "opend"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: open + ed = opened.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.nd.19",
+   "version": 1,
+   "family": "lex.whimper",
+   "target": "EN.FND.SPL.inflections",
+   "format": "choice:spelling",
+   "b": 6.25,
+   "a": 1.1,
+   "prompt": "Which spelling is correct? The puppy was ___ quietly in its basket. (whimper + -ing)",
+   "options": [
+    "whimperring",
+    "whimpering",
+    "whimpring"
+   ],
+   "answer": 1,
+   "distractor_tags": {
+    "0": "over_doubling"
+   },
+   "addresses": [
+    "over_doubling"
+   ],
+   "step": "no_double_unstressed",
+   "rationale": "Applies the rule: whimper + ing = whimpering.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.01",
+   "version": 1,
+   "family": "lex.mimic",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of mimic: The parrot kept ___ my voice.",
+   "answers": [
+    "mimicking"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: mimic + ing = mimicking.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.02",
+   "version": 1,
+   "family": "lex.frolic",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of frolic: The lambs ___ in the meadow.",
+   "answers": [
+    "frolicked"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: frolic + ed = frolicked.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.03",
+   "version": 1,
+   "family": "lex.tie",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of tie: He is ___ his shoelaces.",
+   "answers": [
+    "tying"
+   ],
+   "wrong": {
+    "tieing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: tie + ing = tying.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.04",
+   "version": 1,
+   "family": "lex.die",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the -ing form of die: The plant is ___ without water.",
+   "answers": [
+    "dying"
+   ],
+   "wrong": {
+    "dieing": "kept_silent_e"
+   },
+   "addresses": [
+    "kept_silent_e"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: die + ing = dying.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.05",
+   "version": 1,
+   "family": "lex.pay",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of pay: He ___ for the tickets.",
+   "answers": [
+    "paid"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: pay + ed = paid.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.06",
+   "version": 1,
+   "family": "lex.say",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of say: She ___ goodbye at the gate.",
+   "answers": [
+    "said"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: say + ed = said.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.ex.07",
+   "version": 1,
+   "family": "lex.travel",
+   "target": "EN.FND.SPL.inflections",
+   "format": "typed:cloze",
+   "b": 7.5,
+   "a": 1.3,
+   "prompt": "Write the past tense of travel: Last summer we ___ to Kerala by train.",
+   "answers": [
+    "travelled",
+    "traveled"
+   ],
+   "step": "exceptions",
+   "rationale": "Applies the rule: travel + ed = travelled.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.01",
+   "version": 1,
+   "family": "lex.hope.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -ful to hope: I feel ___ about tomorrow's match.",
+   "answers": [
+    "hopeful"
+   ],
+   "wrong": {
+    "hopefull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "rationale": "Derivational contrast: consonant suffix: the silent e stays (compare hoping).",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.02",
+   "version": 1,
+   "family": "lex.care.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -ful to care: Be ___ when you cross the road.",
+   "answers": [
+    "careful"
+   ],
+   "wrong": {
+    "carefull": "full_suffix"
+   },
+   "addresses": [
+    "full_suffix"
+   ],
+   "step": "ful_ly_ment",
+   "rationale": "Derivational contrast: consonant suffix: the silent e stays (compare caring).",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.03",
+   "version": 1,
+   "family": "lex.safe.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 4.25,
+   "a": 1.3,
+   "prompt": "Add -ly to safe: The plane landed ___.",
+   "answers": [
+    "safely"
+   ],
+   "step": "ful_ly_ment",
+   "rationale": "Derivational contrast: consonant suffix: the silent e stays.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.04",
+   "version": 1,
+   "family": "lex.notice.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 5.5,
+   "a": 1.3,
+   "prompt": "Add -able to notice: There was a ___ change in the weather.",
+   "answers": [
+    "noticeable"
+   ],
+   "step": "able_ible",
+   "rationale": "Derivational contrast: e kept after c to keep the soft sound (exception to e-deletion).",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.05",
+   "version": 1,
+   "family": "lex.prefer.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Add -ence to prefer: Do you have a ___ for tea or coffee?",
+   "answers": [
+    "preference"
+   ],
+   "step": "double_at_join",
+   "rationale": "Derivational contrast: stress moves to the first syllable: no doubling (compare preferred).",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  },
+  {
+   "kind": "code",
+   "id": "spl.dx.dv.06",
+   "version": 1,
+   "family": "lex.begin.deriv",
+   "target": "EN.FND.SPL.morphological",
+   "format": "typed:cloze",
+   "b": 3.5,
+   "a": 1.3,
+   "prompt": "Add -er to begin: This swimming class is for a ___.",
+   "answers": [
+    "beginner"
+   ],
+   "wrong": {
+    "beginer": "dropped_double_at_join"
+   },
+   "addresses": [
+    "dropped_double_at_join"
+   ],
+   "step": "double_at_join",
+   "rationale": "Derivational contrast: stress on the last syllable: double.",
+   "difficulty_source": "expert_estimate",
+   "review": "candidate-unvalidated",
+   "evidence_status": "provisional"
+  }
+ ]
+}

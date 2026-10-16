@@ -1,0 +1,5023 @@
+{
+ "schema": "openpath.spelling.item-evidence@1",
+ "note": "Assessment metadata for spelling inflection items, kept beside the items so no existing item record (or its review fingerprint) changes. Generated items are covered by rule in code (generated.base and template); every other inflection item must have an entry here. lemma = the base word; lexeme_family groups every form of one lemma; exposure_family is the item's own production family; polarity contrast = the rule must not be applied; uses = what the item is suitable or reserved for (one answer is still one piece of evidence); reserved = the lemma appears in no other spelling item and must stay unseen for transfer or delayed checks. Curated and authored entries need educator review.",
+ "roles": [
+  "familiar_practice",
+  "unseen_transfer",
+  "contrast",
+  "misconception_probe",
+  "delayed_retention"
+ ],
+ "items": {
+  "plt.infl.01@1": {
+   "exposure_family": "plt.fam.infl.plain",
+   "lemma": "read",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:read",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.02@1": {
+   "exposure_family": "plt.fam.infl.es",
+   "lemma": "dish",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:dish",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.03@1": {
+   "exposure_family": "plt.fam.infl.plain",
+   "lemma": "fill",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:fill",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.04@1": {
+   "exposure_family": "plt.fam.infl.es",
+   "lemma": "glass",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:glass",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.05@1": {
+   "exposure_family": "plt.fam.infl.double",
+   "lemma": "nod",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:nod",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.06@1": {
+   "exposure_family": "plt.fam.infl.drope",
+   "lemma": "bite",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:bite",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.07@1": {
+   "exposure_family": "plt.fam.infl.ytoi",
+   "lemma": "copy",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:copy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.08@1": {
+   "exposure_family": "plt.fam.infl.ytoi",
+   "lemma": "tidy",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:tidy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.09@1": {
+   "exposure_family": "plt.fam.infl.double",
+   "lemma": "jot",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:jot",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'confirmation'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "plt.infl.10@1": {
+   "exposure_family": "plt.fam.infl.plain",
+   "lemma": "sing",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:sing",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention"
+   ]
+  },
+  "plt.infl.11@1": {
+   "exposure_family": "plt.fam.infl.es",
+   "lemma": "peach",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:peach",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention"
+   ]
+  },
+  "plt.infl.12@1": {
+   "exposure_family": "plt.fam.infl.double",
+   "lemma": "pat",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:pat",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.13@1": {
+   "exposure_family": "plt.fam.infl.drope",
+   "lemma": "skate",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:skate",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.14@1": {
+   "exposure_family": "plt.fam.infl.ytoi",
+   "lemma": "reply",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:reply",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.15@1": {
+   "exposure_family": "plt.fam.infl.ytoi",
+   "lemma": "lucky",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:lucky",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.16@1": {
+   "exposure_family": "plt.fam.infl.drope",
+   "lemma": "glide",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:glide",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'retention'",
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.17@1": {
+   "exposure_family": "plt.infl.17",
+   "lemma": "pull",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:pull",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'practice'",
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "plt.infl.18@1": {
+   "exposure_family": "plt.infl.18",
+   "lemma": "bus",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:bus",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "use_source": "pilot manifest pool 'practice'",
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "plt.infl.19@1": {
+   "exposure_family": "plt.infl.19",
+   "lemma": "dig",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:dig",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'practice'",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.20@1": {
+   "exposure_family": "plt.infl.20",
+   "lemma": "shine",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:shine",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'practice'",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "plt.infl.21@1": {
+   "exposure_family": "plt.infl.21",
+   "lemma": "baby",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:baby",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "pilot",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'practice'",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.001@1": {
+   "exposure_family": "spl.dict.001",
+   "lemma": "point",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:point",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": []
+  },
+  "spl.dict.002@1": {
+   "exposure_family": "spl.dict.002",
+   "lemma": "talk",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:talk",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": []
+  },
+  "spl.dict.003@1": {
+   "exposure_family": "spl.dict.003",
+   "lemma": "help",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:help",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": []
+  },
+  "spl.dict.004@1": {
+   "exposure_family": "spl.dict.004",
+   "lemma": "look",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:look",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": []
+  },
+  "spl.dict.005@1": {
+   "exposure_family": "spl.dict.005",
+   "lemma": "wish",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:wish",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "uses": []
+  },
+  "spl.dict.006@1": {
+   "exposure_family": "spl.dict.006",
+   "lemma": "match",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:match",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "uses": []
+  },
+  "spl.dict.007@1": {
+   "exposure_family": "spl.dict.007",
+   "lemma": "brush",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:brush",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "uses": []
+  },
+  "spl.dict.008@1": {
+   "exposure_family": "spl.dict.008",
+   "lemma": "church",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:church",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "uses": []
+  },
+  "spl.dict.009@1": {
+   "exposure_family": "spl.dict.009",
+   "lemma": "fox",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:fox",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "uses": []
+  },
+  "spl.dict.010@1": {
+   "exposure_family": "spl.dict.010",
+   "lemma": "stop",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:stop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.011@1": {
+   "exposure_family": "spl.dict.011",
+   "lemma": "drop",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:drop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.012@1": {
+   "exposure_family": "spl.dict.012",
+   "lemma": "shop",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:shop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.013@1": {
+   "exposure_family": "spl.dict.013",
+   "lemma": "clap",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:clap",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.014@1": {
+   "exposure_family": "spl.dict.014",
+   "lemma": "grab",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:grab",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.015@1": {
+   "exposure_family": "spl.dict.015",
+   "lemma": "sit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:sit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": []
+  },
+  "spl.dict.016@1": {
+   "exposure_family": "spl.dict.016",
+   "lemma": "plan",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:plan",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": []
+  },
+  "spl.dict.017@1": {
+   "exposure_family": "spl.dict.017",
+   "lemma": "write",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:write",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.018@1": {
+   "exposure_family": "spl.dict.018",
+   "lemma": "smile",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:smile",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.019@1": {
+   "exposure_family": "spl.dict.019",
+   "lemma": "close",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:close",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.020@1": {
+   "exposure_family": "spl.dict.020",
+   "lemma": "arrive",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:arrive",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.021@1": {
+   "exposure_family": "spl.dict.021",
+   "lemma": "save",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:save",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.022@1": {
+   "exposure_family": "spl.dict.022",
+   "lemma": "chase",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:chase",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.023@1": {
+   "exposure_family": "spl.dict.023",
+   "lemma": "hurry",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:hurry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.024@1": {
+   "exposure_family": "spl.dict.024",
+   "lemma": "happy",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:happy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.025@1": {
+   "exposure_family": "spl.dict.025",
+   "lemma": "study",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:study",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.026@1": {
+   "exposure_family": "spl.dict.026",
+   "lemma": "worry",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:worry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.027@1": {
+   "exposure_family": "spl.dict.027",
+   "lemma": "easy",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:easy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.028@1": {
+   "exposure_family": "spl.dict.028",
+   "lemma": "family",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:family",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "y_to_i",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.029@1": {
+   "exposure_family": "spl.dict.029",
+   "lemma": "forget",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:forget",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "stem": "forgot",
+   "suffix": "-en",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.030@1": {
+   "exposure_family": "spl.dict.030",
+   "lemma": "admit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:admit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.031@1": {
+   "exposure_family": "spl.dict.031",
+   "lemma": "prefer",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:prefer",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.032@1": {
+   "exposure_family": "spl.dict.032",
+   "lemma": "regret",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:regret",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.033@1": {
+   "exposure_family": "spl.dict.033",
+   "lemma": "commit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:commit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.034@1": {
+   "exposure_family": "spl.dict.034",
+   "lemma": "permit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:permit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.035@1": {
+   "exposure_family": "spl.dict.035",
+   "lemma": "forbid",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:forbid",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-en",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.036@1": {
+   "exposure_family": "spl.dict.036",
+   "lemma": "open",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:open",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.037@1": {
+   "exposure_family": "spl.dict.037",
+   "lemma": "happen",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:happen",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.038@1": {
+   "exposure_family": "spl.dict.038",
+   "lemma": "offer",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:offer",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.039@1": {
+   "exposure_family": "spl.dict.039",
+   "lemma": "limit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:limit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.040@1": {
+   "exposure_family": "spl.dict.040",
+   "lemma": "enter",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:enter",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.041@1": {
+   "exposure_family": "spl.dict.041",
+   "lemma": "order",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:order",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.042@1": {
+   "exposure_family": "spl.dict.042",
+   "lemma": "garden",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:garden",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.dict.043@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "spl.dict.043",
+   "lemma": "mimic",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:mimic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "ck",
+   "uses": []
+  },
+  "spl.dict.044@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "spl.dict.044",
+   "lemma": "panic",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:panic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "dictation",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ck",
+   "uses": []
+  },
+  "spl.dx.de.01@1": {
+   "exposure_family": "lex.bake",
+   "lemma": "bake",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:bake",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.02@1": {
+   "exposure_family": "lex.ride",
+   "lemma": "ride",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:ride",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.03@1": {
+   "exposure_family": "lex.use",
+   "lemma": "use",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:use",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.04@1": {
+   "exposure_family": "lex.dance",
+   "lemma": "dance",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:dance",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.05@1": {
+   "exposure_family": "lex.hope",
+   "lemma": "hope",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hope",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.06@1": {
+   "exposure_family": "lex.large",
+   "lemma": "large",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:large",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.07@1": {
+   "exposure_family": "lex.graze",
+   "lemma": "graze",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:graze",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.08@1": {
+   "exposure_family": "lex.wade",
+   "lemma": "wade",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:wade",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.09@1": {
+   "exposure_family": "lex.nudge",
+   "lemma": "nudge",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:nudge",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.10@1": {
+   "exposure_family": "lex.squeeze",
+   "lemma": "squeeze",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:squeeze",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.11@1": {
+   "exposure_family": "lex.stroke",
+   "lemma": "stroke",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:stroke",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.12@1": {
+   "exposure_family": "lex.wipe",
+   "lemma": "wipe",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:wipe",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.13@1": {
+   "exposure_family": "lex.bounce",
+   "lemma": "bounce",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:bounce",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.14@1": {
+   "exposure_family": "lex.juggle",
+   "lemma": "juggle",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:juggle",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.15@1": {
+   "exposure_family": "lex.flee.contrast",
+   "lemma": "flee",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:flee",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "fleing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.de.16@1": {
+   "exposure_family": "lex.canoe.contrast",
+   "lemma": "canoe",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:canoe",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "canoing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.de.17@1": {
+   "exposure_family": "lex.dye.contrast",
+   "lemma": "dye",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:dye",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "dying"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.de.18@1": {
+   "exposure_family": "lex.free.contrast",
+   "lemma": "free",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:free",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "freing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.de.19@1": {
+   "exposure_family": "lex.tiptoe.contrast",
+   "lemma": "tiptoe",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:tiptoe",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "tiptoing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.de.20@1": {
+   "exposure_family": "lex.skate",
+   "lemma": "skate",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:skate",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.21@1": {
+   "exposure_family": "lex.smile",
+   "lemma": "smile",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:smile",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.de.22@1": {
+   "exposure_family": "lex.see.contrast",
+   "lemma": "see",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:see",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_e",
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.ds.01@1": {
+   "exposure_family": "lex.hop",
+   "lemma": "hop",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.02@1": {
+   "exposure_family": "lex.plan",
+   "lemma": "plan",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:plan",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.03@1": {
+   "exposure_family": "lex.sit",
+   "lemma": "sit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:sit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.04@1": {
+   "exposure_family": "lex.drop",
+   "lemma": "drop",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:drop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.05@1": {
+   "exposure_family": "lex.hot",
+   "lemma": "hot",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hot",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.06@1": {
+   "exposure_family": "lex.get",
+   "lemma": "get",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:get",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.07@1": {
+   "exposure_family": "lex.plod",
+   "lemma": "plod",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:plod",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.08@1": {
+   "exposure_family": "lex.skim",
+   "lemma": "skim",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:skim",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.09@1": {
+   "exposure_family": "lex.throb",
+   "lemma": "throb",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:throb",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.10@1": {
+   "exposure_family": "lex.prod",
+   "lemma": "prod",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:prod",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.11@1": {
+   "exposure_family": "lex.slam",
+   "lemma": "slam",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:slam",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.12@1": {
+   "exposure_family": "lex.flap",
+   "lemma": "flap",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:flap",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.13@1": {
+   "exposure_family": "lex.spot",
+   "lemma": "spot",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:spot",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.14@1": {
+   "exposure_family": "lex.wag",
+   "lemma": "wag",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:wag",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.15@1": {
+   "exposure_family": "lex.help.contrast",
+   "lemma": "help",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:help",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.16@1": {
+   "exposure_family": "lex.sleep.contrast",
+   "lemma": "sleep",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:sleep",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.17@1": {
+   "exposure_family": "lex.float.contrast",
+   "lemma": "float",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:float",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.18@1": {
+   "exposure_family": "lex.snow.contrast",
+   "lemma": "snow",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:snow",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.19@1": {
+   "exposure_family": "lex.fix.contrast",
+   "lemma": "fix",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:fix",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.20@1": {
+   "exposure_family": "lex.hop.contrast",
+   "lemma": "hop",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-s",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.21@1": {
+   "exposure_family": "lex.hop",
+   "lemma": "hop",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hop",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.22@1": {
+   "exposure_family": "lex.walk.contrast",
+   "lemma": "walk",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:walk",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ds.23@1": {
+   "exposure_family": "lex.hum",
+   "lemma": "hum",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hum",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.dv.01@1": {
+   "exposure_family": "lex.hope.deriv",
+   "lemma": "hope",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:hope",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "principle_link_only": true,
+   "probes": [
+    "full_suffix"
+   ],
+   "reserved": false,
+   "suffix": "-ful",
+   "transformation": "keep_e",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.dv.02@1": {
+   "exposure_family": "lex.care.deriv",
+   "lemma": "care",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:care",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "principle_link_only": true,
+   "probes": [
+    "full_suffix"
+   ],
+   "reserved": false,
+   "suffix": "-ful",
+   "transformation": "keep_e",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.dv.03@1": {
+   "exposure_family": "lex.safe.deriv",
+   "lemma": "safe",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:safe",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "principle_link_only": true,
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ly",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "safly"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.dv.04@1": {
+   "exposure_family": "lex.notice.deriv",
+   "lemma": "notice",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:notice",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "drop_e",
+   "principle_link_only": true,
+   "probes": [],
+   "reserved": false,
+   "suffix": "-able",
+   "transformation": "keep_e",
+   "untagged_errors": [
+    "noticable"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.dv.05@1": {
+   "exposure_family": "lex.prefer.deriv",
+   "lemma": "prefer",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:prefer",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "principle_link_only": true,
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ence",
+   "transformation": "none",
+   "untagged_errors": [
+    "preferrence"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.dv.06@1": {
+   "exposure_family": "lex.begin.deriv",
+   "lemma": "begin",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:begin",
+   "mode": "production",
+   "morphology": "derivational",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "principle_link_only": true,
+   "probes": [
+    "dropped_double_at_join"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ex.01@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "lex.mimic",
+   "lemma": "mimic",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:mimic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ck",
+   "untagged_errors": [
+    "mimicing"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.ex.02@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "lex.frolic",
+   "lemma": "frolic",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:frolic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "ck",
+   "untagged_errors": [
+    "froliced"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.ex.03@1": {
+   "exception_class": "ie_to_y",
+   "exposure_family": "lex.tie",
+   "lemma": "tie",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:tie",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ie_to_y",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ex.04@1": {
+   "exception_class": "ie_to_y",
+   "exposure_family": "lex.die",
+   "lemma": "die",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:die",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ie_to_y",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.ex.05@1": {
+   "exception_class": "irregular_y_past",
+   "exposure_family": "lex.pay",
+   "lemma": "pay",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:pay",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "irregular",
+   "untagged_errors": [
+    "payed"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.ex.06@1": {
+   "exception_class": "irregular_y_past",
+   "exposure_family": "lex.say",
+   "lemma": "say",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:say",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "irregular",
+   "untagged_errors": [
+    "sayed"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.ex.07@1": {
+   "dialect_note": "British doubles the final l (travelled); American does not (traveled). Both accepted until an educator decides.",
+   "exception_class": "uk_final_l",
+   "exposure_family": "lex.travel",
+   "lemma": "travel",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:travel",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [
+    "traveled"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.nd.01@1": {
+   "exposure_family": "lex.happen",
+   "lemma": "happen",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:happen",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.02@1": {
+   "exposure_family": "lex.garden",
+   "lemma": "garden",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:garden",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.03@1": {
+   "exposure_family": "lex.listen",
+   "lemma": "listen",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:listen",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.04@1": {
+   "exposure_family": "lex.enter",
+   "lemma": "enter",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:enter",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.05@1": {
+   "exposure_family": "lex.budget",
+   "lemma": "budget",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:budget",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.06@1": {
+   "exposure_family": "lex.target",
+   "lemma": "target",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:target",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.07@1": {
+   "exposure_family": "lex.blossom",
+   "lemma": "blossom",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:blossom",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.08@1": {
+   "exposure_family": "lex.sharpen",
+   "lemma": "sharpen",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:sharpen",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.09@1": {
+   "exposure_family": "lex.profit",
+   "lemma": "profit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:profit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.10@1": {
+   "exposure_family": "lex.inherit",
+   "lemma": "inherit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:inherit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.11@1": {
+   "exposure_family": "lex.exhibit",
+   "lemma": "exhibit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:exhibit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.12@1": {
+   "exposure_family": "lex.deposit",
+   "lemma": "deposit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:deposit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.13@1": {
+   "exposure_family": "lex.rivet",
+   "lemma": "rivet",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:rivet",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.14@1": {
+   "exposure_family": "lex.glisten",
+   "lemma": "glisten",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:glisten",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.15@1": {
+   "exposure_family": "lex.occur.contrast",
+   "lemma": "occur",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:occur",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.16@1": {
+   "exposure_family": "lex.patrol.contrast",
+   "lemma": "patrol",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:patrol",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.17@1": {
+   "exposure_family": "lex.equip.contrast",
+   "lemma": "equip",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:equip",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.18@1": {
+   "exposure_family": "lex.open",
+   "lemma": "open",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:open",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.nd.19@1": {
+   "exposure_family": "lex.whimper",
+   "lemma": "whimper",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:whimper",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.01@1": {
+   "exposure_family": "lex.look",
+   "lemma": "look",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:look",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.02@1": {
+   "exposure_family": "lex.help",
+   "lemma": "help",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:help",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.03@1": {
+   "exposure_family": "lex.start",
+   "lemma": "start",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:start",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.04@1": {
+   "exposure_family": "lex.talk",
+   "lemma": "talk",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:talk",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.05@1": {
+   "exposure_family": "lex.fast",
+   "lemma": "fast",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:fast",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.06@1": {
+   "exposure_family": "lex.play",
+   "lemma": "play",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:play",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "plaied"
+   ],
+   "uses": [
+    "familiar_practice"
+   ]
+  },
+  "spl.dx.pl.07@1": {
+   "exposure_family": "lex.gasp",
+   "lemma": "gasp",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:gasp",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.08@1": {
+   "exposure_family": "lex.drift",
+   "lemma": "drift",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:drift",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.09@1": {
+   "exposure_family": "lex.mend",
+   "lemma": "mend",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:mend",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.10@1": {
+   "exposure_family": "lex.tilt",
+   "lemma": "tilt",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:tilt",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.11@1": {
+   "exposure_family": "lex.honk",
+   "lemma": "honk",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:honk",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.12@1": {
+   "exposure_family": "lex.lift",
+   "lemma": "lift",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:lift",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.13@1": {
+   "exposure_family": "lex.kick",
+   "lemma": "kick",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:kick",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.14@1": {
+   "exposure_family": "lex.sniff",
+   "lemma": "sniff",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:sniff",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [
+    "snifing"
+   ],
+   "uses": [
+    "delayed_retention"
+   ]
+  },
+  "spl.dx.pl.15@1": {
+   "exposure_family": "lex.grin.contrast",
+   "lemma": "grin",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:grin",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "plain",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.16@1": {
+   "exposure_family": "lex.shake.contrast",
+   "lemma": "shake",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:shake",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "plain",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.17@1": {
+   "exposure_family": "lex.marry.contrast",
+   "lemma": "marry",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:marry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "plain",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.18@1": {
+   "exposure_family": "lex.look",
+   "lemma": "look",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:look",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.pl.19@1": {
+   "exposure_family": "lex.blow",
+   "lemma": "blow",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:blow",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.01@1": {
+   "exposure_family": "lex.prefer",
+   "lemma": "prefer",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:prefer",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.02@1": {
+   "exposure_family": "lex.admit",
+   "lemma": "admit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:admit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.03@1": {
+   "exposure_family": "lex.regret",
+   "lemma": "regret",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:regret",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.04@1": {
+   "exposure_family": "lex.upset",
+   "lemma": "upset",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:upset",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.05@1": {
+   "exposure_family": "lex.control",
+   "lemma": "control",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:control",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.06@1": {
+   "exposure_family": "lex.submit",
+   "lemma": "submit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:submit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.07@1": {
+   "exposure_family": "lex.compel",
+   "lemma": "compel",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:compel",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.08@1": {
+   "exposure_family": "lex.propel",
+   "lemma": "propel",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:propel",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.09@1": {
+   "exposure_family": "lex.expel",
+   "lemma": "expel",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:expel",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.10@1": {
+   "exposure_family": "lex.outwit",
+   "lemma": "outwit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:outwit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.11@1": {
+   "exposure_family": "lex.repel",
+   "lemma": "repel",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:repel",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.12@1": {
+   "exposure_family": "lex.overlap",
+   "lemma": "overlap",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:overlap",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.13@1": {
+   "exposure_family": "lex.embed",
+   "lemma": "embed",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:embed",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.14@1": {
+   "exposure_family": "lex.unwrap",
+   "lemma": "unwrap",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:unwrap",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": true,
+   "suffix": "-ing",
+   "transformation": "double",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.15@1": {
+   "exposure_family": "lex.credit.contrast",
+   "lemma": "credit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:credit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.16@1": {
+   "exposure_family": "lex.gallop.contrast",
+   "lemma": "gallop",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:gallop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.17@1": {
+   "exposure_family": "lex.pocket.contrast",
+   "lemma": "pocket",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:pocket",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "untagged_errors": [],
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.18@1": {
+   "exposure_family": "lex.begin",
+   "lemma": "begin",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:begin",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.19@1": {
+   "exposure_family": "lex.visit.contrast",
+   "lemma": "visit",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:visit",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "stress_doubling",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.sd.20@1": {
+   "exposure_family": "lex.refer",
+   "lemma": "refer",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:refer",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.01@1": {
+   "exposure_family": "lex.fly",
+   "lemma": "fly",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:fly",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.02@1": {
+   "exposure_family": "lex.study",
+   "lemma": "study",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:study",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.03@1": {
+   "exposure_family": "lex.happy",
+   "lemma": "happy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:happy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.04@1": {
+   "exposure_family": "lex.party",
+   "lemma": "party",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:party",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.05@1": {
+   "exposure_family": "lex.dry",
+   "lemma": "dry",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:dry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.06@1": {
+   "exposure_family": "lex.easy",
+   "lemma": "easy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:easy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.07@1": {
+   "exposure_family": "lex.pity",
+   "lemma": "pity",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:pity",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.08@1": {
+   "exposure_family": "lex.ferry",
+   "lemma": "ferry",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:ferry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.09@1": {
+   "exposure_family": "lex.envy",
+   "lemma": "envy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:envy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.10@1": {
+   "exposure_family": "lex.scurry",
+   "lemma": "scurry",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:scurry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "unseen_transfer",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.11@1": {
+   "exposure_family": "lex.deny",
+   "lemma": "deny",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:deny",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.12@1": {
+   "exposure_family": "lex.supply",
+   "lemma": "supply",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:supply",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.13@1": {
+   "exposure_family": "lex.fancy",
+   "lemma": "fancy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:fancy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-er",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.14@1": {
+   "exposure_family": "lex.spy",
+   "lemma": "spy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:spy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": true,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "untagged_errors": [],
+   "uses": [
+    "delayed_retention",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.15@1": {
+   "exposure_family": "lex.stay.contrast",
+   "lemma": "stay",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:stay",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "staied"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.16@1": {
+   "exposure_family": "lex.obey.contrast",
+   "lemma": "obey",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:obey",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "obeied"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.17@1": {
+   "exposure_family": "lex.cry.contrast",
+   "lemma": "cry",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:cry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "criing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.18@1": {
+   "exposure_family": "lex.study.contrast",
+   "lemma": "study",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:study",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "studiing"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.19@1": {
+   "exposure_family": "lex.annoy.contrast",
+   "lemma": "annoy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:annoy",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "annoied"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.20@1": {
+   "exposure_family": "lex.delay.contrast",
+   "lemma": "delay",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:delay",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "untagged_errors": [
+    "delaied"
+   ],
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.21@1": {
+   "exposure_family": "lex.tiny",
+   "lemma": "tiny",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:tiny",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "y_to_i",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.dx.yi.22@1": {
+   "exposure_family": "lex.play.contrast",
+   "lemma": "play",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:play",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "contrast",
+   "principle": "y_to_i",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "keep_y",
+   "uses": [
+    "contrast"
+   ]
+  },
+  "spl.dx.yi.23@1": {
+   "exposure_family": "lex.puppy",
+   "lemma": "puppy",
+   "lemma_source": "authored",
+   "lexeme_family": "lemma:puppy",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "diagnostic_bank",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "y_to_i",
+   "uses": [
+    "familiar_practice",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.01@1": {
+   "exposure_family": "spl.infl.01",
+   "lemma": "play",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:play",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "plain",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "keep_y",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.02@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "swim",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:swim",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.03@1": {
+   "exposure_family": "spl.infl.03",
+   "lemma": "make",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:make",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.04@1": {
+   "exposure_family": "fam.infl.ytoi",
+   "lemma": "carry",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:carry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.05@1": {
+   "exposure_family": "fam.infl.stress",
+   "lemma": "begin",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:begin",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.06@1": {
+   "exposure_family": "fam.infl.unstressed",
+   "lemma": "visit",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:visit",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.07@1": {
+   "exposure_family": "spl.infl.07",
+   "lemma": "hope",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:hope",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "drop_e",
+   "probes": [
+    "kept_silent_e",
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "drop_e",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.08@1": {
+   "exposure_family": "spl.infl.08",
+   "lemma": "happy",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:happy",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.09@1": {
+   "exposure_family": "spl.infl.09",
+   "lemma": "occur",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:occur",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.10@1": {
+   "exposure_family": "spl.infl.10",
+   "lemma": "box",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:box",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "es_plural",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-es",
+   "transformation": "es",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.11@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "run",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:run",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.12@1": {
+   "exposure_family": "fam.infl.ytoi",
+   "lemma": "cry",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:cry",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "y_to_i",
+   "probes": [
+    "y_not_changed"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "y_to_i",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.13@1": {
+   "exposure_family": "fam.infl.stress",
+   "lemma": "forget",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:forget",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "stress_doubling",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.14@1": {
+   "exposure_family": "fam.infl.unstressed",
+   "lemma": "open",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:open",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "no_double_unstressed",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.15@2": {
+   "exception_class": "ie_to_y",
+   "exposure_family": "spl.infl.15",
+   "lemma": "lie",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:lie",
+   "mode": "recognition",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [
+    "kept_silent_e"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ie_to_y",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.16@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "fam.infl.ck",
+   "lemma": "panic",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:panic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "ck",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.17@1": {
+   "exception_class": "ck_insertion",
+   "exposure_family": "fam.infl.ck",
+   "lemma": "picnic",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:picnic",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "hand_written",
+   "polarity": "apply",
+   "principle": "exceptions",
+   "probes": [],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "ck",
+   "use_source": "pilot manifest pool 'diagnosis'",
+   "uses": [
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.18@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "chop",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:chop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.19@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "stop",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:stop",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.20@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "big",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:big",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.21@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "dig",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:dig",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.22@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "trim",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:trim",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.23@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "wet",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:wet",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe",
+    "unseen_transfer"
+   ]
+  },
+  "spl.infl.24@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "jump",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:jump",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.25@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "rain",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:rain",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.26@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "melt",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:melt",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.27@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "cook",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:cook",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.28@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "fast",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:fast",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-est",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.29@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "shout",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:shout",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ed",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.30@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "dream",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:dream",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.31@1": {
+   "exposure_family": "fam.infl.double.contrast",
+   "lemma": "dark",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:dark",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "contrast",
+   "principle": "double_short",
+   "probes": [
+    "over_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-er",
+   "transformation": "none",
+   "uses": [
+    "contrast",
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.j02@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "swim",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:swim",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  },
+  "spl.infl.j11@1": {
+   "exposure_family": "fam.infl.double",
+   "lemma": "run",
+   "lemma_source": "curated",
+   "lexeme_family": "lemma:run",
+   "mode": "production",
+   "morphology": "inflectional",
+   "origin": "journey",
+   "polarity": "apply",
+   "principle": "double_short",
+   "probes": [
+    "no_doubling"
+   ],
+   "reserved": false,
+   "suffix": "-ing",
+   "transformation": "double",
+   "uses": [
+    "misconception_probe"
+   ]
+  }
+ }
+}

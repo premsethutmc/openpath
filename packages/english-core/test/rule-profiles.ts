@@ -88,10 +88,10 @@ export const STAGES: { name: string; day: number; items: string[] }[] = [
   { name: "practiceA", day: 0, items: practiceFor("double_short").map((g) => g.id) },
   { name: "checkA", day: 0, items: ["spl.infl.18", "spl.infl.19", "spl.infl.22", "spl.infl.24", "spl.infl.21"] },
   { name: "practiceB", day: 1, items: practiceFor("drop_e").map((g) => g.id) },
-  { name: "checkB", day: 1, items: ["spl.infl.26", "spl.infl.27", "spl.infl.30", "spl.infl.32", "spl.infl.29"] },
+  { name: "checkB", day: 1, items: ["spl.infl.fx26", "spl.infl.fx27", "spl.infl.fx30", "spl.infl.fx32", "spl.infl.fx29"] },
   { name: "practiceC", day: 2, items: practiceFor("y_to_i").map((g) => g.id) },
-  { name: "checkC", day: 2, items: ["spl.infl.34", "spl.infl.35", "spl.infl.38", "spl.infl.40", "spl.infl.37"] },
-  { name: "delayed", day: 9, items: ["spl.infl.20", "spl.infl.23", "spl.infl.25", "spl.infl.28", "spl.infl.31", "spl.infl.33", "spl.infl.36", "spl.infl.39", "spl.infl.41"] },
+  { name: "checkC", day: 2, items: ["spl.infl.fx34", "spl.infl.fx35", "spl.infl.fx38", "spl.infl.fx40", "spl.infl.fx37"] },
+  { name: "delayed", day: 9, items: ["spl.infl.20", "spl.infl.23", "spl.infl.25", "spl.infl.fx28", "spl.infl.fx31", "spl.infl.fx33", "spl.infl.fx36", "spl.infl.fx39", "spl.infl.fx41"] },
 ];
 
 export interface Run {

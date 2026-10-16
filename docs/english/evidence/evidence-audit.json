@@ -1,0 +1,505 @@
+{
+ "version": "spelling-evidence-audit@1",
+ "policy": {
+  "positiveLemmas": 6,
+  "contrastLemmas": 3,
+  "transferLemmas": 4,
+  "retentionLemmas": 3,
+  "recognitionItems": 2,
+  "productionLemmas": 6,
+  "misconceptionProbes": 3
+ },
+ "rows": [
+  {
+   "principle": "plain",
+   "name": "Adding -s, -ed, -ing with no change",
+   "items": 147,
+   "offeredByApp": 128,
+   "bankOnly": 19,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 28,
+    "practice": 119
+   },
+   "ownerApproved": 6,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 23,
+    "practice": 59
+   },
+   "positives": {
+    "items": 25,
+    "lemmas": 20
+   },
+   "contrasts": {
+    "items": 3,
+    "lemmas": 3
+   },
+   "production": {
+    "items": 26,
+    "lemmas": 22
+   },
+   "recognition": {
+    "items": 2,
+    "lemmas": 2
+   },
+   "transfer": {
+    "lemmas": 7,
+    "reserved": 4
+   },
+   "retention": {
+    "lemmas": 5,
+    "reserved": 4
+   },
+   "misconceptionProbes": 17,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "es_plural",
+   "name": "Adding -es",
+   "items": 189,
+   "offeredByApp": 189,
+   "bankOnly": 0,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 10,
+    "practice": 179
+   },
+   "ownerApproved": 7,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 10,
+    "practice": 60
+   },
+   "positives": {
+    "items": 10,
+    "lemmas": 10
+   },
+   "contrasts": {
+    "items": 0,
+    "lemmas": 0
+   },
+   "production": {
+    "items": 10,
+    "lemmas": 10
+   },
+   "recognition": {
+    "items": 0,
+    "lemmas": 0
+   },
+   "transfer": {
+    "lemmas": 3,
+    "reserved": 0
+   },
+   "retention": {
+    "lemmas": 1,
+    "reserved": 0
+   },
+   "misconceptionProbes": 0,
+   "unmapped": 0,
+   "coverageAllContent": [
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 3/4",
+    "delayed-retention lemmas 1/3",
+    "recognition items 0/2",
+    "misconception probes 0/3"
+   ],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "double_short",
+   "name": "Doubling the final consonant of short words",
+   "items": 220,
+   "offeredByApp": 197,
+   "bankOnly": 23,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 52,
+    "practice": 168
+   },
+   "ownerApproved": 9,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 43,
+    "practice": 58
+   },
+   "positives": {
+    "items": 37,
+    "lemmas": 29
+   },
+   "contrasts": {
+    "items": 15,
+    "lemmas": 15
+   },
+   "production": {
+    "items": 49,
+    "lemmas": 41
+   },
+   "recognition": {
+    "items": 3,
+    "lemmas": 3
+   },
+   "transfer": {
+    "lemmas": 15,
+    "reserved": 5
+   },
+   "retention": {
+    "lemmas": 5,
+    "reserved": 4
+   },
+   "misconceptionProbes": 50,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "drop_e",
+   "name": "Dropping the silent e",
+   "items": 214,
+   "offeredByApp": 192,
+   "bankOnly": 22,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 34,
+    "practice": 180
+   },
+   "ownerApproved": 8,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 31,
+    "practice": 60
+   },
+   "positives": {
+    "items": 28,
+    "lemmas": 25
+   },
+   "contrasts": {
+    "items": 6,
+    "lemmas": 6
+   },
+   "production": {
+    "items": 30,
+    "lemmas": 30
+   },
+   "recognition": {
+    "items": 4,
+    "lemmas": 4
+   },
+   "transfer": {
+    "lemmas": 7,
+    "reserved": 4
+   },
+   "retention": {
+    "lemmas": 6,
+    "reserved": 4
+   },
+   "misconceptionProbes": 28,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "y_to_i",
+   "name": "Changing y to i",
+   "items": 211,
+   "offeredByApp": 188,
+   "bankOnly": 23,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 37,
+    "practice": 174
+   },
+   "ownerApproved": 9,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 31,
+    "practice": 47
+   },
+   "positives": {
+    "items": 30,
+    "lemmas": 26
+   },
+   "contrasts": {
+    "items": 7,
+    "lemmas": 7
+   },
+   "production": {
+    "items": 33,
+    "lemmas": 28
+   },
+   "recognition": {
+    "items": 4,
+    "lemmas": 4
+   },
+   "transfer": {
+    "lemmas": 9,
+    "reserved": 4
+   },
+   "retention": {
+    "lemmas": 6,
+    "reserved": 4
+   },
+   "misconceptionProbes": 30,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "stress_doubling",
+   "name": "Doubling in longer words stressed at the end",
+   "items": 195,
+   "offeredByApp": 175,
+   "bankOnly": 20,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 30,
+    "practice": 165
+   },
+   "ownerApproved": 10,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 25,
+    "practice": 31
+   },
+   "positives": {
+    "items": 26,
+    "lemmas": 21
+   },
+   "contrasts": {
+    "items": 4,
+    "lemmas": 4
+   },
+   "production": {
+    "items": 26,
+    "lemmas": 22
+   },
+   "recognition": {
+    "items": 4,
+    "lemmas": 4
+   },
+   "transfer": {
+    "lemmas": 7,
+    "reserved": 4
+   },
+   "retention": {
+    "lemmas": 4,
+    "reserved": 4
+   },
+   "misconceptionProbes": 30,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "no_double_unstressed",
+   "name": "Not doubling when the stress is earlier",
+   "items": 207,
+   "offeredByApp": 188,
+   "bankOnly": 19,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 28,
+    "practice": 179
+   },
+   "ownerApproved": 9,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 23,
+    "practice": 52
+   },
+   "positives": {
+    "items": 25,
+    "lemmas": 20
+   },
+   "contrasts": {
+    "items": 3,
+    "lemmas": 3
+   },
+   "production": {
+    "items": 26,
+    "lemmas": 22
+   },
+   "recognition": {
+    "items": 2,
+    "lemmas": 2
+   },
+   "transfer": {
+    "lemmas": 6,
+    "reserved": 4
+   },
+   "retention": {
+    "lemmas": 4,
+    "reserved": 4
+   },
+   "misconceptionProbes": 28,
+   "unmapped": 0,
+   "coverageAllContent": [],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  },
+  {
+   "principle": "exceptions",
+   "name": "Exceptions (-ck-, ie to y)",
+   "items": 146,
+   "offeredByApp": 139,
+   "bankOnly": 7,
+   "byTier": {
+    "validated": 0,
+    "demonstration": 12,
+    "practice": 134
+   },
+   "ownerApproved": 5,
+   "wordFamilies": {
+    "validated": 0,
+    "demonstration": 10,
+    "practice": 44
+   },
+   "positives": {
+    "items": 12,
+    "lemmas": 10
+   },
+   "contrasts": {
+    "items": 0,
+    "lemmas": 0
+   },
+   "production": {
+    "items": 11,
+    "lemmas": 9
+   },
+   "recognition": {
+    "items": 1,
+    "lemmas": 1
+   },
+   "transfer": {
+    "lemmas": 3,
+    "reserved": 0
+   },
+   "retention": {
+    "lemmas": 0,
+    "reserved": 0
+   },
+   "misconceptionProbes": 3,
+   "unmapped": 0,
+   "coverageAllContent": [
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 3/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 1/2"
+   ],
+   "coverageValidatedOnly": [
+    "positive lemmas 0/6",
+    "contrast lemmas 0/3",
+    "unseen-transfer lemmas 0/4",
+    "delayed-retention lemmas 0/3",
+    "recognition items 0/2",
+    "production lemmas 0/6",
+    "misconception probes 0/3"
+   ],
+   "reliabilityDemonstrated": false,
+   "masteryClaimPossible": false,
+   "why": [
+    "no complete coverage on educator-validated items (positive lemmas 0/6; contrast lemmas 0/3; unseen-transfer lemmas 0/4; delayed-retention lemmas 0/3; recognition items 0/2; production lemmas 0/6; misconception probes 0/3)",
+    "diagnostic reliability not demonstrated with real learners (no calibration study)"
+   ]
+  }
+ ]
+}

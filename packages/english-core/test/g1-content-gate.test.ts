@@ -13,7 +13,7 @@ const IND = { schema: "provenance@1" as const, attempt: 1, hints: [] as string[]
 /** The profile context, with the draft questions marked provisional. */
 function provisionalContext() {
   const base = profileContext();
-  const items = [...base.content.items.values()].map((i) => (i.id >= "spl.infl.18" && i.id <= "spl.infl.41" && i.kind === "code" ? ({ ...i, evidence_status: "provisional" } as Item) : i));
+  const items = [...base.content.items.values()].map((i) => (((i.id >= "spl.infl.18" && i.id <= "spl.infl.25") || i.id.startsWith("spl.infl.fx")) && i.kind === "code" ? ({ ...i, evidence_status: "provisional" } as Item) : i));
   const ctx = loadContext();
   const b = loadBundle();
   return { ...base, content: indexContent(viewFor({ ...b, items: items as Item[] }, ctx.index), ctx.index) };
