@@ -55,6 +55,7 @@ test("My Words: type, paste and upload a list, see problems, edit, save, practis
   await context.addInitScript(() => {
     const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
     window.__spoken = [];
+    window.__beeAdvanceMs = 600000; // these tests tap Next themselves (e2e/bee.test.mjs checks the automatic next word)
     window.SpeechSynthesisUtterance = class {
       constructor(text) {
         this.text = text;

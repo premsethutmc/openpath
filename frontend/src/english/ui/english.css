@@ -1882,3 +1882,86 @@ h3.sub {
   flex: 1 1 100%;
   margin: 0;
 }
+
+/* Spelling Bee: one big speaker button (SpellingBee.tsx BeeAsk) */
+.bee-listen {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+.bee-speaker {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: var(--violet-deep, #4d3cad);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(75, 58, 168, 0.28);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.bee-speaker svg {
+  width: 56px;
+  height: 56px;
+}
+.bee-speaker:active {
+  transform: scale(0.96);
+}
+.bee-speaker.s-playing {
+  animation: bee-ring 1.1s ease-out infinite;
+}
+.bee-speaker.s-tap,
+.bee-speaker.s-failed {
+  animation: bee-pulse 1.2s ease-in-out infinite;
+}
+.bee-speaker.s-loading {
+  opacity: 0.75;
+}
+@keyframes bee-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(75, 58, 168, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 22px rgba(75, 58, 168, 0);
+  }
+}
+@keyframes bee-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bee-speaker.s-playing,
+  .bee-speaker.s-tap,
+  .bee-speaker.s-failed {
+    animation: none;
+  }
+}
+.bee-speaker-label {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.bee-sentence {
+  min-height: 44px;
+}
+.bee-answer input {
+  font-size: 26px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.bee-answer button[type="submit"] {
+  min-height: 56px;
+  font-size: 1.15rem;
+}
+.bee-quiet {
+  text-align: center;
+}

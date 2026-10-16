@@ -61,3 +61,6 @@ export function speak(text: string, voice: SpeechSynthesisVoice | null, heard?: 
   synth.speak(u);
   if (heard) setTimeout(() => settle(false), waitMs);
 }
+
+/** Whether this browser has speech synthesis at all (it may still have no voice listed). */
+export const speechPossible = () => typeof window !== "undefined" && !!window.speechSynthesis && typeof SpeechSynthesisUtterance !== "undefined";

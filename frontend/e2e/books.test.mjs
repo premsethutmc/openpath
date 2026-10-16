@@ -64,6 +64,7 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await context.addInitScript(() => {
     const v = { name: "Test English (UK)", lang: "en-GB", localService: true, default: true, voiceURI: "test-en-gb" };
     window.__spoken = [];
+    window.__beeAdvanceMs = 600000; // these tests tap Next themselves (e2e/bee.test.mjs checks the automatic next word)
     window.SpeechSynthesisUtterance = class {
       constructor(text) {
         this.text = text;
@@ -97,6 +98,8 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
   await file.setInputFiles({ name: "story.pdf", mimeType: "application/pdf", buffer: Buffer.from("%PDF-1.4") });
   await page.getByText(/Choose a plain-text \(\.txt\) file/).waitFor();
   await file.setInputFiles({ name: "The Lantern on the Hill.txt", mimeType: "text/plain", buffer: Buffer.from(STORY) });
+  // the file is read asynchronously: wait for its title to arrive, rather than reading the box at once
+  for (let t = 0; t < 100 && !(await page.getByLabel("Title").inputValue()); t++) await page.waitForTimeout(100);
   assert.equal(await page.getByLabel("Title").inputValue(), "The Lantern on the Hill");
   await page.getByRole("button", { name: "Find activities" }).click();
   const found = page.locator(".book-review h2");
@@ -138,9 +141,10 @@ test("My Books: open a story, review, approve, practise its spelling and answer 
     await page.locator(".ruled input").fill(k === 1 ? `${w}x` : w);
     await page.getByRole("button", { name: "Submit" }).click();
     await page.getByRole("heading", { name: k === 1 ? "Not quite." : "Right!" }).waitFor();
-    // spoken as "word. sentence word." (or the word alone): the sentence is the book's own
-    const mid = said === w ? "" : said.slice(w.length + 2, said.length - w.length - 2);
-    assert.ok(said === w || (said.startsWith(`${w}. `) && FLAT.includes(mid)), `the sentence spoken is from the book: ${said}`);
+    // spoken as "word. sentence word." (or "word." alone): the sentence is the book's own
+    const alone = said === `${w}.`;
+    const mid = alone ? "" : said.slice(w.length + 2, said.length - w.length - 2);
+    assert.ok(alone || (said.startsWith(`${w}. `) && FLAT.includes(mid)), `the sentence spoken is from the book: ${said}`);
     if (mid) withSentence++;
     if (k < 2) w = await advance(page, "Next word");
     else await page.getByRole("button", { name: "See how you did" }).click();

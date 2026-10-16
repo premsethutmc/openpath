@@ -152,12 +152,14 @@ This version contains unapproved questions and every activity. **Adults only.** 
 
 | # | Do | Expect |
 |---|---|---|
-| A8.0 ★ | **First word after a cold start.** Close Chrome completely (swipe it away), reopen the app, and tap **Start Spelling Bee** straight away | The first word is heard within about 2 seconds. If it is not, a "No sound? Turn the volume up, then tap “Play the word”" box appears, and tapping **Play the word** says it. Note which happened: either passes, but silence with no box is a failure |
-| A8.1 ★ | Make a new learner. On Home, tap **Start Spelling Bee** | The first word is spoken at once (the word, a sentence, the word again). The word is not written anywhere on the screen |
-| A8.2 ★ | Tap **Repeat the word**; wait a minute, then tap it again | The word is heard each time |
-| A8.3 ★ | Type the word with no suggestions appearing, and tap **Submit** | "Right!" and the spelling; **Next word** says the next one |
+| A8.0 ★ | **First word after a cold start.** Close Chrome completely (swipe it away), reopen the app, and tap **Start Spelling Bee** straight away | The first word is heard within about 2 seconds: the phone's voice says the word, a sentence, and the word again. If the phone wants a tap first, the big speaker says **Tap to hear the word** (or **Tap to try again**), and one tap says it. Silence with no prompt is a failure. Note the phone and whether a tap was needed |
+| A8.1 ★ | Make a new learner. On Home, tap **Start Spelling Bee** | No message about the phone's voice. A big speaker button, an answer box, **Submit**. The word is not written anywhere on the screen |
+| A8.2 ★ | Tap the big speaker several times quickly; wait a minute, then tap it again; tap **Hear it in a sentence** | The word alone each time, never two at once; the sentence version from the link |
+| A8.3 ★ | Type the word (check whether the keyboard suggests or corrects words) and tap **Submit** | "Right!" and the spelling; about 2 seconds later the next word appears and is heard, with no tap. **Note the keyboard:** if it suggests or auto-corrects the spelling, write down the phone and keyboard (Samsung Keyboard, Gboard) |
+| A8.3a | Turn the volume to zero, start a word, then turn it up and tap the speaker | The word plays on the tap |
+| A8.3b | Turn on flight mode in the middle of a session, then go to the next word | The word is still heard (the phone's own voice works offline). If it is not, the speaker says **Tap to try again**, and after two failed tries a small "A grown-up can read it to you" link appears |
 | A8.4 | Misspell a word on purpose | "Not quite.", the right spelling, what was typed, and "review list" |
-| A8.5 | Lock the phone mid-session; unlock; or close Chrome and reopen | Home offers **Carry on Spelling Bee** at the same word |
+| A8.5 | Lock the phone while a word is playing; unlock; or close Chrome and reopen | The voice stops when the phone locks. Home offers **Carry on Spelling Bee** at the same word, and it is said (or one tap says it) |
 | A8.6 | Finish 10 words | A summary; Home and Progress show words practised; the next session starts with the misspelt word |
 
 ### A9. My Words (a parent's own list)

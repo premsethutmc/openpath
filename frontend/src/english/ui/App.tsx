@@ -362,8 +362,8 @@ export function App() {
         source={bee.source}
         title={bee.title}
         backTo={bee.back === "mywords" ? "My Words" : bee.back === "mybooks" ? "My Books" : "Home"}
-        voice={learner.state.speech ? voice : null}
-        speechOff={!!voice && !learner.state.speech}
+        voice={voice}
+        speechOff={!learner.state.speech}
         onTurnSpeechOn={async () => {
           await learner.setSpeech(true);
           changed();

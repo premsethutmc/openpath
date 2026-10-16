@@ -138,6 +138,21 @@ pilot build made from the recorded approvals).
 
 ## Tests
 
+**Speech in the browser (`e2e/bee.test.mjs`, with a stand-in speechSynthesis that behaves like a phone's):**
+- the word, its sentence and the word again are said by themselves; the speaker repeats the word, and "Hear it in a
+  sentence" says it all again;
+- **an empty voice list** (Samsung-like): the word is still said, with no voice chosen (the browser's default), for the
+  Bee and for a parent's list;
+- **delayed initialisation:** voices that are listed late are used from then on; the first word does not wait for them;
+  if speech failed before they arrived, the word is tried again by itself when they arrive;
+- **playback failures:** speech refused without a tap ("not-allowed"); speech that errors; a listed voice that errors
+  (the same tap retries with the default voice); speech that stays silent (a cold start); no speechSynthesis at all;
+- **manual retry:** in each case one tap on the speaker says the word; only after two failed tries (or at once, when
+  the browser has no speech) does a small grown-up link appear, and the child can type all along;
+- **no overlap:** a new word, Submit, repeated taps and the screen locking stop the old speech first; the stand-in
+  counts any utterance started over another, and there are none;
+- the next word comes by itself; reload, a full browser restart and keyboard-only use.
+
 **Unit tests (`logic/spelling.test.ts`):**
 - 100 words, 20 per level, unique;
 - where each word came from, and its approval status;
@@ -167,11 +182,32 @@ pilot build made from the recorded approvals).
 - no requests to other sites;
 - General English still works.
 
-**If the first word is not heard.** Chrome on Android can refuse speech that a tap did not start, or drop the first
-utterance after the page loads, without telling the page. The app watches for the voice to start. If it has not
-started within 2.5 seconds, or reports an error, a "No sound? Turn the volume up, then tap “Play the word”" box appears
-and the Play button is highlighted. A tap always starts speech. This is tested with a stand-in voice that drops the
-first utterance (`e2e/bee.test.mjs`); real Android behaviour is §A8.0 of the phone checklist.
+**Sound: the browser's own voice (16 October 2026).** Words are said with the browser's speech synthesis
+(`ui/wordPlayer.ts`). No recordings, audio files or external services are used.
+- **No voice list is required.** A listed local English voice (British first) is used when there is one, looked up again
+  on every play, so voices that arrive late are used from then on. Otherwise no voice is chosen and the browser's
+  default speaks (language en-GB). A network voice is never chosen on purpose.
+- **One word at a time.** Anything still speaking is cancelled before a new word, on Submit, when the next word comes,
+  and when the phone locks. Events from an older utterance are ignored.
+- **Every play is checked.** If speech has not started within 3 s, or reports an error, the play counts as refused or
+  failed (and a late start is cancelled). A listed voice that errors is tried once more with the default voice.
+
+**What the child sees.**
+- A big speaker button, the answer box and **Submit**. Each word is said by itself when it appears.
+- **The speaker:** a tap says the word again, as often as wanted; **Hear it in a sentence** says the sentence again.
+- **If the phone refuses speech until a tap** (Chrome's autoplay rule), the speaker says **Tap to hear the word**; if
+  speech failed, **Tap to try again**. One tap retries.
+- **If speech genuinely fails** (two failed tries, or a browser without speech at all), a small link appears:
+  "Still can't hear it? A grown-up can read it to you". There are no settings to visit and no messages about voices.
+- **After Submit:** the answer is shown and the next word comes by itself. Right answers show for 1.6 s and wrong ones
+  for 3.5 s; **Next word** skips the wait.
+
+**Why Android showed "This device can't say words aloud".** The app spoke only with a voice that the browser *listed*
+as a local English voice, found within 1.5 s. Chrome on many Android phones, Samsung's among them, lists no voices (or
+lists them late) while still speaking with the phone's default engine. So the app decided the phone could not speak and
+fell back to "an adult reads". This is the most likely cause, but it was not confirmed on the founder's phone. The
+Spelling Bee, My Words and My Books now always try to speak, with or without a listed voice. (The General English
+starting check still uses its own voice check, unchanged.)
 
 **Closing the browser.** A browser test closes the whole browser (a persistent profile) mid-session and starts it
 again: Home offers **Carry on** at the same word.

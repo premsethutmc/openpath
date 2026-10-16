@@ -70,7 +70,7 @@ interface BeeEntry {
 
 /**
  * The Spelling Bee's 100 words. Reused dictation questions take their word and sentence from the dictation bank (one
- * source of truth). A pilot build offers no Spelling Bee (it is not on the pilot allowlist), so none is returned there.
+ * source of truth). A pilot build offers only the words its gate allows (approved for pilot use).
  */
 export function bankWords(c: AppContent): SpellWord[] {
   const doc = beeJson as unknown as { words: BeeEntry[] };
