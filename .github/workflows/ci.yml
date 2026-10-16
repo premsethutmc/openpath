@@ -392,3 +392,34 @@ jobs:
             tools/english/out/simulation-*
             tools/english/out/bank-coverage.*
           if-no-files-found: ignore
+
+  tamil-foundation:
+    name: Tamil foundation (provisional content and mobile flow)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run tamil:test
+      - run: npm run tamil:build
+      - run: npx playwright install --with-deps chromium
+      - name: Start Tamil preview and verify HTML
+        run: |
+          nohup npm run tamil:preview > /tmp/tamil-preview.log 2>&1 &
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4176/ -o /tmp/tamil-index.html
+      - run: npm run tamil:e2e
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: tamil-mobile-screenshots
+          path: frontend/e2e/shots/tamil/
+          if-no-files-found: ignore
