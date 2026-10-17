@@ -104,7 +104,7 @@ export function SpellingJourney({ learner, voice, onLeave, onChanged }: Props) {
       <main className="session journey spelling-journey" aria-labelledby="sj-title">
         {bar}
         <article className="sheet lesson" data-step="teach" data-rule={step.rule} data-strategy={step.strategy.id}>
-          <p className="kicker">{step.refresher ? "A quick refresher" : view.decision && view.decision.diagnosis.kind !== "insufficient_evidence" && /different/.test(view.decision.reason) ? "Let's try a different way" : "A short lesson"}</p>
+          <p className="kicker">{step.refresher ? "A quick refresher" : step.again ? "Let's try a different way" : "A short lesson"}</p>
           <h2>{lesson.title}</h2>
           {voice && (
             <button type="button" className="listen" onClick={() => speak(read, voice)} aria-label="Read the lesson aloud">

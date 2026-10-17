@@ -57,7 +57,8 @@ export const SPELLING_JOURNEY_POLICY = {
 
 export type SpellingStep =
   | { kind: "question"; purpose: "screen" | "assessment" | "reassess" | "retention"; rule: string; item: Code; word: JourneyWord }
-  | { kind: "teach"; rule: string; strategy: StrategyContent; refresher: boolean; examples: JourneyWord[] }
+  /** again: an earlier approach on this rule did not work, so this is a different one. */
+  | { kind: "teach"; rule: string; strategy: StrategyContent; refresher: boolean; again: boolean; examples: JourneyWord[] }
   | { kind: "guided"; rule: string; item: Code; word: JourneyWord; strategy: StrategyContent; intervention: string; attempts: AttemptEvent[]; hints: HintEvent[]; revealed: boolean }
   /** Practice with hints where the planner has stopped on a rule: never evidence. */
   | { kind: "practice"; rule: string; item: Code; word: JourneyWord; strategy: StrategyContent; attempts: AttemptEvent[]; hints: HintEvent[]; revealed: boolean; why: "content_gap" | "support" | "extra" }
@@ -345,7 +346,7 @@ function stepFor(s: AppState, c: AppContent, p: RulePlan, policy: PlannerPolicy)
       return question("retention", p.pool.retention[0]);
     case "teach": {
       const strategy = strategyOf(rj, d.strategy);
-      return { kind: "teach", rule: p.rule, strategy, refresher: d.diagnosis.kind === "retrieval_difficulty", examples: rj.teach.slice(0, 3) };
+      return { kind: "teach", rule: p.rule, strategy, refresher: d.diagnosis.kind === "retrieval_difficulty", again: p.state.interventions.length > 0, examples: rj.teach.slice(0, 3) };
     }
     case "guided_practice": {
       const id = p.unfinishedGuided ?? p.guidedLeft[0]?.id;
