@@ -1,12 +1,15 @@
 name: Spelling word bank
 
-# Rebuilds the word bank from the three pinned sources and checks it matches the committed file.
+# Rebuilds the word bank and the spelling-journey bank from the three pinned sources and checks it matches the committed file.
 # Runs only when the pipeline or its lists change (or by hand), since it clones and indexes the sources.
 on:
   workflow_dispatch:
   pull_request:
     paths:
       - tools/english/spelling/build_wordbank.py
+      - tools/english/spelling/build_journey_bank.py
+      - tools/english/spelling/test_build_journey_bank.py
+      - content/english/spelling/journey-exclusions.txt
       - content/english/spelling/blocklist.txt
       - content/english/spelling/exclusions.txt
       - content/english/items/progressions.json
@@ -37,3 +40,7 @@ jobs:
         run: pip install pyyaml
       - name: The committed bank matches a fresh build
         run: python3 tools/english/spelling/build_wordbank.py --scowl /tmp/scowl --cmudict /tmp/cmudict --oewn /tmp/oewn --check
+      - name: The committed spelling-journey bank and its coverage report match a fresh build
+        run: python3 tools/english/spelling/build_journey_bank.py --scowl /tmp/scowl --cmudict /tmp/cmudict --oewn /tmp/oewn --check
+      - name: Journey-bank classifier unit tests
+        run: python3 -m unittest tools/english/spelling/test_build_journey_bank.py -v

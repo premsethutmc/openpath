@@ -1,0 +1,9 @@
+# Extra words kept out of the spelling-journey bank (build_journey_bank.py), beside blocklist.txt and exclusions.txt
+# (which the word bank also uses and which this file does not change). Found by scanning the generated bank for words
+# unsuitable for learners aged 10-15 as teaching or test words: bodily, crime or violence, or odd/technical forms.
+# A short review list, not a word bank.
+peeing peed pees mugging mugged muggings gassing gassed stabbing stabbed knifing knifed shooting shootings
+drugging drugged boozing boozed bombing bombed killing killed kills murdering murdered strangling strangled
+flied geeing geed emceeing filigreeing pureeing horseshoeing gutting gutted bleeding wetting wetted
+adulteries anuses ballses gayer gayest gays hangovers coffined coffining robberies burglaries nutted nutting slays
+executing grossed cursing
