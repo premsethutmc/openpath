@@ -8,6 +8,7 @@ on:
     paths:
       - tools/english/spelling/build_wordbank.py
       - tools/english/spelling/build_journey_bank.py
+      - tools/english/spelling/build_dictionary.py
       - tools/english/spelling/test_build_journey_bank.py
       - content/english/spelling/journey-exclusions.txt
       - content/english/spelling/blocklist.txt
@@ -42,5 +43,7 @@ jobs:
         run: python3 tools/english/spelling/build_wordbank.py --scowl /tmp/scowl --cmudict /tmp/cmudict --oewn /tmp/oewn --check
       - name: The committed spelling-journey bank and its coverage report match a fresh build
         run: python3 tools/english/spelling/build_journey_bank.py --scowl /tmp/scowl --cmudict /tmp/cmudict --oewn /tmp/oewn --check
+      - name: The committed reading-activity word list matches a fresh build
+        run: python3 tools/english/spelling/build_dictionary.py --scowl /tmp/scowl --check
       - name: Journey-bank classifier unit tests
         run: python3 -m unittest tools/english/spelling/test_build_journey_bank.py -v

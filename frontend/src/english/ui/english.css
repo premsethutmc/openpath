@@ -1965,3 +1965,102 @@ h3.sub {
 .bee-quiet {
   text-align: center;
 }
+
+/* ------------------------------------------------------------------ spelling journey and read-and-answer */
+.spelling-journey-card,
+.reading-card {
+  margin-bottom: 14px;
+}
+.spelling-journey .examples .more-example {
+  color: var(--muted);
+}
+.spelling-journey .not-sure {
+  margin-top: 6px;
+}
+.rule-progress {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 18px;
+  display: grid;
+  gap: 8px;
+}
+.rule-progress li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--lilac);
+}
+.rule-progress li[data-state="moved_on"],
+.rule-progress li[data-state="screened_right"] {
+  background: var(--right-wash);
+}
+.rule-progress li span {
+  color: var(--muted);
+  text-align: right;
+}
+.reading .question-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.reading .question-row .listen {
+  flex: none;
+}
+.reading .write {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.reading .write label {
+  font-weight: 700;
+}
+.reading textarea {
+  width: 100%;
+  min-height: 7.5rem;
+  font: inherit;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  box-sizing: border-box;
+  resize: vertical;
+}
+.reading textarea:focus {
+  outline: 3px solid var(--focus);
+  border-color: transparent;
+}
+.written-answer {
+  margin: 14px 0;
+  display: grid;
+  gap: 8px;
+}
+.written-answer .child-text {
+  margin: 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--violet);
+  background: var(--cream);
+  border-radius: 8px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.feedback.partly {
+  background: var(--peach);
+  color: var(--peach-text);
+}
+.feedback.writing {
+  background: var(--lilac-2);
+}
+.feedback.writing ul {
+  margin: 4px 0 0;
+  padding-left: 1.1rem;
+}
+.reading .after {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

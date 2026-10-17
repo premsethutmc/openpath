@@ -41,6 +41,8 @@ import pilotSetJson from "../../../../content/english/spelling/review/pilot-set.
 import lessonsJson from "../../../../content/english/web/lessons.json";
 import feedbackJson from "../../../../content/english/web/feedback.json";
 import journeyJson from "../../../../content/english/web/doubling-journey.json";
+import spellingJourneyJson from "../../../../content/english/web/spelling-journey.json";
+import journeyWordsJson from "../../../../content/english/spelling/journey-words.json";
 import pilotItemsJson from "../../../../content/english/pilot/items.json";
 import pilotPassagesJson from "../../../../content/english/pilot/passages.json";
 import pilotManifestJson from "../../../../content/english/pilot/manifest.json";
@@ -113,6 +115,112 @@ export interface JourneyContent {
   /** Generated practice words for guided practice (practice-only). */
   guided: string[];
   strategies: StrategyContent[];
+}
+
+/** A word of the spelling-journey bank (content/english/spelling/journey-words.json), as one question. */
+export interface JourneyWord {
+  /** The question's id: jrn.<rule>.<word>. */
+  id: string;
+  word: string;
+  rule: string;
+  /** apply: the rule changes the word; contrast: a similar-looking word the rule must NOT change. */
+  kind: "apply" | "contrast";
+  /** Fixed by the pipeline, never by the learner: teach and practice words are never evidence; assess, retention and contrast words are held back. */
+  role: "teach" | "practice" | "assess" | "retention" | "contrast";
+  base: string;
+  /** The ending, without its hyphen (ing, ed, s, er, est). */
+  ending: string;
+  /** Every rule-made misspelling with what it shows (also tags the engine does not list: those only choose the explanation). */
+  wrong: Record<string, string>;
+  /** Can the device say the word without it sounding like another word? */
+  dictate: boolean;
+}
+
+export interface RuleJourney {
+  rule: string;
+  /** The child's name for it ("Doubling letters"). */
+  child: string;
+  /** The parent's description. */
+  skill: string;
+  strategies: StrategyContent[];
+  /** Child-facing explanation of each rule-made mistake, with {base}, {word}, {last}, {ending}, {stem}. */
+  mistakes: Record<string, string>;
+  /** Lesson example words (role teach). */
+  teach: JourneyWord[];
+  /** Question ids by use, in the pipeline's order (the journey orders them per learner). */
+  practice: string[];
+  assess: string[];
+  contrast: string[];
+  retention: string[];
+}
+
+/** The adaptive spelling journey across the inflection rules (spelling-journey.json + journey-words.json). */
+export interface SpellingJourneyContent {
+  review: string;
+  capability: string;
+  /** Rules in teaching order (the capability's ladder). */
+  order: string[];
+  rules: Map<string, RuleJourney>;
+  /** Every journey question's word, by question id. */
+  words: Map<string, JourneyWord>;
+  text: { neutral: string; slip: string; unsure: string };
+  sources: { id: string; commit: string; notice: string }[];
+}
+
+/** Question ids and items for the spelling-journey bank. Evidence words are provisional questions; teach and practice words are generated (practice-only). */
+function spellingJourneyContent(doubling: StrategyContent[]): { content: SpellingJourneyContent; items: Code[] } {
+  type Row = [string, string, "apply" | "contrast", JourneyWord["role"], string, string, number, number, Record<string, string>, string[]];
+  const raw = journeyWordsJson as unknown as { fields: string[]; rows: Row[]; sources: SpellingJourneyContent["sources"] };
+  const doc = spellingJourneyJson as unknown as {
+    review: string; capability: string; order: string[]; neutral: string; slip: string; unsure: string;
+    rules: Record<string, { child: string; skill: string; strategies: StrategyContent[] | "doubling-journey"; mistakes: Record<string, string> }>;
+  };
+  // the engine's misconception list for this capability (framework): only these tags go on a question; others only pick an explanation
+  const ENGINE_TAGS = new Set(["no_doubling", "kept_silent_e", "y_not_changed", "over_doubling"]);
+  const words = new Map<string, JourneyWord>();
+  const items: Code[] = [];
+  const rules = new Map<string, RuleJourney>();
+  for (const id of doc.order) {
+    const r = doc.rules[id];
+    rules.set(id, { rule: id, child: r.child, skill: r.skill, strategies: r.strategies === "doubling-journey" ? doubling : r.strategies, mistakes: r.mistakes, teach: [], practice: [], assess: [], contrast: [], retention: [] });
+  }
+  for (const [w, rule, kind, role, base, join, diff, dictate, wrong, variants] of raw.rows) {
+    const rj = rules.get(rule);
+    if (!rj) continue;
+    const id = `jrn.${rule}.${w}`;
+    const ending = join.replace(/^-/, "");
+    const jw: JourneyWord = { id, word: w, rule, kind, role, base, ending, wrong, dictate: dictate === 1 };
+    words.set(id, jw);
+    const evidence = role === "assess" || role === "retention" || role === "contrast";
+    const engineWrong = Object.fromEntries(Object.entries(wrong).filter(([, t]) => ENGINE_TAGS.has(t)));
+    const prompt = ending === "s" ? `Add -s or -es to "${base}".` : `Add -${ending} to "${base}".`;
+    const item: Code = {
+      kind: "code",
+      id,
+      version: 1,
+      target: doc.capability,
+      format: "typed:word_form",
+      b: Math.min(8, Math.max(1, diff)),
+      a: 1.1,
+      prompt,
+      answers: [w, ...variants],
+      ...(Object.keys(engineWrong).length ? { wrong: engineWrong } : {}),
+      step: rule,
+      family: `fam.jrn.${rule}${kind === "contrast" ? ".contrast" : ""}`,
+      review: "candidate-generated",
+      rationale: `Spelling-journey bank (${role}): difficulty is a feature estimate from the rule's ladder step, word length and commonness, not calibrated.`,
+      ...(dictate === 1 ? { speak: w } : {}),
+      ...(evidence
+        ? // held back for independent checks: provisional (recorded at rule level, never changes the estimate, never verified mastery)
+          { evidence_status: "provisional" as const }
+        : // lesson and practice words: generated and unchecked, so practice-only
+          { difficulty_source: "feature_estimate" as const, generated: { generator: "journey-bank@1", template: "add_ending", word: w, base, join, sources: ["scowl", "cmudict"] } }),
+    } as Code;
+    items.push(item);
+    if (role === "teach") rj.teach.push(jw);
+    else rj[role].push(id);
+  }
+  return { content: { review: doc.review, capability: doc.capability, order: doc.order, rules, words, text: { neutral: doc.neutral, slip: doc.slip, unsure: doc.unsure }, sources: raw.sources }, items };
 }
 
 /**
@@ -206,6 +314,8 @@ export interface AppContent {
   overallGoal: Goal;
   /** The adaptive consonant-doubling journey (MVP slice). */
   journey: JourneyContent;
+  /** The adaptive spelling journey across all eight inflection rules. */
+  spelling: SpellingJourneyContent;
   /** Pilot content: what each question on the five pilot capabilities is reserved for, and the content version. */
   pilot: { version: string; capabilities: string[]; pools: Map<string, PoolInfo> };
   /** The pilot content-safety boundary: set in a pilot build (and only there), null otherwise. */
@@ -231,11 +341,13 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
   const dictation = { version: dictationDoc.version, status: dictationDoc.status, items: dictationDoc.items.filter((i) => ok(i.target)) };
   const j = journeyJson as unknown as { review: string; capability: string; rule: string; items: Code[]; independent: { assessOrder: string[] }; guided: string[]; strategies: StrategyContent[] };
   const journey: JourneyContent = { review: j.review, capability: j.capability, rule: j.rule, items: j.items, assessOrder: j.independent.assessOrder, guided: j.guided, strategies: j.strategies };
+  const spelling = spellingJourneyContent(j.strategies);
   const bundle: ContentBundle = {
     // the journey's provisional questions are in the bank (so the engine can score them) but not in `handWritten`:
     // placement, practice and checks never use them, only the doubling journey does
     // dictation items are scored by the engine like any question, but only the spelling assessment selects them
-    items: [...hand, ...generated, ...journey.items, ...dictation.items],
+    // the spelling journey's questions are in the bank too, for the same reason; only the spelling journey selects them
+    items: [...hand, ...generated, ...journey.items, ...dictation.items, ...spelling.items],
     retired: [...(retiredJson as unknown as Item[]), ...(retiredGeneratedJson as unknown as Item[])].filter((i) => i.kind === "code" && ok(i.target)),
     passages: [...(passagesJson as unknown as Passage[]), ...(pilotPassagesJson as unknown as Passage[])],
     goals: goalsJson as unknown as Goal[],
@@ -278,6 +390,7 @@ export function loadContent(opts: { mode?: ContentMode; review?: GeneratedReview
     guidedGoal,
     overallGoal,
     journey,
+    spelling: spelling.content,
     pilot: (() => {
       const m = pilotManifestJson as unknown as { version: string; capabilities: string[]; pools: Record<string, PoolInfo> };
       return { version: m.version, capabilities: m.capabilities, pools: new Map(Object.entries(m.pools)) };

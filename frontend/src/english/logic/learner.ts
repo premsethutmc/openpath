@@ -3,11 +3,13 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
+import { type EvidenceEvent, type HintEvent, type Item, type Passage, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
+import { DEFAULT_READING_EVALUATOR, READING_EVALUATORS, READING_TASKS, type ReadingTask, revisionChange } from "./reading.ts";
+import { type Explanation, type LearningVector, type SpellingJourneyReport, type SpellingJourneyView, SPELLING_JOURNEY, explainAnswer, learningVector, spellingHint, spellingJourneyReport, spellingJourneyView } from "./spelling-journey.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
+import { APP_VERSION, type WrittenAnswerEvent, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
@@ -24,6 +26,9 @@ import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from 
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
+
+/** A written answer is kept to this many characters (a short answer, not an essay). */
+export const READING_MAX_CHARS = 600;
 
 /** A journey session idle for longer than this is ended when the journey is next opened. */
 export const JOURNEY_IDLE_MS = 6 * 3_600_000;
@@ -739,6 +744,173 @@ export class Learner {
     return parentReport(this.state, this.content, this.clock());
   }
 
+  // ------------------------------------------------------------------ the spelling journey (all inflection rules)
+
+  /**
+   * Open the spelling journey. An open journey is resumed where it was; one left idle for hours is ended, so coming
+   * back on a later day is a new session (delayed checks depend on it) that still continues any lesson left half-way.
+   * When there is nothing to do, no session is recorded and the summary is shown.
+   */
+  async startSpellingJourney(): Promise<SpellingJourneyView> {
+    this.guard("the spelling journey");
+    if (!activityAllowed(this.content, SPELLING_JOURNEY)) throw new PilotRefusal("the spelling journey");
+    let open = this.state.open;
+    if (open?.event.type === SPELLING_JOURNEY && Date.parse(this.clock()) - Date.parse(this.lastActivity(open.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      open = this.state.open;
+    }
+    if (open?.event.type === SPELLING_JOURNEY) return this.spellingJourney();
+    const now = this.clock();
+    const virtual = { event: { kind: "session" as const, id: "preview", at: now, session: "preview", type: SPELLING_JOURNEY }, attempts: [], answered: [], end: null };
+    const preview = spellingJourneyView(this.state, this.content, virtual, now, this.profileId);
+    if (preview.step.kind === "summary") return preview;
+    if (open) await this.stop();
+    await this.add({ kind: "session", id: this.nextId(), at: this.clock(), session: `s:${this.events.length + 1}`, type: SPELLING_JOURNEY, capability: this.content.spelling.capability });
+    return this.spellingJourney();
+  }
+
+  /** Where the spelling journey is now. Records a question as presented (once); closes the session when it has finished. */
+  async spellingJourney(): Promise<SpellingJourneyView> {
+    this.guard("the spelling journey");
+    const session = this.state.open;
+    if (!session || session.event.type !== SPELLING_JOURNEY) return this.startSpellingJourney();
+    if (Date.parse(this.clock()) - Date.parse(this.lastActivity(session.event.session)) > JOURNEY_IDLE_MS) {
+      await this.stop();
+      return this.startSpellingJourney();
+    }
+    const t = perfNow();
+    const v = spellingJourneyView(this.state, this.content, session, this.clock(), this.profileId);
+    record({ name: "select_ms", ms: perfNow() - t });
+    if (v.step.kind === "summary") {
+      await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: session.event.session, reason: "finished" });
+      return v;
+    }
+    if (v.step.kind === "question" || v.step.kind === "guided" || v.step.kind === "practice") {
+      const item = v.step.item;
+      const purpose: PresentedPurpose = v.step.kind === "guided" ? "teaching" : v.step.kind === "practice" ? "practice" : v.step.purpose === "retention" ? "retention" : "assessment";
+      const fresh = !this.presentedId(session.event.session, item.id);
+      const presented = await this.present(item, purpose, v.step.kind === "guided" ? v.step.intervention : undefined);
+      if (fresh && v.decision) await this.traceSelection(presented, { id: item.id, version: item.version }, plannerTrace(v.decision, v.step.kind === "question" ? (v.step.purpose === "screen" ? "assessment" : v.step.purpose) : "practice"));
+    }
+    return spellingJourneyView(this.state, this.content, this.state.open!, this.clock(), this.profileId);
+  }
+
+  /**
+   * Answer the current spelling-journey step. Questions are independent (a first try is evidence); guided and practice
+   * words are always assisted practice, never evidence. Returns the engine's feedback and what to tell the child.
+   */
+  async answerSpellingJourney(view: SpellingJourneyView, response: Response): Promise<{ feedback: Feedback; explanation: Explanation }> {
+    const step = view.step;
+    if (step.kind !== "question" && step.kind !== "guided" && step.kind !== "practice") throw new Error("nothing to answer");
+    let fb: Feedback;
+    if (step.kind === "question") {
+      const block = this.events.filter((e) => e.kind === "intervention" && e.capability === this.content.spelling.capability && e.rule === step.rule && /^spelling-journey:/.test(e.content ?? "")).at(-1)?.id;
+      fb = await this.answer(step.item, response, { use: step.purpose === "retention" ? "retention" : "assessment", ...(step.purpose === "reassess" && block ? { intervention: block } : {}) });
+    } else if (step.kind === "guided") fb = await this.answer(step.item, response, { assisted: true, use: "practice", intervention: step.intervention });
+    else fb = await this.answer(step.item, response, { assisted: true, use: "practice" });
+    return { feedback: fb, explanation: explainAnswer(this.content, step.word, response.kind === "typed" ? response.text : "", fb.correct) };
+  }
+
+  /** The lesson was shown: recorded as an intervention on the rule, with its strategy and example words. */
+  async teachSpellingJourney(view: SpellingJourneyView): Promise<void> {
+    this.guard("teaching");
+    const session = this.state.open;
+    const step = view.step;
+    if (!session || step.kind !== "teach") throw new Error("no lesson to record");
+    await this.add({
+      kind: "intervention",
+      id: this.nextId(),
+      at: this.clock(),
+      session: session.event.session,
+      capability: this.content.spelling.capability,
+      rule: step.rule,
+      strategy: step.strategy.id,
+      content: `spelling-journey:${step.rule}:${step.strategy.id}`,
+      reason: view.decision?.reason ?? "",
+    });
+  }
+
+  /** The next hint for a guided or practice word; the last level is a worked example and is recorded as showing the answer. */
+  async hintSpellingJourney(view: SpellingJourneyView): Promise<string> {
+    this.guard("hints");
+    const session = this.state.open;
+    const step = view.step;
+    if (!session || (step.kind !== "guided" && step.kind !== "practice")) throw new Error("no hint here");
+    const level = this.hintsFor(session.event.session, step.item.id).length + 1;
+    const worked = level >= step.strategy.hints.length;
+    await this.add({
+      kind: "hint",
+      id: this.nextId(),
+      at: this.clock(),
+      session: session.event.session,
+      item: { id: step.item.id, version: step.item.version },
+      ...(this.presentedId(session.event.session, step.item.id) ? { presented: this.presentedId(session.event.session, step.item.id)! } : {}),
+      level,
+      hintType: worked ? `${step.strategy.id}:worked_example` : `${step.strategy.id}:${level}`,
+      ...(worked ? { revealsAnswer: true as const } : {}),
+    });
+    return spellingHint(step.strategy, step.word, level);
+  }
+
+  async finishSpellingJourney(): Promise<void> {
+    const open = this.state.open;
+    if (open && open.event.type === SPELLING_JOURNEY) await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "finished" });
+  }
+
+  spellingJourneyReport(): SpellingJourneyReport {
+    return spellingJourneyReport(this.state, this.content, this.clock());
+  }
+
+  learningVector(): LearningVector {
+    return learningVector(this.state, this.content, this.clock());
+  }
+
+  // ------------------------------------------------------------------ read and answer
+
+  /** The reading questions, each with its passage, in order. */
+  readingTasks(): { task: ReadingTask; passage: Passage }[] {
+    return READING_TASKS.map((task) => ({ task, passage: this.content.ctx.content.passages.get(task.passage)! })).filter((x) => !!x.passage);
+  }
+
+  /** Every written answer to a task, oldest first (the original is revision 0; revisions follow). */
+  readingAnswers(taskId: string): WrittenAnswerEvent[] {
+    return this.events.filter((e): e is WrittenAnswerEvent => e.kind === "written_answer" && e.task.id === taskId);
+  }
+
+  /** The next question: the first not yet answered; when all have been, the one answered longest ago (reading again is always open). */
+  nextReading(): { task: ReadingTask; passage: Passage } | null {
+    const all = this.readingTasks();
+    if (!all.length) return null;
+    const last = (id: string) => this.readingAnswers(id).at(-1)?.at ?? "";
+    return all.find((x) => !last(x.task.id)) ?? [...all].sort((a, b) => last(a.task.id).localeCompare(last(b.task.id)))[0];
+  }
+
+  /**
+   * Save a written answer and evaluate it. The text is stored exactly as written; a revision is a new event, so the
+   * original and every revision stay side by side. `revise` marks this as a revision of the latest answer.
+   */
+  async answerReading(taskId: string, text: string, revise: boolean, evaluator = DEFAULT_READING_EVALUATOR): Promise<WrittenAnswerEvent> {
+    this.guard("written answers"); // the pilot records nothing a child writes in their own words
+    const found = this.readingTasks().find((x) => x.task.id === taskId);
+    if (!found) throw new Error(`no reading question ${taskId}`);
+    const clean = text.replace(/\s+/g, " ").trim().slice(0, READING_MAX_CHARS);
+    const before = this.readingAnswers(taskId);
+    const evaluation = READING_EVALUATORS[evaluator].evaluate(found.task, found.passage, clean);
+    if (revise && before.length) evaluation.evidence.push({ capability: "EN.WRT.PRC.revising", observation: revisionChange(before.at(-1)!.evaluation, evaluation), provisional: true });
+    const e: WrittenAnswerEvent = {
+      kind: "written_answer",
+      id: this.nextId(),
+      at: this.clock(),
+      task: { id: found.task.id, version: found.task.version ?? 1 },
+      passage: found.passage.id,
+      revision: revise && before.length ? before.at(-1)!.revision + 1 : 0,
+      text: clean,
+      evaluation,
+    };
+    await this.add(e);
+    return e;
+  }
+
   async stop(): Promise<void> {
     const open = this.state.open;
     if (open) await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "stopped" });
@@ -797,6 +969,7 @@ export class Learner {
       guided: "Practice",
       explore: "More practice",
       doubling_journey: "Doubling letters",
+      spelling_journey: "Spelling",
       check: "A few questions",
     }[type];
   }
