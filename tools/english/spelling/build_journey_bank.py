@@ -306,12 +306,12 @@ def coverage_md(jb, bank) -> str:
     return "\n".join(L) + "\n"
 
 
-RUNTIME_FIELDS = ["w", "rule", "kind", "role", "base", "join", "diff", "dictate", "wrong"]
+RUNTIME_FIELDS = ["w", "rule", "kind", "role", "base", "join", "diff", "dictate", "wrong", "variants"]
 
 
 def runtime(jb) -> str:
     """The compact copy the web app bundles: what the journey needs at run time, nothing for auditing."""
-    rows = [[e["w"], e["rule"], e["kind"], e["role"], e["base"], e["join"], e["diff"], 1 if e["dictate"] else 0, e["wrong"]] for e in jb["entries"]]
+    rows = [[e["w"], e["rule"], e["kind"], e["role"], e["base"], e["join"], e["diff"], 1 if e["dictate"] else 0, e["wrong"], e.get("variants", [])] for e in jb["entries"]]
     head = {"id": jb["id"] + ".runtime", "version": jb["version"], "full": "content/english/spelling/journey-bank.json",
             "sources": [{"id": s["id"], "commit": s["commit"], "notice": s["notice"]} for s in jb["sources"]], "fields": RUNTIME_FIELDS}
     return json.dumps({**head, "rows": rows}, ensure_ascii=False, separators=(",", ":")).replace('["', '\n["') + "\n"
