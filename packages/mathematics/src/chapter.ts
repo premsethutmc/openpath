@@ -14,7 +14,7 @@ import { sharedProfile } from "./canonical";
 import { mathematicsLedger } from "./registration";
 
 export const chapter = spec;
-export type Stage = (typeof spec.stages)[number];
+export type Stage = Omit<(typeof spec.stages)[number], "questions"> & { questions: string[]; timeLimitSec?: number };
 export type Question = (typeof spec.questions)[number] & { options?: string[]; hint?: string };
 export type ChapterAction = "open" | "hint" | "solution" | "answer" | "complete";
 
@@ -54,7 +54,7 @@ export const question = (id: string): Question => {
   if (!q) throw new Error(`Unknown chapter question ${id}`);
   return q as Question;
 };
-export const stageOf = (id: string): Stage => spec.stages.find((s) => s.id === id)!;
+export const stageOf = (id: string): Stage => spec.stages.find((s) => s.id === id)! as Stage;
 export const LETTERS = ["A", "B", "C", "D"] as const;
 
 /** The canonical answer text: an option letter, or an integer (a leading + and spaces ignored; − accepted). */
@@ -90,7 +90,7 @@ const empty = (): ChapterState => ({ completed: [], current: spec.stages[0].id, 
 export function canComplete(state: ChapterState, stageId: string, now = Date.now()): boolean {
   const i = spec.stages.findIndex((s) => s.id === stageId);
   if (i < 0) return false;
-  const stage = spec.stages[i];
+  const stage = spec.stages[i] as Stage;
   if (!spec.stages.slice(0, i).every((s) => state.completed.includes(s.id))) return false;
   if (stageId === spec.stages.at(-1)!.id && !(state.retentionDueAt && now >= Date.parse(state.retentionDueAt))) return false;
   if (stage.kind === "timed") return true;
@@ -108,7 +108,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
     const ev = raw as ChapterActivity;
     if (seen.has(ev.id) || ev.learnerId !== learnerId || ev.lessonVersion !== spec.version) continue;
     seen.add(ev.id);
-    const stage = spec.stages.find((s) => s.id === ev.stage);
+    const stage = spec.stages.find((s) => s.id === ev.stage) as Stage | undefined;
     if (!stage) continue;
     state.timeMs += Math.max(0, Math.min(ev.elapsedMs || 0, 3_600_000));
     if (ev.action === "open" && stage.kind === "timed" && !state.timedOpenedAt) state.timedOpenedAt = ev.at;

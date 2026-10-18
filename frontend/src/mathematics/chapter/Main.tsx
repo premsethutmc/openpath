@@ -34,7 +34,10 @@ type Screen = { name: "goal" } | { name: "chapters" } | { name: "chapter" };
 class Repo {
   private queue: Promise<unknown> = Promise.resolve();
   private count = 0;
-  constructor(readonly learner: string) {}
+  readonly learner: string;
+  constructor(learner: string) {
+    this.learner = learner;
+  }
   async load() {
     const r = await api.request<{ count: number; events: ChapterActivity[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
     this.count = r.count;
