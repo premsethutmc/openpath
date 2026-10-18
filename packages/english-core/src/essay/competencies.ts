@@ -167,3 +167,14 @@ export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: Lea
 }
 
 export const allowedTags =(ectx: EssayContext, capability: CapabilityId): Set<string> => misconceptionIds(ectx.ctx.index, capability);
+
+/**
+ * Retention due (planner policy @3): the competency was shown at the grade target, and the engine's own delayed check
+ * is now due (verification "overdue"). The engine withdraws the current claim until that check is taken; this is a
+ * retention question, not evidence of a gap, so planners check before re-teaching. A failed check is not "due".
+ */
+export function retentionDue(ectx: EssayContext, capability: CapabilityId, v: LeafView): boolean {
+  const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
+  if (target === null || v.verification.status !== "overdue") return false;
+  return (v.retention.level ?? -Infinity) >= target || (v.verification.historicalLevel ?? -Infinity) >= target;
+}

@@ -294,7 +294,12 @@ test("K1-11 prerequisites become child nodes taught first (run-ons build on comm
   assert.ok(tree.nodes[0].steps[0].order < tree.nodes[1].steps[0].order);
   assert.ok(!j.trees.some((t) => t.root === "EN.GRM.PUN.commas"), "not a second tree");
   // no lessons exist for these yet: the teach steps are blocked, the rest stays possible
-  assert.equal(tree.nodes[1].steps[0].status, "blocked");
+  assert.equal(tree.nodes[0].decision, "prerequisite", "the prerequisite is still taught first (unchanged)");
+  assert.equal(tree.nodes[0].steps[0].kind, "teach");
+  // policy @3 (B2): the target's gap is only suspected, so it is checked at the target before its lesson
+  assert.equal(tree.nodes[1].decision, "insufficient_evidence");
+  assert.deepEqual(tree.nodes[1].steps.map((s) => s.kind), ["independent_check", "teach", "guided_practice"]);
+  assert.equal(tree.nodes[1].steps.find((s) => s.kind === "teach")!.status, "blocked");
   assert.ok(j.contentGaps.some((g) => /no lesson/.test(g.what)));
 });
 
@@ -398,11 +403,14 @@ test("K1-14 the next essay reuses the same profile: earlier essays support a new
   assert.deepEqual(p.essays.map((e) => e.id), ["essay:library", "essay:library-2"]);
   const svaStatus = p.competencies.find((c) => c.competency === SVA)!;
   assert.equal(svaStatus.provenance.independent.length, 3, "the earlier diagnostic answers are part of the profile");
-  // the engine does not yet support the grade target, so the journey teaches, practises and checks
+  // the engine does not yet support the grade target, and the gap is only suspected (the earlier answers were right
+  // but below the target): policy @3 checks at the target first; the lesson and practice follow only if needed
   const j = createJourney(ectx(), events, meta(30, "s2", 7), "essay:library-2").journey;
   const node = j.trees.flatMap((t) => t.nodes).find((n) => n.competency === SVA)!;
   assert.equal(node.level, "none");
-  assert.deepEqual(node.steps.map((s) => s.kind), ["teach", "guided_practice", "independent_check"]);
+  assert.equal(node.decision, "insufficient_evidence");
+  assert.deepEqual(node.steps.map((s) => s.kind), ["independent_check", "teach", "guided_practice"]);
+  assert.deepEqual(node.steps.map((s) => s.condition ?? null), [null, "if_not_shown", "if_not_shown"]);
 });
 
 test("K1-14b a skill the engine shows at the grade target is checked again, not retaught, when a new essay disagrees", async () => {

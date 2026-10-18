@@ -39,7 +39,7 @@ const NAV: { screen: Screen; label: string }[] = [
   { screen: "profile", label: "Profile" },
 ];
 const STEP_LABEL = { diagnose: "Short check", teach: "Lesson", guided_practice: "Practice with help", independent_check: "Check without help" } as const;
-const STEP_STATUS = { pending: "Not done yet", done: "Done (not a claim of mastery)", green: "Shown: the engine counts this skill at the grade target", blocked: "Content missing" } as const;
+const STEP_STATUS = { pending: "Not done yet", done: "Done (not a claim of mastery)", green: "Shown: the engine counts this skill at the grade target", blocked: "Content missing", skipped: "Not needed: the check without help showed the skill (still available to open)" } as const;
 const RETENTION = {
   not_applicable: "Not yet: a delayed check comes only after the skill is shown without help",
   pending: "Pending: the delayed check is not due yet",

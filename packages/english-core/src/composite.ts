@@ -133,6 +133,11 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const p = index.framework.policy;
   const node = composite.nodes[o.capability];
   if (!node) throw new Error(`unknown capability ${o.capability}`);
+  const qualifies = o.qualifying !== false;
+  // The level "as of the last qualifying answer" is the one shown just before this answer: taken before the
+  // time-variance growth and before this answer's own update, so an answer straight after teaching never moves it
+  // (A1, policy fix: it used to be taken after the update, so the first such answer raised or lowered the level).
+  const levelBefore = !qualifies && node.qualifyingN === undefined && o.exposure !== "repeat" ? demonstratedLevel(node, p, o.capability) : undefined;
   touch(node, o.at, index);
   if (o.exposure === "repeat") return recordRepeat(composite, node, o);
   decayMisconceptions(node, o.at, p);
@@ -143,11 +148,10 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const d = capShift(node.direct, o.update(node.direct), o.maxShift);
   node.combined = c.est;
   node.direct = d.est;
-  const qualifies = o.qualifying !== false;
   // the qualifying counts are kept only once an answer has followed teaching: until then they equal directN and
   // contexts, and the node is byte-identical to one recorded before this distinction existed
   if (!qualifies && node.qualifyingN === undefined) {
-    node.qualifiedLevel = demonstratedLevel(node, p, o.capability);
+    node.qualifiedLevel = levelBefore ?? null;
     node.qualifyingN = node.directN;
     node.qualifyingContexts = [...node.contexts];
   }
