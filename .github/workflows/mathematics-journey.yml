@@ -1,0 +1,59 @@
+name: Mathematics learner journey
+on:
+  push:
+    branches: [feat/mathematics-learner-journey-v2]
+  pull_request:
+    paths:
+      [
+        "packages/mathematics/**",
+        "packages/english-core/src/framework.ts",
+        "content/mathematics/**",
+        "backend/family/**",
+        "frontend/src/mathematics/journey/**",
+        "frontend/e2e/mathematics-journey.test.mjs",
+        "frontend/scripts/build-mathematics-journey.mjs",
+        ".github/workflows/mathematics-journey.yml",
+      ]
+permissions:
+  contents: read
+jobs:
+  journey:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r backend/requirements.txt
+      - run: npm ci
+        working-directory: frontend
+      - run: python manage.py test --noinput
+        working-directory: backend
+      - run: npm run typecheck && npm test
+        working-directory: frontend
+      - run: node scripts/build-mathematics-journey.mjs
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Authenticated browser flow
+        shell: bash
+        run: |
+          python backend/manage.py migrate --noinput
+          python backend/manage.py runserver 127.0.0.1:8012 --noreload --nothreading > /tmp/math-api.log 2>&1 &
+          math_api_pid=$!
+          PORT=4182 API_TARGET=http://127.0.0.1:8012 node frontend/scripts/preview-english.mjs > /tmp/math-preview.log 2>&1 &
+          math_preview_pid=$!
+          trap 'kill "$math_api_pid" "$math_preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4182/api/account/ > /dev/null; then break; fi
+            sleep 1
+          done
+          cd frontend
+          CHROMIUM_PATH='' node --import tsx --test e2e/mathematics-journey.test.mjs

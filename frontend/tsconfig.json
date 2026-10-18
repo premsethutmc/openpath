@@ -26,6 +26,7 @@
   ],
   "exclude": [
     "src/english",
-    "src/mathematics/canonical.test.ts"
+    "src/mathematics/canonical.test.ts",
+    "src/mathematics/journey"
   ]
 }
