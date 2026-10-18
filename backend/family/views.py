@@ -399,11 +399,16 @@ class PupilEventsView(AccountBase):
                         {"detail": "This was deleted on another device. Open the learner again to carry on.", "count": count},
                         status=status.HTTP_409_CONFLICT,
                     )
+            if subject == "mathematics":
+                from .mathematics import checked_activity
+                event = checked_activity(event, pupil)
             PupilEvent.objects.create(pupil=pupil, subject=subject, seq=seq, kind=event["kind"], occurred_at=_occurred_at(event), body=event)
         return Response({"count": count + 1}, status=status.HTTP_201_CREATED)
 
     def put(self, request, pupil_id):
         """Import a whole record (a backup from a device) into an empty one. History is never overwritten."""
+        if request.data.get("subject") == "mathematics":
+            raise ValidationError({"detail": "Mathematics imports require the versioned activity append protocol."})
         subject = _subject(request.data.get("subject"))
         events = request.data.get("events")
         if not isinstance(events, list) or not events:

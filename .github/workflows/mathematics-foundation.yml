@@ -1,0 +1,51 @@
+name: Mathematics foundation
+on:
+  pull_request:
+    paths:
+      [
+        "packages/mathematics/**",
+        "content/mathematics/**",
+        "tools/mathematics/**",
+        "frontend/src/mathematics/**",
+        "frontend/scripts/*mathematics.mjs",
+        "frontend/e2e/mathematics.test.mjs",
+        ".github/workflows/mathematics-foundation.yml",
+      ]
+  push:
+    branches: [feat/mathematics-foundation-v1]
+permissions:
+  contents: read
+jobs:
+  mathematics:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: frontend
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --import tsx ../tools/mathematics/validate.mts
+      - name: Frozen curriculum and audit consistency
+        run: |
+          node --import tsx ../tools/mathematics/audit.mts > /tmp/mathematics-audit.json
+          cmp /tmp/mathematics-audit.json ../docs/mathematics/audit.v1.json
+      - run: npm test
+      - run: node scripts/build-mathematics.mjs
+      - run: npx playwright install --with-deps chromium
+      - name: Mathematics browser flows
+        run: |
+          node scripts/preview-mathematics.mjs > /tmp/mathematics-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4176/ > /dev/null; then break; fi
+            sleep 1
+          done
+          CHROMIUM_PATH='' node --test e2e/mathematics.test.mjs
