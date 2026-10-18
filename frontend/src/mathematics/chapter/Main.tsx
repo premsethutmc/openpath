@@ -87,7 +87,9 @@ function App() {
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
-  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [screen]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [screen]);
 
   const { state } = useMemo(() => replay(learner || "none", events, new Date(now).toISOString()), [learner, events, Math.floor(now / 30000)]);
   const visit = useRef(uid());
@@ -248,7 +250,9 @@ function Chapter({ state, now, saving, error, send, onBack }: { state: State; no
   const stage = stageOf(stageId);
   const index = chapter.stages.findIndex((s) => s.id === stageId);
   const allDone = state.completed.length === chapter.stages.length;
-  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [stageId]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [stageId]);
   const back = () => setViewing(null);
   const finish = async () => {
     if (state.completed.includes(stageId)) return back();
@@ -401,7 +405,9 @@ function Timed({ state, now, send, onDone, onContinue, saving }: { state: State;
   const [i, setI] = useState(Math.max(0, ids.findIndex((id) => !state.answers[id])));
   const [value, setValue] = useState("");
   const ending = useRef(false);
-  useEffect(() => setValue(""), [i]);
+  useEffect(() => {
+    setValue("");
+  }, [i]);
   useEffect(() => {
     if (left === 0 && !done && !ending.current) {
       ending.current = true;
