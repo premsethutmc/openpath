@@ -59,6 +59,7 @@ import {
   EssayRefusal,
   analyseEssay,
   dueCheck,
+  journeyOutcomes,
   planCheck,
   plannedChecks,
   createJourney,
@@ -271,7 +272,8 @@ export class EssayStudio {
     const rewriteRec = essay ? essayRecords(events, "rewrite").filter((r) => r.record.rewrite.essay === essay.id).at(-1) : undefined;
     const rewrite = rewriteRec?.record.evaluation ?? null;
     const next = journey ? this.nextStep(journey) : null;
-    const outcomes = journey ? journey.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target" && n.outcome).map((n) => n.outcome!)) : [];
+    // policy @3 (A2): every journey's target skills keep their later and delayed checks, from the latest journey holding each
+    const outcomes = journey ? journeyOutcomes(this.ectx, events, now) : [];
     const due = dueCheck(this.ectx, events, now);
     const laterItem = due ? this.item(due.item) : undefined;
     const laterCheck = due && laterItem ? { check: due.check, item: laterItem, position: due.position, total: due.total } : null;

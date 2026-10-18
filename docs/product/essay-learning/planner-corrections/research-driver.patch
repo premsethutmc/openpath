@@ -1,0 +1,100 @@
+--- a/e002p/src/policies.ts	2026-10-18 16:52:55.000000000 +0530
++++ b/e002p/src/policies.ts	2026-10-18 17:28:47.494382798 +0530
+@@ -48,11 +48,37 @@
+ }
+ 
+ export async function runCurrent(ep: Episode, trace?: Trace[]): Promise<void> {
++  // Generic driver for the before/after comparison of openpath PR "planner corrections": it follows the latest journey
++  // the way the studio does (studio.ts nextStep): pending steps in order; a check after teaching in the same sitting
++  // waits for the next sitting; steps re-read after every check, so "skipped" steps are honoured; later and delayed
++  // checks are planned for every target competency of any journey (studio.ts planLaterChecks, with the A2 change).
++  // For a journey without conditional steps this reproduces the original driver's order exactly.
+   const ectx = ep.ectx;
+   const S = ep.setup;
+   let journey: { id: string } | null = null;
+-  let journeyCheck: { day: number; items: string[] } | null = null;
+   const note = (decision: string) => trace?.push({ day: ep.day, decision });
++  type Step = { id: string; kind: string; status: string; competency: string; order: number; content: { refs: string[]; note: string } };
++  const stepsOf = () => (core.journeyStatus(ectx, ep.events, journey!.id, isoAt(ep.t())).trees.flatMap((t: { nodes: { steps: Step[] }[] }) => t.nodes.flatMap((n) => n.steps)) as Step[]).sort((a, b) => a.order - b.order);
++  const taughtToday = (cap: string) => ep.events.some((e) => (e as { kind: string; session: string; capability?: string }).kind === "intervention" && (e as { session: string }).session === ep.session && (e as { capability?: string }).capability === cap);
++  const done = new Set<string>();
++  const walk = () => {
++    for (let guard = 0; guard < 50; guard++) {
++      const s = stepsOf().find((x) => x.status === "pending" && !done.has(x.id));
++      if (!s) return;
++      if (s.kind === "teach") {
++        for (const l of s.content.refs) ep.teach(s.competency, s.competency === S.prereq ? "teach_prerequisite" : l === S.lessons.aimed ? "teach_misconception" : "teach", l);
++        done.add(s.id);
++      } else if (s.kind === "guided_practice") {
++        for (const i of s.content.refs) ep.practise(i);
++        done.add(s.id);
++      } else {
++        if (taughtToday(s.competency)) return; // a new sitting first
++        for (const i of s.content.refs) ep.answer(i, (s as { purpose?: string }).purpose === "retention" ? "retention_check" : "check");
++        note(`journey check answered (${s.content.refs.length} question(s))`);
++        done.add(s.id);
++      }
++    }
++  };
+   for (const day of S.days) {
+     ep.sit(day);
+     if (S.essayDays.includes(day)) {
+@@ -67,31 +93,17 @@
+       const created = core.createJourney(ectx, ep.events, ep.meta(), id);
+       ep.events.push(created.event);
+       journey = created.journey;
+-      const steps = created.journey.trees.flatMap((t: { nodes: { steps: unknown[] }[] }) => t.nodes.flatMap((n) => n.steps)) as { kind: string; status: string; competency: string; order: number; content: { refs: string[]; note: string }; reason: string }[];
+-      steps.sort((a, b) => a.order - b.order);
+       for (const s of created.journey.skipped) note(`journey skips ${s.competency}: ${s.reason}`);
+-      for (const s of steps) note(`journey step ${s.kind} ${s.competency} (${s.status}): ${s.content.note}`);
+-      for (const s of steps) {
+-        if (s.status === "blocked" || s.kind === "independent_check") continue;
+-        if (s.kind === "teach") for (const l of s.content.refs) ep.teach(s.competency, s.competency === S.prereq ? "teach_prerequisite" : l === S.lessons.aimed ? "teach_misconception" : "teach", l);
+-        else for (const i of s.content.refs) ep.practise(i);
+-      }
+-      const checkItems = steps.filter((s) => s.kind === "independent_check" && s.status !== "blocked").flatMap((s) => s.content.refs);
+-      const next = S.days.find((x) => x > day);
+-      journeyCheck = checkItems.length && next !== undefined ? { day: next, items: checkItems } : null;
+-    } else if (journeyCheck && journeyCheck.day === day) {
+-      for (const i of journeyCheck.items) ep.answer(i, "check");
+-      note(`journey check answered (${journeyCheck.items.length} question(s))`);
+-      journeyCheck = null;
++      for (const t of created.journey.trees) for (const n of t.nodes) note(`journey node ${n.competency}${n.decision ? ` (${n.decision})` : ""}: ${n.steps.map((x: Step) => `${x.kind}:${x.status}`).join(", ")}`);
+     }
+-    // later and retention checks for the journey's competencies: plan when the pipeline allows, take what is due
+-    if (journey && !journeyCheck) {
++    if (journey) walk();
++    if (journey && !stepsOf().some((x) => x.status === "pending" && !done.has(x.id))) {
+       const caps = new Set<string>();
+-      const st = core.journeyStatus(ectx, ep.events, journey.id, isoAt(ep.t()));
+-      for (const t of st.trees) for (const n of t.nodes) caps.add(n.competency);
++      for (const rec of core.essayRecords(ep.events, "journey")) for (const t of rec.record.journey.trees) for (const n of t.nodes) if (n.role === "target") caps.add(n.competency);
+       for (const cap of caps) {
++        const holder = [...core.essayRecords(ep.events, "journey")].reverse().find((rec: { record: { journey: { trees: { nodes: { competency: string }[] }[] } } }) => rec.record.journey.trees.some((t) => t.nodes.some((n) => n.competency === cap)));
+         try {
+-          const p = core.planCheck(ectx, ep.events, ep.meta(), cap, core.journeyStatus(ectx, ep.events, journey.id, isoAt(ep.t())));
++          const p = core.planCheck(ectx, ep.events, ep.meta(), cap, core.journeyStatus(ectx, ep.events, holder.record.journey.id, isoAt(ep.t())));
+           ep.events.push(p.event);
+           note(`planned ${p.check.kind} check for ${cap} from ${p.check.notBefore.slice(0, 10)}`);
+         } catch (e) {
+--- a/e002p/src/benchmark.ts	2026-10-18 16:52:55.000000000 +0530
++++ b/e002p/src/benchmark.ts	2026-10-18 17:39:45.488644266 +0530
+@@ -280,6 +280,6 @@
+   const { md, json } = report(res, { commit, perType, quick });
+   mkdirSync(out, { recursive: true });
+   writeFileSync(join(out, "TABLES.md"), md);
+-  writeFileSync(join(out, "benchmark.json"), JSON.stringify({ commit, seed: SEED, perType, quick, ...(json as object) }, null, 1));
++  writeFileSync(join(out, "benchmark.json"), JSON.stringify({ commit, seed: SEED, perType, quick, ...(json as object), episodes: res.out.filter((r) => r.policy === "current") }, null, 0));
+   console.error(`benchmark: ${res.out.length} episodes in ${((performance.now() - t0) / 1000).toFixed(0)} s; wrote ${out}`);
+ }
+--- a/e002p/src/karthik.ts	2026-10-18 16:52:55.000000000 +0530
++++ b/e002p/src/karthik.ts	2026-10-18 17:29:21.305511386 +0530
+@@ -140,7 +140,7 @@
+   const real = load.loadAppEssayContext();
+   const profile = structuredClone(real.profile.profile);
+   profile.id = `${profile.id}+research-plurals`;
+-  profile.competencies.push({
++  if (!profile.competencies.some((c: { capability: string }) => c.capability === PLURALS)) profile.competencies.push({
+     capability: PLURALS,
+     name: "Plurals and countability",
+     area: "grammar",
