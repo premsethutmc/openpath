@@ -44,6 +44,8 @@ export interface CheckProgress {
   /** Answers that cannot count for this check, with why (too early, with help, after teaching, held). */
   invalid: { item: string; why: string }[];
   complete: boolean;
+  /** When the last answer was given (complete checks), for spacing the next one. */
+  completedAt: string | null;
   /** For a completed retention check: did it show the target was kept? (null: not judged) */
   passed: boolean | null;
 }
@@ -87,7 +89,8 @@ export function checkProgress(ectx: EssayContext, events: readonly LedgerEvent[]
   const complete = left.length === 0;
   const target = ectx.profile.byCapability.get(check.competency)?.expectedBand ?? null;
   const passed = complete && check.kind === "retention" && target !== null && obs.length ? checkPassed(obs, target, null) : null;
-  return { check, left, valid, invalid, complete, passed };
+  const completedAt = complete ? [...firsts.values()].reduce((m, e) => (e.at > m ? e.at : m), "") || null : null;
+  return { check, left, valid, invalid, complete, completedAt, passed };
 }
 
 /** When the learner first showed the target without help (the engine's per-session demonstrated level). */
@@ -128,6 +131,7 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   }
 
   const verificationsUsed = checks.filter((c) => c.kind === "verification").length;
+  const lastVerification = progress.filter((x) => x.check.kind === "verification").at(-1);
   let next: CompetencyOutcome["next"] = null;
   let pending: string | null = null;
   const fmt = (iso: string) => iso.slice(0, 10);
@@ -138,10 +142,16 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
     const available = pickForRole(ectx, events, capability, "independent_verification", p.checkItems).length;
     if (target === null) pending = `${name} has no grade target, so no claim is made`;
     else if (journeyCompleted === false) pending = `the journey's steps for ${name} are not finished`;
-    else if (verificationsUsed >= p.followUpChecks) pending = `not yet shown at band ${target} without help; the later checks this policy allows have been used, so it is recommended for the next essay or a later assessment`;
+    else if (verificationsUsed >= p.followUpChecks) pending = `not yet shown at band ${target} without help; the ${p.followUpChecks} later check${p.followUpChecks === 1 ? "" : "s"} this policy allows have been used, so it is recommended for the next essay or a later assessment`;
+    // a later check with no right answer at all: another check now would not help; teaching comes first
+    else if (lastVerification?.complete && lastVerification.valid.length > 0 && lastVerification.valid.every((x) => !x.correct))
+      pending = `not yet shown at band ${target} without help, and the last later check had no right answers: teaching again (a new essay or lesson) is recommended before another check`;
     else if (available < p.checkItems) pending = `not yet shown at band ${target} without help, and the question bank has only ${available} unseen question${available === 1 ? "" : "s"} between band ${target} and ${target + ABOVE_TARGET} (${p.checkItems} needed): more reviewed questions are needed before it can be checked again`;
     else {
-      const notBefore = addDays(journey?.at && journey.at > lastActivity(events) ? journey.at : lastActivity(events), p.followUpAfterDays);
+      // spaced: from the journey for the first later check, then from the previous check's last answer
+      const spacing = p.followUpSpacingDays[Math.min(verificationsUsed, p.followUpSpacingDays.length - 1)] ?? 1;
+      const from = lastVerification?.completedAt ?? (journey?.at && journey.at > lastActivity(events) ? journey.at : lastActivity(events));
+      const notBefore = addDays(from, spacing);
       next = { kind: "verification", notBefore, itemsAvailable: available, planned: null };
       pending = `not yet shown at band ${target} without help: a later check, in a new sitting, is recommended from ${fmt(notBefore)}`;
     }

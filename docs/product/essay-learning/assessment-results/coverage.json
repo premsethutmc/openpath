@@ -44,7 +44,7 @@
    "practice": 8,
    "shortfall": [
     "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed)",
-    "Subject–verb agreement: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Subject–verb agreement: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -54,8 +54,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -110,7 +110,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Present and past simple: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Present and past simple: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Present and past simple: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -120,8 +120,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -163,7 +163,7 @@
    "diagnosticAtTarget": false,
    "practice": 5,
    "shortfall": [
-    "Progressive and perfect aspect: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Progressive and perfect aspect: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Progressive and perfect aspect: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
    ]
   },
@@ -173,8 +173,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 3,
+   "requiredIndependent": 11,
+   "addIndependent": 7,
    "addIndependentForTwoLaterChecks": 5,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -222,7 +222,7 @@
    "practice": 8,
    "shortfall": [
     "Articles: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed)",
-    "Articles: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Articles: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Articles: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -232,8 +232,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -275,7 +275,7 @@
    "diagnosticAtTarget": false,
    "practice": 7,
    "shortfall": [
-    "Grammatical accuracy in writing: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Grammatical accuracy in writing: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Grammatical accuracy in writing: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
    ]
   },
@@ -285,8 +285,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 3,
+   "requiredIndependent": 11,
+   "addIndependent": 7,
    "addIndependentForTwoLaterChecks": 5,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -328,7 +328,7 @@
    "diagnosticAtTarget": false,
    "practice": 5,
    "shortfall": [
-    "Prepositions of time and place: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Prepositions of time and place: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Prepositions of time and place: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target",
     "Prepositions of time and place: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
    ]
@@ -339,8 +339,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 4,
+   "requiredIndependent": 11,
+   "addIndependent": 8,
    "addIndependentForTwoLaterChecks": 6,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -382,7 +382,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Complete sentences, not fragments: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Complete sentences, not fragments: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Complete sentences, not fragments: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -392,8 +392,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -435,7 +435,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Avoids run-on sentences and comma splices: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Avoids run-on sentences and comma splices: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Avoids run-on sentences and comma splices: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
    ]
   },
@@ -445,8 +445,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 2,
+   "requiredIndependent": 11,
+   "addIndependent": 6,
    "addIndependentForTwoLaterChecks": 4,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -488,7 +488,7 @@
    "diagnosticAtTarget": false,
    "practice": 5,
    "shortfall": [
-    "Coordination: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Coordination: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Coordination: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -498,8 +498,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -541,7 +541,7 @@
    "diagnosticAtTarget": false,
    "practice": 7,
    "shortfall": [
-    "Subordination: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Subordination: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Subordination: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
    ]
   },
@@ -551,8 +551,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 2,
+   "requiredIndependent": 11,
+   "addIndependent": 6,
    "addIndependentForTwoLaterChecks": 4,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -594,6 +594,7 @@
    "diagnosticAtTarget": false,
    "practice": 4,
    "shortfall": [
+    "Commas: 4 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Commas: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
    ]
   },
@@ -603,8 +604,8 @@
    "laterCheckPossible": true
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 1,
+   "requiredIndependent": 11,
+   "addIndependent": 5,
    "addIndependentForTwoLaterChecks": 3,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -646,7 +647,7 @@
    "diagnosticAtTarget": false,
    "practice": 5,
    "shortfall": [
-    "Precise word choice in writing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Precise word choice in writing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Precise word choice in writing: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -656,8 +657,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -699,7 +700,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Collocations: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Collocations: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Collocations: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -709,8 +710,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -752,7 +753,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Connectives and transitions: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Connectives and transitions: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Connectives and transitions: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -762,8 +763,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -805,7 +806,7 @@
    "diagnosticAtTarget": false,
    "practice": 6,
    "shortfall": [
-    "Logical sequencing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Logical sequencing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Logical sequencing: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
    ]
   },
@@ -815,8 +816,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 5,
+   "requiredIndependent": 11,
+   "addIndependent": 9,
    "addIndependentForTwoLaterChecks": 7,
    "addDiagnosticBelow": 0,
    "addPractice": 0,
@@ -858,7 +859,7 @@
    "diagnosticAtTarget": false,
    "practice": 5,
    "shortfall": [
-    "Paragraphing: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Paragraphing: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8",
     "Paragraphing: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target",
     "Paragraphing: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
    ]
@@ -869,8 +870,8 @@
    "laterCheckPossible": false
   },
   "pilot": {
-   "requiredIndependent": 7,
-   "addIndependent": 4,
+   "requiredIndependent": 11,
+   "addIndependent": 8,
    "addIndependentForTwoLaterChecks": 6,
    "addDiagnosticBelow": 0,
    "addPractice": 0,

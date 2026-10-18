@@ -9,6 +9,7 @@
  *   node tools/english/assessment-simulations.ts          JSON
  *   node tools/english/assessment-simulations.ts --md     the Markdown table used in the docs
  *   add --core to run on the core bank without the pilot's questions and pools
+ *   add --reviewed-supplement for the counterfactual: the proposed supplement as if an educator had approved it
  */
 import {
   analyseEssay,
@@ -34,6 +35,7 @@ import {
   type CompetencyOutcome,
 } from "../../packages/english-core/src/index.ts";
 import { loadAppEssayContext, loadEssayContext } from "./essay-load.ts";
+import { loadContextWithSupplement } from "./supplement/load.ts";
 
 export const SVA = "EN.GRM.VERB.sva";
 const LEARNER = "sim-learner";
@@ -244,15 +246,28 @@ async function run(id: string, title: string, ability: Ability, script: (s: Sim,
   };
   const findings = await script(s, log);
   const final = brief(s.outcome(SVA, journeyId));
-  return { id, title, steps, final, reachedTarget: final.demonstrated, verified: final.verified, assistedCountedAsFresh: s.assistedCountedAsFresh(), findings };
+  const out: ScenarioResult = { id, title, steps, final, reachedTarget: final.demonstrated, verified: final.verified, assistedCountedAsFresh: s.assistedCountedAsFresh(), findings };
+  // the record and context, for shadow-only research replays; not enumerable, so never in the JSON results
+  Object.defineProperty(out, "record", { value: { events: s.events, ectx }, enumerable: false });
+  return out;
 }
 
 /**
  * Run every scenario. bank "app" (default): the bank the app ships, with the pilot's pools (what a learner meets).
  * bank "core": the core bank without the pilot's questions or pools, to separate content limits from the estimator.
  */
-export async function runScenarios(bank: "app" | "core" = "app"): Promise<ScenarioResult[]> {
-  bankContext = bank === "app" ? () => loadAppEssayContext() : () => loadEssayContext();
+export type ScenarioBank = "app" | "core" | "reviewed-supplement";
+
+/** The record of a scenario run (events and context), for shadow-only research replays. */
+export const scenarioRecord = (r: ScenarioResult): { events: LedgerEvent[]; ectx: EssayContext } => (r as unknown as { record: { events: LedgerEvent[]; ectx: EssayContext } }).record;
+
+/**
+ * bank "reviewed-supplement": the app bank plus the proposed Grade 8 supplement AS IF an educator had approved it
+ * (provisional mark removed, proposed pools applied), on a copy. A counterfactual to ask what reviewed content would
+ * change. The app never loads the supplement.
+ */
+export async function runScenarios(bank: ScenarioBank = "app"): Promise<ScenarioResult[]> {
+  bankContext = bank === "app" ? () => loadAppEssayContext() : bank === "core" ? () => loadEssayContext() : () => loadContextWithSupplement({ asIfReviewed: true });
   const out: ScenarioResult[] = [];
 
   // 1. fails the diagnostic, improves after teaching
@@ -345,6 +360,26 @@ export async function runScenarios(bank: "app" | "core" = "app"): Promise<Scenar
     }),
   );
 
+  // 7. improves, but needs several later checks: spaced, on unseen questions, at most the policy's number
+  out.push(
+    await run("S7", "Improves gradually after teaching; needs several later checks", (day, taught) => (taught ? Math.min(6.5, 5.25 + 0.3 * day) : 3.5), async (s, log) => {
+      await s.essay("essay:1", ESSAY_1);
+      const j = s.journey("essay:1");
+      log("journey check");
+      const findings: string[] = [];
+      for (let k = 0; k < 8; k++) {
+        const r = s.laterCheck(j.id);
+        if (!r.planned) {
+          log("no further check", r.refused);
+          findings.push(`stopped after ${k} later check${k === 1 ? "" : "s"}: ${r.refused}`);
+          break;
+        }
+        log(`${r.kind} check`, `from ${r.notBefore?.slice(0, 10)}, questions b = ${r.b?.join(", ")}; offered early: ${r.earlyAttempt ? "yes" : "no"}`);
+      }
+      return findings;
+    }),
+  );
+
   // 5. the assessment pool is exhausted: an earlier app session used most questions at the target with help
   out.push(
     await run("S5", "Questions at the target already used up (earlier practice with help)", (_d, taught) => (taught ? 6.5 : 3.5), async (s, log) => {
@@ -401,7 +436,7 @@ function markdown(rs: ScenarioResult[]): string {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const bank = process.argv.includes("--core") ? "core" : "app";
+  const bank: ScenarioBank = process.argv.includes("--core") ? "core" : process.argv.includes("--reviewed-supplement") ? "reviewed-supplement" : "app";
   const rs = await runScenarios(bank);
   console.log(process.argv.includes("--md") ? markdown(rs) : JSON.stringify(rs, null, 1));
 }

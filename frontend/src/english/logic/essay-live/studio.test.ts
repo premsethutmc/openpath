@@ -322,14 +322,15 @@ test("RETENTION-STUDIO the journey finishes with separate claims; later checks a
   while (v.laterCheck) v = (await studio.answerLaterCheck(rightAnswer(v.laterCheck.item))).view;
   const after = v.outcomes.find((x) => x.competency === COMMAS)!;
   // a confirmed gap, then right answers on the journey's check and the later check: the level rises (the evidence
-  // persists), but four right answers after two wrong ones do not yet show band 5. The policy's one later check is
-  // used, so the outcome stays pending with a recommendation, and nothing more is asked (the journey is finite).
+  // persists), but four right answers after two wrong ones do not yet show band 5. The policy allows more later
+  // checks, but the unseen commas questions between band 5 and 6.5 are used up, so the outcome stays pending with
+  // the reason and nothing is recycled (the journey is finite).
   assert.equal(o.next?.kind, "verification");
   assert.equal(after.demonstrated, false);
   assert.equal(after.verified, false);
   assert.equal(after.retention, "not_applicable", "no retention claim before the target is shown");
   assert.ok((after.currentLevel ?? 0) >= (o.currentLevel ?? 0));
-  assert.match(after.pending!, /later checks this policy allows have been used/);
+  assert.match(after.pending!, /more reviewed questions are needed/);
   assert.equal(after.next, null);
   assert.equal((await studio.planLaterChecks()).laterCheck, null);
 });
