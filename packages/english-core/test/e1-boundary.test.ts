@@ -11,7 +11,8 @@ import { T, ctx } from "./helpers.ts";
 const SRC = join(import.meta.dirname, "..", "src");
 
 test("E1-7 the core has no network code, no platform imports and no provider names", () => {
-  for (const f of readdirSync(SRC)) {
+  // every source file, including sub-folders (src/essay/)
+  for (const f of readdirSync(SRC, { recursive: true }).map(String).filter((f) => f.endsWith(".ts"))) {
     const code = readFileSync(join(SRC, f), "utf8");
     assert.doesNotMatch(code, /from\s+["']node:|require\(|\bfetch\(|XMLHttpRequest|WebSocket|process\.env/, `${f} must stay platform-free`);
     assert.doesNotMatch(code, /anthropic|openai|gemini|claude|gpt-|llama|mistral/i, `${f} must not name a provider`);

@@ -11,8 +11,10 @@
  *   observed      an essay showed it (an error or a strength), but not enough to suspect a gap: tentative
  *   suspected     essay observations point to a gap (for example the same kind of error in several sentences):
  *                 a hypothesis to check, never a result
- *   demonstrated  the existing engine says it was shown independently (Verification "demonstrated")
- *   verified      the existing engine says it is verified (Verification "verified": retained after a delay)
+ *   demonstrated  the existing engine says it was shown independently (Verification "demonstrated") at a level
+ *                 that reaches the grade profile's target band
+ *   verified      the existing engine says it is verified (Verification "verified": retained after a delay) at a
+ *                 level that reaches the grade profile's target band
  *
  * "observed" and "suspected" come only from essays and never change an ability estimate. "demonstrated" and
  * "verified" come only from the existing engine (ledger → composite → leafView().verification), under the
@@ -71,6 +73,7 @@ export interface CompetencyProfile {
   subject: "english_writing";
   status: "candidate";
   rubric: { name: string; source: string };
+  note?: string;
   competencies: CompetencyRef[];
 }
 
@@ -303,7 +306,7 @@ export interface JourneyNode {
   requires: CapabilityId[];
   reason: string;
   steps: JourneyStep[];
-  /** Engine verification now: green only at demonstrated or verified. */
+  /** Green only when the engine supports demonstrated or verified at the grade target band. */
   green: boolean;
   level: "none" | "demonstrated" | "verified";
 }
@@ -403,7 +406,11 @@ export interface CompetencyStatus {
    */
   state: CompetencyState;
   gap: GapHypothesis | null;
-  engine: { stage: Stage; verification: VerificationStatus; demonstrated: number | null; mastered: number | null; directN: number };
+  /**
+   * The engine's view. `state` counts demonstrated or verified only when `currentLevel` (the level the evidence
+   * currently supports) reaches `target` (the profile's draft grade band).
+   */
+  engine: { stage: Stage; verification: VerificationStatus; currentLevel: number | null; target: number | null; demonstrated: number | null; mastered: number | null; directN: number };
   essays: { errors: number; strengths: number; essays: number };
   provenance: ProvenanceSummary;
   notes: string[];
