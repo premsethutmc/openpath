@@ -150,7 +150,7 @@ export async function connectEvaluator(api: {
 
 /**
  * The essay context for the app's content. `verification` is the eligibility policy for verified mastery: the pilot
- * policy (reviewed questions only) unless a developer test asks for the developer policy (verification-eligibility@1).
+ * policy (reviewed, released questions only, answered after release) unless a developer test asks for the developer policy (verification-eligibility@2).
  */
 export function essayContext(content: AppContent, verification: VerificationPolicy = PILOT_VERIFICATION): EssayContext {
   const lessons = new Map<CapabilityId, string[]>();

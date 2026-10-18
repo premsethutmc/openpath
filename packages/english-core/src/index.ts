@@ -11,6 +11,7 @@ export * from "./updater.ts";
 export * from "./selection.ts";
 export * from "./store.ts";
 export * from "./retention.ts";
+export * from "./verification.ts";
 export * from "./summary.ts";
 export * from "./rule-evidence.ts";
 export * from "./subject-english-inflections.ts";

@@ -18,6 +18,7 @@ import {
   PILOT_VERIFICATION,
   retention,
   summarise,
+  validateContent,
 } from "../src/index.ts";
 import { loadEssayContext } from "../../../tools/english/essay-load.ts";
 import { ctx } from "./helpers.ts";
@@ -111,4 +112,42 @@ test("K10-4 unreviewed questions: under the pilot policy a verified band on unre
   assert.deepEqual([dev.level, dev.verifiedOn], ["verified", "unreviewed"]);
   // the default policy is the pilot policy
   assert.equal(engineClaim({ ...essay(), verification: undefined }, SVA, v).level, "demonstrated");
+});
+
+test("K10-5 H-V2 distinct fresh answers: two answers to one question, or a repeat, never verify; two distinct fresh questions do", () => {
+  const at = (c: Composite, d: number, b: number, correct: boolean, k: number, exposure?: "repeat") =>
+    applyDirect(c, ctx().index, { capability: SVA, at: day(d, k), session: `s${d}`, context: k % 2 ? "typed:cloze" : "choice:grammar", decisionId: `s${d}:${k}`, update: (e) => binaryUpdate(e, { ...ITEM, b }, correct), misconceptions: [], binary: { b, correct, ...ITEM }, ...(exposure ? { exposure } : {}) });
+  const shown = () => {
+    const c = createComposite(ctx().index, "hv2");
+    session(c, 0, 5.5, 8);
+    return c;
+  };
+  // the delayed session: one fresh answer at the band and the same question again (a repeat)
+  const a = shown();
+  at(a, 9, 5.5, true, 0);
+  at(a, 9, 5.5, true, 1, "repeat");
+  assert.ok((leafView(a, ctx().index, SVA, day(9, 30)).verification.verifiedLevel ?? 0) < 5, "one distinct question is not enough");
+  // two repeats (questions met before): not fresh evidence
+  const b = shown();
+  at(b, 9, 5.5, true, 0, "repeat");
+  at(b, 9, 5.5, true, 1, "repeat");
+  assert.ok((leafView(b, ctx().index, SVA, day(9, 30)).verification.verifiedLevel ?? 0) < 5, "repeats never verify");
+  // two distinct fresh questions at the band
+  const c = shown();
+  at(c, 9, 5.5, true, 0);
+  at(c, 9, 5.75, true, 1);
+  assert.ok(leafView(c, ctx().index, SVA, day(9, 30)).verification.verifiedLevel! >= 5);
+  // six days after the target was first shown: too early, whatever the answers
+  const d = shown();
+  at(d, 6, 5.5, true, 0);
+  at(d, 6, 5.75, true, 1);
+  assert.ok((leafView(d, ctx().index, SVA, day(6, 30)).verification.verifiedLevel ?? 0) < 5, "the delay is at least seven days (less the half-day tolerance)");
+});
+
+test("K10-6 H-V3 content rule: a validated version must say when it was released, and nothing else may", () => {
+  const base = { kind: "code" as const, version: 1, target: SVA, b: 5, a: 1.2, format: "choice:grammar", prompt: "She ___ to school.", options: ["go", "goes"], answer: 1 };
+  const problems = validateContent({ items: [{ ...base, id: "t.1", evidence_status: "validated" }, { ...base, id: "t.2", released_at: "2026-10-01T00:00:00Z" }, { ...base, id: "t.3", evidence_status: "validated", released_at: "2026-10-01T00:00:00Z" }], passages: [], goals: [], misspellings: {} }, ctx().index);
+  assert.ok(problems.some((p) => p.includes("validated item t.1 needs released_at")));
+  assert.ok(problems.some((p) => p.includes("item t.2 has released_at but is not validated")));
+  assert.ok(!problems.some((p) => p.includes("t.3")));
 });

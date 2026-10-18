@@ -5,7 +5,7 @@
  * Like the Grade 8 supplement, they are NOT part of the bank the app ships (frontend/src/english/logic/content.ts never
  * loads this folder), and every question is evidence_status "provisional": even if loaded, the ledger holds every
  * answer and the allocation offers them for practice only. They count only after an educator review changes their
- * status; for the pilot, verified mastery needs them marked "validated" (verification-eligibility@1).
+ * status; for the pilot, verified mastery needs them marked "validated" (verification-eligibility@2: validated and released, answered after the release).
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -37,9 +37,11 @@ export const loadPluralManifest = (): PluralManifest => JSON.parse(readFileSync(
  * and tests only: on a copy, it marks them "validated" (as an approving educator review would) and applies the
  * proposed pools, to ask "would reviewed content of this coverage make verification possible?". Never used by the app.
  */
-export function loadContextWithPlurals(opts: { asIfReviewed?: boolean } = {}): EssayContext {
+export function loadContextWithPlurals(opts: { asIfReviewed?: boolean; releasedAt?: string } = {}): EssayContext {
   const app = loadAppEssayContext();
-  const items = loadPluralItems().map((i) => (opts.asIfReviewed ? ({ ...i, evidence_status: "validated", review: "hypothetically-reviewed" } as Item) : i));
+  // H-V3: a reviewed version also says when it was released (a counterfactual date, before any test journey by default)
+  const releasedAt = opts.releasedAt ?? "2026-01-01T00:00:00.000Z";
+  const items = loadPluralItems().map((i) => (opts.asIfReviewed ? ({ ...i, evidence_status: "validated", released_at: releasedAt, review: "hypothetically-reviewed" } as Item) : i));
   const bundle = {
     items: [...app.ctx.content.items.values(), ...items],
     retired: [...(app.ctx.content.retired?.values() ?? [])],

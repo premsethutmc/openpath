@@ -18,18 +18,18 @@ export interface EvidenceLabel {
 
 /**
  * One label per evidence state, from the profile only (verification@2: the engine, the profile and this label all mean
- * "shown at the target, then kept at a delayed check at the target"; verification-eligibility@1 decides which
+ * "shown at the target, then kept at a delayed check at the target"; verification-eligibility@2 decides which
  * questions may verify).
  */
 export function evidenceLabel(c: CompetencyStatus): EvidenceLabel {
   if (c.state === "verified") {
     if (c.engine.verifiedOn === "unreviewed")
       return { key: "verified_developer", label: "Verified (developer test: unreviewed questions)", detail: "Shown at the grade target, then kept at a delayed check, but on questions not yet reviewed by an educator. Not a pilot result." };
-    return { key: "verified", label: "Verified mastery", detail: "Shown without help at the grade target, then kept at a delayed check at that target at least 7 days later, on reviewed questions." };
+    return { key: "verified", label: "Verified mastery", detail: "Shown without help at the grade target, then kept at a delayed check at that target at least 7 days later, on at least two different fresh questions an educator had reviewed and released before they were answered." };
   }
   if (c.state === "demonstrated") {
     if (c.engine.verificationWithheld)
-      return { key: "shown_unreviewed_check", label: "Shown at the grade target: not verified (unreviewed questions)", detail: "The delayed check was passed, but on questions an educator has not reviewed yet, so it does not count as verified mastery." };
+      return { key: "shown_unreviewed_check", label: "Shown at the grade target: not verified (unreviewed questions)", detail: "The delayed check was passed, but not on questions an educator had reviewed and released before they were answered, so it does not count as verified mastery. The answers still count for the estimate and for showing the skill." };
     return { key: "shown", label: "Shown at the grade target (not yet verified)", detail: "Shown without help on bank questions at the grade target. A delayed check at that target, at least 7 days later, is still needed." };
   }
   const g = c.gap?.status;

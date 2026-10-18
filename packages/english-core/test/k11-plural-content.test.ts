@@ -12,6 +12,7 @@ import { allocateItems, type BankItem, scoreCode, teachingLeak, validateContent 
 import { loadAppEssayContext } from "../../../tools/english/essay-load.ts";
 import { REPO } from "../../../tools/english/load.ts";
 import { loadContextWithPlurals, loadPluralItems, loadPluralManifest, PLURAL_COVERAGE } from "../../../tools/english/supplement/plurals.ts";
+import { exportRoundPlurals, PLURALS_ROUND_DIR, roundPlurals } from "../../../tools/english/educator/round-plurals.ts";
 
 const PLU = "EN.GRM.NOUN.plurals_countability";
 const items = loadPluralItems() as BankItem[];
@@ -90,4 +91,27 @@ test("K11-4 counterfactual: reviewed (validated), these make one full verificati
   const p = allocateItems(provisional, [], PLU);
   assert.ok(!p.reserved.independent_verification.some((id) => id.startsWith("sup.plu.")));
   assert.ok(!p.available.diagnostic.some((id) => id.startsWith("sup.plu.")));
+});
+
+test("K11-5 H-V4: all 30 questions are prepared for item-by-item review, in order, blank, and none is approved", () => {
+  const entries = roundPlurals();
+  assert.equal(entries.length, 30);
+  assert.deepEqual(entries.map((e) => e.review_order), entries.map((_, k) => k + 1));
+  assert.deepEqual(new Set(entries.map((e) => e.record.id)), new Set(items.map((i) => i.id)), "every proposed plural question, once");
+  for (const e of entries) {
+    assert.equal(e.record.kind, "question");
+    assert.match((e.record as { evidence_status: string }).evidence_status, /^provisional/, e.record.id);
+  }
+  // the committed package is current, and both reviewers' files are blank (no decision recorded or simulated)
+  const fresh = exportRoundPlurals(join(REPO, "tools", "english", "out", "k11-round-plurals"));
+  for (const [f, t] of fresh) assert.equal(readFileSync(join(PLURALS_ROUND_DIR, f), "utf8"), t, `${f} is stale: run node tools/english/educator/round-plurals.ts export`);
+  for (const slot of ["A", "B"]) {
+    const rows = readFileSync(join(PLURALS_ROUND_DIR, `reviewer-${slot}`, "decisions.csv"), "utf8").trim().split(/\r?\n/).slice(1);
+    assert.equal(rows.length, 30);
+    assert.ok(rows.every((r) => r.endsWith(",,,,,,")), `reviewer ${slot}: blank`);
+  }
+  assert.ok(items.every((i) => i.evidence_status === "provisional" && !("released_at" in i)), "nothing approved or released");
+  // the review notes cover every question
+  const notes = readFileSync(join(PLURALS_ROUND_DIR, "REVIEW_NOTES.md"), "utf8");
+  for (const i of items) assert.ok(notes.includes(`\`${i.id}\``), `${i.id} has a review note`);
 });

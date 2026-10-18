@@ -199,7 +199,8 @@ test("candidate vs educator-approved content: C′ met on draft questions stays 
   assert.equal(draft.mastery, "provisional");
   assert.match(draft.profile.masteryNote!, /0 of the 2 right answers at level, on approved questions/);
   const approved = structuredClone(c);
-  for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === CAP) (it as Code).evidence_status = "validated";
+  // H-V3: an approved version also says when it was released; only answers given after it can verify
+  for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === CAP) Object.assign(it as Code, { evidence_status: "validated", released_at: "2026-01-01T00:00:00.000Z" });
   const ok = judge((await history(scenario("S3"), approved)).l, approved);
   assert.equal(ok.standing, draft.standing, "the same answers: the same standing");
   // verification@2: approved questions are necessary, not sufficient; the level must also be kept at a later check
@@ -209,6 +210,16 @@ test("candidate vs educator-approved content: C′ met on draft questions stays 
   const kept = judge((await history([...scenario("S3"), { gap: 8, answers: [["admitted", true], ["regretted", true], ["happier", true]] }], approved)).l, approved);
   assert.equal(kept.standing, "confirmed");
   assert.equal(kept.mastery, "verified", "approved questions and kept at a later check: verified");
+  assert.match(kept.profile.masteryNote!, /answered after their release, and kept at a later check .* two different fresh questions/);
+  // H-V3: the same approval, released only after these answers were given: never retroactively verified
+  const late = structuredClone(c);
+  for (const it of late.ctx.content.items.values()) if (it.kind === "code" && it.target === CAP) Object.assign(it as Code, { evidence_status: "validated", released_at: "2027-01-01T00:00:00.000Z" });
+  const lateKept = judge((await history([...scenario("S3"), { gap: 8, answers: [["admitted", true], ["regretted", true], ["happier", true]] }], late)).l, late);
+  assert.deepEqual([lateKept.standing, lateKept.mastery, lateKept.profile.masteryBasis], ["confirmed", "provisional", "approved"]);
+  // approved with no release recorded: never assumed released
+  const unreleased = structuredClone(c);
+  for (const it of unreleased.ctx.content.items.values()) if (it.kind === "code" && it.target === CAP) (it as Code).evidence_status = "validated";
+  assert.equal(judge((await history([...scenario("S3"), { gap: 8, answers: [["admitted", true], ["regretted", true], ["happier", true]] }], unreleased)).l, unreleased).mastery, "provisional");
   // the same later check on draft questions: confirmed, but still not verified
   const keptDraft = judge((await history([...scenario("S3"), { gap: 8, answers: [["admitted", true], ["regretted", true], ["happier", true]] }], c)).l, c);
   assert.deepEqual([keptDraft.standing, keptDraft.mastery], ["confirmed", "provisional"]);

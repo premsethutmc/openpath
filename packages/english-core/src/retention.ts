@@ -19,8 +19,8 @@
  * verified on day 12 because a lower level had been shown on day 1. `verifiedLevel` gives the one meaning used for
  * every level claim: band L is verified only when L was first shown without help in an earlier session, and a later
  * session at least the delay (mastery_gap_days, less the same half-day tolerance) after that has fresh evidence AT L
- * (at least VERIFY_AT_LEVEL_MIN answers on questions of difficulty ≥ L − tolerance) that favours L over L − 1
- * (checkPassed, unchanged). The schedule fields (status, level, dueAt, checks, lastVerifiedAt) are unchanged, so
+ * (at least VERIFY_AT_LEVEL_MIN DISTINCT questions answered fresh, never a repeat, of difficulty ≥ L − tolerance: H-V2)
+ * that favours L over L − 1 (checkPassed, unchanged, on that session's fresh evidence). The schedule fields (status, level, dueAt, checks, lastVerifiedAt) are unchanged, so
  * due dates, selection and historical schedules replay exactly as before.
  */
 import { daysBetween } from "./model.ts";
@@ -82,8 +82,11 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
     const top = eligible.length ? Math.max(...eligible) : null;
     for (let L = top ?? 0; top !== null && L >= 1; L -= 0.5) {
       if (out.verifiedLevel !== null && L <= out.verifiedLevel) break;
-      const atLevel = (s.obs ?? []).filter((o) => o.kind === "binary" && o.b >= L - cfg.tolerance);
-      if (atLevel.length >= VERIFY_AT_LEVEL_MIN && checkPassed(s.obs ?? [], L, s.level, cfg)) {
+      // H-V2: distinct questions answered fresh in this session (a repeat, or a question met before with help, never
+      // verifies; a second answer to the same question is always a repeat), judged on that fresh evidence alone
+      const fresh = (s.obs ?? []).filter((o) => o.exposure !== "repeat");
+      const atLevel = fresh.filter((o) => o.kind === "binary" && o.b >= L - cfg.tolerance);
+      if (atLevel.length >= VERIFY_AT_LEVEL_MIN && checkPassed(fresh, L, s.level, cfg)) {
         out.verifiedLevel = L;
         out.verifiedLevelAt = s.at;
         break;

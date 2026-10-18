@@ -215,7 +215,7 @@ export function EssayLive() {
       <aside className="essay-demo-banner" aria-label="What is real here">
         <strong>Essay studio · connected to the learning engine</strong>
         <span>
-          Synthetic essays only, on a test learner kept on this device. {studio?.verification.eligibility === "counted" ? "Developer test: answers on unreviewed questions may verify, and such results are labelled so; this is not the pilot policy." : "Verified mastery needs educator-reviewed questions (the pilot policy)."} Questions, lessons and every status come from the real engine.{" "}
+          Synthetic essays only, on a test learner kept on this device. {studio?.verification.eligibility === "counted" ? "Developer test: answers on unreviewed questions may verify, and such results are labelled so; this is not the pilot policy." : "Verified mastery needs educator-reviewed questions, answered after their release (the pilot policy)."} Questions, lessons and every status come from the real engine.{" "}
           {studio?.connected
             ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text and its quoted evidence are sent to the server. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
             : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}

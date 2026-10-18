@@ -348,7 +348,7 @@ test("A: a skill shown on draft questions is provisional, never presented as ver
   assert.ok(!draft.strengths.some((t) => /Verified/.test(t)));
   // the same answers on questions an educator has approved: verified (a copy of the content; nothing on disk changes)
   const approved = structuredClone(c);
-  for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === "EN.FND.SPL.inflections") (it as Code).evidence_status = "validated";
+  for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === "EN.FND.SPL.inflections") Object.assign(it as Code, { evidence_status: "validated", released_at: "2026-01-01T00:00:00.000Z" });
   const verified = await run(approved);
   assert.equal(verified.standing, draft.standing, "the standing and the plan are unchanged: only the claim differs");
   // verification@2: approved questions, and the level kept at a later check, are both needed

@@ -11,10 +11,10 @@ import { leafView } from "../composite.ts";
 import type { CapabilityId, EssayEvent, InterventionEvent, LedgerEvent } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
-import { engineClaim, type EssayContext, retentionDue } from "./competencies.ts";
+import { engineClaim, type EssayContext, retentionTiming } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyOutcome, type CompetencyTree, type GapHypothesis, type JourneyNode, type JourneyStep, type JourneyStepKind, type LearningJourney, type NodeDecision } from "./contract.ts";
 import { pickForRole } from "./allocation.ts";
-import { competencyOutcome } from "./checks.ts";
+import { competencyOutcome, targetClockAt } from "./checks.ts";
 import { countedAnalyses, currentHypotheses } from "./gaps.ts";
 
 const STATUS_ORDER: Record<GapHypothesis["status"], number> = { confirmed: 0, unresolved: 1, suspected: 2, weakened: 9 };
@@ -29,6 +29,8 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
   const ledger = Ledger.rebuild(ectx.ctx, learner, events as LedgerEvent[]);
   const view = (cap: CapabilityId) => leafView(ledger.composite, ectx.ctx.index, cap, meta.at);
   const level = (cap: CapabilityId) => engineClaim(ectx, cap, view(cap), events, meta.at).level;
+  // the delayed check that can verify the target runs from when the target was first shown (verification@2)
+  const timing = (cap: CapabilityId) => retentionTiming(ectx, cap, view(cap), targetClockAt(ledger, cap, ectx.profile.byCapability.get(cap)?.expectedBand ?? null, meta.at), meta.at);
   const name = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.name ?? ectx.ctx.index.names.get(cap) ?? cap;
   const hyps = currentHypotheses(ectx, events);
   const skipped: LearningJourney["skipped"] = [];
@@ -47,7 +49,7 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
       // resolved is still carried, as before; earlier journeys and their steps are never changed.)
       if (!h.essays.includes(essayId)) {
         const v = view(h.competency);
-        const shownSince = level(h.competency) !== "none" || retentionDue(ectx, h.competency, v) || (v.verification.historicalLevel ?? -Infinity) >= (ectx.profile.byCapability.get(h.competency)?.expectedBand ?? Infinity);
+        const shownSince = level(h.competency) !== "none" || timing(h.competency) !== null || (v.verification.historicalLevel ?? -Infinity) >= (ectx.profile.byCapability.get(h.competency)?.expectedBand ?? Infinity);
         if (shownSince) {
           skipped.push({ competency: h.competency, reason: `${name(h.competency)}: the difficulty was seen in an earlier essay (${h.essays.join(", ")}), not in this one, and the skill has been shown at the grade target since. Not taught again; any delayed check still follows its schedule.` });
           return false;
@@ -133,8 +135,9 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
       const steps: JourneyStep[] = [];
       if (!specified(cap)) contentGaps.push({ competency: cap, what: `${name(cap)} is not specified in the framework yet (no descriptors, questions or lessons)` });
       let decision: NodeDecision;
-      const due = role === "target" && retentionDue(ectx, cap, view(cap));
-      const retention = due ? retentionStep(cap) : null;
+      const t = role === "target" ? timing(cap) : null;
+      const due = t === "due";
+      const retention = t === "waiting" ? "wait" : due ? retentionStep(cap) : null;
       if (retention === "wait") {
         // its delayed check is already planned and not yet due: no re-teaching before it (and no node)
         waiting = true;
