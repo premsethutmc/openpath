@@ -124,6 +124,8 @@ scenarios from the brief, plus S4b (one wrong answer in the delayed check). They
 
 Results are in `assessment-results/`.
 
+> **Updated 18 October 2026 (verification@2).** "Verified" now means the target band was shown and then kept at a delayed check *at that band*, with at least two answers at the band. Under that definition app S2 and S4b are no longer verified (their delayed check had one question at the target), and the tables below are the earlier reading. The JSON results are current and add `verifiedForPilot` (the pilot policy: reviewed questions only). See [VERIFICATION_POLICY.md](VERIFICATION_POLICY.md).
+
 **App bank (pilot pools honoured):**
 
 | Scenario | Journey completed | Shown at band 5 without help | Verified (engine) | Retention | Assisted answers counted as fresh | Still pending |

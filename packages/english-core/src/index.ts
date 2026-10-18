@@ -31,3 +31,4 @@ export * from "./essay/allocation.ts";
 export * from "./essay/checks.ts";
 export * from "./essay/questions.ts";
 export * from "./essay/recommend.ts";
+export * from "./essay/lessons.ts";

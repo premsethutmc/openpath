@@ -94,6 +94,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "the journey's check (b 6, 6.25) was answered right, yet the level stays 4: the wrong diagnostic answers from before teaching stay in the single cumulative estimate (the model has no change point; uncertainty grows by only 0.0047 per day), so the lower 80% bound needs more right answers at or above band 5",
@@ -176,6 +177,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -254,6 +256,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -332,6 +335,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -390,6 +394,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -448,6 +453,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "stopped after 0 later checks: not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
@@ -509,6 +515,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -587,6 +594,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "evidence persists: 5 answers on agreement across both essays; no question answered twice: yes"

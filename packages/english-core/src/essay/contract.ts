@@ -26,6 +26,7 @@
 import type { CapabilityId, CodeItem } from "../types.ts";
 import type { Stage, VerificationStatus } from "../composite.ts";
 import type { ContentStatus } from "../content.ts";
+import type { LessonProgramme } from "./lessons.ts";
 
 export const ESSAY_CONTRACT = "essay-contract@1" as const;
 export type EssayContractVersion = typeof ESSAY_CONTRACT;
@@ -583,9 +584,17 @@ export interface CompetencyStatus {
     directN: number;
     /** The engine's estimate from counted answers (mean and sd on the band scale); null when none was counted. An estimate, never a claim of mastery. */
     estimate: { mean: number; sd: number } | null;
+    /** verification@2: the band verified by a delayed check at that band; null when none. */
+    verifiedLevel: number | null;
+    /** For a verified claim: on reviewed questions, or (developer policy only) on unreviewed ones. */
+    verifiedOn: "reviewed" | "unreviewed" | null;
+    /** The delayed check was passed, but only on unreviewed questions, so the pilot policy does not count it as verified. */
+    verificationWithheld: boolean;
   };
   /** The latest practice on model-written questions for this competency: formative only, never evidence of mastery. */
   formative: FormativeOutcome | null;
+  /** The lesson programme's completion (learning progress only; never reduced; separate from every evidence claim). */
+  lessons: LessonProgramme | null;
   essays: { errors: number; strengths: number; essays: number; style?: number; notObservable?: number };
   provenance: ProvenanceSummary;
   notes: string[];

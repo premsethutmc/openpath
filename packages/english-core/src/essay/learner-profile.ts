@@ -13,6 +13,7 @@ import { engineClaim, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyState, type CompetencyStatus, type EssayLearnerProfile, type ProfileUpdate } from "./contract.ts";
 import { countedAnalyses, currentHypotheses } from "./gaps.ts";
 import { formativeOutcomes } from "./questions.ts";
+import { lessonProgramme } from "./lessons.ts";
 
 const RANK: Record<CompetencyState, number> = { unknown: 0, observed: 1, suspected: 2, demonstrated: 3, verified: 4 };
 
@@ -36,9 +37,9 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
     let state: CompetencyState = "unknown";
     if (obs.length) state = "observed";
     if (gap && gap.status !== "weakened") state = "suspected";
-    const claim = engineClaim(ectx, cap, v);
+    const claim = engineClaim(ectx, cap, v, events, now);
     if (claim.level !== "none") state = claim.level;
-    if (claim.note) notes.push(`Not counted as shown: ${claim.note}.`);
+    if (claim.note) notes.push(claim.level === "none" ? `Not counted as shown: ${claim.note}.` : `${claim.note[0].toUpperCase()}${claim.note.slice(1)}.`);
     if (gap && gap.status !== "weakened" && RANK[state] >= RANK.demonstrated)
       notes.push(`The engine records this as ${state}, but essay evidence suggests a gap (${gap.status}): checked, not assumed either way.`);
     if (v.verification.status === "overdue" || v.verification.status === "failed")
@@ -78,8 +79,9 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
       area: ref.area,
       state,
       gap,
-      engine: { stage: v.stage, verification: v.verification.status, currentLevel: v.verification.currentLevel, target: claim.target, demonstrated: v.demonstrated, mastered: v.mastered, directN: v.direct.n, estimate: v.direct.n > 0 ? { mean: v.mean, sd: v.sd } : null },
+      engine: { stage: v.stage, verification: v.verification.status, currentLevel: v.verification.currentLevel, target: claim.target, demonstrated: v.demonstrated, mastered: v.mastered, directN: v.direct.n, estimate: v.direct.n > 0 ? { mean: v.mean, sd: v.sd } : null, verifiedLevel: claim.verifiedLevel, verifiedOn: claim.verifiedOn, verificationWithheld: claim.verificationWithheld },
       formative: f,
+      lessons: lessonProgramme(ectx, events, cap),
       essays: { errors, strengths, essays, style, notObservable },
       provenance: { tentative: obs.map((o) => o.id), independent, assisted, held, provisional },
       notes,
