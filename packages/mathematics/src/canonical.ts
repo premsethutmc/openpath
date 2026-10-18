@@ -6,6 +6,10 @@ import type {
   Provenance,
 } from "../../english-core/src/types";
 import { leafView } from "../../english-core/src/composite";
+import {
+  PILOT_VERIFICATION,
+  verificationClaim,
+} from "../../english-core/src/verification";
 import type { Ledger, Context } from "../../english-core/src/updater";
 import { indexContent } from "../../english-core/src/content";
 import { generate, evaluate, type GeneratedItem } from "./generator";
@@ -255,9 +259,20 @@ export function sharedProfile(
       retention: "unavailable",
     };
   const view = leafView(ledger.composite, ledger.ctx.index, competencyId, at);
+  // The ONE verification definition (H-V1, english-core/src/verification.ts): verification@2 at-band verification on
+  // eligible answers only (H-V3: educator-validated, released, answered after release, first encounter). Provisional
+  // mathematics practice is never eligible, so it can never verify mastery, whatever the schedule's status says.
+  const claim = verificationClaim(
+    ledger.ctx,
+    ledger.learnerId,
+    ledger.events,
+    competencyId,
+    at,
+    PILOT_VERIFICATION,
+    view,
+  );
   const status =
-    view.verification.status === "verified" &&
-    view.verification.currentLevel !== null
+    claim.level !== null && claim.on === "reviewed"
       ? "verified"
       : view.demonstrated !== null
         ? "demonstrated"

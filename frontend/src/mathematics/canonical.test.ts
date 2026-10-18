@@ -465,3 +465,47 @@ test("supported wrong answers remain wrong under the native codec for every fami
     assert.deepEqual(ledger.composite.nodes, before);
   }
 });
+
+test("sharedProfile uses the canonical verification definition: schedule 'verified' on unreviewed answers is not verified mastery", async () => {
+  // English agreement answered right across sessions far enough apart that the engine's schedule reads "verified":
+  // none of these questions is educator-validated and released, so the one definition (H-V1–H-V3) does not verify
+  const ctx = host();
+  const ledger = new Ledger(ctx, profile.id);
+  const SVA = "EN.GRM.VERB.sva";
+  type C = { id: string; version: number; format: string; answer?: number; answers?: string[]; passage?: string };
+  const pool = ([...ctx.content.items.values()] as unknown as (C & { kind: string; target: string })[]).filter((i) => i.kind === "code" && i.target === SVA && !i.passage && ((i.format.startsWith("choice") && i.answer !== undefined) || (i.format.startsWith("typed") && i.answers?.length)));
+  const right = (it: C) => (it.format.startsWith("typed") ? { kind: "typed" as const, text: it.answers![0] } : { kind: "choice" as const, choice: it.answer! });
+  let k = 0;
+  for (const d of [0, 1, 9, 10, 25]) {
+    for (let n = 0; n < 3 && k < pool.length; n++, k++) {
+      const it = pool[k];
+      const t = new Date(Date.parse("2026-09-01T09:00:00.000Z") + d * 86_400_000 + n * 60_000).toISOString();
+      ledger.apply({ kind: "evidence", id: `sva:${d}:${n}`, at: t, session: `d${d}`, item: { id: it.id, version: it.version }, response: right(it), use: "assessment", provenance: { schema: "provenance@1", attempt: 1, hints: [], afterFeedback: false, policies: ["passage@1", "assisted@1"] } });
+    }
+  }
+  const now = "2026-09-27T09:00:00.000Z";
+  const view = (await import("../../../packages/english-core/src/composite")).leafView(ledger.composite, ctx.index, SVA, now);
+  assert.equal(view.verification.status, "verified", "the engine's schedule passed its checks");
+  const p = sharedProfile(identity, ledger, SVA, now);
+  assert.notEqual(p.status, "verified", "but not on reviewed, released questions: not verified mastery");
+  assert.equal(p.status, "demonstrated");
+});
+
+test("provisional mathematics practice never verifies mastery, however long and however right", async () => {
+  const ledger = new Ledger(host(), profile.id),
+    store = new MemoryStore();
+  let competency = "";
+  for (let d = 0; d < 30; d += 3) {
+    const a = attempt("comparison", "school", 100 + d, undefined, `attempt-${d}`);
+    competency = a.item.competencyId;
+    const receipt = a.record.attempts[0];
+    receipt.at = new Date(Date.parse(at) + d * 86_400_000).toISOString();
+    const { decisions } = await commit(ledger, store, a.record, `attempt-${d}`);
+    assert.equal(decisions[0].verdict, "held", "provisional: no estimate changes");
+  }
+  const later = new Date(Date.parse(at) + 40 * 86_400_000).toISOString();
+  assert.notEqual(sharedProfile(identity, ledger, competency, later).status, "verified");
+  const { verificationEligibility } = await import("../../../packages/english-core/src/verification");
+  const elig = [...verificationEligibility(ledger.ctx, ledger.events).values()];
+  assert.ok(elig.length >= 10 && elig.every((e) => e === "unreviewed"), "never eligible for verification");
+});
