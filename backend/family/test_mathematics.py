@@ -84,3 +84,43 @@ class MathematicsAccountTests(FamilyTestCase):
             self.assertEqual(self.save(self.activity('complete', 'retention')).status_code, 201)
             self.assertEqual(len([e for e in self.record() if e['action'] == 'complete' and e['journey'] == 'school']), 7)
             self.assertEqual(len([e for e in self.record() if e['action'] == 'complete' and e['journey'] == 'gre-quant']), 1)
+
+
+class CrossSubjectIdentityTests(FamilyTestCase):
+    """English and mathematics: one account, one pupil identity, one event store, separate ordered subject records."""
+
+    def setUp(self):
+        super().setUp()
+        self.client = self.parent()
+        self.pupil_id = str(self.pupil(self.client, 'Synthetic cross-subject learner'))
+        self.seq = 0
+        self.serial = 0
+
+    activity = MathematicsAccountTests.activity
+    save = MathematicsAccountTests.save
+    record = MathematicsAccountTests.record
+
+    def test_one_pupil_both_subjects_survive_logout_and_login(self):
+        from .tests import PASSWORD, event
+        # English: the existing record, unchanged protocol
+        for n in range(3):
+            self.assertEqual(self.append(self.client, self.pupil_id, n, event(n)).status_code, 201)
+        # Mathematics: the same pupil, its own ordered subject record
+        self.assertEqual(self.save(self.activity()).status_code, 201)
+        english = self.client.get(f'/api/pupils/{self.pupil_id}/events/').json()['events']
+        maths = self.record()
+        self.assertEqual(english, [event(n) for n in range(3)])
+        self.assertEqual([e['kind'] for e in maths], ['math_activity'])
+        # sign out: nothing is readable; sign in again: both records are exactly as they were, for the same pupil
+        self.client.post('/api/account/logout/', {}, format='json')
+        self.assertIn(self.client.get(f'/api/pupils/{self.pupil_id}/events/').status_code, (401, 403))
+        r = self.client.post('/api/account/login/', {'email': 'asha.parent@example.org', 'password': PASSWORD}, format='json')
+        self.assertEqual(r.status_code, 200, r.content)
+        self.assertEqual(self.client.get(f'/api/pupils/{self.pupil_id}/events/').json()['events'], english)
+        self.assertEqual(self.record(), maths)
+        # one export holds both subjects of the one pupil; the mathematics append keeps the English sequence untouched
+        out = self.client.get(f'/api/pupils/{self.pupil_id}/export/').json()
+        self.assertEqual(out['subjects']['english'], english)
+        self.assertEqual(out['subjects']['mathematics'], maths)
+        self.assertEqual(self.append(self.client, self.pupil_id, 3, event(3)).status_code, 201)
+        self.assertEqual(PupilEvent.objects.filter(pupil_id=self.pupil_id).values('pupil_id').distinct().count(), 1)
