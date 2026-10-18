@@ -26,7 +26,7 @@ import { isIndependentProvenance, type CapabilityId, type EssayEvent, type Evide
 import { Ledger } from "../updater.ts";
 import { ABOVE_TARGET, pickForRole } from "./allocation.ts";
 import { essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
-import { engineClaim, type EssayContext } from "./competencies.ts";
+import { engineClaim, essayView, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyOutcome, type LearningJourney, type PlannedCheck } from "./contract.ts";
 
 const DAY = 86_400_000;
@@ -111,20 +111,17 @@ export function targetShownAt(ledger: Ledger, capability: CapabilityId, target: 
  */
 export function targetClockAt(ledger: Ledger, capability: CapabilityId, target: number | null, now: string): string | null {
   if (target === null || !ledger.composite.nodes[capability]) return null;
-  const failedAt = leafView(ledger.composite, ledger.ctx.index, capability, now).retention.lastFailedAt;
-  for (const s of ledger.composite.nodes[capability].sessions ?? []) {
-    if (s.at > now) break;
-    if (failedAt && s.at < failedAt) continue;
-    if (!s.teaching && s.level !== null && s.level >= target) return s.at;
-  }
-  return null;
+  // read from the ONE clock (retention.ts, anchored at the target): it starts when the target is first shown and runs
+  // again from the latest failed check at the target
+  const r = leafView(ledger.composite, ledger.ctx.index, capability, now, { target }).atTarget!.retention;
+  return r.firstDemonstratedAt ? (r.lastFailedAt ?? r.firstDemonstratedAt) : null;
 }
 
 /** The separate claims for one competency now. `journey` (from journeyStatus) supplies "journey completed". */
 export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEvent[], capability: CapabilityId, now: string, journey?: LearningJourney | null, ledger?: Ledger): CompetencyOutcome {
   const p = ectx.policy;
   const L = ledger ?? Ledger.rebuild(ectx.ctx, learnerOf(events), events as LedgerEvent[]);
-  const view = leafView(L.composite, ectx.ctx.index, capability, now);
+  const view = essayView(ectx, L.composite, capability, now);
   const claim = engineClaim(ectx, capability, view, events, now);
   const target = claim.target;
   const name = ectx.profile.byCapability.get(capability)?.name ?? capability;
@@ -157,26 +154,40 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   const checks = [...plannedChecks(events).filter((c) => c.competency === capability), ...journeyRetention];
   const progress = checks.map((c) => checkProgress(ectx, events, c, L));
   const open = progress.find((x) => !x.complete);
+  // policy @4: a failed PLANNED delayed check requires a review at once (inside a journey, its conditional steps follow
+  // the check directly). The latest planned delayed check decides; a passed one after it needs no review.
+  const lastPlannedRetention = progress.filter((x) => x.check.kind === "retention" && x.complete && plannedChecks(events).some((c) => c.id === x.check.id)).at(-1);
+  const reviewCheck = lastPlannedRetention?.passed === false ? progress.find((x) => x.check.review?.after === lastPlannedRetention.check.id) : undefined;
+  const review: CompetencyOutcome["review"] | undefined =
+    lastPlannedRetention?.passed === false ? { required: lastPlannedRetention.check.id, planned: reviewCheck?.check.id ?? null, complete: !!reviewCheck?.complete && reviewCheck.check.items.length > 0 } : undefined;
 
   // retention: only once the target has been shown without help
   let retention: CompetencyOutcome["retention"] = "not_applicable";
   let dueAt: string | null = null;
   if (shownAt) {
-    dueAt = later(addDays(clockAt!, p.retentionDelayDays), view.retention.dueAt && view.retention.dueAt >= shownAt ? view.retention.dueAt : null);
+    const sched = view.atTarget?.retention ?? view.retention;
+    dueAt = later(addDays(clockAt!, p.retentionDelayDays), sched.dueAt && sched.dueAt >= shownAt ? sched.dueAt : null);
     const done = progress.filter((x) => x.check.kind === "retention" && x.complete && x.passed !== null && x.check.notBefore >= addDays(shownAt, p.retentionDelayDays) && x.valid.length > 0);
     const last = done.at(-1);
     retention = last ? (last.passed ? "demonstrated" : "not_demonstrated") : now >= dueAt! ? "due" : "pending";
   }
 
-  const verificationsUsed = checks.filter((c) => c.kind === "verification").length;
+  // a review's check is counted with the review, not against the later checks a journey allows
+  const verificationsUsed = checks.filter((c) => c.kind === "verification" && !c.review).length;
   const lastVerification = progress.filter((x) => x.check.kind === "verification").at(-1);
   let next: CompetencyOutcome["next"] = null;
   let pending: string | null = null;
   const fmt = (iso: string) => iso.slice(0, 10);
   if (open) {
     next = { kind: open.check.kind, notBefore: open.check.notBefore, itemsAvailable: open.left.length, planned: open.check.id };
-    pending = now < open.check.notBefore ? `a later ${open.check.kind} check is planned for ${fmt(open.check.notBefore)}` : `a later ${open.check.kind} check is ready to take`;
-  } else if (!demonstrated && !(shownAt !== null && view.verification.status === "overdue")) {
+    pending = open.check.review
+      ? `review after the delayed check: ${open.check.review.lessonNeeded !== false ? "the lesson and practice" : "practice"} in the journey, then a check without help from ${fmt(open.check.notBefore)}`
+      : now < open.check.notBefore ? `a later ${open.check.kind} check is planned for ${fmt(open.check.notBefore)}` : `a later ${open.check.kind} check is ready to take`;
+  } else if (review && !review.planned) {
+    pending = `the delayed check did not show band ${target} was kept: a review (lesson, practice, then a check) is required`;
+  } else if (review?.planned && !checks.find((c) => c.id === review.planned)?.items.length && !demonstrated) {
+    pending = `a review after the delayed check is recorded (${checks.find((c) => c.id === review.planned)?.review?.lessonNeeded === false ? "practice; the lesson if wanted" : "lesson and practice"}); a check without help needs more reviewed questions at band ${target}`;
+  } else if (!demonstrated && !(shownAt !== null && (view.atTarget?.verification ?? view.verification).status === "overdue")) {
     // (an overdue engine check after the target was shown is a retention question, handled below: policy @3)
     const available = pickForRole(ectx, events, capability, "independent_verification", p.checkItems).length;
     if (target === null) pending = `${name} has no grade target, so no claim is made`;
@@ -197,7 +208,14 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   } else if (retention === "pending" || retention === "due" || retention === "not_demonstrated") {
     const available = pickForRole(ectx, events, capability, "delayed_retention", p.retentionItems).length;
     const retentionUsed = checks.some((c) => c.kind === "retention" && progress.find((x) => x.check.id === c.id)?.complete);
-    if (retention === "not_demonstrated" && retentionUsed) pending = `the delayed check did not show band ${target} kept; the evidence is recorded and the engine's own status is unchanged by this note`;
+    const reviewed = review?.complete ? progress.find((x) => x.check.id === review.planned) : undefined;
+    if (retention === "not_demonstrated" && retentionUsed && reviewed?.completedAt) {
+      // shown again after the review: a new delayed check, the policy's delay after the review's check (policy @4)
+      const notBefore = addDays(reviewed.completedAt, p.retentionDelayDays);
+      next = { kind: "retention", notBefore, itemsAvailable: available, planned: null };
+      pending = available < 1 ? `shown again after the review, but no unseen question is left for another delayed check` : `shown again after the review: another delayed check from ${fmt(notBefore)}`;
+      if (available < 1) next = null;
+    } else if (retention === "not_demonstrated" && retentionUsed) pending = `the delayed check did not show band ${target} kept; the evidence is recorded and the engine's own status is unchanged by this note`;
     else if (available < 1) pending = `shown at band ${target}, but no unseen question is left for the delayed retention check: more reviewed questions are needed`;
     else {
       next = { kind: "retention", notBefore: dueAt!, itemsAvailable: available, planned: null };
@@ -214,7 +232,7 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
     }).length;
     if (eligible < VERIFY_AT_LEVEL_MIN) pending = `${pending ?? ""} Its questions are not ${eligible ? "all " : ""}reviewed by an educator and released, so under the pilot policy this check records retention but cannot verify mastery.`.trim();
   }
-  return { competency: capability, target, journeyCompleted, demonstrated, verified, currentLevel: claim.currentLevel, targetShownAt: shownAt, retention, retentionDueAt: dueAt, pending, next };
+  return { competency: capability, target, journeyCompleted, demonstrated, verified, currentLevel: claim.currentLevel, targetShownAt: shownAt, retention, retentionDueAt: dueAt, pending, next, ...(review ? { review } : {}) };
 }
 
 function lastActivity(events: readonly LedgerEvent[]): string {
@@ -229,6 +247,7 @@ function lastActivity(events: readonly LedgerEvent[]): string {
  */
 export function planCheck(ectx: EssayContext, events: readonly LedgerEvent[], meta: EventMeta, capability: CapabilityId, journey?: LearningJourney | null): { event: EssayEvent; check: PlannedCheck } {
   const outcome = competencyOutcome(ectx, events, capability, meta.at, journey);
+  if (outcome.review && !outcome.review.planned) throw new EssayRefusal("a review is required first (planReview)");
   if (!outcome.next) throw new EssayRefusal(outcome.pending ?? "nothing to check");
   if (outcome.next.planned) throw new EssayRefusal(`check ${outcome.next.planned} is already planned`);
   const role = outcome.next.kind === "verification" ? "independent_verification" : "delayed_retention";
@@ -253,9 +272,58 @@ export function dueCheck(ectx: EssayContext, events: readonly LedgerEvent[], now
   const L = Ledger.rebuild(ectx.ctx, learnerOf(events), events as LedgerEvent[]);
   for (const c of plannedChecks(events)) {
     if (now < c.notBefore) continue;
+    // a review's check comes after its lesson (when the app has one): never before the teaching it closes
+    if (c.review && c.review.lessonNeeded !== false && c.review.lessons.length && !events.some((e) => e.kind === "intervention" && e.capability === c.competency && e.at >= c.at)) continue;
     const pr = checkProgress(ectx, events, c, L);
     if (pr.complete) continue;
     return { check: c, item: pr.left[0], position: c.items.length - pr.left.length + 1, total: c.items.length };
   }
   return null;
 }
+
+/**
+ * Record the review a failed delayed check requires (policy @4), at once: the lesson parts, practice with help on
+ * unseen questions below the target, and a verification check without help on reserved unseen questions, in a new
+ * sitting from the next spacing day. Recorded as a planned verification check carrying the review, so it is kept in the
+ * ledger, reserves its questions, and is shown in the learner's existing journey without changing its assigned steps.
+ * Refuses (EssayRefusal) when no review is required or one is already recorded.
+ */
+export function planReview(ectx: EssayContext, events: readonly LedgerEvent[], meta: EventMeta, capability: CapabilityId): { event: EssayEvent; check: PlannedCheck } {
+  const p = ectx.policy;
+  const L = Ledger.rebuild(ectx.ctx, learnerOf(events), events as LedgerEvent[]);
+  const outcome = competencyOutcome(ectx, events, capability, meta.at, null, L);
+  if (!outcome.review) throw new EssayRefusal("no failed delayed check needs a review");
+  if (outcome.review.planned) throw new EssayRefusal(`review ${outcome.review.planned} is already recorded`);
+  const failed = checkProgress(ectx, events, plannedChecks(events).find((c) => c.id === outcome.review!.required)!, L);
+  const items = pickForRole(ectx, events, capability, "independent_verification", p.checkItems);
+  const exclude = new Set(items.map((i) => i.id));
+  const view = essayView(ectx, L.composite, capability, meta.at);
+  const estimate = view.mean;
+  const practice = (ectx.profile.byCapability.get(capability)?.specified ? pickForRole(ectx, events, capability, "guided_practice", p.guidedItems, { exclude, level: estimate }) : []).map((i) => i.id);
+  const lessons = ectx.lessons.get(capability) ?? [];
+  // as for any later check with no right answer, teaching comes first; a partly right check needs practice and a check
+  const lessonNeeded = failed.valid.length > 0 && failed.valid.every((x) => !x.correct);
+  const from = later(failed.completedAt, meta.at) ?? meta.at;
+  // a new sitting from the next spacing day, and no earlier than the engine's own next check at the target, so that a
+  // check kept after the review is counted by the engine's existing retention rule
+  const notBefore = later(addDays(from, p.followUpSpacingDays[0] ?? 1), view.atTarget?.retention.dueAt ?? null)!;
+  const name = ectx.profile.byCapability.get(capability)?.name ?? capability;
+  const reason =
+    `The delayed check on ${fmt10(failed.completedAt ?? meta.at)} did not show ${name} was kept at band ${outcome.target}: ` +
+    `${!lessons.length ? "no lesson in the app yet" : lessonNeeded ? "the lesson again (no answer was right)" : "the lesson if wanted (some answers were right)"}, ${practice.length ? "practice with help" : "no unseen practice questions"}, then ` +
+    (items.length >= p.checkItems ? `a check without help from ${fmt10(notBefore)}.` : `a check once enough reviewed questions exist (only ${items.length} unseen at the target band).`);
+  const check: PlannedCheck = {
+    contract: ESSAY_CONTRACT,
+    id: meta.id,
+    competency: capability,
+    kind: "verification",
+    at: meta.at,
+    notBefore,
+    items: items.length >= p.checkItems ? items.map((i) => ({ id: i.id, version: i.version })) : [],
+    reason,
+    review: { after: failed.check.id, lessons, practice, lessonNeeded },
+  };
+  return { event: { kind: "essay", id: meta.id, at: meta.at, session: meta.session, record: { type: "check", check } }, check };
+}
+
+const fmt10 = (iso: string) => iso.slice(0, 10);

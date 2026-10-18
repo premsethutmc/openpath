@@ -7,12 +7,12 @@
  * answers given with help are shown and never used. Diagnostic answers are ordinary ledger evidence, so the
  * engine's existing rules decide on their own whether they change an estimate.
  */
-import { leafView } from "../composite.ts";
 import { contentStatus, itemVersion, scoreCode } from "../content.ts";
 import { isIndependentProvenance, type CapabilityId, type EvidenceEvent, type InterventionEvent, type LedgerEvent } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { analyses, essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
-import { engineClaim, type EssayContext } from "./competencies.ts";
+import { engineClaim, essayView, type EssayContext, targetRetention } from "./competencies.ts";
+import type { LeafView } from "../composite.ts";
 import { type BankItem, pickForRole } from "./allocation.ts";
 import { ESSAY_CONTRACT, type DiagnosticOutcome, type DiagnosticRequest, type EssayAnalysis, type EssayObservation, type GapHypothesis } from "./contract.ts";
 
@@ -48,15 +48,16 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
       if (suspected) {
         ledger ??= ledgerUpTo(ectx, events, analysisEvents.get(a.id) ?? a.id, learner);
         const total = sentences + (prior?.sentences ?? 0);
-        const view = leafView(ledger.composite, ectx.ctx.index, cap, lastAt(events, analysisEvents.get(a.id)));
+        const view = essayView(ectx, ledger.composite, cap, lastAt(events, analysisEvents.get(a.id)));
         const engine = view.verification.status;
         const atId = analysisEvents.get(a.id) ?? a.id;
         const upTo = events.slice(0, events.findIndex((e) => e.id === atId) + 1 || events.length);
         const claim = engineClaim(ectx, cap, view, upTo, lastAt(events, analysisEvents.get(a.id)));
+        const reassessment = reassessmentOf(ectx, view, claim.level, sentences);
         const basis = [
           `${obs.length} error${obs.length === 1 ? "" : "s"} in ${sentences} sentence${sentences === 1 ? "" : "s"} of essay ${a.essay}`,
           ...(prior ? [`also seen in ${prior.essays.size} earlier essay${prior.essays.size === 1 ? "" : "s"} (${[...prior.essays].join(", ")})`] : []),
-          ...(claim.level !== "none" ? [`the engine records this skill as ${claim.level} at the grade target: the essay disagrees, so it is checked, not retaught`] : []),
+          ...(reassessment ? [reassessment.note] : []),
         ];
         out.push({
           id: `hyp:${a.essay}:${cap}`,
@@ -68,6 +69,7 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
           misconceptions: [...new Set(obs.map((o) => o.misconception).filter((m): m is string => !!m))],
           basis,
           engine,
+          ...(reassessment ? { reassessment } : {}),
           policy: p.version,
         });
       }
@@ -89,6 +91,26 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
     if (outcome.status !== "pending") h.status = outcome.status;
   }
   return out;
+}
+
+/**
+ * Planner policy @4: a competency already shown at the grade target is not diagnosed again on a later essay unless
+ * there is meaningful contradictory evidence. Null when it was never shown at the target (diagnosis as before).
+ */
+function reassessmentOf(ectx: EssayContext, view: LeafView, level: "none" | "demonstrated" | "verified", sentences: number): GapHypothesis["reassessment"] | null {
+  const t = targetRetention(ectx, view.id, view);
+  if (!t.shownAt) return null;
+  const day = t.shownAt.slice(0, 10);
+  const min = ectx.policy.suspectMinSentences;
+  if (t.status === "overdue")
+    return { shownAt: t.shownAt, reason: "retention_due", diagnose: false, note: `shown at the grade target on ${day} and its delayed check is due: that check decides, so no new diagnostic questions are asked` };
+  if (t.status === "failed")
+    return { shownAt: t.shownAt, reason: "review", diagnose: false, note: `shown at the grade target on ${day}, but the latest delayed check did not show it was kept: the review comes next, not new diagnostic questions` };
+  if (level === "none")
+    return { shownAt: t.shownAt, reason: "contradictory", diagnose: true, note: `shown at the grade target on ${day}, but the evidence now supports a lower band: checked again with questions` };
+  if (sentences >= min)
+    return { shownAt: t.shownAt, reason: "contradictory", diagnose: true, note: `the engine records this skill as ${level} at the grade target (shown on ${day}), but this essay alone has errors in ${sentences} sentences: the essay disagrees, so it is checked, not retaught` };
+  return { shownAt: t.shownAt, reason: "held", diagnose: false, note: `the engine records this skill as ${level} at the grade target (shown on ${day}); ${sentences === 1 ? "one error in this essay" : `errors in ${sentences} sentences of this essay`}, with earlier essays' errors, is not enough to reopen it: watched, not reassessed` };
 }
 
 function lastAt(events: readonly LedgerEvent[], id?: string): string {
@@ -119,7 +141,7 @@ export function reservedItems(events: readonly LedgerEvent[]): Set<string> {
   for (const { record } of essayRecords(events, "diagnostic")) for (const i of record.request.items) r.add(i.id);
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind !== "teach") for (const ref of s.content.refs) r.add(ref);
-  for (const { record } of essayRecords(events, "check")) for (const i of record.check.items) r.add(i.id);
+  for (const { record } of essayRecords(events, "check")) for (const i of [...record.check.items.map((x) => x.id), ...(record.check.review?.practice ?? [])]) r.add(i);
   return r;
 }
 
@@ -142,8 +164,11 @@ export function planDiagnostics(ectx: EssayContext, events: readonly LedgerEvent
   let working = [...events];
   for (const h of currentHypotheses(ectx, events).values()) {
     if (planned.has(h.id) || h.status !== "suspected") continue;
+    // policy @4: shown at the target before and no meaningful contradictory evidence: not diagnosed automatically
+    if (h.reassessment && !h.reassessment.diagnose) continue;
     const m = meta(out.length);
     const { event: ev, request } = diagnosticRequestFor(ectx, working, h, m);
+    if (h.reassessment?.diagnose) request.reassessment = h.reassessment.note;
     out.push(ev);
     requests.push(request);
     working = [...working, ev];
@@ -179,12 +204,17 @@ function diagnosticRequestFor(ectx: EssayContext, events: readonly LedgerEvent[]
  * Plan the formal diagnostic for one chosen hypothesis (the learner picked this competency). Refuses when it is not
  * suspected or already has one. Bank questions only; when too few exist, the request records the gap and asks nothing.
  */
-export function planDiagnosticFor(ectx: EssayContext, events: readonly LedgerEvent[], hypothesisId: string, meta: EventMeta): { event: LedgerEvent; request: DiagnosticRequest } {
+export function planDiagnosticFor(ectx: EssayContext, events: readonly LedgerEvent[], hypothesisId: string, meta: EventMeta, opts: { explicitReason?: string } = {}): { event: LedgerEvent; request: DiagnosticRequest } {
   const h = gapHypotheses(ectx, events).find((x) => x.id === hypothesisId);
   if (!h) throw new EssayRefusal(`no hypothesis ${hypothesisId}`);
   if (h.status !== "suspected") throw new EssayRefusal(`${hypothesisId} is already ${h.status}`);
   if (essayRecords(events, "diagnostic").some((r) => r.record.request.hypothesis === hypothesisId && r.record.request.source !== "generated")) throw new EssayRefusal(`${hypothesisId} already has diagnostic questions`);
-  return diagnosticRequestFor(ectx, events, h, meta);
+  // policy @4: a skill shown at the target is checked again only for contradictory evidence or an explicit reason
+  if (h.reassessment && !h.reassessment.diagnose && !opts.explicitReason) throw new EssayRefusal(`${hypothesisId}: ${h.reassessment.note}`);
+  const out = diagnosticRequestFor(ectx, events, h, meta);
+  const why = h.reassessment ? (h.reassessment.diagnose ? h.reassessment.note : opts.explicitReason) : undefined;
+  if (why) (out.request as DiagnosticRequest).reassessment = why;
+  return out;
 }
 
 /** What the answers to a diagnostic request show so far. */

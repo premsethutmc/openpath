@@ -102,14 +102,17 @@ export interface VerificationClaim {
  */
 export function verificationClaim(ctx: Context, learner: string, events: readonly LedgerEvent[], capability: CapabilityId, now: string, policy: VerificationPolicy = PILOT_VERIFICATION, view?: LeafView): VerificationClaim {
   const v = view ?? leafView(Ledger.rebuild(ctx, learner, events as LedgerEvent[]).composite, ctx.index, capability, now);
+  // the same clock as the view: target-anchored when the view is (essay layer), the engine's own otherwise (main app)
+  const target = v.atTarget?.band ?? null;
   const cap = (x: LeafView) => {
-    const lv = x.verification.verifiedLevel ?? null;
-    const cur = x.verification.currentLevel;
-    if (lv === null || cur === null || !(x.verification.status === "verified" || x.verification.status === "demonstrated")) return null;
+    const ver = x.atTarget && x.atTarget.verification.status !== "not_demonstrated" ? x.atTarget.verification : x.verification;
+    const lv = ver.verifiedLevel ?? null;
+    const cur = ver.currentLevel;
+    if (lv === null || cur === null || !(ver.status === "verified" || ver.status === "demonstrated")) return null;
     return Math.min(lv, cur);
   };
   const counted = cap(v);
-  const ev = counted === null ? null : leafView(eligibleLedger(ctx, learner, events).composite, ctx.index, capability, now);
+  const ev = counted === null ? null : leafView(eligibleLedger(ctx, learner, events).composite, ctx.index, capability, now, { target });
   const eligible = ev ? cap(ev) : null;
   const e = eligible === null || counted === null ? null : Math.min(eligible, counted);
   if (e !== null && !(policy.eligibility === "counted" && counted! > e)) return { level: e, on: "reviewed", withheld: false, countedLevel: counted, eligibleLevel: e, policy };

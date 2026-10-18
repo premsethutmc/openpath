@@ -65,7 +65,20 @@ export const VERIFICATION_DEFINITION = "verification@2";
 const DUE_TOLERANCE_MS = 12 * 3_600_000;
 const addDays = (iso: string, days: number) => new Date(Date.parse(iso) + days * 86_400_000).toISOString();
 
-export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION): Retention {
+/**
+ * Where the schedule starts (the ONE retention clock, integration of verification@2 and planner policy @4).
+ *   fromLevel  the schedule starts at the first session (without teaching) whose demonstrated level reaches this
+ *              level: a grade target. An earlier, lower demonstration is history and never starts the clock for a
+ *              higher target. Omitted: the first demonstration at any level starts it (the engine's own schedule, as
+ *              used by the main app, unchanged).
+ * The same function, with the same check rule, intervals and verification@2 at-band rule (`verifiedLevel`), serves
+ * both; nothing else computes a retention due date.
+ */
+export interface RetentionOptions {
+  fromLevel?: number | null;
+}
+
+export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION, opts: RetentionOptions = {}): Retention {
   const out: Retention = { status: "none", level: null, firstDemonstratedAt: null, lastVerifiedAt: null, lastFailedAt: null, dueAt: null, intervalDays: null, overdueDays: 0, checks: [], verifiedLevel: null, verifiedLevelAt: null };
   const initial = cfg.initialDays ?? policy.mastery_gap_days;
   let lastFailed = false;
@@ -95,6 +108,7 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
     if (s.level !== null && (!shown.length || s.level > shown.at(-1)!.level)) shown.push({ level: s.level, at: s.at });
     if (out.firstDemonstratedAt === null) {
       if (s.level === null) continue;
+      if (opts.fromLevel !== undefined && opts.fromLevel !== null && s.level < opts.fromLevel) continue;
       out.firstDemonstratedAt = s.at;
       out.level = s.level;
       out.intervalDays = initial;

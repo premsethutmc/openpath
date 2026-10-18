@@ -211,6 +211,11 @@ test("K9-2 with reviewed questions at the target band (test-only stand-ins, vali
   const v = leafView(Ledger.rebuild(ectx.ctx, LEARNER, r.events).composite, ectx.ctx.index, PLU, r.now());
   assert.ok(v.verification.verifiedLevel! >= 5, "the engine verified band 5 itself");
   assert.ok(Date.parse(v.verification.verifiedLevelAt!) - Date.parse(shownAt) >= ectx.policy.retentionDelayDays * DAY - 12 * 3_600_000);
+  // the one clock (integration): the essay reads the schedule anchored at the target, which starts when band 5 was
+  // first shown and verifies band 5 itself
+  const t = leafView(Ledger.rebuild(ectx.ctx, LEARNER, r.events).composite, ectx.ctx.index, PLU, r.now(), { target: ectx.profile.byCapability.get(PLU)!.expectedBand }).atTarget!;
+  assert.equal(t.retention.firstDemonstratedAt, shownAt);
+  assert.ok(t.verification.verifiedLevel! >= 5);
   const p = essayProfile(ectx, LEARNER, r.events, r.now()).competencies.find((c) => c.competency === PLU)!;
   assert.equal(p.state, "verified", "engine, profile and outcome agree");
   assert.equal(p.engine.verifiedOn, "reviewed");

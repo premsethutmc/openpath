@@ -395,6 +395,17 @@ export interface GapHypothesis {
   /** The engine's verification when the hypothesis was formed (a gap on a verified skill is flagged). */
   engine: VerificationStatus;
   diagnostic?: DiagnosticOutcome;
+  /**
+   * Planner policy @4: set when the competency was already shown at the grade target before this essay. A later essay
+   * does not restart diagnosis automatically; `diagnose` is true only for meaningful contradictory evidence:
+   *   contradictory   this essay alone meets the suspicion rule (errors in at least `suspectMinSentences` sentences), or
+   *                   the engine's current level is already below the target
+   *   retention_due   the delayed check is due: that check is the assessment (no diagnostic)
+   *   review          the latest delayed check failed: the review requirement is the next step (no diagnostic)
+   *   held            one error, carried with earlier essays' errors: watched, not reassessed
+   * An explicit request (planDiagnosticFor with a reason) can still check it.
+   */
+  reassessment?: { shownAt: string; reason: "contradictory" | "retention_due" | "review" | "held"; diagnose: boolean; note: string };
   policy: string;
 }
 
@@ -415,6 +426,8 @@ export interface DiagnosticRequest {
   source?: "bank" | "generated";
   /** For generated questions: the question set (an essay "questions" record). */
   questionSet?: string;
+  /** Planner policy @4: why a skill already shown at the target is checked again (contradictory evidence, or an explicit request). */
+  reassessment?: string;
 }
 
 export interface DiagnosticOutcome {
@@ -455,7 +468,7 @@ export type StepStatus = "pending" | "done" | "green" | "blocked" | "skipped";
  *   check_only             currently shown; the new essay suggests difficulty that questions have not confirmed
  *   prerequisite           a prerequisite the essays show difficulty with: taught first (unchanged)
  */
-export type NodeDecision = "gap" | "insufficient_evidence" | "retention_due" | "refresher" | "check_only" | "prerequisite";
+export type NodeDecision = "gap" | "insufficient_evidence" | "retention_due" | "refresher" | "check_only" | "prerequisite" | "review";
 
 export interface JourneyStep {
   id: string;
@@ -517,6 +530,25 @@ export interface LearningJourney {
    * as assigned but not completed.
    */
   progress?: { stepsTotal: number; stepsDone: number; stepsSkipped: number; stepsBlocked: number; lessonsAssigned: number; lessonsCompleted: number; percent: number };
+  /**
+   * Set by journeyStatus (policy @4): review requirements after a failed delayed check, for this journey's skills (and,
+   * on the latest journey, for any skill). Kept apart from `trees`: the assigned sequence and `progress` never change.
+   */
+  reviews?: JourneyReview[];
+}
+
+/** A review after a failed delayed check, in the learner's existing journey (policy @4). */
+export interface JourneyReview {
+  competency: CapabilityId;
+  /** The planned verification check that closes the review. */
+  check: string;
+  /** The failed delayed check that required it. */
+  after: string;
+  at: string;
+  reason: string;
+  /** Lesson parts, practice with help, then the check without help (status from the ledger, like journey steps). */
+  steps: JourneyStep[];
+  complete: boolean;
 }
 
 // ---------------------------------------------------------------- final rewrite
@@ -685,6 +717,23 @@ export interface PlannedCheck {
   notBefore: string;
   items: { id: string; version: number }[];
   reason: string;
+  /**
+   * Planner policy @4: this verification check closes a review after the retention check `after` failed. The review is
+   * recorded at once (planReview) and shown in the learner's existing journey: the lesson parts, then practice, then
+   * this check (not before the lesson is taken, or its date). It never changes the journey's own steps or progress.
+   * Earlier app versions read it as an ordinary later verification check.
+   */
+  review?: {
+    after: string;
+    lessons: string[];
+    practice: string[];
+    /**
+     * The lesson is required when the failed delayed check had no right answer without help (the existing rule: with
+     * no right answer, teaching comes before another check). When it was partly right, the lesson stays available but
+     * is not required: practice, then the check.
+     */
+    lessonNeeded: boolean;
+  };
 }
 
 /** Where a competency stands, with each claim kept apart (journeyOutcomes). */
@@ -712,6 +761,11 @@ export interface CompetencyOutcome {
   pending: string | null;
   /** The next check that can be planned or taken, or null. */
   next: { kind: "verification" | "retention"; notBefore: string; itemsAvailable: number; planned: string | null } | null;
+  /**
+   * Policy @4: after a failed delayed (planned) check. `required`: the failed check's id; `planned`: the review's
+   * verification check once recorded (planReview), null until then. Absent: no review is required.
+   */
+  review?: { required: string; planned: string | null; complete: boolean };
 }
 
 // ---------------------------------------------------------------- policy
