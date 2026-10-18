@@ -9,6 +9,7 @@
  * the engine and every screen work unchanged. The engine replays the events to build the Learner Vector; the server
  * keeps the events, never a score in their place.
  */
+import type { EssayGatewayInfo } from "../../../../packages/english-core/src/index.ts";
 import type { ScrubSource } from "./scrub.ts";
 import type { AppEvent } from "./events.ts";
 import { APP_BUILD, type Metric } from "./telemetry.ts";
@@ -238,6 +239,14 @@ export class Api {
   // developer diagnostics (an explicit grant is needed; the server refuses everyone else)
   developerStatus() {
     return this.request<{ developer: boolean; commit: string }>("GET", "/developer/status/");
+  }
+  /** The server's essay evaluator (developer accounts; synthetic test essays only). */
+  essayEvaluatorStatus() {
+    return this.request<EssayGatewayInfo & { reason: string; adapter: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/");
+  }
+  /** One essay evaluation through the server, which holds the provider credentials. Allows time for a model. */
+  essayEvaluate(body: { task: "observe" | "rewrite"; request: unknown; data_use: "synthetic_test" }) {
+    return this.request<unknown>("POST", "/evaluation/essays/", body, 120_000);
   }
   claimDeveloper(code: string) {
     return this.request<{ developer: boolean }>("POST", "/developer/claim/", { code });

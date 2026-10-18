@@ -21,6 +21,7 @@ import {
   type EssayContext,
   type EssayEvaluator,
   type EssayEvent,
+  type EssayGatewayInfo,
   type EssayLearnerProfile,
   type EssaySubmission,
   type GapHypothesis,
@@ -44,6 +45,7 @@ import {
   evaluateRewrite,
   fingerprint,
   gapHypotheses,
+  gatewayEssayEvaluator,
   indexCompetencyProfile,
   journeyStatus,
   patternEssayEvaluator,
@@ -101,6 +103,25 @@ export function studioEvaluator(): EssayEvaluator & { source(text: string): "rec
   };
 }
 
+/** Who analysed an essay, from the evaluator recorded with the analysis. */
+export type AnalysedBy = "llm" | "replay" | "recorded" | "patterns";
+
+/**
+ * The server's essay evaluator, when a signed-in developer account has it switched on; otherwise null and the
+ * studio keeps its recorded samples and pattern stand-in. The browser never calls a model provider itself.
+ */
+export async function connectEvaluator(api: {
+  essayEvaluatorStatus(): Promise<EssayGatewayInfo & { reason?: string }>;
+  essayEvaluate(body: { task: "observe" | "rewrite"; request: unknown; data_use: "synthetic_test" }): Promise<unknown>;
+}): Promise<EssayEvaluator | null> {
+  try {
+    const info = await api.essayEvaluatorStatus();
+    return info.available ? gatewayEssayEvaluator({ info, post: (body) => api.essayEvaluate(body) }) : null;
+  } catch {
+    return null; // signed out, not a developer, or no server: the studio works without it
+  }
+}
+
 export function essayContext(content: AppContent): EssayContext {
   const lessons = new Map<CapabilityId, string[]>();
   for (const l of content.lessons.values()) lessons.set(l.capability, [...(lessons.get(l.capability) ?? []), l.id]);
@@ -123,8 +144,10 @@ export interface StudioView {
   essays: EssaySubmission[];
   essay: EssaySubmission | null;
   analysis: EssayAnalysis | null;
-  /** Which evaluator produced the analysis: a recorded sample output or the pattern stand-in. */
-  analysedBy: "recorded" | "patterns" | null;
+  /** Which evaluator produced the analysis: the server's LLM or replay, a recorded sample output, or the pattern stand-in. */
+  analysedBy: AnalysedBy | null;
+  /** Earlier attempts on this essay that failed (for example the server's evaluator was unreachable). */
+  failedAnalyses: string[];
   hypotheses: GapHypothesis[];
   diagnostics: { request: DiagnosticRequest; outcome: DiagnosticOutcome }[];
   nextDiagnostic: { request: DiagnosticRequest; item: Item; position: number; total: number } | null;
@@ -137,12 +160,27 @@ export interface StudioView {
 export class EssayStudio {
   readonly learner: Learner;
   readonly ectx: EssayContext;
-  readonly evaluator: ReturnType<typeof studioEvaluator>;
+  /** The server's evaluator when connected (LLM or replay), else the local recorded samples and pattern stand-in. */
+  readonly evaluator: EssayEvaluator;
+  /** Used when the server's evaluator fails: the failure is recorded first, then this answers (and says so). */
+  readonly fallback: ReturnType<typeof studioEvaluator>;
 
-  constructor(learner: Learner, evaluator = studioEvaluator()) {
+  constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator()) {
     this.learner = learner;
     this.ectx = essayContext(learner.content);
-    this.evaluator = evaluator;
+    this.fallback = fallback;
+    this.evaluator = evaluator ?? fallback;
+  }
+
+  get connected(): boolean {
+    return this.evaluator !== this.fallback;
+  }
+
+  private analysedBy(analysis: EssayAnalysis | null, text: string): AnalysedBy | null {
+    if (!analysis) return null;
+    if (analysis.evaluator.id === "openpath-gateway:llm") return "llm";
+    if (analysis.evaluator.id === "openpath-gateway:replay") return "replay";
+    return this.fallback.source(text);
   }
 
   /** The engine's ledger events (evidence, provenance and essay records), exactly as folded. */
@@ -163,7 +201,9 @@ export class EssayStudio {
     const now = this.now();
     const essay = this.latestEssay();
     const essays = essayRecords(events, "submission").map((r) => r.record.submission);
-    const analysis = essay ? (essayRecords(events, "analysis").find((r) => r.record.analysis.essay === essay.id)?.record.analysis ?? null) : null;
+    // the latest analysis of the essay (an evaluator failure is recorded, then a fallback answers)
+    const analysis = essay ? (essayRecords(events, "analysis").filter((r) => r.record.analysis.essay === essay.id).at(-1)?.record.analysis ?? null) : null;
+    const failedAnalyses = essay ? essayRecords(events, "analysis").filter((r) => r.record.analysis.essay === essay.id && r.record.analysis.status === "rejected").map((r) => r.record.analysis.reasons[0] ?? "") : [];
     const hypotheses = gapHypotheses(this.ectx, events);
     const requests = essay ? essayRecords(events, "diagnostic").filter((r) => r.record.request.essay === essay.id).map((r) => r.record.request) : [];
     const current = new Map(hypotheses.map((h) => [h.competency, h]));
@@ -180,7 +220,8 @@ export class EssayStudio {
       essays,
       essay,
       analysis,
-      analysedBy: essay ? this.evaluator.source(essay.text) : null,
+      analysedBy: essay ? this.analysedBy(analysis, essay.text) : null,
+      failedAnalyses,
       hypotheses,
       diagnostics,
       nextDiagnostic,
@@ -243,6 +284,11 @@ export class EssayStudio {
     await this.learner.recordEssay(s.event);
     const a = await analyseEssay(this.ectx, this.events, this.evaluator, essayId, m2);
     await this.learner.recordEssay(a.event);
+    // the server's evaluator failed or answered invalidly: that is recorded above; the local fallback answers next
+    if (this.connected && a.analysis.status === "rejected") {
+      const [m3] = await this.learner.essayMeta(1);
+      await this.learner.recordEssay((await analyseEssay(this.ectx, this.events, this.fallback, essayId, m3)).event);
+    }
     const metas = await this.learner.essayMeta(20);
     const d = planDiagnostics(this.ectx, this.events, (n) => metas[n]);
     if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
@@ -298,8 +344,10 @@ export class EssayStudio {
     const essay = this.latestEssay();
     if (!essay) throw new Error("no essay yet");
     const [m] = await this.learner.essayMeta(1);
+    // the server's evaluator judges any rewrite; locally, only the built-in sample rewrite has a recorded judgement
     const known = SAMPLES.rewrites.some((r) => r.fingerprint === fingerprint(text));
-    const r = await evaluateRewrite(this.ectx, this.events, known ? this.evaluator : null, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
+    const judge = this.connected ? this.evaluator : known ? this.fallback : null;
+    const r = await evaluateRewrite(this.ectx, this.events, judge, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
     await this.learner.recordEssay(r.event);
     return this.view();
   }

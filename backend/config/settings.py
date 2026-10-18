@@ -120,6 +120,25 @@ OPENPATH_CONSENT_POLICY_VERSION = "2026-10-prototype"
 # provider adapter, and configuring one fails at start-up (decision of 12 October; E3b needs approval).
 OPENPATH_EVALUATION_ADAPTER = os.environ.get("OPENPATH_EVALUATION_ADAPTER", "disabled")
 OPENPATH_EVALUATION_REPLAY_FILE = os.environ.get("OPENPATH_EVALUATION_REPLAY_FILE") or None
+
+# Essay Intelligence v2: the essay evaluator behind the server (evaluation/essay.py). Off by default.
+#   disabled   refuses every request (the default); the essay studio uses its recorded samples and pattern stand-in
+#   replay     recorded outputs by text fingerprint (OPENPATH_ESSAY_REPLAY_FILE): repeatable tests, no provider
+#   llm        a configured LLM provider (evaluation/llm.py); the key is read from the environment only
+# Only developer accounts may call it, and only for synthetic test essays: real learners' essays are refused until
+# consent, retention and deletion policies are approved (that switch is not configurable here).
+OPENPATH_ESSAY_EVALUATOR = os.environ.get("OPENPATH_ESSAY_EVALUATOR", "disabled")
+OPENPATH_ESSAY_REPLAY_FILE = os.environ.get("OPENPATH_ESSAY_REPLAY_FILE") or None
+OPENPATH_ESSAY_EVALUATOR_VERSION = os.environ.get("OPENPATH_ESSAY_EVALUATOR_VERSION", "essay-llm@1")
+OPENPATH_LLM_PROVIDER = os.environ.get("OPENPATH_LLM_PROVIDER", "anthropic")
+OPENPATH_LLM_MODEL = os.environ.get("OPENPATH_LLM_MODEL", "")
+OPENPATH_LLM_BASE_URL = os.environ.get("OPENPATH_LLM_BASE_URL", "")
+OPENPATH_LLM_API_KEY = os.environ.get("OPENPATH_LLM_API_KEY", "")
+OPENPATH_LLM_MAX_OUTPUT_TOKENS = int(os.environ.get("OPENPATH_LLM_MAX_OUTPUT_TOKENS", "4000"))
+OPENPATH_LLM_TIMEOUT_S = float(os.environ.get("OPENPATH_LLM_TIMEOUT_S", "60"))
+# bounded cost: requests and tokens per day across all developers; over either limit, requests are refused
+OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
+OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000
 
 # ---------------------------------------------------------------- parent accounts (family app)
