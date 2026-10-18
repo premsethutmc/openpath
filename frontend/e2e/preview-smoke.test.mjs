@@ -55,6 +55,11 @@ test(`preview smoke: ${process.env.PHASE ?? "write"}`, async () => {
     await page.getByRole("button", { name: /Synthetic preview learner/ }).waitFor();
     await page.goto(base + "/tamil/");
     await page.getByText("தமிழுடன் விளையாடுவோம்!").waitFor();
+    await page.goto(base + "/maths/");
+    await page.getByRole("heading", { name: "What are you preparing for?" }).waitFor();
+    assert.equal(await page.locator("select").count(), 0, "no drop-downs on the JEE chapter");
+    await page.getByRole("button", { name: /JEE Main/ }).click();
+    await page.getByRole("button", { name: /Quadratic Equations/ }).waitFor();
     writeFileSync(state, JSON.stringify({ email, pupil: pupil.data.id, maths: maths.length }));
   } else {
     const s = JSON.parse(readFileSync(state, "utf8"));
