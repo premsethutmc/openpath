@@ -20,6 +20,10 @@ Milestone scopes, each approved before it is built:
 
 - [`milestones/M1_CAPABILITY_REGISTRY.md`](milestones/M1_CAPABILITY_REGISTRY.md): capability registry and observable profile (awaiting approval)
 
+Tutor architecture (proposal, awaiting approval):
+
+- [`tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md`](tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md): one subject-independent tutor that teaches towards a goal, how much help a learner needs, and milestones T0–T3 (revision 2)
+
 [`ARCHITECTURE.md`](ARCHITECTURE.md) is the original design record of the apple-shopping prototype. It is superseded for platform matters.
 
 Every document uses the same labels:
