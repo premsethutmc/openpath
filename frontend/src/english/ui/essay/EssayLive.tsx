@@ -42,6 +42,14 @@ const NAV: { screen: Screen; label: string }[] = [
 ];
 const STEP_LABEL = { diagnose: "Short check", teach: "Lesson", guided_practice: "Practice with help", independent_check: "Check without help" } as const;
 const STEP_STATUS = { pending: "Not done yet", done: "Done (not a claim of mastery)", green: "Shown: the engine counts this skill at the grade target", blocked: "Content missing" } as const;
+const RETENTION = {
+  not_applicable: "Not yet: a delayed check comes only after the skill is shown without help",
+  pending: "Pending: the delayed check is not due yet",
+  due: "Due: the delayed check can be taken now",
+  demonstrated: "Shown: the delayed check showed it was kept",
+  not_demonstrated: "Not shown: the delayed check did not show it was kept (the evidence is recorded)",
+} as const;
+const yesNo = (b: boolean | null, yes: string, no: string, none = "Not on this path") => (b === null ? none : b ? yes : no);
 const GAP = { suspected: "Suggested by your essay: not checked yet", confirmed: "Checked: questions without help agreed", weakened: "Checked: questions without help were right", unresolved: "Not settled yet" } as const;
 
 const screenFor = (v: StudioView): Screen => (v.stage === "write" ? "essay" : v.stage === "diagnose" ? "check" : v.stage === "plan" || v.stage === "learn" ? "path" : v.stage === "rewrite" ? "rewrite" : "profile");
@@ -99,10 +107,10 @@ export function EssayLive() {
       setBusy(false);
     }
   }
-  async function answer(item: Item, r: Response, kind: "diagnostic" | "step") {
+  async function answer(item: Item, r: Response, kind: "diagnostic" | "step" | "later") {
     if (!studio) return;
     await act(async () => {
-      const out = kind === "diagnostic" ? await studio.answerDiagnostic(r) : await studio.answerStep(r);
+      const out = kind === "diagnostic" ? await studio.answerDiagnostic(r) : kind === "later" ? await studio.answerLaterCheck(r) : await studio.answerStep(r);
       setFeedback({ item: item.id, f: out.feedback });
       return out.view;
     });
@@ -307,6 +315,41 @@ export function EssayLive() {
                     </section>
                   ))}
                 </div>
+                {v.outcomes.length > 0 && (
+                  <section className="essay-card essay-outcomes" aria-label="Where each skill stands">
+                    <h2>Where each skill stands</h2>
+                    <p className="small">Each line is a separate claim. Finishing the path is never the same as showing a skill.</p>
+                    {v.outcomes.map((o) => (
+                      <dl key={o.competency} data-outcome-for={o.competency} data-journey-completed={String(o.journeyCompleted)} data-demonstrated={String(o.demonstrated)} data-verified={String(o.verified)} data-retention={o.retention}>
+                        <dt>{name(o.competency)}</dt>
+                        <dd>Path: {yesNo(o.journeyCompleted, "completed", "not finished")}</dd>
+                        <dd>Shown without help at band {o.target}: {o.demonstrated ? "yes" : "not yet"}</dd>
+                        <dd>Verified (a later check passed): {o.verified ? "yes" : "not yet"}</dd>
+                        <dd>Retention: {RETENTION[o.retention]}{o.retentionDueAt && (o.retention === "pending" || o.retention === "due") ? ` (from ${o.retentionDueAt.slice(0, 10)})` : ""}</dd>
+                        {o.pending && <dd className="small">{o.pending}</dd>}
+                      </dl>
+                    ))}
+                    {v.outcomes.some((o) => o.next && !o.next.planned) && (
+                      <button className="essay-primary" disabled={busy} onClick={() => void act(() => studio!.planLaterChecks())}>
+                        Plan the later checks
+                      </button>
+                    )}
+                    {v.checks.filter((c) => !v.laterCheck || c.id !== v.laterCheck.check.id).map((c) => (
+                      <p className="small" key={c.id} data-planned-check={c.kind}>
+                        {c.kind === "retention" ? "Delayed check" : "Later check"} on {name(c.competency)}: from {c.notBefore.slice(0, 10)}
+                      </p>
+                    ))}
+                  </section>
+                )}
+                {v.laterCheck && !v.next && (
+                  <section className="essay-card essay-active-step" data-current-step={`later_${v.laterCheck.check.kind}`}>
+                    <p className="kicker">
+                      {name(v.laterCheck.check.competency)} · {v.laterCheck.check.kind === "retention" ? "Delayed check" : "Later check"} {v.laterCheck.position} of {v.laterCheck.total}
+                    </p>
+                    <p className="small">A new sitting, on questions you have not seen. Answer without help.</p>
+                    <ItemView key={v.laterCheck.item.id} item={v.laterCheck.item} passage={passage(v.laterCheck.item)} voice={null} locked={busy} onSubmit={(r) => void answer(v.laterCheck!.item, r, "later")} />
+                  </section>
+                )}
                 {v.next && (
                   <section className="essay-card essay-active-step" data-current-step={v.next.step.kind}>
                     <p className="kicker">

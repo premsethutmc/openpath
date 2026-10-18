@@ -13,7 +13,9 @@ import { Ledger } from "../updater.ts";
 import { essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
 import { engineClaim, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyTree, type GapHypothesis, type JourneyNode, type JourneyStep, type JourneyStepKind, type LearningJourney } from "./contract.ts";
-import { countedAnalyses, currentHypotheses, pickItems } from "./gaps.ts";
+import { pickForRole } from "./allocation.ts";
+import { competencyOutcome } from "./checks.ts";
+import { countedAnalyses, currentHypotheses } from "./gaps.ts";
 
 const STATUS_ORDER: Record<GapHypothesis["status"], number> = { confirmed: 0, unresolved: 1, suspected: 2, weakened: 9 };
 
@@ -63,18 +65,22 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
     if (!lessons.length) contentGaps.push({ competency: cap, what: `no lesson for ${name(cap)} in the app yet` });
     return step(cap, "teach", why, lessons, lessons.length > 0, lessons.length ? `${lessons.length} lesson part${lessons.length === 1 ? "" : "s"}` : `No lesson for ${name(cap)} yet`);
   };
+  // Practice uses questions below the target band (or not fit to be evidence), pitched at the learner's current
+  // estimate; the check uses unseen questions at or above the target, never one kept for the retention check
+  // (allocation.ts). Questions at or above the target are never spent on practice.
+  const estimate = (cap: CapabilityId) => leafView(ledger.composite, ectx.ctx.index, cap, meta.at).mean;
   const practice = (cap: CapabilityId): JourneyStep => {
-    const items = specified(cap) ? pickItems(ectx, events, cap, p.guidedItems, used) : [];
+    const items = specified(cap) ? pickForRole(ectx, events, cap, "guided_practice", p.guidedItems, { exclude: used, level: estimate(cap) }) : [];
     items.forEach((i) => used.add(i.id));
-    if (!items.length) contentGaps.push({ competency: cap, what: `no unseen practice questions for ${name(cap)}` });
-    return step(cap, "guided_practice", "Practice with help available: these answers are practice and never count as independent evidence.", items.map((i) => i.id), items.length > 0, items.length ? `${items.length} question${items.length === 1 ? "" : "s"} with hints` : `No unseen questions for ${name(cap)}`);
+    if (!items.length) contentGaps.push({ competency: cap, what: `no unseen practice questions below the target band for ${name(cap)}` });
+    return step(cap, "guided_practice", "Practice with help available: these answers are practice and never count as independent evidence.", items.map((i) => i.id), items.length > 0, items.length ? `${items.length} question${items.length === 1 ? "" : "s"} with hints` : `No unseen practice questions for ${name(cap)}`);
   };
   const check = (cap: CapabilityId): JourneyStep => {
-    const items = specified(cap) ? pickItems(ectx, events, cap, p.checkItems, used) : [];
+    const items = specified(cap) ? pickForRole(ectx, events, cap, "independent_verification", p.checkItems, { exclude: used }) : [];
     items.forEach((i) => used.add(i.id));
     const ok = items.length >= p.checkItems;
-    if (!ok) contentGaps.push({ competency: cap, what: `fewer than ${p.checkItems} unseen questions to check ${name(cap)} without help` });
-    return step(cap, "independent_check", "Without help, on questions not used before. It turns green only when the engine counts the skill as demonstrated at the grade target.", items.map((i) => i.id), ok, ok ? `${items.length} unseen questions, no hints` : `Not enough unseen questions to check ${name(cap)}`);
+    if (!ok) contentGaps.push({ competency: cap, what: `fewer than ${p.checkItems} unseen questions at the target band or above to check ${name(cap)} without help` });
+    return step(cap, "independent_check", "Without help, on questions not used before, at the grade target. It turns green only when the engine counts the skill as demonstrated at the grade target.", ok ? items.map((i) => i.id) : [], ok, ok ? `${items.length} unseen questions, no hints` : `Not enough unseen questions at the target band to check ${name(cap)}: a later check is needed once more reviewed questions exist`);
   };
   const specified = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.specified ?? false;
 
@@ -181,6 +187,8 @@ export function journeyStatus(ectx: EssayContext, events: readonly LedgerEvent[]
       const check = node.steps.find((s) => s.kind === "independent_check");
       node.green = node.level !== "none" && (!check || check.status === "green");
     }
+  // the separate claims (journey completed, shown, verified, retention), from the same ledger
+  for (const t of j.trees) for (const node of t.nodes) node.outcome = competencyOutcome(ectx, events, node.competency, now, j, ledger);
   const targets = j.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target"));
   const finished = j.trees.every((t) => t.nodes.every((n) => n.steps.every((s) => s.status !== "pending")));
   j.complete = targets.length === 0 || targets.every((n) => n.green);

@@ -99,16 +99,23 @@ test("ESSAY-INT acceptance: essay → observations → diagnosis → profile →
     }
   }
   assert.equal(v.next, null);
-  assert.equal(sittings, 1, "the check was asked in a new sitting, not straight after the lesson");
+  // the pilot's pools (existing item-role metadata) keep agreement's questions for one use each, and its
+  // confirmation pool has only one question at the Grade 8 target: the check is blocked and says so, nothing is
+  // borrowed from another pool, and the journey still finishes
+  assert.equal(sittings, 0, "no check was asked");
   const node = v.journey!.trees.find((t) => t.root === SVA)!.nodes[0];
   assert.deepEqual(node.steps.slice(0, 2).map((s) => s.status), ["done", "done"], "a lesson and practice are done, never green");
   const claim = engineClaim(studio.ectx, SVA, leafView(learner.state.ledger.composite, content.index, SVA, clock()));
-  // the engine records "demonstrated" at band 4, below the draft Grade 8 target (band 5): done, not green
-  assert.equal(claim.status, "demonstrated");
-  assert.ok(claim.currentLevel! < claim.target!);
+  // no check could be asked, so nothing is shown at the draft Grade 8 target (band 5): not green
+  assert.equal(claim.level, "none");
+  assert.ok(claim.currentLevel === null || claim.currentLevel < claim.target!);
   assert.equal(node.green, false, "green only when the engine supports the grade target");
-  assert.equal(node.steps[2].status, "done");
-  assert.match(v.profile.competencies.find((c) => c.competency === SVA)!.notes.join(" "), /below the draft Grade 8 target/);
+  assert.equal(node.steps[2].status, "blocked");
+  assert.match(node.steps[2].content.note, /Not enough unseen questions at the target band/);
+  assert.equal(node.outcome!.journeyCompleted, true);
+  assert.equal(node.outcome!.demonstrated, false);
+  assert.match(node.outcome!.pending!, /more reviewed questions are needed/);
+  assert.ok(!/verified|mastered/i.test(v.profile.competencies.find((c) => c.competency === SVA)!.state), "no claim from finishing the journey");
   const practice = node.steps[1].evidence.map((id) => learner.state.ledger.decisions.find((d) => d.source === id));
   assert.ok(practice.every((d) => !d || d.verdict === "held"), "practice answers are assisted: held, never an estimate change");
   assert.equal(v.stage, "rewrite");
@@ -147,8 +154,11 @@ test("ESSAY-INT acceptance: essay → observations → diagnosis → profile →
   const second = v.journey!;
   const refs = second.trees.flatMap((t) => t.nodes.flatMap((n) => n.steps.flatMap((s) => (s.kind === "teach" ? [] : s.content.refs))));
   assert.ok(refs.every((r) => !usedBefore.has(r)));
-  // right without help this time: the gap is weakened and agreement is not retaught
-  assert.equal(v.hypotheses.filter((x) => x.competency === SVA).at(-1)!.status, "weakened");
+  // right without help this time, on questions near the band 5 target (the pilot's diagnosis pool): the gap is
+  // weakened and agreement is not retaught
+  const again = v.hypotheses.filter((x) => x.competency === SVA).at(-1)!;
+  assert.equal(again.status, "weakened");
+  assert.ok(again.diagnostic!.answers.some((a) => a.correct && (studio.ectx.ctx.content.items.get(a.item) as { b: number }).b >= 4.5), "at least one right answer near the target");
   assert.ok(!second.trees.some((t) => t.root === SVA));
   assert.match(second.skipped.find((x) => x.competency === SVA)!.reason, /right/);
   // the unresolved gap from the first essay (no questions exist for it) is still on the path, still blocked
@@ -261,4 +271,65 @@ test("ESSAY-INT v2: when the server's evaluator fails, the failure is recorded a
   assert.match(v.failedAnalyses[0], /did not answer/);
   assert.equal(v.analysis!.status, "accepted");
   assert.equal(await connectEvaluator({ essayEvaluatorStatus: async () => { throw new Error("403"); }, essayEvaluate: async () => ({}) }), null, "not a developer: no server evaluator");
+});
+
+// ---------------------------------------------------------------- assessment evidence and retention v1
+
+const COMMAS = "EN.GRM.PUN.commas";
+const COMMA_ESSAY =
+  "After the match ended we walked home together. When we reached my house my mother had made dinner. Because it was late we ate quickly and went to bed. In the morning my brother asked about the game and I told him everything.";
+/** A test evaluator that reports the missing introductory commas in COMMA_ESSAY (synthetic data only). */
+const commaEvaluator = {
+  id: "test-commas",
+  version: "1",
+  async observe(req: { essay: { id: string } }) {
+    const ob = (quote: string) => ({ competency: COMMAS, kind: "error", quote, correction: quote.replace(/ (we|my) /, ", $1 "), confidence: "high", note: "A comma after an introductory clause is expected here." });
+    return { essay_id: req.essay.id, observations: [ob("After the match ended we walked"), ob("When we reached my house my mother"), ob("Because it was late we ate")], not_observable: [] };
+  },
+  async rewrite(): Promise<unknown> {
+    throw new Error("not used");
+  },
+};
+
+test("RETENTION-STUDIO the journey finishes with separate claims; later checks are planned on reserved questions and never offered early", async () => {
+  const clock = testClock();
+  const learner = await Learner.create(content, new MemoryRepo(), STUDIO_PROFILE_NAME, "guardian", clock, STUDIO_PROFILE_ID);
+  const studio = new EssayStudio(learner, commaEvaluator as never);
+  let v = await studio.submit(COMMA_ESSAY);
+  assert.equal(v.hypotheses.find((h) => h.competency === COMMAS)?.status, "suspected");
+  while (v.nextDiagnostic) v = (await studio.answerDiagnostic(v.nextDiagnostic.request.competency === COMMAS ? wrongAnswer(v.nextDiagnostic.item) : rightAnswer(v.nextDiagnostic.item))).view;
+  v = await studio.plan();
+  const bOf = (id: string) => (content.ctx.content.items.get(id) as { b: number }).b;
+  const node = v.journey!.trees.find((t) => t.root === COMMAS)!.nodes[0];
+  const practice = node.steps.find((s) => s.kind === "guided_practice")!;
+  const check = node.steps.find((s) => s.kind === "independent_check")!;
+  assert.ok(practice.content.refs.every((r) => bOf(r) < 5), "practice never spends questions at the target");
+  assert.ok(check.content.refs.length === 2 && check.content.refs.every((r) => bOf(r) >= 5 && bOf(r) <= 6.5), "the check is at the target band");
+  for (let guard = 0; guard < 20 && v.next; guard++) v = v.next.step.kind === "teach" ? await studio.readLesson(v.next.lesson!.id, true) : (await studio.answerStep(rightAnswer(v.next.item!))).view;
+  const o = v.outcomes.find((x) => x.competency === COMMAS)!;
+  assert.equal(o.journeyCompleted, true, "the journey finishes whatever the evidence shows");
+  assert.equal(o.verified, false, "finishing a journey never verifies");
+  // plan the later check: never offered before its time
+  v = await studio.planLaterChecks();
+  const planned = v.checks.find((c) => c.competency === COMMAS)!;
+  assert.ok(planned, JSON.stringify(o));
+  assert.equal(v.laterCheck, null, "not offered before notBefore");
+  const used = itemIds(studio.events.filter((e) => e.kind !== "essay"));
+  assert.ok(planned.items.every((i) => !used.has(i.id) && bOf(i.id) >= 5), "reserved, unseen questions at the target");
+  clock.days(planned.kind === "retention" ? 7 : 1);
+  v = studio.view();
+  assert.equal(v.laterCheck?.check.id, planned.id);
+  while (v.laterCheck) v = (await studio.answerLaterCheck(rightAnswer(v.laterCheck.item))).view;
+  const after = v.outcomes.find((x) => x.competency === COMMAS)!;
+  // a confirmed gap, then right answers on the journey's check and the later check: the level rises (the evidence
+  // persists), but four right answers after two wrong ones do not yet show band 5. The policy's one later check is
+  // used, so the outcome stays pending with a recommendation, and nothing more is asked (the journey is finite).
+  assert.equal(o.next?.kind, "verification");
+  assert.equal(after.demonstrated, false);
+  assert.equal(after.verified, false);
+  assert.equal(after.retention, "not_applicable", "no retention claim before the target is shown");
+  assert.ok((after.currentLevel ?? 0) >= (o.currentLevel ?? 0));
+  assert.match(after.pending!, /later checks this policy allows have been used/);
+  assert.equal(after.next, null);
+  assert.equal((await studio.planLaterChecks()).laterCheck, null);
 });

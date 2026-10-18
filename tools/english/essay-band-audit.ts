@@ -38,7 +38,7 @@ const ev = (item: Item & CodeItem, right: boolean, day: number, session: string,
   item: { id: item.id, version: item.version },
   response: respond(item, right),
   use: assisted ? "practice" : "assessment",
-  provenance: { schema: "provenance@1", attempt: 1, hints: assisted ? ["h"] : [], afterFeedback: false, policies: ["passage@1"] },
+  provenance: { schema: "provenance@1", attempt: 1, hints: assisted ? ["h"] : [], afterFeedback: false, policies: ["passage@1", "assisted@1"] },
 });
 
 const level = (events: LedgerEvent[], cap: string) => {

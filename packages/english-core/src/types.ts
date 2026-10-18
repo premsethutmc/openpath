@@ -424,8 +424,14 @@ export interface Provenance {
 }
 
 /** Evidence policies an answer can be recorded under. */
-export type EvidencePolicy = "passage@1";
+export type EvidencePolicy = "passage@1" | "assisted@1";
 export const PASSAGE_POLICY: EvidencePolicy = "passage@1";
+/**
+ * "assisted@1": an item the learner already met with help (an assisted response, or shown in teaching) is never
+ * fresh evidence again: a later first answer to it is recorded as a repeat (retention only, no estimate change).
+ * Answers recorded before the policy replay exactly as they were scored.
+ */
+export const ASSISTED_POLICY: EvidencePolicy = "assisted@1";
 
 /** What a question was shown for (the client's intent; the engine decides what the evidence shows). */
 export type PresentedPurpose = "assessment" | "practice" | "retention" | "transfer" | "teaching";

@@ -1,0 +1,880 @@
+[
+ {
+  "capability": "EN.GRM.VERB.sva",
+  "name": "Subject–verb agreement",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 38,
+  "pooled": true,
+  "status": {
+   "validated": 0,
+   "candidate": 38,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 7,
+   "below": 21,
+   "target": 6,
+   "above": 4
+  },
+  "roles": {
+   "diagnostic": 14,
+   "teaching": 0,
+   "guided_practice": 8,
+   "independent_verification": 1,
+   "delayed_retention": 1
+  },
+  "independentFamilies": 1,
+  "retentionFamilies": 1,
+  "leaked": [
+   {
+    "item": "plt.sva.17",
+    "words": "are on the"
+   },
+   {
+    "item": "plt.sva.18",
+    "words": "shops were closed"
+   }
+  ],
+  "newLearner": {
+   "retentionReserve": 1,
+   "verification": 1,
+   "diagnosticAtTarget": true,
+   "practice": 8,
+   "shortfall": [
+    "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed)",
+    "Subject–verb agreement: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 1,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 15
+  }
+ },
+ {
+  "capability": "EN.GRM.VERB.present_past_simple",
+  "name": "Present and past simple",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 15,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 15,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 3,
+   "below": 5,
+   "target": 4,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 9,
+   "teaching": 15,
+   "guided_practice": 9,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [
+   {
+    "item": "grm.pps.01",
+    "words": "yesterday i walked"
+   },
+   {
+    "item": "grm.pps.04",
+    "words": "we went to the"
+   },
+   {
+    "item": "grm.pps.09",
+    "words": "caught the ball"
+   }
+  ],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Present and past simple: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Present and past simple: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 9
+  }
+ },
+ {
+  "capability": "EN.GRM.VERB.aspect",
+  "name": "Progressive and perfect aspect",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 13,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 13,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 3,
+   "below": 4,
+   "target": 4,
+   "above": 2
+  },
+  "roles": {
+   "diagnostic": 11,
+   "teaching": 13,
+   "guided_practice": 7,
+   "independent_verification": 4,
+   "delayed_retention": 4
+  },
+  "independentFamilies": 2,
+  "retentionFamilies": 4,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 2,
+   "diagnosticAtTarget": false,
+   "practice": 5,
+   "shortfall": [
+    "Progressive and perfect aspect: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Progressive and perfect aspect: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 3,
+   "addIndependentForTwoLaterChecks": 5,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 11
+  }
+ },
+ {
+  "capability": "EN.GRM.NOUN.articles",
+  "name": "Articles",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 38,
+  "pooled": true,
+  "status": {
+   "validated": 0,
+   "candidate": 38,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 6,
+   "below": 20,
+   "target": 9,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 15,
+   "teaching": 0,
+   "guided_practice": 8,
+   "independent_verification": 1,
+   "delayed_retention": 1
+  },
+  "independentFamilies": 1,
+  "retentionFamilies": 1,
+  "leaked": [
+   {
+    "item": "plt.art.10",
+    "words": "there is a"
+   }
+  ],
+  "newLearner": {
+   "retentionReserve": 1,
+   "verification": 1,
+   "diagnosticAtTarget": true,
+   "practice": 8,
+   "shortfall": [
+    "Articles: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed)",
+    "Articles: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Articles: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 1,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 16
+  }
+ },
+ {
+  "capability": "EN.WRT.ACC.grammar",
+  "name": "Grammatical accuracy in writing",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 13,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 13,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 5,
+   "target": 4,
+   "above": 2
+  },
+  "roles": {
+   "diagnostic": 11,
+   "teaching": 13,
+   "guided_practice": 7,
+   "independent_verification": 4,
+   "delayed_retention": 4
+  },
+  "independentFamilies": 2,
+  "retentionFamilies": 4,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 2,
+   "diagnosticAtTarget": false,
+   "practice": 7,
+   "shortfall": [
+    "Grammatical accuracy in writing: 2 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Grammatical accuracy in writing: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 3,
+   "addIndependentForTwoLaterChecks": 5,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 11
+  }
+ },
+ {
+  "capability": "EN.GRM.PREP.time_place",
+  "name": "Prepositions of time and place",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 16,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 16,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 3,
+   "below": 5,
+   "target": 4,
+   "above": 4
+  },
+  "roles": {
+   "diagnostic": 12,
+   "teaching": 16,
+   "guided_practice": 8,
+   "independent_verification": 4,
+   "delayed_retention": 4
+  },
+  "independentFamilies": 1,
+  "retentionFamilies": 3,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 1,
+   "diagnosticAtTarget": false,
+   "practice": 5,
+   "shortfall": [
+    "Prepositions of time and place: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Prepositions of time and place: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target",
+    "Prepositions of time and place: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 4,
+   "addIndependentForTwoLaterChecks": 6,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 12
+  }
+ },
+ {
+  "capability": "EN.SEN.CMP.fragments",
+  "name": "Complete sentences, not fragments",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 14,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 14,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 6,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 11,
+   "teaching": 14,
+   "guided_practice": 8,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Complete sentences, not fragments: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Complete sentences, not fragments: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 11
+  }
+ },
+ {
+  "capability": "EN.SEN.CMP.run_ons",
+  "name": "Avoids run-on sentences and comma splices",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 14,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 14,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 5,
+   "target": 5,
+   "above": 2
+  },
+  "roles": {
+   "diagnostic": 12,
+   "teaching": 14,
+   "guided_practice": 7,
+   "independent_verification": 5,
+   "delayed_retention": 5
+  },
+  "independentFamilies": 3,
+  "retentionFamilies": 5,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 3,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Avoids run-on sentences and comma splices: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Avoids run-on sentences and comma splices: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 1,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 2,
+   "addIndependentForTwoLaterChecks": 4,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 12
+  }
+ },
+ {
+  "capability": "EN.SEN.CMB.coordination",
+  "name": "Coordination",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 13,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 13,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 5,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 10,
+   "teaching": 13,
+   "guided_practice": 7,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 5,
+   "shortfall": [
+    "Coordination: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Coordination: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 10
+  }
+ },
+ {
+  "capability": "EN.SEN.CMB.subordination",
+  "name": "Subordination",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 15,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 15,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 3,
+   "below": 5,
+   "target": 5,
+   "above": 2
+  },
+  "roles": {
+   "diagnostic": 13,
+   "teaching": 15,
+   "guided_practice": 8,
+   "independent_verification": 5,
+   "delayed_retention": 5
+  },
+  "independentFamilies": 3,
+  "retentionFamilies": 5,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 3,
+   "diagnosticAtTarget": false,
+   "practice": 7,
+   "shortfall": [
+    "Subordination: 3 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Subordination: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 1,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 2,
+   "addIndependentForTwoLaterChecks": 4,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 13
+  }
+ },
+ {
+  "capability": "EN.GRM.PUN.commas",
+  "name": "Commas",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 15,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 15,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 4,
+   "target": 6,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 12,
+   "teaching": 15,
+   "guided_practice": 6,
+   "independent_verification": 6,
+   "delayed_retention": 6
+  },
+  "independentFamilies": 4,
+  "retentionFamilies": 6,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 4,
+   "diagnosticAtTarget": false,
+   "practice": 4,
+   "shortfall": [
+    "Commas: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 2,
+   "retentionLeft": 2,
+   "laterCheckPossible": true
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 1,
+   "addIndependentForTwoLaterChecks": 3,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 12
+  }
+ },
+ {
+  "capability": "EN.VOC.USE.word_choice",
+  "name": "Precise word choice in writing",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 12,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 12,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 4,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 9,
+   "teaching": 12,
+   "guided_practice": 6,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 5,
+   "shortfall": [
+    "Precise word choice in writing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Precise word choice in writing: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 9
+  }
+ },
+ {
+  "capability": "EN.VOC.REL.collocations",
+  "name": "Collocations",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 14,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 14,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 6,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 11,
+   "teaching": 14,
+   "guided_practice": 8,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Collocations: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Collocations: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 11
+  }
+ },
+ {
+  "capability": "EN.SEN.COH.connectives",
+  "name": "Connectives and transitions",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 13,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 13,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 5,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 10,
+   "teaching": 13,
+   "guided_practice": 7,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Connectives and transitions: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Connectives and transitions: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 10
+  }
+ },
+ {
+  "capability": "EN.WRT.ORG.sequencing",
+  "name": "Logical sequencing",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 12,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 12,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 4,
+   "target": 3,
+   "above": 3
+  },
+  "roles": {
+   "diagnostic": 9,
+   "teaching": 12,
+   "guided_practice": 6,
+   "independent_verification": 3,
+   "delayed_retention": 3
+  },
+  "independentFamilies": 0,
+  "retentionFamilies": 2,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 0,
+   "diagnosticAtTarget": false,
+   "practice": 6,
+   "shortfall": [
+    "Logical sequencing: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Logical sequencing: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 5,
+   "addIndependentForTwoLaterChecks": 7,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 9
+  }
+ },
+ {
+  "capability": "EN.WRT.ORG.paragraphing",
+  "name": "Paragraphing",
+  "target": 5,
+  "targetStatus": "provisional",
+  "questions": 12,
+  "pooled": false,
+  "status": {
+   "validated": 0,
+   "candidate": 12,
+   "provisional": 0,
+   "practice": 0
+  },
+  "band": {
+   "belowNear": 2,
+   "below": 4,
+   "target": 4,
+   "above": 2
+  },
+  "roles": {
+   "diagnostic": 10,
+   "teaching": 12,
+   "guided_practice": 6,
+   "independent_verification": 4,
+   "delayed_retention": 4
+  },
+  "independentFamilies": 1,
+  "retentionFamilies": 3,
+  "leaked": [],
+  "newLearner": {
+   "retentionReserve": 2,
+   "verification": 1,
+   "diagnosticAtTarget": false,
+   "practice": 5,
+   "shortfall": [
+    "Paragraphing: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4",
+    "Paragraphing: no question at band 5 or above can be spared for diagnosis (all are kept for checks); diagnostic questions are below the target band, so right answers there cannot rule out a gap at the target",
+    "Paragraphing: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
+   ]
+  },
+  "afterOneJourney": {
+   "verificationLeft": 0,
+   "retentionLeft": 2,
+   "laterCheckPossible": false
+  },
+  "pilot": {
+   "requiredIndependent": 7,
+   "addIndependent": 4,
+   "addIndependentForTwoLaterChecks": 6,
+   "addDiagnosticBelow": 0,
+   "addPractice": 0,
+   "reviewExisting": 10
+  }
+ }
+]

@@ -368,6 +368,8 @@ export interface JourneyNode {
   /** Green only when the engine supports demonstrated or verified at the grade target band. */
   green: boolean;
   level: "none" | "demonstrated" | "verified";
+  /** Set by journeyStatus (policy @1): the separate claims for this competency. */
+  outcome?: CompetencyOutcome;
 }
 
 /** One target competency with the prerequisites it needs: a small tree. */
@@ -514,7 +516,57 @@ export type EssayRecord =
   | { type: "analysis"; analysis: EssayAnalysis }
   | { type: "diagnostic"; request: DiagnosticRequest }
   | { type: "journey"; journey: LearningJourney }
-  | { type: "rewrite"; rewrite: RewriteSubmission; evaluation: RewriteEvaluation };
+  | { type: "rewrite"; rewrite: RewriteSubmission; evaluation: RewriteEvaluation }
+  | { type: "check"; check: PlannedCheck };
+
+// ---------------------------------------------------------------- later checks (assessment evidence and retention v1)
+
+/**
+ * An independent check planned after a journey, on reserved unseen questions:
+ *   verification  a later check, in a new sitting, when the journey's check did not show the grade target
+ *   retention     a delayed check, no earlier than `notBefore` (at least the policy's delay after the target was
+ *                 first shown independently), of something already shown
+ * The items are reserved when the check is planned, so they are never used for teaching or practice. A check
+ * is evidence like any other: the engine's existing rules decide what it shows.
+ */
+export interface PlannedCheck {
+  contract: EssayContractVersion;
+  id: string;
+  competency: CapabilityId;
+  kind: "verification" | "retention";
+  at: string;
+  /** The check cannot be taken before this time: a delayed check is never completed immediately. */
+  notBefore: string;
+  items: { id: string; version: number }[];
+  reason: string;
+}
+
+/** Where a competency stands, with each claim kept apart (journeyOutcomes). */
+export type EssayRetentionState = "not_applicable" | "pending" | "due" | "demonstrated" | "not_demonstrated";
+
+export interface CompetencyOutcome {
+  competency: CapabilityId;
+  target: number | null;
+  /**
+   * The journey's steps for this competency are all done or blocked (it can finish without the target shown).
+   * null: the competency is not on the journey (for example, the diagnosis did not support the essay's suggestion).
+   */
+  journeyCompleted: boolean | null;
+  /** Shown without help at the grade target (the engine's demonstrated or verified, at or above the target). */
+  demonstrated: boolean;
+  /** Verified under the current evidence policy: the engine's own status, after a passed spaced check. */
+  verified: boolean;
+  currentLevel: number | null;
+  /** When the target was first shown without help (null: not yet). */
+  targetShownAt: string | null;
+  retention: EssayRetentionState;
+  /** When the delayed check may be taken (retention pending or due). */
+  retentionDueAt: string | null;
+  /** Why something is still pending, in plain words (null: nothing pending). */
+  pending: string | null;
+  /** The next check that can be planned or taken, or null. */
+  next: { kind: "verification" | "retention"; notBefore: string; itemsAvailable: number; planned: string | null } | null;
+}
 
 // ---------------------------------------------------------------- policy
 
@@ -537,6 +589,14 @@ export interface EssayPolicy {
   prerequisiteDepth: number;
   guidedItems: number;
   checkItems: number;
+  /** Days from first showing the target without help to the delayed retention check (at least 7). */
+  retentionDelayDays: number;
+  /** Unseen questions at or above the target kept back for the delayed retention check. */
+  retentionItems: number;
+  /** Later verification checks offered after a journey whose check did not show the target. */
+  followUpChecks: number;
+  /** Days after the journey before a later verification check (a new sitting, never straight after teaching). */
+  followUpAfterDays: number;
   rewriteLimit: number;
   rewriteMin: number;
 }

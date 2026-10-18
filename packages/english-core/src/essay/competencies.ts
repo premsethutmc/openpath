@@ -9,7 +9,7 @@ import type { CompetencyProfile, CompetencyRef, EssayPolicy, RubricTrait, Writin
 
 /** Draft values for review. None is a claim about what works for children. */
 export const ESSAY_POLICY_DRAFT: EssayPolicy = {
-  version: "essay-policy@0-draft",
+  version: "essay-policy@1-draft",
   suspectMinSentences: 2,
   maxObservations: 40,
   diagnosticItems: 3,
@@ -20,6 +20,10 @@ export const ESSAY_POLICY_DRAFT: EssayPolicy = {
   prerequisiteDepth: 2,
   guidedItems: 3,
   checkItems: 2,
+  retentionDelayDays: 7,
+  retentionItems: 2,
+  followUpChecks: 1,
+  followUpAfterDays: 1,
   rewriteLimit: 50,
   rewriteMin: 20,
 };
@@ -63,11 +67,21 @@ export function indexCompetencyProfile(profile: CompetencyProfile, index: Framew
 }
 
 /** Everything the essay functions need besides the learner's events. */
+/** The pilot manifest's pools. */
+export type ItemPool = "diagnosis" | "practice" | "confirmation" | "retention";
+
 export interface EssayContext {
   ctx: Context;
   profile: IndexedProfile;
   /** Lesson ids the app can show, by capability (content/english/web/lessons.json). Missing: no lesson. */
   lessons: Map<CapabilityId, string[]>;
+  /** The text the app shows when teaching each capability (lesson rules, examples and checks), to find answer leakage. */
+  teachingText?: Map<CapabilityId, string[]>;
+  /**
+   * Existing item-role metadata (content/english/pilot/manifest.json, pilot-content@2): a question reserved for one
+   * use (diagnosis, practice, confirmation or retention) is never taken for another (allocation.ts).
+   */
+  pools?: Map<string, ItemPool>;
   policy: EssayPolicy;
 }
 

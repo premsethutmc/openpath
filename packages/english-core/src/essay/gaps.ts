@@ -8,11 +8,12 @@
  * engine's existing rules decide on their own whether they change an estimate.
  */
 import { leafView } from "../composite.ts";
-import { contentStatus, familyOf, itemVersion, scoreCode, type ContentStatus } from "../content.ts";
-import { isIndependentProvenance, type CapabilityId, type CodeItem, type EvidenceEvent, type InterventionEvent, type LedgerEvent } from "../types.ts";
+import { contentStatus, itemVersion, scoreCode } from "../content.ts";
+import { isIndependentProvenance, type CapabilityId, type EvidenceEvent, type InterventionEvent, type LedgerEvent } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { analyses, essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
 import { engineClaim, type EssayContext } from "./competencies.ts";
+import { type BankItem, pickForRole } from "./allocation.ts";
 import { ESSAY_CONTRACT, type DiagnosticOutcome, type DiagnosticRequest, type EssayAnalysis, type EssayObservation, type GapHypothesis } from "./contract.ts";
 
 /** Analyses that count: accepted, and not a repeat of an essay already analysed. */
@@ -101,7 +102,6 @@ export function currentHypotheses(ectx: EssayContext, events: readonly LedgerEve
 
 // ---------------------------------------------------------------- diagnostic questions
 
-const STATUS_RANK: Record<ContentStatus, number> = { validated: 0, candidate: 1, provisional: 2, practice: 9 };
 
 /** Items the learner has met (answered or been shown). */
 export function seenItems(events: readonly LedgerEvent[]): Set<string> {
@@ -110,43 +110,25 @@ export function seenItems(events: readonly LedgerEvent[]): Set<string> {
   return items;
 }
 
-/** Items already set aside by a diagnostic request or a journey, so no question is used twice. */
+/** Items already set aside by a diagnostic request, a journey or a planned check, so no question is used twice. */
 export function reservedItems(events: readonly LedgerEvent[]): Set<string> {
   const r = new Set<string>();
   for (const { record } of essayRecords(events, "diagnostic")) for (const i of record.request.items) r.add(i.id);
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind !== "teach") for (const ref of s.content.refs) r.add(ref);
+  for (const { record } of essayRecords(events, "check")) for (const i of record.check.items) r.add(i.id);
   return r;
 }
 
-/**
- * Unseen, unreserved questions on one competency from the existing bank, best first: reviewed status, then
- * closeness to the target band. Generated items not yet checked by a person are never used. One per family.
- */
-export type BankItem = { kind: "code" } & CodeItem;
+export type { BankItem } from "./allocation.ts";
 
+/**
+ * Unseen, unreserved questions on one competency for diagnosis (allocation.ts): reviewed status first, then
+ * closeness to the target band, never a question kept back for independent verification or the delayed
+ * retention check. Generated items not yet checked by a person are never used. One per family.
+ */
 export function pickItems(ectx: EssayContext, events: readonly LedgerEvent[], capability: CapabilityId, n: number, exclude: Set<string> = new Set()): BankItem[] {
-  const seen = seenItems(events);
-  const reserved = reservedItems(events);
-  const seenFamilies = new Set<string>();
-  for (const id of seen) {
-    const it = ectx.ctx.content.items.get(id);
-    if (it) seenFamilies.add(familyOf(it));
-  }
-  const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? 5;
-  const pool = (ectx.ctx.content.byCapability.get(capability) ?? [])
-    .filter((i): i is BankItem => i.kind === "code")
-    .filter((i) => contentStatus(i) !== "practice" && !seen.has(i.id) && !reserved.has(i.id) && !exclude.has(i.id) && !seenFamilies.has(familyOf(i)))
-    .sort((a, b) => STATUS_RANK[contentStatus(a)] - STATUS_RANK[contentStatus(b)] || Math.abs(a.b - target) - Math.abs(b.b - target) || a.id.localeCompare(b.id));
-  const out: BankItem[] = [];
-  const families = new Set<string>();
-  for (const i of pool) {
-    if (out.length >= n) break;
-    if (families.has(familyOf(i))) continue;
-    families.add(familyOf(i));
-    out.push(i);
-  }
-  return out;
+  return pickForRole(ectx, events, capability, "diagnostic", n, { exclude });
 }
 
 /** Plan diagnostic questions for every current hypothesis that has none yet. Returns the events to append. */
@@ -223,7 +205,13 @@ export function diagnosticOutcome(ectx: EssayContext, events: readonly LedgerEve
   if (wrong >= p.confirmMinWrong)
     return { ...base, status: "confirmed", reason: `${wrong} of ${ind.length} answered without help were wrong${matches ? `, ${matches} with the same kind of mistake as the essay` : ""}: the essay's suggestion is supported.` };
   if (!allAnswered) return { ...base, status: "pending", reason: `${ind.length} of ${request.items.length} answered without help so far.` };
+  // Right answers can only rule out a gap at the grade target if at least one was on a question near it (within half a
+  // band): all right on easier questions leaves the suggestion unresolved (policy @1).
+  const target = ectx.profile.byCapability.get(request.competency)?.expectedBand ?? null;
+  const nearTarget = target === null || ind.some((a) => a.correct && (itemVersion(ectx.ctx.content, a.item, wanted.get(a.item)!)?.b ?? -Infinity) >= target - 0.5);
   const weakens = ind.length >= request.minIndependent && (p.weakenAllRight ? wrong === 0 : wrong < p.confirmMinWrong);
+  if (weakens && !nearTarget)
+    return { ...base, status: "unresolved", reason: `${right} of ${ind.length} answered without help were right, but every question was below the band ${target} target: that cannot rule out a gap at the target, so practice and a check at the target follow.` };
   if (weakens)
     return { ...base, status: "weakened", reason: `${right} of ${ind.length} answered without help were right: the essay's errors may have been slips. Not a claim of mastery.` };
   return {

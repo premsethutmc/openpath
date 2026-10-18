@@ -3,7 +3,7 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
+import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
@@ -593,7 +593,7 @@ export class Learner {
         item: { id: item.id, version: item.version },
         response,
         use: opts.use,
-        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY] },
+        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY, ASSISTED_POLICY] },
       };
       await this.add(ev);
     } else {

@@ -120,7 +120,8 @@ test("ESSAY-LIVE the critical acceptance path runs through the engine and the le
   assert.equal(blocked, 3, "no content for dependent prepositions: blocked, not invented");
   await completeSteps(page);
   const steps = await page.locator(`[data-tree="${SVA}"] [data-step]`).evaluateAll((els) => els.map((e) => `${e.dataset.step}:${e.dataset.status}`));
-  assert.deepEqual(steps, ["teach:done", "guided_practice:done", "independent_check:done"]);
+  // the pilot's confirmation pool has one question at the Grade 8 target: the check is blocked, not borrowed
+  assert.deepEqual(steps, ["teach:done", "guided_practice:done", "independent_check:blocked"]);
   assert.equal(await page.locator(`[data-node="${SVA}"]`).getAttribute("data-green"), "false", "below the grade target: never shown green");
   assert.equal(await stage(page), "rewrite");
 
