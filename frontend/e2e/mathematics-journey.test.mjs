@@ -349,3 +349,25 @@ test("one OpenPath account across English and Mathematics: same pupil, both reco
   await page.getByRole("button", { name: "Finish activity and save place", exact: true }).waitFor();
   await context.close();
 });
+test("JEE Main chapter: cards (no drop-downs), a class of lessons, answers saved to the account and resumed", async () => {
+  const { page, context } = await setup();
+  await page.goto(base + "/maths/");
+  await page.getByRole("heading", { name: "What are you preparing for?" }).waitFor();
+  assert.equal(await page.locator("select").count(), 0, "no drop-down menus");
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Quadratic Equations/ }).click();
+  // the class: lesson 1, one screen at a time, then its quick check
+  await page.getByText("Lesson 1 of 8").waitFor();
+  while (await page.getByRole("button", { name: "Next", exact: true }).count()) await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("button", { name: "Try it yourself" }).click();
+  await page.getByRole("radio").nth(2).click();
+  await page.getByRole("button", { name: "Check answer" }).click();
+  await page.getByRole("status").filter({ hasText: "Correct!" }).waitFor();
+  // reload: the account has the answer; the class continues at lesson 2
+  await page.reload();
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Quadratic Equations/ }).click();
+  await page.getByText("Lesson 2 of 8").waitFor();
+  assert.equal(await page.locator("select").count(), 0, "no drop-down menus in the class");
+  await context.close();
+});

@@ -83,7 +83,9 @@ http
       return;
     }
     let file = join(dist, path);
-    if (!file.startsWith(dist) || !existsSync(file) || statSync(file).isDirectory()) file = join(dist, "index.html");
+    // a folder with its own entry point (the mathematics home at /maths/) serves that; anything else is the English app
+    if (file.startsWith(dist) && path.length > 1 && path.endsWith("/") && existsSync(join(file, "index.html"))) file = join(file, "index.html");
+    else if (!file.startsWith(dist) || !existsSync(file) || statSync(file).isDirectory()) file = join(dist, "index.html");
     const served = "/" + file.slice(dist.length + 1).replace(/\\/g, "/");
     const extra = Object.assign({}, ...headerRules().filter((r) => matches(r.pattern, served)).map((r) => r.headers));
     response.writeHead(200, {
