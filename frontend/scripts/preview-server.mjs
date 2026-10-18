@@ -338,12 +338,15 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
     // the account API (Django in the same container): one origin, so its session cookie and CSRF checks stay first-party
     if (config.api && path.startsWith("/api/")) return forward(req, res);
     if (req.method !== "GET" && req.method !== "HEAD") return text(res, 405, "Method not allowed", { Allow: "GET" });
-    // the Tamil pilot keeps its own entry point; relative asset paths need the trailing slash
-    if (path === "/tamil") {
-      res.writeHead(301, { ...base(), Location: "/tamil/" });
-      return res.end();
+    // the Tamil pilot (/tamil/) and the mathematics home (/maths/) keep their own entry points; relative asset paths
+    // need the trailing slash
+    for (const entry of ["/tamil", "/maths"]) {
+      if (path === entry) {
+        res.writeHead(301, { ...base(), Location: `${entry}/${url.search}` });
+        return res.end();
+      }
+      if (path === `${entry}/`) return sendFile(res, req, join(dist, entry.slice(1), "index.html"));
     }
-    if (path === "/tamil/") return sendFile(res, req, join(dist, "tamil", "index.html"));
 
     // no account server in this demo: the app runs on this device only (as the static build does)
     if (path.startsWith("/api/")) {
