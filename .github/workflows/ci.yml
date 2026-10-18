@@ -392,3 +392,37 @@ jobs:
             tools/english/out/simulation-*
             tools/english/out/bank-coverage.*
           if-no-files-found: ignore
+
+  essay-learning-experience:
+    name: Essay UX fixtures and phone journey (no intelligence service)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run essay:test
+      - run: npm run english:build
+      - run: node scripts/build-english.mjs --pilot --out=dist-english-pilot
+      - run: npx playwright install --with-deps chromium
+      - name: Start existing English previews (development and reviewed pilot)
+        run: |
+          PORT=4190 nohup npm run english:preview > /tmp/essay-preview.log 2>&1 &
+          PORT=4191 DIST=dist-english-pilot nohup npm run english:preview > /tmp/essay-pilot-preview.log 2>&1 &
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4190/ -o /tmp/essay-index.html
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4191/ -o /tmp/essay-pilot-index.html
+      - run: npm run essay:e2e
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: essay-learning-phone-screenshots
+          path: docs/product/essay-learning/screenshots/
+          if-no-files-found: ignore

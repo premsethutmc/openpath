@@ -5,6 +5,8 @@
  * code runs on a learner's device, in the simulator and on the server.
  */
 
+import type { EssayRecord } from "./essay/contract.ts";
+
 export type CapabilityId = string;
 export type Tier = "skeleton" | "core" | "planned";
 
@@ -527,7 +529,20 @@ export interface RevokeEvent {
   reason: string;
 }
 
-export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent;
+/**
+ * Essay-to-mastery records (essay-contract@1, essay/contract.ts): submissions, validated essay observations,
+ * diagnostic requests, journeys and rewrites. Recorded in this ledger so one learner profile serves every
+ * essay; the updater never changes an estimate for them (essay observations are tentative by definition).
+ */
+export interface EssayEvent {
+  kind: "essay";
+  id: string;
+  at: string;
+  session: string;
+  record: EssayRecord;
+}
+
+export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent | EssayEvent;
 
 export type Verdict = "accepted" | "held" | "rejected" | "revoked" | "ignored";
 
