@@ -183,10 +183,11 @@ test("K9-2 the same journey with reviewed questions at the target band (test-onl
   assert.equal(o.demonstrated, true, `shown at the target without help: ${o.pending}`);
   // the delayed retention check: planned on reserved unseen questions, never offered early, then passed
   const shownAt = o.targetShownAt!;
-  // the delayed check at the target is still to come. (The engine's own verification status may already read
-  // "verified" here, because a later check came at least the delay after a LOWER level was first shown; the studio
-  // therefore labels mastery as verified only once the delayed check after the target was shown has passed.)
+  // the delayed check at the target is still to come. (The engine's own level-generic schedule may already read
+  // "verified" here, because a later check came at least the delay after a LOWER level was first shown; since
+  // policy @4 the essay claim uses the schedule anchored to the target, so it is not verified yet.)
   assert.equal(o.retention, "pending");
+  assert.equal(o.verified, false, "not verified before the delayed check after the target was shown");
   assert.equal(o.next?.kind, "retention");
   {
     const ret = planCheck(ectx, r.events, r.meta("plan"), PLU, st);
@@ -201,9 +202,11 @@ test("K9-2 the same journey with reviewed questions at the target band (test-onl
   }
   assert.equal(o.retention, "demonstrated", JSON.stringify(o));
   assert.equal(o.verified, true);
-  // verified only by the engine's own rule: shown, then kept on independent answers at least the delay later
-  const v = leafView(Ledger.rebuild(ectx.ctx, LEARNER, r.events).composite, ectx.ctx.index, PLU, r.now());
-  assert.ok(Date.parse(v.verification.verifiedAt!) - Date.parse(shownAt) >= ectx.policy.retentionDelayDays * DAY);
+  // verified only by the engine's own rule on the schedule anchored to the target (policy @4): shown at the target,
+  // then kept on independent answers at least the delay later
+  const v = leafView(Ledger.rebuild(ectx.ctx, LEARNER, r.events).composite, ectx.ctx.index, PLU, r.now(), { target: ectx.profile.byCapability.get(PLU)!.expectedBand });
+  assert.equal(v.atTarget!.retention.firstDemonstratedAt, shownAt);
+  assert.ok(Date.parse(v.atTarget!.verification.verifiedAt!) - Date.parse(shownAt) >= ectx.policy.retentionDelayDays * DAY);
   const p = essayProfile(ectx, LEARNER, r.events, r.now()).competencies.find((c) => c.competency === PLU)!;
   assert.equal(p.state, "verified");
   assert.equal(p.provenance.provisional.length, 0, "no generated question took part");

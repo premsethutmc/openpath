@@ -11,7 +11,7 @@
  *
  *   node --import tsx scripts/essay-pilot-journey.mts        writes docs/product/essay-learning/pilot-validation-v1/SYNTHETIC_JOURNEY.md
  */
-import { allocateItems, engineClaim, leafView, type Item, type LedgerEvent } from "../../../../../packages/english-core/src/index.ts";
+import { allocateItems, engineClaim, essayView, type Item, type LedgerEvent } from "../../../../../packages/english-core/src/index.ts";
 import { type AppContent } from "../content.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
@@ -124,7 +124,7 @@ export async function runPilotJourney(content: AppContent, start = "2026-10-19T0
     `Practice questions (answered rightly, with help available): ${practiced.map(desc).join(", ")}. Recorded as ${studio.events.filter((e) => e.kind === "assisted_response" && practiced.includes(e.item.id)).length} assisted responses (policy assisted@1), which never count as evidence of independent skill; independent evidence events for them: ${studio.events.filter((e) => e.kind === "evidence" && practiced.includes(e.item.id)).length}. Step status: \`${step("guided_practice")?.status}\`.`,
   ]);
   const t = Date.parse(clock());
-  const claim6 = engineClaim(studio.ectx, SVA, leafView(learner.state.ledger.composite, content.index, SVA, new Date(t).toISOString()));
+  const claim6 = engineClaim(studio.ectx, SVA, essayView(studio.ectx, learner.state.ledger.composite, SVA, new Date(t).toISOString()));
   const check = step("independent_check");
   add(6, "Demonstrate the skill independently", checked.length && claim6.level !== "none" ? "works" : "blocked", [
     `Independent check step: \`${check?.status}\`. ${check?.content.note ?? ""}`.trim(),
@@ -189,7 +189,7 @@ export async function runPilotJourney(content: AppContent, start = "2026-10-19T0
 
   const o = v.outcomes.find((x) => x.competency === SVA) ?? o7c!;
   const now = clock();
-  const finalClaim = engineClaim(studio.ectx, SVA, leafView(learner.state.ledger.composite, content.index, SVA, now));
+  const finalClaim = engineClaim(studio.ectx, SVA, essayView(studio.ectx, learner.state.ledger.composite, SVA, now));
   return {
     version: PILOT_JOURNEY_VERSION,
     start,

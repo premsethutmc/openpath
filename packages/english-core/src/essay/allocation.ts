@@ -143,7 +143,7 @@ export function usedItems(events: readonly LedgerEvent[]): Set<string> {
   for (const { record } of essayRecords(events, "diagnostic")) for (const i of record.request.items) used.add(i.id);
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind !== "teach") for (const ref of s.content.refs) used.add(ref);
-  for (const { record } of essayRecords(events, "check")) for (const i of record.check.items) used.add(i.id);
+  for (const { record } of essayRecords(events, "check")) for (const i of [...record.check.items.map((x) => x.id), ...(record.check.review?.practice ?? [])]) used.add(i);
   return used;
 }
 

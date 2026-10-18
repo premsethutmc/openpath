@@ -12,10 +12,8 @@
  * TEST-ONLY stand-ins for reviewed bank questions (never shipped).
  */
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import {
-  analyseEssay,
   applyDirect,
   type BankItem,
   binaryUpdate,
@@ -23,149 +21,17 @@ import {
   createComposite,
   createJourney,
   type EssayContext,
-  type EssayEvaluator,
-  ESSAY_OBSERVE_PROTOCOL_V2,
-  ESSAY_REWRITE_PROTOCOL_V2,
-  extendContent,
   gapHypotheses,
   journeyOutcomes,
   journeyStatus,
-  type LearningJourney,
-  type LedgerEvent,
-  Ledger,
   leafView,
   planCheck,
   planDiagnosticFor,
-  type Response,
-  retentionDue,
-  submitEssay,
 } from "../src/index.ts";
 import { loadAppEssayContext } from "../../../tools/english/essay-load.ts";
+import { DAY, ESSAY_2_CLEAN, ESSAY_2_ONE_ERROR, evaluator, FX, INFORMATIONS, journeyEvents, karthikDue, karthikShown, PLU, record, SVA, withExtra } from "./karthik-helpers.ts";
 import { loadContext } from "../../../tools/english/load.ts";
 
-const PLU = "EN.GRM.NOUN.plurals_countability";
-const SVA = "EN.GRM.VERB.sva";
-const LEARNER = "learner:k10";
-const DAY = 86_400_000;
-const T0 = Date.parse("2026-10-19T09:00:00.000Z");
-const FX = JSON.parse(readFileSync(new URL("../../../frontend/e2e/fixtures/essay-diagnostic-workflow.json", import.meta.url), "utf8")) as { essays: Record<string, { text: string; prompt: string }>; observations: Record<string, { competency: string; quote: string }[]> };
-
-// Essay 2 (synthetic): plurals right throughout; whether it carries one plural error is chosen per test
-const ESSAY_2_CLEAN =
-  "During the Pongal holidays we visited my grandmother's village near Melur. We cooked sweet pongal in two new clay pots outside the house. My cousins decorated the cows with bells and coloured horns. In the evening the children of the street drew kolams in front of every house. We went home tired but happy.";
-const ESSAY_2_ONE_ERROR =
-  "During the Pongal holidays we visited my grandmother's village near Melur. We cooked sweet pongal in two new clay pots outside the house. My cousins decorated the cows with bells and coloured horns. In the evening the children of the street drew kolams in front of every house. The village headman shared many informations about the old temple tank.";
-
-function evaluator(essay2Errors: unknown[]): EssayEvaluator {
-  return {
-    id: "openpath-gateway:llm",
-    version: "essay-llm@1",
-    model: "mock-model",
-    protocols: { observe: ESSAY_OBSERVE_PROTOCOL_V2, rewrite: ESSAY_REWRITE_PROTOCOL_V2 },
-    async observe(req) {
-      const observations = req.essay.id === "essay:1" ? FX.observations.karthik : essay2Errors;
-      return { essay_id: req.essay.id, rubric: req.rubric, observations, not_observable: [] };
-    },
-    async rewrite() {
-      throw new Error("not used");
-    },
-  };
-}
-const INFORMATIONS = [{ competency: PLU, kind: "error", quote: "many informations", explanation: "Information is uncountable: it has no plural form.", correction: "a lot of information", misconception: "plural_uncountable", confidence: "high", verification: "required", possible_slip: false }];
-
-/** TEST-ONLY stand-ins for reviewed plural questions at the target band (as in K9). */
-const extra: BankItem[] = Array.from({ length: 16 }, (_, k): BankItem => {
-  const b = 5 + (k % 6) * 0.25;
-  const common = { kind: "code" as const, id: `test.k10.${k + 1}`, version: 1, family: `test.k10.${k + 1}`, target: PLU, b, a: 1.2, prompt: `Test-only plural question ${k + 1}: the ___ were there.` };
-  return k % 2 ? { ...common, format: "choice:grammar", options: ["childs", "children", "childrens"], answer: 1 } : { ...common, format: "typed:cloze", answers: [`answer${k + 1}`] };
-});
-const withExtra = (): EssayContext => {
-  const base = loadAppEssayContext();
-  return { ...base, ctx: { ...base.ctx, content: extendContent(base.ctx.content, extra, base.ctx.index) } };
-};
-
-function record(ectx: EssayContext) {
-  const events: LedgerEvent[] = [];
-  let n = 0;
-  let t = T0;
-  const meta = (session = "s0") => ({ id: `k10:${++n}`, at: new Date((t += 60_000)).toISOString(), session });
-  const now = () => new Date(t).toISOString();
-  const days = (d: number) => void (t += d * DAY);
-  const item = (id: string) => ectx.ctx.content.items.get(id) as BankItem;
-  const respond = (it: BankItem, right: boolean): Response => {
-    const kind = it.format.split(":")[0];
-    if (kind === "typed") return { kind: "typed", text: right ? it.answers![0] : "zzzq" };
-    if (kind === "multi") return { kind: "multi", choices: right ? it.answer_set! : [0] };
-    return { kind: "choice", choice: right ? it.answer! : (it.answer! + 1) % it.options!.length };
-  };
-  const answer = (id: string, right: boolean, session: string) => {
-    const m = meta(session);
-    events.push({ kind: "evidence", id: m.id, at: m.at, session, item: { id, version: item(id).version }, response: respond(item(id), right), use: "assessment", provenance: { schema: "provenance@1", attempt: 1, hints: [], afterFeedback: false, policies: ["passage@1", "assisted@1"] } });
-  };
-  const practise = (id: string, session: string) => {
-    const m = meta(session);
-    events.push({ kind: "assisted_response", id: m.id, at: m.at, session, item: { id, version: item(id).version }, response: respond(item(id), true), attempt: 1, hints: [], afterFeedback: false });
-  };
-  const teach = (cap: string, lesson: string, session: string) => {
-    const m = meta(session);
-    events.push({ kind: "intervention", id: m.id, at: m.at, session, capability: cap, strategy: "lesson", content: lesson });
-  };
-  const essay = async (id: string, text: string, ev: EssayEvaluator, session: string) => {
-    events.push(submitEssay(ectx, events, meta(session), { essayId: id, learner: LEARNER, text, source: { kind: "typed", dataUse: "synthetic_test", prompt: FX.essays.karthik.prompt } }).event);
-    events.push((await analyseEssay(ectx, events, ev, id, meta(session))).event);
-  };
-  const view = (cap = PLU) => leafView(Ledger.rebuild(ectx.ctx, LEARNER, events).composite, ectx.ctx.index, cap, now());
-  return { events, meta, now, days, answer, practise, teach, essay, view };
-}
-
-/**
- * Karthik's first essay through to the target shown at band 5 without help (confirmed gap → lesson → practice →
- * journey check → later checks), on the test-only bank. Returns the record and the first journey.
- */
-async function karthikShown(essay2Errors: unknown[], earlyLowLevel = false) {
-  const ectx = withExtra();
-  const r = record(ectx);
-  const ev = evaluator(essay2Errors);
-  if (earlyLowLevel) {
-    // earlier practice in the app shows plurals at a LOW level: the engine's retention clock starts here
-    r.answer("grm.plu.01", true, "early");
-    r.answer("grm.plu.02", true, "early");
-    r.answer("grm.plu.03", true, "early");
-    r.answer("grm.plu.11", false, "early");
-    assert.ok(r.view().demonstrated !== null && r.view().demonstrated! < 5, "shown below the target first");
-    r.days(1);
-  }
-  await r.essay("essay:1", FX.essays.karthik.text, ev, "s0");
-  const h = gapHypotheses(ectx, r.events).find((x) => x.competency === PLU)!;
-  const d = planDiagnosticFor(ectx, r.events, h.id, r.meta());
-  r.events.push(d.event);
-  for (const i of d.request.items.slice(0, ectx.policy.confirmMinWrong)) r.answer(i.id, false, "s0");
-  assert.equal(gapHypotheses(ectx, r.events).find((x) => x.id === h.id)!.status, "confirmed");
-  r.days(0.01);
-  const j = createJourney(ectx, r.events, r.meta("s1"), "essay:1");
-  r.events.push(j.event);
-  const node = j.journey.trees.find((t) => t.root === PLU)!.nodes[0];
-  assert.equal(node.decision, "gap", "a confirmed gap is taught first (unchanged)");
-  assert.deepEqual(node.steps.map((x) => x.kind), ["teach", "guided_practice", "independent_check"]);
-  r.teach(PLU, node.steps[0].content.refs[0], "s1");
-  for (const id of node.steps[1].content.refs) r.practise(id, "s1");
-  r.days(1);
-  for (const id of node.steps[2].content.refs) r.answer(id, true, "s2");
-  let st = journeyStatus(ectx, r.events, j.journey.id, r.now());
-  let o = competencyOutcome(ectx, r.events, PLU, r.now(), st);
-  for (let k = 0; k < ectx.policy.followUpChecks && !o.demonstrated; k++) {
-    const p = planCheck(ectx, r.events, r.meta("plan"), PLU, st);
-    r.events.push(p.event);
-    r.days(Math.ceil((Date.parse(p.check.notBefore) - Date.parse(r.now())) / DAY) + 0.01);
-    for (const i of p.check.items) r.answer(i.id, true, `later${k}`);
-    st = journeyStatus(ectx, r.events, j.journey.id, r.now());
-    o = competencyOutcome(ectx, r.events, PLU, r.now(), st);
-  }
-  assert.equal(o.demonstrated, true, `Karthik shows the target without help: ${o.pending}`);
-  return { ectx, r, ev, first: j.journey };
-}
-
-const journeyEvents = (events: LedgerEvent[]) => events.filter((e) => e.kind === "essay" && e.record.type === "journey") as (LedgerEvent & { record: { journey: LearningJourney } })[];
 
 // ---------------------------------------------------------------- A1
 
@@ -230,16 +96,6 @@ test("K10-A2b an earlier gap that was never resolved is still carried to the nex
 
 // ---------------------------------------------------------------- A3/B1 (Karthik's retention journey)
 
-async function karthikDue() {
-  const s = await karthikShown(INFORMATIONS);
-  // no sitting until the engine's delayed check falls due
-  let k = 0;
-  while (s.r.view().verification.status !== "overdue" && k++ < 40) s.r.days(1);
-  const v = s.r.view();
-  assert.equal(v.verification.status, "overdue", "the engine's delayed check is due");
-  assert.ok(retentionDue(s.ectx, PLU, v), "a retention question, not a gap");
-  return s;
-}
 
 test("K10-A3 while the delayed check is due, the outcome asks for that check, never a fresh verification or teaching", async () => {
   const { ectx, r, first } = await karthikDue();
@@ -376,16 +232,21 @@ test("K10-B1d an essay retention check already planned is the same check: shared
   assert.ok(!j.trees.some((t) => t.nodes.some((n) => n.competency === PLU && n.steps[0]?.kind === "teach")));
 });
 
-test("K10-B1e the delayed check is planned when the target is shown; if the engine's own clock falls due first, the new journey waits for it", async () => {
+test("K10-B1e the delayed check is planned when the target is shown; before it is due a new essay neither asks nor teaches, and when due the journey asks its own questions", async () => {
   const { ectx, r, ev, first } = await karthikShown(INFORMATIONS, true);
   const p = planCheck(ectx, r.events, r.meta("plan"), PLU, journeyStatus(ectx, r.events, first.id, r.now()));
   r.events.push(p.event);
   assert.equal(p.check.kind, "retention");
-  let k = 0;
-  while (r.view().verification.status !== "overdue" && k++ < 40) r.days(0.5);
-if (Date.parse(r.now()) >= Date.parse(p.check.notBefore)) return; // this history's clocks agree: nothing to wait for
+  // policy @4: the target's own schedule and the planned check fall due together (the earlier low-level practice no
+  // longer starts a clock of its own), so there is never an engine due date ahead of the planned check
+  assert.equal(r.tview().atTarget!.retention.dueAt, p.check.notBefore);
+  r.days(2);
   await r.essay("essay:2", ESSAY_2_ONE_ERROR, ev, "e2");
   const j = createJourney(ectx, r.events, r.meta("e2"), "essay:2").journey;
   assert.ok(!j.trees.some((t) => t.nodes.some((n) => n.competency === PLU)), "no node: nothing is asked or taught before the planned check");
-  assert.match(j.skipped.find((s) => s.competency === PLU)!.reason, /already planned and not yet due/);
+  r.days((Date.parse(p.check.notBefore) - Date.parse(r.now())) / DAY + 0.01);
+  await r.essay("essay:3", `${ESSAY_2_ONE_ERROR} It rained in the evening.`, ev, "e3");
+  const node = createJourney(ectx, r.events, r.meta("e3"), "essay:3").journey.trees.find((t) => t.root === PLU)!.nodes[0];
+  assert.equal(node.decision, "retention_due");
+  assert.deepEqual(node.steps[0].content.refs, p.check.items.map((i) => i.id), "the planned check's own questions, never a second set");
 });

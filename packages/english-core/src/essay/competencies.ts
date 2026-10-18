@@ -4,7 +4,8 @@
 import { isSpecified, misconceptionIds, type FrameworkIndex } from "../framework.ts";
 import type { CapabilityId } from "../types.ts";
 import type { Context } from "../updater.ts";
-import type { LeafView, VerificationStatus } from "../composite.ts";
+import { leafView, type LeafView, type VerificationStatus } from "../composite.ts";
+import type { Composite } from "../types.ts";
 import type { CompetencyProfile, CompetencyRef, EssayPolicy, RubricTrait, WritingArea } from "./contract.ts";
 
 /** Draft values for review. None is a claim about what works for children. */
@@ -100,6 +101,17 @@ export interface EngineClaim {
 
 export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: LeafView): EngineClaim {
   const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
+  // retention timing (policy @4): with a target-anchored view, the schedule and "verified" start from the first
+  // demonstration AT the target; an earlier demonstration at a lower level is history and decides nothing here
+  const t = target !== null && v.atTarget?.band === target ? v.atTarget : null;
+  if (t && target !== null && t.verification.status !== "not_demonstrated") {
+    const status = t.verification.status;
+    const current = t.verification.currentLevel;
+    if (status === "overdue" || status === "failed")
+      return { level: "none", currentLevel: null, target, status, note: `shown at the band ${target} target on ${t.retention.firstDemonstratedAt?.slice(0, 10)}, but ${status === "overdue" ? "its delayed check is due and not yet taken" : "the latest delayed check did not show it was kept"}` };
+    if (current !== null && current >= target) return { level: status === "verified" ? "verified" : "demonstrated", currentLevel: current, target, status, note: null };
+    return { level: "none", currentLevel: current, target, status, note: `shown at the band ${target} target before, but the evidence now supports band ${current ?? "?"}` };
+  }
   const status = v.verification.status;
   const current = v.verification.currentLevel;
   const raw: EngineClaim["level"] = status === "verified" ? "verified" : status === "demonstrated" ? "demonstrated" : "none";
@@ -107,18 +119,41 @@ export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: Lea
   if (target === null) return { level: "none", currentLevel: current, target, status, note: "no grade target is set for this competency, so no claim is made" };
   if (current === null || current < target)
     return { level: "none", currentLevel: current, target, status, note: `the engine records ${status} at band ${current ?? "?"}, below the draft Grade ${ectx.profile.profile.grade} target of band ${target}` };
+  // (only without a target-anchored view: a caller that used plain leafView)
   return { level: raw, currentLevel: current, target, status, note: null };
+}
+
+/** The competency's grade target band, or null. */
+export const targetBand = (ectx: EssayContext, capability: CapabilityId): number | null => ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
+
+/**
+ * The engine's view for the essay layer: leafView with the retention schedule also anchored to the grade target
+ * (`atTarget`, policy @4). Every essay planner and outcome reads proficiency through this.
+ */
+export function essayView(ectx: EssayContext, composite: Composite, capability: CapabilityId, now: string): LeafView {
+  return leafView(composite, ectx.ctx.index, capability, now, { target: targetBand(ectx, capability) });
 }
 
 export const allowedTags =(ectx: EssayContext, capability: CapabilityId): Set<string> => misconceptionIds(ectx.ctx.index, capability);
 
 /**
- * Retention due (planner policy @3): the competency was shown at the grade target, and the engine's own delayed check
- * is now due (verification "overdue"). The engine withdraws the current claim until that check is taken; this is a
- * retention question, not evidence of a gap, so planners check before re-teaching. A failed check is not "due".
+ * Retention due (planner policy @3, timing @4): the competency was shown at the grade target, and the delayed check
+ * on the target-anchored schedule is now due (verification "overdue"). The current claim is withdrawn until that check
+ * is taken; this is a retention question, not evidence of a gap, so planners check before re-teaching. A failed check
+ * is not "due". Without a target-anchored view, the engine's own schedule is used (as in policy @3).
  */
 export function retentionDue(ectx: EssayContext, capability: CapabilityId, v: LeafView): boolean {
-  const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
-  if (target === null || v.verification.status !== "overdue") return false;
+  const target = targetBand(ectx, capability);
+  if (target === null) return false;
+  if (v.atTarget?.band === target) return v.atTarget.verification.status === "overdue";
+  if (v.verification.status !== "overdue") return false;
   return (v.retention.level ?? -Infinity) >= target || (v.verification.historicalLevel ?? -Infinity) >= target;
+}
+
+/** The target-anchored retention status: not shown at the target, current, overdue (due) or failed. */
+export function targetRetention(ectx: EssayContext, capability: CapabilityId, v: LeafView): { shownAt: string | null; status: VerificationStatus; dueAt: string | null } {
+  const target = targetBand(ectx, capability);
+  const t = target !== null && v.atTarget?.band === target ? v.atTarget : null;
+  if (!t) return { shownAt: null, status: "not_demonstrated", dueAt: null };
+  return { shownAt: t.retention.firstDemonstratedAt, status: t.verification.status, dueAt: t.retention.dueAt };
 }

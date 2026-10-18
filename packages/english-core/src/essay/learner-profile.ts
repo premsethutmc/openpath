@@ -5,11 +5,10 @@
  * claims (observed, suspected) come only from validated essay observations and stay tentative. The next essay
  * reads the same ledger, so it starts from everything already known.
  */
-import { leafView } from "../composite.ts";
 import { isIndependentProvenance, type CapabilityId, type EvidenceEvent, type LedgerEvent } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { analyses, essayRecords, submissions } from "./analysis.ts";
-import { engineClaim, type EssayContext } from "./competencies.ts";
+import { engineClaim, essayView, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyState, type CompetencyStatus, type EssayLearnerProfile, type ProfileUpdate } from "./contract.ts";
 import { countedAnalyses, currentHypotheses } from "./gaps.ts";
 import { formativeOutcomes } from "./questions.ts";
@@ -24,7 +23,7 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
   const formative = formativeOutcomes(ectx, events);
   const competencies: CompetencyStatus[] = ectx.profile.profile.competencies.map((ref) => {
     const cap = ref.capability;
-    const v = leafView(ledger.composite, ectx.ctx.index, cap, now);
+    const v = essayView(ectx, ledger.composite, cap, now);
     const obs = counted.flatMap((a) => a.observations.filter((o) => o.competency === cap));
     const errors = obs.filter((o) => o.kind === "error").length;
     const strengths = obs.filter((o) => o.kind === "strength").length;
@@ -41,8 +40,13 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
     if (claim.note) notes.push(`Not counted as shown: ${claim.note}.`);
     if (gap && gap.status !== "weakened" && RANK[state] >= RANK.demonstrated)
       notes.push(`The engine records this as ${state}, but essay evidence suggests a gap (${gap.status}): checked, not assumed either way.`);
-    if (v.verification.status === "overdue" || v.verification.status === "failed")
-      notes.push(`Shown earlier, but ${v.verification.status === "overdue" ? "a later check is overdue" : "the later check was not passed"}: not counted as shown now.`);
+    // retention timing (policy @4): the target's own schedule; an earlier, lower demonstration is reported as history
+    const t = v.atTarget;
+    if (t && t.verification.status === "not_demonstrated" && v.retention.firstDemonstratedAt && claim.target !== null)
+      notes.push(`Shown at band ${v.verification.historicalLevel ?? "?"} on ${v.retention.firstDemonstratedAt.slice(0, 10)}, below the band ${claim.target} target: history only, it does not start the target's delayed check.`);
+    const ver = t && t.verification.status !== "not_demonstrated" ? t.verification : t ? null : v.verification;
+    if (ver && (ver.status === "overdue" || ver.status === "failed") && !claim.note)
+      notes.push(`Shown earlier, but ${ver.status === "overdue" ? "a later check is overdue" : "the later check was not passed"}: not counted as shown now.`);
     if (errors === 1 && !gap) notes.push("One error in essays so far: it may be a slip.");
     if (gap?.status === "weakened") notes.push("The essay suggested a gap, but questions answered without help were right.");
     const f = formative.get(cap) ?? null;
