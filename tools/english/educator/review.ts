@@ -257,7 +257,8 @@ export function buildInventory(): Inventory {
     competencies: records.filter((r) => r.kind === "competency").length,
   };
   if (counts["proposed-supplement"] !== 96) discrepancies.push(`the brief states 96 proposed questions; the repository has ${counts["proposed-supplement"]}`);
-  if (counts["existing-for-review"] !== 181) discrepancies.push(`the brief states 181 existing questions for review; the repository rule gives ${counts["existing-for-review"]}`);
+  // 181 with profile @1 (the brief's figure); profile @2 adds Plurals and countability and its 8 bank questions
+  if (counts["existing-for-review"] !== 189) discrepancies.push(`expected 189 existing questions for review (181 in the brief, plus 8 on Plurals and countability, added in profile @2); the repository rule gives ${counts["existing-for-review"]}`);
   if (counts["pilot-additional"] > 0) discrepancies.push(`${counts["pilot-additional"]} further questions on the pilot competencies (practice, confirmation and retention pools) are not in the 181 but a pilot sequence would use them: added as "pilot-additional"`);
   const ids = q.map((r) => r.id);
   if (new Set(ids).size !== ids.length) discrepancies.push("duplicate question ids remain after deduplication");

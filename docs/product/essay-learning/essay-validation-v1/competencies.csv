@@ -3,6 +3,7 @@ EN.GRM.VERB.sva,Subject–verb agreement,grammar,yes
 EN.GRM.VERB.present_past_simple,Present and past simple,grammar,yes
 EN.GRM.VERB.aspect,Progressive and perfect aspect,grammar,yes
 EN.GRM.NOUN.articles,Articles,grammar,yes
+EN.GRM.NOUN.plurals_countability,Plurals and countability,grammar,no
 EN.WRT.ACC.grammar,Grammatical accuracy in writing,grammar,no
 EN.GRM.PREP.time_place,Prepositions of time and place,prepositions,yes
 EN.GRM.PREP.dependent,Dependent prepositions,prepositions,yes

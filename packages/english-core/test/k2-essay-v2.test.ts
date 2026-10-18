@@ -22,7 +22,7 @@ import {
 import { answer, codeItem, ectx, ESSAY_LIBRARY, ESSAY_STRONG, LEARNER, meta, REWRITE_GOOD, REWRITES, withoutEssays } from "./essay-helpers.ts";
 
 const SVA = "EN.GRM.VERB.sva";
-const RUBRIC = "openpath.g8-writing@1";
+const RUBRIC = "openpath.g8-writing@2";
 const REF = { id: "llm-test", version: "1", protocol: ESSAY_OBSERVE_PROTOCOL_V2, rubric: RUBRIC };
 const src = { kind: "synthetic" as const, dataUse: "synthetic_test" as const, prompt: "Write about a place in your school that matters to you." };
 const sub = (id = "essay:v2", text = ESSAY_LIBRARY) => submitEssay(ectx(), [], meta(0), { essayId: id, learner: LEARNER, text, source: src }).submission;

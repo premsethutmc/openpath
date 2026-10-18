@@ -12,6 +12,12 @@
  *   - Rewrite judgement: a recorded judgement for the built-in sample rewrite; any other rewrite is kept but
  *     not judged (held).
  *   - Real learners: refused. The studio works only with synthetic essays on a dedicated synthetic profile.
+ *
+ * With the server's evaluator connected (and able to write questions), the studio runs the essay-to-diagnostic
+ * workflow: the essay's suspected competencies are shown with their quotes; choosing one asks the server for five
+ * fresh questions, which the core checks (structure, answer key, duplicates) and records as provisional items; the
+ * answers inform the provisional profile through the existing diagnostic rules, and the engine holds every one of
+ * them, so no estimate moves and no mastery can follow from them. Without it, diagnostics come from the bank.
  */
 import {
   type CapabilityId,
@@ -38,7 +44,13 @@ import {
   type CompetencyProfile,
   type CompetencyOutcome,
   type PlannedCheck,
+  type NextActivity,
+  type QuestionSet,
   ESSAY_POLICY_DRAFT,
+  ESSAY_QUESTIONS_PROTOCOL,
+  generateDiagnostic,
+  questionSets,
+  recommendNext,
   EssayRefusal,
   analyseEssay,
   dueCheck,
@@ -118,7 +130,7 @@ export type AnalysedBy = "llm" | "replay" | "recorded" | "patterns";
  */
 export async function connectEvaluator(api: {
   essayEvaluatorStatus(): Promise<EssayGatewayInfo & { reason?: string }>;
-  essayEvaluate(body: { task: "observe" | "rewrite"; request: unknown; data_use: "synthetic_test" }): Promise<unknown>;
+  essayEvaluate(body: { task: "observe" | "rewrite" | "questions"; request: unknown; data_use: "synthetic_test" }): Promise<unknown>;
 }): Promise<EssayEvaluator | null> {
   try {
     const info = await api.essayEvaluatorStatus();
@@ -173,6 +185,12 @@ export interface StudioView {
    * apart so finishing the journey is never presented as mastery.
    */
   outcomes: CompetencyOutcome[];
+  /** Whether fresh diagnostic questions can be generated (the server's evaluator writes questions). */
+  canGenerate: boolean;
+  /** Every question-generation attempt, oldest first (accepted sets hold provisional questions). */
+  questionSets: QuestionSet[];
+  /** The next learning activity the record suggests. */
+  recommendation: NextActivity | null;
   /** Later checks planned on reserved questions (verification in a new sitting, retention after the delay). */
   checks: PlannedCheck[];
   /** A later check whose time has come, with its next question. Never offered before its notBefore time. */
@@ -181,7 +199,7 @@ export interface StudioView {
 
 export class EssayStudio {
   readonly learner: Learner;
-  readonly ectx: EssayContext;
+  private ectxCache: { content: AppContent; ectx: EssayContext } | null = null;
   /** The server's evaluator when connected (LLM or replay), else the local recorded samples and pattern stand-in. */
   readonly evaluator: EssayEvaluator;
   /** Used when the server's evaluator fails: the failure is recorded first, then this answers (and says so). */
@@ -189,9 +207,19 @@ export class EssayStudio {
 
   constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator()) {
     this.learner = learner;
-    this.ectx = essayContext(learner.content);
     this.fallback = fallback;
     this.evaluator = evaluator ?? fallback;
+  }
+
+  /** The essay context for the learner's current content (which grows when generated questions are recorded). */
+  get ectx(): EssayContext {
+    if (this.ectxCache?.content !== this.learner.content) this.ectxCache = { content: this.learner.content, ectx: essayContext(this.learner.content) };
+    return this.ectxCache.ectx;
+  }
+
+  /** The server's evaluator is connected and can write diagnostic questions. */
+  get canGenerate(): boolean {
+    return this.connected && typeof this.evaluator.questions === "function" && this.evaluator.protocols?.questions === ESSAY_QUESTIONS_PROTOCOL;
   }
 
   get connected(): boolean {
@@ -256,6 +284,9 @@ export class EssayStudio {
       rewrite,
       profile: essayProfile(this.ectx, this.learner.profileId, events, now),
       outcomes,
+      canGenerate: this.canGenerate,
+      questionSets: questionSets(events),
+      recommendation: recommendNext(this.ectx, events),
       checks: plannedChecks(events),
       laterCheck,
     };
@@ -271,7 +302,8 @@ export class EssayStudio {
 
   private nextDiagnostic(diagnostics: { request: DiagnosticRequest; outcome: DiagnosticOutcome }[]): StudioView["nextDiagnostic"] {
     for (const { request, outcome } of diagnostics) {
-      if (outcome.status !== "pending") continue;
+      // bank questions stop once the outcome is decided; all five generated questions are asked
+      if (outcome.status !== "pending" && request.source !== "generated") continue;
       const left = request.items.filter((i) => !this.answered(i.id));
       const item = left.length ? this.item(left[0].id) : undefined;
       if (item) return { request, item, position: request.items.length - left.length + 1, total: request.items.length };
@@ -318,10 +350,26 @@ export class EssayStudio {
       const [m3] = await this.learner.essayMeta(1);
       await this.learner.recordEssay((await analyseEssay(this.ectx, this.events, this.fallback, essayId, m3)).event);
     }
-    const metas = await this.learner.essayMeta(20);
-    const d = planDiagnostics(this.ectx, this.events, (n) => metas[n]);
-    if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
+    // with a question writer connected, the learner chooses a competency and fresh questions are written for it;
+    // otherwise diagnostic questions come from the bank at once
+    if (!this.canGenerate) {
+      const metas = await this.learner.essayMeta(20);
+      const d = planDiagnostics(this.ectx, this.events, (n) => metas[n]);
+      if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
+    }
     return this.view();
+  }
+
+  /**
+   * Five fresh diagnostic questions for one suspected competency, written by the server's evaluator and checked by
+   * the core. An attempt that fails the checks is recorded with its reasons and asks nothing; it can be tried again.
+   */
+  async generateQuestions(hypothesisId: string): Promise<{ set: QuestionSet; view: StudioView }> {
+    if (!this.canGenerate) throw new EssayRefusal("fresh questions need the server's evaluator (sign in with a developer account and open the studio with &evaluator=server)");
+    const [m1, m2] = await this.learner.essayMeta(2);
+    const g = await generateDiagnostic(this.ectx, this.events, this.evaluator, hypothesisId, [m1, m2]);
+    await this.learner.recordEssay(...g.events);
+    return { set: g.set, view: this.view() };
   }
 
   private essays(): EssaySubmission[] {

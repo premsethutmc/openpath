@@ -65,6 +65,8 @@ export function EssayLive() {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState<{ item: string; f: Feedback } | null>(null);
   const [lessonAnswer, setLessonAnswer] = useState<number | null>(null);
+  /** The last answer to a generated question was recorded (its result is shown only once all five are answered). */
+  const [recorded, setRecorded] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -109,12 +111,34 @@ export function EssayLive() {
   }
   async function answer(item: Item, r: Response, kind: "diagnostic" | "step" | "later") {
     if (!studio) return;
+    // generated diagnostic questions never reveal the answer while the learner is still answering
+    const generated = kind === "diagnostic" && view?.nextDiagnostic?.request.source === "generated";
     await act(async () => {
       const out = kind === "diagnostic" ? await studio.answerDiagnostic(r) : kind === "later" ? await studio.answerLaterCheck(r) : await studio.answerStep(r);
-      setFeedback({ item: item.id, f: out.feedback });
+      setFeedback(generated ? null : { item: item.id, f: out.feedback });
+      setRecorded(generated);
       return out.view;
     });
   }
+  async function generate(hypothesis: string) {
+    if (!studio) return;
+    await act(
+      async () => (await studio.generateQuestions(hypothesis)).view,
+      (nv) => {
+        setFeedback(null);
+        setRecorded(false);
+        if (nv.nextDiagnostic) setScreen("check");
+      },
+    );
+  }
+  /** The recommended next activity, as an action. */
+  function follow(kind: string) {
+    if (kind === "learn" || kind === "practise_and_check") void act(async () => (view?.journey && view.journey.essay === view.essay?.id ? view : await studio!.plan()), () => setScreen("path"));
+    else if (kind === "check_skill") setScreen("skills");
+    else if (kind === "answer_questions") setScreen("check");
+    else setScreen("essay");
+  }
+  const keyOf = (it: Item | undefined) => (it?.kind === "code" ? (it.options && it.answer !== undefined ? it.options[it.answer] : (it.answers?.[0] ?? "")) : "");
 
   const v = view;
   const essay = v?.essay;
@@ -127,6 +151,26 @@ export function EssayLive() {
     const s = status(cap);
     return <span className={`essay-status essay-status-${s}`} data-status={s}>{STATUS_LABELS[s]}</span>;
   };
+  const Recommendation = () =>
+    v?.recommendation ? (
+      <section className="essay-card essay-recommendation" data-recommendation={v.recommendation.kind} aria-label="What to do next">
+        <p className="kicker">Next</p>
+        <h2>{v.recommendation.title}</h2>
+        <p className="small">{v.recommendation.reason}</p>
+        {v.recommendation.history.length > 0 && (
+          <ul className="small" data-history>
+            {v.recommendation.history.map((h) => (
+              <li key={h}>Earlier essay {h}</li>
+            ))}
+          </ul>
+        )}
+        {v.recommendation.kind !== "check_skill" && (
+          <button className="primary essay-primary" disabled={busy} onClick={() => follow(v.recommendation!.kind)}>
+            {{ learn: "Start learning", practise_and_check: "Go to practice", answer_questions: "Back to the questions", write_again: "Write another essay" }[v.recommendation.kind as "learn"]}
+          </button>
+        )}
+      </section>
+    ) : null;
   const passage = (item: Item) => (item.kind === "code" && item.passage ? content.ctx.content.passages.get(item.passage) : undefined);
   const enabled = (s: Screen) => !!v && (s === "essay" || !!essay) && (s !== "rewrite" || !!v.journey?.finalRewrite.available) && (s !== "profile" || !!essay);
 
@@ -143,7 +187,7 @@ export function EssayLive() {
         <span>
           Synthetic essays only, on a test learner kept on this device. Questions, lessons and every status come from the real engine.{" "}
           {studio?.connected
-            ? `Essay analysis: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text is sent to the server.`
+            ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text and its quoted evidence are sent to the server. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
             : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
         </span>
       </aside>
@@ -221,22 +265,48 @@ export function EssayLive() {
               }{" "}
               {v.failedAnalyses.length > 0 && "The server's evaluator failed for this essay, so the local stand-in answered. "}One essay gives clues, not conclusions.
             </p>
-            <div className="essay-competencies">
+            <Recommendation />
+            <div className="essay-competencies" data-dashboard>
               {[...new Set(v.analysis?.observations.map((o) => o.competency) ?? [])].map((cap) => {
                 const obs = v.analysis!.observations.filter((o) => o.competency === cap);
+                const errors = obs.filter((o) => o.kind === "error");
                 const h = v.hypotheses.filter((x) => x.competency === cap).at(-1);
+                const asked = !!h && v.diagnostics.some((d) => d.request.hypothesis === h.id);
+                const sets = h ? v.questionSets.filter((q) => q.hypothesis === h.id) : [];
+                const failed = sets.at(-1)?.status === "rejected" ? sets.at(-1) : undefined;
                 return (
-                  <article className="essay-card" key={cap} data-competency={cap}>
+                  <article className="essay-card" key={cap} data-competency={cap} data-errors={errors.length}>
                     <div className="essay-card-heading">
                       <h2>{name(cap)}</h2>
                     </div>
                     <Status cap={cap} />
                     {h && <p data-gap={h.status}>{GAP[h.status]}</p>}
+                    <p className="small">
+                      {errors.length ? `${errors.length} thing${errors.length === 1 ? "" : "s"} to check` : "Done well"}
+                      {h && h.essays.length > 1 ? ` · also seen in ${h.essays.length - 1} earlier essay${h.essays.length === 2 ? "" : "s"}` : ""}
+                    </p>
+                    <ul className="essay-quotes">
+                      {obs.map((o) => (
+                        <li key={o.id} data-quote={o.span.quote}>
+                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                        </li>
+                      ))}
+                    </ul>
+                    {h && v.canGenerate && h.status === "suspected" && !asked && (
+                      <button type="button" className="essay-primary" data-generate={cap} disabled={busy} onClick={() => void generate(h.id)}>
+                        {failed ? "Try again: 5 new questions" : "Check this skill: 5 new questions"}
+                      </button>
+                    )}
+                    {failed && (
+                      <p className="small" role="status" data-questions-rejected>
+                        The questions written for this skill did not pass OpenPath&apos;s checks, so none is used: {[...failed.reasons, ...failed.rejected.flatMap((r) => r.reasons.map((x) => `question ${r.index + 1}: ${x}`))].slice(0, 3).join("; ")}.
+                      </p>
+                    )}
                     <details>
                       <summary>Why?</summary>
                       {obs.map((o) => (
                         <blockquote key={o.id}>
-                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                          “{o.span.quote}”: {o.note}
                         </blockquote>
                       ))}
                       {h && <p className="small">{h.basis.join(". ")}</p>}
@@ -253,14 +323,21 @@ export function EssayLive() {
         {v && screen === "check" && (
           <>
             {v.nextDiagnostic ? (
-              <section className="essay-card essay-diagnostic" data-diagnostic={v.nextDiagnostic.request.competency}>
+              <section className="essay-card essay-diagnostic" data-diagnostic={v.nextDiagnostic.request.competency} data-source={v.nextDiagnostic.request.source ?? "bank"}>
                 <p className="kicker">
-                  {name(v.nextDiagnostic.request.competency)} · question {v.nextDiagnostic.position} of up to {v.nextDiagnostic.total} · without help
+                  {name(v.nextDiagnostic.request.competency)} · question {v.nextDiagnostic.position} of {v.nextDiagnostic.request.source === "generated" ? "" : "up to "}
+                  {v.nextDiagnostic.total} · without help
                 </p>
+                {v.nextDiagnostic.request.source === "generated" && <p className="small">Written for you from your essay. Provisional: not reviewed by a teacher, and it never counts as showing the skill. Answers are shown at the end.</p>}
+                {recorded && (
+                  <p className="small" role="status" data-recorded>
+                    Answer recorded.
+                  </p>
+                )}
                 <ItemView key={v.nextDiagnostic.item.id} item={v.nextDiagnostic.item} passage={passage(v.nextDiagnostic.item)} voice={null} locked={busy} onSubmit={(r) => void answer(v.nextDiagnostic!.item, r, "diagnostic")} />
               </section>
             ) : (
-              <p className="essay-note">No questions are waiting.</p>
+              !v.diagnostics.some((d) => d.request.source === "generated") && <p className="essay-note">No questions are waiting.</p>
             )}
             {feedback && (
               <div className="essay-feedback" role="status" data-correct={feedback.f.correct}>
@@ -268,11 +345,37 @@ export function EssayLive() {
                 {feedback.f.explanation && <p className="small">{feedback.f.explanation}</p>}
               </div>
             )}
+            {v.diagnostics
+              .filter((d) => d.request.source === "generated" && !d.request.items.some((i) => !d.outcome.answers.some((a) => a.item === i.id)))
+              .map((d) => (
+                <section className="essay-card essay-results" key={d.request.id} data-results={d.request.competency} data-outcome-generated={d.outcome.status}>
+                  <h2>{name(d.request.competency)}: your answers</h2>
+                  <p>{d.outcome.reason}</p>
+                  <ol>
+                    {d.request.items.map((ref) => {
+                      const it = studio?.ectx.ctx.content.items.get(ref.id);
+                      const a = d.outcome.answers.find((x) => x.item === ref.id);
+                      return (
+                        <li key={ref.id} data-result-item={ref.id} data-correct={String(!!a?.correct)}>
+                          <span>{it?.kind === "code" ? it.prompt : ref.id}</span>
+                          <small>
+                            {a?.correct ? "Right" : "Not quite"} · answer: {keyOf(it)}
+                            {it?.kind === "code" && it.explain ? `. ${it.explain}` : ""}
+                          </small>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                  <p className="small">These answers are kept in your profile as provisional evidence (the questions were written by a model and not reviewed). They change the essay&apos;s suggestion, never your skill level.</p>
+                </section>
+              ))}
+            {!v.nextDiagnostic && <Recommendation />}
             <ul className="essay-profile-list">
               {v.diagnostics.map((d) => (
                 <li key={d.request.id} data-outcome={d.outcome.status}>
                   <span>{name(d.request.competency)}</span>
                   <span>{d.outcome.status === "pending" ? "In progress" : d.outcome.reason}</span>
+                  {d.request.source === "generated" && <small>Fresh questions (provisional)</small>}
                 </li>
               ))}
             </ul>
@@ -489,6 +592,8 @@ export function EssayLive() {
                     <li key={c.competency} data-profile={c.competency} data-state={c.state}>
                       <span>{c.name}</span>
                       <Status cap={c.competency} />
+                      {c.gap && <small data-profile-gap={c.gap.status}>{GAP[c.gap.status]}</small>}
+                      {c.provenance.held.length > 0 && <small data-held={c.provenance.held.length}>{c.provenance.held.length} answer{c.provenance.held.length === 1 ? "" : "s"} on provisional questions: kept, never counted as showing the skill</small>}
                       {c.notes.map((n) => (
                         <small key={n}>{n}</small>
                       ))}

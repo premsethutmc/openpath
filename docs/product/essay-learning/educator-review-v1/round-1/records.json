@@ -16,7 +16,7 @@
    "record": {
     "kind": "competency",
     "id": "EN.GRM.VERB.sva",
-    "version": 1,
+    "version": 2,
     "set": "grade8-profile",
     "name": "Subject–verb agreement",
     "area": "grammar",
@@ -585,7 +585,7 @@
    "record": {
     "kind": "competency",
     "id": "EN.GRM.VERB.present_past_simple",
-    "version": 1,
+    "version": 2,
     "set": "grade8-profile",
     "name": "Present and past simple",
     "area": "grammar",
@@ -1079,7 +1079,7 @@
    "record": {
     "kind": "competency",
     "id": "EN.GRM.NOUN.articles",
-    "version": 1,
+    "version": 2,
     "set": "grade8-profile",
     "name": "Articles",
     "area": "grammar",

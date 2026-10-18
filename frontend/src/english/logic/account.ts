@@ -245,7 +245,7 @@ export class Api {
     return this.request<EssayGatewayInfo & { reason: string; adapter: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/");
   }
   /** One essay evaluation through the server, which holds the provider credentials. Allows time for a model. */
-  essayEvaluate(body: { task: "observe" | "rewrite"; request: unknown; data_use: "synthetic_test" }) {
+  essayEvaluate(body: { task: "observe" | "rewrite" | "questions"; request: unknown; data_use: "synthetic_test" }) {
     return this.request<unknown>("POST", "/evaluation/essays/", body, 120_000);
   }
   claimDeveloper(code: string) {

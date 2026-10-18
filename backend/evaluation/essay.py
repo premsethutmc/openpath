@@ -1,6 +1,7 @@
 """The essay evaluator behind OpenPath's server (Essay Intelligence v2).
 
-The browser never calls a model provider: it sends an essay-observe.v2 or essay-rewrite.v2 request here, and this
+The browser never calls a model provider: it sends an essay-observe.v2, essay-rewrite.v2 or essay-questions.v1 request
+here (questions: fresh diagnostic questions for one suspected competency), and this
 view forwards it to the configured adapter, which holds the provider credentials (server environment only). The
 reply is returned raw; the core (packages/english-core/src/essay) validates it independently before anything is
 recorded, and no observation can change an estimate or verified mastery.
@@ -37,7 +38,11 @@ from .scrub import scrub_identifiers
 
 OBSERVE_V2 = "essay-observe.v2"
 REWRITE_V2 = "essay-rewrite.v2"
-RUBRICS = {"openpath.g8-writing@1"}
+QUESTIONS_V1 = "essay-questions.v1"
+# the current profile (@2 adds Plurals and countability); @1 requests are still accepted
+CURRENT_RUBRIC = "openpath.g8-writing@2"
+RUBRICS = {"openpath.g8-writing@1", CURRENT_RUBRIC}
+TASKS = ("observe", "rewrite", "questions")
 ADAPTERS = ("disabled", "replay", "llm")
 MAX_ESSAY_CHARS = 12_000
 MAX_REWRITE_CHARS = 2_000
@@ -45,6 +50,10 @@ FALLBACK = "the essay studio uses its recorded samples or the pattern stand-in"
 _FORBIDDEN = {"learner", "learner_id", "email", "phone", "school", "token", "user"}
 _OBSERVE_KEYS = {"protocol", "rubric", "prompt", "request_id", "essay", "grade", "competencies", "max_observations"}
 _REWRITE_KEYS = {"protocol", "rubric", "prompt", "request_id", "original", "rewrite", "dimensions"}
+_QUESTION_KEYS = {"protocol", "rubric", "request_id", "grade", "competency", "essay_evidence", "count", "formats", "avoid"}
+MAX_EVIDENCE = 12
+MAX_AVOID = 80
+MAX_SNIPPET_CHARS = 600
 
 # replaced in tests; never logs anything
 TRANSPORT = llm.urllib_transport
@@ -54,7 +63,7 @@ def _keys(value, path=()):
     if isinstance(value, dict):
         for k, v in value.items():
             # a competency's name is content, not identity
-            if not (k == "name" and path[:1] == ("competencies",)):
+            if not (k == "name" and path[:1] in (("competencies",), ("competency",))):
                 yield k
             yield from _keys(v, path + (k,))
     elif isinstance(value, list):
@@ -73,11 +82,11 @@ def _text(obj, field, limit):
 
 def validate_essay_request(task: str, req) -> tuple[dict, str]:
     """Check the shape, refuse anything identifying, remove contact details. Returns (request, judged text)."""
-    if task not in ("observe", "rewrite"):
-        raise ValidationError("task must be observe or rewrite")
+    if task not in TASKS:
+        raise ValidationError("task must be observe, rewrite or questions")
     if not isinstance(req, dict):
         raise ValidationError("request must be an object")
-    allowed, protocol = (_OBSERVE_KEYS, OBSERVE_V2) if task == "observe" else (_REWRITE_KEYS, REWRITE_V2)
+    allowed, protocol = {"observe": (_OBSERVE_KEYS, OBSERVE_V2), "rewrite": (_REWRITE_KEYS, REWRITE_V2), "questions": (_QUESTION_KEYS, QUESTIONS_V1)}[task]
     extra = set(req) - allowed
     if extra:
         raise ValidationError(f"unexpected fields: {sorted(extra)}")
@@ -103,6 +112,8 @@ def validate_essay_request(task: str, req) -> tuple[dict, str]:
             raise ValidationError("max_observations must be between 1 and 60")
         cleaned = {**req, "essay": {**essay, "text": scrub_identifiers(text)}}
         return cleaned, text
+    if task == "questions":
+        return _questions_request(req)
     original = _text(req.get("original"), "text", MAX_ESSAY_CHARS)
     rewrite = _text(req.get("rewrite"), "text", MAX_REWRITE_CHARS)
     cleaned = {
@@ -111,6 +122,37 @@ def validate_essay_request(task: str, req) -> tuple[dict, str]:
         "rewrite": {**req["rewrite"], "text": scrub_identifiers(rewrite)},
     }
     return cleaned, rewrite
+
+
+def _questions_request(req: dict) -> tuple[dict, str]:
+    comp = req.get("competency")
+    if not isinstance(comp, dict) or not isinstance(comp.get("id"), str) or not isinstance(comp.get("name"), str):
+        raise ValidationError("competency must be an object with an id and a name")
+    if not isinstance(comp.get("target_band"), (int, float)) or not 1 <= comp["target_band"] <= 8:
+        raise ValidationError("competency.target_band must be a band from 1 to 8")
+    if not isinstance(comp.get("bands"), dict) or not isinstance(comp.get("misconceptions"), list):
+        raise ValidationError("competency needs its bands and misconceptions")
+    n = req.get("count")
+    if not isinstance(n, int) or not 1 <= n <= 10:
+        raise ValidationError("count must be between 1 and 10")
+    formats = req.get("formats")
+    if not isinstance(formats, list) or not formats or not set(formats) <= {"choice", "typed"}:
+        raise ValidationError("formats must be a non-empty list of choice and typed")
+    evidence = req.get("essay_evidence")
+    if not isinstance(evidence, list) or len(evidence) > MAX_EVIDENCE:
+        raise ValidationError(f"essay_evidence must be a list of at most {MAX_EVIDENCE} quotes")
+    cleaned_evidence = []
+    for e in evidence:
+        if not isinstance(e, dict) or set(e) - {"quote", "correction", "explanation"}:
+            raise ValidationError("each essay_evidence entry has a quote, an optional correction and an explanation")
+        quote = _text(e, "quote", MAX_SNIPPET_CHARS)
+        cleaned_evidence.append({k: scrub_identifiers(v) if isinstance(v, str) else v for k, v in {**e, "quote": quote}.items()})
+    avoid = req.get("avoid")
+    if not isinstance(avoid, list) or len(avoid) > MAX_AVOID or not all(isinstance(a, str) and len(a) <= MAX_SNIPPET_CHARS for a in avoid):
+        raise ValidationError(f"avoid must be a list of at most {MAX_AVOID} short texts")
+    cleaned = {**req, "essay_evidence": cleaned_evidence}
+    # the judged text, for the fingerprint and size only (never stored): the essay evidence
+    return cleaned, "\n".join(e["quote"] for e in cleaned_evidence) or comp["id"]
 
 
 @lru_cache(maxsize=4)
@@ -173,7 +215,7 @@ class DeveloperOnly(AccountBase):
 class EssayEvaluatorStatusView(DeveloperOnly):
     def get(self, request):
         adapter, model, why = _adapter()
-        rubric = sorted(RUBRICS)[0]
+        rubric = CURRENT_RUBRIC
         return Response(
             {
                 "available": why is None,
@@ -183,7 +225,7 @@ class EssayEvaluatorStatusView(DeveloperOnly):
                 "version": settings.OPENPATH_ESSAY_EVALUATOR_VERSION,
                 "model": model,
                 "rubric": rubric,
-                "protocols": {"observe": OBSERVE_V2, "rewrite": REWRITE_V2},
+                "protocols": {"observe": OBSERVE_V2, "rewrite": REWRITE_V2, "questions": QUESTIONS_V1},
                 "synthetic_only": True,
             }
         )
@@ -228,9 +270,13 @@ class EssayEvaluationView(DeveloperOnly):
                 completion = llm.complete(_config(), _prompt(req["protocol"]), json.dumps(req, ensure_ascii=False), transport=TRANSPORT)
                 record.input_tokens, record.output_tokens = completion.input_tokens, completion.output_tokens
                 output = llm.extract_json(completion.text)
-            expected = req["essay"]["id"] if task == "observe" else req["rewrite"].get("id")
-            if output.get("essay_id" if task == "observe" else "rewrite_id") != expected:
-                raise llm.LLMError("the model's answer names a different essay or rewrite")
+            if task == "questions":
+                if output.get("request_id") != req["request_id"]:
+                    raise llm.LLMError("the model's answer names a different question request")
+            else:
+                expected = req["essay"]["id"] if task == "observe" else req["rewrite"].get("id")
+                if output.get("essay_id" if task == "observe" else "rewrite_id") != expected:
+                    raise llm.LLMError("the model's answer names a different essay or rewrite")
         except llm.LLMError as e:
             record.status, record.reason = "failed", str(e)[:200]
             record.latency_ms = int((time.monotonic() - started) * 1000)

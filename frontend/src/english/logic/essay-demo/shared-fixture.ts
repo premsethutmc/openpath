@@ -69,7 +69,7 @@ export function sharedFixture(
       prompt: "Should schools create more green spaces?",
       genre: "persuasive",
       grade: 8,
-      profile: "openpath.g8-writing@1",
+      profile: "openpath.g8-writing@2",
       dataUse: "synthetic_test",
     },
   };

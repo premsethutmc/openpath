@@ -62,8 +62,8 @@ class LLMConfig:
             p.append(f"provider must be one of {', '.join(PROVIDERS)}")
         if not self.model:
             p.append("a model name is required")
-        if not self.base_url.startswith("https://"):
-            p.append("base_url must be an https:// URL")
+        if not (self.base_url.startswith("https://") or _loopback(self.base_url)):
+            p.append("base_url must be an https:// URL (plain http only to this machine, e.g. a local mock provider)")
         if not self.api_key:
             p.append("an API key is required (set it in the server environment, never in code)")
         if not (1 <= self.max_output_tokens <= 16_000):
@@ -73,6 +73,14 @@ class LLMConfig:
         if not (0 <= self.retries <= 3):
             p.append("retries must be between 0 and 3")
         return p
+
+
+def _loopback(url: str) -> bool:
+    """Plain http is allowed only to this machine (127.0.0.1, localhost or ::1): nothing leaves it unencrypted."""
+    from urllib.parse import urlparse
+
+    u = urlparse(url)
+    return u.scheme == "http" and u.hostname in ("127.0.0.1", "localhost", "::1")
 
 
 @dataclass(frozen=True)

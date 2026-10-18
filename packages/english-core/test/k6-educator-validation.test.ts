@@ -19,9 +19,9 @@ import { toCsv } from "../../../tools/english/pilot/review.ts";
 const inv = buildInventory();
 const questions = inv.records.filter((r): r is QuestionRecord => r.kind === "question");
 
-test("K6-1 the package reconciles with the repository: 96 proposed + 181 existing, deduplicated, every field present", () => {
+test("K6-1 the package reconciles with the repository: 96 proposed + 189 existing (181 + 8 on plurals, profile @2), deduplicated, every field present", () => {
   assert.equal(inv.counts["proposed-supplement"], 96);
-  assert.equal(inv.counts["existing-for-review"], 181);
+  assert.equal(inv.counts["existing-for-review"], 189);
   assert.equal(new Set(questions.map((q) => q.id)).size, questions.length, "no duplicate question");
   assert.ok(inv.discrepancies.every((d) => /pilot-additional/.test(d)), inv.discrepancies.join("; "));
   for (const q of questions) {
@@ -30,7 +30,7 @@ test("K6-1 the package reconciles with the repository: 96 proposed + 181 existin
     if (q.set === "proposed-supplement") assert.match(q.evidence_status, /^provisional/);
   }
   assert.equal(inv.counts.lessons, 19);
-  assert.equal(inv.counts.competencies, 19);
+  assert.equal(inv.counts.competencies, 20);
 });
 
 test("K6-2 the committed package and essay-validation files are current", () => {

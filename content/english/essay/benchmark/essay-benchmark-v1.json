@@ -1,9 +1,9 @@
 {
  "id": "openpath.essay-benchmark",
  "version": 1,
- "rubric": "openpath.g8-writing@1",
+ "rubric": "openpath.g8-writing@2",
  "status": "synthetic",
- "provenance": "Essays and reference annotations written by the OpenPath development team (an AI assistant) for testing. They are NOT educator-validated: no teacher has reviewed them. Agreement with these annotations measures agreement with one synthetic reference, not with educators.",
+ "provenance": "Essays and reference annotations written by the OpenPath development team (an AI assistant) for testing. They are NOT educator-validated: no teacher has reviewed them. Agreement with these annotations measures agreement with one synthetic reference, not with educators. On 18 October 2026 the rubric was re-pointed to profile openpath.g8-writing@2, which adds Plurals and countability; no essay or annotation changed, and the essays were not re-annotated for plural errors.",
  "conventions": {
   "kind": "error = a genuine error a Grade 8 teacher would correct; style = a preference, not an error; strength = done clearly well",
   "optional": "an ambiguous or debatable annotation: matching it counts as agreement, missing it is not penalised",

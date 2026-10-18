@@ -83,7 +83,7 @@ test("K1-2 submissions: synthetic only until privacy policies are approved; too-
   assert.throws(() => submitEssay(ectx(), [], meta(0), { essayId: "e", learner: LEARNER, text: ESSAY_STRONG, source: { kind: "typed", dataUse: "real_learner" } }), EssayRefusal);
   assert.throws(() => submitEssay(ectx(), [], meta(0), { essayId: "e", learner: LEARNER, text: "Too short to analyse.", source: src }), /at least 30 words/);
   const s = submitEssay(ectx(), [], meta(0), { essayId: "e", learner: LEARNER, text: ESSAY_STRONG, source: src });
-  assert.equal(s.submission.source.profile, "openpath.g8-writing@1");
+  assert.equal(s.submission.source.profile, "openpath.g8-writing@2");
   assert.equal(s.submission.source.grade, 8);
   assert.equal(fingerprint(ESSAY_STRONG), fingerprint(`  ${ESSAY_STRONG.toUpperCase().replace(/ /g, "   ")}\n`));
   assert.notEqual(fingerprint(ESSAY_STRONG), fingerprint(ESSAY_SLIP));

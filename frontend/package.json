@@ -32,6 +32,7 @@
     "english:build:pilot": "node scripts/build-english.mjs --pilot",
     "english:build:preview": "node scripts/build-english.mjs --preview",
     "essay:test": "node --import tsx --test src/english/logic/essay-demo/*.test.ts src/english/logic/essay-live/*.test.ts",
+    "essay:e2e-diagnostic": "node --test e2e/essay-diagnostic.test.mjs",
     "essay:e2e": "node --test e2e/essay-learning.test.mjs e2e/essay-live.test.mjs"
   },
   "dependencies": {
