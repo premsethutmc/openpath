@@ -427,6 +427,13 @@ export interface RuleVector {
   name: string;
   /** Observed evidence: independent answers on new words (apply, contrast), help, practice, and which content they rest on. */
   evidence: { right: number; total: number; contrastRight: number; contrastTotal: number; withHelp: number; practice: number; provisional: number; validated: number; candidate: number };
+  /**
+   * Estimated ability on this rule, with its uncertainty: the production rule-evidence estimate (rule-evidence.ts
+   * RuleState.current), Beta(1 + right, 1 + wrong) over the latest independent answers on new words. Every
+   * independent journey answer updates it; guided practice, hints, retries, repeats and slips do not. It is an
+   * estimate, never a mastery decision: "demonstrated" and "verified" come from the evidence rules, not from it.
+   */
+  estimate: { right: number; total: number; mean: number; range80: [number, number]; source: "rule-evidence-policy@0-draft" };
   /** Demonstrated understanding: the rule's status from independent answers on new words. */
   demonstrated: "not_yet" | "emerging" | "shown" | "shown_kept";
   /** Provisional progression: the child may move on (screened right, or shown on provisional questions). Never a mastery claim. */
@@ -437,8 +444,13 @@ export interface RuleVector {
 }
 
 export interface LearningVector {
-  /** Estimated ability and uncertainty: the production model's capability estimate (composite@1), unchanged by the journey's provisional answers. */
-  ability: { capability: string; mean: number; sd: number; band: string; source: "composite@1" };
+  /**
+   * The capability-level band estimate (composite@1). The journey's answers do not move it: its updater holds answers
+   * on provisional (unreviewed) and unchecked generated questions, because their difficulty is a feature estimate, not
+   * calibrated (content-validation gate, decision 3 of 12 October 2026). Each rule's own estimate (RuleVector.estimate)
+   * does update. `held` says why this one does not.
+   */
+  ability: { capability: string; mean: number; sd: number; band: string; source: "composite@1"; held: string };
   /** The research ability estimator (v0.5) is not integrated: off, and nothing reads it. */
   experimental: { enabled: false; note: string };
   rules: RuleVector[];
@@ -449,7 +461,7 @@ export function learningVector(s: AppState, c: AppContent, now: string, policy: 
   const v = leafView(s.ledger.composite, c.index, c.spelling.capability, now);
   const touched = new Set(s.events.map((e) => ruleOfEvent(c, e)).filter(Boolean) as string[]);
   return {
-    ability: { capability: c.spelling.capability, mean: v.mean, sd: v.sd, band: `${(v.mean - 2 * v.sd).toFixed(1)}–${(v.mean + 2 * v.sd).toFixed(1)}`, source: "composite@1" },
+    ability: { capability: c.spelling.capability, mean: v.mean, sd: v.sd, band: `${(v.mean - 2 * v.sd).toFixed(1)}–${(v.mean + 2 * v.sd).toFixed(1)}`, source: "composite@1", held: "journey questions are provisional and their difficulty is uncalibrated, so the capability band is not moved by them (content-validation gate); each rule's estimate is" },
     experimental: { enabled: false, note: "The v0.5 research estimator is not part of the app: it needs a parity-tested port and real-learner calibration first (openpath-research docs/INTEGRATION_V0.5.md)." },
     rules: c.spelling.order.map((rule) => {
       const r = states.get(rule)!;
@@ -482,6 +494,7 @@ export function learningVector(s: AppState, c: AppContent, now: string, policy: 
           validated: r.evidenceBasis.validated,
           candidate: r.evidenceBasis.candidate,
         },
+        estimate: { right: r.current.right, total: r.current.total, mean: r.current.mean, range80: r.current.range80, source: "rule-evidence-policy@0-draft" },
         demonstrated,
         provisional,
         verified: countsAsVerified(r),
@@ -494,7 +507,7 @@ export function learningVector(s: AppState, c: AppContent, now: string, policy: 
 // ------------------------------------------------------------------ the parent summary
 
 export interface SpellingJourneyReport {
-  rules: { rule: string; name: string; skill: string; status: string; mistakes: string[]; help: string | null; nextCheck: string | null }[];
+  rules: { rule: string; name: string; skill: string; status: string; estimate: string | null; mistakes: string[]; help: string | null; nextCheck: string | null }[];
   provisional: string;
 }
 
@@ -522,7 +535,9 @@ export function spellingJourneyReport(s: AppState, c: AppContent, now: string): 
       const rj = c.spelling.rules.get(rv.rule)!;
       const mistakes = r.misconceptions.filter((m) => m.state === "active" || m.state === "improving").map((m) => `${TAG_TEXT[m.tag] ?? m.tag.replace(/_/g, " ")} (${m.errors.length} times, on different words, without help)`);
       const status = rv.provisional === "moved_on" && rv.demonstrated === "shown" ? `${PARENT_STATUS.moved_on}${rv.nextCheck ? ` Next check from ${rv.nextCheck.slice(0, 10)}.` : ""}` : PARENT_STATUS[rv.provisional];
-      return { rule: rv.rule, name: rv.name, skill: rj.skill, status, mistakes, help: rv.provisional === "paused" ? "Optional: work through a few words together." : null, nextCheck: rv.nextCheck };
+      const e = rv.estimate;
+      const estimate = e.total ? `On their own: ${e.right} of ${e.total} new words right (likely ${Math.round(e.range80[0] * 10)}–${Math.round(e.range80[1] * 10)} in 10, an estimate from few answers).` : null;
+      return { rule: rv.rule, name: rv.name, skill: rj.skill, status, estimate, mistakes, help: rv.provisional === "paused" ? "Optional: work through a few words together." : null, nextCheck: rv.nextCheck };
     }),
     provisional: "The words, lessons and hints are provisional: generated by rule from licensed word lists, not yet reviewed by an educator. This is a record of what happened, not a mastery certificate.",
   };

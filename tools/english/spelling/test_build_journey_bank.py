@@ -16,7 +16,7 @@ wb = jb.wb
 # CMUdict pronunciations, enough for the cases below
 P = {"hop": "HH AA1 P", "jump": "JH AH1 M P", "rain": "R EY1 N", "begin": "B IH0 G IH1 N", "visit": "V IH1 Z AH0 T",
      "agree": "AH0 G R IY1", "make": "M EY1 K", "play": "P L EY1", "cry": "K R AY1", "box": "B AA1 K S", "book": "B UH1 K",
-     "travel": "T R AE1 V AH0 L", "panic": "P AE1 N IH0 K", "tie": "T AY1", "happy": "HH AE1 P IY0"}
+     "travel": "T R AE1 V AH0 L", "panic": "P AE1 N IH0 K", "tie": "T AY1", "happy": "HH AE1 P IY0", "reveal": "R IH0 V IY1 L", "feel": "F IY1 L"}
 
 
 def classify(base, infl, suffix):
@@ -24,7 +24,8 @@ def classify(base, infl, suffix):
 
 
 def contrast(base, infl, suffix):
-    return jb.contrast_of(base, infl, suffix, wb.syllables(P[base]))
+    got = jb.contrast_of(base, infl, suffix, wb.syllables(P[base]))
+    return got[0] if got else None
 
 
 class Patterns(unittest.TestCase):
@@ -53,6 +54,13 @@ class Patterns(unittest.TestCase):
         self.assertEqual(contrast("play", "played", "ed"), ("y_to_i", "plaied"))
         self.assertEqual(contrast("cry", "crying", "ing"), ("y_to_i", "criing"))
         self.assertEqual(contrast("book", "books", "s"), ("es_plural", "bookes"))
+
+    def test_final_l_contrast_for_the_tricky_endings(self):
+        self.assertEqual(contrast("reveal", "revealed", "ed"), ("exceptions", "revealled"))
+        both = jb.contrast_of("feel", "feeling", "ing", 1)
+        self.assertIn(("double_short", "feelling"), both)
+        self.assertIn(("exceptions", "feelling"), both)
+        self.assertEqual(jb.CONTRAST_TAG["exceptions"], "over_doubling")
 
     def test_not_contrasts(self):
         self.assertIsNone(contrast("hop", "hopping", "ing"))  # changes: an apply word, not a contrast

@@ -2,7 +2,16 @@
   "review": "candidate-unvalidated",
   "note": "The adaptive spelling journey across the eight inflection rules (EN.FND.SPL.inflections). Lessons, hints and mistake explanations are provisional: written for OpenPath from the existing lessons (lessons.json) and the doubling journey, not yet reviewed by an educator. The words come from content/english/spelling/journey-words.json (built by tools/english/spelling/build_journey_bank.py). Hint templates use {base}, {ending}, {word}, {last} and {stem}; the last hint level of every strategy is a worked example that shows the answer and is recorded as such. Mistake explanations are shown only when the typed answer is exactly the misspelling the rule predicts; any other wrong answer gets a neutral explanation that names no misconception.",
   "capability": "EN.FND.SPL.inflections",
-  "order": ["plain", "es_plural", "double_short", "drop_e", "y_to_i", "stress_doubling", "no_double_unstressed", "exceptions"],
+  "order": [
+    "plain",
+    "es_plural",
+    "double_short",
+    "drop_e",
+    "y_to_i",
+    "stress_doubling",
+    "no_double_unstressed",
+    "exceptions"
+  ],
   "rules": {
     "plain": {
       "child": "Adding endings",
@@ -13,22 +22,51 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "Just add the ending",
-            "steps": ["Most words just take the ending.", "The base word does not change: look → looks, looked, looking."],
-            "examples": [{ "text": "kick → kicks, kicked, kicking" }, { "text": "help → helps, helped, helping" }],
+            "steps": [
+              "Most words just take the ending.",
+              "The base word does not change: look → looks, looked, looking."
+            ],
+            "examples": [
+              {
+                "text": "kick → kicks, kicked, kicking"
+              },
+              {
+                "text": "help → helps, helped, helping"
+              }
+            ],
             "tip": "Say the base word first, then add the ending you hear."
           },
-          "hints": ["Write {base} first, exactly as it is.", "Now add {ending} to the end. Nothing else changes.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Write {base} first, exactly as it is.",
+            "Now add {ending} to the end. Nothing else changes.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         },
         {
           "id": "word_building",
           "name": "Build the word in parts",
           "lesson": {
             "title": "Two parts",
-            "steps": ["Part 1: the base word (paint).", "Part 2: the ending (-ing).", "Put them together: paint + ing = painting."],
-            "examples": [{ "text": "jump + ing = jumping" }, { "text": "rain + ed = rained" }],
+            "steps": [
+              "Part 1: the base word (paint).",
+              "Part 2: the ending (-ing).",
+              "Put them together: paint + ing = painting."
+            ],
+            "examples": [
+              {
+                "text": "jump + ing = jumping"
+              },
+              {
+                "text": "rain + ed = rained"
+              }
+            ],
             "tip": "Check: can you still see the whole base word?"
           },
-          "hints": ["Split it: {base} | {ending}.", "Keep every letter of {base}, then add {ending}.", "Worked example (this shows the answer): {base} | {ending} = {word}."]
+          "hints": [
+            "Split it: {base} | {ending}.",
+            "Keep every letter of {base}, then add {ending}.",
+            "Worked example (this shows the answer): {base} | {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {}
@@ -42,22 +80,59 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "When to write -es",
-            "steps": ["Words ending in s, x, z, ch or sh add -es.", "You can hear the extra syllable: fox → foxes, catch → catches.", "Other words just add -s: book → books."],
-            "examples": [{ "text": "dress → dresses" }, { "text": "brush → brushes", "note": "you can hear 'brush-iz'" }, { "text": "book → books", "note": "no extra syllable: just -s" }],
+            "steps": [
+              "Words ending in s, x, z, ch or sh add -es.",
+              "You can hear the extra syllable: fox → foxes, catch → catches.",
+              "Other words just add -s: book → books."
+            ],
+            "examples": [
+              {
+                "text": "dress → dresses"
+              },
+              {
+                "text": "brush → brushes",
+                "note": "you can hear 'brush-iz'"
+              },
+              {
+                "text": "book → books",
+                "note": "no extra syllable: just -s"
+              }
+            ],
             "tip": "If you can hear an extra 'iz' sound at the end, write -es."
           },
-          "hints": ["Look at the last letters of {base}. Is it s, x, z, ch or sh?", "Say it: can you hear an extra 'iz' at the end?", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Look at the last letters of {base}. Is it s, x, z, ch or sh?",
+            "Say it: can you hear an extra 'iz' at the end?",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         },
         {
           "id": "sound_first",
           "name": "Listen for the extra syllable",
           "lesson": {
             "title": "Count the beats",
-            "steps": ["Clap the base word: box (1 beat).", "Clap the new word: box-es (2 beats).", "An extra beat means -es. No extra beat means -s."],
-            "examples": [{ "text": "wish → wish-es", "note": "2 beats: -es" }, { "text": "cat → cats", "note": "still 1 beat: -s" }],
+            "steps": [
+              "Clap the base word: box (1 beat).",
+              "Clap the new word: box-es (2 beats).",
+              "An extra beat means -es. No extra beat means -s."
+            ],
+            "examples": [
+              {
+                "text": "wish → wish-es",
+                "note": "2 beats: -es"
+              },
+              {
+                "text": "cat → cats",
+                "note": "still 1 beat: -s"
+              }
+            ],
             "tip": "The extra beat needs the e to make a sound."
           },
-          "hints": ["Clap {word}. How many beats?", "An extra beat after {base}? Then you need -es.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Clap {word}. How many beats?",
+            "An extra beat after {base}? Then you need -es.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
@@ -83,22 +158,56 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "Dropping the silent e",
-            "steps": ["Does the word end in a silent e? (make, ride)", "Drop the e before -ing: make → making.", "But keep ee, ye and oe: agree → agreeing, see → seeing."],
-            "examples": [{ "text": "ride → riding" }, { "text": "dance → dancing" }, { "text": "agree → agreeing", "note": "ee stays" }],
+            "steps": [
+              "Does the word end in a silent e? (make, ride)",
+              "Drop the e before -ing: make → making.",
+              "But keep ee, ye and oe: agree → agreeing, see → seeing."
+            ],
+            "examples": [
+              {
+                "text": "ride → riding"
+              },
+              {
+                "text": "dance → dancing"
+              },
+              {
+                "text": "agree → agreeing",
+                "note": "ee stays"
+              }
+            ],
             "tip": "The i in -ing does the e's job, so the e is not needed."
           },
-          "hints": ["Does {base} end in a silent e?", "Take the e off, then add the ending: {stem} + {ending}.", "Worked example (this shows the answer): {base} without its e is {stem}; {stem} + {ending} = {word}."]
+          "hints": [
+            "Does {base} end in a silent e?",
+            "Take the e off, then add the ending: {stem} + {ending}.",
+            "Worked example (this shows the answer): {base} without its e is {stem}; {stem} + {ending} = {word}."
+          ]
         },
         {
           "id": "word_building",
           "name": "Swap the e",
           "lesson": {
             "title": "Swap the e for the ending",
-            "steps": ["Write the base word: hope.", "Rub out the silent e: hop_.", "Add the ending: hoping."],
-            "examples": [{ "text": "smile → smil + ing = smiling" }, { "text": "write → writ + ing = writing" }],
+            "steps": [
+              "Write the base word: hope.",
+              "Rub out the silent e: hop_.",
+              "Add the ending: hoping."
+            ],
+            "examples": [
+              {
+                "text": "smile → smil + ing = smiling"
+              },
+              {
+                "text": "write → writ + ing = writing"
+              }
+            ],
             "tip": "Only the silent e goes. A double ee stays: free → freeing."
           },
-          "hints": ["Write {base}. Which letter is silent?", "Swap the silent e for {ending}.", "Worked example (this shows the answer): {base} → {stem} + {ending} = {word}."]
+          "hints": [
+            "Write {base}. Which letter is silent?",
+            "Swap the silent e for {ending}.",
+            "Worked example (this shows the answer): {base} → {stem} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
@@ -115,22 +224,62 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "Changing y to i",
-            "steps": ["Does the word end in a consonant + y? (carry, happy)", "Change the y to i before -ed, -er, -est or -es: carried, happier, ladies.", "Keep the y before -ing (crying) and after a vowel (play → played)."],
-            "examples": [{ "text": "fry → fried" }, { "text": "busy → busier" }, { "text": "play → played", "note": "a vowel before the y: keep it" }],
+            "steps": [
+              "Does the word end in a consonant + y? (carry, happy)",
+              "Change the y to i before -ed, -er, -est or -es: carried, happier, ladies.",
+              "Keep the y before -ing (crying) and after a vowel (play → played)."
+            ],
+            "examples": [
+              {
+                "text": "fry → fried"
+              },
+              {
+                "text": "busy → busier"
+              },
+              {
+                "text": "play → played",
+                "note": "a vowel before the y: keep it"
+              }
+            ],
             "tip": "Never two i's together: cry → crying, not criing."
           },
-          "hints": ["Look at the letter before the y in {base}. Vowel or consonant?", "A consonant before the y: change y to i, unless the ending is -ing.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Look at the letter before the y in {base}. Vowel or consonant?",
+            "A consonant before the y: change y to i, unless the ending is -ing.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         },
         {
           "id": "sort_first",
           "name": "Sort first",
           "lesson": {
             "title": "Sort, then spell",
-            "steps": ["Sort: vowel + y (play, enjoy) or consonant + y (carry, try)?", "Vowel + y: just add the ending.", "Consonant + y: y becomes i, except before -ing."],
-            "examples": [{ "text": "enjoy → enjoyed", "note": "o + y: keep" }, { "text": "try → tried", "note": "r + y: change" }, { "text": "try → trying", "note": "-ing: keep" }],
+            "steps": [
+              "Sort: vowel + y (play, enjoy) or consonant + y (carry, try)?",
+              "Vowel + y: just add the ending.",
+              "Consonant + y: y becomes i, except before -ing."
+            ],
+            "examples": [
+              {
+                "text": "enjoy → enjoyed",
+                "note": "o + y: keep"
+              },
+              {
+                "text": "try → tried",
+                "note": "r + y: change"
+              },
+              {
+                "text": "try → trying",
+                "note": "-ing: keep"
+              }
+            ],
             "tip": "Two quick questions: what is before the y, and is the ending -ing?"
           },
-          "hints": ["Sort {base}: vowel + y, or consonant + y?", "Now check the ending: is it -ing?", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Sort {base}: vowel + y, or consonant + y?",
+            "Now check the ending: is it -ing?",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
@@ -147,22 +296,57 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "Listen for the strong beat",
-            "steps": ["Say the word and find the strongest syllable.", "Strong beat at the END and one vowel + one consonant? Double: be-GIN → beginning.", "Strong beat at the START? Do not double: VIS-it → visited."],
-            "examples": [{ "text": "admit → admitted", "note": "ad-MIT" }, { "text": "regret → regretting" }, { "text": "visit → visited", "note": "VIS-it: no double" }],
+            "steps": [
+              "Say the word and find the strongest syllable.",
+              "Strong beat at the END and one vowel + one consonant? Double: be-GIN → beginning.",
+              "Strong beat at the START? Do not double: VIS-it → visited."
+            ],
+            "examples": [
+              {
+                "text": "admit → admitted",
+                "note": "ad-MIT"
+              },
+              {
+                "text": "regret → regretting"
+              },
+              {
+                "text": "visit → visited",
+                "note": "VIS-it: no double"
+              }
+            ],
             "tip": "Say the word aloud and listen for which syllable is strongest."
           },
-          "hints": ["Say {base}. Which syllable is strongest?", "The strong beat is at the end, so the {last} doubles.", "Worked example (this shows the answer): {base} + {last} + {ending} = {word}."]
+          "hints": [
+            "Say {base}. Which syllable is strongest?",
+            "The strong beat is at the end, so the {last} doubles.",
+            "Worked example (this shows the answer): {base} + {last} + {ending} = {word}."
+          ]
         },
         {
           "id": "clap_it",
           "name": "Clap the beat",
           "lesson": {
             "title": "Clap and spell",
-            "steps": ["Clap the word, making the strong syllable loud.", "Loud clap last? The last letter doubles.", "Loud clap first? Just add the ending."],
-            "examples": [{ "text": "for-GET → forgetting" }, { "text": "OF-fer → offered" }],
+            "steps": [
+              "Clap the word, making the strong syllable loud.",
+              "Loud clap last? The last letter doubles.",
+              "Loud clap first? Just add the ending."
+            ],
+            "examples": [
+              {
+                "text": "for-GET → forgetting"
+              },
+              {
+                "text": "OF-fer → offered"
+              }
+            ],
             "tip": "Compare preFER → preferred with OFfer → offered."
           },
-          "hints": ["Clap {base}. Loud clap first or last?", "Loud clap last: double the {last}.", "Worked example (this shows the answer): {base} + {last} + {ending} = {word}."]
+          "hints": [
+            "Clap {base}. Loud clap first or last?",
+            "Loud clap last: double the {last}.",
+            "Worked example (this shows the answer): {base} + {last} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
@@ -179,22 +363,57 @@
           "name": "Rule and examples",
           "lesson": {
             "title": "When not to double",
-            "steps": ["Say the word and find the strongest syllable.", "Strong beat at the START? Do not double: OP-en → opening.", "Strong beat at the END? Double: be-GIN → beginning."],
-            "examples": [{ "text": "happen → happened", "note": "HAP-pen" }, { "text": "cover → covering" }, { "text": "prefer → preferred", "note": "pre-FER: double" }],
+            "steps": [
+              "Say the word and find the strongest syllable.",
+              "Strong beat at the START? Do not double: OP-en → opening.",
+              "Strong beat at the END? Double: be-GIN → beginning."
+            ],
+            "examples": [
+              {
+                "text": "happen → happened",
+                "note": "HAP-pen"
+              },
+              {
+                "text": "cover → covering"
+              },
+              {
+                "text": "prefer → preferred",
+                "note": "pre-FER: double"
+              }
+            ],
             "tip": "Compare: preFER → preferred, but OFfer → offered."
           },
-          "hints": ["Say {base}. Which syllable is strongest?", "The strong beat is at the start, so nothing doubles.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Say {base}. Which syllable is strongest?",
+            "The strong beat is at the start, so nothing doubles.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         },
         {
           "id": "clap_it",
           "name": "Clap the beat",
           "lesson": {
             "title": "Clap and spell",
-            "steps": ["Clap the word, making the strong syllable loud.", "Loud clap first? Just add the ending.", "Loud clap last? The last letter doubles."],
-            "examples": [{ "text": "GAR-den → gardening" }, { "text": "LIS-ten → listened" }],
+            "steps": [
+              "Clap the word, making the strong syllable loud.",
+              "Loud clap first? Just add the ending.",
+              "Loud clap last? The last letter doubles."
+            ],
+            "examples": [
+              {
+                "text": "GAR-den → gardening"
+              },
+              {
+                "text": "LIS-ten → listened"
+              }
+            ],
             "tip": "Most two-syllable words are loud at the start, and most do not double."
           },
-          "hints": ["Clap {base}. Loud clap first or last?", "Loud clap first: just add {ending}.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Clap {base}. Loud clap first or last?",
+            "Loud clap first: just add {ending}.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
@@ -204,35 +423,78 @@
     },
     "exceptions": {
       "child": "Tricky endings",
-      "skill": "Tricky endings: ie to y (die → dying), adding k after c (panic → panicked), British -ll- (travel → travelled)",
+      "skill": "Tricky endings: ie to y (die → dying), adding k after c (panic → panicked), British -ll- after one vowel (travel → travelled) but not after two (reveal → revealed)",
       "strategies": [
         {
           "id": "rule_examples",
           "name": "Rule and examples",
           "lesson": {
             "title": "Three tricky patterns",
-            "steps": ["ie becomes y before -ing: die → dying.", "Add k after a final c: panic → panicked.", "In British spelling, a final l after one vowel doubles: travel → travelled."],
-            "examples": [{ "text": "lie → lying" }, { "text": "mimic → mimicking" }, { "text": "cancel → cancelled", "note": "American spelling: canceled (also accepted)" }],
+            "steps": [
+              "ie becomes y before -ing: die → dying.",
+              "Add k after a final c: panic → panicked.",
+              "In British spelling, a final l after ONE vowel doubles: travel → travelled. After TWO vowels it does not: reveal → revealed."
+            ],
+            "examples": [
+              {
+                "text": "lie → lying"
+              },
+              {
+                "text": "mimic → mimicking"
+              },
+              {
+                "text": "cancel → cancelled",
+                "note": "American spelling: canceled (also accepted)"
+              },
+              {
+                "text": "cool → cooled",
+                "note": "two vowels (oo): one l"
+              }
+            ],
             "tip": "OpenPath teaches British spelling, and also accepts American spellings as correct."
           },
-          "hints": ["Which tricky pattern does {base} have: ie, c, or l?", "Use that pattern's change, then add {ending}.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Which tricky pattern does {base} have: ie, c, or l?",
+            "Use that pattern's change, then add {ending}.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         },
         {
           "id": "word_building",
           "name": "Build the word in parts",
           "lesson": {
             "title": "Fix the end, then add",
-            "steps": ["Find the tricky end: ie, c or l.", "Fix it: ie → y, c → ck, l → ll.", "Add the ending."],
-            "examples": [{ "text": "tie → ty + ing = tying" }, { "text": "picnic → picnick + ed = picnicked" }],
+            "steps": [
+              "Find the tricky end: ie, c or l.",
+              "Fix it: ie → y, c → ck, and l → ll only after one vowel.",
+              "Add the ending."
+            ],
+            "examples": [
+              {
+                "text": "tie → ty + ing = tying"
+              },
+              {
+                "text": "picnic → picnick + ed = picnicked"
+              },
+              {
+                "text": "conceal + ed = concealed",
+                "note": "two vowels (ea): no extra l"
+              }
+            ],
             "tip": "Without the k, panicing would say 'pan-i-sing'."
           },
-          "hints": ["Find the tricky end of {base}.", "Fix it first, then add {ending}.", "Worked example (this shows the answer): {base} + {ending} = {word}."]
+          "hints": [
+            "Find the tricky end of {base}.",
+            "Fix it first, then add {ending}.",
+            "Worked example (this shows the answer): {base} + {ending} = {word}."
+          ]
         }
       ],
       "mistakes": {
         "missing_k": "Words ending in c add a k before -ed or -ing, so the c keeps its hard sound: {word}.",
         "ie_not_changed": "ie becomes y before -ing: {word}.",
-        "no_doubling": "In British spelling, the final l doubles: {word}. (The American spelling with one l is also accepted.)"
+        "no_doubling": "In British spelling, the final l doubles: {word}. (The American spelling with one l is also accepted.)",
+        "over_doubling": "{base} has two vowels before the l, so the l does not double: {word}."
       }
     }
   },

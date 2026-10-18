@@ -256,7 +256,9 @@ export const rulesEvaluator: ReadingEvaluator = {
     else if (required.every((r) => matched.includes(r)) && matched.length) level = "understood";
     else if (matched.length) level = "partly";
     else if (negated) (level = "cant_tell"), (why = "a negation could reverse the meaning");
-    else if (judged.length >= 3 && relevance < 0.25) level = "off_topic";
+    // off topic only when no word at all relates to the passage or the question: a correct answer in the child's own
+    // words often shares few words with the passage, and must never be told it is off topic
+    else if (judged.length >= 3 && relevance === 0) level = "off_topic";
     else (level = "cant_tell"), (why = "no key point or known misreading found");
     const missing = task.key_points.filter((k) => !matched.includes(k));
     const missingRequired = missing.filter((k) => k.required);

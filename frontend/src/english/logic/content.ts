@@ -170,7 +170,7 @@ export interface SpellingJourneyContent {
 /** Question ids and items for the spelling-journey bank. Evidence words are provisional questions; teach and practice words are generated (practice-only). */
 function spellingJourneyContent(doubling: StrategyContent[]): { content: SpellingJourneyContent; items: Code[] } {
   type Row = [string, string, "apply" | "contrast", JourneyWord["role"], string, string, number, number, Record<string, string>, string[]];
-  const raw = journeyWordsJson as unknown as { fields: string[]; rows: Row[]; sources: SpellingJourneyContent["sources"] };
+  const raw = journeyWordsJson as unknown as { version: number; fields: string[]; rows: Row[]; sources: SpellingJourneyContent["sources"] };
   const doc = spellingJourneyJson as unknown as {
     review: string; capability: string; order: string[]; neutral: string; slip: string; unsure: string;
     rules: Record<string, { child: string; skill: string; strategies: StrategyContent[] | "doubling-journey"; mistakes: Record<string, string> }>;
@@ -197,7 +197,8 @@ function spellingJourneyContent(doubling: StrategyContent[]): { content: Spellin
     const item: Code = {
       kind: "code",
       id,
-      version: 1,
+      // the bank's version: a rebuild that changes a word's role is a new question version (no version-1 record was ever released)
+      version: raw.version,
       target: doc.capability,
       format: "typed:word_form",
       b: Math.min(8, Math.max(1, diff)),

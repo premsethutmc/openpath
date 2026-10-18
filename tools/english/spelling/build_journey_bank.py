@@ -49,11 +49,14 @@ _spec.loader.exec_module(wb)
 REPO = wb.REPO
 OUT = wb.OUT
 CAP = "EN.FND.SPL.inflections"
-VERSION = 1
+VERSION = 2  # 2: scarce rules keep every high-confidence word for checks; contrast words for the final-l rule
 MAX_SIZE = 50  # SCOWL list size: 35 = common (the word bank), 50 = less common but still general vocabulary
 TEACH_PER_RULE = 6
 # share of the remaining high-confidence apply words held back for each use (by a fixed hash of the word)
 SPLIT = (("assess", 0.50), ("retention", 0.20), ("practice", 0.30))
+# a rule with fewer high-confidence words than this keeps them all for checks (assess / retention by this share)
+SCARCE = 120
+SCARCE_ASSESS_NUM, SCARCE_ASSESS_DEN = 7, 10  # 70% for checks, 30% for delayed checks
 RULES = ("plain", "es_plural", "double_short", "drop_e", "y_to_i", "stress_doubling", "no_double_unstressed", "exceptions")
 # the misconception an over-applied rule shows on a contrast word (where the rule must NOT change the word)
 CONTRAST_TAG = {
@@ -63,6 +66,7 @@ CONTRAST_TAG = {
     "drop_e": "dropped_needed_e",
     "y_to_i": "changed_y_wrongly",
     "es_plural": "es_after_other_ending",
+    "exceptions": "over_doubling",
 }
 # misconceptions the journey adds beside the engine's (subject-english-inflections.ts); child-facing text for every tag
 # is in content/english/web/spelling-journey.json
@@ -76,22 +80,26 @@ def fraction(word: str) -> float:
 
 
 def contrast_of(base, infl, suffix, syl):
-    """(rule, over-applied misspelling) if base + suffix -> infl is a word where a similar-looking word changes but
-    this one must not; else None. Only regular, unchanged joins (infl == base + suffix) are contrasts."""
+    """Every (rule, over-applied misspelling) for which base + suffix -> infl is a word where a similar-looking word
+    changes but this one must not. Only regular, unchanged joins (infl == base + suffix) are contrasts."""
+    out = []
     if infl != base + suffix:
-        return None
+        return out
     if suffix in ("ing", "ed", "er", "est") and syl == 1 and re.search(r"[^aeiouwxy]$", base) and not re.search(r"(^|[^aeiou])[aeiou][^aeiouwxy]$", base):
         # one syllable, NOT a single short vowel + single consonant (jump, rain, look, help): must not double
-        return "double_short", base + base[-1] + suffix
+        out.append(("double_short", base + base[-1] + suffix))
+    if suffix in ("ing", "ed", "er") and re.search(r"[aeiou][aeiou]l$", base):
+        # the British final-l rule doubles after ONE vowel (travel -> travelled); after two it does not (reveal -> revealed)
+        out.append(("exceptions", base + "l" + suffix))
     if suffix == "ing" and base.endswith(("ee", "ye", "oe")):
-        return "drop_e", base[:-1] + suffix  # agree -> agreeing, never agreing
+        out.append(("drop_e", base[:-1] + suffix))  # agree -> agreeing, never agreing
     if suffix in ("ed", "s", "er", "est") and re.search(r"[aeiou]y$", base):
-        return "y_to_i", base[:-1] + "i" + ("es" if suffix == "s" else suffix)  # play -> played, never plaied
+        out.append(("y_to_i", base[:-1] + "i" + ("es" if suffix == "s" else suffix)))  # play -> played, never plaied
     if suffix == "ing" and re.search(r"[^aeiou]y$", base):
-        return "y_to_i", base[:-1] + "i" + suffix  # cry -> crying: the y stays before -ing
+        out.append(("y_to_i", base[:-1] + "i" + suffix))  # cry -> crying: the y stays before -ing
     if suffix == "s" and re.search(r"[^aeiouy]$", base) and not re.search(r"(s|x|z|ch|sh)$", base):
-        return "es_plural", base + "es"  # book -> books, never bookes
-    return None
+        out.append(("es_plural", base + "es"))  # book -> books, never bookes
+    return out
 
 
 def build(scowl: Path, cmudict: Path, oewn: Path):
@@ -160,8 +168,7 @@ def build(scowl: Path, cmudict: Path, oewn: Path):
                     uses.append(("stress_doubling", "contrast", {w: "over_doubling" for w in wrong}))
                 if rule == "stress_doubling":
                     uses.append(("no_double_unstressed", "contrast", {base + suffix: "no_doubling"}))
-            con = contrast_of(base, infl, suffix, syl)
-            if con:
+            for con in contrast_of(base, infl, suffix, syl):
                 uses.append((con[0], "contrast", {con[1]: CONTRAST_TAG[con[0]]}))
             if any(u[0] == "exceptions" for u in uses) and pos in ("aj1", "aj2"):
                 rejected["comparative of a -ful adjective (carefuller): avoided in teaching"] += 1
@@ -233,16 +240,26 @@ def build(scowl: Path, cmudict: Path, oewn: Path):
             for e in es:
                 e["role"] = "contrast" if e["conf"] == "high" else "practice"
             continue
-        high = sorted((e for e in es if e["conf"] == "high"), key=lambda e: (e["feat"]["size"], e["feat"]["common"] != "ukfreq", len(e["w"]), wb.fnv1a(e["w"]), e["w"]))
-        for e in high[:TEACH_PER_RULE]:
-            e["role"] = "teach"
-        for e in high[TEACH_PER_RULE:]:
-            f, acc = fraction(e["w"]), 0.0
-            for role, share in SPLIT:
-                acc += share
-                if f < acc:
-                    e["role"] = role
-                    break
+        order = lambda e: (e["feat"]["size"], e["feat"]["common"] != "ukfreq", len(e["w"]), wb.fnv1a(e["w"]), e["w"])
+        high = sorted((e for e in es if e["conf"] == "high"), key=order)
+        if len(high) < SCARCE:
+            # few high-confidence words: every one is held back for independent checks (the lessons use their own
+            # hand-written examples, no bank words); medium and low confidence words are practice only. The split is
+            # by count in a fixed hashed order, so the first checks get the larger share
+            ranked = sorted(high, key=lambda e: (wb.fnv1a("role|" + e["w"]), e["w"]))
+            n_assess = -(-len(ranked) * SCARCE_ASSESS_NUM // SCARCE_ASSESS_DEN)
+            for i, e in enumerate(ranked):
+                e["role"] = "assess" if i < n_assess else "retention"
+        else:
+            for e in high[:TEACH_PER_RULE]:
+                e["role"] = "teach"
+            for e in high[TEACH_PER_RULE:]:
+                f, acc = fraction(e["w"]), 0.0
+                for role, share in SPLIT:
+                    acc += share
+                    if f < acc:
+                        e["role"] = role
+                        break
         for e in es:
             e.setdefault("role", "practice")  # medium and low confidence: practice only, never evidence
     counts = Counter((e["rule"], e["kind"], e["role"], e["conf"]) for e in out)
@@ -255,7 +272,7 @@ def build(scowl: Path, cmudict: Path, oewn: Path):
         "sources": [dict(s, commit=wb.PINS[s["id"]]) for s in wb.SOURCES],
         "filters": {"scowl_max_size": MAX_SIZE, "blocklist": "content/english/spelling/blocklist.txt", "exclusions": ["content/english/spelling/exclusions.txt", "content/english/spelling/journey-exclusions.txt"],
                     "scowl_usage_notes": "groups marked vulgar, offensive, informal or nonstandard are excluded", "letters": "a-z only, 3-14 letters"},
-        "policy": {"teach_per_rule": TEACH_PER_RULE, "split": dict(SPLIT), "evidence": "high-confidence assess, retention and contrast words only",
+        "policy": {"teach_per_rule": TEACH_PER_RULE, "split": dict(SPLIT), "scarce": {"below_high_confidence": SCARCE, "assess_share": f"{SCARCE_ASSESS_NUM}/{SCARCE_ASSESS_DEN}", "lessons": "hand-written lesson examples only", "practice": "medium and low confidence words"}, "evidence": "high-confidence assess, retention and contrast words only",
                    "confidence": {"high": "SCOWL list 35, UK frequency tag on the word or its base, unambiguous pronunciation, a rule-made misspelling exists",
                                   "medium": "less common (list 50), no frequency tag, an accepted American variant, or no specific misspelling",
                                   "low": "CMUdict pronunciations disagree on syllables or stress (e.g. record, present)"}},

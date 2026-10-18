@@ -9,20 +9,20 @@ Evidence = independent checks (assess + retention + contrast, high confidence on
 | Rule | Apply words (kept / found) | Contrast words (kept / found) | Teach | Practice | Assess | Retention | Contrast (evidence) | High | Medium | Low | Can be dictated | Already in the word bank |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | plain | 500 / 14328 | 0 / 0 | 6 | 158 | 245 | 91 | 0 | 500 | 0 | 0 | 492 | 55 |
-| es_plural | 350 / 350 | 250 / 6657 | 6 | 272 | 57 | 15 | 250 | 353 | 247 | 0 | 416 | 21 |
-| double_short | 500 / 652 | 250 / 2329 | 6 | 212 | 206 | 76 | 250 | 658 | 92 | 0 | 651 | 58 |
+| es_plural | 350 / 350 | 250 / 6657 | 0 | 247 | 73 | 30 | 250 | 353 | 247 | 0 | 416 | 21 |
+| double_short | 500 / 652 | 250 / 2326 | 6 | 212 | 206 | 76 | 250 | 658 | 92 | 0 | 651 | 58 |
 | drop_e | 500 / 1861 | 22 / 22 | 6 | 149 | 242 | 107 | 18 | 518 | 4 | 0 | 514 | 60 |
 | y_to_i | 500 / 1985 | 250 / 393 | 6 | 248 | 239 | 98 | 159 | 659 | 91 | 0 | 523 | 53 |
-| stress_doubling | 98 / 98 | 250 / 947 | 6 | 61 | 24 | 7 | 250 | 298 | 43 | 7 | 328 | 55 |
+| stress_doubling | 98 / 98 | 250 / 947 | 0 | 50 | 34 | 14 | 250 | 298 | 43 | 7 | 328 | 55 |
 | no_double_unstressed | 500 / 947 | 98 / 98 | 6 | 248 | 207 | 89 | 48 | 474 | 117 | 7 | 509 | 60 |
-| exceptions | 190 / 190 | 0 / 0 | 6 | 173 | 8 | 3 | 0 | 18 | 158 | 14 | 61 | 56 |
-| **all** | 3138 | 1120 | 48 | 1521 | 1228 | 486 | 975 | 3478 | 752 | 28 | 3494 | 418 |
+| exceptions | 190 / 190 | 153 / 153 | 0 | 238 | 13 | 5 | 87 | 105 | 222 | 16 | 171 | 56 |
+| **all** | 3138 | 1273 | 30 | 1550 | 1259 | 510 | 1062 | 3565 | 816 | 30 | 3604 | 418 |
 
 ## All spelling competencies
 
 | Competency | Word bank (practice items, `wordbank.json`) | Journey bank (`journey-bank.json`) | Independent evidence words |
 |---|---:|---:|---:|
-| EN.FND.SPL.inflections | 475 | 4258 | 2689 |
+| EN.FND.SPL.inflections | 475 | 4411 | 2831 |
 | EN.FND.SPL.morphological | 300 | — (not yet a journey) | 0 |
 | EN.FND.SPL.homophones | 43 | — (not yet a journey) | 0 |
 
@@ -34,9 +34,9 @@ Morphological and homophone words stay in the word bank as practice items (steps
 |---|---:|
 | base has no CMUdict pronunciation | 5641 |
 | base unsuitable (names, abbreviations, hyphenated or capitalised words, blocklist, exclusions, length) | 33299 |
-| comparative of a -ful adjective (carefuller): avoided in teaching | 18 |
+| comparative of a -ful adjective (carefuller): avoided in teaching | 22 |
 | form unsuitable (blocklist, exclusions, length or non-letters) | 178 |
-| irregular or no rule (e.g. ran, went) | 2895 |
+| irregular or no rule (e.g. ran, went) | 2894 |
 
 ## Sources
 

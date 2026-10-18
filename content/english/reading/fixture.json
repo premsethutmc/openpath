@@ -201,10 +201,18 @@
       "text": "The scouts fight each other and the strongest one chooses, there is no dancing.",
       "level": "cant_tell",
       "writing": false
+    },
+    {
+      "id": "volcano.paraphrase_not_off_topic",
+      "task": "rd.volcano.feeling",
+      "kind": "correct_paraphrase",
+      "text": "She could see her brother felt terrible, so she calmed down.",
+      "level": "cant_tell",
+      "writing": false
     }
   ],
   "known_limits": {
-    "note": "Answers the rules still credit although they are wrong: keyword matching cannot read who did what, or whether a claim is inverted. These are pinned so that the label stays 'keyword match, not verified understanding' and any change in behaviour is deliberate. They are why a match must never be presented as verified understanding, and why a meaning-aware reviewer (a teacher, or a qualified evaluator under the existing E3 checks) is needed before any comprehension claim.",
+    "note": "Answers the rules still credit although they are wrong: keyword matching cannot read who did what, or whether a claim is inverted. These are pinned so that the label stays 'keyword match, not verified understanding' and any change in behaviour is deliberate. They are why a match must never be presented as verified understanding, and why a meaning-aware reviewer (a teacher, or a qualified evaluator under the existing E3 checks) is needed before any comprehension claim. The paraphrase cases go the other way: correct answers in a child's own words that the rules under-credit (partly) or cannot judge. They are never told they are wrong or off topic.",
     "cases": [
       {
         "id": "kite.role_reversal",
@@ -247,6 +255,27 @@
         "text": "Sea animals eat plastic and it makes them strong and healthy.",
         "current_level": "understood",
         "truth": "not_yet"
+      },
+      {
+        "id": "kite.paraphrase",
+        "task": "rd.kite.motive",
+        "text": "His sister was unhappy about losing it, and he wanted her to feel good again.",
+        "current_level": "partly",
+        "truth": "understood"
+      },
+      {
+        "id": "bees.paraphrase",
+        "task": "rd.bees.main",
+        "text": "The older bees that go looking pick it, by wiggling to show the others where to go.",
+        "current_level": "partly",
+        "truth": "understood"
+      },
+      {
+        "id": "storm.paraphrase",
+        "task": "rd.storm.detail",
+        "text": "He got something to catch the water under the drips.",
+        "current_level": "cant_tell",
+        "truth": "understood"
       }
     ]
   }

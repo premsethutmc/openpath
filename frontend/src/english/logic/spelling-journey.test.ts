@@ -181,3 +181,45 @@ test("the doubling journey and its records are unchanged by the new journey", as
   assert.equal(content.journey.rule, "double_short");
   assert.equal(content.journey.assessOrder[0], "spl.infl.j02");
 });
+
+test("the rule estimate and its uncertainty update with every independent answer, not with practice or help, and survive a reload", async () => {
+  const { l, repo } = await child("estimate");
+  const est = (x: Learner) => learningVector(x.state, content, x.clock()).rules.find((r) => r.rule === "double_short")!.estimate;
+  assert.equal(est(l).total, 0);
+  assert.deepEqual(est(l).range80.map((x) => x <= 0.2 || x >= 0.8), [true, true], "wide before any answer");
+  // answer until the first guided step, then compare what independent answers and practice did
+  let v = await l.startSpellingJourney();
+  let independent = 0;
+  let guidedTotalBefore = -1;
+  for (let i = 0; i < 60 && v.step.kind !== "summary"; i++) {
+    const st = v.step;
+    if (st.kind === "teach") await l.teachSpellingJourney(v);
+    else if (st.kind === "question") {
+      const before = est(l);
+      await l.answerSpellingJourney(v, { kind: "typed", text: st.rule === "double_short" && st.word.kind === "apply" ? ruleError(st.word) : st.word.word });
+      const after = est(l);
+      if (st.rule === "double_short" && st.word.kind === "apply") {
+        independent++;
+        assert.equal(after.total, before.total + 1, "an independent answer on a new word is counted");
+        assert.ok(after.mean < before.mean || before.total === 0, "a wrong answer lowers the estimate");
+      }
+    } else {
+      guidedTotalBefore = est(l).total;
+      await l.answerSpellingJourney(v, { kind: "typed", text: st.word.word });
+      assert.equal(est(l).total, guidedTotalBefore, "guided practice never changes the estimate");
+      break;
+    }
+    v = await l.spellingJourney();
+  }
+  assert.ok(independent >= 2 && guidedTotalBefore >= 2, "reached guided practice after independent answers");
+  const e = est(l);
+  assert.ok(e.range80[0] < e.mean && e.mean < e.range80[1], "the estimate carries its uncertainty");
+  // persists: rebuilt from the stored record alone
+  const reopened = await Learner.open(content, repo, l.profileId, l.clock);
+  assert.deepEqual(est(reopened), e);
+  // an estimate is never a mastery claim
+  const rv = learningVector(reopened.state, content, reopened.clock()).rules.find((r) => r.rule === "double_short")!;
+  assert.equal(rv.verified, false);
+  assert.match(learningVector(reopened.state, content, reopened.clock()).ability.held, /content-validation gate/);
+  assert.match(reopened.spellingJourneyReport().rules.find((r) => r.rule === "double_short")!.estimate!, /new words right/);
+});

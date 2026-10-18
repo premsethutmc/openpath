@@ -11,6 +11,7 @@ import { MemoryRepo } from "./store.ts";
 import { testClock } from "./journey-sim.ts";
 import { READING_EVALUATORS, READING_TASKS, editDistance, rulesEvaluator } from "./reading.ts";
 import { eventProblem } from "./events.ts";
+import { buildReport, diagnose } from "./diagnostics.ts";
 
 const content = loadContent();
 const fixture = JSON.parse(readFileSync(new URL("../../../../content/english/reading/fixture.json", import.meta.url), "utf8")) as {
@@ -58,6 +59,10 @@ test("known limits: wrong answers that still match key words are labelled as a k
     const e = evaluate(k.task, k.text);
     assert.equal(e.comprehension.level, k.current_level, `${k.id}: behaviour changed; update the fixture deliberately`);
     assert.equal(e.comprehension.basis, "keyword_match");
+    if (k.truth === "understood") {
+      assert.ok(!["not_yet", "off_topic"].includes(e.comprehension.level), `${k.id}: a correct paraphrase is never called wrong or off topic`);
+      continue;
+    }
     const obs = e.evidence.find((x) => x.capability === READING_TASKS.find((t) => t.id === k.task)!.capability)!.observation;
     assert.match(obs, /keyword match, not verified understanding/, k.id);
     assert.doesNotMatch(e.feedback.understanding, /understood/i, `${k.id}: the child is not told they understood`);
@@ -127,4 +132,16 @@ test("a pilot build refuses written answers (the pilot records nothing a child w
   const l = await Learner.create(pilot, new MemoryRepo(), "P", "guardian", testClock(), "p-P");
   await assert.rejects(() => l.answerReading(READING_TASKS[0].id, "anything", false), /pilot/i);
   await assert.rejects(() => l.startSpellingJourney(), /pilot/i);
+});
+
+test("a child's written words never appear in the developer diagnosis or its report (redacted or not)", async () => {
+  const l = await Learner.create(content, new MemoryRepo(), "D", "guardian", testClock(), "p-D");
+  const secret = "Meena was sad because my cousin Zarvanthi broke her kite";
+  await l.answerReading(READING_TASKS[0].id, secret, false);
+  const d = await diagnose(content, { pupil: { id: l.profileId, name: "D" }, events: l.events, now: l.clock() });
+  for (const redact of [true, false]) {
+    const r = buildReport(d, { redact });
+    const all = JSON.stringify(r.json) + r.text;
+    assert.ok(!all.includes("Zarvanthi"), `report (redact=${redact}) contains the child's words`);
+  }
 });

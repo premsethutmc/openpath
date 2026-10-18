@@ -268,6 +268,7 @@ function SpellingSummary({ learner, onLeave }: { learner: Learner; onLeave: () =
               .map((r) => (
                 <li key={r.rule}>
                   <b>{r.skill}</b>: {r.status}
+                  {r.estimate && <> {r.estimate}</>}
                   {r.mistakes.length > 0 && <> Pattern seen: {r.mistakes.join("; ")}.</>}
                   {r.help && <> {r.help}</>}
                 </li>
