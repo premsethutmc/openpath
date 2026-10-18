@@ -184,7 +184,7 @@ The mathematics branch was not changed, and it is not part of this integration.
 | Browser, essay (`essay:e2e`) | 9/9 |
 | Browser, Karthik's two-track multi-session journey and a second essay (`essay:e2e-diagnostic`) | 1/1 |
 | Mathematics branch merged in a scratch worktree | frontend 296/296; core 297/297 |
-| Django, the frontend typecheck, and the full browser suite (PostgreSQL) | CI only: no Django or React types here |
+| CI at aa013a4 (Django on Python 3.10, 3.12 and 3.13; frontend typecheck and build; browser end-to-end with PostgreSQL) | 7/7 pass |
 
 ## Remaining blockers
 
