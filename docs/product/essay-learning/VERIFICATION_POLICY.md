@@ -9,8 +9,9 @@ gate or the ledger. Stored events are never rewritten: every claim below is deri
 
 1. L was first shown without help (outside a teaching session).
 2. A later session, at least the delay after that, has fresh evidence **at** L. The delay is `mastery_gap_days` = 7 days,
-   less the schedule's existing half-day tolerance. Evidence at L means at least 2 answers on questions of difficulty
-   L − 0.5 or above.
+   less the schedule's existing half-day tolerance. Evidence at L means at least 2 **distinct questions answered fresh**
+   (never a repeat, nor a question met before with help) of difficulty L − 0.5 or above (H-V2, a provisional minimum
+   for the pilot, not a claim of universal educational validity).
 3. That fresh evidence favours L over L − 1, by the existing `checkPassed` rule.
 4. No later scheduled check has failed.
 
@@ -81,16 +82,17 @@ role and never verify anything. They are now in the consolidated review package 
   check, the policy's three later checks and a delayed retention check. The shipped bank cannot (K11-4). K9-4 runs the
   whole journey with them to verified mastery under the pilot policy.
 
-## 3. Eligibility policy for verified mastery (verification-eligibility@1)
+## 3. Eligibility policy for verified mastery (verification-eligibility@2)
 
 | Policy | Who | Verified mastery requires | Unreviewed bank questions |
 |---|---|---|---|
-| `reviewed` (**default; the pilot**) | The public pilot, and every context that does not ask otherwise | Shown at the target, then a delayed check at the target, while counting **only answers on educator-reviewed (`validated`) questions** | Count for the estimate and for "shown at the target", exactly as before, but **cannot verify**. The claim says "Shown at the grade target: not verified (unreviewed questions)". |
+| `reviewed` (**default; the pilot**) | The public pilot, the main app, and every context that does not ask otherwise | Shown at the target, then a delayed check at the target, while counting **only eligible answers**: on an educator-reviewed (`validated`) question version with a `released_at`, given at or after that release, to that version, on the learner's first encounter with the question (H-V3) | Count for the estimate and for "shown at the target", exactly as before, but **cannot verify**. The claim says "Shown at the grade target: not verified (unreviewed questions)". |
 | `counted` (developer testing) | The studio with `&verification=developer` (never in a pilot build), and the research simulations | The same definition, on every counted answer | May verify, and the claim says "Verified (developer test: unreviewed questions)". |
 
-**How it is computed.** The same engine rebuilds the ledger from the same events, leaving out answers on questions not
-marked `validated` (`reviewedOnlyView`). Nothing is rewritten. The two readings are compared, and the stricter one wins
-under the pilot policy.
+**How it is computed.** `packages/english-core/src/verification.ts` (`verificationClaim`, used by the essay claim and the
+main-app profile alike). The same engine rebuilds the ledger from the same events, leaving out ineligible answers
+(`verificationEligibility` gives each answer's reason: `unreviewed`, `not_released`, `before_release`, `repeat` or
+`eligible`). Nothing is rewritten. Under the pilot policy the verified band is the one the eligible answers verify.
 
 **Migration strategy.**
 
@@ -107,11 +109,11 @@ under the pilot policy.
 
    A separate, owner-approved content-release change then sets `evidence_status: "validated"` on approved questions,
    as a new item version where content changed.
-3. **No retroactive upgrade.**
-   - An answer counts towards verification only if its question version was `validated`. Answers on earlier draft
-     versions stay unreviewed evidence.
-   - Marking a question validated makes earlier answers to that same version eligible. This is decision H-V3: whether
-     to accept that, or require answers after the approval date.
+3. **No retroactive upgrade (H-V3, decided).**
+   - An answer counts towards verification only if it was given at or after the `released_at` of a `validated`
+     question version, to that version. Answers given before the release, and answers on earlier draft versions, stay
+     in the ledger with their original meaning (estimate, shown) and never become eligible.
+   - The content validator refuses a `validated` item without `released_at`, and `released_at` on any other item.
 4. **Rollback.** The policy is a value in the essay context, not data, so switching it changes readings only.
 
 ## 4. The lesson programme
@@ -159,11 +161,15 @@ ledger.
 5. **Additive fields.** Consumers comparing whole objects with stored snapshots (as two tests did) see the new fields.
    The historical tests now strip them, after checking they never exceed the current level.
 
-## 7. Decisions for the owner
+## 7. Owner decisions (18 October 2026)
 
-- **H-V1.** Confirm verification@2 for the whole app, main profile included, or keep the main-app change behind the
-  pilot only.
-- **H-V2.** Confirm the at-band rule: at least 2 answers at L − 0.5 or above in the delayed session.
-- **H-V3.** When questions are approved: do earlier answers to the same question version become eligible, or only
-  answers after the approval date?
-- **H-V4.** Educator review of the 30 plural questions, which are in the package as `proposed-plurals`.
+- **H-V1 (decided).** One verified-mastery definition for the main app and the essay experience: both call
+  `verificationClaim` under the pilot policy.
+- **H-V2 (decided, provisional minimum).** At least two distinct, eligible, independent responses at the target level,
+  in a delayed session at least seven days after the target was first shown.
+- **H-V3 (decided).** Only responses after the question version was educator-approved and released are eligible; earlier
+  responses stay in the ledger and never become eligible retroactively.
+- **H-V4 (prepared, not done).** The 30 plural questions are prepared for item-by-item review in
+  `educator-review-v1/round-plurals/`. None is approved.
+
+The integration with the planner corrections (PR #52) is described in [INTEGRATION_51_52.md](INTEGRATION_51_52.md).
