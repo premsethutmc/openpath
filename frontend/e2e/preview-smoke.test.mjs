@@ -37,6 +37,8 @@ async function gate(page) {
 test(`preview smoke: ${process.env.PHASE ?? "write"}`, async () => {
   const context = await browser.newContext({ viewport: { width: 412, height: 900 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
+  page.on("pageerror", (e) => console.log(`PAGEERROR ${e.message}`));
+  page.on("console", (m) => m.type() === "error" && console.log(`CONSOLEERROR ${m.text()}`));
   await gate(page);
   if ((process.env.PHASE ?? "write") === "write") {
     const email = `preview-${Date.now()}@example.org`;
@@ -59,7 +61,12 @@ test(`preview smoke: ${process.env.PHASE ?? "write"}`, async () => {
     await page.getByRole("heading", { name: "What are you preparing for?" }).waitFor();
     assert.equal(await page.locator("select").count(), 0, "no drop-downs on the JEE chapter");
     await page.getByRole("button", { name: /JEE Main/ }).click();
-    await page.getByRole("button", { name: /Quadratic Equations/ }).waitFor();
+    try {
+      await page.getByRole("button", { name: /Quadratic Equations/ }).waitFor({ timeout: 15000 });
+    } catch (e) {
+      console.log(`BODY ${(await page.locator("body").innerText()).replace(/\s+/g, " ").slice(0, 400)}`);
+      throw e;
+    }
     writeFileSync(state, JSON.stringify({ email, pupil: pupil.data.id, maths: maths.length }));
   } else {
     const s = JSON.parse(readFileSync(state, "utf8"));

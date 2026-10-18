@@ -49,7 +49,7 @@ jobs:
           set +e
           PHASE=write node --test e2e/preview-smoke.test.mjs 2>&1 | tee smoke-write.txt
           s=${PIPESTATUS[0]}
-          if [ $s -ne 0 ]; then grep -E "Error|expected|actual|waiting for|locator|smoke.test.mjs:" smoke-write.txt | head -12 | while read -r l; do echo "::error::$l"; done; fi
+          if [ $s -ne 0 ]; then grep -E "PAGEERROR|CONSOLEERROR|BODY|Error|expected|actual|waiting for|locator|smoke.test.mjs:" smoke-write.txt | head -20 | while read -r l; do echo "::error::$l"; done; fi
           exit $s
       - name: Restart the container (as Render does after sleeping)
         run: |
@@ -62,7 +62,7 @@ jobs:
           set +e
           PHASE=read node --test e2e/preview-smoke.test.mjs 2>&1 | tee smoke-read.txt
           s=${PIPESTATUS[0]}
-          if [ $s -ne 0 ]; then grep -E "Error|expected|actual|waiting for|locator|smoke.test.mjs:" smoke-read.txt | head -12 | while read -r l; do echo "::error::$l"; done; fi
+          if [ $s -ne 0 ]; then grep -E "PAGEERROR|CONSOLEERROR|BODY|Error|expected|actual|waiting for|locator|smoke.test.mjs:" smoke-read.txt | head -20 | while read -r l; do echo "::error::$l"; done; fi
           exit $s
       - if: always()
         run: docker logs preview | tail -80
