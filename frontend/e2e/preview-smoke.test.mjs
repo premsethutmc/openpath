@@ -37,7 +37,7 @@ async function gate(page) {
 test(`preview smoke: ${process.env.PHASE ?? "write"}`, async () => {
   const context = await browser.newContext({ viewport: { width: 412, height: 900 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  page.on("pageerror", (e) => console.log(`PAGEERROR ${e.message}`));
+  page.on("pageerror", (e) => console.log(`PAGEERROR ${e.message} ${String(e.stack).split("\n").slice(1, 6).map((l) => l.trim().replace(/https?:\/\/[^/]+/, "")).join(" | ")}`));
   page.on("console", (m) => m.type() === "error" && console.log(`CONSOLEERROR ${m.text()}`));
   await gate(page);
   if ((process.env.PHASE ?? "write") === "write") {
