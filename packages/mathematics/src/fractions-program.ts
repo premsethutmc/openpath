@@ -118,6 +118,8 @@ export function replay(
   for (const ev of events) {
     if (ids.has(ev.id)) continue;
     ids.add(ev.id);
+    // another fixed program's activity (for example the JEE chapter) in the same mathematics record
+    if ((ev as { program?: string }).program && (ev as { program?: string }).program !== lesson.id) continue;
     if (
       ev.kind !== "math_activity" ||
       ev.learnerId !== learnerId ||

@@ -349,3 +349,24 @@ test("one OpenPath account across English and Mathematics: same pupil, both reco
   await page.getByRole("button", { name: "Finish activity and save place", exact: true }).waitFor();
   await context.close();
 });
+test("JEE Main chapter: cards (no drop-downs), one step at a time, answers saved to the account and resumed", async () => {
+  const { page, context } = await setup();
+  await page.goto(base + "/maths/");
+  await page.getByRole("heading", { name: "What are you preparing for?" }).waitFor();
+  assert.equal(await page.locator("select").count(), 0, "no drop-down menus");
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Quadratic Equations/ }).click();
+  for (let i = 0; i < 5; i++) await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("button", { name: /continue/i }).click();
+  for (let i = 0; i < 4; i++) await page.getByRole("button", { name: "Show next step" }).click();
+  await page.getByRole("button", { name: "Continue to practice" }).click();
+  await page.getByLabel(/Your answer/).fill("13");
+  await page.getByRole("button", { name: "Check answer" }).click();
+  await page.getByRole("status").filter({ hasText: "Correct!" }).waitFor();
+  // reload: the account has the two finished steps and the answer; the chapter continues at question 2
+  await page.reload();
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /33% done/ }).click();
+  await page.getByText("Question 2 of 6").waitFor();
+  await context.close();
+});

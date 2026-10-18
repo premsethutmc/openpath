@@ -7,6 +7,8 @@
     "src/mathematics/canonical.test.ts",
     "../packages/mathematics/src/canonical.ts",
     "src/mathematics/journey",
+    "../packages/mathematics/src/chapter.ts",
+    "src/mathematics/chapter",
     "src/globals.d.ts"
   ],
   "exclude": []
