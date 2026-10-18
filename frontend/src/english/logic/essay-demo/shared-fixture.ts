@@ -154,6 +154,9 @@ export function sharedFixture(
       engine: {
         stage: demonstrated ? "demonstrated" : "unassessed",
         verification: demonstrated ? "demonstrated" : "not_demonstrated",
+        // essay-contract@1 as of e1c6405: the engine's supported level and the grade target (none in the fixture)
+        currentLevel: null,
+        target: null,
         demonstrated: null,
         mastered: null,
         directN: demonstrated ? 2 : 0,

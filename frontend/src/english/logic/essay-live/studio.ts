@@ -1,0 +1,311 @@
+/**
+ * The essay studio, connected to the real engine (essay-contract@1).
+ *
+ * Everything here runs through the learner's existing record: essay records, diagnostic answers, lessons,
+ * practice and checks are events in the same ledger the rest of the app uses (Learner → Repo → fold → core
+ * Ledger). Every status shown comes from the core's essay functions and the engine's own verification:
+ * nothing is scripted, and nothing here decides what a learner knows.
+ *
+ * What is NOT real yet (and says so in the interface):
+ *   - Essay analysis: recorded evaluator outputs replayed for the built-in synthetic samples; any other text
+ *     goes to a small deterministic pattern stand-in. No live LLM is connected.
+ *   - Rewrite judgement: a recorded judgement for the built-in sample rewrite; any other rewrite is kept but
+ *     not judged (held).
+ *   - Real learners: refused. The studio works only with synthetic essays on a dedicated synthetic profile.
+ */
+import {
+  type CapabilityId,
+  type DiagnosticOutcome,
+  type DiagnosticRequest,
+  type EssayAnalysis,
+  type EssayContext,
+  type EssayEvaluator,
+  type EssayEvent,
+  type EssayLearnerProfile,
+  type EssaySubmission,
+  type GapHypothesis,
+  type Item,
+  type JourneyNode,
+  type JourneyStep,
+  type LearningJourney,
+  type LedgerEvent,
+  type ObservationRequest,
+  type ProfileUpdate,
+  type Response,
+  type RewriteEvaluation,
+  type RewriteRequest,
+  type CompetencyProfile,
+  ESSAY_POLICY_DRAFT,
+  analyseEssay,
+  createJourney,
+  diagnosticOutcome,
+  essayProfile,
+  essayRecords,
+  evaluateRewrite,
+  fingerprint,
+  gapHypotheses,
+  indexCompetencyProfile,
+  journeyStatus,
+  patternEssayEvaluator,
+  planDiagnostics,
+  profileUpdates,
+  submitEssay,
+} from "../../../../../packages/english-core/src/index.ts";
+import g8Profile from "../../../../../content/english/essay/g8-writing.json";
+import samplesJson from "../../../../../content/english/essay/samples.json";
+import type { AppContent, Lesson } from "../content.ts";
+import type { Feedback } from "../feedback.ts";
+import type { Learner } from "../learner.ts";
+
+export interface Sample {
+  id: string;
+  title: string;
+  prompt: string;
+  text: string;
+  fingerprint: string;
+  observations: unknown;
+}
+interface Samples {
+  essays: Sample[];
+  rewrites: { essay: string; text: string; fingerprint: string; judgement: unknown }[];
+}
+export const SAMPLES = samplesJson as unknown as Samples;
+
+/** The fixed id of the on-device synthetic learner the studio uses (never a child's profile). */
+export const STUDIO_PROFILE_ID = "essay-studio-synthetic-learner";
+export const STUDIO_PROFILE_NAME = "Essay test learner (synthetic)";
+
+const swap = (raw: unknown, key: string, value: string): unknown => JSON.parse(JSON.stringify(raw).split(`"${key}"`).join(JSON.stringify(value)));
+
+/**
+ * Replays the recorded analysis of a built-in sample (matched by text fingerprint); any other text is passed to
+ * the pattern stand-in. The evaluator id says which one answered, and both pass the same validation.
+ */
+export function studioEvaluator(): EssayEvaluator & { source(text: string): "recorded" | "patterns" } {
+  const patterns = patternEssayEvaluator();
+  const recorded = (text: string) => SAMPLES.essays.find((s) => s.fingerprint === fingerprint(text));
+  return {
+    id: "openpath-studio",
+    version: "samples@1+patterns@0",
+    model: "no-llm",
+    source: (text: string) => (recorded(text) ? "recorded" : "patterns"),
+    async observe(req: ObservationRequest) {
+      const s = recorded(req.essay.text);
+      return s ? swap(s.observations, "$ESSAY", req.essay.id) : patterns.observe(req);
+    },
+    async rewrite(req: RewriteRequest) {
+      const r = SAMPLES.rewrites.find((x) => x.fingerprint === fingerprint(req.rewrite.text));
+      if (!r) throw new Error("no evaluator is connected for this rewrite");
+      return swap(r.judgement, "$REWRITE", req.rewrite.id);
+    },
+  };
+}
+
+export function essayContext(content: AppContent): EssayContext {
+  const lessons = new Map<CapabilityId, string[]>();
+  for (const l of content.lessons.values()) lessons.set(l.capability, [...(lessons.get(l.capability) ?? []), l.id]);
+  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, policy: ESSAY_POLICY_DRAFT };
+}
+
+export type Stage = "write" | "diagnose" | "plan" | "learn" | "rewrite" | "done";
+
+export interface NextStep {
+  step: JourneyStep;
+  node: JourneyNode;
+  lesson?: Lesson;
+  item?: Item;
+  /** For a check: the questions are asked in a new sitting, so they are not answered straight after a lesson. */
+  newSitting?: boolean;
+}
+
+export interface StudioView {
+  stage: Stage;
+  essays: EssaySubmission[];
+  essay: EssaySubmission | null;
+  analysis: EssayAnalysis | null;
+  /** Which evaluator produced the analysis: a recorded sample output or the pattern stand-in. */
+  analysedBy: "recorded" | "patterns" | null;
+  hypotheses: GapHypothesis[];
+  diagnostics: { request: DiagnosticRequest; outcome: DiagnosticOutcome }[];
+  nextDiagnostic: { request: DiagnosticRequest; item: Item; position: number; total: number } | null;
+  journey: LearningJourney | null;
+  next: NextStep | null;
+  rewrite: RewriteEvaluation | null;
+  profile: EssayLearnerProfile;
+}
+
+export class EssayStudio {
+  readonly learner: Learner;
+  readonly ectx: EssayContext;
+  readonly evaluator: ReturnType<typeof studioEvaluator>;
+
+  constructor(learner: Learner, evaluator = studioEvaluator()) {
+    this.learner = learner;
+    this.ectx = essayContext(learner.content);
+    this.evaluator = evaluator;
+  }
+
+  /** The engine's ledger events (evidence, provenance and essay records), exactly as folded. */
+  get events(): LedgerEvent[] {
+    return this.learner.state.ledger.events;
+  }
+
+  private now(): string {
+    return this.learner.clock();
+  }
+
+  private latestEssay(): EssaySubmission | null {
+    return essayRecords(this.events, "submission").at(-1)?.record.submission ?? null;
+  }
+
+  view(): StudioView {
+    const events = this.events;
+    const now = this.now();
+    const essay = this.latestEssay();
+    const essays = essayRecords(events, "submission").map((r) => r.record.submission);
+    const analysis = essay ? (essayRecords(events, "analysis").find((r) => r.record.analysis.essay === essay.id)?.record.analysis ?? null) : null;
+    const hypotheses = gapHypotheses(this.ectx, events);
+    const requests = essay ? essayRecords(events, "diagnostic").filter((r) => r.record.request.essay === essay.id).map((r) => r.record.request) : [];
+    const current = new Map(hypotheses.map((h) => [h.competency, h]));
+    const diagnostics = requests.map((request) => ({ request, outcome: diagnosticOutcome(this.ectx, events, request, current.get(request.competency)?.misconceptions ?? []) }));
+    const nextDiagnostic = this.nextDiagnostic(diagnostics);
+    const journeyRec = essay ? essayRecords(events, "journey").filter((r) => r.record.journey.essay === essay.id).at(-1) : undefined;
+    const journey = journeyRec ? journeyStatus(this.ectx, events, journeyRec.record.journey.id, now) : null;
+    const rewriteRec = essay ? essayRecords(events, "rewrite").filter((r) => r.record.rewrite.essay === essay.id).at(-1) : undefined;
+    const rewrite = rewriteRec?.record.evaluation ?? null;
+    const next = journey ? this.nextStep(journey) : null;
+    const stage: Stage = !essay ? "write" : nextDiagnostic ? "diagnose" : !journey ? "plan" : rewrite ? "done" : journey.finalRewrite.available ? "rewrite" : "learn";
+    return {
+      stage,
+      essays,
+      essay,
+      analysis,
+      analysedBy: essay ? this.evaluator.source(essay.text) : null,
+      hypotheses,
+      diagnostics,
+      nextDiagnostic,
+      journey,
+      next,
+      rewrite,
+      profile: essayProfile(this.ectx, this.learner.profileId, events, now),
+    };
+  }
+
+  private item(id: string): Item | undefined {
+    return this.ectx.ctx.content.items.get(id);
+  }
+
+  private answered(id: string, since = ""): boolean {
+    return this.events.some((e) => (e.kind === "evidence" || e.kind === "assisted_response") && e.item.id === id && e.at >= since);
+  }
+
+  private nextDiagnostic(diagnostics: { request: DiagnosticRequest; outcome: DiagnosticOutcome }[]): StudioView["nextDiagnostic"] {
+    for (const { request, outcome } of diagnostics) {
+      if (outcome.status !== "pending") continue;
+      const left = request.items.filter((i) => !this.answered(i.id));
+      const item = left.length ? this.item(left[0].id) : undefined;
+      if (item) return { request, item, position: request.items.length - left.length + 1, total: request.items.length };
+    }
+    return null;
+  }
+
+  private nextStep(journey: LearningJourney): NextStep | null {
+    const steps = journey.trees.flatMap((t) => t.nodes.flatMap((node) => node.steps.map((step) => ({ step, node })))).sort((a, b) => a.step.order - b.step.order);
+    for (const { step, node } of steps) {
+      if (step.status !== "pending") continue;
+      if (step.kind === "teach") {
+        const lesson = step.content.refs.map((id) => this.learner.content.lessons.get(id)).find((l) => l && !this.learner.state.lessons.has(l.id)) ?? this.learner.content.lessons.get(step.content.refs[0]);
+        return { step, node, ...(lesson ? { lesson } : {}) };
+      }
+      const left = step.content.refs.filter((id) => !this.answered(id, journey.at));
+      const item = left.length ? this.item(left[0]) : undefined;
+      if (!item) continue;
+      const taughtHere = step.kind === "independent_check" && this.taughtInOpenSession(node.competency);
+      return { step, node, item, ...(taughtHere ? { newSitting: true } : {}) };
+    }
+    return null;
+  }
+
+  private taughtInOpenSession(capability: string): boolean {
+    const open = this.learner.state.open;
+    return !!open && this.events.some((e) => e.kind === "intervention" && e.session === open.event.session && e.capability === capability);
+  }
+
+  private async ensureSession(): Promise<void> {
+    if (this.learner.state.open?.event.type !== "essay") await this.learner.newEssaySession();
+  }
+
+  /** Submit a synthetic essay, analyse it, and plan diagnostic questions for any suspected gap. */
+  async submit(text: string, source: { kind: "typed" | "synthetic"; prompt?: string } = { kind: "synthetic" }): Promise<StudioView> {
+    const [m1, m2] = await this.learner.essayMeta(2);
+    const essayId = `essay:${this.essays().length + 1}`;
+    const s = submitEssay(this.ectx, this.events, m1, { essayId, learner: this.learner.profileId, text, source: { kind: source.kind, dataUse: "synthetic_test", ...(source.prompt ? { prompt: source.prompt } : {}) } });
+    await this.learner.recordEssay(s.event);
+    const a = await analyseEssay(this.ectx, this.events, this.evaluator, essayId, m2);
+    await this.learner.recordEssay(a.event);
+    const metas = await this.learner.essayMeta(20);
+    const d = planDiagnostics(this.ectx, this.events, (n) => metas[n]);
+    if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
+    return this.view();
+  }
+
+  private essays(): EssaySubmission[] {
+    return essayRecords(this.events, "submission").map((r) => r.record.submission);
+  }
+
+  /** Answer the current diagnostic question: an independent first answer, recorded as evidence. */
+  async answerDiagnostic(response: Response): Promise<{ feedback: Feedback; view: StudioView }> {
+    const next = this.view().nextDiagnostic;
+    if (!next) throw new Error("no diagnostic question is waiting");
+    await this.ensureSession();
+    await this.learner.present(next.item, "assessment");
+    const feedback = await this.learner.answer(next.item, response, { use: "assessment" });
+    return { feedback, view: this.view() };
+  }
+
+  /** Build the learning journey from the diagnosed hypotheses. */
+  async plan(): Promise<StudioView> {
+    const essay = this.latestEssay();
+    if (!essay) throw new Error("no essay yet");
+    if (this.view().nextDiagnostic) throw new Error("finish the diagnostic questions first");
+    const [m] = await this.learner.essayMeta(1);
+    const j = createJourney(this.ectx, this.events, m, essay.id);
+    await this.learner.recordEssay(j.event);
+    return this.view();
+  }
+
+  /** Read a lesson: recorded as a lesson and as a teaching intervention for the engine. */
+  async readLesson(lessonId: string, checkCorrect: boolean): Promise<StudioView> {
+    await this.ensureSession();
+    await this.learner.finishLesson(lessonId, checkCorrect);
+    return this.view();
+  }
+
+  /** Answer the current practice or check question. Practice is assisted; a check is an independent first answer. */
+  async answerStep(response: Response): Promise<{ feedback: Feedback; view: StudioView }> {
+    const next = this.view().next;
+    if (!next?.item) throw new Error("no question is waiting");
+    if (next.newSitting) await this.learner.newEssaySession();
+    else await this.ensureSession();
+    const check = next.step.kind === "independent_check";
+    await this.learner.present(next.item, check ? "assessment" : "practice");
+    const feedback = await this.learner.answer(next.item, response, check ? { use: "assessment" } : { assisted: true, use: "practice" });
+    return { feedback, view: this.view() };
+  }
+
+  /** Submit the 50-word rewrite. A rewrite of the built-in sample is judged from a recorded judgement; any other is kept and held. */
+  async rewrite(text: string): Promise<StudioView> {
+    const essay = this.latestEssay();
+    if (!essay) throw new Error("no essay yet");
+    const [m] = await this.learner.essayMeta(1);
+    const known = SAMPLES.rewrites.some((r) => r.fingerprint === fingerprint(text));
+    const r = await evaluateRewrite(this.ectx, this.events, known ? this.evaluator : null, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
+    await this.learner.recordEssay(r.event);
+    return this.view();
+  }
+
+  /** What changed in the profile between two points (for showing what the engine did, and for tests). */
+  updates(before: LedgerEvent[]): ProfileUpdate[] {
+    return profileUpdates(this.ectx, this.learner.profileId, before, this.events, this.now());
+  }
+}

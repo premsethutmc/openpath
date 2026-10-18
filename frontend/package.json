@@ -31,8 +31,8 @@
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",
     "english:build:pilot": "node scripts/build-english.mjs --pilot",
     "english:build:preview": "node scripts/build-english.mjs --preview",
-    "essay:test": "node --import tsx --test src/english/logic/essay-demo/*.test.ts",
-    "essay:e2e": "node --test e2e/essay-learning.test.mjs"
+    "essay:test": "node --import tsx --test src/english/logic/essay-demo/*.test.ts src/english/logic/essay-live/*.test.ts",
+    "essay:e2e": "node --test e2e/essay-learning.test.mjs e2e/essay-live.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

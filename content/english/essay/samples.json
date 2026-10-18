@@ -1,0 +1,186 @@
+{
+ "status": "synthetic test data: written for OpenPath tests; no child wrote any of it",
+ "note": "Recorded evaluator outputs for the built-in synthetic samples, replayed by fingerprint. $ESSAY and $REWRITE are replaced with the ids of the essay or rewrite being judged. Any other text is analysed by the pattern stand-in and its rewrite is kept unjudged.",
+ "essays": [
+  {
+   "id": "library",
+   "title": "Our school library",
+   "prompt": "Write about a place in your school that matters to you.",
+   "text": "My school have a big library on the first floor. Every day my friend go there after lunch and read comics. The librarian discuss about new books with us on morning. In order to borrow a book, a student need a library card. I think reading is important because it help us learn new words. However, some students depend of the internet for everything. Our library should open on Sunday so that everyone can come and read.",
+   "fingerprint": "44bb5660-419",
+   "observations": {
+    "essay_id": "$ESSAY",
+    "observations": [
+     {
+      "competency": "EN.GRM.VERB.sva",
+      "kind": "error",
+      "quote": "My school have",
+      "confidence": "high",
+      "note": "test",
+      "correction": "My school has",
+      "misconception": "third_person_s"
+     },
+     {
+      "competency": "EN.GRM.VERB.sva",
+      "kind": "error",
+      "quote": "my friend go",
+      "confidence": "high",
+      "note": "test",
+      "correction": "my friend goes",
+      "misconception": "third_person_s"
+     },
+     {
+      "competency": "EN.GRM.VERB.sva",
+      "kind": "error",
+      "quote": "a student need",
+      "confidence": "high",
+      "note": "test",
+      "correction": "a student needs",
+      "misconception": "third_person_s"
+     },
+     {
+      "competency": "EN.GRM.VERB.sva",
+      "kind": "error",
+      "quote": "it help",
+      "confidence": "high",
+      "note": "test",
+      "correction": "it helps",
+      "misconception": "third_person_s"
+     },
+     {
+      "competency": "EN.GRM.PREP.dependent",
+      "kind": "error",
+      "quote": "discuss about",
+      "confidence": "high",
+      "note": "test",
+      "correction": "discuss"
+     },
+     {
+      "competency": "EN.GRM.PREP.dependent",
+      "kind": "error",
+      "quote": "depend of",
+      "confidence": "high",
+      "note": "test",
+      "correction": "depend on"
+     },
+     {
+      "competency": "EN.GRM.PREP.time_place",
+      "kind": "error",
+      "quote": "on morning",
+      "confidence": "high",
+      "note": "test",
+      "correction": "in the morning",
+      "misconception": "in_on_at_confusion"
+     },
+     {
+      "competency": "EN.SEN.PRE.concision",
+      "kind": "error",
+      "quote": "In order to",
+      "confidence": "high",
+      "note": "test",
+      "correction": "To"
+     },
+     {
+      "competency": "EN.SEN.COH.connectives",
+      "kind": "strength",
+      "quote": "However, some students",
+      "confidence": "medium",
+      "note": "test"
+     }
+    ],
+    "not_observable": []
+   }
+  },
+  {
+   "id": "weekend",
+   "title": "Weekends at home",
+   "prompt": "Describe how your family spends weekends.",
+   "text": "On weekends my brother play cricket with his friends in the park near our house. I usually stay at home and read a novel or help my mother in the kitchen. Last week we all went to the park together and had a picnic under a big tree. It was a lovely day and nobody wanted to go home.",
+   "fingerprint": "fd3b7eea-282",
+   "observations": {
+    "essay_id": "$ESSAY",
+    "observations": [
+     {
+      "competency": "EN.GRM.VERB.sva",
+      "kind": "error",
+      "quote": "my brother play",
+      "confidence": "high",
+      "note": "test",
+      "misconception": "third_person_s"
+     }
+    ],
+    "not_observable": []
+   }
+  }
+ ],
+ "rewrites": [
+  {
+   "essay": "library",
+   "text": "Our school library is important. My friend goes there daily, and the librarian discusses new books with us in the morning. Students need a card to borrow books. Reading helps us learn new words, but some students depend on the internet. The library should open on Sundays.",
+   "fingerprint": "5b86f5c2-272",
+   "judgement": {
+    "rewrite_id": "$REWRITE",
+    "dimensions": [
+     {
+      "dimension": "meaning_preservation",
+      "rating": "fully",
+      "quotes": [],
+      "note": "All main ideas kept."
+     },
+     {
+      "dimension": "clarity",
+      "rating": "mostly",
+      "quotes": [
+       "Students need a card to borrow books."
+      ],
+      "note": "Clear."
+     },
+     {
+      "dimension": "coherence",
+      "rating": "mostly",
+      "quotes": [
+       "but some students depend on the internet"
+      ],
+      "note": "Linked ideas."
+     },
+     {
+      "dimension": "grammar",
+      "rating": "fully",
+      "quotes": [
+       "My friend goes there daily"
+      ],
+      "note": "Agreement fixed."
+     },
+     {
+      "dimension": "concision",
+      "rating": "mostly",
+      "quotes": [],
+      "note": "Within the limit."
+     }
+    ],
+    "key_ideas": [
+     {
+      "original_quote": "My school have a big library",
+      "rewrite_quote": "Our school library is important"
+     },
+     {
+      "original_quote": "Every day my friend go there",
+      "rewrite_quote": "My friend goes there daily"
+     },
+     {
+      "original_quote": "a student need a library card",
+      "rewrite_quote": "Students need a card to borrow books"
+     },
+     {
+      "original_quote": "some students depend of the internet",
+      "rewrite_quote": "some students depend on the internet"
+     },
+     {
+      "original_quote": "Our library should open on Sunday",
+      "rewrite_quote": "The library should open on Sundays"
+     }
+    ]
+   }
+  }
+ ]
+}
