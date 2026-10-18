@@ -25,6 +25,7 @@ LLM = dict(
     OPENPATH_LLM_MODEL="test-model",
     OPENPATH_LLM_BASE_URL="https://llm.example.test",
     OPENPATH_LLM_API_KEY=KEY,
+    OPENPATH_LLM_RETRIES=0,
 )
 
 
@@ -107,6 +108,7 @@ class EssayGatewayTests(DevTestCase):
         self.assertEqual(headers["x-api-key"], KEY)
         self.assertIn("Grade 8", sent["system"])
         self.assertNotIn("Request:", sent["system"])
+        self.assertNotIn("temperature", sent, "current models reject a non-default temperature")
         # nothing about the text, the output or the key is stored or returned
         rec = EssayEvaluationRecord.objects.get()
         stored = json.dumps(model_to_dict(rec), default=str)

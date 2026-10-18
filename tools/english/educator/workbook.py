@@ -1,6 +1,9 @@
 """Educator review workbook (Excel / Google Sheets) from the consolidated records, and back to a decisions CSV.
 
     python3 tools/english/educator/workbook.py build            write docs/product/essay-learning/educator-review-v1/review-workbook.xlsx
+    python3 tools/english/educator/workbook.py build-round1     write educator-review-v1/round-1/reviewer-{A,B}/review-workbook.xlsx
+                                                                 (the 63 round-1 records, in review order, one blank
+                                                                 workbook per independent reviewer)
     python3 tools/english/educator/workbook.py extract <in.xlsx> <out.csv>
                                                                  a filled workbook -> the decisions CSV that
                                                                  tools/english/educator/review.ts reads
@@ -48,14 +51,26 @@ INSTRUCTIONS = [
 ]
 
 
-def build():
-    data = json.loads((PKG / "records.json").read_text(encoding="utf-8"))
+ROUND1_COLS = ["review_order", "pilot_stage", "pilot_priority"]
+ROUND1_INSTRUCTIONS = [
+    "ROUND 1 (pilot competencies only: subject-verb agreement, present and past simple, articles). 63 rows: review them in review_order.",
+    "Read REVIEWER_GUIDE.md first. pilot_priority 'required' rows are needed for the pilot; 'optional' rows serve only an extra later check.",
+    "",
+]
+
+
+def build(records=None, out=None, round1=False, slot=""):
+    data = json.loads(((records or PKG / "records.json")).read_text(encoding="utf-8"))
+    if round1:
+        # flatten the ordered entries; the review columns come first so the order is visible
+        data = {"records": [{**e["record"], "review_order": e["review_order"], "pilot_stage": e["pilot_stage"], "pilot_priority": e["pilot_priority"]} for e in data["entries"]]}
     wb = Workbook()
     ws = wb.active
     ws.title = "Instructions"
-    for k, line in enumerate(INSTRUCTIONS, 1):
+    lines = ([f"Reviewer slot {slot}: this workbook is yours alone." ] if slot else []) + (ROUND1_INSTRUCTIONS if round1 else []) + INSTRUCTIONS
+    for k, line in enumerate(lines, 1):
         ws.cell(row=k, column=1, value=line).alignment = Alignment(wrap_text=True)
-    ws["A1"].font = Font(bold=True, size=14)
+    ws["A1"].font = Font(bold=True, size=14 if not slot else 12)
     ws.column_dimensions["A"].width = 140
     lists = wb.create_sheet("Lists")
     for k, d in enumerate(DECISIONS, 1):
@@ -63,8 +78,13 @@ def build():
     for k, d in enumerate(ISSUES, 1):
         lists.cell(row=k, column=2, value=d)
     yellow = PatternFill("solid", fgColor="FFF4C2")
-    for title, (kind, cols) in SHEETS.items():
+    # round 1 follows the review order: each competency's definition, then its lessons, then its questions
+    order = ["Competencies", "Lessons", "Questions"] if round1 else list(SHEETS)
+    for title in order:
+        kind, cols = SHEETS[title]
         rows = [r for r in data["records"] if r["kind"] == kind]
+        if round1:
+            cols = ROUND1_COLS + cols
         sh = wb.create_sheet(title, index=len(wb.sheetnames) - 1)
         header = cols + REVIEW_COLS
         for c, h in enumerate(header, 1):
@@ -86,7 +106,8 @@ def build():
             sh.column_dimensions[sh.cell(row=1, column=c).column_letter].width = 60 if h in ("question", "options", "explanation", "difficulty_justification", "band_descriptors", "curriculum_mappings", "rule", "examples", "passage") else 18
         sh.freeze_panes = "B2"
     wb.properties.creator = "OpenPath"
-    out = PKG / "review-workbook.xlsx"
+    out = out or PKG / "review-workbook.xlsx"
+    out.parent.mkdir(parents=True, exist_ok=True)
     wb.save(out)
     print(f"wrote {out.relative_to(REPO)}")
 
@@ -111,6 +132,9 @@ def extract(src, dst):
 if __name__ == "__main__":
     if sys.argv[1:2] == ["build"]:
         build()
+    elif sys.argv[1:2] == ["build-round1"]:
+        for slot in ("A", "B"):
+            build(PKG / "round-1" / "records.json", PKG / "round-1" / f"reviewer-{slot}" / "review-workbook.xlsx", round1=True, slot=slot)
     elif sys.argv[1:2] == ["extract"] and len(sys.argv) == 4:
         extract(sys.argv[2], sys.argv[3])
     else:

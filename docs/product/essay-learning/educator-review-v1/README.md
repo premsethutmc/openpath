@@ -9,6 +9,9 @@ This is one package for an English educator to review the Grade 8 essay-to-maste
 The 15 benchmark essays, the 3 rewrites and their reference annotations are in
 [`../essay-validation-v1/`](../essay-validation-v1/), with an annotation guide and scoring scripts.
 
+**Start with round 1** ([`round-1/`](round-1/)): the 63 records the first pilot needs (3 competencies, 19 lessons,
+41 questions), in review order, with a reviewer guide and one blank workbook per independent reviewer.
+
 **Nothing in this package changes the app.** Decisions are exported as a structured file. Approved items are applied
 only by a separate, explicit content-release change that the owner approves.
 

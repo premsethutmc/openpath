@@ -136,6 +136,7 @@ OPENPATH_LLM_BASE_URL = os.environ.get("OPENPATH_LLM_BASE_URL", "")
 OPENPATH_LLM_API_KEY = os.environ.get("OPENPATH_LLM_API_KEY", "")
 OPENPATH_LLM_MAX_OUTPUT_TOKENS = int(os.environ.get("OPENPATH_LLM_MAX_OUTPUT_TOKENS", "4000"))
 OPENPATH_LLM_TIMEOUT_S = float(os.environ.get("OPENPATH_LLM_TIMEOUT_S", "60"))
+OPENPATH_LLM_RETRIES = int(os.environ.get("OPENPATH_LLM_RETRIES", "1"))
 # bounded cost: requests and tokens per day across all developers; over either limit, requests are refused
 OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
 OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
