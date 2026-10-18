@@ -394,6 +394,66 @@
   "findings": []
  },
  {
+  "id": "S7",
+  "title": "Improves gradually after teaching; needs several later checks",
+  "steps": [
+   {
+    "step": "journey check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.4,
+     "sd": 1.11,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 2
+    }
+   },
+   {
+    "step": "no further check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.4,
+     "sd": 1.11,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 2
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": 2,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "assistedCountedAsFresh": [],
+  "findings": [
+   "stopped after 0 later checks: not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  ]
+ },
+ {
   "id": "S5",
   "title": "Questions at the target already used up (earlier practice with help)",
   "steps": [
@@ -415,7 +475,7 @@
      "status": "demonstrated",
      "currentLevel": 2
     },
-    "note": "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed); Subject–verb agreement: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 1 later check need 4; Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
+    "note": "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed); Subject–verb agreement: 1 unseen question between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8; Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for an independent check (2 needed)"
    },
    {
     "step": "later check?",

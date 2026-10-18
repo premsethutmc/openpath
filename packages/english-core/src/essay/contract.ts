@@ -593,10 +593,13 @@ export interface EssayPolicy {
   retentionDelayDays: number;
   /** Unseen questions at or above the target kept back for the delayed retention check. */
   retentionItems: number;
-  /** Later verification checks offered after a journey whose check did not show the target. */
+  /** At most this many later verification checks after a journey whose check did not show the target (finite). */
   followUpChecks: number;
-  /** Days after the journey before a later verification check (a new sitting, never straight after teaching). */
-  followUpAfterDays: number;
+  /**
+   * Days before each later verification check, counted from the journey (first) or the previous check (then):
+   * always a new sitting, never straight after teaching. The last value repeats if there are more checks.
+   */
+  followUpSpacingDays: number[];
   rewriteLimit: number;
   rewriteMin: number;
 }

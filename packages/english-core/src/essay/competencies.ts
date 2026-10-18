@@ -9,7 +9,7 @@ import type { CompetencyProfile, CompetencyRef, EssayPolicy, RubricTrait, Writin
 
 /** Draft values for review. None is a claim about what works for children. */
 export const ESSAY_POLICY_DRAFT: EssayPolicy = {
-  version: "essay-policy@1-draft",
+  version: "essay-policy@2-draft",
   suspectMinSentences: 2,
   maxObservations: 40,
   diagnosticItems: 3,
@@ -22,8 +22,8 @@ export const ESSAY_POLICY_DRAFT: EssayPolicy = {
   checkItems: 2,
   retentionDelayDays: 7,
   retentionItems: 2,
-  followUpChecks: 1,
-  followUpAfterDays: 1,
+  followUpChecks: 3,
+  followUpSpacingDays: [1, 3, 7],
   rewriteLimit: 50,
   rewriteMin: 20,
 };

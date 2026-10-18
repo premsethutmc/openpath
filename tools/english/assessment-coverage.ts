@@ -13,8 +13,10 @@
  */
 import { ABOVE_TARGET, allocateItems, type ContentStatus, ITEM_ROLES, type ItemRole, itemEligibility } from "../../packages/english-core/src/index.ts";
 import { loadAppEssayContext } from "./essay-load.ts";
+import { loadContextWithSupplement } from "./supplement/load.ts";
 
-const ectx = loadAppEssayContext();
+// --reviewed-supplement: the counterfactual with the proposed supplement as if an educator had approved it
+const ectx = process.argv.includes("--reviewed-supplement") ? loadContextWithSupplement({ asIfReviewed: true }) : loadAppEssayContext();
 const p = ectx.policy;
 
 /** The rule for a credible pilot, per competency (stated so it can be argued with). */
@@ -102,7 +104,7 @@ function markdown(rows: ReturnType<typeof coverage>): string {
     ...rows.map((r) => `| ${r.name} | ${r.questions} | ${r.band.below} | ${r.band.belowNear} | ${r.band.target} | ${r.band.above} | ${r.roles.guided_practice} | ${r.independentFamilies} / ${r.retentionFamilies}${r.pooled ? " (pilot pools)" : " (shared)"} | ${r.leaked.length ? r.leaked.map((l) => `${l.item} ("${l.words}")`).join(", ") : "none found"} | ${r.newLearner.retentionReserve} / ${r.newLearner.verification} | ${r.afterOneJourney.laterCheckPossible ? "yes" : "no"} (${r.afterOneJourney.verificationLeft} left) |`),
   ];
   const t2 = [
-    "| Competency | Add, t ≤ b ≤ t+1.5 (current policy: 1 later check) | Add for 2 later checks | Add, t−1 ≤ b < t | Add, practice | Existing questions to review |",
+    `| Competency | Add, t ≤ b ≤ t+1.5 (current policy: ${p.followUpChecks} later checks) | Add for 2 later checks | Add, t−1 ≤ b < t | Add, practice | Existing questions to review |`,
     "|---|---:|---:|---:|---:|---:|",
     ...rows.map((r) => `| ${r.name} | ${r.pilot.addIndependent} | ${r.pilot.addIndependentForTwoLaterChecks} | ${r.pilot.addDiagnosticBelow} | ${r.pilot.addPractice} | ${r.pilot.reviewExisting} |`),
   ];

@@ -278,3 +278,11 @@ No questions were generated here, and nothing is labelled validated.
   and reports the engine's status separately.
 - **Uncalibrated content.** All difficulties are expert estimates; none are calibrated.
 - **Unchanged scope.** The Grade 8 targets stay provisional. Real-child submissions stay disabled.
+
+## Update: assessment recovery (policy @2)
+
+The policy now allows up to three spaced later checks (1, 3 and 7 days), with the same rules: unseen eligible questions
+only, never early, and pending rather than recycled when content runs out. The coverage numbers above were measured
+with one later check; `assessment-results/coverage.json` is current. A proposed 96-question supplement (provisional,
+unreviewed, not loaded by the app) and a shadow-only estimator study are in
+[ASSESSMENT_RECOVERY.md](ASSESSMENT_RECOVERY.md).
