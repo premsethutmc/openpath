@@ -122,10 +122,19 @@ function record(ectx: EssayContext) {
  * Karthik's first essay through to the target shown at band 5 without help (confirmed gap → lesson → practice →
  * journey check → later checks), on the test-only bank. Returns the record and the first journey.
  */
-async function karthikShown(essay2Errors: unknown[]) {
+async function karthikShown(essay2Errors: unknown[], earlyLowLevel = false) {
   const ectx = withExtra();
   const r = record(ectx);
   const ev = evaluator(essay2Errors);
+  if (earlyLowLevel) {
+    // earlier practice in the app shows plurals at a LOW level: the engine's retention clock starts here
+    r.answer("grm.plu.01", true, "early");
+    r.answer("grm.plu.02", true, "early");
+    r.answer("grm.plu.03", true, "early");
+    r.answer("grm.plu.11", false, "early");
+    assert.ok(r.view().demonstrated !== null && r.view().demonstrated! < 5, "shown below the target first");
+    r.days(1);
+  }
   await r.essay("essay:1", FX.essays.karthik.text, ev, "s0");
   const h = gapHypotheses(ectx, r.events).find((x) => x.competency === PLU)!;
   const d = planDiagnosticFor(ectx, r.events, h.id, r.meta());
@@ -344,4 +353,39 @@ test("K10-P journey progress reads step statuses only: lessons and practice rais
   const stL = journeyStatus(ectx, lessonOnly, first.id, r.now());
   const n = stL.trees.find((t) => t.root === PLU)!.nodes[0];
   assert.ok(stL.progress!.percent > 0 && !n.green, "a finished lesson is progress, not proficiency");
+});
+
+test("K10-B1d an essay retention check already planned is the same check: shared when due, waited for when not", async () => {
+  const { ectx, r, ev, first } = await karthikDue();
+  const st = journeyStatus(ectx, r.events, first.id, r.now());
+  const p = planCheck(ectx, r.events, r.meta("plan"), PLU, st);
+  r.events.push(p.event);
+  assert.equal(p.check.kind, "retention");
+  const due = Date.parse(p.check.notBefore) <= Date.parse(r.now());
+  await r.essay("essay:2", ESSAY_2_ONE_ERROR, ev, "e2");
+  const j = createJourney(ectx, r.events, r.meta("e2"), "essay:2").journey;
+  const node = j.trees.find((t) => t.root === PLU)?.nodes[0];
+  if (due) {
+    assert.deepEqual(node!.steps[0].content.refs, p.check.items.map((i) => i.id), "the journey asks the planned check's own questions");
+    assert.equal(node!.steps[0].purpose, "retention");
+  } else {
+    assert.equal(node, undefined);
+    assert.match(j.skipped.find((s) => s.competency === PLU)!.reason, /already planned and not yet due/);
+  }
+  // either way: no second set of delayed-check questions is reserved, and nothing is taught before the check
+  assert.ok(!j.trees.some((t) => t.nodes.some((n) => n.competency === PLU && n.steps[0]?.kind === "teach")));
+});
+
+test("K10-B1e the delayed check is planned when the target is shown; if the engine's own clock falls due first, the new journey waits for it", async () => {
+  const { ectx, r, ev, first } = await karthikShown(INFORMATIONS, true);
+  const p = planCheck(ectx, r.events, r.meta("plan"), PLU, journeyStatus(ectx, r.events, first.id, r.now()));
+  r.events.push(p.event);
+  assert.equal(p.check.kind, "retention");
+  let k = 0;
+  while (r.view().verification.status !== "overdue" && k++ < 40) r.days(0.5);
+if (Date.parse(r.now()) >= Date.parse(p.check.notBefore)) return; // this history's clocks agree: nothing to wait for
+  await r.essay("essay:2", ESSAY_2_ONE_ERROR, ev, "e2");
+  const j = createJourney(ectx, r.events, r.meta("e2"), "essay:2").journey;
+  assert.ok(!j.trees.some((t) => t.nodes.some((n) => n.competency === PLU)), "no node: nothing is asked or taught before the planned check");
+  assert.match(j.skipped.find((s) => s.competency === PLU)!.reason, /already planned and not yet due/);
 });

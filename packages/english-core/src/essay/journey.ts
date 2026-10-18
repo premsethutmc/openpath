@@ -96,7 +96,16 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
   };
   const specified = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.specified ?? false;
   /** The delayed retention check as a journey step (questions from the retention reserve), or null when too few. */
-  const retentionStep = (cap: CapabilityId): JourneyStep | null => {
+  const retentionStep = (cap: CapabilityId): JourneyStep | "wait" | null => {
+    // a delayed check the essay layer already planned is the same check: reuse its questions (never a second one);
+    // if it is not due yet, nothing is asked or taught before its date
+    const answered = new Set(events.flatMap((e) => (e.kind === "evidence" ? [e.item.id] : [])));
+    const planned = essayRecords(events, "check").map((r) => r.record.check).filter((c) => c.competency === cap && c.kind === "retention" && c.items.some((i) => !answered.has(i.id))).at(-1);
+    if (planned && planned.notBefore > meta.at) return "wait";
+    if (planned) {
+      planned.items.forEach((i) => used.add(i.id));
+      return { ...step(cap, "independent_check", `The delayed check planned for ${planned.notBefore.slice(0, 10)} is due: without help, on the questions kept for it. Teaching follows only if it does not show the skill was kept.`, planned.items.map((i) => i.id), true, `${planned.items.length} questions kept for the delayed check, no hints`), purpose: "retention" };
+    }
     const items = specified(cap) ? pickForRole(ectx, events, cap, "delayed_retention", p.retentionItems, { exclude: used }) : [];
     if (items.length < p.retentionItems) return null;
     items.forEach((i) => used.add(i.id));
@@ -126,7 +135,11 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
       let decision: NodeDecision;
       const due = role === "target" && retentionDue(ectx, cap, view(cap));
       const retention = due ? retentionStep(cap) : null;
-      if (retention) {
+      if (retention === "wait") {
+        // its delayed check is already planned and not yet due: no re-teaching before it (and no node)
+        waiting = true;
+        return;
+      } else if (retention) {
         // A3/B1: shown before and the delayed check is due: check first, re-teach only if it does not hold
         decision = "retention_due";
         steps.push(retention, conditional(teach(cap, "Shown before; the delayed check did not show it was kept: a short refresher.")), conditional(practice(cap)));
@@ -168,7 +181,12 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
         : h.status === "unresolved"
           ? `The essay showed it (${h.basis[0]}); the questions were mixed, so practice and a fresh check follow.`
           : `The essay suggests it (${h.basis[0]}); not yet checked with questions.`;
+    let waiting = false;
     addNode(h.competency, "target", 0, why, h);
+    if (waiting) {
+      skipped.push({ competency: h.competency, reason: `${name(h.competency)}: shown at the grade target before; its delayed check is already planned and not yet due, so nothing is re-taught before it.` });
+      continue;
+    }
     // a prerequisite is taught before what depends on it
     nodes.sort((a, b) => (a.role === b.role ? 0 : a.role === "prerequisite" ? -1 : 1));
     trees.push({ root: h.competency, nodes });
