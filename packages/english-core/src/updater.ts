@@ -153,6 +153,10 @@ export class Ledger {
       case "assisted_response":
         // provenance: recorded for the learner record and rule-level projections; never an estimate change
         return this.record([], event);
+      case "essay":
+        // essay-contract@1: submissions, tentative observations, diagnostic plans, journeys and rewrites are
+        // kept in the learner record for the essay projections; none of them is evidence for an estimate
+        return this.record([], event);
       case "intervention":
         this.interventions.set(event.id, event);
         if (event.capability) {
