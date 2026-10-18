@@ -25,7 +25,9 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
     const v = leafView(ledger.composite, ectx.ctx.index, cap, now);
     const obs = counted.flatMap((a) => a.observations.filter((o) => o.competency === cap));
     const errors = obs.filter((o) => o.kind === "error").length;
-    const strengths = obs.length - errors;
+    const strengths = obs.filter((o) => o.kind === "strength").length;
+    const style = obs.filter((o) => o.kind === "style").length;
+    const notObservable = counted.filter((a) => a.notObservable.includes(cap)).length;
     const essays = new Set(obs.map((o) => o.essay)).size;
     const gap = hyps.get(cap) ?? null;
     const notes: string[] = [];
@@ -42,6 +44,10 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
     if (errors === 1 && !gap) notes.push("One error in essays so far: it may be a slip.");
     if (gap?.status === "weakened") notes.push("The essay suggested a gap, but questions answered without help were right.");
     if (!ref.specified) notes.push("Not specified in the framework yet: it can be observed in an essay but not checked with questions.");
+    if (counted.length && errors === 0 && RANK[state] < RANK.demonstrated)
+      notes.push(strengths ? "Used well in essays so far. That is not mastery: only questions answered without help can show it." : "No errors seen in essays so far. That is not evidence of mastery.");
+    if (notObservable) notes.push(`${notObservable} essay${notObservable === 1 ? "" : "s"} gave no chance to show this.`);
+    if (style) notes.push(`${style} style suggestion${style === 1 ? "" : "s"}: preferences, not errors.`);
     // provenance: what kind of evidence there is, by permission to change estimates
     const decisions = ledger.decisions.filter((d) => d.capability === cap);
     const independent: string[] = [];
@@ -65,7 +71,7 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
       state,
       gap,
       engine: { stage: v.stage, verification: v.verification.status, currentLevel: v.verification.currentLevel, target: claim.target, demonstrated: v.demonstrated, mastered: v.mastered, directN: v.direct.n },
-      essays: { errors, strengths, essays },
+      essays: { errors, strengths, essays, style, notObservable },
       provenance: { tentative: obs.map((o) => o.id), independent, assisted, held },
       notes,
     };

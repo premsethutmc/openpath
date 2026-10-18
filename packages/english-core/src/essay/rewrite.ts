@@ -14,7 +14,9 @@ import type { EssayContext } from "./competencies.ts";
 import {
   ESSAY_CONTRACT,
   ESSAY_REWRITE_PROTOCOL,
+  ESSAY_REWRITE_PROTOCOL_V2,
   type EssayEvaluator,
+  type RewriteProtocol,
   type EssaySubmission,
   type EvaluatorRef,
   type RewriteDimension,
@@ -41,9 +43,11 @@ export function submitRewrite(ectx: EssayContext, events: readonly LedgerEvent[]
   return { contract: ESSAY_CONTRACT, id: input.rewriteId, essay: original.id, at: meta.at, session: meta.session, text: input.text, words, limit };
 }
 
-export function buildRewriteRequest(original: EssaySubmission, rewrite: RewriteSubmission): RewriteRequest {
+export function buildRewriteRequest(original: EssaySubmission, rewrite: RewriteSubmission, protocol: RewriteProtocol = ESSAY_REWRITE_PROTOCOL, rubric?: string): RewriteRequest {
   return {
-    protocol: ESSAY_REWRITE_PROTOCOL,
+    protocol,
+    // v2: the rubric, and the original essay's prompt, so the rewrite is compared with both
+    ...(protocol === ESSAY_REWRITE_PROTOCOL_V2 ? { ...(rubric ? { rubric } : {}), ...(original.source.prompt ? { prompt: original.source.prompt } : {}) } : {}),
     request_id: `rw:${rewrite.id}`,
     original: { id: original.id, text: scrubIdentifiers(original.text) },
     rewrite: { id: rewrite.id, text: scrubIdentifiers(rewrite.text), words: rewrite.words, limit: rewrite.limit },
@@ -56,7 +60,7 @@ const isObj = (x: unknown): x is Record<string, unknown> => !!x && typeof x === 
 /** Validate an evaluator's rewrite judgement. Each dimension stands or falls on its own. */
 export function validateRewrite(ectx: EssayContext, original: EssaySubmission, rewrite: RewriteSubmission, raw: unknown, evaluator: EvaluatorRef | null): RewriteEvaluation {
   const words = { count: rewrite.words, limit: rewrite.limit, min: ectx.policy.rewriteMin, within: rewrite.words <= rewrite.limit && rewrite.words >= ectx.policy.rewriteMin };
-  const base = { contract: ESSAY_CONTRACT, rewrite: rewrite.id, essay: original.id, evaluator, words, affectsEstimates: false as const, verifiesCompetencies: false as const, artifacts: { original: original.id, revised: rewrite.id } };
+  const base = { contract: ESSAY_CONTRACT, rewrite: rewrite.id, essay: original.id, evaluator, words, affectsEstimates: false as const, verifiesCompetencies: false as const, evidenceRole: "transfer" as const, artifacts: { original: original.id, revised: rewrite.id } };
   const notAssessed = (reason: string): RewriteDimensionResult[] => REWRITE_DIMENSIONS.map((dimension) => ({ dimension, rating: null, quotes: [], note: "", status: "not_assessed", reason }));
   const whole = (status: RewriteEvaluation["status"], reasons: string[]): RewriteEvaluation => ({ ...base, dimensions: notAssessed(reasons[0]), keyIdeas: [], status, reasons });
 
@@ -66,9 +70,11 @@ export function validateRewrite(ectx: EssayContext, original: EssaySubmission, r
   const r = normaliseText(rewrite.text);
   if (r.length > 40 && o.includes(r)) return whole("held", ["the rewrite is copied word for word from the original: there is nothing to judge"]);
   if (!evaluator) return whole("held", ["no evaluator is available: the rewrite is kept and can be judged later"]);
-  if (evaluator.protocol !== ESSAY_REWRITE_PROTOCOL) return whole("rejected", [`the evaluator answered protocol ${evaluator.protocol}, not ${ESSAY_REWRITE_PROTOCOL}`]);
+  const v2 = evaluator.protocol === ESSAY_REWRITE_PROTOCOL_V2;
+  if (!v2 && evaluator.protocol !== ESSAY_REWRITE_PROTOCOL) return whole("rejected", [`the evaluator answered protocol ${evaluator.protocol}, not ${ESSAY_REWRITE_PROTOCOL} or ${ESSAY_REWRITE_PROTOCOL_V2}`]);
   if (!isObj(raw)) return whole("rejected", ["the output is not a JSON object"]);
-  const extra = Object.keys(raw).filter((k) => !["rewrite_id", "dimensions", "key_ideas"].includes(k));
+  if (v2 && raw.rubric !== ectx.profile.key) return whole("rejected", [`rubric must be ${ectx.profile.key}`]);
+  const extra = Object.keys(raw).filter((k) => !["rewrite_id", "dimensions", "key_ideas", ...(v2 ? ["rubric"] : [])].includes(k));
   if (extra.length) return whole("rejected", [`unexpected field "${extra[0]}"`]);
   if (raw.rewrite_id !== rewrite.id) return whole("rejected", [`rewrite_id must be ${rewrite.id}`]);
   if (!Array.isArray(raw.dimensions) || !Array.isArray(raw.key_ideas)) return whole("rejected", ["dimensions and key_ideas must be lists"]);
@@ -154,12 +160,15 @@ export async function evaluateRewrite(
 ): Promise<{ event: EssayEvent; evaluation: RewriteEvaluation; rewrite: RewriteSubmission }> {
   const rewrite = submitRewrite(ectx, events, meta, input);
   const original = submissions(events).find((s) => s.id === input.essayId)!;
-  const ref: EvaluatorRef | null = evaluator ? { id: evaluator.id, version: evaluator.version, protocol: ESSAY_REWRITE_PROTOCOL, ...(evaluator.model ? { model: evaluator.model } : {}) } : null;
+  const protocol = evaluator?.protocols?.rewrite ?? ESSAY_REWRITE_PROTOCOL;
+  const ref: EvaluatorRef | null = evaluator
+    ? { id: evaluator.id, version: evaluator.version, protocol, ...(evaluator.model ? { model: evaluator.model } : {}), ...(protocol === ESSAY_REWRITE_PROTOCOL_V2 ? { rubric: ectx.profile.key } : {}) }
+    : null;
   let raw: unknown = undefined;
   let failure: string | null = null;
   if (evaluator && !instructionLike(rewrite.text)) {
     try {
-      raw = await evaluator.rewrite(buildRewriteRequest(original, rewrite));
+      raw = await evaluator.rewrite(buildRewriteRequest(original, rewrite, protocol, ectx.profile.key));
     } catch (e) {
       failure = (e as Error).message;
     }

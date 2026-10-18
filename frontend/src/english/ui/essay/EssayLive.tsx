@@ -13,7 +13,8 @@ import { loadContent } from "../../logic/content.ts";
 import type { Feedback } from "../../logic/feedback.ts";
 import { Learner } from "../../logic/learner.ts";
 import { openRepo } from "../../logic/store.ts";
-import { EssayStudio, SAMPLES, STUDIO_PROFILE_ID, STUDIO_PROFILE_NAME, type StudioView } from "../../logic/essay-live/studio.ts";
+import { connectEvaluator, EssayStudio, SAMPLES, STUDIO_PROFILE_ID, STUDIO_PROFILE_NAME, type StudioView } from "../../logic/essay-live/studio.ts";
+import { Api } from "../../logic/account.ts";
 import { presentationStatus } from "../../logic/essay-demo/shared-fixture.ts";
 import { STATUS_LABELS } from "../../logic/essay-demo/fixtures.ts";
 import { visibleStatus } from "../../logic/essay-demo/presenter.ts";
@@ -67,7 +68,11 @@ export function EssayLive() {
         const learner = profiles.some((p) => p.id === STUDIO_PROFILE_ID)
           ? await Learner.open(content, repo, STUDIO_PROFILE_ID, clock)
           : await Learner.create(content, repo, STUDIO_PROFILE_NAME, "guardian", clock, STUDIO_PROFILE_ID, "this_device_only");
-        const s = new EssayStudio(learner);
+        // the server's evaluator only on explicit opt-in (&evaluator=server): otherwise nothing leaves the device
+        const wantServer = new URLSearchParams(location.search).get("evaluator") === "server";
+        const evaluator = wantServer ? await connectEvaluator(new Api()) : null;
+        if (wantServer && !evaluator) setError("The server's essay evaluator is not available (sign in with a developer account, and ask for it to be switched on). Using the recorded samples and the pattern stand-in.");
+        const s = new EssayStudio(learner, evaluator);
         const v = s.view();
         setStudio(s);
         setView(v);
@@ -128,8 +133,10 @@ export function EssayLive() {
       <aside className="essay-demo-banner" aria-label="What is real here">
         <strong>Essay studio · connected to the learning engine</strong>
         <span>
-          Synthetic essays only, on a test learner kept on this device. Questions, lessons and every status come from the real engine. Essay analysis uses
-          recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected.
+          Synthetic essays only, on a test learner kept on this device. Questions, lessons and every status come from the real engine.{" "}
+          {studio?.connected
+            ? `Essay analysis: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text is sent to the server.`
+            : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
         </span>
       </aside>
       {v && (
@@ -196,8 +203,15 @@ export function EssayLive() {
         {v && screen === "skills" && essay && (
           <>
             <p className="essay-note" data-testid="analysed-by">
-              {v.analysedBy === "recorded" ? "Analysis: recorded evaluator output for this built-in sample, checked by the engine." : "Analysis: the simple pattern stand-in (it misses most errors), checked by the engine."} One
-              essay gives clues, not conclusions.
+              {
+                {
+                  llm: "Analysis: an AI model on OpenPath's server, checked word for word by the engine.",
+                  replay: "Analysis: a recorded server answer (test mode), checked by the engine.",
+                  recorded: "Analysis: recorded evaluator output for this built-in sample, checked by the engine.",
+                  patterns: "Analysis: the simple pattern stand-in (it misses most errors), checked by the engine.",
+                }[v.analysedBy ?? "patterns"]
+              }{" "}
+              {v.failedAnalyses.length > 0 && "The server's evaluator failed for this essay, so the local stand-in answered. "}One essay gives clues, not conclusions.
             </p>
             <div className="essay-competencies">
               {[...new Set(v.analysis?.observations.map((o) => o.competency) ?? [])].map((cap) => {
@@ -214,7 +228,7 @@ export function EssayLive() {
                       <summary>Why?</summary>
                       {obs.map((o) => (
                         <blockquote key={o.id}>
-                          {o.kind === "error" ? "Check: " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
                         </blockquote>
                       ))}
                       {h && <p className="small">{h.basis.join(". ")}</p>}
@@ -396,7 +410,7 @@ export function EssayLive() {
               <label htmlFor="essay-live-rewrite">Rewrite</label>
               <textarea id="essay-live-rewrite" rows={6} maxLength={2000} value={rewrite} onChange={(e) => setRewrite(e.target.value)} />
               <div className="essay-editor-foot">
-                <span>20 to 50 words</span>
+                <span>20 to 50 words · aim for about 50</span>
                 <output aria-live="polite">{wordCount(rewrite)} / 50 words</output>
               </div>
               <button className="primary essay-primary" type="submit" disabled={busy || wordCount(rewrite) < 20 || wordCount(rewrite) > 50}>

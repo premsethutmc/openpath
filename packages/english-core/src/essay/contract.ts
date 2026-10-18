@@ -60,6 +60,11 @@ export interface CompetencyRef {
   grade: number;
   /** Draft expected band (1–8 scale) for the grade; null when the framework does not specify the capability yet. */
   expectedBand: number | null;
+  /**
+   * "provisional": the target is a draft, not calibrated against learners or reviewed by an educator, and the
+   * framework has no descriptor at the target band (descriptors exist at 2, 4, 6 and 8). See BAND_AUDIT.md.
+   */
+  expectedBandStatus?: "provisional";
   /** The framework specifies it (descriptors exist). Unspecified competencies can be observed but not assessed. */
   specified: boolean;
   curriculum: CurriculumRef[];
@@ -117,17 +122,33 @@ export interface EvaluatorRef {
   id: string;
   /** The evaluator's own version (model build, rubric revision, fixture set). */
   version: string;
-  /** The request protocol it answered (ESSAY_OBSERVE_PROTOCOL or ESSAY_REWRITE_PROTOCOL). */
+  /** The request protocol it answered (an observe or rewrite protocol, v1 or v2). */
   protocol: string;
   model?: string;
+  /** The rubric (competency profile) it judged against, e.g. "openpath.g8-writing@1" (protocol v2). */
+  rubric?: string;
 }
 
 export const ESSAY_OBSERVE_PROTOCOL = "essay-observe.v1" as const;
 export const ESSAY_REWRITE_PROTOCOL = "essay-rewrite.v1" as const;
+/**
+ * v2 (Essay Intelligence v2): every observation carries an explanation grounded in the text, whether
+ * diagnostic verification is required, and may be a stylistic preference ("style") rather than an error. The
+ * output names the rubric it used. v1 (the recorded fixtures) is still accepted.
+ */
+export const ESSAY_OBSERVE_PROTOCOL_V2 = "essay-observe.v2" as const;
+/** v2: the request carries the essay's prompt, and the output names the rubric it used. */
+export const ESSAY_REWRITE_PROTOCOL_V2 = "essay-rewrite.v2" as const;
+export type ObserveProtocol = typeof ESSAY_OBSERVE_PROTOCOL | typeof ESSAY_OBSERVE_PROTOCOL_V2;
+export type RewriteProtocol = typeof ESSAY_REWRITE_PROTOCOL | typeof ESSAY_REWRITE_PROTOCOL_V2;
 
 /** What an evaluator receives for analysis. The text is scrubbed of contact details first. */
 export interface ObservationRequest {
-  protocol: typeof ESSAY_OBSERVE_PROTOCOL;
+  protocol: ObserveProtocol;
+  /** The rubric to judge against (v2). */
+  rubric?: string;
+  /** The essay's prompt, when there is one (v2). */
+  prompt?: string;
   request_id: string;
   essay: { id: string; text: string; words: number };
   grade: number;
@@ -158,9 +179,37 @@ export interface ObservationOutput {
   not_observable: CapabilityId[];
 }
 
+/** essay-observe.v2 output (validated strictly; unknown fields are rejected). */
+export interface ObservationOutputV2 {
+  essay_id: string;
+  /** Must equal the request's rubric. */
+  rubric: string;
+  observations: {
+    competency: CapabilityId;
+    /** error: a genuine error; strength: something done clearly well; style: a preference, not an error. */
+    kind: "error" | "strength" | "style";
+    /** Verbatim text from the essay. A paraphrase is rejected. */
+    quote: string;
+    /** Why this text shows the competency, grounded in the quoted words. */
+    explanation: string;
+    /** For an error or a style suggestion: the suggested text. Must differ from the quote. */
+    correction?: string;
+    misconception?: string;
+    confidence: "high" | "medium" | "low";
+    /** Whether a diagnostic check is needed before anything is concluded (style: always not_required). */
+    verification: "required" | "not_required";
+    /** The error looks like a one-off slip (a typo or a lapse) rather than a gap. */
+    possible_slip?: boolean;
+  }[];
+  not_observable: CapabilityId[];
+}
+
 /** What an evaluator receives for the final rewrite. */
 export interface RewriteRequest {
-  protocol: typeof ESSAY_REWRITE_PROTOCOL;
+  protocol: RewriteProtocol;
+  /** v2: the rubric, and the original essay's prompt so the rewrite can be compared with it. */
+  rubric?: string;
+  prompt?: string;
   request_id: string;
   original: { id: string; text: string };
   rewrite: { id: string; text: string; words: number; limit: number };
@@ -170,6 +219,8 @@ export interface RewriteRequest {
 /** What an evaluator must return for a rewrite (raw JSON, validated strictly). */
 export interface RewriteOutput {
   rewrite_id: string;
+  /** v2: must equal the request's rubric. */
+  rubric?: string;
   dimensions: { dimension: RewriteDimension; rating: RewriteRating; quotes: string[]; note: string }[];
   /** The original's main ideas, each with where the rewrite keeps it (null when it is lost). */
   key_ideas: { original_quote: string; rewrite_quote: string | null }[];
@@ -180,6 +231,8 @@ export interface EssayEvaluator {
   id: string;
   version: string;
   model?: string;
+  /** Protocols it speaks (default v1). A v2 evaluator is asked with v2 requests and judged by v2 rules. */
+  protocols?: { observe: ObserveProtocol; rewrite: RewriteProtocol };
   observe(request: ObservationRequest): Promise<unknown>;
   rewrite(request: RewriteRequest): Promise<unknown>;
 }
@@ -200,12 +253,18 @@ export interface EssayObservation {
   essay: string;
   competency: CapabilityId;
   area: WritingArea;
-  kind: "error" | "strength";
+  /** style (v2): a stylistic preference, shown as a suggestion; never an error and never a gap. */
+  kind: "error" | "strength" | "style";
   span: EvidenceSpan;
   correction?: string;
   misconception?: string;
   confidence: "high" | "medium" | "low";
+  /** The explanation (v2) or note (v1), grounded in the quoted text. */
   note: string;
+  /** v2: whether the evaluator says a diagnostic check is needed. */
+  verification?: "required" | "not_required";
+  /** v2: the evaluator thinks this error is a one-off slip. */
+  possibleSlip?: boolean;
   evaluator: EvaluatorRef;
 }
 
@@ -374,6 +433,11 @@ export interface RewriteEvaluation {
   status: "evaluated" | "held" | "rejected";
   reasons: string[];
   affectsEstimates: false;
+  /**
+   * What the rewrite can stand for: transfer evidence (the learner applied what they practised to their own
+   * writing). It is recorded for the learner's profile history; it never proves that a competency is mastered.
+   */
+  evidenceRole?: "transfer";
   verifiesCompetencies: false;
   /** Ledger ids of the original essay and the rewrite, for side-by-side comparison. */
   artifacts: { original: string; revised: string };
@@ -411,7 +475,7 @@ export interface CompetencyStatus {
    * currently supports) reaches `target` (the profile's draft grade band).
    */
   engine: { stage: Stage; verification: VerificationStatus; currentLevel: number | null; target: number | null; demonstrated: number | null; mastered: number | null; directN: number };
-  essays: { errors: number; strengths: number; essays: number };
+  essays: { errors: number; strengths: number; essays: number; style?: number; notObservable?: number };
   provenance: ProvenanceSummary;
   notes: string[];
 }

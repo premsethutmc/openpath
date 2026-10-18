@@ -37,7 +37,8 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
   const analysisEvents = new Map(essayRecords(events, "analysis").map((r) => [r.record.analysis.id, r.event.id]));
   for (const a of countedAnalyses(events)) {
     const errors = new Map<CapabilityId, EssayObservation[]>();
-    for (const o of a.observations) if (o.kind === "error") errors.set(o.competency, [...(errors.get(o.competency) ?? []), o]);
+    // only errors count towards a suspected gap: never a stylistic preference, and never a low-confidence claim
+    for (const o of a.observations) if (o.kind === "error" && o.confidence !== "low") errors.set(o.competency, [...(errors.get(o.competency) ?? []), o]);
     let ledger: Ledger | null = null;
     for (const [cap, obs] of errors) {
       const sentences = new Set(obs.map((o) => o.span.sentence)).size;

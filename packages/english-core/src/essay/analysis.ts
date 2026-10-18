@@ -12,7 +12,9 @@ import { allowedTags, type EssayContext } from "./competencies.ts";
 import {
   ESSAY_CONTRACT,
   ESSAY_OBSERVE_PROTOCOL,
+  ESSAY_OBSERVE_PROTOCOL_V2,
   REAL_LEARNER_ESSAYS_ENABLED,
+  type ObserveProtocol,
   type EssayAnalysis,
   type EssayEvaluator,
   type EssayObservation,
@@ -77,9 +79,10 @@ export function submitEssay(
 }
 
 /** The request an evaluator receives: scrubbed text, and the profile's competencies with their descriptors. */
-export function buildObservationRequest(ectx: EssayContext, submission: EssaySubmission): ObservationRequest {
+export function buildObservationRequest(ectx: EssayContext, submission: EssaySubmission, protocol: ObserveProtocol = ESSAY_OBSERVE_PROTOCOL): ObservationRequest {
   return {
-    protocol: ESSAY_OBSERVE_PROTOCOL,
+    protocol,
+    ...(protocol === ESSAY_OBSERVE_PROTOCOL_V2 ? { rubric: ectx.profile.key, ...(submission.source.prompt ? { prompt: submission.source.prompt } : {}) } : {}),
     request_id: `obs:${submission.id}`,
     essay: { id: submission.id, text: scrubIdentifiers(submission.text), words: submission.words },
     grade: submission.source.grade,
@@ -91,23 +94,43 @@ export function buildObservationRequest(ectx: EssayContext, submission: EssaySub
   };
 }
 
-const TOP = new Set(["essay_id", "observations", "not_observable"]);
-const OBS = new Set(["competency", "kind", "quote", "correction", "misconception", "confidence", "note"]);
+const TOP_V1 = new Set(["essay_id", "observations", "not_observable"]);
+const TOP_V2 = new Set(["essay_id", "rubric", "observations", "not_observable"]);
+const OBS_V1 = new Set(["competency", "kind", "quote", "correction", "misconception", "confidence", "note"]);
+const OBS_V2 = new Set(["competency", "kind", "quote", "explanation", "correction", "misconception", "confidence", "verification", "possible_slip"]);
 const isObj = (x: unknown): x is Record<string, unknown> => !!x && typeof x === "object" && !Array.isArray(x);
+
+/** Limits on what counts as specific evidence (v2). */
+export const OBSERVATION_LIMITS = {
+  /** A quote longer than this is not a specific piece of evidence. */
+  maxQuoteChars: 400,
+  /** A quote covering more than this share of the essay is not specific either. */
+  maxQuoteShare: 0.5,
+  minExplanationChars: 12,
+  maxExplanationChars: 600,
+} as const;
 
 /**
  * Validate an evaluator's raw output against the essay. Whole-output problems reject the analysis; a bad
  * observation is rejected on its own with a reason; text addressed to the evaluator holds everything for a person.
+ *
+ * v2 adds: the rubric must match; every observation needs an explanation and a verification flag; a correction
+ * identical to the quote shows no error; over-broad quotes are not evidence; an error and a strength on the same
+ * words for the same competency contradict each other, so both are rejected; a competency cannot be both observed
+ * and "not observable".
  */
 export function validateObservations(ectx: EssayContext, submission: EssaySubmission, raw: unknown, evaluator: EvaluatorRef, analysisId: string, repeatOf?: string): EssayAnalysis {
   const base = { contract: ESSAY_CONTRACT, id: analysisId, essay: submission.id, evaluator, ...(repeatOf ? { repeatOf } : {}) };
   const whole = (status: EssayAnalysis["status"], reasons: string[]): EssayAnalysis => ({ ...base, status, reasons, observations: [], rejected: [], notObservable: [] });
   if (!evaluator.id || !evaluator.version) return whole("rejected", ["the evaluator has no id or version"]);
-  if (evaluator.protocol !== ESSAY_OBSERVE_PROTOCOL) return whole("rejected", [`the evaluator answered protocol ${evaluator.protocol}, not ${ESSAY_OBSERVE_PROTOCOL}`]);
+  const v2 = evaluator.protocol === ESSAY_OBSERVE_PROTOCOL_V2;
+  if (!v2 && evaluator.protocol !== ESSAY_OBSERVE_PROTOCOL) return whole("rejected", [`the evaluator answered protocol ${evaluator.protocol}, not ${ESSAY_OBSERVE_PROTOCOL} or ${ESSAY_OBSERVE_PROTOCOL_V2}`]);
   if (!isObj(raw)) return whole("rejected", ["the output is not a JSON object"]);
   const shape: string[] = [];
-  for (const k of Object.keys(raw)) if (!TOP.has(k)) shape.push(`unexpected field "${k}": an evaluator may only propose observations`);
+  for (const k of Object.keys(raw)) if (!(v2 ? TOP_V2 : TOP_V1).has(k)) shape.push(`unexpected field "${k}": an evaluator may only propose observations`);
   if (raw.essay_id !== submission.id) shape.push(`essay_id must be ${submission.id}`);
+  if (v2 && raw.rubric !== ectx.profile.key) shape.push(`rubric must be ${ectx.profile.key} (the output names ${JSON.stringify(raw.rubric)})`);
+  if (v2 && evaluator.rubric !== undefined && evaluator.rubric !== ectx.profile.key) shape.push(`the evaluator is configured for rubric ${evaluator.rubric}, not ${ectx.profile.key}`);
   if (!Array.isArray(raw.observations)) shape.push("observations must be a list");
   if (!Array.isArray(raw.not_observable) || !raw.not_observable.every((x) => typeof x === "string")) shape.push("not_observable must be a list of competency ids");
   if (shape.length) return whole("rejected", shape);
@@ -120,22 +143,34 @@ export function validateObservations(ectx: EssayContext, submission: EssaySubmis
   const accepted: EssayObservation[] = [];
   const rejected: EssayAnalysis["rejected"] = [];
   const seen = new Set<string>();
+  const kinds = v2 ? ["error", "strength", "style"] : ["error", "strength"];
+  const norm = (t: string) => t.replace(/[’‘]/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
   list.slice(0, ectx.policy.maxObservations).forEach((o, index) => {
     const reject = (reason: string, competency?: string) => rejected.push({ index, ...(competency ? { competency } : {}), reason });
     if (!isObj(o)) return reject("not an object");
-    const extra = Object.keys(o).filter((k) => !OBS.has(k));
+    const extra = Object.keys(o).filter((k) => !(v2 ? OBS_V2 : OBS_V1).has(k));
     if (extra.length) return reject(`unexpected field "${extra[0]}"`, typeof o.competency === "string" ? o.competency : undefined);
     if (typeof o.competency !== "string") return reject("competency must be a string");
     const ref = ectx.profile.byCapability.get(o.competency);
     if (!ref) return reject(`${o.competency} is not a competency in profile ${ectx.profile.key}`, o.competency);
-    if (o.kind !== "error" && o.kind !== "strength") return reject("kind must be error or strength", o.competency);
+    if (!kinds.includes(o.kind as string)) return reject(`kind must be ${kinds.join(", ")}`, o.competency);
     if (!["high", "medium", "low"].includes(o.confidence as string)) return reject("confidence must be high, medium or low", o.competency);
-    if (typeof o.note !== "string") return reject("note must be a string", o.competency);
+    const explanation = v2 ? o.explanation : o.note;
+    if (typeof explanation !== "string") return reject(`${v2 ? "explanation" : "note"} must be a string`, o.competency);
+    if (v2 && explanation.trim().length < OBSERVATION_LIMITS.minExplanationChars) return reject("no explanation grounded in the text", o.competency);
+    if (v2 && explanation.length > OBSERVATION_LIMITS.maxExplanationChars) return reject("explanation too long", o.competency);
+    if (v2 && o.verification !== "required" && o.verification !== "not_required") return reject("verification must be required or not_required", o.competency);
+    if (v2 && o.possible_slip !== undefined && typeof o.possible_slip !== "boolean") return reject("possible_slip must be true or false", o.competency);
     if (typeof o.quote !== "string" || !o.quote.trim()) return reject("no quoted evidence from the essay", o.competency);
     if (o.correction !== undefined && typeof o.correction !== "string") return reject("correction must be a string", o.competency);
     if (o.misconception !== undefined && typeof o.misconception !== "string") return reject("misconception must be a string", o.competency);
     const span = findSpan(submission.text, o.quote);
     if (!span) return reject(`quote not found word for word in the essay: "${o.quote}"`, o.competency);
+    if (v2 && (span.quote.length > OBSERVATION_LIMITS.maxQuoteChars || span.quote.length > OBSERVATION_LIMITS.maxQuoteShare * submission.text.length))
+      return reject("the quote is too broad to be specific evidence", o.competency);
+    if (v2 && typeof o.correction === "string" && norm(o.correction) === norm(span.quote)) return reject("the correction is the same as the quoted text: no error is shown", o.competency);
+    if (v2 && o.kind === "error" && o.possible_slip === true && o.confidence === "high" && o.verification === "not_required")
+      reasons.push(`a high-confidence possible slip on ${o.competency} is kept as observed, not as a gap`);
     const key = `${o.competency}|${o.kind}|${span.start}|${span.end}`;
     if (seen.has(key)) return reject("the same competency and span were observed twice", o.competency);
     seen.add(key);
@@ -144,24 +179,47 @@ export function validateObservations(ectx: EssayContext, submission: EssaySubmis
       reasons.push(`dropped unknown misconception tag "${misconception}" on ${o.competency}`);
       misconception = undefined;
     }
-    if (o.kind === "strength" && misconception) misconception = undefined;
+    if (o.kind !== "error" && misconception) misconception = undefined;
+    const kind = o.kind as EssayObservation["kind"];
     accepted.push({
       id: `${analysisId}:o${accepted.length + 1}`,
       essay: submission.id,
       competency: o.competency,
       area: ref.area,
-      kind: o.kind,
+      kind,
       span,
-      ...(typeof o.correction === "string" && o.kind === "error" ? { correction: o.correction } : {}),
+      ...(typeof o.correction === "string" && kind !== "strength" ? { correction: o.correction } : {}),
       ...(misconception ? { misconception } : {}),
       confidence: o.confidence as EssayObservation["confidence"],
-      note: o.note,
+      note: explanation,
+      ...(v2 ? { verification: kind === "style" ? ("not_required" as const) : (o.verification as "required" | "not_required") } : {}),
+      ...(v2 && o.possible_slip === true && kind === "error" ? { possibleSlip: true } : {}),
       evaluator,
     });
   });
-  const notObservable = (raw.not_observable as string[]).filter((c) => ectx.profile.byCapability.has(c));
+  // an error and a strength on overlapping words for the same competency contradict each other: neither stands
+  const overlaps = (a: EssayObservation, b: EssayObservation) => a.span.start < b.span.end && b.span.start < a.span.end;
+  const contradicted = new Set<string>();
+  for (const a of accepted)
+    for (const b of accepted)
+      if (a.competency === b.competency && a.kind === "error" && b.kind === "strength" && overlaps(a, b)) {
+        contradicted.add(a.id);
+        contradicted.add(b.id);
+      }
+  const kept = accepted.filter((o) => !contradicted.has(o.id)).map((o, i) => ({ ...o, id: `${analysisId}:o${i + 1}` }));
+  for (const o of accepted)
+    if (contradicted.has(o.id)) rejected.push({ index: -1, competency: o.competency, reason: `contradictory: an error and a strength were both claimed for "${o.span.quote}"` });
+  const observedCaps = new Set(kept.map((o) => o.competency));
+  const notObservable = (raw.not_observable as string[]).filter((c) => {
+    if (!ectx.profile.byCapability.has(c)) return false;
+    if (observedCaps.has(c)) {
+      reasons.push(`${c} was both observed and called not observable: the "not observable" claim is dropped`);
+      return false;
+    }
+    return true;
+  });
   if (repeatOf) reasons.push(`this essay repeats ${repeatOf}: its observations are kept for the record but not counted again`);
-  return { ...base, status: "accepted", reasons, observations: accepted, rejected, notObservable };
+  return { ...base, status: "accepted", reasons, observations: kept, rejected, notObservable };
 }
 
 /** Ask the evaluator, validate its answer, and return the ledger event to append. */
@@ -176,10 +234,11 @@ export async function analyseEssay(
   const submission = all.find((s) => s.id === essayId);
   if (!submission) throw new EssayRefusal(`essay ${essayId} is not recorded`);
   const repeatOf = all.find((s) => s.fingerprint === submission.fingerprint && s.at < submission.at && s.id !== submission.id)?.id;
-  const ref: EvaluatorRef = { id: evaluator.id, version: evaluator.version, protocol: ESSAY_OBSERVE_PROTOCOL, ...(evaluator.model ? { model: evaluator.model } : {}) };
+  const protocol = evaluator.protocols?.observe ?? ESSAY_OBSERVE_PROTOCOL;
+  const ref: EvaluatorRef = { id: evaluator.id, version: evaluator.version, protocol, ...(evaluator.model ? { model: evaluator.model } : {}), ...(protocol === ESSAY_OBSERVE_PROTOCOL_V2 ? { rubric: ectx.profile.key } : {}) };
   let raw: unknown;
   try {
-    raw = await evaluator.observe(buildObservationRequest(ectx, submission));
+    raw = await evaluator.observe(buildObservationRequest(ectx, submission, protocol));
   } catch (e) {
     raw = undefined;
     const analysis: EssayAnalysis = { contract: ESSAY_CONTRACT, id: meta.id, essay: submission.id, evaluator: ref, status: "rejected", reasons: [`the evaluator failed: ${(e as Error).message}`], observations: [], rejected: [], notObservable: [] };
