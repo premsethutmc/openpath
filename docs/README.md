@@ -22,7 +22,7 @@ Milestone scopes, each approved before it is built:
 
 Tutor architecture (proposal, awaiting approval):
 
-- [`tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md`](tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md): one subject-independent tutor that teaches towards a goal, the missing "learning with help" state, and milestones T0–T5
+- [`tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md`](tutor/AUTONOMOUS_TUTOR_ARCHITECTURE.md): one subject-independent tutor that teaches towards a goal, how much help a learner needs, and milestones T0–T3 (revision 2)
 
 [`ARCHITECTURE.md`](ARCHITECTURE.md) is the original design record of the apple-shopping prototype. It is superseded for platform matters.
 
