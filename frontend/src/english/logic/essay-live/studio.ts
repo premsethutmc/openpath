@@ -51,6 +51,8 @@ import {
   type QuestionSet,
   ESSAY_POLICY_DRAFT,
   ESSAY_QUESTIONS_PROTOCOL,
+  PILOT_VERIFICATION,
+  type VerificationPolicy,
   generatePractice,
   nextPracticeQuestion,
   planDiagnosticFor,
@@ -59,6 +61,7 @@ import {
   EssayRefusal,
   analyseEssay,
   dueCheck,
+  journeyOutcomes,
   planCheck,
   plannedChecks,
   createJourney,
@@ -145,7 +148,11 @@ export async function connectEvaluator(api: {
   }
 }
 
-export function essayContext(content: AppContent): EssayContext {
+/**
+ * The essay context for the app's content. `verification` is the eligibility policy for verified mastery: the pilot
+ * policy (reviewed, released questions only, answered after release) unless a developer test asks for the developer policy (verification-eligibility@2).
+ */
+export function essayContext(content: AppContent, verification: VerificationPolicy = PILOT_VERIFICATION): EssayContext {
   const lessons = new Map<CapabilityId, string[]>();
   const teachingText = new Map<CapabilityId, string[]>();
   for (const l of content.lessons.values()) {
@@ -155,7 +162,7 @@ export function essayContext(content: AppContent): EssayContext {
   }
   // the pilot's pools are existing item-role metadata: a question reserved for one use is never taken for another
   const pools = new Map([...content.pilot.pools].map(([id, p]) => [id, p.pool]));
-  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT };
+  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT, verification };
 }
 
 export type Stage = "write" | "diagnose" | "plan" | "learn" | "rewrite" | "done";
@@ -212,7 +219,11 @@ export class EssayStudio {
   /** Used when the server's evaluator fails: the failure is recorded first, then this answers (and says so). */
   readonly fallback: ReturnType<typeof studioEvaluator>;
 
-  constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator()) {
+  /** Which evidence may verify mastery here (the pilot policy unless a developer test chose otherwise). */
+  readonly verification: VerificationPolicy;
+
+  constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator(), verification: VerificationPolicy = PILOT_VERIFICATION) {
+    this.verification = verification;
     this.learner = learner;
     this.fallback = fallback;
     this.evaluator = evaluator ?? fallback;
@@ -220,7 +231,7 @@ export class EssayStudio {
 
   /** The essay context for the learner's current content (which grows when generated questions are recorded). */
   get ectx(): EssayContext {
-    if (this.ectxCache?.content !== this.learner.content) this.ectxCache = { content: this.learner.content, ectx: essayContext(this.learner.content) };
+    if (this.ectxCache?.content !== this.learner.content) this.ectxCache = { content: this.learner.content, ectx: essayContext(this.learner.content, this.verification) };
     return this.ectxCache.ectx;
   }
 
@@ -271,7 +282,8 @@ export class EssayStudio {
     const rewriteRec = essay ? essayRecords(events, "rewrite").filter((r) => r.record.rewrite.essay === essay.id).at(-1) : undefined;
     const rewrite = rewriteRec?.record.evaluation ?? null;
     const next = journey ? this.nextStep(journey) : null;
-    const outcomes = journey ? journey.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target" && n.outcome).map((n) => n.outcome!)) : [];
+    // policy @3 (A2): every journey's target skills keep their later and delayed checks, from the latest journey holding each
+    const outcomes = journey ? journeyOutcomes(this.ectx, events, now) : [];
     const due = dueCheck(this.ectx, events, now);
     const laterItem = due ? this.item(due.item) : undefined;
     const laterCheck = due && laterItem ? { check: due.check, item: laterItem, position: due.position, total: due.total } : null;

@@ -188,6 +188,10 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
         if (!item.generated.sources?.length) problems.push(`generated item ${item.id} must name its lexical sources`);
         if (!item.generated.word) problems.push(`generated item ${item.id} must name its word`);
       } else if (item.difficulty_source === "feature_estimate") problems.push(`item ${item.id} has a feature_estimate difficulty but no generation record`);
+      // H-V3: a validated (educator-approved) version says when it was released; nothing else may claim a release
+      if (item.evidence_status === "validated" && !(typeof item.released_at === "string" && Number.isFinite(Date.parse(item.released_at))))
+        problems.push(`validated item ${item.id} needs released_at (when this version was approved and released)`);
+      if (item.released_at !== undefined && item.evidence_status !== "validated") problems.push(`item ${item.id} has released_at but is not validated`);
       // a model-written question is provisional by construction: it can never change an estimate
       if (item.model_generated) {
         if (item.evidence_status !== "provisional") problems.push(`model-generated item ${item.id} must be provisional`);

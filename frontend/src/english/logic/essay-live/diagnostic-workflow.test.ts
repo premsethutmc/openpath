@@ -13,7 +13,7 @@ import { loadContent } from "../content.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
 import { rightAnswer, wrongAnswer } from "../test-helpers.ts";
-import { estimateLabel, evidenceLabel, formativeLabel } from "./evidence-labels.ts";
+import { estimateLabel, evidenceLabel, formativeLabel, lessonLabel } from "./evidence-labels.ts";
 import { connectEvaluator, EssayStudio, STUDIO_PROFILE_ID, STUDIO_PROFILE_NAME } from "./studio.ts";
 
 const FX = JSON.parse(readFileSync(new URL("../../../../e2e/fixtures/essay-diagnostic-workflow.json", import.meta.url), "utf8")) as {
@@ -168,4 +168,42 @@ test("ESSAY-DIAG without a question writer, bank diagnostics are planned at once
   const v = await studio.submit(FX.essays.karthik.text);
   assert.equal(v.analysedBy, "patterns");
   await assert.rejects(() => studio.practise(v.hypotheses[0]?.id ?? "x"), /server's evaluator/);
+});
+
+test("ESSAY-LESSONS the lesson programme: completed over sessions, kept after a reload and a second essay, awaiting verification, never a claim", async () => {
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const server = mockServer();
+  const learner = await Learner.create(content, repo, STUDIO_PROFILE_NAME, "guardian", clock, STUDIO_PROFILE_ID);
+  let studio = new EssayStudio(learner, await connectEvaluator(server));
+  let v = await studio.submit(FX.essays.karthik.text, { kind: "typed", prompt: FX.essays.karthik.prompt });
+  const hyp = v.hypotheses.find((h) => h.competency === PLU)!;
+  v = await studio.checkSkill(hyp.id);
+  for (; v.nextDiagnostic; ) v = (await studio.answerDiagnostic(wrongAnswer(v.nextDiagnostic.item))).view;
+  v = await studio.plan();
+  const programme = v.profile.competencies.find((c) => c.competency === PLU)!.lessons!;
+  assert.equal(programme.total, 5);
+  // lesson 1 in this session, the rest on two later days, each in a new sitting
+  v = await studio.readLesson(programme.lessons[0].id, true);
+  for (const [k, id] of programme.lessons.slice(1).map((l) => l.id).entries()) {
+    if (k === 0 || k === 2) {
+      clock.days(1);
+      await learner.newEssaySession();
+    }
+    v = await studio.readLesson(id, k % 2 === 0);
+  }
+  let p = v.profile.competencies.find((c) => c.competency === PLU)!;
+  assert.deepEqual([p.lessons!.completed, p.lessons!.percent, p.lessons!.sessions], [5, 100, 3]);
+  assert.equal(evidenceLabel(p).key, "confirmed", "completed lessons change no evidence state");
+  assert.match(lessonLabel(p)!, /All lessons done/);
+  assert.match(v.recommendation?.verification?.reason ?? studio.view().recommendation?.verification?.reason ?? "", /Mastery verification is not available/);
+  // reload, then a second essay a week later: the completion history is kept
+  const reopened = await Learner.open(content, repo, STUDIO_PROFILE_ID, clock);
+  studio = new EssayStudio(reopened, await connectEvaluator(server));
+  assert.deepEqual(studio.view().profile.competencies.find((c) => c.competency === PLU)!.lessons, p.lessons);
+  clock.days(7);
+  v = await studio.submit(FX.essays.second.text, { kind: "typed", prompt: FX.essays.second.prompt });
+  p = v.profile.competencies.find((c) => c.competency === PLU)!;
+  assert.equal(p.lessons!.percent, 100, "a new essay never resets learning progress");
+  assert.ok(!["demonstrated", "verified"].includes(p.state));
 });

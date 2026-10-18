@@ -161,8 +161,12 @@ export function sharedFixture(
         mastered: null,
         directN: demonstrated ? 2 : 0,
         estimate: null,
+        verifiedLevel: null,
+        verifiedOn: null,
+        verificationWithheld: false,
       },
       formative: null,
+      lessons: null,
       essays: {
         errors: state === "suspected" ? 1 : 0,
         strengths: observed ? 1 : 0,

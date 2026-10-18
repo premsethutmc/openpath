@@ -4,6 +4,9 @@
     python3 tools/english/educator/workbook.py build-round1     write educator-review-v1/round-1/reviewer-{A,B}/review-workbook.xlsx
                                                                  (the 63 round-1 records, in review order, one blank
                                                                  workbook per independent reviewer)
+    python3 tools/english/educator/workbook.py build-plurals    write educator-review-v1/round-plurals/reviewer-{A,B}/review-workbook.xlsx
+                                                                 (the 30 proposed plural questions, item by item, in
+                                                                 review order, one blank workbook per reviewer)
     python3 tools/english/educator/workbook.py extract <in.xlsx> <out.csv>
                                                                  a filled workbook -> the decisions CSV that
                                                                  tools/english/educator/review.ts reads
@@ -59,15 +62,26 @@ ROUND1_INSTRUCTIONS = [
 ]
 
 
-def build(records=None, out=None, round1=False, slot=""):
+PLURALS_COLS = ["review_order", "coverage_name", "proposed_use"]
+PLURALS_INSTRUCTIONS = [
+    "PLURAL QUESTIONS (30 proposed, provisional questions on plural nouns). Review every row, item by item, in review_order.",
+    "Read round-plurals/REVIEW_NOTES.md first: it lists what to check for each sub-skill and each question. The notes are the author's questions to you, not decisions.",
+    "Approving a question does not release it: only a separate content release marks an approved version validated, with its release date.",
+    "",
+]
+
+
+def build(records=None, out=None, round1=False, slot="", plurals=False):
     data = json.loads(((records or PKG / "records.json")).read_text(encoding="utf-8"))
-    if round1:
+    if plurals:
+        data = {"records": [{**e["record"], "review_order": e["review_order"], "coverage_name": e["coverage_name"], "proposed_use": e["proposed_use"]} for e in data["entries"]]}
+    elif round1:
         # flatten the ordered entries; the review columns come first so the order is visible
         data = {"records": [{**e["record"], "review_order": e["review_order"], "pilot_stage": e["pilot_stage"], "pilot_priority": e["pilot_priority"]} for e in data["entries"]]}
     wb = Workbook()
     ws = wb.active
     ws.title = "Instructions"
-    lines = ([f"Reviewer slot {slot}: this workbook is yours alone." ] if slot else []) + (ROUND1_INSTRUCTIONS if round1 else []) + INSTRUCTIONS
+    lines = ([f"Reviewer slot {slot}: this workbook is yours alone." ] if slot else []) + (PLURALS_INSTRUCTIONS if plurals else ROUND1_INSTRUCTIONS if round1 else []) + INSTRUCTIONS
     for k, line in enumerate(lines, 1):
         ws.cell(row=k, column=1, value=line).alignment = Alignment(wrap_text=True)
     ws["A1"].font = Font(bold=True, size=14 if not slot else 12)
@@ -79,11 +93,13 @@ def build(records=None, out=None, round1=False, slot=""):
         lists.cell(row=k, column=2, value=d)
     yellow = PatternFill("solid", fgColor="FFF4C2")
     # round 1 follows the review order: each competency's definition, then its lessons, then its questions
-    order = ["Competencies", "Lessons", "Questions"] if round1 else list(SHEETS)
+    order = ["Questions"] if plurals else ["Competencies", "Lessons", "Questions"] if round1 else list(SHEETS)
     for title in order:
         kind, cols = SHEETS[title]
         rows = [r for r in data["records"] if r["kind"] == kind]
-        if round1:
+        if plurals:
+            cols = PLURALS_COLS + cols
+        elif round1:
             cols = ROUND1_COLS + cols
         sh = wb.create_sheet(title, index=len(wb.sheetnames) - 1)
         header = cols + REVIEW_COLS
@@ -116,6 +132,8 @@ def extract(src, dst):
     wb = load_workbook(src, read_only=True)
     out = [["record_kind", "record_id", "version", "fingerprint", "reviewer_id", "decision", "reason", "suggested_correction", "issues", "date"]]
     for title, (kind, cols) in SHEETS.items():
+        if title not in wb.sheetnames:  # a round workbook may have only some sheets (round-plurals: Questions)
+            continue
         sh = wb[title]
         rows = list(sh.iter_rows(values_only=True))
         h = [str(x) for x in rows[0]]
@@ -135,6 +153,9 @@ if __name__ == "__main__":
     elif sys.argv[1:2] == ["build-round1"]:
         for slot in ("A", "B"):
             build(PKG / "round-1" / "records.json", PKG / "round-1" / f"reviewer-{slot}" / "review-workbook.xlsx", round1=True, slot=slot)
+    elif sys.argv[1:2] == ["build-plurals"]:
+        for slot in ("A", "B"):
+            build(PKG / "round-plurals" / "records.json", PKG / "round-plurals" / f"reviewer-{slot}" / "review-workbook.xlsx", slot=slot, plurals=True)
     elif sys.argv[1:2] == ["extract"] and len(sys.argv) == 4:
         extract(sys.argv[2], sys.argv[3])
     else:

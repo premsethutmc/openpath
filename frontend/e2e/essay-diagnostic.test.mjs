@@ -178,6 +178,18 @@ test("ESSAY-DIAG two tracks: dashboard → bank check → model practice → les
   }
   assert.deepEqual(await tree.locator("[data-step]").evaluateAll((els) => els.map((e) => `${e.dataset.step}:${e.dataset.status}`)), ["teach:done", "guided_practice:done", "independent_check:blocked"]);
   assert.equal(await page.locator(`[data-outcome-for="${PLU}"]`).getAttribute("data-verified"), "false");
+  // the lesson programme continues beyond the path's one lesson; progress is learning, never a claim
+  const prog = tree.locator(`[data-lesson-programme="${PLU}"]`);
+  assert.equal(await prog.getAttribute("data-lessons-done"), "1");
+  assert.equal(await prog.getAttribute("data-lessons-total"), "5");
+  await prog.locator("[data-next-lesson]").click();
+  await page.locator('[data-current-step="programme_lesson"]').waitFor();
+  await page.locator("input[name=lesson-check]").first().check();
+  await page.getByRole("button", { name: "I've read this" }).click();
+  await page.waitForFunction(() => document.querySelector("#essay-main")?.getAttribute("aria-busy") === "false" && !document.querySelector('[data-current-step="programme_lesson"]'));
+  assert.equal(await prog.getAttribute("data-lessons-done"), "2");
+  assert.match(await prog.innerText(), /2 of 5 completed \(40%\)\. Learning progress only/);
+  assert.deepEqual(await tree.locator("[data-step]").evaluateAll((els) => els.map((e) => `${e.dataset.step}:${e.dataset.status}`)), ["teach:done", "guided_practice:done", "independent_check:blocked"], "lessons never change the check");
   await shot(page, "path");
 
   // the profile says what the evidence is: gap confirmed, an estimate (not mastery), formative practice, held answers
@@ -192,6 +204,7 @@ test("ESSAY-DIAG two tracks: dashboard → bank check → model practice → les
   assert.match(await row.locator("[data-estimate]").innerText(), /an estimate, not mastery/);
   assert.equal(await row.locator("[data-formative]").getAttribute("data-formative"), "difficulty");
   assert.equal(await row.locator("[data-held]").getAttribute("data-held"), "5");
+  assert.equal(await row.locator("[data-lessons]").getAttribute("data-lessons"), "40");
   const before = await page.locator("[data-profile]").evaluateAll((els) => els.map((e) => `${e.dataset.profile}:${e.dataset.state}:${e.querySelector("[data-status]")?.dataset.status}`));
   await shot(page, "profile");
 

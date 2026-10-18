@@ -11,10 +11,10 @@ import { leafView } from "../composite.ts";
 import type { CapabilityId, EssayEvent, InterventionEvent, LedgerEvent } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
-import { engineClaim, type EssayContext } from "./competencies.ts";
-import { ESSAY_CONTRACT, type CompetencyTree, type GapHypothesis, type JourneyNode, type JourneyStep, type JourneyStepKind, type LearningJourney } from "./contract.ts";
+import { engineClaim, type EssayContext, retentionTiming } from "./competencies.ts";
+import { ESSAY_CONTRACT, type CompetencyOutcome, type CompetencyTree, type GapHypothesis, type JourneyNode, type JourneyStep, type JourneyStepKind, type LearningJourney, type NodeDecision } from "./contract.ts";
 import { pickForRole } from "./allocation.ts";
-import { competencyOutcome } from "./checks.ts";
+import { competencyOutcome, targetClockAt } from "./checks.ts";
 import { countedAnalyses, currentHypotheses } from "./gaps.ts";
 
 const STATUS_ORDER: Record<GapHypothesis["status"], number> = { confirmed: 0, unresolved: 1, suspected: 2, weakened: 9 };
@@ -27,7 +27,10 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
   const learner = learnerOf(events);
   if (!essayRecords(events, "submission").some((r) => r.record.submission.id === essayId)) throw new EssayRefusal(`essay ${essayId} is not recorded`);
   const ledger = Ledger.rebuild(ectx.ctx, learner, events as LedgerEvent[]);
-  const level = (cap: CapabilityId) => engineClaim(ectx, cap, leafView(ledger.composite, ectx.ctx.index, cap, meta.at)).level;
+  const view = (cap: CapabilityId) => leafView(ledger.composite, ectx.ctx.index, cap, meta.at);
+  const level = (cap: CapabilityId) => engineClaim(ectx, cap, view(cap), events, meta.at).level;
+  // the delayed check that can verify the target runs from when the target was first shown (verification@2)
+  const timing = (cap: CapabilityId) => retentionTiming(ectx, cap, view(cap), targetClockAt(ledger, cap, ectx.profile.byCapability.get(cap)?.expectedBand ?? null, meta.at), meta.at);
   const name = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.name ?? ectx.ctx.index.names.get(cap) ?? cap;
   const hyps = currentHypotheses(ectx, events);
   const skipped: LearningJourney["skipped"] = [];
@@ -41,6 +44,17 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
   const order = [...ectx.profile.byCapability.keys()];
   const candidates = [...hyps.values()]
     .filter((h) => {
+      // A2 (policy @3): a skill shown or verified since is not re-taught merely because an earlier essay's
+      // hypothesis is still in the record. Only this essay's evidence can reopen it. (An earlier gap that was never
+      // resolved is still carried, as before; earlier journeys and their steps are never changed.)
+      if (!h.essays.includes(essayId)) {
+        const v = view(h.competency);
+        const shownSince = level(h.competency) !== "none" || timing(h.competency) !== null || (v.verification.historicalLevel ?? -Infinity) >= (ectx.profile.byCapability.get(h.competency)?.expectedBand ?? Infinity);
+        if (shownSince) {
+          skipped.push({ competency: h.competency, reason: `${name(h.competency)}: the difficulty was seen in an earlier essay (${h.essays.join(", ")}), not in this one, and the skill has been shown at the grade target since. Not taught again; any delayed check still follows its schedule.` });
+          return false;
+        }
+      }
       if (h.status !== "weakened") return true;
       skipped.push({ competency: h.competency, reason: `${name(h.competency)}: the essay suggested a gap, but questions answered without help were right. Not taught.` });
       return false;
@@ -83,6 +97,30 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
     return step(cap, "independent_check", "Without help, on questions not used before, at the grade target. It turns green only when the engine counts the skill as demonstrated at the grade target.", ok ? items.map((i) => i.id) : [], ok, ok ? `${items.length} unseen questions, no hints` : `Not enough unseen questions at the target band to check ${name(cap)}: a later check is needed once more reviewed questions exist`);
   };
   const specified = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.specified ?? false;
+  /** The delayed retention check as a journey step (questions from the retention reserve), or null when too few. */
+  const retentionStep = (cap: CapabilityId): JourneyStep | "wait" | null => {
+    // a delayed check the essay layer already planned is the same check: reuse its questions (never a second one);
+    // if it is not due yet, nothing is asked or taught before its date
+    const answered = new Set(events.flatMap((e) => (e.kind === "evidence" ? [e.item.id] : [])));
+    const planned = essayRecords(events, "check").map((r) => r.record.check).filter((c) => c.competency === cap && c.kind === "retention" && c.items.some((i) => !answered.has(i.id))).at(-1);
+    if (planned && planned.notBefore > meta.at) return "wait";
+    if (planned) {
+      planned.items.forEach((i) => used.add(i.id));
+      return { ...step(cap, "independent_check", `The delayed check planned for ${planned.notBefore.slice(0, 10)} is due: without help, on the questions kept for it. Teaching follows only if it does not show the skill was kept.`, planned.items.map((i) => i.id), true, `${planned.items.length} questions kept for the delayed check, no hints`), purpose: "retention" };
+    }
+    const items = specified(cap) ? pickForRole(ectx, events, cap, "delayed_retention", p.retentionItems, { exclude: used }) : [];
+    if (items.length < p.retentionItems) return null;
+    items.forEach((i) => used.add(i.id));
+    return { ...step(cap, "independent_check", "The delayed check is due: without help, on questions kept for it. Teaching follows only if it does not show the skill was kept.", items.map((i) => i.id), true, `${items.length} unseen questions kept for the delayed check, no hints`), purpose: "retention" };
+  };
+  /** After conditional teaching, a check without help as in any journey — only when the bank still has the questions. */
+  const afterCheck = (cap: CapabilityId, steps: JourneyStep[]) => {
+    const items = specified(cap) ? pickForRole(ectx, events, cap, "independent_verification", p.checkItems, { exclude: used }) : [];
+    if (items.length < p.checkItems) return;
+    items.forEach((i) => used.add(i.id));
+    steps.push(conditional(step(cap, "independent_check", "After the lesson and practice: without help, on questions not used before, at the grade target.", items.map((i) => i.id), true, `${items.length} unseen questions, no hints`)));
+  };
+  const conditional = (s: JourneyStep): JourneyStep => ({ ...s, condition: "if_not_shown", reason: `${s.reason} Only if the check before it does not show the skill; otherwise it stays available but is not needed.` });
 
   for (const h of candidates) {
     if (trees.length >= p.maxTrees) {
@@ -96,10 +134,40 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
       const requires = ectx.ctx.index.requires.get(cap) ?? [];
       const steps: JourneyStep[] = [];
       if (!specified(cap)) contentGaps.push({ competency: cap, what: `${name(cap)} is not specified in the framework yet (no descriptors, questions or lessons)` });
-      if (lv === "none") steps.push(teach(cap, why), practice(cap), check(cap));
-      else if (hyp?.status === "confirmed") steps.push(teach(cap, `Shown before (${lv}), but the essay and the diagnostic questions now both show difficulty: a short refresher.`), practice(cap), check(cap));
-      else steps.push(check(cap));
-      nodes.push({ competency: cap, role, requires, reason: why, steps, green: false, level: lv });
+      let decision: NodeDecision;
+      const t = role === "target" ? timing(cap) : null;
+      const due = t === "due";
+      const retention = t === "waiting" ? "wait" : due ? retentionStep(cap) : null;
+      if (retention === "wait") {
+        // its delayed check is already planned and not yet due: no re-teaching before it (and no node)
+        waiting = true;
+        return;
+      } else if (retention) {
+        // A3/B1: shown before and the delayed check is due: check first, re-teach only if it does not hold
+        decision = "retention_due";
+        steps.push(retention, conditional(teach(cap, "Shown before; the delayed check did not show it was kept: a short refresher.")), conditional(practice(cap)));
+        afterCheck(cap, steps);
+      } else if (lv === "none" && role === "target" && !due && hyp && hyp.status !== "confirmed") {
+        // B2: insufficient evidence is not a confirmed gap: check at the target first when the bank can
+        const c = check(cap);
+        decision = "insufficient_evidence";
+        if (c.status !== "blocked") {
+          steps.push(c, conditional(teach(cap, why)), conditional(practice(cap)));
+          afterCheck(cap, steps);
+        }
+        // too few questions at the target to check first: teach, as before (the research found this helps)
+        else steps.push(teach(cap, why), practice(cap), c);
+      } else if (lv === "none") {
+        decision = role === "prerequisite" ? "prerequisite" : "gap";
+        steps.push(teach(cap, why), practice(cap), check(cap));
+      } else if (hyp?.status === "confirmed") {
+        decision = "refresher";
+        steps.push(teach(cap, `Shown before (${lv}), but the essay and the diagnostic questions now both show difficulty: a short refresher.`), practice(cap), check(cap));
+      } else {
+        decision = "check_only";
+        steps.push(check(cap));
+      }
+      nodes.push({ competency: cap, role, requires, reason: why, steps, green: false, level: lv, decision });
       if (depth >= p.prerequisiteDepth) return;
       for (const pre of requires) {
         if (nodes.some((n) => n.competency === pre) || trees.some((t) => t.nodes.some((n) => n.competency === pre))) continue;
@@ -116,7 +184,12 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
         : h.status === "unresolved"
           ? `The essay showed it (${h.basis[0]}); the questions were mixed, so practice and a fresh check follow.`
           : `The essay suggests it (${h.basis[0]}); not yet checked with questions.`;
+    let waiting = false;
     addNode(h.competency, "target", 0, why, h);
+    if (waiting) {
+      skipped.push({ competency: h.competency, reason: `${name(h.competency)}: shown at the grade target before; its delayed check is already planned and not yet due, so nothing is re-taught before it.` });
+      continue;
+    }
     // a prerequisite is taught before what depends on it
     nodes.sort((a, b) => (a.role === b.role ? 0 : a.role === "prerequisite" ? -1 : 1));
     trees.push({ root: h.competency, nodes });
@@ -168,9 +241,19 @@ export function journeyStatus(ectx: EssayContext, events: readonly LedgerEvent[]
   const after = events.filter((e) => e.at >= j.at);
   for (const t of j.trees)
     for (const node of t.nodes) {
-      node.level = engineClaim(ectx, node.competency, leafView(ledger.composite, ectx.ctx.index, node.competency, now)).level;
+      node.level = engineClaim(ectx, node.competency, leafView(ledger.composite, ectx.ctx.index, node.competency, now), events, now).level;
+      // the node's first check decides its conditional steps (policy @3)
+      const firstCheck = node.steps.find((x) => x.kind === "independent_check");
       for (const s of node.steps) {
         if (s.status === "blocked") continue;
+        if (s.condition === "if_not_shown" && firstCheck && firstCheck.status !== "pending" && firstCheck.status !== "blocked" && node.level !== "none") {
+          // the check showed the skill: the step stays assigned (it can still be opened) but is not needed
+          const started = s.kind === "teach" ? after.some((e) => e.kind === "intervention" && e.capability === node.competency) : s.content.refs.some((r) => after.some((e) => (e.kind === "evidence" || e.kind === "assisted_response") && e.item.id === r));
+          if (!started) {
+            s.status = "skipped";
+            continue;
+          }
+        }
         if (s.kind === "teach") {
           const taught = after.filter((e): e is InterventionEvent => e.kind === "intervention" && e.capability === node.competency);
           s.evidence = taught.map((e) => e.id);
@@ -191,9 +274,43 @@ export function journeyStatus(ectx: EssayContext, events: readonly LedgerEvent[]
   for (const t of j.trees) for (const node of t.nodes) node.outcome = competencyOutcome(ectx, events, node.competency, now, j, ledger);
   const targets = j.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target"));
   const finished = j.trees.every((t) => t.nodes.every((n) => n.steps.every((s) => s.status !== "pending")));
+  // progress through the assigned sequence: step statuses only, never the engine (kept apart from proficiency)
+  const all = j.trees.flatMap((t) => t.nodes.flatMap((n) => n.steps));
+  const doneish = (s: JourneyStep) => s.status === "done" || s.status === "green";
+  const lessons = all.filter((s) => s.kind === "teach");
+  j.progress = {
+    stepsTotal: all.length,
+    stepsDone: all.filter(doneish).length,
+    stepsSkipped: all.filter((s) => s.status === "skipped").length,
+    stepsBlocked: all.filter((s) => s.status === "blocked").length,
+    lessonsAssigned: lessons.length,
+    lessonsCompleted: lessons.filter(doneish).length,
+    percent: all.length ? Math.round((100 * all.filter(doneish).length) / all.length) : 100,
+  };
   j.complete = targets.length === 0 || targets.every((n) => n.green);
   j.finalRewrite = finished
     ? { available: true, reason: j.complete ? "Every skill in the journey is shown: time for the 50-word rewrite." : "All steps are done. Some skills are not yet shown without help; the rewrite can still go ahead." }
     : { available: false, reason: "After the journey's steps (lessons, practice and checks)." };
   return j;
+}
+
+/**
+ * The outcome of every target competency any journey has worked on, each from the latest journey that holds it
+ * (policy @3). A later journey that leaves out a skill shown since (A2) must not drop that skill's later and delayed
+ * checks: they keep their schedule. Latest journey first, then earlier ones.
+ */
+export function journeyOutcomes(ectx: EssayContext, events: readonly LedgerEvent[], now: string): CompetencyOutcome[] {
+  const out: CompetencyOutcome[] = [];
+  const seen = new Set<CapabilityId>();
+  for (const rec of essayRecords(events, "journey").reverse()) {
+    const caps = rec.record.journey.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target").map((n) => n.competency)).filter((c) => !seen.has(c));
+    if (!caps.length) continue;
+    const st = journeyStatus(ectx, events, rec.record.journey.id, now);
+    for (const c of caps) {
+      const o = st.trees.flatMap((t) => t.nodes).find((n) => n.competency === c)?.outcome;
+      if (o) out.push(o);
+      seen.add(c);
+    }
+  }
+  return out;
 }

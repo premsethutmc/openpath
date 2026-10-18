@@ -20,7 +20,8 @@
  */
 import { leafView } from "../composite.ts";
 import { binaryParams, itemVersion, scoreCode } from "../content.ts";
-import { checkPassed } from "../retention.ts";
+import { checkPassed, VERIFY_AT_LEVEL_MIN } from "../retention.ts";
+import { PILOT_VERIFICATION } from "../verification.ts";
 import { isIndependentProvenance, type CapabilityId, type EssayEvent, type EvidenceEvent, type LedgerEvent, type SessionObservation } from "../types.ts";
 import { Ledger } from "../updater.ts";
 import { ABOVE_TARGET, pickForRole } from "./allocation.ts";
@@ -103,12 +104,28 @@ export function targetShownAt(ledger: Ledger, capability: CapabilityId, target: 
   return null;
 }
 
+/**
+ * When the delay before a delayed check that can VERIFY the target starts (verification@2): the first session showing
+ * the target without help since the engine's last failed check (a failed check means it must be shown again). Equal
+ * to targetShownAt when no check has failed. Null: not shown since.
+ */
+export function targetClockAt(ledger: Ledger, capability: CapabilityId, target: number | null, now: string): string | null {
+  if (target === null || !ledger.composite.nodes[capability]) return null;
+  const failedAt = leafView(ledger.composite, ledger.ctx.index, capability, now).retention.lastFailedAt;
+  for (const s of ledger.composite.nodes[capability].sessions ?? []) {
+    if (s.at > now) break;
+    if (failedAt && s.at < failedAt) continue;
+    if (!s.teaching && s.level !== null && s.level >= target) return s.at;
+  }
+  return null;
+}
+
 /** The separate claims for one competency now. `journey` (from journeyStatus) supplies "journey completed". */
 export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEvent[], capability: CapabilityId, now: string, journey?: LearningJourney | null, ledger?: Ledger): CompetencyOutcome {
   const p = ectx.policy;
   const L = ledger ?? Ledger.rebuild(ectx.ctx, learnerOf(events), events as LedgerEvent[]);
   const view = leafView(L.composite, ectx.ctx.index, capability, now);
-  const claim = engineClaim(ectx, capability, view);
+  const claim = engineClaim(ectx, capability, view, events, now);
   const target = claim.target;
   const name = ectx.profile.byCapability.get(capability)?.name ?? capability;
   const nodes = journey ? journey.trees.flatMap((t) => t.nodes).filter((n) => n.competency === capability) : [];
@@ -116,7 +133,28 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   const demonstrated = claim.level !== "none";
   const verified = claim.level === "verified";
   const shownAt = targetShownAt(L, capability, target, now);
-  const checks = plannedChecks(events).filter((c) => c.competency === capability);
+  // the delay for a check that can verify the target runs from the clock (re-started by a failed check)
+  const clockAt = targetClockAt(L, capability, target, now) ?? shownAt;
+  // a journey step that is the delayed retention check (policy @3) counts as a retention check like a planned one;
+  // it counts for the essay's delayed check only from retentionDelayDays after the target was first shown
+  const journeyRetention: PlannedCheck[] = essayRecords(events, "journey").flatMap(({ record }) =>
+    record.journey.trees.flatMap((t) =>
+      t.nodes
+        .filter((n) => n.competency === capability)
+        .flatMap((n) => n.steps.filter((x) => x.purpose === "retention" && x.content.available))
+        .map((x) => ({
+          contract: ESSAY_CONTRACT,
+          id: x.id,
+          competency: capability,
+          kind: "retention" as const,
+          at: record.journey.at,
+          notBefore: clockAt ? (later(record.journey.at, addDays(clockAt, p.retentionDelayDays)) ?? record.journey.at) : record.journey.at,
+          items: x.content.refs.map((id) => ({ id, version: ectx.ctx.content.items.get(id)?.version ?? 1 })),
+          reason: x.reason,
+        })),
+    ),
+  );
+  const checks = [...plannedChecks(events).filter((c) => c.competency === capability), ...journeyRetention];
   const progress = checks.map((c) => checkProgress(ectx, events, c, L));
   const open = progress.find((x) => !x.complete);
 
@@ -124,7 +162,7 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   let retention: CompetencyOutcome["retention"] = "not_applicable";
   let dueAt: string | null = null;
   if (shownAt) {
-    dueAt = later(addDays(shownAt, p.retentionDelayDays), view.retention.dueAt && view.retention.dueAt >= shownAt ? view.retention.dueAt : null);
+    dueAt = later(addDays(clockAt!, p.retentionDelayDays), view.retention.dueAt && view.retention.dueAt >= shownAt ? view.retention.dueAt : null);
     const done = progress.filter((x) => x.check.kind === "retention" && x.complete && x.passed !== null && x.check.notBefore >= addDays(shownAt, p.retentionDelayDays) && x.valid.length > 0);
     const last = done.at(-1);
     retention = last ? (last.passed ? "demonstrated" : "not_demonstrated") : now >= dueAt! ? "due" : "pending";
@@ -138,7 +176,8 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   if (open) {
     next = { kind: open.check.kind, notBefore: open.check.notBefore, itemsAvailable: open.left.length, planned: open.check.id };
     pending = now < open.check.notBefore ? `a later ${open.check.kind} check is planned for ${fmt(open.check.notBefore)}` : `a later ${open.check.kind} check is ready to take`;
-  } else if (!demonstrated) {
+  } else if (!demonstrated && !(shownAt !== null && view.verification.status === "overdue")) {
+    // (an overdue engine check after the target was shown is a retention question, handled below: policy @3)
     const available = pickForRole(ectx, events, capability, "independent_verification", p.checkItems).length;
     if (target === null) pending = `${name} has no grade target, so no claim is made`;
     else if (journeyCompleted === false) pending = `the journey's steps for ${name} are not finished`;
@@ -164,6 +203,16 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
       next = { kind: "retention", notBefore: dueAt!, itemsAvailable: available, planned: null };
       pending = retention === "pending" ? `retention pending: the delayed check is due on ${fmt(dueAt!)}` : "retention check due now";
     }
+  }
+  // H-V3 (pilot policy): a delayed check whose questions are not educator-reviewed and released before it is taken
+  // still records retention evidence, but it can never verify mastery; the outcome says so instead of implying it can
+  if (next?.kind === "retention" && (ectx.verification ?? PILOT_VERIFICATION).eligibility === "reviewed") {
+    const ids = open?.check.kind === "retention" ? open.check.items.map((i) => i.id) : pickForRole(ectx, events, capability, "delayed_retention", p.retentionItems).map((i) => i.id);
+    const eligible = ids.filter((id) => {
+      const it = ectx.ctx.content.items.get(id);
+      return it?.kind === "code" && it.evidence_status === "validated" && !!it.released_at && it.released_at <= (next!.notBefore > now ? next!.notBefore : now);
+    }).length;
+    if (eligible < VERIFY_AT_LEVEL_MIN) pending = `${pending ?? ""} Its questions are not ${eligible ? "all " : ""}reviewed by an educator and released, so under the pilot policy this check records retention but cannot verify mastery.`.trim();
   }
   return { competency: capability, target, journeyCompleted, demonstrated, verified, currentLevel: claim.currentLevel, targetShownAt: shownAt, retention, retentionDueAt: dueAt, pending, next };
 }

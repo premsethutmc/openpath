@@ -142,6 +142,12 @@ export interface CodeItem {
    *                  (changing it would alter historical estimates and needs a separate decision).
    */
   evidence_status?: "provisional" | "validated";
+  /**
+   * When THIS version was educator-approved and released to learners (ISO time; verification-eligibility@2, H-V3).
+   * Required on a "validated" item and allowed on no other. Only answers given at or after it, to this version, may
+   * contribute to pilot verification; earlier answers stay in the ledger with their original meaning.
+   */
+  released_at?: string;
   /** The step of the capability's difficulty ladder this item sits on (content/english/items/progressions.json). */
   step?: string;
   /** Why the item sits at this difficulty: what makes it harder or easier than its neighbours. */

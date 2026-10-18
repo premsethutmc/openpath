@@ -13,6 +13,15 @@
  *
  * "Previously demonstrated" (history) and "currently verified" (retention)
  * are reported separately.
+ *
+ * Verified LEVEL (verification@2, 18 October 2026). The schedule above verifies "the retained level", which
+ * could be raised in the same session that is judged as the check: a level first shown on day 12 was reported as
+ * verified on day 12 because a lower level had been shown on day 1. `verifiedLevel` gives the one meaning used for
+ * every level claim: band L is verified only when L was first shown without help in an earlier session, and a later
+ * session at least the delay (mastery_gap_days, less the same half-day tolerance) after that has fresh evidence AT L
+ * (at least VERIFY_AT_LEVEL_MIN DISTINCT questions answered fresh, never a repeat, of difficulty ≥ L − tolerance: H-V2)
+ * that favours L over L − 1 (checkPassed, unchanged, on that session's fresh evidence). The schedule fields (status, level, dueAt, checks, lastVerifiedAt) are unchanged, so
+ * due dates, selection and historical schedules replay exactly as before.
  */
 import { daysBetween } from "./model.ts";
 import type { NodeState, Policy, SessionObservation } from "./types.ts";
@@ -43,19 +52,47 @@ export interface Retention {
   intervalDays: number | null;
   overdueDays: number;
   checks: { at: string; passed: boolean; level: number | null; intervalAfter: number }[];
+  /** The highest band verified by a delayed check at that band (verification@2); null when none, or after a failed check. */
+  verifiedLevel: number | null;
+  /** When `verifiedLevel` was verified. */
+  verifiedLevelAt: string | null;
 }
+
+/** Answers at the level a delayed check needs before it can verify that level. */
+export const VERIFY_AT_LEVEL_MIN = 2;
+export const VERIFICATION_DEFINITION = "verification@2";
 
 const DUE_TOLERANCE_MS = 12 * 3_600_000;
 const addDays = (iso: string, days: number) => new Date(Date.parse(iso) + days * 86_400_000).toISOString();
 
 export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION): Retention {
-  const out: Retention = { status: "none", level: null, firstDemonstratedAt: null, lastVerifiedAt: null, lastFailedAt: null, dueAt: null, intervalDays: null, overdueDays: 0, checks: [] };
+  const out: Retention = { status: "none", level: null, firstDemonstratedAt: null, lastVerifiedAt: null, lastFailedAt: null, dueAt: null, intervalDays: null, overdueDays: 0, checks: [], verifiedLevel: null, verifiedLevelAt: null };
   const initial = cfg.initialDays ?? policy.mastery_gap_days;
   let lastFailed = false;
+  // each new highest level shown, with when it was first shown (independent, outside teaching sessions)
+  const shown: { level: number; at: string }[] = [];
+  const delayMs = policy.mastery_gap_days * 86_400_000 - DUE_TOLERANCE_MS;
   for (const s of node.sessions ?? []) {
     if (Date.parse(s.at) > Date.parse(now)) break;
     // a session with teaching on this capability is neither a first demonstration nor a retention check
     if (s.teaching) continue;
+    // verification@2: does this session's fresh evidence verify a level first shown at least the delay earlier?
+    // any band up to the highest one shown at least the delay earlier can be verified, by fresh evidence at that band
+    const eligible = shown.filter((x) => Date.parse(s.at) - Date.parse(x.at) >= delayMs).map((x) => x.level);
+    const top = eligible.length ? Math.max(...eligible) : null;
+    for (let L = top ?? 0; top !== null && L >= 1; L -= 0.5) {
+      if (out.verifiedLevel !== null && L <= out.verifiedLevel) break;
+      // H-V2: distinct questions answered fresh in this session (a repeat, or a question met before with help, never
+      // verifies; a second answer to the same question is always a repeat), judged on that fresh evidence alone
+      const fresh = (s.obs ?? []).filter((o) => o.exposure !== "repeat");
+      const atLevel = fresh.filter((o) => o.kind === "binary" && o.b >= L - cfg.tolerance);
+      if (atLevel.length >= VERIFY_AT_LEVEL_MIN && checkPassed(fresh, L, s.level, cfg)) {
+        out.verifiedLevel = L;
+        out.verifiedLevelAt = s.at;
+        break;
+      }
+    }
+    if (s.level !== null && (!shown.length || s.level > shown.at(-1)!.level)) shown.push({ level: s.level, at: s.at });
     if (out.firstDemonstratedAt === null) {
       if (s.level === null) continue;
       out.firstDemonstratedAt = s.at;
@@ -86,6 +123,11 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
       out.lastFailedAt = s.at;
       out.level = s.level === null ? null : Math.min(s.level, out.level! - 1);
       lastFailed = true;
+      // a failed check: nothing stays verified, and a level must be shown again before it can be verified again
+      out.verifiedLevel = null;
+      out.verifiedLevelAt = null;
+      shown.length = 0;
+      if (s.level !== null) shown.push({ level: s.level, at: s.at });
     }
   }
   if (out.firstDemonstratedAt === null) return out;

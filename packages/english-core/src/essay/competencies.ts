@@ -2,9 +2,10 @@
  * The competency profile an essay is analysed against, checked against the framework, and the draft policy.
  */
 import { isSpecified, misconceptionIds, type FrameworkIndex } from "../framework.ts";
-import type { CapabilityId } from "../types.ts";
-import type { Context } from "../updater.ts";
-import type { LeafView, VerificationStatus } from "../composite.ts";
+import type { CapabilityId, LedgerEvent } from "../types.ts";
+import { type Context, Ledger } from "../updater.ts";
+import { type LeafView, leafView, type VerificationStatus } from "../composite.ts";
+import { PILOT_VERIFICATION, verificationClaim, type VerificationPolicy } from "../verification.ts";
 import type { CompetencyProfile, CompetencyRef, EssayPolicy, RubricTrait, WritingArea } from "./contract.ts";
 
 /** Draft values for review. None is a claim about what works for children. */
@@ -83,7 +84,12 @@ export interface EssayContext {
    */
   pools?: Map<string, ItemPool>;
   policy: EssayPolicy;
+  /** Which evidence may establish verified mastery (absent: the pilot policy: reviewed, released questions answered after their release). */
+  verification?: VerificationPolicy;
 }
+
+// verification-eligibility (H-V1/H-V3): one definition for every surface, in ../verification.ts
+export { DEVELOPER_VERIFICATION, PILOT_VERIFICATION, type VerificationPolicy } from "../verification.ts";
 
 /**
  * What the engine supports for a competency, measured against the profile's target band. "demonstrated" and
@@ -96,18 +102,64 @@ export interface EngineClaim {
   target: number | null;
   status: VerificationStatus;
   note: string | null;
+  /** verification@2: the band a delayed check at that band verified (null: none). */
+  verifiedLevel: number | null;
+  /** For "verified": whether it holds on reviewed questions alone, or only with unreviewed ones (developer policy). */
+  verifiedOn: "reviewed" | "unreviewed" | null;
+  /** Verified on all counted evidence, but the policy (reviewed only) does not allow it: reported as shown instead. */
+  verificationWithheld: boolean;
 }
 
-export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: LeafView): EngineClaim {
+export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: LeafView, events?: readonly LedgerEvent[], now?: string): EngineClaim {
   const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
   const status = v.verification.status;
   const current = v.verification.currentLevel;
-  const raw: EngineClaim["level"] = status === "verified" ? "verified" : status === "demonstrated" ? "demonstrated" : "none";
-  if (raw === "none") return { level: "none", currentLevel: current, target, status, note: null };
-  if (target === null) return { level: "none", currentLevel: current, target, status, note: "no grade target is set for this competency, so no claim is made" };
+  const verifiedLevel = v.verification.verifiedLevel ?? null;
+  const base = { currentLevel: current, target, status, verifiedLevel, verifiedOn: null, verificationWithheld: false } as const;
+  const shown = status === "verified" || status === "demonstrated";
+  if (!shown) return { ...base, level: "none", note: null };
+  if (target === null) return { ...base, level: "none", note: "no grade target is set for this competency, so no claim is made" };
   if (current === null || current < target)
-    return { level: "none", currentLevel: current, target, status, note: `the engine records ${status} at band ${current ?? "?"}, below the draft Grade ${ectx.profile.profile.grade} target of band ${target}` };
-  return { level: raw, currentLevel: current, target, status, note: null };
+    return { ...base, level: "none", note: `the engine records ${status} at band ${current ?? "?"}, below the draft Grade ${ectx.profile.profile.grade} target of band ${target}` };
+  // verification@2: verified only when a delayed check AT the target verified it (not a lower band kept)
+  if (verifiedLevel === null || verifiedLevel < target)
+    return { ...base, level: "demonstrated", note: verifiedLevel === null ? null : `band ${verifiedLevel} is verified; band ${target} is shown, and its own delayed check is still to come` };
+  const policy = ectx.verification ?? PILOT_VERIFICATION;
+  if (!events || !now) {
+    // no record to show which answers were eligible: the developer policy counts every answer; the pilot never assumes
+    if (policy.eligibility === "counted") return { ...base, level: "verified", verifiedOn: "unreviewed", note: "verified on questions not yet reviewed by an educator: a developer test result, not valid for the pilot" };
+    return { ...base, level: "demonstrated", verificationWithheld: true, note: "the delayed check was passed, but it cannot be shown to be on questions reviewed by an educator and released: under the pilot policy this is not verified mastery (not yet reviewed by an educator)" };
+  }
+  const learner = (events.find((e) => e.kind === "essay" && e.record.type === "submission") as { record?: { submission?: { learner: string } } } | undefined)?.record?.submission?.learner ?? "learner";
+  const vc = verificationClaim(ectx.ctx, learner, events, capability, now, policy, v);
+  if (vc.level !== null && vc.level >= target) {
+    if (vc.on === "reviewed") return { ...base, level: "verified", verifiedOn: "reviewed", note: null };
+    return { ...base, level: "verified", verifiedOn: "unreviewed", note: "verified on questions not yet reviewed by an educator: a developer test result, not valid for the pilot" };
+  }
+  return { ...base, level: "demonstrated", verificationWithheld: true, note: "the delayed check was passed, but not on enough answers to questions reviewed by an educator and given after their release: under the pilot policy this is not verified mastery (not yet reviewed by an educator, or answered before release)" };
 }
 
 export const allowedTags =(ectx: EssayContext, capability: CapabilityId): Set<string> => misconceptionIds(ectx.ctx.index, capability);
+
+/**
+ * Retention due (planner policy @3): the competency was shown at the grade target, and the engine's own delayed check
+ * is now due (verification "overdue"). The engine withdraws the current claim until that check is taken; this is a
+ * retention question, not evidence of a gap, so planners check before re-teaching. A failed check is not "due".
+ *
+ * Integration (verification@2): the engine's schedule runs from the first demonstration at ANY band, but the delayed
+ * check that can verify the TARGET runs from when the target was first shown (`shownAt`, checks.ts targetShownAt).
+ * When `shownAt` and `now` are given, it is "due" only from `retentionDelayDays` after that; before then it is
+ * "waiting": nothing is asked or taught, because a check then could not verify the target and would spend the questions
+ * kept for it.
+ */
+export function retentionTiming(ectx: EssayContext, capability: CapabilityId, v: LeafView, shownAt?: string | null, now?: string): "due" | "waiting" | null {
+  const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
+  if (target === null || v.verification.status !== "overdue") return null;
+  if (!((v.retention.level ?? -Infinity) >= target || (v.verification.historicalLevel ?? -Infinity) >= target)) return null;
+  if (shownAt === undefined || now === undefined) return "due";
+  if (shownAt === null) return null;
+  return Date.parse(now) >= Date.parse(shownAt) + ectx.policy.retentionDelayDays * 86_400_000 ? "due" : "waiting";
+}
+export function retentionDue(ectx: EssayContext, capability: CapabilityId, v: LeafView, shownAt?: string | null, now?: string): boolean {
+  return retentionTiming(ectx, capability, v, shownAt, now) === "due";
+}
