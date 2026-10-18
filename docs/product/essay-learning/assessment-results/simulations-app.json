@@ -94,6 +94,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "the journey's check was blocked: Not enough unseen questions at the target band to check Subject–verb agreement: a later check is needed once more reviewed questions exist. The level stays 2, from the diagnostic answers given before teaching",
@@ -149,7 +150,7 @@
     "outcome": {
      "journeyCompleted": null,
      "demonstrated": true,
-     "verified": true,
+     "verified": false,
      "currentLevel": 5.5,
      "retention": "demonstrated",
      "retentionDueAt": "2026-11-10T09:03:00.000Z",
@@ -168,14 +169,15 @@
   "final": {
    "journeyCompleted": null,
    "demonstrated": true,
-   "verified": true,
+   "verified": false,
    "currentLevel": 5.5,
    "retention": "demonstrated",
    "retentionDueAt": "2026-11-10T09:03:00.000Z",
    "pending": null
   },
   "reachedTarget": true,
-  "verified": true,
+  "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -254,6 +256,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -332,6 +335,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -363,7 +367,7 @@
     "outcome": {
      "journeyCompleted": null,
      "demonstrated": true,
-     "verified": true,
+     "verified": false,
      "currentLevel": 5.5,
      "retention": "demonstrated",
      "retentionDueAt": "2026-11-10T09:03:00.000Z",
@@ -382,14 +386,15 @@
   "final": {
    "journeyCompleted": null,
    "demonstrated": true,
-   "verified": true,
+   "verified": false,
    "currentLevel": 5.5,
    "retention": "demonstrated",
    "retentionDueAt": "2026-11-10T09:03:00.000Z",
    "pending": null
   },
   "reachedTarget": true,
-  "verified": true,
+  "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -448,6 +453,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "stopped after 0 later checks: not yet shown at band 5 without help, and the question bank has only 1 unseen question between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
@@ -509,6 +515,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -587,6 +594,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "evidence persists: 6 answers on agreement across both essays; no question answered twice: yes"

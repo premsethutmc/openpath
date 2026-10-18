@@ -6,16 +6,16 @@
  * essays, on a dedicated on-device synthetic profile; it never uses a child's profile or the parent account.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { type Item, type Response, wordCount } from "../../../../../packages/english-core/src/index.ts";
+import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, wordCount } from "../../../../../packages/english-core/src/index.ts";
 import { Brand } from "../Onboarding";
 import { ItemView } from "../ItemView";
-import { loadContent } from "../../logic/content.ts";
+import { BUILD_CONTENT_MODE, loadContent } from "../../logic/content.ts";
 import type { Feedback } from "../../logic/feedback.ts";
 import { Learner } from "../../logic/learner.ts";
 import { openRepo } from "../../logic/store.ts";
 import { connectEvaluator, EssayStudio, SAMPLES, STUDIO_PROFILE_ID, STUDIO_PROFILE_NAME, type StudioView } from "../../logic/essay-live/studio.ts";
 import { Api } from "../../logic/account.ts";
-import { type EvidenceKey, estimateLabel, evidenceLabel, formativeLabel } from "../../logic/essay-live/evidence-labels.ts";
+import { type EvidenceKey, estimateLabel, evidenceLabel, formativeLabel, lessonLabel } from "../../logic/essay-live/evidence-labels.ts";
 import "./essay.css";
 
 /** Real time, plus the offset in days the app's tests already use (so a later sitting can be tested). */
@@ -63,6 +63,8 @@ export function EssayLive() {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState<{ item: string; f: Feedback } | null>(null);
   const [lessonAnswer, setLessonAnswer] = useState<number | null>(null);
+  /** A lesson of the programme opened from the path (beyond the journey's own teaching step). */
+  const [openLesson, setOpenLesson] = useState<string | null>(null);
   /** The last answer to a generated question was recorded (its result is shown only once all five are answered). */
   const [recorded, setRecorded] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -80,7 +82,9 @@ export function EssayLive() {
         const wantServer = new URLSearchParams(location.search).get("evaluator") === "server";
         const evaluator = wantServer ? await connectEvaluator(new Api()) : null;
         if (wantServer && !evaluator) setError("The server's essay evaluator is not available (sign in with a developer account, and ask for it to be switched on). Using the recorded samples and the pattern stand-in.");
-        const s = new EssayStudio(learner, evaluator);
+        // developer testing only: unreviewed questions may verify, and every such result says so
+        const developer = BUILD_CONTENT_MODE !== "pilot" && new URLSearchParams(location.search).get("verification") === "developer";
+        const s = new EssayStudio(learner, evaluator, undefined, developer ? DEVELOPER_VERIFICATION : PILOT_VERIFICATION);
         const v = s.view();
         setStudio(s);
         setView(v);
@@ -155,10 +159,10 @@ export function EssayLive() {
   const v = view;
   const essay = v?.essay;
   const name = (cap: string) => studio?.ectx.profile.byCapability.get(cap)?.name ?? cap;
-  const STATUS_CLASS: Record<EvidenceKey, string> = { none: "not-started", seen: "needs-verification", suspected: "needs-verification", confirmed: "learning", unsettled: "needs-verification", not_confirmed: "needs-verification", shown: "independently-demonstrated", shown_delayed_pending: "independently-demonstrated", verified: "verified" };
+  const STATUS_CLASS: Record<EvidenceKey, string> = { none: "not-started", seen: "needs-verification", suspected: "needs-verification", confirmed: "learning", unsettled: "needs-verification", not_confirmed: "needs-verification", shown: "independently-demonstrated", shown_unreviewed_check: "independently-demonstrated", verified: "verified", verified_developer: "independently-demonstrated" };
   const labelFor = (cap: string) => {
     const c = v?.profile.competencies.find((x) => x.competency === cap);
-    return c ? evidenceLabel(c, v?.outcomes.find((o) => o.competency === cap)) : null;
+    return c ? evidenceLabel(c) : null;
   };
   /** The evidence state, worded for what the evidence actually shows (evidence-labels.ts). */
   const Status = ({ cap }: { cap: string }) => {
@@ -211,7 +215,7 @@ export function EssayLive() {
       <aside className="essay-demo-banner" aria-label="What is real here">
         <strong>Essay studio · connected to the learning engine</strong>
         <span>
-          Synthetic essays only, on a test learner kept on this device. Questions, lessons and every status come from the real engine.{" "}
+          Synthetic essays only, on a test learner kept on this device. {studio?.verification.eligibility === "counted" ? "Developer test: answers on unreviewed questions may verify, and such results are labelled so; this is not the pilot policy." : "Verified mastery needs educator-reviewed questions (the pilot policy)."} Questions, lessons and every status come from the real engine.{" "}
           {studio?.connected
             ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text and its quoted evidence are sent to the server. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
             : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
@@ -451,6 +455,24 @@ export function EssayLive() {
                           Mastery verification is not available for {name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the Grade 8 target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.
                         </p>
                       )}
+                      {(() => {
+                        const c = v.profile.competencies.find((x) => x.competency === t.root);
+                        const l = c?.lessons;
+                        if (!l) return null;
+                        const nextId = l.lessons.find((x) => !x.completedAt)?.id;
+                        return (
+                          <div className="small" data-lesson-programme={t.root} data-lessons-done={l.completed} data-lessons-total={l.total}>
+                            <p>
+                              Lessons: {l.completed} of {l.total} completed ({l.percent}%){l.sessions > 1 ? `, over ${l.sessions} sessions` : ""}. Learning progress only: it is not a measure of understanding or mastery.
+                            </p>
+                            {nextId && !openLesson && (
+                              <button type="button" className="link" disabled={busy} data-next-lesson={nextId} onClick={() => setOpenLesson(nextId)}>
+                                Next lesson ({l.completed + 1} of {l.total})
+                              </button>
+                            )}
+                          </div>
+                        );
+                      })()}
                       {v.canGenerate && !v.nextPractice && (() => {
                         const h = v.hypotheses.filter((x) => x.competency === t.root).at(-1);
                         return h ? (
@@ -513,7 +535,44 @@ export function EssayLive() {
                     <ItemView key={v.laterCheck.item.id} item={v.laterCheck.item} passage={passage(v.laterCheck.item)} voice={null} locked={busy} onSubmit={(r) => void answer(v.laterCheck!.item, r, "later")} />
                   </section>
                 )}
-                {v.next && (
+                {openLesson && content.lessons.get(openLesson) && (() => {
+                  const l = content.lessons.get(openLesson)!;
+                  return (
+                    <section className="essay-card essay-active-step" data-current-step="programme_lesson" data-lesson={l.id}>
+                      <p className="kicker">{name(l.capability)} · Lesson programme</p>
+                      <h2>{l.title}</h2>
+                      <p>{l.rule}</p>
+                      {l.examples.map((ex) => (
+                        <blockquote key={ex.text}>{ex.text}</blockquote>
+                      ))}
+                      <fieldset>
+                        <legend>{l.check.prompt}</legend>
+                        {l.check.options.map((o, i) => (
+                          <label className="essay-option" key={o}>
+                            <input type="radio" name="lesson-check" checked={lessonAnswer === i} onChange={() => setLessonAnswer(i)} />
+                            <span>{o}</span>
+                          </label>
+                        ))}
+                      </fieldset>
+                      <button
+                        className="primary essay-primary"
+                        disabled={busy || lessonAnswer === null}
+                        onClick={() =>
+                          void act(
+                            () => studio!.readLesson(l.id, lessonAnswer === l.check.answer),
+                            () => {
+                              setLessonAnswer(null);
+                              setOpenLesson(null);
+                            },
+                          )
+                        }
+                      >
+                        I&apos;ve read this
+                      </button>
+                    </section>
+                  );
+                })()}
+                {v.next && !openLesson && (
                   <section className="essay-card essay-active-step" data-current-step={v.next.step.kind}>
                     <p className="kicker">
                       {name(v.next.node.competency)} · {STEP_LABEL[v.next.step.kind]}
@@ -653,6 +712,9 @@ export function EssayLive() {
                       <span>{c.name}</span>
                       <Status cap={c.competency} />
                       {c.gap && <small data-profile-gap={c.gap.status}>{GAP[c.gap.status]}</small>}
+                      {lessonLabel(c) && (
+                        <small data-lessons={c.lessons!.percent}>{lessonLabel(c)}</small>
+                      )}
                       <small data-estimate={c.engine.estimate ? c.engine.estimate.mean.toFixed(1) : "none"}>{estimateLabel(c)}</small>
                       {formativeLabel(c) && <small data-formative={c.formative!.status}>{formativeLabel(c)}</small>}
                       {c.provenance.provisional.length > 0 && <small data-held={c.provenance.provisional.length}>{c.provenance.provisional.length} answer{c.provenance.provisional.length === 1 ? "" : "s"} on model-written practice questions: kept, never counted as evidence of the skill</small>}

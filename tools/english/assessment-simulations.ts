@@ -15,8 +15,10 @@ import {
   analyseEssay,
   competencyOutcome,
   createJourney,
+  DEVELOPER_VERIFICATION,
   dueCheck,
   type EssayContext,
+  PILOT_VERIFICATION,
   type EssayEvent,
   type EventMeta,
   journeyStatus,
@@ -228,7 +230,10 @@ export interface ScenarioResult {
   steps: { step: string; outcome: ReturnType<typeof brief>; engine: ReturnType<Sim["engine"]>; note?: string }[];
   final: ReturnType<typeof brief>;
   reachedTarget: boolean;
+  /** Verified on counted evidence (developer policy). */
   verified: boolean;
+  /** Verified under the pilot policy (only educator-reviewed questions may verify). */
+  verifiedForPilot: boolean;
   assistedCountedAsFresh: string[];
   findings: string[];
 }
@@ -246,7 +251,8 @@ async function run(id: string, title: string, ability: Ability, script: (s: Sim,
   };
   const findings = await script(s, log);
   const final = brief(s.outcome(SVA, journeyId));
-  const out: ScenarioResult = { id, title, steps, final, reachedTarget: final.demonstrated, verified: final.verified, assistedCountedAsFresh: s.assistedCountedAsFresh(), findings };
+  const pilot = competencyOutcome({ ...ectx, verification: PILOT_VERIFICATION }, s.events, SVA, s.at());
+  const out: ScenarioResult = { id, title, steps, final, reachedTarget: final.demonstrated, verified: final.verified, verifiedForPilot: pilot.verified, assistedCountedAsFresh: s.assistedCountedAsFresh(), findings };
   // the record and context, for shadow-only research replays; not enumerable, so never in the JSON results
   Object.defineProperty(out, "record", { value: { events: s.events, ectx }, enumerable: false });
   return out;
@@ -267,7 +273,10 @@ export const scenarioRecord = (r: ScenarioResult): { events: LedgerEvent[]; ectx
  * change. The app never loads the supplement.
  */
 export async function runScenarios(bank: ScenarioBank = "app"): Promise<ScenarioResult[]> {
-  bankContext = bank === "app" ? () => loadAppEssayContext() : bank === "core" ? () => loadEssayContext() : () => loadContextWithSupplement({ asIfReviewed: true });
+  // the scenarios study the engine on counted evidence (developer policy: unreviewed questions may verify, and the
+  // result says so); `verifiedForPilot` reports the same record under the pilot policy (reviewed questions only)
+  const base = bank === "app" ? () => loadAppEssayContext() : bank === "core" ? () => loadEssayContext() : () => loadContextWithSupplement({ asIfReviewed: true });
+  bankContext = () => ({ ...base(), verification: DEVELOPER_VERIFICATION });
   const out: ScenarioResult[] = [];
 
   // 1. fails the diagnostic, improves after teaching

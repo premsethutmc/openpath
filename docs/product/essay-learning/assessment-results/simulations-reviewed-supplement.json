@@ -94,6 +94,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "the journey's check (b 5, 5.5) was answered right, yet the level stays 5.5: the wrong diagnostic answers from before teaching stay in the single cumulative estimate (the model has no change point; uncertainty grows by only 0.0047 per day), so the lower 80% bound needs more right answers at or above band 5",
@@ -176,6 +177,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -254,6 +256,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -352,6 +355,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -410,6 +414,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -508,6 +513,7 @@
   },
   "reachedTarget": true,
   "verified": true,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "stopped after 2 later checks: nothing to check"
@@ -569,6 +575,7 @@
   },
   "reachedTarget": false,
   "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": []
  },
@@ -600,7 +607,7 @@
     "outcome": {
      "journeyCompleted": true,
      "demonstrated": true,
-     "verified": true,
+     "verified": false,
      "currentLevel": 5.5,
      "retention": "pending",
      "retentionDueAt": "2026-11-22T09:09:00.000Z",
@@ -620,7 +627,7 @@
     "outcome": {
      "journeyCompleted": null,
      "demonstrated": true,
-     "verified": true,
+     "verified": false,
      "currentLevel": 5.5,
      "retention": "pending",
      "retentionDueAt": "2026-11-22T09:09:00.000Z",
@@ -639,14 +646,15 @@
   "final": {
    "journeyCompleted": null,
    "demonstrated": true,
-   "verified": true,
+   "verified": false,
    "currentLevel": 5.5,
    "retention": "pending",
    "retentionDueAt": "2026-11-22T09:09:00.000Z",
    "pending": "retention pending: the delayed check is due on 2026-11-22"
   },
   "reachedTarget": true,
-  "verified": true,
+  "verified": false,
+  "verifiedForPilot": false,
   "assistedCountedAsFresh": [],
   "findings": [
    "evidence persists: 10 answers on agreement across both essays; no question answered twice: yes"

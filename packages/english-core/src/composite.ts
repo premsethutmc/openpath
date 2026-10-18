@@ -289,6 +289,13 @@ export interface Verification {
   historicalLevel: number | null;
   /** When the current level was last verified (a passed check), if ever. */
   verifiedAt: string | null;
+  /**
+   * verification@2: the band verified by a delayed check AT that band (shown first, then kept on fresh evidence at that
+   * band at least the delay later), capped by what the evidence supports now; null when none is currently verified.
+   * Every claim that a band is verified uses this, never `currentLevel`.
+   */
+  verifiedLevel: number | null;
+  verifiedLevelAt: string | null;
 }
 
 export function isStruggling(node: NodeState, p: Policy): boolean {
@@ -352,7 +359,8 @@ function verificationOf(node: NodeState, ret: Retention, demonstrated: number | 
     ret.status === "none" ? "not_demonstrated" : ret.status === "overdue" ? "overdue" : ret.status === "failed" ? "failed" : ret.lastVerifiedAt ? "verified" : "demonstrated";
   const current = status === "verified" || status === "demonstrated";
   const currentLevel = current && ret.level !== null && demonstrated !== null ? Math.min(ret.level, demonstrated) : null;
-  return { status, currentLevel, historicalLevel, verifiedAt: ret.lastVerifiedAt };
+  const verifiedLevel = current && ret.verifiedLevel !== null && demonstrated !== null ? Math.min(ret.verifiedLevel, demonstrated) : null;
+  return { status, currentLevel, historicalLevel, verifiedAt: ret.lastVerifiedAt, verifiedLevel, verifiedLevelAt: verifiedLevel === null ? null : ret.verifiedLevelAt };
 }
 
 export interface AggregateView {

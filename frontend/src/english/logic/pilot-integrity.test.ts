@@ -6,6 +6,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
+import { withoutVerification2 } from "./test-helpers.ts";
 import { type Item, evidenceLine, leafView } from "../../../../packages/english-core/src/index.ts";
 import { type Code, GUIDED, loadContent } from "./content.ts";
 import type { AppEvent } from "./events.ts";
@@ -51,7 +52,7 @@ test("PI-1 a record made at PR #24 replays with exactly the results it had: esti
   const s = fold(c, history.events as AppEvent[]);
   assert.deepEqual(plain(s.ledger.composite), history.composite, "the engine's composite is unchanged");
   assert.deepEqual(plain(s.ledger.decisions), history.decisions, "every decision is unchanged");
-  for (const [id, v] of Object.entries(history.views)) assert.deepEqual(plain(leafView(s.ledger.composite, c.index, id, history.now)), v, id);
+  for (const [id, v] of Object.entries(history.views)) assert.deepEqual(withoutVerification2(plain(leafView(s.ledger.composite, c.index, id, history.now))), v, id);
   const p = learnerProfile(s, c, history.now);
   for (const [id, want] of Object.entries(history.profile)) {
     const x = p.capabilities.find((y) => y.id === id)!;

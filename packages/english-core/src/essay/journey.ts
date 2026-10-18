@@ -27,7 +27,7 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
   const learner = learnerOf(events);
   if (!essayRecords(events, "submission").some((r) => r.record.submission.id === essayId)) throw new EssayRefusal(`essay ${essayId} is not recorded`);
   const ledger = Ledger.rebuild(ectx.ctx, learner, events as LedgerEvent[]);
-  const level = (cap: CapabilityId) => engineClaim(ectx, cap, leafView(ledger.composite, ectx.ctx.index, cap, meta.at)).level;
+  const level = (cap: CapabilityId) => engineClaim(ectx, cap, leafView(ledger.composite, ectx.ctx.index, cap, meta.at), events, meta.at).level;
   const name = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.name ?? ectx.ctx.index.names.get(cap) ?? cap;
   const hyps = currentHypotheses(ectx, events);
   const skipped: LearningJourney["skipped"] = [];
@@ -168,7 +168,7 @@ export function journeyStatus(ectx: EssayContext, events: readonly LedgerEvent[]
   const after = events.filter((e) => e.at >= j.at);
   for (const t of j.trees)
     for (const node of t.nodes) {
-      node.level = engineClaim(ectx, node.competency, leafView(ledger.composite, ectx.ctx.index, node.competency, now)).level;
+      node.level = engineClaim(ectx, node.competency, leafView(ledger.composite, ectx.ctx.index, node.competency, now), events, now).level;
       for (const s of node.steps) {
         if (s.status === "blocked") continue;
         if (s.kind === "teach") {

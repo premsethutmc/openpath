@@ -24,6 +24,9 @@ import { loadAppEssayContext } from "../essay-load.ts";
 import { REPO } from "../load.ts";
 import { fingerprint, ISSUES, parseCsv, toCsv } from "../pilot/review.ts";
 import { loadSupplementItems, loadSupplementManifest } from "../supplement/load.ts";
+import { loadPluralItems, loadPluralManifest } from "../supplement/plurals.ts";
+
+const pluralManifest = loadPluralManifest();
 
 export const PACKAGE_DIR = join(REPO, "docs", "product", "essay-learning", "educator-review-v1");
 export const DECISIONS = ["approve", "revise", "reject", "unable_to_determine"] as const;
@@ -38,7 +41,7 @@ export interface QuestionRecord {
   kind: "question";
   id: string;
   version: number;
-  set: "proposed-supplement" | "existing-for-review" | "pilot-additional";
+  set: "proposed-supplement" | "proposed-plurals" | "existing-for-review" | "pilot-additional";
   competency: string;
   competency_name: string;
   response_type: "recognition" | "constructed";
@@ -156,6 +159,7 @@ export function buildInventory(): Inventory {
       difficulty_justification: step ? `Expert estimate (not calibrated). Ladder step "${step.id}" at band ${step.band}: ${step.feature} b ${i.b} is ${(i.b - step.band >= 0 ? "+" : "") + (i.b - step.band).toFixed(2)} from the step.` : `Expert estimate (not calibrated); no ladder step recorded.`,
       intended_role: [
         set === "proposed-supplement" ? `proposed: ${proposedPool === "retention" ? "delayed retention check" : "independent check"} (after review)` : "",
+        set === "proposed-plurals" ? `proposed: ${pluralManifest.proposedUse[i.id]} question (after review); coverage: ${pluralManifest.coverage[i.id].replace("_", " ")}` : "",
         pool ? `pilot pool: ${pool} (${POOL_ROLE[pool]})` : "",
         `allocation now: ${roles.length ? roles.join(", ") : "none"}`,
       ]
@@ -182,6 +186,12 @@ export function buildInventory(): Inventory {
     if (seen.has(i.id)) continue;
     seen.add(i.id);
     records.push(question(i, "proposed-supplement", manifest.proposedPools[i.id]));
+  }
+  // the proposed plural-noun questions (by coverage), for the same review
+  for (const i of loadPluralItems().filter((x): x is Code => x.kind === "code")) {
+    if (seen.has(i.id)) continue;
+    seen.add(i.id);
+    records.push(question(i, "proposed-plurals", pluralManifest.proposedPools[i.id]));
   }
   for (const id of existingIds) {
     if (seen.has(id)) {
@@ -248,6 +258,7 @@ export function buildInventory(): Inventory {
   const q = records.filter((r): r is QuestionRecord => r.kind === "question");
   const counts = {
     "proposed-supplement": q.filter((r) => r.set === "proposed-supplement").length,
+    "proposed-plurals": q.filter((r) => r.set === "proposed-plurals").length,
     "existing-for-review": q.filter((r) => r.set === "existing-for-review").length,
     "pilot-additional": q.filter((r) => r.set === "pilot-additional").length,
     questions: q.length,
@@ -288,6 +299,7 @@ function inventoryMarkdown(inv: Inventory): string {
     "| Set | Records | Rule |",
     "|---|---:|---|",
     `| Proposed supplement | ${c["proposed-supplement"]} | content/english/proposed/g8-supplement-v1/items.json (provisional, not loaded by the app) |`,
+    `| Proposed plural questions | ${c["proposed-plurals"]} | content/english/proposed/g8-plurals-v1/items.json (provisional, not loaded by the app; six sub-skills × diagnostic, independent, transfer, retention) |`,
     `| Existing questions for review | ${c["existing-for-review"]} | Live bank as the app ships it: the 16 specified Grade 8 competencies, questions the allocation may use for diagnosis or independent checks, not educator-validated |`,
     `| Pilot-additional questions | ${c["pilot-additional"]} | Other questions a pilot sequence on the three pilot competencies would use (practice, confirmation and retention pools) |`,
     `| **All questions** | **${c.questions}** | ${c.recognition} recognition (choice, multi, order, match), ${c.constructed} constructed (typed) |`,

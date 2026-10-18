@@ -2,9 +2,10 @@
  * The competency profile an essay is analysed against, checked against the framework, and the draft policy.
  */
 import { isSpecified, misconceptionIds, type FrameworkIndex } from "../framework.ts";
-import type { CapabilityId } from "../types.ts";
-import type { Context } from "../updater.ts";
-import type { LeafView, VerificationStatus } from "../composite.ts";
+import type { CapabilityId, LedgerEvent } from "../types.ts";
+import { type Context, Ledger } from "../updater.ts";
+import { type LeafView, leafView, type VerificationStatus } from "../composite.ts";
+import { itemVersion } from "../content.ts";
 import type { CompetencyProfile, CompetencyRef, EssayPolicy, RubricTrait, WritingArea } from "./contract.ts";
 
 /** Draft values for review. None is a claim about what works for children. */
@@ -83,6 +84,45 @@ export interface EssayContext {
    */
   pools?: Map<string, ItemPool>;
   policy: EssayPolicy;
+  /** Which evidence may establish verified mastery (absent: the pilot policy, reviewed questions only). */
+  verification?: VerificationPolicy;
+}
+
+/**
+ * verification-eligibility@1 (18 October 2026). Which answers may establish VERIFIED mastery:
+ *   reviewed  the pilot policy (default): the target-level demonstration and the delayed check must hold when only
+ *             answers on educator-reviewed questions (evidence_status "validated") are counted. Answers on unreviewed
+ *             bank questions still count for the estimate and for "shown", exactly as before, but cannot verify.
+ *   counted   developer testing: every answer the engine counts may verify, and the claim says it was verified on
+ *             unreviewed questions. Never used for a pilot build.
+ * Nothing is rewritten: both are read from the same ledger with the same engine; only the claim differs.
+ */
+export interface VerificationPolicy {
+  version: "verification-eligibility@1";
+  eligibility: "reviewed" | "counted";
+}
+export const PILOT_VERIFICATION: VerificationPolicy = { version: "verification-eligibility@1", eligibility: "reviewed" };
+export const DEVELOPER_VERIFICATION: VerificationPolicy = { version: "verification-eligibility@1", eligibility: "counted" };
+
+const reviewedLedgers = new WeakMap<object, Map<string, Ledger>>();
+/** The engine's view counting only answers on educator-reviewed questions (the same ledger rules on fewer events). */
+export function reviewedOnlyView(ectx: EssayContext, events: readonly LedgerEvent[], capability: CapabilityId, now: string): LeafView {
+  let byLearner = reviewedLedgers.get(events);
+  if (!byLearner) reviewedLedgers.set(events, (byLearner = new Map()));
+  const learner = (events.find((e) => e.kind === "essay" && e.record.type === "submission") as { record?: { submission?: { learner: string } } } | undefined)?.record?.submission?.learner ?? "learner";
+  // keyed by the record's length and last event, so a record that grew is rebuilt
+  const key = `${learner}#${events.length}#${events.at(-1)?.id ?? ""}#${ectx.ctx.content.items.size}`;
+  let L = byLearner.get(key);
+  if (!L) {
+    const reviewed = events.filter((e) => {
+      if (e.kind !== "evidence") return true;
+      const it = itemVersion(ectx.ctx.content, e.item.id, e.item.version);
+      return it?.kind === "code" && it.evidence_status === "validated";
+    });
+    L = Ledger.rebuild(ectx.ctx, learner, reviewed as LedgerEvent[]);
+    byLearner.set(key, L);
+  }
+  return leafView(L.composite, ectx.ctx.index, capability, now);
 }
 
 /**
@@ -96,18 +136,34 @@ export interface EngineClaim {
   target: number | null;
   status: VerificationStatus;
   note: string | null;
+  /** verification@2: the band a delayed check at that band verified (null: none). */
+  verifiedLevel: number | null;
+  /** For "verified": whether it holds on reviewed questions alone, or only with unreviewed ones (developer policy). */
+  verifiedOn: "reviewed" | "unreviewed" | null;
+  /** Verified on all counted evidence, but the policy (reviewed only) does not allow it: reported as shown instead. */
+  verificationWithheld: boolean;
 }
 
-export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: LeafView): EngineClaim {
+export function engineClaim(ectx: EssayContext, capability: CapabilityId, v: LeafView, events?: readonly LedgerEvent[], now?: string): EngineClaim {
   const target = ectx.profile.byCapability.get(capability)?.expectedBand ?? null;
   const status = v.verification.status;
   const current = v.verification.currentLevel;
-  const raw: EngineClaim["level"] = status === "verified" ? "verified" : status === "demonstrated" ? "demonstrated" : "none";
-  if (raw === "none") return { level: "none", currentLevel: current, target, status, note: null };
-  if (target === null) return { level: "none", currentLevel: current, target, status, note: "no grade target is set for this competency, so no claim is made" };
+  const verifiedLevel = v.verification.verifiedLevel ?? null;
+  const base = { currentLevel: current, target, status, verifiedLevel, verifiedOn: null, verificationWithheld: false } as const;
+  const shown = status === "verified" || status === "demonstrated";
+  if (!shown) return { ...base, level: "none", note: null };
+  if (target === null) return { ...base, level: "none", note: "no grade target is set for this competency, so no claim is made" };
   if (current === null || current < target)
-    return { level: "none", currentLevel: current, target, status, note: `the engine records ${status} at band ${current ?? "?"}, below the draft Grade ${ectx.profile.profile.grade} target of band ${target}` };
-  return { level: raw, currentLevel: current, target, status, note: null };
+    return { ...base, level: "none", note: `the engine records ${status} at band ${current ?? "?"}, below the draft Grade ${ectx.profile.profile.grade} target of band ${target}` };
+  // verification@2: verified only when a delayed check AT the target verified it (not a lower band kept)
+  if (verifiedLevel === null || verifiedLevel < target)
+    return { ...base, level: "demonstrated", note: verifiedLevel === null ? null : `band ${verifiedLevel} is verified; band ${target} is shown, and its own delayed check is still to come` };
+  const policy = ectx.verification ?? PILOT_VERIFICATION;
+  const rv = events && now ? reviewedOnlyView(ectx, events, capability, now) : null;
+  const onReviewed = !!rv && (rv.verification.verifiedLevel ?? -Infinity) >= target && (rv.verification.currentLevel ?? -Infinity) >= target;
+  if (onReviewed) return { ...base, level: "verified", verifiedOn: "reviewed", note: null };
+  if (policy.eligibility === "counted") return { ...base, level: "verified", verifiedOn: "unreviewed", note: "verified on questions not yet reviewed by an educator: a developer test result, not valid for the pilot" };
+  return { ...base, level: "demonstrated", verificationWithheld: true, note: "the delayed check was passed, but on questions not yet reviewed by an educator: under the pilot policy this is not verified mastery" };
 }
 
 export const allowedTags =(ectx: EssayContext, capability: CapabilityId): Set<string> => misconceptionIds(ectx.ctx.index, capability);
