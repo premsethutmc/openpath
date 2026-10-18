@@ -194,8 +194,9 @@ export function updateProgram(
 }
 export function completion(def: ProgramDefinition, record: ProgramRecord) {
   return Math.round(
-    (record.completed.filter((id) => def.stages.some((s) => s.id === id))
-      .length /
+    (new Set(
+      record.completed.filter((id) => def.stages.some((s) => s.id === id)),
+    ).size /
       def.stages.length) *
       100,
   );

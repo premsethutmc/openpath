@@ -32,6 +32,10 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --import tsx ../tools/mathematics/validate.mts
+      - name: Frozen curriculum and audit consistency
+        run: |
+          node --import tsx ../tools/mathematics/audit.mts > /tmp/mathematics-audit.json
+          cmp /tmp/mathematics-audit.json ../docs/mathematics/audit.v1.json
       - run: npm test
       - run: node scripts/build-mathematics.mjs
       - run: npx playwright install --with-deps chromium

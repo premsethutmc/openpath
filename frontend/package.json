@@ -8,7 +8,7 @@
     "build": "node scripts/build.mjs",
     "build:standalone": "node scripts/build.mjs --standalone",
     "preview": "node scripts/preview.mjs",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.english.json",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.english.json && tsc --noEmit -p tsconfig.mathematics-integration.json",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "e2e": "node --test e2e/play.test.mjs",
     "english:build": "node scripts/build-english.mjs",

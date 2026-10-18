@@ -1,5 +1,7 @@
 # Mathematics foundation v1
 
+Follow-up: [integration-readiness audit](FOLLOW_UP.md) and [follow-up test results](FOLLOW_UP_VALIDATION.md). A tested practice-only canonical ledger codec is now available in `packages/mathematics/src/canonical.ts`; production subject registration and account persistence remain pending. The 200-competency graph is frozen.
+
 This branch supplies a modular curriculum, deterministic practice generator, fixed-program contract and synthetic mobile preview. It does **not** implement another learner model, change evidence eligibility, alter English/Tamil or integrate into production navigation. See [integration boundary](INTEGRATION.md), recorded before implementation.
 
 ## Run and validate
