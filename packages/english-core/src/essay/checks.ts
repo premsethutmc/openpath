@@ -116,7 +116,26 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   const demonstrated = claim.level !== "none";
   const verified = claim.level === "verified";
   const shownAt = targetShownAt(L, capability, target, now);
-  const checks = plannedChecks(events).filter((c) => c.competency === capability);
+  // a journey step that is the delayed retention check (policy @3) counts as a retention check like a planned one;
+  // it counts for the essay's delayed check only from retentionDelayDays after the target was first shown
+  const journeyRetention: PlannedCheck[] = essayRecords(events, "journey").flatMap(({ record }) =>
+    record.journey.trees.flatMap((t) =>
+      t.nodes
+        .filter((n) => n.competency === capability)
+        .flatMap((n) => n.steps.filter((x) => x.purpose === "retention" && x.content.available))
+        .map((x) => ({
+          contract: ESSAY_CONTRACT,
+          id: x.id,
+          competency: capability,
+          kind: "retention" as const,
+          at: record.journey.at,
+          notBefore: shownAt ? (later(record.journey.at, addDays(shownAt, p.retentionDelayDays)) ?? record.journey.at) : record.journey.at,
+          items: x.content.refs.map((id) => ({ id, version: ectx.ctx.content.items.get(id)?.version ?? 1 })),
+          reason: x.reason,
+        })),
+    ),
+  );
+  const checks = [...plannedChecks(events).filter((c) => c.competency === capability), ...journeyRetention];
   const progress = checks.map((c) => checkProgress(ectx, events, c, L));
   const open = progress.find((x) => !x.complete);
 
@@ -138,7 +157,8 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   if (open) {
     next = { kind: open.check.kind, notBefore: open.check.notBefore, itemsAvailable: open.left.length, planned: open.check.id };
     pending = now < open.check.notBefore ? `a later ${open.check.kind} check is planned for ${fmt(open.check.notBefore)}` : `a later ${open.check.kind} check is ready to take`;
-  } else if (!demonstrated) {
+  } else if (!demonstrated && !(shownAt !== null && view.verification.status === "overdue")) {
+    // (an overdue engine check after the target was shown is a retention question, handled below: policy @3)
     const available = pickForRole(ectx, events, capability, "independent_verification", p.checkItems).length;
     if (target === null) pending = `${name} has no grade target, so no claim is made`;
     else if (journeyCompleted === false) pending = `the journey's steps for ${name} are not finished`;

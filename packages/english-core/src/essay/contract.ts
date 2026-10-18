@@ -436,10 +436,25 @@ export type JourneyStepKind = "diagnose" | "teach" | "guided_practice" | "indepe
 
 /**
  * pending: not started; done: completed (a lesson read, practice finished); green: the evidence policy now
- * permits the claim (engine verification demonstrated or verified); blocked: missing content.
+ * permits the claim (engine verification demonstrated or verified); blocked: missing content; skipped: a step
+ * planned only "if the check before it does not show the skill" (planner policy @3), and the check did show it.
+ * A skipped lesson stays assigned and can still be opened; it is never counted as completed.
  * Only the engine can make a step or node green; completing a lesson never does.
  */
-export type StepStatus = "pending" | "done" | "green" | "blocked";
+export type StepStatus = "pending" | "done" | "green" | "blocked" | "skipped";
+
+/**
+ * Why the planner gave a node the steps it has (planner policy @3).
+ *   gap                    a confirmed gap, or nothing at the target can check it first: teach, practise, check
+ *   insufficient_evidence  the essay and questions so far neither confirm nor rule out a gap: check at the target
+ *                          first; the lesson and practice follow only if the check does not show the skill
+ *   retention_due          shown at the target before, and its delayed check is due: the delayed check first;
+ *                          remedial teaching only if it does not show the skill was kept
+ *   refresher              shown before, and the new essay and its questions now confirm difficulty
+ *   check_only             currently shown; the new essay suggests difficulty that questions have not confirmed
+ *   prerequisite           a prerequisite the essays show difficulty with: taught first (unchanged)
+ */
+export type NodeDecision = "gap" | "insufficient_evidence" | "retention_due" | "refresher" | "check_only" | "prerequisite";
 
 export interface JourneyStep {
   id: string;
@@ -451,6 +466,10 @@ export interface JourneyStep {
   /** Ledger ids that moved the step on. */
   evidence: string[];
   reason: string;
+  /** Only needed if the node's first check does not show the skill (policy @3); otherwise it becomes "skipped". */
+  condition?: "if_not_shown";
+  /** A check step that is the competency's delayed retention check (questions from the retention reserve). */
+  purpose?: "retention";
 }
 
 export interface JourneyNode {
@@ -463,6 +482,8 @@ export interface JourneyNode {
   /** Green only when the engine supports demonstrated or verified at the grade target band. */
   green: boolean;
   level: "none" | "demonstrated" | "verified";
+  /** Why the planner chose these steps (policy @3; absent on journeys created before it). */
+  decision?: NodeDecision;
   /** Set by journeyStatus (policy @1): the separate claims for this competency. */
   outcome?: CompetencyOutcome;
 }
@@ -489,6 +510,12 @@ export interface LearningJourney {
   finalRewrite: { available: boolean; reason: string };
   /** All target nodes green. Not a verified goal unless every target is "verified". */
   complete: boolean;
+  /**
+   * Set by journeyStatus: how much of the assigned sequence has been carried out, from step statuses alone. It never
+   * reads the engine and is not proficiency: a learner can be shown at 30% and not shown at 100%. Skipped lessons count
+   * as assigned but not completed.
+   */
+  progress?: { stepsTotal: number; stepsDone: number; stepsSkipped: number; stepsBlocked: number; lessonsAssigned: number; lessonsCompleted: number; percent: number };
 }
 
 // ---------------------------------------------------------------- final rewrite
