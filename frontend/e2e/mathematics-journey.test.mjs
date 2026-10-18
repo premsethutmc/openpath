@@ -77,7 +77,7 @@ async function setup(width = 360) {
       exact: true,
     })
     .waitFor();
-  return { page, context, learner: pupil.data.id };
+  return { page, context, learner: pupil.data.id, email };
 }
 async function saved(p) {
   await p
@@ -321,5 +321,31 @@ test("412px concept and signed-out account isolation", async () => {
     403,
   );
   await other.close();
+  await context.close();
+});
+test("one OpenPath account across English and Mathematics: same pupil, both records kept through sign-out and sign-in", async () => {
+  const { page, context, learner, email } = await setup(412); // registered, signed out and signed back in through the page
+  await finish(page);
+  const maths = await records(page, learner);
+  assert.ok(maths.length >= 1, "a mathematics activity is saved to the account");
+  // the English application, same origin and session: the same pupil, not a second identity
+  await page.goto(base + "/");
+  await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
+  await page.getByRole("button", { name: /Synthetic fractions learner/ }).waitFor();
+  const pupils = await call(page, "/pupils/");
+  assert.equal(pupils.status, 200);
+  assert.deepEqual(pupils.data.pupils.map((p) => p.id), [learner], "one pupil for both subjects");
+  const english = await call(page, `/pupils/${learner}/events/`);
+  assert.equal(english.status, 200);
+  assert.ok(english.data.events.every((e) => e.kind !== "math_activity"), "mathematics activity never enters the English record");
+  // sign out and back in: both subjects as they were
+  await call(page, "/account/logout/", {});
+  assert.ok([401, 403].includes((await call(page, `/pupils/${learner}/events/?subject=mathematics`)).status));
+  const back = await call(page, "/account/login/", { email, password: "synthetic-family-passphrase-v2" });
+  assert.equal(back.status, 200, JSON.stringify(back.data));
+  assert.deepEqual(await records(page, learner), maths, "the mathematics record is unchanged");
+  assert.deepEqual((await call(page, `/pupils/${learner}/events/`)).data.events, english.data.events, "and the English record");
+  await page.goto(`${base}/mathematics.html?learner=${learner}&journey=school`);
+  await page.getByRole("button", { name: "Finish activity and save place", exact: true }).waitFor();
   await context.close();
 });

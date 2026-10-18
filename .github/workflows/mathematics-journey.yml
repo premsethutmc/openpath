@@ -40,6 +40,14 @@ jobs:
         working-directory: frontend
       - run: node scripts/build-mathematics-journey.mjs
         working-directory: frontend
+      # The combined private preview (English and Mathematics on one origin, one account): kept as a workflow artifact
+      # for download and local review only. Nothing is deployed, and there is no real-child access.
+      - uses: actions/upload-artifact@v7
+        with:
+          name: openpath-combined-private-preview
+          path: frontend/dist-english/
+          retention-days: 7
+          if-no-files-found: error
       - run: npx playwright install --with-deps chromium
         working-directory: frontend
       - name: Authenticated browser flow
