@@ -284,6 +284,23 @@ export interface GeneratedQuestionOutput {
   misconceptions?: Record<string, string>;
 }
 
+/**
+ * What practice on one model-written question set shows: formative feedback only. It never confirms or rules out a
+ * gap (only reviewed bank questions do), and the engine holds every answer, so it never changes an estimate.
+ */
+export interface FormativeOutcome {
+  set: string;
+  competency: CapabilityId;
+  status: "pending" | "difficulty" | "secure" | "mixed";
+  right: number;
+  answered: number;
+  total: number;
+  /** Wrong answers whose misconception matches the essay's. */
+  misconceptionMatches: number;
+  answers: { evidence: string; item: string; correct: boolean }[];
+  reason: string;
+}
+
 export interface QuestionOutput {
   request_id: string;
   competency: CapabilityId;
@@ -537,6 +554,8 @@ export interface ProvenanceSummary {
   assisted: string[];
   /** Recorded but held by the engine (provisional content, repeats, unqualified evaluators). */
   held: string[];
+  /** The held answers that were on model-written (provisional) questions. */
+  provisional: string[];
 }
 
 export interface CompetencyStatus {
@@ -554,7 +573,19 @@ export interface CompetencyStatus {
    * The engine's view. `state` counts demonstrated or verified only when `currentLevel` (the level the evidence
    * currently supports) reaches `target` (the profile's draft grade band).
    */
-  engine: { stage: Stage; verification: VerificationStatus; currentLevel: number | null; target: number | null; demonstrated: number | null; mastered: number | null; directN: number };
+  engine: {
+    stage: Stage;
+    verification: VerificationStatus;
+    currentLevel: number | null;
+    target: number | null;
+    demonstrated: number | null;
+    mastered: number | null;
+    directN: number;
+    /** The engine's estimate from counted answers (mean and sd on the band scale); null when none was counted. An estimate, never a claim of mastery. */
+    estimate: { mean: number; sd: number } | null;
+  };
+  /** The latest practice on model-written questions for this competency: formative only, never evidence of mastery. */
+  formative: FormativeOutcome | null;
   essays: { errors: number; strengths: number; essays: number; style?: number; notObservable?: number };
   provenance: ProvenanceSummary;
   notes: string[];

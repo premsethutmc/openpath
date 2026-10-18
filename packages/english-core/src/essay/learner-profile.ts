@@ -12,6 +12,7 @@ import { analyses, essayRecords, submissions } from "./analysis.ts";
 import { engineClaim, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyState, type CompetencyStatus, type EssayLearnerProfile, type ProfileUpdate } from "./contract.ts";
 import { countedAnalyses, currentHypotheses } from "./gaps.ts";
+import { formativeOutcomes } from "./questions.ts";
 
 const RANK: Record<CompetencyState, number> = { unknown: 0, observed: 1, suspected: 2, demonstrated: 3, verified: 4 };
 
@@ -20,6 +21,7 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
   const hyps = currentHypotheses(ectx, events);
   const counted = countedAnalyses(events);
   const evidence = new Map(events.filter((e): e is EvidenceEvent => e.kind === "evidence").map((e) => [e.id, e]));
+  const formative = formativeOutcomes(ectx, events);
   const competencies: CompetencyStatus[] = ectx.profile.profile.competencies.map((ref) => {
     const cap = ref.capability;
     const v = leafView(ledger.composite, ectx.ctx.index, cap, now);
@@ -43,6 +45,7 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
       notes.push(`Shown earlier, but ${v.verification.status === "overdue" ? "a later check is overdue" : "the later check was not passed"}: not counted as shown now.`);
     if (errors === 1 && !gap) notes.push("One error in essays so far: it may be a slip.");
     if (gap?.status === "weakened") notes.push("The essay suggested a gap, but questions answered without help were right.");
+    const f = formative.get(cap) ?? null;
     if (!ref.specified) notes.push("Not specified in the framework yet: it can be observed in an essay but not checked with questions.");
     if (counted.length && errors === 0 && RANK[state] < RANK.demonstrated)
       notes.push(strengths ? "Used well in essays so far. That is not mastery: only questions answered without help can show it." : "No errors seen in essays so far. That is not evidence of mastery.");
@@ -53,11 +56,16 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
     const independent: string[] = [];
     const assisted: string[] = [];
     const held: string[] = [];
+    const provisional: string[] = [];
     for (const d of decisions) {
       const ev = evidence.get(d.source);
       if (d.verdict === "accepted" && ev && isIndependentProvenance(ev.provenance)) independent.push(d.source);
       else if (d.verdict === "held" && ev?.provenance && !isIndependentProvenance(ev.provenance)) assisted.push(d.source);
-      else if (d.verdict === "held") held.push(d.source);
+      else if (d.verdict === "held") {
+        held.push(d.source);
+        const it = ev ? ectx.ctx.content.items.get(ev.item.id) : undefined;
+        if (it?.kind === "code" && it.model_generated) provisional.push(d.source);
+      }
     }
     for (const e of events)
       if (e.kind === "assisted_response") {
@@ -70,9 +78,10 @@ export function essayProfile(ectx: EssayContext, learner: string, events: readon
       area: ref.area,
       state,
       gap,
-      engine: { stage: v.stage, verification: v.verification.status, currentLevel: v.verification.currentLevel, target: claim.target, demonstrated: v.demonstrated, mastered: v.mastered, directN: v.direct.n },
+      engine: { stage: v.stage, verification: v.verification.status, currentLevel: v.verification.currentLevel, target: claim.target, demonstrated: v.demonstrated, mastered: v.mastered, directN: v.direct.n, estimate: v.direct.n > 0 ? { mean: v.mean, sd: v.sd } : null },
+      formative: f,
       essays: { errors, strengths, essays, style, notObservable },
-      provenance: { tentative: obs.map((o) => o.id), independent, assisted, held },
+      provenance: { tentative: obs.map((o) => o.id), independent, assisted, held, provisional },
       notes,
     };
   });

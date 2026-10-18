@@ -603,3 +603,11 @@
 .essay-experience .essay-results li[data-correct="false"] small {
   color: var(--warn, #9a4b00);
 }
+/* a profile row: name and label on one line, then each evidence line below at full width */
+.essay-experience .essay-profile-list li {
+  flex-wrap: wrap;
+}
+.essay-experience .essay-profile-list li > small {
+  flex-basis: 100%;
+  overflow-wrap: anywhere;
+}

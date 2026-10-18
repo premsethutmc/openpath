@@ -1,8 +1,9 @@
 /**
- * K8: the essay-to-diagnostic workflow in the core. Fresh questions written by a (mocked) model for one suspected
- * competency are checked for structure, answer-key consistency and duplicates; a single bad question rejects the set;
- * accepted questions are provisional items whose answers inform the provisional profile but are held by the engine,
- * so no estimate moves and no mastery can follow; a second essay's request avoids the first set.
+ * K8: model-written questions on the PRACTICE track (two-track policy). Fresh questions written by a (mocked) model
+ * are checked for structure, answer-key consistency and duplicates; a single bad question rejects the set; accepted
+ * questions are provisional items that give formative feedback only: they never confirm or rule out a gap, the engine
+ * holds every answer, and no amount of repeated practice on them can make a skill demonstrated or verified. A second
+ * essay's request avoids the first set.
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -18,7 +19,11 @@ import {
   type EvidenceEvent,
   extendContent,
   gapHypotheses,
-  generateDiagnostic,
+  competencyOutcome,
+  formativeOutcome,
+  generatePractice,
+  planCheck,
+  planDiagnosticFor,
   generatedQuestionItems,
   Ledger,
   type LedgerEvent,
@@ -28,6 +33,7 @@ import {
   scoreCode,
   submitEssay,
   validateContent,
+  essayProfile,
   type Response,
 } from "../src/index.ts";
 import { loadAppEssayContext } from "../../../tools/english/essay-load.ts";
@@ -96,7 +102,7 @@ function answerAll(events: LedgerEvent[], items: BankItem[], right: (k: number) 
   });
 }
 
-test("K8-1 Karthik's essay: plurals and agreement are suspected; five fresh plural questions pass every check and become provisional items", async () => {
+test("K8-1 Karthik's essay: plurals suspected; five fresh plural questions pass every check and become provisional practice items", async () => {
   const events: LedgerEvent[] = [];
   const model = mockModel();
   const a = await essay(events, "karthik", "essay:1", model);
@@ -105,11 +111,15 @@ test("K8-1 Karthik's essay: plurals and agreement are suspected; five fresh plur
   const h = gapHypotheses(base, events).find((x) => x.competency === PLU)!;
   assert.equal(h.status, "suspected");
   assert.equal(gapHypotheses(base, events).find((x) => x.competency === SVA)?.status, "suspected");
-  assert.equal(recommendNext(base, events)?.kind, "check_skill");
+  // the formal track first: the bank can diagnose plurals
+  const rec = recommendNext(base, events)!;
+  assert.equal(rec.kind, "check_skill");
+  assert.equal(rec.verification?.available, false, "but the bank cannot verify plurals: one unseen question at the target band, two needed");
 
-  const g = await generateDiagnostic(base, events, model, h.id, [meta(), meta()]);
+  const g = await generatePractice(base, events, model, h.id, meta());
   assert.equal(g.set.status, "accepted", JSON.stringify(g.set.rejected));
   assert.equal(g.set.items.length, 5);
+  assert.equal(g.events.length, 1, "a question set only: never a diagnostic request");
   const req = model.requests[0];
   assert.equal(req.competency.id, PLU);
   assert.equal(req.competency.target_band, 5);
@@ -126,9 +136,6 @@ test("K8-1 Karthik's essay: plurals and agreement are suspected; five fresh plur
     assert.ok(!scoreCode(it, respond(it, false)).correct);
   }
   assert.deepEqual(validateContent({ items: g.set.items, passages: [], goals: [], misspellings: {} }, base.ctx.index), []);
-  assert.equal(g.request?.source, "generated");
-  assert.equal(g.request?.questionSet, g.set.id);
-  assert.deepEqual(g.request?.items.map((i) => i.contentStatus), ["provisional", "provisional", "provisional", "provisional", "provisional"]);
 });
 
 test("K8-2 one bad question rejects the whole set: structure, answer-key consistency and duplicates", async () => {
@@ -153,10 +160,9 @@ test("K8-2 one bad question rejects the whole set: structure, answer-key consist
     const model = mockModel((req) => ({ request_id: req.request_id, competency: req.competency.id, questions: edit(structuredClone(good)) }));
     await essay(events, "karthik", "essay:1", model);
     const h = gapHypotheses(base, events).find((x) => x.competency === PLU)!;
-    const g = await generateDiagnostic(base, events, model, h.id, [meta(), meta()]);
+    const g = await generatePractice(base, events, model, h.id, meta());
     assert.equal(g.set.status, "rejected", what);
     assert.equal(g.set.items.length, 0, what);
-    assert.equal(g.request, null, what);
     assert.match([...g.set.reasons, ...g.set.rejected.flatMap((r) => r.reasons)].join(" | "), why, what);
     assert.equal(g.events.length, 1, `${what}: the rejected attempt is recorded, and nothing is asked`);
   }
@@ -167,42 +173,65 @@ test("K8-2 one bad question rejects the whole set: structure, answer-key consist
   });
   await essay(events, "karthik", "essay:1", failing);
   const h = gapHypotheses(base, events).find((x) => x.competency === PLU)!;
-  const g = await generateDiagnostic(base, events, failing, h.id, [meta(), meta()]);
+  const g = await generatePractice(base, events, failing, h.id, meta());
   assert.equal(g.set.status, "rejected");
   assert.match(g.set.reasons[0], /529/);
 });
 
-test("K8-3 answers update the provisional profile, are held by the engine, and never establish mastery", async () => {
+test("K8-3 practice answers are formative only: held, no estimate, no gap decision; repeated practice never makes a skill shown or verified", async () => {
   const events: LedgerEvent[] = [];
   const model = mockModel();
   await essay(events, "karthik", "essay:1", model);
   const h = gapHypotheses(base, events).find((x) => x.competency === PLU)!;
-  const g = await generateDiagnostic(base, events, model, h.id, [meta(), meta()]);
+  const g = await generatePractice(base, events, model, h.id, meta());
   events.push(...g.events);
   const ctx = withItems(events);
   const before = JSON.stringify(Ledger.rebuild(ctx.ctx, LEARNER, events).composite.nodes[PLU]);
-  // two right, three wrong: the existing diagnostic rule confirms the gap
   answerAll(events, g.set.items, (k) => k >= 3);
   const L = Ledger.rebuild(ctx.ctx, LEARNER, events);
-  const decisions = L.decisions.filter((d) => g.set.items.some((i) => events.some((e) => e.kind === "evidence" && e.id === d.source && e.item.id === i.id)));
+  const decisions = L.decisions.filter((d) => events.some((e) => e.kind === "evidence" && e.id === d.source && g.set.items.some((i) => i.id === e.item.id)));
   assert.equal(decisions.length, 5);
   assert.ok(decisions.every((d) => d.verdict === "held" && /provisional item/.test(d.reasons[0])), "every answer is held");
   assert.equal(JSON.stringify(L.composite.nodes[PLU]), before, "no estimate moved");
-  const after = gapHypotheses(ctx, events).find((x) => x.id === h.id)!;
-  assert.equal(after.status, "confirmed");
-  assert.equal(after.diagnostic!.answers.length, 5);
-  const rec = recommendNext(ctx, events)!;
-  assert.equal(rec.kind, "learn");
-  assert.equal(rec.competency, PLU);
-  assert.match(rec.lesson!, /plurals_countability#/);
+  const f = formativeOutcome(ctx, events, g.set, h.misconceptions);
+  assert.equal(f.status, "difficulty");
+  assert.match(f.reason, /formative feedback only/);
+  assert.equal(gapHypotheses(ctx, events).find((x) => x.id === h.id)!.status, "suspected", "practice never confirms a gap");
+  const p = essayProfile(ctx, LEARNER, events, at(0, 1)).competencies.find((c) => c.competency === PLU)!;
+  assert.equal(p.state, "suspected");
+  assert.equal(p.provenance.provisional.length, 5);
+  assert.equal(p.engine.estimate, null, "no counted answer, so no estimate");
+  assert.equal(p.formative?.status, "difficulty");
+  // the formal track is still what is recommended
+  assert.equal(recommendNext(ctx, events)?.kind, "check_skill");
 
-  // even many right answers on generated questions over weeks cannot make the skill demonstrated or verified
+  // repeated practice on the same provisional questions, over weeks, plus a second set: still nothing is shown
   const more: LedgerEvent[] = [...events];
-  for (let round = 0; round < 3; round++) answerAll(more, g.set.items, () => true, 8 + round * 8);
-  const L2 = Ledger.rebuild(ctx.ctx, LEARNER, more);
-  const v = leafView(L2.composite, ctx.ctx.index, PLU, at(0, 40));
+  for (let round = 0; round < 4; round++) answerAll(more, g.set.items, () => true, 8 + round * 8);
+  const h2 = gapHypotheses(withItems(more), more).find((x) => x.id === h.id)!;
+  const g2 = await generatePractice(withItems(more), more, model, h2.id, meta(40));
+  assert.equal(g2.set.status, "accepted");
+  more.push(...g2.events);
+  answerAll(more, g2.set.items, () => true, 41);
+  const ctx2 = withItems(more);
+  const L2 = Ledger.rebuild(ctx2.ctx, LEARNER, more);
+  const v = leafView(L2.composite, ctx2.ctx.index, PLU, at(0, 60));
   assert.equal(v.verification.status, "not_demonstrated");
   assert.equal(v.direct.n, 0, "no direct evidence was accepted from provisional questions");
+  const o = competencyOutcome(ctx2, more, PLU, at(0, 60));
+  assert.deepEqual([o.demonstrated, o.verified, o.retention], [false, false, "not_applicable"]);
+  const p2 = essayProfile(ctx2, LEARNER, more, at(0, 60)).competencies.find((c) => c.competency === PLU)!;
+  assert.ok(!["demonstrated", "verified"].includes(p2.state));
+  assert.equal(p2.provenance.provisional.length, 30, "every answer on a provisional question, repeats included, is kept and held");
+  // and generated items are never taken for a formal diagnostic or a planned check
+  const d = planDiagnosticFor(ctx2, more, h.id, meta(60));
+  assert.ok(d.request.items.every((i) => !i.id.startsWith("gen.")));
+  try {
+    const c = planCheck(ctx2, more, meta(60), PLU);
+    assert.ok(c.check.items.every((i) => !i.id.startsWith("gen.")));
+  } catch (e) {
+    assert.match((e as Error).message, /question|shown|check/);
+  }
 });
 
 test("K8-4 a second essay: prior evidence shapes the hypothesis, the recommendation and the request (no repeated question)", async () => {
@@ -210,7 +239,13 @@ test("K8-4 a second essay: prior evidence shapes the hypothesis, the recommendat
   const model = mockModel();
   await essay(events, "karthik", "essay:1", model);
   const h1 = gapHypotheses(base, events).find((x) => x.competency === PLU)!;
-  const g1 = await generateDiagnostic(base, events, model, h1.id, [meta(), meta()]);
+  // formal diagnosis from the bank (wrong answers confirm the gap)
+  const d1 = planDiagnosticFor(base, events, h1.id, meta());
+  events.push(d1.event);
+  const bankItems = d1.request.items.map((i) => base.ctx.content.items.get(i.id) as BankItem);
+  answerAll(events, bankItems, () => false);
+  assert.equal(gapHypotheses(base, events).find((x) => x.id === h1.id)!.status, "confirmed");
+  const g1 = await generatePractice(base, events, model, h1.id, meta());
   events.push(...g1.events);
   answerAll(events, g1.set.items, (k) => k >= 3);
   await essay(events, "second", "essay:2", model, 7);
@@ -219,21 +254,10 @@ test("K8-4 a second essay: prior evidence shapes the hypothesis, the recommendat
   assert.equal(h2.id, `hyp:essay:2:${PLU}`);
   assert.equal(h2.status, "suspected", "one error, suspected because the earlier essay showed the same");
   assert.match(h2.basis.join(" "), /earlier essay/);
-  const g2 = await generateDiagnostic(ctx, events, model, h2.id, [meta(7), meta(7)]);
+  const rec = recommendNext(ctx, events)!;
+  assert.match(rec.history.join(" "), /essay:1: confirmed/);
+  const g2 = await generatePractice(ctx, events, model, h2.id, meta(7));
   assert.equal(g2.set.status, "accepted", JSON.stringify(g2.set.rejected));
-  const req2 = model.requests[1];
-  for (const it of g1.set.items) assert.ok(req2.avoid.includes(it.prompt), "the first set's questions are to be avoided");
+  for (const it of g1.set.items) assert.ok(model.requests[1].avoid.includes(it.prompt), "the first set's questions are to be avoided");
   assert.ok(g2.set.items.every((i) => !g1.set.items.some((j) => j.prompt === i.prompt)));
-  events.push(...g2.events);
-  answerAll(events, g2.set.items, () => true, 7);
-  const ctx2 = withItems(events);
-  const rec = recommendNext(ctx2, events)!;
-  assert.equal(gapHypotheses(ctx2, events).filter((x) => x.competency === PLU).at(-1)!.status, "weakened");
-  // essay 2 shows only the plural error, now answered right without help: nothing to teach for this essay
-  assert.equal(rec.kind, "write_again");
-  // the history of the earlier essay is carried into the recommendation while the plural check is open
-  const open = [...events.slice(0, events.length - 5)];
-  const recOpen = recommendNext(withItems(open), open)!;
-  assert.equal(recOpen.kind, "answer_questions");
-  assert.match(recOpen.history.join(" "), /essay:1: confirmed/);
 });

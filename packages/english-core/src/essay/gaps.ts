@@ -77,7 +77,8 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
     }
   }
   // the diagnosis each hypothesis has had so far
-  const requests = essayRecords(events, "diagnostic").map((r) => r.record.request);
+  // the formal track only: a request of generated (provisional) questions never decides a hypothesis
+  const requests = essayRecords(events, "diagnostic").map((r) => r.record.request).filter((r) => r.source !== "generated");
   for (const h of out) {
     const req = requests.find((r) => r.hypothesis === h.id);
     if (!req) continue;
@@ -140,31 +141,48 @@ export function planDiagnostics(ectx: EssayContext, events: readonly LedgerEvent
   for (const h of currentHypotheses(ectx, events).values()) {
     if (planned.has(h.id) || h.status !== "suspected") continue;
     const m = meta(out.length);
-    const essay = h.essays.at(-1)!;
-    const ref = ectx.profile.byCapability.get(h.competency)!;
-    const items = ref.specified ? pickItems(ectx, working, h.competency, ectx.policy.diagnosticItems) : [];
-    const gap = !ref.specified
-      ? `${ref.name} is not specified in the framework yet: no questions exist to check it`
-      : items.length < ectx.policy.diagnosticMinIndependent
-        ? `only ${items.length} unseen question${items.length === 1 ? "" : "s"} on ${ref.name}; at least ${ectx.policy.diagnosticMinIndependent} are needed`
-        : undefined;
-    const request: DiagnosticRequest = {
-      contract: ESSAY_CONTRACT,
-      id: m.id,
-      essay,
-      hypothesis: h.id,
-      competency: h.competency,
-      items: items.map((i) => ({ id: i.id, version: i.version, contentStatus: contentStatus(i) })),
-      minIndependent: ectx.policy.diagnosticMinIndependent,
-      ...(gap ? { contentGap: gap } : {}),
-      policy: ectx.policy.version,
-    };
-    const ev: LedgerEvent = { kind: "essay", id: m.id, at: m.at, session: m.session, record: { type: "diagnostic", request } };
+    const { event: ev, request } = diagnosticRequestFor(ectx, working, h, m);
     out.push(ev);
     requests.push(request);
     working = [...working, ev];
   }
   return { events: out, requests };
+}
+
+/** The formal diagnostic request for one hypothesis: eligible, unseen bank questions, or the content gap stated. */
+function diagnosticRequestFor(ectx: EssayContext, events: readonly LedgerEvent[], h: GapHypothesis, m: EventMeta): { event: LedgerEvent; request: DiagnosticRequest } {
+  const essay = h.essays.at(-1)!;
+  const ref = ectx.profile.byCapability.get(h.competency)!;
+  const items = ref.specified ? pickItems(ectx, events, h.competency, ectx.policy.diagnosticItems) : [];
+  const gap = !ref.specified
+    ? `${ref.name} is not specified in the framework yet: no questions exist to check it`
+    : items.length < ectx.policy.diagnosticMinIndependent
+      ? `only ${items.length} unseen question${items.length === 1 ? "" : "s"} on ${ref.name}; at least ${ectx.policy.diagnosticMinIndependent} are needed`
+      : undefined;
+  const request: DiagnosticRequest = {
+    contract: ESSAY_CONTRACT,
+    id: m.id,
+    essay,
+    hypothesis: h.id,
+    competency: h.competency,
+    items: items.map((i) => ({ id: i.id, version: i.version, contentStatus: contentStatus(i) })),
+    minIndependent: ectx.policy.diagnosticMinIndependent,
+    ...(gap ? { contentGap: gap } : {}),
+    policy: ectx.policy.version,
+  };
+  return { event: { kind: "essay", id: m.id, at: m.at, session: m.session, record: { type: "diagnostic", request } }, request };
+}
+
+/**
+ * Plan the formal diagnostic for one chosen hypothesis (the learner picked this competency). Refuses when it is not
+ * suspected or already has one. Bank questions only; when too few exist, the request records the gap and asks nothing.
+ */
+export function planDiagnosticFor(ectx: EssayContext, events: readonly LedgerEvent[], hypothesisId: string, meta: EventMeta): { event: LedgerEvent; request: DiagnosticRequest } {
+  const h = gapHypotheses(ectx, events).find((x) => x.id === hypothesisId);
+  if (!h) throw new EssayRefusal(`no hypothesis ${hypothesisId}`);
+  if (h.status !== "suspected") throw new EssayRefusal(`${hypothesisId} is already ${h.status}`);
+  if (essayRecords(events, "diagnostic").some((r) => r.record.request.hypothesis === hypothesisId && r.record.request.source !== "generated")) throw new EssayRefusal(`${hypothesisId} already has diagnostic questions`);
+  return diagnosticRequestFor(ectx, events, h, meta);
 }
 
 /** What the answers to a diagnostic request show so far. */

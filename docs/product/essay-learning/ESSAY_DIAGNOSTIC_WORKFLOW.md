@@ -1,5 +1,7 @@
 # Essay-to-diagnostic workflow
 
+> **Updated: two-track policy.** Model-written questions are now practice only: formative, held, and they decide no gap. Formal diagnosis and checks use bank questions. See [TWO_TRACK_ASSESSMENT.md](TWO_TRACK_ASSESSMENT.md), which supersedes steps 4–7 below where they differ.
+
 This is the essay studio's path from an essay to diagnostic questions. It reuses the existing parts:
 
 - the server's provider gateway and LLM client;

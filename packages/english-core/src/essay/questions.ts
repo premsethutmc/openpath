@@ -10,13 +10,15 @@
  *                   example, or a sentence of the learner's own essay.
  * One failing question rejects the whole set (five checked questions or none), and the reasons are recorded.
  *
- * Accepted questions become code items with `evidence_status: "provisional"` and a `model_generated` record. The
- * engine's existing content-validation gate holds every answer to a provisional item: the answer is scored and kept
- * with its provenance, it informs the essay's gap hypothesis (the provisional profile), and it never changes an
- * estimate, so it can never establish demonstrated or verified mastery. Nobody has reviewed these questions, and
+ * Two-track policy. Accepted questions become code items with `evidence_status: "provisional"` and a
+ * `model_generated` record, on the PRACTICE track: they give formative feedback (formativeOutcome) and may serve guided
+ * practice. The engine's existing content-validation gate holds every answer to a provisional item: the answer is
+ * scored and kept with its provenance, and it never changes an estimate, so it can never establish demonstrated or
+ * verified mastery; and they never confirm or rule out a gap. The FORMAL track (diagnosis, independent checks, the
+ * delayed retention check) uses only eligible, unseen bank questions. Nobody has reviewed generated questions, and
  * nothing here says so.
  */
-import { contentStatus } from "../content.ts";
+import { scoreCode } from "../content.ts";
 import { scrubIdentifiers } from "../evaluation.ts";
 import { instructionLike } from "../freeform.ts";
 import { fnv1a } from "../model.ts";
@@ -27,8 +29,8 @@ import { allowedTags, type EssayContext } from "./competencies.ts";
 import {
   ESSAY_CONTRACT,
   ESSAY_QUESTIONS_PROTOCOL,
-  type DiagnosticRequest,
   type EssayEvaluator,
+  type FormativeOutcome,
   type EvaluatorRef,
   type GapHypothesis,
   type QuestionRequest,
@@ -250,40 +252,73 @@ export function validateQuestionSet(ectx: EssayContext, events: readonly LedgerE
 }
 
 /**
- * Ask the evaluator for fresh questions for one suspected gap, validate them, and return the events to record: the
- * question set, and (when accepted) the diagnostic request that asks them. Refuses when the hypothesis is unknown,
- * already has diagnostic questions, or the evaluator cannot write questions. A failed or invalid answer is recorded
- * as a rejected set (no questions), never guessed around.
+ * Ask the evaluator for fresh practice questions on one essay hypothesis's competency, validate them, and return the
+ * event to record (the question set). Practice track only: the set never becomes a diagnostic request, so it can never
+ * confirm or rule out a gap, and the engine holds every answer (provisional items), so it never changes an estimate.
+ * Formal diagnosis and independent checks use reviewed, eligible, unseen bank questions (gaps.ts, journey.ts). A failed
+ * or invalid answer is recorded as a rejected set (no questions), never guessed around.
  */
-export async function generateDiagnostic(ectx: EssayContext, events: readonly LedgerEvent[], evaluator: EssayEvaluator, hypothesisId: string, meta: [EventMeta, EventMeta]): Promise<{ events: EssayEvent[]; set: QuestionSet; request: DiagnosticRequest | null }> {
+export async function generatePractice(ectx: EssayContext, events: readonly LedgerEvent[], evaluator: EssayEvaluator, hypothesisId: string, meta: EventMeta): Promise<{ events: EssayEvent[]; set: QuestionSet }> {
   const h = gapHypotheses(ectx, events).find((x) => x.id === hypothesisId);
   if (!h) throw new EssayRefusal(`no hypothesis ${hypothesisId}`);
-  if (h.status !== "suspected") throw new EssayRefusal(`${hypothesisId} is already ${h.status}`);
-  if (essayRecords(events, "diagnostic").some((r) => r.record.request.hypothesis === hypothesisId)) throw new EssayRefusal(`${hypothesisId} already has diagnostic questions`);
-  if (!evaluator.questions || evaluator.protocols?.questions !== ESSAY_QUESTIONS_PROTOCOL) throw new EssayRefusal("no question writer is connected: fresh questions need the server's evaluator");
+  if (!evaluator.questions || evaluator.protocols?.questions !== ESSAY_QUESTIONS_PROTOCOL) throw new EssayRefusal("no question writer is connected: fresh practice questions need the server's evaluator");
+  const open = questionSets(events).find((s) => s.competency === h.competency && s.status === "accepted" && formativeOutcome(ectx, events, s).status === "pending");
+  if (open) throw new EssayRefusal(`finish the practice questions already written for ${h.competency} first`);
   const request = buildQuestionRequest(ectx, events, h);
   const ref: EvaluatorRef = { id: evaluator.id, version: evaluator.version, protocol: ESSAY_QUESTIONS_PROTOCOL, ...(evaluator.model ? { model: evaluator.model } : {}), rubric: ectx.profile.key };
   let set: QuestionSet;
   try {
     const raw = await evaluator.questions(request);
-    set = validateQuestionSet(ectx, events, h, request, raw, ref, meta[0]);
+    set = validateQuestionSet(ectx, events, h, request, raw, ref, meta);
   } catch (e) {
-    set = { contract: ESSAY_CONTRACT, id: meta[0].id, essay: h.essays.at(-1)!, hypothesis: h.id, competency: h.competency, request, evaluator: ref, status: "rejected", reasons: [`the question writer failed: ${(e as Error).message}`], rejected: [], items: [] };
+    set = { contract: ESSAY_CONTRACT, id: meta.id, essay: h.essays.at(-1)!, hypothesis: h.id, competency: h.competency, request, evaluator: ref, status: "rejected", reasons: [`the question writer failed: ${(e as Error).message}`], rejected: [], items: [] };
   }
-  const out: EssayEvent[] = [{ kind: "essay", id: meta[0].id, at: meta[0].at, session: meta[0].session, record: { type: "questions", set } }];
-  if (set.status !== "accepted") return { events: out, set, request: null };
-  const dr: DiagnosticRequest = {
-    contract: ESSAY_CONTRACT,
-    id: meta[1].id,
-    essay: set.essay,
-    hypothesis: h.id,
-    competency: h.competency,
-    items: set.items.map((i) => ({ id: i.id, version: i.version, contentStatus: contentStatus(i) })),
-    minIndependent: ectx.policy.diagnosticMinIndependent,
-    policy: ectx.policy.version,
-    source: "generated",
-    questionSet: set.id,
-  };
-  out.push({ kind: "essay", id: meta[1].id, at: meta[1].at, session: meta[1].session, record: { type: "diagnostic", request: dr } });
-  return { events: out, set, request: dr };
+  return { events: [{ kind: "essay", id: meta.id, at: meta.at, session: meta.session, record: { type: "questions", set } }], set };
+}
+
+/** What the answers to one accepted practice set show so far: formative feedback, never a gap decision or a level. */
+export function formativeOutcome(ectx: EssayContext, events: readonly LedgerEvent[], set: QuestionSet, misconceptions: string[] = []): FormativeOutcome {
+  const setAt = events.find((e) => e.kind === "essay" && e.record.type === "questions" && e.record.set.id === set.id)?.at ?? "";
+  const ids = new Map(set.items.map((i) => [i.id, i]));
+  const seen = new Set<string>();
+  const answers: FormativeOutcome["answers"] = [];
+  let matches = 0;
+  for (const e of events) {
+    if (e.kind !== "evidence" || e.at < setAt || seen.has(e.item.id)) continue;
+    const item = ids.get(e.item.id);
+    if (!item) continue;
+    seen.add(item.id);
+    const { correct, misconceptions: tags } = scoreCode(item, e.response);
+    if (!correct && tags.some((t) => misconceptions.includes(t))) matches++;
+    answers.push({ evidence: e.id, item: item.id, correct });
+  }
+  const right = answers.filter((a) => a.correct).length;
+  const wrong = answers.length - right;
+  const base = { set: set.id, competency: set.competency, right, answered: answers.length, total: set.items.length, misconceptionMatches: matches, answers };
+  const note = "Practice on questions written by a model: formative feedback only. It does not confirm or rule out the gap and never counts as showing the skill.";
+  if (answers.length < set.items.length) return { ...base, status: "pending", reason: `${answers.length} of ${set.items.length} practice questions answered.` };
+  if (wrong >= ectx.policy.confirmMinWrong) return { ...base, status: "difficulty", reason: `${wrong} of ${answers.length} practice questions were wrong${matches ? `, ${matches} with the same kind of mistake as the essay` : ""}: more learning is likely to help. ${note}` };
+  if (wrong === 0) return { ...base, status: "secure", reason: `All ${answers.length} practice questions were right. ${note}` };
+  return { ...base, status: "mixed", reason: `${right} of ${answers.length} practice questions were right. ${note}` };
+}
+
+/** The latest formative outcome for each competency. */
+export function formativeOutcomes(ectx: EssayContext, events: readonly LedgerEvent[]): Map<CapabilityId, FormativeOutcome> {
+  const hyps = new Map(gapHypotheses(ectx, events).map((h) => [h.id, h]));
+  const m = new Map<CapabilityId, FormativeOutcome>();
+  for (const s of questionSets(events)) if (s.status === "accepted") m.set(s.competency, formativeOutcome(ectx, events, s, hyps.get(s.hypothesis)?.misconceptions ?? []));
+  return m;
+}
+
+/** The next unanswered question of an open practice set, if any. */
+export function nextPracticeQuestion(ectx: EssayContext, events: readonly LedgerEvent[]): { set: QuestionSet; item: BankItem; position: number; total: number } | null {
+  for (const s of questionSets(events)) {
+    if (s.status !== "accepted") continue;
+    const o = formativeOutcome(ectx, events, s);
+    if (o.status !== "pending") continue;
+    const done = new Set(o.answers.map((a) => a.item));
+    const item = s.items.find((i) => !done.has(i.id));
+    if (item) return { set: s, item, position: done.size + 1, total: s.items.length };
+  }
+  return null;
 }

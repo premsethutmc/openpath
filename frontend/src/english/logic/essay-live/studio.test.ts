@@ -130,7 +130,8 @@ test("ESSAY-INT acceptance: essay → observations → diagnosis → profile →
   assert.equal(v.stage, "done");
 
   // 7. reload: a new learner object from the same repository gives the same studio
-  const strip = (x: unknown) => JSON.stringify(x, (k, val) => (k === "asOf" ? undefined : val));
+  // the estimate's sd widens with elapsed time (the engine's time model); everything else must be identical
+  const strip = (x: unknown) => JSON.stringify(x, (k, val) => (k === "asOf" || k === "sd" ? undefined : val));
   const reopened = await Learner.open(content, repo, STUDIO_PROFILE_ID, clock);
   studio = new EssayStudio(reopened);
   const reloaded = studio.view();
