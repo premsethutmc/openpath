@@ -230,7 +230,7 @@ test("read and answer: understanding and writing judged apart, an improved answe
   const card = page.locator(".written-answer").first();
   await card.waitFor();
   assert.equal(await card.getAttribute("data-level"), "understood", "understanding is credited despite the slips");
-  assert.match(await card.locator('[data-part="understanding"]').innerText(), /You understood it/);
+  assert.match(await card.locator('[data-part="understanding"]').innerText(), /You found the key ideas/);
   assert.ok(Number(await card.locator('[data-part="writing"]').getAttribute("data-flags")) > 0, "writing slips are reported");
   assert.match(await card.locator('[data-part="writing"]').innerText(), /becuse/);
   assert.match(await card.locator('[data-part="writing"]').innerText(), /don't change whether you understood/);

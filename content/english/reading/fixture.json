@@ -1,33 +1,253 @@
 {
   "id": "openpath-reading-fixture",
-  "note": "Deterministic development fixture for the Read and answer evaluator (rules@1). Written for OpenPath to cover the five cases the evaluator must keep apart: correct understanding with poor spelling or grammar, fluent but incorrect, off topic, partial, and ambiguous. 'level' is what the evaluator must say about understanding; 'writing' is whether it must find at least one spelling, grammar or punctuation error. These are test cases, not calibration: real children's marked answers are still needed.",
+  "note": "Deterministic development fixture for the Read and answer evaluator (rules@1). Written for OpenPath to cover the five cases the evaluator must keep apart: correct understanding with poor spelling or grammar, fluent but incorrect, off topic, partial, ambiguous, and key words without a sentence. 'level' is what the evaluator must say about understanding; 'writing' is whether it must find at least one spelling, grammar or punctuation error. These are test cases, not calibration: real children's marked answers are still needed.",
   "cases": [
-    { "id": "kite.poor_grammar", "task": "rd.kite.motive", "kind": "correct_poor_grammar", "text": "becuse meena was sad her kite was gone and arjun want to make her happy", "level": "understood", "writing": true },
-    { "id": "kite.fluent_wrong", "task": "rd.kite.motive", "kind": "fluent_incorrect", "text": "Arjun gave it away because he didn't want his kite any more.", "level": "not_yet", "writing": false },
-    { "id": "kite.off_topic", "task": "rd.kite.motive", "kind": "off_topic", "text": "My favourite football team won the match on Sunday.", "level": "off_topic", "writing": false },
-    { "id": "kite.partial", "task": "rd.kite.motive", "kind": "partial", "text": "Because Meena lost her kite.", "level": "partly", "writing": false },
-    { "id": "kite.ambiguous", "task": "rd.kite.motive", "kind": "ambiguous", "text": "Maybe to cheer her up, or maybe he didn't want it.", "level": "cant_tell", "writing": false },
-    { "id": "kite.correct", "task": "rd.kite.motive", "kind": "correct", "text": "Meena was sad because her kite flew away, so Arjun gave her his kite to cheer her up.", "level": "understood", "writing": false },
-
-    { "id": "bees.poor_grammar", "task": "rd.bees.main", "kind": "correct_poor_grammar", "text": "the scout bees they choses by doing a waggle danse", "level": "understood", "writing": true },
-    { "id": "bees.fluent_wrong", "task": "rd.bees.main", "kind": "fluent_incorrect", "text": "The queen chooses the new home because she is in charge of the hive.", "level": "not_yet", "writing": false },
-    { "id": "bees.partial", "task": "rd.bees.main", "kind": "partial", "text": "The scouts choose the new home.", "level": "partly", "writing": false },
-    { "id": "bees.ambiguous", "task": "rd.bees.main", "kind": "ambiguous", "text": "The queen decides, or the scouts do a dance.", "level": "cant_tell", "writing": false },
-    { "id": "bees.off_topic", "task": "rd.bees.main", "kind": "off_topic", "text": "I like eating pizza with my cousins at weekends.", "level": "off_topic", "writing": false },
-
-    { "id": "city.poor_grammar", "task": "rd.city.cause", "kind": "correct_poor_grammar", "text": "they was lots of dark roofs and roads that absorbs the heat", "level": "understood", "writing": true },
-    { "id": "city.fluent_wrong", "task": "rd.city.cause", "kind": "fluent_incorrect", "text": "Cities are hotter because they are closer to the sun.", "level": "not_yet", "writing": false },
-    { "id": "city.cant_tell", "task": "rd.city.cause", "kind": "ambiguous", "text": "Because it is a city and that is how it is.", "level": "cant_tell", "writing": false },
-
-    { "id": "storm.correct", "task": "rd.storm.detail", "kind": "correct", "text": "He put buckets under the leaks.", "level": "understood", "writing": false },
-    { "id": "storm.misspelt", "task": "rd.storm.detail", "kind": "correct_poor_grammar", "text": "he got two bukets and put them under the drips", "level": "understood", "writing": true },
-    { "id": "storm.fluent_wrong", "task": "rd.storm.detail", "kind": "fluent_incorrect", "text": "He hid under the table with the goat.", "level": "not_yet", "writing": false },
-    { "id": "storm.negated", "task": "rd.storm.detail", "kind": "ambiguous", "text": "He did not get a bucket.", "level": "cant_tell", "writing": false },
-
-    { "id": "plastic.partial", "task": "rd.plastic.effect", "kind": "partial", "text": "Turtles eat plastic bags because they look like jellyfish.", "level": "understood", "writing": false },
-    { "id": "plastic.too_short", "task": "rd.plastic.effect", "kind": "too_short", "text": "bad", "level": "too_short", "writing": false },
-
-    { "id": "volcano.correct", "task": "rd.volcano.feeling", "kind": "correct", "text": "She saw Dev was really sorry and nearly crying, so she stayed calm.", "level": "understood", "writing": false },
-    { "id": "volcano.partial_grammar", "task": "rd.volcano.feeling", "kind": "correct_poor_grammar", "text": "because dev was sory", "level": "understood", "writing": true }
-  ]
+    {
+      "id": "kite.poor_grammar",
+      "task": "rd.kite.motive",
+      "kind": "correct_poor_grammar",
+      "text": "becuse meena was sad her kite was gone and arjun want to make her happy",
+      "level": "understood",
+      "writing": true
+    },
+    {
+      "id": "kite.fluent_wrong",
+      "task": "rd.kite.motive",
+      "kind": "fluent_incorrect",
+      "text": "Arjun gave it away because he didn't want his kite any more.",
+      "level": "not_yet",
+      "writing": false
+    },
+    {
+      "id": "kite.off_topic",
+      "task": "rd.kite.motive",
+      "kind": "off_topic",
+      "text": "My favourite football team won the match on Sunday.",
+      "level": "off_topic",
+      "writing": false
+    },
+    {
+      "id": "kite.partial",
+      "task": "rd.kite.motive",
+      "kind": "partial",
+      "text": "Because Meena lost her kite.",
+      "level": "partly",
+      "writing": false
+    },
+    {
+      "id": "kite.ambiguous",
+      "task": "rd.kite.motive",
+      "kind": "ambiguous",
+      "text": "Maybe to cheer her up, or maybe he didn't want it.",
+      "level": "cant_tell",
+      "writing": false
+    },
+    {
+      "id": "kite.correct",
+      "task": "rd.kite.motive",
+      "kind": "correct",
+      "text": "Meena was sad because her kite flew away, so Arjun gave her his kite to cheer her up.",
+      "level": "understood",
+      "writing": false
+    },
+    {
+      "id": "bees.poor_grammar",
+      "task": "rd.bees.main",
+      "kind": "correct_poor_grammar",
+      "text": "the scout bees they choses by doing a waggle danse",
+      "level": "understood",
+      "writing": true
+    },
+    {
+      "id": "bees.fluent_wrong",
+      "task": "rd.bees.main",
+      "kind": "fluent_incorrect",
+      "text": "The queen chooses the new home because she is in charge of the hive.",
+      "level": "not_yet",
+      "writing": false
+    },
+    {
+      "id": "bees.partial",
+      "task": "rd.bees.main",
+      "kind": "partial",
+      "text": "The scouts choose the new home.",
+      "level": "partly",
+      "writing": false
+    },
+    {
+      "id": "bees.ambiguous",
+      "task": "rd.bees.main",
+      "kind": "ambiguous",
+      "text": "The queen decides, or the scouts do a dance.",
+      "level": "cant_tell",
+      "writing": false
+    },
+    {
+      "id": "bees.off_topic",
+      "task": "rd.bees.main",
+      "kind": "off_topic",
+      "text": "I like eating pizza with my cousins at weekends.",
+      "level": "off_topic",
+      "writing": false
+    },
+    {
+      "id": "city.poor_grammar",
+      "task": "rd.city.cause",
+      "kind": "correct_poor_grammar",
+      "text": "they was lots of dark roofs and roads that absorbs the heat",
+      "level": "understood",
+      "writing": true
+    },
+    {
+      "id": "city.fluent_wrong",
+      "task": "rd.city.cause",
+      "kind": "fluent_incorrect",
+      "text": "Cities are hotter because they are closer to the sun.",
+      "level": "not_yet",
+      "writing": false
+    },
+    {
+      "id": "city.cant_tell",
+      "task": "rd.city.cause",
+      "kind": "ambiguous",
+      "text": "Because it is a city and that is how it is.",
+      "level": "cant_tell",
+      "writing": false
+    },
+    {
+      "id": "storm.correct",
+      "task": "rd.storm.detail",
+      "kind": "correct",
+      "text": "He put buckets under the leaks.",
+      "level": "understood",
+      "writing": false
+    },
+    {
+      "id": "storm.misspelt",
+      "task": "rd.storm.detail",
+      "kind": "correct_poor_grammar",
+      "text": "he got two bukets and put them under the drips",
+      "level": "understood",
+      "writing": true
+    },
+    {
+      "id": "storm.fluent_wrong",
+      "task": "rd.storm.detail",
+      "kind": "fluent_incorrect",
+      "text": "He hid under the table with the goat.",
+      "level": "not_yet",
+      "writing": false
+    },
+    {
+      "id": "storm.negated",
+      "task": "rd.storm.detail",
+      "kind": "ambiguous",
+      "text": "He did not get a bucket.",
+      "level": "cant_tell",
+      "writing": false
+    },
+    {
+      "id": "plastic.partial",
+      "task": "rd.plastic.effect",
+      "kind": "partial",
+      "text": "Turtles eat plastic bags because they look like jellyfish.",
+      "level": "understood",
+      "writing": false
+    },
+    {
+      "id": "plastic.too_short",
+      "task": "rd.plastic.effect",
+      "kind": "too_short",
+      "text": "bad",
+      "level": "too_short",
+      "writing": false
+    },
+    {
+      "id": "volcano.correct",
+      "task": "rd.volcano.feeling",
+      "kind": "correct",
+      "text": "She saw Dev was really sorry and nearly crying, so she stayed calm.",
+      "level": "understood",
+      "writing": false
+    },
+    {
+      "id": "volcano.partial_grammar",
+      "task": "rd.volcano.feeling",
+      "kind": "correct_poor_grammar",
+      "text": "because dev was sory",
+      "level": "understood",
+      "writing": true
+    },
+    {
+      "id": "kite.keywords_only",
+      "task": "rd.kite.motive",
+      "kind": "keywords_only",
+      "text": "sad cheer kite",
+      "level": "cant_tell",
+      "writing": true
+    },
+    {
+      "id": "bees.keywords_only",
+      "task": "rd.bees.main",
+      "kind": "keywords_only",
+      "text": "scouts dance",
+      "level": "cant_tell",
+      "writing": true
+    },
+    {
+      "id": "bees.negated_mechanism",
+      "task": "rd.bees.main",
+      "kind": "ambiguous",
+      "text": "The scouts fight each other and the strongest one chooses, there is no dancing.",
+      "level": "cant_tell",
+      "writing": false
+    }
+  ],
+  "known_limits": {
+    "note": "Answers the rules still credit although they are wrong: keyword matching cannot read who did what, or whether a claim is inverted. These are pinned so that the label stays 'keyword match, not verified understanding' and any change in behaviour is deliberate. They are why a match must never be presented as verified understanding, and why a meaning-aware reviewer (a teacher, or a qualified evaluator under the existing E3 checks) is needed before any comprehension claim.",
+    "cases": [
+      {
+        "id": "kite.role_reversal",
+        "task": "rd.kite.motive",
+        "text": "Arjun was sad so Meena gave him her kite to cheer him up.",
+        "current_level": "understood",
+        "truth": "not_yet"
+      },
+      {
+        "id": "kite.wrong_person",
+        "task": "rd.kite.motive",
+        "text": "Because Arjun lost his kite and wanted to be happy.",
+        "current_level": "understood",
+        "truth": "not_yet"
+      },
+      {
+        "id": "city.inverted_cause",
+        "task": "rd.city.cause",
+        "text": "Cities are hotter so people plant more trees there.",
+        "current_level": "understood",
+        "truth": "not_yet"
+      },
+      {
+        "id": "city.nonsense_keyword",
+        "task": "rd.city.cause",
+        "text": "Roads like to eat ice cream.",
+        "current_level": "understood",
+        "truth": "off_topic"
+      },
+      {
+        "id": "storm.wrong_action",
+        "task": "rd.storm.detail",
+        "text": "He kicked the bucket out of the window.",
+        "current_level": "understood",
+        "truth": "not_yet"
+      },
+      {
+        "id": "plastic.inverted_effect",
+        "task": "rd.plastic.effect",
+        "text": "Sea animals eat plastic and it makes them strong and healthy.",
+        "current_level": "understood",
+        "truth": "not_yet"
+      }
+    ]
+  }
 }

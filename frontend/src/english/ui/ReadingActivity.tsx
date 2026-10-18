@@ -13,7 +13,7 @@ interface Props {
 }
 
 const HEADLINE: Record<ComprehensionLevel, string> = {
-  understood: "You understood it",
+  understood: "You found the key ideas",
   partly: "Nearly there",
   not_yet: "Not yet",
   off_topic: "Is that about the question?",

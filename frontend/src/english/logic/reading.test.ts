@@ -13,7 +13,10 @@ import { READING_EVALUATORS, READING_TASKS, editDistance, rulesEvaluator } from 
 import { eventProblem } from "./events.ts";
 
 const content = loadContent();
-const fixture = JSON.parse(readFileSync(new URL("../../../../content/english/reading/fixture.json", import.meta.url), "utf8")) as { cases: { id: string; task: string; kind: string; text: string; level: string; writing: boolean }[] };
+const fixture = JSON.parse(readFileSync(new URL("../../../../content/english/reading/fixture.json", import.meta.url), "utf8")) as {
+  cases: { id: string; task: string; kind: string; text: string; level: string; writing: boolean }[];
+  known_limits: { cases: { id: string; task: string; text: string; current_level: string; truth: string }[] };
+};
 const evaluate = (taskId: string, text: string) => {
   const t = READING_TASKS.find((x) => x.id === taskId)!;
   return rulesEvaluator.evaluate(t, content.ctx.content.passages.get(t.passage)!, text);
@@ -38,6 +41,26 @@ test("the fixture: correct with poor grammar, fluent but wrong, off topic, parti
     assert.equal(e.comprehension.level, c.level, `${c.id}: "${c.text}"`);
     const flags = e.mechanics.spelling.length + e.mechanics.grammar.length + e.mechanics.punctuation.length;
     assert.equal(flags > 0, c.writing, `${c.id}: writing flags ${JSON.stringify(e.mechanics)}`);
+  }
+});
+
+test("key words without a sentence, and negations anywhere, make it abstain instead of crediting understanding", () => {
+  for (const [task, text] of [["rd.kite.motive", "sad cheer kite"], ["rd.bees.main", "scouts dance"], ["rd.bees.main", "The scouts never dance and nobody agrees."], ["rd.bees.main", "The scouts fight, there is no dancing."]]) {
+    const e = evaluate(task, text);
+    assert.equal(e.comprehension.level, "cant_tell", text);
+    assert.ok(e.comprehension.abstained && e.comprehension.why, text);
+  }
+});
+
+test("known limits: wrong answers that still match key words are labelled as a keyword match, never as verified understanding", () => {
+  assert.ok(fixture.known_limits.cases.length >= 5);
+  for (const k of fixture.known_limits.cases) {
+    const e = evaluate(k.task, k.text);
+    assert.equal(e.comprehension.level, k.current_level, `${k.id}: behaviour changed; update the fixture deliberately`);
+    assert.equal(e.comprehension.basis, "keyword_match");
+    const obs = e.evidence.find((x) => x.capability === READING_TASKS.find((t) => t.id === k.task)!.capability)!.observation;
+    assert.match(obs, /keyword match, not verified understanding/, k.id);
+    assert.doesNotMatch(e.feedback.understanding, /understood/i, `${k.id}: the child is not told they understood`);
   }
 });
 

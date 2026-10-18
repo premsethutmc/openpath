@@ -49,7 +49,11 @@ export interface MechanicsFlag {
 
 export interface ReadingEvaluation {
   evaluator: string;
-  comprehension: { level: ComprehensionLevel; matched: string[]; missing: string[]; contradicted: string[]; relevance: number; abstained: boolean };
+  /**
+   * level "understood" means every required key point was found in a sentence-like answer with no negation: a keyword
+   * match (basis), never verified understanding. why: the reason for abstaining, when it abstained.
+   */
+  comprehension: { level: ComprehensionLevel; basis: "keyword_match"; matched: string[]; missing: string[]; contradicted: string[]; relevance: number; abstained: boolean; why: string | null };
   mechanics: { spelling: MechanicsFlag[]; grammar: MechanicsFlag[]; punctuation: MechanicsFlag[] };
   coherence: "sentence" | "fragment";
   feedback: { understanding: string; writing: string[] };
@@ -236,25 +240,37 @@ export const rulesEvaluator: ReadingEvaluator = {
     const unsure = new Map(sp.map((f) => [f.quote.toLowerCase(), f.suggestion]));
     const judged = content.filter((t) => !unsure.has(t.w) || (unsure.get(t.w) && topical(unsure.get(t.w)!)));
     const relevance = judged.length ? judged.filter((t) => topical(t.w) || (unsure.get(t.w) && topical(unsure.get(t.w)!))).length / judged.length : content.length ? 0 : 0;
+    // Matching words is not reading meaning. The rules credit key points only in an answer written as a sentence
+    // (four or more words, with ordinary small words such as "was", "the", "to"), and never when a negation anywhere
+    // could reverse it ("there is no dancing"); otherwise they say they cannot tell. Even then a match is reported as
+    // "key points present", not as verified understanding: word order and who-did-what are not checked.
+    const sentence = toks.length >= 4 && toks.some((t) => STOP.has(t.w));
+    const negatedAnywhere = toks.some((t) => NEGATION.has(t.w)) && !contra.length;
     let level: ComprehensionLevel;
+    let why: string | null = null;
     if (toks.length < 2) level = "too_short";
-    else if (contra.length && matched.length) level = "cant_tell"; // both a key point and a misreading: unclear which is meant
+    else if (contra.length && matched.length) (level = "cant_tell"), (why = "both a key point and a known misreading");
     else if (contra.length) level = "not_yet";
-    else if (required.every((r) => matched.includes(r)) && matched.length) level = negated ? "cant_tell" : "understood";
+    else if (matched.length && !sentence) (level = "cant_tell"), (why = "key words without a sentence");
+    else if (matched.length && (negated || negatedAnywhere)) (level = "cant_tell"), (why = "a negation could reverse the meaning");
+    else if (required.every((r) => matched.includes(r)) && matched.length) level = "understood";
     else if (matched.length) level = "partly";
-    else if (negated) level = "cant_tell";
+    else if (negated) (level = "cant_tell"), (why = "a negation could reverse the meaning");
     else if (judged.length >= 3 && relevance < 0.25) level = "off_topic";
-    else level = "cant_tell";
+    else (level = "cant_tell"), (why = "no key point or known misreading found");
     const missing = task.key_points.filter((k) => !matched.includes(k));
     const missingRequired = missing.filter((k) => k.required);
 
     const hint = (missingRequired[0] ?? missing[0] ?? task.key_points[0]).text.toLowerCase();
     const understanding: Record<ComprehensionLevel, () => string> = {
-      understood: () => missing.length ? `You've got it. You could also add: ${missing[0].text.toLowerCase()}.` : "You've got it: your answer shows you understood the passage.",
+      understood: () => (missing.length ? `Your answer has the key ideas. You could also add: ${missing[0].text.toLowerCase()}.` : "Your answer has the key ideas from the passage."),
       partly: () => `Good start. To make it complete, add: ${hint}.`,
       not_yet: () => `Have another look at the passage: it says something different. Think about: ${hint}.`,
       off_topic: () => `Your answer doesn't seem to be about the question yet. Read the question again: "${task.question}"`,
-      cant_tell: () => "I couldn't tell from your answer whether you found it. Try saying it another way, using words from the passage.",
+      cant_tell: () =>
+        why === "key words without a sentence"
+          ? "Write it as a full sentence, so I can tell what you mean."
+          : "I couldn't tell from your answer whether you found it. Try saying it another way, using words from the passage.",
       too_short: () => "Write a little more: one sentence is enough.",
     };
 
@@ -268,7 +284,19 @@ export const rulesEvaluator: ReadingEvaluator = {
 
     const abstained = level === "cant_tell" || level === "too_short";
     const evidence: ReadingEvaluation["evidence"] = [
-      { capability: task.capability, observation: abstained ? "not judged (abstained)" : level, provisional: true },
+      {
+        capability: task.capability,
+        observation: abstained
+          ? `not judged (abstained: ${why ?? "too short"})`
+          : level === "understood"
+            ? "all key points present (keyword match, not verified understanding)"
+            : level === "partly"
+              ? "some key points present (keyword match, not verified understanding)"
+              : level === "not_yet"
+                ? "a known misreading (keyword match)"
+                : "off topic (word overlap)",
+        provisional: true,
+      },
       { capability: "EN.WRT.TSK.task_response", observation: level === "off_topic" ? "off topic" : abstained ? "not judged (abstained)" : "on topic", provisional: true },
       { capability: "EN.WRT.ACC.spelling", observation: `${sp.length} possible spelling mistake(s) in ${toks.length} word(s)`, provisional: true },
       { capability: "EN.WRT.ACC.grammar", observation: `${grammar.length} grammar error(s) found by rule`, provisional: true },
@@ -276,7 +304,7 @@ export const rulesEvaluator: ReadingEvaluator = {
     ];
     return {
       evaluator: "rules@1",
-      comprehension: { level, matched: matched.map((k) => k.id), missing: missing.map((k) => k.id), contradicted: contra.map((c) => c.id), relevance: Math.round(relevance * 100) / 100, abstained },
+      comprehension: { level, basis: "keyword_match", why, matched: matched.map((k) => k.id), missing: missing.map((k) => k.id), contradicted: contra.map((c) => c.id), relevance: Math.round(relevance * 100) / 100, abstained },
       mechanics: { spelling: sp, grammar, punctuation },
       coherence,
       feedback: { understanding: capFirst(understanding[level]()), writing },

@@ -75,17 +75,86 @@ Tamil is not on `main` (it is on `feat/tamil-foundation`), so this branch has no
 | ![A week later](learning-journey/07-week-later-check.png) | ![Reading question](learning-journey/08-reading-question.png) |
 | ![Two-part feedback](learning-journey/09-reading-feedback.png) | ![Improved answer kept beside the original](learning-journey/10-reading-revised.png) |
 
+## Review findings (draft PR #41, 18 October 2026)
+
+**1. Why journey answers do not move the ability estimate.** Every journey check word is `evidence_status:
+"provisional"`. The core updater's content-validation gate (`packages/english-core/src/updater.ts`) holds provisional
+answers, and also unchecked generated items such as the practice words: they are recorded, and they count at rule level
+as demonstrations, but composite@1 is never changed. That is intended until content is reviewed.
+
+The existing safe route is educator validation through the review process. Approved words would get
+`evidence_status: "validated"`, or `generated.checked` for practice items. This must be done as a **new item version**,
+with the provisional version 1 moved to the retired versions. The record is rebuilt from current content, so changing
+version 1 in place would retroactively turn earlier provisional answers into estimate updates.
+
+Two caveats once validated:
+- Difficulty is still a feature estimate.
+- The rule-level claim guard (`countsAsVerified`) would then allow "verified" after a passed delayed check.
+
+No v0.5 component is needed or used.
+
+**2. Does the reading evaluator abstain?** The first version did not reliably abstain: 9 of 14 adversarial answers were
+labelled "understood", including the bare keyword list "scouts dance". This is fixed on this branch:
+- Key words without a sentence, and a negation anywhere in the answer, now give "can't tell".
+- A match is shown to the child as "You found the key ideas", never "You understood it".
+- A match is recorded as "key points present (keyword match, not verified understanding)".
+
+Six wrong answers are still credited. Word matching cannot read who did what, or whether a claim is inverted. For
+example, "Roads like to eat ice cream" counts as naming a reason. These six are pinned in
+`content/english/reading/fixture.json` (`known_limits`) by a test. **Comprehension claims need a meaning-aware
+reviewer** (a teacher, or an evaluator qualified under the existing E3 checks) before they count for anything.
+
+**3. Spelling competencies that cannot satisfy the existing evidence requirements.** The worst case for one learner on
+one rule, from `PLANNER_POLICY_DRAFT` and `RULE_EVIDENCE_POLICY_DRAFT`:
+- check words: a diagnostic, plus a check after each teaching approach, plus four new words to be "shown"
+  (13–15 words);
+- contrast words: 3–4;
+- delayed-check words: 2 per check.
+
+| Rule | Check words (have / need) | Contrast words | Delayed-check words (have / 3 checks) |
+|---|---|---|---|
+| plain | 245 / 13 | **none: can never be "shown"** | 91 / 6 |
+| es_plural | 57 / 13 | 250 / 3 | 15 / 6 |
+| double_short | 206 / 15 | 250 / 4 | 76 / 6 |
+| drop_e | 242 / 13 | 18 / 3 | 107 / 6 |
+| y_to_i | 239 / 13 | 159 / 3 | 98 / 6 |
+| stress_doubling | 24 / 13 (thin) | 250 / 3 | 7 / 6 (thin) |
+| no_double_unstressed | 207 / 13 | 48 / 3 | 89 / 6 |
+| exceptions | **8 / 13 short** | **none: can never be "shown"** | **3 / 6 short** |
+
+Across all three spelling competencies (inflections, morphological, homophones) there are **0 validated items**, so
+no spelling rule can reach "verified" for any learner. Morphological and homophone spelling have no rule definitions
+in the engine, and only 54 and 18 candidate hand-written items.
+
+**4. Privacy documentation against actual storage. This is a mismatch, and a blocker.**
+- What the documents say:
+  - `pilot/PARENT_INFORMATION_SHEET.md` lists "Anything your child writes in their own words" under *Not recorded*.
+  - `pilot/PILOT_LEAD_AND_DATA.md` lists "free text written by children" under *Never collected*.
+  - The account consent says only "learning records" and "answers".
+- What the code does:
+  - `written_answer` events keep the child's text exactly as written, in the browser, and are included in every export.
+  - In account mode they sync to the server.
+  - Before this review they were shown unredacted to a developer when a parent turned on diagnostics sharing.
+- What is fixed on this branch: developer diagnostics now blank the text and every quote taken from it, and keep
+  only the judgement's shape. A backend test covers this.
+- What still holds the feature back:
+  - Pilot builds refuse the activity, so the pilot documents stay true for pilot builds. They are not true for this
+    feature anywhere else.
+  - Before Read and answer is enabled for children, the documents and the consent need to describe free-text storage,
+    sync, export and retention, and a data-protection reviewer must approve them.
+
 ## Blockers for a real-child pilot
 
 1. **Educator review.** None of the content has been reviewed by an educator yet: the journey's lessons, hints and
    mistake explanations, the reading tasks, their key points, and a sample of the generated words. All of it is
    labelled provisional. The pilot gate keeps it out of pilot builds.
-2. **Calibration.** Word difficulty is a feature estimate. The reading evaluator's rules have only been checked against
-   a 22-case fixture written for OpenPath, not against children's answers marked by teachers. Session lengths and
+2. **Calibration and meaning (see finding 2).** Word difficulty is a feature estimate. The reading evaluator matches
+   key words and still credits six known wrong answers. Its judgements must not count for anything until checked
+   against children's answers marked by teachers, or until a meaning-aware evaluator is qualified. Session lengths and
    screening sizes are draft values.
-3. **Privacy and consent for free text.** Written answers store the child's own words, and in account mode they sync to
-   the server. The pilot information sheet currently says no free text is recorded, so it needs updating, along with a
-   scrub and retention rule for `written_answer`.
+3. **Privacy and consent for free text (blocker; see finding 4).** The documents say children's own words are never
+   recorded. Read and answer stores them, exports them and, in account mode, syncs them. Wording, retention and a
+   deletion rule need approval from a data-protection reviewer before children use it.
 4. **Thin rules.** The exceptions rule has 8 check words and stress doubling has 24. Plain endings and exceptions have
    no contrast words, so under the evidence rules they can never be "shown". They are screened only.
 5. **Speech.** Spoken prompts need a local device voice. "Hear it again" shows even when no voice is available.
