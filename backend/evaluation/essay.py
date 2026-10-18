@@ -128,6 +128,7 @@ def _config() -> llm.LLMConfig:
         api_key=settings.OPENPATH_LLM_API_KEY,
         max_output_tokens=settings.OPENPATH_LLM_MAX_OUTPUT_TOKENS,
         timeout_s=settings.OPENPATH_LLM_TIMEOUT_S,
+        retries=getattr(settings, "OPENPATH_LLM_RETRIES", 1),
     )
 
 

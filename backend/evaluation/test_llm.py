@@ -36,7 +36,12 @@ class LLMClientTests(unittest.TestCase):
         self.assertIn("anthropic-version", headers)
         self.assertEqual(body["system"], "SYSTEM")
         self.assertEqual(body["messages"], [{"role": "user", "content": "USER"}])
-        self.assertEqual((body["max_tokens"], body["temperature"], timeout), (900, 0.0, 20))
+        self.assertEqual((body["max_tokens"], timeout), (900, 20))
+        # current models reject a non-default temperature: it is not sent unless configured
+        self.assertNotIn("temperature", body)
+        t2 = Recorder(body={"content": [{"type": "text", "text": "{}"}], "usage": {}, "stop_reason": "end_turn"})
+        complete(cfg(temperature=0.0), "S", "U", transport=t2)
+        self.assertEqual(t2.calls[0][2]["temperature"], 0.0)
 
     def test_openai_compatible_wire_format(self):
         t = Recorder(body={"choices": [{"message": {"content": "{}"}, "finish_reason": "stop"}], "usage": {"prompt_tokens": 3, "completion_tokens": 2}})
@@ -56,7 +61,7 @@ class LLMClientTests(unittest.TestCase):
         ]
         for t in cases:
             with self.assertRaises(LLMError) as e:
-                complete(cfg(), "S", "an essay about my school", transport=t)
+                complete(cfg(), "S", "an essay about my school", transport=t, sleep=lambda s: None)
             self.assertNotIn(KEY, str(e.exception))
             self.assertNotIn("essay about my school", str(e.exception))
 
@@ -64,10 +69,43 @@ class LLMClientTests(unittest.TestCase):
             raise LLMError("the model provider could not be reached (TimeoutError)")
 
         with self.assertRaises(LLMError):
-            complete(cfg(), "S", "U", transport=broken)
+            complete(cfg(), "S", "U", transport=broken, sleep=lambda s: None)
+
+    def test_stop_reasons_errors_and_retries(self):
+        for stop, words in [("refusal", "declined"), ("model_context_window_exceeded", "context window")]:
+            with self.assertRaises(LLMError) as e:
+                complete(cfg(), "S", "U", transport=Recorder(body={"content": [], "stop_reason": stop}))
+            self.assertIn(words, str(e.exception))
+        # the provider's error type is reported, never its message (which could echo input)
+        err = {"type": "error", "error": {"type": "invalid_request_error", "message": "an essay about my school"}}
+        with self.assertRaises(LLMError) as e:
+            complete(cfg(), "S", "U", transport=Recorder(status=400, body=err))
+        self.assertIn("invalid_request_error", str(e.exception))
+        self.assertNotIn("essay about my school", str(e.exception))
+        # a transient failure is retried once (bounded), then succeeds; a 400 is not retried
+        calls = []
+
+        def flaky(url, headers, body, timeout):
+            calls.append(1)
+            if len(calls) == 1:
+                return 529, json.dumps({"type": "error", "error": {"type": "overloaded_error", "message": "x"}}).encode()
+            return 200, json.dumps({"content": [{"type": "text", "text": "{}"}], "usage": {"input_tokens": 1, "output_tokens": 1}, "stop_reason": "end_turn"}).encode()
+
+        slept = []
+        self.assertEqual(complete(cfg(), "S", "U", transport=flaky, sleep=slept.append).text, "{}")
+        self.assertEqual((len(calls), slept), (2, [2.0]))
+        bad = Recorder(status=400, body=err)
+        with self.assertRaises(LLMError):
+            complete(cfg(retries=3), "S", "U", transport=bad, sleep=lambda s: None)
+        self.assertEqual(len(bad.calls), 1)
+        always = Recorder(status=429, body={"type": "error", "error": {"type": "rate_limit_error", "message": "x"}})
+        with self.assertRaises(LLMError) as e:
+            complete(cfg(retries=2), "S", "U", transport=always, sleep=lambda s: None)
+        self.assertEqual(len(always.calls), 3)
+        self.assertIn("rate_limit_error", str(e.exception))
 
     def test_configuration_and_limits(self):
-        for bad in [cfg(provider="other"), cfg(model=""), cfg(base_url="http://insecure.test"), cfg(api_key=""), cfg(max_output_tokens=0), cfg(timeout_s=0)]:
+        for bad in [cfg(provider="other"), cfg(model=""), cfg(base_url="http://insecure.test"), cfg(api_key=""), cfg(max_output_tokens=0), cfg(timeout_s=0), cfg(retries=9)]:
             with self.assertRaises(LLMError):
                 complete(bad, "S", "U", transport=Recorder(body={}))
         with self.assertRaises(LLMError):
