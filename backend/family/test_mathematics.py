@@ -62,7 +62,7 @@ class MathematicsAccountTests(FamilyTestCase):
         self.assertEqual(PupilEvent.objects.filter(subject='mathematics').count(), 1)
 
     def test_undefined_or_unsupported_answers_rejected(self):
-        for response in ['1/0', 'x', '1e5', '', 'NaN']:
+        for response in ['1/0', 'x', '1e5', '', 'NaN', '௨', '٢']:
             self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response=response)).status_code, 400)
         self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response='2.0')).status_code, 201)
 

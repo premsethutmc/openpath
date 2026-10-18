@@ -34,7 +34,7 @@ def checked_activity(event, pupil):
     if event['action'] in {'answer', 'draft'} and (not isinstance(event.get('response'), str) or len(event['response']) > 80):
         raise ValidationError({'event': 'Use an answer of at most 80 characters.'})
     if event['action'] == 'answer':
-        if not re.fullmatch('[+-]?\\d+(?:\\.\\d+)?(?:/[+-]?\\d+)?', event['response'].strip().replace('−', '-')):
+        if not re.fullmatch('[+-]?\\d+(?:\\.\\d+)?(?:/[+-]?\\d+)?', event['response'].strip().replace('−', '-'), flags=re.ASCII):
             raise ValidationError({'event': 'Use a number, decimal or fraction.'})
         try:
             parts = event['response'].strip().replace('−', '-').split('/')
