@@ -1,6 +1,6 @@
 {
   "id": "jee-quadratics",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Quadratic Equations",
   "track": "jee-main",
   "competencyId": "MATH.algebra.quadratics",
@@ -12,23 +12,429 @@
     "marking": "NTA, Information Bulletin JEE (Main) 2026: Section A multiple choice and Section B numerical value, +4 correct, -1 incorrect, 0 unanswered; numerical answers are integers.",
     "markingUrl": "https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2025/11/202511021649722475.pdf"
   },
-  "marking": { "correct": 4, "incorrect": -1, "unanswered": 0 },
+  "marking": {
+    "correct": 4,
+    "incorrect": -1,
+    "unanswered": 0
+  },
   "retentionAfter": "timed",
   "retentionDelayDays": 7,
   "stages": [
     {
-      "id": "recap",
-      "title": "Quick recap",
-      "kind": "cards",
-      "cards": [
-        { "title": "The standard form", "text": "A quadratic equation is ax² + bx + c = 0 with a ≠ 0. It always has two roots, α and β, in the complex numbers (they may be equal)." },
-        { "title": "The formula", "text": "α, β = (−b ± √D) / 2a, where D = b² − 4ac is the discriminant." },
-        { "title": "Nature of roots", "text": "D > 0: two different real roots. D = 0: two equal real roots. D < 0: two non-real roots, complex conjugates p ± qi (for real a, b, c)." },
-        { "title": "Sum and product", "text": "α + β = −b/a and αβ = c/a. You can often answer without finding α and β at all." },
-        { "title": "Useful identities", "text": "α² + β² = (α + β)² − 2αβ.   α³ + β³ = (α + β)³ − 3αβ(α + β).   (α − β)² = (α + β)² − 4αβ." },
-        { "title": "Building an equation", "text": "With roots α and β: x² − (α + β)x + αβ = 0. Multiply through to clear fractions." }
+      "id": "class",
+      "title": "Class: learn the chapter",
+      "kind": "lessons",
+      "lessons": [
+        {
+          "id": "L1",
+          "title": "What is a quadratic equation?",
+          "check": "k1",
+          "screens": [
+            {
+              "title": "The standard form",
+              "text": [
+                "A quadratic equation is an equation that can be written as",
+                "with a, b, c real numbers and a ≠ 0. The highest power of x is 2: that is what “quadratic” means."
+              ],
+              "math": [
+                "ax² + bx + c = 0"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Examples",
+              "text": [
+                "x² − 5x + 6 = 0 (a = 1, b = −5, c = 6)",
+                "3x² − 12 = 0 (b = 0 is allowed)",
+                "x(x − 3) = 4 is quadratic too: expand it to x² − 3x − 4 = 0."
+              ],
+              "tip": "Always rewrite in standard form first. Then read off a, b and c, signs included."
+            },
+            {
+              "title": "What a root is",
+              "text": [
+                "A root is a value of x that makes the equation true.",
+                "Try x = 2 in x² − 5x + 6:",
+                "So 2 is a root. Check for yourself that 3 is the other root."
+              ],
+              "math": [
+                "2² − 5(2) + 6 = 4 − 10 + 6 = 0 ✓"
+              ],
+              "mathAt": 2
+            },
+            {
+              "title": "The picture: a parabola",
+              "text": [
+                "The graph of y = ax² + bx + c is a U-shaped curve called a parabola (upside down when a < 0).",
+                "The roots are exactly where the curve meets the x-axis (where y = 0). Here: at x = 2 and x = 3."
+              ],
+              "graph": {
+                "a": 1,
+                "b": -5,
+                "c": 6,
+                "yMax": 3
+              }
+            },
+            {
+              "title": "Key fact",
+              "text": [
+                "A quadratic equation has exactly two roots (counting complex numbers, and counting a repeated root twice). It can never have three.",
+                "So if a question gives you three different numbers that all satisfy ax² + bx + c = 0, then a = b = c = 0: it was never a quadratic."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "L2",
+          "title": "Solving by factorisation",
+          "check": "k2",
+          "screens": [
+            {
+              "title": "The zero-product rule",
+              "text": [
+                "If two numbers multiply to give 0, at least one of them is 0.",
+                "So once you write the quadratic as a product of two brackets, each bracket gives a root."
+              ],
+              "math": [
+                "(x − 2)(x − 3) = 0  ⇒  x = 2 or x = 3"
+              ]
+            },
+            {
+              "title": "Splitting the middle term (a = 1)",
+              "text": [
+                "For x² − 5x + 6 = 0, find two numbers whose product is c = 6 and whose sum is b = −5.",
+                "They are −2 and −3."
+              ],
+              "math": [
+                "x² − 2x − 3x + 6 = 0",
+                "x(x − 2) − 3(x − 2) = 0",
+                "(x − 2)(x − 3) = 0"
+              ]
+            },
+            {
+              "title": "When a ≠ 1",
+              "text": [
+                "Solve 2x² + 5x − 3 = 0. Now look for two numbers with product a × c = −6 and sum b = 5: they are 6 and −1."
+              ],
+              "math": [
+                "2x² + 6x − x − 3 = 0",
+                "2x(x + 3) − 1(x + 3) = 0",
+                "(2x − 1)(x + 3) = 0  ⇒  x = ½ or x = −3"
+              ]
+            },
+            {
+              "title": "A classic mistake",
+              "text": [
+                "Solve x² = 3x. Dividing both sides by x gives x = 3 and loses a root.",
+                "Instead bring everything to one side: x² − 3x = 0, so x(x − 3) = 0, and x = 0 or x = 3."
+              ],
+              "tip": "Never divide by an expression that could be zero. Factor it out instead."
+            }
+          ]
+        },
+        {
+          "id": "L3",
+          "title": "Completing the square and the formula",
+          "check": "k3",
+          "screens": [
+            {
+              "title": "Completing the square",
+              "text": [
+                "Not every quadratic factorises nicely. Completing the square always works.",
+                "Solve x² + 6x + 5 = 0. Half of 6 is 3, and (x + 3)² = x² + 6x + 9."
+              ],
+              "math": [
+                "x² + 6x + 9 = 4",
+                "(x + 3)² = 4",
+                "x + 3 = ±2  ⇒  x = −1 or x = −5"
+              ]
+            },
+            {
+              "title": "Doing it in general",
+              "text": [
+                "Do the same steps to ax² + bx + c = 0: divide by a, move c/a across, and add (b/2a)² to both sides."
+              ],
+              "math": [
+                "x² + (b/a)x = −c/a",
+                "(x + b/2a)² = (b² − 4ac) / 4a²",
+                "x + b/2a = ±√(b² − 4ac) / 2a"
+              ]
+            },
+            {
+              "title": "The quadratic formula",
+              "text": [
+                "This gives both roots of every quadratic equation:",
+                "The expression under the root, b² − 4ac, is called the discriminant, D. The next lesson is all about it."
+              ],
+              "math": [
+                "x = (−b ± √(b² − 4ac)) / 2a"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Using it",
+              "text": [
+                "Solve x² − 4x + 1 = 0. Here a = 1, b = −4, c = 1, so D = 16 − 4 = 12 and √12 = 2√3."
+              ],
+              "math": [
+                "x = (4 ± 2√3) / 2 = 2 ± √3"
+              ],
+              "tip": "Simplify the surd and cancel the common factor. JEE options are usually written in the simplest form."
+            }
+          ]
+        },
+        {
+          "id": "L4",
+          "title": "The discriminant and the nature of roots",
+          "check": "k4",
+          "screens": [
+            {
+              "title": "D tells you the type of roots",
+              "text": [
+                "Before solving, D = b² − 4ac tells you what kind of roots to expect:",
+                "D > 0: two different real roots.",
+                "D = 0: two equal real roots, both x = −b/2a.",
+                "D < 0: no real roots; the roots are two complex conjugates (lesson 7)."
+              ]
+            },
+            {
+              "title": "See it on the graph",
+              "text": [
+                "Move the sliders. Watch where the parabola meets the x-axis and how the sign of D changes: two crossings, one touch, or no meeting point."
+              ],
+              "graph": {
+                "a": 1,
+                "b": -2,
+                "c": -3,
+                "interactive": true
+              }
+            },
+            {
+              "title": "Rational or irrational?",
+              "text": [
+                "If a, b and c are rational (for example integers) and D is a perfect square, the roots are rational.",
+                "If D > 0 is not a perfect square, the roots are irrational and come as a pair p ± √q."
+              ],
+              "math": [
+                "x² − 5x + 6: D = 1 → roots 2, 3",
+                "x² − 4x + 1: D = 12 → roots 2 ± √3"
+              ]
+            },
+            {
+              "title": "A JEE favourite: equal roots",
+              "text": [
+                "For what values of k does x² + kx + 9 = 0 have equal roots?",
+                "Equal roots means D = 0."
+              ],
+              "math": [
+                "k² − 4 × 1 × 9 = 0",
+                "k² = 36  ⇒  k = 6 or k = −6"
+              ],
+              "tip": "“Equal roots” → D = 0. “Real roots” → D ≥ 0. “Real and distinct” → D > 0. “No real roots” → D < 0."
+            }
+          ]
+        },
+        {
+          "id": "L5",
+          "title": "Sum and product of roots",
+          "check": "k5",
+          "screens": [
+            {
+              "title": "Read them off the coefficients",
+              "text": [
+                "If α and β are the roots of ax² + bx + c = 0, then:",
+                "Add the two values from the quadratic formula: the ±√D parts cancel and leave −2b/2a. Multiplying them gives (b² − D)/4a² = c/a."
+              ],
+              "math": [
+                "α + β = −b/a",
+                "αβ = c/a"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Example",
+              "text": [
+                "For 2x² − 3x − 5 = 0:"
+              ],
+              "math": [
+                "α + β = −(−3)/2 = 3/2",
+                "αβ = −5/2"
+              ],
+              "tip": "Watch the minus sign in −b/a. Getting it wrong is the most common slip."
+            },
+            {
+              "title": "Symmetric expressions",
+              "text": [
+                "Many JEE questions ask for an expression in α and β without finding α and β. Rewrite it using only α + β and αβ:"
+              ],
+              "math": [
+                "α² + β² = (α + β)² − 2αβ",
+                "(α − β)² = (α + β)² − 4αβ",
+                "1/α + 1/β = (α + β) / αβ",
+                "α³ + β³ = (α + β)³ − 3αβ(α + β)"
+              ]
+            },
+            {
+              "title": "Try the method",
+              "text": [
+                "α, β are the roots of x² − 3x + 1 = 0. Then α + β = 3 and αβ = 1, so"
+              ],
+              "math": [
+                "α² + β² = 3² − 2 × 1 = 7"
+              ],
+              "tip": "Notice that we never found α or β (they are (3 ± √5)/2). That is the point: it is faster and avoids messy surds."
+            }
+          ]
+        },
+        {
+          "id": "L6",
+          "title": "Forming an equation from its roots",
+          "check": "k6",
+          "screens": [
+            {
+              "title": "The rule",
+              "text": [
+                "A quadratic with roots α and β is",
+                "Read it as: x² − (sum of roots)x + (product of roots) = 0."
+              ],
+              "math": [
+                "x² − (α + β)x + αβ = 0"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Examples",
+              "text": [
+                "Roots 3 and −5: sum −2, product −15.",
+                "Roots 1 + √2 and 1 − √2: sum 2, product 1 − 2 = −1."
+              ],
+              "math": [
+                "x² + 2x − 15 = 0",
+                "x² − 2x − 1 = 0"
+              ]
+            },
+            {
+              "title": "New roots from old ones",
+              "text": [
+                "α, β are the roots of x² − 3x + 1 = 0. Find the equation whose roots are α² and β².",
+                "New sum = α² + β² = 7 (from the last lesson). New product = (αβ)² = 1."
+              ],
+              "math": [
+                "x² − 7x + 1 = 0"
+              ],
+              "tip": "For roots 1/α and 1/β, just swap a and c: from ax² + bx + c = 0 you get cx² + bx + a = 0."
+            }
+          ]
+        },
+        {
+          "id": "L7",
+          "title": "Complex roots",
+          "check": "k7",
+          "screens": [
+            {
+              "title": "When D < 0",
+              "text": [
+                "There is no real number whose square is negative, so we use i, where i² = −1. Then √(−4) = 2i.",
+                "x² + 4 = 0 gives x² = −4, so x = 2i or x = −2i."
+              ]
+            },
+            {
+              "title": "Using the formula",
+              "text": [
+                "Solve x² − 2x + 5 = 0. Here D = 4 − 20 = −16, and √(−16) = 4i."
+              ],
+              "math": [
+                "x = (2 ± 4i) / 2 = 1 ± 2i"
+              ]
+            },
+            {
+              "title": "Conjugate pairs",
+              "text": [
+                "When a, b and c are real, complex roots always come in a pair p + qi and p − qi (complex conjugates).",
+                "Sum = 2p and product = p² + q², so the sum and product rules still work."
+              ],
+              "math": [
+                "roots 1 ± 2i:  sum 2, product 1 + 4 = 5",
+                "equation: x² − 2x + 5 = 0"
+              ],
+              "tip": "If a question says one root of a real quadratic is 2 + 3i, you already know the other one: 2 − 3i."
+            }
+          ]
+        },
+        {
+          "id": "L8",
+          "title": "Equations that become quadratic",
+          "check": "k8",
+          "screens": [
+            {
+              "title": "Substitution",
+              "text": [
+                "Some equations are quadratics in disguise. In x⁴ − 5x² + 4 = 0, put t = x²:",
+                "t = 1 gives x = ±1 and t = 4 gives x = ±2: four real solutions."
+              ],
+              "math": [
+                "t² − 5t + 4 = 0  ⇒  t = 1 or t = 4"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "With a modulus",
+              "text": [
+                "Solve x² − 5|x| + 6 = 0. Since x² = |x|², put t = |x| (and remember t ≥ 0):",
+                "|x| = 2 gives x = ±2 and |x| = 3 gives x = ±3: four solutions."
+              ],
+              "math": [
+                "t² − 5t + 6 = 0  ⇒  t = 2 or t = 3"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Check what t is allowed to be",
+              "text": [
+                "After a substitution, throw away any value of t that is impossible.",
+                "In x⁴ + x² − 6 = 0, t = x² gives t = 2 or t = −3. But x² can never be −3, so only x = ±√2 are real solutions."
+              ],
+              "tip": "t = x² and t = |x| must be ≥ 0. Count the solutions carefully: JEE often asks how many there are."
+            }
+          ]
+        }
       ],
-      "questions": []
+      "formulaSheet": [
+        {
+          "title": "The standard form",
+          "text": "A quadratic equation is ax² + bx + c = 0 with a ≠ 0. It always has two roots, α and β, in the complex numbers (they may be equal)."
+        },
+        {
+          "title": "The formula",
+          "text": "α, β = (−b ± √D) / 2a, where D = b² − 4ac is the discriminant."
+        },
+        {
+          "title": "Nature of roots",
+          "text": "D > 0: two different real roots. D = 0: two equal real roots. D < 0: two non-real roots, complex conjugates p ± qi (for real a, b, c)."
+        },
+        {
+          "title": "Sum and product",
+          "text": "α + β = −b/a and αβ = c/a. You can often answer without finding α and β at all."
+        },
+        {
+          "title": "Useful identities",
+          "text": "α² + β² = (α + β)² − 2αβ.   α³ + β³ = (α + β)³ − 3αβ(α + β).   (α − β)² = (α + β)² − 4αβ."
+        },
+        {
+          "title": "Building an equation",
+          "text": "With roots α and β: x² − (α + β)x + αβ = 0. Multiply through to clear fractions."
+        }
+      ],
+      "questions": [
+        "k1",
+        "k2",
+        "k3",
+        "k4",
+        "k5",
+        "k6",
+        "k7",
+        "k8"
+      ]
     },
     {
       "id": "worked",
@@ -44,28 +450,380 @@
       ],
       "questions": []
     },
-    { "id": "practice", "title": "Practice with hints", "kind": "questions", "hints": true, "questions": ["p1", "p2", "p3", "p4", "p5", "p6"] },
-    { "id": "check", "title": "Check without hints", "kind": "questions", "hints": false, "questions": ["c1", "c2", "c3", "c4"] },
-    { "id": "timed", "title": "Timed section", "kind": "timed", "hints": false, "timeLimitSec": 720, "questions": ["t1", "t2", "t3", "t4", "t5"] },
-    { "id": "revision", "title": "Revision check", "kind": "questions", "hints": false, "questions": ["r1", "r2"] }
+    {
+      "id": "practice",
+      "title": "Practice with hints",
+      "kind": "questions",
+      "hints": true,
+      "questions": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6"
+      ]
+    },
+    {
+      "id": "check",
+      "title": "Check without hints",
+      "kind": "questions",
+      "hints": false,
+      "questions": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    {
+      "id": "timed",
+      "title": "Timed section",
+      "kind": "timed",
+      "hints": false,
+      "timeLimitSec": 720,
+      "questions": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ]
+    },
+    {
+      "id": "revision",
+      "title": "Revision check",
+      "kind": "questions",
+      "hints": false,
+      "questions": [
+        "r1",
+        "r2"
+      ]
+    }
   ],
   "questions": [
-    { "id": "p1", "type": "integer", "difficulty": 1, "skill": "sum-product", "prompt": "α and β are the roots of x² − 5x + 6 = 0. Find α² + β².", "answer": "13", "hint": "α + β = 5 and αβ = 6. Use α² + β² = (α + β)² − 2αβ.", "solution": "α² + β² = 5² − 2 × 6 = 25 − 12 = 13." },
-    { "id": "p2", "type": "choice", "difficulty": 1, "skill": "nature", "prompt": "The roots of 2x² − 4x + 5 = 0 are:", "options": ["real and different", "real and equal", "non-real complex conjugates", "one real and one non-real"], "answer": "C", "hint": "Find D = b² − 4ac.", "solution": "D = (−4)² − 4 × 2 × 5 = 16 − 40 = −24 < 0, so the roots are non-real complex conjugates. (With real coefficients, non-real roots always come in a conjugate pair, so D is never 'one real, one non-real'.)" },
-    { "id": "p3", "type": "integer", "difficulty": 1, "skill": "nature", "prompt": "For k > 0, x² + kx + 16 = 0 has equal roots. Find k.", "answer": "8", "hint": "Equal roots means D = 0.", "solution": "D = k² − 4 × 16 = 0, so k² = 64 and k = 8 (k > 0)." },
-    { "id": "p4", "type": "choice", "difficulty": 2, "skill": "formation", "prompt": "The quadratic equation whose roots are 2 + √3 and 2 − √3 is:", "options": ["x² − 4x + 1 = 0", "x² + 4x + 1 = 0", "x² − 4x − 1 = 0", "x² − 2x + 1 = 0"], "answer": "A", "hint": "Find the sum and the product of the two roots.", "solution": "Sum = 4, product = (2 + √3)(2 − √3) = 4 − 3 = 1. The equation is x² − 4x + 1 = 0." },
-    { "id": "p5", "type": "integer", "difficulty": 2, "skill": "sum-product", "prompt": "α and β are the roots of x² − 3x + 1 = 0. Find α³ + β³.", "answer": "18", "hint": "α³ + β³ = (α + β)³ − 3αβ(α + β), with α + β = 3 and αβ = 1.", "solution": "α³ + β³ = 3³ − 3 × 1 × 3 = 27 − 9 = 18." },
-    { "id": "p6", "type": "choice", "difficulty": 3, "skill": "sum-product", "prompt": "The roots of x² − (k + 1)x + k = 0 differ by 3, and k > 1. Then k equals:", "options": ["2", "3", "4", "5"], "answer": "C", "hint": "Try x = 1 in the equation. Then the other root is the product divided by 1.", "solution": "x = 1 is a root (1 − k − 1 + k = 0), so the other root is k (the product). k − 1 = 3 gives k = 4." },
-    { "id": "c1", "type": "integer", "difficulty": 1, "skill": "sum-product", "prompt": "α and β are the roots of x² + 4x − 5 = 0. Find |α − β|.", "answer": "6", "solution": "(α − β)² = (α + β)² − 4αβ = 16 + 20 = 36, so |α − β| = 6." },
-    { "id": "c2", "type": "choice", "difficulty": 2, "skill": "nature", "prompt": "The roots of x² − 2kx + 9 = 0 are real exactly when:", "options": ["|k| ≥ 3", "|k| ≤ 3", "k ≥ 3 only", "for every real k"], "answer": "A", "solution": "D = 4k² − 36 ≥ 0 gives k² ≥ 9, that is |k| ≥ 3 (k ≤ −3 also works)." },
-    { "id": "c3", "type": "integer", "difficulty": 2, "skill": "sum-product", "prompt": "α and β are the roots of 2x² − 6x + 3 = 0. Find 1/α + 1/β.", "answer": "2", "solution": "1/α + 1/β = (α + β)/(αβ) = 3 ÷ (3/2) = 2." },
-    { "id": "c4", "type": "choice", "difficulty": 2, "skill": "formation", "prompt": "The quadratic equation with roots 3 and −1/2 is:", "options": ["2x² − 5x − 3 = 0", "2x² + 5x − 3 = 0", "2x² − 5x + 3 = 0", "x² − 5x − 3 = 0"], "answer": "A", "solution": "Sum = 5/2, product = −3/2: x² − (5/2)x − 3/2 = 0, so 2x² − 5x − 3 = 0." },
-    { "id": "t1", "type": "choice", "difficulty": 1, "skill": "sum-product", "prompt": "If α and β are the roots of x² − 6x + 4 = 0, then α²β + αβ² equals:", "options": ["10", "20", "24", "36"], "answer": "C", "solution": "α²β + αβ² = αβ(α + β) = 4 × 6 = 24." },
-    { "id": "t2", "type": "choice", "difficulty": 2, "skill": "nature", "prompt": "The number of real roots of x² − 5|x| + 6 = 0 is:", "options": ["1", "2", "3", "4"], "answer": "D", "solution": "Let t = |x| ≥ 0: t² − 5t + 6 = 0 gives t = 2 or 3, so x = ±2, ±3: four real roots." },
-    { "id": "t3", "type": "choice", "difficulty": 3, "skill": "nature", "prompt": "x² + 2(k − 1)x + (k + 5) = 0 has equal roots. The sum of all possible values of k is:", "options": ["−1", "3", "4", "5"], "answer": "B", "solution": "D = 4(k − 1)² − 4(k + 5) = 0 gives k² − 3k − 4 = 0, so k = 4 or k = −1. Their sum is 3." },
-    { "id": "t4", "type": "choice", "difficulty": 1, "skill": "complex", "prompt": "The roots of x² − 2x + 2 = 0 are:", "options": ["1 ± i", "−1 ± i", "2 ± i", "1 ± 2i"], "answer": "A", "solution": "x = (2 ± √(4 − 8))/2 = (2 ± 2i)/2 = 1 ± i." },
-    { "id": "t5", "type": "integer", "difficulty": 3, "skill": "sum-product", "prompt": "α and β are the roots of x² − x − 1 = 0. Find α⁴ + β⁴. (Numerical value: enter an integer.)", "answer": "7", "solution": "α² + β² = 1 + 2 = 3. Then α⁴ + β⁴ = (α² + β²)² − 2(αβ)² = 9 − 2 = 7." },
-    { "id": "r1", "type": "integer", "difficulty": 1, "skill": "sum-product", "prompt": "α and β are the roots of x² − 7x + 10 = 0. Find α² + β².", "answer": "29", "solution": "α² + β² = 7² − 2 × 10 = 49 − 20 = 29." },
-    { "id": "r2", "type": "choice", "difficulty": 1, "skill": "nature", "prompt": "The roots of x² + 6x + 9 = 0 are:", "options": ["real and different", "real and equal", "non-real", "one positive, one negative"], "answer": "B", "solution": "D = 36 − 36 = 0: two equal real roots (both −3)." }
+    {
+      "id": "k1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "standard-form",
+      "prompt": "Which one of these is a quadratic equation?",
+      "options": [
+        "x³ − x = 0",
+        "(x + 1)² = x²",
+        "x(x − 3) = 4",
+        "2x + 5 = 0"
+      ],
+      "answer": "C",
+      "hint": "Expand and bring everything to one side before deciding.",
+      "solution": "x(x − 3) = 4 becomes x² − 3x − 4 = 0, degree 2. (x + 1)² = x² looks quadratic but simplifies to 2x + 1 = 0, which is linear."
+    },
+    {
+      "id": "k2",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "factorisation",
+      "prompt": "Find the larger root of x² − 7x + 12 = 0.",
+      "answer": "4",
+      "hint": "Two numbers with product 12 and sum −7.",
+      "solution": "x² − 7x + 12 = (x − 3)(x − 4), so the roots are 3 and 4. The larger is 4."
+    },
+    {
+      "id": "k3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "formula",
+      "prompt": "The roots of x² − 2x − 1 = 0 are",
+      "options": [
+        "1 ± √2",
+        "−1 ± √2",
+        "1 ± √3",
+        "2 ± √2"
+      ],
+      "answer": "A",
+      "hint": "a = 1, b = −2, c = −1. Find D first.",
+      "solution": "D = 4 + 4 = 8 and √8 = 2√2, so x = (2 ± 2√2)/2 = 1 ± √2."
+    },
+    {
+      "id": "k4",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "discriminant",
+      "prompt": "Find the positive value of k for which x² − kx + 25 = 0 has equal roots.",
+      "answer": "10",
+      "hint": "Equal roots: D = 0.",
+      "solution": "D = k² − 100 = 0, so k = ±10. The positive value is 10."
+    },
+    {
+      "id": "k5",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² − 4x + 2 = 0. Find α² + β².",
+      "answer": "12",
+      "hint": "α + β = 4 and αβ = 2.",
+      "solution": "α² + β² = (α + β)² − 2αβ = 16 − 4 = 12."
+    },
+    {
+      "id": "k6",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "formation",
+      "prompt": "The quadratic equation with roots 2 and −3 is",
+      "options": [
+        "x² + x − 6 = 0",
+        "x² − x − 6 = 0",
+        "x² + x + 6 = 0",
+        "x² − 5x − 6 = 0"
+      ],
+      "answer": "A",
+      "hint": "Sum −1, product −6. Use x² − (sum)x + product = 0.",
+      "solution": "Sum = −1 and product = −6, so x² − (−1)x + (−6) = x² + x − 6 = 0."
+    },
+    {
+      "id": "k7",
+      "type": "choice",
+      "difficulty": 2,
+      "skill": "complex-roots",
+      "prompt": "One root of x² + bx + c = 0, with b and c real, is 3 + i. Then (b, c) is",
+      "options": [
+        "(−6, 10)",
+        "(6, 10)",
+        "(−6, 8)",
+        "(6, 8)"
+      ],
+      "answer": "A",
+      "hint": "The other root is the conjugate 3 − i.",
+      "solution": "The roots are 3 ± i: sum 6 and product 9 + 1 = 10. So x² − 6x + 10 = 0, giving b = −6 and c = 10."
+    },
+    {
+      "id": "k8",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "reducible",
+      "prompt": "How many real solutions does x⁴ − 10x² + 9 = 0 have?",
+      "answer": "4",
+      "hint": "Put t = x².",
+      "solution": "t² − 10t + 9 = 0 gives t = 1 or t = 9. Then x = ±1 and x = ±3: four real solutions."
+    },
+    {
+      "id": "p1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² − 5x + 6 = 0. Find α² + β².",
+      "answer": "13",
+      "hint": "α + β = 5 and αβ = 6. Use α² + β² = (α + β)² − 2αβ.",
+      "solution": "α² + β² = 5² − 2 × 6 = 25 − 12 = 13."
+    },
+    {
+      "id": "p2",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "nature",
+      "prompt": "The roots of 2x² − 4x + 5 = 0 are:",
+      "options": [
+        "real and different",
+        "real and equal",
+        "non-real complex conjugates",
+        "one real and one non-real"
+      ],
+      "answer": "C",
+      "hint": "Find D = b² − 4ac.",
+      "solution": "D = (−4)² − 4 × 2 × 5 = 16 − 40 = −24 < 0, so the roots are non-real complex conjugates. (With real coefficients, non-real roots always come in a conjugate pair, so D is never 'one real, one non-real'.)"
+    },
+    {
+      "id": "p3",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "nature",
+      "prompt": "For k > 0, x² + kx + 16 = 0 has equal roots. Find k.",
+      "answer": "8",
+      "hint": "Equal roots means D = 0.",
+      "solution": "D = k² − 4 × 16 = 0, so k² = 64 and k = 8 (k > 0)."
+    },
+    {
+      "id": "p4",
+      "type": "choice",
+      "difficulty": 2,
+      "skill": "formation",
+      "prompt": "The quadratic equation whose roots are 2 + √3 and 2 − √3 is:",
+      "options": [
+        "x² − 4x + 1 = 0",
+        "x² + 4x + 1 = 0",
+        "x² − 4x − 1 = 0",
+        "x² − 2x + 1 = 0"
+      ],
+      "answer": "A",
+      "hint": "Find the sum and the product of the two roots.",
+      "solution": "Sum = 4, product = (2 + √3)(2 − √3) = 4 − 3 = 1. The equation is x² − 4x + 1 = 0."
+    },
+    {
+      "id": "p5",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² − 3x + 1 = 0. Find α³ + β³.",
+      "answer": "18",
+      "hint": "α³ + β³ = (α + β)³ − 3αβ(α + β), with α + β = 3 and αβ = 1.",
+      "solution": "α³ + β³ = 3³ − 3 × 1 × 3 = 27 − 9 = 18."
+    },
+    {
+      "id": "p6",
+      "type": "choice",
+      "difficulty": 3,
+      "skill": "sum-product",
+      "prompt": "The roots of x² − (k + 1)x + k = 0 differ by 3, and k > 1. Then k equals:",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": "C",
+      "hint": "Try x = 1 in the equation. Then the other root is the product divided by 1.",
+      "solution": "x = 1 is a root (1 − k − 1 + k = 0), so the other root is k (the product). k − 1 = 3 gives k = 4."
+    },
+    {
+      "id": "c1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² + 4x − 5 = 0. Find |α − β|.",
+      "answer": "6",
+      "solution": "(α − β)² = (α + β)² − 4αβ = 16 + 20 = 36, so |α − β| = 6."
+    },
+    {
+      "id": "c2",
+      "type": "choice",
+      "difficulty": 2,
+      "skill": "nature",
+      "prompt": "The roots of x² − 2kx + 9 = 0 are real exactly when:",
+      "options": [
+        "|k| ≥ 3",
+        "|k| ≤ 3",
+        "k ≥ 3 only",
+        "for every real k"
+      ],
+      "answer": "A",
+      "solution": "D = 4k² − 36 ≥ 0 gives k² ≥ 9, that is |k| ≥ 3 (k ≤ −3 also works)."
+    },
+    {
+      "id": "c3",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of 2x² − 6x + 3 = 0. Find 1/α + 1/β.",
+      "answer": "2",
+      "solution": "1/α + 1/β = (α + β)/(αβ) = 3 ÷ (3/2) = 2."
+    },
+    {
+      "id": "c4",
+      "type": "choice",
+      "difficulty": 2,
+      "skill": "formation",
+      "prompt": "The quadratic equation with roots 3 and −1/2 is:",
+      "options": [
+        "2x² − 5x − 3 = 0",
+        "2x² + 5x − 3 = 0",
+        "2x² − 5x + 3 = 0",
+        "x² − 5x − 3 = 0"
+      ],
+      "answer": "A",
+      "solution": "Sum = 5/2, product = −3/2: x² − (5/2)x − 3/2 = 0, so 2x² − 5x − 3 = 0."
+    },
+    {
+      "id": "t1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "sum-product",
+      "prompt": "If α and β are the roots of x² − 6x + 4 = 0, then α²β + αβ² equals:",
+      "options": [
+        "10",
+        "20",
+        "24",
+        "36"
+      ],
+      "answer": "C",
+      "solution": "α²β + αβ² = αβ(α + β) = 4 × 6 = 24."
+    },
+    {
+      "id": "t2",
+      "type": "choice",
+      "difficulty": 2,
+      "skill": "nature",
+      "prompt": "The number of real roots of x² − 5|x| + 6 = 0 is:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": "D",
+      "solution": "Let t = |x| ≥ 0: t² − 5t + 6 = 0 gives t = 2 or 3, so x = ±2, ±3: four real roots."
+    },
+    {
+      "id": "t3",
+      "type": "choice",
+      "difficulty": 3,
+      "skill": "nature",
+      "prompt": "x² + 2(k − 1)x + (k + 5) = 0 has equal roots. The sum of all possible values of k is:",
+      "options": [
+        "−1",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": "B",
+      "solution": "D = 4(k − 1)² − 4(k + 5) = 0 gives k² − 3k − 4 = 0, so k = 4 or k = −1. Their sum is 3."
+    },
+    {
+      "id": "t4",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "complex",
+      "prompt": "The roots of x² − 2x + 2 = 0 are:",
+      "options": [
+        "1 ± i",
+        "−1 ± i",
+        "2 ± i",
+        "1 ± 2i"
+      ],
+      "answer": "A",
+      "solution": "x = (2 ± √(4 − 8))/2 = (2 ± 2i)/2 = 1 ± i."
+    },
+    {
+      "id": "t5",
+      "type": "integer",
+      "difficulty": 3,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² − x − 1 = 0. Find α⁴ + β⁴. (Numerical value: enter an integer.)",
+      "answer": "7",
+      "solution": "α² + β² = 1 + 2 = 3. Then α⁴ + β⁴ = (α² + β²)² − 2(αβ)² = 9 − 2 = 7."
+    },
+    {
+      "id": "r1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "sum-product",
+      "prompt": "α and β are the roots of x² − 7x + 10 = 0. Find α² + β².",
+      "answer": "29",
+      "solution": "α² + β² = 7² − 2 × 10 = 49 − 20 = 29."
+    },
+    {
+      "id": "r2",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "nature",
+      "prompt": "The roots of x² + 6x + 9 = 0 are:",
+      "options": [
+        "real and different",
+        "real and equal",
+        "non-real",
+        "one positive, one negative"
+      ],
+      "answer": "B",
+      "solution": "D = 36 − 36 = 0: two equal real roots (both −3)."
+    }
   ]
 }

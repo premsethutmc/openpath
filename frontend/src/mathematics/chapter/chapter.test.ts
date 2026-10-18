@@ -19,7 +19,23 @@ const disc = (a: number, b: number, c: number) => b * b - 4 * a * c;
 const nature = (d: number) => (d > 0 ? "real and different" : d === 0 ? "real and equal" : "non-real");
 
 /** An independent computation of each answer, from the numbers in the question. */
+const pick = (id: string, ok: (i: number) => boolean) => question(id).options![[0, 1, 2, 3].find(ok)!];
+// the degree of a polynomial from its values at 0..5 (finite differences)
+const degree = (f: (x: number) => number) => {
+  let d = [0, 1, 2, 3, 4, 5].map(f);
+  let n = -1;
+  while (d.some((v) => Math.abs(v) > 1e-9)) { n++; d = d.slice(1).map((v, i) => v - d[i]); }
+  return n;
+};
 const KEY: Record<string, () => string> = {
+  k1: () => pick("k1", (i) => degree([(x: number) => x ** 3 - x, (x: number) => (x + 1) ** 2 - x * x, (x: number) => x * (x - 3) - 4, (x: number) => 2 * x + 5][i]) === 2),
+  k2: () => String(Math.max(...real(1, -7, 12))),
+  k3: () => { const [x, y] = real(1, -2, -1); return `${near((x + y) / 2)} ± √${near(((x - y) / 2) ** 2)}`; },
+  k4: () => String([...Array(100).keys()].find((k) => k > 0 && disc(1, -k, 25) === 0)),
+  k5: () => { const [x, y] = real(1, -4, 2); return String(near(x * x + y * y)); },
+  k6: () => pick("k6", (i) => { const f = [(x: number) => x * x + x - 6, (x: number) => x * x - x - 6, (x: number) => x * x + x + 6, (x: number) => x * x - 5 * x - 6][i]; return f(2) === 0 && f(-3) === 0; }),
+  k7: () => pick("k7", (i) => { const [b, c] = [[-6, 10], [6, 10], [-6, 8], [6, 8]][i]; return 8 + 3 * b + c === 0 && 6 + b === 0; }), // (3 + i)² = 8 + 6i
+  k8: () => String(new Set(real(1, -10, 9).filter((t) => t >= 0).flatMap((t) => [Math.sqrt(t), -Math.sqrt(t)])).size),
   p1: () => { const [x, y] = real(1, -5, 6); return String(near(x * x + y * y)); },
   p2: () => (disc(2, -4, 5) < 0 ? "non-real complex conjugates" : "?"),
   p3: () => String([...Array(100).keys()].find((k) => k > 0 && disc(1, k, 16) === 0)),
@@ -78,8 +94,8 @@ const at = (d: number) => new Date(Date.parse("2026-10-18T10:00:00Z") + d * 86_4
 const ev = (action: ChapterActivity["action"], stage: string, day: number, extra: Partial<ChapterActivity> = {}): ChapterActivity => ({ kind: "math_activity", program: "jee-quadratics", id: `e${n + 1}`, at: at(day), learnerId: L, journey: "jee-main", lessonVersion: chapter.version, action, stage, elapsedMs: 1000, sessionId: `math:${L}:v`, ...extra });
 
 function through(answer: (id: string) => string | null, retentionDueAt = at(7)) {
-  const events: ChapterActivity[] = [ev("complete", "recap", 0), ev("complete", "worked", 0)];
-  for (const s of ["practice", "check"]) {
+  const events: ChapterActivity[] = [];
+  for (const s of ["class", "worked", "practice", "check"]) {
     for (const id of chapter.stages.find((x) => x.id === s)!.questions) events.push(ev("answer", s, 0, { questionId: id, response: answer(id) ?? "0" }));
     events.push(ev("complete", s, 0));
   }
@@ -96,7 +112,7 @@ test("progress counts steps; the timed section scores +4 / −1 / 0 and may end 
   const key = (id: string) => question(id).answer;
   const events = through((id) => (id === "t2" ? null : id === "t3" ? "A" : key(id)));
   const { state } = replay(L, events, at(2));
-  assert.deepEqual(state.completed, ["recap", "worked", "practice", "check", "timed"]);
+  assert.deepEqual(state.completed, ["class", "worked", "practice", "check", "timed"]);
   assert.equal(percent(state), 83);
   const s = timedScore(state);
   assert.equal(s.score, 4 + 0 - 1 + 4 + 4, "three right (+12), one wrong (−1), one skipped (0)");
@@ -116,9 +132,13 @@ test("the revision check opens after its date; finishing it completes the chapte
 });
 
 test("a step cannot be skipped, and an early answer is the one that counts (no retries on the same question)", () => {
-  const events = [ev("complete", "practice", 0), ev("complete", "recap", 0), ev("answer", "practice", 0, { questionId: "p1", response: "12" }), ev("answer", "practice", 0, { questionId: "p1", response: "13" })];
+  const lessons = chapter.stages[0].questions;
+  const events = [ev("complete", "class", 0), ev("answer", "class", 0, { questionId: "k1", response: "C" }), ev("complete", "class", 0)];
+  assert.deepEqual(replay(L, events, at(1)).state.completed, [], "the class is finished only after every lesson's check");
+  for (const id of lessons.slice(1)) events.push(ev("answer", "class", 0, { questionId: id, response: question(id).answer }));
+  events.push(ev("complete", "practice", 0), ev("complete", "class", 0), ev("complete", "worked", 0), ev("answer", "practice", 0, { questionId: "p1", response: "12" }), ev("answer", "practice", 0, { questionId: "p1", response: "13" }));
   const { state } = replay(L, events, at(1));
-  assert.deepEqual(state.completed, ["recap"], "practice was not finished: its questions were not all answered");
+  assert.deepEqual(state.completed, ["class", "worked"], "practice was not finished: its questions were not all answered");
   assert.equal(state.answers.p1.correct, false, "the first answer counts");
 });
 

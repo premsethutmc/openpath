@@ -4,7 +4,7 @@ from unittest import mock
 from django.utils import timezone
 from rest_framework.test import APIClient
 from .tests import FamilyTestCase
-from .mathematics import lesson
+from .mathematics import lesson, program
 from .models import PupilEvent
 
 class MathematicsAccountTests(FamilyTestCase):
@@ -136,9 +136,9 @@ class JeeChapterTests(FamilyTestCase):
         self.seq = 0
         self.serial = 0
 
-    def activity(self, action='complete', stage='recap', **extra):
+    def activity(self, action='complete', stage='class', **extra):
         self.serial += 1
-        return {'kind': 'math_activity', 'program': 'jee-quadratics', 'id': f'jee-{self.serial}', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'math:{self.pupil_id}:jee-visit', 'journey': 'jee-main', 'lessonVersion': '1.0.0', 'action': action, 'stage': stage, 'elapsedMs': 20, **extra}
+        return {'kind': 'math_activity', 'program': 'jee-quadratics', 'id': f'jee-{self.serial}', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'math:{self.pupil_id}:jee-visit', 'journey': 'jee-main', 'lessonVersion': program('jee-quadratics')['version'], 'action': action, 'stage': stage, 'elapsedMs': 20, **extra}
 
     save = MathematicsAccountTests.save
     record = MathematicsAccountTests.record
@@ -148,7 +148,11 @@ class JeeChapterTests(FamilyTestCase):
         spec = program('jee-quadratics')
         self.assertEqual(self.save(self.activity(journey='school')).status_code, 400, 'the chapter belongs to the JEE Main track')
         self.assertEqual(self.save(self.activity(stage='worked')).status_code, 400, 'steps in order')
-        for stage in ['recap', 'worked']:
+        self.assertEqual(self.save(self.activity('complete', 'class')).status_code, 400, 'each lesson check first')
+        for qid in spec['stages'][0]['questions']:
+            q = next(x for x in spec['questions'] if x['id'] == qid)
+            self.assertEqual(self.save(self.activity('answer', 'class', questionId=qid, response=q['answer'])).status_code, 201)
+        for stage in ['class', 'worked']:
             self.assertEqual(self.save(self.activity(stage=stage)).status_code, 201)
         self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p1', response='1/2')).status_code, 400, 'numerical value: an integer')
         self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p2', response='E')).status_code, 400, 'a choice: A to D')
@@ -175,6 +179,6 @@ class JeeChapterTests(FamilyTestCase):
     def test_programs_keep_their_own_sequences_in_one_record(self):
         fractions = MathematicsAccountTests.activity(self, 'complete', 'concept')
         self.assertEqual(self.save(fractions).status_code, 201, 'the fractions program, as before')
-        self.assertEqual(self.save(self.activity()).status_code, 201, 'the chapter starts at its own first step')
+        self.assertEqual(self.save(self.activity('open')).status_code, 201, 'the chapter starts at its own first step')
         self.assertEqual(self.save(self.activity(program='unknown')).status_code, 400)
         self.assertEqual(len(self.record()), 2)
