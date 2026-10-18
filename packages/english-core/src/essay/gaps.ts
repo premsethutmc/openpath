@@ -50,7 +50,9 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
         const total = sentences + (prior?.sentences ?? 0);
         const view = leafView(ledger.composite, ectx.ctx.index, cap, lastAt(events, analysisEvents.get(a.id)));
         const engine = view.verification.status;
-        const claim = engineClaim(ectx, cap, view);
+        const atId = analysisEvents.get(a.id) ?? a.id;
+        const upTo = events.slice(0, events.findIndex((e) => e.id === atId) + 1 || events.length);
+        const claim = engineClaim(ectx, cap, view, upTo, lastAt(events, analysisEvents.get(a.id)));
         const basis = [
           `${obs.length} error${obs.length === 1 ? "" : "s"} in ${sentences} sentence${sentences === 1 ? "" : "s"} of essay ${a.essay}`,
           ...(prior ? [`also seen in ${prior.essays.size} earlier essay${prior.essays.size === 1 ? "" : "s"} (${[...prior.essays].join(", ")})`] : []),

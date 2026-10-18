@@ -108,7 +108,7 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   const p = ectx.policy;
   const L = ledger ?? Ledger.rebuild(ectx.ctx, learnerOf(events), events as LedgerEvent[]);
   const view = leafView(L.composite, ectx.ctx.index, capability, now);
-  const claim = engineClaim(ectx, capability, view);
+  const claim = engineClaim(ectx, capability, view, events, now);
   const target = claim.target;
   const name = ectx.profile.byCapability.get(capability)?.name ?? capability;
   const nodes = journey ? journey.trees.flatMap((t) => t.nodes).filter((n) => n.competency === capability) : [];

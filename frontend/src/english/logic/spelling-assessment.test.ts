@@ -351,8 +351,14 @@ test("A: a skill shown on draft questions is provisional, never presented as ver
   for (const it of approved.ctx.content.items.values()) if (it.kind === "code" && it.target === "EN.FND.SPL.inflections") (it as Code).evidence_status = "validated";
   const verified = await run(approved);
   assert.equal(verified.standing, draft.standing, "the standing and the plan are unchanged: only the claim differs");
-  assert.equal(verified.mastery, "verified");
-  assert.ok(verified.strengths.some((t) => /Verified on educator-approved questions/.test(t)));
+  // verification@2: approved questions, and the level kept at a later check, are both needed
+  if (verified.standing === "confirmed") {
+    assert.equal(verified.mastery, "verified");
+    assert.ok(verified.strengths.some((t) => /Verified on educator-approved questions/.test(t)));
+  } else {
+    assert.deepEqual([verified.mastery, verified.masteryBasis], ["provisional", "approved"]);
+    assert.ok(verified.strengths.some((t) => /educator-approved questions.*verified once the level is kept at a later check/.test(t)));
+  }
 });
 
 test("B: one misspelt word is a suspicion to probe, not a reason to teach; errors on separate words may lead to teaching", async () => {
