@@ -224,6 +224,31 @@ class ParentContentTests(DevTestCase):
         self.assertEqual(seen[3]["redacted"], f"a parent's book text of {len(text)} characters")
         self.assertEqual((seen[5]["correct"], seen[6]["correct"]), (True, False))
 
+    def test_a_childs_written_answer_is_redacted_for_a_developer(self):
+        other = self.parent("reading@example.org")
+        meera = self.pupil(other, "Meera")
+        evaluation = {
+            "evaluator": "rules@1",
+            "comprehension": {"level": "understood", "matched": ["sad", "cheer"], "missing": [], "contradicted": [], "relevance": 0.4, "abstained": False},
+            "mechanics": {"spelling": [{"rule": "unknown_word", "capability": "EN.WRT.ACC.spelling", "quote": "becuse", "suggestion": "because", "message": 'Check the spelling of "becuse".'}], "grammar": [], "punctuation": []},
+            "coherence": "sentence",
+            "feedback": {"understanding": "You've got it.", "writing": ['Check the spelling of "becuse".']},
+            "evidence": [{"capability": "EN.RDG.INF.motives", "observation": "understood", "provisional": True}],
+        }
+        self.add(other, meera, "written_answer", task={"id": "rd.kite.motive", "version": 1}, passage="rdg.p1", revision=0, text="becuse my sister Priya was sad", evaluation=evaluation)
+        full = other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"]
+        self.assertEqual(full[-1]["text"], "becuse my sister Priya was sad", "the parent reads it back in full")
+        dev = self.developer()
+        other.patch(f"/api/pupils/{meera}/", {"shared_for_diagnostics": True}, format="json")
+        seen = dev.get(f"/api/developer/pupils/{meera}/events/").json()["events"][-1]
+        shown = json.dumps(seen)
+        for secret in ["becuse", "Priya", "sister", "because"]:
+            self.assertNotIn(secret, shown)
+        self.assertEqual(seen["redacted"], "a child's written answer of 30 characters")
+        self.assertEqual(seen["evaluation"]["comprehension"]["level"], "understood")
+        self.assertEqual(seen["evaluation"]["mechanics_counts"], {"spelling": 1, "grammar": 0, "punctuation": 0})
+        self.assertEqual(other.get(f"/api/pupils/{meera}/events/?subject=english").json()["events"], full, "the stored record is unchanged")
+
     def test_a_developers_own_pupils_are_shown_in_full(self):
         dev = self.developer()
         arun = self.pupil(dev, "Arun")

@@ -25,7 +25,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void }) {
+export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onSpellingJourney, onReading }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onSpellingJourney?: () => void; onReading?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -45,6 +45,8 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMy
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
+      {onSpellingJourney && <SpellingJourneyCard learner={learner} onOpen={onSpellingJourney} />}
+      {onReading && <ReadingCard learner={learner} onOpen={onReading} />}
       <BeeCard learner={learner} onBee={onBee} />
       <MyWordsCard learner={learner} onOpen={onMyWords} />
       <MyBooksCard learner={learner} onOpen={onMyBooks} />
@@ -146,6 +148,41 @@ function BeeCard({ learner, onBee }: { learner: Learner; onBee: () => void }) {
       <button type="button" className="primary light" onClick={onBee}>
         {open ? `Carry on Spelling Bee (word ${open.position} of ${open.total})` : "Start Spelling Bee"}
         <Arrow />
+      </button>
+    </section>
+  );
+}
+
+/** The adaptive spelling journey: the app chooses what to check, teach and practise. Hidden in a pilot build. */
+function SpellingJourneyCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const open = learner.state.open?.event.type === "spelling_journey";
+  const started = learner.state.events.some((e) => e.kind === "session" && e.type === "spelling_journey");
+  return (
+    <section className="hub-card spelling-journey-card" aria-labelledby="sj-card-title">
+      <h2 id="sj-card-title">
+        <span aria-hidden="true">✏️ </span>Spelling rules
+      </h2>
+      <p>{started ? "Carry on where you left off: a few words, a short lesson if it helps, then practice." : "A short check, then lessons and practice picked for you."}</p>
+      <button type="button" className="primary light" onClick={onOpen}>
+        {open ? "Carry on" : started ? "Continue spelling" : "Start spelling"}
+        <Arrow />
+      </button>
+    </section>
+  );
+}
+
+/** Read and answer: a short passage and a question answered in the child's own words. Hidden in a pilot build. */
+function ReadingCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  return (
+    <section className="hub-card plain reading-card" aria-labelledby="reading-card-title">
+      <h2 id="reading-card-title">
+        <span aria-hidden="true">📖 </span>Read and answer
+      </h2>
+      <p>Read a short passage and answer a question in your own words.</p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Start reading
       </button>
     </section>
   );

@@ -20,6 +20,7 @@ export type SessionType =
   | "guided" // a grammar or vocabulary capability: lesson, then adaptive practice
   | "explore" // any capability, through the existing engine (no teaching)
   | "doubling_journey" // the adaptive consonant-doubling journey: diagnose, teach, guided practice, independent reassessment
+  | "spelling_journey" // the adaptive spelling journey across all inflection rules (spelling-journey.ts)
   | "check"; // a few independent questions on one capability, chosen by the development plan (assess, reassess or a later check)
 
 export interface Planned {
@@ -363,14 +364,30 @@ export interface BookDeleteEvent {
 }
 export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent | BookEvent | BookReviewEvent | BookAnswerEvent | BookDeleteEvent;
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
+/**
+ * Read and answer: one written answer to a reading question, as the child wrote it, with the evaluation it got.
+ * The first answer is revision 0; each revision is a new event (the earlier text is never changed). The evaluation
+ * and its per-competency evidence are provisional and are not part of the engine's ledger.
+ */
+export interface WrittenAnswerEvent {
+  kind: "written_answer";
+  id: string;
+  at: string;
+  task: { id: string; version: number };
+  passage: string;
+  revision: number;
+  text: string;
+  evaluation: import("./reading.ts").ReadingEvaluation;
+}
+
+export type AppEvent = WrittenAnswerEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "written_answer"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end"]);
 
@@ -394,6 +411,7 @@ export function eventProblem(e: unknown): string | null {
   if (x.kind === "book_review" && (typeof x.book !== "string" || typeof x.fingerprint !== "string" || !Array.isArray(x.approved) || !(x.approved as unknown[]).every((a) => typeof a === "string"))) return `event ${x.id} is a book review without its approvals`;
   if (x.kind === "book_answer" && (typeof x.book !== "string" || typeof x.question !== "string" || typeof x.correct !== "boolean")) return `event ${x.id} is a book answer without its question`;
   if (x.kind === "book_delete" && typeof x.book !== "string") return `event ${x.id} names no book`;
+  if (x.kind === "written_answer" && (typeof (x.task as { id?: unknown } | undefined)?.id !== "string" || typeof x.text !== "string" || typeof x.revision !== "number")) return `event ${x.id} is a written answer without its text`;
   if (x.kind.startsWith("spell_") && x.kind !== "spell_end" && !["bank", "list", "book"].includes((x.source as { type?: string } | undefined)?.type ?? "")) return `event ${x.id} names no spelling source`;
   if (x.kind === "spell_answer" && (typeof (x.word as { id?: unknown } | undefined)?.id !== "string" || typeof x.correct !== "boolean" || typeof x.response !== "string")) return `event ${x.id} is a spelling answer without a word or result`;
   return null;

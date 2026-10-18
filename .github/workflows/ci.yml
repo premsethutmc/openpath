@@ -231,6 +231,14 @@ jobs:
         run: |
           npm run english:e2e-bee 2>&1 | tee english-bee-e2e.log
           ../.github/scripts/require-tests.sh english-bee-e2e.log "Spelling Bee end-to-end"
+      - name: Spelling journey and Read and answer, in a phone-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/learning
+        run: |
+          npm run english:e2e-learning 2>&1 | tee english-learning-e2e.log
+          ../.github/scripts/require-tests.sh english-learning-e2e.log "Spelling journey and reading end-to-end"
       - name: My Words in an Android-sized browser
         working-directory: frontend
         env:

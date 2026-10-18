@@ -1,0 +1,96 @@
+{
+  "id": "openpath-reading-short-answer",
+  "version": 1,
+  "review": "candidate-unvalidated",
+  "note": "Short-answer reading questions for the Read and answer activity. Written for OpenPath on the existing passages (content/english/items/passages.json), not yet reviewed by an educator. Each key point lists groups of words or word stems (a stem ends in *); a key point is found when one entry of every group appears in the answer, allowing one wrong letter in longer words so that a spelling slip never hides understanding. 'contradicts' lists ideas that show a misreading. The rule-based evaluator (frontend/src/english/logic/reading.ts) marks understanding only from these, separately from spelling and grammar, and says it cannot tell when the answer matches neither. Judgements are provisional: not calibrated against marked answers from real children.",
+  "tasks": [
+    {
+      "id": "rd.kite.motive",
+      "passage": "rdg.p1",
+      "capability": "EN.RDG.INF.motives",
+      "question": "Why did Arjun give Meena his own kite?",
+      "key_points": [
+        { "id": "sad", "text": "Meena was sad or upset because she had lost her kite", "required": true, "groups": [["sad", "upset", "unhappy", "lost", "snapped", "flew away", "gone", "disappear*", "no kite", "empty hands", "cry*"]] },
+        { "id": "cheer", "text": "Arjun wanted to cheer her up or be kind", "required": true, "groups": [["cheer", "happy", "kind", "help", "nice", "feel better", "smile", "care*", "share", "make her"]] }
+      ],
+      "contradicts": [
+        { "id": "broken", "text": "Arjun's kite was broken or he did not want it", "groups": [["his kite was broken", "did not want", "didn't want", "doesn't want", "didnt want", "bored"]] }
+      ],
+      "model_answer": "Meena was sad because her kite had flown away, so Arjun gave her his kite to cheer her up.",
+      "topic": ["kite", "meena", "arjun", "brother", "sister", "fly", "string", "wind", "gate"]
+    },
+    {
+      "id": "rd.volcano.feeling",
+      "passage": "rdg.p5",
+      "capability": "EN.RDG.INF.motives",
+      "question": "Why did Kiran take a deep breath instead of shouting at Dev?",
+      "key_points": [
+        { "id": "saw_sorry", "text": "She saw that Dev was sorry or upset (his tears, his face)", "required": true, "groups": [["sorry", "upset", "sad", "cry*", "tears", "face", "apolog*", "did not mean", "didn't mean", "accident*"]] },
+        { "id": "calm_kind", "text": "She chose to stay calm or be kind", "required": false, "groups": [["calm", "kind", "angry", "anger", "not shout", "not to shout", "forgive", "patient", "fix", "nice"]] }
+      ],
+      "contradicts": [
+        { "id": "not_upset", "text": "Kiran did not care about the volcano", "groups": [["did not care", "didn't care", "didnt care", "not care"]] }
+      ],
+      "model_answer": "She saw that Dev was sorry and about to cry, so she calmed down instead of shouting.",
+      "topic": ["kiran", "dev", "volcano", "brother", "shout", "breath", "science", "fair"]
+    },
+    {
+      "id": "rd.city.cause",
+      "passage": "rdg.p2",
+      "capability": "EN.RDG.INF.cause_effect",
+      "question": "Give one reason why a city can be hotter than the countryside.",
+      "key_points": [
+        { "id": "reason", "text": "One of: dark roads and roofs absorb heat; fewer trees or plants to cool the air; cars, air conditioners or factories make heat", "required": true, "groups": [["dark", "asphalt", "concrete", "road*", "roof*", "absorb*", "fewer trees", "less trees", "no trees", "not many trees", "plants", "green", "fields", "cars", "air condition*", "factor*", "traffic", "buildings"]] }
+      ],
+      "contradicts": [
+        { "id": "sun_closer", "text": "The sun is closer to cities, or cities get more sun", "groups": [["closer to the sun", "sun is closer", "nearer the sun", "more sun"]] }
+      ],
+      "model_answer": "Roads and roofs are made of dark materials that soak up the sun's heat.",
+      "topic": ["city", "cities", "hot", "hotter", "heat", "warm", "countryside", "temperature", "sun"]
+    },
+    {
+      "id": "rd.bees.main",
+      "passage": "rdg.p6",
+      "capability": "EN.RDG.SUM.main_idea",
+      "question": "Who chooses the bees' new home, and how?",
+      "key_points": [
+        { "id": "scouts", "text": "The scout bees (not the queen) choose", "required": true, "groups": [["scout*", "older bees", "worker*", "the bees", "they all", "many bees", "hundreds"]] },
+        { "id": "dance", "text": "They dance to show good sites, and the site with most support wins", "required": true, "groups": [["danc*", "waggle", "vote", "agree*", "most bees", "support", "inspect*", "check"]] }
+      ],
+      "contradicts": [
+        { "id": "queen", "text": "The queen chooses", "groups": [["queen choose*", "queen picks", "queen decides", "queen chose", "the queen does", "by the queen"]] }
+      ],
+      "model_answer": "The scout bees choose. They do a waggle dance to show where good sites are, and the swarm goes to the site most scouts support.",
+      "topic": ["bee", "bees", "home", "swarm", "queen", "site", "nest", "hive", "tree"]
+    },
+    {
+      "id": "rd.storm.detail",
+      "passage": "rdg.p9",
+      "capability": "EN.RDG.LIT.locate_detail",
+      "question": "What did Anand do when water started coming through the ceiling?",
+      "key_points": [
+        { "id": "buckets", "text": "He put buckets under the leaks", "required": true, "groups": [["bucket*", "bowl*", "pot*", "container*"]] }
+      ],
+      "contradicts": [
+        { "id": "under_table", "text": "He hid under the table (that was two years earlier)", "groups": [["under the table", "hid", "goat"]] }
+      ],
+      "model_answer": "He fetched two buckets and put them under the leaks.",
+      "topic": ["anand", "water", "ceiling", "leak", "rain", "roof", "storm", "drip"]
+    },
+    {
+      "id": "rd.plastic.effect",
+      "passage": "rdg.p10",
+      "capability": "EN.RDG.INF.cause_effect",
+      "question": "How does plastic harm sea animals?",
+      "key_points": [
+        { "id": "eat", "text": "Animals eat it (mistaking bags for jellyfish, or birds feeding caps to chicks)", "required": true, "groups": [["eat*", "ate", "swallow*", "food", "jellyfish", "feed*", "stomach"]] },
+        { "id": "starve", "text": "It fills their stomach so they stop eating and become weak", "required": false, "groups": [["full", "stop eating", "stops eating", "weak", "starv*", "hungry", "die*", "dying", "sick", "ill"]] }
+      ],
+      "contradicts": [
+        { "id": "rot", "text": "Plastic rots in the sea", "groups": [["plastic rots", "rots away"]] }
+      ],
+      "model_answer": "Turtles and birds eat plastic by mistake. It fills their stomachs, so they stop eating and get weak.",
+      "topic": ["plastic", "sea", "ocean", "animal*", "turtle*", "bird*", "fish", "bag*", "bottle"]
+    }
+  ]
+}

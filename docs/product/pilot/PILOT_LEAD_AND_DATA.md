@@ -54,7 +54,11 @@ must agree to it.
 - photos, video or audio of children;
 - location;
 - device identifiers beyond a label such as "D1";
-- free text written by children.
+- free text written by children. The pilot build has no activity where a child writes in their own words: Read and
+  answer (which stores a child's written answers) and the spelling journey are refused in a pilot build, and nothing is
+  recorded if they are attempted (`frontend/src/english/logic/reading.test.ts`, pilot boundary tests). Enabling Read and
+  answer for children outside the pilot needs this sheet, the parent information sheet and the in-app consent wording
+  updated and approved first (see `docs/product/ENGLISH_LEARNING_JOURNEY_V1.md`, finding 4).
 
 ## Approvals that need human review (not represented here as given)
 

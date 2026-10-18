@@ -84,7 +84,8 @@ class DeveloperBase(AccountBase):
 
 
 def redact_parent_content(body: dict) -> dict:
-    """A parent's own material in another family's shared record, as a developer sees it: its shape, not its words.
+    """A parent's own material, or a child's own written words, in another family's shared record, as a developer sees
+    it: its shape, not its words.
 
     My Words lists and My Books text are the parent's own content, saved in the pupil's record so the
     parent can use them on any device. Sharing a pupil for diagnostics shares how the app behaved, not that content:
@@ -105,6 +106,23 @@ def redact_parent_content(body: dict) -> dict:
         return {**body, "approved": [_pseudonym(a) for a in body["approved"]], "redacted": "approved activities from a parent's book"}
     if kind == "book_answer":
         return {**body, "question": _pseudonym(body.get("question")), "response": "", "redacted": "an answer about a parent's book"}
+    if kind == "written_answer":
+        # a child's own words (Read and answer): never shown to a developer of another family. The judgement's shape
+        # (levels, which key points, how many writing flags) stays, so the evaluator can still be diagnosed; the text,
+        # and every quote or suggestion taken from it, goes
+        text = body.get("text")
+        ev = body.get("evaluation") if isinstance(body.get("evaluation"), dict) else {}
+        mech = ev.get("mechanics") if isinstance(ev.get("mechanics"), dict) else {}
+        counts = {k: len(v) if isinstance(v, list) else 0 for k, v in mech.items()}
+        shape = {
+            "evaluator": ev.get("evaluator"),
+            "comprehension": ev.get("comprehension"),
+            "coherence": ev.get("coherence"),
+            "mechanics_counts": counts,
+            "evidence": ev.get("evidence"),
+        }
+        n = len(text) if isinstance(text, str) else 0
+        return {**body, "text": "", "evaluation": shape, "redacted": f"a child's written answer of {n} characters"}
     source = body.get("source")
     if isinstance(source, dict) and source.get("type") in PARENT_SOURCES:
         # a parent's words are their own ids (the word in lower case): replace each with a stable pseudonym, so the

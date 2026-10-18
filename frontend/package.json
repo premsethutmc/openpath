@@ -23,6 +23,7 @@
     "english:e2e-pilot-bee": "node --test e2e/pilot-bee.test.mjs",
     "english:e2e-demo": "node --test e2e/demo.test.mjs",
     "english:e2e-bee": "node --test e2e/bee.test.mjs",
+    "english:e2e-learning": "node --test e2e/learning-journey.test.mjs",
     "english:e2e-mywords": "node --test e2e/mywords.test.mjs",
     "english:e2e-books": "node --test e2e/books.test.mjs",
     "english:e2e-parent-content": "node --test e2e/parent-content.test.mjs",

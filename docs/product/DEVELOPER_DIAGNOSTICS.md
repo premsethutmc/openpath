@@ -114,6 +114,11 @@ JSON), **Download (.txt)** or **Download JSON**. Paste it into the assistant.
   record id becomes `pupil-A`.
 - Email-like text is removed.
 - Flag notes are never included; only their count is.
+- A child's written answers (Read and answer, `written_answer` events) are never included in a report, redacted or not
+  (`reading.test.ts`). In another family's shared record, the developer view of the raw events blanks the answer text and
+  every quote or suggestion taken from it. It keeps only the judgement's shape: levels, key-point ids, and counts of
+  writing flags (`backend/family/developer.py`, `test_developer.py`). A developer's own pupils are shown in full, as for
+  My Words and My Books.
 - No password, token, session or CSRF value ever reaches the page.
 
 Reports contain answers and timestamps, because a diagnosis needs them. Reports are read-only: they are computed in

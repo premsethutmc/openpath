@@ -17,6 +17,8 @@ import type { PlanStep } from "../logic/plan.ts";
 import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { Home } from "./Home.tsx";
 import { Journey } from "./Journey.tsx";
+import { SpellingJourney } from "./SpellingJourney.tsx";
+import { ReadingActivity } from "./ReadingActivity.tsx";
 import { ImportBackup, Me } from "./Me.tsx";
 import { AddLearner, type AuthMode, Brand, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
 import { PathView } from "./PathView.tsx";
@@ -99,6 +101,8 @@ export function App() {
   const [inMyBooks, setInMyBooks] = useState(false);
   const [bookQuiz, setBookQuiz] = useState<Book | null>(null);
   const [inJourney, setInJourney] = useState(false);
+  const [inSpellingJourney, setInSpellingJourney] = useState(false);
+  const [inReading, setInReading] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
@@ -134,6 +138,8 @@ export function App() {
       setTab("home");
       setInSession(false);
       setInJourney(false);
+      setInSpellingJourney(false);
+      setInReading(false);
       setBee(null);
       setInMyWords(false);
       setInMyBooks(false);
@@ -417,6 +423,31 @@ export function App() {
       />
     );
 
+  if (inSpellingJourney || (inSession && learner.state.open?.event.type === "spelling_journey"))
+    return (
+      <SpellingJourney
+        learner={learner}
+        voice={learner.state.speech ? voice : null}
+        onChanged={changed}
+        onLeave={() => {
+          setInSpellingJourney(false);
+          setInSession(false);
+          changed();
+        }}
+      />
+    );
+  if (inReading)
+    return (
+      <ReadingActivity
+        learner={learner}
+        voice={learner.state.speech ? voice : null}
+        onChanged={changed}
+        onLeave={() => {
+          setInReading(false);
+          changed();
+        }}
+      />
+    );
   if (inJourney || (inSession && learner.state.open?.event.type === "doubling_journey"))
     return (
       <Journey
@@ -460,7 +491,9 @@ export function App() {
         <Home
           learner={learner}
           onStart={start}
-          onResume={() => (learner.state.open?.event.type === "doubling_journey" ? setInJourney(true) : setInSession(true))}
+          onResume={() => (learner.state.open?.event.type === "doubling_journey" ? setInJourney(true) : learner.state.open?.event.type === "spelling_journey" ? setInSpellingJourney(true) : setInSession(true))}
+          onSpellingJourney={() => setInSpellingJourney(true)}
+          onReading={() => setInReading(true)}
           onJourney={async () => {
             await learner.startJourney();
             setInJourney(true);
