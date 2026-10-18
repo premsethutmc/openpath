@@ -25,7 +25,7 @@ await esbuild.build({
   bundle: true,
   format: "esm",
   target: "es2022",
-  minify: false,
+  minify: true,
   outdir: `${root}/dist-english/maths`,
   entryNames: "app",
   define: { "process.env.NODE_ENV": '"production"' },
