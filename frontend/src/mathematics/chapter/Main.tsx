@@ -170,9 +170,9 @@ function App() {
           {UNITS.map((u, i) =>
             i === 1 ? (
               <button key={u} className="card accent" onClick={() => setScreen({ name: "chapter" })}>
-                <span className="tag">{state.completed.length ? `${percent(state)}% done` : "Start here"}</span>
+                <span className="tag">{state.completed.length ? `${percent(state)}% done` : "Start the class"}</span>
                 <span className="card-title">Unit 2 · Quadratic Equations</span>
-                <span className="card-sub">Nature of roots, sum and product of roots, forming equations, complex roots</span>
+                <span className="card-sub">8 lessons from the basics, a worked example, practice, a timed section and revision</span>
                 <span className="bar"><span style={{ width: `${percent(state)}%` }} /></span>
               </button>
             ) : (
@@ -250,6 +250,9 @@ function Chapter({ state, now, saving, error, send, onBack }: { state: State; no
   const stage = stageOf(stageId);
   const index = chapter.stages.findIndex((s) => s.id === stageId);
   const allDone = state.completed.length === chapter.stages.length;
+  // finer than whole steps: the answered questions of the step in progress count too (the class takes a while)
+  const open = stageOf(state.current).questions;
+  const fine = allDone ? 100 : Math.round((100 * (state.completed.length + (open.length ? open.filter((q) => state.answers[q]).length / (open.length + 1) : 0))) / chapter.stages.length);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [stageId]);
@@ -276,14 +279,14 @@ function Chapter({ state, now, saving, error, send, onBack }: { state: State; no
   );
   return (
     <>
-      <TopBar left={<button className="link" onClick={onBack}>← Chapters</button>} title="Quadratic Equations" right={<span className="muted small">{percent(state)}%</span>} progress={percent(state)} />
+      <TopBar left={<button className="link" onClick={onBack}>← Back</button>} title="Quadratic Equations" right={<span className="muted small">{fine}%</span>} progress={fine} />
       <main className="page">
         {error && <p className="error" role="alert">{error}</p>}
         {steps}
         <p className="eyebrow">Step {index + 1} of {chapter.stages.length}</p>
         <h1 key={stageId} className="enter">{stage.title}</h1>
         <div key={`${stageId}-body`} className="enter">
-          {stage.kind === "cards" && <Recap onDone={finish} done={state.completed.includes(stageId)} saving={saving} />}
+          {stage.kind === "lessons" && <Lessons state={state} send={send} onDone={finish} done={state.completed.includes(stageId)} saving={saving} />}
           {stage.kind === "steps" && <Worked onDone={finish} done={state.completed.includes(stageId)} saving={saving} />}
           {stage.kind === "questions" && stageId !== chapter.stages.at(-1)!.id && <Questions stageId={stageId} hints={!!stage.hints} state={state} send={send} onDone={finish} saving={saving} />}
           {stage.kind === "timed" && <Timed state={state} now={now} send={send} onDone={finish} onContinue={back} saving={saving} />}
@@ -301,23 +304,182 @@ function Chapter({ state, now, saving, error, send, onBack }: { state: State; no
   );
 }
 
-function Recap({ onDone, done, saving }: { onDone: () => void; done: boolean; saving: boolean }) {
-  const cards = chapter.stages[0].cards!;
-  const [n, setN] = useState(0);
-  const card = cards[n];
+type Lesson = { id: string; title: string; check: string; screens: { title: string; text?: string[]; math?: string[]; mathAt?: number; tip?: string; graph?: { a: number; b: number; c: number; interactive?: boolean; yMax?: number } }[] };
+
+function Lessons({ state, send, onDone, done, saving }: { state: State; send: Send; onDone: () => void; done: boolean; saving: boolean }) {
+  const stage = chapter.stages[0] as unknown as { lessons: Lesson[]; formulaSheet: { title: string; text: string }[] };
+  const lessons = stage.lessons;
+  const firstOpen = lessons.findIndex((l) => !state.answers[l.check]);
+  const [open, setOpen] = useState<number | null>(done ? null : firstOpen < 0 ? lessons.length : firstOpen);
+  const [screen, setScreen] = useState(0);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [open, screen]);
+  const go = (i: number) => {
+    setOpen(i);
+    setScreen(0);
+  };
+  const learned = lessons.filter((l) => state.answers[l.check]).length;
+
+  if (open === null)
+    return (
+      <div className="stack">
+        <p className="muted">{learned} of {lessons.length} lessons done. Tap a lesson to open it.</p>
+        <div className="cards">
+          {lessons.map((l, i) => {
+            const ok = !!state.answers[l.check];
+            const reachable = ok || i === (firstOpen < 0 ? lessons.length : firstOpen);
+            return (
+              <button key={l.id} className={`card ${reachable && !ok ? "accent" : ""} ${reachable ? "" : "disabled"}`} disabled={!reachable} onClick={() => go(i)}>
+                <span className={`tag ${ok ? "" : reachable ? "" : "soon"}`}>{ok ? "✓ Done" : reachable ? "Up next" : "Locked"}</span>
+                <span className="card-title">Lesson {i + 1} · {l.title}</span>
+                <span className="card-sub">{l.screens.length} short screens and a quick check</span>
+              </button>
+            );
+          })}
+          <button className="card" disabled={learned < lessons.length} onClick={() => go(lessons.length)}>
+            <span className={`tag ${learned < lessons.length ? "soon" : ""}`}>{learned < lessons.length ? "After the lessons" : "Revise"}</span>
+            <span className="card-title">Formula sheet</span>
+          </button>
+        </div>
+        {done && <button className="primary" onClick={onDone}>Continue</button>}
+      </div>
+    );
+
+  if (open >= lessons.length)
+    return (
+      <div className="stack">
+        <p className="eyebrow">Formula sheet · keep this in mind</p>
+        {stage.formulaSheet.map((c) => (
+          <div key={c.title} className="panel enter">
+            <h2>{c.title}</h2>
+            <p className="lead">{c.text}</p>
+          </div>
+        ))}
+        <div className="actions sticky">
+          <button className="secondary" onClick={() => setOpen(null)}>All lessons</button>
+          <button className="primary" disabled={saving || learned < lessons.length} onClick={onDone}>{done ? "Continue" : "Finish the class"}</button>
+        </div>
+      </div>
+    );
+
+  const lesson = lessons[open];
+  const atCheck = screen >= lesson.screens.length;
+  const sc = lesson.screens[Math.min(screen, lesson.screens.length - 1)];
   return (
     <div className="stack">
-      <div key={n} className="panel enter">
-        <p className="eyebrow">{n + 1} / {cards.length}</p>
-        <h2>{card.title}</h2>
-        <p className="lead">{card.text}</p>
+      <div className="lesson-head">
+        <button className="link small" onClick={() => setOpen(null)}>All lessons</button>
+        <p className="eyebrow">Lesson {open + 1} of {lessons.length}</p>
+        <h2>{lesson.title}</h2>
+        <div className="dots" aria-hidden="true">
+          {lesson.screens.map((_, i) => <span key={i} className={i === screen ? "on" : ""} />)}
+          <span className={atCheck ? "on" : ""} />
+        </div>
       </div>
-      <div className="dots" aria-hidden="true">{cards.map((_, i) => <span key={i} className={i === n ? "on" : ""} />)}</div>
-      <div className="actions">
-        {n > 0 && <button className="secondary" onClick={() => setN(n - 1)}>Back</button>}
-        {n < cards.length - 1 ? <button className="primary" onClick={() => setN(n + 1)}>Next</button> : <button className="primary" disabled={saving} onClick={onDone}>{done ? "Continue" : "I’ve got it, continue"}</button>}
+      {!atCheck ? (
+        <>
+          <div key={`${lesson.id}-${screen}`} className="panel enter lesson">
+            <h3>{sc.title}</h3>
+            {(sc.text ?? []).slice(0, sc.mathAt ?? sc.text?.length).map((t, i) => <p key={i}>{t}</p>)}
+            {sc.math && <Formula lines={sc.math} />}
+            {(sc.text ?? []).slice(sc.mathAt ?? sc.text?.length).map((t, i) => <p key={`b${i}`}>{t}</p>)}
+            {sc.graph && <Parabola {...sc.graph} />}
+            {sc.tip && <p className="hint">💡 {sc.tip}</p>}
+          </div>
+          <div className="actions sticky">
+            {screen > 0 && <button className="secondary" onClick={() => setScreen(screen - 1)}>Back</button>}
+            <button className="primary" onClick={() => setScreen(screen + 1)}>{screen === lesson.screens.length - 1 ? "Try it yourself" : "Next"}</button>
+          </div>
+        </>
+      ) : (
+        <LessonCheck key={lesson.id} qid={lesson.check} state={state} send={send} saving={saving} onBack={() => setScreen(lesson.screens.length - 1)} onNext={() => go(open + 1)} last={open === lessons.length - 1} />
+      )}
+    </div>
+  );
+}
+
+function Formula({ lines }: { lines: string[] }) {
+  return <div className="formula">{lines.map((l, i) => <div key={i}>{l}</div>)}</div>;
+}
+
+function useFeedbackInView(answered: unknown) {
+  useEffect(() => {
+    if (answered) document.querySelector(".feedback")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [!!answered]);
+}
+
+function LessonCheck({ qid, state, send, saving, onBack, onNext, last }: { qid: string; state: State; send: Send; saving: boolean; onBack: () => void; onNext: () => void; last: boolean }) {
+  const q = question(qid);
+  const answered = state.answers[qid];
+  useFeedbackInView(answered);
+  const [value, setValue] = useState("");
+  const [hint, setHint] = useState(false);
+  return (
+    <div className="stack">
+      <p className="eyebrow">Try it yourself · quick check</p>
+      <div className="panel enter"><p className="lead">{q.prompt}</p></div>
+      <Answer q={q} value={answered ? answered.response : value} setValue={setValue} disabled={!!answered || saving} />
+      {!answered && (hint ? <p className="hint enter">💡 {q.hint}</p> : <button className="link" onClick={() => (setHint(true), send("hint", "class", { questionId: qid }))}>Show a hint</button>)}
+      {answered && (
+        <div className={`feedback enter ${answered.correct ? "good" : "bad"}`} role="status">
+          <strong>{answered.correct ? "Correct!" : `Not quite: the answer is ${q.type === "choice" ? `${q.answer}, ${q.options![LETTERS.indexOf(q.answer as "A")]}` : q.answer}.`}</strong>
+          <p>{q.solution}</p>
+        </div>
+      )}
+      <div className="actions sticky">
+        <button className="secondary" onClick={onBack}>Back</button>
+        {!answered ? (
+          <button className="primary" disabled={!value || saving} onClick={() => send("answer", "class", { questionId: qid, response: value })}>{saving ? "Saving…" : "Check answer"}</button>
+        ) : (
+          <button className="primary" onClick={onNext}>{last ? "Formula sheet" : "Next lesson"}</button>
+        )}
       </div>
     </div>
+  );
+}
+
+/** y = ax² + bx + c on −6 ≤ x ≤ 6: where it meets the x-axis, and the sign of D. Sliders when interactive. */
+function Parabola(props: { a: number; b: number; c: number; interactive?: boolean; yMax?: number }) {
+  const [a, setA] = useState(props.a);
+  const [b, setB] = useState(props.b);
+  const [c, setC] = useState(props.c);
+  const W = 320, H = 220, X = 6, Y = props.yMax ?? 10;
+  const sx = (x: number) => ((x + X) / (2 * X)) * W;
+  const sy = (y: number) => H / 2 - (y / Y) * (H / 2);
+  const pts: string[] = [];
+  for (let i = 0; i <= 240; i++) {
+    const x = -X + (2 * X * i) / 240;
+    const y = a * x * x + b * x + c;
+    pts.push(`${sx(x).toFixed(1)},${sy(Math.max(-3 * Y, Math.min(3 * Y, y))).toFixed(1)}`);
+  }
+  const D = b * b - 4 * a * c;
+  const roots = D > 0 ? [(-b - Math.sqrt(D)) / (2 * a), (-b + Math.sqrt(D)) / (2 * a)] : D === 0 ? [-b / (2 * a)] : [];
+  const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2)).replace("-", "−");
+  const sign = (n: number, first = false) => (n < 0 ? ` − ${fmt(-n)}` : first ? fmt(n) : ` + ${fmt(n)}`);
+  const eq = `y = ${a === 1 ? "" : a === -1 ? "−" : fmt(a)}x²${b ? sign(b) + "x" : ""}${c ? sign(c) : ""}`;
+  const nature = D > 0 ? "D > 0: two different real roots" : D === 0 ? "D = 0: two equal roots (the curve just touches the axis)" : "D < 0: no real roots (the curve never meets the axis)";
+  const slider = (label: string, v: number, set: (n: number) => void, min: number, max: number) => (
+    <label className="slider">
+      <span>{label} = {fmt(v)}</span>
+      <input type="range" min={min} max={max} step={1} value={v} onChange={(e) => { const n = Number(e.target.value); set(label === "a" && n === 0 ? (v > 0 ? -1 : 1) : n); }} />
+    </label>
+  );
+  return (
+    <figure className="graph">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Graph of ${eq}. ${nature}.`}>
+        <line x1={0} y1={sy(0)} x2={W} y2={sy(0)} className="axis" />
+        <line x1={sx(0)} y1={0} x2={sx(0)} y2={H} className="axis" />
+        {[-4, -2, 2, 4].map((t) => <text key={t} x={sx(t)} y={sy(0) + 14} className="tick">{String(t).replace("-", "−")}</text>)}
+        <polyline points={pts.join(" ")} className="curve" />
+        {roots.filter((r) => Math.abs(r) <= X).map((r, i) => <circle key={i} cx={sx(r)} cy={sy(0)} r={5} className="root" />)}
+      </svg>
+      <figcaption>
+        <strong>{eq}</strong>
+        <span>D = {fmt(D)}. {nature}{roots.length ? `: x = ${roots.map(fmt).join(" and ")}` : ""}.</span>
+      </figcaption>
+      {props.interactive && <div className="sliders">{slider("a", a, setA, -3, 3)}{slider("b", b, setB, -8, 8)}{slider("c", c, setC, -9, 9)}</div>}
+    </figure>
   );
 }
 
@@ -365,6 +527,7 @@ function Questions({ stageId, hints, state, send, onDone, saving }: { stageId: s
   const [hint, setHint] = useState(false);
   const q = question(ids[i]);
   const answered = state.answers[q.id];
+  useFeedbackInView(answered);
   useEffect(() => {
     setValue("");
     setHint(false);
