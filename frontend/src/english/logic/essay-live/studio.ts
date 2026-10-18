@@ -36,8 +36,14 @@ import {
   type RewriteEvaluation,
   type RewriteRequest,
   type CompetencyProfile,
+  type CompetencyOutcome,
+  type PlannedCheck,
   ESSAY_POLICY_DRAFT,
+  EssayRefusal,
   analyseEssay,
+  dueCheck,
+  planCheck,
+  plannedChecks,
   createJourney,
   diagnosticOutcome,
   essayProfile,
@@ -124,8 +130,15 @@ export async function connectEvaluator(api: {
 
 export function essayContext(content: AppContent): EssayContext {
   const lessons = new Map<CapabilityId, string[]>();
-  for (const l of content.lessons.values()) lessons.set(l.capability, [...(lessons.get(l.capability) ?? []), l.id]);
-  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, policy: ESSAY_POLICY_DRAFT };
+  const teachingText = new Map<CapabilityId, string[]>();
+  for (const l of content.lessons.values()) {
+    lessons.set(l.capability, [...(lessons.get(l.capability) ?? []), l.id]);
+    const shown = [l.rule, ...l.examples.map((e) => e.text), l.tip ?? "", l.check.prompt, ...l.check.options, l.check.explain].filter(Boolean);
+    teachingText.set(l.capability, [...(teachingText.get(l.capability) ?? []), ...shown]);
+  }
+  // the pilot's pools are existing item-role metadata: a question reserved for one use is never taken for another
+  const pools = new Map([...content.pilot.pools].map(([id, p]) => [id, p.pool]));
+  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT };
 }
 
 export type Stage = "write" | "diagnose" | "plan" | "learn" | "rewrite" | "done";
@@ -155,6 +168,15 @@ export interface StudioView {
   next: NextStep | null;
   rewrite: RewriteEvaluation | null;
   profile: EssayLearnerProfile;
+  /**
+   * Each journey competency's separate claims (journey completed, shown without help, verified, retention), kept
+   * apart so finishing the journey is never presented as mastery.
+   */
+  outcomes: CompetencyOutcome[];
+  /** Later checks planned on reserved questions (verification in a new sitting, retention after the delay). */
+  checks: PlannedCheck[];
+  /** A later check whose time has come, with its next question. Never offered before its notBefore time. */
+  laterCheck: { check: PlannedCheck; item: Item; position: number; total: number } | null;
 }
 
 export class EssayStudio {
@@ -214,6 +236,10 @@ export class EssayStudio {
     const rewriteRec = essay ? essayRecords(events, "rewrite").filter((r) => r.record.rewrite.essay === essay.id).at(-1) : undefined;
     const rewrite = rewriteRec?.record.evaluation ?? null;
     const next = journey ? this.nextStep(journey) : null;
+    const outcomes = journey ? journey.trees.flatMap((t) => t.nodes.filter((n) => n.role === "target" && n.outcome).map((n) => n.outcome!)) : [];
+    const due = dueCheck(this.ectx, events, now);
+    const laterItem = due ? this.item(due.item) : undefined;
+    const laterCheck = due && laterItem ? { check: due.check, item: laterItem, position: due.position, total: due.total } : null;
     const stage: Stage = !essay ? "write" : nextDiagnostic ? "diagnose" : !journey ? "plan" : rewrite ? "done" : journey.finalRewrite.available ? "rewrite" : "learn";
     return {
       stage,
@@ -229,6 +255,9 @@ export class EssayStudio {
       next,
       rewrite,
       profile: essayProfile(this.ectx, this.learner.profileId, events, now),
+      outcomes,
+      checks: plannedChecks(events),
+      laterCheck,
     };
   }
 
@@ -336,6 +365,39 @@ export class EssayStudio {
     const check = next.step.kind === "independent_check";
     await this.learner.present(next.item, check ? "assessment" : "practice");
     const feedback = await this.learner.answer(next.item, response, check ? { use: "assessment" } : { assisted: true, use: "practice" });
+    return { feedback, view: this.view() };
+  }
+
+  /**
+   * Plan the later checks the outcomes call for, reserving their questions: a verification check (a new sitting,
+   * from the next day) where the journey's check did not show the target, a retention check once it is due.
+   * Idempotent; returns the view. A competency with too few questions stays pending, with the reason.
+   */
+  async planLaterChecks(): Promise<StudioView> {
+    const v = this.view();
+    if (!v.journey) return v;
+    for (const o of v.outcomes) {
+      if (!o.next || o.next.planned) continue;
+      // a retention check is planned only when the target has been shown; its notBefore keeps it delayed
+      const [m] = await this.learner.essayMeta(1);
+      try {
+        const p = planCheck(this.ectx, this.events, m, o.competency, this.view().journey);
+        await this.learner.recordEssay(p.event);
+      } catch (e) {
+        if (!(e instanceof EssayRefusal)) throw e;
+      }
+    }
+    return this.view();
+  }
+
+  /** Answer the next question of a later check that is due: always a new sitting, an independent first answer. */
+  async answerLaterCheck(response: Response): Promise<{ feedback: Feedback; view: StudioView }> {
+    const next = this.view().laterCheck;
+    if (!next) throw new Error("no later check is due");
+    if (next.position === 1) await this.learner.newEssaySession();
+    else await this.ensureSession();
+    await this.learner.present(next.item, next.check.kind === "retention" ? "retention" : "assessment");
+    const feedback = await this.learner.answer(next.item, response, { use: next.check.kind === "retention" ? "retention" : "assessment" });
     return { feedback, view: this.view() };
   }
 

@@ -27,3 +27,5 @@ export * from "./essay/journey.ts";
 export * from "./essay/rewrite.ts";
 export * from "./essay/learner-profile.ts";
 export * from "./essay/evaluators.ts";
+export * from "./essay/allocation.ts";
+export * from "./essay/checks.ts";

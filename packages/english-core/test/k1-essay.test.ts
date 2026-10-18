@@ -19,6 +19,7 @@ import {
   journeyStatus,
   Ledger,
   leafView,
+  type EssayEvent,
   type LedgerEvent,
   patternEssayEvaluator,
   planDiagnostics,
@@ -190,10 +191,17 @@ test("K1-7 two wrong answers without help confirm the gap; the matching misconce
   const h = currentHypotheses(ectx(), events).get(SVA)!;
   assert.equal(h.status, "confirmed");
   assert.equal(h.diagnostic!.independent.total, 3);
-  // these questions tag "attraction_error" (not the essay's "third_person_s"), so none matches here ...
-  assert.equal(h.diagnostic!.misconceptionMatches, 0);
-  // ... and a hypothesis carrying that tag counts both wrong answers as the same kind of mistake
-  assert.equal(diagnosticOutcome(ectx(), events, sva, ["attraction_error"]).misconceptionMatches, 2);
+  assert.equal(h.diagnostic!.misconceptionMatches, 0, "the planned questions carry no tag the essay showed");
+  // two questions that tag "attraction_error" (both kept back for independent checks in the plan above, so they are
+  // asked here through a hand-made request): a hypothesis carrying that tag counts both wrong answers
+  const tagged: LedgerEvent[] = [];
+  await essay(tagged, "essay:library", ESSAY_LIBRARY, 0);
+  const request = { ...sva, items: ["grm.sva.07", "grm.sva.15"].map((id) => ({ id, version: codeItem(id).version, contentStatus: "candidate" as const })) };
+  answerAll(tagged, request.items, [false, false], 10, { tag: "attraction_error" });
+  const out = diagnosticOutcome(ectx(), tagged, request, ["attraction_error"]);
+  assert.equal(out.status, "confirmed");
+  assert.equal(out.misconceptionMatches, 2);
+  assert.equal(diagnosticOutcome(ectx(), tagged, request, ["third_person_s"]).misconceptionMatches, 0);
 });
 
 test("K1-8 contradictory diagnosis: all right weakens the essay's suggestion; mixed leaves it unresolved; neither claims mastery", async () => {
@@ -201,6 +209,20 @@ test("K1-8 contradictory diagnosis: all right weakens the essay's suggestion; mi
   await essay(right, "essay:library", ESSAY_LIBRARY, 0);
   const r1 = diagnose(right, 5).find((r) => r.competency === SVA)!;
   answerAll(right, r1.items, [true, true, true], 10);
+  // policy @1: the planned questions are below the band 5 target (questions at the target are kept back for checks),
+  // so all right leaves the suggestion unresolved ...
+  const below = currentHypotheses(ectx(), right).get(SVA)!;
+  assert.equal(below.status, "unresolved");
+  assert.match(below.diagnostic!.reason, /below the band 5 target/);
+  assert.ok(r1.items.every((i) => codeItem(i.id).b < 5));
+  // ... while all right including a question near the target weakens it (a request that includes one)
+  right.length = 0;
+  await essay(right, "essay:library", ESSAY_LIBRARY, 0);
+  const planned = diagnose(right, 5).find((r) => r.competency === SVA)!;
+  const nearTarget = { ...planned, items: [planned.items[0], planned.items[1], { id: "grm.sva.07", version: codeItem("grm.sva.07").version, contentStatus: "candidate" as const }] };
+  const k = right.findIndex((e) => e.id === planned.id);
+  right[k] = { ...(right[k] as EssayEvent), record: { type: "diagnostic", request: nearTarget } } as EssayEvent;
+  answerAll(right, nearTarget.items, [true, true, true], 10);
   assert.equal(currentHypotheses(ectx(), right).get(SVA)!.status, "weakened");
   const j = createJourney(ectx(), right, meta(30), "essay:library").journey;
   assert.ok(!j.trees.some((t) => t.root === SVA));
@@ -364,7 +386,8 @@ test("K1-14 the next essay reuses the same profile: earlier essays support a new
   await essay(events, "essay:library", ESSAY_LIBRARY, 0);
   const sva = diagnose(events, 5).find((r) => r.competency === SVA)!;
   answerAll(events, sva.items, [true, true, true], 10);
-  assert.equal(currentHypotheses(ectx(), events).get(SVA)!.status, "weakened");
+  // policy @1: right answers on questions below the band 5 target cannot rule the gap out
+  assert.equal(currentHypotheses(ectx(), events).get(SVA)!.status, "unresolved");
   // a week later, one more agreement error: alone it would be a slip, but with the earlier essay it is suspected again
   await essay(events, "essay:library-2", ESSAY_LIBRARY_2, 0, "s2", 7);
   const h = currentHypotheses(ectx(), events).get(SVA)!;

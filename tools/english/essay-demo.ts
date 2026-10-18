@@ -61,7 +61,7 @@ let minute = 10;
 for (const r of d.requests)
   for (const it of r.items) {
     const item = ectx.ctx.content.items.get(it.id) as CodeItem;
-    events.push({ kind: "evidence", id: `demo:ev${++n}`, at: at(minute++), session: "demo-s1", item: { id: it.id, version: it.version }, response: respond(item, r.competency !== "EN.GRM.VERB.sva"), use: "assessment", provenance: { schema: "provenance@1", attempt: 1, hints: [], afterFeedback: false, policies: ["passage@1"] } });
+    events.push({ kind: "evidence", id: `demo:ev${++n}`, at: at(minute++), session: "demo-s1", item: { id: it.id, version: it.version }, response: respond(item, r.competency !== "EN.GRM.VERB.sva"), use: "assessment", provenance: { schema: "provenance@1", attempt: 1, hints: [], afterFeedback: false, policies: ["passage@1", "assisted@1"] } });
   }
 show("hypotheses after diagnosis", [...currentHypotheses(ectx, events).values()].map((h) => ({ competency: h.competency, status: h.status, reason: h.diagnostic?.reason })));
 

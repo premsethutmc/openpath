@@ -89,3 +89,16 @@ target.
    evidence the engine already asks for (separate sessions), and it is the honest way to move from 4 to 5.
 4. **Write band-5 descriptors, or decide (D-5) that targets sit on described bands.** This should be done with an
    educator. Until then targets stay provisional.
+
+## Update: assessment evidence and retention v1
+
+The first two recommendations above are now implemented in [ASSESSMENT_RETENTION.md](ASSESSMENT_RETENTION.md):
+
+- questions at or above the target are kept for independent checks and the delayed retention check, and are never
+  spent on practice;
+- a later verification check and a delayed retention check are planned on reserved questions.
+
+The table above was measured with the earlier journey and the core bank; the six simulations there supersede its
+"journey path" column. The finding stands, and is now sharper: band 5 is reachable with legitimate evidence, but for a
+learner who first fails the diagnostic, the bank runs out of reviewed questions between b 5 and 6.5 before the
+estimator's lower bound reaches 5. Band 5 is still not lowered, and every target is still provisional.
