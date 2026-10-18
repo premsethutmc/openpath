@@ -39,7 +39,7 @@
      "competency": "EN.GRM.VERB.sva",
      "kind": "error",
      "quote": "the traffic near the market are",
-     "note": "The subject is traffic (singular); the verb agrees with market's neighbour.",
+     "note": "The subject is traffic (singular); the verb wrongly agrees with the nearer noun, market.",
      "misconception": "attraction_error"
     },
     {
