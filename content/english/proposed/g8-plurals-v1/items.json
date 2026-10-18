@@ -1,0 +1,721 @@
+[
+ {
+  "kind": "code",
+  "id": "sup.plu.reg.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.2,
+  "prompt": "Write the plural of potato: We bought a kilo of ___ at the market.",
+  "step": "regular",
+  "rationale": "Regular plural with -es after a consonant + o; a common spelling trap.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "potatoes"
+  ],
+  "family": "sup.plu.reg.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.reg.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.2,
+  "prompt": "Write the plural of shelf: The library has new wooden ___ for the dictionaries.",
+  "step": "regular",
+  "rationale": "f changes to -ves; regularising to 'shelfs' is the usual mistake.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "shelves"
+  ],
+  "wrong": {
+   "shelfs": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.reg.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.reg.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the correct sentence.",
+  "step": "regular",
+  "rationale": "-es after ch, recognised in a full sentence; distractors regularise or omit the plural.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The two churchs are near the river.",
+   "The two churches are near the river.",
+   "The two church are near the river."
+  ],
+  "answer": 1,
+  "family": "sup.plu.reg.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.reg.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 5.75,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: The farmer kept the eggs in three wooden boxs near the door.",
+  "step": "regular",
+  "rationale": "Finding and correcting a misspelt plural inside a sentence, without being told which word.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "boxes"
+  ],
+  "family": "sup.plu.reg.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.reg.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.5,
+  "a": 1.2,
+  "prompt": "Write the plural of hero: The firefighters were the ___ of the flood.",
+  "step": "regular",
+  "rationale": "-es after o in a less frequent word.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "heroes"
+  ],
+  "family": "sup.plu.reg.05"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.irr.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 4.5,
+  "a": 1.2,
+  "prompt": "Write the plural of foot: After the long walk, both my ___ were sore.",
+  "step": "y_and_irregular",
+  "rationale": "A common irregular plural (band-4 descriptor), near the target for a diagnosis.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "feet"
+  ],
+  "wrong": {
+   "foots": "regularised_plural",
+   "feets": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.irr.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.irr.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the correct word: The ___ of the village keep their goats near the well.",
+  "step": "y_and_irregular",
+  "rationale": "Irregular plural woman → women against regularised forms.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "womans",
+   "women",
+   "womens",
+   "woman"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "regularised_plural",
+   "2": "regularised_plural"
+  },
+  "family": "sup.plu.irr.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.irr.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.5,
+  "a": 1.2,
+  "prompt": "Write the plural of goose: Three ___ walked slowly across the road.",
+  "step": "y_and_irregular",
+  "rationale": "A less common irregular plural, typed.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "geese"
+  ],
+  "wrong": {
+   "gooses": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.irr.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.irr.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: The two mans who fixed our roof were brothers.",
+  "step": "y_and_irregular",
+  "rationale": "Correcting a regularised irregular plural in context.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "men"
+  ],
+  "wrong": {
+   "mans": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.irr.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.irr.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.2,
+  "prompt": "Write the plural of wife: The farmers and their ___ sang at the harvest festival.",
+  "step": "y_and_irregular",
+  "rationale": "-fe → -ves, typed.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "wives"
+  ],
+  "wrong": {
+   "wifes": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.irr.05"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.alr.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 4.75,
+  "a": 1.1,
+  "prompt": "Choose the correct sentence.",
+  "step": "y_and_irregular",
+  "rationale": "'children' is already plural; adding -s is the error the essay showed.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The childrens are playing outside.",
+   "The children are playing outside.",
+   "The childs are playing outside."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "regularised_plural",
+   "2": "regularised_plural"
+  },
+  "family": "sup.plu.alr.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.alr.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 5.5,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: Many peoples in our street grow vegetables on their roofs.",
+  "step": "y_and_irregular",
+  "rationale": "'people' is already plural; correcting it in context.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "people"
+  ],
+  "wrong": {
+   "peoples": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.alr.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.alr.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Choose the correct word: The farmer sold all his ___ before the rains.",
+  "step": "y_and_irregular",
+  "rationale": "'cattle' has no -s plural; a less common already-plural noun.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "cattles",
+   "cattle",
+   "cattle's"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "regularised_plural"
+  },
+  "family": "sup.plu.alr.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.alr.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 6.25,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: The childrens of our colony planted twenty trees last Sunday.",
+  "step": "y_and_irregular",
+  "rationale": "Correcting a doubled plural in a longer sentence, unprompted.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "children"
+  ],
+  "wrong": {
+   "childrens": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.alr.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.alr.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.2,
+  "prompt": "Type the plural of person: About fifty ___ waited outside the station.",
+  "step": "y_and_irregular",
+  "rationale": "person → people (persons is also accepted in formal use).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "people",
+   "persons"
+  ],
+  "wrong": {
+   "persones": "regularised_plural"
+  },
+  "addresses": [
+   "regularised_plural"
+  ],
+  "family": "sup.plu.alr.05"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.num.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 4.5,
+  "a": 1.1,
+  "prompt": "Choose the correct words: My uncle bought ___ for the new house.",
+  "step": "regular",
+  "rationale": "A number before a countable noun needs the plural.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "two chair",
+   "two chairs",
+   "two chaires"
+  ],
+  "answer": 1,
+  "family": "sup.plu.num.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.num.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.2,
+  "prompt": "Write the missing word (use bucket): The gardener carried four ___ of water to the plants.",
+  "step": "regular",
+  "rationale": "Number + plural inside a measure phrase ('four buckets of').",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "buckets"
+  ],
+  "family": "sup.plu.num.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.num.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "multi:error_spot",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Two of these sentences have a mistake with a plural. Choose both.",
+  "step": "regular",
+  "rationale": "Finds number + singular errors among correct sentences; both must be found and nothing else chosen.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "We waited for three hour at the bus stand.",
+   "She has two brothers and one sister.",
+   "There were five match in the tournament.",
+   "I read two books last week.",
+   "The bus has forty seats."
+  ],
+  "answer_set": [
+   0,
+   2
+  ],
+  "family": "sup.plu.num.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.num.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 5.5,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: Our school has twenty classroom and one big hall.",
+  "step": "regular",
+  "rationale": "Correcting number + singular in context.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "classrooms"
+  ],
+  "family": "sup.plu.num.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.num.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.2,
+  "prompt": "Write the missing word (use kilometre): The station is about six ___ from my house.",
+  "step": "regular",
+  "rationale": "Number + plural of a unit; both spellings accepted.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "kilometres",
+   "kilometers"
+  ],
+  "family": "sup.plu.num.05"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.qua.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 4.75,
+  "a": 1.2,
+  "prompt": "Write many or much: There wasn't ___ rain this year, so the well is low.",
+  "step": "many_much",
+  "rationale": "much with an uncountable noun in a negative sentence.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "much"
+  ],
+  "wrong": {
+   "many": "much_many_confusion"
+  },
+  "addresses": [
+   "much_many_confusion"
+  ],
+  "family": "sup.plu.qua.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.qua.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Choose the correct word: How ___ chapters do we have to read for Monday?",
+  "step": "many_much",
+  "rationale": "many with a plural countable noun in a question.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "much",
+   "many",
+   "little"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "much_many_confusion"
+  },
+  "family": "sup.plu.qua.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.qua.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Choose the correct words: There are only ___ left in the box, so we must share them.",
+  "step": "many_much",
+  "rationale": "a few + plural noun against a little / singular.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "a little biscuit",
+   "a few biscuits",
+   "a few biscuit",
+   "little biscuits"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "much_many_confusion"
+  },
+  "family": "sup.plu.qua.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.qua.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "Replace the wrong word with many or much: We did not have many time to finish the project.",
+  "step": "many_much",
+  "rationale": "Correcting a quantifier with an uncountable noun in context; the instruction limits the answer to many or much.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "much"
+  ],
+  "wrong": {
+   "many": "much_many_confusion"
+  },
+  "addresses": [
+   "much_many_confusion"
+  ],
+  "family": "sup.plu.qua.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.qua.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:cloze",
+  "b": 5.5,
+  "a": 1.2,
+  "prompt": "Write many or much: How ___ eggs do we need for the cake?",
+  "step": "many_much",
+  "rationale": "many with a plural countable noun.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "many"
+  ],
+  "wrong": {
+   "much": "much_many_confusion"
+  },
+  "addresses": [
+   "much_many_confusion"
+  ],
+  "family": "sup.plu.qua.05"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.cnt.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the correct sentence.",
+  "step": "uncountable",
+  "rationale": "advice is uncountable: no -s and no 'an'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "My grandfather gave me some useful advices before the exam.",
+   "My grandfather gave me some useful advice before the exam.",
+   "My grandfather gave me an useful advice before the exam."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "plural_uncountable"
+  },
+  "family": "sup.plu.cnt.01"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.cnt.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 5.75,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: We need more informations before we choose a place for the school trip.",
+  "step": "uncountable",
+  "rationale": "information is uncountable; correcting the added -s in context.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "information"
+  ],
+  "wrong": {
+   "informations": "plural_uncountable"
+  },
+  "addresses": [
+   "plural_uncountable"
+  ],
+  "family": "sup.plu.cnt.02"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.cnt.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "multi:error_spot",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Two of these sentences have a mistake with a countable or uncountable noun. Choose both.",
+  "step": "uncountable",
+  "rationale": "Finds -s added to uncountable nouns among correct sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The furnitures in the hall are old.",
+   "We bought some bread and two cakes.",
+   "My luggages were heavy.",
+   "There is a lot of traffic today.",
+   "She has three cousins in Pune."
+  ],
+  "answer_set": [
+   0,
+   2
+  ],
+  "family": "sup.plu.cnt.03"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.cnt.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "typed:correction",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "One word in this sentence is wrong. Type the correct word: My mother bought new furnitures for the guest room.",
+  "step": "uncountable",
+  "rationale": "Correcting a plural uncountable noun in context.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "furniture"
+  ],
+  "wrong": {
+   "furnitures": "plural_uncountable"
+  },
+  "addresses": [
+   "plural_uncountable"
+  ],
+  "family": "sup.plu.cnt.04"
+ },
+ {
+  "kind": "code",
+  "id": "sup.plu.cnt.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.plurals_countability",
+  "format": "choice:grammar",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Choose the correct sentence.",
+  "step": "uncountable",
+  "rationale": "rice is uncountable: singular verb, no -s.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The rice in this sack is from Thanjavur.",
+   "The rices in this sack are from Thanjavur.",
+   "A rice in this sack is from Thanjavur."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "1": "plural_uncountable"
+  },
+  "family": "sup.plu.cnt.05"
+ }
+]

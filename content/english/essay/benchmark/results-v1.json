@@ -1,0 +1,422 @@
+[
+ {
+  "evaluator": {
+   "id": "benchmark-reference",
+   "version": "v1",
+   "model": "synthetic-annotations",
+   "protocol": "essay-observe.v2"
+  },
+  "benchmark": "openpath.essay-benchmark@1",
+  "essays": 15,
+  "errors": {
+   "precision": 1,
+   "recall": 1,
+   "matched": 41,
+   "unmatched": 0,
+   "required": 36,
+   "requiredMatched": 36,
+   "optionalMatched": 5
+  },
+  "style": {
+   "precision": 1,
+   "recall": 1,
+   "required": 4
+  },
+  "strengths": {
+   "proposed": 2,
+   "matchedReference": 2
+  },
+  "unsupported": {
+   "rejected": 0,
+   "proposed": 48,
+   "rate": 0,
+   "essaysNotAccepted": 0
+  },
+  "validText": {
+   "errorsOnValidText": 0,
+   "errorsOnCleanEssays": 0
+  },
+  "slips": {
+   "reference": 1,
+   "markedPossibleSlip": 1
+  },
+  "competencyAgreement": {
+   "agreement": 1,
+   "kappa": 1,
+   "cells": 283
+  },
+  "rewrites": {
+   "judged": 0,
+   "note": "not measured: this evaluator does not judge rewrites"
+  },
+  "perEssay": [
+   {
+    "id": "b01-agreement",
+    "status": "accepted",
+    "accepted": 6,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b02-tense",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b03-articles-prepositions",
+    "status": "accepted",
+    "accepted": 5,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b04-sentence-boundaries",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b05-vocabulary",
+    "status": "accepted",
+    "accepted": 5,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b06-connectives",
+    "status": "accepted",
+    "accepted": 3,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b07-concision",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b08-clean-library",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b09-clean-alternatives",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b10-aspect-ambiguous",
+    "status": "accepted",
+    "accepted": 2,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b11-single-slip",
+    "status": "accepted",
+    "accepted": 1,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b12-dependent-prepositions",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b13-boundaries-commas",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b14-clean-argument",
+    "status": "accepted",
+    "accepted": 2,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b15-a-an",
+    "status": "accepted",
+    "accepted": 4,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   }
+  ]
+ },
+ {
+  "evaluator": {
+   "id": "openpath-patterns",
+   "version": "patterns@0",
+   "model": "rules",
+   "protocol": "essay-observe.v1"
+  },
+  "benchmark": "openpath.essay-benchmark@1",
+  "essays": 15,
+  "errors": {
+   "precision": 1,
+   "recall": 0.111,
+   "matched": 4,
+   "unmatched": 0,
+   "required": 36,
+   "requiredMatched": 4,
+   "optionalMatched": 0
+  },
+  "style": {
+   "precision": 1,
+   "recall": 0.75,
+   "required": 4
+  },
+  "strengths": {
+   "proposed": 4,
+   "matchedReference": 1
+  },
+  "unsupported": {
+   "rejected": 0,
+   "proposed": 11,
+   "rate": 0,
+   "essaysNotAccepted": 0
+  },
+  "validText": {
+   "errorsOnValidText": 0,
+   "errorsOnCleanEssays": 0
+  },
+  "slips": {
+   "reference": 1,
+   "markedPossibleSlip": 0
+  },
+  "competencyAgreement": {
+   "agreement": 0.968,
+   "kappa": 0.459,
+   "cells": 283
+  },
+  "rewrites": {
+   "judged": 0,
+   "note": "not measured: this evaluator does not judge rewrites"
+  },
+  "perEssay": [
+   {
+    "id": "b01-agreement",
+    "status": "accepted",
+    "accepted": 1,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.VERB.sva \"my sister walk\"",
+     "error EN.GRM.VERB.sva \"the traffic near the market are\"",
+     "error EN.GRM.VERB.sva \"My parents worries\"",
+     "error EN.GRM.VERB.sva \"The school bus come\"",
+     "error EN.GRM.VERB.sva \"the town need\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b02-tense",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.VERB.present_past_simple \"we walk\"",
+     "error EN.GRM.VERB.present_past_simple \"we decide\"",
+     "error EN.GRM.VERB.present_past_simple \"a parrot copies\"",
+     "error EN.GRM.VERB.present_past_simple \"we eat ice cream\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b03-articles-prepositions",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.PREP.time_place \"born on 2012\"",
+     "error EN.GRM.NOUN.articles \"my mother is teacher\"",
+     "error EN.GRM.PREP.time_place \"at the second floor\"",
+     "error EN.GRM.PREP.time_place \"on the night\"",
+     "error EN.GRM.NOUN.articles \"to the Chennai\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b04-sentence-boundaries",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.SEN.CMP.run_ons \"Our class planted trees last week it was hard work\"",
+     "error EN.SEN.CMP.run_ons \"Some students dug the holes, others carried water\"",
+     "error EN.SEN.CMP.fragments \"Because the soil was dry.\"",
+     "error EN.SEN.CMP.run_ons \"The teacher was pleased, she said\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b05-vocabulary",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.VOC.REL.collocations \"did a big mistake\"",
+     "error EN.VOC.REL.collocations \"make my homework\"",
+     "error EN.VOC.REL.collocations \"take more attention\"",
+     "error EN.VOC.REL.collocations \"do an effort\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b06-connectives",
+    "status": "accepted",
+    "accepted": 2,
+    "rejected": 0,
+    "missed": [
+     "error EN.SEN.COH.connectives \"However, they help\"",
+     "error EN.SEN.COH.connectives \"Therefore, phones can be useful\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b07-concision",
+    "status": "accepted",
+    "accepted": 3,
+    "rejected": 0,
+    "missed": [
+     "style EN.SEN.PRE.concision \"In my opinion, I think\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b08-clean-library",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b09-clean-alternatives",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b10-aspect-ambiguous",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.VERB.aspect \"I have visited\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b11-single-slip",
+    "status": "accepted",
+    "accepted": 1,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b12-dependent-prepositions",
+    "status": "accepted",
+    "accepted": 1,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.PREP.dependent \"interested about\"",
+     "error EN.GRM.PREP.dependent \"participated to\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b13-boundaries-commas",
+    "status": "accepted",
+    "accepted": 0,
+    "rejected": 0,
+    "missed": [
+     "error EN.SEN.CMP.run_ons \"My friend was tired, I was hungry\"",
+     "error EN.SEN.CMP.run_ons \"We ate quickly then we watched\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b14-clean-argument",
+    "status": "accepted",
+    "accepted": 2,
+    "rejected": 0,
+    "missed": [],
+    "unmatched": [],
+    "rejections": []
+   },
+   {
+    "id": "b15-a-an",
+    "status": "accepted",
+    "accepted": 1,
+    "rejected": 0,
+    "missed": [
+     "error EN.GRM.NOUN.articles \"a ice cream\"",
+     "error EN.GRM.NOUN.articles \"an banana\"",
+     "error EN.GRM.NOUN.articles \"an useful advice\""
+    ],
+    "unmatched": [],
+    "rejections": []
+   }
+  ]
+ }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ta.teach.vowels",
+    "competency": "TA.vowels",
+    "explanation": "உயிரெழுத்து தனியாக வரும். அ, ஆ இரண்டும் வேறு எழுத்துகள்.",
+    "examples": "அ, இ, உ",
+    "contrast": "க் என்பது மெய்யெழுத்து.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.consonants",
+    "competency": "TA.consonants",
+    "explanation": "மெய்யெழுத்தின் மேல் புள்ளி இருக்கும். க், ம் ஆகியவை மெய்யெழுத்துகள்.",
+    "examples": "க், ச், ம்",
+    "contrast": "க என்பது உயிர்மெய்; க் என்பது மெய்.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.aytham",
+    "competency": "TA.aytham",
+    "explanation": "ஃ என்பது ஆய்த எழுத்து. இது உயிரெழுத்தோ மெய்யெழுத்தோ அல்ல.",
+    "examples": "ஃ",
+    "contrast": "அ என்பது உயிரெழுத்து; க் என்பது மெய்யெழுத்து.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.length",
+    "competency": "TA.length",
+    "explanation": "அ, இ, உ, எ, ஒ குறில். ஆ, ஈ, ஊ, ஏ, ஐ, ஓ, ஔ நெடில்.",
+    "examples": "அ — ஆ; இ — ஈ",
+    "contrast": "ஐ, ஔ ஆகியவையும் நெடில்.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.composition",
+    "competency": "TA.composition",
+    "explanation": "மெய்யுடன் உயிர் சேர்ந்தால் உயிர்மெய் உருவாகும். புள்ளியை நீக்கி உயிர்க்குறியைச் சேர்ப்போம்.",
+    "examples": "க் + அ = க; க் + ஆ = கா",
+    "contrast": "க் + இ = கி; க் + ஈ = கீ. இவற்றைக் குழப்ப வேண்டாம்.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.signs",
+    "competency": "TA.signs",
+    "explanation": "எ, ஏ, ஐ குறிகள் எழுத்துக்கு முன் தோன்றும். ஒ, ஓ, ஔ குறிகள் இருபுறமும் தோன்றும். தட்டச்சில் மெய்யை முதலில் எழுதுவோம்.",
+    "examples": "க் + எ = கெ; க் + ஒ = கொ",
+    "contrast": "கெ, கே இரண்டும் வேறு; கொ, கோ இரண்டும் வேறு.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.recognition",
+    "competency": "TA.recognition",
+    "explanation": "சொல்லில் உள்ள எல்லா எழுத்துகளையும் கவனிப்போம். ஒரு குறி மாறினாலும் சொல் மாறலாம்.",
+    "examples": "கல் — கால்",
+    "contrast": "கல், கால் இரண்டும் ஒரே சொல் அல்ல.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  },
+  {
+    "id": "ta.teach.spelling",
+    "competency": "TA.spelling",
+    "explanation": "கொடுத்த எழுத்துகளை வரிசையாக இணைத்துச் சொல்லை எழுதுவோம். புள்ளியையும் உயிர்க்குறியையும் விட வேண்டாம்.",
+    "examples": "ம + ர + ம் = மரம்",
+    "contrast": "மரம் என்பதில் இறுதி எழுத்து ம்; ம அல்ல.",
+    "review": "provisional",
+    "provenance": "OpenPath Tamil foundation authored candidate v1; educator review pending"
+  }
+]

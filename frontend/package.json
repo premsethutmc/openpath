@@ -8,7 +8,7 @@
     "build": "node scripts/build.mjs",
     "build:standalone": "node scripts/build.mjs --standalone",
     "preview": "node scripts/preview.mjs",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.english.json",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.english.json && tsc --noEmit -p tsconfig.mathematics-integration.json",
     "test": "node --import tsx --test \"src/**/*.test.ts\"",
     "e2e": "node --test e2e/play.test.mjs",
     "english:build": "node scripts/build-english.mjs",
@@ -30,7 +30,14 @@
     "english:demo-hash-password": "node scripts/demo-hash-password.mjs",
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",
     "english:build:pilot": "node scripts/build-english.mjs --pilot",
-    "english:build:preview": "node scripts/build-english.mjs --preview"
+    "english:build:preview": "node scripts/build-english.mjs --preview",
+    "essay:test": "node --import tsx --test src/english/logic/essay-demo/*.test.ts src/english/logic/essay-live/*.test.ts",
+    "essay:e2e-diagnostic": "node --test e2e/essay-diagnostic.test.mjs",
+    "essay:e2e": "node --test e2e/essay-learning.test.mjs e2e/essay-live.test.mjs",
+    "tamil:build": "node scripts/build-tamil.mjs",
+    "tamil:preview": "node scripts/preview-tamil.mjs",
+    "tamil:test": "node --import tsx --test src/tamil/*.test.ts",
+    "tamil:e2e": "node --test e2e/tamil.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

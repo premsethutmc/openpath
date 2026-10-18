@@ -1,0 +1,623 @@
+{
+ "id": "openpath.g8-writing",
+ "version": 2,
+ "grade": 8,
+ "subject": "english_writing",
+ "status": "candidate",
+ "rubric": {
+  "name": "6+1 Trait Writing",
+  "source": "Education Northwest, 6+1 Trait Writing model (traits used for grouping and reporting only)."
+ },
+ "note": "Draft Grade 8 writing profile for essay analysis. Expected bands are draft values (band 5 ~ CEFR B1, indicative). Every curriculum mapping is unvalidated until an educator reviews it. Competencies marked specified=false exist in the framework but have no descriptors, questions or lessons yet: they can be observed in an essay but not diagnosed or taught. Every expected band is provisional (uncalibrated): see docs/product/essay-learning/BAND_AUDIT.md. Version 2 (18 October 2026) adds Plurals and countability (EN.GRM.NOUN.plurals_countability, an existing specified framework leaf) so essays can show singular/plural noun errors; its band-5 target is provisional like every other.",
+ "competencies": [
+  {
+   "capability": "EN.GRM.VERB.sva",
+   "name": "Subject–verb agreement",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.VERB.sva",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Subject–Verb Concord",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.VERB.present_past_simple",
+   "name": "Present and past simple",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.VERB.present_past_simple",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Tenses",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.VERB.aspect",
+   "name": "Progressive and perfect aspect",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.VERB.aspect",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Tenses",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.NOUN.articles",
+   "name": "Articles",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.NOUN.articles",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Determiners",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "name": "Plurals and countability",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.NOUN.plurals_countability",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Determiners (quantifiers with countable and uncountable nouns)",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.WRT.ACC.grammar",
+   "name": "Grammatical accuracy in writing",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.WRT.ACC.grammar",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.PREP.time_place",
+   "name": "Prepositions of time and place",
+   "area": "prepositions",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.PREP.time_place",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.PREP.dependent",
+   "name": "Dependent prepositions",
+   "area": "prepositions",
+   "trait": "word_choice",
+   "grade": 8,
+   "expectedBand": null,
+   "specified": false,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.PREP.dependent",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    }
+   ]
+  },
+  {
+   "capability": "EN.SEN.CMP.fragments",
+   "name": "Complete sentences, not fragments",
+   "area": "sentence_structure",
+   "trait": "sentence_fluency",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.CMP.fragments",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.CMP.run_ons",
+   "name": "Avoids run-on sentences and comma splices",
+   "area": "sentence_structure",
+   "trait": "sentence_fluency",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.CMP.run_ons",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy; Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.CMB.coordination",
+   "name": "Coordination",
+   "area": "sentence_structure",
+   "trait": "sentence_fluency",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.CMB.coordination",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.CMB.subordination",
+   "name": "Subordination",
+   "area": "sentence_structure",
+   "trait": "sentence_fluency",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.CMB.subordination",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.PUN.commas",
+   "name": "Commas",
+   "area": "sentence_structure",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.PUN.commas",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Orthographic control",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.VOC.USE.word_choice",
+   "name": "Precise word choice in writing",
+   "area": "vocabulary",
+   "trait": "word_choice",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.VOC.USE.word_choice",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Vocabulary range; Propositional precision",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.VOC.REL.collocations",
+   "name": "Collocations",
+   "area": "vocabulary",
+   "trait": "word_choice",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.VOC.REL.collocations",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Vocabulary control",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.COH.connectives",
+   "name": "Connectives and transitions",
+   "area": "coherence",
+   "trait": "organization",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.COH.connectives",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.COH.reference_across",
+   "name": "Reference across sentences",
+   "area": "coherence",
+   "trait": "organization",
+   "grade": 8,
+   "expectedBand": null,
+   "specified": false,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.COH.reference_across",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    }
+   ]
+  },
+  {
+   "capability": "EN.WRT.ORG.sequencing",
+   "name": "Logical sequencing",
+   "area": "coherence",
+   "trait": "organization",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.WRT.ORG.sequencing",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.WRT.ORG.paragraphing",
+   "name": "Paragraphing",
+   "area": "coherence",
+   "trait": "organization",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.WRT.ORG.paragraphing",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Coherence and cohesion",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.SEN.PRE.concision",
+   "name": "Concision",
+   "area": "concision",
+   "trait": "sentence_fluency",
+   "grade": 8,
+   "expectedBand": null,
+   "specified": false,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.SEN.PRE.concision",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    }
+   ]
+  }
+ ]
+}

@@ -18,10 +18,10 @@ from django.conf import settings
 from django.db import models
 
 # Subjects that share the pupil identity and the event architecture. English is the
-# only one with an engine today; mathematics is reserved so a later engine can keep
-# its own ordered ledger for the same pupil.
+# existing implementation; mathematics uses the same engine and pupil identity,
+# with its own ordered subject events.
 SUBJECTS = [("english", "English"), ("mathematics", "Mathematics")]
-ACTIVE_SUBJECTS = {"english"}
+ACTIVE_SUBJECTS = {"english", "mathematics"}
 
 
 class Pupil(models.Model):

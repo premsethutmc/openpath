@@ -1,0 +1,43 @@
+# Actual v2 validation
+
+Base: accepted `22e28c726cfb24aba33f5f8035537b404828586f`. Tests use synthetic accounts/content, not real-child evidence or educator validation.
+
+| Check                                                                  | Actual result                                                                                                                                                                                                                   |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                                                    | Passed all three configurations, including the real-account journey and shared registration                                                                                                                                     |
+| `npm test`                                                             | **271 passed / 0 failed**, including five v2 program/registration/replay tests and all existing frontend tests                                                                                                                  |
+| Backend `.venv/bin/python manage.py test --noinput`                    | **137 passed / 0 failed** on SQLite, including five new mathematics service tests                                                                                                                                               |
+| Backend migrations check                                               | `makemigrations --check --dry-run`: no changes detected; existing models/tables reused                                                                                                                                          |
+| `node scripts/build-mathematics-journey.mjs`                           | Passed: unchanged English entry plus additive mathematics page                                                                                                                                                                  |
+| `node --import tsx --test e2e/mathematics-journey.test.mjs`            | **3 passed / 0 failed** against the actual Django API and account cookies, with 320/360/412px emulated phones                                                                                                                   |
+| Existing `e2e/accounts.test.mjs` against the same integrated build/API | **6 passed / 0 failed** using the single-threaded SQLite local preview                                                                                                                                                          |
+| Additional shared-core suite                                           | **203 passed / 2 failed** of 205; the same existing E1/E2A frozen research fingerprint mismatches remain visible                                                                                                                |
+| Frozen curriculum                                                      | Existing 200-competency inventory unchanged; its pinned hash regression passes                                                                                                                                                  |
+| Scope                                                                  | Estimator, updater, composite, evidence/eligibility policies, English application entry/navigation, Tamil source and essay branches unchanged. Only the framework registration API is extended, with English defaults preserved |
+| `git diff --check`                                                     | Passed                                                                                                                                                                                                                          |
+| GitHub CI                                                              | New authenticated-journey workflow prepared; no remote CI result is claimed here                                                                                                                                                |
+
+## Scenarios actually exercised
+
+- Real parent registration/login through existing services, existing pupil UUID selection, authenticated mathematics appends, signed-out denial and other-parent ownership denial.
+- Interactive equal parts; concept/worked stages; persisted typed draft; **closed browser context and a new context** using the existing account session; resumed stage and answer.
+- Guided/independent/word-problem/reverse-and-number-line transfer questions with exact answers, including fractions. Enter submits an answer. The simplest-form tasks reject equivalent but unreduced or decimal responses; normalization does not erase that instructional criterion. Native Ledger observations remain held, all direct evidence counts stay zero and profile understanding stays unestablished.
+- Six core stages finish with 86% overall activities and an explicit delayed retention requirement. No completed progress is discarded.
+- Enter GRE with zero GRE program completion, then complete two GRE stages and repeat a school question. Same pupil/competency/item history, native `repeat` exposure, separate school/GRE completion after page refresh and tab switching. JEE Advanced selection/progress also survives refresh. Reopened visits retain the pupil identity and have distinct persisted visit IDs.
+- Invalid `1/0`, a simulated API outage and unsigned access cannot fabricate saved answers/completion. Storage conflicts and duplicate IDs are rejected by the service.
+- Server-owned clock/deadline: early retention answers and completion are rejected; a controlled server clock after one day permits delayed answers/completion. Full seven-stage replay reaches 100% **activities** while native estimates/mastery remain unchanged. This uses automated clock-controlled tests, not a claimed real one-day learner follow-up.
+- All ten fixed answer keys are checked with exact fraction relationships, not just JSON shape. This verifies the mathematics of the authored examples, not educational effectiveness, authentic transfer or calibrated difficulty.
+
+## Failures found and resolved/retained
+
+During local testing, the threaded Django/SQLite preview produced existing `OperationalError: database is locked` errors under API/telemetry concurrency. The unchanged-main frontend also encountered server errors against that threaded backend. The local preview and its CI smoke workflow now use Django `--nothreading` with SQLite; the unchanged English account suite then passed all six tests. No English assertions, production database settings or estimator logic were changed to mask this. Production PostgreSQL concurrency/load testing remains outstanding.
+
+Two new browser-test issues were fixed during development: parsing a legitimate empty logout response as JSON, and a nested locator that incorrectly searched for a form inside itself after the input's accessible label was improved. No product assertions were disabled. A changed transfer task's expected answer was updated and independently checked (`3/4 = 15/20`).
+
+The two pre-existing failures in `packages/english-core/test/e2-research.test.ts` remain unfixed: frozen E1/E2A simulation fingerprints. Earlier foundation validation reproduced them on untouched main. The v2 shared-core run again reports 203 passes and those same two failures. Baselines/tests were not rewritten. This is not an all-green shared-core claim.
+
+An existing backend assertion that mathematics was inactive now tests an actually unregistered subject (`science`), because this branch intentionally activates mathematics; the new service tests verify mathematics-specific rejection, ownership, sequence and timing rules.
+
+## Limits
+
+No physical Samsung, real learner, educator-review, complete accessibility audit, production PostgreSQL load test or combined essay/Tamil release test was performed. Those branches/sources are preserved, not silently merged. Subject-menu placement remains deferred at the explicit navigation boundary; `/mathematics.html` works directly using real account services. Official exam formats/scoring/readiness are still unverified and disabled. Other competency programs remain unimplemented scaffolds. This is a complete provisional program for one existing competency, not a completed mathematics curriculum or a deployment approval.

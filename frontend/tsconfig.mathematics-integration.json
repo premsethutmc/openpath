@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.english.json",
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/mathematics/canonical.test.ts",
+    "../packages/mathematics/src/canonical.ts",
+    "src/mathematics/journey",
+    "src/globals.d.ts"
+  ],
+  "exclude": []
+}

@@ -1,0 +1,164 @@
+{
+  "version": "1.0.0",
+  "tracks": [
+    {
+      "id": "jee-main",
+      "version": "1.0.0-provisional",
+      "name": "JEE Main Mathematics",
+      "source": {
+        "url": "https://jeemain.nta.nic.in/",
+        "officialVersion": null,
+        "checkedAt": "2026-10-18",
+        "verification": "blocked-403"
+      },
+      "syllabusMapping": [
+        {
+          "competencyId": "MATH.algebra.quadratics",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        },
+        {
+          "competencyId": "MATH.coordinate.distance",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        }
+      ],
+      "coverage": "Initial shared skill samples only; complete official syllabus mapping outstanding.",
+      "candidateFormats": [
+        "single-choice",
+        "numerical"
+      ],
+      "formatsVerified": false,
+      "questionFamilies": [
+        "quadratic-numerical",
+        "coordinate"
+      ],
+      "difficulty": "Author-selected parameter ranges; not calibrated exam difficulty.",
+      "timingRules": null,
+      "scoringRules": null,
+      "timedTestEnabled": false,
+      "practiceMode": true,
+      "weakAreaAnalysis": "Consume shared host evidence; never infer readiness from program completion.",
+      "journeyVersion": "1.0.0",
+      "nextAction": "Verify current official syllabus, formats, timing and scoring before enabling timed tests."
+    },
+    {
+      "id": "jee-advanced",
+      "version": "1.0.0-provisional",
+      "name": "JEE Advanced Mathematics",
+      "source": {
+        "url": "https://jeeadv.ac.in/",
+        "officialVersion": null,
+        "checkedAt": "2026-10-18",
+        "verification": "blocked-403"
+      },
+      "syllabusMapping": [
+        {
+          "competencyId": "MATH.calculus.derivative-rules",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        },
+        {
+          "competencyId": "MATH.algebra.algebra-simplify",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        },
+        {
+          "competencyId": "MATH.algebra.quadratics",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        }
+      ],
+      "coverage": "Initial shared skill samples only; complete official syllabus mapping outstanding.",
+      "candidateFormats": [
+        "single-choice",
+        "multiple-select",
+        "numerical"
+      ],
+      "formatsVerified": false,
+      "questionFamilies": [
+        "calculus-numerical",
+        "quadratic"
+      ],
+      "difficulty": "Author-selected parameter ranges; not calibrated exam difficulty.",
+      "timingRules": null,
+      "scoringRules": null,
+      "timedTestEnabled": false,
+      "practiceMode": true,
+      "weakAreaAnalysis": "Consume shared host evidence; never infer readiness from program completion.",
+      "journeyVersion": "1.0.0",
+      "nextAction": "Verify current official syllabus, formats, timing and scoring before enabling timed tests."
+    },
+    {
+      "id": "gre-quant",
+      "version": "1.0.0-provisional",
+      "name": "GRE Quantitative Reasoning",
+      "source": {
+        "url": "https://www.ets.org/gre/test-takers/general-test/prepare/content/quantitative-reasoning.html",
+        "officialVersion": null,
+        "checkedAt": "2026-10-18",
+        "verification": "blocked-403"
+      },
+      "syllabusMapping": [
+        {
+          "competencyId": "MATH.number.fraction-comparison",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        },
+        {
+          "competencyId": "MATH.number.percentage",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        }
+      ],
+      "coverage": "Initial shared skill samples only; complete official syllabus mapping outstanding.",
+      "candidateFormats": [
+        "quantitative-comparison",
+        "single-choice",
+        "multiple-select",
+        "numerical"
+      ],
+      "formatsVerified": false,
+      "questionFamilies": [
+        "comparison",
+        "percent"
+      ],
+      "difficulty": "Author-selected parameter ranges; not calibrated exam difficulty.",
+      "timingRules": null,
+      "scoringRules": null,
+      "timedTestEnabled": false,
+      "practiceMode": true,
+      "weakAreaAnalysis": "Consume shared host evidence; never infer readiness from program completion.",
+      "journeyVersion": "1.0.0",
+      "nextAction": "Verify current official syllabus, formats, timing and scoring before enabling timed tests."
+    },
+    {
+      "id": "cuet",
+      "version": "1.0.0-provisional",
+      "name": "CUET Mathematics",
+      "source": {
+        "url": "https://cuet.nta.nic.in/",
+        "officialVersion": null,
+        "checkedAt": "2026-10-18",
+        "verification": "blocked-403"
+      },
+      "syllabusMapping": [
+        {
+          "competencyId": "MATH.algebra.matrices",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        },
+        {
+          "competencyId": "MATH.calculus.definite-integrals",
+          "status": "provisional-skill-overlap-not-verified-syllabus"
+        }
+      ],
+      "coverage": "Initial shared skill samples only; complete official syllabus mapping outstanding.",
+      "candidateFormats": [
+        "single-choice"
+      ],
+      "formatsVerified": false,
+      "questionFamilies": [],
+      "difficulty": "Author-selected parameter ranges; not calibrated exam difficulty.",
+      "timingRules": null,
+      "scoringRules": null,
+      "timedTestEnabled": false,
+      "practiceMode": false,
+      "weakAreaAnalysis": "Consume shared host evidence; never infer readiness from program completion.",
+      "journeyVersion": "1.0.0",
+      "nextAction": "Verify current official syllabus, formats, timing and scoring before enabling timed tests."
+    }
+  ]
+}

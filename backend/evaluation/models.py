@@ -9,6 +9,7 @@ No live LLM provider exists in E3a. The record keeps provenance so that any prop
 the protocol, adapter and request that produced it.
 """
 
+from django.conf import settings
 from django.db import models
 
 from learners.models import Learner
@@ -44,6 +45,34 @@ class EvaluationRecord(models.Model):
     status = models.CharField(max_length=16, choices=STATUS)
     reason = models.CharField(max_length=200, blank=True)
     proposal = models.JSONField(null=True, blank=True, help_text="Exactly what the adapter returned. Untrusted.")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at", "id"]
+
+
+class EssayEvaluationRecord(models.Model):
+    """One essay evaluation request (Essay Intelligence v2; synthetic test data only).
+
+    Metadata only: never the essay, the rewrite, the request or the model's output, and never a credential.
+    It keeps enough to trace provenance (protocol, adapter, model, rubric, text fingerprint) and to enforce the
+    daily request and token limits."""
+
+    STATUS = [("answered", "Answered"), ("refused", "Refused"), ("failed", "Failed")]
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="essay_evaluations")
+    task = models.CharField(max_length=12)
+    protocol = models.CharField(max_length=24)
+    adapter = models.CharField(max_length=16)
+    model = models.CharField(max_length=80, blank=True)
+    rubric = models.CharField(max_length=60, blank=True)
+    fingerprint = models.CharField(max_length=40, blank=True)
+    text_chars = models.PositiveIntegerField(default=0)
+    status = models.CharField(max_length=16, choices=STATUS)
+    reason = models.CharField(max_length=200, blank=True)
+    input_tokens = models.PositiveIntegerField(default=0)
+    output_tokens = models.PositiveIntegerField(default=0)
+    latency_ms = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

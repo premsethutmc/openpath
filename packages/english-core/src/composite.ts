@@ -133,6 +133,11 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const p = index.framework.policy;
   const node = composite.nodes[o.capability];
   if (!node) throw new Error(`unknown capability ${o.capability}`);
+  const qualifies = o.qualifying !== false;
+  // The level "as of the last qualifying answer" is the one shown just before this answer: taken before the
+  // time-variance growth and before this answer's own update, so an answer straight after teaching never moves it
+  // (A1, policy fix: it used to be taken after the update, so the first such answer raised or lowered the level).
+  const levelBefore = !qualifies && node.qualifyingN === undefined && o.exposure !== "repeat" ? demonstratedLevel(node, p, o.capability) : undefined;
   touch(node, o.at, index);
   if (o.exposure === "repeat") return recordRepeat(composite, node, o);
   decayMisconceptions(node, o.at, p);
@@ -143,11 +148,10 @@ export function applyDirect(composite: Composite, index: FrameworkIndex, o: Dire
   const d = capShift(node.direct, o.update(node.direct), o.maxShift);
   node.combined = c.est;
   node.direct = d.est;
-  const qualifies = o.qualifying !== false;
   // the qualifying counts are kept only once an answer has followed teaching: until then they equal directN and
   // contexts, and the node is byte-identical to one recorded before this distinction existed
   if (!qualifies && node.qualifyingN === undefined) {
-    node.qualifiedLevel = demonstratedLevel(node, p, o.capability);
+    node.qualifiedLevel = levelBefore ?? null;
     node.qualifyingN = node.directN;
     node.qualifyingContexts = [...node.contexts];
   }
@@ -269,6 +273,12 @@ export interface LeafView {
    * `demonstrated` or the history alone.
    */
   verification: Verification;
+  /**
+   * Only when a target band was asked for (leafView opts.target): the same schedule and verification, anchored to the
+   * first demonstration AT the target (retention timing, policy @4). An earlier demonstration at a lower level stays in
+   * `retention`/`verification` and `historicalLevel`; it never starts the clock or passes a check for the target.
+   */
+  atTarget?: { band: number; retention: Retention; verification: Verification };
   misconceptions: { id: string; strength: number }[];
 }
 
@@ -289,6 +299,13 @@ export interface Verification {
   historicalLevel: number | null;
   /** When the current level was last verified (a passed check), if ever. */
   verifiedAt: string | null;
+  /**
+   * verification@2: the band verified by a delayed check AT that band (shown first, then kept on fresh evidence at that
+   * band at least the delay later), capped by what the evidence supports now; null when none is currently verified.
+   * Every claim that a band is verified uses this, never `currentLevel`.
+   */
+  verifiedLevel: number | null;
+  verifiedLevelAt: string | null;
 }
 
 export function isStruggling(node: NodeState, p: Policy): boolean {
@@ -298,7 +315,7 @@ export function isStruggling(node: NodeState, p: Policy): boolean {
   return recent.filter((t) => t.correct).length / recent.length < p.struggling_max_success;
 }
 
-export function leafView(composite: Composite, index: FrameworkIndex, id: CapabilityId, now: string): LeafView {
+export function leafView(composite: Composite, index: FrameworkIndex, id: CapabilityId, now: string, opts: { target?: number | null } = {}): LeafView {
   const p = index.framework.policy;
   const node = composite.nodes[id];
   const cap = index.leaves.get(id)!;
@@ -341,8 +358,14 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
     masteredBefore: slipped || unverified ? masteredHist : null,
     retention: ret,
     verification: verificationOf(node, ret, demonstrated, masteredHist),
+    ...(opts.target !== undefined && opts.target !== null ? { atTarget: atTargetOf(node, p, now, opts.target, demonstrated, masteredHist) } : {}),
     misconceptions,
   };
+}
+
+function atTargetOf(node: NodeState, p: Policy, now: string, band: number, demonstrated: number | null, masteredHist: number | null): NonNullable<LeafView["atTarget"]> {
+  const ret = retention(node, p, now, undefined, { fromLevel: band });
+  return { band, retention: ret, verification: verificationOf(node, ret, demonstrated, masteredHist) };
 }
 
 function verificationOf(node: NodeState, ret: Retention, demonstrated: number | null, masteredHist: number | null): Verification {
@@ -352,7 +375,8 @@ function verificationOf(node: NodeState, ret: Retention, demonstrated: number | 
     ret.status === "none" ? "not_demonstrated" : ret.status === "overdue" ? "overdue" : ret.status === "failed" ? "failed" : ret.lastVerifiedAt ? "verified" : "demonstrated";
   const current = status === "verified" || status === "demonstrated";
   const currentLevel = current && ret.level !== null && demonstrated !== null ? Math.min(ret.level, demonstrated) : null;
-  return { status, currentLevel, historicalLevel, verifiedAt: ret.lastVerifiedAt };
+  const verifiedLevel = current && ret.verifiedLevel !== null && demonstrated !== null ? Math.min(ret.verifiedLevel, demonstrated) : null;
+  return { status, currentLevel, historicalLevel, verifiedAt: ret.lastVerifiedAt, verifiedLevel, verifiedLevelAt: verifiedLevel === null ? null : ret.verifiedLevelAt };
 }
 
 export interface AggregateView {

@@ -16,11 +16,15 @@ import {
   type Passage,
   type GeneratedReview,
   type ItemReview,
+  type LedgerEvent,
+  extendContent,
+  generatedQuestionItems,
   indexContent,
   indexFramework,
   isSpecified,
   reviewStatus,
 } from "../../../../packages/english-core/src/index.ts";
+import type { AppEvent } from "./events.ts";
 import { SINGLE_FORMAT_DEMONSTRATION } from "./mastery-policy.ts";
 import frameworkJson from "../../../../content/english/framework/en-0.2.0.json";
 import codeItemsJson from "../../../../content/english/items/code-items.json";
@@ -210,6 +214,17 @@ export interface AppContent {
   pilot: { version: string; capabilities: string[]; pools: Map<string, PoolInfo> };
   /** The pilot content-safety boundary: set in a pilot build (and only there), null otherwise. */
   gate: PilotGate | null;
+}
+
+/**
+ * The content with the model-written questions recorded in this learner's own events added (essay "questions"
+ * records). They are provisional by construction (the core refuses any other kind), so the engine scores them but
+ * holds every answer. The same events always give the same content, so a reloaded record rebuilds exactly.
+ */
+export function withRecordedQuestions(c: AppContent, events: readonly AppEvent[]): AppContent {
+  const items = generatedQuestionItems(events as LedgerEvent[]);
+  if (!items.length) return c;
+  return { ...c, ctx: { ...c.ctx, content: extendContent(c.ctx.content, items, c.index) } };
 }
 
 /** Build the content index. Throws on invalid content, exactly as the engine does elsewhere. */

@@ -3,10 +3,10 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
-import { type EvidenceEvent, type HintEvent, type Item, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
+import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
-import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
+import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId, withRecordedQuestions } from "./content.ts";
 import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
@@ -50,7 +50,10 @@ export class PilotRefusal extends Error {
 export const newProfileId = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`);
 
 export class Learner {
-  readonly content: AppContent;
+  /** The content the engine scores against: the app's, plus any questions written for this learner (provisional). */
+  content: AppContent;
+  /** The app's content, before anything recorded in this learner's events is added. */
+  private readonly base: AppContent;
   readonly repo: Repo;
   readonly profileId: string;
   readonly clock: Clock;
@@ -64,12 +67,13 @@ export class Learner {
   private spellingStop: { stop: string; note?: string } | null = null;
 
   private constructor(content: AppContent, repo: Repo, profileId: string, events: AppEvent[], clock: Clock) {
-    this.content = content;
+    this.base = content;
+    this.content = withRecordedQuestions(content, events);
     this.repo = repo;
     this.profileId = profileId;
     this.clock = clock;
     this.events = events;
-    this.state = fold(content, events);
+    this.state = fold(this.content, events);
   }
 
   static async open(content: AppContent, repo: Repo, profileId: string, clock: Clock): Promise<Learner> {
@@ -109,6 +113,8 @@ export class Learner {
     }
     t = perfNow();
     try {
+      // a recorded question set adds its (provisional) questions to what the engine scores against
+      if (e.kind === "essay" && e.record.type === "questions") this.content = withRecordedQuestions(this.base, this.events);
       this.state = fold(this.content, this.events);
     } catch (err) {
       record({ name: "engine_error", ok: false, detail: err });
@@ -302,6 +308,7 @@ export class Learner {
   /** Read the stored record again (after it was changed in place) and rebuild everything from it. */
   private async reload(): Promise<void> {
     this.events = await this.repo.load(this.profileId);
+    this.content = withRecordedQuestions(this.base, this.events);
     this.state = fold(this.content, this.events);
     this.spellCache = null;
     this.bookCache = null;
@@ -427,9 +434,14 @@ export class Learner {
         queue = spellingTransferQueue(s, c, step.capability!, step.step!, this.speech);
         extra = { capability: step.capability, step: step.step };
         break;
+      case "essay":
+        // the essay studio decides what comes next (essay-contract@1 in the core); the session only groups its records
+        break;
     }
     const speech = step.type.startsWith("spelling_") ? { speech: this.speechRecord() } : {};
     await this.add({ ...base, ...(queue ? { queue } : {}), ...extra, ...speech });
+    // an essay session has no question queue: the essay studio fills it, so it is not finished here
+    if (step.type === "essay") return { session: this.state.open!, lesson: null, next: null, done: 0, total: 0 };
     return this.current();
   }
 
@@ -588,7 +600,7 @@ export class Learner {
         item: { id: item.id, version: item.version },
         response,
         use: opts.use,
-        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY] },
+        provenance: { schema: "provenance@1", ...(presented ? { presented } : {}), attempt: 1, hints: [], afterFeedback: false, ...(opts.intervention ? { intervention: opts.intervention } : {}), policies: [PASSAGE_POLICY, ASSISTED_POLICY] },
       };
       await this.add(ev);
     } else {
@@ -739,6 +751,38 @@ export class Learner {
     return parentReport(this.state, this.content, this.clock());
   }
 
+  // ------------------------------------------------------------------ essays (essay-contract@1)
+
+  /**
+   * Ids for the next essay records, in an open essay session (one is started if none is open). The records
+   * themselves are built by the core (packages/english-core/src/essay); this class only stores them.
+   */
+  async essayMeta(count = 1): Promise<{ id: string; at: string; session: string }[]> {
+    this.guard("the essay studio");
+    if (this.state.open?.event.type !== "essay") await this.start({ type: "essay" });
+    const session = this.state.open!.event.session;
+    const at = this.clock();
+    const base = this.events.length + 1;
+    return Array.from({ length: count }, (_, i) => ({ id: `${this.profileId}:essay:${base}:${i + 1}`, at, session }));
+  }
+
+  /** Store essay records from the core. The engine records them and changes no estimate. */
+  async recordEssay(...records: EssayEvent[]): Promise<void> {
+    this.guard("the essay studio");
+    for (const e of records) {
+      const open = this.state.open;
+      if (e.kind !== "essay") throw new Error("only essay records are stored here");
+      if (!open || open.event.type !== "essay" || e.session !== open.event.session) throw new Error("an essay record belongs to the open essay session");
+      await this.add(e);
+    }
+  }
+
+  /** A new essay sitting: the open session ends first, so answers are not counted as given straight after its lessons. */
+  async newEssaySession(): Promise<void> {
+    this.guard("the essay studio");
+    await this.start({ type: "essay" });
+  }
+
   async stop(): Promise<void> {
     const open = this.state.open;
     if (open) await this.add({ kind: "session_end", id: this.nextId(), at: this.clock(), session: open.event.session, reason: "stopped" });
@@ -798,6 +842,7 @@ export class Learner {
       explore: "More practice",
       doubling_journey: "Doubling letters",
       check: "A few questions",
+      essay: "Essay studio",
     }[type];
   }
 }

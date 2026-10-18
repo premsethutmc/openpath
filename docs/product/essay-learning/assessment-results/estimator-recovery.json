@@ -1,0 +1,759 @@
+{
+ "shadowOnly": true,
+ "recencyQ": 0.25,
+ "target": 5,
+ "seeds": 400,
+ "replay": {
+  "app": [
+   {
+    "scenario": "S1",
+    "title": "Fails the diagnostic, then improves after teaching",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.4,
+     "directSd": 1.11
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 2,
+     "phase": 2
+    },
+    "mean": {
+     "cumulative": 3.4,
+     "recency": 3.36,
+     "phase": 3.4
+    }
+   },
+   {
+    "scenario": "S2",
+    "title": "Answers hard independent questions right throughout",
+    "answers": 4,
+    "instructions": 0,
+    "engine": {
+     "directMean": 6.47,
+     "directSd": 0.82
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 5.5,
+     "phase": 5.5
+    },
+    "mean": {
+     "cumulative": 6.47,
+     "recency": 6.66,
+     "phase": 6.47
+    }
+   },
+   {
+    "scenario": "S3",
+    "title": "Completes practice with help, fails every independent check",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.4,
+     "directSd": 1.11
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 2,
+     "phase": 2
+    },
+    "mean": {
+     "cumulative": 3.4,
+     "recency": 3.36,
+     "phase": 3.4
+    }
+   },
+   {
+    "scenario": "S4",
+    "title": "Passes the checks, then fails the delayed retention check",
+    "answers": 4,
+    "instructions": 0,
+    "engine": {
+     "directMean": 5.59,
+     "directSd": 0.82
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4.5,
+     "recency": 4.5,
+     "phase": 4.5
+    },
+    "mean": {
+     "cumulative": 5.59,
+     "recency": 5.37,
+     "phase": 5.59
+    }
+   },
+   {
+    "scenario": "S4b",
+    "title": "One wrong answer in the delayed retention check",
+    "answers": 4,
+    "instructions": 0,
+    "engine": {
+     "directMean": 6.47,
+     "directSd": 0.82
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 5.5,
+     "phase": 5.5
+    },
+    "mean": {
+     "cumulative": 6.47,
+     "recency": 6.66,
+     "phase": 6.47
+    }
+   },
+   {
+    "scenario": "S7",
+    "title": "Improves gradually after teaching; needs several later checks",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.4,
+     "directSd": 1.11
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 2,
+     "phase": 2
+    },
+    "mean": {
+     "cumulative": 3.4,
+     "recency": 3.36,
+     "phase": 3.4
+    }
+   },
+   {
+    "scenario": "S5",
+    "title": "Questions at the target already used up (earlier practice with help)",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.4,
+     "directSd": 1.11
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 2,
+     "phase": 2
+    },
+    "mean": {
+     "cumulative": 3.4,
+     "recency": 3.36,
+     "phase": 3.4
+    }
+   },
+   {
+    "scenario": "S6",
+    "title": "Returns for a second essay with evidence from the first",
+    "answers": 6,
+    "instructions": 1,
+    "engine": {
+     "directMean": 4.72,
+     "directSd": 0.85
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4,
+     "recency": 4,
+     "phase": 4
+    },
+    "mean": {
+     "cumulative": 4.72,
+     "recency": 5.24,
+     "phase": 5.16
+    }
+   }
+  ],
+  "core": [
+   {
+    "scenario": "S1",
+    "title": "Fails the diagnostic, then improves after teaching",
+    "answers": 5,
+    "instructions": 1,
+    "engine": {
+     "directMean": 4.81,
+     "directSd": 0.84
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4,
+     "recency": 4.5,
+     "phase": null
+    },
+    "mean": {
+     "cumulative": 4.81,
+     "recency": 5.71,
+     "phase": 6.66
+    }
+   },
+   {
+    "scenario": "S2",
+    "title": "Answers hard independent questions right throughout",
+    "answers": 7,
+    "instructions": 1,
+    "engine": {
+     "directMean": 6.33,
+     "directSd": 0.7
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 5.5,
+     "phase": 6
+    },
+    "mean": {
+     "cumulative": 6.33,
+     "recency": 6.85,
+     "phase": 7.05
+    }
+   },
+   {
+    "scenario": "S3",
+    "title": "Completes practice with help, fails every independent check",
+    "answers": 5,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.44,
+     "directSd": 0.86
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2.5,
+     "recency": 2.5,
+     "phase": null
+    },
+    "mean": {
+     "cumulative": 3.44,
+     "recency": 3.52,
+     "phase": 3.33
+    }
+   },
+   {
+    "scenario": "S4",
+    "title": "Passes the checks, then fails the delayed retention check",
+    "answers": 7,
+    "instructions": 1,
+    "engine": {
+     "directMean": 5.25,
+     "directSd": 0.7
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4.5,
+     "recency": 4,
+     "phase": 4.5
+    },
+    "mean": {
+     "cumulative": 5.25,
+     "recency": 4.86,
+     "phase": 5.26
+    }
+   },
+   {
+    "scenario": "S4b",
+    "title": "One wrong answer in the delayed retention check",
+    "answers": 7,
+    "instructions": 1,
+    "engine": {
+     "directMean": 5.85,
+     "directSd": 0.7
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5,
+     "recency": 4.5,
+     "phase": 5
+    },
+    "mean": {
+     "cumulative": 5.85,
+     "recency": 5.77,
+     "phase": 6.19
+    }
+   },
+   {
+    "scenario": "S7",
+    "title": "Improves gradually after teaching; needs several later checks",
+    "answers": 5,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.44,
+     "directSd": 0.86
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2.5,
+     "recency": 2.5,
+     "phase": null
+    },
+    "mean": {
+     "cumulative": 3.44,
+     "recency": 3.52,
+     "phase": 3.33
+    }
+   },
+   {
+    "scenario": "S5",
+    "title": "Questions at the target already used up (earlier practice with help)",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.51,
+     "directSd": 0.88
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2.5,
+     "recency": 2.5,
+     "phase": 2.5
+    },
+    "mean": {
+     "cumulative": 3.51,
+     "recency": 3.66,
+     "phase": 3.51
+    }
+   },
+   {
+    "scenario": "S6",
+    "title": "Returns for a second essay with evidence from the first",
+    "answers": 5,
+    "instructions": 2,
+    "engine": {
+     "directMean": 4.81,
+     "directSd": 0.84
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4,
+     "recency": 4.5,
+     "phase": null
+    },
+    "mean": {
+     "cumulative": 4.81,
+     "recency": 5.71,
+     "phase": 6.66
+    }
+   }
+  ],
+  "reviewed-supplement": [
+   {
+    "scenario": "S1",
+    "title": "Fails the diagnostic, then improves after teaching",
+    "answers": 9,
+    "instructions": 1,
+    "engine": {
+     "directMean": 6.23,
+     "directSd": 0.72
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 6,
+     "phase": 6
+    },
+    "mean": {
+     "cumulative": 6.23,
+     "recency": 6.96,
+     "phase": 6.79
+    }
+   },
+   {
+    "scenario": "S2",
+    "title": "Answers hard independent questions right throughout",
+    "answers": 5,
+    "instructions": 0,
+    "engine": {
+     "directMean": 6.57,
+     "directSd": 0.78
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 5.5,
+     "phase": 5.5
+    },
+    "mean": {
+     "cumulative": 6.57,
+     "recency": 6.8,
+     "phase": 6.57
+    }
+   },
+   {
+    "scenario": "S3",
+    "title": "Completes practice with help, fails every independent check",
+    "answers": 7,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.08,
+     "directSd": 1.02
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 1.5,
+     "phase": 1.5
+    },
+    "mean": {
+     "cumulative": 3.08,
+     "recency": 2.89,
+     "phase": 2.89
+    }
+   },
+   {
+    "scenario": "S4",
+    "title": "Passes the checks, then fails the delayed retention check",
+    "answers": 7,
+    "instructions": 0,
+    "engine": {
+     "directMean": 4.62,
+     "directSd": 0.64
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 4,
+     "recency": 3,
+     "phase": 4
+    },
+    "mean": {
+     "cumulative": 4.62,
+     "recency": 4.05,
+     "phase": 4.62
+    }
+   },
+   {
+    "scenario": "S4b",
+    "title": "One wrong answer in the delayed retention check",
+    "answers": 5,
+    "instructions": 0,
+    "engine": {
+     "directMean": 6.57,
+     "directSd": 0.78
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 5.5,
+     "phase": 5.5
+    },
+    "mean": {
+     "cumulative": 6.57,
+     "recency": 6.8,
+     "phase": 6.57
+    }
+   },
+   {
+    "scenario": "S7",
+    "title": "Improves gradually after teaching; needs several later checks",
+    "answers": 9,
+    "instructions": 1,
+    "engine": {
+     "directMean": 6.23,
+     "directSd": 0.72
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 6,
+     "phase": 6
+    },
+    "mean": {
+     "cumulative": 6.23,
+     "recency": 6.96,
+     "phase": 6.79
+    }
+   },
+   {
+    "scenario": "S5",
+    "title": "Questions at the target already used up (earlier practice with help)",
+    "answers": 3,
+    "instructions": 1,
+    "engine": {
+     "directMean": 3.4,
+     "directSd": 1.11
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 2,
+     "recency": 2,
+     "phase": 2
+    },
+    "mean": {
+     "cumulative": 3.4,
+     "recency": 3.36,
+     "phase": 3.4
+    }
+   },
+   {
+    "scenario": "S6",
+    "title": "Returns for a second essay with evidence from the first",
+    "answers": 10,
+    "instructions": 1,
+    "engine": {
+     "directMean": 6.33,
+     "directSd": 0.77
+    },
+    "cumulativeMatchesEngine": true,
+    "level": {
+     "cumulative": 5.5,
+     "recency": 6,
+     "phase": 6
+    },
+    "mean": {
+     "cumulative": 6.33,
+     "recency": 7.2,
+     "phase": 6.92
+    }
+   }
+  ]
+ },
+ "monteCarlo": [
+  {
+   "learner": "improver: 3.5 before teaching, 6 after",
+   "cumulative": {
+    "shownEver": 0.6425,
+    "falseShown": 0,
+    "shownAtEnd": 0.4525,
+    "meanAnswersToShow": 4.9,
+    "meanFlips": 0.99,
+    "retentionReached": 0.59,
+    "shownAfterRetention": 0.7669491525423728
+   },
+   "recency": {
+    "shownEver": 0.855,
+    "falseShown": 0,
+    "shownAtEnd": 0.43,
+    "meanAnswersToShow": 4.3,
+    "meanFlips": 1.65,
+    "retentionReached": 0.77,
+    "shownAfterRetention": 0.5584415584415584
+   },
+   "phase": {
+    "shownEver": 0.795,
+    "falseShown": 0,
+    "shownAtEnd": 0.63,
+    "meanAnswersToShow": 4.3,
+    "meanFlips": 1.24,
+    "retentionReached": 0.7425,
+    "shownAfterRetention": 0.8484848484848485
+   }
+  },
+  {
+   "learner": "slow improver: 3.5 before, 5.5 after",
+   "cumulative": {
+    "shownEver": 0.35,
+    "falseShown": 0,
+    "shownAtEnd": 0.2025,
+    "meanAnswersToShow": 5.3,
+    "meanFlips": 0.57,
+    "retentionReached": 0.3075,
+    "shownAfterRetention": 0.6585365853658537
+   },
+   "recency": {
+    "shownEver": 0.595,
+    "falseShown": 0,
+    "shownAtEnd": 0.2125,
+    "meanAnswersToShow": 4.8,
+    "meanFlips": 1.13,
+    "retentionReached": 0.5075,
+    "shownAfterRetention": 0.4187192118226601
+   },
+   "phase": {
+    "shownEver": 0.53,
+    "falseShown": 0,
+    "shownAtEnd": 0.36,
+    "meanAnswersToShow": 4.8,
+    "meanFlips": 0.9,
+    "retentionReached": 0.475,
+    "shownAfterRetention": 0.7578947368421053
+   }
+  },
+  {
+   "learner": "below target throughout: 4",
+   "cumulative": {
+    "shownEver": 0.045,
+    "falseShown": 0.045,
+    "shownAtEnd": 0.0125,
+    "meanAnswersToShow": 2.5,
+    "meanFlips": 0.09,
+    "retentionReached": 0.0325,
+    "shownAfterRetention": 0.38461538461538464
+   },
+   "recency": {
+    "shownEver": 0.065,
+    "falseShown": 0.065,
+    "shownAtEnd": 0.0025,
+    "meanAnswersToShow": 4,
+    "meanFlips": 0.13,
+    "retentionReached": 0.0375,
+    "shownAfterRetention": 0.06666666666666667
+   },
+   "phase": {
+    "shownEver": 0.0225,
+    "falseShown": 0.0225,
+    "shownAtEnd": 0.0025,
+    "meanAnswersToShow": 4.6,
+    "meanFlips": 0.04,
+    "retentionReached": 0.02,
+    "shownAfterRetention": 0.125
+   }
+  },
+  {
+   "learner": "well below, choice questions only (lucky guesses): 3",
+   "cumulative": {
+    "shownEver": 0.01,
+    "falseShown": 0.01,
+    "shownAtEnd": 0,
+    "meanAnswersToShow": 3.8,
+    "meanFlips": 0.02,
+    "retentionReached": 0.0075,
+    "shownAfterRetention": 0
+   },
+   "recency": {
+    "shownEver": 0.025,
+    "falseShown": 0.025,
+    "shownAtEnd": 0.0025,
+    "meanAnswersToShow": 3.8,
+    "meanFlips": 0.05,
+    "retentionReached": 0.02,
+    "shownAfterRetention": 0.125
+   },
+   "phase": {
+    "shownEver": 0.0125,
+    "falseShown": 0.0125,
+    "shownAtEnd": 0.005,
+    "meanAnswersToShow": 5.4,
+    "meanFlips": 0.03,
+    "retentionReached": 0.01,
+    "shownAfterRetention": 0.5
+   }
+  },
+  {
+   "learner": "just below, choice questions only (lucky guesses): 4.5",
+   "cumulative": {
+    "shownEver": 0.07,
+    "falseShown": 0.07,
+    "shownAtEnd": 0.0175,
+    "meanAnswersToShow": 4.6,
+    "meanFlips": 0.13,
+    "retentionReached": 0.0575,
+    "shownAfterRetention": 0.30434782608695654
+   },
+   "recency": {
+    "shownEver": 0.1425,
+    "falseShown": 0.1425,
+    "shownAtEnd": 0.0225,
+    "meanAnswersToShow": 3.8,
+    "meanFlips": 0.3,
+    "retentionReached": 0.1025,
+    "shownAfterRetention": 0.21951219512195122
+   },
+   "phase": {
+    "shownEver": 0.105,
+    "falseShown": 0.105,
+    "shownAtEnd": 0.035,
+    "meanAnswersToShow": 4.6,
+    "meanFlips": 0.22,
+    "retentionReached": 0.0775,
+    "shownAfterRetention": 0.45161290322580644
+   }
+  },
+  {
+   "learner": "at target throughout: 6",
+   "cumulative": {
+    "shownEver": 0.835,
+    "falseShown": 0,
+    "shownAtEnd": 0.655,
+    "meanAnswersToShow": 2.5,
+    "meanFlips": 1.19,
+    "retentionReached": 0.795,
+    "shownAfterRetention": 0.8238993710691824
+   },
+   "recency": {
+    "shownEver": 0.91,
+    "falseShown": 0,
+    "shownAtEnd": 0.475,
+    "meanAnswersToShow": 2.6,
+    "meanFlips": 1.74,
+    "retentionReached": 0.8425,
+    "shownAfterRetention": 0.5637982195845698
+   },
+   "phase": {
+    "shownEver": 0.84,
+    "falseShown": 0,
+    "shownAtEnd": 0.71,
+    "meanAnswersToShow": 4,
+    "meanFlips": 1.14,
+    "retentionReached": 0.795,
+    "shownAfterRetention": 0.8930817610062893
+   }
+  },
+  {
+   "learner": "forgets: 6 after teaching, 3.5 from day 7",
+   "cumulative": {
+    "shownEver": 0.495,
+    "falseShown": 0.13,
+    "shownAtEnd": 0.095,
+    "meanAnswersToShow": 4.2,
+    "meanFlips": 1.06,
+    "retentionReached": 0.4525,
+    "shownAfterRetention": 0.20994475138121546
+   },
+   "recency": {
+    "shownEver": 0.74,
+    "falseShown": 0.13,
+    "shownAtEnd": 0.04,
+    "meanAnswersToShow": 3.9,
+    "meanFlips": 1.65,
+    "retentionReached": 0.615,
+    "shownAfterRetention": 0.06504065040650407
+   },
+   "phase": {
+    "shownEver": 0.6925,
+    "falseShown": 0.31,
+    "shownAtEnd": 0.1775,
+    "meanAnswersToShow": 3.8,
+    "meanFlips": 1.38,
+    "retentionReached": 0.6225,
+    "shownAfterRetention": 0.285140562248996
+   }
+  }
+ ],
+ "luckyStreak": {
+  "cumulative": [
+   null,
+   null,
+   1.5,
+   2,
+   2,
+   2.5,
+   3
+  ],
+  "recency": [
+   null,
+   null,
+   1.5,
+   2,
+   2,
+   3,
+   3.5
+  ],
+  "phase": [
+   null,
+   null,
+   1.5,
+   null,
+   null,
+   3,
+   3.5
+  ]
+ }
+}
