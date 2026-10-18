@@ -135,7 +135,7 @@ The committed `assessment-results/*.json` files are historical outputs and were 
 
 ### Production estimator (E002P)
 
-No estimate changes. The tables are identical before and after; see "E002P" in the PR description. The estimator, the evidence gate and `leafView` without a target are untouched.
+No estimate changes. All eight conditions and the calibration set give identical tables and JSON before and after; only the run-time columns differ. The estimator, the evidence gate and `leafView` without a target are untouched.
 
 ## Not changed, and still open
 
