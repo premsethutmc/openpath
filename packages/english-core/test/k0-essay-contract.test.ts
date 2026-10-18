@@ -20,7 +20,7 @@ const essayEvent: LedgerEvent = {
       text: "My school have a big library.",
       words: 6,
       fingerprint: "f",
-      source: { kind: "synthetic", grade: 8, profile: "openpath.g8-writing@1", dataUse: "synthetic_test" },
+      source: { kind: "synthetic", grade: 8, profile: "openpath.g8-writing@2", dataUse: "synthetic_test" },
     },
   },
 };

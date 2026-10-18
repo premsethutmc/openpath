@@ -15,9 +15,7 @@ import { Learner } from "../../logic/learner.ts";
 import { openRepo } from "../../logic/store.ts";
 import { connectEvaluator, EssayStudio, SAMPLES, STUDIO_PROFILE_ID, STUDIO_PROFILE_NAME, type StudioView } from "../../logic/essay-live/studio.ts";
 import { Api } from "../../logic/account.ts";
-import { presentationStatus } from "../../logic/essay-demo/shared-fixture.ts";
-import { STATUS_LABELS } from "../../logic/essay-demo/fixtures.ts";
-import { visibleStatus } from "../../logic/essay-demo/presenter.ts";
+import { type EvidenceKey, estimateLabel, evidenceLabel, formativeLabel } from "../../logic/essay-live/evidence-labels.ts";
 import "./essay.css";
 
 /** Real time, plus the offset in days the app's tests already use (so a later sitting can be tested). */
@@ -50,7 +48,7 @@ const RETENTION = {
   not_demonstrated: "Not shown: the delayed check did not show it was kept (the evidence is recorded)",
 } as const;
 const yesNo = (b: boolean | null, yes: string, no: string, none = "Not on this path") => (b === null ? none : b ? yes : no);
-const GAP = { suspected: "Suggested by your essay: not checked yet", confirmed: "Checked: questions without help agreed", weakened: "Checked: questions without help were right", unresolved: "Not settled yet" } as const;
+const GAP = { suspected: "Suspected from your essay: not checked with bank questions yet", confirmed: "Gap confirmed: bank questions answered without help agreed", weakened: "Gap not confirmed: bank questions answered without help were right", unresolved: "Checked with bank questions: not settled" } as const;
 
 const screenFor = (v: StudioView): Screen => (v.stage === "write" ? "essay" : v.stage === "diagnose" ? "check" : v.stage === "plan" || v.stage === "learn" ? "path" : v.stage === "rewrite" ? "rewrite" : "profile");
 
@@ -65,6 +63,8 @@ export function EssayLive() {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState<{ item: string; f: Feedback } | null>(null);
   const [lessonAnswer, setLessonAnswer] = useState<number | null>(null);
+  /** The last answer to a generated question was recorded (its result is shown only once all five are answered). */
+  const [recorded, setRecorded] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -107,26 +107,96 @@ export function EssayLive() {
       setBusy(false);
     }
   }
-  async function answer(item: Item, r: Response, kind: "diagnostic" | "step" | "later") {
+  async function answer(item: Item, r: Response, kind: "diagnostic" | "step" | "later" | "practice") {
     if (!studio) return;
+    // practice on model-written questions never reveals an answer while the learner is still answering
+    const practice = kind === "practice";
     await act(async () => {
-      const out = kind === "diagnostic" ? await studio.answerDiagnostic(r) : kind === "later" ? await studio.answerLaterCheck(r) : await studio.answerStep(r);
-      setFeedback({ item: item.id, f: out.feedback });
+      const out = kind === "diagnostic" ? await studio.answerDiagnostic(r) : kind === "later" ? await studio.answerLaterCheck(r) : practice ? await studio.answerPractice(r) : await studio.answerStep(r);
+      setFeedback(practice ? null : { item: item.id, f: out.feedback });
+      setRecorded(practice);
       return out.view;
     });
   }
+  /** Formal track: eligible, unseen bank questions for the chosen competency. */
+  async function checkSkill(hypothesis: string) {
+    if (!studio) return;
+    await act(
+      () => studio.checkSkill(hypothesis),
+      () => {
+        setFeedback(null);
+        setScreen("check");
+      },
+    );
+  }
+  /** Practice track: five fresh model-written questions (provisional; formative only). */
+  async function practise(hypothesis: string) {
+    if (!studio) return;
+    await act(
+      async () => (await studio.practise(hypothesis)).view,
+      (nv) => {
+        setFeedback(null);
+        setRecorded(false);
+        if (nv.nextPractice) setScreen("check");
+      },
+    );
+  }
+  /** The recommended next activity, as an action. */
+  function follow(kind: string, cap: string | null) {
+    const h = cap ? view?.hypotheses.filter((x) => x.competency === cap).at(-1) : undefined;
+    if (kind === "learn" || kind === "practise_and_check") void act(async () => (view?.journey && view.journey.essay === view.essay?.id ? view : await studio!.plan()), () => setScreen("path"));
+    else if (kind === "check_skill" && h) void checkSkill(h.id);
+    else if (kind === "practise" && h) void practise(h.id);
+    else if (kind === "answer_questions" || kind === "finish_practice") setScreen("check");
+    else setScreen("essay");
+  }
+  const keyOf = (it: Item | undefined) => (it?.kind === "code" ? (it.options && it.answer !== undefined ? it.options[it.answer] : (it.answers?.[0] ?? "")) : "");
 
   const v = view;
   const essay = v?.essay;
   const name = (cap: string) => studio?.ectx.profile.byCapability.get(cap)?.name ?? cap;
-  const status = (cap: string) => {
+  const STATUS_CLASS: Record<EvidenceKey, string> = { none: "not-started", seen: "needs-verification", suspected: "needs-verification", confirmed: "learning", unsettled: "needs-verification", not_confirmed: "needs-verification", shown: "independently-demonstrated", shown_delayed_pending: "independently-demonstrated", verified: "verified" };
+  const labelFor = (cap: string) => {
     const c = v?.profile.competencies.find((x) => x.competency === cap);
-    return c ? visibleStatus(presentationStatus(c), "shared-contract", c.engine.verification) : "not-started";
+    return c ? evidenceLabel(c, v?.outcomes.find((o) => o.competency === cap)) : null;
   };
+  /** The evidence state, worded for what the evidence actually shows (evidence-labels.ts). */
   const Status = ({ cap }: { cap: string }) => {
-    const s = status(cap);
-    return <span className={`essay-status essay-status-${s}`} data-status={s}>{STATUS_LABELS[s]}</span>;
+    const l = labelFor(cap);
+    if (!l) return null;
+    return (
+      <span className={`essay-status essay-status-${STATUS_CLASS[l.key]}`} data-status={l.key} title={l.detail}>
+        {l.label}
+      </span>
+    );
   };
+  const Recommendation = () =>
+    v?.recommendation ? (
+      <section className="essay-card essay-recommendation" data-recommendation={v.recommendation.kind} aria-label="What to do next">
+        <p className="kicker">Next</p>
+        <h2>{v.recommendation.title}</h2>
+        <p className="small">{v.recommendation.reason}</p>
+        {v.recommendation.verification && !v.recommendation.verification.available && (
+          <p className="small" data-verification="unavailable">
+            {v.recommendation.verification.reason}
+          </p>
+        )}
+        {v.recommendation.history.length > 0 && (
+          <ul className="small" data-history>
+            {v.recommendation.history.map((h) => (
+              <li key={h}>Earlier essay {h}</li>
+            ))}
+          </ul>
+        )}
+        {(v.recommendation.kind !== "practise" || v.canGenerate) && (
+          <button className="primary essay-primary" disabled={busy} onClick={() => follow(v.recommendation!.kind, v.recommendation!.competency)}>
+            {
+              ({ learn: "Start learning", practise_and_check: "Go to my learning path", answer_questions: "Back to the questions", finish_practice: "Back to the practice", check_skill: "Check this skill", practise: "Practise: 5 new questions", write_again: "Write another essay" } as Record<string, string>)[v.recommendation.kind]
+            }
+          </button>
+        )}
+      </section>
+    ) : null;
   const passage = (item: Item) => (item.kind === "code" && item.passage ? content.ctx.content.passages.get(item.passage) : undefined);
   const enabled = (s: Screen) => !!v && (s === "essay" || !!essay) && (s !== "rewrite" || !!v.journey?.finalRewrite.available) && (s !== "profile" || !!essay);
 
@@ -143,7 +213,7 @@ export function EssayLive() {
         <span>
           Synthetic essays only, on a test learner kept on this device. Questions, lessons and every status come from the real engine.{" "}
           {studio?.connected
-            ? `Essay analysis: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text is sent to the server.`
+            ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text and its quoted evidence are sent to the server. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
             : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
         </span>
       </aside>
@@ -221,22 +291,53 @@ export function EssayLive() {
               }{" "}
               {v.failedAnalyses.length > 0 && "The server's evaluator failed for this essay, so the local stand-in answered. "}One essay gives clues, not conclusions.
             </p>
-            <div className="essay-competencies">
+            <Recommendation />
+            <div className="essay-competencies" data-dashboard>
               {[...new Set(v.analysis?.observations.map((o) => o.competency) ?? [])].map((cap) => {
                 const obs = v.analysis!.observations.filter((o) => o.competency === cap);
+                const errors = obs.filter((o) => o.kind === "error");
                 const h = v.hypotheses.filter((x) => x.competency === cap).at(-1);
+                const asked = !!h && v.diagnostics.some((d) => d.request.hypothesis === h.id && d.request.source !== "generated");
+                const sets = h ? v.questionSets.filter((q) => q.hypothesis === h.id) : [];
+                const failed = sets.at(-1)?.status === "rejected" ? sets.at(-1) : undefined;
                 return (
-                  <article className="essay-card" key={cap} data-competency={cap}>
+                  <article className="essay-card" key={cap} data-competency={cap} data-errors={errors.length}>
                     <div className="essay-card-heading">
                       <h2>{name(cap)}</h2>
                     </div>
                     <Status cap={cap} />
                     {h && <p data-gap={h.status}>{GAP[h.status]}</p>}
+                    <p className="small">
+                      {errors.length ? `${errors.length} thing${errors.length === 1 ? "" : "s"} to check` : "Done well"}
+                      {h && h.essays.length > 1 ? ` · also seen in ${h.essays.length - 1} earlier essay${h.essays.length === 2 ? "" : "s"}` : ""}
+                    </p>
+                    <ul className="essay-quotes">
+                      {obs.map((o) => (
+                        <li key={o.id} data-quote={o.span.quote}>
+                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                        </li>
+                      ))}
+                    </ul>
+                    {h && v.canGenerate && h.status === "suspected" && !asked && (
+                      <button type="button" className="essay-primary" data-check={cap} disabled={busy} onClick={() => void checkSkill(h.id)}>
+                        Check this skill (questions from the bank)
+                      </button>
+                    )}
+                    {h && v.canGenerate && !v.nextPractice && (
+                      <button type="button" className="link" data-practise={cap} disabled={busy} onClick={() => void practise(h.id)}>
+                        {failed ? "Try again: practise with 5 new questions" : "Practise with 5 new questions (provisional)"}
+                      </button>
+                    )}
+                    {failed && (
+                      <p className="small" role="status" data-questions-rejected>
+                        The questions written for this skill did not pass OpenPath&apos;s checks, so none is used: {[...failed.reasons, ...failed.rejected.flatMap((r) => r.reasons.map((x) => `question ${r.index + 1}: ${x}`))].slice(0, 3).join("; ")}.
+                      </p>
+                    )}
                     <details>
                       <summary>Why?</summary>
                       {obs.map((o) => (
                         <blockquote key={o.id}>
-                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                          “{o.span.quote}”: {o.note}
                         </blockquote>
                       ))}
                       {h && <p className="small">{h.basis.join(". ")}</p>}
@@ -253,14 +354,34 @@ export function EssayLive() {
         {v && screen === "check" && (
           <>
             {v.nextDiagnostic ? (
-              <section className="essay-card essay-diagnostic" data-diagnostic={v.nextDiagnostic.request.competency}>
+              <section className="essay-card essay-diagnostic" data-diagnostic={v.nextDiagnostic.request.competency} data-source={v.nextDiagnostic.request.source ?? "bank"}>
                 <p className="kicker">
-                  {name(v.nextDiagnostic.request.competency)} · question {v.nextDiagnostic.position} of up to {v.nextDiagnostic.total} · without help
+                  {name(v.nextDiagnostic.request.competency)} · question {v.nextDiagnostic.position} of {v.nextDiagnostic.request.source === "generated" ? "" : "up to "}
+                  {v.nextDiagnostic.total} · without help
                 </p>
+                {v.nextDiagnostic.request.source === "generated" && <p className="small">Written for you from your essay. Provisional: not reviewed by a teacher, and it never counts as showing the skill. Answers are shown at the end.</p>}
+                {recorded && (
+                  <p className="small" role="status" data-recorded>
+                    Answer recorded.
+                  </p>
+                )}
                 <ItemView key={v.nextDiagnostic.item.id} item={v.nextDiagnostic.item} passage={passage(v.nextDiagnostic.item)} voice={null} locked={busy} onSubmit={(r) => void answer(v.nextDiagnostic!.item, r, "diagnostic")} />
               </section>
+            ) : v.nextPractice ? (
+              <section className="essay-card essay-diagnostic" data-practice={v.nextPractice.set.competency} data-source="generated">
+                <p className="kicker">
+                  {name(v.nextPractice.set.competency)} · practice {v.nextPractice.position} of {v.nextPractice.total}
+                </p>
+                <p className="small">Practice written for you from your essay by a model. Provisional: not reviewed by a teacher. It gives feedback only; it never confirms a gap or counts as showing the skill. Answers are shown at the end.</p>
+                {recorded && (
+                  <p className="small" role="status" data-recorded>
+                    Answer recorded.
+                  </p>
+                )}
+                <ItemView key={v.nextPractice.item.id} item={v.nextPractice.item} passage={undefined} voice={null} locked={busy} onSubmit={(r) => void answer(v.nextPractice!.item, r, "practice")} />
+              </section>
             ) : (
-              <p className="essay-note">No questions are waiting.</p>
+              !v.questionSets.some((q) => q.status === "accepted") && <p className="essay-note">No questions are waiting.</p>
             )}
             {feedback && (
               <div className="essay-feedback" role="status" data-correct={feedback.f.correct}>
@@ -268,11 +389,40 @@ export function EssayLive() {
                 {feedback.f.explanation && <p className="small">{feedback.f.explanation}</p>}
               </div>
             )}
+            {!v.nextPractice &&
+              v.questionSets
+                .filter((q) => q.status === "accepted" && q.essay === essay?.id)
+                .map((q) => {
+                  const f = v.profile.competencies.find((c) => c.competency === q.competency)?.formative;
+                  if (!f || f.set !== q.id || f.status === "pending") return null;
+                  return (
+                    <section className="essay-card essay-results" key={q.id} data-results={q.competency} data-formative={f.status}>
+                      <h2>{name(q.competency)}: your practice</h2>
+                      <p>{f.reason}</p>
+                      <ol>
+                        {q.items.map((it) => {
+                          const a = f.answers.find((x) => x.item === it.id);
+                          return (
+                            <li key={it.id} data-result-item={it.id} data-correct={String(!!a?.correct)}>
+                              <span>{it.prompt}</span>
+                              <small>
+                                {a?.correct ? "Right" : "Not quite"} · answer: {keyOf(it)}
+                                {it.explain ? `. ${it.explain}` : ""}
+                              </small>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    </section>
+                  );
+                })}
+            {!v.nextDiagnostic && !v.nextPractice && <Recommendation />}
             <ul className="essay-profile-list">
               {v.diagnostics.map((d) => (
                 <li key={d.request.id} data-outcome={d.outcome.status}>
                   <span>{name(d.request.competency)}</span>
                   <span>{d.outcome.status === "pending" ? "In progress" : d.outcome.reason}</span>
+                  <small>{d.request.source === "generated" ? "Older fresh questions (provisional: not a formal check)" : "Questions from the bank"}</small>
                 </li>
               ))}
             </ul>
@@ -296,6 +446,19 @@ export function EssayLive() {
                     <section className="essay-branch" key={t.root} data-tree={t.root}>
                       <h2>{name(t.root)}</h2>
                       <Status cap={t.root} />
+                      {t.nodes.some((n) => n.competency === t.root && n.steps.some((x) => x.kind === "independent_check" && x.status === "blocked")) && (
+                        <p className="small" data-verification="unavailable">
+                          Mastery verification is not available for {name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the Grade 8 target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.
+                        </p>
+                      )}
+                      {v.canGenerate && !v.nextPractice && (() => {
+                        const h = v.hypotheses.filter((x) => x.competency === t.root).at(-1);
+                        return h ? (
+                          <button type="button" className="link" data-practise={t.root} disabled={busy} onClick={() => void practise(h.id)}>
+                            More practice: 5 new questions (provisional)
+                          </button>
+                        ) : null;
+                      })()}
                       <div className="essay-branch-body">
                         {t.nodes.map((n) => (
                           <div key={n.competency} data-node={n.competency} data-green={n.green}>
@@ -489,6 +652,10 @@ export function EssayLive() {
                     <li key={c.competency} data-profile={c.competency} data-state={c.state}>
                       <span>{c.name}</span>
                       <Status cap={c.competency} />
+                      {c.gap && <small data-profile-gap={c.gap.status}>{GAP[c.gap.status]}</small>}
+                      <small data-estimate={c.engine.estimate ? c.engine.estimate.mean.toFixed(1) : "none"}>{estimateLabel(c)}</small>
+                      {formativeLabel(c) && <small data-formative={c.formative!.status}>{formativeLabel(c)}</small>}
+                      {c.provenance.provisional.length > 0 && <small data-held={c.provenance.provisional.length}>{c.provenance.provisional.length} answer{c.provenance.provisional.length === 1 ? "" : "s"} on model-written practice questions: kept, never counted as evidence of the skill</small>}
                       {c.notes.map((n) => (
                         <small key={n}>{n}</small>
                       ))}

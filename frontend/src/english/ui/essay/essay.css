@@ -576,3 +576,38 @@
     animation: none;
   }
 }
+
+/* essay-to-diagnostic workflow: the dashboard's quotes, the recommendation and the results of generated questions */
+.essay-experience .essay-quotes {
+  margin: 0.5rem 0;
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+}
+.essay-experience .essay-quotes li {
+  margin: 0.2rem 0;
+  overflow-wrap: anywhere;
+}
+.essay-experience .essay-recommendation {
+  border-left: 4px solid var(--accent, #6b4fd8);
+}
+.essay-experience .essay-results ol {
+  padding-left: 1.1rem;
+}
+.essay-experience .essay-results li {
+  margin: 0.4rem 0;
+  overflow-wrap: anywhere;
+}
+.essay-experience .essay-results li small {
+  display: block;
+}
+.essay-experience .essay-results li[data-correct="false"] small {
+  color: var(--warn, #9a4b00);
+}
+/* a profile row: name and label on one line, then each evidence line below at full width */
+.essay-experience .essay-profile-list li {
+  flex-wrap: wrap;
+}
+.essay-experience .essay-profile-list li > small {
+  flex-basis: 100%;
+  overflow-wrap: anywhere;
+}

@@ -38,7 +38,7 @@ test("ESSAY-INT acceptance: essay → observations → diagnosis → profile →
   // 1. submit a synthetic Grade 8 essay
   let v = await studio.submit(library.text);
   assert.equal(v.essay!.source.dataUse, "synthetic_test");
-  assert.equal(v.essay!.source.profile, "openpath.g8-writing@1");
+  assert.equal(v.essay!.source.profile, "openpath.g8-writing@2");
   assert.equal(learner.events.filter((e) => e.kind === "essay").length >= 2, true, "stored in the learner's own record");
   assert.ok((await repo.load(STUDIO_PROFILE_ID)).some((e) => e.kind === "essay"), "and in the repository");
 
@@ -130,7 +130,8 @@ test("ESSAY-INT acceptance: essay → observations → diagnosis → profile →
   assert.equal(v.stage, "done");
 
   // 7. reload: a new learner object from the same repository gives the same studio
-  const strip = (x: unknown) => JSON.stringify(x, (k, val) => (k === "asOf" ? undefined : val));
+  // the estimate's sd widens with elapsed time (the engine's time model); everything else must be identical
+  const strip = (x: unknown) => JSON.stringify(x, (k, val) => (k === "asOf" || k === "sd" ? undefined : val));
   const reopened = await Learner.open(content, repo, STUDIO_PROFILE_ID, clock);
   studio = new EssayStudio(reopened);
   const reloaded = studio.view();
@@ -220,7 +221,7 @@ test("ESSAY-INT a pilot build refuses the essay studio before anything is record
 
 // ---------------------------------------------------------------- the server's evaluator (Essay Intelligence v2)
 
-const INFO = { available: true, id: "openpath-gateway:llm", version: "essay-llm@1", model: "test-model", rubric: "openpath.g8-writing@1", protocols: { observe: "essay-observe.v2" as const, rewrite: "essay-rewrite.v2" as const } };
+const INFO = { available: true, id: "openpath-gateway:llm", version: "essay-llm@1", model: "test-model", rubric: "openpath.g8-writing@2", protocols: { observe: "essay-observe.v2" as const, rewrite: "essay-rewrite.v2" as const } };
 
 /** A stand-in for the server: answers essay-observe.v2 from the recorded sample outputs, converted to v2. */
 function fakeServer(opts: { fail?: boolean } = {}) {
@@ -251,7 +252,7 @@ test("ESSAY-INT v2: with the server's evaluator connected, analyses and rewrites
   let v = await studio.submit(SAMPLES.essays[0].text);
   assert.equal(v.analysedBy, "llm");
   assert.equal(v.analysis!.evaluator.protocol, "essay-observe.v2");
-  assert.equal(v.analysis!.evaluator.rubric, "openpath.g8-writing@1");
+  assert.equal(v.analysis!.evaluator.rubric, "openpath.g8-writing@2");
   assert.ok(v.analysis!.observations.every((o) => o.verification && o.note.startsWith("In the quoted words")));
   assert.equal(v.hypotheses.find((h) => h.competency === SVA)?.status, "suspected");
   assert.ok(server.calls.every((c) => c.data_use === "synthetic_test"));

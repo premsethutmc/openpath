@@ -10,6 +10,7 @@ every recorded proposal can be traced to the exact prompt that produced it.
 | `short.v1.md` | E3 short written answers: key points marked with quotes; code decides right or wrong | E3a, mock evaluators only |
 | `essay-observe.v1.md` | Essay-to-mastery: quoted error and strength observations per Grade 8 competency; code finds every span | Fixtures and the pattern stand-in only |
 | `essay-rewrite.v1.md` | Essay-to-mastery: 50-word rewrite judged on five separate dimensions with quotes and key ideas | Fixtures only |
+| `essay-questions.v1.md` | Essay-to-diagnostic: five fresh questions for one suspected competency; code checks structure, answer key and duplicates; always provisional | Server gateway (synthetic only); mocked provider in tests; no paid call made |
 
 `{{REQUEST_JSON}}` is filled with the request (`renderFreeformPrompt` in `freeform.ts`). For E3
 prompts the learner's response is also placed between fixed markers (`{{RESPONSE_TEXT}}`), so the

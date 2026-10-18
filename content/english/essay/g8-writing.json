@@ -1,6 +1,6 @@
 {
  "id": "openpath.g8-writing",
- "version": 1,
+ "version": 2,
  "grade": 8,
  "subject": "english_writing",
  "status": "candidate",
@@ -8,7 +8,7 @@
   "name": "6+1 Trait Writing",
   "source": "Education Northwest, 6+1 Trait Writing model (traits used for grouping and reporting only)."
  },
- "note": "Draft Grade 8 writing profile for essay analysis. Expected bands are draft values (band 5 ~ CEFR B1, indicative). Every curriculum mapping is unvalidated until an educator reviews it. Competencies marked specified=false exist in the framework but have no descriptors, questions or lessons yet: they can be observed in an essay but not diagnosed or taught. Every expected band is provisional (uncalibrated): see docs/product/essay-learning/BAND_AUDIT.md.",
+ "note": "Draft Grade 8 writing profile for essay analysis. Expected bands are draft values (band 5 ~ CEFR B1, indicative). Every curriculum mapping is unvalidated until an educator reviews it. Competencies marked specified=false exist in the framework but have no descriptors, questions or lessons yet: they can be observed in an essay but not diagnosed or taught. Every expected band is provisional (uncalibrated): see docs/product/essay-learning/BAND_AUDIT.md. Version 2 (18 October 2026) adds Plurals and countability (EN.GRM.NOUN.plurals_countability, an existing specified framework leaf) so essays can show singular/plural noun errors; its band-5 target is provisional like every other.",
  "competencies": [
   {
    "capability": "EN.GRM.VERB.sva",
@@ -148,6 +148,42 @@
     {
      "scheme": "cbse",
      "code": "Determiners",
+     "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
+     "validated": false
+    }
+   ],
+   "expectedBandStatus": "provisional"
+  },
+  {
+   "capability": "EN.GRM.NOUN.plurals_countability",
+   "name": "Plurals and countability",
+   "area": "grammar",
+   "trait": "conventions",
+   "grade": 8,
+   "expectedBand": 5,
+   "specified": true,
+   "curriculum": [
+    {
+     "scheme": "openpath",
+     "code": "EN.GRM.NOUN.plurals_countability",
+     "note": "OpenPath English framework 0.2.0 leaf; its band descriptors are the definition.",
+     "validated": false
+    },
+    {
+     "scheme": "ncert_lo",
+     "grade": 8,
+     "note": "NCERT Learning Outcomes (2017), Class VIII English: document-level reference only; no outcome-level mapping is claimed.",
+     "validated": false
+    },
+    {
+     "scheme": "cefr",
+     "code": "Grammatical accuracy",
+     "note": "CEFR Companion Volume (2020) illustrative scale(s); band 5 is roughly B1 (indicative).",
+     "validated": false
+    },
+    {
+     "scheme": "cbse",
+     "code": "Determiners (quantifiers with countable and uncountable nouns)",
      "note": "Topic named in the CBSE English (184) Class X syllabus 2025–26; indicative for Class VIII.",
      "validated": false
     }

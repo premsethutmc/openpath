@@ -6,7 +6,7 @@
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
-import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId } from "./content.ts";
+import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId, withRecordedQuestions } from "./content.ts";
 import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
@@ -50,7 +50,10 @@ export class PilotRefusal extends Error {
 export const newProfileId = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `p-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`);
 
 export class Learner {
-  readonly content: AppContent;
+  /** The content the engine scores against: the app's, plus any questions written for this learner (provisional). */
+  content: AppContent;
+  /** The app's content, before anything recorded in this learner's events is added. */
+  private readonly base: AppContent;
   readonly repo: Repo;
   readonly profileId: string;
   readonly clock: Clock;
@@ -64,12 +67,13 @@ export class Learner {
   private spellingStop: { stop: string; note?: string } | null = null;
 
   private constructor(content: AppContent, repo: Repo, profileId: string, events: AppEvent[], clock: Clock) {
-    this.content = content;
+    this.base = content;
+    this.content = withRecordedQuestions(content, events);
     this.repo = repo;
     this.profileId = profileId;
     this.clock = clock;
     this.events = events;
-    this.state = fold(content, events);
+    this.state = fold(this.content, events);
   }
 
   static async open(content: AppContent, repo: Repo, profileId: string, clock: Clock): Promise<Learner> {
@@ -109,6 +113,8 @@ export class Learner {
     }
     t = perfNow();
     try {
+      // a recorded question set adds its (provisional) questions to what the engine scores against
+      if (e.kind === "essay" && e.record.type === "questions") this.content = withRecordedQuestions(this.base, this.events);
       this.state = fold(this.content, this.events);
     } catch (err) {
       record({ name: "engine_error", ok: false, detail: err });
@@ -302,6 +308,7 @@ export class Learner {
   /** Read the stored record again (after it was changed in place) and rebuild everything from it. */
   private async reload(): Promise<void> {
     this.events = await this.repo.load(this.profileId);
+    this.content = withRecordedQuestions(this.base, this.events);
     this.state = fold(this.content, this.events);
     this.spellCache = null;
     this.bookCache = null;

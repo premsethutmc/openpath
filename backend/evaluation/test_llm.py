@@ -105,12 +105,15 @@ class LLMClientTests(unittest.TestCase):
         self.assertIn("rate_limit_error", str(e.exception))
 
     def test_configuration_and_limits(self):
-        for bad in [cfg(provider="other"), cfg(model=""), cfg(base_url="http://insecure.test"), cfg(api_key=""), cfg(max_output_tokens=0), cfg(timeout_s=0), cfg(retries=9)]:
+        for bad in [cfg(provider="other"), cfg(model=""), cfg(base_url="http://insecure.test"), cfg(base_url="http://127.0.0.1.evil.test"), cfg(api_key=""), cfg(max_output_tokens=0), cfg(timeout_s=0), cfg(retries=9)]:
             with self.assertRaises(LLMError):
                 complete(bad, "S", "U", transport=Recorder(body={}))
         with self.assertRaises(LLMError):
             complete(cfg(max_input_chars=10), "S", "U" * 20, transport=Recorder(body={}))
         self.assertNotIn(KEY, repr(cfg()))
+        # plain http only to this machine (a local mock provider in tests)
+        for local in ["http://127.0.0.1:8791", "http://localhost:8791"]:
+            self.assertEqual(cfg(base_url=local).problems(), [])
 
     def test_extract_json(self):
         self.assertEqual(extract_json('```json\n{"a": 1}\n```'), {"a": 1})

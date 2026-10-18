@@ -4,7 +4,7 @@
  * A live LLM evaluator is any object implementing EssayEvaluator; its raw output goes through the same
  * validation as these. Nothing here names a provider.
  */
-import type { EssayEvaluator, ObservationOutput, ObservationRequest, ObserveProtocol, RewriteProtocol, RewriteRequest } from "./contract.ts";
+import type { EssayEvaluator, ObservationOutput, ObservationRequest, ObserveProtocol, QuestionRequest, QuestionsProtocol, RewriteProtocol, RewriteRequest } from "./contract.ts";
 import { essaySentences } from "./text.ts";
 
 /**
@@ -82,7 +82,8 @@ export interface EssayGatewayInfo {
   version: string;
   model: string;
   rubric: string;
-  protocols: { observe: ObserveProtocol; rewrite: RewriteProtocol };
+  /** questions: present when the server can also write diagnostic questions (essay-questions.v1). */
+  protocols: { observe: ObserveProtocol; rewrite: RewriteProtocol; questions?: QuestionsProtocol };
 }
 
 /**
@@ -92,12 +93,14 @@ export interface EssayGatewayInfo {
  * or failure throws, and the caller records a rejected analysis (nothing is guessed). Validation of the output
  * itself happens afterwards, in OpenPath, exactly as for any other evaluator.
  */
-export function gatewayEssayEvaluator(o: { info: EssayGatewayInfo; post: (body: { task: "observe" | "rewrite"; request: unknown; data_use: "synthetic_test" }) => Promise<unknown> }): EssayEvaluator {
-  const call = async (task: "observe" | "rewrite", request: unknown) => {
+export type GatewayTask = "observe" | "rewrite" | "questions";
+
+export function gatewayEssayEvaluator(o: { info: EssayGatewayInfo; post: (body: { task: GatewayTask; request: unknown; data_use: "synthetic_test" }) => Promise<unknown> }): EssayEvaluator {
+  const call = async (task: GatewayTask, request: unknown) => {
     const reply = (await o.post({ task, request, data_use: "synthetic_test" })) as { output?: unknown; evaluator?: Partial<EssayGatewayInfo> & { protocol?: string } } | null;
     if (!reply || typeof reply !== "object" || !("output" in reply)) throw new Error("the essay evaluator gave no output");
     const e = reply.evaluator ?? {};
-    const expected = task === "observe" ? o.info.protocols.observe : o.info.protocols.rewrite;
+    const expected = task === "observe" ? o.info.protocols.observe : task === "rewrite" ? o.info.protocols.rewrite : o.info.protocols.questions;
     if (e.id !== o.info.id || e.version !== o.info.version || e.model !== o.info.model || e.rubric !== o.info.rubric || e.protocol !== expected)
       throw new Error("the essay evaluator answered with a different configuration than it advertised");
     return reply.output;
@@ -109,5 +112,6 @@ export function gatewayEssayEvaluator(o: { info: EssayGatewayInfo; post: (body: 
     protocols: o.info.protocols,
     observe: (req: ObservationRequest) => call("observe", req),
     rewrite: (req: RewriteRequest) => call("rewrite", req),
+    ...(o.info.protocols.questions ? { questions: (req: QuestionRequest) => call("questions", req) } : {}),
   };
 }

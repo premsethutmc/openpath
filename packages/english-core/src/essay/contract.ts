@@ -23,7 +23,7 @@
  * Versioning: every exchanged object carries `contract: "essay-contract@1"`. A breaking change gets a new
  * version string; readers reject versions they do not know.
  */
-import type { CapabilityId } from "../types.ts";
+import type { CapabilityId, CodeItem } from "../types.ts";
 import type { Stage, VerificationStatus } from "../composite.ts";
 import type { ContentStatus } from "../content.ts";
 
@@ -232,9 +232,100 @@ export interface EssayEvaluator {
   version: string;
   model?: string;
   /** Protocols it speaks (default v1). A v2 evaluator is asked with v2 requests and judged by v2 rules. */
-  protocols?: { observe: ObserveProtocol; rewrite: RewriteProtocol };
+  protocols?: { observe: ObserveProtocol; rewrite: RewriteProtocol; questions?: QuestionsProtocol };
   observe(request: ObservationRequest): Promise<unknown>;
   rewrite(request: RewriteRequest): Promise<unknown>;
+  /** Write fresh diagnostic questions (essay-questions.v1). Optional: an evaluator without it cannot generate. */
+  questions?(request: QuestionRequest): Promise<unknown>;
+}
+
+// ---------------------------------------------------------------- generated diagnostic questions (essay-questions.v1)
+
+export const ESSAY_QUESTIONS_PROTOCOL = "essay-questions.v1" as const;
+export type QuestionsProtocol = typeof ESSAY_QUESTIONS_PROTOCOL;
+
+/**
+ * What a question writer receives: one competency of the profile, its descriptors and misconceptions, the essay's
+ * quoted evidence for it, and the questions it must not repeat. No learner identity.
+ */
+export interface QuestionRequest {
+  protocol: QuestionsProtocol;
+  rubric: string;
+  request_id: string;
+  grade: number;
+  competency: { id: CapabilityId; name: string; target_band: number; bands: Record<string, string>; misconceptions: { id: string; description: string }[] };
+  /** Quoted essay evidence for this competency (scrubbed), so the questions address what the essay showed. */
+  essay_evidence: { quote: string; correction?: string; explanation: string }[];
+  count: number;
+  formats: ("choice" | "typed")[];
+  /** Question texts already used or in the bank for this competency: none may be repeated or closely copied. */
+  avoid: string[];
+}
+
+/** One question as a writer must return it (validated strictly; unknown fields are rejected). */
+export interface GeneratedQuestionOutput {
+  /** choice: pick one option; typed: type the missing word(s). */
+  format: "choice" | "typed";
+  /** One sentence (or two) with exactly one blank written as "___". */
+  stem: string;
+  /** choice: 3 or 4 options, each filling the blank. */
+  options?: string[];
+  /** choice: the index of the one correct option. */
+  answer?: number;
+  /** typed: every accepted answer (the first is the model answer). */
+  answers?: string[];
+  /** The stem with the blank filled by the key: it must agree with the key (answer-key consistency). */
+  correct_sentence: string;
+  /** Why the key is right; it must name the key. */
+  explanation: string;
+  /** Estimated difficulty on the framework's band scale. */
+  band: number;
+  /** choice: distractor index → misconception id; typed: wrong answer → misconception id (ids from the request). */
+  misconceptions?: Record<string, string>;
+}
+
+/**
+ * What practice on one model-written question set shows: formative feedback only. It never confirms or rules out a
+ * gap (only reviewed bank questions do), and the engine holds every answer, so it never changes an estimate.
+ */
+export interface FormativeOutcome {
+  set: string;
+  competency: CapabilityId;
+  status: "pending" | "difficulty" | "secure" | "mixed";
+  right: number;
+  answered: number;
+  total: number;
+  /** Wrong answers whose misconception matches the essay's. */
+  misconceptionMatches: number;
+  answers: { evidence: string; item: string; correct: boolean }[];
+  reason: string;
+}
+
+export interface QuestionOutput {
+  request_id: string;
+  competency: CapabilityId;
+  questions: GeneratedQuestionOutput[];
+}
+
+/**
+ * One generation attempt, recorded in the learner's ledger. When accepted, `items` are the validated questions as
+ * provisional code items: they can be asked and scored like any question, and their answers inform the provisional
+ * essay profile, but the engine holds every answer (no estimate change, so never mastery). A rejected attempt keeps
+ * its reasons and no item.
+ */
+export interface QuestionSet {
+  contract: EssayContractVersion;
+  id: string;
+  essay: string;
+  hypothesis: string;
+  competency: CapabilityId;
+  request: QuestionRequest;
+  evaluator: EvaluatorRef;
+  status: "accepted" | "rejected";
+  reasons: string[];
+  /** Per-question problems (index into the output's questions). */
+  rejected: { index: number; reasons: string[] }[];
+  items: ({ kind: "code" } & CodeItem)[];
 }
 
 // ---------------------------------------------------------------- observations
@@ -319,6 +410,10 @@ export interface DiagnosticRequest {
   /** Set when too few suitable unseen questions exist: reported, never filled with invented questions. */
   contentGap?: string;
   policy: string;
+  /** Where the questions came from: the reviewed bank (default) or a validated, provisional generated set. */
+  source?: "bank" | "generated";
+  /** For generated questions: the question set (an essay "questions" record). */
+  questionSet?: string;
 }
 
 export interface DiagnosticOutcome {
@@ -459,6 +554,8 @@ export interface ProvenanceSummary {
   assisted: string[];
   /** Recorded but held by the engine (provisional content, repeats, unqualified evaluators). */
   held: string[];
+  /** The held answers that were on model-written (provisional) questions. */
+  provisional: string[];
 }
 
 export interface CompetencyStatus {
@@ -476,7 +573,19 @@ export interface CompetencyStatus {
    * The engine's view. `state` counts demonstrated or verified only when `currentLevel` (the level the evidence
    * currently supports) reaches `target` (the profile's draft grade band).
    */
-  engine: { stage: Stage; verification: VerificationStatus; currentLevel: number | null; target: number | null; demonstrated: number | null; mastered: number | null; directN: number };
+  engine: {
+    stage: Stage;
+    verification: VerificationStatus;
+    currentLevel: number | null;
+    target: number | null;
+    demonstrated: number | null;
+    mastered: number | null;
+    directN: number;
+    /** The engine's estimate from counted answers (mean and sd on the band scale); null when none was counted. An estimate, never a claim of mastery. */
+    estimate: { mean: number; sd: number } | null;
+  };
+  /** The latest practice on model-written questions for this competency: formative only, never evidence of mastery. */
+  formative: FormativeOutcome | null;
   essays: { errors: number; strengths: number; essays: number; style?: number; notObservable?: number };
   provenance: ProvenanceSummary;
   notes: string[];
@@ -517,7 +626,8 @@ export type EssayRecord =
   | { type: "diagnostic"; request: DiagnosticRequest }
   | { type: "journey"; journey: LearningJourney }
   | { type: "rewrite"; rewrite: RewriteSubmission; evaluation: RewriteEvaluation }
-  | { type: "check"; check: PlannedCheck };
+  | { type: "check"; check: PlannedCheck }
+  | { type: "questions"; set: QuestionSet };
 
 // ---------------------------------------------------------------- later checks (assessment evidence and retention v1)
 

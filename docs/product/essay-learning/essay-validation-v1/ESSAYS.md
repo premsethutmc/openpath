@@ -1,6 +1,6 @@
 # Essays and rewrites for independent annotation (openpath.essay-benchmark@1)
 
-Status: **synthetic**. Essays and reference annotations written by the OpenPath development team (an AI assistant) for testing. They are NOT educator-validated: no teacher has reviewed them. Agreement with these annotations measures agreement with one synthetic reference, not with educators.
+Status: **synthetic**. Essays and reference annotations written by the OpenPath development team (an AI assistant) for testing. They are NOT educator-validated: no teacher has reviewed them. Agreement with these annotations measures agreement with one synthetic reference, not with educators. On 18 October 2026 the rubric was re-pointed to profile openpath.g8-writing@2, which adds Plurals and countability; no essay or annotation changed, and the essays were not re-annotated for plural errors.
 
 Annotate each essay without looking at REFERENCE.md or at another annotator's work. Follow ANNOTATION_GUIDE.md. Record marks in your own copy of annotation-template.csv and rewrite ratings in rewrite-ratings-template.csv.
 

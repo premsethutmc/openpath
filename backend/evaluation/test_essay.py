@@ -97,7 +97,8 @@ class EssayGatewayTests(DevTestCase):
             status = dev.get(STATUS).json()
             r = dev.post(URL, observe_request(), format="json")
         self.assertTrue(status["available"])
-        self.assertEqual(status["protocols"], {"observe": "essay-observe.v2", "rewrite": "essay-rewrite.v2"})
+        self.assertEqual(status["protocols"], {"observe": "essay-observe.v2", "rewrite": "essay-rewrite.v2", "questions": "essay-questions.v1"})
+        self.assertEqual(status["rubric"], "openpath.g8-writing@2")
         self.assertEqual(r.status_code, 200, r.content)
         body = r.json()
         self.assertEqual(body["output"], MODEL_OUTPUT)
@@ -203,3 +204,61 @@ class EssayGatewayTests(DevTestCase):
             r = dev.post(URL, {"task": "rewrite", "request": req, "data_use": "synthetic_test"}, format="json")
         self.assertEqual(r.status_code, 200, r.content)
         self.assertEqual(r.json()["evaluator"]["protocol"], "essay-rewrite.v2")
+
+
+def questions_request(**extra):
+    req = {
+        "protocol": "essay-questions.v1",
+        "rubric": "openpath.g8-writing@2",
+        "request_id": "q:hyp:essay:1:EN.GRM.NOUN.plurals_countability:1",
+        "grade": 8,
+        "competency": {"id": "EN.GRM.NOUN.plurals_countability", "name": "Plurals and countability", "target_band": 5, "bands": {"4": "Forms common irregular plurals."}, "misconceptions": [{"id": "regularised_plural", "description": "Regularises irregular plurals."}]},
+        "essay_evidence": [{"quote": "many womans, call 98765 43210", "correction": "many women", "explanation": "Woman has an irregular plural."}],
+        "count": 5,
+        "formats": ["choice", "typed"],
+        "avoid": ["Write the plural of cat: I have two ___."],
+    }
+    req.update(extra)
+    return {"task": "questions", "request": req, "data_use": "synthetic_test"}
+
+
+QUESTIONS_OUTPUT = {"request_id": "q:hyp:essay:1:EN.GRM.NOUN.plurals_countability:1", "competency": "EN.GRM.NOUN.plurals_countability", "questions": []}
+
+
+class EssayQuestionTests(DevTestCase):
+    @override_settings(**LLM)
+    def test_questions_task_uses_the_versioned_prompt_scrubs_evidence_and_checks_the_request_id(self):
+        dev = self.developer()
+        t = anthropic_reply(json.dumps(QUESTIONS_OUTPUT))
+        with mock.patch.object(essay, "TRANSPORT", t):
+            r = dev.post(URL, questions_request(), format="json")
+        self.assertEqual(r.status_code, 200, r.content)
+        self.assertEqual(r.json()["output"], QUESTIONS_OUTPUT)
+        self.assertEqual(r.json()["evaluator"]["protocol"], "essay-questions.v1")
+        self.assertEqual(r.json()["evaluator"]["rubric"], "openpath.g8-writing@2")
+        _, _, sent = t.calls[0]
+        self.assertIn("fresh diagnostic questions", sent["system"])
+        self.assertNotIn("Request:", sent["system"])
+        user = json.loads(sent["messages"][0]["content"])
+        self.assertNotIn("98765", user["essay_evidence"][0]["quote"], "contact details removed before the provider sees it")
+        rec = EssayEvaluationRecord.objects.get()
+        self.assertEqual((rec.task, rec.protocol, rec.status), ("questions", "essay-questions.v1", "answered"))
+        self.assertNotIn("womans", json.dumps(model_to_dict(rec), default=str))
+        # an answer for another request is refused
+        with mock.patch.object(essay, "TRANSPORT", anthropic_reply(json.dumps({**QUESTIONS_OUTPUT, "request_id": "q:other"}))):
+            self.assertEqual(dev.post(URL, questions_request(), format="json").status_code, 502)
+
+    @override_settings(**LLM)
+    def test_malformed_question_requests_are_refused(self):
+        dev = self.developer()
+        bad = [
+            questions_request(protocol="essay-observe.v2"),
+            questions_request(count=50),
+            questions_request(formats=["essay"]),
+            questions_request(competency={"id": "x"}),
+            questions_request(essay_evidence=[{"quote": "a", "learner": "Asha"}]),
+            questions_request(avoid=["x" * 700]),
+            questions_request(learner_id="1"),
+        ]
+        for body in bad:
+            self.assertEqual(dev.post(URL, body, format="json").status_code, 400, body["request"])

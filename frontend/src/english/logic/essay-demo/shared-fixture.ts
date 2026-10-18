@@ -69,7 +69,7 @@ export function sharedFixture(
       prompt: "Should schools create more green spaces?",
       genre: "persuasive",
       grade: 8,
-      profile: "openpath.g8-writing@1",
+      profile: "openpath.g8-writing@2",
       dataUse: "synthetic_test",
     },
   };
@@ -160,7 +160,9 @@ export function sharedFixture(
         demonstrated: null,
         mastered: null,
         directN: demonstrated ? 2 : 0,
+        estimate: null,
       },
+      formative: null,
       essays: {
         errors: state === "suspected" ? 1 : 0,
         strengths: observed ? 1 : 0,
@@ -173,6 +175,7 @@ export function sharedFixture(
           : [],
         assisted: scene === "guided" ? [`fixture:guided:${c.id}`] : [],
         held: [],
+        provisional: [],
       },
       notes: [
         "Synthetic projection only. No real learner evidence was created.",
