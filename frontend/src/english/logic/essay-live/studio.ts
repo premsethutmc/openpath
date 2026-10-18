@@ -61,6 +61,8 @@ import {
   dueCheck,
   journeyOutcomes,
   planCheck,
+  planReview,
+  competencyOutcome,
   plannedChecks,
   createJourney,
   diagnosticOutcome,
@@ -323,6 +325,11 @@ export class EssayStudio {
 
   private nextStep(journey: LearningJourney): NextStep | null {
     const steps = journey.trees.flatMap((t) => t.nodes.flatMap((node) => node.steps.map((step) => ({ step, node })))).sort((a, b) => a.step.order - b.step.order);
+    // policy @4: a review after a failed delayed check follows the journey's own steps (its check is a later check, below)
+    for (const r of journey.reviews ?? []) {
+      const node: JourneyNode = { competency: r.competency, role: "target", requires: [], reason: r.reason, steps: r.steps, green: false, level: "none", decision: "review" };
+      for (const step of r.steps) if (step.kind !== "independent_check") steps.push({ step, node });
+    }
     for (const { step, node } of steps) {
       if (step.status !== "pending") continue;
       if (step.kind === "teach") {
@@ -376,7 +383,8 @@ export class EssayStudio {
    */
   async checkSkill(hypothesisId: string): Promise<StudioView> {
     const [m] = await this.learner.essayMeta(1);
-    const d = planDiagnosticFor(this.ectx, this.events, hypothesisId, m);
+    // the learner chose this skill: an explicit reason, so a skill already shown at the target can be checked again (policy @4)
+    const d = planDiagnosticFor(this.ectx, this.events, hypothesisId, m, { explicitReason: "the learner chose to check this skill again" });
     await this.learner.recordEssay(d.event as EssayEvent);
     return this.view();
   }
@@ -456,6 +464,11 @@ export class EssayStudio {
     const v = this.view();
     if (!v.journey) return v;
     for (const o of v.outcomes) {
+      // policy @4: a failed delayed check records its review at once (normally done when the check is answered)
+      if (o.review && !o.review.planned) {
+        await this.recordReview(o.competency);
+        continue;
+      }
       if (!o.next || o.next.planned) continue;
       // a retention check is planned only when the target has been shown; its notBefore keeps it delayed
       const [m] = await this.learner.essayMeta(1);
@@ -469,6 +482,15 @@ export class EssayStudio {
     return this.view();
   }
 
+  private async recordReview(competency: string): Promise<void> {
+    const [m] = await this.learner.essayMeta(1);
+    try {
+      await this.learner.recordEssay(planReview(this.ectx, this.events, m, competency).event);
+    } catch (e) {
+      if (!(e instanceof EssayRefusal)) throw e;
+    }
+  }
+
   /** Answer the next question of a later check that is due: always a new sitting, an independent first answer. */
   async answerLaterCheck(response: Response): Promise<{ feedback: Feedback; view: StudioView }> {
     const next = this.view().laterCheck;
@@ -477,6 +499,11 @@ export class EssayStudio {
     else await this.ensureSession();
     await this.learner.present(next.item, next.check.kind === "retention" ? "retention" : "assessment");
     const feedback = await this.learner.answer(next.item, response, { use: next.check.kind === "retention" ? "retention" : "assessment" });
+    // policy @4: the delayed check just failed: record the review now, in the existing journey, without waiting for an essay
+    if (next.check.kind === "retention" && next.position === next.total) {
+      const o = competencyOutcome(this.ectx, this.events, next.check.competency, this.now());
+      if (o.review && !o.review.planned) await this.recordReview(next.check.competency);
+    }
     return { feedback, view: this.view() };
   }
 

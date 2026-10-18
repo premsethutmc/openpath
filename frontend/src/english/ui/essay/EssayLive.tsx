@@ -478,6 +478,21 @@ export function EssayLive() {
                     </section>
                   ))}
                 </div>
+                {(v.journey.reviews ?? []).map((r) => (
+                  <section className="essay-branch" key={r.check} data-review={r.competency} data-review-complete={String(r.complete)}>
+                    <h2>Review: {name(r.competency)}</h2>
+                    <p className="small">{r.reason} Your learning path above is unchanged.</p>
+                    <ol>
+                      {r.steps.map((s) => (
+                        <li key={s.id} data-step={s.kind} data-status={s.status}>
+                          <span className="essay-node" />
+                          {STEP_LABEL[s.kind]}
+                          <small>{s.status === "blocked" ? s.content.note : s.status === "skipped" ? "Available if you want it: some answers in the delayed check were right" : STEP_STATUS[s.status]}</small>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                ))}
                 {v.outcomes.length > 0 && (
                   <section className="essay-card essay-outcomes" aria-label="Where each skill stands">
                     <h2>Where each skill stands</h2>

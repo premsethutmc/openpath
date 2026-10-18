@@ -273,6 +273,12 @@ export interface LeafView {
    * `demonstrated` or the history alone.
    */
   verification: Verification;
+  /**
+   * Only when a target band was asked for (leafView opts.target): the same schedule and verification, anchored to the
+   * first demonstration AT the target (retention timing, policy @4). An earlier demonstration at a lower level stays in
+   * `retention`/`verification` and `historicalLevel`; it never starts the clock or passes a check for the target.
+   */
+  atTarget?: { band: number; retention: Retention; verification: Verification };
   misconceptions: { id: string; strength: number }[];
 }
 
@@ -302,7 +308,7 @@ export function isStruggling(node: NodeState, p: Policy): boolean {
   return recent.filter((t) => t.correct).length / recent.length < p.struggling_max_success;
 }
 
-export function leafView(composite: Composite, index: FrameworkIndex, id: CapabilityId, now: string): LeafView {
+export function leafView(composite: Composite, index: FrameworkIndex, id: CapabilityId, now: string, opts: { target?: number | null } = {}): LeafView {
   const p = index.framework.policy;
   const node = composite.nodes[id];
   const cap = index.leaves.get(id)!;
@@ -345,8 +351,14 @@ export function leafView(composite: Composite, index: FrameworkIndex, id: Capabi
     masteredBefore: slipped || unverified ? masteredHist : null,
     retention: ret,
     verification: verificationOf(node, ret, demonstrated, masteredHist),
+    ...(opts.target !== undefined && opts.target !== null ? { atTarget: atTargetOf(node, p, now, opts.target, demonstrated, masteredHist) } : {}),
     misconceptions,
   };
+}
+
+function atTargetOf(node: NodeState, p: Policy, now: string, band: number, demonstrated: number | null, masteredHist: number | null): NonNullable<LeafView["atTarget"]> {
+  const ret = retention(node, p, now, undefined, { fromLevel: band });
+  return { band, retention: ret, verification: verificationOf(node, ret, demonstrated, masteredHist) };
 }
 
 function verificationOf(node: NodeState, ret: Retention, demonstrated: number | null, masteredHist: number | null): Verification {

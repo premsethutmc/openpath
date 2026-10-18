@@ -27,6 +27,7 @@ import {
   type Item,
   patternEssayEvaluator,
   planCheck,
+  planReview,
   planDiagnostics,
   type Response,
   scoreCode,
@@ -129,6 +130,24 @@ class Sim {
   journey(essayId: string) {
     const { event, journey } = createJourney(this.ectx, this.events, this.meta(), essayId);
     this.events.push(event);
+    // a journey with conditional steps (planner policy @3/@4: check first) is followed as the studio does — steps in
+    // order, re-read after each check, a check after teaching in a new sitting; any other journey exactly as before
+    if (journey.trees.some((t) => t.nodes.some((n) => n.steps.some((x) => x.condition)))) {
+      const done = new Set<string>();
+      for (let guard = 0; guard < 50; guard++) {
+        const st = journeyStatus(this.ectx, this.events, journey.id, this.at());
+        const next = st.trees.flatMap((t) => t.nodes.flatMap((n) => n.steps)).sort((a, b) => a.order - b.order).find((x) => x.status === "pending" && !done.has(x.id));
+        if (!next) break;
+        done.add(next.id);
+        if (next.kind === "teach") next.content.refs.slice(0, 1).forEach((l) => this.teach(next.competency, l));
+        else if (next.kind === "guided_practice") next.content.refs.forEach((id) => this.practise(id));
+        else {
+          if (this.events.some((e) => e.kind === "intervention" && e.session === this.session && e.capability === next.competency)) this.newSitting(this.day + 1);
+          next.content.refs.forEach((id) => this.answer(id, next.purpose === "retention" ? "retention" : "assessment"));
+        }
+      }
+      return journey;
+    }
     const steps = journey.trees.flatMap((t) => t.nodes.flatMap((node) => node.steps.map((s) => ({ s, node })))).sort((a, b) => a.s.order - b.s.order);
     for (const { s } of steps.filter((x) => x.s.kind !== "independent_check")) {
       if (s.status === "blocked") continue;
@@ -150,20 +169,30 @@ class Sim {
   laterCheck(journeyId: string): { planned: boolean; kind?: string; notBefore?: string; refused?: string; earlyAttempt?: string | null; b?: number[] } {
     const j = this.status(journeyId);
     let planned;
-    try {
-      const m = this.meta();
-      planned = planCheck(this.ectx, this.events, m, SVA, j);
-    } catch (e) {
-      return { planned: false, refused: (e as Error).message };
-    }
-    this.events.push(planned.event as EssayEvent);
+    // policy @4 (studio.ts answerLaterCheck): a failed delayed check records its review at once; its lesson and
+    // practice come first, in this sitting, and its check in a new sitting
+    const o = competencyOutcome(this.ectx, this.events, SVA, this.at(), j);
+    if (o.review && !o.review.planned) {
+      planned = planReview(this.ectx, this.events, this.meta(), SVA);
+      this.events.push(planned.event as EssayEvent);
+      const rv = planned.check.review!;
+      rv.lessons.slice(0, 1).forEach((l) => this.teach(SVA, l));
+      rv.practice.forEach((id) => this.practise(id));
+    } else
+      try {
+        const m = this.meta();
+        planned = planCheck(this.ectx, this.events, m, SVA, j);
+      } catch (e) {
+        return { planned: false, refused: (e as Error).message };
+      }
+    if (!planned.check.review) this.events.push(planned.event as EssayEvent);
     // trying it straight away: no question is offered before notBefore
     const early = dueCheck(this.ectx, this.events, this.at());
     const earlyAttempt = early ? early.check.id : null;
     const dueDay = Math.ceil((Date.parse(planned.check.notBefore) - T0) / DAY);
     this.newSitting(Math.max(this.day + 1, dueDay));
     for (let q = dueCheck(this.ectx, this.events, this.at()); q; q = dueCheck(this.ectx, this.events, this.at())) this.answer(q.item, planned.check.kind === "retention" ? "retention" : "assessment");
-    return { planned: true, kind: planned.check.kind, notBefore: planned.check.notBefore, earlyAttempt, b: planned.check.items.map((i) => this.item(i.id).b) };
+    return { planned: true, kind: planned.check.review ? "review" : planned.check.kind, notBefore: planned.check.notBefore, earlyAttempt, b: planned.check.items.map((i) => this.item(i.id).b) };
   }
   engine(cap = SVA) {
     const l = Ledger.rebuild(this.ectx.ctx, LEARNER, this.events);

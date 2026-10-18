@@ -48,7 +48,18 @@ export interface Retention {
 const DUE_TOLERANCE_MS = 12 * 3_600_000;
 const addDays = (iso: string, days: number) => new Date(Date.parse(iso) + days * 86_400_000).toISOString();
 
-export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION): Retention {
+/**
+ * Options for a schedule anchored to one level (retention timing, policy @4).
+ *   fromLevel  the schedule starts at the first session (without teaching) whose demonstrated level reaches this
+ *              level. Sessions before it are history: an earlier, lower demonstration never starts the clock for a
+ *              higher target. Omitted: the first demonstration at any level starts it (the engine's own schedule,
+ *              unchanged).
+ */
+export interface RetentionOptions {
+  fromLevel?: number | null;
+}
+
+export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION, opts: RetentionOptions = {}): Retention {
   const out: Retention = { status: "none", level: null, firstDemonstratedAt: null, lastVerifiedAt: null, lastFailedAt: null, dueAt: null, intervalDays: null, overdueDays: 0, checks: [] };
   const initial = cfg.initialDays ?? policy.mastery_gap_days;
   let lastFailed = false;
@@ -58,6 +69,7 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
     if (s.teaching) continue;
     if (out.firstDemonstratedAt === null) {
       if (s.level === null) continue;
+      if (opts.fromLevel !== undefined && opts.fromLevel !== null && s.level < opts.fromLevel) continue;
       out.firstDemonstratedAt = s.at;
       out.level = s.level;
       out.intervalDays = initial;

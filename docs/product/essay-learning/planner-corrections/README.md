@@ -93,3 +93,8 @@ changes at the next session instead). Grade-target claim precision in the calibr
 - **Remedial teaching after a failed *planned* delayed check** still comes only through the next recommendation or essay
   (inside a journey it follows the check directly).
 - **Diagnosis below the target** (the main source of unnecessary lessons) is a locked-policy question for the owner.
+
+## Follow-ups (policy @4)
+
+Retention timing at the target, no automatic re-diagnosis on later essays, and a review after a failed delayed check:
+see `policy-4/README.md` (branch `fix/essay-retention-followups`, stacked on this one).
