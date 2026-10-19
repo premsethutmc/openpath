@@ -1,0 +1,24 @@
+{
+  "name": "openpath-kids",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OpenPath Kids: Chintoo's World, a data-driven interactive cartoon player for ages 3-7.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "serve": "node scripts/serve.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "e2e": "node --test e2e/walkthrough.test.mjs",
+    "validate": "node --import tsx scripts/validate.mts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.28.2",
+    "playwright": "^1.56.0",
+    "tsx": "^4.23.12",
+    "typescript": "^6.0.3"
+  },
+  "engines": { "node": ">=22" }
+}

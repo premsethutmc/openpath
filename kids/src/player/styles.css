@@ -1,0 +1,177 @@
+/* OpenPath Kids player. Warm, calm, large touch targets, no flashing. */
+:root {
+  --ink: #4a2c18;
+  --paper: #fff8ec;
+  --accent: #ff8a3d;
+  --accent-dark: #d9651f;
+  --teal: #2bb3a6;
+  --shadow: 0 6px 0 rgba(90, 50, 20, 0.25);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #2d1e14;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  font-family: "Nunito", "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+}
+#app { position: fixed; inset: 0; display: grid; place-items: center; }
+
+.frame { position: relative; width: 100vw; height: 100vh; height: 100dvh; display: grid; place-items: center; overflow: hidden; }
+.host { position: relative; width: min(100vw, calc(100dvh * 16 / 9)); aspect-ratio: 16 / 9; }
+.stage { display: block; width: 100%; height: 100%; touch-action: none; border-radius: 0; }
+@media (min-aspect-ratio: 16/9) { .host { border-radius: 0; } }
+
+/* ---- characters ---- */
+.rig .eye-closed, .rig .mouth, .rig .mouth-talk { display: none; }
+.rig .mouth-talk { display: inline; opacity: 0; }
+.rig.talking .mouth-talk { animation: talk 0.3s steps(1, end) infinite; }
+@keyframes talk { 0% { opacity: 1; } 50% { opacity: 0; } }
+.rig[data-mood="neutral"] .mouth-neutral,
+.rig[data-mood="sleepy"] .mouth-neutral,
+.rig[data-mood="happy"] .mouth-smile,
+.rig[data-mood="proud"] .mouth-smile,
+.rig[data-mood="surprised"] .mouth-o,
+.rig[data-mood="hungry"] .mouth-o,
+.rig[data-mood="sad"] .mouth-sad,
+.rig[data-mood="yuck"] .mouth-yuck { display: inline; }
+.rig .mouth-o { display: inline; opacity: 0; }
+.rig[data-mood="surprised"] .mouth-o, .rig[data-mood="hungry"] .mouth-o { opacity: 1; }
+
+.rig[data-mood="proud"] .eye, .rig[data-asleep] .eye { visibility: hidden; }
+.rig[data-mood="proud"] .eye-closed, .rig[data-asleep] .eye-closed { display: inline; }
+.rig[data-asleep] .eye-closed { transform: scaleY(-1); transform-box: fill-box; transform-origin: center; }
+.rig[data-mood="sleepy"]:not([data-asleep]) .lid { opacity: 1; }
+.rig .brow { transform-box: fill-box; transform-origin: center; transition: transform 0.3s; }
+.rig[data-mood="sad"] .brow-l { transform: rotate(-16deg) translateY(-4px); }
+.rig[data-mood="sad"] .brow-r { transform: rotate(16deg) translateY(-4px); }
+.rig[data-mood="yuck"] .brow-l { transform: rotate(14deg) translateY(6px); }
+.rig[data-mood="yuck"] .brow-r { transform: rotate(-14deg) translateY(6px); }
+.rig[data-mood="surprised"] .brow, .rig[data-mood="happy"] .brow { transform: translateY(-8px); }
+.rig[data-mood="hungry"] .brow-l { transform: rotate(-10deg); }
+.rig[data-mood="hungry"] .brow-r { transform: rotate(10deg); }
+.rig[data-mood="yuck"] .eye { transform: scaleY(0.6); transform-box: fill-box; transform-origin: center; }
+.rig .cheek { transition: opacity 0.3s; }
+.rig[data-mood="happy"] .cheek, .rig[data-mood="proud"] .cheek { opacity: 0.75; }
+
+/* ---- props and touch ---- */
+.prop .halo { opacity: 0; pointer-events: none; }
+.prop.touchable .halo { animation: halo 2.2s ease-in-out infinite; }
+@keyframes halo { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+.prop.touchable .prop-body { animation: nudge 2.2s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+.hit { fill: transparent; cursor: pointer; pointer-events: all; }
+.hit.done { pointer-events: none; }
+
+.badge circle { fill: #fff; stroke: var(--teal); stroke-width: 7; }
+.badge text { font-size: 44px; font-weight: 800; fill: #1f6f67; }
+
+/* ---- speech ---- */
+.bubble rect, .bubble path { fill: #fff; stroke: #6b3b1f; stroke-width: 5; stroke-linejoin: round; }
+.bubble path { stroke-width: 0; }
+.bubble text { font-size: 40px; font-weight: 800; fill: var(--ink); }
+.caption {
+  position: absolute; left: 50%; bottom: 3%; transform: translate(-50%, 20%);
+  max-width: 80%; padding: 0.35em 1em; border-radius: 999px;
+  background: rgba(255, 248, 236, 0.92); color: var(--ink);
+  font-size: clamp(14px, 2.6vmin, 28px); font-weight: 800; text-align: center;
+  opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+}
+.caption.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---- ambient motion (off when motion is reduced or the story is paused) ---- */
+.amb-cloud-a { animation: drift 46s linear infinite alternate; }
+.amb-cloud-b { animation: drift 60s linear infinite alternate-reverse; }
+.amb-cloud-c { animation: drift 38s linear infinite alternate; }
+@keyframes drift { from { transform: translateX(-60px); } to { transform: translateX(60px); } }
+.amb-sun { animation: spin 90s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.amb-canopy { animation: sway 5s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-0.6deg); } to { transform: rotate(0.6deg); } }
+.amb-sway, .amb-grass { animation: sway2 3.2s ease-in-out infinite alternate; }
+.amb-grass:nth-of-type(2n) { animation-duration: 2.6s; }
+@keyframes sway2 { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+.amb-leaf { animation: sway2 2.4s ease-in-out infinite alternate; }
+.amb-curtain-l, .amb-curtain-r { animation: curtain 6s ease-in-out infinite alternate; }
+@keyframes curtain { from { transform: skewX(-1.5deg); } to { transform: skewX(1.5deg); } }
+.amb-beam { animation: beam 7s ease-in-out infinite alternate; }
+@keyframes beam { from { opacity: 0.6; } to { opacity: 1; } }
+.amb-ripple { animation: ripple 3s ease-out infinite; }
+@keyframes ripple { from { transform: scale(0.4); opacity: 0.8; } to { transform: scale(1.6); opacity: 0; } }
+.amb-butterfly-a { animation: flutter-path-a 16s ease-in-out infinite alternate; }
+.amb-butterfly-b { animation: flutter-path-b 19s ease-in-out infinite alternate; }
+@keyframes flutter-path-a { 0% { transform: translate(0, 0); } 33% { transform: translate(-120px, -60px); } 66% { transform: translate(-60px, 30px); } 100% { transform: translate(-200px, -20px); } }
+@keyframes flutter-path-b { 0% { transform: translate(0, 0); } 50% { transform: translate(-90px, -80px); } 100% { transform: translate(-30px, -10px); } }
+.amb-flutter { animation: wings 0.35s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+@keyframes wings { from { transform: scaleX(1); } to { transform: scaleX(0.3); } }
+
+.reduced [class*="amb-"], .reduced .prop.touchable .prop-body { animation: none !important; }
+.reduced .prop.touchable .halo { animation: none; opacity: 0.7; }
+.paused *, .paused *::before { animation-play-state: paused !important; }
+
+/* ---- controls ---- */
+button { font: inherit; }
+.ctl {
+  position: absolute; z-index: 5; width: 56px; height: 56px; padding: 10px;
+  border: 0; border-radius: 50%; background: rgba(255, 248, 236, 0.85); color: var(--ink);
+  box-shadow: 0 3px 0 rgba(90, 50, 20, 0.25); cursor: pointer;
+}
+.ctl svg { width: 100%; height: 100%; display: block; }
+.controls { position: absolute; top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); display: flex; gap: 12px; z-index: 5; }
+.controls .ctl { position: static; }
+.grownups { top: max(10px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); width: 44px; height: 44px; padding: 8px; opacity: 0.55; }
+.grownups .ring { position: absolute; inset: -4px; border-radius: 50%; border: 4px solid var(--teal); clip-path: inset(0 100% 0 0); }
+.grownups.holding .ring { animation: fill-ring 1s linear forwards; }
+@keyframes fill-ring { to { clip-path: inset(0 0 0 0); } }
+.frame[data-state="ready"] .controls, .frame[data-state="ended"] .controls { display: none; }
+
+.overlay { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; background: rgba(45, 30, 20, 0.28); }
+.overlay[hidden] { display: none; }
+.big {
+  width: clamp(112px, 30vmin, 200px); height: clamp(112px, 30vmin, 200px); padding: 0;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: var(--accent); color: #fff;
+  box-shadow: 0 8px 0 var(--accent-dark), 0 14px 30px rgba(0, 0, 0, 0.25); cursor: pointer;
+  position: relative;
+}
+/* A soft ring that breathes around the button (the button itself stays still under the finger). */
+.big::after {
+  content: ""; position: absolute; inset: -14px; border-radius: 50%;
+  border: 8px solid rgba(255, 248, 236, 0.7); animation: breathe 2.4s ease-in-out infinite; pointer-events: none;
+}
+.big svg { width: 56%; height: 56%; display: block; }
+.big:active { transform: translateY(4px); box-shadow: 0 4px 0 var(--accent-dark); }
+@keyframes breathe { 0%, 100% { transform: scale(0.94); opacity: 0.4; } 50% { transform: scale(1.04); opacity: 1; } }
+.reduced .big::after { animation: none; }
+.turn { display: none; position: absolute; bottom: 8%; width: 64px; height: 64px; color: #fff8ec; opacity: 0.85; }
+@media (orientation: portrait) { .turn { display: block; } }
+
+.panel {
+  position: absolute; z-index: 6; inset: auto; width: min(92vw, 420px); max-height: 92dvh; overflow: auto;
+  padding: 20px 22px; border-radius: 22px; background: var(--paper); color: var(--ink);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); user-select: text;
+}
+.panel[hidden] { display: none; }
+.panel h2 { margin: 0 0 4px; font-size: 22px; }
+.panel .title { margin: 0 0 14px; opacity: 0.75; }
+.panel fieldset { border: 0; padding: 0; margin: 0 0 12px; display: grid; gap: 8px; }
+.panel legend { font-weight: 800; margin-bottom: 6px; }
+.panel label { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 18px; }
+.panel input { width: 24px; height: 24px; accent-color: var(--teal); }
+.panel .note { font-size: 14px; opacity: 0.8; }
+.panel .buttons { display: flex; gap: 10px; justify-content: flex-end; }
+.panel .buttons button { min-height: 48px; padding: 0 18px; border-radius: 14px; border: 0; background: var(--teal); color: #fff; font-weight: 800; }
+.panel .buttons .close { background: #e9dcc6; color: var(--ink); }
+@media (max-height: 520px) {
+  .panel { padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; align-items: start; }
+  .panel h2, .panel .title, .panel .note, .panel .buttons { grid-column: 1 / -1; }
+  .panel .title { margin-bottom: 6px; }
+  .panel label { min-height: 40px; }
+  .panel fieldset { margin: 0; }
+}
+.broken { color: #fff; padding: 20px; white-space: pre-wrap; }
