@@ -1,5 +1,7 @@
 """Written answers marked by an educator (written@1): consent, pseudonyms, one append-only mark, evidence only when
 marked correct. Synthetic accounts and pupils only."""
+import json
+
 from django.core.management import call_command
 
 from .learning import content, independent_at
@@ -40,7 +42,11 @@ class WrittenMarkingTests(LearningBase):
         attempt = self.written('anything at all, even the words written:marked-correct')
         self.assertIsNone(independent_at(self.records(), q['competency']), 'an unmarked written answer is not evidence')
         self.assertEqual(self.save(self.attempt(TASK, '', activity='practice')).status_code, 400, 'an empty written answer is refused')
-        self.assertEqual(self.save(self.attempt(TASK, 'x' * 4001, activity='practice')).status_code, 400, 'at most 4000 characters')
+        self.assertEqual(self.save(self.attempt(TASK, 'x' * 16001, activity='practice')).status_code, 400, 'at most 16 000 characters')
+        # draw@1: a drawing and its note are one text answer, pending like any written answer
+        drawing = 'draw@1 ' + json.dumps({'text': 'The tangent is perpendicular to the radius.', 's': [['l', 10, 10, 200, 200], ['c', 150, 150, 200, 150]]})
+        self.assertEqual(self.save(self.attempt(TASK, drawing, activity='practice')).status_code, 201)
+        self.assertIsNone(independent_at(self.records(), q['competency']), 'a drawing is not evidence until an educator marks it')
         self.assertTrue(attempt)
 
     def test_nothing_is_shared_until_the_parent_chooses_and_only_with_an_educator(self):

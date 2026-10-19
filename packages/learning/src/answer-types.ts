@@ -153,6 +153,13 @@ export function normalise(raw: string): string {
     .replace(/√/g, "sqrt")
     .replace(/\s+/g, " ");
 }
+/** Numbers side by side (mixed@1): "179 2/3" is the mixed number 179⅔, never 179 × 2/3; any other two numbers with
+ * only a space between them ("2 3") are unreadable, not a product. */
+export function spaced(s: string): string {
+  const t = s.replace(/(^|[^\w.)^])(\d+) (\d+) ?\/ ?(\d+)(?![\w.(^])/g, (_, pre, w, n, d) => `${pre}(${w}+${n}/${d})`);
+  if (/\d \.?\d/.test(t)) throw new Error("two numbers side by side");
+  return t;
+}
 function tokens(s: string): Tok[] {
   const out: Tok[] = [];
   let i = 0;
@@ -197,7 +204,7 @@ function tokens(s: string): Tok[] {
 export type Node = { k: "num"; v: string } | { k: "var"; v: string } | { k: "const"; v: "pi" | "e" } | { k: "neg"; a: Node } | { k: "bin"; op: "+" | "-" | "*" | "/" | "^"; a: Node; b: Node } | { k: "fn"; f: string; a: Node };
 /** Parse an expression: + − × ÷ ^, brackets, |x|, implicit multiplication (2x, 3(x+1), x sin x), functions. */
 export function parse(raw: string): Node {
-  const s = normalise(raw);
+  const s = spaced(normalise(raw));
   if (s.length > 200) throw new Error("too long");
   const ts = tokens(s);
   let i = 0;

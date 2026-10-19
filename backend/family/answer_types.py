@@ -187,8 +187,17 @@ def _tokens(s):
     return out
 
 
+def spaced(s):
+    """Numbers side by side (mixed@1; answer-types.ts spaced): "179 2/3" is the mixed number 179 2/3, never a product;
+    any other two numbers with only a space between them are unreadable."""
+    t = re.sub(r'(^|[^\w.)^])(\d+) (\d+) ?/ ?(\d+)(?![\w.(^])', lambda m: f'{m.group(1)}({m.group(2)}+{m.group(3)}/{m.group(4)})', s)
+    if re.search(r'\d \.?\d', t):
+        raise Unreadable('two numbers side by side')
+    return t
+
+
 def parse(raw):
-    s = normalise(raw)
+    s = spaced(normalise(raw))
     if len(s) > 200:
         raise Unreadable('too long')
     ts = _tokens(s)
