@@ -1,0 +1,113 @@
+{
+ "schema": "competency-concepts@1",
+ "version": "1.0.0",
+ "status": "provisional",
+ "note": "Concept annotations for curriculum interpretation (meaning@3, packages/learning/src/meaning.ts): concepts a competency carries that its short name does not say. They change only how textbook outcomes are matched to competencies (a reviewer still decides); no competency, relation or evidence changes. Written with AI assistance, not educator-reviewed.",
+ "annotations": {
+  "MATH.number.exponents": [
+   "powers"
+  ],
+  "MATH.algebra.identities-intro": [
+   "expansion",
+   "distributive"
+  ],
+  "MATH.algebra.identities": [
+   "expansion",
+   "binomialProduct"
+  ],
+  "MATH.algebra.factorisation": [
+   "factorise",
+   "expressions"
+  ],
+  "MATH.algebra.polynomials": [
+   "polynomials"
+  ],
+  "MATH.calculus.continuity": [
+   "continuity"
+  ],
+  "MATH.calculus.differentiability": [
+   "differentiability"
+  ],
+  "MATH.calculus.derivative-rules": [
+   "derivatives",
+   "differentiationRules"
+  ],
+  "MATH.calculus.derivatives": [
+   "derivatives",
+   "firstPrinciples"
+  ],
+  "MATH.calculus.applications": [
+   "derivatives",
+   "extrema"
+  ],
+  "MATH.calculus.indefinite-integrals": [
+   "integrals",
+   "antiderivative"
+  ],
+  "MATH.calculus.integration-methods": [
+   "integrals",
+   "substitution",
+   "byParts"
+  ],
+  "MATH.calculus.definite-integrals": [
+   "integrals",
+   "definite"
+  ],
+  "MATH.calculus.area-integrals": [
+   "integrals",
+   "area"
+  ],
+  "MATH.algebra.matrices": [
+   "matrices"
+  ],
+  "MATH.algebra.determinants": [
+   "determinants"
+  ],
+  "MATH.probability.conditional": [
+   "probability",
+   "conditional"
+  ],
+  "MATH.probability.bayes": [
+   "probability",
+   "bayes"
+  ],
+  "MATH.probability.classical": [
+   "probability"
+  ],
+  "MATH.vectors.products": [
+   "vectors"
+  ],
+  "MATH.vectors.algebra": [
+   "vectors"
+  ],
+  "MATH.algebra.quadratic-complex": [
+   "complexNumbers",
+   "quadratic"
+  ],
+  "MATH.number.complex": [
+   "complexNumbers"
+  ],
+  "MATH.measurement.combined-solids": [
+   "solids"
+  ],
+  "MATH.measurement.cones-spheres": [
+   "solids"
+  ],
+  "MATH.trigonometry.ratios": [
+   "trigonometry"
+  ],
+  "MATH.algebra.quadratic-discriminant": [
+   "discriminant",
+   "quadratic",
+   "equations"
+  ],
+  "MATH.algebra.matrix-systems": [
+   "matrices",
+   "equations",
+   "twoVariables"
+  ],
+  "MATH.algebra.binomial": [
+   "binomialTheorem"
+  ]
+ }
+}

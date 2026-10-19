@@ -1,0 +1,384 @@
+{
+ "schema": "content-review@1",
+ "note": "The educator-review registry (packages/learning/src/review.ts). Maintained with packages/learning/scripts/review.ts. 'submitted' means awaiting an educator: no module here has been approved or released, so no question counts as validated in the shared engine.",
+ "entries": [
+  {
+   "item": "module:MATH.algebra.identities",
+   "competency": "MATH.algebra.identities",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "25ff77e7",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "25ff77e7",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "25ff77e7",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.identities-intro",
+   "competency": "MATH.algebra.identities-intro",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "c8810233",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "c8810233",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "c8810233",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.quadratic-discriminant",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "3fffe494",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "3fffe494",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "3fffe494",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.quadratics",
+   "competency": "MATH.algebra.quadratics",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "78427d56",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "78427d56",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "78427d56",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.calculus.definite-integrals",
+   "competency": "MATH.calculus.definite-integrals",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "1ea74da7",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "1ea74da7",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.calculus.derivative-rules",
+   "competency": "MATH.calculus.derivative-rules",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "216df5fb",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "216df5fb",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "216df5fb",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.calculus.indefinite-integrals",
+   "competency": "MATH.calculus.indefinite-integrals",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "6424ddd1",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "6424ddd1",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "6424ddd1",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.calculus.integration-methods",
+   "competency": "MATH.calculus.integration-methods",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "56cc6b22",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "56cc6b22",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "56cc6b22",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.coordinate.cartesian",
+   "competency": "MATH.coordinate.cartesian",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "66c84b96",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "66c84b96",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.measurement.rectangle-area",
+   "competency": "MATH.measurement.rectangle-area",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "294d9334",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "294d9334",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.equivalent-fractions",
+   "competency": "MATH.number.equivalent-fractions",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "dcc20825",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "dcc20825",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "dcc20825",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.exponents",
+   "competency": "MATH.number.exponents",
+   "origin": "synthesised",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "4ce28d9f",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "4ce28d9f",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "4ce28d9f",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.factors-multiples",
+   "competency": "MATH.number.factors-multiples",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "ba1a6732",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "ba1a6732",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.fraction-add-like",
+   "competency": "MATH.number.fraction-add-like",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "645a6929",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "645a6929",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.fraction-comparison",
+   "competency": "MATH.number.fraction-comparison",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "1f9065ea",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "1f9065ea",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.fraction-models",
+   "competency": "MATH.number.fraction-models",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "45695038",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "45695038",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.multiplication-tables",
+   "competency": "MATH.number.multiplication-tables",
+   "origin": "authored",
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "contentHash": "62aa835a",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T12:00:00.000Z",
+     "contentHash": "62aa835a",
+     "note": "added"
+    }
+   ]
+  }
+ ]
+}

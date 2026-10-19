@@ -1,7 +1,7 @@
 {
- "version": "1.0.0",
+ "version": "1.1.0",
  "status": "provisional",
- "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed.",
+ "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed. 1.1.0 adds micro-skills, supports, and two relation kinds that are never followed by recovery: 'alternatives' (another way to do the same work) and 'enrichment' (going further). Nothing in 1.0.0 is changed or removed.",
  "competencies": [
   {
    "id": "MLY.mult.facts-2-5-10",
@@ -98,6 +98,90 @@
    "objectives": [
     "Read the integral of a constant as width × height"
    ]
+  },
+  {
+   "id": "MLY.pow.whole",
+   "name": "Powers of whole numbers",
+   "partOf": "MATH.number.exponents",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Work out a power such as 2⁵ as repeated multiplication"
+   ]
+  },
+  {
+   "id": "MLY.alg.distributive",
+   "name": "The distributive property: a(x + b)",
+   "partOf": "MATH.algebra.identities-intro",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Multiply every term inside a bracket by the number outside"
+   ]
+  },
+  {
+   "id": "MLY.alg.expand-binomials",
+   "name": "Expand (x + a)(x + b)",
+   "partOf": "MATH.algebra.identities",
+   "gradeRange": [
+    8,
+    9
+   ],
+   "objectives": [
+    "Multiply two brackets term by term and collect the x terms"
+   ]
+  },
+  {
+   "id": "MLY.calc.power-derivative",
+   "name": "Differentiate a power of x",
+   "partOf": "MATH.calculus.derivative-rules",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Use d/dx (k xⁿ) = k n xⁿ⁻¹ and evaluate it at a point"
+   ]
+  },
+  {
+   "id": "MLY.calc.power-antiderivative",
+   "name": "Antiderivative of a power of x",
+   "partOf": "MATH.calculus.indefinite-integrals",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use ∫ k xⁿ dx = k xⁿ⁺¹ ⁄ (n + 1) + C and evaluate it between limits"
+   ]
+  },
+  {
+   "id": "MLY.calc.substitution",
+   "name": "Integrate by substitution",
+   "partOf": "MATH.calculus.integration-methods",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Choose u, rewrite the integral in u, and change the limits"
+   ]
+  },
+  {
+   "id": "MLY.calc.by-parts",
+   "name": "Integrate by parts",
+   "partOf": "MATH.calculus.integration-methods",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use ∫ u dv = uv − ∫ v du"
+   ]
   }
  ],
  "supports": [
@@ -178,6 +262,94 @@
     "MATH.number.fraction-add-like"
    ],
    "note": "A fraction times a whole number is repeated addition of like fractions."
+  },
+  {
+   "competency": "MATH.number.exponents",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "A whole-number power is repeated multiplication."
+  },
+  {
+   "competency": "MATH.algebra.identities-intro",
+   "supports": [
+    "MATH.number.multiplication-tables",
+    "MATH.algebra.variables"
+   ],
+   "note": "Expanding a(x + b) multiplies a by each term."
+  },
+  {
+   "competency": "MATH.algebra.identities",
+   "supports": [
+    "MATH.algebra.identities-intro",
+    "MATH.number.integer-add"
+   ],
+   "note": "(x + a)(x + b) is two distributive steps; the x terms are collected with signed numbers."
+  },
+  {
+   "competency": "MATH.calculus.derivative-rules",
+   "supports": [
+    "MATH.number.exponents",
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "The power rule lowers the power by one and multiplies by it."
+  },
+  {
+   "competency": "MATH.calculus.indefinite-integrals",
+   "supports": [
+    "MATH.calculus.derivative-rules",
+    "MATH.number.exponents",
+    "MATH.number.fraction-add-like"
+   ],
+   "note": "An antiderivative undoes a derivative; evaluating it needs powers and fractions with the same denominator."
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "supports": [
+    "MATH.algebra.variables",
+    "MATH.number.exponents"
+   ],
+   "note": "A substitution evaluates u = x² + c at the limits."
+  },
+  {
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "supports": [
+    "MATH.number.integer-add",
+    "MATH.number.exponents"
+   ],
+   "note": "b² − 4ac is signed arithmetic with a square."
+  }
+ ],
+ "alternatives": [
+  {
+   "competency": "MATH.algebra.identities",
+   "alternatives": [
+    "MATH.measurement.rectangle-area"
+   ],
+   "note": "An area model: (x + a)(x + b) is a rectangle x + a by x + b, cut into four parts."
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "alternatives": [
+    "MATH.algebra.functions"
+   ],
+   "note": "Read the solutions where the graph of y = x² + px + q crosses the x-axis."
+  }
+ ],
+ "enrichment": [
+  {
+   "competency": "MATH.algebra.quadratics",
+   "enrichment": [
+    "MATH.algebra.quadratic-complex"
+   ],
+   "note": "When there are no real solutions, the complex ones."
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "enrichment": [
+    "MATH.calculus.differential-equations"
+   ],
+   "note": "Separable differential equations use the same integrals."
   }
  ]
 }

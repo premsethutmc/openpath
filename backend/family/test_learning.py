@@ -185,6 +185,9 @@ class GeneratedQuestionTests(LearningBase):
                 self.assertEqual((g['competency'], g['type']), (r['competency'], r['type']), r['id'])
                 from .learning import right
                 self.assertTrue(right(g, r['answer']), f"{r['id']}: the app's answer {r['answer']} is right on the server ({g['answer']})")
+                if 'options' in r:
+                    self.assertEqual(g['options'], r['options'], r['id'])
+                    self.assertEqual(g['answer'], r['answer'], r['id'])
 
     def test_a_generated_question_is_saved_with_its_competency_and_checked(self):
         self.save(self.enrol())

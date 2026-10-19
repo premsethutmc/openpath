@@ -19,6 +19,7 @@ import { mathematicsLedger } from "../../mathematics/src/registration";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
+import { releasedQuestions } from "./review";
 
 export const DAY = 86_400_000;
 /** The delayed check comes at least this long after independent success (the existing seven-day requirement). */
@@ -44,9 +45,14 @@ export function useReviewFixture(f: { items: string[]; releasedAt: string } | nu
 }
 export const reviewFixtureActive = () => getFixture() !== null;
 
+let released: Map<string, string> | null = null;
 export function nativeItem(q: Question): Item & { kind: "code" } {
   const fixture = getFixture();
-  const validated = fixture?.items.has(q.id);
+  // validated: a question of a module an educator approved and that was released unchanged (review.ts), or, in a
+  // test build only, the review fixture
+  released ??= releasedQuestions();
+  const releasedAt = released.get(q.id) ?? (fixture?.items.has(q.id) ? fixture.releasedAt : undefined);
+  const validated = releasedAt !== undefined;
   return {
     kind: "code",
     id: `learn:${q.id}`,
@@ -60,8 +66,8 @@ export function nativeItem(q: Question): Item & { kind: "code" } {
     a: 1,
     b: 4,
     evidence_status: validated ? "validated" : "provisional",
-    ...(validated ? { released_at: fixture!.releasedAt } : {}),
-    review: validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
+    ...(validated ? { released_at: releasedAt } : {}),
+    review: released.has(q.id) ? "Educator-reviewed and released (content/learning/review.v1.json)" : validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
     explain: q.solution,
   } as Item & { kind: "code" };
 }

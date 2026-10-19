@@ -78,6 +78,15 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "board-b-sample-mathematics-class-10",
+   "version": "1.1.0",
+   "grade": 10,
+   "title": "Board B Sample Mathematics, Class 10",
+   "hash": "57f70817",
+   "file": "board-b-sample-mathematics-class-10.v1.1.0.json",
+   "board": "Sample Board B (synthetic, not a real board)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-10",
    "version": "1.0.0",
    "grade": 10,
@@ -109,6 +118,15 @@
    "title": "OpenPath Sample Mathematics, Grade 11",
    "hash": "62b64d64",
    "file": "openpath-sample-mathematics-grade-11.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-12",
+   "version": "1.1.0",
+   "grade": 12,
+   "title": "OpenPath Sample Mathematics, Grade 12",
+   "hash": "76999a5b",
+   "file": "openpath-sample-mathematics-grade-12.v1.1.0.json",
    "board": "OpenPath sample (synthetic, not a real board)"
   }
  ]

@@ -89,7 +89,9 @@ test("modules are complete: diagnostics, strategies with their own guided and ch
     assert.ok(m.retention.length >= 2, `${m.competency}: a delayed check of two questions (two fresh answers are needed to verify)`);
     const used = [...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.probes, ...m.strategies.flatMap((s) => [s.guided, s.check])];
     assert.equal(new Set(used).size, used.length, `${m.competency}: no question has two roles`);
-    for (const id of used) assert.equal(question(id).competency, m.competency, `${id} belongs to ${m.competency}`);
+    for (const id of used.filter((x) => !m.probes.includes(x))) assert.equal(graph.evidenceTarget(question(id).competency), m.competency, `${id} belongs to ${m.competency}`);
+    // a probe asks about what the skill builds on: its own skill, or one a relation names (7 × 8 inside 7 × 8 = ?; 3 × 4 inside 3(x + 4))
+    for (const id of m.probes) assert.ok(question(id).competency === m.competency || graph.relationsOf(m.competency).some((r) => r.from === question(id).competency), `${id}: a probe about ${m.competency} or something it builds on`);
     const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => question(id).type));
     assert.ok(formats.size >= 2, `${m.competency}: two question formats (the shared engine needs two contexts to demonstrate)`);
     for (const s of m.strategies) for (const n of s.needs) assert.ok(m.probes.includes(n), `${s.id} needs a probe of this module`);
@@ -145,7 +147,7 @@ test("releases are versioned by content: a changed release has a different hash,
   assert.notEqual(hashOf({ ...changed, hash: "" }), r.hash);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: r.hash }, new Map()), r);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: "deadbeef" }, new Map()), null);
-  assert.equal(sampleReleases.length, 7, "the latest version of six sample books and one second-board book");
+  assert.equal(sampleReleases.length, 9, "the latest version of seven sample books (Grades 4, 5, 7, 8, 10, 11, 12) and two second-board books (Grades 4 and 10)");
   // earlier versions stay readable: a learner enrolled on 1.0.0 still finds their curriculum
   const old = allReleases.find((x) => x.id === r.id && x.version === "1.0.0")!;
   assert.equal(releaseFor({ id: old.id, version: "1.0.0", hash: old.hash }, new Map()), old);

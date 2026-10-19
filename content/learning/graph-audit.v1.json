@@ -1,7 +1,7 @@
 {
  "schema": "math-relation-audit@1",
  "graph": "prerequisites 1.1.0",
- "version": "1.0.0",
+ "version": "1.1.0",
  "status": "proposal: not educator-reviewed",
  "reviewer": "OpenPath engineering (mathematical review by Claude); needs educator review",
  "scope": "Every mandatory edge of graph 1.1.0 whose target is assigned by a sample curriculum, has a learning module, or is a learning support.",
@@ -12,7 +12,7 @@
   "disputed": "not mathematically needed: not traced in recovery; proposed for removal from the mandatory graph",
   "trivial": "true but uninformative (remote foundations): not traced"
  },
- "note": "The mandatory graph is not changed by this file. It changes only which relations recovery follows; no evidence or competency ID changes.",
+ "note": "The mandatory graph is not changed by this file. It changes only which relations recovery follows; no evidence or competency ID changes. 1.1.0 adds the mandatory edges into the competencies of the synthesised modules (6 edges); the 41 edges of 1.0.0 are unchanged.",
  "edges": [
   {
    "target": "MATH.algebra.arithmetic-sequences",
@@ -259,6 +259,36 @@
    "source": "MATH.statistics.scaled-bars",
    "classification": "disputed",
    "reason": "Finding a mean does not need scaled bar charts."
+  },
+  {
+   "target": "MATH.number.exponents",
+   "source": "MATH.number.profit-loss",
+   "classification": "disputed",
+   "reason": "Exponent laws need repeated multiplication, not profit and loss: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.calculus.indefinite-integrals",
+   "source": "MATH.calculus.applications",
+   "classification": "disputed",
+   "reason": "Antiderivatives reverse the differentiation rules; rates and extrema are not needed. Differentiation rules are a learning support instead."
+  },
+  {
+   "target": "MATH.calculus.integration-methods",
+   "source": "MATH.calculus.indefinite-integrals",
+   "classification": "mandatory",
+   "reason": "Substitution and parts rewrite an integral into one whose antiderivative is known."
+  },
+  {
+   "target": "MATH.algebra.identities-intro",
+   "source": "MATH.algebra.algebra-simplify",
+   "classification": "plausible",
+   "reason": "Expanding a(x + b) produces like terms to collect; simplifying is closely tied but a(x + b) itself needs only the distributive property."
+  },
+  {
+   "target": "MATH.calculus.derivative-rules",
+   "source": "MATH.calculus.differentiability",
+   "classification": "support",
+   "reason": "Applying the power rule does not require testing differentiability; knowing where rules apply is useful context."
   }
  ]
 }

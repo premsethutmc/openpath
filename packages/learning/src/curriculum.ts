@@ -7,7 +7,7 @@
  * release records who reviewed it and that it is NOT educator-reviewed. An outcome that matches nothing becomes a
  * provisional competency proposal with its textbook reference; it is never registered as a competency.
  */
-import { extractPlain, extractStructured, type ExtractedDocument } from "./extract";
+import { extractPlain, extractStructured, type ExtractedDocument, type ExtractedOutcome, type ExtractedSection } from "./extract";
 import { graph, type Competency } from "./graph";
 import { interpret } from "./meaning";
 
@@ -19,7 +19,7 @@ export interface SourceRef {
 export interface Mapping {
   id: string;
   score: number;
-  method: "text-match@1" | "meaning@2";
+  method: "text-match@1" | "meaning@2" | "meaning@3";
   status: "proposed" | "accepted" | "rejected";
 }
 export interface ProvisionalCompetency {
@@ -36,22 +36,48 @@ export interface Outcome {
   mapping: {
     competencies: Mapping[];
     proposal?: ProvisionalCompetency;
-    /** meaning@2: clear, uncertain (a reviewer must choose) or missing (no competency carries it), and why. */
-    verdict?: "clear" | "uncertain" | "missing";
+    /** meaning@2: clear, uncertain (a reviewer must choose) or missing (no competency carries it), and why;
+     * unsupported: the subject has no competency graph in OpenPath yet, so nothing is mapped. */
+    verdict?: "clear" | "uncertain" | "missing" | "unsupported";
     why?: string;
     concepts?: string[];
   };
   /** Where the outcome is in the source document. */
   location?: { page?: number; line: number };
 }
-export interface Chapter {
+export interface Section {
   id: string;
-  number: number;
+  number: string;
   title: string;
   pages?: string;
   outcomes: Outcome[];
   examples: { title: string; pages?: string }[];
   exercises: { ref: string; pages?: string }[];
+  sections?: Section[];
+}
+export interface Chapter {
+  id: string;
+  number: number;
+  title: string;
+  pages?: string;
+  /** The unit (part, strand, theme) the chapter belongs to, when the book groups chapters. */
+  unit?: { id: string; number: number; title: string };
+  outcomes: Outcome[];
+  examples: { title: string; pages?: string }[];
+  exercises: { ref: string; pages?: string }[];
+  /** Sections of any depth; each has its own outcomes. */
+  sections?: Section[];
+}
+/** Subjects with a competency graph in OpenPath (others are extracted and kept, but nothing is mapped). */
+export const SUPPORTED_SUBJECTS = ["Mathematics"] as const;
+export const subjectSupported = (name: string) => /^(mathematics|maths?)$/i.test(name.trim());
+/** Every outcome of a chapter or section, with the section path it sits in (outermost first). */
+export function outcomesOf(c: Chapter | Section, path: Section[] = []): { outcome: Outcome; sections: Section[] }[] {
+  return [...c.outcomes.map((outcome) => ({ outcome, sections: path })), ...(c.sections ?? []).flatMap((s) => outcomesOf(s, [...path, s]))];
+}
+/** Every outcome of a release, with its subject, chapter and section path. */
+export function allOutcomesOf(r: CurriculumRelease) {
+  return r.subjects.flatMap((s) => s.chapters.flatMap((chapter) => outcomesOf(chapter).map((x) => ({ ...x, chapter, subject: s }))));
 }
 export interface CurriculumRelease {
   id: string;
@@ -62,7 +88,7 @@ export interface CurriculumRelease {
   hash: string;
   source: { kind: "textbook"; title: string; edition?: string; publisher?: string; board?: string; academicYear?: string; licence?: string; synthetic: boolean; extractor?: string };
   review: { by: string; at: string; note: string; educatorReviewed: false } | null;
-  subjects: { id: string; name: string; chapters: Chapter[] }[];
+  subjects: { id: string; name: string; chapters: Chapter[]; supported?: false; unsupportedReason?: string }[];
 }
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48);
@@ -164,11 +190,38 @@ export function synthesise(input: string | ExtractedDocument, opts: { id?: strin
   const title = meta.title ?? `Grade ${grade} curriculum`;
   const synthetic = /synthetic|sample|test|not a real/i.test(`${meta.board ?? ""} ${meta.publisher ?? ""} ${meta.edition ?? ""}`);
   const subject = meta.subject ?? "Mathematics";
+  const supported = subjectSupported(subject);
+  const outcome = (prefix: string, chapterTitle: string) => (o: ExtractedOutcome, k: number): Outcome => {
+    const id = `${prefix}.o${k + 1}`;
+    if (!supported) return { id, text: o.text, pages: o.pages, location: o.location, mapping: { competencies: [], verdict: "unsupported", why: `${subject} is not supported in My Learning Year yet: OpenPath has a competency graph for mathematics only, so nothing is mapped or taught.` } };
+    const meaning = interpret(o.text, grade);
+    const competencies: Mapping[] = meaning.candidates.map((m) => ({ id: m.id, score: m.score, method: meaning.method, status: "proposed" }));
+    return {
+      id,
+      text: o.text,
+      pages: o.pages,
+      location: o.location,
+      mapping: {
+        competencies,
+        verdict: meaning.verdict,
+        why: meaning.why,
+        concepts: meaning.concepts,
+        ...(meaning.verdict === "missing"
+          ? { proposal: { id: `proposal.${slug(title)}.${id}`, name: o.text, status: "provisional-proposal" as const, source: { textbook: title, chapter: chapterTitle, pages: o.pages }, note: "No existing competency carries this outcome's mathematics. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions." } }
+          : {}),
+      },
+    };
+  };
+  const section = (cid: string, chapterTitle: string) => (x: ExtractedSection): Section => {
+    const sid = `${cid}.s${x.number.replace(/\./g, "-")}`;
+    return { id: sid, number: x.number, title: x.title, pages: x.pages, examples: x.examples, exercises: x.exercises, outcomes: x.outcomes.map(outcome(sid, chapterTitle)), ...(x.sections.length ? { sections: x.sections.map(section(cid, chapterTitle)) } : {}) };
+  };
   const body = {
     subjects: [
       {
         id: slug(subject),
         name: subject,
+        ...(supported ? {} : { supported: false as const, unsupportedReason: `${subject} is not supported in My Learning Year yet (mathematics only).` }),
         chapters: chapters.map((c) => {
           const cid = `ch${c.number}-${slug(c.title)}`;
           return {
@@ -176,28 +229,11 @@ export function synthesise(input: string | ExtractedDocument, opts: { id?: strin
             number: c.number,
             title: c.title,
             pages: c.pages,
+            ...(c.unit ? { unit: { id: `unit${c.unit.number}-${slug(c.unit.title)}`, number: c.unit.number, title: c.unit.title } } : {}),
             examples: c.examples,
             exercises: c.exercises,
-            outcomes: c.outcomes.map((o, k) => {
-              const meaning = interpret(o.text, grade);
-              const id = `${cid}.o${k + 1}`;
-              const competencies: Mapping[] = meaning.candidates.map((m) => ({ id: m.id, score: m.score, method: "meaning@2", status: "proposed" }));
-              return {
-                id,
-                text: o.text,
-                pages: o.pages,
-                location: o.location,
-                mapping: {
-                  competencies,
-                  verdict: meaning.verdict,
-                  why: meaning.why,
-                  concepts: meaning.concepts,
-                  ...(meaning.verdict === "missing"
-                    ? { proposal: { id: `proposal.${slug(title)}.${id}`, name: o.text, status: "provisional-proposal" as const, source: { textbook: title, chapter: c.title, pages: o.pages }, note: "No existing competency carries this outcome's mathematics. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions." } }
-                    : {}),
-                },
-              };
-            }),
+            outcomes: c.outcomes.map(outcome(cid, c.title)),
+            ...(c.sections?.length ? { sections: c.sections.map(section(cid, c.title)) } : {}),
           };
         }),
       },
@@ -210,7 +246,7 @@ export function synthesise(input: string | ExtractedDocument, opts: { id?: strin
     grade,
     title,
     hash: "",
-    source: { kind: "textbook", title, edition: meta.edition, publisher: meta.publisher, board: meta.board, ...(meta.academicYear ? { academicYear: meta.academicYear } : {}), licence: meta.licence, synthetic, extractor: doc.provenance.extractor },
+    source: { kind: "textbook", title, edition: meta.edition, publisher: meta.publisher, board: meta.board, ...(meta.academicYear ?? meta.academicyear ? { academicYear: meta.academicYear ?? meta.academicyear } : {}), licence: meta.licence, synthetic, extractor: doc.provenance.extractor },
     review: null,
     ...body,
   };
@@ -230,34 +266,27 @@ export interface ReviewDecision {
 export function review(draft: CurriculumRelease, decisions: ReviewDecision[] | "accept-proposals", by: string, at: string, note = "Reviewed by the account owner in OpenPath. Not an educator review."): CurriculumRelease {
   if (draft.status !== "draft") throw new Error("Only a draft can be reviewed");
   const decided = decisions === "accept-proposals" ? null : new Map(decisions.map((d) => [d.outcome, new Set(d.accept)]));
-  const subjects = draft.subjects.map((s) => ({
-    ...s,
-    chapters: s.chapters.map((c) => ({
-      ...c,
-      outcomes: c.outcomes.map((o) => {
-        // "accept-proposals" accepts the top proposal of a CLEAR mapping only; an uncertain one needs an explicit decision
-        const keep = decided ? decided.get(o.id) ?? new Set<string>() : new Set(o.mapping.verdict === "uncertain" ? [] : o.mapping.competencies.slice(0, 1).map((m) => m.id));
-        for (const id of keep) if (!graph.byId.has(id)) throw new Error(`Unknown competency ${id}`);
-        const listed = o.mapping.competencies.map((m) => ({ ...m, status: keep.has(m.id) ? ("accepted" as const) : ("rejected" as const) }));
-        // a reviewer may also add a competency the matcher did not propose
-        for (const id of keep) if (!listed.some((m) => m.id === id)) listed.push({ id, score: 0, method: "text-match@1", status: "accepted" });
-        return { ...o, mapping: { ...o.mapping, competencies: listed } };
-      }),
-    })),
-  }));
+  const decide = (o: Outcome): Outcome => {
+    // "accept-proposals" accepts the top proposal of a CLEAR mapping only; an uncertain one needs an explicit decision
+    const keep = decided ? decided.get(o.id) ?? new Set<string>() : new Set(o.mapping.verdict === "uncertain" || o.mapping.verdict === "unsupported" ? [] : o.mapping.competencies.slice(0, 1).map((m) => m.id));
+    if (o.mapping.verdict === "unsupported" && keep.size) throw new Error(`${o.id}: this subject is not supported, so nothing can be mapped`);
+    for (const id of keep) if (!graph.byId.has(id)) throw new Error(`Unknown competency ${id}`);
+    const listed = o.mapping.competencies.map((m) => ({ ...m, status: keep.has(m.id) ? ("accepted" as const) : ("rejected" as const) }));
+    // a reviewer may also add a competency the matcher did not propose
+    for (const id of keep) if (!listed.some((m) => m.id === id)) listed.push({ id, score: 0, method: "text-match@1", status: "accepted" });
+    return { ...o, mapping: { ...o.mapping, competencies: listed } };
+  };
+  const inSection = (x: Section): Section => ({ ...x, outcomes: x.outcomes.map(decide), ...(x.sections ? { sections: x.sections.map(inSection) } : {}) });
+  const subjects = draft.subjects.map((s) => ({ ...s, chapters: s.chapters.map((c) => ({ ...c, outcomes: c.outcomes.map(decide), ...(c.sections ? { sections: c.sections.map(inSection) } : {}) })) }));
   const release: CurriculumRelease = { ...draft, subjects, status: "reviewed", review: { by, at, note, educatorReviewed: false }, hash: "" };
   release.hash = hashOf({ ...release, hash: "" });
   return release;
 }
 
-/** The competencies a release assigns (accepted mappings only), in book order. */
-export function assigned(release: CurriculumRelease): { competency: string; outcome: Outcome; chapter: Chapter; subject: string }[] {
+/** The competencies a release assigns (accepted mappings only), in book order, with the section path of each. */
+export function assigned(release: CurriculumRelease): { competency: string; outcome: Outcome; chapter: Chapter; sections: Section[]; subject: string }[] {
   if (release.status !== "reviewed") return [];
-  const out: { competency: string; outcome: Outcome; chapter: Chapter; subject: string }[] = [];
-  for (const s of release.subjects)
-    for (const c of s.chapters)
-      for (const o of c.outcomes) for (const m of o.mapping.competencies) if (m.status === "accepted") out.push({ competency: m.id, outcome: o, chapter: c, subject: s.name });
-  return out;
+  return allOutcomesOf(release).flatMap(({ outcome, chapter, sections, subject }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => ({ competency: m.id, outcome, chapter, sections, subject: subject.name })));
 }
 
 export function validateRelease(r: CurriculumRelease): string[] {

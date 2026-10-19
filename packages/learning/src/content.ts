@@ -6,8 +6,9 @@
 import data from "../../../content/learning/modules.v1.json";
 import problemsData from "../../../content/learning/problems.v1.json";
 import goalsData from "../../../content/learning/goals.v1.json";
+import libraryData from "../../../content/learning/library.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
-import { explainStep, problemOf } from "./families";
+import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -105,7 +106,13 @@ export interface Goal {
 }
 
 export const contentVersion = data.version;
-export const modules = data.modules as unknown as Module[];
+/** Modules written by hand (modules.v1.json) and modules synthesised from blueprints (library.v1.json, library.ts). */
+export const authoredModules = data.modules as unknown as Module[];
+export const synthesisedModules = libraryData.modules as unknown as (Module & { provenance: Record<string, unknown> })[];
+export const libraryVersion = libraryData.version;
+export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))];
+/** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
+export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);
 export const questions = data.questions as unknown as Question[];
 export const problems = problemsData.problems as unknown as Problem[];
 export const goals = goalsData.goals as unknown as Goal[];
@@ -117,10 +124,20 @@ export const question = (id: string): Question => {
   if (q) return q;
   const f = fragments.get(id);
   const g = problemOf(id);
-  if (g) return { id, competency: g.competency, skill: g.competency, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, difficulty: 1, source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
+  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
   throw new Error(`Unknown question ${id}`);
 };
+/** A generated problem's written explanations as misconceptions on the question (one per predicted answer). */
+function misconceptionsOf(g: FamilyProblem): NonNullable<Question["misconceptions"]> {
+  const out: NonNullable<Question["misconceptions"]> = [];
+  for (const b of g.bugs) {
+    if (b.predict === null || (g.type === "set" && !Array.isArray(b.predict))) continue;
+    const values = g.type === "set" ? [b.predict] : Array.isArray(b.predict) ? b.predict : [b.predict];
+    for (const v of values) out.push({ when: g.type === "choice" ? "ABCD"[v as number] : showValue(v), hypothesis: b.kind, says: b.says });
+  }
+  return out;
+}
 export const isQuestion = (id: string) => qById.has(id) || fragments.has(id) || problemOf(id) !== null;
 export const moduleFor = (competency: string) => modules.find((m) => m.competency === competency) ?? null;
 export const goal = (id: string) => goals.find((g) => g.id === id) ?? null;
