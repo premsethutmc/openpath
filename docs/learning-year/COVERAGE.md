@@ -37,340 +37,340 @@ Every competency that has some content:
 
 | Competency | Grades | Status | Why |
 |---|---|---|---|
-| Extend repeating patterns (`MATH.algebra.repeating-patterns`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aapatn missing). |
-| Describe relative positions (`MATH.geometry.positions`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aarow missing). |
-| Recognise plane and solid shapes (`MATH.geometry.shapes`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aasolid missing). |
-| Read and use a calendar (`MATH.measurement.calendar`) | 1–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aacald missing). |
-| Compare lengths directly (`MATH.measurement.length-comparison`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aalong missing). |
-| Compare masses (`MATH.measurement.mass-comparison`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aaheavy missing). |
-| Recognise coin values (`MATH.measurement.money-coins`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aacoin missing). |
-| Make and total amounts with notes and coins (`MATH.measurement.money-totals`) | 1–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aamoney missing). |
-| Measure with non-standard units (`MATH.measurement.non-standard-units`) | 1–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aaclip missing). |
-| Sequence everyday events (`MATH.measurement.time-order`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aaseq missing). |
-| Combine quantities within 20 (`MATH.number.addition`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aaadd missing). |
-| Compare and order numbers (`MATH.number.compare-numbers`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aacmp missing). |
+| Extend repeating patterns (`MATH.algebra.repeating-patterns`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aapatn draft). |
+| Describe relative positions (`MATH.geometry.positions`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aarow draft). |
+| Recognise plane and solid shapes (`MATH.geometry.shapes`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aasolid draft). |
+| Read and use a calendar (`MATH.measurement.calendar`) | 1–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aacald draft). |
+| Compare lengths directly (`MATH.measurement.length-comparison`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aalong draft). |
+| Compare masses (`MATH.measurement.mass-comparison`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aaheavy draft). |
+| Recognise coin values (`MATH.measurement.money-coins`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aacoin draft). |
+| Make and total amounts with notes and coins (`MATH.measurement.money-totals`) | 1–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aamoney draft). |
+| Measure with non-standard units (`MATH.measurement.non-standard-units`) | 1–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aaclip draft). |
+| Sequence everyday events (`MATH.measurement.time-order`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aaseq draft). |
+| Combine quantities within 20 (`MATH.number.addition`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aaadd draft). |
+| Compare and order numbers (`MATH.number.compare-numbers`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aacmp draft). |
 | Count objects to 20 (`MATH.number.count-objects`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cnt draft). |
-| Compose tens and ones (`MATH.number.place-value-tens`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aatens missing). |
-| Find differences within 20 (`MATH.number.subtraction`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aasub missing). |
-| Use zero in operations (`MATH.number.zero`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aazero missing). |
-| Sort and match objects by attributes (`MATH.reasoning.sort-by-attribute`) | 1–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families absort missing). |
-| Read simple picture counts (`MATH.statistics.picture-data`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abpic missing). |
-| Extend additive number patterns (`MATH.algebra.number-patterns`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abseq missing). |
-| Identify and draw straight and curved lines in different orientations (`MATH.geometry.line-types`) | 2–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abline missing). |
-| Locate positions and describe routes using grids, maps and directions (`MATH.geometry.maps-directions`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abgrid missing). |
-| Describe sides corners and faces (`MATH.geometry.shape-properties`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abside missing). |
-| Recognise folding symmetry (`MATH.geometry.symmetry-fold`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families absym missing). |
-| Compare and measure capacity (`MATH.measurement.capacity`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abcup missing). |
-| Read hours and half-hours (`MATH.measurement.clock`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abclock missing). |
-| Find simple change (`MATH.measurement.money-change`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abchange missing). |
-| Measure using standard length units (`MATH.measurement.standard-length`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ablen missing). |
-| Measure using standard mass units (`MATH.measurement.standard-mass`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abkg missing). |
-| Add two-digit numbers with regrouping (`MATH.number.addition-regroup`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families addr draft, aatens missing). |
-| Represent multiplication as equal groups (`MATH.number.equal-groups`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abgroup missing). |
-| Represent hundreds tens and ones (`MATH.number.hundreds`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families abhto missing). |
-| Add, subtract and multiply mentally using place-value strategies (`MATH.number.mental-arithmetic`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acaddten missing). |
-| Locate and compare numbers on a number line (`MATH.number.number-line`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acnlpos missing). |
-| Divide by equal sharing (`MATH.number.sharing`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acshare missing). |
-| Subtract with regrouping (`MATH.number.subtraction-regroup`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acsub2 missing). |
-| Recognise halves and quarters (`MATH.number.unit-fractions`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families achalf missing). |
-| Choose an operation for a story (`MATH.reasoning.operation-choice`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acstory missing). |
-| Interpret pictographs with a key (`MATH.statistics.pictographs`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acpict missing). |
-| Express equality and inequality between expressions using =, < and > (`MATH.algebra.equality-inequality`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acbalance missing). |
-| Describe growing patterns (`MATH.algebra.growing-patterns`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acgrow missing). |
-| Find missing operands (`MATH.algebra.missing-number`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acmissing missing). |
-| Distinguish lines rays and segments (`MATH.geometry.lines-segments`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aclines missing). |
-| Explore tiling and shapes (`MATH.geometry.shape-tiling`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families actile missing). |
-| Calculate elapsed time (`MATH.measurement.elapsed-time`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acelapsed missing). |
-| Convert metres and centimetres (`MATH.measurement.length-conversion`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acmcm missing). |
-| Read money in rupees and paise (`MATH.measurement.money-decimals`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families acpaise missing). |
-| Measure boundary length (`MATH.measurement.perimeter-intro`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adperim missing). |
-| Convert between hours, minutes and seconds (`MATH.measurement.time-unit-conversion`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adhmin missing). |
+| Compose tens and ones (`MATH.number.place-value-tens`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aatens draft). |
+| Find differences within 20 (`MATH.number.subtraction`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aasub draft). |
+| Use zero in operations (`MATH.number.zero`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aazero draft). |
+| Sort and match objects by attributes (`MATH.reasoning.sort-by-attribute`) | 1–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families absort draft). |
+| Read simple picture counts (`MATH.statistics.picture-data`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abpic draft). |
+| Extend additive number patterns (`MATH.algebra.number-patterns`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abseq draft). |
+| Identify and draw straight and curved lines in different orientations (`MATH.geometry.line-types`) | 2–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abline draft). |
+| Locate positions and describe routes using grids, maps and directions (`MATH.geometry.maps-directions`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abgrid draft). |
+| Describe sides corners and faces (`MATH.geometry.shape-properties`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abside draft). |
+| Recognise folding symmetry (`MATH.geometry.symmetry-fold`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families absym draft). |
+| Compare and measure capacity (`MATH.measurement.capacity`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abcup draft). |
+| Read hours and half-hours (`MATH.measurement.clock`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abclock draft). |
+| Find simple change (`MATH.measurement.money-change`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abchange draft). |
+| Measure using standard length units (`MATH.measurement.standard-length`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ablen draft). |
+| Measure using standard mass units (`MATH.measurement.standard-mass`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abkg draft). |
+| Add two-digit numbers with regrouping (`MATH.number.addition-regroup`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families addr draft, aatens draft). |
+| Represent multiplication as equal groups (`MATH.number.equal-groups`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abgroup draft). |
+| Represent hundreds tens and ones (`MATH.number.hundreds`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families abhto draft). |
+| Add, subtract and multiply mentally using place-value strategies (`MATH.number.mental-arithmetic`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acaddten draft). |
+| Locate and compare numbers on a number line (`MATH.number.number-line`) | 2–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acnlpos draft). |
+| Divide by equal sharing (`MATH.number.sharing`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acshare draft). |
+| Subtract with regrouping (`MATH.number.subtraction-regroup`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acsub2 draft). |
+| Recognise halves and quarters (`MATH.number.unit-fractions`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families achalf draft). |
+| Choose an operation for a story (`MATH.reasoning.operation-choice`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acstory draft). |
+| Interpret pictographs with a key (`MATH.statistics.pictographs`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acpict draft). |
+| Express equality and inequality between expressions using =, < and > (`MATH.algebra.equality-inequality`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acbalance draft). |
+| Describe growing patterns (`MATH.algebra.growing-patterns`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acgrow draft). |
+| Find missing operands (`MATH.algebra.missing-number`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acmissing draft). |
+| Distinguish lines rays and segments (`MATH.geometry.lines-segments`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aclines draft). |
+| Explore tiling and shapes (`MATH.geometry.shape-tiling`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families actile draft). |
+| Calculate elapsed time (`MATH.measurement.elapsed-time`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acelapsed draft). |
+| Convert metres and centimetres (`MATH.measurement.length-conversion`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acmcm draft). |
+| Read money in rupees and paise (`MATH.measurement.money-decimals`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families acpaise draft). |
+| Measure boundary length (`MATH.measurement.perimeter-intro`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adperim draft). |
+| Convert between hours, minutes and seconds (`MATH.measurement.time-unit-conversion`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adhmin draft). |
 | Interpret quotients and remainders (`MATH.number.division-remainders`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families divr submitted, mul submitted). |
-| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp missing). |
-| Represent fractions of a whole (`MATH.number.fraction-models`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname missing). |
-| Find a fraction of a collection (`MATH.number.fraction-of-collection`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adfcol missing). |
-| Add and subtract multi-digit numbers with regrouping (`MATH.number.multi-digit-add-subtract`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adcol3 missing). |
+| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft). |
+| Represent fractions of a whole (`MATH.number.fraction-models`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft). |
+| Find a fraction of a collection (`MATH.number.fraction-of-collection`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcol draft). |
+| Add and subtract multi-digit numbers with regrouping (`MATH.number.multi-digit-add-subtract`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adcol3 draft). |
 | Use multiplication facts (`MATH.number.multiplication-tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mul submitted). |
-| Represent numbers to thousands (`MATH.number.thousands`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adexp missing). |
-| Estimate and check an answer (`MATH.reasoning.estimate-check`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adest missing). |
-| Read simple bar charts (`MATH.statistics.bar-charts`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adbar missing). |
-| Organise counts in tables (`MATH.statistics.tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adtally missing). |
-| Express pattern rules in words (`MATH.algebra.pattern-rules`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aepat missing). |
-| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeang missing). |
-| Identify centres radii and diameters (`MATH.geometry.circles`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aecirc missing). |
-| Find lines of symmetry (`MATH.geometry.symmetry-lines`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aesym missing). |
-| Perform and describe reflections, translations and rotations of figures (`MATH.geometry.transformations`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aerefl missing). |
-| Convert between 12-hour and 24-hour time (`MATH.measurement.24-hour-clock`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aet24 missing). |
-| Measure area in square units (`MATH.measurement.area-squares`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aearea missing). |
-| Calculate with measured quantities in mixed units (`MATH.measurement.compute-with-measures`) | 4–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aemix missing). |
+| Represent numbers to thousands (`MATH.number.thousands`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adexp draft). |
+| Estimate and check an answer (`MATH.reasoning.estimate-check`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adest draft). |
+| Read simple bar charts (`MATH.statistics.bar-charts`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adbar draft). |
+| Organise counts in tables (`MATH.statistics.tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adtally draft). |
+| Express pattern rules in words (`MATH.algebra.pattern-rules`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aepat draft). |
+| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft). |
+| Identify centres radii and diameters (`MATH.geometry.circles`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft). |
+| Find lines of symmetry (`MATH.geometry.symmetry-lines`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aesym draft). |
+| Perform and describe reflections, translations and rotations of figures (`MATH.geometry.transformations`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aerefl draft). |
+| Convert between 12-hour and 24-hour time (`MATH.measurement.24-hour-clock`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aet24 draft). |
+| Measure area in square units (`MATH.measurement.area-squares`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft). |
+| Calculate with measured quantities in mixed units (`MATH.measurement.compute-with-measures`) | 4–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aemix draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families rperim submitted). |
-| Convert common metric units (`MATH.measurement.unit-conversions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeconv missing). |
-| Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aedec missing). |
+| Convert common metric units (`MATH.measurement.unit-conversions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeconv draft). |
+| Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aedec draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families eqfrac submitted). |
-| Classify numbers as even or odd (`MATH.number.even-odd`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeeven missing). |
+| Classify numbers as even or odd (`MATH.number.even-odd`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeeven draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
-| Read and compare large numbers (`MATH.number.large-numbers`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeind missing). |
+| Read and compare large numbers (`MATH.number.large-numbers`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft). |
 | Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families ldiv submitted). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mmul submitted, mul submitted). |
-| Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aep10 missing). |
-| Round numbers to the nearest ten, hundred or thousand (`MATH.number.rounding`) | 4–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeround missing). |
-| Explain a multi-step solution (`MATH.reasoning.multi-step`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeshop missing). |
-| Reason systematically to solve puzzles and strategy games (`MATH.reasoning.puzzle-strategy`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afmissd missing). |
-| List or count all arrangements or configurations systematically (including figures within a figure) (`MATH.reasoning.systematic-enumeration`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afcount missing). |
-| Read and draw pie charts (`MATH.statistics.pie-charts`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afpie missing). |
-| Interpret scaled bar charts (`MATH.statistics.scaled-bars`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afbar missing). |
-| Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afletter missing). |
-| Relate figurate number sequences to their dot and shape pictures (`MATH.algebra.figurate-numbers`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families affig missing). |
-| Measure and draw angles (`MATH.geometry.angle-measure`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afprot missing). |
-| Use linear pairs, vertically opposite, complementary and supplementary angles (`MATH.geometry.angle-pairs`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afpair missing). |
-| Describe angles as fractions of a turn and direction of turning (`MATH.geometry.angles-as-turns`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afturn missing). |
-| Describe iterative fractal constructions and quantify each stage (`MATH.geometry.fractal-iteration`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families affrac missing). |
-| Match solids to nets (`MATH.geometry.nets`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afsolid missing). |
-| Classify quadrilaterals by side, angle and diagonal properties (`MATH.geometry.quadrilateral-classification`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afquad missing). |
-| Identify rotational symmetry and its order (and translational symmetry in patterns) (`MATH.geometry.rotational-symmetry`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afrot missing). |
-| Classify triangles (`MATH.geometry.triangle-types`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aftri missing). |
-| Compare shapes with equal area or equal perimeter (`MATH.measurement.area-perimeter-relation`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families afapr missing). |
+| Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aep10 draft). |
+| Round numbers to the nearest ten, hundred or thousand (`MATH.number.rounding`) | 4–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeround draft). |
+| Explain a multi-step solution (`MATH.reasoning.multi-step`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeshop draft). |
+| Reason systematically to solve puzzles and strategy games (`MATH.reasoning.puzzle-strategy`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afmissd draft). |
+| List or count all arrangements or configurations systematically (including figures within a figure) (`MATH.reasoning.systematic-enumeration`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afcount draft). |
+| Read and draw pie charts (`MATH.statistics.pie-charts`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afpie draft). |
+| Interpret scaled bar charts (`MATH.statistics.scaled-bars`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afbar draft). |
+| Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afletter draft). |
+| Relate figurate number sequences to their dot and shape pictures (`MATH.algebra.figurate-numbers`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families affig draft). |
+| Measure and draw angles (`MATH.geometry.angle-measure`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afprot draft). |
+| Use linear pairs, vertically opposite, complementary and supplementary angles (`MATH.geometry.angle-pairs`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afpair draft). |
+| Describe angles as fractions of a turn and direction of turning (`MATH.geometry.angles-as-turns`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afturn draft). |
+| Describe iterative fractal constructions and quantify each stage (`MATH.geometry.fractal-iteration`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families affrac draft). |
+| Match solids to nets (`MATH.geometry.nets`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afsolid draft). |
+| Classify quadrilaterals by side, angle and diagonal properties (`MATH.geometry.quadrilateral-classification`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afquad draft). |
+| Identify rotational symmetry and its order (and translational symmetry in patterns) (`MATH.geometry.rotational-symmetry`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afrot draft). |
+| Classify triangles (`MATH.geometry.triangle-types`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aftri draft). |
+| Compare shapes with equal area or equal perimeter (`MATH.measurement.area-perimeter-relation`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afapr draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
-| Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agspd missing, ldiv submitted). |
+| Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agspd draft, ldiv submitted). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families vol submitted). |
-| Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agdec missing). |
-| Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac missing). |
+| Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft). |
+| Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft). |
 | Add unlike fractions (`MATH.number.fraction-add`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families faddu submitted). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, mul submitted). |
-| Find common factors, common multiples, HCF and LCM (`MATH.number.hcf-lcm`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aglcm missing). |
-| Convert between mixed and improper fractions (`MATH.number.mixed-fractions`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agimp missing, mul submitted). |
-| Evaluate arithmetic expressions using brackets and operation precedence (`MATH.number.order-of-operations`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agbod missing, mul submitted). |
-| Represent percentages as hundredths (`MATH.number.percent-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agpct missing). |
-| Distinguish prime and composite numbers (`MATH.number.primes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agprime missing). |
-| Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families agcex missing). |
+| Find common factors, common multiples, HCF and LCM (`MATH.number.hcf-lcm`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aglcm draft). |
+| Convert between mixed and improper fractions (`MATH.number.mixed-fractions`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agimp draft, mul submitted). |
+| Evaluate arithmetic expressions using brackets and operation precedence (`MATH.number.order-of-operations`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agbod draft, mul submitted). |
+| Represent percentages as hundredths (`MATH.number.percent-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft). |
+| Distinguish prime and composite numbers (`MATH.number.primes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft). |
+| Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agcex draft). |
 | Find and interpret a mean (`MATH.statistics.averages-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mean4 submitted). |
-| Solve one-step equations (`MATH.algebra.linear-intro`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahone missing). |
+| Solve one-step equations (`MATH.algebra.linear-intro`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahone draft). |
 | Evaluate variable expressions (`MATH.algebra.variables`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families linev draft). |
 | Construct simple figures with ruler and compass (`MATH.geometry.basic-constructions`) | 6–6 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Use elementary triangle properties (`MATH.geometry.triangle-properties`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahtri missing). |
-| Calculate cube and cuboid volume (`MATH.measurement.cube-volume`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aicvol missing, vol submitted). |
-| Calculate triangle area (`MATH.measurement.triangle-area`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aitri missing). |
-| Multiply and divide decimals (`MATH.number.decimal-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aidmul missing). |
-| Multiply and divide fractions (`MATH.number.fraction-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aifmul missing). |
-| Add and subtract integers (`MATH.number.integer-add`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aiint missing). |
-| Order signed integers (`MATH.number.integers`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajord missing). |
-| Use commutative, associative and distributive properties to transform and compare expressions (`MATH.number.operation-properties`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajd99 missing). |
-| Express a number as a product of primes (`MATH.number.prime-factorisation`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajpf missing). |
-| Represent and simplify ratios (`MATH.number.ratio`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajrat missing). |
-| Calculate unit rates (`MATH.number.unit-rate`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajrate missing). |
-| Compare possible and impossible events (`MATH.probability.chance-language`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akchance missing). |
-| Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts (`MATH.reasoning.algorithms-flowcharts`) | 6–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akloop missing). |
-| Formulate and test conjectures from number explorations (`MATH.reasoning.conjecture-testing`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akkap missing). |
-| Justify divisibility tests (`MATH.reasoning.divisibility`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akdivd missing). |
-| Solve number grid puzzles such as supercells and magic squares (`MATH.reasoning.number-grid-puzzles`) | 6–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akmagic missing). |
+| Use elementary triangle properties (`MATH.geometry.triangle-properties`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahtri draft). |
+| Calculate cube and cuboid volume (`MATH.measurement.cube-volume`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicvol draft, vol submitted). |
+| Calculate triangle area (`MATH.measurement.triangle-area`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitri draft). |
+| Multiply and divide decimals (`MATH.number.decimal-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aidmul draft). |
+| Multiply and divide fractions (`MATH.number.fraction-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aifmul draft). |
+| Add and subtract integers (`MATH.number.integer-add`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiint draft). |
+| Order signed integers (`MATH.number.integers`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajord draft). |
+| Use commutative, associative and distributive properties to transform and compare expressions (`MATH.number.operation-properties`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajd99 draft). |
+| Express a number as a product of primes (`MATH.number.prime-factorisation`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajpf draft). |
+| Represent and simplify ratios (`MATH.number.ratio`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrat draft). |
+| Calculate unit rates (`MATH.number.unit-rate`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrate draft). |
+| Compare possible and impossible events (`MATH.probability.chance-language`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akchance draft). |
+| Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts (`MATH.reasoning.algorithms-flowcharts`) | 6–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akloop draft). |
+| Formulate and test conjectures from number explorations (`MATH.reasoning.conjecture-testing`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akkap draft). |
+| Justify divisibility tests (`MATH.reasoning.divisibility`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akdivd draft). |
+| Solve number grid puzzles such as supercells and magic squares (`MATH.reasoning.number-grid-puzzles`) | 6–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akmagic draft). |
 | Find and justify winning strategies in simple number games (`MATH.reasoning.winning-strategies`) | 6–6 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Build frequency tables (`MATH.statistics.data-frequency`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akfreq missing). |
-| Choose, design and critique data displays and infographics (`MATH.statistics.evaluate-data-displays`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akbarpct missing). |
-| Simplify linear expressions (`MATH.algebra.algebra-simplify`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahlike missing). |
-| Express and justify a general pattern with an algebraic expression (`MATH.algebra.generalise-with-expressions`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahmatch missing). |
+| Build frequency tables (`MATH.statistics.data-frequency`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akfreq draft). |
+| Choose, design and critique data displays and infographics (`MATH.statistics.evaluate-data-displays`) | 6–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akbarpct draft). |
+| Simplify linear expressions (`MATH.algebra.algebra-simplify`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahlike draft). |
+| Express and justify a general pattern with an algebraic expression (`MATH.algebra.generalise-with-expressions`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahmatch draft). |
 | Expand simple products (`MATH.algebra.identities-intro`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families dist submitted, mul submitted). |
 | Solve linear equations (`MATH.algebra.linear-equations`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lin submitted). |
-| Apply triangle congruence (`MATH.geometry.congruence`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahcong missing). |
+| Apply triangle congruence (`MATH.geometry.congruence`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahcong draft). |
 | Construct triangles from sufficient data (`MATH.geometry.construction-triangles`) | 7–7 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Use angles with parallel lines (`MATH.geometry.parallel-angles`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahpar missing). |
-| Apply the Baudhayana-Pythagoras theorem and its converse (`MATH.geometry.pythagoras`) | 7–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahpyth missing). |
-| Decide which polygons tile the plane and create tilings (`MATH.geometry.tessellations`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahtile missing). |
-| Calculate circle area and circumference (`MATH.measurement.circle-area`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aicircum missing). |
-| Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas) (`MATH.measurement.parallelogram-rhombus-area`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aipara missing). |
-| Calculate cuboid surface area (`MATH.measurement.surface-area-intro`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aitsa missing). |
+| Use angles with parallel lines (`MATH.geometry.parallel-angles`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahpar draft). |
+| Apply the Baudhayana-Pythagoras theorem and its converse (`MATH.geometry.pythagoras`) | 7–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahpyth draft). |
+| Decide which polygons tile the plane and create tilings (`MATH.geometry.tessellations`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahtile draft). |
+| Calculate circle area and circumference (`MATH.measurement.circle-area`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicircum draft). |
+| Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas) (`MATH.measurement.parallelogram-rhombus-area`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipara draft). |
+| Calculate cuboid surface area (`MATH.measurement.surface-area-intro`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitsa draft). |
 | Use integer exponent laws (`MATH.number.exponents`) | 7–7 | Partially supported | Question pool too small for: diagnostic. |
-| Read, write and convert numbers in the Indian and international systems (`MATH.number.indian-international-numeration`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajmill missing). |
-| Multiply integers using sign rules (`MATH.number.integer-multiply`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajimul missing, mul submitted). |
+| Read, write and convert numbers in the Indian and international systems (`MATH.number.indian-international-numeration`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajmill draft). |
+| Multiply integers using sign rules (`MATH.number.integer-multiply`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajimul draft, mul submitted). |
 | Calculate percentages (`MATH.number.percentage`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families pct submitted). |
-| Calculate profit loss and simple interest (`MATH.number.profit-loss`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajpl missing). |
+| Calculate profit loss and simple interest (`MATH.number.profit-loss`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajpl draft). |
 | Solve direct proportions (`MATH.number.proportion`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families prop submitted). |
-| Divide a quantity in a given ratio (`MATH.number.ratio-division`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajrdiv missing). |
-| Operate on rational numbers (`MATH.number.rational-numbers`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajrq missing). |
-| Estimate probability experimentally (`MATH.probability.experimental`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akexp missing). |
-| Solve cryptarithm (digits-in-disguise) puzzles (`MATH.reasoning.digit-puzzles`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akcrypt missing). |
-| Reason with parity of sums and products (`MATH.reasoning.parity`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akpar missing). |
-| Distinguish additive and proportional reasoning (`MATH.reasoning.proportional-check`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akresize missing). |
-| Describe sequences with explicit and recursive rules (`MATH.sequences.explicit-recursive-rules`) | 7–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahrec missing). |
-| Calculate median and mode (`MATH.statistics.median-mode`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akmed missing). |
+| Divide a quantity in a given ratio (`MATH.number.ratio-division`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrdiv draft). |
+| Operate on rational numbers (`MATH.number.rational-numbers`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrq draft). |
+| Estimate probability experimentally (`MATH.probability.experimental`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akexp draft). |
+| Solve cryptarithm (digits-in-disguise) puzzles (`MATH.reasoning.digit-puzzles`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akcrypt draft). |
+| Reason with parity of sums and products (`MATH.reasoning.parity`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akpar draft). |
+| Distinguish additive and proportional reasoning (`MATH.reasoning.proportional-check`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akresize draft). |
+| Describe sequences with explicit and recursive rules (`MATH.sequences.explicit-recursive-rules`) | 7–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahrec draft). |
+| Calculate median and mode (`MATH.statistics.median-mode`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akmed draft). |
 | Pose statistical questions and draw conclusions from data (`MATH.statistics.statistical-questions`) | 7–8 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Factor algebraic expressions (`MATH.algebra.factorisation`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families factor submitted). |
 | Use algebraic identities (`MATH.algebra.identities`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families expand draft). |
-| Solve inverse proportion problems (`MATH.algebra.inverse-proportion`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ahinv missing). |
-| Solve equations with rational coefficients (`MATH.algebra.linear-rational`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families lneg missing, aiint missing). |
-| Plot points in four quadrants (`MATH.coordinate.cartesian`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahread missing). |
+| Solve inverse proportion problems (`MATH.algebra.inverse-proportion`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahinv draft). |
+| Solve equations with rational coefficients (`MATH.algebra.linear-rational`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lneg draft, aiint draft). |
+| Plot points in four quadrants (`MATH.coordinate.cartesian`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahread draft). |
 | Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data (`MATH.geometry.construction-quadrilaterals`) | 8–8 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Calculate polygon angle sums (`MATH.geometry.polygon-angles`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aipolymiss missing, aipolyreg missing). |
-| Count faces, vertices and edges of polyhedra and verify Euler's formula (`MATH.geometry.polyhedra-euler`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aieuler missing). |
-| Use quadrilateral angle properties (`MATH.geometry.quadrilaterals`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aiquad missing, aipolyreg missing). |
-| Use scales on maps and scale drawings (`MATH.geometry.scale-drawings`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aiscale missing). |
-| Interpret views of solids (`MATH.geometry.solid-views`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aisolid missing). |
-| Calculate cylinder volume and surface area (`MATH.measurement.cylinder`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aicylv missing). |
-| Calculate trapezium and composite areas (`MATH.measurement.trapezium-area`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aitrap missing). |
-| Calculate compound growth (`MATH.number.compound-interest`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajci missing). |
-| Find cubes and cube roots (`MATH.number.cubes`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajcube missing). |
-| Compare linear and exponential growth (`MATH.number.exponential-growth`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajgrow missing). |
-| Represent numbers in place-value systems with different bases (`MATH.number.number-bases`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajb10 missing). |
-| Use scientific notation (`MATH.number.scientific-notation`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aksci missing, akscid missing). |
+| Calculate polygon angle sums (`MATH.geometry.polygon-angles`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipolymiss draft, aipolyreg draft). |
+| Count faces, vertices and edges of polyhedra and verify Euler's formula (`MATH.geometry.polyhedra-euler`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aieuler draft). |
+| Use quadrilateral angle properties (`MATH.geometry.quadrilaterals`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiquad draft, aipolyreg draft). |
+| Use scales on maps and scale drawings (`MATH.geometry.scale-drawings`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiscale draft). |
+| Interpret views of solids (`MATH.geometry.solid-views`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aisolid draft). |
+| Calculate cylinder volume and surface area (`MATH.measurement.cylinder`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicylv draft). |
+| Calculate trapezium and composite areas (`MATH.measurement.trapezium-area`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitrap draft). |
+| Calculate compound growth (`MATH.number.compound-interest`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajci draft). |
+| Find cubes and cube roots (`MATH.number.cubes`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajcube draft). |
+| Compare linear and exponential growth (`MATH.number.exponential-growth`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajgrow draft). |
+| Represent numbers in place-value systems with different bases (`MATH.number.number-bases`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajb10 draft). |
+| Use scientific notation (`MATH.number.scientific-notation`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aksci draft, akscid draft). |
 | Find squares and square roots (`MATH.number.square-roots`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families root draft). |
-| Enumerate simple sample spaces (`MATH.probability.sample-space`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akss missing). |
-| Encode and decode messages using rule-based ciphers (`MATH.reasoning.coding-ciphers`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akshift missing). |
-| Distinguish proof from examples (`MATH.reasoning.proof-intro`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akthink missing). |
-| Interpret grouped histograms (`MATH.statistics.histograms`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akhist missing). |
-| Apply remainder and factor theorems (`MATH.algebra.factor-theorem`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alrem missing). |
-| Represent linear equations in two variables (`MATH.algebra.linear-two-variables`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alrule missing). |
-| Find GCD and LCM of polynomials (`MATH.algebra.polynomial-gcd-lcm`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families algcd missing). |
-| Operate on polynomials (`MATH.algebra.polynomials`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alpmul missing). |
-| Simplify rational algebraic expressions (`MATH.algebra.rational-expressions`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alratl missing). |
-| Relate coordinates and geometric distances (`MATH.coordinate.distance-intro`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aldist missing). |
-| Apply circle chord and angle theorems (`MATH.geometry.circle-theorems`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alangle missing). |
+| Enumerate simple sample spaces (`MATH.probability.sample-space`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akss draft). |
+| Encode and decode messages using rule-based ciphers (`MATH.reasoning.coding-ciphers`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akshift draft). |
+| Distinguish proof from examples (`MATH.reasoning.proof-intro`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akthink draft). |
+| Interpret grouped histograms (`MATH.statistics.histograms`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akhist draft). |
+| Apply remainder and factor theorems (`MATH.algebra.factor-theorem`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alrem draft). |
+| Represent linear equations in two variables (`MATH.algebra.linear-two-variables`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alrule draft). |
+| Find GCD and LCM of polynomials (`MATH.algebra.polynomial-gcd-lcm`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families algcd draft). |
+| Operate on polynomials (`MATH.algebra.polynomials`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alpmul draft). |
+| Simplify rational algebraic expressions (`MATH.algebra.rational-expressions`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alratl draft). |
+| Relate coordinates and geometric distances (`MATH.coordinate.distance-intro`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aldist draft). |
+| Apply circle chord and angle theorems (`MATH.geometry.circle-theorems`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alangle draft). |
 | Construct perpendicular and angle bisectors (`MATH.geometry.constructions-bisectors`) | 9–9 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Use axioms and deductive arguments (`MATH.geometry.euclidean`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amreason missing). |
-| Prove and apply the midpoint theorem and its converse (`MATH.geometry.midpoint-theorem`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ammid missing). |
-| Prove properties and tests of parallelograms (`MATH.geometry.parallelogram-proofs`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ampgx missing). |
-| Prove triangle relationships (`MATH.geometry.triangle-proof`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amcrit missing). |
-| Find the area of a cyclic quadrilateral using Brahmagupta's formula (`MATH.measurement.brahmagupta-formula`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ambrahma missing). |
-| Calculate cone and sphere measures (`MATH.measurement.cones-spheres`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amcone missing). |
-| Calculate triangle area using Heron formula (`MATH.measurement.heron`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amheron missing). |
-| Calculate surface area and volume of pyramids (`MATH.measurement.pyramids`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ampyrs missing). |
+| Use axioms and deductive arguments (`MATH.geometry.euclidean`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amreason draft). |
+| Prove and apply the midpoint theorem and its converse (`MATH.geometry.midpoint-theorem`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ammid draft). |
+| Prove properties and tests of parallelograms (`MATH.geometry.parallelogram-proofs`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ampgx draft). |
+| Prove triangle relationships (`MATH.geometry.triangle-proof`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amcrit draft). |
+| Find the area of a cyclic quadrilateral using Brahmagupta's formula (`MATH.measurement.brahmagupta-formula`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ambrahma draft). |
+| Calculate cone and sphere measures (`MATH.measurement.cones-spheres`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amcone draft). |
+| Calculate triangle area using Heron formula (`MATH.measurement.heron`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amheron draft). |
+| Calculate surface area and volume of pyramids (`MATH.measurement.pyramids`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ampyrs draft). |
 | Prove that a number is irrational (`MATH.number.irrationality-proofs`) | 9–10 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Simplify radicals (`MATH.number.radicals`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families surd draft). |
-| Represent rational and irrational numbers (`MATH.number.real-numbers`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amrec missing). |
+| Represent rational and irrational numbers (`MATH.number.real-numbers`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amrec draft). |
 | Construct irrational lengths such as sqrt n on the number line (`MATH.number.root-length-construction`) | 9–9 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Calculate equally likely event probabilities (`MATH.probability.classical`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anbag missing). |
-| Use tree diagrams and two-way tables for compound experiments (`MATH.probability.tree-diagrams`) | 9–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families antree missing). |
-| Construct a mathematical argument (`MATH.reasoning.mathematical-argument`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anpts missing). |
-| Interpret grouped data and distributions (`MATH.statistics.grouped-data`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anfreq missing). |
-| Read and construct stacked and 100% stacked bar charts (`MATH.statistics.stacked-bar-charts`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anstack missing). |
-| Calculate and interpret weighted and combined means (`MATH.statistics.weighted-mean`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anwmean missing). |
+| Calculate equally likely event probabilities (`MATH.probability.classical`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anbag draft). |
+| Use tree diagrams and two-way tables for compound experiments (`MATH.probability.tree-diagrams`) | 9–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families antree draft). |
+| Construct a mathematical argument (`MATH.reasoning.mathematical-argument`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anpts draft). |
+| Interpret grouped data and distributions (`MATH.statistics.grouped-data`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anfreq draft). |
+| Read and construct stacked and 100% stacked bar charts (`MATH.statistics.stacked-bar-charts`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anstack draft). |
+| Calculate and interpret weighted and combined means (`MATH.statistics.weighted-mean`) | 9–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anwmean draft). |
 | Use arithmetic progressions (`MATH.algebra.arithmetic-sequences`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apn submitted). |
-| Combine functions by sum, difference, product, quotient and composition (`MATH.algebra.function-operations`) | 10–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alcomp missing). |
-| Solve pairs of linear equations (`MATH.algebra.linear-systems`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alsys missing). |
-| Solve linear systems in three variables (`MATH.algebra.linear-systems-three-variables`) | 10–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families al3sys missing). |
-| Find square roots of polynomials (`MATH.algebra.polynomial-square-root`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alpsq missing). |
-| Relate zeros of a polynomial to its graph and coefficients (`MATH.algebra.polynomial-zeros`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alsym missing). |
+| Combine functions by sum, difference, product, quotient and composition (`MATH.algebra.function-operations`) | 10–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alcomp draft). |
+| Solve pairs of linear equations (`MATH.algebra.linear-systems`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alsys draft). |
+| Solve linear systems in three variables (`MATH.algebra.linear-systems-three-variables`) | 10–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families al3sys draft). |
+| Find square roots of polynomials (`MATH.algebra.polynomial-square-root`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alpsq draft). |
+| Relate zeros of a polynomial to its graph and coefficients (`MATH.algebra.polynomial-zeros`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alsym draft). |
 | Interpret the quadratic discriminant (`MATH.algebra.quadratic-discriminant`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families disc draft). |
-| Solve quadratics graphically (`MATH.algebra.quadratic-graphs`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alqline missing). |
+| Solve quadratics graphically (`MATH.algebra.quadratic-graphs`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alqline draft). |
 | Solve quadratic equations (`MATH.algebra.quadratics`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families quad draft). |
 | Use coordinate distance and section formulas (`MATH.coordinate.distance`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cdist submitted). |
-| Find polygon areas from coordinates (`MATH.coordinate.polygon-area`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families altria missing). |
-| Apply Ceva and Menelaus theorems (`MATH.geometry.ceva-menelaus`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amceva missing). |
-| Use tangent properties (`MATH.geometry.circle-tangents`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amtlen missing). |
+| Find polygon areas from coordinates (`MATH.coordinate.polygon-area`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families altria draft). |
+| Apply Ceva and Menelaus theorems (`MATH.geometry.ceva-menelaus`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amceva draft). |
+| Use tangent properties (`MATH.geometry.circle-tangents`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amtlen draft). |
 | Construct similar figures (`MATH.geometry.scaled-construction`) | 10–10 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Apply triangle similarity (`MATH.geometry.similarity`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amsim missing). |
-| Calculate measures of combined solids (`MATH.measurement.combined-solids`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amcombv missing). |
-| Calculate frustum surface area and volume (`MATH.measurement.frustum`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amfrust missing). |
-| Calculate sector and segment areas (`MATH.measurement.sectors`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families amseg missing). |
+| Apply triangle similarity (`MATH.geometry.similarity`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amsim draft). |
+| Calculate measures of combined solids (`MATH.measurement.combined-solids`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amcombv draft). |
+| Calculate frustum surface area and volume (`MATH.measurement.frustum`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amfrust draft). |
+| Calculate sector and segment areas (`MATH.measurement.sectors`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amseg draft). |
 | Use Euclidean algorithm and prime factorisation (`MATH.number.euclid-algorithm`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families hcf submitted). |
-| Use congruence modulo n (`MATH.number.modular-arithmetic`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anmod missing). |
-| Use complementary events (`MATH.probability.complements`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ancomp missing). |
-| Choose and justify a mathematical model (`MATH.reasoning.model-selection`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anpair missing). |
-| Sum special series of natural numbers (`MATH.sequences.power-sums`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families alsum missing). |
-| Calculate grouped mean median and mode (`MATH.statistics.grouped-mean`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families angmean missing). |
-| Solve height and distance problems (`MATH.trigonometry.heights-distances`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anheight missing). |
-| Prove elementary trigonometric identities (`MATH.trigonometry.identities`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ansecpt missing). |
-| Use trigonometric ratios (`MATH.trigonometry.ratios`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families anstd missing). |
-| Solve equations and inequalities involving absolute value (`MATH.algebra.absolute-value`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aoabseq missing). |
-| Use the binomial theorem (`MATH.algebra.binomial`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aobinco missing). |
-| Graph functions using translations, reflections and dilations (`MATH.algebra.function-transformations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aotrans missing). |
-| Identify domain range and functions (`MATH.algebra.functions`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aodom missing). |
-| Use geometric sequences and series (`MATH.algebra.geometric-sequences`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aogp missing). |
+| Use congruence modulo n (`MATH.number.modular-arithmetic`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anmod draft). |
+| Use complementary events (`MATH.probability.complements`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ancomp draft). |
+| Choose and justify a mathematical model (`MATH.reasoning.model-selection`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anpair draft). |
+| Sum special series of natural numbers (`MATH.sequences.power-sums`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alsum draft). |
+| Calculate grouped mean median and mode (`MATH.statistics.grouped-mean`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families angmean draft). |
+| Solve height and distance problems (`MATH.trigonometry.heights-distances`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anheight draft). |
+| Prove elementary trigonometric identities (`MATH.trigonometry.identities`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ansecpt draft). |
+| Use trigonometric ratios (`MATH.trigonometry.ratios`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anstd draft). |
+| Solve equations and inequalities involving absolute value (`MATH.algebra.absolute-value`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aoabseq draft). |
+| Use the binomial theorem (`MATH.algebra.binomial`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aobinco draft). |
+| Graph functions using translations, reflections and dilations (`MATH.algebra.function-transformations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aotrans draft). |
+| Identify domain range and functions (`MATH.algebra.functions`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aodom draft). |
+| Use geometric sequences and series (`MATH.algebra.geometric-sequences`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aogp draft). |
 | Solve linear inequalities (`MATH.algebra.inequalities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lineq draft). |
-| Graph linear inequalities and systems in two variables (`MATH.algebra.inequalities-two-variables`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aocorner missing). |
-| Use logarithm laws and solve logarithmic equations (`MATH.algebra.logarithms`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aologlaw missing). |
-| Solve quadratic and rational inequalities (`MATH.algebra.nonlinear-inequalities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aoqin missing). |
-| Decompose rational functions into partial fractions (`MATH.algebra.partial-fractions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aopf missing). |
-| Count permutations and combinations (`MATH.algebra.permutations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aonpr missing). |
-| Solve quadratics over complex numbers (`MATH.algebra.quadratic-complex`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aocq missing). |
-| Represent relations (`MATH.algebra.relations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aocart missing). |
-| Use set operations (`MATH.algebra.sets`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aosetop missing). |
-| Sketch and read graphs of standard real functions (`MATH.algebra.standard-function-graphs`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aostd missing). |
-| Differentiate from first principles (`MATH.calculus.derivatives`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqfp missing). |
+| Graph linear inequalities and systems in two variables (`MATH.algebra.inequalities-two-variables`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aocorner draft). |
+| Use logarithm laws and solve logarithmic equations (`MATH.algebra.logarithms`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aologlaw draft). |
+| Solve quadratic and rational inequalities (`MATH.algebra.nonlinear-inequalities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aoqin draft). |
+| Decompose rational functions into partial fractions (`MATH.algebra.partial-fractions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aopf draft). |
+| Count permutations and combinations (`MATH.algebra.permutations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aonpr draft). |
+| Solve quadratics over complex numbers (`MATH.algebra.quadratic-complex`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aocq draft). |
+| Represent relations (`MATH.algebra.relations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aocart draft). |
+| Use set operations (`MATH.algebra.sets`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aosetop draft). |
+| Sketch and read graphs of standard real functions (`MATH.algebra.standard-function-graphs`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aostd draft). |
+| Differentiate from first principles (`MATH.calculus.derivatives`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqfp draft). |
 | Evaluate elementary limits (`MATH.calculus.limits`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families lim submitted). |
-| Analyse circle parabola ellipse and hyperbola (`MATH.coordinate.conics`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arcircle missing). |
-| Derive the equation of a locus (`MATH.coordinate.locus`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aslocus missing). |
-| Analyse pairs of straight lines from second-degree equations (`MATH.coordinate.pair-of-lines`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aspair missing). |
-| Locate points in three dimensions (`MATH.coordinate.space-coordinates`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asdist3 missing). |
-| Use straight-line equations (`MATH.coordinate.straight-lines`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asline missing). |
-| Represent and calculate with complex numbers (`MATH.number.complex`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ascop missing). |
-| Write complex numbers in modulus-argument (polar) form (`MATH.number.complex-polar-form`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asarg missing). |
-| Apply event algebra (`MATH.probability.events`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asaddp missing). |
-| Use logical implications and counterexamples (`MATH.reasoning.logic`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atconv missing). |
+| Analyse circle parabola ellipse and hyperbola (`MATH.coordinate.conics`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arcircle draft). |
+| Derive the equation of a locus (`MATH.coordinate.locus`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aslocus draft). |
+| Analyse pairs of straight lines from second-degree equations (`MATH.coordinate.pair-of-lines`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aspair draft). |
+| Locate points in three dimensions (`MATH.coordinate.space-coordinates`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asdist3 draft). |
+| Use straight-line equations (`MATH.coordinate.straight-lines`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asline draft). |
+| Represent and calculate with complex numbers (`MATH.number.complex`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ascop draft). |
+| Write complex numbers in modulus-argument (polar) form (`MATH.number.complex-polar-form`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asarg draft). |
+| Apply event algebra (`MATH.probability.events`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asaddp draft). |
+| Use logical implications and counterexamples (`MATH.reasoning.logic`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atconv draft). |
 | Prove statements by mathematical induction (`MATH.reasoning.mathematical-induction`) | 11–11 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
-| Work with arithmetico-geometric and harmonic progressions (`MATH.sequences.agp-hp`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aoagp missing). |
-| Use arithmetic and geometric means and the AM-GM inequality (`MATH.sequences.am-gm-relation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apins missing). |
-| Use binomial, exponential and logarithmic series (`MATH.sequences.infinite-series-expansions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apbin missing). |
-| Describe sequences and series by general term, recursion and sigma notation (`MATH.sequences.sequence-notation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apgent missing). |
-| Sum finite series using standard sums and telescoping (`MATH.sequences.series-summation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aptel missing). |
-| Form Cartesian products and count their elements (`MATH.sets-relations.cartesian-product`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apcartn missing). |
-| Represent subsets of the real line in interval notation (`MATH.sets-relations.real-intervals`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apintop missing). |
-| Calculate variance and standard deviation (`MATH.statistics.dispersion`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atvar missing). |
-| Calculate mean deviation about the mean or median (`MATH.statistics.mean-deviation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atmdmean missing). |
-| Apply compound, multiple-angle and sum-to-product identities (`MATH.trigonometry.compound-angle-identities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atcomp missing). |
-| Solve trigonometric equations (`MATH.trigonometry.equations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atprinc missing). |
-| Use trigonometric functions and identities (`MATH.trigonometry.functions`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atval missing). |
-| Measure angles in radians (`MATH.trigonometry.radians`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atrad missing). |
-| Solve triangles using sine, cosine and projection rules (`MATH.trigonometry.triangle-laws`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atsiner missing). |
+| Work with arithmetico-geometric and harmonic progressions (`MATH.sequences.agp-hp`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aoagp draft). |
+| Use arithmetic and geometric means and the AM-GM inequality (`MATH.sequences.am-gm-relation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apins draft). |
+| Use binomial, exponential and logarithmic series (`MATH.sequences.infinite-series-expansions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apbin draft). |
+| Describe sequences and series by general term, recursion and sigma notation (`MATH.sequences.sequence-notation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apgent draft). |
+| Sum finite series using standard sums and telescoping (`MATH.sequences.series-summation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aptel draft). |
+| Form Cartesian products and count their elements (`MATH.sets-relations.cartesian-product`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apcartn draft). |
+| Represent subsets of the real line in interval notation (`MATH.sets-relations.real-intervals`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apintop draft). |
+| Calculate variance and standard deviation (`MATH.statistics.dispersion`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atvar draft). |
+| Calculate mean deviation about the mean or median (`MATH.statistics.mean-deviation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atmdmean draft). |
+| Apply compound, multiple-angle and sum-to-product identities (`MATH.trigonometry.compound-angle-identities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atcomp draft). |
+| Solve trigonometric equations (`MATH.trigonometry.equations`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atprinc draft). |
+| Use trigonometric functions and identities (`MATH.trigonometry.functions`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atval draft). |
+| Measure angles in radians (`MATH.trigonometry.radians`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atrad draft). |
+| Solve triangles using sine, cosine and projection rules (`MATH.trigonometry.triangle-laws`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atsiner draft). |
 | Evaluate and apply determinants (`MATH.algebra.determinants`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families det2 submitted). |
-| Analyse inverse functions (`MATH.algebra.inverse-functions`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apinvf missing). |
-| Solve graphical linear programming problems (`MATH.algebra.linear-programming`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aplpmax missing). |
-| Operate on matrices (`MATH.algebra.matrices`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apmmul missing). |
-| Solve systems using matrices (`MATH.algebra.matrix-systems`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apsys3 missing). |
-| Solve higher-degree polynomial equations using structure (`MATH.algebra.polynomial-equation-solving`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families approg missing). |
-| Determine the nature and number of roots of a polynomial (`MATH.algebra.polynomial-root-analysis`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apconj missing). |
-| Relate roots and coefficients of polynomial equations (`MATH.algebra.vieta-relations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apvsum missing). |
-| Use derivatives for rates and extrema (`MATH.calculus.applications`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqmono missing). |
-| Calculate areas using integration (`MATH.calculus.area-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqarea missing). |
-| Test continuity (`MATH.calculus.continuity`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqcontk missing). |
-| Sketch curves using derivatives, symmetry and asymptotes (`MATH.calculus.curve-sketching`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqconc missing). |
-| Evaluate definite integrals using their properties (`MATH.calculus.definite-integral-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqodd missing). |
+| Analyse inverse functions (`MATH.algebra.inverse-functions`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apinvf draft). |
+| Solve graphical linear programming problems (`MATH.algebra.linear-programming`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aplpmax draft). |
+| Operate on matrices (`MATH.algebra.matrices`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apmmul draft). |
+| Solve systems using matrices (`MATH.algebra.matrix-systems`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apsys3 draft). |
+| Solve higher-degree polynomial equations using structure (`MATH.algebra.polynomial-equation-solving`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families approg draft). |
+| Determine the nature and number of roots of a polynomial (`MATH.algebra.polynomial-root-analysis`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apconj draft). |
+| Relate roots and coefficients of polynomial equations (`MATH.algebra.vieta-relations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apvsum draft). |
+| Use derivatives for rates and extrema (`MATH.calculus.applications`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqmono draft). |
+| Calculate areas using integration (`MATH.calculus.area-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqarea draft). |
+| Test continuity (`MATH.calculus.continuity`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqcontk draft). |
+| Sketch curves using derivatives, symmetry and asymptotes (`MATH.calculus.curve-sketching`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqconc draft). |
+| Evaluate definite integrals using their properties (`MATH.calculus.definite-integral-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqodd draft). |
 | Evaluate definite integrals (`MATH.calculus.definite-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint submitted). |
 | Apply differentiation rules (`MATH.calculus.derivative-rules`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted). |
-| Test differentiability (`MATH.calculus.differentiability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqdiffab missing). |
-| Solve elementary differential equations (`MATH.calculus.differential-equations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqsep missing). |
-| Find and use second-order derivatives (`MATH.calculus.higher-derivatives`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqd2 missing). |
-| Solve homogeneous first-order first-degree differential equations (`MATH.calculus.homogeneous-de`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqhom missing). |
-| Differentiate implicit, parametric and logarithmically transformed functions (`MATH.calculus.implicit-parametric-differentiation`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arimpl missing). |
-| Evaluate improper integrals and gamma integrals (`MATH.calculus.improper-gamma-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families argamma missing). |
+| Test differentiability (`MATH.calculus.differentiability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqdiffab draft). |
+| Solve elementary differential equations (`MATH.calculus.differential-equations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqsep draft). |
+| Find and use second-order derivatives (`MATH.calculus.higher-derivatives`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqd2 draft). |
+| Solve homogeneous first-order first-degree differential equations (`MATH.calculus.homogeneous-de`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqhom draft). |
+| Differentiate implicit, parametric and logarithmically transformed functions (`MATH.calculus.implicit-parametric-differentiation`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arimpl draft). |
+| Evaluate improper integrals and gamma integrals (`MATH.calculus.improper-gamma-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families argamma draft). |
 | Find antiderivatives (`MATH.calculus.indefinite-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families pint submitted, pow submitted). |
 | Integrate by substitution and parts (`MATH.calculus.integration-methods`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families subst submitted, pow submitted). |
-| Evaluate indeterminate forms using l'Hopital's rule (`MATH.calculus.lhopital`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arlhop missing). |
-| Use differentials for linear approximation and error estimates (`MATH.calculus.linear-approximation`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arlinapp missing). |
-| Solve linear first-order differential equations with an integrating factor (`MATH.calculus.linear-first-order-de`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arlinde missing). |
-| Apply Rolle's and Lagrange's mean value theorems (`MATH.calculus.mean-value-theorems`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families armvt missing). |
-| Find intervals where a function increases or decreases (`MATH.calculus.monotonicity`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families armono missing). |
-| Examine limits and continuity of functions of two variables (`MATH.calculus.multivariable-limits`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families armvlim missing). |
-| Model growth, decay and mixing with first-order differential equations (`MATH.calculus.ode-modelling`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arodemod missing). |
-| Compute partial derivatives and apply Euler's theorem (`MATH.calculus.partial-derivatives`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arpartial missing). |
-| Integrate rational functions by partial fractions (`MATH.calculus.partial-fractions-integration`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arpfint missing). |
-| Use reduction formulae for definite integrals (`MATH.calculus.reduction-formulae`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arwallis missing). |
-| Expand functions as Taylor and Maclaurin series (`MATH.calculus.taylor-series`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families armaclaurin missing). |
-| Find volumes of solids of revolution by integration (`MATH.calculus.volumes-of-revolution`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families arvolrev missing). |
-| Find tangents and normals to circles and conics (`MATH.coordinate.conic-tangents-normals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families astan missing). |
-| Find the shortest distance between skew or parallel lines in space (`MATH.coordinate.skew-line-distance`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asskew missing). |
-| Represent lines in space (`MATH.coordinate.space-lines`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asdcos missing). |
-| Represent planes and distances (`MATH.coordinate.space-planes`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asplaned missing). |
-| Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3) (`MATH.matrices.adjoint-inverse`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families apinv2 missing). |
-| Reduce matrices to echelon form and find rank (`MATH.matrices.rank-row-reduction`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aprank missing). |
-| Test consistency of linear systems by the rank method (`MATH.matrices.system-consistency`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqrank missing). |
-| Use transposes and symmetric/skew-symmetric decomposition (`MATH.matrices.transpose-symmetry`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqsym missing). |
-| Describe loci and regions in the complex plane (`MATH.number.complex-locus`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families ascloc missing). |
-| Apply de Moivre's theorem and find nth roots (`MATH.number.de-moivre-roots`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asdemo missing). |
-| Apply Bayes theorem (`MATH.probability.bayes`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asbayes missing). |
-| Apply Bernoulli and binomial distributions (`MATH.probability.binomial-distribution`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families asbinom missing). |
+| Evaluate indeterminate forms using l'Hopital's rule (`MATH.calculus.lhopital`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arlhop draft). |
+| Use differentials for linear approximation and error estimates (`MATH.calculus.linear-approximation`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arlinapp draft). |
+| Solve linear first-order differential equations with an integrating factor (`MATH.calculus.linear-first-order-de`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arlinde draft). |
+| Apply Rolle's and Lagrange's mean value theorems (`MATH.calculus.mean-value-theorems`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families armvt draft). |
+| Find intervals where a function increases or decreases (`MATH.calculus.monotonicity`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families armono draft). |
+| Examine limits and continuity of functions of two variables (`MATH.calculus.multivariable-limits`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families armvlim draft). |
+| Model growth, decay and mixing with first-order differential equations (`MATH.calculus.ode-modelling`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arodemod draft). |
+| Compute partial derivatives and apply Euler's theorem (`MATH.calculus.partial-derivatives`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arpartial draft). |
+| Integrate rational functions by partial fractions (`MATH.calculus.partial-fractions-integration`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arpfint draft). |
+| Use reduction formulae for definite integrals (`MATH.calculus.reduction-formulae`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arwallis draft). |
+| Expand functions as Taylor and Maclaurin series (`MATH.calculus.taylor-series`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families armaclaurin draft). |
+| Find volumes of solids of revolution by integration (`MATH.calculus.volumes-of-revolution`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arvolrev draft). |
+| Find tangents and normals to circles and conics (`MATH.coordinate.conic-tangents-normals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families astan draft). |
+| Find the shortest distance between skew or parallel lines in space (`MATH.coordinate.skew-line-distance`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asskew draft). |
+| Represent lines in space (`MATH.coordinate.space-lines`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asdcos draft). |
+| Represent planes and distances (`MATH.coordinate.space-planes`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asplaned draft). |
+| Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3) (`MATH.matrices.adjoint-inverse`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apinv2 draft). |
+| Reduce matrices to echelon form and find rank (`MATH.matrices.rank-row-reduction`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aprank draft). |
+| Test consistency of linear systems by the rank method (`MATH.matrices.system-consistency`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqrank draft). |
+| Use transposes and symmetric/skew-symmetric decomposition (`MATH.matrices.transpose-symmetry`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqsym draft). |
+| Describe loci and regions in the complex plane (`MATH.number.complex-locus`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ascloc draft). |
+| Apply de Moivre's theorem and find nth roots (`MATH.number.de-moivre-roots`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asdemo draft). |
+| Apply Bayes theorem (`MATH.probability.bayes`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asbayes draft). |
+| Apply Bernoulli and binomial distributions (`MATH.probability.binomial-distribution`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asbinom draft). |
 | Calculate conditional probabilities (`MATH.probability.conditional`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families condp draft). |
-| Work with probability density and distribution functions (`MATH.probability.continuous-random-variables`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atpdfp missing). |
-| Test and use independence of events (`MATH.probability.independent-events`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atindu missing). |
-| Analyse discrete random variables (`MATH.probability.random-variables`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atrvmean missing). |
-| Apply the law of total probability over a partition (`MATH.probability.total-probability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families attotal missing). |
-| Analyse compound statements with truth tables (`MATH.reasoning.propositional-logic`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atrows missing). |
-| Test properties of binary operations (`MATH.sets-relations.binary-operations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqbinid missing). |
-| Classify functions as one-one, onto or bijective (`MATH.sets-relations.function-types`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqonto missing). |
-| Test relations for reflexivity, symmetry, transitivity and equivalence (`MATH.sets-relations.relation-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqrel missing). |
-| Evaluate inverse trigonometric functions (`MATH.trigonometry.inverse`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atinv missing). |
-| Operate on vectors (`MATH.vectors.algebra`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atlin missing). |
-| Find direction cosines and direction ratios of vectors and lines (`MATH.vectors.direction-cosines`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atdc missing). |
-| Use dot and cross products (`MATH.vectors.products`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atang missing). |
-| Use scalar and vector triple products (`MATH.vectors.triple-products`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module missing; families atstp missing). |
+| Work with probability density and distribution functions (`MATH.probability.continuous-random-variables`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atpdfp draft). |
+| Test and use independence of events (`MATH.probability.independent-events`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atindu draft). |
+| Analyse discrete random variables (`MATH.probability.random-variables`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atrvmean draft). |
+| Apply the law of total probability over a partition (`MATH.probability.total-probability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families attotal draft). |
+| Analyse compound statements with truth tables (`MATH.reasoning.propositional-logic`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atrows draft). |
+| Test properties of binary operations (`MATH.sets-relations.binary-operations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqbinid draft). |
+| Classify functions as one-one, onto or bijective (`MATH.sets-relations.function-types`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqonto draft). |
+| Test relations for reflexivity, symmetry, transitivity and equivalence (`MATH.sets-relations.relation-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqrel draft). |
+| Evaluate inverse trigonometric functions (`MATH.trigonometry.inverse`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atinv draft). |
+| Operate on vectors (`MATH.vectors.algebra`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atlin draft). |
+| Find direction cosines and direction ratios of vectors and lines (`MATH.vectors.direction-cosines`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atdc draft). |
+| Use dot and cross products (`MATH.vectors.products`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atang draft). |
+| Use scalar and vector triple products (`MATH.vectors.triple-products`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atstp draft). |
 
 Unsupported question type (3): Justify multi-concept problem solutions; Convert between numerical/algebraic expressions and tree diagrams; Locate and construct triangle centres.
 
@@ -1005,7 +1005,7 @@ Unsupported question type (3): Justify multi-concept problem solutions; Convert 
 - With a complete learning module (validate@1): **334/338 (99%)**; with an incomplete module: 0; with none: 4
 - Modules: 334 (hand-written 23, synthesised from blueprints 311)
 - Problem families (generated questions with independent checks): 620
-- Review registry (repository copy): draft 9, submitted 73, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 912, submitted 42, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
@@ -1046,18 +1046,18 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeind missing). |
+| Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft). |
 | Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mul submitted). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mmul submitted, mul submitted). |
 | Interpret quotients and remainders (`MATH.number.division-remainders`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families divr submitted, mul submitted). |
-| Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname missing). |
+| Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families eqfrac submitted). |
-| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp missing). |
+| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
-| Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aearea missing). |
+| Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families rperim submitted). |
-| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeang missing). |
-| Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aecirc missing). |
+| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft). |
+| Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft). |
 
 ### Grade 4: OpenPath Sample Mathematics, Grade 4 (openpath-sample-mathematics-grade-4@1.1.0)
 
@@ -1070,18 +1070,18 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeind missing). |
+| Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft). |
 | Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mul submitted). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families mmul submitted, mul submitted). |
 | Divide multi-digit numbers (`MATH.number.long-division`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families ldiv submitted). |
-| Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname missing). |
+| Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families eqfrac submitted). |
-| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp missing). |
+| Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
-| Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aearea missing). |
+| Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families rperim submitted). |
-| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aeang missing). |
-| Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aecirc missing). |
+| Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft). |
+| Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft). |
 
 ### Grade 5: OpenPath Sample Mathematics, Grade 5 (openpath-sample-mathematics-grade-5@1.1.0)
 
@@ -1094,17 +1094,17 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Find factors and multiples (`MATH.number.factors-multiples`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac missing). |
-| Distinguish prime and composite numbers (`MATH.number.primes`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families agprime missing). |
+| Find factors and multiples (`MATH.number.factors-multiples`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft). |
+| Distinguish prime and composite numbers (`MATH.number.primes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families eqfrac submitted). |
 | Add unlike fractions (`MATH.number.fraction-add`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families faddu submitted). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, mul submitted). |
-| Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families agdec missing). |
-| Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families agpct missing). |
+| Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft). |
+| Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families vol submitted). |
-| Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families afletter missing). |
-| Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families agcex missing). |
+| Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families afletter draft). |
+| Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agcex draft). |
 | Find and interpret a mean (`MATH.statistics.averages-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mean4 submitted). |
 
 ### Grade 7: OpenPath Sample Mathematics, Grade 7 (openpath-sample-mathematics-grade-7@1.1.0)
@@ -1118,7 +1118,7 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Operate on rational numbers (`MATH.number.rational-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families ajrq missing). |
+| Operate on rational numbers (`MATH.number.rational-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrq draft). |
 | Evaluate variable expressions (`MATH.algebra.variables`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families linev draft). |
 | Solve linear equations (`MATH.algebra.linear-equations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lin submitted). |
 | Calculate percentages (`MATH.number.percentage`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families pct submitted). |
@@ -1138,7 +1138,7 @@ By grade (a competency spanning grades counts in each):
 | Find squares and square roots (`MATH.number.square-roots`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families root draft). |
 | Use algebraic identities (`MATH.algebra.identities`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families expand draft). |
 | Factor algebraic expressions (`MATH.algebra.factorisation`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families factor submitted). |
-| Plot points in four quadrants (`MATH.coordinate.cartesian`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahread missing). |
+| Plot points in four quadrants (`MATH.coordinate.cartesian`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahread draft). |
 
 ### Grade 10: Board B Sample Mathematics, Class 10 (board-b-sample-mathematics-class-10@1.1.0)
 
@@ -1157,7 +1157,7 @@ By grade (a competency spanning grades counts in each):
 | Solve quadratic equations (`MATH.algebra.quadratics`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families quad draft). |
 | Interpret the quadratic discriminant (`MATH.algebra.quadratic-discriminant`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families disc draft). |
 | Use arithmetic progressions (`MATH.algebra.arithmetic-sequences`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families apn submitted). |
-| Use trigonometric ratios (`MATH.trigonometry.ratios`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families anstd missing). |
+| Use trigonometric ratios (`MATH.trigonometry.ratios`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families anstd draft). |
 
 ### Grade 10: OpenPath Sample Mathematics, Grade 10 (openpath-sample-mathematics-grade-10@1.1.0)
 
@@ -1186,12 +1186,12 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Use set operations (`MATH.algebra.sets`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aosetop missing). |
-| Identify domain range and functions (`MATH.algebra.functions`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aodom missing). |
-| Use straight-line equations (`MATH.coordinate.straight-lines`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families asline missing). |
+| Use set operations (`MATH.algebra.sets`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aosetop draft). |
+| Identify domain range and functions (`MATH.algebra.functions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aodom draft). |
+| Use straight-line equations (`MATH.coordinate.straight-lines`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families asline draft). |
 | Solve linear inequalities (`MATH.algebra.inequalities`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lineq draft). |
 | Evaluate elementary limits (`MATH.calculus.limits`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families lim submitted). |
-| Differentiate from first principles (`MATH.calculus.derivatives`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqfp missing). |
+| Differentiate from first principles (`MATH.calculus.derivatives`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqfp draft). |
 
 ### Grade 12: OpenPath Sample Mathematics, Grade 12 (openpath-sample-mathematics-grade-12@1.1.0)
 
@@ -1204,16 +1204,16 @@ By grade (a competency spanning grades counts in each):
 
 | Competency | Status | Why |
 |---|---|---|
-| Operate on matrices (`MATH.algebra.matrices`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families apmmul missing). |
+| Operate on matrices (`MATH.algebra.matrices`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families apmmul draft). |
 | Evaluate and apply determinants (`MATH.algebra.determinants`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families det2 submitted). |
-| Test continuity (`MATH.calculus.continuity`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqcontk missing). |
+| Test continuity (`MATH.calculus.continuity`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqcontk draft). |
 | Apply differentiation rules (`MATH.calculus.derivative-rules`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted). |
 | Find antiderivatives (`MATH.calculus.indefinite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families pint submitted, pow submitted). |
 | Integrate by substitution and parts (`MATH.calculus.integration-methods`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families subst submitted, pow submitted). |
 | Evaluate definite integrals (`MATH.calculus.definite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint submitted). |
-| Calculate areas using integration (`MATH.calculus.area-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqarea missing). |
+| Calculate areas using integration (`MATH.calculus.area-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqarea draft). |
 | Calculate conditional probabilities (`MATH.probability.conditional`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families condp draft). |
-| Apply Bayes theorem (`MATH.probability.bayes`) | Complete, awaiting review | Complete; awaiting educator review (module missing; families asbayes missing). |
+| Apply Bayes theorem (`MATH.probability.bayes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families asbayes draft). |
 
 ## Explicitly unsupported
 

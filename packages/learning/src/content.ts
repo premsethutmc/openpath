@@ -68,6 +68,9 @@ export interface Module {
   probes: string[];
   /** The question family whose release pool supplies further questions of each phase (depth@1). */
   pool?: { family: string; version: string };
+  /** pools@1: every family the module draws from (the main one first): a competency is broader than one family (read
+   * the clock and time after n minutes), so its questions come from all of them. */
+  pools?: { family: string; version: string }[];
   /** written@2: the part of the skill a computer cannot mark (a proof, construction, graph sketch or justification),
    * offered once the skill is shown on your own; an educator marks it, and while it waits nothing else is held up. */
   written?: string[];
@@ -118,11 +121,16 @@ export interface Goal {
 
 export const contentVersion = data.version;
 /** Modules written by hand (modules.v1.json) and modules synthesised from blueprints (library.v1.json, library.ts). */
-const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["pool"]> }).authoredPools ?? {}) as Record<string, Module["pool"]>;
+const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["pool"] & { pools?: Module["pools"] }> }).authoredPools ?? {}) as Record<string, NonNullable<Module["pool"]> & { pools?: Module["pools"] }>;
 /** Hand-written modules, each with the release pool of its competency's family (when there is one); then the modules
  * of competencies an educator marks (written-modules.v1.json: teaching, auto-marked component questions and written
  * tasks, written@1). */
-export const authoredModules = [...(data.modules as unknown as Module[]), ...(markedData.modules as unknown as Module[])].map((m) => (authoredPools[m.competency] ? { ...m, pool: authoredPools[m.competency] } : m));
+export const authoredModules = [...(data.modules as unknown as Module[]), ...(markedData.modules as unknown as Module[])].map((m) => {
+  const a = authoredPools[m.competency];
+  return a ? { ...m, pool: { family: a.family, version: a.version }, ...(a.pools ? { pools: a.pools } : {}) } : m;
+});
+/** pools@1: the families a module draws from (main first). */
+export const poolFamilies = (m: Module): string[] => (m.pools?.length ? m.pools.map((p) => p.family) : m.pool ? [m.pool.family] : []);
 export const synthesisedModules = libraryData.modules as unknown as (Module & { provenance: Record<string, unknown> })[];
 export const libraryVersion = libraryData.version;
 // written@2: a module answered automatically also offers the skill's written tasks (the part an educator marks); an

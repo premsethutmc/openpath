@@ -34,7 +34,7 @@ import { moduleFor, question, type Module } from "./content";
 import { RETENTION_CHECK } from "./evidence";
 import { FAMILIES, phasePool } from "./families";
 import { graph } from "./graph";
-import { DEPTH_POLICY, moduleQuestions, poolDepth } from "./library";
+import { DEPTH_POLICY, modulePhasePool, moduleQuestions, poolDepth } from "./library";
 import { familiesOf, familyReviewOf, reviewOf } from "./review";
 import { validateFamily } from "./spec";
 import { validateModule } from "./validate";
@@ -94,7 +94,7 @@ export function checkCompetency(id: string): CompetencyCheck {
     worked: !!m && [...m.chapter, ...m.strategies.flatMap((s) => s.screens)].some((s) => (s.math ?? []).length > 0),
     guided: !!m && m.strategies.every((s) => !!s.guided),
     independent: educator ? !!m && m.transfer.some((x) => question(x).type === "written") && written.length >= 2 : !!m && m.transfer.length > 0 && new Set(alone.map((x) => `${question(x).type}${x.endsWith(":w") ? "-situation" : ""}`)).size >= 2,
-    retention: educator ? !!m && m.retention.length >= RETENTION_CHECK && written.length >= 3 : !!m && m.retention.length >= RETENTION_CHECK && (!pool || phasePool(pool, "retention").length >= DEPTH_POLICY.minimum.retention),
+    retention: educator ? !!m && m.retention.length >= RETENTION_CHECK && written.length >= 3 : !!m && m.retention.length >= RETENTION_CHECK && (!pool || modulePhasePool(m!, "retention").length >= DEPTH_POLICY.minimum.retention),
     variants: educator ? written.length >= 3 && listed.filter((x) => question(x).type === "written").length >= 2 : !!depth?.sufficient,
     validation: !!m && validateModule(m).length === 0 && fams.every(familyOk),
     review: !!m && ok(reviewOf(id).state) && fams.every((f) => ok(familyReviewOf(f).state)),

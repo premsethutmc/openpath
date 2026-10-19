@@ -21,6 +21,7 @@ import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
 import { exposureKey, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
+import { modulePhasePool } from "./library";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
 
@@ -38,7 +39,8 @@ const answered = (records: LearnerRecords, qid: string) => records.attempts.find
 export function fromPool(m: Module, phase: Phase, records: LearnerRecords): string | null {
   if (!m.pool) return null;
   const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
-  return phasePool(m.pool.family, phase).find((id) => !seen.has(exposureKey(id))) ?? null;
+  // pools@1: from every family of the competency in turn
+  return modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id))) ?? null;
 }
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
