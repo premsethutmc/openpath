@@ -148,7 +148,7 @@ export function fromTemplate(family: string, competency: string, version: string
   const stepsEx = ex()!;
   const diagnostics = explore(family, used);
   const probes = [...new Set(first.bugs.flatMap((b) => (b.probe && !b.probe.startsWith(`gen:${family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
-  const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name.toLowerCase());
+  const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name);
   const strategies: Strategy[] = [
     { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
   ];
@@ -157,7 +157,7 @@ export function fromTemplate(family: string, competency: string, version: string
     strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`For ${mistakeEx.prompt.replace(/ \(.*\)$/, "")} a common answer is ${show(b.predict as number)}.`, b.says, def.teach.idea], math: [`Not ${show(b.predict as number)}, but ${mistakeEx.answer}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
-    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ title: "What it uses", text: [`This uses ${uses.join(" and ")}. If a step is slow, practise that first; then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
+    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
   return {
     competency,
     title: def.title,

@@ -1,0 +1,16 @@
+/* Content review (/review/): the My Learning Year tokens, with tables for specifications and coverage. */
+.review-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
+.review-nav button { max-width: 100%; white-space: normal; }
+.matrix { width: 100%; border-collapse: collapse; font-size: 0.9rem; display: block; overflow-x: auto; }
+.matrix th, .matrix td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line, #e3e6ef); vertical-align: top; }
+.matrix th { font-weight: 600; }
+.matrix td[data-state="released"], .matrix td[data-status="approved"] { color: var(--ok, #1d7a46); font-weight: 600; }
+.matrix td[data-state="submitted"], .matrix td[data-status="awaiting"] { color: var(--brand, #5b4bd6); }
+.review .qcard.try { margin: 10px 0; }
+.review .right { color: var(--ok, #1d7a46); }
+.review .wrong { color: var(--warn, #8a4b00); }
+.review pre.math { white-space: pre-wrap; font-family: inherit; background: var(--brand-soft, #eef0ff); padding: 8px 10px; border-radius: 8px; }
+.review .lesson-preview { margin: 8px 0; }
+.review .decision textarea { min-height: 72px; width: 100%; }
+.review .history li { margin: 4px 0; }
+.review code { font-size: 0.85em; }

@@ -31,7 +31,7 @@ import { assigned, type Chapter, type CurriculumRelease, type Outcome, type Sect
 import { moduleFor, moduleOrigin, question } from "./content";
 import type { SkillEvidence } from "./evidence";
 import { graph } from "./graph";
-import { reviewOf } from "./review";
+import { activeRegistry, reviewOf } from "./review";
 import { validateModule } from "./validate";
 
 export type TileStatus = "verified" | "shown" | "active" | "not_started" | "no_questions";
@@ -76,11 +76,17 @@ const LOOK: Record<TileStatus, { label: string; icon: string }> = {
   not_started: { label: "Not started", icon: "○" },
   no_questions: { label: "No learning content yet", icon: "–" },
 };
-const REVIEW_LABEL: Record<string, string> = { draft: "Draft: not yet submitted for educator review", submitted: "Awaiting educator review", changes_requested: "Changes requested by an educator", approved: "Approved by an educator, not yet released", released: "Educator-reviewed and released", missing: "Not in the review registry" };
+const REVIEW_LABEL: Record<string, string> = { draft: "Draft: not yet submitted for educator review", submitted: "Awaiting educator review", changes_requested: "Changes requested by an educator", approved: "Approved by an educator, not yet released", released: "Educator-reviewed and released", rejected: "Rejected by an educator", missing: "Not in the review registry" };
 
 const contentCache = new Map<string, TileContent>();
 /** The learning content a skill has (content@1): a validated module, an incomplete one, practice questions only, or none. */
+let cachedFor: unknown = null;
 export function contentOf(id: string): TileContent {
+  // the review state is part of what a tile says: a newly loaded registry (the server's) starts afresh
+  if (cachedFor !== activeRegistry()) {
+    contentCache.clear();
+    cachedFor = activeRegistry();
+  }
   const hit = contentCache.get(id);
   if (hit) return hit;
   const m = moduleFor(id);

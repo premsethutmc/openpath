@@ -120,7 +120,9 @@ def independent_at(prior, competency):
         q = qs.get(e.get('questionId')) or generated(e.get('questionId')) if e.get('record') == 'attempt' else None
         if not q:
             continue
-        n = seen[e['questionId']] = seen.get(e['questionId'], 0) + 1
+        # one exposure per problem, whichever answer format (the app's records.ts exposureKey)
+        key = re.sub(r':mc$', '', e['questionId']) if e['questionId'].startswith('gen:') else e['questionId']
+        n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
         if right(q, e.get('response', '')):

@@ -87,7 +87,8 @@ export function familySpec(fam: string): FamilySpec | null {
     excluded,
     difficulty: { "1": byLevel(1).length, "2": byLevel(2).length, "3": byLevel(3).length },
     examples,
-    explanations: [...new Set(items.flatMap((p) => p.bugs.map((b) => `${b.id}: ${b.says.replace(/[−\d].*$/, "").trim() || b.id}`)))].slice(0, 12),
+    // one line per kind of explanation (a fact slip is one kind, whatever the fact), with an example of its wording
+    explanations: [...new Map(items.flatMap((p) => p.bugs.map((b) => [b.id.replace(/:.*$/, ""), `${b.id.replace(/:.*$/, "")} (${b.kind}): ${b.says}`] as const))).values()],
     teach: def.teach ?? null,
     fingerprint,
   };

@@ -21,6 +21,7 @@ import { years } from "../../../packages/learning/src/plan";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
 import { flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
+import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
 import "../mathematics/chapter/chapter.css";
@@ -93,6 +94,7 @@ function App() {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
+  const [registryLoaded, setRegistryLoaded] = useState(0);
   const visit = useRef(uid());
 
   async function refreshAccount() {
@@ -100,6 +102,12 @@ function App() {
     if (!s.available) throw new Error("The OpenPath account service is not reachable. Wait a minute (it may be waking up) and reload.");
     setSignedIn(s.account.authenticated);
     if (s.account.authenticated) {
+      // what is released (educator-reviewed): only released content can count toward verified mastery
+      const reviewed = await api.request<{ registry: Registry }>("GET", "/content-review/").catch(() => null);
+      if (reviewed) {
+        setActiveRegistry(reviewed.registry);
+        setRegistryLoaded((n) => n + 1);
+      }
       const rows = await api.pupils();
       setPupils(rows);
       setLearner((cur) => (rows.some((p) => p.id === cur) ? cur : rows.length === 1 ? rows[0].id : ""));
@@ -122,7 +130,7 @@ function App() {
     window.scrollTo({ top: 0 });
   }, [view]);
 
-  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}` }) : null), [learner, events, now]);
+  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}` }) : null), [learner, events, now, registryLoaded]);
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 

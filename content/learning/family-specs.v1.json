@@ -36,18 +36,8 @@
     "gen:mul:11,5:mc"
    ],
    "explanations": [
-    "fact-slip:2x2: A multiplication fact (",
-    "fact-slip:2x3: A multiplication fact (",
-    "add-for-multiply: add-for-multiply",
-    "fact-slip:2x4: A multiplication fact (",
-    "fact-slip:2x5: A multiplication fact (",
-    "fact-slip:2x6: A multiplication fact (",
-    "fact-slip:2x7: A multiplication fact (",
-    "fact-slip:2x8: A multiplication fact (",
-    "fact-slip:2x9: A multiplication fact (",
-    "fact-slip:2x10: A multiplication fact (",
-    "fact-slip:2x11: A multiplication fact (",
-    "fact-slip:2x12: A multiplication fact ("
+    "fact-slip (recall): A multiplication fact (12 × 12) is not yet reliable.",
+    "add-for-multiply (conceptual): 12 × 12 was added instead of multiplied."
    ],
    "teach": {
     "idea": "a × b counts a groups of b: the same as b groups of a.",
@@ -106,18 +96,9 @@
     "gen:rect:11,10:mc"
    ],
    "explanations": [
-    "perimeter-for-area: The distance around (perimeter) was found instead of the space inside (area).",
-    "fact-slip:2x2: A multiplication fact (",
-    "add-sides: The two sides were added; area multiplies them.",
-    "fact-slip:2x3: A multiplication fact (",
-    "fact-slip:2x4: A multiplication fact (",
-    "fact-slip:2x5: A multiplication fact (",
-    "fact-slip:2x6: A multiplication fact (",
-    "fact-slip:2x7: A multiplication fact (",
-    "fact-slip:2x8: A multiplication fact (",
-    "fact-slip:2x9: A multiplication fact (",
-    "fact-slip:2x10: A multiplication fact (",
-    "fact-slip:2x11: A multiplication fact ("
+    "perimeter-for-area (conceptual): The distance around (perimeter) was found instead of the space inside (area).",
+    "fact-slip (prerequisite): A multiplication fact (12 × 12) is not yet reliable.",
+    "add-sides (conceptual): The two sides were added; area multiplies them."
    ],
    "teach": {
     "idea": "Area counts the unit squares that cover a shape.",
@@ -180,18 +161,9 @@
     "gen:eqfrac:5,6,42:mc"
    ],
    "explanations": [
-    "additive-scaling: The same amount was added to the top as to the bottom; equal fractions multiply both by the same number.",
-    "scale-one-part: Only the bottom was changed; the top must be multiplied by the same number.",
-    "fact-slip:1x2: A multiplication fact (",
-    "fact-slip:1x3: A multiplication fact (",
-    "fact-slip:1x4: A multiplication fact (",
-    "fact-slip:1x5: A multiplication fact (",
-    "fact-slip:1x6: A multiplication fact (",
-    "fact-slip:1x7: A multiplication fact (",
-    "fact-slip:1x8: A multiplication fact (",
-    "fact-slip:1x9: A multiplication fact (",
-    "fact-slip:1x10: A multiplication fact (",
-    "fact-slip:2x2: A multiplication fact ("
+    "additive-scaling (conceptual): The same amount was added to the top as to the bottom; equal fractions multiply both by the same number.",
+    "scale-one-part (procedural): Only the bottom was changed; the top must be multiplied by the same number.",
+    "fact-slip (recall): A multiplication fact (9 × 10) is not yet reliable."
    ],
    "teach": {
     "idea": "Equal fractions cover the same amount: cutting every piece into k smaller pieces multiplies top and bottom by k.",
@@ -258,9 +230,9 @@
     "gen:fadd:8,3,10,-1:mc"
    ],
    "explanations": [
-    "add-denominators: The bottom numbers were added too; they name the size of the pieces, which does not change.",
-    "multiply-tops: The top numbers were multiplied; adding fractions adds the pieces.",
-    "subtract-reversed: The smaller top number was taken from the larger one the wrong way round."
+    "add-denominators (conceptual): The bottom numbers were added too; they name the size of the pieces, which does not change.",
+    "multiply-tops (procedural): The top numbers were multiplied; adding fractions adds the pieces.",
+    "subtract-reversed (procedural): The smaller top number was taken from the larger one the wrong way round."
    ],
    "teach": {
     "idea": "Like fractions count the same size of piece: add or take away the pieces.",
@@ -323,18 +295,11 @@
     "gen:cint:3,11,9:mc"
    ],
    "explanations": [
-    "fencepost-width: The whole numbers from a to b were counted (one too many); the width is b",
-    "add-width-height: Width and height were added; the area multiplies them.",
-    "fact-slip:1x1: A multiplication fact (",
-    "forget-height: Only the width was found; the area is width × height.",
-    "fact-slip:1x2: A multiplication fact (",
-    "fact-slip:1x3: A multiplication fact (",
-    "fact-slip:1x4: A multiplication fact (",
-    "fact-slip:1x5: A multiplication fact (",
-    "fact-slip:1x6: A multiplication fact (",
-    "fact-slip:1x7: A multiplication fact (",
-    "fact-slip:1x8: A multiplication fact (",
-    "fact-slip:1x9: A multiplication fact ("
+    "fencepost-width (procedural): The whole numbers from a to b were counted (one too many); the width is b − a.",
+    "add-width-height (conceptual): Width and height were added; the area multiplies them.",
+    "fact-slip (prerequisite): A multiplication fact (12 × 4) is not yet reliable.",
+    "forget-height (conceptual): Only the width was found; the area is width × height.",
+    "ignore-lower-limit (conceptual): The width was taken as the upper limit only; the width is upper minus lower."
    ],
    "teach": {
     "idea": "The integral of a constant c from a to b is the area of a rectangle: width b − a, height c.",
@@ -393,7 +358,7 @@
     "gen:quad:3,-18"
    ],
    "explanations": [
-    "root-signs: The numbers in the brackets were taken as the solutions; (x"
+    "root-signs (procedural): The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip."
    ],
    "teach": {
     "idea": "If a product is zero, one of its factors is zero.",
@@ -456,8 +421,8 @@
     "gen:linev:7,-7,4:mc"
    ],
    "explanations": [
-    "concatenate: concatenate",
-    "add-for-multiply: add-for-multiply"
+    "concatenate (conceptual): 9x with x = 9 was read as the digits 99; 9x means 9 × x.",
+    "add-for-multiply (conceptual): 9x was worked out as 9 + x; it means 9 × x."
    ],
    "teach": {
     "idea": "y = mx + c gives y for any x: m × x, then add c.",
@@ -512,7 +477,7 @@
     "gen:meet:3,-2"
    ],
    "explanations": [
-    "square-as-double: x × x was worked out as x + x (doubling); x × x is x squared."
+    "square-as-double (conceptual): x × x was worked out as x + x (doubling); x × x is x squared."
    ],
    "teach": {
     "idea": "Where two graphs meet, their y values are equal.",
@@ -624,8 +589,8 @@
     "gen:alp:3,0:mc"
    ],
    "explanations": [
-    "line-only: The area under the line was found; the region is between the line and the parabola.",
-    "wrong-order: The parabola was taken as the top curve; here the line is above, so the answer was negative."
+    "line-only (conceptual): The area under the line was found; the region is between the line and the parabola.",
+    "wrong-order (procedural): The parabola was taken as the top curve; here the line is above, so the answer was negative."
    ],
    "teach": {
     "idea": "The area between two curves is the integral of (top − bottom) between where they meet.",
@@ -684,9 +649,9 @@
     "gen:pow:10,4:mc"
    ],
    "explanations": [
-    "one-factor-short: One factor too few was multiplied:",
-    "multiply-for-power: A power was worked out as a multiplication (",
-    "add-for-power: The two numbers were added; a power is repeated multiplication."
+    "one-factor-short (procedural): One factor too few was multiplied: 12 must appear 4 times.",
+    "multiply-for-power (conceptual): A power was worked out as a multiplication (12⁴ as 12 × 4); a power multiplies 12 by itself 4 times.",
+    "add-for-power (conceptual): The two numbers were added; a power is repeated multiplication."
    ],
    "teach": {
     "idea": "aⁿ multiplies a by itself n times.",
@@ -745,18 +710,9 @@
     "gen:dist:11,10:mc"
    ],
    "explanations": [
-    "first-term-only: Only the x was multiplied by",
-    "add-for-multiply: add-for-multiply",
-    "fact-slip:1x2: A multiplication fact (",
-    "fact-slip:2x2: A multiplication fact (",
-    "fact-slip:2x3: A multiplication fact (",
-    "fact-slip:2x4: A multiplication fact (",
-    "fact-slip:2x5: A multiplication fact (",
-    "fact-slip:2x6: A multiplication fact (",
-    "fact-slip:2x7: A multiplication fact (",
-    "fact-slip:2x8: A multiplication fact (",
-    "fact-slip:2x9: A multiplication fact (",
-    "fact-slip:2x10: A multiplication fact ("
+    "first-term-only (procedural): Only the x was multiplied by 12; the number outside multiplies every term in the bracket.",
+    "add-for-multiply (conceptual): 12 and 12 were added; the bracket means 12 × 12.",
+    "fact-slip (prerequisite): A multiplication fact (12 × 12) is not yet reliable."
    ],
    "teach": {
     "idea": "The number outside a bracket multiplies every term inside.",
@@ -815,10 +771,9 @@
     "gen:expand:-3,1:mc"
    ],
    "explanations": [
-    "product-for-sum: The two numbers were multiplied for the x term; -",
-    "one-cross-term: Only one of the two middle products was kept; both x × b and a × x give an x term.",
-    "sign-slip: -",
-    "product-for-sum: The two numbers were multiplied for the x term;"
+    "product-for-sum (conceptual): The two numbers were multiplied for the x term; 8 × 9 is the number at the end, and the x term collects 8x and 9x.",
+    "one-cross-term (procedural): Only one of the two middle products was kept; both x × b and a × x give an x term.",
+    "sign-slip (prerequisite): -1 + 9 was worked out without the signs; adding numbers with different signs is a difference."
    ],
    "teach": {
     "idea": "(x + a)(x + b) has four products; two of them are x terms.",
@@ -881,10 +836,10 @@
     "gen:dpow:7,5,2:mc"
    ],
    "explanations": [
-    "power-not-multiplied: The power was lowered but not brought down as a factor: the derivative of xⁿ is n xⁿ⁻¹.",
-    "value-not-slope: The function's value was found, not its rate of change (the derivative).",
-    "power-not-lowered: The power was not lowered: the derivative of xⁿ is n xⁿ⁻¹.",
-    "multiply-for-power: A power was worked out as a multiplication ("
+    "power-not-multiplied (procedural): The power was lowered but not brought down as a factor: the derivative of xⁿ is n xⁿ⁻¹.",
+    "value-not-slope (conceptual): The function's value was found, not its rate of change (the derivative).",
+    "power-not-lowered (procedural): The power was not lowered: the derivative of xⁿ is n xⁿ⁻¹.",
+    "multiply-for-power (prerequisite): A power was worked out as a multiplication (3⁴ as 3 × 4); a power multiplies 3 by itself 4 times."
    ],
    "teach": {
     "idea": "The derivative of k xⁿ is k n xⁿ⁻¹.",
@@ -951,11 +906,11 @@
     "gen:pint:1,4,9,3:mc"
    ],
    "explanations": [
-    "no-divide: The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n +",
-    "differentiated: The function was differentiated instead of integrated: integrating raises the power.",
-    "power-not-raised: It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n +",
-    "multiply-for-power: A power was worked out as a multiplication (",
-    "ignore-lower-limit: Only the upper limit was used; the answer is F(upper)"
+    "no-divide (procedural): The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1).",
+    "differentiated (conceptual): The function was differentiated instead of integrated: integrating raises the power.",
+    "power-not-raised (procedural): It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1).",
+    "multiply-for-power (prerequisite): A power was worked out as a multiplication (4⁴ as 4 × 4); a power multiplies 4 by itself 4 times.",
+    "ignore-lower-limit (conceptual): Only the upper limit was used; the answer is F(upper) − F(lower)."
    ],
    "teach": {
     "idea": "An antiderivative of xⁿ is xⁿ⁺¹ ⁄ (n + 1).",
@@ -1022,10 +977,10 @@
     "gen:subst:1,3,1,3:mc"
    ],
    "explanations": [
-    "limits-not-changed: The old limits were used for u: when x goes from",
-    "no-divide: The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n +",
-    "extra-half: It was divided by",
-    "multiply-for-power: A power was worked out as a multiplication ("
+    "limits-not-changed (procedural): The old limits were used for u: when x goes from 2 to 3, u = x² + 4 goes from 8 to 13.",
+    "no-divide (procedural): The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1).",
+    "extra-half (conceptual): It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du.",
+    "multiply-for-power (prerequisite): A power was worked out as a multiplication (12⁴ as 12 × 4); a power multiplies 12 by itself 4 times."
    ],
    "teach": {
     "idea": "With u = x² + c, 2x dx becomes du.",
@@ -1082,9 +1037,9 @@
     "gen:disc:1,-20:mc"
    ],
    "explanations": [
-    "negative-square: b² was taken as negative for a negative b; a square is never negative.",
-    "minus-c-sign: The sign of",
-    "forgot-four: The discriminant was taken as b²"
+    "negative-square (prerequisite): b² was taken as negative for a negative b; a square is never negative.",
+    "minus-c-sign (prerequisite): The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds.",
+    "forgot-four (procedural): The discriminant was taken as b² − c; it is b² − 4ac."
    ],
    "teach": {
     "idea": "b² − 4ac decides how many real solutions there are.",
@@ -1143,9 +1098,9 @@
     "gen:rperim:19,12:mc"
    ],
    "explanations": [
-    "area-for-perimeter: The space inside (area) was found; the perimeter is the distance around the edge.",
-    "two-sides-only: Only two sides were added; a rectangle has four sides, two of each length.",
-    "three-sides: One side was left out; go all the way around: four sides."
+    "area-for-perimeter (conceptual): The space inside (area) was found; the perimeter is the distance around the edge.",
+    "two-sides-only (procedural): Only two sides were added; a rectangle has four sides, two of each length.",
+    "three-sides (procedural): One side was left out; go all the way around: four sides."
    ],
    "teach": {
     "idea": "The perimeter is the distance all the way around a shape: add the lengths of every side.",
@@ -1204,18 +1159,9 @@
     "gen:mmul:85,3:mc"
    ],
    "explanations": [
-    "tens-as-ones: The tens digit was multiplied as if it were",
-    "fact-slip:2x2: A multiplication fact (",
-    "fact-slip:2x3: A multiplication fact (",
-    "fact-slip:2x4: A multiplication fact (",
-    "lost-carry: The tens carried from the ones were not added: they belong in the tens column.",
-    "fact-slip:2x5: A multiplication fact (",
-    "fact-slip:2x6: A multiplication fact (",
-    "fact-slip:2x7: A multiplication fact (",
-    "fact-slip:2x8: A multiplication fact (",
-    "fact-slip:2x9: A multiplication fact (",
-    "fact-slip:3x3: A multiplication fact (",
-    "fact-slip:3x4: A multiplication fact ("
+    "tens-as-ones (conceptual): The tens digit was multiplied as if it were 9, not 90: each digit's place value counts.",
+    "fact-slip (prerequisite): A multiplication fact (9 × 9) is not yet reliable.",
+    "lost-carry (procedural): The tens carried from the ones were not added: they belong in the tens column."
    ],
    "teach": {
     "idea": "Split the two-digit number into tens and ones, multiply each part, then add.",
@@ -1274,18 +1220,9 @@
     "gen:divr:71,9:mc"
    ],
    "explanations": [
-    "quotient-as-remainder: The number of groups was given; the remainder is what is left over after the groups.",
-    "remainder-too-big: One group too few was taken: a remainder is always less than",
-    "fact-slip:3x3: A multiplication fact (",
-    "fact-slip:2x4: A multiplication fact (",
-    "fact-slip:2x5: A multiplication fact (",
-    "fact-slip:2x6: A multiplication fact (",
-    "fact-slip:3x4: A multiplication fact (",
-    "fact-slip:2x7: A multiplication fact (",
-    "fact-slip:3x5: A multiplication fact (",
-    "fact-slip:2x8: A multiplication fact (",
-    "fact-slip:4x4: A multiplication fact (",
-    "fact-slip:2x9: A multiplication fact ("
+    "quotient-as-remainder (conceptual): The number of groups was given; the remainder is what is left over after the groups.",
+    "remainder-too-big (procedural): One group too few was taken: a remainder is always less than 8.",
+    "fact-slip (prerequisite): A multiplication fact (12 × 8) is not yet reliable."
    ],
    "teach": {
     "idea": "Dividing makes equal groups; the remainder is what is left when no more full groups fit.",
@@ -1344,9 +1281,9 @@
     "gen:ldiv:86,7:mc"
    ],
    "explanations": [
-    "digits-reversed: The digits of the answer were written in the wrong order: the first step gives the tens.",
-    "one-group-off: A multiplication fact with",
-    "dropped-zero: A zero in the answer was left out: when the divisor does not go into a step, write"
+    "digits-reversed (procedural): The digits of the answer were written in the wrong order: the first step gives the tens.",
+    "one-group-off (recall): A multiplication fact with 9 slipped by one group.",
+    "dropped-zero (procedural): A zero in the answer was left out: when the divisor does not go into a step, write 0 there."
    ],
    "teach": {
     "idea": "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.",
@@ -1409,9 +1346,9 @@
     "gen:fmulw:7,8,9:mc"
    ],
    "explanations": [
-    "multiply-both: Top and bottom were both multiplied by",
-    "multiply-bottom: The bottom was multiplied;",
-    "add-whole: add-whole"
+    "multiply-both (conceptual): Top and bottom were both multiplied by 9: that gives an equal fraction, not 9 lots of it.",
+    "multiply-bottom (procedural): The bottom was multiplied; 9 lots of 11/12 is 9 × 11 pieces of the same size.",
+    "add-whole (conceptual): 9 was added to the top; multiplying means 9 lots."
    ],
    "teach": {
     "idea": "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.",
@@ -1478,8 +1415,8 @@
     "gen:faddu:4,5,2,9:mc"
    ],
    "explanations": [
-    "add-tops-and-bottoms: Tops and bottoms were added separately; fractions with different pieces must first be written with the same pieces.",
-    "same-bottom-not-scaled: A common denominator was chosen but the tops were not changed to match it."
+    "add-tops-and-bottoms (conceptual): Tops and bottoms were added separately; fractions with different pieces must first be written with the same pieces.",
+    "same-bottom-not-scaled (procedural): A common denominator was chosen but the tops were not changed to match it."
    ],
    "teach": {
     "idea": "Fractions can be added only when they count the same size of piece.",
@@ -1538,9 +1475,9 @@
     "gen:pct:75,20:mc"
    ],
    "explanations": [
-    "no-hundred: Per cent means out of",
-    "percent-as-divisor: It was divided by",
-    "subtracted: subtracted"
+    "no-hundred (conceptual): Per cent means out of 100: the amount must be divided by 100 as well as multiplied.",
+    "percent-as-divisor (conceptual): It was divided by 95; 95% means 95 out of every 100.",
+    "subtracted (procedural): 95% of 400 is a part of 400, not 400 minus 95."
    ],
    "teach": {
     "idea": "Per cent means out of 100: 30% of an amount is 30 parts of every 100.",
@@ -1607,9 +1544,9 @@
     "gen:mean4:3,10,11,12:mc"
    ],
    "explanations": [
-    "total-not-shared: The numbers were added but the total was not shared out among the four.",
-    "divide-by-three: The total was divided by the wrong count: there are four numbers.",
-    "middle-for-mean: A middle value was chosen; the mean shares the total equally."
+    "total-not-shared (procedural): The numbers were added but the total was not shared out among the four.",
+    "divide-by-three (procedural): The total was divided by the wrong count: there are four numbers.",
+    "middle-for-mean (conceptual): A middle value was chosen; the mean shares the total equally."
    ],
    "teach": {
     "idea": "The mean shares the total out equally: it is the value every number would have if they were levelled out.",
@@ -1664,9 +1601,9 @@
     "gen:root:22:mc"
    ],
    "explanations": [
-    "squared-instead: The number was squared; the square root goes the other way.",
-    "near-square: A square fact next to the right one was used.",
-    "half-for-root: The number was halved; the square root is the number that multiplied by itself gives it."
+    "squared-instead (conceptual): The number was squared; the square root goes the other way.",
+    "near-square (recall): A square fact next to the right one was used.",
+    "half-for-root (conceptual): The number was halved; the square root is the number that multiplied by itself gives it."
    ],
    "teach": {
     "idea": "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.",
@@ -1729,9 +1666,9 @@
     "gen:vol:8,4,7:mc"
    ],
    "explanations": [
-    "one-layer: Only the bottom layer was counted; there are as many layers as the height.",
-    "added-sides: The three lengths were added; volume multiplies them.",
-    "outside-only: The squares on the outside faces were counted; volume counts the cubes inside too."
+    "one-layer (conceptual): Only the bottom layer was counted; there are as many layers as the height.",
+    "added-sides (conceptual): The three lengths were added; volume multiplies them.",
+    "outside-only (conceptual): The squares on the outside faces were counted; volume counts the cubes inside too."
    ],
    "teach": {
     "idea": "Volume counts the cubes that fill a shape: layers of cubes stacked up.",
@@ -1794,9 +1731,9 @@
     "gen:lin:8,20,9:mc"
    ],
    "explanations": [
-    "forgot-divide: forgot-divide",
-    "added-not-subtracted: added-not-subtracted",
-    "divided-first: Only part of the left side was divided: undo the +"
+    "forgot-divide (procedural): 20 was taken away but the 9 was not divided out: 9x = 108 means x = 108 ÷ 9.",
+    "added-not-subtracted (procedural): 18 was added to both sides; to undo + 18, subtract 18.",
+    "divided-first (procedural): Only part of the left side was divided: undo the + 18 first, then the × 9."
    ],
    "teach": {
     "idea": "An equation is a balance: do the same to both sides and it stays true.",
@@ -1859,8 +1796,8 @@
     "gen:prop:6,13,12:mc"
    ],
    "explanations": [
-    "additive: The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.",
-    "no-unit: The total for"
+    "additive (conceptual): The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.",
+    "no-unit (procedural): The total for 8 was multiplied by 12; first find the price of one pencil."
    ],
    "teach": {
     "idea": "In a direct proportion, twice as many costs twice as much: the price of one stays the same.",
@@ -1919,9 +1856,9 @@
     "gen:factor:4,-9:mc"
    ],
    "explanations": [
-    "sum-minus-product: The number was found from the product alone, with the wrong sign: the two numbers must multiply to q AND add to p.",
-    "coefficient-as-number: The x coefficient was copied into the bracket; the two numbers in the brackets add up to it.",
-    "constant-minus: The given number was taken away from the constant; the two numbers multiply to the constant."
+    "sum-minus-product (procedural): The number was found from the product alone, with the wrong sign: the two numbers must multiply to q AND add to p.",
+    "coefficient-as-number (conceptual): The x coefficient was copied into the bracket; the two numbers in the brackets add up to it.",
+    "constant-minus (procedural): The given number was taken away from the constant; the two numbers multiply to the constant."
    ],
    "teach": {
     "idea": "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient.",
@@ -1984,9 +1921,9 @@
     "gen:apn:14,4,19:mc"
    ],
    "explanations": [
-    "n-jumps: n-jumps",
-    "times-n: The first term was multiplied; an arithmetic progression adds the same difference each time.",
-    "forgot-start: Only the jumps were counted; the sequence starts at the first term."
+    "n-jumps (procedural): 20 jumps were counted; from term 1 to term 20 there are 19 jumps.",
+    "times-n (conceptual): The first term was multiplied; an arithmetic progression adds the same difference each time.",
+    "forgot-start (procedural): Only the jumps were counted; the sequence starts at the first term."
    ],
    "teach": {
     "idea": "Each term of an arithmetic progression is the one before plus the common difference d.",
@@ -2053,9 +1990,9 @@
     "gen:cdist:-3,2,5,-4:mc"
    ],
    "explanations": [
-    "added-sides: The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²).",
-    "no-root: The square root was not taken at the end.",
-    "sign-slip: A difference of coordinates lost a sign: from"
+    "added-sides (conceptual): The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²).",
+    "no-root (procedural): The square root was not taken at the end.",
+    "sign-slip (prerequisite): A difference of coordinates lost a sign: from −2 to 3 is 5, not 1."
    ],
    "teach": {
     "idea": "The distance between two points is the hypotenuse of a right triangle whose sides are the across and up distances.",
@@ -2114,9 +2051,9 @@
     "gen:hcf:60,94:mc"
    ],
    "explanations": [
-    "lcm-for-hcf: The lowest common multiple was found; the HCF is the largest number that divides both.",
-    "a-common-factor: A common factor was found, but not the highest one.",
-    "difference: The difference was given; keep going: the HCF also divides the difference, so repeat with the smaller numbers."
+    "lcm-for-hcf (conceptual): The lowest common multiple was found; the HCF is the largest number that divides both.",
+    "a-common-factor (conceptual): A common factor was found, but not the highest one.",
+    "difference (procedural): The difference was given; keep going: the HCF also divides the difference, so repeat with the smaller numbers."
    ],
    "teach": {
     "idea": "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.",
@@ -2181,9 +2118,9 @@
     "gen:det2:3,4,-1,1:mc"
    ],
    "explanations": [
-    "added-diagonals: The two diagonal products were added; the determinant subtracts them: ad",
-    "reversed: The products were subtracted the wrong way round: ad",
-    "wrong-pairs: The wrong entries were paired: multiply along the diagonals, a × d and b × c."
+    "added-diagonals (procedural): The two diagonal products were added; the determinant subtracts them: ad − bc.",
+    "reversed (procedural): The products were subtracted the wrong way round: ad − bc, not bc − ad.",
+    "wrong-pairs (procedural): The wrong entries were paired: multiply along the diagonals, a × d and b × c."
    ],
    "teach": {
     "idea": "The determinant of [[a, b], [c, d]] is ad − bc: the product down one diagonal minus the product down the other.",
@@ -2242,9 +2179,9 @@
     "gen:lim:8,2:mc"
    ],
    "explanations": [
-    "zero-for-undefined: zero-for-undefined",
-    "forgot-plus-a: x²",
-    "squared: x²"
+    "zero-for-undefined (conceptual): 0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).",
+    "forgot-plus-a (procedural): x² − a² was factorised as (x − a) alone; it is (x − a)(x + a), which gives 2a at x = a.",
+    "squared (procedural): x² − a² was replaced by x²; after cancelling, (x + a) gives 2a."
    ],
    "teach": {
     "idea": "When substituting gives 0 ⁄ 0, the limit still exists: simplify first, then substitute.",
@@ -2309,9 +2246,9 @@
     "gen:condp:6,2,2,2:mc"
    ],
    "explanations": [
-    "whole-class: The whole class was counted; given that a girl is chosen, only the girls count.",
-    "not-over-yes: Chess girls were compared with non-chess girls; a probability divides by all the girls.",
-    "reversed-condition: The chess club was taken as the group; the question is among the girls."
+    "whole-class (conceptual): The whole class was counted; given that a girl is chosen, only the girls count.",
+    "not-over-yes (procedural): Chess girls were compared with non-chess girls; a probability divides by all the girls.",
+    "reversed-condition (conceptual): The chess club was taken as the group; the question is among the girls."
    ],
    "teach": {
     "idea": "P(A given B) counts only the cases where B happened: B becomes the whole.",

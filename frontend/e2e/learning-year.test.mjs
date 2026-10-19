@@ -11,6 +11,7 @@
  *   node --import tsx --test e2e/learning-year.test.mjs
  */
 import assert from "node:assert/strict";
+import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
@@ -688,7 +689,7 @@ test("platform E and F: an unseen textbook through the same screens; then the ne
   await tile(page, "Expanding brackets");
   await tile(page, "Expand simple products");
   assert.match(await crumbs(page), /Algebra.*Brackets and powers.*Expanding brackets.*Expand simple products/s);
-  await page.getByText(/Awaiting educator review/).waitFor();
+  await page.getByText(/educator review/).waitFor();
   await shot(page, "p-e2-unseen-skill-phone");
   await page.getByRole("button", { name: /^(Start|Continue)$/ }).click();
   const w = await work(page);
@@ -718,4 +719,193 @@ test("platform E and F: an unseen textbook through the same screens; then the ne
   await page.getByText("Grade 9 · 2026-27").waitFor();
   await page.getByText("Grade 12 · 2027-28").waitFor();
   await context.close();
+});
+
+// ---------------------------------------------------------------- content system: educator review, released content, depth
+
+const MANAGE = process.env.YEAR_MANAGE ?? "python3 backend/manage.py";
+/** Grant a content-review role to a synthetic account (the explicit management command; Django only). */
+function grant(email, role) {
+  execSync(`${MANAGE} content_reviewer grant ${email} --role ${role}`, { cwd: fileURLToPath(root), stdio: "pipe" });
+}
+async function reviewerPage(name, roles, size = "tablet") {
+  const viewport = size === "tablet" ? { width: 820, height: 1180 } : { width: 360, height: 800 };
+  const context = await browser.newContext({ viewport, isMobile: true, hasTouch: true });
+  const page = await context.newPage();
+  page.on("pageerror", (e) => console.error("page error:", e.message));
+  await page.goto(base + "/review/");
+  await page.getByRole("heading", { name: "Sign in to review content" }).waitFor();
+  const email = `${name}-${Date.now()}-${Math.random().toString(36).slice(2)}@example.org`;
+  assert.equal((await call(page, "/account/register/", { email, password: PASSWORD, consent: true })).status, 201);
+  for (const r of roles) grant(email, r);
+  await page.reload();
+  return { page, context, email };
+}
+let reviewerBoth = null;
+/** One synthetic account with both roles, for releases made by the API (registration is rate-limited). */
+async function sharedReviewer() {
+  reviewerBoth ??= await reviewerPage("both", ["educator", "release-manager"]);
+  return reviewerBoth;
+}
+/** Take items through the whole workflow by the API (each decision by the role it needs); idempotent. */
+async function releaseAll(page, items) {
+  for (const item of items) {
+    for (const decision of ["submit", "approve", "release"]) {
+      const reg = (await call(page, "/content-review/")).data.registry;
+      const e = reg.entries.find((x) => x.item === item);
+      assert.ok(e, item);
+      const want = { submit: ["draft", "changes_requested"], approve: ["submitted"], release: ["approved"] }[decision];
+      if (!want.includes(e.state)) continue;
+      const r = await call(page, "/content-review/decisions/", { item, decision, contentHash: e.contentHash, note: "checked in the acceptance test (synthetic reviewer)" });
+      assert.equal(r.status, 201, `${item} ${decision}: ${JSON.stringify(r.data)}`);
+    }
+  }
+}
+/** Learn a skill with two early mistakes, come back the next day, and again after seven full days: verified. */
+async function learnToVerified(page, learner, path, shotPrefix) {
+  const go = async () => {
+    await home(page);
+    for (const t of path) await tile(page, t);
+    const start = page.getByRole("button", { name: /^(Start|Continue)$/ });
+    if (await start.count()) await start.click();
+  };
+  await go();
+  let wrong = 0;
+  const twoMistakes = (qid) => {
+    if (wrong >= 2) return null;
+    wrong++;
+    const q = Q.get(qid);
+    return q.misconceptions?.find((m) => m.when !== q.answer)?.when ?? String(Number(q.answer) + 10);
+  };
+  const first = await work(page, twoMistakes, 40);
+  assert.ok(first.some((l) => l.startsWith("lesson:")), `the mistakes led to teaching: ${first.join(" ")}`);
+  await shot(page, `${shotPrefix}-1-after-lesson`);
+  await timeTravel(page, learner, 1);
+  await page.reload();
+  await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
+  await go();
+  const second = await work(page, () => null, 40);
+  assert.ok(second.length >= 1, `fresh questions on the next day: ${second.join(" ")}`);
+  await timeTravel(page, learner, 7.05);
+  await page.reload();
+  await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
+  await page.getByRole("button", { name: "Start the delayed check" }).click();
+  const third = await work(page, () => null, 10);
+  assert.ok(third.length >= 2, `the delayed check: ${third.join(" ")}`);
+  await home(page);
+  for (const t of path.slice(0, -1)) await tile(page, t);
+  assert.equal(await tileStatus(page, path.at(-1)), "verified", "green: verified on released content");
+  await shot(page, `${shotPrefix}-2-verified`);
+  // in the module, no problem is asked twice (a retry of a problem the learner was stuck on is help, by design)
+  const recs = (await records(page, learner)).filter((r) => r.record === "attempt" && !String(r.context ?? "").startsWith("recovery:"));
+  const keys = recs.map((r) => r.questionId.replace(/:mc$/, ""));
+  assert.equal(new Set(keys).size, keys.length, "no problem was asked twice");
+  return [...first, ...second, ...third];
+}
+
+test("content system: an educator reviews a question family and its module in the browser; a release manager releases them; a Grade 4 learner then reaches verified", async () => {
+  if (mode !== "django") return; // review decisions are server records
+  const ed = await reviewerPage("educator", ["educator"]);
+  const { page } = ed;
+  await page.getByRole("heading", { name: "Content review" }).waitFor();
+  await page.getByTestId("roles").getByText(/educator/).waitFor();
+  await shot(page, "r1-overview-coverage-tablet");
+  await page.getByRole("button", { name: "Question families" }).click();
+  await page.getByRole("button", { name: /^mmul:/ }).click();
+  await page.getByRole("button", { name: "Run the validation now" }).click();
+  await page.getByTestId("validation").getByText("All checks pass.").waitFor();
+  // test a representative question with the answer a misunderstanding gives
+  const card = page.locator(".qcard.try").first();
+  const qid = await card.getAttribute("data-qid");
+  const q = Q.get(qid);
+  const wrong = q.misconceptions?.find((m) => m.when !== q.answer)?.when;
+  if (q.type === "choice") await card.getByRole("radio").nth("ABCD".indexOf(wrong ?? (q.answer === "A" ? "B" : "A"))).click();
+  else await card.getByLabel("Your answer").fill(wrong ?? "1");
+  await card.getByRole("button", { name: "Check" }).click();
+  await card.getByRole("status").getByText("Not right.").waitFor();
+  await shot(page, "r2-family-validation-and-try-tablet");
+  // submit and approve the family, with notes
+  await page.getByRole("button", { name: "Submit for review" }).click();
+  await page.getByTestId("state").getByText("Awaiting review").waitFor();
+  await page.getByLabel("Review note").fill("Checked the parameter ranges, the validation results, ten questions and every mistake explanation.");
+  await page.getByRole("button", { name: "Approve", exact: true }).click();
+  await page.getByTestId("state").getByText("Approved, not released").waitFor();
+  assert.equal(await page.getByRole("button", { name: "Release to learners" }).count(), 0, "an educator cannot release");
+  await shot(page, "r3-family-approved-history-tablet");
+  // the module: its teaching, its pool; request a correction first, then approve after resubmission
+  await page.getByRole("button", { name: "Modules" }).click();
+  await page.getByRole("button", { name: "Multiplying a two-digit number by a one-digit number" }).click();
+  await page.getByText(/Question pool \(depth@1\): mmul/).waitFor();
+  await page.getByRole("button", { name: "Submit for review" }).click();
+  await page.getByTestId("state").getByText("Awaiting review").waitFor();
+  await page.getByLabel("Review note").fill("Please check the wording of the mistake strategy.");
+  await page.getByRole("button", { name: "Request corrections" }).click();
+  await page.getByTestId("state").getByText("Changes requested").waitFor();
+  await page.getByRole("button", { name: "Submit for review" }).click();
+  await page.getByTestId("state").getByText("Awaiting review").waitFor();
+  await page.getByLabel("Review note").fill("Re-read after the correction request; teaching text and questions checked.");
+  await page.getByRole("button", { name: "Approve", exact: true }).click();
+  await page.getByTestId("state").getByText("Approved, not released").waitFor();
+  await shot(page, "r4-module-approved-after-correction-tablet");
+  // the release manager: the module cannot go before its families
+  const rm = await reviewerPage("release", ["release-manager"]);
+  await rm.page.getByRole("button", { name: "Modules" }).click();
+  await rm.page.getByRole("button", { name: "Multiplying a two-digit number by a one-digit number" }).click();
+  await rm.page.getByRole("button", { name: "Release to learners" }).click();
+  await rm.page.getByRole("alert").getByText(/Release these question families first: .*mmul/).waitFor();
+  await shot(rm.page, "r5-release-blocked-until-families-tablet");
+  await rm.page.getByRole("button", { name: "Question families" }).click();
+  await rm.page.getByRole("button", { name: /^mmul:/ }).click();
+  await rm.page.getByRole("button", { name: "Release to learners" }).click();
+  await rm.page.getByTestId("state").getByText("Released").waitFor();
+  // the other family the module uses (7 × 8 probes), by the API, then the module
+  const both = await sharedReviewer();
+  await releaseAll(both.page, ["family:mul"]);
+  await rm.page.getByRole("button", { name: "Modules" }).click();
+  await rm.page.getByRole("button", { name: "Multiplying a two-digit number by a one-digit number" }).click();
+  await rm.page.getByRole("button", { name: "Release to learners" }).click();
+  await rm.page.getByTestId("state").getByText("Released").waitFor();
+  await rm.page.locator(".history").getByText(/Changes requested by/).waitFor();
+  await shot(rm.page, "r6-module-released-history-tablet");
+  // a learner: two early mistakes, the next day, a week later: verified on released content (no test fixture)
+  const { page: lp, context, learner } = await learnerPage("Synthetic G4 released learner");
+  await setupYear(lp, 4);
+  await learnToVerified(lp, learner, ["Multiplication and division", "Multiply multi-digit numbers"], "v4");
+  for (const c of [ed.context, rm.context, context]) await c.close();
+});
+
+test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, recovery, a week away, verified on released content", async () => {
+  if (mode !== "django") return;
+  const both = await sharedReviewer();
+  await releaseAll(both.page, ["family:factor", "family:subst", "family:pow", "family:dist", "family:mul", "module:MATH.algebra.factorisation", "module:MATH.calculus.integration-methods", "module:MATH.algebra.identities-intro"]);
+  // Grade 10 (Board B): factorising, with two early mistakes
+  {
+    const { page, context, learner } = await learnerPage("Synthetic G10 released learner");
+    await page.getByRole("heading", { name: "Set up My Learning Year" }).waitFor();
+    await page.getByRole("button", { name: /^Grade 10\b/ }).click();
+    await page.getByRole("radio", { name: "Sample Board B" }).click();
+    await page.getByRole("button", { name: /Board B Sample Mathematics/ }).click();
+    await page.getByRole("button", { name: "Start Grade 10" }).click();
+    await page.getByRole("heading", { name: /^Grade 10 · / }).waitFor();
+    await learnToVerified(page, learner, ["Algebra", "Polynomials", "Factorisation", "Factor algebraic expressions"], "v10");
+    await context.close();
+  }
+  // Grade 12: a substitution integral done with powers as multiplication → recovery to powers; then the skill itself
+  {
+    const { page, context, learner } = await learnerPage("Synthetic G12 released learner", "tablet");
+    await setupYear(page, 12);
+    await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
+    await page.getByText("Solved after help", { exact: true }).waitFor();
+    await learnToVerified(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12");
+    await context.close();
+  }
+  // an unfamiliar plain-text textbook (Board C, Grade 9)
+  {
+    const { page, context, learner } = await learnerPage("Synthetic unfamiliar-book learner");
+    await setupYear(page, 9, { textbook: UNSEEN });
+    await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).click();
+    await page.getByRole("heading", { name: /^Grade 9 · / }).waitFor();
+    await learnToVerified(page, learner, ["Algebra", "Brackets and powers", "Expanding brackets", "Expand simple products"], "v9");
+    await context.close();
+  }
 });
