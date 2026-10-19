@@ -195,6 +195,8 @@ const F: Def[] = [
       return [
         { id: "root-signs", kind: "procedural", competency: "MATH.algebra.quadratics", says: "The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip.", predict: roots.map((x) => -x) },
         { id: "one-root", kind: "conceptual", competency: "MATH.algebra.quadratics", says: "Only one solution was found; a quadratic like this has two.", predict: null },
+        // the factor pair has the right product but not the right sum: a factorisation gap (algebra), not a quadratics one
+        ...wrongPair(p, q, roots),
       ].filter((x) => x.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[-4, 4], [-4, 4]], ([r, s]) => r !== s && r !== 0 && s !== 0).map(([r, s]) => [-(r + s), r * s]).filter(([pp, qq], i, a) => a.findIndex((x) => x[0] === pp && x[1] === qq) === i),
@@ -681,6 +683,8 @@ const F: Def[] = [
       { id: "multiply-both", kind: "conceptual", competency: "MATH.number.fraction-multiply", says: `Top and bottom were both multiplied by ${k}: that gives an equal fraction, not ${k} lots of it.`, predict: a / b },
       { id: "multiply-bottom", kind: "procedural", competency: "MATH.number.fraction-multiply", says: `The bottom was multiplied; ${k} lots of ${a}/${b} is ${k} × ${a} pieces of the same size.`, predict: a / (b * k) },
       { id: "add-whole", kind: "conceptual", competency: "MATH.number.fraction-multiply", says: `${k} was added to the top; multiplying means ${k} lots.`, predict: (a + k) / b },
+      // the method is right, the multiplication fact is not: one group of ${a} too many (a fluency gap, not a fraction one)
+      ...(a >= 2 && k * a + a <= 144 ? [{ id: "fact-slip-multiply", kind: "prerequisite" as const, competency: MT, says: `${k} × ${a} was taken as ${(k + 1) * a}, one group of ${a} too many: the method was right, the multiplication fact was not.`, predict: ((k + 1) * a) / b, ...(a <= 12 ? { probe: `gen:mul:${k},${a}` } : {}) }] : []),
     ],
     variants: (p) => pairs(p, [[1, 5], [2, 8], [2, 6]], ([a, b]) => a < b).slice(0, 80),
     explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
@@ -1243,6 +1247,25 @@ function predictsAnswer(def: Def, v: Value, answer: Value): boolean {
 }
 const mcPrompt = (text: string) => `${text.replace(/ ?\((?:A fraction is fine\.|0, 1 or 2)\)$/, "").replace(/ What number goes in the box(?: \(it may be negative\))?\?$/, " Which number goes in the box?")} Choose one.`;
 
+/** quad: a factor pair of q with the right product but the wrong sum (x² − 5x + 6 = (x − 1)(x − 6)?). */
+function wrongPair(p: number, q: number, roots: number[]): Bug[] {
+  const [m, n] = roots.map((r) => -r); // (x + m)(x + n)
+  const sign = Math.sign(m) || 1;
+  const cands: number[][] = [];
+  for (let u = 1; u * u <= Math.abs(q); u++) {
+    if (q % u) continue;
+    const v = Math.abs(q) / u;
+    if (q > 0) cands.push([sign * u, sign * v]);
+    else cands.push([-u, v], [u, -v]);
+  }
+  for (const pair of cands) {
+    if (pair[0] * pair[1] !== q || pair[0] + pair[1] === p || (pair[0] === m && pair[1] === n) || (pair[0] === n && pair[1] === m)) continue;
+    const probe = Math.abs(m) <= 9 && Math.abs(n) <= 9 && m !== n && m + n !== 0 ? { probe: `gen:factor:${m},${n}` } : {};
+    return [{ id: "pair-product-only", kind: "prerequisite", competency: "MATH.algebra.factorisation", says: `The numbers ${signedNum(pair[0])} and ${signedNum(pair[1])} multiply to ${q} but add to ${pair[0] + pair[1]}, not ${p}: the pair must give both the product and the sum.`, predict: pair.map((x) => -x).sort((x, y) => x - y), ...probe }];
+  }
+  return [];
+}
+const signedNum = (x: number) => (x < 0 ? `−${-x}` : String(x));
 /** wording@1: one convention for the minus sign in what a learner reads (−3, not -3): a hyphen before a number, a
  * letter, a root or a bracket, at the start or after a space, bracket, = or comma, is shown as the minus sign. Only
  * the wording changes (prompts, explanations and steps); answers and options are compared as written. */
