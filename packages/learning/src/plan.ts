@@ -62,6 +62,27 @@ export function nextActivity(release: CurriculumRelease, ev: (id: string) => Ski
   return { kind: "none", competency: null, reason: "Every skill with questions this year has been shown. Delayed checks will come back when due." };
 }
 
+/**
+ * Why the next activity is different from what it was at the end of the learner's previous visit (plan@1 is derived
+ * from the records alone, so the same records always give the same plan; this explains a change).
+ */
+export function planChange(before: NextActivity | null, now: NextActivity, evBefore: (id: string) => SkillEvidence, evNow: (id: string) => SkillEvidence, name: (id: string) => string): string | null {
+  if (!before || (before.kind === now.kind && before.competency === now.competency && before.question === now.question)) return null;
+  const was = before.competency;
+  if (now.kind === "retention") return `A week has passed since you showed ${name(now.competency!)} on your own, so its delayed check comes first.`;
+  if (now.kind === "review") return `The delayed check of ${name(now.competency!)} was missed, so it comes back for review.`;
+  if (was && was !== now.competency) {
+    const b = evBefore(was).status;
+    const n = evNow(was).status;
+    if (n === "verified" && b !== "verified") return `${name(was)} is now verified, so the plan moves on.`;
+    if ((n === "independent" || n === "transfer") && !["independent", "transfer", "verified"].includes(b)) return `${name(was)} is now shown on your own, so the plan moves on to ${now.competency ? name(now.competency) : "what is next"}.`;
+    if (before.kind === "retention" && evNow(was).retention === "passed") return `The delayed check of ${name(was)} was passed, so the plan moves on.`;
+  }
+  if (now.competency && (now.kind === "continue" || now.kind === "start") && ["independent", "transfer", "verified"].includes(evBefore(now.competency).status)) return `${name(now.competency)} comes back: two of your last three answers on it were not right.`;
+  if (now.kind === "challenge") return "Every skill of this year with questions is shown: an enrichment challenge is next.";
+  return `The plan changed: ${now.reason}`;
+}
+
 /** The learner's years, from enrolment records (a grade transition keeps every earlier record). */
 export function years(records: LearnerRecords) {
   return records.enrolments.map((e, i) => ({ ...e, current: i === records.enrolments.length - 1 }));

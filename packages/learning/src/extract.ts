@@ -32,8 +32,10 @@ export interface ExtractedDocument {
   provenance: { extractor: "structured-text@1" | "plain-text@1" | "pdf-text-layer@1"; cost: 0; warnings: string[]; pages?: number };
 }
 export class ExtractionError extends Error {
-  constructor(message: string, readonly reason: "no-chapters" | "no-grade" | "scanned" | "unreadable" | "not-approved") {
+  readonly reason: "no-chapters" | "no-grade" | "scanned" | "unreadable" | "not-approved";
+  constructor(message: string, reason: ExtractionError["reason"]) {
     super(message);
+    this.reason = reason;
   }
 }
 export const EXTRACTION_POLICY = {

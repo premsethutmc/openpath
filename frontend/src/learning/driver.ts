@@ -40,7 +40,7 @@ export class Driver {
     this.session = `s${++this.n}`;
   }
   state() {
-    return learnerState(this.learnerId, this.events, this.now);
+    return learnerState(this.learnerId, this.events, this.now, { currentSession: this.session });
   }
   enrol(grade: number, year: string, r: CurriculumRelease) {
     this.events.push(make.enrol(this.ctx(), grade, year, r));

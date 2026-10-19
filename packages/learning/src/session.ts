@@ -6,7 +6,8 @@ import { question } from "./content";
 import { releaseFor } from "./curricula";
 import type { CurriculumRelease } from "./curriculum";
 import { evidenceFor } from "./evidence";
-import { nextActivity, yearSummary } from "./plan";
+import { graph } from "./graph";
+import { nextActivity, planChange, yearSummary } from "./plan";
 import { currentEnrolment, readRecords, type LearningActivity, type LearningRecord } from "./records";
 
 let counter = 0;
@@ -22,11 +23,34 @@ export const make = {
   teach: (c: Ctx, competency: string, strategy: string, rule: string): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule }),
 };
 
-export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number) {
+export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string } = {}) {
   const records = readRecords(learnerId, events);
   const ev = evidenceFor(learnerId, records, now);
   const enrol = currentEnrolment(records);
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;
+  const next = release ? nextActivity(release, ev.get, records) : null;
+  // the plan at the end of the previous visit: the same derivation, without this visit's records
+  let change: string | null = null;
+  if (next && release) {
+    const own = (e: { kind: string }) => (e as LearningRecord).sessionId;
+    const sessions = [...new Set(events.filter((e) => e.kind === "learning_record").map(own))];
+    const last = o.currentSession && sessions.includes(o.currentSession) ? o.currentSession : null;
+    const before = events.filter((e) => e.kind !== "learning_record" || own(e) !== last);
+    if (last && before.length < events.length) {
+      const r0 = readRecords(learnerId, before);
+      const e0 = evidenceFor(learnerId, r0, now);
+      const enrol0 = currentEnrolment(r0);
+      const rel0 = enrol0 ? releaseFor(enrol0.curriculum, r0.curricula) : null;
+      if (rel0 && rel0.id === release.id) change = planChange(nextActivity(rel0, e0.get, r0), next, e0.get, ev.get, (id) => graph.get(id).name);
+    } else if (!last && sessions.length) {
+      // a new visit: what changed since the last record (time passing makes a delayed check due)
+      const lastAt = records.attempts.at(-1)?.at;
+      if (lastAt) {
+        const then = evidenceFor(learnerId, records, Date.parse(lastAt) + 1);
+        change = planChange(nextActivity(release, then.get, records), next, then.get, ev.get, (id) => graph.get(id).name);
+      }
+    }
+  }
   return {
     records,
     evidence: ev.get,
@@ -34,6 +58,8 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
     enrolment: enrol,
     release,
     summary: release ? yearSummary(release, ev.get) : null,
-    next: release ? nextActivity(release, ev.get, records) : null,
+    next,
+    /** Why the next activity differs from the end of the previous visit (null: unchanged). */
+    change,
   };
 }

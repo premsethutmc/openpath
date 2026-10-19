@@ -18,8 +18,9 @@ function tokens(s: string): string[] | null {
   return out && out.join("") === t ? out : null;
 }
 function parse(s: string): Node | null {
-  const tk = tokens(s);
-  if (!tk || !tk.length) return null;
+  const found = tokens(s);
+  if (!found || !found.length) return null;
+  const tk: string[] = found;
   let i = 0;
   const peek = () => tk[i];
   const atomStart = (t?: string) => !!t && (/^\d/.test(t) || t === "x" || t === "(" || t === "√");

@@ -13,6 +13,7 @@
 import { indexContent } from "../../english-core/src/content";
 import type { AssistedResponseEvent, EvidenceEvent, HintEvent, Item } from "../../english-core/src/types";
 import { sharedProfile } from "../../mathematics/src/canonical";
+import type { GraphVersion } from "../../mathematics/src/prerequisites";
 import { mathematicsLedger } from "../../mathematics/src/registration";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
@@ -70,8 +71,8 @@ const INDEPENDENT_ACTIVITIES = new Set(["diagnostic", "probe", "practice", "chec
 export const independentAttempt = (a: Attempt) => !assistedAttempt(a) && INDEPENDENT_ACTIVITIES.has(a.activity);
 
 /** The shared ledger, replayed from the learner's records. */
-export function ledgerFor(learnerId: string, records: LearnerRecords) {
-  const ledger = mathematicsLedger(learnerId);
+export function ledgerFor(learnerId: string, records: LearnerRecords, graphVersion: GraphVersion = "1.1.0") {
+  const ledger = mathematicsLedger(learnerId, graphVersion);
   const generated = [...new Set(records.attempts.map((a) => a.questionId).filter((id) => id.startsWith("gen:")))];
   ledger.ctx.content = indexContent({ items: [...allQuestionIds(), ...generated].map((id) => nativeItem(question(id))), passages: [], goals: [], misspellings: {} }, ledger.ctx.index);
   const items = (id: string) => {
@@ -145,8 +146,12 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     if (right(a)) distinctRight.add(a.questionId);
     if (!independentAt && distinctRight.size >= INDEPENDENT_MIN && right(a)) independentAt = a.at;
   }
+  // status@2: once shown, one slip does not undo it; two wrong of the last three answers on your own do (the skill
+  // then comes back to the plan). Before it is shown, the latest answer on your own must be right.
+  const after = independentAt ? ind.filter((a) => a.at > independentAt!) : [];
+  const recentWrong = after.slice(-3).filter((a) => !right(a)).length;
   const lastInd = ind.at(-1);
-  const isIndependent = !!independentAt && !!lastInd && right(lastInd);
+  const isIndependent = !!independentAt && !!lastInd && (right(lastInd) || recentWrong < 2);
   const due = independentAt ? new Date(Date.parse(independentAt) + RETENTION_DAYS * DAY).toISOString() : null;
   const retentionAnswers = due ? ind.filter((a) => a.activity === "retention" && a.at >= due) : [];
   // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): any wrong fails it
@@ -182,8 +187,8 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
 }
 
 /** Evidence for every competency and micro-skill that has records (others are not_started). */
-export function evidenceFor(learnerId: string, records: LearnerRecords, now: number) {
-  const ledger = ledgerFor(learnerId, records);
+export function evidenceFor(learnerId: string, records: LearnerRecords, now: number, graphVersion: GraphVersion = "1.1.0") {
+  const ledger = ledgerFor(learnerId, records, graphVersion);
   const at = new Date(now).toISOString();
   const cache = new Map<string, SkillEvidence>();
   const get = (id: string): SkillEvidence => {

@@ -93,6 +93,15 @@ export interface Goal {
   foundations: { strands: string[]; note: string };
   topics: { id: string; competencies: string[]; weight: [number, number] }[];
   marking: { correct: number; wrong: number; note: string };
+  exam: {
+    pattern: string;
+    verified: boolean;
+    durationMinutes: number;
+    papers: number;
+    sections: { id: string; format: "mcq-single" | "mcq-multiple" | "numerical" | "mixed"; questions: number; marking: { correct: number; wrong: number; blank: number; partialPerOption?: number }; disputed?: string }[];
+    formats?: string[];
+    note: string;
+  };
 }
 
 export const contentVersion = data.version;

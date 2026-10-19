@@ -42,6 +42,33 @@ export function overlay(goalId: string, grade: number, curriculum: string[], ev:
   return { goal: g, foundations, challenges, note: `${g.name} is a long-term goal. These are skills from your own year that it builds on; nothing from later grades is shown.` };
 }
 
+// ---------------------------------------------------------------- goal readiness (goals@2)
+
+/**
+ * Readiness for a goal is a VIEW over the learner's one evidence record: nothing is stored for a goal except that it
+ * was chosen. Adding or removing a goal never adds, changes or removes evidence.
+ */
+export function readiness(goalId: string, grade: number, ev: (id: string) => SkillEvidence) {
+  const g = goalById(goalId);
+  if (!g) return null;
+  const upTo = graph.competencies.filter((c) => !c.partOf && g.foundations.strands.includes(c.strand) && c.gradeRange[0] <= grade);
+  const shown = upTo.filter((c) => ["independent", "transfer", "verified"].includes(ev(c.id).status));
+  return { goal: g, foundationsSoFar: upTo.length, shown: shown.length, verified: upTo.filter((c) => ev(c.id).status === "verified").length, ids: shown.map((c) => c.id) };
+}
+
+/** Which kind of plan fits: foundations (years away), the exam plan, or a crash course (weeks away). */
+export function horizon(goalId: string, grade: number, weeksLeft: number | null): "foundations" | "exam" | "crash" {
+  if (!examPlanApplies(goalId, grade)) return "foundations";
+  return weeksLeft !== null && weeksLeft <= 12 ? "crash" : "exam";
+}
+
+/** The expected marks per question, and whether to answer, for one section's marking at a chance p of being right. */
+export function attemptRule(m: { correct: number; wrong: number; blank: number; partialPerOption?: number }, p: number) {
+  const expected = p * m.correct + (1 - p) * m.wrong;
+  const breakEven = m.wrong < 0 ? -m.wrong / (m.correct - m.wrong) : 0;
+  return { expected: Math.round(expected * 100) / 100, attempt: expected > m.blank, breakEven: Math.round(breakEven * 100) / 100, partial: !!m.partialPerOption };
+}
+
 // ---------------------------------------------------------------- near the exam: priorities under a target
 
 /** The exam plan is for learners near the exam (JEE: Grade 11 and above; GRE: after school). Younger: the overlay only. */
@@ -61,25 +88,30 @@ const CHANCE: Record<SkillEvidence["status"], number> = { verified: 0.85, transf
 export function examPlan(goalId: string, ev: (id: string) => SkillEvidence, weeksLeft: number, target: 0.6 | 0.75 | 0.9) {
   const g = goalById(goalId);
   if (!g) return null;
-  const { correct, wrong } = g.marking;
+  const crash = weeksLeft <= 12;
+  // the main section's marking decides whether a guess is worth it (each section is shown below)
+  const main = g.exam.sections[0].marking;
   const topics: TopicPlan[] = g.topics.map((t) => {
     const cs = t.competencies.filter((id) => graph.byId.has(id)).map((id) => ({ id, status: ev(id).status }));
     const chance = cs.reduce((s, c) => s + CHANCE[c.status], 0) / Math.max(cs.length, 1);
     const mid = (t.weight[0] + t.weight[1]) / 2;
-    return { topic: t.id, weight: t.weight, chance, attempt: chance * correct + (1 - chance) * wrong > 0, priority: mid * (1 - chance), competencies: cs };
+    // a crash course goes for the most marks per week: high weight and already close; long preparation fills gaps
+    const priority = crash ? mid * chance * (1 - chance) * 4 : mid * (1 - chance);
+    return { topic: t.id, weight: t.weight, chance, attempt: attemptRule(main, chance).attempt, priority, competencies: cs };
   });
-  // expected share of marks, attempting only where expected marks are positive (a range, from the weight ranges)
-  const share = (pick: (t: TopicPlan) => number) => topics.reduce((s, t) => s + pick(t) * (t.attempt ? (t.chance * correct + (1 - t.chance) * wrong) / correct : 0), 0);
+  const share = (pick: (t: TopicPlan) => number) => topics.reduce((s, t) => s + pick(t) * Math.max(0, attemptRule(main, t.chance).expected / main.correct), 0);
   const low = share((t) => t.weight[0]);
   const high = share((t) => t.weight[1]);
-  const weekly = Math.max(1, Math.min(3, Math.round(topics.length / Math.max(weeksLeft, 1))));
   return {
     goal: g,
     target,
+    mode: crash ? ("crash" as const) : ("exam" as const),
     estimate: { low: Math.round(low * 100), high: Math.round(high * 100) },
     onTrack: low >= target,
     priorities: [...topics].sort((a, b) => b.priority - a.priority),
-    perWeek: weekly,
-    caveat: "A rough estimate from your own practice answers with provisional topic weight ranges. It is not a prediction of an exam score.",
+    sections: g.exam.sections.map((sec) => ({ ...sec, rule: attemptRule(sec.marking, 0.5) })),
+    perWeek: Math.max(1, Math.min(3, Math.round(topics.length / Math.max(weeksLeft, 1)))),
+    advice: crash ? "Crash course: practise the topics where you are closest, timed, and answer only when the marking makes it worth it." : "Long preparation: close the biggest gaps first; timed papers come later.",
+    caveat: `A rough estimate from your own practice answers with provisional topic weight ranges and the ${g.exam.pattern} pattern${g.exam.verified ? "" : " (not verified against the official paper)"}. It is not a prediction of an exam score.`,
   };
 }
