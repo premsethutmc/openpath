@@ -1401,7 +1401,8 @@ export function candidates(fam: string): number[][] {
   rec(0, []);
   return out;
 }
-const poolCache = (GF.__openpathPools ??= new Map());
+type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> };
+const poolCache: Map<string, PoolEntry> = (GF.__openpathPools ??= new Map<string, PoolEntry>());
 /** The family's release pool: every candidate that builds and passes its independent check. A candidate that fails
  * is EXCLUDED (never offered), with the reason, so one bad parameter choice cannot reach a learner. */
 export function pool(fam: string) {
