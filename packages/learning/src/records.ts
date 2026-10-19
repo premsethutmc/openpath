@@ -17,7 +17,7 @@ export type LearningRecord =
   | (Base & { record: "enrol"; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "goal"; pathway: string; targetYear?: number; active: boolean })
   | (Base & { record: "curriculum"; release: CurriculumRelease })
-  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string })
+  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[] })
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
   | (Base & { record: "skip"; target: string });
 
@@ -34,6 +34,8 @@ export interface Attempt {
   /** Which attempt at this question (1 = first). Only a first, unaided attempt can be independent evidence. */
   n: number;
   context?: string;
+  /** The learner's written working, line by line (working@1); never part of how the answer counts. */
+  working?: string[];
 }
 export interface LearnerRecords {
   enrolments: { at: string; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } }[];
@@ -63,7 +65,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
       const n = (count.get(r.questionId) ?? 0) + 1;
       count.set(r.questionId, n);
-      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response: r.response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context });
+      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response: r.response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}) });
     } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });
   }

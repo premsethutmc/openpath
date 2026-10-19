@@ -48,7 +48,7 @@ export class Driver {
   goal(pathway: string, active = true) {
     this.events.push(make.goal(this.ctx(), pathway, active));
   }
-  answer(qid: string, response: string, activity: LearningActivity, o: { hints?: number; context?: string } = {}) {
+  answer(qid: string, response: string, activity: LearningActivity, o: { hints?: number; context?: string; working?: string[] } = {}) {
     this.events.push(make.attempt(this.ctx(), qid, response, activity, o));
     this.trace.push(`${activity}:${qid}=${response}${o.hints ? `+hint` : ""}`);
   }

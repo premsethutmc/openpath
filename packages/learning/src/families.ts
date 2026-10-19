@@ -49,6 +49,8 @@ export interface Problem {
 }
 type Def = {
   id: string;
+  /** How many parameters a stored id carries. */
+  arity: number;
   title: string;
   competency: string;
   type: Problem["type"];
@@ -112,6 +114,7 @@ const pairs = (p: number[], ranges: [number, number][], keep: (q: number[]) => b
 const F: Def[] = [
   {
     id: "mul",
+    arity: 2,
     title: "A multiplication fact",
     competency: MT,
     type: "integer",
@@ -133,6 +136,7 @@ const F: Def[] = [
   },
   {
     id: "rect",
+    arity: 2,
     title: "Area of a rectangle",
     competency: "MATH.measurement.rectangle-area",
     type: "integer",
@@ -162,6 +166,7 @@ const F: Def[] = [
   },
   {
     id: "eqfrac",
+    arity: 3,
     title: "A missing part of an equivalent fraction",
     competency: "MATH.number.equivalent-fractions",
     type: "integer",
@@ -190,6 +195,7 @@ const F: Def[] = [
   },
   {
     id: "fadd",
+    arity: 4,
     title: "Adding or subtracting like fractions",
     competency: "MATH.number.fraction-add-like",
     type: "fraction",
@@ -199,7 +205,7 @@ const F: Def[] = [
       if (!m) return null;
       return int(m[2]) === int(m[5]) ? [int(m[1]), int(m[4]), int(m[2]), m[3] === "+" ? 1 : -1] : [int(m[1]), int(m[4]), int(m[2]), m[3] === "+" ? 1 : -1, int(m[5])];
     },
-    reject: (p) => (p.length > 4 ? "Only fractions with the same denominator are supported (unlike denominators are not yet)." : p[2] < 2 || p[2] > 20 || (p[3] < 0 && p[1] > p[0]) ? "Only like fractions with denominators up to 20 and a result of at least 0 are supported." : null),
+    reject: (p) => (p.length > 4 ? "Only fractions with the same denominator are supported (unlike denominators are not yet)." : p[3] !== 1 && p[3] !== -1 ? "Unknown operation." : p[2] < 2 || p[2] > 20 || (p[3] < 0 && p[1] > p[0]) ? "Only like fractions with denominators up to 20 and a result of at least 0 are supported." : null),
     prompt: ([a, b, n, s]) => `${a}/${n} ${s > 0 ? "+" : "−"} ${b}/${n} = ?`,
     solve: ([a, b, n, s]) => ({ steps: [{ id: "tops", op: s > 0 ? "add" : "subtract", competency: "MATH.number.fraction-add-like", inputs: [a, b], value: a + s * b }], answer: (a + s * b) / n }),
     validate: ([a, b, n, s], v) => typeof v === "number" && Math.abs(v - (a / n + (s * b) / n)) < 1e-9,
@@ -215,6 +221,7 @@ const F: Def[] = [
   },
   {
     id: "cint",
+    arity: 3,
     title: "The definite integral of a constant",
     competency: "MATH.calculus.definite-integrals",
     type: "integer",
@@ -246,6 +253,7 @@ const F: Def[] = [
   },
   {
     id: "quad",
+    arity: 2,
     title: "A quadratic equation with whole-number roots",
     competency: "MATH.algebra.quadratics",
     type: "set",
@@ -283,6 +291,7 @@ const F: Def[] = [
   },
   {
     id: "linev",
+    arity: 3,
     title: "A value on a straight line",
     competency: "MATH.algebra.variables",
     type: "integer",
@@ -304,6 +313,7 @@ const F: Def[] = [
   },
   {
     id: "meet",
+    arity: 2,
     title: "Where a line meets y = x², by trying whole numbers",
     competency: "MATH.algebra.linear-equations",
     type: "set",
@@ -326,6 +336,7 @@ const F: Def[] = [
   },
   {
     id: "above",
+    arity: 3,
     title: "Which graph is higher at a point",
     competency: "MATH.algebra.functions",
     type: "choice",
@@ -341,6 +352,7 @@ const F: Def[] = [
   },
   {
     id: "alp",
+    arity: 2,
     title: "The area between a parabola and a line",
     competency: "MATH.calculus.area-integrals",
     type: "fraction",
@@ -426,7 +438,7 @@ export function problemOf(id: string): Problem | null {
   const def = m && FAMILIES.get(m[1]);
   if (!def) return null;
   const p = m![2].split(",").map(Number);
-  if (def.reject(p)) return null;
+  if (p.length !== def.arity || def.reject(p)) return null;
   try {
     return build(def, p);
   } catch {

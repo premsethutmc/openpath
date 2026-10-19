@@ -1,0 +1,205 @@
+{
+ "id": "openpath-sample-mathematics-grade-8",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 8,
+ "title": "OpenPath Sample Mathematics, Grade 8",
+ "hash": "922e6977",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 8",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency (for an educator to check: ch3-graphs.o1). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-squares-and-square-roots",
+     "number": 1,
+     "title": "Squares and square roots",
+     "pages": "1–14",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "9"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch1-squares-and-square-roots.o1",
+       "text": "Find squares and square roots",
+       "pages": "2",
+       "location": {
+        "line": 12,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.square-roots",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on squareRoots.",
+        "concepts": [
+         "squareRoots"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-algebraic-identities",
+     "number": 2,
+     "title": "Algebraic identities",
+     "pages": "15–30",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "21"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch2-algebraic-identities.o1",
+       "text": "Use algebraic identities to expand products",
+       "pages": "16",
+       "location": {
+        "line": 17,
+        "page": 16
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.identities",
+          "score": 0.74,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.trigonometry.identities",
+          "score": 0.62,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.identities-intro",
+          "score": 0.6,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on identities.",
+        "concepts": [
+         "multiplication",
+         "identities"
+        ]
+       }
+      },
+      {
+       "id": "ch2-algebraic-identities.o2",
+       "text": "Factor algebraic expressions",
+       "pages": "24",
+       "location": {
+        "line": 18,
+        "page": 24
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.factorisation",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.variables",
+          "score": 0.546,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on factorsMultiples, expressions.",
+        "concepts": [
+         "factorsMultiples",
+         "expressions"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-graphs",
+     "number": 3,
+     "title": "Graphs",
+     "pages": "31–44",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "38"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch3-graphs.o1",
+       "text": "Plot points in four quadrants on the Cartesian plane",
+       "pages": "32",
+       "location": {
+        "line": 23,
+        "page": 32
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.cartesian",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.coordinate.distance-intro",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 0.664,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Plot points in four quadrants; Relate coordinates and geometric distances): a reviewer should choose.",
+        "concepts": [
+         "coordinates"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

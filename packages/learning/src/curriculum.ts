@@ -7,7 +7,9 @@
  * release records who reviewed it and that it is NOT educator-reviewed. An outcome that matches nothing becomes a
  * provisional competency proposal with its textbook reference; it is never registered as a competency.
  */
+import { extractPlain, extractStructured, type ExtractedDocument } from "./extract";
 import { graph, type Competency } from "./graph";
+import { interpret } from "./meaning";
 
 export interface SourceRef {
   textbook: string;
@@ -17,7 +19,7 @@ export interface SourceRef {
 export interface Mapping {
   id: string;
   score: number;
-  method: "text-match@1";
+  method: "text-match@1" | "meaning@2";
   status: "proposed" | "accepted" | "rejected";
 }
 export interface ProvisionalCompetency {
@@ -31,7 +33,16 @@ export interface Outcome {
   id: string;
   text: string;
   pages?: string;
-  mapping: { competencies: Mapping[]; proposal?: ProvisionalCompetency };
+  mapping: {
+    competencies: Mapping[];
+    proposal?: ProvisionalCompetency;
+    /** meaning@2: clear, uncertain (a reviewer must choose) or missing (no competency carries it), and why. */
+    verdict?: "clear" | "uncertain" | "missing";
+    why?: string;
+    concepts?: string[];
+  };
+  /** Where the outcome is in the source document. */
+  location?: { page?: number; line: number };
 }
 export interface Chapter {
   id: string;
@@ -49,7 +60,7 @@ export interface CurriculumRelease {
   grade: number;
   title: string;
   hash: string;
-  source: { kind: "textbook"; title: string; edition?: string; publisher?: string; board?: string; licence?: string; synthetic: boolean };
+  source: { kind: "textbook"; title: string; edition?: string; publisher?: string; board?: string; academicYear?: string; licence?: string; synthetic: boolean; extractor?: string };
   review: { by: string; at: string; note: string; educatorReviewed: false } | null;
   subjects: { id: string; name: string; chapters: Chapter[] }[];
 }
@@ -142,36 +153,53 @@ export function propose(outcome: string, grade: number, limit = 3, threshold = 0
     .slice(0, limit);
 }
 
-/** Textbook text → a draft curriculum with mapping proposals (status "draft"; not assignable until reviewed). */
-export function synthesise(text: string, opts: { id?: string; version?: string } = {}): CurriculumRelease {
-  const { meta, chapters } = parseTextbook(text);
+/**
+ * A document (text, or an already extracted document) → a draft curriculum with mapping proposals by meaning
+ * (mapping@2). Status "draft": nothing is assignable until reviewed.
+ */
+export function synthesise(input: string | ExtractedDocument, opts: { id?: string; version?: string } = {}): CurriculumRelease {
+  const doc = typeof input === "string" ? (input.trimStart().startsWith("---") ? extractStructured(input) : extractPlain(input)) : input;
+  const { meta, chapters } = doc;
   const grade = Number(meta.grade);
   const title = meta.title ?? `Grade ${grade} curriculum`;
-  const synthetic = /synthetic|sample|test/i.test(`${meta.board ?? ""} ${meta.publisher ?? ""} ${meta.edition ?? ""}`);
+  const synthetic = /synthetic|sample|test|not a real/i.test(`${meta.board ?? ""} ${meta.publisher ?? ""} ${meta.edition ?? ""}`);
   const subject = meta.subject ?? "Mathematics";
   const body = {
     subjects: [
       {
         id: slug(subject),
         name: subject,
-        chapters: chapters.map((c) => ({
-          ...c,
-          outcomes: c.outcomes.map((o, k) => {
-            const competencies = propose(o.text, grade);
-            const id = `${c.id}.o${k + 1}`;
-            return {
-              id,
-              text: o.text,
-              pages: o.pages,
-              mapping: {
-                competencies,
-                ...(competencies.length
-                  ? {}
-                  : { proposal: { id: `proposal.${slug(title)}.${id}`, name: o.text, status: "provisional-proposal" as const, source: { textbook: title, chapter: c.title, pages: o.pages }, note: "No existing competency matched. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions." } }),
-              },
-            };
-          }),
-        })),
+        chapters: chapters.map((c) => {
+          const cid = `ch${c.number}-${slug(c.title)}`;
+          return {
+            id: cid,
+            number: c.number,
+            title: c.title,
+            pages: c.pages,
+            examples: c.examples,
+            exercises: c.exercises,
+            outcomes: c.outcomes.map((o, k) => {
+              const meaning = interpret(o.text, grade);
+              const id = `${cid}.o${k + 1}`;
+              const competencies: Mapping[] = meaning.candidates.map((m) => ({ id: m.id, score: m.score, method: "meaning@2", status: "proposed" }));
+              return {
+                id,
+                text: o.text,
+                pages: o.pages,
+                location: o.location,
+                mapping: {
+                  competencies,
+                  verdict: meaning.verdict,
+                  why: meaning.why,
+                  concepts: meaning.concepts,
+                  ...(meaning.verdict === "missing"
+                    ? { proposal: { id: `proposal.${slug(title)}.${id}`, name: o.text, status: "provisional-proposal" as const, source: { textbook: title, chapter: c.title, pages: o.pages }, note: "No existing competency carries this outcome's mathematics. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions." } }
+                    : {}),
+                },
+              };
+            }),
+          };
+        }),
       },
     ],
   };
@@ -182,7 +210,7 @@ export function synthesise(text: string, opts: { id?: string; version?: string }
     grade,
     title,
     hash: "",
-    source: { kind: "textbook", title, edition: meta.edition, publisher: meta.publisher, board: meta.board, licence: meta.licence, synthetic },
+    source: { kind: "textbook", title, edition: meta.edition, publisher: meta.publisher, board: meta.board, ...(meta.academicYear ? { academicYear: meta.academicYear } : {}), licence: meta.licence, synthetic, extractor: doc.provenance.extractor },
     review: null,
     ...body,
   };
@@ -207,7 +235,8 @@ export function review(draft: CurriculumRelease, decisions: ReviewDecision[] | "
     chapters: s.chapters.map((c) => ({
       ...c,
       outcomes: c.outcomes.map((o) => {
-        const keep = decided ? decided.get(o.id) ?? new Set<string>() : new Set(o.mapping.competencies.slice(0, 1).map((m) => m.id));
+        // "accept-proposals" accepts the top proposal of a CLEAR mapping only; an uncertain one needs an explicit decision
+        const keep = decided ? decided.get(o.id) ?? new Set<string>() : new Set(o.mapping.verdict === "uncertain" ? [] : o.mapping.competencies.slice(0, 1).map((m) => m.id));
         for (const id of keep) if (!graph.byId.has(id)) throw new Error(`Unknown competency ${id}`);
         const listed = o.mapping.competencies.map((m) => ({ ...m, status: keep.has(m.id) ? ("accepted" as const) : ("rejected" as const) }));
         // a reviewer may also add a competency the matcher did not propose

@@ -18,7 +18,7 @@ export const make = {
   enrol: (c: Ctx, grade: number, academicYear: string, r: CurriculumRelease): LearningRecord => ({ ...base(c), record: "enrol", grade, academicYear, curriculum: { id: r.id, version: r.version, hash: r.hash } }),
   goal: (c: Ctx, pathway: string, active = true, targetYear?: number): LearningRecord => ({ ...base(c), record: "goal", pathway, active, ...(targetYear ? { targetYear } : {}) }),
   curriculum: (c: Ctx, release: CurriculumRelease): LearningRecord => ({ ...base(c), record: "curriculum", release }),
-  attempt: (c: Ctx, questionId: string, response: string, activity: LearningActivity, o: { hints?: number; solution?: boolean; context?: string } = {}): LearningRecord => ({ ...base(c), record: "attempt", questionId, response, activity, hints: o.hints ?? 0, solution: o.solution ?? false, competency: question(questionId).competency, ...(o.context ? { context: o.context } : {}) }),
+  attempt: (c: Ctx, questionId: string, response: string, activity: LearningActivity, o: { hints?: number; solution?: boolean; context?: string; working?: string[] } = {}): LearningRecord => ({ ...base(c), record: "attempt", questionId, response, activity, hints: o.hints ?? 0, solution: o.solution ?? false, competency: question(questionId).competency, ...(o.context ? { context: o.context } : {}), ...(o.working?.length ? { working: o.working.slice(0, 8).map((l) => l.slice(0, 80)) } : {}) }),
   teach: (c: Ctx, competency: string, strategy: string, rule: string): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule }),
 };
 

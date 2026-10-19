@@ -16,7 +16,7 @@ ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
 G4 = json.loads((ROOT / 'curricula/openpath-sample-mathematics-grade-4.v1.0.0.json').read_text())
 
 
-class LearningRecordTests(FamilyTestCase):
+class LearningBase(FamilyTestCase):
     def setUp(self):
         super().setUp()
         self.client = self.parent()
@@ -44,6 +44,8 @@ class LearningRecordTests(FamilyTestCase):
         q = content()['questions'][qid]
         return self.rec('attempt', questionId=qid, response=response, activity=activity, hints=0, solution=False, competency=q['competency'], **extra)
 
+
+class LearningRecordTests(LearningBase):
     def test_the_server_hash_matches_the_app_for_every_sample_release(self):
         for f in (ROOT / 'curricula').glob('openpath-*.json'):
             r = json.loads(f.read_text())
@@ -169,3 +171,25 @@ class LearningRecordTests(FamilyTestCase):
             from .learning import server_now
             from .models import Pupil
             self.assertLess(server_now(Pupil.objects.get(pk=real)), timezone.now() + timedelta(days=1), 'a real pupil never gets the test clock')
+
+
+class GeneratedQuestionTests(LearningBase):
+    def test_server_agrees_with_the_app_on_every_generated_question(self):
+        from .learning_families import generated
+        rows = json.loads((ROOT / 'families-parity.v1.json').read_text())['rows']
+        self.assertGreater(len(rows), 150)
+        for r in rows:
+            g = generated(r['id'])
+            self.assertEqual(g is not None, r['supported'], r['id'])
+            if g:
+                self.assertEqual((g['competency'], g['type']), (r['competency'], r['type']), r['id'])
+                from .learning import right
+                self.assertTrue(right(g, r['answer']), f"{r['id']}: the app's answer {r['answer']} is right on the server ({g['answer']})")
+
+    def test_a_generated_question_is_saved_with_its_competency_and_checked(self):
+        self.save(self.enrol())
+        ok = self.rec('attempt', questionId='gen:cint:2,9,6', response='54', activity='diagnostic', hints=0, solution=False, competency='MATH.calculus.definite-integrals', context='investigate:gen:cint:2,9,6')
+        self.assertEqual(self.save(ok).status_code, 201)
+        for bad in [ok | {'questionId': 'gen:cint:9,2,6'}, ok | {'competency': 'MATH.number.multiplication-tables'}, ok | {'questionId': 'gen:mul:7,8,9'}, ok | {'response': 'fifty'}]:
+            self.assertEqual(self.save(bad | {'id': f'x{self.serial}'}).status_code, 400, bad)
+            self.serial += 1

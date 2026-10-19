@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { canonical, isCorrect, misconceptionOf, moduleFor, modules, problems, question, questions } from "../../../packages/learning/src/content";
-import { releaseFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
+import { allReleases, releaseFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
 import { assigned, hashOf, propose, review, synthesise, validateRelease } from "../../../packages/learning/src/curriculum";
 import { offersFor, trace } from "../../../packages/learning/src/decomposition";
 import { diagnose, DIAGNOSTIC_POLICY } from "../../../packages/learning/src/diagnostic";
@@ -114,7 +114,11 @@ test("a textbook becomes a draft with mapped outcomes and source references, and
   assert.equal(rel.status, "reviewed");
   assert.equal(rel.review!.educatorReviewed, false);
   assert.deepEqual(validateRelease(rel), []);
-  assert.ok(assigned(rel).some((a) => a.competency === EQ));
+  // "Generate equivalent fractions by multiplying numerator and denominator" is close to "multiply fractions":
+  // flagged uncertain, so it is NOT accepted without an explicit decision
+  assert.equal(fractions.outcomes[1].mapping.verdict, "uncertain");
+  assert.ok(!assigned(rel).some((a) => a.competency === EQ), "an uncertain mapping needs a reviewer's decision");
+  assert.ok(assigned(review(draft, [{ outcome: fractions.outcomes[1].id, accept: [EQ] }], "t", "t")).some((a) => a.competency === EQ));
   assert.throws(() => review(rel, "accept-proposals", "x", "y"), /Only a draft/);
   // explicit decisions: the reviewer rejects one mapping and adds another
   const custom = review(draft, [{ outcome: fractions.outcomes[1].id, accept: ["MATH.number.fraction-models"] }], "test", "2026-09-01T00:00:00Z");
@@ -141,7 +145,11 @@ test("releases are versioned by content: a changed release has a different hash,
   assert.notEqual(hashOf({ ...changed, hash: "" }), r.hash);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: r.hash }, new Map()), r);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: "deadbeef" }, new Map()), null);
-  assert.equal(sampleReleases.length, 6);
+  assert.equal(sampleReleases.length, 7, "the latest version of six sample books and one second-board book");
+  // earlier versions stay readable: a learner enrolled on 1.0.0 still finds their curriculum
+  const old = allReleases.find((x) => x.id === r.id && x.version === "1.0.0")!;
+  assert.equal(releaseFor({ id: old.id, version: "1.0.0", hash: old.hash }, new Map()), old);
+  assert.notEqual(old.hash, r.hash);
 });
 
 // ---------------------------------------------------------------- graph

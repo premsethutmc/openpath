@@ -14,6 +14,7 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
+from .learning_families import generated
 from .models import PupilEvent
 
 ROOT = 'content/learning'
@@ -22,7 +23,7 @@ RECORDS = {
     'enrol': {'grade', 'academicYear', 'curriculum'},
     'goal': {'pathway', 'active', 'targetYear'},
     'curriculum': {'release'},
-    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context'},
+    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working'},
     'teach': {'rule', 'strategy', 'competency'},
     'skip': {'target'},
 }
@@ -114,10 +115,10 @@ def independent_at(prior, competency):
     qs = content()['questions']
     seen, distinct = {}, set()
     for e in prior:
-        if e.get('record') != 'attempt' or e.get('questionId') not in qs:
+        q = qs.get(e.get('questionId')) or generated(e.get('questionId')) if e.get('record') == 'attempt' else None
+        if not q:
             continue
         n = seen[e['questionId']] = seen.get(e['questionId'], 0) + 1
-        q = qs[e['questionId']]
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
         if right(q, e.get('response', '')):
@@ -226,7 +227,7 @@ def checked_learning(event, pupil):
     elif record == 'curriculum':
         _check_release(event.get('release'), prior)
     elif record == 'attempt':
-        q = c['questions'].get(event.get('questionId'))
+        q = c['questions'].get(event.get('questionId')) or generated(event.get('questionId'))
         if not q:
             _reject('Unknown question.')
         if event.get('competency') != q['competency']:
@@ -239,6 +240,9 @@ def checked_learning(event, pupil):
             _reject('That answer is not in the form this question asks for.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
+        w = event.get('working', [])
+        if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
+            _reject('Working is at most 8 lines of 80 characters.')
         if event['activity'] == 'retention':
             # the same rule as the app (status@1): two distinct right first answers on your own, then seven full days
             since = independent_at(prior, q['competency'])

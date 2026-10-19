@@ -1,16 +1,33 @@
-/** The sample reviewed curriculum releases (generated from the synthetic CC0 textbooks by scripts/releases.ts). */
+/**
+ * The sample reviewed curriculum releases (generated from the synthetic CC0 textbooks by scripts/releases.ts). Every
+ * version is kept: a learner's records refer to a release by id, version and content hash, and an older version
+ * stays readable after a newer one is published. New enrolments use the latest version.
+ */
 import type { CurriculumRelease } from "./curriculum";
-import g4 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-4.v1.0.0.json";
-import g5 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-5.v1.0.0.json";
-import g7 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-7.v1.0.0.json";
-import g8 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-8.v1.0.0.json";
-import g10 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-10.v1.0.0.json";
-import g11 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-11.v1.0.0.json";
+import r0 from "../../../content/learning/curricula/discovering-mathematics-learner-s-book-4.v1.1.0.json";
+import r1 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-4.v1.0.0.json";
+import r2 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-4.v1.1.0.json";
+import r3 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-5.v1.0.0.json";
+import r4 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-5.v1.1.0.json";
+import r5 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-7.v1.0.0.json";
+import r6 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-7.v1.1.0.json";
+import r7 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-8.v1.0.0.json";
+import r8 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-8.v1.1.0.json";
+import r9 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-10.v1.0.0.json";
+import r10 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-10.v1.1.0.json";
+import r11 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-11.v1.0.0.json";
+import r12 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-11.v1.1.0.json";
 
-export const sampleReleases = [g4, g5, g7, g8, g10, g11] as unknown as CurriculumRelease[];
-export const sampleFor = (grade: number) => sampleReleases.find((r) => r.grade === grade) ?? null;
-/** A release by reference: the built-in samples, or one the learner's own records saved (matched by hash). */
+export const allReleases = [r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12] as unknown as CurriculumRelease[];
+const newer = (a: string, b: string) => a.split(".").map(Number).reduce((d, x, i) => d || x - Number(b.split(".")[i] ?? 0), 0) > 0;
+/** The latest version of each release. */
+export const sampleReleases = allReleases.filter((r) => !allReleases.some((x) => x.id === r.id && newer(x.version, r.version)));
+/** The default sample textbook for a grade (the OpenPath sample series). */
+export const sampleFor = (grade: number) => sampleReleases.find((r) => r.grade === grade && r.id.startsWith("openpath-sample-")) ?? null;
+/** Every latest release for a grade (several boards or textbooks). */
+export const releasesFor = (grade: number) => sampleReleases.filter((r) => r.grade === grade);
+/** A release by reference: any built-in version, or one the learner's own records saved (matched by hash). */
 export function releaseFor(ref: { id: string; version: string; hash: string }, saved: Map<string, CurriculumRelease>): CurriculumRelease | null {
   const same = (x: CurriculumRelease | undefined) => !!x && x.id === ref.id && x.version === ref.version && x.hash === ref.hash;
-  return sampleReleases.find(same) ?? [...saved.values()].find(same) ?? null;
+  return allReleases.find(same) ?? [...saved.values()].find(same) ?? null;
 }

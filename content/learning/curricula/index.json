@@ -1,12 +1,30 @@
 {
  "releases": [
   {
+   "id": "discovering-mathematics-learner-s-book-4",
+   "version": "1.1.0",
+   "grade": 4,
+   "title": "Discovering Mathematics — Learner's Book 4",
+   "hash": "0eb3a858",
+   "file": "discovering-mathematics-learner-s-book-4.v1.1.0.json",
+   "board": "Sample Board B (synthetic)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-4",
    "version": "1.0.0",
    "grade": 4,
    "title": "OpenPath Sample Mathematics, Grade 4",
    "hash": "911be86f",
    "file": "openpath-sample-mathematics-grade-4.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-4",
+   "version": "1.1.0",
+   "grade": 4,
+   "title": "OpenPath Sample Mathematics, Grade 4",
+   "hash": "abb2b802",
+   "file": "openpath-sample-mathematics-grade-4.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
    "id": "openpath-sample-mathematics-grade-5",
@@ -17,12 +35,30 @@
    "file": "openpath-sample-mathematics-grade-5.v1.0.0.json"
   },
   {
+   "id": "openpath-sample-mathematics-grade-5",
+   "version": "1.1.0",
+   "grade": 5,
+   "title": "OpenPath Sample Mathematics, Grade 5",
+   "hash": "5e1e9660",
+   "file": "openpath-sample-mathematics-grade-5.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-7",
    "version": "1.0.0",
    "grade": 7,
    "title": "OpenPath Sample Mathematics, Grade 7",
    "hash": "130b554b",
    "file": "openpath-sample-mathematics-grade-7.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-7",
+   "version": "1.1.0",
+   "grade": 7,
+   "title": "OpenPath Sample Mathematics, Grade 7",
+   "hash": "984c767b",
+   "file": "openpath-sample-mathematics-grade-7.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
    "id": "openpath-sample-mathematics-grade-8",
@@ -33,6 +69,15 @@
    "file": "openpath-sample-mathematics-grade-8.v1.0.0.json"
   },
   {
+   "id": "openpath-sample-mathematics-grade-8",
+   "version": "1.1.0",
+   "grade": 8,
+   "title": "OpenPath Sample Mathematics, Grade 8",
+   "hash": "922e6977",
+   "file": "openpath-sample-mathematics-grade-8.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-10",
    "version": "1.0.0",
    "grade": 10,
@@ -41,12 +86,30 @@
    "file": "openpath-sample-mathematics-grade-10.v1.0.0.json"
   },
   {
+   "id": "openpath-sample-mathematics-grade-10",
+   "version": "1.1.0",
+   "grade": 10,
+   "title": "OpenPath Sample Mathematics, Grade 10",
+   "hash": "dc19952d",
+   "file": "openpath-sample-mathematics-grade-10.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-11",
    "version": "1.0.0",
    "grade": 11,
    "title": "OpenPath Sample Mathematics, Grade 11",
    "hash": "2e0188d1",
    "file": "openpath-sample-mathematics-grade-11.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-11",
+   "version": "1.1.0",
+   "grade": 11,
+   "title": "OpenPath Sample Mathematics, Grade 11",
+   "hash": "62b64d64",
+   "file": "openpath-sample-mathematics-grade-11.v1.1.0.json",
+   "board": "OpenPath sample (synthetic, not a real board)"
   }
  ]
 }
