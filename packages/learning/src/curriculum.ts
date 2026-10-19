@@ -19,7 +19,7 @@ export interface SourceRef {
 export interface Mapping {
   id: string;
   score: number;
-  method: "text-match@1" | "meaning@2" | "meaning@3" | "inventory@1";
+  method: "text-match@1" | "meaning@2" | "meaning@3" | "meaning@4" | "inventory@1";
   status: "proposed" | "accepted" | "rejected";
 }
 export interface ProvisionalCompetency {
