@@ -10,6 +10,7 @@
  *
  * The statuses below (status@1) describe what the records show, for the tiles. They are not a mastery model.
  */
+import { leafView } from "../../english-core/src/composite";
 import { indexContent } from "../../english-core/src/content";
 import type { AssistedResponseEvent, EvidenceEvent, HintEvent, Item } from "../../english-core/src/types";
 import { sharedProfile } from "../../mathematics/src/canonical";
@@ -132,7 +133,7 @@ const about = (id: string) => (a: Attempt) => {
   return graph.byId.get(id)?.partOf ? q.skill === id : q.competency === id || graph.evidenceTarget(q.competency) === id;
 };
 
-export function skillEvidence(id: string, records: LearnerRecords, profileStatus: string, now: number, engineRetention = "unavailable"): SkillEvidence {
+export function skillEvidence(id: string, records: LearnerRecords, profileStatus: string, now: number, engineRetention = "unavailable", engineShownAt: string | null = null): SkillEvidence {
   const mine = records.attempts.filter(about(id));
   const taught = records.teaching.some((t) => t.competency === id);
   // a probe asks about what a skill builds on (7 × 5 when 7 × 8 is the question): it is evidence for its own
@@ -152,7 +153,10 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const recentWrong = after.slice(-3).filter((a) => !right(a)).length;
   const lastInd = ind.at(-1);
   const isIndependent = !!independentAt && !!lastInd && (right(lastInd) || recentWrong < 2);
-  const due = independentAt ? new Date(Date.parse(independentAt) + RETENTION_DAYS * DAY).toISOString() : null;
+  // the delayed check: seven full days after independent success, and after the shared engine's own first
+  // demonstration when it has one, so the check this surface offers is one the engine can verify (verification@3)
+  const from = independentAt && engineShownAt && engineShownAt > independentAt ? engineShownAt : independentAt;
+  const due = from ? new Date(Date.parse(from) + RETENTION_DAYS * DAY).toISOString() : null;
   const retentionAnswers = due ? ind.filter((a) => a.activity === "retention" && a.at >= due) : [];
   // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): any wrong fails it
   const need = Math.min(RETENTION_CHECK, moduleFor(id)?.retention.length ?? 1);
@@ -196,7 +200,8 @@ export function evidenceFor(learnerId: string, records: LearnerRecords, now: num
     if (!e) {
       const c = graph.byId.get(id);
       const view = c && !c.partOf && records.attempts.some(about(id)) ? sharedProfile({ learnerId }, ledger, id, at) : null;
-      e = skillEvidence(id, records, view?.status ?? "unavailable", now, view?.retention ?? "unavailable");
+      const shownAt = view ? leafView(ledger.composite, ledger.ctx.index, id, at).retention.firstDemonstratedAt : null;
+      e = skillEvidence(id, records, view?.status ?? "unavailable", now, view?.retention ?? "unavailable", shownAt);
       cache.set(id, e);
     }
     return e;

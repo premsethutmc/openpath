@@ -320,13 +320,14 @@ test("J: across sessions the plan continues without reteaching, explains its cha
 
 // ---------------------------------------------------------------- K: the seven-day boundary
 
-test("K: nothing verifies before seven full days; the delayed check at seven days follows the unchanged policy", () => {
+test("K: nothing verifies before seven full days (verification@3, in the engine and on this surface); the delayed check at seven days verifies", () => {
   fixture(true);
   for (const [days, viaPractice] of [[6.6, true], [6.99, true], [6.99, false]] as [number, boolean][]) {
     const d = new Driver(`synthetic-k-${days}-${viaPractice}`, T0);
     d.enrol(4, "2026-27", sampleFor(4)!);
     d.work(EQ, right);
-    const t0 = Date.parse(d.state().evidence(EQ).independentAt!);
+    // the delayed check's clock starts at independent success (and the engine's first demonstration, if later)
+    const t0 = Date.parse(d.state().evidence(EQ).retentionDueAt!) - 7 * DAY;
     d.newSession(0);
     d.now = t0 + days * DAY;
     const st = d.state();
@@ -337,7 +338,8 @@ test("K: nothing verifies before seven full days; the delayed check at seven day
       d.answer("eq-r1", "6", "practice");
       d.answer("eq-r2", "15", "practice");
       const e = d.state().evidence(EQ);
-      assert.equal(e.engine, "verified", "the engine's own rule (7 days less half a day), unchanged");
+      // verification@3 (the approved seven-full-day rule) in the shared engine itself: not verified before 7 days
+      assert.notEqual(e.engine, "verified", `${days} days: the shared engine does not verify (verification@3)`);
       assert.notEqual(e.status, "verified", `${days} days: not verified on this surface`);
     }
   }
@@ -345,7 +347,7 @@ test("K: nothing verifies before seven full days; the delayed check at seven day
   d.enrol(4, "2026-27", sampleFor(4)!);
   d.work(EQ, right);
   d.newSession(0);
-  d.now = Date.parse(d.state().evidence(EQ).independentAt!) + 7 * DAY;
+  d.now = Date.parse(d.state().evidence(EQ).retentionDueAt!);
   assert.equal(d.state().evidence(EQ).retention, "due");
   d.work(EQ, right);
   assert.equal(d.state().evidence(EQ).status, "verified");
