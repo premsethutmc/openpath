@@ -20,7 +20,7 @@ Read `../family-kit.ts` (the contract) and two existing families in `../families
 | `difficulty(p)` | 1, 2 or 3 |
 | `teach` | `idea` (why it works) and `method` (how to do it), each one or two sentences; `alternatives`: at least ONE further way of explaining (e.g. a picture or concrete model for younger grades, a different method for older), each `{ id, title, kind, text: [..] }`, optional `visual` |
 | `figure(p)` | a picture the question needs (Grades 1–5 especially: dots to count, a clock, coins, a bar chart). See "Pictures". |
-| `word(p)` | the same mathematics in an everyday situation (the transfer question). Strongly recommended. Same answer. |
+| `word(p)` | the same mathematics in an everyday situation (the transfer question). Strongly recommended. Same answer (a choice family's everyday form keeps its `choices` and letter). |
 | `mc` | `true` if a multiple-choice form makes sense; options come from your explanations' predictions, topped up by `distractors(p)` |
 | `decimals` | `true` for money, measures and statistics: answers and options are shown as decimals (54.5, not 109/2) |
 | `cap` | at most this many problems released (use 300–600 for large domains). With a cap, a domain of more than 300 000 combinations (e.g. five-digit numbers) is SAMPLED deterministically instead of listed, so large numbers are fine |

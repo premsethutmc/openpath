@@ -864,6 +864,7 @@ export const B20: Def[] = [
     explain: (s) => (s.id === "count" ? `n(A) = ${s.inputs[0]}, n(B) = ${s.inputs[1]}, n(A ∩ B) = ${s.inputs[2]}` : `Compare N × n(A ∩ B) = ${s.inputs[0]} with n(A) × n(B) = ${s.inputs[1]}: ${INDT_CHOICES[Number(s.value)]}`),
     domain: D_INDT,
     keep: K_INDT,
+    cap: 400,
     difficulty: ([N]) => lv(N, 12, 20),
     teach: {
       idea: "Mutually exclusive events cannot happen together (A ∩ B is empty). Independent events have P(A ∩ B) = P(A) × P(B). Two events that both can happen cannot be both.",
@@ -1089,7 +1090,7 @@ export const B20: Def[] = [
       const k = cexAns(a, c);
       const v = cexF(a, c)(k);
       let d = 2;
-      while (v % d !== 0) d++;
+      while (v >= 2 && v % d !== 0) d++;
       return { steps: [st("search", "evaluate", LOG, [1, k - 1], "prime"), st("factor", "factorise", "MATH.number.primes", [v, d], k)], answer: k };
     },
     // independent: a sieve of Eratosthenes, checking every earlier value is prime and this one is not
@@ -1108,7 +1109,7 @@ export const B20: Def[] = [
     bugs: ([a, c]) => [{ id: "obvious-factor-not-smallest", kind: "procedural", competency: LOG, says: `n = ${c} makes every term a multiple of ${c}, so it is a counterexample, but the question asks for the SMALLEST one; check n = 1, 2, 3, … in order.`, predict: c }],
     distractors: ([a, c]) => [cexAns(a, c) + 1, cexAns(a, c) - 1, c - 1],
     variants: ([a, c]) => [[a + 1, c]].filter((q) => inBox(q, D_CEX) && K_CEX(q)),
-    explain: (s) => (s.id === "search" ? `For n = ${s.inputs[0]} to ${s.inputs[1]} the values are all prime` : `At n = ${s.value} the value is ${s.inputs[0]} = ${s.inputs[1]} × ${Number(s.inputs[0]) / Number(s.inputs[1])}, not prime`),
+    explain: (s) => (s.id === "search" ? `For n = ${s.inputs[0]} to ${s.inputs[1]} the values are all prime` : Number(s.inputs[0]) < 2 ? `At n = ${s.value} the value is ${s.inputs[0]}, which is not prime` : `At n = ${s.value} the value is ${s.inputs[0]} = ${s.inputs[1]} × ${Number(s.inputs[0]) / Number(s.inputs[1])}, not prime`),
     domain: D_CEX,
     keep: K_CEX,
     difficulty: ([a, c]) => lv(cexAns(a, c), 4, 10),

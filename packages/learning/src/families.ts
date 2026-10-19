@@ -1256,6 +1256,12 @@ function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem 
   }
   if (form === "word") {
     if (!def.word) throw new Error(`families@2: ${def.id} has no everyday-situation form`);
+    // a choice family's everyday form keeps its own options and the letter of the right one
+    if (def.type === "choice") {
+      const own = def.choices?.(p);
+      if (!own || typeof answer !== "number" || !own[answer]) throw new Error(`families@2: ${def.id}(${p}) needs choices for its everyday form`);
+      return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: "choice", answer: "ABCD"[answer], bugs, options: own };
+    }
     return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: def.type, answer: shown(def, answer), bugs };
   }
   const choice = def.type === "choice";
