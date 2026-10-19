@@ -83,7 +83,7 @@ The one rule change is the seven-full-day verification, which the owner approved
 | disc | number of real roots | the vertex value |
 
 - Each family has a multiple-choice form, `gen:…:mc`.
-- The server mirrors the families, and a parity fixture covers 1114 ids.
+- The server mirrors the families, and a parity fixture covers 1136 ids (1114 supported, 22 that must be refused).
 
 **Seven synthesised modules:**
 - powers;
@@ -122,7 +122,8 @@ Each scenario is tested at engine level in `frontend/src/learning/platform.test.
 - frontend unit tests: **392/392**;
 - Django: **186/186**;
 - browser: **12/12 journeys** against Django `runserver` (phone and tablet);
-- diagnostic@2 synthetic check across 16 families: 155 cases → 135 identified, 20 uncertain, **0 wrong claims**. Random answers gave 0 claims.
+- diagnostic@2 synthetic check across 16 families: 153 cases → 132 identified, 21 uncertain, **0 wrong claims**. Random answers gave 0 claims.
+- An independent check (a separate agent that had not written the code) recomputed all 919 new-family questions in closed form: 0 wrong. It found a notation slip ("−1²" for (−1)²), and explanations that predicted the right answer on some items, which made those diagnostic picks uninformative. Both are fixed: such predictions are dropped, and diagnostics prefer questions that can show more explanations.
 
 ## 4. Findings and blockers
 

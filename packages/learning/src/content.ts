@@ -134,7 +134,7 @@ function misconceptionsOf(g: FamilyProblem): NonNullable<Question["misconception
   for (const b of g.bugs) {
     if (b.predict === null || (g.type === "set" && !Array.isArray(b.predict))) continue;
     const values = g.type === "set" ? [b.predict] : Array.isArray(b.predict) ? b.predict : [b.predict];
-    for (const v of values) out.push({ when: g.type === "choice" ? "ABCD"[v as number] : showValue(v), hypothesis: b.kind, says: b.says });
+    for (const v of values) if (showValue(v) !== g.answer || g.type === "choice") out.push({ when: g.type === "choice" ? "ABCD"[v as number] : showValue(v), hypothesis: b.kind, says: b.says });
   }
   return out;
 }

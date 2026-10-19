@@ -82,7 +82,8 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
   const diagnostics: string[] = [];
   const covered = new Set<string>();
   for (let k = 0; k < 3; k++) {
-    const best = pool.filter((p) => !used.has(p.id)).map((p) => ({ p, gain: [...predicted(p)].filter((b) => !covered.has(b)).length })).sort((a, b) => b.gain - a.gain)[0];
+    // new explanations covered first, then how many explanations the question can show at all
+    const best = pool.filter((p) => !used.has(p.id)).map((p) => ({ p, gain: [...predicted(p)].filter((b) => !covered.has(b)).length, all: predicted(p).size })).sort((a, b) => b.gain - a.gain || b.all - a.all)[0];
     if (!best) break;
     used.add(best.p.id);
     diagnostics.push(best.p.id);

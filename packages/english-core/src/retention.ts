@@ -18,7 +18,8 @@
  * could be raised in the same session that is judged as the check: a level first shown on day 12 was reported as
  * verified on day 12 because a lower level had been shown on day 1. `verifiedLevel` gives the one meaning used for
  * every level claim: band L is verified only when L was first shown without help in an earlier session, and a later
- * session at least the delay (mastery_gap_days, less the same half-day tolerance) after that has fresh evidence AT L
+ * session at least the delay (verification@3, the default: exactly mastery_gap_days; verification@2, for historical
+ * replay: less the same half-day tolerance) after that has fresh evidence AT L
  * (at least VERIFY_AT_LEVEL_MIN DISTINCT questions answered fresh, never a repeat, of difficulty ≥ L − tolerance: H-V2)
  * that favours L over L − 1 (checkPassed, unchanged, on that session's fresh evidence). The schedule fields (status, level, dueAt, checks, lastVerifiedAt) are unchanged, so
  * due dates, selection and historical schedules replay exactly as before.

@@ -7,7 +7,7 @@
    "competency": "MATH.algebra.identities",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "25ff77e7",
+   "contentHash": "bc332f41",
    "state": "submitted",
    "history": [
     {
@@ -24,6 +24,38 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "25ff77e7",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "31d03208",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "31d03208",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "bc332f41",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "bc332f41",
      "note": "submitted for educator review"
     }
    ]
@@ -59,7 +91,7 @@
    "competency": "MATH.algebra.quadratic-discriminant",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "3fffe494",
+   "contentHash": "d3a10777",
    "state": "submitted",
    "history": [
     {
@@ -76,6 +108,38 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "3fffe494",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "604866b8",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "604866b8",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "d3a10777",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "d3a10777",
      "note": "submitted for educator review"
     }
    ]
@@ -145,7 +209,7 @@
    "competency": "MATH.calculus.derivative-rules",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "216df5fb",
+   "contentHash": "d4b923e9",
    "state": "submitted",
    "history": [
     {
@@ -162,6 +226,38 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "216df5fb",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "036aae79",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "036aae79",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "d4b923e9",
+     "note": "content changed: earlier review no longer applies"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T14:00:00.000Z",
+     "contentHash": "d4b923e9",
      "note": "submitted for educator review"
     }
    ]

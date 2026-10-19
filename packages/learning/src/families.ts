@@ -79,6 +79,9 @@ type Def = {
 const MT = "MATH.number.multiplication-tables";
 const EXP = "MATH.number.exponents";
 const SUP: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "-": "⁻" };
+/** A number as written in a step: "−" for minus, and in brackets when negative (so (−1)² is not read as −1²). */
+const neg = (t: string | number) => String(t).replace(/^-/, "−");
+const par = (v: string | number) => (Number(v) < 0 ? `(${neg(v)})` : String(v));
 const sup = (n: number | string) => String(n).replace(/./g, (c) => SUP[c] ?? c);
 /** x to a power, as written: x, x², x³ … */
 const xp = (n: number) => (n === 1 ? "x" : `x${String(n).replace(/./g, (c) => SUP[c])}`);
@@ -524,7 +527,7 @@ const F: Def[] = [
       ...(Math.sign(a) !== Math.sign(b) ? [{ id: "sign-slip", kind: "prerequisite" as const, competency: "MATH.number.integer-add", says: `${a} + ${b} was worked out without the signs; adding numbers with different signs is a difference.`, predict: Math.abs(a) + Math.abs(b) === a + b ? -(a + b) : Math.sign(a + b) * (Math.abs(a) + Math.abs(b)) }] : []),
     ],
     variants: (p) => pairs(p, [[-5, 5], [-5, 5]], ([a, b]) => a !== 0 && b !== 0 && a < b && a + b !== 0),
-    explain: (s) => (s.id === "collect" ? `${s.inputs[0]}x + ${s.inputs[1]}x = ${show(s.value)}x` : s.id === "outer" ? `x × ${s.inputs[1]} = ${s.inputs[1]}x` : `${s.inputs[0]} × x = ${s.inputs[0]}x`),
+    explain: (s) => (s.id === "collect" ? `${neg(s.inputs[0])}x + ${par(s.inputs[1])}x = ${neg(show(s.value))}x` : s.id === "outer" ? `x × ${par(s.inputs[1])} = ${neg(s.inputs[1])}x` : `${par(s.inputs[0])} × x = ${neg(s.inputs[0])}x`),
   },
   {
     id: "dpow",
@@ -659,7 +662,7 @@ const F: Def[] = [
       ].filter((x) => x.predict !== null && x.predict !== right) as Bug[];
     },
     variants: (p) => pairs(p, [[-6, 6], [-9, 9]], ([pp, qq]) => pp !== 0 && qq !== 0),
-    explain: (s) => (s.id === "square" ? `b² = ${s.inputs[0]}² = ${show(s.value)}` : s.id === "four-q" ? `4ac = 4 × ${s.inputs[1]} = ${show(s.value)}` : s.id === "discriminant" ? `b² − 4ac = ${s.inputs[0]} − (${s.inputs[1]}) = ${show(s.value)}` : `${show(s.inputs[0] as number)} is ${(s.inputs[0] as number) > 0 ? "positive: two solutions" : s.inputs[0] === 0 ? "zero: one solution" : "negative: no real solutions"}`),
+    explain: (s) => (s.id === "square" ? `b² = ${par(s.inputs[0])}² = ${show(s.value)}` : s.id === "four-q" ? `4ac = 4 × ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "discriminant" ? `b² − 4ac = ${s.inputs[0]} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : `${show(s.inputs[0] as number)} is ${(s.inputs[0] as number) > 0 ? "positive: two solutions" : s.inputs[0] === 0 ? "zero: one solution" : "negative: no real solutions"}`),
   },
 ];
 export const FAMILIES = new Map(F.map((f) => [f.id, f]));
@@ -681,11 +684,18 @@ const mcPrompt = (text: string) => `${text.replace(/ ?\((?:A fraction is fine\.|
 function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const { steps, answer } = def.solve(p);
   if (!def.validate(p, answer)) throw new Error(`families@1: ${def.id}(${p}) failed its independent check`);
-  const bugs = def.bugs(p);
+  const raw = def.bugs(p);
+  // an explanation that predicts the right answer here cannot be seen on this problem: drop those predictions
+  const bugs = raw.flatMap((b) => {
+    if (b.predict === null || def.type === "set" || typeof answer !== "number") return [b];
+    if (!Array.isArray(b.predict)) return near(b.predict, answer) ? [] : [b];
+    const keep = b.predict.filter((v) => !near(v, answer));
+    return keep.length ? [{ ...b, predict: keep }] : [];
+  });
   const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps };
   if (form === "mc") {
     if (!def.mc || typeof answer !== "number") throw new Error(`families@1: ${def.id} has no multiple-choice form`);
-    const opts = mcOptions(def, p, answer, bugs);
+    const opts = mcOptions(def, p, answer, raw);
     const idx = (v: number) => opts.findIndex((o) => near(o, v));
     const right = idx(answer);
     const mcBugs = bugs.flatMap((b) => {
