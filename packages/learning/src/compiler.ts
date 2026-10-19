@@ -137,6 +137,8 @@ export interface RequirementRow {
   competencies: string[];
   class: RequirementClass;
   why: string;
+  /** Graph metadata to correct: the board teaches this at a grade the competency's range leaves out. */
+  graphGradeRange?: string;
 }
 const NEEDS_PEOPLE = /\b(prove|proof|construct|draw|sketch|justify|explain|design|create|pose|investigate|critique)\b/i;
 
@@ -155,10 +157,13 @@ export function compileRelease(r: CurriculumRelease): RequirementRow[] {
     const peoplePart = /\((partly )?marked by an educator/.test(why0) || (!/\(marked automatically/.test(why0) && NEEDS_PEOPLE.test(outcome.text));
     // … and the written task must be written for THIS outcome (its "serves"), not merely exist for the competency
     const peopleMissing = peoplePart && !writtenTasks.some((t) => (t.serves ?? []).includes(outcome.id) && comps.includes(graph.evidenceTarget(t.competency)));
-    // the level: the outcome's grade within a grade of a mapped competency's range
-    const gradeOff = comps.length > 0 && !checks.some((c) => c.grades[0] - 1 <= r.grade && r.grade <= c.grades[1] + 1);
     // oam@1: what the content really assesses (every part of the statement, at its level)
     const oa = outcomeAssessment(outcome.id);
+    // the level: judged from the content by the map (its "grade"); without a judgement, the outcome's grade must be
+    // within a grade of a mapped competency's range. A range in the graph that misses a board's grade is reported
+    // as graph metadata to correct, not as missing content.
+    const rangeOff = comps.length > 0 && !checks.some((c) => c.grades[0] - 1 <= r.grade && r.grade <= c.grades[1] + 1);
+    const gradeOff = !oa && rangeOff;
     const notAssessed = !oa ? "not yet judged against the content (outcome-assessment map)" : oa.verdict !== "full" ? `not every part is assessed: ${oa.missing || oa.verdict}` : oa.grade !== "fit" ? `assessed ${oa.grade} the outcome's level` : "";
     const done = (ok: boolean) => ok && !peopleMissing && !gradeOff && !notAssessed;
     const cls: RequirementClass = !comps.length || (oa?.verdict === "none" && !anything) ? "not-implemented" : oa?.verdict === "none" ? (byPeople ? "unsupported" : "not-implemented") : done(checks.every((c) => CRITERIA.every((k) => c.met[k]))) ? "validated" : done(checks.every((c) => c.complete)) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
@@ -167,7 +172,7 @@ export function compileRelease(r: CurriculumRelease): RequirementRow[] {
       : cls === "unsupported" ? "Needs written reasoning, a construction or a drawing, and no educator-marked tasks or teaching exist yet."
       : cls === "validated" ? "Complete, validated and educator-approved."
       : `${[...checks.filter((c) => !c.complete).map((c) => `${c.name}: missing ${c.missing.filter((m) => m !== "review").join(", ") || "review"}`), ...(peopleMissing ? ["the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome"] : []), ...(gradeOff ? ["the mapped skills are taught at another level"] : []), ...(notAssessed ? [notAssessed] : [])].join("; ") || "Awaiting educator review."}`;
-    return { release: `${r.id}@${r.version}`, board: r.source.board ?? "", grade: r.grade, domain: chapter.unit?.title ?? "", chapter: chapter.title, section: sections.at(-1)?.title ?? null, outcome: outcome.id, text: outcome.text, competencies: comps, class: cls, why };
+    return { release: `${r.id}@${r.version}`, board: r.source.board ?? "", grade: r.grade, domain: chapter.unit?.title ?? "", chapter: chapter.title, section: sections.at(-1)?.title ?? null, outcome: outcome.id, text: outcome.text, competencies: comps, class: cls, why, ...(rangeOff ? { graphGradeRange: "a mapped competency's grade range in the graph does not include this grade" } : {}) };
   });
 }
 
