@@ -28,6 +28,7 @@
     "src/english",
     "src/mathematics/canonical.test.ts",
     "src/mathematics/journey",
-    "src/mathematics/chapter"
+    "src/mathematics/chapter",
+    "src/mathematics/unit"
   ]
 }
