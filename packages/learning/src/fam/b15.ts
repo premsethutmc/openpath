@@ -1894,7 +1894,12 @@ export const B15: Def[] = [
       if (k !== 0) out.push({ id: "five-as-sum", kind: "conceptual", competency: LOG, says: "log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a.", predict: lawAnswer(i + k, j + k, 0) });
       const d = lawNumber([i, j, k]).places;
       if (d > 0) out.push({ id: "decimal-ignored", kind: "procedural", competency: LOG, says: `The decimal point was ignored; ${lawNumber([i, j, k]).text} is a whole number divided by 10${d > 1 ? sup(d) : ""}, which subtracts ${d}.`, predict: lawAnswer(i - k, j, k + d) });
-      out.push({ id: "powers-not-multiplied", kind: "procedural", competency: LOG, says: "A power was not brought down: log 2³ = 3 log 2 = 3a, not a.", predict: lawAnswer(Math.sign(i - k), Math.sign(j), Math.sign(k)) });
+      // the slip: every power is written as 1 (keeping its sign), so log 2ⁱ3ʲ5ᵏ becomes sgn(i)·a + sgn(j)·b + sgn(k)·(1 − a)
+      const big = ([[2, i], [3, j], [5, k]] as [number, number][]).find(([, e]) => Math.abs(e) >= 2);
+      if (big) {
+        const [base, e] = big;
+        out.push({ id: "powers-not-multiplied", kind: "procedural", competency: LOG, says: `The powers were not brought down: log ${base}${sup(e)} was taken as ${e < 0 ? "−" : ""}log ${base}; log xⁿ = n log x, so log ${base}${sup(e)} = ${e < 0 ? "−" : ""}${Math.abs(e)} log ${base}.`, predict: lawAnswer(Math.sign(i) - Math.sign(k), Math.sign(j), Math.sign(k)) });
+      }
       return out;
     },
     distractors: ([i, j, k]) => [lawAnswer(j, i - k, k), lawAnswer(i - k, j, -k), lawAnswer(i - k + 1, j, k), lawAnswer(i - k, j + 1, k), lawAnswer(i - k, j, k + 1)],

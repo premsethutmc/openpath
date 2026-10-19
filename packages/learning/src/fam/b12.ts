@@ -443,7 +443,7 @@ export const B12: Def[] = [
     // [a, b, s]: y = ax + b for x = s … s + 4
     parse: none,
     reject: (p) => (!inR(p, [[-6, 6], [-10, 10], [0, 2]]) || p[0] === 0 ? "A rule y = ax + b with a from −6 to 6 (not 0), b from −10 to 10, and a table starting at x = 0, 1 or 2." : null),
-    prompt: () => `The table in the picture shows pairs (x, y) that follow one straight-line rule. Write y in terms of x.`,
+    prompt: () => `The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without "y =").`,
     solve: ([a, b, s]) => ({
       steps: [
         st("step", "subtract", INTADD, [s * a + b + a, s * a + b], a),
@@ -471,7 +471,7 @@ export const B12: Def[] = [
     domain: [[-6, 6], [-10, 10], [0, 2]],
     cap: 300,
     difficulty: ([a, b, s]) => (s === 0 && a > 0 ? 1 : a > 0 || b >= 0 ? 2 : 3),
-    word: ([a, b, s]) => `${nm(a + b)} records the temperature y (in °C) of a liquid x minutes after starting an experiment: ${[0, 1, 2, 3, 4].map((i) => `after ${s + i} min it is ${N(a * (s + i) + b)} °C`).join("; ")}. The temperature changes steadily. Write y in terms of x.`,
+    word: ([a, b, s]) => `${nm(a + b)} records the temperature y (in °C) of a liquid x minutes after starting an experiment: ${[0, 1, 2, 3, 4].map((i) => `after ${s + i} min it is ${N(a * (s + i) + b)} °C`).join("; ")}. The temperature changes steadily. Write the expression in x that gives y (just the expression, without "y =").`,
     teach: {
       idea: "When y changes by the same amount each time x goes up by 1, the rule is y = (step) × x + (value of y at x = 0).",
       method: "Find the step from two neighbouring values. Work back to x = 0 to find the starting value. Check your rule with one more pair from the table.",
@@ -806,7 +806,7 @@ export const B12: Def[] = [
       const yy = den !== 0 ? (a2 * c1 + a1 * c2) / den : null;
       return [
         B("swapped", "procedural", SYS, "The values were written in the wrong order; the pair is (x, y): x first.", x !== y ? tup(y, x) : null),
-        B("added-to-eliminate", "procedural", SYS, "After making the x coefficients equal, the equations were added; with the same sign they must be subtracted to remove x.", yy !== null && yy !== y && Number.isInteger(yy) && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
+        B("added-to-eliminate", "procedural", SYS, "After making the x coefficients equal, the two equations were added and the x terms were then crossed out as if they had cancelled; x terms with the same sign cancel only when the equations are subtracted.", yy !== null && yy !== y && Number.isInteger(yy) && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
       ].filter((b) => b.predict !== null);
     },
     distractors: ([, , , , x, y]) => [tup(x + 1, y), tup(x, y + 1), tup(x - 1, y + 2), tup(-x, y)],
@@ -859,7 +859,7 @@ export const B12: Def[] = [
       const yy = (a2 * c1 + a1 * c2) / den;
       return [
         B("swapped", "procedural", SYS, "The prices were given in the wrong order; the question asks for (pen, notebook).", x !== y ? tup(y, x) : null),
-        B("added-to-eliminate", "procedural", SYS, "After making the pen numbers equal, the two equations were added; they must be subtracted to remove the pens.", yy !== y && Number.isInteger(yy) && yy > 0 && (c1 - b1 * yy) / a1 > 0 && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
+        B("added-to-eliminate", "procedural", SYS, "After making the pen numbers equal, the two equations were added and the pen terms were then crossed out as if they had cancelled; equal pen terms cancel only when the equations are subtracted.", yy !== y && Number.isInteger(yy) && yy > 0 && (c1 - b1 * yy) / a1 > 0 && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
       ].filter((b) => b.predict !== null);
     },
     distractors: ([, , , , x, j]) => [tup(x + 1, 5 * j - 1), tup(x, 5 * j + 5), tup(x - 1, 5 * j)],
@@ -914,7 +914,8 @@ export const B12: Def[] = [
     explain: (s) => `Compare a₁/a₂ = ${s.inputs[0]}, b₁/b₂ = ${s.inputs[1]} and c₁/c₂ = ${s.inputs[2]}: ${["the first two differ, so the lines cross once", "the first two are equal but the third is not: parallel lines, no solution", "all three are equal: the same line, infinitely many solutions"][Number(s.value)]}`,
     domain: [[1, 5], [-5, 5], [1, 9], [2, 4], [0, 2], [-1, 1]],
     cap: 360,
-    difficulty: ([, , , , kind]) => (kind === 1 ? 2 : kind === 0 ? 3 : 2),
+    // one solution needs only a₁/a₂ ≠ b₁/b₂; the other two cases also need the third ratio compared
+    difficulty: ([, b1, , , kind]) => (kind === 0 ? 1 : b1 < 0 ? 3 : 2),
     teach: {
       idea: "Two lines either cross once, are parallel (never meet) or are the same line. The ratios of the coefficients tell which.",
       method: "If a₁/a₂ ≠ b₁/b₂: exactly one solution. If a₁/a₂ = b₁/b₂ ≠ c₁/c₂: no solution. If all three ratios are equal: infinitely many.",
@@ -1022,7 +1023,7 @@ export const B12: Def[] = [
     // [a, b, c, kind]: zeros α, β of ax² + bx + c; kind 0 α² + β², 1 1/α + 1/β, 2 α/β + β/α
     parse: none,
     reject: (p) => (!inR(p, [[1, 4], [-9, 9], [-9, 9], [0, 2]]) || p[1] === 0 || p[2] === 0 || p[1] * p[1] - 4 * p[0] * p[2] <= 0 ? "ax² + bx + c with two different real zeros, a 1–4, b and c from −9 to 9 (not 0)." : null),
-    prompt: ([a, b, c, kind]) => `α and β are the zeros of p(x) = ${pl([a, b, c])}. Without finding α and β, find the value of ${["α² + β²", "1/α + 1/β", "α/β + β/α"][kind]}.`,
+    prompt: ([a, b, c, kind]) => `α and β are the zeros of p(x) = ${pl([a, b, c])}. Without finding α and β, find the value of ${["α² + β²", "1/α + 1/β", "α/β + β/α"][kind]}. (A fraction is fine.)`,
     solve: ([a, b, c, kind]) => {
       const S = -b / a;
       const P = c / a;
@@ -1138,7 +1139,7 @@ export const B12: Def[] = [
     parse: none,
     reject: (p) => (!inR(p, [[1, 2], [-6, 6], [-9, 9]]) || p[1] === 0 || p[2] === 0 ? "ax² + px + q = 0 with a = 1 or 2 and p, q small and not 0." : null),
     prompt: ([a, p, q]) => `The graph of y = ${a === 1 ? "" : a}x² has been drawn. To solve ${pl([a, p, q])} = 0 with it, which straight line should be drawn on the same axes?`,
-    word: ([a, p, q]) => `${nm(a + p + q)} is designing a skate-park ramp. Its curved side is drawn on a grid as y = ${a === 1 ? "" : a}x² (in metres). A straight support beam is to be fixed so that it meets the curve exactly at the points whose x-coordinates are the solutions of ${pl([a, p, q])} = 0. Along which straight line, drawn on the same axes, should the beam go?`,
+    word: ([a, p, q]) => `${nm(a + p + q)} has a carefully drawn graph of y = ${a === 1 ? "" : a}x² on graph paper and wants to use it to solve ${pl([a, p, q])} = 0 without any algebra on the quadratic. The plan: draw one straight line on the same axes and read off the x-coordinates of any points where it crosses the curve (if it does not cross, there are no real solutions). Which straight line should be drawn?`,
     choices: (pp) => {
       const [, p, q] = pp;
       const lines = [[-p, -q], [p, q], [-p, q], [p, -q]].map(([m, c]) => `y = ${pl([m, c])}`);
@@ -1406,7 +1407,7 @@ export const B12: Def[] = [
     distractors: ([kind, x1, y1, x2, y2]) => (kind === 0 ? [tup((y1 + y2) / 2, (x1 + x2) / 2), tup((x1 + x2) / 2 + 1, (y1 + y2) / 2)] : [tup(2 * x2 + x1, 2 * y2 + y1), tup(2 * y2 - y1, 2 * x2 - x1), tup(2 * x2 - x1 + 1, 2 * y2 - y1)]),
     variants: () => [],
     explain: (s) => (s.id === "x" || s.id === "y" ? `${s.id}: (${N(Number(s.inputs[0]))} + ${N(Number(s.inputs[1]))}) ÷ 2 = ${Q(Number(s.value))}` : `${s.id === "bx" ? "x" : "y"}: 2 × ${N(Number(s.inputs[1]))} − (${N(Number(s.inputs[0]))}) = ${N(Number(s.value))}`),
-    figure: ([kind, x1, y1, x2, y2]) => ({ type: "plane", points: [[x1, y1, "A"], [x2, y2, kind ? "M" : "B"]], ...(kind ? {} : { segments: [[[x1, y1], [x2, y2]]] }), range: kind ? 13 : 7 }),
+    figure: ([kind, x1, y1, x2, y2]) => ({ type: "plane", points: [[x1, y1, "A"], [x2, y2, kind ? "M" : "B"]], ...(kind ? {} : { segments: [[[x1, y1], [x2, y2]]] }), range: 7 }),
     domain: [[0, 1], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
     cap: 400,
     difficulty: ([kind, x1, y1, x2, y2]) => (kind === 0 && (x1 + x2) % 2 === 0 && (y1 + y2) % 2 === 0 ? 1 : kind === 0 ? 2 : 3),
@@ -1581,7 +1582,7 @@ export const B12: Def[] = [
     // [x1, y1, x2, y2, x3]: (x1, y1), (x2, y2), (x3, k) collinear
     parse: none,
     reject: (p) => (!inR(p, [[-5, -1], [-5, 5], [1, 5], [-5, 5], [-6, 6]]) || p[4] === p[0] || p[4] === p[2] || p[1] === p[3] ? "Two points on a slanting line and a third x-coordinate different from both." : null),
-    prompt: ([x1, y1, x2, y2, x3]) => `For which value of k are the points ${tup(x1, y1)}, ${tup(x2, y2)} and (${N(x3)}, k) collinear?`,
+    prompt: ([x1, y1, x2, y2, x3]) => `For which value of k are the points ${tup(x1, y1)}, ${tup(x2, y2)} and (${N(x3)}, k) collinear? (A fraction is fine.)`,
     solve: ([x1, y1, x2, y2, x3]) => {
       // ½[x1(y2 − k) + x2(k − y1) + x3(y1 − y2)] = 0 → k(x2 − x1) = x2y1 − x1y2 − x3(y1 − y2)
       const k = (x2 * y1 - x1 * y2 - x3 * (y1 - y2)) / (x2 - x1);
@@ -1655,12 +1656,14 @@ export const B12: Def[] = [
         [B("halved", "conceptual", CT, "The angle was halved; the angle at the CENTRE is the larger one: twice the angle at the circumference.", x % 2 === 0 ? x / 2 : null), B("equal", "conceptual", CT, "The two angles were taken as equal; the angle at the centre is twice the angle at the circumference.", x)],
         [B("doubled", "conceptual", CT, "The angle at the centre was doubled; the angle at the circumference is half of it.", 4 * x), B("equal", "conceptual", CT, "The two angles were taken as equal; the angle at the circumference is half the angle at the centre.", 2 * x)],
         [B("opposite-equal", "conceptual", CT, "Opposite angles of a cyclic quadrilateral were taken as equal; they add up to 180°.", x), B("complement", "recall", CT, "90° was used; opposite angles of a cyclic quadrilateral add up to 180°, not 90°.", x < 90 ? 90 - x : null)],
-        [B("no-right-angle", "conceptual", CT, "∠ACB was not used; the angle in a semicircle is 90°, so the other two angles add up to 90°.", 180 - x), B("equal", "conceptual", TRI, "The two angles at A and B were taken as equal; that is only true when C is halfway round.", x)],
+        [B("bracket-slip", "procedural", TRI, "180° − 90° − ∠CAB was worked out as 180° − (90° − ∠CAB): the given angle was added back instead of taken away. Both 90° and ∠CAB come off 180°.", 90 + x), B("equal", "conceptual", TRI, "The two angles at A and B were taken as equal; that is only true when C is halfway round.", x)],
         [B("not-halved", "procedural", TRI, `180° − ${x}° was not shared between the two equal angles.`, 180 - x), B("half-centre", "conceptual", CT, "The base angle was taken as half the angle at the centre; in triangle OAB the two base angles share 180° minus the angle at O.", x / 2 !== (180 - x) / 2 ? x / 2 : null)],
       ][k].filter((b) => b.predict !== null),
     variants: () => [],
     explain: (s) => (s.id === "fact" ? `Use: ${s.value}` : `So the angle is ${s.value}°`),
-    figure: ([k, x]) => (k === 3 ? { type: "triangle", angles: [deg(x), "?", "90°"], sides: ["", "", "AB (diameter)"], right: true } : k === 4 ? { type: "triangle", angles: ["?", "", deg(x)], sides: ["r", "", "r"] } : null),
+    // right triangle: the right angle (C) is the bottom-left corner, side 1 the hypotenuse (the diameter AB); in the
+    // isosceles triangle OAB the two radii (sides 1 and 2) meet at the top corner O
+    figure: ([k, x]) => (k === 3 ? { type: "triangle", angles: ["90°", deg(x), "?"], sides: ["", "AB (diameter)", ""], right: true } : k === 4 ? { type: "triangle", angles: ["?", "", deg(x)], sides: ["", "r", "r"] } : null),
     domain: [[0, 4], [15, 150]],
     difficulty: ([k]) => (k === 0 || k === 3 ? 1 : k === 1 || k === 2 ? 2 : 3),
     teach: {
@@ -1711,7 +1714,8 @@ export const B12: Def[] = [
     distractors: ([k, r, d]) => [surd(r * r - d * d + 1), surd(k === 0 ? r * r - d * d : 4 * (r * r - d * d)), String(r + d)],
     variants: () => [],
     explain: (s) => (s.id === "bisect" ? `Use: ${s.value}, making a right triangle with the radius as hypotenuse` : s.id === "double" ? `The chord is twice that: ${s.value} cm` : `√(${s.inputs[0]} − ${s.inputs[1]}) = ${s.value}`),
-    figure: ([k, r, d]) => ({ type: "triangle", sides: k === 0 ? [`${d} cm`, "half the chord", `${r} cm`] : ["distance", `${d} cm`, `${r} cm`], right: true }),
+    // right triangle: sides 0 and 2 are the legs, side 1 the hypotenuse (the radius)
+    figure: ([k, r, d]) => ({ type: "triangle", sides: k === 0 ? [`${d} cm`, `${r} cm`, "half the chord"] : [`${d} cm`, `${r} cm`, "distance"], right: true }),
     domain: [[0, 1], [3, 15], [1, 14]],
     difficulty: ([, r, d]) => (isSq(r * r - d * d) ? 1 : sqfree(r * r - d * d)[0] === 1 ? 2 : 3),
     word: ([k, r, d]) => (k === 0 ? `A round table top has radius ${r} cm. A straight strip of tape is stuck across it, from edge to edge, passing ${d} cm from the centre at its closest. How long is the tape, in cm (exact)?` : `A wheel of radius ${r} cm has a straight metal bar of length ${2 * d} cm fixed with both ends on the rim. How far is the bar from the centre of the wheel, in cm (exact)?`),
