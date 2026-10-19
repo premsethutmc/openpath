@@ -46,7 +46,7 @@ function withBug(d: Driver, bugId: string, taughtWhen: string): Answerer {
     const p = problemOf(qid);
     const taught = d.events.some((e) => e.record === "teach" && (e as { competency: string }).competency === taughtWhen);
     const b = p?.bugs.find((x) => x.id === bugId);
-    if (!p || taught || !b || b.predict === null) return right(qid);
+    if (!p || taught || !b || b.predict === null) return right(qid, "");
     const v = Array.isArray(b.predict) && p.type !== "set" ? b.predict[0] : b.predict;
     return p.type === "choice" ? "ABCD"[v as number] : show(v as number);
   };
