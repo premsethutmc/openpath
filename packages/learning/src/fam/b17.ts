@@ -71,6 +71,12 @@ const xb = (e: number, v = "x", pretty = true): string => (e === 0 ? "" : e < 0 
 /** A polynomial for a prompt (x², x³) and for an answer (x^2). */
 const pp = (t: [number, number][], v = "x") => sum(t.map(([c, e]) => [c, xb(e, v)] as [number, string]));
 const pa = (t: [number, number][], v = "x") => sum(t.map(([c, e]) => [c, xb(e, v, false)] as [number, string]));
+/** The factor x − r as written in a product: a lone x is not bracketed. */
+const fx = (r: number) => (r === 0 ? "x" : `(x${sg(-r)})`);
+/** (x − r)(x − t) with the bare x first: x(x + 4), (x − 1)(x − 3). */
+const fx2 = (r: number, t: number) => (t === 0 && r !== 0 ? `x${fx(r)}` : `${fx(r)}${fx(t)}`);
+/** A sum in brackets only when it has more than one term. */
+const br = (t: string) => (/ [+−] /.test(t) ? `(${t})` : t);
 /** k·x inside a function: x, 2x, −x. */
 const kx = (k: number, v = "x") => (k === 1 ? v : k === -1 ? `−${v}` : `${N(k)}${v}`);
 /** e^(ax) as an answer body: e^x, e^(2x), e^(−x); "" when a = 0. */
@@ -952,7 +958,7 @@ export const B17: Def[] = [
         if (q !== 0) out.push({ id: "only-square", kind: "procedural", competency: DER, says: `Only the x² term was worked out; the ${N(q)}x term gives ${N(q)}h/h = ${N(q)}.`, predict: pa([[2 * k, 1]]) });
       } else if (kind === 1) {
         const base = q === 0 ? "x" : `(x${sg(q)})`;
-        out.push({ id: "sign-lost", kind: "procedural", competency: DER, says: `The minus sign was lost: k/(x + h${sg(q)}) − k/(x${sg(q)}) has numerator −kh.`, predict: `${k}/${base}^2` });
+        out.push({ id: "sign-lost", kind: "procedural", competency: DER, says: `The minus sign was lost: k/(x + h${sg(q)}) − k/${q === 0 ? "x" : `(x${sg(q)})`} has numerator −kh.`, predict: `${k}/${base}²` });
         out.push({ id: "not-squared", kind: "procedural", competency: DER, says: "Only one bracket was kept in the denominator; after cancelling h, both (x + h + q) and (x + q) remain and become (x + q)².", predict: `−${k}/${base}` });
       } else if (kind === 2) {
         const r = q === 0 ? "√x" : `√(x${sg(q)})`;
@@ -1031,7 +1037,7 @@ export const B17: Def[] = [
     prompt: ([al, be, s, ask, c]) => `Find the interval(s) on which f(x) = ${cubicText(al, be, s, c)} is strictly ${ask ? "decreasing" : "increasing"}. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).`,
     solve: ([al, be, s, ask]) => {
       const ans = openIv(al, be, (s > 0) === (ask === 0));
-      return { steps: [step("derivative", "differentiate", RULES, [], `${s > 0 ? "" : "−"}6(x${sg(-al)})(x${sg(-be)})`), step("critical", "solve", FACT, ["f′(x) = 0"], `${N(al)}, ${N(be)}`), step("sign", "classify", APP, [ask ? "f′ < 0" : "f′ > 0"], ans)], answer: ans };
+      return { steps: [step("derivative", "differentiate", RULES, [], `${s > 0 ? "" : "−"}6${fx2(al, be)}`), step("critical", "solve", FACT, ["f′(x) = 0"], `${N(al)}, ${N(be)}`), step("sign", "classify", APP, [ask ? "f′ < 0" : "f′ > 0"], ans)], answer: ans };
     },
     // independent: the sign of a central-difference derivative on a fine grid, and f′ ≈ 0 at the end points
     validate: ([al, be, s, ask, c], v) => {
@@ -1040,9 +1046,9 @@ export const B17: Def[] = [
     },
     bugs: ([al, be, s, ask]) => {
       const outer = (s > 0) === (ask === 0);
-      const out: Bug[] = [{ id: s > 0 ? "inside-outside" : "leading-sign", kind: "conceptual", competency: APP, says: s > 0 ? `The two kinds of interval were swapped: f′(x) = 6(x${sg(-al)})(x${sg(-be)}) is negative between the roots and positive outside them.` : "The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them.", predict: openIv(al, be, !outer) }];
+      const out: Bug[] = [{ id: s > 0 ? "inside-outside" : "leading-sign", kind: "conceptual", competency: APP, says: s > 0 ? `The two kinds of interval were swapped: f′(x) = 6${fx2(al, be)} is negative between the roots and positive outside them.` : "The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them.", predict: openIv(al, be, !outer) }];
       if (outer) out.push({ id: "one-piece", kind: "procedural", competency: APP, says: `Only one piece was given; f′ has the same sign on (−∞, ${N(al)}) and on (${N(be)}, ∞), so both pieces belong to the answer.`, predict: `(${N(be)}, ∞)` });
-      if (!(al === -be)) out.push({ id: "root-signs", kind: "procedural", competency: FACT, says: `The roots of f′ were read with the wrong signs: (x${sg(-al)}) = 0 gives x = ${N(al)}.`, predict: openIv(-be, -al, outer) });
+      if (!(al === -be)) out.push({ id: "root-signs", kind: "procedural", competency: FACT, says: `The roots of f′ were read with the wrong signs: ${al === 0 ? `x${sg(-be)} = 0 gives x = ${N(be)}` : `x${sg(-al)} = 0 gives x = ${N(al)}`}.`, predict: openIv(-be, -al, outer) });
       return out;
     },
     distractors: ([al, be]) => [`(−∞, ${N(al)})`, `(${N(al)}, ∞)`, `(−∞, ${N(be)})`],
@@ -1330,13 +1336,13 @@ export const B17: Def[] = [
         if (v !== 0) out.push({ id: "move-sign", kind: "prerequisite", competency: "MATH.algebra.linear-equations", says: `${N(v)} was moved across without changing its sign: ${lhs} = ${N(R)} was written as ${coef(u)}k = ${N(R)}${sg(v)}. Moving a number to the other side changes its sign: ${coef(u)}k = ${N(R)}${sg(-v)}.`, predict: (R + v) / u });
         if (u !== 1 && R - v !== (R - v) / u) out.push({ id: "no-divide", kind: "procedural", competency: CONT, says: `The equation ${lhs} = ${N(R)} was not finished: ${u}k = ${N(R - v)} was given as the answer, but k = ${N(R - v)} ÷ ${u}.`, predict: R - v });
       } else if (kind === 1) {
-        if (u !== v) out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over, giving ${F(v / u)}: the number in the sine goes on top, since sin(${kx(u)})/${v === 1 ? "x" : `(${kx(v)})`} = (${u}/${v}) × sin(${kx(u)})/${u === 1 ? "x" : `(${kx(u)})`}, which tends to ${F(u / v)}.`, predict: v / u });
+        if (u !== v) out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over, giving ${F(v / u)}: the number in the sine goes on top, since sin(${kx(u)})/${v === 1 ? "x" : `(${kx(v)})`} = ${v === 1 ? u : `(${u}/${v})`} × sin(${kx(u)})/${u === 1 ? "x" : `(${kx(u)})`}, which tends to ${F(u / v)}.`, predict: v / u });
         if (u !== 1) out.push({ id: "m-lost", kind: "procedural", competency: LIM, says: `sin(${u}x)/x was taken as 1; it tends to ${u}, since sin θ/θ → 1 needs θ = ${u}x in both places.`, predict: 1 / v });
       } else if (kind === 2) {
         out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: "1 − cos θ is about θ²/2 for small θ; the ½ was lost.", predict: (u * u) / v });
         if (u !== 1) out.push({ id: "not-squared", kind: "procedural", competency: LIM, says: `1 − cos(${u}x) = 2 sin²(${u}x/2), which gives (${u}x)²/2: the ${u} is squared.`, predict: u / (2 * v) });
       } else if (kind === 3) {
-        out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: "After multiplying by √(1 + mx) + 1, the denominator tends to 2; the 2 was lost.", predict: u / v });
+        out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: `After multiplying top and bottom by √(1 + ${kx(u)}) + 1, the bottom has the factor √(1 + ${kx(u)}) + 1, which tends to 2; that 2 was lost.`, predict: u / v });
       } else {
         out.push({ id: "cube-factor", kind: "prerequisite", competency: FACT, says: `x³ − ${u ** 3} was factorised as (x − ${u})(x² + ${u * u}); it is (x − ${u})(x² + ${u}x + ${u * u}).`, predict: 2 * u * u });
         out.push({ id: "zero", kind: "conceptual", competency: LIM, says: `0/0 was taken as 0; it means the expression must be simplified (cancel x − ${u}) before substituting.`, predict: 0 });
@@ -1368,7 +1374,7 @@ export const B17: Def[] = [
     prompt: ([kind, al, be, ask, p]) => `Find the interval(s) on which the curve y = ${concText(kind, al, be, p)} is concave ${ask ? "downward" : "upward"}. Write open intervals, joined by ∪ if there are two.`,
     solve: ([kind, al, be, ask]) => {
       const ans = kind === 0 ? openIv(al, be, ask === 0) : ask ? `(−∞, ${N(al)})` : `(${N(al)}, ∞)`;
-      return { steps: [step("second", "differentiate", HD, [], kind === 0 ? `12(x${sg(-al)})(x${sg(-be)})` : `6(x${sg(-al)})`), step("sign", "classify", CURVE, [ask ? "y″ < 0" : "y″ > 0"], ans)], answer: ans };
+      return { steps: [step("second", "differentiate", HD, [], kind === 0 ? `12${fx2(al, be)}` : `6${fx(al)}`), step("sign", "classify", CURVE, [ask ? "y″ < 0" : "y″ > 0"], ans)], answer: ans };
     },
     // independent: the sign of a second difference on a fine grid, and y″ ≈ 0 at the end points
     validate: ([kind, al, be, ask, p], v) => {
@@ -1378,7 +1384,7 @@ export const B17: Def[] = [
     bugs: ([kind, al, be, ask]) => {
       const out: Bug[] = [];
       if (kind === 0) {
-        out.push({ id: "swapped", kind: "conceptual", competency: CURVE, says: `Upward and downward were swapped: y″ = 12(x${sg(-al)})(x${sg(-be)}) is positive outside the roots (concave upward) and negative between them.`, predict: openIv(al, be, ask !== 0) });
+        out.push({ id: "swapped", kind: "conceptual", competency: CURVE, says: `Upward and downward were swapped: y″ = 12${fx2(al, be)} is positive outside the roots (concave upward) and negative between them.`, predict: openIv(al, be, ask !== 0) });
         if (ask === 0) out.push({ id: "one-piece", kind: "procedural", competency: CURVE, says: "Only one piece was given; y″ > 0 on both outer pieces.", predict: `(${N(be)}, ∞)` });
       } else {
         out.push({ id: "swapped", kind: "conceptual", competency: CURVE, says: `Upward and downward were swapped: y″ = 6(x${sg(-al)}) is positive to the right of x = ${N(al)}, so the curve is concave upward there.`, predict: ask ? `(${N(al)}, ∞)` : `(−∞, ${N(al)})` });
@@ -1575,7 +1581,7 @@ export const B17: Def[] = [
     prompt: ([kind, p, q, y0]) => (kind === 0 ? `Solve the differential equation dy/dx = ${q === 0 ? `${p === 1 ? "" : p === -1 ? "−" : N(p)}xy` : p === 0 ? `${q === 1 ? "" : q === -1 ? "−" : N(q)}y` : `(${pp([[p, 1], [q, 0]])})y`}, given that y = ${y0} when x = 0. Write y in terms of x.` : `Solve the differential equation dy/dx = ${p === 1 ? "" : p === -1 ? "−" : N(p)}y/x, x > 0, given that y = ${y0} when x = 1. Write y in terms of x.`),
     solve: ([kind, p, q, y0]) => {
       const ans = sepAnswer(kind, p, q, y0);
-      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = (${pa([[p, 1], [q, 0]])}) dx` : `dy/y = ${N(p)} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `log y = ${sepExpo(p, q)} + C` : `log y = ${N(p)} log x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
+      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = ${br(pp([[p, 1], [q, 0]]))} dx` : `dy/y = ${N(p)} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `log y = ${sepExpo(p, q)} + C` : `log y = ${N(p)} log x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
     },
     // independent: a Runge–Kutta solution of the equation from the initial condition
     validate: ([kind, p, q, y0], v) => (kind === 0 ? solvesIvp(v, (x, y) => (p * x + q) * y, 0, y0, [0.5, 1.2, 1.9]) : solvesIvp(v, (x, y) => (p * y) / x, 1, y0, [0.5, 1.6, 2.3])),
@@ -1592,10 +1598,10 @@ export const B17: Def[] = [
       }
       return out;
     },
-    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqsep")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqsep")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "separate" ? `Separate the variables: ${s.value}` : s.id === "integrate" ? `Integrate both sides: ${s.value}` : `Use y = ${s.inputs[0]} at the starting point to find the constant: y = ${s.value}`),
-    word: ([kind, p, q, y0]) => (kind === 0 ? `A quantity y changes so that its rate of change dy/dx equals (${pp([[p, 1], [q, 0]])}) times y, and y = ${y0} when x = 0. Find y as an expression in x.` : `For x > 0, a quantity y changes so that dy/dx = ${N(p)}y/x, and y = ${y0} when x = 1. Find y as an expression in x.`),
+    word: ([kind, p, q, y0]) => (kind === 0 ? `A quantity y changes so that its rate of change dy/dx equals ${br(pp([[p, 1], [q, 0]]))} times y, and y = ${y0} when x = 0. Find y as an expression in x.` : `For x > 0, a quantity y changes so that dy/dx = ${N(p)}y/x, and y = ${y0} when x = 1. Find y as an expression in x.`),
     domain: [[0, 1], [-4, 4], [-3, 3], [1, 5]],
     cap: 300,
     difficulty: ([kind, p, q]) => (kind === 1 ? 1 : p === 0 || q === 0 ? 2 : 3),
@@ -1669,7 +1675,7 @@ export const B17: Def[] = [
       out.push({ id: "q-not-multiplied", kind: "procedural", competency: DE, says: `The right side was integrated without multiplying it by the integrating factor ${k === 1 ? "x" : `x${sup(k)}`}: y·(IF) = ∫ Q·(IF) dx.`, predict: pp([[m / (n + 1), n + 1 - k], [y1 - m / (n + 1), -k]]) });
       return out;
     },
-    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqlinde")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqlinde")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "if" ? `Integrating factor: e^(∫${s.inputs[0]}/x dx) = ${s.value}` : s.id === "integrate" ? `Multiply through and integrate: ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[1, 3], [1, 6], [0, 3], [-3, 4]],
@@ -1711,7 +1717,7 @@ export const B17: Def[] = [
       } else out.push({ id: "two-lost", kind: "procedural", competency: INDEF, says: "∫ v dv = v²/2; the factor 2 was lost when solving for v².", predict: `x√(${k === 1 ? "" : k}log x + ${c * c})` });
       return out;
     },
-    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqhom")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqhom")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "substitute" ? `Put y = vx, dy/dx = v + x dv/dx: ${s.value}` : s.id === "separate" ? `Separate and integrate ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[0, 2], [1, 4], [1, 4], [-3, 6]],

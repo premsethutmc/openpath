@@ -274,7 +274,7 @@ const D_DOM: [number, number][] = [[0, 4], [-6, 6], [-12, 12]];
 const domOk = (p: number[]) => inDom(p, D_DOM) && (p[0] === 0 ? p[1] !== 0 : p[1] < p[2] && p[2] <= 6);
 function domText([t, a, b]: number[]) {
   const q = poly([1, -(a + b), a * b]);
-  return t === 0 ? `√(${lin(a, b)})` : t === 1 ? `1/(${q})` : t === 2 ? `√(${q})` : t === 3 ? `1/√(${q})` : `√(${poly([-1, a + b, -a * b])})`;
+  return t === 0 ? (lin(a, b) === "x" ? "√x" : `√(${lin(a, b)})`) : t === 1 ? `1/(${q})` : t === 2 ? `√(${q})` : t === 3 ? `1/√(${q})` : `√(${poly([-1, a + b, -a * b])})`;
 }
 function domAnswer(t: number, a: number, b: number): string {
   if (t === 0) {
@@ -1541,7 +1541,7 @@ export const B15: Def[] = [
     prompt: ([a, b, n, r]) => `Find the coefficient of ${xp(r)} in the expansion of (${lin(a, b)})${sup(n)}.`,
     solve: ([a, b, n, r]) => ({
       steps: [
-        { id: "term", op: "write", competency: BIN, inputs: [n, r], value: `${sup(n)}C${sub(r)} (${lin(a, 0)})${sup(r)} (${n_(b)})${sup(n - r)}` },
+        { id: "term", op: "write", competency: BIN, inputs: [n, r], value: `${sup(n)}C${sub(r)} ${a === 1 ? "x" : `(${lin(a, 0)})`}${sup(r)} (${n_(b)})${sup(n - r)}` },
         { id: "choose", op: "choose", competency: PERM, inputs: [n, r], value: choose(n, r) },
         { id: "powers", op: "evaluate", competency: EXPN, inputs: [a, r, b, n - r], value: a ** r * b ** (n - r) },
         { id: "coefficient", op: "multiply", competency: BIN, inputs: [choose(n, r), a ** r * b ** (n - r)], value: bco(a, b, n, r) },
@@ -1555,7 +1555,7 @@ export const B15: Def[] = [
       return v === c[r];
     },
     bugs: ([a, b, n, r]) => [
-      { id: "powers-left-out", kind: "conceptual", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was given; the term also carries (${lin(a, 0)})${sup(r)} and (${n_(b)})${sup(n - r)}, so their powers are part of the coefficient.`, predict: choose(n, r) },
+      { id: "powers-left-out", kind: "conceptual", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was given; the term also carries ${a === 1 ? "x" : `(${lin(a, 0)})`}${sup(r)} and (${n_(b)})${sup(n - r)}, so their powers are part of the coefficient.`, predict: choose(n, r) },
       { id: "general-term-index", kind: "procedural", competency: BIN, says: `The general term was used with the wrong index: the term with ${xp(r)} uses ${sup(n)}C${sub(r)} and the powers ${r} and ${n - r}.`, predict: bco(a, b, n, r - 1) },
       ...(bco(a, b, n, r) < 0 ? [{ id: "sign-lost", kind: "procedural", competency: EXPN, says: `The minus sign was dropped; ${([[a, r], [b, n - r]] as [number, number][]).filter(([v, e]) => v < 0 && e % 2).map(([v, e]) => `(${n_(v)})${sup(e)}`).join(" and ")} is negative (a negative number to an odd power), so the coefficient is negative.`, predict: Math.abs(bco(a, b, n, r)) } as Bug] : []),
       ...(Math.abs(a) !== 1 ? [{ id: "a-power-forgotten", kind: "procedural", competency: EXPN, says: `The ${n_(a)} in (${lin(a, 0)})${sup(r)} was not raised to the power ${r}.`, predict: choose(n, r) * a * b ** (n - r) } as Bug] : []),

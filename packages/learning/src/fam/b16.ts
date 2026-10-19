@@ -547,7 +547,7 @@ export const B16: Def[] = [
       return [surd(4 * k, m), String(2 * a * b), surd(3 * k, m), String(2 * (a + b)), String(a * b)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "product" ? `(${s.inputs[0]})(${s.inputs[1]}) = ${s.value}: x cancels, so the product is fixed` : s.id === "gm" ? `GM = √${s.inputs[0]} = ${s.value}` : `AM ≥ GM: the sum ≥ 2 × ${s.inputs[1]} = ${s.value}, with equality when the two terms are equal`),
+    explain: (s) => (s.id === "product" ? `${s.inputs[0] === "x" ? "x" : `(${s.inputs[0]})`}(${s.inputs[1]}) = ${s.value}: x cancels, so the product is fixed` : s.id === "gm" ? `GM = √${s.inputs[0]} = ${s.value}` : `AM ≥ GM: the sum ≥ 2 × ${s.inputs[1]} = ${s.value}, with equality when the two terms are equal`),
     domain: [[1, 12], [1, 30]],
     cap: 360,
     difficulty: ([a, b]) => (sqfree(a * b)[1] === 1 ? 1 : a === 1 ? 2 : 3),
