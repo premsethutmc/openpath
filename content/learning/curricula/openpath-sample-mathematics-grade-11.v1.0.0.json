@@ -1,0 +1,193 @@
+{
+ "id": "openpath-sample-mathematics-grade-11",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 11,
+ "title": "OpenPath Sample Mathematics, Grade 11",
+ "hash": "2e0188d1",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 11",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-sets-and-functions",
+     "number": 1,
+     "title": "Sets and functions",
+     "pages": "1–22",
+     "outcomes": [
+      {
+       "id": "ch1-sets-and-functions.o1",
+       "text": "Use set operations",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.sets",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch1-sets-and-functions.o2",
+       "text": "Identify domain, range and functions",
+       "pages": "12",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.functions",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "9"
+      }
+     ]
+    },
+    {
+     "id": "ch2-straight-lines",
+     "number": 2,
+     "title": "Straight lines",
+     "pages": "23–40",
+     "outcomes": [
+      {
+       "id": "ch2-straight-lines.o1",
+       "text": "Use straight-line equations",
+       "pages": "24",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.straight-lines",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "33"
+      }
+     ]
+    },
+    {
+     "id": "ch3-linear-inequalities",
+     "number": 3,
+     "title": "Linear inequalities",
+     "pages": "41–52",
+     "outcomes": [
+      {
+       "id": "ch3-linear-inequalities.o1",
+       "text": "Solve linear inequalities",
+       "pages": "42",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.inequalities",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-systems",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.linear-equations",
+          "score": 0.347,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "48"
+      }
+     ]
+    },
+    {
+     "id": "ch4-limits-and-derivatives",
+     "number": 4,
+     "title": "Limits and derivatives",
+     "pages": "53–74",
+     "outcomes": [
+      {
+       "id": "ch4-limits-and-derivatives.o1",
+       "text": "Evaluate elementary limits",
+       "pages": "54",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.limits",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch4-limits-and-derivatives.o2",
+       "text": "Differentiate from first principles",
+       "pages": "64",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.derivatives",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 4.1",
+       "pages": "61"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

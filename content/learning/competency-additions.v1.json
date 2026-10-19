@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "provisional",
+  "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed.",
+  "competencies": [
+    { "id": "MLY.mult.facts-2-5-10", "name": "Multiplication facts for 2, 5 and 10", "partOf": "MATH.number.multiplication-tables", "gradeRange": [2, 3], "objectives": ["Recall products with 2, 5 and 10 quickly"] },
+    { "id": "MLY.mult.facts-3-4", "name": "Multiplication facts for 3 and 4", "partOf": "MATH.number.multiplication-tables", "gradeRange": [3, 3], "objectives": ["Recall or quickly derive products with 3 and 4"] },
+    { "id": "MLY.mult.facts-6-9", "name": "Multiplication facts for 6, 7, 8 and 9", "partOf": "MATH.number.multiplication-tables", "gradeRange": [3, 4], "objectives": ["Recall or derive products such as 7 × 8"] },
+    { "id": "MLY.mult.derive", "name": "Derive an unknown fact from known facts", "partOf": "MATH.number.multiplication-tables", "gradeRange": [3, 4], "objectives": ["Split a factor, double, or adjust a near fact to find a product"] },
+    { "id": "MLY.frac.same-whole", "name": "Equal parts of the same whole", "partOf": "MATH.number.equivalent-fractions", "gradeRange": [3, 4], "objectives": ["See that 1/2 and 2/4 of the same strip cover the same length"] },
+    { "id": "MLY.frac.scale", "name": "Multiply numerator and denominator by the same number", "partOf": "MATH.number.equivalent-fractions", "gradeRange": [4, 4], "objectives": ["Make an equivalent fraction by scaling both parts"] },
+    { "id": "MLY.frac.check-equal", "name": "Decide whether two fractions are equal", "partOf": "MATH.number.equivalent-fractions", "gradeRange": [4, 5], "objectives": ["Compare by a common denominator or by scaling"] },
+    { "id": "MLY.calc.area-constant", "name": "Area under a constant function is a rectangle", "partOf": "MATH.calculus.area-integrals", "gradeRange": [11, 12], "objectives": ["Read the integral of a constant as width × height"] }
+  ],
+  "supports": [
+    { "competency": "MATH.calculus.area-integrals", "supports": ["MATH.calculus.definite-integrals", "MATH.measurement.rectangle-area", "MATH.coordinate.cartesian"], "note": "An area integral of a constant is a rectangle: definite integral as area, width × height, reading the graph." },
+    { "competency": "MATH.calculus.definite-integrals", "supports": ["MATH.measurement.rectangle-area", "MATH.algebra.functions"] },
+    { "competency": "MATH.measurement.rectangle-area", "supports": ["MATH.number.multiplication-tables", "MATH.measurement.area-squares"] },
+    { "competency": "MATH.number.multiplication-tables", "supports": ["MATH.number.equal-groups", "MATH.number.addition"] },
+    { "competency": "MATH.number.equivalent-fractions", "supports": ["MATH.number.fraction-models", "MATH.number.multiplication-tables"] },
+    { "competency": "MATH.number.fraction-add", "supports": ["MATH.number.equivalent-fractions", "MATH.number.fraction-add-like"] },
+    { "competency": "MATH.algebra.quadratics", "supports": ["MATH.algebra.identities", "MATH.algebra.factorisation", "MATH.number.square-roots"] },
+    { "competency": "MATH.number.equal-groups", "supports": ["MATH.number.addition"] }
+  ]
+}

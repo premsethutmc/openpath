@@ -1,0 +1,105 @@
+{
+ "version": "1.0.0",
+ "status": "provisional",
+ "problems": [
+  {
+   "id": "area-parabola-line",
+   "title": "Region between a parabola and a line",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "style": "In the style of a JEE Advanced area question. Original, not a past paper.",
+   "validation": "Answers computed and checked in packages/learning/src/content.test.ts; not educator-reviewed.",
+   "competencies": [
+    "MATH.algebra.variables",
+    "MATH.coordinate.cartesian",
+    "MATH.algebra.quadratics",
+    "MATH.algebra.functions",
+    "MATH.algebra.inequalities",
+    "MATH.calculus.definite-integrals",
+    "MATH.calculus.area-integrals"
+   ],
+   "full": {
+    "id": "area-parabola-line.full",
+    "type": "fraction",
+    "prompt": "Find the area of the region {(x, y) : x² ≤ y ≤ x + 2}.",
+    "answer": "9/2",
+    "solution": "x² = x + 2 gives x = −1 and x = 2. Area = ∫ from −1 to 2 of (x + 2 − x²) dx = [x²/2 + 2x − x³/3] from −1 to 2 = 10/3 − (−7/6) = 9/2.",
+    "competencies": [
+     "MATH.algebra.quadratics",
+     "MATH.algebra.inequalities",
+     "MATH.calculus.definite-integrals",
+     "MATH.calculus.area-integrals"
+    ],
+    "minGrade": 11,
+    "readiness": [
+     "MATH.algebra.quadratics",
+     "MATH.calculus.definite-integrals"
+    ]
+   },
+   "fragments": [
+    {
+     "id": "area-parabola-line.g7",
+     "type": "integer",
+     "prompt": "On the line y = x + 2, what is y when x = 3?",
+     "answer": "5",
+     "solution": "y = 3 + 2 = 5.",
+     "competencies": [
+      "MATH.algebra.variables",
+      "MATH.coordinate.cartesian"
+     ],
+     "minGrade": 7,
+     "maxGrade": 7,
+     "readiness": []
+    },
+    {
+     "id": "area-parabola-line.g8",
+     "type": "set",
+     "prompt": "Try whole numbers x from −3 to 3. For which of them is x × x equal to x + 2? Enter both, separated by a comma.",
+     "answer": "-1,2",
+     "solution": "(−1) × (−1) = 1 = −1 + 2, and 2 × 2 = 4 = 2 + 2. No other whole number from −3 to 3 works.",
+     "competencies": [
+      "MATH.algebra.linear-equations",
+      "MATH.coordinate.cartesian"
+     ],
+     "minGrade": 8,
+     "maxGrade": 9,
+     "readiness": []
+    },
+    {
+     "id": "area-parabola-line.g10",
+     "type": "set",
+     "prompt": "Solve x² = x + 2. Enter both solutions, separated by a comma.",
+     "answer": "-1,2",
+     "solution": "x² − x − 2 = 0, (x − 2)(x + 1) = 0.",
+     "competencies": [
+      "MATH.algebra.quadratics"
+     ],
+     "minGrade": 10,
+     "readiness": []
+    },
+    {
+     "id": "area-parabola-line.g11",
+     "type": "choice",
+     "prompt": "Between x = −1 and x = 2, which graph is higher: y = x + 2 or y = x²? (Try x = 0.)",
+     "answer": "A",
+     "options": [
+      "y = x + 2",
+      "y = x²",
+      "They are equal everywhere there",
+      "It changes at x = 0"
+     ],
+     "solution": "At x = 0: x + 2 = 2 and x² = 0. The line is above the parabola between the crossing points.",
+     "competencies": [
+      "MATH.algebra.functions",
+      "MATH.algebra.inequalities"
+     ],
+     "minGrade": 11,
+     "readiness": [
+      "MATH.algebra.quadratics"
+     ]
+    }
+   ]
+  }
+ ]
+}
