@@ -60,6 +60,8 @@ def scrub_events(events: list[dict], src: dict) -> tuple[list[dict], int]:
             nxt = {**e, "question": question(e.get("question")), "response": "", "scrubbed": True}
         elif kind == "spell_session" and _same(e.get("source"), src) and isinstance(e.get("words"), list):
             nxt = {**e, "words": [name(w) for w in e["words"]], "scrubbed": True}
+        elif kind == "spell_learning" and _same(e.get("source"), src):
+            nxt = {**e, "word": name(e.get("word")), "response": "", "scrubbed": True}
         elif kind == "spell_answer" and _same(e.get("source"), src) and isinstance(e.get("word"), dict):
             nxt = {**e, "word": {**e["word"], "id": name(e["word"].get("id")), "text": ""}, "response": "", "scrubbed": True}
         if nxt != e:
@@ -91,6 +93,6 @@ def revives_deleted(event: dict, deleted: set[tuple[str, str]]) -> bool:
     if kind in ("book_review", "book_answer"):
         return ("book", event.get("book")) in deleted and not event.get("scrubbed")
     source = event.get("source")
-    if kind in ("spell_session", "spell_answer") and isinstance(source, dict):
+    if kind in ("spell_session", "spell_answer", "spell_learning") and isinstance(source, dict):
         return (source.get("type"), source.get("id")) in deleted and not event.get("scrubbed")
     return False

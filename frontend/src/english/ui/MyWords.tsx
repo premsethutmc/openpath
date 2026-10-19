@@ -9,7 +9,7 @@ import type { Learner } from "../logic/learner.ts";
 import { sourceProgress } from "../logic/spelling.ts";
 import { LIST_LIMITS, type ListWord, type Parsed, type WordList, listText, listWords, parseWords } from "../logic/wordlists.ts";
 
-export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: Learner; onPractise: (l: WordList) => void; onLeave: () => void; onChanged: () => void }) {
+export function MyWords({ learner, onPractise, onLeave, onChanged, learningMode = false }: { learner: Learner; learningMode?: boolean; onPractise: (l: WordList) => void; onLeave: () => void; onChanged: () => void }) {
   const [editing, setEditing] = useState<WordList | "new" | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   if (editing) return <ListEditor learner={learner} list={editing === "new" ? null : editing} onDone={() => (setEditing(null), onChanged())} />;
@@ -27,7 +27,7 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
       <h1 id="mywords-title" className="hero">
         My Words
       </h1>
-      <p className="sub">Type, paste or upload the words to practise. When the learner practises, each word is only spoken, never shown.</p>
+      <p className="sub">{learningMode ? "Type, paste or upload words. Children first study each spelling, then hide it and try recalling it." : "Type, paste or upload the words to practise. When the learner practises, each word is only spoken, never shown."}</p>
       <p className="small where-kept">{keptWhere(learner)}</p>
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         New word list

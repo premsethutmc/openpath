@@ -49,6 +49,7 @@ export function scrubEvents(events: readonly AppEvent[], src: ScrubSource): { ev
     else if (e.kind === "book_review" && book && e.book === src.id) next = { ...e, fingerprint: "", approved: [], scrubbed: true };
     else if (e.kind === "book_answer" && book && e.book === src.id) next = { ...e, question: question(e.question), response: "", scrubbed: true };
     else if (e.kind === "spell_session" && sameSource(e.source, src)) next = { ...e, words: e.words.map(name), scrubbed: true };
+    else if (e.kind === "spell_learning" && sameSource(e.source, src)) next={...e,word:name(e.word),response:"",scrubbed:true};
     else if (e.kind === "spell_answer" && sameSource(e.source, src)) next = { ...e, word: { ...e.word, id: name(e.word.id), text: "" }, response: "", scrubbed: true };
     if (next !== e && JSON.stringify(next) !== JSON.stringify(e)) changed++;
     return next === e || JSON.stringify(next) === JSON.stringify(e) ? e : next;

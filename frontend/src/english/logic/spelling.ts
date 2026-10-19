@@ -144,6 +144,8 @@ export function spellingState(events: readonly AppEvent[]): SpellingState {
       if (!w) st.words.set(key, (w = { key, id: e.word.id, text: e.word.text, source: e.source, level: e.word.level, answers: [], box: null, due: null, reviewed: false }));
       w.answers.push(e);
       w.text = e.word.text;
+      // A newly studied or hinted spelling cannot pass a delayed review or raise the practice level.
+      if(e.assisted){w.box=0;w.due=e.at;w.reviewed=false;continue;}
       // review: wrong puts it on the list (due next session); right when due moves it on; right at the end takes it off
       if (!e.correct) {
         w.box = 0;

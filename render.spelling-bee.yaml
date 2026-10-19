@@ -1,0 +1,26 @@
+# Private family preview, not a public learner launch. No API/database: lists stay on each browser.
+# Separate service and branch; never replace an existing OpenPath service.
+services:
+  - type: web
+    name: openpath-spelling-bee-private
+    runtime: node
+    plan: free
+    region: singapore
+    branch: feat/spelling-bee-standalone-learning
+    autoDeployTrigger: 'off'
+    buildCommand: cd frontend && npm ci && node scripts/build-spelling-bee.mjs
+    startCommand: node frontend/scripts/demo-server.mjs
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: '22.18.0'
+      - key: DEMO_TITLE
+        value: OpenPath Spelling Bee
+      - key: DEMO_DIST
+        value: frontend/dist-english-bee
+      - key: DEMO_PASSWORD_HASH
+        sync: false
+      - key: DEMO_SESSION_SECRET
+        generateValue: true
+      - key: DEMO_SESSION_HOURS
+        value: '168'

@@ -22,3 +22,7 @@ frontend/dist-english-pilot-approved/
 
 # Tamil pilot build
 frontend/dist-tamil/
+
+# Standalone Spelling Bee build
+frontend/dist-english-bee/
+frontend/dist-english-regression/

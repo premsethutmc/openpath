@@ -87,7 +87,7 @@ export function configFromEnv(env = process.env) {
   if (!(hours > 0 && hours <= 24 * 30)) problems.push("DEMO_SESSION_HOURS must be between 0 and 720");
   const dist = env.DEMO_DIST ? env.DEMO_DIST : fileURLToPath(new URL(`../${"dist-english"}`, import.meta.url));
   if (!existsSync(join(dist, "index.html"))) problems.push(`no build at ${dist}: run npm run english:build first`);
-  return { problems, config: { hash, hashText: env.DEMO_PASSWORD_HASH ?? "", secret, sessionMs: hours * 3_600_000, dist, allowHttp: env.DEMO_ALLOW_HTTP === "1" } };
+  return { problems, config: { title: env.DEMO_TITLE || "OpenPath English", hash, hashText: env.DEMO_PASSWORD_HASH ?? "", secret, sessionMs: hours * 3_600_000, dist, allowHttp: env.DEMO_ALLOW_HTTP === "1" } };
 }
 
 /**
@@ -216,12 +216,12 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
           res.writeHead(303, { ...base(), Location: "/" });
           return res.end();
         }
-        return page(res, 200, loginPage(url.searchParams.has("out") ? "You are logged out." : ""));
+        return page(res, 200, loginPage(url.searchParams.has("out") ? "You are logged out." : "", config.title));
       }
       if (req.method !== "POST") return text(res, 405, "Method not allowed", { Allow: "GET, POST" });
       if (!sameOrigin(req)) return text(res, 403, "Forbidden");
       const who = client(req);
-      const tooMany = () => page(res, 429, loginPage("Too many attempts. Wait 15 minutes and try again."), { "Retry-After": String(Math.ceil(limits.windowMs / 1000)) });
+      const tooMany = () => page(res, 429, loginPage("Too many attempts. Wait 15 minutes and try again.", config.title), { "Retry-After": String(Math.ceil(limits.windowMs / 1000)) });
       if (blocked(who) || totalInFlight >= (limits.queue ?? 8)) return tooMany();
       // reserve the attempt now, before anything is awaited
       inFlight.set(who, (inFlight.get(who) ?? 0) + 1);
@@ -247,7 +247,7 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       if (!ok) {
         fail(who);
         if (res.destroyed) return;
-        return page(res, 401, loginPage("That password is not right."));
+        return page(res, 401, loginPage("That password is not right.", config.title));
       }
       failures.delete(who);
       const s = issue();
@@ -348,10 +348,10 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">"
 const shell = (title, body) => `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>${title}</title>
 <style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#eef2f7;color:#1c2333;font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}main{width:100%;max-width:380px;background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(31,58,147,.08)}h1{font-size:1.3rem;margin:0 0 4px;color:#1f3a93}p{margin:8px 0}.small{font-size:.85rem;color:#5a6478}label{display:block;font-weight:600;margin:16px 0 6px}input{width:100%;font:inherit;padding:12px;border:2px solid #c9d3e6;border-radius:10px}input:focus{outline:none;border-color:#1f3a93}button{width:100%;min-height:48px;margin-top:16px;font:inherit;font-weight:600;border:0;border-radius:10px;background:#1f3a93;color:#fff}button.secondary{background:#fff;color:#1f3a93;border:2px solid #1f3a93}.msg{background:#fff4d6;border-radius:8px;padding:8px 12px}a{color:#1f3a93}</style></head><body><main>${body}</main></body></html>`;
 
-function loginPage(message) {
+function loginPage(message, title = "OpenPath English") {
   return shell(
     "OpenPath demo: log in",
-    `<h1>OpenPath English</h1><p class="small">Private product demo for the owner. Draft content, synthetic learners only. Not for pupils.</p>
+    `<h1>${esc(title)}</h1><p class="small">Private product demo for the owner. Draft content, synthetic learners only. Not for pupils.</p>
 ${message ? `<p class="msg" role="status">${esc(message)}</p>` : ""}
 <form method="post" action="/login"><label for="password">Demo password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus maxlength="200"><button type="submit">Log in</button></form>`,
   );

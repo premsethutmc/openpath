@@ -275,6 +275,7 @@ export interface SpellSessionEvent {
   /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
   level?: number;
   delivery: "device_voice" | "adult_reader";
+  learningMode?: "learn-recall@1";
   /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
   scrubbed?: boolean;
 }
@@ -292,8 +293,14 @@ export interface SpellAnswerEvent {
   plays: number;
   /** Asked again because it was misspelt before (a review), not for the first time. */
   review: boolean;
+  /** Shown the spelling in this session: practice, never an independent review pass. */
+  assisted?: boolean;
   /** Its source was deleted: the word and the answer are removed, right/wrong kept (logic/scrub.ts). */
   scrubbed?: boolean;
+}
+export interface SpellLearningEvent {
+  kind: "spell_learning"; id:string; at:string; session:string; source:SpellSource;
+  word:string; action:"study"|"recall"|"hint"|"draft"; response?:string; scrubbed?:boolean;
 }
 export interface SpellEndEvent {
   kind: "spell_end";
@@ -362,7 +369,7 @@ export interface BookDeleteEvent {
   at: string;
   book: string;
 }
-export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent | BookEvent | BookReviewEvent | BookAnswerEvent | BookDeleteEvent;
+export type SpellEvent = SpellLearningEvent | SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent | BookEvent | BookReviewEvent | BookAnswerEvent | BookDeleteEvent;
 
 export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
@@ -371,9 +378,9 @@ const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke",
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "spell_learning", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
-const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end", "essay"]);
+const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end", "spell_learning", "essay"]);
 const ESSAY_RECORDS = new Set(["submission", "analysis", "diagnostic", "journey", "rewrite"]);
 
 /** Structural check of one event (used on import). Proposals and qualifications are not produced by this app. */
@@ -401,6 +408,9 @@ export function eventProblem(e: unknown): string | null {
     if (!r || typeof r !== "object" || !ESSAY_RECORDS.has(String(r.type))) return `event ${x.id} is an essay event without a known record`;
   }
   if (x.kind.startsWith("spell_") && x.kind !== "spell_end" && !["bank", "list", "book"].includes((x.source as { type?: string } | undefined)?.type ?? "")) return `event ${x.id} names no spelling source`;
+  if(x.kind==="spell_session" && x.learningMode!==undefined && x.learningMode!=="learn-recall@1")return `event ${x.id} has an unknown learning mode`;
+  if(x.kind==="spell_answer" && x.assisted!==undefined && typeof x.assisted!=="boolean")return `event ${x.id} has invalid assistance metadata`;
+  if (x.kind === "spell_learning" && (typeof x.word !== "string" || !["study","recall","hint","draft"].includes(String(x.action)) || (x.response !== undefined && (typeof x.response !== "string" || x.response.length > 100)))) return `event ${x.id} is an invalid learning action`;
   if (x.kind === "spell_answer" && (typeof (x.word as { id?: unknown } | undefined)?.id !== "string" || typeof x.correct !== "boolean" || typeof x.response !== "string")) return `event ${x.id} is a spelling answer without a word or result`;
   return null;
 }

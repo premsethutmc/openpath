@@ -44,7 +44,7 @@ from .scrub import SOURCES as SCRUB_SOURCES
 from .scrub import deleted_sources, revives_deleted, scrub_events
 
 # events that could bring a deleted list or book back, and the events that record a deletion
-REVIVING_KINDS = {"word_list", "spell_session", "spell_answer", "book", "book_review", "book_answer"}
+REVIVING_KINDS = {"word_list", "spell_session", "spell_answer", "spell_learning", "book", "book_review", "book_answer"}
 DELETE_KINDS = {"word_list_delete", "book_delete"}
 
 User = get_user_model()

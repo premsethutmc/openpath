@@ -82,7 +82,7 @@ await rm(out, { recursive: true, force: true });
 await mkdir(`${out}/assets`, { recursive: true });
 await esbuild.build({
   absWorkingDir: root,
-  entryPoints: ["src/english/ui/main.tsx"],
+  entryPoints: [process.argv.includes("--spelling-only") ? "src/english/ui/spelling-only.tsx" : "src/english/ui/main.tsx"],
   bundle: true,
   format: "esm",
   target: ["es2022", "safari15"],

@@ -109,6 +109,8 @@ def redact_parent_content(body: dict) -> dict:
     if isinstance(source, dict) and source.get("type") in PARENT_SOURCES:
         # a parent's words are their own ids (the word in lower case): replace each with a stable pseudonym, so the
         # same word is still the same word, without saying which word it is
+        if kind == "spell_learning":
+            return {**body, "word": _pseudonym(body.get("word")), "response": "", "redacted": "learning on a parent's own material"}
         if kind == "spell_answer":
             word = body.get("word") if isinstance(body.get("word"), dict) else {}
             return {**body, "word": {**word, "id": _pseudonym(word.get("id")), "text": ""}, "response": "", "redacted": "a word from a parent's own material"}

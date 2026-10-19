@@ -24,6 +24,8 @@ import { ProgressView } from "./ProgressView.tsx";
 import { Session } from "./Session.tsx";
 import { detectSpeech } from "./speech.ts";
 import { SpellingIntro } from "./SpellingIntro.tsx";
+import {SpellingHome,SpellingWelcome,SpellingSetup} from "./SpellingHome.tsx";
+import {SpellingLearning} from "./SpellingLearning.tsx";
 import { SpellingBee } from "./SpellingBee.tsx";
 import { MyWords } from "./MyWords.tsx";
 import { BookQuestions, MyBooks } from "./MyBooks.tsx";
@@ -80,7 +82,7 @@ const resetLink = () => {
   return q.get("uid") && q.get("token") ? { uid: q.get("uid")!, token: q.get("token")! } : null;
 };
 
-export function App() {
+export function App({spellingOnly=false}:{spellingOnly?:boolean}={}) {
   const content = useMemo<AppContent>(() => loadContent(), []);
   const api = useMemo(() => new Api(), []);
   const [screen, setScreen] = useState<Screen>({ name: "loading" });
@@ -245,6 +247,7 @@ export function App() {
       </main>
     );
 
+  if(spellingOnly && screen.name==="welcome")return <SpellingWelcome accounts={accounts} onBegin={()=>accounts?setScreen({name:"auth",mode:"register"}):deviceRepo&&chooseRepo(deviceRepo,"device",false)} onLogin={()=>setScreen({name:"auth",mode:"login"})} onDevice={()=>{if(deviceRepo)void chooseRepo(deviceRepo,"device",false)}}/>;
   if (screen.name === "welcome")
     return (
       <Welcome
@@ -315,9 +318,10 @@ export function App() {
       </>
     );
 
+  const LearnerSetup=spellingOnly?SpellingSetup:AddLearner;
   if (screen.name === "add")
     return (
-      <AddLearner
+      <LearnerSetup
         mode={mode}
         onCancel={() => (profiles.length || mode === "account" ? setScreen({ name: "pupils" }) : setScreen({ name: "welcome" }))}
         onCreate={async (name, by, band: LearnerBand, goal: LearnerGoal) => {
@@ -354,6 +358,7 @@ export function App() {
 
   if (screen.name === "spelling-intro") return <SpellingIntro learner={learner} voice={voice} step={screen.step} onStart={start} onBack={() => setScreen({ name: "app" })} onChanged={changed} />;
 
+  if(spellingOnly&&bee)return <SpellingLearning key={`${learner.profileId}:${bee.source.type}:${bee.source.id}`} learner={learner} source={bee.source} title={bee.title} onChanged={changed} onLeave={()=>{setBee(null);setInMyWords(false);changed();}}/>;
   if (bee)
     return (
       <SpellingBee
@@ -407,6 +412,7 @@ export function App() {
   if (inMyWords)
     return (
       <MyWords
+        learningMode={spellingOnly}
         learner={learner}
         onChanged={changed}
         onPractise={(l) => setBee({ source: { type: "list", id: l.id }, title: l.name, back: "mywords" })}
@@ -416,6 +422,35 @@ export function App() {
         }}
       />
     );
+
+  const parentSettings = (
+        <Me
+          learner={learner}
+          repo={repo}
+          voice={voice}
+          account={mode === "account" ? email : null}
+          onChanged={changed}
+          onSwitch={toPicker}
+          onOpen={(id) => openLearner(repo, id)}
+          onRemoved={toPicker}
+          onSignOut={signOut}
+          diagnostics={diagnostics}
+          onDeleteAccount={async (password) => {
+            await api.deleteAccount(password);
+            setSender(null);
+            store.set(MODE, null);
+            setEmail(null);
+            setLearner(null);
+            store.set(LAST, null);
+            setRepo(deviceRepo);
+            setProfiles(deviceRepo ? await deviceRepo.profiles() : []);
+            setMode("device");
+            setScreen({ name: "welcome" });
+          }}
+        />
+  );
+  if(spellingOnly&&tab==="me")return <><button className="link" onClick={()=>setTab("home")}>← Spelling Bee</button>{parentSettings}</>;
+  if(spellingOnly)return <SpellingHome onManage={()=>setTab("me")} learner={learner} account={mode==="account"} onWords={()=>setInMyWords(true)} onSwitch={()=>void toPicker()} onSignOut={mode==="account"?signOut:undefined} onStart={(source,title)=>setBee({source,title,back:"home"})}/>;
 
   if (inJourney || (inSession && learner.state.open?.event.type === "doubling_journey"))
     return (
@@ -479,32 +514,7 @@ export function App() {
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}
       {tab === "progress" && <ProgressView learner={learner} />}
-      {tab === "me" && (
-        <Me
-          learner={learner}
-          repo={repo}
-          voice={voice}
-          account={mode === "account" ? email : null}
-          onChanged={changed}
-          onSwitch={toPicker}
-          onOpen={(id) => openLearner(repo, id)}
-          onRemoved={toPicker}
-          onSignOut={signOut}
-          diagnostics={diagnostics}
-          onDeleteAccount={async (password) => {
-            await api.deleteAccount(password);
-            setSender(null);
-            store.set(MODE, null);
-            setEmail(null);
-            setLearner(null);
-            store.set(LAST, null);
-            setRepo(deviceRepo);
-            setProfiles(deviceRepo ? await deviceRepo.profiles() : []);
-            setMode("device");
-            setScreen({ name: "welcome" });
-          }}
-        />
-      )}
+      {tab === "me" && parentSettings}
       <nav className="nav" aria-label="Sections">
         {TABS.map((t) => (
           <button key={t.id} type="button" aria-current={tab === t.id ? "page" : undefined} onClick={() => (setTab(t.id), scrollTo(0, 0))}>

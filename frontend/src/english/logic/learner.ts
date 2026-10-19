@@ -315,13 +315,14 @@ export class Learner {
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
-  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice"): Promise<void> {
+  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice", learning=false): Promise<void> {
+    if(learning && this.content.gate)throw new PilotRefusal("unreviewed spelling learning mode");
     this.guardSpelling(source);
     const open = this.spelling().open;
     if (open) await this.stopSpelling();
     const plan = planSession(this.spelling(), this.spellingWords(source), this.clock());
     if (!plan.ids.length) throw new Error("there are no words to practise in this list");
-    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery });
+    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: learning ? plan.ids.slice(0,5) : plan.ids, ...(learning?{learningMode:"learn-recall@1" as const}:{}), ...(plan.level !== undefined ? { level: plan.level } : {}), delivery });
   }
 
   /** The open spelling session: the word to ask next (null when it is done) and the counts so far. */
@@ -333,6 +334,14 @@ export class Learner {
     return { source: open.event.source, session: open.event.session, delivery: open.event.delivery, level: open.event.level, word, position: v.position, total: v.total, right: v.right, wrong: v.wrong };
   }
 
+  /** Instructional receipts only: never sent to the estimator. Saved before a spelling is revealed. */
+  async learnSpelling(action:"study"|"recall"|"hint"|"draft", response?:string):Promise<void>{
+    const cur=this.spellingSession();
+    if(!cur?.word || this.spelling().open?.event.learningMode!=="learn-recall@1")throw new Error("No learning word is open");
+    this.guardSpelling(cur.source);
+    await this.add({kind:"spell_learning",id:this.nextId(),at:this.clock(),session:cur.session,source:cur.source,word:cur.word.id,action,...(action==="draft"?{response:(response??"").slice(0,100)}:{})});
+  }
+
   /** Answer the current word. Returns whether it was right and the word (to show its spelling now, after the answer). */
   async answerSpelling(response: string, plays: number): Promise<{ correct: boolean; word: SpellWord }> {
     const cur = this.spellingSession();
@@ -341,7 +350,9 @@ export class Learner {
     const w = cur.word;
     const before = this.spelling().words.get(wordKey(w.source, w.id));
     const correct = checkSpelling(w, response);
-    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null });
+    const learning=this.spelling().open?.event.learningMode=== "learn-recall@1";
+    const assisted=learning && this.events.some(e=>e.kind==="spell_learning" && e.session===cur.session && e.word===w.id && (e.action==="study" || e.action==="hint"));
+    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, ...(learning?{assisted}:{}), plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null });
     // the session ends by itself after its last word
     const after = this.spellingSession();
     if (after && !after.word) await this.add({ kind: "spell_end", id: this.nextId(), at: this.clock(), session: cur.session, reason: "finished" });
