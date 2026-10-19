@@ -2050,7 +2050,7 @@ const asarg: Def = {
       B("basic-angle-only", "conceptual", POLAR, `The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.`, piStr(basic)),
       B("arctan-quadrant", "conceptual", POLAR, "tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.", x < 0 ? piStr(y > 0 ? rsub(k, R_(1)) : y < 0 ? radd(k, R_(1)) : R_(0)) : null),
       B("not-principal", "procedural", POLAR, "The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.", k[0] < 0 ? piStr(radd(k, R_(2))) : null),
-      B("degrees-given", "procedural", POLAR, "The argument was given in degrees; in radians 180° is π (so 45° is π/4).", String(Math.round(rv(k) * 180))),
+      B("degrees-given", "procedural", POLAR, "The argument was given in degrees; in radians 180° is π (so 45° is π/4).", mi(Math.round(rv(k) * 180))),
     ];
   },
   distractors: ([j]) => {

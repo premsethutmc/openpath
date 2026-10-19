@@ -211,9 +211,11 @@ const logdParts = ([a, b, k]: number[]) => {
 
 const LH_D: [number, number][] = [[0, 4], [1, 6], [1, 6]];
 const lhKeep = (p: number[]) => inDom(p, LH_D) && (p[0] !== 2 || (p[1] >= 2 && p[2] >= 2 && p[1] !== p[2])) && (p[0] !== 3 || p[1] * p[2] <= 12);
+/** log(a/b) (natural logarithm, written "log" as in the Grade 11–12 books), simplest form: log 3, −log 2, log(3/2). */
 const lnFrac = (a: number, b: number) => {
   const g = gcd(a, b);
-  return b / g === 1 ? `ln(${a / g})` : `ln(${a / g}/${b / g})`;
+  const [n, d] = [a / g, b / g];
+  return d === 1 ? `log ${n}` : n === 1 ? `−log ${d}` : `log(${n}/${d})`;
 };
 const ePow = (n: number) => (n === 1 ? "e" : `e${sup(n)}`);
 const lhExpr = ([f, a, b]: number[]) =>
@@ -237,7 +239,8 @@ const lhAnswer = ([f, a, b]: number[]): string => [nf(a / b), nf((a * a) / (2 * 
 // ---------------------------------------------------------------- linear approximation
 
 const LIN_D: [number, number][] = [[0, 1], [2, 10], [-9, 9]];
-const linKeep = (p: number[]) => inDom(p, LIN_D) && p[2] !== 0 && (p[0] === 0 ? Math.abs(p[2]) <= Math.min(p[1], 5) : p[1] <= 6 && 4 * Math.abs(p[2]) <= p[1] ** 3);
+/** The change is small next to the known value (|d| at most a quarter of a² or a³), so the tangent line is a fair estimate. */
+const linKeep = (p: number[]) => inDom(p, LIN_D) && p[2] !== 0 && (p[0] === 0 ? Math.abs(p[2]) <= 5 && 4 * Math.abs(p[2]) <= p[1] ** 2 : p[1] <= 6 && 4 * Math.abs(p[2]) <= p[1] ** 3);
 const linAns = ([f, a, d]: number[]) => (f === 0 ? a + d / (2 * a) : a + d / (3 * a * a));
 const ERR_D: [number, number][] = [[0, 2], [2, 20], [1, 5], [0, 1]];
 const errN = (s: number) => (s === 1 ? 3 : 2);
@@ -324,7 +327,16 @@ const mvlParts = ([t, k, b]: number[]) => {
     { expr: `(x³ + ${K3}y³)/(x + ${coef(k)}y)`, at: [-k * b, b], ans: 3 * k * k * b * b, g: (x: number, y: number) => (x ** 3 + k ** 3 * y ** 3) / (x + k * y) },
   ][t];
 };
-const MVLX_D: [number, number][] = [[0, 3], [0, 3], [1, 4], [1, 4]];
+const MVLX_D: [number, number][] = [[0, 3], [0, 3], [1, 4], [1, 4], [0, 1]];
+/** The function: k xᵖ yᵠ/(x² + c y²) (s = 0), or (x² + c y² + k xᵖ yᵠ)/(x² + c y²) = 1 + k xᵖ yᵠ/(x² + c y²) (s = 1). */
+const mvlxText = ([p, q, k, c, s]: number[]) => {
+  const mono = `${pw("x", p)}${pw("y", q)}`;
+  if (!s) return `${coef(k)}${mono}/(x² + ${coef(c)}y²)`;
+  const terms = new Map<string, number>([["x²", 1], ["y²", c]]);
+  terms.set(mono, (terms.get(mono) ?? 0) + k);
+  return `(${sum([...terms].map(([m, v]) => [v, m] as [number, string]))})/(x² + ${coef(c)}y²)`;
+};
+const mvlxG = ([p, q, k, c, s]: number[]) => (x: number, y: number) => (s ? x * x + c * y * y + k * x ** p * y ** q : k * x ** p * y ** q) / (x * x + c * y * y);
 const mvlxKeep = (p: number[]) => inDom(p, MVLX_D) && p[0] + p[1] >= 1;
 const MVLX_CHOICES = ["The limit exists and equals 0", "The limit exists and is not 0", "The limit does not exist"];
 
@@ -468,14 +480,15 @@ const shifted = (v: string, c: number) => (c === 0 ? v : `(${sum([[1, v], [-c, "
 const paraEq = ([o, sg, N, h, k]: number[]) => {
   const s = sg ? -N : N;
   const [sqV, sqC, lV, lC] = o === 0 ? ["y", k, "x", h] : ["x", h, "y", k];
-  return `${sqC === 0 ? `${sqV}²` : `${shifted(sqV, sqC)}²`} = ${coef(s)}${shifted(lV, lC)}`;
+  const lin = s === 1 && lC !== 0 ? sum([[1, lV], [-lC, ""]]) : `${coef(s)}${shifted(lV, lC)}`;
+  return `${sqC === 0 ? `${sqV}²` : `${shifted(sqV, sqC)}²`} = ${lin}`;
 };
 const paraFocus = ([o, sg, N, h, k]: number[]): [number, number] => {
   const s = sg ? -N : N;
   return o === 0 ? [h + s / 4, k] : [h, k + s / 4];
 };
 const ECC_D: [number, number][] = [[0, 1], [1, 6], [1, 6], [0, 1]];
-const eccKeep = (p: number[]) => inDom(p, ECC_D) && (p[0] === 1 || p[1] !== p[2]);
+const eccKeep = (p: number[]) => inDom(p, ECC_D) && (p[0] === 1 || p[1] !== p[2]) && !(p[3] === 1 && p[1] === 1 && p[2] === 1);
 const eccEq = ([kind, a, b, s]: number[]) => {
   const op = kind ? "−" : "+";
   if (s === 0) return `${a === 1 ? "x²" : `x²/${a * a}`} ${op} ${b === 1 ? "y²" : `y²/${b * b}`} = 1`;
@@ -682,12 +695,12 @@ export const B18: Def[] = [
     // [f, a, b]: five standard forms, 0/0 and 1^∞
     parse: none,
     reject: (p) => (lhKeep(p) ? null : "One of five standard indeterminate forms with small whole a and b."),
-    prompt: (p) => `Evaluate lim (x → 0) of ${lhExpr(p)}. Give the exact value.`,
+    prompt: (p) => `Evaluate lim (x → 0) of ${lhExpr(p)}. Give the exact value${p[0] === 2 ? " (log is the natural logarithm)" : ""}.`,
     solve: (p) => {
       const [f, a, b] = p;
       const ans = lhAnswer(p);
       const steps: Step[] = [st("form", "evaluate", LIM, [lhExpr(p)], f === 3 ? "1^∞" : "0/0")];
-      if (f === 3) steps.push(st("log", "take logarithms", LOG, [a, b], `ln L = lim ${b} ln(1 + ${ax(a)})/x = ${a * b}`));
+      if (f === 3) steps.push(st("log", "take logarithms", LOG, [a, b], `log L = lim ${b} log(1 + ${ax(a)})/x = ${a * b}`));
       else steps.push(st("rule", "differentiate", LH, [f, a, b], ans));
       steps.push(st("value", "evaluate", LH, [], ans));
       return { steps, answer: ans };
@@ -709,12 +722,12 @@ export const B18: Def[] = [
           bug("x2-as-x", "procedural", DR, "The derivative of x² was taken as x; it is 2x.", nf((a * a) / b)),
           bug("cos-sign", "recall", DR, "The derivative of cos was taken as +sin; it is −sin, so the minus signs cancel.", nf((-a * a) / (2 * b))),
         ];
-      if (f === 2) return [bug("ax-derivative", "recall", DR, `The derivative of ${a}^x was taken as ${a}; it is ${a}^x ln ${a}.`, nf(a - b)), bug("log-quotient", "recall", LOG, `ln ${a} − ln ${b} was written as ln ${a} ÷ ln ${b}; a difference of logarithms is the logarithm of a quotient.`, `ln(${a})/ln(${b})`)];
+      if (f === 2) return [bug("ax-derivative", "recall", DR, `The derivative of ${a}^x was taken as ${a}; it is ${a}^x log ${a} (natural logarithm).`, nf(a - b)), bug("log-quotient", "recall", LOG, `log ${a} − log ${b} was written as log ${a} ÷ log ${b}; a difference of logarithms is the logarithm of a quotient.`, `log ${a}/log ${b}`)];
       if (f === 3)
         return [
           bug("one-to-infinity", "conceptual", LIM, "1 to any power was taken to be 1; here the base only tends to 1 while the power grows, which is an indeterminate form.", "1"),
-          bug("no-exponential", "procedural", LOG, `The limit of ln L was given (${a * b}) instead of L itself; L = e^(ln L).`, nf(a * b)),
-          bug("add-for-multiply", "procedural", LH, `The limit of ln L is ${b} × ${a}, not ${b} + ${a}.`, ePow(a + b)),
+          bug("no-exponential", "procedural", LOG, `The limit of log L was given (${a * b}) instead of L itself; L = e^(log L).`, nf(a * b)),
+          bug("add-for-multiply", "procedural", LH, `The limit of log L is ${b} × ${a}, not ${b} + ${a}.`, ePow(a + b)),
         ];
       return [
         bug("tan-as-x", "conceptual", LIM, `tan ${ax(a)} was replaced by ${ax(a)} too early, which gives 0; the difference needs the next term, (${ax(a)})³/3.`, "0"),
@@ -726,7 +739,7 @@ export const B18: Def[] = [
       [
         [nf((2 * a) / b), nf(a * b), nf(a / b + 1), "0"],
         [nf(a / b), nf((a * a) / (4 * b))],
-        [`ln(${a * b})`, lnFrac(b, a)],
+        [`log ${a * b}`, lnFrac(b, a)],
         [ePow(2 * a * b), ePow(a * b + 1)],
         [nf(a ** 3 / (6 * b)), nf(a ** 2 / (3 * b))],
       ][f],
@@ -737,7 +750,7 @@ export const B18: Def[] = [
     difficulty: ([f]) => (f === 0 ? 1 : f === 1 || f === 2 ? 2 : 3),
     teach: {
       idea: "Near x = 0 a 0/0 quotient behaves like the ratio of the rates at which numerator and denominator leave 0, so lim f/g = lim f′/g′ while the form stays 0/0.",
-      method: "Check the form; differentiate the numerator and the denominator separately (not the quotient rule) and substitute again; repeat while it is still 0/0. For 1^∞, take ln first and exponentiate at the end.",
+      method: "Check the form; differentiate the numerator and the denominator separately (not the quotient rule) and substitute again; repeat while it is still 0/0. For 1^∞, take log (the natural logarithm) first and exponentiate at the end.",
       alternatives: [
         { id: "series", title: "Use standard series", kind: "conceptual", text: ["Replace each function by the start of its series: eᵘ ≈ 1 + u, cos u ≈ 1 − u²/2, tan u ≈ u + u³/3.", "Cancel the power of x and let x → 0."] },
       ],
@@ -818,6 +831,7 @@ export const B18: Def[] = [
     skill: "errors by differentials",
     type: "fraction",
     mc: true,
+    decimals: true,
     // [s, x, k, q]: square area / cube volume / cube surface; side x cm, error k/100 cm; q = 0 absolute, 1 percentage
     parse: none,
     reject: (p) => (errKeep(p) ? null : "A square or cube of side 2–20 cm with a measurement error of 0.01–0.05 cm."),
@@ -854,6 +868,16 @@ export const B18: Def[] = [
         bug("side-percentage", "conceptual", LA, `The percentage error in the side was given; the ${ERR_WHAT[s].replace(/ of the.*/, "")} grows as the ${n === 2 ? "square" : "cube"} of the side, so its percentage error is ${n} times as large.`, (100 * ds) / x),
         bug("relative-not-percent", "procedural", LA, "The relative error was found but not multiplied by 100 to make a percentage.", (n * ds) / x),
       ];
+    },
+    // further real slips: the derivative not multiplied by the error, the error 0.0k read as 0.k, V × Δx; for a
+    // percentage, the change not divided by the side, or divided by the side instead of by V
+    distractors: ([s, x, k, q]) => {
+      const n = errN(s);
+      const c = errC(s);
+      const ds = k / 100;
+      const der = n * c * x ** (n - 1);
+      if (q === 0) return [der, der * ds * 10, c * x ** n * ds];
+      return [100 * n * ds, (100 * der * ds) / x];
     },
     variants: () => [],
     explain: (s) => (s.id === "derivative" ? `dV/dx = ${s.value} at x = ${s.inputs[2]}` : s.id === "abs" ? `ΔV ≈ (dV/dx) Δx = ${s.inputs[0]} × ${s.inputs[1]} = ${nf(Number(s.value))}` : `Percentage error = ΔV / V × 100 = ${nf(Number(s.inputs[0]))} ÷ ${s.inputs[1]} × 100 = ${nf(Number(s.value))}%`),
@@ -1128,6 +1152,9 @@ export const B18: Def[] = [
       if (t === 2) return [zero, bug("dropped-x", "procedural", LIM, `(e^(${coef(k)}xy) − 1)/y was taken to tend to ${k}; it is ${coef(k)}x × (eᵘ − 1)/u with u = ${coef(k)}xy, and x → ${nf(b)}.`, k)];
       return [zero, bug("factor-sign", "recall", POLY, `a³ + b³ = (a + b)(a² − ab + b²) was used with + ab in the second bracket.`, k * k * b * b)];
     },
+    // further real slips: the number k lost when substituting, the sign of the point's coordinate lost, and for the
+    // cubes the middle term −ab dropped
+    distractors: ([t, k, b]) => (t === 0 ? [2 * b, -2 * k * b, k * b] : t === 3 ? [2 * k * k * b * b, 3 * b * b, 3 * k * b * b] : [b, -k * b, k * k * b]),
     variants: () => [],
     explain: (s) => (s.id === "form" ? `Substituting (${nf(Number(s.inputs[1]))}, ${nf(Number(s.inputs[2]))}) gives 0/0` : `Simplify (${s.inputs[0]}), then substitute: the limit is ${nf(Number(s.value))}`),
     domain: MVL_D,
@@ -1144,50 +1171,52 @@ export const B18: Def[] = [
   },
   {
     id: "armvlimx",
-    arity: 4,
+    arity: 5,
     title: "Does a two-variable limit at the origin exist?",
     competency: MVL,
     skill: "existence of two-variable limits",
     type: "choice",
-    // [p, q, k, c]: k xᵖ yᵠ / (x² + c y²) at (0, 0)
+    // [p, q, k, c, s]: k xᵖ yᵠ / (x² + c y²) at (0, 0) (s = 0), or 1 plus it written as one fraction (s = 1)
     parse: none,
-    reject: (p) => (mvlxKeep(p) ? null : "k xᵖ yᵠ / (x² + c y²) with p, q up to 3."),
+    reject: (p) => (mvlxKeep(p) ? null : "k xᵖ yᵠ / (x² + c y²), or (x² + c y² + k xᵖ yᵠ)/(x² + c y²), with p, q up to 3."),
     choices: () => MVLX_CHOICES,
-    prompt: ([p, q, k, c]) => `Let f(x, y) = ${coef(k)}${pw("x", p)}${pw("y", q)}/(x² + ${coef(c)}y²) for (x, y) ≠ (0, 0). Which statement about lim ((x, y) → (0, 0)) f(x, y) is true?`,
-    solve: ([p, q]) => {
-      const idx = p + q > 2 ? 0 : 2;
+    prompt: (p) => `Let f(x, y) = ${mvlxText(p)} for (x, y) ≠ (0, 0). Which statement about lim ((x, y) → (0, 0)) f(x, y) is true?`,
+    solve: ([p, q, , , s]) => {
+      const idx = p + q > 2 ? (s ? 1 : 0) : 2;
       return {
         steps: [
+          ...(s ? [st("split", "divide", MVL, [], "f = 1 + (the fraction without the x² + cy² part)")] : []),
           st("degree", "compare", MVL, [p + q, 2], p + q - 2),
-          st("paths", "compare", LIM, [p, q], idx),
+          st("paths", "compare", LIM, [p, q, s], idx),
         ],
         answer: idx,
       };
     },
     // independent: values along six directions very close to the origin
-    validate: ([p, q, k, c], v) => {
-      const r = 1e-4;
-      const vals = [0, 0.4, 1.1, Math.PI / 2, 2.3, 3.0].map((t) => {
-        const x = r * Math.cos(t);
-        const y = r * Math.sin(t);
-        return (k * x ** p * y ** q) / (x * x + c * y * y);
-      });
-      const idx = vals.every((x) => Math.abs(x) < 1e-2) ? 0 : vals.every((x) => Number.isFinite(x) && Math.abs(x - vals[0]) < 1e-6) ? 1 : 2;
+    validate: (P, v) => {
+      const g = mvlxG(P);
+      const r = 1e-6;
+      const vals = [0, 0.4, 1.1, Math.PI / 2, 2.3, 3.0].map((t) => g(r * Math.cos(t), r * Math.sin(t)));
+      const idx = vals.every((x) => Math.abs(x) < 1e-3) ? 0 : vals.every((x) => Number.isFinite(x) && Math.abs(x - vals[0]) < 1e-3) ? 1 : 2;
       return v === idx;
     },
-    bugs: ([p, q]) =>
+    bugs: ([p, q, , , s]) =>
       p + q > 2
-        ? [bug("zero-denominator", "conceptual", LIM, "The denominator is 0 at the origin, so it was decided that there is no limit; a limit looks at the values near the point, and here the top shrinks faster than the bottom.", 2)]
+        ? [
+            bug("zero-denominator", "conceptual", LIM, "The denominator is 0 at the origin, so it was decided that there is no limit; a limit looks at the values near the point, and here the top shrinks faster than the bottom.", 2),
+            ...(s ? [bug("one-forgotten", "procedural", MVL, "The part k xᵖyᵠ/(x² + cy²) was seen to tend to 0, but the x² + cy² in the numerator, divided by the denominator, gives 1, which stays.", 0)] : []),
+          ]
         : [
-            bug("one-path", "conceptual", MVL, "Only one path (an axis) was tried; along an axis the values tend to 0, but along a line y = mx they do not, so the limit does not exist.", 0),
-            ...(p + q === 2 && (p === 0 || q === 0) ? [bug("other-axis", "conceptual", MVL, "Only the other axis was tried, which gives a non-zero constant; along the first axis the values are 0.", 1)] : []),
+            bug("one-path", "conceptual", MVL, `Only one path (an axis) was tried; along an axis the values tend to ${s ? "a single number" : "0"}, but along a line y = mx they do not, so the limit does not exist.`, s ? 1 : 0),
+            ...(!s && p + q === 2 && (p === 0 || q === 0) ? [bug("other-axis", "conceptual", MVL, "Only the other axis was tried, which gives a non-zero constant; along the first axis the values are 0.", 1)] : []),
           ],
-    variants: () => [],
-    explain: (s) => (s.id === "degree" ? `Top degree ${s.inputs[0]}, bottom degree ${s.inputs[1]}` : s.value === 0 ? "In polar form |f| ≤ (constant) × r^(p+q−2) → 0, so the limit is 0" : "Along y = mx the value depends on m (or grows without bound), so the limit does not exist"),
+    variants: ([p, q, k, c, s]) => [[p, q, k, c, 1 - s]],
+    explain: (s) => (s.id === "split" ? `Divide: ${s.value}` : s.id === "degree" ? `Top degree ${s.inputs[0]}, bottom degree ${s.inputs[1]}` : s.value === 0 ? "In polar form |f| ≤ (constant) × r^(p+q−2) → 0, so the limit is 0" : s.value === 1 ? "The fraction part is at most (constant) × r^(p+q−2) in polar form, so it tends to 0 and the limit is 1" : "Along y = mx the value depends on m (or grows without bound), so the limit does not exist"),
     domain: MVLX_D,
     keep: mvlxKeep,
-    cap: 200,
-    difficulty: ([p, q]) => (p + q === 2 ? 2 : p + q < 2 ? 1 : 3),
+    cap: 300,
+    difficulty: ([p, q, , , s]) => (p + q === 2 ? 2 : p + q < 2 ? 1 : s ? 3 : 2),
+    word: (p) => `On a heated metal plate, the temperature (in °C above the room) at a point (x, y) near a small hole at the origin is modelled by T(x, y) = ${mvlxText(p)}. Which statement about lim ((x, y) → (0, 0)) T(x, y) is true?`,
     teach: {
       idea: "A limit at a point in the plane must be the same along every way of approaching; two paths with different limits prove there is no limit.",
       method: "Try y = mx: if the result depends on m (or blows up), the limit does not exist. If the top has higher degree than the bottom, use polar coordinates to show the values shrink to 0.",
@@ -1195,7 +1224,7 @@ export const B18: Def[] = [
         { id: "polar", title: "Polar coordinates", kind: "procedural", text: ["Put x = r cos θ, y = r sin θ.", "If f becomes rⁿ × (something bounded) with n > 0, the limit is 0; if r cancels and θ is left, the limit does not exist."] },
       ],
     },
-    limits: "Rational functions k xᵖ yᵠ/(x² + c y²) at the origin; continuity of piecewise definitions is not included.",
+    limits: "Rational functions k xᵖ yᵠ/(x² + c y²), alone or plus 1, at the origin; continuity of piecewise definitions is not included.",
   },
 
   // ------------------------------------------------------------ growth, decay and cooling
@@ -1206,6 +1235,7 @@ export const B18: Def[] = [
     competency: ODE,
     type: "fraction",
     mc: true,
+    decimals: true,
     // [t, a, b, c]: t = 0 bacteria doubling, 1 radioactive half-life, 2 Newton cooling
     parse: none,
     reject: (p) => (odeKeep(p) ? null : "A doubling, half-life or cooling model with whole-number data."),
@@ -1253,10 +1283,27 @@ export const B18: Def[] = [
       const S = 20 + 5 * c;
       const T0 = S + 16 * a;
       const T1 = S + 4 * a * b;
+      // the room-ignored value is shown only when it is a terminating decimal (a learner would not leave 3721/73)
+      const ignored = (T1 * T1) / T0;
+      const terminates = (() => {
+        let d = ratio(ignored)[1];
+        for (const q of [2, 5]) while (d % q === 0) d /= q;
+        return d === 1;
+      })();
       return [
-        bug("linear-cooling", "conceptual", MODEL, "The tea was assumed to lose the same number of degrees in each 10 minutes; it cools faster when it is hotter, so the difference from the room is multiplied by the same fraction each time.", 2 * T1 - T0),
-        bug("room-ignored", "conceptual", MODEL, `The room temperature was ignored; it is the difference T − ${S} that shrinks by the same fraction.`, (T1 * T1) / T0),
+        // linear cooling would take the tea to or below the room's temperature when the first drop is half or more
+        bug("linear-cooling", "conceptual", MODEL, "The tea was assumed to lose the same number of degrees in each 10 minutes; it cools faster when it is hotter, so the difference from the room is multiplied by the same fraction each time.", 2 * T1 - T0 > S ? 2 * T1 - T0 : null),
+        bug("room-ignored", "conceptual", MODEL, `The room temperature was ignored; it is the difference T − ${S} that shrinks by the same fraction.`, terminates ? ignored : null),
       ];
+    },
+    // further real slips: one period too few or too many, the increase (or the amount lost) instead of the amount, and for
+    // cooling the room temperature not added back, no further cooling after 10 minutes, or half-way to the room
+    distractors: ([t, a, b, c]) => {
+      if (t === 0) return [500 * a * 2 ** (c - 1), 500 * a * 2 ** (c + 1), 500 * a * (2 ** c - 1)];
+      if (t === 1) return [(16 * a) / 2 ** (c - 1), 16 * a - (16 * a) / 2 ** c, (16 * a) / 2 ** (c + 1)];
+      const S = 20 + 5 * c;
+      const T1 = S + 4 * a * b;
+      return [a * b * b, T1, (T1 + S) / 2];
     },
     variants: () => [],
     explain: (s) => (s.id === "model" ? `Solving the differential equation: ${s.value}` : s.id === "periods" ? `${s.inputs[0]} is ${s.value} periods of ${s.inputs[1]}` : s.id === "ratio" ? `In 10 minutes the difference from the room is multiplied by ${s.inputs[0]}/${s.inputs[1]} = ${nf(Number(s.value))}` : s.id === "square" ? `In 20 minutes it is multiplied by that twice: T = ${nf(Number(s.value))}` : `So the answer is ${nf(Number(s.value))}`),
@@ -1362,9 +1409,16 @@ export const B18: Def[] = [
       const f = eulF(P);
       return [
         bug("forgot-degree", "recall", PD, `The value of f itself was given; Euler's theorem says x f_x + y f_y = n f, with n = ${d} here.`, f(u, v)),
-        bug("degree-off", "recall", PD, `The degree was taken as ${d - 1}; every term here has degree ${d}.`, (d - 1) * f(u, v)),
+        // for degree 2, degree − 1 = 1 gives f itself, the same as forgot-degree: then only that one is listed
+        ...(d > 2 ? [bug("degree-off", "recall", PD, `The degree was taken as ${d - 1}; every term here has degree ${d}.`, (d - 1) * f(u, v))] : []),
         bug("one-part", "procedural", PD, "Only x ∂f/∂x was worked out; the y ∂f/∂y part was left out.", Math.round(u * d1((t) => f(t, v), u, 1e-4))),
       ];
+    },
+    // further real slips: the degree counted one too high, only y ∂f/∂y, and f_x + f_y without the factors x and y
+    distractors: ([d, A, B, C, u, v]) => {
+      const fx = d * A * u ** (d - 1) + (d - 1) * B * u ** (d - 2) * v;
+      const fy = B * u ** (d - 1) + d * C * v ** (d - 1);
+      return [(d + 1) * eulF([d, A, B, C])(u, v), v * fy, fx + fy];
     },
     variants: () => [],
     explain: (s) => (s.id === "degree" ? `Every term has degree ${s.value}` : s.id === "value" ? `f(${s.inputs[0]}, ${nf(Number(s.inputs[1]))}) = ${s.value}` : `By Euler's theorem, x f_x + y f_y = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
@@ -1536,6 +1590,11 @@ export const B18: Def[] = [
       if (f === 1 || f === 2) return [bug("sign-pattern", "recall", SER, `The signs in the ${f === 1 ? "sine" : "cosine"} series alternate (+, −, +, …); this term's sign was missed.`, Math.abs(c)), bug("no-factorial", "recall", SER, `The ${k}! in the denominator was left out.`, c * fk)];
       if (f === 3) return [bug("factorial", "recall", SER, `The term was divided by ${k}! (as in the series for eˣ) instead of by ${k}.`, c / fk * k), bug("sign-pattern", "recall", SER, "The series for ln(1 + u) alternates in sign: u − u²/2 + u³/3 − …; this term's sign was missed.", -c)];
       return [bug("factorial", "recall", SER, `The term was divided by ${k}!; the geometric series 1 + u + u² + … has no factorials.`, c / fk), bug("sign-of-a", "procedural", TAY, `The sign of u = ${ax(a)} was dropped before raising it to the power ${k}.`, Math.abs(a) ** k)];
+    },
+    // further real slips: a raised to the power k − 1 instead of k, and the opposite sign
+    distractors: (p) => {
+      const c = tayCoef(p);
+      return [c / p[1], -c, c * p[1]];
     },
     variants: () => [],
     explain: (s) => (s.id === "series" ? `The general term of the standard series is ${s.value}` : `Put u = ${ax(Number(s.inputs[0]))} and pick out the ${pw("x", Number(s.inputs[1]))} term: its coefficient is ${nf(Number(s.value))}`),
@@ -2002,6 +2061,7 @@ export const B18: Def[] = [
     domain: CID_D,
     cap: 300,
     difficulty: ([t, h, k]) => (t <= 1 && h === 0 && k === 0 ? 1 : t <= 1 || (h === 0 && k === 0) ? 2 : 3),
+    word: (p) => `In a design for a garden in Ooty, the edge of a flower bed is drawn along the curve ${cidEq(p)} (units in metres). Which curve is the edge of the bed?`,
     teach: {
       idea: "For A x² + C y² + D x + E y + F = 0 (no xy term), the squared terms decide the shape: one squared variable gives a parabola, equal coefficients a circle, same signs an ellipse, opposite signs a hyperbola.",
       method: "Look only at the x² and y² coefficients first; then, if you want to be sure, complete the squares to see the standard form.",

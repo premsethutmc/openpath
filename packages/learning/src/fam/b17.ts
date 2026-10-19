@@ -60,7 +60,7 @@ function sum(terms: [number, string][]): string {
     let t: string;
     if (!body) t = fmt(a);
     else if (body.startsWith("/")) t = d ? `${n}/(${d}${body.slice(1)})` : `${n}/${body.slice(1)}`;
-    else if (!d) t = a === 1 ? body : `${a}${body}`;
+    else if (!d) t = a === 1 ? body : `${a}${body.startsWith("log") ? " " : ""}${body}`;
     else t = `${n === "1" ? "" : n}${body}/${d}`;
     out.push(out.length ? `${c < 0 ? "−" : "+"} ${t}` : c < 0 ? `−${t}` : t);
   }
@@ -258,6 +258,11 @@ function binProp(form: number, k: number, l: number): [string, (a: number, b: nu
       return k >= 2 && k <= 5 && l === 0 ? [`(a + b)/${k}`, (a, b) => (a + b) / k, 1] : null;
     case 9:
       return k >= 1 && k <= 3 ? [`ab + ${co(k)}a + ${co(k)}b${plus(l)}`, (a, b) => a * b + k * a + k * b + l, l === k * k - k ? 0 : 1] : null;
+    case 10:
+      // one entry compared with a fixed number: associative (the other entry is ignored) but not commutative
+      return k >= 1 && k <= 4 && l >= -2 && l <= 3
+        ? [[`max{a, ${N(l)}}`, `min{a, ${N(l)}}`, `max{b, ${N(l)}}`, `min{b, ${N(l)}}`][k - 1], [(a: number) => Math.max(a, l), (a: number) => Math.min(a, l), (_: number, b: number) => Math.max(b, l), (_: number, b: number) => Math.min(b, l)][k - 1] as (a: number, b: number) => number, 2]
+        : null;
     default:
       return null;
   }
@@ -339,10 +344,18 @@ function relProps(ps: [number, number][], n: number): [boolean, boolean, boolean
   return [r, s, t];
 }
 const propText = ([r, s, t]: boolean[]) => `${r ? "reflexive" : "not reflexive"}, ${s ? "symmetric" : "not symmetric"}, ${t ? "transitive" : "not transitive"}`;
+/** FNV-1a hash of a string (a fixed, parameter-dependent order for the options). */
+const fnv = (t: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < t.length; i++) x = Math.imul(x ^ t.charCodeAt(i), 0x01000193) >>> 0;
+  return x;
+};
+/** The true statement and its three one-property flips, in an order fixed by a hash of the relation (so the letter of
+ * the right answer is not predictable). The everyday form uses the same choices and index. */
 const relChoices = (mask: number) => {
   const T = relProps(pairsOf(mask, 3), 3);
   const flips = [0, 1, 2].map((i) => T.map((x, j) => (j === i ? !x : x)));
-  return [T, ...flips].map(propText).sort();
+  return [T, ...flips].map(propText).sort((x, y) => fnv(`${mask}:${x}`) - fnv(`${mask}:${y}`) || (x < y ? -1 : 1));
 };
 /** Union–find classes of A = {1, …, n} joined by R. */
 function classes(ps: [number, number][], n: number): number[] {
@@ -473,7 +486,7 @@ export const B17: Def[] = [
     },
     solve: ([a, c, d, m, k, q]) => {
       const { comb, b1, b2 } = system(a, c, d, m, k);
-      if (q === 0) return { steps: [step("det", "evaluate", DET, ["|A|", "λ"], `${d - a * c}(λ − ${comb[2]})`), step("solve", "solve", SC, ["|A| = 0"], comb[2])], answer: comb[2] };
+      if (q === 0) return { steps: [step("det", "evaluate", DET, ["|A|", "λ"], `${d - a * c}(λ${sg(-comb[2])})`), step("solve", "solve", SC, ["|A| = 0"], comb[2])], answer: comb[2] };
       const mu = m * b1 + k * b2;
       return { steps: [step("combine", "compare", RANK, [m, k], `R₃ = ${m}R₁ ${k < 0 ? "−" : "+"} ${Math.abs(k)}R₂`), step("rhs", "evaluate", SC, [m, b1, k, b2], mu)], answer: mu };
     },
@@ -497,6 +510,8 @@ export const B17: Def[] = [
         const f1 = detPlus(1) - f0;
         const root = f1 !== 0 ? -f0 / f1 : NaN;
         if (Number.isInteger(root)) out.push({ id: "cofactor-sign", kind: "procedural", competency: DET, says: "The determinant was expanded with a + sign on the middle term; the signs along a row are +, −, +.", predict: root });
+        // |A| = (d − ac)(λ − λ₀): the linear equation pλ − pλ₀ = 0 solved with the sign of λ₀ slipped
+        if (comb[2] !== 0) out.push({ id: "solve-sign", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `|A| = ${d - a * c === 1 ? "" : d - a * c === -1 ? "−" : N(d - a * c)}λ${sg(-(d - a * c) * comb[2])} = 0 was solved with a sign slip, giving λ = ${N(-comb[2])}; moving ${N(-(d - a * c) * comb[2])} across changes its sign.`, predict: -comb[2] });
         out.push({ id: "copy-row", kind: "conceptual", competency: SC, says: "λ was chosen to copy the z-coefficient of the second equation; the third row must be the same combination of the first two rows in every column.", predict: 2 });
       } else {
         if (m * b1 + k * b2 !== 0) out.push({ id: "homogeneous-zero", kind: "conceptual", competency: SC, says: "μ = 0 was chosen, as for a homogeneous system; here the third equation must be the same combination of the first two on the right side too.", predict: 0 });
@@ -706,7 +721,7 @@ export const B17: Def[] = [
     competency: BIN,
     type: "choice",
     parse: none,
-    reject: ([form, k, l]) => (binProp(form, k, l) ? null : "One of ten rules for a ∗ b on ℝ."),
+    reject: ([form, k, l]) => (binProp(form, k, l) ? null : "One of eleven rules for a ∗ b on ℝ."),
     prompt: ([form, k, l]) => `On ℝ, a binary operation ∗ is defined by a ∗ b = ${binProp(form, k, l)![0]}. Which is true?`,
     choices: () => BIN_CHOICES,
     solve: ([form, k, l]) => {
@@ -735,14 +750,14 @@ export const B17: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "swap" ? `a ∗ b and b ∗ a are ${s.value}` : s.id === "group" ? `(a ∗ b) ∗ c and a ∗ (b ∗ c) are ${s.value}` : `So ∗ is ${BIN_CHOICES[Number(s.value)]}`),
-    domain: [[0, 9], [-4, 5], [-3, 6]],
+    domain: [[0, 10], [-4, 5], [-3, 6]],
     difficulty: ([form]) => (form === 0 || form === 1 || form === 7 ? 1 : form === 2 || form === 9 ? 3 : 2),
     teach: {
       idea: "Commutative: a ∗ b = b ∗ a for all a, b. Associative: (a ∗ b) ∗ c = a ∗ (b ∗ c) for all a, b, c. Either can hold without the other.",
       method: "Swap a and b in the rule and compare. Then work out (a ∗ b) ∗ c and a ∗ (b ∗ c) in full and compare. One counter-example (with actual numbers) is enough to show a property fails.",
       alternatives: [{ id: "counterexample", title: "Hunt for a counter-example", kind: "procedural", text: ["Try small numbers such as a = 1, b = 2, c = 3.", "If the two sides differ, the property fails; if they agree for several choices, prove it with letters."] }],
     },
-    limits: "Ten rules on ℝ with small parameters; operation tables and modulo n are left out.",
+    limits: "Eleven rules on ℝ with small parameters (max{a, b} type rules use one fixed number); operation tables and modulo n are left out.",
   },
   {
     id: "aqonto",
@@ -1423,7 +1438,7 @@ export const B17: Def[] = [
     type: "fraction",
     mc: true,
     parse: none,
-    reject: ([kind, a, b]) => (kind < 0 || kind > 4 || a < 0 || a > 6 || b > 12 || b - a < 2 || (kind === 3 && a < 2) ? "∫ₐᵇ g(x)/(g(x) + g(a + b − x)) dx for √x, x², x³, ln x or eˣ." : null),
+    reject: ([kind, a, b]) => (kind < 0 || kind > 4 || a < 0 || a > 15 || b > 40 || b - a < 2 || (kind === 3 && a < 2) ? "∫ₐᵇ g(x)/(g(x) + g(a + b − x)) dx for √x, x², x³, log x or eˣ." : null),
     prompt: ([kind, a, b]) => `Evaluate ${intg(a, b)} ${KING[kind][0](a + b)} dx.`,
     solve: ([, a, b]) => ({ steps: [step("reflect", "substitute", DIP, [a + b], "I = ∫ g(a + b − x)/(g(a + b − x) + g(x)) dx"), step("add", "add", DIP, [b, a], b - a), step("halve", "divide", DEFI, [2], (b - a) / 2)], answer: (b - a) / 2 }),
     // independent: Simpson's rule on the integrand itself
@@ -1435,7 +1450,7 @@ export const B17: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "reflect" ? `Replace x by ${s.inputs[0]} − x: ${s.value}` : s.id === "add" ? `Add the two forms: 2I = ∫ 1 dx = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `So I = ${F(Number(s.value))}`),
-    domain: [[0, 4], [0, 6], [1, 12]],
+    domain: [[0, 4], [0, 15], [1, 40]],
     cap: 300,
     difficulty: ([kind, a]) => (a === 0 ? 1 : kind === 3 ? 3 : 2),
     teach: {
@@ -1553,7 +1568,7 @@ export const B17: Def[] = [
     prompt: ([kind, p, q, y0]) => (kind === 0 ? `Solve the differential equation dy/dx = ${q === 0 ? `${p === 1 ? "" : p === -1 ? "−" : N(p)}xy` : p === 0 ? `${q === 1 ? "" : q === -1 ? "−" : N(q)}y` : `(${pp([[p, 1], [q, 0]])})y`}, given that y = ${y0} when x = 0. Write y in terms of x.` : `Solve the differential equation dy/dx = ${p === 1 ? "" : p === -1 ? "−" : N(p)}y/x, x > 0, given that y = ${y0} when x = 1. Write y in terms of x.`),
     solve: ([kind, p, q, y0]) => {
       const ans = sepAnswer(kind, p, q, y0);
-      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = (${pa([[p, 1], [q, 0]])}) dx` : `dy/y = ${p} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `ln y = ${sepExpo(p, q)} + C` : `ln y = ${p} ln x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
+      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = (${pa([[p, 1], [q, 0]])}) dx` : `dy/y = ${p} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `log y = ${sepExpo(p, q)} + C` : `log y = ${p} log x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
     },
     // independent: a Runge–Kutta solution of the equation from the initial condition
     validate: ([kind, p, q, y0], v) => (kind === 0 ? solvesIvp(v, (x, y) => (p * x + q) * y, 0, y0, [0.5, 1.2, 1.9]) : solvesIvp(v, (x, y) => (p * y) / x, 1, y0, [0.5, 1.6, 2.3])),
@@ -1562,11 +1577,11 @@ export const B17: Def[] = [
       if (kind === 0) {
         const e = sepExpo(p, q);
         if (y0 !== 1) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant of integration was dropped; y = ${y0} at x = 0 fixes it: y = Ae^(…) with A = ${y0}.`, predict: `e^(${e})` });
-        out.push({ id: "constant-in-exponent", kind: "procedural", competency: DE, says: `ln y = ${e} + C gives C = ln ${y0}, not ${y0}; the constant was put into the exponent as ${y0}.`, predict: `e^(${e} + ${y0})` });
-        out.push({ id: "y-dropped", kind: "conceptual", competency: DE, says: "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.", predict: sum([[p / 2, "x^2"], [q, "x"], [y0, ""]]) });
+        out.push({ id: "constant-in-exponent", kind: "procedural", competency: DE, says: `log y = ${e} + C gives C = log ${y0}, not ${y0}; the constant was put into the exponent as ${y0}.`, predict: `e^(${e} + ${y0})` });
+        out.push({ id: "y-dropped", kind: "conceptual", competency: DE, says: "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.", predict: sum([[p / 2, "x²"], [q, "x"], [y0, ""]]) });
       } else {
-        if (y0 !== 1) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant was dropped; y(1) = ${y0} gives y = ${y0}x^${p}.`, predict: p < 0 ? `x^(${N(p)})` : `x^${p}` });
-        out.push({ id: "constant-added-late", kind: "procedural", competency: DE, says: "The constant was added after taking exponentials; ln y = p ln x + C gives y = Axᵖ, a constant multiple.", predict: `${p < 0 ? `x^(${N(p)})` : `x^${p}`} + ${y0 - 1 === 0 ? "1" : y0 - 1}` });
+        if (y0 !== 1) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant was dropped; y(1) = ${y0} gives y = ${y0}${xp1(p)}.`, predict: xp1(p) });
+        out.push({ id: "constant-added-late", kind: "procedural", competency: DE, says: "The constant was added after taking exponentials; log y = p log x + C gives y = Axᵖ, a constant multiple.", predict: `${xp1(p)} + ${y0 - 1 === 0 ? "1" : y0 - 1}` });
       }
       return out;
     },
@@ -1579,7 +1594,7 @@ export const B17: Def[] = [
     difficulty: ([kind, p, q]) => (kind === 1 ? 1 : p === 0 || q === 0 ? 2 : 3),
     teach: {
       idea: "When dy/dx is a function of x times a function of y, the variables can be separated: dy/g(y) = f(x) dx, and each side integrated.",
-      method: "Divide by y, integrate both sides (ln y on the left), add one constant, exponentiate, and use the initial condition to find the constant.",
+      method: "Divide by y, integrate both sides (log y on the left, the natural logarithm), add one constant, exponentiate, and use the initial condition to find the constant.",
       alternatives: [{ id: "check", title: "Check by differentiating", kind: "procedural", text: ["Differentiate your y and see whether you get the right side of the equation.", "Then put in the starting x and check you get the starting y."] }],
     },
     limits: "Two separable forms with exponential or power solutions; equations needing partial fractions are left out.",
@@ -1592,7 +1607,7 @@ export const B17: Def[] = [
     type: "tuple",
     mc: true,
     parse: none,
-    reject: ([n, pw, m, r]) => (n < 1 || n > 3 || pw < 1 || pw > 4 || m < 1 || m > 5 || r < 0 || r > 2 ? "Polynomial in the derivatives, highest order 1 to 3." : null),
+    reject: ([n, pw, m, r]) => (n < 1 || n > 4 || pw < 1 || pw > 5 || m < 1 || m > 6 || r < 0 || r > 2 ? "Polynomial in the derivatives, highest order 1 to 4." : null),
     prompt: (p) => `Find the order and the degree of the differential equation ${odeText(p)}. Write the answer as (order, degree).`,
     solve: ([n, pw]) => ({ steps: [step("order", "classify", DE, [], n), step("degree", "classify", DE, [n], pw)], answer: `(${n}, ${pw})` }),
     // independent: read the terms of the equation and pick the highest derivative and its power
@@ -1612,7 +1627,7 @@ export const B17: Def[] = [
     distractors: ([n, pw]) => [`(${n + 1}, ${pw})`, `(${n}, ${pw + 1})`, `(${n === 1 ? 2 : n - 1}, ${pw})`],
     variants: () => [],
     explain: (s) => (s.id === "order" ? `The highest derivative is ${D(Number(s.value))}: order ${s.value}` : `It appears to the power ${s.value}: degree ${s.value}`),
-    domain: [[1, 3], [1, 4], [1, 5], [0, 2]],
+    domain: [[1, 4], [1, 5], [1, 6], [0, 2]],
     difficulty: ([n, pw, m]) => (m <= pw ? 1 : n === 1 ? 2 : 3),
     teach: {
       idea: "The order is that of the highest derivative in the equation; the degree (defined when the equation is a polynomial in the derivatives) is the power of that highest derivative.",
@@ -1634,8 +1649,8 @@ export const B17: Def[] = [
     solve: ([k, m, n, y1]) => {
       const A = m / (n + k + 1);
       const C = y1 - A;
-      const ans = pa([[A, n + 1], [C, -k]]);
-      return { steps: [step("if", "evaluate", DE, [k], k === 1 ? "x" : `x^${k}`), step("integrate", "integrate", INDEF, [m, n + k], `y·x^${k} = ${pa([[A, n + k + 1]])} + C`), step("constant", "evaluate", DE, [y1], ans)], answer: ans };
+      const ans = pp([[A, n + 1], [C, -k]]);
+      return { steps: [step("if", "evaluate", DE, [k], k === 1 ? "x" : `x${sup(k)}`), step("integrate", "integrate", INDEF, [m, n + k], `y·${k === 1 ? "x" : `x${sup(k)}`} = ${pp([[A, n + k + 1]])} + C`), step("constant", "evaluate", DE, [y1], ans)], answer: ans };
     },
     // independent: a Runge–Kutta solution from x = 1
     validate: ([k, m, n, y1], v) => solvesIvp(v, (x, y) => m * x ** n - (k * y) / x, 1, y1, [0.5, 1.7, 2.4]),
@@ -1643,8 +1658,8 @@ export const B17: Def[] = [
       const A = m / (n + k + 1);
       const C = y1 - A;
       const out: Bug[] = [];
-      if (Math.abs(C) > 1e-12) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant of integration was dropped; y·x^${k} = … + C, and y(1) = ${N(y1)} fixes C.`, predict: pa([[A, n + 1]]) });
-      out.push({ id: "q-not-multiplied", kind: "procedural", competency: DE, says: `The right side was integrated without multiplying it by the integrating factor x^${k}: y·(IF) = ∫ Q·(IF) dx.`, predict: pa([[m / (n + 1), n + 1 - k], [y1 - m / (n + 1), -k]]) });
+      if (Math.abs(C) > 1e-12) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant of integration was dropped; y·${k === 1 ? "x" : `x${sup(k)}`} = … + C, and y(1) = ${N(y1)} fixes C.`, predict: pp([[A, n + 1]]) });
+      out.push({ id: "q-not-multiplied", kind: "procedural", competency: DE, says: `The right side was integrated without multiplying it by the integrating factor ${k === 1 ? "x" : `x${sup(k)}`}: y·(IF) = ∫ Q·(IF) dx.`, predict: pp([[m / (n + 1), n + 1 - k], [y1 - m / (n + 1), -k]]) });
       return out;
     },
     distractors: (p) => { const a = String(B17.find((d) => d.id === "aqlinde")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
@@ -1681,12 +1696,12 @@ export const B17: Def[] = [
     bugs: ([kind, k, m, c]) => {
       const out: Bug[] = [];
       if (kind === 0) {
-        if (c !== 0) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant was dropped: v = ${k} ln x + C, and y(1) = ${N(c)} gives C = ${N(c)}.`, predict: sum([[k, "x ln(x)"]]) });
+        if (c !== 0) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant was dropped: v = ${k} log x + C, and y(1) = ${N(c)} gives C = ${N(c)}.`, predict: sum([[k, "x log x"]]) });
         out.push({ id: "dv-for-dy", kind: "conceptual", competency: HOM, says: "With y = vx, dy/dx was taken as dv/dx; by the product rule dy/dx = v + x dv/dx.", predict: `x(${F(c + k)}e^(x − 1) − ${k})` });
       } else if (kind === 1) {
         out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: "The constant of integration was dropped (taken as 0); the initial condition fixes it.", predict: sum([[-k / (m - 1), "x"]]) });
         out.push({ id: "dv-for-dy", kind: "conceptual", competency: HOM, says: "With y = vx, dy/dx was taken as dv/dx; by the product rule dy/dx = v + x dv/dx.", predict: `x((${F(c + k / m)})e^(${m}(x − 1)) − ${F(k / m)})` });
-      } else out.push({ id: "two-lost", kind: "procedural", competency: INDEF, says: "∫ v dv = v²/2; the factor 2 was lost when solving for v².", predict: `x√(${k === 1 ? "" : k}ln(x) + ${c * c})` });
+      } else out.push({ id: "two-lost", kind: "procedural", competency: INDEF, says: "∫ v dv = v²/2; the factor 2 was lost when solving for v².", predict: `x√(${k === 1 ? "" : k}log x + ${c * c})` });
       return out;
     },
     distractors: (p) => { const a = String(B17.find((d) => d.id === "aqhom")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
@@ -1700,7 +1715,7 @@ export const B17: Def[] = [
       method: "Substitute y = vx and dy/dx = v + x dv/dx, simplify to x dv/dx = g(v), separate and integrate, put v = y/x back, and use the initial condition.",
       alternatives: [{ id: "check", title: "Check your answer", kind: "procedural", text: ["Differentiate your y and work out the right side of the equation with it.", "They must agree, and your y must equal the given value at x = 1."] }],
     },
-    limits: "Three homogeneous forms whose solutions involve x ln x, powers of x or a square root; implicit solutions are left out.",
+    limits: "Three homogeneous forms whose solutions involve x log x (natural logarithm), powers of x or a square root; implicit solutions are left out.",
   },
   // ============================================================== second derivatives
   {
@@ -1711,8 +1726,8 @@ export const B17: Def[] = [
     type: "expression",
     mc: true,
     parse: none,
-    reject: (p) => (d2Ok(p) ? null : "eᵃˣ sin bx, eᵃˣ cos bx, ln(ax + b), kxⁿ ln x, kxeᵃˣ, x sin ax or x cos ax."),
-    prompt: (p) => `If y = ${d2Text(p)}, find d²y/dx².`,
+    reject: (p) => (d2Ok(p) ? null : "eᵃˣ sin bx, eᵃˣ cos bx, log(ax + b), kxⁿ log x, kxeᵃˣ, x sin ax or x cos ax."),
+    prompt: (p) => `If y = ${d2Text(p)}, find d²y/dx².${p[0] === 1 || p[0] === 2 ? " (log is the natural logarithm.)" : ""}`,
     solve: (p) => {
       const [first, second] = d2Answers(p);
       return { steps: [step("first", "differentiate", RULES, [d2Text(p)], first), step("second", "differentiate", HD, [first], second)], answer: second };
@@ -1726,14 +1741,14 @@ export const B17: Def[] = [
       const e = ex(a);
       if (kind === 0) out.push({ id: "b-squared-sign", kind: "recall", competency: RULES, says: `The derivative of cos(${kx(b)}) is −${b === 1 ? "" : b}sin(${kx(b)}); with the minus sign lost, −b² became +b².`, predict: `${e}(${sum([[a * a + b * b, `sin(${kx(b)})`], [2 * a * b, `cos(${kx(b)})`]])})` });
       if (kind === 4) out.push({ id: "b-squared-sign", kind: "recall", competency: RULES, says: `The derivative of sin(${kx(b)}) is +${b === 1 ? "" : b}cos(${kx(b)}); a sign slip turned −b² into +b².`, predict: `${e}(${sum([[a * a + b * b, `cos(${kx(b)})`], [-2 * a * b, `sin(${kx(b)})`]])})` });
-      if (kind === 1 && a > 1) out.push({ id: "chain-once", kind: "procedural", competency: RULES, says: `The chain-rule factor ${a} was used only once; each differentiation of (${kx(a)}${sg(b)}) brings a factor ${a}.`, predict: b === 0 ? `−1/(${a}x^2)` : `−${a}/(${kx(a)}${sg(b)})^2` });
+      if (kind === 1 && a > 1) out.push({ id: "chain-once", kind: "procedural", competency: RULES, says: `The chain-rule factor ${a} was used only once; each differentiation of (${kx(a)}${sg(b)}) brings a factor ${a}.`, predict: b === 0 ? `−1/(${a}x²)` : `−${a}/(${kx(a)}${sg(b)})²` });
       if (kind === 3) out.push({ id: "product-once", kind: "procedural", competency: RULES, says: "Only the eᵃˣ factor was differentiated each time; the product rule also differentiates the x.", predict: `${sum([[b * a * a, "x"]])}${e}` });
       if (kind === 5) out.push({ id: "x-as-constant", kind: "procedural", competency: RULES, says: "x was treated as a constant multiplier; x sin ax is a product, so use the product rule.", predict: b ? `${sum([[-a * a, `x cos(${kx(a)})`]])}` : `${sum([[-a * a, `x sin(${kx(a)})`]])}` });
       return out;
     },
     distractors: (p) => {
       const [first] = d2Answers(p);
-      return [`(${first})^2`, `−(${d2Answers(p)[1]})`];
+      return [`(${first})²`, `−(${d2Answers(p)[1]})`];
     },
     variants: () => [],
     explain: (s) => (s.id === "first" ? `dy/dx = ${s.value}` : `Differentiate again: d²y/dx² = ${s.value}`),
@@ -1921,15 +1936,17 @@ const KING: [(s: number) => string, (x: number, s: number) => number][] = [
   [(s) => `√x/(√x + √(${s} − x))`, (x, s) => Math.sqrt(x) / (Math.sqrt(x) + Math.sqrt(s - x))],
   [(s) => `x²/(x² + (${s} − x)²)`, (x, s) => (x * x) / (x * x + (s - x) ** 2)],
   [(s) => `x³/(x³ + (${s} − x)³)`, (x, s) => x ** 3 / (x ** 3 + (s - x) ** 3)],
-  [(s) => `ln x/(ln x + ln(${s} − x))`, (x, s) => Math.log(x) / (Math.log(x) + Math.log(s - x))],
+  [(s) => `log x/(log x + log(${s} − x))`, (x, s) => Math.log(x) / (Math.log(x) + Math.log(s - x))],
   [(s) => `eˣ/(eˣ + e^(${s} − x))`, (x, s) => Math.exp(x) / (Math.exp(x) + Math.exp(s - x))],
 ];
 function sepExpo(p: number, q: number): string {
-  return sum([[p / 2, "x^2"], [q, "x"]]);
+  return sum([[p / 2, "x²"], [q, "x"]]);
 }
+/** x to a whole power, written with superscripts: x, x³, x⁻². */
+const xp1 = (p: number) => (p === 1 ? "x" : `x${sup(p)}`);
 function sepAnswer(kind: number, p: number, q: number, y0: number): string {
-  if (kind === 0) return `${y0 === 1 ? "" : y0}e^(${sepExpo(p, q)})`;
-  return `${y0 === 1 ? "" : y0}${p < 0 ? `x^(${N(p)})` : p === 1 ? "x" : `x^${p}`}`;
+  if (kind === 0) return `${y0 === 1 ? "" : y0}${sepExpo(p, q) === "x" ? "e^x" : `e^(${sepExpo(p, q)})`}`;
+  return `${y0 === 1 ? "" : y0}${xp1(p)}`;
 }
 function odeTerms([n, pw, m]: number[]): [number, number][] {
   return [[n, pw], [n - 1, m]];
@@ -1950,9 +1967,9 @@ function homOk([kind, k, m, c]: number[]): boolean {
   return false;
 }
 function homAnswer([kind, k, m, c]: number[]): string {
-  if (kind === 0) return sum([[k, "x ln(x)"], [c, "x"]]);
-  if (kind === 1) return sum([[c + k / (m - 1), `x^${m}`], [-k / (m - 1), "x"]]);
-  return `x√(${2 * k}ln(x) + ${c * c})`;
+  if (kind === 0) return sum([[k, "x log x"], [c, "x"]]);
+  if (kind === 1) return sum([[c + k / (m - 1), `x${sup(m)}`], [-k / (m - 1), "x"]]);
+  return `x√(${2 * k}log x + ${c * c})`;
 }
 function d2Ok([kind, a, b]: number[]): boolean {
   if (kind === 0 || kind === 4) return a !== 0 && a <= 3 && b >= 1 && b <= 3;
@@ -1966,8 +1983,8 @@ function d2Text([kind, a, b]: number[]): string {
   const e = exPretty(a);
   if (kind === 0) return `${e} sin ${kx(b)}`;
   if (kind === 4) return `${e} cos ${kx(b)}`;
-  if (kind === 1) return `ln(${kx(a)}${sg(b)})`;
-  if (kind === 2) return `${b === 1 ? "" : b}x${sup(a)} ln x`;
+  if (kind === 1) return b === 0 && a === 1 ? "log x" : `log(${kx(a)}${sg(b)})`;
+  if (kind === 2) return `${b === 1 ? "" : b}x${sup(a)} log x`;
   if (kind === 3) return `${b === 1 ? "" : b}x${e}`;
   return `x ${b ? "cos" : "sin"} ${kx(a)}`;
 }
@@ -1987,16 +2004,16 @@ function d2Answers([kind, a, b]: number[]): [string, string] {
   if (kind === 0) return [`${e}(${sum([[a, sb], [b, cb]])})`, `${e}(${sum([[a * a - b * b, sb], [2 * a * b, cb]])})`];
   if (kind === 4) return [`${e}(${sum([[a, cb], [-b, sb]])})`, `${e}(${sum([[a * a - b * b, cb], [-2 * a * b, sb]])})`];
   if (kind === 1) {
-    if (b === 0) return ["1/x", "−1/x^2"];
+    if (b === 0) return ["1/x", "−1/x²"];
     const lin = `${kx(a)}${sg(b)}`;
-    return [`${a}/(${lin})`, `−${a * a}/(${lin})^2`];
+    return [`${a}/(${lin})`, `−${a * a}/(${lin})²`];
   }
   if (kind === 2) {
     const n = a;
-    const pre = (pw: number) => `${b === 1 ? "" : b}${pw === 0 ? "" : pw === 1 ? "x" : `x^${pw}`}`;
-    const inner2 = sum([[n * (n - 1), "ln(x)"], [2 * n - 1, ""]]);
+    const pre = (pw: number) => `${b === 1 ? "" : b}${pw === 0 ? "" : pw === 1 ? "x" : `x${sup(pw)}`}`;
+    const inner2 = sum([[n * (n - 1), "log x"], [2 * n - 1, ""]]);
     const p2 = pre(n - 2);
-    return [`${pre(n - 1)}(${sum([[n, "ln(x)"], [1, ""]])})`, p2 ? `${p2}(${inner2})` : inner2];
+    return [`${pre(n - 1)}(${sum([[n, "log x"], [1, ""]])})`, p2 ? `${p2}(${inner2})` : inner2];
   }
   if (kind === 3) return [`${b === 1 ? "" : b}${e}(${sum([[a, "x"], [1, ""]])})`, `${b === 1 ? "" : b}${e}(${sum([[a * a, "x"], [2 * a, ""]])})`];
   const sa = `sin(${kx(a)})`;
