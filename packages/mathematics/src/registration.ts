@@ -3,9 +3,16 @@ import type { Framework } from "../../english-core/src/types";
 import { indexContent } from "../../english-core/src/content";
 import { Ledger, type Context } from "../../english-core/src/updater";
 import english from "../../../content/english/framework/en-0.2.0.json";
-import { competencies } from "./curriculum";
+import {
+  competencyGraph,
+  activeGraphVersion,
+  type GraphVersion,
+} from "./prerequisites";
 /** Reuse host policy verbatim; no math calibration/eligibility changes. All content remains provisional. */
-export function mathematicsContext(): Context {
+export function mathematicsContext(
+  graphVersion: GraphVersion = activeGraphVersion,
+): Context {
+  const competencies = competencyGraph(graphVersion);
   const strands = [...new Set(competencies.map((c) => c.strand))].map(
     (strand) => ({
       id: `MATH.${strand}`,
@@ -31,7 +38,7 @@ export function mathematicsContext(): Context {
   );
   const framework: Framework = {
     id: "math",
-    version: "1.0.0",
+    version: graphVersion,
     title: "Mathematics",
     status: "provisional",
     review: {
@@ -60,6 +67,9 @@ export function mathematicsContext(): Context {
     ),
   };
 }
-export function mathematicsLedger(learnerId: string) {
-  return new Ledger(mathematicsContext(), learnerId);
+export function mathematicsLedger(
+  learnerId: string,
+  graphVersion: GraphVersion = activeGraphVersion,
+) {
+  return new Ledger(mathematicsContext(graphVersion), learnerId);
 }
