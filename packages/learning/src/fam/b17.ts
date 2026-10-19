@@ -1933,7 +1933,7 @@ function homAnswer([kind, k, m, c]: number[]): string {
 }
 function d2Ok([kind, a, b]: number[]): boolean {
   if (kind === 0 || kind === 4) return a !== 0 && a <= 3 && b >= 1 && b <= 3;
-  if (kind === 1) return a >= 1 && a <= 5 && b >= 0 && b <= 5;
+  if (kind === 1) return a >= 1 && a <= 5 && b >= 0 && b <= 5 && gcd(a, b) === 1;
   if (kind === 2) return a >= 2 && a <= 5 && b >= 1 && b <= 3;
   if (kind === 3) return a !== 0 && a <= 3 && b >= 1 && b <= 4;
   if (kind === 5) return a >= 1 && a <= 4 && (b === 0 || b === 1);
@@ -1980,4 +1980,4 @@ function d2Answers([kind, a, b]: number[]): [string, string] {
   const ca = `cos(${kx(a)})`;
   return b ? [sum([[1, ca], [-a, `x ${sa}`]]), sum([[-2 * a, sa], [-a * a, `x ${ca}`]])] : [sum([[1, sa], [a, `x ${ca}`]]), sum([[2 * a, ca], [-a * a, `x ${sa}`]])];
 }
-void gcd;
+
