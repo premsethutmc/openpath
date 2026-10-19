@@ -59,8 +59,8 @@ const typedOf = (id: string) => problemOf(id.replace(/:mc$/, ""))!;
  * check from the retention part; never the same problem twice (in either answer format).
  */
 function drawer(family: string, used: Set<string>) {
-  const take = (phase: Phase, form: "typed" | "mc" | "any" = "any"): string => {
-    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : x)).find((x) => !used.has(exposureKey(x)));
+  const take = (phase: Phase, form: "typed" | "mc" | "word" | "any" = "any"): string => {
+    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : form === "word" ? `${x.replace(/:mc$/, "")}:w` : x)).find((x) => !used.has(exposureKey(x)) && (form !== "word" || problemOf(x) !== null));
     if (!id) throw new Error(`${LIBRARY_POLICY}: family ${family} has too few ${phase} questions for a module`);
     used.add(exposureKey(id));
     return id;
@@ -150,9 +150,18 @@ export function fromTemplate(family: string, competency: string, version: string
   const diagnostics = explore(family, used);
   const probes = [...new Set(first.bugs.flatMap((b) => (b.probe && !b.probe.startsWith(`gen:${family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
   const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name);
+  const vis = (f: ((p: number[]) => unknown) | undefined, p: Problem) => {
+    const w = f?.(p.params);
+    return w ? { widget: w as Screen["widget"] } : {};
+  };
   const strategies: Strategy[] = [
-    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
+    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx), ...vis(def.teach.visual, stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
   ];
+  // template@2: the family's further ways of explaining, each with its own example (and picture)
+  for (const alt of def.teach.alternatives ?? []) {
+    const e = ex() ?? stepsEx;
+    strategies.push({ id: alt.id, title: alt.title, kind: alt.kind, needs: [], screens: [{ title: alt.title, text: alt.text, math: worked(e), ...vis(alt.visual, e) }], guided: take("practice", "typed"), check: take("check", strategies.length % 2 ? "mc" : "typed") });
+  }
   if (mistakeEx) {
     const b = conceptual(mistakeEx)!;
     strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says, def.teach.idea], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
@@ -162,15 +171,15 @@ export function fromTemplate(family: string, competency: string, version: string
   return {
     competency,
     title: def.title,
-    chapter: [{ title: def.title, text: [def.teach.idea], math: worked(first), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}) }],
+    chapter: [{ title: def.title, text: [def.teach.idea], math: worked(first), ...vis(def.teach.visual, first), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}) }],
     diagnostics,
     strategies,
     practice: [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")],
-    transfer: [take("practice", "mc")],
+    transfer: [def.word ? take("practice", "word") : take("practice", "mc")],
     retention: [take("retention", "typed"), take("retention", "mc")],
     probes,
     pool: { family, version: FAMILY_VERSION[family] },
-    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+template@1`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
+    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+${def.teach.alternatives?.length || def.teach.visual ? "template@2" : "template@1"}`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
   };
 }
 

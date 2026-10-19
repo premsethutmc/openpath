@@ -14,6 +14,7 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
+from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, parse as parse_expression, same_answer
 from .learning_families import generated
 from .models import PupilEvent
 
@@ -28,6 +29,8 @@ RECORDS = {
     'skip': {'target'},
 }
 BASE = {'kind', 'id', 'at', 'learnerId', 'sessionId', 'record'}
+# a written answer (proof, construction, explanation) may be long; an educator marks it
+WRITTEN_LIMIT = 4000
 # the delayed check (status@1 RETENTION_DAYS), less the half-day tolerance the shared engine also allows
 # a delayed check: seven full days after independent success (status@1 RETENTION_DAYS; no tolerance on this surface)
 RETENTION_DELAY = timedelta(days=7)
@@ -50,8 +53,14 @@ def content():
     for p in problems:
         for f in [p['full'], *p['fragments']]:
             questions[f['id']] = {**f, 'competency': f['competencies'][-1], 'role': 'challenge'}
+    for t in _load('written.v1.json')['tasks']:
+        # written@1: an educator marks it; the answer is the mark "correct" (never the learner's text)
+        questions[t['id']] = {**t, 'type': 'written', 'answer': '', 'role': 'written'}
     graph = {c['id'] for c in json.loads((Path(settings.BASE_DIR).parent / 'content/mathematics/curriculum.v1.json').read_text())['competencies']}
     graph |= {c['id'] for c in _load('competency-additions.v1.json')['competencies']}
+    expansion = Path(settings.BASE_DIR).parent / ROOT / 'competency-expansion.v1.json'
+    if expansion.exists():
+        graph |= {c['id'] for c in json.loads(expansion.read_text())['competencies']}
     releases = {(r['id'], r['version']): r['hash'] for r in _load('curricula/index.json')['releases']}
     return {
         'questions': questions,
@@ -90,7 +99,10 @@ def server_now(pupil):
 
 
 def canonical(kind, raw):
-    """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind."""
+    """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind. answers@2 types
+    (answer_types.py): exact types have a canonical form; sampled types are compared in `right`; written: none."""
+    if kind in NEW_TYPES:
+        return canonical_of(kind, raw)
     t = str(raw).strip().replace('−', '-')
     try:
         if kind == 'choice':
@@ -108,24 +120,34 @@ def canonical(kind, raw):
 
 
 def right(q, response):
+    if q['type'] in HUMAN:
+        return False  # an educator marks it
+    if q['type'] in SAMPLED:
+        return same_answer(q['type'], response, q['answer'])
     c = canonical(q['type'], response)
     return c is not None and c == canonical(q['type'], q['answer'])
 
 
-def independent_at(prior, competency):
-    """When independent success on this competency was first shown (the app's skillEvidence.independentAt)."""
+def independent_at(prior, competency, marks=None):
+    """When independent success on this competency was first shown (the app's skillEvidence.independentAt). A written
+    answer counts only once an educator has marked it correct (marks: attempt id -> verdict); unmarked, it is not
+    yet evidence of anything."""
     qs = content()['questions']
+    marks = marks or {}
     seen, distinct = {}, set()
     for e in prior:
+        if e.get('record') == 'attempt' and (qs.get(e.get('questionId')) or {}).get('type') in HUMAN and e.get('id') not in marks:
+            continue
         q = qs.get(e.get('questionId')) or generated(e.get('questionId')) if e.get('record') == 'attempt' else None
         if not q:
             continue
         # one exposure per problem, whichever answer format (the app's records.ts exposureKey)
-        key = re.sub(r':mc$', '', e['questionId']) if e['questionId'].startswith('gen:') else e['questionId']
+        key = re.sub(r':(mc|w)$', '', e['questionId']) if e['questionId'].startswith('gen:') else e['questionId']
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
-        if right(q, e.get('response', '')):
+        ok = marks.get(e.get('id')) == 'correct' if q['type'] in HUMAN else right(q, e.get('response', ''))
+        if ok:
             distinct.add(e['questionId'])
             if len(distinct) >= INDEPENDENT_MIN:
                 return timezone.datetime.fromisoformat(e['at'].replace('Z', '+00:00'))
@@ -142,6 +164,16 @@ def _text(value, limit):
 
 def _answer_ok(kind, raw):
     t = raw.strip().replace('−', '-')
+    if kind in HUMAN:
+        return 0 < len(t) <= WRITTEN_LIMIT
+    if kind in SAMPLED:
+        try:
+            parse_expression(re.sub(r'\s*\+\s*[cCkK]\s*$', '', t) if kind == 'antiderivative' else t)
+            return True
+        except Exception:  # noqa: BLE001 - any unreadable expression
+            return False
+    if kind in NEW_TYPES:
+        return canonical_of(kind, t) is not None
     if kind == 'choice':
         return t.upper() in {'A', 'B', 'C', 'D'}
     if kind == 'integer':
@@ -248,7 +280,7 @@ def checked_learning(event, pupil):
             _reject('Unknown activity.')
         if type(event.get('hints')) is not int or not 0 <= event['hints'] <= 5 or type(event.get('solution')) is not bool:
             _reject('Hints and solutions are recorded as given.')
-        if not isinstance(event.get('response'), str) or len(event['response']) > 80 or not _answer_ok(q['type'], event['response']):
+        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES else 80) or not _answer_ok(q['type'], event['response']):
             _reject('That answer is not in the form this question asks for.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
@@ -257,7 +289,9 @@ def checked_learning(event, pupil):
             _reject('Working is at most 8 lines of 80 characters.')
         if event['activity'] == 'retention':
             # the same rule as the app (status@1): two distinct right first answers on your own, then seven full days
-            since = independent_at(prior, q['competency'])
+            from .models import WrittenMark
+            marks = dict(WrittenMark.objects.filter(pupil=pupil).values_list('attempt_id', 'verdict'))
+            since = independent_at(prior, q['competency'], marks)
             if since is None or now - since < RETENTION_DELAY:
                 _reject('The delayed check is not due yet.')
     elif record == 'teach':

@@ -2272,6 +2272,374 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "cnt",
+   "version": "1.0.0",
+   "title": "Counting objects in a picture",
+   "competency": "MATH.number.count-objects",
+   "skill": "MATH.number.count-objects",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     20
+    ],
+    [
+     0,
+     5
+    ]
+   ],
+   "poolSize": 120,
+   "excluded": [],
+   "difficulty": {
+    "1": 30,
+    "2": 30,
+    "3": 60
+   },
+   "examples": [
+    "gen:cnt:2,4",
+    "gen:cnt:4,2:mc",
+    "gen:cnt:7,4",
+    "gen:cnt:9,2:mc",
+    "gen:cnt:14,2",
+    "gen:cnt:17,4:mc"
+   ],
+   "explanations": [
+    "skip-one (procedural): One object was missed. Touch each one as you say its number.",
+    "count-twice (procedural): One object was counted twice. Move each one (or tick it) once you have counted it.",
+    "teen-reversal (conceptual): The number was said the wrong way round: 20 is 1 ten and 10 ones."
+   ],
+   "teach": {
+    "idea": "Each object gets exactly one number. The last number you say tells how many there are.",
+    "method": "Touch each object once as you count, starting from 1. Stop when every object has a number.",
+    "alternatives": [
+     {
+      "id": "ten_frame",
+      "title": "Fill a ten frame",
+      "kind": "conceptual",
+      "text": [
+       "Put the objects in a ten frame: each square holds one.",
+       "A full frame is 10; count the extra squares after 10."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "6adf444e",
+   "validation": {
+    "family": "cnt",
+    "deterministic": {
+     "checked": 120,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "addr",
+   "version": "1.0.0",
+   "title": "Adding two-digit numbers with regrouping",
+   "competency": "MATH.number.addition-regroup",
+   "skill": "MATH.number.addition-regroup",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     10,
+     89
+    ],
+    [
+     10,
+     89
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 79,
+    "2": 97,
+    "3": 224
+   },
+   "examples": [
+    "gen:addr:24,16",
+    "gen:addr:43,27:mc",
+    "gen:addr:18,27",
+    "gen:addr:28,25:mc",
+    "gen:addr:38,44",
+    "gen:addr:57,18:mc"
+   ],
+   "explanations": [
+    "no-regroup (conceptual): The ten made by the ones (9 + 9 = 18) was not carried to the tens.",
+    "write-both-digits (conceptual): All of 18 was written in the ones place; 18 is 1 ten and 8 ones.",
+    "fact-slip-add (recall): An addition fact (9 + 9) is not yet reliable."
+   ],
+   "teach": {
+    "idea": "Ten ones make one ten. When the ones add up to 10 or more, swap ten of them for a ten.",
+    "method": "Add the ones first. If there are 10 or more, carry 1 ten to the tens column. Then add the tens, including the carried ten.",
+    "alternatives": [
+     {
+      "id": "make_ten",
+      "title": "Make a ten first",
+      "kind": "conceptual",
+      "text": [
+       "Break the second number to make a ten with the first: 38 + 25 = 38 + 2 + 23 = 40 + 23.",
+       "A round number of tens is easy to add to."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "aafa97aa",
+   "validation": {
+    "family": "addr",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "surd",
+   "version": "1.0.0",
+   "title": "Simplifying a square root",
+   "competency": "MATH.number.radicals",
+   "skill": "MATH.number.radicals",
+   "type": "exact",
+   "multipleChoice": true,
+   "domain": [
+    [
+     8,
+     600
+    ]
+   ],
+   "poolSize": 211,
+   "excluded": [],
+   "difficulty": {
+    "1": 13,
+    "2": 52,
+    "3": 146
+   },
+   "examples": [
+    "gen:surd:24",
+    "gen:surd:40:mc",
+    "gen:surd:104",
+    "gen:surd:152:mc",
+    "gen:surd:338",
+    "gen:surd:475:mc"
+   ],
+   "explanations": [
+    "root-not-squared (conceptual): 100 came out of the root as 100; a square comes out as its square root (√100 = 10).",
+    "halve-instead (conceptual): The number was halved; a square root asks which number times itself gives it."
+   ],
+   "teach": {
+    "idea": "√(a × b) = √a × √b, so a perfect-square factor can come out of the root as its square root.",
+    "method": "Find the largest perfect square that divides the number, write the number as square × rest, and take the square root of the square outside.",
+    "alternatives": [
+     {
+      "id": "prime_pairs",
+      "title": "Pair the prime factors",
+      "kind": "procedural",
+      "text": [
+       "Write the number as a product of primes, e.g. 72 = 2 × 2 × 2 × 3 × 3.",
+       "Each pair of equal primes comes out as one prime: (2)(3)√2 = 6√2."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "6684f7d5",
+   "validation": {
+    "family": "surd",
+    "deterministic": {
+     "checked": 211,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "lineq",
+   "version": "1.0.0",
+   "title": "Solving a linear inequality",
+   "competency": "MATH.algebra.inequalities",
+   "skill": "MATH.algebra.inequalities",
+   "type": "interval",
+   "multipleChoice": true,
+   "domain": [
+    [
+     -6,
+     6
+    ],
+    [
+     -15,
+     15
+    ],
+    [
+     -20,
+     20
+    ]
+   ],
+   "poolSize": 500,
+   "excluded": [],
+   "difficulty": {
+    "1": 114,
+    "2": 101,
+    "3": 285
+   },
+   "examples": [
+    "gen:lineq:3,3,-6",
+    "gen:lineq:4,9,-7:mc",
+    "gen:lineq:3,-14,4",
+    "gen:lineq:4,-5,19:mc",
+    "gen:lineq:-3,-14,13",
+    "gen:lineq:-2,6,10:mc"
+   ],
+   "explanations": [
+    "keep-sign-negative (conceptual): Both sides were divided by −1, a negative number, but the inequality sign was not reversed.",
+    "add-instead (procedural): 15 was moved to the other side without changing its sign.",
+    "boundary-included (procedural): The boundary value was included; with < it is not part of the answer."
+   ],
+   "teach": {
+    "idea": "An inequality stays true when you add, subtract, or multiply and divide by a POSITIVE number; dividing by a negative number flips the order, so the sign reverses.",
+    "method": "Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer.",
+    "alternatives": [
+     {
+      "id": "test_numbers",
+      "title": "Test numbers on a number line",
+      "kind": "conceptual",
+      "text": [
+       "Find the boundary by solving the equation ax + b = c.",
+       "Try one number on each side in the original inequality: the side where it is true is the answer."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "bb03ddb9",
+   "validation": {
+    "family": "lineq",
+    "deterministic": {
+     "checked": 500,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "dprod",
+   "version": "1.0.0",
+   "title": "Differentiating k xⁿ times sin(ax) or cos(ax)",
+   "competency": "MATH.calculus.derivative-rules",
+   "skill": "MATH.calculus.derivative-rules",
+   "type": "expression",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "poolSize": 120,
+   "excluded": [],
+   "difficulty": {
+    "1": 10,
+    "2": 70,
+    "3": 40
+   },
+   "examples": [
+    "gen:dprod:2,1,1,1",
+    "gen:dprod:4,1,0,1:mc",
+    "gen:dprod:2,2,1,3",
+    "gen:dprod:4,2,0,1:mc",
+    "gen:dprod:2,4,0,3",
+    "gen:dprod:4,3,1,2:mc"
+   ],
+   "explanations": [
+    "product-of-derivatives (conceptual): The two derivatives were multiplied; the derivative of a product is u′v + uv′, not u′v′.",
+    "one-term-only (procedural): Only one part of the product rule was used; there are two terms, u′v and uv′.",
+    "chain-forgotten (procedural): The inner 3x was forgotten: the derivative of cos(3x) has a factor 3 (chain rule).",
+    "cos-derivative-sign (recall): The derivative of cos is −sin (with a minus sign)."
+   ],
+   "teach": {
+    "idea": "When y = u × v, a small change in x changes both factors: y′ = u′v + uv′. The derivative of sin(ax) is a cos(ax), and of cos(ax) is −a sin(ax).",
+    "method": "Name u and v, differentiate each (remember the inner factor a), then write u′v + uv′.",
+    "alternatives": [
+     {
+      "id": "table",
+      "title": "A u, v table",
+      "kind": "procedural",
+      "text": [
+       "Write u and u′ in one row, v and v′ in the next.",
+       "Cross-multiply: u′ times v, plus u times v′."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "31ee105e",
+   "validation": {
+    "family": "dprod",
+    "deterministic": {
+     "checked": 120,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }

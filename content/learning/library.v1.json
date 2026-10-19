@@ -3217,6 +3217,603 @@
      "gen:condp:3,2,3,5"
     ]
    }
+  },
+  {
+   "competency": "MATH.number.count-objects",
+   "title": "Counting objects in a picture",
+   "chapter": [
+    {
+     "title": "Counting objects in a picture",
+     "text": [
+      "Each object gets exactly one number. The last number you say tells how many there are."
+     ],
+     "math": [
+      "How many flowers are in the picture?",
+      "Touch and count each one: 1, 2, 3 … 8. The last number said is how many."
+     ],
+     "widget": {
+      "type": "dots",
+      "count": 8,
+      "rows": 1
+     },
+     "tip": "One object was missed. Touch each one as you say its number."
+    }
+   ],
+   "diagnostics": [
+    "gen:cnt:14,5",
+    "gen:cnt:20,2",
+    "gen:cnt:12,1"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Touch each object once as you count, starting from 1. Stop when every object has a number."
+       ],
+       "math": [
+        "How many stars are in the picture?",
+        "Touch and count each one: 1, 2, 3 … 8. The last number said is how many."
+       ],
+       "widget": {
+        "type": "dots",
+        "count": 8,
+        "rows": 1
+       }
+      }
+     ],
+     "guided": "gen:cnt:14,1",
+     "check": "gen:cnt:8,4"
+    },
+    {
+     "id": "ten_frame",
+     "title": "Fill a ten frame",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Fill a ten frame",
+       "text": [
+        "Put the objects in a ten frame: each square holds one.",
+        "A full frame is 10; count the extra squares after 10."
+       ],
+       "math": [
+        "How many apples are in the picture?",
+        "Touch and count each one: 1, 2, 3 … 14. The last number said is how many."
+       ],
+       "widget": {
+        "type": "tenframe",
+        "filled": 14,
+        "frames": 2
+       }
+      }
+     ],
+     "guided": "gen:cnt:20,5",
+     "check": "gen:cnt:8,5:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “How many apples are in the picture?” A common wrong answer is 7.",
+        "One object was missed. Touch each one as you say its number.",
+        "Each object gets exactly one number. The last number you say tells how many there are."
+       ],
+       "math": [
+        "Not 7, but 8"
+       ]
+      }
+     ],
+     "guided": "gen:cnt:14,3",
+     "check": "gen:cnt:20,0:mc"
+    }
+   ],
+   "practice": [
+    "gen:cnt:14,2",
+    "gen:cnt:18,0:mc",
+    "gen:cnt:18,3"
+   ],
+   "transfer": [
+    "gen:cnt:18,2:w"
+   ],
+   "retention": [
+    "gen:cnt:5,0",
+    "gen:cnt:8,2:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "cnt",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "cnt",
+    "seed": [
+     8,
+     3
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:cnt:8,3",
+     "gen:cnt:8,0",
+     "gen:cnt:8,1"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.number.addition-regroup",
+   "title": "Adding two-digit numbers with regrouping",
+   "chapter": [
+    {
+     "title": "Adding two-digit numbers with regrouping",
+     "text": [
+      "Ten ones make one ten. When the ones add up to 10 or more, swap ten of them for a ten."
+     ],
+     "math": [
+      "36 + 24 = ?",
+      "Ones: 6 + 4 = 10",
+      "10 ones = 1 ten and 0 ones: carry the ten",
+      "Tens: 3 + 2 + 1 carried = 6 tens"
+     ],
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 5,
+      "ones": 10
+     },
+     "tip": "The ten made by the ones (6 + 4 = 10) was not carried to the tens."
+    }
+   ],
+   "diagnostics": [
+    "gen:addr:66,15",
+    "gen:addr:19,37",
+    "gen:addr:36,18"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Add the ones first. If there are 10 or more, carry 1 ten to the tens column. Then add the tens, including the carried ten."
+       ],
+       "math": [
+        "56 + 35 = ?",
+        "Ones: 6 + 5 = 11",
+        "11 ones = 1 ten and 1 one: carry the ten",
+        "Tens: 5 + 3 + 1 carried = 9 tens"
+       ],
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 8,
+        "ones": 11
+       }
+      }
+     ],
+     "guided": "gen:addr:66,27",
+     "check": "gen:addr:11,29"
+    },
+    {
+     "id": "make_ten",
+     "title": "Make a ten first",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Make a ten first",
+       "text": [
+        "Break the second number to make a ten with the first: 38 + 25 = 38 + 2 + 23 = 40 + 23.",
+        "A round number of tens is easy to add to."
+       ],
+       "math": [
+        "66 + 24 = ?",
+        "Ones: 6 + 4 = 10",
+        "10 ones = 1 ten and 0 ones: carry the ten",
+        "Tens: 6 + 2 + 1 carried = 9 tens"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": 66,
+        "to": 90,
+        "jumps": [
+         [
+          66,
+          70
+         ],
+         [
+          70,
+          90
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:addr:56,38",
+     "check": "gen:addr:19,28:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “11 + 19 = ?” A common wrong answer is 20.",
+        "The ten made by the ones (1 + 9 = 10) was not carried to the tens.",
+        "Ten ones make one ten. When the ones add up to 10 or more, swap ten of them for a ten."
+       ],
+       "math": [
+        "Not 20, but 30"
+       ]
+      }
+     ],
+     "guided": "gen:addr:66,25",
+     "check": "gen:addr:66,17:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Combine quantities within 20; Compose tens and ones. If a step is slow, practise that skill first.",
+        "Then the method is: Add the ones first. If there are 10 or more, carry 1 ten to the tens column. Then add the tens, including the carried ten."
+       ]
+      }
+     ],
+     "guided": "gen:addr:56,39",
+     "check": "gen:addr:19,29"
+    }
+   ],
+   "practice": [
+    "gen:addr:76,16",
+    "gen:addr:76,17:mc",
+    "gen:addr:38,59"
+   ],
+   "transfer": [
+    "gen:addr:19,25:w"
+   ],
+   "retention": [
+    "gen:addr:66,26",
+    "gen:addr:61,29:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "addr",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "addr",
+    "seed": [
+     36,
+     24
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:addr:36,24",
+     "gen:addr:11,19",
+     "gen:addr:56,35"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.number.radicals",
+   "title": "Simplifying a square root",
+   "chapter": [
+    {
+     "title": "Simplifying a square root",
+     "text": [
+      "√(a × b) = √a × √b, so a perfect-square factor can come out of the root as its square root."
+     ],
+     "math": [
+      "Write √24 in its simplest form.",
+      "24 = 4 × 6, and 4 is a perfect square",
+      "√4 × √6 = 2√6"
+     ],
+     "tip": "4 came out of the root as 4; a square comes out as its square root (√4 = 2)."
+    }
+   ],
+   "diagnostics": [
+    "gen:surd:12",
+    "gen:surd:90",
+    "gen:surd:160"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Find the largest perfect square that divides the number, write the number as square × rest, and take the square root of the square outside."
+       ],
+       "math": [
+        "Write √96 in its simplest form.",
+        "96 = 16 × 6, and 16 is a perfect square",
+        "√16 × √6 = 4√6"
+       ]
+      }
+     ],
+     "guided": "gen:surd:72",
+     "check": "gen:surd:28"
+    },
+    {
+     "id": "prime_pairs",
+     "title": "Pair the prime factors",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Pair the prime factors",
+       "text": [
+        "Write the number as a product of primes, e.g. 72 = 2 × 2 × 2 × 3 × 3.",
+        "Each pair of equal primes comes out as one prime: (2)(3)√2 = 6√2."
+       ],
+       "math": [
+        "Write √164 in its simplest form.",
+        "164 = 4 × 41, and 4 is a perfect square",
+        "√4 × √41 = 2√41"
+       ]
+      }
+     ],
+     "guided": "gen:surd:117",
+     "check": "gen:surd:92:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Write √99 in its simplest form.” A common wrong answer is 9√11.",
+        "9 came out of the root as 9; a square comes out as its square root (√9 = 3).",
+        "√(a × b) = √a × √b, so a perfect-square factor can come out of the root as its square root."
+       ],
+       "math": [
+        "Not 9√11, but 3√11"
+       ]
+      }
+     ],
+     "guided": "gen:surd:176",
+     "check": "gen:surd:172:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Find factors and multiples. If a step is slow, practise that skill first.",
+        "Then the method is: Find the largest perfect square that divides the number, write the number as square × rest, and take the square root of the square outside."
+       ]
+      }
+     ],
+     "guided": "gen:surd:116",
+     "check": "gen:surd:168"
+    }
+   ],
+   "practice": [
+    "gen:surd:175",
+    "gen:surd:108:mc",
+    "gen:surd:188"
+   ],
+   "transfer": [
+    "gen:surd:189:mc"
+   ],
+   "retention": [
+    "gen:surd:20",
+    "gen:surd:27:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "surd",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "surd",
+    "seed": [
+     24
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:surd:24",
+     "gen:surd:99",
+     "gen:surd:96"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.inequalities",
+   "title": "Solving a linear inequality",
+   "chapter": [
+    {
+     "title": "Solving a linear inequality",
+     "text": [
+      "An inequality stays true when you add, subtract, or multiply and divide by a POSITIVE number; dividing by a negative number flips the order, so the sign reverses."
+     ],
+     "math": [
+      "Solve 2x − 1 < 7. Write the answer as an inequality for x (e.g. x > 2).",
+      "Add 1 to both sides: the right side becomes 8",
+      "Divide both sides by 2: x < 4"
+     ],
+     "tip": "1 was moved to the other side without changing its sign."
+    }
+   ],
+   "diagnostics": [
+    "gen:lineq:-3,-6,-6",
+    "gen:lineq:-2,-12,12",
+    "gen:lineq:-2,11,-13"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
+       ],
+       "math": [
+        "Solve −3x + 9 < −12. Write the answer as an inequality for x (e.g. x > 2).",
+        "Take 9 from both sides: the right side becomes −21",
+        "Divide both sides by −3 and reverse the sign, because dividing by a negative number reverses an inequality: x > 7"
+       ]
+      }
+     ],
+     "guided": "gen:lineq:5,-1,-1",
+     "check": "gen:lineq:3,7,19"
+    },
+    {
+     "id": "test_numbers",
+     "title": "Test numbers on a number line",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Test numbers on a number line",
+       "text": [
+        "Find the boundary by solving the equation ax + b = c.",
+        "Try one number on each side in the original inequality: the side where it is true is the answer."
+       ],
+       "math": [
+        "Solve −6x + 14 < −16. Write the answer as an inequality for x (e.g. x > 2).",
+        "Take 14 from both sides: the right side becomes −30",
+        "Divide both sides by −6 and reverse the sign, because dividing by a negative number reverses an inequality: x > 5"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": 0,
+        "to": 10,
+        "marks": [
+         5
+        ]
+       }
+      }
+     ],
+     "guided": "gen:lineq:-2,-4,20",
+     "check": "gen:lineq:-2,-12,10:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).” A common wrong answer is x ≤ 4.",
+        "The boundary value was included; with < it is not part of the answer.",
+        "An inequality stays true when you add, subtract, or multiply and divide by a POSITIVE number; dividing by a negative number flips the order, so the sign reverses."
+       ],
+       "math": [
+        "Not x ≤ 4, but x < 4"
+       ]
+      }
+     ],
+     "guided": "gen:lineq:-1,5,-4",
+     "check": "gen:lineq:-4,13,1:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first.",
+        "Then the method is: Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
+       ]
+      }
+     ],
+     "guided": "gen:lineq:4,9,-7",
+     "check": "gen:lineq:-4,11,-5"
+    }
+   ],
+   "practice": [
+    "gen:lineq:4,12,4",
+    "gen:lineq:3,11,-16:mc",
+    "gen:lineq:3,6,15"
+   ],
+   "transfer": [
+    "gen:lineq:2,15,1:w"
+   ],
+   "retention": [
+    "gen:lineq:-6,-12,-6",
+    "gen:lineq:-3,-3,-3:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "lineq",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "lineq",
+    "seed": [
+     2,
+     -1,
+     7
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:lineq:2,-1,7",
+     "gen:lineq:5,-6,14",
+     "gen:lineq:-3,9,-12"
+    ]
+   }
   }
  ],
  "authoredPools": {

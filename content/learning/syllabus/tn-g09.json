@@ -1,0 +1,1762 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 9,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics, Standard Nine",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation (content: SCERT Tamil Nadu)",
+  "edition": "First Edition 2018 (trimester, 3 term books); Revised Edition 2019 single volume, reprinted annually (latest circulating copy labelled 2025 edition)",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Mathematics, Standard Nine (English medium), full volume",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation / SCERT",
+   "edition": "First Edition 2018; Revised Edition 2019",
+   "academicYear": "2019-20 onward (copy uploaded Aug 2022)",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-9-Maths-Textbook-English.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "edition statement, chapter list, section titles (contents page)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics, Standard Nine, Term I/II/III, Volume 2 (2018 trimester edition)",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation / SCERT",
+   "edition": "First Edition 2018, trimester pattern",
+   "academicYear": "2018-19",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-9-Maths-Term-1-Textbook.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirming the superseded 2018 term-wise structure (Term II: https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-9-Maths-Term-2-Textbook.pdf ; Term III: https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-9-Maths-Term-3-Textbook.pdf)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics, Standard Nine, chapter PDFs (Ch 1, 3, 4, 8 read)",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation / SCERT",
+   "edition": "Revised Edition 2019 (chapter files uploaded Oct 2019)",
+   "academicYear": "2019-20 onward",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/10/Tamil-Nadu-State-Board-Textbooks_Samacheer-Kalvi-Books_Class-9th_Maths-chapter-8_-English-Medium.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "chapter learning-outcome boxes and sub-section scope (sets, algebra, geometry, statistics)"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Maths 9th std (TN 9th Maths English Medium) topic index (secondary)",
+   "publisher": "BrainKart",
+   "edition": "n/a",
+   "academicYear": "unspecified",
+   "url": "https://www.brainkart.com/subject/Maths-9th-std_350/",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of sub-topics (secondary, not authoritative)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Tamilnadu 9th New Books (secondary listing; file 'Class_9_Mathematics_English_2025_Edition')",
+   "publisher": "tntextbooks.in",
+   "edition": "2025 edition (file name)",
+   "academicYear": "2026-27 (as claimed)",
+   "url": "https://www.tntextbooks.in/p/9th-books.html",
+   "accessed": "2026-10-19",
+   "used_for": "indication of the reprint currently circulating; contents not readable"
+  },
+  {
+   "kind": "notification",
+   "title": "Textbook sale notifications for academic year 2026-27 (Term-1 1-7, Term-2 1-7, annual 8th & 11th, minority 4-12)",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+   "edition": "notices dated 14.05.2026, 25.05.2026, 22.09.2026",
+   "academicYear": "2026-27",
+   "url": "https://www.textbookcorp.in/schools",
+   "accessed": "2026-10-19",
+   "used_for": "evidence that term-wise books in 2026-27 are only for Std 1-7; Std 9/10 sale not separately listed"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu: Printing of new second-term textbooks for classes 1-3 under way (news, secondary)",
+   "publisher": "DT Next",
+   "edition": "updated 16 Sep 2026",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-printing-of-new-second-term-textbooks-for-classes-13-under-way",
+   "accessed": "2026-10-19",
+   "used_for": "new State Education Policy syllabus in 2026-27 only for classes 1-3; remaining classes from next academic year"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu Board 2023: full syllabus for classes 10-12 after Covid reductions (news, secondary)",
+   "publisher": "ALLEN (news.allen.in)",
+   "edition": "2023",
+   "academicYear": "2022-23",
+   "url": "https://news.allen.in/tamil-nadu-board-2023/",
+   "accessed": "2026-10-19",
+   "used_for": "Covid-era reductions withdrawn; full syllabus examined"
+  }
+ ],
+ "notes": [
+  "Official sites could not be read: textbooksonline.tn.nic.in (robots disallowed for the fetch tool; shell has no internet), tnschools.gov.in/scert e-books page (JavaScript-rendered, no content returned), textbookcorp.tn.gov.in price-list PDF (robots disallowed), dge.tn.gov.in (no syllabus/blueprint notices visible). Textbook content was therefore read from copies of the official TNTBESC/SCERT PDF hosted on cdn1.byjus.com; the front matter (Government of Tamil Nadu, SCERT copyright) identifies it as the official book. Chapters are marked verified:true on that basis.",
+  "Term structure: the 2018 First Edition was printed in trimester pattern (Term I: Set Language, Real Numbers, Algebra, Geometry, Coordinate Geometry; Term II: Set Language, Real Numbers, Algebra, Geometry, Statistics; Term III: Algebra, Coordinate Geometry, Trigonometry, Mensuration, Probability). The 2019 Revised Edition is a single volume with nine chapters, and this file follows it (terms:null, term:null on all chapters). TNTBESC 2026-27 notices list term-wise books only for Std 1-7, which supports single-volume Std 9; not confirmed by an explicit Std 9 notice.",
+  "Edition for 2026-27: News (DT Next, 16 Sep 2026) says the new State Education Policy syllabus applies in 2026-27 only to classes 1-3, with remaining classes from the next academic year, so Std 9 should still use the Revised Edition 2019 content (annual reprint; a '2025 Edition' file circulates). Some third-party sites (tnkalvi.net, tntextbooks.in) label the Std 9 Maths file 'new syllabus 2026-27'; I could not open that file to check whether its content differs. If TN issued a revised Std 9 Maths book for 2026-27, this file must be re-checked.",
+  "Reduced syllabus: Covid-era reductions (2020-21 to 2022-23) were withdrawn and full syllabus restored from the 2023 exams (secondary news). Std 9 has no public exam, and no 2026-27 reduction notice was found. A third-party 'month-wise syllabus 2026-27' (padasalai.net) exists but its maths file was labelled 2025-26 and was not opened.",
+  "Section lists contain only the numbered top-level sections from the official contents page (x.y). Sub-sections (e.g. 3.6.2 Synthetic Division, 3.8.1 Simultaneous Linear Equations, 4.7.1-4.7.4 triangle-centre constructions, 8.5.2 grouped median) were seen in chapter PDFs and are reflected in outcomes but not listed as sections.",
+  "Chapter 3 section 3.8 (Linear Equation in Two Variables) covers simultaneous equations by graphical, substitution, elimination and cross-multiplication methods plus consistency. Consistency was taught through examples, not a separately numbered heading in the copy read.",
+  "Chapter 8 (Statistics) covers grouped median and grouped mode as well as grouped mean (direct, assumed-mean, step-deviation), which goes beyond NCERT Class 9; these are mapped to MATH.statistics.grouped-mean (Grade 10 in the list).",
+  "Trigonometric-table lookup (6.4) has no matching competency; mapped partially to MATH.trigonometry.ratios rather than proposing a lookup-only competency.",
+  "Synthetic division is mapped to existing polynomial/factor-theorem competencies (it is a method, not a separate skill). Polynomial GCD is a proposed competency, shared with Grade 10.",
+  "MATH.algebra.sets is listed as Grade 11 and MATH.trigonometry.ratios / MATH.coordinate.distance / MATH.algebra.linear-systems as Grade 10 in competencies-v1; TN teaches these in Grade 9. The mapping is by skill, not grade."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g09-c01",
+   "number": 1,
+   "term": null,
+   "title": "Set Language",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c01-s02",
+     "title": "Set"
+    },
+    {
+     "id": "tn-g09-c01-s03",
+     "title": "Representation of a Set"
+    },
+    {
+     "id": "tn-g09-c01-s04",
+     "title": "Types of Sets"
+    },
+    {
+     "id": "tn-g09-c01-s05",
+     "title": "Set Operations"
+    },
+    {
+     "id": "tn-g09-c01-s06",
+     "title": "Properties of Set Operations"
+    },
+    {
+     "id": "tn-g09-c01-s07",
+     "title": "De Morgan's Laws"
+    },
+    {
+     "id": "tn-g09-c01-s08",
+     "title": "Application on Cardinality of Sets"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c01-o01",
+     "statement": "Describe a collection as a set and write it in roster form, set-builder form and descriptive form, converting between them.",
+     "concepts": [
+      "set",
+      "roster form",
+      "set-builder form",
+      "element"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "tn-g09-c01-o02",
+     "statement": "Classify sets as empty, singleton, finite, infinite, equal, equivalent, disjoint, and identify subsets, proper subsets and the power set, including counting subsets.",
+     "concepts": [
+      "types of sets",
+      "subset",
+      "power set",
+      "cardinality"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric",
+      "true-false",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "tn-g09-c01-o03",
+     "statement": "Find the complement, union, intersection, difference and symmetric difference of sets and shade them on Venn diagrams.",
+     "concepts": [
+      "union",
+      "intersection",
+      "difference",
+      "symmetric difference",
+      "complement",
+      "Venn diagram"
+     ],
+     "questionTypes": [
+      "set",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "tn-g09-c01-o04",
+     "statement": "Verify commutative, associative and distributive properties of union and intersection for given sets.",
+     "concepts": [
+      "commutative",
+      "associative",
+      "distributive properties of sets"
+     ],
+     "questionTypes": [
+      "set",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "tn-g09-c01-o05",
+     "statement": "State and verify De Morgan's laws for set difference and for complementation, using listed elements and Venn diagrams.",
+     "concepts": [
+      "De Morgan's laws"
+     ],
+     "questionTypes": [
+      "set",
+      "diagram-drawing",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets",
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "tn-g09-c01-o06",
+     "statement": "Solve real-life counting problems with two or three overlapping sets using the cardinality formulas for union and Venn diagrams.",
+     "concepts": [
+      "n(A∪B)",
+      "n(A∪B∪C)",
+      "inclusion-exclusion"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c02",
+   "number": 2,
+   "term": null,
+   "title": "Real Numbers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c02-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c02-s02",
+     "title": "Rational Numbers"
+    },
+    {
+     "id": "tn-g09-c02-s03",
+     "title": "Irrational Numbers"
+    },
+    {
+     "id": "tn-g09-c02-s04",
+     "title": "Real Numbers"
+    },
+    {
+     "id": "tn-g09-c02-s05",
+     "title": "Radical Notation"
+    },
+    {
+     "id": "tn-g09-c02-s06",
+     "title": "Surds"
+    },
+    {
+     "id": "tn-g09-c02-s07",
+     "title": "Rationalisation of Surds"
+    },
+    {
+     "id": "tn-g09-c02-s08",
+     "title": "Scientific Notation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c02-o01",
+     "statement": "Locate rational numbers on the number line and find rational numbers between two given rationals.",
+     "concepts": [
+      "rational numbers",
+      "number line",
+      "density"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric",
+      "diagram-drawing"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.real-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers",
+      "MATH.number.real-numbers"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o02",
+     "statement": "Convert between fractions and terminating or recurring decimals, and use the decimal expansion to decide whether a number is rational or irrational.",
+     "concepts": [
+      "terminating decimal",
+      "recurring decimal",
+      "irrational number"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.real-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.real-numbers"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o03",
+     "statement": "Represent irrational numbers such as square roots on the number line and carry out operations on real numbers, recognising closure properties.",
+     "concepts": [
+      "irrational on number line",
+      "real number operations"
+     ],
+     "questionTypes": [
+      "construction",
+      "true-false",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.real-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.real-numbers"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o04",
+     "statement": "Interpret radicals and fractional exponents and convert between radical and index forms using exponent laws.",
+     "concepts": [
+      "radical notation",
+      "fractional exponent",
+      "laws of exponents"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.radicals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.exponents",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents",
+      "MATH.number.radicals"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o05",
+     "statement": "Identify surds, simplify them, compare their order, and add, subtract, multiply and divide surds.",
+     "concepts": [
+      "surd",
+      "order of surd",
+      "like surds"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.radicals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.radicals"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o06",
+     "statement": "Rationalise denominators of expressions involving surds, including binomial surd denominators using conjugates.",
+     "concepts": [
+      "rationalising factor",
+      "conjugate"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.radicals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.radicals"
+     ]
+    },
+    {
+     "id": "tn-g09-c02-o07",
+     "statement": "Write very large and very small numbers in scientific notation and compute with them.",
+     "concepts": [
+      "scientific notation",
+      "standard form"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.scientific-notation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.scientific-notation"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c03-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c03-s02",
+     "title": "Polynomials"
+    },
+    {
+     "id": "tn-g09-c03-s03",
+     "title": "Remainder Theorem"
+    },
+    {
+     "id": "tn-g09-c03-s04",
+     "title": "Algebraic Identities"
+    },
+    {
+     "id": "tn-g09-c03-s05",
+     "title": "Factorisation"
+    },
+    {
+     "id": "tn-g09-c03-s06",
+     "title": "Division of Polynomials"
+    },
+    {
+     "id": "tn-g09-c03-s07",
+     "title": "Greatest Common Divisor (GCD)"
+    },
+    {
+     "id": "tn-g09-c03-s08",
+     "title": "Linear Equation in Two Variables"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c03-o01",
+     "statement": "Classify polynomials by degree and number of terms, add, subtract and multiply them, evaluate a polynomial and find its zeros.",
+     "concepts": [
+      "degree",
+      "zero of polynomial",
+      "polynomial arithmetic"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.polynomials"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o02",
+     "statement": "Use the remainder theorem to find remainders and the factor theorem to test for and find linear factors.",
+     "concepts": [
+      "remainder theorem",
+      "factor theorem"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factor-theorem",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factor-theorem"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o03",
+     "statement": "Expand and apply identities for (a+b+c)^2, products of three binomials, and cubes of binomials, and use them to evaluate or factorise.",
+     "concepts": [
+      "trinomial square",
+      "cube identities",
+      "(x+a)(x+b)(x+c)"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o04",
+     "statement": "Factorise quadratic trinomials ax^2+bx+c and cubic polynomials, using identities, splitting the middle term and synthetic division.",
+     "concepts": [
+      "factorisation",
+      "splitting the middle term",
+      "synthetic division"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.factor-theorem",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factor-theorem",
+      "MATH.algebra.factorisation"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o05",
+     "statement": "Divide a polynomial by another using long division and synthetic division, expressing the result with the division algorithm.",
+     "concepts": [
+      "division algorithm",
+      "quotient",
+      "remainder",
+      "synthetic division"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.polynomials"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o06",
+     "statement": "Find the greatest common divisor of two or more polynomials by factorising them.",
+     "concepts": [
+      "GCD of polynomials"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-gcd-lcm",
+       "name": "Find GCD and LCM of polynomials",
+       "strand": "algebra",
+       "gradeRange": [
+        9,
+        10
+       ],
+       "prerequisites": [
+        "MATH.algebra.factorisation"
+       ],
+       "supports": [
+        "MATH.algebra.polynomials",
+        "MATH.number.factors-multiples",
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "No existing competency covers finding common divisors/multiples of polynomials; factorisation and factors-multiples are prerequisites, not the skill itself."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-gcd-lcm"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o07",
+     "statement": "Draw the graph of a linear equation in two variables and solve a pair of simultaneous linear equations graphically, by substitution, by elimination and by cross-multiplication.",
+     "concepts": [
+      "linear equation in two variables",
+      "simultaneous equations",
+      "cross-multiplication"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "graph-sketch",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-two-variables",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems",
+      "MATH.algebra.linear-two-variables"
+     ]
+    },
+    {
+     "id": "tn-g09-c03-o08",
+     "statement": "Decide whether a pair of linear equations is consistent or inconsistent and whether it has a unique solution, no solution or infinitely many solutions.",
+     "concepts": [
+      "consistency",
+      "parallel lines",
+      "coincident lines"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c04-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c04-s02",
+     "title": "Types of Angles"
+    },
+    {
+     "id": "tn-g09-c04-s03",
+     "title": "Quadrilaterals"
+    },
+    {
+     "id": "tn-g09-c04-s04",
+     "title": "Parts of a Circle"
+    },
+    {
+     "id": "tn-g09-c04-s05",
+     "title": "Properties of Chords of a Circle"
+    },
+    {
+     "id": "tn-g09-c04-s06",
+     "title": "Cyclic Quadrilaterals"
+    },
+    {
+     "id": "tn-g09-c04-s07",
+     "title": "Practical Geometry"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c04-o01",
+     "statement": "Use linear pairs, vertically opposite angles, angles formed by a transversal and the triangle angle-sum property to find unknown angles and justify results, including congruence of triangles.",
+     "concepts": [
+      "transversal",
+      "linear pair",
+      "angle sum",
+      "congruent triangles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence",
+      "MATH.geometry.parallel-angles"
+     ]
+    },
+    {
+     "id": "tn-g09-c04-o02",
+     "statement": "Classify quadrilaterals and prove and apply properties of parallelograms and other special quadrilaterals.",
+     "concepts": [
+      "parallelogram",
+      "rhombus",
+      "trapezium",
+      "properties of quadrilaterals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.quadrilaterals",
+      "MATH.geometry.triangle-proof"
+     ]
+    },
+    {
+     "id": "tn-g09-c04-o03",
+     "statement": "Identify parts of a circle and apply chord properties: perpendicular from the centre bisects a chord, equal chords are equidistant from the centre and subtend equal angles.",
+     "concepts": [
+      "chord",
+      "perpendicular bisector of chord",
+      "equal chords"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems"
+     ]
+    },
+    {
+     "id": "tn-g09-c04-o04",
+     "statement": "Apply theorems on angles subtended by arcs: the angle at the centre is twice that at the circumference, and angles in the same segment are equal.",
+     "concepts": [
+      "angle at centre",
+      "angles in same segment",
+      "semicircle angle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems"
+     ]
+    },
+    {
+     "id": "tn-g09-c04-o05",
+     "statement": "Use properties of cyclic quadrilaterals, including supplementary opposite angles and the exterior angle property, to find angles and prove results.",
+     "concepts": [
+      "cyclic quadrilateral",
+      "opposite angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems"
+     ]
+    },
+    {
+     "id": "tn-g09-c04-o06",
+     "statement": "Construct and locate the centroid, orthocentre, circumcentre and incentre of a given triangle with ruler and compass, and draw its circumcircle and incircle.",
+     "concepts": [
+      "centroid",
+      "orthocentre",
+      "circumcentre",
+      "incentre",
+      "incircle"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.triangle-concurrency",
+       "name": "Locate and construct triangle centres",
+       "strand": "geometry",
+       "gradeRange": [
+        9,
+        10
+       ],
+       "prerequisites": [
+        "MATH.geometry.constructions-bisectors"
+       ],
+       "supports": [
+        "MATH.geometry.triangle-properties",
+        "MATH.geometry.construction-triangles"
+       ],
+       "why": "Existing construction competencies cover bisectors and triangles, but not the concurrency points (centroid, orthocentre, circumcentre, incentre) as concepts to identify, construct and use."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.constructions-bisectors",
+      "MATH.geometry.triangle-concurrency"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c05",
+   "number": 5,
+   "term": null,
+   "title": "Coordinate Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c05-s01",
+     "title": "Mapping the Plane"
+    },
+    {
+     "id": "tn-g09-c05-s02",
+     "title": "Devising a Coordinate System"
+    },
+    {
+     "id": "tn-g09-c05-s03",
+     "title": "Distance between any Two Points"
+    },
+    {
+     "id": "tn-g09-c05-s04",
+     "title": "The Mid-point of a Line Segment"
+    },
+    {
+     "id": "tn-g09-c05-s05",
+     "title": "Points of Trisection of a Line Segment"
+    },
+    {
+     "id": "tn-g09-c05-s06",
+     "title": "Section Formula"
+    },
+    {
+     "id": "tn-g09-c05-s07",
+     "title": "The Coordinates of the Centroid"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c05-o01",
+     "statement": "Plot and read points in the Cartesian plane, naming quadrants and points on the axes.",
+     "concepts": [
+      "Cartesian plane",
+      "quadrants",
+      "abscissa",
+      "ordinate"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.cartesian",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.cartesian"
+     ]
+    },
+    {
+     "id": "tn-g09-c05-o02",
+     "statement": "Find the distance between two points and use it to test collinearity or classify triangles and quadrilaterals.",
+     "concepts": [
+      "distance formula",
+      "collinearity",
+      "isosceles/right triangle test"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.distance-intro"
+     ]
+    },
+    {
+     "id": "tn-g09-c05-o03",
+     "statement": "Find the midpoint and the points of trisection of a segment joining two points, and solve related problems.",
+     "concepts": [
+      "midpoint formula",
+      "trisection"
+     ],
+     "questionTypes": [
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "tn-g09-c05-o04",
+     "statement": "Use the section formula to find the point dividing a segment internally in a given ratio, or the ratio in which a point divides a segment.",
+     "concepts": [
+      "section formula",
+      "internal division"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "tn-g09-c05-o05",
+     "statement": "Find the coordinates of the centroid of a triangle from its vertices, and missing vertices given the centroid.",
+     "concepts": [
+      "centroid"
+     ],
+     "questionTypes": [
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c06",
+   "number": 6,
+   "term": null,
+   "title": "Trigonometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c06-s02",
+     "title": "Trigonometric Ratios of Some Special Angles"
+    },
+    {
+     "id": "tn-g09-c06-s03",
+     "title": "Trigonometric Ratios for Complementary Angles"
+    },
+    {
+     "id": "tn-g09-c06-s04",
+     "title": "Method of using Trigonometric Table"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c06-o01",
+     "statement": "Define the six trigonometric ratios of an acute angle in a right triangle and find all ratios given one of them.",
+     "concepts": [
+      "sine",
+      "cosine",
+      "tangent",
+      "reciprocal ratios"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "tn-g09-c06-o02",
+     "statement": "Recall and use trigonometric ratios of 0°, 30°, 45°, 60° and 90° to evaluate expressions.",
+     "concepts": [
+      "standard angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "tn-g09-c06-o03",
+     "statement": "Use complementary-angle relations such as sin(90°−θ)=cos θ to simplify and evaluate expressions.",
+     "concepts": [
+      "complementary angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "tn-g09-c06-o04",
+     "statement": "Read values of sine, cosine and tangent for angles in degrees and minutes from trigonometric tables (including mean differences) and use them to solve right-triangle problems.",
+     "concepts": [
+      "trigonometric table",
+      "degrees and minutes",
+      "mean difference"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c07",
+   "number": 7,
+   "term": null,
+   "title": "Mensuration",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c07-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c07-s02",
+     "title": "Heron's Formula"
+    },
+    {
+     "id": "tn-g09-c07-s03",
+     "title": "Application of Heron's Formula in Finding Areas of Quadrilaterals"
+    },
+    {
+     "id": "tn-g09-c07-s04",
+     "title": "Surface Area of Cuboid and Cube"
+    },
+    {
+     "id": "tn-g09-c07-s05",
+     "title": "Volume of Cuboid and Cube"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c07-o01",
+     "statement": "Calculate the area of a triangle from its three sides using Heron's formula.",
+     "concepts": [
+      "Heron's formula",
+      "semi-perimeter"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.heron",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.heron"
+     ]
+    },
+    {
+     "id": "tn-g09-c07-o02",
+     "statement": "Find areas of quadrilaterals and composite plots by splitting them into triangles and applying Heron's formula.",
+     "concepts": [
+      "area of quadrilateral",
+      "decomposition"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.heron",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.heron",
+      "MATH.measurement.trapezium-area"
+     ]
+    },
+    {
+     "id": "tn-g09-c07-o03",
+     "statement": "Calculate the lateral and total surface areas of cuboids and cubes in practical contexts.",
+     "concepts": [
+      "lateral surface area",
+      "total surface area",
+      "cuboid",
+      "cube"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.surface-area-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.surface-area-intro"
+     ]
+    },
+    {
+     "id": "tn-g09-c07-o04",
+     "statement": "Calculate volumes of cuboids and cubes and solve capacity problems involving unit conversion.",
+     "concepts": [
+      "volume",
+      "capacity",
+      "litre conversion"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.cube-volume",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cube-volume"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c08",
+   "number": 8,
+   "term": null,
+   "title": "Statistics",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c08-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c08-s02",
+     "title": "Collection of Data"
+    },
+    {
+     "id": "tn-g09-c08-s03",
+     "title": "Measures of Central Tendency"
+    },
+    {
+     "id": "tn-g09-c08-s04",
+     "title": "Arithmetic Mean"
+    },
+    {
+     "id": "tn-g09-c08-s05",
+     "title": "Median"
+    },
+    {
+     "id": "tn-g09-c08-s06",
+     "title": "Mode"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c08-o01",
+     "statement": "Distinguish primary and secondary data and organise raw data into ungrouped and grouped frequency distributions.",
+     "concepts": [
+      "primary data",
+      "secondary data",
+      "frequency distribution"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.grouped-data",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency",
+      "MATH.statistics.grouped-data"
+     ]
+    },
+    {
+     "id": "tn-g09-c08-o02",
+     "statement": "Compute the arithmetic mean of raw data and of an ungrouped frequency distribution, and use the property that deviations from the mean sum to zero.",
+     "concepts": [
+      "arithmetic mean",
+      "sum of deviations"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.grouped-data",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.grouped-data"
+     ]
+    },
+    {
+     "id": "tn-g09-c08-o03",
+     "statement": "Compute the mean of a grouped frequency distribution by the direct, assumed-mean and step-deviation methods.",
+     "concepts": [
+      "grouped mean",
+      "assumed mean",
+      "step deviation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ]
+    },
+    {
+     "id": "tn-g09-c08-o04",
+     "statement": "Find the median of raw data, ungrouped and grouped frequency distributions using cumulative frequency.",
+     "concepts": [
+      "median",
+      "cumulative frequency",
+      "median class"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean",
+      "MATH.statistics.median-mode"
+     ]
+    },
+    {
+     "id": "tn-g09-c08-o05",
+     "statement": "Find the mode of raw, ungrouped and grouped data and use the empirical relation between mean, median and mode.",
+     "concepts": [
+      "mode",
+      "modal class",
+      "empirical relation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean",
+      "MATH.statistics.median-mode"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g09-c09",
+   "number": 9,
+   "term": null,
+   "title": "Probability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g09-c09-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g09-c09-s02",
+     "title": "Basic Ideas"
+    },
+    {
+     "id": "tn-g09-c09-s03",
+     "title": "Classical Approach"
+    },
+    {
+     "id": "tn-g09-c09-s04",
+     "title": "Empirical Approach"
+    },
+    {
+     "id": "tn-g09-c09-s05",
+     "title": "Types of Events"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g09-c09-o01",
+     "statement": "Describe random experiments, outcomes, trials and sample spaces for coins, dice and cards.",
+     "concepts": [
+      "random experiment",
+      "outcome",
+      "sample space"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.sample-space"
+     ]
+    },
+    {
+     "id": "tn-g09-c09-o02",
+     "statement": "Compute theoretical (classical) probabilities for equally likely outcomes.",
+     "concepts": [
+      "classical probability",
+      "equally likely"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.classical",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical"
+     ]
+    },
+    {
+     "id": "tn-g09-c09-o03",
+     "statement": "Estimate probabilities from experimental frequency data and compare them with theoretical values.",
+     "concepts": [
+      "empirical probability",
+      "relative frequency"
+     ],
+     "questionTypes": [
+      "fraction",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.experimental",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.experimental"
+     ]
+    },
+    {
+     "id": "tn-g09-c09-o04",
+     "statement": "Identify sure, impossible, mutually exclusive, exhaustive and complementary events and use P(A)+P(A')=1.",
+     "concepts": [
+      "types of events",
+      "complementary events",
+      "mutually exclusive"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.complements",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.probability.chance-language",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.chance-language",
+      "MATH.probability.complements"
+     ]
+    }
+   ]
+  }
+ ]
+}

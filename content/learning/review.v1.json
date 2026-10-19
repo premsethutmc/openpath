@@ -48,6 +48,27 @@
    ]
   },
   {
+   "item": "family:addr",
+   "kind": "family",
+   "competency": "MATH.number.addition-regroup",
+   "family": "addr",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "aafa97aa",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "aafa97aa",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:alp",
    "kind": "family",
    "competency": "MATH.calculus.area-integrals",
@@ -224,6 +245,27 @@
      "at": "2026-10-19T18:00:00.000Z",
      "contentHash": "12064e16",
      "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:cnt",
+   "kind": "family",
+   "competency": "MATH.number.count-objects",
+   "family": "cnt",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "6adf444e",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "6adf444e",
+     "note": "added"
     }
    ]
   },
@@ -494,6 +536,27 @@
      "at": "2026-10-19T18:00:00.000Z",
      "contentHash": "6efa000d",
      "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:dprod",
+   "kind": "family",
+   "competency": "MATH.calculus.derivative-rules",
+   "family": "dprod",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "31ee105e",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "31ee105e",
+     "note": "added"
     }
    ]
   },
@@ -944,6 +1007,27 @@
      "at": "2026-10-19T18:00:00.000Z",
      "contentHash": "4bf4c8ea",
      "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:lineq",
+   "kind": "family",
+   "competency": "MATH.algebra.inequalities",
+   "family": "lineq",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "bb03ddb9",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "bb03ddb9",
+     "note": "added"
     }
    ]
   },
@@ -1578,6 +1662,27 @@
    ]
   },
   {
+   "item": "family:surd",
+   "kind": "family",
+   "competency": "MATH.number.radicals",
+   "family": "surd",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "6684f7d5",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "6684f7d5",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:vol",
    "kind": "family",
    "competency": "MATH.measurement.volume-cubes",
@@ -1912,6 +2017,25 @@
      "at": "2026-10-19T16:00:00.000Z",
      "contentHash": "830abfbe",
      "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.inequalities",
+   "kind": "module",
+   "competency": "MATH.algebra.inequalities",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "4d0a3ec0",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "4d0a3ec0",
+     "note": "added"
     }
    ]
   },
@@ -2678,6 +2802,44 @@
    ]
   },
   {
+   "item": "module:MATH.number.addition-regroup",
+   "kind": "module",
+   "competency": "MATH.number.addition-regroup",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "a4901feb",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "a4901feb",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.count-objects",
+   "kind": "module",
+   "competency": "MATH.number.count-objects",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "e742fcd6",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "e742fcd6",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.number.division-remainders",
    "kind": "module",
    "competency": "MATH.number.division-remainders",
@@ -3400,6 +3562,25 @@
      "at": "2026-10-19T18:00:00.000Z",
      "contentHash": "8a7600db",
      "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.radicals",
+   "kind": "module",
+   "competency": "MATH.number.radicals",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "be0fff09",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T13:52:21.852Z",
+     "contentHash": "be0fff09",
+     "note": "added"
     }
    ]
   },

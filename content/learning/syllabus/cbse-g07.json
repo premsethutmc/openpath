@@ -1,0 +1,2191 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 7,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Ganita Prakash: Textbook of Mathematics for Grade 7, Part I and Part II",
+  "publisher": "NCERT",
+  "edition": "Part I first edition 2025; Part II first edition 2025 (NCERT library: New Delhi, NCERT 2025, ISBN 9789357291569); 2026-27 reprint not verified",
+  "terms": 2
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Ganita Prakash (Class 7) audio book: Part I chapter list",
+   "publisher": "CIET-NCERT",
+   "edition": "2025",
+   "academicYear": "current",
+   "url": "https://ciet.ncert.gov.in/audio-book/155",
+   "accessed": "2026-10-19",
+   "used_for": "official confirmation of Part I chapter titles 1-8"
+  },
+  {
+   "kind": "textbook",
+   "title": "Ganita Prakash -II (Class 7) audio book: Part II chapter list",
+   "publisher": "CIET-NCERT",
+   "edition": "2025",
+   "academicYear": "current",
+   "url": "https://ciet.ncert.gov.in/audio-book/137",
+   "accessed": "2026-10-19",
+   "used_for": "official confirmation of Part II chapter titles 1-7"
+  },
+  {
+   "kind": "textbook",
+   "title": "NCERT library catalogue record: Ganita Prakash, Part II: Textbook of Mathematics for Grade 7",
+   "publisher": "NCERT",
+   "edition": "2025, 190 p., ISBN 9789357291569",
+   "academicYear": "2025-26",
+   "url": "https://webopac.ncert.gov.in/bib/196818",
+   "accessed": "2026-10-19",
+   "used_for": "title and year of Part II"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Annual Syllabus Mathematics Class VII (2026-27), English medium",
+   "publisher": "Directorate of Education, Govt. of NCT of Delhi",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://edustud.nic.in/edu/Syllabus_2026_27/7/7_MATH_SYLLABUS_2026_27_EM.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirmation that this book/part is in use for 2026-27; chapter titles; subtopic (section) list"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-12/2025 (26.03.2025): availability of new NCERT textbooks and bridge programmes",
+   "publisher": "CBSE",
+   "edition": "26 March 2025",
+   "academicYear": "2025-26",
+   "url": "https://www.cbseacademic.nic.in/web_material/Circulars/2025/12_Circular_2025.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "new NCERT mathematics textbooks for Grades 7 and 8 introduced from 2025-26; Grade 6 book already in place"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-14/2026 (01.04.2026): release of curriculum 2026-27 (Classes IX-XII)",
+   "publisher": "CBSE",
+   "edition": "1 April 2026",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "checked for Grades 6-8: CBSE's 2026-27 curriculum release covers only Classes IX-XII; no separate CBSE syllabus for Grades 6-8 (NCERT textbooks apply)"
+  }
+ ],
+ "notes": [
+  "ncert.nic.in (textbook.php and the textbook PDF/prelims files) refused automated fetching (robots.txt disallow) on 2026-10-19, so the NCERT contents pages, printed section headings and edition/reprint lines could not be read directly. Chapter titles were verified instead against other official government sources: NCERT's CIET audio-book pages (ciet.ncert.gov.in) and the Delhi Directorate of Education 2026-27 syllabus (edustud.nic.in), which prescribes NCERT books. 'verified': true means the title was seen in at least one of those sources.",
+  "CBSE does not publish its own mathematics syllabus for Grades 6-8. Its 2026-27 curriculum release (Circular Acad-14/2026) covers Classes IX-XII only, and CBSE circulars direct schools to the new NCERT textbooks. The 2026-27 prescription is therefore inferred from those circulars plus the Delhi DoE 2026-27 syllabus. No CBSE or NCERT notice found replaces or withdraws Ganita Prakash for 2026-27.",
+  "Section titles come from the subtopic lists in the Delhi DoE 2026-27 annual syllabus, not from the printed textbook. They appear to quote the textbook's section headings, but DoE may have shortened, merged or left some out (its list is 'for assessment purpose only'), and capitalisation follows DoE. Check them against the printed NCERT book before using them as exact headings.",
+  "Learning outcomes are written by the compiler from the chapter and section scope. They are not copied from NCERT's Learning Outcomes document, which was not consulted because ncert.nic.in was inaccessible.",
+  "Secondary sites (teachoo.com, edzy.ai, esaral.com, aglasem.com, collegedunia.com) were used only to locate official documents and to cross-check chapter order and titles. Nothing was taken from them as authoritative.",
+  "Grade 7: the new NCERT Grade 7 mathematics book came in from 2025-26 (CBSE Circular Acad-12/2025) in two parts: Ganita Prakash Part I (8 chapters) and Part II (7 chapters). The Delhi DoE 2026-27 Grade 7 syllabus prescribes Part I (Ch 1-8) and Part II (Ch 1-7), which confirms both parts are in use in 2026-27.",
+  "Chapter numbering starts again at 1 in Part II. Here 'term' records the book part (1 = Part I, 2 = Part II), and chapter ids follow the term-book pattern (cbse-g07-t1-c01 ... cbse-g07-t2-c07). In the Delhi DoE plan Part I is taught before the mid-term and Part II after it. CBSE itself does not set terms for Grade 7.",
+  "Grade 7 chapter titles: the official CIET pages show them only as audio file names (underscores, no punctuation). Punctuation and capitalisation (e.g. 'Expressions using Letter-Numbers', 'Connecting the Dots' — secondary sites print 'Connecting the Dots...') follow the DoE syllabus and secondary sites, and should be checked against the printed contents page.",
+  "Part I edition: assumed to be the first edition of 2025 (released for 2025-26). The imprint line was not seen. For Part II, the NCERT catalogue gives publication year 2025 but no edition statement.",
+  "Part II Ch 2 (Operations with Integers): DoE lists only 'A Quick Recap of Integers' and 'Multiplication of Integers'. Whether the chapter also covers division of integers was not verified, so no division outcome is included. If division is in the book, add it under MATH.number.integer-multiply (or a separate division competency).",
+  "Part II Ch 3 (Finding Common Ground): the 'Pretty Procedure' is probably an HCF algorithm (possibly Euclid's division method), but this was not verified. The outcome is mapped only partially to MATH.number.euclid-algorithm.",
+  "Part II Ch 6 (Constructions and Tilings): DoE lists only 'Geometric Constructions' and 'Tiling', so the specific constructions taught (e.g. perpendicular or angle bisectors, regular polygons) are not known. The construction outcome is deliberately general.",
+  "Part II Ch 5 (Connecting the Dots): whether mode, range or double bar graphs are included was not verified. The outcomes cover only mean/median and general graph choice."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g07-t1-c01",
+   "number": 1,
+   "term": 1,
+   "title": "Large Numbers Around Us",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c01-s01",
+     "title": "A Lakh Varieties"
+    },
+    {
+     "id": "cbse-g07-t1-c01-s02",
+     "title": "Land of Tens"
+    },
+    {
+     "id": "cbse-g07-t1-c01-s03",
+     "title": "Of Crores and Crores"
+    },
+    {
+     "id": "cbse-g07-t1-c01-s04",
+     "title": "Exact and Approximate Value"
+    },
+    {
+     "id": "cbse-g07-t1-c01-s05",
+     "title": "Patterns in Products"
+    },
+    {
+     "id": "cbse-g07-t1-c01-s06",
+     "title": "Did You Ever Wonder…?"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c01-o01",
+     "statement": "Read, write and compare numbers up to crores in the Indian system and convert them to and from the international system (millions, billions).",
+     "concepts": [
+      "lakh",
+      "crore",
+      "million",
+      "Indian and international systems"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.indian-international-numeration",
+       "name": "Read, write and convert numbers in the Indian and international systems",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.large-numbers"
+       ],
+       "supports": [],
+       "why": "MATH.number.large-numbers is about reading/comparing; lakh-crore vs million-billion naming and conversion is a separate assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.indian-international-numeration",
+      "MATH.number.large-numbers"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c01-o02",
+     "statement": "Explain place value as repeated groupings of ten (e.g. how many thousands make a lakh, how many lakhs make a crore).",
+     "concepts": [
+      "place value",
+      "powers of ten"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.large-numbers"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c01-o03",
+     "statement": "Tell when an exact value is needed and when an approximate one is enough, and round large numbers sensibly.",
+     "concepts": [
+      "exact vs approximate",
+      "rounding"
+     ],
+     "questionTypes": [
+      "estimation",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.rounding",
+       "name": "Round numbers and distinguish exact from approximate values",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.thousands"
+       ],
+       "supports": [
+        "MATH.reasoning.estimate-check"
+       ],
+       "why": "MATH.reasoning.estimate-check is about estimating and checking an answer; rounding to a given place and judging when an approximate value is appropriate is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c01-o04",
+     "statement": "Use patterns in products (e.g. multiplying by powers of ten) to calculate and estimate large products and to judge the size of large quantities.",
+     "concepts": [
+      "patterns in products",
+      "estimating products"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-multiplication"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c02",
+   "number": 2,
+   "term": 1,
+   "title": "Arithmetic Expressions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c02-s01",
+     "title": "Simple Expressions"
+    },
+    {
+     "id": "cbse-g07-t1-c02-s02",
+     "title": "Reading and Evaluating Complex Expressions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c02-o01",
+     "statement": "Write an arithmetic expression for a situation and evaluate it.",
+     "concepts": [
+      "arithmetic expressions"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.order-of-operations",
+       "name": "Evaluate arithmetic expressions using brackets and operation precedence",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.multiplication-tables"
+       ],
+       "supports": [
+        "MATH.number.long-division"
+       ],
+       "why": "No existing competency covers reading, writing and evaluating multi-operation arithmetic expressions with brackets and precedence."
+      }
+     ],
+     "mapped": [
+      "MATH.number.order-of-operations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c02-o02",
+     "statement": "Identify the terms of an expression and evaluate expressions with brackets using the conventions for order of operations.",
+     "concepts": [
+      "terms",
+      "brackets",
+      "order of operations"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.order-of-operations",
+       "name": "Evaluate arithmetic expressions using brackets and operation precedence",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.multiplication-tables"
+       ],
+       "supports": [
+        "MATH.number.long-division"
+       ],
+       "why": "No existing competency covers reading, writing and evaluating multi-operation arithmetic expressions with brackets and precedence."
+      }
+     ],
+     "mapped": [
+      "MATH.number.order-of-operations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c02-o03",
+     "statement": "Compare or rewrite expressions without fully evaluating them by swapping and grouping terms and handling signs when removing brackets.",
+     "concepts": [
+      "swapping and grouping",
+      "removing brackets"
+     ],
+     "questionTypes": [
+      "true-false",
+      "multiple-choice",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.alg.distributive",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.operation-properties",
+       "name": "Use commutative, associative and distributive properties to transform and compare expressions",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MLY.alg.distributive",
+        "MATH.number.order-of-operations"
+       ],
+       "why": "MLY.alg.distributive covers only a(x+b); comparing or regrouping expressions using swapping/grouping properties (and sign changes on removing brackets) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.operation-properties",
+      "MLY.alg.distributive"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c03",
+   "number": 3,
+   "term": 1,
+   "title": "A Peek Beyond the Point",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c03-s01",
+     "title": "The Need for Smaller Units"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s02",
+     "title": "A Tenth Part"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s03",
+     "title": "A Hundredth Part"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s04",
+     "title": "Decimal Place Value"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s05",
+     "title": "Units of Measurement"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s06",
+     "title": "Locating and Comparing Decimals"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s07",
+     "title": "Addition and Subtraction of Decimals"
+    },
+    {
+     "id": "cbse-g07-t1-c03-s08",
+     "title": "More on the Decimal System"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c03-o01",
+     "statement": "Represent tenths, hundredths and thousandths in decimal notation and state the place value of each digit.",
+     "concepts": [
+      "tenths",
+      "hundredths",
+      "decimal place value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c03-o02",
+     "statement": "Write measurements in larger units using decimals (e.g. cm to m, g to kg) and convert between them.",
+     "concepts": [
+      "units of measurement",
+      "decimal conversions"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.length-conversion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.length-conversion",
+      "MATH.measurement.unit-conversions"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c03-o03",
+     "statement": "Locate decimals on a number line and compare and order them.",
+     "concepts": [
+      "comparing decimals",
+      "number line"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c03-o04",
+     "statement": "Add and subtract decimals, including in measurement and money problems.",
+     "concepts": [
+      "decimal addition",
+      "decimal subtraction"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem",
+      "money"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-operations"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c04",
+   "number": 4,
+   "term": 1,
+   "title": "Expressions using Letter-Numbers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c04-s01",
+     "title": "The Notion of Letter-Numbers"
+    },
+    {
+     "id": "cbse-g07-t1-c04-s02",
+     "title": "Revising Arithmetic Expressions"
+    },
+    {
+     "id": "cbse-g07-t1-c04-s03",
+     "title": "Omission of the Multiplication Symbol in Algebraic Expressions"
+    },
+    {
+     "id": "cbse-g07-t1-c04-s04",
+     "title": "Simplification of Algebraic Expressions"
+    },
+    {
+     "id": "cbse-g07-t1-c04-s05",
+     "title": "Pick Patterns and Reveal Relationships"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c04-o01",
+     "statement": "Use letters for unknown or varying quantities to write algebraic expressions for situations.",
+     "concepts": [
+      "letter-numbers",
+      "algebraic expressions"
+     ],
+     "questionTypes": [
+      "expression",
+      "word-problem"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.expressions-intro",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.variables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.expressions-intro",
+      "MATH.algebra.variables"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c04-o02",
+     "statement": "Evaluate algebraic expressions for given values of the letters.",
+     "concepts": [
+      "evaluating expressions"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.variables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.variables"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c04-o03",
+     "statement": "Simplify algebraic expressions by collecting like terms, following the convention of leaving out the multiplication sign.",
+     "concepts": [
+      "like terms",
+      "simplification"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c04-o04",
+     "statement": "Describe patterns (e.g. in matchstick figures or calendars) with algebraic expressions and use them to reveal relationships.",
+     "concepts": [
+      "generalisation",
+      "patterns"
+     ],
+     "questionTypes": [
+      "expression",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.generalise-with-expressions",
+       "name": "Express and justify a general pattern with an algebraic expression",
+       "strand": "algebra",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.algebra.variables"
+       ],
+       "supports": [
+        "MATH.algebra.pattern-rules",
+        "MATH.algebra.algebra-simplify"
+       ],
+       "why": "MATH.algebra.pattern-rules is in words (Grade 4) and MATH.algebra.variables is evaluation; writing an algebraic generalisation of a pattern or trick and using it to justify the pattern is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.generalise-with-expressions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c05",
+   "number": 5,
+   "term": 1,
+   "title": "Parallel and Intersecting Lines",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c05-s01",
+     "title": "Across the Line"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s02",
+     "title": "Perpendicular Lines"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s03",
+     "title": "Between Lines"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s04",
+     "title": "Parallel and Perpendicular Lines in Paper Folding"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s05",
+     "title": "Transversals"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s06",
+     "title": "Corresponding Angles"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s07",
+     "title": "Drawing Parallel Lines"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s08",
+     "title": "Alternate Angles"
+    },
+    {
+     "id": "cbse-g07-t1-c05-s09",
+     "title": "Parallel Illusions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c05-o01",
+     "statement": "Use the facts that angles in a linear pair add to 180 degrees and that vertically opposite angles are equal to find unknown angles where two lines cross.",
+     "concepts": [
+      "linear pair",
+      "vertically opposite angles"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.angle-pairs",
+       "name": "Use linear pairs, vertically opposite, complementary and supplementary angles",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.geometry.lines-segments"
+       ],
+       "why": "MATH.geometry.parallel-angles is about angles made by a transversal with parallel lines; relationships between angles at a single intersection are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.angle-pairs"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c05-o02",
+     "statement": "Identify perpendicular and parallel lines, and make them by paper folding.",
+     "concepts": [
+      "perpendicular lines",
+      "parallel lines"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "construction"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.lines-segments",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.lines-segments"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c05-o03",
+     "statement": "Name the corresponding and alternate angles made by a transversal and use them to find unknown angles when the lines are parallel.",
+     "concepts": [
+      "transversal",
+      "corresponding angles",
+      "alternate angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.parallel-angles"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c05-o04",
+     "statement": "Use angle conditions to decide whether two lines are parallel and justify the decision.",
+     "concepts": [
+      "test for parallel lines"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.parallel-angles"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c05-o05",
+     "statement": "Draw a line parallel to a given line through a given point using geometric tools.",
+     "concepts": [
+      "drawing parallel lines"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c06",
+   "number": 6,
+   "term": 1,
+   "title": "Number Play",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c06-s01",
+     "title": "Numbers Tell us Things"
+    },
+    {
+     "id": "cbse-g07-t1-c06-s02",
+     "title": "Picking Parity"
+    },
+    {
+     "id": "cbse-g07-t1-c06-s03",
+     "title": "Some Explorations in Grids"
+    },
+    {
+     "id": "cbse-g07-t1-c06-s04",
+     "title": "Nature's Favourite Sequence: The Virahāṅka–Fibonacci Numbers!"
+    },
+    {
+     "id": "cbse-g07-t1-c06-s05",
+     "title": "Digits in Disguise"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c06-o01",
+     "statement": "Predict and justify whether a sum, difference or product is even or odd without calculating it.",
+     "concepts": [
+      "parity",
+      "even and odd"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.parity",
+       "name": "Reason with parity of sums and products",
+       "strand": "reasoning",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.factors-multiples"
+       ],
+       "why": "No existing competency covers predicting/justifying whether sums and products are even or odd, a recurring Ganita Prakash theme (Grade 7 'Picking Parity', Grade 8 'Exploring Even and Odd Sums')."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.parity"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c06-o02",
+     "statement": "Solve and reason about grid puzzles such as magic squares with given row, column and diagonal sums.",
+     "concepts": [
+      "magic squares",
+      "grid sums"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.number-grid-puzzles",
+       "name": "Solve number grid puzzles such as supercells and magic squares",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.compare-numbers",
+        "MATH.algebra.missing-number"
+       ],
+       "why": "Grid-based number reasoning (supercells, magic squares, grid sums) is assessed in Number Play chapters and is not covered by any existing competency."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.number-grid-puzzles"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c06-o03",
+     "statement": "Generate Virahanka-Fibonacci numbers, link them to counting problems (e.g. rhythms of short and long beats), and explore their patterns.",
+     "concepts": [
+      "Virahanka-Fibonacci numbers",
+      "recursive sequence"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.sequences.explicit-recursive-rules",
+       "name": "Generate and reason about recursively defined sequences",
+       "strand": "sequences",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.number-patterns"
+       ],
+       "why": "Virahanka-Fibonacci numbers (each term the sum of the previous two) are a recursive sequence; existing pattern/progression competencies are additive or arithmetic/geometric."
+      }
+     ],
+     "mapped": [
+      "MATH.sequences.explicit-recursive-rules"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c06-o04",
+     "statement": "Work out the hidden digits in letter-coded addition or multiplication puzzles.",
+     "concepts": [
+      "cryptarithms",
+      "place value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.digit-puzzles",
+       "name": "Solve cryptarithm (digits-in-disguise) puzzles",
+       "strand": "reasoning",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.large-numbers",
+        "MATH.number.multi-multiplication"
+       ],
+       "why": "Deducing hidden digits in letter-coded arithmetic uses place value and carrying in a way no existing competency describes."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.digit-puzzles"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c07",
+   "number": 7,
+   "term": 1,
+   "title": "A Tale of Three Intersecting Lines",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c07-s01",
+     "title": "Equilateral Triangles"
+    },
+    {
+     "id": "cbse-g07-t1-c07-s02",
+     "title": "Constructing a Triangle When its Sides are Given"
+    },
+    {
+     "id": "cbse-g07-t1-c07-s03",
+     "title": "Construction of Triangles When Some Sides and Angles are Given"
+    },
+    {
+     "id": "cbse-g07-t1-c07-s04",
+     "title": "Constructions Related to Altitudes of Triangles"
+    },
+    {
+     "id": "cbse-g07-t1-c07-s05",
+     "title": "Types of Triangles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c07-o01",
+     "statement": "Construct a triangle from three given side lengths and use the triangle inequality to decide whether such a triangle exists.",
+     "concepts": [
+      "SSS construction",
+      "triangle inequality"
+     ],
+     "questionTypes": [
+      "construction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.construction-triangles",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.construction-triangles",
+      "MATH.geometry.triangle-properties"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c07-o02",
+     "statement": "Construct a triangle from two sides and the included angle, or from two angles and a side.",
+     "concepts": [
+      "SAS construction",
+      "ASA construction"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.construction-triangles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.construction-triangles"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c07-o03",
+     "statement": "Use the fact that the angles of a triangle add to 180 degrees to find unknown angles and to decide whether given angles can form a triangle.",
+     "concepts": [
+      "angle sum property"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.triangle-properties"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c07-o04",
+     "statement": "Draw the altitudes of a triangle.",
+     "concepts": [
+      "altitude"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c07-o05",
+     "statement": "Classify triangles by their sides and by their angles.",
+     "concepts": [
+      "equilateral",
+      "isosceles",
+      "scalene",
+      "acute",
+      "right",
+      "obtuse"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-types",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.triangle-types"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t1-c08",
+   "number": 8,
+   "term": 1,
+   "title": "Working with Fractions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t1-c08-s01",
+     "title": "Multiplication of Fractions"
+    },
+    {
+     "id": "cbse-g07-t1-c08-s02",
+     "title": "Division of Fractions"
+    },
+    {
+     "id": "cbse-g07-t1-c08-s03",
+     "title": "Some Problems Involving Fractions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t1-c08-o01",
+     "statement": "Multiply fractions and mixed numbers, and interpret the product with an area model.",
+     "concepts": [
+      "fraction multiplication",
+      "area model"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-multiply",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-multiply",
+      "MATH.number.fraction-product"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c08-o02",
+     "statement": "Divide fractions and whole numbers using reciprocals.",
+     "concepts": [
+      "fraction division",
+      "reciprocal"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-product"
+     ]
+    },
+    {
+     "id": "cbse-g07-t1-c08-o03",
+     "statement": "Solve word problems that need multiplication or division of fractions.",
+     "concepts": [
+      "fraction word problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-product",
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c01",
+   "number": 1,
+   "term": 2,
+   "title": "Geometric Twins",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c01-s01",
+     "title": "Geometric Twins"
+    },
+    {
+     "id": "cbse-g07-t2-c01-s02",
+     "title": "Congruence of Triangles"
+    },
+    {
+     "id": "cbse-g07-t2-c01-s03",
+     "title": "Angles of Isosceles and Equilateral Triangles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c01-o01",
+     "statement": "Recognise congruent figures and match corresponding sides and angles of congruent triangles.",
+     "concepts": [
+      "congruence",
+      "corresponding parts"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c01-o02",
+     "statement": "Use the SSS, SAS, ASA/AAS and RHS conditions to decide whether two triangles are congruent.",
+     "concepts": [
+      "congruence criteria"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c01-o03",
+     "statement": "Use the equal-angle properties of isosceles and equilateral triangles to find unknown angles and justify them.",
+     "concepts": [
+      "isosceles triangle",
+      "equilateral triangle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence",
+      "MATH.geometry.triangle-properties"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c02",
+   "number": 2,
+   "term": 2,
+   "title": "Operations with Integers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c02-s01",
+     "title": "A Quick Recap of Integers"
+    },
+    {
+     "id": "cbse-g07-t2-c02-s02",
+     "title": "Multiplication of Integers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c02-o01",
+     "statement": "Add and subtract integers fluently (revision of Grade 6).",
+     "concepts": [
+      "integer addition",
+      "integer subtraction"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c02-o02",
+     "statement": "Multiply integers using sign rules, explained through patterns or models.",
+     "concepts": [
+      "integer multiplication",
+      "sign rules"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.integer-multiply",
+       "name": "Multiply integers using sign rules",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.integers"
+       ],
+       "supports": [
+        "MATH.number.integer-add"
+       ],
+       "why": "MATH.number.integer-add covers only addition/subtraction; MATH.number.rational-numbers is broader and later in the logical sequence."
+      }
+     ],
+     "mapped": [
+      "MATH.number.integer-multiply"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c02-o03",
+     "statement": "Evaluate expressions and solve context problems that combine integer operations.",
+     "concepts": [
+      "integer expressions"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.integer-multiply",
+       "name": "Multiply integers using sign rules",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.integers"
+       ],
+       "supports": [
+        "MATH.number.integer-add"
+       ],
+       "why": "MATH.number.integer-add covers only addition/subtraction; MATH.number.rational-numbers is broader and later in the logical sequence."
+      },
+      {
+       "id": "MATH.number.operation-properties",
+       "name": "Use commutative, associative and distributive properties to transform and compare expressions",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MLY.alg.distributive",
+        "MATH.number.order-of-operations"
+       ],
+       "why": "MLY.alg.distributive covers only a(x+b); comparing or regrouping expressions using swapping/grouping properties (and sign changes on removing brackets) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.integer-add",
+      "MATH.number.integer-multiply",
+      "MATH.number.operation-properties"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c03",
+   "number": 3,
+   "term": 2,
+   "title": "Finding Common Ground",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c03-s01",
+     "title": "The Greatest of All"
+    },
+    {
+     "id": "cbse-g07-t2-c03-s02",
+     "title": "Least, but not Last!"
+    },
+    {
+     "id": "cbse-g07-t2-c03-s03",
+     "title": "Patterns, Properties, and a Pretty Procedure!"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c03-o01",
+     "statement": "Find the highest common factor (HCF) of two or more numbers.",
+     "concepts": [
+      "HCF"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c03-o02",
+     "statement": "Find the least common multiple (LCM) of two or more numbers.",
+     "concepts": [
+      "LCM"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c03-o03",
+     "statement": "Explore properties linking HCF and LCM (e.g. HCF x LCM = product of two numbers) and use an efficient procedure to find the HCF.",
+     "concepts": [
+      "HCF-LCM relation",
+      "procedure for HCF"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.euclid-algorithm",
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c03-o04",
+     "statement": "Solve word problems that need an HCF or an LCM, such as grouping or scheduling.",
+     "concepts": [
+      "HCF/LCM word problems"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c04",
+   "number": 4,
+   "term": 2,
+   "title": "Another Peek Beyond the Point",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c04-s01",
+     "title": "A Quick Recap of Decimals"
+    },
+    {
+     "id": "cbse-g07-t2-c04-s02",
+     "title": "Decimal Multiplication"
+    },
+    {
+     "id": "cbse-g07-t2-c04-s03",
+     "title": "Decimal Division"
+    },
+    {
+     "id": "cbse-g07-t2-c04-s04",
+     "title": "Look Before You Leap!"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c04-o01",
+     "statement": "Multiply decimals by whole numbers, by powers of ten and by other decimals.",
+     "concepts": [
+      "decimal multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c04-o02",
+     "statement": "Divide decimals by whole numbers, by powers of ten and by other decimals.",
+     "concepts": [
+      "decimal division"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c04-o03",
+     "statement": "Estimate before calculating to check that decimal products and quotients are reasonable, and solve problems in context.",
+     "concepts": [
+      "estimation",
+      "reasonableness"
+     ],
+     "questionTypes": [
+      "estimation",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product",
+      "MATH.reasoning.estimate-check"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c05",
+   "number": 5,
+   "term": 2,
+   "title": "Connecting the Dots",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c05-s01",
+     "title": "Of Questions and Statements"
+    },
+    {
+     "id": "cbse-g07-t2-c05-s02",
+     "title": "Representative Values"
+    },
+    {
+     "id": "cbse-g07-t2-c05-s03",
+     "title": "Visualising Data"
+    },
+    {
+     "id": "cbse-g07-t2-c05-s04",
+     "title": "Data Detective"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c05-o01",
+     "statement": "Tell statistical questions (answered by collecting varying data) apart from other questions and from statements.",
+     "concepts": [
+      "statistical questions"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.statistical-questions",
+       "name": "Pose statistical questions and draw conclusions from data",
+       "strand": "statistics",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.statistics.data-frequency"
+       ],
+       "why": "Existing statistics competencies are about organising/displaying data or computing measures; distinguishing statistical questions from statements and reasoning from data to a conclusion is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.statistical-questions"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c05-o02",
+     "statement": "Calculate the mean and median of a data set and choose the more suitable representative value.",
+     "concepts": [
+      "mean",
+      "median",
+      "representative value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.median-mode"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c05-o03",
+     "statement": "Choose and draw a suitable graph for a data set and read information from graphs.",
+     "concepts": [
+      "visualising data",
+      "bar graphs"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.statistics.evaluate-data-displays",
+       "name": "Choose, design and critique data displays and infographics",
+       "strand": "statistics",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.statistics.scaled-bars"
+       ],
+       "supports": [
+        "MATH.statistics.pictographs"
+       ],
+       "why": "Ganita Prakash assesses aesthetic/misleading-display considerations and infographics; existing competencies only cover reading and drawing specific charts."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.evaluate-data-displays",
+      "MATH.statistics.scaled-bars"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c05-o04",
+     "statement": "Investigate a question with data and justify a conclusion from the evidence.",
+     "concepts": [
+      "data investigation",
+      "drawing conclusions"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.statistical-questions",
+       "name": "Pose statistical questions and draw conclusions from data",
+       "strand": "statistics",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.statistics.data-frequency"
+       ],
+       "why": "Existing statistics competencies are about organising/displaying data or computing measures; distinguishing statistical questions from statements and reasoning from data to a conclusion is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.statistical-questions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c06",
+   "number": 6,
+   "term": 2,
+   "title": "Constructions and Tilings",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c06-s01",
+     "title": "Geometric Constructions"
+    },
+    {
+     "id": "cbse-g07-t2-c06-s02",
+     "title": "Tiling"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c06-o01",
+     "statement": "Carry out the ruler-and-compass constructions in the chapter and explain why each one works.",
+     "concepts": [
+      "geometric constructions"
+     ],
+     "questionTypes": [
+      "construction",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.constructions-bisectors"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c06-o02",
+     "statement": "Decide which shapes can tile a flat surface without gaps or overlaps, using the angles that meet at a point.",
+     "concepts": [
+      "tiling",
+      "angles at a vertex"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-tiling",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.tessellations",
+       "name": "Decide which polygons tile the plane and create tilings",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.geometry.shape-tiling",
+        "MATH.geometry.polygon-angles"
+       ],
+       "why": "MATH.geometry.shape-tiling (Grade 3) is informal exploration; reasoning about which shapes tile using angle sums at a vertex is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.shape-tiling",
+      "MATH.geometry.tessellations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c06-o03",
+     "statement": "Create and describe tiling patterns made from one or more shapes.",
+     "concepts": [
+      "tiling patterns"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.tessellations",
+       "name": "Decide which polygons tile the plane and create tilings",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.geometry.shape-tiling",
+        "MATH.geometry.polygon-angles"
+       ],
+       "why": "MATH.geometry.shape-tiling (Grade 3) is informal exploration; reasoning about which shapes tile using angle sums at a vertex is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.tessellations"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g07-t2-c07",
+   "number": 7,
+   "term": 2,
+   "title": "Finding the Unknown",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g07-t2-c07-s01",
+     "title": "Find the Unknowns"
+    },
+    {
+     "id": "cbse-g07-t2-c07-s02",
+     "title": "Solving Equations Systematically"
+    },
+    {
+     "id": "cbse-g07-t2-c07-s03",
+     "title": "Mind the Mistake, Mend the Mistake"
+    },
+    {
+     "id": "cbse-g07-t2-c07-s04",
+     "title": "A Pinch of History"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g07-t2-c07-o01",
+     "statement": "Write a linear equation in one unknown to model a situation or puzzle.",
+     "concepts": [
+      "forming equations"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c07-o02",
+     "statement": "Solve linear equations in one unknown systematically by doing the same operation to both sides, and check the solution.",
+     "concepts": [
+      "solving linear equations",
+      "balancing"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c07-o03",
+     "statement": "Find and correct mistakes in worked solutions of equations.",
+     "concepts": [
+      "error analysis"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ]
+    },
+    {
+     "id": "cbse-g07-t2-c07-o04",
+     "statement": "Solve word problems by forming and solving a linear equation.",
+     "concepts": [
+      "equation word problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ]
+    }
+   ]
+  }
+ ]
+}

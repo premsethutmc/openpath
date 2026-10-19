@@ -220,12 +220,12 @@ def generated(qid):
     r = _mirror(qid)
     if r is not None:
         return r
-    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(:mc)?', qid or '')
+    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(:mc|:w)?', qid or '')
     fam = _table().get(m.group(1)) if m else None
     key = f"{m.group(2)}{m.group(3) or ''}" if m else ''
     if not fam or key not in fam['items']:
         return None
-    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) else fam['type'], 'answer': fam['items'][key], 'role': 'generated'}
+    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) == ':mc' else fam['type'], 'answer': fam['items'][key], 'role': 'generated'}
 
 
 def _mirror(qid):

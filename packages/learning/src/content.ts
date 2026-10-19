@@ -9,6 +9,7 @@ import goalsData from "../../../content/learning/goals.v1.json";
 import libraryData from "../../../content/learning/library.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
 import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
+import { canonicalOf, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -18,7 +19,7 @@ export interface Question {
   /** The micro-skill (or the competency itself) the question is about. */
   skill: string;
   role: Role;
-  type: "integer" | "fraction" | "choice" | "polynomial" | "set";
+  type: AnswerType;
   prompt: string;
   answer: string;
   solution: string;
@@ -26,6 +27,8 @@ export interface Question {
   probe?: "concept" | "procedure" | "recall" | "transfer";
   hint?: string;
   options?: string[];
+  /** A picture the question needs (family-kit Visual). */
+  figure?: { type: string; [k: string]: unknown };
   misconceptions?: { when: string; hypothesis: Hypothesis; says: string }[];
   goals?: string[];
   readiness?: string[];
@@ -38,7 +41,8 @@ export interface Screen {
   text: string[];
   math?: string[];
   tip?: string;
-  widget?: { type: "strips" | "array"; top?: number; bottom?: number; shaded?: number; rows?: number; cols?: number; split?: number };
+  /** A picture (family-kit Visual: strips, array, dots, tenframe, blocks, numberline, clock, coins, bars …). */
+  widget?: { type: string; top?: number; bottom?: number; shaded?: number; rows?: number; cols?: number; split?: number; [k: string]: unknown };
 }
 export interface Strategy {
   id: string;
@@ -128,7 +132,7 @@ export const question = (id: string): Question => {
   if (q) return q;
   const f = fragments.get(id);
   const g = problemOf(id);
-  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
+  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
   throw new Error(`Unknown question ${id}`);
 };
@@ -146,8 +150,19 @@ export const isQuestion = (id: string) => qById.has(id) || fragments.has(id) || 
 export const moduleFor = (competency: string) => modules.find((m) => m.competency === competency) ?? null;
 export const goal = (id: string) => goals.find((g) => g.id === id) ?? null;
 
-/** The canonical form of an answer of this question's type, or null if it is not one (equivalent answers share it). */
-export function canonical(q: Pick<Question, "type">, raw: string): string | null {
+/** The canonical form of an answer of this question's type, or null if it is not one (equivalent answers share it).
+ * answers@2 types (answer-types.ts): exact types have a canonical form; sampled types (expression, antiderivative) are
+ * compared with the question's answer, so a response equal to it gets the answer's form ("=…") and any other readable
+ * response its own ("~…"); a written answer has none (an educator marks it). */
+export function canonical(q: Pick<Question, "type"> & { answer?: string }, raw: string): string | null {
+  if (NEW_TYPES.has(q.type)) {
+    if (HUMAN.has(q.type)) return null;
+    if (SAMPLED.has(q.type)) {
+      if (!readable(q.type, raw)) return null;
+      return q.answer !== undefined && sameAnswer(q.type, raw, q.answer) ? `=${q.answer}` : `~${normalise(raw)}`;
+    }
+    return canonicalOf(q.type, raw);
+  }
   const t = raw.trim().replace(/−/g, "-");
   if (!t) return null;
   try {
@@ -162,12 +177,17 @@ export function canonical(q: Pick<Question, "type">, raw: string): string | null
   }
 }
 export const isCorrect = (q: Pick<Question, "type" | "answer">, raw: string) => {
+  if (HUMAN.has(q.type)) return false;
   const c = canonical(q, raw);
   return c !== null && c === canonical(q, q.answer);
 };
+/** A written answer is marked by an educator, never here (written.ts). */
+export const needsMarking = (q: Pick<Question, "type">) => HUMAN.has(q.type);
 /** The written explanation for this particular wrong answer, and the hypothesis it supports (only when it is specific). */
 export function misconceptionOf(q: Question, raw: string) {
+  if (HUMAN.has(q.type)) return null;
   const c = canonical(q, raw);
   if (c === null || c === canonical(q, q.answer)) return null;
+  if (SAMPLED.has(q.type)) return q.misconceptions?.find((m) => sameAnswer(q.type, raw, m.when)) ?? null;
   return q.misconceptions?.find((m) => canonical(q, m.when) === c) ?? null;
 }

@@ -1,0 +1,1871 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 10,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics, Standard Ten",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation (content: SCERT Tamil Nadu)",
+  "edition": "First Edition 2019; Revised Editions 2020 and 2021; reprinted annually (latest circulating copy labelled 2025 edition)",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Mathematics, Standard Ten (English medium), full volume",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation / SCERT",
+   "edition": "First Edition 2019; Revised Editions 2020, 2021",
+   "academicYear": "2022-23 copy (uploaded Aug 2022)",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-SSLC-Class-10-Mathematics-Textbook.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "edition statement, single-volume confirmation, chapter list, section titles (contents page)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics, Standard Ten, chapter PDFs (Ch 3, 4, 8 read)",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation / SCERT",
+   "edition": "First Edition 2019 (chapter files uploaded Oct 2019)",
+   "academicYear": "2019-20",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/10/Tamil-Nadu-State-Board-Textbooks_Samacheer-Kalvi-Books_Class-10_Maths-English-Medium-Chapter-4.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "learning-outcome boxes and sub-section scope (algebra, geometry constructions/tangents/Ceva-Menelaus, dispersion and probability)"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Maths 10th Std (TN 10th Mathematics English Medium) topic index (secondary)",
+   "publisher": "BrainKart",
+   "edition": "n/a",
+   "academicYear": "unspecified",
+   "url": "https://www.brainkart.com/subject/Maths-10th-Std_397/",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of sub-topics and exercise structure (secondary)"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Tamil Nadu Board Class 10 Mathematics Syllabus (secondary)",
+   "publisher": "Shaalaa",
+   "edition": "labelled 2026-27",
+   "academicYear": "2026-27",
+   "url": "https://www.shaalaa.com/syllabus/tamil-nadu-board-of-secondary-education-class-10-mathematics_8934",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check that the 8-unit structure is unchanged for 2026-27 (secondary)"
+  },
+  {
+   "kind": "notification",
+   "title": "Standard 10 Mathematics syllabus 2021-2022 (reduced; secondary copy)",
+   "publisher": "PW (static.pw.live), reproducing the TN reduced syllabus",
+   "edition": "2021-22",
+   "academicYear": "2021-22",
+   "url": "https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS_BLOGS/8f660355-d24b-4d7c-b00e-3fce4f2cb5d7.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "historical reduced-syllabus sections (now superseded); confirms section numbering"
+  },
+  {
+   "kind": "textbook",
+   "title": "Tamilnadu 10th New Books (secondary listing; file 'Class_10_Mathematics_English_2025_Edition')",
+   "publisher": "tntextbooks.in",
+   "edition": "2025 edition (file name)",
+   "academicYear": "2026-27 (as claimed)",
+   "url": "https://www.tntextbooks.in/p/10th-books.html",
+   "accessed": "2026-10-19",
+   "used_for": "indication of the reprint currently circulating; contents not readable"
+  },
+  {
+   "kind": "notification",
+   "title": "Textbook sale notifications for academic year 2026-27 (Term-1 1-7, Term-2 1-7, annual 8th & 11th, minority 4-12)",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+   "edition": "notices dated 14.05.2026, 25.05.2026, 22.09.2026",
+   "academicYear": "2026-27",
+   "url": "https://www.textbookcorp.in/schools",
+   "accessed": "2026-10-19",
+   "used_for": "evidence that term-wise books in 2026-27 are only for Std 1-7; Std 9/10 sale not separately listed"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu: Printing of new second-term textbooks for classes 1-3 under way (news, secondary)",
+   "publisher": "DT Next",
+   "edition": "updated 16 Sep 2026",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-printing-of-new-second-term-textbooks-for-classes-13-under-way",
+   "accessed": "2026-10-19",
+   "used_for": "new State Education Policy syllabus in 2026-27 only for classes 1-3; remaining classes from next academic year"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu Board 2023: full syllabus for classes 10-12 after Covid reductions (news, secondary)",
+   "publisher": "ALLEN (news.allen.in)",
+   "edition": "2023",
+   "academicYear": "2022-23",
+   "url": "https://news.allen.in/tamil-nadu-board-2023/",
+   "accessed": "2026-10-19",
+   "used_for": "Covid-era reductions withdrawn; full syllabus examined"
+  }
+ ],
+ "notes": [
+  "Official sites could not be read: textbooksonline.tn.nic.in (robots disallowed for the fetch tool), tnschools.gov.in/scert (JavaScript-rendered), the official cloudfront e-book HTML/PDF links (fetch errors), textbookcorp.tn.gov.in price list (robots disallowed), dge.tn.gov.in (no syllabus/blueprint notices visible). The chapter and section list comes from a copy of the official TNTBESC/SCERT PDF (Revised Edition 2021 front matter) hosted on cdn1.byjus.com. Chapters are marked verified:true on that basis.",
+  "Single volume confirmed from the front matter: no term split.",
+  "Edition for 2026-27: News (DT Next, Sep 2026) says the new SEP-based syllabus applies only to classes 1-3 in 2026-27, so Std 10 should continue with the 2019 book (revised 2020/2021, annual reprints). A file labelled '2025 Edition' circulates but could not be opened, so later minor revisions after 2021 cannot be ruled out. Std 10 is not listed among the 2026-27 'new' books on third-party sites.",
+  "Reduced syllabus: TN reduced the SSLC syllabus in the Covid years (e.g. 2021-22 retained only parts of units: 1.1-1.4, 2.1-2.4/2.6-2.7, 3.1-3.6/3.8, 4.1-4.6, 5.1-5.5, 6.1/6.3, 7.1-7.4, 8.4-8.5 per a secondary copy). The full syllabus was restored for the 2023 public exams (secondary news). No reduction notice for 2025-26 or 2026-27 was found, and the dge.tn.gov.in notices could not be read. One secondary page (getmyuni) still shows a 'deleted syllabus 2026' table with no official citation, so I treated it as stale.",
+  "Exam pattern (secondary, careers360): SSLC Mathematics 100 marks, 2.5 hours plus 15 minutes reading time, pass mark 35. The official blueprint/question-pattern document was not verified.",
+  "Section 3.7 'Graph of Variations' appears in the 2021 revised contents but not in the 2019 first-edition chapter file. In that file 3.7 was Quadratic Graphs and 3.8 Matrices, and the matrix section looked shorter. The section list follows the revised contents.",
+  "Section lists contain only the numbered top-level sections from the official contents page. Sub-topics (nature of roots, relation between roots and coefficients, alternate segment theorem, tangent constructions, Ceva/Menelaus, standard deviation methods, tree diagrams) were confirmed from chapter files or secondary indexes and appear in the outcomes.",
+  "Several TN Grade 10 topics are Grade 11/12 in the competency list (sets/relations/functions, GP, matrices, straight lines, dispersion, event algebra). They are mapped by skill.",
+  "Proposed competencies cover topics with no existing equivalent: function composition, modular arithmetic, special series sums, three-variable linear systems, polynomial GCD/LCM (shared with Grade 9), rational expressions, polynomial square root, roots-coefficients relations, quadratic graphs, Pythagoras theorem, Ceva/Menelaus, coordinate polygon area, frustum. MATH.geometry.pythagoras may duplicate a proposal from another board/grade file, so check before merging.",
+  "Constructions of triangles from base, vertical angle and median/altitude/bisector are mapped partially to MATH.geometry.construction-triangles and MATH.geometry.circle-theorems rather than proposing a new competency."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g10-c01",
+   "number": 1,
+   "term": null,
+   "title": "Relations and Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c01-s02",
+     "title": "Ordered Pair"
+    },
+    {
+     "id": "tn-g10-c01-s03",
+     "title": "Cartesian Product"
+    },
+    {
+     "id": "tn-g10-c01-s04",
+     "title": "Relations"
+    },
+    {
+     "id": "tn-g10-c01-s05",
+     "title": "Functions"
+    },
+    {
+     "id": "tn-g10-c01-s06",
+     "title": "Representation of Functions"
+    },
+    {
+     "id": "tn-g10-c01-s07",
+     "title": "Types of Functions"
+    },
+    {
+     "id": "tn-g10-c01-s08",
+     "title": "Special Cases of Functions"
+    },
+    {
+     "id": "tn-g10-c01-s09",
+     "title": "Composition of Functions"
+    },
+    {
+     "id": "tn-g10-c01-s10",
+     "title": "Identifying the Graphs of Linear, Quadratic, Cubic and Reciprocal Functions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c01-o01",
+     "statement": "Form ordered pairs and Cartesian products of two or three sets and find the number of elements in a product.",
+     "concepts": [
+      "ordered pair",
+      "Cartesian product"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.relations",
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "tn-g10-c01-o02",
+     "statement": "Identify relations as subsets of a Cartesian product and state their domain, co-domain and range.",
+     "concepts": [
+      "relation",
+      "domain",
+      "co-domain",
+      "range"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.relations"
+     ]
+    },
+    {
+     "id": "tn-g10-c01-o03",
+     "statement": "Decide whether a relation is a function using arrow diagrams, ordered pairs, tables, rules and the vertical line test, and represent functions in these forms.",
+     "concepts": [
+      "function",
+      "vertical line test",
+      "representation of functions"
+     ],
+     "questionTypes": [
+      "true-false",
+      "multiple-choice",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.functions"
+     ]
+    },
+    {
+     "id": "tn-g10-c01-o04",
+     "statement": "Classify functions as one-one, many-one, onto, into or bijective, and recognise constant, identity and real-valued functions.",
+     "concepts": [
+      "one-one",
+      "onto",
+      "bijection",
+      "constant function",
+      "identity function"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.inverse-functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.functions",
+      "MATH.algebra.inverse-functions"
+     ]
+    },
+    {
+     "id": "tn-g10-c01-o05",
+     "statement": "Form and evaluate compositions of functions and check whether composition is commutative or associative for given functions.",
+     "concepts": [
+      "composite function",
+      "f∘g"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.function-operations",
+       "name": "Compose functions",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "MATH.algebra.functions covers domain/range and MATH.algebra.inverse-functions covers inverses; forming f∘g, evaluating it and testing non-commutativity/associativity is a separate assessable skill not listed."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.function-operations"
+     ]
+    },
+    {
+     "id": "tn-g10-c01-o06",
+     "statement": "Recognise and sketch graphs of linear, modulus, quadratic, cubic, reciprocal and constant functions.",
+     "concepts": [
+      "graphs of standard functions",
+      "modulus function",
+      "reciprocal function"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.functions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c02",
+   "number": 2,
+   "term": null,
+   "title": "Numbers and Sequences",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c02-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c02-s02",
+     "title": "Euclid's Division Lemma"
+    },
+    {
+     "id": "tn-g10-c02-s03",
+     "title": "Euclid's Division Algorithm"
+    },
+    {
+     "id": "tn-g10-c02-s04",
+     "title": "Fundamental Theorem of Arithmetic"
+    },
+    {
+     "id": "tn-g10-c02-s05",
+     "title": "Modular Arithmetic"
+    },
+    {
+     "id": "tn-g10-c02-s06",
+     "title": "Sequences"
+    },
+    {
+     "id": "tn-g10-c02-s07",
+     "title": "Arithmetic Progression"
+    },
+    {
+     "id": "tn-g10-c02-s08",
+     "title": "Series"
+    },
+    {
+     "id": "tn-g10-c02-s09",
+     "title": "Geometric Progression"
+    },
+    {
+     "id": "tn-g10-c02-s10",
+     "title": "Sum to n terms of a Geometric Progression"
+    },
+    {
+     "id": "tn-g10-c02-s11",
+     "title": "Special Series"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c02-o01",
+     "statement": "Apply Euclid's division lemma and algorithm to find the HCF of integers and to prove statements about integer forms.",
+     "concepts": [
+      "division lemma",
+      "Euclid's algorithm",
+      "HCF"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.euclid-algorithm"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o02",
+     "statement": "Use the fundamental theorem of arithmetic to factorise numbers, find HCF and LCM, and reason about divisibility and terminating decimals.",
+     "concepts": [
+      "prime factorisation",
+      "fundamental theorem of arithmetic"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.euclid-algorithm"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o03",
+     "statement": "Use congruence modulo n to find remainders, solve simple congruences and model cyclic situations such as clock times and weekdays.",
+     "concepts": [
+      "congruence modulo",
+      "modular operations"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.modular-arithmetic",
+       "name": "Use congruence modulo n",
+       "strand": "number",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.division-remainders",
+        "MATH.number.integers"
+       ],
+       "supports": [
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "No existing competency covers congruence modulo n, modular addition/multiplication or solving simple congruences (e.g. clock/day-of-week problems)."
+      }
+     ],
+     "mapped": [
+      "MATH.number.modular-arithmetic"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o04",
+     "statement": "Find terms of sequences from general or recursive rules, and find nth terms, number of terms and conditions for arithmetic progressions.",
+     "concepts": [
+      "sequence",
+      "general term",
+      "arithmetic progression",
+      "common difference"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression",
+      "pattern"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o05",
+     "statement": "Find the sum of the first n terms of an arithmetic series and solve related word problems.",
+     "concepts": [
+      "sum of AP",
+      "series"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o06",
+     "statement": "Find nth terms of geometric progressions, sums of finite and infinite geometric series, and solve related problems.",
+     "concepts": [
+      "geometric progression",
+      "common ratio",
+      "sum to infinity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.geometric-sequences"
+     ]
+    },
+    {
+     "id": "tn-g10-c02-o07",
+     "statement": "Evaluate sums of the first n natural numbers, odd numbers, squares and cubes using standard formulas.",
+     "concepts": [
+      "sum of naturals",
+      "sum of squares",
+      "sum of cubes"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.sequences.power-sums",
+       "name": "Sum special series of natural numbers",
+       "strand": "sequences",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.arithmetic-sequences"
+       ],
+       "supports": [
+        "MATH.algebra.algebra-simplify"
+       ],
+       "why": "Using closed forms for sums of first n natural numbers, odd numbers, squares and cubes is not covered by the AP or GP competencies."
+      }
+     ],
+     "mapped": [
+      "MATH.sequences.power-sums"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c03-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c03-s02",
+     "title": "Simultaneous Linear Equations in Three Variables"
+    },
+    {
+     "id": "tn-g10-c03-s03",
+     "title": "GCD and LCM of Polynomials"
+    },
+    {
+     "id": "tn-g10-c03-s04",
+     "title": "Rational Expressions"
+    },
+    {
+     "id": "tn-g10-c03-s05",
+     "title": "Square Root of Polynomials"
+    },
+    {
+     "id": "tn-g10-c03-s06",
+     "title": "Quadratic Equations"
+    },
+    {
+     "id": "tn-g10-c03-s07",
+     "title": "Graph of Variations"
+    },
+    {
+     "id": "tn-g10-c03-s08",
+     "title": "Quadratic Graphs"
+    },
+    {
+     "id": "tn-g10-c03-s09",
+     "title": "Matrices"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c03-o01",
+     "statement": "Solve a system of three linear equations in three variables by elimination and recognise systems with no or infinitely many solutions.",
+     "concepts": [
+      "three-variable system",
+      "elimination"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.linear-systems-three-variables",
+       "name": "Solve linear systems in three variables",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.linear-systems"
+       ],
+       "supports": [
+        "MATH.algebra.matrix-systems"
+       ],
+       "why": "MATH.algebra.linear-systems is explicitly about pairs of equations; elimination for three unknowns (and recognising no/infinitely many solutions) is a genuine extension; MATH.algebra.matrix-systems is the Grade-12 matrix method, not elimination."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.linear-systems",
+      "MATH.algebra.linear-systems-three-variables"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o02",
+     "statement": "Find the GCD and LCM of polynomials and use the relation that their product equals the product of the two polynomials.",
+     "concepts": [
+      "GCD",
+      "LCM",
+      "polynomials"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-gcd-lcm",
+       "name": "Find GCD and LCM of polynomials",
+       "strand": "algebra",
+       "gradeRange": [
+        9,
+        10
+       ],
+       "prerequisites": [
+        "MATH.algebra.factorisation"
+       ],
+       "supports": [
+        "MATH.algebra.polynomials",
+        "MATH.number.factors-multiples",
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "No existing competency covers finding common divisors/multiples of polynomials; factorisation and factors-multiples are prerequisites, not the skill itself."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-gcd-lcm"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o03",
+     "statement": "Reduce rational expressions to lowest terms, state excluded values, and multiply, divide, add and subtract rational expressions.",
+     "concepts": [
+      "rational expression",
+      "excluded value"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.rational-expressions",
+       "name": "Simplify and operate on rational expressions",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.factorisation",
+        "MATH.number.fraction-add"
+       ],
+       "supports": [
+        "MATH.algebra.polynomial-gcd-lcm",
+        "MATH.number.fraction-product"
+       ],
+       "why": "No existing competency covers reducing algebraic fractions, excluded values, and their four operations."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.rational-expressions"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o04",
+     "statement": "Find the square root of a perfect-square polynomial by factorisation and by the long-division method.",
+     "concepts": [
+      "square root of polynomial"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-square-root",
+       "name": "Find square roots of polynomials",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.algebra.identities",
+        "MATH.algebra.polynomials"
+       ],
+       "supports": [
+        "MATH.algebra.factorisation",
+        "MATH.number.square-roots"
+       ],
+       "why": "Extracting the square root of a perfect-square polynomial (by factorisation or the long-division method) is not covered by any existing competency."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-square-root"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o05",
+     "statement": "Solve quadratic equations by factorisation, completing the square and the formula, and apply them to word problems.",
+     "concepts": [
+      "quadratic equation",
+      "completing the square",
+      "quadratic formula"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o06",
+     "statement": "Analyse the roots of a quadratic without fully solving it: use the discriminant to determine their nature and find parameter values, and use the sum and product of roots to form equations and evaluate symmetric expressions.",
+     "concepts": [
+      "discriminant",
+      "nature of roots",
+      "sum of roots",
+      "product of roots"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratic-discriminant",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-zeros",
+       "name": "Relate roots and coefficients of quadratics",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.quadratics"
+       ],
+       "supports": [
+        "MATH.algebra.polynomials"
+       ],
+       "why": "Sum/product of roots, forming a quadratic from given roots and evaluating symmetric functions of roots are not in MATH.algebra.quadratics (solving) or MATH.algebra.quadratic-discriminant (nature of roots)."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-zeros",
+      "MATH.algebra.quadratic-discriminant"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o07",
+     "statement": "Draw graphs of direct and inverse variation, and plot quadratic graphs to solve quadratic equations, including by intersection with a straight line.",
+     "concepts": [
+      "direct variation",
+      "inverse variation",
+      "parabola",
+      "graphical solution"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.quadratic-graphs",
+       "name": "Solve quadratics graphically",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.coordinate.cartesian",
+        "MATH.algebra.variables"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.algebra.quadratic-discriminant",
+        "MATH.algebra.functions"
+       ],
+       "why": "Plotting y = ax^2+bx+c from a table and reading solutions (including via intersection with a line) is a graphical skill distinct from algebraic solving; no existing competency covers parabola plotting."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.inverse-proportion",
+      "MATH.algebra.quadratic-graphs",
+      "MATH.number.proportion"
+     ]
+    },
+    {
+     "id": "tn-g10-c03-o08",
+     "statement": "Identify the order and types of matrices, and add, subtract, scalar-multiply, multiply and transpose matrices, verifying their properties.",
+     "concepts": [
+      "matrix",
+      "order",
+      "transpose",
+      "matrix multiplication"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c04-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c04-s02",
+     "title": "Similarity"
+    },
+    {
+     "id": "tn-g10-c04-s03",
+     "title": "Thales Theorem and Angle Bisector Theorem"
+    },
+    {
+     "id": "tn-g10-c04-s04",
+     "title": "Pythagoras Theorem"
+    },
+    {
+     "id": "tn-g10-c04-s05",
+     "title": "Circles and Tangents"
+    },
+    {
+     "id": "tn-g10-c04-s06",
+     "title": "Concurrency Theorems"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c04-o01",
+     "statement": "Use AA, SAS and SSS similarity criteria and results on ratios of altitudes, perimeters and areas of similar triangles to solve problems.",
+     "concepts": [
+      "similar triangles",
+      "AA/SAS/SSS similarity",
+      "area ratio"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o02",
+     "statement": "Construct a triangle similar to a given triangle for a given scale factor less than or greater than 1.",
+     "concepts": [
+      "scale factor",
+      "similar triangle construction"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.scaled-construction",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.scaled-construction"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o03",
+     "statement": "Prove and apply the basic proportionality (Thales) theorem, the angle bisector theorem, and their converses.",
+     "concepts": [
+      "basic proportionality theorem",
+      "angle bisector theorem"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity",
+      "MATH.geometry.triangle-proof"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o04",
+     "statement": "Construct a triangle given its base, vertical angle and either the median, the altitude, or the point where the vertical-angle bisector meets the base.",
+     "concepts": [
+      "segment containing an angle",
+      "vertical angle",
+      "locus"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.construction-triangles",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems",
+      "MATH.geometry.construction-triangles"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o05",
+     "statement": "Prove the Pythagoras theorem and its converse and apply them, including Pythagorean triples.",
+     "concepts": [
+      "Pythagoras theorem",
+      "converse",
+      "Pythagorean triple"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Pythagoras theorem and its converse",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots"
+       ],
+       "supports": [
+        "MATH.geometry.triangle-properties",
+        "MATH.geometry.similarity"
+       ],
+       "why": "The competency list has no entry for the Pythagoras theorem (statement, converse, triples, applications); triangle-properties (Grade 6) and similarity do not name it. Check whether another board file already proposed the same id."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras",
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o06",
+     "statement": "Apply tangent properties (radius–tangent perpendicularity, equal tangents from an external point, alternate segment theorem, common tangents) to find lengths and angles.",
+     "concepts": [
+      "tangent",
+      "secant",
+      "alternate segment theorem",
+      "common tangent"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o07",
+     "statement": "Construct a tangent at a point on a circle and a pair of tangents from an external point, and measure their lengths.",
+     "concepts": [
+      "tangent construction"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    },
+    {
+     "id": "tn-g10-c04-o08",
+     "statement": "Apply Ceva's theorem to test concurrency of cevians and Menelaus' theorem to test collinearity, and find unknown segment ratios.",
+     "concepts": [
+      "cevian",
+      "Ceva's theorem",
+      "Menelaus' theorem"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.ceva-menelaus",
+       "name": "Apply Ceva and Menelaus theorems",
+       "strand": "geometry",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.ratio"
+       ],
+       "supports": [
+        "MATH.geometry.similarity",
+        "MATH.geometry.triangle-centres"
+       ],
+       "why": "Concurrency (Ceva) and collinearity (Menelaus) ratio conditions are not covered by any existing geometry competency."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.ceva-menelaus"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c05",
+   "number": 5,
+   "term": null,
+   "title": "Coordinate Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c05-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c05-s02",
+     "title": "Area of a Triangle"
+    },
+    {
+     "id": "tn-g10-c05-s03",
+     "title": "Area of a Quadrilateral"
+    },
+    {
+     "id": "tn-g10-c05-s04",
+     "title": "Inclination of a Line"
+    },
+    {
+     "id": "tn-g10-c05-s05",
+     "title": "Straight Line"
+    },
+    {
+     "id": "tn-g10-c05-s06",
+     "title": "General Form of a Straight Line"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c05-o01",
+     "statement": "Find the area of a triangle and of a quadrilateral from the coordinates of their vertices, and use zero area to test collinearity.",
+     "concepts": [
+      "area by coordinates",
+      "collinearity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.coordinate.polygon-area",
+       "name": "Find polygon areas from coordinates",
+       "strand": "coordinate",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.coordinate.cartesian"
+       ],
+       "supports": [
+        "MATH.measurement.triangle-area",
+        "MATH.coordinate.distance"
+       ],
+       "why": "MATH.coordinate.distance covers distance and section formulas only; area of a triangle/quadrilateral from vertex coordinates and the area test for collinearity are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.coordinate.polygon-area"
+     ]
+    },
+    {
+     "id": "tn-g10-c05-o02",
+     "statement": "Find the slope of a line from its inclination or from two points, and use slopes to test parallelism, perpendicularity and collinearity.",
+     "concepts": [
+      "slope",
+      "inclination",
+      "parallel lines",
+      "perpendicular lines"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "tn-g10-c05-o03",
+     "statement": "Write the equation of a straight line in slope-intercept, point-slope, two-point and intercept forms, including lines parallel to the axes.",
+     "concepts": [
+      "equation of a line",
+      "slope-intercept form",
+      "intercept form"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "tn-g10-c05-o04",
+     "statement": "Convert between general form ax+by+c=0 and other forms, read slope and intercepts, and find equations of lines parallel or perpendicular to a given line.",
+     "concepts": [
+      "general form",
+      "parallel and perpendicular lines"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "tn-g10-c05-o05",
+     "statement": "Use coordinate methods to solve geometric problems such as finding vertices, altitudes or the type of a quadrilateral.",
+     "concepts": [
+      "coordinate proof"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "proof",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.straight-lines"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c06",
+   "number": 6,
+   "term": null,
+   "title": "Trigonometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c06-s02",
+     "title": "Trigonometric Identities"
+    },
+    {
+     "id": "tn-g10-c06-s03",
+     "title": "Heights and Distances"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c06-o01",
+     "statement": "Recall trigonometric ratios and their values for standard and complementary angles as a basis for identities.",
+     "concepts": [
+      "trigonometric ratios",
+      "standard angles"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "tn-g10-c06-o02",
+     "statement": "Prove trigonometric identities using the Pythagorean identities and the reciprocal and quotient relations.",
+     "concepts": [
+      "sin²θ+cos²θ=1",
+      "1+tan²θ=sec²θ",
+      "1+cot²θ=cosec²θ"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities"
+     ]
+    },
+    {
+     "id": "tn-g10-c06-o03",
+     "statement": "Use identities to simplify expressions and find values of other ratios from given conditions.",
+     "concepts": [
+      "simplification with identities"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities"
+     ]
+    },
+    {
+     "id": "tn-g10-c06-o04",
+     "statement": "Solve height and distance problems involving angles of elevation, depression, or both, including two-observation problems.",
+     "concepts": [
+      "angle of elevation",
+      "angle of depression",
+      "line of sight"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.heights-distances",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.heights-distances"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c07",
+   "number": 7,
+   "term": null,
+   "title": "Mensuration",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c07-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c07-s02",
+     "title": "Surface Area"
+    },
+    {
+     "id": "tn-g10-c07-s03",
+     "title": "Volume"
+    },
+    {
+     "id": "tn-g10-c07-s04",
+     "title": "Volume and Surface Area of Combined Solids"
+    },
+    {
+     "id": "tn-g10-c07-s05",
+     "title": "Conversion of Solids from one Shape to another with no change in Volume"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c07-o01",
+     "statement": "Calculate curved and total surface areas of solid and hollow cylinders.",
+     "concepts": [
+      "cylinder",
+      "hollow cylinder",
+      "curved surface area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.cylinder",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cylinder"
+     ]
+    },
+    {
+     "id": "tn-g10-c07-o02",
+     "statement": "Calculate surface areas and volumes of right circular cones, spheres, hemispheres and hollow hemispheres/spherical shells.",
+     "concepts": [
+      "cone",
+      "sphere",
+      "hemisphere",
+      "slant height"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.cones-spheres",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cones-spheres"
+     ]
+    },
+    {
+     "id": "tn-g10-c07-o03",
+     "statement": "Calculate surface area and volume of a frustum of a cone.",
+     "concepts": [
+      "frustum"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.frustum",
+       "name": "Calculate frustum surface area and volume",
+       "strand": "measurement",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.measurement.cones-spheres"
+       ],
+       "supports": [
+        "MATH.geometry.similarity",
+        "MATH.measurement.combined-solids"
+       ],
+       "why": "Frustum formulas (curved/total surface area, volume) are not part of cones-spheres or combined-solids, which deal with whole solids."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.frustum"
+     ]
+    },
+    {
+     "id": "tn-g10-c07-o04",
+     "statement": "Find surface areas and volumes of solids formed by combining cylinders, cones, spheres and hemispheres.",
+     "concepts": [
+      "combined solids"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids"
+     ]
+    },
+    {
+     "id": "tn-g10-c07-o05",
+     "statement": "Solve problems where a solid is melted or recast into another shape using conservation of volume.",
+     "concepts": [
+      "conversion of solids",
+      "volume conservation"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g10-c08",
+   "number": 8,
+   "term": null,
+   "title": "Statistics and Probability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g10-c08-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g10-c08-s02",
+     "title": "Measures of Dispersion"
+    },
+    {
+     "id": "tn-g10-c08-s03",
+     "title": "Coefficient of Variation"
+    },
+    {
+     "id": "tn-g10-c08-s04",
+     "title": "Probability"
+    },
+    {
+     "id": "tn-g10-c08-s05",
+     "title": "Algebra of Events"
+    },
+    {
+     "id": "tn-g10-c08-s06",
+     "title": "Addition Theorem of Probability"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g10-c08-o01",
+     "statement": "Find the range and coefficient of range of a data set and explain what dispersion measures.",
+     "concepts": [
+      "range",
+      "coefficient of range",
+      "dispersion"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion"
+     ]
+    },
+    {
+     "id": "tn-g10-c08-o02",
+     "statement": "Compute variance and standard deviation for raw, ungrouped and grouped data by direct, mean, assumed-mean and step-deviation methods.",
+     "concepts": [
+      "variance",
+      "standard deviation",
+      "step deviation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion"
+     ]
+    },
+    {
+     "id": "tn-g10-c08-o03",
+     "statement": "Compute the coefficient of variation and use it to compare the consistency of two data sets.",
+     "concepts": [
+      "coefficient of variation",
+      "consistency"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion"
+     ]
+    },
+    {
+     "id": "tn-g10-c08-o04",
+     "statement": "List sample spaces of random experiments using tree diagrams and find probabilities of events.",
+     "concepts": [
+      "sample space",
+      "tree diagram",
+      "probability of an event"
+     ],
+     "questionTypes": [
+      "set",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.classical",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical",
+      "MATH.probability.sample-space"
+     ]
+    },
+    {
+     "id": "tn-g10-c08-o05",
+     "statement": "Use the algebra of events (union, intersection, complement) and types of events (mutually exclusive, complementary, sure, impossible) to compute probabilities.",
+     "concepts": [
+      "algebra of events",
+      "mutually exclusive",
+      "complementary events"
+     ],
+     "questionTypes": [
+      "fraction",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.complements",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.complements",
+      "MATH.probability.events"
+     ]
+    },
+    {
+     "id": "tn-g10-c08-o06",
+     "statement": "Apply the addition theorem of probability for two and three events to solve problems.",
+     "concepts": [
+      "addition theorem",
+      "P(A∪B)"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.events"
+     ]
+    }
+   ]
+  }
+ ]
+}

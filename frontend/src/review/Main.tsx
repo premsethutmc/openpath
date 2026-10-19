@@ -6,6 +6,7 @@
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Figure } from "../year/Figure";
 import { Api } from "../english/logic/account";
 import { isCorrect, misconceptionOf, modules, moduleOrigin, question } from "../../../packages/learning/src/content";
 import { graphCoverage, MATRIX_LABEL, releaseCoverage, type MatrixStatus } from "../../../packages/learning/src/coverage";
@@ -181,6 +182,7 @@ function TryQuestion({ qid }: { qid: string }) {
     <div className="qcard try" data-qid={qid}>
       <p className="small muted">{qid}{p ? ` · difficulty ${FAMILIES.get(p.family)?.difficulty?.(p.params) ?? 2}` : ""}</p>
       <p className="prompt">{q.prompt}</p>
+      {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />
       <div className="actions"><button className="secondary" disabled={!value.trim()} onClick={() => setChecked(isCorrect(q, value))}>Check</button></div>
       {checked !== null && (

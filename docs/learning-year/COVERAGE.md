@@ -10,33 +10,35 @@ One status per competency of the 200-competency graph (which is itself only a st
 
 | Status | Competencies |
 |---|---|
-| Complete and educator-approved | 0/200 (0%) |
-| Complete, awaiting review | 31/200 (16%) |
-| Partially supported | 8/200 (4%) |
-| Unsupported question type | 21/200 (11%) |
-| No content | 140/200 (70%) |
+| Complete and educator-approved | 0/338 (0%) |
+| Complete, awaiting review | 35/338 (10%) |
+| Partially supported | 8/338 (2%) |
+| Unsupported question type | 47/338 (14%) |
+| No content | 248/338 (73%) |
 
 By grade:
 
 | Grade | Complete and educator-approved | Complete, awaiting review | Partially supported | Unsupported question type | No content |
 |---|---|---|---|---|---|
-| 1 | 0 | 0 | 0 | 0 | 15 |
-| 2 | 0 | 0 | 0 | 2 | 14 |
-| 3 | 0 | 2 | 2 | 1 | 11 |
-| 4 | 0 | 5 | 0 | 2 | 8 |
-| 5 | 0 | 5 | 1 | 3 | 6 |
-| 6 | 0 | 1 | 0 | 2 | 12 |
-| 7 | 0 | 4 | 1 | 1 | 10 |
-| 8 | 0 | 2 | 2 | 1 | 12 |
-| 9 | 0 | 0 | 0 | 4 | 11 |
-| 10 | 0 | 5 | 0 | 3 | 9 |
-| 11 | 0 | 1 | 1 | 1 | 17 |
-| 12 | 0 | 6 | 1 | 1 | 15 |
+| 1 | 0 | 1 | 0 | 0 | 18 |
+| 2 | 0 | 1 | 0 | 4 | 19 |
+| 3 | 0 | 2 | 2 | 3 | 20 |
+| 4 | 0 | 5 | 0 | 4 | 24 |
+| 5 | 0 | 5 | 1 | 7 | 29 |
+| 6 | 0 | 1 | 0 | 7 | 29 |
+| 7 | 0 | 4 | 1 | 8 | 33 |
+| 8 | 0 | 2 | 2 | 9 | 31 |
+| 9 | 0 | 1 | 0 | 11 | 18 |
+| 10 | 0 | 5 | 0 | 10 | 25 |
+| 11 | 0 | 2 | 1 | 8 | 42 |
+| 12 | 0 | 6 | 1 | 6 | 58 |
 
 Every competency that has some content:
 
 | Competency | Grades | Status | Why |
 |---|---|---|---|
+| Count objects to 20 (`MATH.number.count-objects`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cnt draft). |
+| Add two-digit numbers with regrouping (`MATH.number.addition-regroup`) | 2–2 | Complete, awaiting review | Complete; awaiting educator review (module draft; families addr draft). |
 | Interpret quotients and remainders (`MATH.number.division-remainders`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families divr submitted, mul submitted). |
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | 3–3 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Represent fractions of a whole (`MATH.number.fraction-models`) | 3–3 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
@@ -62,12 +64,14 @@ Every competency that has some content:
 | Use algebraic identities (`MATH.algebra.identities`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families expand submitted). |
 | Plot points in four quadrants (`MATH.coordinate.cartesian`) | 8–8 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Find squares and square roots (`MATH.number.square-roots`) | 8–8 | Partially supported | Question pool too small for: diagnostic, check, practice, retention. |
+| Simplify radicals (`MATH.number.radicals`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families surd draft). |
 | Use arithmetic progressions (`MATH.algebra.arithmetic-sequences`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families apn submitted). |
 | Interpret the quadratic discriminant (`MATH.algebra.quadratic-discriminant`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families disc submitted). |
 | Solve quadratic equations (`MATH.algebra.quadratics`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families quad submitted). |
 | Use coordinate distance and section formulas (`MATH.coordinate.distance`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families cdist submitted). |
 | Use Euclidean algorithm and prime factorisation (`MATH.number.euclid-algorithm`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families hcf submitted). |
 | Identify domain range and functions (`MATH.algebra.functions`) | 11–11 | Partially supported | A question family (above) but no module: no teaching yet. |
+| Solve linear inequalities (`MATH.algebra.inequalities`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lineq draft). |
 | Evaluate elementary limits (`MATH.calculus.limits`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families lim submitted). |
 | Evaluate and apply determinants (`MATH.algebra.determinants`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families det2 submitted). |
 | Calculate areas using integration (`MATH.calculus.area-integrals`) | 12–12 | Partially supported | A question family (alp) but no module: family alp has too few check questions for a module. |
@@ -77,7 +81,7 @@ Every competency that has some content:
 | Integrate by substitution and parts (`MATH.calculus.integration-methods`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families subst submitted, pow submitted). |
 | Calculate conditional probabilities (`MATH.probability.conditional`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module submitted; families condp submitted). |
 
-Unsupported question type (21): Recognise folding symmetry; Interpret pictographs with a key; Read simple bar charts; Find lines of symmetry; Interpret scaled bar charts; Measure and draw angles; Match solids to nets; Test a generalisation with examples; Construct simple figures with ruler and compass; Justify divisibility tests; Construct triangles from sufficient data; Distinguish proof from examples; Use axioms and deductive arguments; Prove triangle relationships; Construct perpendicular and angle bisectors; Construct a mathematical argument; Construct similar figures; Prove elementary trigonometric identities; Choose and justify a mathematical model; Use logical implications and counterexamples; Justify multi-concept problem solutions.
+Unsupported question type (47): Recognise folding symmetry; Interpret pictographs with a key; Read simple bar charts; Find lines of symmetry; Interpret scaled bar charts; Measure and draw angles; Match solids to nets; Test a generalisation with examples; Construct simple figures with ruler and compass; Justify divisibility tests; Construct triangles from sufficient data; Distinguish proof from examples; Use axioms and deductive arguments; Prove triangle relationships; Construct perpendicular and angle bisectors; Construct a mathematical argument; Construct similar figures; Prove elementary trigonometric identities; Choose and justify a mathematical model; Use logical implications and counterexamples; Justify multi-concept problem solutions; Convert between numerical/algebraic expressions and tree diagrams; Graph functions using translations, reflections and dilations; Express and justify a general pattern with an algebraic expression; Graph linear inequalities and systems in two variables; Relate zeros of a polynomial to its graph and coefficients; Sketch and read graphs of standard real functions; Sketch curves using derivatives, symmetry and asymptotes; Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data; Describe iterative fractal constructions and quantify each stage; Identify and draw straight and curved lines in different orientations; Locate positions and describe routes using grids, maps and directions; Prove and apply the midpoint theorem and its converse; Prove properties and tests of parallelograms; Identify rotational symmetry and its order (and translational symmetry in patterns); Use scales on maps and scale drawings; Locate and construct triangle centres; Write complex numbers in modulus-argument (polar) form; Prove that a number is irrational; Construct irrational lengths such as sqrt n on the number line; Use tree diagrams and two-way tables for compound experiments; Prove statements by mathematical induction; Find and justify winning strategies in simple number games; Test relations for reflexivity, symmetry, transitivity and equivalence; Read and draw pie charts; Read and construct stacked and 100% stacked bar charts; Pose statistical questions and draw conclusions from data.
 
 ## Question families (spec@1)
 
@@ -119,40 +123,45 @@ Unsupported question type (21): Recognise folding symmetry; Interpret pictograph
 | det2: A 2 × 2 determinant | `MATH.algebra.determinants` | 2076 | 0 | 576/1500/0 | `e06062d9` |
 | lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `b78c12de` |
 | condp: A conditional probability from a table | `MATH.probability.conditional` | 625 | 0 | 250/375/0 | `ec04e80a` |
+| cnt: Counting objects in a picture | `MATH.number.count-objects` | 120 | 0 | 30/30/60 | `6adf444e` |
+| addr: Adding two-digit numbers with regrouping | `MATH.number.addition-regroup` | 400 | 0 | 79/97/224 | `aafa97aa` |
+| surd: Simplifying a square root | `MATH.number.radicals` | 211 | 0 | 13/52/146 | `6684f7d5` |
+| lineq: Solving a linear inequality | `MATH.algebra.inequalities` | 500 | 0 | 114/101/285 | `bb03ddb9` |
+| dprod: Differentiating k xⁿ times sin(ax) or cos(ax) | `MATH.calculus.derivative-rules` | 120 | 0 | 10/70/40 | `31ee105e` |
 
 ## Whole competency graph
 
-- Competencies (not counting micro-skills): **200**
-- With a complete learning module (validate@1): **37/200 (19%)**; with an incomplete module: 0; with none: 163
-- Modules: 37 (hand-written 10, synthesised from blueprints 27)
-- Problem families (generated questions with independent checks): 36
-- Review registry (repository copy): draft 0, submitted 73, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Competencies (not counting micro-skills): **338**
+- With a complete learning module (validate@1): **41/338 (12%)**; with an incomplete module: 0; with none: 297
+- Modules: 41 (hand-written 10, synthesised from blueprints 31)
+- Problem families (generated questions with independent checks): 41
+- Review registry (repository copy): draft 9, submitted 73, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
-| Diagnostic questions | 37/200 (19%) |
-| Teaching strategies | 37/200 (19%) |
-| Practice (≥ 2) | 37/200 (19%) |
-| Independent assessment | 37/200 (19%) |
-| Retention check | 37/200 (19%) |
-| Educator-approved | 0/200 (0%) |
+| Diagnostic questions | 41/338 (12%) |
+| Teaching strategies | 41/338 (12%) |
+| Practice (≥ 2) | 41/338 (12%) |
+| Independent assessment | 41/338 (12%) |
+| Retention check | 41/338 (12%) |
+| Educator-approved | 0/338 (0%) |
 
 By grade (a competency spanning grades counts in each):
 
 | Grade | Competencies | Complete module | Incomplete module |
 |---|---|---|---|
-| 1 | 15 | 0 | 0 |
-| 2 | 16 | 0 | 0 |
-| 3 | 16 | 4 | 0 |
-| 4 | 15 | 5 | 0 |
-| 5 | 15 | 6 | 0 |
-| 6 | 15 | 1 | 0 |
-| 7 | 16 | 5 | 0 |
-| 8 | 17 | 4 | 0 |
-| 9 | 15 | 0 | 0 |
-| 10 | 17 | 5 | 0 |
-| 11 | 20 | 1 | 0 |
-| 12 | 23 | 6 | 0 |
+| 1 | 19 | 1 | 0 |
+| 2 | 24 | 1 | 0 |
+| 3 | 27 | 4 | 0 |
+| 4 | 33 | 5 | 0 |
+| 5 | 42 | 6 | 0 |
+| 6 | 37 | 1 | 0 |
+| 7 | 46 | 5 | 0 |
+| 8 | 44 | 4 | 0 |
+| 9 | 30 | 1 | 0 |
+| 10 | 40 | 5 | 0 |
+| 11 | 53 | 2 | 0 |
+| 12 | 71 | 6 | 0 |
 
 ## Sample releases
 
@@ -301,16 +310,16 @@ By grade (a competency spanning grades counts in each):
 - Board: OpenPath sample (synthetic, not a real board); subject: Mathematics
 - Extracted requirements: 4 chapters, 0 sections, 6 outcomes, 0 worked examples, 4 exercises
 - Competency mappings: 6/6 outcomes mapped (accepted); proposals: clear 5, uncertain 1, missing 0 (provisional competency proposals 0), unsupported 0
-- Competencies assigned: 6; complete module 1, incomplete 0, none 5
-- Diagnostic questions 1/6 (17%); Teaching strategies 1/6 (17%); Practice (≥ 2) 1/6 (17%); Independent assessment 1/6 (17%); Retention check 1/6 (17%); Educator-approved 0/6 (0%)
-- Matrix: Complete and educator-approved 0; Complete, awaiting review 1; Partially supported 1; Unsupported question type 0; No content 4
+- Competencies assigned: 6; complete module 2, incomplete 0, none 4
+- Diagnostic questions 2/6 (33%); Teaching strategies 2/6 (33%); Practice (≥ 2) 2/6 (33%); Independent assessment 2/6 (33%); Retention check 2/6 (33%); Educator-approved 0/6 (0%)
+- Matrix: Complete and educator-approved 0; Complete, awaiting review 2; Partially supported 1; Unsupported question type 0; No content 3
 
 | Competency | Status | Why |
 |---|---|---|
 | Use set operations (`MATH.algebra.sets`) | No content | No content yet. |
 | Identify domain range and functions (`MATH.algebra.functions`) | Partially supported | A question family (above) but no module: no teaching yet. |
 | Use straight-line equations (`MATH.coordinate.straight-lines`) | No content | No content yet. |
-| Solve linear inequalities (`MATH.algebra.inequalities`) | No content | No content yet. |
+| Solve linear inequalities (`MATH.algebra.inequalities`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lineq draft). |
 | Evaluate elementary limits (`MATH.calculus.limits`) | Complete, awaiting review | Complete; awaiting educator review (module submitted; families lim submitted). |
 | Differentiate from first principles (`MATH.calculus.derivatives`) | No content | No content yet. |
 

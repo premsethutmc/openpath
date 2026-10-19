@@ -1,0 +1,2732 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 12,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics: Textbook for Class XII, Part I (Chapters 1-6) and Part II (Chapters 7-13)",
+  "publisher": "NCERT",
+  "edition": "Part I first edition November 2006 (ISBN 81-7450-629-2); rationalised content in force since 2022-23 and continued unchanged in 2026-27; the exact 2026-27 reprint line of Part I and Part II could not be read (ncert.nic.in PDFs blocked to my fetcher)",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "syllabus",
+   "title": "Mathematics (Code No. 041) Classes XI-XII, Senior Secondary (Secondary Part 2) Curriculum 2026-27",
+   "publisher": "CBSE",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Maths_SecP2_2026-27.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "units and marks (Relations and Functions 8, Algebra 10, Calculus 35, Vectors and 3D Geometry 14, Linear Programming 5, Probability 8; 80 theory + 20 internal), chapter topic lists incl. restrictions, internal assessment, question paper design, prescribed books"
+  },
+  {
+   "kind": "syllabus",
+   "title": "CBSE Curriculum 2026-27 index page",
+   "publisher": "CBSE",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/curriculum_2027.html",
+   "accessed": "2026-10-19",
+   "used_for": "locating the official 2026-27 Mathematics (041) curriculum PDF"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Mathematics Senior Secondary Curriculum 2025-26",
+   "publisher": "CBSE",
+   "edition": "2025-26",
+   "academicYear": "2025-26",
+   "url": "https://www.cbseacademic.nic.in/web_material/CurriculumMain26/SrSec/Maths_SrSec_2025-26.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "comparison (Class XII probability text identical: no random variables)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics: Textbook for Class XII Part I - prelims and contents (lemh1ps.pdf)",
+   "publisher": "NCERT",
+   "edition": "the copy returned was the pre-rationalisation 2019-20 printing",
+   "academicYear": "2019-20",
+   "url": "https://ncert.nic.in/textbook/pdf/lemh1ps.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "Part I chapter titles and original section list (before rationalisation)"
+  },
+  {
+   "kind": "notification",
+   "title": "List of Rationalised Content in Textbooks for Class XII (Mathematics Part I code 12079, Part II code 12080)",
+   "publisher": "NCERT (copy hosted by PW / static.pw.live - secondary host)",
+   "edition": "2022 rationalisation",
+   "academicYear": "2022-23 onward",
+   "url": "https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS_BLOGS/25781c3a-49c0-4260-8355-a8635d64f8fa.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "which sections were removed from the Class XII books (used to derive the current section lists)"
+  },
+  {
+   "kind": "textbook",
+   "title": "SATHEE NCERT book theory, Class 12 Mathematics chapters",
+   "publisher": "SATHEE (Ministry of Education / IIT Kanpur portal) - secondary reproduction",
+   "edition": "undated",
+   "academicYear": "unknown",
+   "url": "https://sathee.iitk.ac.in/ncert-books/ncert-books-theory/class-12/nbt-math-12/chapter-13-probability",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of section headings and renumbering for chapters 1, 3-13 (chapter 2 page would not load)"
+  },
+  {
+   "kind": "notification",
+   "title": "CBSE Class 12 Maths Syllabus 2026-27 (states the Class 12 Maths books remain unchanged for 2026-27)",
+   "publisher": "Careers360 (secondary)",
+   "edition": "2026",
+   "academicYear": "2026-27",
+   "url": "https://school.careers360.com/boards/cbse/cbse-class-12-maths-syllabus-2026-27",
+   "accessed": "2026-10-19",
+   "used_for": "corroboration only"
+  },
+  {
+   "kind": "notification",
+   "title": "News report of NCERT notice on 2026-27 textbooks (only Grade 9 changed; 10 and 11 deferred to 2027-28)",
+   "publisher": "Kerala Kaumudi (secondary)",
+   "edition": "18 March 2026",
+   "academicYear": "2026-27",
+   "url": "https://keralakaumudi.com/en/news/news-amp.php?id=1717483",
+   "accessed": "2026-10-19",
+   "used_for": "inference that the Class XII books are also unchanged in 2026-27"
+  }
+ ],
+ "notes": [
+  "Textbook: no new NCERT Class XII Mathematics book exists for 2026-27; CBSE 2026-27 prescribes 'Mathematics Part I' and 'Part II' (NCERT) plus Exemplar and Lab Manual, editions unstated. I could not read the current Part I/Part II prelims (ncert.nic.in/textbook/pdf is blocked by robots for my fetcher; an older 2019-20 Part I prelims was returned from cache), so the reprint year is not verified.",
+  "Section lists were DERIVED, not read from the current print: the pre-rationalisation contents (official, 2019-20) minus the sections NCERT's 2022 rationalisation list removes, cross-checked against the SATHEE reproduction. Section numbering in the current book may differ; titles only are recorded.",
+  "Conflicts between sources: SATHEE still shows '5.8 Mean Value Theorem' (Ch 5), a 'Properties of Determinants' heading (Ch 4), '8.2.1 area bounded by a curve and a line' (Ch 8), and the whole Plane material 11.6-11.10 (Ch 11), all of which the NCERT rationalisation list removes and none of which is in the CBSE 2026-27 topic list. I followed the rationalisation list and the CBSE curriculum and left them out.",
+  "Removed by rationalisation (not recorded): binary operations; elementary row/column operations and inverse by elementary operations; properties of determinants; Mean Value Theorem; tangents and normals; approximations; definite integral as a limit of a sum; area between two curves; formation of differential equations; scalar triple product; planes, coplanarity and line-plane angle; types of LPP section; random variables, probability distributions, mean/variance, Bernoulli trials and binomial distribution.",
+  "Chapter 1: CBSE 2026-27 lists only types of relations and one-one/onto functions; composition and invertible functions remain partly in the book (section 1.4) but are not in the CBSE topic list. Outcome o04 covers them as 'extension'. Chapter 2: only definitions, domain/range, principal value branch and graphs are listed by CBSE; the properties section was largely removed by rationalisation - the remaining 2.3 material was not checked, so only '2.1 Introduction' and '2.2 Basic Concepts' are recorded.",
+  "Existing competencies not used: MATH.coordinate.space-planes (planes are outside the 2026-27 syllabus) and MATH.probability.random-variables (random variables removed from the book and absent from CBSE 2026-27). MATH.algebra.inverse-functions is used only for the extension outcome in Chapter 1.",
+  "CBSE restrictions recorded in outcomes: non-commutativity examples restricted to order-2 square matrices; determinants up to 3x3; systems with unique solution only (2 or 3 variables); FTC without proof; areas under lines, circles, parabolas and ellipses in standard form only; linear DE of the forms dy/dx + py = q and dx/dy + p1 x = q1; LP with at most three non-trivial constraints; only derivatives of sin^-1 x, cos^-1 x, tan^-1 x among inverse trig derivatives.",
+  "Assessment (CBSE 2026-27): 80-mark 3-hour paper; 55% remembering/understanding, 25% applying, 20% analysing/evaluating/creating; no chapter-wise weightage; 33% internal choice. Internal assessment 20 = periodic tests 10 (three tests, best two averaged; suggested Jul-Aug, Nov, Dec-Jan) + mathematics activities 10 (10 Lab Manual activities with record 5, year-end activity test 3, viva-voce 2).",
+  "Chapter titles: Part I titles seen on official NCERT prelims (older printing; titles are unchanged by rationalisation) and Part II titles 'Integrals', 'Differential Equations', 'Linear Programming', 'Probability' match the CBSE curriculum. 'Application of Integrals', 'Vector Algebra' and 'Three Dimensional Geometry' are the printed titles as reported by secondary sources; CBSE names them 'Applications of the Integrals', 'Vectors' and 'Three-dimensional Geometry'; marked verified:false.",
+  "Several existing competencies are tagged 11-11 (e.g. MATH.algebra.relations, MATH.algebra.functions); they are used as prerequisites or partial fits here."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g12-c01",
+   "number": 1,
+   "term": null,
+   "title": "Relations and Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c01-s02",
+     "title": "Types of Relations"
+    },
+    {
+     "id": "cbse-g12-c01-s03",
+     "title": "Types of Functions"
+    },
+    {
+     "id": "cbse-g12-c01-s04",
+     "title": "Composition of Functions and Invertible Function"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c01-o01",
+     "statement": "Test whether a given relation is reflexive, symmetric or transitive, and justify the answer.",
+     "concepts": [
+      "reflexive",
+      "symmetric",
+      "transitive",
+      "empty and universal relations"
+     ],
+     "questionTypes": [
+      "true-false",
+      "proof",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.relation-properties",
+       "name": "Test relations for reflexivity, symmetry, transitivity and equivalence",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.relations"
+       ],
+       "supports": [
+        "MATH.reasoning.mathematical-argument"
+       ],
+       "why": "MATH.algebra.relations (grade 11) is about representing relations; classifying them and finding equivalence classes is a distinct proof-oriented skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.relations",
+      "MATH.sets-relations.relation-properties"
+     ]
+    },
+    {
+     "id": "cbse-g12-c01-o02",
+     "statement": "Show that a relation is an equivalence relation and describe its equivalence classes.",
+     "concepts": [
+      "equivalence relation",
+      "equivalence class"
+     ],
+     "questionTypes": [
+      "proof",
+      "set"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.relation-properties",
+       "name": "Test relations for reflexivity, symmetry, transitivity and equivalence",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.relations"
+       ],
+       "supports": [
+        "MATH.reasoning.mathematical-argument"
+       ],
+       "why": "MATH.algebra.relations (grade 11) is about representing relations; classifying them and finding equivalence classes is a distinct proof-oriented skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.relations",
+      "MATH.reasoning.mathematical-argument",
+      "MATH.sets-relations.relation-properties"
+     ]
+    },
+    {
+     "id": "cbse-g12-c01-o03",
+     "statement": "Decide whether a function is one-one, onto or bijective, using algebraic arguments or graphs.",
+     "concepts": [
+      "injective",
+      "surjective",
+      "bijective"
+     ],
+     "questionTypes": [
+      "true-false",
+      "proof",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.function-types",
+       "name": "Classify functions as one-one, onto or bijective",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "MATH.algebra.inverse-functions uses bijectivity but deciding injectivity/surjectivity of a given function is a separate, separately assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.functions",
+      "MATH.sets-relations.function-types"
+     ]
+    },
+    {
+     "id": "cbse-g12-c01-o04",
+     "statement": "(Extension; in book, not in CBSE 2026-27 topic list) Compose functions and find the inverse of a bijective function.",
+     "concepts": [
+      "composition",
+      "invertible function"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inverse-functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.function-operations",
+       "name": "Combine functions by sum, difference, product, quotient and composition",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "No existing competency covers the algebra of functions or composition; MATH.algebra.inverse-functions presupposes it."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.function-operations",
+      "MATH.algebra.inverse-functions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c02",
+   "number": 2,
+   "term": null,
+   "title": "Inverse Trigonometric Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c02-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c02-s02",
+     "title": "Basic Concepts"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c02-o01",
+     "statement": "Explain why trigonometric functions must be restricted to be invertible and state domain, range and principal value branch of each inverse function.",
+     "concepts": [
+      "restricted domain",
+      "principal value branch"
+     ],
+     "questionTypes": [
+      "interval",
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.function-types",
+       "name": "Classify functions as one-one, onto or bijective",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "MATH.algebra.inverse-functions uses bijectivity but deciding injectivity/surjectivity of a given function is a separate, separately assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.sets-relations.function-types",
+      "MATH.trigonometry.inverse"
+     ]
+    },
+    {
+     "id": "cbse-g12-c02-o02",
+     "statement": "Find principal values of inverse trigonometric expressions.",
+     "concepts": [
+      "principal value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    },
+    {
+     "id": "cbse-g12-c02-o03",
+     "statement": "Sketch the graphs of inverse trigonometric functions by reflecting the restricted trigonometric graphs in y = x.",
+     "concepts": [
+      "graph of sin^-1 x",
+      "reflection in y = x"
+     ],
+     "questionTypes": [
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    },
+    {
+     "id": "cbse-g12-c02-o04",
+     "statement": "Evaluate compositions such as sin(sin^-1 x) or sin^-1(sin x) correctly using the principal branch.",
+     "concepts": [
+      "composition with principal branch"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c03",
+   "number": 3,
+   "term": null,
+   "title": "Matrices",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c03-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c03-s02",
+     "title": "Matrix"
+    },
+    {
+     "id": "cbse-g12-c03-s03",
+     "title": "Types of Matrices"
+    },
+    {
+     "id": "cbse-g12-c03-s04",
+     "title": "Operations on Matrices"
+    },
+    {
+     "id": "cbse-g12-c03-s05",
+     "title": "Transpose of a Matrix"
+    },
+    {
+     "id": "cbse-g12-c03-s06",
+     "title": "Symmetric and Skew Symmetric Matrices"
+    },
+    {
+     "id": "cbse-g12-c03-s07",
+     "title": "Invertible Matrices"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c03-o01",
+     "statement": "Read and construct matrices from data or a rule, state their order, identify types (row, column, square, diagonal, scalar, identity, zero) and use equality of matrices.",
+     "concepts": [
+      "order",
+      "types of matrices",
+      "equality"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "multiple-choice",
+      "equation-solution"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ]
+    },
+    {
+     "id": "cbse-g12-c03-o02",
+     "statement": "Add matrices, multiply by a scalar and multiply conformable matrices.",
+     "concepts": [
+      "matrix addition",
+      "scalar multiplication",
+      "matrix multiplication"
+     ],
+     "questionTypes": [
+      "vector-matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ]
+    },
+    {
+     "id": "cbse-g12-c03-o03",
+     "statement": "Use properties of matrix operations and show with order-2 examples that multiplication is not commutative and that AB = O is possible with A, B non-zero.",
+     "concepts": [
+      "non-commutativity",
+      "zero divisors",
+      "associativity and distributivity"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ]
+    },
+    {
+     "id": "cbse-g12-c03-o04",
+     "statement": "Find transposes, use (AB)' = B'A', and write a square matrix as a sum of symmetric and skew-symmetric matrices.",
+     "concepts": [
+      "transpose",
+      "symmetric matrix",
+      "skew-symmetric matrix"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.matrices.transpose-symmetry",
+       "name": "Use transposes and symmetric/skew-symmetric decomposition",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.matrices"
+       ],
+       "supports": [],
+       "why": "MATH.algebra.matrices covers matrix operations; transpose laws and writing a square matrix as symmetric plus skew-symmetric parts form a distinct skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.matrices",
+      "MATH.matrices.transpose-symmetry"
+     ]
+    },
+    {
+     "id": "cbse-g12-c03-o05",
+     "statement": "Explain invertibility of a square matrix and prove that an inverse, if it exists, is unique.",
+     "concepts": [
+      "invertible matrix",
+      "uniqueness of inverse"
+     ],
+     "questionTypes": [
+      "proof",
+      "true-false"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices",
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "cbse-g12-c03-o06",
+     "statement": "Model simple real situations (costs, quantities) with matrix products.",
+     "concepts": [
+      "matrix models"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "vector-matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c04",
+   "number": 4,
+   "term": null,
+   "title": "Determinants",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c04-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c04-s02",
+     "title": "Determinant"
+    },
+    {
+     "id": "cbse-g12-c04-s03",
+     "title": "Area of a Triangle"
+    },
+    {
+     "id": "cbse-g12-c04-s04",
+     "title": "Minors and Cofactors"
+    },
+    {
+     "id": "cbse-g12-c04-s05",
+     "title": "Adjoint and Inverse of a Matrix"
+    },
+    {
+     "id": "cbse-g12-c04-s06",
+     "title": "Applications of Determinants and Matrices"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c04-o01",
+     "statement": "Evaluate determinants of square matrices up to order 3.",
+     "concepts": [
+      "determinant of order 2 and 3",
+      "expansion along a row or column"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.determinants"
+     ]
+    },
+    {
+     "id": "cbse-g12-c04-o02",
+     "statement": "Use determinants to find the area of a triangle from vertex coordinates and to test collinearity or find an unknown vertex.",
+     "concepts": [
+      "area of triangle",
+      "collinearity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "equation-solution",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "cbse-g12-c04-o03",
+     "statement": "Find minors, cofactors and the adjoint of a matrix and use A(adj A) = |A| I.",
+     "concepts": [
+      "minor",
+      "cofactor",
+      "adjoint"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "name": "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.determinants"
+       ],
+       "supports": [
+        "MATH.algebra.matrix-systems"
+       ],
+       "why": "MATH.algebra.determinants is evaluation and simple uses; the cofactor/adjoint route to A^-1 is a multi-step skill that matrix-systems depends on."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.matrices.adjoint-inverse"
+     ]
+    },
+    {
+     "id": "cbse-g12-c04-o04",
+     "statement": "Decide whether a matrix is singular and find the inverse of a non-singular matrix of order up to 3.",
+     "concepts": [
+      "singular matrix",
+      "inverse via adjoint"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "name": "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.determinants"
+       ],
+       "supports": [
+        "MATH.algebra.matrix-systems"
+       ],
+       "why": "MATH.algebra.determinants is evaluation and simple uses; the cofactor/adjoint route to A^-1 is a multi-step skill that matrix-systems depends on."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.matrices.adjoint-inverse"
+     ]
+    },
+    {
+     "id": "cbse-g12-c04-o05",
+     "statement": "Decide from examples whether a system of linear equations is consistent and how many solutions it has.",
+     "concepts": [
+      "consistency",
+      "inconsistency",
+      "number of solutions"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrix-systems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrix-systems"
+     ]
+    },
+    {
+     "id": "cbse-g12-c04-o06",
+     "statement": "Solve systems of two or three linear equations with a unique solution using X = A^-1 B, including word problems.",
+     "concepts": [
+      "matrix method",
+      "AX = B"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem",
+      "vector-matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrix-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "name": "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.determinants"
+       ],
+       "supports": [
+        "MATH.algebra.matrix-systems"
+       ],
+       "why": "MATH.algebra.determinants is evaluation and simple uses; the cofactor/adjoint route to A^-1 is a multi-step skill that matrix-systems depends on."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.matrix-systems",
+      "MATH.matrices.adjoint-inverse"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c05",
+   "number": 5,
+   "term": null,
+   "title": "Continuity and Differentiability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c05-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c05-s02",
+     "title": "Continuity"
+    },
+    {
+     "id": "cbse-g12-c05-s03",
+     "title": "Differentiability"
+    },
+    {
+     "id": "cbse-g12-c05-s04",
+     "title": "Exponential and Logarithmic Functions"
+    },
+    {
+     "id": "cbse-g12-c05-s05",
+     "title": "Logarithmic Differentiation"
+    },
+    {
+     "id": "cbse-g12-c05-s06",
+     "title": "Derivatives of Functions in Parametric Forms"
+    },
+    {
+     "id": "cbse-g12-c05-s07",
+     "title": "Second Order Derivative"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c05-o01",
+     "statement": "Test continuity of a function at a point and on its domain, including piecewise functions, and find parameter values that make a function continuous.",
+     "concepts": [
+      "continuity at a point",
+      "algebra of continuous functions",
+      "piecewise functions"
+     ],
+     "questionTypes": [
+      "true-false",
+      "equation-solution",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.continuity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.continuity"
+     ]
+    },
+    {
+     "id": "cbse-g12-c05-o02",
+     "statement": "Test differentiability at a point and explain that differentiability implies continuity but not conversely.",
+     "concepts": [
+      "left and right derivatives",
+      "differentiability implies continuity"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differentiability",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differentiability"
+     ]
+    },
+    {
+     "id": "cbse-g12-c05-o03",
+     "statement": "Differentiate composite functions by the chain rule, including sin^-1 x, cos^-1 x and tan^-1 x.",
+     "concepts": [
+      "chain rule",
+      "derivatives of inverse trigonometric functions"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivative-rules"
+     ]
+    },
+    {
+     "id": "cbse-g12-c05-o04",
+     "statement": "Differentiate exponential and logarithmic functions and their combinations.",
+     "concepts": [
+      "derivative of e^x",
+      "derivative of log x"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivative-rules"
+     ]
+    },
+    {
+     "id": "cbse-g12-c05-o05",
+     "statement": "Differentiate implicitly defined functions, functions in parametric form, and functions of the form u(x)^v(x) by logarithmic differentiation.",
+     "concepts": [
+      "implicit differentiation",
+      "parametric derivative",
+      "logarithmic differentiation"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.implicit-parametric-differentiation",
+       "name": "Differentiate implicit, parametric and logarithmically transformed functions",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [],
+       "why": "MATH.calculus.derivative-rules covers sum/product/quotient/chain rules; implicit, parametric and logarithmic differentiation are separate techniques."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.implicit-parametric-differentiation"
+     ]
+    },
+    {
+     "id": "cbse-g12-c05-o06",
+     "statement": "Find second-order derivatives and verify given differential relations.",
+     "concepts": [
+      "second derivative"
+     ],
+     "questionTypes": [
+      "expression",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "name": "Find and use second-order derivatives",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.implicit-parametric-differentiation"
+       ],
+       "why": "No existing competency covers second derivatives (including verifying relations such as y'' + y = 0), which the second-derivative test also needs."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.higher-derivatives"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c06",
+   "number": 6,
+   "term": null,
+   "title": "Application of Derivatives",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c06-s02",
+     "title": "Rate of Change of Quantities"
+    },
+    {
+     "id": "cbse-g12-c06-s03",
+     "title": "Increasing and Decreasing Functions"
+    },
+    {
+     "id": "cbse-g12-c06-s04",
+     "title": "Maxima and Minima"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c06-o01",
+     "statement": "Use derivatives to find rates of change of related quantities (areas, volumes, marginal cost/revenue).",
+     "concepts": [
+      "rate of change",
+      "related rates",
+      "marginal cost"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "cbse-g12-c06-o02",
+     "statement": "Find intervals on which a function is increasing or decreasing using the sign of its derivative.",
+     "concepts": [
+      "increasing",
+      "decreasing",
+      "critical points"
+     ],
+     "questionTypes": [
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.monotonicity",
+       "name": "Find intervals where a function increases or decreases",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules",
+        "MATH.sets-relations.real-intervals"
+       ],
+       "supports": [
+        "MATH.calculus.applications"
+       ],
+       "why": "MATH.calculus.applications is about rates and extrema; sign analysis of f' to find monotonic intervals is a separate, frequently assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.applications",
+      "MATH.calculus.monotonicity"
+     ]
+    },
+    {
+     "id": "cbse-g12-c06-o03",
+     "statement": "Locate local maxima and minima using the first-derivative test.",
+     "concepts": [
+      "local extremum",
+      "first derivative test"
+     ],
+     "questionTypes": [
+      "numeric",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "cbse-g12-c06-o04",
+     "statement": "Use the second-derivative test to classify critical points.",
+     "concepts": [
+      "second derivative test",
+      "point of inflection"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "name": "Find and use second-order derivatives",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.implicit-parametric-differentiation"
+       ],
+       "why": "No existing competency covers second derivatives (including verifying relations such as y'' + y = 0), which the second-derivative test also needs."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.applications",
+      "MATH.calculus.higher-derivatives"
+     ]
+    },
+    {
+     "id": "cbse-g12-c06-o05",
+     "statement": "Find absolute maximum and minimum values of a function on a closed interval.",
+     "concepts": [
+      "absolute extrema",
+      "closed interval method"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "cbse-g12-c06-o06",
+     "statement": "Formulate and solve optimisation problems from geometry and everyday contexts.",
+     "concepts": [
+      "optimisation",
+      "modelling"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c07",
+   "number": 7,
+   "term": null,
+   "title": "Integrals",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c07-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c07-s02",
+     "title": "Integration as an Inverse Process of Differentiation"
+    },
+    {
+     "id": "cbse-g12-c07-s03",
+     "title": "Methods of Integration"
+    },
+    {
+     "id": "cbse-g12-c07-s04",
+     "title": "Integrals of Some Particular Functions"
+    },
+    {
+     "id": "cbse-g12-c07-s05",
+     "title": "Integration by Partial Fractions"
+    },
+    {
+     "id": "cbse-g12-c07-s06",
+     "title": "Integration by Parts"
+    },
+    {
+     "id": "cbse-g12-c07-s07",
+     "title": "Definite Integral"
+    },
+    {
+     "id": "cbse-g12-c07-s08",
+     "title": "Fundamental Theorem of Calculus"
+    },
+    {
+     "id": "cbse-g12-c07-s09",
+     "title": "Evaluation of Definite Integrals by Substitution"
+    },
+    {
+     "id": "cbse-g12-c07-s10",
+     "title": "Some Properties of Definite Integrals"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c07-o01",
+     "statement": "Find antiderivatives of standard functions using integration as the inverse of differentiation and basic properties of indefinite integrals.",
+     "concepts": [
+      "antiderivative",
+      "constant of integration",
+      "standard integrals"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.indefinite-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.calc.power-antiderivative",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.indefinite-integrals",
+      "MLY.calc.power-antiderivative"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o02",
+     "statement": "Integrate by substitution, including use of trigonometric identities.",
+     "concepts": [
+      "substitution",
+      "trigonometric identities in integration"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.calc.substitution",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.integration-methods",
+      "MLY.calc.substitution"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o03",
+     "statement": "Evaluate integrals of the specified standard forms such as 1/(x^2 +/- a^2), 1/sqrt(a^2 - x^2), (px+q)/(ax^2+bx+c) and sqrt(x^2 +/- a^2).",
+     "concepts": [
+      "integrals of particular functions",
+      "completing the square"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.integration-methods"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o04",
+     "statement": "Integrate rational functions by decomposing them into partial fractions.",
+     "concepts": [
+      "partial fractions",
+      "repeated and quadratic factors"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.partial-fractions-integration",
+       "name": "Integrate rational functions by partial fractions",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.indefinite-integrals",
+        "MATH.algebra.polynomials"
+       ],
+       "supports": [
+        "MATH.calculus.integration-methods"
+       ],
+       "why": "MATH.calculus.integration-methods (and its MLY parts) names substitution and parts only; partial-fraction decomposition is a separate method."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.integration-methods",
+      "MATH.calculus.partial-fractions-integration"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o05",
+     "statement": "Integrate by parts, including integrals of the form e^x[f(x) + f'(x)].",
+     "concepts": [
+      "integration by parts",
+      "e^x[f + f'] form"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.calc.by-parts",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.integration-methods",
+      "MLY.calc.by-parts"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o06",
+     "statement": "Evaluate definite integrals using the Fundamental Theorem of Calculus (stated without proof), including by substitution.",
+     "concepts": [
+      "definite integral",
+      "Fundamental Theorem of Calculus",
+      "change of limits"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.definite-integrals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.definite-integrals"
+     ]
+    },
+    {
+     "id": "cbse-g12-c07-o07",
+     "statement": "Use properties of definite integrals (e.g. f(a+b-x), odd/even functions, splitting the interval) to evaluate integrals.",
+     "concepts": [
+      "properties of definite integrals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.definite-integrals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.definite-integral-properties",
+       "name": "Evaluate definite integrals using their properties",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.definite-integrals"
+       ],
+       "supports": [],
+       "why": "Using symmetry/King's-rule style properties (e.g. integral of f(a+b-x), odd/even functions) is a distinct skill beyond evaluation via antiderivatives."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.definite-integral-properties",
+      "MATH.calculus.definite-integrals"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c08",
+   "number": 8,
+   "term": null,
+   "title": "Application of Integrals",
+   "verified": false,
+   "sections": [
+    {
+     "id": "cbse-g12-c08-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c08-s02",
+     "title": "Area under Simple Curves"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c08-o01",
+     "statement": "Express the area between a curve and an axis as a definite integral using vertical or horizontal strips.",
+     "concepts": [
+      "elementary strip",
+      "area as integral"
+     ],
+     "questionTypes": [
+      "expression",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.calc.area-constant",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals",
+      "MLY.calc.area-constant"
+     ]
+    },
+    {
+     "id": "cbse-g12-c08-o02",
+     "statement": "Find areas bounded by lines and the coordinate axes using integration.",
+     "concepts": [
+      "area under a line"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals"
+     ]
+    },
+    {
+     "id": "cbse-g12-c08-o03",
+     "statement": "Find areas of regions bounded by circles, parabolas and ellipses in standard form.",
+     "concepts": [
+      "area of circle",
+      "area under parabola",
+      "area of ellipse",
+      "symmetry"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals",
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g12-c08-o04",
+     "statement": "Sketch the region before integrating and choose limits correctly, using symmetry where possible.",
+     "concepts": [
+      "sketching regions",
+      "choice of limits"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c09",
+   "number": 9,
+   "term": null,
+   "title": "Differential Equations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c09-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c09-s02",
+     "title": "Basic Concepts"
+    },
+    {
+     "id": "cbse-g12-c09-s03",
+     "title": "General and Particular Solutions of a Differential Equation"
+    },
+    {
+     "id": "cbse-g12-c09-s04",
+     "title": "Methods of Solving First Order, First Degree Differential Equations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c09-o01",
+     "statement": "Find the order and degree (when defined) of a differential equation.",
+     "concepts": [
+      "order",
+      "degree"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations"
+     ]
+    },
+    {
+     "id": "cbse-g12-c09-o02",
+     "statement": "Verify that a function is a general or particular solution of a given differential equation.",
+     "concepts": [
+      "general solution",
+      "particular solution",
+      "arbitrary constants"
+     ],
+     "questionTypes": [
+      "proof",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "name": "Find and use second-order derivatives",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.implicit-parametric-differentiation"
+       ],
+       "why": "No existing competency covers second derivatives (including verifying relations such as y'' + y = 0), which the second-derivative test also needs."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.higher-derivatives"
+     ]
+    },
+    {
+     "id": "cbse-g12-c09-o03",
+     "statement": "Solve differential equations by separation of variables, including initial-value problems.",
+     "concepts": [
+      "variables separable",
+      "initial condition"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations"
+     ]
+    },
+    {
+     "id": "cbse-g12-c09-o04",
+     "statement": "Recognise and solve homogeneous first-order first-degree differential equations with the substitution y = vx.",
+     "concepts": [
+      "homogeneous function",
+      "y = vx substitution"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.homogeneous-de",
+       "name": "Solve homogeneous first-order first-degree differential equations",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.differential-equations",
+        "MATH.calculus.integration-methods"
+       ],
+       "supports": [],
+       "why": "MATH.calculus.differential-equations is elementary solving (separation); the y = vx substitution method is a separate technique."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.homogeneous-de"
+     ]
+    },
+    {
+     "id": "cbse-g12-c09-o05",
+     "statement": "Solve linear differential equations dy/dx + Py = Q or dx/dy + P1 x = Q1 using an integrating factor.",
+     "concepts": [
+      "linear differential equation",
+      "integrating factor"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.linear-first-order-de",
+       "name": "Solve linear first-order differential equations with an integrating factor",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.differential-equations",
+        "MATH.calculus.integration-methods"
+       ],
+       "supports": [],
+       "why": "The integrating-factor method for dy/dx + Py = Q (or dx/dy + P1 x = Q1) is not covered by the elementary DE competency."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.linear-first-order-de"
+     ]
+    },
+    {
+     "id": "cbse-g12-c09-o06",
+     "statement": "Model simple growth, decay or geometric situations with a first-order differential equation and solve it.",
+     "concepts": [
+      "growth and decay",
+      "modelling"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c10",
+   "number": 10,
+   "term": null,
+   "title": "Vector Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "cbse-g12-c10-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c10-s02",
+     "title": "Some Basic Concepts"
+    },
+    {
+     "id": "cbse-g12-c10-s03",
+     "title": "Types of Vectors"
+    },
+    {
+     "id": "cbse-g12-c10-s04",
+     "title": "Addition of Vectors"
+    },
+    {
+     "id": "cbse-g12-c10-s05",
+     "title": "Multiplication of a Vector by a Scalar"
+    },
+    {
+     "id": "cbse-g12-c10-s06",
+     "title": "Product of Two Vectors"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c10-o01",
+     "statement": "Distinguish scalars from vectors, find magnitude and identify zero, unit, equal, negative, collinear and co-initial vectors.",
+     "concepts": [
+      "magnitude",
+      "types of vectors",
+      "position vector"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.algebra",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.algebra"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o02",
+     "statement": "Find direction cosines and direction ratios of a vector.",
+     "concepts": [
+      "direction cosines",
+      "direction ratios"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.algebra",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.vectors.direction-cosines",
+       "name": "Find direction cosines and direction ratios of vectors and lines",
+       "strand": "vectors",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.vectors.algebra",
+        "MATH.coordinate.space-coordinates"
+       ],
+       "supports": [
+        "MATH.coordinate.space-lines"
+       ],
+       "why": "Shared by Vector Algebra and Three Dimensional Geometry; neither MATH.vectors.algebra nor MATH.coordinate.space-lines names it."
+      }
+     ],
+     "mapped": [
+      "MATH.vectors.algebra",
+      "MATH.vectors.direction-cosines"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o03",
+     "statement": "Add vectors (triangle and parallelogram laws), multiply by scalars and work with components in i, j, k form, including the vector joining two points.",
+     "concepts": [
+      "vector addition",
+      "scalar multiple",
+      "components",
+      "unit vector in a direction"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.vectors.algebra",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.algebra"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o04",
+     "statement": "Find the position vector of a point dividing a segment internally or externally in a given ratio.",
+     "concepts": [
+      "section formula (vector)",
+      "midpoint"
+     ],
+     "questionTypes": [
+      "vector-matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.algebra",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.vectors.algebra"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o05",
+     "statement": "Compute dot products and use them to find angles between vectors, test perpendicularity and find projections.",
+     "concepts": [
+      "scalar product",
+      "angle between vectors",
+      "projection"
+     ],
+     "questionTypes": [
+      "numeric",
+      "vector-matrix",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.products",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.products"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o06",
+     "statement": "Compute cross products and use them to find perpendicular vectors and areas of triangles and parallelograms.",
+     "concepts": [
+      "vector product",
+      "area via cross product"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.products",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.products"
+     ]
+    },
+    {
+     "id": "cbse-g12-c10-o07",
+     "statement": "Prove geometric results using properties of dot and cross products.",
+     "concepts": [
+      "vector proof"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.vectors.products",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.mathematical-argument",
+      "MATH.vectors.products"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c11",
+   "number": 11,
+   "term": null,
+   "title": "Three Dimensional Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "cbse-g12-c11-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c11-s02",
+     "title": "Direction Cosines and Direction Ratios of a Line"
+    },
+    {
+     "id": "cbse-g12-c11-s03",
+     "title": "Equation of a Line in Space"
+    },
+    {
+     "id": "cbse-g12-c11-s04",
+     "title": "Angle between Two Lines"
+    },
+    {
+     "id": "cbse-g12-c11-s05",
+     "title": "Shortest Distance between Two Lines"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c11-o01",
+     "statement": "Find direction cosines and direction ratios of a line, including the line through two points.",
+     "concepts": [
+      "direction cosines of a line",
+      "direction ratios"
+     ],
+     "questionTypes": [
+      "numeric",
+      "vector-matrix"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.vectors.direction-cosines",
+       "name": "Find direction cosines and direction ratios of vectors and lines",
+       "strand": "vectors",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.vectors.algebra",
+        "MATH.coordinate.space-coordinates"
+       ],
+       "supports": [
+        "MATH.coordinate.space-lines"
+       ],
+       "why": "Shared by Vector Algebra and Three Dimensional Geometry; neither MATH.vectors.algebra nor MATH.coordinate.space-lines names it."
+      }
+     ],
+     "mapped": [
+      "MATH.coordinate.space-lines",
+      "MATH.vectors.direction-cosines"
+     ]
+    },
+    {
+     "id": "cbse-g12-c11-o02",
+     "statement": "Write vector and Cartesian equations of a line through a point parallel to a given vector, and convert between the forms.",
+     "concepts": [
+      "vector equation of a line",
+      "Cartesian (symmetric) form"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-lines"
+     ]
+    },
+    {
+     "id": "cbse-g12-c11-o03",
+     "statement": "Find the angle between two lines and test lines for parallelism or perpendicularity.",
+     "concepts": [
+      "angle between lines",
+      "parallel and perpendicular lines"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.vectors.products",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-lines",
+      "MATH.vectors.products"
+     ]
+    },
+    {
+     "id": "cbse-g12-c11-o04",
+     "statement": "Identify skew lines and find the shortest distance between two skew lines or two parallel lines.",
+     "concepts": [
+      "skew lines",
+      "shortest distance"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.coordinate.skew-line-distance",
+       "name": "Find the shortest distance between skew or parallel lines in space",
+       "strand": "coordinate",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.coordinate.space-lines",
+        "MATH.vectors.products"
+       ],
+       "supports": [],
+       "why": "MATH.coordinate.space-lines is representing lines; the shortest-distance computation is a distinct multi-step skill. (MATH.coordinate.space-planes is about planes, which are outside the 2026-27 syllabus.)"
+      }
+     ],
+     "mapped": [
+      "MATH.coordinate.skew-line-distance",
+      "MATH.coordinate.space-lines"
+     ]
+    },
+    {
+     "id": "cbse-g12-c11-o05",
+     "statement": "Decide whether two lines intersect and find the point of intersection or the foot of a perpendicular from a point to a line.",
+     "concepts": [
+      "intersection of lines",
+      "foot of perpendicular"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-lines"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c12",
+   "number": 12,
+   "term": null,
+   "title": "Linear Programming",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c12-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c12-s02",
+     "title": "Linear Programming Problem and its Mathematical Formulation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c12-o01",
+     "statement": "Explain LP terms: decision variables, objective function, constraints, feasible region, feasible and optimal solutions.",
+     "concepts": [
+      "objective function",
+      "constraints",
+      "feasible region",
+      "optimal solution"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-programming",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-programming"
+     ]
+    },
+    {
+     "id": "cbse-g12-c12-o02",
+     "statement": "Formulate a two-variable linear programming problem from a word situation (with up to three non-trivial constraints).",
+     "concepts": [
+      "formulation",
+      "non-negativity"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-programming",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-programming"
+     ]
+    },
+    {
+     "id": "cbse-g12-c12-o03",
+     "statement": "Draw the feasible region of a system of constraints and identify its corner points.",
+     "concepts": [
+      "half-planes",
+      "corner points",
+      "bounded and unbounded regions"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-programming",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.inequalities-two-variables",
+       "name": "Graph linear inequalities and systems in two variables",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.inequalities",
+        "MATH.algebra.linear-two-variables"
+       ],
+       "supports": [
+        "MATH.algebra.linear-programming"
+       ],
+       "why": "MATH.algebra.inequalities is one-variable algebraic solving; shading half-planes and feasible regions is a separate graphical skill and the direct prerequisite for linear programming."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.inequalities-two-variables",
+      "MATH.algebra.linear-programming"
+     ]
+    },
+    {
+     "id": "cbse-g12-c12-o04",
+     "statement": "Find the optimal value by the corner-point method and handle unbounded or infeasible cases correctly.",
+     "concepts": [
+      "corner point method",
+      "unbounded region check",
+      "infeasible problem"
+     ],
+     "questionTypes": [
+      "numeric",
+      "coordinate",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-programming",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-programming"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g12-c13",
+   "number": 13,
+   "term": null,
+   "title": "Probability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g12-c13-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g12-c13-s02",
+     "title": "Conditional Probability"
+    },
+    {
+     "id": "cbse-g12-c13-s03",
+     "title": "Multiplication Theorem on Probability"
+    },
+    {
+     "id": "cbse-g12-c13-s04",
+     "title": "Independent Events"
+    },
+    {
+     "id": "cbse-g12-c13-s05",
+     "title": "Bayes' Theorem"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g12-c13-o01",
+     "statement": "Calculate conditional probabilities P(A|B) and use their properties.",
+     "concepts": [
+      "conditional probability",
+      "properties of P(A|B)"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.conditional",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.conditional"
+     ]
+    },
+    {
+     "id": "cbse-g12-c13-o02",
+     "statement": "Use the multiplication theorem to find probabilities of joint events, including draws without replacement.",
+     "concepts": [
+      "multiplication theorem",
+      "dependent events"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.conditional",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.conditional"
+     ]
+    },
+    {
+     "id": "cbse-g12-c13-o03",
+     "statement": "Test whether events are independent and use independence to find probabilities.",
+     "concepts": [
+      "independent events",
+      "P(A and B) = P(A)P(B)"
+     ],
+     "questionTypes": [
+      "true-false",
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.conditional",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.probability.independent-events",
+       "name": "Test and use independence of events",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.conditional"
+       ],
+       "supports": [],
+       "why": "MATH.probability.conditional covers P(A|B) and the multiplication rule; recognising/proving independence and using it for repeated trials is separately assessed."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.conditional",
+      "MATH.probability.independent-events"
+     ]
+    },
+    {
+     "id": "cbse-g12-c13-o04",
+     "statement": "Use a partition of the sample space and the theorem of total probability.",
+     "concepts": [
+      "partition",
+      "total probability"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.bayes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.probability.total-probability",
+       "name": "Apply the law of total probability over a partition",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.conditional"
+       ],
+       "supports": [
+        "MATH.probability.bayes"
+       ],
+       "why": "Bayes' theorem builds on total probability, but computing an overall probability over a partition is a separate question type."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.bayes",
+      "MATH.probability.total-probability"
+     ]
+    },
+    {
+     "id": "cbse-g12-c13-o05",
+     "statement": "Apply Bayes' theorem to revise probabilities in context (tests, machines, urns).",
+     "concepts": [
+      "Bayes' theorem",
+      "prior and posterior"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.bayes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.bayes"
+     ]
+    },
+    {
+     "id": "cbse-g12-c13-o06",
+     "statement": "Distinguish mutually exclusive from independent events and explain the difference with examples.",
+     "concepts": [
+      "independence vs mutual exclusivity"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "multiple-choice"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.probability.independent-events",
+       "name": "Test and use independence of events",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.conditional"
+       ],
+       "supports": [],
+       "why": "MATH.probability.conditional covers P(A|B) and the multiplication rule; recognising/proving independence and using it for repeated trials is separately assessed."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.events",
+      "MATH.probability.independent-events"
+     ]
+    }
+   ]
+  }
+ ]
+}

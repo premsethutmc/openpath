@@ -21,6 +21,7 @@
  *   boundary        every domain edge and one step outside it, holding the other parameters at a valid choice
  */
 import { canonical, isCorrect, question } from "./content";
+import { sameAnswer, NEW_TYPES } from "./answer-types";
 import { hashOf } from "./curriculum";
 import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, show, type Problem } from "./families";
 
@@ -56,10 +57,11 @@ export interface FamilySpec {
  */
 const itemSignature = (p: Problem) => {
   const def = FAMILIES.get(p.family)!;
-  const typed = problemOf(p.id.replace(/:mc$/, ""))!;
+  const typed = problemOf(p.id.replace(/:(mc|w)$/, ""))!;
   const v = def.solve(typed.params).answer;
   const probes = typeof v === "number" ? [v, v + 1, v - 1, 2 * v + 1, v + 0.5].map((x) => (def.validate(typed.params, x) ? "1" : "0")).join("") : def.validate(typed.params, v) ? "1" : "0";
-  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes].join("¦");
+
+  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : [])].join("¦");
 };
 
 export function familySpec(fam: string): FamilySpec | null {
@@ -67,6 +69,7 @@ export function familySpec(fam: string): FamilySpec | null {
   if (!def?.domain) return null;
   const { items, excluded } = pool(fam);
   const mc = items.map((p) => (def.mc && p.type !== "set" && p.type !== "choice" ? problemOf(`${p.id}:mc`) : null)).filter((x): x is Problem => !!x);
+  const word = items.map((p) => (def.word ? problemOf(`${p.id}:w`) : null)).filter((x): x is Problem => !!x);
   const byLevel = (l: number) => items.filter((p) => difficultyOf(p) === l);
   const examples = [1, 2, 3].flatMap((l) => {
     const xs = byLevel(l);
@@ -85,6 +88,9 @@ export function familySpec(fam: string): FamilySpec | null {
     teach: def.teach ?? null,
     items: items.map(itemSignature),
     mc: mc.map(itemSignature),
+    ...(word.length ? { word: word.map(itemSignature) } : {}),
+    ...(def.cap ? { cap: def.cap } : {}),
+    ...(def.teach?.alternatives ? { alternatives: def.teach.alternatives.map((a) => [a.id, a.title, a.kind, ...a.text]) } : {}),
   });
   return {
     id: fam,
@@ -127,7 +133,7 @@ function checkItem(p: Problem, out: string[]) {
   if (canonical(q, q.answer) === null || !isCorrect(q, q.answer)) out.push(`${p.id}: its answer is not in its own format`);
   for (const b of p.bugs) {
     const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
-    if (p.type !== "choice") for (const v of vals) if (show(v as number) === p.answer) out.push(`${p.id}: explanation ${b.id} predicts the right answer`);
+    if (p.type !== "choice") for (const v of vals) if (show(v as number) === p.answer || (NEW_TYPES.has(p.type) && sameAnswer(p.type, show(v as number), p.answer))) out.push(`${p.id}: explanation ${b.id} predicts the right answer`);
   }
   if (p.type === "choice" && p.options) {
     if (new Set(p.options).size !== p.options.length) out.push(`${p.id}: repeated options`);
@@ -141,12 +147,27 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   const { items, excluded } = pool(fam);
   for (const p of items) {
     checkItem(p, det);
+    // the independent check must refuse every wrong answer an explanation predicts (otherwise it is not a check)
+    for (const b of p.bugs) {
+      const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
+      for (const v of vals) if (p.type !== "choice" && def.validate(p.params, v as never)) det.push(`${p.id}: the independent check accepts ${show(v as never)}, which explanation ${b.id} predicts as wrong`);
+    }
     if (def.mc && p.type !== "set" && p.type !== "choice") {
       const m = problemOf(`${p.id}:mc`);
       if (!m) det.push(`${p.id}:mc does not build`);
       else {
         checkItem(m, det);
         if (m.options![("ABCD").indexOf(m.answer)] !== p.answer) det.push(`${p.id}:mc: the right letter is not the typed answer`);
+        if (NEW_TYPES.has(p.type)) m.options!.forEach((o, i) => { if (i !== "ABCD".indexOf(m.answer) && sameAnswer(p.type, o, p.answer)) det.push(`${p.id}:mc: option ${"ABCD"[i]} is also right`); });
+      }
+    }
+    if (def.word) {
+      const w = problemOf(`${p.id}:w`);
+      if (!w) det.push(`${p.id}:w does not build`);
+      else {
+        checkItem(w, det);
+        if (w.answer !== p.answer) det.push(`${p.id}:w: the everyday form has a different answer`);
+        if (w.prompt === p.prompt) det.push(`${p.id}:w: the everyday form is worded the same as the typed form`);
       }
     }
   }

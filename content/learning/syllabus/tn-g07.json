@@ -1,0 +1,2044 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 7,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "edition": "Samacheer Kalvi new-syllabus edition (first introduced 2019-20), reprinted for 2026-27; exact imprint/reprint line not verified",
+  "terms": 3
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Tamil Nadu e-textbooks portal (official) - attempted",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.textbooksonline.tn.nic.in/",
+   "accessed": "2026-10-19",
+   "used_for": "attempted for official PDFs and edition lines; fetch refused by the site's robots.txt (also tried /Std6.htm, /Books/06/... PDF path); shell has no internet access"
+  },
+  {
+   "kind": "textbook",
+   "title": "TN School Education Department portal / SCERT portal (official) - attempted",
+   "publisher": "Government of Tamil Nadu, School Education Department / SCERT",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://tnschools.gov.in/",
+   "accessed": "2026-10-19",
+   "used_for": "attempted; pages are JavaScript-rendered and exposed no textbook links to the fetcher; scert.tnschools.gov.in likewise; e-learn.tnschools.gov.in refused by robots.txt"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions for Mathematics Term 1 [English] Class 7 TN Board",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.shaalaa.com/textbook-solutions/samacheer-kalvi-solutions-mathematics-term-1-english-class-7-tn-board_314",
+   "accessed": "2026-10-19",
+   "used_for": "Term 1 chapter titles, order, exercise counts"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions for Mathematics Term 2 [English] Class 7 TN Board",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.shaalaa.com/textbook-solutions/samacheer-kalvi-solutions-mathematics-term-2-english-class-7-tn-board_315",
+   "accessed": "2026-10-19",
+   "used_for": "Term 2 chapter titles, order, exercise counts"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions for Mathematics Term 3 [English] Class 7 TN Board",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.shaalaa.com/textbook-solutions/samacheer-kalvi-solutions-mathematics-term-3-english-class-7-tn-board_316",
+   "accessed": "2026-10-19",
+   "used_for": "Term 3 chapter titles, order, exercise counts"
+  },
+  {
+   "kind": "textbook",
+   "title": "Maths 7th Std (TN 7th Maths English Medium)",
+   "publisher": "Brainkart (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.brainkart.com/subject/Maths-7th-Std_428/",
+   "accessed": "2026-10-19",
+   "used_for": "chapter titles (cross-check) and section headings for all three terms"
+  },
+  {
+   "kind": "notification",
+   "title": "Class 1 to 3 textbooks ready, works for Classes 4 to 12 in primary stage (DT Next, 8 May 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/class-1-to-3-textbooks-ready-works-for-classes-4-to-12-in-primary-stage-2",
+   "accessed": "2026-10-19",
+   "used_for": "edition currency: 2026-27 books for Classes 4-12 remain on the old (2018-19/2019-20) syllabus; new SEP-based curriculum from 2027-28"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu may scrap trimester system for Classes 6, 7 (DT Next, updated 4 Aug 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-may-scrap-trimester-system-for-classes-6-7",
+   "accessed": "2026-10-19",
+   "used_for": "term structure: Classes 6-7 still use three term books in 2026-27 (single book proposed from 2027-28); Class 8 already moved to a single annual textbook about three years earlier"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu: Classes 4-12 curriculum preparation in third phase (DT Next, updated 16 Aug 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-classes-4-12-curriculum-preparation-in-third-phase",
+   "accessed": "2026-10-19",
+   "used_for": "confirms new Classes 4-12 textbooks targeted for 2027-28, i.e. not in force for 2026-27"
+  }
+ ],
+ "notes": [
+  "Official sources could not be opened: textbooksonline.tn.nic.in and e-learn.tnschools.gov.in refuse automated fetching via robots.txt, tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that returned no content, and the sandbox shell has no internet access. Because of this every chapter is marked verified:false. Chapter titles were cross-checked between two independent secondary sites (Shaalaa and Brainkart), which agree on every chapter title and order. Neither is official.",
+  "Edition currency for 2026-27: DT Next (8 May 2026; 16 Aug 2026) reports that only Classes 1-3 received new-syllabus books in 2026-27. Classes 4-12 continue on the existing Samacheer Kalvi syllabus (the 2018-19 / 2019-20 'new syllabus' books), and the new State Education Policy curriculum is targeted for 2027-28. The same article says Classes 4-12 books with the old syllabus were 'being prepared' for 2026-27, so a 2026 reprint or re-typeset printing may exist. I could not see its imprint page to confirm the edition line or any content changes.",
+  "Section titles come from Brainkart's topic index for this book, which follows the textbook's headings. They were not checked against the official PDF. I dropped exercise, summary, 'Try these' and worked-example entries and kept only content headings. Section ids are positional, not the textbook's own section numbers, which I could not see.",
+  "All outcomes are my own paraphrases of chapter content; no textbook text is reproduced.",
+  "Competencies listed under 'proposed' are reused across the TN Grade 6, 7 and 8 files with identical ids and definitions.",
+  "Grade 7 is published as three term books. Each term restarts chapter numbering at 1, so the ids encode the term (tn-g07-t2-c03 ...). For 2026-27 the term structure still holds: the proposal to merge the Class 6-7 books into one volume targets 2027-28 (DT Next, Aug 2026).",
+  "Exercise counts from Shaalaa match Brainkart's index for every Grade 7 chapter, which suggests both follow the same printing. The one exception is T3 Information Processing, where both list only Exercise 6.1 (flowcharts).",
+  "T3 Algebra 'Inequations' covers simple one-variable inequations at an introductory level. I mapped it as a partial fit to MATH.algebra.inequalities, which the list places at Grade 11, rather than proposing a near-duplicate.",
+  "T2 Information Processing 'Pascal's Triangle': Brainkart writes 'Pascal s Triangle'; I restored the apostrophe. T1 Geometry 'special angles without protractor' presumably means 60, 30, 90, 45 and 120 degrees; I could not confirm the exact list."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g07-t1-c01",
+   "number": 1,
+   "term": 1,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c01-s01",
+     "title": "Addition of Integers"
+    },
+    {
+     "id": "tn-g07-t1-c01-s02",
+     "title": "Properties of Addition"
+    },
+    {
+     "id": "tn-g07-t1-c01-s03",
+     "title": "Subtraction of Integers"
+    },
+    {
+     "id": "tn-g07-t1-c01-s04",
+     "title": "Properties of Subtraction"
+    },
+    {
+     "id": "tn-g07-t1-c01-s05",
+     "title": "Multiplication of Integers"
+    },
+    {
+     "id": "tn-g07-t1-c01-s06",
+     "title": "Properties of Multiplication of Integers"
+    },
+    {
+     "id": "tn-g07-t1-c01-s07",
+     "title": "Distributive Property of Multiplication over Addition"
+    },
+    {
+     "id": "tn-g07-t1-c01-s08",
+     "title": "Division of Integers"
+    },
+    {
+     "id": "tn-g07-t1-c01-s09",
+     "title": "Properties of Division"
+    },
+    {
+     "id": "tn-g07-t1-c01-s10",
+     "title": "Statement Problems on Integers using all Fundamental Operations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c01-o01",
+     "statement": "Add and subtract integers, using the number line and sign rules.",
+     "concepts": [
+      "integer addition",
+      "integer subtraction",
+      "number line"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c01-o02",
+     "statement": "Multiply and divide integers using the sign rules.",
+     "concepts": [
+      "integer multiplication",
+      "integer division",
+      "sign rules"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c01-o03",
+     "statement": "Check which properties (closure, commutative, associative, identity, distributive) hold for each integer operation, using counterexamples where a property fails.",
+     "concepts": [
+      "properties of integers",
+      "counterexample"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.counterexamples-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.operation-properties",
+       "name": "Use closure, commutative, associative, distributive and identity properties of operations on a number system",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.addition",
+        "MATH.number.equal-groups"
+       ],
+       "supports": [
+        "MLY.alg.distributive",
+        "MATH.number.rational-numbers"
+       ],
+       "why": "Existing list has only MLY.alg.distributive (one property, algebraic); TN teaches the property set explicitly for whole numbers (G6), integers (G7) and rationals (G8)."
+      }
+     ],
+     "mapped": [
+      "MATH.number.operation-properties",
+      "MATH.reasoning.counterexamples-intro"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c01-o04",
+     "statement": "Solve word problems that need several integer operations, such as temperature changes, depths or scores.",
+     "concepts": [
+      "integer word problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add",
+      "MATH.reasoning.multi-step"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t1-c02",
+   "number": 2,
+   "term": 1,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c02-s01",
+     "title": "Area and Perimeter of the Parallelogram"
+    },
+    {
+     "id": "tn-g07-t1-c02-s02",
+     "title": "Area of the rhombus"
+    },
+    {
+     "id": "tn-g07-t1-c02-s03",
+     "title": "Area of the Trapezium"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c02-o01",
+     "statement": "Calculate the area and perimeter of a parallelogram from its base, height and sides, and find a missing dimension.",
+     "concepts": [
+      "parallelogram",
+      "base and height"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "name": "Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas)",
+       "strand": "measurement",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.measurement.rectangle-area",
+        "MATH.measurement.triangle-area"
+       ],
+       "supports": [
+        "MATH.measurement.trapezium-area"
+       ],
+       "why": "The list jumps from triangle area (G6) to trapezium/composite areas (G8); parallelogram and rhombus area formulas have no home."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.parallelogram-rhombus-area"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c02-o02",
+     "statement": "Calculate the area of a rhombus from its diagonals and use it to find an unknown diagonal.",
+     "concepts": [
+      "rhombus",
+      "diagonals"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "name": "Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas)",
+       "strand": "measurement",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.measurement.rectangle-area",
+        "MATH.measurement.triangle-area"
+       ],
+       "supports": [
+        "MATH.measurement.trapezium-area"
+       ],
+       "why": "The list jumps from triangle area (G6) to trapezium/composite areas (G8); parallelogram and rhombus area formulas have no home."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.parallelogram-rhombus-area"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c02-o03",
+     "statement": "Calculate the area of a trapezium from its parallel sides and height, including in field and plot problems.",
+     "concepts": [
+      "trapezium",
+      "parallel sides"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.trapezium-area"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t1-c03",
+   "number": 3,
+   "term": 1,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c03-s01",
+     "title": "Terms and Co-efficients"
+    },
+    {
+     "id": "tn-g07-t1-c03-s02",
+     "title": "Like and unlike terms"
+    },
+    {
+     "id": "tn-g07-t1-c03-s03",
+     "title": "Value of an algebraic expression"
+    },
+    {
+     "id": "tn-g07-t1-c03-s04",
+     "title": "Addition and Subtraction of Algebraic expressions"
+    },
+    {
+     "id": "tn-g07-t1-c03-s05",
+     "title": "Simple linear equations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c03-o01",
+     "statement": "Identify the terms, coefficients and constants of an expression, and tell like terms from unlike terms.",
+     "concepts": [
+      "term",
+      "coefficient",
+      "like terms"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "set"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c03-o02",
+     "statement": "Evaluate an algebraic expression for given values of its variables.",
+     "concepts": [
+      "substitution"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.variables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.variables"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c03-o03",
+     "statement": "Add and subtract algebraic expressions by combining like terms.",
+     "concepts": [
+      "addition of expressions",
+      "subtraction of expressions"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c03-o04",
+     "statement": "Form and solve simple linear equations in one variable from word problems.",
+     "concepts": [
+      "linear equation",
+      "transposition",
+      "word problems"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t1-c04",
+   "number": 4,
+   "term": 1,
+   "title": "Direct and Inverse Proportion",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c04-s01",
+     "title": "Direct Proportion"
+    },
+    {
+     "id": "tn-g07-t1-c04-s02",
+     "title": "Inverse Proportion"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c04-o01",
+     "statement": "Recognise when two quantities vary directly and solve direct-proportion problems with the unitary method or a ratio.",
+     "concepts": [
+      "direct proportion",
+      "unitary method"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.proportion"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c04-o02",
+     "statement": "Recognise when two quantities vary inversely and solve problems about workers and time or speed and time.",
+     "concepts": [
+      "inverse proportion"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c04-o03",
+     "statement": "Decide from a table or situation whether a relationship is direct, inverse or neither.",
+     "concepts": [
+      "classifying variation"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.proportional-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.proportional-check"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t1-c05",
+   "number": 5,
+   "term": 1,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c05-s01",
+     "title": "Pair of Angles formed by Intersecting Lines"
+    },
+    {
+     "id": "tn-g07-t1-c05-s02",
+     "title": "Transversal"
+    },
+    {
+     "id": "tn-g07-t1-c05-s03",
+     "title": "Construction of perpendicular bisector of a line segment"
+    },
+    {
+     "id": "tn-g07-t1-c05-s04",
+     "title": "Construction of angle bisector of an angle"
+    },
+    {
+     "id": "tn-g07-t1-c05-s05",
+     "title": "Construction of special angles without using protractor"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c05-o01",
+     "statement": "Use adjacent angles, linear pairs and vertically opposite angles at intersecting lines to find unknown angles.",
+     "concepts": [
+      "linear pair",
+      "vertically opposite angles",
+      "adjacent angles"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.angle-pairs",
+       "name": "Identify and use complementary, supplementary, adjacent, linear-pair and vertically opposite angles",
+       "strand": "geometry",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.geometry.parallel-angles"
+       ],
+       "why": "parallel-angles covers transversal angles only; angle-pair relationships without parallel lines are not in the list."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.angle-pairs"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c05-o02",
+     "statement": "Identify the corresponding, alternate and co-interior angles formed by a transversal, and use them to find angles or test lines for parallelism.",
+     "concepts": [
+      "transversal",
+      "corresponding angles",
+      "alternate angles",
+      "co-interior angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.parallel-angles"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c05-o03",
+     "statement": "Construct the perpendicular bisector of a line segment and the bisector of an angle with ruler and compass.",
+     "concepts": [
+      "perpendicular bisector",
+      "angle bisector"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.constructions-bisectors"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c05-o04",
+     "statement": "Construct special angles such as 60, 30, 90, 45 and 120 degrees with ruler and compass only.",
+     "concepts": [
+      "compass constructions",
+      "special angles"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.constructions-bisectors"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t1-c06",
+   "number": 6,
+   "term": 1,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t1-c06-s01",
+     "title": "Tetromino"
+    },
+    {
+     "id": "tn-g07-t1-c06-s02",
+     "title": "Route Map"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t1-c06-o01",
+     "statement": "Fit tetromino shapes together to tile or fill a given region.",
+     "concepts": [
+      "tetromino",
+      "tiling"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "intro",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-tiling",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-tiling"
+     ]
+    },
+    {
+     "id": "tn-g07-t1-c06-o02",
+     "statement": "Read a route map to describe paths with directions and choose the shortest or most suitable route.",
+     "concepts": [
+      "route map",
+      "directions",
+      "shortest path"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.positions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.positions",
+      "MATH.reasoning.multi-step"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t2-c01",
+   "number": 1,
+   "term": 2,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t2-c01-s01",
+     "title": "Representing a Decimal Number"
+    },
+    {
+     "id": "tn-g07-t2-c01-s02",
+     "title": "Fractions and Decimals"
+    },
+    {
+     "id": "tn-g07-t2-c01-s03",
+     "title": "Comparison of Decimals"
+    },
+    {
+     "id": "tn-g07-t2-c01-s04",
+     "title": "Representing Decimal Numbers on the Number Line"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t2-c01-o01",
+     "statement": "Represent decimals in place-value form, expanded form and with tenths/hundredths models.",
+     "concepts": [
+      "decimal place value",
+      "expanded form"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c01-o02",
+     "statement": "Convert fractions to decimals and decimals to fractions in simplest form.",
+     "concepts": [
+      "fraction-decimal conversion"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths",
+      "MATH.number.equivalent-fractions"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c01-o03",
+     "statement": "Compare and order decimal numbers.",
+     "concepts": [
+      "comparing decimals"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c01-o04",
+     "statement": "Locate decimal numbers on a number line.",
+     "concepts": [
+      "number line",
+      "decimals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t2-c02",
+   "number": 2,
+   "term": 2,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t2-c02-s01",
+     "title": "Circle"
+    },
+    {
+     "id": "tn-g07-t2-c02-s02",
+     "title": "Circumference of a Circle"
+    },
+    {
+     "id": "tn-g07-t2-c02-s03",
+     "title": "Area of the Circle"
+    },
+    {
+     "id": "tn-g07-t2-c02-s04",
+     "title": "Area of Pathways"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t2-c02-o01",
+     "statement": "Name the parts of a circle and relate radius and diameter.",
+     "concepts": [
+      "radius",
+      "diameter",
+      "chord",
+      "centre"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circles"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c02-o02",
+     "statement": "Calculate the circumference of a circle and find the radius from a given circumference, including distance-by-wheel problems.",
+     "concepts": [
+      "circumference",
+      "pi"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c02-o03",
+     "statement": "Calculate the area of a circle, and of rings and semicircles.",
+     "concepts": [
+      "area of circle",
+      "circular ring"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c02-o04",
+     "statement": "Find the area of rectangular and circular pathways by subtracting inner areas from outer areas.",
+     "concepts": [
+      "pathways",
+      "subtraction of areas"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area",
+      "MATH.measurement.trapezium-area"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t2-c03",
+   "number": 3,
+   "term": 2,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t2-c03-s01",
+     "title": "Exponents and Powers"
+    },
+    {
+     "id": "tn-g07-t2-c03-s02",
+     "title": "Laws of Exponents"
+    },
+    {
+     "id": "tn-g07-t2-c03-s03",
+     "title": "Unit Digit of Numbers in Exponential Form"
+    },
+    {
+     "id": "tn-g07-t2-c03-s04",
+     "title": "Degree of Expression"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t2-c03-o01",
+     "statement": "Write repeated products in exponential form and evaluate powers, including expressing a number as a product of prime powers.",
+     "concepts": [
+      "base",
+      "exponent",
+      "powers"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.pow.whole",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.exponents",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents",
+      "MLY.pow.whole"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c03-o02",
+     "statement": "Apply the product, quotient, power-of-a-power and zero-exponent laws to simplify expressions.",
+     "concepts": [
+      "laws of exponents"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c03-o03",
+     "statement": "Find the unit digit of a large power using the repeating cycle of unit digits.",
+     "concepts": [
+      "unit digit cycles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "pattern"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.pattern-rules",
+      "MATH.number.exponents"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c03-o04",
+     "statement": "Determine the degree of a monomial or polynomial expression.",
+     "concepts": [
+      "degree of expression"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.polynomials"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t2-c04",
+   "number": 4,
+   "term": 2,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t2-c04-s01",
+     "title": "Application of Angle Sum Property of Triangle"
+    },
+    {
+     "id": "tn-g07-t2-c04-s02",
+     "title": "Exterior Angles"
+    },
+    {
+     "id": "tn-g07-t2-c04-s03",
+     "title": "Congruency of Triangles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t2-c04-o01",
+     "statement": "Use the angle-sum property and the exterior-angle property to find unknown angles of triangles.",
+     "concepts": [
+      "angle sum",
+      "exterior angle property"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.triangle-properties"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c04-o02",
+     "statement": "Identify corresponding parts of congruent figures and use the SSS, SAS, ASA and RHS criteria to decide whether two triangles are congruent.",
+     "concepts": [
+      "congruence criteria",
+      "corresponding parts"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t2-c05",
+   "number": 5,
+   "term": 2,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t2-c05-s01",
+     "title": "Tables and Patterns Leading to Linear Functions"
+    },
+    {
+     "id": "tn-g07-t2-c05-s02",
+     "title": "Pascal's Triangle"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t2-c05-o01",
+     "statement": "Find the linear rule linking two quantities from a table of values and use it to predict new values.",
+     "concepts": [
+      "input-output tables",
+      "linear rule"
+     ],
+     "questionTypes": [
+      "expression",
+      "pattern",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.linear-two-variables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-two-variables",
+      "MATH.algebra.pattern-rules"
+     ]
+    },
+    {
+     "id": "tn-g07-t2-c05-o02",
+     "statement": "Build Pascal's triangle and describe the number patterns in its rows and diagonals.",
+     "concepts": [
+      "Pascal's triangle",
+      "number patterns"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.number-patterns",
+      "MATH.algebra.pattern-rules"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c01",
+   "number": 1,
+   "term": 3,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c01-s01",
+     "title": "Rounding of Decimals"
+    },
+    {
+     "id": "tn-g07-t3-c01-s02",
+     "title": "Addition and Subtraction of Decimal Numbers"
+    },
+    {
+     "id": "tn-g07-t3-c01-s03",
+     "title": "Multiplication of Decimal Numbers"
+    },
+    {
+     "id": "tn-g07-t3-c01-s04",
+     "title": "Division of Decimal Numbers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c01-o01",
+     "statement": "Round decimals to the nearest whole number, tenth or hundredth.",
+     "concepts": [
+      "rounding decimals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.rounding",
+       "name": "Round whole numbers and decimals to a given place and use rounding to estimate",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.large-numbers",
+        "MATH.number.decimal-tenths"
+       ],
+       "supports": [
+        "MATH.reasoning.estimate-check"
+       ],
+       "why": "MATH.reasoning.estimate-check is about checking answers; no competency covers the place-value rounding procedure itself."
+      }
+     ],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c01-o02",
+     "statement": "Add and subtract decimal numbers, including in money and measurement problems.",
+     "concepts": [
+      "decimal addition",
+      "decimal subtraction"
+     ],
+     "questionTypes": [
+      "numeric",
+      "money"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-operations"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c01-o03",
+     "statement": "Multiply decimals by whole numbers, by powers of 10 and by other decimals.",
+     "concepts": [
+      "decimal multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c01-o04",
+     "statement": "Divide decimals by whole numbers, by powers of 10 and by other decimals, and solve related word problems.",
+     "concepts": [
+      "decimal division"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c02",
+   "number": 2,
+   "term": 3,
+   "title": "Percentage and Simple Interest",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c02-s01",
+     "title": "Converting Fraction to Percentage"
+    },
+    {
+     "id": "tn-g07-t3-c02-s02",
+     "title": "Converting percentage as fraction"
+    },
+    {
+     "id": "tn-g07-t3-c02-s03",
+     "title": "Converting Decimals to Percentage"
+    },
+    {
+     "id": "tn-g07-t3-c02-s04",
+     "title": "Converting Percentages to Decimals"
+    },
+    {
+     "id": "tn-g07-t3-c02-s05",
+     "title": "Percentage in Real Life"
+    },
+    {
+     "id": "tn-g07-t3-c02-s06",
+     "title": "Simple Interest"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c02-o01",
+     "statement": "Convert between fractions, decimals and percentages.",
+     "concepts": [
+      "percentage conversion"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.percentage",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro",
+      "MATH.number.percentage"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c02-o02",
+     "statement": "Calculate a percentage of a quantity and express one quantity as a percentage of another in real-life situations such as marks, populations or discounts.",
+     "concepts": [
+      "percentage of quantity",
+      "percentage increase/decrease"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c02-o03",
+     "statement": "Calculate simple interest, amount, principal, rate or time when the other quantities are given.",
+     "concepts": [
+      "simple interest",
+      "principal",
+      "rate",
+      "time"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.profit-loss"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c03",
+   "number": 3,
+   "term": 3,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c03-s01",
+     "title": "Geometrical Approach to Multiplication of Monomials"
+    },
+    {
+     "id": "tn-g07-t3-c03-s02",
+     "title": "Geometrical proof of Identities"
+    },
+    {
+     "id": "tn-g07-t3-c03-s03",
+     "title": "Factorisation using identities"
+    },
+    {
+     "id": "tn-g07-t3-c03-s04",
+     "title": "Inequations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c03-o01",
+     "statement": "Use area models to multiply monomials and binomials.",
+     "concepts": [
+      "area model",
+      "monomial product"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.alg.distributive",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.identities-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities-intro",
+      "MLY.alg.distributive"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c03-o02",
+     "statement": "Verify the identities for (a+b)^2, (a-b)^2 and (a+b)(a-b) with area diagrams and use them to expand expressions.",
+     "concepts": [
+      "algebraic identities",
+      "geometric proof"
+     ],
+     "questionTypes": [
+      "expression",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities",
+      "MATH.algebra.identities-intro"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c03-o03",
+     "statement": "Factorise expressions that match a standard identity.",
+     "concepts": [
+      "factorisation using identities"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factorisation"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c03-o04",
+     "statement": "Solve simple one-variable inequations over whole numbers or integers and show the solution set on a number line.",
+     "concepts": [
+      "inequations",
+      "solution set"
+     ],
+     "questionTypes": [
+      "set",
+      "interval"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c04",
+   "number": 4,
+   "term": 3,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c04-s01",
+     "title": "Symmetry through transformations"
+    },
+    {
+     "id": "tn-g07-t3-c04-s02",
+     "title": "Construction of circles and concentric circles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c04-o01",
+     "statement": "Apply reflections, translations and rotations to figures and identify the symmetry each transformation produces.",
+     "concepts": [
+      "reflection",
+      "translation",
+      "rotation"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.transformations",
+       "name": "Perform and describe reflections, translations and rotations of figures",
+       "strand": "geometry",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.coordinate.cartesian",
+        "MATH.geometry.rotational-symmetry"
+       ],
+       "why": "No competency covers rigid transformations as operations on figures."
+      },
+      {
+       "id": "MATH.geometry.rotational-symmetry",
+       "name": "Identify rotational symmetry and its order (and translational symmetry in patterns)",
+       "strand": "geometry",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.geometry.transformations"
+       ],
+       "why": "Existing symmetry competencies are reflection/line symmetry only."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.rotational-symmetry",
+      "MATH.geometry.transformations"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c04-o02",
+     "statement": "Construct circles and concentric circles from given radii, or from a given ring width, using a compass.",
+     "concepts": [
+      "circle construction",
+      "concentric circles"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.circles"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c05",
+   "number": 5,
+   "term": 3,
+   "title": "Statistics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c05-s01",
+     "title": "Collection of data"
+    },
+    {
+     "id": "tn-g07-t3-c05-s02",
+     "title": "Organisation of Data"
+    },
+    {
+     "id": "tn-g07-t3-c05-s03",
+     "title": "Representative values"
+    },
+    {
+     "id": "tn-g07-t3-c05-s04",
+     "title": "Arithmetic Mean"
+    },
+    {
+     "id": "tn-g07-t3-c05-s05",
+     "title": "Mode"
+    },
+    {
+     "id": "tn-g07-t3-c05-s06",
+     "title": "Median"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c05-o01",
+     "statement": "Collect and organise data into tables.",
+     "concepts": [
+      "data collection",
+      "organisation"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c05-o02",
+     "statement": "Calculate the arithmetic mean of a data set and interpret it as a representative value.",
+     "concepts": [
+      "arithmetic mean"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c05-o03",
+     "statement": "Find the mode and median of ungrouped data and choose an appropriate representative value.",
+     "concepts": [
+      "mode",
+      "median"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.median-mode"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g07-t3-c06",
+   "number": 6,
+   "term": 3,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g07-t3-c06-s01",
+     "title": "Flowchart and Types of Flowchart"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g07-t3-c06-o01",
+     "statement": "Read a flowchart that uses the standard symbols and trace it to find the output.",
+     "concepts": [
+      "flowchart symbols",
+      "tracing"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.algorithms-flowcharts",
+       "name": "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.multi-step",
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "Algorithmic/computational thinking is not represented in the existing list."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.algorithms-flowcharts"
+     ]
+    },
+    {
+     "id": "tn-g07-t3-c06-o02",
+     "statement": "Draw a flowchart, with decisions where needed, for a simple process or computation.",
+     "concepts": [
+      "flowchart design",
+      "decision box"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.algorithms-flowcharts",
+       "name": "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.multi-step",
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "Algorithmic/computational thinking is not represented in the existing list."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.algorithms-flowcharts"
+     ]
+    }
+   ]
+  }
+ ]
+}

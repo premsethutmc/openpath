@@ -111,18 +111,25 @@ test("a textbook becomes a draft with mapped outcomes and source references, and
   assert.deepEqual(fractions.outcomes.map((o) => o.mapping.competencies[0]?.id), ["MATH.number.fraction-models", EQ, "MATH.number.fraction-comparison", "MATH.number.fraction-add-like"]);
   assert.ok(fractions.outcomes.every((o) => o.mapping.competencies.every((m) => m.status === "proposed")), "never silently accepted");
   const proposals = draft.subjects[0].chapters.flatMap((c) => c.outcomes).filter((o) => o.mapping.proposal);
-  assert.equal(proposals.length, 2, "outcomes with no match become provisional proposals, not new verified competencies");
+  // rounding was a gap before the curriculum expansion (expansion@1 added MATH.number.rounding); the timetable is still one
+  assert.equal(proposals.length, 1, "outcomes with no match become provisional proposals, not new verified competencies");
+  assert.match(proposals[0].text, /timetable/);
+  assert.equal(draft.subjects[0].chapters.flatMap((c) => c.outcomes).find((o) => /round/i.test(o.text))!.mapping.competencies[0].id, "MATH.number.rounding");
   assert.ok(proposals.every((o) => o.mapping.proposal!.status === "provisional-proposal" && o.mapping.proposal!.source.pages));
   assert.ok(proposals.every((o) => !graph.byId.has(o.mapping.proposal!.id)), "a proposal is not added to the graph");
   const rel = review(draft, "accept-proposals", "test reviewer", "2026-09-01T00:00:00Z");
   assert.equal(rel.status, "reviewed");
   assert.equal(rel.review!.educatorReviewed, false);
   assert.deepEqual(validateRelease(rel), []);
-  // "Generate equivalent fractions by multiplying numerator and denominator" is close to "multiply fractions":
+  // "Divide multi-digit numbers and interpret the remainder" is close to two skills (long division; remainders):
   // flagged uncertain, so it is NOT accepted without an explicit decision
-  assert.equal(fractions.outcomes[1].mapping.verdict, "uncertain");
-  assert.ok(!assigned(rel).some((a) => a.competency === EQ), "an uncertain mapping needs a reviewer's decision");
-  assert.ok(assigned(review(draft, [{ outcome: fractions.outcomes[1].id, accept: [EQ] }], "t", "t")).some((a) => a.competency === EQ));
+  const divide = draft.subjects[0].chapters.flatMap((c) => c.outcomes).find((o) => /interpret the remainder/.test(o.text))!;
+  assert.equal(divide.mapping.verdict, "uncertain");
+  const LD = divide.mapping.competencies[0].id;
+  assert.ok(!assigned(rel).some((a) => a.competency === LD && a.outcome.id === divide.id), "an uncertain mapping needs a reviewer's decision");
+  assert.ok(assigned(review(draft, [{ outcome: divide.id, accept: [LD] }], "t", "t")).some((a) => a.competency === LD));
+  // equivalent fractions maps to its own skill
+  assert.equal(fractions.outcomes[1].mapping.competencies[0].id, EQ);
   assert.throws(() => review(rel, "accept-proposals", "x", "y"), /Only a draft/);
   // explicit decisions: the reviewer rejects one mapping and adds another
   const custom = review(draft, [{ outcome: fractions.outcomes[1].id, accept: ["MATH.number.fraction-models"] }], "test", "2026-09-01T00:00:00Z");

@@ -21,6 +21,7 @@ export const MEANING_VERSION = "meaning@3";
 /** Concept → phrasings (regular expressions on lower-case text). Order does not matter. */
 const LEXICON: Record<string, RegExp[]> = {
   fraction: [/fraction/, /numerator/, /denominator/, /\b\d+\/\d+\b/, /[½⅓¼¾⅔]/, /\bhalf\b(?![- ]hours?)|\bhalves\b|quarter(?![- ]hour| past| to\b)|third|eighth|fifths?\b|sixths?\b|tenths?\b(?! place)/, /part of (a|the|one) (whole|shape)|parts of a whole|equal (parts|pieces)/],
+  ofQuantity: [/(fraction|half|quarter|third)s? of (a |an |the )?(collection|set|group|number|quantity|amount)|of a collection|of \d+ (objects|things|items|sweets|people)/],
   equivalence: [/equivalent/, /same (amount|value|size|number)\b(?! of)/, /name the same/, /equal fractions/, /simplest form|lowest terms|simplif/],
   comparison: [/compar/, /\border\b|\bordering\b/, /bigger|larger|greater|smaller|less than|more than|which is more|which .* (more|less)/],
   likeDenominators: [/\blike (fractions|denominators)/, /same (denominator|bottom number)/],

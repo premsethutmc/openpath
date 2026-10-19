@@ -1,0 +1,1981 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 10,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics: Textbook for Class X",
+  "publisher": "NCERT",
+  "edition": "rationalised edition (content rationalised from the 2023-24 reprint; continued unchanged for 2026-27; exact 2026-27 reprint date not verified)",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "syllabus",
+   "title": "Mathematics, Class X, Curriculum 2026-27 (Secondary Part I), Subject Codes 041 Standard / 241 Basic",
+   "publisher": "CBSE Academic Unit",
+   "edition": "2026-27 (released 2 April 2026)",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart1/Maths_SecP1X_2026-27.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "units and marks, chapter topic lists and restrictions, which theorems must be proved, competencies, question-paper design for Standard and Basic, internal assessment, prescribed books"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-14/2026: Release of CBSE Curriculum for the Academic Session 2026-27 for Classes IX-XII",
+   "publisher": "CBSE",
+   "edition": "01.04.2026",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "release date of the 2026-27 curriculum"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Curriculum for the Academic Year 2026-27 (index page)",
+   "publisher": "CBSE Academic Unit",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/curriculum_2027.html",
+   "accessed": "2026-10-19",
+   "used_for": "locating the Class X Mathematics document"
+  },
+  {
+   "kind": "notification",
+   "title": "NCERT advisory on textbooks for 2026-27 (as reported by Kerala Kaumudi and myCBSEguide; original PDF could not be fetched)",
+   "publisher": "NCERT",
+   "edition": "18 March 2026",
+   "academicYear": "2026-27",
+   "url": "https://ncert.nic.in/pdf/announcement/notices/Advisory_ncertbooks.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirming no new Class 10 textbook in 2026-27; new books deferred to 2027-28"
+  },
+  {
+   "kind": "textbook",
+   "title": "NCERT Class 10 Mathematics chapters as hosted by SATHEE (IIT Kanpur / Ministry of Education initiative)",
+   "publisher": "SATHEE, IIT Kanpur (hosting NCERT text)",
+   "edition": "rationalised",
+   "academicYear": "2026-27",
+   "url": "https://satheebihar.iitk.ac.in/engineering/ncert-books/nb-class-10/nb-math-10",
+   "accessed": "2026-10-19",
+   "used_for": "chapter titles 1-14; section headings checked for chapters 3, 8, 9, 11 and 13"
+  }
+ ],
+ "notes": [
+  "TEXTBOOK: For 2026-27 Class X still uses the rationalised NCERT 'Mathematics: Textbook for Class X' (14 chapters; Constructions removed). NCERT said in March 2026 that new NCF-SE books for Grades 10 and 11 come only from 2027-28; I read this in news reports because the NCERT advisory PDF is blocked to the fetch tool.",
+  "STANDARD vs BASIC: CBSE offers Mathematics Standard (041) and Mathematics Basic (241). They have the same syllabus, the same textbook and the same 80+20 mark structure; only the question-paper design differs. Standard: Remembering/Understanding 43 marks (54%), Applying 19 (24%), Analysing/Evaluating/Creating 18 (22%). Basic: 60 (75%), 12 (15%), 8 (10%). This file covers both; no outcome is Standard-only.",
+  "UNIT WEIGHTS (theory 80 marks, 3 hours): Number Systems 6, Algebra 20, Coordinate Geometry 6, Geometry 15, Trigonometry 12, Mensuration 10, Statistics and Probability 11. Internal assessment 20: pen-paper test and multiple assessment 10 (5+5), portfolio 5, lab practical 5. The extracted text of the 2026-27 document gave no period counts.",
+  "PROOFS CBSE REQUIRES (assessment human): irrationality of sqrt 2, sqrt 3, sqrt 5 and numbers like 3 + 2 sqrt 5; the Basic Proportionality Theorem; the tangent at a point is perpendicular to the radius; tangents from an external point are equal; sin^2 A + cos^2 A = 1 and simple identities; that the trigonometric ratios of an acute angle are well defined. Converse of BPT and the similarity criteria are stated without proof and only applied.",
+  "RESTRICTIONS stated by CBSE: quadratic equations only with real roots, by factorisation and the quadratic formula; section formula for internal division only; heights and distances with at most two right triangles and angles of 30, 45 and 60 degrees; segment areas only for central angles of 60, 90 and 120 degrees; surface area and volume for combinations of any two of cube, cuboid, sphere, hemisphere, right circular cylinder and cone; grouped mean by direct, assumed-mean and step-deviation methods; median and mode of grouped data without bimodal cases; probability by the classical definition only.",
+  "DELETED (rationalised since 2023-24; not in the 2026-27 syllabus): Euclid's division lemma; decimal expansions of rationals; division algorithm for polynomials; cross-multiplication and equations reducible to linear pairs; completing the square; areas of similar triangles; Pythagoras theorem (Ch 6); area of a triangle in coordinates; trigonometric ratios of complementary angles; Constructions chapter; review of circle perimeter/area and combinations of plane figures; conversion of solids and the frustum; ogives. This list comes from a secondary site (pw.live) and is consistent with the official syllabus topics; there is no official deletion list in the 2026-27 document.",
+  "SECTIONS: section headings were checked on SATHEE (IIT Kanpur's mirror of the NCERT text) for Chs 3, 8, 9, 11 and 13. For Chs 1, 2, 4, 5, 6, 7, 10, 12 and 14 those pages would not load; their headings are the known rationalised-edition headings and fit the deleted-sections list, but I could not check them against the print in this session.",
+  "CHAPTER TITLES: all 14 titles appear in the SATHEE listing. Most also match the CBSE 2026-27 topic headings (official). 'Some Applications of Trigonometry' appears in CBSE only as the topic 'Heights and Distances'; CBSE also lists 'Trigonometric Identities' as a separate topic, which in the book is Section 8.4 of Ch 8. All chapters are marked verified:true on the basis of the CBSE and SATHEE sources together.",
+  "EXAM SCHEME: the 2026-27 curriculum document describes a single 80-mark, 3-hour theory paper. The two-board-examination arrangement for Class X (main exam plus an optional second exam) is not described in this document and was not verified here.",
+  "CH 2: CBSE restricts the zeros-coefficients relationship to quadratic polynomials. The book also mentions cubic polynomials, but they are not assessed."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g10-c01",
+   "number": 1,
+   "term": null,
+   "title": "Real Numbers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c01-s02",
+     "title": "The Fundamental Theorem of Arithmetic"
+    },
+    {
+     "id": "cbse-g10-c01-s03",
+     "title": "Revisiting Irrational Numbers"
+    },
+    {
+     "id": "cbse-g10-c01-s04",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c01-o01",
+     "statement": "Express a natural number as a product of primes and state the Fundamental Theorem of Arithmetic (uniqueness of prime factorisation).",
+     "concepts": [
+      "prime factorisation",
+      "Fundamental Theorem of Arithmetic"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.primes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.euclid-algorithm",
+      "MATH.number.primes"
+     ]
+    },
+    {
+     "id": "cbse-g10-c01-o02",
+     "statement": "Find the HCF and LCM of numbers from their prime factorisations, use HCF x LCM = product for two numbers, and solve word problems with them.",
+     "concepts": [
+      "HCF",
+      "LCM",
+      "HCF-LCM product"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.euclid-algorithm",
+      "MATH.number.factors-multiples"
+     ]
+    },
+    {
+     "id": "cbse-g10-c01-o03",
+     "statement": "Use uniqueness of prime factorisation to justify number facts, e.g. that 6^n can never end in 0.",
+     "concepts": [
+      "reasoning with FTA"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "cbse-g10-c01-o04",
+     "statement": "Prove by contradiction that sqrt 2, sqrt 3 and sqrt 5 are irrational, using the fact that if a prime divides a^2 it divides a.",
+     "concepts": [
+      "irrationality proof",
+      "proof by contradiction"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.irrationality-proofs",
+       "name": "Prove that a number is irrational",
+       "strand": "number",
+       "gradeRange": [
+        9,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.real-numbers",
+        "MATH.number.primes",
+        "MATH.reasoning.proof-intro"
+       ],
+       "supports": [
+        "MATH.number.factors-multiples",
+        "MATH.reasoning.mathematical-argument"
+       ],
+       "why": "MATH.number.real-numbers covers representing and classifying rational/irrational numbers, not writing a proof by contradiction that a specific number (sqrt p, a + b sqrt p) is irrational, which CBSE assesses in Grades 9 and 10."
+      }
+     ],
+     "mapped": [
+      "MATH.number.irrationality-proofs"
+     ]
+    },
+    {
+     "id": "cbse-g10-c01-o05",
+     "statement": "Prove that numbers such as 3 + 2 sqrt 5 or 1/sqrt 2 are irrational, given the irrationality of the surd.",
+     "concepts": [
+      "irrationality of combinations",
+      "closure of rationals"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.number.real-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.irrationality-proofs",
+       "name": "Prove that a number is irrational",
+       "strand": "number",
+       "gradeRange": [
+        9,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.real-numbers",
+        "MATH.number.primes",
+        "MATH.reasoning.proof-intro"
+       ],
+       "supports": [
+        "MATH.number.factors-multiples",
+        "MATH.reasoning.mathematical-argument"
+       ],
+       "why": "MATH.number.real-numbers covers representing and classifying rational/irrational numbers, not writing a proof by contradiction that a specific number (sqrt p, a + b sqrt p) is irrational, which CBSE assesses in Grades 9 and 10."
+      }
+     ],
+     "mapped": [
+      "MATH.number.irrationality-proofs",
+      "MATH.number.real-numbers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c02",
+   "number": 2,
+   "term": null,
+   "title": "Polynomials",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c02-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c02-s02",
+     "title": "Geometrical Meaning of the Zeroes of a Polynomial"
+    },
+    {
+     "id": "cbse-g10-c02-s03",
+     "title": "Relationship between Zeroes and Coefficients of a Polynomial"
+    },
+    {
+     "id": "cbse-g10-c02-s04",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c02-o01",
+     "statement": "Find the number of zeros of a polynomial from its graph by counting where it meets the x-axis.",
+     "concepts": [
+      "zeros of a polynomial",
+      "graph of polynomial"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-zeros",
+       "name": "Relate zeros of a polynomial to its graph and coefficients",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials",
+        "MATH.coordinate.cartesian"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.algebra.factorisation"
+       ],
+       "why": "MATH.algebra.polynomials covers operating on polynomials; reading zeros from a graph and using sum/product of zeros of a quadratic is a separate assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-zeros",
+      "MATH.algebra.polynomials"
+     ]
+    },
+    {
+     "id": "cbse-g10-c02-o02",
+     "statement": "Find the zeros of a quadratic polynomial by factorising, and check the sum and product of zeros against the coefficients.",
+     "concepts": [
+      "zeros of quadratic",
+      "sum and product of zeros"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-zeros",
+       "name": "Relate zeros of a polynomial to its graph and coefficients",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials",
+        "MATH.coordinate.cartesian"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.algebra.factorisation"
+       ],
+       "why": "MATH.algebra.polynomials covers operating on polynomials; reading zeros from a graph and using sum/product of zeros of a quadratic is a separate assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.factorisation",
+      "MATH.algebra.polynomial-zeros"
+     ]
+    },
+    {
+     "id": "cbse-g10-c02-o03",
+     "statement": "Write a quadratic polynomial whose zeros have a given sum and product.",
+     "concepts": [
+      "forming a quadratic from zeros"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-zeros",
+       "name": "Relate zeros of a polynomial to its graph and coefficients",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials",
+        "MATH.coordinate.cartesian"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.algebra.factorisation"
+       ],
+       "why": "MATH.algebra.polynomials covers operating on polynomials; reading zeros from a graph and using sum/product of zeros of a quadratic is a separate assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-zeros"
+     ]
+    },
+    {
+     "id": "cbse-g10-c02-o04",
+     "statement": "Evaluate symmetric expressions in the zeros (e.g. alpha^2 + beta^2, 1/alpha + 1/beta) without finding the zeros, and find unknown coefficients from conditions on the zeros.",
+     "concepts": [
+      "symmetric functions of zeros"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-zeros",
+       "name": "Relate zeros of a polynomial to its graph and coefficients",
+       "strand": "algebra",
+       "gradeRange": [
+        10,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials",
+        "MATH.coordinate.cartesian"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.algebra.factorisation"
+       ],
+       "why": "MATH.algebra.polynomials covers operating on polynomials; reading zeros from a graph and using sum/product of zeros of a quadratic is a separate assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.identities",
+      "MATH.algebra.polynomial-zeros"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c03",
+   "number": 3,
+   "term": null,
+   "title": "Pair of Linear Equations in Two Variables",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c03-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c03-s02",
+     "title": "Graphical Method of Solution of a Pair of Linear Equations"
+    },
+    {
+     "id": "cbse-g10-c03-s03",
+     "title": "Algebraic Methods of Solving a Pair of Linear Equations"
+    },
+    {
+     "id": "cbse-g10-c03-s04",
+     "title": "Substitution Method"
+    },
+    {
+     "id": "cbse-g10-c03-s05",
+     "title": "Elimination Method"
+    },
+    {
+     "id": "cbse-g10-c03-s06",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c03-o01",
+     "statement": "Represent a situation as a pair of linear equations in two variables.",
+     "concepts": [
+      "forming linear systems"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    },
+    {
+     "id": "cbse-g10-c03-o02",
+     "statement": "Solve a pair of linear equations graphically and interpret intersecting, parallel and coincident lines.",
+     "concepts": [
+      "graphical solution",
+      "intersecting/parallel/coincident lines"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    },
+    {
+     "id": "cbse-g10-c03-o03",
+     "statement": "Decide from the coefficient ratios a1/a2, b1/b2, c1/c2 whether a pair has one, none or infinitely many solutions, and find parameter values for a given case.",
+     "concepts": [
+      "consistency conditions",
+      "coefficient ratios"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    },
+    {
+     "id": "cbse-g10-c03-o04",
+     "statement": "Solve a pair of linear equations by substitution.",
+     "concepts": [
+      "substitution method"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    },
+    {
+     "id": "cbse-g10-c03-o05",
+     "statement": "Solve a pair of linear equations by elimination.",
+     "concepts": [
+      "elimination method"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ]
+    },
+    {
+     "id": "cbse-g10-c03-o06",
+     "statement": "Model and solve everyday problems (ages, money, speeds, digits, geometry) with a pair of linear equations and interpret the solution.",
+     "concepts": [
+      "situational problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c04",
+   "number": 4,
+   "term": null,
+   "title": "Quadratic Equations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c04-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c04-s02",
+     "title": "Quadratic Equations"
+    },
+    {
+     "id": "cbse-g10-c04-s03",
+     "title": "Solution of a Quadratic Equation by Factorisation"
+    },
+    {
+     "id": "cbse-g10-c04-s04",
+     "title": "Nature of Roots"
+    },
+    {
+     "id": "cbse-g10-c04-s05",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c04-o01",
+     "statement": "Recognise quadratic equations in standard form ax^2 + bx + c = 0 (a not 0) and form them from situations.",
+     "concepts": [
+      "standard form",
+      "forming quadratics"
+     ],
+     "questionTypes": [
+      "true-false",
+      "equation-solution"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics"
+     ]
+    },
+    {
+     "id": "cbse-g10-c04-o02",
+     "statement": "Solve quadratic equations by factorisation (splitting the middle term).",
+     "concepts": [
+      "factorisation method",
+      "roots"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics"
+     ]
+    },
+    {
+     "id": "cbse-g10-c04-o03",
+     "statement": "Solve quadratic equations with real roots using the quadratic formula.",
+     "concepts": [
+      "quadratic formula"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics"
+     ]
+    },
+    {
+     "id": "cbse-g10-c04-o04",
+     "statement": "Use the discriminant to decide the nature of roots and find parameter values for equal or real roots.",
+     "concepts": [
+      "discriminant",
+      "nature of roots"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratic-discriminant",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratic-discriminant"
+     ]
+    },
+    {
+     "id": "cbse-g10-c04-o05",
+     "statement": "Model everyday problems (areas, speeds, ages, numbers) with quadratic equations, solve them and reject solutions that do not fit the context.",
+     "concepts": [
+      "situational quadratics",
+      "admissible roots"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c05",
+   "number": 5,
+   "term": null,
+   "title": "Arithmetic Progressions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c05-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c05-s02",
+     "title": "Arithmetic Progressions"
+    },
+    {
+     "id": "cbse-g10-c05-s03",
+     "title": "nth Term of an AP"
+    },
+    {
+     "id": "cbse-g10-c05-s04",
+     "title": "Sum of First n Terms of an AP"
+    },
+    {
+     "id": "cbse-g10-c05-s05",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c05-o01",
+     "statement": "Decide whether a list is an AP and identify its first term and common difference.",
+     "concepts": [
+      "arithmetic progression",
+      "common difference"
+     ],
+     "questionTypes": [
+      "true-false",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g10-c05-o02",
+     "statement": "Derive and use the nth-term formula of an AP, including the nth term from the end and which term has a given value.",
+     "concepts": [
+      "nth term",
+      "a + (n-1)d"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g10-c05-o03",
+     "statement": "Derive and use the formula for the sum of the first n terms of an AP.",
+     "concepts": [
+      "sum of n terms",
+      "n/2[2a + (n-1)d]"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g10-c05-o04",
+     "statement": "Solve everyday problems (savings, instalments, arrangements) with AP terms and sums.",
+     "concepts": [
+      "AP applications"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c06",
+   "number": 6,
+   "term": null,
+   "title": "Triangles",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c06-s02",
+     "title": "Similar Figures"
+    },
+    {
+     "id": "cbse-g10-c06-s03",
+     "title": "Similarity of Triangles"
+    },
+    {
+     "id": "cbse-g10-c06-s04",
+     "title": "Criteria for Similarity of Triangles"
+    },
+    {
+     "id": "cbse-g10-c06-s05",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c06-o01",
+     "statement": "Explain when figures are similar versus congruent, with examples and counterexamples (e.g. polygons with equal angles but sides not in proportion).",
+     "concepts": [
+      "similar figures",
+      "congruent vs similar"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "cbse-g10-c06-o02",
+     "statement": "Prove the Basic Proportionality Theorem: a line parallel to one side of a triangle divides the other two sides in the same ratio.",
+     "concepts": [
+      "Basic Proportionality Theorem (Thales)"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity",
+      "MATH.geometry.triangle-proof"
+     ]
+    },
+    {
+     "id": "cbse-g10-c06-o03",
+     "statement": "Use the BPT and its converse to find lengths and to show lines are parallel.",
+     "concepts": [
+      "BPT applications",
+      "converse of BPT"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "cbse-g10-c06-o04",
+     "statement": "Apply the AA/AAA, SSS and SAS similarity criteria to find unknown sides and angles.",
+     "concepts": [
+      "similarity criteria"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "cbse-g10-c06-o05",
+     "statement": "Prove triangles similar and deduce relations between their sides, such as equal products of segments.",
+     "concepts": [
+      "similarity proofs"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity",
+      "MATH.geometry.triangle-proof"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c07",
+   "number": 7,
+   "term": null,
+   "title": "Coordinate Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c07-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c07-s02",
+     "title": "Distance Formula"
+    },
+    {
+     "id": "cbse-g10-c07-s03",
+     "title": "Section Formula"
+    },
+    {
+     "id": "cbse-g10-c07-s04",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c07-o01",
+     "statement": "Calculate the distance between two points with the distance formula.",
+     "concepts": [
+      "distance formula"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "cbse-g10-c07-o02",
+     "statement": "Use distances to test collinearity, classify triangles and quadrilaterals, and find points equidistant from given points.",
+     "concepts": [
+      "collinearity",
+      "classifying figures",
+      "equidistant point"
+     ],
+     "questionTypes": [
+      "true-false",
+      "coordinate",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "cbse-g10-c07-o03",
+     "statement": "Find the point dividing a segment internally in a given ratio, including the midpoint and points of trisection.",
+     "concepts": [
+      "section formula",
+      "internal division",
+      "midpoint"
+     ],
+     "questionTypes": [
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    },
+    {
+     "id": "cbse-g10-c07-o04",
+     "statement": "Find the ratio in which a point or an axis divides a segment, and unknown vertices (e.g. of a parallelogram) using the section formula.",
+     "concepts": [
+      "ratio of division",
+      "unknown vertex"
+     ],
+     "questionTypes": [
+      "numeric",
+      "coordinate"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c08",
+   "number": 8,
+   "term": null,
+   "title": "Introduction to Trigonometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c08-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c08-s02",
+     "title": "Trigonometric Ratios"
+    },
+    {
+     "id": "cbse-g10-c08-s03",
+     "title": "Trigonometric Ratios of Some Specific Angles"
+    },
+    {
+     "id": "cbse-g10-c08-s04",
+     "title": "Trigonometric Identities"
+    },
+    {
+     "id": "cbse-g10-c08-s05",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c08-o01",
+     "statement": "Define the six trigonometric ratios of an acute angle in a right triangle and explain, using similarity, why they depend only on the angle.",
+     "concepts": [
+      "sine",
+      "cosine",
+      "tangent",
+      "cosecant",
+      "secant",
+      "cotangent",
+      "well-definedness"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "cbse-g10-c08-o02",
+     "statement": "Find the other trigonometric ratios of an angle from one given ratio.",
+     "concepts": [
+      "ratios from one ratio"
+     ],
+     "questionTypes": [
+      "fraction",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "cbse-g10-c08-o03",
+     "statement": "Recall and justify the ratios of 30, 45 and 60 degrees (and the motivated values at 0 and 90), and evaluate expressions with them.",
+     "concepts": [
+      "standard angles",
+      "0 and 90 degrees"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ]
+    },
+    {
+     "id": "cbse-g10-c08-o04",
+     "statement": "Prove sin^2 A + cos^2 A = 1 and the related identities with sec/tan and cosec/cot.",
+     "concepts": [
+      "Pythagorean identities"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities"
+     ]
+    },
+    {
+     "id": "cbse-g10-c08-o05",
+     "statement": "Prove simple trigonometric identities and simplify expressions using the basic identities.",
+     "concepts": [
+      "proving identities"
+     ],
+     "questionTypes": [
+      "proof",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c09",
+   "number": 9,
+   "term": null,
+   "title": "Some Applications of Trigonometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c09-s01",
+     "title": "Heights and Distances"
+    },
+    {
+     "id": "cbse-g10-c09-s02",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c09-o01",
+     "statement": "Identify angles of elevation and depression and draw a labelled diagram for a heights-and-distances situation.",
+     "concepts": [
+      "angle of elevation",
+      "angle of depression",
+      "line of sight"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.heights-distances",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.heights-distances"
+     ]
+    },
+    {
+     "id": "cbse-g10-c09-o02",
+     "statement": "Find heights or distances with one right triangle and angles of 30, 45 or 60 degrees.",
+     "concepts": [
+      "single right triangle problems"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.heights-distances",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.heights-distances"
+     ]
+    },
+    {
+     "id": "cbse-g10-c09-o03",
+     "statement": "Solve heights-and-distances problems involving two right triangles (e.g. two observation points, an object seen from a height).",
+     "concepts": [
+      "two right triangle problems"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.heights-distances",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.heights-distances"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c10",
+   "number": 10,
+   "term": null,
+   "title": "Circles",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c10-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c10-s02",
+     "title": "Tangent to a Circle"
+    },
+    {
+     "id": "cbse-g10-c10-s03",
+     "title": "Number of Tangents from a Point on a Circle"
+    },
+    {
+     "id": "cbse-g10-c10-s04",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c10-o01",
+     "statement": "Tell tangents, secants and non-intersecting lines apart and state how many tangents can be drawn from a point inside, on or outside a circle.",
+     "concepts": [
+      "tangent",
+      "secant",
+      "point of contact",
+      "number of tangents"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    },
+    {
+     "id": "cbse-g10-c10-o02",
+     "statement": "Prove that the tangent at any point of a circle is perpendicular to the radius through the point of contact.",
+     "concepts": [
+      "tangent perpendicular to radius"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    },
+    {
+     "id": "cbse-g10-c10-o03",
+     "statement": "Prove that the two tangents drawn from an external point to a circle are equal in length.",
+     "concepts": [
+      "equal tangent lengths"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    },
+    {
+     "id": "cbse-g10-c10-o04",
+     "statement": "Use tangent properties to find lengths and angles and to prove results such as AB + CD = AD + BC for a quadrilateral circumscribing a circle.",
+     "concepts": [
+      "applications of tangent theorems",
+      "circumscribed quadrilateral"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c11",
+   "number": 11,
+   "term": null,
+   "title": "Areas Related to Circles",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c11-s01",
+     "title": "Areas of Sector and Segment of a Circle"
+    },
+    {
+     "id": "cbse-g10-c11-s02",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c11-o01",
+     "statement": "Calculate the area of a sector and the length of its arc from the radius and central angle.",
+     "concepts": [
+      "area of sector",
+      "arc length"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.sectors",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.sectors"
+     ]
+    },
+    {
+     "id": "cbse-g10-c11-o02",
+     "statement": "Calculate the area of a segment of a circle for central angles of 60, 90 or 120 degrees.",
+     "concepts": [
+      "area of segment"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.sectors",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.sectors"
+     ]
+    },
+    {
+     "id": "cbse-g10-c11-o03",
+     "statement": "Solve applied problems with sectors and segments, such as clock hands, wipers and designs.",
+     "concepts": [
+      "applied sector problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.sectors",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area",
+      "MATH.measurement.sectors"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c12",
+   "number": 12,
+   "term": null,
+   "title": "Surface Areas and Volumes",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c12-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c12-s02",
+     "title": "Surface Area of a Combination of Solids"
+    },
+    {
+     "id": "cbse-g10-c12-s03",
+     "title": "Volume of a Combination of Solids"
+    },
+    {
+     "id": "cbse-g10-c12-s04",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c12-o01",
+     "statement": "Calculate the surface area of a solid made of two basic solids (cube, cuboid, cylinder, cone, sphere, hemisphere), deciding which faces stay exposed.",
+     "concepts": [
+      "surface area of combined solids"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids"
+     ]
+    },
+    {
+     "id": "cbse-g10-c12-o02",
+     "statement": "Calculate the volume of a solid made of two basic solids.",
+     "concepts": [
+      "volume of combined solids"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids"
+     ]
+    },
+    {
+     "id": "cbse-g10-c12-o03",
+     "statement": "Model real objects (toys, tents, capsules, vessels) as combinations of solids and answer questions about material or capacity.",
+     "concepts": [
+      "modelling objects as combined solids"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c13",
+   "number": 13,
+   "term": null,
+   "title": "Statistics",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c13-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g10-c13-s02",
+     "title": "Mean of Grouped Data"
+    },
+    {
+     "id": "cbse-g10-c13-s03",
+     "title": "Mode of Grouped Data"
+    },
+    {
+     "id": "cbse-g10-c13-s04",
+     "title": "Median of Grouped Data"
+    },
+    {
+     "id": "cbse-g10-c13-s05",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c13-o01",
+     "statement": "Calculate the mean of grouped data by the direct, assumed-mean and step-deviation methods.",
+     "concepts": [
+      "grouped mean",
+      "assumed mean",
+      "step deviation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ]
+    },
+    {
+     "id": "cbse-g10-c13-o02",
+     "statement": "Calculate the mode of grouped data from the modal class with the formula.",
+     "concepts": [
+      "modal class",
+      "grouped mode"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ]
+    },
+    {
+     "id": "cbse-g10-c13-o03",
+     "statement": "Calculate the median of grouped data using cumulative frequencies and the median formula.",
+     "concepts": [
+      "cumulative frequency",
+      "median class",
+      "grouped median"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ]
+    },
+    {
+     "id": "cbse-g10-c13-o04",
+     "statement": "Find a missing frequency from a given mean or median and interpret which measure of centre suits a situation.",
+     "concepts": [
+      "missing frequency",
+      "interpreting measures"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g10-c14",
+   "number": 14,
+   "term": null,
+   "title": "Probability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g10-c14-s01",
+     "title": "Probability — A Theoretical Approach"
+    },
+    {
+     "id": "cbse-g10-c14-s02",
+     "title": "Summary"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g10-c14-o01",
+     "statement": "Calculate theoretical (classical) probabilities for experiments with equally likely outcomes, such as coins, dice, cards and balls in bags.",
+     "concepts": [
+      "classical probability",
+      "equally likely outcomes"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.classical",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical"
+     ]
+    },
+    {
+     "id": "cbse-g10-c14-o02",
+     "statement": "Use the facts that P(E) + P(not E) = 1, that 0 <= P(E) <= 1, and that impossible and sure events have probabilities 0 and 1.",
+     "concepts": [
+      "complementary events",
+      "impossible event",
+      "sure event"
+     ],
+     "questionTypes": [
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.complements",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.complements"
+     ]
+    },
+    {
+     "id": "cbse-g10-c14-o03",
+     "statement": "List the sample space of two-stage experiments (two coins, two dice) and find probabilities of events defined on it.",
+     "concepts": [
+      "sample space of compound experiments"
+     ],
+     "questionTypes": [
+      "set",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.probability.classical",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical",
+      "MATH.probability.sample-space"
+     ]
+    }
+   ]
+  }
+ ]
+}

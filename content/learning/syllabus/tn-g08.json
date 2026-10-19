@@ -1,0 +1,1468 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 8,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics - Standard Eight (single annual volume), English Medium",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "edition": "Samacheer Kalvi new-syllabus content (introduced 2019-20), issued as a single annual volume since about 2023-24 and reprinted for 2026-27; exact imprint/reprint line not verified",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Tamil Nadu e-textbooks portal (official) - attempted",
+   "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.textbooksonline.tn.nic.in/",
+   "accessed": "2026-10-19",
+   "used_for": "attempted for official PDFs and edition lines; fetch refused by the site's robots.txt (also tried /Std6.htm, /Books/06/... PDF path); shell has no internet access"
+  },
+  {
+   "kind": "textbook",
+   "title": "TN School Education Department portal / SCERT portal (official) - attempted",
+   "publisher": "Government of Tamil Nadu, School Education Department / SCERT",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://tnschools.gov.in/",
+   "accessed": "2026-10-19",
+   "used_for": "attempted; pages are JavaScript-rendered and exposed no textbook links to the fetcher; scert.tnschools.gov.in likewise; e-learn.tnschools.gov.in refused by robots.txt"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions for Mathematics [English] Class 8 TN Board",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.shaalaa.com/textbook-solutions/samacheer-kalvi-solutions-mathematics-english-class-8-tn-board_302",
+   "accessed": "2026-10-19",
+   "used_for": "chapter titles, order and exercise counts; shows a single (non-term) book"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions Class 8 Chapter 1 Numbers",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.shaalaa.com/textbook-solutions/c/samacheer-kalvi-solutions-mathematics-english-class-8-tn-board-chapter-1-numbers_4175",
+   "accessed": "2026-10-19",
+   "used_for": "chapter 1 exercise page ranges (pp. 12-47), confirming the whole of chapter 1 sits in one book"
+  },
+  {
+   "kind": "textbook",
+   "title": "Maths 8th Std (TN 8th Maths English Medium)",
+   "publisher": "Brainkart (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.brainkart.com/subject/Maths-8th-Std_424/",
+   "accessed": "2026-10-19",
+   "used_for": "chapter titles (cross-check) and section headings"
+  },
+  {
+   "kind": "textbook",
+   "title": "TN Board Class 8 Maths solutions index",
+   "publisher": "StudiesToday (secondary)",
+   "edition": "not stated on page",
+   "academicYear": "not stated",
+   "url": "https://www.studiestoday.com/tn-board-class-8-maths-26493.html",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of chapters 5-7 and exercise counts"
+  },
+  {
+   "kind": "notification",
+   "title": "Class 1 to 3 textbooks ready, works for Classes 4 to 12 in primary stage (DT Next, 8 May 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/class-1-to-3-textbooks-ready-works-for-classes-4-to-12-in-primary-stage-2",
+   "accessed": "2026-10-19",
+   "used_for": "edition currency: 2026-27 books for Classes 4-12 remain on the old (2018-19/2019-20) syllabus; new SEP-based curriculum from 2027-28"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu may scrap trimester system for Classes 6, 7 (DT Next, updated 4 Aug 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-may-scrap-trimester-system-for-classes-6-7",
+   "accessed": "2026-10-19",
+   "used_for": "term structure: Classes 6-7 still use three term books in 2026-27 (single book proposed from 2027-28); Class 8 already moved to a single annual textbook about three years earlier"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu: Classes 4-12 curriculum preparation in third phase (DT Next, updated 16 Aug 2026)",
+   "publisher": "DT Next (news)",
+   "edition": "not stated on page",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-classes-4-12-curriculum-preparation-in-third-phase",
+   "accessed": "2026-10-19",
+   "used_for": "confirms new Classes 4-12 textbooks targeted for 2027-28, i.e. not in force for 2026-27"
+  }
+ ],
+ "notes": [
+  "Official sources could not be opened: textbooksonline.tn.nic.in and e-learn.tnschools.gov.in refuse automated fetching via robots.txt, tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that returned no content, and the sandbox shell has no internet access. Because of this every chapter is marked verified:false. Chapter titles were cross-checked between two independent secondary sites (Shaalaa and Brainkart), which agree on every chapter title and order. Neither is official.",
+  "Edition currency for 2026-27: DT Next (8 May 2026; 16 Aug 2026) reports that only Classes 1-3 received new-syllabus books in 2026-27. Classes 4-12 continue on the existing Samacheer Kalvi syllabus (the 2018-19 / 2019-20 'new syllabus' books), and the new State Education Policy curriculum is targeted for 2027-28. The same article says Classes 4-12 books with the old syllabus were 'being prepared' for 2026-27, so a 2026 reprint or re-typeset printing may exist. I could not see its imprint page to confirm the edition line or any content changes.",
+  "Section titles come from Brainkart's topic index for this book, which follows the textbook's headings. They were not checked against the official PDF. I dropped exercise, summary, 'Try these' and worked-example entries and kept only content headings. Section ids are positional, not the textbook's own section numbers, which I could not see.",
+  "All outcomes are my own paraphrases of chapter content; no textbook text is reproduced.",
+  "Competencies listed under 'proposed' are reused across the TN Grade 6, 7 and 8 files with identical ids and definitions.",
+  "TERM STRUCTURE DIFFERS FROM THE BRIEF. The brief said Grades 6-8 are term-wise, but DT Next (Aug 2026) reports that Class 8 moved to a single annual textbook about three years ago, and that only Classes 6-7 (and 1-5) still have three term books. Shaalaa, Brainkart and StudiesToday all show one Class 8 Mathematics book with chapters 1-7 numbered straight through. I therefore set textbook.terms = null and term = null, and used ids of the form tn-g08-c01, the schema's pattern for a non-term book. If OpenPath needs a term split for Grade 8, check the official PDF (textbooksonline.tn.nic.in) or the school calendar before imposing one. I did not invent one.",
+  "Chapter titles, order and exercise counts (1.1-1.7, 2.1-2.4, 3.1-3.10, 4.1-4.5, 5.1-5.5, 6.1-6.3, 7.1-7.4) agree between Shaalaa and Brainkart.",
+  "Chapter 2 'Parts of a Circle' covers arcs and sectors, which I mapped as an exact fit to MATH.measurement.sectors even though the list places that competency at Grade 10. Chapter 2 '3-D shapes' (nets and Euler's formula) is my reading of the section title; the exact sub-content was not seen.",
+  "Chapter 6 Statistics: the sections cover graphical representation of ungrouped and grouped frequency distributions. I assume that means bar graphs, histograms and frequency polygons, and possibly pie charts, but I could not confirm which graph types are included.",
+  "Chapter 7 Information Processing has several short puzzle-style sections (SET game, map colouring, packing, shopping comparison). These are mapped as partial fits to general reasoning competencies rather than each getting its own competency. Only cryptology received a proposed competency."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g08-c01",
+   "number": 1,
+   "term": null,
+   "title": "Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c01-s01",
+     "title": "Rational Numbers"
+    },
+    {
+     "id": "tn-g08-c01-s02",
+     "title": "Rational numbers on a number line"
+    },
+    {
+     "id": "tn-g08-c01-s03",
+     "title": "Decimal representation of a rational number"
+    },
+    {
+     "id": "tn-g08-c01-s04",
+     "title": "Positive and Negative rational numbers"
+    },
+    {
+     "id": "tn-g08-c01-s05",
+     "title": "Equivalent rational numbers"
+    },
+    {
+     "id": "tn-g08-c01-s06",
+     "title": "Rational numbers in Standard form"
+    },
+    {
+     "id": "tn-g08-c01-s07",
+     "title": "Comparison of rational numbers"
+    },
+    {
+     "id": "tn-g08-c01-s08",
+     "title": "Rational numbers between any two given rational numbers"
+    },
+    {
+     "id": "tn-g08-c01-s09",
+     "title": "Basic Arithmetic Operations on Rational Numbers"
+    },
+    {
+     "id": "tn-g08-c01-s10",
+     "title": "Word Problems on the basic operations"
+    },
+    {
+     "id": "tn-g08-c01-s11",
+     "title": "Properties of Rational Numbers"
+    },
+    {
+     "id": "tn-g08-c01-s12",
+     "title": "Introduction to Square Numbers"
+    },
+    {
+     "id": "tn-g08-c01-s13",
+     "title": "Square Root"
+    },
+    {
+     "id": "tn-g08-c01-s14",
+     "title": "Cubes and Cube Roots"
+    },
+    {
+     "id": "tn-g08-c01-s15",
+     "title": "Exponents and Powers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c01-o01",
+     "statement": "Represent rational numbers on a number line and in standard form, compare them, and find rational numbers between any two given ones.",
+     "concepts": [
+      "rational numbers",
+      "standard form",
+      "density"
+     ],
+     "questionTypes": [
+      "fraction",
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers"
+     ]
+    },
+    {
+     "id": "tn-g08-c01-o02",
+     "statement": "Add, subtract, multiply and divide rational numbers and solve word problems with them.",
+     "concepts": [
+      "operations on rationals",
+      "reciprocal"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers"
+     ]
+    },
+    {
+     "id": "tn-g08-c01-o03",
+     "statement": "Check which properties (closure, commutative, associative, distributive, identity, inverse) hold for rational-number operations.",
+     "concepts": [
+      "properties of rationals",
+      "additive/multiplicative inverse"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.operation-properties",
+       "name": "Use closure, commutative, associative, distributive and identity properties of operations on a number system",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.addition",
+        "MATH.number.equal-groups"
+       ],
+       "supports": [
+        "MLY.alg.distributive",
+        "MATH.number.rational-numbers"
+       ],
+       "why": "Existing list has only MLY.alg.distributive (one property, algebraic); TN teaches the property set explicitly for whole numbers (G6), integers (G7) and rationals (G8)."
+      }
+     ],
+     "mapped": [
+      "MATH.number.operation-properties",
+      "MATH.number.rational-numbers"
+     ]
+    },
+    {
+     "id": "tn-g08-c01-o04",
+     "statement": "Identify perfect squares and find square roots by prime factorisation and long division, including for decimals, and estimate non-perfect square roots.",
+     "concepts": [
+      "perfect squares",
+      "square root",
+      "long division method",
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.square-roots",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.square-roots"
+     ]
+    },
+    {
+     "id": "tn-g08-c01-o05",
+     "statement": "Find cubes and cube roots using prime factorisation, and identify perfect cubes.",
+     "concepts": [
+      "cubes",
+      "cube roots"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.cubes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.cubes"
+     ]
+    },
+    {
+     "id": "tn-g08-c01-o06",
+     "statement": "Simplify expressions with zero and negative integer exponents using the laws of exponents, and write numbers in standard (scientific) form.",
+     "concepts": [
+      "negative exponents",
+      "laws of exponents",
+      "scientific notation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.scientific-notation",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents",
+      "MATH.number.scientific-notation"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c02",
+   "number": 2,
+   "term": null,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c02-s01",
+     "title": "Parts of a Circle"
+    },
+    {
+     "id": "tn-g08-c02-s02",
+     "title": "Combined shapes"
+    },
+    {
+     "id": "tn-g08-c02-s03",
+     "title": "Three dimensional (3-D) shapes"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c02-o01",
+     "statement": "Calculate the arc length, area and perimeter of a sector from the radius and the central angle.",
+     "concepts": [
+      "sector",
+      "arc length",
+      "central angle"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.sectors",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area",
+      "MATH.measurement.sectors"
+     ]
+    },
+    {
+     "id": "tn-g08-c02-o02",
+     "statement": "Find the perimeter and area of combined shapes made of rectangles, triangles, trapeziums, semicircles and sectors.",
+     "concepts": [
+      "combined shapes",
+      "composite area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.sectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.sectors",
+      "MATH.measurement.trapezium-area"
+     ]
+    },
+    {
+     "id": "tn-g08-c02-o03",
+     "statement": "Match 3-D solids to their nets and views, and count their faces, edges and vertices to verify Euler's formula.",
+     "concepts": [
+      "nets",
+      "polyhedra",
+      "Euler's formula"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.polyhedra-euler",
+       "name": "Count faces, vertices and edges of polyhedra and verify Euler's formula",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.shape-properties"
+       ],
+       "supports": [
+        "MATH.geometry.nets",
+        "MATH.geometry.solid-views"
+       ],
+       "why": "nets and solid-views do not cover F + V - E = 2 relationships."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.polyhedra-euler",
+      "MATH.geometry.solid-views"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c03-s01",
+     "title": "Multiplication of Algebraic Expressions"
+    },
+    {
+     "id": "tn-g08-c03-s02",
+     "title": "Division of Algebraic Expressions"
+    },
+    {
+     "id": "tn-g08-c03-s03",
+     "title": "Identities"
+    },
+    {
+     "id": "tn-g08-c03-s04",
+     "title": "Cubic Identities"
+    },
+    {
+     "id": "tn-g08-c03-s05",
+     "title": "Application of Cubic Identities"
+    },
+    {
+     "id": "tn-g08-c03-s06",
+     "title": "Factorisation"
+    },
+    {
+     "id": "tn-g08-c03-s07",
+     "title": "Factorisation using cubic identities"
+    },
+    {
+     "id": "tn-g08-c03-s08",
+     "title": "Linear Equation in One Variable"
+    },
+    {
+     "id": "tn-g08-c03-s09",
+     "title": "Word problems that involve linear equations"
+    },
+    {
+     "id": "tn-g08-c03-s10",
+     "title": "Graph"
+    },
+    {
+     "id": "tn-g08-c03-s11",
+     "title": "Graph: To obtain a straight line"
+    },
+    {
+     "id": "tn-g08-c03-s12",
+     "title": "Graph: Line parallel to the coordinate axes"
+    },
+    {
+     "id": "tn-g08-c03-s13",
+     "title": "Scale in a graph"
+    },
+    {
+     "id": "tn-g08-c03-s14",
+     "title": "Linear Graph"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c03-o01",
+     "statement": "Multiply polynomials and divide a polynomial by a monomial or binomial.",
+     "concepts": [
+      "multiplication of expressions",
+      "division of expressions"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "partial"
+      },
+      {
+       "id": "MLY.alg.expand-binomials",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.polynomials",
+      "MLY.alg.expand-binomials"
+     ]
+    },
+    {
+     "id": "tn-g08-c03-o02",
+     "statement": "Use the square, product and cubic identities, such as (a+b)^3, (a-b)^3 and (x+a)(x+b)(x+c), to expand expressions and evaluate numerical expressions.",
+     "concepts": [
+      "algebraic identities",
+      "cubic identities"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities"
+     ]
+    },
+    {
+     "id": "tn-g08-c03-o03",
+     "statement": "Factorise expressions by common factors, grouping and standard (including cubic) identities.",
+     "concepts": [
+      "factorisation",
+      "grouping",
+      "identities"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factorisation"
+     ]
+    },
+    {
+     "id": "tn-g08-c03-o04",
+     "statement": "Solve linear equations in one variable, including ones with rational coefficients and the variable on both sides, and apply them to word problems.",
+     "concepts": [
+      "linear equations",
+      "word problems"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-rational",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-rational"
+     ]
+    },
+    {
+     "id": "tn-g08-c03-o05",
+     "statement": "Plot points in all four quadrants and choose a suitable scale for the axes.",
+     "concepts": [
+      "Cartesian plane",
+      "quadrants",
+      "scale"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.cartesian",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.cartesian"
+     ]
+    },
+    {
+     "id": "tn-g08-c03-o06",
+     "statement": "Draw the straight-line graph of a linear relation, including lines parallel to the axes, and read values from it.",
+     "concepts": [
+      "linear graph",
+      "lines parallel to axes"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-two-variables",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.cartesian",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-two-variables",
+      "MATH.coordinate.cartesian"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c04",
+   "number": 4,
+   "term": null,
+   "title": "Life Mathematics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c04-s01",
+     "title": "Applications of Percentage in Word Problems"
+    },
+    {
+     "id": "tn-g08-c04-s02",
+     "title": "Profit, Loss, Discount, Overhead Expenses and GST"
+    },
+    {
+     "id": "tn-g08-c04-s03",
+     "title": "Compound Interest"
+    },
+    {
+     "id": "tn-g08-c04-s04",
+     "title": "Applications of Compound Interest Formula"
+    },
+    {
+     "id": "tn-g08-c04-s05",
+     "title": "Difference between C I and S I"
+    },
+    {
+     "id": "tn-g08-c04-s06",
+     "title": "Compound Variation"
+    },
+    {
+     "id": "tn-g08-c04-s07",
+     "title": "Time and Work"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c04-o01",
+     "statement": "Solve percentage word problems, including percentage increase and decrease.",
+     "concepts": [
+      "percentage applications"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage"
+     ]
+    },
+    {
+     "id": "tn-g08-c04-o02",
+     "statement": "Calculate profit, loss, discount, overhead expenses and GST to find marked price, selling price or cost price.",
+     "concepts": [
+      "discount",
+      "overhead expenses",
+      "GST",
+      "marked price"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.percentage",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage",
+      "MATH.number.profit-loss"
+     ]
+    },
+    {
+     "id": "tn-g08-c04-o03",
+     "statement": "Calculate compound interest with annual, half-yearly or quarterly compounding, apply the formula to growth and depreciation, and compare it with simple interest.",
+     "concepts": [
+      "compound interest",
+      "growth/depreciation",
+      "CI vs SI"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compound-interest",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compound-interest"
+     ]
+    },
+    {
+     "id": "tn-g08-c04-o04",
+     "statement": "Solve compound variation problems that combine direct and inverse proportion.",
+     "concepts": [
+      "compound variation"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion",
+      "MATH.number.proportion"
+     ]
+    },
+    {
+     "id": "tn-g08-c04-o05",
+     "statement": "Solve time and work problems using each worker's rate of work per unit time.",
+     "concepts": [
+      "time and work",
+      "work rate"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion",
+      "MATH.number.unit-rate"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c05",
+   "number": 5,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c05-s01",
+     "title": "Congruent and Similar Shapes"
+    },
+    {
+     "id": "tn-g08-c05-s02",
+     "title": "Congruent Triangles"
+    },
+    {
+     "id": "tn-g08-c05-s03",
+     "title": "Similar Triangles"
+    },
+    {
+     "id": "tn-g08-c05-s04",
+     "title": "The Pythagorean Theorem"
+    },
+    {
+     "id": "tn-g08-c05-s05",
+     "title": "Converse of Pythagoras Theorem"
+    },
+    {
+     "id": "tn-g08-c05-s06",
+     "title": "Point of Concurrency"
+    },
+    {
+     "id": "tn-g08-c05-s07",
+     "title": "Medians of a Triangle"
+    },
+    {
+     "id": "tn-g08-c05-s08",
+     "title": "Altitude of a Triangle"
+    },
+    {
+     "id": "tn-g08-c05-s09",
+     "title": "Perpendicular Bisectors of a Triangle"
+    },
+    {
+     "id": "tn-g08-c05-s10",
+     "title": "Angle Bisectors of a Triangle"
+    },
+    {
+     "id": "tn-g08-c05-s11",
+     "title": "Construction of Quadrilaterals"
+    },
+    {
+     "id": "tn-g08-c05-s12",
+     "title": "Construction of Trapeziums"
+    },
+    {
+     "id": "tn-g08-c05-s13",
+     "title": "Construction of Special Quadrilaterals"
+    },
+    {
+     "id": "tn-g08-c05-s14",
+     "title": "Construction of a Parallelogram"
+    },
+    {
+     "id": "tn-g08-c05-s15",
+     "title": "Construction of a Rhombus"
+    },
+    {
+     "id": "tn-g08-c05-s16",
+     "title": "Construction of a Rectangle"
+    },
+    {
+     "id": "tn-g08-c05-s17",
+     "title": "Construction of a Square"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c05-o01",
+     "statement": "Use the congruence criteria to prove two triangles congruent and deduce that corresponding parts are equal.",
+     "concepts": [
+      "congruence",
+      "CPCTC"
+     ],
+     "questionTypes": [
+      "proof",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence"
+     ]
+    },
+    {
+     "id": "tn-g08-c05-o02",
+     "statement": "Recognise similar triangles (AA, SAS, SSS) and use proportional sides to find unknown lengths.",
+     "concepts": [
+      "similar triangles",
+      "proportional sides"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ]
+    },
+    {
+     "id": "tn-g08-c05-o03",
+     "statement": "Use the Pythagorean theorem to find missing sides of right triangles, and its converse to test whether a triangle is right-angled.",
+     "concepts": [
+      "Pythagorean theorem",
+      "converse",
+      "Pythagorean triples"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Pythagorean theorem and its converse to right triangles",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        9
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots",
+        "MATH.geometry.triangle-types"
+       ],
+       "supports": [
+        "MATH.coordinate.distance-intro",
+        "MATH.trigonometry.ratios"
+       ],
+       "why": "No existing competency covers the Pythagorean theorem, though distance and trigonometry competencies depend on it."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ]
+    },
+    {
+     "id": "tn-g08-c05-o04",
+     "statement": "Construct medians, altitudes, perpendicular bisectors and angle bisectors of a triangle and locate the centroid, orthocentre, circumcentre and incentre.",
+     "concepts": [
+      "centroid",
+      "orthocentre",
+      "circumcentre",
+      "incentre"
+     ],
+     "questionTypes": [
+      "construction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.triangle-concurrency",
+       "name": "Construct and identify medians, altitudes, perpendicular bisectors and angle bisectors of a triangle and their points of concurrency",
+       "strand": "geometry",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.constructions-bisectors",
+        "MATH.geometry.triangle-properties"
+       ],
+       "supports": [
+        "MATH.geometry.triangle-proof"
+       ],
+       "why": "Constructions-bisectors covers bisecting a segment/angle; concurrency points (centroid, orthocentre, circumcentre, incentre) are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.triangle-concurrency"
+     ]
+    },
+    {
+     "id": "tn-g08-c05-o05",
+     "statement": "Construct a general quadrilateral, a trapezium and special quadrilaterals (parallelogram, rhombus, rectangle, square) from given measurements, and find the area.",
+     "concepts": [
+      "quadrilateral construction",
+      "trapezium",
+      "special quadrilaterals"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.construction-quadrilaterals",
+       "name": "Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.construction-triangles",
+        "MATH.geometry.quadrilaterals"
+       ],
+       "supports": [
+        "MATH.geometry.basic-constructions"
+       ],
+       "why": "construction-triangles is triangle-only; quadrilateral constructions are a distinct taught and assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.construction-quadrilaterals"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c06",
+   "number": 6,
+   "term": null,
+   "title": "Statistics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c06-s01",
+     "title": "Frequency Distribution Table"
+    },
+    {
+     "id": "tn-g08-c06-s02",
+     "title": "Graphical Representation of the Frequency Distribution for Ungrouped Data"
+    },
+    {
+     "id": "tn-g08-c06-s03",
+     "title": "Graphical Representation of the Frequency Distribution for Grouped Data"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c06-o01",
+     "statement": "Organise raw data into ungrouped and grouped frequency distribution tables using class intervals.",
+     "concepts": [
+      "frequency distribution",
+      "class intervals",
+      "tally"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.grouped-data",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency",
+      "MATH.statistics.grouped-data"
+     ]
+    },
+    {
+     "id": "tn-g08-c06-o02",
+     "statement": "Represent an ungrouped frequency distribution graphically and interpret the graph.",
+     "concepts": [
+      "graphical representation",
+      "ungrouped data"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.scaled-bars"
+     ]
+    },
+    {
+     "id": "tn-g08-c06-o03",
+     "statement": "Draw and interpret histograms and frequency polygons for grouped data.",
+     "concepts": [
+      "histogram",
+      "frequency polygon"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.histograms",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.histograms"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g08-c07",
+   "number": 7,
+   "term": null,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g08-c07-s01",
+     "title": "Principles of Counting"
+    },
+    {
+     "id": "tn-g08-c07-s02",
+     "title": "SET - Game"
+    },
+    {
+     "id": "tn-g08-c07-s03",
+     "title": "Map Colouring"
+    },
+    {
+     "id": "tn-g08-c07-s04",
+     "title": "Fibonacci Numbers"
+    },
+    {
+     "id": "tn-g08-c07-s05",
+     "title": "Highest Common Factor"
+    },
+    {
+     "id": "tn-g08-c07-s06",
+     "title": "Cryptology"
+    },
+    {
+     "id": "tn-g08-c07-s07",
+     "title": "Shopping Comparison"
+    },
+    {
+     "id": "tn-g08-c07-s08",
+     "title": "Packing"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g08-c07-o01",
+     "statement": "Count outcomes with the addition and multiplication principles of counting.",
+     "concepts": [
+      "fundamental principle of counting"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.systematic-enumeration",
+       "name": "List or count all arrangements or configurations systematically (including figures within a figure)",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.probability.sample-space",
+        "MATH.algebra.permutations"
+       ],
+       "why": "sample-space is about probability outcomes and permutations is Grade 11 formula work; organised listing/counting of configurations is missing at this level."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.permutations",
+      "MATH.probability.sample-space",
+      "MATH.reasoning.systematic-enumeration"
+     ]
+    },
+    {
+     "id": "tn-g08-c07-o02",
+     "statement": "Solve attribute-matching and map-colouring puzzles under the given rules, using as few colours as possible.",
+     "concepts": [
+      "SET game",
+      "map colouring"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.systematic-enumeration",
+       "name": "List or count all arrangements or configurations systematically (including figures within a figure)",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.probability.sample-space",
+        "MATH.algebra.permutations"
+       ],
+       "why": "sample-space is about probability outcomes and permutations is Grade 11 formula work; organised listing/counting of configurations is missing at this level."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.multi-step",
+      "MATH.reasoning.systematic-enumeration"
+     ]
+    },
+    {
+     "id": "tn-g08-c07-o03",
+     "statement": "Generate Fibonacci numbers and find the HCF by repeated division, noting the link to Fibonacci numbers.",
+     "concepts": [
+      "Fibonacci sequence",
+      "Euclid's division for HCF"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.euclid-algorithm",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.algorithms-flowcharts",
+       "name": "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.multi-step",
+        "MATH.number.euclid-algorithm"
+       ],
+       "why": "Algorithmic/computational thinking is not represented in the existing list."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.pattern-rules",
+      "MATH.number.euclid-algorithm",
+      "MATH.reasoning.algorithms-flowcharts"
+     ]
+    },
+    {
+     "id": "tn-g08-c07-o04",
+     "statement": "Encode and decode messages using simple substitution or shift ciphers.",
+     "concepts": [
+      "cryptology",
+      "cipher"
+     ],
+     "questionTypes": [
+      "pattern"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.coding-ciphers",
+       "name": "Encode and decode messages using rule-based ciphers",
+       "strand": "reasoning",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "TN Grade 8 Information Processing teaches simple cryptology; no competency covers cipher rules."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.coding-ciphers"
+     ]
+    },
+    {
+     "id": "tn-g08-c07-o05",
+     "statement": "Compare offers by unit price to make the best buy, and solve simple packing problems that fit items into a space.",
+     "concepts": [
+      "best buy",
+      "unit price",
+      "packing"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.cube-volume",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cube-volume",
+      "MATH.number.unit-rate"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -399,7 +399,9 @@ test("L: two textbooks saying the same mathematics differently map to the same s
   // genuinely missing mathematics is detected in both, with a page reference
   for (const r of [a, b]) {
     const missing = out(r).filter((o) => o.mapping.verdict === "missing");
-    assert.ok(missing.some((o) => /round/i.test(o.text)) && missing.some((o) => /timetable/i.test(o.text)));
+    assert.ok(missing.some((o) => /timetable/i.test(o.text)));
+    // rounding was missing from the 200-competency graph; the curriculum expansion added it, and both books find it
+    assert.equal(out(r).find((o) => /round/i.test(o.text))!.mapping.competencies[0].id, "MATH.number.rounding");
     assert.ok(missing.every((o) => o.mapping.proposal?.source.pages));
   }
   // a vague outcome is flagged, not guessed
