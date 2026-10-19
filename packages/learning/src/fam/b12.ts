@@ -173,7 +173,7 @@ const FACTS = [
   "Opposite angles of a cyclic quadrilateral are equal.",
   "Angles in the same segment of a circle add up to 180°.",
 ];
-/** For each situation: the right fact, then the other options (fact indices); the first wrong one is the usual mix-up. */
+/** For each fact: the right fact, then the other options (fact indices); the first wrong one is the usual mix-up. */
 const THEO: number[][] = [
   [0, 1, 2, 3],
   [1, 0, 7, 3],
@@ -182,15 +182,55 @@ const THEO: number[][] = [
   [4, 5, 2, 0],
   [5, 4, 1, 2],
 ];
-const theoStatement = (s: number, x: number) =>
-  [
-    `O is the centre of a circle and A, B, C lie on it, with C on the major arc AB. We know ∠AOB = ${2 * x}°, and we write ∠ACB = ${x}°.`,
-    `A, B, C, D lie on a circle, with C and D on the same side of the chord AB. We know ∠ACB = ${x}°, and we write ∠ADB = ${x}°.`,
-    `AB is a diameter of a circle and C is another point on the circle. We write ∠ACB = 90°, so ∠CAB = ${90 - (x % 70) - 10}° when ∠CBA = ${(x % 70) + 10}°.`,
-    `ABCD is a cyclic quadrilateral with ∠DAB = ${x + 40}°. We write ∠BCD = ${140 - x}°.`,
-    `O is the centre of a circle and OM is perpendicular to the chord AB, with M on AB. AB = ${2 * x} mm, and we write AM = ${x} mm.`,
-    `In a circle with centre O, the chords AB and CD are both ${x} mm long. AB is ${Math.floor(x / 4)} mm from O, and we write that CD is also ${Math.floor(x / 4)} mm from O.`,
-  ][s];
+/** The words that identify each fact among the options (used by the independent check). */
+const THEO_KEY = ["twice", "same segment of a circle are equal", "semicircle", "add up to 180", "bisects", "equidistant"];
+/** Situations: the fact a step uses, the step itself for a number x (20–80), and for cyclic quadrilaterals the given
+ * angle (never 90°: then the opposite angles would also be equal, and a wrong option would fit too). */
+const SITS: { f: number; t: (x: number) => string; given?: (x: number) => number }[] = [
+  // the angle at the centre is twice the angle at the circumference
+  { f: 0, t: (x) => `O is the centre of a circle and A, B, C lie on it, with C on the major arc AB. We know ∠AOB = ${2 * x}°, and we write ∠ACB = ${x}°.` },
+  { f: 0, t: (x) => `O is the centre of a circle and P, Q, R lie on it, with R on the major arc PQ. We know ∠PRQ = ${x}°, and we write ∠POQ = ${2 * x}°.` },
+  { f: 0, t: (x) => `Triangle ABC is drawn with all three vertices on a circle whose centre is O, and ∠BAC = ${x}°. We write ∠BOC = ${2 * x}°.` },
+  { f: 0, t: (x) => `The chord XY of a circle with centre O makes ∠XOY = ${2 * x}° at the centre. Z is a point on the major arc XY, and we write ∠XZY = ${x}°.` },
+  { f: 0, t: (x) => `K, L, M lie on a circle with centre O, and M is on the major arc KL. Since ∠KML = ${x}°, we write that the radii OK and OL make an angle of ${2 * x}° at O.` },
+  { f: 0, t: (x) => `O is the centre of a circle, A and B lie on it, and ∠AOB = ${2 * x}°. For any point P on the major arc AB we write ∠APB = ${x}°.` },
+  // angles in the same segment are equal
+  { f: 1, t: (x) => `A, B, C, D lie on a circle, with C and D on the same side of the chord AB. We know ∠ACB = ${x}°, and we write ∠ADB = ${x}°.` },
+  { f: 1, t: (x) => `P, Q, R, S lie on a circle, with R and S on the same side of the chord PQ. We know ∠PRQ = ${x}°, and we write ∠PSQ = ${x}°.` },
+  { f: 1, t: (x) => `The chords AC and BD of a circle cross at E. We know ∠BAC = ${x}°, and we write ∠BDC = ${x}°.` },
+  { f: 1, t: (x) => `ABCD is a quadrilateral with its vertices on a circle, and its diagonals are drawn. We know ∠CAD = ${x}°, and we write ∠CBD = ${x}°.` },
+  { f: 1, t: (x) => `X and Y are two points on a circle, and P, Q, R are three more points on the major arc XY. We know ∠XPY = ${x}°, and we write ∠XQY = ∠XRY = ${x}°.` },
+  { f: 1, t: (x) => `Two triangles ABK and ABL are drawn with K and L on a circle through A and B, both on the same side of AB. We know ∠AKB = ${x}°, and we write ∠ALB = ${x}°.` },
+  // the angle in a semicircle
+  { f: 2, t: (x) => `AB is a diameter of a circle and C is another point on the circle. We write ∠ACB = 90°, so ∠CAB = ${90 - x}° when ∠CBA = ${x}°.` },
+  { f: 2, t: (x) => `PQ is a diameter of a circle with centre O, and R is another point on the circle with ∠RPQ = ${x}°. We write ∠PRQ = 90°, so ∠RQP = ${90 - x}°.` },
+  { f: 2, t: (x) => `Triangle XYZ has all its vertices on a circle, and its side XY passes through the centre. ∠YXZ = ${x}°, and we write ∠XZY = 90°.` },
+  { f: 2, t: (x) => `AB is a diameter of a circle, and C and D are points on the circle on opposite sides of AB, with ∠CAB = ${x}°. We write ∠ACB = ∠ADB = 90°.` },
+  { f: 2, t: (x) => `KL is a diameter of a circle, ${2 * x} mm long, and M is another point on the circle. We write ∠KML = 90°, so KM² + ML² = ${4 * x * x} mm².` },
+  { f: 2, t: (x) => `AC is a diameter of a circle and B is a point on the circle with ∠BCA = ${x}°. We write ∠ABC = 90°.` },
+  // opposite angles of a cyclic quadrilateral
+  { f: 3, given: (x) => x + 40, t: (x) => `ABCD is a cyclic quadrilateral with ∠DAB = ${x + 40}°. We write ∠BCD = ${140 - x}°.` },
+  { f: 3, given: (x) => x + 25, t: (x) => `PQRS is a cyclic quadrilateral with ∠PQR = ${x + 25}°. We write ∠PSR = ${155 - x}°.` },
+  { f: 3, given: (x) => x + 30, t: (x) => `All four vertices of the quadrilateral KLMN lie on a circle, and ∠K = ${x + 30}°. We write ∠M = ${150 - x}°.` },
+  { f: 3, given: (x) => 2 * x, t: (x) => `ABCD is a cyclic quadrilateral with ∠ABC = ${2 * x}°. We write ∠ADC = ${180 - 2 * x}°.` },
+  { f: 3, given: (x) => x + 50, t: (x) => `Four lamp posts W, X, Y, Z stand in that order on a circular path. ∠WXY = ${x + 50}°, and we write ∠WZY = ${130 - x}°.` },
+  { f: 3, given: (x) => x + 10, t: (x) => `In the cyclic quadrilateral EFGH, ∠EFG = ${x + 10}°. We write ∠GHE = ${170 - x}°.` },
+  // the perpendicular from the centre bisects a chord
+  { f: 4, t: (x) => `O is the centre of a circle and OM is perpendicular to the chord AB, with M on AB. AB = ${2 * x} mm, and we write AM = ${x} mm.` },
+  { f: 4, t: (x) => `O is the centre of a circle, and a line from O meets the chord PQ at N at right angles. PN = ${x} mm, and we write NQ = ${x} mm.` },
+  { f: 4, t: (x) => `In a circle with centre O, OD is perpendicular to the chord AB, with D on AB, and AD = ${x} mm. We write AB = ${2 * x} mm.` },
+  { f: 4, t: (x) => `The radius OC of a circle with centre O cuts the chord AB at right angles at E. AE = ${x} mm, and we write EB = ${x} mm.` },
+  { f: 4, t: (x) => `The chord KL of a circle with centre O is ${2 * x} mm long, and OP is perpendicular to KL with P on KL. We write KP = ${x} mm, ready to use Pythagoras in triangle OPK.` },
+  { f: 4, t: (x) => `O is the centre of a circle and OF is perpendicular to the chord GH, with F on GH. GF = ${x} mm, so we write that F is the midpoint of GH and GH = ${2 * x} mm.` },
+  // equal chords are equidistant from the centre
+  { f: 5, t: (x) => `In a circle with centre O, the chords AB and CD are both ${x} mm long. AB is ${Math.floor(x / 4)} mm from O, and we write that CD is also ${Math.floor(x / 4)} mm from O.` },
+  { f: 5, t: (x) => `The chords PQ and RS of a circle with centre O are each ${x} mm long. The perpendicular from O to PQ is ${Math.floor(x / 3)} mm long, and we write that the perpendicular from O to RS is also ${Math.floor(x / 3)} mm long.` },
+  { f: 5, t: (x) => `The chords KL and MN of a circle with centre O are both ${x} mm long. OP is perpendicular to KL and OQ is perpendicular to MN, and we write OP = OQ.` },
+  { f: 5, t: (x) => `AB and AC are two chords of a circle with centre O, each ${x} mm long. We write that O is the same distance from AB as from AC.` },
+  { f: 5, t: (x) => `Two chords of a circle with centre O have the same length, ${x} mm. One of them is ${Math.floor(x / 5) + 1} mm from O, and we write that the other is ${Math.floor(x / 5) + 1} mm from O as well.` },
+  { f: 5, t: (x) => `The chords EF and GH of a circle with centre O are each ${x} mm long, and O is ${Math.floor(x / 4) + 2} mm from EF. We write that GH is ${Math.floor(x / 4) + 2} mm from O too.` },
+];
+const theoStatement = (s: number, x: number) => SITS[s].t(x);
 
 export const B12: Def[] = [
   // ============================================================ polynomials: multiply, divide
@@ -1734,25 +1774,30 @@ export const B12: Def[] = [
     title: "Which circle fact justifies a step",
     competency: CT,
     type: "choice",
-    // [s, x]: situation s with a number x
+    // [s, x]: situation s (SITS: six for each of six facts) with a number x
     parse: none,
-    reject: (p) => (!inR(p, [[0, 5], [20, 80]]) ? "One of six situations with a number from 20 to 80." : null),
+    reject: (p) => {
+      if (!inR(p, [[0, SITS.length - 1], [20, 80]])) return `One of ${SITS.length} situations with a number from 20 to 80.`;
+      const g = SITS[p[0]].given;
+      return g && g(p[1]) === 90 ? "A right angle in a cyclic quadrilateral makes its opposite angle equal too, so a wrong option would also fit." : null;
+    },
     prompt: ([s, x]) => `${theoStatement(s, x)} Which fact justifies this step?`,
-    choices: ([s, x]) => perm([s, x], 4).map((i) => FACTS[THEO[s][i]]),
-    solve: ([s, x]) => ({ steps: [st("fact", "recall", CT, [s], FACTS[THEO[s][0]])], answer: perm([s, x], 4).indexOf(0) }),
+    choices: ([s, x]) => perm([s, x], 4).map((i) => FACTS[THEO[SITS[s].f][i]]),
+    solve: ([s, x]) => ({ steps: [st("fact", "recall", CT, [s], FACTS[THEO[SITS[s].f][0]])], answer: perm([s, x], 4).indexOf(0) }),
     // independent: find the option whose fact is the one for this situation by its wording
     validate: ([s, x], v) => {
-      const key = ["twice", "same segment of a circle are equal", "semicircle", "add up to 180", "bisects", "equidistant"][s];
-      const opts = perm([s, x], 4).map((i) => FACTS[THEO[s][i]]);
+      const key = THEO_KEY[SITS[s].f];
+      const opts = perm([s, x], 4).map((i) => FACTS[THEO[SITS[s].f][i]]);
       return typeof v === "number" && opts[v] !== undefined && opts[v].includes(key) && opts.filter((o) => o.includes(key)).length === 1;
     },
     bugs: ([s, x]) => [
-      B("mixed-up-fact", "conceptual", CT, ["The fact about angles in the same segment was chosen; here one angle is at the centre, so the centre-angle fact applies.", "The centre-angle fact was chosen; here both angles are on the circle, standing on the same arc.", "The fact about angles in the same segment was chosen; the step uses the diameter, so the semicircle fact applies.", "Opposite angles of a cyclic quadrilateral are not equal in general; they add up to 180°.", "The fact about equal chords was chosen; this step is about one chord and the perpendicular from the centre.", "The fact about the perpendicular bisecting a chord was chosen; this step compares two equal chords."][s], perm([s, x], 4).indexOf(1)),
+      B("mixed-up-fact", "conceptual", CT, ["The fact about angles in the same segment was chosen; here one of the angles is at the centre, so the centre-angle fact applies.", "The centre-angle fact was chosen; here both angles are on the circle, standing on the same arc.", "The fact about angles in the same segment was chosen; the step uses the diameter, so the semicircle fact applies.", "Opposite angles of a cyclic quadrilateral were taken to be equal; they add up to 180°, and that is what the step uses.", "The fact about equal chords was chosen; this step is about one chord and the perpendicular from the centre.", "The fact about the perpendicular bisecting a chord was chosen; this step compares two equal chords."][SITS[s].f], perm([s, x], 4).indexOf(1)),
     ],
     variants: () => [],
     explain: (s) => `The step uses: ${s.value}`,
-    domain: [[0, 5], [20, 80]],
-    difficulty: ([s]) => (s === 2 || s === 4 ? 1 : s === 0 || s === 3 ? 2 : 3),
+    domain: [[0, SITS.length - 1], [20, 80]],
+    cap: 400,
+    difficulty: ([s]) => (SITS[s].f === 2 || SITS[s].f === 4 ? 1 : SITS[s].f === 0 || SITS[s].f === 3 ? 2 : 3),
     teach: {
       idea: "Each step in a geometry argument needs a reason: a definition or a theorem already proved. Matching the situation (where the angle is, what the chord does) to the theorem is the first part of writing a proof.",
       method: "Look at what the step uses: an angle at the centre, two angles on the same arc, a diameter, a cyclic quadrilateral, a perpendicular to a chord, or equal chords. Pick the fact about exactly that.",

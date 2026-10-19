@@ -449,6 +449,19 @@ const IDS: [string, boolean, string, (x: number) => number, string, string][] = 
   ["(1 − cos θ)(1 + cos θ)", false, "sin²θ", (x) => (1 - tr.c(x)) * (1 + tr.c(x)), "cos²θ", "1 − cos²θ was taken as cos²θ; since sin²θ + cos²θ = 1, 1 − cos²θ = sin²θ."],
 ];
 const scaleExpr = (m: number, e: string) => (m === 1 ? e : /^\d+$/.test(e) ? String(m * Number(e)) : / [+−] /.test(e) ? `${m}(${e})` : `${m} ${e}`);
+/** anidsimp's four options: the simplified form, the identity slip's form, the form without the factor (when there is
+ * one) and further simple forms, all different in value, in an order fixed by the parameters. */
+const idsOptions = ([t, m]: number[]): string[] => {
+  const xs = [0.4, 0.9, 1.3];
+  const same = (a: string, b: string) => xs.every((x) => close(ev(a, { t: x }), ev(b, { t: x }), 1e-8));
+  const out: string[] = [];
+  const extra = ["sec θ", "cos²θ", "2", "cot θ", "sin θ cos θ", "tan θ", "cosec θ", "sin²θ", "1", "cos θ"];
+  const k = hash(t, m, 7) % extra.length;
+  const pool = [scaleExpr(m, IDS[t][2]), scaleExpr(m, IDS[t][4]), ...(m > 1 ? [IDS[t][2]] : []), ...[...extra.slice(k), ...extra.slice(0, k)].map((e) => scaleExpr(m, e))];
+  for (const e of pool) if (out.length < 4 && !out.some((o) => same(o, e))) out.push(e);
+  const r = hash(t, m) % 4;
+  return [...out.slice(r), ...out.slice(0, r)];
+};
 const SECPT = [
   { given: "sec θ + tan θ", asks: ["sec θ − tan θ", "sec θ", "tan θ", "sin θ"] },
   { given: "cosec θ + cot θ", asks: ["cosec θ − cot θ", "cosec θ", "cot θ", "cos θ"] },
@@ -1056,7 +1069,7 @@ export const B14: Def[] = [
         { id: "slopes", title: "Compare slopes", kind: "conceptual", text: ["Points are on one line when the slope from P to Q equals the slope from Q to R.", "Two sides are perpendicular when the product of their slopes is −1 (or one is horizontal and the other vertical)."] },
       ],
     },
-    limits: "Lattice points built to be on a line, right-angled (not isosceles), isosceles (not right-angled) or neither; the written justification is marked by an educator, the conclusion here.",
+    limits: "Lattice points built to be on a line, right-angled (not isosceles), isosceles (not right-angled) or neither: an argument that must first rule out a straight line (altri classifies true triangles, including right-and-isosceles, for the distance formula itself); the written justification is marked by an educator, the conclusion here.",
   },
   {
     id: "angarr",
@@ -1155,7 +1168,7 @@ export const B14: Def[] = [
     reject: ([x, y, k]) => (x < 5 || x > 30 || y < 10 || y > 60 || k < 0 || k >= PAIRK.length || x === y ? "Costs ₹5–₹30 and ₹10–₹60 (different), one of six pairs of conditions." : null),
     prompt: ([x, y, k]) => {
       const [a1, b1, a2, b2] = PAIRK[k];
-      return `${a1} ${a1 === 1 ? "pen" : "pens"} and ${b1} ${b1 === 1 ? "notebook" : "notebooks"} cost ₹${a1 * x + b1 * y}, and ${a2} ${a2 === 1 ? "pen" : "pens"} and ${b2} ${b2 === 1 ? "notebook" : "notebooks"} cost ₹${a2 * x + b2 * y}. Let one pen cost ₹x and one notebook ₹y. Write two equations, solve them, and give the answer as (x, y).`;
+      return `For a school play, ${a1} ${a1 === 1 ? "child's ticket" : "children's tickets"} and ${b1} adult ${b1 === 1 ? "ticket" : "tickets"} cost ₹${a1 * x + b1 * y}, and ${a2} ${a2 === 1 ? "child's ticket" : "children's tickets"} and ${b2} adult ${b2 === 1 ? "ticket" : "tickets"} cost ₹${a2 * x + b2 * y}. Let a child's ticket cost ₹x and an adult's ticket ₹y. Write two equations, solve them, and give the answer as (x, y).`;
     },
     solve: ([x, y, k]) => {
       const [a1, b1, a2, b2] = PAIRK[k];
@@ -1177,7 +1190,7 @@ export const B14: Def[] = [
       const [a1, b1, a2, b2] = PAIRK[k];
       return a1 * t[0] + b1 * t[1] === a1 * x + b1 * y && a2 * t[0] + b2 * t[1] === a2 * x + b2 * y;
     },
-    bugs: ([x, y]) => [{ id: "swapped", kind: "procedural", competency: MODEL, says: "The two values were written the wrong way round; the question asks for (cost of a pen, cost of a notebook).", predict: `(${y}, ${x})` }],
+    bugs: ([x, y]) => [{ id: "swapped", kind: "procedural", competency: MODEL, says: "The two values were written the wrong way round; the question asks for (x, y): the child's ticket first.", predict: `(${y}, ${x})` }],
     distractors: ([x, y, k]) => {
       const [a1, b1, a2, b2] = PAIRK[k];
       return [[x + b1, y - a1], [x - b2, y + a2], [x + 1, y + 1]].filter(([u, w]) => u > 0 && w > 0).map(([u, w]) => `(${u}, ${w})`);
@@ -1190,7 +1203,7 @@ export const B14: Def[] = [
     difficulty: ([, , k]) => (k <= 1 ? 1 : k <= 3 ? 2 : 3),
     word: ([x, y, k]) => {
       const [a1, b1, a2, b2] = PAIRK[k];
-      return `At a fruit stall, ${a1} kg of bananas and ${b1} kg of apples cost ₹${a1 * x + b1 * y}, while ${a2} kg of bananas and ${b2} kg of apples cost ₹${a2 * x + b2 * y}. Find the price of 1 kg of bananas and of 1 kg of apples, written as (bananas, apples).`;
+      return `At a temple festival stall, ${a1} ${a1 === 1 ? "cup" : "cups"} of tea and ${b1} ${b1 === 1 ? "plate" : "plates"} of idli cost ₹${a1 * x + b1 * y}, while ${a2} ${a2 === 1 ? "cup" : "cups"} of tea and ${b2} ${b2 === 1 ? "plate" : "plates"} of idli cost ₹${a2 * x + b2 * y}. Find the price of one cup of tea and of one plate of idli, written as (tea, idli).`;
     },
     teach: {
       idea: "Two unknown prices and two facts about them: each fact is one linear equation, and the pair that makes both true is the answer.",
@@ -1199,7 +1212,7 @@ export const B14: Def[] = [
         { id: "substitute", title: "Substitution", kind: "procedural", text: ["From the equation with a coefficient 1, write one unknown in terms of the other.", "Put it into the other equation, solve, and check both facts with the prices."] },
       ],
     },
-    limits: "Two items with whole-rupee prices and six fixed pairs of conditions; ages, digits and speeds are other contexts of the same model.",
+    limits: "Two kinds of ticket or item with whole-rupee prices and six fixed pairs of conditions; the focus is writing the model (the shopping problems of alsysw practise solving). Ages, digits and speeds are other contexts of the same model.",
   },
   {
     id: "anquad",
@@ -1437,7 +1450,7 @@ export const B14: Def[] = [
     mc: true,
     parse: none,
     reject: ([a, b, c, s]) => ([a, b, c].some((x) => x < 1 || x > 40) || s < 0 || s > 2 || (1000 * [a, b, c][s]) % (a + b + c) !== 0 ? "Three counts 1–40 whose percentage has at most one decimal place." : null),
-    prompt: ([a, b, c, s]) => `The bar chart shows how the ${a + b + c} children of Class 9C come to school. In a 100% stacked bar chart of this data, what percentage of the bar is the part for children who ${SEG[s]}?`,
+    prompt: ([a, b, c, s]) => `The bar chart shows how the ${a + b + c} children of Class 9C come to school. In a 100% stacked bar chart of this data, what percentage of the bar is the part for children who ${SEG[s]}? Give the number without the % sign.`,
     figure: ([a, b, c]) => ({ type: "bars", title: "Class 9C: how children come to school", labels: ["walk", "bus", "cycle"], values: [a, b, c] }),
     solve: ([a, b, c, s]) => {
       const k = [a, b, c][s];
@@ -1473,7 +1486,7 @@ export const B14: Def[] = [
     keep: ([a, b, c, s]) => (1000 * [a, b, c][s]) % (a + b + c) === 0,
     cap: 300,
     difficulty: ([a, b, c, s]) => ((100 * [a, b, c][s]) % (a + b + c) !== 0 ? 3 : a + b + c === 50 || a + b + c === 25 || a + b + c === 20 ? 1 : 2),
-    word: ([a, b, c, s]) => `In a street survey, ${a} families said they walk to the market, ${b} take a bus and ${c} cycle. ${nm(a + b + c)} draws one 100% stacked bar for the survey. What percentage of the bar is the part for families who ${["walk", "take a bus", "cycle"][s]}?`,
+    word: ([a, b, c, s]) => `In a street survey, ${a} families said they walk to the market, ${b} take a bus and ${c} cycle. ${nm(a + b + c)} draws one 100% stacked bar for the survey. What percentage of the bar is the part for families who ${["walk", "take a bus", "cycle"][s]}? Give the number without the % sign.`,
     teach: {
       idea: "In a 100% stacked bar the whole bar stands for the whole group, 100%; each part's length is its share of the group.",
       method: "Add the counts to get the whole, divide the part by the whole and multiply by 100.",
@@ -1860,7 +1873,7 @@ export const B14: Def[] = [
     reject: ([pi, d, ask]) => (pi < 0 || pi > 2 || d < 4 || d > 80 || (ask !== 0 && ask !== 1) ? "One of three pairs of angles and a walk of 4 to 80 m." : null),
     prompt: ([pi, d, ask]) => {
       const [a, b] = TWO[pi].map((i) => HA[i]);
-      return `From a point on level ground, the angle of elevation of the top of a tower is ${a}°. After walking ${d} m straight towards the tower, the angle of elevation becomes ${b}°. Find ${ask === 0 ? "the height of the tower" : "the distance from the second point to the foot of the tower"} in metres (exact value).`;
+      return `From a point on level ground, the angle of elevation of the top of a tower is ${a}°. After walking ${d} m straight towards the tower, the angle of elevation becomes ${b}°. Find ${ask === 0 ? "the height of the tower" : "the distance from the second point to the foot of the tower"} in metres. Give the exact value with a rational denominator (rationalise the denominator if a surd is left in it).`;
     },
     solve: ([pi, d, ask]) => {
       const [a, b] = TWO[pi];
@@ -1896,7 +1909,8 @@ export const B14: Def[] = [
         ? [
             { id: "far-only", kind: "conceptual", competency: HD, says: `${d} m was taken as the whole distance from the first point to the tower; it is only the distance walked, and the rest (x) is unknown.`, predict: pr(qscale(T3(a), d)) },
             { id: "near-only", kind: "conceptual", competency: HD, says: `${d} m was taken as the distance from the second point to the tower; the second point is x m from the tower, an unknown.`, predict: pr(qscale(T3(b), d)) },
-            { id: "angle-difference", kind: "conceptual", competency: TR, says: `The difference of the angles (${HA[b] - HA[a]}°) was used in one triangle; the two angles belong to two different right triangles that share the height.`, predict: pr(qscale(diff, d)) },
+            // only for 30°/60°, where the difference 30° is a standard angle a learner knows (tan 15° is not)
+            ...(pi === 0 ? [{ id: "angle-difference", kind: "conceptual", competency: TR, says: `The difference of the angles (${HA[b] - HA[a]}°) was used in one triangle; the two angles belong to two different right triangles that share the height.`, predict: pr(qscale(diff, d)) } as Bug] : []),
           ]
         : [
             { id: "height-given", kind: "procedural", competency: HD, says: "The height of the tower was given; the question asks for the distance from the second point.", predict: pr(twoH(pi, d)) },
@@ -1915,7 +1929,7 @@ export const B14: Def[] = [
     difficulty: ([pi, , ask]) => (pi === 0 ? (ask === 1 ? 1 : 2) : 3),
     word: ([pi, d, ask]) => {
       const [a, b] = TWO[pi].map((i) => HA[i]);
-      return `${nm(d + pi)} stands on the bank of a river and sees the top of a tree on the opposite bank at an angle of elevation of ${b}°. Moving ${d} m straight back from the bank, the angle becomes ${a}°. Find ${ask === 0 ? "the height of the tree" : "the width of the river"} in metres (exact value).`;
+      return `${nm(d + pi)} stands on the bank of a river and sees the top of a tree on the opposite bank at an angle of elevation of ${b}°. Moving ${d} m straight back from the bank, the angle becomes ${a}°. Find ${ask === 0 ? "the height of the tree" : "the width of the river"} in metres. Give the exact value with a rational denominator (rationalise the denominator if a surd is left in it).`;
     },
     teach: {
       idea: "Each observation point gives a right triangle; the two triangles share the height h, and their bases differ by the distance walked.",
@@ -1975,7 +1989,7 @@ export const B14: Def[] = [
       return [p / q, (p * p + q * q) / (p * p - q * q), q / (2 * p)].filter((x) => !close(x, ans));
     },
     variants: () => [],
-    explain: (s) => (s.id === "conjugate" ? `(${SECPT[0].asks[1]} + …)(… − …) = 1, so ${s.inputs[0]} = ${s.inputs[1]} = ${fmt(Number(s.value))}` : s.id === "quotient" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${fmt(Number(s.value))}` : `${s.id === "add" ? "Add" : "Subtract"} the two equations and halve: (${s.inputs[0]} ${s.id === "add" ? "+" : "−"} ${s.inputs[1]}) ÷ 2 = ${fmt(Number(s.value))}`),
+    explain: (s) => (s.id === "conjugate" ? `(${SECPT[String(s.inputs[0]).startsWith("cosec") ? 1 : 0].given})(${s.inputs[0]}) = 1, so ${s.inputs[0]} = ${s.inputs[1]} = ${fmt(Number(s.value))}` : s.id === "quotient" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${fmt(Number(s.value))}` : `${s.id === "add" ? "Add" : "Subtract"} the two equations and halve: (${s.inputs[0]} ${s.id === "add" ? "+" : "−"} ${s.inputs[1]}) ÷ 2 = ${fmt(Number(s.value))}`),
     domain: [[2, 9], [1, 8], [0, 1], [0, 3]],
     keep: ([p, q]) => p > q && gcd(p, q) === 1,
     cap: 300,
@@ -1994,30 +2008,29 @@ export const B14: Def[] = [
     arity: 2,
     title: "Simplifying with the trigonometric identities",
     competency: IDN,
-    type: "expression",
-    mc: true,
+    // a choice among simplified forms: a typed expression would be accepted unsimplified (it is compared by value)
+    type: "choice",
     parse: none,
     reject: ([t, m]) => (t < 0 || t >= IDS.length || m < 1 || m > 6 ? "One of the sixteen expressions with a whole-number factor 1 to 6." : null),
-    prompt: ([t, m]) => `Simplify ${m === 1 ? IDS[t][0] : IDS[t][1] ? `${m}[${IDS[t][0]}]` : `${m}${IDS[t][0].startsWith("(") ? "" : " "}${IDS[t][0]}`}.`,
-    solve: ([t, m]) => ({ steps: [step("identity", "rewrite", IDN, [IDS[t][0]], IDS[t][2]), ...(m > 1 ? [step("factor", "multiply", IDN, [m, IDS[t][2]], scaleExpr(m, IDS[t][2]))] : [])], answer: scaleExpr(m, IDS[t][2]) }),
-    // independent: compare with the original expression evaluated numerically at several angles
+    prompt: ([t, m]) => `Simplify ${m === 1 ? IDS[t][0] : IDS[t][1] ? `${m}[${IDS[t][0]}]` : `${m}${IDS[t][0].startsWith("(") ? "" : " "}${IDS[t][0]}`}. Which of these is it equal to?`,
+    choices: (p) => idsOptions(p),
+    solve: ([t, m]) => ({ steps: [step("identity", "rewrite", IDN, [IDS[t][0]], IDS[t][2]), ...(m > 1 ? [step("factor", "multiply", IDN, [m, IDS[t][2]], scaleExpr(m, IDS[t][2]))] : [])], answer: idsOptions([t, m]).indexOf(scaleExpr(m, IDS[t][2])) }),
+    // independent: evaluate every option numerically at several angles; the chosen one must be the only option that
+    // agrees with the original expression
     validate: ([t, m], v) => {
-      if (typeof v !== "string") return false;
-      for (const x of [0.31, 0.52, 0.74, 0.96, 1.18, 1.37]) {
-        const got = ev(v, { t: x });
-        if (!Number.isFinite(got) || !close(got, m * IDS[t][3](x), 1e-8)) return false;
-      }
-      return true;
+      const opts = idsOptions([t, m]);
+      const agrees = (e: string) => [0.31, 0.52, 0.74, 0.96, 1.18, 1.37].every((x) => {
+        const got = ev(e, { t: x });
+        return Number.isFinite(got) && close(got, m * IDS[t][3](x), 1e-8);
+      });
+      return typeof v === "number" && opts[v] !== undefined && agrees(opts[v]) && opts.filter(agrees).length === 1;
     },
-    bugs: ([t, m]) => [
-      { id: "identity-slip", kind: "recall", competency: IDN, says: IDS[t][5], predict: scaleExpr(m, IDS[t][4]) },
-      ...(m > 1 ? [{ id: "factor-dropped", kind: "procedural", competency: IDN, says: `The factor ${m} in front was lost while simplifying; it multiplies the whole result.`, predict: IDS[t][2] } as Bug] : []),
-    ],
-    distractors: ([t, m]) => {
-      const right = (x: number) => m * IDS[t][3](x);
-      return ["sec θ", "cos²θ", "2", "cot θ", "sin θ cos θ"]
-        .map((e) => scaleExpr(m, e))
-        .filter((e) => ![0.4, 0.9, 1.3].every((x) => close(ev(e, { t: x }), right(x), 1e-8)));
+    bugs: ([t, m]) => {
+      const opts = idsOptions([t, m]);
+      return [
+        { id: "identity-slip", kind: "recall", competency: IDN, says: IDS[t][5], predict: opts.indexOf(scaleExpr(m, IDS[t][4])) },
+        ...(m > 1 ? [{ id: "factor-dropped", kind: "procedural", competency: IDN, says: `The factor ${m} in front was lost while simplifying; it multiplies the whole result.`, predict: opts.indexOf(IDS[t][2]) } as Bug] : []),
+      ].filter((b) => (b.predict as number) >= 0);
     },
     variants: () => [],
     explain: (s) => (s.id === "identity" ? `Using the identities, ${s.inputs[0]} = ${s.value}` : `Multiply by ${s.inputs[0]}: ${s.value}`),
@@ -2091,7 +2104,7 @@ export const B14: Def[] = [
       return !!a && !!b && !qeq(a, Qn(0)) && !qeq(b, Qn(0)) && !(f1 === f2 && t1 === t2) && !(op === 1 && qeq(a, b)) && !(op === 4 && qeq(qmul(a, a), qmul(b, b)));
     },
     cap: 400,
-    difficulty: ([, , , , op]) => (op >= 3 ? 1 : op === 2 ? 3 : 2),
+    difficulty: ([, , , , op]) => (op === 2 ? 1 : op <= 1 ? 2 : 3),
     teach: {
       idea: "The ratios of 30°, 45° and 60° come from two triangles: half an equilateral triangle of side 2 (sides 1, √3, 2) and half a square of side 1 (sides 1, 1, √2).",
       method: "Write down each value (sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2, cos the reverse order, tan = sin ÷ cos), then do the arithmetic with surds exactly.",

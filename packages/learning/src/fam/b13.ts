@@ -216,7 +216,12 @@ const CONEV_DOM: [number, number][] = [[0, 6], [1, 10], [0, 1], [0, 1]];
 const SPH_DOM: [number, number][] = [[1, 14], [0, 1], [0, 1], [0, 1]];
 const SHELL_DOM: [number, number][] = [[2, 20], [1, 6], [0, 2]];
 const HER_DOM: [number, number][] = [[3, 24], [3, 24], [3, 24]];
-const herOk = ([a, b, c]: number[]) => a <= b && b <= c && a + b > c && (a + b + c) % 2 === 0;
+const herOk = ([a, b, c]: number[]) => {
+  if (!(a <= b && b <= c && a + b > c && (a + b + c) % 2 === 0)) return false;
+  // Grade 9: the area's surd keeps a small square-free part (√m with m under 100)
+  const s = (a + b + c) / 2;
+  return sqfree(s * (s - a) * (s - b) * (s - c))[1] < 100;
+};
 
 /** Triangles with whole-number sides up to 25 and a whole-number area: [x, y, z, area]. */
 const HTRI: [number, number, number, number][] = [];
@@ -281,7 +286,8 @@ const csOk = ([s, t, k, o, H]: number[]) => {
 };
 const RC_DOM: [number, number][] = [[0, 2], [1, 12], [1, 30], [1, 6], [1, 12]];
 const rcOk = ([m, a, b, c, d]: number[]) => {
-  if (m === 0) return b >= 2 && b <= 6 && a <= 10 && c === 1 && d === 1;
+  // mode 0: c 1 sphere → spheres, 2 hemisphere → spheres (b even), 3 sphere → hemispheres
+  if (m === 0) return b >= 2 && b <= 8 && a <= 10 && c <= 3 && (c !== 2 || b % 2 === 0) && d === 1;
   if (m === 1) return b < a && b <= 4 && c === 1 && d === 1;
   if (c >= a || d > b) return false;
   const n = q(3 * a * a * b, c * c * d);
@@ -379,9 +385,9 @@ const REASONS = [
   "An exterior angle of a triangle equals the sum of the two interior opposite angles.",
 ];
 const REASON_MIS = [1, 0, 3, 2, 1, 6, 5];
-const RS_DOM: [number, number][] = [[0, 6], [5, 31], [0, 5]];
+const RS_DOM: [number, number][] = [[0, 20], [5, 31], [0, 5]];
 const rsB = (a: number) => 5 * (((a * 3) % 9) + 4);
-const rsOk = ([c, a]: number[]) => (c >= 5 ? 5 * a + rsB(a) <= 170 : true);
+const rsOk = ([c, a]: number[]) => (RS_CASES[c].r >= 5 ? 5 * a + rsB(a) <= 170 : true);
 const CRIT = ["SSS", "SAS", "ASA", "AAS", "RHS", "None of these: the facts are not enough"];
 const CRIT_MIS = [5, 2, 3, 2, 5, 1];
 const CR_DOM: [number, number][] = [[0, 5], [3, 12], [0, 11]];
@@ -410,29 +416,44 @@ function fourOf(total: number, right: number, mis: number, seed: number): number
   const k = seed % 4;
   return [...base.slice(k), ...base.slice(0, k)];
 }
-/** The reason-for-a-step configurations: (where the angles are, the relation the step uses). */
-const RS_GEO: { config: "cross" | "line" | "parallel" | "triangle" | "exterior"; a1?: [string, boolean]; a2?: [string, boolean]; rel: "equal" | "sum180" | "tri" | "ext" }[] = [
-  { config: "cross", rel: "equal" },
-  { config: "line", rel: "sum180" },
-  { config: "parallel", a1: ["left", true], a2: ["right", true], rel: "equal" },
-  { config: "parallel", a1: ["right", false], a2: ["right", true], rel: "equal" },
-  { config: "parallel", a1: ["right", true], a2: ["right", true], rel: "sum180" },
-  { config: "triangle", rel: "tri" },
-  { config: "exterior", rel: "ext" },
+/** The reason-for-a-step configurations: the reason r (an index into REASONS), where the angles are and the relation the
+ * step uses (for the independent check), the statement for angles A and b, and an everyday form (who: a name). Three
+ * configurations (different letters, positions and angles) for each of the seven reasons. */
+type RsGeo = { config: "cross" | "line" | "parallel" | "triangle" | "exterior"; a1?: [string, boolean]; a2?: [string, boolean]; rel: "equal" | "sum180" | "tri" | "ext" };
+const ALT: RsGeo = { config: "parallel", a1: ["left", true], a2: ["right", true], rel: "equal" };
+const COR: RsGeo = { config: "parallel", a1: ["right", false], a2: ["right", true], rel: "equal" };
+const COI: RsGeo = { config: "parallel", a1: ["right", true], a2: ["right", true], rel: "sum180" };
+const RS_CASES: { r: number; geo: RsGeo; t: (A: number, b: number) => string; w: (A: number, b: number, who: string) => string }[] = [
+  // vertically opposite angles
+  { r: 0, geo: { config: "cross", rel: "equal" }, t: (A) => `Lines AB and CD cross at O. ∠AOC = ${A}°. A proof says: "so ∠BOD = ${A}°."`, w: (A, _b, who) => `On a town map, two straight roads AB and CD cross at a junction O. ${who} measures the angle between the roads, ∠AOC = ${A}°, and writes: "so ∠BOD = ${A}°."` },
+  { r: 0, geo: { config: "cross", rel: "equal" }, t: (A) => `Lines PQ and RS cross at M. ∠PMS = ${A}°. A proof says: "so ∠QMR = ${A}°."`, w: (A, _b, who) => `A pair of scissors is opened so that its two straight blades PQ and RS cross at the screw M. ${who} measures ∠PMS = ${A}° and writes: "so ∠QMR = ${A}°."` },
+  { r: 0, geo: { config: "cross", rel: "equal" }, t: (A) => `Lines XY and UV cross at K. ∠XKV = ${A}°. A proof says: "so ∠YKU = ${A}°."`, w: (A, _b, who) => `Two straight sticks XY and UV are tied together where they cross, at K, to hold up a tomato plant. ${who} measures ∠XKV = ${A}° and writes: "so ∠YKU = ${A}°."` },
+  // linear pair
+  { r: 1, geo: { config: "line", rel: "sum180" }, t: (A) => `O is a point on line AB, and ray OC starts at O. ∠AOC = ${A}°. A proof says: "so ∠BOC = ${180 - A}°."`, w: (A, _b, who) => `A straight railway track AB has a level crossing at O, from which a straight footpath OC leads away. ${who} measures ∠AOC = ${A}° and writes: "so ∠BOC = ${180 - A}°."` },
+  { r: 1, geo: { config: "line", rel: "sum180" }, t: (A) => `P, Q and R lie on a straight line in that order, and ray QS starts at Q. ∠PQS = ${A}°. A proof says: "so ∠RQS = ${180 - A}°."`, w: (A, _b, who) => `A ladder QS leans against a wall, with its foot Q on the straight edge PR of the floor (P, Q, R in that order). ${who} measures ∠PQS = ${A}° and writes: "so ∠RQS = ${180 - A}°."` },
+  { r: 1, geo: { config: "line", rel: "sum180" }, t: (A) => `Ray OC stands on line XY at O. ∠XOC = ${A}°. A proof says: "so ∠COY = ${180 - A}°."`, w: (A, _b, who) => `A straight pole OC leans out from the point O on the straight front edge XY of a stage. ${who} measures ∠XOC = ${A}° and writes: "so ∠COY = ${180 - A}°."` },
+  // alternate angles
+  { r: 2, geo: ALT, t: (A) => `AB ∥ CD. A line crosses AB at X and CD at Y, with A and D on opposite sides of XY. ∠AXY = ${A}°. A proof says: "so ∠XYD = ${A}°."`, w: (A, _b, who) => `The two edges AB and CD of a straight road are parallel. A painted line on the road meets edge AB at X and edge CD at Y, with A and D on opposite sides of XY. ${who} measures ∠AXY = ${A}° and writes: "so ∠XYD = ${A}°."` },
+  { r: 2, geo: ALT, t: (A) => `PQ ∥ RS. A line crosses PQ at M and RS at N, with Q and R on opposite sides of MN. ∠QMN = ${A}°. A proof says: "so ∠MNR = ${A}°."`, w: (A, _b, who) => `The two rails PQ and RS of a straight railway line are parallel. A straight crack in a sleeper meets rail PQ at M and rail RS at N, with Q and R on opposite sides of MN. ${who} measures ∠QMN = ${A}° and writes: "so ∠MNR = ${A}°."` },
+  { r: 2, geo: ALT, t: (A) => `AB ∥ CD. A line crosses AB at E and CD at F, with B and C on opposite sides of EF. ∠BEF = ${A}°. A proof says: "so ∠EFC = ${A}°."`, w: (A, _b, who) => `The top edge AB and the bottom edge CD of a window are parallel, and a straight crack in the glass runs from E on AB to F on CD, with B and C on opposite sides of EF. ${who} measures ∠BEF = ${A}° and writes: "so ∠EFC = ${A}°."` },
+  // corresponding angles
+  { r: 3, geo: COR, t: (A) => `AB ∥ CD. A line PQ crosses AB at X and CD at Y, in the order P, X, Y, Q, with B and D on the same side of PQ. ∠PXB = ${A}°. A proof says: "so ∠XYD = ${A}°."`, w: (A, _b, who) => `On a ruled notebook page, two printed lines AB and CD are parallel. ${who} draws a straight pencil line PQ that crosses AB at X and CD at Y, in the order P, X, Y, Q, with B and D on the same side of PQ. ${who} measures ∠PXB = ${A}° and writes: "so ∠XYD = ${A}°."` },
+  { r: 3, geo: COR, t: (A) => `PQ ∥ RS. A line LM crosses PQ at X and RS at Y, in the order L, X, Y, M, with Q and S on the same side of LM. ∠LXQ = ${A}°. A proof says: "so ∠XYS = ${A}°."`, w: (A, _b, who) => `Two parallel shelves PQ and RS are fixed to a wall, and a straight slanting rod LM rests across them, crossing PQ at X and RS at Y, in the order L, X, Y, M, with Q and S on the same side of LM. ${who} measures ∠LXQ = ${A}° and writes: "so ∠XYS = ${A}°."` },
+  { r: 3, geo: COR, t: (A) => `AB ∥ CD. A line EF crosses AB at G and CD at H, in the order E, G, H, F, with A and C on the same side of EF. ∠AGE = ${A}°. A proof says: "so ∠CHG = ${A}°."`, w: (A, _b, who) => `The two banks AB and CD of a straight canal are parallel, and a straight bridge EF crosses bank AB at G and bank CD at H, in the order E, G, H, F, with A and C on the same side of EF. ${who} measures ∠AGE = ${A}° and writes: "so ∠CHG = ${A}°."` },
+  // co-interior angles
+  { r: 4, geo: COI, t: (A) => `AB ∥ CD. A line crosses AB at X and CD at Y, with B and D on the same side of XY. ∠BXY = ${A}°. A proof says: "so ∠XYD = ${180 - A}°."`, w: (A, _b, who) => `A wooden gate has two parallel bars AB and CD, and a slanting brace that meets AB at X and CD at Y, with B and D on the same side of XY. ${who} measures ∠BXY = ${A}° and writes: "so ∠XYD = ${180 - A}°."` },
+  { r: 4, geo: COI, t: (A) => `PQ ∥ RS. A line crosses PQ at M and RS at N, with P and R on the same side of MN. ∠PMN = ${A}°. A proof says: "so ∠MNR = ${180 - A}°."`, w: (A, _b, who) => `The two long sides PQ and RS of a ladder are parallel, and a slanting support meets PQ at M and RS at N, with P and R on the same side of MN. ${who} measures ∠PMN = ${A}° and writes: "so ∠MNR = ${180 - A}°."` },
+  { r: 4, geo: COI, t: (A) => `AB ∥ CD. A line crosses AB at E and CD at F, with A and C on the same side of EF. ∠AEF = ${A}°. A proof says: "so ∠EFC = ${180 - A}°."`, w: (A, _b, who) => `The top and bottom edges AB and CD of a blackboard are parallel, and a straight chalk line meets AB at E and CD at F, with A and C on the same side of EF. ${who} measures ∠AEF = ${A}° and writes: "so ∠EFC = ${180 - A}°."` },
+  // angle sum of a triangle
+  { r: 5, geo: { config: "triangle", rel: "tri" }, t: (A, b) => `In ΔABC, ∠A = ${A}° and ∠B = ${b}°. A proof says: "so ∠C = ${180 - A - b}°."`, w: (A, b, who) => `A triangular garden plot ABC is fenced on all three sides. ${who} measures the corners ∠A = ${A}° and ∠B = ${b}° and writes, without measuring the third corner: "so ∠C = ${180 - A - b}°."` },
+  { r: 5, geo: { config: "triangle", rel: "tri" }, t: (A, b) => `In ΔPQR, ∠P = ${A}° and ∠R = ${b}°. A proof says: "so ∠Q = ${180 - A - b}°."`, w: (A, b, who) => `A triangular flag PQR is cut from cloth. ${who} measures ∠P = ${A}° and ∠R = ${b}° and writes, without measuring the corner Q: "so ∠Q = ${180 - A - b}°."` },
+  { r: 5, geo: { config: "triangle", rel: "tri" }, t: (A, b) => `In ΔXYZ, ∠Y = ${A}° and ∠Z = ${b}°. A proof says: "so ∠X = ${180 - A - b}°."`, w: (A, b, who) => `Three villages X, Y and Z are joined by straight roads. On the map ${who} measures ∠Y = ${A}° and ∠Z = ${b}° and writes, without measuring at X: "so ∠X = ${180 - A - b}°."` },
+  // exterior angle of a triangle
+  { r: 6, geo: { config: "exterior", rel: "ext" }, t: (A, b) => `In ΔABC, side BC is extended beyond C to a point D. ∠A = ${A}° and ∠B = ${b}°. A proof says: "so ∠ACD = ${A + b}°."`, w: (A, b, who) => `In a triangular roof frame ABC, the bottom beam BC sticks out beyond C to a point D. ${who} measures ∠A = ${A}° and ∠B = ${b}° and writes, without measuring at C: "so ∠ACD = ${A + b}°."` },
+  { r: 6, geo: { config: "exterior", rel: "ext" }, t: (A, b) => `In ΔPQR, side QR is extended beyond R to a point S. ∠P = ${A}° and ∠Q = ${b}°. A proof says: "so ∠PRS = ${A + b}°."`, w: (A, b, who) => `A triangular signboard PQR stands on a straight rod QR that sticks out beyond R to S. ${who} measures ∠P = ${A}° and ∠Q = ${b}° and writes, without measuring at R: "so ∠PRS = ${A + b}°."` },
+  { r: 6, geo: { config: "exterior", rel: "ext" }, t: (A, b) => `In ΔABC, side CA is extended beyond A to a point D. ∠B = ${A}° and ∠C = ${b}°. A proof says: "so ∠BAD = ${A + b}°."`, w: (A, b, who) => `A triangular park ABC has a straight path along CA that goes on beyond A to a gate D. ${who} measures ∠B = ${A}° and ∠C = ${b}° and writes, without measuring at A: "so ∠BAD = ${A + b}°."` },
 ];
-const rsText = (c: number, a: number) => {
-  const A = 5 * a;
-  const b = rsB(a);
-  return [
-    `Lines AB and CD cross at O. ∠AOC = ${A}°. A proof says: "so ∠BOD = ${A}°."`,
-    `O is a point on line AB, and ray OC starts at O. ∠AOC = ${A}°. A proof says: "so ∠BOC = ${180 - A}°."`,
-    `AB ∥ CD. A line crosses AB at X and CD at Y, with A and D on opposite sides of XY. ∠AXY = ${A}°. A proof says: "so ∠XYD = ${A}°."`,
-    `AB ∥ CD. A line PQ crosses AB at X and CD at Y, in the order P, X, Y, Q, with B and D on the same side of PQ. ∠PXB = ${A}°. A proof says: "so ∠XYD = ${A}°."`,
-    `AB ∥ CD. A line crosses AB at X and CD at Y, with B and D on the same side of XY. ∠BXY = ${A}°. A proof says: "so ∠XYD = ${180 - A}°."`,
-    `In ΔABC, ∠A = ${A}° and ∠B = ${b}°. A proof says: "so ∠C = ${180 - A - b}°."`,
-    `In ΔABC, side BC is extended beyond C to a point D. ∠A = ${A}° and ∠B = ${b}°. A proof says: "so ∠ACD = ${A + b}°."`,
-  ][c];
-};
+const rsText = (c: number, a: number) => RS_CASES[c].t(5 * a, rsB(a));
 type Fact = { k: "s"; i: number; j: number; v: number } | { k: "a"; i: number; v: number };
 /** The facts given for congruence case c, with vertex names rotated by rot and lengths/angles from L. */
 function critFacts(c: number, L: number, rot: number): Fact[] {
@@ -445,7 +466,11 @@ function critFacts(c: number, L: number, rot: number): Fact[] {
   if (c === 2) return [an(u, 0), s(u, v, 0), an(v, 3)];
   if (c === 3) return [an(u, 0), an(v, 3), s(v, w, 1)];
   if (c === 4) return [{ k: "a", i: v, v: 90 }, s(w, u, 3), s(u, v, 0)];
-  return [s(u, v, 0), s(v, w, 1), an(u, 0)];
+  // SSA with two possible triangles: adjacent side L + k, opposite side L, and adjacent × sin A < L < adjacent
+  const adj = 1 + (L % 3);
+  let A = 30 + 5 * ((L * 3) % 5);
+  while ((L + adj) * Math.sin((A * Math.PI) / 180) >= L) A -= 5;
+  return [s(u, v, adj), s(v, w, 0), { k: "a", i: u, v: A }];
 }
 const V1 = ["A", "B", "C"];
 const V2 = ["P", "Q", "R"];
@@ -615,7 +640,7 @@ export const B13: Def[] = [
     reject: rj(CONEV_DOM, coneOk, "Cones with radius 3–50 cm and height up to 80 cm whose slant height is a whole number."),
     prompt: ([t, k, o, g]) => {
       const [r, h, l] = leg(t, k, o);
-      return `A right circular cone has a base radius of ${r} cm and ${g ? `a slant height of ${l}` : `a height of ${h}`} cm. Taking π = ${piName(piFor(r))}, find its volume, in cm³. (A fraction is fine.)`;
+      return `A right circular cone has a base radius of ${r} cm and ${g ? `a slant height of ${l}` : `a height of ${h}`} cm. Taking π = ${piName(piFor(r))}, find its volume, in cm³. (Give the exact value; a fraction or mixed number is fine.)`;
     },
     solve: ([t, k, o, g]) => {
       const [r, h, l] = leg(t, k, o);
@@ -659,7 +684,7 @@ export const B13: Def[] = [
     },
     word: ([t, k, o, g]) => {
       const [r, h, l] = leg(t, k, o);
-      return `A heap of rice at a mill is shaped like a cone with a base radius of ${r} m and ${g ? `a slant height of ${l}` : `a height of ${h}`} m. What volume of rice is in the heap, in m³? (π = ${piName(piFor(r))}; a fraction is fine.)`;
+      return `A heap of rice at a mill is shaped like a cone with a base radius of ${r} m and ${g ? `a slant height of ${l}` : `a height of ${h}`} m. What volume of rice is in the heap, in m³? (π = ${piName(piFor(r))}; give the exact value, a fraction or mixed number is fine.)`;
     },
     teach: {
       idea: "A cone fits exactly three times into a cylinder with the same base and height, so its volume is one third of the cylinder's: ⅓πr²h.",
@@ -678,7 +703,7 @@ export const B13: Def[] = [
     // [k, s, a, g]: radius 7k/2 cm; s 0 sphere, 1 solid hemisphere; a 0 surface area, 1 volume; g 0 radius given, 1 diameter given
     parse: none,
     reject: rj(SPH_DOM, () => true, "Radii from 3.5 cm to 49 cm in steps of 3.5 cm."),
-    prompt: ([k, s, a, g]) => `A ${s ? "solid hemisphere" : "sphere"} has a ${g ? `diameter of ${7 * k}` : `radius of ${D(7 * k, 2)}`} cm. Taking π = 22/7, find its ${a ? "volume, in cm³" : s ? "total surface area (curved surface and flat face), in cm²" : "surface area, in cm²"}. (A fraction is fine.)`,
+    prompt: ([k, s, a, g]) => `A ${s ? "solid hemisphere" : "sphere"} has a ${g ? `diameter of ${7 * k}` : `radius of ${D(7 * k, 2)}`} cm. Taking π = 22/7, find its ${a ? "volume, in cm³" : s ? "total surface area (curved surface and flat face), in cm²" : "surface area, in cm²"}. (Give the exact value; a fraction or mixed number is fine.)`,
     solve: ([k, s, a, g]) => {
       const r = q(7 * k, 2);
       const steps: Step[] = g ? [step("radius", "half", CS, [7 * k], dec(r))] : [];
@@ -734,10 +759,14 @@ export const B13: Def[] = [
     domain: SPH_DOM,
     difficulty: ([, s, , g]) => (!s && !g ? 1 : s && g ? 3 : 2),
     figure: ([k, s, , g]) => (s ? null : { type: "solid", name: "sphere", dims: [g ? `d = ${7 * k} cm` : `r = ${D(7 * k, 2)} cm`] }),
+    // contexts chosen to fit the size (radius 3.5k cm): small balls, a football at 10.5 cm, globes and tanks when large
     word: ([k, s, a, g]) => {
       const size = g ? `a diameter of ${7 * k}` : `a radius of ${D(7 * k, 2)}`;
-      if (!s) return a ? `A solid steel ball for a machine has ${size} cm. How much steel is in it, in cm³? (π = 22/7; a fraction is fine.)` : `A leather football has ${size} cm. How much leather covers it, in cm²? (π = 22/7; a fraction is fine.)`;
-      return a ? `A solid hemispherical paperweight of glass has ${size} cm. How much glass is in it, in cm³? (π = 22/7; a fraction is fine.)` : `${name(k)} paints a solid wooden hemisphere with ${size} cm all over, including its flat face. What area is painted, in cm²? (π = 22/7; a fraction is fine.)`;
+      const ex = "(π = 22/7; give the exact value, a fraction or mixed number is fine.)";
+      if (!s && a) return k <= 2 ? `A solid steel ball for a machine has ${size} cm. How much steel is in it, in cm³? ${ex}` : k <= 6 ? `A solid stone ball on top of a garden gate post has ${size} cm. How much stone is in it, in cm³? ${ex}` : `A spherical water tank has ${size} cm (measured inside). How much water can it hold, in cm³? ${ex}`;
+      if (!s) return k <= 2 ? `A small rubber ball has ${size} cm. What is the area of its surface, in cm²? ${ex}` : k === 3 ? `A leather football has ${size} cm. How much leather covers it, in cm²? ${ex}` : `A globe for a school hall has ${size} cm. How much printed map is needed to cover it exactly, in cm²? ${ex}`;
+      if (a) return k <= 2 ? `A solid hemispherical paperweight of glass has ${size} cm. How much glass is in it, in cm³? ${ex}` : `A solid concrete hemisphere used as a road divider has ${size} cm. How much concrete is in it, in cm³? ${ex}`;
+      return k <= 4 ? `${name(k)} paints a solid wooden hemisphere with ${size} cm all over, including its flat face. What area is painted, in cm²? ${ex}` : `A solid concrete hemisphere marking the edge of a car park has ${size} cm. It is painted all over before it is put in place, including its flat face. What area is painted, in cm²? ${ex}`;
     },
     teach: {
       idea: "A sphere's surface is exactly four circles of the same radius (4πr²), and its volume is 4/3 πr³. A hemisphere is half a sphere: curved surface 2πr², volume 2/3 πr³.",
@@ -761,7 +790,7 @@ export const B13: Def[] = [
       const what = s === 0 ? `A hollow metal ball has an inner radius of ${r} cm and an outer radius of ${R} cm. Find the volume of metal in it, in cm³.`
         : s === 1 ? `A hemispherical metal bowl has an inner radius of ${r} cm and an outer radius of ${R} cm. Find the volume of metal in the bowl, in cm³.`
         : `A hemispherical bowl has an inner radius of ${r} cm and an outer radius of ${R} cm. Find its total surface area (inside, outside and the flat ring at the rim), in cm².`;
-      return `${what} Write the answer as a multiple of π and give only the number in front of π (for 52π, write 52; a fraction is fine).`;
+      return `${what} Write the answer as a multiple of π and give only the number in front of π (for 52π, write 52; give the exact value, a fraction or mixed number is fine).`;
     },
     solve: ([r, t, s]) => {
       const R = r + t;
@@ -802,8 +831,8 @@ export const B13: Def[] = [
     figure: ([r, t, s]) => (s === 0 ? { type: "solid", name: "sphere", dims: [`inner r = ${r} cm`, `outer R = ${r + t} cm`] } : null),
     word: ([r, t, s]) => {
       const R = r + t;
-      return s === 0 ? `A shot-put shell is a hollow iron ball with an outer radius of ${R} cm and walls ${t} cm thick. How much iron is in it, in cm³? Give only the number in front of π (a fraction is fine).`
-        : s === 1 ? `${name(r)}'s brass bowl is half of a hollow sphere: its inside radius is ${r} cm and the brass is ${t} cm thick. How much brass is in the bowl, in cm³? Give only the number in front of π (a fraction is fine).`
+      return s === 0 ? `A shot-put shell is a hollow iron ball with an outer radius of ${R} cm and walls ${t} cm thick. How much iron is in it, in cm³? Give only the number in front of π (exact; a fraction or mixed number is fine).`
+        : s === 1 ? `${name(r)}'s brass bowl is half of a hollow sphere: its inside radius is ${r} cm and the brass is ${t} cm thick. How much brass is in the bowl, in cm³? Give only the number in front of π (exact; a fraction or mixed number is fine).`
         : `A hemispherical steel bowl ${t} cm thick has an inside radius of ${r} cm. It is polished inside, outside and on its flat rim. What area is polished, in cm²? Give only the number in front of π.`;
     },
     teach: {
@@ -823,7 +852,7 @@ export const B13: Def[] = [
     mc: true,
     // [a, b, c]: sides with a ≤ b ≤ c and an even perimeter (so s is a whole number)
     parse: none,
-    reject: rj(HER_DOM, herOk, "Triangles with whole-number sides 3–24 cm (shortest first) and an even perimeter."),
+    reject: rj(HER_DOM, herOk, "Triangles with whole-number sides 3–24 cm (shortest first), an even perimeter and an area √m with m under 100 after simplifying."),
     prompt: ([a, b, c]) => `A triangle has sides of ${a} cm, ${b} cm and ${c} cm. Use Heron's formula to find its area, in cm². Give the exact value (a surd such as 6√5 is fine).`,
     solve: ([a, b, c]) => {
       const s = (a + b + c) / 2;
@@ -858,7 +887,8 @@ export const B13: Def[] = [
       const s = (a + b + c) / 2;
       return isqrt(s * (s - a) * (s - b) * (s - c)) !== null ? 1 : c <= 15 ? 2 : 3;
     },
-    figure: ([a, b, c]) => ({ type: "triangle", sides: [`${c} cm`, `${a} cm`, `${b} cm`] }),
+    // the drawn triangle's base is its longest side, the right side the middle one and the left side the shortest
+    figure: ([a, b, c]) => ({ type: "triangle", sides: [`${c} cm`, `${b} cm`, `${a} cm`] }),
     word: ([a, b, c]) => `${name(a + b)}'s family owns a triangular plot of land with sides of ${a} m, ${b} m and ${c} m. What is the area of the plot, in m²? Give the exact value (a surd such as 6√5 is fine).`,
     teach: {
       idea: "Three sides fix a triangle, so they fix its area. Heron's formula gives it without the height: area = √(s(s − a)(s − b)(s − c)), where s is half the perimeter.",
@@ -1058,7 +1088,7 @@ export const B13: Def[] = [
     // [bt, x, y, h]: base 0 square of side x, 1 rectangle x × y, 2 right triangle with legs x and y; height h
     parse: none,
     reject: rj(PYRV_DOM, pyrvOk, "Square, rectangular or right-triangle bases with sides 2–20 cm and heights 3–30 cm."),
-    prompt: ([bt, x, y, h]) => `A pyramid has ${bt === 0 ? `a square base of side ${x} cm` : bt === 1 ? `a rectangular base ${x} cm by ${y} cm` : `a base that is a right-angled triangle with shorter sides ${x} cm and ${y} cm`} and a vertical height of ${h} cm. Find its volume, in cm³. (A fraction is fine.)`,
+    prompt: ([bt, x, y, h]) => `A pyramid has ${bt === 0 ? `a square base of side ${x} cm` : bt === 1 ? `a rectangular base ${x} cm by ${y} cm` : `a base that is a right-angled triangle with shorter sides ${x} cm and ${y} cm`} and a vertical height of ${h} cm. Find its volume, in cm³. (Give the exact value; a fraction or mixed number is fine.)`,
     solve: ([bt, x, y, h]) => {
       const base = bt === 2 ? q(x * y, 2) : Q(x * y);
       const V = qm(base, q(h, 3));
@@ -1087,7 +1117,7 @@ export const B13: Def[] = [
     cap: 300,
     difficulty: ([bt]) => (bt === 0 ? 1 : bt === 1 ? 2 : 3),
     figure: ([bt, x, y, h]) => ({ type: "solid", name: "pyramid", dims: [bt === 0 ? `base ${x} cm × ${x} cm` : bt === 1 ? `base ${x} cm × ${y} cm` : `right-triangle base ${x} cm, ${y} cm`, `height = ${h} cm`] }),
-    word: ([bt, x, y, h]) => `A souvenir of solid glass is a pyramid ${h} cm tall with ${bt === 0 ? `a square base of side ${x} cm` : bt === 1 ? `a rectangular base ${x} cm by ${y} cm` : `a right-angled triangular base with shorter sides ${x} cm and ${y} cm`}. How much glass is in it, in cm³? (A fraction is fine.)`,
+    word: ([bt, x, y, h]) => `A souvenir of solid glass is a pyramid ${h} cm tall with ${bt === 0 ? `a square base of side ${x} cm` : bt === 1 ? `a rectangular base ${x} cm by ${y} cm` : `a right-angled triangular base with shorter sides ${x} cm and ${y} cm`}. How much glass is in it, in cm³? (Give the exact value; a fraction or mixed number is fine.)`,
     teach: {
       idea: "Three equal pyramids fill a prism with the same base and height, so a pyramid's volume is ⅓ × base area × height.",
       method: "Find the base area (side², length × breadth, or ½ × the two shorter sides for a right triangle), multiply by the height and divide by 3.",
@@ -1112,7 +1142,7 @@ export const B13: Def[] = [
         : s === 1 ? `A solid is a cylinder of radius ${r} cm and height ${H} cm with a cone of the same radius and height ${h} cm on top.`
         : s === 2 ? `A capsule is a cylinder of radius ${r} cm and length ${H} cm with a hemisphere of the same radius on each end.`
         : `A solid is a cylinder of radius ${r} cm and height ${H} cm with a hemisphere of the same radius on top.`;
-      return `${shape} Taking π = 22/7, find its volume, in cm³. (A fraction is fine.)`;
+      return `${shape} Taking π = 22/7, find its volume, in cm³. (Give the exact value; a fraction or mixed number is fine.)`;
     },
     solve: ([s, k, H, h]) => {
       const r = q(7 * k, 2);
@@ -1157,10 +1187,12 @@ export const B13: Def[] = [
     difficulty: ([s, k]) => (s === 1 && k % 2 === 0 ? 1 : s === 0 || s === 3 ? 2 : s === 1 ? 2 : 3),
     word: ([s, k, H, h]) => {
       const r = D(7 * k, 2);
-      return s === 0 ? `${name(k + h)}'s wooden spinning top is a cone ${h} cm tall on a hemisphere, both of radius ${r} cm. How much wood is in the top, in cm³? (π = 22/7; a fraction is fine.)`
-        : s === 1 ? `A model rocket is a cylinder of radius ${r} cm and height ${H} cm topped by a cone ${h} cm tall of the same radius. How much space is inside the model, in cm³? (π = 22/7; a fraction is fine.)`
-        : s === 2 ? `A medicine capsule is a cylinder ${H} mm long and ${r} mm in radius, with half a ball of the same radius at each end. How much medicine does it hold, in mm³? (π = 22/7; a fraction is fine.)`
-        : `A grain store is a cylinder of radius ${r} m and height ${H} m with a dome shaped like a hemisphere on top. How much grain can it hold when full to the top of the dome, in m³? (π = 22/7; a fraction is fine.)`;
+      const ex = "(π = 22/7; give the exact value, a fraction or mixed number is fine.)";
+      // contexts chosen to fit the size (radius 3.5k)
+      if (s === 0) return k <= 2 ? `${name(k + h)}'s wooden spinning top is a cone ${h} cm tall on a hemisphere, both of radius ${r} cm. How much wood is in the top, in cm³? ${ex}` : `A solid marker buoy for a lake is a cone ${h} cm tall on a hemisphere, both of radius ${r} cm. How much material is in the buoy, in cm³? ${ex}`;
+      if (s === 1) return k <= 2 ? `A model rocket is a cylinder of radius ${r} cm and height ${H} cm topped by a cone ${h} cm tall of the same radius. How much space is inside the model, in cm³? ${ex}` : `A metal storage bin is a cylinder of radius ${r} cm and height ${H} cm with a conical lid ${h} cm tall of the same radius. How much does it hold when full to the tip of the lid, in cm³? ${ex}`;
+      if (s === 2) return k === 1 ? `A medicine capsule is a cylinder ${H} mm long and ${r} mm in radius, with half a ball of the same radius at each end. How much medicine does it hold, in mm³? ${ex}` : `A gas cylinder for a camping stove is shaped like a capsule: a cylinder ${H} cm long and ${r} cm in radius with a hemisphere at each end. How much space is inside it, in cm³? ${ex}`;
+      return k <= 2 ? `A grain store is a cylinder of radius ${r} m and height ${H} m with a dome shaped like a hemisphere on top. How much grain can it hold when full to the top of the dome, in m³? ${ex}` : `A water tank is a cylinder of radius ${r} cm and height ${H} cm with a hemispherical top. How much water does it hold when full to the top, in cm³? ${ex}`;
     },
     teach: {
       idea: "Volume adds up: a solid made of two pieces holds what the two pieces hold together.",
@@ -1183,10 +1215,10 @@ export const B13: Def[] = [
     prompt: ([s, t, k, o, H]) => {
       if (s >= 2) {
         const r = D(7 * k, 2);
-        return `${s === 2 ? `A solid capsule is a cylinder of radius ${r} cm and length ${H} cm with a hemisphere of the same radius on each end.` : `A solid is a cylinder of radius ${r} cm and height ${H} cm, standing on its base, with a hemisphere of the same radius on top.`} Taking π = 22/7, find the total area of its outside surface, in cm². (A fraction is fine.)`;
+        return `${s === 2 ? `A solid capsule is a cylinder of radius ${r} cm and length ${H} cm with a hemisphere of the same radius on each end.` : `A solid is a cylinder of radius ${r} cm and height ${H} cm, standing on its base, with a hemisphere of the same radius on top.`} Taking π = 22/7, find the total area of its outside surface, in cm². (Give the exact value; a fraction or mixed number is fine.)`;
       }
       const [r, h] = leg(t, k, o);
-      return `${s === 0 ? `A solid toy is a cone of height ${h} cm on a hemisphere, both of radius ${r} cm.` : `A solid is a cylinder of radius ${r} cm and height ${H} cm, standing on its base, with a cone of the same radius and height ${h} cm on top.`} Taking π = ${piName(piFor(r))}, find the total area of its outside surface, in cm². (A fraction is fine.)`;
+      return `${s === 0 ? `A solid toy is a cone of height ${h} cm on a hemisphere, both of radius ${r} cm.` : `A solid is a cylinder of radius ${r} cm and height ${H} cm, standing on its base, with a cone of the same radius and height ${h} cm on top.`} Taking π = ${piName(piFor(r))}, find the total area of its outside surface, in cm². (Give the exact value; a fraction or mixed number is fine.)`;
     },
     solve: (p) => {
       const { pi, parts } = combsParts(p);
@@ -1214,7 +1246,8 @@ export const B13: Def[] = [
       const total = parts.reduce((acc, x) => qa(acc, x[2]), Q(0));
       const r = s >= 2 ? q(7 * k, 2) : Q(leg(t, k, o)[0]);
       const r2 = qm(r, r);
-      const out: Bug[] = [B("hidden-faces", "conceptual", COMB, "The surface areas of the separate solids were added, including the circles where they are joined. Those faces are inside the solid and are not part of its outside.", dec(qm(pi, qa(total, qm(Q(2), r2)))))];
+      // each join hides two circles (one face of each solid); a capsule has two joins
+      const out: Bug[] = [B("hidden-faces", "conceptual", COMB, "The surface areas of the separate solids were added, including the circles where they are joined. Those faces are inside the solid and are not part of its outside.", dec(qm(pi, qa(total, qm(Q(s === 2 ? 4 : 2), r2)))))];
       if (s <= 1) {
         const [rr, h, l] = leg(t, k, o);
         out.push(B("height-for-slant", "conceptual", CS, "The cone's height was used in πrl. The cone's surface needs the slant height.", dec(qm(pi, qs(total, Q(rr * (l - h)))))));
@@ -1236,11 +1269,11 @@ export const B13: Def[] = [
     word: ([s, t, k, o, H]) => {
       if (s >= 2) {
         const r = D(7 * k, 2);
-        return s === 2 ? `A capsule-shaped solid soap is a cylinder ${H} cm long and ${r} cm in radius with a hemisphere on each end. It is wrapped in a thin film that covers it exactly. How much film is used, in cm²? (π = 22/7; a fraction is fine.)` : `A stone pillar is a cylinder of radius ${r} m and height ${H} m with a hemispherical cap. It is to be painted all over, including the base it stands on (before it is set up). What area is painted, in m²? (π = 22/7; a fraction is fine.)`;
+        return s === 2 ? `A capsule-shaped solid soap is a cylinder ${H} cm long and ${r} cm in radius with a hemisphere on each end. It is wrapped in a thin film that covers it exactly. How much film is used, in cm²? (π = 22/7; give the exact value, a fraction or mixed number is fine.)` : `A stone pillar is a cylinder of radius ${r} m and height ${H} m with a hemispherical cap. It is to be painted all over, including the base it stands on (before it is set up). What area is painted, in m²? (π = 22/7; give the exact value, a fraction or mixed number is fine.)`;
       }
       const [r, h] = leg(t, k, o);
       const pi = piName(piFor(r));
-      return s === 0 ? `${name(r + h)} paints a solid toy made of a cone ${h} cm tall on a hemisphere, both of radius ${r} cm. What area is painted, in cm²? (π = ${pi}; a fraction is fine.)` : `A solid wooden model of a temple tower is a cylinder of radius ${r} cm and height ${H} cm with a cone ${h} cm tall on top. It is varnished all over, including its base. What area is varnished, in cm²? (π = ${pi}; a fraction is fine.)`;
+      return s === 0 ? `${name(r + h)} paints a solid toy made of a cone ${h} cm tall on a hemisphere, both of radius ${r} cm. What area is painted, in cm²? (π = ${pi}; give the exact value, a fraction or mixed number is fine.)` : `A solid wooden model of a temple tower is a cylinder of radius ${r} cm and height ${H} cm with a cone ${h} cm tall on top. It is varnished all over, including its base. What area is varnished, in cm²? (π = ${pi}; give the exact value, a fraction or mixed number is fine.)`;
     },
     teach: {
       idea: "When two solids are joined, the faces where they touch disappear inside; only the faces you could still touch from outside count.",
@@ -1256,16 +1289,20 @@ export const B13: Def[] = [
     competency: COMB,
     type: "exact",
     mc: true,
-    // [m, a, b, c, d]: m 0 sphere radius a·b into spheres of radius a (count); 1 sphere radius a drawn into a rod of radius b (length);
+    // [m, a, b, c, d]: m 0 a solid of radius a·b into solids of radius a (count; c 1 sphere → spheres, 2 hemisphere →
+    // spheres, 3 sphere → hemispheres); 1 sphere radius a drawn into a rod of radius b (length);
     // 2 cylinder radius a, height b recast into cones of radius c, height d (count)
     parse: none,
     reject: rj(RC_DOM, rcOk, "Whole-number sizes where the recast pieces come out as stated."),
     prompt: ([m, a, b, c, d]) =>
-      m === 0 ? `A solid metal sphere of radius ${a * b} cm is melted and recast into small solid spheres, each of radius ${a} cm. How many small spheres are made?`
-      : m === 1 ? `A solid metal sphere of radius ${a} cm is melted and drawn into a solid cylindrical rod of radius ${b} cm. How long is the rod, in cm? (A fraction is fine.)`
+      m === 0 ? `A solid metal ${c === 2 ? "hemisphere" : "sphere"} of radius ${a * b} cm is melted and recast into small solid ${c === 3 ? "hemispheres" : "spheres"}, each of radius ${a} cm. How many small ${c === 3 ? "hemispheres" : "spheres"} are made?`
+      : m === 1 ? `A solid metal sphere of radius ${a} cm is melted and drawn into a solid cylindrical rod of radius ${b} cm. How long is the rod, in cm? (Give the exact value; a fraction or mixed number is fine.)`
       : `A solid metal cylinder of radius ${a} cm and height ${b} cm is melted and recast into solid cones, each of radius ${c} cm and height ${d} cm. How many cones are made?`,
     solve: ([m, a, b, c, d]) => {
-      if (m === 0) return { steps: [step("big", "note", CS, [`4/3 π × ${a * b}³`], ""), step("ratio", "divide", COMB, [`${a * b}³`, `${a}³`], b ** 3)], answer: String(b ** 3) };
+      if (m === 0) {
+        const n = c === 1 ? b ** 3 : c === 2 ? b ** 3 / 2 : 2 * b ** 3;
+        return { steps: [step("big", "note", CS, [`${c === 2 ? "2/3" : "4/3"} π × ${a * b}³`], ""), step("small", "note", CS, [`${c === 3 ? "2/3" : "4/3"} π × ${a}³`], ""), step("ratio", "divide", COMB, [`${c === 2 ? "2/3" : "4/3"} × ${a * b}³`, `${c === 3 ? "2/3" : "4/3"} × ${a}³`], n)], answer: String(n) };
+      }
       if (m === 1) {
         const L = q(4 * a ** 3, 3 * b * b);
         return { steps: [step("equal", "note", COMB, [`π × ${b}² × length = 4/3 π × ${a}³`], ""), step("length", "divide", COMB, [dec(q(4 * a ** 3, 3)), b * b], dec(L))], answer: dec(L) };
@@ -1277,24 +1314,32 @@ export const B13: Def[] = [
     validate: ([m, a, b, c, d], v) => {
       const x = num(v);
       if (x === null) return false;
-      if (m === 0) return Number.isInteger(x) && near(x * (4 / 3) * Math.PI * a ** 3, (4 / 3) * Math.PI * (a * b) ** 3, 1e-9);
+      if (m === 0) return Number.isInteger(x) && near(x * (c === 3 ? 2 / 3 : 4 / 3) * Math.PI * a ** 3, (c === 2 ? 2 / 3 : 4 / 3) * Math.PI * (a * b) ** 3, 1e-9);
       if (m === 1) return near(Math.PI * b * b * x, (4 / 3) * Math.PI * a ** 3, 1e-9);
       return Number.isInteger(x) && near((x * Math.PI * c * c * d) / 3, Math.PI * a * a * b, 1e-9);
     },
     bugs: ([m, a, b, c, d]) => {
-      if (m === 0) return [B("radius-ratio", "conceptual", COMB, "The radii were divided. Volume grows with the cube of the radius, so divide the volumes: (R/r)³.", String(b)), B("squared", "conceptual", COMB, "The ratio of radii was squared, as for surface areas. Volumes use cubes.", String(b * b))];
+      if (m === 0) {
+        const n = c === 1 ? b ** 3 : c === 2 ? b ** 3 / 2 : 2 * b ** 3;
+        return [
+          B("radius-ratio", "conceptual", COMB, "The radii were divided. Volume grows with the cube of the radius, so divide the volumes.", String(b)),
+          B("squared", "conceptual", COMB, "The ratio of the radii was squared, as for surface areas. Volumes use cubes.", String(b * b)),
+          ...(c === 2 ? [B("hemisphere-as-sphere", "conceptual", CS, "The hemisphere was treated as a whole sphere. It holds only half as much metal: 2/3 πR³.", String(b ** 3))] : []),
+          ...(c === 3 ? [B("hemisphere-as-sphere", "conceptual", CS, "The small hemispheres were treated as whole spheres. Each holds only half as much: 2/3 πr³, so twice as many are made.", String(b ** 3))] : []),
+        ].filter((x) => Number(x.predict) !== n);
+      }
       if (m === 1) return [B("no-third", "recall", CS, "4πr³ was used for the sphere. Its volume is 4/3 πr³.", dec(q(4 * a ** 3, b * b))), B("not-squared", "procedural", CYL, "The rod's radius was not squared. The rod is a cylinder of volume πr² × length.", dec(q(4 * a ** 3, 3 * b)))];
       return [B("no-third", "conceptual", CS, "The cones were treated as cylinders. A cone holds ⅓πr²h, so three times as many are made.", dec(q(a * a * b, c * c * d))), B("not-squared", "procedural", CYL, "The radii were not squared. Volumes use πr².", dec(q(3 * a * b, c * d)))];
     },
-    distractors: ([m, a, b, c, d]) => (m === 0 ? [String(b ** 3 * 2), String(3 * b)] : m === 1 ? [dec(q(2 * a ** 3, 3 * b * b)), dec(q(4 * a * a, 3 * b))] : [dec(q(6 * a * a * b, c * c * d)), dec(q(a * a * b, 3 * c * c * d))]),
+    distractors: ([m, a, b, c, d]) => (m === 0 ? [String((c === 1 ? b ** 3 : c === 2 ? b ** 3 / 2 : 2 * b ** 3) * 2), String(3 * b)] : m === 1 ? [dec(q(2 * a ** 3, 3 * b * b)), dec(q(4 * a * a, 3 * b))] : [dec(q(6 * a * a * b, c * c * d)), dec(q(a * a * b, 3 * c * c * d))]),
     variants: () => [],
-    explain: say({ big: "Volume of the big sphere", ratio: "Number of small spheres", equal: "Same volume of metal", length: "Length", count: "Number of cones" }),
+    explain: say({ big: "Volume of the big solid", small: "Volume of one small piece", ratio: "Number of small pieces", equal: "Same volume of metal", length: "Length", count: "Number of cones" }),
     domain: RC_DOM,
     cap: 300,
-    difficulty: ([m]) => (m === 0 ? 1 : m === 2 ? 2 : 3),
+    difficulty: ([m, , , c]) => (m === 0 ? (c === 1 ? 1 : 2) : m === 2 ? 2 : 3),
     word: ([m, a, b, c, d]) =>
-      m === 0 ? `A jeweller melts a silver ball of radius ${a * b} mm and makes small round beads of radius ${a} mm from it. How many beads can be made?`
-      : m === 1 ? `${name(a + b)} melts a solid copper ball of radius ${a} cm and draws it into a rod of radius ${b} cm. How long is the rod, in cm? (A fraction is fine.)`
+      m === 0 ? (c === 1 ? `A jeweller melts a silver ball of radius ${a * b} mm and makes small round beads of radius ${a} mm from it. How many beads can be made?` : c === 2 ? `A candle maker melts a solid hemisphere of wax of radius ${a * b} mm and moulds round wax beads of radius ${a} mm from it. How many beads can be made?` : `A sweet maker melts a ball of chocolate of radius ${a * b} mm and moulds it into small hemispherical sweets of radius ${a} mm. How many sweets can be made?`)
+      : m === 1 ? `${name(a + b)} melts a solid copper ball of radius ${a} cm and draws it into a rod of radius ${b} cm. How long is the rod, in cm? (Give the exact value; a fraction or mixed number is fine.)`
       : `Kulfi is packed in a cylindrical tin of radius ${a} cm and height ${b} cm. It is all served in full cones of radius ${c} cm and height ${d} cm (no ice-cream on top). How many cones can be filled?`,
     teach: {
       idea: "Melting and recasting changes the shape but not the amount of metal, so the volume before equals the total volume after.",
@@ -1316,7 +1361,7 @@ export const B13: Def[] = [
     reject: rj(FR_DOM, frOk, "Frustums with radii up to 40 cm, heights up to 40 cm and whole-number slant heights, where π = 22/7 cancels."),
     prompt: (p) => {
       const { R, r, h } = frParts(p);
-      return `A frustum of a cone (a cone with its top cut off parallel to the base) has end radii of ${R} cm and ${r} cm and a height of ${h} cm. Taking π = 22/7, find its ${["volume, in cm³", "curved surface area, in cm²", "total surface area (curved surface and both circular ends), in cm²"][p[0]]}.${p[0] === 0 ? " (A fraction is fine.)" : ""}`;
+      return `A frustum of a cone (a cone with its top cut off parallel to the base) has end radii of ${R} cm and ${r} cm and a height of ${h} cm. Taking π = 22/7, find its ${["volume, in cm³", "curved surface area, in cm²", "total surface area (curved surface and both circular ends), in cm²"][p[0]]}.${p[0] === 0 ? " (Give the exact value; a fraction or mixed number is fine.)" : ""}`;
     },
     solve: (p) => {
       const { R, r, h, l } = frParts(p);
@@ -1361,7 +1406,7 @@ export const B13: Def[] = [
     difficulty: ([a]) => (a === 1 ? 1 : a === 0 ? 2 : 3),
     word: (p) => {
       const { R, r, h } = frParts(p);
-      return p[0] === 0 ? `A steel bucket is shaped like a frustum: ${h} cm deep, with a radius of ${R} cm at the top and ${r} cm at the bottom. How much water does it hold when full, in cm³? (π = 22/7; a fraction is fine.)`
+      return p[0] === 0 ? `A steel bucket is shaped like a frustum: ${h} cm deep, with a radius of ${R} cm at the top and ${r} cm at the bottom. How much water does it hold when full, in cm³? (π = 22/7; give the exact value, a fraction or mixed number is fine.)`
         : p[0] === 1 ? `A lampshade is the sloping side of a frustum ${h} cm tall, with end radii of ${R} cm and ${r} cm. How much cloth covers it (no top or bottom), in cm²? (π = 22/7)`
         : `${name(R + r)} makes a closed tin shaped like a frustum, ${h} cm tall, with end radii of ${R} cm and ${r} cm. How much metal sheet is needed for all of it, in cm²? (π = 22/7)`;
     },
@@ -1445,7 +1490,7 @@ export const B13: Def[] = [
     // [L, t, hand, ask]: hand length L cm; hand 0 minute hand for 5t minutes, 1 hour hand for t hours; ask 0 area swept, 1 distance travelled by the tip
     parse: none,
     reject: rj(CLK_DOM, () => true, "Hands 4–21 cm long, 5–55 minutes or 1–11 hours."),
-    prompt: ([L, t, hand, ask]) => `The ${hand ? "hour" : "minute"} hand of a clock is ${L} cm long. Taking π = ${piName(piFor(L))}, find the ${ask ? "distance its tip travels" : "area it sweeps"} in ${hand ? `${t} hour${t === 1 ? "" : "s"}` : `${5 * t} minutes`}, in ${ask ? "cm" : "cm²"}. (A fraction is fine.)`,
+    prompt: ([L, t, hand, ask]) => `The ${hand ? "hour" : "minute"} hand of a clock is ${L} cm long. Taking π = ${piName(piFor(L))}, find the ${ask ? "distance its tip travels" : "area it sweeps"} in ${hand ? `${t} hour${t === 1 ? "" : "s"}` : `${5 * t} minutes`}, in ${ask ? "cm" : "cm²"}. (Give the exact value; a fraction or mixed number is fine.)`,
     solve: ([L, t, hand, ask]) => {
       const pi = piFor(L);
       const angle = 30 * t;
@@ -1482,7 +1527,7 @@ export const B13: Def[] = [
     domain: CLK_DOM,
     cap: 300,
     difficulty: ([, t, hand]) => (!hand && [3, 6, 9].includes(t) ? 1 : !hand ? 2 : 3),
-    word: ([L, t, hand, ask]) => `${name(L + t)} watches the classroom clock, whose ${hand ? "hour" : "minute"} hand is ${L} cm long. During ${hand ? `${t} hour${t === 1 ? "" : "s"}` : `a ${5 * t}-minute lesson`}, how ${ask ? "far does the tip of the hand travel, in cm" : "much of the clock face does the hand sweep over, in cm²"}? (π = ${piName(piFor(L))}; a fraction is fine.)`,
+    word: ([L, t, hand, ask]) => `${name(L + t)} watches the classroom clock, whose ${hand ? "hour" : "minute"} hand is ${L} cm long. During ${hand ? `${t} hour${t === 1 ? "" : "s"}` : `a ${5 * t}-minute lesson`}, how ${ask ? "far does the tip of the hand travel, in cm" : "much of the clock face does the hand sweep over, in cm²"}? (π = ${piName(piFor(L))}; give the exact value, a fraction or mixed number is fine.)`,
     teach: {
       idea: "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 360° in 12 hours (30° an hour).",
       method: "Find the angle turned, then take that fraction of 360° of the whole circle: area θ/360 × πr², or distance θ/360 × 2πr.",
@@ -1559,7 +1604,7 @@ export const B13: Def[] = [
     // [f, n, x]: f 0 n.ddd… (x = d), 1 n.ababab… (x = ab), 2 0.nxxx… (n = the digit that does not repeat)
     parse: none,
     reject: rj(REC_DOM, recOk, "Recurring decimals with one repeating digit, a two-digit repeating block, or one digit before a repeating digit."),
-    prompt: (p) => `Write ${recText(p)} (${recNote(p)}) as a fraction p/q in its simplest form.`,
+    prompt: (p) => `Write ${recText(p)} (${recNote(p)}) as a fraction p/q.`,
     solve: (p) => {
       const [f, n, x] = p;
       const v = recValue(p);
@@ -1590,7 +1635,7 @@ export const B13: Def[] = [
     domain: REC_DOM,
     cap: 400,
     difficulty: ([f, n]) => (f === 0 && n === 0 ? 1 : f < 2 ? 2 : 3),
-    word: (p) => `${name(p[1] + p[2])}'s calculator shows ${recText(p)} and ${name(p[1] + p[2])} knows ${recNote(p)}. Which fraction p/q, in its simplest form, is this?`,
+    word: (p) => `${name(p[1] + p[2])}'s calculator shows ${recText(p)} and ${name(p[1] + p[2])} knows ${recNote(p)}. Which fraction p/q is this?`,
     teach: {
       idea: "A recurring decimal is rational: multiplying by a power of 10 shifts the repeating part, and subtracting makes the endless tail cancel.",
       method: "Let x be the number. Multiply by 10 for one repeating digit, by 100 for two, and subtract so the repeating tails cancel; then divide and simplify.",
@@ -1684,7 +1729,7 @@ export const B13: Def[] = [
     domain: PL_DOM,
     cap: 300,
     difficulty: ([p, m, n]) => (gcd(p, plQ([p, m, n])) > 1 ? 3 : m === 0 || n === 0 ? 1 : 2),
-    word: (p) => `₹${p[0]} is shared equally among ${plQ(p)} people, and each share is written as an exact decimal number of rupees. How many digits come after the decimal point?`,
+    word: (p) => `A computer divides ${p[0]} by ${plQ(p)} and prints the exact answer as a decimal number. How many digits does it print after the decimal point?`,
     teach: {
       idea: "p/(2^m 5^n) can be rewritten over 10^k, where k is the larger of m and n, so it has exactly k decimal places (after simplifying).",
       method: "Simplify the fraction, write the denominator as 2^m × 5^n, and take the larger power.",
@@ -1799,7 +1844,7 @@ export const B13: Def[] = [
     word: ([ti, m, ni, ask]) => {
       const [a, b, c] = SIM_TRIS[ti];
       const PQ = dec(q(a * m, SIM_N[ni]));
-      return ask < 2 ? `At the same time of day, a pole ${ask === 0 ? b : c} m tall casts a shadow ${a} m long, and a tower casts a shadow ${PQ} m long. How tall is the tower, in m?` : `${name(ti + m)} draws a triangular garden with sides ${a} m, ${b} m and ${c} m, then plans a ${m > SIM_N[ni] ? "larger" : "smaller"} garden of exactly the same shape whose side matching the ${a} m side is ${PQ} m. What is the perimeter of the ${m > SIM_N[ni] ? "larger" : "smaller"} garden, in m?`;
+      return ask < 2 ? `At the same time of day, a pole ${ask === 0 ? b : c} m tall casts a shadow ${a} m long, and a second pole nearby casts a shadow ${PQ} m long. How tall is the second pole, in m?` : `${name(ti + m)} draws a triangular garden with sides ${a} m, ${b} m and ${c} m, then plans a ${m > SIM_N[ni] ? "larger" : "smaller"} garden of exactly the same shape whose side matching the ${a} m side is ${PQ} m. What is the perimeter of the ${m > SIM_N[ni] ? "larger" : "smaller"} garden, in m?`;
     },
     teach: {
       idea: "Similar triangles have the same shape: matching angles are equal and every side is multiplied by the same scale factor.",
@@ -2242,10 +2287,18 @@ export const B13: Def[] = [
       const lens = [c.p1 * X + c.q1, c.p2 * X + c.q2, c.p3 * Y + c.q3, c.p4 * Y + c.q4];
       return lens[0] === lens[1] && lens[2] === lens[3] && lens.every((l) => l > 0);
     },
-    bugs: ([x, y]) => [
-      ...(x !== y ? [B("swapped", "procedural", LIN, "x and y were swapped: the first pair of lengths gives x, the second pair gives y.", `(${y}, ${x})`)] : []),
-      B("sign-slip", "procedural", LIN, "A number was moved to the other side of the equation without changing its sign.", `(${-x}, ${-y})`),
-    ],
+    bugs: (p) => {
+      const [x, y] = p;
+      const c = pgParts(p);
+      // p₁x + q₁ = p₂x + q₂ with q₁ moved across unchanged: (p₁ − p₂)x = q₂ + q₁ (and the same in the y equation)
+      const fr = (n: number, d: number) => dec(q(n, d)).replace(/^-/, "−");
+      const sx = q(c.q2 + c.q1, c.p1 - c.p2);
+      const sy = q(c.q4 + c.q3, c.p3 - c.p4);
+      return [
+        ...(x !== y ? [B("swapped", "procedural", LIN, "x and y were swapped: the first pair of lengths gives x, the second pair gives y.", `(${y}, ${x})`)] : []),
+        ...(!(qe(sx, Q(x)) && qe(sy, Q(y))) ? [B("sign-slip", "procedural", LIN, "In each equation the number beside the first expression was moved to the other side without changing its sign (added instead of subtracted).", `(${fr(sx[0], sx[1])}, ${fr(sy[0], sy[1])})`)] : []),
+      ];
+    },
     distractors: ([x, y]) => [`(${x + 1}, ${y})`, `(${x}, ${y + 1})`, `(${x + 1}, ${y + 1})`],
     variants: () => [],
     explain: say({ eq1: "First pair", eq2: "Second pair" }),
@@ -2270,33 +2323,23 @@ export const B13: Def[] = [
     title: "Choosing the reason for a step in an angle proof",
     competency: EUC,
     type: "choice",
-    // [c, a, seed]: configuration c (0 vertically opposite … 6 exterior angle), angle 5a degrees, seed orders the options
+    // [c, a, seed]: configuration c (RS_CASES: three for each of the seven reasons), angle 5a degrees, seed orders the options
     parse: none,
     reject: rj(RS_DOM, rsOk, "Angles from 25° to 155° in steps of 5° (triangles with a third angle of at least 10°)."),
-    choices: ([c, , seed]) => fourOf(7, c, REASON_MIS[c], seed).map((i) => REASONS[i]),
+    choices: ([c, , seed]) => fourOf(7, RS_CASES[c].r, REASON_MIS[RS_CASES[c].r], seed).map((i) => REASONS[i]),
     prompt: ([c, a]) => `${rsText(c, a)} Which reason justifies this step?`,
-    word: ([c, a]) => {
-      const A = 5 * a;
-      const b = rsB(a);
-      const who = name(c + a);
-      return [
-        `On a town map, two straight roads AB and CD cross at a junction O. ${who} measures the angle between the roads, ∠AOC = ${A}°, and writes: "so ∠BOD = ${A}°."`,
-        `A straight railway track AB has a level crossing at O, from which a straight footpath OC leads away. ${who} measures ∠AOC = ${A}° and writes: "so ∠BOC = ${180 - A}°."`,
-        `The two edges AB and CD of a straight road are parallel. A painted line on the road meets edge AB at X and edge CD at Y, with A and D on opposite sides of XY. ${who} measures ∠AXY = ${A}° and writes: "so ∠XYD = ${A}°."`,
-        `On a ruled notebook page, two printed lines AB and CD are parallel. ${who} draws a straight pencil line PQ that crosses AB at X and CD at Y, in the order P, X, Y, Q, with B and D on the same side of PQ. ${who} measures ∠PXB = ${A}° and writes: "so ∠XYD = ${A}°."`,
-        `A wooden gate has two parallel bars AB and CD, and a slanting brace that meets AB at X and CD at Y, with B and D on the same side of XY. ${who} measures ∠BXY = ${A}° and writes: "so ∠XYD = ${180 - A}°."`,
-        `A triangular garden plot ABC is fenced on all three sides. ${who} measures the corners ∠A = ${A}° and ∠B = ${b}° and writes, without measuring the third corner: "so ∠C = ${180 - A - b}°."`,
-        `In a triangular roof frame ABC, the bottom beam BC sticks out beyond C to a point D. ${who} measures ∠A = ${A}° and ∠B = ${b}° and writes, without measuring at C: "so ∠ACD = ${A + b}°."`,
-      ][c] + " Which reason justifies this step?";
+    word: ([c, a]) => `${RS_CASES[c].w(5 * a, rsB(a), name(c + a))} Which reason justifies this step?`,
+    solve: ([c, , seed]) => {
+      const r = RS_CASES[c].r;
+      return { steps: [step("reason", "note", EUC, [REASONS[r]], "")], answer: fourOf(7, r, REASON_MIS[r], seed).indexOf(r) };
     },
-    solve: ([c, , seed]) => ({ steps: [step("reason", "note", EUC, [REASONS[c]], "")], answer: fourOf(7, c, REASON_MIS[c], seed).indexOf(c) }),
     // independent: classify the situation from where the two angles lie (same or opposite side of the transversal,
     // between the parallel lines or outside) and the relation the numbers in the step satisfy
     validate: ([c, a, seed], v) => {
       if (typeof v !== "number") return false;
-      const text = fourOf(7, c, REASON_MIS[c], seed).map((i) => REASONS[i])[v];
+      const text = fourOf(7, RS_CASES[c].r, REASON_MIS[RS_CASES[c].r], seed).map((i) => REASONS[i])[v];
       if (!text) return false;
-      const g = RS_GEO[c];
+      const g = RS_CASES[c].geo;
       const nums = (rsText(c, a).match(/\d+(?=°)/g) ?? []).map(Number);
       const stepVal = nums[nums.length - 1];
       const relOk = g.rel === "equal" ? stepVal === nums[0] : g.rel === "sum180" ? stepVal + nums[0] === 180 : g.rel === "tri" ? nums[0] + nums[1] + stepVal === 180 : stepVal === nums[0] + nums[1];
@@ -2313,7 +2356,8 @@ export const B13: Def[] = [
       return false;
     },
     bugs: ([c, , seed]) => {
-      const opts = fourOf(7, c, REASON_MIS[c], seed);
+      const r = RS_CASES[c].r;
+      const opts = fourOf(7, r, REASON_MIS[r], seed);
       const says = [
         "The linear-pair reason was chosen, but the two angles are opposite each other at a crossing, and they are equal.",
         "Vertically opposite angles was chosen, but these two angles sit side by side on a straight line and add up to 180°.",
@@ -2323,13 +2367,16 @@ export const B13: Def[] = [
         "The exterior-angle reason was chosen, but the step uses the three angles inside the triangle.",
         "The angle-sum reason was chosen, but the step finds an exterior angle directly as the sum of the two opposite interior angles.",
       ];
-      return [B(`mix-${c}`, "conceptual", c >= 5 ? TPROP : PAR, says[c], opts.indexOf(REASON_MIS[c]))];
+      return [B(`mix-${r}`, "conceptual", r >= 5 ? TPROP : PAR, says[r], opts.indexOf(REASON_MIS[r]))];
     },
     variants: () => [],
     explain: (s) => `The reason: ${s.inputs[0]}`,
     domain: RS_DOM,
     cap: 300,
-    difficulty: ([c]) => (c <= 1 || c === 5 ? 1 : c === 6 ? 2 : 3),
+    difficulty: ([c]) => {
+      const r = RS_CASES[c].r;
+      return r <= 1 || r === 5 ? 1 : r === 6 ? 2 : 3;
+    },
     teach: {
       idea: "Each step of a proof must follow from something already accepted: a definition, an axiom or a theorem. The reason names it.",
       method: "Look at where the two angles are: at one crossing (vertically opposite or linear pair), at two crossings of parallel lines (Z = alternate, F = corresponding, C = co-interior), or in a triangle (angle sum, exterior angle).",
@@ -2447,7 +2494,14 @@ export const B13: Def[] = [
     // [r, d]: a circle of radius r cm and a point d cm from its centre
     parse: none,
     reject: rj(TC_DOM, tcOk, "Radii 2–12 cm and points up to twice the radius from the centre."),
-    prompt: ([r, d]) => `A circle has radius ${r} cm. A point P is ${d} cm from its centre${d === 0 ? " (P is the centre)" : ""}. How many tangents to the circle can be drawn through P?`,
+    // the circle is given by its radius, its diameter, or as the centre O with OP (fixed by r and d, for variety)
+    prompt: ([r, d]) => {
+      const mode = (7 * r + d) % 3;
+      const where = d === 0 ? " (P is the centre)" : "";
+      return mode === 0 ? `A circle has radius ${r} cm. A point P is ${d} cm from its centre${where}. How many tangents to the circle can be drawn through P?`
+        : mode === 1 ? `A circle has diameter ${2 * r} cm. A point P is ${d} cm from its centre${where}. How many tangents to the circle can be drawn through P?`
+        : `O is the centre of a circle of radius ${r} cm, and P is a point with OP = ${d} cm${where}. How many lines through P touch the circle at exactly one point?`;
+    },
     solve: ([r, d]) => ({ steps: [step("compare", "note", TAN, [d < r ? `${d} < ${r}: P is inside the circle` : d === r ? `${d} = ${r}: P is on the circle` : `${d} > ${r}: P is outside the circle`], d < r ? 0 : d === r ? 1 : 2)], answer: d < r ? 0 : d === r ? 1 : 2 }),
     // independent: turn a line round P and count the directions in which its distance from the centre equals the radius
     validate: ([r, d], v) => {
@@ -2462,7 +2516,14 @@ export const B13: Def[] = [
       }
       return v === count;
     },
-    bugs: ([r, d]) => (d < r ? [B("inside-two", "conceptual", TAN, "From a point inside the circle every line through it cuts the circle twice, so no line just touches it: there are no tangents.", 2), B("inside-one", "conceptual", TAN, "There is no tangent through a point inside the circle; every line through it is a secant.", 1)] : d === r ? [B("on-two", "conceptual", TAN, "At a point on the circle there is exactly one tangent, perpendicular to the radius there.", 2)] : [B("outside-one", "conceptual", TAN, "From a point outside the circle there are two tangents, one touching each side of the circle.", 1)]),
+    bugs: ([r, d]) => {
+      const right = d < r ? 0 : d === r ? 1 : 2;
+      const viaDiameter = d < 2 * r ? 0 : d === 2 * r ? 1 : 2;
+      return [
+        ...(d < r ? [B("inside-two", "conceptual", TAN, "It was thought that two tangents can be drawn from any point, as from a point outside the circle. P is inside, so every line through it cuts the circle twice and none just touches it.", 2), B("inside-one", "conceptual", TAN, "It was thought that one line through a point inside the circle can just touch it. Every line through an inside point crosses the circle at two points.", 1)] : d === r ? [B("on-two", "conceptual", TAN, "It was thought that two tangents pass through P, as for a point outside the circle. P is on the circle, so there is just one tangent there, at right angles to the radius.", 2)] : [B("outside-one", "conceptual", TAN, "It was thought that only one tangent can be drawn from P, as at a point on the circle. From a point outside the circle there are two, one touching each side.", 1)]),
+        ...((7 * r + d) % 3 === 1 && viaDiameter !== right ? [B("diameter-as-radius", "procedural", TAN, `The distance ${d} cm was compared with the diameter, ${2 * r} cm. It must be compared with the radius, half the diameter.`, viaDiameter)] : []),
+      ];
+    },
     variants: () => [],
     explain: (s) => `${s.inputs[0]}, so the number of tangents is ${s.value}.`,
     domain: TC_DOM,
