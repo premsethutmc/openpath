@@ -1,0 +1,154 @@
+.foundation {
+  max-width: 680px;
+  margin: auto;
+  padding: 16px;
+  color: #29243c;
+}
+.foundation h1 {
+  font-size: 1.65rem;
+}
+.foundation section,
+.foundation article {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 12px 0;
+}
+.foundation button,
+.foundation select,
+.foundation input {
+  min-height: 46px;
+  max-width: 100%;
+  font: inherit;
+}
+.foundation button {
+  white-space: normal;
+  margin: 4px;
+  padding: 10px 14px;
+}
+.foundation label {
+  display: block;
+  margin: 12px 0;
+}
+.foundation input:not([type="range"]) {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.foundation form {
+  border-top: 1px solid #ded5ed;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+.foundation progress {
+  width: 100%;
+  height: 8px;
+  accent-color: #7963b3;
+}
+.foundation .program-row {
+  text-align: left;
+  width: 100%;
+  margin: 0;
+}
+.foundation .notice {
+  background: #fff0df;
+  padding: 12px;
+  border-radius: 12px;
+}
+.foundation .manipulative {
+  background: #e8f6ef;
+}
+.foundation .two-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.foundation .two-groups div {
+  overflow-wrap: anywhere;
+}
+.foundation .numberline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 20px;
+}
+.foundation .numberline span {
+  padding: 4px;
+  border-bottom: 2px solid #7963b3;
+  min-width: 14px;
+  text-align: center;
+}
+.foundation .jump {
+  background: #dfd4f3;
+}
+.foundation .landing {
+  background: #f8c79b;
+}
+.foundation .array-row {
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: #62478c;
+}
+.foundation .fraction-strip {
+  display: grid;
+  width: 100%;
+  margin: 12px 0;
+}
+.foundation .fraction-strip button {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  border: 1px solid #57456e;
+  min-width: 0;
+  background: #fff;
+  height: 58px;
+}
+.foundation .fraction-strip .shaded {
+  background: #9b85c5;
+}
+.foundation .idea-picture {
+  font-size: 26px;
+  background: #e8f6ef;
+  padding: 16px;
+  border-radius: 12px;
+}
+.foundation ol {
+  padding-left: 20px;
+}
+.foundation li button {
+  text-align: left;
+}
+.foundation [role="alert"] {
+  background: #fff0df;
+  padding: 12px;
+  overflow-wrap: anywhere;
+}
+.foundation nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+.foundation [aria-pressed="true"] {
+  border: 2px solid #62478c;
+}
+.foundation button:focus-visible,
+.foundation input:focus-visible {
+  outline: 3px solid #62478c;
+  outline-offset: 2px;
+}
+
+.foundation .counted {
+  background: #bfe5cc;
+  border: 2px solid #526f59;
+}
+
+.foundation .numberline {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.foundation .numberline span {
+  flex: 0 0 24px;
+}
+.foundation summary {
+  min-height: 46px;
+  cursor: pointer;
+}

@@ -15,6 +15,9 @@ def lesson():
     return json.loads((Path(settings.BASE_DIR).parent / 'content/mathematics/programs/equivalent-fractions.v2.json').read_text())
 
 def checked_activity(event, pupil):
+    if event.get('kind') == 'math_foundation_activity':
+        from .math_foundation import checked_foundation
+        return checked_foundation(event, pupil)
     spec = lesson()
     allowed = {'kind', 'id', 'at', 'learnerId', 'journey', 'lessonVersion', 'action', 'stage', 'questionId', 'response', 'elapsedMs', 'sessionId'}
     if set(event) - allowed or event.get('kind') != 'math_activity' or event.get('learnerId') != str(pupil.pk) or (event.get('lessonVersion') != spec['version']):
@@ -44,7 +47,7 @@ def checked_activity(event, pupil):
     prior = list(PupilEvent.objects.filter(pupil=pupil, subject='mathematics').values_list('body', flat=True))
     if any((e.get('id') == event['id'] for e in prior)):
         raise ValidationError({'event': 'This activity ID already exists. Reload to confirm a retry.'})
-    own = [e for e in prior if e.get('journey') == event['journey']]
+    own = [e for e in prior if e.get('kind') == 'math_activity' and e.get('journey') == event['journey']]
     done = {e.get('stage') for e in own if e.get('action') == 'complete'}
     now = timezone.now()
     if stage['id'] == 'retention' and event['action'] != 'open':
