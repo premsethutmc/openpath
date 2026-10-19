@@ -7,7 +7,9 @@ import { useState } from "react";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
-import { moduleState, recovery, type ModulePhase } from "../../../packages/learning/src/intervention";
+import { problemOf } from "../../../packages/learning/src/families";
+import { familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
+import { checkWorking, canCheckWorking } from "../../../packages/learning/src/working";
 import { Icon } from "./icons";
 import type { LearnerRecords, LearningActivity } from "../../../packages/learning/src/records";
 
@@ -19,7 +21,7 @@ export interface Ctx {
   now: number;
   session: string;
   saving: boolean;
-  answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string }) => Promise<boolean>;
+  answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[] }) => Promise<boolean>;
   teach: (competency: string, strategy: string, rule: string) => Promise<boolean>;
 }
 export const STATUS_WORD: Record<SkillEvidence["status"], string> = {
@@ -53,6 +55,7 @@ interface Fb {
   qid: string;
   response: string;
   right: boolean;
+  working?: string[];
 }
 
 /** An answer box for any question type. */
@@ -80,6 +83,8 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
 function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => void; label?: string }) {
   const q = question(fb.qid);
   const says = fb.right ? null : misconceptionOf(q, fb.response)?.says;
+  const fam = fb.working?.length ? familyOf(fb.qid) : null;
+  const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
   return (
     <div className="stack enter">
       <div className={`feedback ${fb.right ? "good" : "bad"}`} role="status">
@@ -87,6 +92,12 @@ function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => vo
         {says && <p>{says}</p>}
         <p>{q.solution}</p>
       </div>
+      {check && (
+        <div className={`feedback ${check.valid ? "good" : "bad"}`} role="note" aria-label="Your working">
+          <strong>Your working{check.method && check.method.id !== "other" ? `: ${check.method.name.toLowerCase()}` : ""}</strong>
+          <p>{check.note}</p>
+        </div>
+      )}
       <div className="actions sticky">
         <button className="primary" onClick={onNext}>{label}</button>
       </div>
@@ -99,12 +110,22 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const q = question(qid);
   const [value, setValue] = useState("");
   const [hint, setHint] = useState(false);
+  const [working, setWorking] = useState("");
+  const fam = familyOf(qid);
+  const workable = !!fam && canCheckWorking(problemOf(fam)!);
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       <span className="counted">{COUNTS[activity]}</span>
       <p className="prompt">{q.prompt}</p>
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
+      {workable && (
+        <details className="working">
+          <summary>Show your working (optional)</summary>
+          <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />
+          <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>
+        </details>
+      )}
       {hint && q.hint && <p className="hint">{q.hint}</p>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
@@ -112,8 +133,9 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           className="primary"
           disabled={!value.trim() || ctx.saving}
           onClick={async () => {
-            const ok = await ctx.answer(qid, value, activity, { hints: hint ? 1 : 0, ...(context ? { context } : {}) });
-            if (ok) onAnswered?.({ qid, response: value, right: isCorrect(q, value) });
+            const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
+            const ok = await ctx.answer(qid, value, activity, { hints: hint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}) });
+            if (ok) onAnswered?.({ qid, response: value, right: isCorrect(q, value), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
@@ -177,12 +199,12 @@ function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens:
 }
 
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void }) {
+export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null }) {
   const [own, setOwn] = useState<Fb | null>(null);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session);
+  const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -239,7 +261,7 @@ export function Recovery({ original, ctx, onExit }: { original: string; ctx: Ctx
   const q = question(original);
   const trace = (
     <div className="trace" aria-label="What this problem uses">
-      {r.supports.map((s) => {
+      {r.supports.filter((s) => s.assessable).map((s) => {
         const e = ctx.evidence(s.id);
         return (
           <div key={s.id} className={`trace-row ${statusClass(e.status)} ${r.active === s.id ? "now" : ""}`}>
@@ -250,24 +272,42 @@ export function Recovery({ original, ctx, onExit }: { original: string; ctx: Ctx
       })}
     </div>
   );
+  // what the investigation found, in plain words (diagnostic@2; the support numbers are relative, not probabilities)
+  const finding = r.reasoning && r.reasoning.observed.length > 1 && (
+    <div className={`feedback ${r.reasoning.status === "established" ? "good" : "bad"}`} role="note" aria-label="What we think happened">
+      <strong>{r.reasoning.status === "established" ? "What we think happened" : r.reasoning.status === "uncertain" ? "Not sure yet" : "Looking into it"}</strong>
+      <p>{r.plan?.why ?? r.reason}</p>
+      {r.reasoning.status === "uncertain" && <p className="small">A teacher or parent can look at your working with you.</p>}
+    </div>
+  );
   if (fb) return <div className="stack"><p className="eyebrow">{fb.qid === original ? "The problem" : graph.get(question(fb.qid).competency).name}</p><Feedback fb={fb} onNext={() => setFb(null)} /></div>;
   if (r.phase === "attempt" || r.phase === "return")
     return (
       <div className="stack">
         <p className="eyebrow">{r.phase === "return" ? "Back to the original problem" : "A problem you are stuck on"}</p>
         <h1>{graph.get(q.competency).name}</h1>
-        {r.phase === "return" && <p className="why">The skill it needed is in place now. Try the original problem again. A second attempt counts as work with help, not on your own.</p>}
+        {finding}
+        {r.phase === "return" && <p className="why">{r.reason} A second attempt counts as work with help, not on your own.</p>}
         <Ask qid={original} activity="original" ctx={ctx} context={`recovery:${original}`} onAnswered={setFb} />
       </div>
     );
-  if (r.phase === "support" && r.active)
+  if (r.phase === "investigate" && r.question)
     return (
       <div className="stack">
-        <p className="eyebrow">Finding what this problem needs</p>
+        <p className="eyebrow">Working out what happened</p>
         <h1>{graph.get(q.competency).name}</h1>
         <p className="why">{r.reason}</p>
+        <Ask key={r.question} qid={r.question} activity="diagnostic" ctx={ctx} context={investigateContext(original)} onAnswered={setFb} />
+      </div>
+    );
+  if ((r.phase === "support" || r.phase === "teach") && r.active)
+    return (
+      <div className="stack">
+        <p className="eyebrow">{r.phase === "teach" ? "Learning the step that went wrong" : "Finding what this problem needs"}</p>
+        <h1>{graph.get(q.competency).name}</h1>
+        {finding || <p className="why">{r.reason}</p>}
         {trace}
-        <div className="panel"><Module key={r.active} competency={r.active} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} /></div>
+        <div className="panel"><Module key={r.active} competency={r.active} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} established={r.established} /></div>
       </div>
     );
   return (

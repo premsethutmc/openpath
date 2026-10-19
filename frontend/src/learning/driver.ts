@@ -5,7 +5,7 @@
 import { question } from "../../../packages/learning/src/content";
 import type { CurriculumRelease } from "../../../packages/learning/src/curriculum";
 import { DAY } from "../../../packages/learning/src/evidence";
-import { moduleState, recovery, type ModuleState } from "../../../packages/learning/src/intervention";
+import { investigateContext, moduleState, recovery, type Established, type ModuleState } from "../../../packages/learning/src/intervention";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
 
@@ -40,7 +40,7 @@ export class Driver {
     this.session = `s${++this.n}`;
   }
   state() {
-    return learnerState(this.learnerId, this.events, this.now);
+    return learnerState(this.learnerId, this.events, this.now, { currentSession: this.session });
   }
   enrol(grade: number, year: string, r: CurriculumRelease) {
     this.events.push(make.enrol(this.ctx(), grade, year, r));
@@ -48,14 +48,14 @@ export class Driver {
   goal(pathway: string, active = true) {
     this.events.push(make.goal(this.ctx(), pathway, active));
   }
-  answer(qid: string, response: string, activity: LearningActivity, o: { hints?: number; context?: string } = {}) {
+  answer(qid: string, response: string, activity: LearningActivity, o: { hints?: number; context?: string; working?: string[] } = {}) {
     this.events.push(make.attempt(this.ctx(), qid, response, activity, o));
     this.trace.push(`${activity}:${qid}=${response}${o.hints ? `+hint` : ""}`);
   }
   /** One step of a skill module, as the app does it. Returns the state that was acted on. */
-  step(competency: string, answerer: Answerer, o: { hintOnGuided?: boolean } = {}): ModuleState {
+  step(competency: string, answerer: Answerer, o: { hintOnGuided?: boolean; established?: Established | null } = {}): ModuleState {
     const st = this.state();
-    const ms = moduleState(competency, st.records, st.evidence(competency), this.now, this.session);
+    const ms = moduleState(competency, st.records, st.evidence(competency), this.now, this.session, o.established);
     if (ms.phase === "chapter") {
       this.events.push(make.teach(this.ctx(), competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis"));
       this.trace.push(`teach:${ms.strategy!.id}`);
@@ -90,8 +90,12 @@ export class Driver {
         this.answer(original, answerer(original, r.phase), "original", { context: `recovery:${original}` });
         continue;
       }
-      if (r.phase === "support") {
-        this.step(r.active!, answerer);
+      if (r.phase === "investigate") {
+        this.answer(r.question!, answerer(r.question!, r.phase), "diagnostic", { context: investigateContext(original) });
+        continue;
+      }
+      if (r.phase === "support" || r.phase === "teach") {
+        this.step(r.active!, answerer, { established: r.established });
         continue;
       }
       break;

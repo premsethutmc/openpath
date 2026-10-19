@@ -1,3 +1,4 @@
+import { competencyGraph } from "../../../packages/mathematics/src/prerequisites";
 import React, { useState, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -23,6 +24,7 @@ import {
 } from "../../../packages/mathematics/src/program";
 import { candidateResponse } from "../../../packages/mathematics/src/adapter";
 import "./style.css";
+const currentGraph = competencyGraph();
 type Saved = {
   version: 1;
   records: Record<string, ProgramRecord>;
@@ -509,14 +511,15 @@ function App() {
                   </>
                 )}
                 <details>
-                  <summary>Evidence and prerequisites</summary>
+                  <summary>Evidence and prerequisites (graph 1.1.0)</summary>
                   <p>
                     {c.id} · {c.version}
                   </p>
                   <p>{c.demonstrationCriteria.join(" ")}</p>
                   <p>
                     Prerequisites:{" "}
-                    {c.prerequisites.join(", ") || c.rootJustification}
+                    {currentGraph.find((n) => n.id === c.id)!.prerequisites.join(", ") ||
+                      currentGraph.find((n) => n.id === c.id)!.rootJustification}
                   </p>
                   <p>
                     NCERT/CBSE proposed grade {c.gradeRange[0]}: provisional.

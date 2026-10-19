@@ -1,0 +1,527 @@
+{
+  "schema": "math-prerequisite-review@1",
+  "baseGraphVersion": "1.0.0",
+  "activeGraphVersion": "1.1.0",
+  "competencies": 200,
+  "beforeEdges": 200,
+  "afterEdges": 166,
+  "removedEdges": [
+    {
+      "capability": "MATH.measurement.mass-comparison",
+      "requires": "MATH.measurement.length-comparison"
+    },
+    {
+      "capability": "MATH.measurement.time-order",
+      "requires": "MATH.measurement.mass-comparison"
+    },
+    {
+      "capability": "MATH.measurement.money-coins",
+      "requires": "MATH.measurement.time-order"
+    },
+    {
+      "capability": "MATH.number.equal-groups",
+      "requires": "MATH.number.subtraction-regroup"
+    },
+    {
+      "capability": "MATH.measurement.standard-length",
+      "requires": "MATH.measurement.money-coins"
+    },
+    {
+      "capability": "MATH.measurement.standard-mass",
+      "requires": "MATH.measurement.standard-length"
+    },
+    {
+      "capability": "MATH.measurement.capacity",
+      "requires": "MATH.measurement.standard-mass"
+    },
+    {
+      "capability": "MATH.measurement.clock",
+      "requires": "MATH.measurement.capacity"
+    },
+    {
+      "capability": "MATH.measurement.money-change",
+      "requires": "MATH.measurement.clock"
+    },
+    {
+      "capability": "MATH.number.thousands",
+      "requires": "MATH.number.unit-fractions"
+    },
+    {
+      "capability": "MATH.number.multiplication-tables",
+      "requires": "MATH.number.thousands"
+    },
+    {
+      "capability": "MATH.number.fraction-models",
+      "requires": "MATH.number.division-remainders"
+    },
+    {
+      "capability": "MATH.geometry.lines-segments",
+      "requires": "MATH.geometry.symmetry-fold"
+    },
+    {
+      "capability": "MATH.measurement.length-conversion",
+      "requires": "MATH.measurement.money-change"
+    },
+    {
+      "capability": "MATH.measurement.elapsed-time",
+      "requires": "MATH.measurement.perimeter-intro"
+    },
+    {
+      "capability": "MATH.measurement.money-decimals",
+      "requires": "MATH.measurement.elapsed-time"
+    },
+    {
+      "capability": "MATH.number.large-numbers",
+      "requires": "MATH.number.fraction-comparison"
+    },
+    {
+      "capability": "MATH.number.equivalent-fractions",
+      "requires": "MATH.number.long-division"
+    },
+    {
+      "capability": "MATH.geometry.symmetry-lines",
+      "requires": "MATH.geometry.circles"
+    },
+    {
+      "capability": "MATH.measurement.area-squares",
+      "requires": "MATH.measurement.money-decimals"
+    },
+    {
+      "capability": "MATH.measurement.unit-conversions",
+      "requires": "MATH.measurement.rectangle-perimeter"
+    },
+    {
+      "capability": "MATH.number.factors-multiples",
+      "requires": "MATH.number.decimal-tenths"
+    },
+    {
+      "capability": "MATH.number.fraction-add",
+      "requires": "MATH.number.primes"
+    },
+    {
+      "capability": "MATH.number.decimal-operations",
+      "requires": "MATH.number.fraction-multiply"
+    },
+    {
+      "capability": "MATH.geometry.angle-measure",
+      "requires": "MATH.geometry.symmetry-lines"
+    },
+    {
+      "capability": "MATH.geometry.nets",
+      "requires": "MATH.geometry.triangle-types"
+    },
+    {
+      "capability": "MATH.measurement.time-speed-intro",
+      "requires": "MATH.measurement.volume-cubes"
+    },
+    {
+      "capability": "MATH.number.integers",
+      "requires": "MATH.number.percent-intro"
+    },
+    {
+      "capability": "MATH.number.fraction-product",
+      "requires": "MATH.number.integer-add"
+    },
+    {
+      "capability": "MATH.number.ratio",
+      "requires": "MATH.number.decimal-product"
+    },
+    {
+      "capability": "MATH.geometry.basic-constructions",
+      "requires": "MATH.geometry.nets"
+    },
+    {
+      "capability": "MATH.measurement.triangle-area",
+      "requires": "MATH.measurement.time-speed-intro"
+    },
+    {
+      "capability": "MATH.measurement.cube-volume",
+      "requires": "MATH.measurement.triangle-area"
+    },
+    {
+      "capability": "MATH.statistics.data-frequency",
+      "requires": "MATH.statistics.averages-intro"
+    }
+  ],
+  "addedEdges": [],
+  "unchangedCompetencies": 166,
+  "unapprovedChangesAdopted": 0,
+  "rootCountBefore": 6,
+  "rootCountAfter": 40,
+  "checks": [
+    {
+      "capability": "MATH.measurement.mass-comparison",
+      "before": [
+        "MATH.measurement.length-comparison"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.time-order",
+      "before": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.money-coins",
+      "before": [
+        "MATH.measurement.time-order"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.equal-groups",
+      "before": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.standard-length",
+      "before": [
+        "MATH.measurement.money-coins"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.standard-mass",
+      "before": [
+        "MATH.measurement.standard-length"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.capacity",
+      "before": [
+        "MATH.measurement.standard-mass"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.clock",
+      "before": [
+        "MATH.measurement.capacity"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.money-change",
+      "before": [
+        "MATH.measurement.clock"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.thousands",
+      "before": [
+        "MATH.number.unit-fractions"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.multiplication-tables",
+      "before": [
+        "MATH.number.thousands"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.fraction-models",
+      "before": [
+        "MATH.number.division-remainders"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.geometry.lines-segments",
+      "before": [
+        "MATH.geometry.symmetry-fold"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.length-conversion",
+      "before": [
+        "MATH.measurement.money-change"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.elapsed-time",
+      "before": [
+        "MATH.measurement.perimeter-intro"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.money-decimals",
+      "before": [
+        "MATH.measurement.elapsed-time"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.large-numbers",
+      "before": [
+        "MATH.number.fraction-comparison"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.equivalent-fractions",
+      "before": [
+        "MATH.number.long-division"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.geometry.symmetry-lines",
+      "before": [
+        "MATH.geometry.circles"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.area-squares",
+      "before": [
+        "MATH.measurement.money-decimals"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.unit-conversions",
+      "before": [
+        "MATH.measurement.rectangle-perimeter"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.factors-multiples",
+      "before": [
+        "MATH.number.decimal-tenths"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.fraction-add",
+      "before": [
+        "MATH.number.primes"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.decimal-operations",
+      "before": [
+        "MATH.number.fraction-multiply"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.geometry.angle-measure",
+      "before": [
+        "MATH.geometry.symmetry-lines"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.geometry.nets",
+      "before": [
+        "MATH.geometry.triangle-types"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.time-speed-intro",
+      "before": [
+        "MATH.measurement.volume-cubes"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.integers",
+      "before": [
+        "MATH.number.percent-intro"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.fraction-product",
+      "before": [
+        "MATH.number.integer-add"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.number.ratio",
+      "before": [
+        "MATH.number.decimal-product"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.geometry.basic-constructions",
+      "before": [
+        "MATH.geometry.nets"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.triangle-area",
+      "before": [
+        "MATH.measurement.time-speed-intro"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.measurement.cube-volume",
+      "before": [
+        "MATH.measurement.triangle-area"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    },
+    {
+      "capability": "MATH.statistics.data-frequency",
+      "before": [
+        "MATH.statistics.averages-intro"
+      ],
+      "after": [],
+      "beforeErrors": [],
+      "afterErrors": [],
+      "addedMandatoryEdges": 0,
+      "idsPreserved": true
+    }
+  ]
+}

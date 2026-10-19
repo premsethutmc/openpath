@@ -1,0 +1,348 @@
+{
+  "schema": "math-prerequisite-patch@1",
+  "baseVersion": "1.0.0",
+  "version": "1.1.0",
+  "changePolicy": "Remove only the 34 reviewed incorrect mandatory edges; no replacement hard gates or evidence remapping.",
+  "corrections": [
+    {
+      "capability": "MATH.measurement.mass-comparison",
+      "removeRequires": "MATH.measurement.length-comparison",
+      "before": [
+        "MATH.measurement.length-comparison"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.time-order",
+      "removeRequires": "MATH.measurement.mass-comparison",
+      "before": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.money-coins",
+      "removeRequires": "MATH.measurement.time-order",
+      "before": [
+        "MATH.measurement.time-order"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.equal-groups",
+      "removeRequires": "MATH.number.subtraction-regroup",
+      "before": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.standard-length",
+      "removeRequires": "MATH.measurement.money-coins",
+      "before": [
+        "MATH.measurement.money-coins"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.standard-mass",
+      "removeRequires": "MATH.measurement.standard-length",
+      "before": [
+        "MATH.measurement.standard-length"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.capacity",
+      "removeRequires": "MATH.measurement.standard-mass",
+      "before": [
+        "MATH.measurement.standard-mass"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.clock",
+      "removeRequires": "MATH.measurement.capacity",
+      "before": [
+        "MATH.measurement.capacity"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.money-change",
+      "removeRequires": "MATH.measurement.clock",
+      "before": [
+        "MATH.measurement.clock"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.thousands",
+      "removeRequires": "MATH.number.unit-fractions",
+      "before": [
+        "MATH.number.unit-fractions"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.multiplication-tables",
+      "removeRequires": "MATH.number.thousands",
+      "before": [
+        "MATH.number.thousands"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.fraction-models",
+      "removeRequires": "MATH.number.division-remainders",
+      "before": [
+        "MATH.number.division-remainders"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.geometry.lines-segments",
+      "removeRequires": "MATH.geometry.symmetry-fold",
+      "before": [
+        "MATH.geometry.symmetry-fold"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.length-conversion",
+      "removeRequires": "MATH.measurement.money-change",
+      "before": [
+        "MATH.measurement.money-change"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.elapsed-time",
+      "removeRequires": "MATH.measurement.perimeter-intro",
+      "before": [
+        "MATH.measurement.perimeter-intro"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.money-decimals",
+      "removeRequires": "MATH.measurement.elapsed-time",
+      "before": [
+        "MATH.measurement.elapsed-time"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.large-numbers",
+      "removeRequires": "MATH.number.fraction-comparison",
+      "before": [
+        "MATH.number.fraction-comparison"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.equivalent-fractions",
+      "removeRequires": "MATH.number.long-division",
+      "before": [
+        "MATH.number.long-division"
+      ],
+      "after": [],
+      "reason": "Long division is not a necessary mathematical prerequisite. Exact replacement edges remain a proposal: visual repartitioning need not require multiplication fluency.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.geometry.symmetry-lines",
+      "removeRequires": "MATH.geometry.circles",
+      "before": [
+        "MATH.geometry.circles"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.area-squares",
+      "removeRequires": "MATH.measurement.money-decimals",
+      "before": [
+        "MATH.measurement.money-decimals"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.unit-conversions",
+      "removeRequires": "MATH.measurement.rectangle-perimeter",
+      "before": [
+        "MATH.measurement.rectangle-perimeter"
+      ],
+      "after": [],
+      "reason": "Removal of rectangle-perimeter gate is clear. Requiring all three measurement domains together remains over-broad for a single-unit conversion task.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.factors-multiples",
+      "removeRequires": "MATH.number.decimal-tenths",
+      "before": [
+        "MATH.number.decimal-tenths"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.fraction-add",
+      "removeRequires": "MATH.number.primes",
+      "before": [
+        "MATH.number.primes"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.decimal-operations",
+      "removeRequires": "MATH.number.fraction-multiply",
+      "before": [
+        "MATH.number.fraction-multiply"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.geometry.angle-measure",
+      "removeRequires": "MATH.geometry.symmetry-lines",
+      "before": [
+        "MATH.geometry.symmetry-lines"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.geometry.nets",
+      "removeRequires": "MATH.geometry.triangle-types",
+      "before": [
+        "MATH.geometry.triangle-types"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.time-speed-intro",
+      "removeRequires": "MATH.measurement.volume-cubes",
+      "before": [
+        "MATH.measurement.volume-cubes"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.integers",
+      "removeRequires": "MATH.number.percent-intro",
+      "before": [
+        "MATH.number.percent-intro"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.fraction-product",
+      "removeRequires": "MATH.number.integer-add",
+      "before": [
+        "MATH.number.integer-add"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.number.ratio",
+      "removeRequires": "MATH.number.decimal-product",
+      "before": [
+        "MATH.number.decimal-product"
+      ],
+      "after": [],
+      "reason": "Decimal multiplication/division is not necessary to introduce whole-number ratios. Equivalent-fraction fluency as a hard new gate still needs review.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.geometry.basic-constructions",
+      "removeRequires": "MATH.geometry.nets",
+      "before": [
+        "MATH.geometry.nets"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.triangle-area",
+      "removeRequires": "MATH.measurement.time-speed-intro",
+      "before": [
+        "MATH.measurement.time-speed-intro"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.measurement.cube-volume",
+      "removeRequires": "MATH.measurement.triangle-area",
+      "before": [
+        "MATH.measurement.triangle-area"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    },
+    {
+      "capability": "MATH.statistics.data-frequency",
+      "removeRequires": "MATH.statistics.averages-intro",
+      "before": [
+        "MATH.statistics.averages-intro"
+      ],
+      "after": [],
+      "reason": "The old mandatory edge links a distinct skill that is not necessary to introduce this target; approve removal separately from the exact replacement set.",
+      "rootJustification": "No approved external mandatory prerequisite after removing the unrelated hard gate. Teach the required concrete foundations within this competency; further prerequisite proposals require educator review."
+    }
+  ]
+}

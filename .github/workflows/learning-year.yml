@@ -62,7 +62,7 @@ jobs:
             sleep 1
           done
           cd frontend
-          if ! YEAR_API=django CHROMIUM_PATH='' SHOTS=/tmp/year-screens/ node --test e2e/learning-year.test.mjs > /tmp/year-e2e.log 2>&1; then
+          if ! YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs > /tmp/year-e2e.log 2>&1; then
             cat /tmp/year-e2e.log
             # the failures as annotations, readable without the full log
             grep -E "^not ok|error:|Error|expected|actual|at .*learning-year" /tmp/year-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done

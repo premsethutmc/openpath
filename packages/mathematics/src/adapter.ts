@@ -1,4 +1,5 @@
-import { competencies, examTracks, curriculumVersion } from "./curriculum";
+import { examTracks, curriculumVersion } from "./curriculum";
+import { competencyGraph, activeGraphVersion } from "./prerequisites";
 import { programs } from "./program";
 import { type GeneratedItem } from "./generator";
 /** Provisional replaceable module boundary: deliberately NOT a LedgerEvent or estimator. */
@@ -57,8 +58,10 @@ export function candidateResponse(
 }
 export const mathematicsModule = {
   id: "mathematics",
-  version: curriculumVersion,
-  competencies,
+  version: activeGraphVersion,
+  curriculumVersion,
+  prerequisiteGraphVersion: activeGraphVersion,
+  competencies: competencyGraph(),
   programs,
   examTracks,
   evidenceContract: "math-candidate@1",

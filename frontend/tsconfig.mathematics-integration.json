@@ -16,7 +16,9 @@
     "src/year",
     "src/learning",
     "../packages/learning/src",
-    "../packages/learning/scripts"
+    "../packages/learning/scripts",
+    "../tools/mathematics/prerequisite-report.mts",
+    "../tools/mathematics/fingerprint-portability.mts"
   ],
   "exclude": []
 }

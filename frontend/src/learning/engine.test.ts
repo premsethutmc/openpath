@@ -7,14 +7,15 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { canonical, isCorrect, misconceptionOf, moduleFor, modules, problems, question, questions } from "../../../packages/learning/src/content";
-import { releaseFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
+import { allReleases, releaseFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
 import { assigned, hashOf, propose, review, synthesise, validateRelease } from "../../../packages/learning/src/curriculum";
 import { offersFor, trace } from "../../../packages/learning/src/decomposition";
 import { diagnose, DIAGNOSTIC_POLICY } from "../../../packages/learning/src/diagnostic";
 import { DAY, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { examPlan, examPlanApplies, overlay } from "../../../packages/learning/src/goals";
 import { graph, walkSupports } from "../../../packages/learning/src/graph";
-import { orderStrategies } from "../../../packages/learning/src/intervention";
+import { familyOf, investigateContext, orderStrategies } from "../../../packages/learning/src/intervention";
+import { reason } from "../../../packages/learning/src/reasoning";
 import { years } from "../../../packages/learning/src/plan";
 import { readRecords } from "../../../packages/learning/src/records";
 import { aggregate, flatten, tileAt, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
@@ -113,7 +114,11 @@ test("a textbook becomes a draft with mapped outcomes and source references, and
   assert.equal(rel.status, "reviewed");
   assert.equal(rel.review!.educatorReviewed, false);
   assert.deepEqual(validateRelease(rel), []);
-  assert.ok(assigned(rel).some((a) => a.competency === EQ));
+  // "Generate equivalent fractions by multiplying numerator and denominator" is close to "multiply fractions":
+  // flagged uncertain, so it is NOT accepted without an explicit decision
+  assert.equal(fractions.outcomes[1].mapping.verdict, "uncertain");
+  assert.ok(!assigned(rel).some((a) => a.competency === EQ), "an uncertain mapping needs a reviewer's decision");
+  assert.ok(assigned(review(draft, [{ outcome: fractions.outcomes[1].id, accept: [EQ] }], "t", "t")).some((a) => a.competency === EQ));
   assert.throws(() => review(rel, "accept-proposals", "x", "y"), /Only a draft/);
   // explicit decisions: the reviewer rejects one mapping and adds another
   const custom = review(draft, [{ outcome: fractions.outcomes[1].id, accept: ["MATH.number.fraction-models"] }], "test", "2026-09-01T00:00:00Z");
@@ -140,7 +145,11 @@ test("releases are versioned by content: a changed release has a different hash,
   assert.notEqual(hashOf({ ...changed, hash: "" }), r.hash);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: r.hash }, new Map()), r);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: "deadbeef" }, new Map()), null);
-  assert.equal(sampleReleases.length, 6);
+  assert.equal(sampleReleases.length, 7, "the latest version of six sample books and one second-board book");
+  // earlier versions stay readable: a learner enrolled on 1.0.0 still finds their curriculum
+  const old = allReleases.find((x) => x.id === r.id && x.version === "1.0.0")!;
+  assert.equal(releaseFor({ id: old.id, version: "1.0.0", hash: old.hash }, new Map()), old);
+  assert.notEqual(old.hash, r.hash);
 });
 
 // ---------------------------------------------------------------- graph
@@ -357,10 +366,17 @@ test("journey C: Grade 10 integration problem → supports traced, verified ones
   d.newSession(1);
   assert.equal(d.state().evidence("MATH.measurement.rectangle-area").status, "verified");
   assert.equal(d.state().evidence("MATH.coordinate.cartesian").status, "verified");
-  const known: Record<string, string> = { "mt-d1": "54", "mt-d2": "48", "mt-k-77": "47", "ai-original": "54" };
+  // a learner for whom 7 × 8 is not reliable (it comes out as 54, wherever it appears), everything else right
+  const known: Record<string, string> = { "mt-d1": "54", "mt-d2": "48", "mt-k-77": "47", "ai-original": "54", "gen:mul:7,8": "54" };
   const phases = d.recover("ai-original", (q, ph) => (q === "ai-original" && ph === "return" ? "56" : known[q] ?? question(q).answer));
-  assert.deepEqual(phases, ["attempt", "support:MATH.calculus.definite-integrals", `support:${MT}`, "return", "solved_after_help"]);
-  assert.ok(d.trace.includes("diagnostic:mt-d1=54"), "uncertain multiplication is assessed with 7 × 8");
+  // the wrong answer is investigated first (diagnostic@2); the established explanation (7 × 8) sends it straight to
+  // multiplication facts, without re-checking definite integrals, which the investigation showed are fine
+  assert.deepEqual(phases, ["attempt", "investigate", `support:${MT}`, "return", "solved_after_help"]);
+  const st0 = d.state();
+  const follow = st0.records.attempts.filter((a) => a.context === investigateContext("ai-original"));
+  assert.ok(follow.some((a) => a.questionId === "gen:mul:7,8"), "the fact itself was asked");
+  assert.equal(reason(familyOf("ai-original")!, [{ questionId: "gen:cint:0,8,7", response: "54" }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))])?.best?.id, "fact-slip:7x8");
+  assert.ok(d.trace.includes("diagnostic:gen:mul:7,8=54"), "uncertain multiplication is assessed with 7 × 8 itself");
   assert.ok(d.trace.includes("teach:decomposition"));
   const t = d.trace.indexOf("teach:decomposition");
   assert.deepEqual(d.trace.slice(t + 1, t + 3), ["guided:mt-dec-g=42", "check:mt-dec-c=48"]);
