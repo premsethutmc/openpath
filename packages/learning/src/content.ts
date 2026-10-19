@@ -7,8 +7,9 @@ import data from "../../../content/learning/modules.v1.json";
 import problemsData from "../../../content/learning/problems.v1.json";
 import goalsData from "../../../content/learning/goals.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
+import { explainStep, problemOf } from "./families";
 
-export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge";
+export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
 export interface Question {
   id: string;
@@ -106,10 +107,12 @@ export const question = (id: string): Question => {
   const q = qById.get(id);
   if (q) return q;
   const f = fragments.get(id);
+  const g = problemOf(id);
+  if (g) return { id, competency: g.competency, skill: g.competency, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, difficulty: 1, source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
   throw new Error(`Unknown question ${id}`);
 };
-export const isQuestion = (id: string) => qById.has(id) || fragments.has(id);
+export const isQuestion = (id: string) => qById.has(id) || fragments.has(id) || problemOf(id) !== null;
 export const moduleFor = (competency: string) => modules.find((m) => m.competency === competency) ?? null;
 export const goal = (id: string) => goals.find((g) => g.id === id) ?? null;
 

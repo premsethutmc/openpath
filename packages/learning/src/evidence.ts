@@ -72,7 +72,8 @@ export const independentAttempt = (a: Attempt) => !assistedAttempt(a) && INDEPEN
 /** The shared ledger, replayed from the learner's records. */
 export function ledgerFor(learnerId: string, records: LearnerRecords) {
   const ledger = mathematicsLedger(learnerId);
-  ledger.ctx.content = indexContent({ items: allQuestionIds().map((id) => nativeItem(question(id))), passages: [], goals: [], misspellings: {} }, ledger.ctx.index);
+  const generated = [...new Set(records.attempts.map((a) => a.questionId).filter((id) => id.startsWith("gen:")))];
+  ledger.ctx.content = indexContent({ items: [...allQuestionIds(), ...generated].map((id) => nativeItem(question(id))), passages: [], goals: [], misspellings: {} }, ledger.ctx.index);
   const items = (id: string) => {
     const it = nativeItem(question(id));
     return { id: it.id, version: it.version };
@@ -154,7 +155,10 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const transferRight = ind.some((a) => ["transfer", "original", "challenge"].includes(a.activity) && right(a));
   const assisted = mine.filter((a) => !independentAttempt(a));
   const probed = mine.filter((a) => independentAttempt(a) && !ind.includes(a));
-  const verified = profileStatus === "verified";
+  // Verified on this surface: the shared engine's verification (verification@2, unchanged) AND this skill's own delayed
+  // check passed at least RETENTION_DAYS (seven full days) after independent success. The engine alone allows a
+  // half-day tolerance (6.5 days) and counts any later fresh answers; this surface never shows green before seven days.
+  const verified = profileStatus === "verified" && retention === "passed";
   let status: Status = "not_started";
   if (verified) status = "verified";
   // a missed delayed check (ours), or the shared engine's own retention schedule saying a check failed or is overdue

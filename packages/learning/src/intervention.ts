@@ -19,7 +19,9 @@ import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleSt
 import { moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
+import { parseProblem, problemOf } from "./families";
 import { graph, walkSupports } from "./graph";
+import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -101,11 +103,19 @@ export interface ModuleState {
   reason: string;
 }
 
-export function moduleState(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string): ModuleState {
+/** What an earlier diagnosis (diagnostic@2, in recovery) established about this skill, so it is not asked again. */
+export interface Established {
+  kind: "conceptual" | "procedural" | "recall" | "prerequisite";
+  says: string;
+}
+export function moduleState(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null): ModuleState {
   const m = moduleFor(competency);
   const base = { competency, question: null, strategy: null, diagnosis: null, decision: null } as const;
   if (!m) return { ...base, phase: "unavailable", reason: "No questions for this skill yet." };
-  const d = diagnose(m, records.attempts);
+  // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
+  // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
+  const asked = diagnose(m, records.attempts);
+  const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence } : asked;
   const shown = ev.status === "independent" || ev.status === "transfer" || ev.status === "verified";
   const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id)) ?? null;
   if (ev.retention === "due") {
@@ -150,7 +160,7 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
     if (s && answered(records, s.check)) s = order.find((x) => !answered(records, x.check) && !records.teaching.some((t) => t.competency === competency && t.strategy === x.id)) ?? null;
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
   if (decision.action === "guided_practice" && st) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) return { ...base, phase: "check", question: st.check, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
@@ -175,31 +185,77 @@ const diagnosisReason = (d: Diagnosis) =>
 export interface RecoveryState {
   original: string;
   competency: string;
-  phase: "attempt" | "trace" | "support" | "return" | "solved" | "solved_after_help" | "escalate";
-  supports: { id: string; depth: number; via: string | null; assessable: boolean }[];
-  /** The supporting skill being worked on now. */
+  phase: "attempt" | "investigate" | "trace" | "support" | "teach" | "return" | "solved" | "solved_after_help" | "escalate";
+  supports: { id: string; depth: number; via: string | null; assessable: boolean; type: string }[];
+  /** The supporting skill (or the problem's own skill, to teach) being worked on now. */
   active: string | null;
+  /** In "investigate": the next question that best tells the explanations apart. */
+  question: string | null;
+  /** The diagnosis of the wrong answers (diagnostic@2), when the problem is from a supported family. */
+  reasoning: Reasoning | null;
+  /** What the diagnosis leads to, and why (learner-facing). */
+  plan: ReturnType<typeof nextFromReasoning> | null;
+  /** What was established, to pass to the module that teaches it. */
+  established: Established | null;
   reason: string;
 }
+
+/** The supported-family form of a question: itself if generated, or its prompt read as a problem. */
+export function familyOf(qid: string): string | null {
+  if (problemOf(qid)) return qid;
+  const p = parseProblem(question(qid).prompt);
+  return p.supported ? p.problem.id : null;
+}
+export const investigateContext = (original: string) => `investigate:${original}`;
 
 export function recovery(originalQid: string, records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string): RecoveryState {
   const q = question(originalQid);
   const tries = records.attempts.filter((a) => a.questionId === originalQid);
   const supports = walkSupports(q.competency, RECOVERY_DEPTH).map((s) => ({ ...s, assessable: !!moduleFor(s.id) }));
-  const base = { original: originalQid, competency: q.competency, supports };
+  const base = { original: originalQid, competency: q.competency, supports, question: null, reasoning: null, plan: null, established: null };
   if (!tries.length) return { ...base, phase: "attempt", active: null, reason: "Try the problem." };
   if (rightAnswer(tries[0])) return { ...base, phase: "solved", active: null, reason: "Solved on your own." };
-  const shown = (id: string) => ["independent", "transfer", "verified"].includes(evidence(id).status);
   if (tries.slice(1).some(rightAnswer)) return { ...base, phase: "solved_after_help", active: null, reason: "Solved after help. That counts as help, not as work on your own." };
+  const shown = (id: string) => ["independent", "transfer", "verified"].includes(evidence(id).status);
+  const resolved = (id: string, est?: Established | null) => {
+    const ms = moduleState(id, records, evidence(id), now, session, est);
+    return { ms, done: shown(id) || ms.phase === "done" };
+  };
+
+  // 1. a supported problem: investigate the wrong answer, then act on what was established
+  const fam = familyOf(originalQid);
+  let reasoning: Reasoning | null = null;
+  let plan: RecoveryState["plan"] = null;
+  if (fam) {
+    const follow = records.attempts.filter((a) => a.context === investigateContext(originalQid) && a.n === 1);
+    reasoning = reason(fam, [{ questionId: fam, response: tries[0].response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]);
+    if (reasoning?.status === "need_more" && reasoning.next) return { ...base, reasoning, phase: "investigate", active: null, question: reasoning.next, reason: "One more question to understand what happened (it does not count against you)." };
+    if (reasoning) plan = nextFromReasoning(reasoning, q.competency);
+    if (plan && plan.kind !== "unsure" && plan.competency) {
+      const best = reasoning!.best!;
+      const est: Established | null = best.kind === "secure" || best.kind === "unexplained" ? null : { kind: best.kind, says: best.says };
+      if (plan.kind === "practise") return { ...base, reasoning, plan, phase: "return", active: null, reason: `${plan.why} Try the problem again.` };
+      if (moduleFor(plan.competency)) {
+        const r = resolved(plan.competency, est);
+        if (!r.done) {
+          if (r.ms.phase === "pause") return { ...base, reasoning, plan, established: est, phase: "escalate", active: plan.competency, reason: `${graph.get(plan.competency).name}: different explanations have not clicked yet. Ask a teacher or parent.` };
+          return { ...base, reasoning, plan, established: est, phase: plan.kind === "teach" ? "teach" : "support", active: plan.competency, reason: plan.why };
+        }
+        return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem." };
+      }
+      // no module for it: the worked steps are the teaching, then back to the problem
+      return { ...base, reasoning, plan, phase: "return", active: null, reason: `${plan.why} Look at the worked steps, then try again.` };
+    }
+  }
+  // 2. not a supported problem, or the diagnosis is unsure: check supporting skills along the relations
   for (const s of supports) {
     if (!s.assessable || shown(s.id)) continue;
-    const ms = moduleState(s.id, records, evidence(s.id), now, session);
-    // worked through to the end without being shown: not the gap that blocks this problem now
-    if (ms.phase === "done") continue;
-    if (ms.phase === "pause") return { ...base, phase: "escalate", active: s.id, reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
-    return { ...base, phase: "support", active: s.id, reason: `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}. We check it first, then come back to the problem.` };
+    const r = resolved(s.id);
+    if (r.done) continue;
+    if (r.ms.phase === "pause") return { ...base, reasoning, plan, phase: "escalate", active: s.id, reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
+    return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}. We check it first, then come back to the problem.` };
   }
-  return { ...base, phase: "return", active: null, reason: "Back to the original problem." };
+  return { ...base, reasoning, plan, phase: "return", active: null, reason: plan?.kind === "unsure" ? `${plan.why} Try the problem again, or ask a teacher to look at your working.` : "Back to the original problem." };
 }
 
 export const daysUntil = (iso: string | null, now: number) => (iso ? Math.ceil((Date.parse(iso) - now) / DAY) : null);

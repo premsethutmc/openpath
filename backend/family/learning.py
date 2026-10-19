@@ -8,6 +8,7 @@ import json
 import os
 import re
 from datetime import timedelta
+from fractions import Fraction
 from functools import lru_cache
 from pathlib import Path
 from django.conf import settings
@@ -27,7 +28,10 @@ RECORDS = {
 }
 BASE = {'kind', 'id', 'at', 'learnerId', 'sessionId', 'record'}
 # the delayed check (status@1 RETENTION_DAYS), less the half-day tolerance the shared engine also allows
-RETENTION_DELAY = timedelta(days=7) - timedelta(hours=12)
+# a delayed check: seven full days after independent success (status@1 RETENTION_DAYS; no tolerance on this surface)
+RETENTION_DELAY = timedelta(days=7)
+INDEPENDENT_MIN = 2
+INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
 NUMBER = r'[+-]?\d{1,9}'
 RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
 
@@ -80,6 +84,47 @@ def server_now(pupil):
         if isinstance(days, (int, float)) and 0 <= days <= 3650:
             now += timedelta(days=days)
     return now
+
+
+def canonical(kind, raw):
+    """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind."""
+    t = str(raw).strip().replace('−', '-')
+    try:
+        if kind == 'choice':
+            return t.upper() if t.upper() in {'A', 'B', 'C', 'D'} else None
+        if kind == 'integer':
+            return str(int(t)) if re.fullmatch(NUMBER, t, flags=re.ASCII) else None
+        if kind == 'fraction':
+            return str(Fraction(t.replace(' ', '')))
+        if kind == 'set':
+            parts = [Fraction(p.strip()) for p in t.split(',')]
+            return ','.join(sorted(str(p) for p in parts)) if len(set(parts)) == len(parts) else None
+    except (ValueError, ZeroDivisionError):
+        return None
+    return t
+
+
+def right(q, response):
+    c = canonical(q['type'], response)
+    return c is not None and c == canonical(q['type'], q['answer'])
+
+
+def independent_at(prior, competency):
+    """When independent success on this competency was first shown (the app's skillEvidence.independentAt)."""
+    qs = content()['questions']
+    seen, distinct = {}, set()
+    for e in prior:
+        if e.get('record') != 'attempt' or e.get('questionId') not in qs:
+            continue
+        n = seen[e['questionId']] = seen.get(e['questionId'], 0) + 1
+        q = qs[e['questionId']]
+        if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
+            continue
+        if right(q, e.get('response', '')):
+            distinct.add(e['questionId'])
+            if len(distinct) >= INDEPENDENT_MIN:
+                return timezone.datetime.fromisoformat(e['at'].replace('Z', '+00:00'))
+    return None
 
 
 def _reject(message):
@@ -150,11 +195,6 @@ def _known_release(ref, prior):
     )
 
 
-def _target(competency):
-    """The competency an answer is evidence for (a micro-skill's parent, as in the app's graph.evidenceTarget)."""
-    return competency
-
-
 def checked_learning(event, pupil):
     c = content()
     record = event.get('record')
@@ -200,9 +240,9 @@ def checked_learning(event, pupil):
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
         if event['activity'] == 'retention':
-            # a delayed check needs earlier work on the same skill at least a week before (the app checks the rest)
-            first = min((e['at'] for e in prior if e.get('record') == 'attempt' and _target(e.get('competency')) == q['competency'] and isinstance(e.get('at'), str)), default=None)
-            if not first or now - timezone.datetime.fromisoformat(first.replace('Z', '+00:00')) < RETENTION_DELAY:
+            # the same rule as the app (status@1): two distinct right first answers on your own, then seven full days
+            since = independent_at(prior, q['competency'])
+            if since is None or now - since < RETENTION_DELAY:
                 _reject('The delayed check is not due yet.')
     elif record == 'teach':
         m = c['modules'].get(event.get('competency'))

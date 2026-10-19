@@ -14,7 +14,8 @@ import { diagnose, DIAGNOSTIC_POLICY } from "../../../packages/learning/src/diag
 import { DAY, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { examPlan, examPlanApplies, overlay } from "../../../packages/learning/src/goals";
 import { graph, walkSupports } from "../../../packages/learning/src/graph";
-import { orderStrategies } from "../../../packages/learning/src/intervention";
+import { familyOf, investigateContext, orderStrategies } from "../../../packages/learning/src/intervention";
+import { reason } from "../../../packages/learning/src/reasoning";
 import { years } from "../../../packages/learning/src/plan";
 import { readRecords } from "../../../packages/learning/src/records";
 import { aggregate, flatten, tileAt, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
@@ -357,10 +358,17 @@ test("journey C: Grade 10 integration problem → supports traced, verified ones
   d.newSession(1);
   assert.equal(d.state().evidence("MATH.measurement.rectangle-area").status, "verified");
   assert.equal(d.state().evidence("MATH.coordinate.cartesian").status, "verified");
-  const known: Record<string, string> = { "mt-d1": "54", "mt-d2": "48", "mt-k-77": "47", "ai-original": "54" };
+  // a learner for whom 7 × 8 is not reliable (it comes out as 54, wherever it appears), everything else right
+  const known: Record<string, string> = { "mt-d1": "54", "mt-d2": "48", "mt-k-77": "47", "ai-original": "54", "gen:mul:7,8": "54" };
   const phases = d.recover("ai-original", (q, ph) => (q === "ai-original" && ph === "return" ? "56" : known[q] ?? question(q).answer));
-  assert.deepEqual(phases, ["attempt", "support:MATH.calculus.definite-integrals", `support:${MT}`, "return", "solved_after_help"]);
-  assert.ok(d.trace.includes("diagnostic:mt-d1=54"), "uncertain multiplication is assessed with 7 × 8");
+  // the wrong answer is investigated first (diagnostic@2); the established explanation (7 × 8) sends it straight to
+  // multiplication facts, without re-checking definite integrals, which the investigation showed are fine
+  assert.deepEqual(phases, ["attempt", "investigate", `support:${MT}`, "return", "solved_after_help"]);
+  const st0 = d.state();
+  const follow = st0.records.attempts.filter((a) => a.context === investigateContext("ai-original"));
+  assert.ok(follow.some((a) => a.questionId === "gen:mul:7,8"), "the fact itself was asked");
+  assert.equal(reason(familyOf("ai-original")!, [{ questionId: "gen:cint:0,8,7", response: "54" }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))])?.best?.id, "fact-slip:7x8");
+  assert.ok(d.trace.includes("diagnostic:gen:mul:7,8=54"), "uncertain multiplication is assessed with 7 × 8 itself");
   assert.ok(d.trace.includes("teach:decomposition"));
   const t = d.trace.indexOf("teach:decomposition");
   assert.deepEqual(d.trace.slice(t + 1, t + 3), ["guided:mt-dec-g=42", "check:mt-dec-c=48"]);

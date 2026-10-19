@@ -110,15 +110,23 @@ class LearningRecordTests(FamilyTestCase):
         unknown['hash'] = hash_of({**unknown, 'hash': ''})
         self.assertEqual(self.save(self.rec('curriculum', release=unknown)).status_code, 400)
 
-    def test_delayed_check_waits_a_week_by_the_server_clock(self):
+    def test_delayed_check_waits_seven_full_days_after_independent_success(self):
         now = timezone.now()
         with mock.patch('family.learning.timezone.now', return_value=now):
             self.save(self.enrol())
             self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'no earlier work')
             self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
-            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'not due yet')
-        with mock.patch('family.learning.timezone.now', return_value=now + timedelta(days=7)):
-            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201)
+            self.assertEqual(self.save(self.attempt('eq-d2', '3')).status_code, 201, 'wrong: not yet independent')
+            self.assertEqual(self.save(self.attempt('eq-s1g', '4', activity='guided')).status_code, 201, 'with help: never independent')
+        with mock.patch('family.learning.timezone.now', return_value=now + timedelta(days=1)):
+            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'one right answer is not independent success')
+        start = now + timedelta(days=1, seconds=1)
+        with mock.patch('family.learning.timezone.now', return_value=start):
+            self.assertEqual(self.save(self.attempt('eq-p1', '9', activity='practice')).status_code, 201, 'second distinct right answer: independent now')
+        for days, ok in [(6.5, False), (6.99, False), (7, True)]:
+            with mock.patch('family.learning.timezone.now', return_value=start + timedelta(days=days)):
+                code = self.save(self.attempt('eq-r1' if ok else 'eq-r2', '6' if ok else '15', activity='retention')).status_code
+                self.assertEqual(code, 201 if ok else 400, f'{days} days after independent success')
 
     def test_duplicates_conflicts_and_coexistence_with_fixed_programs(self):
         e = self.enrol()
@@ -148,6 +156,7 @@ class LearningRecordTests(FamilyTestCase):
         import tempfile
         self.save(self.enrol())
         self.save(self.attempt('eq-d1', '2'))
+        self.save(self.attempt('eq-d2', '2'))
         before = self.records()
         real = str(self.pupil(self.client, 'Arun'))
         with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:
@@ -155,7 +164,7 @@ class LearningRecordTests(FamilyTestCase):
         os.environ.pop('OPENPATH_TEST_CLOCK_FILE', None)
         self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'no test clock without the variable')
         with mock.patch.dict(os.environ, {'OPENPATH_TEST_CLOCK_FILE': f.name}):
-            self.assertEqual(self.records()[:2], before, 'no stored record changes')
+            self.assertEqual(self.records()[:3], before, 'no stored record changes')
             self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201, 'due by the test clock')
             from .learning import server_now
             from .models import Pupil

@@ -4,12 +4,14 @@
  * running the My Learning Year browser journeys where Django is not installed. CI runs the same journeys against the
  * real Django API. It does not reproduce Django's validation; backend/family/test_learning.py tests that.
  *
- *   PORT=8013 node e2e/lib/fake-api.mjs
+ *   PORT=8013 node --import tsx e2e/lib/fake-api.mjs
  *
  * POST /__test/clock {pupil, days} moves the server clock forward for one synthetic learner (as Django's
  * OPENPATH_TEST_CLOCK_FILE does). No stored record changes.
  */
 import http from "node:http";
+import { skillEvidence } from "../../../packages/learning/src/evidence.ts";
+import { readRecords } from "../../../packages/learning/src/records.ts";
 
 const accounts = new Map(); // email -> { password, pupils: [] }
 const sessions = new Map(); // cookie -> email
@@ -75,8 +77,9 @@ http.createServer(async (req, res) => {
     const nowMs = Date.now() + (clock.get(pupil.id) ?? 0) * 86_400_000;
     const now = new Date(nowMs).toISOString();
     if (e.kind === "learning_record" && e.record === "attempt" && e.activity === "retention") {
-      const first = list.filter((x) => x.kind === "learning_record" && x.record === "attempt" && x.competency === e.competency).map((x) => x.at).sort()[0];
-      if (!first || nowMs - Date.parse(first) < 6.5 * 86_400_000) return json(res, 400, { event: "The delayed check is not due yet." });
+      // the server's rule: seven full days after independent success (computed by the app's own engine here)
+      const since = skillEvidence(e.competency, readRecords(pupil.id, list), "unavailable", nowMs).independentAt;
+      if (!since || nowMs - Date.parse(since) < 7 * 86_400_000) return json(res, 400, { event: "The delayed check is not due yet." });
     }
     const saved = subject === "mathematics" ? { ...e, at: now, savedAt: now } : e;
     list.push(saved);
