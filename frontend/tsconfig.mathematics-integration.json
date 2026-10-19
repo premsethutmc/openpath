@@ -15,6 +15,7 @@
     "src/mathematics/foundation",
     "src/year",
     "src/learning",
+    "src/review",
     "../packages/learning/src",
     "../packages/learning/scripts",
     "../tools/mathematics/prerequisite-report.mts",

@@ -95,7 +95,7 @@ function Overview({ reg, open }: { reg: Registry; open: (v: View) => void }) {
         <table className="matrix"><tbody>{ks.map((k) => <tr key={k}><th>{MATRIX_LABEL[k]}</th><td data-status={k}>{g.matrix[k]}</td></tr>)}</tbody></table>
         <p className="small muted">{g.total} competencies. A module counts as complete only with a question pool deep enough for diagnosis, practice, reassessment and the delayed check. Approved means the module and every question family it uses.</p>
         <table className="matrix small"><thead><tr><th>Textbook</th>{ks.map((k) => <th key={k}>{MATRIX_LABEL[k]}</th>)}</tr></thead><tbody>
-          {allReleases.filter((r, i, a) => !a.some((x) => x.id === r.id && x.version > r.version)).map((r) => { const c = releaseCoverage(r); return <tr key={r.id}><th>Grade {r.grade}: {r.title}</th>{ks.map((k) => <td key={k}>{c.matrix[k]}</td>)}</tr>; })}
+          {allReleases.filter((r, _i, a) => !a.some((x) => x.id === r.id && x.version > r.version)).map((r) => { const c = releaseCoverage(r); return <tr key={r.id}><th>Grade {r.grade}: {r.title}</th>{ks.map((k) => <td key={k}>{c.matrix[k]}</td>)}</tr>; })}
         </tbody></table>
       </section>
       <section aria-label="Unresolved">
@@ -229,7 +229,7 @@ function ModuleDetail({ competency, e, reg, roles, decide, openFamily }: { compe
 
 // ---------------------------------------------------------------- curriculum mappings
 
-const latest = () => allReleases.filter((r, i, a) => !a.some((x) => x.id === r.id && x.version > r.version));
+const latest = () => allReleases.filter((r, _i, a) => !a.some((x) => x.id === r.id && x.version > r.version));
 function CurriculumList({ reg, open }: { reg: Registry; open: (item: string) => void }) {
   return (
     <div className="stack">
