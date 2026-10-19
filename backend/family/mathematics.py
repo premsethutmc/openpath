@@ -44,13 +44,27 @@ def checked_activity(event, pupil):
     if event.get('journey') not in ({spec['track']} if 'track' in spec else {'school', 'jee-main', 'jee-advanced', 'gre-quant'}):
         raise ValidationError({'event': 'Unknown journey.'})
     stage = next((s for s in spec['stages'] if s['id'] == event.get('stage')), None)
-    if not stage or event.get('action') not in {'open', 'draft', 'hint', 'solution', 'answer', 'complete'}:
+    if not stage or event.get('action') not in {'open', 'draft', 'hint', 'solution', 'answer', 'complete', 'teach', 'skip'}:
         raise ValidationError({'event': 'Unknown fixed activity.'})
+    # a help branch (programs with "remediation"): which teaching block was started, or which help was set aside
+    remediation = spec.get('remediation', {'rules': [], 'transfer': []})
+    if event['action'] in {'teach', 'skip'}:
+        if 'remediation' not in spec or 'questionId' in event or not isinstance(event.get('response'), str):
+            raise ValidationError({'event': 'This program has no help branch.'})
+        rules = {r['id']: r for r in remediation['rules']}
+        if event['action'] == 'teach':
+            rule_id, _, strategy = event['response'].partition(':')
+            if rule_id not in rules or strategy not in {s['id'] for s in rules[rule_id]['strategies']}:
+                raise ValidationError({'event': 'Unknown help.'})
+        elif event['response'] not in set(rules) | {f"transfer:{t['question']}" for t in remediation['transfer']}:
+            raise ValidationError({'event': 'Unknown help.'})
     duration = event.get('elapsedMs')
     if type(duration) not in (int, float) or not 0 <= duration <= 3600000:
         raise ValidationError({'event': 'Invalid duration.'})
-    # a stage's main questions, or its extra practice (offered after a wrong answer; never needed to finish the stage)
-    if event['action'] in {'draft', 'hint', 'solution', 'answer'} and event.get('questionId') not in stage['questions'] + stage.get('support', []):
+    # a stage's main questions, its extra practice (offered after a wrong answer), or a help-branch question (asked in
+    # whichever step the learner is in); only main questions are ever needed to finish a stage
+    help_questions = {x for r in remediation['rules'] for s in r['strategies'] for x in (s['guided'], s['reassess'])} | {p['question'] for t in remediation['transfer'] for p in t['probes']}
+    if event['action'] in {'draft', 'hint', 'solution', 'answer'} and event.get('questionId') not in stage['questions'] + stage.get('support', []) + sorted(help_questions):
         raise ValidationError({'event': 'Question is not part of this stage.'})
     if event['action'] in {'answer', 'draft'} and (not isinstance(event.get('response'), str) or len(event['response']) > 80):
         raise ValidationError({'event': 'Use an answer of at most 80 characters.'})
@@ -86,7 +100,8 @@ def checked_activity(event, pupil):
     own = [e for e in same if e.get('journey') == event['journey']]
     done = {e.get('stage') for e in own if e.get('action') == 'complete'}
     now = timezone.now()
-    if stage['id'] == retention_stage and event['action'] != 'open':
+    # help-branch records are not the revision check: they may be saved while the revision waits for its date
+    if stage['id'] == retention_stage and event['action'] not in {'open', 'teach', 'skip'} and event.get('questionId') not in help_questions:
         due = next((e.get('retentionDueAt') for e in own if e.get('retentionDueAt')), None)
         if not due or now < timezone.datetime.fromisoformat(due):
             raise ValidationError({'event': 'The delayed retention check is not due yet.'})

@@ -52,3 +52,25 @@
 .standing .big-number { font-size: 2rem; font-weight: 800; margin: 0; }
 .standing .big-number span, .big-number span { font-size: 1rem; color: var(--muted); font-weight: 600; }
 .big-number { font-size: 2.2rem; font-weight: 800; margin: 0; }
+
+/* the help branch: offered over the step's buttons, then on its own screen with the step list kept above */
+.help-offer { position: fixed; left: 0; right: 0; margin: 0 auto; bottom: 0; width: min(560px, 100%); animation: rise 0.3s ease both; z-index: 20; background: var(--card); border: 2px solid var(--brand); border-bottom: 0; border-radius: 20px 20px 0 0; padding: 16px 18px calc(16px + env(safe-area-inset-bottom)); box-shadow: 0 -10px 30px rgba(24, 34, 58, 0.18); }
+.help-offer h3 { margin: 2px 0 6px; }
+.help-offer p { margin: 0 0 8px; }
+.help-offer .actions { margin-top: 6px; }
+.help-offer-space { height: 300px; }
+.help .help-head { background: var(--brand-soft); border-radius: var(--radius); padding: 14px 16px; margin: 8px 0 14px; }
+.help-why { margin: 4px 0 6px; font-weight: 600; }
+.help-steps { list-style: none; display: flex; gap: 6px; padding: 0; margin: 10px 0 0; flex-wrap: wrap; }
+.help-steps li { font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 99px; background: var(--card); color: var(--muted); border: 1px solid var(--line); }
+.help-steps li.here { background: var(--brand); color: #fff; border-color: var(--brand); }
+.similar { margin-top: 8px; }
+.similar .panel { margin-top: 8px; color: var(--ink); }
+.minimum svg { width: 100%; height: auto; display: block; }
+.minimum .mbar { fill: #d9d4ff; }
+.minimum .mbar.min { fill: #c9ecd9; }
+.minimum .mbar.on { fill: var(--brand); }
+.minimum figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+@keyframes rise { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .help-offer { animation: none; } }
+@media (min-width: 700px) { .page { max-width: 640px; } .help-offer { width: min(640px, 100%); } }
