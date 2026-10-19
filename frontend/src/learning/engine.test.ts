@@ -94,8 +94,10 @@ test("modules are complete: diagnostics, strategies with their own guided and ch
     for (const id of used.filter((x) => !m.probes.includes(x))) assert.equal(graph.evidenceTarget(question(id).competency), m.competency, `${id} belongs to ${m.competency}`);
     // a probe asks about what the skill builds on: its own skill, or one a relation names (7 × 8 inside 7 × 8 = ?; 3 × 4 inside 3(x + 4))
     for (const id of m.probes) assert.ok(question(id).competency === m.competency || graph.relationsOf(m.competency).some((r) => r.from === question(id).competency), `${id}: a probe about ${m.competency} or something it builds on`);
-    const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => question(id).type));
-    assert.ok(formats.size >= 2, `${m.competency}: two question formats (the shared engine needs two contexts to demonstrate)`);
+    // the evidence context as the shared engine records it (evidence.ts): the answer format, and an everyday
+    // situation (:w) is a context of its own (context@2)
+    const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => `${question(id).type}${id.endsWith(":w") ? "-situation" : ""}`));
+    assert.ok(formats.size >= 2, `${m.competency}: two evidence contexts (the shared engine needs two contexts to demonstrate)`);
     for (const s of m.strategies) for (const n of s.needs) assert.ok(m.probes.includes(n), `${s.id} needs a probe of this module`);
   }
 });
