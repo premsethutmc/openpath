@@ -7,7 +7,7 @@
  * Runge–Kutta integration of the differential equation. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
-import { fmt, gcd, near, simpson, sup } from "../family-kit";
+import { coef, fmt, gcd, near, simpson, sup } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
 const SC = "MATH.matrices.system-consistency";
@@ -1261,6 +1261,8 @@ export const B17: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Evaluating gives ${s.value} square units`),
+    // an area is never negative: negative options are not offered
+    range: [0, Infinity],
     domain: [[0, 2], [1, 4], [1, 9], [1, 4]],
     keep: areaOk,
     difficulty: ([kind]) => (kind === 0 ? 2 : kind === 1 ? 2 : 3),
@@ -1282,7 +1284,8 @@ export const B17: Def[] = [
     reject: (p) => (contOk(p) ? null : "A piecewise polynomial, or sin(mx)/(nx), (1 − cos mx)/(nx²), (√(1 + mx) − 1)/(nx), (x³ − u³)/(x − u)."),
     prompt: ([kind, u, v, w, z]) => {
       if (kind === 0) return `f(x) = ${pp([[1, 1]]).replace("x", "kx")}${sg(v)} for x ≤ ${u}, and f(x) = ${pp([[w, 2], [z, 0]])} for x > ${u}. Find the value of k for which f is continuous at x = ${u}.`;
-      const top = kind === 1 ? `sin(${kx(u)})/(${kx(v)})` : kind === 2 ? `(1 − cos(${kx(u)}))/(${v === 1 ? "" : v}x²)` : kind === 3 ? `(√(1 + ${kx(u)}) − 1)/(${kx(v)})` : `(x³ − ${u ** 3})/(x − ${u})`;
+      const bot = (t: string) => (t === "x" ? t : `(${t})`);
+      const top = kind === 1 ? `sin(${kx(u)})/${bot(kx(v))}` : kind === 2 ? `(1 − cos(${kx(u)}))/${bot(`${v === 1 ? "" : v}x²`)}` : kind === 3 ? `(√(1 + ${kx(u)}) − 1)/${bot(kx(v))}` : `(x³ − ${u ** 3})/(x − ${u})`;
       const at = kind === 4 ? u : 0;
       return `f(x) = ${top} for x ≠ ${at}, and f(${at}) = k. Find the value of k for which f is continuous at x = ${at}.`;
     },
@@ -1301,10 +1304,13 @@ export const B17: Def[] = [
     bugs: ([kind, u, v, w, z]) => {
       const out: Bug[] = [];
       if (kind === 0) {
-        out.push({ id: "move-sign", kind: "prerequisite", competency: "MATH.algebra.linear-equations", says: `${N(v)} was moved across without changing its sign: ${u}k ${v < 0 ? "−" : "+"} ${Math.abs(v)} = ${w * u * u + z} gives ${u}k = ${w * u * u + z} ${v < 0 ? "+" : "−"} ${Math.abs(v)}.`, predict: (w * u * u + z + v) / u });
-        if (u !== 1) out.push({ id: "no-divide", kind: "procedural", competency: CONT, says: `The equation ${u}k ${v < 0 ? "−" : "+"} ${Math.abs(v)} = ${w * u * u + z} was not finished: divide by ${u}.`, predict: w * u * u + z - v });
+        const R = w * u * u + z;
+        const lhs = `${coef(u)}k${sg(v)}`;
+        // the slip: uk + v = R written as uk = R + v (the sign of v kept when it moves across)
+        if (v !== 0) out.push({ id: "move-sign", kind: "prerequisite", competency: "MATH.algebra.linear-equations", says: `${N(v)} was moved across without changing its sign: ${lhs} = ${N(R)} was written as ${coef(u)}k = ${N(R)}${sg(v)}. Moving a number to the other side changes its sign: ${coef(u)}k = ${N(R)}${sg(-v)}.`, predict: (R + v) / u });
+        if (u !== 1 && R - v !== (R - v) / u) out.push({ id: "no-divide", kind: "procedural", competency: CONT, says: `The equation ${lhs} = ${N(R)} was not finished: ${u}k = ${N(R - v)} was given as the answer, but k = ${N(R - v)} ÷ ${u}.`, predict: R - v });
       } else if (kind === 1) {
-        out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over: sin(${u}x)/(${v}x) = (${u}/${v}) × sin(${u}x)/(${u}x), which tends to ${u}/${v}.`, predict: v / u });
+        if (u !== v) out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over, giving ${F(v / u)}: the number in the sine goes on top, since sin(${kx(u)})/${v === 1 ? "x" : `(${kx(v)})`} = (${u}/${v}) × sin(${kx(u)})/${u === 1 ? "x" : `(${kx(u)})`}, which tends to ${F(u / v)}.`, predict: v / u });
         if (u !== 1) out.push({ id: "m-lost", kind: "procedural", competency: LIM, says: `sin(${u}x)/x was taken as 1; it tends to ${u}, since sin θ/θ → 1 needs θ = ${u}x in both places.`, predict: 1 / v });
       } else if (kind === 2) {
         out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: "1 − cos θ is about θ²/2 for small θ; the ½ was lost.", predict: (u * u) / v });
@@ -1313,7 +1319,7 @@ export const B17: Def[] = [
         out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: "After multiplying by √(1 + mx) + 1, the denominator tends to 2; the 2 was lost.", predict: u / v });
       } else {
         out.push({ id: "cube-factor", kind: "prerequisite", competency: FACT, says: `x³ − ${u ** 3} was factorised as (x − ${u})(x² + ${u * u}); it is (x − ${u})(x² + ${u}x + ${u * u}).`, predict: 2 * u * u });
-        out.push({ id: "zero", kind: "conceptual", competency: LIM, says: "0/0 was taken as 0; it means the expression must be simplified (cancel x − u) before substituting.", predict: 0 });
+        out.push({ id: "zero", kind: "conceptual", competency: LIM, says: `0/0 was taken as 0; it means the expression must be simplified (cancel x − ${u}) before substituting.`, predict: 0 });
       }
       return out;
     },
@@ -1452,7 +1458,7 @@ export const B17: Def[] = [
     solve: ([kind, a, b, c]) => {
       if (kind === 0) {
         const ans = ((c - a) ** 2 + (b - c) ** 2) / 2;
-        return { steps: [step("split", "split", DIP, [c], `${intg(a, c)} (${N(c)} − x) dx + ${intg(c, b)} (x${sg(-c)}) dx`), step("pieces", "evaluate", DEFI, [(c - a) ** 2 / 2, (b - c) ** 2 / 2], ans)], answer: ans };
+        return { steps: [step("split", "split", DIP, [c], `${intg(a, c)} ${c === 0 ? "(−x)" : `(${N(c)} − x)`} dx + ${intg(c, b)} ${c === 0 ? "x" : `(x${sg(-c)})`} dx`), step("pieces", "evaluate", DEFI, [(c - a) ** 2 / 2, (b - c) ** 2 / 2], ans)], answer: ans };
       }
       const ks = range(a, b - 1);
       const ans = ks.reduce((s, k) => s + k, 0);
@@ -1470,17 +1476,19 @@ export const B17: Def[] = [
     bugs: ([kind, a, b, c]) =>
       kind === 0
         ? [
-            { id: "no-split", kind: "conceptual", competency: DIP, says: `|x − ${c}| was integrated as x − ${c} all the way; for x < ${c} it is ${c} − x, so split at x = ${c}.`, predict: ((b - c) ** 2 - (c - a) ** 2) / 2 },
-            { id: "right-only", kind: "procedural", competency: DIP, says: `Only the part from ${c} to ${b} was found; the part from ${a} to ${c} also counts.`, predict: (b - c) ** 2 / 2 },
+            { id: "no-split", kind: "conceptual", competency: DIP, says: `|x${sg(-c)}| was integrated as x${sg(-c)} all the way; for x < ${N(c)} it is ${N(c)} − x, so split at x = ${N(c)}.`, predict: ((b - c) ** 2 - (c - a) ** 2) / 2 },
+            { id: "right-only", kind: "procedural", competency: DIP, says: `Only the part from ${N(c)} to ${N(b)} was found; the part from ${N(a)} to ${N(c)} also counts.`, predict: (b - c) ** 2 / 2 },
           ]
         : [
             { id: "as-x", kind: "conceptual", competency: DIP, says: "[x] was integrated as if it were x; [x] is constant on each interval [k, k + 1), so split at the integers.", predict: (b * b - a * a) / 2 },
-            { id: "one-too-many", kind: "procedural", competency: DIP, says: `The last unit interval was counted up to ${b}; the pieces are [${a}, ${a + 1}), …, [${b - 1}, ${b}), with values ${a} to ${b - 1}.`, predict: range(a, b).reduce((s, k) => s + k, 0) },
+            { id: "one-too-many", kind: "procedural", competency: DIP, says: `The last unit interval was counted up to ${N(b)}; the pieces are [${N(a)}, ${N(a + 1)}), …, [${N(b - 1)}, ${N(b)}), with values ${N(a)} to ${N(b - 1)}.`, predict: range(a, b).reduce((s, k) => s + k, 0) },
           ],
     variants: () => [],
     explain: (s) => (s.id === "split" ? `Split: ${s.value}` : `Add the pieces: ${F(Number(s.value))}`),
     domain: [[0, 1], [-4, 2], [-1, 6], [-3, 5]],
     keep: ([kind, a, b, c]) => (kind === 0 ? a < c && c < b : c === 0 && a >= -3 && b >= a + 2),
+    // the integral of |x − c| is never negative (the integral of [x] can be)
+    range: ([kind]) => (kind === 0 ? [0, Infinity] : null),
     difficulty: ([kind, a]) => (kind === 0 && a >= 0 ? 1 : kind === 0 ? 2 : 3),
     teach: {
       idea: "∫ₐᵇ f = ∫ₐᶜ f + ∫ᶜᵇ f for any c in between. Split where the formula changes: at x = c for |x − c|, at each integer for [x].",
@@ -1516,7 +1524,7 @@ export const B17: Def[] = [
     },
     bugs: ([c, p, q]) => [
       { id: "slope-without-x", kind: "procedural", competency: DIFF, says: `The slopes were matched as a = ${N(p)}, forgetting the 2x from x²: the left derivative at x = ${N(c)} is 2(${N(c)}) + a.`, predict: `(${N(p)}, ${N(q - c * c)})` },
-      { id: "sign-slip", kind: "procedural", competency: DIFF, says: `2(${N(c)}) + a = ${N(p)} was solved as a = ${N(p)} + ${N(2 * c)}; take ${N(2 * c)} from both sides.`, predict: `(${N(p + 2 * c)}, ${N(q - 3 * c * c)})` },
+      { id: "sign-slip", kind: "procedural", competency: DIFF, says: `2(${N(c)}) + a = ${N(p)} was solved as a = ${N(p)}${sg(2 * c)}; subtract 2(${N(c)}) = ${N(2 * c)} from both sides instead.`, predict: `(${N(p + 2 * c)}, ${N(q - 3 * c * c)})` },
     ],
     distractors: ([c, p, q]) => [`(${N(p - 2 * c)}, ${N(q - c * c)})`, `(${N(p)}, ${N(q)})`],
     variants: () => [],

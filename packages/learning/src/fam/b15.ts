@@ -289,12 +289,15 @@ const rangeOk = (p: number[]) => inDom(p, D_RANGE) && p[0] !== 0;
 const rangeCs = ([a, h, k]: number[]) => [a, -2 * a * h, a * h * h + k];
 const ray = (v: number, up: boolean, closed = true) => (up ? ivs([[v, closed, null, false]]) : ivs([[null, false, v, closed]]));
 
-const D_FCL: [number, number][] = [[1, 3], [-4, 4], [-9, 9], [0, 3]];
-const fclOk = (p: number[]) => inDom(p, D_FCL) && p[1] !== 0 && !(p[0] !== 2 && p[3] === 3);
+/** [h, c, d, s]: f(x) = (x − h)² + c, written expanded, on the domain [d, ∞), into ℝ (s = 0), [c, ∞) (s = 1) or
+ * [f(d), ∞) (s = 2). (Linear, cube and modulus functions on ℕ, ℤ, ℝ are the function-types family aqonto.) */
+const D_FCL: [number, number][] = [[-5, 5], [-9, 9], [-5, 5], [0, 2]];
+// (with d = h the codomains [c, ∞) and [f(d), ∞) are the same, so s = 2 is left out there)
+const fclOk = (p: number[]) => inDom(p, D_FCL) && Math.abs(p[2] - p[0]) <= 3 && !(p[2] === p[0] && p[3] === 2);
 const FCH = ["f is one-one and onto (a bijection)", "f is one-one but not onto", "f is onto but not one-one", "f is neither one-one nor onto"];
-const fclCs = (k: number, a: number, b: number) => [a, ...Array(k - 1).fill(0), b];
-const fclDom = (s: number) => (s === 0 || s === 3 ? "ℝ" : "[0, ∞)");
-const fclCod = (s: number, a: number, b: number) => (s <= 1 ? "ℝ" : a > 0 ? `[${n_(b)}, ∞)` : `(−∞, ${n_(b)}]`);
+const fclCs = (h: number, c: number) => [1, -2 * h, h * h + c];
+const fclAt = (h: number, c: number, x: number) => (x - h) ** 2 + c;
+const fclCod = ([h, c, d, s]: number[]) => (s === 0 ? "ℝ" : `[${n_(s === 1 ? c : fclAt(h, c, d))}, ∞)`);
 const fclIdx = (oo: boolean, onto: boolean) => (oo ? (onto ? 0 : 1) : onto ? 2 : 3);
 
 const D_TR: [number, number][] = [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-3, 3], [-1, 1]];
@@ -873,66 +876,67 @@ export const B15: Def[] = [
   {
     id: "aofclass",
     arity: 4,
-    title: "Is a function one-one, onto, both or neither?",
+    title: "Is a quadratic on a restricted domain one-one, onto, both or neither?",
     competency: FUN,
     type: "choice",
     parse: none,
-    reject: (p) => (fclOk(p) ? null : "f(x) = axᵏ + b (k = 1, 2, 3) on ℝ or [0, ∞), into ℝ or its range."),
-    prompt: ([k, a, b, s]) => `Let f : ${fclDom(s)} → ${fclCod(s, a, b)} be given by f(x) = ${poly(fclCs(k, a, b))}. Which statement is true?`,
+    reject: (p) => (fclOk(p) ? null : "f(x) = (x − h)² + c (written out) on [d, ∞) with |d − h| ≤ 3, into ℝ, [c, ∞) or [f(d), ∞)."),
+    prompt: (p) => `Let f : [${n_(p[2])}, ∞) → ${fclCod(p)} be given by f(x) = ${poly(fclCs(p[0], p[1]))}. Which statement is true?`,
     choices: () => FCH,
-    solve: ([k, , , s]) => {
-      const oo = k !== 2 || s === 1 || s === 2;
-      const onto = s === 2 || s === 3 || (s === 0 && k !== 2);
+    solve: ([h, c, d, s]) => {
+      const oo = d >= h;
+      const onto = s === 2 || (s === 1 && d <= h);
       return {
         steps: [
-          { id: "one-one", op: "check", competency: FUN, inputs: [k, s], value: oo ? 1 : 0 },
-          { id: "onto", op: "check", competency: FUN, inputs: [k, s], value: onto ? 1 : 0 },
+          { id: "vertex", op: "complete-square", competency: QUAD, inputs: [h, c], value: `${bx(h)}²${c === 0 ? "" : ` ${c < 0 ? "−" : "+"} ${Math.abs(c)}`}` },
+          { id: "one-one", op: "check", competency: FUN, inputs: [h, d], value: oo ? 1 : 0 },
+          { id: "onto", op: "check", competency: FUN, inputs: [d >= h ? fclAt(h, c, d) : c, s], value: onto ? 1 : 0 },
         ],
         answer: fclIdx(oo, onto),
       };
     },
-    // independent: sample points for one-one; scan the domain for a solution of f(x) = y for sample y in the codomain
-    validate: ([k, a, b, s], v) => {
-      const f = (x: number) => a * x ** k + b;
-      const half = s === 1 || s === 2;
-      const xs = [-2, -1, -0.5, 0, 0.5, 1, 2].filter((x) => !half || x >= 0);
+    // independent: sample points for one-one (half-steps catch the mirror pairs); scan the domain for a solution of
+    // f(x) = y for sample y in the codomain
+    validate: ([h, c, d, s], v) => {
+      const f = (x: number) => x * x - 2 * h * x + h * h + c;
+      const xs = Array.from({ length: 25 }, (_, j) => d + j / 2);
       let oo = true;
       for (const x of xs) for (const y of xs) if (x !== y && Math.abs(f(x) - f(y)) < 1e-12) oo = false;
-      const ys = s <= 1 ? [b - 3, b - 1, b, b + 1, b + 3] : a > 0 ? [b, b + 1, b + 3] : [b, b - 1, b - 3];
+      const lo = s === 1 ? c : f(d);
+      const ys = s === 0 ? [c - 40, c - 1, c, f(d), f(d) + 5] : [lo, lo + 0.5, lo + 3, lo + 20];
       const hit = (y: number) => {
-        for (let i = half ? 0 : -4000; i < 4000; i++) {
-          const u = f(i / 200) - y;
-          const w = f((i + 1) / 200) - y;
-          if (u === 0 || u * w < 0) return true;
+        for (let i = 0; i < 12000; i++) {
+          const u = f(d + i / 200) - y;
+          const w = f(d + (i + 1) / 200) - y;
+          if (Math.abs(u) < 1e-12 || u * w < 0) return true;
         }
-        return f(20) === y;
+        return false;
       };
       return v === fclIdx(oo, ys.every(hit));
     },
-    bugs: ([k, a, b, s]) => {
+    bugs: ([h, c, d, s]) => {
+      const oo = d >= h;
+      const onto = s === 2 || (s === 1 && d <= h);
+      const least = d >= h ? fclAt(h, c, d) : c;
       const out: Bug[] = [];
-      if (k === 2 && s === 0) {
-        out.push({ id: "positive-x-only", kind: "conceptual", competency: FUN, says: "Only x ≥ 0 was tried; f(−1) = f(1), so on ℝ two inputs share an output.", predict: 1 });
-        out.push({ id: "codomain-as-range", kind: "conceptual", competency: FUN, says: `The range was taken to be all of ℝ; values ${a > 0 ? "below" : "above"} ${n_(b)} are never reached.`, predict: 2 });
-      }
-      if (s === 1) out.push({ id: "codomain-as-range", kind: "conceptual", competency: FUN, says: `Onto was assumed; on [0, ∞) f only reaches values ${a > 0 ? "from" : "up to"} ${n_(b)}${a > 0 ? " upwards" : ""}, not every real number.`, predict: 0 });
-      if (k === 2 && s === 3) out.push({ id: "pair-missed", kind: "conceptual", competency: FUN, says: "f(−x) = f(x) was missed: on ℝ, f(−1) = f(1), so f is not one-one.", predict: 0 });
-      if (k === 2 && s === 2) out.push({ id: "square-never-one-one", kind: "conceptual", competency: FUN, says: "x² was taken as never one-one; on [0, ∞) there are no negative inputs, so different inputs give different outputs.", predict: 2 });
-      if (k === 3 && s === 0) out.push({ id: "cube-like-square", kind: "conceptual", competency: FUN, says: "x³ was treated like x²; (−x)³ = −x³, so a cube takes every real value exactly once.", predict: 3 });
+      if (!oo) out.push({ id: "vertex-inside", kind: "conceptual", competency: FUN, says: `The vertex x = ${n_(h)} was not compared with the domain; it lies inside [${n_(d)}, ∞), so f goes down and then up: f(${n_(d)}) = f(${n_(2 * h - d)}) = ${fclAt(h, c, d)}.`, predict: fclIdx(true, onto) });
+      if (oo) out.push({ id: "square-never-one-one", kind: "conceptual", competency: FUN, says: `A quadratic was taken as never one-one; here the domain starts at ${n_(d)}, ${d === h ? "the vertex" : "to the right of the vertex"} x = ${n_(h)}, so f only increases and different inputs give different outputs.`, predict: fclIdx(false, onto) });
+      if (s === 1 && d > h) out.push({ id: "vertex-value-reached", kind: "conceptual", competency: FUN, says: `The least value ${n_(c)} (at the vertex x = ${n_(h)}) was taken as reached; x = ${n_(h)} is not in the domain, so f only reaches values from f(${n_(d)}) = ${fclAt(h, c, d)} upwards.`, predict: fclIdx(oo, true) });
+      if (s === 0) out.push({ id: "codomain-as-range", kind: "conceptual", competency: FUN, says: `The range was taken to be all of ℝ; on this domain f never goes below ${n_(least)}.`, predict: fclIdx(oo, true) });
       return out;
     },
-    variants: ([k, a, b, s]) => [[k, a, b, (s + 1) % 4]].filter(fclOk),
-    explain: (s) => (s.id === "one-one" ? `One-one (different inputs, different outputs): ${s.value ? "yes" : "no"}` : `Onto (every element of the codomain is an output): ${s.value ? "yes" : "no"}`),
+    variants: ([h, c, d, s]) => [[h, c, d, (s + 1) % 3], [h, c, d + 1, s]].filter(fclOk),
+    explain: (s) => (s.id === "vertex" ? `Complete the square: f(x) = ${s.value}, so the vertex is at x = ${n_(Number(s.inputs[0]))}` : s.id === "one-one" ? `One-one (the domain starts at ${n_(Number(s.inputs[1]))}, ${Number(s.inputs[1]) >= Number(s.inputs[0]) ? "not left of" : "left of"} the vertex): ${s.value ? "yes" : "no"}` : `Onto (the range is [${n_(Number(s.inputs[0]))}, ∞); is every element of the codomain reached?): ${s.value ? "yes" : "no"}`),
     domain: D_FCL,
     keep: fclOk,
     cap: 300,
-    difficulty: ([k, , , s]) => (k === 1 && s === 0 ? 1 : s <= 1 ? 2 : 3),
+    difficulty: ([h, , d, s]) => (d === h && s === 1 ? 1 : d < h || s === 2 ? 2 : 3),
     teach: {
-      idea: "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. Both depend on the domain and codomain, not only on the formula.",
-      method: "For one-one, look for two different inputs with the same output (for x², try x and −x). For onto, find the range on the given domain and compare it with the codomain.",
-      alternatives: [{ id: "lines", title: "Horizontal lines on the graph", kind: "conceptual", text: ["Sketch the graph over the given domain only.", "One-one: no horizontal line meets it twice. Onto: every horizontal line at a height in the codomain meets it at least once."] }],
+      idea: "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex.",
+      method: "Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain.",
+      alternatives: [{ id: "lines", title: "Horizontal lines on the graph", kind: "conceptual", text: ["Sketch the parabola and keep only the part over the domain [d, ∞).", "One-one: no horizontal line meets it twice. Onto: every horizontal line at a height in the codomain meets it at least once."], visual: ([h, c, d]) => ({ type: "plane", points: [[h, c, "vertex"], [d, fclAt(h, c, d), "start"]], range: 12 }) }],
     },
-    limits: "Functions axᵏ + b for k = 1, 2, 3 on ℝ or [0, ∞); proofs of injectivity are written work for an educator.",
+    limits: "Upward parabolas (x − h)² + c on a half-line [d, ∞); linear, cube and modulus functions on ℕ, ℤ and ℝ are the function-types family (aqonto), and proofs are written work for an educator.",
   },
   // ============================================================ transformations (partial)
   {

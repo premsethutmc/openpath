@@ -120,7 +120,8 @@ const vec = (p: number[]) => {
   if (!t.length) return "0";
   return t.map(([c, v], i) => `${i === 0 ? (c < 0 ? "−" : "") : c < 0 ? " − " : " + "}${Math.abs(c) === 1 ? "" : Math.abs(c)}${v}`).join("");
 };
-const lineVec = (a: number[], u: number[], par = "λ") => `r⃗ = (${vec(a)}) + ${par}(${vec(u)})`;
+/** A line r⃗ = a + λu as printed (r⃗ = λu when it passes through the origin). */
+const lineVec = (a: number[], u: number[], par = "λ") => (a.every((x) => x === 0) ? `r⃗ = ${par}(${vec(u)})` : `r⃗ = (${vec(a)}) + ${par}(${vec(u)})`);
 /** A complex number a + bi with whole-number parts, as printed. */
 const cz = (a: number, b: number) => {
   const im = b === 0 ? "" : `${Math.abs(b) === 1 ? "" : Math.abs(b)}i`;
@@ -762,6 +763,7 @@ const aspar: Def = {
   domain: [[0, 6], [-6, 6], [-6, 6], [-6, 6]],
   cap: 300,
   difficulty: ([a1, b1, a2, b2]) => (a1 === a2 && b1 === b2 ? 1 : a1 * b2 - a2 * b1 === 0 || a1 * a2 + b1 * b2 === 0 ? 2 : 3),
+  word: (p) => `On a town plan, a new road is to be laid along ${lin2(p[0], p[1], cP(p, 0))} and an existing railway line runs along ${lin2(p[2], p[3], cP(p, 1))}. Are the road and the railway parallel, perpendicular, or neither?`,
   teach: {
     idea: "The slope of ax + by + c = 0 is −a/b. Parallel lines have equal slopes; perpendicular lines have slopes whose product is −1.",
     method: "Find both slopes (or test a₁b₂ − a₂b₁ = 0 for parallel and a₁a₂ + b₁b₂ = 0 for perpendicular, which also works for vertical lines).",
@@ -804,7 +806,7 @@ const astan: Def = {
   solve: (pp) => {
     const [m, c] = tanLine(pp, pp[3]);
     const ans = poly([[m, "x"], [c, ""]]);
-    return { steps: [S("slope-curve", "differentiate", TAN, [tanCurve(pp)], rs(tanLine(pp, 0)[0])), S("slope-line", "choose", TAN, [pp[3]], rs(m)), S("equation", "substitute", LINE, [rs(m)], ans)], answer: ans };
+    return { steps: [S("slope-curve", "differentiate", TAN, [tanEq(pp)], rs(tanLine(pp, 0)[0])), S("slope-line", "choose", TAN, [pp[3]], rs(m)), S("equation", "substitute", LINE, [rs(m)], ans)], answer: ans };
   },
   // independent: the line must pass through the point and its slope must match (tangent) or be perpendicular to
   // (normal) the curve's slope found by a numerical difference along the curve itself
@@ -849,8 +851,8 @@ const astan: Def = {
   difficulty: ([kind, , , w]) => (kind === 0 && w === 1 ? 1 : kind === 0 ? 2 : 3),
   word: (pp) => {
     const [x1, y1] = tanPoint(pp);
-    if (pp[0] === 0) return pp[3] ? `A circular running track has equation ${tanCurve(pp)} (units of 10 m, centre at the origin). From the point ${P2(x1, y1)} on the track, a runner cuts straight across towards the centre, along the normal. Find the equation of the runner's path as y = mx + c and type the right-hand side.` : `A circular running track has equation ${tanCurve(pp)} (units of 10 m). At the point ${P2(x1, y1)} a runner leaves the track and runs straight on along the tangent. Find the equation of this straight path as y = mx + c and type the right-hand side.`;
-    return `The cross-section of a dish antenna is the parabola ${tanCurve(pp)}. At the point ${P2(x1, y1)} a support rod is fixed along the ${pp[3] ? "normal" : "tangent"} to the dish. Find the equation of the rod's line as y = mx + c and type the right-hand side.`;
+    if (pp[0] === 0) return pp[3] ? `A circular running track has equation ${tanEq(pp)} (units of 10 m, centre at the origin). From the point ${P2(x1, y1)} on the track, a runner cuts straight across towards the centre, along the normal. Find the equation of the runner's path as y = mx + c and type the right-hand side.` : `A circular running track has equation ${tanEq(pp)} (units of 10 m). At the point ${P2(x1, y1)} a runner leaves the track and runs straight on along the tangent. Find the equation of this straight path as y = mx + c and type the right-hand side.`;
+    return `The cross-section of a dish antenna is the parabola ${tanEq(pp)}. At the point ${P2(x1, y1)} a support rod is fixed along the ${pp[3] ? "normal" : "tangent"} to the dish. Find the equation of the rod's line as y = mx + c and type the right-hand side.`;
   },
   teach: {
     idea: "The tangent at a point has the slope of the curve there (from implicit differentiation or the standard formulas); the normal is perpendicular to it.",
@@ -862,8 +864,12 @@ const astan: Def = {
 function tanPoint([kind, p, q]: number[]): [number, number] {
   return kind === 0 ? [p, q] : [p * q * q, 2 * p * q];
 }
-function tanCurve([kind, p, q]: number[]) {
-  return kind === 0 ? `circle x² + y² = ${p * p + q * q}` : `parabola y² = ${4 * p}x`;
+function tanCurve(pp: number[]) {
+  return `${pp[0] === 0 ? "circle" : "parabola"} ${tanEq(pp)}`;
+}
+/** The curve's equation alone (without its name). */
+function tanEq([kind, p, q]: number[]) {
+  return kind === 0 ? `x² + y² = ${p * p + q * q}` : `y² = ${4 * p}x`;
 }
 /** [slope, intercept] of the tangent (w = 0) or normal (w = 1). */
 function tanLine([kind, p, q]: number[], w: number): [R, R] {
@@ -1118,6 +1124,7 @@ const asoct: Def = {
   cap: 300,
   keep: (p) => p.filter((x) => x === 0).length > 0 || (p[0] * 3 + p[1] * 5 + p[2] * 7 + 60) % 4 === 0,
   difficulty: (p) => (p.filter((x) => x === 0).length === 2 ? 1 : p.filter((x) => x === 0).length === 1 ? 2 : 3),
+  word: (p) => `In a 3D design program, the origin is a corner of a model room and the axes run along its edges (units in metres). ${nm(p[0] + p[1] + p[2])} places a small light at the point ${P3(p)}. Where does the light lie?`,
   teach: {
     idea: "The three coordinate planes (xy, yz, zx) divide space into eight octants. A zero coordinate puts a point on a coordinate plane; two zeros put it on an axis.",
     method: "Count the zero coordinates. None: use the signs of x, y and z to name the octant. One zero (say z = 0): the point is in the plane of the other two axes (the xy-plane). Two zeros: the point is on the remaining axis.",
@@ -1219,7 +1226,7 @@ const asangl: Def = {
     if (isZero(u) || isZero(v) || isZero(cross(u, v))) return "Two lines that are not parallel.";
     return null;
   },
-  prompt: (p) => `Find cos θ, where θ is the acute angle between the lines ${lineVec(angPts(p)[0], p.slice(0, 3))} and ${lineVec(angPts(p)[1], p.slice(3), "μ")}.`,
+  prompt: (p) => `Find cos θ, where θ is the ${angWord(p)} between the lines ${lineVec(angPts(p)[0], p.slice(0, 3))} and ${lineVec(angPts(p)[1], p.slice(3), "μ")}.`,
   solve: (p) => {
     const u = p.slice(0, 3);
     const v = p.slice(3);
@@ -1263,7 +1270,7 @@ const asangl: Def = {
   domain: Array(6).fill([-3, 3]) as [number, number][],
   cap: 400,
   difficulty: (p) => (dot(p.slice(0, 3), p.slice(3)) === 0 ? 1 : 2),
-  word: (p) => `Two straight steel rods in a roof frame lie along ${lineVec(angPts(p)[0], p.slice(0, 3))} and ${lineVec(angPts(p)[1], p.slice(3), "μ")} (units in metres). Find cos θ, where θ is the acute angle between the rods.`,
+  word: (p) => `Two straight steel rods in a roof frame lie along ${lineVec(angPts(p)[0], p.slice(0, 3))} and ${lineVec(angPts(p)[1], p.slice(3), "μ")} (units in metres). Find cos θ, where θ is the ${angWord(p)} between the rods.`,
   teach: {
     idea: "The angle between two lines is the angle between their direction vectors; the dot product gives its cosine, and |u·v| gives the acute angle. cos θ = 0 means the lines are perpendicular.",
     method: "Take the direction vectors u and v (the vectors multiplied by λ and μ), and work out cos θ = |u·v|/(|u||v|).",
@@ -1271,6 +1278,10 @@ const asangl: Def = {
   },
   limits: "Direction vectors with components from −3 to 3 (not parallel); the answer is cos θ, possibly 0 for perpendicular lines.",
 };
+/** "the acute angle", or "the angle" when the lines are perpendicular (there is no acute angle). */
+function angWord(p: number[]) {
+  return dot(p.slice(0, 3), p.slice(3)) === 0 ? "angle" : "acute angle";
+}
 function angPts(p: number[]) {
   return [basePt(p), basePt([p[3], p[4], p[5], p[0], p[1], p[2]]).map((x, i) => x + i - 1)];
 }
@@ -1417,7 +1428,10 @@ const aslrel: Def = {
   explain: (s) => (s.id === "directions" ? `u × v = ${s.value} (zero means the directions are parallel)` : s.id === "join" ? `(B − A)·(u × v) = ${s.value} (zero means the lines lie in one plane and meet)` : `So the lines are ${LREL[Number(s.value)]}`),
   domain: [[0, 11], [0, 11], [-2, 2], [-2, 2], [-1, 1]],
   difficulty: ([iu, iv, , , ga]) => (iu === iv ? 1 : ga === 0 ? 2 : 3),
-
+  word: (p) => {
+    const L = relLines(p);
+    return `Two drones fly along straight paths ${lineVec(L.A, L.u)} and ${lineVec(L.B, L.v, "μ")} (units in metres). Are the two paths parallel, intersecting, or skew?`;
+  },
   teach: {
     idea: "In space two lines are parallel (directions are multiples), intersecting (they share a point), or skew (neither: not parallel and never meet).",
     method: "If the directions are multiples, the lines are parallel. Otherwise set the general points equal, solve two of the coordinate equations for λ and μ, and test the third: it holds for intersecting lines and fails for skew lines.",
@@ -1638,14 +1652,20 @@ const asplaned: Def = {
   distractors: ([a, b, c, d, x0, y0, z0]) => {
     const n = Math.abs(a * x0 + b * y0 + c * z0 + d);
     const N = a * a + b * b + c * c;
-    return [String(n), sq(R_(n + 1, N), N), rs(R_(n, Math.abs(a) + Math.abs(b) + Math.abs(c)))];
+    const s0 = a * x0 + b * y0 + c * z0;
+    // real slips: the root of a² + b² + c² forgotten, the constant's sign changed (s₀ − d), the distance of the origin
+    // |d|/|n| (the point ignored), and the sum of the coefficients' sizes used as |n|
+    return [String(n), sq(R_(Math.abs(s0 - d), N), N), ...(d !== 0 ? [sq(R_(Math.abs(d), N), N)] : []), rs(R_(n, Math.abs(a) + Math.abs(b) + Math.abs(c)))];
   },
   variants: () => [],
   explain: (s) => (s.id === "substitute" ? `Put the point into ax + by + cz + d: ${s.value}` : s.id === "normal" ? `|n| = √(a² + b² + c²) = ${s.value}` : `Distance = |ax₀ + by₀ + cz₀ + d|/√(a² + b² + c²) = ${s.value}`),
   domain: [[-4, 4], [-4, 4], [-4, 4], [-9, 9], [-4, 4], [-4, 4], [-4, 4]],
   cap: 400,
   difficulty: ([a, b, c]) => (Number.isInteger(Math.sqrt(a * a + b * b + c * c)) ? 1 : 2),
-  word: ([a, b, c, d, x0, y0, z0]) => `A lamp hangs at ${P3([x0, y0, z0])} near a sloping glass roof that lies in the plane ${lin3(a, b, c, d)} (units in metres). How far is the lamp from the roof?`,
+  word: ([a, b, c, d, x0, y0, z0]) => {
+    const [surface, short] = a === 0 && b === 0 ? ["a flat glass ceiling", "ceiling"] : c === 0 ? ["an upright glass wall", "wall"] : ["a sloping glass roof", "roof"];
+    return `A lamp hangs at ${P3([x0, y0, z0])} near ${surface} that lies in the plane ${lin3(a, b, c, d)} (units in metres). How far is the lamp from the ${short}?`;
+  },
   teach: {
     idea: "The shortest distance from a point to a plane is along the normal (a, b, c); dividing ax₀ + by₀ + cz₀ + d by |n| measures it in units of length.",
     method: "Substitute the point into ax + by + cz + d, take the absolute value, and divide by √(a² + b² + c²).",
@@ -1934,6 +1954,7 @@ const ascpow: Def = {
   explain: (s) => (s.id === "remainder" ? `${mi(Number(s.inputs[0]))} = 4 × ${Math.floor(Number(s.inputs[0]) / 4) < 0 ? `(${mi(Math.floor(Number(s.inputs[0]) / 4))})` : Math.floor(Number(s.inputs[0]) / 4)} + ${s.value}: the remainder is ${s.value}` : `The powers repeat every 4, so i${sup(Number(s.inputs[0]))} = ${IPOW[Number(s.value)]}`),
   domain: [[-60, 200]],
   difficulty: ([n]) => (n > 0 && n <= 40 ? 1 : n > 0 ? 2 : 3),
+  word: ([n]) => `${nm(Math.abs(n))}'s calculator app shows complex numbers and has a key that ${n > 0 ? "multiplies" : "divides"} the number on the screen by i. Starting from 1, the key is pressed ${Math.abs(n)} times, so the screen shows i${sup(n)}. Which number is on the screen?`,
   teach: {
     idea: "i¹ = i, i² = −1, i³ = −i, i⁴ = 1, and then the pattern repeats, so only the remainder of the power on division by 4 matters.",
     method: "Divide the power by 4 and keep the remainder r (from 0 to 3, also for negative powers); then iⁿ = iʳ.",
@@ -1998,26 +2019,26 @@ const asarg: Def = {
   arity: 2,
   title: "The principal argument of a complex number",
   competency: POLAR,
-  type: "exact",
+  type: "expression",
   mc: true,
   // [j, s]: z = s × (the j-th special point)
   parse: none,
   reject: (p) => (!allIn(p, [[0, 14], [1, 9]]) ? "A complex number at a special angle, scaled by 1 to 9." : null),
-  prompt: ([j, s]) => `Find the principal argument θ (−π < θ ≤ π) of z = ${argZ(j, s)}. Type the number k with θ = kπ (for example, type −1/4 for θ = −π/4).`,
+  prompt: ([j, s]) => `Find the principal argument θ (−π < θ ≤ π) of z = ${argZ(j, s)}. Write θ in radians, in terms of π (you may type pi).`,
   solve: ([j, s]) => {
     const A = ANG[j];
     const basic = argBasic(A.k);
-    return { steps: [S("modulus", "evaluate", CX, [argZ(j, s)], es(emul(A.mod, E_([s, 1])))), S("basic", "evaluate", TRIG, [rs(basic)], piStr(basic)), S("quadrant", "adjust", POLAR, [A.re[0], A.im[0]], piStr(A.k))], answer: rs(A.k) };
+    return { steps: [S("modulus", "evaluate", CX, [argZ(j, s)], es(emul(A.mod, E_([s, 1])))), S("basic", "evaluate", TRIG, [rs(basic)], piStr(basic)), S("quadrant", "adjust", POLAR, [A.re[0], A.im[0]], piStr(A.k))], answer: piStr(A.k) };
   },
-  // independent: r cos(kπ) and r sin(kπ) must give back the real and imaginary parts, with −1 < k ≤ 1
+  // independent: r cos θ and r sin θ must give back the real and imaginary parts, with −π < θ ≤ π
   validate: ([j, s], v) => {
-    const k = num1(v);
-    if (k === null || k <= -1 || k > 1) return false;
+    const t = num1(v);
+    if (t === null || t <= -Math.PI + 1e-12 || t > Math.PI + 1e-12) return false;
     const A = ANG[j];
     const x = s * A.re[0] * Math.sqrt(A.re[1]);
     const y = s * A.im[0] * Math.sqrt(A.im[1]);
     const r = Math.hypot(x, y);
-    return close(r * Math.cos(k * Math.PI), x, 1e-9) && close(r * Math.sin(k * Math.PI), y, 1e-9);
+    return close(r * Math.cos(t), x, 1e-9) && close(r * Math.sin(t), y, 1e-9);
   },
   bugs: ([j]) => {
     const A = ANG[j];
@@ -2026,14 +2047,15 @@ const asarg: Def = {
     const x = A.re[0];
     const y = A.im[0];
     return [
-      B("basic-angle-only", "conceptual", POLAR, `The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.`, rs(basic)),
-      B("arctan-quadrant", "conceptual", POLAR, "tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.", x < 0 ? rs(y > 0 ? rsub(k, R_(1)) : y < 0 ? radd(k, R_(1)) : R_(0)) : null),
-      B("not-principal", "procedural", POLAR, "The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.", k[0] < 0 ? rs(radd(k, R_(2))) : null),
+      B("basic-angle-only", "conceptual", POLAR, `The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.`, piStr(basic)),
+      B("arctan-quadrant", "conceptual", POLAR, "tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.", x < 0 ? piStr(y > 0 ? rsub(k, R_(1)) : y < 0 ? radd(k, R_(1)) : R_(0)) : null),
+      B("not-principal", "procedural", POLAR, "The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.", k[0] < 0 ? piStr(radd(k, R_(2))) : null),
+      B("degrees-given", "procedural", POLAR, "The argument was given in degrees; in radians 180° is π (so 45° is π/4).", String(Math.round(rv(k) * 180))),
     ];
   },
   distractors: ([j]) => {
     const k = ANG[j].k;
-    return [rs([-k[0], k[1]]), rs(rsub(R_(1, 2), k)), rs(R_(k[0], 2 * k[1]))];
+    return [piStr([-k[0], k[1]]), piStr(rsub(R_(1, 2), k)), piStr(R_(k[0], 2 * k[1]))];
   },
   variants: () => [],
   explain: (s) => (s.id === "modulus" ? `|z| = ${s.value}` : s.id === "basic" ? `The acute angle α with tan α = |y/x| is ${s.value}` : `Use the quadrant (signs of the parts): θ = ${s.value}`),
@@ -2047,7 +2069,7 @@ const asarg: Def = {
     method: "Find the acute angle α with tan α = |y/x|. Then use the quadrant: first α, second π − α, third −(π − α), fourth −α.",
     alternatives: [{ id: "sketch", title: "Sketch the point", kind: "conceptual", text: ["Plot z in the Argand plane and mark the angle from the positive real axis.", "Anticlockwise angles are positive, clockwise ones negative; choose the one between −π and π."], visual: ([j, s]) => ({ type: "plane", points: [[s * ANG[j].re[0] * Math.sqrt(ANG[j].re[1]), s * ANG[j].im[0] * Math.sqrt(ANG[j].im[1]), "z"]], segments: [[[0, 0], [s * ANG[j].re[0] * Math.sqrt(ANG[j].re[1]), s * ANG[j].im[0] * Math.sqrt(ANG[j].im[1])]]] }) }],
   },
-  limits: "Numbers at the special angles (multiples of π/6 and π/4, and the axes), scaled by 1 to 9; the answer is k in θ = kπ.",
+  limits: "Numbers at the special angles (multiples of π/6 and π/4, and the axes), scaled by 1 to 9; the answer is θ in radians, in terms of π.",
 };
 function argZ(j: number, s: number) {
   const A = ANG[j];
@@ -2069,36 +2091,37 @@ const polarTxt = (r: number, a: number) => {
   const ang = a < 0 ? `(${piStr(R_(a, 6))})` : piStr(R_(a, 6));
   return `${r === 1 ? "" : r}(cos ${ang} + i sin ${ang})`;
 };
+/** One pair of moduli per choice of arguments (the moduli do not change the argument, so they only vary the numbers). */
+const polmR = ([, a1, , a2, op]: number[]) => [1 + ((((a1 * 7 + a2 * 3 + op * 5) % 6) + 6) % 6), 1 + ((((a1 * 5 + a2 * 11 + op) % 6) + 6) % 6)];
 const aspolm: Def = {
   id: "aspolm",
   arity: 5,
   title: "Multiplying and dividing in polar form",
   competency: POLAR,
-  type: "tuple",
+  type: "expression",
   mc: true,
-  // [r₁, a₁, r₂, a₂, op]: z₁ = r₁ cis(a₁π/6), z₂ = r₂ cis(a₂π/6); op 0 product, 1 quotient
+  // [r₁, a₁, r₂, a₂, op]: z₁ = r₁ cis(a₁π/6), z₂ = r₂ cis(a₂π/6); op 0 product, 1 quotient; the principal argument
   parse: none,
   reject: (p) => (!allIn(p, [[1, 6], [-5, 6], [1, 6], [-5, 6], [0, 1]]) || p[1] === 0 || p[3] === 0 ? "Moduli 1 to 6 and arguments that are non-zero multiples of π/6 in (−π, π]." : null),
-  prompt: ([r1, a1, r2, a2, op]) => `z₁ = ${polarTxt(r1, a1)} and z₂ = ${polarTxt(r2, a2)}. Find ${op ? "z₁/z₂" : "z₁z₂"} in polar form. Type the pair (r, k), where r is its modulus and kπ its principal argument (−π < kπ ≤ π).`,
+  prompt: ([r1, a1, r2, a2, op]) => `z₁ = ${polarTxt(r1, a1)} and z₂ = ${polarTxt(r2, a2)}. Find the principal argument θ (−π < θ ≤ π) of ${op ? "z₁/z₂" : "z₁z₂"}. Write θ in radians, in terms of π (you may type pi).`,
   solve: ([r1, a1, r2, a2, op]) => {
     const r = op ? R_(r1, r2) : R_(r1 * r2);
     const raw = op ? a1 - a2 : a1 + a2;
     const k = R_(prin6(raw), 6);
-    return { steps: [S("modulus", op ? "divide" : "multiply", POLAR, [r1, r2], rs(r)), S("argument", op ? "subtract" : "add", POLAR, [rs(R_(raw, 6))], piStr(R_(raw, 6))), S("principal", "adjust", POLAR, [rs(R_(raw, 6))], piStr(k))], answer: tup([rs(r), rs(k)]) };
+    return { steps: [S("modulus", op ? "divide" : "multiply", POLAR, [r1, r2], rs(r)), S("argument", op ? "subtract" : "add", POLAR, [rs(R_(raw, 6))], piStr(R_(raw, 6))), S("principal", "adjust", POLAR, [rs(R_(raw, 6))], piStr(k))], answer: piStr(k) };
   },
-  // independent: multiply or divide the numbers in the form x + iy, then compare with r(cos kπ + i sin kπ)
+  // independent: multiply or divide the numbers in the form x + iy, then compare the direction with (cos θ, sin θ)
   validate: ([r1, a1, r2, a2, op], v) => {
-    const t = nums(v);
-    if (!t || t.length !== 2 || t[1] <= -1 || t[1] > 1 || t[0] <= 0) return false;
+    const t = num1(v);
+    if (t === null || t <= -Math.PI + 1e-12 || t > Math.PI + 1e-12) return false;
     const z1 = [r1 * Math.cos((a1 * Math.PI) / 6), r1 * Math.sin((a1 * Math.PI) / 6)];
     const z2 = [r2 * Math.cos((a2 * Math.PI) / 6), r2 * Math.sin((a2 * Math.PI) / 6)];
     const w = op ? cmul(z1, [z2[0] / (r2 * r2), -z2[1] / (r2 * r2)]) : cmul(z1, z2);
-    return close(t[0] * Math.cos(t[1] * Math.PI), w[0], 1e-9) && close(t[0] * Math.sin(t[1] * Math.PI), w[1], 1e-9);
+    const m = Math.hypot(w[0], w[1]);
+    return close(m * Math.cos(t), w[0], 1e-9) && close(m * Math.sin(t), w[1], 1e-9);
   },
-  bugs: ([r1, a1, r2, a2, op]) => {
-    const r = op ? R_(r1, r2) : R_(r1 * r2);
+  bugs: ([, a1, , a2, op]) => {
     const raw = op ? a1 - a2 : a1 + a2;
-    const mk = (rr: R, kk: R) => tup([rs(rr), rs(kk)]);
     const red = (k: R) => {
       let x = k;
       while (rv(x) > 1) x = rsub(x, R_(2));
@@ -2106,33 +2129,36 @@ const aspolm: Def = {
       return x;
     };
     return [
-      B("arguments-multiplied", "conceptual", POLAR, `The arguments were ${op ? "divided" : "multiplied"} like the moduli; when complex numbers are ${op ? "divided, arguments are subtracted" : "multiplied, arguments are added"}.`, op ? null : mk(r, red(R_(a1 * a2, 36)))),
+      B("arguments-multiplied", "conceptual", POLAR, "The arguments were multiplied like the moduli; when complex numbers are multiplied, the arguments are added.", op ? null : piStr(red(R_(a1 * a2, 36)))),
       op
-        ? B("subtracted-wrong-way", "procedural", POLAR, "The arguments were subtracted the wrong way round: arg(z₁/z₂) = arg z₁ − arg z₂.", mk(r, R_(prin6(a2 - a1), 6)))
-        : B("added-moduli", "conceptual", POLAR, "The moduli were added; moduli multiply: |z₁z₂| = |z₁||z₂|.", mk(R_(r1 + r2), R_(prin6(raw), 6))),
-      B("not-principal", "procedural", POLAR, "The argument was not brought into (−π, π]; add or subtract 2π.", raw > 6 || raw <= -6 ? mk(r, R_(raw, 6)) : null),
+        ? B("subtracted-wrong-way", "procedural", POLAR, "The arguments were subtracted the wrong way round, as arg z₂ − arg z₁; arg(z₁/z₂) = arg z₁ − arg z₂.", piStr(R_(prin6(a2 - a1), 6)))
+        : B("arguments-subtracted", "recall", POLAR, "The arguments were subtracted (as for a quotient); for a product they are added.", piStr(R_(prin6(a1 - a2), 6))),
+      B("not-principal", "procedural", POLAR, "The argument was not brought into (−π, π]; add or subtract 2π.", raw > 6 || raw <= -6 ? piStr(R_(raw, 6)) : null),
     ];
   },
-  distractors: ([r1, a1, r2, a2, op]) => {
-    const r = op ? R_(r1, r2) : R_(r1 * r2);
-    const k = R_(prin6(op ? a1 - a2 : a1 + a2), 6);
+  distractors: ([, a1, , a2, op]) => {
     const s6 = prin6(op ? a1 - a2 : a1 + a2);
-    return [tup([rs(r), rs(k[0] === k[1] ? R_(1, 2) : [-k[0], k[1]])]), tup([rs(op ? R_(r2, r1) : R_(r1 * r2 + 1)), rs(k)]), tup([rs(radd(r, R_(1))), rs(k)]), tup([rs(r), rs(R_(prin6(s6 + 2), 6))]), tup([rs(r), rs(R_(prin6(s6 - 3), 6))])];
+    return [piStr(R_(prin6(-s6 === -6 ? 3 : -s6), 6)), piStr(R_(prin6(s6 + 2), 6)), piStr(R_(prin6(s6 - 3), 6)), piStr(R_(prin6(s6 + 6), 6))];
   },
   variants: () => [],
-  explain: (s) => (s.id === "modulus" ? `${s.op === "divide" ? "Divide" : "Multiply"} the moduli: ${s.value}` : s.id === "argument" ? `${s.op === "subtract" ? "Subtract" : "Add"} the arguments: ${s.value}` : `The principal argument (add or subtract 2π if needed): ${s.value}`),
+  explain: (s) => (s.id === "modulus" ? `(The modulus is ${s.op === "divide" ? "r₁/r₂" : "r₁r₂"} = ${s.value}; it does not change the argument.)` : s.id === "argument" ? `${s.op === "subtract" ? "Subtract" : "Add"} the arguments: ${s.value}` : `The principal argument (add or subtract 2π if needed): ${s.value}`),
   domain: [[1, 6], [-5, 6], [1, 6], [-5, 6], [0, 1]],
+  keep: (p) => {
+    const [r1, r2] = polmR(p);
+    return p[0] === r1 && p[2] === r2;
+  },
   cap: 400,
   difficulty: ([, a1, , a2, op]) => {
     const raw = op ? a1 - a2 : a1 + a2;
     return raw > 6 || raw <= -6 ? 3 : op ? 2 : 1;
   },
+  word: ([r1, a1, r2, a2, op]) => `In an AC circuit, quantities are written in polar form. ${op ? `A voltage V = ${polarTxt(r1, a1)} drives a current through an impedance Z = ${polarTxt(r2, a2)}, so the current is V/Z.` : `A current I = ${polarTxt(r1, a1)} flows through an impedance Z = ${polarTxt(r2, a2)}, so the voltage is IZ.`} Find the principal argument θ (−π < θ ≤ π) of the ${op ? "current" : "voltage"}, in radians and in terms of π (you may type pi).`,
   teach: {
     idea: "In polar form, multiplying complex numbers multiplies their moduli and adds their arguments; dividing divides the moduli and subtracts the arguments.",
     method: "Multiply (or divide) r₁ and r₂, add (or subtract) the arguments, and bring the result into (−π, π] by adding or subtracting 2π.",
     alternatives: [{ id: "rotations", title: "Stretch and turn", kind: "conceptual", text: ["Multiplying by z₂ stretches by r₂ and turns by arg z₂.", "So the turns add up and the stretches multiply."] }],
   },
-  limits: "Moduli 1 to 6 and arguments that are multiples of π/6.",
+  limits: "Moduli 1 to 6 and arguments that are multiples of π/6 (one pair of moduli for each pair of arguments); the answer is the principal argument in radians, in terms of π.",
 };
 
 // ---- circles in the Argand plane
@@ -2388,7 +2414,8 @@ const asaddp: Def = {
   },
   prompt: ([N, a, b, c, q]) => {
     const u = a + b - c;
-    const given = q === 1 ? `P(A) = ${pf(a, N)}, P(B) = ${pf(b, N)} and P(A ∪ B) = ${pf(u, N)}` : q === 3 ? `P(A) = ${pf(a, N)} and P(A ∩ B) = ${pf(c, N)}` : `P(A) = ${pf(a, N)}, P(B) = ${pf(b, N)} and P(A ∩ B) = ${pf(c, N)}`;
+    // for "A but not B" P(B) is given too (not needed, but it keeps different problems different and is a fair test)
+    const given = q === 1 ? `P(A) = ${pf(a, N)}, P(B) = ${pf(b, N)} and P(A ∪ B) = ${pf(u, N)}` : `P(A) = ${pf(a, N)}, P(B) = ${pf(b, N)} and P(A ∩ B) = ${pf(c, N)}`;
     return `For two events A and B, ${given}. Find ${ADDQ[q]}.`;
   },
   solve: ([N, a, b, c, q]) => {
@@ -2416,7 +2443,7 @@ const asaddp: Def = {
   bugs: ([N, a, b, c, q]) => {
     const u = a + b - c;
     if (q === 0) return [B("overlap-not-subtracted", "conceptual", EV, "P(A) + P(B) counts the outcomes in both events twice; subtract P(A ∩ B) once.", (a + b) / N), B("assumed-independent", "conceptual", EV, "P(A ∩ B) is given; it was replaced by P(A) × P(B), which is only right for independent events.", a / N + b / N - (a * b) / (N * N))];
-    if (q === 1) return [B("assumed-independent", "conceptual", EV, "P(A ∩ B) was taken as P(A) × P(B); the events are not said to be independent, so use P(A ∩ B) = P(A) + P(B) − P(A ∪ B).", (a * b) / (N * N)), B("sign-slip", "procedural", EV, "The rule was rearranged with the wrong signs: P(A ∩ B) = P(A) + P(B) − P(A ∪ B).", (a + b + u) / N)];
+    if (q === 1) return [B("assumed-independent", "conceptual", EV, "P(A ∩ B) was taken as P(A) × P(B); the events are not said to be independent, so use P(A ∩ B) = P(A) + P(B) − P(A ∪ B).", (a * b) / (N * N)), B("union-minus-one", "procedural", EV, "The overlap was found as P(A ∪ B) − P(A); that is the part of B outside A. Rearranging the addition rule gives P(A ∩ B) = P(A) + P(B) − P(A ∪ B).", (u - a) / N)];
     if (q === 2) return [B("complement-forgotten", "procedural", COMP, "P(A ∪ B) was given; 'neither' is the complement: 1 − P(A ∪ B).", u / N), B("overlap-not-added-back", "conceptual", EV, "1 − P(A) − P(B) removes the overlap twice; add P(A ∩ B) back.", (N - a - b) / N)];
     return [B("gave-P-A", "conceptual", EV, "P(A) includes the outcomes where B also happens; take P(A ∩ B) away.", a / N), B("subtracted-P-B", "procedural", EV, "P(B) was subtracted; only the overlap P(A ∩ B) is removed from P(A).", a > b ? (a - b) / N : null)];
   },
@@ -2499,7 +2526,10 @@ const asmex: Def = {
   explain: (s) => (s.id === "intersection" ? `A ∩ B = ${s.value}` : s.id === "union" ? `A ∪ B = ${s.value}` : `So A and B are ${MEX[Number(s.value)]}`),
   domain: [[0, 3], [0, 79]],
   difficulty: ([cat]) => (cat === 3 ? 1 : cat === 2 ? 3 : 2),
-
+  word: (p) => {
+    const [A, Bm] = mexPair(p);
+    return `Eight raffle tickets numbered 1 to 8 are in a bag at a school fair, and ${nm(p[1])} draws one at random. A prize of a book goes with the numbers ${setTxt(A)} (event A) and a prize of a pen with the numbers ${setTxt(Bm)} (event B). Which describes the events A and B?`;
+  },
   teach: {
     idea: "Mutually exclusive events cannot happen together (A ∩ B is empty). Exhaustive events cover the whole sample space (A ∪ B = S).",
     method: "Find A ∩ B: empty means mutually exclusive. Find A ∪ B: the whole sample space means exhaustive. Each property is checked separately.",
@@ -2588,57 +2618,70 @@ function bayesSetup(p: number[], w: string[]) {
   return `${w[0]} ${sh.length} ${w[1]}. ${parts.replace(/, (?=[^,]*$)/, " and ")} ${w[3]}. ${rates.replace(/, (?=[^,]*$)/, " and ")} ${w[4]} are ${w[5]}.`;
 }
 
+/** "a 1", "a 1 or 2", "a 1, 2 or 3": the faces 1 to f of a die. */
+const facesTxt = (f: number) => (f === 1 ? "a 1" : `a ${Array.from({ length: f - 1 }, (_, i) => i + 1).join(", ")} or ${f}`);
+/** The names alternate: even positions are girls' names (she), odd positions boys' names (he). */
+const pron = (k: number) => (((k % NAMES.length) + NAMES.length) % NAMES.length) % 2 === 0 ? "she" : "he";
 const astotp: Def = {
   id: "astotp",
   arity: 5,
-  title: "The theorem of total probability",
+  title: "Bayes' theorem: which bag the ball came from",
   competency: BAY,
   type: "fraction",
   mc: true,
-  // [f, r₁, b₁, r₂, b₂]: a die chooses Bag I on 1 to f, otherwise Bag II; P(red)
+  // [f, r₁, b₁, r₂, b₂]: a die chooses Bag I on 1 to f, otherwise Bag II; the ball is red: P(Bag I | red)
   parse: none,
   reject: (p) => (!allIn(p, [[1, 5], [1, 6], [1, 6], [1, 6], [1, 6]]) || (p[1] * (p[3] + p[4]) === p[3] * (p[1] + p[2])) ? "Two bags of 1 to 6 red and 1 to 6 black balls with different proportions of red, chosen by a die." : null),
-  prompt: ([f, r1, b1, r2, b2]) => `A die is thrown. If it shows ${f === 1 ? "1" : `1 to ${f}`}, a ball is drawn from Bag I, which has ${r1} red and ${b1} black balls; otherwise a ball is drawn from Bag II, which has ${r2} red and ${b2} black balls. Find the probability that the ball drawn is red.`,
+  prompt: ([f, r1, b1, r2, b2]) => `A die is thrown. If it shows ${facesTxt(f)}, a ball is drawn from Bag I, which has ${r1} red and ${b1} black balls; otherwise a ball is drawn from Bag II, which has ${r2} red and ${b2} black balls. The ball drawn is red. Find the probability that it was drawn from Bag I.`,
   solve: ([f, r1, b1, r2, b2]) => {
     const [n1, n2] = [r1 + b1, r2 + b2];
     const t1 = (f / 6) * (r1 / n1);
     const t2 = ((6 - f) / 6) * (r2 / n2);
-    return { steps: [S("bag1", "multiply", COND, [pf(f, 6), pf(r1, n1)], t1), S("bag2", "multiply", COND, [pf(6 - f, 6), pf(r2, n2)], t2), S("total", "add", BAY, [], t1 + t2)], answer: (f * r1 * n2 + (6 - f) * r2 * n1) / (6 * n1 * n2) };
+    return { steps: [S("bag1", "multiply", COND, [pf(f, 6), pf(r1, n1)], t1), S("bag2", "multiply", COND, [pf(6 - f, 6), pf(r2, n2)], t2), S("total", "add", "MATH.probability.total-probability", [], t1 + t2), S("bayes", "divide", BAY, [], t1 / (t1 + t2))], answer: (f * r1 * n2) / (f * r1 * n2 + (6 - f) * r2 * n1) };
   },
-  // independent: list every equally likely (die face, ball in Bag I, ball in Bag II) and count the red draws
+  // independent: list every equally likely (die face, ball in Bag I, ball in Bag II); among the red draws, count those
+  // from Bag I
   validate: ([f, r1, b1, r2, b2], v) => {
     if (typeof v !== "number") return false;
     const [n1, n2] = [r1 + b1, r2 + b2];
     let red = 0;
-    let all = 0;
+    let fromI = 0;
     for (let face = 1; face <= 6; face++)
       for (let i = 0; i < n1; i++)
-        for (let j = 0; j < n2; j++) {
-          all++;
-          if (face <= f ? i < r1 : j < r2) red++;
-        }
-    return Math.abs(v - red / all) < 1e-12;
+        for (let j = 0; j < n2; j++)
+          if (face <= f ? i < r1 : j < r2) {
+            red++;
+            if (face <= f) fromI++;
+          }
+    return Math.abs(v - fromI / red) < 1e-12;
   },
   bugs: ([f, r1, b1, r2, b2]) => {
     const [n1, n2] = [r1 + b1, r2 + b2];
+    const t1 = (f * r1) / (6 * n1);
+    const t2 = ((6 - f) * r2) / (6 * n2);
     return [
-      B("bags-averaged", "conceptual", BAY, `The two bags are not equally likely: Bag I is used with probability ${pf(f, 6)}. Weight each bag's chance of red by the chance of using it.`, f !== 3 ? (r1 / n1 + r2 / n2) / 2 : null),
-      B("balls-pooled", "conceptual", BAY, "The balls of both bags were put together; the ball comes from one bag only, chosen by the die.", (r1 + r2) / (n1 + n2)),
-      B("one-bag-only", "procedural", BAY, "Only the Bag I branch was counted; add the Bag II branch as well.", (f * r1) / (6 * n1)),
+      B("joint-not-divided", "procedural", BAY, "P(Bag I and red) was given; the ball is known to be red, so divide by the total probability of red, P(red) = P(Bag I and red) + P(Bag II and red).", t1),
+      B("condition-reversed", "conceptual", COND, `P(red | Bag I) = ${pf(r1, n1)} was given; the question asks the reverse, P(Bag I | red).`, r1 / n1),
+      B("forward-question", "conceptual", BAY, "The probability that the ball is red was found (total probability); here the colour is known and the bag is asked, so that total is the denominator.", t1 + t2),
+      B("prior-only", "conceptual", BAY, `The chance of choosing Bag I before the draw, ${pf(f, 6)}, was given; knowing the ball is red changes it.`, f / 6),
     ];
   },
   variants: () => [],
-  explain: (s) => (s.id === "bag1" ? `Bag I and red: ${s.inputs[0]} × ${s.inputs[1]}` : s.id === "bag2" ? `Bag II and red: ${s.inputs[0]} × ${s.inputs[1]}` : "Add the two branches (total probability)"),
+  explain: (s) => (s.id === "bag1" ? `Bag I and red: ${s.inputs[0]} × ${s.inputs[1]}` : s.id === "bag2" ? `Bag II and red: ${s.inputs[0]} × ${s.inputs[1]}` : s.id === "total" ? "Add the two branches: P(red), the total probability" : "Bayes: P(Bag I | red) = P(Bag I and red) ÷ P(red)"),
   domain: [[1, 5], [1, 6], [1, 6], [1, 6], [1, 6]],
   cap: 400,
   difficulty: ([f, r1, b1, r2, b2]) => (f === 3 ? 1 : (r1 + b1) === (r2 + b2) ? 2 : 3),
-  word: ([f, r1, b1, r2, b2]) => `${nm(f + r1)} throws a die to choose a box. On ${f === 1 ? "a 1" : `1 to ${f}`} she takes a pen from Box I, which has ${r1} blue and ${b1} black pens; otherwise she takes a pen from Box II, which has ${r2} blue and ${b2} black pens. Find the probability that the pen is blue.`,
-  teach: {
-    idea: "When an outcome can happen in several separate ways (through Bag I or through Bag II), its probability is the sum over the ways of P(way) × P(outcome | way).",
-    method: "Draw a tree: first branch the bag (with the die's probabilities), then the colour. Multiply along each red branch and add.",
-    alternatives: [{ id: "count_all", title: "Count equally likely cases", kind: "conceptual", text: ["Imagine many repeats: in 6 throws, f choose Bag I and the rest Bag II.", "Scale up so the balls divide evenly, count the red draws, and divide by all the draws."] }],
+  word: ([f, r1, b1, r2, b2]) => {
+    const who = nm(f + r1);
+    const pr = pron(f + r1);
+    return `${who} throws a die to choose a box. On ${facesTxt(f)} ${pr} takes a pen from Box I, which has ${r1} blue and ${b1} black pens; otherwise ${pr} takes a pen from Box II, which has ${r2} blue and ${b2} black pens. The pen ${pr} takes is blue. Find the probability that it came from Box I.`;
   },
-  limits: "Two bags of up to 6 red and 6 black balls chosen by a die; three or more stages are not included.",
+  teach: {
+    idea: "Bayes' theorem turns the question round: P(Bag I | red) = P(Bag I and red) / P(red), and P(red) adds up the red branches of both bags (total probability).",
+    method: "Draw a tree: first the bag (with the die's probabilities), then the colour. Multiply along each red branch; divide the Bag I red branch by the sum of both red branches.",
+    alternatives: [{ id: "count_all", title: "Count equally likely cases", kind: "conceptual", text: ["Imagine many repeats: in 6 throws, f choose Bag I and the rest Bag II; scale up so the balls divide evenly.", "Count all the red draws and the red draws from Bag I: the answer is the second count divided by the first."] }],
+  },
+  limits: "Two bags of up to 6 red and 6 black balls chosen by a die, the bag asked given the colour; the forward question (P(red)) is the total-probability family, and three or more sources are in the machines family.",
 };
 
 const C = (n: number, k: number) => {
@@ -2782,7 +2825,12 @@ const asbinmv: Def = {
   domain: [[2, 40], [1, 9], [2, 10], [0, 1]],
   cap: 400,
   difficulty: ([n, a, d, mode]) => (mode === 0 && (n * a) % d === 0 ? 1 : mode === 0 ? 2 : 3),
-  word: ([n, a, d, mode]) => (mode ? `The number of defective bulbs in a box is binomial, with mean ${rs(R_(n * a, d))} and variance ${rs(R_(n * a * (d - a), d * d))}. How many bulbs are in a box, and what is the probability that a bulb is defective? Type (n, p).` : `Each bulb made by a machine is defective with probability ${pf(a, d)}, independently. A box holds ${n} bulbs. Find the mean and variance of the number of defective bulbs in a box, typed as (mean, variance).`),
+  // a large p reads as a success (a seed germinating), a small one as a fault (a defective bulb)
+  word: ([n, a, d, mode]) => {
+    const good = 2 * a > d;
+    if (mode) return good ? `The number of seeds that germinate in a packet is binomial, with mean ${rs(R_(n * a, d))} and variance ${rs(R_(n * a * (d - a), d * d))}. How many seeds are in a packet, and what is the probability that a seed germinates? Type (n, p).` : `The number of defective bulbs in a box is binomial, with mean ${rs(R_(n * a, d))} and variance ${rs(R_(n * a * (d - a), d * d))}. How many bulbs are in a box, and what is the probability that a bulb is defective? Type (n, p).`;
+    return good ? `Each seed in a packet germinates with probability ${pf(a, d)}, independently of the others. A packet holds ${n} seeds. Find the mean and variance of the number of seeds that germinate, typed as (mean, variance).` : `Each bulb made by a machine is defective with probability ${pf(a, d)}, independently. A box holds ${n} bulbs. Find the mean and variance of the number of defective bulbs in a box, typed as (mean, variance).`;
+  },
   teach: {
     idea: "A binomial count is a sum of n independent 0–1 trials, each with mean p and variance pq, so the mean is np and the variance is npq.",
     method: "Mean = np, variance = npq with q = 1 − p. Going back: q = variance ÷ mean, p = 1 − q, n = mean ÷ p.",
