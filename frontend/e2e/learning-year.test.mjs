@@ -16,6 +16,7 @@ import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { question } from "../../packages/learning/src/content.ts";
+import { problemOf, show } from "../../packages/learning/src/families.ts";
 
 const base = process.env.YEAR_URL ?? "http://127.0.0.1:4190";
 const mode = process.env.YEAR_API ?? "fake";
@@ -548,5 +549,173 @@ test("journey N: a Grade 5 JEE learner builds foundations; Grade 11 later uses t
   await page.getByText(/Crash course/).waitFor();
   await page.getByText(/not verified against the official paper/).waitFor();
   await shot(page, "n1-grade11-exam-plan-crash-phone");
+  await context.close();
+});
+
+// ---------------------------------------------------------------- platform scenarios (the same UI for every grade)
+
+/** Answer as a learner with one written misunderstanding of a problem family, until `learned()` (then right). */
+const withBug = (bugId, learned) => (qid) => {
+  const p = problemOf(qid);
+  const b = p?.bugs.find((x) => x.id === bugId);
+  if (!p || learned() || !b || b.predict === null) return null;
+  const v = Array.isArray(b.predict) && p.type !== "set" ? b.predict[0] : b.predict;
+  return p.type === "choice" ? "ABCD"[v] : show(v);
+};
+/** Work a typed problem through recovery to its end; the learner's misunderstanding goes once a lesson is read. */
+async function recoverTyped(page, text, bugId) {
+  let taught = false;
+  const policy = withBug(bugId, () => taught);
+  await typeProblem(page, text);
+  await answer(page, policy);
+  await next(page);
+  const log = [];
+  for (let i = 0; i < 40; i++) {
+    if (await page.getByText(/^Solved (after help|on your own)$/).count()) break;
+    if (await page.locator(".lesson").count()) {
+      log.push(`lesson:${await page.locator(".lesson .eyebrow").innerText()}`);
+      taught = true;
+      await lesson(page);
+      continue;
+    }
+    if (await page.locator(".qcard").count()) {
+      const guided = (await page.locator(".qcard .counted").innerText()).startsWith("Practice with help");
+      const a = await answer(page, policy, { hint: guided });
+      log.push(`${a.qid}=${a.response}`);
+      await next(page);
+      continue;
+    }
+    await page.waitForTimeout(200);
+  }
+  return log;
+}
+async function crumbs(page) {
+  return page.getByRole("navigation", { name: "Where you are" }).innerText();
+}
+
+test("platform B: Grade 10 board textbook → Algebra → Quadratic equations → sections; a gap in expanding brackets repaired", async () => {
+  const { page, context, learner } = await learnerPage("Synthetic Grade 10 board learner");
+  await page.getByRole("heading", { name: "Set up My Learning Year" }).waitFor();
+  await page.getByRole("button", { name: /^Grade 10\b/ }).click();
+  await page.getByRole("radio", { name: "Sample Board B" }).click();
+  await shot(page, "p-b0-setup-board-phone");
+  await page.getByRole("button", { name: /Board B Sample Mathematics/ }).click();
+  await page.getByRole("button", { name: "Start Grade 10" }).click();
+  await page.getByRole("heading", { name: /^Grade 10 · / }).waitFor();
+  await shot(page, "p-b1-dashboard-units-phone");
+  await tile(page, "Algebra");
+  await tile(page, "Quadratic equations");
+  await shot(page, "p-b2-chapter-sections-phone");
+  await tile(page, "Solving by factorisation");
+  assert.match(await crumbs(page), /Mathematics.*Algebra.*Quadratic equations.*Solving by factorisation/s);
+  await page.locator(".tile", { hasText: "Solve quadratic equations" }).first().waitFor();
+  await shot(page, "p-b3-section-skills-phone");
+  await home(page);
+  // the gap: (x + a)(x + b) expanded with a × b as the x term
+  const log = await recoverTyped(page, "expand (x+2)(x+6)", "product-for-sum");
+  assert.ok(log.some((l) => l.startsWith("lesson:")), log.join(" "));
+  await page.getByText("Solved after help", { exact: true }).waitFor();
+  await shot(page, "p-b4-gap-repaired-phone");
+  const recs = await records(page, learner);
+  assert.ok(recs.some((r) => r.record === "teach" && r.competency === "MATH.algebra.identities"), "expanding brackets was taught");
+  // and quadratics continues
+  await home(page);
+  await tile(page, "Algebra");
+  await tile(page, "Quadratic equations");
+  await openSkill(page, "Solving by factorisation", "Solve quadratic equations");
+  const w = await work(page);
+  assert.ok(w.length >= 2, w.join(" "));
+  await context.close();
+});
+
+test("platform C: Grade 12 → Calculus → Integrals → Techniques of integration → capabilities; recovery to powers (Grade 7)", async () => {
+  const { page, context, learner } = await learnerPage("Synthetic Grade 12 learner", "tablet");
+  await setupYear(page, 12);
+  await tile(page, "Calculus");
+  await tile(page, "Integrals");
+  await tile(page, "Techniques of integration");
+  await tile(page, "Integrate by substitution and parts");
+  await page.locator(".tile", { hasText: "Integrate by parts" }).getByText("No learning content yet").waitFor();
+  await page.locator(".tile", { hasText: "Integrate by substitution" }).first().waitFor();
+  await shot(page, "p-c1-capabilities-tablet");
+  await home(page);
+  await page.getByText("What OpenPath can teach from this textbook").click();
+  await page.getByText(/No learning content yet: /).waitFor();
+  await shot(page, "p-c2-coverage-tablet");
+  const log = await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
+  await page.getByText("Solved after help", { exact: true }).waitFor();
+  await shot(page, "p-c3-solved-after-powers-tablet");
+  const recs = await records(page, learner);
+  assert.ok(recs.some((r) => r.record === "teach" && r.competency === "MATH.number.exponents"), `powers taught: ${log.join(" ")}`);
+  assert.ok(recs.some((r) => r.record === "attempt" && r.context === "investigate:gen:subst:0,2,1,1"), "the wrong answer was investigated");
+  await context.close();
+});
+
+const UNSEEN = `Sample Board C — Mathematics for Class 9 (synthetic test book, not a real board; CC0)
+Subject: Mathematics
+Academic year 2026–27
+Part One: Algebra
+Chapter 1: Brackets and powers (pages 1 to 24)
+1.1 Expanding brackets (page 2)
+By the end of this section learners can:
+• expand brackets such as 3(x + 4) using the distributive property (page 3)
+1.2 Powers (page 12)
+By the end of this section learners can:
+• work out powers such as 2⁵ (page 13)
+Part Two: Geometry
+Chapter 2: Constructions (pages 25 to 40)
+By the end of this chapter learners can:
+• construct the perpendicular bisector of a line segment (page 26)
+• describe how a rainbow forms (page 30)
+`;
+
+test("platform E and F: an unseen textbook through the same screens; then the next year keeps the evidence", async () => {
+  const { page, context, learner } = await learnerPage("Synthetic unseen-book learner");
+  // a subject OpenPath does not support is said so, and cannot be used
+  await setupYear(page, 9, { textbook: "Science for Class 9 (synthetic)\nSubject: Science\nChapter 1: Light (pages 1 to 9)\nLearners will be able to:\n- describe how a rainbow forms (page 2)\n" });
+  await page.getByRole("alert").getByText(/Science is not supported in My Learning Year yet/).waitFor();
+  assert.ok(await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).isDisabled());
+  await shot(page, "p-e0-unsupported-subject-phone");
+  await page.reload();
+  await setupYear(page, 9, { textbook: UNSEEN });
+  await page.locator(".outcome", { hasText: "describe how a rainbow forms" }).getByText("No matching skill: kept as a proposal.").waitFor();
+  await page.locator(".outcome", { hasText: "expand brackets" }).getByText(/Brackets and powers › Expanding brackets/).waitFor();
+  await shot(page, "p-e1-unseen-review-phone");
+  await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).click();
+  await page.getByRole("heading", { name: /^Grade 9 · / }).waitFor();
+  await tile(page, "Algebra");
+  await tile(page, "Brackets and powers");
+  await tile(page, "Expanding brackets");
+  await tile(page, "Expand simple products");
+  assert.match(await crumbs(page), /Algebra.*Brackets and powers.*Expanding brackets.*Expand simple products/s);
+  await page.getByText(/Awaiting educator review/).waitFor();
+  await shot(page, "p-e2-unseen-skill-phone");
+  await page.getByRole("button", { name: /^(Start|Continue)$/ }).click();
+  const w = await work(page);
+  assert.ok(w.length >= 3, w.join(" "));
+  await home(page);
+  // the unit is still learning: one of its two constituent skills (expanding, powers) is shown
+  const unit = page.locator(".tile", { hasText: "Algebra" }).first();
+  assert.equal(await unit.getAttribute("data-status"), "active");
+  assert.match(await unit.getAttribute("aria-label"), /1 of 2/);
+  await shot(page, "p-e3-unseen-shown-phone");
+  // F: a year later, Grade 12 (2027-28): every record kept, the overdue delayed check first, the new book's tiles
+  const before = (await records(page, learner)).length;
+  await timeTravel(page, learner, 240);
+  await page.reload();
+  await page.getByRole("button", { name: "Start the next year" }).click();
+  await page.getByRole("button", { name: /^Grade 12\b/ }).click();
+  await page.getByRole("radio", { name: "2027-28" }).click();
+  await page.getByRole("button", { name: "No goal for now" }).click();
+  await page.getByRole("button", { name: /OpenPath Sample Mathematics, Grade 12/ }).click();
+  await page.getByRole("button", { name: "Start Grade 12" }).click();
+  await page.getByRole("heading", { name: "Grade 12 · 2027-28" }).waitFor();
+  await page.getByRole("button", { name: "Start the delayed check" }).waitFor();
+  await shot(page, "p-f1-next-year-delayed-check-phone");
+  const after = await records(page, learner);
+  assert.equal(after.length, before + 1, "one enrolment added; nothing removed");
+  await page.getByRole("button", { name: "Earlier years" }).click();
+  await page.getByText("Grade 9 · 2026-27").waitFor();
+  await page.getByText("Grade 12 · 2027-28").waitFor();
   await context.close();
 });
