@@ -121,8 +121,8 @@ Status: browser.
 
 ## 2. Tests (local; CI runs the same)
 
-- Frontend unit tests: **398/398**, including `content-system.test.ts`. Each family's specification passes; approval goes stale after a generator change; failing items are excluded; depth after two mistakes reaches verified; a repeat is help; limits are reported.
-- Django: **194/194**. The server's content hashes equal the app's for all 73 items. The workflow is tested: roles, notes, stale versions, a module released only after its families, append-only history. Every one of the 40 931 pool question ids is known to the server in its answer format.
+- Frontend unit tests: **402/402**, including `content-system.test.ts`. Each family's specification passes; approval goes stale after a generator change; failing items are excluded; depth after two mistakes reaches verified; a repeat is help; limits are reported; every module's questions come from the right phase of its pool; an exhausted pool stops without repeating or reporting mastery; one problem answered twenty times counts once; no grade-specific branch in the engine.
+- Django: **197/197**. The server's content hashes equal the app's for all 73 items. The workflow is tested: roles, notes, stale versions, a module released only after its families, append-only history. Every one of the 40 931 pool question ids is known to the server in its answer format.
 - Browser: **14/14 journeys** against Django `runserver`: the earlier 12, plus educator review and three released-content learners.
 - CI also checks that generated files are current: specifications, the question table, the library, parity and coverage.
 
@@ -142,7 +142,49 @@ Still noted, not changed:
 - 24 `hcf` items have no explanation.
 - The server's independence count matches on the question's competency, not on micro-skills. Here that makes the server the stricter of the two.
 
-## 3. Findings and blockers
+## 3. Final validation of PR #64
+
+### Educator workflow against Django (browser, `e2e/learning-year.test.mjs`, test 13)
+1. **Specification:** a family is specified in code (`families.ts`); `scripts/specs.ts` generates its pool, validates it and writes `family-specs.v1.json` and the server's question table. There is no in-browser authoring of a new family.
+2. **Validation:** the reviewer runs the family's validation in `/review/` and tries questions.
+3. **Submit → approve:** an educator (role granted by `manage.py content_reviewer`) approves the family, then requests a correction on the module and approves it.
+4. **Release:** a separate release manager releases; module release is refused until its families are released.
+5. **Learner use:** a Grade 4 learner then works the released module to verified, with no fixture. Test 14 does the same for Grade 10, Grade 12 (with recovery) and an unfamiliar Grade 9 book.
+
+### Negative cases
+| Case | Where tested | Result |
+|---|---|---|
+| Rejection | Django `test_a_rejected_version_cannot_be_approved_or_released` | rejected version cannot be approved or released |
+| Unauthorised approval | Django workflow tests | an account with no review role cannot submit, a release manager cannot approve, an educator cannot release (all 403); an account holding both roles cannot release what it approved (four eyes) |
+| Generator change | unit test 3; Django stale-version tests | approval goes stale; a decision on an old hash is refused (409); a released module is suspended |
+| Invalid variants | unit test 3; Django `test_questions_outside_an_approved_pool_are_refused` | failing items excluded; out-of-pool ids and a bad option letter refused by the server |
+| Exhausted pool | unit test 8 (`root`, the smallest pool) | the module stops; no problem asked twice; no mastery reported |
+| Repeated exposure | unit tests 5 and 9; Django `test_a_repeated_problem_never_makes_a_delayed_check_due` | one problem answered 20 times in both formats is 1 independent exposure; the delayed check never becomes due from repeats (control: due after 7 days 5 minutes, not at 6 days 23 hours) |
+
+### Separated pools
+Each family's pool is hash-partitioned: retention 20 %, diagnostic 10 %, reassessment check 20 %, practice 50 %. Unit test 7 checks every module's listed questions sit in the right part (guided, practice and transfer in practice); `fromPool` draws further checks only from the check part, and retention only from the retention part.
+
+### One pipeline for every grade
+Unit test 10 scans `packages/learning/src` for a grade compared with a fixed number. The only one is `goals.ts` (`examPlanApplies`: which goals show an exam plan), a goal rule, not a curriculum rule. The same calls give a working module for the Grade 4, Grade 10 and Grade 12 books.
+
+### Coverage of the 200-competency graph, by stage
+| Stage | Competencies |
+|---|---|
+| Content generated or written (a module exists) | 37 (27 generated from blueprints or templates, 10 hand-written) |
+| Module passes structural validation (validate@1), with its families validating | 37 |
+| Complete and releasable (deep enough pool for every phase), awaiting review | **31** (25 generated, 6 hand-written) |
+| Educator-approved in the repository | **0** |
+| Released in the repository | **0** |
+
+All 36 families validate and are in state "submitted". Approvals and releases exist only in test databases, made by synthetic reviewer accounts. Matrix: approved 0, awaiting 31, partial 8, unsupported 21, none 140.
+
+### Known Node 24 failure (separate issue, not passing)
+`legacy-exact-research (24.19.0)` fails on every commit of this stack, by design: two exact-hash research fixtures produce different hashes under Node 24. The job stays a real failure (no skip, no rewritten baseline); Node 22 passes. It is not caused by this PR and is not counted as passing.
+
+### Intermittent CI failure seen on `cceaa69`
+`mathematics (24.19.0)`, step "Fixed mathematics journeys", failed on its first attempt (65 s against the usual 20 s, consistent with a browser timeout) and passed on rerun. The same journeys pass on Node 22 in CI and 12/12 locally against Django. Job logs are not downloadable from this environment, so the cause is not confirmed.
+
+## 4. Findings and blockers
 
 | Item | Class | Note |
 |---|---|---|
@@ -153,7 +195,7 @@ Still noted, not changed:
 | Small families (`root`, `pow`, `alp`) | Content | Their domains can be widened, or the parts made smaller. |
 | Earlier owner decisions (#62/#63) | Unchanged | Tile design, relation audit, exam patterns, OCR, AI extraction. |
 
-## 4. Reproduce
+## 5. Reproduce
 
 ```
 node --import tsx packages/learning/scripts/specs.ts      # family specifications, validation, server table

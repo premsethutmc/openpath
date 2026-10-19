@@ -137,3 +137,85 @@ test("depth limits are reported, never papered over", () => {
   const big = poolDepth(modules.find((m) => m.competency === "MATH.algebra.linear-equations")!)!;
   assert.equal(big.sufficient, true);
 });
+
+test("every module's questions come from the right part of its family's pool, and the parts never overlap", () => {
+  for (const m of modules.filter((x) => x.pool)) {
+    const fam = m.pool!.family;
+    const inFamily = (q: string) => q.startsWith(`gen:${fam}:`);
+    const where = (qs: string[], phase: string) => {
+      for (const q of qs.filter(inFamily)) assert.equal(phaseOf(q), phase, `${m.competency}: ${q} should be from the ${phase} part`);
+    };
+    where(m.diagnostics, "diagnostic");
+    where(m.strategies.map((s) => s.check), "check");
+    where([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.guided)], "practice");
+    where(m.retention, "retention");
+  }
+});
+
+test("an exhausted pool: the module stops, never repeats a problem, and never reports mastery it has not seen", () => {
+  const comp = "MATH.number.square-roots";
+  useRegistry(releasedRegistry(["root", "mul"], [comp]));
+  try {
+    const d = new Driver("synthetic-exhausted", T0);
+    d.enrol(8, "2026-27", sampleReleases.find((r) => r.grade === 8)!);
+    // a learner who keeps getting it wrong: the module teaches, then stops when its explanations and questions run out
+    for (let visit = 0; visit < 6; visit++) {
+      d.work(comp, (q) => String(Number(question(q).answer.replace(/\D/g, "") || 0) + 3), { max: 40 });
+      d.newSession(1);
+    }
+    const st = d.state();
+    const keys = st.records.attempts.map((a) => exposureKey(a.questionId));
+    assert.equal(new Set(keys).size, keys.length, "no problem asked twice");
+    const ms = moduleState(comp, st.records, st.evidence(comp), d.now, d.session);
+    assert.ok(["pause", "done"].includes(ms.phase) || !ms.question, `the module stops: ${ms.phase} ${ms.reason}`);
+    assert.ok(!["independent", "transfer", "verified"].includes(st.evidence(comp).status), "wrong answers never become mastery");
+    assert.ok(keys.length <= pool("root").items.length + 6, "it cannot ask more problems than exist");
+  } finally {
+    useRegistry(null);
+  }
+});
+
+test("repeated questions cannot create false mastery: the same problems answered again and again stay one exposure each", () => {
+  const comp = "MATH.number.multi-multiplication";
+  useRegistry(releasedRegistry(["mmul", "mul"], [comp]));
+  try {
+    const d = new Driver("synthetic-repeater", T0);
+    d.enrol(4, "2026-27", sampleReleases.find((r) => r.grade === 4)!);
+    // one problem, right, twenty times, in both formats, over several visits
+    for (let k = 0; k < 20; k++) {
+      if (k % 5 === 0) d.newSession(1);
+      const id = k % 2 ? "gen:mmul:47,6:mc" : "gen:mmul:47,6";
+      d.answer(id, question(id).answer, "check");
+    }
+    const ev = d.state().evidence(comp);
+    assert.equal(ev.independent.total, 1, "one exposure counts once");
+    assert.equal(ev.status, "guided", "never shown on your own from one problem");
+    assert.equal(ev.engineRetention, "not_demonstrated", "the shared engine does not demonstrate it either");
+    d.newSession(8);
+    assert.notEqual(d.state().evidence(comp).status, "verified");
+  } finally {
+    useRegistry(null);
+  }
+});
+
+test("one pipeline for every grade: no grade-specific branch in the learning engine", async () => {
+  const { readdirSync, readFileSync } = await import("node:fs");
+  const dir = new URL("../../../packages/learning/src/", import.meta.url);
+  const offenders: string[] = [];
+  for (const f of readdirSync(dir).filter((x) => x.endsWith(".ts"))) {
+    readFileSync(new URL(f, dir), "utf8").split("\n").forEach((line, i) => {
+      // a comparison of a grade with a fixed number decides behaviour by grade
+      if (/\bgrade\s*(===|==|!==|<=|>=|<|>)\s*\d/.test(line) && !line.trim().startsWith("//")) offenders.push(`${f}:${i + 1}: ${line.trim()}`);
+    });
+  }
+  // the only one: which goals show an exam plan (a goal's own rule, not a curriculum's)
+  assert.deepEqual(offenders.map((o) => o.split(":")[0]), ["goals.ts"], offenders.join("\n"));
+  // and the same path gives a working module for the Grade 4, 10 and 12 books
+  for (const [grade, id, comp] of [[4, "openpath-sample-mathematics-grade-4", "MATH.number.multi-multiplication"], [10, "board-b-sample-mathematics-class-10", "MATH.algebra.factorisation"], [12, "openpath-sample-mathematics-grade-12", "MATH.calculus.integration-methods"]] as const) {
+    const d = new Driver(`synthetic-pipe-${grade}`, T0);
+    d.enrol(grade, "2026-27", sampleReleases.find((r) => r.id === id)!);
+    const st = d.state();
+    assert.ok(st.summary!.tiles.length > 0);
+    assert.equal(moduleState(comp, st.records, st.evidence(comp), d.now, d.session).phase, "explore", `Grade ${grade}`);
+  }
+});

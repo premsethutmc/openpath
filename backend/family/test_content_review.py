@@ -14,7 +14,7 @@ from .tests import FamilyTestCase
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
 
 
-class ContentReviewTests(FamilyTestCase):
+class ReviewBase(FamilyTestCase):
     def setUp(self):
         super().setUp()
         emails = ['educator@example.org', 'release@example.org']
@@ -30,6 +30,9 @@ class ContentReviewTests(FamilyTestCase):
 
     def state(self, item, client=None):
         return next(e for e in (client or self.learner_parent).get('/api/content-review/').json()['registry']['entries'] if e['item'] == item)
+
+
+class ContentReviewTests(ReviewBase):
 
     def test_the_server_hashes_content_exactly_as_the_app_does(self):
         repo = {e['item']: e['contentHash'] for e in json.loads((ROOT / 'review.v1.json').read_text())['entries']}
@@ -121,3 +124,60 @@ class ContentReviewTests(FamilyTestCase):
             e = self.state(mod)
         self.assertEqual(e['state'], 'approved')
         self.assertIn('no longer released', e['suspended'])
+
+
+class ReleasedContentEvidenceTests(ReviewBase):
+    """Rejection, out-of-pool questions and repeated exposure, through the server."""
+
+    def test_a_rejected_version_cannot_be_approved_or_released(self):
+        fam = 'family:pct'
+        self.assertEqual(self.decide(self.educator, fam, 'submit').status_code, 201)
+        self.assertEqual(self.decide(self.educator, fam, 'reject', note='the 5% wording is unclear').status_code, 201)
+        self.assertEqual(self.state(fam)['state'], 'rejected')
+        self.assertEqual(self.decide(self.educator, fam, 'approve').status_code, 409)
+        self.assertEqual(self.decide(self.manager, fam, 'release').status_code, 409)
+        self.assertEqual(self.decide(self.educator, fam, 'submit').status_code, 409, 'a rejected version stays rejected: only a new version can be submitted')
+
+    def _pupil(self):
+        from .test_learning import G4
+        pid = str(self.pupil(self.learner_parent, 'Synthetic pool pupil'))
+        seq = [0]
+        n = [0]
+
+        def save(record, **extra):
+            n[0] += 1
+            ev = {'kind': 'learning_record', 'id': f'pp-{n[0]}', 'at': '2000-01-01T00:00:00Z', 'learnerId': pid, 'sessionId': f'learn:{pid}:v', 'record': record, **extra}
+            r = self.append(self.learner_parent, pid, seq[0], ev, subject='mathematics')
+            if r.status_code == 201:
+                seq[0] += 1
+            return r
+        save('enrol', grade=4, academicYear='2026-27', curriculum={'id': G4['id'], 'version': G4['version'], 'hash': G4['hash']})
+        return pid, save
+
+    def test_questions_outside_an_approved_pool_are_refused(self):
+        _, save = self._pupil()
+        ok = dict(response='282', activity='practice', hints=0, solution=False, competency='MATH.number.multi-multiplication')
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,6', **ok).status_code, 201)
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,1', **(ok | {'response': '47'})).status_code, 400, 'outside the domain')
+        self.assertEqual(save('attempt', questionId='gen:mmul:40,6', **(ok | {'response': '240'})).status_code, 400, 'excluded by the specification')
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,6:mc', **(ok | {'response': 'Z'})).status_code, 400, 'not an option letter')
+
+    def test_a_repeated_problem_never_makes_a_delayed_check_due(self):
+        pid, save = self._pupil()
+        ok = dict(activity='check', hints=0, solution=False, competency='MATH.number.multi-multiplication')
+        from .learning_families import generated
+        # the same problem twice (typed, then multiple choice), both right: one exposure, so not two distinct answers
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,6', response='282', **ok).status_code, 201)
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,6:mc', response=generated('gen:mmul:47,6:mc')['answer'], **ok).status_code, 201)
+        from datetime import timedelta
+        from django.utils import timezone as tz
+        later = tz.now() + timedelta(days=8)
+        with mock.patch('family.learning.timezone.now', return_value=later):
+            r = save('attempt', questionId='gen:mmul:51,4', response='204', activity='retention', hints=0, solution=False, competency='MATH.number.multi-multiplication')
+        self.assertEqual(r.status_code, 400, 'one problem seen twice is not independent success')
+        # the control: a second, different problem right makes it due seven full days later
+        self.assertEqual(save('attempt', questionId='gen:mmul:58,3', response='174', **ok).status_code, 201)
+        with mock.patch('family.learning.timezone.now', return_value=tz.now() + timedelta(days=6, hours=23)):
+            self.assertEqual(save('attempt', questionId='gen:mmul:51,4', response='204', activity='retention', hints=0, solution=False, competency='MATH.number.multi-multiplication').status_code, 400, 'not before seven full days')
+        with mock.patch('family.learning.timezone.now', return_value=tz.now() + timedelta(days=7, minutes=5)):
+            self.assertEqual(save('attempt', questionId='gen:mmul:51,4', response='204', activity='retention', hints=0, solution=False, competency='MATH.number.multi-multiplication').status_code, 201)
