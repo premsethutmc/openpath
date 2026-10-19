@@ -32,6 +32,9 @@ def lesson():
 
 
 def checked_activity(event, pupil):
+    if event.get('kind') == 'learning_record':
+        from .learning import checked_learning
+        return checked_learning(event, pupil)
     if event.get('kind') == 'math_foundation_activity':
         from .math_foundation import checked_foundation
         return checked_foundation(event, pupil)

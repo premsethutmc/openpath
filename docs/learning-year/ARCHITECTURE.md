@@ -146,8 +146,22 @@ objectives, evidence: [attempt ids], assessable, strategies, curriculumRefs, goa
 3. **Curriculum ingestion is deterministic.** It parses a structured textbook format; there are no LLM calls (cost
    rule). A release needs an explicit review by the account owner, recorded as "not educator-reviewed".
 4. **No new design is presented as approved.** No approved My Learning Year design is in the repository, so the
-   tiles use the approved English tokens and the directive's status rules. **Product-owner decision needed:** supply
+   tiles use the existing mathematics app's visual language (`/maths/`, `chapter.css` tokens, cards and buttons) and the directive's status rules. **Product-owner decision needed:** supply
    or confirm the tile design.
 5. **Green can't appear on shipped maths content yet.** It needs educator-validated questions, and there are none.
    Browser journeys that must show green use a test-only review fixture, which is built only into test bundles and
    labelled on screen. The verification policy itself is unchanged.
+6. **Evidence context is the question format.** The shared engine needs answers in two different contexts to
+   demonstrate a level (the existing `demonstrated_min_contexts` = 2). Learning questions use the format
+   `typed:learning-<type>@1` (integer, fraction, choice, set), so every module has at least two formats. No policy
+   value was changed.
+7. **A delayed check is two questions.** The shared verification needs two distinct fresh answers in the later session
+   (`VERIFY_AT_LEVEL_MIN` = 2), so every module has two retention questions; any wrong answer fails the check (review).
+8. **Probes are not independence.** A probe (7 × 5 when the question is 7 × 8) is evidence for its micro-skill only.
+9. **The server keeps time.** Learning records are saved with the server's time, and the server refuses a delayed
+   check with no work on that skill at least 6.5 days earlier. Browser tests move a synthetic learner's records into
+   the past with a test-only management command (`learning_time_travel`, refused unless
+   `OPENPATH_ALLOW_TIME_TRAVEL=1`, and only for pupils named "Synthetic …").
+10. **"Stuck on a problem" is learner-opened.** A problem from class or coaching is offered from two grades before its
+    own grade (the integration problem from Grade 10). It is never placed in the year's tiles.
+11. **The exam plan starts at Grade 11** (GRE: Grade 12). Younger learners with a goal get the overlay only.

@@ -216,7 +216,7 @@ PROBLEMS = [dict(
 
 # ======================================================== goal pathways
 GOALS = [
-  dict(id="jee-advanced", name="IIT-JEE Advanced", examTrack="jee-advanced", status="provisional",
+  dict(id="jee-advanced", name="JEE Advanced", examTrack="jee-advanced", status="provisional",
        note="An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
        foundations=dict(strands=["number", "algebra", "reasoning", "geometry"], note="For younger learners: number sense, fractions, patterns, reasoning and proof-like thinking within their own grade."),
        topics=[dict(id="algebra", competencies=["MATH.algebra.quadratics", "MATH.algebra.quadratic-complex", "MATH.algebra.arithmetic-sequences", "MATH.algebra.binomial", "MATH.algebra.permutations"], weight=[0.2, 0.35]),
@@ -225,7 +225,7 @@ GOALS = [
                dict(id="vectors-3d", competencies=["MATH.vectors.algebra", "MATH.coordinate.space-lines"], weight=[0.05, 0.2]),
                dict(id="probability", competencies=["MATH.probability.conditional", "MATH.probability.bayes"], weight=[0.05, 0.15])],
        marking=dict(correct=4, wrong=-1, note="Varies by paper and section; a configurable default, not a claim about any year's paper.")),
-  dict(id="jee-main", name="IIT-JEE Main", examTrack="jee-main", status="provisional",
+  dict(id="jee-main", name="JEE Main", examTrack="jee-main", status="provisional",
        note="An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
        foundations=dict(strands=["number", "algebra", "reasoning", "geometry"], note="As for JEE Advanced."),
        topics=[dict(id="algebra", competencies=["MATH.algebra.quadratics", "MATH.algebra.arithmetic-sequences", "MATH.algebra.binomial"], weight=[0.2, 0.35]),

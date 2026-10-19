@@ -1,7 +1,7 @@
 /**
  * The learner's year and next activity (plan@1).
  *
- * Priority for "what next": 1. a delayed check that is due, 2. a skill that needs review, 3. a skill in progress
+ * Priority for "what next": 1. a delayed check that is due (for any skill with records, from any year), 2. a skill that needs review, 3. a skill in progress
  * (an open intervention), 4. the first not-yet-shown skill of the current chapter, 5. the next chapter, 6. enrichment
  * from a goal overlay (only once the year's skills it rests on are shown). Nothing outside the current curriculum.
  */
@@ -9,6 +9,7 @@ import { assigned, type CurriculumRelease } from "./curriculum";
 import { moduleFor } from "./content";
 import type { SkillEvidence } from "./evidence";
 import { overlay } from "./goals";
+import { graph } from "./graph";
 import { currentEnrolment, type LearnerRecords } from "./records";
 import { flatten, tilesFor, type Tile } from "./tiles";
 
@@ -41,7 +42,9 @@ export function yearSummary(release: CurriculumRelease, ev: (id: string) => Skil
 export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords): NextActivity {
   const rows = assigned(release).filter((r) => moduleFor(r.competency));
   const ids = [...new Set(rows.map((r) => r.competency))];
-  const due = ids.find((id) => ev(id).retention === "due");
+  // a delayed check comes back whatever year the skill was shown in (records persist across grades)
+  const touched = [...new Set(records.attempts.map((a) => graph.evidenceTarget(a.competency)))].filter((id) => moduleFor(id));
+  const due = [...ids, ...touched.filter((id) => !ids.includes(id))].find((id) => ev(id).retention === "due");
   if (due) return { kind: "retention", competency: due, reason: "A delayed check is due: a few questions to see the skill has stayed with you." };
   const review = ids.find((id) => ev(id).status === "review");
   if (review) return { kind: "review", competency: review, reason: "The delayed check was missed, so this skill comes back for review." };

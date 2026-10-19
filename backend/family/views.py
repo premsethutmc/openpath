@@ -403,7 +403,8 @@ class PupilEventsView(AccountBase):
                 from .mathematics import checked_activity
                 event = checked_activity(event, pupil)
             PupilEvent.objects.create(pupil=pupil, subject=subject, seq=seq, kind=event["kind"], occurred_at=_occurred_at(event), body=event)
-        return Response({"count": count + 1}, status=status.HTTP_201_CREATED)
+        # the saved time (mathematics records keep the server's clock), so the app can use exactly what was stored
+        return Response({"count": count + 1, "at": event.get("at")}, status=status.HTTP_201_CREATED)
 
     def put(self, request, pupil_id):
         """Import a whole record (a backup from a device) into an empty one. History is never overwritten."""

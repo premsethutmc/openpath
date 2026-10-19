@@ -4,7 +4,7 @@
  "goals": [
   {
    "id": "jee-advanced",
-   "name": "IIT-JEE Advanced",
+   "name": "JEE Advanced",
    "examTrack": "jee-advanced",
    "status": "provisional",
    "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
@@ -87,7 +87,7 @@
   },
   {
    "id": "jee-main",
-   "name": "IIT-JEE Main",
+   "name": "JEE Main",
    "examTrack": "jee-main",
    "status": "provisional",
    "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",

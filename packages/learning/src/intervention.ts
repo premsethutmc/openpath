@@ -197,7 +197,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     // worked through to the end without being shown: not the gap that blocks this problem now
     if (ms.phase === "done") continue;
     if (ms.phase === "pause") return { ...base, phase: "escalate", active: s.id, reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
-    return { ...base, phase: "support", active: s.id, reason: `This problem uses ${graph.get(s.id).name.toLowerCase()}. That is not shown yet, so we check it first, then come back to the problem.` };
+    return { ...base, phase: "support", active: s.id, reason: `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}. We check it first, then come back to the problem.` };
   }
   return { ...base, phase: "return", active: null, reason: "Back to the original problem." };
 }

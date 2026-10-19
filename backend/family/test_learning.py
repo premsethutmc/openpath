@@ -1,0 +1,168 @@
+"""My Learning Year records: ownership, references, server clock, delayed checks, coexistence. Synthetic pupils only."""
+import json
+import os
+from datetime import timedelta
+from io import StringIO
+from pathlib import Path
+from unittest import mock
+
+from django.conf import settings
+from django.core.management import call_command
+from django.core.management.base import CommandError
+from django.utils import timezone
+from rest_framework.test import APIClient
+
+from .learning import content, hash_of
+from .models import PupilEvent
+from .tests import PASSWORD, FamilyTestCase
+
+ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
+G4 = json.loads((ROOT / 'curricula/openpath-sample-mathematics-grade-4.v1.0.0.json').read_text())
+
+
+class LearningRecordTests(FamilyTestCase):
+    def setUp(self):
+        super().setUp()
+        self.client = self.parent()
+        self.pupil_id = str(self.pupil(self.client, 'Synthetic learning-year pupil'))
+        self.seq = 0
+        self.serial = 0
+
+    def rec(self, record, **extra):
+        self.serial += 1
+        return {'kind': 'learning_record', 'id': f'lr-{self.serial}', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'learn:{self.pupil_id}:visit', 'record': record, **extra}
+
+    def save(self, event):
+        r = self.append(self.client, self.pupil_id, self.seq, event, subject='mathematics')
+        if r.status_code == 201:
+            self.seq += 1
+        return r
+
+    def records(self, client=None):
+        return (client or self.client).get(f'/api/pupils/{self.pupil_id}/events/?subject=mathematics').json()['events']
+
+    def enrol(self, grade=4, release=G4):
+        return self.rec('enrol', grade=grade, academicYear='2026-27', curriculum={'id': release['id'], 'version': release['version'], 'hash': release['hash']})
+
+    def attempt(self, qid, response, activity='diagnostic', **extra):
+        q = content()['questions'][qid]
+        return self.rec('attempt', questionId=qid, response=response, activity=activity, hints=0, solution=False, competency=q['competency'], **extra)
+
+    def test_the_server_hash_matches_the_app_for_every_sample_release(self):
+        for f in (ROOT / 'curricula').glob('openpath-*.json'):
+            r = json.loads(f.read_text())
+            self.assertEqual(hash_of({**r, 'hash': ''}), r['hash'], f.name)
+
+    def test_enrol_goal_attempt_and_teach_are_saved_with_the_server_time(self):
+        now = timezone.now()
+        with mock.patch('family.learning.timezone.now', return_value=now):
+            self.assertEqual(self.save(self.enrol()).status_code, 201)
+            self.assertEqual(self.save(self.rec('goal', pathway='jee-advanced', active=True)).status_code, 201)
+            r = self.save(self.attempt('eq-d1', '2'))
+            self.assertEqual(r.status_code, 201)
+            self.assertEqual(r.json()['at'], now.isoformat().replace('+00:00', 'Z'), 'the app is told the saved time')
+            self.assertEqual(self.save(self.rec('teach', competency='MATH.number.equivalent-fractions', strategy='strip_model', rule='conceptual')).status_code, 201)
+        saved = self.records()
+        self.assertEqual(len(saved), 4)
+        self.assertTrue(all(e['at'] != '2000-01-01T00:00:00Z' for e in saved), 'never the client clock')
+
+    def test_ownership_unknown_fields_and_claimed_status_are_refused(self):
+        bad = [
+            self.enrol() | {'learnerId': 'someone-else'},
+            self.enrol() | {'sessionId': 'learn:other:visit'},
+            self.enrol() | {'verified': True},
+            self.attempt('eq-d1', '2') | {'status': 'verified'},
+            self.attempt('eq-d1', '2') | {'mastery': 1},
+            self.rec('goal', pathway='invented-exam', active=True),
+            self.rec('attempt', questionId='invented', response='1', activity='practice', hints=0, solution=False, competency='MATH.number.equivalent-fractions'),
+            self.attempt('eq-d1', '2') | {'competency': 'MATH.calculus.area-integrals'},
+            self.attempt('eq-d1', '2', activity='graded'),
+            self.attempt('eq-d1', '2') | {'hints': -1},
+            self.attempt('eq-d1', 'x' * 81),
+            self.attempt('eq-d1', 'two'),
+            self.attempt('eq-p2', 'E'),
+            self.attempt('fa-d1', '5/0'),
+            self.rec('teach', competency='MATH.number.equivalent-fractions', strategy='invented', rule='x'),
+            self.enrol(grade=13),
+            self.rec('enrol', grade=4, academicYear='2026-27', curriculum={'id': G4['id'], 'version': G4['version'], 'hash': '00000000'}),
+        ]
+        for e in bad:
+            self.assertEqual(self.save(e).status_code, 400, e)
+        self.assertEqual(self.records(), [])
+
+    def test_answers_in_each_form(self):
+        self.save(self.enrol())
+        for qid, response in [('eq-p2', 'b'), ('fa-d1', '10/16'), ('qd-c1', '3, −2'), ('mt-d1', '54'), ('area-parabola-line.full', '9/2')]:
+            self.assertEqual(self.save(self.attempt(qid, response)).status_code, 201, qid)
+
+    def test_a_reviewed_textbook_release_is_kept_and_referenced_by_hash(self):
+        own = {**G4, 'id': 'my-school-grade-4', 'title': 'My school Grade 4'}
+        own['hash'] = hash_of({**own, 'hash': ''})
+        self.assertEqual(self.save(self.enrol(release=own)).status_code, 400, 'not before the release is saved')
+        self.assertEqual(self.save(self.rec('curriculum', release=own)).status_code, 201)
+        self.assertEqual(self.save(self.enrol(release=own)).status_code, 201)
+        tampered = {**own, 'title': 'changed'}
+        self.assertEqual(self.save(self.rec('curriculum', release=tampered)).status_code, 400, 'content must match its hash')
+        claims = {**own, 'review': {**own['review'], 'educatorReviewed': True}}
+        claims['hash'] = hash_of({**claims, 'hash': ''})
+        self.assertEqual(self.save(self.rec('curriculum', release=claims)).status_code, 400, 'no educator review from the app')
+        draft = {**own, 'status': 'draft'}
+        draft['hash'] = hash_of({**draft, 'hash': ''})
+        self.assertEqual(self.save(self.rec('curriculum', release=draft)).status_code, 400, 'a draft is never assigned')
+        unknown = json.loads(json.dumps(own))
+        unknown['subjects'][0]['chapters'][0]['outcomes'][0]['mapping']['competencies'][0]['id'] = 'MATH.invented'
+        unknown['hash'] = hash_of({**unknown, 'hash': ''})
+        self.assertEqual(self.save(self.rec('curriculum', release=unknown)).status_code, 400)
+
+    def test_delayed_check_waits_a_week_by_the_server_clock(self):
+        now = timezone.now()
+        with mock.patch('family.learning.timezone.now', return_value=now):
+            self.save(self.enrol())
+            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'no earlier work')
+            self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
+            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'not due yet')
+        with mock.patch('family.learning.timezone.now', return_value=now + timedelta(days=7)):
+            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201)
+
+    def test_duplicates_conflicts_and_coexistence_with_fixed_programs(self):
+        e = self.enrol()
+        self.assertEqual(self.save(e).status_code, 201)
+        self.assertEqual(self.save(e).status_code, 400, 'the same id twice')
+        self.assertEqual(self.append(self.client, self.pupil_id, 0, self.attempt('eq-d1', '2'), subject='mathematics').status_code, 409, 'stale position')
+        from .mathematics import lesson
+        spec = lesson()
+        fixed = {'kind': 'math_activity', 'id': 'fixed-1', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'journey': 'school', 'lessonVersion': spec['version'], 'action': 'open', 'stage': spec['stages'][0]['id'], 'elapsedMs': 1, 'sessionId': f'math:{self.pupil_id}:v'}
+        self.assertEqual(self.save(fixed).status_code, 201, 'a fixed program still works beside learning records')
+        self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
+        kinds = [x['kind'] for x in self.records()]
+        self.assertEqual(kinds, ['learning_record', 'math_activity', 'learning_record'])
+
+    def test_records_survive_logout_and_login_and_are_private(self):
+        self.save(self.enrol())
+        self.save(self.attempt('eq-d1', '2'))
+        self.client.post('/api/account/logout/')
+        self.assertEqual(self.client.get(f'/api/pupils/{self.pupil_id}/events/?subject=mathematics').status_code, 403)
+        again = APIClient()
+        self.assertEqual(again.post('/api/account/login/', {'email': 'asha.parent@example.org', 'password': PASSWORD}, format='json').status_code, 200)
+        self.assertEqual(len(self.records(again)), 2)
+        other = self.parent('other.parent@example.org')
+        self.assertEqual(other.get(f'/api/pupils/{self.pupil_id}/events/?subject=mathematics').status_code, 404)
+
+    def test_time_travel_is_test_only_and_synthetic_only(self):
+        self.save(self.enrol())
+        self.save(self.attempt('eq-d1', '2'))
+        with mock.patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('OPENPATH_ALLOW_TIME_TRAVEL', None)
+            with self.assertRaises(CommandError):
+                call_command('learning_time_travel', self.pupil_id, '--days', '8')
+        real = str(self.pupil(self.client, 'Arun'))
+        with mock.patch.dict(os.environ, {'OPENPATH_ALLOW_TIME_TRAVEL': '1'}):
+            with self.assertRaises(CommandError):
+                call_command('learning_time_travel', real, '--days', '8')
+            before = self.records()
+            call_command('learning_time_travel', self.pupil_id, '--days', '8', stdout=StringIO())
+        after = self.records()
+        for b, a in zip(before, after):
+            self.assertEqual(timezone.datetime.fromisoformat(b['at'].replace('Z', '+00:00')) - timezone.datetime.fromisoformat(a['at'].replace('Z', '+00:00')), timedelta(days=8))
+        self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201, 'now due')
+        self.assertEqual(PupilEvent.objects.filter(pupil_id=real).count(), 0)
