@@ -8,7 +8,9 @@
     "../packages/mathematics/src/canonical.ts",
     "src/mathematics/journey",
     "src/globals.d.ts",
-    "src/mathematics/foundation"
+    "src/mathematics/foundation",
+    "../tools/mathematics/prerequisite-report.mts",
+    "../tools/mathematics/fingerprint-portability.mts"
   ],
   "exclude": []
 }
