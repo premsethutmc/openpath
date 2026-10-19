@@ -1374,6 +1374,8970 @@
    "answer": "125/6"
   },
   {
+   "id": "gen:pow:3,4",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "81"
+  },
+  {
+   "id": "gen:pow:2,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:pow:2,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:pow:2,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:pow:2,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "4",
+    "5",
+    "6",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:pow:2,4",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:pow:2,4:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "8",
+    "16",
+    "17"
+   ]
+  },
+  {
+   "id": "gen:pow:3,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "9"
+  },
+  {
+   "id": "gen:pow:3,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "3",
+    "5",
+    "6",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:pow:3,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "27"
+  },
+  {
+   "id": "gen:pow:3,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "9",
+    "27",
+    "28"
+   ]
+  },
+  {
+   "id": "gen:pow:4,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:pow:4,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "4",
+    "6",
+    "8",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:pow:4,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "64"
+  },
+  {
+   "id": "gen:pow:4,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "7",
+    "12",
+    "16",
+    "64"
+   ]
+  },
+  {
+   "id": "gen:pow:4,4",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "256"
+  },
+  {
+   "id": "gen:pow:4,4:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "8",
+    "16",
+    "64",
+    "256"
+   ]
+  },
+  {
+   "id": "gen:pow:5,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "25"
+  },
+  {
+   "id": "gen:pow:5,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "5",
+    "7",
+    "10",
+    "25"
+   ]
+  },
+  {
+   "id": "gen:pow:5,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "125"
+  },
+  {
+   "id": "gen:pow:5,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "8",
+    "15",
+    "25",
+    "125"
+   ]
+  },
+  {
+   "id": "gen:pow:5,4",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "625"
+  },
+  {
+   "id": "gen:pow:5,4:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "9",
+    "20",
+    "125",
+    "625"
+   ]
+  },
+  {
+   "id": "gen:pow:6,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "36"
+  },
+  {
+   "id": "gen:pow:6,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "6",
+    "8",
+    "12",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:pow:6,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "216"
+  },
+  {
+   "id": "gen:pow:6,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "9",
+    "18",
+    "36",
+    "216"
+   ]
+  },
+  {
+   "id": "gen:pow:6,4",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "1296"
+  },
+  {
+   "id": "gen:pow:6,4:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "10",
+    "24",
+    "216",
+    "1296"
+   ]
+  },
+  {
+   "id": "gen:pow:7,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "49"
+  },
+  {
+   "id": "gen:pow:7,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "7",
+    "9",
+    "14",
+    "49"
+   ]
+  },
+  {
+   "id": "gen:pow:7,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "343"
+  },
+  {
+   "id": "gen:pow:7,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "10",
+    "21",
+    "49",
+    "343"
+   ]
+  },
+  {
+   "id": "gen:pow:8,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "64"
+  },
+  {
+   "id": "gen:pow:8,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "8",
+    "10",
+    "16",
+    "64"
+   ]
+  },
+  {
+   "id": "gen:pow:8,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "512"
+  },
+  {
+   "id": "gen:pow:8,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "11",
+    "24",
+    "64",
+    "512"
+   ]
+  },
+  {
+   "id": "gen:pow:9,2",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "81"
+  },
+  {
+   "id": "gen:pow:9,2:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "9",
+    "11",
+    "18",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:pow:9,3",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "integer",
+   "answer": "729"
+  },
+  {
+   "id": "gen:pow:9,3:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "12",
+    "27",
+    "81",
+    "729"
+   ]
+  },
+  {
+   "id": "gen:pow:3,4:mc",
+   "supported": true,
+   "competency": "MATH.number.exponents",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "7",
+    "12",
+    "27",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:dist:4,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "28"
+  },
+  {
+   "id": "gen:dist:2,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:dist:2,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "5",
+    "6",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:dist:2,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:dist:2,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "6",
+    "8",
+    "10"
+   ]
+  },
+  {
+   "id": "gen:dist:2,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "10"
+  },
+  {
+   "id": "gen:dist:2,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "7",
+    "10",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:dist:2,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dist:2,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "8",
+    "12",
+    "14"
+   ]
+  },
+  {
+   "id": "gen:dist:2,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "14"
+  },
+  {
+   "id": "gen:dist:2,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "9",
+    "14",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:dist:2,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:dist:2,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "10",
+    "16",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:dist:2,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "18"
+  },
+  {
+   "id": "gen:dist:2,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "11",
+    "18",
+    "20"
+   ]
+  },
+  {
+   "id": "gen:dist:3,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:dist:3,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "5",
+    "6",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:dist:3,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dist:3,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "7",
+    "12",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:dist:3,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "15"
+  },
+  {
+   "id": "gen:dist:3,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "8",
+    "15",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:dist:3,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "18"
+  },
+  {
+   "id": "gen:dist:3,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "9",
+    "18",
+    "21"
+   ]
+  },
+  {
+   "id": "gen:dist:3,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "21"
+  },
+  {
+   "id": "gen:dist:3,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "10",
+    "21",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dist:3,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dist:3,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "11",
+    "24",
+    "27"
+   ]
+  },
+  {
+   "id": "gen:dist:3,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "27"
+  },
+  {
+   "id": "gen:dist:3,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "12",
+    "27",
+    "30"
+   ]
+  },
+  {
+   "id": "gen:dist:4,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:dist:4,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "6",
+    "8",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:dist:4,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dist:4,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "7",
+    "12",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:dist:4,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "20"
+  },
+  {
+   "id": "gen:dist:4,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "9",
+    "20",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dist:4,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dist:4,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "10",
+    "24",
+    "28"
+   ]
+  },
+  {
+   "id": "gen:dist:4,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "32"
+  },
+  {
+   "id": "gen:dist:4,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "12",
+    "32",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:dist:4,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "36"
+  },
+  {
+   "id": "gen:dist:4,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "13",
+    "36",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:dist:5,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "10"
+  },
+  {
+   "id": "gen:dist:5,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "7",
+    "10",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:dist:5,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "15"
+  },
+  {
+   "id": "gen:dist:5,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "8",
+    "15",
+    "20"
+   ]
+  },
+  {
+   "id": "gen:dist:5,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "20"
+  },
+  {
+   "id": "gen:dist:5,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "9",
+    "20",
+    "25"
+   ]
+  },
+  {
+   "id": "gen:dist:5,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "30"
+  },
+  {
+   "id": "gen:dist:5,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "11",
+    "30",
+    "35"
+   ]
+  },
+  {
+   "id": "gen:dist:5,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "35"
+  },
+  {
+   "id": "gen:dist:5,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "12",
+    "35",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:dist:5,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "40"
+  },
+  {
+   "id": "gen:dist:5,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "13",
+    "40",
+    "45"
+   ]
+  },
+  {
+   "id": "gen:dist:5,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "45"
+  },
+  {
+   "id": "gen:dist:5,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "14",
+    "45",
+    "50"
+   ]
+  },
+  {
+   "id": "gen:dist:6,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dist:6,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "8",
+    "12",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:dist:6,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "18"
+  },
+  {
+   "id": "gen:dist:6,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "9",
+    "18",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dist:6,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dist:6,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "10",
+    "24",
+    "30"
+   ]
+  },
+  {
+   "id": "gen:dist:6,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "30"
+  },
+  {
+   "id": "gen:dist:6,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "11",
+    "30",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:dist:6,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "42"
+  },
+  {
+   "id": "gen:dist:6,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "13",
+    "42",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:dist:6,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "48"
+  },
+  {
+   "id": "gen:dist:6,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "14",
+    "48",
+    "54"
+   ]
+  },
+  {
+   "id": "gen:dist:6,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "54"
+  },
+  {
+   "id": "gen:dist:6,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "15",
+    "54",
+    "60"
+   ]
+  },
+  {
+   "id": "gen:dist:7,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "14"
+  },
+  {
+   "id": "gen:dist:7,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "9",
+    "14",
+    "21"
+   ]
+  },
+  {
+   "id": "gen:dist:7,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "21"
+  },
+  {
+   "id": "gen:dist:7,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "10",
+    "21",
+    "28"
+   ]
+  },
+  {
+   "id": "gen:dist:7,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "28"
+  },
+  {
+   "id": "gen:dist:7,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "11",
+    "28",
+    "35"
+   ]
+  },
+  {
+   "id": "gen:dist:7,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "35"
+  },
+  {
+   "id": "gen:dist:7,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "12",
+    "35",
+    "42"
+   ]
+  },
+  {
+   "id": "gen:dist:7,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "42"
+  },
+  {
+   "id": "gen:dist:7,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "13",
+    "42",
+    "49"
+   ]
+  },
+  {
+   "id": "gen:dist:7,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "56"
+  },
+  {
+   "id": "gen:dist:7,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "15",
+    "56",
+    "63"
+   ]
+  },
+  {
+   "id": "gen:dist:7,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "63"
+  },
+  {
+   "id": "gen:dist:7,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "16",
+    "63",
+    "70"
+   ]
+  },
+  {
+   "id": "gen:dist:8,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:dist:8,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "10",
+    "16",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dist:8,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dist:8,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "11",
+    "24",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:dist:8,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "32"
+  },
+  {
+   "id": "gen:dist:8,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "12",
+    "32",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:dist:8,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "40"
+  },
+  {
+   "id": "gen:dist:8,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "13",
+    "40",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:dist:8,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "48"
+  },
+  {
+   "id": "gen:dist:8,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "14",
+    "48",
+    "56"
+   ]
+  },
+  {
+   "id": "gen:dist:8,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "56"
+  },
+  {
+   "id": "gen:dist:8,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "15",
+    "56",
+    "64"
+   ]
+  },
+  {
+   "id": "gen:dist:8,9",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "72"
+  },
+  {
+   "id": "gen:dist:8,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "17",
+    "72",
+    "80"
+   ]
+  },
+  {
+   "id": "gen:dist:9,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "18"
+  },
+  {
+   "id": "gen:dist:9,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "11",
+    "18",
+    "27"
+   ]
+  },
+  {
+   "id": "gen:dist:9,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "27"
+  },
+  {
+   "id": "gen:dist:9,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "12",
+    "27",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:dist:9,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "36"
+  },
+  {
+   "id": "gen:dist:9,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "13",
+    "36",
+    "45"
+   ]
+  },
+  {
+   "id": "gen:dist:9,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "45"
+  },
+  {
+   "id": "gen:dist:9,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "5",
+    "14",
+    "45",
+    "54"
+   ]
+  },
+  {
+   "id": "gen:dist:9,6",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "54"
+  },
+  {
+   "id": "gen:dist:9,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "15",
+    "54",
+    "63"
+   ]
+  },
+  {
+   "id": "gen:dist:9,7",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "63"
+  },
+  {
+   "id": "gen:dist:9,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "16",
+    "63",
+    "72"
+   ]
+  },
+  {
+   "id": "gen:dist:9,8",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "integer",
+   "answer": "72"
+  },
+  {
+   "id": "gen:dist:9,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "17",
+    "72",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:dist:4,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities-intro",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7",
+    "11",
+    "28",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:expand:3,-5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-2"
+  },
+  {
+   "id": "gen:expand:-5,-4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-9"
+  },
+  {
+   "id": "gen:expand:-5,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-9",
+    "-8",
+    "-5",
+    "20"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,-3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-8"
+  },
+  {
+   "id": "gen:expand:-5,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-8",
+    "-7",
+    "-5",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,-2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-7"
+  },
+  {
+   "id": "gen:expand:-5,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-7",
+    "-6",
+    "-5",
+    "10"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,-1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-6"
+  },
+  {
+   "id": "gen:expand:-5,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "-7",
+    "-6",
+    "-5",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-4"
+  },
+  {
+   "id": "gen:expand:-5,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "-6",
+    "-5",
+    "-4",
+    "-3"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-3"
+  },
+  {
+   "id": "gen:expand:-5,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-10",
+    "-7",
+    "-5",
+    "-3"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-2"
+  },
+  {
+   "id": "gen:expand:-5,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-15",
+    "-8",
+    "-5",
+    "-2"
+   ]
+  },
+  {
+   "id": "gen:expand:-5,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-1"
+  },
+  {
+   "id": "gen:expand:-5,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-20",
+    "-9",
+    "-5",
+    "-1"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,-3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-7"
+  },
+  {
+   "id": "gen:expand:-4,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-7",
+    "-6",
+    "-4",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,-2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-6"
+  },
+  {
+   "id": "gen:expand:-4,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-6",
+    "-5",
+    "-4",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,-1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-5"
+  },
+  {
+   "id": "gen:expand:-4,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "-6",
+    "-5",
+    "-4",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-3"
+  },
+  {
+   "id": "gen:expand:-4,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "-5",
+    "-4",
+    "-3",
+    "-2"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-2"
+  },
+  {
+   "id": "gen:expand:-4,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-8",
+    "-6",
+    "-4",
+    "-2"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-1"
+  },
+  {
+   "id": "gen:expand:-4,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-12",
+    "-7",
+    "-4",
+    "-1"
+   ]
+  },
+  {
+   "id": "gen:expand:-4,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:expand:-4,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,-2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-5"
+  },
+  {
+   "id": "gen:expand:-3,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "-5",
+    "-4",
+    "-3",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,-1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-4"
+  },
+  {
+   "id": "gen:expand:-3,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "-5",
+    "-4",
+    "-3",
+    "3"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-2"
+  },
+  {
+   "id": "gen:expand:-3,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "-4",
+    "-3",
+    "-2",
+    "-1"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-1"
+  },
+  {
+   "id": "gen:expand:-3,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "D",
+   "options": [
+    "-6",
+    "-5",
+    "-3",
+    "-1"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:expand:-3,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:expand:-3,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:expand:-3,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:expand:-2,-1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-3"
+  },
+  {
+   "id": "gen:expand:-2,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "-4",
+    "-3",
+    "-2",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:expand:-2,1",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "-1"
+  },
+  {
+   "id": "gen:expand:-2,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "-3",
+    "-2",
+    "-1",
+    "0"
+   ]
+  },
+  {
+   "id": "gen:expand:-2,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:expand:-2,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:expand:-2,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:expand:-2,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:expand:-2,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "3"
+  },
+  {
+   "id": "gen:expand:-2,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:expand:-1,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:expand:-1,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  {
+   "id": "gen:expand:-1,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:expand:-1,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:expand:-1,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "3"
+  },
+  {
+   "id": "gen:expand:-1,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:expand:-1,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:expand:-1,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:expand:1,2",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "3"
+  },
+  {
+   "id": "gen:expand:1,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:expand:1,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:expand:1,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "3",
+    "4",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:expand:1,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "5"
+  },
+  {
+   "id": "gen:expand:1,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "4",
+    "5",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:expand:1,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:expand:1,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "5",
+    "6",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:expand:2,3",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "5"
+  },
+  {
+   "id": "gen:expand:2,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "4",
+    "5",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:expand:2,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:expand:2,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "6",
+    "7",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:expand:2,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "7"
+  },
+  {
+   "id": "gen:expand:2,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "7",
+    "8",
+    "10"
+   ]
+  },
+  {
+   "id": "gen:expand:3,4",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "7"
+  },
+  {
+   "id": "gen:expand:3,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "3",
+    "7",
+    "8",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:expand:3,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:expand:3,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "3",
+    "8",
+    "9",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:expand:4,5",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "integer",
+   "answer": "9"
+  },
+  {
+   "id": "gen:expand:4,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "4",
+    "9",
+    "10",
+    "20"
+   ]
+  },
+  {
+   "id": "gen:expand:3,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.identities",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "-15",
+    "-8",
+    "-2",
+    "3"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "96"
+  },
+  {
+   "id": "gen:dpow:1,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:dpow:1,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:dpow:1,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "4",
+    "5",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:dpow:1,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "3",
+    "6",
+    "9",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "3"
+  },
+  {
+   "id": "gen:dpow:1,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dpow:1,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "8",
+    "12",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "27"
+  },
+  {
+   "id": "gen:dpow:1,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "18",
+    "27",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:dpow:1,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1",
+    "3",
+    "4",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "32"
+  },
+  {
+   "id": "gen:dpow:1,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "16",
+    "32",
+    "64"
+   ]
+  },
+  {
+   "id": "gen:dpow:1,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "108"
+  },
+  {
+   "id": "gen:dpow:1,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "27",
+    "81",
+    "108",
+    "324"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "4"
+  },
+  {
+   "id": "gen:dpow:2,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:dpow:2,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "4",
+    "8",
+    "9",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dpow:2,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "6",
+    "12",
+    "18",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:dpow:2,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "5",
+    "6",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dpow:2,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8",
+    "16",
+    "24",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "54"
+  },
+  {
+   "id": "gen:dpow:2,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "18",
+    "36",
+    "54",
+    "162"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:dpow:2,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "7",
+    "8",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "64"
+  },
+  {
+   "id": "gen:dpow:2,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "16",
+    "32",
+    "64",
+    "128"
+   ]
+  },
+  {
+   "id": "gen:dpow:2,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "216"
+  },
+  {
+   "id": "gen:dpow:2,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "54",
+    "162",
+    "216",
+    "648"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "6"
+  },
+  {
+   "id": "gen:dpow:3,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "5",
+    "6",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dpow:3,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "6",
+    "12",
+    "13",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "18"
+  },
+  {
+   "id": "gen:dpow:3,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "9",
+    "18",
+    "27",
+    "54"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "9"
+  },
+  {
+   "id": "gen:dpow:3,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "8",
+    "9",
+    "10"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "36"
+  },
+  {
+   "id": "gen:dpow:3,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "12",
+    "24",
+    "36",
+    "72"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "81"
+  },
+  {
+   "id": "gen:dpow:3,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "27",
+    "54",
+    "81",
+    "243"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dpow:3,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "11",
+    "12",
+    "13"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "324"
+  },
+  {
+   "id": "gen:dpow:3,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "81",
+    "243",
+    "324",
+    "972"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "8"
+  },
+  {
+   "id": "gen:dpow:4,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "7",
+    "8",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:dpow:4,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "8",
+    "16",
+    "17",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "24"
+  },
+  {
+   "id": "gen:dpow:4,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "12",
+    "24",
+    "36",
+    "72"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "12"
+  },
+  {
+   "id": "gen:dpow:4,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "11",
+    "12",
+    "13"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "48"
+  },
+  {
+   "id": "gen:dpow:4,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "16",
+    "32",
+    "48",
+    "96"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "108"
+  },
+  {
+   "id": "gen:dpow:4,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "36",
+    "72",
+    "108",
+    "324"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "16"
+  },
+  {
+   "id": "gen:dpow:4,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "4",
+    "15",
+    "16",
+    "17"
+   ]
+  },
+  {
+   "id": "gen:dpow:4,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "integer",
+   "answer": "128"
+  },
+  {
+   "id": "gen:dpow:4,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "32",
+    "64",
+    "128",
+    "256"
+   ]
+  },
+  {
+   "id": "gen:dpow:3,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.derivative-rules",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "24",
+    "48",
+    "96",
+    "192"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "52/3"
+  },
+  {
+   "id": "gen:pint:0,2,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "2"
+  },
+  {
+   "id": "gen:pint:0,2,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "8/3"
+  },
+  {
+   "id": "gen:pint:0,2,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "2",
+    "8/3",
+    "4",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,1,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "4"
+  },
+  {
+   "id": "gen:pint:0,2,1,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "8/3",
+    "4",
+    "12",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "4"
+  },
+  {
+   "id": "gen:pint:0,2,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "4",
+    "5",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "16/3"
+  },
+  {
+   "id": "gen:pint:0,2,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "4",
+    "16/3",
+    "8",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "8"
+  },
+  {
+   "id": "gen:pint:0,2,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "16/3",
+    "8",
+    "24",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "6"
+  },
+  {
+   "id": "gen:pint:0,2,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "6",
+    "7",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "8"
+  },
+  {
+   "id": "gen:pint:0,2,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "6",
+    "8",
+    "12",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "12"
+  },
+  {
+   "id": "gen:pint:0,2,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "8",
+    "12",
+    "36",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "8"
+  },
+  {
+   "id": "gen:pint:0,2,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "8",
+    "9",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "32/3"
+  },
+  {
+   "id": "gen:pint:0,2,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "8",
+    "32/3",
+    "16",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "16"
+  },
+  {
+   "id": "gen:pint:0,2,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "32/3",
+    "16",
+    "48",
+    "64"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,5,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "10"
+  },
+  {
+   "id": "gen:pint:0,2,5,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "10",
+    "11",
+    "20"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,5,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "40/3"
+  },
+  {
+   "id": "gen:pint:0,2,5,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "10",
+    "40/3",
+    "20",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,5,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "20"
+  },
+  {
+   "id": "gen:pint:0,2,5,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "40/3",
+    "20",
+    "60",
+    "80"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,6,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "12"
+  },
+  {
+   "id": "gen:pint:0,2,6,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "12",
+    "13",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,6,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "16"
+  },
+  {
+   "id": "gen:pint:0,2,6,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "12",
+    "16",
+    "24",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:pint:0,2,6,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "24"
+  },
+  {
+   "id": "gen:pint:0,2,6,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "16",
+    "24",
+    "72",
+    "96"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "9/2"
+  },
+  {
+   "id": "gen:pint:0,3,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "3",
+    "9/2",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "9"
+  },
+  {
+   "id": "gen:pint:0,3,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9/2",
+    "6",
+    "9",
+    "27"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,1,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "81/4"
+  },
+  {
+   "id": "gen:pint:0,3,1,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "9",
+    "81/4",
+    "27",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "9"
+  },
+  {
+   "id": "gen:pint:0,3,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "6",
+    "9",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "18"
+  },
+  {
+   "id": "gen:pint:0,3,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "12",
+    "18",
+    "54"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "81/2"
+  },
+  {
+   "id": "gen:pint:0,3,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "18",
+    "81/2",
+    "54",
+    "162"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "27/2"
+  },
+  {
+   "id": "gen:pint:0,3,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "9",
+    "27/2",
+    "27"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "27"
+  },
+  {
+   "id": "gen:pint:0,3,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "27/2",
+    "18",
+    "27",
+    "81"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "243/4"
+  },
+  {
+   "id": "gen:pint:0,3,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "27",
+    "243/4",
+    "81",
+    "243"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "18"
+  },
+  {
+   "id": "gen:pint:0,3,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "12",
+    "18",
+    "36"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "36"
+  },
+  {
+   "id": "gen:pint:0,3,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "18",
+    "24",
+    "36",
+    "108"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "81"
+  },
+  {
+   "id": "gen:pint:0,3,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "36",
+    "81",
+    "108",
+    "324"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,5,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "45/2"
+  },
+  {
+   "id": "gen:pint:0,3,5,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "15",
+    "45/2",
+    "45"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,5,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "45"
+  },
+  {
+   "id": "gen:pint:0,3,5,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "45/2",
+    "30",
+    "45",
+    "135"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,5,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "405/4"
+  },
+  {
+   "id": "gen:pint:0,3,5,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "45",
+    "405/4",
+    "135",
+    "405"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,6,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "27"
+  },
+  {
+   "id": "gen:pint:0,3,6,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "18",
+    "27",
+    "54"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,6,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "54"
+  },
+  {
+   "id": "gen:pint:0,3,6,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "27",
+    "36",
+    "54",
+    "162"
+   ]
+  },
+  {
+   "id": "gen:pint:0,3,6,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "243/2"
+  },
+  {
+   "id": "gen:pint:0,3,6,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "54",
+    "243/2",
+    "162",
+    "486"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "3/2"
+  },
+  {
+   "id": "gen:pint:1,2,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "3/2",
+    "3"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "7/3"
+  },
+  {
+   "id": "gen:pint:1,2,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3/2",
+    "2",
+    "7/3",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,1,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "15/4"
+  },
+  {
+   "id": "gen:pint:1,2,1,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "7/3",
+    "15/4",
+    "9",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "3"
+  },
+  {
+   "id": "gen:pint:1,2,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "2",
+    "3",
+    "6"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "14/3"
+  },
+  {
+   "id": "gen:pint:1,2,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3",
+    "4",
+    "14/3",
+    "14"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "15/2"
+  },
+  {
+   "id": "gen:pint:1,2,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "14/3",
+    "15/2",
+    "18",
+    "30"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "9/2"
+  },
+  {
+   "id": "gen:pint:1,2,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "3",
+    "9/2",
+    "9"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "7"
+  },
+  {
+   "id": "gen:pint:1,2,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9/2",
+    "6",
+    "7",
+    "21"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "45/4"
+  },
+  {
+   "id": "gen:pint:1,2,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "7",
+    "45/4",
+    "27",
+    "45"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "6"
+  },
+  {
+   "id": "gen:pint:1,2,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "4",
+    "6",
+    "12"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "28/3"
+  },
+  {
+   "id": "gen:pint:1,2,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "6",
+    "8",
+    "28/3",
+    "28"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "15"
+  },
+  {
+   "id": "gen:pint:1,2,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "28/3",
+    "15",
+    "36",
+    "60"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,5,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "15/2"
+  },
+  {
+   "id": "gen:pint:1,2,5,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "5",
+    "15/2",
+    "15"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,5,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "35/3"
+  },
+  {
+   "id": "gen:pint:1,2,5,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "15/2",
+    "10",
+    "35/3",
+    "35"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,5,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "75/4"
+  },
+  {
+   "id": "gen:pint:1,2,5,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "35/3",
+    "75/4",
+    "45",
+    "75"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,6,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "9"
+  },
+  {
+   "id": "gen:pint:1,2,6,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "6",
+    "9",
+    "18"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,6,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "14"
+  },
+  {
+   "id": "gen:pint:1,2,6,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "9",
+    "12",
+    "14",
+    "42"
+   ]
+  },
+  {
+   "id": "gen:pint:1,2,6,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "45/2"
+  },
+  {
+   "id": "gen:pint:1,2,6,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "14",
+    "45/2",
+    "54",
+    "90"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "4"
+  },
+  {
+   "id": "gen:pint:1,3,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "2",
+    "4",
+    "8"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "26/3"
+  },
+  {
+   "id": "gen:pint:1,3,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "4",
+    "26/3",
+    "9",
+    "26"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,1,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "20"
+  },
+  {
+   "id": "gen:pint:1,3,1,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "26/3",
+    "20",
+    "24",
+    "80"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "8"
+  },
+  {
+   "id": "gen:pint:1,3,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "4",
+    "8",
+    "16"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,2,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "40"
+  },
+  {
+   "id": "gen:pint:1,3,2,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "52/3",
+    "40",
+    "48",
+    "160"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "12"
+  },
+  {
+   "id": "gen:pint:1,3,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "6",
+    "12",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "26"
+  },
+  {
+   "id": "gen:pint:1,3,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "12",
+    "26",
+    "27",
+    "78"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,3,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "60"
+  },
+  {
+   "id": "gen:pint:1,3,3,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "26",
+    "60",
+    "72",
+    "240"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,4,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "16"
+  },
+  {
+   "id": "gen:pint:1,3,4,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "8",
+    "16",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,4,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "104/3"
+  },
+  {
+   "id": "gen:pint:1,3,4,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "16",
+    "104/3",
+    "36",
+    "104"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,4,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "80"
+  },
+  {
+   "id": "gen:pint:1,3,4,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "104/3",
+    "80",
+    "96",
+    "320"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,5,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "20"
+  },
+  {
+   "id": "gen:pint:1,3,5,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "10",
+    "20",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,5,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "130/3"
+  },
+  {
+   "id": "gen:pint:1,3,5,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "20",
+    "130/3",
+    "45",
+    "130"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,5,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "100"
+  },
+  {
+   "id": "gen:pint:1,3,5,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "130/3",
+    "100",
+    "120",
+    "400"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,6,1",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "24"
+  },
+  {
+   "id": "gen:pint:1,3,6,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "12",
+    "24",
+    "48"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,6,2",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "52"
+  },
+  {
+   "id": "gen:pint:1,3,6,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "24",
+    "52",
+    "54",
+    "156"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,6,3",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "fraction",
+   "answer": "120"
+  },
+  {
+   "id": "gen:pint:1,3,6,3:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "52",
+    "120",
+    "144",
+    "480"
+   ]
+  },
+  {
+   "id": "gen:pint:1,3,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.indefinite-integrals",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "8",
+    "52/3",
+    "18",
+    "52"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "124/3"
+  },
+  {
+   "id": "gen:subst:0,1,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "3/2"
+  },
+  {
+   "id": "gen:subst:0,1,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/2",
+    "3/4",
+    "3/2",
+    "3"
+   ]
+  },
+  {
+   "id": "gen:subst:0,1,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "7/3"
+  },
+  {
+   "id": "gen:subst:0,1,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/3",
+    "7/6",
+    "7/3",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:subst:0,1,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "5/2"
+  },
+  {
+   "id": "gen:subst:0,1,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/2",
+    "5/4",
+    "5/2",
+    "5"
+   ]
+  },
+  {
+   "id": "gen:subst:0,1,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "19/3"
+  },
+  {
+   "id": "gen:subst:0,1,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/3",
+    "19/6",
+    "19/3",
+    "19"
+   ]
+  },
+  {
+   "id": "gen:subst:0,1,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "7/2"
+  },
+  {
+   "id": "gen:subst:0,1,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/2",
+    "7/4",
+    "7/2",
+    "7"
+   ]
+  },
+  {
+   "id": "gen:subst:0,1,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "37/3"
+  },
+  {
+   "id": "gen:subst:0,1,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "1/3",
+    "37/6",
+    "37/3",
+    "37"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "12"
+  },
+  {
+   "id": "gen:subst:0,2,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "6",
+    "12",
+    "24"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "16"
+  },
+  {
+   "id": "gen:subst:0,2,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "8",
+    "16",
+    "32"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "208/3"
+  },
+  {
+   "id": "gen:subst:0,2,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8/3",
+    "104/3",
+    "208/3",
+    "208"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "20"
+  },
+  {
+   "id": "gen:subst:0,2,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "2",
+    "10",
+    "20",
+    "40"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "316/3"
+  },
+  {
+   "id": "gen:subst:0,2,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8/3",
+    "158/3",
+    "316/3",
+    "316"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,1,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "21/2"
+  },
+  {
+   "id": "gen:subst:1,2,1,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3/2",
+    "21/4",
+    "21/2",
+    "21"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,1,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "39"
+  },
+  {
+   "id": "gen:subst:1,2,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7/3",
+    "39/2",
+    "39",
+    "117"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,2,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "27/2"
+  },
+  {
+   "id": "gen:subst:1,2,2,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3/2",
+    "27/4",
+    "27/2",
+    "27"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,2,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "63"
+  },
+  {
+   "id": "gen:subst:1,2,2,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7/3",
+    "63/2",
+    "63",
+    "189"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,3,1",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "33/2"
+  },
+  {
+   "id": "gen:subst:1,2,3,1:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "3/2",
+    "33/4",
+    "33/2",
+    "33"
+   ]
+  },
+  {
+   "id": "gen:subst:1,2,3,2",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "fraction",
+   "answer": "93"
+  },
+  {
+   "id": "gen:subst:1,2,3,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "7/3",
+    "93/2",
+    "93",
+    "279"
+   ]
+  },
+  {
+   "id": "gen:subst:0,2,1,2:mc",
+   "supported": true,
+   "competency": "MATH.calculus.integration-methods",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "8/3",
+    "62/3",
+    "124/3",
+    "124"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-6,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-6,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:-6,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-5,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-5,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-5,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-5,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-4,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:-4,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-4,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-4,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-4,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-4,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-4,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-4,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-3,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-3,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-3,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-2,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:-2,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-2,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-2,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:-1,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-1,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:-1,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:1,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:1,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:1,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:2,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:2,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:2,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:2,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:3,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:3,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:3,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:4,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:4,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:4,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:4,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:4,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:4,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:4,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:4,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:5,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:5,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:5,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:5,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "0"
+  },
+  {
+   "id": "gen:disc:5,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "A",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,-1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,-1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,1",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,1:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,2",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,2:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,3",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,3:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,4",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,4:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,5",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,5:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,6",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,7",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,7:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,8",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "2"
+  },
+  {
+   "id": "gen:disc:6,8:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:6,9",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "integer",
+   "answer": "1"
+  },
+  {
+   "id": "gen:disc:6,9:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "B",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "gen:disc:-5,6:mc",
+   "supported": true,
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "type": "choice",
+   "answer": "C",
+   "options": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
    "id": "gen:mul:13,2",
    "supported": false
   },
@@ -1419,6 +10383,46 @@
   },
   {
    "id": "gen:mul:a,b",
+   "supported": false
+  },
+  {
+   "id": "gen:mul:7,8:mc",
+   "supported": false
+  },
+  {
+   "id": "gen:pow:13,2",
+   "supported": false
+  },
+  {
+   "id": "gen:pow:2,6:mc",
+   "supported": false
+  },
+  {
+   "id": "gen:dist:1,3",
+   "supported": false
+  },
+  {
+   "id": "gen:expand:3,-3",
+   "supported": false
+  },
+  {
+   "id": "gen:dpow:3,4,5",
+   "supported": false
+  },
+  {
+   "id": "gen:pint:0,5,1,1",
+   "supported": false
+  },
+  {
+   "id": "gen:subst:0,2,0,1",
+   "supported": false
+  },
+  {
+   "id": "gen:disc:0,4",
+   "supported": false
+  },
+  {
+   "id": "gen:pint:1,3,2,2:mcq",
    "supported": false
   }
  ]

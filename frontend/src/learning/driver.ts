@@ -11,8 +11,9 @@ import { learnerState, make } from "../../../packages/learning/src/session";
 
 export type Answerer = (qid: string, phase: string) => string;
 export const right: Answerer = (q) => question(q).answer;
-export const activityFor = (ms: Pick<ModuleState, "phase" | "question">): LearningActivity =>
-  ms.phase === "explore" ? "diagnostic"
+export const activityFor = (ms: Pick<ModuleState, "phase" | "question" | "activity">): LearningActivity =>
+  ms.activity ? ms.activity
+  : ms.phase === "explore" ? "diagnostic"
   : ms.phase === "strategy" ? "probe"
   : ms.phase === "guided" ? "guided"
   : ms.phase === "check" ? "check"

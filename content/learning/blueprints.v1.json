@@ -1,0 +1,491 @@
+{
+ "schema": "module-blueprint@1",
+ "version": "1.0.0",
+ "status": "draft",
+ "note": "Module blueprints for the content-production pipeline (packages/learning/src/library.ts). A blueprint holds the teaching text a person wrote; synthesis adds questions from the problem family, each checked by the family's independent check. Original, CC0, written with AI assistance, not educator-reviewed: every synthesised module starts as a draft in content/learning/review.v1.json.",
+ "blueprints": [
+  {
+   "competency": "MATH.number.exponents",
+   "title": "Work out powers",
+   "family": "pow",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "A power is repeated multiplication",
+     "text": [
+      "2⁵ means 2 multiplied by itself 5 times. The small raised number (the power) counts how many 2s there are; it is not a number to multiply by."
+     ],
+     "worked": true,
+     "tip": "2⁵ is not 2 × 5 = 10. It is 2 × 2 × 2 × 2 × 2 = 32."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "count_factors",
+     "title": "Write out the factors",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Count them out",
+       "text": [
+        "Write the number as many times as the power says, with × between them. Then multiply two at a time."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "build_up",
+     "title": "Build it up one step at a time",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Multiply again and again",
+       "text": [
+        "Start with the number and multiply by it again for each extra power: for 3⁴, 3 → 9 → 27 → 81. That is one multiplication fewer than the power."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "facts_first",
+     "title": "Use the multiplication facts you know",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Each step is a fact",
+       "text": [
+        "Every step of a power is a multiplication fact: 2 × 2 = 4, 4 × 2 = 8, 8 × 2 = 16. If a step is slow, say that times table first."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.identities-intro",
+   "title": "Expand a bracket: a(x + b)",
+   "family": "dist",
+   "seed": [
+    3,
+    4
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The number outside multiplies everything inside",
+     "text": [
+      "3(x + 4) means three lots of (x + 4): (x + 4) + (x + 4) + (x + 4). That is three x's and three 4s."
+     ],
+     "math": [
+      "3(x + 4) = 3 × x + 3 × 4 = 3x + 12"
+     ],
+     "tip": "Multiply every term in the bracket, not only the first one."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "area_model",
+     "title": "See it as a rectangle",
+     "kind": "conceptual",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Split the rectangle",
+       "text": [
+        "Draw a rectangle a high and x + b long. Split the long side into x and b. The two parts have areas a × x and a × b; together they are the whole rectangle."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "arrows",
+     "title": "An arrow to each term",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Multiply along each arrow",
+       "text": [
+        "Draw an arrow from the number outside the bracket to each term inside it, and multiply along each arrow."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "times_fact",
+     "title": "Check the multiplication fact",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "The last term is a fact",
+       "text": [
+        "The number at the end is the number outside times the number inside: 3 × 4 = 12. If that fact is slow, rebuild it from one you know: 3 × 4 is 3 × 2 doubled."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.identities",
+   "title": "Expand (x + a)(x + b)",
+   "family": "expand",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Four products",
+     "text": [
+      "In (x + 2)(x + 5), each term of the first bracket multiplies each term of the second: x × x, x × 5, 2 × x and 2 × 5."
+     ],
+     "math": [
+      "(x + 2)(x + 5) = x² + 5x + 2x + 10 = x² + 7x + 10"
+     ],
+     "tip": "The x term is the SUM of the two numbers; the last term is their PRODUCT."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "grid",
+     "title": "Use a grid (an area model)",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Fill the four cells",
+       "text": [
+        "Draw a 2 by 2 grid. Write x and a along the top, x and b down the side. Fill each cell with the product of its row and column, then add the two cells that have an x."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "four_products",
+     "title": "First, outer, inner, last",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Two of the four products have an x",
+       "text": [
+        "Multiply the first terms, the outer terms, the inner terms and the last terms. The outer and inner products are the two x terms: add them."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signed_sum",
+     "title": "Add the signed numbers",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Keep each sign",
+       "text": [
+        "When a number is negative, keep its sign: (x + 3)(x − 5) gives 3x and −5x, and 3 + (−5) = −2, so the x term is −2x."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.derivative-rules",
+   "title": "Differentiate powers of x",
+   "family": "dpow",
+   "seed": [
+    2,
+    3,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The power rule",
+     "text": [
+      "To differentiate k xⁿ, bring the power down as a factor and lower the power by one: the derivative is k n xⁿ⁻¹. Then put in the value of x."
+     ],
+     "worked": true,
+     "tip": "Lower the power first, then substitute."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "slope",
+     "title": "A derivative is a rate of change",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Not the value: how fast it changes",
+       "text": [
+        "f′(3) is how fast f is changing at x = 3, not the value f(3). For f(x) = x², the values at 2.9, 3 and 3.1 are 8.41, 9 and 9.61: they rise by 1.2 over 0.2, which is 6 per unit, and the rule gives 2 × 3 = 6."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "two_moves",
+     "title": "Two moves: multiply, then lower",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "In this order",
+       "text": [
+        "Multiply the coefficient by the power, then take one off the power. Only then put in the number."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_first",
+     "title": "Work out the power carefully",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "A power is repeated multiplication",
+       "text": [
+        "2² = 2 × 2 = 4 and 2³ = 2 × 2 × 2 = 8. A power is not the number times the power: 2³ is not 6."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.indefinite-integrals",
+   "title": "Integrate powers of x",
+   "family": "pint",
+   "seed": [
+    0,
+    2,
+    3,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Reverse the power rule",
+     "text": [
+      "Differentiating xⁿ⁺¹ ⁄ (n + 1) gives xⁿ. So an antiderivative of k xⁿ is k xⁿ⁺¹ ⁄ (n + 1): raise the power by one, then divide by the new power."
+     ],
+     "math": [
+      "∫ k xⁿ dx = k xⁿ⁺¹ ⁄ (n + 1) + C"
+     ]
+    },
+    {
+     "title": "Between two limits",
+     "text": [
+      "For a definite integral, work out the antiderivative F at the upper limit and at the lower limit, then subtract: F(upper) − F(lower). The constant C cancels."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "differentiate_back",
+     "title": "Check by differentiating back",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Undo, then check",
+       "text": [
+        "Whatever antiderivative you write, differentiate it: you must get back the function you started with. x³ differentiates to 3x², so ∫ 3x² dx = x³ + C."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "raise_then_divide",
+     "title": "Raise, then divide",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Two moves, then the limits",
+       "text": [
+        "Add one to the power, then divide by that new power. Then put in the upper limit and the lower limit, and subtract."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_and_fractions",
+     "title": "Powers and fractions first",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "What the working needs",
+       "text": [
+        "The working needs powers (2³ = 8) and fractions with the same denominator (16⁄3 − 2⁄3 = 14⁄3). If either is slow, practise it first; the integration itself is two moves."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "title": "Integrate by substitution",
+   "family": "subst",
+   "seed": [
+    0,
+    1,
+    1,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Spot u and du",
+     "text": [
+      "In ∫ 2x(x² + 1)² dx, call the inside of the bracket u = x² + 1. Its derivative, 2x, is already there: du = 2x dx. So the integral is ∫ u² du."
+     ],
+     "math": [
+      "u = x² + 1, du = 2x dx",
+      "∫ 2x(x² + 1)² dx = ∫ u² du = u³ ⁄ 3 + C"
+     ]
+    },
+    {
+     "title": "Change the limits",
+     "text": [
+      "With limits, change them too: put each x limit into u = x² + 1, and integrate between those u values. You never go back to x."
+     ],
+     "worked": true,
+     "tip": "Using the x limits for u is the most common slip."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "why_du",
+     "title": "Why 2x dx becomes du",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Nothing left to divide by",
+       "text": [
+        "du ⁄ dx = 2x, so a small change dx in x changes u by 2x dx. The 2x in the integral is exactly what turns dx into du: there is no extra 2 to divide by."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "limits_table",
+     "title": "Make a little table of limits",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "x row, u row",
+       "text": [
+        "Write two rows, x and u. Under x put the two limits; under u put x² + c for each. Then integrate in u between the u values."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_check",
+     "title": "Work out the powers",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "The last step is arithmetic",
+       "text": [
+        "The last step is powers of whole numbers, like 2³ = 8 and 5³ = 125, then a subtraction and a division. A power is repeated multiplication, not the number times the power."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "title": "How many solutions? The discriminant",
+   "family": "disc",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "b² − 4ac decides",
+     "text": [
+      "For ax² + bx + c = 0, work out the discriminant b² − 4ac. Positive: two different real solutions. Zero: one (repeated) solution. Negative: no real solutions."
+     ],
+     "worked": true,
+     "tip": "b² is never negative, even when b is."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "parabola",
+     "title": "Picture the parabola",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Crossings",
+       "text": [
+        "y = x² + bx + c is a U-shaped curve. Two solutions: it crosses the x-axis twice. One: it just touches it. None: it stays above it. The discriminant tells you which, without drawing."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "careful_signs",
+     "title": "Write each part with its sign",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "b², then 4ac, then subtract",
+       "text": [
+        "Write b², then 4ac with c's own sign, then subtract. For x² − 4x − 5: b² = 16, 4ac = 4 × (−5) = −20, and 16 − (−20) = 36, which is positive: two solutions."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signed_numbers",
+     "title": "Subtracting a negative",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Two sign facts",
+       "text": [
+        "Taking away a negative number adds: 16 − (−20) = 36. And a square is never negative: (−4)² = 16."
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

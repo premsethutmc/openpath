@@ -134,13 +134,16 @@ test("G: an unseen mistake on a problem the learner types in is investigated and
   assert.deepEqual(again.state().evidence("MATH.calculus.definite-integrals"), d.state().evidence("MATH.calculus.definite-integrals"));
 });
 
+/** Seeds of the families added for the platform (families@1, seven more). */
+const NEW_SEEDS: Record<string, number[]> = { pow: [3, 4], dist: [4, 7], expand: [3, -5], dpow: [3, 4, 2], pint: [1, 3, 2, 2], subst: [0, 2, 1, 2], disc: [-5, 6] };
+
 test("B: diagnosis generalises across families and unseen parameter combinations, and says when it is unsure", () => {
   const rand = rng(20261019);
   const tally = { trials: 0, identified: 0, uncertain: 0, wrongClaim: 0 };
   const noise = { trials: 0, claimed: 0 };
   for (const fam of FAMILIES.keys()) {
     if (fam === "above") continue;
-    const seeds = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], alp: [1, 2] }[fam]!;
+    const seeds = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], alp: [1, 2], ...NEW_SEEDS }[fam]!;
     const pool = [problemOf(`gen:${fam}:${seeds.join(",")}`)!, ...variantsOf(problemOf(`gen:${fam}:${seeds.join(",")}`)!)];
     for (let k = 0; k < 12; k++) {
       const start = pool[Math.floor(rand() * pool.length)];
@@ -153,7 +156,7 @@ test("B: diagnosis generalises across families and unseen parameter combinations
         const b = p.bugs.find((x) => x.id === bug.id);
         if (!b || b.predict === null || rand() < 0.15) return p.answer;
         const v = b.predict;
-        return asText(p, Array.isArray(v) && b.id.startsWith("fact-slip") ? v[Math.floor(rand() * v.length)] : (v as number | number[]));
+        return asText(p, Array.isArray(v) && (b.id.startsWith("fact-slip") || p.type !== "set") ? v[Math.floor(rand() * v.length)] : (v as number | number[]));
       };
       const first = learner(start.id);
       if (isCorrect(question(start.id), first)) continue; // the misunderstanding gives the right answer here (e.g. 2/8 + 2/8 by multiplying tops)
@@ -190,9 +193,15 @@ test("B: diagnosis generalises across families and unseen parameter combinations
 test("C: every family's answer passes an independent check, and decomposition gives grade-appropriate steps", () => {
   let n = 0;
   for (const [fam] of FAMILIES) {
-    const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2] }[fam]!;
+    const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2], ...NEW_SEEDS }[fam]!;
     const p = problemOf(`gen:${fam}:${seed.join(",")}`)!;
     for (const v of [p, ...variantsOf(p)]) {
+      // the multiple-choice form: the right letter is the family's answer, and every option is a distinct value
+      const mc = problemOf(`${v.id}:mc`);
+      if (FAMILIES.get(fam)!.mc) {
+        assert.ok(mc && mc.type === "choice" && mc.options!.length >= 3 && new Set(mc.options).size === mc.options!.length, `${v.id}:mc`);
+        assert.equal(mc!.options!["ABCD".indexOf(mc!.answer)], v.answer, `${v.id}:mc answer`);
+      } else assert.equal(mc, null, `${fam} has no multiple-choice form`);
       assert.ok(v.steps.length >= 1 && v.answer, v.id); // problemOf throws if the independent check fails
       for (const b of v.bugs) assert.ok(b.predict === null || JSON.stringify(b.predict) !== JSON.stringify(v.answer), `${v.id}: ${b.id} predicts a wrong answer`);
       n++;
@@ -320,13 +329,14 @@ test("J: across sessions the plan continues without reteaching, explains its cha
 
 // ---------------------------------------------------------------- K: the seven-day boundary
 
-test("K: nothing verifies before seven full days; the delayed check at seven days follows the unchanged policy", () => {
+test("K: nothing verifies before seven full days (verification@3, in the engine and on this surface); the delayed check at seven days verifies", () => {
   fixture(true);
   for (const [days, viaPractice] of [[6.6, true], [6.99, true], [6.99, false]] as [number, boolean][]) {
     const d = new Driver(`synthetic-k-${days}-${viaPractice}`, T0);
     d.enrol(4, "2026-27", sampleFor(4)!);
     d.work(EQ, right);
-    const t0 = Date.parse(d.state().evidence(EQ).independentAt!);
+    // the delayed check's clock starts at independent success (and the engine's first demonstration, if later)
+    const t0 = Date.parse(d.state().evidence(EQ).retentionDueAt!) - 7 * DAY;
     d.newSession(0);
     d.now = t0 + days * DAY;
     const st = d.state();
@@ -337,7 +347,8 @@ test("K: nothing verifies before seven full days; the delayed check at seven day
       d.answer("eq-r1", "6", "practice");
       d.answer("eq-r2", "15", "practice");
       const e = d.state().evidence(EQ);
-      assert.equal(e.engine, "verified", "the engine's own rule (7 days less half a day), unchanged");
+      // verification@3 (the approved seven-full-day rule) in the shared engine itself: not verified before 7 days
+      assert.notEqual(e.engine, "verified", `${days} days: the shared engine does not verify (verification@3)`);
       assert.notEqual(e.status, "verified", `${days} days: not verified on this surface`);
     }
   }
@@ -345,7 +356,7 @@ test("K: nothing verifies before seven full days; the delayed check at seven day
   d.enrol(4, "2026-27", sampleFor(4)!);
   d.work(EQ, right);
   d.newSession(0);
-  d.now = Date.parse(d.state().evidence(EQ).independentAt!) + 7 * DAY;
+  d.now = Date.parse(d.state().evidence(EQ).retentionDueAt!);
   assert.equal(d.state().evidence(EQ).retention, "due");
   d.work(EQ, right);
   assert.equal(d.state().evidence(EQ).status, "verified");

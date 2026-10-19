@@ -44,6 +44,7 @@ def _load(name):
 @lru_cache
 def content():
     modules = _load('modules.v1.json')
+    library = _load('library.v1.json')['modules']
     problems = _load('problems.v1.json')['problems']
     questions = {q['id']: q for q in modules['questions']}
     for p in problems:
@@ -54,7 +55,8 @@ def content():
     releases = {(r['id'], r['version']): r['hash'] for r in _load('curricula/index.json')['releases']}
     return {
         'questions': questions,
-        'modules': {m['competency']: m for m in modules['modules']},
+        # hand-written modules, then modules synthesised from blueprints (library.v1.json); a hand-written one wins
+        'modules': {**{m['competency']: m for m in library}, **{m['competency']: m for m in modules['modules']}},
         'goals': {g['id'] for g in _load('goals.v1.json')['goals']},
         'graph': graph,
         'releases': releases,
@@ -172,12 +174,20 @@ def _check_release(release, pupil_prior):
     subjects = release.get('subjects')
     if not isinstance(subjects, list) or not subjects:
         _reject('A curriculum release needs its subjects.')
+    def outcomes(node, depth=0):
+        # a chapter's own outcomes, then its sections' (any depth, bounded)
+        if not isinstance(node, dict) or depth > 8:
+            return []
+        own = [o for o in node.get('outcomes', []) if isinstance(o, dict)]
+        return own + [o for sec in node.get('sections', []) or [] for o in outcomes(sec, depth + 1)]
     for s in subjects:
         for ch in s.get('chapters', []) if isinstance(s, dict) else []:
-            for o in ch.get('outcomes', []) if isinstance(ch, dict) else []:
+            for o in outcomes(ch):
                 for m in (o.get('mapping') or {}).get('competencies', []):
                     if m.get('status') == 'accepted' and m.get('id') not in c['graph']:
                         _reject('A curriculum release assigns an unknown competency.')
+                    if m.get('status') == 'accepted' and (o.get('mapping') or {}).get('verdict') == 'unsupported':
+                        _reject('An outcome of an unsupported subject cannot be mapped.')
                 prop = (o.get('mapping') or {}).get('proposal')
                 if prop and (prop.get('status') != 'provisional-proposal' or prop.get('id') in c['graph']):
                     _reject('A proposal stays provisional and cannot reuse a competency id.')

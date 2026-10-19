@@ -9,6 +9,9 @@
  *   disputed    a mandatory edge the audit finds mathematically unnecessary (proposed for removal; not followed).
  *   trivial     true but uninformative (e.g. "addition within 20" for limits; not followed).
  *   part        conceptual decomposition: a micro-skill is part of a competency (partOf); evidence counts for both.
+ *   alternative another way to do the target's work (an area model for expanding brackets). Offered as "another
+ *               way"; never followed by recovery and never a gate.
+ *   enrichment  where the target leads further (complex roots after quadratics). Offered as "go further" only.
  * Teaching strategies are not graph edges: they live in the modules (strategy.needs names probe questions).
  *
  * No relation ever gates a learner: modules are open whatever their prerequisites. Relations steer recovery (which
@@ -99,6 +102,22 @@ export function relations(opts: RelationOptions = {}): Map<string, Relation[]> {
 }
 const FOLLOWED: RelationType[] = ["mandatory", "plausible", "support"];
 
+type Side = { competency: string; note?: string };
+const sideLinks = (rows: (Side & Record<string, unknown>)[] | undefined, key: string) => {
+  const out = new Map<string, { id: string; note?: string }[]>();
+  for (const r of rows ?? []) {
+    known(r.competency, key);
+    for (const id of r[key] as string[]) {
+      known(id, key);
+      out.set(r.competency, [...(out.get(r.competency) ?? []), { id, note: r.note }]);
+    }
+  }
+  return out;
+};
+const add = additions as unknown as { alternatives?: (Side & { alternatives: string[] })[]; enrichment?: (Side & { enrichment: string[] })[] };
+const alternativeLinks = sideLinks(add.alternatives, "alternatives");
+const enrichmentLinks = sideLinks(add.enrichment, "enrichment");
+
 export const graph = {
   version: `${curriculum.version}+prerequisites@1.1.0+audit@${audit.version}+additions@${additions.version}`,
   competencies: all,
@@ -116,6 +135,10 @@ export const graph = {
   relationsOf: (id: string, opts?: RelationOptions) => relations(opts).get(id) ?? [],
   /** What recovery may check when a learner is stuck on this competency: mandatory, plausible and support edges. */
   supportsOf: (id: string, opts?: RelationOptions) => (relations(opts).get(id) ?? []).filter((r) => FOLLOWED.includes(r.type)).sort((a, b) => FOLLOWED.indexOf(a.type) - FOLLOWED.indexOf(b.type)).map((r) => r.from),
+  /** Other ways to do this competency's work (never followed by recovery). */
+  alternativesOf: (id: string) => alternativeLinks.get(id) ?? [],
+  /** Where this competency leads further (never followed by recovery). */
+  enrichmentOf: (id: string) => enrichmentLinks.get(id) ?? [],
   /** The mathematics package's mandatory prerequisites (no audit applied). */
   prerequisitesOf: (id: string, version: GraphVersion = "1.1.0") => competencyGraph(version).find((n) => n.id === id)?.prerequisites ?? [],
 };

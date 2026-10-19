@@ -103,21 +103,124 @@ def _alp(p):
     return 'MATH.calculus.area-integrals', 'fraction', F(x2) - F(x1)
 
 
+EXP = 'MATH.number.exponents'
+
+
+def _sgn(v):
+    return (v > 0) - (v < 0)
+
+
+def _pow(p):
+    a, n = p
+    if a < 2 or a > 12 or n < 2 or n > 5 or a ** n > 100000:
+        return None
+    return EXP, 'integer', a ** n, [a * n, a ** (n - 1), a + n]
+
+
+def _dist(p):
+    a, b = p
+    if a < 2 or a > 12 or b < 1 or b > 12:
+        return None
+    return 'MATH.algebra.identities-intro', 'integer', a * b, [b, a + b, a * (b + 1)]
+
+
+def _expand(p):
+    a, b = p
+    if a == 0 or b == 0 or abs(a) > 12 or abs(b) > 12 or a + b == 0:
+        return None
+    firsts = [a * b, a]
+    if _sgn(a) != _sgn(b):
+        firsts.append(-(a + b) if abs(a) + abs(b) == a + b else _sgn(a + b) * (abs(a) + abs(b)))
+    return 'MATH.algebra.identities', 'integer', a + b, firsts
+
+
+def _dpow(p):
+    k, n, t = p
+    if k < 1 or k > 9 or n < 2 or n > 5 or t < 1 or t > 4 or k * n * t ** (n - 1) > 5000:
+        return None
+    firsts = [k * n * t ** n, k * t ** (n - 1), k * t ** n]
+    if n - 1 >= 2 and t >= 2:
+        firsts.append(k * n * t * (n - 1))
+    return 'MATH.calculus.derivative-rules', 'integer', k * n * t ** (n - 1), firsts
+
+
+def _pint(p):
+    a, b, k, n = p
+    if a < 0 or b <= a or b > 4 or k < 1 or k > 12 or n < 1 or n > 3:
+        return None
+    F = lambda x: Fraction(k * x ** (n + 1), n + 1)
+    firsts = [k * (b ** (n + 1) - a ** (n + 1)), k * n * (b ** (n - 1) - a ** (n - 1)), Fraction(k * (b ** n - a ** n), n)]
+    if a > 0:
+        firsts.append(Fraction(k * b ** (n + 1), n + 1))
+    if b >= 2:
+        firsts.append(Fraction(k * ((n + 1) * b - (n + 1) * a), n + 1))
+    return 'MATH.calculus.indefinite-integrals', 'fraction', F(b) - F(a), firsts
+
+
+def _subst(p):
+    a, b, c, n = p
+    if a < 0 or b <= a or b > 3 or c < 1 or c > 4 or n < 1 or n > 3:
+        return None
+    u1, u2 = a * a + c, b * b + c
+    d = u2 ** (n + 1) - u1 ** (n + 1)
+    firsts = [Fraction(b ** (n + 1) - a ** (n + 1), n + 1), d, Fraction(d, 2 * (n + 1))]
+    if u2 <= 12 and n + 1 <= 5:
+        firsts.append(u2 - u1)
+    return 'MATH.calculus.integration-methods', 'fraction', Fraction(d, n + 1), firsts
+
+
+def _disc(p):
+    pp, q = p
+    if abs(pp) > 12 or abs(q) > 40 or pp == 0 or q == 0:
+        return None
+    d = pp * pp - 4 * q
+    return 'MATH.algebra.quadratic-discriminant', 'integer', 2 if d > 0 else 1 if d == 0 else 0, 'fixed:0,1,2'
+
+
+def _options(answer, firsts):
+    """The multiple-choice options (families.ts mcOptions): the answer and up to three mal-rule answers, topped up."""
+    if firsts == 'fixed:0,1,2':
+        return [Fraction(0), Fraction(1), Fraction(2)]
+    answer = Fraction(answer)
+    out = []
+
+    def add(v):
+        v = Fraction(v)
+        if v != answer and v not in out and (answer < 0 or v >= 0) and len(out) < 3:
+            out.append(v)
+    for v in firsts:
+        add(v)
+    for v in [answer + 1, answer - 1, answer + 2, 2 * answer, answer + 3, answer - 2]:
+        add(v)
+    return sorted(out + [answer])
+
+
+MC = {'pow': (2, _pow), 'dist': (2, _dist), 'expand': (2, _expand), 'dpow': (3, _dpow), 'pint': (4, _pint), 'subst': (4, _subst), 'disc': (2, _disc)}
+
 FAMILIES = {'mul': (2, _mul), 'rect': (2, _rect), 'eqfrac': (3, _eqfrac), 'fadd': (4, _fadd), 'cint': (3, _cint), 'quad': (2, _quad),
             'linev': (3, _linev), 'meet': (2, _meetf), 'above': (3, _above), 'alp': (2, _alp)}
 
 
 def generated(qid):
-    """A generated question as {competency, type, answer}, or None if the id is unknown or unsupported."""
-    m = re.fullmatch(r'gen:([a-z]+):(-?\d+(?:,-?\d+)*)', qid or '')
-    if not m or m.group(1) not in FAMILIES:
+    """A generated question as {competency, type, answer}, or None if the id is unknown or unsupported.
+    "gen:<family>:<params>:mc" is the multiple-choice form of a family that has one: the answer is a letter."""
+    m = re.fullmatch(r'gen:([a-z]+):(-?\d+(?:,-?\d+)*)(:mc)?', qid or '')
+    if not m or (m.group(1) not in FAMILIES and m.group(1) not in MC):
         return None
-    arity, fn = FAMILIES[m.group(1)]
+    arity, fn = FAMILIES.get(m.group(1)) or MC[m.group(1)]
     p = [int(x) for x in m.group(2).split(',')]
     if len(p) != arity:
+        return None
+    if m.group(3) and m.group(1) not in MC:
         return None
     r = fn(p)
     if r is None:
         return None
+    if m.group(1) in MC:
+        competency, kind, answer, firsts = r
+        if m.group(3):
+            options = _options(answer, firsts)
+            return {'id': qid, 'competency': competency, 'type': 'choice', 'answer': 'ABCD'[options.index(Fraction(answer))], 'options': [_show(o) for o in options], 'role': 'generated'}
+        return {'id': qid, 'competency': competency, 'type': kind, 'answer': _show(answer), 'role': 'generated'}
     competency, kind, answer = r
     return {'id': qid, 'competency': competency, 'type': kind, 'answer': answer if kind == 'choice' else _show(answer), 'role': 'generated'}

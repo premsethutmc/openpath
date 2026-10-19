@@ -18,7 +18,8 @@
  * could be raised in the same session that is judged as the check: a level first shown on day 12 was reported as
  * verified on day 12 because a lower level had been shown on day 1. `verifiedLevel` gives the one meaning used for
  * every level claim: band L is verified only when L was first shown without help in an earlier session, and a later
- * session at least the delay (mastery_gap_days, less the same half-day tolerance) after that has fresh evidence AT L
+ * session at least the delay (verification@3, the default: exactly mastery_gap_days; verification@2, for historical
+ * replay: less the same half-day tolerance) after that has fresh evidence AT L
  * (at least VERIFY_AT_LEVEL_MIN DISTINCT questions answered fresh, never a repeat, of difficulty ≥ L − tolerance: H-V2)
  * that favours L over L − 1 (checkPassed, unchanged, on that session's fresh evidence). The schedule fields (status, level, dueAt, checks, lastVerifiedAt) are unchanged, so
  * due dates, selection and historical schedules replay exactly as before.
@@ -60,7 +61,16 @@ export interface Retention {
 
 /** Answers at the level a delayed check needs before it can verify that level. */
 export const VERIFY_AT_LEVEL_MIN = 2;
-export const VERIFICATION_DEFINITION = "verification@2";
+/**
+ * The verification definition in force (approved by the product owner, 19 October 2026): verification@3 is
+ * verification@2 with the delay measured in FULL days: a level shown at time t is verified only by a session at least
+ * mastery_gap_days × 24 hours later. verification@2 allowed the same half-day tolerance as due dates (7 days less
+ * 12 hours). Everything else is unchanged. verification@2 stays available for replaying historical claims exactly.
+ */
+export type VerificationDefinition = "verification@2" | "verification@3";
+export const VERIFICATION_DEFINITION: VerificationDefinition = "verification@3";
+/** The verification delay a definition uses, in milliseconds, for a mastery gap in days. */
+export const verificationDelayMs = (gapDays: number, def: VerificationDefinition = VERIFICATION_DEFINITION) => gapDays * 86_400_000 - (def === "verification@2" ? DUE_TOLERANCE_MS : 0);
 
 const DUE_TOLERANCE_MS = 12 * 3_600_000;
 const addDays = (iso: string, days: number) => new Date(Date.parse(iso) + days * 86_400_000).toISOString();
@@ -76,6 +86,8 @@ const addDays = (iso: string, days: number) => new Date(Date.parse(iso) + days *
  */
 export interface RetentionOptions {
   fromLevel?: number | null;
+  /** Which verification definition to apply (default: the one in force, verification@3). */
+  definition?: VerificationDefinition;
 }
 
 export function retention(node: NodeState, policy: Policy, now: string, cfg: RetentionConfig = RETENTION, opts: RetentionOptions = {}): Retention {
@@ -84,7 +96,8 @@ export function retention(node: NodeState, policy: Policy, now: string, cfg: Ret
   let lastFailed = false;
   // each new highest level shown, with when it was first shown (independent, outside teaching sessions)
   const shown: { level: number; at: string }[] = [];
-  const delayMs = policy.mastery_gap_days * 86_400_000 - DUE_TOLERANCE_MS;
+  // the due-date tolerance (checks are due by the day) is unchanged; the VERIFICATION delay follows the definition
+  const delayMs = verificationDelayMs(policy.mastery_gap_days, opts.definition);
   for (const s of node.sessions ?? []) {
     if (Date.parse(s.at) > Date.parse(now)) break;
     // a session with teaching on this capability is neither a first demonstration nor a retention check

@@ -42,6 +42,8 @@ const KEY: Record<string, string> = {
   "mt-arr-g": String(3 * 6), "mt-arr-c": String(4 * 6), "mt-r1": String(8 * 7), "mt-r2": String(9 * 6), "mt-p1": "C",
   "ra-d1": String(6 * 4), "ra-d2": String(5 * 5), "ra-g1": String(9 * 3), "ra-c1": String(8 * 5), "ra-r1": String(7 * 4), "ra-p1": "B", "ra-r2": String(9 * 3),
   "ca-d1": "C", "ca-d2": "7", "ca-g1": "B", "ca-c1": "6", "ca-r1": "C", "ca-p1": "B", "ca-r2": "D",
+  "fm-p2": "A", "fm-t1": String(8 - 3), "fc-p2": "2", "fc-t1": "B", "fa-p2": "5/7", "fa-t1": "7/9", "mt-p2": String(7 * 6), "mt-t1": String(8 * 7),
+  "ra-p2": String(9 * 4), "ra-t1": String(6 * 5), "ca-p2": "0", "ca-t1": String(1 - 3), "di-p2": String((7 - 2) * 3), "di-t1": String((10 - 3) * 4), "fx-p2": "12", "fx-t1": String([...Array(22).keys()].map((k) => k + 2).filter((k) => 24 % k === 0).length),
   "di-d1": String(3 * 4), "di-d2": String(2 * 4), "di-g1": String(5 * 6), "di-c1": String(4 * 5), "di-r1": String(9 * 3), "di-p1": "C", "di-r2": String(5 * 4),
   "ai-original": String(7 * 8), "ai-c1": String(6 * 9),
   "fx-d1": "6", "fx-d2": "12", "fx-g1": "6", "fx-c1": "24", "fx-r1": "6", "fx-p1": "D", "fx-r2": "4",
@@ -89,7 +91,9 @@ test("modules are complete: diagnostics, strategies with their own guided and ch
     assert.ok(m.retention.length >= 2, `${m.competency}: a delayed check of two questions (two fresh answers are needed to verify)`);
     const used = [...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.probes, ...m.strategies.flatMap((s) => [s.guided, s.check])];
     assert.equal(new Set(used).size, used.length, `${m.competency}: no question has two roles`);
-    for (const id of used) assert.equal(question(id).competency, m.competency, `${id} belongs to ${m.competency}`);
+    for (const id of used.filter((x) => !m.probes.includes(x))) assert.equal(graph.evidenceTarget(question(id).competency), m.competency, `${id} belongs to ${m.competency}`);
+    // a probe asks about what the skill builds on: its own skill, or one a relation names (7 × 8 inside 7 × 8 = ?; 3 × 4 inside 3(x + 4))
+    for (const id of m.probes) assert.ok(question(id).competency === m.competency || graph.relationsOf(m.competency).some((r) => r.from === question(id).competency), `${id}: a probe about ${m.competency} or something it builds on`);
     const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => question(id).type));
     assert.ok(formats.size >= 2, `${m.competency}: two question formats (the shared engine needs two contexts to demonstrate)`);
     for (const s of m.strategies) for (const n of s.needs) assert.ok(m.probes.includes(n), `${s.id} needs a probe of this module`);
@@ -145,7 +149,7 @@ test("releases are versioned by content: a changed release has a different hash,
   assert.notEqual(hashOf({ ...changed, hash: "" }), r.hash);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: r.hash }, new Map()), r);
   assert.equal(releaseFor({ id: r.id, version: r.version, hash: "deadbeef" }, new Map()), null);
-  assert.equal(sampleReleases.length, 7, "the latest version of six sample books and one second-board book");
+  assert.equal(sampleReleases.length, 9, "the latest version of seven sample books (Grades 4, 5, 7, 8, 10, 11, 12) and two second-board books (Grades 4 and 10)");
   // earlier versions stay readable: a learner enrolled on 1.0.0 still finds their curriculum
   const old = allReleases.find((x) => x.id === r.id && x.version === "1.0.0")!;
   assert.equal(releaseFor({ id: old.id, version: "1.0.0", hash: old.hash }, new Map()), old);

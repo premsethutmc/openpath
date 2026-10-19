@@ -1,5 +1,6 @@
 /**
- * Curriculum interpretation by mathematical meaning (mapping@2).
+ * Curriculum interpretation by mathematical meaning (mapping@2; meaning@3 adds secondary-school concepts and the
+ * competency concept annotations of content/learning/competency-concepts.v1.json).
  *
  * An outcome and a competency are each read into CONCEPTS: the mathematical objects, operations and relations they
  * talk about (fraction, equivalence, comparison, addition, area, perimeter, remainder, …), recognised through
@@ -12,7 +13,10 @@
  * clear, UNCERTAIN (two competencies close, or a weak match: a reviewer must choose) or MISSING (no competency carries
  * the outcome's concepts: a provisional proposal with its source reference). Nothing is authoritative until reviewed.
  */
+import annotations from "../../../content/learning/competency-concepts.v1.json";
 import { graph, type Competency } from "./graph";
+
+export const MEANING_VERSION = "meaning@3";
 
 /** Concept → phrasings (regular expressions on lower-case text). Order does not matter. */
 const LEXICON: Record<string, RegExp[]> = {
@@ -52,7 +56,7 @@ const LEXICON: Record<string, RegExp[]> = {
   progression: [/progression/, /arithmetic sequence|\bsequence/, /nth term|common difference/],
   geometric: [/geometric (progression|sequence|series)|common ratio/],
   inverse: [/\binverse\b|inversely/],
-  applications: [/\bapplications?\b|\bapply\b/],
+  applications: [/\bapplications?\b/],
   coordinates: [/coordinate/, /quadrant/, /plot(ting)? points/, /\bx-axis|\by-axis|ordered pairs?/],
   distance: [/distance (formula|between)/, /section formula/],
   straightLine: [/straight[- ]line|slope|gradient|y = mx/],
@@ -77,6 +81,33 @@ const LEXICON: Record<string, RegExp[]> = {
   money: [/money|rupees|coins|change\b/],
   conversion: [/convert|conversion/],
   wholePart: [/of a whole|parts of|part of/],
+  // meaning@3: secondary-school concepts
+  powers: [/\bpowers? of\b|\bpowers\b|exponent|\bindices\b|index laws|squared|cubed|[²³⁴⁵]/],
+  expansion: [/\bexpand|expansion|multiply out|remove the brackets/],
+  distributive: [/distributive/, /a\(x ?\+ ?b\)|a\(b ?\+ ?c\)/],
+  binomialProduct: [/\bbinomials\b|products? of (two )?binomials/, /\(x ?\+ ?a\) ?\(x ?\+ ?b\)|two brackets/],
+  binomialTheorem: [/binomial (theorem|expansion|coefficients?)|pascal/],
+  polynomials: [/polynomial/],
+  continuity: [/continu(ity|ous)/],
+  differentiability: [/differentiab/],
+  differentiationRules: [/(power|product|quotient|chain) rule|rules of differentiation|differentiation rules/],
+  firstPrinciples: [/first principles/],
+  extrema: [/maxim|minim|extrem|rates? of change/],
+  antiderivative: [/anti-?derivative|indefinite integral|primitive/],
+  substitution: [/substitution/],
+  byParts: [/by parts/],
+  definite: [/definite integral|between (two )?limits|limits of integration/],
+  matrices: [/matri(x|ces)/],
+  determinants: [/determinant/],
+  probability: [/probab/, /\bchance\b|likelihood/],
+  conditional: [/conditional|given that/],
+  bayes: [/bayes/],
+  vectors: [/vector|dot product|cross product/],
+  complexNumbers: [/complex (numbers?|roots?)/, /\bimaginary\b/],
+  solids: [/solids?\b|cylinder|cone|sphere|cuboid|prism/],
+  construction: [/\bconstruct(ion|ions|ing|s)?\b(?! (a|an) (mathematical )?(argument|proof))/, /ruler and compass|compass(es)? and (a )?(ruler|straightedge)/],
+  bisector: [/bisect/],
+  trigonometry: [/trigonometr|\bsine\b|cosine|\btangent ratio|\bsin\b|\bcos\b|\btan\b/],
 };
 const CONCEPTS = Object.keys(LEXICON);
 export function concepts(text: string): Set<string> {
@@ -85,7 +116,12 @@ export function concepts(text: string): Set<string> {
 }
 
 const mapped = graph.competencies.filter((c) => !c.partOf);
-const signature = new Map<string, Set<string>>(mapped.map((c) => [c.id, concepts([c.name, c.description ?? ""].join(" "))]));
+const notes = (annotations as { annotations: Record<string, string[]> }).annotations;
+for (const [id, ks] of Object.entries(notes)) {
+  if (!graph.byId.has(id)) throw new Error(`competency-concepts: unknown competency ${id}`);
+  for (const k of ks) if (!(k in LEXICON)) throw new Error(`competency-concepts: unknown concept ${k} for ${id}`);
+}
+const signature = new Map<string, Set<string>>(mapped.map((c) => [c.id, new Set([...concepts([c.name, c.description ?? ""].join(" ")), ...(notes[c.id] ?? [])])]));
 /** Rarer concepts carry more meaning (inverse document frequency over the competency map). */
 const idf = new Map(CONCEPTS.map((k) => [k, Math.log((mapped.length + 1) / (1 + mapped.filter((c) => signature.get(c.id)!.has(k)).length))]));
 
@@ -95,7 +131,7 @@ export interface MeaningMatch {
   shared: string[];
 }
 export interface MeaningMapping {
-  method: "meaning@2";
+  method: "meaning@2" | "meaning@3";
   concepts: string[];
   candidates: MeaningMatch[];
   /** clear: one competency stands out; uncertain: a reviewer must choose; missing: no competency carries it. */
@@ -104,7 +140,7 @@ export interface MeaningMapping {
 }
 export const MEANING_POLICY = { accept: 0.5, clearAt: 0.62, margin: 0.12, gradePenalty: 0.06, contradiction: 0.5 } as const;
 /** Qualifiers: a competency that carries one the outcome does not mention is a different, narrower skill. */
-const QUALIFIERS = ["geometric", "inverse", "applications", "unlikeDenominators", "twoVariables"];
+const QUALIFIERS = ["geometric", "inverse", "applications", "unlikeDenominators", "twoVariables", "vectors", "complexNumbers", "solids", "matrices", "byParts", "substitution", "firstPrinciples", "extrema", "binomialTheorem"];
 /** Concepts that cannot both describe one outcome: a competency carrying the other one is penalised. */
 const CONTRADICTIONS: [string, string][] = [["likeDenominators", "unlikeDenominators"], ["area", "perimeter"], ["multiDigit", "facts"], ["rounding", "estimation"], ["oneVariable", "twoVariables"]];
 
@@ -124,17 +160,17 @@ function scoreOf(o: Set<string>, c: Competency, grade: number) {
 
 export function interpret(outcome: string, grade: number, limit = 3): MeaningMapping {
   const o = concepts(outcome);
-  if (!o.size) return { method: "meaning@2", concepts: [], candidates: [], verdict: "missing", why: "No mathematical concept was recognised in this outcome." };
+  if (!o.size) return { method: "meaning@3", concepts: [], candidates: [], verdict: "missing", why: "No mathematical concept was recognised in this outcome." };
   const candidates = mapped
     .map((c) => ({ id: c.id, ...scoreOf(o, c, grade) }))
     .filter((m) => m.score >= MEANING_POLICY.accept)
     .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id))
     .slice(0, limit);
-  if (!candidates.length) return { method: "meaning@2", concepts: [...o], candidates: [], verdict: "missing", why: `No competency covers ${[...o].join(", ")}.` };
+  if (!candidates.length) return { method: "meaning@3", concepts: [...o], candidates: [], verdict: "missing", why: `No competency covers ${[...o].join(", ")}.` };
   const [a, b] = candidates;
   const clear = a.score >= MEANING_POLICY.clearAt && (!b || a.score - b.score >= MEANING_POLICY.margin);
   return {
-    method: "meaning@2",
+    method: "meaning@3",
     concepts: [...o],
     candidates,
     verdict: clear ? "clear" : "uncertain",

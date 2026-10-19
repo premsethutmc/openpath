@@ -40,6 +40,10 @@ export interface Problem {
   id: string;
   params: number[];
   competency: string;
+  /** The micro-skill (or the competency itself). */
+  skill: string;
+  /** "typed" (the learner writes the answer) or "mc" (chooses among the answer and mal-rule answers). */
+  form: "typed" | "mc";
   prompt: string;
   type: "integer" | "fraction" | "set" | "choice";
   answer: string;
@@ -53,7 +57,11 @@ type Def = {
   arity: number;
   title: string;
   competency: string;
+  /** The micro-skill the family practises, when finer than its competency. */
+  skill?: string;
   type: Problem["type"];
+  /** The family also has a multiple-choice form ("gen:<family>:<params>:mc"): mal-rule answers as the options. */
+  mc?: boolean;
   /** Read the parameters from written text; null if the text is not this family. */
   parse: (t: string) => number[] | null;
   /** Reject parameters outside what the family supports (a reason), or accept (null). */
@@ -69,6 +77,40 @@ type Def = {
 // ---------------------------------------------------------------- shared helpers
 
 const MT = "MATH.number.multiplication-tables";
+const EXP = "MATH.number.exponents";
+const SUP: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "-": "⁻" };
+/** A number as written in a step: "−" for minus, and in brackets when negative (so (−1)² is not read as −1²). */
+const neg = (t: string | number) => String(t).replace(/^-/, "−");
+const par = (v: string | number) => (Number(v) < 0 ? `(${neg(v)})` : String(v));
+const sup = (n: number | string) => String(n).replace(/./g, (c) => SUP[c] ?? c);
+/** x to a power, as written: x, x², x³ … */
+const xp = (n: number) => (n === 1 ? "x" : `x${String(n).replace(/./g, (c) => SUP[c])}`);
+const coef = (k: number) => (k === 1 ? "" : String(k));
+const signed = (v: number) => `${v < 0 ? "−" : "+"} ${Math.abs(v)}`;
+const SUPREAD: Record<string, string> = { "²": "^2", "³": "^3", "⁴": "^4", "⁵": "^5", "⁶": "^6", "⁷": "^7", "⁸": "^8", "⁹": "^9" };
+/** Superscript powers → ^n, for reading written problems. */
+const unsup = (t: string) => t.replace(/[²³⁴⁵⁶⁷⁸⁹]/g, (c) => SUPREAD[c]);
+const powerOf = (a: number, n: number) => {
+  let v = 1;
+  for (let i = 0; i < n; i++) v *= a;
+  return v;
+};
+/** The definite integral of g over [a, b] by Simpson's rule (an independent numerical check). */
+const simpson = (g: (x: number) => number, a: number, b: number, n = 2000) => {
+  const h = (b - a) / n;
+  let s = g(a) + g(b);
+  for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * g(a + i * h);
+  return (s * h) / 3;
+};
+const near = (x: number, y: number, rel = 1e-7) => Math.abs(x - y) <= rel * Math.max(1, Math.abs(x), Math.abs(y));
+const powerSlip = (a: number, n: number, predict: Value | null, kind: Bug["kind"] = "prerequisite"): Bug => ({
+  id: "multiply-for-power",
+  kind,
+  competency: EXP,
+  says: `A power was worked out as a multiplication (${a}${String(n).replace(/./g, (c) => SUP[c])} as ${a} × ${n}); a power multiplies ${a} by itself ${n} times.`,
+  predict,
+  ...(a >= 2 && a <= 12 && n >= 2 && n <= 5 ? { probe: `gen:pow:${a},${n}` } : {}),
+});
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : Math.abs(a));
 export const show = (v: Value): string => (Array.isArray(v) ? [...v].sort((a, b) => a - b).map(fmt).join(",") : fmt(v));
 function fmt(x: number): string {
@@ -407,14 +449,264 @@ const F: Def[] = [
     variants: (p) => [[1, 2], [1, 6], [2, 3], [0, 4], [1, 12], [3, 4]].filter((q) => q[0] !== p[0] || q[1] !== p[1]),
     explain: (s) => s.id,
   },
+
+  {
+    id: "pow",
+    arity: 2,
+    title: "A power of a whole number",
+    competency: EXP,
+    skill: "MLY.pow.whole",
+    type: "integer",
+    mc: true,
+    // [a, n]: a to the power n
+    parse: (t) => {
+      const m = unsup(norm(t)).replace(/ /g, "").match(/^(?:whatis)?(\d{1,2})(?:\^|tothepowerof|tothepower)(\d)(?:=\??)?\??$/i);
+      return m ? [int(m[1]), int(m[2])] : null;
+    },
+    reject: ([a, n]) => (a < 2 || a > 12 || n < 2 || n > 5 || powerOf(a, n) > 100000 ? "Only powers aⁿ with 2 ≤ a ≤ 12, 2 ≤ n ≤ 5 (up to 100 000) are supported." : null),
+    prompt: ([a, n]) => `${a}${String(n).replace(/./g, (c) => SUP[c])} = ?`,
+    solve: ([a, n]) => ({ steps: [{ id: "power", op: "multiply", competency: EXP, inputs: [a, n], value: powerOf(a, n) }], answer: powerOf(a, n) }),
+    validate: ([a, n], v) => v === Number(BigInt(a) ** BigInt(n)),
+    bugs: ([a, n]) => [
+      powerSlip(a, n, a * n, "conceptual"),
+      { id: "one-factor-short", kind: "procedural", competency: EXP, says: `One factor too few was multiplied: ${a} must appear ${n} times.`, predict: powerOf(a, n - 1) },
+      { id: "add-for-power", kind: "conceptual", competency: EXP, says: "The two numbers were added; a power is repeated multiplication.", predict: a + n },
+    ],
+    variants: (p) => pairs(p, [[2, 9], [2, 4]], ([a, n]) => powerOf(a, n) <= 1300),
+    explain: (s) => `${[...Array(Number(s.inputs[1]))].map(() => s.inputs[0]).join(" × ")} = ${show(s.value)}`,
+  },
+  {
+    id: "dist",
+    arity: 2,
+    title: "Expanding a(x + b)",
+    competency: "MATH.algebra.identities-intro",
+    skill: "MLY.alg.distributive",
+    type: "integer",
+    mc: true,
+    // [a, b]: a(x + b) = ax + □
+    parse: (t) => {
+      const m = norm(t).toLowerCase().replace(/ /g, "").match(/^(?:expand:?)?(\d{1,2})\(x\+(\d{1,2})\)(?:=\d*x\+(?:□|\?|_+))?\??$/);
+      return m ? [int(m[1]), int(m[2])] : null;
+    },
+    reject: ([a, b]) => (a < 2 || a > 12 || b < 1 || b > 12 ? "Only a(x + b) with whole numbers 2 ≤ a ≤ 12 and 1 ≤ b ≤ 12 is supported." : null),
+    prompt: ([a, b]) => `Expand the bracket: ${a}(x + ${b}) = ${a}x + □. What number goes in the box?`,
+    solve: ([a, b]) => ({ steps: [{ id: "x-term", op: "multiply", competency: "MATH.algebra.identities-intro", inputs: [a, "x"], value: a }, mul(a, b, MT, "constant")], answer: a * b }),
+    validate: ([a, b], v) => {
+      // the two sides agree at x = 3 and x = 7, by repeated addition of the bracket
+      const left = (x: number) => [...Array(a)].reduce((s) => s + (x + b), 0);
+      return typeof v === "number" && left(3) === a * 3 + v && left(7) === a * 7 + v;
+    },
+    bugs: ([a, b]) => [
+      { id: "first-term-only", kind: "procedural", competency: "MATH.algebra.identities-intro", says: `Only the x was multiplied by ${a}; the number outside multiplies every term in the bracket.`, predict: b },
+      { ...addForMul(a, b), says: `${a} and ${b} were added; the bracket means ${a} × ${b}.` },
+      factSlip(a, b),
+    ],
+    variants: (p) => pairs(p, [[2, 9], [2, 9]], ([a, b]) => a !== b),
+    explain: (s) => (s.id === "x-term" ? `${s.inputs[0]} × x = ${s.inputs[0]}x` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
+  },
+  {
+    id: "expand",
+    arity: 2,
+    title: "Expanding (x + a)(x + b)",
+    competency: "MATH.algebra.identities",
+    skill: "MLY.alg.expand-binomials",
+    type: "integer",
+    mc: true,
+    // [a, b]: (x + a)(x + b) = x² + □x + ab
+    parse: (t) => {
+      const m = norm(t).toLowerCase().replace(/ /g, "").match(/^(?:expand:?)?\(x([+-]\d{1,2})\)\(x([+-]\d{1,2})\)/);
+      return m ? [int(m[1]), int(m[2])] : null;
+    },
+    reject: ([a, b]) => (a === 0 || b === 0 || Math.abs(a) > 12 || Math.abs(b) > 12 || a + b === 0 ? "Only (x + a)(x + b) with non-zero whole numbers up to 12 and a + b not 0 is supported." : null),
+    prompt: ([a, b]) => `Expand (x ${signed(a)})(x ${signed(b)}) = x² + □x ${signed(a * b)}. What number goes in the box (it may be negative)?`,
+    solve: ([a, b]) => ({ steps: [{ id: "outer", op: "multiply", competency: "MATH.algebra.identities", inputs: ["x", b], value: b }, { id: "inner", op: "multiply", competency: "MATH.algebra.identities", inputs: [a, "x"], value: a }, { id: "collect", op: "add", competency: "MATH.number.integer-add", inputs: [a, b], value: a + b }], answer: a + b }),
+    validate: ([a, b], v) => typeof v === "number" && [2, 5].every((x) => (x + a) * (x + b) === x * x + v * x + a * b),
+    bugs: ([a, b]) => [
+      { id: "product-for-sum", kind: "conceptual", competency: "MATH.algebra.identities", says: `The two numbers were multiplied for the x term; ${a} × ${b} is the number at the end, and the x term collects ${a}x and ${b}x.`, predict: a * b },
+      { id: "one-cross-term", kind: "procedural", competency: "MATH.algebra.identities", says: "Only one of the two middle products was kept; both x × b and a × x give an x term.", predict: [a, b] },
+      ...(Math.sign(a) !== Math.sign(b) ? [{ id: "sign-slip", kind: "prerequisite" as const, competency: "MATH.number.integer-add", says: `${a} + ${b} was worked out without the signs; adding numbers with different signs is a difference.`, predict: Math.abs(a) + Math.abs(b) === a + b ? -(a + b) : Math.sign(a + b) * (Math.abs(a) + Math.abs(b)) }] : []),
+    ],
+    variants: (p) => pairs(p, [[-5, 5], [-5, 5]], ([a, b]) => a !== 0 && b !== 0 && a < b && a + b !== 0),
+    explain: (s) => (s.id === "collect" ? `${neg(s.inputs[0])}x + ${par(s.inputs[1])}x = ${neg(show(s.value))}x` : s.id === "outer" ? `x × ${par(s.inputs[1])} = ${neg(s.inputs[1])}x` : `${par(s.inputs[0])} × x = ${neg(s.inputs[0])}x`),
+  },
+  {
+    id: "dpow",
+    arity: 3,
+    title: "The derivative of k xⁿ at a point",
+    competency: "MATH.calculus.derivative-rules",
+    skill: "MLY.calc.power-derivative",
+    type: "integer",
+    mc: true,
+    // [k, n, t]: f(x) = k xⁿ, f′(t)
+    parse: (t) => {
+      const m = unsup(norm(t)).replace(/ /g, "").match(/f\(x\)=(\d*)x(?:\^(\d))?[.,;]?(?:whatis|find)?f['′]\((-?\d{1,2})\)/i);
+      return m ? [m[1] ? int(m[1]) : 1, m[2] ? int(m[2]) : 1, int(m[3])] : null;
+    },
+    reject: ([k, n, t]) => (k < 1 || k > 9 || n < 2 || n > 5 || t < 1 || t > 4 || k * n * powerOf(t, n - 1) > 5000 ? "Only f(x) = k xⁿ with 1 ≤ k ≤ 9, 2 ≤ n ≤ 5 and f′(t) at a whole number 1 ≤ t ≤ 4 is supported." : null),
+    prompt: ([k, n, t]) => `f(x) = ${coef(k)}${xp(n)}. What is f′(${t})?`,
+    solve: ([k, n, t]) => ({ steps: [{ id: "rule", op: "multiply", competency: "MATH.calculus.derivative-rules", inputs: [k, n], value: k * n }, { id: "power", op: "evaluate", competency: EXP, inputs: [t, n - 1], value: powerOf(t, n - 1) }, mul(k * n, powerOf(t, n - 1), MT, "value")], answer: k * n * powerOf(t, n - 1) }),
+    validate: ([k, n, t], v) => {
+      // a central difference of f itself, not the rule
+      const f = (x: number) => k * x ** n;
+      const h = 1e-4;
+      return typeof v === "number" && Math.abs((f(t + h) - f(t - h)) / (2 * h) - v) < 1e-3 * Math.max(1, Math.abs(v));
+    },
+    bugs: ([k, n, t]) => [
+      { id: "power-not-lowered", kind: "procedural", competency: "MATH.calculus.derivative-rules", says: "The power was not lowered: the derivative of xⁿ is n xⁿ⁻¹.", predict: k * n * powerOf(t, n) },
+      { id: "power-not-multiplied", kind: "procedural", competency: "MATH.calculus.derivative-rules", says: "The power was lowered but not brought down as a factor: the derivative of xⁿ is n xⁿ⁻¹.", predict: k * powerOf(t, n - 1) },
+      { id: "value-not-slope", kind: "conceptual", competency: "MATH.calculus.derivative-rules", says: "The function's value was found, not its rate of change (the derivative).", predict: k * powerOf(t, n) },
+      ...(n - 1 >= 2 && t >= 2 ? [powerSlip(t, n - 1, k * n * t * (n - 1))] : []),
+    ],
+    variants: (p) => pairs(p, [[1, 4], [2, 4], [1, 3]], ([k, n, t]) => k * n * powerOf(t, n - 1) <= 400),
+    explain: (s) => (s.id === "rule" ? `Bring the power down: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "power" ? `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
+  },
+  {
+    id: "pint",
+    arity: 4,
+    title: "The definite integral of k xⁿ",
+    competency: "MATH.calculus.indefinite-integrals",
+    skill: "MLY.calc.power-antiderivative",
+    type: "fraction",
+    mc: true,
+    // [a, b, k, n]: ∫ from a to b of k xⁿ dx
+    parse: (t) => {
+      const s = unsup(norm(t).toLowerCase()).replace(/ /g, "");
+      const m = s.match(/^(?:∫|integral)(?:from)?(\d)to(\d)(?:of)?(\d{0,2})x(?:\^(\d))?dx(?:=\??)?\??$/);
+      return m ? [int(m[1]), int(m[2]), m[3] ? int(m[3]) : 1, m[4] ? int(m[4]) : 1] : null;
+    },
+    reject: ([a, b, k, n]) => (a < 0 || b <= a || b > 4 || k < 1 || k > 12 || n < 1 || n > 3 ? "Only ∫ from a to b of k xⁿ dx with 0 ≤ a < b ≤ 4, 1 ≤ k ≤ 12 and n = 1, 2 or 3 is supported." : null),
+    prompt: ([a, b, k, n]) => `∫ from ${a} to ${b} of ${coef(k)}${xp(n)} dx = ? (A fraction is fine.)`,
+    solve: ([a, b, k, n]) => {
+      const F = (x: number) => (k * powerOf(x, n + 1)) / (n + 1);
+      return { steps: [{ id: "antiderivative", op: "integrate", competency: "MATH.calculus.indefinite-integrals", inputs: [k, n + 1], value: k / (n + 1) }, { id: "upper", op: "evaluate", competency: EXP, inputs: [b, n + 1], value: powerOf(b, n + 1) }, { id: "lower", op: "evaluate", competency: EXP, inputs: [a, n + 1], value: powerOf(a, n + 1) }, { id: "difference", op: "subtract", competency: "MATH.calculus.definite-integrals", inputs: [b, a], value: F(b) - F(a) }], answer: F(b) - F(a) };
+    },
+    validate: ([a, b, k, n], v) => typeof v === "number" && near(simpson((x) => k * x ** n, a, b, 200), v),
+    bugs: ([a, b, k, n]) => [
+      { id: "no-divide", kind: "procedural", competency: "MATH.calculus.indefinite-integrals", says: "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1).", predict: k * (powerOf(b, n + 1) - powerOf(a, n + 1)) },
+      { id: "differentiated", kind: "conceptual", competency: "MATH.calculus.indefinite-integrals", says: "The function was differentiated instead of integrated: integrating raises the power.", predict: k * n * (powerOf(b, n - 1) - powerOf(a, n - 1)) },
+      { id: "power-not-raised", kind: "procedural", competency: "MATH.calculus.indefinite-integrals", says: "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1).", predict: (k * (powerOf(b, n) - powerOf(a, n))) / n },
+      ...(a > 0 ? [{ id: "ignore-lower-limit", kind: "conceptual" as const, competency: "MATH.calculus.definite-integrals", says: "Only the upper limit was used; the answer is F(upper) − F(lower).", predict: (k * powerOf(b, n + 1)) / (n + 1) }] : []),
+      ...(b >= 2 ? [powerSlip(b, n + 1, (k * ((n + 1) * b - (n + 1) * a)) / (n + 1))] : []),
+    ],
+    variants: (p) => pairs(p, [[0, 1], [2, 3], [1, 6], [1, 3]], () => true),
+    explain: (s) => (s.id === "antiderivative" ? `Raise the power and divide: F(x) = ${s.inputs[0]}x${sup(s.inputs[1])} ⁄ ${s.inputs[1]}` : s.id === "difference" ? `F(${s.inputs[0]}) − F(${s.inputs[1]}) = ${show(s.value)}` : `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}`),
+  },
+  {
+    id: "subst",
+    arity: 4,
+    title: "An integral by substitution",
+    competency: "MATH.calculus.integration-methods",
+    skill: "MLY.calc.substitution",
+    type: "fraction",
+    mc: true,
+    // [a, b, c, n]: ∫ from a to b of 2x (x² + c)ⁿ dx
+    parse: (t) => {
+      const s = unsup(norm(t).toLowerCase()).replace(/ /g, "").replace(/·|\*/g, "");
+      const m = s.match(/^(?:∫|integral)(?:from)?(\d)to(\d)(?:of)?2x\(x\^2\+(\d)\)(?:\^(\d))?dx(?:=\??)?\??$/);
+      return m ? [int(m[1]), int(m[2]), int(m[3]), m[4] ? int(m[4]) : 1] : null;
+    },
+    reject: ([a, b, c, n]) => (a < 0 || b <= a || b > 3 || c < 1 || c > 4 || n < 1 || n > 3 ? "Only ∫ from a to b of 2x(x² + c)ⁿ dx with 0 ≤ a < b ≤ 3, 1 ≤ c ≤ 4 and n = 1, 2 or 3 is supported." : null),
+    prompt: ([a, b, c, n]) => `∫ from ${a} to ${b} of 2x(x² + ${c})${n === 1 ? "" : String(n).replace(/./g, (d) => SUP[d])} dx = ? (A fraction is fine.)`,
+    solve: ([a, b, c, n]) => {
+      const [u1, u2] = [a * a + c, b * b + c];
+      const v = (powerOf(u2, n + 1) - powerOf(u1, n + 1)) / (n + 1);
+      return { steps: [{ id: "u-limits", op: "evaluate", competency: "MATH.algebra.variables", inputs: [a, b, c], value: [u1, u2] }, { id: "antiderivative", op: "integrate", competency: "MATH.calculus.indefinite-integrals", inputs: [n, n + 1], value: 1 / (n + 1) }, { id: "upper", op: "evaluate", competency: EXP, inputs: [u2, n + 1], value: powerOf(u2, n + 1) }, { id: "lower", op: "evaluate", competency: EXP, inputs: [u1, n + 1], value: powerOf(u1, n + 1) }, { id: "difference", op: "subtract", competency: "MATH.calculus.integration-methods", inputs: [u2, u1], value: v }], answer: v };
+    },
+    validate: ([a, b, c, n], v) => typeof v === "number" && near(simpson((x) => 2 * x * (x * x + c) ** n, a, b), v, 1e-9),
+    bugs: ([a, b, c, n]) => {
+      const [u1, u2] = [a * a + c, b * b + c];
+      return [
+        { id: "limits-not-changed", kind: "procedural", competency: "MATH.calculus.integration-methods", says: `The old limits were used for u: when x goes from ${a} to ${b}, u = x² + ${c} goes from ${u1} to ${u2}.`, predict: (powerOf(b, n + 1) - powerOf(a, n + 1)) / (n + 1) },
+        { id: "no-divide", kind: "procedural", competency: "MATH.calculus.indefinite-integrals", says: "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1).", predict: powerOf(u2, n + 1) - powerOf(u1, n + 1) },
+        { id: "extra-half", kind: "conceptual", competency: "MATH.calculus.integration-methods", says: "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du.", predict: (powerOf(u2, n + 1) - powerOf(u1, n + 1)) / (2 * (n + 1)) },
+        ...(u2 <= 12 && n + 1 <= 5 ? [powerSlip(u2, n + 1, u2 - u1)] : []),
+      ];
+    },
+    variants: (p) => pairs(p, [[0, 1], [1, 2], [1, 3], [1, 2]], ([a, b]) => b > a),
+    explain: (s) => (s.id === "u-limits" ? `Let u = x² + ${s.inputs[2]}: x = ${s.inputs[0]} gives u = ${(s.value as number[])[0]}, x = ${s.inputs[1]} gives u = ${(s.value as number[])[1]}` : s.id === "antiderivative" ? `2x dx = du, so the integral is ∫ u${sup(s.inputs[0])} du = u${sup(s.inputs[1])} ⁄ ${s.inputs[1]}` : s.id === "difference" ? `Between u = ${s.inputs[1]} and u = ${s.inputs[0]}: ${show(s.value)}` : `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}`),
+  },
+  {
+    id: "disc",
+    arity: 2,
+    title: "How many real solutions a quadratic has",
+    competency: "MATH.algebra.quadratic-discriminant",
+    type: "integer",
+    mc: true,
+    // [p, q]: x² + p x + q = 0
+    parse: (t) => {
+      const s = unsup(norm(t).toLowerCase()).replace(/ /g, "");
+      const m = s.match(/howmany(?:real)?(?:solutions|roots).*x\^2([+-]\d*)x([+-]\d+)=0/);
+      if (!m) return null;
+      const c = m[1] === "+" ? 1 : m[1] === "-" ? -1 : int(m[1]);
+      return [c, int(m[2])];
+    },
+    reject: ([p, q]) => (Math.abs(p) > 12 || Math.abs(q) > 40 || p === 0 || q === 0 ? "Only x² + px + q = 0 with whole numbers p and q not 0, |p| ≤ 12 and |q| ≤ 40 is supported." : null),
+    prompt: ([p, q]) => `How many different real solutions does x² ${signed(p)}x ${signed(q)} = 0 have? (0, 1 or 2)`.replace(/ ([+−]) 1x/, " $1 x"),
+    solve: ([p, q]) => {
+      const d = p * p - 4 * q;
+      const count = d > 0 ? 2 : d === 0 ? 1 : 0;
+      return { steps: [{ id: "square", op: "evaluate", competency: EXP, inputs: [p, 2], value: p * p }, mul(4, q, MT, "four-q"), { id: "discriminant", op: "subtract", competency: "MATH.number.integer-add", inputs: [p * p, 4 * q], value: d }, { id: "count", op: "compare", competency: "MATH.algebra.quadratic-discriminant", inputs: [d], value: count }], answer: count };
+    },
+    // independent: the lowest point of y = x² + px + q, by evaluating the function at its axis of symmetry
+    validate: ([p, q], v) => {
+      const low = (-p / 2) ** 2 + p * (-p / 2) + q;
+      return v === (low < 0 ? 2 : low === 0 ? 1 : 0);
+    },
+    bugs: ([p, q]) => {
+      const count = (d: number) => (d > 0 ? 2 : d === 0 ? 1 : 0);
+      const right = count(p * p - 4 * q);
+      return [
+        { id: "forgot-four", kind: "procedural", competency: "MATH.algebra.quadratic-discriminant", says: "The discriminant was taken as b² − c; it is b² − 4ac.", predict: count(p * p - q) },
+        { id: "minus-c-sign", kind: "prerequisite", competency: "MATH.number.integer-add", says: "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds.", predict: q < 0 ? count(p * p + 4 * q) : null },
+        { id: "negative-square", kind: "prerequisite", competency: EXP, says: "b² was taken as negative for a negative b; a square is never negative.", predict: p < 0 ? count(-(p * p) - 4 * q) : null },
+      ].filter((x) => x.predict !== null && x.predict !== right) as Bug[];
+    },
+    variants: (p) => pairs(p, [[-6, 6], [-9, 9]], ([pp, qq]) => pp !== 0 && qq !== 0),
+    explain: (s) => (s.id === "square" ? `b² = ${par(s.inputs[0])}² = ${show(s.value)}` : s.id === "four-q" ? `4ac = 4 × ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "discriminant" ? `b² − 4ac = ${s.inputs[0]} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : `${show(s.inputs[0] as number)} is ${(s.inputs[0] as number) > 0 ? "positive: two solutions" : s.inputs[0] === 0 ? "zero: one solution" : "negative: no real solutions"}`),
+  },
 ];
 export const FAMILIES = new Map(F.map((f) => [f.id, f]));
 
-function build(def: Def, p: number[]): Problem {
+/** The options of a multiple-choice form: the answer and up to three mal-rule answers (the first prediction of each
+ * written explanation, in order), topped up with nearby values; sorted by value, so the letters are reproducible. */
+function mcOptions(def: Def, p: number[], answer: number, bugs: Bug[]): number[] {
+  if (def.id === "disc") return [0, 1, 2];
+  const out: number[] = [];
+  const add = (v: number | undefined) => {
+    if (v !== undefined && Number.isFinite(v) && !near(v, answer) && !out.some((o) => near(o, v)) && (answer < 0 || v >= 0) && out.length < 3) out.push(v);
+  };
+  for (const b of bugs) add(b.predict === null ? undefined : Array.isArray(b.predict) ? b.predict[0] : b.predict);
+  for (const v of [answer + 1, answer - 1, answer + 2, 2 * answer, answer + 3, answer - 2]) add(v);
+  return [...out, answer].sort((x, y) => x - y);
+}
+const mcPrompt = (text: string) => `${text.replace(/ ?\((?:A fraction is fine\.|0, 1 or 2)\)$/, "").replace(/ What number goes in the box(?: \(it may be negative\))?\?$/, " Which number goes in the box?")} Choose one.`;
+
+function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const { steps, answer } = def.solve(p);
   if (!def.validate(p, answer)) throw new Error(`families@1: ${def.id}(${p}) failed its independent check`);
+  const raw = def.bugs(p);
+  // an explanation that predicts the right answer here cannot be seen on this problem: drop those predictions
+  const bugs = raw.flatMap((b) => {
+    if (b.predict === null || def.type === "set" || typeof answer !== "number") return [b];
+    if (!Array.isArray(b.predict)) return near(b.predict, answer) ? [] : [b];
+    const keep = b.predict.filter((v) => !near(v, answer));
+    return keep.length ? [{ ...b, predict: keep }] : [];
+  });
+  const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps };
+  if (form === "mc") {
+    if (!def.mc || typeof answer !== "number") throw new Error(`families@1: ${def.id} has no multiple-choice form`);
+    const opts = mcOptions(def, p, answer, raw);
+    const idx = (v: number) => opts.findIndex((o) => near(o, v));
+    const right = idx(answer);
+    const mcBugs = bugs.flatMap((b) => {
+      const vals = b.predict === null ? [] : Array.isArray(b.predict) ? b.predict : [b.predict];
+      const ix = [...new Set(vals.map(idx))].filter((i) => i >= 0 && i !== right);
+      return ix.length ? [{ ...b, predict: ix.length === 1 ? ix[0] : ix }] : [];
+    });
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map(show) };
+  }
   const choice = def.type === "choice";
-  return { family: def.id, id: `gen:${def.id}:${p.join(",")}`, params: p, competency: def.competency, prompt: def.prompt(p), type: def.type, answer: choice ? "AB"[answer as number] : show(answer), steps, bugs: def.bugs(p), ...(choice ? { options: ["The line", "The parabola y = x²"] } : {}) };
+  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "AB"[answer as number] : show(answer), bugs, ...(choice ? { options: ["The line", "The parabola y = x²"] } : {}) };
 }
 
 export type Parsed = { supported: true; problem: Problem } | { supported: false; reason: string; family?: string };
@@ -434,13 +726,13 @@ export function parseProblem(text: string): Parsed {
 
 /** A stored generated question id "gen:<family>:<params>" → the problem (null if unknown or unsupported). */
 export function problemOf(id: string): Problem | null {
-  const m = id.match(/^gen:([a-z]+):(-?\d+(?:,-?\d+)*)$/);
+  const m = id.match(/^gen:([a-z]+):(-?\d+(?:,-?\d+)*)(?::(mc))?$/);
   const def = m && FAMILIES.get(m[1]);
   if (!def) return null;
   const p = m![2].split(",").map(Number);
-  if (p.length !== def.arity || def.reject(p)) return null;
+  if (p.length !== def.arity || def.reject(p) || (m![3] && !def.mc)) return null;
   try {
-    return build(def, p);
+    return build(def, p, m![3] ? "mc" : "typed");
   } catch {
     return null;
   }
@@ -469,6 +761,7 @@ export function decompose(pr: Problem, grade: number) {
 function stepQuestion(pr: Problem, s: Step): Problem | null {
   const at = (fam: string, p: number[]) => (FAMILIES.get(fam)!.reject(p) ? null : build(FAMILIES.get(fam)!, p));
   if (s.op === "multiply" && s.inputs.every((x) => typeof x === "number")) return at("mul", s.inputs as number[]);
+  if (s.op === "evaluate" && s.competency === EXP && s.inputs.every((x) => typeof x === "number")) return at("pow", s.inputs as number[]);
   if (pr.family === "alp") {
     const [m, c] = pr.params;
     if (s.id === "line-value") return at("linev", [m, c, s.inputs[2] as number]);

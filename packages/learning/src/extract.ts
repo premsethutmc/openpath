@@ -3,10 +3,14 @@
  * their locations. Extraction says WHAT the document contains; interpretation (meaning.ts) says what it MEANS, and
  * review (curriculum.ts) decides what becomes authoritative. Each result records how it was extracted.
  *
- *   structured-text  the OpenPath textbook format (front matter, "# Chapter n: …", "## Learning outcomes", "- …")
+ *   structured-text  the OpenPath textbook format (front matter, "# Chapter n: …", "## Learning outcomes", "- …"),
+ *                    optionally grouped into units ("# Unit n: …") and divided into sections of any depth
+ *                    ("## Section 7.2: …", "### Section 7.2.1: …")
  *   plain-text       a textbook's contents as ordinary text: chapter headings ("Chapter Three — Parts of a Whole
  *                    (pages 37 to 58)", "Unit 2: …"), outcome lists after "learners can", "students will be able
- *                    to", "learning outcomes", "you will learn", page references "(page 38)", "(p. 38)", "Page 12"
+ *                    to", "learning outcomes", "you will learn", page references "(page 38)", "(p. 38)", "Page 12";
+ *                    units above chapters ("Part 2: …", "Unit 3: …" when the book also has chapters) and numbered
+ *                    sections ("7.2 Methods of integration", "Section 7.2: …")
  *   pdf              the PDF's own text layer (uncompressed or Flate streams; literal and hex strings), page by page,
  *                    then the plain-text reader. A PDF with no text layer (a scan) is DECLINED: it needs OCR, which is
  *                    not available here (an external dependency), and nothing is guessed from it.
@@ -18,13 +22,29 @@ export interface ExtractedOutcome {
   pages?: string;
   location: { page?: number; line: number };
 }
-export interface ExtractedChapter {
-  number: number;
+export interface ExtractedSection {
+  /** As printed: "7.2", "7.2.1". */
+  number: string;
   title: string;
   pages?: string;
   outcomes: ExtractedOutcome[];
   examples: { title: string; pages?: string }[];
   exercises: { ref: string; pages?: string }[];
+  /** Sections inside this one (any depth). */
+  sections: ExtractedSection[];
+}
+export interface ExtractedChapter {
+  number: number;
+  title: string;
+  pages?: string;
+  /** The unit (part, strand, theme) the chapter belongs to, when the book groups chapters. */
+  unit?: { number: number; title: string };
+  /** Outcomes stated for the chapter as a whole. */
+  outcomes: ExtractedOutcome[];
+  examples: { title: string; pages?: string }[];
+  exercises: { ref: string; pages?: string }[];
+  /** Sections, when the book has them (any depth); their outcomes are theirs, not the chapter's. */
+  sections?: ExtractedSection[];
 }
 export interface ExtractedDocument {
   meta: Record<string, string>;
@@ -66,16 +86,39 @@ export function extractStructured(text: string): ExtractedDocument {
   }
   const chapters: ExtractedChapter[] = [];
   let section: "outcomes" | "examples" | "exercises" | null = null;
+  let unit: ExtractedChapter["unit"];
+  // the open sections, outermost first; outcomes go to the innermost
+  let stack: ExtractedSection[] = [];
+  const here = () => stack.at(-1) ?? chapters.at(-1)!;
   for (; i < lines.length; i++) {
     const line = lines[i].trim();
     if (!line) continue;
-    const ch = line.match(/^#\s+Chapter\s+(\d+)\s*[:.]\s*(.+)$/i);
-    if (ch) {
-      chapters.push({ number: Number(ch[1]), title: withoutPages(ch[2]), pages: pagesIn(ch[2]), outcomes: [], examples: [], exercises: [] });
+    const u = line.match(UNIT_HEADING);
+    if (u && Number.isFinite(numberOf(u[1]))) {
+      unit = { number: numberOf(u[1]), title: withoutPages(u[2]) };
       section = null;
       continue;
     }
-    const sec = line.match(/^##\s+(.+)$/);
+    const ch = line.match(/^#\s+Chapter\s+(\d+)\s*[:.]\s*(.+)$/i);
+    if (ch) {
+      chapters.push({ number: Number(ch[1]), title: withoutPages(ch[2]), pages: pagesIn(ch[2]), ...(unit ? { unit } : {}), outcomes: [], examples: [], exercises: [] });
+      section = null;
+      stack = [];
+      continue;
+    }
+    const sh = line.match(/^(#{2,6})\s+(?:section|topic|subsection|lesson)\s+(\d+(?:\.\d+)*)\s*[:.—–-]\s*(.+)$/i);
+    if (sh && chapters.length) {
+      const depth = sh[1].length - 1; // "##" is a section of the chapter, "###" a section inside it …
+      stack = stack.slice(0, depth - 1);
+      const s: ExtractedSection = { number: sh[2], title: withoutPages(sh[3]), pages: pagesIn(sh[3]), outcomes: [], examples: [], exercises: [], sections: [] };
+      const parent = stack.at(-1);
+      if (parent) parent.sections.push(s);
+      else (chapters.at(-1)!.sections ??= []).push(s);
+      stack.push(s);
+      section = null;
+      continue;
+    }
+    const sec = line.match(/^#{2,6}\s+(.+)$/);
     if (sec) {
       const t = sec[1].toLowerCase();
       section = t.includes("outcome") ? "outcomes" : t.includes("example") ? "examples" : t.includes("exercise") ? "exercises" : null;
@@ -83,7 +126,7 @@ export function extractStructured(text: string): ExtractedDocument {
     }
     const item = line.match(/^[-*]\s+(.+)$/);
     if (item && chapters.length && section) {
-      const c = chapters.at(-1)!;
+      const c = here();
       const body = withoutPages(item[1]);
       const pages = pagesIn(item[1]);
       if (section === "outcomes") c.outcomes.push({ text: body, pages, location: { line: i + 1, ...(pages ? { page: Number(pages.split("–")[0]) } : {}) } });
@@ -95,6 +138,11 @@ export function extractStructured(text: string): ExtractedDocument {
 }
 
 const CHAPTER = /^(?:chapter|unit|lesson)\s+([0-9]+|[a-z]+)\s*(?:[:.—–-]+)\s*(.+)$/i;
+const ONLY_CHAPTER = /^chapter\s+([0-9]+|[a-z]+)\s*(?:[:.—–-]+)\s*(.+)$/i;
+/** A grouping above chapters: "# Unit 3: Calculus" (structured) or "Part Two — Calculus" (plain). */
+const UNIT_HEADING = /^#\s+(?:unit|part|strand|theme|domain)\s+([0-9]+|[a-z]+)\s*[:.—–-]+\s*(.+)$/i;
+const UNIT_PLAIN = /^(?:unit|part|strand|theme|domain)\s+([0-9]+|[a-z]+)\s*(?:[:.—–-]+)\s*(.+)$/i;
+const SECTION_PLAIN = /^(?:(?:section|topic)\s+)?(\d+\.\d+(?:\.\d+)*)\s*[:.—–-]?\s+([A-Z].{2,80}?)\s*$/;
 const OUTCOMES = /(learners|students|pupils|you)\s+(can|will|should)\b|able to|learning (outcomes|objectives)|you will learn|by the end of/i;
 const BULLET = /^(?:[•●▪◦*·-]|\d+[.)]|[a-z][.)])\s+(.+)$/;
 /** Ordinary text (also the PDF reader's output, with "\f" between pages). */
@@ -105,6 +153,11 @@ export function extractPlain(text: string, extractor: ExtractedDocument["provena
   let inOutcomes = false;
   let page = 1;
   const lines = text.replace(/\r/g, "").split("\n");
+  // a book that has chapters uses "unit" and "part" for groups of chapters; otherwise a unit is a chapter
+  const hasChapters = lines.some((l) => ONLY_CHAPTER.test(l.replace(/\f/g, "").trim()));
+  let unit: ExtractedChapter["unit"];
+  let stack: ExtractedSection[] = [];
+  const here = () => stack.at(-1) ?? chapters.at(-1)!;
   lines.forEach((raw, k) => {
     page += (raw.match(/\f/g) ?? []).length;
     const line = raw.replace(/\f/g, "").trim();
@@ -116,15 +169,36 @@ export function extractPlain(text: string, extractor: ExtractedDocument["provena
       if (g && !meta.grade) meta.grade = g[1];
       const b = line.match(/^board\s*:\s*(.+)$/i);
       if (b) meta.board = b[1].trim();
+      const sj = line.match(/^subject\s*:\s*(.+)$/i);
+      if (sj) meta.subject = sj[1].trim();
       const y = line.match(/academic year\s*(\d{4})\s*[–-]\s*(\d{2,4})/i);
       if (y) meta.academicYear = `${y[1]}-${y[2].slice(-2)}`;
       if (!meta.title && k === lines.findIndex((l) => l.trim())) meta.title = line.replace(/\s*[—–-]\s*/g, " — ");
       if (/synthetic|not a real/i.test(line)) meta.edition = (meta.edition ? meta.edition + "; " : "") + line;
       if (/\bcc0\b|licen[cs]e/i.test(line)) meta.licence = line;
     }
-    const ch = line.match(CHAPTER);
+    const un = hasChapters ? line.match(UNIT_PLAIN) : null;
+    if (un && Number.isFinite(numberOf(un[1]))) {
+      unit = { number: numberOf(un[1]), title: withoutPages(un[2]) };
+      inOutcomes = false;
+      return;
+    }
+    const ch = line.match(hasChapters ? ONLY_CHAPTER : CHAPTER);
     if (ch && Number.isFinite(numberOf(ch[1]))) {
-      chapters.push({ number: numberOf(ch[1]), title: withoutPages(ch[2]), pages: pagesIn(ch[2]), outcomes: [], examples: [], exercises: [] });
+      chapters.push({ number: numberOf(ch[1]), title: withoutPages(ch[2]), pages: pagesIn(ch[2]), ...(unit ? { unit } : {}), outcomes: [], examples: [], exercises: [] });
+      inOutcomes = false;
+      stack = [];
+      return;
+    }
+    const sc = chapters.length && !BULLET.test(line) ? line.match(SECTION_PLAIN) : null;
+    if (sc) {
+      const depth = sc[1].split(".").length - 1;
+      stack = stack.slice(0, depth - 1);
+      const s: ExtractedSection = { number: sc[1], title: withoutPages(sc[2]), pages: pagesIn(sc[2]), outcomes: [], examples: [], exercises: [], sections: [] };
+      const parent = stack.at(-1);
+      if (parent) parent.sections.push(s);
+      else (chapters.at(-1)!.sections ??= []).push(s);
+      stack.push(s);
       inOutcomes = false;
       return;
     }
@@ -132,13 +206,18 @@ export function extractPlain(text: string, extractor: ExtractedDocument["provena
     const b = line.match(BULLET);
     if (b && chapters.length && inOutcomes) {
       const pages = pagesIn(b[1]);
-      chapters.at(-1)!.outcomes.push({ text: withoutPages(b[1]), pages, location: { line: k + 1, page: pages ? Number(pages.split("–")[0]) : page } });
+      here().outcomes.push({ text: withoutPages(b[1]), pages, location: { line: k + 1, page: pages ? Number(pages.split("–")[0]) : page } });
       return;
     }
     if (chapters.length && inOutcomes && !b) inOutcomes = false;
   });
-  for (const c of chapters) if (!c.outcomes.length) warnings.push(`Chapter ${c.number} (${c.title}): no outcome list found.`);
+  for (const c of chapters) if (!allOutcomes(c).length) warnings.push(`Chapter ${c.number} (${c.title}): no outcome list found.`);
   return finish({ meta, chapters, provenance: { extractor, cost: 0, warnings } });
+}
+
+/** Every outcome of a chapter: its own, then each section's, in book order. */
+export function allOutcomes(c: { outcomes: ExtractedOutcome[]; sections?: ExtractedSection[] }): ExtractedOutcome[] {
+  return [...c.outcomes, ...(c.sections ?? []).flatMap((s) => allOutcomes(s))];
 }
 
 function finish(d: ExtractedDocument): ExtractedDocument {

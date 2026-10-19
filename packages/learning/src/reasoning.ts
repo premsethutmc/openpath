@@ -54,7 +54,7 @@ export interface Reasoning {
 const same = (a: Value, b: Value) => show(a) === show(b);
 const asValue = (pr: Problem, raw: string): Value | null => {
   const t = raw.trim().replace(/−/g, "-");
-  if (pr.type === "choice") return /^[AB]$/i.test(t) ? "AB".indexOf(t.toUpperCase()) : null;
+  if (pr.type === "choice") return /^[A-D]$/i.test(t) ? "ABCD".indexOf(t.toUpperCase()) : null;
   const num = (x: string) => {
     const m = x.trim().match(/^([+-]?\d+(?:\.\d+)?)(?:\/([+-]?\d+))?$/);
     return m ? Number(m[1]) / (m[2] ? Number(m[2]) : 1) : NaN;
@@ -67,8 +67,9 @@ const asValue = (pr: Problem, raw: string): Value | null => {
   return Number.isFinite(v) ? v : null;
 };
 const correctValue = (pr: Problem): Value => asValue(pr, pr.answer)!;
-/** The answers an explanation predicts: a fact slip predicts any of several neighbouring facts; others one answer. */
-const predictions = (b: Bug): Value[] => (b.predict === null ? [] : Array.isArray(b.predict) && b.id.startsWith("fact-slip:") ? b.predict.map((x) => x) : [b.predict]);
+/** The answers an explanation predicts: a fact slip predicts any of several neighbouring facts, and on a problem whose
+ * answer is one value a list is a set of alternatives; a list on a set problem is one predicted set. */
+const predictions = (b: Bug, pr: Problem): Value[] => (b.predict === null ? [] : Array.isArray(b.predict) && (b.id.startsWith("fact-slip:") || pr.type !== "set") ? b.predict.map((x) => x) : [b.predict]);
 
 /** P(response class | explanation) for one problem. */
 function likelihood(pr: Problem, exp: Explanation, value: Value | null): number {
@@ -76,11 +77,11 @@ function likelihood(pr: Problem, exp: Explanation, value: Value | null): number 
   const right = value !== null && same(value, correctValue(pr));
   if (exp.id === "secure") return right ? 1 - P.slip : P.slip / 6;
   if (exp.id === "unexplained") {
-    const predicted = value !== null && pr.bugs.some((b) => predictions(b).some((v) => same(v, value)));
+    const predicted = value !== null && pr.bugs.some((b) => predictions(b, pr).some((v) => same(v, value)));
     return right ? 0.3 : predicted ? 0.1 : 0.6;
   }
   const bug = pr.bugs.find((b) => b.id === exp.id);
-  const preds = bug ? predictions(bug).filter((v) => !same(v, correctValue(pr))) : [];
+  const preds = bug ? predictions(bug, pr).filter((v) => !same(v, correctValue(pr))) : [];
   if (!preds.length) return right ? 1 - P.slip : P.slip / 6; // this explanation predicts no mistake on this problem
   if (right) return P.notApplied;
   if (value !== null && preds.some((v) => same(v, value))) return P.consistency / preds.length;
@@ -107,7 +108,7 @@ const entropy = (s: Record<string, number>) => -Object.values(s).reduce((a, p) =
 
 /** Expected entropy after asking `pr` (over the distinct answers the explanations predict, plus right and other). */
 function expectedEntropy(pr: Problem, exps: Explanation[], s: Record<string, number>): number {
-  const classes: (Value | null)[] = [correctValue(pr), ...pr.bugs.flatMap(predictions), null];
+  const classes: (Value | null)[] = [correctValue(pr), ...pr.bugs.flatMap((b) => predictions(b, pr)), null];
   const distinct = classes.filter((v, i) => v === null || classes.findIndex((w) => w !== null && same(w, v)) === i);
   let h = 0;
   for (const v of distinct) {
@@ -135,7 +136,7 @@ export function reason(original: string, observations: Observation[]): Reasoning
   for (const { o, pr } of asked) {
     const v = asValue(pr, o.response);
     s = normalise(Object.fromEntries(exps.map((e) => [e.id, s[e.id] * likelihood(pr, e, v === null ? NaN : v)])));
-    observed.push({ questionId: o.questionId, response: o.response, right: v !== null && same(v, correctValue(pr)), matches: pr.bugs.filter((b) => v !== null && predictions(b).some((p) => same(p, v))).map((b) => b.id) });
+    observed.push({ questionId: o.questionId, response: o.response, right: v !== null && same(v, correctValue(pr)), matches: pr.bugs.filter((b) => v !== null && predictions(b, pr).some((p) => same(p, v))).map((b) => b.id) });
   }
   const ranked = [...exps].sort((a, b) => s[b.id] - s[a.id]);
   const top = ranked[0];
