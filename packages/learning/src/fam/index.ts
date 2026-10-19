@@ -32,3 +32,10 @@ export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, 
  * specification check refuses a probability family that does not declare its range. */
 const PROBABILITY_ANSWERS = ["akchance", "akexp", "akdice", "anbag", "ancardn", "andice", "antree", "ancomp", "anunion", "asaddp", "asbayes", "astotp", "asbinom", "atpdfp", "atindu", "attotal"];
 for (const d of DOMAIN_FAMILIES) if (PROBABILITY_ANSWERS.includes(d.id)) d.range ??= [0, 1];
+/** A cosine or sine lies in [−1, 1] (an option outside it is ruled out without the mathematics); a length, distance
+ * or area is never negative. atdbl answers sin 2A, cos 2A or tan 2A (its last parameter): only the first two are bounded. */
+const RANGES: Record<string, Def["range"]> = {
+  atang: [-1, 1], atcosr: [-1, 1], asangl: [-1, 1], atdbl: (p) => (p[3] === 2 ? null : [-1, 1]),
+  asperpd: [0, Infinity], asskew: [0, Infinity], asplaned: [0, Infinity], atarea: [0, Infinity], arconicarea: [0, Infinity], altria: [0, Infinity],
+};
+for (const d of DOMAIN_FAMILIES) if (RANGES[d.id]) d.range ??= RANGES[d.id];

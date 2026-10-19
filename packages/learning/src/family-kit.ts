@@ -106,7 +106,7 @@ export type Def = {
   /** The range a meaningful answer lies in, e.g. [0, 1] for a probability: a multiple-choice option outside it is not
    * offered (a learner can rule it out without the mathematics), though the explanation still diagnoses a typed answer
    * outside it. Every answer must lie inside (checked). */
-  range?: [number, number];
+  range?: [number, number] | ((p: number[]) => [number, number] | null);
   /** At most this many problems in the release pool (a fixed, hash-chosen subset of the candidates). */
   cap?: number;
   /** Where the family's domain is a deliberate limit, why (shown to reviewers). */

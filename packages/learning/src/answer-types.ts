@@ -384,6 +384,15 @@ const exactNumber = (raw: string) => {
 // ---------------------------------------------------------------- numerical evaluation (expression, antiderivative)
 
 const SAMPLES = [0.3711, 0.6457, 0.9283, 1.2049, 1.5337, 1.8862, 2.3171];
+/** The value of a constant answer as shown ("−2√6", "31/16", "3π/4"), or null when it has letters or is unreadable. */
+export function numericValue(s: string): number | null {
+  try {
+    const v = evaluate(parse(s), {});
+    return Number.isFinite(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
 export function evaluate(n: Node, env: Record<string, number>): number {
   switch (n.k) {
     case "num":

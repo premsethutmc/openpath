@@ -23,6 +23,8 @@ export interface WrittenTask {
   answer?: "text" | "drawing";
   /** The sheet a drawing starts from: plain, squared, or axes with their ranges (graph sketches). */
   canvas?: { grid?: boolean; axes?: { x: [number, number]; y: [number, number]; step?: number } };
+  /** The curriculum outcomes (syllabus ids) this task assesses. */
+  serves?: string[];
   rubric: { id: string; criterion: string; points: number }[];
   guidance: string;
   source: string;

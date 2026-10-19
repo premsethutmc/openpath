@@ -14,7 +14,7 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
-import { sameAnswer, NEW_TYPES } from "./answer-types";
+import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
 
 import { EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
@@ -1179,16 +1179,23 @@ export const FAMILIES: Map<string, Def> = (GF.__openpathFamilies ??= new Map(F.m
  * written explanation, in order), topped up with nearby values; sorted by value, so the letters are reproducible.
  * For an answer written in its type's form (answers@2), the options are the answer, the explanations' predictions and
  * the family's distractors, distinct under the type's own equality, sorted as text. */
+/** range@1: the meaningful range of this problem's answer (a probability, a cosine, a length), or null. */
+export const rangeOf = (def: Def, p: number[]): [number, number] | null => (typeof def.range === "function" ? def.range(p) : def.range ?? null);
+const within = (rg: [number, number] | null, v: number | null) => !rg || v === null || (v >= rg[0] - 1e-12 && v <= rg[1] + 1e-12);
 function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
   if (def.id === "disc") return [0, 1, 2];
+  const rg = rangeOf(def, p);
   if (typeof answer === "string") {
     const out: string[] = [];
     const add = (v: Value | undefined) => {
       if (typeof v !== "string" || sameAnswer(def.type, v, answer) || out.some((o) => sameAnswer(def.type, o, v) || o === v) || out.length >= 3) return;
+      if (rg && !within(rg, numericValue(v))) return;
       out.push(v);
     };
     for (const b of bugs) add(b.predict === null ? undefined : Array.isArray(b.predict) ? undefined : b.predict);
     for (const v of def.distractors?.(p) ?? []) add(v);
+    // range@1: the answer with the opposite sign, where the range allows it (a cosine's sign slip)
+    if (rg && def.type === "exact") add(answer.startsWith("-") || answer.startsWith("−") ? answer.slice(1) : /^[\w√(]/.test(answer) && !/[+\-−]/.test(answer) ? `-${answer}` : undefined);
     if (out.length < 2) throw new Error(`families@2: ${def.id}(${p}) has too few wrong options for a multiple-choice form`);
     // a fixed order that differs from problem to problem (so the right letter is not always in the same place)
     const salt = `gen:${def.id}:${p.join(",")}`;
@@ -1196,7 +1203,7 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
   }
   const out: number[] = [];
   // range@1: an option outside the quantity's meaningful range (a probability above 1) is not offered
-  const inRange = (v: number) => !def.range || (v >= def.range[0] - 1e-12 && v <= def.range[1] + 1e-12);
+  const inRange = (v: number) => within(rg, v);
   const add = (v: number | undefined) => {
     if (v !== undefined && Number.isFinite(v) && inRange(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && ((answer as number) < 0 || v >= 0) && out.length < 3) out.push(v);
   };
@@ -1210,9 +1217,10 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
   for (const b of bugs) addPredicted(b.predict === null ? undefined : Array.isArray(b.predict) ? (b.predict[0] as number) : (b.predict as number));
   for (const v of (def.distractors?.(p) ?? []) as number[]) add(v);
   // inside a range the whole-number neighbours are mostly outside it: the complement and nearby values in the range
-  if (def.range) {
+  // the complement only for a bounded range (1 − p for a probability), never for a length (range to infinity)
+  if (rg) {
     const a = answer as number;
-    for (const v of [def.range[1] + def.range[0] - a, a / 2, 2 * a, a * a, (a + def.range[1]) / 2]) add(v);
+    for (const v of [...(Number.isFinite(rg[1]) ? [rg[1] + rg[0] - a, (a + rg[1]) / 2] : []), a / 2, 2 * a, a * a]) add(v);
   }
   for (const v of [(answer as number) + 1, (answer as number) - 1, (answer as number) + 2, 2 * (answer as number), (answer as number) + 3, (answer as number) - 2]) add(v);
   return [...out, answer].sort((x, y) => (x as number) - (y as number));
@@ -1235,7 +1243,15 @@ function predictsAnswer(def: Def, v: Value, answer: Value): boolean {
 }
 const mcPrompt = (text: string) => `${text.replace(/ ?\((?:A fraction is fine\.|0, 1 or 2)\)$/, "").replace(/ What number goes in the box(?: \(it may be negative\))?\?$/, " Which number goes in the box?")} Choose one.`;
 
+/** wording@1: one convention for the minus sign in what a learner reads (−3, not -3): a hyphen before a number, a
+ * letter, a root or a bracket, at the start or after a space, bracket, = or comma, is shown as the minus sign. Only
+ * the wording changes (prompts, explanations and steps); answers and options are compared as written. */
+export const prose = (t: string) => t.replace(/(^|[\s(=,[|:;])-(?=[\d.a-zA-Zπ√(])/g, "$1−");
 function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
+  const q = buildRaw(def, p, form);
+  return { ...q, prompt: prose(q.prompt), bugs: q.bugs.map((b) => ({ ...b, says: prose(b.says) })) };
+}
+function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const { steps, answer } = def.solve(p);
   if (!def.validate(p, answer)) throw new Error(`families@1: ${def.id}(${p}) failed its independent check`);
   const raw = def.bugs(p);
@@ -1308,7 +1324,7 @@ export function problemOf(id: string): Problem | null {
   }
 }
 export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)]));
-export const explainStep = (pr: Problem, s: Step) => FAMILIES.get(pr.family)!.explain(s);
+export const explainStep = (pr: Problem, s: Step) => prose(FAMILIES.get(pr.family)!.explain(s));
 
 // ---------------------------------------------------------------- decomposition (decomposition@2)
 

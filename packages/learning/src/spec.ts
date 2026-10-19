@@ -21,9 +21,9 @@
  *   boundary        every domain edge and one step outside it, holding the other parameters at a valid choice
  */
 import { canonical, isCorrect, question } from "./content";
-import { sameAnswer, NEW_TYPES } from "./answer-types";
+import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { hashOf } from "./curriculum";
-import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, show, type Problem } from "./families";
+import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, rangeOf, show, type Problem } from "./families";
 
 export const SPEC_POLICY = "spec@1";
 /** Versions of each family specification; bump when the generator is changed on purpose (the fingerprint changes
@@ -163,14 +163,15 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
       for (const v of vals) if (p.type !== "choice" && def.validate(p.params, v as never)) det.push(`${p.id}: the independent check accepts ${show(v as never)}, which explanation ${b.id} predicts as wrong`);
     }
     // range@1: the answer lies in the declared range, and so does every option
-    const inR = (s: string) => { const v = numeric(s); return v === null || !def.range || (v >= def.range[0] - 1e-12 && v <= def.range[1] + 1e-12); };
-    if (def.range && !inR(p.answer)) det.push(`${p.id}: the answer ${p.answer} is outside the family's range [${def.range}]`);
+    const rg = rangeOf(def, p.params);
+    const inR = (s: string) => { const v = numeric(s) ?? numericValue(s); return v === null || !rg || (v >= rg[0] - 1e-12 && v <= rg[1] + 1e-12); };
+    if (rg && !inR(p.answer)) det.push(`${p.id}: the answer ${p.answer} is outside the family's range [${rg}]`);
     if (def.mc && p.type !== "set" && p.type !== "choice") {
       const m = problemOf(`${p.id}:mc`);
       if (!m) det.push(`${p.id}:mc does not build`);
       else {
         checkItem(m, det);
-        for (const o of m.options ?? []) if (!inR(o)) det.push(`${p.id}:mc: option ${o} is outside the family's range [${def.range}]`);
+        for (const o of m.options ?? []) if (!inR(o)) det.push(`${p.id}:mc: option ${o} is outside the family's range [${rg}]`);
         if (m.options && m.options.length < 3) det.push(`${p.id}:mc: only ${m.options.length} options`);
         if (m.options![("ABCD").indexOf(m.answer)] !== p.answer) det.push(`${p.id}:mc: the right letter is not the typed answer`);
         if (NEW_TYPES.has(p.type)) m.options!.forEach((o, i) => { if (i !== "ABCD".indexOf(m.answer) && sameAnswer(p.type, o, p.answer)) det.push(`${p.id}:mc: option ${"ABCD"[i]} is also right`); });
