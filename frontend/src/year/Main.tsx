@@ -675,7 +675,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
           )}
           <div className="cards">
             {sample && shown.includes(sample) && <button className={`card ${mode === "sample" ? "accent" : ""}`} onClick={() => setMode("sample")}><span className="card-title">{sample.title}</span><span className="card-sub">{sample.source.board ?? "A sample textbook"} · reviewed mapping, not an educator review</span></button>}
-            {shown.filter((r) => r.id !== sample?.id).map((r) => <button key={r.id} className={`card ${mode === r.id ? "accent" : ""}`} onClick={() => setMode(r.id)}><span className="card-title">{r.title}</span><span className="card-sub">{r.source.board ?? "Another textbook"} · a sample book (synthetic)</span></button>)}
+            {shown.filter((r) => r.id !== sample?.id).map((r) => <button key={r.id} className={`card ${mode === r.id ? "accent" : ""}`} onClick={() => setMode(r.id)}><span className="card-title">{r.title}</span><span className="card-sub">{r.source.board ?? "Another textbook"} · {(r.source as { synthetic?: boolean }).synthetic === false ? "mapped from the curriculum inventory, not an educator review" : "a sample book (synthetic)"}</span></button>)}
             <button className={`card ${mode === "book" ? "accent" : ""}`} onClick={() => setMode("book")}><span className="card-title">Add my textbook</span><span className="card-sub">Paste its contents, or choose a PDF of its contents pages</span></button>
           </div>
         </>
