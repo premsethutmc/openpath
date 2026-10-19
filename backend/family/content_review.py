@@ -48,7 +48,7 @@ def items():
     lib = _load('library.v1.json')
     pools = lib.get('authoredPools', {})
     mods = []
-    for m in _load('modules.v1.json')['modules']:
+    for m in [*_load('modules.v1.json')['modules'], *_load('written-modules.v1.json')['modules']]:
         mods.append(({**m, 'pool': pools[m['competency']]} if m['competency'] in pools else m, 'authored'))
     for m in lib['modules']:
         mods.append(({k: v for k, v in m.items() if k != 'provenance'}, m.get('provenance', {}).get('author', 'OpenPath')))

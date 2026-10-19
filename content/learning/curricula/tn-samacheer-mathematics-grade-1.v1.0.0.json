@@ -1,0 +1,153 @@
+{
+ "id": "tn-samacheer-mathematics-grade-1",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 1,
+ "title": "Mathematics, Standard I (new revised-curriculum term books; exact printed title not seen) — Grade 1 Mathematics (Tamil Nadu State Board)",
+ "hash": "2953f058",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics, Standard I (new revised-curriculum term books; exact printed title not seen)",
+  "edition": "new edition 2026 (Term I released May 2026; Term II distributed from 5 Oct 2026; Term III not yet released as of 2026-10-19)",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/tn-g01.json. 3 of 3 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://textbooksonline.tn.nic.in/ https://www.tnschools.gov.in/textbooks https://scert.tnschools.gov.in/ https://www.dtnext.in/amp/story/news/tamilnadu/tn-govt-releases-new-books-for-classes-1-to-3. Notes: Official sources could not be read: textbooksonline.tn.nic.in and textbookcorp.tn.gov.in refuse the fetch tool (robots.txt); tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that return no content to the fetch tool; the sandbox shell has no internet access. All chapter information comes from secondary sites, so every chapter is verified:false. EDITION CHANGE: for 2026-27, Classes 1-3 use NEW textbooks written for Tamil Nadu's revised curriculum (State Education Policy, launched Aug 2025). The Minister released the Term 1 books on 18/19 May 2026 (DT Next, News Today). Term 2 books, also new, were printed in Sept 2026 and handed out when schools reopened on 5 Oct 2026. SCERT trained master trainers on 7-8 Oct 2026 (Rc. No. 2640773/F1/2026, dated 03.10.2026). As of 2026-10-19 no source says whether Term 3 will also be new; it probably will be. The earlier (2019-era, Ennum Ezhuthum-aligned) Term 1-3 books are superseded for 2026-27. ENNUM EZHUTHUM: the mission continues in 2026-27. Weekly teacher log books for Classes 1-3 carry the heading 'Ennum Ezhuthum' and index lessons against the new textbook and a separate Teacher's Handbook (THB). Ennum Ezhuthum lesson plans for 2026-27 also exist for Classes 4-5. DT Next (7 May 2026) reports that the separate Ennum Ezhuthum workbook has been merged into the new Classes 1-3 textbook.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "tn-g01-t1-c01",
+     "number": 1,
+     "title": "Unit 1 (Term 1, chapter 1)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g01-t1-c02",
+     "number": 2,
+     "title": "Unit 2 (Term 1, chapter 2)",
+     "outcomes": [
+      {
+       "id": "tn-g01-t1-c02-o01",
+       "text": "Find how many there are altogether when two small groups of objects are put together, and record it as an addition.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      },
+      {
+       "id": "tn-g01-t1-c02-o02",
+       "text": "Find how many are left when some objects are taken away from a group, and record it as a subtraction.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      },
+      {
+       "id": "tn-g01-t1-c02-o03",
+       "text": "Choose whether a simple picture story needs adding or taking away.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g01-t1-c02-s01",
+       "number": "2.6",
+       "title": "மொத்த பலூன்கள் [Tamil-medium title; gloss: 'Total Balloons'; EM printed title not seen]",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g01-t1-c02-s02",
+       "number": "2.8",
+       "title": "மீதி பலூன்கள் [Tamil-medium title; gloss: 'Remaining Balloons'; EM printed title not seen]",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g01-t2-c01",
+     "number": 1,
+     "title": "Unit 1 (Term 2, chapter 1)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g01-t2-c01-s01",
+       "number": "1.1",
+       "title": "தாகமுள்ள பறவைகள் [Tamil-medium title; gloss: 'Thirsty Birds'; EM printed title not seen]",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    }
+   ]
+  }
+ ]
+}

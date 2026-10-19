@@ -14,3 +14,4 @@
 .review .decision textarea { min-height: 72px; width: 100%; }
 .review .history li { margin: 4px 0; }
 .review code { font-size: 0.85em; }
+.response { white-space: pre-wrap; border-left: 4px solid var(--accent, #2f6fde); padding: 8px 12px; margin: 8px 0; background: var(--soft, #eef3fb); }

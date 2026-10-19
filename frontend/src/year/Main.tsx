@@ -20,6 +20,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
+import type { WrittenMark } from "../../../packages/learning/src/written";
 import { flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
@@ -117,10 +118,14 @@ function App() {
     refreshAccount().catch((e) => setError(String(e.message ?? e))).finally(() => setReady(true));
   }, []);
   const repo = useMemo(() => (learner ? new Repo(learner) : null), [learner]);
+  // written@1: an educator's marks on this learner's written answers (read-only; only a mark of correct counts)
+  const [marks, setMarks] = useState<WrittenMark[]>([]);
   useEffect(() => {
     setEvents(null);
+    setMarks([]);
     if (!repo || !signedIn) return;
     repo.load().then(setEvents).catch((e) => setError(String(e.message ?? e)));
+    api.request<{ marks: WrittenMark[] }>("GET", `/pupils/${learner}/written-marks/`).then((r) => setMarks(r.marks)).catch(() => setMarks([]));
   }, [repo, signedIn]);
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 30_000);
@@ -130,7 +135,7 @@ function App() {
     window.scrollTo({ top: 0 });
   }, [view]);
 
-  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}` }) : null), [learner, events, now, registryLoaded]);
+  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}`, marks }) : null), [learner, events, now, registryLoaded, marks]);
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 
@@ -422,12 +427,59 @@ function App() {
           </div>
         )}
       </section>
+      <WrittenWork records={st.records} learner={learner} />
       <div className="section-title"><h2>Your years</h2></div>
       <div className="actions">
         <button className="secondary" onClick={() => setView({ name: "years" })}>Earlier years</button>
         <button className="secondary" onClick={() => setView({ name: "setup" })}>Start the next year</button>
       </div>
     </Shell>
+  );
+}
+
+/** written@1: written answers waiting for an educator, the marks given, and the parent's choice of who marks. */
+function WrittenWork({ records, learner }: { records: ReturnType<typeof learnerState>["records"]; learner: string }) {
+  const marked = records.attempts.filter((a) => a.written);
+  const [shares, setShares] = useState<{ email: string }[] | null>(null);
+  const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    api.request<{ shares: { email: string }[] }>("GET", `/pupils/${learner}/marking-share/`).then((r) => setShares(r.shares)).catch(() => setShares([]));
+  }, [learner]);
+  if (!records.pending.length && !marked.length && !shares?.length) return null;
+  return (
+    <section aria-label="Written work">
+      <div className="section-title"><h2>Written work</h2></div>
+      <p className="muted small">Proofs, constructions and explanations are read and marked by an educator, never by the computer. An answer counts only once it is marked correct.</p>
+      {records.pending.map((p) => (
+        <div key={p.id} className="panel"><p className="eyebrow">Waiting for an educator · {graph.get(p.competency).name}</p><p className="small">{p.text.slice(0, 280)}{p.text.length > 280 ? "…" : ""}</p></div>
+      ))}
+      {marked.map((a) => (
+        <div key={a.id} className={`feedback ${a.written!.mark.verdict === "correct" ? "good" : "bad"}`} role="note">
+          <strong>{a.written!.mark.verdict === "correct" ? "Marked correct" : a.written!.mark.verdict === "partial" ? "Partly correct" : "Not yet correct"} · {a.written!.mark.score}/{a.written!.mark.outOf}</strong>
+          <p>{a.written!.mark.feedback}</p>
+          <p className="small muted">{graph.get(a.competency).name} · marked by an educator</p>
+        </div>
+      ))}
+      <details className="panel">
+        <summary>Who marks written work</summary>
+        <p className="small">Written answers are shown only to the educators you choose (under a pseudonym). {shares?.length ? `Shared with: ${shares.map((s) => s.email).join(", ")}.` : "Not shared with anyone yet."}</p>
+        <label className="field">Educator's email<input value={email} onChange={(e) => setEmail(e.target.value)} type="email" autoComplete="off" /></label>
+        <div className="actions">
+          <button className="secondary" disabled={!email.trim()} onClick={async () => {
+            try {
+              await api.request("POST", `/pupils/${learner}/marking-share/`, { email });
+              setShares([...(shares ?? []), { email }]);
+              setMsg("Shared."); setEmail("");
+            } catch (e) {
+              setMsg(String((e as Error).message ?? e));
+            }
+          }}>Share written work</button>
+          {shares?.map((s) => <button key={s.email} className="link" onClick={async () => { await api.request("DELETE", `/pupils/${learner}/marking-share/`, { email: s.email }); setShares(shares.filter((x) => x.email !== s.email)); }}>Stop sharing with {s.email}</button>)}
+        </div>
+        {msg && <p className="small" role="status">{msg}</p>}
+      </details>
+    </section>
   );
 }
 

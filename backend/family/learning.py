@@ -47,6 +47,8 @@ def _load(name):
 @lru_cache
 def content():
     modules = _load('modules.v1.json')
+    marked = _load('written-modules.v1.json')
+    modules = {**modules, 'questions': [*modules['questions'], *marked['questions']], 'modules': [*modules['modules'], *marked['modules']]}
     library = _load('library.v1.json')['modules']
     problems = _load('problems.v1.json')['problems']
     questions = {q['id']: q for q in modules['questions']}

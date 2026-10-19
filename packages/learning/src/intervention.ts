@@ -30,7 +30,7 @@ export const RECOVERY_DEPTH = 2;
 
 const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === m.competency;
 /** The learner's first attempt at this problem, in either answer format (one exposure). */
-const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? null;
+const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? (records.pending?.some((p) => p.questionId === qid) ? ({ questionId: qid } as unknown as Attempt) : null);
 /**
  * depth@1: the next question of a phase from the module's family pool that this learner has never seen (in either
  * format). null when the pool has no unseen question left: the module then says so; nothing is repeated as evidence.
@@ -101,7 +101,7 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
   };
 }
 
-export type ModulePhase = "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable";
+export type ModulePhase = "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable" | "waiting";
 export interface ModuleState {
   competency: string;
   phase: ModulePhase;
@@ -133,6 +133,8 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const m = moduleFor(competency);
   const base = { competency, question: null, strategy: null, diagnosis: null, decision: null } as const;
   if (!m) return { ...base, phase: "unavailable", reason: "No questions for this skill yet." };
+  // written@1: a written answer is with an educator; nothing here moves on until it is marked (other skills can)
+  if (records.pending?.some((p) => graph.evidenceTarget(p.competency) === competency)) return { ...base, phase: "waiting", reason: "Your written answer is with an educator. You will see the mark and their feedback under “Written work”; carry on with other skills meanwhile." };
   // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
   // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
   const asked = diagnose(m, records.attempts);

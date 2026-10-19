@@ -19,7 +19,7 @@ export interface SourceRef {
 export interface Mapping {
   id: string;
   score: number;
-  method: "text-match@1" | "meaning@2" | "meaning@3";
+  method: "text-match@1" | "meaning@2" | "meaning@3" | "inventory@1";
   status: "proposed" | "accepted" | "rejected";
 }
 export interface ProvisionalCompetency {
@@ -67,6 +67,8 @@ export interface Chapter {
   exercises: { ref: string; pages?: string }[];
   /** Sections of any depth; each has its own outcomes. */
   sections?: Section[];
+  /** false when the chapter title could not be checked against an official source (boards@1). */
+  sourceVerified?: false;
 }
 /** Subjects with a competency graph in OpenPath (others are extracted and kept, but nothing is mapped). */
 export const SUPPORTED_SUBJECTS = ["Mathematics"] as const;

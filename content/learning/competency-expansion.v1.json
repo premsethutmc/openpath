@@ -157,9 +157,6 @@
     "cbse-g12:cbse-g12-c01-o04",
     "tn-g10:tn-g10-c01-o05"
    ],
-   "mergedFrom": [
-    "MATH.algebra.function-composition"
-   ],
    "status": "provisional"
   },
   {
@@ -377,9 +374,6 @@
     "cbse-g10:cbse-g10-c02-o03",
     "cbse-g10:cbse-g10-c02-o04",
     "tn-g10:tn-g10-c03-o06"
-   ],
-   "mergedFrom": [
-    "MATH.algebra.zeros-coefficients"
    ],
    "status": "provisional"
   },
@@ -1182,9 +1176,6 @@
     "tn-g08:tn-g08-c05-o04",
     "tn-g09:tn-g09-c04-o06"
    ],
-   "mergedFrom": [
-    "MATH.geometry.triangle-centres"
-   ],
    "status": "provisional"
   },
   {
@@ -1439,9 +1430,6 @@
     "cbse-g08:cbse-g08-t2-c07-o02",
     "tn-g07:tn-g07-t1-c02-o01",
     "tn-g07:tn-g07-t1-c02-o02"
-   ],
-   "mergedFrom": [
-    "MATH.measurement.quadrilateral-area"
    ],
    "status": "provisional"
   },
@@ -2046,9 +2034,6 @@
     "tn-g07:tn-g07-t3-c06-o02",
     "tn-g08:tn-g08-c07-o03"
    ],
-   "mergedFrom": [
-    "MATH.reasoning.algorithmic-thinking"
-   ],
    "status": "provisional"
   },
   {
@@ -2311,9 +2296,6 @@
     "cbse-g09:cbse-g09-c08-o02",
     "cbse-g09:cbse-g09-c08-o06"
    ],
-   "mergedFrom": [
-    "MATH.sequences.recursive-sequences"
-   ],
    "status": "provisional"
   },
   {
@@ -2349,9 +2331,6 @@
    "evidence": [
     "cbse-g11:cbse-g11-c08-o06",
     "tn-g10:tn-g10-c02-o07"
-   ],
-   "mergedFrom": [
-    "MATH.sequences.special-series-sums"
    ],
    "status": "provisional"
   },
@@ -4794,6 +4773,48 @@
    "from": "MATH.algebra.determinants",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.addition-regroup",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "regrouping trades ten ones for one ten: it rests on tens and ones"
+  },
+  {
+   "target": "MATH.number.subtraction-regroup",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "exchanging a ten for ten ones rests on tens and ones"
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "from": "MATH.number.integer-add",
+   "type": "plausible",
+   "reason": "solving with negative numbers adds and subtracts integers"
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "from": "MATH.number.integer-multiply",
+   "type": "support",
+   "reason": "dividing by a negative coefficient uses the sign rules"
+  },
+  {
+   "target": "MATH.number.fraction-product",
+   "from": "MATH.number.multiplication-tables",
+   "type": "support",
+   "reason": "multiplying fractions multiplies whole numbers top and bottom"
+  },
+  {
+   "target": "MATH.number.fraction-multiply",
+   "from": "MATH.number.multiplication-tables",
+   "type": "support",
+   "reason": "a fraction of a whole number multiplies and divides whole numbers"
+  },
+  {
+   "target": "MATH.algebra.quadratics",
+   "from": "MATH.algebra.polynomial-zeros",
+   "type": "support",
+   "reason": "roots of a quadratic are the zeros of the polynomial"
   }
  ],
  "disputed": [

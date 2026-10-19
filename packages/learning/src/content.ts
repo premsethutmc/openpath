@@ -7,9 +7,11 @@ import data from "../../../content/learning/modules.v1.json";
 import problemsData from "../../../content/learning/problems.v1.json";
 import goalsData from "../../../content/learning/goals.v1.json";
 import libraryData from "../../../content/learning/library.v1.json";
+import markedData from "../../../content/learning/written-modules.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
 import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
 import { canonicalOf, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
+import { MARKED_NOT, MARKED_RIGHT, outOf, writtenTask } from "./written";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -114,14 +116,16 @@ export interface Goal {
 export const contentVersion = data.version;
 /** Modules written by hand (modules.v1.json) and modules synthesised from blueprints (library.v1.json, library.ts). */
 const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["pool"]> }).authoredPools ?? {}) as Record<string, Module["pool"]>;
-/** Hand-written modules, each with the release pool of its competency's family (when there is one). */
-export const authoredModules = (data.modules as unknown as Module[]).map((m) => (authoredPools[m.competency] ? { ...m, pool: authoredPools[m.competency] } : m));
+/** Hand-written modules, each with the release pool of its competency's family (when there is one); then the modules
+ * of competencies an educator marks (written-modules.v1.json: teaching, auto-marked component questions and written
+ * tasks, written@1). */
+export const authoredModules = [...(data.modules as unknown as Module[]), ...(markedData.modules as unknown as Module[])].map((m) => (authoredPools[m.competency] ? { ...m, pool: authoredPools[m.competency] } : m));
 export const synthesisedModules = libraryData.modules as unknown as (Module & { provenance: Record<string, unknown> })[];
 export const libraryVersion = libraryData.version;
 export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))];
 /** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
 export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);
-export const questions = data.questions as unknown as Question[];
+export const questions = [...data.questions, ...markedData.questions] as unknown as Question[];
 export const problems = problemsData.problems as unknown as Problem[];
 export const goals = goalsData.goals as unknown as Goal[];
 const qById = new Map(questions.map((q) => [q.id, q]));
@@ -131,6 +135,9 @@ export const question = (id: string): Question => {
   const q = qById.get(id);
   if (q) return q;
   const f = fragments.get(id);
+  const w = writtenTask(id);
+  // written@1: an educator marks it; its "answer" is the educator's mark of correct, never a text to match
+  if (w) return { id, competency: w.competency, skill: w.competency, role: "practice", type: "written", prompt: w.prompt, answer: MARKED_RIGHT, solution: `An educator marks this against ${w.rubric.length} criteria (${outOf(w)} points): ${w.rubric.map((r) => r.criterion).join("; ")}.`, ...(w.figure ? { figure: w.figure } : {}), difficulty: 3, source: w.source, licence: w.licence, review: "provisional" };
   const g = problemOf(id);
   if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
@@ -146,7 +153,7 @@ function misconceptionsOf(g: FamilyProblem): NonNullable<Question["misconception
   }
   return out;
 }
-export const isQuestion = (id: string) => qById.has(id) || fragments.has(id) || problemOf(id) !== null;
+export const isQuestion = (id: string) => qById.has(id) || fragments.has(id) || writtenTask(id) !== null || problemOf(id) !== null;
 export const moduleFor = (competency: string) => modules.find((m) => m.competency === competency) ?? null;
 export const goal = (id: string) => goals.find((g) => g.id === id) ?? null;
 
@@ -156,7 +163,8 @@ export const goal = (id: string) => goals.find((g) => g.id === id) ?? null;
  * response its own ("~…"); a written answer has none (an educator marks it). */
 export function canonical(q: Pick<Question, "type"> & { answer?: string }, raw: string): string | null {
   if (NEW_TYPES.has(q.type)) {
-    if (HUMAN.has(q.type)) return null;
+    // a written answer: only the educator's mark (records.ts) has a form; the learner's own text has none
+    if (HUMAN.has(q.type)) return raw === MARKED_RIGHT ? "marked-correct" : raw === MARKED_NOT ? "marked-not-yet" : null;
     if (SAMPLED.has(q.type)) {
       if (!readable(q.type, raw)) return null;
       return q.answer !== undefined && sameAnswer(q.type, raw, q.answer) ? `=${q.answer}` : `~${normalise(raw)}`;
@@ -177,7 +185,7 @@ export function canonical(q: Pick<Question, "type"> & { answer?: string }, raw: 
   }
 }
 export const isCorrect = (q: Pick<Question, "type" | "answer">, raw: string) => {
-  if (HUMAN.has(q.type)) return false;
+  if (HUMAN.has(q.type)) return raw === MARKED_RIGHT;
   const c = canonical(q, raw);
   return c !== null && c === canonical(q, q.answer);
 };

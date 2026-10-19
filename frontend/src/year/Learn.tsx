@@ -5,6 +5,7 @@
  */
 import { useState } from "react";
 import { Figure } from "./Figure";
+import { needsMarking } from "../../../packages/learning/src/content";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
@@ -105,6 +106,17 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
 
 function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => void; label?: string }) {
   const q = question(fb.qid);
+  if (needsMarking(q))
+    return (
+      <div className="stack enter">
+        <div className="feedback" role="status">
+          <strong>Sent to be marked.</strong>
+          <p>An educator will read your answer and mark it against the criteria. It counts only once it is marked correct; you will see the mark and the feedback under “Written work”.</p>
+          <p className="small muted">{q.solution}</p>
+        </div>
+        <div className="actions sticky"><button className="primary" onClick={onNext}>{label}</button></div>
+      </div>
+    );
   const says = fb.right ? null : misconceptionOf(q, fb.response)?.says;
   const fam = fb.working?.length ? familyOf(fb.qid) : null;
   const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
@@ -269,8 +281,8 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   return (
     <div className="stack">
       {head}
-      <div className={`feedback ${ms.phase === "pause" ? "bad" : "good"}`} role="status">
-        <strong>{ms.phase === "pause" ? "Let's pause this one" : STATUS_WORD[ev.status]}</strong>
+      <div className={`feedback ${ms.phase === "pause" ? "bad" : ms.phase === "waiting" ? "" : "good"}`} role="status">
+        <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : STATUS_WORD[ev.status]}</strong>
         <p>{ms.reason}</p>
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>

@@ -24,7 +24,7 @@ import "../year/year.css";
 import "./review.css";
 
 const api = new Api();
-type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string };
+type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string } | { name: "marking" };
 const STATE_WORD: Record<string, string> = { draft: "Draft", submitted: "Awaiting review", changes_requested: "Changes requested", rejected: "Rejected", approved: "Approved, not released", released: "Released", missing: "Not in the registry" };
 const fams = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
 
@@ -63,7 +63,7 @@ function App() {
   };
   const nav = (
     <nav className="review-nav" aria-label="Review sections">
-      {([["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"]] as const).map(([n, label]) => (
+      {([["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"], ["marking", "Marking"]] as const).map(([n, label]) => (
         <button key={n} className={view.name.startsWith(n.slice(0, -1)) || view.name === n ? "primary" : "secondary"} onClick={() => setView({ name: n } as View)}>{label}</button>
       ))}
     </nav>
@@ -76,8 +76,72 @@ function App() {
     : view.name === "modules" ? <ModuleList reg={data.registry} open={(c) => setView({ name: "module", competency: c })} />
     : view.name === "module" ? <ModuleDetail competency={view.competency} e={entry(`module:${view.competency}`)} reg={data.registry} roles={data.roles} decide={decide} openFamily={(id) => setView({ name: "family", id })} />
     : view.name === "curricula" ? <CurriculumList reg={data.registry} open={(item) => setView({ name: "curriculum", item })} />
+    : view.name === "marking" ? <Marking roles={data.roles} />
     : <CurriculumDetail item={view.item} e={entry(view.item)} roles={data.roles} decide={decide} />;
   return <Shell error={error}>{nav}{roles}{body}</Shell>;
+}
+
+// ---------------------------------------------------------------- marking written answers (written@1)
+
+type QueueRow = { pupil: string; learner: string; attemptId: string; questionId: string; at: string; response: string; task: { prompt: string; kind: string; rubric: { id: string; criterion: string; points: number }[]; guidance: string; competency: string; figure?: { type: string } }; mark: null | { verdict: string; score: number; outOf: number; feedback: string; at: string; marker?: string } };
+function Marking({ roles }: { roles: string[] }) {
+  const [rows, setRows] = useState<QueueRow[] | null>(null);
+  const [error, setError] = useState("");
+  const load = () => api.request<{ queue: QueueRow[] }>("GET", "/written/queue/").then((r) => setRows(r.queue)).catch((e) => setError(String(e.message ?? e)));
+  useEffect(() => {
+    if (roles.includes("educator")) load();
+  }, []);
+  if (!roles.includes("educator")) return <p className="muted">Marking written answers needs the educator role.</p>;
+  if (error) return <p className="error" role="alert">{error}</p>;
+  if (!rows) return <p className="muted">Loading the marking queue…</p>;
+  return (
+    <section>
+      <h2>Written answers to mark</h2>
+      <p className="small muted">Only learners whose parents chose to share their written work with you appear here, under a pseudonym. Each answer is marked once; marks are kept and cannot be changed. Only full marks count as correct.</p>
+      {!rows.length && <p className="muted">Nothing to mark.</p>}
+      {rows.map((r) => <MarkOne key={`${r.pupil}:${r.attemptId}`} r={r} onDone={load} />)}
+    </section>
+  );
+}
+function MarkOne({ r, onDone }: { r: QueueRow; onDone: () => void }) {
+  const total = r.task.rubric.reduce((n, x) => n + x.points, 0);
+  const [got, setGot] = useState<Record<string, number>>({});
+  const [feedback, setFeedback] = useState("");
+  const [msg, setMsg] = useState("");
+  const score = Object.values(got).reduce((a, b) => a + b, 0);
+  const verdict = score === total ? "correct" : score === 0 ? "incorrect" : "partial";
+  return (
+    <article className="qcard" data-attempt={r.attemptId}>
+      <p className="eyebrow">{r.learner} · {graph.get(r.task.competency).name} · {r.task.kind}</p>
+      <p className="prompt">{r.task.prompt}</p>
+      {r.task.figure && <Figure v={r.task.figure} />}
+      <blockquote className="response">{r.response}</blockquote>
+      <details><summary>Guidance for the marker</summary><p className="small">{r.task.guidance}</p></details>
+      {r.mark ? (
+        <p role="status"><b>Marked {r.mark.verdict} ({r.mark.score}/{r.mark.outOf})</b> by {r.mark.marker ?? "an educator"}: {r.mark.feedback}</p>
+      ) : (
+        <>
+          <table className="matrix small"><tbody>
+            {r.task.rubric.map((c) => (
+              <tr key={c.id}><th>{c.criterion}</th><td><select aria-label={`Points for ${c.criterion}`} value={got[c.id] ?? 0} onChange={(e) => setGot({ ...got, [c.id]: Number(e.target.value) })}>{Array.from({ length: c.points + 1 }, (_, k) => <option key={k} value={k}>{k} / {c.points}</option>)}</select></td></tr>
+            ))}
+          </tbody></table>
+          <label className="field">Feedback for the learner<textarea aria-label="Feedback" rows={3} value={feedback} onChange={(e) => setFeedback(e.target.value)} /></label>
+          <div className="actions">
+            <button className="primary" disabled={!feedback.trim()} onClick={async () => {
+              try {
+                await api.request("POST", "/written/marks/", { pupil: r.pupil, attemptId: r.attemptId, verdict, score, feedback });
+                onDone();
+              } catch (e) {
+                setMsg(String((e as Error).message ?? e));
+              }
+            }}>Give the mark: {score}/{total} ({verdict === "correct" ? "correct" : verdict === "partial" ? "partly correct" : "not yet correct"})</button>
+          </div>
+          {msg && <p className="error" role="alert">{msg}</p>}
+        </>
+      )}
+    </article>
+  );
 }
 
 // ---------------------------------------------------------------- overview: coverage and unresolved issues

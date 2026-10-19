@@ -1,0 +1,1536 @@
+{
+ "id": "cbse-ncert-mathematics-grade-6",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 6,
+ "title": "Ganita Prakash: Textbook of Mathematics for Grade 6 — Grade 6 Mathematics (CBSE / NCERT)",
+ "hash": "c2b29f9a",
+ "source": {
+  "kind": "textbook",
+  "title": "Ganita Prakash: Textbook of Mathematics for Grade 6",
+  "edition": "first edition 2024 (NCF-SE 2023); 2026-27 reprint not verified",
+  "publisher": "NCERT",
+  "board": "CBSE (NCERT textbooks)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/cbse-g06.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://ciet.ncert.gov.in/audio-book/171 https://edustud.nic.in/edu/Syllabus_2026_27/6/6_MATH_ANNUAL_SYLLABUS_2026_27_EM.pdf https://www.cbseacademic.nic.in/web_material/Circulars/2025/12_Circular_2025.pdf https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf. Notes: ncert.nic.in (textbook.php and the textbook PDF/prelims files) refused automated fetching (robots.txt disallow) on 2026-10-19, so the NCERT contents pages, printed section headings and edition/reprint lines could not be read directly. Chapter titles were verified instead against other official government sources: NCERT's CIET audio-book pages (ciet.ncert.gov.in) and the Delhi Directorate of Education 2026-27 syllabus (edustud.nic.in), which prescribes NCERT books. 'verified': true means the title was seen in at least one of those sources. CBSE does not publish its own mathematics syllabus for Grades 6-8. Its 2026-27 curriculum release (Circular Acad-14/2026) covers Classes IX-XII only, and CBSE circulars direct schools to the new NCERT textbooks. The 2026-27 prescription is therefore inferred from those circulars plus the Delhi DoE 2026-27 syllabus. No CBSE or NCERT notice found replaces or withdraws Ganita Prakash for 2026-27. Section titles come from the subtopic lists in the Delhi DoE 2026-27 annual syllabus, not from the printed textbook. They appear to quote the textbook's section headings, but DoE may have shortened, merged or left some out (its list is 'for assessment purpose only'), and capitalisation follows DoE. Check them against the printed NCERT book before using them as exact headings.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "cbse-g06-c05",
+     "number": 5,
+     "title": "Prime Time",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c05-s01",
+       "number": "5.1",
+       "title": "Common multiples and common factors",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c05-o01",
+         "text": "List common multiples and common factors of two numbers and use them to solve game or timing problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.factors-multiples",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.hcf-lcm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, numeric, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c05-s02",
+       "number": "5.2",
+       "title": "Prime numbers",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c05-o02",
+         "text": "Tell prime numbers from composite numbers and list primes in a range using a sieve.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.primes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g06-c05-o03",
+         "text": "Decide whether two numbers are co-prime.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.hcf-lcm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c05-s03",
+       "number": "5.3",
+       "title": "Co-prime numbers for safekeeping treasure",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c05-s04",
+       "number": "5.4",
+       "title": "Prime factorization",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c05-s05",
+       "number": "5.5",
+       "title": "Divisibility tests",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c05-o04",
+         "text": "Write a number as a product of primes and use the factorisation to check divisibility and co-primeness.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.prime-factorisation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g06-c05-o05",
+         "text": "Apply divisibility tests and explain from place value why they work.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.divisibility",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c05-s06",
+       "number": "5.6",
+       "title": "Fun with numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g06-c07",
+     "number": 7,
+     "title": "Fractions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c07-s01",
+       "number": "7.1",
+       "title": "Fractional units and equal shares",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c07-o01",
+         "text": "Interpret fractions as equal shares and as parts of a whole, and use fractional units to measure lengths.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-models",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s02",
+       "number": "7.2",
+       "title": "Fractional units as parts of a whole",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s03",
+       "number": "7.3",
+       "title": "Measuring using fractional units",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s04",
+       "number": "7.4",
+       "title": "Marking fraction lengths on number line",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c07-o02",
+         "text": "Place fractions, including fractions greater than one, on a number line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-models",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; fraction, diagram-drawing)."
+         }
+        },
+        {
+         "id": "cbse-g06-c07-o05",
+         "text": "Compare and order fractions, including fractions with unlike denominators.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; ordered-list, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g06-c07-o06",
+         "text": "Add and subtract fractions with like and unlike denominators, including in word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s05",
+       "number": "7.5",
+       "title": "Mixed fractions",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c07-o03",
+         "text": "Convert between mixed fractions and improper fractions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.mixed-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s06",
+       "number": "7.6",
+       "title": "Equivalent fractions",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c07-o04",
+         "text": "Make equivalent fractions and reduce a fraction to its lowest terms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.equivalent-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.frac.check-equal",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s07",
+       "number": "7.7",
+       "title": "Comparing fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s08",
+       "number": "7.8",
+       "title": "Addition & Subtraction of fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c07-s09",
+       "number": "7.9",
+       "title": "A pinch of history",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g06-c10",
+     "number": 10,
+     "title": "The Other Side of Zero",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c10-s01",
+       "number": "10.1",
+       "title": "Bela's building of fun",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c10-s02",
+       "number": "10.2",
+       "title": "The token model",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c10-o02",
+         "text": "Add and subtract integers using a token (positive/negative counter) model and the number line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.integer-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c10-s03",
+       "number": "10.3",
+       "title": "Integers in other places",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c10-o01",
+         "text": "Represent positive and negative integers on a number line (for example floors above and below ground) and order them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.integers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; ordered-list, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g06-c10-o03",
+         "text": "Solve problems involving integers in contexts such as bank balances, temperature and height above or below sea level.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.integer-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g06-c10-o04",
+         "text": "Complete integer grid puzzles (e.g. grids with equal row and column sums) and explain the reasoning.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.integer-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.number-grid-puzzles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c10-s04",
+       "number": "10.4",
+       "title": "Exploration with integers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c10-s05",
+       "number": "10.5",
+       "title": "A pinch of history",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g06-c01",
+     "number": 1,
+     "title": "Patterns in Mathematics",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c01-s01",
+       "number": "1.1",
+       "title": "Patterns in numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c01-s02",
+       "number": "1.2",
+       "title": "Visualising number sequences",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c01-o01",
+         "text": "Extend common number sequences (counting, odd, even, triangular, square, cube and powers of 2) and state the rule that generates each.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.number-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; pattern, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g06-c01-o02",
+         "text": "Draw dot or shape pictures of number sequences and explain why each picture gives the next number in the sequence.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g06-c01-o04",
+         "text": "Count sides, corners or line segments in shape sequences (such as regular polygons or stacked squares) and link the counts to number sequences.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.growing-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; pattern, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c01-s03",
+       "number": "1.3",
+       "title": "Relations among number sequences",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c01-o03",
+         "text": "Find and justify relations between sequences, for example that adding consecutive odd numbers from 1 gives square numbers, or that two consecutive triangular numbers add to a square number.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.conjecture-testing",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.counterexamples-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c01-s04",
+       "number": "1.4",
+       "title": "Patterns in shapes, relation to number sequences",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g06-c02",
+     "number": 2,
+     "title": "Lines and Angles",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c02-s01",
+       "number": "2.1",
+       "title": "Point, Line Segment, Line, Ray, Angle",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c02-o01",
+         "text": "Name and distinguish points, line segments, lines and rays using standard notation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.lines-segments",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, diagram-drawing)."
+         }
+        },
+        {
+         "id": "cbse-g06-c02-o02",
+         "text": "Treat an angle as an amount of turn between two arms, name its vertex and arms, and compare angles by superposition or rotation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g06-c02-o03",
+         "text": "Measure a given angle and draw an angle of a given size with a protractor.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angle-measure",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; measurement-with-unit, construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s02",
+       "number": "2.2",
+       "title": "Comparing Angles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s03",
+       "number": "2.3",
+       "title": "Making Rotating arms",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s04",
+       "number": "2.4",
+       "title": "Special types of angles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s05",
+       "number": "2.5",
+       "title": "Measuring Angles",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c02-o04",
+         "text": "Classify angles as acute, right, obtuse, straight or reflex from their measures or drawings.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s06",
+       "number": "2.6",
+       "title": "Drawing Angles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c02-s07",
+       "number": "2.7",
+       "title": "Type of angles & their measures",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g06-c08",
+     "number": 8,
+     "title": "Playing with Constructions",
+     "outcomes": [
+      {
+       "id": "cbse-g06-c08-o01",
+       "text": "Use a compass and ruler to draw circles, arcs and figures made from them.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.basic-constructions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.circles",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c08-s01",
+       "number": "8.1",
+       "title": "Artwork",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c08-s02",
+       "number": "8.2",
+       "title": "Squares and rectangles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c08-s03",
+       "number": "8.3",
+       "title": "Constructing Squares and rectangles",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c08-o02",
+         "text": "Construct squares and rectangles of given side lengths with ruler and compass.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.basic-constructions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c08-s04",
+       "number": "8.4",
+       "title": "An exploration in rectangles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c08-s05",
+       "number": "8.5",
+       "title": "Exploring diagonals of rectangles and squares",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c08-o03",
+         "text": "Investigate the diagonals of rectangles and squares (equal length, bisecting each other, angles formed) and use them in constructions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.quadrilaterals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; written-explanation, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c08-s06",
+       "number": "8.6",
+       "title": "Points equidistant from two given points",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c08-o04",
+         "text": "Locate points that are the same distance from two given points.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.constructions-bisectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g06-c09",
+     "number": 9,
+     "title": "Symmetry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c09-s01",
+       "number": "9.1",
+       "title": "Line of Symmetry",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c09-o02",
+         "text": "Complete or create a figure so that it has a given line of symmetry.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c09-s02",
+       "number": "9.2",
+       "title": "Paper folding and cutting",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c09-o01",
+         "text": "Find all lines of symmetry of a figure, including by folding and cutting paper.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-fold",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c09-s03",
+       "number": "9.3",
+       "title": "Rotational Symmetry",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c09-o03",
+         "text": "Find the angles of rotational symmetry and the order of rotational symmetry of a figure.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.rotational-symmetry",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g06-c09-o04",
+         "text": "Describe the reflection and rotational symmetries of circles and regular polygons.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.rotational-symmetry",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c09-s04",
+       "number": "9.4",
+       "title": "Symmetries of a circle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g06-c06",
+     "number": 6,
+     "title": "Perimeter and Area",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c06-s01",
+       "number": "6.1",
+       "title": "Perimeter",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c06-o01",
+         "text": "Find the perimeters of rectangles, squares, triangles and regular polygons.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.perimeter-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.rectangle-perimeter",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g06-c06-o04",
+         "text": "Compare shapes with the same perimeter but different areas, and the reverse, and solve real-life perimeter and area problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.rectangle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; word-problem, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c06-s02",
+       "number": "6.2",
+       "title": "Area",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c06-o02",
+         "text": "Find the area of rectangles and squares, and estimate the area of irregular shapes by counting squares on a grid.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.area-squares",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.rectangle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, estimation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c06-s03",
+       "number": "6.3",
+       "title": "Area of a triangle",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c06-o03",
+         "text": "Find the area of a triangle as half the area of a related rectangle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.triangle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g06-c04",
+     "number": 4,
+     "title": "Data Handling and Presentation",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c04-s01",
+       "number": "4.1",
+       "title": "Collecting & organizing data",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c04-o01",
+         "text": "Collect data for a question and organise it with tally marks and a frequency table.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.data-frequency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; data-table)."
+         }
+        },
+        {
+         "id": "cbse-g06-c04-o05",
+         "text": "Judge whether a data display is clear and honest and suggest better design choices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.evaluate-data-displays",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c04-s02",
+       "number": "4.2",
+       "title": "Pictographs",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c04-o02",
+         "text": "Read pictographs with a key, including partial symbols, and draw a pictograph from a table.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.pictographs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; data-table, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c04-s03",
+       "number": "4.3",
+       "title": "Bar Graphs",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c04-o03",
+         "text": "Read bar graphs with a scale and answer comparison questions from them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.scaled-bars",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; data-table, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c04-s04",
+       "number": "4.4",
+       "title": "Drawing a Bar Graph",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c04-o04",
+         "text": "Draw a bar graph from data, choosing a suitable scale and labelling the axes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.scaled-bars",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; graph-sketch)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c04-s05",
+       "number": "4.5",
+       "title": "Artistic & Aesthetic considerations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "cbse-g06-c03",
+     "number": 3,
+     "title": "Number Play",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g06-c03-s01",
+       "number": "3.1",
+       "title": "Numbers can tell us things",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s02",
+       "number": "3.2",
+       "title": "Supercells",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o01",
+         "text": "Reason about how numbers are arranged in a grid or row, for example filling a grid so that chosen cells are larger than all their neighbours (supercells).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.compare-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.number-grid-puzzles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s03",
+       "number": "3.3",
+       "title": "Patterns of numbers on the number line",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s04",
+       "number": "3.4",
+       "title": "Playing with digits",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o02",
+         "text": "Explore digit-based processes (digit sums, palindromes by reversing and adding, Kaprekar's routine) and form and test conjectures about them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.conjecture-testing",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s05",
+       "number": "3.5",
+       "title": "Pretty Palindromic patterns",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s06",
+       "number": "3.6",
+       "title": "The magic number of Kaprekar",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s07",
+       "number": "3.7",
+       "title": "Clock & calendar numbers",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o05",
+         "text": "Find and use number patterns in clocks and calendars.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.elapsed-time",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time, pattern)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s08",
+       "number": "3.8",
+       "title": "Mental math",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o04",
+         "text": "Use mental-calculation strategies and rough estimation to judge the size of quantities and results.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.rounding",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.estimate-check",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; estimation, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s09",
+       "number": "3.9",
+       "title": "Playing with number patterns",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s10",
+       "number": "3.10",
+       "title": "the Collatz conjecture",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o03",
+         "text": "Generate Collatz sequences from a starting number and describe their behaviour.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.conjecture-testing",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, pattern)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s11",
+       "number": "3.11",
+       "title": "Simple Estimation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g06-c03-s12",
+       "number": "3.12",
+       "title": "Games and winning strategies",
+       "outcomes": [
+        {
+         "id": "cbse-g06-c03-o06",
+         "text": "Work out and explain a winning strategy for a simple two-player number game.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.winning-strategies",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-reasoning",
+      "number": 6,
+      "title": "Mathematical reasoning"
+     }
+    }
+   ]
+  }
+ ]
+}

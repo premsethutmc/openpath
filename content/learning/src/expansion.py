@@ -33,6 +33,17 @@ MERGE = {
     'MATH.number.decimal-expansions': ('MATH.number.real-numbers', 'terminating and recurring decimals are part of representing rational and irrational numbers'),
     'MATH.algebra.linear-functions': ('MATH.algebra.linear-two-variables', 'y = ax + b relationships are the existing linear equations in two variables'),
 }
+# relations INTO existing competencies that the curricula show are needed (curated; each with its reason). They steer
+# recovery only; no relation ever gates a learner, and no recorded evidence changes.
+INTO_EXISTING = [
+    ('MATH.number.addition-regroup', 'MATH.number.place-value-tens', 'plausible', 'regrouping trades ten ones for one ten: it rests on tens and ones'),
+    ('MATH.number.subtraction-regroup', 'MATH.number.place-value-tens', 'plausible', 'exchanging a ten for ten ones rests on tens and ones'),
+    ('MATH.algebra.linear-equations', 'MATH.number.integer-add', 'plausible', 'solving with negative numbers adds and subtracts integers'),
+    ('MATH.algebra.linear-equations', 'MATH.number.integer-multiply', 'support', 'dividing by a negative coefficient uses the sign rules'),
+    ('MATH.number.fraction-product', 'MATH.number.multiplication-tables', 'support', 'multiplying fractions multiplies whole numbers top and bottom'),
+    ('MATH.number.fraction-multiply', 'MATH.number.multiplication-tables', 'support', 'a fraction of a whole number multiplies and divides whole numbers'),
+    ('MATH.algebra.quadratics', 'MATH.algebra.polynomial-zeros', 'support', 'roots of a quadratic are the zeros of the polynomial'),
+]
 STRAND = {'matrices': 'algebra', 'sets-relations': 'algebra', 'sequences': 'algebra'}
 
 
@@ -100,6 +111,11 @@ def main():
             if s == tid or s not in allids:
                 continue
             relations.append({'target': tid, 'from': s, 'type': 'support', 'reason': 'helpful background named by the curriculum inventory; never a gate'})
+    for t, f, ty, why in INTO_EXISTING:
+        if t in allids and f in allids:
+            relations.append({'target': t, 'from': f, 'type': ty, 'reason': why})
+        else:
+            dropped.append({'target': t, 'from': f, 'reason': 'unknown competency'})
     # cycles among plausible relations are refused (the later edge is listed as disputed)
     graph = defaultdict(set)
     kept = []
