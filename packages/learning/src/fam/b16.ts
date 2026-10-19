@@ -1075,6 +1075,7 @@ export const B16: Def[] = [
     reject: (p) => {
       const [a, w1, c, w2, s1, s2, op] = p;
       if (a < -5 || a > 3 || w1 < 2 || w1 > 6 || c < -3 || c > 5 || w2 < 2 || w2 > 6 || s1 < 0 || s1 > 3 || s2 < 0 || s2 > 3 || op < 0 || op > 2) return "Two bounded intervals with whole-number ends.";
+      if (a === c && w1 === w2) return "The two intervals have the same ends.";
       const res = ivOp(p, op);
       return !res.length || res.some((iv) => req(iv.lo, iv.hi)) ? "The result is empty or a single point." : null;
     },
@@ -1113,7 +1114,10 @@ export const B16: Def[] = [
       out.push(B("ends-all-closed", "procedural", IVL, "Every end was written with a square bracket; check each end: is that number itself in the set?", allClosed));
       return out;
     },
-    distractors: (p) => [ivsS(ivOp(p, p[6]).map((iv) => ({ ...iv, lc: !iv.lc, hc: !iv.hc }))), ivsS(ivOp(p, p[6]).map((iv) => ({ ...iv, lc: false, hc: false })))],
+    distractors: (p) => {
+      const r = ivOp(p, p[6]);
+      return [ivsS(r.map((iv) => ({ ...iv, lc: !iv.lc, hc: !iv.hc }))), ivsS(r.map((iv) => ({ ...iv, lc: false, hc: false }))), ivsS(r.map((iv, i) => (i === r.length - 1 ? { ...iv, hi: radd(iv.hi, rr(1)) } : iv))), ivsS(r.map((iv, i) => (i === 0 ? { ...iv, lo: rsub(iv.lo, rr(1)) } : iv)))];
+    },
     variants: () => [],
     explain: (s) => (s.id === "line" ? `Draw ${s.inputs[0]} and ${s.inputs[1]} on one number line and shade ${s.value}` : `Read off the ends, deciding for each whether it is included: ${s.value}`),
     domain: [[-5, 3], [2, 6], [-3, 5], [2, 6], [0, 3], [0, 3], [0, 2]],
@@ -1986,7 +1990,7 @@ export const B16: Def[] = [
         B("sum-sign", "recall", VIETA, "The sum of the roots was taken as +(coefficient of x²); it is −(coefficient of x²).", r === 0 ? null : `${surdPlus(u, -1, w)}, ${n_(-r - 4 * u)}`),
       ];
     },
-    distractors: ([u, wi, r]) => [`${surdPlus(u, -1, SURDS[wi])}, ${n_(r + 1)}`, `${surdPlus(u, -1, SURDS[wi])}, ${n_(-r)}`],
+    distractors: ([u, wi, r]) => [`${surdPlus(u, -1, SURDS[wi])}, ${n_(r + 1)}`, `${surdPlus(u, -1, SURDS[wi])}, ${n_(r - 1)}`, `${surdPlus(u, 1, SURDS[wi])}, ${n_(r)}`],
     variants: () => [],
     explain: (s) => (s.id === "conjugate" ? `The coefficients are rational, so the conjugate ${s.value} is also a root` : s.id === "quadratic" ? `(x − (${s.inputs[0]}))(x − (${s.inputs[1]})) = ${s.value}` : `Dividing the cubic by ${s.inputs[0]} leaves x − (${s.value}), so the third root is ${s.value}`),
     domain: [[-4, 4], [0, 4], [-5, 5]],
@@ -2163,7 +2167,7 @@ export const B16: Def[] = [
             ],
     distractors: ([p, q, t, k]) => {
       const [b, c] = vform(p, q, t, k);
-      return [polyS([1, -b, c], "x", false), polyS([1, b, -c], "x", false)];
+      return [polyS([1, -b, c], "x", false), polyS([1, b, -c], "x", false), polyS([1, b, c + 1], "x", false), polyS([1, b + 1, c], "x", false)];
     },
     variants: () => [],
     explain: (s) => (s.id === "vieta" ? s.value as string : s.id === "sum" ? `New sum of zeros: ${n_(Number(s.value))}` : s.id === "product" ? `New product of zeros: ${n_(Number(s.value))}` : `x² − (sum)x + (product) = ${s.value}`),
@@ -2213,6 +2217,7 @@ export const B16: Def[] = [
         ...(a * d + b * c !== 0 ? [B("determinant-added", "prerequisite", DET, "The determinant was found as ad + bc; it is ad − bc.", matS(mscale(toM([[d, -b], [-c, a]]), rr(1, a * d + b * c))), det2)] : []),
       ];
     },
+    distractors: ([a, b, c, d]) => [matS(mscale(toM([[d, -b], [-c, a]]), rr(-1, a * d - b * c))), matN([[a, b], [c, d]]), matS(mscale(toM([[a, c], [b, d]]), rr(1, a * d - b * c)))],
     variants: () => [],
     explain: (s) => (s.id === "det" ? `|A| = ad − bc = ${n_(Number(s.value))} (not 0, so A⁻¹ exists)` : s.id === "adj" ? `adj A = ${s.value}` : `Divide every entry by ${n_(Number(s.inputs[0]))}: ${s.value}`),
     domain: [[-4, 6], [-4, 6], [-4, 6], [-4, 6]],
