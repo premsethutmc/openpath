@@ -358,13 +358,14 @@
     "gen:quad:3,-18"
    ],
    "explanations": [
-    "root-signs (procedural): The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip."
+    "root-signs (procedural): The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip.",
+    "pair-product-only (prerequisite): The numbers 1 and 24 multiply to 24 but add to 25, not 10: the pair must give both the product and the sum."
    ],
    "teach": {
     "idea": "If a product is zero, one of its factors is zero.",
     "method": "Factorise x² + px + q = (x − r)(x − s), then each bracket gives a solution."
    },
-   "fingerprint": "1ed69e34",
+   "fingerprint": "8554aafb",
    "validation": {
     "family": "quad",
     "deterministic": {
@@ -428,7 +429,7 @@
     "idea": "y = mx + c gives y for any x: m × x, then add c.",
     "method": "Multiply m by the value of x first, then add (or subtract) c."
    },
-   "fingerprint": "9cf7208c",
+   "fingerprint": "25711a44",
    "validation": {
     "family": "linev",
     "deterministic": {
@@ -483,7 +484,7 @@
     "idea": "Where two graphs meet, their y values are equal.",
     "method": "Try each whole number and compare x × x with the line's value."
    },
-   "fingerprint": "57803318",
+   "fingerprint": "160d13a5",
    "validation": {
     "family": "meet",
     "deterministic": {
@@ -540,7 +541,7 @@
     "idea": "A graph is higher at x when its y value there is larger.",
     "method": "Work out both y values at that x and compare."
    },
-   "fingerprint": "693205a7",
+   "fingerprint": "3cf29737",
    "validation": {
     "family": "above",
     "deterministic": {
@@ -773,13 +774,13 @@
    "explanations": [
     "product-for-sum (conceptual): The two numbers were multiplied for the x term; 8 × 9 is the number at the end, and the x term collects 8x and 9x.",
     "one-cross-term (procedural): Only one of the two middle products was kept; both x × b and a × x give an x term.",
-    "sign-slip (prerequisite): -1 + 9 was worked out without the signs; adding numbers with different signs is a difference."
+    "sign-slip (prerequisite): −1 + 9 was worked out without the signs; adding numbers with different signs is a difference."
    ],
    "teach": {
     "idea": "(x + a)(x + b) has four products; two of them are x terms.",
     "method": "The x coefficient is a + b and the constant is ab."
    },
-   "fingerprint": "b3fbb3a3",
+   "fingerprint": "3b99ba99",
    "validation": {
     "family": "expand",
     "deterministic": {
@@ -1045,7 +1046,7 @@
     "idea": "b² − 4ac decides how many real solutions there are.",
     "method": "Positive: two; zero: one; negative: none."
    },
-   "fingerprint": "024a748d",
+   "fingerprint": "ddb647e1",
    "validation": {
     "family": "disc",
     "deterministic": {
@@ -1348,13 +1349,14 @@
    "explanations": [
     "multiply-both (conceptual): Top and bottom were both multiplied by 9: that gives an equal fraction, not 9 lots of it.",
     "multiply-bottom (procedural): The bottom was multiplied; 9 lots of 11/12 is 9 × 11 pieces of the same size.",
-    "add-whole (conceptual): 9 was added to the top; multiplying means 9 lots."
+    "add-whole (conceptual): 9 was added to the top; multiplying means 9 lots.",
+    "fact-slip-multiply (prerequisite): 9 × 11 was taken as 110, one group of 11 too many: the method was right, the multiplication fact was not."
    ],
    "teach": {
     "idea": "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.",
     "method": "Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7."
    },
-   "fingerprint": "d1bc32fb",
+   "fingerprint": "e77d98e6",
    "validation": {
     "family": "fmulw",
     "deterministic": {
@@ -2254,7 +2256,7 @@
     "idea": "P(A given B) counts only the cases where B happened: B becomes the whole.",
     "method": "Find the group you are told about (the girls), then the fraction of that group with the property (in the chess club)."
    },
-   "fingerprint": "ec04e80a",
+   "fingerprint": "6ed41416",
    "validation": {
     "family": "condp",
     "deterministic": {
@@ -2326,7 +2328,7 @@
      }
     ]
    },
-   "fingerprint": "662a06c7",
+   "fingerprint": "d737e7c0",
    "validation": {
     "family": "cnt",
     "deterministic": {
@@ -2398,7 +2400,7 @@
      }
     ]
    },
-   "fingerprint": "bca40b91",
+   "fingerprint": "84402a19",
    "validation": {
     "family": "addr",
     "deterministic": {
@@ -2617,7 +2619,7 @@
      }
     ]
    },
-   "fingerprint": "1401844e",
+   "fingerprint": "36d02165",
    "validation": {
     "family": "lneg",
     "deterministic": {
@@ -2787,7 +2789,7 @@
      }
     ]
    },
-   "fingerprint": "d396aa3c",
+   "fingerprint": "afec4a37",
    "validation": {
     "family": "aapatn",
     "deterministic": {
@@ -2863,7 +2865,7 @@
      }
     ]
    },
-   "fingerprint": "676e6790",
+   "fingerprint": "0c2c00b7",
    "validation": {
     "family": "aapatu",
     "deterministic": {
@@ -2942,7 +2944,7 @@
      }
     ]
    },
-   "fingerprint": "14102d27",
+   "fingerprint": "ee735614",
    "validation": {
     "family": "aarow",
     "deterministic": {
@@ -3021,7 +3023,7 @@
      }
     ]
    },
-   "fingerprint": "c207ff1a",
+   "fingerprint": "54f5aaf9",
    "validation": {
     "family": "aashelf",
     "deterministic": {
@@ -3101,7 +3103,7 @@
      }
     ]
    },
-   "fingerprint": "afbba65c",
+   "fingerprint": "7f9ca949",
    "validation": {
     "family": "aasolid",
     "deterministic": {
@@ -3142,20 +3144,20 @@
      29
     ]
    ],
-   "poolSize": 300,
+   "poolSize": 246,
    "excluded": [],
    "difficulty": {
-    "1": 41,
-    "2": 96,
-    "3": 163
+    "1": 29,
+    "2": 86,
+    "3": 131
    },
    "examples": [
     "gen:aaflat:2,6,20",
-    "gen:aaflat:2,7,12:mc",
+    "gen:aaflat:2,7,14:mc",
     "gen:aaflat:0,7,4",
-    "gen:aaflat:1,6,20:mc",
-    "gen:aaflat:1,8,2",
-    "gen:aaflat:1,9,26:mc"
+    "gen:aaflat:1,6,13:mc",
+    "gen:aaflat:0,9,17",
+    "gen:aaflat:1,9,13:mc"
    ],
    "explanations": [
     "only-upright (conceptual): Only the triangles pointing up were counted. A triangle is still a triangle when it is turned: it has 3 sides and 3 corners.",
@@ -3178,11 +3180,11 @@
      }
     ]
    },
-   "fingerprint": "6d26e70b",
+   "fingerprint": "a3660d16",
    "validation": {
     "family": "aaflat",
     "deterministic": {
-     "checked": 300,
+     "checked": 246,
      "failures": []
     },
     "property": {
@@ -3258,7 +3260,7 @@
      }
     ]
    },
-   "fingerprint": "bd0afbbd",
+   "fingerprint": "f55bc424",
    "validation": {
     "family": "aacald",
     "deterministic": {
@@ -3333,7 +3335,7 @@
      }
     ]
    },
-   "fingerprint": "c69aa270",
+   "fingerprint": "62a6325f",
    "validation": {
     "family": "aacalc",
     "deterministic": {
@@ -3412,7 +3414,7 @@
      }
     ]
    },
-   "fingerprint": "beebb69f",
+   "fingerprint": "520260c4",
    "validation": {
     "family": "aacalgap",
     "deterministic": {
@@ -3492,7 +3494,7 @@
      }
     ]
    },
-   "fingerprint": "6625fd97",
+   "fingerprint": "06971968",
    "validation": {
     "family": "aacalmo",
     "deterministic": {
@@ -3571,7 +3573,7 @@
      }
     ]
    },
-   "fingerprint": "568056fe",
+   "fingerprint": "8bb044e5",
    "validation": {
     "family": "aalong",
     "deterministic": {
@@ -3727,7 +3729,7 @@
      }
     ]
    },
-   "fingerprint": "9bfd71df",
+   "fingerprint": "d9788937",
    "validation": {
     "family": "aaheavy",
     "deterministic": {
@@ -3848,17 +3850,17 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 101,
-    "2": 98,
-    "3": 101
+    "1": 94,
+    "2": 100,
+    "3": 106
    },
    "examples": [
-    "gen:aacoin:0,41,0",
-    "gen:aacoin:1,21,0:mc",
-    "gen:aacoin:2,20,0",
-    "gen:aacoin:2,40,1:mc",
-    "gen:aacoin:0,41,1",
-    "gen:aacoin:1,21,1:mc"
+    "gen:aacoin:0,40,0",
+    "gen:aacoin:1,18,0:mc",
+    "gen:aacoin:2,18,1",
+    "gen:aacoin:2,37,0:mc",
+    "gen:aacoin:0,40,1",
+    "gen:aacoin:1,19,1:mc"
    ],
    "explanations": [
     "opposite (conceptual): The one worth the most was chosen. Compare the numbers printed on them.",
@@ -3880,7 +3882,7 @@
      }
     ]
    },
-   "fingerprint": "dac4cc1c",
+   "fingerprint": "eeae0b47",
    "validation": {
     "family": "aacoin",
     "deterministic": {
@@ -3920,17 +3922,17 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 112,
-    "2": 47,
-    "3": 141
+    "1": 25,
+    "2": 16,
+    "3": 259
    },
    "examples": [
-    "gen:aamoney:97,0",
-    "gen:aamoney:201,0:mc",
-    "gen:aamoney:103,0",
-    "gen:aamoney:191,0:mc",
-    "gen:aamoney:99,1",
-    "gen:aamoney:207,1:mc"
+    "gen:aamoney:13,0",
+    "gen:aamoney:30,0:mc",
+    "gen:aamoney:20,0",
+    "gen:aamoney:28,0:mc",
+    "gen:aamoney:92,1",
+    "gen:aamoney:185,1:mc"
    ],
    "explanations": [
     "count-coins (conceptual): The coins and notes were counted, one each. Each one is worth the number printed on it.",
@@ -3951,7 +3953,7 @@
      }
     ]
    },
-   "fingerprint": "3ce3bd6d",
+   "fingerprint": "2851e847",
    "validation": {
     "family": "aamoney",
     "deterministic": {
@@ -4026,7 +4028,7 @@
      }
     ]
    },
-   "fingerprint": "b6fdb8b4",
+   "fingerprint": "c87da029",
    "validation": {
     "family": "aamake",
     "deterministic": {
@@ -4101,7 +4103,7 @@
      }
     ]
    },
-   "fingerprint": "45f51635",
+   "fingerprint": "06df4bb5",
    "validation": {
     "family": "aaclip",
     "deterministic": {
@@ -4178,7 +4180,7 @@
      }
     ]
    },
-   "fingerprint": "b4bf8bc7",
+   "fingerprint": "be857943",
    "validation": {
     "family": "aacups",
     "deterministic": {
@@ -4323,7 +4325,7 @@
      }
     ]
    },
-   "fingerprint": "1383cfcd",
+   "fingerprint": "2478e7ca",
    "validation": {
     "family": "aadur",
     "deterministic": {
@@ -4404,7 +4406,7 @@
      }
     ]
    },
-   "fingerprint": "d0ba41c6",
+   "fingerprint": "8f685f8a",
    "validation": {
     "family": "aaadd",
     "deterministic": {
@@ -4476,7 +4478,7 @@
      }
     ]
    },
-   "fingerprint": "187d0a44",
+   "fingerprint": "d34c6f5b",
    "validation": {
     "family": "aabond",
     "deterministic": {
@@ -4623,7 +4625,7 @@
      }
     ]
    },
-   "fingerprint": "5d5a80cb",
+   "fingerprint": "2011984c",
    "validation": {
     "family": "aanext",
     "deterministic": {
@@ -4664,20 +4666,20 @@
      1
     ]
    ],
-   "poolSize": 220,
+   "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 52,
-    "2": 52,
-    "3": 116
+    "1": 82,
+    "2": 82,
+    "3": 136
    },
    "examples": [
-    "gen:aaordn:75,3,0",
-    "gen:aaordn:127,3,0:mc",
-    "gen:aaordn:75,3,1",
-    "gen:aaordn:127,3,1:mc",
-    "gen:aaordn:73,4,0",
-    "gen:aaordn:118,4,1:mc"
+    "gen:aaordn:77,3,0",
+    "gen:aaordn:146,3,0:mc",
+    "gen:aaordn:77,3,1",
+    "gen:aaordn:146,3,1:mc",
+    "gen:aaordn:63,4,0",
+    "gen:aaordn:129,4,0:mc"
    ],
    "explanations": [
     "reversed (procedural): The order was turned round. Start with the biggest number.",
@@ -4698,11 +4700,11 @@
      }
     ]
    },
-   "fingerprint": "7b3ac989",
+   "fingerprint": "2402136d",
    "validation": {
     "family": "aaordn",
     "deterministic": {
-     "checked": 220,
+     "checked": 300,
      "failures": []
     },
     "property": {
@@ -4779,7 +4781,7 @@
      }
     ]
    },
-   "fingerprint": "abadf122",
+   "fingerprint": "fe301eaa",
    "validation": {
     "family": "aatens",
     "deterministic": {
@@ -4851,7 +4853,7 @@
      }
     ]
    },
-   "fingerprint": "c709ada7",
+   "fingerprint": "09e3d9f2",
    "validation": {
     "family": "aadigit",
     "deterministic": {
@@ -4921,7 +4923,7 @@
      }
     ]
    },
-   "fingerprint": "2cfe8b9d",
+   "fingerprint": "c55e2a5d",
    "validation": {
     "family": "aagreat",
     "deterministic": {
@@ -4989,7 +4991,7 @@
      }
     ]
    },
-   "fingerprint": "77d3d428",
+   "fingerprint": "f51d94df",
    "validation": {
     "family": "aaword",
     "deterministic": {
@@ -5070,7 +5072,7 @@
      }
     ]
    },
-   "fingerprint": "d1bd26a2",
+   "fingerprint": "ce233fd8",
    "validation": {
     "family": "aasub",
     "deterministic": {
@@ -5150,7 +5152,7 @@
      }
     ]
    },
-   "fingerprint": "54bf91fe",
+   "fingerprint": "4a55072b",
    "validation": {
     "family": "aamore",
     "deterministic": {
@@ -5219,7 +5221,7 @@
      }
     ]
    },
-   "fingerprint": "b51bbe81",
+   "fingerprint": "7f6fbe00",
    "validation": {
     "family": "aazero",
     "deterministic": {
@@ -5304,7 +5306,7 @@
      }
     ]
    },
-   "fingerprint": "baa246ca",
+   "fingerprint": "aa892d3c",
    "validation": {
     "family": "absort",
     "deterministic": {
@@ -5390,7 +5392,7 @@
      }
     ]
    },
-   "fingerprint": "c41975cf",
+   "fingerprint": "d8965f49",
    "validation": {
     "family": "abpic",
     "deterministic": {
@@ -5478,7 +5480,7 @@
      }
     ]
    },
-   "fingerprint": "67af4f53",
+   "fingerprint": "cb1b2429",
    "validation": {
     "family": "abpicmore",
     "deterministic": {
@@ -5554,7 +5556,7 @@
      }
     ]
    },
-   "fingerprint": "eb26873e",
+   "fingerprint": "5ebb2649",
    "validation": {
     "family": "abseq",
     "deterministic": {
@@ -5633,7 +5635,7 @@
      }
     ]
    },
-   "fingerprint": "c89e2b21",
+   "fingerprint": "acff1eea",
    "validation": {
     "family": "abmiss",
     "deterministic": {
@@ -5705,7 +5707,7 @@
      }
     ]
    },
-   "fingerprint": "3fbde83f",
+   "fingerprint": "6d8c837f",
    "validation": {
     "family": "abline",
     "deterministic": {
@@ -5785,7 +5787,7 @@
      }
     ]
    },
-   "fingerprint": "bcca66d2",
+   "fingerprint": "e93c17ad",
    "validation": {
     "family": "abgrid",
     "deterministic": {
@@ -5951,7 +5953,7 @@
      }
     ]
    },
-   "fingerprint": "cbad8e4f",
+   "fingerprint": "414fc773",
    "validation": {
     "family": "abside",
     "deterministic": {
@@ -6026,7 +6028,7 @@
      }
     ]
    },
-   "fingerprint": "ada1079f",
+   "fingerprint": "ff7be260",
    "validation": {
     "family": "abroll",
     "deterministic": {
@@ -6106,7 +6108,7 @@
      }
     ]
    },
-   "fingerprint": "a451c102",
+   "fingerprint": "960677ce",
    "validation": {
     "family": "absolid",
     "deterministic": {
@@ -6178,7 +6180,7 @@
      }
     ]
    },
-   "fingerprint": "90805f23",
+   "fingerprint": "3a7f619f",
    "validation": {
     "family": "absym",
     "deterministic": {
@@ -6264,7 +6266,7 @@
      }
     ]
    },
-   "fingerprint": "a2bcb02b",
+   "fingerprint": "6c0e2925",
    "validation": {
     "family": "abcup",
     "deterministic": {
@@ -6343,7 +6345,7 @@
      }
     ]
    },
-   "fingerprint": "155ca855",
+   "fingerprint": "66d7f85e",
    "validation": {
     "family": "abjug",
     "deterministic": {
@@ -6487,7 +6489,7 @@
      }
     ]
    },
-   "fingerprint": "6a2e7c84",
+   "fingerprint": "0f72b397",
    "validation": {
     "family": "abchange",
     "deterministic": {
@@ -6571,7 +6573,7 @@
      }
     ]
    },
-   "fingerprint": "07d29543",
+   "fingerprint": "4a80c104",
    "validation": {
     "family": "abneed",
     "deterministic": {
@@ -6643,7 +6645,7 @@
      }
     ]
    },
-   "fingerprint": "7cc3b8af",
+   "fingerprint": "821430a5",
    "validation": {
     "family": "ablen",
     "deterministic": {
@@ -6727,7 +6729,7 @@
      }
     ]
    },
-   "fingerprint": "6f22fcfd",
+   "fingerprint": "fc082782",
    "validation": {
     "family": "abkg",
     "deterministic": {
@@ -6800,7 +6802,7 @@
      }
     ]
    },
-   "fingerprint": "efbd25d4",
+   "fingerprint": "647cd01c",
    "validation": {
     "family": "abgroup",
     "deterministic": {
@@ -6876,7 +6878,7 @@
      }
     ]
    },
-   "fingerprint": "daf624ea",
+   "fingerprint": "e5b86113",
    "validation": {
     "family": "abhto",
     "deterministic": {
@@ -6951,7 +6953,7 @@
      }
     ]
    },
-   "fingerprint": "c6165aac",
+   "fingerprint": "e22f2f2d",
    "validation": {
     "family": "abreg",
     "deterministic": {
@@ -7032,7 +7034,7 @@
      }
     ]
    },
-   "fingerprint": "1b34bb65",
+   "fingerprint": "e09284df",
    "validation": {
     "family": "acaddten",
     "deterministic": {
@@ -7104,7 +7106,7 @@
      }
     ]
    },
-   "fingerprint": "e8144b0a",
+   "fingerprint": "27ca69a4",
    "validation": {
     "family": "acpart",
     "deterministic": {
@@ -7179,7 +7181,7 @@
      }
     ]
    },
-   "fingerprint": "72b46731",
+   "fingerprint": "33d32c73",
    "validation": {
     "family": "acnlpos",
     "deterministic": {
@@ -7260,7 +7262,7 @@
      }
     ]
    },
-   "fingerprint": "0de9e841",
+   "fingerprint": "1dc2fc43",
    "validation": {
     "family": "acnljump",
     "deterministic": {
@@ -7331,7 +7333,7 @@
      }
     ]
    },
-   "fingerprint": "64ed82d0",
+   "fingerprint": "104df0b8",
    "validation": {
     "family": "acnlbetween",
     "deterministic": {
@@ -7411,7 +7413,7 @@
      }
     ]
    },
-   "fingerprint": "6994aba3",
+   "fingerprint": "792c0558",
    "validation": {
     "family": "acshare",
     "deterministic": {
@@ -7483,7 +7485,7 @@
      }
     ]
    },
-   "fingerprint": "fac3066c",
+   "fingerprint": "595c33e9",
    "validation": {
     "family": "acsub2",
     "deterministic": {
@@ -7554,7 +7556,7 @@
      }
     ]
    },
-   "fingerprint": "0f67ada9",
+   "fingerprint": "cde8afcb",
    "validation": {
     "family": "acsub3",
     "deterministic": {
@@ -7630,7 +7632,7 @@
      }
     ]
    },
-   "fingerprint": "d9d4e450",
+   "fingerprint": "66204712",
    "validation": {
     "family": "achalf",
     "deterministic": {
@@ -7709,7 +7711,7 @@
      }
     ]
    },
-   "fingerprint": "889cf072",
+   "fingerprint": "53c1ccdc",
    "validation": {
     "family": "achalfof",
     "deterministic": {
@@ -7789,7 +7791,7 @@
      }
     ]
    },
-   "fingerprint": "cf8e7794",
+   "fingerprint": "e47d8f60",
    "validation": {
     "family": "acstory",
     "deterministic": {
@@ -7864,7 +7866,7 @@
      }
     ]
    },
-   "fingerprint": "da69587e",
+   "fingerprint": "33af547e",
    "validation": {
     "family": "acpict",
     "deterministic": {
@@ -7940,7 +7942,7 @@
      }
     ]
    },
-   "fingerprint": "484e2f94",
+   "fingerprint": "bc226c0b",
    "validation": {
     "family": "acpictmore",
     "deterministic": {
@@ -8020,7 +8022,7 @@
      }
     ]
    },
-   "fingerprint": "1720f289",
+   "fingerprint": "58a8e351",
    "validation": {
     "family": "acbalance",
     "deterministic": {
@@ -8097,7 +8099,7 @@
      }
     ]
    },
-   "fingerprint": "f6ddd193",
+   "fingerprint": "280393cf",
    "validation": {
     "family": "acmissing",
     "deterministic": {
@@ -8173,7 +8175,7 @@
      }
     ]
    },
-   "fingerprint": "619dcb89",
+   "fingerprint": "73b33e90",
    "validation": {
     "family": "acgrow",
     "deterministic": {
@@ -8244,7 +8246,7 @@
      }
     ]
    },
-   "fingerprint": "09e952e2",
+   "fingerprint": "3c4bcbf4",
    "validation": {
     "family": "acsticks",
     "deterministic": {
@@ -8320,7 +8322,7 @@
      }
     ]
    },
-   "fingerprint": "00807db3",
+   "fingerprint": "32c9fa25",
    "validation": {
     "family": "aclines",
     "deterministic": {
@@ -8396,7 +8398,7 @@
      }
     ]
    },
-   "fingerprint": "318caa54",
+   "fingerprint": "8a7b52d7",
    "validation": {
     "family": "actile",
     "deterministic": {
@@ -8472,7 +8474,7 @@
      }
     ]
    },
-   "fingerprint": "c7a60936",
+   "fingerprint": "9e648f66",
    "validation": {
     "family": "acelapsed",
     "deterministic": {
@@ -8549,7 +8551,7 @@
      }
     ]
    },
-   "fingerprint": "7c751181",
+   "fingerprint": "9cb7f048",
    "validation": {
     "family": "acmcm",
     "deterministic": {
@@ -8626,7 +8628,7 @@
      }
     ]
    },
-   "fingerprint": "94e9f01e",
+   "fingerprint": "5a655ad5",
    "validation": {
     "family": "acpaise",
     "deterministic": {
@@ -8788,7 +8790,7 @@
      }
     ]
    },
-   "fingerprint": "6f84f7d3",
+   "fingerprint": "16e058a3",
    "validation": {
     "family": "adperim",
     "deterministic": {
@@ -8864,7 +8866,7 @@
      }
     ]
    },
-   "fingerprint": "e7faa9bb",
+   "fingerprint": "b1421631",
    "validation": {
     "family": "admper",
     "deterministic": {
@@ -8936,7 +8938,7 @@
      }
     ]
    },
-   "fingerprint": "6299414e",
+   "fingerprint": "8212fa78",
    "validation": {
     "family": "adhmin",
     "deterministic": {
@@ -9080,7 +9082,7 @@
      }
     ]
    },
-   "fingerprint": "87af3b3a",
+   "fingerprint": "d61b2378",
    "validation": {
     "family": "adsec",
     "deterministic": {
@@ -9332,7 +9334,7 @@
      }
     ]
    },
-   "fingerprint": "f64d6044",
+   "fingerprint": "768e3f28",
    "validation": {
     "family": "adfname",
     "deterministic": {
@@ -9409,7 +9411,7 @@
      }
     ]
    },
-   "fingerprint": "8216f14b",
+   "fingerprint": "56f26ddc",
    "validation": {
     "family": "adfbuild",
     "deterministic": {
@@ -9485,7 +9487,7 @@
      }
     ]
    },
-   "fingerprint": "a10d9227",
+   "fingerprint": "6da2bf93",
    "validation": {
     "family": "adfcol",
     "deterministic": {
@@ -9562,7 +9564,7 @@
      }
     ]
    },
-   "fingerprint": "8ddc4c9b",
+   "fingerprint": "527e5f6d",
    "validation": {
     "family": "adfmeas",
     "deterministic": {
@@ -9621,12 +9623,12 @@
    "explanations": [
     "no-carry (conceptual): A ten (or a hundred) made in one column was not carried to the next column.",
     "first-carry-forgotten (procedural): The hundred was carried, but the ten carried from the ones was forgotten in the tens column. Add every carried 1 to the next column.",
-    "smaller-from-larger (conceptual): In each column the smaller digit was taken from the larger one. When the top digit is smaller, take a ten from the next column first.",
-    "borrow-not-taken (procedural): A ten was borrowed, but the column it came from was not made one less."
+    "smaller-from-larger (conceptual): In each column the smaller digit was taken from the larger one. When the top digit is smaller, regroup first: exchange 1 ten from the next column for 10 ones.",
+    "borrow-not-taken (procedural): A ten (or a hundred) was exchanged for 10 ones (or 10 tens), but the column it came from was not made one less. When you regroup, the next column gives one away, so it goes down by 1."
    ],
    "teach": {
     "idea": "Ten ones make a ten and ten tens make a hundred, so a column that gets too big passes a ten (or a hundred) on, and a column that is too small can break one from the next column.",
-    "method": "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, carrying or borrowing as you go. Check with an estimate.",
+    "method": "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go: carry a ten when adding, exchange a ten for 10 ones when subtracting. Check with an estimate.",
     "alternatives": [
      {
       "id": "jumps",
@@ -9639,7 +9641,7 @@
      }
     ]
    },
-   "fingerprint": "6604886a",
+   "fingerprint": "b3520fe1",
    "validation": {
     "family": "adcol3",
     "deterministic": {
@@ -9720,7 +9722,7 @@
      }
     ]
    },
-   "fingerprint": "4a2fdbb3",
+   "fingerprint": "e8e53aac",
    "validation": {
     "family": "adexp",
     "deterministic": {
@@ -9788,7 +9790,7 @@
      }
     ]
    },
-   "fingerprint": "19a08423",
+   "fingerprint": "404306ef",
    "validation": {
     "family": "ad1000",
     "deterministic": {
@@ -9859,7 +9861,7 @@
      }
     ]
    },
-   "fingerprint": "b9ee1384",
+   "fingerprint": "f19fd2ae",
    "validation": {
     "family": "adbetw",
     "deterministic": {
@@ -9935,7 +9937,7 @@
      }
     ]
    },
-   "fingerprint": "d70476d4",
+   "fingerprint": "744e6d05",
    "validation": {
     "family": "adest",
     "deterministic": {
@@ -9980,20 +9982,20 @@
      1
     ]
    ],
-   "poolSize": 450,
+   "poolSize": 448,
    "excluded": [],
    "difficulty": {
-    "1": 51,
-    "2": 283,
-    "3": 116
+    "1": 56,
+    "2": 280,
+    "3": 112
    },
    "examples": [
-    "gen:adbar:1,10,0,0",
-    "gen:adbar:2,23,0,0:mc",
-    "gen:adbar:1,11,2,0",
-    "gen:adbar:2,20,1,0:mc",
-    "gen:adbar:1,13,2,1",
-    "gen:adbar:2,19,3,1:mc"
+    "gen:adbar:1,0,0,0",
+    "gen:adbar:2,8,0,0:mc",
+    "gen:adbar:1,0,2,0",
+    "gen:adbar:2,8,1,0:mc",
+    "gen:adbar:1,0,3,1",
+    "gen:adbar:2,8,2,1:mc"
    ],
    "explanations": [
     "next-bar (procedural): The bar next to the one asked about was read. Find the label first, then go straight up its bar.",
@@ -10018,11 +10020,11 @@
      }
     ]
    },
-   "fingerprint": "3e7977b2",
+   "fingerprint": "5a999ba5",
    "validation": {
     "family": "adbar",
     "deterministic": {
-     "checked": 450,
+     "checked": 448,
      "failures": []
     },
     "property": {
@@ -10059,28 +10061,28 @@
      2
     ]
    ],
-   "poolSize": 336,
+   "poolSize": 270,
    "excluded": [],
    "difficulty": {
-    "1": 62,
-    "2": 50,
-    "3": 224
+    "1": 32,
+    "2": 58,
+    "3": 180
    },
    "examples": [
-    "gen:adtally:1,9,0",
+    "gen:adtally:1,5,0",
     "gen:adtally:2,22,0:mc",
-    "gen:adtally:1,7,0",
-    "gen:adtally:2,17,0:mc",
-    "gen:adtally:1,9,1",
-    "gen:adtally:2,19,2:mc"
+    "gen:adtally:1,0,0",
+    "gen:adtally:2,21,0:mc",
+    "gen:adtally:1,4,1",
+    "gen:adtally:2,22,1:mc"
    ],
    "explanations": [
+    "bundle-as-one (conceptual): Each bundle ||||/ was counted as 1 instead of 5.",
+    "bundle-as-four (conceptual): Only the four upright marks of each bundle were counted. The line across is the fifth mark.",
     "wrong-row (procedural): The marks in another row were counted. Find the right row first.",
     "missed-row (procedural): One row was left out of the total. Add every row.",
-    "bundle-as-one (conceptual): Each bundle ||||/ was counted as 1 instead of 5.",
     "added (conceptual): The two rows were added. 'How many more' asks for the difference.",
-    "one-row (procedural): Only one row was counted. Subtract the smaller count from the larger.",
-    "bundle-as-four (conceptual): Only the four upright marks of each bundle were counted. The line across is the fifth mark."
+    "one-row (procedural): Only one row was counted. Subtract the smaller count from the larger."
    ],
    "teach": {
     "idea": "Tally marks record one mark for each thing counted; every fifth mark crosses the four before it, so the marks come in easy bundles of 5.",
@@ -10097,11 +10099,11 @@
      }
     ]
    },
-   "fingerprint": "3ca78fb3",
+   "fingerprint": "e238bfa5",
    "validation": {
     "family": "adtally",
     "deterministic": {
-     "checked": 336,
+     "checked": 270,
      "failures": []
     },
     "property": {
@@ -10184,7 +10186,7 @@
      }
     ]
    },
-   "fingerprint": "52aff32f",
+   "fingerprint": "cc8e0a16",
    "validation": {
     "family": "adtwo",
     "deterministic": {
@@ -10260,7 +10262,7 @@
      }
     ]
    },
-   "fingerprint": "aa0599e8",
+   "fingerprint": "ad197f8e",
    "validation": {
     "family": "aepat",
     "deterministic": {
@@ -10336,7 +10338,7 @@
      }
     ]
    },
-   "fingerprint": "3b6dfcc5",
+   "fingerprint": "c61270ba",
    "validation": {
     "family": "aehund",
     "deterministic": {
@@ -10419,7 +10421,7 @@
      }
     ]
    },
-   "fingerprint": "ccb100ca",
+   "fingerprint": "edfe92e3",
    "validation": {
     "family": "aeang",
     "deterministic": {
@@ -10491,7 +10493,7 @@
      }
     ]
    },
-   "fingerprint": "35f40be0",
+   "fingerprint": "99e70959",
    "validation": {
     "family": "aeturn",
     "deterministic": {
@@ -10563,7 +10565,7 @@
      }
     ]
    },
-   "fingerprint": "1144e4a8",
+   "fingerprint": "b590a157",
    "validation": {
     "family": "aecirc",
     "deterministic": {
@@ -10635,7 +10637,7 @@
      }
     ]
    },
-   "fingerprint": "805503c5",
+   "fingerprint": "0b188708",
    "validation": {
     "family": "aesym",
     "deterministic": {
@@ -11006,12 +11008,12 @@
     "gen:aeel24:15,2,22,1:mc"
    ],
    "explanations": [
-    "subtract-as-number (conceptual): The times were subtracted like ordinary numbers, borrowing 100 minutes; an hour has only 60 minutes.",
+    "subtract-as-number (conceptual): The times were subtracted like ordinary numbers, so 1 hour was exchanged for 100 minutes. An hour has only 60 minutes: when you regroup, change 1 hour into 60 minutes.",
     "smaller-from-larger (procedural): The smaller number of minutes was taken from the larger one; when the end minutes are fewer, change 1 hour into 60 minutes first.",
     "hours-only (procedural): Only the hours were counted and the minutes were left out."
    ],
    "teach": {
-    "idea": "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times you borrow 60 minutes, not 100.",
+    "idea": "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times and need to regroup, 1 hour is exchanged for 60 minutes, not 100.",
     "method": "Count on from the start to the next full hour, then the full hours, then the minutes to the end time, and add them up.",
     "alternatives": [
      {
@@ -11025,7 +11027,7 @@
      }
     ]
    },
-   "fingerprint": "d950bc63",
+   "fingerprint": "dbe283c6",
    "validation": {
     "family": "aeel24",
     "deterministic": {
@@ -11097,7 +11099,7 @@
      }
     ]
    },
-   "fingerprint": "9fd9aabc",
+   "fingerprint": "a5785132",
    "validation": {
     "family": "aearea",
     "deterministic": {
@@ -11177,7 +11179,7 @@
      }
     ]
    },
-   "fingerprint": "dac8d438",
+   "fingerprint": "0c081534",
    "validation": {
     "family": "aeperar",
     "deterministic": {
@@ -11411,7 +11413,7 @@
      }
     ]
    },
-   "fingerprint": "f663dfc1",
+   "fingerprint": "2b97851d",
    "validation": {
     "family": "aeconv",
     "deterministic": {
@@ -11487,7 +11489,7 @@
      }
     ]
    },
-   "fingerprint": "7ff07148",
+   "fingerprint": "9cccd73f",
    "validation": {
     "family": "aeparts",
     "deterministic": {
@@ -11788,7 +11790,7 @@
      }
     ]
    },
-   "fingerprint": "e38ab0e1",
+   "fingerprint": "f0943795",
    "validation": {
     "family": "aeind",
     "deterministic": {
@@ -11926,7 +11928,7 @@
      }
     ]
    },
-   "fingerprint": "d7d373e4",
+   "fingerprint": "aa942806",
    "validation": {
     "family": "aep10",
     "deterministic": {
@@ -12002,7 +12004,7 @@
      }
     ]
    },
-   "fingerprint": "26ae0088",
+   "fingerprint": "1bac875a",
    "validation": {
     "family": "aemult",
     "deterministic": {
@@ -12074,7 +12076,7 @@
      }
     ]
    },
-   "fingerprint": "6f46f36d",
+   "fingerprint": "a2963ce0",
    "validation": {
     "family": "aeround",
     "deterministic": {
@@ -12154,7 +12156,7 @@
      }
     ]
    },
-   "fingerprint": "02cbe9de",
+   "fingerprint": "263655ab",
    "validation": {
     "family": "aeest",
     "deterministic": {
@@ -12238,7 +12240,7 @@
      }
     ]
    },
-   "fingerprint": "dc4b98e9",
+   "fingerprint": "40414d4f",
    "validation": {
     "family": "aeshop",
     "deterministic": {
@@ -12310,7 +12312,7 @@
      }
     ]
    },
-   "fingerprint": "8f2f947f",
+   "fingerprint": "e00ecde5",
    "validation": {
     "family": "aedrip",
     "deterministic": {
@@ -12373,13 +12375,13 @@
    "explanations": [
     "carry-forgotten (procedural): The ten carried from the column on the right was forgotten. When a column adds up to 10 or more, 1 goes to the next column.",
     "add-not-undo (conceptual): To find a missing part of an addition, take the other number away from the total; the digits were added instead.",
-    "borrow-forgotten (procedural): The ten borrowed by the column on the right was not taken off this column.",
+    "borrow-forgotten (procedural): The column on the right was regrouped (1 from this column was exchanged for 10 there), but this column was not made one less.",
     "subtract-not-undo (conceptual): To find the first number of a subtraction, add the answer and the number taken away; the digits were subtracted instead.",
-    "smaller-from-larger (conceptual): In that column the smaller digit was taken from the larger one. When the top digit is smaller, borrow a ten from the next column."
+    "smaller-from-larger (conceptual): In that column the smaller digit was taken from the larger one. When the top digit is smaller, regroup first: exchange 1 from the next column on the left for 10 in this column."
    ],
    "teach": {
-    "idea": "A sum or difference is a true sentence, so each column must work out, including any ten carried or borrowed from the column on its right.",
-    "method": "Start from the ones column and move left. In each column, note whether a ten is carried (addition) or borrowed (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation.",
+    "idea": "A sum or difference is a true sentence, so each column must work out, including any regrouping with the column on its right (a ten carried in, or 1 exchanged for 10 ones).",
+    "method": "Start from the ones column and move left. In each column, note whether the column regroups: a ten carried (addition) or 1 exchanged for 10 in the column on the right (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation.",
     "alternatives": [
      {
       "id": "try_digits",
@@ -12401,7 +12403,7 @@
      }
     ]
    },
-   "fingerprint": "2a861641",
+   "fingerprint": "44a810ed",
    "validation": {
     "family": "afmissd",
     "deterministic": {
@@ -12477,7 +12479,7 @@
      }
     ]
    },
-   "fingerprint": "e24937a4",
+   "fingerprint": "1321243b",
    "validation": {
     "family": "afnim",
     "deterministic": {
@@ -12562,7 +12564,7 @@
      }
     ]
    },
-   "fingerprint": "ef6a803d",
+   "fingerprint": "53943e1a",
    "validation": {
     "family": "afcount",
     "deterministic": {
@@ -12646,7 +12648,7 @@
      }
     ]
    },
-   "fingerprint": "807d444f",
+   "fingerprint": "c923f744",
    "validation": {
     "family": "afdigits",
     "deterministic": {
@@ -12726,7 +12728,7 @@
      }
     ]
    },
-   "fingerprint": "66162395",
+   "fingerprint": "7a248212",
    "validation": {
     "family": "afpie",
     "deterministic": {
@@ -12803,7 +12805,7 @@
      }
     ]
    },
-   "fingerprint": "9da94b63",
+   "fingerprint": "155f057f",
    "validation": {
     "family": "afpieang",
     "deterministic": {
@@ -12880,7 +12882,7 @@
      }
     ]
    },
-   "fingerprint": "4baebf94",
+   "fingerprint": "b23edff0",
    "validation": {
     "family": "afbar",
     "deterministic": {
@@ -13112,7 +13114,7 @@
      }
     ]
    },
-   "fingerprint": "ceac48eb",
+   "fingerprint": "94ffd047",
    "validation": {
     "family": "affig",
     "deterministic": {
@@ -13189,7 +13191,7 @@
      }
     ]
    },
-   "fingerprint": "70363526",
+   "fingerprint": "f357f46a",
    "validation": {
     "family": "affigrel",
     "deterministic": {
@@ -13261,7 +13263,7 @@
      }
     ]
    },
-   "fingerprint": "50f9667d",
+   "fingerprint": "36616e70",
    "validation": {
     "family": "afprot",
     "deterministic": {
@@ -13332,7 +13334,7 @@
      }
     ]
    },
-   "fingerprint": "1a14774f",
+   "fingerprint": "f405ad09",
    "validation": {
     "family": "afpair",
     "deterministic": {
@@ -13406,7 +13408,7 @@
      }
     ]
    },
-   "fingerprint": "65fc8f34",
+   "fingerprint": "a97ddf02",
    "validation": {
     "family": "afcross",
     "deterministic": {
@@ -13482,7 +13484,7 @@
      }
     ]
    },
-   "fingerprint": "95c9d87d",
+   "fingerprint": "2d0bc158",
    "validation": {
     "family": "afturn",
     "deterministic": {
@@ -13554,7 +13556,7 @@
      }
     ]
    },
-   "fingerprint": "9e907b0b",
+   "fingerprint": "796462d3",
    "validation": {
     "family": "afclock",
     "deterministic": {
@@ -13634,7 +13636,7 @@
      }
     ]
    },
-   "fingerprint": "9ef42df8",
+   "fingerprint": "a447ad0b",
    "validation": {
     "family": "affrac",
     "deterministic": {
@@ -13731,7 +13733,7 @@
      }
     ]
    },
-   "fingerprint": "af418c2c",
+   "fingerprint": "bd835f7b",
    "validation": {
     "family": "afsolid",
     "deterministic": {
@@ -13812,7 +13814,7 @@
      }
     ]
    },
-   "fingerprint": "7723ef44",
+   "fingerprint": "e3ce9010",
    "validation": {
     "family": "afpaint",
     "deterministic": {
@@ -13888,7 +13890,7 @@
      }
     ]
    },
-   "fingerprint": "5a4d6e3f",
+   "fingerprint": "a74e1306",
    "validation": {
     "family": "afquad",
     "deterministic": {
@@ -13966,7 +13968,7 @@
      }
     ]
    },
-   "fingerprint": "046f55d9",
+   "fingerprint": "b61e53e8",
    "validation": {
     "family": "afpara",
     "deterministic": {
@@ -14049,7 +14051,7 @@
      }
     ]
    },
-   "fingerprint": "5fb1ca22",
+   "fingerprint": "310d594e",
    "validation": {
     "family": "afrot",
     "deterministic": {
@@ -14123,7 +14125,7 @@
      }
     ]
    },
-   "fingerprint": "a90aeb97",
+   "fingerprint": "d79d0aa0",
    "validation": {
     "family": "aftri",
     "deterministic": {
@@ -14196,7 +14198,7 @@
      }
     ]
    },
-   "fingerprint": "5e03f4a5",
+   "fingerprint": "fe23c256",
    "validation": {
     "family": "aftris",
     "deterministic": {
@@ -14279,7 +14281,7 @@
      }
     ]
    },
-   "fingerprint": "8286429d",
+   "fingerprint": "f13a1e09",
    "validation": {
     "family": "afapr",
     "deterministic": {
@@ -14356,7 +14358,7 @@
      }
     ]
    },
-   "fingerprint": "483b627a",
+   "fingerprint": "293f1248",
    "validation": {
     "family": "agspd",
     "deterministic": {
@@ -14436,7 +14438,7 @@
      }
     ]
    },
-   "fingerprint": "d69ad7b5",
+   "fingerprint": "f93d14d8",
    "validation": {
     "family": "agspdc",
     "deterministic": {
@@ -14896,7 +14898,7 @@
      }
     ]
    },
-   "fingerprint": "436d218b",
+   "fingerprint": "fca8fa06",
    "validation": {
     "family": "aglcm",
     "deterministic": {
@@ -14981,7 +14983,7 @@
      }
     ]
    },
-   "fingerprint": "4db40bf4",
+   "fingerprint": "71221d81",
    "validation": {
     "family": "aghcf3",
     "deterministic": {
@@ -15221,7 +15223,7 @@
      }
     ]
    },
-   "fingerprint": "f6177f71",
+   "fingerprint": "31ed6df1",
    "validation": {
     "family": "agbod",
     "deterministic": {
@@ -15478,26 +15480,26 @@
     ],
     [
      0,
-     29
+     49
     ]
    ],
-   "poolSize": 120,
+   "poolSize": 200,
    "excluded": [],
    "difficulty": {
-    "1": 60,
-    "2": 30,
-    "3": 30
+    "1": 100,
+    "2": 50,
+    "3": 50
    },
    "examples": [
-    "gen:agcex:0,20",
-    "gen:agcex:3,10:mc",
-    "gen:agcex:2,10",
-    "gen:agcex:2,20:mc",
-    "gen:agcex:1,10",
-    "gen:agcex:1,20:mc"
+    "gen:agcex:0,33",
+    "gen:agcex:3,16:mc",
+    "gen:agcex:2,16",
+    "gen:agcex:2,33:mc",
+    "gen:agcex:1,16",
+    "gen:agcex:1,33:mc"
    ],
    "explanations": [
-    "confirming-example (conceptual): 21 agrees with the claim, so it does not show the claim is wrong. To show a claim is not always true, find ONE number where it fails."
+    "confirming-example (conceptual): 9 agrees with the claim, so it does not show the claim is wrong. To show a claim is not always true, find ONE number where it fails."
    ],
    "teach": {
     "idea": "A claim that says 'every' must work for ALL numbers. One number where it fails, a counterexample, is enough to show it is not always true; numbers where it works never prove it.",
@@ -15514,11 +15516,11 @@
      }
     ]
    },
-   "fingerprint": "4effaff4",
+   "fingerprint": "b73d1d31",
    "validation": {
     "family": "agcex",
     "deterministic": {
-     "checked": 120,
+     "checked": 200,
      "failures": []
     },
     "property": {
@@ -15599,7 +15601,7 @@
      }
     ]
    },
-   "fingerprint": "a3c0bcb7",
+   "fingerprint": "3277e5f5",
    "validation": {
     "family": "ahone",
     "deterministic": {
@@ -15688,7 +15690,7 @@
      }
     ]
    },
-   "fingerprint": "ba41600d",
+   "fingerprint": "41ca846a",
    "validation": {
     "family": "ahlike",
     "deterministic": {
@@ -15777,7 +15779,7 @@
      }
     ]
    },
-   "fingerprint": "82f85c9c",
+   "fingerprint": "5113f270",
    "validation": {
     "family": "ahsub",
     "deterministic": {
@@ -15861,7 +15863,7 @@
      }
     ]
    },
-   "fingerprint": "d3ba0869",
+   "fingerprint": "733a4c3e",
    "validation": {
     "family": "ahcoef",
     "deterministic": {
@@ -16336,7 +16338,7 @@
    ],
    "explanations": [
     "off-by-one (procedural): The terms were miscounted by one. Number each term as you write it: term 1 is the first number given.",
-    "arithmetic (conceptual): The sequence was treated as adding -2 each time. Here each term is the sum of the two before it, so the jumps grow."
+    "arithmetic (conceptual): The sequence was treated as adding −2 each time. Here each term is the sum of the two before it, so the jumps grow."
    ],
    "teach": {
     "idea": "Each new term is made from the two terms before it, so you must keep the last two terms in view as you go.",
@@ -16362,7 +16364,7 @@
      }
     ]
    },
-   "fingerprint": "9fc7ee98",
+   "fingerprint": "52fc8197",
    "validation": {
     "family": "ahfib",
     "deterministic": {
@@ -16447,7 +16449,7 @@
      }
     ]
    },
-   "fingerprint": "1b0c1f35",
+   "fingerprint": "f6066ef7",
    "validation": {
     "family": "ahinv",
     "deterministic": {
@@ -16519,7 +16521,7 @@
      }
     ]
    },
-   "fingerprint": "7e6ffe86",
+   "fingerprint": "38d0fb18",
    "validation": {
     "family": "ahwork",
     "deterministic": {
@@ -16608,7 +16610,7 @@
      }
     ]
    },
-   "fingerprint": "765c53db",
+   "fingerprint": "b5786ee6",
    "validation": {
     "family": "ahfrac",
     "deterministic": {
@@ -16688,7 +16690,7 @@
      }
     ]
    },
-   "fingerprint": "f58cd10d",
+   "fingerprint": "35789b00",
    "validation": {
     "family": "ahboth",
     "deterministic": {
@@ -16838,7 +16840,7 @@
      }
     ]
    },
-   "fingerprint": "5191342c",
+   "fingerprint": "c8cc574a",
    "validation": {
     "family": "ahquad",
     "deterministic": {
@@ -16998,7 +17000,7 @@
      }
     ]
    },
-   "fingerprint": "7541d27d",
+   "fingerprint": "c6517f26",
    "validation": {
     "family": "ahtri",
     "deterministic": {
@@ -17076,7 +17078,7 @@
      }
     ]
    },
-   "fingerprint": "79f64474",
+   "fingerprint": "6a05ef9c",
    "validation": {
     "family": "ahext",
     "deterministic": {
@@ -17149,7 +17151,7 @@
      }
     ]
    },
-   "fingerprint": "833a1b4b",
+   "fingerprint": "548ebe48",
    "validation": {
     "family": "ahiso",
     "deterministic": {
@@ -17225,7 +17227,7 @@
      }
     ]
    },
-   "fingerprint": "c17cc61d",
+   "fingerprint": "89cb615b",
    "validation": {
     "family": "ahineq",
     "deterministic": {
@@ -17320,7 +17322,7 @@
      }
     ]
    },
-   "fingerprint": "ecf31e0e",
+   "fingerprint": "149844c8",
    "validation": {
     "family": "ahcong",
     "deterministic": {
@@ -17400,7 +17402,7 @@
      }
     ]
    },
-   "fingerprint": "4859d054",
+   "fingerprint": "7af72054",
    "validation": {
     "family": "ahpar",
     "deterministic": {
@@ -17484,7 +17486,7 @@
      }
     ]
    },
-   "fingerprint": "0e4a0560",
+   "fingerprint": "d73ba12c",
    "validation": {
     "family": "ahparx",
     "deterministic": {
@@ -17569,7 +17571,7 @@
      }
     ]
    },
-   "fingerprint": "3b85ac04",
+   "fingerprint": "2ff67d44",
    "validation": {
     "family": "ahpyth",
     "deterministic": {
@@ -17662,7 +17664,7 @@
      }
     ]
    },
-   "fingerprint": "affabe41",
+   "fingerprint": "fb17bb8c",
    "validation": {
     "family": "ahtile",
     "deterministic": {
@@ -17734,7 +17736,7 @@
      }
     ]
    },
-   "fingerprint": "b430e0ed",
+   "fingerprint": "259ddc42",
    "validation": {
     "family": "aipolymiss",
     "deterministic": {
@@ -17811,7 +17813,7 @@
      }
     ]
    },
-   "fingerprint": "7ee5c413",
+   "fingerprint": "28b175b3",
    "validation": {
     "family": "aipolyreg",
     "deterministic": {
@@ -17887,7 +17889,7 @@
      }
     ]
    },
-   "fingerprint": "aae1e096",
+   "fingerprint": "126d36ec",
    "validation": {
     "family": "aieuler",
     "deterministic": {
@@ -17971,7 +17973,7 @@
      }
     ]
    },
-   "fingerprint": "f3fc8660",
+   "fingerprint": "63f33d44",
    "validation": {
     "family": "aisolid",
     "deterministic": {
@@ -18046,7 +18048,7 @@
      }
     ]
    },
-   "fingerprint": "20faf24a",
+   "fingerprint": "efc0bb20",
    "validation": {
     "family": "aiquad",
     "deterministic": {
@@ -18123,7 +18125,7 @@
      }
     ]
    },
-   "fingerprint": "efd800c8",
+   "fingerprint": "88e87c4c",
    "validation": {
     "family": "aipgram",
     "deterministic": {
@@ -18201,7 +18203,7 @@
      }
     ]
    },
-   "fingerprint": "0a51e771",
+   "fingerprint": "1f6d0f51",
    "validation": {
     "family": "aidiag",
     "deterministic": {
@@ -18278,7 +18280,7 @@
      }
     ]
    },
-   "fingerprint": "31f0a1fb",
+   "fingerprint": "bdc6f372",
    "validation": {
     "family": "aiscale",
     "deterministic": {
@@ -18427,7 +18429,7 @@
      }
     ]
    },
-   "fingerprint": "a442a61f",
+   "fingerprint": "6ae131e6",
    "validation": {
     "family": "aicvol",
     "deterministic": {
@@ -18507,7 +18509,7 @@
      }
     ]
    },
-   "fingerprint": "584f730b",
+   "fingerprint": "4f4cca1c",
    "validation": {
     "family": "aicap",
     "deterministic": {
@@ -18586,7 +18588,7 @@
      }
     ]
    },
-   "fingerprint": "955e1877",
+   "fingerprint": "8b5ccc6b",
    "validation": {
     "family": "aipack",
     "deterministic": {
@@ -19348,7 +19350,7 @@
      }
     ]
    },
-   "fingerprint": "cd93d527",
+   "fingerprint": "3aa5850d",
    "validation": {
     "family": "aitsa",
     "deterministic": {
@@ -19424,7 +19426,7 @@
      }
     ]
    },
-   "fingerprint": "bd37c255",
+   "fingerprint": "f28e06cf",
    "validation": {
     "family": "ailsa",
     "deterministic": {
@@ -19739,7 +19741,7 @@
      }
     ]
    },
-   "fingerprint": "2cd6a63a",
+   "fingerprint": "f35ca387",
    "validation": {
     "family": "ailshape",
     "deterministic": {
@@ -19821,7 +19823,7 @@
      }
     ]
    },
-   "fingerprint": "74b566a7",
+   "fingerprint": "5bb557aa",
    "validation": {
     "family": "aipath",
     "deterministic": {
@@ -20144,7 +20146,7 @@
      }
     ]
    },
-   "fingerprint": "533b8667",
+   "fingerprint": "80e9b220",
    "validation": {
     "family": "aifmul",
     "deterministic": {
@@ -20224,7 +20226,7 @@
      }
     ]
    },
-   "fingerprint": "963e3522",
+   "fingerprint": "58f96cd7",
    "validation": {
     "family": "aifdiv",
     "deterministic": {
@@ -20302,7 +20304,7 @@
      }
     ]
    },
-   "fingerprint": "554b9443",
+   "fingerprint": "47137afe",
    "validation": {
     "family": "aiint",
     "deterministic": {
@@ -20377,7 +20379,7 @@
      }
     ]
    },
-   "fingerprint": "4ef9c934",
+   "fingerprint": "1a315863",
    "validation": {
     "family": "aitemp",
     "deterministic": {
@@ -20529,7 +20531,7 @@
      }
     ]
    },
-   "fingerprint": "cc8ed5d6",
+   "fingerprint": "78c750a4",
    "validation": {
     "family": "ajd99",
     "deterministic": {
@@ -20606,7 +20608,7 @@
      }
     ]
    },
-   "fingerprint": "5793ad77",
+   "fingerprint": "f03d9a4e",
    "validation": {
     "family": "ajbrk",
     "deterministic": {
@@ -20743,7 +20745,7 @@
      }
     ]
    },
-   "fingerprint": "cfb521a3",
+   "fingerprint": "57be95c1",
    "validation": {
     "family": "ajsqm",
     "deterministic": {
@@ -20903,7 +20905,7 @@
      }
     ]
    },
-   "fingerprint": "3349ea3b",
+   "fingerprint": "956c6c4e",
    "validation": {
     "family": "ajeqr",
     "deterministic": {
@@ -20979,7 +20981,7 @@
      }
     ]
    },
-   "fingerprint": "63145744",
+   "fingerprint": "c00c69da",
    "validation": {
     "family": "ajrate",
     "deterministic": {
@@ -21059,7 +21061,7 @@
      }
     ]
    },
-   "fingerprint": "1df91353",
+   "fingerprint": "2138099e",
    "validation": {
     "family": "ajbest",
     "deterministic": {
@@ -21131,7 +21133,7 @@
      }
     ]
    },
-   "fingerprint": "85dfee19",
+   "fingerprint": "3496a0ef",
    "validation": {
     "family": "ajwork",
     "deterministic": {
@@ -21214,7 +21216,7 @@
      }
     ]
    },
-   "fingerprint": "d1c84096",
+   "fingerprint": "2ef08f8a",
    "validation": {
     "family": "ajlaw",
     "deterministic": {
@@ -21286,7 +21288,7 @@
      }
     ]
    },
-   "fingerprint": "d077bc50",
+   "fingerprint": "676fa4a4",
    "validation": {
     "family": "ajudig",
     "deterministic": {
@@ -21361,7 +21363,7 @@
      }
     ]
    },
-   "fingerprint": "298ee215",
+   "fingerprint": "42a4303f",
    "validation": {
     "family": "ajneg",
     "deterministic": {
@@ -21433,7 +21435,7 @@
      }
     ]
    },
-   "fingerprint": "743cade6",
+   "fingerprint": "52011e5c",
    "validation": {
     "family": "ajmill",
     "deterministic": {
@@ -21505,7 +21507,7 @@
      }
     ]
    },
-   "fingerprint": "2aa9aa86",
+   "fingerprint": "66aedb35",
    "validation": {
     "family": "ajimul",
     "deterministic": {
@@ -21587,7 +21589,7 @@
      }
     ]
    },
-   "fingerprint": "9927e007",
+   "fingerprint": "cce1c1c6",
    "validation": {
     "family": "ajpl",
     "deterministic": {
@@ -21672,7 +21674,7 @@
      }
     ]
    },
-   "fingerprint": "44fe3072",
+   "fingerprint": "17817245",
    "validation": {
     "family": "ajsi",
     "deterministic": {
@@ -21749,7 +21751,7 @@
      }
     ]
    },
-   "fingerprint": "ac606160",
+   "fingerprint": "956bdcc6",
    "validation": {
     "family": "ajdisc",
     "deterministic": {
@@ -21834,7 +21836,7 @@
      }
     ]
    },
-   "fingerprint": "9c99a080",
+   "fingerprint": "343d35f8",
    "validation": {
     "family": "ajrdiv",
     "deterministic": {
@@ -21921,7 +21923,7 @@
      }
     ]
    },
-   "fingerprint": "5c109ff4",
+   "fingerprint": "8766367b",
    "validation": {
     "family": "ajrq",
     "deterministic": {
@@ -22005,7 +22007,7 @@
      }
     ]
    },
-   "fingerprint": "67dd1362",
+   "fingerprint": "f973b07a",
    "validation": {
     "family": "ajci",
     "deterministic": {
@@ -22080,7 +22082,7 @@
      }
     ]
    },
-   "fingerprint": "02b3b7fe",
+   "fingerprint": "8295cb9e",
    "validation": {
     "family": "ajcube",
     "deterministic": {
@@ -22149,7 +22151,7 @@
      }
     ]
    },
-   "fingerprint": "6b9beec1",
+   "fingerprint": "7b8a4e9e",
    "validation": {
     "family": "ajcmul",
     "deterministic": {
@@ -22226,7 +22228,7 @@
      }
     ]
    },
-   "fingerprint": "30b687cb",
+   "fingerprint": "f16cf00e",
    "validation": {
     "family": "ajgrow",
     "deterministic": {
@@ -22296,7 +22298,7 @@
      }
     ]
    },
-   "fingerprint": "28e53ab6",
+   "fingerprint": "4c03ed19",
    "validation": {
     "family": "ajb10",
     "deterministic": {
@@ -22368,7 +22370,7 @@
      }
     ]
    },
-   "fingerprint": "b24f0c1b",
+   "fingerprint": "a0cd402b",
    "validation": {
     "family": "ajbase",
     "deterministic": {
@@ -22442,7 +22444,7 @@
      }
     ]
    },
-   "fingerprint": "ba631979",
+   "fingerprint": "f82b9ae8",
    "validation": {
     "family": "aksci",
     "deterministic": {
@@ -22515,7 +22517,7 @@
      }
     ]
    },
-   "fingerprint": "ca8d8c89",
+   "fingerprint": "875d2a27",
    "validation": {
     "family": "akscid",
     "deterministic": {
@@ -22589,7 +22591,7 @@
      }
     ]
    },
-   "fingerprint": "fe7bb4c5",
+   "fingerprint": "0cf9a232",
    "validation": {
     "family": "aksqf",
     "deterministic": {
@@ -22725,7 +22727,7 @@
      }
     ]
    },
-   "fingerprint": "22bb5905",
+   "fingerprint": "db4c4d57",
    "validation": {
     "family": "aksqb",
     "deterministic": {
@@ -22810,7 +22812,7 @@
      }
     ]
    },
-   "fingerprint": "922313b4",
+   "fingerprint": "65125a07",
    "validation": {
     "family": "akchance",
     "deterministic": {
@@ -22886,7 +22888,7 @@
      }
     ]
    },
-   "fingerprint": "00160dcd",
+   "fingerprint": "c4e39c08",
    "validation": {
     "family": "akexp",
     "deterministic": {
@@ -22966,7 +22968,7 @@
      }
     ]
    },
-   "fingerprint": "fe390639",
+   "fingerprint": "229fd506",
    "validation": {
     "family": "akss",
     "deterministic": {
@@ -23048,7 +23050,7 @@
      }
     ]
    },
-   "fingerprint": "1e35cc9b",
+   "fingerprint": "e909d018",
    "validation": {
     "family": "akdice",
     "deterministic": {
@@ -23124,7 +23126,7 @@
      }
     ]
    },
-   "fingerprint": "e34684f0",
+   "fingerprint": "34f59b45",
    "validation": {
     "family": "akloop",
     "deterministic": {
@@ -23197,7 +23199,7 @@
      }
     ]
    },
-   "fingerprint": "4228f309",
+   "fingerprint": "7710d549",
    "validation": {
     "family": "akeuclid",
     "deterministic": {
@@ -23265,7 +23267,7 @@
      }
     ]
    },
-   "fingerprint": "4322160f",
+   "fingerprint": "408ce4d2",
    "validation": {
     "family": "akkap",
     "deterministic": {
@@ -23337,7 +23339,7 @@
      }
     ]
    },
-   "fingerprint": "97cace2e",
+   "fingerprint": "7270fd9f",
    "validation": {
     "family": "akcollatz",
     "deterministic": {
@@ -23410,7 +23412,7 @@
      }
     ]
    },
-   "fingerprint": "3fdad7e2",
+   "fingerprint": "9d4f6095",
    "validation": {
     "family": "akodd",
     "deterministic": {
@@ -23450,16 +23452,16 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 140,
+    "1": 139,
     "2": 90,
-    "3": 170
+    "3": 171
    },
    "examples": [
     "gen:akdivd:0,46",
     "gen:akdivd:0,93:mc",
     "gen:akdivd:1,50",
     "gen:akdivd:1,120:mc",
-    "gen:akdivd:2,82",
+    "gen:akdivd:2,83",
     "gen:akdivd:3,47:mc"
    ],
    "explanations": [
@@ -23486,7 +23488,7 @@
      }
     ]
    },
-   "fingerprint": "002c606c",
+   "fingerprint": "e42563a5",
    "validation": {
     "family": "akdivd",
     "deterministic": {
@@ -23566,7 +23568,7 @@
      }
     ]
    },
-   "fingerprint": "ffcd4812",
+   "fingerprint": "d03a3f8f",
    "validation": {
     "family": "akmagic",
     "deterministic": {
@@ -23643,7 +23645,7 @@
      }
     ]
    },
-   "fingerprint": "a174c50c",
+   "fingerprint": "a56b30cd",
    "validation": {
     "family": "akcrypt",
     "deterministic": {
@@ -23711,7 +23713,7 @@
      }
     ]
    },
-   "fingerprint": "af9ecbf5",
+   "fingerprint": "c0de1964",
    "validation": {
     "family": "akpar",
     "deterministic": {
@@ -23800,7 +23802,7 @@
      }
     ]
    },
-   "fingerprint": "3d07b688",
+   "fingerprint": "2113f0f2",
    "validation": {
     "family": "akresize",
     "deterministic": {
@@ -23871,7 +23873,7 @@
      }
     ]
    },
-   "fingerprint": "410dcdc8",
+   "fingerprint": "ee89ba7a",
    "validation": {
     "family": "akshift",
     "deterministic": {
@@ -23951,7 +23953,7 @@
      }
     ]
    },
-   "fingerprint": "2fc1ee02",
+   "fingerprint": "fa77582a",
    "validation": {
     "family": "akthink",
     "deterministic": {
@@ -24028,7 +24030,7 @@
      }
     ]
    },
-   "fingerprint": "a5b59a45",
+   "fingerprint": "09f10233",
    "validation": {
     "family": "akfreq",
     "deterministic": {
@@ -24098,7 +24100,7 @@
      }
     ]
    },
-   "fingerprint": "86256562",
+   "fingerprint": "981a4e54",
    "validation": {
     "family": "akgroup",
     "deterministic": {
@@ -24142,17 +24144,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 119,
-    "2": 181,
-    "3": 100
+    "1": 116,
+    "2": 188,
+    "3": 96
    },
    "examples": [
-    "gen:akbarpct:0,42,3",
-    "gen:akbarpct:2,5,0:mc",
-    "gen:akbarpct:1,6,3",
-    "gen:akbarpct:1,48,3:mc",
-    "gen:akbarpct:1,16,1",
-    "gen:akbarpct:2,9,2:mc"
+    "gen:akbarpct:0,45,2",
+    "gen:akbarpct:2,5,1:mc",
+    "gen:akbarpct:1,6,2",
+    "gen:akbarpct:2,0,1:mc",
+    "gen:akbarpct:1,16,0",
+    "gen:akbarpct:2,14,0:mc"
    ],
    "explanations": [
     "value-as-percent (conceptual): The bar's value (150) was given as the percentage. A percentage compares the bar with the total of all bars, 500.",
@@ -24174,7 +24176,7 @@
      }
     ]
    },
-   "fingerprint": "8883077c",
+   "fingerprint": "199e292e",
    "validation": {
     "family": "akbarpct",
     "deterministic": {
@@ -24246,7 +24248,7 @@
      }
     ]
    },
-   "fingerprint": "b3413bc9",
+   "fingerprint": "3db97164",
    "validation": {
     "family": "akmed",
     "deterministic": {
@@ -24312,7 +24314,7 @@
      }
     ]
    },
-   "fingerprint": "3daaf5a0",
+   "fingerprint": "c1ef8203",
    "validation": {
     "family": "akmode",
     "deterministic": {
@@ -24345,16 +24347,16 @@
      1999
     ]
    ],
-   "poolSize": 204,
+   "poolSize": 203,
    "excluded": [],
    "difficulty": {
-    "1": 85,
+    "1": 84,
     "2": 119,
     "3": 0
    },
    "examples": [
-    "gen:akfmean:799",
-    "gen:akfmean:1386:mc",
+    "gen:akfmean:833",
+    "gen:akfmean:1436:mc",
     "gen:akfmean:802",
     "gen:akfmean:1313:mc"
    ],
@@ -24378,11 +24380,11 @@
      }
     ]
    },
-   "fingerprint": "373a4a78",
+   "fingerprint": "af43d4e5",
    "validation": {
     "family": "akfmean",
     "deterministic": {
-     "checked": 204,
+     "checked": 203,
      "failures": []
     },
     "property": {
@@ -24454,7 +24456,7 @@
      }
     ]
    },
-   "fingerprint": "526f6a75",
+   "fingerprint": "6da22a2c",
    "validation": {
     "family": "akhist",
     "deterministic": {
@@ -24706,7 +24708,7 @@
      }
     ]
    },
-   "fingerprint": "519b8f78",
+   "fingerprint": "a9377b95",
    "validation": {
     "family": "alrem",
     "deterministic": {
@@ -24789,7 +24791,7 @@
      }
     ]
    },
-   "fingerprint": "997035c8",
+   "fingerprint": "7eaf57f1",
    "validation": {
     "family": "alfack",
     "deterministic": {
@@ -24940,7 +24942,7 @@
      }
     ]
    },
-   "fingerprint": "b300eeb3",
+   "fingerprint": "07437ab3",
    "validation": {
     "family": "alrule",
     "deterministic": {
@@ -25019,7 +25021,7 @@
      }
     ]
    },
-   "fingerprint": "0d777ca1",
+   "fingerprint": "03b5f1f9",
    "validation": {
     "family": "alsol2",
     "deterministic": {
@@ -25405,7 +25407,7 @@
      }
     ]
    },
-   "fingerprint": "cc9bf9ec",
+   "fingerprint": "5dc1f60f",
    "validation": {
     "family": "alcomp",
     "deterministic": {
@@ -25555,7 +25557,7 @@
    ],
    "explanations": [
     "swapped (procedural): The values were written in the wrong order; the pair is (x, y): x first.",
-    "added-to-eliminate (procedural): After making the x coefficients equal, the equations were added; with the same sign they must be subtracted to remove x."
+    "added-to-eliminate (procedural): After making the x coefficients equal, the two equations were added and the x terms were then crossed out as if they had cancelled; x terms with the same sign cancel only when the equations are subtracted."
    ],
    "teach": {
     "idea": "The solution is the one pair (x, y) that makes both equations true: the point where the two lines cross.",
@@ -25572,7 +25574,7 @@
      }
     ]
    },
-   "fingerprint": "900e7e9d",
+   "fingerprint": "db987467",
    "validation": {
     "family": "alsys",
     "deterministic": {
@@ -25642,7 +25644,7 @@
    ],
    "explanations": [
     "swapped (procedural): The prices were given in the wrong order; the question asks for (pen, notebook).",
-    "added-to-eliminate (procedural): After making the pen numbers equal, the two equations were added; they must be subtracted to remove the pens."
+    "added-to-eliminate (procedural): After making the pen numbers equal, the two equations were added and the pen terms were then crossed out as if they had cancelled; equal pen terms cancel only when the equations are subtracted."
    ],
    "teach": {
     "idea": "Each purchase gives one equation in the two unknown prices; together they fix both prices.",
@@ -25659,7 +25661,7 @@
      }
     ]
    },
-   "fingerprint": "2e7800b5",
+   "fingerprint": "1e4b040b",
    "validation": {
     "family": "alsysw",
     "deterministic": {
@@ -25715,15 +25717,17 @@
    "poolSize": 360,
    "excluded": [],
    "difficulty": {
-    "1": 0,
-    "2": 210,
-    "3": 150
+    "1": 150,
+    "2": 106,
+    "3": 104
    },
    "examples": [
-    "gen:alcons:2,5,6,2,1,1",
-    "gen:alcons:4,1,6,3,1,-1",
     "gen:alcons:2,5,3,3,0,-1",
-    "gen:alcons:4,-1,2,3,0,-1"
+    "gen:alcons:4,-1,2,3,0,-1",
+    "gen:alcons:2,5,6,2,1,1",
+    "gen:alcons:4,3,4,2,1,-1",
+    "gen:alcons:2,-1,2,2,2,1",
+    "gen:alcons:4,-2,6,4,1,1"
    ],
    "explanations": [
     "x-ratio-only (conceptual): Only a₁/a₂ was compared; the lines are parallel or the same only when b₁/b₂ is in the same ratio too.",
@@ -25745,7 +25749,7 @@
      }
     ]
    },
-   "fingerprint": "658673b7",
+   "fingerprint": "f0cc103b",
    "validation": {
     "family": "alcons",
     "deterministic": {
@@ -25981,7 +25985,7 @@
      }
     ]
    },
-   "fingerprint": "4af594f4",
+   "fingerprint": "185169af",
    "validation": {
     "family": "alsym",
     "deterministic": {
@@ -26132,7 +26136,7 @@
      }
     ]
    },
-   "fingerprint": "3da370be",
+   "fingerprint": "5718cee2",
    "validation": {
     "family": "alqline",
     "deterministic": {
@@ -26283,7 +26287,7 @@
      }
     ]
    },
-   "fingerprint": "89caa8a5",
+   "fingerprint": "a38f4e8e",
    "validation": {
     "family": "alsum",
     "deterministic": {
@@ -26358,7 +26362,7 @@
      }
     ]
    },
-   "fingerprint": "cdee8bb5",
+   "fingerprint": "b618b28c",
    "validation": {
     "family": "alsumr",
     "deterministic": {
@@ -26524,7 +26528,7 @@
      }
     ]
    },
-   "fingerprint": "261ed0bd",
+   "fingerprint": "e3546de2",
    "validation": {
     "family": "almid",
     "deterministic": {
@@ -26786,7 +26790,7 @@
      }
     ]
    },
-   "fingerprint": "6638e992",
+   "fingerprint": "81e6c425",
    "validation": {
     "family": "altria",
     "deterministic": {
@@ -26869,7 +26873,7 @@
      }
     ]
    },
-   "fingerprint": "9f0b7095",
+   "fingerprint": "ac5a1b38",
    "validation": {
     "family": "alcoll",
     "deterministic": {
@@ -26927,7 +26931,7 @@
     "doubled (conceptual): The angle at the centre was doubled; the angle at the circumference is half of it.",
     "opposite-equal (conceptual): Opposite angles of a cyclic quadrilateral were taken as equal; they add up to 180°.",
     "complement (recall): 90° was used; opposite angles of a cyclic quadrilateral add up to 180°, not 90°.",
-    "no-right-angle (conceptual): ∠ACB was not used; the angle in a semicircle is 90°, so the other two angles add up to 90°.",
+    "bracket-slip (procedural): 180° − 90° − ∠CAB was worked out as 180° − (90° − ∠CAB): the given angle was added back instead of taken away. Both 90° and ∠CAB come off 180°.",
     "not-halved (procedural): 180° − 150° was not shared between the two equal angles.",
     "half-centre (conceptual): The base angle was taken as half the angle at the centre; in triangle OAB the two base angles share 180° minus the angle at O."
    ],
@@ -26946,7 +26950,7 @@
      }
     ]
    },
-   "fingerprint": "fe55d0c2",
+   "fingerprint": "48f34359",
    "validation": {
     "family": "alangle",
     "deterministic": {
@@ -27023,7 +27027,7 @@
      }
     ]
    },
-   "fingerprint": "5446d0b9",
+   "fingerprint": "d42ca7d9",
    "validation": {
     "family": "alchord",
     "deterministic": {
@@ -27053,27 +27057,27 @@
    "domain": [
     [
      0,
-     5
+     35
     ],
     [
      20,
      80
     ]
    ],
-   "poolSize": 366,
+   "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 122,
-    "2": 122,
-    "3": 122
+    "1": 153,
+    "2": 100,
+    "3": 147
    },
    "examples": [
-    "gen:altheo:2,60",
-    "gen:altheo:4,40",
-    "gen:altheo:0,60",
-    "gen:altheo:3,40",
-    "gen:altheo:1,60",
-    "gen:altheo:5,40"
+    "gen:altheo:25,35",
+    "gen:altheo:26,45",
+    "gen:altheo:2,43",
+    "gen:altheo:22,25",
+    "gen:altheo:9,39",
+    "gen:altheo:10,79"
    ],
    "explanations": [
     "mixed-up-fact (conceptual): The fact about the perpendicular bisecting a chord was chosen; this step compares two equal chords."
@@ -27093,11 +27097,11 @@
      }
     ]
    },
-   "fingerprint": "9de1edef",
+   "fingerprint": "8c91ba18",
    "validation": {
     "family": "altheo",
     "deterministic": {
-     "checked": 366,
+     "checked": 400,
      "failures": []
     },
     "property": {
@@ -27259,7 +27263,7 @@
      }
     ]
    },
-   "fingerprint": "93b0554c",
+   "fingerprint": "9f4bfad0",
    "validation": {
     "family": "amconev",
     "deterministic": {
@@ -27343,7 +27347,7 @@
      }
     ]
    },
-   "fingerprint": "f024e151",
+   "fingerprint": "9c8a4c51",
    "validation": {
     "family": "amsph",
     "deterministic": {
@@ -27422,7 +27426,7 @@
      }
     ]
    },
-   "fingerprint": "4c810a44",
+   "fingerprint": "a40cd7aa",
    "validation": {
     "family": "amshell",
     "deterministic": {
@@ -27466,17 +27470,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 14,
-    "2": 86,
-    "3": 300
+    "1": 19,
+    "2": 110,
+    "3": 271
    },
    "examples": [
-    "gen:amheron:8,15,17",
-    "gen:amheron:13,14,15:mc",
-    "gen:amheron:5,10,13",
-    "gen:amheron:8,12,12:mc",
-    "gen:amheron:9,15,22",
-    "gen:amheron:13,13,20:mc"
+    "gen:amheron:10,10,12",
+    "gen:amheron:13,13,24:mc",
+    "gen:amheron:5,11,12",
+    "gen:amheron:8,8,14:mc",
+    "gen:amheron:9,18,21",
+    "gen:amheron:13,14,23:mc"
    ],
    "explanations": [
     "perimeter-for-s (procedural): The whole perimeter was used for s. In Heron's formula s is the semi-perimeter, half the perimeter.",
@@ -27498,7 +27502,7 @@
      }
     ]
    },
-   "fingerprint": "69da8a15",
+   "fingerprint": "fd36d7d4",
    "validation": {
     "family": "amheron",
     "deterministic": {
@@ -27565,7 +27569,7 @@
      }
     ]
    },
-   "fingerprint": "4ea67488",
+   "fingerprint": "d7f079b8",
    "validation": {
     "family": "amherq",
     "deterministic": {
@@ -27810,7 +27814,7 @@
      }
     ]
    },
-   "fingerprint": "e9f2006c",
+   "fingerprint": "e066b668",
    "validation": {
     "family": "ampyrv",
     "deterministic": {
@@ -27891,7 +27895,7 @@
      }
     ]
    },
-   "fingerprint": "2d725945",
+   "fingerprint": "3c3428a5",
    "validation": {
     "family": "amcombv",
     "deterministic": {
@@ -27976,7 +27980,7 @@
      }
     ]
    },
-   "fingerprint": "803108a5",
+   "fingerprint": "1df8a155",
    "validation": {
     "family": "amcombs",
     "deterministic": {
@@ -28028,21 +28032,22 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 10,
-    "2": 281,
-    "3": 9
+    "1": 12,
+    "2": 280,
+    "3": 8
    },
    "examples": [
     "gen:amrecast:0,6,5,1,1",
-    "gen:amrecast:0,7,6,1,1:mc",
-    "gen:amrecast:2,6,16,1,9",
-    "gen:amrecast:2,10,2,1,2:mc",
-    "gen:amrecast:1,6,2,1,1",
+    "gen:amrecast:0,7,7,1,1:mc",
+    "gen:amrecast:2,6,12,3,1",
+    "gen:amrecast:2,8,20,2,8:mc",
+    "gen:amrecast:1,6,1,1,1",
     "gen:amrecast:1,11,2,1,1:mc"
    ],
    "explanations": [
-    "radius-ratio (conceptual): The radii were divided. Volume grows with the cube of the radius, so divide the volumes: (R/r)³.",
-    "squared (conceptual): The ratio of radii was squared, as for surface areas. Volumes use cubes.",
+    "radius-ratio (conceptual): The radii were divided. Volume grows with the cube of the radius, so divide the volumes.",
+    "squared (conceptual): The ratio of the radii was squared, as for surface areas. Volumes use cubes.",
+    "hemisphere-as-sphere (conceptual): The small hemispheres were treated as whole spheres. Each holds only half as much: 2/3 πr³, so twice as many are made.",
     "no-third (conceptual): The cones were treated as cylinders. A cone holds ⅓πr²h, so three times as many are made.",
     "not-squared (procedural): The radii were not squared. Volumes use πr²."
    ],
@@ -28061,7 +28066,7 @@
      }
     ]
    },
-   "fingerprint": "74cc8026",
+   "fingerprint": "e21a67fa",
    "validation": {
     "family": "amrecast",
     "deterministic": {
@@ -28149,7 +28154,7 @@
      }
     ]
    },
-   "fingerprint": "a652be60",
+   "fingerprint": "d0effbf3",
    "validation": {
     "family": "amfrust",
     "deterministic": {
@@ -28309,7 +28314,7 @@
      }
     ]
    },
-   "fingerprint": "becca465",
+   "fingerprint": "f2eca425",
    "validation": {
     "family": "amclock",
     "deterministic": {
@@ -28466,7 +28471,7 @@
      }
     ]
    },
-   "fingerprint": "92923e4b",
+   "fingerprint": "deeef979",
    "validation": {
     "family": "amrec",
     "deterministic": {
@@ -28622,7 +28627,7 @@
      }
     ]
    },
-   "fingerprint": "ba971b2e",
+   "fingerprint": "bb6c7bfe",
    "validation": {
     "family": "amplaces",
     "deterministic": {
@@ -28785,7 +28790,7 @@
      }
     ]
    },
-   "fingerprint": "73339ea1",
+   "fingerprint": "5920843f",
    "validation": {
     "family": "amsim",
     "deterministic": {
@@ -29103,7 +29108,7 @@
      }
     ]
    },
-   "fingerprint": "cd4f2366",
+   "fingerprint": "5b00cf06",
    "validation": {
     "family": "amtang",
     "deterministic": {
@@ -29410,7 +29415,7 @@
     "gen:ampgx:8,12,0,2:mc"
    ],
    "explanations": [
-    "sign-slip (procedural): A number was moved to the other side of the equation without changing its sign.",
+    "sign-slip (procedural): In each equation the number beside the first expression was moved to the other side without changing its sign (added instead of subtracted).",
     "swapped (procedural): x and y were swapped: the first pair of lengths gives x, the second pair gives y."
    ],
    "teach": {
@@ -29428,7 +29433,7 @@
      }
     ]
    },
-   "fingerprint": "7790e052",
+   "fingerprint": "43d97405",
    "validation": {
     "family": "ampgx",
     "deterministic": {
@@ -29458,7 +29463,7 @@
    "domain": [
     [
      0,
-     6
+     20
     ],
     [
      5,
@@ -29472,17 +29477,17 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 135,
-    "2": 46,
-    "3": 119
+    "1": 129,
+    "2": 45,
+    "3": 126
    },
    "examples": [
-    "gen:amreason:0,26,2",
-    "gen:amreason:1,30,0",
-    "gen:amreason:6,14,3",
-    "gen:amreason:6,19,2",
-    "gen:amreason:3,5,0",
-    "gen:amreason:3,18,4"
+    "gen:amreason:3,11,0",
+    "gen:amreason:5,26,3",
+    "gen:amreason:18,18,3",
+    "gen:amreason:19,25,0",
+    "gen:amreason:8,20,1",
+    "gen:amreason:12,8,3"
    ],
    "explanations": [
     "mix-0 (conceptual): The linear-pair reason was chosen, but the two angles are opposite each other at a crossing, and they are equal.",
@@ -29508,7 +29513,7 @@
      }
     ]
    },
-   "fingerprint": "2c67880a",
+   "fingerprint": "9849405e",
    "validation": {
     "family": "amreason",
     "deterministic": {
@@ -29587,7 +29592,7 @@
      }
     ]
    },
-   "fingerprint": "5e412557",
+   "fingerprint": "a99b9652",
    "validation": {
     "family": "amcrit",
     "deterministic": {
@@ -29720,10 +29725,11 @@
     "gen:amtcount:9,8:mc"
    ],
    "explanations": [
-    "inside-two (conceptual): From a point inside the circle every line through it cuts the circle twice, so no line just touches it: there are no tangents.",
-    "inside-one (conceptual): There is no tangent through a point inside the circle; every line through it is a secant.",
-    "on-two (conceptual): At a point on the circle there is exactly one tangent, perpendicular to the radius there.",
-    "outside-one (conceptual): From a point outside the circle there are two tangents, one touching each side of the circle."
+    "inside-two (conceptual): It was thought that two tangents can be drawn from any point, as from a point outside the circle. P is inside, so every line through it cuts the circle twice and none just touches it.",
+    "inside-one (conceptual): It was thought that one line through a point inside the circle can just touch it. Every line through an inside point crosses the circle at two points.",
+    "on-two (conceptual): It was thought that two tangents pass through P, as for a point outside the circle. P is on the circle, so there is just one tangent there, at right angles to the radius.",
+    "diameter-as-radius (procedural): The distance 22 cm was compared with the diameter, 24 cm. It must be compared with the radius, half the diameter.",
+    "outside-one (conceptual): It was thought that only one tangent can be drawn from P, as at a point on the circle. From a point outside the circle there are two, one touching each side."
    ],
    "teach": {
     "idea": "A tangent touches a circle at exactly one point. Compare the point's distance from the centre with the radius: inside, on, or outside.",
@@ -29740,7 +29746,7 @@
      }
     ]
    },
-   "fingerprint": "243644d1",
+   "fingerprint": "13ff025e",
    "validation": {
     "family": "amtcount",
     "deterministic": {
@@ -29822,7 +29828,7 @@
      }
     ]
    },
-   "fingerprint": "4a7eacb8",
+   "fingerprint": "c9c925f1",
    "validation": {
     "family": "anmod",
     "deterministic": {
@@ -29907,7 +29913,7 @@
      }
     ]
    },
-   "fingerprint": "aa30c301",
+   "fingerprint": "b934cb2d",
    "validation": {
     "family": "ancong",
     "deterministic": {
@@ -30059,7 +30065,7 @@
      }
     ]
    },
-   "fingerprint": "bf59c8e4",
+   "fingerprint": "6de3d865",
    "validation": {
     "family": "anbag",
     "deterministic": {
@@ -30136,7 +30142,7 @@
      }
     ]
    },
-   "fingerprint": "c2088dc0",
+   "fingerprint": "249755b6",
    "validation": {
     "family": "ancardn",
     "deterministic": {
@@ -30210,7 +30216,7 @@
      }
     ]
    },
-   "fingerprint": "2e0227c0",
+   "fingerprint": "fbd3e1ce",
    "validation": {
     "family": "andice",
     "deterministic": {
@@ -30292,7 +30298,7 @@
      }
     ]
    },
-   "fingerprint": "7ff4cf68",
+   "fingerprint": "0af5a3ea",
    "validation": {
     "family": "antree",
     "deterministic": {
@@ -30341,15 +30347,15 @@
    "excluded": [],
    "difficulty": {
     "1": 12,
-    "2": 146,
-    "3": 142
+    "2": 167,
+    "3": 121
    },
    "examples": [
     "gen:ancomp:0,1,0,7",
     "gen:ancomp:0,5,0,7:mc",
-    "gen:ancomp:1,3,2,11",
-    "gen:ancomp:1,5,5,19:mc",
-    "gen:ancomp:1,4,4,12",
+    "gen:ancomp:1,3,1,5",
+    "gen:ancomp:1,5,5,13:mc",
+    "gen:ancomp:1,3,4,10",
     "gen:ancomp:1,6,4,15:mc"
    ],
    "explanations": [
@@ -30372,7 +30378,7 @@
      }
     ]
    },
-   "fingerprint": "2fa4a83f",
+   "fingerprint": "ff00e42b",
    "validation": {
     "family": "ancomp",
     "deterministic": {
@@ -30421,16 +30427,16 @@
    "excluded": [],
    "difficulty": {
     "1": 19,
-    "2": 131,
-    "3": 150
+    "2": 142,
+    "3": 139
    },
    "examples": [
     "gen:anunion:4,4,2,10",
     "gen:anunion:5,5,4,10:mc",
-    "gen:anunion:6,13,2,19",
-    "gen:anunion:10,2,1,17:mc",
-    "gen:anunion:6,11,3,16",
-    "gen:anunion:10,10,7,16:mc"
+    "gen:anunion:6,14,5,17",
+    "gen:anunion:10,5,4,11:mc",
+    "gen:anunion:6,13,3,16",
+    "gen:anunion:10,10,7,14:mc"
    ],
    "explanations": [
     "overlap-not-taken (conceptual): P(A) and P(B) were added without taking away P(A and B); the outcomes in both were counted twice.",
@@ -30452,7 +30458,7 @@
      }
     ]
    },
-   "fingerprint": "8be5df26",
+   "fingerprint": "08643907",
    "validation": {
     "family": "anunion",
     "deterministic": {
@@ -30613,7 +30619,7 @@
      }
     ]
    },
-   "fingerprint": "71893d84",
+   "fingerprint": "cc6f2899",
    "validation": {
     "family": "anpts",
     "deterministic": {
@@ -30692,7 +30698,7 @@
      }
     ]
    },
-   "fingerprint": "174f2711",
+   "fingerprint": "b7794859",
    "validation": {
     "family": "angarr",
     "deterministic": {
@@ -30817,7 +30823,7 @@
     "gen:anpair:22,20,5:mc"
    ],
    "explanations": [
-    "swapped (procedural): The two values were written the wrong way round; the question asks for (cost of a pen, cost of a notebook)."
+    "swapped (procedural): The two values were written the wrong way round; the question asks for (x, y): the child's ticket first."
    ],
    "teach": {
     "idea": "Two unknown prices and two facts about them: each fact is one linear equation, and the pair that makes both true is the answer.",
@@ -30834,7 +30840,7 @@
      }
     ]
    },
-   "fingerprint": "b048e2aa",
+   "fingerprint": "5faa1788",
    "validation": {
     "family": "anpair",
     "deterministic": {
@@ -30905,7 +30911,7 @@
      }
     ]
    },
-   "fingerprint": "e352a19e",
+   "fingerprint": "97af0633",
    "validation": {
     "family": "anquad",
     "deterministic": {
@@ -30980,7 +30986,7 @@
      }
     ]
    },
-   "fingerprint": "0e94d9e9",
+   "fingerprint": "f512d3b4",
    "validation": {
     "family": "anfreq",
     "deterministic": {
@@ -31133,7 +31139,7 @@
      }
     ]
    },
-   "fingerprint": "2eb94bb9",
+   "fingerprint": "57aaf76c",
    "validation": {
     "family": "anstack",
     "deterministic": {
@@ -31213,7 +31219,7 @@
      }
     ]
    },
-   "fingerprint": "ff330fbc",
+   "fingerprint": "9e56a97c",
    "validation": {
     "family": "anpct",
     "deterministic": {
@@ -31758,7 +31764,7 @@
    "explanations": [
     "far-only (conceptual): 80 m was taken as the whole distance from the first point to the tower; it is only the distance walked, and the rest (x) is unknown.",
     "near-only (conceptual): 80 m was taken as the distance from the second point to the tower; the second point is x m from the tower, an unknown.",
-    "angle-difference (conceptual): The difference of the angles (15°) was used in one triangle; the two angles belong to two different right triangles that share the height.",
+    "angle-difference (conceptual): The difference of the angles (30°) was used in one triangle; the two angles belong to two different right triangles that share the height.",
     "height-given (procedural): The height of the tower was given; the question asks for the distance from the second point.",
     "far-distance (procedural): The distance from the first point (x + 80) was given; the question asks for x, from the second point."
    ],
@@ -31777,7 +31783,7 @@
      }
     ]
    },
-   "fingerprint": "9032f741",
+   "fingerprint": "0dcbb115",
    "validation": {
     "family": "antwo",
     "deterministic": {
@@ -31858,7 +31864,7 @@
      }
     ]
    },
-   "fingerprint": "5305719b",
+   "fingerprint": "7b293d0c",
    "validation": {
     "family": "ansecpt",
     "deterministic": {
@@ -31883,8 +31889,8 @@
    "title": "Simplifying with the trigonometric identities",
    "competency": "MATH.trigonometry.identities",
    "skill": "MATH.trigonometry.identities",
-   "type": "expression",
-   "multipleChoice": true,
+   "type": "choice",
+   "multipleChoice": false,
    "domain": [
     [
      0,
@@ -31904,11 +31910,11 @@
    },
    "examples": [
     "gen:anidsimp:1,5",
-    "gen:anidsimp:3,3:mc",
+    "gen:anidsimp:3,3",
     "gen:anidsimp:6,5",
-    "gen:anidsimp:9,3:mc",
+    "gen:anidsimp:9,3",
     "gen:anidsimp:14,1",
-    "gen:anidsimp:15,1:mc"
+    "gen:anidsimp:15,1"
    ],
    "explanations": [
     "identity-slip (recall): 1 − cos²θ was taken as cos²θ; since sin²θ + cos²θ = 1, 1 − cos²θ = sin²θ.",
@@ -31929,7 +31935,7 @@
      }
     ]
    },
-   "fingerprint": "684aef09",
+   "fingerprint": "8ea9931e",
    "validation": {
     "family": "anidsimp",
     "deterministic": {
@@ -31981,17 +31987,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 157,
+    "1": 83,
     "2": 160,
-    "3": 83
+    "3": 157
    },
    "examples": [
-    "gen:anstd:1,0,0,1,4",
-    "gen:anstd:1,3,1,0,4:mc",
+    "gen:anstd:1,0,0,1,2",
+    "gen:anstd:1,3,0,4,2:mc",
     "gen:anstd:1,0,0,1,1",
     "gen:anstd:1,3,1,1,0:mc",
-    "gen:anstd:1,0,0,1,2",
-    "gen:anstd:1,3,0,4,2:mc"
+    "gen:anstd:1,0,0,1,4",
+    "gen:anstd:1,3,1,0,4:mc"
    ],
    "explanations": [
     "sin-cos-swapped (recall): The values of sin and cos were swapped (and tan taken as cot): for example sin 30° = 1/2 and cos 30° = √3/2.",
@@ -32023,7 +32029,7 @@
      }
     ]
    },
-   "fingerprint": "4687b5ad",
+   "fingerprint": "638ae9dd",
    "validation": {
     "family": "anstd",
     "deterministic": {
@@ -32182,7 +32188,7 @@
      }
     ]
    },
-   "fingerprint": "8ed34a20",
+   "fingerprint": "9410be19",
    "validation": {
     "family": "ancompa",
     "deterministic": {
@@ -32356,7 +32362,7 @@
      }
     ]
    },
-   "fingerprint": "284ab662",
+   "fingerprint": "775d3d95",
    "validation": {
     "family": "aosub",
     "deterministic": {
@@ -32439,7 +32445,7 @@
      }
     ]
    },
-   "fingerprint": "c2b28b2d",
+   "fingerprint": "ab9924b2",
    "validation": {
     "family": "aoinex",
     "deterministic": {
@@ -32469,38 +32475,38 @@
    "domain": [
     [
      1,
-     6
+     10
     ],
     [
      1,
-     6
+     10
     ],
     [
      0,
      2
     ]
    ],
-   "poolSize": 92,
+   "poolSize": 228,
    "excluded": [],
    "difficulty": {
-    "1": 35,
-    "2": 35,
-    "3": 22
+    "1": 99,
+    "2": 99,
+    "3": 30
    },
    "examples": [
-    "gen:aocart:3,1,0",
-    "gen:aocart:5,1,0:mc",
-    "gen:aocart:3,1,2",
-    "gen:aocart:5,1,2:mc",
-    "gen:aocart:2,3,1",
-    "gen:aocart:3,4,1:mc"
+    "gen:aocart:4,5,0",
+    "gen:aocart:7,8,0:mc",
+    "gen:aocart:4,5,2",
+    "gen:aocart:7,8,2:mc",
+    "gen:aocart:2,2,1",
+    "gen:aocart:4,2,1:mc"
    ],
    "explanations": [
-    "added (conceptual): n(A) and n(B) were added; each of the 6 elements of A pairs with each of the 6 elements of B, so they multiply.",
+    "added (conceptual): n(A) and n(B) were added; each of the 10 elements of A pairs with each of the 10 elements of B, so they multiply.",
     "pairs-not-subsets (conceptual): The number of ordered pairs was given; a relation is any subset of A × B, and a set of mn pairs has 2^(mn) subsets.",
-    "power-of-sum (procedural): 2 was raised to n(A) + n(B); A × B has 6 × 2 = 12 pairs, so the count is 2^12.",
+    "power-of-sum (procedural): 2 was raised to n(A) + n(B); A × B has 10 × 1 = 10 pairs, so the count is 2^10.",
     "empty-relation-left-out (conceptual): The empty relation was left out; ∅ is a subset of A × B, so it is a relation too.",
-    "subtracted (conceptual): n(A) was subtracted from n(A × B); n(A × B) = n(A) × n(B), so divide by 6."
+    "subtracted (conceptual): n(A) was subtracted from n(A × B); n(A × B) = n(A) × n(B), so divide by 10."
    ],
    "teach": {
     "idea": "A × B is the set of all ordered pairs (a, b) with a in A and b in B, so n(A × B) = n(A) × n(B). A relation from A to B is any subset of A × B.",
@@ -32517,11 +32523,11 @@
      }
     ]
    },
-   "fingerprint": "a5f74e96",
+   "fingerprint": "a9b169d3",
    "validation": {
     "family": "aocart",
     "deterministic": {
-     "checked": 92,
+     "checked": 228,
      "failures": []
     },
     "property": {
@@ -32539,45 +32545,61 @@
   {
    "id": "aorel",
    "version": "1.0.0",
-   "title": "Is a relation reflexive, symmetric, transitive?",
+   "title": "Is a relation given by a rule reflexive, symmetric, transitive?",
    "competency": "MATH.algebra.relations",
    "skill": "MATH.algebra.relations",
    "type": "choice",
    "multipleChoice": false,
    "domain": [
     [
-     1,
-     511
+     0,
+     8
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     3,
+     8
     ]
    ],
-   "poolSize": 300,
+   "poolSize": 102,
    "excluded": [],
    "difficulty": {
-    "1": 127,
-    "2": 86,
-    "3": 87
+    "1": 24,
+    "2": 36,
+    "3": 42
    },
    "examples": [
-    "gen:aorel:98",
-    "gen:aorel:273",
-    "gen:aorel:218",
-    "gen:aorel:361",
-    "gen:aorel:349",
-    "gen:aorel:469"
+    "gen:aorel:2,0,5",
+    "gen:aorel:5,0,7",
+    "gen:aorel:0,2,3",
+    "gen:aorel:4,1,3",
+    "gen:aorel:3,2,5",
+    "gen:aorel:8,0,7"
    ],
    "explanations": [
-    "some-diagonal (conceptual): Some pairs (a, a) are in R, so R was called reflexive; reflexive needs every one of (1, 1), (2, 2) and (3, 3).",
-    "transitive-a-equals-c (conceptual): Chains that come back to the start were skipped: (1, 2) and (2, 1) in R need (1, 1) in R too.",
-    "chain-missed (procedural): A chain was missed: (1, 3) and (3, 1) are in R, but (1, 1) is not.",
-    "some-pairs-checked (procedural): Only some pairs were checked for symmetry; every (a, b) in R needs its partner (b, a) in R."
+    "some-diagonal (conceptual): Some pairs (a, a) are in R, so R was called reflexive; reflexive needs (a, a) for every a in A, and (4, 4) is not in R.",
+    "transitive-a-equals-c (conceptual): Chains that come back to the start were skipped: (3, 1) and (1, 3) in R need (3, 3) in R too.",
+    "chain-missed (procedural): A chain was missed: (2, 1) and (1, 5) are in R, but (2, 5) is not."
    ],
    "teach": {
     "idea": "Reflexive: every element is related to itself. Symmetric: whenever (a, b) is in R, so is (b, a). Transitive: whenever (a, b) and (b, c) are in R, so is (a, c) — including chains with a = c.",
-    "method": "Check each property against the list, one pair or one chain at a time. A single missing pair is enough to say 'not'.",
+    "method": "Test the rule itself: put b = a for reflexive; swap a and b for symmetric; for transitive, take a chain (a, b), (b, c) and check (a, c). A single counter-example from A is enough to say 'not'.",
     "alternatives": [
      {
+      "id": "list",
+      "title": "List the pairs first",
+      "kind": "procedural",
+      "text": [
+       "Write out R as a list of pairs by going through every a and b in A.",
+       "Then check (a, a) for every a, the reverse of every pair, and every chain (a, b), (b, c)."
+      ]
+     },
+     {
       "id": "matrix",
-      "title": "Write R as a 3 × 3 table",
+      "title": "Write R as a table",
       "kind": "procedural",
       "text": [
        "Put a 1 in row a, column b when (a, b) is in R.",
@@ -32586,11 +32608,11 @@
      }
     ]
    },
-   "fingerprint": "850b9a9d",
+   "fingerprint": "2456e45f",
    "validation": {
     "family": "aorel",
     "deterministic": {
-     "checked": 300,
+     "checked": 102,
      "failures": []
     },
     "property": {
@@ -32598,7 +32620,7 @@
      "failures": []
     },
     "boundary": {
-     "cases": 4,
+     "cases": 12,
      "failures": []
     },
     "excluded": 0,
@@ -32677,7 +32699,7 @@
      }
     ]
    },
-   "fingerprint": "13d7be08",
+   "fingerprint": "2737b50e",
    "validation": {
     "family": "aodom",
     "deterministic": {
@@ -32755,7 +32777,7 @@
      }
     ]
    },
-   "fingerprint": "0e47f6d1",
+   "fingerprint": "0d2cf265",
    "validation": {
     "family": "aorange",
     "deterministic": {
@@ -32777,67 +32799,66 @@
   {
    "id": "aofclass",
    "version": "1.0.0",
-   "title": "Is a function one-one, onto, both or neither?",
+   "title": "Is a quadratic on a restricted domain one-one, onto, both or neither?",
    "competency": "MATH.algebra.functions",
    "skill": "MATH.algebra.functions",
    "type": "choice",
    "multipleChoice": false,
    "domain": [
     [
-     1,
-     3
-    ],
-    [
-     -4,
-     4
+     -5,
+     5
     ],
     [
      -9,
      9
     ],
     [
+     -5,
+     5
+    ],
+    [
      0,
-     3
+     2
     ]
    ],
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 34,
-    "2": 144,
-    "3": 122
+    "1": 20,
+    "2": 169,
+    "3": 111
    },
    "examples": [
-    "gen:aofclass:1,-1,-8,0",
-    "gen:aofclass:1,2,-9,0",
-    "gen:aofclass:2,-3,3,1",
-    "gen:aofclass:2,4,0,1",
-    "gen:aofclass:2,-3,-7,3",
-    "gen:aofclass:2,2,-5,3"
+    "gen:aofclass:-1,-1,-1,1",
+    "gen:aofclass:4,-6,4,1",
+    "gen:aofclass:-1,7,-4,2",
+    "gen:aofclass:2,8,0,0",
+    "gen:aofclass:-3,4,-2,0",
+    "gen:aofclass:1,-3,4,1"
    ],
    "explanations": [
-    "codomain-as-range (conceptual): Onto was assumed; on [0, ∞) f only reaches values from 4 upwards, not every real number.",
-    "positive-x-only (conceptual): Only x ≥ 0 was tried; f(−1) = f(1), so on ℝ two inputs share an output.",
-    "square-never-one-one (conceptual): x² was taken as never one-one; on [0, ∞) there are no negative inputs, so different inputs give different outputs.",
-    "pair-missed (conceptual): f(−x) = f(x) was missed: on ℝ, f(−1) = f(1), so f is not one-one.",
-    "cube-like-square (conceptual): x³ was treated like x²; (−x)³ = −x³, so a cube takes every real value exactly once."
+    "square-never-one-one (conceptual): A quadratic was taken as never one-one; here the domain starts at 5, the vertex x = 5, so f only increases and different inputs give different outputs.",
+    "codomain-as-range (conceptual): The range was taken to be all of ℝ; on this domain f never goes below 5.",
+    "vertex-value-reached (conceptual): The least value −3 (at the vertex x = 4) was taken as reached; x = 4 is not in the domain, so f only reaches values from f(5) = −2 upwards.",
+    "vertex-inside (conceptual): The vertex x = 5 was not compared with the domain; it lies inside [4, ∞), so f goes down and then up: f(4) = f(6) = 6."
    ],
    "teach": {
-    "idea": "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. Both depend on the domain and codomain, not only on the formula.",
-    "method": "For one-one, look for two different inputs with the same output (for x², try x and −x). For onto, find the range on the given domain and compare it with the codomain.",
+    "idea": "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex.",
+    "method": "Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain.",
     "alternatives": [
      {
       "id": "lines",
       "title": "Horizontal lines on the graph",
       "kind": "conceptual",
       "text": [
-       "Sketch the graph over the given domain only.",
+       "Sketch the parabola and keep only the part over the domain [d, ∞).",
        "One-one: no horizontal line meets it twice. Onto: every horizontal line at a height in the codomain meets it at least once."
       ]
      }
     ]
    },
-   "fingerprint": "8d016352",
+   "fingerprint": "53822fd1",
    "validation": {
     "family": "aofclass",
     "deterministic": {
@@ -32954,12 +32975,12 @@
    "multipleChoice": true,
    "domain": [
     [
-     -49,
-     49
+     -99,
+     99
     ],
     [
-     -49,
-     49
+     -99,
+     99
     ],
     [
      0,
@@ -32970,18 +32991,18 @@
    "excluded": [],
    "difficulty": {
     "1": 0,
-    "2": 213,
-    "3": 87
+    "2": 206,
+    "3": 94
    },
    "examples": [
-    "gen:aostd:-11,1,1",
-    "gen:aostd:16,-18,1:mc",
-    "gen:aostd:-35,-13,0",
-    "gen:aostd:-13,-14,0:mc"
+    "gen:aostd:-26,56,1",
+    "gen:aostd:22,-18,1:mc",
+    "gen:aostd:-68,-61,1",
+    "gen:aostd:-31,-4,1:mc"
    ],
    "explanations": [
-    "drop-decimals (conceptual): The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3.",
     "nearest (conceptual): The numbers were rounded to the nearest integer; [x] always goes down to the integer at or below x.",
+    "drop-decimals (conceptual): The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3.",
     "ceiling (recall): The integer above was taken; the greatest integer function takes the integer at or below x."
    ],
    "teach": {
@@ -32999,7 +33020,7 @@
      }
     ]
    },
-   "fingerprint": "92ce0355",
+   "fingerprint": "55fdb192",
    "validation": {
     "family": "aostd",
     "deterministic": {
@@ -33160,7 +33181,7 @@
      }
     ]
    },
-   "fingerprint": "aae5a54b",
+   "fingerprint": "9356c25e",
    "validation": {
     "family": "aoabseq",
     "deterministic": {
@@ -33331,7 +33352,7 @@
      }
     ]
    },
-   "fingerprint": "28e5c66e",
+   "fingerprint": "1ed4810e",
    "validation": {
     "family": "aoqin",
     "deterministic": {
@@ -33405,7 +33426,7 @@
      }
     ]
    },
-   "fingerprint": "93aad160",
+   "fingerprint": "ea981aac",
    "validation": {
     "family": "aorat",
     "deterministic": {
@@ -33485,7 +33506,7 @@
      }
     ]
    },
-   "fingerprint": "05e4974f",
+   "fingerprint": "76f4452f",
    "validation": {
     "family": "aopf",
     "deterministic": {
@@ -33567,7 +33588,7 @@
      }
     ]
    },
-   "fingerprint": "20be2a90",
+   "fingerprint": "c2a10b62",
    "validation": {
     "family": "aopfq",
     "deterministic": {
@@ -33597,33 +33618,33 @@
    "domain": [
     [
      3,
-     15
+     30
     ],
     [
      2,
-     15
+     30
     ]
    ],
-   "poolSize": 88,
+   "poolSize": 110,
    "excluded": [],
    "difficulty": {
-    "1": 13,
+    "1": 28,
     "2": 28,
-    "3": 47
+    "3": 54
    },
    "examples": [
-    "gen:aonpr:7,2",
-    "gen:aonpr:11,2:mc",
+    "gen:aonpr:12,2",
+    "gen:aonpr:21,2:mc",
     "gen:aonpr:6,6",
     "gen:aonpr:8,6:mc",
-    "gen:aonpr:11,10",
-    "gen:aonpr:13,7:mc"
+    "gen:aonpr:14,5",
+    "gen:aonpr:22,3:mc"
    ],
    "explanations": [
-    "order-ignored (conceptual): The objects were chosen without order (¹⁵C₈); in an arrangement the order matters.",
-    "repetition (conceptual): Every place was given all 15 choices; an object used in one place cannot be used again, so the choices go down by one each time.",
-    "all-arranged (procedural): All 13 objects were arranged (13!); only 9 places are filled.",
-    "divide-by-r (recall): 13! was divided by 9!; ¹³P₉ = 13!/(13 − 9)!."
+    "order-ignored (conceptual): The objects were chosen without order (³⁰C₄); in an arrangement the order matters.",
+    "repetition (conceptual): Every place was given all 30 choices; an object used in one place cannot be used again, so the choices go down by one each time.",
+    "all-arranged (procedural): All 10 objects were arranged (10!); only 7 places are filled.",
+    "divide-by-r (recall): 10! was divided by 7!; ¹⁰P₇ = 10!/(10 − 7)!."
    ],
    "teach": {
     "idea": "Filling r places in order from n distinct objects: n choices for the first place, n − 1 for the second, and so on, so ⁿPᵣ = n(n − 1)…(n − r + 1) = n!/(n − r)!.",
@@ -33640,11 +33661,11 @@
      }
     ]
    },
-   "fingerprint": "2abb1049",
+   "fingerprint": "08b0bd48",
    "validation": {
     "family": "aonpr",
     "deterministic": {
-     "checked": 88,
+     "checked": 110,
      "failures": []
     },
     "property": {
@@ -33712,7 +33733,7 @@
      }
     ]
    },
-   "fingerprint": "8a345b2a",
+   "fingerprint": "1f9d2b8c",
    "validation": {
     "family": "aoncr",
     "deterministic": {
@@ -33792,7 +33813,7 @@
      }
     ]
    },
-   "fingerprint": "d714c516",
+   "fingerprint": "b6b65cfa",
    "validation": {
     "family": "aocomm",
     "deterministic": {
@@ -33868,7 +33889,7 @@
      }
     ]
    },
-   "fingerprint": "2eea74e3",
+   "fingerprint": "99b115a5",
    "validation": {
     "family": "aomulti",
     "deterministic": {
@@ -33932,7 +33953,7 @@
     "powers-left-out (conceptual): Only ⁸C₇ was given; the term also carries (3x)⁷ and (3)¹, so their powers are part of the coefficient.",
     "general-term-index (procedural): The general term was used with the wrong index: the term with x⁷ uses ⁸C₇ and the powers 7 and 1.",
     "a-power-forgotten (procedural): The 3 in (3x)⁷ was not raised to the power 7.",
-    "sign-lost (procedural): The minus sign was dropped; a negative number to an odd power is negative."
+    "sign-lost (procedural): The minus sign was dropped; (−1)¹ is negative (a negative number to an odd power), so the coefficient is negative."
    ],
    "teach": {
     "idea": "The general term of (u + v)ⁿ is ⁿCᵣ uʳ vⁿ⁻ʳ. With u = ax and v = b, the term with xʳ is ⁿCᵣ aʳ bⁿ⁻ʳ xʳ.",
@@ -33949,7 +33970,7 @@
      }
     ]
    },
-   "fingerprint": "d54c9e51",
+   "fingerprint": "c2500fa3",
    "validation": {
     "family": "aobinco",
     "deterministic": {
@@ -34106,7 +34127,7 @@
      }
     ]
    },
-   "fingerprint": "aeb515de",
+   "fingerprint": "fef5edfa",
    "validation": {
     "family": "aobinind",
     "deterministic": {
@@ -34182,7 +34203,7 @@
      }
     ]
    },
-   "fingerprint": "4b462113",
+   "fingerprint": "c3ee73a6",
    "validation": {
     "family": "aogp",
     "deterministic": {
@@ -34258,7 +34279,7 @@
      }
     ]
    },
-   "fingerprint": "6755a106",
+   "fingerprint": "08891241",
    "validation": {
     "family": "aogpsum",
     "deterministic": {
@@ -34334,7 +34355,7 @@
      }
     ]
    },
-   "fingerprint": "c42489d1",
+   "fingerprint": "806a52a6",
    "validation": {
     "family": "aogpinf",
     "deterministic": {
@@ -34414,7 +34435,7 @@
      }
     ]
    },
-   "fingerprint": "b748b5ef",
+   "fingerprint": "b3a2b524",
    "validation": {
     "family": "aoagp",
     "deterministic": {
@@ -34486,7 +34507,7 @@
      }
     ]
    },
-   "fingerprint": "c0393820",
+   "fingerprint": "8f3cb6cd",
    "validation": {
     "family": "aohm",
     "deterministic": {
@@ -34545,7 +34566,7 @@
    "explanations": [
     "five-as-sum (conceptual): log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a.",
     "decimal-ignored (procedural): The decimal point was ignored; 518.4 is a whole number divided by 10, which subtracts 1.",
-    "powers-not-multiplied (procedural): A power was not brought down: log 2³ = 3 log 2 = 3a, not a."
+    "powers-not-multiplied (procedural): The powers were not brought down: log 2⁵ was taken as log 2; log xⁿ = n log x, so log 2⁵ = 5 log 2."
    ],
    "teach": {
     "idea": "log(xy) = log x + log y, log(x/y) = log x − log y and log xⁿ = n log x. With log 10 = 1, log 5 = log(10/2) = 1 − log 2.",
@@ -34562,7 +34583,7 @@
      }
     ]
    },
-   "fingerprint": "93548ebd",
+   "fingerprint": "4fa54000",
    "validation": {
     "family": "aologlaw",
     "deterministic": {
@@ -34592,37 +34613,37 @@
    "domain": [
     [
      0,
-     2
+     3
     ],
     [
      1,
-     4
+     6
     ],
     [
-     -4,
-     6
+     -8,
+     8
     ]
    ],
-   "poolSize": 104,
+   "poolSize": 212,
    "excluded": [],
    "difficulty": {
-    "1": 14,
-    "2": 42,
-    "3": 48
+    "1": 20,
+    "2": 77,
+    "3": 115
    },
    "examples": [
-    "gen:aolog:0,1,6",
-    "gen:aolog:1,1,6:mc",
-    "gen:aolog:0,4,6",
-    "gen:aolog:1,4,5:mc",
-    "gen:aolog:1,1,-4",
-    "gen:aolog:2,1,-4:mc"
+    "gen:aolog:0,1,8",
+    "gen:aolog:2,1,2:mc",
+    "gen:aolog:0,5,6",
+    "gen:aolog:1,4,6:mc",
+    "gen:aolog:0,5,-2",
+    "gen:aolog:1,5,-7:mc"
    ],
    "explanations": [
-    "upside-down (conceptual): The exponents were divided the wrong way; log₆₂₅ x asks which power of 625 gives x, so it is 5/4.",
+    "upside-down (conceptual): The exponents were divided the wrong way; log₃₄₃ x asks which power of 343 gives x, so it is 4/3.",
     "subtract-exponents (procedural): The powers were subtracted; the logarithm is the power that turns the base into the number, here a quotient of the powers.",
-    "sign-lost (procedural): 1/5 = 5^-1: the power is negative.",
-    "divide-numbers (conceptual): 3125 was divided by 625; a logarithm is a power, not a quotient of the numbers."
+    "sign-lost (procedural): 1/7 = 7^-1: the power is negative.",
+    "divide-numbers (conceptual): 2401 was divided by 343; a logarithm is a power, not a quotient of the numbers."
    ],
    "teach": {
     "idea": "log_B X = y means Bʸ = X. If B = cⁱ and X = cʲ, then (cⁱ)ʸ = cʲ, so iy = j and y = j/i.",
@@ -34639,11 +34660,11 @@
      }
     ]
    },
-   "fingerprint": "72754d9a",
+   "fingerprint": "f126d18a",
    "validation": {
     "family": "aolog",
     "deterministic": {
-     "checked": 104,
+     "checked": 212,
      "failures": []
     },
     "property": {
@@ -34669,39 +34690,39 @@
    "domain": [
     [
      0,
-     3
+     6
     ],
     [
      1,
-     9
+     12
     ],
     [
      1,
-     1000
+     4096
     ],
     [
      0,
      1
     ]
    ],
-   "poolSize": 114,
+   "poolSize": 268,
    "excluded": [],
    "difficulty": {
-    "1": 22,
-    "2": 30,
-    "3": 62
+    "1": 34,
+    "2": 46,
+    "3": 188
    },
    "examples": [
-    "gen:aologeq:0,3,8,1",
-    "gen:aologeq:1,2,9,0",
-    "gen:aologeq:0,6,64,0",
-    "gen:aologeq:2,2,25,0",
-    "gen:aologeq:0,9,128,0",
-    "gen:aologeq:2,3,125,1"
+    "gen:aologeq:0,4,16,1",
+    "gen:aologeq:4,1,4,0",
+    "gen:aologeq:1,3,27,1",
+    "gen:aologeq:4,3,16,0",
+    "gen:aologeq:1,5,81,0",
+    "gen:aologeq:4,5,512,1"
    ],
    "explanations": [
-    "extraneous-kept (conceptual): The negative root was kept; log of a negative number is not defined, so x = −1000 is rejected.",
-    "sum-inside (conceptual): log x + log(x + 999) was taken as log(2x + 999); the sum of logs is the log of the product, x(x + 999)."
+    "extraneous-kept (conceptual): The negative root was kept; log of a negative number is not defined, so x = −2401 is rejected.",
+    "sum-inside (conceptual): log x + log(x + 2400) was taken as log(2x + 2400); the sum of logs is the log of the product, x(x + 2400)."
    ],
    "teach": {
     "idea": "log x + log y = log(xy), and log_B N = k means N = Bᵏ. A logarithm is only defined for positive numbers, so every root must be checked.",
@@ -34718,11 +34739,11 @@
      }
     ]
    },
-   "fingerprint": "6f14f76e",
+   "fingerprint": "5f836628",
    "validation": {
     "family": "aologeq",
     "deterministic": {
-     "checked": 114,
+     "checked": 268,
      "failures": []
     },
     "property": {
@@ -35098,7 +35119,7 @@
      }
     ]
    },
-   "fingerprint": "4053c191",
+   "fingerprint": "50c5ceba",
    "validation": {
     "family": "apamgm",
     "deterministic": {
@@ -35241,7 +35262,7 @@
    ],
    "explanations": [
     "no-factorial (recall): The term was not divided by 5!; e^y = 1 + y + y²/2! + y³/3! + …",
-    "k-not-raised (procedural): The 4/3 inside was not raised to the power 5: the term is (4/3x)⁵.",
+    "k-not-raised (procedural): The 4/3 inside was not raised to the power 5: the term is (4x/3)⁵.",
     "divide-by-r (recall): The term was divided by 5, as in the log series; the exponential series divides by 5! = 120.",
     "signs-not-alternating (recall): Every term of log(1 + y) was taken as positive; the signs alternate: y − y²/2 + y³/3 − …",
     "factorial-for-log (recall): The term was divided by 5!; in the log series it is divided by 5 (the exponential series has the factorials)."
@@ -35261,7 +35282,7 @@
      }
     ]
    },
-   "fingerprint": "09f4dba7",
+   "fingerprint": "40827f29",
    "validation": {
     "family": "apexlog",
     "deterministic": {
@@ -35319,8 +35340,8 @@
    ],
    "explanations": [
     "n-not-n-minus-1 (procedural): aₙ = a + nd was used; the first term has no d added, so aₙ = a + (n − 1)d.",
-    "d-left-out (conceptual): The common difference 9 was not used as the coefficient of n; each step adds 9, so aₙ has 9n.",
-    "first-term-times-n (conceptual): The first term was multiplied by n; that would make every term a multiple of 18.",
+    "difference-reversed (procedural): The difference was worked out as a₁ − a₂ = −9; the common difference is a₂ − a₁ = 9 (later term minus earlier term).",
+    "constant-left-out (procedural): Only the step 9n was written; 9n gives 9 at n = 1, but the first term is 18, so a constant 9 must be added.",
     "treated-as-ap (conceptual): Only the first difference was used, as if the sequence were an AP; here the differences themselves change, so aₙ has an n² term.",
     "whole-second-difference (procedural): The coefficient of n² was taken as the second difference (2); it is half of it, because n² itself has second difference 2.",
     "square-only (procedural): Only n² was matched to the first term; the n term is needed too (check a₂ and a₃)."
@@ -35340,7 +35361,7 @@
      }
     ]
    },
-   "fingerprint": "6cc862de",
+   "fingerprint": "3129b8fe",
    "validation": {
     "family": "apgent",
     "deterministic": {
@@ -35578,7 +35599,7 @@
      }
     ]
    },
-   "fingerprint": "616a4279",
+   "fingerprint": "e2a33897",
    "validation": {
     "family": "apsumk",
     "deterministic": {
@@ -35623,34 +35644,33 @@
      4
     ]
    ],
-   "poolSize": 258,
+   "poolSize": 270,
    "excluded": [],
    "difficulty": {
     "1": 100,
     "2": 100,
-    "3": 58
+    "3": 70
    },
    "examples": [
     "gen:apcartn:1,3,4,3",
     "gen:apcartn:1,5,3,1:mc",
     "gen:apcartn:0,3,4,3",
     "gen:apcartn:0,5,3,1:mc",
-    "gen:apcartn:3,3,3,1",
-    "gen:apcartn:3,5,2,1:mc"
+    "gen:apcartn:3,2,4,1",
+    "gen:apcartn:3,4,5,1:mc"
    ],
    "explanations": [
     "upper-end-included (procedural): The end 8 was counted in A, but x < 8 leaves it out; A has 6 elements.",
-    "added (conceptual): The numbers of elements were added; each choice from A goes with each choice from B and from C, so they multiply.",
+    "added (conceptual): The numbers of elements were added; each element of A pairs with each element of B, so n(A × B) = n(A) × n(B).",
     "third-added (procedural): n(A × B) was found, then n(C) was added; A × B × C has a triple for every pair and every element of C.",
-    "pairs-not-subsets (conceptual): n(A × B) = 10 was given; a relation is any subset of A × B, and a set with 10 elements has 2^10 subsets.",
-    "functions-counted (conceptual): The number of functions from A to B (2^5) was found; every subset of A × B is a relation, not only the functions.",
-    "power-of-sum (procedural): 2^(5 + 2) was used; the exponent is n(A × B) = 5 × 2.",
+    "product-commutes (conceptual): A × B and B × A were taken to be the same set, so only 30 pairs were counted; (1, a) is in A × B but (a, 1) is in B × A — different pairs — and no pair is in both, because A and B have no common element.",
+    "square-of-union (procedural): (A ∪ B) × (A ∪ B) was counted (11²); it also contains pairs like (1, 2) and (a, b) that are in neither A × B nor B × A.",
     "union (conceptual): The union (A × B) ∪ (A × C) was counted; the intersection keeps only pairs whose second entry is in both B and C.",
     "forgot-a (procedural): Only B ∩ C was counted; each of its 4 elements pairs with each of the 6 elements of A."
    ],
    "teach": {
     "idea": "A × B is the set of all ordered pairs (a, b) with a ∈ A and b ∈ B. Each of the n(A) first entries goes with each of the n(B) second entries, so n(A × B) = n(A)·n(B).",
-    "method": "Count each set first (list it if it is in set-builder form), then multiply. A relation from A to B is any subset of A × B, so there are 2^(n(A)·n(B)) of them.",
+    "method": "Count each set first (list it if it is in set-builder form), then multiply. A × B and B × A have the same number of pairs, but different pairs: (a, b) ≠ (b, a) unless a = b.",
     "alternatives": [
      {
       "id": "grid",
@@ -35663,11 +35683,11 @@
      }
     ]
    },
-   "fingerprint": "37be76e1",
+   "fingerprint": "ce40fe58",
    "validation": {
     "family": "apcartn",
     "deterministic": {
-     "checked": 258,
+     "checked": 270,
      "failures": []
     },
     "property": {
@@ -35905,6 +35925,7 @@
     "gen:apineq:-3,4,-13,12,0:mc"
    ],
    "explanations": [
+    "brackets-not-swapped (conceptual): The ends were swapped after dividing by −2, but the brackets were kept where they were; reversing the inequalities moves the strict end to the other side, so the brackets swap sides too.",
     "middle-only (procedural): 9 was taken away from the middle only; whatever is done to the middle must be done to all three parts.",
     "both-included (procedural): Both ends were included; only the end that comes from ≤ belongs to the solution set."
    ],
@@ -35923,7 +35944,7 @@
      }
     ]
    },
-   "fingerprint": "0bb3177e",
+   "fingerprint": "d1731d79",
    "validation": {
     "family": "apineq",
     "deterministic": {
@@ -36089,7 +36110,7 @@
      }
     ]
    },
-   "fingerprint": "86ed0116",
+   "fingerprint": "7c36c6de",
    "validation": {
     "family": "apinvf",
     "deterministic": {
@@ -36173,7 +36194,7 @@
      }
     ]
    },
-   "fingerprint": "278cdab1",
+   "fingerprint": "92855d6f",
    "validation": {
     "family": "apinvv",
     "deterministic": {
@@ -36266,7 +36287,7 @@
      }
     ]
    },
-   "fingerprint": "8d117f3e",
+   "fingerprint": "87d044d0",
    "validation": {
     "family": "aplpmax",
     "deterministic": {
@@ -36360,7 +36381,7 @@
      }
     ]
    },
-   "fingerprint": "8c9ae5b5",
+   "fingerprint": "eefac103",
    "validation": {
     "family": "aplpmin",
     "deterministic": {
@@ -36425,12 +36446,14 @@
    "excluded": [],
    "difficulty": {
     "1": 0,
-    "2": 149,
-    "3": 0
+    "2": 48,
+    "3": 101
    },
    "examples": [
-    "gen:aplpopt:3,6,3,1,1,1,1,9",
-    "gen:aplpopt:5,4,2,1,1,1,4,6:mc"
+    "gen:aplpopt:3,5,5,1,1,3,6,3",
+    "gen:aplpopt:5,2,1,1,1,5,4,9:mc",
+    "gen:aplpopt:4,1,1,1,1,4,5,4",
+    "gen:aplpopt:5,4,2,5,1,5,4,6:mc"
    ],
    "explanations": [
     "infeasible-corner (conceptual): An axis intercept that breaks the other constraint was chosen; check every corner in ALL the constraints.",
@@ -36451,7 +36474,7 @@
      }
     ]
    },
-   "fingerprint": "281d7e65",
+   "fingerprint": "e2cd5bcb",
    "validation": {
     "family": "aplpopt",
     "deterministic": {
@@ -36547,7 +36570,7 @@
      }
     ]
    },
-   "fingerprint": "d220cfe3",
+   "fingerprint": "e4e960d7",
    "validation": {
     "family": "apmmul",
     "deterministic": {
@@ -36650,7 +36673,7 @@
      }
     ]
    },
-   "fingerprint": "1e7e251f",
+   "fingerprint": "d8444b0f",
    "validation": {
     "family": "apmlin",
     "deterministic": {
@@ -36730,7 +36753,8 @@
    ],
    "explanations": [
     "item-left-out (procedural): The third item was left out; a row of 3 quantities times a column of 3 prices has 3 products to add.",
-    "added (conceptual): Each quantity was added to its price; the bill multiplies each quantity by its price and then adds.",
+    "not-added (procedural): Each quantity was multiplied by its price, but the three products in a row were not added; QP has one entry per row of Q, the sum of those products.",
+    "prices-reversed (procedural): The prices were paired with the quantities in the wrong order (the column read from the bottom up); the first entry of a row goes with the first entry of the column.",
     "rows-swapped (procedural): The two rows were written in the wrong order; row 1 of QP comes from row 1 of Q."
    ],
    "teach": {
@@ -36748,7 +36772,7 @@
      }
     ]
    },
-   "fingerprint": "2554aa0e",
+   "fingerprint": "dbcaccf5",
    "validation": {
     "family": "apmcost",
     "deterministic": {
@@ -36946,7 +36970,7 @@
      }
     ]
    },
-   "fingerprint": "743c1b07",
+   "fingerprint": "2fda74fb",
    "validation": {
     "family": "apsys2",
     "deterministic": {
@@ -37025,7 +37049,7 @@
      }
     ]
    },
-   "fingerprint": "7d698329",
+   "fingerprint": "2635f97a",
    "validation": {
     "family": "approg",
     "deterministic": {
@@ -37104,7 +37128,7 @@
      }
     ]
    },
-   "fingerprint": "b7a97936",
+   "fingerprint": "46d405eb",
    "validation": {
     "family": "aprrt",
     "deterministic": {
@@ -37134,7 +37158,7 @@
    "domain": [
     [
      1,
-     12
+     40
     ],
     [
      1,
@@ -37148,21 +37172,21 @@
    "poolSize": 360,
    "excluded": [],
    "difficulty": {
-    "1": 123,
-    "2": 110,
-    "3": 127
+    "1": 46,
+    "2": 127,
+    "3": 187
    },
    "examples": [
-    "gen:apvolx:2,2,3",
-    "gen:apvolx:3,4,9:mc",
-    "gen:apvolx:6,2,6",
-    "gen:apvolx:7,5,9:mc",
-    "gen:apvolx:10,2,4",
-    "gen:apvolx:11,3,7:mc"
+    "gen:apvolx:2,1,7",
+    "gen:apvolx:2,3,9:mc",
+    "gen:apvolx:13,2,4",
+    "gen:apvolx:16,1,9:mc",
+    "gen:apvolx:28,1,5",
+    "gen:apvolx:34,2,4:mc"
    ],
    "explanations": [
-    "longest-edge (procedural): x + 9 (the longest edge) was given; the question asks for x.",
-    "cube-root (conceptual): The cube root of 4536 was taken as if all three edges were equal; the other edges are longer than x, so x is less than ∛4536."
+    "cube-root (conceptual): The equation was treated as x³ = 84280, leaving out the terms in x² and x; for x > 0 those terms are positive, so the root is less than ∛84280 ≈ 44.",
+    "linear-only (procedural): Only the x term was kept: 24x = 82560 gives 3440, but x³ and 11x² also add to the left side, so the root is much smaller."
    ],
    "teach": {
     "idea": "x(x + a)(x + b) = V expands to a cubic with one sign change, so it has exactly one positive root; a whole-number root divides the constant term V.",
@@ -37179,7 +37203,7 @@
      }
     ]
    },
-   "fingerprint": "5d16f4d0",
+   "fingerprint": "28883776",
    "validation": {
     "family": "apvolx",
     "deterministic": {
@@ -37255,7 +37279,7 @@
      }
     ]
    },
-   "fingerprint": "d27c2bce",
+   "fingerprint": "6b257172",
    "validation": {
     "family": "apconj",
     "deterministic": {
@@ -37327,7 +37351,7 @@
      }
     ]
    },
-   "fingerprint": "04e0fbb5",
+   "fingerprint": "c12ec253",
    "validation": {
     "family": "apdesc",
     "deterministic": {
@@ -37413,7 +37437,7 @@
      }
     ]
    },
-   "fingerprint": "7a9a1323",
+   "fingerprint": "66c38619",
    "validation": {
     "family": "apvsum",
     "deterministic": {
@@ -37495,7 +37519,7 @@
      }
     ]
    },
-   "fingerprint": "40169db0",
+   "fingerprint": "79b03c87",
    "validation": {
     "family": "apvform",
     "deterministic": {
@@ -37673,7 +37697,7 @@
      }
     ]
    },
-   "fingerprint": "164889bc",
+   "fingerprint": "516a7d70",
    "validation": {
     "family": "apadj3",
     "deterministic": {
@@ -37745,7 +37769,7 @@
      }
     ]
    },
-   "fingerprint": "c66363a7",
+   "fingerprint": "92389840",
    "validation": {
     "family": "aprank",
     "deterministic": {
@@ -37834,7 +37858,7 @@
      }
     ]
    },
-   "fingerprint": "1f2ee5c5",
+   "fingerprint": "cd778ca7",
    "validation": {
     "family": "aqrank",
     "deterministic": {
@@ -37903,6 +37927,7 @@
     "gen:aqcpar:1,1,3,2,2,1:mc"
    ],
    "explanations": [
+    "solve-sign (procedural): |A| = −3λ − 3 = 0 was solved with a sign slip, giving λ = 1; moving −3 across changes its sign.",
     "copy-row (conceptual): λ was chosen to copy the z-coefficient of the second equation; the third row must be the same combination of the first two rows in every column.",
     "homogeneous-zero (conceptual): μ = 0 was chosen, as for a homogeneous system; here the third equation must be the same combination of the first two on the right side too.",
     "just-add (procedural): The first two equations were simply added; the third row is 1R₁ − 1R₂, so the right side must be 1 × 1 − 1 × 5.",
@@ -37923,7 +37948,7 @@
      }
     ]
    },
-   "fingerprint": "f3f7f61d",
+   "fingerprint": "19a98d36",
    "validation": {
     "family": "aqcpar",
     "deterministic": {
@@ -38158,24 +38183,24 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 99,
-    "2": 135,
-    "3": 66
+    "1": 13,
+    "2": 166,
+    "3": 121
    },
    "examples": [
-    "gen:aqbinid:0,7,2,0",
-    "gen:aqbinid:1,4,4,0:mc",
-    "gen:aqbinid:1,2,3,1",
-    "gen:aqbinid:1,9,2,1:mc",
-    "gen:aqbinid:2,6,5,1",
+    "gen:aqbinid:0,6,0,0",
+    "gen:aqbinid:1,2,0,0:mc",
+    "gen:aqbinid:0,7,-2,1",
+    "gen:aqbinid:1,4,4,1:mc",
+    "gen:aqbinid:2,7,-5,1",
     "gen:aqbinid:3,-2,-3,1:mc"
    ],
    "explanations": [
+    "negative (conceptual): −6 (the inverse for ordinary addition) was given; the inverse b must satisfy 6 ∗ b = e for this operation's identity e.",
     "identity-zero (conceptual): 6 ∗ b = 0 was solved; the identity of ∗ is −9, not 0.",
-    "identity-sign (procedural): a + e + 9 = a gives e = − 9; the sign was slipped.",
-    "negative (conceptual): −3 (the inverse for ordinary addition) was given; the inverse b must satisfy 3 ∗ b = e for this operation's identity e.",
-    "identity-one (conceptual): 3 ∗ b = 1 was solved; the identity of ∗ is 0, so solve 3 + b + 3(3)b = 0.",
-    "reciprocal (conceptual): 1/3 (the ordinary inverse) was given; the inverse b must satisfy 3 ∗ b = e, where e = 9 is this operation's identity."
+    "identity-sign (procedural): a + e + 8 = a gives e = − 8; the sign was slipped.",
+    "reciprocal (conceptual): 1/5 (the ordinary inverse) was given; the inverse b must satisfy 5 ∗ b = e, where e = 9 is this operation's identity.",
+    "identity-one (conceptual): 6 ∗ b = 1 was solved; the identity of ∗ is 0, so solve 6 + b + 3(6)b = 0."
    ],
    "teach": {
     "idea": "The identity e leaves every element unchanged: a ∗ e = e ∗ a = a. An inverse of a is an element b with a ∗ b = b ∗ a = e. Both depend on the rule, not on ordinary + or ×.",
@@ -38192,7 +38217,7 @@
      }
     ]
    },
-   "fingerprint": "c629eb59",
+   "fingerprint": "c09d5db7",
    "validation": {
     "family": "aqbinid",
     "deterministic": {
@@ -38222,7 +38247,7 @@
    "domain": [
     [
      0,
-     9
+     10
     ],
     [
      -4,
@@ -38233,18 +38258,18 @@
      6
     ]
    ],
-   "poolSize": 123,
+   "poolSize": 147,
    "excluded": [],
    "difficulty": {
     "1": 62,
-    "2": 22,
+    "2": 46,
     "3": 39
    },
    "examples": [
     "gen:aqbinp:0,3,3",
     "gen:aqbinp:1,2,4",
-    "gen:aqbinp:3,1,5",
-    "gen:aqbinp:6,1,0",
+    "gen:aqbinp:6,2,0",
+    "gen:aqbinp:10,2,0",
     "gen:aqbinp:9,1,1",
     "gen:aqbinp:9,2,4"
    ],
@@ -38269,11 +38294,11 @@
      }
     ]
    },
-   "fingerprint": "a0aed105",
+   "fingerprint": "248591d9",
    "validation": {
     "family": "aqbinp",
     "deterministic": {
-     "checked": 123,
+     "checked": 147,
      "failures": []
     },
     "property": {
@@ -38351,7 +38376,7 @@
      }
     ]
    },
-   "fingerprint": "a399c8ae",
+   "fingerprint": "11ee68b4",
    "validation": {
     "family": "aqonto",
     "deterministic": {
@@ -38419,7 +38444,7 @@
      }
     ]
    },
-   "fingerprint": "d963c0ff",
+   "fingerprint": "c2bf1c25",
    "validation": {
     "family": "aqrel",
     "deterministic": {
@@ -38448,6 +38473,10 @@
    "multipleChoice": true,
    "domain": [
     [
+     4,
+     5
+    ],
+    [
      0,
      65535
     ]
@@ -38456,14 +38485,14 @@
    "excluded": [],
    "difficulty": {
     "1": 0,
-    "2": 38,
-    "3": 362
+    "2": 26,
+    "3": 374
    },
    "examples": [
-    "gen:aqeqcl:5248",
-    "gen:aqeqcl:17410:mc",
-    "gen:aqeqcl:8485",
-    "gen:aqeqcl:29184:mc"
+    "gen:aqeqcl:4,6208",
+    "gen:aqeqcl:4,16642:mc",
+    "gen:aqeqcl:4,25121",
+    "gen:aqeqcl:5,10912:mc"
    ],
    "explanations": [
     "reflexive-only (conceptual): Only the pairs (a, a) were added; an equivalence relation must also be symmetric and transitive.",
@@ -38485,7 +38514,7 @@
      }
     ]
    },
-   "fingerprint": "126e41ac",
+   "fingerprint": "c1e6530b",
    "validation": {
     "family": "aqeqcl",
     "deterministic": {
@@ -38497,7 +38526,7 @@
      "failures": []
     },
     "boundary": {
-     "cases": 4,
+     "cases": 8,
      "failures": []
     },
     "excluded": 0,
@@ -38571,7 +38600,7 @@
      }
     ]
    },
-   "fingerprint": "8f23779d",
+   "fingerprint": "51fa1518",
    "validation": {
     "family": "aqfp",
     "deterministic": {
@@ -38650,7 +38679,7 @@
      }
     ]
    },
-   "fingerprint": "0707f8d8",
+   "fingerprint": "61f85b30",
    "validation": {
     "family": "aqvel",
     "deterministic": {
@@ -38716,7 +38745,7 @@
    ],
    "explanations": [
     "leading-sign (conceptual): The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them.",
-    "root-signs (procedural): The roots of f′ were read with the wrong signs: (x − 3) = 0 gives x = 3.",
+    "root-signs (procedural): The roots of f′ were read with the wrong signs: x − 3 = 0 gives x = 3.",
     "inside-outside (conceptual): The two kinds of interval were swapped: f′(x) = 6(x − 3)(x − 4) is negative between the roots and positive outside them.",
     "one-piece (procedural): Only one piece was given; f′ has the same sign on (−∞, 3) and on (4, ∞), so both pieces belong to the answer."
    ],
@@ -38735,7 +38764,7 @@
      }
     ]
    },
-   "fingerprint": "adf1d430",
+   "fingerprint": "59c2ee5e",
    "validation": {
     "family": "aqmono",
     "deterministic": {
@@ -38818,7 +38847,7 @@
      }
     ]
    },
-   "fingerprint": "81669160",
+   "fingerprint": "2f49d0c2",
    "validation": {
     "family": "aqext",
     "deterministic": {
@@ -38901,7 +38930,7 @@
      }
     ]
    },
-   "fingerprint": "25880cc8",
+   "fingerprint": "dc45885d",
    "validation": {
     "family": "aqabs",
     "deterministic": {
@@ -38984,7 +39013,7 @@
      }
     ]
    },
-   "fingerprint": "a9e2217e",
+   "fingerprint": "a8ac2334",
    "validation": {
     "family": "aqrr",
     "deterministic": {
@@ -39063,7 +39092,7 @@
      }
     ]
    },
-   "fingerprint": "7cfb7b32",
+   "fingerprint": "1b60960a",
    "validation": {
     "family": "aqarea",
     "deterministic": {
@@ -39128,14 +39157,14 @@
     "gen:aqcontk:3,3,1,0,0:mc"
    ],
    "explanations": [
-    "move-sign (prerequisite): 3 was moved across without changing its sign: 3k + 3 = 30 gives 3k = 30 − 3.",
-    "no-divide (procedural): The equation 3k + 3 = 30 was not finished: divide by 3.",
-    "upside-down (procedural): The ratio was turned over: sin(6x)/(5x) = (6/5) × sin(6x)/(6x), which tends to 6/5.",
+    "move-sign (prerequisite): 3 was moved across without changing its sign: 3k + 3 = 30 was written as 3k = 30 + 3. Moving a number to the other side changes its sign: 3k = 30 − 3.",
+    "no-divide (procedural): The equation 3k + 3 = 30 was not finished: 3k = 27 was given as the answer, but k = 27 ÷ 3.",
+    "upside-down (procedural): The ratio was turned over, giving 5/6: the number in the sine goes on top, since sin(6x)/(5x) = (6/5) × sin(6x)/(6x), which tends to 6/5.",
     "m-lost (procedural): sin(6x)/x was taken as 1; it tends to 6, since sin θ/θ → 1 needs θ = 6x in both places.",
-    "half-lost (procedural): After multiplying by √(1 + mx) + 1, the denominator tends to 2; the 2 was lost.",
+    "half-lost (procedural): After multiplying top and bottom by √(1 + 6x) + 1, the bottom has the factor √(1 + 6x) + 1, which tends to 2; that 2 was lost.",
     "not-squared (procedural): 1 − cos(6x) = 2 sin²(6x/2), which gives (6x)²/2: the 6 is squared.",
     "cube-factor (prerequisite): x³ − 216 was factorised as (x − 6)(x² + 36); it is (x − 6)(x² + 6x + 36).",
-    "zero (conceptual): 0/0 was taken as 0; it means the expression must be simplified (cancel x − u) before substituting."
+    "zero (conceptual): 0/0 was taken as 0; it means the expression must be simplified (cancel x − 6) before substituting."
    ],
    "teach": {
     "idea": "f is continuous at a when lim (x → a) f(x) exists and equals f(a): the left limit, the right limit and the value all agree.",
@@ -39152,7 +39181,7 @@
      }
     ]
    },
-   "fingerprint": "9758c9ef",
+   "fingerprint": "a01a4a27",
    "validation": {
     "family": "aqcontk",
     "deterministic": {
@@ -39236,7 +39265,7 @@
      }
     ]
    },
-   "fingerprint": "ecf49df2",
+   "fingerprint": "b37d8d42",
    "validation": {
     "family": "aqconc",
     "deterministic": {
@@ -39315,7 +39344,7 @@
      }
     ]
    },
-   "fingerprint": "8c0efa6c",
+   "fingerprint": "0484854b",
    "validation": {
     "family": "aqodd",
     "deterministic": {
@@ -39349,31 +39378,31 @@
     ],
     [
      0,
-     6
+     15
     ],
     [
      1,
-     12
+     40
     ]
    ],
-   "poolSize": 259,
+   "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 44,
-    "2": 180,
-    "3": 35
+    "1": 8,
+    "2": 277,
+    "3": 15
    },
    "examples": [
-    "gen:aqking:1,0,5",
-    "gen:aqking:2,0,9:mc",
-    "gen:aqking:1,2,9",
-    "gen:aqking:2,4,9:mc",
-    "gen:aqking:3,3,7",
-    "gen:aqking:3,4,12:mc"
+    "gen:aqking:1,0,4",
+    "gen:aqking:1,0,7:mc",
+    "gen:aqking:1,3,23",
+    "gen:aqking:2,10,20:mc",
+    "gen:aqking:3,4,19",
+    "gen:aqking:3,15,22:mc"
    ],
    "explanations": [
-    "not-halved (procedural): Adding the two forms of I gives 2I = ∫ 1 dx = 6; the last step, dividing by 2, was missed.",
-    "sum-of-limits (procedural): ∫ₐᵇ 1 dx = b − a = 6, not a + b."
+    "not-halved (procedural): Adding the two forms of I gives 2I = ∫ 1 dx = 25; the last step, dividing by 2, was missed.",
+    "sum-of-limits (procedural): ∫ₐᵇ 1 dx = b − a = 25, not a + b."
    ],
    "teach": {
     "idea": "∫ₐᵇ f(x) dx = ∫ₐᵇ f(a + b − x) dx: replacing x by a + b − x runs over the same interval backwards. For g(x)/(g(x) + g(a + b − x)), the two forms add up to 1.",
@@ -39390,11 +39419,11 @@
      }
     ]
    },
-   "fingerprint": "81d9afa5",
+   "fingerprint": "5650ebcb",
    "validation": {
     "family": "aqking",
     "deterministic": {
-     "checked": 259,
+     "checked": 300,
      "failures": []
     },
     "property": {
@@ -39471,7 +39500,7 @@
      }
     ]
    },
-   "fingerprint": "904e10f7",
+   "fingerprint": "5186a139",
    "validation": {
     "family": "aqabsint",
     "deterministic": {
@@ -39527,7 +39556,7 @@
    ],
    "explanations": [
     "slope-without-x (procedural): The slopes were matched as a = 5, forgetting the 2x from x²: the left derivative at x = 3 is 2(3) + a.",
-    "sign-slip (procedural): 2(3) + a = 5 was solved as a = 5 + 6; take 6 from both sides."
+    "sign-slip (procedural): 2(3) + a = 5 was solved as a = 5 + 6; subtract 2(3) = 6 from both sides instead."
    ],
    "teach": {
     "idea": "Differentiable at c means the left and right derivatives at c are equal; this also needs f to be continuous at c (the pieces must meet).",
@@ -39544,7 +39573,7 @@
      }
     ]
    },
-   "fingerprint": "424d7356",
+   "fingerprint": "b14414bc",
    "validation": {
     "family": "aqdiffab",
     "deterministic": {
@@ -39605,14 +39634,14 @@
     "gen:aqsep:0,2,-1,1:mc"
    ],
    "explanations": [
-    "constant-in-exponent (procedural): ln y = 2x^2 + 2x + C gives C = ln 5, not 5; the constant was put into the exponent as 5.",
+    "constant-in-exponent (procedural): log y = 2x² + 2x + C gives C = log 5, not 5; the constant was put into the exponent as 5.",
     "y-dropped (conceptual): The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.",
-    "constant-dropped (procedural): The constant was dropped; y(1) = 5 gives y = 5x^4.",
-    "constant-added-late (procedural): The constant was added after taking exponentials; ln y = p ln x + C gives y = Axᵖ, a constant multiple."
+    "constant-dropped (procedural): The constant was dropped; y(1) = 5 gives y = 5x⁴.",
+    "constant-added-late (procedural): The constant was added after taking exponentials; log y = p log x + C gives y = Axᵖ, a constant multiple."
    ],
    "teach": {
     "idea": "When dy/dx is a function of x times a function of y, the variables can be separated: dy/g(y) = f(x) dx, and each side integrated.",
-    "method": "Divide by y, integrate both sides (ln y on the left), add one constant, exponentiate, and use the initial condition to find the constant.",
+    "method": "Divide by y, integrate both sides (log y on the left, the natural logarithm), add one constant, exponentiate, and use the initial condition to find the constant.",
     "alternatives": [
      {
       "id": "check",
@@ -39625,7 +39654,7 @@
      }
     ]
    },
-   "fingerprint": "52b429a9",
+   "fingerprint": "ea4ae94f",
    "validation": {
     "family": "aqsep",
     "deterministic": {
@@ -39655,10 +39684,6 @@
    "domain": [
     [
      1,
-     3
-    ],
-    [
-     1,
      4
     ],
     [
@@ -39666,24 +39691,28 @@
      5
     ],
     [
+     1,
+     6
+    ],
+    [
      0,
      2
     ]
    ],
-   "poolSize": 180,
+   "poolSize": 360,
    "excluded": [],
    "difficulty": {
-    "1": 90,
-    "2": 30,
-    "3": 60
+    "1": 180,
+    "2": 45,
+    "3": 135
    },
    "examples": [
-    "gen:aqorddeg:2,1,1,0",
-    "gen:aqorddeg:3,1,1,0:mc",
-    "gen:aqorddeg:1,1,5,1",
-    "gen:aqorddeg:1,2,5,2:mc",
-    "gen:aqorddeg:2,2,5,2",
-    "gen:aqorddeg:3,1,5,1:mc"
+    "gen:aqorddeg:2,3,3,0",
+    "gen:aqorddeg:3,5,1,0:mc",
+    "gen:aqorddeg:1,2,3,0",
+    "gen:aqorddeg:1,3,5,0:mc",
+    "gen:aqorddeg:3,1,2,0",
+    "gen:aqorddeg:4,1,2,0:mc"
    ],
    "explanations": [
     "largest-power (conceptual): The largest power anywhere was taken as the degree; the degree is the power of the highest-order derivative only.",
@@ -39704,11 +39733,11 @@
      }
     ]
    },
-   "fingerprint": "1c14468e",
+   "fingerprint": "b9bb3dd0",
    "validation": {
     "family": "aqorddeg",
     "deterministic": {
-     "checked": 180,
+     "checked": 360,
      "failures": []
     },
     "property": {
@@ -39765,8 +39794,8 @@
     "gen:aqlinde:3,3,0,3:mc"
    ],
    "explanations": [
-    "constant-dropped (procedural): The constant of integration was dropped; y·x^3 = … + C, and y(1) = −1 fixes C.",
-    "q-not-multiplied (procedural): The right side was integrated without multiplying it by the integrating factor x^3: y·(IF) = ∫ Q·(IF) dx."
+    "constant-dropped (procedural): The constant of integration was dropped; y·x³ = … + C, and y(1) = −1 fixes C.",
+    "q-not-multiplied (procedural): The right side was integrated without multiplying it by the integrating factor x³: y·(IF) = ∫ Q·(IF) dx."
    ],
    "teach": {
     "idea": "For dy/dx + Py = Q, multiplying by the integrating factor e^(∫P dx) turns the left side into the derivative of y × IF.",
@@ -39783,7 +39812,7 @@
      }
     ]
    },
-   "fingerprint": "23ca4aff",
+   "fingerprint": "4158807c",
    "validation": {
     "family": "aqlinde",
     "deterministic": {
@@ -39863,7 +39892,7 @@
      }
     ]
    },
-   "fingerprint": "eb9b4911",
+   "fingerprint": "acc7c015",
    "validation": {
     "family": "aqhom",
     "deterministic": {
@@ -39941,7 +39970,7 @@
      }
     ]
    },
-   "fingerprint": "14056011",
+   "fingerprint": "8c389a9a",
    "validation": {
     "family": "aqd2",
     "deterministic": {
@@ -40316,17 +40345,17 @@
     "x2-as-x (procedural): The derivative of x² was taken as x; it is 2x.",
     "cos-sign (recall): The derivative of cos was taken as +sin; it is −sin, so the minus signs cancel.",
     "stopped-early (procedural): After one application the limit of sin(6x)/x was taken as 1; it is 6.",
-    "ax-derivative (recall): The derivative of 6^x was taken as 6; it is 6^x ln 6.",
-    "log-quotient (recall): ln 6 − ln 5 was written as ln 6 ÷ ln 5; a difference of logarithms is the logarithm of a quotient.",
+    "ax-derivative (recall): The derivative of 6^x was taken as 6; it is 6^x log 6 (natural logarithm).",
+    "log-quotient (recall): log 6 − log 5 was written as log 6 ÷ log 5; a difference of logarithms is the logarithm of a quotient.",
     "one-to-infinity (conceptual): 1 to any power was taken to be 1; here the base only tends to 1 while the power grows, which is an indeterminate form.",
-    "no-exponential (procedural): The limit of ln L was given (12) instead of L itself; L = e^(ln L).",
-    "add-for-multiply (procedural): The limit of ln L is 2 × 6, not 2 + 6.",
+    "no-exponential (procedural): The limit of log L was given (12) instead of L itself; L = e^(log L).",
+    "add-for-multiply (procedural): The limit of log L is 2 × 6, not 2 + 6.",
     "tan-as-x (conceptual): tan 6x was replaced by 6x too early, which gives 0; the difference needs the next term, (6x)³/3.",
     "x3-factor (procedural): The factor 3 from differentiating x³ was lost."
    ],
    "teach": {
     "idea": "Near x = 0 a 0/0 quotient behaves like the ratio of the rates at which numerator and denominator leave 0, so lim f/g = lim f′/g′ while the form stays 0/0.",
-    "method": "Check the form; differentiate the numerator and the denominator separately (not the quotient rule) and substitute again; repeat while it is still 0/0. For 1^∞, take ln first and exponentiate at the end.",
+    "method": "Check the form; differentiate the numerator and the denominator separately (not the quotient rule) and substitute again; repeat while it is still 0/0. For 1^∞, take log (the natural logarithm) first and exponentiate at the end.",
     "alternatives": [
      {
       "id": "series",
@@ -40339,7 +40368,7 @@
      }
     ]
    },
-   "fingerprint": "97e2ac9c",
+   "fingerprint": "6615fc4b",
    "validation": {
     "family": "arlhop",
     "deterministic": {
@@ -40380,18 +40409,18 @@
      9
     ]
    ],
-   "poolSize": 148,
+   "poolSize": 144,
    "excluded": [],
    "difficulty": {
-    "1": 14,
-    "2": 64,
+    "1": 12,
+    "2": 62,
     "3": 70
    },
    "examples": [
-    "gen:arlinapp:0,3,3",
-    "gen:arlinapp:0,5,1:mc",
-    "gen:arlinapp:0,6,3",
-    "gen:arlinapp:0,8,4:mc",
+    "gen:arlinapp:0,4,2",
+    "gen:arlinapp:0,5,2:mc",
+    "gen:arlinapp:0,6,4",
+    "gen:arlinapp:0,8,5:mc",
     "gen:arlinapp:1,4,-2",
     "gen:arlinapp:1,5,4:mc"
    ],
@@ -40417,11 +40446,11 @@
      }
     ]
    },
-   "fingerprint": "ca956ffa",
+   "fingerprint": "ca24f92c",
    "validation": {
     "family": "arlinapp",
     "deterministic": {
-     "checked": 148,
+     "checked": 144,
      "failures": []
     },
     "property": {
@@ -40498,7 +40527,7 @@
      }
     ]
    },
-   "fingerprint": "73ae5863",
+   "fingerprint": "8ae76349",
    "validation": {
     "family": "arerror",
     "deterministic": {
@@ -40813,7 +40842,7 @@
      }
     ]
    },
-   "fingerprint": "f8095d0c",
+   "fingerprint": "f41a01ec",
    "validation": {
     "family": "armvlim",
     "deterministic": {
@@ -40856,27 +40885,32 @@
     [
      1,
      4
+    ],
+    [
+     0,
+     1
     ]
    ],
-   "poolSize": 200,
+   "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 28,
-    "2": 40,
-    "3": 132
+    "1": 32,
+    "2": 166,
+    "3": 102
    },
    "examples": [
-    "gen:armvlimx:0,1,3,2",
-    "gen:armvlimx:1,0,1,3",
-    "gen:armvlimx:1,1,1,2",
-    "gen:armvlimx:1,1,4,3",
-    "gen:armvlimx:1,3,4,1",
-    "gen:armvlimx:3,0,3,1"
+    "gen:armvlimx:0,1,4,2,0",
+    "gen:armvlimx:1,0,2,3,1",
+    "gen:armvlimx:1,1,4,1,1",
+    "gen:armvlimx:2,2,3,4,0",
+    "gen:armvlimx:2,1,3,1,1",
+    "gen:armvlimx:3,0,3,1,1"
    ],
    "explanations": [
-    "one-path (conceptual): Only one path (an axis) was tried; along an axis the values tend to 0, but along a line y = mx they do not, so the limit does not exist.",
+    "one-path (conceptual): Only one path (an axis) was tried; along an axis the values tend to a single number, but along a line y = mx they do not, so the limit does not exist.",
     "other-axis (conceptual): Only the other axis was tried, which gives a non-zero constant; along the first axis the values are 0.",
-    "zero-denominator (conceptual): The denominator is 0 at the origin, so it was decided that there is no limit; a limit looks at the values near the point, and here the top shrinks faster than the bottom."
+    "zero-denominator (conceptual): The denominator is 0 at the origin, so it was decided that there is no limit; a limit looks at the values near the point, and here the top shrinks faster than the bottom.",
+    "one-forgotten (procedural): The part k xᵖyᵠ/(x² + cy²) was seen to tend to 0, but the x² + cy² in the numerator, divided by the denominator, gives 1, which stays."
    ],
    "teach": {
     "idea": "A limit at a point in the plane must be the same along every way of approaching; two paths with different limits prove there is no limit.",
@@ -40893,11 +40927,11 @@
      }
     ]
    },
-   "fingerprint": "0bff4c2d",
+   "fingerprint": "059e823f",
    "validation": {
     "family": "armvlimx",
     "deterministic": {
-     "checked": 200,
+     "checked": 300,
      "failures": []
     },
     "property": {
@@ -40905,7 +40939,7 @@
      "failures": []
     },
     "boundary": {
-     "cases": 16,
+     "cases": 20,
      "failures": []
     },
     "excluded": 0,
@@ -40976,7 +41010,7 @@
      }
     ]
    },
-   "fingerprint": "e167eebb",
+   "fingerprint": "61eaac76",
    "validation": {
     "family": "arodemod",
     "deterministic": {
@@ -41138,8 +41172,8 @@
    ],
    "explanations": [
     "forgot-degree (recall): The value of f itself was given; Euler's theorem says x f_x + y f_y = n f, with n = 4 here.",
-    "degree-off (recall): The degree was taken as 3; every term here has degree 4.",
-    "one-part (procedural): Only x ∂f/∂x was worked out; the y ∂f/∂y part was left out."
+    "one-part (procedural): Only x ∂f/∂x was worked out; the y ∂f/∂y part was left out.",
+    "degree-off (recall): The degree was taken as 3; every term here has degree 4."
    ],
    "teach": {
     "idea": "If every term of f has degree n, scaling (x, y) by t scales f by tⁿ; differentiating that at t = 1 gives x f_x + y f_y = n f.",
@@ -41156,7 +41190,7 @@
      }
     ]
    },
-   "fingerprint": "a193d42f",
+   "fingerprint": "6925dcc3",
    "validation": {
     "family": "areuler",
     "deterministic": {
@@ -41236,7 +41270,7 @@
      }
     ]
    },
-   "fingerprint": "ab5a51ea",
+   "fingerprint": "4bbba3c2",
    "validation": {
     "family": "arpfint",
     "deterministic": {
@@ -41391,7 +41425,7 @@
      }
     ]
    },
-   "fingerprint": "fd2883ad",
+   "fingerprint": "375251f3",
    "validation": {
     "family": "armaclaurin",
     "deterministic": {
@@ -41693,7 +41727,7 @@
     "gen:arparabola:1,0,10,-2,0:mc"
    ],
    "explanations": [
-    "no-quarter (recall): The number 16 was used as the focal distance; −1616·x means 4a = -16, so a = −4.",
+    "no-quarter (recall): The number 16 was used as the focal distance; −1616·x means 4a = −16, so a = −4.",
     "wrong-axis (conceptual): The focus was put on the wrong axis; the parabola opens along the y-direction (the variable that is not squared).",
     "vertex-sign (procedural): The vertex was read with the wrong signs: (x − h) means the vertex has x = h.",
     "direction-sign (procedural): The parabola was taken to open the other way; the sign in front of the linear side gives the direction."
@@ -41713,7 +41747,7 @@
      }
     ]
    },
-   "fingerprint": "64061dd6",
+   "fingerprint": "efa8669b",
    "validation": {
     "family": "arparabola",
     "deterministic": {
@@ -41758,19 +41792,19 @@
      1
     ]
    ],
-   "poolSize": 132,
+   "poolSize": 131,
    "excluded": [],
    "difficulty": {
     "1": 15,
     "2": 51,
-    "3": 66
+    "3": 65
    },
    "examples": [
     "gen:areccentric:0,4,3,0",
     "gen:areccentric:0,6,1,0:mc",
     "gen:areccentric:1,1,3,0",
     "gen:areccentric:1,4,2,0:mc",
-    "gen:areccentric:0,5,3,1",
+    "gen:areccentric:0,5,2,1",
     "gen:areccentric:1,3,3,1:mc"
    ],
    "explanations": [
@@ -41795,11 +41829,11 @@
      }
     ]
    },
-   "fingerprint": "1d7a2396",
+   "fingerprint": "5ada0d20",
    "validation": {
     "family": "areccentric",
     "deterministic": {
-     "checked": 132,
+     "checked": 131,
      "failures": []
     },
     "property": {
@@ -41878,7 +41912,7 @@
      }
     ]
    },
-   "fingerprint": "495e7cce",
+   "fingerprint": "76997582",
    "validation": {
     "family": "arconicarea",
     "deterministic": {
@@ -41959,7 +41993,7 @@
      }
     ]
    },
-   "fingerprint": "8489a065",
+   "fingerprint": "d7845b8a",
    "validation": {
     "family": "arconicid",
     "deterministic": {
@@ -42101,7 +42135,7 @@
     "gen:aslocpar:3,-3,6:mc"
    ],
    "explanations": [
-    "line-distance-sign (conceptual): The distance from P(x, y) to the line x = −2 is |x − −2| = |x + 2|; it was written with the wrong sign.",
+    "line-distance-sign (conceptual): The distance from P(x, y) to the line x = −2 is |x + 2|; the number was used with the wrong sign, as |x − 2|.",
     "bracket-sign (prerequisite): (y − 6)² was expanded with the wrong sign of the middle term: (y − k)² = y² − 2ky + k².",
     "lost-two (procedural): When the x² terms cancel, the x terms give 16x (the 2 from expanding the squares stays); the expression was divided by 8 instead of 16."
    ],
@@ -42120,7 +42154,7 @@
      }
     ]
    },
-   "fingerprint": "be8e5c1c",
+   "fingerprint": "74c979d6",
    "validation": {
     "family": "aslocpar",
     "deterministic": {
@@ -42153,6 +42187,10 @@
      6
     ],
     [
+     1,
+     3
+    ],
+    [
      -6,
      6
     ],
@@ -42161,23 +42199,23 @@
      3
     ]
    ],
-   "poolSize": 234,
+   "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 12,
-    "2": 66,
-    "3": 156
+    "1": 11,
+    "2": 58,
+    "3": 231
    },
    "examples": [
-    "gen:aspair:-2,2,1",
-    "gen:aspair:0,3,1",
-    "gen:aspair:-4,-2,1",
-    "gen:aspair:-2,6,1",
-    "gen:aspair:-4,0,2",
-    "gen:aspair:-1,2,2"
+    "gen:aspair:-3,1,3,1",
+    "gen:aspair:0,1,2,1",
+    "gen:aspair:-4,1,-3,1",
+    "gen:aspair:-1,1,0,1",
+    "gen:aspair:-4,3,-1,2",
+    "gen:aspair:-1,2,6,1"
    ],
    "explanations": [
-    "sum-sign (procedural): The sum of the slopes was taken as +(xy coefficient)/(y² coefficient); for y² + 2hxy/b + … the sum of the slopes is −2h/b.",
+    "sum-sign (procedural): The sum of the slopes was taken as +(xy coefficient)/(y² coefficient); for by² + 2hxy + ax² = 0 the sum of the slopes is −2h/b.",
     "reciprocal-slopes (conceptual): The equation was solved for x/y instead of y/x, which gives the reciprocals of the slopes. Put y = mx and solve for m."
    ],
    "teach": {
@@ -42189,17 +42227,17 @@
       "title": "Factorise directly",
       "kind": "procedural",
       "text": [
-       "Treat the equation as a quadratic in y and factorise it into (y − m₁x)(y − m₂x) times a number.",
-       "Each factor set to zero is one line; read off its slope."
+       "Treat the equation as a quadratic in y and factorise it into (q₁y − p₁x)(q₂y − p₂x).",
+       "Each factor set to zero is one line; read off its slope p/q."
       ]
      }
     ]
    },
-   "fingerprint": "3313f51c",
+   "fingerprint": "ba66ecf7",
    "validation": {
     "family": "aspair",
     "deterministic": {
-     "checked": 234,
+     "checked": 300,
      "failures": []
     },
     "property": {
@@ -42207,7 +42245,7 @@
      "failures": []
     },
     "boundary": {
-     "cases": 12,
+     "cases": 16,
      "failures": []
     },
     "excluded": 0,
@@ -42228,6 +42266,10 @@
      6
     ],
     [
+     1,
+     3
+    ],
+    [
      -6,
      6
     ],
@@ -42236,23 +42278,23 @@
      3
     ]
    ],
-   "poolSize": 231,
+   "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 17,
-    "2": 60,
-    "3": 154
+    "1": 16,
+    "2": 55,
+    "3": 229
    },
    "examples": [
-    "gen:aspairang:-2,0,1",
-    "gen:aspairang:0,1,1:mc",
-    "gen:aspairang:-5,4,1",
-    "gen:aspairang:-2,5,1:mc",
-    "gen:aspairang:-4,-1,3",
-    "gen:aspairang:-1,2,2:mc"
+    "gen:aspairang:-2,1,0,1",
+    "gen:aspairang:-1,1,3,1:mc",
+    "gen:aspairang:-5,1,4,1",
+    "gen:aspairang:-2,1,4,1:mc",
+    "gen:aspairang:-4,3,-1,1",
+    "gen:aspairang:-1,2,-1,3:mc"
    ],
    "explanations": [
-    "no-absolute-value (procedural): The sign was kept; the acute angle has a positive tangent, so take the absolute value.",
+    "no-absolute-value (procedural): The sign of (m₁ − m₂)/(1 + m₁m₂) was kept; the acute angle has a positive tangent, so take the absolute value.",
     "lost-two (recall): The formula is tan θ = |2√(h² − ab)/(a + b)|; the 2 was left out.",
     "denominator-sign (recall): With slopes m₁ and m₂, tan θ = |(m₁ − m₂)/(1 + m₁m₂)|; a minus sign was used in the denominator."
    ],
@@ -42271,11 +42313,11 @@
      }
     ]
    },
-   "fingerprint": "ad4844b5",
+   "fingerprint": "e9ee688a",
    "validation": {
     "family": "aspairang",
     "deterministic": {
-     "checked": 231,
+     "checked": 300,
      "failures": []
     },
     "property": {
@@ -42283,7 +42325,7 @@
      "failures": []
     },
     "boundary": {
-     "cases": 12,
+     "cases": 16,
      "failures": []
     },
     "excluded": 0,
@@ -42433,7 +42475,7 @@
      }
     ]
    },
-   "fingerprint": "eb78525f",
+   "fingerprint": "2dd11a27",
    "validation": {
     "family": "asperpd",
     "deterministic": {
@@ -42678,7 +42720,7 @@
      }
     ]
    },
-   "fingerprint": "eb072a8a",
+   "fingerprint": "c652fe24",
    "validation": {
     "family": "aspar",
     "deterministic": {
@@ -42759,7 +42801,7 @@
      }
     ]
    },
-   "fingerprint": "eeb2d075",
+   "fingerprint": "3d4aa24d",
    "validation": {
     "family": "astan",
     "deterministic": {
@@ -43102,7 +43144,7 @@
      }
     ]
    },
-   "fingerprint": "e8d75d39",
+   "fingerprint": "b26ee87a",
    "validation": {
     "family": "asoct",
     "deterministic": {
@@ -43272,7 +43314,7 @@
      }
     ]
    },
-   "fingerprint": "6b14e213",
+   "fingerprint": "290e598b",
    "validation": {
     "family": "aslrel",
     "deterministic": {
@@ -43358,7 +43400,7 @@
      }
     ]
    },
-   "fingerprint": "0a8e47d5",
+   "fingerprint": "bda06d22",
    "validation": {
     "family": "asangl",
     "deterministic": {
@@ -43454,7 +43496,7 @@
      }
     ]
    },
-   "fingerprint": "2c69c068",
+   "fingerprint": "5307cc48",
    "validation": {
     "family": "asfoot",
     "deterministic": {
@@ -43554,7 +43596,7 @@
      }
     ]
    },
-   "fingerprint": "93be8b50",
+   "fingerprint": "a73db1cb",
    "validation": {
     "family": "asskew",
     "deterministic": {
@@ -43644,7 +43686,7 @@
      }
     ]
    },
-   "fingerprint": "662fd021",
+   "fingerprint": "9ceffdb7",
    "validation": {
     "family": "asparl3",
     "deterministic": {
@@ -43734,7 +43776,7 @@
      }
     ]
    },
-   "fingerprint": "8013a794",
+   "fingerprint": "b0faae87",
    "validation": {
     "family": "asplaned",
     "deterministic": {
@@ -43828,7 +43870,7 @@
      }
     ]
    },
-   "fingerprint": "15cfefa9",
+   "fingerprint": "c6e887bf",
    "validation": {
     "family": "asmeet",
     "deterministic": {
@@ -44147,7 +44189,7 @@
      }
     ]
    },
-   "fingerprint": "fbd96d12",
+   "fingerprint": "8fe9472f",
    "validation": {
     "family": "ascpow",
     "deterministic": {
@@ -44219,7 +44261,7 @@
      }
     ]
    },
-   "fingerprint": "6336294f",
+   "fingerprint": "2c7d7677",
    "validation": {
     "family": "ascsqrt",
     "deterministic": {
@@ -44244,7 +44286,7 @@
    "title": "The principal argument of a complex number",
    "competency": "MATH.number.complex-polar-form",
    "skill": "MATH.number.complex-polar-form",
-   "type": "exact",
+   "type": "expression",
    "multipleChoice": true,
    "domain": [
     [
@@ -44274,6 +44316,7 @@
    "explanations": [
     "arctan-quadrant (conceptual): tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.",
     "not-principal (procedural): The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.",
+    "degrees-given (procedural): The argument was given in degrees; in radians 180° is π (so 45° is π/4).",
     "basic-angle-only (conceptual): The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y."
    ],
    "teach": {
@@ -44291,7 +44334,7 @@
      }
     ]
    },
-   "fingerprint": "b2c7a442",
+   "fingerprint": "1a6a6fb2",
    "validation": {
     "family": "asarg",
     "deterministic": {
@@ -44316,7 +44359,7 @@
    "title": "Multiplying and dividing in polar form",
    "competency": "MATH.number.complex-polar-form",
    "skill": "MATH.number.complex-polar-form",
-   "type": "tuple",
+   "type": "expression",
    "multipleChoice": true,
    "domain": [
     [
@@ -44340,26 +44383,26 @@
      1
     ]
    ],
-   "poolSize": 400,
+   "poolSize": 242,
    "excluded": [],
    "difficulty": {
-    "1": 144,
-    "2": 144,
-    "3": 112
+    "1": 85,
+    "2": 86,
+    "3": 71
    },
    "examples": [
-    "gen:aspolm:2,4,3,-2,0",
-    "gen:aspolm:4,1,1,-3,0:mc",
-    "gen:aspolm:2,4,3,-2,1",
-    "gen:aspolm:4,3,1,-2,1:mc",
-    "gen:aspolm:3,-5,5,6,1",
-    "gen:aspolm:4,3,4,6,0:mc"
+    "gen:aspolm:3,-4,3,2,0",
+    "gen:aspolm:5,-2,1,2,0:mc",
+    "gen:aspolm:2,5,2,1,1",
+    "gen:aspolm:4,4,6,4,1:mc",
+    "gen:aspolm:2,5,6,-3,1",
+    "gen:aspolm:4,6,6,1,0:mc"
    ],
    "explanations": [
-    "arguments-multiplied (conceptual): The arguments were divided like the moduli; when complex numbers are divided, arguments are subtracted.",
-    "added-moduli (conceptual): The moduli were added; moduli multiply: |z₁z₂| = |z₁||z₂|.",
+    "arguments-multiplied (conceptual): The arguments were multiplied like the moduli; when complex numbers are multiplied, the arguments are added.",
+    "subtracted-wrong-way (procedural): The arguments were subtracted the wrong way round, as arg z₂ − arg z₁; arg(z₁/z₂) = arg z₁ − arg z₂.",
     "not-principal (procedural): The argument was not brought into (−π, π]; add or subtract 2π.",
-    "subtracted-wrong-way (procedural): The arguments were subtracted the wrong way round: arg(z₁/z₂) = arg z₁ − arg z₂."
+    "arguments-subtracted (recall): The arguments were subtracted (as for a quotient); for a product they are added."
    ],
    "teach": {
     "idea": "In polar form, multiplying complex numbers multiplies their moduli and adds their arguments; dividing divides the moduli and subtracts the arguments.",
@@ -44376,11 +44419,11 @@
      }
     ]
    },
-   "fingerprint": "065fcb95",
+   "fingerprint": "8268c94e",
    "validation": {
     "family": "aspolm",
     "deterministic": {
-     "checked": 400,
+     "checked": 242,
      "failures": []
     },
     "property": {
@@ -44685,7 +44728,7 @@
     "overlap-not-subtracted (conceptual): P(A) + P(B) counts the outcomes in both events twice; subtract P(A ∩ B) once.",
     "assumed-independent (conceptual): P(A ∩ B) is given; it was replaced by P(A) × P(B), which is only right for independent events.",
     "overlap-not-added-back (conceptual): 1 − P(A) − P(B) removes the overlap twice; add P(A ∩ B) back.",
-    "sign-slip (procedural): The rule was rearranged with the wrong signs: P(A ∩ B) = P(A) + P(B) − P(A ∪ B)."
+    "union-minus-one (procedural): The overlap was found as P(A ∪ B) − P(A); that is the part of B outside A. Rearranging the addition rule gives P(A ∩ B) = P(A) + P(B) − P(A ∪ B)."
    ],
    "teach": {
     "idea": "Adding P(A) and P(B) counts the overlap A ∩ B twice, so it is taken away once: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). 'Neither' is the complement of A ∪ B.",
@@ -44702,7 +44745,7 @@
      }
     ]
    },
-   "fingerprint": "3a646660",
+   "fingerprint": "77b81cac",
    "validation": {
     "family": "asaddp",
     "deterministic": {
@@ -44774,7 +44817,7 @@
      }
     ]
    },
-   "fingerprint": "369ee005",
+   "fingerprint": "eeb9aa3d",
    "validation": {
     "family": "asmex",
     "deterministic": {
@@ -44862,7 +44905,7 @@
      }
     ]
    },
-   "fingerprint": "6a418302",
+   "fingerprint": "2b87b8dc",
    "validation": {
     "family": "asbayes",
     "deterministic": {
@@ -44884,7 +44927,7 @@
   {
    "id": "astotp",
    "version": "1.0.0",
-   "title": "The theorem of total probability",
+   "title": "Bayes' theorem: which bag the ball came from",
    "competency": "MATH.probability.bayes",
    "skill": "MATH.probability.bayes",
    "type": "fraction",
@@ -44927,26 +44970,27 @@
     "gen:astotp:4,6,1,3,6:mc"
    ],
    "explanations": [
-    "bags-averaged (conceptual): The two bags are not equally likely: Bag I is used with probability 5/6. Weight each bag's chance of red by the chance of using it.",
-    "balls-pooled (conceptual): The balls of both bags were put together; the ball comes from one bag only, chosen by the die.",
-    "one-bag-only (procedural): Only the Bag I branch was counted; add the Bag II branch as well."
+    "joint-not-divided (procedural): P(Bag I and red) was given; the ball is known to be red, so divide by the total probability of red, P(red) = P(Bag I and red) + P(Bag II and red).",
+    "condition-reversed (conceptual): P(red | Bag I) = 1/2 was given; the question asks the reverse, P(Bag I | red).",
+    "forward-question (conceptual): The probability that the ball is red was found (total probability); here the colour is known and the bag is asked, so that total is the denominator.",
+    "prior-only (conceptual): The chance of choosing Bag I before the draw, 5/6, was given; knowing the ball is red changes it."
    ],
    "teach": {
-    "idea": "When an outcome can happen in several separate ways (through Bag I or through Bag II), its probability is the sum over the ways of P(way) × P(outcome | way).",
-    "method": "Draw a tree: first branch the bag (with the die's probabilities), then the colour. Multiply along each red branch and add.",
+    "idea": "Bayes' theorem turns the question round: P(Bag I | red) = P(Bag I and red) / P(red), and P(red) adds up the red branches of both bags (total probability).",
+    "method": "Draw a tree: first the bag (with the die's probabilities), then the colour. Multiply along each red branch; divide the Bag I red branch by the sum of both red branches.",
     "alternatives": [
      {
       "id": "count_all",
       "title": "Count equally likely cases",
       "kind": "conceptual",
       "text": [
-       "Imagine many repeats: in 6 throws, f choose Bag I and the rest Bag II.",
-       "Scale up so the balls divide evenly, count the red draws, and divide by all the draws."
+       "Imagine many repeats: in 6 throws, f choose Bag I and the rest Bag II; scale up so the balls divide evenly.",
+       "Count all the red draws and the red draws from Bag I: the answer is the second count divided by the first."
       ]
      }
     ]
    },
-   "fingerprint": "2fe6f9b7",
+   "fingerprint": "ed5eb089",
    "validation": {
     "family": "astotp",
     "deterministic": {
@@ -45031,7 +45075,7 @@
      }
     ]
    },
-   "fingerprint": "61293c3d",
+   "fingerprint": "6be6ab42",
    "validation": {
     "family": "asbinom",
     "deterministic": {
@@ -45111,7 +45155,7 @@
      }
     ]
    },
-   "fingerprint": "e2d10a8c",
+   "fingerprint": "2b7f80c1",
    "validation": {
     "family": "asbinmv",
     "deterministic": {
@@ -45200,7 +45244,7 @@
      }
     ]
    },
-   "fingerprint": "a206d0fa",
+   "fingerprint": "9b59b8fb",
    "validation": {
     "family": "atpdfp",
     "deterministic": {
@@ -45276,7 +45320,7 @@
      }
     ]
    },
-   "fingerprint": "5a599031",
+   "fingerprint": "f67418a1",
    "validation": {
     "family": "atpdfk",
     "deterministic": {
@@ -45357,7 +45401,7 @@
      }
     ]
    },
-   "fingerprint": "cf2af07b",
+   "fingerprint": "f74148a2",
    "validation": {
     "family": "atindu",
     "deterministic": {
@@ -45401,17 +45445,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 96,
-    "2": 109,
-    "3": 195
+    "1": 87,
+    "2": 108,
+    "3": 205
    },
    "examples": [
-    "gen:atindt:9,6,2",
-    "gen:atindt:11,6,2",
-    "gen:atindt:16,3,2",
-    "gen:atindt:19,2,18",
-    "gen:atindt:24,3,11",
-    "gen:atindt:27,6,16"
+    "gen:atindt:9,2,2",
+    "gen:atindt:11,5,1",
+    "gen:atindt:16,6,2",
+    "gen:atindt:19,4,1",
+    "gen:atindt:25,4,7",
+    "gen:atindt:28,2,6"
    ],
    "explanations": [
     "independent-means-apart (conceptual): 'Independent' was taken to mean 'cannot happen together'. That is mutually exclusive; independent means P(A ∩ B) = P(A) × P(B).",
@@ -45432,7 +45476,7 @@
      }
     ]
    },
-   "fingerprint": "242998c4",
+   "fingerprint": "b6877130",
    "validation": {
     "family": "atindt",
     "deterministic": {
@@ -45484,17 +45528,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 268,
-    "2": 63,
-    "3": 69
+    "1": 266,
+    "2": 67,
+    "3": 67
    },
    "examples": [
-    "gen:atrvmean:1,3,1,4,2",
-    "gen:atrvmean:2,4,2,3,4:mc",
-    "gen:atrvmean:-1,1,4,2,3",
-    "gen:atrvmean:-1,2,4,2,4:mc",
-    "gen:atrvmean:-2,2,3,1,1",
-    "gen:atrvmean:-2,3,1,4,4:mc"
+    "gen:atrvmean:1,2,4,4,1",
+    "gen:atrvmean:2,4,1,3,4:mc",
+    "gen:atrvmean:-1,1,4,2,2",
+    "gen:atrvmean:-1,3,2,3,2:mc",
+    "gen:atrvmean:-2,2,1,4,4",
+    "gen:atrvmean:-2,3,3,3,1:mc"
    ],
    "explanations": [
     "divided-by-count (procedural): Σ x P(x) was divided by the number of values; the probabilities already do the averaging, so E(X) = Σ x P(x).",
@@ -45515,7 +45559,7 @@
      }
     ]
    },
-   "fingerprint": "ea11291b",
+   "fingerprint": "6c5663cc",
    "validation": {
     "family": "atrvmean",
     "deterministic": {
@@ -45568,14 +45612,14 @@
    "excluded": [],
    "difficulty": {
     "1": 0,
-    "2": 262,
-    "3": 138
+    "2": 258,
+    "3": 142
    },
    "examples": [
-    "gen:atrvvar:1,2,3,3,3",
-    "gen:atrvvar:2,3,3,1,4:mc",
-    "gen:atrvvar:-2,4,1,1,2",
-    "gen:atrvvar:-1,2,3,1,3:mc"
+    "gen:atrvvar:1,3,1,1,4",
+    "gen:atrvvar:2,3,3,4,4:mc",
+    "gen:atrvvar:-2,3,4,4,2",
+    "gen:atrvvar:-1,2,2,3,1:mc"
    ],
    "explanations": [
     "mean-square-missing (procedural): E(X²) was given as the variance; the square of the mean must be taken away: Var(X) = E(X²) − [E(X)]².",
@@ -45597,7 +45641,7 @@
      }
     ]
    },
-   "fingerprint": "3a5e1346",
+   "fingerprint": "76ee370e",
    "validation": {
     "family": "atrvvar",
     "deterministic": {
@@ -45681,7 +45725,7 @@
      }
     ]
    },
-   "fingerprint": "de7b4583",
+   "fingerprint": "86e566fe",
    "validation": {
     "family": "attotal",
     "deterministic": {
@@ -45711,7 +45755,7 @@
    "domain": [
     [
      0,
-     1
+     2
     ],
     [
      2,
@@ -45722,18 +45766,18 @@
      30
     ]
    ],
-   "poolSize": 253,
+   "poolSize": 271,
    "excluded": [],
    "difficulty": {
     "1": 104,
-    "2": 120,
+    "2": 138,
     "3": 29
    },
    "examples": [
     "gen:atconv:0,5,30",
     "gen:atconv:0,16,4",
-    "gen:atconv:0,10,9",
-    "gen:atconv:0,20,18",
+    "gen:atconv:0,18,25",
+    "gen:atconv:2,2,11",
     "gen:atconv:1,11,2",
     "gen:atconv:1,21,2"
    ],
@@ -45756,11 +45800,11 @@
      }
     ]
    },
-   "fingerprint": "dc466ba5",
+   "fingerprint": "5caee77c",
    "validation": {
     "family": "atconv",
     "deterministic": {
-     "checked": 253,
+     "checked": 271,
      "failures": []
     },
     "property": {
@@ -45826,7 +45870,7 @@
      }
     ]
    },
-   "fingerprint": "26d422fe",
+   "fingerprint": "af4b44fa",
    "validation": {
     "family": "atcex",
     "deterministic": {
@@ -45911,7 +45955,7 @@
      }
     ]
    },
-   "fingerprint": "7c2e881f",
+   "fingerprint": "07d99a20",
    "validation": {
     "family": "atrows",
     "deterministic": {
@@ -45971,17 +46015,17 @@
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
-    "1": 51,
-    "2": 113,
-    "3": 136
+    "1": 54,
+    "2": 107,
+    "3": 139
    },
    "examples": [
-    "gen:atclass:1,1,2,0,0,0,2",
-    "gen:atclass:2,1,1,1,0,1,3",
-    "gen:atclass:1,1,2,0,2,2,1",
-    "gen:atclass:2,2,0,1,2,1,0",
-    "gen:atclass:1,2,2,3,0,3,3",
-    "gen:atclass:2,2,1,2,3,1,1"
+    "gen:atclass:1,0,2,0,3,0,1",
+    "gen:atclass:2,1,0,0,3,0,1",
+    "gen:atclass:1,2,2,1,1,1,2",
+    "gen:atclass:3,0,0,1,3,2,0",
+    "gen:atclass:1,2,2,1,3,3,1",
+    "gen:atclass:2,3,0,3,2,3,1"
    ],
    "explanations": [
     "first-row-only (procedural): Only the first row (p and q both true) was checked; a tautology must be true in EVERY row, a contradiction false in every row.",
@@ -46002,7 +46046,7 @@
      }
     ]
    },
-   "fingerprint": "add6b26e",
+   "fingerprint": "8010645b",
    "validation": {
     "family": "atclass",
     "deterministic": {
@@ -46095,7 +46139,7 @@
      }
     ]
    },
-   "fingerprint": "ff3083e8",
+   "fingerprint": "941e3f0d",
    "validation": {
     "family": "atvar",
     "deterministic": {
@@ -46212,42 +46256,42 @@
    "multipleChoice": false,
    "domain": [
     [
-     20,
-     80
+     30,
+     70
     ],
     [
      2,
-     20
+     14
     ],
     [
-     20,
-     80
+     30,
+     70
     ],
     [
      2,
-     20
+     14
     ]
    ],
    "poolSize": 300,
    "excluded": [],
    "difficulty": {
     "1": 0,
-    "2": 193,
-    "3": 107
+    "2": 132,
+    "3": 168
    },
    "examples": [
-    "gen:atcv:40,18,43,20",
-    "gen:atcv:56,16,67,13",
-    "gen:atcv:31,7,40,9",
-    "gen:atcv:60,18,76,19"
+    "gen:atcv:43,12,46,10",
+    "gen:atcv:56,6,34,14",
+    "gen:atcv:40,10,45,11",
+    "gen:atcv:56,8,35,5"
    ],
    "explanations": [
-    "higher-mean (conceptual): The higher average was chosen; a higher mean means scoring more, not scoring more steadily.",
-    "smaller-sd (conceptual): The smaller standard deviation was chosen; spread must be compared relative to the mean, CV = σ/x̄ × 100."
+    "smaller-sd (conceptual): The smaller standard deviation was chosen; spread must be compared relative to the mean, CV = σ/x̄ × 100.",
+    "higher-mean (conceptual): The higher average was chosen; a higher mean means scoring more, not scoring more steadily."
    ],
    "teach": {
     "idea": "The coefficient of variation CV = (σ/x̄) × 100 measures spread as a percentage of the mean, so groups with different means can be compared. The smaller CV is the more consistent.",
-    "method": "Work out CV for each batter, then choose the smaller one.",
+    "method": "Work out CV for each batter, then choose the smaller one (equal CVs mean equally consistent).",
     "alternatives": [
      {
       "id": "cross_multiply",
@@ -46260,7 +46304,7 @@
      }
     ]
    },
-   "fingerprint": "fe13f928",
+   "fingerprint": "552261f6",
    "validation": {
     "family": "atcv",
     "deterministic": {
@@ -46346,7 +46390,7 @@
      }
     ]
    },
-   "fingerprint": "1638d342",
+   "fingerprint": "a7a1e950",
    "validation": {
     "family": "atmdmean",
     "deterministic": {
@@ -46435,7 +46479,7 @@
      }
     ]
    },
-   "fingerprint": "c83f763e",
+   "fingerprint": "abcb878b",
    "validation": {
     "family": "atmdmed",
     "deterministic": {
@@ -46469,7 +46513,7 @@
     ],
     [
      0,
-     2
+     5
     ],
     [
      0,
@@ -46480,20 +46524,20 @@
      2
     ]
    ],
-   "poolSize": 110,
+   "poolSize": 192,
    "excluded": [],
    "difficulty": {
-    "1": 20,
-    "2": 56,
-    "3": 34
+    "1": 32,
+    "2": 96,
+    "3": 64
    },
    "examples": [
     "gen:atcomp:1,1,1,0",
-    "gen:atcomp:11,0,0,1:mc",
-    "gen:atcomp:7,1,1,0",
-    "gen:atcomp:12,2,0,1:mc",
-    "gen:atcomp:6,1,1,2",
-    "gen:atcomp:12,0,0,2:mc"
+    "gen:atcomp:11,2,0,1:mc",
+    "gen:atcomp:9,1,0,0",
+    "gen:atcomp:13,0,0,0:mc",
+    "gen:atcomp:7,1,1,2",
+    "gen:atcomp:12,2,0,2:mc"
    ],
    "explanations": [
     "distribute (conceptual): tan(A − B) was split as tan A − tan B; tan does not distribute over a sum, so use the compound-angle formula.",
@@ -46514,11 +46558,11 @@
      }
     ]
    },
-   "fingerprint": "a44faf83",
+   "fingerprint": "4709503e",
    "validation": {
     "family": "atcomp",
     "deterministic": {
-     "checked": 110,
+     "checked": 192,
      "failures": []
     },
     "property": {
@@ -46594,7 +46638,7 @@
      }
     ]
    },
-   "fingerprint": "f5e26aba",
+   "fingerprint": "4daa92bf",
    "validation": {
     "family": "atdbl",
     "deterministic": {
@@ -46619,8 +46663,8 @@
    "title": "Products of sines and cosines as sums",
    "competency": "MATH.trigonometry.compound-angle-identities",
    "skill": "MATH.trigonometry.compound-angle-identities",
-   "type": "expression",
-   "multipleChoice": true,
+   "type": "choice",
+   "multipleChoice": false,
    "domain": [
     [
      0,
@@ -46644,14 +46688,15 @@
    },
    "examples": [
     "gen:atp2s:0,8,4",
-    "gen:atp2s:2,6,3:mc",
+    "gen:atp2s:2,6,3",
     "gen:atp2s:1,8,4",
-    "gen:atp2s:3,6,3:mc"
+    "gen:atp2s:3,6,3"
    ],
    "explanations": [
-    "sign-between-terms (recall): The order was reversed: 2 sin A sin B = cos(A − B) − cos(A + B).",
-    "halved (procedural): The answer was halved; the factor 2 in front of the product is exactly what the formula 2 sin A cos B = sin(A + B) + sin(A − B) uses.",
-    "minus-dropped (procedural): The terms were swapped and the result is the negative of the right answer."
+    "sign-between-terms (recall): The two cosines were combined with the wrong sign, as cos(A − B) + cos(A + B); that sum is 2 cos A cos B. For 2 sin A sin B the two cosines are subtracted: cos(A − B) − cos(A + B).",
+    "halved (procedural): A ½ was put in front, from the form sin A sin B = ½[cos(A − B) − cos(A + B)]; here the product already carries the 2, so the ½ and the 2 cancel.",
+    "wrong-function (recall): Sines were written where the formula gives cosines: a product of two cosines becomes a sum of COSINES.",
+    "minus-dropped (procedural): The cosines were subtracted in the wrong order, cos(A + B) − cos(A − B); that is the negative of 2 sin A sin B."
    ],
    "teach": {
     "idea": "Adding sin(A + B) and sin(A − B) cancels the cos A sin B parts and leaves 2 sin A cos B; the other three product formulas come the same way.",
@@ -46668,7 +46713,7 @@
      }
     ]
    },
-   "fingerprint": "38b90ed9",
+   "fingerprint": "d1b9d13b",
    "validation": {
     "family": "atp2s",
     "deterministic": {
@@ -46690,10 +46735,10 @@
   {
    "id": "atprinc",
    "version": "1.0.0",
-   "title": "Solutions of a trigonometric equation in 0° ≤ x < 360°",
+   "title": "Solutions of a trigonometric equation in 0 ≤ x < 2π",
    "competency": "MATH.trigonometry.equations",
    "skill": "MATH.trigonometry.equations",
-   "type": "set",
+   "type": "roots",
    "multipleChoice": false,
    "domain": [
     [
@@ -46729,25 +46774,26 @@
     "gen:atprinc:1,7,3,0"
    ],
    "explanations": [
-    "principal-only (conceptual): Only the principal value was given; tan takes each value once in every 180°, so look in every quadrant where it has this sign.",
-    "one-turn-only (procedural): Only angles 3x below 360° were used; when 0° ≤ x < 360°, 3x runs from 0° up to 1080°."
+    "principal-only (conceptual): Only the principal value was given; tan takes each value once in every π, so look in every quadrant where it has this sign.",
+    "degrees-not-radians (procedural): The solutions were worked out in degrees and the degree numbers typed; in radians 180° is π, so 30° is π/6.",
+    "one-turn-only (procedural): Only angles 3x below 2π were used; when 0 ≤ x < 2π, 3x runs from 0 up to 6π."
    ],
    "teach": {
-    "idea": "sin and cos repeat every 360° and take each value twice per turn (once for tan, which repeats every 180°); the quadrant signs (All, Sin, Tan, Cos) tell you where.",
-    "method": "Find the reference angle from the standard values, place it in each quadrant where the function has the right sign, then (for kx) add multiples of 360° until kx passes 360k°, and divide by k.",
+    "idea": "sin and cos repeat every 2π and take each value twice per turn (tan repeats every π and takes each value once); the quadrant signs (All, Sin, Tan, Cos) tell you where.",
+    "method": "Find the reference angle from the standard values (π/6, π/4, π/3), place it in each quadrant where the function has the right sign, then (for kx) add multiples of 2π until kx reaches 2kπ, and divide by k.",
     "alternatives": [
      {
       "id": "graph",
       "title": "Read it off the graph",
       "kind": "conceptual",
       "text": [
-       "Sketch y = sin x for 0° to 360° and the line y = value.",
-       "Each crossing is a solution; for sin kx the graph squeezes k waves into 360°, so there are k times as many crossings."
+       "Sketch y = sin x for 0 to 2π and the line y = value.",
+       "Each crossing is a solution; for sin kx the graph squeezes k waves into 0 to 2π, so there are k times as many crossings."
       ]
      }
     ]
    },
-   "fingerprint": "27014757",
+   "fingerprint": "135cd622",
    "validation": {
     "family": "atprinc",
     "deterministic": {
@@ -46826,7 +46872,7 @@
      }
     ]
    },
-   "fingerprint": "d1f55469",
+   "fingerprint": "3c39066c",
    "validation": {
     "family": "atgen",
     "deterministic": {
@@ -46898,7 +46944,7 @@
      }
     ]
    },
-   "fingerprint": "fbf7f1f7",
+   "fingerprint": "99760dfb",
    "validation": {
     "family": "atval",
     "deterministic": {
@@ -46977,7 +47023,7 @@
      }
     ]
    },
-   "fingerprint": "5a7f9abf",
+   "fingerprint": "7f0f1f33",
    "validation": {
     "family": "atper",
     "deterministic": {
@@ -47116,7 +47162,7 @@
      }
     ]
    },
-   "fingerprint": "1c9c46b2",
+   "fingerprint": "1acf2649",
    "validation": {
     "family": "atdeg",
     "deterministic": {
@@ -47195,7 +47241,7 @@
      }
     ]
    },
-   "fingerprint": "2df1bbc9",
+   "fingerprint": "b8825273",
    "validation": {
     "family": "atarc",
     "deterministic": {
@@ -47342,7 +47388,7 @@
      }
     ]
    },
-   "fingerprint": "39f5453c",
+   "fingerprint": "bc1f8e8f",
    "validation": {
     "family": "atcosr",
     "deterministic": {
@@ -47415,7 +47461,7 @@
      }
     ]
    },
-   "fingerprint": "9f45e774",
+   "fingerprint": "58039c28",
    "validation": {
     "family": "atarea",
     "deterministic": {
@@ -47669,7 +47715,7 @@
      }
     ]
    },
-   "fingerprint": "b6f64014",
+   "fingerprint": "74d401d3",
    "validation": {
     "family": "atlin",
     "deterministic": {
@@ -48030,7 +48076,7 @@
      }
     ]
    },
-   "fingerprint": "8744548b",
+   "fingerprint": "4d912c9b",
    "validation": {
     "family": "atang",
     "deterministic": {
@@ -48118,7 +48164,7 @@
      }
     ]
    },
-   "fingerprint": "f3b8d7fa",
+   "fingerprint": "466df28a",
    "validation": {
     "family": "atproj",
     "deterministic": {
@@ -48402,7 +48448,7 @@
      }
     ]
    },
-   "fingerprint": "1555dc1d",
+   "fingerprint": "a57eff3b",
    "validation": {
     "family": "atstp",
     "deterministic": {
@@ -48495,7 +48541,7 @@
      }
     ]
    },
-   "fingerprint": "e7cca0ed",
+   "fingerprint": "af870227",
    "validation": {
     "family": "atcopl",
     "deterministic": {
@@ -48594,7 +48640,7 @@
      }
     ]
    },
-   "fingerprint": "092abea8",
+   "fingerprint": "65f8ad3c",
    "validation": {
     "family": "atvtp",
     "deterministic": {
