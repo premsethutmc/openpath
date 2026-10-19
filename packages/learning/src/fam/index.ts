@@ -15,8 +15,11 @@ import { B08 } from "./b08";
 import { B09 } from "./b09";
 import { B10 } from "./b10";
 import { B11 } from "./b11";
+import { B12 } from "./b12";
 import { B13 } from "./b13";
 import { B14 } from "./b14";
 import { B15 } from "./b15";
+import { B16 } from "./b16";
+import { B18 } from "./b18";
 
-export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B13, ...B14, ...B15];
+export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B12, ...B13, ...B14, ...B15, ...B16, ...B18];
