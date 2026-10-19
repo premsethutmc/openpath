@@ -7,7 +7,7 @@
  */
 import type { Bug, Def, Value } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
-import { fmt, gcd, near } from "../family-kit";
+import { fmt, gcd, near, signed } from "../family-kit";
 
 const LINI = "MATH.algebra.linear-intro";
 const SIMP = "MATH.algebra.algebra-simplify";
@@ -251,7 +251,7 @@ export const B08: Def[] = [
     },
     distractors: ([a, b, c, d]) => [poly([[a + c, "x"], [b - d, "y"]]), poly([[a - c, "x"], [b + d, "y"]]), poly([[b + d, "x"], [a + c, "y"]])],
     variants: () => [],
-    explain: (s) => (s.id === "x-terms" ? `x terms: ${n_(Number(s.inputs[0]))} + (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "x"]])}` : s.id === "y-terms" ? `y terms: ${n_(Number(s.inputs[0]))} + (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "y"]])}` : `Together: ${s.value}`),
+    explain: (s) => (s.id === "x-terms" ? `x terms: ${n_(Number(s.inputs[0]))} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "x"]])}` : s.id === "y-terms" ? `y terms: ${n_(Number(s.inputs[0]))} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "y"]])}` : `Together: ${s.value}`),
     domain: [[1, 9], [-9, 9], [-9, 9], [-9, 9]],
     cap: 400,
     difficulty: ([, b, c, d]) => ([b, c, d].every((k) => k > 0) ? 1 : [b, c, d].filter((k) => k < 0).length === 1 ? 2 : 3),
@@ -299,7 +299,7 @@ export const B08: Def[] = [
     ],
     distractors: ([a, b, c, d]) => [poly([[a - c, "x"], [d - b, ""]]), poly([[a - c, "x"], [b, ""]])],
     variants: () => [],
-    explain: (s) => (s.id === "open" ? `−(${s.inputs[0]}) = ${s.value}: every sign in the bracket changes` : s.id === "x-terms" ? `x terms: ${s.inputs[0]}x − ${s.inputs[1]}x = ${poly([[Number(s.value), "x"]])}` : `Numbers: ${n_(Number(s.inputs[0]))} − (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}`),
+    explain: (s) => (s.id === "open" ? `−(${s.inputs[0]}) = ${s.value}: every sign in the bracket changes` : s.id === "x-terms" ? `x terms: ${s.inputs[0]}x − ${s.inputs[1]}x = ${poly([[Number(s.value), "x"]])}` : `Numbers: ${n_(Number(s.inputs[0]))} ${signed(-Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: [[2, 12], [-12, 12], [1, 12], [-12, 12]],
     cap: 400,
     difficulty: ([, b, , d]) => (b > 0 && d > 0 && b > d ? 1 : d > 0 ? 2 : 3),
@@ -873,7 +873,7 @@ export const B08: Def[] = [
       { id: "wrong-way-round", kind: "procedural", competency: INTADD, says: "The numbers were subtracted the wrong way round, giving the right size with the wrong sign. Check by putting the answer back into both sides.", predict: (b - d) / (a - c) },
     ]),
     variants: () => [],
-    explain: (s) => (s.id === "x-left" ? `Take ${poly([[Number(s.inputs[1]), "x"]])} from both sides: ${poly([[Number(s.value), "x"]])} on the left` : s.id === "numbers-right" ? `Move the numbers to the right: ${n_(Number(s.inputs[0]))} − (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}` : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${fmt(Number(s.value)).replace(/^-/, "−")}`),
+    explain: (s) => (s.id === "x-left" ? `Take ${poly([[Number(s.inputs[1]), "x"]])} from both sides: ${poly([[Number(s.value), "x"]])} on the left` : s.id === "numbers-right" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: ${n_(Number(s.inputs[0]))} + ${-Number(s.inputs[1])} = ${n_(Number(s.value))} on the right` : `Take ${s.inputs[1]} from both sides: ${n_(Number(s.inputs[0]))} − ${s.inputs[1]} = ${n_(Number(s.value))} on the right`) : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${fmt(Number(s.value)).replace(/^-/, "−")}`),
     domain: [[2, 9], [-15, 15], [-5, 8], [-15, 15]],
     cap: 400,
     difficulty: ([a, b, c, d]) => ((d - b) % (a - c) === 0 && c > 0 ? 1 : (d - b) % (a - c) === 0 ? 2 : 3),

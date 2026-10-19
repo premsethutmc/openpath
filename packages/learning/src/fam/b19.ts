@@ -305,9 +305,9 @@ const aslocpar: Def = {
   bugs: ([a, b, h]) => {
     const den = 2 * (a - h);
     return [
-      B("line-distance-sign", "conceptual", LOCUS, `The distance from P(x, y) to the line x = ${mi(h)} is |x − ${mi(h)}|${h < 0 ? ` = |x + ${-h}|` : ""}; it was written with the wrong sign.`, a + h !== 0 ? poly([[R_(1, 2 * (a + h)), "y²"], [R_(-2 * b, 2 * (a + h)), "y"], [R_(b * b + a * a - h * h, 2 * (a + h)), ""]]) : null),
-      B("bracket-sign", "prerequisite", DIST, `(y − ${mi(b)})² was expanded with the wrong sign of the middle term: (y − k)² = y² − 2ky + k².`, b !== 0 ? poly([[R_(1, den), "y²"], [R_(2 * b, den), "y"], [R_(b * b + a * a - h * h, den), ""]]) : null),
-      B("lost-two", "procedural", LOCUS, `When the x² terms cancel, the x terms give ${den}x (the 2 from expanding the squares stays); the expression was divided by ${a - h} instead of ${den}.`, a - h !== 1 && a - h !== -1 ? poly([[R_(1, a - h), "y²"], [R_(-2 * b, a - h), "y"], [R_(b * b + a * a - h * h, a - h), ""]]) : poly([[R_(1, a - h), "y²"], [R_(-2 * b, a - h), "y"], [R_(b * b + a * a - h * h, a - h), ""]])),
+      B("line-distance-sign", "conceptual", LOCUS, `The distance from P(x, y) to the line x = ${mi(h)} is ${h === 0 ? "|x|" : `|x ${h > 0 ? "−" : "+"} ${Math.abs(h)}|`}; the number was used with the wrong sign, as ${h === 0 ? "|x|" : `|x ${h > 0 ? "+" : "−"} ${Math.abs(h)}|`}.`, a + h !== 0 ? poly([[R_(1, 2 * (a + h)), "y²"], [R_(-2 * b, 2 * (a + h)), "y"], [R_(b * b + a * a - h * h, 2 * (a + h)), ""]]) : null),
+      B("bracket-sign", "prerequisite", DIST, `${sqTerm("y", b)} was expanded with the wrong sign of the middle term: (y − k)² = y² − 2ky + k².`, b !== 0 ? poly([[R_(1, den), "y²"], [R_(2 * b, den), "y"], [R_(b * b + a * a - h * h, den), ""]]) : null),
+      B("lost-two", "procedural", LOCUS, `When the x² terms cancel, the x terms give ${mi(den)}x (the 2 from expanding the squares stays); the expression was divided by ${mi(a - h)} instead of ${mi(den)}.`, a - h !== 1 && a - h !== -1 ? poly([[R_(1, a - h), "y²"], [R_(-2 * b, a - h), "y"], [R_(b * b + a * a - h * h, a - h), ""]]) : poly([[R_(1, a - h), "y²"], [R_(-2 * b, a - h), "y"], [R_(b * b + a * a - h * h, a - h), ""]])),
     ];
   },
   distractors: ([a, b, h]) => {
@@ -330,103 +330,139 @@ const aslocpar: Def = {
   limits: "A focus with whole-number coordinates and a vertical directrix x = h; other directrices and ellipse or hyperbola loci are not included.",
 };
 
-// ---- pairs of lines through the origin: b(y − m₁x)(y − m₂x) = 0
-const pairEq = (m1: number, m2: number, b: number) => `${poly([[R_(b * m1 * m2), "x²"], [R_(-b * (m1 + m2)), "xy"], [R_(b), "y²"]])} = 0`;
+// ---- pairs of lines through the origin: (q₁y − p₁x)(q₂y − p₂x) = 0, slopes p₁/q₁ < p₂/q₂ in lowest terms (each
+// equation once: no scaled copies of the same pair)
+const pairCoef = ([p1, q1, p2, q2]: number[]) => ({ A: p1 * p2, H2: -(q1 * p2 + q2 * p1), Bc: q1 * q2 });
+const pairEq = (pp: number[]) => {
+  const { A, H2, Bc } = pairCoef(pp);
+  return `${poly([[R_(A), "x²"], [R_(H2), "xy"], [R_(Bc), "y²"]])} = 0`;
+};
+const pairOk = (pp: number[]) => {
+  const [p1, q1, p2, q2] = pp;
+  return allIn(pp, PAIR_D) && gcd(Math.abs(p1), q1) === 1 && gcd(Math.abs(p2), q2) === 1 && p1 * q2 < p2 * q1;
+};
+const PAIR_D: [number, number][] = [[-6, 6], [1, 3], [-6, 6], [1, 3]];
+/** The slopes found by trying every fraction p/q (q up to 3) in the equation (an independent search). */
+const pairSearch = (pp: number[]) => {
+  const { A, H2, Bc } = pairCoef(pp);
+  const out: number[] = [];
+  for (let q = 1; q <= 3; q++) for (let p = -18; p <= 18; p++) {
+    const m = p / q;
+    if (Math.abs(Bc * m * m + H2 * m + A) < 1e-9 && !out.some((x) => close(x, m))) out.push(m);
+  }
+  return out.sort((x, y) => x - y);
+};
 
 const aspair: Def = {
   id: "aspair",
-  arity: 3,
+  arity: 4,
   title: "The slopes of a pair of lines through the origin",
   competency: PAIR,
   type: "set",
-  // [m₁, m₂, b]: b y² − b(m₁ + m₂)xy + b m₁m₂ x² = 0
+  // [p₁, q₁, p₂, q₂]: slopes p₁/q₁ < p₂/q₂
   parse: none,
-  reject: (p) => (!allIn(p, [[-6, 6], [-6, 6], [1, 3]]) || p[0] >= p[1] ? "Two different whole-number slopes from −6 to 6 (listed in increasing order) and a coefficient of y² from 1 to 3." : null),
-  prompt: ([m1, m2, b]) => `The equation ${pairEq(m1, m2, b)} represents a pair of straight lines through the origin. Find the slopes of the two lines. Type both, separated by a comma.`,
-  solve: ([m1, m2, b]) => ({
-    steps: [
-      S("substitute", "substitute", PAIR, [b * m1 * m2, -b * (m1 + m2), b], `${poly([[R_(b), "m²"], [R_(-b * (m1 + m2)), "m"], [R_(b * m1 * m2), ""]])} = 0`),
-      S("solve", "solve", QUAD, [m1 + m2, m1 * m2], [m1, m2]),
-    ],
-    answer: [m1, m2],
-  }),
-  // independent: each slope m must make y = mx satisfy the equation (substitute and check it gives 0)
-  validate: ([m1, m2, b], v) => {
-    if (!Array.isArray(v) || v.length !== 2 || close(v[0], v[1])) return false;
-    return v.every((m) => close(b * m1 * m2 + -b * (m1 + m2) * m + b * m * m, 0, 1e-9));
+  reject: (pp) => (!pairOk(pp) ? "Two different slopes p/q in lowest terms (p from −6 to 6, q from 1 to 3), listed in increasing order." : null),
+  prompt: (pp) => `The equation ${pairEq(pp)} represents a pair of straight lines through the origin. Find the slopes of the two lines. Type both, separated by a comma (fractions are fine).`,
+  solve: (pp) => {
+    const { A, H2, Bc } = pairCoef(pp);
+    const ms = [pp[0] / pp[1], pp[2] / pp[3]];
+    return {
+      steps: [S("substitute", "substitute", PAIR, [A, H2, Bc], `${poly([[R_(Bc), "m²"], [R_(H2), "m"], [R_(A), ""]])} = 0`), S("solve", "solve", QUAD, [rs(R_(-H2, Bc)), rs(R_(A, Bc))], ms)],
+      answer: ms,
+    };
   },
-  bugs: ([m1, m2]) => [
-    B("sum-sign", "procedural", PAIR, "The sum of the slopes was taken as +(xy coefficient)/(y² coefficient); for y² + 2hxy/b + … the sum of the slopes is −2h/b.", [-m2, -m1]),
-    B("reciprocal-slopes", "conceptual", PAIR, "The equation was solved for x/y instead of y/x, which gives the reciprocals of the slopes. Put y = mx and solve for m.", m1 !== 0 && m2 !== 0 ? [1 / m1, 1 / m2].sort((x, y) => x - y) : null),
-  ],
+  // independent: each slope m must make y = mx satisfy the equation (substitute and check it gives 0)
+  validate: (pp, v) => {
+    if (!Array.isArray(v) || v.length !== 2 || close(v[0], v[1])) return false;
+    const { A, H2, Bc } = pairCoef(pp);
+    return v.every((m) => close(Bc * m * m + H2 * m + A, 0, 1e-9));
+  },
+  bugs: (pp) => {
+    const [m1, m2] = [pp[0] / pp[1], pp[2] / pp[3]];
+    return [
+      B("sum-sign", "procedural", PAIR, "The sum of the slopes was taken as +(xy coefficient)/(y² coefficient); for by² + 2hxy + ax² = 0 the sum of the slopes is −2h/b.", [-m2, -m1]),
+      B("reciprocal-slopes", "conceptual", PAIR, "The equation was solved for x/y instead of y/x, which gives the reciprocals of the slopes. Put y = mx and solve for m.", m1 !== 0 && m2 !== 0 ? [1 / m1, 1 / m2].sort((x, y) => x - y) : null),
+    ];
+  },
   variants: () => [],
-  explain: (s) => (s.id === "substitute" ? `Put y = mx and divide by x²: ${s.value}` : `Solve the quadratic in m: the slopes are ${(s.value as number[]).map(mi).join(" and ")}`),
-  domain: [[-6, 6], [-6, 6], [1, 3]],
-  difficulty: ([m1, m2, b]) => (b === 1 && (m1 === 0 || m1 + m2 === 0) ? 1 : b === 1 ? 2 : 3),
-  word: ([m1, m2, b]) => `Two straight railway tracks cross at a level crossing placed at the origin of a map. Together the two tracks are described by ${pairEq(m1, m2, b)}. Find the slopes of the two tracks (type both, separated by a comma).`,
+  explain: (s) => (s.id === "substitute" ? `Put y = mx and divide by x²: ${s.value}` : `Solve the quadratic in m (sum of the roots ${s.inputs[0]}, product ${s.inputs[1]}): the slopes are ${(s.value as number[]).map((x) => rs(R_(Math.round(x * 6), 6))).join(" and ")}`),
+  domain: PAIR_D,
+  keep: pairOk,
+  cap: 300,
+  difficulty: ([p1, q1, p2, q2]) => (q1 === 1 && q2 === 1 ? (p1 === 0 || p1 + p2 === 0 ? 1 : 2) : 3),
+  word: (pp) => `Two straight railway tracks cross at a level crossing placed at the origin of a map. Together the two tracks are described by ${pairEq(pp)}. Find the slopes of the two tracks (type both, separated by a comma; fractions are fine).`,
   teach: {
     idea: "A homogeneous equation ax² + 2hxy + by² = 0 factorises into two linear factors through the origin; putting y = mx turns it into a quadratic whose roots are the slopes.",
     method: "Substitute y = mx, divide by x², and solve bm² + 2hm + a = 0. Check: the sum of the slopes is −2h/b and the product is a/b.",
-    alternatives: [{ id: "factorise", title: "Factorise directly", kind: "procedural", text: ["Treat the equation as a quadratic in y and factorise it into (y − m₁x)(y − m₂x) times a number.", "Each factor set to zero is one line; read off its slope."] }],
+    alternatives: [{ id: "factorise", title: "Factorise directly", kind: "procedural", text: ["Treat the equation as a quadratic in y and factorise it into (q₁y − p₁x)(q₂y − p₂x).", "Each factor set to zero is one line; read off its slope p/q."] }],
   },
-  limits: "Pairs of lines through the origin with whole-number slopes; the general second-degree equation and the condition for a pair of lines are not included.",
+  limits: "Pairs of lines through the origin with slopes p/q (q up to 3), each pair once (no multiples of the same equation); the general second-degree equation and the condition for a pair of lines are not included.",
 };
 
 const aspairang: Def = {
   id: "aspairang",
-  arity: 3,
+  arity: 4,
   title: "The angle between a pair of lines through the origin",
   competency: PAIR,
   type: "exact",
   mc: true,
   parse: none,
-  reject: (p) => (!allIn(p, [[-6, 6], [-6, 6], [1, 3]]) || p[0] >= p[1] || 1 + p[0] * p[1] === 0 ? "Two different whole-number slopes from −6 to 6 (increasing), not perpendicular, and a coefficient of y² from 1 to 3." : null),
-  prompt: ([m1, m2, b]) => `Find tan θ, where θ is the acute angle between the pair of lines ${pairEq(m1, m2, b)}.`,
-  solve: ([m1, m2, b]) => {
-    const a = b * m1 * m2;
-    const h = R_(-b * (m1 + m2), 2);
-    const disc = rsub(rmul(h, h), R_(a * b));
-    const ans = R_(Math.abs(m1 - m2), Math.abs(1 + m1 * m2));
+  reject: (pp) => (!pairOk(pp) || pp[0] * pp[2] + pp[1] * pp[3] === 0 ? "Two different slopes p/q in lowest terms (p from −6 to 6, q from 1 to 3, increasing), not perpendicular." : null),
+  prompt: (pp) => `Find tan θ, where θ is the acute angle between the pair of lines ${pairEq(pp)}.`,
+  solve: (pp) => {
+    const { A, H2, Bc } = pairCoef(pp);
+    const h = R_(H2, 2);
+    const disc = rsub(rmul(h, h), R_(A * Bc));
+    const [p1, q1, p2, q2] = pp;
+    const ans = R_(Math.abs(p1 * q2 - p2 * q1), Math.abs(q1 * q2 + p1 * p2));
     return {
       steps: [
-        S("coefficients", "read", PAIR, [a, rs(h), b], `a = ${mi(a)}, h = ${rs(h)}, b = ${b}`),
+        S("coefficients", "read", PAIR, [A, rs(h), Bc], `a = ${mi(A)}, h = ${rs(h)}, b = ${Bc}`),
         S("discriminant", "evaluate", PAIR, [rs(disc)], rs(disc)),
-        S("tan", "divide", PAIR, [rs(disc), a + b], rs(ans)),
+        S("tan", "divide", PAIR, [rs(disc), A + Bc], rs(ans)),
       ],
       answer: rs(ans),
     };
   },
-  // independent: find the slopes by trying whole numbers in the equation, then measure the angle with arctan
-  validate: ([m1, m2, b], v) => {
+  // independent: find the slopes by trying fractions in the equation, then measure the angle with arctan
+  validate: (pp, v) => {
     const t = num1(v);
     if (t === null) return false;
-    const ms: number[] = [];
-    for (let m = -12; m <= 12; m++) if (b * m1 * m2 - b * (m1 + m2) * m + b * m * m === 0) ms.push(m);
+    const ms = pairSearch(pp);
     if (ms.length !== 2) return false;
     let th = Math.abs(Math.atan(ms[0]) - Math.atan(ms[1]));
     if (th > Math.PI / 2) th = Math.PI - th;
     return close(Math.tan(th), t, 1e-9);
   },
-  bugs: ([m1, m2]) => {
-    const ans = R_(Math.abs(m1 - m2), Math.abs(1 + m1 * m2));
+  bugs: ([p1, q1, p2, q2]) => {
+    const num = Math.abs(p1 * q2 - p2 * q1);
+    const den = q1 * q2 + p1 * p2;
+    const ans = R_(num, Math.abs(den));
+    const minus = q1 * q2 - p1 * p2;
     return [
-      B("no-absolute-value", "procedural", PAIR, "The sign was kept; the acute angle has a positive tangent, so take the absolute value.", rs([-ans[0], ans[1]])),
+      B("no-absolute-value", "procedural", PAIR, "The sign of (m₁ − m₂)/(1 + m₁m₂) was kept; the acute angle has a positive tangent, so take the absolute value.", rs(R_(p1 * q2 - p2 * q1, den))),
       B("lost-two", "recall", PAIR, "The formula is tan θ = |2√(h² − ab)/(a + b)|; the 2 was left out.", rs(R_(ans[0], 2 * ans[1]))),
-      B("denominator-sign", "recall", LINE, "With slopes m₁ and m₂, tan θ = |(m₁ − m₂)/(1 + m₁m₂)|; a minus sign was used in the denominator.", 1 - m1 * m2 !== 0 ? rs(R_(Math.abs(m1 - m2), Math.abs(1 - m1 * m2))) : null),
+      B("denominator-sign", "recall", LINE, "With slopes m₁ and m₂, tan θ = |(m₁ − m₂)/(1 + m₁m₂)|; a minus sign was used in the denominator.", minus !== 0 ? rs(R_(num, Math.abs(minus))) : null),
     ];
   },
-  distractors: ([m1, m2]) => [rs(R_(Math.abs(1 + m1 * m2), Math.abs(m1 - m2))), rs(R_(Math.abs(m1 - m2) + 1, Math.abs(1 + m1 * m2)))],
+  distractors: ([p1, q1, p2, q2]) => {
+    const num = Math.abs(p1 * q2 - p2 * q1);
+    const den = Math.abs(q1 * q2 + p1 * p2);
+    return [rs(R_(den, num)), rs(R_(2 * num, den)), rs(R_(num + den, den))];
+  },
   variants: () => [],
   explain: (s) => (s.id === "coefficients" ? `Compare with ax² + 2hxy + by² = 0: ${s.value}` : s.id === "discriminant" ? `h² − ab = ${s.value}` : `tan θ = |2√(h² − ab)/(a + b)| = ${s.value}`),
-  domain: [[-6, 6], [-6, 6], [1, 3]],
-  difficulty: ([m1, m2, b]) => (b === 1 && Math.abs(m1) + Math.abs(m2) <= 4 ? 1 : b === 1 ? 2 : 3),
-  word: ([m1, m2, b]) => `Two straight roads meet at a junction at the origin of a town map; together they are described by ${pairEq(m1, m2, b)}. Find tan θ, where θ is the acute angle between the two roads.`,
+  domain: PAIR_D,
+  keep: (pp) => pairOk(pp) && pp[0] * pp[2] + pp[1] * pp[3] !== 0,
+  cap: 300,
+  difficulty: ([p1, q1, p2, q2]) => (q1 === 1 && q2 === 1 && Math.abs(p1) + Math.abs(p2) <= 4 ? 1 : q1 === 1 && q2 === 1 ? 2 : 3),
+  word: (pp) => `Two straight roads meet at a junction at the origin of a town map; together they are described by ${pairEq(pp)}. Find tan θ, where θ is the acute angle between the two roads.`,
   teach: {
     idea: "For ax² + 2hxy + by² = 0 the slopes satisfy m₁ + m₂ = −2h/b and m₁m₂ = a/b, so tan θ = |(m₁ − m₂)/(1 + m₁m₂)| becomes |2√(h² − ab)/(a + b)|.",
     method: "Read a, h (half the xy coefficient) and b, work out h² − ab, and use tan θ = |2√(h² − ab)/(a + b)|.",
     alternatives: [{ id: "slopes_first", title: "Find the slopes first", kind: "procedural", text: ["Put y = mx to get the two slopes.", "Use tan θ = |(m₁ − m₂)/(1 + m₁m₂)| for the acute angle."] }],
   },
-  limits: "Pairs through the origin with whole-number slopes that are not perpendicular; the answer is tan θ (no calculator angle).",
+  limits: "Pairs through the origin with slopes p/q (q up to 3) that are not perpendicular, each pair once; the answer is tan θ (no calculator angle).",
 };
 
 // ---- straight lines

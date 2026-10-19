@@ -47,7 +47,7 @@ const smallerFromLarger = (a: number, b: number) => {
   const db = digitsOf(b, 3);
   return fromDigits(da.map((x, i) => Math.abs(x - db[i])));
 };
-/** Column subtraction where a ten (or hundred) is borrowed but the next column is not made one less. */
+/** Column subtraction where a ten (or hundred) is exchanged for ones (regrouped) but the column it came from is not made one less. */
 const borrowNoDecrease = (a: number, b: number) => {
   const da = digitsOf(a, 3);
   const db = digitsOf(b, 3);

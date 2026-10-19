@@ -5,7 +5,7 @@
  * place-value systems in other bases. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
-import { EXP, MT, factSlip, gcd, near, sup } from "../family-kit";
+import { EXP, MT, factSlip, gcd, near, signed, sup } from "../family-kit";
 
 const INT = "MATH.number.integers";
 const OPP = "MATH.number.operation-properties";
@@ -744,7 +744,7 @@ export const B10: Def[] = [
     // only values that show as exact fractions (denominators up to 1000), never a long decimal
     distractors: ([a, m, k]) => [a ** (m - k - 1), a ** (m - k + 1), a ** (k - m)].filter((x) => Number.isInteger(x) || Number.isInteger(Math.round(1 / x)) && Math.round(1 / x) <= 1000),
     variants: () => [],
-    explain: (s) => (s.id === "combine" ? `${s.inputs[0]} + (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}` : `${s.inputs[0]} to the power ${n_(Number(s.inputs[1]))} = ${Number(s.value) < 1 ? `1/${Math.round(1 / Number(s.value))}` : s.value}`),
+    explain: (s) => (s.id === "combine" ? `Add the powers: ${s.inputs[0]} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : `${s.inputs[0]} to the power ${n_(Number(s.inputs[1]))} = ${Number(s.value) < 1 ? `1/${Math.round(1 / Number(s.value))}` : s.value}`),
     domain: [[2, 10], [0, 5], [1, 8]],
     // answers written as exact fractions: denominators up to 1000
     keep: ([a, m, k]) => k <= m || a ** (k - m) <= 1000,
@@ -1196,7 +1196,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "common" ? `Common denominator: ${s.value}` : s.id === "flip" ? `Dividing by ${s.inputs[0]} is multiplying by its reciprocal` : `${s.inputs[0]} ${s.op === "add" ? "+" : s.op === "subtract" ? "−" : "×"} ${s.inputs[1]} = ${fmtQ(Number(s.value))}`),
+    explain: (s) => (s.id === "common" ? `Common denominator: ${s.value}` : s.id === "flip" ? `Dividing by ${s.inputs[0]} is multiplying by its reciprocal` : `${String(s.inputs[0]).replace(/^-/, "−")} ${s.op === "add" ? "+" : s.op === "subtract" ? "−" : "×"} ${String(s.inputs[1]).startsWith("-") ? `(${String(s.inputs[1]).replace(/^-/, "−")})` : s.inputs[1]} = ${fmtQ(Number(s.value))}`),
     domain: [[-8, 8], [2, 9], [-8, 8], [2, 9], [0, 3]],
     cap: 500,
     difficulty: ([, b, , d, o]) => (o === 2 ? 1 : o === 3 ? 2 : b === d || b % d === 0 || d % b === 0 ? 2 : 3),

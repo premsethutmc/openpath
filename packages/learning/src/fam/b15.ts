@@ -77,6 +77,11 @@ function combo(ts: [number, string][]): string {
 const lin = (a: number, b: number) => poly([a, b]);
 /** x − a written as a factor: x − 3, x + 2, x. */
 const fac = (a: number) => lin(1, -a);
+/** The factor x − a as written in a product or under a fraction bar: a lone x is not bracketed. */
+const bx = (a: number) => (a === 0 ? "x" : `(${fac(a)})`);
+/** A numerator or denominator in brackets only when it has more than one term. */
+const brk = (t: string) => (/ /.test(t) ? `(${t})` : t);
+const prod2 = (a: number, b: number) => (b === 0 && a !== 0 ? `x${bx(a)}` : `${bx(a)}${bx(b)}`);
 const choose = (n: number, r: number) => {
   if (r < 0 || r > n) return 0;
   let v = 1;
@@ -208,37 +213,59 @@ const inexOk = (p: number[]) => inDom(p, D_INEX) && p[2] < Math.min(p[0], p[1]);
 
 // ---------------------------------------------------------------- relations
 
-const D_CART: [number, number][] = [[1, 6], [1, 6], [0, 2]];
+const D_CART: [number, number][] = [[1, 10], [1, 10], [0, 2]];
 const cartOk = (p: number[]) => inDom(p, D_CART) && (p[2] !== 1 || p[0] * p[1] <= 12) && !(p[0] === 1 && p[1] === 1);
 const nums = (m: number) => `{${Array.from({ length: m }, (_, i) => i + 1).join(", ")}}`;
-const lets = (n: number) => `{${"pqrstu".slice(0, n).split("").join(", ")}}`;
+const lets = (n: number) => `{${"pqrstuvwyz".slice(0, n).split("").join(", ")}}`;
+/** n with its noun, singular only for 1. */
+const pl = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 
-const pairsOf = (mask: number) => {
-  const out: [number, number][] = [];
-  for (let i = 0; i < 9; i++) if (mask & (1 << i)) out.push([Math.floor(i / 3) + 1, (i % 3) + 1]);
-  return out;
-};
 const popcount = (m: number) => {
   let c = 0;
   for (let x = m; x; x >>= 1) c += x & 1;
   return c;
 };
-const relOk = (p: number[]) => inDom(p, [[1, 511]]) && popcount(p[0]) >= 3 && popcount(p[0]) <= 7;
+/** Relations on A = {1, …, n} given by a rule (set-builder form): the rule's text for k, its test, and its values of k.
+ * (Relations given as a list of pairs are the relation-properties family aqrel.) */
+const RRULES: [(k: number) => string, (a: number, b: number, k: number) => boolean, number[]][] = [
+  [(k) => `a − b is divisible by ${k}`, (a, b, k) => (a - b) % k === 0, [2, 3, 4]],
+  [() => "a ≤ b", (a, b) => a <= b, [0]],
+  [() => "a < b", (a, b) => a < b, [0]],
+  [(k) => `a + b = ${k}`, (a, b, k) => a + b === k, [4, 5, 6]],
+  [(k) => `|a − b| ≤ ${k}`, (a, b, k) => Math.abs(a - b) <= k, [1, 2]],
+  [(k) => `b = a + ${k}`, (a, b, k) => b === a + k, [1, 2]],
+  [() => "a divides b", (a, b) => b % a === 0, [0]],
+  [() => "ab is even", (a, b) => (a * b) % 2 === 0, [0]],
+  [(k) => `a + b ≤ ${k}`, (a, b, k) => a + b <= k, [4, 5, 6]],
+];
+const D_REL: [number, number][] = [[0, 8], [0, 2], [3, 8]];
+const relOk = (p: number[]) => inDom(p, D_REL) && p[1] < RRULES[p[0]][2].length && relPairs(p).length >= 1;
+const relK = ([rule, ki]: number[]) => RRULES[rule][2][ki];
+const relText = (p: number[]) => `{(a, b) : a, b ∈ A, ${RRULES[p[0]][0](relK(p))}}`;
+/** The pairs of R, listed by going through A × A. */
+function relPairs(p: number[]): [number, number][] {
+  const n = p[2];
+  const out: [number, number][] = [];
+  for (let a = 1; a <= n; a++) for (let b = 1; b <= n; b++) if (RRULES[p[0]][1](a, b, relK(p))) out.push([a, b]);
+  return out;
+}
 /** The properties by going through the list of pairs. */
-function relProps(mask: number) {
-  const ps = pairsOf(mask);
+function relProps(p: number[]) {
+  const ps = relPairs(p);
   const has = (a: number, b: number) => ps.some(([x, y]) => x === a && y === b);
-  const r = [1, 2, 3].every((a) => has(a, a));
+  const missing = Array.from({ length: p[2] }, (_, i) => i + 1).filter((a) => !has(a, a));
+  const r = missing.length === 0;
   const s = ps.every(([a, b]) => has(b, a));
+  const noRev = ps.filter(([a, b]) => !has(b, a));
   const fails: [number, number, number][] = [];
   for (const [a, b] of ps) for (const [b2, c] of ps) if (b === b2 && !has(a, c)) fails.push([a, b, c]);
-  return { r, s, t: fails.length === 0, fails, ps, has };
+  return { r, s, t: fails.length === 0, fails, ps, has, missing, noRev };
 }
 const relLabel = (r: boolean, s: boolean, t: boolean) => `R is ${r ? "" : "not "}reflexive, ${s ? "" : "not "}symmetric and ${t ? "" : "not "}transitive`;
-function relChoices(mask: number) {
-  const { r, s, t } = relProps(mask);
+function relChoices(p: number[]) {
+  const { r, s, t } = relProps(p);
   const opts = [relLabel(r, s, t), relLabel(!r, s, t), relLabel(r, !s, t), relLabel(r, s, !t)];
-  return [...opts].sort((x, y) => fnv(`${mask}:${x}`) - fnv(`${mask}:${y}`) || (x < y ? -1 : 1));
+  return [...opts].sort((x, y) => fnv(`${p.join(",")}:${x}`) - fnv(`${p.join(",")}:${y}`) || (x < y ? -1 : 1));
 }
 
 // ---------------------------------------------------------------- functions
@@ -278,7 +305,7 @@ function trText([, , h, v, a, s]: number[]) {
   return `y = ${A}f(${inner})${v === 0 ? "" : v < 0 ? ` − ${-v}` : ` + ${v}`}`;
 }
 
-const D_STD: [number, number][] = [[-49, 49], [-49, 49], [0, 1]];
+const D_STD: [number, number][] = [[-99, 99], [-99, 99], [0, 1]];
 const stdOk = (p: number[]) => inDom(p, D_STD) && p[0] % 10 !== 0 && p[1] % 10 !== 0 && (p[0] < 0 || p[1] < 0);
 const dec = (u: number) => `${u < 0 ? "−" : ""}${Math.floor(Math.abs(u) / 10)}.${Math.abs(u) % 10}`;
 
@@ -323,8 +350,8 @@ const pfqNum = ([a, k, A, B, C]: number[]) => [A + B, C - a * B, A * k - a * C];
 
 // ---------------------------------------------------------------- counting
 
-const D_NPR: [number, number][] = [[3, 15], [2, 15]];
-const nprOk = (p: number[]) => inDom(p, D_NPR) && p[1] <= p[0] && perm(p[0], p[1]) <= 1e9;
+const D_NPR: [number, number][] = [[3, 30], [2, 30]];
+const nprOk = (p: number[]) => inDom(p, D_NPR) && p[1] <= p[0] && perm(p[0], p[1]) <= 1e6;
 const D_NCR: [number, number][] = [[4, 20], [2, 18]];
 const ncrOk = (p: number[]) => inDom(p, D_NCR) && p[1] <= p[0] - 2;
 const D_COMM: [number, number][] = [[3, 9], [3, 9], [3, 6], [1, 5]];
@@ -384,17 +411,17 @@ function lawNumber([i, j, k]: number[]): { text: string; places: number } {
 }
 const lawAnswer = (ca: number, cb: number, c0: number) => combo([[ca, "a"], [cb, "b"], [c0, ""]]);
 
-const LB = [2, 3, 5];
-const D_LOG: [number, number][] = [[0, 2], [1, 4], [-4, 6]];
+const LB = [2, 3, 5, 7];
+const D_LOG: [number, number][] = [[0, 3], [1, 6], [-8, 8]];
 const logOk = (p: number[]) => inDom(p, D_LOG) && p[2] !== 0 && p[2] !== p[1] && LB[p[0]] ** Math.abs(p[2]) <= 3125 && LB[p[0]] ** p[1] <= 625;
 const logArg = (c: number, j: number) => (j > 0 ? String(c ** j) : `(1/${c ** -j})`);
 
-const EB = [2, 3, 5, 10];
-const D_LEQ: [number, number][] = [[0, 3], [1, 9], [1, 1000], [0, 1]];
+const EB = [2, 3, 5, 10, 4, 6, 7];
+const D_LEQ: [number, number][] = [[0, 6], [1, 12], [1, 4096], [0, 1]];
 const leqOk = (p: number[]) => {
   if (!inDom(p, D_LEQ)) return false;
   const P = EB[p[0]] ** p[1];
-  return P <= 1000 && P % p[2] === 0 && p[2] * p[2] > P;
+  return P <= 4096 && P % p[2] === 0 && p[2] * p[2] > P;
 };
 const logb = (B: number) => (B === 10 ? "log" : `log${sub(B)}`);
 
@@ -612,7 +639,7 @@ export const B15: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: (p) => (cartOk(p) ? null : "Sets of 1 to 6 elements; for counting relations, n(A) × n(B) at most 12."),
+    reject: (p) => (cartOk(p) ? null : "Sets of 1 to 10 elements; for counting relations, n(A) × n(B) at most 12."),
     prompt: ([m, n, q]) => (q === 0 ? `A = ${nums(m)} and B = ${lets(n)}. How many ordered pairs are in A × B?` : q === 1 ? `A = ${nums(m)} and B = ${lets(n)}. How many relations are there from A to B?` : `A = ${nums(m)} and n(A × B) = ${m * n}. How many elements does B have?`),
     solve: ([m, n, q]) => {
       const steps: Step[] = [{ id: "pairs", op: q === 2 ? "divide" : "multiply", competency: REL, inputs: q === 2 ? [m * n, m] : [m, n], value: q === 2 ? n : m * n }];
@@ -649,76 +676,80 @@ export const B15: Def[] = [
     difficulty: ([, , q]) => (q === 0 ? 1 : q === 2 ? 2 : 3),
     word: ([m, n, q]) =>
       q === 0
-        ? `A tiffin centre makes ${m} kinds of dosa and ${n} kinds of chutney. A plate is one dosa with one chutney. How many different plates are possible?`
+        ? `A tiffin centre makes ${pl(m, "kind", "kinds")} of dosa and ${pl(n, "kind", "kinds")} of chutney. A plate is one dosa with one chutney. How many different plates are possible?`
         : q === 1
-          ? `Each of ${m} students says, for each of ${n} games, whether or not they like it. How many different sets of answers are possible for the whole group?`
-          : `A tiffin centre makes ${m} kinds of dosa. A plate is one dosa with one chutney, and ${m * n} different plates are possible. How many kinds of chutney are there?`,
+          ? `${m === 1 ? "A student says" : `Each of ${m} students says`}, for ${n === 1 ? "one game" : `each of ${n} games`}, whether or not they like it. How many different sets of answers are possible${m === 1 ? "" : " for the whole group"}?`
+          : `A tiffin centre makes ${pl(m, "kind", "kinds")} of dosa. A plate is one dosa with one chutney, and ${m * n} different plates are possible. How many kinds of chutney are there?`,
     teach: {
       idea: "A × B is the set of all ordered pairs (a, b) with a in A and b in B, so n(A × B) = n(A) × n(B). A relation from A to B is any subset of A × B.",
       method: "Multiply the sizes for the product. For the number of relations, raise 2 to the power n(A) × n(B).",
       alternatives: [{ id: "grid", title: "Draw the pairs as a grid", kind: "conceptual", text: ["Write A down the side and B along the top: each cell is one ordered pair.", "The grid has n(A) rows and n(B) columns; a relation is a choice of cells to tick."] }],
     },
-    limits: "Two finite sets of up to 6 elements; products of three sets are not included.",
+    limits: "Two finite sets of up to 10 elements; products of three sets are not included.",
   },
   {
     id: "aorel",
-    arity: 1,
-    title: "Is a relation reflexive, symmetric, transitive?",
+    arity: 3,
+    title: "Is a relation given by a rule reflexive, symmetric, transitive?",
     competency: REL,
     type: "choice",
     parse: none,
-    reject: (p) => (relOk(p) ? null : "A relation on {1, 2, 3} with 3 to 7 ordered pairs."),
-    prompt: ([mask]) => `On the set A = {1, 2, 3}, the relation R = {${pairsOf(mask).map(([a, b]) => `(${a}, ${b})`).join(", ")}}. Which statement is true?`,
-    choices: ([mask]) => relChoices(mask),
-    solve: ([mask]) => {
-      const { r, s, t } = relProps(mask);
+    // [rule, k, n]: R = {(a, b) : a, b ∈ {1, …, n}, rule} (RRULES)
+    reject: (p) => (relOk(p) ? null : "A relation on {1, …, n} (n from 3 to 8) given by one of nine rules."),
+    prompt: (p) => `On the set A = ${p[2] <= 5 ? `{${Array.from({ length: p[2] }, (_, i) => i + 1).join(", ")}}` : `{1, 2, …, ${p[2]}}`}, the relation R = ${relText(p)}. Which statement is true?`,
+    choices: (p) => relChoices(p),
+    solve: (p) => {
+      const { r, s, t } = relProps(p);
       return {
         steps: [
-          { id: "reflexive", op: "check", competency: REL, inputs: ["(1, 1), (2, 2), (3, 3)"], value: r ? 1 : 0 },
+          { id: "reflexive", op: "check", competency: REL, inputs: ["(a, a) for every a"], value: r ? 1 : 0 },
           { id: "symmetric", op: "check", competency: REL, inputs: ["(a, b) → (b, a)"], value: s ? 1 : 0 },
           { id: "transitive", op: "check", competency: REL, inputs: ["(a, b), (b, c) → (a, c)"], value: t ? 1 : 0 },
         ],
-        answer: relChoices(mask).indexOf(relLabel(r, s, t)),
+        answer: relChoices(p).indexOf(relLabel(r, s, t)),
       };
     },
     // independent: the relation as a 0–1 matrix: diagonal, transpose, and the boolean square M² ≤ M
-    validate: ([mask], v) => {
-      const M = [0, 1, 2].map((i) => [0, 1, 2].map((j) => (mask >> (3 * i + j)) & 1));
+    validate: (p, v) => {
+      const n = p[2];
+      const I = Array.from({ length: n }, (_, i) => i);
+      const M = I.map((i) => I.map((j) => (RRULES[p[0]][1](i + 1, j + 1, relK(p)) ? 1 : 0)));
       const r = M.every((row, i) => row[i] === 1);
       const s = M.every((row, i) => row.every((x, j) => x === M[j][i]));
-      const t = M.every((row, i) => row.every((x, j) => x === 1 || ![0, 1, 2].some((k) => M[i][k] === 1 && M[k][j] === 1)));
-      return typeof v === "number" && relChoices(mask)[v] === relLabel(r, s, t);
+      const t = M.every((row, i) => row.every((x, j) => x === 1 || !I.some((k) => M[i][k] === 1 && M[k][j] === 1)));
+      return typeof v === "number" && relChoices(p)[v] === relLabel(r, s, t);
     },
-    bugs: ([mask]) => {
-      const { r, s, t, fails, ps, has } = relProps(mask);
-      const ch = relChoices(mask);
+    bugs: (p) => {
+      const { r, s, t, fails, ps, missing, noRev } = relProps(p);
+      const ch = relChoices(p);
       const out: Bug[] = [];
-      if (!r && ps.some(([a, b]) => a === b)) out.push({ id: "some-diagonal", kind: "conceptual", competency: REL, says: `Some pairs (a, a) are in R, so R was called reflexive; reflexive needs every one of (1, 1), (2, 2) and (3, 3).`, predict: ch.indexOf(relLabel(!r, s, t)) });
-      if (!s && ps.some(([a, b]) => a !== b && has(b, a))) out.push({ id: "some-pairs-checked", kind: "procedural", competency: REL, says: "Only some pairs were checked for symmetry; every (a, b) in R needs its partner (b, a) in R.", predict: ch.indexOf(relLabel(r, !s, t)) });
+      if (!r && ps.some(([a, b]) => a === b)) out.push({ id: "some-diagonal", kind: "conceptual", competency: REL, says: `Some pairs (a, a) are in R, so R was called reflexive; reflexive needs (a, a) for every a in A, and (${missing[0]}, ${missing[0]}) is not in R.`, predict: ch.indexOf(relLabel(!r, s, t)) });
+      if (!s && ps.some(([a, b]) => a !== b && ps.some(([x, y]) => x === b && y === a))) out.push({ id: "some-pairs-checked", kind: "procedural", competency: REL, says: `Only some pairs were checked for symmetry; (${noRev[0][0]}, ${noRev[0][1]}) is in R but (${noRev[0][1]}, ${noRev[0][0]}) is not.`, predict: ch.indexOf(relLabel(r, !s, t)) });
       if (!t) {
         const onlySame = fails.every(([a, , c]) => a === c);
+        const [a, b, c] = onlySame ? fails[0] : fails.find(([x, , z]) => x !== z)!;
         out.push(
           onlySame
-            ? { id: "transitive-a-equals-c", kind: "conceptual", competency: REL, says: `Chains that come back to the start were skipped: (${fails[0][0]}, ${fails[0][1]}) and (${fails[0][1]}, ${fails[0][2]}) in R need (${fails[0][0]}, ${fails[0][2]}) in R too.`, predict: ch.indexOf(relLabel(r, s, !t)) }
-            : { id: "chain-missed", kind: "procedural", competency: REL, says: `A chain was missed: (${fails[0][0]}, ${fails[0][1]}) and (${fails[0][1]}, ${fails[0][2]}) are in R, but (${fails[0][0]}, ${fails[0][2]}) is not.`, predict: ch.indexOf(relLabel(r, s, !t)) },
+            ? { id: "transitive-a-equals-c", kind: "conceptual", competency: REL, says: `Chains that come back to the start were skipped: (${a}, ${b}) and (${b}, ${c}) in R need (${a}, ${c}) in R too.`, predict: ch.indexOf(relLabel(r, s, !t)) }
+            : { id: "chain-missed", kind: "procedural", competency: REL, says: `A chain was missed: (${a}, ${b}) and (${b}, ${c}) are in R, but (${a}, ${c}) is not.`, predict: ch.indexOf(relLabel(r, s, !t)) },
         );
       }
       return out;
     },
-    variants: ([mask]) => [[mask ^ 1], [mask ^ 16], [mask ^ 256]].filter(relOk),
+    variants: ([rule, k, n]) => [[rule, k, n + 1], [rule, k + 1, n]].filter(relOk),
     explain: (s) => (s.id === "reflexive" ? `Reflexive (every (a, a) in R): ${s.value ? "yes" : "no"}` : s.id === "symmetric" ? `Symmetric (each (a, b) has its (b, a)): ${s.value ? "yes" : "no"}` : `Transitive (each chain (a, b), (b, c) has its (a, c)): ${s.value ? "yes" : "no"}`),
-    domain: [[1, 511]],
+    domain: D_REL,
     keep: relOk,
-    cap: 300,
-    difficulty: ([mask]) => (popcount(mask) <= 4 ? 1 : popcount(mask) <= 5 ? 2 : 3),
+    difficulty: ([rule]) => (rule === 1 || rule === 2 || rule === 5 ? 1 : rule === 0 || rule === 4 || rule === 6 ? 2 : 3),
     teach: {
       idea: "Reflexive: every element is related to itself. Symmetric: whenever (a, b) is in R, so is (b, a). Transitive: whenever (a, b) and (b, c) are in R, so is (a, c) — including chains with a = c.",
-      method: "Check each property against the list, one pair or one chain at a time. A single missing pair is enough to say 'not'.",
+      method: "Test the rule itself: put b = a for reflexive; swap a and b for symmetric; for transitive, take a chain (a, b), (b, c) and check (a, c). A single counter-example from A is enough to say 'not'.",
       alternatives: [
-        { id: "matrix", title: "Write R as a 3 × 3 table", kind: "procedural", text: ["Put a 1 in row a, column b when (a, b) is in R.", "Reflexive: 1s all along the diagonal. Symmetric: the table equals its mirror image across the diagonal. Transitive: whenever row a has a 1 in column b and row b has a 1 in column c, row a has a 1 in column c."], visual: ([mask]) => ({ type: "table", head: ["R", "1", "2", "3"], rows: [0, 1, 2].map((i) => [String(i + 1), ...[0, 1, 2].map((j) => String((mask >> (3 * i + j)) & 1))]) }) },
+        { id: "list", title: "List the pairs first", kind: "procedural", text: ["Write out R as a list of pairs by going through every a and b in A.", "Then check (a, a) for every a, the reverse of every pair, and every chain (a, b), (b, c)."] },
+        { id: "matrix", title: "Write R as a table", kind: "procedural", text: ["Put a 1 in row a, column b when (a, b) is in R.", "Reflexive: 1s all along the diagonal. Symmetric: the table equals its mirror image across the diagonal. Transitive: whenever row a has a 1 in column b and row b has a 1 in column c, row a has a 1 in column c."], visual: (p) => ({ type: "table", head: ["R", ...Array.from({ length: p[2] }, (_, j) => String(j + 1))], rows: Array.from({ length: p[2] }, (_, i) => [String(i + 1), ...Array.from({ length: p[2] }, (_, j) => (RRULES[p[0]][1](i + 1, j + 1, relK(p)) ? "1" : "0"))]) }) },
       ],
     },
-    limits: "Relations on {1, 2, 3} only; proving that a relation is an equivalence relation on an infinite set is written work for an educator.",
+    limits: "Relations on {1, …, n} for n ≤ 8 given by a rule; relations given as a list of pairs are the relation-properties family (aqrel), and proofs on infinite sets are written work for an educator.",
   },
   // ============================================================ functions
   {
@@ -740,7 +771,7 @@ export const B15: Def[] = [
               { id: "solve", op: "solve", competency: INEQ, inputs: [a, b], value: ans },
             ]
           : [
-              { id: "factor", op: "factorise", competency: FACT, inputs: [a, b], value: `(${fac(a)})(${fac(b)})` },
+              { id: "factor", op: "factorise", competency: FACT, inputs: [a, b], value: `${prod2(a, b)}` },
               { id: "condition", op: "write", competency: FUN, inputs: [["≠ 0", "≥ 0", "> 0", "≤ 0"][t - 1]], value: ans },
               { id: "solve", op: "solve", competency: NLI, inputs: [a, b], value: ans },
             ];
@@ -761,11 +792,11 @@ export const B15: Def[] = [
         if (b !== 0) out.push({ id: "b-sign", kind: "procedural", competency: LIN, says: `${Math.abs(b)} was moved across without changing its sign.`, predict: a > 0 ? ivs([[b / a, true, null, false]]) : ivs([[null, false, b / a, true]]) });
         return out;
       }
-      const neg: Bug = { id: "root-signs", kind: "procedural", competency: FACT, says: `The roots were read with the wrong signs: ${poly([1, -(a + b), a * b])} = (${fac(a)})(${fac(b)}) is zero at x = ${n_(a)} and x = ${n_(b)}.`, predict: domAnswer(t, -b, -a) };
+      const neg: Bug = { id: "root-signs", kind: "procedural", competency: FACT, says: `The roots were read with the wrong signs: ${poly([1, -(a + b), a * b])} = ${prod2(a, b)} is zero at x = ${n_(a)} and x = ${n_(b)}.`, predict: domAnswer(t, -b, -a) };
       if (t === 1) return [{ id: "root-rule-used", kind: "conceptual", competency: FUN, says: "The quadratic was made positive, as under a square root; a denominator only has to be non-zero, so just x = a and x = b are removed.", predict: domAnswer(3, a, b) }, neg];
-      if (t === 2) return [{ id: "sign-region", kind: "conceptual", competency: NLI, says: `The interval between the roots was chosen; (${fac(a)})(${fac(b)}) is negative there and ≥ 0 outside.`, predict: ivs([[a, true, b, true]]) }, { id: "ends-left-out", kind: "procedural", competency: FUN, says: "The roots were left out; √0 = 0 is defined, so they belong to the domain.", predict: domAnswer(3, a, b) }, neg];
+      if (t === 2) return [{ id: "sign-region", kind: "conceptual", competency: NLI, says: `The interval between the roots was chosen; ${prod2(a, b)} is negative there and ≥ 0 outside.`, predict: ivs([[a, true, b, true]]) }, { id: "ends-left-out", kind: "procedural", competency: FUN, says: "The roots were left out; √0 = 0 is defined, so they belong to the domain.", predict: domAnswer(3, a, b) }, neg];
       if (t === 3) return [{ id: "denominator-zero", kind: "conceptual", competency: FUN, says: `The roots ${n_(a)} and ${n_(b)} were included; there the denominator is √0 = 0.`, predict: domAnswer(2, a, b) }, { id: "sign-region", kind: "conceptual", competency: NLI, says: "The interval between the roots was chosen; the quadratic is negative there.", predict: ivs([[a, false, b, false]]) }, neg];
-      return [{ id: "minus-ignored", kind: "conceptual", competency: NLI, says: `The minus sign in front of x² was ignored; ${poly([-1, a + b, -a * b])} = (${fac(a)})(${n_(b)} − x) is ≥ 0 between the roots.`, predict: domAnswer(2, a, b) }, { id: "ends-left-out", kind: "procedural", competency: FUN, says: "The roots were left out; √0 = 0 is defined.", predict: ivs([[a, false, b, false]]) }, neg];
+      return [{ id: "minus-ignored", kind: "conceptual", competency: NLI, says: `The minus sign in front of x² was ignored; ${poly([-1, a + b, -a * b])} = ${bx(a)}(${n_(b)} − x) is ≥ 0 between the roots.`, predict: domAnswer(2, a, b) }, { id: "ends-left-out", kind: "procedural", competency: FUN, says: "The roots were left out; √0 = 0 is defined.", predict: ivs([[a, false, b, false]]) }, neg];
     },
     distractors: ([t, a, b]) => (t === 0 ? ["(−∞, ∞)", a > 0 ? ivs([[null, false, -b / a, true]]) : ivs([[-b / a, true, null, false]])] : ["(−∞, ∞)", ivs([[a, false, b, false]]), ivs([[null, false, a, true], [b, false, null, false]])]),
     variants: ([t, a, b]) => [[(t + 1) % 5, a, b]].filter(domOk),
@@ -796,7 +827,7 @@ export const B15: Def[] = [
     prompt: (p) => `Find the range of f : ℝ → ℝ, f(x) = ${poly(rangeCs(p))}. Write it in interval notation.`,
     solve: ([a, h, k]) => ({
       steps: [
-        { id: "vertex", op: "complete-square", competency: QUAD, inputs: [a, h, k], value: `${a === 1 ? "" : a === -1 ? "−" : n_(a)}(${fac(h)})² ${k < 0 ? "−" : "+"} ${Math.abs(k)}` },
+        { id: "vertex", op: "complete-square", competency: QUAD, inputs: [a, h, k], value: `${a === 1 ? "" : a === -1 ? "−" : n_(a)}${bx(h)}² ${k < 0 ? "−" : "+"} ${Math.abs(k)}` },
         { id: "extreme", op: "evaluate", competency: FUN, inputs: [h, a > 0 ? "least" : "greatest"], value: k },
       ],
       answer: ray(k, a > 0),
@@ -954,7 +985,7 @@ export const B15: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: (p) => (stdOk(p) ? null : "Two numbers with one decimal place between −5 and 5, not whole, at least one negative."),
+    reject: (p) => (stdOk(p) ? null : "Two numbers with one decimal place between −10 and 10, not whole, at least one negative."),
     prompt: ([u, w, op]) => `[x] denotes the greatest integer less than or equal to x. Find [${dec(u)}] ${op ? "−" : "+"} [${dec(w)}].`,
     solve: ([u, w, op]) => {
       const fu = Math.floor(u / 10);
@@ -1072,7 +1103,7 @@ export const B15: Def[] = [
     domain: D_ABSE,
     cap: 300,
     difficulty: ([a, b]) => (a === 1 ? 1 : (b % a === 0) ? 2 : 3),
-    word: ([a, b, c]) => `${nm(a + c)} thinks of a number x. On the number line, ${a === 1 ? "x" : `${a}x`} is exactly ${c} units away from ${n_(-b)}. Which numbers could x be? Give every answer, separated by commas.`,
+    word: ([a, b, c]) => `${nm(a + c)} thinks of a number x. On the number line, ${a === 1 ? "x" : `${a}x`} is exactly ${c} unit${c === 1 ? "" : "s"} away from ${n_(-b)}. Which numbers could x be? Give every answer, separated by commas.`,
     teach: {
       idea: "|A| is the distance of A from 0, so |A| = c (with c > 0) means A = c or A = −c: two equations.",
       method: "Write the two cases ax + b = c and ax + b = −c, and solve each.",
@@ -1123,7 +1154,7 @@ export const B15: Def[] = [
     teach: {
       idea: "|A| < c means A is within c of 0: −c < A < c. |A| > c means A is further than c from 0: A < −c or A > c.",
       method: "Rewrite without the modulus (one double inequality, or two inequalities joined by 'or'), solve for x, and write the answer in interval notation with the right brackets.",
-      alternatives: [{ id: "distance", title: "Distance from a point", kind: "conceptual", text: ["|ax + b| is the distance between ax and −b on the number line.", "'Less than c' is the stretch of length 2c centred at −b; 'more than c' is everything outside it."], visual: ([a, b, c]) => ({ type: "numberline", from: (-c - b) / a - 3, to: (c - b) / a + 3, marks: [(-c - b) / a, (c - b) / a] }) }],
+      alternatives: [{ id: "distance", title: "Distance from a point", kind: "conceptual", text: ["|ax + b| is the distance between ax and −b on the number line.", "'Less than c' is the stretch of length 2c centred at −b; 'more than c' is everything outside it."], visual: ([a, b, c]) => ({ type: "numberline", from: Math.floor((-c - b) / a) - 2, to: Math.ceil((c - b) / a) + 2, marks: [(-c - b) / a, (c - b) / a] }) }],
     },
     limits: "|ax + b| compared with a positive constant; inequalities with a modulus on both sides are another family.",
   },
@@ -1140,7 +1171,7 @@ export const B15: Def[] = [
     prompt: ([a, b, r, m]) => `Solve ${poly([m, -m * (a + b), m * a * b])} ${OPS[r]} 0. Write the answer in interval notation.`,
     solve: ([a, b, r, m]) => ({
       steps: [
-        { id: "factor", op: "factorise", competency: FACT, inputs: [a, b, m], value: `${m === 1 ? "" : m === -1 ? "−" : n_(m)}(${fac(a)})(${fac(b)})` },
+        { id: "factor", op: "factorise", competency: FACT, inputs: [a, b, m], value: `${m === 1 ? "" : m === -1 ? "−" : n_(m)}${prod2(a, b)}` },
         { id: "signs", op: "sign-chart", competency: NLI, inputs: [a, b, m > 0 ? "+" : "−"], value: qinAnswer(a, b, r, m) },
       ],
       answer: qinAnswer(a, b, r, m),
@@ -1148,8 +1179,8 @@ export const B15: Def[] = [
     validate: ([a, b, r, m], v) => agrees(v, (k, N) => cmp(m * (k - a * N) * (k - b * N), r)),
     bugs: ([a, b, r, m]) => [
       m < 0
-        ? { id: "leading-sign", kind: "conceptual", competency: NLI, says: `The negative x² coefficient was ignored; ${m === -1 ? "−" : n_(m)}(${fac(a)})(${fac(b)}) is positive between the roots and negative outside.`, predict: qinAnswer(a, b, r, -m) }
-        : { id: "wrong-region", kind: "conceptual", competency: NLI, says: `The wrong region was chosen; (${fac(a)})(${fac(b)}) is negative between ${n_(a)} and ${n_(b)} and positive outside.`, predict: qinAnswer(a, b, r ^ 2, m) },
+        ? { id: "leading-sign", kind: "conceptual", competency: NLI, says: `The negative x² coefficient was ignored; ${m === -1 ? "−" : n_(m)}${prod2(a, b)} is positive between the roots and negative outside.`, predict: qinAnswer(a, b, r, -m) }
+        : { id: "wrong-region", kind: "conceptual", competency: NLI, says: `The wrong region was chosen; ${prod2(a, b)} is negative between ${n_(a)} and ${n_(b)} and positive outside.`, predict: qinAnswer(a, b, r ^ 2, m) },
       { id: "end-points", kind: "procedural", competency: INEQ, says: r % 2 ? "The roots were left out; with ≤ or ≥ the value 0 is allowed." : "The roots were included; there the expression is 0, which does not satisfy a strict inequality.", predict: qinAnswer(a, b, r ^ 1, m) },
       ...(a !== -b ? [{ id: "root-signs", kind: "procedural", competency: FACT, says: `The roots were read with the wrong signs; the expression is zero at x = ${n_(a)} and x = ${n_(b)}.`, predict: qinAnswer(-b, -a, r, m) } as Bug] : []),
     ],
@@ -1179,7 +1210,7 @@ export const B15: Def[] = [
     mc: true,
     parse: none,
     reject: (p) => (ratOk(p) ? null : "(x − a)/(x − b) compared with 0, whole numbers a ≠ b from −8 to 8."),
-    prompt: ([a, b, r]) => `Solve ${a === 0 ? "x" : `(${fac(a)})`}/(${fac(b)}) ${OPS[r]} 0. Write the answer in interval notation.`,
+    prompt: ([a, b, r]) => `Solve ${a === 0 ? "x" : `${bx(a)}`}/${bx(b)} ${OPS[r]} 0. Write the answer in interval notation.`,
     solve: ([a, b, r]) => ({
       steps: [
         { id: "critical", op: "find", competency: NLI, inputs: [a, b], value: [a, b].sort((x, y) => x - y) },
@@ -1217,10 +1248,10 @@ export const B15: Def[] = [
     mc: true,
     parse: none,
     reject: (p) => (pfOk(p) ? null : "(px + q)/((x − a)(x − b)) with whole-number roots a < b and whole-number A, B, not 0."),
-    prompt: ([a, b, A, B]) => `Resolve (${lin(A + B, -(A * b + B * a))})/(${poly([1, -(a + b), a * b])}) into partial fractions of the form A/(${fac(a)}) + B/(${fac(b)}). Write the pair (A, B).`,
+    prompt: ([a, b, A, B]) => `Resolve ${brk(lin(A + B, -(A * b + B * a)))}/(${poly([1, -(a + b), a * b])}) into partial fractions of the form A/${bx(a)} + B/${bx(b)}. Write the pair (A, B).`,
     solve: ([a, b, A, B]) => ({
       steps: [
-        { id: "factor", op: "factorise", competency: FACT, inputs: [a, b], value: `(${fac(a)})(${fac(b)})` },
+        { id: "factor", op: "factorise", competency: FACT, inputs: [a, b], value: `${prod2(a, b)}` },
         { id: "A", op: "substitute", competency: PF, inputs: [a, (A + B) * a - (A * b + B * a), a - b], value: A },
         { id: "B", op: "substitute", competency: PF, inputs: [b, (A + B) * b - (A * b + B * a), b - a], value: B },
       ],
@@ -1260,7 +1291,7 @@ export const B15: Def[] = [
     mc: true,
     parse: none,
     reject: (p) => (pfqOk(p) ? null : "N(x)/((x − a)(x² + k)) with whole numbers a, k > 0 and A ≠ 0."),
-    prompt: (p) => `Resolve (${poly(pfqNum(p))})/((${fac(p[0])})(x² + ${p[1]})) into partial fractions of the form A/(${fac(p[0])}) + (Bx + C)/(x² + ${p[1]}). Write the triple (A, B, C).`,
+    prompt: (p) => `Resolve ${brk(poly(pfqNum(p)))}/(${bx(p[0])}(x² + ${p[1]})) into partial fractions of the form A/${bx(p[0])} + (Bx + C)/(x² + ${p[1]}). Write the triple (A, B, C).`,
     solve: ([a, k, A, B, C]) => {
       const [p2, p1, p0] = pfqNum([a, k, A, B, C]);
       return {
@@ -1282,9 +1313,9 @@ export const B15: Def[] = [
       const [p2, p1] = pfqNum([a, k, A, B, C]);
       const A2 = A * (a * a + k);
       return [
-        { id: "not-divided", kind: "procedural", competency: PF, says: `N(${n_(a)}) was taken as A without dividing by ${n_(a)}² + ${k} = ${a * a + k}.`, predict: tup(A2, p2 - A2, p1 + a * (p2 - A2)) },
+        { id: "not-divided", kind: "procedural", competency: PF, says: `N(${n_(a)}) was taken as A without dividing by ${par2(a)}² + ${k} = ${a * a + k}.`, predict: tup(A2, p2 - A2, p1 + a * (p2 - A2)) },
         { id: "x2-as-B", kind: "procedural", competency: PF, says: `B was taken as the whole x² coefficient ${n_(p2)}; the x² terms come from A·x² and Bx·x, so B = ${n_(p2)} − A.`, predict: tup(A, p2, p1 + a * p2) },
-        ...(a !== 0 && B !== 0 ? [{ id: "c-sign", kind: "procedural", competency: PF, says: `A sign slip matching the x terms: (Bx + C)(${fac(a)}) gives (C ${a > 0 ? "−" : "+"} ${Math.abs(a) === 1 ? "" : Math.abs(a)}B)x.`, predict: tup(A, B, p1 - a * B) } as Bug] : []),
+        ...(a !== 0 && B !== 0 ? [{ id: "c-sign", kind: "procedural", competency: PF, says: `A sign slip matching the x terms: (Bx + C)${bx(a)} gives (C ${a > 0 ? "−" : "+"} ${Math.abs(a) === 1 ? "" : Math.abs(a)}B)x.`, predict: tup(A, B, p1 - a * B) } as Bug] : []),
       ];
     },
     distractors: ([, , A, B, C]) => [tup(A, -B, C), tup(A, B, -C), tup(-A, B, C)],
@@ -1310,7 +1341,7 @@ export const B15: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: (p) => (nprOk(p) ? null : "ⁿPᵣ for 3 ≤ n ≤ 15, 2 ≤ r ≤ n, at most 10⁹."),
+    reject: (p) => (nprOk(p) ? null : "ⁿPᵣ for 3 ≤ n ≤ 30, 2 ≤ r ≤ n, at most 10⁶."),
     prompt: ([n, r]) => `Find ${sup(n)}P${sub(r)}, the number of ways of arranging ${r} of ${n} distinct objects in a row.`,
     solve: ([n, r]) => ({
       steps: [
@@ -1318,20 +1349,23 @@ export const B15: Def[] = [
       ],
       answer: perm(n, r),
     }),
-    // independent: n!/(n − r)! from factorials
-    validate: ([n, r], v) => v === fact(n) / fact(n - r),
+    // independent: n!/(n − r)! from factorials (exact, in big integers)
+    validate: ([n, r], v) => {
+      const F = (k: number) => (k <= 1 ? 1n : BigInt(k) * F(k - 1));
+      return typeof v === "number" && Number.isInteger(v) && BigInt(v) === F(n) / F(n - r);
+    },
     bugs: ([n, r]) => [
       { id: "order-ignored", kind: "conceptual", competency: PERM, says: `The objects were chosen without order (${sup(n)}C${sub(r)}); in an arrangement the order matters.`, predict: choose(n, r) },
       ...(n ** r <= 1e12 ? [{ id: "repetition", kind: "conceptual", competency: PERM, says: `Every place was given all ${n} choices; an object used in one place cannot be used again, so the choices go down by one each time.`, predict: n ** r } as Bug] : []),
-      ...(r < n && n <= 13 ? [{ id: "all-arranged", kind: "procedural", competency: PERM, says: `All ${n} objects were arranged (${n}!); only ${r} places are filled.`, predict: fact(n) } as Bug] : []),
-      ...(r < n - 1 && n <= 13 ? [{ id: "divide-by-r", kind: "recall", competency: PERM, says: `${n}! was divided by ${r}!; ${sup(n)}P${sub(r)} = ${n}!/(${n} − ${r})!.`, predict: fact(n) / fact(r) } as Bug] : []),
+      ...(r < n && n <= 10 ? [{ id: "all-arranged", kind: "procedural", competency: PERM, says: `All ${n} objects were arranged (${n}!); only ${r} places are filled.`, predict: fact(n) } as Bug] : []),
+      ...(r < n - 1 && n <= 10 ? [{ id: "divide-by-r", kind: "recall", competency: PERM, says: `${n}! was divided by ${r}!; ${sup(n)}P${sub(r)} = ${n}!/(${n} − ${r})!.`, predict: fact(n) / fact(r) } as Bug] : []),
     ],
     variants: ([n, r]) => [[n, r - 1], [n + 1, r]].filter(nprOk),
     explain: (s) => `${s.inputs.length} places, filled one after another: ${s.inputs.join(" × ")} = ${s.value}`,
     domain: D_NPR,
     keep: nprOk,
     difficulty: ([n, r]) => (r <= 2 ? 1 : n <= 9 ? 2 : 3),
-    word: ([n, r]) => `${n} students take part in a quiz, and ${r} different prizes (first, second, third and so on) are to be given to ${r} of them, one prize each. In how many ways can the prizes be given?`,
+    word: ([n, r]) => `${n} students take part in a quiz, and ${r} different prizes (${r === 2 ? "first and second" : r === 3 ? "first, second and third" : "first, second, third and so on"}) are to be given to ${r} of them, one prize each. In how many ways can the prizes be given?`,
     teach: {
       idea: "Filling r places in order from n distinct objects: n choices for the first place, n − 1 for the second, and so on, so ⁿPᵣ = n(n − 1)…(n − r + 1) = n!/(n − r)!.",
       method: "Multiply r numbers, starting at n and going down by one each time.",
@@ -1519,7 +1553,7 @@ export const B15: Def[] = [
     bugs: ([a, b, n, r]) => [
       { id: "powers-left-out", kind: "conceptual", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was given; the term also carries (${lin(a, 0)})${sup(r)} and (${n_(b)})${sup(n - r)}, so their powers are part of the coefficient.`, predict: choose(n, r) },
       { id: "general-term-index", kind: "procedural", competency: BIN, says: `The general term was used with the wrong index: the term with ${xp(r)} uses ${sup(n)}C${sub(r)} and the powers ${r} and ${n - r}.`, predict: bco(a, b, n, r - 1) },
-      ...(b < 0 || a < 0 ? [{ id: "sign-lost", kind: "procedural", competency: EXPN, says: `The minus sign was dropped; a negative number to an ${(b < 0 ? n - r : r) % 2 ? "odd" : "even"} power is ${(b < 0 ? n - r : r) % 2 ? "negative" : "positive"}.`, predict: Math.abs(bco(a, b, n, r)) } as Bug] : []),
+      ...(bco(a, b, n, r) < 0 ? [{ id: "sign-lost", kind: "procedural", competency: EXPN, says: `The minus sign was dropped; ${([[a, r], [b, n - r]] as [number, number][]).filter(([v, e]) => v < 0 && e % 2).map(([v, e]) => `(${n_(v)})${sup(e)}`).join(" and ")} is negative (a negative number to an odd power), so the coefficient is negative.`, predict: Math.abs(bco(a, b, n, r)) } as Bug] : []),
       ...(Math.abs(a) !== 1 ? [{ id: "a-power-forgotten", kind: "procedural", competency: EXPN, says: `The ${n_(a)} in (${lin(a, 0)})${sup(r)} was not raised to the power ${r}.`, predict: choose(n, r) * a * b ** (n - r) } as Bug] : []),
     ],
     variants: ([a, b, n, r]) => [[a, b, n, r + 1], [a, -b, n, r]].filter(bcoOk),
@@ -1845,7 +1879,8 @@ export const B15: Def[] = [
     bugs: ([a, b]) => [
       { id: "arithmetic-mean", kind: "conceptual", competency: AGP, says: "The arithmetic mean was found; the harmonic mean is the reciprocal of the mean of the reciprocals.", predict: (a + b) / 2 },
       ...(Number.isInteger(Math.sqrt(a * b)) ? [{ id: "geometric-mean", kind: "conceptual", competency: AGP, says: "The geometric mean √(ab) was found; the harmonic mean is 2ab/(a + b).", predict: Math.sqrt(a * b) } as Bug] : []),
-      { id: "not-inverted", kind: "procedural", competency: AGP, says: "The mean of the reciprocals was found but not turned back over.", predict: (a + b) / (2 * a * b) },
+      // shown only when it is a fraction with a readable denominator
+      ...((2 * a * b) / gcd(a + b, 2 * a * b) <= 1000 ? [{ id: "not-inverted", kind: "procedural", competency: AGP, says: "The mean of the reciprocals was found but not turned back over.", predict: (a + b) / (2 * a * b) } as Bug] : []),
     ],
     variants: ([a, b]) => [[a, b + 1], [a + 1, b]].filter(hmOk),
     explain: (s) => (s.id === "reciprocals" ? `1/${s.inputs[0]} + 1/${s.inputs[1]} = ${fr(Number(s.value))}` : `H = 2 ÷ ${fr(Number(s.inputs[1]))} = ${fr(Number(s.value))}`),
@@ -1853,7 +1888,10 @@ export const B15: Def[] = [
     keep: hmOk,
     cap: 300,
     difficulty: ([a, b]) => (b % a === 0 ? 1 : b <= 15 ? 2 : 3),
-    word: ([a, b]) => `${nm(a + b)} cycles from home to a temple at ${a} km/h and comes back along the same road at ${b} km/h. What is the average speed for the whole journey, in km/h? (A fraction is fine.)`,
+    word: ([a, b]) =>
+      a >= 8
+        ? `${nm(a + b)} cycles from home to a temple at ${a} km/h and comes back along the same road at ${b} km/h. What is the average speed for the whole journey, in km/h? (A fraction is fine.)`
+        : `Toffee packets cost ₹${a} each at one shop and ₹${b} each at another. ${nm(a + b)} spends the same amount of money at each shop. What is the average price of all the packets bought, in rupees? (A fraction is fine.)`,
     teach: {
       idea: "Numbers are in harmonic progression when their reciprocals are in AP. The harmonic mean H of a and b is the middle one: 1/H is the average of 1/a and 1/b, so H = 2ab/(a + b).",
       method: "Add the reciprocals, halve, and turn the result upside down — or use 2ab/(a + b) directly.",
@@ -1923,7 +1961,7 @@ export const B15: Def[] = [
     type: "fraction",
     mc: true,
     parse: none,
-    reject: (p) => (logOk(p) ? null : "log of cʲ to base cⁱ for c = 2, 3, 5, with i ≠ j and j ≠ 0."),
+    reject: (p) => (logOk(p) ? null : "log of cʲ to base cⁱ for c = 2, 3, 5, 7, with i ≠ j and j ≠ 0."),
     prompt: ([c, i, j]) => `Evaluate log${sub(LB[c] ** i)} ${logArg(LB[c], j)}. (A fraction is fine.)`,
     solve: ([c, i, j]) => ({
       steps: [
@@ -1954,7 +1992,7 @@ export const B15: Def[] = [
       method: "Write the base and the number as powers of the same prime, then divide the power of the number by the power of the base.",
       alternatives: [{ id: "change-base", title: "Change of base", kind: "procedural", text: ["log_B X = log_c X / log_c B.", "With X = cʲ and B = cⁱ this is j/i."] }],
     },
-    limits: "Bases and numbers that are powers of 2, 3 or 5; logarithms needing a calculator are left out.",
+    limits: "Bases and numbers that are powers of 2, 3, 5 or 7; logarithms needing a calculator are left out.",
   },
   {
     id: "aologeq",
@@ -1963,7 +2001,7 @@ export const B15: Def[] = [
     competency: LOG,
     type: "set",
     parse: none,
-    reject: (p) => (leqOk(p) ? null : "log_B x + log_B(x ± c) = k with B = 2, 3, 5 or 10, Bᵏ ≤ 1000 and a whole-number solution."),
+    reject: (p) => (leqOk(p) ? null : "log_B x + log_B(x ± c) = k with B = 2, 3, 4, 5, 6, 7 or 10, Bᵏ ≤ 4096 and a whole-number solution."),
     prompt: ([bi, k, u, t]) => {
       const B = EB[bi];
       const P = B ** k;

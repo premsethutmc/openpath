@@ -62,7 +62,7 @@ const LETTERS = "ABCDE";
 // ---------------------------------------------------------------- missing digits (puzzle-strategy)
 
 const digits3 = (x: number) => [Math.floor(x / 100), Math.floor(x / 10) % 10, x % 10];
-/** A three-digit sum or difference with at least one carry or borrow. */
+/** A three-digit sum or difference with at least one regrouping (a carry, or a ten exchanged for ones). */
 function missSum(s: number, op: number) {
   const r = rng(1009 + s * 7919 + op * 104729);
   for (let tries = 0; ; tries++) {
@@ -80,7 +80,8 @@ function missSum(s: number, op: number) {
     if ((res >= 100 && res <= 999 && carry) || tries > 60) return { a, b, res };
   }
 }
-/** The carry (addition) or borrow (subtraction) arriving at column pos (0 hundreds, 1 tens, 2 ones). */
+/** The regrouping that reaches column pos (0 hundreds, 1 tens, 2 ones): a carry into it (addition), or 1 taken from it
+ * and exchanged for 10 in the column on its right (subtraction). */
 function incoming(a: number, b: number, op: number, pos: number) {
   if (pos === 2) return 0;
   const lowA = pos === 1 ? a % 10 : a % 100;
@@ -352,7 +353,7 @@ export const B06: Def[] = [
       const inc = incoming(a, b, op, pos);
       return {
         steps: [
-          st("carry", op === 0 ? "carry" : "borrow", op === 0 ? "MATH.number.addition-regroup" : SUBR, [pos], inc),
+          st("carry", op === 0 ? "carry" : "exchange", op === 0 ? "MATH.number.addition-regroup" : SUBR, [pos], inc),
           st("column", where === 0 ? (op === 0 ? "subtract" : "add") : op === 0 ? "add" : "subtract", PZ, [pos, where, op, inc], d),
         ],
         answer: d,
@@ -382,17 +383,17 @@ export const B06: Def[] = [
         out.push({ id: "add-not-undo", kind: "conceptual", competency: ADD, says: `To find a missing part of an addition, take the other number away from the total; the digits were added instead.`, predict: (R[k] + B[k]) % 10 });
       }
       if (op === 1 && where === 1) {
-        out.push({ id: "smaller-from-larger", kind: "conceptual", competency: SUBR, says: "In that column the smaller digit was taken from the larger one. When the top digit is smaller, borrow a ten from the next column.", predict: Math.abs(A[k] - B[k]) });
-        out.push({ id: "borrow-forgotten", kind: "procedural", competency: SUBR, says: "The ten borrowed by the column on the right was not taken off this column.", predict: (A[k] - B[k] + 10) % 10 });
+        out.push({ id: "smaller-from-larger", kind: "conceptual", competency: SUBR, says: "In that column the smaller digit was taken from the larger one. When the top digit is smaller, regroup first: exchange 1 from the next column on the left for 10 in this column.", predict: Math.abs(A[k] - B[k]) });
+        out.push({ id: "borrow-forgotten", kind: "procedural", competency: SUBR, says: "The column on the right was regrouped (1 from this column was exchanged for 10 there), but this column was not made one less.", predict: (A[k] - B[k] + 10) % 10 });
       }
       if (op === 1 && where === 0) {
-        out.push({ id: "borrow-forgotten", kind: "procedural", competency: SUBR, says: "Working backwards, the borrow from the column on the right was forgotten. The first number is the answer plus the number taken away.", predict: (R[k] + B[k]) % 10 });
+        out.push({ id: "borrow-forgotten", kind: "procedural", competency: SUBR, says: "Working backwards, the regrouping in the column on the right was forgotten: 1 from this column was exchanged for 10 there. The first number is the answer plus the number taken away, plus that 1.", predict: (R[k] + B[k]) % 10 });
         out.push({ id: "subtract-not-undo", kind: "conceptual", competency: SUBR, says: "To find the first number of a subtraction, add the answer and the number taken away; the digits were subtracted instead.", predict: Math.abs(R[k] - B[k]) });
       }
       return out;
     },
     variants: () => [],
-    explain: (s) => (s.id === "carry" ? (Number(s.value) ? `The column to the right ${s.op === "carry" ? "makes a carry of 1 into this column" : "borrows 1 ten from this column"}` : "The column to the right does not carry or borrow") : `Work the hidden column, using the ${s.inputs[2] === 0 ? "carry" : "borrow"}: the missing digit is ${s.value}`),
+    explain: (s) => (s.id === "carry" ? (Number(s.value) ? (s.op === "carry" ? "The column to the right makes a carry of 1 into this column" : "The column to the right is regrouped: 1 from this column is exchanged for 10 there, so this column has 1 less") : "The column to the right needs no regrouping (nothing is carried or exchanged)") : `Work the hidden column, using the ${s.inputs[2] === 0 ? "carry" : "exchange"}: the missing digit is ${s.value}`),
     domain: [[0, 59], [0, 2], [0, 1], [0, 1]],
     cap: 400,
     difficulty: ([s, pos, where, op]) => {
@@ -413,8 +414,8 @@ export const B06: Def[] = [
     },
     word: (p) => `${name(p[0])} wrote a ${p[3] === 0 ? "sum" : "subtraction"} in a notebook, but a drop of ink covered one digit: ${missText(p)}. Which digit is under the ink drop?`,
     teach: {
-      idea: "A sum or difference is a true sentence, so each column must work out, including any ten carried or borrowed from the column on its right.",
-      method: "Start from the ones column and move left. In each column, note whether a ten is carried (addition) or borrowed (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation.",
+      idea: "A sum or difference is a true sentence, so each column must work out, including any regrouping with the column on its right (a ten carried in, or 1 exchanged for 10 ones).",
+      method: "Start from the ones column and move left. In each column, note whether the column regroups: a ten carried (addition) or 1 exchanged for 10 in the column on the right (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation.",
       alternatives: [
         { id: "try_digits", title: "Try the digits and check", kind: "procedural", text: ["Put a digit in the box and work out the whole sum.", "If it is not right, see whether the answer came out too big or too small and try a better digit. Only one digit works."] },
         { id: "undo", title: "Undo the operation", kind: "conceptual", text: ["A missing part of an addition is total − other part.", "A missing first number of a subtraction is answer + number taken away. Work out that calculation and read off the digit."] },

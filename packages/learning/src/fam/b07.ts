@@ -53,7 +53,7 @@ const decBugs = (answer: number, k: number, list: (Omit<Bug, "predict"> & { u: n
   list.flatMap(({ u, keep, ...b }) => (u === null || u === answer || u < 0 ? [] : [{ ...b, predict: dec(u, k, keep) } as Bug]));
 const decDistract = (answer: number, k: number, avoid: number[], cands: number[], keep = false) =>
   [...new Set(cands)].filter((u) => u > 0 && u !== answer && !avoid.includes(u)).map((u) => dec(u, k, keep));
-/** Digit-by-digit combination of two whole numbers (no carrying or borrowing): the classic column slips. */
+/** Digit-by-digit combination of two whole numbers (no regrouping: nothing carried or exchanged): the classic column slips. */
 const digitwise = (a: number, b: number, f: (x: number, y: number) => number) => {
   let r = 0;
   let p = 1;
@@ -97,16 +97,25 @@ const CLAIMS: { says: string; fits: (n: number) => boolean; agree: number[]; cou
   { says: "Every multiple of 3 is an odd number.", fits: (n) => n % 2 === 1, agree: [3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99], counter: [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96] },
 ];
 const CEXN = ["Meena", "Arjun", "Selvi", "Farhan"];
-/** The five numbers tested for claim k, choice s: four that fit the claim and one counterexample. */
+/** A fixed, well-mixed hash (FNV-1a, then the murmur3 finalizer). */
+const hm = (str: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) x = Math.imul(x ^ str.charCodeAt(i), 0x01000193) >>> 0;
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0;
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0;
+  return (x ^ (x >>> 16)) >>> 0;
+};
+/** The five numbers tested for claim k, choice s: four that fit the claim (a hash-chosen four of its agreeing numbers,
+ * smallest first) and one counterexample put in among them. Different choices test different numbers (distinct@1). */
 function claimList(k: number, s: number): { list: number[]; counter: number } {
   const c = CLAIMS[k];
-  const counter = c.counter[(s * 5 + k) % c.counter.length];
-  const step = Math.floor(c.agree.length / 4);
-  const ag = [0, 1, 2, 3].map((i) => c.agree[(s * 7 + i * step) % c.agree.length]).sort((a, b) => a - b);
+  const counter = c.counter[hm(`cex${k}:${s}:c`) % c.counter.length];
+  const ag = [...c.agree].sort((x, y) => hm(`cex${k}:${s}:${x}`) - hm(`cex${k}:${s}:${y}`) || x - y).slice(0, 4).sort((a, b) => a - b);
   const list = [...ag];
-  list.splice(s % 5, 0, counter);
+  list.splice(hm(`cex${k}:${s}:at`) % 5, 0, counter);
   return { list, counter };
 }
+const CEX_SEEDS = 50;
 
 // ------------------------------------------------------------------ order of operations (agbod)
 const FORMS = [
@@ -1069,7 +1078,12 @@ export const B07: Def[] = [
     mc: true,
     parse: none,
     // [k, s]: claim k tested on the five numbers of choice s
-    reject: ([k, s]) => (k < 0 || k >= CLAIMS.length || s < 0 || s > 29 ? "One of four claims about numbers, tested on five numbers." : null),
+    reject: ([k, s]) =>
+      k < 0 || k >= CLAIMS.length || !Number.isInteger(s) || s < 0 || s >= CEX_SEEDS
+        ? "One of four claims about numbers, tested on five numbers."
+        : [...Array(s).keys()].some((s0) => claimList(k, s0).list.join() === claimList(k, s).list.join())
+          ? "An earlier choice already tests these numbers in this order (distinct@1)."
+          : null,
     prompt: ([k, s]) => `${CEXN[k]} says: "${CLAIMS[k].says}" ${CEXN[k]} tests the numbers in the table. Which one of them shows that the claim is NOT always true?`,
     solve: ([k, s]) => {
       const { list, counter } = claimList(k, s);
@@ -1094,7 +1108,7 @@ export const B07: Def[] = [
     },
     variants: () => [],
     explain: (st) => `Test each number: ${st.value} fits the first part of the claim but not the second, so it is a counterexample`,
-    domain: [[0, 3], [0, 29]],
+    domain: [[0, 3], [0, CEX_SEEDS - 1]],
     difficulty: ([k]) => (k === 0 || k === 3 ? 1 : k === 2 ? 2 : 3),
     figure: ([k, s]) => ({ type: "table", head: ["Numbers tested"], rows: claimList(k, s).list.map((n) => [String(n)]) }),
     word: ([k, s]) => {

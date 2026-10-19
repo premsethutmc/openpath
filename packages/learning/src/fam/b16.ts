@@ -47,6 +47,8 @@ const SYS3 = "MATH.algebra.linear-systems-three-variables";
 
 // ---------------------------------------------------------------- helpers
 const none = () => null;
+/** n with its noun, singular only for 1. */
+const pl = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 const fnv = (s: string) => {
   let h = 0x811c9dc5;
   for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193) >>> 0;
@@ -542,14 +544,14 @@ export const B16: Def[] = [
     },
     distractors: ([a, b]) => {
       const [k, m] = sqfree(a * b);
-      return [surd(4 * k, m), String(2 * a * b)];
+      return [surd(4 * k, m), String(2 * a * b), surd(3 * k, m), String(2 * (a + b)), String(a * b)];
     },
     variants: () => [],
     explain: (s) => (s.id === "product" ? `(${s.inputs[0]})(${s.inputs[1]}) = ${s.value}: x cancels, so the product is fixed` : s.id === "gm" ? `GM = √${s.inputs[0]} = ${s.value}` : `AM ≥ GM: the sum ≥ 2 × ${s.inputs[1]} = ${s.value}, with equality when the two terms are equal`),
     domain: [[1, 12], [1, 30]],
     cap: 360,
     difficulty: ([a, b]) => (sqfree(a * b)[1] === 1 ? 1 : a === 1 ? 2 : 3),
-    word: ([a, b]) => `A transport company finds that when a lorry runs at x tens of km/h (x > 0), the fuel and driver cost of a trip is ₹(${a === 1 ? "" : a}x + ${b}/x) thousand. What is the least possible cost of the trip, in thousands of rupees? Give the exact value.`,
+    word: ([a, b]) => `An engineer finds that a frame of width x metres (x > 0) needs (${a === 1 ? "" : a}x + ${b}/x) metres of steel rod. What is the least length of rod the frame can need, in metres? Give the exact value (a surd such as 4√3 is fine).`,
     teach: {
       idea: "For positive p and q, (p + q)/2 ≥ √(pq), with equality exactly when p = q. Here p = ax and q = b/x have a fixed product ab.",
       method: "Multiply the two terms: (ax)(b/x) = ab. So ax + b/x ≥ 2√(ab), and the value 2√(ab) is reached when ax = b/x, i.e. x = √(b/a).",
@@ -643,7 +645,7 @@ export const B16: Def[] = [
       const kx = kxS(a, b);
       return f
         ? `Find the coefficient of x${sup(r)} in the expansion of log(1 ${a < 0 ? "−" : "+"} ${kx}) in ascending powers of x (log is the natural logarithm, |${kx}| < 1).`
-        : `Find the coefficient of x${sup(r)} in the expansion of e^(${a < 0 ? "−" : ""}${kx}) in ascending powers of x.`;
+        : `Find the coefficient of x${sup(r)} in the expansion of ${a === 1 && b === 1 ? "eˣ" : `e^(${a < 0 ? "−" : ""}${kx})`} in ascending powers of x.`;
     },
     solve: ([f, a, b, r]) => {
       const kr = rpow(rr(a, b), r);
@@ -672,12 +674,12 @@ export const B16: Def[] = [
         ? [
             B("signs-not-alternating", "recall", SER, "Every term of log(1 + y) was taken as positive; the signs alternate: y − y²/2 + y³/3 − …", rs(rdiv(kr, rr(r)))),
             B("factorial-for-log", "recall", LOG, `The term was divided by ${r}!; in the log series it is divided by ${r} (the exponential series has the factorials).`, rs(rmul(sign, rdiv(kr, rr(fact(r)))))),
-            ...(k[0] !== 1 || k[1] !== 1 ? [B("k-not-raised", "procedural", SER, `The ${rs(k)} inside was not raised to the power ${r}: the term is (${rs(k)}x)${sup(r)}.`, rs(rmul(sign, rdiv(k, rr(r)))))] : []),
+            ...(k[0] !== 1 || k[1] !== 1 ? [B("k-not-raised", "procedural", SER, `The ${rs(k)} inside was not raised to the power ${r}: the term is (${a < 0 ? "−" : ""}${kxS(a, b)})${sup(r)}.`, rs(rmul(sign, rdiv(k, rr(r)))))] : []),
           ]
         : [
             B("no-factorial", "recall", SER, `The term was not divided by ${r}!; e^y = 1 + y + y²/2! + y³/3! + …`, rs(kr)),
             B("divide-by-r", "recall", SER, `The term was divided by ${r}, as in the log series; the exponential series divides by ${r}! = ${fact(r)}.`, rs(rdiv(kr, rr(r)))),
-            ...(k[0] !== 1 || k[1] !== 1 ? [B("k-not-raised", "procedural", SER, `The ${rs(k)} inside was not raised to the power ${r}: the term is (${rs(k)}x)${sup(r)}/${r}!.`, rs(rdiv(k, rr(fact(r)))))] : []),
+            ...(k[0] !== 1 || k[1] !== 1 ? [B("k-not-raised", "procedural", SER, `The ${rs(k)} inside was not raised to the power ${r}: the term is (${a < 0 ? "−" : ""}${kxS(a, b)})${sup(r)}/${r}!.`, rs(rdiv(k, rr(fact(r)))))] : []),
           ];
     },
     distractors: ([f, a, b, r]) => [rs(rmul(rr(-1), f ? rmul(rpow(rr(a, b), r), rr(r % 2 ? 1 : -1, r)) : rdiv(rpow(rr(a, b), r), rr(fact(r))))), rs(rpow(rr(a, b), r - 1))],
@@ -710,7 +712,7 @@ export const B16: Def[] = [
     prompt: (p) => `A sequence begins ${genTerms(p, 5).map(n_).join(", ")}, … and continues by the same rule.${p[0] ? " (The differences between its terms go up by the same amount each time.)" : ""} Write its general term aₙ as an expression in n.`,
     solve: ([t, d, e]) => {
       const ts = genTerms([t, d, e], 3);
-      const ans = polyS(t ? [1, d, e] : [d, e], "n", false);
+      const ans = polyS(t ? [1, d, e] : [d, e], "n");
       return {
         steps: t
           ? [st("first-diff", "subtract", AP, [ts[1], ts[0]], ts[1] - ts[0]), st("second-diff", "subtract", NOTE, [ts[2] - ts[1], ts[1] - ts[0]], 2), st("fit", "solve", LIN, [ts[0], ts[1]], ans)]
@@ -734,18 +736,19 @@ export const B16: Def[] = [
       const D = t2 - t1;
       if (!t)
         return [
-          B("n-not-n-minus-1", "procedural", AP, `aₙ = a + nd was used; the first term has no d added, so aₙ = a + (n − 1)d.`, polyS([d, t1], "n", false)),
-          B("d-left-out", "conceptual", AP, `The common difference ${n_(d)} was not used as the coefficient of n; each step adds ${n_(d)}, so aₙ has ${n_(d)}n.`, d === 1 ? null : polyS([1, t1 - 1], "n", false)),
-          B("first-term-times-n", "conceptual", NOTE, `The first term was multiplied by n; that would make every term a multiple of ${n_(t1)}.`, t1 === 0 || t1 === d ? null : polyS([t1, 0], "n", false)),
+          B("n-not-n-minus-1", "procedural", AP, `aₙ = a + nd was used; the first term has no d added, so aₙ = a + (n − 1)d.`, polyS([d, t1], "n")),
+          // the difference found as a₁ − a₂ (subtracted the wrong way round), then a + (n − 1)d used correctly
+          B("difference-reversed", "procedural", AP, `The difference was worked out as a₁ − a₂ = ${n_(-d)}; the common difference is a₂ − a₁ = ${n_(d)} (later term minus earlier term).`, polyS([-d, t1 + d], "n")),
+          ...(t1 === d || t1 === 0 ? [] : [B("constant-left-out", "procedural", NOTE, `Only the step ${n_(d)}n was written; ${n_(d)}n gives ${n_(d)} at n = 1, but the first term is ${n_(t1)}, so a constant ${n_(t1 - d)} must be added.`, polyS([d, 0], "n"))]),
         ];
       const B2 = t2 - t1 - 6;
       return [
-        B("treated-as-ap", "conceptual", NOTE, "Only the first difference was used, as if the sequence were an AP; here the differences themselves change, so aₙ has an n² term.", polyS([D, t1 - D], "n", false)),
-        B("whole-second-difference", "procedural", NOTE, "The coefficient of n² was taken as the second difference (2); it is half of it, because n² itself has second difference 2.", polyS([2, B2, t1 - 2 - B2], "n", false)),
-        B("square-only", "procedural", NOTE, "Only n² was matched to the first term; the n term is needed too (check a₂ and a₃).", d === 0 ? null : polyS([1, 0, t1 - 1], "n", false)),
+        B("treated-as-ap", "conceptual", NOTE, "Only the first difference was used, as if the sequence were an AP; here the differences themselves change, so aₙ has an n² term.", polyS([D, t1 - D], "n")),
+        B("whole-second-difference", "procedural", NOTE, "The coefficient of n² was taken as the second difference (2); it is half of it, because n² itself has second difference 2.", polyS([2, B2, t1 - 2 - B2], "n")),
+        ...(d === 0 ? [] : [B("square-only", "procedural", NOTE, "Only n² was matched to the first term; the n term is needed too (check a₂ and a₃).", polyS([1, 0, t1 - 1], "n"))]),
       ];
     },
-    distractors: ([t, d, e]) => (t ? [polyS([1, d, e + 1], "n", false), polyS([1, -d, e], "n", false)] : [polyS([d, e + 1], "n", false), polyS([d, -e], "n", false), polyS([-d, e], "n", false)]),
+    distractors: ([t, d, e]) => (t ? [polyS([1, d, e + 1], "n"), polyS([1, -d, e], "n")] : [polyS([d, e + 1], "n"), polyS([d, -e], "n"), polyS([-d, e], "n")]),
     variants: () => [],
     explain: (s) => (s.id === "first-diff" ? `a₂ − a₁ = ${n_(Number(s.value))}` : s.id === "second-diff" ? "The differences go up by 2 each time, so aₙ = n² + bn + c" : `Match a₁ and a₂: aₙ = ${s.value}`),
     domain: [[0, 1], [-6, 9], [-9, 9]],
@@ -949,11 +952,12 @@ export const B16: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    // [v, m, n, o]: v = 0 n(A × B) with A in set-builder form; 1 n(A × B × C); 2 the number of relations from A to B; 3 n((A × B) ∩ (A × C))
-    reject: ([v, m, n, o]) => (v < 0 || v > 3 || m < 2 || m > 6 || n < 2 || n > 5 || o < 0 || o > 4 || (v === 2 && (o !== 0 || m * n > 10)) || (v === 3 && (o < 1 || o > n - 1)) ? "Small finite sets: products of two or three sets, relations, intersections of products." : null),
+    // [v, m, n, o]: v = 0 n(A × B) with A in set-builder form; 1 n(A × B × C); 2 n((A × B) ∪ (B × A)) for disjoint A, B; 3 n((A × B) ∩ (A × C))
+    // (counting relations from A to B is the relations family aocart; this family stays with products of sets)
+    reject: ([v, m, n, o]) => (v < 0 || v > 3 || m < 2 || m > 6 || n < 2 || n > 5 || o < 0 || o > 4 || (v === 2 && o !== 0) || (v === 3 && (o < 1 || o > n - 1)) ? "Small finite sets: products of two or three sets, unions and intersections of products." : null),
     prompt: (p) => cartText(p),
     solve: ([v, m, n, o]) => {
-      const ans = v === 0 ? m * n : v === 1 ? m * n * (o + 2) : v === 2 ? 2 ** (m * n) : m * o;
+      const ans = v === 0 ? m * n : v === 1 ? m * n * (o + 2) : v === 2 ? 2 * m * n : m * o;
       return {
         steps:
           v === 0
@@ -961,7 +965,7 @@ export const B16: Def[] = [
             : v === 1
               ? [st("product", "multiply", CART, [m, n, o + 2], ans)]
               : v === 2
-                ? [st("pairs", "multiply", CART, [m, n], m * n), st("subsets", "power", REL, [2, m * n], ans)]
+                ? [st("pairs", "multiply", CART, [m, n], m * n), st("union", "add", SETS, [m * n, m * n], ans)]
                 : [st("common", "count", SETS, ["B ∩ C"], o), st("product", "multiply", CART, [m, o], ans)],
         answer: ans,
       };
@@ -973,7 +977,7 @@ export const B16: Def[] = [
       let c = 0;
       if (v === 0) for (const a of A) for (const b of Bs) c += a === a && b === b ? 1 : 0;
       else if (v === 1) for (const a of A) for (const b of Bs) for (let z = 0; z < o + 2; z++) c += a + b.length + z >= 0 ? 1 : 0;
-      else if (v === 2) for (let mask = 0; mask < 2 ** (m * n); mask++) c++;
+      else if (v === 2) c = new Set([...A.flatMap((a) => Bs.map((b) => `${a}|${b}`)), ...Bs.flatMap((b) => A.map((a) => `${b}|${a}`))]).size;
       else {
         const Cs = SHAPE(2 * n).slice(n - o, 2 * n - o);
         for (const a of A) for (const b of Bs) for (const a2 of A) for (const cc of Cs) if (a === a2 && b === cc) c++;
@@ -993,27 +997,27 @@ export const B16: Def[] = [
             ]
           : v === 2
             ? [
-                B("pairs-not-subsets", "conceptual", REL, `n(A × B) = ${m * n} was given; a relation is any subset of A × B, and a set with ${m * n} elements has 2^${m * n} subsets.`, m * n),
-                B("functions-counted", "conceptual", REL, `The number of functions from A to B (${n}^${m}) was found; every subset of A × B is a relation, not only the functions.`, n ** m),
-                B("power-of-sum", "procedural", REL, `2^(${m} + ${n}) was used; the exponent is n(A × B) = ${m} × ${n}.`, 2 ** (m + n)),
+                B("product-commutes", "conceptual", CART, `A × B and B × A were taken to be the same set, so only ${m * n} pairs were counted; (1, a) is in A × B but (a, 1) is in B × A — different pairs — and no pair is in both, because A and B have no common element.`, m * n),
+                ...(m + n === m * n ? [] : [B("added", "conceptual", CART, "The numbers of elements were added; each element of A pairs with each element of B, so n(A × B) = n(A) × n(B).", 2 * (m + n))]),
+                B("square-of-union", "procedural", CART, `(A ∪ B) × (A ∪ B) was counted (${m + n}²); it also contains pairs like (1, 2) and (a, b) that are in neither A × B nor B × A.`, (m + n) ** 2),
               ]
             : [
                 B("union", "conceptual", CART, "The union (A × B) ∪ (A × C) was counted; the intersection keeps only pairs whose second entry is in both B and C.", m * (2 * n - o)),
                 B("forgot-a", "procedural", CART, `Only B ∩ C was counted; each of its ${o} elements pairs with each of the ${m} elements of A.`, o),
               ],
     variants: () => [],
-    explain: (s) => (s.id === "count-a" ? `List A: it has ${s.value} elements` : s.id === "pairs" ? `n(A × B) = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "subsets" ? `Each relation is a subset of A × B: 2^${s.inputs[1]} = ${s.value}` : s.id === "common" ? `B ∩ C has ${s.value} elements, and (A × B) ∩ (A × C) = A × (B ∩ C)` : `Multiply: ${s.inputs.join(" × ")} = ${s.value}`),
+    explain: (s) => (s.id === "count-a" ? `List A: it has ${s.value} elements` : s.id === "pairs" ? `n(A × B) = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "union" ? `B × A has ${s.inputs[1]} pairs too, none of them in A × B (A and B have no common element): ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "common" ? `B ∩ C has ${s.value} elements, and (A × B) ∩ (A × C) = A × (B ∩ C)` : `Multiply: ${s.inputs.join(" × ")} = ${s.value}`),
     domain: [[0, 3], [2, 6], [2, 5], [0, 4]],
-    keep: ([v, m, n, o]) => (v === 2 ? o === 0 && m * n <= 10 : v === 3 ? o >= 1 && o <= n - 1 : true),
+    keep: ([v, , n, o]) => (v === 2 ? o === 0 : v === 3 ? o >= 1 && o <= n - 1 : true),
     difficulty: ([v]) => (v === 1 ? 1 : v === 0 ? 2 : 3),
     teach: {
       idea: "A × B is the set of all ordered pairs (a, b) with a ∈ A and b ∈ B. Each of the n(A) first entries goes with each of the n(B) second entries, so n(A × B) = n(A)·n(B).",
-      method: "Count each set first (list it if it is in set-builder form), then multiply. A relation from A to B is any subset of A × B, so there are 2^(n(A)·n(B)) of them.",
+      method: "Count each set first (list it if it is in set-builder form), then multiply. A × B and B × A have the same number of pairs, but different pairs: (a, b) ≠ (b, a) unless a = b.",
       alternatives: [
         { id: "grid", title: "A grid of pairs", kind: "conceptual", text: ["Draw a grid with a row for each element of A and a column for each element of B.", "Each cell is one ordered pair, so the number of cells is rows × columns."], visual: ([, m, n]) => ({ type: "grid", rows: m, cols: n }) },
       ],
     },
-    limits: "Finite sets of up to six elements; relations only when n(A)·n(B) ≤ 10 (so 2^(mn) stays readable).",
+    limits: "Finite sets of up to six elements; counting relations from A to B is the relations family (aocart).",
   },
   {
     id: "apcartset",
@@ -1173,7 +1177,7 @@ export const B16: Def[] = [
       const [a, b, p, w, s] = q;
       const right = dblIv(q);
       const out: Bug[] = [];
-      if (a < 0) out.push(B("brackets-not-swapped", "conceptual", INEQ, `Dividing by ${n_(a)} reverses the inequalities, so the end that was strict becomes the other end; the brackets swap sides too.`, ivS({ ...right, lc: !s, hc: !!s })));
+      if (a < 0) out.push(B("brackets-not-swapped", "conceptual", INEQ, `The ends were swapped after dividing by ${n_(a)}, but the brackets were kept where they were; reversing the inequalities moves the strict end to the other side, so the brackets swap sides too.`, ivS({ ...right, lc: !!s, hc: !s })));
       if (b !== 0) {
         const L = rr(p, a);
         const U = rr(p + w, a);
@@ -1275,8 +1279,8 @@ export const B16: Def[] = [
       const ans = invS(a, b, c, d);
       return {
         steps: [
-          st("swap", "write", INV, ["y = f(x)"], c === 0 ? `y = ${polyS([a, b])}` : `y(${polyS([c, d])}) = ${polyS([a, b])}`),
-          st("collect", "solve", LIN, ["x"], c === 0 ? `x = (y ${b < 0 ? "+" : "−"} ${Math.abs(b)})/${n_(a)}` : `x(${polyS([c, -a], "y")}) = ${polyS([-d, b], "y")}`),
+          st("swap", "write", INV, ["y = f(x)"], c === 0 ? `y = ${polyS([a, b])}` : `${polyS([c, d]) === "x" ? "xy" : `y(${polyS([c, d])})`} = ${polyS([a, b])}`),
+          st("collect", "solve", LIN, ["x"], c === 0 ? `x = (y ${b < 0 ? "+" : "−"} ${Math.abs(b)})/${n_(a)}` : `${polyS([c, -a], "y") === "y" ? "xy" : `x(${polyS([c, -a], "y")})`} = ${polyS([-d, b], "y")}`),
           st("rename", "write", INV, ["y → x"], ans),
         ],
         answer: ans,
@@ -1300,15 +1304,15 @@ export const B16: Def[] = [
     bugs: ([a, b, c, d]) =>
       c === 0
         ? [
-            B("reciprocal", "conceptual", INV, "f⁻¹ was taken as 1/f(x); the inverse UNDOES f (f⁻¹(f(x)) = x), it is not the reciprocal.", `1/(${polyS([a, b])})`),
-            B("undo-wrong-order", "procedural", INV, `The steps were undone in the wrong order: f multiplies by ${n_(a)} first and then adds ${n_(b)}, so f⁻¹ first takes away ${n_(b)} and then divides by ${n_(a)}.`, b === 0 || a === 1 ? null : `${a < 0 ? "−" : ""}x/${Math.abs(a)} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`),
-            B("sign-of-b", "procedural", LIN, `${n_(b)} was moved across without changing its sign.`, b === 0 ? null : linInv(a, -b)),
+            B("reciprocal", "conceptual", INV, "f⁻¹ was taken as 1/f(x); the inverse UNDOES f (f⁻¹(f(x)) = x), it is not the reciprocal.", `1/${wrapBot(polyS([a, b]))}`),
+            ...(b === 0 || a === 1 ? [] : [B("undo-wrong-order", "procedural", INV, `The steps were undone in the wrong order: f multiplies by ${n_(a)} first and then adds ${n_(b)}, so f⁻¹ first takes away ${n_(b)} and then divides by ${n_(a)}.`, `${a < 0 ? "−" : ""}x/${Math.abs(a)} ${b > 0 ? "−" : "+"} ${Math.abs(b)}`)]),
+            ...(b === 0 ? [] : [B("sign-of-b", "procedural", LIN, `${n_(b)} was moved across without changing its sign.`, linInv(a, -b))]),
           ]
         : [
             B("reciprocal", "conceptual", INV, "f⁻¹ was taken as 1/f(x); the inverse UNDOES f (f(f⁻¹(x)) = x), it is not the reciprocal.", fracS(c, d, a, b, "x")),
-            B("sign-slip", "procedural", LIN, "A sign was lost when the x terms were collected on one side; check by putting your answer into f.", `${wrapTop(polyS([d, -b]))}/(${polyS([c, -a])})`),
+            B("sign-slip", "procedural", LIN, "A sign was lost when the x terms were collected on one side; check by putting your answer into f.", `${wrapTop(polyS([d, -b]))}/${wrapBot(polyS([c, -a]))}`),
           ],
-    distractors: ([a, b, c, d]) => (c === 0 ? [polyS([a, -b])] : [fracS(a, b, c, d), `${wrapTop(polyS([d, b]))}/(${polyS([c, a])})`]),
+    distractors: ([a, b, c, d]) => (c === 0 ? [polyS([a, -b])] : [fracS(a, b, c, d), `${wrapTop(polyS([d, b]))}/${wrapBot(polyS([c, a]))}`]),
     variants: () => [],
     explain: (s) => (s.id === "swap" ? `Write ${s.value}` : s.id === "collect" ? `Collect the x terms: ${s.value}` : `Solve and rename y as x: f⁻¹(x) = ${s.value}`),
     domain: [[-5, 5], [-6, 6], [0, 3], [-6, 6]],
@@ -1340,7 +1344,7 @@ export const B16: Def[] = [
       return {
         steps: [
           st("set", "write", INV, [t], `${fracS(a, b, c, d)} = ${n_(t)}`),
-          st("multiply", "multiply", LIN, [t], `${polyS([a, b])} = ${n_(t)}(${polyS([c, d])})`),
+          st("multiply", "multiply", LIN, [t], `${polyS([a, b])} = ${polyS([c, d]) === "x" ? polyS([t, 0]) : `${n_(t)}(${polyS([c, d])})`}`),
           st("solve", "solve", LIN, [b - d * t, c * t - a], rs(x)),
         ],
         answer: rv(x),
@@ -1401,8 +1405,8 @@ export const B16: Def[] = [
       const wrong = Math.max(best, ...lpWrong(p, false).map((c) => Z(p[6], p[7], c)));
       const zv = Z(p[6], p[7], [p[0], p[1]]);
       return [
-        B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was used as a corner; every corner must satisfy ALL the constraints.", wrong === best ? null : wrong),
-        B("intersection-only", "procedural", LP, "Only the point where the two lines meet was checked; Z must be worked out at every corner of the feasible region.", zv === best ? null : zv),
+        ...(wrong === best ? [] : [B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was used as a corner; every corner must satisfy ALL the constraints.", wrong)]),
+        ...(zv === best ? [] : [B("intersection-only", "procedural", LP, "Only the point where the two lines meet was checked; Z must be worked out at every corner of the feasible region.", zv)]),
       ];
     },
     variants: () => [],
@@ -1413,7 +1417,8 @@ export const B16: Def[] = [
     difficulty: (p) => (Z(p[6], p[7], [p[0], p[1]]) === Math.max(...lpCorners(p, false).map((c) => Z(p[6], p[7], c))) ? 2 : 3),
     word: (p) => {
       const L = lpOf(p)!;
-      return `A carpenter makes x chairs and y tables a week. A chair needs ${p[2]} units of wood and ${p[4]} hours of work; a table needs ${p[3]} units of wood and ${p[5]} hours of work. Each week there are ${L.c1} units of wood and ${L.c2} hours of work. The profit is ₹${p[6]}00 on a chair and ₹${p[7]}00 on a table. Using the corner-point method, find the greatest weekly profit, in hundreds of rupees.`;
+      // the lathe-time constraint is written in minutes (both sides × 10: the same feasible region)
+      return `A carpenter makes x chairs and y tables a day. A chair needs ${pl(p[2], "unit", "units")} of wood and ${10 * p[4]} minutes on the lathe; a table needs ${pl(p[3], "unit", "units")} of wood and ${10 * p[5]} minutes on the lathe. Each day there are ${L.c1} units of wood and ${10 * L.c2} minutes of lathe time. The profit is ₹${p[6]}00 on a chair and ₹${p[7]}00 on a table. Using the corner-point method, find the greatest daily profit, in hundreds of rupees.`;
     },
     teach: {
       idea: "A linear objective takes its greatest and least values over a bounded feasible region at corner points of the region.",
@@ -1448,8 +1453,8 @@ export const B16: Def[] = [
       const zv = Z(p[6], p[7], [p[0], p[1]]);
       return [
         B("origin", "conceptual", LP, "The origin was used as a corner; (0, 0) does not satisfy the ≥ constraints, so it is not in the feasible region.", 0),
-        B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was used; every corner must satisfy ALL the constraints.", wrong === best ? null : wrong),
-        B("intersection-only", "procedural", LP, "Only the point where the two lines meet was checked; Z must be worked out at every corner.", zv === best ? null : zv),
+        ...(wrong === best ? [] : [B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was used; every corner must satisfy ALL the constraints.", wrong)]),
+        ...(zv === best ? [] : [B("intersection-only", "procedural", LP, "Only the point where the two lines meet was checked; Z must be worked out at every corner.", zv)]),
       ];
     },
     variants: () => [],
@@ -1460,7 +1465,7 @@ export const B16: Def[] = [
     difficulty: (p) => (Z(p[6], p[7], [p[0], p[1]]) === Math.min(...lpCorners(p, true).map((c) => Z(p[6], p[7], c))) ? 2 : 3),
     word: (p) => {
       const L = lpOf(p)!;
-      return `A dietician mixes x kg of food F and y kg of food G. One kg of F gives ${p[2]} units of vitamin A and ${p[4]} units of vitamin C; one kg of G gives ${p[3]} units of vitamin A and ${p[5]} units of vitamin C. The mixture must give at least ${L.c1} units of vitamin A and at least ${L.c2} units of vitamin C. F costs ₹${p[6]}0 a kg and G costs ₹${p[7]}0 a kg. Using the corner-point method, find the least cost of the mixture, in tens of rupees.`;
+      return `A dietician mixes x kg of food F and y kg of food G. One kg of F gives ${pl(p[2], "unit", "units")} of vitamin A and ${pl(p[4], "unit", "units")} of vitamin C; one kg of G gives ${pl(p[3], "unit", "units")} of vitamin A and ${pl(p[5], "unit", "units")} of vitamin C. The mixture must give at least ${L.c1} units of vitamin A and at least ${L.c2} units of vitamin C. F costs ₹${p[6]}0 a kg and G costs ₹${p[7]}0 a kg. Using the corner-point method, find the least cost of the mixture, in tens of rupees.`;
     },
     teach: {
       idea: "With ≥ constraints the feasible region is unbounded, but if p, q > 0 then Z = px + qy still has a least value, at a corner point.",
@@ -1507,8 +1512,8 @@ export const B16: Def[] = [
       const best = Math.max(...zs);
       const bad = lpWrong(p, false).filter((c) => Z(p[6], p[7], c) > best).sort((a, b) => Z(p[6], p[7], b) - Z(p[6], p[7], a))[0];
       return [
-        B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was chosen; check every corner in ALL the constraints.", bad ? `(${bad.join(", ")})` : null),
-        B("intersection-only", "procedural", LP, "The meeting point of the two lines was chosen without comparing Z at the other corners.", Z(p[6], p[7], [p[0], p[1]]) === best ? null : `(${p[0]}, ${p[1]})`),
+        ...(bad ? [B("infeasible-corner", "conceptual", LP, "An axis intercept that breaks the other constraint was chosen; check every corner in ALL the constraints.", `(${bad.join(", ")})`)] : []),
+        ...(Z(p[6], p[7], [p[0], p[1]]) === best ? [] : [B("intersection-only", "procedural", LP, "The meeting point of the two lines was chosen without comparing Z at the other corners.", `(${p[0]}, ${p[1]})`)]),
       ];
     },
     distractors: (p) => lpCorners(p, false).filter((c) => c[0] || c[1]).map((c) => `(${c.join(", ")})`),
@@ -1517,10 +1522,11 @@ export const B16: Def[] = [
     domain: [[1, 6], [1, 6], [1, 5], [1, 5], [1, 5], [1, 5], [1, 9], [1, 9]],
     keep: lpKeep,
     cap: 400,
-    difficulty: (p) => (lpCorners(p, false).map((c) => Z(p[6], p[7], c)).indexOf(Z(p[6], p[7], [p[0], p[1]])) === -1 ? 3 : 2),
+    // harder when the best corner is not the meeting point (X, Y) of the two lines
+    difficulty: (p) => (Z(p[6], p[7], [p[0], p[1]]) === Math.max(...lpCorners(p, false).map((c) => Z(p[6], p[7], c))) ? 2 : 3),
     word: (p) => {
       const L = lpOf(p)!;
-      return `A small factory makes x boxes of sweets of type P and y boxes of type Q a day. A box of P needs ${p[2]} kg of sugar and ${p[4]} hours of work; a box of Q needs ${p[3]} kg of sugar and ${p[5]} hours of work. Each day there are ${L.c1} kg of sugar and ${L.c2} hours of work. The profit is ₹${p[6]}0 on a box of P and ₹${p[7]}0 on a box of Q. How many boxes of each type give the greatest profit? Write the answer as (P boxes, Q boxes).`;
+      return `A small factory makes x boxes of sweets of type P and y boxes of type Q a day. A box of P needs ${p[2]} kg of sugar and ${10 * p[4]} minutes of packing; a box of Q needs ${p[3]} kg of sugar and ${10 * p[5]} minutes of packing. Each day there are ${L.c1} kg of sugar and ${10 * L.c2} minutes of packing time. The profit is ₹${p[6]}0 on a box of P and ₹${p[7]}0 on a box of Q. How many boxes of each type give the greatest profit? Write the answer as (P boxes, Q boxes).`;
     },
     teach: {
       idea: "The optimal solution is the feasible point where Z is best; for a linear Z it is a corner point of the feasible region.",
@@ -1543,7 +1549,7 @@ export const B16: Def[] = [
     parse: none,
     // [a, b, c, d, e, f, g, h]: A = [[a, b], [c, d]], B = [[e, f], [g, h]]; AB
     reject: (p) => (p.some((x) => x < -3 || x > 5) ? "Entries from −3 to 5." : null),
-    prompt: (p) => `A = ${matN(m2(p))} and B = ${matN(m2(p, 4))}. Find AB.`,
+    prompt: (p) => `A = ${matN(m2(p))} and B = ${matN(m2(p, 4))}. Find AB, written as [[a, b], [c, d]].`,
     solve: (p) => {
       const P = mmul(toM(m2(p)), toM(m2(p, 4)));
       return { steps: [st("row1", "multiply", MAT, ["row 1 of A", "columns of B"], `[${P[0].map(rs).join(", ")}]`), st("row2", "multiply", MAT, ["row 2 of A", "columns of B"], `[${P[1].map(rs).join(", ")}]`)], answer: matS(P) };
@@ -1599,7 +1605,7 @@ export const B16: Def[] = [
     parse: none,
     // [k, s, x1..x4, a1..a4]: kX + A = B (s = 0) or kX − A = B (s = 1), with X = [[x1, x2], [x3, x4]]
     reject: (p) => (p[0] < 2 || p[0] > 4 || (p[1] !== 0 && p[1] !== 1) || p.slice(2, 6).some((x) => x < -4 || x > 5) || p.slice(6).some((x) => x < -6 || x > 6) ? "kX ± A = B with k from 2 to 4 and small entries." : null),
-    prompt: (p) => `A = ${matN(m2(p, 6))} and B = ${matN(mlinB(p))}. Find the matrix X such that ${p[0]}X ${p[1] ? "−" : "+"} A = B.`,
+    prompt: (p) => `A = ${matN(m2(p, 6))} and B = ${matN(mlinB(p))}. Find the matrix X such that ${p[0]}X ${p[1] ? "−" : "+"} A = B, written as [[a, b], [c, d]].`,
     solve: (p) => {
       const X = m2(p, 2);
       const rhs = mlinB(p).map((r, i) => r.map((x, j) => (p[1] ? x + p[6 + 2 * i + j] : x - p[6 + 2 * i + j])));
@@ -1650,7 +1656,7 @@ export const B16: Def[] = [
     parse: none,
     // [q11, q12, q13, q21, q22, q23, i1, i2, i3]: quantities (2 × 3) times prices PRICES[i] (3 × 1)
     reject: (p) => (p.slice(0, 6).some((x) => x < 1 || x > 9) || p.slice(6).some((x) => x < 0 || x >= PRICES.length) ? "Quantities 1 to 9 and listed prices." : null),
-    prompt: (p) => `Q = ${matN([p.slice(0, 3), p.slice(3, 6)])} (order 2 × 3) and P = ${matN(costP(p))} (order 3 × 1). Find QP.`,
+    prompt: (p) => `Q = ${matN([p.slice(0, 3), p.slice(3, 6)])} (order 2 × 3) and P = ${matN(costP(p))} (order 3 × 1). Find QP, written as a column [[a], [b]].`,
     solve: (p) => {
       const T = costT(p);
       return { steps: [st("row1", "multiply", MAT, [p.slice(0, 3).join(","), costP(p).flat().join(",")], T[0]), st("row2", "multiply", MAT, [p.slice(3, 6).join(","), costP(p).flat().join(",")], T[1])], answer: matN([[T[0]], [T[1]]]) };
@@ -1667,10 +1673,13 @@ export const B16: Def[] = [
     bugs: (p) => {
       const pr = costP(p).flat();
       const T = costT(p);
+      const rev = [0, 3].map((o) => p[o] * pr[2] + p[o + 1] * pr[1] + p[o + 2] * pr[0]);
       return [
         B("item-left-out", "procedural", MAT, "The third item was left out; a row of 3 quantities times a column of 3 prices has 3 products to add.", matN([[p[0] * pr[0] + p[1] * pr[1]], [p[3] * pr[0] + p[4] * pr[1]]])),
-        B("added", "conceptual", MAT, "Each quantity was added to its price; the bill multiplies each quantity by its price and then adds.", matN([[p[0] + p[1] + p[2] + pr[0] + pr[1] + pr[2]], [p[3] + p[4] + p[5] + pr[0] + pr[1] + pr[2]]])),
-        B("rows-swapped", "procedural", MAT, "The two rows were written in the wrong order; row 1 of QP comes from row 1 of Q.", T[0] === T[1] ? null : matN([[T[1]], [T[0]]])),
+        B("not-added", "procedural", MAT, "Each quantity was multiplied by its price, but the three products in a row were not added; QP has one entry per row of Q, the sum of those products.", matN([0, 3].map((o) => [0, 1, 2].map((j) => p[o + j] * pr[j])))),
+        // the column of prices read from the bottom up: the first quantity is paired with the last price
+        ...(rev[0] === T[0] && rev[1] === T[1] ? [] : [B("prices-reversed", "procedural", MAT, "The prices were paired with the quantities in the wrong order (the column read from the bottom up); the first entry of a row goes with the first entry of the column.", matN(rev.map((t) => [t])))]),
+        ...(T[0] === T[1] ? [] : [B("rows-swapped", "procedural", MAT, "The two rows were written in the wrong order; row 1 of QP comes from row 1 of Q.", matN([[T[1]], [T[0]]]))]),
       ];
     },
     distractors: (p) => {
@@ -1685,7 +1694,7 @@ export const B16: Def[] = [
     difficulty: (p) => (p.slice(0, 6).every((x) => x <= 5) ? 1 : 2),
     word: (p) => {
       const pr = costP(p).flat();
-      return `Two shops sold rice, dal and sugar in one day. Anbu Stores sold ${p[0]} kg of rice, ${p[1]} kg of dal and ${p[2]} kg of sugar; Kaveri Traders sold ${p[3]} kg, ${p[4]} kg and ${p[5]} kg. Rice costs ₹${pr[0]}, dal ₹${pr[1]} and sugar ₹${pr[2]} a kg. Multiply the quantity matrix (one row per shop) by the price matrix (one column) to write the takings, in rupees, as a column matrix (Anbu Stores first).`;
+      return `Two shops sold rice, dal and sugar in one day. Anbu Stores sold ${p[0]} kg of rice, ${p[1]} kg of dal and ${p[2]} kg of sugar; Kaveri Traders sold ${p[3]} kg, ${p[4]} kg and ${p[5]} kg. Rice costs ₹${pr[0]}, dal ₹${pr[1]} and sugar ₹${pr[2]} a kg. Multiply the quantity matrix (one row per shop) by the price matrix (one column) to write the takings, in rupees, as a column matrix [[a], [b]] (Anbu Stores first).`;
     },
     teach: {
       idea: "A row of quantities times a column of prices is a bill: each quantity is multiplied by its own price and the products are added. QP does this for every row at once.",
@@ -1786,8 +1795,8 @@ export const B16: Def[] = [
       const f = c * x + d * y;
       return [
         B("adj-signs", "procedural", ADJ, "In the adjoint the off-diagonal entries were not negated; for [[a, b], [c, d]] the adjoint is [[d, −b], [−c, a]].", tup([rr(d * e + b * f, D), rr(c * e + a * f, D)])),
-        B("swapped", "procedural", MSYS, "x and y were written the wrong way round; X = [[x], [y]], so the first entry of A⁻¹B is x.", x === y ? null : `(${y}, ${x})`),
-        B("not-divided", "procedural", MSYS, "adj A · B was not divided by |A|; A⁻¹ = adj A / |A|.", Math.abs(D) === 1 ? null : tup([rr(D * x), rr(D * y)])),
+        ...(x === y ? [] : [B("swapped", "procedural", MSYS, "x and y were written the wrong way round; X = [[x], [y]], so the first entry of A⁻¹B is x.", `(${y}, ${x})`)]),
+        ...(Math.abs(D) === 1 ? [] : [B("not-divided", "procedural", MSYS, "adj A · B was not divided by |A|; A⁻¹ = adj A / |A|.", tup([rr(D * x), rr(D * y)]))]),
       ];
     },
     distractors: ([, , , , x, y]) => [`(${x + 1}, ${y})`, `(${x}, ${y + 1})`],
@@ -1797,7 +1806,7 @@ export const B16: Def[] = [
     keep: ([a, b, c, d]) => a * d - b * c !== 0,
     cap: 400,
     difficulty: ([a, b, c, d]) => (Math.abs(a * d - b * c) === 1 ? 1 : Math.abs(a * d - b * c) <= 6 ? 2 : 3),
-    word: ([a, b, c, d, x, y]) => `${name(a + d)} buys ${a} pens and ${b} notebooks for ₹${a * x + b * y}. ${name(a + d + 3)} buys ${c} pens and ${d} notebooks for ₹${c * x + d * y}. Write these as a matrix equation and use the inverse matrix to find the price of one pen and of one notebook, in rupees. Write the answer as (pen, notebook).`,
+    word: ([a, b, c, d, x, y]) => `${name(a + d)} buys ${pl(a, "pen", "pens")} and ${pl(b, "notebook", "notebooks")} for ₹${a * x + b * y}. ${name(a + d + 3)} buys ${pl(c, "pen", "pens")} and ${pl(d, "notebook", "notebooks")} for ₹${c * x + d * y}. Write these as a matrix equation and use the inverse matrix to find the price of one pen and of one notebook, in rupees. Write the answer as (pen, notebook).`,
     teach: {
       idea: "If |A| ≠ 0 then A has an inverse and AX = B gives X = A⁻¹B. For a 2 × 2 matrix, A⁻¹ = (1/|A|)[[d, −b], [−c, a]].",
       method: "Find |A| = ad − bc, write the adjoint (swap a and d, negate b and c), multiply it by B and divide by |A|.",
@@ -1916,7 +1925,7 @@ export const B16: Def[] = [
     mc: true,
     parse: none,
     // [x, a, b]: x(x + a)(x + b) = V
-    reject: ([x, a, b]) => (x < 1 || x > 12 || a < 1 || a > 6 || b <= a || b > 9 ? "Edges x, x + a, x + b with x up to 12." : null),
+    reject: ([x, a, b]) => (x < 1 || x > 40 || a < 1 || a > 6 || b <= a || b > 9 ? "Edges x, x + a, x + b with x up to 40." : null),
     prompt: ([x, a, b]) => `The equation ${polyS([1, a + b, a * b, -x * (x + a) * (x + b)])} = 0 has exactly one positive root, and it is a whole number. Find it.`,
     solve: ([x, a, b]) => {
       const V = x * (x + a) * (x + b);
@@ -1927,17 +1936,21 @@ export const B16: Def[] = [
     bugs: ([x, a, b]) => {
       const V = x * (x + a) * (x + b);
       const c = Math.round(Math.cbrt(V));
+      const lin = V / (a * b);
       return [
-        B("longest-edge", "procedural", PES, `x + ${b} (the longest edge) was given; the question asks for x.`, x + b),
-        B("cube-root", "conceptual", PES, `The cube root of ${V} was taken as if all three edges were equal; the other edges are longer than x, so x is less than ∛${V}.`, c === x ? null : c),
+        ...(c === x ? [] : [B("cube-root", "conceptual", PES, `The equation was treated as x³ = ${V}, leaving out the terms in x² and x; for x > 0 those terms are positive, so the root is less than ∛${V} ≈ ${c}.`, c)]),
+        ...(Number.isInteger(lin) && lin !== x ? [B("linear-only", "procedural", PES, `Only the x term was kept: ${a * b}x = ${V} gives ${lin}, but x³ and ${a + b}x² also add to the left side, so the root is much smaller.`, lin)] : []),
       ];
     },
     variants: () => [],
     explain: (s) => (s.id === "signs" ? "The signs + + + − change once, so there is exactly one positive root (Descartes)" : s.id === "divisors" ? `A whole-number root divides ${s.inputs[0]}` : `x = ${s.inputs[0]} makes the polynomial 0`),
-    domain: [[1, 12], [1, 6], [2, 9]],
+    distractors: ([x]) => [x - 1, x + 1, x - 2, x + 2],
+    // a positive root: 0 and negative numbers are not offered
+    range: [1, Infinity],
+    domain: [[1, 40], [1, 6], [2, 9]],
     keep: ([, a, b]) => b > a,
     cap: 360,
-    difficulty: ([x]) => (x <= 4 ? 1 : x <= 8 ? 2 : 3),
+    difficulty: ([x]) => (x <= 6 ? 1 : x <= 20 ? 2 : 3),
     word: ([x, a, b]) => `A closed box is a cuboid. Its width is ${a} cm more than its height x, and its length is ${b} cm more than its height. Its volume is ${x * (x + a) * (x + b)} cm³. Form a cubic equation in x and solve it to find the height x, in cm.`,
     teach: {
       idea: "x(x + a)(x + b) = V expands to a cubic with one sign change, so it has exactly one positive root; a whole-number root divides the constant term V.",
@@ -1946,7 +1959,7 @@ export const B16: Def[] = [
         { id: "table", title: "A trial table", kind: "procedural", text: ["Make a table of x and x(x + a)(x + b) for x = 1, 2, 3, …", "The volume grows as x grows, so stop when you reach V."] },
       ],
     },
-    limits: "Cuboids with whole-number edges up to 21 cm; dimensions found from area conditions are similar and not separately included.",
+    limits: "Cuboids with whole-number edges up to 49 cm; dimensions found from area conditions are similar and not separately included.",
   },
   {
     id: "apconj",
@@ -1986,9 +1999,13 @@ export const B16: Def[] = [
     bugs: ([u, wi, r]) => {
       const w = SURDS[wi];
       return [
-        B("both-signs-changed", "conceptual", PRA, `Both parts of the root changed sign; the conjugate of ${surdPlus(u, 1, w)} changes only the sign of the surd: ${surdPlus(u, -1, w)}.`, u === 0 ? null : `${surdPlus(-u, -1, w)}, ${n_(r)}`),
-        B("rational-part-changed", "conceptual", PRA, "The sign of the whole-number part was changed; it is the surd part whose sign changes.", u === 0 ? null : `${surdPlus(-u, 1, w)}, ${n_(r)}`),
-        B("sum-sign", "recall", VIETA, "The sum of the roots was taken as +(coefficient of x²); it is −(coefficient of x²).", r === 0 ? null : `${surdPlus(u, -1, w)}, ${n_(-r - 4 * u)}`),
+        ...(u === 0
+          ? []
+          : [
+              B("both-signs-changed", "conceptual", PRA, `Both parts of the root changed sign; the conjugate of ${surdPlus(u, 1, w)} changes only the sign of the surd: ${surdPlus(u, -1, w)}.`, `${surdPlus(-u, -1, w)}, ${n_(r)}`),
+              B("rational-part-changed", "conceptual", PRA, "The sign of the whole-number part was changed; it is the surd part whose sign changes.", `${surdPlus(-u, 1, w)}, ${n_(r)}`),
+            ]),
+        ...(r === -2 * u ? [] : [B("sum-sign", "recall", VIETA, "The sum of the roots was taken as +(coefficient of x²); it is −(coefficient of x²).", `${surdPlus(u, -1, w)}, ${n_(-r - 4 * u)}`)]),
       ];
     },
     distractors: ([u, wi, r]) => [`${surdPlus(u, -1, SURDS[wi])}, ${n_(r + 1)}`, `${surdPlus(u, -1, SURDS[wi])}, ${n_(r - 1)}`, `${surdPlus(u, 1, SURDS[wi])}, ${n_(r)}`],
@@ -2044,6 +2061,8 @@ export const B16: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "substitute" ? `p(−x) = ${s.value}` : `Signs: ${s.inputs[0]}, so ${s.value} change${s.value === 1 ? "" : "s"}`),
+    // a quintic has at most 5 sign changes
+    range: [0, 5],
     domain: [[0, 161], [0, 1]],
     difficulty: ([s, mode]) => (mode ? 3 : descPoly(s).includes(0) ? 2 : 1),
     teach: {
@@ -2131,7 +2150,7 @@ export const B16: Def[] = [
     solve: ([p, q, t, k]) => {
       const [b, c] = vform(p, q, t, k);
       const sum = -b;
-      return { steps: [st("vieta", "recall", VIETA, [p, q], `α + β = ${n_(-p)}, αβ = ${n_(q)}`), st("sum", "evaluate", VIETA, [t], sum), st("product", "evaluate", VIETA, [t], c), st("form", "write", VIETA, [sum, c], polyS([1, b, c], "x", false))], answer: polyS([1, b, c], "x", false) };
+      return { steps: [st("vieta", "recall", VIETA, [p, q], `α + β = ${n_(-p)}, αβ = ${n_(q)}`), st("sum", "evaluate", VIETA, [t], sum), st("product", "evaluate", VIETA, [t], c), st("form", "write", VIETA, [sum, c], polyS([1, b, c]))], answer: polyS([1, b, c]) };
     },
     // independent: find α, β numerically (complex), transform them, and check they are the zeros of the answer
     validate: ([p, q, t, k], v) => {
@@ -2156,19 +2175,19 @@ export const B16: Def[] = [
     },
     bugs: ([p, q, t, k]) =>
       t === 0
-        ? [B("wrong-direction", "procedural", VIETA, `The shift went the wrong way: if y = α ${k < 0 ? "−" : "+"} ${Math.abs(k)}, the new sum is (α + β) ${k < 0 ? "−" : "+"} ${2 * Math.abs(k)}.`, polyS([1, p + 2 * k, k * k + p * k + q], "x", false))]
+        ? [B("wrong-direction", "procedural", VIETA, `The shift went the wrong way: if y = α ${k < 0 ? "−" : "+"} ${Math.abs(k)}, the new sum is (α + β) ${k < 0 ? "−" : "+"} ${2 * Math.abs(k)}.`, polyS([1, p + 2 * k, k * k + p * k + q]))]
         : t === 1
           ? [
-              B("k-not-squared", "procedural", VIETA, `The product was multiplied by ${n_(k)}; (${n_(k)}α)(${n_(k)}β) = ${k * k}αβ.`, polyS([1, k * p, k * q], "x", false)),
-              B("sum-sign", "recall", VIETA, "The x coefficient was written as +(sum of roots); it is −(sum of roots).", polyS([1, -k * p, k * k * q], "x", false)),
+              B("k-not-squared", "procedural", VIETA, `The product was multiplied by ${n_(k)}; (${n_(k)}α)(${n_(k)}β) = ${k * k}αβ.`, polyS([1, k * p, k * q])),
+              B("sum-sign", "recall", VIETA, "The x coefficient was written as +(sum of roots); it is −(sum of roots).", polyS([1, -k * p, k * k * q])),
             ]
           : [
-              B("identity-sign", "procedural", IDEN, "α² + β² was taken as (α + β)² + 2αβ; it is (α + β)² − 2αβ.", polyS([1, -(p * p + 2 * q), q * q], "x", false)),
-              B("product-not-squared", "procedural", VIETA, "The product α²β² was taken as αβ; it is (αβ)².", polyS([1, -(p * p - 2 * q), q], "x", false)),
+              B("identity-sign", "procedural", IDEN, "α² + β² was taken as (α + β)² + 2αβ; it is (α + β)² − 2αβ.", polyS([1, -(p * p + 2 * q), q * q])),
+              B("product-not-squared", "procedural", VIETA, "The product α²β² was taken as αβ; it is (αβ)².", polyS([1, -(p * p - 2 * q), q])),
             ],
     distractors: ([p, q, t, k]) => {
       const [b, c] = vform(p, q, t, k);
-      return [polyS([1, -b, c], "x", false), polyS([1, b, -c], "x", false), polyS([1, b, c + 1], "x", false), polyS([1, b + 1, c], "x", false)];
+      return [polyS([1, -b, c]), polyS([1, b, -c]), polyS([1, b, c + 1]), polyS([1, b + 1, c])];
     },
     variants: () => [],
     explain: (s) => (s.id === "vieta" ? s.value as string : s.id === "sum" ? `New sum of zeros: ${n_(Number(s.value))}` : s.id === "product" ? `New product of zeros: ${n_(Number(s.value))}` : `x² − (sum)x + (product) = ${s.value}`),
@@ -2244,7 +2263,7 @@ export const B16: Def[] = [
     parse: none,
     // [a11 … a33]
     reject: (p) => (p.some((x) => x < -2 || x > 3) || sarrus(m3(p)) === 0 ? "Entries −2 to 3 and |A| ≠ 0." : null),
-    prompt: (p) => `A = ${matN(m3(p))}. Find adj A.`,
+    prompt: (p) => `A = ${matN(m3(p))}. Find adj A, written as [[a, b, c], [d, e, f], [g, h, i]].`,
     solve: (p) => {
       const Cf = cofactors(m3(p));
       return { steps: [st("minors", "evaluate", DET, ["2 × 2 minors"], matN(minors(m3(p)))), st("cofactors", "sign", ADJ, ["(−1)^(i+j)"], matN(Cf)), st("transpose", "transpose", ADJ, ["Cᵀ"], matN(mT(Cf)))], answer: matN(mT(Cf)) };
@@ -2308,6 +2327,9 @@ export const B16: Def[] = [
             ...(r === 1 ? [B("one-row-removed", "procedural", RANK, "Only one row was reduced to zero; the third row is also a multiple of the first.", 2)] : []),
           ]
         : [B("columns-counted", "conceptual", RANK, "The number of columns was taken; the rank is at most the number of rows (3) and is the number of non-zero rows in echelon form.", 4)],
+    // the ranks a non-zero 3 × 4 matrix can have; 4 is offered only as the column-count mistake (for a rank-3 matrix)
+    distractors: () => [1, 2, 3],
+    range: ([r]) => (r === 3 ? [1, 4] : [1, 3]),
     variants: () => [],
     explain: (s) => (s.id === "reduce" ? `Use row operations Rᵢ → Rᵢ − kRⱼ to reach echelon form` : `Count the non-zero rows: rank = ${s.value}`),
     domain: [[1, 3], [0, 119]],
@@ -2372,7 +2394,7 @@ function cartText([v, m, n, o]: number[]) {
   const A = `{${Array.from({ length: m }, (_, i) => i + 1).join(", ")}}`;
   if (v === 0) return `A = {x ∈ ℤ : ${n_(o - 2)} ≤ x < ${n_(o - 2 + m)}} and B = ${Bs}. How many elements does A × B have?`;
   if (v === 1) return `A = ${A}, B = ${Bs} and C = {${Array.from({ length: o + 2 }, (_, i) => 10 * (i + 1)).join(", ")}}. How many elements does A × B × C have?`;
-  if (v === 2) return `A = ${A} and B = ${Bs}. How many different relations from A to B are there?`;
+  if (v === 2) return `A = ${A} and B = ${Bs}. How many elements does (A × B) ∪ (B × A) have?`;
   return `A = ${A}, B = ${Bs} and C = {${SHAPE(2 * n).slice(n - o, 2 * n - o).join(", ")}}. How many elements does (A × B) ∩ (A × C) have?`;
 }
 function cartSets([m, n, s, t]: number[]): [number[], number[]] {
@@ -2448,17 +2470,22 @@ function chOpts(p: number[]): Opt[] {
 function fracS(a: number, b: number, c: number, d: number, v = "x") {
   const top = polyS([a, b], v);
   const bot = polyS([c, d], v);
-  return `${/ [+−] /.test(top) ? `(${top})` : top}/(${bot})`;
+  return `${/ [+−] /.test(top) ? `(${top})` : top}/${wrapBot(bot)}`;
+}
+/** A denominator: a lone variable is not bracketed. */
+function wrapBot(t: string) {
+  return /^[a-z]$/.test(t) ? t : `(${t})`;
 }
 function linInv(a: number, b: number) {
   // (x − b)/a written plainly
   if (a === 1) return polyS([1, -b]);
   if (a === -1) return polyS([-1, b]);
+  if (b === 0) return `${a < 0 ? "−" : ""}x/${Math.abs(a)}`;
   return a > 0 ? `(${polyS([1, -b])})/${a}` : `(${polyS([-1, b])})/${-a}`;
 }
 function invS(a: number, b: number, c: number, d: number) {
   if (c === 0) return linInv(a, b);
-  return `${wrapTop(polyS([-d, b]))}/(${polyS([c, -a])})`;
+  return `${wrapTop(polyS([-d, b]))}/${wrapBot(polyS([c, -a]))}`;
 }
 /** A numerator: in brackets only when it has two terms. */
 function wrapTop(t: string) {

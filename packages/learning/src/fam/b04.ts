@@ -113,7 +113,15 @@ const BARCTX = [
   { title: "the birds seen in a school garden one morning", labels: ["Crow", "Sparrow", "Parrot", "Myna"], q: (l: string) => `How many ${l === "Sparrow" ? "sparrows" : `${l.toLowerCase()}s`} were seen?`, unit: "birds", more: (x: string, y: string) => `How many more ${x.toLowerCase()}s than ${y.toLowerCase()}s were seen?` },
   { title: "the vehicles that passed a school gate in ten minutes", labels: ["Bus", "Car", "Auto", "Cycle"], q: (l: string) => `How many ${l === "Bus" ? "buses" : `${l.toLowerCase()}s`} passed?`, unit: "vehicles", more: (x: string, y: string) => `How many more ${x === "Bus" ? "buses" : `${x.toLowerCase()}s`} than ${y === "Bus" ? "buses" : `${y.toLowerCase()}s`} passed?` },
 ];
-const barValues = (c: number, s: number, sc: number) => [0, 1, 2, 3].map((i) => (2 + ((s * (2 * i + 1) + 3 * i + 5 * c) % 9)) * (sc ? 5 : 1));
+/** A fixed, well-mixed hash (FNV-1a, then the murmur3 finalizer): every seed gives its own chart or table (distinct@1). */
+const hm = (str: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) x = Math.imul(x ^ str.charCodeAt(i), 0x01000193) >>> 0;
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0;
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0;
+  return (x ^ (x >>> 16)) >>> 0;
+};
+const barValues = (c: number, s: number, sc: number) => [0, 1, 2, 3].map((i) => (2 + (hm(`bar${c}:${s}:${i}`) % 9)) * (sc ? 5 : 1));
 const distinct = (v: number[]) => new Set(v).size === v.length;
 
 const TALLYCTX = [
@@ -123,7 +131,7 @@ const TALLYCTX = [
   { head: "Flower", items: ["Jasmine", "Rose", "Marigold"], who: "children chose", what: "flower" },
 ];
 const BUNDLE = "||||/";
-const tallyCounts = (c: number, s: number) => [0, 1, 2].map((i) => 3 + ((s * (i + 2) + 5 * i + 3 * c) % 15));
+const tallyCounts = (c: number, s: number) => [0, 1, 2].map((i) => 3 + (hm(`tally:${c}:${s}:${i}`) % 15));
 const tally = (n: number) => [...Array(Math.floor(n / 5)).fill(BUNDLE), ...(n % 5 ? ["|".repeat(n % 5)] : [])].join(" ");
 /** Count the marks drawn: a bundle is five, a stroke is one (independent of the numbers that made them). */
 const readTally = (t: string) => [...t].reduce((s, ch) => s + (ch === "|" || ch === "/" ? 1 : 0), 0);
@@ -835,8 +843,8 @@ export const B04: Def[] = [
       }
       const c = colSub(a, b);
       return [
-        { id: "smaller-from-larger", kind: "conceptual", competency: SUBR, says: "In each column the smaller digit was taken from the larger one. When the top digit is smaller, take a ten from the next column first.", predict: Number(A.map((d, i) => Math.abs(d - B[i])).join("")) },
-        { id: "borrow-not-taken", kind: "procedural", competency: SUBR, says: "A ten was borrowed, but the column it came from was not made one less.", predict: a - b + 10 * c.b1 + 100 * c.b2 },
+        { id: "smaller-from-larger", kind: "conceptual", competency: SUBR, says: "In each column the smaller digit was taken from the larger one. When the top digit is smaller, regroup first: exchange 1 ten from the next column for 10 ones.", predict: Number(A.map((d, i) => Math.abs(d - B[i])).join("")) },
+        { id: "borrow-not-taken", kind: "procedural", competency: SUBR, says: "A ten (or a hundred) was exchanged for 10 ones (or 10 tens), but the column it came from was not made one less. When you regroup, the next column gives one away, so it goes down by 1.", predict: a - b + 10 * c.b1 + 100 * c.b2 },
       ];
     },
     variants: () => [],
@@ -867,7 +875,7 @@ export const B04: Def[] = [
     word: ([a, b, op]) => (op === 0 ? `A school library has ${a} Tamil books and ${b} English books. How many books does it have in all?` : `A farmer picked ${a} coconuts and sold ${b} of them at the market. How many coconuts are left?`),
     teach: {
       idea: "Ten ones make a ten and ten tens make a hundred, so a column that gets too big passes a ten (or a hundred) on, and a column that is too small can break one from the next column.",
-      method: "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, carrying or borrowing as you go. Check with an estimate.",
+      method: "Write the numbers one under the other, ones under ones. Work from the ones to the hundreds, regrouping as you go: carry a ten when adding, exchange a ten for 10 ones when subtracting. Check with an estimate.",
       visual: ([a]) => ({ type: "blocks", hundreds: digits(a)[0], tens: digits(a)[1], ones: digits(a)[2] }),
       alternatives: [
         { id: "jumps", title: "Jump by hundreds, tens and ones", kind: "conceptual", text: ["Start at the first number. Jump by the hundreds of the second number, then its tens, then its ones (forwards to add, backwards to subtract).", "Each jump is easy to do in your head."], visual: ([a, b, op]) => {
@@ -1203,7 +1211,7 @@ export const B04: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: ([c, s, q]) => (c < 0 || c > 3 || s < 0 || s > 29 || q < 0 || q > 2 ? "A tally table of three rows and one of three questions." : !distinct(tallyCounts(c, s)) ? "The three counts are different." : null),
+    reject: ([c, s, q]) => (c < 0 || c > 3 || s < 0 || s > 29 || q < 0 || q > 2 ? "A tally table of three rows and one of three questions." : !distinct(tallyCounts(c, s)) ? "The three counts are different." : [...Array(s).keys()].some((s0) => tallyCounts(c, s0).join() === tallyCounts(c, s).join()) ? "An earlier seed already draws this table (distinct@1)." : null),
     prompt: ([c, s, q]) => {
       const C = TALLYCTX[c];
       const n = tallyCounts(c, s);

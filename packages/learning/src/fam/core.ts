@@ -294,7 +294,7 @@ export const CORE: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: (st) => (st.id === "move" ? `Subtract ${n_(Number(st.inputs[1]))} from both sides: ${n_(Number(st.inputs[0]))} − (${n_(Number(st.inputs[1]))}) = ${n_(Number(st.value))}` : `Divide both sides by ${n_(Number(st.inputs[1]))}: ${n_(Number(st.inputs[0]))} ÷ ${n_(Number(st.inputs[1]))} = ${n_(Number(st.value))}`),
+    explain: (st) => (st.id === "move" ? (Number(st.inputs[1]) < 0 ? `Add ${-Number(st.inputs[1])} to both sides (this undoes the ${n_(Number(st.inputs[1]))}): ${n_(Number(st.inputs[0]))} + ${-Number(st.inputs[1])} = ${n_(Number(st.value))}` : `Subtract ${st.inputs[1]} from both sides: ${n_(Number(st.inputs[0]))} − ${st.inputs[1]} = ${n_(Number(st.value))}`) : `Divide both sides by ${n_(Number(st.inputs[1]))}: ${n_(Number(st.inputs[0]))} ÷ ${n_(Number(st.inputs[1]))} = ${n_(Number(st.value))}`),
     domain: [[-9, 9], [-20, 20], [-12, 12]],
     keep: ([a, b, x]) => a !== 0 && a !== 1 && b !== 0 && x !== 0 && (a < 0 || b < 0 || x < 0) && Math.abs(a * x + b) <= 60,
     cap: 500,

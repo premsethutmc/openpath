@@ -781,7 +781,7 @@ export const B05: Def[] = [
       const raw = h2 * 100 + 5 * k2 - (h1 * 100 + 5 * k1);
       const borrow = k2 < k1;
       return [
-        { id: "subtract-as-number", kind: "conceptual", competency: ELAPSED, says: "The times were subtracted like ordinary numbers, borrowing 100 minutes; an hour has only 60 minutes.", predict: borrow ? tup(Math.floor(raw / 100), raw % 100) : null },
+        { id: "subtract-as-number", kind: "conceptual", competency: ELAPSED, says: "The times were subtracted like ordinary numbers, so 1 hour was exchanged for 100 minutes. An hour has only 60 minutes: when you regroup, change 1 hour into 60 minutes.", predict: borrow ? tup(Math.floor(raw / 100), raw % 100) : null },
         { id: "smaller-from-larger", kind: "procedural", competency: ADDSUB, says: "The smaller number of minutes was taken from the larger one; when the end minutes are fewer, change 1 hour into 60 minutes first.", predict: borrow ? tup(h2 - h1, 5 * (k1 - k2)) : null },
         { id: "hours-only", kind: "procedural", competency: ELAPSED, says: "Only the hours were counted and the minutes were left out.", predict: tup(h2 - h1, 0) },
       ];
@@ -804,7 +804,7 @@ export const B05: Def[] = [
         : `${name(h1 + k2)} leaves home at ${hh(h1, 5 * k1)} and gets back at ${hh(h2, 5 * k2)} the same day. How long was ${name(h1 + k2)} away? Write it as (hours, minutes).`;
     },
     teach: {
-      idea: "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times you borrow 60 minutes, not 100.",
+      idea: "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times and need to regroup, 1 hour is exchanged for 60 minutes, not 100.",
       method: "Count on from the start to the next full hour, then the full hours, then the minutes to the end time, and add them up.",
       visual: ([h1, k1, h2, k2]) => ({ type: "numberline", from: h1, to: h2 + (k2 ? 1 : 0), step: 1, marks: [h1 + k1 / 12, h2 + k2 / 12] }),
       alternatives: [

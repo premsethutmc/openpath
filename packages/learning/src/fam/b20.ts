@@ -233,8 +233,9 @@ const deg = (d: number) => (d * Math.PI) / 180;
 
 const LITS = ["p", "¬p", "q", "¬q", "r", "¬r"];
 const OPS = ["∧", "∨", "→", "↔"];
-const opB = (o: number, x: boolean, y: boolean) => [x && y, x || y, !x || y, x === y][o];
-const opM = (o: number, x: number, y: number, mask: number) => [x & y, x | y, (~x | y) & mask, ~(x ^ y) & mask][o];
+/** Connectives 0 ∧, 1 ∨, 2 →, 3 ↔; 4 is exclusive or ("one but not both"), used only for the misreading of ∨. */
+const opB = (o: number, x: boolean, y: boolean) => [x && y, x || y, !x || y, x === y, x !== y][o];
+const opM = (o: number, x: number, y: number, mask: number) => [x & y, x | y, (~x | y) & mask, ~(x ^ y) & mask, (x ^ y) & mask][o];
 const pop = (x: number) => {
   let c = 0;
   for (; x; x &= x - 1) c++;
@@ -274,9 +275,11 @@ const K_INDT = (p: number[]) => {
   const [N, a, m] = p;
   if (m >= N || a > N) return false;
   const ans = indtAns(p);
-  return ans !== 2 || hsh(p, 4) % 3 === 0;
+  // about as many problems of each kind (independent ones are the rarest)
+  const h = hsh(p, 4) >>> 0;
+  return ans === 0 || (ans === 1 && h % 5 < 3) || (ans === 2 && h % 20 < 3);
 };
-const INDT_CHOICES = ["A and B are independent", "A and B are mutually exclusive, so they are not independent", "A and B are neither independent nor mutually exclusive", "A and B are both independent and mutually exclusive"];
+const INDT_CHOICES = ["A and B are independent", "A and B are mutually exclusive, so they are not independent", "A and B are neither independent nor mutually exclusive"];
 
 const D_RV: [number, number][] = [[-2, 3], [1, 4], [1, 4], [1, 4], [1, 4]];
 /** The weights in lowest terms (proportional weights give the same table, so the same question). */
@@ -294,14 +297,19 @@ const rvTable = (p: number[]) => {
 const D_TOT: [number, number][] = [[1, 5], [1, 6], [1, 6], [1, 6], [1, 6]];
 const dieFaces = (k: number) => (k === 1 ? "1" : `${Array.from({ length: k - 1 }, (_, i) => i + 1).join(", ")} or ${k}`);
 
-const D_CONV: [number, number][] = [[0, 1], [2, 30], [2, 30]];
-const K_CONV = ([kind, a, b]: number[]) => (kind === 1 ? b === 2 : a !== b && (a % b === 0 || b % a === 0 || hsh([a, b], 8) % 6 === 0));
+const D_CONV: [number, number][] = [[0, 2], [2, 30], [2, 30]];
+const K_CONV = ([kind, a, b]: number[]) =>
+  kind === 1 ? b === 2 : kind === 2 ? a < b && b <= 12 && a * b <= 120 : a !== b && (a % b === 0 || b % a === 0 || hsh([a, b], 8) % 9 === 0);
 const squareFree = (a: number) => sqf(a)[0] === 1;
-const convTruth = ([kind, a, b]: number[]) => (kind === 0 ? [a % b === 0, b % a === 0] : [true, squareFree(a)]);
+const convTruth = ([kind, a, b]: number[]) => (kind === 0 ? [a % b === 0, b % a === 0] : kind === 1 ? [true, squareFree(a)] : [true, gcd(a, b) === 1]);
 const CONV_CHOICES = ["The statement and its converse are both true", "The statement is true, but its converse is false", "The statement is false, but its converse is true", "The statement and its converse are both false"];
 const convIndex = (s: boolean, c: boolean) => (s ? (c ? 0 : 1) : c ? 2 : 3);
 const convStatements = ([kind, a, b]: number[]) =>
-  kind === 0 ? [`If n is a multiple of ${a}, then n is a multiple of ${b}.`, `If n is a multiple of ${b}, then n is a multiple of ${a}.`] : [`If n is a multiple of ${a}, then n² is a multiple of ${a}.`, `If n² is a multiple of ${a}, then n is a multiple of ${a}.`];
+  kind === 0
+    ? [`If n is a multiple of ${a}, then n is a multiple of ${b}.`, `If n is a multiple of ${b}, then n is a multiple of ${a}.`]
+    : kind === 1
+      ? [`If n is a multiple of ${a}, then n² is a multiple of ${a}.`, `If n² is a multiple of ${a}, then n is a multiple of ${a}.`]
+      : [`If n is a multiple of ${a * b}, then n is a multiple of both ${a} and ${b}.`, `If n is a multiple of both ${a} and ${b}, then n is a multiple of ${a * b}.`];
 
 const D_CEX: [number, number][] = [[-8, 12], [2, 299]];
 const isPrime = (n: number) => {
@@ -362,9 +370,13 @@ const K_CLASS = (p: number[]) => {
   const [A, , B, , C, , D] = p;
   if (A >> 1 === B >> 1 || C >> 1 === D >> 1) return false;
   const t = pop(classMask(p));
-  return t === 4 || t === 0 || hsh(p, 11) % 9 === 0;
+  // about as many tautologies as contradictions and contingencies (tautologies are the most common)
+  const h = hsh(p, 11) >>> 0;
+  return t === 0 || (t === 4 && h % 8 < 3) || (t !== 4 && h % 9 === 0);
 };
 const classText = ([A, o1, B, o2, C, o3, D]: number[]) => `(${L2[A]} ${OPS[o1]} ${L2[B]}) ${OPS[o2]} (${L2[C]} ${OPS[o3]} ${L2[D]})`;
+const SENT2 = ["the bus is late", "the bus is not late", "Kavya walks to school", "Kavya does not walk to school"];
+const classWords = ([A, o1, B, o2, C, o3, D]: number[]) => joinS(o2, `[${joinS(o1, SENT2[A], SENT2[B])}]`, `[${joinS(o3, SENT2[C], SENT2[D])}]`).replace(/^./, (ch) => ch.toUpperCase());
 
 const D_VAR: [number, number][] = [[1, 20], [1, 5], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6]];
 const varData = ([a, d, ...f]: number[]) => ({ xs: [0, 1, 2, 3, 4].map((i) => a + i * d), f });
@@ -382,14 +394,23 @@ const sdM = (xs: number[]) => {
   return n * Q - S * S;
 };
 
-const D_CV: [number, number][] = [[20, 80], [2, 20], [20, 80], [2, 20]];
+const D_CV: [number, number][] = [[30, 70], [2, 14], [30, 70], [2, 14]];
 const K_CV = (p: number[]) => {
   const [m1, s1, m2, s2] = p;
-  if (m1 === m2 || s1 === s2 || s1 * m2 === s2 * m1) return false;
+  if (m1 === m2 || s1 === s2) return false;
+  // equal coefficients of variation (equally consistent) are rare: keep all of them and a matching share of the rest
+  if (s1 * m2 === s2 * m1) return true;
+  const h = hsh(p, 5) >>> 0;
+  if (h % 120 !== 0) return false;
   const sdLow = s1 < s2;
   const cvLow = s1 * m2 < s2 * m1;
-  return sdLow !== cvLow || hsh(p, 5) % 3 === 0;
+  return sdLow !== cvLow || h % 360 === 0;
 };
+const cvNames = ([m1, , m2]: number[]) => {
+  const n1 = nameOf(m1);
+  return [n1, nameOf(m2 + 1) === n1 ? nameOf(m2 + 2) : nameOf(m2 + 1)];
+};
+const cvIndex = ([m1, s1, m2, s2]: number[]) => (s1 * m2 === s2 * m1 ? 2 : s1 * m2 < s2 * m1 ? 0 : 1);
 
 const D_MD6: [number, number][] = [[1, 40], [1, 40], [1, 40], [1, 40], [1, 40], [1, 40]];
 const K_MD6 = (p: number[]) => new Set(p).size >= 4;
@@ -398,13 +419,14 @@ const median7 = (xs: number[]) => [...xs].sort((a, b) => a - b)[3];
 const K_MD7 = (p: number[]) => new Set(p).size === 7 && p[3] !== median7(p);
 
 const CA = [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 45, 135, 225, 315];
-const CB = [30, 45, 60];
-const D_COMP: [number, number][] = [[0, 14], [0, 2], [0, 1], [0, 2]];
-const K_COMP = ([ai, bi, , f]: number[]) => {
+const CB = [30, 45, 60, 120, 135, 150];
+const D_COMP: [number, number][] = [[0, 14], [0, 5], [0, 1], [0, 2]];
+/** A ± B must be an odd multiple of 15° (not itself a standard angle, which needs no formula). */
+const K_COMP = ([ai, bi, o, f]: number[]) => {
   const A = CA[ai];
   const B = CB[bi];
-  const ok = A % 45 === 0 && A % 90 !== 0 ? B !== 45 : B === 45;
-  return ok && !(f === 2 && (A === 90 || A === 270));
+  const S = o ? A - B : A + B;
+  return S % 30 !== 0 && S % 45 !== 0 && !(f === 2 && (A === 90 || A === 270));
 };
 const compParts = (A: number, B: number) => ({ sA: sinE(A), cA: cosE(A), sB: sinE(B), cB: cosE(B) });
 /** f(A ± B) by the compound-angle formula (o = 0: +, 1: −); flip uses the wrong sign in the formula. */
@@ -435,19 +457,32 @@ const DBL_F = ["sin 2A", "cos 2A", "tan 2A"];
 const D_P2S: [number, number][] = [[0, 3], [2, 9], [1, 8]];
 const K_P2S = ([, a, b]: number[]) => b < a;
 const ax = (k: number) => (k === 1 ? "x" : `${k}x`);
-const p2sParts = (t: number, a: number, b: number) => {
-  const fn = t <= 1 ? "sin" : "cos";
-  const P = `${fn}(${ax(a + b)})`;
-  const M = `${fn}(${ax(a - b)})`;
-  return { P, M };
-};
-const p2sAnswer = (t: number, a: number, b: number, swapSign = false) => {
-  const { P, M } = p2sParts(t, a, b);
-  const sign = (t === 0 || t === 2) !== swapSign ? "+" : "−";
-  return t === 3 ? `${M} ${swapSign ? "+" : "−"} ${P}` : `${P} ${sign} ${M}`;
-};
 const p2sText = (t: number, a: number, b: number) => [`2 sin ${ax(a)} cos ${ax(b)}`, `2 cos ${ax(a)} sin ${ax(b)}`, `2 cos ${ax(a)} cos ${ax(b)}`, `2 sin ${ax(a)} sin ${ax(b)}`][t];
 const p2sFn = (t: number, a: number, b: number) => (x: number) => [2 * Math.sin(a * x) * Math.cos(b * x), 2 * Math.cos(a * x) * Math.sin(b * x), 2 * Math.cos(a * x) * Math.cos(b * x), 2 * Math.sin(a * x) * Math.sin(b * x)][t];
+/** The four sum forms offered for a product: [the right one, the sign slip, halved, the other slip]; each as text and
+ * as a number-valued function, built from its terms (c₁ f₁(m₁x) + c₂ f₂(m₂x), times h). */
+const p2sForms = (t: number, a: number, b: number) => {
+  const s = a + b;
+  const d = a - b;
+  const fn = t <= 1 ? "sin" : "cos";
+  const other = t <= 1 ? "cos" : "sin";
+  type Form = [string, number, number, string, number, number, number];
+  const right: Form = t === 0 ? [fn, s, 1, fn, d, 1, 1] : t === 1 ? [fn, s, 1, fn, d, -1, 1] : t === 2 ? [fn, s, 1, fn, d, 1, 1] : [fn, d, 1, fn, s, -1, 1];
+  const swapped: Form = [right[0], right[1], right[2], right[3], right[4], -right[5], 1];
+  const halved: Form = [...right.slice(0, 6), 0.5] as Form;
+  const fourth: Form = t === 3 ? [fn, s, 1, fn, d, -1, 1] : [other, s, 1, other, d, right[5], 1];
+  const text = ([f1, m1, , f2, m2, c2, h]: Form) => {
+    const inner = `${f1} ${ax(m1)} ${c2 < 0 ? "−" : "+"} ${f2} ${ax(m2)}`;
+    return h === 1 ? inner : `½(${inner})`;
+  };
+  const value = ([f1, m1, c1, f2, m2, c2, h]: Form) => (x: number) => h * (c1 * (f1 === "sin" ? Math.sin : Math.cos)(m1 * x) + c2 * (f2 === "sin" ? Math.sin : Math.cos)(m2 * x));
+  return [right, swapped, halved, fourth].map((f) => ({ text: text(f), value: value(f) }));
+};
+/** The order the four forms are shown in (fixed per problem, so the right letter is not always the same). */
+const p2sOrder = (p: number[]) => {
+  const perms = [[0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 0, 1], [3, 2, 1, 0], [1, 2, 3, 0], [2, 0, 1, 3], [3, 1, 0, 2], [0, 3, 2, 1]];
+  return perms[(hsh(p, 31) >>> 0) % perms.length];
+};
 
 // equations: values of sin, cos, tan with their principal angles (degrees)
 type EqVal = { t: string; v: number; a: number; n: string; d: string; s: number };
@@ -464,6 +499,7 @@ const eqText = (f: number, e: EqVal, k: number, w: number) => {
 };
 
 const D_PRINC: [number, number][] = [[0, 2], [0, 8], [1, 3], [0, 1]];
+const PRINC_FORM = "Write every solution as a multiple of π and type only the multipliers, as fractions separated by commas: for example, the solutions π/4 and 3π/2 are typed 1/4, 3/2 (and x = 0 is typed 0).";
 const K_PRINC = ([f, v, , w]: number[]) => v < EQV[f].length && !(w === 1 && EQV[f][v].v === 0);
 const princSolve = (f: number, a: number, k: number, limit = 360 * k) => {
   const base = f === 0 ? [a, 180 - a] : f === 1 ? [a, -a] : [a, a + 180];
@@ -704,7 +740,7 @@ export const B20: Def[] = [
     domain: D_PDFP,
     keep: K_PDFP,
     difficulty: ([n]) => (n === 1 ? 1 : n === 2 ? 2 : 3),
-    word: ([n, a, b, c]) => `The time X (in hours) that a mobile phone takes to charge fully is modelled by the density f(x) = ${pdfText(n, a)} for 0 ≤ x ≤ ${a}, and 0 otherwise. Find the probability that a charge takes ${b === 0 ? `at most ${c} hours` : `between ${b} and ${c} hours`}.`,
+    word: ([n, a, b, c]) => `The time X (in hours) that a mobile phone takes to charge fully is modelled by the density f(x) = ${pdfText(n, a)} for 0 ≤ x ≤ ${a}, and 0 otherwise. Find the probability that a charge takes ${b === 0 ? `at most ${c} hour${c === 1 ? "" : "s"}` : `between ${b} and ${c} hours`}.`,
     teach: {
       idea: "For a continuous random variable, probability is AREA under the density curve: P(b ≤ X ≤ c) is the integral of f(x) from b to c, and the whole area is 1.",
       method: "Integrate the density from the lower limit to the upper limit (or find F(x) = P(X ≤ x) first), then subtract: F(c) − F(b).",
@@ -815,7 +851,12 @@ export const B20: Def[] = [
     explain: (s) => (s.id === "both" ? `P(A ∩ B) = P(A) × P(B) = ${s.inputs[0]} × ${s.inputs[1]} = ${dec(+Number(s.value).toFixed(4))}` : `Combine: ${["P(A ∩ B)", "P(A) + P(B) − P(A ∩ B)", "(1 − P(A))(1 − P(B))", "P(A) + P(B) − 2P(A ∩ B)"][Number(s.inputs[0])]} = ${F(Number(s.value))}`),
     domain: D_INDU,
     difficulty: ([, , k]) => (k === 0 ? 1 : k === 1 ? 2 : 3),
-    word: ([a, b, k]) => `${nameOf(a)} and ${nameOf(b + 3)} try to solve a puzzle on their own, independently. The probability that ${nameOf(a)} solves it is ${indDec(a)} and that ${nameOf(b + 3)} solves it is ${indDec(b)}. Find the probability that ${["both of them solve it", "at least one of them solves it", "neither of them solves it", "exactly one of them solves it"][k]}.`,
+    word: ([a, b, k]) => {
+      const n1 = nameOf(a);
+      const n2 = nameOf(b + 3) === n1 ? nameOf(b + 4) : nameOf(b + 3);
+      return `${n1} and ${n2} try to solve a puzzle on their own, independently. The probability that ${n1} solves it is ${indDec(a)} and that ${n2} solves it is ${indDec(b)}. Find the probability that ${["both of them solve it", "at least one of them solves it", "neither of them solves it", "exactly one of them solves it"][k]}.`;
+    },
+    decimals: true,
     teach: {
       idea: "A and B are independent when knowing that one happened does not change the chance of the other, so P(A ∩ B) = P(A) × P(B).",
       method: "Multiply for 'both'. Use P(A ∪ B) = P(A) + P(B) − P(A ∩ B) for 'at least one', complements (1 − P) for 'not', and add the two separate ways for 'exactly one'.",
@@ -858,7 +899,7 @@ export const B20: Def[] = [
       const ans = indtAns(p);
       const { nA, nB, nAB } = indtCounts(p);
       return [
-        { id: "independent-means-apart", kind: "conceptual", competency: IND, says: "'Independent' was taken to mean 'cannot happen together'. That is mutually exclusive; independent means P(A ∩ B) = P(A) × P(B).", predict: ans === 1 ? 3 : ans === 0 ? 2 : null },
+        { id: "independent-means-apart", kind: "conceptual", competency: IND, says: "'Independent' was taken to mean 'cannot happen together'. That is mutually exclusive; independent means P(A ∩ B) = P(A) × P(B).", predict: ans === 1 ? 0 : ans === 0 ? 2 : null },
         { id: "counts-not-probabilities", kind: "procedural", competency: IND, says: "n(A ∩ B) was compared with n(A) × n(B); the test uses probabilities: n(A ∩ B)/N against (n(A)/N) × (n(B)/N).", predict: ans === 0 && nAB !== nA * nB ? 2 : null },
       ];
     },
@@ -868,6 +909,7 @@ export const B20: Def[] = [
     keep: K_INDT,
     cap: 400,
     difficulty: ([N]) => lv(N, 12, 20),
+    word: ([N, a, m]) => `In a school lucky draw, ${N} tickets numbered 1 to ${N} are in a box and one is drawn at random. The ${a === 2 ? "even-numbered tickets win a pen" : `tickets whose number is a multiple of ${a} win a pen`} (event A), and the tickets numbered up to ${m} belong to Class XI students (event B). Which statement is true?`,
     teach: {
       idea: "Mutually exclusive events cannot happen together (A ∩ B is empty). Independent events have P(A ∩ B) = P(A) × P(B). Two events that both can happen cannot be both.",
       method: "Count n(A), n(B) and n(A ∩ B). If n(A ∩ B) = 0 they are mutually exclusive. Otherwise compare P(A ∩ B) with P(A) × P(B).",
@@ -883,6 +925,7 @@ export const B20: Def[] = [
     competency: RV,
     type: "fraction",
     mc: true,
+    decimals: true,
     // [s, w0..w3]: X takes s, s+1, s+2, s+3 with probabilities w_i / Σw
     parse: none,
     reject: gate(D_RV, K_RV, "Four consecutive values with probabilities in small whole-number proportions (in lowest terms: weights 2, 2, 2, 2 are the same table as 1, 1, 1, 1)."),
@@ -1044,7 +1087,9 @@ export const B20: Def[] = [
     word: ([kind, a, b]) =>
       kind === 0
         ? `In a counting game, the class says the whole numbers n = 1, 2, 3, … in turn. ${nameOf(a + b)} claps whenever n is a multiple of ${a}, and ${nameOf(a + b + 1)} stamps whenever n is a multiple of ${b}. ${nameOf(a + b)} claims: "${convStatements([kind, a, b])[0]}" (that is, every time I clap, you stamp). Which is correct about this claim (the statement) and its converse?`
-        : `${nameOf(a + 3)} lays square tiles in an n × n square, for whole numbers n, and then packs all n² tiles into boxes that hold ${a} tiles each. ${nameOf(a + 3)} claims: "${convStatements([kind, a, b])[0]}" (that is, if the side has a multiple of ${a} tiles, the tiles fill the boxes exactly). Which is correct about this claim (the statement) and its converse?`,
+        : kind === 2
+          ? `${nameOf(a + b)} runs a sweet shop and, for any whole number n, may have n laddus to pack. ${nameOf(a + b)} claims: "${convStatements([kind, a, b])[0]}" (that is, if the laddus fill boxes of ${a * b} exactly, they also fill boxes of ${a} exactly and boxes of ${b} exactly). Which is correct about this claim (the statement) and its converse?`
+          : `${nameOf(a + 3)} lays square tiles in an n × n square, for whole numbers n, and then packs all n² tiles into boxes that hold ${a} tiles each. ${nameOf(a + 3)} claims: "${convStatements([kind, a, b])[0]}" (that is, if the side has a multiple of ${a} tiles, the tiles fill the boxes exactly). Which is correct about this claim (the statement) and its converse?`,
     solve: (p) => {
       const [s, c] = convTruth(p);
       return { steps: [st("converse", "converse", LOG, [convStatements(p)[0]], convStatements(p)[1]), st("decide", "decide", LOG, [String(s), String(c)], convIndex(s, c))], answer: convIndex(s, c) };
@@ -1057,6 +1102,10 @@ export const B20: Def[] = [
         if (kind === 0) {
           if (n % a === 0 && n % b !== 0) s = false;
           if (n % b === 0 && n % a !== 0) c = false;
+        } else if (kind === 2) {
+          const both = n % a === 0 && n % b === 0;
+          if (n % (a * b) === 0 && !both) s = false;
+          if (both && n % (a * b) !== 0) c = false;
         } else {
           if (n % a === 0 && (n * n) % a !== 0) s = false;
           if ((n * n) % a === 0 && n % a !== 0) c = false;
@@ -1075,7 +1124,7 @@ export const B20: Def[] = [
     explain: (s) => (s.id === "converse" ? `The converse swaps the parts: "${s.value}"` : `The statement is ${s.inputs[0]}; the converse is ${s.inputs[1]}`),
     domain: D_CONV,
     keep: K_CONV,
-    difficulty: ([kind, a, b]) => (kind === 1 ? 3 : a % b === 0 || b % a === 0 ? 1 : 2),
+    difficulty: ([kind, a, b]) => (kind === 1 ? 3 : kind === 2 ? 2 : a % b === 0 || b % a === 0 ? 1 : 2),
     teach: {
       idea: "The converse of 'if P then Q' is 'if Q then P'. A statement can be true while its converse is false, so each needs its own check.",
       method: "Try to find a counterexample: a case where the 'if' part is true and the 'then' part is false. If none can exist, the statement is true; one counterexample makes it false.",
@@ -1212,6 +1261,7 @@ export const B20: Def[] = [
     keep: K_CLASS,
     cap: 300,
     difficulty: ([, o1, , o2, , o3]) => lv([o1, o2, o3].filter((o) => o >= 2).length, 0, 1),
+    word: (p) => `Let p be "the bus is late" and q be "Kavya walks to school". Consider the statement: "${classWords(p)}." Is this statement (that is, ${classText(p)}) a tautology, a contradiction or a contingency?`,
     teach: {
       idea: "A tautology is true in every row of its truth table, a contradiction is false in every row, and a contingency is true in some rows and false in others.",
       method: "Make the 4-row table for p and q, work out each bracket and then the whole statement, and look at the final column.",
@@ -1227,6 +1277,7 @@ export const B20: Def[] = [
     competency: DISP,
     type: "fraction",
     mc: true,
+    decimals: true,
     // [a, d, f1..f5]: x = a, a+d, …, a+4d with frequencies f
     parse: none,
     reject: gate(D_VAR, () => true, "Five equally spaced values with frequencies from 1 to 6."),
@@ -1329,34 +1380,43 @@ export const B20: Def[] = [
     type: "choice",
     // [m1, s1, m2, s2]
     parse: none,
-    reject: gate(D_CV, K_CV, "Means 20–80 and standard deviations 2–20, with different coefficients of variation."),
-    choices: (p) => [`${nameOf(p[0])} is more consistent`, `${nameOf(p[2] + 1) === nameOf(p[0]) ? nameOf(p[2] + 2) : nameOf(p[2] + 1)} is more consistent`],
+    reject: gate(D_CV, K_CV, "Means 30–70 and standard deviations 2–14 (different means, different standard deviations)."),
+    choices: (p) => [`${cvNames(p)[0]} is more consistent`, `${cvNames(p)[1]} is more consistent`, "Both are equally consistent"],
     prompt: (p) => {
       const [m1, s1, m2, s2] = p;
-      const n1 = nameOf(m1);
-      const n2 = nameOf(m2 + 1) === n1 ? nameOf(m2 + 2) : nameOf(m2 + 1);
+      const [n1, n2] = cvNames(p);
       return `Over a season, ${n1}'s cricket scores have mean ${m1} runs and standard deviation ${s1} runs; ${n2}'s scores have mean ${m2} runs and standard deviation ${s2} runs. Using the coefficient of variation, who is the more consistent batter?`;
     },
     solve: ([m1, s1, m2, s2]) => {
       const c1 = (100 * s1) / m1;
       const c2 = (100 * s2) / m2;
-      return { steps: [st("cv1", "divide", DISP, [s1, m1], c1), st("cv2", "divide", DISP, [s2, m2], c2), st("compare", "compare", DISP, [c1, c2], c1 < c2 ? 0 : 1)], answer: c1 < c2 ? 0 : 1 };
+      const ans = near(c1, c2, 1e-12) ? 2 : c1 < c2 ? 0 : 1;
+      return { steps: [st("cv1", "divide", DISP, [s1, m1], c1), st("cv2", "divide", DISP, [s2, m2], c2), st("compare", "compare", DISP, [c1, c2], ans)], answer: ans };
     },
     // independent: cross-multiply s₁m₂ against s₂m₁ (no division)
-    validate: ([m1, s1, m2, s2], v) => v === (s1 * m2 < s2 * m1 ? 0 : 1),
+    validate: (p, v) => v === cvIndex(p),
     bugs: ([m1, s1, m2, s2]) => [
       { id: "smaller-sd", kind: "conceptual", competency: DISP, says: "The smaller standard deviation was chosen; spread must be compared relative to the mean, CV = σ/x̄ × 100.", predict: s1 < s2 ? 0 : 1 },
       { id: "higher-mean", kind: "conceptual", competency: DISP, says: "The higher average was chosen; a higher mean means scoring more, not scoring more steadily.", predict: m1 > m2 ? 0 : 1 },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "compare" ? `The smaller CV is more consistent` : `CV = ${s.inputs[0]}/${s.inputs[1]} × 100 = ${+Number(s.value).toFixed(2)}%`),
+    explain: (s) => (s.id === "compare" ? (Number(s.value) === 2 ? "The two CVs are equal, so they are equally consistent" : "The smaller CV is more consistent") : `CV = ${s.inputs[0]}/${s.inputs[1]} × 100 = ${+Number(s.value).toFixed(2)}%`),
     domain: D_CV,
     keep: K_CV,
     cap: 300,
-    difficulty: ([m1, s1, m2, s2]) => ((s1 < s2) !== (s1 * m2 < s2 * m1) ? 3 : 2),
+    difficulty: (p) => {
+      const [, s1, , s2] = p;
+      const i = cvIndex(p);
+      return i === 2 || (s1 < s2) !== (i === 0) ? 3 : 2;
+    },
+    word: (p) => {
+      const [m1, s1, m2, s2] = p;
+      const [n1, n2] = cvNames(p);
+      return `${n1} and ${n2} each run a tea stall near a bus stand in Madurai. Over a month, ${n1} sells a mean of ${m1} cups a day with standard deviation ${s1} cups; ${n2} sells a mean of ${m2} cups a day with standard deviation ${s2} cups. Using the coefficient of variation, whose daily sales are more consistent?`;
+    },
     teach: {
       idea: "The coefficient of variation CV = (σ/x̄) × 100 measures spread as a percentage of the mean, so groups with different means can be compared. The smaller CV is the more consistent.",
-      method: "Work out CV for each batter, then choose the smaller one.",
+      method: "Work out CV for each batter, then choose the smaller one (equal CVs mean equally consistent).",
       alternatives: [{ id: "cross_multiply", title: "Compare without dividing", kind: "procedural", text: ["σ₁/x̄₁ < σ₂/x̄₂ exactly when σ₁ × x̄₂ < σ₂ × x̄₁.", "Multiply across and compare the two whole numbers."] }],
     },
     limits: "Two groups given by mean and standard deviation; computing both from raw data is in the other dispersion families.",
@@ -1369,6 +1429,7 @@ export const B20: Def[] = [
     competency: MD,
     type: "fraction",
     mc: true,
+    decimals: true,
     parse: none,
     reject: gate(D_MD6, K_MD6, "Six whole numbers from 1 to 40, at least four different."),
     prompt: (p) => `Find the mean deviation about the mean of the data ${p.join(", ")}.`,
@@ -1415,6 +1476,7 @@ export const B20: Def[] = [
     competency: MD,
     type: "fraction",
     mc: true,
+    decimals: true,
     parse: none,
     reject: gate(D_MD7, K_MD7, "Seven different whole numbers from 1 to 50, not listed in order."),
     prompt: (p) => `Find the mean deviation about the median of the data ${p.join(", ")}.`,
@@ -1555,43 +1617,39 @@ export const B20: Def[] = [
     arity: 3,
     title: "Products of sines and cosines as sums",
     competency: COMP,
-    type: "expression",
-    mc: true,
-    // [t, a, b]: 2 sin ax cos bx, 2 cos ax sin bx, 2 cos ax cos bx, 2 sin ax sin bx
+    type: "choice",
+    // [t, a, b]: 2 sin ax cos bx, 2 cos ax sin bx, 2 cos ax cos bx, 2 sin ax sin bx; choose the equal sum or difference
     parse: none,
     reject: gate(D_P2S, K_P2S, "2 sin ax cos bx (and the other three products) with 1 ≤ b < a ≤ 9."),
-    prompt: ([t, a, b]) => `Express ${p2sText(t, a, b)} as a sum or difference of sines or cosines.`,
-    solve: ([t, a, b]) => {
-      const ans = p2sAnswer(t, a, b);
-      return { steps: [st("formula", "rewrite", COMP, [p2sText(t, a, b), a + b, a - b], ans)], answer: ans };
+    choices: ([t, a, b]) => {
+      const forms = p2sForms(t, a, b);
+      return p2sOrder([t, a, b]).map((i) => forms[i].text);
     },
-    // independent: evaluate the product and the answer at several points
+    prompt: ([t, a, b]) => `Which of these is equal to ${p2sText(t, a, b)}, written as a sum or difference of sines or cosines?`,
+    solve: ([t, a, b]) => {
+      const ans = p2sOrder([t, a, b]).indexOf(0);
+      return { steps: [st("formula", "rewrite", COMP, [p2sText(t, a, b), a + b, a - b], p2sForms(t, a, b)[0].text), st("choose", "compare", COMP, [], ans)], answer: ans };
+    },
+    // independent: evaluate the product and the chosen option numerically at several points
     validate: ([t, a, b], v) => {
-      if (typeof v !== "string") return false;
-      try {
-        const e = parse(v);
-        const g = p2sFn(t, a, b);
-        return [0.31, 0.77, 1.13, 1.9, 2.47].every((x) => near(evaluate(e, { x }), g(x), 1e-9));
-      } catch {
-        return false;
-      }
+      if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > 3) return false;
+      const opt = p2sForms(t, a, b)[p2sOrder([t, a, b])[v]].value;
+      const g = p2sFn(t, a, b);
+      return [0.31, 0.77, 1.13, 1.9, 2.47].every((x) => near(opt(x), g(x), 1e-9));
     },
     bugs: ([t, a, b]) => {
-      const { P, M } = p2sParts(t, a, b);
+      const ord = p2sOrder([t, a, b]);
       const out: Bug[] = [
-        { id: "sign-between-terms", kind: "recall", competency: COMP, says: t === 3 ? "The order was reversed: 2 sin A sin B = cos(A − B) − cos(A + B)." : t === 1 ? "The sign was wrong: 2 cos A sin B = sin(A + B) − sin(A − B)." : `The sign was wrong: ${p2sText(t, a, b).slice(0, 9).replace(/ \d*x/, " A")}… gives a SUM of the two terms.`, predict: p2sAnswer(t, a, b, true) },
-        { id: "halved", kind: "procedural", competency: COMP, says: "The answer was halved; the factor 2 in front of the product is exactly what the formula 2 sin A cos B = sin(A + B) + sin(A − B) uses.", predict: `(${p2sAnswer(t, a, b)})/2` },
+        { id: "sign-between-terms", kind: "recall", competency: COMP, says: t === 3 ? "The two cosines were combined with the wrong sign, as cos(A − B) + cos(A + B); that sum is 2 cos A cos B. For 2 sin A sin B the two cosines are subtracted: cos(A − B) − cos(A + B)." : t === 1 ? "The two sines were added, as sin(A + B) + sin(A − B); that sum is 2 sin A cos B. For 2 cos A sin B they are subtracted: sin(A + B) − sin(A − B)." : `The two terms were subtracted; for ${t === 0 ? "2 sin A cos B" : "2 cos A cos B"} they are added.`, predict: ord.indexOf(1) },
+        { id: "halved", kind: "procedural", competency: COMP, says: "A ½ was put in front, from the form sin A cos B = ½[sin(A + B) + sin(A − B)]; here the product already carries the 2, so the ½ and the 2 cancel.", predict: ord.indexOf(2) },
+        t === 3
+          ? { id: "minus-dropped", kind: "procedural", competency: COMP, says: "The cosines were subtracted in the wrong order, cos(A + B) − cos(A − B); that is the negative of 2 sin A sin B.", predict: ord.indexOf(3) }
+          : { id: "wrong-function", kind: "recall", competency: COMP, says: t <= 1 ? "Cosines were written where the formula gives sines: a product of a sine and a cosine becomes a sum of SINES." : "Sines were written where the formula gives cosines: a product of two cosines becomes a sum of COSINES.", predict: ord.indexOf(3) },
       ];
-      if (t === 3) out.push({ id: "minus-dropped", kind: "procedural", competency: COMP, says: "The terms were swapped and the result is the negative of the right answer.", predict: `${P} − ${M}` });
       return out;
     },
-    distractors: ([t, a, b]) => {
-      const { P, M } = p2sParts(t, a, b);
-      const other = t <= 1 ? "cos" : "sin";
-      return [`${P.replace(/sin|cos/, other)} + ${M.replace(/sin|cos/, other)}`, `${P.replace(/\(.*\)/, `(${ax(a * b)})`)}`];
-    },
     variants: ([t, a, b]) => [0, 1, 2, 3].filter((x) => x !== t).map((x) => [x, a, b]),
-    explain: (s) => `With A = ${s.inputs[1] === undefined ? "" : ""}${Number(s.inputs[1]) - 0}x and A − B = ${s.inputs[2]}x: ${s.inputs[0]} = ${s.value}`,
+    explain: (s) => (s.id === "choose" ? `So the equal option is ${"ABCD"[Number(s.value)]}` : `The angles are A + B = ${ax(Number(s.inputs[1]))} and A − B = ${ax(Number(s.inputs[2]))}: ${s.inputs[0]} = ${s.value}`),
     domain: D_P2S,
     keep: K_P2S,
     difficulty: ([t]) => (t === 0 || t === 2 ? 2 : 3),
@@ -1606,49 +1664,53 @@ export const B20: Def[] = [
   {
     id: "atprinc",
     arity: 4,
-    title: "Solutions of a trigonometric equation in 0° ≤ x < 360°",
+    title: "Solutions of a trigonometric equation in 0 ≤ x < 2π",
     competency: EQN,
+    // radians, as the Tamil Nadu and CBSE senior-secondary books give them: each solution is a multiple of π, and the
+    // learner types the multipliers (π/6 and 5π/6 as 1/6, 5/6), compared as a set of exact fractions in any order
     type: "set",
     // [f, v, k, w]: f(kx) = value v; w = 1 writes it rearranged
     parse: none,
     reject: gate(D_PRINC, K_PRINC, "sin kx, cos kx or tan kx equal to a standard value, k up to 3."),
-    prompt: ([f, v, k, w]) => `Solve ${eqText(f, EQV[f][v], k, w)} for 0° ≤ x < 360°. Give all the solutions in degrees, separated by commas.`,
+    prompt: ([f, v, k, w]) => `Solve ${eqText(f, EQV[f][v], k, w)} for 0 ≤ x < 2π (x in radians). ${PRINC_FORM}`,
     solve: ([f, v, k]) => {
       const e = EQV[f][v];
-      const ans = princSolve(f, e.a, k);
-      return { steps: [st("principal", "evaluate", INV, [FN[f], e.t], e.a), st("general", "solve", EQN, [k], ans)], answer: ans };
+      const ans = princSolve(f, e.a, k).map((d) => d / 180);
+      return { steps: [st("principal", "evaluate", INV, [FN[f], e.t], piStr(e.a, 180)), st("general", "solve", EQN, [k], ans)], answer: ans };
     },
-    // independent: scan x in half-degree steps and keep the values that satisfy the equation numerically
+    // independent: scan x = jπ/144 over [0, 2π) and keep the values that satisfy the equation numerically
     validate: ([f, v, k], ans) => {
       if (!Array.isArray(ans)) return false;
       const e = EQV[f][v];
       const found: number[] = [];
-      for (let x = 0; x < 360; x += 0.5) {
-        const t = deg(k * x);
+      for (let j = 0; j < 288; j++) {
+        const t = k * j * (Math.PI / 144);
         if (f === 2 && Math.abs(Math.cos(t)) < 1e-9) continue;
-        if (Math.abs(fNum(f, t) - e.v) < 1e-9) found.push(x);
+        if (Math.abs(fNum(f, t) - e.v) < 1e-9) found.push(j / 144);
       }
       const a = [...ans].sort((x, y) => x - y);
       return a.length === found.length && a.every((x, i) => near(x, found[i], 1e-9));
     },
     bugs: ([f, v, k]) => {
       const e = EQV[f][v];
-      const out: Bug[] = [{ id: "principal-only", kind: "conceptual", competency: EQN, says: `Only the principal value was given; ${FN[f]} takes each value ${f === 2 ? "once in every 180°" : "twice in every 360°"}, so look in every quadrant where it has this sign.`, predict: [e.a / k] }];
-      if (k > 1) out.push({ id: "one-turn-only", kind: "procedural", competency: EQN, says: `Only angles ${k}x below 360° were used; when 0° ≤ x < 360°, ${k}x runs from 0° up to ${360 * k}°.`, predict: princSolve(f, e.a, k, 360) });
+      const all = princSolve(f, e.a, k);
+      const out: Bug[] = [{ id: "principal-only", kind: "conceptual", competency: EQN, says: `Only the principal value was given; ${FN[f]} takes each value ${f === 2 ? "once in every π" : "twice in every 2π"}, so look in every quadrant where it has this sign.`, predict: [e.a / (180 * k)] }];
+      if (k > 1) out.push({ id: "one-turn-only", kind: "procedural", competency: EQN, says: `Only angles ${k}x below 2π were used; when 0 ≤ x < 2π, ${k}x runs from 0 up to ${2 * k}π.`, predict: princSolve(f, e.a, k, 360).map((d) => d / 180) });
+      out.push({ id: "degrees-not-radians", kind: "procedural", competency: RAD, says: "The solutions were worked out in degrees and the degree numbers typed; in radians 180° is π, so 30° is π/6 and is typed 1/6.", predict: all });
       return out;
     },
     variants: ([f, v, k, w]) => [[f, v, k === 1 ? 2 : 1, w]].filter((q) => K_PRINC(q)),
-    explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is ${neg(Number(s.value))}°` : `All angles with this value, divided by ${s.inputs[0]} and kept in 0° ≤ x < 360°: ${(s.value as number[]).join(", ")}`),
+    explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is ${s.value}` : `All angles with this value, divided by ${s.inputs[0]} and kept in 0 ≤ x < 2π: x = ${(s.value as number[]).map((c) => piStr(Math.round(c * 144), 144)).join(", ")} (typed ${(s.value as number[]).map((c) => F(c)).join(", ")})`),
     domain: D_PRINC,
     keep: K_PRINC,
     difficulty: ([f, v, k]) => (k === 1 && EQV[f][v].v >= 0 ? 1 : k === 1 ? 2 : 3),
-    word: ([f, v, k, w]) => `${nameOf(f + v + k)} is setting up a rotating light in a school science fair. It shines on the screen exactly at the angles x (in degrees) with ${eqText(f, EQV[f][v], k, w)}. Find every such angle with 0° ≤ x < 360°, separated by commas.`,
+    word: ([f, v, k, w]) => `${nameOf(f + v + k)} is setting up a rotating light for a school science fair. It shines on the screen exactly at the angles x (in radians) with ${eqText(f, EQV[f][v], k, w)}. Find every such angle with 0 ≤ x < 2π. ${PRINC_FORM}`,
     teach: {
-      idea: "sin and cos repeat every 360° and take each value twice per turn (once for tan, which repeats every 180°); the quadrant signs (All, Sin, Tan, Cos) tell you where.",
-      method: "Find the reference angle from the standard values, place it in each quadrant where the function has the right sign, then (for kx) add multiples of 360° until kx passes 360k°, and divide by k.",
-      alternatives: [{ id: "graph", title: "Read it off the graph", kind: "conceptual", text: ["Sketch y = sin x for 0° to 360° and the line y = value.", "Each crossing is a solution; for sin kx the graph squeezes k waves into 360°, so there are k times as many crossings."] }],
+      idea: "sin and cos repeat every 2π and take each value twice per turn (tan repeats every π and takes each value once); the quadrant signs (All, Sin, Tan, Cos) tell you where.",
+      method: "Find the reference angle from the standard values (π/6, π/4, π/3), place it in each quadrant where the function has the right sign, then (for kx) add multiples of 2π until kx reaches 2kπ, and divide by k.",
+      alternatives: [{ id: "graph", title: "Read it off the graph", kind: "conceptual", text: ["Sketch y = sin x for 0 to 2π and the line y = value.", "Each crossing is a solution; for sin kx the graph squeezes k waves into 0 to 2π, so there are k times as many crossings."] }],
     },
-    limits: "Standard values only, answers in degrees; quadratic trigonometric equations are left out.",
+    limits: "Standard values only, solutions in radians in [0, 2π) typed as multiples of π (the set type reads fractions, not π); quadratic trigonometric equations are left out.",
   },
   {
     id: "atgen",
@@ -1709,6 +1771,7 @@ export const B20: Def[] = [
     explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is α = ${s.value}` : `For ${s.inputs[0]}: ${["kx = nπ + (−1)ⁿα", "kx = 2nπ ± α", "kx = nπ + α"][FN.indexOf(String(s.inputs[0]))]}, then divide by ${s.inputs[1]}`),
     domain: D_GEN,
     difficulty: ([f, v, k]) => (k === 1 && GENV[f][v].v > 0 ? 1 : k === 1 ? 2 : 3),
+    word: ([f, v, k, w]) => `In a physics lab, a signal is recorded as y = ${FN[f]} ${kxs(k)}, with x in radians. An alarm is set to sound at every x where ${eqText(f, GENV[f][v], k, w)}. Which describes all the values of x at which the alarm sounds?`,
     teach: {
       idea: "sin y = sin α ⇔ y = nπ + (−1)ⁿα; cos y = cos α ⇔ y = 2nπ ± α; tan y = tan α ⇔ y = nπ + α (n any integer), with α the principal value.",
       method: "Write the right side as f(α) using the principal value, apply the matching general form to kx, then divide everything by k.",
@@ -1822,6 +1885,7 @@ export const B20: Def[] = [
     domain: D_PER,
     cap: 300,
     difficulty: ([f, , a, c]) => (f <= 1 && a === 1 && c === 0 ? 1 : f <= 2 ? 2 : 3),
+    word: (p) => `In a computer simulation, a quantity changes with time x (in seconds) as ${perExpr(p)}. After how many seconds does the pattern of values first repeat (the period)?`,
     teach: {
       idea: "sin, cos, sec and cosec repeat every 2π; tan and cot every π. Replacing x by kx makes the graph repeat k times as fast; the number in front and the shift inside do not change the period.",
       method: "Take the basic period (2π or π) and divide it by k.",
@@ -1909,6 +1973,7 @@ export const B20: Def[] = [
     competency: RAD,
     type: "fraction",
     mc: true,
+    decimals: true,
     // kind 0: arc length, r = 7a, angle 15b°, π = 22/7; kind 1: angle = l/r with l = a, r = b; kind 2: sector area, r = a, θ = b/4
     parse: none,
     reject: gate(D_ARC, K_ARC, "Arc length with π = 22/7, an angle from l = rθ, or a sector area ½r²θ."),
@@ -2668,6 +2733,13 @@ export const B20: Def[] = [
         { id: "middle-sign", kind: "procedural", competency: DETM, says: "The middle term of the expansion was added; the signs go +, −, + along the first row.", predict: a[0] * m[0] + a[1] * m[1] + a[2] * m[2] },
         { id: "order-swapped", kind: "conceptual", competency: TP, says: "Two of the vectors were swapped ([b a c]); swapping two rows changes the sign of the triple product.", predict: -det3(a, b, c) },
       ];
+    },
+    // further real slips: Sarrus' rule with only the three down-diagonals (the up-diagonals not taken away), and the
+    // signs +, −, − along the first row
+    distractors: (x) => {
+      const [a, b, c] = abc(x);
+      const m = [b[1] * c[2] - b[2] * c[1], b[0] * c[2] - b[2] * c[0], b[0] * c[1] - b[1] * c[0]];
+      return [a[0] * b[1] * c[2] + a[1] * b[2] * c[0] + a[2] * b[0] * c[1], a[0] * m[0] - a[1] * m[1] - a[2] * m[2], -(a[2] * b[1] * c[0] + a[0] * b[2] * c[1] + a[1] * b[0] * c[2])];
     },
     variants: () => [],
     explain: (s) => (s.id === "minors" ? `The 2 × 2 minors of b and c: ${s.value}` : `Expand along a = (${s.inputs.join(", ")}) with signs +, −, +: ${s.value}`),

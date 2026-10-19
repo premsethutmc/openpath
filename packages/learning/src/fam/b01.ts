@@ -37,6 +37,14 @@ const hs = (s: string) => {
   }
   return x;
 };
+/** hs with its bits mixed (murmur3 finalizer): small remainders (hm(..) % 10) are then evenly spread, so different
+ * seeds really give different rows of shapes, coins or numbers (distinct@1). */
+const hm = (s: string) => {
+  let x = hs(s);
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0;
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0;
+  return (x ^ (x >>> 16)) >>> 0;
+};
 const inR = (p: number[], d: [number, number][]) => p.length === d.length && p.every((v, i) => Number.isInteger(v) && v >= d[i][0] && v <= d[i][1]);
 const guard = (d: [number, number][], ok: (p: number[]) => boolean, why: string) => (p: number[]) => (!inR(p, d) || !ok(p) ? why : null);
 const st = (id: string, op: string, competency: string, inputs: (number | string)[], value: Value): Step => ({ id, op, competency, inputs, value });
@@ -170,7 +178,7 @@ const FLAT: [string, number][] = [["▲", 0], ["▼", 0], ["◀", 0], ["▶", 0]
 /** Sides and whether all sides are equal, for each drawn shape (used by the check). */
 const FLAT_PROPS: Record<string, { sides: number; equal: boolean }> = { "▲": { sides: 3, equal: false }, "▼": { sides: 3, equal: false }, "◀": { sides: 3, equal: false }, "▶": { sides: 3, equal: false }, "■": { sides: 4, equal: true }, "□": { sides: 4, equal: true }, "●": { sides: 0, equal: false }, "○": { sides: 0, equal: false }, "▬": { sides: 4, equal: false }, "▮": { sides: 4, equal: false } };
 const FLATN = ["triangle", "square", "circle"];
-const flatRow = (len: number, seed: number) => [...Array(len)].map((_, i) => FLAT[hs(`${seed}:${len}:${i}`) % FLAT.length]);
+const flatRow = (len: number, seed: number) => [...Array(len)].map((_, i) => FLAT[hm(`${seed}:${len}:${i}`) % FLAT.length]);
 
 // ---------------------------------------------------------------- calendar
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -205,17 +213,29 @@ const ACTS: [string, number][] = [["tie your shoelaces", 1], ["brush your teeth"
 // ---------------------------------------------------------------- money
 const SMALL = [1, 2, 5, 10];
 const BIGV = [1, 2, 5, 10, 20, 50];
-const moneyOf = (seed: number, big: number) => {
-  const vals = big ? BIGV : SMALL;
-  const n = big ? 3 + (hs(`m${seed}`) % 3) : 2 + (hs(`m${seed}`) % 3);
-  return [...Array(n)].map((_, i) => vals[hs(`m${seed}:${i}`) % vals.length]).sort((a, b) => b - a);
-};
+/** Every different collection of coins (and notes) for aamoney, listed once each (largest first, as drawn): 2–4 coins
+ * of ₹1, ₹2, ₹5, ₹10 adding up to ₹3–₹20 (big 0), or 3–5 coins and notes up to ₹50 adding up to ₹21–₹100 (big 1). The
+ * seed picks one collection, so two seeds never show the same money (distinct@1). */
+const MONEY_SETS = [0, 1].map((big) => {
+  const vals = big ? [...BIGV].reverse() : [...SMALL].reverse();
+  const [nmin, nmax, lo, hi] = big ? [3, 5, 21, 100] : [2, 4, 3, 20];
+  const out: number[][] = [];
+  const rec = (i: number, acc: number[], t: number) => {
+    if (acc.length >= nmin && t >= lo && t <= hi) out.push(acc);
+    if (acc.length === nmax) return;
+    for (let j = i; j < vals.length; j++) if (t + vals[j] <= hi) rec(j, [...acc, vals[j]], t + vals[j]);
+  };
+  rec(0, [], 0);
+  // a fixed shuffle, so neighbouring seeds are not neighbouring collections
+  return out.sort((a, b) => hm(`ms${big}:${a.join("+")}`) - hm(`ms${big}:${b.join("+")}`));
+});
+const moneyOf = (seed: number, big: number) => MONEY_SETS[big][seed] ?? [];
 const COINV1 = [1, 2, 5, 10, 20];
 const COINV2 = [1, 2, 5, 10, 20, 50, 100];
 const coinsOf = (seed: number, big: number) => {
   const vals = big ? COINV2 : COINV1;
-  const n = 3 + (hs(`c${seed}`) % 3);
-  return [...Array(n)].map((_, i) => vals[hs(`c${seed}:${i}`) % vals.length]);
+  const n = 3 + (hm(`c${seed}`) % 3);
+  return [...Array(n)].map((_, i) => vals[hm(`c${seed}:${i}`) % vals.length]);
 };
 const rs = (v: number) => `₹${v}`;
 const kindOfMoney = (v: number) => (v >= 50 ? "note" : "coin");
@@ -1000,8 +1020,10 @@ export const B01: Def[] = [
     parse: none,
     reject: guard([[0, 2], [0, 59], [0, 1]], ([kind, seed, big]) => {
       const it = coinsOf(seed, big);
-      return kind <= 1 ? new Set(it).size >= 2 : it.filter((x) => x === it[0]).length < it.length;
-    }, "Three to five coins and notes, not all the same."),
+      // a seed that draws exactly the coins of an earlier seed would repeat that question (distinct@1)
+      const repeat = [...Array(seed).keys()].some((s0) => list(coinsOf(s0, big)) === list(it));
+      return !repeat && (kind <= 1 ? new Set(it).size >= 2 : it.filter((x) => x === it[0]).length < it.length);
+    }, "Three to five coins and notes, not all the same, and not a row of coins another seed already draws."),
     prompt: ([kind, seed, big]) => {
       const it = coinsOf(seed, big);
       return kind === 0
@@ -1079,8 +1101,8 @@ export const B01: Def[] = [
     reject: guard([[0, 299], [0, 1]], ([seed, big]) => {
       const it = moneyOf(seed, big);
       const t = it.reduce((a, b) => a + b, 0);
-      return big ? t <= 100 && t > 20 : t <= 20 && t >= 3;
-    }, "Coins and notes adding up to ₹20 (or to ₹100)."),
+      return it.length > 0 && (big ? t <= 100 && t > 20 : t <= 20 && t >= 3);
+    }, "One of the different collections of coins adding up to ₹20 (or coins and notes adding up to ₹100)."),
     prompt: () => "How much money is in the picture altogether, in rupees?",
     solve: ([seed, big]) => {
       const it = moneyOf(seed, big);
@@ -1983,7 +2005,7 @@ function durActs(c: number, sh: number) {
   return perm(4, sh).map((t) => chosen[t]);
 }
 function ordNums(seed: number, k: number) {
-  return [...Array(k)].map((_, i) => 10 + (hs(`o${seed}:${k}:${i}`) % 90));
+  return [...Array(k)].map((_, i) => 10 + (hm(`o${seed}:${k}:${i}`) % 90));
 }
 function cards(x: number) {
   const ds = combo(10, 3, x);

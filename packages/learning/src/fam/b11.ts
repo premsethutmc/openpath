@@ -255,6 +255,18 @@ const modeData = (s: number) => {
   }
   return { xs: shuffle(r, xs), M, fM };
 };
+/** distinct@1: the first seed (0 … n − 1) that draws each picture or number; a later seed that draws the same one again
+ * is rejected, so no question is released twice. Worked out once per family and kept. */
+const FIRST = new Map<string, Map<string, number>>();
+const isRepeat = (key: string, n: number, sig: (s: number) => string, s: number) => {
+  let m = FIRST.get(key);
+  if (!m) {
+    m = new Map();
+    for (let t = 0; t < n; t++) if (!m.has(sig(t))) m.set(sig(t), t);
+    FIRST.set(key, m);
+  }
+  return m.get(sig(s)) !== s;
+};
 const FMC = [
   { x: "Number of children", f: "Number of families", lo: 0, what: "number of children per family" },
   { x: "Goals scored", f: "Number of matches", lo: 0, what: "number of goals per match" },
@@ -1133,7 +1145,7 @@ export const B11: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: ([di, s]) => (di < 0 || di > 3 || s < 0 || s > 149 ? "Divisibility by 3, 9, 11 or 6." : divSolve(di, s) === null ? "No digit works for this number." : null),
+    reject: ([di, s]) => (di < 0 || di > 3 || !Number.isInteger(s) || s < 0 || s > 149 ? "Divisibility by 3, 9, 11 or 6." : divSolve(di, s) === null ? "No digit works for this number." : isRepeat(`akdivd${di}`, 150, (t) => divShown(di, t), s) ? "An earlier choice already shows this number (distinct@1)." : null),
     prompt: ([di, s]) => `What is the smallest digit that can go in the box so that ${divShown(di, s)} is divisible by ${DIVS[di]}?`,
     solve: ([di, s]) => {
       const D = DIVS[di];
@@ -1645,7 +1657,7 @@ export const B11: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    reject: ([c, s, j]) => (c < 0 || c > 2 || s < 0 || s > 49 || j < 0 || j > 3 ? "One of three bar charts and one of its four bars." : null),
+    reject: ([c, s, j]) => (c < 0 || c > 2 || !Number.isInteger(s) || s < 0 || s > 49 || j < 0 || j > 3 ? "One of three bar charts and one of its four bars." : isRepeat(`akbarpct${c}`, 50, (t) => JSON.stringify(barData(c, t)), s) ? "An earlier choice already draws this bar chart (distinct@1)." : null),
     prompt: ([c, s, j]) => `The bar chart shows the ${BPC[c].desc}. What percentage of ${BPC[c].whole} ${BPC[c].ask[j]}?`,
     solve: ([c, s, j]) => {
       const { T, v } = barData(c, s);
@@ -1814,7 +1826,8 @@ export const B11: Def[] = [
     mc: true,
     parse: none,
     reject: ([s]) => {
-      if (s < 0 || s > 1999) return "One of 2000 frequency tables.";
+      if (!Number.isInteger(s) || s < 0 || s > 1999) return "One of 2000 frequency tables.";
+      if (isRepeat("akfmean", 2000, (t) => JSON.stringify(fmeanData(t)), s)) return "An earlier choice already shows this frequency table (distinct@1).";
       const { xs, fs } = fmeanData(s);
       return (10 * sum(xs.map((x, i) => x * fs[i]))) % sum(fs) !== 0 ? "A mean with at most one decimal place." : null;
     },
