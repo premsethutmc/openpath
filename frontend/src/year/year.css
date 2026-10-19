@@ -142,3 +142,11 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 .trace-row svg { flex: none; }
 .trace-row .trace-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .trace-row .trace-text > span { color: var(--muted); font-size: 0.82rem; }
+
+/* platform: tile kinds, content honesty, coverage */
+.tile-kind { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted, #5b6270); }
+.coverage summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.coverage ul.plain li { margin: 2px 0; }
+[data-content="partial"] b { color: var(--warn, #8a4b00); }
+.actions[role="radiogroup"] { flex-wrap: wrap; }
+.actions[role="radiogroup"] button { max-width: 100%; white-space: normal; }

@@ -151,9 +151,12 @@
     }
    ],
    "practice": [
-    "fm-p1"
+    "fm-p1",
+    "fm-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "fm-t1"
+   ],
    "retention": [
     "fm-r1",
     "fm-r2"
@@ -200,9 +203,12 @@
     }
    ],
    "practice": [
-    "fc-p1"
+    "fc-p1",
+    "fc-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "fc-t1"
+   ],
    "retention": [
     "fc-r1",
     "fc-r2"
@@ -243,9 +249,12 @@
     }
    ],
    "practice": [
-    "fa-p1"
+    "fa-p1",
+    "fa-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "fa-t1"
+   ],
    "retention": [
     "fa-r1",
     "fa-r2"
@@ -389,9 +398,12 @@
     }
    ],
    "practice": [
-    "mt-p1"
+    "mt-p1",
+    "mt-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "mt-t1"
+   ],
    "retention": [
     "mt-r1",
     "mt-r2"
@@ -443,9 +455,12 @@
     }
    ],
    "practice": [
-    "ra-p1"
+    "ra-p1",
+    "ra-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "ra-t1"
+   ],
    "retention": [
     "ra-r1",
     "ra-r2"
@@ -486,9 +501,12 @@
     }
    ],
    "practice": [
-    "ca-p1"
+    "ca-p1",
+    "ca-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "ca-t1"
+   ],
    "retention": [
     "ca-r1",
     "ca-r2"
@@ -529,9 +547,12 @@
     }
    ],
    "practice": [
-    "di-p1"
+    "di-p1",
+    "di-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "di-t1"
+   ],
    "retention": [
     "di-r1",
     "di-r2"
@@ -577,9 +598,12 @@
     }
    ],
    "practice": [
-    "fx-p1"
+    "fx-p1",
+    "fx-p2"
    ],
-   "transfer": [],
+   "transfer": [
+    "fx-t1"
+   ],
    "retention": [
     "fx-r1",
     "fx-r2"
@@ -2564,6 +2588,343 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional"
+  },
+  {
+   "id": "fm-p2",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "A bar is cut into 5 equal parts and 2 are shaded. What fraction is shaded?",
+   "answer": "A",
+   "solution": "2 of 5 equal parts: 2/5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2/5",
+    "2/3",
+    "5/2",
+    "3/5"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "2/3 compares shaded with unshaded parts; a fraction compares shaded parts with all the equal parts."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "The top and bottom are swapped: the bottom counts all the equal parts."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "3/5 is the part that is not shaded."
+    }
+   ]
+  },
+  {
+   "id": "fm-t1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A ribbon is cut into 8 equal pieces. Sam uses 3 pieces for a gift. How many eighths of the ribbon are left?",
+   "answer": "5",
+   "solution": "8 − 3 = 5 equal pieces, so 5/8 is left.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "fc-p2",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "□/9 is smaller than 3/9 and larger than 1/9. What number goes in the box?",
+   "answer": "2",
+   "solution": "Ninths: more than 1 and fewer than 3 is 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fc-t1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "transfer",
+   "type": "choice",
+   "prompt": "Asha ate 2/6 of a cake and Ravi ate 4/6 of the same cake. Who ate more?",
+   "answer": "B",
+   "solution": "Both are sixths of the same cake: 4 pieces are more than 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "options": [
+    "Asha",
+    "Ravi",
+    "They ate the same",
+    "You cannot tell"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Both are sixths of one cake, so the one with more sixths ate more."
+    }
+   ]
+  },
+  {
+   "id": "fa-p2",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "practice",
+   "type": "fraction",
+   "prompt": "3/7 + 2/7 = ?",
+   "answer": "5/7",
+   "solution": "3 sevenths + 2 sevenths = 5 sevenths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "5/14",
+     "hypothesis": "procedural",
+     "says": "The bottom numbers were added too; sevenths stay sevenths."
+    }
+   ]
+  },
+  {
+   "id": "fa-t1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "transfer",
+   "type": "fraction",
+   "prompt": "A jug is 2/9 full. You pour in another 5/9 of a jug. How full is it now?",
+   "answer": "7/9",
+   "solution": "2 ninths + 5 ninths = 7 ninths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "misconceptions": [
+    {
+     "when": "7/18",
+     "hypothesis": "procedural",
+     "says": "The bottom numbers were added too; ninths stay ninths."
+    }
+   ]
+  },
+  {
+   "id": "mt-p2",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "7 × 6 = ?",
+   "answer": "42",
+   "solution": "7 × 5 = 35, and one more 7 is 42.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "48",
+     "hypothesis": "recall",
+     "says": "48 is 8 × 6. 7 × 6 is one 6 less: 42."
+    },
+    {
+     "when": "13",
+     "hypothesis": "conceptual",
+     "says": "7 and 6 were added; 7 × 6 is 7 groups of 6."
+    }
+   ]
+  },
+  {
+   "id": "mt-t1",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "Chairs are set out in 8 rows of 7. How many chairs are there?",
+   "answer": "56",
+   "solution": "8 rows of 7: 8 × 7 = 56.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "ra-p2",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "A rectangle is 9 cm by 4 cm. What is its area in square centimetres?",
+   "answer": "36",
+   "solution": "9 × 4 = 36 unit squares.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "26",
+     "hypothesis": "conceptual",
+     "says": "26 cm is the perimeter (the distance around); area is the space inside: 9 × 4."
+    },
+    {
+     "when": "13",
+     "hypothesis": "conceptual",
+     "says": "The sides were added; area multiplies them."
+    }
+   ]
+  },
+  {
+   "id": "ra-t1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A floor is 6 m long and 5 m wide. How many tiles 1 m by 1 m cover it?",
+   "answer": "30",
+   "solution": "6 rows of 5 tiles: 6 × 5 = 30.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "ca-p2",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "The point (−4, □) is on the x-axis. What number goes in the box?",
+   "answer": "0",
+   "solution": "Every point on the x-axis has y = 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ca-t1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "On a map grid you start at (1, 2) and move 3 units left. What is your new x-coordinate?",
+   "answer": "-2",
+   "solution": "Left lowers x: 1 − 3 = −2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "Moving left makes x smaller, not larger."
+    },
+    {
+     "when": "2",
+     "hypothesis": "procedural",
+     "says": "The sign was dropped: 1 − 3 is −2."
+    }
+   ]
+  },
+  {
+   "id": "di-p2",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "∫ from 2 to 7 of 3 dx = ?",
+   "answer": "15",
+   "solution": "Width 7 − 2 = 5, height 3: 5 × 3 = 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "21",
+     "hypothesis": "conceptual",
+     "says": "Only the upper limit was used; the width is 7 − 2."
+    },
+    {
+     "when": "18",
+     "hypothesis": "procedural",
+     "says": "The whole numbers from 2 to 7 were counted; the width is 7 − 2 = 5."
+    }
+   ]
+  },
+  {
+   "id": "di-t1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A tap adds water at a steady 4 litres per minute from minute 3 to minute 10. The water added is ∫ from 3 to 10 of 4 dt. How many litres is that?",
+   "answer": "28",
+   "solution": "Width 10 − 3 = 7 minutes, height 4 litres per minute: 7 × 4 = 28 litres.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "fx-p2",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "What is the smallest number that is a multiple of both 4 and 6?",
+   "answer": "12",
+   "solution": "Multiples of 6: 6, 12. 12 is also 4 × 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "24",
+     "hypothesis": "procedural",
+     "says": "4 × 6 = 24 is a common multiple, but 12 is smaller."
+    }
+   ]
+  },
+  {
+   "id": "fx-t1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A class of 24 is split into equal teams of more than 1 and fewer than 24 pupils. How many different team sizes are possible?",
+   "answer": "6",
+   "solution": "The factors of 24 between 2 and 23: 2, 3, 4, 6, 8, 12. That is 6 sizes.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
   }
  ]
 }

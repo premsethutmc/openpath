@@ -8,7 +8,8 @@ import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
 import { goal as goalById, goals, moduleFor, question, questions } from "../../../packages/learning/src/content";
 import { releasesFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
-import { assigned, review, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
+import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
+import { releaseCoverage, UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
 import { decompose, parseProblem, problemOf } from "../../../packages/learning/src/families";
@@ -68,10 +69,19 @@ type View =
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
-const academicYear = (d = new Date()) => {
-  const y = d.getMonth() >= 5 ? d.getFullYear() : d.getFullYear() - 1;
+const academicYear = (d = new Date(), ahead = 0) => {
+  const y = (d.getMonth() >= 5 ? d.getFullYear() : d.getFullYear() - 1) + ahead;
   return `${y}-${String((y + 1) % 100).padStart(2, "0")}`;
 };
+/** Subjects a learner may name; only those with a competency graph can be taught here (coverage@1 says so). */
+const SUBJECTS = ["Mathematics", "English", "Science", "Social studies", "Another language"];
+/** The heading over a tile's children, from what they are. */
+const childHeading = (ts: Tile[]) => {
+  const kinds = new Set(ts.map((t) => (t.kind === "proposal" || t.kind === "unsupported" ? "skill" : t.kind)));
+  const only = kinds.size === 1 ? [...kinds][0] : null;
+  return only === "unit" ? "Units" : only === "chapter" ? "Chapters" : only === "section" ? "Sections" : only === "skill" ? "Skills" : only === "micro" ? "Smaller steps" : "Inside";
+};
+const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Unit", chapter: "Chapter", section: "Section", skill: "Skill", micro: "Smaller step", proposal: "Not mapped yet", unsupported: "Not supported yet" };
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -178,10 +188,10 @@ function App() {
           current={st.enrolment?.grade ?? null}
           goals={[...st.records.goals.keys()]}
           saving={saving}
-          onSave={async (grade, release, saveRelease, goal) => {
+          onSave={async (grade, release, saveRelease, goal, year) => {
             const recs: LearningRecord[] = [];
             if (saveRelease) recs.push(make.curriculum(ctxOf(), release));
-            recs.push(make.enrol(ctxOf(), grade, academicYear(), release));
+            recs.push(make.enrol(ctxOf(), grade, year, release));
             for (const g of st.records.goals.keys()) if (g !== goal) recs.push(make.goal(ctxOf(), g, false));
             if (goal && !st.records.goals.has(goal)) recs.push(make.goal(ctxOf(), goal, true));
             if (await save(...recs)) setView({ name: "year" });
@@ -203,8 +213,8 @@ function App() {
   const goalOf = (c: string) => activeGoals.filter((g) => overlay(g, grade, assigned(release).map((a) => a.competency), st.evidence)?.foundations.includes(c));
   const tiles = tilesFor(release, st.evidence, goalOf);
   const open = (t: Tile, path: string[]) => {
-    if (t.kind === "proposal") return;
-    if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!)) return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
+    if (t.kind === "proposal" || t.kind === "unsupported") return;
+    if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
     setView({ name: "tile", path });
   };
 
@@ -267,10 +277,10 @@ function App() {
             </React.Fragment>
           ))}
         </nav>
-        <TileDetail t={here} ev={st.evidence} onStart={here.competency && moduleFor(here.competency) ? () => setView({ name: "module", competency: here.competency!, back: view }) : undefined} />
+        <TileDetail t={here} ev={st.evidence} onStart={here.competency && moduleFor(here.competency) && here.kind === "skill" ? () => setView({ name: "module", competency: here.competency!, back: view }) : undefined} />
         {here.children.length > 0 && (
           <>
-            <div className="section-title"><h2>{here.kind === "chapter" ? "Skills" : here.kind === "subject" ? "Chapters" : "Smaller steps"}</h2></div>
+            <div className="section-title"><h2>{childHeading(here.children)}</h2></div>
             <TileGrid tiles={here.children} onOpen={(t) => open(t, [...view.path, t.id])} />
           </>
         )}
@@ -332,10 +342,12 @@ function App() {
       )}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
-          <div className="section-title"><h2>{s.title}</h2><span className="small muted">{s.progress.done} of {s.progress.total} chapters shown</span></div>
+          <div className="section-title"><h2>{s.title}</h2><span className="small muted">{s.progress.done} of {s.progress.total} skills shown on your own</span></div>
+          {s.subtitle && <p className="hint small" role="note">{s.subtitle}</p>}
           <TileGrid tiles={s.children} onOpen={(t) => open(t, [s.id, t.id])} />
         </section>
       ))}
+      <CoverageCard release={release} />
       {overlays.map((o) => (
         <section key={o!.goal.id} aria-label={`Goal ${o!.goal.name}`}>
           <div className="section-title"><h2>Your goal: {o!.goal.name}</h2></div>
@@ -415,10 +427,12 @@ function TileGrid({ tiles, onOpen }: { tiles: Tile[]; onOpen: (t: Tile) => void 
   return (
     <div className="tiles">
       {tiles.map((t) => (
-        <button key={t.id} className={`tile ${t.kind === "proposal" ? "proposal" : t.status}`} data-status={t.status} disabled={t.kind === "proposal"} onClick={() => onOpen(t)} aria-label={`${t.title}: ${t.label}${t.progress.total ? `, ${t.progress.done} of ${t.progress.total}` : ""}`}>
+        <button key={t.id} className={`tile ${t.kind === "proposal" || t.kind === "unsupported" ? "proposal" : t.status}`} data-status={t.status} data-kind={t.kind} disabled={t.kind === "proposal" || t.kind === "unsupported"} onClick={() => onOpen(t)} aria-label={`${t.title}: ${t.label}${t.progress.total ? `, ${t.progress.done} of ${t.progress.total}` : ""}${t.content && t.content.level !== "module" ? `, ${t.content.label}` : ""}`}>
           {t.goalRefs.length > 0 && <span className="goal-mark">Goal</span>}
+          {t.kind !== "skill" && t.kind !== "micro" && t.kind !== "proposal" && t.kind !== "unsupported" && <span className="tile-kind">{KIND_WORD[t.kind]}</span>}
           <span className="tile-title">{t.title}</span>
           {t.subtitle && <span className="tile-sub">{t.subtitle}</span>}
+          {t.content?.level === "partial" && <span className="tile-sub">Some content: not a full module yet</span>}
           {t.progress.total > 0 && <span className="tbar" aria-hidden="true"><span style={{ width: `${(100 * t.progress.done) / t.progress.total}%` }} /></span>}
           <span className="tile-status"><span className="tile-icon" aria-hidden="true"><Icon glyph={t.icon} /></span>{t.label}</span>
         </button>
@@ -431,7 +445,7 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
   const e = t.competency ? ev(t.competency) : null;
   return (
     <div className="stack">
-      <p className="eyebrow">{t.kind === "subject" ? "Subject" : t.kind === "chapter" ? "Chapter" : t.kind === "micro" ? "Smaller step" : "Skill"}</p>
+      <p className="eyebrow">{KIND_WORD[t.kind]}</p>
       <h1 style={{ margin: 0 }}>{t.title}</h1>
       <div className="year-meta">
         <span className="chip"><Icon glyph={t.icon} /> {t.label}</span>
@@ -448,11 +462,41 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
         </div>
       )}
       {t.strategies.length > 0 && <p className="small muted">Ways it can be explained: {t.strategies.join(" · ")}</p>}
+      {t.content && (t.kind === "skill" || t.kind === "micro") && (
+        <p className="small" data-content={t.content.level}>
+          <b>{t.content.label}.</b>{t.content.level === "partial" ? ` Missing: ${t.content.missing.join("; ")}.` : ""}{t.content.review ? ` ${t.content.review}.` : ""}
+          {t.content.origin === "synthesised" ? " Questions generated from a checked problem family; teaching text written for OpenPath." : ""}
+        </p>
+      )}
+      {t.alternatives && t.alternatives.length > 0 && <p className="small muted">Another way to think about it: {t.alternatives.join(" · ")}</p>}
+      {t.enrichment && t.enrichment.length > 0 && <p className="small muted">Where it leads: {t.enrichment.join(" · ")}</p>}
       {t.curriculumRefs[0] && <p className="ref">{t.curriculumRefs[0].textbook}{t.curriculumRefs[0].chapter ? ` · ${t.curriculumRefs[0].chapter}` : ""}{t.curriculumRefs[0].pages ? ` · pp. ${t.curriculumRefs[0].pages}` : ""}</p>}
       {onStart && t.assessable && <button className="primary" onClick={onStart}>{e && e.status !== "not_started" ? "Continue" : "Start"}</button>}
       {t.kind === "micro" && t.competency && <p className="muted small">Practised inside {graph.get(graph.evidenceTarget(t.competency)).name.toLowerCase()}: its questions on this step count here.</p>}
-      {!onStart && t.kind === "skill" && <p className="muted small">No questions for this skill yet.</p>}
+      {!onStart && t.kind === "skill" && <p className="muted small">No learning content for this skill yet. It is part of your curriculum, so it stays on your map.</p>}
     </div>
+  );
+}
+
+/** What the platform can teach from this textbook, measured separately for each kind of content (coverage@1). */
+function CoverageCard({ release }: { release: CurriculumRelease }) {
+  const c = useMemo(() => releaseCoverage(release), [release]);
+  const row = (label: string, n: number) => <li key={label}><b>{n}</b> of {c.counts.total} · {label}</li>;
+  return (
+    <details className="panel coverage" style={{ marginTop: 16 }}>
+      <summary><b>What OpenPath can teach from this textbook</b> <span className="small muted">{c.counts.module} of {c.counts.total} skills have a full learning module · {c.counts.approved} educator-approved</span></summary>
+      <p className="small">Read from the book: {c.extracted.chapters} chapters{c.extracted.sections ? `, ${c.extracted.sections} sections` : ""}, {c.extracted.outcomes} outcomes. Mapped to a skill: {c.mapping.accepted} of {c.extracted.outcomes}{c.mapping.proposals ? ` (${c.mapping.proposals} kept as proposals)` : ""}.</p>
+      <ul className="plain small" aria-label="Coverage by kind of content">
+        {row("with diagnostic questions", c.counts.diagnostic)}
+        {row("with teaching strategies", c.counts.strategies)}
+        {row("with practice", c.counts.practice)}
+        {row("with independent assessment", c.counts.independent)}
+        {row("with a delayed (retention) check", c.counts.retention)}
+        {row("educator-approved", c.counts.approved)}
+      </ul>
+      {c.counts.none > 0 && <p className="small">No learning content yet: {c.competencies.filter((x) => x.module === "none").map((x) => x.name).join(", ")}.</p>}
+      <p className="small muted">Content is original OpenPath material and not yet educator-reviewed, so no skill can be verified on it. These are counts of content, not of learning.</p>
+    </details>
   );
 }
 
@@ -497,8 +541,11 @@ function StuckBox({ onOpen }: { onOpen: (qid: string) => void }) {
   );
 }
 
-function Setup({ current, goals: active, saving, onSave }: { current: number | null; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null) => void }) {
+function Setup({ current, goals: active, saving, onSave }: { current: number | null; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null, year: string) => void }) {
   const [grade, setGrade] = useState<number | null>(current ? Math.min(current + 1, 12) : null);
+  const [year, setYear] = useState(academicYear(new Date(), current ? 1 : 0));
+  const [board, setBoard] = useState<string | null>(null);
+  const [subjects, setSubjects] = useState<Set<string>>(new Set(["Mathematics"]));
   const [mode, setMode] = useState<string | null>(null);
   const [text, setText] = useState("");
   const [draft, setDraft] = useState<CurriculumRelease | null>(null);
@@ -506,14 +553,17 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
   const [goal, setGoal] = useState<string | null>(active[0] ?? null);
   const [problem, setProblem] = useState("");
   const sample = grade ? sampleFor(grade) : null;
-  const outcomes = draft ? draft.subjects.flatMap((s) => s.chapters.flatMap((c) => c.outcomes.map((o) => ({ c, o })))) : [];
-  const finish = (r: CurriculumRelease, own: boolean) => onSave(grade!, r, own, goal);
+  const outcomes = draft ? allOutcomesOf(draft).map(({ chapter, sections, outcome }) => ({ c: chapter, where: [chapter.title, ...sections.map((x) => x.title)].join(" › "), o: outcome })) : [];
+  const finish = (r: CurriculumRelease, own: boolean) => onSave(grade!, r, own, goal, year);
+  const boards = grade ? [...new Set(releasesFor(grade).map((r) => r.source.board ?? "Another textbook"))] : [];
+  const shown = grade ? releasesFor(grade).filter((r) => !board || (r.source.board ?? "Another textbook") === board) : [];
+  const unsupportedDraft = draft ? draft.subjects.find((s) => s.supported === false) : null;
   const read = (doc: Parameters<typeof synthesise>[0]) => {
     const d = synthesise(doc);
     if (d.grade !== grade) throw new Error(`This textbook says Grade ${d.grade}; Grade ${grade} is chosen.`);
     setDraft(d);
     // a clear match is ticked for you to confirm; an uncertain one is left for you to choose
-    setPicked(Object.fromEntries(d.subjects.flatMap((s) => s.chapters.flatMap((c) => c.outcomes.map((o) => [o.id, new Set(o.mapping.verdict === "clear" ? o.mapping.competencies.slice(0, 1).map((m) => m.id) : [])])))));
+    setPicked(Object.fromEntries(allOutcomesOf(d).map(({ outcome: o }) => [o.id, new Set(o.mapping.verdict === "clear" ? o.mapping.competencies.slice(0, 1).map((m) => m.id) : [])])));
     setProblem("");
   };
   return (
@@ -531,6 +581,22 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
       </div>
       {grade && (
         <>
+          <h2>Academic year</h2>
+          <div className="actions" role="radiogroup" aria-label="Academic year">
+            {[academicYear(new Date(), 0), academicYear(new Date(), 1)].map((y) => <button key={y} role="radio" aria-checked={year === y} className={year === y ? "primary" : "secondary"} onClick={() => setYear(y)}>{y}</button>)}
+          </div>
+          <h2>Subjects</h2>
+          <div className="cards" role="group" aria-label="Subjects">
+            {SUBJECTS.map((sj) => {
+              const ok = subjectSupported(sj);
+              return (
+                <label key={sj} className={`card ${subjects.has(sj) ? "accent" : ""} ${ok ? "" : "locked"}`}>
+                  <span className="card-title"><input type="checkbox" disabled={!ok} checked={subjects.has(sj)} onChange={(e) => setSubjects((cur) => { const n = new Set(cur); if (e.target.checked) n.add(sj); else n.delete(sj); return n; })} /> {sj}</span>
+                  <span className="card-sub">{ok ? "Supported: skill map, modules and evidence" : sj === "English" ? "Not in My Learning Year yet (OpenPath English is separate)" : "Not supported yet: no skill map in OpenPath"}</span>
+                </label>
+              );
+            })}
+          </div>
           <h2>Long-term goal (optional)</h2>
           <div className="cards">
             {[null, ...goals.map((g) => g.id)].map((g) => (
@@ -540,10 +606,15 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
               </button>
             ))}
           </div>
-          <h2>Curriculum</h2>
+          <h2>Board or curriculum</h2>
+          {boards.length > 1 && (
+            <div className="actions" role="radiogroup" aria-label="Board">
+              {[null, ...boards].map((b) => <button key={b ?? "all"} role="radio" aria-checked={board === b} className={board === b ? "primary" : "secondary"} onClick={() => { setBoard(b); setMode(null); }}>{b ? b.replace(/\s*\(.*\)\s*$/, "") : "All boards"}</button>)}
+            </div>
+          )}
           <div className="cards">
-            {sample && <button className={`card ${mode === "sample" ? "accent" : ""}`} onClick={() => setMode("sample")}><span className="card-title">{sample.title}</span><span className="card-sub">A sample textbook written for OpenPath (reviewed mapping, not an educator review)</span></button>}
-            {releasesFor(grade).filter((r) => r.id !== sample?.id).map((r) => <button key={r.id} className={`card ${mode === r.id ? "accent" : ""}`} onClick={() => setMode(r.id)}><span className="card-title">{r.title}</span><span className="card-sub">{r.source.board ?? "Another textbook"} · a second sample book (synthetic)</span></button>)}
+            {sample && shown.includes(sample) && <button className={`card ${mode === "sample" ? "accent" : ""}`} onClick={() => setMode("sample")}><span className="card-title">{sample.title}</span><span className="card-sub">{sample.source.board ?? "A sample textbook"} · reviewed mapping, not an educator review</span></button>}
+            {shown.filter((r) => r.id !== sample?.id).map((r) => <button key={r.id} className={`card ${mode === r.id ? "accent" : ""}`} onClick={() => setMode(r.id)}><span className="card-title">{r.title}</span><span className="card-sub">{r.source.board ?? "Another textbook"} · a sample book (synthetic)</span></button>)}
             <button className={`card ${mode === "book" ? "accent" : ""}`} onClick={() => setMode("book")}><span className="card-title">Add my textbook</span><span className="card-sub">Paste its contents, or choose a PDF of its contents pages</span></button>
           </div>
         </>
@@ -552,7 +623,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
       {mode && mode !== "sample" && mode !== "book" && grade && <button className="primary" disabled={saving} onClick={() => finish(releasesFor(grade).find((r) => r.id === mode)!, false)}>{saving ? "Saving…" : `Start Grade ${grade}`}</button>}
       {mode === "book" && !draft && (
         <div className="stack">
-          <p className="small muted">Paste the contents pages: chapter headings with pages, and the lists of what learners will be able to do. Or choose a PDF (one with selectable text; scanned pages cannot be read yet).</p>
+          <p className="small muted">Paste the contents pages: chapter headings with pages (units and numbered sections too), and the lists of what learners will be able to do. Or choose a PDF (one with selectable text; scanned pages cannot be read yet).</p>
           <textarea className="book" aria-label="Textbook contents" value={text} onChange={(e) => setText(e.target.value)} />
           <label className="field small">Or a PDF<input type="file" accept="application/pdf" aria-label="Textbook PDF" onChange={async (e) => {
             const f = e.target.files?.[0];
@@ -578,20 +649,21 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
           <h2>Check the skills for each outcome</h2>
           <p className="small muted">OpenPath suggests skills from its skill map. Nothing is used until you confirm. An outcome with no match is kept as a proposal with its page reference; it gets no questions.</p>
           <div className="mapping">
-            {outcomes.map(({ c, o }) => (
+            {outcomes.map(({ where, o }) => (
               <div key={o.id} className="outcome">
-                <p>{o.text} <span className="ref">({c.title}{o.pages ? `, p. ${o.pages}` : ""})</span></p>
+                <p>{o.text} <span className="ref">({where}{o.pages ? `, p. ${o.pages}` : ""})</span></p>
                 {o.mapping.verdict === "uncertain" && <p className="hint small" role="note">Please choose: {o.mapping.why}</p>}
                 {o.mapping.competencies.length ? o.mapping.competencies.map((m) => (
                   <label key={m.id}>
                     <input type="checkbox" checked={picked[o.id]?.has(m.id) ?? false} onChange={(e) => setPicked((p) => { const s = new Set(p[o.id]); if (e.target.checked) s.add(m.id); else s.delete(m.id); return { ...p, [o.id]: s }; })} />
                     {graph.get(m.id).name} <span className="ref">({Math.round(m.score * 100)}% match)</span>
                   </label>
-                )) : <span className="ref">No matching skill: kept as a proposal.</span>}
+                )) : <span className="ref">{o.mapping.verdict === "unsupported" ? "Not supported yet: nothing is mapped." : "No matching skill: kept as a proposal."}</span>}
               </div>
             ))}
           </div>
-          <button className="primary" disabled={saving} onClick={() => {
+          {unsupportedDraft && <p className="error" role="alert">{unsupportedDraft.unsupportedReason} {UNSUPPORTED.subjects}</p>}
+          <button className="primary" disabled={saving || !!unsupportedDraft} onClick={() => {
             const decisions: ReviewDecision[] = outcomes.map(({ o }) => ({ outcome: o.id, accept: [...(picked[o.id] ?? [])] }));
             finish(review(draft, decisions, "account owner", new Date().toISOString()), true);
           }}>{saving ? "Saving…" : `Use this curriculum for Grade ${grade}`}</button>

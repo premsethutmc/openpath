@@ -42,6 +42,8 @@ const KEY: Record<string, string> = {
   "mt-arr-g": String(3 * 6), "mt-arr-c": String(4 * 6), "mt-r1": String(8 * 7), "mt-r2": String(9 * 6), "mt-p1": "C",
   "ra-d1": String(6 * 4), "ra-d2": String(5 * 5), "ra-g1": String(9 * 3), "ra-c1": String(8 * 5), "ra-r1": String(7 * 4), "ra-p1": "B", "ra-r2": String(9 * 3),
   "ca-d1": "C", "ca-d2": "7", "ca-g1": "B", "ca-c1": "6", "ca-r1": "C", "ca-p1": "B", "ca-r2": "D",
+  "fm-p2": "A", "fm-t1": String(8 - 3), "fc-p2": "2", "fc-t1": "B", "fa-p2": "5/7", "fa-t1": "7/9", "mt-p2": String(7 * 6), "mt-t1": String(8 * 7),
+  "ra-p2": String(9 * 4), "ra-t1": String(6 * 5), "ca-p2": "0", "ca-t1": String(1 - 3), "di-p2": String((7 - 2) * 3), "di-t1": String((10 - 3) * 4), "fx-p2": "12", "fx-t1": String([...Array(22).keys()].map((k) => k + 2).filter((k) => 24 % k === 0).length),
   "di-d1": String(3 * 4), "di-d2": String(2 * 4), "di-g1": String(5 * 6), "di-c1": String(4 * 5), "di-r1": String(9 * 3), "di-p1": "C", "di-r2": String(5 * 4),
   "ai-original": String(7 * 8), "ai-c1": String(6 * 9),
   "fx-d1": "6", "fx-d2": "12", "fx-g1": "6", "fx-c1": "24", "fx-r1": "6", "fx-p1": "D", "fx-r2": "4",

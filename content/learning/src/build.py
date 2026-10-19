@@ -251,6 +251,30 @@ GOALS = [
                  note="Section-level adaptive; scaled scores 130–170 are not modelled.")),
 ]
 
+# ======================================================== platform: complete the small modules (practice in a second
+# format, and a transfer question), so each passes validate@1. New ids only: no existing question changes.
+EXTRA = {
+    FM: [q("fm-p2", FM, "practice", "choice", "A bar is cut into 5 equal parts and 2 are shaded. What fraction is shaded?", "A", "2 of 5 equal parts: 2/5.", options=["2/5", "2/3", "5/2", "3/5"], mis=[("B", "conceptual", "2/3 compares shaded with unshaded parts; a fraction compares shaded parts with all the equal parts."), ("C", "procedural", "The top and bottom are swapped: the bottom counts all the equal parts."), ("D", "conceptual", "3/5 is the part that is not shaded.")]),
+         q("fm-t1", FM, "transfer", "integer", "A ribbon is cut into 8 equal pieces. Sam uses 3 pieces for a gift. How many eighths of the ribbon are left?", "5", "8 − 3 = 5 equal pieces, so 5/8 is left.", probe="transfer")],
+    FC: [q("fc-p2", FC, "practice", "integer", "□/9 is smaller than 3/9 and larger than 1/9. What number goes in the box?", "2", "Ninths: more than 1 and fewer than 3 is 2."),
+         q("fc-t1", FC, "transfer", "choice", "Asha ate 2/6 of a cake and Ravi ate 4/6 of the same cake. Who ate more?", "B", "Both are sixths of the same cake: 4 pieces are more than 2.", probe="transfer", options=["Asha", "Ravi", "They ate the same", "You cannot tell"], mis=[("A", "conceptual", "Both are sixths of one cake, so the one with more sixths ate more.")])],
+    FA: [q("fa-p2", FA, "practice", "fraction", "3/7 + 2/7 = ?", "5/7", "3 sevenths + 2 sevenths = 5 sevenths.", mis=[("5/14", "procedural", "The bottom numbers were added too; sevenths stay sevenths.")]),
+         q("fa-t1", FA, "transfer", "fraction", "A jug is 2/9 full. You pour in another 5/9 of a jug. How full is it now?", "7/9", "2 ninths + 5 ninths = 7 ninths.", probe="transfer", mis=[("7/18", "procedural", "The bottom numbers were added too; ninths stay ninths.")])],
+    MT: [q("mt-p2", MT, "practice", "integer", "7 × 6 = ?", "42", "7 × 5 = 35, and one more 7 is 42.", skill="MLY.mult.facts-6-9", mis=[("48", "recall", "48 is 8 × 6. 7 × 6 is one 6 less: 42."), ("13", "conceptual", "7 and 6 were added; 7 × 6 is 7 groups of 6.")]),
+         q("mt-t1", MT, "transfer", "integer", "Chairs are set out in 8 rows of 7. How many chairs are there?", "56", "8 rows of 7: 8 × 7 = 56.", probe="transfer", skill="MLY.mult.facts-6-9")],
+    RA: [q("ra-p2", RA, "practice", "integer", "A rectangle is 9 cm by 4 cm. What is its area in square centimetres?", "36", "9 × 4 = 36 unit squares.", mis=[("26", "conceptual", "26 cm is the perimeter (the distance around); area is the space inside: 9 × 4."), ("13", "conceptual", "The sides were added; area multiplies them.")]),
+         q("ra-t1", RA, "transfer", "integer", "A floor is 6 m long and 5 m wide. How many tiles 1 m by 1 m cover it?", "30", "6 rows of 5 tiles: 6 × 5 = 30.", probe="transfer")],
+    CA: [q("ca-p2", CA, "practice", "integer", "The point (−4, □) is on the x-axis. What number goes in the box?", "0", "Every point on the x-axis has y = 0."),
+         q("ca-t1", CA, "transfer", "integer", "On a map grid you start at (1, 2) and move 3 units left. What is your new x-coordinate?", "-2", "Left lowers x: 1 − 3 = −2.", probe="transfer", mis=[("4", "conceptual", "Moving left makes x smaller, not larger."), ("2", "procedural", "The sign was dropped: 1 − 3 is −2.")])],
+    DI: [q("di-p2", DI, "practice", "integer", "∫ from 2 to 7 of 3 dx = ?", "15", "Width 7 − 2 = 5, height 3: 5 × 3 = 15.", mis=[("21", "conceptual", "Only the upper limit was used; the width is 7 − 2."), ("18", "procedural", "The whole numbers from 2 to 7 were counted; the width is 7 − 2 = 5.")]),
+         q("di-t1", DI, "transfer", "integer", "A tap adds water at a steady 4 litres per minute from minute 3 to minute 10. The water added is ∫ from 3 to 10 of 4 dt. How many litres is that?", "28", "Width 10 − 3 = 7 minutes, height 4 litres per minute: 7 × 4 = 28 litres.", probe="transfer")],
+    FMU: [q("fx-p2", FMU, "practice", "integer", "What is the smallest number that is a multiple of both 4 and 6?", "12", "Multiples of 6: 6, 12. 12 is also 4 × 3.", mis=[("24", "procedural", "4 × 6 = 24 is a common multiple, but 12 is smaller.")]),
+          q("fx-t1", FMU, "transfer", "integer", "A class of 24 is split into equal teams of more than 1 and fewer than 24 pupils. How many different team sizes are possible?", "6", "The factors of 24 between 2 and 23: 2, 3, 4, 6, 8, 12. That is 6 sizes.", probe="transfer")],
+}
+for m in MODULES:
+    for qid in EXTRA.get(m["competency"], []):
+        (m["transfer"] if Q[qid]["role"] == "transfer" else m["practice"]).append(qid)
+
 ids = set(Q)
 for m in MODULES:
     for qid in m["diagnostics"] + m["practice"] + m["retention"] + m["transfer"] + m["probes"] + [x for s in m["strategies"] for x in [s["guided"], s["check"]] + s["needs"]]:
