@@ -1227,6 +1227,12 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
     for (const v of [...(Number.isFinite(rg[1]) ? [rg[1] + rg[0] - a, (a + rg[1]) / 2] : []), a / 2, 2 * a, a * a]) add(v);
   }
   for (const v of [(answer as number) + 1, (answer as number) - 1, (answer as number) + 2, 2 * (answer as number), (answer as number) + 3, (answer as number) - 2]) add(v);
+  // families@2: a fixed order that differs from problem to problem, so the right letter cannot be guessed from the
+  // order of the values; the first families keep value order (the server computes their options too)
+  if (V2.has(def.id)) {
+    const salt = `gen:${def.id}:${p.join(",")}`;
+    return [...out, answer].sort((x, y) => fnv(salt + show(x as number)) - fnv(salt + show(y as number)) || (x as number) - (y as number));
+  }
   return [...out, answer].sort((x, y) => (x as number) - (y as number));
 }
 /** A value as the learner sees it: a family that works in decimals (money, measures, statistics) shows a terminating
