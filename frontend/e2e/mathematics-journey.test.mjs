@@ -404,3 +404,47 @@ test("Completing the square unit: predict before the reveal, misconception feedb
   await page.getByText("Part 2 of 3").waitFor();
   await context.close();
 });
+test("Completing the square help: two wrong answers open help that says why, it runs teach → guided → check, and returns to the same place", async () => {
+  const { page, context, learner } = await setup(360);
+  await page.goto(base + "/maths/");
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Completing the square/ }).click();
+  await page.getByText("Part 1 of 3").waitFor();
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  // a first wrong answer: feedback only, no help branch yet (it may be a slip)
+  await page.locator('.ask[data-qid="p1"] input').fill("5");
+  await page.locator('.ask[data-qid="p1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.locator('.ask[data-qid="p1"]').getByRole("status").waitFor();
+  assert.equal(await page.locator(".help-offer").count(), 0, "one wrong answer is not yet a gap");
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("button", { name: "Check your understanding" }).click();
+  await page.locator('.ask[data-qid="d1"]').getByRole("radio").nth(0).click();
+  await page.locator('.ask[data-qid="d1"]').getByRole("button", { name: "Check answer" }).click();
+  // the second observation: help is offered, with the reason and the way back
+  const offer = page.locator(".help-offer");
+  await offer.getByText("Squaring a bracket").waitFor();
+  await offer.getByText(/Two of your answers suggest/).waitFor();
+  await offer.getByText(/Then back to Step 1/).waitFor();
+  await offer.getByRole("button", { name: "Start the extra help" }).click();
+  await page.getByRole("button", { name: "I've read it: practise it" }).click();
+  await page.locator('main.help .ask[data-qid="px1"] input').nth(0).fill("4");
+  await page.locator('main.help .ask[data-qid="px1"] input').nth(1).fill("4");
+  await page.locator('main.help .ask[data-qid="px1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.locator('main.help .ask[data-qid="px1"]').getByRole("status").filter({ hasText: "Correct!" }).waitFor();
+  await page.getByRole("button", { name: "Now one on your own" }).click();
+  // leave in the middle of the help: it resumes after a reload
+  await page.reload();
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Completing the square/ }).click();
+  await page.getByText(/Welcome back. You were in the middle of this extra help/).waitFor();
+  await page.locator('main.help .ask[data-qid="pxc1"] input').fill("81");
+  await page.locator('main.help .ask[data-qid="pxc1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.locator('main.help .ask[data-qid="pxc1"]').getByRole("status").filter({ hasText: "Correct!" }).waitFor();
+  await page.getByRole("button", { name: /Back to the lesson: Step 1/ }).click();
+  // the lesson continues where it stood: part 1's check is answered, so (after the reload) part 2
+  await page.getByText("Part 2 of 3").waitFor();
+  const saved = (await records(page, learner)).filter((e) => e.program === "completing-the-square");
+  assert.deepEqual(saved.filter((e) => e.action === "teach").map((e) => e.response), ["expand:area_model"]);
+  assert.deepEqual(saved.filter((e) => e.action === "answer").map((e) => e.questionId), ["p1", "d1", "px1", "pxc1"]);
+  await context.close();
+});

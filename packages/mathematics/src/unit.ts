@@ -43,8 +43,13 @@ export interface UnitQuestion {
   fields?: string[];
   unordered?: boolean;
   hint?: string;
-  misconceptions?: { when: string; says: string }[];
+  /** signal: what this wrong answer shows on its own (used only when it is unambiguous; see remediation.ts). */
+  misconceptions?: { when: string; says: string; signal?: string }[];
   support?: string;
+  /** "remediation": asked only inside a help branch (never part of a step). */
+  role?: "remediation";
+  /** The competency this question is about, when it is not the unit's own (prerequisite questions). */
+  competency?: string;
   revisit?: { stage: string; section: string };
 }
 export interface Screen {
@@ -53,7 +58,7 @@ export interface Screen {
   math?: string[];
   mathAt?: number;
   tip?: string;
-  widget?: { type: "tiles" | "balance"; b?: number; mode?: "show" | "split" | "build"; choose?: boolean };
+  widget?: { type: "tiles" | "balance" | "minimum"; b?: number; mode?: "show" | "split" | "build"; choose?: boolean; p?: number; q?: number };
   predict?: string;
   reveal?: { text?: string[]; math?: string[]; mathAt?: number; tip?: string };
 }
@@ -90,6 +95,41 @@ export interface UnitStage {
   check?: string;
   intro?: { id: string; screens: Screen[] };
 }
+export interface Strategy {
+  id: string;
+  title: string;
+  screens: Screen[];
+  /** One guided question (hints; recorded as assisted) and one fresh independent check. */
+  guided: string;
+  reassess: string;
+  /** Also show this (prerequisite) rule's first strategy as the teaching. */
+  teachFrom?: string;
+}
+export interface Rule {
+  id: string;
+  kind: "prerequisite" | "procedure" | "transfer";
+  /** For transfer rules: which kind of transfer demand. */
+  category?: "interpret" | "recognise" | "translate";
+  /** A competency of the curriculum graph. */
+  competency: string;
+  name: string;
+  /** Shown to the learner: why this help is offered. */
+  why: string;
+  /** Main questions whose wrong first answers count as observations of this rule. */
+  observe: string[];
+  prerequisite?: string;
+  /** A similar worked example, shown with the first wrong answer (procedure rules). */
+  example?: { problem: string; steps: { text: string }[]; tip?: string };
+  strategies: Strategy[];
+}
+export interface TransferDiagnosis {
+  question: string;
+  /** The rule taught when the parts are right but the whole is not. */
+  demand: string;
+  /** The procedure rule taught when the procedure itself is what failed. */
+  procedure: string;
+  probes: { question: string; tests: "procedure" | "translate" }[];
+}
 export interface UnitSpec {
   id: string;
   version: string;
@@ -102,10 +142,12 @@ export interface UnitSpec {
   retentionDelayDays: number;
   stages: UnitStage[];
   questions: UnitQuestion[];
+  remediation: { policy: { guidedItems: number; reassessItems: number; reassessPassMin: number; reassessContrastItems: number }; rules: Rule[]; transfer: TransferDiagnosis[] };
 }
 export const unit = spec as unknown as UnitSpec;
 
-export type UnitAction = "open" | "hint" | "solution" | "answer" | "complete";
+/** teach: a help branch's teaching block was started (response "rule:strategy"); skip: help was set aside (response: the rule, or "transfer:<question>"). */
+export type UnitAction = "open" | "hint" | "solution" | "answer" | "complete" | "teach" | "skip";
 export interface UnitActivity {
   kind: "math_activity";
   program: string;
@@ -139,6 +181,13 @@ export interface UnitState {
   answers: Record<string, Answer>;
   hints: string[];
   solutions: string[];
+  /** Every answer, in order, including later attempts at a question (only the first one counts). */
+  attempts: { questionId: string; response: string; correct: boolean; at: string }[];
+  /** Help-branch teaching blocks started, and help set aside. */
+  teaching: { rule: string; strategy: string; at: string; session: string }[];
+  skips: { target: string; at: string }[];
+  /** First record time of each visit (session). */
+  sessions: Record<string, string>;
   retentionDueAt: string | null;
   timeMs: number;
   /** Distinct visits (sessions), and the time of the latest record. */
@@ -200,13 +249,15 @@ export function misconception(q: UnitQuestion, raw: string): string | null {
   return q.misconceptions?.find((m) => normalise(q, m.when) === n)?.says ?? null;
 }
 
+/** Item ids stay those of 1.0.0 across content versions: a question id never changes meaning (CONTENT_VERSIONING.md). */
+const ITEM_NAMESPACE = "1.0.0";
 export function nativeItem(q: UnitQuestion): Item & { kind: "code" } {
   return {
     kind: "code",
-    id: `math:${unit.id}:${unit.version}:${q.id}`,
+    id: `math:${unit.id}:${ITEM_NAMESPACE}:${q.id}`,
     version: 1,
     family: `math:${unit.id}:${q.skill}@1`,
-    target: unit.competencyId,
+    target: q.competency ?? unit.competencyId,
     format: "typed:math-unit@1",
     prompt: q.prompt,
     answers: [`${q.type}:${normalise(q, q.answer)}`],
@@ -228,7 +279,15 @@ export const stageOfQuestion = (qid: string) => unit.stages.find((s) => s.questi
 const USE: Record<Phase, EvidenceUse | null> = { teaching: null, worked: null, guided: "practice", independent: "assessment", application: "assessment", transfer: "assessment", retention: "retention" };
 
 function empty(): UnitState {
-  return { completed: [], current: unit.stages[0].id, answers: {}, hints: [], solutions: [], retentionDueAt: null, timeMs: 0, visits: 0, lastAt: null };
+  return { completed: [], current: unit.stages[0].id, answers: {}, hints: [], solutions: [], attempts: [], teaching: [], skips: [], sessions: {}, retentionDueAt: null, timeMs: 0, visits: 0, lastAt: null };
+}
+
+const rulesById = new Map(unit.remediation.rules.map((r) => [r.id, r]));
+/** Where a remediation question sits: its rule and strategy, and whether it is the guided question, the check or a probe. */
+export function remediationRole(qid: string): { rule: string; strategy: string; role: "guided" | "reassess" } | { probe: string } | null {
+  for (const r of unit.remediation.rules) for (const st of r.strategies) if (st.guided === qid || st.reassess === qid) return { rule: r.id, strategy: st.id, role: st.guided === qid ? "guided" : "reassess" };
+  for (const t of unit.remediation.transfer) if (t.probes.some((p) => p.question === qid)) return { probe: t.question };
+  return null;
 }
 
 /** Steps that can be finished now: the earlier ones are done, each main question is answered, and the revision is due. */
@@ -254,12 +313,27 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
     const stage = unit.stages.find((s) => s.id === ev.stage);
     if (!stage) continue;
     seen.add(ev.id);
-    if (ev.sessionId) sessions.add(ev.sessionId);
+    if (ev.sessionId) {
+      sessions.add(ev.sessionId);
+      state.sessions[ev.sessionId] ??= ev.at;
+    }
     state.lastAt = ev.at;
     state.timeMs += Math.max(0, Math.min(ev.elapsedMs || 0, 3_600_000));
     const session = ev.sessionId ?? `legacy-unknown:${unit.id}`;
     const qid = ev.questionId;
-    const known = qid && (stage.questions.includes(qid) || stage.support.includes(qid));
+    const remedial = qid ? remediationRole(qid) : null;
+    const known = qid && (stage.questions.includes(qid) || stage.support.includes(qid) || !!remedial);
+    if (ev.action === "teach" && ev.response) {
+      const [rule, strategy] = ev.response.split(":");
+      const r = rulesById.get(rule);
+      const st = r?.strategies.find((x) => x.id === strategy);
+      if (r && st) {
+        state.teaching.push({ rule, strategy, at: ev.at, session });
+        // the shared ledger's own record of teaching: the guided question is displayed as part of it (assisted@1)
+        ledger.apply({ kind: "intervention", id: `native-teach:${ev.id}`, at: ev.at, session, capability: r.competency, strategy, content: `${unit.id}:${rule}`, items: [nativeItem(question(st.guided)).id], reason: r.why });
+      }
+    }
+    if (ev.action === "skip" && ev.response) state.skips.push({ target: ev.response, at: ev.at });
     if ((ev.action === "hint" || ev.action === "solution") && known && !state.answers[qid]) {
       const item = nativeItem(question(qid));
       const hint: HintEvent = { kind: "hint", id: `native-hint:${ev.id}`, at: ev.at, session, item: { id: item.id, version: item.version }, level: ev.action === "hint" ? 1 : 2, hintType: ev.action === "hint" ? "rule_reminder" : "worked_solution", ...(ev.action === "solution" ? { revealsAnswer: true as const } : {}) };
@@ -267,13 +341,18 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
       (hintIds[qid] ??= []).push(hint.id);
       (ev.action === "hint" ? state.hints : state.solutions).push(qid);
     }
+    if (ev.action === "answer" && known && state.answers[qid]) {
+      const text = normalise(question(qid), ev.response ?? "");
+      if (text !== null) state.attempts.push({ questionId: qid, response: text, correct: text === normalise(question(qid), question(qid).answer), at: ev.at });
+    }
     if (ev.action === "answer" && known && !state.answers[qid]) {
       const q = question(qid);
       const text = normalise(q, ev.response ?? "");
       if (text === null) continue;
       const item = nativeItem(q);
       const response = { kind: "typed" as const, text: `${q.type}:${text}` };
-      const use = USE[stage.phase];
+      // help-branch questions: the guided one is assisted (as the planner says); checks and probes are independent
+      const use = remedial ? ("role" in remedial && remedial.role === "guided" ? null : "assessment") : USE[stage.phase];
       const assisted = use === null || !!hintIds[qid]?.length;
       if (use === null) {
         // a prediction or check inside teaching: the item was met as part of the teaching, so it is recorded as an
@@ -294,6 +373,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
         ledger.apply(evidence);
       }
       state.answers[qid] = { response: text, correct: scoreCode(item, response).correct, assisted, at: ev.at, stage: stage.id };
+      state.attempts.push({ questionId: qid, response: text, correct: state.answers[qid].correct, at: ev.at });
     }
     if (ev.action === "complete" && canComplete(state, stage.id, Date.parse(ev.at)) && !state.completed.includes(stage.id)) {
       state.completed.push(stage.id);
