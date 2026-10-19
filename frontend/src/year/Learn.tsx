@@ -3,7 +3,7 @@
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
@@ -180,7 +180,7 @@ function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens:
 export function Module({ competency, ctx, onExit, embedded = false, onFeedback }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void }) {
   const [own, setOwn] = useState<Fb | null>(null);
   const fb = onFeedback ? null : own;
-  const setFb = onFeedback ?? setOwn;
+  const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
   const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session);
   const name = graph.get(competency).name;

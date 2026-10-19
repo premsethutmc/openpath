@@ -2,18 +2,14 @@
 import json
 import os
 from datetime import timedelta
-from io import StringIO
 from pathlib import Path
 from unittest import mock
 
 from django.conf import settings
-from django.core.management import call_command
-from django.core.management.base import CommandError
 from django.utils import timezone
 from rest_framework.test import APIClient
 
 from .learning import content, hash_of
-from .models import PupilEvent
 from .tests import PASSWORD, FamilyTestCase
 
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
@@ -148,21 +144,19 @@ class LearningRecordTests(FamilyTestCase):
         other = self.parent('other.parent@example.org')
         self.assertEqual(other.get(f'/api/pupils/{self.pupil_id}/events/?subject=mathematics').status_code, 404)
 
-    def test_time_travel_is_test_only_and_synthetic_only(self):
+    def test_test_clock_is_test_only_synthetic_only_and_changes_no_record(self):
+        import tempfile
         self.save(self.enrol())
         self.save(self.attempt('eq-d1', '2'))
-        with mock.patch.dict(os.environ, {}, clear=False):
-            os.environ.pop('OPENPATH_ALLOW_TIME_TRAVEL', None)
-            with self.assertRaises(CommandError):
-                call_command('learning_time_travel', self.pupil_id, '--days', '8')
+        before = self.records()
         real = str(self.pupil(self.client, 'Arun'))
-        with mock.patch.dict(os.environ, {'OPENPATH_ALLOW_TIME_TRAVEL': '1'}):
-            with self.assertRaises(CommandError):
-                call_command('learning_time_travel', real, '--days', '8')
-            before = self.records()
-            call_command('learning_time_travel', self.pupil_id, '--days', '8', stdout=StringIO())
-        after = self.records()
-        for b, a in zip(before, after):
-            self.assertEqual(timezone.datetime.fromisoformat(b['at'].replace('Z', '+00:00')) - timezone.datetime.fromisoformat(a['at'].replace('Z', '+00:00')), timedelta(days=8))
-        self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201, 'now due')
-        self.assertEqual(PupilEvent.objects.filter(pupil_id=real).count(), 0)
+        with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:
+            json.dump({self.pupil_id: 8, real: 8}, f)
+        os.environ.pop('OPENPATH_TEST_CLOCK_FILE', None)
+        self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 400, 'no test clock without the variable')
+        with mock.patch.dict(os.environ, {'OPENPATH_TEST_CLOCK_FILE': f.name}):
+            self.assertEqual(self.records()[:2], before, 'no stored record changes')
+            self.assertEqual(self.save(self.attempt('eq-r1', '6', activity='retention')).status_code, 201, 'due by the test clock')
+            from .learning import server_now
+            from .models import Pupil
+            self.assertLess(server_now(Pupil.objects.get(pk=real)), timezone.now() + timedelta(days=1), 'a real pupil never gets the test clock')

@@ -6,14 +6,15 @@
  *
  *   PORT=8013 node e2e/lib/fake-api.mjs
  *
- * POST /__test/time-travel {pupil, days} moves a learner's learning records into the past (as the Django management
- * command learning_time_travel does).
+ * POST /__test/clock {pupil, days} moves the server clock forward for one synthetic learner (as Django's
+ * OPENPATH_TEST_CLOCK_FILE does). No stored record changes.
  */
 import http from "node:http";
 
 const accounts = new Map(); // email -> { password, pupils: [] }
 const sessions = new Map(); // cookie -> email
 const pupils = new Map(); // id -> { id, display_name, owner, events: { english: [], mathematics: [] } }
+const clock = new Map(); // pupil id -> days ahead (test clock)
 let n = 0;
 const json = (res, status, body, headers = {}) => {
   res.writeHead(status, { "Content-Type": "application/json", "Cache-Control": "no-store", ...headers });
@@ -32,11 +33,11 @@ http.createServer(async (req, res) => {
   const p = url.pathname;
   const body = req.method === "GET" ? {} : await read(req);
   const email = who(req);
-  if (p === "/__test/time-travel") {
+  if (p === "/__test/clock") {
     const pupil = pupils.get(body.pupil);
     if (!pupil || !pupil.display_name.startsWith("Synthetic")) return json(res, 400, { detail: "synthetic pupils only" });
-    for (const e of pupil.events.mathematics) if (e.kind === "learning_record") e.at = new Date(Date.parse(e.at) - body.days * 86_400_000).toISOString();
-    return json(res, 200, { moved: pupil.events.mathematics.length });
+    clock.set(pupil.id, body.days);
+    return json(res, 200, { days: body.days });
   }
   if (p === "/api/account/" && req.method === "GET") return json(res, 200, email ? { authenticated: true, email, accounts: true } : { authenticated: false, accounts: true });
   if (p === "/api/account/register/") {
@@ -71,10 +72,11 @@ http.createServer(async (req, res) => {
     if (body.seq !== list.length) return json(res, 409, { detail: "The record has changed since it was loaded.", count: list.length });
     const e = body.event;
     if (e.learnerId !== pupil.id || list.some((x) => x.id === e.id)) return json(res, 400, { event: "Invalid owner or duplicate id." });
-    const now = new Date().toISOString();
+    const nowMs = Date.now() + (clock.get(pupil.id) ?? 0) * 86_400_000;
+    const now = new Date(nowMs).toISOString();
     if (e.kind === "learning_record" && e.record === "attempt" && e.activity === "retention") {
       const first = list.filter((x) => x.kind === "learning_record" && x.record === "attempt" && x.competency === e.competency).map((x) => x.at).sort()[0];
-      if (!first || Date.now() - Date.parse(first) < 6.5 * 86_400_000) return json(res, 400, { event: "The delayed check is not due yet." });
+      if (!first || nowMs - Date.parse(first) < 6.5 * 86_400_000) return json(res, 400, { event: "The delayed check is not due yet." });
     }
     const saved = subject === "mathematics" ? { ...e, at: now, savedAt: now } : e;
     list.push(saved);

@@ -24,7 +24,12 @@ export class Driver {
   trace: string[] = [];
   session = "s1";
   private n = 1;
-  constructor(public learnerId: string, public now: number) {}
+  learnerId: string;
+  now: number;
+  constructor(learnerId: string, now: number) {
+    this.learnerId = learnerId;
+    this.now = now;
+  }
   ctx() {
     this.now += 60_000;
     return { learnerId: this.learnerId, sessionId: this.session, at: new Date(this.now).toISOString() };

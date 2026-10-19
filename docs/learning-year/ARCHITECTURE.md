@@ -159,9 +159,10 @@ objectives, evidence: [attempt ids], assessable, strategies, curriculumRefs, goa
    (`VERIFY_AT_LEVEL_MIN` = 2), so every module has two retention questions; any wrong answer fails the check (review).
 8. **Probes are not independence.** A probe (7 × 5 when the question is 7 × 8) is evidence for its micro-skill only.
 9. **The server keeps time.** Learning records are saved with the server's time, and the server refuses a delayed
-   check with no work on that skill at least 6.5 days earlier. Browser tests move a synthetic learner's records into
-   the past with a test-only management command (`learning_time_travel`, refused unless
-   `OPENPATH_ALLOW_TIME_TRAVEL=1`, and only for pupils named "Synthetic …").
+   check with no work on that skill at least 6.5 days earlier. Records stay append-only. Browser tests reach a delayed
+   check with a test-only clock: `OPENPATH_TEST_CLOCK_FILE` (never set in production) names a JSON file of
+   {pupil id: days ahead}, honoured only for pupils named "Synthetic …", and the test moves the browser's clock by the
+   same amount.
 10. **"Stuck on a problem" is learner-opened.** A problem from class or coaching is offered from two grades before its
     own grade (the integration problem from Grade 10). It is never placed in the year's tiles.
 11. **The exam plan starts at Grade 11** (GRE: Grade 12). Younger learners with a goal get the overlay only.

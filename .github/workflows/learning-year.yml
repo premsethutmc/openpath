@@ -49,6 +49,9 @@ jobs:
         shell: bash
         run: |
           python backend/manage.py migrate --noinput
+          # TEST ONLY: a per-pupil clock for synthetic pupils, so a delayed check can be reached (no record is changed)
+          export OPENPATH_TEST_CLOCK_FILE=/tmp/year-clock.json
+          echo '{}' > "$OPENPATH_TEST_CLOCK_FILE"
           python backend/manage.py runserver 127.0.0.1:8014 --noreload --nothreading > /tmp/year-api.log 2>&1 &
           api_pid=$!
           PORT=4190 API_TARGET=http://127.0.0.1:8014 node frontend/scripts/preview-english.mjs > /tmp/year-preview.log 2>&1 &

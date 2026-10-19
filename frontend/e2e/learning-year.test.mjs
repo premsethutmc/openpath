@@ -1,7 +1,7 @@
 /**
  * My Learning Year: acceptance journeys A–F in a real browser, through the UI, against an OpenPath API.
  *
- *   CI:    the real Django API (YEAR_API=django, time travel by the learning_time_travel management command)
+ *   CI:    the real Django API (YEAR_API=django, OPENPATH_TEST_CLOCK_FILE set for the server and this test)
  *   local: e2e/lib/fake-api.mjs (YEAR_API=fake, FAKE_API=http://127.0.0.1:8013)
  *
  * The app is the TEST BUILD (scripts/build-year.mjs --test): questions are treated as educator-reviewed so that a
@@ -9,8 +9,7 @@
  * SHOTS (default ../docs/learning-year/screens) at phone (360 × 800) and tablet (820 × 1180) sizes.
  */
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
@@ -58,9 +57,23 @@ async function learnerPage(name, size = "phone") {
 async function records(page, id) {
   return (await call(page, `/pupils/${id}/events/?subject=mathematics`)).data.events;
 }
-function timeTravel(learner, days) {
-  if (mode === "django") execFileSync("python", ["backend/manage.py", "learning_time_travel", learner, "--days", String(days)], { cwd: fileURLToPath(root), env: { ...process.env, OPENPATH_ALLOW_TIME_TRAVEL: "1" }, stdio: "inherit" });
-  else return fetch(fakeApi + "/__test/time-travel", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pupil: learner, days }) }).then((r) => assert.equal(r.status, 200));
+/**
+ * Move time forward for one synthetic learner: the server's test clock (Django: OPENPATH_TEST_CLOCK_FILE; the fake
+ * API: /__test/clock) and the browser's clock by the same amount. No stored record is changed.
+ */
+const ahead = new Map();
+async function timeTravel(page, learner, days) {
+  const total = (ahead.get(learner) ?? 0) + days;
+  ahead.set(learner, total);
+  if (mode === "django") {
+    const file = process.env.OPENPATH_TEST_CLOCK_FILE;
+    const all = existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : {};
+    writeFileSync(file, JSON.stringify({ ...all, [learner]: total }));
+  } else {
+    const r = await fetch(fakeApi + "/__test/clock", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pupil: learner, days: total }) });
+    assert.equal(r.status, 200);
+  }
+  await page.clock.setSystemTime(new Date(Date.now() + total * 86_400_000));
 }
 const shot = async (page, name) => {
   await page.waitForTimeout(450); // let the screen-enter animation finish
@@ -210,7 +223,7 @@ test("journeys A, E, F: Grade 4 textbook → Fractions → diagnostic → strate
   await shot(page, "e2-years-phone");
 
   // F: a week later the delayed check is due; a wrong answer means review, not verified
-  await timeTravel(learner, 8);
+  await timeTravel(page, learner, 8);
   await page.reload();
   await page.getByRole("button", { name: "Start the delayed check" }).click();
   await answer(page, (q) => (q === "eq-r1" ? "8" : null));
@@ -259,7 +272,7 @@ test("journeys C and D: integration problem → verified supports green → 7 ×
   await openSkill(page, "Graphs", "Plot points in four quadrants");
   await work(page);
   await home(page);
-  await timeTravel(learner, 8);
+  await timeTravel(page, learner, 8);
   await page.reload();
   for (let k = 0; k < 2; k++) {
     await page.getByRole("button", { name: "Start the delayed check" }).click();

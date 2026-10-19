@@ -5,6 +5,7 @@ records through the shared engine. The server keeps the time (an event's "at" is
 (questions, strategies, goals, curriculum releases by content hash) and refuses a delayed check that is not due.
 """
 import json
+import os
 import re
 from datetime import timedelta
 from functools import lru_cache
@@ -63,6 +64,22 @@ def hash_of(value):
     for i in range(0, len(data), 2):
         h = ((h ^ (data[i] | data[i + 1] << 8)) * 0x01000193) & 0xFFFFFFFF
     return format(h, '08x')
+
+
+def server_now(pupil):
+    """The server's clock. TEST ONLY: with OPENPATH_TEST_CLOCK_FILE set (never in production), a JSON file
+    {pupil id: days} moves the clock forward for a synthetic pupil, so browser tests can reach a delayed check without
+    changing any stored record. The browser's clock is moved by the same amount."""
+    now = timezone.now()
+    path = os.environ.get('OPENPATH_TEST_CLOCK_FILE')
+    if path and pupil.display_name.startswith('Synthetic'):
+        try:
+            days = json.loads(Path(path).read_text()).get(str(pupil.pk), 0)
+        except (OSError, ValueError):
+            days = 0
+        if isinstance(days, (int, float)) and 0 <= days <= 3650:
+            now += timedelta(days=days)
+    return now
 
 
 def _reject(message):
@@ -152,7 +169,7 @@ def checked_learning(event, pupil):
     prior = [e for e in PupilEvent.objects.filter(pupil=pupil, subject='mathematics', kind='learning_record').values_list('body', flat=True)]
     if any(e.get('id') == event['id'] for e in prior):
         _reject('This activity ID already exists. Reload to confirm a retry.')
-    now = timezone.now()
+    now = server_now(pupil)
 
     if record == 'enrol':
         if type(event.get('grade')) is not int or not 1 <= event['grade'] <= 12:

@@ -1,5 +1,3 @@
-import React from "react";
-
 /** Status icons as drawings (font glyphs for half-circles are missing on many phones). */
 export function Icon({ glyph }: { glyph: string }) {
   const p = { width: 14, height: 14, viewBox: "0 0 16 16", "aria-hidden": true as const, fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
