@@ -11,7 +11,8 @@
     "src/mathematics/chapter",
     "../packages/mathematics/src/unit.ts",
     "src/mathematics/unit",
-    "src/globals.d.ts"
+    "src/globals.d.ts",
+    "src/mathematics/foundation"
   ],
   "exclude": []
 }
