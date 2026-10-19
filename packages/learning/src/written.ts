@@ -14,10 +14,15 @@ export const WRITTEN_POLICY = "written@1";
 export interface WrittenTask {
   id: string;
   competency: string;
-  kind: "proof" | "construction" | "explanation" | "drawing";
+  kind: "proof" | "construction" | "explanation" | "drawing" | "sketch";
   grade: number;
   prompt: string;
   figure?: { type: string; [k: string]: unknown };
+  /** draw@1: "drawing" hands in a drawing (pen, straight edge, compass, points) with a note; otherwise text. A graph
+   * sketch, a construction or a diagram is drawn; the educator marks the drawing as handed in. */
+  answer?: "text" | "drawing";
+  /** The sheet a drawing starts from: plain, squared, or axes with their ranges (graph sketches). */
+  canvas?: { grid?: boolean; axes?: { x: [number, number]; y: [number, number]; step?: number } };
   rubric: { id: string; criterion: string; points: number }[];
   guidance: string;
   source: string;

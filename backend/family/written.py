@@ -96,7 +96,7 @@ class MarkingQueueView(AccountBase):
                 m = marked.get(body['id'])
                 out.append({
                     'pupil': str(pupil.pk), 'learner': _alias(pupil.pk), 'attemptId': body['id'], 'questionId': body['questionId'], 'at': body.get('at'),
-                    'task': {k: task.get(k) for k in ('prompt', 'kind', 'rubric', 'guidance', 'competency', 'figure', 'grade')}, 'response': body.get('response', ''),
+                    'task': {k: task.get(k) for k in ('prompt', 'kind', 'rubric', 'guidance', 'competency', 'figure', 'grade', 'answer', 'canvas')}, 'response': body.get('response', ''),
                     'mark': _mark_json(m, with_marker=True) if m else None,
                 })
         out.sort(key=lambda r: (r['mark'] is not None, r['at'] or ''))

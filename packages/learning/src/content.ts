@@ -11,7 +11,7 @@ import markedData from "../../../content/learning/written-modules.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
 import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
 import { canonicalOf, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
-import { MARKED_NOT, MARKED_RIGHT, outOf, writtenTask } from "./written";
+import { MARKED_NOT, MARKED_RIGHT, outOf, tasksFor, writtenTask } from "./written";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -68,6 +68,9 @@ export interface Module {
   probes: string[];
   /** The question family whose release pool supplies further questions of each phase (depth@1). */
   pool?: { family: string; version: string };
+  /** written@2: the part of the skill a computer cannot mark (a proof, construction, graph sketch or justification),
+   * offered once the skill is shown on your own; an educator marks it, and while it waits nothing else is held up. */
+  written?: string[];
 }
 export interface Fragment {
   id: string;
@@ -122,7 +125,15 @@ const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["
 export const authoredModules = [...(data.modules as unknown as Module[]), ...(markedData.modules as unknown as Module[])].map((m) => (authoredPools[m.competency] ? { ...m, pool: authoredPools[m.competency] } : m));
 export const synthesisedModules = libraryData.modules as unknown as (Module & { provenance: Record<string, unknown> })[];
 export const libraryVersion = libraryData.version;
-export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))];
+// written@2: a module answered automatically also offers the skill's written tasks (the part an educator marks); an
+// educator-marked module (no pool) already asks its tasks as its own questions
+const withWritten = (m: Module): Module => {
+  if (!m.pool) return m;
+  const own = new Set(Object.values({ d: m.diagnostics, p: m.practice, t: m.transfer, r: m.retention }).flat());
+  const w = tasksFor(m.competency).map((t) => t.id).filter((id) => !own.has(id));
+  return w.length ? { ...m, written: w } : m;
+};
+export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withWritten);
 /** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
 export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);
 export const questions = [...data.questions, ...markedData.questions] as unknown as Question[];

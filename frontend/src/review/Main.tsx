@@ -19,6 +19,7 @@ import { familiesOf, setActiveRegistry, type Registry, type ReviewEntry } from "
 import { familySpec, validateFamily, type ValidationReport } from "../../../packages/learning/src/spec";
 import { validateModule } from "../../../packages/learning/src/validate";
 import { AnswerInput } from "../year/Learn";
+import { isDrawing, SketchView } from "../year/SketchPad";
 import "../mathematics/chapter/chapter.css";
 import "../year/year.css";
 import "./review.css";
@@ -83,7 +84,7 @@ function App() {
 
 // ---------------------------------------------------------------- marking written answers (written@1)
 
-type QueueRow = { pupil: string; learner: string; attemptId: string; questionId: string; at: string; response: string; task: { prompt: string; kind: string; rubric: { id: string; criterion: string; points: number }[]; guidance: string; competency: string; figure?: { type: string } }; mark: null | { verdict: string; score: number; outOf: number; feedback: string; at: string; marker?: string } };
+type QueueRow = { pupil: string; learner: string; attemptId: string; questionId: string; at: string; response: string; task: { prompt: string; kind: string; rubric: { id: string; criterion: string; points: number }[]; guidance: string; competency: string; figure?: { type: string }; answer?: "text" | "drawing"; canvas?: { grid?: boolean; axes?: { x: [number, number]; y: [number, number]; step?: number } } }; mark: null | { verdict: string; score: number; outOf: number; feedback: string; at: string; marker?: string } };
 function Marking({ roles }: { roles: string[] }) {
   const [rows, setRows] = useState<QueueRow[] | null>(null);
   const [error, setError] = useState("");
@@ -115,7 +116,7 @@ function MarkOne({ r, onDone }: { r: QueueRow; onDone: () => void }) {
       <p className="eyebrow">{r.learner} · {graph.get(r.task.competency).name} · {r.task.kind}</p>
       <p className="prompt">{r.task.prompt}</p>
       {r.task.figure && <Figure v={r.task.figure} />}
-      <blockquote className="response">{r.response}</blockquote>
+      {isDrawing(r.response) ? <SketchView raw={r.response} canvas={r.task.canvas} /> : <blockquote className="response">{r.response}</blockquote>}
       <details><summary>Guidance for the marker</summary><p className="small">{r.task.guidance}</p></details>
       {r.mark ? (
         <p role="status"><b>Marked {r.mark.verdict} ({r.mark.score}/{r.mark.outOf})</b> by {r.mark.marker ?? "an educator"}: {r.mark.feedback}</p>

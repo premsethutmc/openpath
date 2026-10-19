@@ -5,6 +5,8 @@
  */
 import { useState } from "react";
 import { Figure } from "./Figure";
+import { SketchPad } from "./SketchPad";
+import { writtenTask } from "../../../packages/learning/src/written";
 import { needsMarking } from "../../../packages/learning/src/content";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
@@ -77,7 +79,7 @@ const ANSWER_LABEL: Record<string, string> = {
 };
 const ANSWER_EXAMPLE: Record<string, string> = { fraction: "e.g. 3/4", set: "e.g. 2, 5", exact: "e.g. 2√3", roots: "e.g. 2, −3", tuple: "e.g. (3, −2)", matrix: "e.g. [[1, 0], [0, 1]]", interval: "e.g. x > 3", ratio: "e.g. 3:4", expression: "e.g. 2x cos(x^2)", antiderivative: "e.g. x^3/3 + C", polynomial: "e.g. x^2 + 2x" };
 /** An answer box for any question type. */
-export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options">; value: string; setValue: (v: string) => void; disabled: boolean }) {
+export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
   if (q.type === "choice")
     return (
       <div className="options" role="radiogroup" aria-label="Choose one answer">
@@ -87,6 +89,14 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
             <span>{o}</span>
           </button>
         ))}
+      </div>
+    );
+  const task = q.type === "written" && q.id ? writtenTask(q.id) : null;
+  if (task?.answer === "drawing")
+    return (
+      <div className="field">
+        Your drawing (an educator will look at it and mark it)
+        <SketchPad value={value} onChange={setValue} canvas={task.canvas} disabled={disabled} />
       </div>
     );
   if (q.type === "written")

@@ -20,7 +20,8 @@ import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
-import type { WrittenMark } from "../../../packages/learning/src/written";
+import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
+import { isDrawing, SketchView } from "./SketchPad";
 import { flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
@@ -452,7 +453,7 @@ function WrittenWork({ records, learner }: { records: ReturnType<typeof learnerS
       <div className="section-title"><h2>Written work</h2></div>
       <p className="muted small">Proofs, constructions and explanations are read and marked by an educator, never by the computer. An answer counts only once it is marked correct.</p>
       {records.pending.map((p) => (
-        <div key={p.id} className="panel"><p className="eyebrow">Waiting for an educator · {graph.get(p.competency).name}</p><p className="small">{p.text.slice(0, 280)}{p.text.length > 280 ? "…" : ""}</p></div>
+        <div key={p.id} className="panel"><p className="eyebrow">Waiting for an educator · {graph.get(p.competency).name}</p>{isDrawing(p.text) ? <SketchView raw={p.text} canvas={writtenTask(p.questionId)?.canvas} /> : <p className="small">{p.text.slice(0, 280)}{p.text.length > 280 ? "…" : ""}</p>}</div>
       ))}
       {marked.map((a) => (
         <div key={a.id} className={`feedback ${a.written!.mark.verdict === "correct" ? "good" : "bad"}`} role="note">

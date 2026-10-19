@@ -129,12 +129,17 @@ export function compileRelease(r: CurriculumRelease): RequirementRow[] {
     // how the outcome is assessed: the inventory records it (boards@1 put it in the mapping's reason); otherwise the wording
     const why0 = outcome.mapping.why ?? "";
     const byPeople = /\(marked by an educator/.test(why0) || (!/\((partly )?marked/.test(why0) && NEEDS_PEOPLE.test(outcome.text));
-    const cls: RequirementClass = !comps.length ? "not-implemented" : checks.every((c) => CRITERIA.every((k) => c.met[k])) ? "validated" : checks.every((c) => c.complete) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
+    // written@2: an outcome with a part only an educator can mark (a proof, construction, sketch or justification) is
+    // complete only when a mapped competency offers a written task for it; the automatic part alone is partial
+    const peoplePart = /\((partly )?marked by an educator/.test(why0) || (!/\(marked automatically/.test(why0) && NEEDS_PEOPLE.test(outcome.text));
+    const peopleMissing = peoplePart && !checks.some((c) => c.writtenTasks > 0);
+    const done = (ok: boolean) => ok && !peopleMissing;
+    const cls: RequirementClass = !comps.length ? "not-implemented" : done(checks.every((c) => CRITERIA.every((k) => c.met[k]))) ? "validated" : done(checks.every((c) => c.complete)) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
     const why =
       cls === "not-implemented" && !comps.length ? "No competency is mapped to this outcome."
       : cls === "unsupported" ? "Needs written reasoning, a construction or a drawing, and no educator-marked tasks or teaching exist yet."
       : cls === "validated" ? "Complete, validated and educator-approved."
-      : `${checks.filter((c) => !c.complete).map((c) => `${c.name}: missing ${c.missing.filter((m) => m !== "review").join(", ") || "review"}`).join("; ") || "Awaiting educator review."}`;
+      : `${[...checks.filter((c) => !c.complete).map((c) => `${c.name}: missing ${c.missing.filter((m) => m !== "review").join(", ") || "review"}`), ...(peopleMissing ? ["the part an educator marks (proof, construction, sketch or justification) has no written task"] : [])].join("; ") || "Awaiting educator review."}`;
     return { release: `${r.id}@${r.version}`, board: r.source.board ?? "", grade: r.grade, domain: chapter.unit?.title ?? "", chapter: chapter.title, section: sections.at(-1)?.title ?? null, outcome: outcome.id, text: outcome.text, competencies: comps, class: cls, why };
   });
 }

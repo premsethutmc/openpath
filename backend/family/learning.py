@@ -30,7 +30,7 @@ RECORDS = {
 }
 BASE = {'kind', 'id', 'at', 'learnerId', 'sessionId', 'record'}
 # a written answer (proof, construction, explanation) may be long; an educator marks it
-WRITTEN_LIMIT = 4000
+WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; frontend/src/year/SketchPad.tsx)
 # the delayed check (status@1 RETENTION_DAYS), less the half-day tolerance the shared engine also allows
 # a delayed check: seven full days after independent success (status@1 RETENTION_DAYS; no tolerance on this surface)
 RETENTION_DELAY = timedelta(days=7)

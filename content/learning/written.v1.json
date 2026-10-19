@@ -101,7 +101,7 @@
    "competency": "MATH.geometry.constructions-bisectors",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Using only a ruler and compasses, construct the perpendicular bisector of a line segment AB that is 7 cm long. Say why the line you draw is perpendicular to AB and passes through its midpoint. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Using only a ruler and compasses, construct the perpendicular bisector of a line segment AB that is 7 cm long. Say why the line you draw is perpendicular to AB and passes through its midpoint. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "arcs",
@@ -119,17 +119,18 @@
      "points": 2
     }
    ],
-   "guidance": "If the learner uploads or describes a drawing, check that the radius is more than half of AB. A full reason refers to equal distances (or to congruent triangles).",
+   "guidance": "If the learner uploads or describes a drawing, check that the radius is more than half of AB. A full reason refers to equal distances (or to congruent triangles). Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:con:angbis",
    "competency": "MATH.geometry.constructions-bisectors",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Using only a ruler and compasses, bisect an angle of 70°. Explain why the two angles you make are equal. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Using only a ruler and compasses, bisect an angle of 70°. Explain why the two angles you make are equal. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "arc",
@@ -152,17 +153,18 @@
      "points": 1
     }
    ],
-   "guidance": "Accept any correct ruler-and-compass method. The reason must name congruent triangles or equal distances.",
+   "guidance": "Accept any correct ruler-and-compass method. The reason must name congruent triangles or equal distances. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:con:basic60",
    "competency": "MATH.geometry.basic-constructions",
    "kind": "construction",
    "grade": 6,
-   "prompt": "With a ruler and compasses only (no protractor), construct an angle of 60°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "With a ruler and compasses only (no protractor), construct an angle of 60°. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "ray",
@@ -180,17 +182,18 @@
      "points": 1
     }
    ],
-   "guidance": "The construction makes an equilateral triangle; an explanation is not required at Grade 6 but may be credited in feedback.",
+   "guidance": "The construction makes an equilateral triangle; an explanation is not required at Grade 6 but may be credited in feedback. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:con:scaled",
    "competency": "MATH.geometry.scaled-construction",
    "kind": "construction",
    "grade": 10,
-   "prompt": "Divide a line segment AB of length 8 cm in the ratio 3 : 2 using a ruler and compasses, and explain why the point you find divides AB in that ratio. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Divide a line segment AB of length 8 cm in the ratio 3 : 2 using a ruler and compasses, and explain why the point you find divides AB in that ratio. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "ray",
@@ -213,17 +216,18 @@
      "points": 1
     }
    ],
-   "guidance": "Equal steps must be marked with the compasses at a fixed radius.",
+   "guidance": "Equal steps must be marked with the compasses at a fixed radius. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:con:quad",
    "competency": "MATH.geometry.construction-quadrilaterals",
    "kind": "construction",
    "grade": 8,
-   "prompt": "Construct a quadrilateral PQRS with PQ = 5 cm, QR = 4 cm, RS = 6 cm, PS = 5.5 cm and diagonal PR = 7 cm. Say why these five measurements are enough. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a quadrilateral PQRS with PQ = 5 cm, QR = 4 cm, RS = 6 cm, PS = 5.5 cm and diagonal PR = 7 cm. Say why these five measurements are enough. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "tri1",
@@ -241,17 +245,18 @@
      "points": 1
     }
    ],
-   "guidance": "Two triangles sharing the diagonal; check the second triangle is on the opposite side of PR.",
+   "guidance": "Two triangles sharing the diagonal; check the second triangle is on the opposite side of PR. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:root:sqrt5",
    "competency": "MATH.number.root-length-construction",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Locate √5 on the number line using a ruler and compasses, and explain why the point you mark is √5 units from 0. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Locate √5 on the number line using a ruler and compasses, and explain why the point you mark is √5 units from 0. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "triangle",
@@ -269,10 +274,11 @@
      "points": 1
     }
    ],
-   "guidance": "Any right triangle with legs whose squares sum to 5 is fine.",
+   "guidance": "Any right triangle with legs whose squares sum to 5 is fine. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:ind:sum",
@@ -373,7 +379,7 @@
    "competency": "MATH.geometry.basic-constructions",
    "kind": "construction",
    "grade": 6,
-   "prompt": "Draw a line l and mark a point P that is 4 cm away from it. Using a ruler and compasses, construct the line through P that is parallel to l, and say how you know the two lines are parallel. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Draw a line l and mark a point P that is 4 cm away from it. Using a ruler and compasses, construct the line through P that is parallel to l, and say how you know the two lines are parallel. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "perp",
@@ -391,17 +397,18 @@
      "points": 1
     }
    ],
-   "guidance": "Any correct ruler-and-compass method is fine (e.g. copying an angle to make equal corresponding angles). The reason must connect the steps to parallel lines (two lines perpendicular to the same line, or equal corresponding/alternate angles).",
+   "guidance": "Any correct ruler-and-compass method is fine (e.g. copying an angle to make equal corresponding angles). The reason must connect the steps to parallel lines (two lines perpendicular to the same line, or equal corresponding/alternate angles). Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:bas:altitude",
    "competency": "MATH.geometry.basic-constructions",
    "kind": "construction",
    "grade": 7,
-   "prompt": "Draw a triangle ABC in which the angle at B is acute and BC is the longest side. Construct the altitude from A to BC (the line from A that meets BC at a right angle). Say why your line meets BC at a right angle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Draw a triangle ABC in which the angle at B is acute and BC is the longest side. Construct the altitude from A to BC (the line from A that meets BC at a right angle). Say why your line meets BC at a right angle. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "arc",
@@ -424,17 +431,18 @@
      "points": 1
     }
    ],
-   "guidance": "This is the perpendicular from a point to a line, used in a triangle. Credit 'extend BC if needed'. The reason may be given as equal distances from X and Y.",
+   "guidance": "This is the perpendicular from a point to a line, used in a triangle. Credit 'extend BC if needed'. The reason may be given as equal distances from X and Y. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:bas:rectangle",
    "competency": "MATH.geometry.basic-constructions",
    "kind": "construction",
    "grade": 6,
-   "prompt": "Construct a rectangle ABCD with AB = 7 cm and BC = 3.5 cm, using a ruler and compasses (no protractor or set square). Say how you know each corner is a right angle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a rectangle ABCD with AB = 7 cm and BC = 3.5 cm, using a ruler and compasses (no protractor or set square). Say how you know each corner is a right angle. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -457,17 +465,18 @@
      "points": 1
     }
    ],
-   "guidance": "At Grade 6, 'I constructed the right angles at A and B and made AD = BC = 3.5 cm' is a full reason. A shape with the right side lengths but no constructed right angle is not yet a rectangle.",
+   "guidance": "At Grade 6, 'I constructed the right angles at A and B and made AD = BC = 3.5 cm' is a full reason. A shape with the right side lengths but no constructed right angle is not yet a rectangle. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:tri:sss",
    "competency": "MATH.geometry.construction-triangles",
    "kind": "construction",
    "grade": 7,
-   "prompt": "Construct triangle LMN with LM = 7 cm, MN = 6 cm and LN = 5 cm. First check that a triangle with these sides exists, then construct it, and explain why the point N you find is the right one. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct triangle LMN with LM = 7 cm, MN = 6 cm and LN = 5 cm. First check that a triangle with these sides exists, then construct it, and explain why the point N you find is the right one. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "ineq",
@@ -490,17 +499,18 @@
      "points": 1
     }
    ],
-   "guidance": "Any side may be the base, as long as the arcs use the matching radii from the matching ends. The check may be written as 'the two shorter sides add to more than the longest'.",
+   "guidance": "Any side may be the base, as long as the arcs use the matching radii from the matching ends. The check may be written as 'the two shorter sides add to more than the longest'. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:tri:sas",
    "competency": "MATH.geometry.construction-triangles",
    "kind": "construction",
    "grade": 7,
-   "prompt": "Construct triangle ABC with AB = 6 cm, angle A = 60° and AC = 4.5 cm. (You may make the 60° angle with compasses, or with a protractor if you have one.) Say why these three measurements fix exactly one triangle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct triangle ABC with AB = 6 cm, angle A = 60° and AC = 4.5 cm. (You may make the 60° angle with compasses, or with a protractor if you have one.) Say why these three measurements fix exactly one triangle. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -523,17 +533,18 @@
      "points": 1
     }
    ],
-   "guidance": "The angle must be at A, between AB and AC. Credit either way of making 60°. 'Only one place for C' or 'SAS fixes the triangle' are both full reasons.",
+   "guidance": "The angle must be at A, between AB and AC. Credit either way of making 60°. 'Only one place for C' or 'SAS fixes the triangle' are both full reasons. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:tri:asa",
    "competency": "MATH.geometry.construction-triangles",
    "kind": "construction",
    "grade": 7,
-   "prompt": "Construct triangle PQR with PQ = 6.5 cm, angle P = 40° and angle Q = 110° (a protractor may be used for the angles). Then explain why there is NO triangle with PQ = 6.5 cm, angle P = 80° and angle Q = 110°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct triangle PQR with PQ = 6.5 cm, angle P = 40° and angle Q = 110° (a protractor may be used for the angles). Then explain why there is NO triangle with PQ = 6.5 cm, angle P = 80° and angle Q = 110°. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -556,17 +567,18 @@
      "points": 1
     }
    ],
-   "guidance": "The two angles must be drawn on the same side of PQ. For the second part, 'the arms would only meet if the two angles added to less than 180°' is a full reason.",
+   "guidance": "The two angles must be drawn on the same side of PQ. For the second part, 'the arms would only meet if the two angles added to less than 180°' is a full reason. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:tri:rhs",
    "competency": "MATH.geometry.construction-triangles",
    "kind": "construction",
    "grade": 7,
-   "prompt": "Construct a right-angled triangle XYZ with the right angle at Y, XY = 6 cm and hypotenuse XZ = 10 cm, using a ruler and compasses. Explain each step. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a right-angled triangle XYZ with the right angle at Y, XY = 6 cm and hypotenuse XZ = 10 cm, using a ruler and compasses. Explain each step. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -589,10 +601,11 @@
      "points": 1
     }
    ],
-   "guidance": "The arc must be centred at X (the other end of the hypotenuse), not at Y. The learner may note YZ = 8 cm by Pythagoras; credit it in feedback.",
+   "guidance": "The arc must be centred at X (the other end of the hypotenuse), not at Y. The learner may note YZ = 8 cm by Pythagoras; credit it in feedback. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:prf:odd-product",
@@ -858,7 +871,7 @@
    "competency": "MATH.geometry.constructions-bisectors",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Using only a ruler and compasses, construct an angle of 135° at a point O on a line. Explain why your angle is 135°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Using only a ruler and compasses, construct an angle of 135° at a point O on a line. Explain why your angle is 135°. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "perp",
@@ -881,17 +894,18 @@
      "points": 1
     }
    ],
-   "guidance": "Accept other correct routes, e.g. 120° + half of the 30° between 120° and 150°, if correctly justified. Check the learner names which angle is 135°.",
+   "guidance": "Accept other correct routes, e.g. 120° + half of the 30° between 120° and 150°, if correctly justified. Check the learner names which angle is 135°. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:bis:circumcircle",
    "competency": "MATH.geometry.constructions-bisectors",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Draw any triangle ABC whose angles are all less than 90°. Using a ruler and compasses, construct the circle that passes through A, B and C. Explain why it passes through all three corners. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Draw any triangle ABC whose angles are all less than 90°. Using a ruler and compasses, construct the circle that passes through A, B and C. Explain why it passes through all three corners. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "bis1",
@@ -914,17 +928,18 @@
      "points": 2
     }
    ],
-   "guidance": "Two perpendicular bisectors are enough; the third may be drawn as a check. Credit 'equidistant from the endpoints' as the reason for each bisector.",
+   "guidance": "Two perpendicular bisectors are enough; the third may be drawn as a check. Credit 'equidistant from the endpoints' as the reason for each bisector. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:scl:smaller",
    "competency": "MATH.geometry.scaled-construction",
    "kind": "construction",
    "grade": 10,
-   "prompt": "Construct a triangle ABC with BC = 6 cm, CA = 5 cm and AB = 4 cm. Then construct a triangle similar to it whose sides are 2/3 of the corresponding sides of ABC, and explain why the new triangle is similar with scale factor 2/3. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a triangle ABC with BC = 6 cm, CA = 5 cm and AB = 4 cm. Then construct a triangle similar to it whose sides are 2/3 of the corresponding sides of ABC, and explain why the new triangle is similar with scale factor 2/3. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "tri",
@@ -952,17 +967,18 @@
      "points": 1
     }
    ],
-   "guidance": "The parallels may be drawn by copying an angle with the compasses. The number of steps must be 3 (the larger of 2 and 3) and the join must be from B₃.",
+   "guidance": "The parallels may be drawn by copying an angle with the compasses. The number of steps must be 3 (the larger of 2 and 3) and the join must be from B₃. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:scl:larger",
    "competency": "MATH.geometry.scaled-construction",
    "kind": "construction",
    "grade": 10,
-   "prompt": "Construct any triangle PQR with QR = 5 cm. Then construct a triangle similar to PQR with scale factor 4/3 (each side 4/3 of the corresponding side of PQR). Explain why it has that scale factor. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct any triangle PQR with QR = 5 cm. Then construct a triangle similar to PQR with scale factor 4/3 (each side 4/3 of the corresponding side of PQR). Explain why it has that scale factor. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "ray",
@@ -990,10 +1006,11 @@
      "points": 1
     }
    ],
-   "guidance": "The most common error is joining Q₄R and drawing the parallel through Q₃, which gives 3/4. QR and QP must be extended beyond R and P.",
+   "guidance": "The most common error is joining Q₄R and drawing the parallel through Q₃, which gives 3/4. QR and QP must be extended beyond R and P. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:scl:why-bpt",
@@ -1033,7 +1050,7 @@
    "competency": "MATH.geometry.construction-quadrilaterals",
    "kind": "construction",
    "grade": 8,
-   "prompt": "Construct a trapezium ABCD with AB ∥ DC, AB = 7 cm, BC = 5 cm, ∠B = 60° and DC = 4 cm. Explain how you make DC parallel to AB. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a trapezium ABCD with AB ∥ DC, AB = 7 cm, BC = 5 cm, ∠B = 60° and DC = 4 cm. Explain how you make DC parallel to AB. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -1056,17 +1073,18 @@
      "points": 1
     }
    ],
-   "guidance": "The point D must be marked in the direction of A. Any correct way of drawing the parallel through C is acceptable if it is explained.",
+   "guidance": "The point D must be marked in the direction of A. Any correct way of drawing the parallel through C is acceptable if it is explained. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:quad:angles",
    "competency": "MATH.geometry.construction-quadrilaterals",
    "kind": "construction",
    "grade": 8,
-   "prompt": "Construct a quadrilateral ABCD with AB = 5.5 cm, BC = 4 cm, ∠A = 75°, ∠B = 100° and ∠C = 120° (a protractor may be used for the angles). Describe your steps, and say what ∠D will measure and why. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a quadrilateral ABCD with AB = 5.5 cm, BC = 4 cm, ∠A = 75°, ∠B = 100° and ∠C = 120° (a protractor may be used for the angles). Describe your steps, and say what ∠D will measure and why. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "base",
@@ -1089,17 +1107,18 @@
      "points": 1
     }
    ],
-   "guidance": "Check that the angle at C is measured inside the quadrilateral (from CB). The value of ∠D can be checked by measurement but must be justified by the angle sum.",
+   "guidance": "Check that the angle at C is measured inside the quadrilateral (from CB). The value of ∠D can be checked by measurement but must be justified by the angle sum. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:quad:rhombus",
    "competency": "MATH.geometry.construction-quadrilaterals",
    "kind": "construction",
    "grade": 8,
-   "prompt": "Construct a rhombus whose diagonals are 8 cm and 6 cm. Explain why your construction gives a rhombus, and find the length of its side. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Construct a rhombus whose diagonals are 8 cm and 6 cm. Explain why your construction gives a rhombus, and find the length of its side. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "diag",
@@ -1122,10 +1141,11 @@
      "points": 1
     }
    ],
-   "guidance": "Learners may use the property 'diagonals of a rhombus bisect each other at right angles' or the equal-distance property; both are full reasons.",
+   "guidance": "Learners may use the property 'diagonals of a rhombus bisect each other at right angles' or the equal-distance property; both are full reasons. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:irr:sqrt5",
@@ -1198,7 +1218,7 @@
    "competency": "MATH.number.root-length-construction",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Describe how to draw the first three triangles of the square-root spiral, starting from a segment OA₁ of 1 unit, and explain why OA₂ = √2, OA₃ = √3 and OA₄ = √4 = 2. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Describe how to draw the first three triangles of the square-root spiral, starting from a segment OA₁ of 1 unit, and explain why OA₂ = √2, OA₃ = √3 and OA₄ = √4 = 2. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "start",
@@ -1221,17 +1241,18 @@
      "points": 1
     }
    ],
-   "guidance": "Each unit segment must be perpendicular to the previous hypotenuse (not to OA₁). The perpendiculars may be constructed or drawn with a set square.",
+   "guidance": "Each unit segment must be perpendicular to the previous hypotenuse (not to OA₁). The perpendiculars may be constructed or drawn with a set square. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:root:semicircle",
    "competency": "MATH.number.root-length-construction",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Describe how to construct a segment of length √3.5 using a ruler and compasses, by drawing AB = 3.5 units and BC = 1 unit on a straight line, a semicircle on AC, and a perpendicular at B. Explain why the perpendicular from B to the semicircle has length √3.5. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Describe how to construct a segment of length √3.5 using a ruler and compasses, by drawing AB = 3.5 units and BC = 1 unit on a straight line, a semicircle on AC, and a perpendicular at B. Explain why the perpendicular from B to the semicircle has length √3.5. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "line",
@@ -1254,17 +1275,18 @@
      "points": 2
     }
    ],
-   "guidance": "Accept the general argument: OD = (x + 1)/2, OB = (x − 1)/2, so BD² = x. The last step may be done with x = 3.5 or in general.",
+   "guidance": "Accept the general argument: OD = (x + 1)/2, OB = (x − 1)/2, so BD² = x. The last step may be done with x = 3.5 or in general. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:root:sqrt13",
    "competency": "MATH.number.root-length-construction",
    "kind": "construction",
    "grade": 9,
-   "prompt": "Locate √13 on the number line using a ruler and compasses, and explain why the point you mark is √13 from 0. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "prompt": "Locate √13 on the number line using a ruler and compasses, and explain why the point you mark is √13 from 0. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
    "rubric": [
     {
      "id": "legs",
@@ -1287,10 +1309,11 @@
      "points": 1
     }
    ],
-   "guidance": "Any correct route is fine, e.g. legs √12 and 1 from an earlier construction. The arc must be centred at 0.",
+   "guidance": "Any correct route is fine, e.g. legs √12 and 1 from an earlier construction. The arc must be centred at 0. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:ind:odd",
@@ -1554,7 +1577,8 @@
    "guidance": "There is no drawing tool, so mark the description. For a pie chart the angles are 70/700 × 360 = 36°, 144°, 108°, 72°.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "answer": "drawing"
   },
   {
    "id": "wr:disp:infographic",
