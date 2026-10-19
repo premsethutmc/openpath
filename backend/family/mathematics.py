@@ -14,7 +14,10 @@ from .models import PupilEvent
 PROGRAM_FILES = {
     'equivalent-fractions': 'content/mathematics/programs/equivalent-fractions.v2.json',
     'jee-quadratics': 'content/mathematics/programs/jee-quadratics.v1.json',
+    'completing-the-square': 'content/mathematics/programs/completing-the-square.v1.json',
 }
+# An integer or a fraction n/d (the reference unit's "fraction" and "values" answers).
+RATIONAL = '[+-]?\\d{1,6}(?:/[+-]?\\d{1,6})?'
 # The fractions program's retention rule, as before; other programs say theirs in the file.
 FRACTIONS_RETENTION = {'retentionAfter': 'transfer', 'retentionStage': 'retention'}
 
@@ -46,7 +49,8 @@ def checked_activity(event, pupil):
     duration = event.get('elapsedMs')
     if type(duration) not in (int, float) or not 0 <= duration <= 3600000:
         raise ValidationError({'event': 'Invalid duration.'})
-    if event['action'] in {'draft', 'hint', 'solution', 'answer'} and event.get('questionId') not in stage['questions']:
+    # a stage's main questions, or its extra practice (offered after a wrong answer; never needed to finish the stage)
+    if event['action'] in {'draft', 'hint', 'solution', 'answer'} and event.get('questionId') not in stage['questions'] + stage.get('support', []):
         raise ValidationError({'event': 'Question is not part of this stage.'})
     if event['action'] in {'answer', 'draft'} and (not isinstance(event.get('response'), str) or len(event['response']) > 80):
         raise ValidationError({'event': 'Use an answer of at most 80 characters.'})
@@ -57,6 +61,13 @@ def checked_activity(event, pupil):
     elif event['action'] == 'answer' and kind == 'integer':
         if not re.fullmatch('[+-]?\\d{1,9}', event['response'].strip().replace('−', '-'), flags=re.ASCII):
             raise ValidationError({'event': 'Enter a whole number (an integer).'})
+    elif event['action'] == 'answer' and kind in {'fraction', 'values'}:
+        q = next(x for x in spec['questions'] if x['id'] == event['questionId'])
+        parts = event['response'].strip().replace('−', '-').replace(' ', '').split(',')
+        if len(parts) != (1 if kind == 'fraction' else len(q.get('fields', []))) or not all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts):
+            raise ValidationError({'event': 'Enter each answer as a whole number or a fraction such as -5/2.'})
+        if any(p.split('/')[1].lstrip('+-').strip('0') == '' for p in parts if '/' in p):
+            raise ValidationError({'event': 'Use a fraction with a nonzero denominator.'})
     elif event['action'] == 'answer':
         if not re.fullmatch('[+-]?\\d+(?:\\.\\d+)?(?:/[+-]?\\d+)?', event['response'].strip().replace('−', '-'), flags=re.ASCII):
             raise ValidationError({'event': 'Use a number, decimal or fraction.'})

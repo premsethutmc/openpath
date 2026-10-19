@@ -6,6 +6,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../../english/logic/account";
 import { chapter, type ChapterActivity, type ChapterAction, canComplete, LETTERS, percent, question, replay, stageOf, timedScore, timeLeft } from "../../../../packages/mathematics/src/chapter";
+import { unit, replay as unitReplay, type UnitActivity, type UnitAction } from "../../../../packages/mathematics/src/unit";
+import { UnitView } from "../unit/Unit";
 import "./chapter.css";
 
 const api = new Api();
@@ -29,7 +31,9 @@ const UNITS = [
   "Trigonometry",
 ];
 
-type Screen = { name: "goal" } | { name: "chapters" } | { name: "chapter" };
+type Screen = { name: "goal" } | { name: "chapters" } | { name: "chapter" } | { name: "unit" };
+/** Any of the mathematics home's activity records (the chapter's and the reference unit's), in the one mathematics record. */
+type MathEvent = ChapterActivity | UnitActivity;
 
 class Repo {
   private queue: Promise<unknown> = Promise.resolve();
@@ -39,11 +43,11 @@ class Repo {
     this.learner = learner;
   }
   async load() {
-    const r = await api.request<{ count: number; events: ChapterActivity[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
+    const r = await api.request<{ count: number; events: MathEvent[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
     this.count = r.count;
     return r.events;
   }
-  append(event: ChapterActivity) {
+  append(event: MathEvent) {
     const work = this.queue.then(async () => {
       const r = await api.request<{ count: number }>("POST", `/pupils/${this.learner}/events/`, { subject: "mathematics", seq: this.count, event });
       this.count = r.count;
@@ -60,7 +64,7 @@ function App() {
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [screen, setScreen] = useState<Screen>({ name: "goal" });
-  const [events, setEvents] = useState<ChapterActivity[]>([]);
+  const [events, setEvents] = useState<MathEvent[]>([]);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
@@ -92,17 +96,20 @@ function App() {
   }, [screen]);
 
   const { state } = useMemo(() => replay(learner || "none", events, new Date(now).toISOString()), [learner, events, Math.floor(now / 30000)]);
+  const unitState = useMemo(() => unitReplay(learner || "none", events, new Date(now).toISOString()).state, [learner, events, Math.floor(now / 30000)]);
   const visit = useRef(uid());
   const opened = useRef(Date.now());
 
-  async function send(action: ChapterAction, stage: string, extra: Partial<ChapterActivity> = {}) {
+  const send = (action: ChapterAction, stage: string, extra: Partial<ChapterActivity> = {}) => record({ program: "jee-quadratics", lessonVersion: chapter.version }, action, stage, extra);
+  const sendUnit = (action: UnitAction, stage: string, extra: Partial<UnitActivity> = {}) => record({ program: unit.id, lessonVersion: unit.version }, action, stage, extra);
+  async function record(meta: { program: string; lessonVersion: string }, action: ChapterAction | UnitAction, stage: string, extra: Partial<MathEvent> = {}) {
     if (!repo) return;
     setSaving(true);
     setError("");
     try {
       const elapsed = Math.min(Date.now() - opened.current, 3_600_000);
       opened.current = Date.now();
-      const next = await repo.append({ kind: "math_activity", program: "jee-quadratics", id: uid(), at: new Date().toISOString(), learnerId: learner, sessionId: `math:${learner}:${visit.current}`, journey: "jee-main", lessonVersion: chapter.version, action, stage, elapsedMs: action === "answer" || action === "complete" ? elapsed : 0, ...extra });
+      const next = await repo.append({ kind: "math_activity", id: uid(), at: new Date().toISOString(), learnerId: learner, sessionId: `math:${learner}:${visit.current}`, journey: "jee-main", action, stage, elapsedMs: action === "answer" || action === "complete" ? elapsed : 0, ...extra, ...meta } as MathEvent);
       setEvents(next);
       return true;
     } catch (e) {
@@ -165,16 +172,24 @@ function App() {
     return (
       <Shell error={error} top={<TopBar left={<button className="link" onClick={() => setScreen({ name: "goal" })}>← Goals</button>} title="JEE Main · Mathematics" />}>
         <h1>Chapters</h1>
-        <p className="muted">The 14 units of the official JEE Main 2026 mathematics syllabus. One chapter is ready to try.</p>
+        <p className="muted">The 14 units of the official JEE Main 2026 mathematics syllabus. Unit 2 is ready to try.</p>
         <div className="cards">
           {UNITS.map((u, i) =>
             i === 1 ? (
-              <button key={u} className="card accent" onClick={() => setScreen({ name: "chapter" })}>
-                <span className="tag">{state.completed.length ? `${percent(state)}% done` : "Start the class"}</span>
-                <span className="card-title">Unit 2 · Quadratic Equations</span>
-                <span className="card-sub">8 lessons from the basics, a worked example, practice, a timed section and revision</span>
-                <span className="bar"><span style={{ width: `${percent(state)}%` }} /></span>
-              </button>
+              <React.Fragment key={u}>
+                <button className="card accent" onClick={() => setScreen({ name: "chapter" })}>
+                  <span className="tag">{state.completed.length ? `${percent(state)}% done` : "Start the class"}</span>
+                  <span className="card-title">Unit 2 · Quadratic Equations</span>
+                  <span className="card-sub">8 lessons from the basics, a worked example, practice, a timed section and revision</span>
+                  <span className="bar"><span style={{ width: `${percent(state)}%` }} /></span>
+                </button>
+                <button className="card accent" onClick={() => setScreen({ name: "unit" })}>
+                  <span className="tag">{unitState.completed.length ? `${Math.round((100 * unitState.completed.length) / unit.stages.length)}% done` : "New · taught in depth"}</span>
+                  <span className="card-title">Unit 2 · Completing the square</span>
+                  <span className="card-sub">From expanding brackets to the quadratic formula: see why it works, then practise, apply it and come back a week later</span>
+                  <span className="bar"><span style={{ width: `${Math.round((100 * unitState.completed.length) / unit.stages.length)}%` }} /></span>
+                </button>
+              </React.Fragment>
             ) : (
               <div key={u} className="card disabled" aria-disabled="true">
                 <span className="tag soon">Coming soon</span>
@@ -186,6 +201,7 @@ function App() {
       </Shell>
     );
 
+  if (screen.name === "unit") return <UnitView learnerId={learner} events={events} now={now} saving={saving} error={error} send={sendUnit} onBack={() => setScreen({ name: "chapters" })} />;
   return <Chapter state={state} now={now} saving={saving} error={error} send={send} onBack={() => setScreen({ name: "chapters" })} />;
 }
 

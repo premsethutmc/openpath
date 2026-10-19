@@ -182,3 +182,63 @@ class JeeChapterTests(FamilyTestCase):
         self.assertEqual(self.save(self.activity('open')).status_code, 201, 'the chapter starts at its own first step')
         self.assertEqual(self.save(self.activity(program='unknown')).status_code, 400)
         self.assertEqual(len(self.record()), 2)
+
+
+class CompletingSquareUnitTests(FamilyTestCase):
+    """The Completing the square reference unit: its own fixed program, new answer formats and extra practice."""
+
+    def setUp(self):
+        super().setUp()
+        self.client = self.parent()
+        self.pupil_id = str(self.pupil(self.client, 'Synthetic unit learner'))
+        self.seq = 0
+        self.serial = 0
+        self.spec = program('completing-the-square')
+
+    def activity(self, action='complete', stage='prereq', **extra):
+        self.serial += 1
+        return {'kind': 'math_activity', 'program': 'completing-the-square', 'id': f'cts-{self.serial}', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'math:{self.pupil_id}:cts-visit', 'journey': 'jee-main', 'lessonVersion': self.spec['version'], 'action': action, 'stage': stage, 'elapsedMs': 20, **extra}
+
+    save = MathematicsAccountTests.save
+    record = MathematicsAccountTests.record
+
+    def stage(self, stage_id):
+        return next(s for s in self.spec['stages'] if s['id'] == stage_id)
+
+    def answer_all(self, stage_id):
+        for qid in self.stage(stage_id)['questions']:
+            q = next(x for x in self.spec['questions'] if x['id'] == qid)
+            self.assertEqual(self.save(self.activity('answer', stage_id, questionId=qid, response=q['answer'])).status_code, 201, qid)
+
+    def test_formats_extra_practice_order_and_revision(self):
+        self.assertEqual(self.save(self.activity(stage='picture')).status_code, 400, 'steps in order')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1')).status_code, 400, 'two values for two fields')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1,x')).status_code, 400, 'numbers only')
+        self.assertEqual(self.save(self.activity('answer', 'picture', questionId='e4', response='25/0')).status_code, 400, 'a nonzero denominator')
+        self.assertEqual(self.save(self.activity('answer', 'picture', questionId='e4', response='2.5')).status_code, 400, 'a fraction, not a decimal')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='es1', response='36')).status_code, 400, "another step's extra practice")
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1, −9')).status_code, 201, 'either order, the minus sign accepted')
+        self.assertEqual(self.save(self.activity('complete', 'prereq')).status_code, 400, 'each prediction and check first')
+        self.answer_all('prereq')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='ds1', response='49')).status_code, 201, "the step's own extra practice")
+        self.assertEqual(self.save(self.activity('complete', 'prereq')).status_code, 201, 'extra practice is never needed to finish')
+        for stage_id in ['picture', 'worked', 'formula', 'guided', 'independent', 'apply']:
+            self.answer_all(stage_id)
+            self.assertEqual(self.save(self.activity('complete', stage_id)).status_code, 201, stage_id)
+        self.answer_all('transfer')
+        now = timezone.now()
+        with mock.patch('family.mathematics.timezone.now', return_value=now):
+            self.assertEqual(self.save(self.activity('complete', 'transfer')).status_code, 201)
+            due = timezone.datetime.fromisoformat(self.record()[-1]['retentionDueAt'])
+            self.assertEqual(due, now + timedelta(days=7))
+            self.assertEqual(self.save(self.activity('answer', 'retention', questionId='r1', response='4,8')).status_code, 400, 'not before a week')
+        with mock.patch('family.mathematics.timezone.now', return_value=now + timedelta(days=7, seconds=1)):
+            self.answer_all('retention')
+            self.assertEqual(self.save(self.activity('complete', 'retention')).status_code, 201)
+
+    def test_the_unit_and_the_chapter_keep_their_own_sequences(self):
+        chapter = {'kind': 'math_activity', 'program': 'jee-quadratics', 'id': 'jee-1', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'math:{self.pupil_id}:jee', 'journey': 'jee-main', 'lessonVersion': program('jee-quadratics')['version'], 'action': 'open', 'stage': 'class', 'elapsedMs': 1}
+        self.assertEqual(self.save(chapter).status_code, 201)
+        self.assertEqual(self.save(self.activity('open')).status_code, 201, 'the unit starts at its own first step')
+        self.assertEqual(self.save(self.activity('open', journey='school')).status_code, 400, 'the unit belongs to the JEE Main track')
+        self.assertEqual(len(self.record()), 2)
