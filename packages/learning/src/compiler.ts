@@ -38,7 +38,8 @@ import { DEPTH_POLICY, modulePhasePool, moduleQuestions, poolDepth } from "./lib
 import { familiesOf, familyReviewOf, reviewOf } from "./review";
 import { validateFamily } from "./spec";
 import { validateModule } from "./validate";
-import { tasksFor } from "./written";
+import { tasksFor, writtenTasks } from "./written";
+import oamData from "../../../content/learning/outcome-assessment.v1.json";
 import expansion from "../../../content/learning/competency-expansion.v1.json";
 
 export const COMPILER_POLICY = "compiler@1";
@@ -59,6 +60,25 @@ export interface CompetencyCheck {
   complete: boolean;
 }
 
+/** oam@1: for each curriculum outcome, what really assesses it (an AI judgement from the content itself, provisional
+ * until an educator reviews it; content/learning/outcome-assessment.v1.json). An outcome is complete only where it says
+ * "full"; an outcome it has not judged is never claimed. */
+type Assessed = { outcome: string; verdict: "full" | "partial" | "none"; families: string[]; written: string[]; authored: boolean; missing: string; grade: "fit" | "below" | "above" };
+const assessedBy = new Map((oamData as { outcomes: Assessed[] }).outcomes.map((o) => [o.outcome, o]));
+export const outcomeAssessment = (id: string) => assessedBy.get(id) ?? null;
+/** A competency on a cycle of followed prerequisites (A needs B needs … A): the order cannot be honoured. */
+function onCycle(id: string): boolean {
+  const seen = new Set<string>();
+  const stack = [...graph.supportsOf(id)];
+  while (stack.length) {
+    const x = stack.pop()!;
+    if (x === id) return true;
+    if (seen.has(x)) continue;
+    seen.add(x);
+    stack.push(...graph.supportsOf(x));
+  }
+  return false;
+}
 const disputedInto = new Set((expansion as { disputed: { target: string }[] }).disputed.map((d) => d.target));
 const validation = new Map<string, boolean>();
 const familyOk = (f: string) => {
@@ -87,13 +107,13 @@ export function checkCompetency(id: string): CompetencyCheck {
   const listed = m ? Object.values(moduleQuestions(m)).flat() : [];
   const met: Record<Criterion, boolean> = {
     graph: !!c.name && !!c.strand && c.gradeRange[0] >= 1 && c.gradeRange[1] <= 12,
-    relations: !disputedInto.has(id),
+    relations: !disputedInto.has(id) && !onCycle(id),
     diagnostic: educator ? (m ? m.diagnostics.length >= 1 : false) : diag.length >= 3,
     misconception: educator ? written.every((t) => t.rubric.length >= 2) : diag.length > 0 && predicts / diag.length >= 0.5,
     strategy: !!m && m.strategies.length > 0,
     worked: !!m && [...m.chapter, ...m.strategies.flatMap((s) => s.screens)].some((s) => (s.math ?? []).length > 0),
     guided: !!m && m.strategies.every((s) => !!s.guided),
-    independent: educator ? !!m && m.transfer.some((x) => question(x).type === "written") && written.length >= 2 : !!m && m.transfer.length > 0 && new Set(alone.map((x) => `${question(x).type}${x.endsWith(":w") ? "-situation" : ""}`)).size >= 2,
+    independent: educator ? !!m && m.transfer.some((x) => question(x).type === "written") && written.length >= 2 : !!m && m.transfer.some((x) => !x.startsWith("gen:") || x.endsWith(":w")) && new Set(alone.map((x) => `${question(x).type}${x.endsWith(":w") ? "-situation" : ""}`)).size >= 2,
     retention: educator ? !!m && m.retention.length >= RETENTION_CHECK && written.length >= 3 : !!m && m.retention.length >= RETENTION_CHECK && (!pool || modulePhasePool(m!, "retention").length >= DEPTH_POLICY.minimum.retention),
     variants: educator ? written.length >= 3 && listed.filter((x) => question(x).type === "written").length >= 2 : !!depth?.sufficient,
     validation: !!m && validateModule(m).length === 0 && fams.every(familyOk),
@@ -123,7 +143,8 @@ const NEEDS_PEOPLE = /\b(prove|proof|construct|draw|sketch|justify|explain|desig
 /** Every requirement of a release, classified. */
 export function compileRelease(r: CurriculumRelease): RequirementRow[] {
   return allOutcomesOf(r).map(({ outcome, chapter, sections }) => {
-    const comps = outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => m.id);
+    // a micro-skill is assessed through its competency (MLY.mult.facts-6-9 → multiplication facts)
+    const comps = [...new Set(outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id)))];
     const checks = comps.map(checkCompetency);
     const anything = checks.some((c) => c.met.strategy || c.met.diagnostic || c.families.length > 0 || c.writtenTasks > 0);
     // how the outcome is assessed: the inventory records it (boards@1 put it in the mapping's reason); otherwise the wording
@@ -132,14 +153,20 @@ export function compileRelease(r: CurriculumRelease): RequirementRow[] {
     // written@2: an outcome with a part only an educator can mark (a proof, construction, sketch or justification) is
     // complete only when a mapped competency offers a written task for it; the automatic part alone is partial
     const peoplePart = /\((partly )?marked by an educator/.test(why0) || (!/\(marked automatically/.test(why0) && NEEDS_PEOPLE.test(outcome.text));
-    const peopleMissing = peoplePart && !checks.some((c) => c.writtenTasks > 0);
-    const done = (ok: boolean) => ok && !peopleMissing;
-    const cls: RequirementClass = !comps.length ? "not-implemented" : done(checks.every((c) => CRITERIA.every((k) => c.met[k]))) ? "validated" : done(checks.every((c) => c.complete)) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
+    // … and the written task must be written for THIS outcome (its "serves"), not merely exist for the competency
+    const peopleMissing = peoplePart && !writtenTasks.some((t) => (t.serves ?? []).includes(outcome.id) && comps.includes(graph.evidenceTarget(t.competency)));
+    // the level: the outcome's grade within a grade of a mapped competency's range
+    const gradeOff = comps.length > 0 && !checks.some((c) => c.grades[0] - 1 <= r.grade && r.grade <= c.grades[1] + 1);
+    // oam@1: what the content really assesses (every part of the statement, at its level)
+    const oa = outcomeAssessment(outcome.id);
+    const notAssessed = !oa ? "not yet judged against the content (outcome-assessment map)" : oa.verdict !== "full" ? `not every part is assessed: ${oa.missing || oa.verdict}` : oa.grade !== "fit" ? `assessed ${oa.grade} the outcome's level` : "";
+    const done = (ok: boolean) => ok && !peopleMissing && !gradeOff && !notAssessed;
+    const cls: RequirementClass = !comps.length || (oa?.verdict === "none" && !anything) ? "not-implemented" : oa?.verdict === "none" ? (byPeople ? "unsupported" : "not-implemented") : done(checks.every((c) => CRITERIA.every((k) => c.met[k]))) ? "validated" : done(checks.every((c) => c.complete)) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
     const why =
       cls === "not-implemented" && !comps.length ? "No competency is mapped to this outcome."
       : cls === "unsupported" ? "Needs written reasoning, a construction or a drawing, and no educator-marked tasks or teaching exist yet."
       : cls === "validated" ? "Complete, validated and educator-approved."
-      : `${[...checks.filter((c) => !c.complete).map((c) => `${c.name}: missing ${c.missing.filter((m) => m !== "review").join(", ") || "review"}`), ...(peopleMissing ? ["the part an educator marks (proof, construction, sketch or justification) has no written task"] : [])].join("; ") || "Awaiting educator review."}`;
+      : `${[...checks.filter((c) => !c.complete).map((c) => `${c.name}: missing ${c.missing.filter((m) => m !== "review").join(", ") || "review"}`), ...(peopleMissing ? ["the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome"] : []), ...(gradeOff ? ["the mapped skills are taught at another level"] : []), ...(notAssessed ? [notAssessed] : [])].join("; ") || "Awaiting educator review."}`;
     return { release: `${r.id}@${r.version}`, board: r.source.board ?? "", grade: r.grade, domain: chapter.unit?.title ?? "", chapter: chapter.title, section: sections.at(-1)?.title ?? null, outcome: outcome.id, text: outcome.text, competencies: comps, class: cls, why };
   });
 }
