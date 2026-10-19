@@ -105,6 +105,8 @@ const LEXICON: Record<string, RegExp[]> = {
   vectors: [/vector|dot product|cross product/],
   complexNumbers: [/complex (numbers?|roots?)/, /\bimaginary\b/],
   solids: [/solids?\b|cylinder|cone|sphere|cuboid|prism/],
+  construction: [/\bconstruct(ion|ions|ing|s)?\b(?! (a|an) (mathematical )?(argument|proof))/, /ruler and compass|compass(es)? and (a )?(ruler|straightedge)/],
+  bisector: [/bisect/],
   trigonometry: [/trigonometr|\bsine\b|cosine|\btangent ratio|\bsin\b|\bcos\b|\btan\b/],
 };
 const CONCEPTS = Object.keys(LEXICON);

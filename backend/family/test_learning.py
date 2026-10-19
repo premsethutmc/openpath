@@ -196,3 +196,43 @@ class GeneratedQuestionTests(LearningBase):
         for bad in [ok | {'questionId': 'gen:cint:9,2,6'}, ok | {'competency': 'MATH.number.multiplication-tables'}, ok | {'questionId': 'gen:mul:7,8,9'}, ok | {'response': 'fifty'}]:
             self.assertEqual(self.save(bad | {'id': f'x{self.serial}'}).status_code, 400, bad)
             self.serial += 1
+
+
+class PlatformTests(LearningBase):
+    """The platform directive: synthesised modules, multiple-choice generated questions, nested curricula."""
+
+    def test_a_synthesised_module_is_known_to_the_server_and_its_strategy_can_be_taught(self):
+        self.save(self.enrol())
+        library = json.loads((ROOT / 'library.v1.json').read_text())['modules']
+        self.assertGreaterEqual(len(library), 7)
+        m = next(x for x in library if x['competency'] == 'MATH.calculus.integration-methods')
+        self.assertEqual(self.save(self.rec('teach', competency=m['competency'], strategy=m['strategies'][0]['id'], rule='procedural')).status_code, 201)
+        self.assertEqual(self.save(self.rec('teach', competency=m['competency'], strategy='invented', rule='procedural')).status_code, 400)
+
+    def test_a_multiple_choice_generated_question_is_checked_by_letter(self):
+        self.save(self.enrol())
+        ok = self.rec('attempt', questionId='gen:subst:0,2,1,2:mc', response='C', activity='practice', hints=0, solution=False, competency='MATH.calculus.integration-methods')
+        self.assertEqual(self.save(ok).status_code, 201)
+        for bad in [ok | {'response': '124/3'}, ok | {'response': 'E'}, ok | {'questionId': 'gen:mul:7,8:mc'}, ok | {'competency': 'MATH.calculus.definite-integrals'}]:
+            self.assertEqual(self.save(bad | {'id': f'x{self.serial}'}).status_code, 400, bad)
+            self.serial += 1
+
+    def test_a_release_with_sections_is_checked_at_every_depth(self):
+        release = json.loads((ROOT / 'curricula/openpath-sample-mathematics-grade-12.v1.1.0.json').read_text())
+        self.assertEqual(hash_of({**release, 'hash': ''}), release['hash'])
+        self.assertEqual(self.save(self.rec('curriculum', release=release)).status_code, 201)
+        self.assertEqual(self.save(self.enrol(12, release)).status_code, 201)
+        # an unknown competency hidden in a section is found
+        bad = json.loads(json.dumps(release))
+        sec = next(s for ch in bad['subjects'][0]['chapters'] for s in ch.get('sections', []) if s['outcomes'])
+        sec['outcomes'][0]['mapping']['competencies'][0] |= {'id': 'MATH.invented', 'status': 'accepted'}
+        bad['id'] = 'tampered'
+        bad['hash'] = hash_of({**bad, 'hash': ''})
+        self.assertEqual(self.save(self.rec('curriculum', release=bad)).status_code, 400)
+        # an outcome of an unsupported subject cannot be mapped
+        sci = json.loads(json.dumps(release))
+        o = sci['subjects'][0]['chapters'][0]['outcomes'][0]
+        o['mapping'] |= {'verdict': 'unsupported'}
+        sci['id'] = 'unsupported-mapped'
+        sci['hash'] = hash_of({**sci, 'hash': ''})
+        self.assertEqual(self.save(self.rec('curriculum', release=sci)).status_code, 400)

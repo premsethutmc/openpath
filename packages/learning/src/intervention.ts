@@ -101,6 +101,8 @@ export interface ModuleState {
   decision: PlannerDecision | null;
   /** What the learner is told about this step. */
   reason: string;
+  /** How the answer is recorded (from the list the question came from: a check alone is an assessment). */
+  activity?: import("./records").LearningActivity;
 }
 
 /** What an earlier diagnosis (diagnostic@2, in recovery) established about this skill, so it is not asked again. */
@@ -109,6 +111,14 @@ export interface Established {
   says: string;
 }
 export function moduleState(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null): ModuleState {
+  const ms = moduleStep(competency, records, ev, now, session, established);
+  const m = moduleFor(competency);
+  if (!m || !ms.question) return ms;
+  const q = ms.question;
+  const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) ? "check" : "practice";
+  return { ...ms, activity };
+}
+function moduleStep(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null): ModuleState {
   const m = moduleFor(competency);
   const base = { competency, question: null, strategy: null, diagnosis: null, decision: null } as const;
   if (!m) return { ...base, phase: "unavailable", reason: "No questions for this skill yet." };
@@ -124,8 +134,12 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
   }
   if (d.next && !shown) return { ...base, phase: "explore", question: d.next, diagnosis: d, reason: "A short check to find the right starting point." };
   if (shown) {
-    const more = unanswered([...m.practice, ...m.transfer]);
-    return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };
+    // more questions alone: practice, the transfer question, then the checks of strategies not taught (independent
+    // assessments, so the shared engine has the direct evidence it needs to demonstrate the skill)
+    const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+    // shown here, but the shared record (the engine) has not yet demonstrated it: say so, never imply a check will verify
+    const engineShort = !more && ev.engine !== "unavailable" && ev.engineRetention === "not_demonstrated";
+    return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };
   }
   if (d.result === "secure" || d.result === "insufficient_evidence") {
     // no clear gap: verify on fresh questions alone; a gap that shows there is then taught

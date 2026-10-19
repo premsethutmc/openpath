@@ -19,7 +19,7 @@ import { mathematicsLedger } from "../../mathematics/src/registration";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
-import { releasedQuestions } from "./review";
+import { releasedQuestions, type Registry } from "./review";
 
 export const DAY = 86_400_000;
 /** The delayed check comes at least this long after independent success (the existing seven-day requirement). */
@@ -45,12 +45,20 @@ export function useReviewFixture(f: { items: string[]; releasedAt: string } | nu
 }
 export const reviewFixtureActive = () => getFixture() !== null;
 
-let released: Map<string, string> | null = null;
+// on globalThis, like the fixture, so one switch holds however the module was loaded
+const R = globalThis as { __openpathLearningReleased?: Map<string, string> | null };
+/**
+ * Read the released questions from another registry (tests and review tooling: e.g. to show what a module's release
+ * would change before the registry file is edited). null goes back to the repository's registry.
+ */
+export function useRegistry(reg: Registry | null) {
+  R.__openpathLearningReleased = reg ? releasedQuestions(reg) : null;
+}
 export function nativeItem(q: Question): Item & { kind: "code" } {
   const fixture = getFixture();
   // validated: a question of a module an educator approved and that was released unchanged (review.ts), or, in a
   // test build only, the review fixture
-  released ??= releasedQuestions();
+  const released = (R.__openpathLearningReleased ??= releasedQuestions());
   const releasedAt = released.get(q.id) ?? (fixture?.items.has(q.id) ? fixture.releasedAt : undefined);
   const validated = releasedAt !== undefined;
   return {
