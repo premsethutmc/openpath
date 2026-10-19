@@ -40,9 +40,10 @@ export function describe(v: V): string {
     case "triangle":
       return `A triangle${arr(v.sides).length ? ` with sides ${arr(v.sides).join(", ")}` : ""}${arr(v.angles).length ? ` and angles ${arr(v.angles).join(", ")}` : ""}${v.right ? ", right-angled" : ""}`;
     case "plane":
-      return `Coordinate axes with points ${arr<[number, number, string?]>(v.points).map(([x, y, l]) => `${l ? `${l} ` : ""}(${minus(x)}, ${minus(y)})`).join(", ")}`;
+      return `${num(v.quadrant) === 1 ? "The first quadrant of coordinate axes" : "Coordinate axes"} with points ${arr<[number, number, string?]>(v.points).map(([x, y, l]) => `${l ? `${l} ` : ""}(${minus(x)}, ${minus(y)})`).join(", ")}`;
     case "pie":
-      return `A pie chart: ${arr<string>(v.labels).map((l, i) => `${l} ${arr<number>(v.values)[i]}`).join(", ")}`;
+      // what a sighted learner sees: the size of each sector (its angle), not the hidden data values
+      return `A pie chart: ${arr<string>(v.labels).map((l, i) => `${l} a sector of ${Math.round((arr<number>(v.values)[i] / (arr<number>(v.values).reduce((a, b) => a + b, 0) || 1)) * 360)}°`).join(", ")}`;
     case "solid":
       return `A ${str(v.name)}${arr(v.dims).length ? ` (${arr(v.dims).join(", ")})` : ""}`;
     case "balance":
@@ -201,7 +202,8 @@ export function Figure({ v }: { v: V }) {
         rectangle: [[30, 50], [190, 50], [190, 150], [30, 150]],
         square: [[60, 40], [170, 40], [170, 150], [60, 150]],
         parallelogram: [[60, 50], [200, 50], [160, 150], [20, 150]],
-        rhombus: [[110, 20], [190, 100], [110, 180], [30, 100]],
+        // equal sides, unequal diagonals (160 and 112): a rhombus that is not a square
+        rhombus: [[110, 20], [166, 100], [110, 180], [54, 100]],
         trapezium: [[70, 50], [150, 50], [200, 150], [20, 150]],
         kite: [[110, 20], [170, 80], [110, 180], [50, 80]],
         lshape: [[30, 30], [100, 30], [100, 110], [190, 110], [190, 170], [30, 170]],
@@ -280,11 +282,15 @@ export function Figure({ v }: { v: V }) {
     }
     case "plane": {
       const R = Math.max(5, num(v.range, 6));
-      const X = (x: number) => 110 + (x / R) * 100;
-      const Y = (y: number) => 110 - (y / R) * 100;
+      // quadrant: 1 draws only x, y ≥ 0 (the first quadrant, as in the junior grades); otherwise all four, centred
+      const q1 = num(v.quadrant) === 1;
+      const X = (x: number) => (q1 ? 20 + (x / R) * 190 : 110 + (x / R) * 100);
+      const Y = (y: number) => (q1 ? 200 - (y / R) * 190 : 110 - (y / R) * 100);
+      const [o0, o1] = [X(0), Y(0)];
       const out: JSX.Element[] = [];
-      for (let k = -R; k <= R; k++) out.push(<line key={`gx${k}`} x1={X(k)} y1={10} x2={X(k)} y2={210} stroke={SOFT} />, <line key={`gy${k}`} x1={10} y1={Y(k)} x2={210} y2={Y(k)} stroke={SOFT} />);
-      out.push(<line key="xa" x1={10} y1={110} x2={210} y2={110} stroke={INK} />, <line key="ya" x1={110} y1={10} x2={110} y2={210} stroke={INK} />, <text key="xl" x={204} y={124} fontSize={12} fill={INK}>x</text>, <text key="yl" x={116} y={20} fontSize={12} fill={INK}>y</text>);
+      for (let k = q1 ? 0 : -R; k <= R; k++) out.push(<line key={`gx${k}`} x1={X(k)} y1={q1 ? Y(R) : 10} x2={X(k)} y2={q1 ? o1 : 210} stroke={SOFT} />, <line key={`gy${k}`} x1={q1 ? o0 : 10} y1={Y(k)} x2={q1 ? X(R) : 210} y2={Y(k)} stroke={SOFT} />);
+      if (q1) for (let k = 1; k <= R; k++) out.push(<text key={`nx${k}`} x={X(k)} y={o1 + 14} fontSize={10} textAnchor="middle" fill={INK}>{k}</text>, <text key={`ny${k}`} x={o0 - 6} y={Y(k) + 4} fontSize={10} textAnchor="end" fill={INK}>{k}</text>);
+      out.push(<line key="xa" x1={q1 ? o0 : 10} y1={o1} x2={q1 ? X(R) + 6 : 210} y2={o1} stroke={INK} />, <line key="ya" x1={o0} y1={q1 ? Y(R) - 6 : 10} x2={o0} y2={q1 ? o1 : 210} stroke={INK} />, <text key="xl" x={q1 ? X(R) + 4 : 204} y={o1 + (q1 ? -6 : 14)} fontSize={12} fill={INK}>x</text>, <text key="yl" x={o0 + 6} y={q1 ? Y(R) - 4 : 20} fontSize={12} fill={INK}>y</text>);
       arr<[[number, number], [number, number]]>(v.segments).forEach(([a, b], i) => out.push(<line key={`s${i}`} x1={X(a[0])} y1={Y(a[1])} x2={X(b[0])} y2={Y(b[1])} stroke={ACC} strokeWidth={2} />));
       arr<[number, number, string?]>(v.points).forEach(([x, y, l], i) => out.push(<circle key={`p${i}`} cx={X(x)} cy={Y(y)} r={4} fill={ACC} />, <text key={`pl${i}`} x={X(x) + 6} y={Y(y) - 6} fontSize={12} fill={INK}>{l ?? ""}</text>));
       return box(220, 220, out);

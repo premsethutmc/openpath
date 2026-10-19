@@ -26,3 +26,9 @@ import { B19 } from "./b19";
 import { B20 } from "./b20";
 
 export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B12, ...B13, ...B14, ...B15, ...B16, ...B17, ...B18, ...B19, ...B20];
+
+/** range@1: these families answer a probability, so an option above 1 or below 0 is never offered (a learner could rule
+ * it out without the mathematics); the explanation behind such a prediction still diagnoses a typed answer. The
+ * specification check refuses a probability family that does not declare its range. */
+const PROBABILITY_ANSWERS = ["akchance", "akexp", "akdice", "anbag", "ancardn", "andice", "antree", "ancomp", "anunion", "asaddp", "asbayes", "astotp", "asbinom", "atpdfp", "atindu", "attotal"];
+for (const d of DOMAIN_FAMILIES) if (PROBABILITY_ANSWERS.includes(d.id)) d.range ??= [0, 1];

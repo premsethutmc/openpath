@@ -15,7 +15,7 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, parse as parse_expression, same_answer
-from .learning_families import generated
+from .learning_families import exposure, generated
 from .models import PupilEvent
 
 ROOT = 'content/learning'
@@ -143,8 +143,8 @@ def independent_at(prior, competency, marks=None):
         q = qs.get(e.get('questionId')) or generated(e.get('questionId')) if e.get('record') == 'attempt' else None
         if not q:
             continue
-        # one exposure per problem, whichever answer format (the app's records.ts exposureKey)
-        key = re.sub(r':(mc|w)$', '', e['questionId']) if e['questionId'].startswith('gen:') else e['questionId']
+        # one exposure per problem, whichever answer format (the app's families.ts exposureKey; distinct@1)
+        key = exposure(e['questionId'])
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue

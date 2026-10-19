@@ -65,7 +65,7 @@ or use a `tuple` (hours, minutes) — say which in the prompt.
 `{ type: "table", head, rows }` · `{ type: "shape", sides, lengths?: (number|string)[], name? }` (a regular polygon) or `{ type: "shape", kind: "rectangle" | "square" | "parallelogram" | "rhombus" | "trapezium" | "kite" | "lshape", lengths?: [...side by side, starting top-left, clockwise], diagonals?: true, height?: "4 cm" }` ·
 `{ type: "angle", deg }` · `{ type: "circle", radius?, diameter?, sector? }` (labels as strings; sector in degrees) · `{ type: "grid", rows, cols, shaded? }` (shaded: a count, filled row by row) ·
 `{ type: "triangle", sides?: [base, right side, left side], angles?: [bottom-left, bottom-right, top], right?, height?: "6 cm" }` (side 0 is the base, drawn at the bottom; with right: true, side 0 and side 2 are the legs and side 1 the hypotenuse) ·
-`{ type: "plane", points: [x, y, label?][], segments?: [[x, y], [x, y]][], range? }` · `{ type: "pie", labels, values }` ·
+`{ type: "plane", points: [x, y, label?][], segments?: [[x, y], [x, y]][], range?, quadrant?: 1 }` (quadrant 1: only x, y ≥ 0, numbered axes) · `{ type: "pie", labels, values }` ·
 `{ type: "strips", top, bottom, shaded }` fraction strips · `{ type: "array", rows, cols, split? }` ·
 `{ type: "solid", name: "cube" | "cuboid" | "cylinder" | "cone" | "sphere" | "pyramid", dims?: string[] }` ·
 `{ type: "balance", left, right }`.

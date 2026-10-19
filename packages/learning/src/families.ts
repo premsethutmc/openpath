@@ -1117,6 +1117,7 @@ const F: Def[] = [
     competency: "MATH.probability.conditional",
     type: "fraction",
     mc: true,
+    range: [0, 1],
     parse: () => null,
     // [p, q, r, s]: counts: chess club & girls p, chess & boys q, not chess & girls r, not chess & boys s. P(chess | girl)
     reject: (v) => (v.some((x) => x < 2 || x > 15) ? "Only counts from 2 to 15 are supported." : null),
@@ -1194,18 +1195,25 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
     return [...out, answer].sort((x, y) => fnv(salt + String(x)) - fnv(salt + String(y)) || (String(x) < String(y) ? -1 : 1));
   }
   const out: number[] = [];
+  // range@1: an option outside the quantity's meaningful range (a probability above 1) is not offered
+  const inRange = (v: number) => !def.range || (v >= def.range[0] - 1e-12 && v <= def.range[1] + 1e-12);
   const add = (v: number | undefined) => {
-    if (v !== undefined && Number.isFinite(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && ((answer as number) < 0 || v >= 0) && out.length < 3) out.push(v);
+    if (v !== undefined && Number.isFinite(v) && inRange(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && ((answer as number) < 0 || v >= 0) && out.length < 3) out.push(v);
   };
   // families@2: a predicted wrong answer is offered whatever its sign (the wrong-sign answer is the point of a sign-rule
   // question); only the topped-up neighbours keep to the answer's sign. The first families keep their rule (the server
   // computes their options too).
   const addPredicted = (v: number | undefined) => {
     if (!V2.has(def.id)) return add(v);
-    if (v !== undefined && Number.isFinite(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && out.length < 3) out.push(v);
+    if (v !== undefined && Number.isFinite(v) && inRange(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && out.length < 3) out.push(v);
   };
   for (const b of bugs) addPredicted(b.predict === null ? undefined : Array.isArray(b.predict) ? (b.predict[0] as number) : (b.predict as number));
   for (const v of (def.distractors?.(p) ?? []) as number[]) add(v);
+  // inside a range the whole-number neighbours are mostly outside it: the complement and nearby values in the range
+  if (def.range) {
+    const a = answer as number;
+    for (const v of [def.range[1] + def.range[0] - a, a / 2, 2 * a, a * a, (a + def.range[1]) / 2]) add(v);
+  }
   for (const v of [(answer as number) + 1, (answer as number) - 1, (answer as number) + 2, 2 * (answer as number), (answer as number) + 3, (answer as number) - 2]) add(v);
   return [...out, answer].sort((x, y) => (x as number) - (y as number));
 }
@@ -1380,7 +1388,7 @@ export function candidates(fam: string): number[][] {
   if (def.cap && out.length > def.cap) return out.map((p) => ({ p, h: fnv(`gen:${fam}:${p.join(",")}`) })).sort((a, b) => a.h - b.h).slice(0, def.cap).map((x) => x.p).sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
   return out;
 }
-type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> };
+type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string>; same: Map<string, string> };
 const poolCache: Map<string, PoolEntry> = (GF.__openpathPools ??= new Map<string, PoolEntry>());
 /** The family's release pool: every candidate that builds and passes its independent check. A candidate that fails
  * is EXCLUDED (never offered), with the reason, so one bad parameter choice cannot reach a learner. */
@@ -1390,14 +1398,28 @@ export function pool(fam: string) {
   const def = FAMILIES.get(fam)!;
   const items: Problem[] = [];
   const excluded: { params: number[]; reason: string }[] = [];
+  // distinct@1: a parameter choice that shows the learner exactly the question an earlier one shows (same wording,
+  // picture and options) is the same question: it is not released again, and answering either is one exposure
+  const shownAs = new Map<string, { id: string; answer: string }>();
+  const same = new Map<string, string>();
   for (const p of candidates(fam)) {
     try {
-      items.push(build(def, p));
+      const q = build(def, p);
+      const sig = `${q.prompt}\u0000${JSON.stringify(q.figure ?? null)}\u0000${JSON.stringify(q.options ?? null)}`;
+      const first = shownAs.get(sig);
+      if (first) {
+        // the same question with another answer is ambiguous: a defect of the family (the specification check fails it)
+        excluded.push({ params: p, reason: first.answer === q.answer ? `shows the same question as ${first.id} (distinct@1)` : `AMBIGUOUS: shows the same question as ${first.id} but answers ${q.answer}, not ${first.answer}` });
+        same.set(q.id, first.id);
+        continue;
+      }
+      shownAs.set(sig, { id: q.id, answer: q.answer });
+      items.push(q);
     } catch (e) {
       excluded.push({ params: p, reason: String((e as Error).message) });
     }
   }
-  const r = { items, excluded, ids: new Set(items.map((x) => x.id)) };
+  const r = { items, excluded, ids: new Set(items.map((x) => x.id)), same };
   poolCache.set(fam, r);
   return r;
 }
@@ -1407,7 +1429,13 @@ export const resetPools = () => {
   candCache.clear();
 };
 /** The base (typed) id of a generated question: "gen:f:p" for both "gen:f:p" and "gen:f:p:mc" (one exposure). */
-export const exposureKey = (qid: string) => (qid.startsWith("gen:") ? qid.replace(/:(mc|w)$/, "") : qid);
+export const exposureKey = (qid: string) => {
+  if (!qid.startsWith("gen:")) return qid;
+  const base = qid.replace(/:(mc|w)$/, "");
+  // distinct@1: a parameter choice that shows the same question as a released one is the same exposure
+  const fam = base.split(":")[1];
+  return (FAMILIES.has(fam) && pool(fam).same.get(base)) || base;
+};
 /** Whether a generated question is in its family's release pool. */
 export function inPool(qid: string): boolean {
   const m = qid.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/);

@@ -125,6 +125,12 @@ const rng = (seed: number) => () => {
   return seed / 2 ** 32;
 };
 
+/** A shown rational number ("3/4", "-0.5", "2"), or null for anything else. */
+function numeric(s: string): number | null {
+  const m = /^(-?\d+(?:\.\d+)?)(?:\/(\d+))?$/.exec(String(s).trim());
+  return m ? Number(m[1]) / (m[2] ? Number(m[2]) : 1) : null;
+}
+
 function checkItem(p: Problem, out: string[]) {
   const rebuilt = problemOf(p.id);
   if (!rebuilt || itemSignature(rebuilt) !== itemSignature(p)) out.push(`${p.id}: does not rebuild identically from its id`);
@@ -145,6 +151,10 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   const def = FAMILIES.get(fam)!;
   const det: string[] = [];
   const { items, excluded } = pool(fam);
+  // range@1: a family whose every answer is a probability declares it, so its options stay meaningful
+  if (def.mc && !def.range && def.competency.startsWith("MATH.probability.") && items.length && items.every((p) => { const v = numeric(p.answer); return v !== null && v >= 0 && v <= 1; }))
+    det.push(`${fam}: every answer is a probability; declare range: [0, 1] so no option above 1 or below 0 is offered`);
+  for (const e of excluded) if (e.reason.startsWith("AMBIGUOUS")) det.push(`gen:${fam}:${e.params.join(",")}: ${e.reason}`);
   for (const p of items) {
     checkItem(p, det);
     // the independent check must refuse every wrong answer an explanation predicts (otherwise it is not a check)
@@ -152,11 +162,16 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
       const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
       for (const v of vals) if (p.type !== "choice" && def.validate(p.params, v as never)) det.push(`${p.id}: the independent check accepts ${show(v as never)}, which explanation ${b.id} predicts as wrong`);
     }
+    // range@1: the answer lies in the declared range, and so does every option
+    const inR = (s: string) => { const v = numeric(s); return v === null || !def.range || (v >= def.range[0] - 1e-12 && v <= def.range[1] + 1e-12); };
+    if (def.range && !inR(p.answer)) det.push(`${p.id}: the answer ${p.answer} is outside the family's range [${def.range}]`);
     if (def.mc && p.type !== "set" && p.type !== "choice") {
       const m = problemOf(`${p.id}:mc`);
       if (!m) det.push(`${p.id}:mc does not build`);
       else {
         checkItem(m, det);
+        for (const o of m.options ?? []) if (!inR(o)) det.push(`${p.id}:mc: option ${o} is outside the family's range [${def.range}]`);
+        if (m.options && m.options.length < 3) det.push(`${p.id}:mc: only ${m.options.length} options`);
         if (m.options![("ABCD").indexOf(m.answer)] !== p.answer) det.push(`${p.id}:mc: the right letter is not the typed answer`);
         if (NEW_TYPES.has(p.type)) m.options!.forEach((o, i) => { if (i !== "ABCD".indexOf(m.answer) && sameAnswer(p.type, o, p.answer)) det.push(`${p.id}:mc: option ${"ABCD"[i]} is also right`); });
       }
