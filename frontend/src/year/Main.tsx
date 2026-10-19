@@ -7,7 +7,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
 import { goal as goalById, goals, moduleFor, question, questions } from "../../../packages/learning/src/content";
-import { releasesFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
+import { latestReleases, releasesFor, sampleFor } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
 import { releaseCoverage, UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
@@ -256,7 +256,7 @@ function App() {
         <h1>Your years</h1>
         <p className="muted">Every year keeps its records. A skill shown in an earlier year stays shown, and its delayed checks still come back.</p>
         {years(st.records).slice().reverse().map((y) => {
-          const r = sampleReleases.find((x) => x.id === y.curriculum.id && x.hash === y.curriculum.hash) ?? [...st.records.curricula.values()].find((x) => x.id === y.curriculum.id && x.hash === y.curriculum.hash);
+          const r = latestReleases.find((x) => x.id === y.curriculum.id && x.hash === y.curriculum.hash) ?? [...st.records.curricula.values()].find((x) => x.id === y.curriculum.id && x.hash === y.curriculum.hash);
           const s = r ? flatten(tilesFor(r, st.evidence)).filter((t) => t.kind === "skill" && t.assessable) : [];
           return (
             <div key={y.at} className="panel" style={{ marginBottom: 12 }}>

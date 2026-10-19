@@ -407,8 +407,11 @@ test("L: two textbooks saying the same mathematics differently map to the same s
   // a vague outcome is flagged, not guessed
   assert.equal(out(b).find((o) => o.text.startsWith("solve word problems"))!.mapping.verdict, "uncertain");
   assert.equal(interpret("solve word problems involving fractions", 4).verdict, "uncertain");
-  // both boards coexist as releases for Grade 4, and evidence is shared (same competency ids)
-  assert.equal(releasesFor(4).length, 2);
+  // both sample boards coexist as releases for Grade 4, beside the CBSE and Tamil Nadu releases (boards@1), and
+  // evidence is shared (same competency ids)
+  const g4 = releasesFor(4).map((r) => r.id).sort();
+  assert.equal(g4.filter((id) => !/^(cbse-ncert|tn-samacheer)-/.test(id)).length, 2, g4.join(" "));
+  assert.deepEqual(g4.filter((id) => /^(cbse-ncert|tn-samacheer)-/.test(id)), ["cbse-ncert-mathematics-grade-4", "tn-samacheer-mathematics-grade-4"]);
 });
 
 test("L: the same textbook read from a PDF's text layer gives the same outcomes; a scan is declined", async () => {
