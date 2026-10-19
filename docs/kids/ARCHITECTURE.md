@@ -70,9 +70,11 @@ frame-by-frame bitmap animation, PixiJS can be put behind the same `Director` in
 change. If the illustrator delivers rigs authored in Rive or Spine, their runtimes can render a character
 inside the stage the same way. Neither is needed now, and neither involves licences or paid services today.
 
-**Device performance.** Smoothness was checked in desktop Chromium with Android phone and tablet
-viewports and with CPU throttling. It has **not yet been verified on a physical inexpensive Android
-phone**; that check is listed in the PR as outstanding.
+**Device performance.** Measured in headless Chromium at an Android phone viewport (915 × 412, device pixel
+ratio 2.6) with DevTools CPU throttling, over 45 s of the garden scene (walking, flying, ambient motion):
+4× slower CPU, 59 frames a second with no frame over 50 ms; 6× slower CPU, 57 frames a second with 4 frames
+over 50 ms (`node scripts/dev/frames.mjs 6 45`). This is an emulation. It has **not yet been verified on a
+physical inexpensive Android phone**; that check is listed in the PR as outstanding.
 
 ## Characters are rigs, not pictures
 
