@@ -522,7 +522,7 @@ const asperpd: Def = {
   distractors: ([a, b, c, x0, y0]) => {
     const n = Math.abs(a * x0 + b * y0 + c);
     const N = a * a + b * b;
-    return [String(n), sq(R_(n + 1, N), N), rs(R_(n, Math.abs(a) + Math.abs(b)))];
+    return [String(n), sq(R_(n + 1, N), N), rs(R_(n, Math.abs(a) + Math.abs(b))), String(2 * n), rs(R_(n, 2))];
   },
   variants: () => [],
   explain: (s) => (s.id === "substitute" ? `Put the point into ax + by + c: ${s.value}` : s.id === "normal" ? `√(a² + b²) = ${s.value}` : `Distance = |ax₀ + by₀ + c|/√(a² + b²) = ${s.value}`),
@@ -708,7 +708,7 @@ const aspar: Def = {
   // independent: the angle between the direction vectors (b, −a), measured with arccos
   validate: ([a1, b1, a2, b2], v) => {
     const th = Math.acos(Math.max(-1, Math.min(1, (b1 * b2 + a1 * a2) / (Math.hypot(a1, b1) * Math.hypot(a2, b2)))));
-    const kind = Math.abs(th) < 1e-9 || Math.abs(th - Math.PI) < 1e-9 ? 0 : Math.abs(th - Math.PI / 2) < 1e-9 ? 1 : 2;
+    const kind = Math.abs(th) < 1e-6 || Math.abs(th - Math.PI) < 1e-6 ? 0 : Math.abs(th - Math.PI / 2) < 1e-9 ? 1 : 2;
     return v === kind;
   },
   bugs: ([a1, b1, a2, b2]) => {
@@ -725,7 +725,6 @@ const aspar: Def = {
   domain: [[0, 6], [-6, 6], [-6, 6], [-6, 6]],
   cap: 300,
   difficulty: ([a1, b1, a2, b2]) => (a1 === a2 && b1 === b2 ? 1 : a1 * b2 - a2 * b1 === 0 || a1 * a2 + b1 * b2 === 0 ? 2 : 3),
-  word: (p) => `On a farm plan, one straight fence follows ${lin2(p[0], p[1], cP(p, 0))} and another follows ${lin2(p[2], p[3], cP(p, 1))}. Are the fences parallel, perpendicular, or neither?`,
   teach: {
     idea: "The slope of ax + by + c = 0 is −a/b. Parallel lines have equal slopes; perpendicular lines have slopes whose product is −1.",
     method: "Find both slopes (or test a₁b₂ − a₂b₁ = 0 for parallel and a₁a₂ + b₁b₂ = 0 for perpendicular, which also works for vertical lines).",
@@ -1199,7 +1198,7 @@ const asangl: Def = {
     const u = p.slice(0, 3);
     const w = p.slice(3);
     const s = norm(cross(u, w)) / (norm(u) * norm(w));
-    return close(Math.sqrt(Math.max(0, 1 - s * s)), c, 1e-8);
+    return close(c * c, 1 - s * s, 1e-9);
   },
   bugs: (p) => {
     const u = p.slice(0, 3);
@@ -1381,10 +1380,7 @@ const aslrel: Def = {
   explain: (s) => (s.id === "directions" ? `u × v = ${s.value} (zero means the directions are parallel)` : s.id === "join" ? `(B − A)·(u × v) = ${s.value} (zero means the lines lie in one plane and meet)` : `So the lines are ${LREL[Number(s.value)]}`),
   domain: [[0, 11], [0, 11], [-2, 2], [-2, 2], [-1, 1]],
   difficulty: ([iu, iv, , , ga]) => (iu === iv ? 1 : ga === 0 ? 2 : 3),
-  word: (p) => {
-    const L = relLines(p);
-    return `Two straight cables in a factory run along ${lineVec(L.A, L.u)} and ${lineVec(L.B, L.v, "μ")} (units in metres). Are the cables parallel, do they cross (intersect), or are they skew?`;
-  },
+
   teach: {
     idea: "In space two lines are parallel (directions are multiples), intersecting (they share a point), or skew (neither: not parallel and never meet).",
     method: "If the directions are multiples, the lines are parallel. Otherwise set the general points equal, solve two of the coordinate equations for λ and μ, and test the third: it holds for intersecting lines and fails for skew lines.",
@@ -2083,7 +2079,8 @@ const aspolm: Def = {
   distractors: ([r1, a1, r2, a2, op]) => {
     const r = op ? R_(r1, r2) : R_(r1 * r2);
     const k = R_(prin6(op ? a1 - a2 : a1 + a2), 6);
-    return [tup([rs(r), rs(k[0] === k[1] ? R_(1, 2) : [-k[0], k[1]])]), tup([rs(op ? R_(r2, r1) : R_(r1 * r2 + 1)), rs(k)])];
+    const s6 = prin6(op ? a1 - a2 : a1 + a2);
+    return [tup([rs(r), rs(k[0] === k[1] ? R_(1, 2) : [-k[0], k[1]])]), tup([rs(op ? R_(r2, r1) : R_(r1 * r2 + 1)), rs(k)]), tup([rs(radd(r, R_(1))), rs(k)]), tup([rs(r), rs(R_(prin6(s6 + 2), 6))]), tup([rs(r), rs(R_(prin6(s6 - 3), 6))])];
   },
   variants: () => [],
   explain: (s) => (s.id === "modulus" ? `${s.op === "divide" ? "Divide" : "Multiply"} the moduli: ${s.value}` : s.id === "argument" ? `${s.op === "subtract" ? "Subtract" : "Add"} the arguments: ${s.value}` : `The principal argument (add or subtract 2π if needed): ${s.value}`),
@@ -2461,10 +2458,7 @@ const asmex: Def = {
   explain: (s) => (s.id === "intersection" ? `A ∩ B = ${s.value}` : s.id === "union" ? `A ∪ B = ${s.value}` : `So A and B are ${MEX[Number(s.value)]}`),
   domain: [[0, 3], [0, 79]],
   difficulty: ([cat]) => (cat === 3 ? 1 : cat === 2 ? 3 : 2),
-  word: (p) => {
-    const [A, Bm] = mexPair(p);
-    return `${nm(p[1])} draws one card from 8 cards numbered 1 to 8. Event A is that the card is one of ${setTxt(A)}, and event B is that it is one of ${setTxt(Bm)}. Which describes the events A and B?`;
-  },
+
   teach: {
     idea: "Mutually exclusive events cannot happen together (A ∩ B is empty). Exhaustive events cover the whole sample space (A ∪ B = S).",
     method: "Find A ∩ B: empty means mutually exclusive. Find A ∪ B: the whole sample space means exhaustive. Each property is checked separately.",
@@ -2733,7 +2727,7 @@ const asbinmv: Def = {
     if (mode) {
       const q = R_(d - a, d);
       const nn = rdiv(R_(n * a, d), q);
-      return [B("p-q-swapped", "procedural", BIN, "Variance ÷ mean gives q = 1 − p, not p.", 2 * a !== d ? tup([rs(nn), rs(q)]) : null), B("variance-as-np", "recall", BIN, "The variance is npq, not np; divide the variance by the mean to get q.", null)];
+      return [B("p-q-swapped", "procedural", BIN, "Variance ÷ mean gives q = 1 − p, not p.", 2 * a !== d ? tup([rs(nn), rs(q)]) : null)];
     }
     const mean = R_(n * a, d);
     return [
