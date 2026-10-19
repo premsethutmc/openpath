@@ -44,7 +44,9 @@ function App() {
       if (s.account.authenticated) await load();
     }).catch((e) => setError(String(e.message ?? e))).finally(() => setReady(true));
   }, []);
-  useEffect(() => window.scrollTo({ top: 0 }), [view]);
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [view]);
   if (!ready) return <Shell><p className="muted">Opening…</p></Shell>;
   if (!signedIn) return <Shell error={error}><SignIn onDone={() => { setSignedIn(true); load().catch((e) => setError(String(e.message ?? e))); }} onError={setError} /></Shell>;
   if (!data) return <Shell error={error}><p className="muted">Loading the review registry…</p></Shell>;
