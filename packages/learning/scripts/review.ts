@@ -15,7 +15,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { modules, synthesisedModules } from "../src/content";
-import { decide, effectiveState, itemOf, release, submit, sync, type Registry } from "../src/review";
+import { FAMILIES } from "../src/families";
+import { decide, effectiveState, familyItem, itemOf, release, submit, sync, syncFamily, type Registry } from "../src/review";
+import { validateFamily } from "../src/spec";
 import { validateModule } from "../src/validate";
 
 const file = join(import.meta.dirname, "../../../content/learning/review.v1.json");
@@ -32,25 +34,37 @@ const put = (e: Registry["entries"][number]) => {
   if (i >= 0) reg.entries[i] = e;
   else reg.entries.push(e);
 };
-const targets = (t: string) => (t === "all" ? modules.map((m) => m.competency) : [t]);
-const entry = (c: string) => {
-  const e = reg.entries.find((x) => x.item === itemOf(c));
-  if (!e) throw new Error(`${c}: not in the registry (run sync)`);
+const families = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
+const itemFor = (t: string) => (t.startsWith("family:") || t.startsWith("module:") ? t : itemOf(t));
+const targets = (t: string) => (t === "all" ? [...families.map(familyItem), ...modules.map((m) => itemOf(m.competency))] : [itemFor(t)]);
+const entry = (item: string) => {
+  const e = reg.entries.find((x) => x.item === item);
+  if (!e) throw new Error(`${item}: not in the registry (run sync)`);
   return e;
 };
-if (cmd === "sync") for (const m of modules) put(sync(reg.entries.find((x) => x.item === itemOf(m.competency)), m, authorOf(m.competency), at));
-else if (cmd === "submit") {
+const problemsOf = (item: string) => {
+  if (item.startsWith("family:")) {
+    const v = validateFamily(item.slice(7));
+    return [...v.deterministic.failures, ...v.property.failures, ...v.boundary.failures];
+  }
+  return validateModule(modules.find((m) => itemOf(m.competency) === item)!);
+};
+if (cmd === "sync") {
+  for (const f of families) put(syncFamily(reg.entries.find((x) => x.item === familyItem(f)), f, at));
+  for (const m of modules) put(sync(reg.entries.find((x) => x.item === itemOf(m.competency)), m, authorOf(m.competency), at));
+} else if (cmd === "submit") {
   for (const c of targets(target)) {
     const e = entry(c);
     if (target === "all" && e.state !== "draft") continue;
-    const problems = validateModule(modules.find((m) => m.competency === c)!);
+    const problems = problemsOf(c);
     // "all" submits what validates and reports the rest (they stay drafts)
     if (target === "all" && problems.length) console.log(`not submitted: ${c}: ${problems.join("; ")}`);
     else put(submit(e, flag("by"), at, problems));
   }
-} else if (cmd === "approve" || cmd === "request-changes") put(decide(entry(target), { by: flag("educator"), role: flag("educator") ? "educator" : "engineer" }, cmd === "approve" ? "approve" : "request_changes", at, flag("note")));
-else if (cmd === "release") put(release(entry(target), flag("by"), at));
+} else if (cmd === "approve" || cmd === "request-changes" || cmd === "reject") put(decide(entry(itemFor(target)), { by: flag("educator"), role: flag("educator") ? "educator" : "engineer" }, cmd === "approve" ? "approve" : cmd === "reject" ? "reject" : "request_changes", at, flag("note")));
+else if (cmd === "release") put(release(entry(itemFor(target)), flag("by"), at, reg));
 else if (cmd !== "status") throw new Error(`unknown command ${cmd}`);
 reg.entries.sort((a, b) => a.item.localeCompare(b.item));
+reg.schema = "content-review@2";
 if (cmd !== "status") writeFileSync(file, JSON.stringify(reg, null, 1) + "\n");
-for (const e of reg.entries) console.log(`${effectiveState(e, modules.find((m) => m.competency === e.competency) ?? null).padEnd(18)} ${e.origin.padEnd(12)} ${e.competency}`);
+for (const e of reg.entries) console.log(`${effectiveState(e).padEnd(18)} ${e.origin.padEnd(12)} ${e.item}`);

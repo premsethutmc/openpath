@@ -131,3 +131,62 @@ class ClientMetric(models.Model):
     ok = models.BooleanField(default=True)
     app_version = models.CharField(max_length=40, blank=True)
     detail = models.CharField(max_length=200, blank=True)
+
+
+# ---------------------------------------------------------------- educator review of learning content (review@2)
+
+
+class ContentReviewer(models.Model):
+    """An explicit grant of a content-review role to one account (educator: approve, reject, request changes;
+    release manager: release approved content). Granted only by `manage.py content_reviewer grant`."""
+
+    ROLES = [("educator", "Educator"), ("release_manager", "Release manager")]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="content_roles")
+    role = models.CharField(max_length=20, choices=ROLES)
+    granted_at = models.DateTimeField(auto_now_add=True)
+    granted_via = models.CharField(max_length=40)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["user", "role"], name="one_grant_per_role")]
+
+    @property
+    def active(self) -> bool:
+        return self.revoked_at is None
+
+
+class AppendOnlyQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("content review decisions are append-only")
+
+    def delete(self):
+        raise ValueError("content review decisions are append-only")
+
+
+class ContentDecision(models.Model):
+    """One review decision on one version of one item (family:<id> or module:<competency>). Append-only: the history
+    is the record of who decided what, on which content hash, when."""
+
+    DECISIONS = [("submit", "Submit"), ("approve", "Approve"), ("request_changes", "Request changes"), ("reject", "Reject"), ("release", "Release")]
+    item = models.CharField(max_length=120, db_index=True)
+    content_hash = models.CharField(max_length=16)
+    version = models.CharField(max_length=20, blank=True)
+    decision = models.CharField(max_length=20, choices=DECISIONS)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    reviewer_label = models.CharField(max_length=160, help_text="The reviewer's name or email when they decided.")
+    role = models.CharField(max_length=20)
+    note = models.TextField(max_length=2000, blank=True)
+    at = models.DateTimeField(auto_now_add=True)
+
+    objects = AppendOnlyQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["at", "id"]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("content review decisions are append-only")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("content review decisions are append-only")

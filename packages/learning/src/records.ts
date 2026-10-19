@@ -4,6 +4,7 @@
  */
 import type { CurriculumRelease } from "./curriculum";
 import { isQuestion } from "./content";
+import { exposureKey } from "./families";
 
 export type LearningActivity = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge";
 interface Base {
@@ -63,8 +64,10 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       else out.goals.delete(r.pathway);
     } else if (r.record === "curriculum") out.curricula.set(`${r.release.id}@${r.release.version}#${r.release.hash}`, r.release);
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
-      const n = (count.get(r.questionId) ?? 0) + 1;
-      count.set(r.questionId, n);
+      // the same problem in another answer format is the same exposure: a second sight is never fresh evidence
+      const key = exposureKey(r.questionId);
+      const n = (count.get(key) ?? 0) + 1;
+      count.set(key, n);
       out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response: r.response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}) });
     } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });

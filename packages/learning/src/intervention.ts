@@ -19,7 +19,7 @@ import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleSt
 import { moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
-import { parseProblem, problemOf } from "./families";
+import { exposureKey, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
@@ -29,7 +29,17 @@ export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedIte
 export const RECOVERY_DEPTH = 2;
 
 const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === m.competency;
-const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => a.questionId === qid) ?? null;
+/** The learner's first attempt at this problem, in either answer format (one exposure). */
+const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? null;
+/**
+ * depth@1: the next question of a phase from the module's family pool that this learner has never seen (in either
+ * format). null when the pool has no unseen question left: the module then says so; nothing is repeated as evidence.
+ */
+export function fromPool(m: Module, phase: Phase, records: LearnerRecords): string | null {
+  if (!m.pool) return null;
+  const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
+  return phasePool(m.pool.family, phase).find((id) => !seen.has(exposureKey(id))) ?? null;
+}
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
 export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords): Strategy[] {
@@ -115,7 +125,8 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
   const m = moduleFor(competency);
   if (!m || !ms.question) return ms;
   const q = ms.question;
-  const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) ? "check" : "practice";
+  const fromCheckPool = !!m.pool && q.startsWith("gen:") && ![...m.practice, ...m.transfer].includes(q) && phaseOfQ(q) === "check";
+  const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) || fromCheckPool ? "check" : "practice";
   return { ...ms, activity };
 }
 function moduleStep(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null): ModuleState {
@@ -129,23 +140,33 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const shown = ev.status === "independent" || ev.status === "transfer" || ev.status === "verified";
   const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id)) ?? null;
   if (ev.retention === "due") {
-    const r = unanswered(m.retention);
+    // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
+    const r = unanswered(m.retention) ?? fromPool(m, "retention", records);
     if (r) return { ...base, phase: "retention", question: r, diagnosis: d, reason: "A delayed check, a week after you first showed this: does it last?" };
   }
   if (d.next && !shown) return { ...base, phase: "explore", question: d.next, diagnosis: d, reason: "A short check to find the right starting point." };
   if (shown) {
     // more questions alone: practice, the transfer question, then the checks of strategies not taught (independent
     // assessments, so the shared engine has the direct evidence it needs to demonstrate the skill)
-    const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
-    // shown here, but the shared record (the engine) has not yet demonstrated it: say so, never imply a check will verify
-    const engineShort = !more && ev.engine !== "unavailable" && ev.engineRetention === "not_demonstrated";
+    // while the shared record has not yet demonstrated the skill, fresh checks alone from the pool (independent
+    // assessments); once it has, only the module's own practice remains (optional)
+    const needsEvidence = ev.engine !== "unavailable" && ev.engineRetention === "not_demonstrated";
+    // the shared engine never lets answers given straight after teaching (same visit) demonstrate a skill: more
+    // questions now would add nothing, so they wait for the next visit
+    const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
+    const listed = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+    if (!listed && needsEvidence && taughtThisVisit && m.pool)
+      return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
+    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null);
+    // shown here, but the shared record (the engine) has not yet demonstrated it and nothing is left: say so
+    const engineShort = !more && needsEvidence;
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };
   }
   if (d.result === "secure" || d.result === "insufficient_evidence") {
     // no clear gap: verify on fresh questions alone; a gap that shows there is then taught
     const rs = ruleStateFor(m, d, records);
     if (rs.status !== "weak") {
-      const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+      const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
       if (more) return { ...base, phase: "verify", question: more, diagnosis: d, reason: d.result === "secure" ? "You seem to know this. Now on your own, on a new question." : "Not enough to tell yet. One more question on your own." };
     }
   }

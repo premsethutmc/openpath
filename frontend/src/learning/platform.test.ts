@@ -5,19 +5,20 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { modules, question, synthesisedModules } from "../../../packages/learning/src/content";
+import { authoredModules, modules, question, synthesisedModules } from "../../../packages/learning/src/content";
 import { CATEGORIES, graphCoverage, releaseCoverage } from "../../../packages/learning/src/coverage";
 import { sampleReleases } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned, review, synthesise, type CurriculumRelease } from "../../../packages/learning/src/curriculum";
 import { DAY, useRegistry, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { extract } from "../../../packages/learning/src/extract";
-import { decompose, problemOf, show } from "../../../packages/learning/src/families";
+import { decompose, inPool, problemOf, show } from "../../../packages/learning/src/families";
 import { examPlan, overlay } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { moduleState } from "../../../packages/learning/src/intervention";
-import { synthesise as synthesiseModule, type Blueprint } from "../../../packages/learning/src/library";
+import { buildLibrary, type Blueprint } from "../../../packages/learning/src/library";
 import { years } from "../../../packages/learning/src/plan";
 import { contentHashOf, decide, effectiveState, itemOf, registry, release as releaseModule, ReviewError, submit, sync, type Registry } from "../../../packages/learning/src/review";
+import { releasedRegistry } from "./released";
 import { flatten, tileAt, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { validateModule } from "../../../packages/learning/src/validate";
 import { Driver, right, type Answerer } from "./driver";
@@ -56,27 +57,27 @@ const fixtureOff = () => useReviewFixture(null);
 
 // ---------------------------------------------------------------- the content pipeline
 
-test("pipeline: the library is exactly what the blueprints synthesise; every module validates; nothing is approved", () => {
+test("pipeline: the library is exactly what blueprints and templates build; every module validates; nothing is approved", () => {
   const bps = JSON.parse(read("content/learning/blueprints.v1.json")) as { version: string; blueprints: Blueprint[] };
-  const fresh = bps.blueprints.map((b) => synthesiseModule(b, bps.version));
-  assert.deepEqual(JSON.parse(JSON.stringify(fresh)), synthesisedModules, "library.v1.json is generated, never edited by hand");
+  const fresh = buildLibrary(bps, authoredModules.map(({ pool: _p, ...m }) => m));
+  assert.deepEqual(JSON.parse(JSON.stringify(fresh.modules)), synthesisedModules, "library.v1.json is generated, never edited by hand");
   for (const m of modules) assert.deepEqual(validateModule(m), [], `${m.competency} validates`);
   // every synthesised question is a family question that passes its independent check, in two formats
   for (const m of synthesisedModules) {
     const ids = [...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.strategies.flatMap((s) => [s.guided, s.check])];
-    for (const id of ids) assert.ok(problemOf(id), id);
+    for (const id of ids) assert.ok(problemOf(id) && inPool(id), id);
     assert.ok(ids.some((id) => id.endsWith(":mc")) && ids.some((id) => !id.endsWith(":mc")));
   }
-  // the registry: every module is in it, none approved or released, every entry matches its module's content
+  // the registry: every module and family is in it, none approved or released, each entry has the current content
   for (const m of modules) {
     const e = registry.entries.find((x) => x.item === itemOf(m.competency));
     assert.ok(e, `${m.competency} is in the registry`);
     assert.equal(e!.contentHash, contentHashOf(m), `${m.competency}: the registry has the current content`);
-    assert.ok(e!.state === "draft" || e!.state === "submitted", `${m.competency} is ${e!.state}: no educator has approved anything`);
   }
+  assert.ok(registry.entries.every((e) => e.state === "draft" || e.state === "submitted"), "no educator has approved anything");
 });
 
-test("pipeline: review needs an educator who is not the author; only a released, unchanged module counts as validated", () => {
+test("pipeline: review needs an educator who is not the author; a module is released only after its families", () => {
   const m = modules.find((x) => x.competency === "MATH.calculus.integration-methods")!;
   const at = "2026-10-20T00:00:00Z";
   let e = sync(undefined, m, "OpenPath author", at);
@@ -84,11 +85,15 @@ test("pipeline: review needs an educator who is not the author; only a released,
   assert.throws(() => submit(e, "eng", at, ["no chapter"]), ReviewError, "an invalid module cannot be submitted");
   e = submit(e, "eng", at, validateModule(m));
   assert.throws(() => decide(e, { by: "eng", role: "engineer" }, "approve", at, "looks fine"), /Only an educator/);
-  assert.throws(() => decide(e, { by: "OpenPath author", role: "educator" }, "approve", at, "fine"), /not be the module's author/);
+  assert.throws(() => decide(e, { by: "OpenPath author", role: "educator" }, "approve", at, "fine"), /not be the item's author/);
   assert.throws(() => decide(e, { by: "A. Teacher", role: "educator" }, "approve", at, " "), /needs a note/);
-  assert.throws(() => releaseModule(e, "rm", at), /only an approved module/);
+  assert.throws(() => releaseModule(e, "rm", at), /only an approved item/);
   e = decide(e, { by: "A. Teacher (test identity)", role: "educator" }, "approve", at, "checked every question and screen");
-  e = releaseModule(e, "release manager (test)", at);
+  const empty: Registry = { ...registry, entries: [] };
+  assert.throws(() => releaseModule(e, "release manager (test)", at, empty), /families that are not released yet: subst, pow/);
+  assert.throws(() => releaseModule(e, "an educator", at, empty, "educator"), /Only a release manager/);
+  const withFamily = releasedRegistry(["subst", "pow"], []);
+  e = releaseModule(e, "release manager (test)", at, withFamily);
   assert.equal(effectiveState(e, m), "released");
   // a change to the module after release: the review no longer applies
   assert.equal(effectiveState(e, { ...m, title: m.title + "!" }), "draft");
@@ -283,11 +288,7 @@ test("E: an unseen textbook goes through the same pipeline with no new code; its
   // the module goes through review exactly as any other; once released (in a test registry) its questions validate,
   // so a learner can reach verified mastery on it; the repository registry is not changed
   const comp = "MATH.algebra.identities-intro";
-  const m = modules.find((x) => x.competency === comp)!;
-  const at = new Date(T0).toISOString();
-  let e = submit(sync(undefined, m, "OpenPath (written with AI assistance; not educator-reviewed)", at), "eng", at, validateModule(m));
-  e = releaseModule(decide(e, { by: "A. Teacher (test identity)", role: "educator" }, "approve", at, "checked"), "release manager (test)", "2020-01-01T00:00:00Z");
-  const testRegistry: Registry = { ...registry, entries: [e] };
+  const testRegistry = releasedRegistry(["dist", "mul"], [comp]);
   useRegistry(testRegistry);
   try {
     d.work(comp, right);

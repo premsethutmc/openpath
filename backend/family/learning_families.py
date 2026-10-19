@@ -2,9 +2,14 @@
 answer type and answer, so the server can check a record that refers to one. The same rules as the app; a parity test
 (content/learning/families-parity.v1.json, written by the app's own code) keeps them identical.
 """
+import json
 import math
 import re
 from fractions import Fraction
+from functools import lru_cache
+from pathlib import Path
+
+from django.conf import settings
 
 MT = 'MATH.number.multiplication-tables'
 
@@ -201,9 +206,29 @@ FAMILIES = {'mul': (2, _mul), 'rect': (2, _rect), 'eqfrac': (3, _eqfrac), 'fadd'
             'linev': (3, _linev), 'meet': (2, _meetf), 'above': (3, _above), 'alp': (2, _alp)}
 
 
+@lru_cache
+def _table():
+    """The release pool of every family (content/learning/generated.v1.json, written by the app's own code)."""
+    return json.loads((Path(settings.BASE_DIR).parent / 'content/learning/generated.v1.json').read_text())['families']
+
+
 def generated(qid):
     """A generated question as {competency, type, answer}, or None if the id is unknown or unsupported.
-    "gen:<family>:<params>:mc" is the multiple-choice form of a family that has one: the answer is a letter."""
+    "gen:<family>:<params>:mc" is the multiple-choice form of a family that has one: the answer is a letter.
+    The families written before families@2 are computed here (any supported parameters, as a learner may type a
+    problem); every family's release pool is also in the generated table, which is the only source for the rest."""
+    r = _mirror(qid)
+    if r is not None:
+        return r
+    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(:mc)?', qid or '')
+    fam = _table().get(m.group(1)) if m else None
+    key = f"{m.group(2)}{m.group(3) or ''}" if m else ''
+    if not fam or key not in fam['items']:
+        return None
+    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) else fam['type'], 'answer': fam['items'][key], 'role': 'generated'}
+
+
+def _mirror(qid):
     m = re.fullmatch(r'gen:([a-z]+):(-?\d+(?:,-?\d+)*)(:mc)?', qid or '')
     if not m or (m.group(1) not in FAMILIES and m.group(1) not in MC):
         return None

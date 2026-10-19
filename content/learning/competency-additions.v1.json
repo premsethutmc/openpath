@@ -318,6 +318,42 @@
     "MATH.number.exponents"
    ],
    "note": "b² − 4ac is signed arithmetic with a square."
+  },
+  {
+   "competency": "MATH.number.multi-multiplication",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Each digit's product is a multiplication fact."
+  },
+  {
+   "competency": "MATH.number.division-remainders",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Groups of the divisor are multiplication facts."
+  },
+  {
+   "competency": "MATH.number.long-division",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Each step of a division is a multiplication fact."
+  },
+  {
+   "competency": "MATH.coordinate.distance",
+   "supports": [
+    "MATH.number.square-roots",
+    "MATH.number.integer-add"
+   ],
+   "note": "Differences of coordinates, squared, added, and a square root."
+  },
+  {
+   "competency": "MATH.calculus.limits",
+   "supports": [
+    "MATH.algebra.identities"
+   ],
+   "note": "x² − a² = (x − a)(x + a)."
   }
  ],
  "alternatives": [

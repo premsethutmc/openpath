@@ -5,7 +5,9 @@ import { FAMILIES, problemOf, variantsOf } from "../src/families";
 
 const ids = new Set<string>();
 for (const [fam, def] of FAMILIES) {
-  const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2], pow: [3, 4], dist: [4, 7], expand: [3, -5], dpow: [3, 4, 2], pint: [1, 3, 2, 2], subst: [0, 2, 1, 2], disc: [-5, 6] }[fam]!;
+  const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2], pow: [3, 4], dist: [4, 7], expand: [3, -5], dpow: [3, 4, 2], pint: [1, 3, 2, 2], subst: [0, 2, 1, 2], disc: [-5, 6] }[fam as "mul"];
+  // families@2 have no server-side mirror: the server reads their whole release pool from generated.v1.json
+  if (!seed) continue;
   ids.add(`gen:${fam}:${seed.join(",")}`);
   const p = problemOf(`gen:${fam}:${seed.join(",")}`);
   // every variant of the newer families (they are small), the first 25 of the others; and each multiple-choice form
@@ -15,7 +17,7 @@ for (const [fam, def] of FAMILIES) {
   }
   if (def.mc) ids.add(`gen:${fam}:${seed.join(",")}:mc`);
 }
-for (const bad of ["gen:mul:13,2", "gen:mul:7", "gen:eqfrac:2,5,14", "gen:fadd:3,2,8,1,9", "gen:cint:5,2,3", "gen:quad:1,1", "gen:alp:1,1", "gen:meet:0,0", "gen:above:1,2,2", "gen:nope:1,2", "gen:mul:7,8,9", "gen:mul:a,b", "gen:mul:7,8:mc", "gen:pow:13,2", "gen:pow:2,6:mc", "gen:dist:1,3", "gen:expand:3,-3", "gen:dpow:3,4,5", "gen:pint:0,5,1,1", "gen:subst:0,2,0,1", "gen:disc:0,4", "gen:pint:1,3,2,2:mcq"]) ids.add(bad);
+for (const bad of ["gen:mul:13,2", "gen:mul:7", "gen:eqfrac:2,5,14", "gen:fadd:3,2,8,1,9", "gen:cint:5,2,3", "gen:quad:1,1", "gen:alp:1,1", "gen:meet:0,0", "gen:above:1,2,2", "gen:nope:1,2", "gen:mul:7,8,9", "gen:mul:a,b", "gen:pow:13,2", "gen:pow:2,6:mc", "gen:dist:1,3", "gen:expand:3,-3", "gen:dpow:3,4,5", "gen:pint:0,5,1,1", "gen:subst:0,2,0,1", "gen:disc:0,4", "gen:pint:1,3,2,2:mcq"]) ids.add(bad);
 const rows = [...ids].map((id) => {
   const p = problemOf(id);
   return p ? { id, supported: true, competency: p.competency, type: p.type, answer: p.answer, ...(p.form === "mc" ? { options: p.options } : {}) } : { id, supported: false };

@@ -32,6 +32,7 @@
     "src/mathematics/unit",
     "src/mathematics/foundation",
     "src/year",
-    "src/learning"
+    "src/learning",
+    "src/review"
   ]
 }

@@ -186,8 +186,21 @@ class GeneratedQuestionTests(LearningBase):
                 from .learning import right
                 self.assertTrue(right(g, r['answer']), f"{r['id']}: the app's answer {r['answer']} is right on the server ({g['answer']})")
                 if 'options' in r:
-                    self.assertEqual(g['options'], r['options'], r['id'])
+                    if 'options' in g:
+                        self.assertEqual(g['options'], r['options'], r['id'])
                     self.assertEqual(g['answer'], r['answer'], r['id'])
+
+    def test_every_question_of_every_release_pool_is_known_to_the_server_in_its_answer_format(self):
+        from .learning import _answer_ok
+        from .learning_families import _table, generated
+        n = 0
+        for fam, t in _table().items():
+            for key, answer in t['items'].items():
+                g = generated(f'gen:{fam}:{key}')
+                self.assertIsNotNone(g, (fam, key))
+                self.assertTrue(_answer_ok(g['type'], answer), (fam, key, answer))
+                n += 1
+        self.assertGreater(n, 30000)
 
     def test_a_generated_question_is_saved_with_its_competency_and_checked(self):
         self.save(self.enrol())

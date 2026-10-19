@@ -1,13 +1,1810 @@
 {
- "schema": "content-review@1",
+ "schema": "content-review@2",
  "note": "The educator-review registry (packages/learning/src/review.ts). Maintained with packages/learning/scripts/review.ts. 'submitted' means awaiting an educator: no module here has been approved or released, so no question counts as validated in the shared engine.",
  "entries": [
+  {
+   "item": "family:above",
+   "kind": "family",
+   "competency": "MATH.algebra.functions",
+   "family": "above",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "693205a7",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fcd422ea",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fcd422ea",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "693205a7",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "693205a7",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:alp",
+   "kind": "family",
+   "competency": "MATH.calculus.area-integrals",
+   "family": "alp",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "6cd0f1f4",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "3f328107",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "3f328107",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "6cd0f1f4",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "6cd0f1f4",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:apn",
+   "kind": "family",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "family": "apn",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "a8dad5c4",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "d056ad2c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "d056ad2c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a8dad5c4",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a8dad5c4",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:cdist",
+   "kind": "family",
+   "competency": "MATH.coordinate.distance",
+   "family": "cdist",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "a08920e8",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "29891d5c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "29891d5c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a08920e8",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a08920e8",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:cint",
+   "kind": "family",
+   "competency": "MATH.calculus.definite-integrals",
+   "family": "cint",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "12064e16",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fcdc38aa",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fcdc38aa",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "12064e16",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "12064e16",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:condp",
+   "kind": "family",
+   "competency": "MATH.probability.conditional",
+   "family": "condp",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "ec04e80a",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "eda1ebaa",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "eda1ebaa",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "ec04e80a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "ec04e80a",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:det2",
+   "kind": "family",
+   "competency": "MATH.algebra.determinants",
+   "family": "det2",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "e06062d9",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "2a7bed66",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "2a7bed66",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "e06062d9",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "e06062d9",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:disc",
+   "kind": "family",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "family": "disc",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "024a748d",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "08bf7691",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "08bf7691",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "024a748d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "024a748d",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:dist",
+   "kind": "family",
+   "competency": "MATH.algebra.identities-intro",
+   "family": "dist",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "24831898",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "73e2b81a",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "73e2b81a",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "24831898",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "24831898",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:divr",
+   "kind": "family",
+   "competency": "MATH.number.division-remainders",
+   "family": "divr",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "3eca44a6",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "9d3b7f6f",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "9d3b7f6f",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "3eca44a6",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "3eca44a6",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:dpow",
+   "kind": "family",
+   "competency": "MATH.calculus.derivative-rules",
+   "family": "dpow",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "6efa000d",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "c1870859",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "c1870859",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "6efa000d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "6efa000d",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:eqfrac",
+   "kind": "family",
+   "competency": "MATH.number.equivalent-fractions",
+   "family": "eqfrac",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "7260c840",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e318a02c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e318a02c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "7260c840",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "7260c840",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:expand",
+   "kind": "family",
+   "competency": "MATH.algebra.identities",
+   "family": "expand",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "b3fbb3a3",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e95fce17",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e95fce17",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "b3fbb3a3",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "b3fbb3a3",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:factor",
+   "kind": "family",
+   "competency": "MATH.algebra.factorisation",
+   "family": "factor",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "4d2b22ea",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "6632fbec",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "6632fbec",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4d2b22ea",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4d2b22ea",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:fadd",
+   "kind": "family",
+   "competency": "MATH.number.fraction-add-like",
+   "family": "fadd",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "4666c963",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "aa39df1c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "aa39df1c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4666c963",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4666c963",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:faddu",
+   "kind": "family",
+   "competency": "MATH.number.fraction-add",
+   "family": "faddu",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "40d2c521",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "809d46fd",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "809d46fd",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "40d2c521",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "40d2c521",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:fmulw",
+   "kind": "family",
+   "competency": "MATH.number.fraction-multiply",
+   "family": "fmulw",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "d1bc32fb",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "33924b9b",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "33924b9b",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "d1bc32fb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "d1bc32fb",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:hcf",
+   "kind": "family",
+   "competency": "MATH.number.euclid-algorithm",
+   "family": "hcf",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "db3c75dc",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "3e16c2da",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "3e16c2da",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "db3c75dc",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "db3c75dc",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:ldiv",
+   "kind": "family",
+   "competency": "MATH.number.long-division",
+   "family": "ldiv",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "88e2905c",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "660fb0ce",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "660fb0ce",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "88e2905c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "88e2905c",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:lim",
+   "kind": "family",
+   "competency": "MATH.calculus.limits",
+   "family": "lim",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "b78c12de",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "6913571a",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "6913571a",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "b78c12de",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "b78c12de",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:lin",
+   "kind": "family",
+   "competency": "MATH.algebra.linear-equations",
+   "family": "lin",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "4bf4c8ea",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "38e54ca1",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "38e54ca1",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4bf4c8ea",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "4bf4c8ea",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:linev",
+   "kind": "family",
+   "competency": "MATH.algebra.variables",
+   "family": "linev",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "9cf7208c",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "54f3cfab",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "54f3cfab",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9cf7208c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9cf7208c",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:mean4",
+   "kind": "family",
+   "competency": "MATH.statistics.averages-intro",
+   "family": "mean4",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "77dfc843",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "52be6e2d",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "52be6e2d",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "77dfc843",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "77dfc843",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:meet",
+   "kind": "family",
+   "competency": "MATH.algebra.linear-equations",
+   "family": "meet",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "57803318",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "45abf4a2",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "45abf4a2",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "57803318",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "57803318",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:mmul",
+   "kind": "family",
+   "competency": "MATH.number.multi-multiplication",
+   "family": "mmul",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "614faf13",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "a65a8613",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "a65a8613",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "614faf13",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "614faf13",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:mul",
+   "kind": "family",
+   "competency": "MATH.number.multiplication-tables",
+   "family": "mul",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "3be0e6ee",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "252bbdbc",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "252bbdbc",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "3be0e6ee",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "3be0e6ee",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:pct",
+   "kind": "family",
+   "competency": "MATH.number.percentage",
+   "family": "pct",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "5f9ec2ff",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "02b53481",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "02b53481",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "5f9ec2ff",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "5f9ec2ff",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:pint",
+   "kind": "family",
+   "competency": "MATH.calculus.indefinite-integrals",
+   "family": "pint",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "552b485b",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f89244d7",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f89244d7",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "552b485b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "552b485b",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:pow",
+   "kind": "family",
+   "competency": "MATH.number.exponents",
+   "family": "pow",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "9ef3b50f",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "11bee98b",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "11bee98b",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9ef3b50f",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9ef3b50f",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:prop",
+   "kind": "family",
+   "competency": "MATH.number.proportion",
+   "family": "prop",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "e765795e",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "135e8a74",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "135e8a74",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "e765795e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "e765795e",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:quad",
+   "kind": "family",
+   "competency": "MATH.algebra.quadratics",
+   "family": "quad",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "1ed69e34",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "15f7318d",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "15f7318d",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "1ed69e34",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "1ed69e34",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:rect",
+   "kind": "family",
+   "competency": "MATH.measurement.rectangle-area",
+   "family": "rect",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "491f99bc",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f81d431c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f81d431c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "491f99bc",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "491f99bc",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:root",
+   "kind": "family",
+   "competency": "MATH.number.square-roots",
+   "family": "root",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "452a8b26",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "73d83356",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "73d83356",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "452a8b26",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "452a8b26",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:rperim",
+   "kind": "family",
+   "competency": "MATH.measurement.rectangle-perimeter",
+   "family": "rperim",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "d9863e32",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "00ea54e2",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "00ea54e2",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "d9863e32",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "d9863e32",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:subst",
+   "kind": "family",
+   "competency": "MATH.calculus.integration-methods",
+   "family": "subst",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "ff41c625",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fbc8a807",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fbc8a807",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "ff41c625",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "ff41c625",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "family:vol",
+   "kind": "family",
+   "competency": "MATH.measurement.volume-cubes",
+   "family": "vol",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "9ffc067e",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "43a88732",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "43a88732",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9ffc067e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9ffc067e",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.arithmetic-sequences",
+   "kind": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "9edf1099",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "64395484",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "64395484",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "8d4745ef",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "8d4745ef",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9edf1099",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "9edf1099",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.determinants",
+   "kind": "module",
+   "competency": "MATH.algebra.determinants",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "188a33bc",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0ee0b45c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0ee0b45c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "ab48ec53",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "ab48ec53",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "188a33bc",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "188a33bc",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.factorisation",
+   "kind": "module",
+   "competency": "MATH.algebra.factorisation",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "0d9a5de9",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "4d84e5fe",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "4d84e5fe",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "90264603",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "90264603",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "0d9a5de9",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "0d9a5de9",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
   {
    "item": "module:MATH.algebra.identities",
    "competency": "MATH.algebra.identities",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "bc332f41",
+   "contentHash": "e32efa0c",
    "state": "submitted",
    "history": [
     {
@@ -56,6 +1853,22 @@
      "role": "engineer",
      "at": "2026-10-19T14:00:00.000Z",
      "contentHash": "bc332f41",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e32efa0c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "e32efa0c",
      "note": "submitted for educator review"
     }
    ]
@@ -65,7 +1878,7 @@
    "competency": "MATH.algebra.identities-intro",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "c8810233",
+   "contentHash": "830abfbe",
    "state": "submitted",
    "history": [
     {
@@ -82,6 +1895,81 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "c8810233",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "830abfbe",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "830abfbe",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.linear-equations",
+   "kind": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "53ef5edb",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "dbb90f12",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "dbb90f12",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "6efd5cfd",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "6efd5cfd",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "53ef5edb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "53ef5edb",
      "note": "submitted for educator review"
     }
    ]
@@ -91,7 +1979,7 @@
    "competency": "MATH.algebra.quadratic-discriminant",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "d3a10777",
+   "contentHash": "39a3bf27",
    "state": "submitted",
    "history": [
     {
@@ -140,6 +2028,22 @@
      "role": "engineer",
      "at": "2026-10-19T14:00:00.000Z",
      "contentHash": "d3a10777",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "39a3bf27",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "39a3bf27",
      "note": "submitted for educator review"
     }
    ]
@@ -149,7 +2053,7 @@
    "competency": "MATH.algebra.quadratics",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "78427d56",
+   "contentHash": "bff0ed92",
    "state": "submitted",
    "history": [
     {
@@ -167,6 +2071,81 @@
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "78427d56",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "bff0ed92",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "bff0ed92",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.algebra.variables",
+   "kind": "module",
+   "competency": "MATH.algebra.variables",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "561b9455",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "21e7dbed",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "21e7dbed",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "e8f45994",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "e8f45994",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "561b9455",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "561b9455",
+     "note": "submitted for educator review"
     }
    ]
   },
@@ -175,7 +2154,7 @@
    "competency": "MATH.calculus.definite-integrals",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "a528201e",
+   "contentHash": "f3c77645",
    "state": "submitted",
    "history": [
     {
@@ -201,6 +2180,22 @@
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "a528201e",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f3c77645",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f3c77645",
+     "note": "submitted for educator review"
     }
    ]
   },
@@ -209,7 +2204,7 @@
    "competency": "MATH.calculus.derivative-rules",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "d4b923e9",
+   "contentHash": "8cd39ca2",
    "state": "submitted",
    "history": [
     {
@@ -258,6 +2253,22 @@
      "role": "engineer",
      "at": "2026-10-19T14:00:00.000Z",
      "contentHash": "d4b923e9",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "8cd39ca2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "8cd39ca2",
      "note": "submitted for educator review"
     }
    ]
@@ -267,7 +2278,7 @@
    "competency": "MATH.calculus.indefinite-integrals",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "6424ddd1",
+   "contentHash": "67b186ca",
    "state": "submitted",
    "history": [
     {
@@ -285,6 +2296,22 @@
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "6424ddd1",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "67b186ca",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "67b186ca",
+     "note": "submitted for educator review"
     }
    ]
   },
@@ -293,7 +2320,7 @@
    "competency": "MATH.calculus.integration-methods",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "56cc6b22",
+   "contentHash": "7a8dbbd9",
    "state": "submitted",
    "history": [
     {
@@ -310,6 +2337,81 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "56cc6b22",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "7a8dbbd9",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "7a8dbbd9",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.calculus.limits",
+   "kind": "module",
+   "competency": "MATH.calculus.limits",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "38fbe272",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "2611da87",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "2611da87",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c6945a88",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c6945a88",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "38fbe272",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "38fbe272",
      "note": "submitted for educator review"
     }
    ]
@@ -349,11 +2451,70 @@
    ]
   },
   {
+   "item": "module:MATH.coordinate.distance",
+   "kind": "module",
+   "competency": "MATH.coordinate.distance",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "da47fd1d",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "511e462f",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "511e462f",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "962b6050",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "962b6050",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "da47fd1d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "da47fd1d",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.measurement.rectangle-area",
    "competency": "MATH.measurement.rectangle-area",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "a118a52f",
+   "contentHash": "f2eea71e",
    "state": "submitted",
    "history": [
     {
@@ -379,6 +2540,199 @@
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "a118a52f",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f2eea71e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f2eea71e",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.measurement.rectangle-perimeter",
+   "kind": "module",
+   "competency": "MATH.measurement.rectangle-perimeter",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "64a83c55",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "41ec0346",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "41ec0346",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "7fd7a635",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "7fd7a635",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "64a83c55",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "64a83c55",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.measurement.volume-cubes",
+   "kind": "module",
+   "competency": "MATH.measurement.volume-cubes",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "cc9fd966",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f94e2ffd",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "f94e2ffd",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "77ada7d2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "77ada7d2",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "cc9fd966",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "cc9fd966",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.division-remainders",
+   "kind": "module",
+   "competency": "MATH.number.division-remainders",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "debb3d19",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "7442ed26",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "7442ed26",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "392ad203",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "392ad203",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "debb3d19",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "debb3d19",
+     "note": "submitted for educator review"
     }
    ]
   },
@@ -387,7 +2741,7 @@
    "competency": "MATH.number.equivalent-fractions",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "dcc20825",
+   "contentHash": "fbf9c768",
    "state": "submitted",
    "history": [
     {
@@ -405,6 +2759,65 @@
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "dcc20825",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fbf9c768",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fbf9c768",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.euclid-algorithm",
+   "kind": "module",
+   "competency": "MATH.number.euclid-algorithm",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "79176942",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0812b223",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0812b223",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "79176942",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "79176942",
+     "note": "submitted for educator review"
     }
    ]
   },
@@ -413,7 +2826,7 @@
    "competency": "MATH.number.exponents",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "4ce28d9f",
+   "contentHash": "79091bb9",
    "state": "submitted",
    "history": [
     {
@@ -430,6 +2843,22 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "4ce28d9f",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "79091bb9",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "79091bb9",
      "note": "submitted for educator review"
     }
    ]
@@ -469,11 +2898,70 @@
    ]
   },
   {
+   "item": "module:MATH.number.fraction-add",
+   "kind": "module",
+   "competency": "MATH.number.fraction-add",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "95aa1b41",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "d7652cce",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "d7652cce",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c54a1b8b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c54a1b8b",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "95aa1b41",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "95aa1b41",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.number.fraction-add-like",
    "competency": "MATH.number.fraction-add-like",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "452d86b4",
+   "contentHash": "22e2635a",
    "state": "submitted",
    "history": [
     {
@@ -498,6 +2986,22 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "452d86b4",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "22e2635a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "22e2635a",
      "note": "submitted for educator review"
     }
    ]
@@ -571,11 +3075,188 @@
    ]
   },
   {
+   "item": "module:MATH.number.fraction-multiply",
+   "kind": "module",
+   "competency": "MATH.number.fraction-multiply",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "199c6bdb",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "dd301c15",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "dd301c15",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "529fdefc",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "529fdefc",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "199c6bdb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "199c6bdb",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.long-division",
+   "kind": "module",
+   "competency": "MATH.number.long-division",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "15a3f87e",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "b4964f83",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "b4964f83",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "fa5704b4",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "fa5704b4",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "15a3f87e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "15a3f87e",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.multi-multiplication",
+   "kind": "module",
+   "competency": "MATH.number.multi-multiplication",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "973bf99d",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "9a184ffe",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "9a184ffe",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c01f8ab5",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "c01f8ab5",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "973bf99d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "973bf99d",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.number.multiplication-tables",
    "competency": "MATH.number.multiplication-tables",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "63e92c89",
+   "contentHash": "bb93c502",
    "state": "submitted",
    "history": [
     {
@@ -600,6 +3281,285 @@
      "role": "engineer",
      "at": "2026-10-19T12:00:00.000Z",
      "contentHash": "63e92c89",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "bb93c502",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "bb93c502",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.percentage",
+   "kind": "module",
+   "competency": "MATH.number.percentage",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "53db033d",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fb3f0401",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "fb3f0401",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "53db033d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "53db033d",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.proportion",
+   "kind": "module",
+   "competency": "MATH.number.proportion",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "8a7600db",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0128cf0c",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0128cf0c",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "dd7369fd",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "dd7369fd",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "8a7600db",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "8a7600db",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.number.square-roots",
+   "kind": "module",
+   "competency": "MATH.number.square-roots",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "dd57d200",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0ee9b342",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "0ee9b342",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "dd57d200",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "dd57d200",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.probability.conditional",
+   "kind": "module",
+   "competency": "MATH.probability.conditional",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "a822e6f6",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "24298add",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "24298add",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "4aa697ec",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "4aa697ec",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a822e6f6",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "a822e6f6",
+     "note": "submitted for educator review"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.statistics.averages-intro",
+   "kind": "module",
+   "competency": "MATH.statistics.averages-intro",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "213765ed",
+   "state": "submitted",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "af4ad540",
+     "note": "added"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T16:00:00.000Z",
+     "contentHash": "af4ad540",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "9e78b5bb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T17:00:00.000Z",
+     "contentHash": "9e78b5bb",
+     "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "213765ed",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "submitted",
+     "by": "OpenPath engineering (Claude)",
+     "role": "engineer",
+     "at": "2026-10-19T18:00:00.000Z",
+     "contentHash": "213765ed",
      "note": "submitted for educator review"
     }
    ]

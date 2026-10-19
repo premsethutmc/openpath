@@ -23,8 +23,35 @@ import { graph } from "./graph";
 import { moduleQuestions } from "./library";
 import { reviewOf } from "./review";
 import { validateModule } from "./validate";
+import { poolDepth } from "./library";
+import { familiesOf, familyReviewOf } from "./review";
+import libraryData from "../../../content/learning/library.v1.json";
+const notBuiltReason = (id: string) => ((libraryData as { notBuilt?: { competency: string; reason: string }[] }).notBuilt ?? []).find((n) => n.competency === id)?.reason.replace(/^library@\d: /, "") ?? null;
 
-export const COVERAGE_POLICY = "coverage@1";
+export const COVERAGE_POLICY = "coverage@2";
+/**
+ * The coverage matrix (coverage@2): one status per competency, never inflated by counting a generated question as a
+ * learning module.
+ *   approved     complete (a module that validates, with a question family whose pool is deep enough for diagnosis,
+ *                practice, reassessment and the delayed check) AND the module and every family it uses are
+ *                educator-approved (or released)
+ *   awaiting     complete, but not yet approved
+ *   partial      something exists but is not complete: a module with gaps, a module with no question family (only its
+ *                listed questions, so a learner can run out), a pool too small (depth@1), or a family with no module
+ *   unsupported  no content, and the competency needs a question type OpenPath cannot mark automatically (proofs,
+ *                constructions, written arguments, diagrams)
+ *   none         no content yet
+ */
+export type MatrixStatus = "approved" | "awaiting" | "partial" | "unsupported" | "none";
+export const MATRIX_LABEL: Record<MatrixStatus, string> = { approved: "Complete and educator-approved", awaiting: "Complete, awaiting review", partial: "Partially supported", unsupported: "Unsupported question type", none: "No content" };
+const UNSUPPORTED_TYPE: [RegExp, string][] = [
+  [/\b(prove|proof|deductive|axioms?)\b/i, "proof"],
+  [/\b(construct|constructions?)\b(?! measures)/i, "geometric construction"],
+  [/\b(justify|argument|generalisation|counterexamples?|logic|implications?)\b/i, "written reasoning"],
+  [/\b(charts?|graphs?|pictographs?|diagrams?|nets?|sketch|draw|plot|tessellat|symmetry|transformations?|maps?)\b/i, "diagram or drawing"],
+];
+/** The question type a competency needs that is not supported (a stated rule over its name), or null. */
+export const unsupportedType = (id: string) => UNSUPPORTED_TYPE.find(([r]) => r.test(graph.get(id).name))?.[1] ?? null;
 export const CATEGORIES = ["diagnostic", "strategies", "practice", "independent", "retention", "approved"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -39,6 +66,12 @@ export interface CompetencyCoverage {
   review: string;
   families: string[];
   has: Record<Category, boolean>;
+  /** depth@1: whether the module's family pool can supply every phase (null: no pool). */
+  depth: { sufficient: boolean; short: string[]; counts: Record<string, number> } | null;
+  /** Review state of each family the module uses. */
+  familyReview: Record<string, string>;
+  status: MatrixStatus;
+  why: string;
 }
 export function competencyCoverage(id: string): CompetencyCoverage {
   const c = graph.get(id);
@@ -47,6 +80,19 @@ export function competencyCoverage(id: string): CompetencyCoverage {
   const q = m ? moduleQuestions(m) : null;
   const alone = q ? [...q.check, ...q.practice, ...q.transfer, ...q.retention] : [];
   const r = reviewOf(id);
+  const depth = m ? poolDepth(m) : null;
+  const fams = m ? familiesOf(m) : [];
+  const familyReview = Object.fromEntries(fams.map((f) => [f, familyReviewOf(f).state]));
+  const familyHere = [...FAMILIES.values()].filter((f) => f.competency === id && f.domain).map((f) => f.id);
+  const ok = (st: string) => st === "approved" || st === "released";
+  const complete = !!m && missing.length === 0 && !!depth?.sufficient;
+  const status: MatrixStatus = complete ? (ok(r.state) && fams.every((f) => ok(familyReview[f])) ? "approved" : "awaiting") : m || familyHere.length ? "partial" : unsupportedType(id) ? "unsupported" : "none";
+  const why =
+    status === "approved" ? "Module and question families approved."
+    : status === "awaiting" ? `Complete; awaiting educator review (module ${r.state}; families ${fams.map((f) => `${f} ${familyReview[f]}`).join(", ")}).`
+    : status === "partial" ? (!m ? `A question family (${familyHere.join(", ")}) but no module: ${notBuiltReason(id) ?? "no teaching yet"}.` : missing.length ? `Module incomplete: ${missing.join("; ")}.` : !depth ? "No question family: only the module's own questions, so a learner can run out." : `Question pool too small for: ${depth.short.join(", ")}.`)
+    : status === "unsupported" ? `Needs ${unsupportedType(id)}, which is not marked automatically.`
+    : "No content yet.";
   return {
     id,
     name: c.name,
@@ -65,6 +111,10 @@ export function competencyCoverage(id: string): CompetencyCoverage {
       retention: !!m && m.retention.length >= RETENTION_CHECK,
       approved: r.state === "approved" || r.state === "released",
     },
+    depth: depth ? { sufficient: depth.sufficient, short: depth.short, counts: depth.counts } : null,
+    familyReview,
+    status,
+    why,
   };
 }
 
@@ -80,7 +130,9 @@ export interface ReleaseCoverage {
   mapping: { clear: number; uncertain: number; missing: number; unsupported: number; accepted: number; proposals: number };
   competencies: CompetencyCoverage[];
   counts: Record<Category, number> & { module: number; partial: number; none: number; total: number };
+  matrix: Record<MatrixStatus, number>;
 }
+export const matrixOf = (cs: CompetencyCoverage[]) => Object.fromEntries((Object.keys(MATRIX_LABEL) as MatrixStatus[]).map((k) => [k, cs.filter((c) => c.status === k).length])) as Record<MatrixStatus, number>;
 const sectionsIn = (ss: Section[] | undefined): Section[] => (ss ?? []).flatMap((s) => [s, ...sectionsIn(s.sections)]);
 
 export function releaseCoverage(r: CurriculumRelease): ReleaseCoverage {
@@ -102,6 +154,7 @@ export function releaseCoverage(r: CurriculumRelease): ReleaseCoverage {
     extracted: { chapters: chapters.length, sections: secs.length, outcomes: outs.length, examples: [...chapters, ...secs].reduce((n, c) => n + c.examples.length, 0), exercises: [...chapters, ...secs].reduce((n, c) => n + c.exercises.length, 0) },
     mapping: { clear: v("clear"), uncertain: v("uncertain"), missing: v("missing"), unsupported: v("unsupported"), accepted: outs.filter((o) => o.outcome.mapping.competencies.some((m) => m.status === "accepted")).length, proposals: outs.filter((o) => o.outcome.mapping.proposal).length },
     competencies: comps,
+    matrix: matrixOf(comps),
     counts: { ...counts, module: comps.filter((c) => c.module === "module").length, partial: comps.filter((c) => c.module === "partial").length, none: comps.filter((c) => c.module === "none").length, total: comps.length },
   };
 }
@@ -119,7 +172,7 @@ export function graphCoverage() {
       if (c.module === "partial") row.partial++;
       byGrade.set(g, row);
     }
-  return { total: comps.length, module: comps.filter((c) => c.module === "module").length, partial: comps.filter((c) => c.module === "partial").length, counts, byGrade: [...byGrade.entries()].sort((a, b) => a[0] - b[0]), competencies: comps };
+  return { matrix: matrixOf(comps), total: comps.length, module: comps.filter((c) => c.module === "module").length, partial: comps.filter((c) => c.module === "partial").length, counts, byGrade: [...byGrade.entries()].sort((a, b) => a[0] - b[0]), competencies: comps };
 }
 
 /** What is explicitly not supported (stated, never guessed around). */

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import developer, views
+from . import content_review, developer, views
 
 urlpatterns = [
     path("account/", views.AccountView.as_view(), name="account"),
@@ -16,6 +16,8 @@ urlpatterns = [
     path("pupils/<uuid:pupil_id>/events/", views.PupilEventsView.as_view(), name="pupil-events"),
     path("pupils/<uuid:pupil_id>/events/scrub/", views.PupilScrubView.as_view(), name="pupil-events-scrub"),
     path("pupils/<uuid:pupil_id>/export/", views.PupilExportView.as_view(), name="pupil-export"),
+    path("content-review/", content_review.ContentReviewView.as_view(), name="content-review"),
+    path("content-review/decisions/", content_review.ContentDecisionView.as_view(), name="content-review-decisions"),
     path("telemetry/", developer.TelemetryView.as_view(), name="telemetry"),
     path("developer/status/", developer.DeveloperStatusView.as_view(), name="developer-status"),
     path("developer/claim/", developer.DeveloperClaimView.as_view(), name="developer-claim"),

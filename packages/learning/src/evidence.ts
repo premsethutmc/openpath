@@ -19,7 +19,7 @@ import { mathematicsLedger } from "../../mathematics/src/registration";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
-import { releasedQuestions, type Registry } from "./review";
+import { releaseOf, setActiveRegistry, type Registry } from "./review";
 
 export const DAY = 86_400_000;
 /** The delayed check comes at least this long after independent success (the existing seven-day requirement). */
@@ -32,7 +32,7 @@ export const RETENTION_CHECK = 2;
 // ---------------------------------------------------------------- the review fixture (test builds only)
 
 // kept on globalThis so that one switch holds however the module was loaded (test runners may load it twice)
-type Fixture = { items: Set<string>; releasedAt: string } | null;
+type Fixture = { items: Set<string>; releasedAt: string; all?: boolean } | null;
 const G = globalThis as { __openpathLearningReviewFixture?: Fixture };
 const getFixture = (): Fixture => G.__openpathLearningReviewFixture ?? null;
 /**
@@ -40,26 +40,23 @@ const getFixture = (): Fixture => G.__openpathLearningReviewFixture ?? null;
  * what a verified (green) skill looks like. Shipped content is never reviewed; the app enables this only in a test
  * build, and says so on screen.
  */
-export function useReviewFixture(f: { items: string[]; releasedAt: string } | null) {
-  G.__openpathLearningReviewFixture = f && { items: new Set(f.items), releasedAt: f.releasedAt };
+export function useReviewFixture(f: { items: string[]; releasedAt: string; all?: boolean } | null) {
+  G.__openpathLearningReviewFixture = f && { items: new Set(f.items), releasedAt: f.releasedAt, all: f.all };
 }
 export const reviewFixtureActive = () => getFixture() !== null;
 
-// on globalThis, like the fixture, so one switch holds however the module was loaded
-const R = globalThis as { __openpathLearningReleased?: Map<string, string> | null };
 /**
- * Read the released questions from another registry (tests and review tooling: e.g. to show what a module's release
- * would change before the registry file is edited). null goes back to the repository's registry.
+ * Use another review registry (the server's, which the app loads at start; or a test's). null goes back to the
+ * repository's registry. Released content is read through review.ts releaseOf.
  */
 export function useRegistry(reg: Registry | null) {
-  R.__openpathLearningReleased = reg ? releasedQuestions(reg) : null;
+  setActiveRegistry(reg);
 }
 export function nativeItem(q: Question): Item & { kind: "code" } {
   const fixture = getFixture();
-  // validated: a question of a module an educator approved and that was released unchanged (review.ts), or, in a
-  // test build only, the review fixture
-  const released = (R.__openpathLearningReleased ??= releasedQuestions());
-  const releasedAt = released.get(q.id) ?? (fixture?.items.has(q.id) ? fixture.releasedAt : undefined);
+  // validated: a released question (review.ts releaseOf), or, in a test build only, the review fixture
+  const released = releaseOf(q.id);
+  const releasedAt = released ?? (fixture?.items.has(q.id) || (fixture?.all && true) ? fixture!.releasedAt : undefined);
   const validated = releasedAt !== undefined;
   return {
     kind: "code",
@@ -75,7 +72,7 @@ export function nativeItem(q: Question): Item & { kind: "code" } {
     b: 4,
     evidence_status: validated ? "validated" : "provisional",
     ...(validated ? { released_at: releasedAt } : {}),
-    review: released.has(q.id) ? "Educator-reviewed and released (content/learning/review.v1.json)" : validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
+    review: released ? "Educator-reviewed and released (content/learning/review.v1.json)" : validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
     explain: q.solution,
   } as Item & { kind: "code" };
 }
