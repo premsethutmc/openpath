@@ -1,0 +1,54 @@
+/* The Completing the square reference unit (builds on chapter.css: cards, panels, options, actions). */
+.small-steps .step-dot { width: 30px; height: 30px; font-size: 0.85rem; }
+.small-steps::before { left: 15px; right: 15px; }
+.prompt { white-space: pre-line; }
+.reveal { margin-top: 14px; padding-top: 12px; border-top: 2px dashed var(--line); }
+.remediate { background: #fff8ec; border-color: #f2dcb4; }
+.remediate h3 { margin: 6px 0 6px; }
+.try { background: #f7f8fd; }
+.why { margin: 6px 0 0; color: var(--muted); }
+.why span { font-weight: 700; color: var(--ink); }
+.worked li strong { display: block; }
+.help-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.feedback.neutral { background: #eef0f7; color: var(--ink); }
+.feedback .link { margin-top: 8px; }
+
+/* answer boxes: one per value, each with a sign button (phone keypads often have no minus key) */
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fields.three { grid-template-columns: 1fr 1fr 1fr; }
+.fields .field:only-child { grid-column: 1 / -1; }
+.fields .field > span:first-child { font-size: 0.9rem; color: var(--muted); }
+.number { display: flex; gap: 6px; }
+.number input { min-width: 0; font-size: 1.2rem; padding: 12px 10px; }
+.sign { flex: none; width: 44px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); font: inherit; font-weight: 800; font-size: 1.1rem; color: var(--brand); }
+
+/* algebra tiles */
+.tiles { margin: 10px 0 4px; }
+.tiles svg { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; }
+.tile-x2 { fill: #d9d4ff; stroke: var(--brand); stroke-width: 1.5; }
+.tile-x { fill: #c9ecd9; stroke: #1d7a4f; stroke-width: 1; }
+.tile-unit { fill: #ffd98a; stroke: #b07a06; stroke-width: 1; }
+.tile-gap { fill: none; stroke: #b3372b; stroke-width: 1.5; stroke-dasharray: 4 3; }
+.tile-label { font-size: 11px; fill: var(--muted); text-anchor: middle; }
+.tile-name { font-size: 18px; font-weight: 700; fill: var(--brand); text-anchor: middle; }
+.tiles figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; text-align: center; }
+.tile-controls { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.control-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.control-row .secondary { width: 100%; padding: 0 8px; min-height: 48px; font-size: 0.95rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 8px; }
+.chip { border: 2px solid var(--line); background: var(--card); border-radius: 99px; padding: 6px 12px; font: inherit; font-size: 0.9rem; font-weight: 600; }
+.chip.on { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
+
+/* the balance */
+.balance { margin: 10px 0 4px; display: flex; flex-direction: column; gap: 10px; }
+.pans { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pan { border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; border: 2px solid var(--line); }
+.pan strong { font-size: 1.5rem; }
+.pan.even { border-color: var(--good); background: var(--good-soft); }
+.pan.off { border-color: var(--bad); background: var(--bad-soft); }
+
+/* where you stand */
+.standing { display: grid; gap: 10px; }
+.standing .big-number { font-size: 2rem; font-weight: 800; margin: 0; }
+.standing .big-number span, .big-number span { font-size: 1rem; color: var(--muted); font-weight: 600; }
+.big-number { font-size: 2.2rem; font-weight: 800; margin: 0; }

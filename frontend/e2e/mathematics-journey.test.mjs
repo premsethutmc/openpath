@@ -371,3 +371,36 @@ test("JEE Main chapter: cards (no drop-downs), a class of lessons, answers saved
   assert.equal(await page.locator("select").count(), 0, "no drop-down menus in the class");
   await context.close();
 });
+test("Completing the square unit: predict before the reveal, misconception feedback and re-teaching, saved and resumed", async () => {
+  const { page, context, learner } = await setup(390);
+  await page.goto(base + "/maths/");
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Completing the square/ }).click();
+  await page.getByText("Part 1 of 3").waitFor();
+  assert.equal(await page.locator("select").count(), 0, "no drop-down menus");
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  // a prediction before the pattern is revealed
+  assert.equal(await page.getByText("(x + a)² = x² + 2ax + a²").count(), 0, "the rule is hidden until the learner predicts");
+  await page.getByRole("button", { name: "Answer to continue" }).waitFor();
+  await page.locator('.ask[data-qid="p1"] input').fill("25");
+  await page.locator('.ask[data-qid="p1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.getByText("(x + a)² = x² + 2ax + a²").waitFor();
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("button", { name: "Check your understanding" }).click();
+  // a typical mistake: (x − 6)² = x² − 36
+  await page.locator('.ask[data-qid="d1"]').getByRole("radio").nth(0).click();
+  await page.locator('.ask[data-qid="d1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.getByText("you lost the middle term").waitFor();
+  await page.getByText("Another way to see it").waitFor();
+  await page.locator('.ask[data-qid="ds1"] input').fill("49");
+  await page.locator('.ask[data-qid="ds1"]').getByRole("button", { name: "Check answer" }).click();
+  await page.locator('.ask[data-qid="ds1"]').getByRole("status").filter({ hasText: "Correct!" }).waitFor();
+  const saved = (await records(page, learner)).filter((e) => e.program === "completing-the-square");
+  assert.deepEqual(saved.filter((e) => e.action === "answer").map((e) => [e.questionId, e.response]), [["p1", "25"], ["d1", "A"], ["ds1", "49"]], "answers saved to the account");
+  // leave and come back: the unit continues at the next part
+  await page.reload();
+  await page.getByRole("button", { name: /JEE Main/ }).click();
+  await page.getByRole("button", { name: /Completing the square/ }).click();
+  await page.getByText("Part 2 of 3").waitFor();
+  await context.close();
+});

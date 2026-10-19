@@ -1,0 +1,2568 @@
+{
+  "id": "completing-the-square",
+  "version": "1.0.0",
+  "compatibleVersions": [],
+  "title": "Completing the square",
+  "unitOf": "jee-quadratics",
+  "track": "jee-main",
+  "competencyId": "MATH.algebra.quadratics",
+  "review": "provisional",
+  "reviewNote": "Original teaching and questions written for this reference unit; every answer is recomputed independently in frontend/src/mathematics/unit/unit.test.ts. Not reviewed by an educator; not previous-year questions. Provisional: it can never verify mastery.",
+  "source": [
+    "NTA Syllabus for JEE (Main) 2026, Unit 2: quadratic equations in real and complex number systems and their solutions"
+  ],
+  "levels": "School foundations (stages 1 to 6) towards JEE Main (stages 7 and 8). No JEE Advanced material.",
+  "retentionAfter": "transfer",
+  "retentionDelayDays": 7,
+  "stages": [
+    {
+      "id": "prereq",
+      "title": "Before we start",
+      "phase": "teaching",
+      "kind": "teach",
+      "sections": [
+        {
+          "id": "P1",
+          "title": "Squaring a bracket",
+          "screens": [
+            {
+              "title": "What (x + 3)² means",
+              "text": [
+                "(x + 3)² means (x + 3) × (x + 3). Multiply every term in the first bracket by every term in the second:",
+                "The two middle terms are the same, so they add up: 3x + 3x = 6x."
+              ],
+              "math": [
+                "(x + 3)(x + 3) = x² + 3x + 3x + 9",
+                "= x² + 6x + 9"
+              ],
+              "mathAt": 1
+            },
+            {
+              "title": "Spot the pattern",
+              "text": [
+                "In (x + 3)² = x² + 6x + 9, the 6 is twice 3, and the 9 is 3 squared. Use that pattern to predict the next one before you see it."
+              ],
+              "predict": "p1",
+              "reveal": {
+                "text": [
+                  "In general:",
+                  "The middle coefficient is twice a, and the last term is a squared. This one pattern is the whole key to completing the square."
+                ],
+                "math": [
+                  "(x + a)² = x² + 2ax + a²"
+                ],
+                "mathAt": 1
+              }
+            },
+            {
+              "title": "With a minus sign",
+              "text": [
+                "(x − 4)² = (x − 4)(x − 4) = x² − 4x − 4x + 16. So:"
+              ],
+              "math": [
+                "(x − a)² = x² − 2ax + a²"
+              ],
+              "tip": "The last term is always positive: (−4) × (−4) = +16."
+            }
+          ],
+          "check": "d1",
+          "remediate": {
+            "screens": [
+              {
+                "title": "Why (x − 6)² is not x² − 36",
+                "text": [
+                  "Test it with a number. Put x = 10:",
+                  "They are different, so (x − 6)² ≠ x² − 36. Expanding properly gives x² − 12x + 36, and with x = 10 that is 100 − 120 + 36 = 16 ✓."
+                ],
+                "math": [
+                  "(10 − 6)² = 4² = 16",
+                  "10² − 36 = 64"
+                ],
+                "mathAt": 1
+              }
+            ],
+            "support": "ds1"
+          }
+        },
+        {
+          "id": "P2",
+          "title": "Solving x² = k",
+          "screens": [
+            {
+              "title": "Two square roots",
+              "text": [
+                "x² = 9 has two solutions, 3 and −3, because 3² = 9 and (−3)² = 9. We write x = ±3."
+              ],
+              "tip": "Forgetting the negative root loses half the answer. It is the most common slip in this chapter."
+            },
+            {
+              "title": "A squared bracket",
+              "text": [
+                "(x − 2)² = 9 works the same way: the bracket x − 2 must be 3 or −3."
+              ],
+              "math": [
+                "x − 2 = 3  or  x − 2 = −3",
+                "x = 5  or  x = −1"
+              ]
+            },
+            {
+              "title": "When the number is not a perfect square",
+              "text": [
+                "(x + 1)² = 5 gives x + 1 = ±√5, so x = −1 ± √5. Leave √5 as it is: that is the exact answer."
+              ]
+            },
+            {
+              "title": "When the number is negative",
+              "text": [
+                "(x + 1)² = −4 has no real solution, because a real number squared is never negative. (Complex roots come later in the chapter.)"
+              ]
+            }
+          ],
+          "check": "d2",
+          "remediate": {
+            "screens": [
+              {
+                "title": "Undo the bracket in two steps",
+                "text": [
+                  "Solve (x + 4)² = 25 slowly:",
+                  "First take the square root of both sides, keeping both signs. Then undo the + 4 by subtracting 4 from both sides."
+                ],
+                "math": [
+                  "x + 4 = 5  or  x + 4 = −5",
+                  "x = 5 − 4 = 1  or  x = −5 − 4 = −9"
+                ],
+                "mathAt": 1
+              }
+            ],
+            "support": "ds2"
+          }
+        },
+        {
+          "id": "P3",
+          "title": "Keeping an equation balanced",
+          "screens": [
+            {
+              "title": "Do the same to both sides",
+              "text": [
+                "An equation is a balance: both sides have the same value. You may add, subtract, multiply or divide (by a non-zero number), as long as you do it to the whole of both sides.",
+                "Dividing an equation by 2 means dividing every term on both sides by 2."
+              ],
+              "math": [
+                "4x² − 8x = 12",
+                "x² − 2x = 3   (every term ÷ 4)"
+              ]
+            }
+          ],
+          "check": "d3",
+          "remediate": {
+            "screens": [
+              {
+                "title": "Every term, both sides",
+                "text": [
+                  "2x² + 8x − 10 = 0 has three terms on the left and 0 on the right. Divide each of them by 2:"
+                ],
+                "math": [
+                  "2x² ÷ 2 = x²",
+                  "8x ÷ 2 = 4x",
+                  "−10 ÷ 2 = −5",
+                  "0 ÷ 2 = 0"
+                ]
+              }
+            ],
+            "support": "ds3"
+          }
+        }
+      ],
+      "questions": [
+        "p1",
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "support": [
+        "ds1",
+        "ds2",
+        "ds3"
+      ],
+      "hints": true
+    },
+    {
+      "id": "picture",
+      "title": "See it: why it is called completing the square",
+      "phase": "teaching",
+      "kind": "teach",
+      "sections": [
+        {
+          "id": "S1",
+          "title": "A perfect square is a square",
+          "screens": [
+            {
+              "title": "(x + 3)² as an area",
+              "text": [
+                "(x + 3)² is the area of a square with side x + 3. Cut each side into x and 3, and the square splits into four pieces:",
+                "One x² square, two x-by-3 rectangles (3x each, 6x in all), and a 3-by-3 corner of 9 unit tiles: x² + 6x + 9."
+              ],
+              "widget": {
+                "type": "tiles",
+                "b": 6,
+                "mode": "show"
+              }
+            },
+            {
+              "title": "Now the corner is missing",
+              "text": [
+                "Start with only x² + 6x: one x² square and 6 strips, each x long and 1 wide. Move strips to the right side or the bottom and try to make a square."
+              ],
+              "widget": {
+                "type": "tiles",
+                "b": 6,
+                "mode": "split"
+              },
+              "predict": "e1",
+              "reveal": {
+                "text": [
+                  "Adding 9 completes the square:",
+                  "That is all “completing the square” means: adding the missing corner."
+                ],
+                "math": [
+                  "x² + 6x + 9 = (x + 3)²"
+                ],
+                "mathAt": 1
+              }
+            },
+            {
+              "title": "Build it yourself",
+              "text": [
+                "Split the strips evenly, then add unit tiles until the shape is a complete square. Watch the algebra underneath change as you go."
+              ],
+              "widget": {
+                "type": "tiles",
+                "b": 6,
+                "mode": "build"
+              }
+            }
+          ]
+        },
+        {
+          "id": "S2",
+          "title": "What do you add, in general?",
+          "screens": [
+            {
+              "title": "Change the number of strips",
+              "text": [
+                "Try x² + 4x, x² + 8x and x² + 10x. Each time, split the strips evenly and count the tiles in the corner."
+              ],
+              "widget": {
+                "type": "tiles",
+                "b": 4,
+                "mode": "build",
+                "choose": true
+              }
+            },
+            {
+              "title": "Predict",
+              "text": [
+                "Without building it, predict the corner for x² + 10x."
+              ],
+              "predict": "e2",
+              "reveal": {
+                "text": [
+                  "10 strips split 5 and 5, so the corner is 5 by 5:"
+                ],
+                "math": [
+                  "x² + 10x + 25 = (x + 5)²"
+                ]
+              }
+            },
+            {
+              "title": "The rule",
+              "text": [
+                "Now for any x² + bx."
+              ],
+              "predict": "e3",
+              "reveal": {
+                "text": [
+                  "Half of the b strips go on each side, so the corner is b/2 by b/2. Its area is (b/2)²:"
+                ],
+                "math": [
+                  "x² + bx + (b/2)² = (x + b/2)²"
+                ],
+                "tip": "Say it as: halve the coefficient of x, then square it."
+              }
+            },
+            {
+              "title": "Why halve? The algebra agrees",
+              "text": [
+                "Compare with the pattern from the start: (x + a)² = x² + 2ax + a². To match x² + bx we need 2a = b, so a = b/2, and the last term must be a² = (b/2)².",
+                "The picture and the algebra give the same answer, and the algebra still works when tiles cannot be drawn (fractions and negatives, next)."
+              ]
+            }
+          ],
+          "remediate": {
+            "screens": [
+              {
+                "title": "Count the corner again",
+                "text": [
+                  "Look at x² + 6x again: 3 strips on the right and 3 on the bottom. The gap in the corner is 3 tiles wide and 3 tiles tall, so 3 × 3 = 9. With b strips, each side gets b/2, so the corner is (b/2) × (b/2)."
+                ],
+                "widget": {
+                  "type": "tiles",
+                  "b": 6,
+                  "mode": "build"
+                }
+              }
+            ],
+            "support": "es1"
+          }
+        },
+        {
+          "id": "S3",
+          "title": "Fractions, negatives and expressions",
+          "screens": [
+            {
+              "title": "An odd coefficient",
+              "text": [
+                "Tiles cannot be cut in half on screen, but the algebra works the same way. Predict first."
+              ],
+              "predict": "e4",
+              "reveal": {
+                "text": [
+                  "Half of 5 is 5/2:"
+                ],
+                "math": [
+                  "x² + 5x + (5/2)² = (x + 5/2)²",
+                  "(5/2)² = 25/4"
+                ]
+              }
+            },
+            {
+              "title": "A negative coefficient",
+              "text": [
+                "Now x² − 8x. Halving −8 gives −4."
+              ],
+              "predict": "e5",
+              "reveal": {
+                "text": [
+                  "(x − 4)² = x² − 8x + 16. The sign goes into the bracket; the number you add is positive, because it is a square."
+                ]
+              }
+            },
+            {
+              "title": "Completing the square in an expression",
+              "text": [
+                "To rewrite x² + 6x + 5, add the missing 9 and take it away again, so the value does not change:"
+              ],
+              "math": [
+                "x² + 6x + 5 = x² + 6x + 9 − 9 + 5",
+                "= (x + 3)² − 4"
+              ],
+              "tip": "In an expression, add and take away the same number. In an equation, add it to both sides (next stage)."
+            }
+          ],
+          "check": "e6",
+          "remediate": {
+            "screens": [
+              {
+                "title": "Add it, then take it away",
+                "text": [
+                  "(x + 4)² = x² + 8x + 16. That has 16 where x² + 8x + 3 has 3. So x² + 8x + 3 is 13 less than (x + 4)²:"
+                ],
+                "math": [
+                  "x² + 8x + 3 = (x + 4)² − 16 + 3 = (x + 4)² − 13"
+                ]
+              }
+            ],
+            "support": "es3"
+          }
+        }
+      ],
+      "questions": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6"
+      ],
+      "support": [
+        "es1",
+        "es2",
+        "es3"
+      ],
+      "hints": true
+    },
+    {
+      "id": "worked",
+      "title": "Worked examples",
+      "phase": "worked",
+      "kind": "worked",
+      "examples": [
+        {
+          "id": "W1",
+          "title": "Basic: a monic quadratic",
+          "problem": "Solve x² + 6x + 5 = 0.",
+          "steps": [
+            {
+              "text": "Move the constant to the right.",
+              "math": [
+                "x² + 6x = −5"
+              ],
+              "why": "We want x² + bx alone on the left, so that we can complete the square there."
+            },
+            {
+              "text": "Add (6/2)² = 9 to both sides.",
+              "math": [
+                "x² + 6x + 9 = −5 + 9"
+              ],
+              "why": "Adding the same number to both sides keeps the equation true.",
+              "predict": "w1"
+            },
+            {
+              "text": "Write the left side as a square.",
+              "math": [
+                "(x + 3)² = 4"
+              ],
+              "why": "x² + 6x + 9 is exactly (x + 3)²: the completed square."
+            },
+            {
+              "text": "Take square roots, both of them.",
+              "math": [
+                "x + 3 = 2  or  x + 3 = −2"
+              ],
+              "why": "Both 2² and (−2)² are 4."
+            },
+            {
+              "text": "Solve each and check.",
+              "math": [
+                "x = −1  or  x = −5"
+              ],
+              "why": "Check x = −1: 1 − 6 + 5 = 0 ✓. (This one also factorises as (x + 1)(x + 5); completing the square works even when factorising does not.)"
+            }
+          ]
+        },
+        {
+          "id": "W2",
+          "title": "Basic: a negative b and irrational roots",
+          "problem": "Solve x² − 8x + 3 = 0.",
+          "steps": [
+            {
+              "text": "Move the constant across.",
+              "math": [
+                "x² − 8x = −3"
+              ]
+            },
+            {
+              "text": "Add (−8/2)² = 16 to both sides.",
+              "math": [
+                "x² − 8x + 16 = −3 + 16"
+              ],
+              "predict": "w2",
+              "why": "Halve −8 to get −4; square it to get +16."
+            },
+            {
+              "text": "Complete the square.",
+              "math": [
+                "(x − 4)² = 13"
+              ]
+            },
+            {
+              "text": "Square-root both sides.",
+              "math": [
+                "x − 4 = ±√13"
+              ],
+              "why": "13 is not a perfect square, so keep the exact root."
+            },
+            {
+              "text": "Solve.",
+              "math": [
+                "x = 4 ± √13"
+              ],
+              "why": "Two irrational roots, a conjugate pair. No integer factorisation exists here."
+            }
+          ]
+        },
+        {
+          "id": "W3",
+          "title": "Intermediate: an odd coefficient",
+          "problem": "Solve x² + 3x − 1 = 0.",
+          "steps": [
+            {
+              "text": "Move the constant across.",
+              "math": [
+                "x² + 3x = 1"
+              ]
+            },
+            {
+              "text": "Add (3/2)² = 9/4 to both sides.",
+              "math": [
+                "x² + 3x + 9/4 = 1 + 9/4"
+              ],
+              "predict": "w3",
+              "why": "Fractions are fine: the rule is the same."
+            },
+            {
+              "text": "Complete the square and add the fractions.",
+              "math": [
+                "(x + 3/2)² = 13/4"
+              ],
+              "why": "1 = 4/4, and 4/4 + 9/4 = 13/4."
+            },
+            {
+              "text": "Square-root both sides.",
+              "math": [
+                "x + 3/2 = ±√13 / 2"
+              ],
+              "why": "√(13/4) = √13 / √4 = √13 / 2."
+            },
+            {
+              "text": "Solve.",
+              "math": [
+                "x = (−3 ± √13) / 2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "W4",
+          "title": "Intermediate: a leading coefficient that is not 1",
+          "problem": "Solve 2x² + 12x − 5 = 0.",
+          "steps": [
+            {
+              "text": "Divide every term by 2.",
+              "math": [
+                "x² + 6x − 5/2 = 0"
+              ],
+              "predict": "w4",
+              "why": "The pattern x² + bx + (b/2)² needs the x² coefficient to be 1. Dividing by 2 does not change the roots."
+            },
+            {
+              "text": "Move the constant across.",
+              "math": [
+                "x² + 6x = 5/2"
+              ]
+            },
+            {
+              "text": "Add 9 to both sides.",
+              "math": [
+                "x² + 6x + 9 = 5/2 + 9 = 23/2"
+              ]
+            },
+            {
+              "text": "Complete the square.",
+              "math": [
+                "(x + 3)² = 23/2"
+              ]
+            },
+            {
+              "text": "Solve.",
+              "math": [
+                "x = −3 ± √(23/2) = (−6 ± √46) / 2"
+              ],
+              "why": "√(23/2) = √46 / 2 (multiply top and bottom inside the root by 2)."
+            }
+          ]
+        },
+        {
+          "id": "W5",
+          "title": "Intermediate: a negative leading coefficient",
+          "problem": "Solve −x² + 4x + 1 = 0.",
+          "steps": [
+            {
+              "text": "Divide every term by −1.",
+              "math": [
+                "x² − 4x − 1 = 0"
+              ],
+              "predict": "w5",
+              "why": "Dividing every term by −1 flips every sign."
+            },
+            {
+              "text": "Move the constant across and add (−4/2)² = 4.",
+              "math": [
+                "x² − 4x + 4 = 1 + 4"
+              ]
+            },
+            {
+              "text": "Complete the square.",
+              "math": [
+                "(x − 2)² = 5"
+              ]
+            },
+            {
+              "text": "Solve.",
+              "math": [
+                "x = 2 ± √5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "W6",
+          "title": "Intermediate: fractions throughout",
+          "problem": "Solve 3x² − 2x − 1 = 0.",
+          "steps": [
+            {
+              "text": "Divide every term by 3 and move the constant.",
+              "math": [
+                "x² − (2/3)x = 1/3"
+              ]
+            },
+            {
+              "text": "Add (−1/3)² = 1/9 to both sides.",
+              "math": [
+                "x² − (2/3)x + 1/9 = 1/3 + 1/9"
+              ],
+              "predict": "w6"
+            },
+            {
+              "text": "Complete the square.",
+              "math": [
+                "(x − 1/3)² = 4/9"
+              ],
+              "why": "1/3 = 3/9, and 3/9 + 1/9 = 4/9."
+            },
+            {
+              "text": "Square-root and solve.",
+              "math": [
+                "x − 1/3 = ±2/3",
+                "x = 1  or  x = −1/3"
+              ],
+              "why": "Check x = 1: 3 − 2 − 1 = 0 ✓. Rational roots: this one also factorises as (3x + 1)(x − 1)."
+            }
+          ]
+        }
+      ],
+      "questions": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6"
+      ],
+      "support": [],
+      "hints": true
+    },
+    {
+      "id": "formula",
+      "title": "Why the quadratic formula is true",
+      "phase": "worked",
+      "kind": "worked",
+      "examples": [
+        {
+          "id": "F",
+          "title": "Completing the square, once, for every quadratic",
+          "problem": "Solve ax² + bx + c = 0 (a ≠ 0) with the same steps as before, using letters.",
+          "steps": [
+            {
+              "text": "Divide every term by a.",
+              "math": [
+                "x² + (b/a)x + c/a = 0"
+              ],
+              "why": "Exactly as for 2x² + 12x − 5 = 0: the x² coefficient must be 1. This is allowed because a ≠ 0."
+            },
+            {
+              "text": "Move c/a to the right.",
+              "math": [
+                "x² + (b/a)x = −c/a"
+              ]
+            },
+            {
+              "text": "Add (b/2a)² to both sides.",
+              "math": [
+                "x² + (b/a)x + (b/2a)² = −c/a + b²/4a²"
+              ],
+              "predict": "f1",
+              "why": "Halve the coefficient of x, then square it: the same rule as x² + 6x + 9."
+            },
+            {
+              "text": "The left side is now a perfect square.",
+              "math": [
+                "(x + b/2a)² = b²/4a² − c/a"
+              ]
+            },
+            {
+              "text": "Put the right side over one denominator.",
+              "math": [
+                "(x + b/2a)² = (b² − 4ac) / 4a²"
+              ],
+              "predict": "f2"
+            },
+            {
+              "text": "Square-root both sides.",
+              "math": [
+                "x + b/2a = ±√(b² − 4ac) / 2a"
+              ],
+              "why": "√(4a²) = 2|a|, and the ± already covers both signs, so we can write 2a."
+            },
+            {
+              "text": "Subtract b/2a.",
+              "math": [
+                "x = (−b ± √(b² − 4ac)) / 2a"
+              ],
+              "why": "This is the quadratic formula. It is completing the square, done once for every quadratic."
+            },
+            {
+              "text": "What b² − 4ac tells you.",
+              "math": [
+                "D = b² − 4ac"
+              ],
+              "predict": "f3",
+              "why": "That is why the discriminant decides the nature of the roots: D > 0 two real roots, D = 0 one repeated root, D < 0 none that are real."
+            }
+          ]
+        }
+      ],
+      "check": "f4",
+      "questions": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "support": [],
+      "hints": true
+    },
+    {
+      "id": "guided",
+      "title": "Guided practice",
+      "phase": "guided",
+      "kind": "questions",
+      "hints": true,
+      "questions": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6",
+        "g7",
+        "g8"
+      ],
+      "support": [
+        "gs1",
+        "gs2",
+        "gs3",
+        "gs4",
+        "gs5",
+        "gs6",
+        "gs7",
+        "gs8"
+      ]
+    },
+    {
+      "id": "independent",
+      "title": "On your own",
+      "phase": "independent",
+      "kind": "questions",
+      "hints": false,
+      "questions": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "support": [
+        "es3",
+        "gs1",
+        "gs2",
+        "gs3",
+        "gs4",
+        "gs7"
+      ]
+    },
+    {
+      "id": "apply",
+      "title": "Choose a method, find the mistake",
+      "phase": "application",
+      "kind": "questions",
+      "hints": false,
+      "intro": {
+        "id": "intro",
+        "screens": [
+          {
+            "title": "Which method?",
+            "text": [
+              "Factorisation is fastest when two integers with the right product and sum are easy to spot. Completing the square always works, and it shows the turning point of the graph. The formula is completing the square done once in general: use it when the numbers are awkward."
+            ]
+          },
+          {
+            "title": "Mistake 1: adding to one side only",
+            "text": [
+              "x² + 6x = −5 is true when x = −1. Try adding 9 to one side only, then to both sides, and test x = −1 each time."
+            ],
+            "widget": {
+              "type": "balance"
+            }
+          },
+          {
+            "title": "Mistakes 2 and 3: signs and dividing",
+            "text": [
+              "Signs: (x − 4)² = x² − 8x + 16. Halving −8 gives −4 (that sign goes in the bracket), and the number you add, 16, is positive.",
+              "Dividing: when the x² coefficient is not 1, divide every term on both sides, including the constant."
+            ]
+          }
+        ]
+      },
+      "questions": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6"
+      ],
+      "support": [
+        "gs1"
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "New kinds of problem",
+      "phase": "transfer",
+      "kind": "questions",
+      "hints": false,
+      "questions": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "support": [
+        "ts1"
+      ]
+    },
+    {
+      "id": "retention",
+      "title": "Revision check",
+      "phase": "retention",
+      "kind": "questions",
+      "hints": false,
+      "questions": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "support": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "p1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "expand-square",
+      "prompt": "Predict before you see it: (x + 5)² = x² + 10x + ?",
+      "answer": "25",
+      "solution": "(x + 5)(x + 5) = x² + 5x + 5x + 25 = x² + 10x + 25. The last term is 5 × 5.",
+      "misconceptions": [
+        {
+          "when": "5",
+          "says": "You wrote 5, but the last term is 5 × 5 = 25: the 5 in the first bracket multiplies the 5 in the second."
+        },
+        {
+          "when": "10",
+          "says": "10 is 2 × 5, the middle coefficient. The last term is 5² = 25."
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "expand-square",
+      "prompt": "(x − 6)² equals",
+      "answer": "B",
+      "solution": "(x − 6)(x − 6) = x² − 6x − 6x + 36 = x² − 12x + 36.",
+      "options": [
+        "x² − 36",
+        "x² − 12x + 36",
+        "x² − 12x − 36",
+        "x² + 36"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Squaring a bracket is not squaring each term: you lost the middle term −12x. Try x = 10: (10 − 6)² = 16, but 10² − 36 = 64."
+        },
+        {
+          "when": "C",
+          "says": "The last term is (−6) × (−6) = +36: a negative times a negative is positive."
+        },
+        {
+          "when": "D",
+          "says": "This squares each term and drops the middle term −12x."
+        }
+      ],
+      "support": "ds1",
+      "revisit": {
+        "stage": "prereq",
+        "section": "P1"
+      }
+    },
+    {
+      "id": "ds1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "expand-square",
+      "prompt": "Extra practice: (x + 7)² = x² + 14x + ?",
+      "answer": "49",
+      "solution": "(x + 7)² = x² + 2 × 7 × x + 7² = x² + 14x + 49.",
+      "misconceptions": [
+        {
+          "when": "7",
+          "says": "The last term is 7² = 49, not 7."
+        },
+        {
+          "when": "14",
+          "says": "14 is the middle coefficient, 2 × 7. The last term is 7² = 49."
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "square-root",
+      "prompt": "Solve (x + 4)² = 25. Enter both solutions.",
+      "answer": "-9,1",
+      "solution": "x + 4 = 5 or x + 4 = −5, so x = 1 or x = −9.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "unordered": true,
+      "misconceptions": [
+        {
+          "when": "-1,9",
+          "says": "Check the subtraction: x + 4 = ±5 gives x = −4 + 5 = 1 and x = −4 − 5 = −9."
+        },
+        {
+          "when": "-5,5",
+          "says": "It is x + 4 that equals ±5, not x. Subtract 4 from both: x = 1 or x = −9."
+        },
+        {
+          "when": "1,1",
+          "says": "There are two solutions: x + 4 = 5 and x + 4 = −5."
+        }
+      ],
+      "support": "ds2",
+      "revisit": {
+        "stage": "prereq",
+        "section": "P2"
+      }
+    },
+    {
+      "id": "ds2",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "square-root",
+      "prompt": "Extra practice: solve (x − 3)² = 16.",
+      "answer": "-1,7",
+      "solution": "x − 3 = 4 or x − 3 = −4, so x = 7 or x = −1.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "unordered": true,
+      "misconceptions": [
+        {
+          "when": "-7,1",
+          "says": "x − 3 = ±4 means x = 3 ± 4: 7 and −1."
+        },
+        {
+          "when": "-4,4",
+          "says": "It is x − 3 that equals ±4. Add 3: x = 7 or x = −1."
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "divide-through",
+      "prompt": "Divide every term of 2x² + 8x − 10 = 0 by 2.",
+      "answer": "B",
+      "solution": "2x² ÷ 2 = x², 8x ÷ 2 = 4x, −10 ÷ 2 = −5, and 0 ÷ 2 = 0: x² + 4x − 5 = 0.",
+      "options": [
+        "x² + 8x − 10 = 0",
+        "x² + 4x − 5 = 0",
+        "x² + 4x − 10 = 0",
+        "2x² + 4x − 5 = 0"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Only the x² term was divided. Every term must be divided by 2."
+        },
+        {
+          "when": "C",
+          "says": "−10 must be divided too: −10 ÷ 2 = −5."
+        },
+        {
+          "when": "D",
+          "says": "The x² term must be divided too: 2x² ÷ 2 = x²."
+        }
+      ],
+      "support": "ds3",
+      "revisit": {
+        "stage": "prereq",
+        "section": "P3"
+      }
+    },
+    {
+      "id": "ds3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "divide-through",
+      "prompt": "Extra practice: divide every term of 3x² − 12x + 9 = 0 by 3.",
+      "answer": "A",
+      "solution": "3x² ÷ 3 = x², −12x ÷ 3 = −4x, 9 ÷ 3 = 3: x² − 4x + 3 = 0.",
+      "options": [
+        "x² − 4x + 3 = 0",
+        "x² − 12x + 9 = 0",
+        "x² − 4x + 9 = 0",
+        "3x² − 4x + 3 = 0"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "Only the x² term was divided."
+        },
+        {
+          "when": "C",
+          "says": "9 ÷ 3 = 3: the constant is divided too."
+        },
+        {
+          "when": "D",
+          "says": "3x² ÷ 3 = x²."
+        }
+      ]
+    },
+    {
+      "id": "e1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "complete-term",
+      "prompt": "When the 6 strips are split 3 and 3, a corner is missing. How many 1 × 1 unit tiles fill that corner?",
+      "answer": "9",
+      "solution": "The missing corner is 3 wide and 3 tall, so it holds 3 × 3 = 9 unit tiles.",
+      "misconceptions": [
+        {
+          "when": "6",
+          "says": "6 is the number of strips. The corner is 3 wide and 3 tall: 3 × 3 = 9."
+        },
+        {
+          "when": "3",
+          "says": "The corner is 3 by 3, so it holds 3 × 3 = 9 tiles, not 3."
+        },
+        {
+          "when": "36",
+          "says": "That would be a 6-by-6 corner. Each side gets only 3 strips, so the corner is 3 by 3 = 9."
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "complete-term",
+      "prompt": "For x² + 10x, how many unit tiles complete the square?",
+      "answer": "25",
+      "solution": "Split the 10 strips 5 and 5. The corner is 5 by 5, so 25 tiles: x² + 10x + 25 = (x + 5)².",
+      "misconceptions": [
+        {
+          "when": "10",
+          "says": "10 is the number of strips. Split them 5 and 5: the corner is 5 × 5 = 25."
+        },
+        {
+          "when": "100",
+          "says": "That squares 10. Half the strips go each way, so the corner is (10/2)² = 25."
+        },
+        {
+          "when": "5",
+          "says": "The corner is 5 by 5: 5 × 5 = 25 tiles."
+        }
+      ],
+      "support": "es1"
+    },
+    {
+      "id": "es1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "complete-term",
+      "prompt": "Extra practice: what do you add to x² + 12x to complete the square?",
+      "answer": "36",
+      "solution": "Half of 12 is 6, and 6² = 36: x² + 12x + 36 = (x + 6)².",
+      "misconceptions": [
+        {
+          "when": "12",
+          "says": "12 is b. Add (12/2)² = 36."
+        },
+        {
+          "when": "144",
+          "says": "Halve first: (12/2)² = 36, not 12²."
+        },
+        {
+          "when": "6",
+          "says": "6 is half of 12; square it: 36."
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "complete-term",
+      "prompt": "For x² + bx, the number you add to complete the square is",
+      "answer": "C",
+      "solution": "Half of the b strips go on each side, so the missing corner is b/2 by b/2, with area (b/2)².",
+      "options": [
+        "b",
+        "2b",
+        "(b/2)²",
+        "b²"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "For x² + 6x that would be 6, but the corner needed 9. Count the corner: it is b/2 by b/2."
+        },
+        {
+          "when": "B",
+          "says": "For x² + 6x that would be 12, but the corner needed 9."
+        },
+        {
+          "when": "D",
+          "says": "b² is a b-by-b corner. Only half of the strips go on each side, so the corner is (b/2) by (b/2)."
+        }
+      ],
+      "revisit": {
+        "stage": "picture",
+        "section": "S2"
+      }
+    },
+    {
+      "id": "e4",
+      "type": "fraction",
+      "difficulty": 1,
+      "skill": "complete-term-fraction",
+      "prompt": "What do you add to x² + 5x to complete the square? (Use / for a fraction, for example 7/4.)",
+      "answer": "25/4",
+      "solution": "Half of 5 is 5/2, and (5/2)² = 25/4: x² + 5x + 25/4 = (x + 5/2)².",
+      "misconceptions": [
+        {
+          "when": "25/2",
+          "says": "Square the whole fraction: (5/2)² = 25/4. The denominator is squared too."
+        },
+        {
+          "when": "5/2",
+          "says": "Half of 5 is 5/2; you still need to square it: 25/4."
+        },
+        {
+          "when": "25",
+          "says": "That squares 5 without halving first: (5/2)² = 25/4."
+        }
+      ],
+      "support": "es2"
+    },
+    {
+      "id": "e5",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "complete-term-negative",
+      "prompt": "x² − 8x + ▢ = (x − n)². Enter the number you add, and n.",
+      "answer": "16,4",
+      "solution": "Halve −8: −4. Square it: 16. So x² − 8x + 16 = (x − 4)², and n = 4.",
+      "fields": [
+        "add",
+        "n"
+      ],
+      "misconceptions": [
+        {
+          "when": "16,-4",
+          "says": "The bracket is (x − 4)², so n = 4. (x − (−4))² would be (x + 4)²."
+        },
+        {
+          "when": "-16,4",
+          "says": "(−4)² = +16: the number you add is always positive."
+        },
+        {
+          "when": "64,8",
+          "says": "Halve −8 first (−4), then square it: 16."
+        },
+        {
+          "when": "-16,-4",
+          "says": "(−4)² = +16, and the bracket is (x − 4)², so n = 4."
+        }
+      ]
+    },
+    {
+      "id": "e6",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "vertex-form",
+      "prompt": "Write x² + 8x + 3 in the form (x + p)² + q.",
+      "answer": "4,-13",
+      "solution": "x² + 8x + 3 = x² + 8x + 16 − 16 + 3 = (x + 4)² − 13. So p = 4 and q = −13.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "misconceptions": [
+        {
+          "when": "4,3",
+          "says": "You made (x + 4)² by adding 16, but did not take the 16 away again: 3 − 16 = −13."
+        },
+        {
+          "when": "4,19",
+          "says": "You added 16 instead of subtracting it: 3 − 16 = −13."
+        },
+        {
+          "when": "8,-61",
+          "says": "p is half of 8, which is 4."
+        },
+        {
+          "when": "-4,-13",
+          "says": "x² + 8x has +8, so the bracket is (x + 4)²: p = 4."
+        }
+      ],
+      "support": "es3",
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      }
+    },
+    {
+      "id": "es2",
+      "type": "fraction",
+      "difficulty": 1,
+      "skill": "complete-term-fraction",
+      "prompt": "Extra practice: what do you add to x² + 3x to complete the square?",
+      "answer": "9/4",
+      "solution": "Half of 3 is 3/2, and (3/2)² = 9/4.",
+      "misconceptions": [
+        {
+          "when": "9/2",
+          "says": "(3/2)² = 9/4: square the denominator too."
+        },
+        {
+          "when": "3/2",
+          "says": "Square the half: 9/4."
+        },
+        {
+          "when": "9",
+          "says": "Halve first: (3/2)² = 9/4."
+        }
+      ]
+    },
+    {
+      "id": "es3",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "vertex-form",
+      "prompt": "Extra practice: write x² − 6x + 1 in the form (x + p)² + q.",
+      "answer": "-3,-8",
+      "solution": "x² − 6x + 1 = (x − 3)² − 9 + 1 = (x − 3)² − 8.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "misconceptions": [
+        {
+          "when": "3,-8",
+          "says": "x² − 6x gives (x − 3)², so p = −3."
+        },
+        {
+          "when": "-3,10",
+          "says": "Subtract the 9 you added: 1 − 9 = −8."
+        },
+        {
+          "when": "-3,1",
+          "says": "Take away the 9 you added: 1 − 9 = −8."
+        }
+      ]
+    },
+    {
+      "id": "w1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "complete-term",
+      "prompt": "x² + 6x = −5. What do you add to both sides?",
+      "answer": "B",
+      "solution": "Add (6/2)² = 9 to both sides: the left side becomes (x + 3)².",
+      "options": [
+        "6",
+        "9",
+        "36",
+        "3"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "6 is b. The missing corner is (6/2)² = 9."
+        },
+        {
+          "when": "C",
+          "says": "36 is 6². Halve first: (6/2)² = 9."
+        },
+        {
+          "when": "D",
+          "says": "3 is half of 6; you still square it: 9."
+        }
+      ]
+    },
+    {
+      "id": "w2",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "balance",
+      "prompt": "x² − 8x = −3. Which line comes next?",
+      "answer": "A",
+      "solution": "Add (−8/2)² = 16 to both sides.",
+      "options": [
+        "x² − 8x + 16 = −3 + 16",
+        "x² − 8x + 16 = −3",
+        "x² − 8x − 16 = −3 − 16",
+        "x² − 8x + 64 = −3 + 64"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "16 must be added to the right side too, or the equation is no longer true."
+        },
+        {
+          "when": "C",
+          "says": "(−4)² = +16: add 16, not −16."
+        },
+        {
+          "when": "D",
+          "says": "Halve −8 first: (−8/2)² = 16, not 64."
+        }
+      ]
+    },
+    {
+      "id": "w3",
+      "type": "fraction",
+      "difficulty": 1,
+      "skill": "complete-term-fraction",
+      "prompt": "x² + 3x = 1. What do you add to both sides?",
+      "answer": "9/4",
+      "solution": "Half of 3 is 3/2, and (3/2)² = 9/4.",
+      "misconceptions": [
+        {
+          "when": "3/2",
+          "says": "Square the half: (3/2)² = 9/4."
+        },
+        {
+          "when": "9/2",
+          "says": "(3/2)² = 9/4: square the denominator too."
+        },
+        {
+          "when": "9",
+          "says": "Halve 3 first: (3/2)² = 9/4."
+        }
+      ]
+    },
+    {
+      "id": "w4",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "divide-through",
+      "prompt": "2x² + 12x − 5 = 0. What is the best first step?",
+      "answer": "A",
+      "solution": "Divide every term by 2, so the x² coefficient is 1.",
+      "options": [
+        "Divide every term by 2",
+        "Add 36 to both sides",
+        "Move −5 across, then add (12/2)²",
+        "Take square roots"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "Completing the square needs x² with coefficient 1 first: (x + 3)² gives x², not 2x²."
+        },
+        {
+          "when": "C",
+          "says": "With 2x² on the left, adding 36 does not make a perfect square. Divide by 2 first."
+        },
+        {
+          "when": "D",
+          "says": "There is no square to take the root of yet."
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "divide-through",
+      "prompt": "−x² + 4x + 1 = 0. What is the best first step?",
+      "answer": "A",
+      "solution": "Divide every term by −1, giving x² − 4x − 1 = 0.",
+      "options": [
+        "Divide every term by −1",
+        "Add 4 to both sides",
+        "Divide only the x² term by −1",
+        "Take square roots"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "First make the x² coefficient +1. With −x², adding 4 does not complete a square."
+        },
+        {
+          "when": "C",
+          "says": "Dividing only one term changes the equation. Every term must be divided by −1."
+        },
+        {
+          "when": "D",
+          "says": "There is no square yet."
+        }
+      ]
+    },
+    {
+      "id": "w6",
+      "type": "fraction",
+      "difficulty": 1,
+      "skill": "complete-term-fraction",
+      "prompt": "x² − (2/3)x = 1/3. What do you add to both sides?",
+      "answer": "1/9",
+      "solution": "Half of −2/3 is −1/3, and (−1/3)² = 1/9.",
+      "misconceptions": [
+        {
+          "when": "4/9",
+          "says": "Halve −2/3 first: −1/3. Then square it: 1/9."
+        },
+        {
+          "when": "1/3",
+          "says": "Half of 2/3 is 1/3; square it: 1/9."
+        },
+        {
+          "when": "-1/9",
+          "says": "A square is never negative: (−1/3)² = +1/9."
+        }
+      ]
+    },
+    {
+      "id": "f1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "derivation",
+      "prompt": "x² + (b/a)x = −c/a. What do you add to both sides?",
+      "answer": "C",
+      "solution": "Half of b/a is b/2a; square it: (b/2a)² = b²/4a².",
+      "options": [
+        "(b/a)²",
+        "b/2a",
+        "(b/2a)²",
+        "b²/4"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Halve first: half of b/a is b/2a."
+        },
+        {
+          "when": "B",
+          "says": "That is half the coefficient; now square it."
+        },
+        {
+          "when": "D",
+          "says": "The coefficient of x is b/a, not b: (b/2a)² = b²/4a²."
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "derivation",
+      "prompt": "Write b²/4a² − c/a over the common denominator 4a².",
+      "answer": "A",
+      "solution": "c/a = 4ac/4a² (multiply top and bottom by 4a), so the right side is (b² − 4ac)/4a².",
+      "options": [
+        "(b² − 4ac) / 4a²",
+        "(b² − c) / 4a²",
+        "(b² − 4ac) / 2a",
+        "(b² + 4ac) / 4a²"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "c/a must become 4ac/4a²: multiply top and bottom by 4a."
+        },
+        {
+          "when": "C",
+          "says": "The denominator is still 4a². The 2a appears after taking the square root."
+        },
+        {
+          "when": "D",
+          "says": "It is minus c/a, so minus 4ac."
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "derivation",
+      "prompt": "What does the derivation show when b² − 4ac < 0?",
+      "answer": "B",
+      "solution": "(x + b/2a)² would equal a negative number, which no real x can do. So there are no real roots.",
+      "options": [
+        "The formula is wrong",
+        "(x + b/2a)² would equal a negative number, so there is no real x",
+        "Both roots are 0",
+        "a must be negative"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "The algebra is still right; it just has no real solution."
+        },
+        {
+          "when": "C",
+          "says": "Roots of 0 would need c = 0, which has nothing to do with the sign of b² − 4ac."
+        },
+        {
+          "when": "D",
+          "says": "The sign of a is not what decides it."
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "formula",
+      "prompt": "Use the formula on x² − 4x + 1 = 0 and write the roots as p ± √q.",
+      "answer": "2,3",
+      "solution": "x = (4 ± √(16 − 4)) / 2 = (4 ± √12) / 2 = (4 ± 2√3) / 2 = 2 ± √3.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "misconceptions": [
+        {
+          "when": "-2,3",
+          "says": "−b = −(−4) = +4, so p = 4 / 2 = 2."
+        },
+        {
+          "when": "2,12",
+          "says": "√12 = 2√3, and dividing by 2a = 2 leaves √3: q = 3."
+        },
+        {
+          "when": "4,12",
+          "says": "Divide by 2a = 2: (4 ± √12) / 2 = 2 ± √3."
+        }
+      ]
+    },
+    {
+      "id": "g1",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-monic",
+      "prompt": "Solve x² + 4x − 5 = 0 by completing the square.",
+      "answer": "-5,1",
+      "solution": "x² + 4x = 5. Add 4: (x + 2)² = 9. So x + 2 = ±3, giving x = 1 or x = −5.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Move −5 across, then add (4/2)² = 4 to both sides.",
+      "support": "gs1",
+      "misconceptions": [
+        {
+          "when": "-1,5",
+          "says": "Check the signs: x + 2 = 3 gives x = 1, and x + 2 = −3 gives x = −5."
+        },
+        {
+          "when": "-3,3",
+          "says": "It is x + 2 that equals ±3. Subtract 2: x = 1 or x = −5."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W1"
+      }
+    },
+    {
+      "id": "g2",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative",
+      "prompt": "x² − 10x + 7 = 0 has roots p ± √q. Find p and q.",
+      "answer": "5,18",
+      "solution": "x² − 10x = −7. Add 25: (x − 5)² = 18, so x = 5 ± √18 (that is, 5 ± 3√2).",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "hint": "Move 7 across (it becomes −7), then add (−10/2)² = 25.",
+      "support": "gs2",
+      "misconceptions": [
+        {
+          "when": "-5,18",
+          "says": "The bracket is (x − 5)², so x = 5 ± √18: p = 5."
+        },
+        {
+          "when": "5,32",
+          "says": "7 moves across as −7: −7 + 25 = 18."
+        },
+        {
+          "when": "5,7",
+          "says": "Move 7 across and add 25 to both sides: q = −7 + 25 = 18."
+        }
+      ],
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      }
+    },
+    {
+      "id": "g3",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-odd",
+      "prompt": "Solve x² + 7x + 10 = 0 by completing the square.",
+      "answer": "-5,-2",
+      "solution": "x² + 7x = −10. Add 49/4: (x + 7/2)² = −40/4 + 49/4 = 9/4. So x + 7/2 = ±3/2: x = −2 or x = −5.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Add (7/2)² = 49/4 to both sides, and write −10 as −40/4.",
+      "support": "gs3",
+      "misconceptions": [
+        {
+          "when": "2,5",
+          "says": "x + 7/2 = ±3/2 gives x = −7/2 ± 3/2: −2 and −5 (both negative)."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "picture",
+        "section": "S2"
+      }
+    },
+    {
+      "id": "g4",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-nonunit",
+      "prompt": "Solve 2x² − 8x − 10 = 0 by completing the square.",
+      "answer": "-1,5",
+      "solution": "Divide by 2: x² − 4x − 5 = 0. x² − 4x = 5, add 4: (x − 2)² = 9. So x = 2 ± 3: 5 or −1.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Divide every term by 2 first.",
+      "support": "gs4",
+      "misconceptions": [
+        {
+          "when": "-5,1",
+          "says": "(x − 2)² = 9 gives x = 2 ± 3: 5 and −1."
+        },
+        {
+          "when": "-1,9",
+          "says": "After dividing by 2, the constant is −5, not −10: x² − 4x = 5."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W4"
+      }
+    },
+    {
+      "id": "g5",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "vertex-form",
+      "prompt": "Write 2x² + 12x + 7 in the form a(x + p)² + q.",
+      "answer": "2,3,-11",
+      "solution": "2x² + 12x + 7 = 2(x² + 6x) + 7 = 2[(x + 3)² − 9] + 7 = 2(x + 3)² − 18 + 7 = 2(x + 3)² − 11.",
+      "fields": [
+        "a",
+        "p",
+        "q"
+      ],
+      "hint": "Take 2 out of the first two terms: 2(x² + 6x) + 7. Complete the square inside the bracket.",
+      "support": "gs5",
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      },
+      "misconceptions": [
+        {
+          "when": "2,3,-2",
+          "says": "The 9 you subtracted is inside the bracket, so it is multiplied by 2: 7 − 18 = −11."
+        },
+        {
+          "when": "2,3,16",
+          "says": "You added 9 instead of subtracting it: 2[(x + 3)² − 9] + 7."
+        },
+        {
+          "when": "2,6,-11",
+          "says": "Inside the bracket it is x² + 6x, so p is half of 6: 3."
+        },
+        {
+          "when": "1,3,-11",
+          "says": "a is the 2 you took out: 2(x + 3)² − 11."
+        }
+      ]
+    },
+    {
+      "id": "g6",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative-a",
+      "prompt": "Solve −x² + 6x − 5 = 0 by completing the square.",
+      "answer": "1,5",
+      "solution": "Divide by −1: x² − 6x + 5 = 0. x² − 6x = −5, add 9: (x − 3)² = 4. So x = 3 ± 2: 1 or 5.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Divide every term by −1 first: every sign flips.",
+      "support": "gs6",
+      "misconceptions": [
+        {
+          "when": "-5,-1",
+          "says": "Dividing by −1 gives x² − 6x + 5 = 0, so (x − 3)² = 4 and x = 3 ± 2: 1 and 5."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W5"
+      }
+    },
+    {
+      "id": "g7",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "solve-fractions",
+      "prompt": "Solve x² + (1/2)x − 3/16 = 0 by completing the square.",
+      "answer": "-3/4,1/4",
+      "solution": "x² + (1/2)x = 3/16. Add (1/4)² = 1/16: (x + 1/4)² = 4/16 = 1/4. So x + 1/4 = ±1/2: x = 1/4 or x = −3/4.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Half of 1/2 is 1/4. Add (1/4)² = 1/16 to both sides.",
+      "support": "gs7",
+      "misconceptions": [
+        {
+          "when": "-1/4,3/4",
+          "says": "x + 1/4 = ±1/2 gives x = −1/4 ± 1/2: 1/4 and −3/4."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W6"
+      }
+    },
+    {
+      "id": "g8",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "no-real-roots",
+      "prompt": "Complete the square for x² + 2x + 5 = 0. In (x + 1)² = k, what is k?",
+      "answer": "-4",
+      "solution": "x² + 2x = −5. Add 1: (x + 1)² = −4. A real square cannot be negative, so there are no real roots (the roots are −1 ± 2i).",
+      "hint": "Move 5 across (it becomes −5), then add 1.",
+      "support": "gs8",
+      "revisit": {
+        "stage": "formula",
+        "section": "F"
+      },
+      "misconceptions": [
+        {
+          "when": "6",
+          "says": "5 moves across as −5: −5 + 1 = −4."
+        },
+        {
+          "when": "4",
+          "says": "−5 + 1 = −4, not 4."
+        },
+        {
+          "when": "-6",
+          "says": "Add 1 to both sides: −5 + 1 = −4."
+        }
+      ]
+    },
+    {
+      "id": "gs1",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-monic",
+      "prompt": "Extra practice: solve x² + 2x − 8 = 0.",
+      "answer": "-4,2",
+      "solution": "x² + 2x = 8. Add 1: (x + 1)² = 9, so x = −1 ± 3: 2 or −4.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Add (2/2)² = 1 to both sides.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-2,4",
+          "says": "x + 1 = ±3 gives x = −1 ± 3: 2 and −4."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "gs2",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative",
+      "prompt": "Extra practice: x² − 6x + 2 = 0 has roots p ± √q. Find p and q.",
+      "answer": "3,7",
+      "solution": "x² − 6x = −2. Add 9: (x − 3)² = 7, so x = 3 ± √7.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "hint": "Add (−6/2)² = 9 to both sides.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-3,7",
+          "says": "The bracket is (x − 3)², so p = 3."
+        },
+        {
+          "when": "3,11",
+          "says": "2 moves across as −2: −2 + 9 = 7."
+        }
+      ]
+    },
+    {
+      "id": "gs3",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-odd",
+      "prompt": "Extra practice: solve x² + 5x + 4 = 0.",
+      "answer": "-4,-1",
+      "solution": "x² + 5x = −4. Add 25/4: (x + 5/2)² = 9/4, so x = −5/2 ± 3/2: −1 or −4.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Add (5/2)² = 25/4; −4 = −16/4.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "1,4",
+          "says": "x = −5/2 ± 3/2 gives −1 and −4: both negative."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "gs4",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-nonunit",
+      "prompt": "Extra practice: solve 3x² + 6x − 9 = 0.",
+      "answer": "-3,1",
+      "solution": "Divide by 3: x² + 2x − 3 = 0. Add 1: (x + 1)² = 4, so x = 1 or −3.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Divide every term by 3 first.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-1,3",
+          "says": "(x + 1)² = 4 gives x = −1 ± 2: 1 and −3."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "gs5",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "vertex-form",
+      "prompt": "Extra practice: write 3x² − 6x + 1 in the form a(x + p)² + q.",
+      "answer": "3,-1,-2",
+      "solution": "3(x² − 2x) + 1 = 3[(x − 1)² − 1] + 1 = 3(x − 1)² − 2.",
+      "fields": [
+        "a",
+        "p",
+        "q"
+      ],
+      "hint": "Take 3 out of the first two terms.",
+      "misconceptions": [
+        {
+          "when": "3,-1,0",
+          "says": "The 1 you subtract inside is multiplied by 3: 1 − 3 = −2."
+        },
+        {
+          "when": "3,1,-2",
+          "says": "x² − 2x gives (x − 1)², so p = −1."
+        }
+      ]
+    },
+    {
+      "id": "gs6",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative-a",
+      "prompt": "Extra practice: solve −x² − 2x + 3 = 0.",
+      "answer": "-3,1",
+      "solution": "Divide by −1: x² + 2x − 3 = 0. Add 1: (x + 1)² = 4, so x = 1 or −3.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Divide every term by −1 first.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-1,3",
+          "says": "x² + 2x − 3 = 0 gives (x + 1)² = 4, so x = −1 ± 2: 1 and −3."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "gs7",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-fractions",
+      "prompt": "Extra practice: solve x² − (2/3)x − 1/3 = 0.",
+      "answer": "-1/3,1",
+      "solution": "x² − (2/3)x = 1/3. Add 1/9: (x − 1/3)² = 4/9, so x = 1/3 ± 2/3: 1 or −1/3.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": "Add (1/3)² = 1/9.",
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-1,1/3",
+          "says": "x − 1/3 = ±2/3 gives x = 1/3 ± 2/3: 1 and −1/3."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "gs8",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "no-real-roots",
+      "prompt": "Extra practice: in x² − 4x + 7 = 0, completing the square gives (x − 2)² = k. Find k.",
+      "answer": "-3",
+      "solution": "x² − 4x = −7. Add 4: (x − 2)² = −3. No real roots.",
+      "hint": "−7 + 4.",
+      "misconceptions": [
+        {
+          "when": "11",
+          "says": "7 moves across as −7: −7 + 4 = −3."
+        },
+        {
+          "when": "3",
+          "says": "−7 + 4 = −3."
+        }
+      ]
+    },
+    {
+      "id": "i1",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-monic",
+      "prompt": "Solve x² + 8x + 12 = 0 by completing the square.",
+      "answer": "-6,-2",
+      "solution": "x² + 8x = −12. Add 16: (x + 4)² = 4, so x = −4 ± 2: −2 or −6.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": "gs1",
+      "misconceptions": [
+        {
+          "when": "2,6",
+          "says": "x = −4 ± 2 gives −2 and −6: both negative."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W1"
+      }
+    },
+    {
+      "id": "i2",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative",
+      "prompt": "x² − 2x − 4 = 0 has roots p ± √q. Find p and q.",
+      "answer": "1,5",
+      "solution": "x² − 2x = 4. Add 1: (x − 1)² = 5, so x = 1 ± √5.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "hint": null,
+      "support": "gs2",
+      "misconceptions": [
+        {
+          "when": "-1,5",
+          "says": "The bracket is (x − 1)², so p = 1."
+        },
+        {
+          "when": "1,3",
+          "says": "−4 moves across as +4: 4 + 1 = 5."
+        }
+      ],
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      }
+    },
+    {
+      "id": "i3",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "solve-odd",
+      "prompt": "Solve x² + 9x + 14 = 0 by completing the square.",
+      "answer": "-7,-2",
+      "solution": "x² + 9x = −14. Add 81/4: (x + 9/2)² = −56/4 + 81/4 = 25/4, so x = −9/2 ± 5/2: −2 or −7.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": "gs3",
+      "misconceptions": [
+        {
+          "when": "2,7",
+          "says": "x = −9/2 ± 5/2 gives −2 and −7: both negative."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "picture",
+        "section": "S2"
+      }
+    },
+    {
+      "id": "i4",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-nonunit",
+      "prompt": "Solve 3x² − 12x + 9 = 0 by completing the square.",
+      "answer": "1,3",
+      "solution": "Divide by 3: x² − 4x + 3 = 0. x² − 4x = −3, add 4: (x − 2)² = 1, so x = 1 or 3.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": "gs4",
+      "misconceptions": [
+        {
+          "when": "-3,-1",
+          "says": "x² − 4x gives (x − 2)², so x = 2 ± 1: 1 and 3."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W4"
+      }
+    },
+    {
+      "id": "i5",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "vertex-form",
+      "prompt": "Write x² − 5x + 2 in the form (x + p)² + q.",
+      "answer": "-5/2,-17/4",
+      "solution": "x² − 5x + 2 = (x − 5/2)² − 25/4 + 2 = (x − 5/2)² − 17/4.",
+      "fields": [
+        "p",
+        "q"
+      ],
+      "support": "es3",
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      },
+      "misconceptions": [
+        {
+          "when": "-5/2,33/4",
+          "says": "Subtract (5/2)² = 25/4, do not add it: 2 − 25/4 = −17/4."
+        },
+        {
+          "when": "5/2,-17/4",
+          "says": "x² − 5x gives (x − 5/2)², so p = −5/2."
+        },
+        {
+          "when": "-5/2,-23/4",
+          "says": "2 = 8/4, so 8/4 − 25/4 = −17/4."
+        }
+      ]
+    },
+    {
+      "id": "i6",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "solve-fractions",
+      "prompt": "Solve 4x² + 4x − 3 = 0 by completing the square.",
+      "answer": "-3/2,1/2",
+      "solution": "Divide by 4: x² + x = 3/4. Add 1/4: (x + 1/2)² = 1, so x = −1/2 ± 1: 1/2 or −3/2.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": "gs7",
+      "misconceptions": [
+        {
+          "when": "-1/2,3/2",
+          "says": "x = −1/2 ± 1 gives 1/2 and −3/2."
+        }
+      ],
+      "unordered": true,
+      "revisit": {
+        "stage": "worked",
+        "section": "W4"
+      }
+    },
+    {
+      "id": "a1",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "method-choice",
+      "prompt": "Which method is quickest for x² − 7x + 12 = 0?",
+      "answer": "A",
+      "solution": "3 × 4 = 12 and 3 + 4 = 7 are easy to spot, so factorising, (x − 3)(x − 4) = 0, is quickest. The other methods also work.",
+      "options": [
+        "Factorisation: (x − 3)(x − 4) = 0",
+        "Completing the square",
+        "The quadratic formula",
+        "They all take exactly the same work"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "Completing the square works, but here two integers (3 and 4) with product 12 and sum 7 are easy to spot."
+        },
+        {
+          "when": "C",
+          "says": "The formula works, but factorising is quicker when the factors are easy to see."
+        },
+        {
+          "when": "D",
+          "says": "They give the same roots, but not with the same work."
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "method-choice",
+      "prompt": "Which method works for every quadratic equation?",
+      "answer": "B",
+      "solution": "Completing the square always works (the quadratic formula is completing the square done in general). Integer factorisation does not always exist.",
+      "options": [
+        "Factorisation with integers",
+        "Completing the square",
+        "Guess and check",
+        "Taking square roots straight away"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "x² − 2x − 1 = 0 has roots 1 ± √2: there is no integer factorisation."
+        },
+        {
+          "when": "C",
+          "says": "Irrational roots such as 1 ± √2 cannot be found by guessing."
+        },
+        {
+          "when": "D",
+          "says": "That works only when there is no x term, like x² = 9."
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-monic",
+      "prompt": "Solve x² + 14x + 40 = 0 by any method.",
+      "answer": "-10,-4",
+      "solution": "Factorising: (x + 4)(x + 10) = 0. Or completing the square: (x + 7)² = 9, x = −7 ± 3. Either way x = −4 or x = −10.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": "gs1",
+      "misconceptions": [
+        {
+          "when": "4,10",
+          "says": "Both roots are negative: (x + 4)(x + 10) = 0 gives x = −4 or x = −10."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "a4",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "error-balance",
+      "prompt": "Find the mistake. Riya solves x² + 6x − 7 = 0:\n① x² + 6x = 7\n② x² + 6x + 9 = 7\n③ (x + 3)² = 7\n④ x = −3 ± √7\nWhich line is wrong first?",
+      "answer": "B",
+      "solution": "In line ② the 9 was added to the left side only. Adding it to both sides gives (x + 3)² = 16, so x = 1 or x = −7.",
+      "options": [
+        "Line ①: it should be −7",
+        "Line ②: 9 was added to the left side only",
+        "Line ③: (x + 3)² is x² + 6x + 3",
+        "Line ④: the root should be √3"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Moving −7 across gives +7, so ① is right."
+        },
+        {
+          "when": "C",
+          "says": "(x + 3)² = x² + 6x + 9, so ③ follows from ②. The problem is earlier."
+        },
+        {
+          "when": "D",
+          "says": "④ follows from ③; the mistake is in ②."
+        }
+      ],
+      "revisit": {
+        "stage": "apply",
+        "section": "intro"
+      }
+    },
+    {
+      "id": "a5",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "error-divide",
+      "prompt": "Find the mistake. Arjun solves 2x² + 8x − 10 = 0:\n① 2x² + 8x = 10\n② x² + 4x = 10\n③ (x + 2)² = 14\n④ x = −2 ± √14\nWhich line is wrong first?",
+      "answer": "B",
+      "solution": "In line ② the 10 was not divided by 2. Correctly: x² + 4x = 5, (x + 2)² = 9, so x = 1 or x = −5.",
+      "options": [
+        "Line ①",
+        "Line ②: 10 was not divided by 2",
+        "Line ③: he should add 16",
+        "Line ④"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Moving −10 across gives +10, so ① is right."
+        },
+        {
+          "when": "C",
+          "says": "After dividing by 2 the x coefficient is 4, so 4 is the right number to add. The mistake is earlier."
+        },
+        {
+          "when": "D",
+          "says": "④ follows from ③. The mistake is in ②."
+        }
+      ]
+    },
+    {
+      "id": "a6",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "error-sign",
+      "prompt": "Find the mistake. Meera writes x² − 10x + 3 = (x + 5)² − 22. What went wrong?",
+      "answer": "B",
+      "solution": "(x + 5)² = x² + 10x + 25 has +10x. The correct bracket is (x − 5)²: x² − 10x + 3 = (x − 5)² − 22.",
+      "options": [
+        "She should have added 100",
+        "The bracket should be (x − 5)²",
+        "−25 + 3 is −28",
+        "Nothing: it is correct"
+      ],
+      "misconceptions": [
+        {
+          "when": "A",
+          "says": "Halve −10 first: (−5)² = 25, so 25 is right."
+        },
+        {
+          "when": "C",
+          "says": "−25 + 3 = −22, so −22 is right."
+        },
+        {
+          "when": "D",
+          "says": "Expand (x + 5)²: x² + 10x + 25. The sign of the x term is wrong."
+        }
+      ]
+    },
+    {
+      "id": "t1",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "transfer-minimum",
+      "prompt": "Find the smallest value that x² − 6x + 13 can take, for real x.",
+      "answer": "4",
+      "solution": "x² − 6x + 13 = (x − 3)² + 4. A square is never negative, so the smallest value is 4, when x = 3.",
+      "support": "ts1",
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      },
+      "misconceptions": [
+        {
+          "when": "13",
+          "says": "13 is the value at x = 0. Complete the square: (x − 3)² + 4 is smallest when x = 3."
+        },
+        {
+          "when": "3",
+          "says": "3 is the value of x where the minimum happens. The minimum value is 4."
+        },
+        {
+          "when": "-9",
+          "says": "(x − 3)² = x² − 6x + 9, so x² − 6x + 13 = (x − 3)² + 4."
+        }
+      ]
+    },
+    {
+      "id": "ts1",
+      "type": "integer",
+      "difficulty": 1,
+      "skill": "transfer-minimum",
+      "prompt": "Extra practice: find the smallest value of x² + 4x + 9.",
+      "answer": "5",
+      "solution": "x² + 4x + 9 = (x + 2)² + 5, smallest (5) when x = −2.",
+      "misconceptions": [
+        {
+          "when": "9",
+          "says": "9 is the value at x = 0; (x + 2)² + 5 is smallest when x = −2."
+        },
+        {
+          "when": "-2",
+          "says": "−2 is where it happens; the smallest value is 5."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "transfer-minimum",
+      "prompt": "For which value of x is −x² + 8x − 5 largest?",
+      "answer": "4",
+      "solution": "−x² + 8x − 5 = −(x² − 8x) − 5 = −[(x − 4)² − 16] − 5 = 11 − (x − 4)². It is largest (11) when x = 4.",
+      "revisit": {
+        "stage": "picture",
+        "section": "S3"
+      },
+      "misconceptions": [
+        {
+          "when": "11",
+          "says": "11 is the largest value. It happens when x = 4."
+        },
+        {
+          "when": "-4",
+          "says": "x² − 8x completes to (x − 4)², which is 0 when x = 4."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "type": "values",
+      "difficulty": 3,
+      "skill": "transfer-substitution",
+      "prompt": "Solve (x + 1)² + 6(x + 1) + 8 = 0.",
+      "answer": "-5,-3",
+      "solution": "Let u = x + 1: u² + 6u + 8 = 0, so (u + 3)² = 1 and u = −2 or −4. Then x = u − 1: x = −3 or x = −5.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-4,-2",
+          "says": "Those are the values of x + 1. Subtract 1: x = −3 or x = −5."
+        },
+        {
+          "when": "-3,-1",
+          "says": "Complete the square in u = x + 1: (u + 3)² = 1 gives u = −2 or −4, so x = −3 or −5."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "t4",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "transfer-repeated",
+      "prompt": "The equation x² + 10x + c = 0 has exactly one root (a repeated root). Find c.",
+      "answer": "25",
+      "solution": "x² + 10x + c = (x + 5)² + c − 25. One repeated root means (x + 5)² = 0 exactly, so c − 25 = 0 and c = 25.",
+      "revisit": {
+        "stage": "picture",
+        "section": "S2"
+      },
+      "misconceptions": [
+        {
+          "when": "100",
+          "says": "Halve 10 first: (10/2)² = 25."
+        },
+        {
+          "when": "5",
+          "says": "(x + 5)² needs + 25: c = 25."
+        },
+        {
+          "when": "-25",
+          "says": "(x + 5)² = x² + 10x + 25, so c = +25."
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "transfer-rearrange",
+      "prompt": "Solve x² = 4x + 21 and give the larger root.",
+      "answer": "7",
+      "solution": "x² − 4x = 21. Add 4: (x − 2)² = 25, so x = 2 ± 5: 7 or −3. The larger is 7.",
+      "revisit": {
+        "stage": "worked",
+        "section": "W1"
+      },
+      "misconceptions": [
+        {
+          "when": "5",
+          "says": "(x − 2)² = 25 gives x − 2 = ±5, so x = 7 or −3."
+        },
+        {
+          "when": "-3",
+          "says": "−3 is the smaller root; the larger is 7."
+        },
+        {
+          "when": "3",
+          "says": "x = 2 − 5 = −3 is the smaller root. The larger is 2 + 5 = 7."
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "type": "integer",
+      "difficulty": 2,
+      "skill": "transfer-context",
+      "prompt": "A rectangle is 4 m longer than it is wide, and its area is 60 m². How wide is it, in metres?",
+      "answer": "6",
+      "solution": "w(w + 4) = 60, so w² + 4w = 60. Add 4: (w + 2)² = 64, so w + 2 = ±8: w = 6 or −10. A width cannot be negative, so w = 6.",
+      "misconceptions": [
+        {
+          "when": "-10",
+          "says": "w = −10 solves the equation, but a width cannot be negative."
+        },
+        {
+          "when": "10",
+          "says": "10 m is the length (6 + 4). The width is 6 m."
+        },
+        {
+          "when": "8",
+          "says": "8 is w + 2. Subtract 2: w = 6."
+        }
+      ]
+    },
+    {
+      "id": "r1",
+      "type": "values",
+      "difficulty": 1,
+      "skill": "solve-negative",
+      "prompt": "Solve x² − 12x + 32 = 0 by completing the square.",
+      "answer": "4,8",
+      "solution": "x² − 12x = −32. Add 36: (x − 6)² = 4, so x = 6 ± 2: 4 or 8.",
+      "fields": [
+        "x =",
+        "or x ="
+      ],
+      "hint": null,
+      "support": null,
+      "misconceptions": [
+        {
+          "when": "-8,-4",
+          "says": "x² − 12x gives (x − 6)², so x = 6 ± 2: 4 and 8."
+        }
+      ],
+      "unordered": true
+    },
+    {
+      "id": "r2",
+      "type": "values",
+      "difficulty": 2,
+      "skill": "vertex-form",
+      "prompt": "Write 3x² + 12x + 5 in the form a(x + p)² + q.",
+      "answer": "3,2,-7",
+      "solution": "3(x² + 4x) + 5 = 3[(x + 2)² − 4] + 5 = 3(x + 2)² − 7.",
+      "fields": [
+        "a",
+        "p",
+        "q"
+      ],
+      "misconceptions": [
+        {
+          "when": "3,2,1",
+          "says": "The 4 subtracted inside is multiplied by 3: 5 − 12 = −7."
+        },
+        {
+          "when": "3,4,-7",
+          "says": "Inside it is x² + 4x, so p is half of 4: 2."
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "type": "choice",
+      "difficulty": 1,
+      "skill": "explain",
+      "prompt": "Why do we add (b/2)² to x² + bx?",
+      "answer": "A",
+      "solution": "x² + bx is a square with two strip rectangles; the missing corner is b/2 by b/2, with area (b/2)². Adding it makes (x + b/2)².",
+      "options": [
+        "It is the area of the missing b/2-by-b/2 corner, which makes a perfect square",
+        "It makes the equation equal zero",
+        "It doubles b",
+        "It is a rule with no reason"
+      ],
+      "misconceptions": [
+        {
+          "when": "B",
+          "says": "Adding (b/2)² does not make anything zero; it turns x² + bx into the square (x + b/2)²."
+        },
+        {
+          "when": "C",
+          "says": "It does not change b. It fills the missing corner."
+        },
+        {
+          "when": "D",
+          "says": "There is a reason: it is the missing corner of the square, (b/2) × (b/2)."
+        }
+      ]
+    }
+  ]
+}

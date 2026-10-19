@@ -9,6 +9,8 @@
     "src/mathematics/journey",
     "../packages/mathematics/src/chapter.ts",
     "src/mathematics/chapter",
+    "../packages/mathematics/src/unit.ts",
+    "src/mathematics/unit",
     "src/globals.d.ts"
   ],
   "exclude": []
