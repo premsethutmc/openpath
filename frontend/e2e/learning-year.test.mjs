@@ -44,7 +44,7 @@ async function learnerPage(name, size = "phone") {
   const viewport = size === "tablet" ? { width: 820, height: 1180 } : { width: 360, height: 800 };
   const context = await browser.newContext({ viewport, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  page.on("pageerror", (e) => console.error("page error:", e.message));
+  page.on("pageerror", (e) => console.error("page error:", e.message, (e.stack ?? "").split("\n").slice(0, 6).join(" | ")));
   await page.goto(base + "/year/");
   await page.getByRole("heading", { name: "Sign in to OpenPath" }).waitFor();
   const email = `year-${Date.now()}-${Math.random().toString(36).slice(2)}@example.org`;
