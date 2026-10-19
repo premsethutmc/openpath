@@ -33,7 +33,10 @@
    "guidance": "A complete proof by contradiction has all four steps. Accept any correct equivalent argument (e.g. via prime factorisation and the parity of exponents). Award a step only if its reason is given, not just the equation.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o04"
+   ]
   },
   {
    "id": "wr:irr:sqrt3",
@@ -66,7 +69,10 @@
    "guidance": "The key reason is that if a prime p divides a², then p divides a. Accept equivalent arguments.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o04"
+   ]
   },
   {
    "id": "wr:irr:sum",
@@ -94,7 +100,10 @@
    "guidance": "The rearranged expression must be argued rational (rationals are closed under subtraction and division by a non-zero rational).",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o05"
+   ]
   },
   {
    "id": "wr:con:perpbis",
@@ -249,7 +258,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g08-c05-o05"
+   ]
   },
   {
    "id": "wr:root:sqrt5",
@@ -278,7 +290,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g09-c03-o05"
+   ]
   },
   {
    "id": "wr:ind:sum",
@@ -311,7 +326,10 @@
    "guidance": "The step must use the hypothesis explicitly: add (k + 1) to k(k + 1)/2 and simplify to (k + 1)(k + 2)/2.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "tn-g11-c04-o04"
+   ]
   },
   {
    "id": "wr:ind:div",
@@ -344,7 +362,10 @@
    "guidance": "Accept any correct rearrangement in the step.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "tn-g11-c04-o04"
+   ]
   },
   {
    "id": "wr:game:21",
@@ -372,7 +393,10 @@
    "guidance": "The winning positions are 1 more than multiples of 4; the first player says 1 and then keeps each round to 4 numbers.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c03-o06"
+   ]
   },
   {
    "id": "wr:bas:parallel",
@@ -401,7 +425,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g06-t2-c04-o04"
+   ]
   },
   {
    "id": "wr:bas:altitude",
@@ -435,7 +462,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g07-t1-c07-o04"
+   ]
   },
   {
    "id": "wr:bas:rectangle",
@@ -469,7 +499,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g06-c08-o02"
+   ]
   },
   {
    "id": "wr:tri:sss",
@@ -503,7 +536,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g07-t1-c07-o01"
+   ]
   },
   {
    "id": "wr:tri:sas",
@@ -537,7 +573,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g07-t1-c07-o02"
+   ]
   },
   {
    "id": "wr:tri:asa",
@@ -571,7 +610,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g07-t1-c07-o02"
+   ]
   },
   {
    "id": "wr:tri:rhs",
@@ -666,7 +708,10 @@
    "guidance": "Brackets may be expanded at any stage, e.g. 4(n + 3) − 8 = 4n + 4. An explanation using a 'bag of counters' picture is fine if it matches the algebra.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c06-o01"
+   ]
   },
   {
    "id": "wr:prf:reverse",
@@ -699,7 +744,10 @@
    "guidance": "Writing 'ab' for the number is a common slip (it means a × b); credit only if the learner makes clear it means 10a + b.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c06-o04"
+   ]
   },
   {
    "id": "wr:prf:parallelogram",
@@ -732,7 +780,10 @@
    "guidance": "Check that the angles are paired with the correct parallel lines and that the vertices of the triangles are matched in order (A↔C, B↔D, C↔A).",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t1-c04-o05"
+   ]
   },
   {
    "id": "wr:tpf:isosceles-converse",
@@ -765,7 +816,10 @@
    "guidance": "Accept other correct constructions, e.g. the perpendicular from A to BC (then AAS again). A proof that uses 'sides opposite equal angles are equal' is circular: it assumes the result.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c09-o04"
+   ]
   },
   {
    "id": "wr:tpf:perp-mid",
@@ -798,7 +852,10 @@
    "guidance": "Some learners will cite RHS; that needs the hypotenuses equal, which is what is being proved. SAS is the correct criterion here.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c09-o06"
+   ]
   },
   {
    "id": "wr:tpf:diagonals",
@@ -831,7 +888,10 @@
    "guidance": "Check the vertex correspondence (A↔C, B↔D, O↔O). Vertically opposite angles at O may replace one pair of alternate angles.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "tn-g09-c04-o02"
+   ]
   },
   {
    "id": "wr:tpf:pythag-converse",
@@ -864,7 +924,10 @@
    "guidance": "The key step is PR = AC (positive square roots of equal squares). Using the converse itself as a reason is circular.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c09-o05"
+   ]
   },
   {
    "id": "wr:bis:135",
@@ -932,7 +995,11 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g09-c05-o02",
+    "tn-g09-c04-o06"
+   ]
   },
   {
    "id": "wr:scl:smaller",
@@ -971,7 +1038,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g10-c04-o02"
+   ]
   },
   {
    "id": "wr:scl:larger",
@@ -1010,7 +1080,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g10-c04-o02"
+   ]
   },
   {
    "id": "wr:scl:why-bpt",
@@ -1077,7 +1150,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g08-c05-o05"
+   ]
   },
   {
    "id": "wr:quad:angles",
@@ -1145,7 +1221,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "tn-g08-c05-o05"
+   ]
   },
   {
    "id": "wr:irr:sqrt5",
@@ -1178,7 +1257,10 @@
    "guidance": "The reason for '5 divides a² ⇒ 5 divides a' must refer to 5 being prime (or to prime factorisation). An argument by parity (even/odd) does not work for 5.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o04"
+   ]
   },
   {
    "id": "wr:irr:reciprocal",
@@ -1211,7 +1293,10 @@
    "guidance": "An equivalent route: 1/√2 = √2/2; if it were rational r then √2 = 2r would be rational. Either needs the closure reason stated.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o05"
+   ]
   },
   {
    "id": "wr:root:spiral",
@@ -1245,7 +1330,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g09-c03-o05"
+   ]
   },
   {
    "id": "wr:root:semicircle",
@@ -1379,7 +1467,10 @@
    "guidance": "The step needs the reason 2k ≥ k + 1 because k ≥ 1; without it the chain of inequalities is incomplete.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "tn-g11-c04-o04"
+   ]
   },
   {
    "id": "wr:game:pile",
@@ -1478,7 +1569,10 @@
    "guidance": "The twist is that going second wins here. Credit any clear explanation, in words, a table, or a worked game with the general rule stated.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c03-o06"
+   ]
   },
   {
    "id": "wr:disp:critique",
@@ -1578,7 +1672,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "cbse-g08-t2-c05-o04"
+   ]
   },
   {
    "id": "wr:disp:infographic",
@@ -1611,7 +1708,10 @@
    "guidance": "Any three well-explained problems with sensible improvements deserve full marks.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c05-o04"
+   ]
   },
   {
    "id": "wr:stq:pose",
@@ -5828,7 +5928,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g08-t1-c04-o01"
+    "cbse-g08-t1-c04-o01",
+    "cbse-g08-t1-c04-o05"
    ]
   },
   {
@@ -7171,7 +7272,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c12-o04"
+    "cbse-g09-c12-o04",
+    "cbse-g09-c12-o05"
    ]
   },
   {
@@ -7365,7 +7467,9 @@
    "review": "provisional",
    "serves": [
     "cbse-g10-c06-o03",
-    "tn-g10-c04-o01"
+    "tn-g10-c04-o01",
+    "cbse-g10-c06-o02",
+    "tn-g10-c04-o03"
    ]
   },
   {
@@ -11131,6 +11235,1854 @@
    "review": "provisional",
    "serves": [
     "tn-g12-c12-o04"
+   ]
+  },
+  {
+   "id": "wr:pat:times-table-patterns",
+   "competency": "MATH.algebra.pattern-rules",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Look at the 9 times table: 9, 18, 27, 36, 45, 54, 63, 72, 81, 90.\n(a) Describe what happens to the tens digit and to the ones digit as you go down the table.\n(b) Add the two digits of each answer from 18 to 81. What do you notice?\n(c) Meena says: 'Every answer in the 5 times table ends in 5 or 0.' Explain why this is always true.\n(d) Explain why every answer in the 4 times table is also an answer in the 2 times table.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "digits",
+     "criterion": "(a) The tens digit goes up by 1 each time and the ones digit goes down by 1",
+     "points": 1
+    },
+    {
+     "id": "sum",
+     "criterion": "(b) The digits always add up to 9",
+     "points": 1
+    },
+    {
+     "id": "five",
+     "criterion": "(c) A reason: adding 5 each time takes an ending of 5 to 0 and 0 to 5 (or: 5 × an even number is a number of tens, 5 × an odd number is tens and one more 5)",
+     "points": 1
+    },
+    {
+     "id": "four",
+     "criterion": "(d) A reason: 4 is 2 groups of 2, so 4 × a number is the same as 2 × (double that number), e.g. 4 × 7 = 2 × 14",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept other true patterns in (a), such as pairs that are reverses of each other (18 and 81, 27 and 72) or 9 × n = 10 × n − n, as long as the tens/ones change is described. In (c) and (d) the reason must work for every answer, not just list a few examples; a picture-style explanation in words (two rows of two) is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g05-c06-o03"
+   ]
+  },
+  {
+   "id": "wr:shp:tangram",
+   "competency": "MATH.geometry.shape-properties",
+   "kind": "drawing",
+   "grade": 5,
+   "prompt": "A tangram is a square cut into seven pieces: 2 big triangles, 1 middle-sized triangle, 2 small triangles, 1 square and 1 parallelogram.\n(a) On the squared sheet, draw a square 8 squares long and 8 squares wide, and draw lines to cut it into the seven tangram pieces.\n(b) Beside it, draw how the two small triangles can be put together to make a shape the same as the square piece, and again to make a shape the same as the middle-sized triangle.\n(c) In the note, describe the pieces: Which pieces have a right-angled corner? Which piece has no right angle at all? Which piece has all its sides equal? Which piece has its opposite sides equal but no right angles?",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "pieces",
+     "criterion": "(a) The 8 × 8 square is divided into seven pieces of the right kinds and sizes (2 big, 1 middle and 2 small triangles, a square and a parallelogram) with no gaps",
+     "points": 1
+    },
+    {
+     "id": "combine",
+     "criterion": "(b) Shows two small triangles joined along their longest sides to make a square, and joined along a short side to make a triangle like the middle one",
+     "points": 1
+    },
+    {
+     "id": "angles",
+     "criterion": "(c) Says all five triangles and the square have a right angle, and the parallelogram has none",
+     "points": 1
+    },
+    {
+     "id": "sides",
+     "criterion": "(c) Says only the square has all sides equal, and the parallelogram has opposite sides equal (two angles smaller and two bigger than a right angle)",
+     "points": 1
+    }
+   ],
+   "guidance": "One correct layout, with the corners of the square at (0,0), (8,0), (8,8), (0,8): big triangles (0,0)-(8,0)-(4,4) and (0,0)-(0,8)-(4,4); middle triangle (8,4)-(8,8)-(4,8); small triangles (8,0)-(8,4)-(6,2) and (4,4)-(6,6)-(2,6); square (4,4)-(6,2)-(8,4)-(6,6); parallelogram (0,8)-(2,6)-(6,6)-(4,8). Any turned or flipped arrangement with the same pieces is correct. A child who has made the shapes with real tangram pieces may describe them instead of drawing them exactly. Every triangle also has two equal sides; credit this if mentioned. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g05-c07-o04"
+   ]
+  },
+  {
+   "id": "wr:disp:pictograph-honest",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "explanation",
+   "grade": 6,
+   "prompt": "A fruit shop's poster shows how many mangoes it sold each day as a pictograph. The shop uses one mango picture for every 10 mangoes, but the poster has no key. Monday has 4 small mango pictures. Tuesday has 4 mango pictures drawn twice as big. Wednesday has 6 small pictures squeezed close together, so its row looks shorter than Monday's. The title says 'Sales doubled on Tuesday!'\n(a) Using 1 picture = 10 mangoes, how many mangoes were really sold each day?\n(b) Give two reasons why the poster is not clear or not honest.\n(c) Describe how you would redraw it so that it is clear and fair.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "counts",
+     "criterion": "(a) Monday 40, Tuesday 40, Wednesday 60",
+     "points": 1
+    },
+    {
+     "id": "reasons",
+     "criterion": "(b) Two valid problems, e.g. the bigger pictures make Tuesday look larger though it equals Monday; the title is false; there is no key; uneven spacing makes Wednesday look smaller",
+     "points": 2
+    },
+    {
+     "id": "redraw",
+     "criterion": "(c) A fair design: pictures all the same size and equally spaced, a key (one picture = 10 mangoes), labelled days and an honest title",
+     "points": 1
+    }
+   ],
+   "guidance": "Award 1 of 2 for (b) if only one valid reason is given. Accept a suggestion to use a bar graph instead, if the learner also says how it makes the comparison fair (same bar width, scale from 0).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c04-o05"
+   ]
+  },
+  {
+   "id": "wr:frac:number-line-beyond-one",
+   "competency": "MATH.number.fraction-models",
+   "kind": "drawing",
+   "grade": 6,
+   "prompt": "On the squared sheet, draw a number line from 0 to 2 on which 1 whole is 6 squares long. Mark 0, 1 and 2. Then mark and label these fractions: 1/2, 1/3, 5/6, 7/6, 4/3, 3/2 and 11/6.\nIn the note: (a) explain how you found where 4/3 goes; (b) say which fraction on your line is at the same point as 8/6, and why; (c) write 11/6 as a mixed number and say between which two whole numbers it lies.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "line",
+     "criterion": "A number line with 0, 1 and 2 marked 6 squares apart",
+     "points": 1
+    },
+    {
+     "id": "proper",
+     "criterion": "1/3, 1/2 and 5/6 placed at 2, 3 and 5 squares from 0",
+     "points": 1
+    },
+    {
+     "id": "improper",
+     "criterion": "7/6, 4/3, 3/2 and 11/6 placed at 7, 8, 9 and 11 squares from 0",
+     "points": 1
+    },
+    {
+     "id": "explain",
+     "criterion": "(a) Explains that each third is 2 squares, so 4/3 is 8 squares (or 1 whole and one more third)",
+     "points": 1
+    },
+    {
+     "id": "equal",
+     "criterion": "(b) 8/6 is at the same point as 4/3, because 8/6 = 4/3; and (c) 11/6 = 1 5/6, between 1 and 2",
+     "points": 1
+    }
+   ],
+   "guidance": "Positions are counted in squares from 0. A line drawn with a different unit is acceptable if the unit is stated and every fraction is placed correctly for it; then do not award 'line'. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c07-o02"
+   ]
+  },
+  {
+   "id": "wr:circ:rangoli-rosette",
+   "competency": "MATH.geometry.circles",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "Make a rangoli flower with compass and ruler.\n(a) Draw a circle with centre O.\n(b) Mark a point A on the circle. Without changing the compass opening, put the compass point at A and draw an arc inside the circle from one side of the circle to the other.\n(c) Put the compass point where the arc meets the circle and draw the next arc. Keep going round until you have six petals.\n(d) With the straight edge, join the six points on the circle where the petals meet it, in order.\nIn the note: say how many points you marked on the circle, name the shape you get by joining them, and explain why stepping round the circle with the radius fits exactly six times.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "circle",
+     "criterion": "Draws a circle with its centre marked",
+     "points": 1
+    },
+    {
+     "id": "petals",
+     "criterion": "Draws arcs with the same radius as the circle, each centred at a point on the circle, making six petals",
+     "points": 1
+    },
+    {
+     "id": "hexagon",
+     "criterion": "Joins the six points to make a hexagon",
+     "points": 1
+    },
+    {
+     "id": "name",
+     "criterion": "Note: six points; the shape is a hexagon whose sides are all equal to the radius",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Gives a reason for six: each side equals the radius, so O and two neighbouring points make an equilateral triangle, and six such triangles fit around O (6 × 60° = 360°)",
+     "points": 1
+    }
+   ],
+   "guidance": "At Grade 6 a reason such as 'each side is the same as the radius, and six equal triangles fill the circle' earns 'why'. The arcs may run only between the circle's points (petal outlines) or right across the circle. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c08-o01"
+   ]
+  },
+  {
+   "id": "wr:bis:same-distance-wells",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "Two wells, A and B, are 6 cm apart on a village map. The village wants a water tank that is the same distance from both wells.\n(a) Mark A and B 6 cm apart. Set the compass to 5 cm and draw arcs from A and from B; mark the two points where they cross. Do the same with the compass set to 4 cm.\n(b) What do you notice about the four points you marked? Draw the line through them.\n(c) In the note, explain why every point you marked is the same distance from A and from B, and say where on your line the tank would be nearest to the wells.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "arcs5",
+     "criterion": "Arcs of the same radius (5 cm) from A and from B, crossing at two points, one on each side of AB",
+     "points": 1
+    },
+    {
+     "id": "arcs4",
+     "criterion": "Arcs of radius 4 cm from A and B, giving two more crossing points",
+     "points": 1
+    },
+    {
+     "id": "line",
+     "criterion": "(b) Notices the four points lie on one straight line, which crosses AB at its midpoint at a right angle, and draws it",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(c) Explains that each point is on an arc of the same radius from A and from B, so it is that far from both",
+     "points": 1
+    },
+    {
+     "id": "nearest",
+     "criterion": "(c) The nearest place is the midpoint of AB, 3 cm from each well",
+     "points": 1
+    }
+   ],
+   "guidance": "The radii do not have to be exactly 5 cm and 4 cm on the drawing pad, but both arcs of a pair must have the same radius and be more than half of AB. Accept 'it is the perpendicular bisector' or 'it cuts AB in half at a right angle' for 'line'. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c08-o04"
+   ]
+  },
+  {
+   "id": "wr:bas:parallel-copy-angle",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Draw a line l and a point P that is not on it. Draw a line through P that cuts l at Q (a transversal).\n(a) Using a ruler and compasses, copy the angle that PQ makes with l, so that an equal angle is made at P in the corresponding position. Draw the line m through P that forms this angle.\n(b) Explain why m is parallel to l.\n(c) Say how you could check your answer by measuring. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "transversal",
+     "criterion": "Draws the transversal through P meeting l at Q",
+     "points": 1
+    },
+    {
+     "id": "copy",
+     "criterion": "Copies the angle at Q to P: an arc centred at Q, the same arc centred at P, the chord taken with the compass and marked off from P's arc",
+     "points": 1
+    },
+    {
+     "id": "line",
+     "criterion": "Draws m through P and the marked point",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(b) Equal corresponding angles (or equal alternate angles) mean the lines are parallel",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "(c) Measures the perpendicular distance between l and m at two places far apart and finds it equal (or measures the two angles)",
+     "points": 1
+    }
+   ],
+   "guidance": "Copying the angle in the alternate position is equally correct. The two-perpendiculars method is also a valid parallel construction, but this task asks for the angle-copy method: give 'copy' only if an angle is copied. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g07-t1-c05-o05"
+   ]
+  },
+  {
+   "id": "wr:bar:rainfall-choose-draw",
+   "competency": "MATH.statistics.scaled-bars",
+   "kind": "drawing",
+   "grade": 7,
+   "prompt": "A school weather club in Tamil Nadu recorded the rainfall each month: June 60 mm, July 90 mm, August 120 mm, September 120 mm, October 270 mm, November 360 mm.\n(a) In the note, say whether a bar graph, a pictograph or a pie chart is the best way to show this data, and why.\n(b) On the squared sheet, draw your graph. Choose a scale that fits (the sheet has 15 squares each way), write the scale, label both axes and give the graph a title.\n(c) From your graph: which two months had the same rainfall? How many times July's rainfall fell in November? In which month does the heavy rain begin?",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "choice",
+     "criterion": "(a) Chooses a bar graph (or a line graph) and gives a reason, e.g. comparing amounts month by month; a pie chart does not fit because the months are not parts of one whole",
+     "points": 1
+    },
+    {
+     "id": "scale",
+     "criterion": "(b) States a scale that fits the sheet, e.g. 1 square = 30 mm",
+     "points": 1
+    },
+    {
+     "id": "bars",
+     "criterion": "(b) Bar heights are correct for the scale (for 30 mm a square: 2, 3, 4, 4, 9, 12 squares)",
+     "points": 1
+    },
+    {
+     "id": "labels",
+     "criterion": "(b) Months on one axis, rainfall in mm on the other, and a title",
+     "points": 1
+    },
+    {
+     "id": "read",
+     "criterion": "(c) August and September; 4 times (360 ÷ 90); heavy rain begins in October",
+     "points": 1
+    }
+   ],
+   "guidance": "Any scale that fits is fine (e.g. 1 square = 40 mm gives 1.5, 2.25, 3, 3, 6.75, 9). Bars should have equal widths and gaps. A line graph is a sensible choice for change over time and earns 'choice' with a reason. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g07-t2-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:stq:walk-or-bus",
+   "competency": "MATH.statistics.statistical-questions",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "Class 7 wanted to answer the question: 'Do students who walk to school get there faster than students who come by bus?' One morning they recorded the travel times (in minutes) of 6 walkers and 6 bus riders.\nWalkers: 6, 9, 10, 12, 13, 22\nBus: 14, 16, 18, 20, 22, 30\n(a) Find the mean and the median time for each group.\n(b) Write a conclusion that is supported by this evidence.\n(c) Give one reason to be careful with your conclusion.\n(d) Suggest one more piece of data the class should collect to answer their question better.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "mean",
+     "criterion": "(a) Means: walkers 12 minutes, bus 20 minutes",
+     "points": 1
+    },
+    {
+     "id": "median",
+     "criterion": "(a) Medians: walkers 11 minutes, bus 19 minutes",
+     "points": 1
+    },
+    {
+     "id": "conclusion",
+     "criterion": "(b) On that morning walkers took less time on average than bus riders, backed by the averages",
+     "points": 1
+    },
+    {
+     "id": "caution",
+     "criterion": "(c) A valid caution: only one morning, only 6 students in each group, or walkers may simply live nearer, so less time does not mean they move faster",
+     "points": 1
+    },
+    {
+     "id": "more",
+     "criterion": "(d) A sensible extra measurement, e.g. the distance from home to school, or times on several days",
+     "points": 1
+    }
+   ],
+   "guidance": "Reward the point that 'faster' is about speed, while the data is about time taken. A conclusion that only says 'walkers' with no evidence does not earn 'conclusion'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g07-t2-c05-o04"
+   ]
+  },
+  {
+   "id": "wr:bis:why-they-work",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "(a) Draw a segment AB 8 cm long. With a ruler and compasses, construct its perpendicular bisector, and mark the midpoint M of AB.\n(b) Draw an angle of any size with vertex O. Construct its bisector with a ruler and compasses.\n(c) In the note, explain why each construction works. Hint: in (a), join A and B to the two points where your arcs cross; in (b), join the points your arcs make and look for triangles with equal sides. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "perp",
+     "criterion": "(a) Equal arcs (radius more than half of AB) from A and from B, crossing on both sides of AB, and the line through the two crossings",
+     "points": 1
+    },
+    {
+     "id": "mid",
+     "criterion": "(a) Marks M where the line meets AB, with AM = MB = 4 cm",
+     "points": 1
+    },
+    {
+     "id": "angle",
+     "criterion": "(b) An arc from O cutting both arms, equal arcs from those two points meeting at a point inside the angle, and the ray from O through it",
+     "points": 1
+    },
+    {
+     "id": "why-a",
+     "criterion": "(c) For (a): each crossing point is the same distance from A and B (the four points make a rhombus, or congruent triangles by SSS), so the line meets AB at its midpoint at a right angle",
+     "points": 1
+    },
+    {
+     "id": "why-b",
+     "criterion": "(c) For (b): the two triangles formed are congruent by SSS (two pairs of equal radii and a common side), so the two angles at O are equal",
+     "points": 1
+    }
+   ],
+   "guidance": "A rhombus argument (diagonals of a rhombus bisect each other at right angles) is a full reason for (a). Arcs only on one side of AB are acceptable in (a) if the learner also uses the midpoint. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g07-t2-c06-o01",
+    "tn-g07-t1-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:bas:special-angles",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Using only a ruler and compasses (no protractor), construct each of these angles on its own line: (a) 60°, (b) 120°, (c) 30°, (d) 90°, (e) 45°.\nIn the note, list your steps for each angle and say which angle you built it from (for example, 'I bisected the 60° angle'). Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "60-120",
+     "criterion": "(a)–(b) 60° by one step of the radius along an arc from the point on the line, and 120° by two steps",
+     "points": 1
+    },
+    {
+     "id": "30",
+     "criterion": "(c) 30° by bisecting a 60° angle",
+     "points": 1
+    },
+    {
+     "id": "90",
+     "criterion": "(d) 90° by bisecting the angle between 60° and 120° (or by bisecting a straight angle / constructing a perpendicular)",
+     "points": 1
+    },
+    {
+     "id": "45",
+     "criterion": "(e) 45° by bisecting a 90° angle",
+     "points": 1
+    },
+    {
+     "id": "plan",
+     "criterion": "The note names, for each angle, the angle or construction it was built from",
+     "points": 1
+    }
+   ],
+   "guidance": "Other correct routes are fine, e.g. 90° as a perpendicular at a point on the line, or 45° from bisecting the angle between 0° and 90° of a constructed right angle. Arcs must be visible for each angle. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g07-t1-c05-o04"
+   ]
+  },
+  {
+   "id": "wr:div:eight-eleven-proof",
+   "competency": "MATH.reasoning.divisibility",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "(a) Use a shortcut to decide whether 7136 and 5420 are divisible by 8. Explain, using place value, why you only need to look at the last three digits.\n(b) A test for 11: a 3-digit number with digits a, b, c (the number 100a + 10b + c) is divisible by 11 when a − b + c is divisible by 11 (0 counts as divisible). Use the test on 583 and on 719.\n(c) Prove the test in (b) with algebra: show that 100a + 10b + c = 99a + 11b + (a − b + c), and explain why this proves the test.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "eight",
+     "criterion": "(a) 7136 is divisible by 8 (136 = 8 × 17); 5420 is not (420 is not a multiple of 8)",
+     "points": 1
+    },
+    {
+     "id": "why8",
+     "criterion": "(a) 1000 = 8 × 125, so every thousand (and every larger place) is a multiple of 8, and only the last three digits can leave a remainder",
+     "points": 1
+    },
+    {
+     "id": "eleven",
+     "criterion": "(b) 583: 5 − 8 + 3 = 0, so divisible (583 = 11 × 53); 719: 7 − 1 + 9 = 15, so not divisible",
+     "points": 1
+    },
+    {
+     "id": "identity",
+     "criterion": "(c) Shows 99a + 11b + (a − b + c) = 100a + 10b + c",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "(c) 99a + 11b = 11(9a + b) is always a multiple of 11, so the number is divisible by 11 exactly when a − b + c is",
+     "points": 1
+    }
+   ],
+   "guidance": "In (a) accept 'divide 136 by 8'. In (c) the learner must say why the 99a + 11b part does not matter; an identity with no conclusion earns only 'identity'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t1-c05-o02",
+    "cbse-g08-t2-c06-o04"
+   ]
+  },
+  {
+   "id": "wr:conj:consecutive-sums",
+   "competency": "MATH.reasoning.conjecture-testing",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "Some numbers can be written as the sum of two or more consecutive counting numbers, for example 9 = 4 + 5 = 2 + 3 + 4 and 10 = 1 + 2 + 3 + 4.\n(a) Try every number from 1 to 16. Which of them can NOT be written this way? Make a conjecture about these numbers.\n(b) Explain why the sum of any two consecutive numbers is always odd, and why the sum of any three consecutive numbers is always a multiple of 3.\n(c) Without adding, decide whether 1 + 2 + 3 + … + 20 is even or odd, and explain how you know.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "list",
+     "criterion": "(a) Finds that 1, 2, 4, 8 and 16 cannot be written this way",
+     "points": 1
+    },
+    {
+     "id": "conjecture",
+     "criterion": "(a) Conjectures that the powers of 2 are exactly the numbers that cannot be written this way",
+     "points": 1
+    },
+    {
+     "id": "two",
+     "criterion": "(b) Two consecutive numbers are one even and one odd (or n + (n + 1) = 2n + 1), so the sum is odd",
+     "points": 1
+    },
+    {
+     "id": "three",
+     "criterion": "(b) (n − 1) + n + (n + 1) = 3n, or the middle number times 3, so a multiple of 3",
+     "points": 1
+    },
+    {
+     "id": "parity",
+     "criterion": "(c) Even: there are 10 odd numbers from 1 to 20, and an even number of odd numbers adds to an even total (the sum is 210)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept either treatment of 1 in (a) if the learner says what they decided. A proof of the conjecture is not required. In (c), finding 210 and saying 'even' without a parity argument earns the point only if the reasoning is shown; pairing (1 + 20, 2 + 19, …, ten pairs of 21) is also valid.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t1-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:pie:travel-to-school",
+   "competency": "MATH.statistics.pie-charts",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "72 students in Class 8 were asked how they come to school: bus 24, walk 18, cycle 12, auto 12, car 6.\n(a) In the note, work out the angle of the sector for each way of travelling, showing your working.\n(b) Draw the pie chart: draw a circle with the compass and make the sectors with the straight edge. All the angles can be made with compass constructions, or you may judge them carefully. Label each sector.\n(c) What fraction of the students walk or cycle?\n(d) The whole school has 360 students. If they travel in the same way, about how many come by bus?",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "angles",
+     "criterion": "(a) Bus 120°, walk 90°, cycle 60°, auto 60°, car 30°, each from (number ÷ 72) × 360°",
+     "points": 2
+    },
+    {
+     "id": "draw",
+     "criterion": "(b) A circle divided into five labelled sectors in the right sizes (bus a third, walk a quarter, cycle and auto a sixth each, car a twelfth)",
+     "points": 1
+    },
+    {
+     "id": "fraction",
+     "criterion": "(c) 30/72 = 5/12",
+     "points": 1
+    },
+    {
+     "id": "scale",
+     "criterion": "(d) 120 students (a third of 360)",
+     "points": 1
+    }
+   ],
+   "guidance": "Award 1 of 2 for 'angles' if the method is right but one angle is wrong. The angles must add up to 360°. Sectors are judged by eye: a 120° sector should look like a third of the circle. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c03-o03"
+   ]
+  },
+  {
+   "id": "wr:frac:carpet-koch",
+   "competency": "MATH.geometry.fractal-iteration",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "The Sierpinski carpet: start with a square (Stage 0). To make the next stage, divide every remaining square into 9 equal smaller squares and remove (shade) the middle one.\n(a) On the squared sheet, draw Stage 1 as a 3 × 3 square with its middle square shaded, and Stage 2 as a 9 × 9 square with all the removed squares shaded.\n(b) In the note, make a table for Stages 0, 1, 2 and 3 showing the number of squares left and the fraction of the original area left.\n(c) The Koch snowflake starts with an equilateral triangle with sides of 9 cm. At each stage, every side is divided into three equal parts and the middle part is replaced by two sides of a smaller equilateral triangle pointing outwards. Find the perimeter at Stages 0, 1 and 2, and say what happens to the perimeter as the stages go on.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "stage1",
+     "criterion": "(a) Stage 1: the 3 × 3 square with only the centre square shaded",
+     "points": 1
+    },
+    {
+     "id": "stage2",
+     "criterion": "(a) Stage 2: the 9 × 9 square with the middle 3 × 3 block and the centre square of each of the other eight 3 × 3 blocks shaded (64 small squares left)",
+     "points": 1
+    },
+    {
+     "id": "count",
+     "criterion": "(b) Squares left: 1, 8, 64, 512 (multiply by 8 each stage)",
+     "points": 1
+    },
+    {
+     "id": "area",
+     "criterion": "(b) Area left: 1, 8/9, 64/81, 512/729",
+     "points": 1
+    },
+    {
+     "id": "koch",
+     "criterion": "(c) Perimeters 27 cm, 36 cm, 48 cm",
+     "points": 1
+    },
+    {
+     "id": "trend",
+     "criterion": "(c) Each stage multiplies the perimeter by 4/3, so it keeps growing without limit (while the area stays bounded)",
+     "points": 1
+    }
+   ],
+   "guidance": "The bounded-area remark is not needed for 'trend'. Accept the table in any clear layout. In Stage 2, check that the shaded centre of the middle block is one 3 × 3 block, not nine separate unit squares in a different place. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c04-o01"
+   ]
+  },
+  {
+   "id": "wr:net:ant-on-cube",
+   "competency": "MATH.geometry.nets",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "A box is a cube with edges 3 cm. An ant at corner A wants to reach the opposite corner G (the corner farthest from A), walking only on the surface of the box.\n(a) On the squared sheet (1 square = 1 cm), draw the net of the two faces the ant can cross, the front face and the top face, joined along their shared edge. Mark A and G, and draw the ant's shortest path as a straight line.\n(b) In the note, find the length of this path.\n(c) Compare it with two other routes: along three edges, and along the diagonal of one face followed by one edge. Which is shortest?\n(d) How many different shortest paths are there from A to G?",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "net",
+     "criterion": "(a) Two 3 × 3 squares joined along an edge to make a 6 × 3 rectangle, with A and G at opposite corners",
+     "points": 1
+    },
+    {
+     "id": "path",
+     "criterion": "(a) The path is the straight line from A to G across the net, crossing the shared edge at its middle",
+     "points": 1
+    },
+    {
+     "id": "length",
+     "criterion": "(b) √(6² + 3²) = √45 ≈ 6.7 cm, by Pythagoras",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "(c) Three edges: 9 cm; face diagonal plus edge: 3√2 + 3 ≈ 7.2 cm; the straight path on the net is shortest",
+     "points": 1
+    },
+    {
+     "id": "count",
+     "criterion": "(d) 6 shortest paths (one for each choice of the pair of faces / the edge crossed)",
+     "points": 1
+    }
+   ],
+   "guidance": "Any pair of adjacent faces gives the same length. Accept √45 = 3√5. In (d), accept 6 with a reason; 3 with the reason 'three pairs of faces' earns no mark, since each pair can be crossed in two ways. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:views:staircase",
+   "competency": "MATH.geometry.solid-views",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "Kavin builds a staircase from 6 cube blocks, only one cube deep from front to back: the bottom layer has 3 cubes in a row, the second layer has 2 cubes starting from the left end, and the top layer has 1 cube on the left.\n(a) On the squared sheet, draw its front view, top view and side view from the right, and label each.\n(b) Draw a sketch of the whole staircase that shows three faces of it at once (an isometric-style drawing, using slanting lines for depth).\n(c) In the note: if you were shown only the front view, could you be sure how many cubes were used? Explain.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "front",
+     "criterion": "(a) Front view: a staircase of 6 squares, columns 3, 2 and 1 high from the left",
+     "points": 1
+    },
+    {
+     "id": "top",
+     "criterion": "(a) Top view: a row of 3 squares",
+     "points": 1
+    },
+    {
+     "id": "side",
+     "criterion": "(a) Right side view: a column of 3 squares",
+     "points": 1
+    },
+    {
+     "id": "sketch",
+     "criterion": "(b) A 3-D sketch with front, top and side faces shown and parallel slanting edges for depth, with the right numbers of cubes in each column",
+     "points": 1
+    },
+    {
+     "id": "only-front",
+     "criterion": "(c) No: cubes could be hidden behind the visible ones (the solid could be deeper), so one view is not enough",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept the side view drawn from the left (also a column of 3) if it is labelled. A true isometric grid is not available, so judge the sketch on whether it reads as a solid with consistent slanting edges. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c04-o04"
+   ]
+  },
+  {
+   "id": "wr:irr:sqrt2-sqrt3-g9",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "(a) Prove by contradiction that √2 is irrational. Begin by supposing that √2 = p/q, where p and q are whole numbers with no common factor and q ≠ 0, and give a reason for every step.\n(b) Prove in the same way that √3 is irrational. You may use the fact that if 3 divides p², then 3 divides p.\n(c) Ravi uses the same method to 'prove' that √4 is irrational. Explain at which step his argument must break down.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "(a) Assumes √2 = p/q in lowest terms and squares to get p² = 2q²",
+     "points": 1
+    },
+    {
+     "id": "sqrt2",
+     "criterion": "(a) p² even so p even; p = 2r gives q² = 2r², so q is even; both even contradicts 'no common factor'",
+     "points": 1
+    },
+    {
+     "id": "sqrt3",
+     "criterion": "(b) p² = 3q², so 3 divides p; p = 3r gives q² = 3r², so 3 divides q; contradiction, so √3 is irrational",
+     "points": 1
+    },
+    {
+     "id": "sqrt4",
+     "criterion": "(c) The step 'if 4 divides p² then 4 divides p' is false because 4 is not prime (e.g. p = 2), and in fact √4 = 2/1",
+     "points": 1
+    }
+   ],
+   "guidance": "In (a), the reason 'if p² is even then p is even' (an odd number squared is odd) must be given. Accept proofs that use prime factorisation (the exponent of 2 is even in p² and odd in 2q²).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c03-o04"
+   ]
+  },
+  {
+   "id": "wr:idt:area-models-g9",
+   "competency": "MATH.algebra.identities",
+   "kind": "drawing",
+   "grade": 9,
+   "prompt": "Use area pictures on the squared sheet to show why these identities are true. You may place the two pictures one above the other.\n(a) (a + b)² = a² + 2ab + b²: draw a square of side a + b with a = 4 squares and b = 2 squares, split it into four parts and label the area of each part using a and b.\n(b) (x + 2)(x + 4) = x² + 6x + 8: draw a rectangle with sides x + 2 and x + 4, taking x = 5 squares, split it into four parts and label each part with its area in terms of x.\n(c) In the note, explain why your picture in (a) shows the identity for all values of a and b, not just 4 and 2. Then explain, by describing a picture, why (a − b)² = a² − 2ab + b².",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "square",
+     "criterion": "(a) A 6 × 6 square split into a² (4 × 4), two ab rectangles (4 × 2) and b² (2 × 2), each labelled",
+     "points": 1
+    },
+    {
+     "id": "rect",
+     "criterion": "(b) A 7 × 9 rectangle split into x², 2x, 4x and 8, each labelled",
+     "points": 1
+    },
+    {
+     "id": "sum",
+     "criterion": "(b) Adds the parts: x² + 2x + 4x + 8 = x² + 6x + 8",
+     "points": 1
+    },
+    {
+     "id": "general",
+     "criterion": "(c) Explains that the cutting works for any lengths: the side is always a then b, so the pieces are always a², ab, ab, b²",
+     "points": 1
+    },
+    {
+     "id": "minus",
+     "criterion": "(c) For (a − b)²: from the a × a square remove two a × b strips; the b × b corner has been removed twice, so add it back: a² − 2ab + b²",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a = 5, b = 3 or other values if the picture fits. In (c) an algebraic expansion alone does not earn 'minus': the learner must link it to areas. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c04-o01"
+   ]
+  },
+  {
+   "id": "wr:circ:one-circle-three-points",
+   "competency": "MATH.geometry.circle-theorems",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Three villages P, Q and R are not on one straight line. A mobile tower is to be put up at a point the same distance from all three.\n(a) Mark three such points P, Q and R. With ruler and compasses, construct the point O that is the same distance from all three, and draw the circle through P, Q and R.\n(b) In the note, prove that exactly one circle passes through P, Q and R: explain why the centre of any such circle must lie on the perpendicular bisectors of PQ and of QR, and why these two lines meet in exactly one point.\n(c) Explain why no circle can pass through three points that are on one straight line. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "bisect",
+     "criterion": "(a) Perpendicular bisectors of PQ and QR constructed with equal arcs",
+     "points": 1
+    },
+    {
+     "id": "circle",
+     "criterion": "(a) O marked where they meet and the circle centred at O drawn through P, Q and R",
+     "points": 1
+    },
+    {
+     "id": "on-bisector",
+     "criterion": "(b) A centre is equidistant from P and Q, so lies on the perpendicular bisector of PQ; likewise for QR",
+     "points": 1
+    },
+    {
+     "id": "unique",
+     "criterion": "(b) PQ and QR are not parallel (P, Q, R are not collinear), so their perpendicular bisectors are not parallel and meet in exactly one point; the radius OP is then fixed, so there is only one circle",
+     "points": 1
+    },
+    {
+     "id": "collinear",
+     "criterion": "(c) If P, Q, R are collinear, the two perpendicular bisectors are both perpendicular to the same line, so they are parallel and never meet: no centre exists",
+     "points": 1
+    }
+   ],
+   "guidance": "The proof in (b) must give both parts: every centre lies on both bisectors, and the bisectors meet only once. Using the third bisector is not needed. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c05-o02"
+   ]
+  },
+  {
+   "id": "wr:con:sulba-square",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "The Baudhayana Sulbasutra describes how to turn a rectangle into a square with the same area. Try it on the squared sheet, using the side of one square as the unit.\n(a) Draw a rectangle 8 units by 2 units. Cut off a 2 × 2 square at one end, cut the rest into two equal halves (each 3 × 2), and redraw the pieces as an L-shape: the square with one half along its top and the other half along its side.\n(b) Your L-shape fits inside a 5 × 5 square with a smaller square missing from the corner. What size is the missing square? Explain why the area of the rectangle equals 5² − 3².\n(c) With the compass and straight edge, construct a segment of length s with s² = 5² − 3²: draw a right angle, mark 3 units along one arm, and with the compass set to 5 units find the point on the other arm. Then draw the square of side s.\n(d) In the note, justify why the square has the same area as the rectangle, and explain why the method works for any rectangle with sides a and b. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "ell",
+     "criterion": "(a) The rectangle cut and rearranged into an L-shape of a 2 × 2 square with two 3 × 2 pieces along two sides",
+     "points": 1
+    },
+    {
+     "id": "diff",
+     "criterion": "(b) The missing square is 3 × 3, so the area is 25 − 9 = 16 = 8 × 2",
+     "points": 1
+    },
+    {
+     "id": "triangle",
+     "criterion": "(c) A right triangle with leg 3 and hypotenuse 5 (arc of radius 5), giving the other leg s = 4",
+     "points": 1
+    },
+    {
+     "id": "square",
+     "criterion": "(c) The square of side s drawn",
+     "points": 1
+    },
+    {
+     "id": "justify",
+     "criterion": "(d) By the Baudhayana–Pythagoras theorem s² = 5² − 3² = area of the L = area of the rectangle; in general ((a + b)/2)² − ((a − b)/2)² = ab",
+     "points": 1
+    }
+   ],
+   "guidance": "The general formula in 'justify' may be in words: the big square has side half of (a + b), the missing one half of (a − b). Any layout of the pieces that forms the L-shape is fine. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c06-o06"
+   ]
+  },
+  {
+   "id": "wr:tpf:isosceles-base-angles",
+   "competency": "MATH.geometry.triangle-proof",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "(a) In △ABC, AB = AC. Prove that ∠B = ∠C. Draw the bisector of ∠A meeting BC at D, and give a reason for every statement.\n(b) In △PQR, PQ = PR. Side RQ is extended beyond Q, and the exterior angle at Q is 110°. Find ∠P, giving a reason for each step.\n(c) Use (a) to prove that every angle of an equilateral triangle is 60°.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "cong",
+     "criterion": "(a) △ABD ≅ △ACD by SAS: AB = AC (given), ∠BAD = ∠CAD (AD bisects ∠A), AD common",
+     "points": 1
+    },
+    {
+     "id": "cpct",
+     "criterion": "(a) So ∠B = ∠C (corresponding parts of congruent triangles)",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(b) ∠PQR = 70° (linear pair), ∠PRQ = 70° (angles opposite equal sides), ∠P = 40° (angle sum)",
+     "points": 1
+    },
+    {
+     "id": "equilateral",
+     "criterion": "(c) Applying (a) to two pairs of equal sides gives all three angles equal; they add to 180°, so each is 60°",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a proof using the midpoint D of BC (SSS) or the altitude (RHS). In (b) a reason must be given for each step.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c09-o04"
+   ]
+  },
+  {
+   "id": "wr:cong:ssa-not-enough",
+   "competency": "MATH.geometry.congruence",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "(a) With ruler and compasses, construct an angle of 30° at a point A (bisect a 60° angle). On one arm mark B with AB = 8 cm. With the compass set to 5 cm and its point at B, draw an arc that cuts the other arm. It cuts the arm at two points, C₁ and C₂: draw both triangles ABC₁ and ABC₂.\n(b) In the note, explain how your drawing shows that SSA (two sides and an angle that is NOT between them) is not a congruence condition.\n(c) In quadrilateral ABCD, AB = AD and ∠ABC = ∠ADC = 90°. Prove that CB = CD and that AC bisects ∠BAD. Name the congruence condition you use and give the matching of vertices. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "thirty",
+     "criterion": "(a) 30° constructed by bisecting a 60° angle",
+     "points": 1
+    },
+    {
+     "id": "two",
+     "criterion": "(a) The arc of radius 5 cm from B meets the other arm twice and both triangles are drawn",
+     "points": 1
+    },
+    {
+     "id": "ssa",
+     "criterion": "(b) Both triangles have AB = 8 cm, BC = 5 cm and ∠A = 30°, yet AC₁ and AC₂ differ (about 3.9 cm and 9.9 cm), so they are not congruent",
+     "points": 1
+    },
+    {
+     "id": "rhs",
+     "criterion": "(c) △ABC ≅ △ADC by RHS: right angles at B and D, hypotenuse AC common, AB = AD (B ↔ D)",
+     "points": 1
+    },
+    {
+     "id": "deduce",
+     "criterion": "(c) Hence CB = CD and ∠BAC = ∠DAC (corresponding parts), so AC bisects ∠BAD",
+     "points": 1
+    }
+   ],
+   "guidance": "The distance from B to the other arm is 8 × sin 30° = 4 cm, which is less than 5 cm, so the arc meets the arm twice; the learner need not compute this. In (c) a wrong vertex matching loses 'rhs'. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c09-o06"
+   ]
+  },
+  {
+   "id": "wr:avg:which-average-decision",
+   "competency": "MATH.statistics.median-mode",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "(a) A small workshop in Coimbatore has 9 people. Their monthly pay in thousands of rupees is 15, 16, 16, 18, 18, 18, 20, 22, 120 (the last is the owner). A job advert says 'Average pay about ₹29,000 a month'. Find the mean, median and mode. Is the advert fair to someone applying for a job? Which average best tells a new worker what they are likely to earn, and why?\n(b) For each decision, say whether you would use the mean, the median or the mode, and why: (i) a tailor deciding which shirt size to stock the most of; (ii) a farmer estimating the total rice harvest of 10 fields from the typical yield of a field; (iii) describing a typical house price in a street where one house is a very large bungalow.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "mean",
+     "criterion": "(a) Mean = 263 ÷ 9 ≈ 29.2 thousand (₹29,200)",
+     "points": 1
+    },
+    {
+     "id": "median-mode",
+     "criterion": "(a) Median 18 thousand and mode 18 thousand",
+     "points": 1
+    },
+    {
+     "id": "judge",
+     "criterion": "(a) The advert is misleading: the owner's large pay pulls the mean up; the median (or mode) of ₹18,000 better describes a worker's pay",
+     "points": 1
+    },
+    {
+     "id": "choices",
+     "criterion": "(b) (i) mode, (ii) mean (total = mean × 10), (iii) median, each with a reason",
+     "points": 2
+    }
+   ],
+   "guidance": "Award 1 of 2 for (b) if two of the three choices are right with reasons. In (b)(ii) the key reason is that the mean times the number of fields gives the total.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c10-o05"
+   ]
+  },
+  {
+   "id": "wr:alg:column-addition",
+   "competency": "MATH.reasoning.algorithms-flowcharts",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "(a) Write the usual column method for adding two whole numbers as an algorithm: a numbered list of precise steps that works for any two whole numbers. Your algorithm must say what to do with a carry and when to stop.\n(b) Trace your algorithm on 4786 + 3528: for each step, write the column, the digits added (with any carry), the digit written down and the carry.\n(c) To add 27.85 and 6.4 with your algorithm, what must be done first, and why? Explain using place value, then find the sum.\n(d) Explain, using place value, why a carry of 1 is moved to the next column on the left.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "algorithm",
+     "criterion": "(a) A finite list of precise steps: start at the ones column, add the digits and the carry, write the ones digit, carry the tens digit, move left, and stop when no columns and no carry remain",
+     "points": 1
+    },
+    {
+     "id": "trace",
+     "criterion": "(b) Ones 6 + 8 = 14 (write 4, carry 1); tens 8 + 2 + 1 = 11 (write 1, carry 1); hundreds 7 + 5 + 1 = 13 (write 3, carry 1); thousands 4 + 3 + 1 = 8; answer 8314",
+     "points": 1
+    },
+    {
+     "id": "align",
+     "criterion": "(c) Line up the decimal points (write 6.4 as 6.40) so tenths are added to tenths and hundredths to hundredths",
+     "points": 1
+    },
+    {
+     "id": "sum",
+     "criterion": "(c) 27.85 + 6.40 = 34.25",
+     "points": 1
+    },
+    {
+     "id": "carry",
+     "criterion": "(d) 10 units in one place make 1 unit of the next place (10 ones = 1 ten, 10 tens = 1 hundred), so the extra ten moves left",
+     "points": 1
+    }
+   ],
+   "guidance": "The algorithm in (a) may be a flowchart described in words. It must handle a final carry (e.g. 95 + 7). A trace that gets 8314 but skips the carries earns no 'trace' mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c11-o01"
+   ]
+  },
+  {
+   "id": "wr:alg:compare-and-improve",
+   "competency": "MATH.reasoning.algorithms-flowcharts",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "Meena has a list of 100 roll numbers written in increasing order and wants to know whether 73 is in it.\nAlgorithm A: check the numbers one by one from the start.\nAlgorithm B: look at the middle number of the part of the list still left; if 73 is smaller, keep only the left half, if larger, keep only the right half; repeat until it is found or nothing is left.\n(a) In the worst case, how many numbers does Algorithm A look at?\n(b) About how many does Algorithm B look at in the worst case? Explain by writing how the size of the part left changes each time.\n(c) What must be true about the list for Algorithm B to work?\n(d) Kavin wants the largest number in an unsorted list of 10 numbers. He compares every pair of numbers, which takes 45 comparisons. Describe a better algorithm that keeps one number written down as 'largest so far', and count how many comparisons it needs.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "linear",
+     "criterion": "(a) 100 numbers",
+     "points": 1
+    },
+    {
+     "id": "halving",
+     "criterion": "(b) About 7, from halving: 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1",
+     "points": 1
+    },
+    {
+     "id": "sorted",
+     "criterion": "(c) The list must be in order (sorted)",
+     "points": 1
+    },
+    {
+     "id": "improve",
+     "criterion": "(d) Write down the first number; compare each next number with it and replace it when the new one is larger; at the end it is the largest",
+     "points": 1
+    },
+    {
+     "id": "count",
+     "criterion": "(d) 9 comparisons instead of 45",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept 6 or 7 in (b) with a halving argument. The improved algorithm in (d) may be written as numbered steps or a flowchart in words.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c11-o05"
+   ]
+  },
+  {
+   "id": "wr:mid:centroid-ratio",
+   "competency": "MATH.geometry.midpoint-theorem",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "In △ABC, E is the midpoint of AC and F is the midpoint of AB. The medians BE and CF meet at G. P and Q are the midpoints of GB and GC.\n(a) Prove that FE ∥ BC and FE = ½BC.\n(b) Prove that PQ ∥ BC and PQ = ½BC.\n(c) Deduce that FEQP is a parallelogram, and hence that BG = 2GE and CG = 2GF.\n(d) Explain why the third median, from A, must also pass through G.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "fe",
+     "criterion": "(a) The midpoint theorem in △ABC",
+     "points": 1
+    },
+    {
+     "id": "pq",
+     "criterion": "(b) The midpoint theorem in △GBC",
+     "points": 1
+    },
+    {
+     "id": "para",
+     "criterion": "(c) FE and PQ are equal and parallel, so FEQP is a parallelogram (one pair of opposite sides equal and parallel)",
+     "points": 1
+    },
+    {
+     "id": "ratio",
+     "criterion": "(c) Its diagonals EP and FQ bisect each other at G, so GE = GP = PB, giving BG = 2GE (and likewise CG = 2GF)",
+     "points": 1
+    },
+    {
+     "id": "third",
+     "criterion": "(d) The median from A and BE also meet at the point dividing BE in the ratio 2 : 1 from B (same argument), which is G",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a coordinate or vector proof if complete. In (d) any correct argument that the point dividing a median 2 : 1 is the same for every pair of medians earns the mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c12-o05"
+   ]
+  },
+  {
+   "id": "wr:tile:quad-symmetry-tiling",
+   "competency": "MATH.geometry.shape-tiling",
+   "kind": "drawing",
+   "grade": 9,
+   "prompt": "(a) In the note, for each quadrilateral give its number of lines of symmetry and its order of rotational symmetry, and say whether it has central (half-turn) symmetry: square; rectangle (not a square); rhombus (not a square); parallelogram (no right angles, sides not all equal); kite (not a rhombus); isosceles trapezium.\n(b) On the squared sheet, draw a quadrilateral with no equal sides and no parallel sides, with its corners on grid points, about 4 or 5 squares across. Show how copies of it tile: turn it through a half-turn about the midpoint of one side to get the next copy, and continue until four copies meet at one corner.\n(c) Explain why copies of any quadrilateral can be fitted around a point with no gaps and no overlaps.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "sym1",
+     "criterion": "(a) Square: 4 lines, order 4, central; rectangle: 2 lines, order 2, central; rhombus: 2 lines (the diagonals), order 2, central",
+     "points": 1
+    },
+    {
+     "id": "sym2",
+     "criterion": "(a) Parallelogram: 0 lines, order 2, central; kite: 1 line, order 1, not central; isosceles trapezium: 1 line, order 1, not central",
+     "points": 1
+    },
+    {
+     "id": "tile",
+     "criterion": "(b) At least four copies drawn by half-turns about side midpoints, fitting with no gaps or overlaps",
+     "points": 1
+    },
+    {
+     "id": "corner",
+     "criterion": "(b) At the shared corner, each of the four different angles of the quadrilateral appears once",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(c) The four angles of a quadrilateral add to 360°, and a half-turn about a side's midpoint makes the matching sides fit exactly",
+     "points": 1
+    }
+   ],
+   "guidance": "Example quadrilateral: corners (0,0), (4,0), (5,3), (1,5). Order of rotational symmetry 1 may be written as 'no rotational symmetry'. A tiling drawn by translating pairs of copies is acceptable if it has no gaps or overlaps. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c12-o07"
+   ]
+  },
+  {
+   "id": "wr:est:tank-scaling",
+   "competency": "MATH.reasoning.estimate-check",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "(a) Estimate how much water your classroom would hold if it were a closed tank. Estimate its length, width and height in metres and say how you estimated each one (for example, by pacing or counting floor tiles). Find the volume in m³ and give it in litres.\n(b) A cuboid water tank on a roof in Madurai is 2 m × 1 m × 1 m. A new tank has every edge doubled. Without working out the new volume first, say how many times as much water it holds and how many times as much paint is needed for its outside. Explain why.\n(c) Kavya says: 'If I double the radius of a cylindrical drum but keep its height the same, it will hold twice as much water.' Is she right? Explain.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "estimate",
+     "criterion": "(a) Reasonable measurements with a stated method (e.g. about 8 m × 6 m × 3 m)",
+     "points": 1
+    },
+    {
+     "id": "volume",
+     "criterion": "(a) Multiplies to get the volume (e.g. 144 m³) and converts using 1 m³ = 1000 litres (144,000 L)",
+     "points": 1
+    },
+    {
+     "id": "volume-scale",
+     "criterion": "(b) 8 times as much water, because each of the three dimensions doubles (2 × 2 × 2)",
+     "points": 1
+    },
+    {
+     "id": "area-scale",
+     "criterion": "(b) 4 times as much paint, because each face's two dimensions double (2 × 2)",
+     "points": 1
+    },
+    {
+     "id": "drum",
+     "criterion": "(c) No: the volume πr²h depends on r², so doubling r makes it 4 times as large",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept any classroom estimate between about 80 m³ and 300 m³ with a sensible method. A learner who computes 16 m³ vs 2 m³ and 40 m² vs 10 m² instead of reasoning first still earns (b) if the ratio is explained.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c14-o06"
+   ]
+  },
+  {
+   "id": "wr:sim:chord-products",
+   "competency": "MATH.geometry.similarity",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "(a) Two chords AB and CD of a circle cut each other at a point P inside the circle. Prove that △PAC ∼ △PDB, and deduce that PA × PB = PC × PD.\n(b) In △ABC, ∠B = 90° and BD is perpendicular to AC, with D on AC. Prove that △ADB ∼ △ABC, and deduce that AB² = AD × AC.\n(c) In (b), AD = 4 cm and DC = 5 cm. Find AB.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "aa1",
+     "criterion": "(a) ∠APC = ∠DPB (vertically opposite) and ∠PAC = ∠PDB (angles in the same segment, on chord BC), so the triangles are similar by AA",
+     "points": 1
+    },
+    {
+     "id": "product",
+     "criterion": "(a) PA/PD = PC/PB, so PA × PB = PC × PD",
+     "points": 1
+    },
+    {
+     "id": "aa2",
+     "criterion": "(b) ∠A is common and ∠ADB = ∠ABC = 90°, so △ADB ∼ △ABC by AA",
+     "points": 1
+    },
+    {
+     "id": "square",
+     "criterion": "(b) AD/AB = AB/AC, so AB² = AD × AC",
+     "points": 1
+    },
+    {
+     "id": "value",
+     "criterion": "(c) AB² = 4 × 9 = 36, so AB = 6 cm",
+     "points": 1
+    }
+   ],
+   "guidance": "Check the vertex correspondence: in (a) P ↔ P, A ↔ D, C ↔ B. Using the other pair of angles in the same segment is equally valid.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c06-o05"
+   ]
+  },
+  {
+   "id": "wr:set:laws-g11",
+   "competency": "MATH.algebra.sets",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "Use the laws of set algebra, naming each law you use, and not Venn diagrams.\n(a) Prove that (A ∪ B) ∩ (A ∪ B′) = A.\n(b) Using A − X = A ∩ X′, prove that A − (B ∪ C) = (A − B) ∩ (A − C).\n(c) Simplify [A′ ∪ (A ∩ B)]′.\n(d) Is A ∪ (B ∩ C) = (A ∪ B) ∩ C true for all sets A, B, C? Prove it or give a counterexample.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "a",
+     "criterion": "(a) Distributive law gives A ∪ (B ∩ B′) = A ∪ ∅ = A (complement and identity laws)",
+     "points": 1
+    },
+    {
+     "id": "b",
+     "criterion": "(b) A ∩ (B ∪ C)′ = A ∩ (B′ ∩ C′) by De Morgan, = (A ∩ B′) ∩ (A ∩ C′) by idempotent, commutative and associative laws, = (A − B) ∩ (A − C)",
+     "points": 1
+    },
+    {
+     "id": "c",
+     "criterion": "(c) A′ ∪ (A ∩ B) = (A′ ∪ A) ∩ (A′ ∪ B) = A′ ∪ B, so the complement is A ∩ B′ = A − B",
+     "points": 1
+    },
+    {
+     "id": "d",
+     "criterion": "(d) False in general, with a counterexample such as A = {1}, B = C = ∅ (left side {1}, right side ∅)",
+     "points": 1
+    }
+   ],
+   "guidance": "Each step should name its law; one missing name in a part is acceptable, a chain with no names is not. In (d) any correct counterexample with both sides worked out earns the mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c01-o05"
+   ]
+  },
+  {
+   "id": "wr:solid:draw-solids",
+   "competency": "MATH.geometry.solid-views",
+   "kind": "drawing",
+   "grade": 5,
+   "prompt": "On the squared sheet, draw each of these solids so that it looks solid (3-D), not flat:\n(a) a cube, like a dice;\n(b) a cuboid, like a matchbox;\n(c) a cylinder, like a tin of milk powder;\n(d) a cone, like a birthday cap.\nIn the note, write how many faces, edges and corners a cube has, and say which of your solids have a curved surface.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "cube",
+     "criterion": "(a) Cube drawn as two equal squares, one shifted, with their corners joined",
+     "points": 1
+    },
+    {
+     "id": "cuboid",
+     "criterion": "(b) Cuboid drawn the same way with two rectangles (or a longer shape)",
+     "points": 1
+    },
+    {
+     "id": "cylinder",
+     "criterion": "(c) Cylinder with an oval top and bottom joined by two straight sides",
+     "points": 1
+    },
+    {
+     "id": "cone",
+     "criterion": "(d) Cone with an oval base and two straight lines meeting at a point",
+     "points": 1
+    },
+    {
+     "id": "note",
+     "criterion": "Note: a cube has 6 faces, 12 edges and 8 corners; the cylinder and cone have curved surfaces",
+     "points": 1
+    }
+   ],
+   "guidance": "Hidden edges may be left out or drawn lightly. Judge whether each drawing looks like the solid, not neatness. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g05-t1-c01-o01"
+   ]
+  },
+  {
+   "id": "wr:pat:letters-words",
+   "competency": "MATH.algebra.pattern-rules",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "For each pattern, write the rule in words and write the next two terms.\n(a) A, C, E, G, …\n(b) Z, X, V, T, …\n(c) AB, ABC, ABCD, …\n(d) AZ, BY, CX, …\n(e) Make up your own pattern of letters or words, write its first four terms, and write its rule.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "ab",
+     "criterion": "(a) Skip one letter each time: I, K; and (b) go back two letters each time: R, P",
+     "points": 1
+    },
+    {
+     "id": "c",
+     "criterion": "(c) Add the next letter of the alphabet each time: ABCDE, ABCDEF",
+     "points": 1
+    },
+    {
+     "id": "d",
+     "criterion": "(d) The first letter moves forward one and the second moves back one: DW, EV",
+     "points": 1
+    },
+    {
+     "id": "own",
+     "criterion": "(e) A pattern whose four terms really follow the rule the learner wrote",
+     "points": 1
+    }
+   ],
+   "guidance": "The rule must be in words, not only the next terms. In (d) accept 'the two letters are the same distance from the two ends of the alphabet'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g05-t2-c03-o02"
+   ]
+  },
+  {
+   "id": "wr:cost:affordable-choices",
+   "competency": "MATH.reasoning.operation-choice",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Selvi has ₹150 to spend on school things. A notebook costs ₹45 at Shop A and ₹38 at Shop B. A geometry box costs ₹95 at Shop A and ₹110 at Shop B. A pen costs ₹10 at both shops.\n(a) For the notebook and for the geometry box, say which shop is cheaper and by how much.\n(b) Is the geometry box from Shop B affordable for Selvi if she also needs two notebooks? Show your working.\n(c) Selvi needs one geometry box, one notebook and one pen. Say where she should buy each one to spend the least, and find her total and her change.\n(d) Explain what 'expensive' and 'affordable' mean, using an example from these shops.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "compare",
+     "criterion": "(a) Notebook: Shop B is cheaper by ₹7; geometry box: Shop A is cheaper by ₹15",
+     "points": 1
+    },
+    {
+     "id": "afford",
+     "criterion": "(b) Not affordable: ₹110 + 2 × ₹38 = ₹186, more than ₹150",
+     "points": 1
+    },
+    {
+     "id": "plan",
+     "criterion": "(c) Box from A, notebook from B, pen from either: ₹95 + ₹38 + ₹10 = ₹143, change ₹7",
+     "points": 1
+    },
+    {
+     "id": "words",
+     "criterion": "(d) 'Expensive' means costs more than other choices (or a lot of money); 'affordable' means it fits within the money she has, with a matching example",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b) accept the cheapest notebooks; with Shop A notebooks the total (₹200) is also too much. In (d) the example must match the meaning given.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g05-t3-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:bas:perpendicular-on-off",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "(a) Draw a line l and mark a point A on it. With ruler and compasses, construct the line through A that is perpendicular to l.\n(b) Mark a point P that is not on l. Construct the perpendicular from P to l, meeting l at M.\n(c) In the note, say how you could check that your angles are right angles, and explain why PM is the shortest path from P to the line l. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "on",
+     "criterion": "(a) An arc centred at A cuts l at two points; equal arcs from those points cross; the line joins A to the crossing",
+     "points": 1
+    },
+    {
+     "id": "off",
+     "criterion": "(b) An arc centred at P cuts l at two points; equal arcs from those points cross on the other side; the line from P through the crossing meets l at M",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "(c) A sensible check: the corner of a set square, folding the paper, or measuring 90° with a protractor",
+     "points": 1
+    },
+    {
+     "id": "shortest",
+     "criterion": "(c) Any other path from P to l is the slanting side of a right-angled triangle with PM, so it is longer",
+     "points": 1
+    }
+   ],
+   "guidance": "A set-square construction is acceptable for (a) and (b) if described step by step (one edge along l, slide until the other edge passes through the point). Accept 'the slanting line is the longest side of the triangle' for 'shortest'. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g06-t2-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:tile:tetrominoes",
+   "competency": "MATH.geometry.shape-tiling",
+   "kind": "drawing",
+   "grade": 7,
+   "prompt": "A tetromino is a shape made of 4 squares joined edge to edge.\n(a) On the squared sheet, draw all five different tetrominoes (shapes that are the same after turning or flipping count as one).\n(b) Draw a 4 × 4 square and fill it completely with four L-shaped tetrominoes.\n(c) Draw a 2 × 6 rectangle and fill it with three tetrominoes, using at least two different shapes.\n(d) In the note, explain why a 3 × 5 rectangle can never be filled with tetrominoes, whichever ones you use.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "five",
+     "criterion": "(a) The five tetrominoes: straight (I), square (O), T, L and S (Z), with no shape repeated",
+     "points": 1
+    },
+    {
+     "id": "square",
+     "criterion": "(b) The 4 × 4 square filled with four L-shapes, no gaps or overlaps",
+     "points": 1
+    },
+    {
+     "id": "rect",
+     "criterion": "(c) The 2 × 6 rectangle filled with three tetrominoes of at least two kinds, e.g. two straight pieces and one square, or two L's and one square",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(d) A 3 × 5 rectangle has 15 squares, and 15 is not a multiple of 4",
+     "points": 1
+    }
+   ],
+   "guidance": "In (a) the mirror image of L (J) and of S (Z) count as the same shape; if a learner draws them as extra shapes, do not award 'five' unless they say they are flips. A hands-on solution with paper pieces may be drawn after doing it. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g07-t1-c06-o01"
+   ]
+  },
+  {
+   "id": "wr:circ:concentric-rings",
+   "competency": "MATH.geometry.circles",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "A target board for a school fair is made of circles with the same centre (concentric circles).\n(a) Mark a centre O and draw circles of radius 1 cm, 2.5 cm and 4 cm with the compass.\n(b) Draw a second target beside it: a circle of radius 1.5 cm with two rings around it, each ring 1 cm wide. (A ring is the space between two neighbouring circles.)\n(c) In the note, say which radii you used in (b), explain how you kept all the circles concentric, and find the width of the outer ring in (a).",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "first",
+     "criterion": "(a) Three circles with the same centre, radii about 1, 2.5 and 4 cm (in that ratio)",
+     "points": 1
+    },
+    {
+     "id": "second",
+     "criterion": "(b) Three circles with one centre, radii 1.5, 2.5 and 3.5 cm",
+     "points": 1
+    },
+    {
+     "id": "radii",
+     "criterion": "(c) States the radii 1.5 cm, 2.5 cm and 3.5 cm, found by adding the ring width each time",
+     "points": 1
+    },
+    {
+     "id": "explain",
+     "criterion": "(c) Keeps the compass point on the same centre for every circle; the outer ring in (a) is 4 − 2.5 = 1.5 cm wide",
+     "points": 1
+    }
+   ],
+   "guidance": "On the drawing pad lengths are judged by their ratios, not exact centimetres. A learner who gives the ring widths in (b) from the outside in is also correct if the circles are right. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g07-t3-c04-o02"
+   ]
+  },
+  {
+   "id": "wr:freq:quiz-scores",
+   "competency": "MATH.statistics.scaled-bars",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "Thirty students took a 5-mark quiz. Their scores were:\n3, 4, 2, 5, 3, 1, 4, 3, 2, 4, 5, 3, 0, 4, 3, 2, 4, 1, 3, 5, 4, 3, 2, 3, 4, 1, 5, 3, 4, 2\n(a) In the note, make a frequency table (score and number of students), using tally marks.\n(b) On the squared sheet, draw a bar graph of the frequency distribution, with one bar for each score. Label both axes, give a scale and a title.\n(c) From your graph: which score is the mode? How many students scored 3 or more? What is the median score? What fraction of the students scored less than 2?",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "table",
+     "criterion": "(a) Frequencies: 0 → 1, 1 → 3, 2 → 5, 3 → 9, 4 → 8, 5 → 4 (total 30)",
+     "points": 1
+    },
+    {
+     "id": "bars",
+     "criterion": "(b) Six bars with heights matching the frequencies for the chosen scale",
+     "points": 1
+    },
+    {
+     "id": "labels",
+     "criterion": "(b) Scores on one axis, number of students on the other, a scale and a title",
+     "points": 1
+    },
+    {
+     "id": "mode",
+     "criterion": "(c) Mode 3; 21 students scored 3 or more",
+     "points": 1
+    },
+    {
+     "id": "median",
+     "criterion": "(c) Median 3; 4/30 = 2/15 scored less than 2",
+     "points": 1
+    }
+   ],
+   "guidance": "A scale of 1 square = 1 student fits the sheet. Accept a bar graph with gaps or without, as long as the bars are equal in width. The median is the mean of the 15th and 16th scores, both 3. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g08-c06-o02"
+   ]
+  },
+  {
+   "id": "wr:ms:map-colouring",
+   "competency": "MATH.reasoning.multi-step",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "A map has six districts. District M is in the middle and shares a border with each of the five districts around it: A, B, C, D and E. Going round, A borders B, B borders C, C borders D, D borders E, and E borders A. No other pairs share a border. Districts that share a border must be coloured differently.\n(a) Colour the map with as few colours as possible: give each district a colour.\n(b) Explain why it is impossible to use fewer colours than you did.\n(c) If districts D and E are joined into one district, so the ring has only four districts A, B, C, D, how many colours are needed now? Give a colouring.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "colouring",
+     "criterion": "(a) A correct colouring with 4 colours, e.g. M red, A blue, B green, C blue, D green, E yellow",
+     "points": 1
+    },
+    {
+     "id": "ring",
+     "criterion": "(b) The ring A, B, C, D, E has an odd number of districts, so two colours cannot alternate round it: the ring needs 3 colours",
+     "points": 1
+    },
+    {
+     "id": "middle",
+     "criterion": "(b) M borders all five ring districts, so it needs a colour different from all of them: a fourth colour",
+     "points": 1
+    },
+    {
+     "id": "four",
+     "criterion": "(c) 3 colours: the ring of four alternates two colours (A and C one colour, B and D another) and M takes a third",
+     "points": 1
+    }
+   ],
+   "guidance": "A learner may draw the map in the note's description or list the colours; both are fine. Any valid colourings earn the marks; the reasons in (b) must explain why 3 colours fail, not only show that 4 work.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g08-c07-o02"
+   ]
+  },
+  {
+   "id": "wr:par:transversal-angles-g9",
+   "competency": "MATH.geometry.parallel-angles",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "(a) AB and CD are parallel lines. A transversal cuts AB at P and CD at Q, with B and D on the same side of the transversal. The bisectors of ∠BPQ and ∠DQP meet at R. Prove that ∠PRQ = 90°.\n(b) Two straight lines cross at O. One of the angles is (3x + 10)° and the angle vertically opposite to it is (5x − 30)°. Find x and all four angles at O, naming the property you use at each step.\n(c) In △ABC, side BC is extended to D. Prove that ∠ACD = ∠A + ∠B, giving a reason for each step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "cointerior",
+     "criterion": "(a) ∠BPQ + ∠DQP = 180° (co-interior angles, AB ∥ CD)",
+     "points": 1
+    },
+    {
+     "id": "right",
+     "criterion": "(a) Half of each adds to 90°, so in △PRQ, ∠PRQ = 180° − 90° = 90° (angle sum)",
+     "points": 1
+    },
+    {
+     "id": "vertical",
+     "criterion": "(b) 3x + 10 = 5x − 30 (vertically opposite), x = 20; angles 70°, 110°, 70°, 110° (linear pair)",
+     "points": 1
+    },
+    {
+     "id": "exterior",
+     "criterion": "(c) ∠ACB + ∠ACD = 180° (linear pair) and ∠A + ∠B + ∠ACB = 180° (angle sum), so ∠ACD = ∠A + ∠B",
+     "points": 1
+    }
+   ],
+   "guidance": "In (c) a proof using a line through C parallel to AB is equally valid. Each step needs its reason; a correct answer with no reasons in (b) earns the mark only if both properties are named.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g09-c04-o01"
+   ]
+  },
+  {
+   "id": "wr:conc:centroid-ortho-in",
+   "competency": "MATH.geometry.triangle-concurrency",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Construct △ABC with BC = 7 cm, CA = 6 cm and AB = 5 cm.\n(a) Locate the midpoints of two sides by constructing their perpendicular bisectors, draw the two medians and mark the centroid G.\n(b) Construct two altitudes (perpendiculars from a vertex to the opposite side) and mark the orthocentre H.\n(c) Construct two angle bisectors, mark the incentre I, and draw the incircle, taking its radius from a perpendicular from I to one side.\n(d) In the note, say whether G, H and I lie inside or outside the triangle and why, name the kind of triangle in which the orthocentre lies outside it, and check by measuring that the distance from A to G is about twice the distance from G to the midpoint of BC. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "triangle",
+     "criterion": "Triangle constructed with arcs of the given radii (SSS)",
+     "points": 1
+    },
+    {
+     "id": "centroid",
+     "criterion": "(a) Midpoints found by constructed perpendicular bisectors, two medians drawn, G marked",
+     "points": 1
+    },
+    {
+     "id": "ortho",
+     "criterion": "(b) Two altitudes constructed as perpendiculars from vertices, H marked",
+     "points": 1
+    },
+    {
+     "id": "in",
+     "criterion": "(c) Two angle bisectors constructed, I marked, and the incircle drawn with a radius perpendicular to a side",
+     "points": 1
+    },
+    {
+     "id": "note",
+     "criterion": "(d) All three are inside because the triangle is acute (5² + 6² > 7²); the orthocentre is outside in an obtuse triangle; AG ≈ 2 × GD",
+     "points": 1
+    }
+   ],
+   "guidance": "The circumcentre and circumcircle are assessed in wr:bis:circumcircle. Accept midpoints found by bisecting with arcs only on one side, if the midpoint is marked from the constructed line. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g09-c04-o06"
+   ]
+  },
+  {
+   "id": "wr:euc:lemma-forms",
+   "competency": "MATH.number.euclid-algorithm",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "(a) Use Euclid's division algorithm to find the HCF of 1071 and 462. Write each step in the form a = bq + r.\n(b) Use Euclid's division lemma with divisor 4 to show that every odd positive integer is of the form 4q + 1 or 4q + 3 for some whole number q.\n(c) Show that the square of any positive integer is of the form 3m or 3m + 1 for some whole number m.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "steps",
+     "criterion": "(a) 1071 = 462 × 2 + 147; 462 = 147 × 3 + 21; 147 = 21 × 7 + 0",
+     "points": 1
+    },
+    {
+     "id": "hcf",
+     "criterion": "(a) HCF = 21, the last non-zero remainder",
+     "points": 1
+    },
+    {
+     "id": "odd",
+     "criterion": "(b) Any n = 4q + r with r = 0, 1, 2 or 3; 4q and 4q + 2 are even, so an odd n is 4q + 1 or 4q + 3",
+     "points": 1
+    },
+    {
+     "id": "cases",
+     "criterion": "(c) Writes n = 3q, 3q + 1 or 3q + 2 (the lemma with divisor 3)",
+     "points": 1
+    },
+    {
+     "id": "squares",
+     "criterion": "(c) Squares: 9q² = 3(3q²); 9q² + 6q + 1 = 3(3q² + 2q) + 1; 9q² + 12q + 4 = 3(3q² + 4q + 1) + 1, so always 3m or 3m + 1",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b) the learner must say why remainders 0 and 2 give even numbers. In (c) each case's m must be shown, not just claimed.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c02-o01"
+   ]
+  },
+  {
+   "id": "wr:euc:fta-hcf-decimals",
+   "competency": "MATH.number.euclid-algorithm",
+   "kind": "explanation",
+   "grade": 10,
+   "prompt": "(a) Write 3960 and 2772 as products of prime factors. Use them to find the HCF and the LCM, and check that HCF × LCM = 3960 × 2772.\n(b) Use the fundamental theorem of arithmetic to explain why 6ⁿ can never end in the digit 0, for any natural number n.\n(c) Without dividing, decide which of 13/80, 7/24 and 21/120 have terminating decimal expansions. Explain your reasoning for each.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "factors",
+     "criterion": "(a) 3960 = 2³ × 3² × 5 × 11 and 2772 = 2² × 3² × 7 × 11",
+     "points": 1
+    },
+    {
+     "id": "hcf-lcm",
+     "criterion": "(a) HCF = 2² × 3² × 11 = 396; LCM = 2³ × 3² × 5 × 7 × 11 = 27720; both products are 10,977,120",
+     "points": 1
+    },
+    {
+     "id": "six",
+     "criterion": "(b) 6ⁿ = 2ⁿ × 3ⁿ; a number ending in 0 has 5 as a prime factor, and by uniqueness of prime factorisation 6ⁿ has none",
+     "points": 1
+    },
+    {
+     "id": "two",
+     "criterion": "(c) 13/80 terminates (80 = 2⁴ × 5); 7/24 does not (24 = 2³ × 3 has the factor 3)",
+     "points": 1
+    },
+    {
+     "id": "lowest",
+     "criterion": "(c) 21/120 must first be reduced to 7/40; 40 = 2³ × 5, so it terminates",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b), the word 'unique' (or 'only one prime factorisation') must appear in the reasoning for the mark. Decimal values (0.1625, 0.175) are not needed.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c02-o02"
+   ]
+  },
+  {
+   "id": "wr:sim:angle-bisector-thm",
+   "competency": "MATH.geometry.similarity",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "(a) Prove the angle bisector theorem: in △ABC, the bisector of ∠A meets BC at D; prove that BD/DC = AB/AC. (Hint: draw through C a line parallel to DA, meeting BA extended at E.)\n(b) State the converse of the angle bisector theorem.\n(c) In △PQR, PQ = 6 cm, PR = 9 cm and QR = 10 cm. The bisector of ∠P meets QR at S. Find QS and SR.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "isos",
+     "criterion": "(a) ∠BAD = ∠AEC (corresponding angles) and ∠DAC = ∠ACE (alternate angles); since ∠BAD = ∠DAC, ∠AEC = ∠ACE, so AE = AC",
+     "points": 1
+    },
+    {
+     "id": "bpt",
+     "criterion": "(a) In △BCE, DA ∥ CE, so BD/DC = BA/AE (basic proportionality theorem) = AB/AC",
+     "points": 1
+    },
+    {
+     "id": "converse",
+     "criterion": "(b) If D on BC satisfies BD/DC = AB/AC, then AD bisects ∠A",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(c) QS/SR = 6/9 = 2/3, so QS = 4 cm and SR = 6 cm",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a proof by areas (the two triangles ABD and ACD have the same height from A, and D is equidistant from AB and AC) if every step has a reason.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:con:base-vertical-median",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Construct △ABC with base BC = 6 cm, ∠BAC = 60° and median AD = 5 cm, where D is the midpoint of BC.\n(a) Draw BC. Below BC, draw a ray BE making 60° with BC, then draw BF perpendicular to BE. Let the perpendicular bisector of BC meet BF at O, and draw the circle with centre O through B and C.\n(b) Mark D, the midpoint of BC. Draw an arc of radius 5 cm centred at D to cut the circle above BC at A, and join AB and AC.\n(c) In the note, explain why ∠BAC = 60° for every point A on the arc above BC, and say how the construction would change if you were given the altitude from A as 4 cm instead of the median. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "tangent",
+     "criterion": "(a) Ray BE at 60° below BC and BF perpendicular to BE",
+     "points": 1
+    },
+    {
+     "id": "centre",
+     "criterion": "(a) O found on the perpendicular bisector of BC and the circle through B and C drawn",
+     "points": 1
+    },
+    {
+     "id": "apex",
+     "criterion": "(b) Arc of radius 5 cm from the midpoint D meets the major arc at A, and the triangle is drawn (AB ≈ 6.7 cm, AC ≈ 4.7 cm, or the mirror image)",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(c) BE is a tangent at B (BE ⟂ OB), so the angle in the alternate segment equals ∠CBE = 60° (or: ∠BOC = 120°, so the angle at the circumference is 60°)",
+     "points": 1
+    },
+    {
+     "id": "altitude",
+     "criterion": "(c) For the altitude: draw a line parallel to BC at a distance of 4 cm; A is where it meets the arc",
+     "points": 1
+    }
+   ],
+   "guidance": "Either intersection of the median arc with the circle gives a correct triangle (the two are mirror images). Any correct method of drawing the 60° segment on BC is acceptable, e.g. centre O with ∠OBC = 30°. Mark the drawing together with the note: a step counts when it is drawn or described and its lines, arcs or points are where they must be; a freehand drawing is judged on intent, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c04-o04"
    ]
   }
  ]
