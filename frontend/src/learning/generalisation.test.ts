@@ -13,7 +13,7 @@ import { sampleFor, releasesFor } from "../../../packages/learning/src/curricula
 import { assigned, synthesise } from "../../../packages/learning/src/curriculum";
 import { DAY, evidenceFor, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { extract, extractPlain } from "../../../packages/learning/src/extract";
-import { decompose, FAMILIES, parseProblem, problemOf, variantsOf, type Problem } from "../../../packages/learning/src/families";
+import { decompose, FAMILIES, parseProblem, problemOf, variantsOf, type Problem, pool as familyPool } from "../../../packages/learning/src/families";
 import { attemptRule, examPlan, horizon, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph, relations, walkSupports } from "../../../packages/learning/src/graph";
 import { familyOf, investigateContext, moduleState, recovery } from "../../../packages/learning/src/intervention";
@@ -143,7 +143,8 @@ test("B: diagnosis generalises across families and unseen parameter combinations
   const noise = { trials: 0, claimed: 0 };
   for (const fam of FAMILIES.keys()) {
     if (fam === "above") continue;
-    const seeds = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], alp: [1, 2], ...NEW_SEEDS }[fam]!;
+    const seeds = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], alp: [1, 2], ...NEW_SEEDS }[fam] ?? familyPool(fam).items[Math.floor(familyPool(fam).items.length / 2)]?.params;
+    if (!seeds) continue;
     const pool = [problemOf(`gen:${fam}:${seeds.join(",")}`)!, ...variantsOf(problemOf(`gen:${fam}:${seeds.join(",")}`)!)];
     for (let k = 0; k < 12; k++) {
       const start = pool[Math.floor(rand() * pool.length)];
@@ -193,7 +194,7 @@ test("B: diagnosis generalises across families and unseen parameter combinations
 test("C: every family's answer passes an independent check, and decomposition gives grade-appropriate steps", () => {
   let n = 0;
   for (const [fam] of FAMILIES) {
-    const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2], ...NEW_SEEDS }[fam]!;
+    const seed = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], above: [1, 2, 0], alp: [1, 2], ...NEW_SEEDS }[fam] ?? familyPool(fam).items[Math.floor(familyPool(fam).items.length / 2)]!.params;
     const p = problemOf(`gen:${fam}:${seed.join(",")}`)!;
     for (const v of [p, ...variantsOf(p)]) {
       // the multiple-choice form: the right letter is the family's answer, and every option is a distinct value

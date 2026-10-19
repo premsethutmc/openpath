@@ -60,6 +60,8 @@ export interface Module {
   transfer: string[];
   retention: string[];
   probes: string[];
+  /** The question family whose release pool supplies further questions of each phase (depth@1). */
+  pool?: { family: string; version: string };
 }
 export interface Fragment {
   id: string;
@@ -107,7 +109,9 @@ export interface Goal {
 
 export const contentVersion = data.version;
 /** Modules written by hand (modules.v1.json) and modules synthesised from blueprints (library.v1.json, library.ts). */
-export const authoredModules = data.modules as unknown as Module[];
+const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["pool"]> }).authoredPools ?? {}) as Record<string, Module["pool"]>;
+/** Hand-written modules, each with the release pool of its competency's family (when there is one). */
+export const authoredModules = (data.modules as unknown as Module[]).map((m) => (authoredPools[m.competency] ? { ...m, pool: authoredPools[m.competency] } : m));
 export const synthesisedModules = libraryData.modules as unknown as (Module & { provenance: Record<string, unknown> })[];
 export const libraryVersion = libraryData.version;
 export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))];
