@@ -557,7 +557,7 @@ const K_INV = (p: number[]) => {
   const [f, i, g, j, s] = p;
   if (i >= INVT[f].args.length) return false;
   if (s === 0) return g === 0 && j === 0;
-  return j < INVT[g].args.length && hsh(p, 21) % 14 === 0;
+  return j < INVT[g].args.length && !(f === g && i === j) && hsh(p, 21) % 14 === 0;
 };
 const invNum = (f: number, x: number) => {
   if (f === 0) return Math.asin(x);
@@ -692,7 +692,7 @@ export const B20: Def[] = [
       const A = a ** (n + 1);
       const out: Bug[] = [
         { id: "density-not-area", kind: "conceptual", competency: CRV, says: b === 0 ? `The density value f(${c}) was taken as the probability; for a continuous variable the probability is the AREA under f, found by integrating.` : `The density values were subtracted, f(${c}) − f(${b}); a probability is the AREA under f between ${b} and ${c}, found by integrating.`, predict: k * (c ** n - b ** n) },
-        { id: "power-not-divided", kind: "procedural", competency: INTG, says: `x${sup(n)} was integrated to x${sup(n + 1)} without dividing by ${n + 1}.`, predict: k * (c ** (n + 1) - b ** (n + 1)) },
+        { id: "power-not-divided", kind: "procedural", competency: INTG, says: `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, predict: k * (c ** (n + 1) - b ** (n + 1)) },
       ];
       if (b > 0) out.push({ id: "lower-limit-ignored", kind: "procedural", competency: CRV, says: `Only P(X ≤ ${c}) was found; the part below ${b} must be taken away.`, predict: c ** (n + 1) / A });
       return out;
@@ -740,7 +740,7 @@ export const B20: Def[] = [
       const D = hi ** (n + 1) - lo ** (n + 1);
       const out: Bug[] = [];
       if (n >= 1) {
-        out.push({ id: "power-not-divided", kind: "procedural", competency: INTG, says: `x${sup(n)} was integrated to x${sup(n + 1)} without dividing by ${n + 1}.`, predict: 1 / D });
+        out.push({ id: "power-not-divided", kind: "procedural", competency: INTG, says: `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, predict: 1 / D });
         out.push({ id: "height-one", kind: "conceptual", competency: CRV, says: `f(${hi}) was set equal to 1; it is the total AREA under f that must be 1, not its largest value.`, predict: 1 / hi ** n });
       }
       if (lo > 0) out.push({ id: "lower-limit-ignored", kind: "procedural", competency: INTG, says: `The integral was taken from 0 instead of from ${lo}; f is 0 below ${lo}.`, predict: (n + 1) / hi ** (n + 1) });
@@ -1526,6 +1526,11 @@ export const B20: Def[] = [
       else out.push({ id: "formula-mixed", kind: "recall", competency: COMP, says: "Two forms of the formula were mixed up: cos 2A = 1 − 2 sin²A = 2 cos²A − 1, not 1 − 2 cos²A.", predict: 1 - 2 * c * c });
       return out;
     },
+    distractors: (p) => {
+      const [s, c] = dblSC(p);
+      const v = dblOf(p[3], s, c);
+      return [-v, 1 / v, v / 2];
+    },
     variants: ([t, g, q, h]) => [0, 1, 2].filter((x) => x !== h).map((x) => [t, g, q, x]),
     explain: (s) => (s.id === "other" ? `From sin²A + cos²A = 1 with the quadrant's sign: ${s.inputs[0]} = ${F(Number(s.value))}` : `${s.inputs[0]} = ${["2 sin A cos A", "cos²A − sin²A", "2 tan A/(1 − tan²A)"][DBL_F.indexOf(String(s.inputs[0]))]} = ${F(Number(s.value))}`),
     domain: D_DBL,
@@ -1629,7 +1634,7 @@ export const B20: Def[] = [
     domain: D_PRINC,
     keep: K_PRINC,
     difficulty: ([f, v, k]) => (k === 1 && EQV[f][v].v >= 0 ? 1 : k === 1 ? 2 : 3),
-    word: ([f, v, k, w]) => `A wave on a screen in a physics lab is set so that ${eqText(f, EQV[f][v], k, w)}, where x is an angle in degrees. Find every angle x with 0° ≤ x < 360° that fits, separated by commas.`,
+    word: ([f, v, k, w]) => `${nameOf(f + v + k)} is setting up a rotating light in a school science fair. It shines on the screen exactly at the angles x (in degrees) with ${eqText(f, EQV[f][v], k, w)}. Find every such angle with 0° ≤ x < 360°, separated by commas.`,
     teach: {
       idea: "sin and cos repeat every 360° and take each value twice per turn (once for tan, which repeats every 180°); the quadrant signs (All, Sin, Tan, Cos) tell you where.",
       method: "Find the reference angle from the standard values, place it in each quadrant where the function has the right sign, then (for kx) add multiples of 360° until kx passes 360k°, and divide by k.",
@@ -1874,6 +1879,7 @@ export const B20: Def[] = [
       { id: "denominator-dropped", kind: "procedural", competency: RAD, says: `π was replaced by 180° but the division by ${d} was forgotten.`, predict: 180 * k },
       { id: "pi-as-full-turn", kind: "conceptual", competency: RAD, says: "π was replaced by 360°; π radians is a half turn, 180°.", predict: (360 * k) / d },
     ],
+    distractors: ([k, d]) => [(90 * k) / d, (180 * d) / k, -(180 * k) / d],
     variants: ([k, d]) => [[-k, d]],
     explain: (s) => `Replace π by 180°: ${s.inputs[0]} = ${F(Number(s.value))}°`,
     domain: D_DEG,
@@ -2152,7 +2158,7 @@ export const B20: Def[] = [
     // [f, k, m]: f⁻¹(f(kπ/m)), θ outside the principal range
     parse: none,
     reject: gate(D_INVC, K_INVC, "θ = kπ/m (m from 3 to 10, up to 3π either way) outside the principal range."),
-    prompt: ([f, k, m]) => `Find the value of ${["sin⁻¹(sin", "cos⁻¹(cos", "tan⁻¹(tan"][f]}(${piStr(k, m)}))). Write the answer in terms of π (you may type pi).`,
+    prompt: ([f, k, m]) => `Find the value of ${["sin⁻¹(sin", "cos⁻¹(cos", "tan⁻¹(tan"][f]}(${piStr(k, m)})). Write the answer in terms of π (you may type pi).`,
     solve: ([f, k, m]) => {
       const K = invcReduce(f, k, m);
       return { steps: [st("shift", "reduce", TF, [piStr(k, m)], piStr(invcReduce(f, k, m, false), m)), st("branch", "evaluate", INV, [["[−π/2, π/2]", "[0, π]", "(−π/2, π/2)"][f]], piStr(K, m))], answer: piStr(K, m) };
@@ -2339,7 +2345,7 @@ export const B20: Def[] = [
       else if (m !== n) out.push({ id: "internal-as-external", kind: "conceptual", competency: VA, says: "The external formula was used; for internal division r = (mq + np)/(m + n).", predict: tupS(secPoint(P, Q, m, n, 1)) });
       return out;
     },
-    distractors: (x) => [tupS(x.slice(0, 3).map((v, i) => (v + x[3 + i]) / 2)), tupS(x.slice(3, 6).map((v, i) => v - x[i]))],
+    distractors: (x) => [tupS(x.slice(0, 3).map((v, i) => (v + x[3 + i]) / 2)), tupS(x.slice(3, 6).map((v, i) => v - x[i])), tupS(x.slice(3, 6).map((v, i) => v + x[i])), tupS(x.slice(3, 6).map((v, i) => 2 * v - x[i]))],
     variants: () => [],
     explain: (s) => (s.id === "formula" ? `r = ${s.value}` : `Component by component: r = ${s.value}`),
     domain: D_SEC,
