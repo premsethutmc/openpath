@@ -499,7 +499,9 @@ const eqText = (f: number, e: EqVal, k: number, w: number) => {
 };
 
 const D_PRINC: [number, number][] = [[0, 2], [0, 8], [1, 3], [0, 1]];
-const PRINC_FORM = "Write every solution as a multiple of π and type only the multipliers, as fractions separated by commas: for example, the solutions π/4 and 3π/2 are typed 1/4, 3/2 (and x = 0 is typed 0).";
+const PRINC_FORM = "Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).";
+/** Solutions as the learner writes them: multiples of π (multipliers c in [0, 2)). */
+const piList = (cs: number[]) => [...cs].sort((x, y) => x - y).map((c) => piStr(Math.round(c * 144), 144)).join(", ");
 const K_PRINC = ([f, v, , w]: number[]) => v < EQV[f].length && !(w === 1 && EQV[f][v].v === 0);
 const princSolve = (f: number, a: number, k: number, limit = 360 * k) => {
   const base = f === 0 ? [a, 180 - a] : f === 1 ? [a, -a] : [a, a + 180];
@@ -1666,9 +1668,9 @@ export const B20: Def[] = [
     arity: 4,
     title: "Solutions of a trigonometric equation in 0 ≤ x < 2π",
     competency: EQN,
-    // radians, as the Tamil Nadu and CBSE senior-secondary books give them: each solution is a multiple of π, and the
-    // learner types the multipliers (π/6 and 5π/6 as 1/6, 5/6), compared as a set of exact fractions in any order
-    type: "set",
+    // radians, as the Tamil Nadu and CBSE senior-secondary books give them: the solutions in terms of π (pi@1), compared
+    // exactly as a set in any order and notation (5π/6, 5pi/6, (5/6)π)
+    type: "roots",
     // [f, v, k, w]: f(kx) = value v; w = 1 writes it rearranged
     parse: none,
     reject: gate(D_PRINC, K_PRINC, "sin kx, cos kx or tan kx equal to a standard value, k up to 3."),
@@ -1676,11 +1678,17 @@ export const B20: Def[] = [
     solve: ([f, v, k]) => {
       const e = EQV[f][v];
       const ans = princSolve(f, e.a, k).map((d) => d / 180);
-      return { steps: [st("principal", "evaluate", INV, [FN[f], e.t], piStr(e.a, 180)), st("general", "solve", EQN, [k], ans)], answer: ans };
+      return { steps: [st("principal", "evaluate", INV, [FN[f], e.t], piStr(e.a, 180)), st("general", "solve", EQN, [k], ans)], answer: piList(ans) };
     },
     // independent: scan x = jπ/144 over [0, 2π) and keep the values that satisfy the equation numerically
-    validate: ([f, v, k], ans) => {
-      if (!Array.isArray(ans)) return false;
+    validate: ([f, v, k], answer) => {
+      if (typeof answer !== "string") return false;
+      let ans: number[];
+      try {
+        ans = answer.split(",").map((t) => evaluate(parse(t), {}) / Math.PI);
+      } catch {
+        return false;
+      }
       const e = EQV[f][v];
       const found: number[] = [];
       for (let j = 0; j < 288; j++) {
@@ -1694,13 +1702,13 @@ export const B20: Def[] = [
     bugs: ([f, v, k]) => {
       const e = EQV[f][v];
       const all = princSolve(f, e.a, k);
-      const out: Bug[] = [{ id: "principal-only", kind: "conceptual", competency: EQN, says: `Only the principal value was given; ${FN[f]} takes each value ${f === 2 ? "once in every π" : "twice in every 2π"}, so look in every quadrant where it has this sign.`, predict: [e.a / (180 * k)] }];
-      if (k > 1) out.push({ id: "one-turn-only", kind: "procedural", competency: EQN, says: `Only angles ${k}x below 2π were used; when 0 ≤ x < 2π, ${k}x runs from 0 up to ${2 * k}π.`, predict: princSolve(f, e.a, k, 360).map((d) => d / 180) });
-      out.push({ id: "degrees-not-radians", kind: "procedural", competency: RAD, says: "The solutions were worked out in degrees and the degree numbers typed; in radians 180° is π, so 30° is π/6 and is typed 1/6.", predict: all });
+      const out: Bug[] = [{ id: "principal-only", kind: "conceptual", competency: EQN, says: `Only the principal value was given; ${FN[f]} takes each value ${f === 2 ? "once in every π" : "twice in every 2π"}, so look in every quadrant where it has this sign.`, predict: piList([e.a / (180 * k)]) }];
+      if (k > 1) out.push({ id: "one-turn-only", kind: "procedural", competency: EQN, says: `Only angles ${k}x below 2π were used; when 0 ≤ x < 2π, ${k}x runs from 0 up to ${2 * k}π.`, predict: piList(princSolve(f, e.a, k, 360).map((d) => d / 180)) });
+      out.push({ id: "degrees-not-radians", kind: "procedural", competency: RAD, says: "The solutions were worked out in degrees and the degree numbers typed; in radians 180° is π, so 30° is π/6.", predict: [...all].sort((x, y) => x - y).map((d) => fmt(d)).join(", ") });
       return out;
     },
     variants: ([f, v, k, w]) => [[f, v, k === 1 ? 2 : 1, w]].filter((q) => K_PRINC(q)),
-    explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is ${s.value}` : `All angles with this value, divided by ${s.inputs[0]} and kept in 0 ≤ x < 2π: x = ${(s.value as number[]).map((c) => piStr(Math.round(c * 144), 144)).join(", ")} (typed ${(s.value as number[]).map((c) => F(c)).join(", ")})`),
+    explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is ${s.value}` : `All angles with this value, divided by ${s.inputs[0]} and kept in 0 ≤ x < 2π: x = ${(s.value as number[]).map((c) => piStr(Math.round(c * 144), 144)).join(", ")} `),
     domain: D_PRINC,
     keep: K_PRINC,
     difficulty: ([f, v, k]) => (k === 1 && EQV[f][v].v >= 0 ? 1 : k === 1 ? 2 : 3),
@@ -1710,7 +1718,7 @@ export const B20: Def[] = [
       method: "Find the reference angle from the standard values (π/6, π/4, π/3), place it in each quadrant where the function has the right sign, then (for kx) add multiples of 2π until kx reaches 2kπ, and divide by k.",
       alternatives: [{ id: "graph", title: "Read it off the graph", kind: "conceptual", text: ["Sketch y = sin x for 0 to 2π and the line y = value.", "Each crossing is a solution; for sin kx the graph squeezes k waves into 0 to 2π, so there are k times as many crossings."] }],
     },
-    limits: "Standard values only, solutions in radians in [0, 2π) typed as multiples of π (the set type reads fractions, not π); quadratic trigonometric equations are left out.",
+    limits: "Standard values only, solutions in radians in [0, 2π) written in terms of π; quadratic trigonometric equations are left out.",
   },
   {
     id: "atgen",

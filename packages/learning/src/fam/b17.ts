@@ -357,6 +357,10 @@ const relChoices = (mask: number) => {
   const flips = [0, 1, 2].map((i) => T.map((x, j) => (j === i ? !x : x)));
   return [T, ...flips].map(propText).sort((x, y) => fnv(`${mask}:${x}`) - fnv(`${mask}:${y}`) || (x < y ? -1 : 1));
 };
+/** The pairs coded by the 16 bits of m: on {1, 2, 3, 4} every pair; on {1, …, 5} the 16 pairs (a, b) with a ≠ b and
+ * a ≤ 4 (so 5 appears only as a second entry). */
+const EQ5: [number, number][] = range(1, 4).flatMap((a) => range(1, 5).filter((b) => b !== a).map((b) => [a, b] as [number, number]));
+const eqPairs = (n: number, m: number): [number, number][] => (n === 4 ? pairsOf(m, 4) : EQ5.filter((_, i) => m & (1 << i)));
 /** Union–find classes of A = {1, …, n} joined by R. */
 function classes(ps: [number, number][], n: number): number[] {
   const parent = range(0, n);
@@ -486,7 +490,7 @@ export const B17: Def[] = [
     },
     solve: ([a, c, d, m, k, q]) => {
       const { comb, b1, b2 } = system(a, c, d, m, k);
-      if (q === 0) return { steps: [step("det", "evaluate", DET, ["|A|", "λ"], `${d - a * c}(λ${sg(-comb[2])})`), step("solve", "solve", SC, ["|A| = 0"], comb[2])], answer: comb[2] };
+      if (q === 0) return { steps: [step("det", "evaluate", DET, ["|A|", "λ"], `${d - a * c === 1 ? "" : d - a * c === -1 ? "−" : N(d - a * c)}(λ${sg(-comb[2])})`), step("solve", "solve", SC, ["|A| = 0"], comb[2])], answer: comb[2] };
       const mu = m * b1 + k * b2;
       return { steps: [step("combine", "compare", RANK, [m, k], `R₃ = ${m}R₁ ${k < 0 ? "−" : "+"} ${Math.abs(k)}R₂`), step("rhs", "evaluate", SC, [m, b1, k, b2], mu)], answer: mu };
     },
@@ -864,32 +868,33 @@ export const B17: Def[] = [
   },
   {
     id: "aqeqcl",
-    arity: 1,
+    arity: 2,
     title: "The fewest pairs that make a relation an equivalence relation",
     competency: RP,
     type: "integer",
     mc: true,
     parse: none,
-    reject: ([m]) => {
-      if (m < 0 || m > 65535 || popcount(m) < 2 || popcount(m) > 5) return "A relation on {1, 2, 3, 4} with 2 to 5 pairs.";
-      const ps = pairsOf(m, 4);
-      return classes(ps, 4).reduce((s, c) => s + c * c, 0) === ps.length ? "Already an equivalence relation." : null;
+    // [n, m]: a relation on {1, …, n} (n = 4 or 5) whose pairs are the bits of m (eqPairs)
+    reject: ([n, m]) => {
+      if ((n !== 4 && n !== 5) || m < 0 || m > 65535 || popcount(m) < 2 || popcount(m) > 5) return "A relation on {1, 2, 3, 4} or {1, …, 5} with 2 to 5 pairs.";
+      const ps = eqPairs(n, m);
+      return classes(ps, n).reduce((s, c) => s + c * c, 0) === ps.length ? "Already an equivalence relation." : null;
     },
-    prompt: ([m]) => `On A = {1, 2, 3, 4}, R = ${showRel(pairsOf(m, 4))}. What is the least number of ordered pairs that must be added to R to make it an equivalence relation?`,
-    solve: ([m]) => {
-      const ps = pairsOf(m, 4);
-      const cs = classes(ps, 4);
+    prompt: ([n, m]) => `On A = {${range(1, n).join(", ")}}, R = ${showRel(eqPairs(n, m))}. What is the least number of ordered pairs that must be added to R to make it an equivalence relation?`,
+    solve: ([n, m]) => {
+      const ps = eqPairs(n, m);
+      const cs = classes(ps, n);
       const total = cs.reduce((s, c) => s + c * c, 0);
       return { steps: [step("classes", "group", REL, [ps.length], cs.slice().sort((a, b) => b - a).join(" + ")), step("pairs", "count", RP, cs, total), step("added", "subtract", RP, [total, ps.length], total - ps.length)], answer: total - ps.length };
     },
     // independent: keep adding the pairs reflexivity, symmetry and transitivity demand until nothing changes
-    validate: ([m], v) => {
-      const ps = pairsOf(m, 4);
+    validate: ([n, m], v) => {
+      const ps = eqPairs(n, m);
       const S = new Set(ps.map(([a, b]) => `${a},${b}`));
       let grew = true;
       while (grew) {
         const before = S.size;
-        for (let a = 1; a <= 4; a++) S.add(`${a},${a}`);
+        for (let a = 1; a <= n; a++) S.add(`${a},${a}`);
         const cur = [...S].map((t) => t.split(",").map(Number));
         for (const [a, b] of cur) S.add(`${b},${a}`);
         for (const [a, b] of cur) for (const [c, d] of cur) if (b === c) S.add(`${a},${d}`);
@@ -897,13 +902,13 @@ export const B17: Def[] = [
       }
       return v === S.size - ps.length;
     },
-    bugs: ([m]) => {
-      const ps = pairsOf(m, 4);
+    bugs: ([n, m]) => {
+      const ps = eqPairs(n, m);
       const has = (a: number, b: number) => ps.some(([x, y]) => x === a && y === b);
-      const diag = range(1, 4).filter((a) => !has(a, a)).length;
-      const rs = new Set([...ps.map(([a, b]) => `${a},${b}`), ...ps.map(([a, b]) => `${b},${a}`), ...range(1, 4).map((a) => `${a},${a}`)]);
-      const total = classes(ps, 4).reduce((s, c) => s + c * c, 0) - ps.length;
-      const isolated = range(1, 4).filter((a) => !ps.some(([x, y]) => x === a || y === a)).length;
+      const diag = range(1, n).filter((a) => !has(a, a)).length;
+      const rs = new Set([...ps.map(([a, b]) => `${a},${b}`), ...ps.map(([a, b]) => `${b},${a}`), ...range(1, n).map((a) => `${a},${a}`)]);
+      const total = classes(ps, n).reduce((s, c) => s + c * c, 0) - ps.length;
+      const isolated = range(1, n).filter((a) => !ps.some(([x, y]) => x === a || y === a)).length;
       const out: Bug[] = [
         { id: "reflexive-only", kind: "conceptual", competency: RP, says: "Only the pairs (a, a) were added; an equivalence relation must also be symmetric and transitive.", predict: diag },
         { id: "no-transitive", kind: "procedural", competency: RP, says: "Reflexive and symmetric pairs were added, but the pairs that transitivity forces (from chains (a, b), (b, c)) were missed.", predict: rs.size - ps.length },
@@ -913,15 +918,15 @@ export const B17: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "classes" ? `R links the elements into classes of sizes ${s.value}` : s.id === "pairs" ? `An equivalence relation with these classes has ${s.value} pairs (a class of size n gives n² pairs)` : `Pairs to add: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
-    domain: [[0, 65535]],
+    domain: [[4, 5], [0, 65535]],
     cap: 400,
-    difficulty: ([m]) => (popcount(m) <= 3 ? 2 : 3),
+    difficulty: ([n, m]) => (n === 4 && popcount(m) <= 3 ? 2 : 3),
     teach: {
       idea: "The smallest equivalence relation containing R splits A into classes of elements linked by R; within a class every element is related to every element.",
       method: "Join elements that appear together in a pair of R into classes; a class of n elements needs n² pairs; add up, then subtract the pairs R already has.",
       alternatives: [{ id: "close", title: "Close it step by step", kind: "procedural", text: ["Add every (a, a); add the reverse of every pair; then add (a, c) for every chain (a, b), (b, c).", "Repeat until nothing new appears, and count what you added."] }],
     },
-    limits: "Relations on {1, 2, 3, 4} with 2 to 5 pairs; describing the classes in words is left to an educator.",
+    limits: "Relations on {1, 2, 3, 4} or {1, …, 5} with 2 to 5 pairs; describing the classes in words is left to an educator.",
   },
   // ============================================================== derivatives
   {
@@ -1450,6 +1455,8 @@ export const B17: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "reflect" ? `Replace x by ${s.inputs[0]} − x: ${s.value}` : s.id === "add" ? `Add the two forms: 2I = ∫ 1 dx = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `So I = ${F(Number(s.value))}`),
+    // the answer (b − a)/2 is the smallest of the explained answers: further options below or above it, varying
+    distractors: ([kind, a, b]) => [[(b - a) / 4, (b - a) / 3], [(b - a) / 4, b - a + 1], [b - a + 1, b - a + 2]][(kind + a + 2 * b) % 3],
     domain: [[0, 4], [0, 15], [1, 40]],
     cap: 300,
     difficulty: ([kind, a]) => (a === 0 ? 1 : kind === 3 ? 3 : 2),
@@ -1568,7 +1575,7 @@ export const B17: Def[] = [
     prompt: ([kind, p, q, y0]) => (kind === 0 ? `Solve the differential equation dy/dx = ${q === 0 ? `${p === 1 ? "" : p === -1 ? "−" : N(p)}xy` : p === 0 ? `${q === 1 ? "" : q === -1 ? "−" : N(q)}y` : `(${pp([[p, 1], [q, 0]])})y`}, given that y = ${y0} when x = 0. Write y in terms of x.` : `Solve the differential equation dy/dx = ${p === 1 ? "" : p === -1 ? "−" : N(p)}y/x, x > 0, given that y = ${y0} when x = 1. Write y in terms of x.`),
     solve: ([kind, p, q, y0]) => {
       const ans = sepAnswer(kind, p, q, y0);
-      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = (${pa([[p, 1], [q, 0]])}) dx` : `dy/y = ${p} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `log y = ${sepExpo(p, q)} + C` : `log y = ${p} log x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
+      return { steps: [step("separate", "separate", DE, [], kind === 0 ? `dy/y = (${pa([[p, 1], [q, 0]])}) dx` : `dy/y = ${N(p)} dx/x`), step("integrate", "integrate", INDEF, [], kind === 0 ? `log y = ${sepExpo(p, q)} + C` : `log y = ${N(p)} log x + C`), step("constant", "evaluate", DE, [y0], ans)], answer: ans };
     },
     // independent: a Runge–Kutta solution of the equation from the initial condition
     validate: ([kind, p, q, y0], v) => (kind === 0 ? solvesIvp(v, (x, y) => (p * x + q) * y, 0, y0, [0.5, 1.2, 1.9]) : solvesIvp(v, (x, y) => (p * y) / x, 1, y0, [0.5, 1.6, 2.3])),

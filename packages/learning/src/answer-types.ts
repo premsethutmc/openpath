@@ -102,7 +102,8 @@ const cinv = (c: Coef): Coef => {
   return new Map([[m, qinv(qmul(r, [m, 1n]))]]);
 };
 
-const monoParse = (k: string): [string, number][] => (k ? [...k.matchAll(/([a-z])(\d+)/g)].map((x) => [x[1], Number(x[2])]) : []);
+// π is a symbol of its own in exact answers (pi@1): 5π/6 is exactly five sixths of π, never a decimal
+const monoParse = (k: string): [string, number][] => (k ? [...k.matchAll(/([a-zπ])(\d+)/g)].map((x) => [x[1], Number(x[2])]) : []);
 const cmpStr = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 const monoKey = (vs: [string, number][]) => vs.filter(([, n]) => n > 0).sort((a, b) => cmpStr(a[0], b[0])).map(([v, n]) => `${v}${n}`).join("");
 const monoMul = (a: string, b: string) => {
@@ -332,6 +333,7 @@ export function exact(n: Node): Poly {
     case "var":
       return new Map([[`${n.v}1`, cconst([1n, 1n])]]);
     case "const":
+      if (n.v === "pi") return new Map([["π1", cconst([1n, 1n])]]);
       throw new Error("not exact");
     case "neg":
       return pscale(exact(n.a), cconst([-1n, 1n]));
@@ -377,7 +379,8 @@ export const exactCanonical = (raw: string) => pshow(exact(parse(raw)));
 /** An exact constant (no variables), canonical. */
 const exactNumber = (raw: string) => {
   const p = exact(parse(raw));
-  if (asConst(p) === null) throw new Error("a number, not an expression");
+  // a number, or a number times π (pi@1: solutions of trigonometric equations in radians)
+  if (![...p.keys()].every((k) => k === "" || k === "π1")) throw new Error("a number, not an expression");
   return pshow(p);
 };
 

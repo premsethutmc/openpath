@@ -80,7 +80,8 @@ def _cinv(c):
 
 
 def _mono_parse(k):
-    return [(v, int(n)) for v, n in re.findall(r'([a-z])(\d+)', k)]
+    # π is a symbol of its own in exact answers (pi@1; answer-types.ts)
+    return [(v, int(n)) for v, n in re.findall(r'([a-zπ])(\d+)', k)]
 
 
 def _mono_key(vs):
@@ -337,6 +338,8 @@ def exact(n):
     if k == 'var':
         return {f'{n[1]}1': _cconst(1)}
     if k == 'const':
+        if n[1] == 'pi':
+            return {'π1': _cconst(1)}
         raise Unreadable('not exact')
     if k == 'neg':
         return _pscale(exact(n[1]), _cconst(-1))
@@ -388,7 +391,8 @@ def exact_canonical(raw):
 
 def _exact_number(raw):
     p = exact(parse(raw))
-    if _as_const(p) is None:
+    # a number, or a number times π (pi@1)
+    if not all(k in ('', 'π1') for k in p):
         raise Unreadable('a number, not an expression')
     return _pshow(p)
 
