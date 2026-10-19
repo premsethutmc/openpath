@@ -279,6 +279,8 @@ const K_INDT = (p: number[]) => {
 const INDT_CHOICES = ["A and B are independent", "A and B are mutually exclusive, so they are not independent", "A and B are neither independent nor mutually exclusive", "A and B are both independent and mutually exclusive"];
 
 const D_RV: [number, number][] = [[-2, 3], [1, 4], [1, 4], [1, 4], [1, 4]];
+/** The weights in lowest terms (proportional weights give the same table, so the same question). */
+const K_RV = ([, ...w]: number[]) => w.reduce((g, x) => gcd(g, x), 0) === 1;
 const rvData = ([s, ...w]: number[]) => {
   const xs = [s, s + 1, s + 2, s + 3];
   const T = w.reduce((a, b) => a + b, 0);
@@ -883,7 +885,7 @@ export const B20: Def[] = [
     mc: true,
     // [s, w0..w3]: X takes s, s+1, s+2, s+3 with probabilities w_i / Σw
     parse: none,
-    reject: gate(D_RV, () => true, "Four consecutive values with probabilities in small whole-number proportions."),
+    reject: gate(D_RV, K_RV, "Four consecutive values with probabilities in small whole-number proportions (in lowest terms: weights 2, 2, 2, 2 are the same table as 1, 1, 1, 1)."),
     prompt: () => `The probability distribution of a random variable X is given in the table. Find the mean E(X).`,
     solve: (p) => {
       const { xs, w, T } = rvData(p);
@@ -910,6 +912,7 @@ export const B20: Def[] = [
     variants: (p) => [[p[0] + 1, ...p.slice(1)]].filter((q) => inBox(q, D_RV)),
     explain: (s) => `E(X) = Σ x P(x) = ${s.inputs.join("")} = ${F(Number(s.value))}`,
     domain: D_RV,
+    keep: K_RV,
     cap: 400,
     difficulty: ([s]) => (s >= 0 ? 1 : s === -1 ? 2 : 3),
     figure: rvTable,
@@ -929,7 +932,7 @@ export const B20: Def[] = [
     type: "fraction",
     mc: true,
     parse: none,
-    reject: gate(D_RV, () => true, "Four consecutive values with probabilities in small whole-number proportions."),
+    reject: gate(D_RV, K_RV, "Four consecutive values with probabilities in small whole-number proportions (in lowest terms: weights 2, 2, 2, 2 are the same table as 1, 1, 1, 1)."),
     prompt: () => `The probability distribution of a random variable X is given in the table. Find the variance Var(X).`,
     solve: (p) => {
       const { xs, w, T } = rvData(p);
@@ -960,6 +963,7 @@ export const B20: Def[] = [
     variants: (p) => [[p[0] - 1, ...p.slice(1)]].filter((q) => inBox(q, D_RV)),
     explain: (s) => (s.id === "mean" ? `E(X) = Σ x P(x) = ${F(Number(s.value))}` : s.id === "ex2" ? `E(X²) = Σ x² P(x) = ${F(Number(s.value))}` : `Var(X) = E(X²) − [E(X)]² = ${F(Number(s.inputs[0]))} − (${F(Number(s.inputs[1]))})² = ${F(Number(s.value))}`),
     domain: D_RV,
+    keep: K_RV,
     cap: 400,
     difficulty: ([s]) => (s >= 0 ? 2 : 3),
     figure: rvTable,
@@ -1037,6 +1041,10 @@ export const B20: Def[] = [
     reject: gate(D_CONV, K_CONV, "If-then statements about multiples, with whole numbers from 2 to 30."),
     choices: () => CONV_CHOICES,
     prompt: (p) => `For whole numbers n, consider the statement: "${convStatements(p)[0]}" Which is correct about this statement and its converse?`,
+    word: ([kind, a, b]) =>
+      kind === 0
+        ? `In a counting game, the class says the whole numbers n = 1, 2, 3, … in turn. ${nameOf(a + b)} claps whenever n is a multiple of ${a}, and ${nameOf(a + b + 1)} stamps whenever n is a multiple of ${b}. ${nameOf(a + b)} claims: "${convStatements([kind, a, b])[0]}" (that is, every time I clap, you stamp). Which is correct about this claim (the statement) and its converse?`
+        : `${nameOf(a + 3)} lays square tiles in an n × n square, for whole numbers n, and then packs all n² tiles into boxes that hold ${a} tiles each. ${nameOf(a + 3)} claims: "${convStatements([kind, a, b])[0]}" (that is, if the side has a multiple of ${a} tiles, the tiles fill the boxes exactly). Which is correct about this claim (the statement) and its converse?`,
     solve: (p) => {
       const [s, c] = convTruth(p);
       return { steps: [st("converse", "converse", LOG, [convStatements(p)[0]], convStatements(p)[1]), st("decide", "decide", LOG, [String(s), String(c)], convIndex(s, c))], answer: convIndex(s, c) };
@@ -2452,7 +2460,9 @@ export const B20: Def[] = [
       const a = x.slice(0, 3);
       const b = x.slice(3);
       const d = dot(a, b);
-      return [overRoot(-d === 0 ? 1 : -d, len2(a) * len2(b)), overRoot(d === 0 ? 1 : d, len2(a) + len2(b)), overRoot(d, len2(b))];
+      // the last two always lie in [−1, 1] (a cosine's range): a · b over |a|²|b|² or over |a|² + |b|² (square roots forgotten)
+      const e = d === 0 ? 1 : d;
+      return [overRoot(-d === 0 ? 1 : -d, len2(a) * len2(b)), overRoot(e, len2(a) + len2(b)), overRoot(d, len2(b)), overRoot(e, (len2(a) * len2(b)) ** 2), overRoot(e, (len2(a) + len2(b)) ** 2)];
     },
     variants: () => [],
     explain: (s) => (s.id === "dot" ? `a · b = ${s.value}` : s.id === "lengths" ? `|a| = ${String(s.value).split(", ")[0]}, |b| = ${String(s.value).split(", ")[1]}` : `cos θ = ${s.inputs[0]}/(|a||b|) = ${s.value}`),

@@ -10,6 +10,7 @@ import { join } from "node:path";
 import { CLASS_LABEL, CRITERIA, checkCompetency, compileRelease, COMPILER_POLICY, priorities, type RequirementClass, type RequirementRow } from "../src/compiler";
 import { boardReleases } from "../src/board-releases";
 import { FAMILIES, pool } from "../src/families";
+import { poolDepth } from "../src/library";
 import { graph } from "../src/graph";
 import { modules } from "../src/content";
 import { writtenTasks } from "../src/written";
@@ -25,6 +26,11 @@ const byGrade = boardReleases.map((r) => ({ release: r.id, board: r.source.board
 const fams = [...FAMILIES.values()].filter((f) => f.domain);
 const typeMix = fams.reduce((m, f) => ((m[f.type] = (m[f.type] ?? 0) + 1), m), {} as Record<string, number>);
 const prio = priorities(rows);
+// distinct@1 and depth@1: what the pools can honestly provide (a problem shown twice is not fresh evidence)
+const dupFams = fams.map((f) => ({ family: f.id, competency: f.competency, same: pool(f.id).same.size, ambiguous: pool(f.id).excluded.filter((e) => e.reason.startsWith("AMBIGUOUS")).length, released: pool(f.id).items.length })).filter((x) => x.same || x.ambiguous);
+const depths = modules.filter((m) => m.pool).map((m) => ({ competency: m.competency, ...poolDepth(m)! }));
+const shallow = depths.filter((d) => !d.sufficient);
+const peopleRows = rows.filter((r) => /\((partly )?marked by an educator/.test(r.why) || r.why.includes("the part an educator marks"));
 const allComps = graph.competencies.filter((c) => !c.partOf);
 const out = {
   schema: "coverage-matrix@1",
@@ -42,7 +48,14 @@ const out = {
     families: { count: fams.length, problems: fams.reduce((n, f) => n + pool(f.id).items.length, 0), answerTypes: typeMix, withPictures: fams.filter((f) => f.figure).length, withEverydayForm: fams.filter((f) => f.word).length, withAlternatives: fams.filter((f) => f.teach?.alternatives?.length).length },
     modules: modules.length,
     writtenTasks: writtenTasks.length,
+    writtenByKind: writtenTasks.reduce((m, t) => ((m[t.kind] = (m[t.kind] ?? 0) + 1), m), {} as Record<string, number>),
+    drawnTasks: writtenTasks.filter((t) => t.answer === "drawing").length,
+    diversity: { familiesWithRepeatedQuestions: dupFams.length, repeatedQuestionsNotReleased: dupFams.reduce((n, x) => n + x.same, 0), ambiguous: dupFams.reduce((n, x) => n + x.ambiguous, 0) },
+    poolSufficiency: { modulesWithPools: depths.length, sufficient: depths.length - shallow.length, insufficient: shallow.length },
+    educatorPart: { requirementsWithoutWrittenTask: rows.filter((r) => r.why.includes("the part an educator marks")).length },
   },
+  diversity: dupFams,
+  insufficientPools: shallow,
   grades: byGrade,
   competencies: checks,
   requirements: rows,
@@ -81,6 +94,18 @@ const md: string[] = [
   "## Question families",
   "",
   `${out.summary.families.count} families, ${out.summary.families.problems} problems in release pools. Answer types: ${Object.entries(typeMix).map(([k, v]) => `${k} ${v}`).join(", ")}. With a picture: ${out.summary.families.withPictures}; with an everyday (transfer) form: ${out.summary.families.withEverydayForm}; with alternative explanations: ${out.summary.families.withAlternatives}. Written (educator-marked) tasks: ${writtenTasks.length}.`,
+  "",
+  "## Assessment diversity and pool sufficiency (distinct@1, depth@1)",
+  "",
+  `A parameter choice that shows exactly the question another one shows is the same question: it is not released again and counts as the same exposure. ${out.summary.diversity.familiesWithRepeatedQuestions} families had such repeats; ${out.summary.diversity.repeatedQuestionsNotReleased} repeated questions are not released; ${out.summary.diversity.ambiguous} were ambiguous (the same question with two answers: a defect, refused by the specification check).`,
+  "",
+  `Of ${depths.length} modules with a pool, ${depths.length - shallow.length} can fill every phase with questions the learner has not seen (diagnosis ${"≥"} 3, checks ${"≥"} 6, practice ${"≥"} 15, delayed check ${"≥"} 6); ${shallow.length} cannot, and say so instead of repeating questions:`,
+  "",
+  ...(shallow.length ? ["| Competency | Family | Diagnosis | Checks | Practice | Delayed check | Short of |", "|---|---|---|---|---|---|---|", ...shallow.map((d) => `| ${graph.get(d.competency).name} | \`${d.family}\` | ${d.counts.diagnostic} | ${d.counts.check} | ${d.counts.practice} | ${d.counts.retention} | ${d.short.join(", ")} |`)] : ["(none)"]),
+  "",
+  "## The part an educator marks (written@2)",
+  "",
+  `${writtenTasks.length} written tasks (${Object.entries(out.summary.writtenByKind).map(([k, v]) => `${k} ${v}`).join(", ")}); ${out.summary.drawnTasks} are drawn on the drawing pad (graph sketches, constructions, diagrams). An outcome with a part only an educator can mark is complete only with a written task for it; ${out.summary.educatorPart.requirementsWithoutWrittenTask} requirements still lack one.`,
   "",
   "## Graph",
   "",

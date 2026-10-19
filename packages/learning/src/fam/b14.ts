@@ -185,6 +185,11 @@ const treeP = (r: number, b: number, w: number, e: number) => {
   const br = (b / T) * (r / (w ? T : T - 1));
   return [rr, rr + bb, rb + br, 1 - bb][e];
 };
+/** anunion: x, y, z, d is k times a smaller allowed choice (denominator still at least 6): the same question as that one. */
+const unionDup = ([x, y, z, d]: number[]) => {
+  const g = gcd(gcd(x, y), gcd(z, d));
+  return (g - 1) * (d / g) >= 6;
+};
 const probText = (a: number, d: number) => {
   const g = gcd(a, d);
   return d / g === 1 ? String(a / g) : `${a / g}/${d / g}`;
@@ -865,7 +870,7 @@ export const B14: Def[] = [
     reject: ([m, a, c, d]) => {
       if (d < 3 || d > 20 || a < 1 || (m !== 0 && m !== 1)) return "Probabilities in twentieths or coarser.";
       if (m === 0) return c !== 0 || a >= d || gcd(a, d) !== 1 ? "P(E) = a/d in lowest terms." : null;
-      return c < 1 || a + c >= d ? "Two outcomes whose probabilities add to less than 1." : null;
+      return c < 1 || a + c >= d ? "Two outcomes whose probabilities add to less than 1." : gcd(gcd(a, c), d) !== 1 ? "a, c and d with no common factor (a common factor shows the same fractions as a smaller d)." : null;
     },
     prompt: ([m, a, c, d]) =>
       m === 0
@@ -896,7 +901,7 @@ export const B14: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "known" ? `${s.inputs[0]} + ${s.inputs[1]} = ${fmt(Number(s.value))}` : `P(the rest) = 1 − ${s.inputs[1]}: the probabilities of all the outcomes add up to 1`),
     domain: [[0, 1], [1, 19], [0, 19], [3, 20]],
-    keep: ([m, a, c, d]) => (m === 0 ? c === 0 && a < d && gcd(a, d) === 1 : c >= 1 && a + c < d),
+    keep: ([m, a, c, d]) => (m === 0 ? c === 0 && a < d && gcd(a, d) === 1 : c >= 1 && a + c < d && gcd(gcd(a, c), d) === 1),
     cap: 300,
     difficulty: ([m, a, c, d]) => (m === 0 ? (d <= 10 ? 1 : 2) : gcd(a, d) === 1 && gcd(c, d) === 1 ? 2 : 3),
     word: ([m, a, c, d]) =>
@@ -920,7 +925,7 @@ export const B14: Def[] = [
     type: "fraction",
     mc: true,
     parse: none,
-    reject: ([x, y, z, d]) => (d < 6 || d > 20 || x < 1 || y < 1 || z < 1 || z >= Math.min(x, y) || x + y - z > d ? "P(A) = x/d, P(B) = y/d, P(A and B) = z/d with the overlap smaller than each and the union at most 1." : null),
+    reject: ([x, y, z, d]) => (d < 6 || d > 20 || x < 1 || y < 1 || z < 1 || z >= Math.min(x, y) || x + y - z > d ? "P(A) = x/d, P(B) = y/d, P(A and B) = z/d with the overlap smaller than each and the union at most 1." : unionDup([x, y, z, d]) ? "The same fractions as a smaller denominator d (a common factor of x, y, z and d)." : null),
     prompt: ([x, y, z, d]) => `For two events A and B, P(A) = ${probText(x, d)}, P(B) = ${probText(y, d)} and P(A and B) = ${probText(z, d)}. Find P(A or B).`,
     solve: ([x, y, z, d]) => ({ steps: [step("add", "add", "MATH.number.addition", [probText(x, d), probText(y, d)], (x + y) / d), step("overlap", "subtract", COMP, [probText(x + y, d), probText(z, d)], (x + y - z) / d)], answer: (x + y - z) / d }),
     // independent: d equally likely outcomes; A the first x, B overlapping it in exactly z; count the union
@@ -938,7 +943,7 @@ export const B14: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "add" ? `P(A) + P(B) = ${s.inputs[0]} + ${s.inputs[1]}` : `Take away P(A and B) once, because it was counted in both: ${s.inputs[1]}`),
     domain: [[1, 20], [1, 20], [1, 10], [6, 20]],
-    keep: ([x, y, z, d]) => z < Math.min(x, y) && x + y - z <= d,
+    keep: ([x, y, z, d]) => z < Math.min(x, y) && x + y - z <= d && !unionDup([x, y, z, d]),
     cap: 300,
     difficulty: ([x, y, z, d]) => (gcd(x, d) === 1 && gcd(y, d) === 1 ? 2 : d <= 10 ? 1 : 3),
     word: ([x, y, z, d]) => `In a school, the probability that a student chosen at random plays cricket is ${probText(x, d)}, plays kabaddi is ${probText(y, d)}, and plays both is ${probText(z, d)}. What is the probability that the student plays at least one of the two games?`,
@@ -1016,6 +1021,10 @@ export const B14: Def[] = [
     prompt: (p) => {
       const [P, Q, R] = ptsOf(p);
       return `The points P${pt(P)}, Q${pt(Q)} and R${pt(R)} are given. Work out PQ, QR and PR with the distance formula and decide which statement is true.`;
+    },
+    word: (p) => {
+      const [P, Q, R] = ptsOf(p);
+      return `On a village map drawn on a square grid (1 unit = 1 km), the school is at P${pt(P)}, the temple at Q${pt(Q)} and the water tank at R${pt(R)}. ${nm(p[1] + p[2] + p[3])} wants to know how these three places are placed with respect to one another, using only the straight-line distances PQ, QR and PR between them. Which statement about the three places is true?`;
     },
     choices: () => PTS,
     solve: (p) => {
@@ -1385,6 +1394,7 @@ export const B14: Def[] = [
       return a1 === a2 || (k !== 2 && (a1 > a2) === (k === 0)) ? "The larger count and the larger share must point to different answers." : null;
     },
     prompt: () => "The clustered bar chart shows how many children of Class 9A and Class 9B walk to school and how many come by bus. If the same data were drawn as a 100% stacked bar chart, which class would have the longer 'walk' part of its bar?",
+    word: ([a1, b1, a2, b2]) => `For Road Safety Week, ${nm(a1 + b2)} asked the children of Class 9A and Class 9B whether they walk to school or come by bus; the counts are in the bar chart in the picture. For the school notice board, each class will be drawn as one bar of the same full length (100%), split into a 'walk' part and a 'bus' part, so that the classes can be compared fairly whatever their sizes. On the notice board, which class would have the longer 'walk' part?`,
     figure: ([a1, b1, a2, b2]) => ({ type: "bars", title: "how children come to school", labels: ["9A walk", "9A bus", "9B walk", "9B bus"], values: [a1, b1, a2, b2] }),
     choices: () => ["Class 9A", "Class 9B", "Both would be the same length"],
     solve: (p) => {

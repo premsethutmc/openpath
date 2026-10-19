@@ -1138,6 +1138,7 @@ export const B12: Def[] = [
     parse: none,
     reject: (p) => (!inR(p, [[1, 2], [-6, 6], [-9, 9]]) || p[1] === 0 || p[2] === 0 ? "ax² + px + q = 0 with a = 1 or 2 and p, q small and not 0." : null),
     prompt: ([a, p, q]) => `The graph of y = ${a === 1 ? "" : a}x² has been drawn. To solve ${pl([a, p, q])} = 0 with it, which straight line should be drawn on the same axes?`,
+    word: ([a, p, q]) => `${nm(a + p + q)} is designing a skate-park ramp. Its curved side is drawn on a grid as y = ${a === 1 ? "" : a}x² (in metres). A straight support beam is to be fixed so that it meets the curve exactly at the points whose x-coordinates are the solutions of ${pl([a, p, q])} = 0. Along which straight line, drawn on the same axes, should the beam go?`,
     choices: (pp) => {
       const [, p, q] = pp;
       const lines = [[-p, -q], [p, q], [-p, q], [p, -q]].map(([m, c]) => `y = ${pl([m, c])}`);

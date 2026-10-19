@@ -2275,6 +2275,20 @@ export const B13: Def[] = [
     reject: rj(RS_DOM, rsOk, "Angles from 25° to 155° in steps of 5° (triangles with a third angle of at least 10°)."),
     choices: ([c, , seed]) => fourOf(7, c, REASON_MIS[c], seed).map((i) => REASONS[i]),
     prompt: ([c, a]) => `${rsText(c, a)} Which reason justifies this step?`,
+    word: ([c, a]) => {
+      const A = 5 * a;
+      const b = rsB(a);
+      const who = name(c + a);
+      return [
+        `On a town map, two straight roads AB and CD cross at a junction O. ${who} measures the angle between the roads, ∠AOC = ${A}°, and writes: "so ∠BOD = ${A}°."`,
+        `A straight railway track AB has a level crossing at O, from which a straight footpath OC leads away. ${who} measures ∠AOC = ${A}° and writes: "so ∠BOC = ${180 - A}°."`,
+        `The two edges AB and CD of a straight road are parallel. A painted line on the road meets edge AB at X and edge CD at Y, with A and D on opposite sides of XY. ${who} measures ∠AXY = ${A}° and writes: "so ∠XYD = ${A}°."`,
+        `On a ruled notebook page, two printed lines AB and CD are parallel. ${who} draws a straight pencil line PQ that crosses AB at X and CD at Y, in the order P, X, Y, Q, with B and D on the same side of PQ. ${who} measures ∠PXB = ${A}° and writes: "so ∠XYD = ${A}°."`,
+        `A wooden gate has two parallel bars AB and CD, and a slanting brace that meets AB at X and CD at Y, with B and D on the same side of XY. ${who} measures ∠BXY = ${A}° and writes: "so ∠XYD = ${180 - A}°."`,
+        `A triangular garden plot ABC is fenced on all three sides. ${who} measures the corners ∠A = ${A}° and ∠B = ${b}° and writes, without measuring the third corner: "so ∠C = ${180 - A - b}°."`,
+        `In a triangular roof frame ABC, the bottom beam BC sticks out beyond C to a point D. ${who} measures ∠A = ${A}° and ∠B = ${b}° and writes, without measuring at C: "so ∠ACD = ${A + b}°."`,
+      ][c] + " Which reason justifies this step?";
+    },
     solve: ([c, , seed]) => ({ steps: [step("reason", "note", EUC, [REASONS[c]], "")], answer: fourOf(7, c, REASON_MIS[c], seed).indexOf(c) }),
     // independent: classify the situation from where the two angles lie (same or opposite side of the transversal,
     // between the parallel lines or outside) and the relation the numbers in the step satisfy

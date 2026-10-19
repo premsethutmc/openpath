@@ -411,6 +411,11 @@ export const B17: Def[] = [
       const { A, B } = rankSys(p);
       return `Use the rank method to decide how many solutions this system has: ${eqn(A[0], B[0])}, ${eqn(A[1], B[1])}, ${eqn(A[2], B[2])}.`;
     },
+    word: (p) => {
+      const { A, B } = rankSys(p);
+      const [who, friend] = [["Meena", "Kavin"], ["Fatima", "Ravi"], ["Anu", "Arjun"], ["Selvi", "Imran"]][Math.abs(p[0] + 2 * p[2] + p[4]) % 4];
+      return `For a maths-club puzzle, ${who} writes three clues about three unknown numbers x, y and z (they may be negative or fractions): ${eqn(A[0], B[0])}; ${eqn(A[1], B[1])}; ${eqn(A[2], B[2])}. Before trying to solve, ${friend} checks whether the clues fix the numbers, leave them undecided, or contradict each other. Using the rank method, how many solutions do the three clues have together?`;
+    },
     choices: () => SYS_CHOICES,
     solve: (p) => {
       const cat = p[5];
@@ -642,7 +647,9 @@ export const B17: Def[] = [
     parse: none,
     reject: ([form, k, t, ask]) => {
       const ok = form === 0 || form === 1 ? k >= 1 && k <= 9 : form === 2 ? k >= 2 && k <= 9 && t !== 0 : form === 3 ? k !== 0 && Math.abs(k) <= 3 && ask === 1 && t !== 0 && 1 + k * t !== 0 : false;
-      return !ok || t < -5 || t > 6 || ask < 0 || ask > 1 || (ask === 1 && t === binIdE(form, k)) ? "a + b ∓ k on ℤ, ab/k on ℚ − {0}, or a + b + kab." : null;
+      if (!ok || t < -5 || t > 6 || ask < 0 || ask > 1 || (ask === 1 && t === binIdE(form, k))) return "a + b ∓ k on ℤ, ab/k on ℚ − {0}, or a + b + kab.";
+      // the identity question does not use t: one choice of t per rule, so the same question is not listed twice
+      return ask === 0 && t !== (form === 2 ? 1 : 0) ? "For the identity element, t is not used (t = 0, or 1 for ab/k)." : null;
     },
     prompt: ([form, k, t, ask]) => `On ${binIdSet(form, k)}, the binary operation ∗ is defined by a ∗ b = ${binIdDef(form, k)}. ${ask ? `Find the inverse of ${N(t)}.` : "Find the identity element."}`,
     solve: ([form, k, t, ask]) => {
@@ -749,6 +756,13 @@ export const B17: Def[] = [
       const [dom, cod, f] = ontoKind(kind, a, b)!;
       return `f: ${SETNAME[dom]} → ${cod === "B" ? `[${N(b)}, ∞)` : SETNAME[cod]} is given by f(x) = ${f}. Which is true?`;
     },
+    word: ([kind, a, b]) => {
+      const [dom, cod, f] = ontoKind(kind, a, b)!;
+      const who = ["Fatima", "Kavin", "Meena", "Ravi"][Math.abs(a + 2 * b) % 4];
+      const inSet = { R: "any real number", N: "any natural number 1, 2, 3, …", Z: "any integer", H: "any real number that is 0 or more" }[dom];
+      const outSet = cod === "B" ? `any real number from ${N(b)} upwards` : cod === "R" ? "any real number" : cod === "N" ? "any natural number" : "any integer";
+      return `For the school computer club, ${who} writes a coding program f. It accepts as input x ${inSet} and turns it into the code f(x) = ${f}, and an allowed code can be ${outSet}. ${who} wants to know two things: can every input be recovered from its code (do different inputs always get different codes)? Is every allowed code actually produced by some input? Which is true of f?`;
+    },
     choices: () => ONTO_CHOICES,
     solve: ([kind, a, b]) => {
       const ans = ontoKind(kind, a, b)![4];
@@ -795,6 +809,7 @@ export const B17: Def[] = [
     parse: none,
     reject: ([m]) => (m < 0 || m > 511 || popcount(m) < 3 || popcount(m) > 7 ? "A relation on {1, 2, 3} with 3 to 7 pairs." : null),
     prompt: ([m]) => `On A = {1, 2, 3}, the relation R = ${showRel(pairsOf(m, 3))}. Which statement about R is true?`,
+    word: ([m]) => `Three classmates have roll numbers 1 (Anu), 2 (Ravi) and 3 (Meena). For each pair, the class teacher records (a, b) when student a has saved student b's phone number in their phone (saving your own number counts as (a, a)). The records are R = ${showRel(pairsOf(m, 3))}, a relation on A = {1, 2, 3}. Which statement about R is true?`,
     choices: ([m]) => relChoices(m),
     solve: ([m]) => {
       const T = relProps(pairsOf(m, 3), 3);

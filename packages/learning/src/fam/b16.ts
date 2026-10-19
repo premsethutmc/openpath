@@ -1819,6 +1819,7 @@ export const B16: Def[] = [
     // [g, u, v, k]: roots u − v, u, u + v (g = 0, AP) or u, u·v, u·v² (g = 1, GP); leading coefficient k
     reject: ([g, u, v, k]) => ((g !== 0 && g !== 1) || k < 1 || k > 2 || (g === 0 ? u < -5 || u > 6 || v < 1 || v > 6 : u === 0 || Math.abs(u) > 3 || ![-3, -2, 2, 3].includes(v)) ? "Roots in AP (whole middle root and difference) or GP (whole first root, ratio ±2 or ±3)." : null),
     prompt: (p) => `The roots of ${polyS(fromRoots(p[3], progRoots(p)))} = 0 are in ${p[0] ? "geometric" : "arithmetic"} progression. Solve the equation. Write the roots separated by commas.`,
+    word: (p) => `Engineers plan a new road through the Nilgiri hills. A survey models the height of the road above a reference level, in metres, by h = ${polyS(fromRoots(p[3], progRoots(p)))}, where x is the distance in km east of a check post (negative values are to the west) and a negative h means the road runs through a tunnel below the reference level. ${name(p[1] + p[2] + p[3])} notices that the road is exactly at the reference level (h = 0) at three places, whose x-values are in ${p[0] ? "geometric progression (each is the same multiple of the one before)" : "arithmetic progression (equally spaced)"}. Find these three x-values, in km. Write them separated by commas.`,
     solve: (p) => {
       const cs = fromRoots(p[3], progRoots(p));
       const rts = progRoots(p);
