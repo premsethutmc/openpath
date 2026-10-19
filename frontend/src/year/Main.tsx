@@ -7,11 +7,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
 import { goal as goalById, goals, moduleFor, question, questions } from "../../../packages/learning/src/content";
-import { sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
+import { releasesFor, sampleFor, sampleReleases } from "../../../packages/learning/src/curricula";
 import { assigned, review, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
-import { offersFor, trace } from "../../../packages/learning/src/decomposition";
+import { offersFor } from "../../../packages/learning/src/decomposition";
+import { extract } from "../../../packages/learning/src/extract";
+import { decompose, parseProblem, problemOf } from "../../../packages/learning/src/families";
+import { familyOf } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, useReviewFixture } from "../../../packages/learning/src/evidence";
-import { examPlan, examPlanApplies, overlay } from "../../../packages/learning/src/goals";
+import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
@@ -109,7 +112,7 @@ function App() {
     window.scrollTo({ top: 0 });
   }, [view]);
 
-  const st = useMemo(() => (learner && events ? learnerState(learner, events, now) : null), [learner, events, now]);
+  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}` }) : null), [learner, events, now]);
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 
@@ -280,7 +283,13 @@ function App() {
   const next = st.next!;
   const ids = assigned(release).map((a) => a.competency);
   const overlays = activeGoals.map((g) => overlay(g, grade, ids, st.evidence)).filter((o) => o !== null);
-  const offers = offersFor(grade, st.evidence).filter((o) => o.full || o.fragments.length);
+  // advanced problems: the steps of the general decomposition that suit this grade; the full problem once its
+  // grade and readiness rules are met (decomposition@2 for the steps, the stored readiness rule for the full problem)
+  const offers = offersFor(grade, st.evidence).map((o) => {
+    const fam = familyOf(o.problem.full.id);
+    const d = fam ? decompose(problemOf(fam)!, grade) : null;
+    return { o, steps: o.full ? [] : (d?.forGrade ?? []).map((x) => x.question!) };
+  }).filter((x) => x.o.full || x.steps.length);
   const goNext = () => {
     if (next.kind === "challenge" && next.question) return setView({ name: "single", qid: next.question, heading: "Enrichment challenge" });
     if (next.competency) setView({ name: "module", competency: next.competency, back: { name: "year" } });
@@ -315,6 +324,7 @@ function App() {
           <p className="eyebrow">Next</p>
           <h2>{next.question ? question(next.question).prompt.split(":")[0] : graph.get(next.competency!).name}</h2>
           <p className="muted">{next.reason}</p>
+          {st.change && <p className="why" role="status"><b>Why this changed:</b> {st.change}</p>}
           <button className="primary" onClick={goNext}>{next.kind === "retention" ? "Start the delayed check" : next.kind === "review" ? "Review it" : next.kind === "continue" ? "Continue" : "Start"}</button>
         </div>
       ) : (
@@ -345,38 +355,53 @@ function App() {
               })}
             </div>
           )}
+          {(() => {
+            const r = readiness(o!.goal.id, grade, st.evidence)!;
+            return <p className="small">Foundations so far (up to Grade {grade}): {r.shown} of {r.foundationsSoFar} shown on your own{r.verified ? `, ${r.verified} verified` : ""}. This is read from your own record; a goal adds nothing to it.</p>;
+          })()}
           {examPlanApplies(o!.goal.id, grade) && <ExamPlanCard goalId={o!.goal.id} ev={st.evidence} />}
         </section>
       ))}
       {offers.length > 0 && (
         <section aria-label="Steps toward an advanced problem">
           <div className="section-title"><h2>Steps toward an advanced problem</h2></div>
+          <p className="muted small">An advanced problem, broken into steps. You see only the steps for your grade; the whole problem comes when you are ready for it.</p>
           <div className="cards">
-            {offers.flatMap((o) => (o.full ? [o.full] : o.fragments).map((f) => {
-              const tr = trace(f.id)!;
-              return (
-                <button key={f.id} className="card" onClick={() => setView({ name: "single", qid: f.id, heading: tr.isFull ? `Full problem · ${o.problem.title}` : `One step of: ${o.problem.title}`, note: tr.isFull ? "You have shown the skills it needs. This is the full problem." : `This is one part of an advanced problem, at your grade. It uses ${f.competencies.map((c) => graph.get(c).name.toLowerCase()).join(" and ")}.` })}>
-                  <span className="tag">{tr.isFull ? "Full problem" : "One step"}</span>
-                  <span className="card-title">{f.prompt}</span>
-                  <span className="card-sub">{o.problem.style} · {o.problem.validation}</span>
-                </button>
-              );
-            }))}
+            {offers.flatMap(({ o, steps }) =>
+              o.full
+                ? [
+                    <button key={o.full.id} className="card" onClick={() => setView({ name: "single", qid: o.full!.id, heading: `Full problem · ${o.problem.title}`, note: "You have shown the skills it needs. This is the full problem." })}>
+                      <span className="tag">Full problem</span>
+                      <span className="card-title">{o.full.prompt}</span>
+                      <span className="card-sub">{o.problem.style} · {o.problem.validation}</span>
+                    </button>,
+                  ]
+                : steps.map((q) => (
+                    <button key={q.id} className="card" onClick={() => setView({ name: "single", qid: q.id, heading: `One step of: ${o.problem.title}`, note: `One part of an advanced problem, at your grade. It uses ${graph.get(q.competency).name.toLowerCase()}.` })}>
+                      <span className="tag">One step</span>
+                      <span className="card-title">{q.prompt}</span>
+                      <span className="card-sub">{graph.get(q.competency).name}</span>
+                    </button>
+                  )),
+            )}
           </div>
         </section>
       )}
-      {stuckFor(grade).length > 0 && <section aria-label="Stuck on a problem">
+      <section aria-label="Stuck on a problem">
         <div className="section-title"><h2>Stuck on a problem?</h2></div>
-        <p className="muted small">A problem from class or coaching. OpenPath finds which skill it rests on is missing, teaches that, and brings you back.</p>
-        <div className="cards">
-          {stuckFor(grade).map((q) => (
-            <button key={q.id} className="card" onClick={() => setView({ name: "stuck", qid: q.id })}>
-              <span className="card-title">{q.prompt}</span>
-              <span className="card-sub">{graph.get(q.competency).name}</span>
-            </button>
-          ))}
-        </div>
-      </section>}
+        <p className="muted small">Type a problem from class or coaching. OpenPath works out what went wrong, teaches the skill it needs, and brings you back to it.</p>
+        <StuckBox onOpen={(qid) => setView({ name: "stuck", qid })} />
+        {stuckFor(grade).length > 0 && (
+          <div className="cards" style={{ marginTop: 10 }}>
+            {stuckFor(grade).map((q) => (
+              <button key={q.id} className="card" onClick={() => setView({ name: "stuck", qid: q.id })}>
+                <span className="card-title">{q.prompt}</span>
+                <span className="card-sub">{graph.get(q.competency).name}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
       <div className="section-title"><h2>Your years</h2></div>
       <div className="actions">
         <button className="secondary" onClick={() => setView({ name: "years" })}>Earlier years</button>
@@ -433,23 +458,48 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
 
 function ExamPlanCard({ goalId, ev }: { goalId: string; ev: Ctx["evidence"] }) {
   const [target, setTarget] = useState<0.6 | 0.75 | 0.9>(0.75);
-  const plan = examPlan(goalId, ev, 26, target)!;
+  const [weeks, setWeeks] = useState(40);
+  const plan = examPlan(goalId, ev, weeks, target)!;
   return (
     <div className="panel" style={{ marginTop: 12 }}>
       <h3 style={{ marginTop: 0 }}>Exam plan</h3>
-      <div className="actions" role="radiogroup" aria-label="Target">
+      <div className="actions" role="radiogroup" aria-label="Time left">
+        {([[40, "Months away"], [8, "Last 8 weeks"]] as const).map(([w, label]) => <button key={w} role="radio" aria-checked={weeks === w} className={weeks === w ? "primary" : "secondary"} onClick={() => setWeeks(w)}>{label}</button>)}
+      </div>
+      <div className="actions" role="radiogroup" aria-label="Target" style={{ marginTop: 8 }}>
         {([0.6, 0.75, 0.9] as const).map((t) => <button key={t} role="radio" aria-checked={t === target} className={t === target ? "primary" : "secondary"} onClick={() => setTarget(t)}>{Math.round(t * 100)}%</button>)}
       </div>
+      <p>{plan.advice}</p>
       <p>Rough estimate from your own answers: {plan.estimate.low}–{plan.estimate.high}% of the marks. {plan.onTrack ? "On track for this target." : "Below this target so far."}</p>
-      <p className="small muted">{plan.caveat} Marking: {plan.goal.marking.note}</p>
       <ol className="plain">{plan.priorities.slice(0, 3).map((p) => <li key={p.topic}><b>{p.topic}</b> · weight {Math.round(p.weight[0] * 100)}–{Math.round(p.weight[1] * 100)}% · {p.attempt ? "worth attempting" : "skip unless sure (negative marking)"}</li>)}</ol>
+      <p className="small"><b>The paper ({plan.goal.exam.pattern}):</b> {plan.sections.map((sec) => `${sec.questions} ${sec.format === "numerical" ? "numerical" : sec.format === "mcq-multiple" ? "multiple-correct" : sec.format === "mixed" ? "mixed-format" : "single-correct"} (+${sec.marking.correct}/${sec.marking.wrong}${sec.marking.partialPerOption ? ", partial marks" : ""}${sec.rule.breakEven ? `; guess only if your chance is above ${Math.round(sec.rule.breakEven * 100)}%` : "; always answer"})${sec.disputed ? ` [${sec.disputed}]` : ""}`).join(" · ")}</p>
+      <p className="small muted">{plan.caveat}</p>
     </div>
+  );
+}
+
+function StuckBox({ onOpen }: { onOpen: (qid: string) => void }) {
+  const [text, setText] = useState("");
+  const [why, setWhy] = useState<string | null>(null);
+  return (
+    <form className="stack" onSubmit={(e) => {
+      e.preventDefault();
+      const p = parseProblem(text);
+      if (p.supported) {
+        setWhy(null);
+        onOpen(p.problem.id);
+      } else setWhy(p.reason);
+    }}>
+      <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. ∫ from 2 to 9 of 6 dx, or 2/5 = □/15" /></label>
+      {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
+      <button className="secondary" disabled={!text.trim()}>Work through it</button>
+    </form>
   );
 }
 
 function Setup({ current, goals: active, saving, onSave }: { current: number | null; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null) => void }) {
   const [grade, setGrade] = useState<number | null>(current ? Math.min(current + 1, 12) : null);
-  const [mode, setMode] = useState<"sample" | "book" | null>(null);
+  const [mode, setMode] = useState<string | null>(null);
   const [text, setText] = useState("");
   const [draft, setDraft] = useState<CurriculumRelease | null>(null);
   const [picked, setPicked] = useState<Record<string, Set<string>>>({});
@@ -458,6 +508,14 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
   const sample = grade ? sampleFor(grade) : null;
   const outcomes = draft ? draft.subjects.flatMap((s) => s.chapters.flatMap((c) => c.outcomes.map((o) => ({ c, o })))) : [];
   const finish = (r: CurriculumRelease, own: boolean) => onSave(grade!, r, own, goal);
+  const read = (doc: Parameters<typeof synthesise>[0]) => {
+    const d = synthesise(doc);
+    if (d.grade !== grade) throw new Error(`This textbook says Grade ${d.grade}; Grade ${grade} is chosen.`);
+    setDraft(d);
+    // a clear match is ticked for you to confirm; an uncertain one is left for you to choose
+    setPicked(Object.fromEntries(d.subjects.flatMap((s) => s.chapters.flatMap((c) => c.outcomes.map((o) => [o.id, new Set(o.mapping.verdict === "clear" ? o.mapping.competencies.slice(0, 1).map((m) => m.id) : [])])))));
+    setProblem("");
+  };
   return (
     <div className="stack">
       <h1>{current ? "Start the next year" : "Set up My Learning Year"}</h1>
@@ -485,25 +543,32 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
           <h2>Curriculum</h2>
           <div className="cards">
             {sample && <button className={`card ${mode === "sample" ? "accent" : ""}`} onClick={() => setMode("sample")}><span className="card-title">{sample.title}</span><span className="card-sub">A sample textbook written for OpenPath (reviewed mapping, not an educator review)</span></button>}
-            <button className={`card ${mode === "book" ? "accent" : ""}`} onClick={() => setMode("book")}><span className="card-title">Add my textbook</span><span className="card-sub">Paste its contents: chapters, pages and learning outcomes</span></button>
+            {releasesFor(grade).filter((r) => r.id !== sample?.id).map((r) => <button key={r.id} className={`card ${mode === r.id ? "accent" : ""}`} onClick={() => setMode(r.id)}><span className="card-title">{r.title}</span><span className="card-sub">{r.source.board ?? "Another textbook"} · a second sample book (synthetic)</span></button>)}
+            <button className={`card ${mode === "book" ? "accent" : ""}`} onClick={() => setMode("book")}><span className="card-title">Add my textbook</span><span className="card-sub">Paste its contents, or choose a PDF of its contents pages</span></button>
           </div>
         </>
       )}
       {mode === "sample" && sample && <button className="primary" disabled={saving} onClick={() => finish(sample, false)}>{saving ? "Saving…" : `Start Grade ${grade}`}</button>}
+      {mode && mode !== "sample" && mode !== "book" && grade && <button className="primary" disabled={saving} onClick={() => finish(releasesFor(grade).find((r) => r.id === mode)!, false)}>{saving ? "Saving…" : `Start Grade ${grade}`}</button>}
       {mode === "book" && !draft && (
         <div className="stack">
-          <p className="small muted">Format: a front matter block (title, grade, subject, licence), then “## Chapter title (pp. 1–10)” and “- Outcome (p. 3)” lines. See the sample textbooks.</p>
+          <p className="small muted">Paste the contents pages: chapter headings with pages, and the lists of what learners will be able to do. Or choose a PDF (one with selectable text; scanned pages cannot be read yet).</p>
           <textarea className="book" aria-label="Textbook contents" value={text} onChange={(e) => setText(e.target.value)} />
-          {problem && <p className="error">{problem}</p>}
-          <button className="primary" disabled={!text.trim()} onClick={() => {
+          <label className="field small">Or a PDF<input type="file" accept="application/pdf" aria-label="Textbook PDF" onChange={async (e) => {
+            const f = e.target.files?.[0];
+            if (!f) return;
             try {
-              const d = synthesise(text);
-              if (d.grade !== grade) throw new Error(`This textbook says Grade ${d.grade}; Grade ${grade} is chosen.`);
-              setDraft(d);
-              setPicked(Object.fromEntries(d.subjects.flatMap((s) => s.chapters.flatMap((c) => c.outcomes.map((o) => [o.id, new Set(o.mapping.competencies.slice(0, 1).map((m) => m.id))])))));
-              setProblem("");
-            } catch (e) {
-              setProblem(String((e as Error).message ?? e));
+              read(await extract({ bytes: new Uint8Array(await f.arrayBuffer()) }));
+            } catch (er) {
+              setProblem(String((er as Error).message ?? er));
+            }
+          }} /></label>
+          {problem && <p className="error">{problem}</p>}
+          <button className="primary" disabled={!text.trim()} onClick={async () => {
+            try {
+              read(await extract({ text }));
+            } catch (er) {
+              setProblem(String((er as Error).message ?? er));
             }
           }}>Read the textbook</button>
         </div>
@@ -516,6 +581,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
             {outcomes.map(({ c, o }) => (
               <div key={o.id} className="outcome">
                 <p>{o.text} <span className="ref">({c.title}{o.pages ? `, p. ${o.pages}` : ""})</span></p>
+                {o.mapping.verdict === "uncertain" && <p className="hint small" role="note">Please choose: {o.mapping.why}</p>}
                 {o.mapping.competencies.length ? o.mapping.competencies.map((m) => (
                   <label key={m.id}>
                     <input type="checkbox" checked={picked[o.id]?.has(m.id) ?? false} onChange={(e) => setPicked((p) => { const s = new Set(p[o.id]); if (e.target.checked) s.add(m.id); else s.delete(m.id); return { ...p, [o.id]: s }; })} />

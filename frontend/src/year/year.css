@@ -1,6 +1,19 @@
-/* My Learning Year: builds on the mathematics app's visual language (chapter.css tokens, cards, buttons, answers).
-   Tile colours carry meaning; every tile also has a text label and an icon, so colour is never the only signal. */
+/* My Learning Year in the approved English visual language (english.css tokens: violet and mint, rounded type, a soft
+   gradient, cards and one chunky primary button), on the mathematics app's layout (chapter.css). Tile colours carry
+   meaning; every tile also has a text label and an icon, so colour is never the only signal. */
 :root {
+  --brand: #6755df;
+  --brand-soft: #f1eeff;
+  --ink: #203047;
+  --muted: #5f6b84;
+  --line: #e6e6f2;
+  --good: #0f7a5d;
+  --good-soft: #e9faf4;
+  --bad: #b4532a;
+  --bad-soft: #fff0e9;
+  --warn-soft: #fff1e0;
+  --bg: #f8f9ff;
+  font-family: ui-rounded, "SF Pro Rounded", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
   --verified: #1d7a4f;
   --verified-soft: #e3f6ec;
   --shown: #2f6fd1;
@@ -10,7 +23,11 @@
   --idle: #8a93a8;
   --idle-soft: #f0f2f7;
 }
+body { background: linear-gradient(160deg, #f5eaff 0%, #f8f9ff 40%, #dff8f2 100%) fixed; }
 .page.wide { max-width: 920px; }
+details.working { background: var(--brand-soft); border-radius: 12px; padding: 8px 12px; }
+details.working summary { font-weight: 700; cursor: pointer; color: var(--brand); }
+details.working textarea { width: 100%; font: inherit; font-size: 0.95rem; border: 2px solid var(--line); border-radius: 12px; padding: 10px; margin-top: 8px; background: #fff; }
 .topbar-row.wide { max-width: 920px; }
 .test-banner { background: #2a1f00; color: #ffd76a; font-weight: 700; font-size: 0.82rem; text-align: center; padding: 6px 10px; letter-spacing: 0.02em; }
 

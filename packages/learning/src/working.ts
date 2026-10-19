@@ -224,6 +224,6 @@ export function checkWorking(pr: Problem, raw: string[]): WorkingCheck {
     lines: checked.map(({ text, valid, why }) => ({ text, valid, ...(why ? { why } : {}) })),
     valid,
     method: id ? { id, name: METHODS[id] } : null,
-    note: !lines.length ? "No working given." : valid ? (id === "other" ? "Every line is right. That is a valid way, even if it is not one of the ways taught here." : `Every line is right: ${METHODS[id!].toLowerCase()}.`) : `A line has a slip: ${checked.find((l) => !l.valid)!.why}.`,
+    note: !lines.length ? "No working given." : valid ? (id === "other" ? "Every line is right. That is a valid way, even if it is not one of the ways taught here." : "Every line is right.") : `A line has a slip: ${checked.find((l) => !l.valid)!.why}.`,
   };
 }
