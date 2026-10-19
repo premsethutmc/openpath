@@ -12,6 +12,7 @@
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { advice, canComplete, LETTERS, misconception, normalise, question, replay, resumePoint, stageOf, standing, struggling, unit, type Example, type Screen, type Section, type UnitAction, type UnitActivity, type UnitQuestion, type UnitState } from "../../../../packages/mathematics/src/unit";
+import { activeBranch, explain, firstDifficultyExample, outcome, returnPoint, rule as ruleOf, rules, type Branch, type RuleOutcome } from "../../../../packages/mathematics/src/remediation";
 import "./unit.css";
 
 export type UnitSend = (action: UnitAction, stage: string, extra?: Partial<UnitActivity>) => Promise<boolean | undefined>;
@@ -19,10 +20,21 @@ type Where = { stage: string; section: string };
 const PHASE: Record<string, string> = { teaching: "Learn", worked: "Worked examples", guided: "Guided practice", independent: "On your own", application: "Apply", transfer: "New problems", retention: "Revision" };
 const minus = (t: string) => t.replace(/-/g, "−");
 
-export function UnitView({ learnerId, events, now, saving, error, send, onBack }: { learnerId: string; events: readonly { kind: string; program?: string }[]; now: number; saving: boolean; error: string; send: UnitSend; onBack: () => void }) {
+export function UnitView({ learnerId, events, now, saving, error, send, onBack, session }: { learnerId: string; events: readonly { kind: string; program?: string }[]; now: number; saving: boolean; error: string; send: UnitSend; onBack: () => void; session: string }) {
   const { state, profile } = useMemo(() => replay(learnerId, events, new Date(now).toISOString()), [learnerId, events, Math.floor(now / 30000)]);
   const [viewing, setViewing] = useState<string | null>(null);
   const [revisit, setRevisit] = useState<Where | null>(null);
+  // the help branch: derived from the records (so it resumes after a reload); `helping` is the one on screen
+  const nowIso = new Date(now).toISOString();
+  const branch = useMemo(() => activeBranch(state, nowIso, session), [state, session, Math.floor(now / 30000)]);
+  const [helping, setHelping] = useState<Branch | null>(null);
+  const [resumed] = useState(() => branch && "inProgress" in branch && branch.inProgress);
+  useEffect(() => {
+    // unfinished help resumes straight away; new help is offered first (see HelpOffer)
+    if (resumed && branch && !helping) setHelping(branch);
+  }, [resumed]);
+  /** Records of the help belong to the step the learner is in (or the last one done, while the revision waits). */
+  const helpStage = state.current === unit.stages.at(-1)!.id && !(state.retentionDueAt && now >= Date.parse(state.retentionDueAt)) ? (state.completed.at(-1) ?? state.current) : state.current;
   const stageId = viewing ?? state.current;
   const stage = stageOf(stageId);
   const index = unit.stages.findIndex((s) => s.id === stageId);
@@ -40,9 +52,12 @@ export function UnitView({ learnerId, events, now, saving, error, send, onBack }
   const isRetention = stageId === unit.stages.at(-1)!.id;
   const due = state.retentionDueAt && now >= Date.parse(state.retentionDueAt);
 
-  if (revisit) return <Revisit where={revisit} onClose={() => setRevisit(null)} />;
+  const back = returnPoint(state);
   return (
     <>
+      {revisit && <Revisit where={revisit} onClose={() => setRevisit(null)} />}
+      {!revisit && helping && <Help first={helping} state={state} nowIso={nowIso} session={session} send={send} saving={saving} stage={helpStage} back={back} resumed={!!resumed} onDone={() => setHelping(null)} onRevisit={setRevisit} />}
+      <div hidden={!!revisit || !!helping}>
       <header className="topbar">
         <div className="topbar-row">
           <span><button className="link" onClick={onBack}>← Back</button></span>
@@ -76,14 +91,166 @@ export function UnitView({ learnerId, events, now, saving, error, send, onBack }
                 <p className="lead">The revision check opens {state.retentionDueAt ? `on ${new Date(state.retentionDueAt).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}` : "a week after you finish the new problems"}.</p>
                 <p className="muted small">Coming back after a week shows whether the method has stuck. Until then, you can reopen any finished step from the circles above.</p>
               </div>
-              <Standing state={state} status={profile.status} onRevisit={setRevisit} />
+              <Standing state={state} status={profile.status} onRevisit={setRevisit} nowIso={nowIso} session={session} />
             </div>
           )}
-          {allDone && !viewing && <Standing state={state} status={profile.status} onRevisit={setRevisit} />}
+          {allDone && !viewing && <Standing state={state} status={profile.status} onRevisit={setRevisit} nowIso={nowIso} session={session} />}
         </div>
         {viewing && <button className="secondary wide" onClick={() => setViewing(null)}>Back to where I was</button>}
+        {branch && !helping && !viewing && <div className="help-offer-space" aria-hidden="true" />}
+        {branch && !helping && !viewing && <HelpOffer branch={branch} state={state} saving={saving} back={back} onStart={async () => {
+          if (branch.kind === "teach" && !(await send("teach", helpStage, { response: `${branch.rule.id}:${branch.strategy.id}` }))) return;
+          setHelping(branch);
+        }} onSkip={() => send("skip", helpStage, { response: branch.target })} />}
       </main>
+      </div>
     </>
+  );
+}
+
+// ---------------------------------------------------------------- the help branch
+
+const RULE_KIND: Record<string, string> = { prerequisite: "Something this step depends on", procedure: "The method", transfer: "Using it in a new kind of problem" };
+
+/** Offered, never forced: why, what it is, where the learner goes back to. It sits over the step's buttons until chosen. */
+function HelpOffer({ branch, state, saving, back, onStart, onSkip }: { branch: Branch; state: UnitState; saving: boolean; back: { number: number; title: string }; onStart: () => void; onSkip: () => void }) {
+  const name = branch.kind === "diagnose" ? "Finding which part to help with" : branch.rule.name;
+  const pause = branch.kind === "pause";
+  return (
+    <div className="help-offer" role="dialog" aria-labelledby="help-offer-title">
+      <p className="eyebrow">{pause ? "A pause" : "Extra help"}{branch.kind !== "diagnose" ? ` · ${RULE_KIND[branch.rule.kind]}` : ""}</p>
+      <h3 id="help-offer-title">{name}</h3>
+      <p>{explain(branch, state)}</p>
+      {!pause && <p className="muted small">About 3 minutes. Then back to Step {back.number}, {back.title.toLowerCase()}, exactly where you are now.</p>}
+      <div className="actions">
+        {pause ? (
+          <button className="primary" disabled={saving} onClick={onSkip}>Back to the lesson</button>
+        ) : (
+          <>
+            <button className="secondary" disabled={saving} onClick={onSkip}>Not now</button>
+            <button className="primary" disabled={saving} onClick={onStart}>{branch.kind === "diagnose" ? "Answer one quick question" : "Start the extra help"}</button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The help itself, on its own screen with the step list still above it. It holds on to what is on screen until the
+ * learner taps on (feedback stays visible), then follows the planner's next decision, and ends back in the lesson.
+ */
+function Help({ first, state, nowIso, session, send, saving, stage, back, resumed, onDone, onRevisit }: { first: Branch; state: UnitState; nowIso: string; session: string; send: UnitSend; saving: boolean; stage: string; back: { number: number; title: string }; resumed: boolean; onDone: () => void; onRevisit: (w: Where) => void }) {
+  const [shown, setShown] = useState<Branch>(first);
+  const [teachingOpen, setTeachingOpen] = useState(shown.kind !== "check");
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [shown]);
+  const next = activeBranch(state, nowIso, session);
+  const sameRule = (b: Branch | null) => !!b && b.target === shown.target;
+  const qid = shown.kind === "guided" || shown.kind === "check" || shown.kind === "diagnose" ? shown.question : null;
+  const answered = qid ? state.answers[qid] : undefined;
+  const ruleId = shown.kind === "diagnose" ? null : shown.rule.id;
+  const strategy = shown.kind === "teach" || shown.kind === "guided" || shown.kind === "check" ? shown.strategy : null;
+  const from = strategy?.teachFrom ? ruleOf(strategy.teachFrom).strategies[0] : null;
+  const advance = async () => {
+    if (next && sameRule(next)) {
+      if (next.kind === "teach" && !(await send("teach", stage, { response: `${next.rule.id}:${next.strategy.id}` }))) return;
+      setShown(next);
+      setTeachingOpen(next.kind !== "check");
+    } else onDone();
+  };
+  const step = shown.kind === "teach" ? "Learn it" : shown.kind === "guided" ? "Practise it, with help" : shown.kind === "check" ? "Now on your own" : shown.kind === "diagnose" ? "One quick question" : "A pause";
+  const nextLabel = !next || !sameRule(next) ? `Back to the lesson: Step ${back.number}` : next.kind === "teach" ? "Try a different explanation" : next.kind === "pause" ? "Continue" : next.kind === "check" ? "Now one on your own" : "Continue";
+  return (
+    <main className="page help">
+      <div className="help-head">
+        <p className="eyebrow">Extra help{ruleId ? ` · ${ruleOf(ruleId).name}` : ""}</p>
+        <p className="help-why">{resumed && shown === first ? "Welcome back. You were in the middle of this extra help. " : ""}{explain(shown, state)}</p>
+        <p className="muted small">Then back to Step {back.number}, {back.title.toLowerCase()}, where you were. Your place in the lesson is kept.</p>
+        {shown.kind !== "pause" && shown.kind !== "diagnose" && <ol className="help-steps" aria-label="Steps in this help">
+          {["Learn it", "Practise it, with help", "Now on your own"].map((t) => <li key={t} className={t === step ? "here" : ""}>{t}</li>)}
+        </ol>}
+      </div>
+      {strategy && (shown.kind === "teach" || teachingOpen) && (
+        <div className="stack">
+          <h2>{strategy.title}</h2>
+          {from && from.screens.map((sc, i) => <TeachingScreen key={`f${i}`} sc={sc} />)}
+          {strategy.screens.map((sc, i) => <TeachingScreen key={i} sc={sc} />)}
+        </div>
+      )}
+      {strategy && shown.kind === "check" && <button className="link" onClick={() => setTeachingOpen(!teachingOpen)}>{teachingOpen ? "Hide the explanation" : "See the explanation again"}</button>}
+      {shown.kind === "pause" && (
+        <div className="panel accent-soft">
+          <p className="lead">{shown.rule.name}</p>
+          <p>What you have done so far is saved, and nothing is held back: the lesson goes on.</p>
+        </div>
+      )}
+      {qid && (
+        <div className="panel lesson">
+          <Ask key={qid} qid={qid} state={state} send={send} saving={saving} stageId={stage} label={step} hints={shown.kind === "guided"} similar={false} onRevisit={onRevisit} />
+        </div>
+      )}
+      <div className="actions sticky">
+        {shown.kind === "teach" ? (
+          <button className="primary" disabled={saving} onClick={advance}>I've read it: practise it</button>
+        ) : shown.kind === "pause" ? (
+          <button className="primary" disabled={saving} onClick={async () => (await send("skip", stage, { response: shown.target })) && onDone()}>Back to the lesson: Step {back.number}</button>
+        ) : (
+          <>
+            {!answered && <button className="secondary" disabled={saving} onClick={async () => (await send("skip", stage, { response: shown.target })) && onDone()}>Leave the help</button>}
+            <button className="primary" disabled={!answered || saving} onClick={advance}>{answered ? nextLabel : "Answer to continue"}</button>
+          </>
+        )}
+      </div>
+    </main>
+  );
+}
+
+function TeachingScreen({ sc }: { sc: Screen }) {
+  return (
+    <div className="panel lesson">
+      <h3>{sc.title}</h3>
+      <Body sc={sc} />
+      {sc.widget?.type === "tiles" && <Tiles b={sc.widget.b ?? 6} mode={sc.widget.mode ?? "build"} choose={sc.widget.choose} />}
+      {sc.widget?.type === "balance" && <Balance />}
+      {sc.widget?.type === "minimum" && <MinimumExplorer p={sc.widget.p ?? -3} q={sc.widget.q ?? 4} />}
+    </div>
+  );
+}
+
+/** Move x along and watch (x + p)² + q: the square is never negative, so the value never goes below q. */
+export function MinimumExplorer({ p, q }: { p: number; q: number }) {
+  const centre = -p;
+  const xs = Array.from({ length: 9 }, (_, i) => centre - 4 + i);
+  const [x, setX] = useState(centre + 2);
+  const f = (v: number) => (v + p) ** 2 + q;
+  const top = f(xs[0]);
+  const W = 300, H = 150, bw = W / xs.length;
+  const sq = (x + p) ** 2;
+  const bracket = p < 0 ? `(x − ${-p})²` : `(x + ${p})²`;
+  return (
+    <figure className="minimum">
+      <svg viewBox={`0 0 ${W} ${H + 18}`} role="img" aria-label={`Values of ${bracket} + ${q} for x from ${xs[0]} to ${xs.at(-1)}; the smallest is ${q} at x = ${centre}.`}>
+        {xs.map((v, i) => {
+          const h = (f(v) / top) * H;
+          return (
+            <g key={v}>
+              <rect x={i * bw + 4} y={H - h} width={bw - 8} height={h} className={v === x ? "mbar on" : v === centre ? "mbar min" : "mbar"} />
+              <text x={i * bw + bw / 2} y={H + 14} className="tile-label">{String(v).replace("-", "−")}</text>
+            </g>
+          );
+        })}
+      </svg>
+      <label className="slider">
+        <span>x = {String(x).replace("-", "−")}</span>
+        <input type="range" min={xs[0]} max={xs.at(-1)} step={1} value={x} onChange={(e) => setX(Number(e.target.value))} />
+      </label>
+      <figcaption>
+        <strong>{bracket} + {q} = {sq} + {q} = {sq + q}</strong>
+        <span>{sq === 0 ? `The square is 0 here, so this is the smallest value: ${q}, at x = ${centre}.` : `The square is ${sq}, more than 0, so the value is more than ${q}.`}</span>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -364,9 +531,30 @@ function Ask({ qid, state, send, saving, stageId, label, hints = true, solution 
           {!answered.correct && <p><strong>Answer:</strong> {formatAnswer(q)}</p>}
           <p>{q.solution}</p>
           {!answered.correct && help?.revisit && onRevisit && <button className="link" onClick={() => onRevisit(help.revisit!)}>See the explanation again</button>}
+          {!answered.correct && <SimilarExample state={state} qid={qid} />}
         </div>
       )}
       {answered && !answered.correct && similar && q.support && <TryOne qid={q.support} state={state} send={send} saving={saving} stageId={stageId} />}
+    </div>
+  );
+}
+
+/** The first time a method goes wrong: a similar example, worked out step by step (opened by the learner). */
+function SimilarExample({ state, qid }: { state: UnitState; qid: string }) {
+  const r = firstDifficultyExample(state, qid);
+  const [open, setOpen] = useState(false);
+  if (!r?.example) return null;
+  return (
+    <div className="similar">
+      <button className="link" onClick={() => setOpen(!open)}>{open ? "Hide the similar example" : "See a similar example worked out"}</button>
+      {open && (
+        <div className="panel enter">
+          <p className="eyebrow">A similar example</p>
+          <p className="lead">{r.example.problem}</p>
+          <ol className="plain">{r.example.steps.map((s, i) => <li key={i}>{s.text}</li>)}</ol>
+          {r.example.tip && <p className="hint">💡 {r.example.tip}</p>}
+        </div>
+      )}
     </div>
   );
 }
@@ -415,9 +603,18 @@ function Inputs({ q, values, setValues, disabled }: { q: UnitQuestion; values: s
 
 // ---------------------------------------------------------------- where the learner stands
 
-function Standing({ state, status, onRevisit }: { state: UnitState; status: string; onRevisit: (w: Where) => void }) {
+const OUTCOME: Record<RuleOutcome, string> = {
+  none: "",
+  "one-slip": "One slip so far: not enough to say there is a gap",
+  "help-open": "Extra help waiting for you",
+  "improved-after-help": "Right on your own after extra help (progress, not yet mastery)",
+  "help-skipped": "Extra help set aside: progress here is without that help",
+  "paused-ask-a-person": "Paused: worth going through with a teacher or parent",
+};
+function Standing({ state, status, onRevisit, nowIso, session }: { state: UnitState; status: string; onRevisit: (w: Where) => void; nowIso: string; session: string }) {
   const s = standing(state, { status });
   const open = advice(state);
+  const help = rules.map((r) => ({ r, o: outcome(state, r, nowIso, session) })).filter((x) => x.o !== "none");
   return (
     <div className="stack">
       <h2>Where you stand</h2>
@@ -426,6 +623,12 @@ function Standing({ state, status, onRevisit }: { state: UnitState; status: stri
         <div className="panel"><p className="eyebrow">Shown on your own</p><p className="big-number">{s.demonstrated.correct}<span> / {s.demonstrated.answered}</span></p><p className="muted small">Right first time, without hints, in the later steps. Practice questions only: not yet reviewed by a teacher.</p></div>
         <div className="panel"><p className="eyebrow">Verified mastery</p><p className="lead">{s.verified ? "Verified" : "Not verified"}</p><p className="muted small">Only teacher-reviewed questions can verify mastery, and this unit's are not reviewed yet.</p></div>
       </div>
+      {help.length > 0 && (
+        <div className="panel">
+          <h3>Extra help in this unit</h3>
+          <ul className="plain">{help.map(({ r, o }) => <li key={r.id}><strong>{r.name}</strong>: {OUTCOME[o]}</li>)}</ul>
+        </div>
+      )}
       {open.length > 0 && (
         <div className="panel">
           <h3>Worth another look</h3>

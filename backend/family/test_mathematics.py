@@ -242,3 +242,39 @@ class CompletingSquareUnitTests(FamilyTestCase):
         self.assertEqual(self.save(self.activity('open')).status_code, 201, 'the unit starts at its own first step')
         self.assertEqual(self.save(self.activity('open', journey='school')).status_code, 400, 'the unit belongs to the JEE Main track')
         self.assertEqual(len(self.record()), 2)
+
+
+class CompletingSquareHelpTests(FamilyTestCase):
+    """The reference unit's help branch (v1.1.0): teaching blocks, set-aside help and help questions."""
+
+    def setUp(self):
+        super().setUp()
+        self.client = self.parent()
+        self.pupil_id = str(self.pupil(self.client, 'Synthetic help learner'))
+        self.seq = 0
+        self.serial = 0
+        self.spec = program('completing-the-square')
+
+    activity = CompletingSquareUnitTests.activity
+    save = MathematicsAccountTests.save
+    record = MathematicsAccountTests.record
+
+    def test_teach_skip_and_help_questions(self):
+        self.assertEqual(self.save(self.activity('teach', 'prereq', response='expand:area_model')).status_code, 201, 'a teaching block')
+        self.assertEqual(self.save(self.activity('teach', 'prereq', response='expand:invented')).status_code, 400, 'unknown strategy')
+        self.assertEqual(self.save(self.activity('teach', 'prereq')).status_code, 400, 'which block')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='px1', response='4,4')).status_code, 201, 'a help question, in the step the learner is in')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='px1', response='4')).status_code, 400, 'its format is checked')
+        self.assertEqual(self.save(self.activity('skip', 'prereq', response='roots')).status_code, 201, 'help set aside')
+        self.assertEqual(self.save(self.activity('skip', 'prereq', response='transfer:t1')).status_code, 201)
+        self.assertEqual(self.save(self.activity('skip', 'prereq', response='nothing')).status_code, 400)
+        self.assertEqual(self.save(self.activity('complete', 'prereq')).status_code, 400, 'help questions never finish a step')
+        self.assertEqual(self.save(self.activity('answer', 'retention', questionId='prc1', response='3,7')).status_code, 201, 'help is not the revision: no date rule')
+        self.assertEqual(self.save(self.activity('answer', 'retention', questionId='r1', response='4,8')).status_code, 400, 'the revision itself still waits')
+        old = self.activity('open', 'prereq')
+        old['lessonVersion'] = '1.0.0'
+        self.assertEqual(self.save(old).status_code, 400, 'new records use the current version; 1.0.0 records already saved still replay')
+
+    def test_other_programs_have_no_help_branch(self):
+        chapter = {'kind': 'math_activity', 'program': 'jee-quadratics', 'id': 'jee-h', 'at': '2000-01-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'math:{self.pupil_id}:jee', 'journey': 'jee-main', 'lessonVersion': program('jee-quadratics')['version'], 'action': 'skip', 'stage': 'class', 'elapsedMs': 1, 'response': 'expand'}
+        self.assertEqual(self.save(chapter).status_code, 400)

@@ -6,7 +6,7 @@ Q = {}
 def q(id, type, prompt, answer, solution, skill, difficulty=1, **kw):
     d = dict(id=id, type=type, difficulty=difficulty, skill=skill, prompt=prompt, answer=answer, solution=solution)
     for k, v in kw.items():
-        if k == 'mis': d['misconceptions'] = [dict(when=w, says=s) for w, s in v]
+        if k == 'mis': d['misconceptions'] = [dict(when=m[0], says=m[1], **({'signal': m[2]} if len(m) > 2 else {})) for m in v]
         else: d[k] = v
     assert id not in Q, id
     Q[id] = d
@@ -300,19 +300,19 @@ apply = dict(id="apply", title="Choose a method, find the mistake", phase="appli
 
 # ---------------------------------------------------------------- stage 8: transfer (structures not seen in the examples)
 q("t1", "integer", "Find the smallest value that x² − 6x + 13 can take, for real x.", "4", "x² − 6x + 13 = (x − 3)² + 4. A square is never negative, so the smallest value is 4, when x = 3.", "transfer-minimum", 2,
-  support="ts1", revisit=RV_NEG, mis=[("13", "13 is the value at x = 0. Complete the square: (x − 3)² + 4 is smallest when x = 3."), ("3", "3 is the value of x where the minimum happens. The minimum value is 4."), ("-9", "(x − 3)² = x² − 6x + 9, so x² − 6x + 13 = (x − 3)² + 4.")])
+  support="ts1", revisit=RV_NEG, mis=[("13", "13 is the value at x = 0. Complete the square: (x − 3)² + 4 is smallest when x = 3."), ("3", "3 is the value of x where the minimum happens. The minimum value is 4.", "extreme"), ("-9", "(x − 3)² = x² − 6x + 9, so x² − 6x + 13 = (x − 3)² + 4.")])
 q("ts1", "integer", "Extra practice: find the smallest value of x² + 4x + 9.", "5", "x² + 4x + 9 = (x + 2)² + 5, smallest (5) when x = −2.", "transfer-minimum",
   mis=[("9", "9 is the value at x = 0; (x + 2)² + 5 is smallest when x = −2."), ("-2", "−2 is where it happens; the smallest value is 5.")])
 q("t2", "integer", "For which value of x is −x² + 8x − 5 largest?", "4", "−x² + 8x − 5 = −(x² − 8x) − 5 = −[(x − 4)² − 16] − 5 = 11 − (x − 4)². It is largest (11) when x = 4.", "transfer-minimum", 2,
-  revisit=RV_NEG, mis=[("11", "11 is the largest value. It happens when x = 4."), ("-4", "x² − 8x completes to (x − 4)², which is 0 when x = 4.")])
+  revisit=RV_NEG, mis=[("11", "11 is the largest value. It happens when x = 4.", "extreme"), ("-4", "x² − 8x completes to (x − 4)², which is 0 when x = 4.")])
 solve("t3", "Solve (x + 1)² + 6(x + 1) + 8 = 0.", "-5,-3", "Let u = x + 1: u² + 6u + 8 = 0, so (u + 3)² = 1 and u = −2 or −4. Then x = u − 1: x = −3 or x = −5.", "transfer-substitution", None, None,
-      [("-4,-2", "Those are the values of x + 1. Subtract 1: x = −3 or x = −5."), ("-3,-1", "Complete the square in u = x + 1: (u + 3)² = 1 gives u = −2 or −4, so x = −3 or −5.")], difficulty=3)
+      [("-4,-2", "Those are the values of x + 1. Subtract 1: x = −3 or x = −5.", "recognise"), ("-3,-1", "Complete the square in u = x + 1: (u + 3)² = 1 gives u = −2 or −4, so x = −3 or −5.")], difficulty=3)
 q("t4", "integer", "The equation x² + 10x + c = 0 has exactly one root (a repeated root). Find c.", "25", "x² + 10x + c = (x + 5)² + c − 25. One repeated root means (x + 5)² = 0 exactly, so c − 25 = 0 and c = 25.", "transfer-repeated", 2,
   revisit=RV_TERM, mis=[("100", "Halve 10 first: (10/2)² = 25."), ("5", "(x + 5)² needs + 25: c = 25."), ("-25", "(x + 5)² = x² + 10x + 25, so c = +25.")])
 q("t5", "integer", "Solve x² = 4x + 21 and give the larger root.", "7", "x² − 4x = 21. Add 4: (x − 2)² = 25, so x = 2 ± 5: 7 or −3. The larger is 7.", "transfer-rearrange", 2,
-  revisit=RV_BAL, mis=[("5", "(x − 2)² = 25 gives x − 2 = ±5, so x = 7 or −3."), ("-3", "−3 is the smaller root; the larger is 7."), ("3", "x = 2 − 5 = −3 is the smaller root. The larger is 2 + 5 = 7.")])
+  revisit=RV_BAL, mis=[("5", "(x − 2)² = 25 gives x − 2 = ±5, so x = 7 or −3."), ("-3", "−3 is the smaller root; the larger is 7.", "context"), ("3", "x = 2 − 5 = −3 is the smaller root. The larger is 2 + 5 = 7.")])
 q("t6", "integer", "A rectangle is 4 m longer than it is wide, and its area is 60 m². How wide is it, in metres?", "6", "w(w + 4) = 60, so w² + 4w = 60. Add 4: (w + 2)² = 64, so w + 2 = ±8: w = 6 or −10. A width cannot be negative, so w = 6.", "transfer-context", 2,
-  mis=[("-10", "w = −10 solves the equation, but a width cannot be negative."), ("10", "10 m is the length (6 + 4). The width is 6 m."), ("8", "8 is w + 2. Subtract 2: w = 6.")])
+  mis=[("-10", "w = −10 solves the equation, but a width cannot be negative.", "context"), ("10", "10 m is the length (6 + 4). The width is 6 m.", "context"), ("8", "8 is w + 2. Subtract 2: w = 6.")])
 transfer = dict(id="transfer", title="New kinds of problem", phase="transfer", kind="questions", hints=False, questions=["t1", "t2", "t3", "t4", "t5", "t6"])
 
 # ---------------------------------------------------------------- stage 9: delayed retention
@@ -323,6 +323,244 @@ q("r3", "choice", "Why do we add (b/2)² to x² + bx?", "A", "x² + bx is a squa
   options=["It is the area of the missing b/2-by-b/2 corner, which makes a perfect square", "It makes the equation equal zero", "It doubles b", "It is a rule with no reason"],
   mis=[("B", "Adding (b/2)² does not make anything zero; it turns x² + bx into the square (x + b/2)²."), ("C", "It does not change b. It fills the missing corner."), ("D", "There is a reason: it is the missing corner of the square, (b/2) × (b/2).")])
 retention = dict(id="retention", title="Revision check", phase="retention", kind="questions", hints=False, questions=["r1", "r2", "r3"])
+
+# ---------------------------------------------------------------- remediation (v1.1.0): a temporary help branch
+# Each "rule" is something a learner can be missing. Its strategies are tried in order by the shared planner
+# (english-core/src/planner.ts): teach, one guided question (hints, assisted), then one fresh independent check.
+# A failed strategy is never repeated; after the last one the planner recommends a person. Nothing is generated.
+R = "remediation"
+def rq(id, type, prompt, answer, solution, skill, competency=None, **kw):
+    kw.setdefault('difficulty', 1)
+    d = q(id, type, prompt, answer, solution, skill, kw.pop('difficulty'), **kw)
+    Q[id]['role'] = R
+    if competency: Q[id]['competency'] = competency
+    return d
+def strat(id, title, screens, guided, reassess, ref=None):
+    d = dict(id=id, title=title, screens=screens, guided=guided, reassess=reassess)
+    if ref: d['teachFrom'] = ref
+    return d
+ID, SQ, LIN, QUAD = "MATH.algebra.identities", "MATH.number.square-roots", "MATH.algebra.linear-equations", "MATH.algebra.quadratics"
+
+# prerequisite rules (competencies from the curriculum graph)
+rq("px1", "values", "(x + 2)² = x² + ▢x + ▢. Fill in both numbers.", "4,4", "Two rectangles of 2x make 4x, and the 2-by-2 corner is 4: (x + 2)² = x² + 4x + 4.", "expand-square", ID,
+   fields=["middle coefficient", "last term"], hint="Picture the square of side x + 2: x², two x-by-2 rectangles, and a 2-by-2 corner.",
+   mis=[("2,4", "There are two rectangles of 2x each: 4x in all."), ("0,4", "The two rectangles make the middle term: 2 × 2 × x = 4x."), ("4,2", "The corner is 2 by 2, so the last term is 4, not 2.")])
+rq("pxc1", "integer", "(x + 9)² = x² + 18x + ?", "81", "The corner is 9 by 9: 81.", "expand-square", ID, mis=[("9", "The last term is 9², not 9."), ("18", "18 is the middle coefficient; the last term is 9² = 81.")])
+rq("px2", "values", "(x − 3)² = x² + ▢x + ▢. Fill in both numbers (use ± for a minus sign).", "-6,9", "Grid: x × x = x², x × (−3) = −3x twice (−6x), (−3) × (−3) = 9. So x² − 6x + 9.", "expand-square", ID,
+   fields=["middle coefficient", "last term"], hint="Use the grid: the two middle cells are both x × (−3).",
+   mis=[("-3,9", "There are two middle cells of −3x: −6x."), ("-6,-9", "(−3) × (−3) = +9."), ("6,9", "Each middle cell is x × (−3) = −3x, so the middle term is negative.")])
+rq("pxc2", "choice", "Which expression equals (x − 7)²?", "B", "(x − 7)² = x² − 14x + 49.", "expand-square", ID, options=["x² − 49", "x² − 14x + 49", "x² + 14x + 49", "x² − 14x − 49"],
+   mis=[("A", "That forgets the two middle cells, −7x each."), ("C", "The middle cells are x × (−7): negative."), ("D", "(−7) × (−7) = +49.")])
+rq("pr1", "values", "Solve (x + 2)² = 9.", "-5,1", "x + 2 = 3 or x + 2 = −3, so x = 1 or x = −5.", "square-root", SQ, fields=ROOTS, unordered=True,
+   hint="The box x + 2 squares to 9, so the box is 3 or −3.", mis=[("-1,5", "x + 2 = ±3 gives x = −2 ± 3: 1 and −5."), ("-3,3", "It is x + 2 that is ±3. Subtract 2 from each.")])
+rq("prc1", "values", "Solve (x − 5)² = 4.", "3,7", "x − 5 = 2 or x − 5 = −2, so x = 7 or x = 3.", "square-root", SQ, fields=ROOTS, unordered=True,
+   mis=[("-7,-3", "x − 5 = ±2 gives x = 5 ± 2: 7 and 3."), ("-2,2", "It is x − 5 that is ±2. Add 5 to each.")])
+rq("pr2", "values", "Solve (x + 3)² = 49.", "-10,4", "Undo the square: x + 3 = ±7. Undo the + 3: x = 4 or x = −10. Check: (4 + 3)² = 49 ✓, (−10 + 3)² = 49 ✓.", "square-root", SQ, fields=ROOTS, unordered=True,
+   hint="Undo the square first (±7), then the + 3.", mis=[("-4,10", "x + 3 = ±7 gives x = −3 ± 7: 4 and −10."), ("-7,7", "Undo the + 3 as well: subtract 3 from each.")])
+rq("prc2", "values", "Solve (x − 4)² = 36.", "-2,10", "x − 4 = ±6, so x = 10 or x = −2.", "square-root", SQ, fields=ROOTS, unordered=True,
+   mis=[("-10,2", "x − 4 = ±6 gives x = 4 ± 6: 10 and −2."), ("-6,6", "It is x − 4 that is ±6. Add 4 to each.")])
+rq("pb1", "choice", "Divide every term of 4x² − 8x = 20 by 4.", "A", "4x² ÷ 4 = x², −8x ÷ 4 = −2x, 20 ÷ 4 = 5.", "divide-through", LIN, options=["x² − 2x = 5", "x² − 8x = 20", "x² − 2x = 20", "4x² − 2x = 5"],
+   hint="Three terms, three divisions.", mis=[("B", "Only the x² term was divided."), ("C", "The right side must be divided too: 20 ÷ 4 = 5."), ("D", "4x² ÷ 4 = x².")])
+rq("pbc1", "choice", "x² + 4x = 1. Which line is still the same equation?", "A", "Adding 4 to both sides keeps it balanced: x² + 4x + 4 = 5.", "balance", LIN, options=["x² + 4x + 4 = 5", "x² + 4x + 4 = 1", "x² + 4x = 5", "x² + 4x + 4 = 4"],
+   mis=[("B", "4 was added to the left only."), ("C", "4 was added to the right only."), ("D", "The right side should become 1 + 4 = 5.")])
+rq("pb2", "choice", "x = 2 solves x² − x = 2. Which step keeps the balance? (Test x = 2 in each.)", "A", "Adding 1/4 to both sides keeps the equation true for x = 2: 4 − 2 + 1/4 = 2 + 1/4 ✓.", "balance", LIN,
+   options=["x² − x + 1/4 = 2 + 1/4", "x² − x + 1/4 = 2", "x² − x = 2 + 1/4", "x² − x − 1/4 = 2 + 1/4"],
+   hint="Put x = 2 into each line and see which stays true.", mis=[("B", "With x = 2 the left is 2¼ and the right is 2: not balanced."), ("C", "With x = 2 the left is 2 and the right is 2¼."), ("D", "The left went down by ¼ and the right went up by ¼.")])
+rq("pbc2", "choice", "Divide every term of −2x² + 6x = −4 by −2.", "A", "−2x² ÷ −2 = x², 6x ÷ −2 = −3x, −4 ÷ −2 = 2.", "divide-through", LIN, options=["x² − 3x = 2", "x² + 6x = −4", "−x² + 3x = −2", "x² − 3x = −4"],
+   mis=[("B", "Only the first term was divided."), ("C", "That divides by 2, not by −2."), ("D", "The right side too: −4 ÷ −2 = 2.")])
+prerequisite_rules = [
+  dict(id="expand", kind="prerequisite", competency=ID, name="Squaring a bracket",
+       why="Completing the square is the pattern (x + a)² = x² + 2ax + a², used backwards. Two of your answers suggest that pattern is not secure yet, so here is a short lesson on it first.",
+       observe=["p1", "d1", "ds1"], strategies=[
+    strat("area_model", "See (x + a)² as an area", [
+      dict(title="A square of side x + 4", text=["Split each side of the square into x and 4. The square breaks into four pieces:", "x², two rectangles of 4x each (8x), and a 4-by-4 corner of 16. So (x + 4)² = x² + 8x + 16."], widget=dict(type="tiles", b=8, mode="show")),
+      dict(title="Why not x² + 16?", text=["x² + 16 counts only the big square and the corner. It leaves out the two rectangles, which make the middle term 2 × 4 × x = 8x. Check with x = 1: (1 + 4)² = 25, but 1 + 16 = 17."])], "px1", "pxc1"),
+    strat("multiply_it_out", "Multiply every term, then check with a number", [
+      dict(title="The grid", text=["Write (x + 5)(x + 5) as a grid: x and 5 along the top, x and 5 down the side. Each cell is a product:", "Add the cells: x² + 5x + 5x + 25 = x² + 10x + 25."], math=["×  |  x   |  5", "x  |  x²  |  5x", "5  |  5x  |  25"], mathAt=1),
+      dict(title="Check with a number", text=["Put x = 1: (1 + 5)² = 36, and 1 + 10 + 25 = 36 ✓. A quick number check catches a missing middle term or a wrong sign."])], "px2", "pxc2")]),
+  dict(id="roots", kind="prerequisite", competency=SQ, name="Square roots: both of them",
+       why="Solving (x + p)² = k needs both square roots of k. Two of your answers suggest the ± step is not secure yet.",
+       observe=["d2", "ds2"], strategies=[
+    strat("two_numbers", "Two numbers square to the same thing", [
+      dict(title="What squares to 16?", text=["4 × 4 = 16 and (−4) × (−4) = 16. So if a box squared is 16, the box is 4 or −4."], math=["▢² = 16  ⇒  ▢ = 4  or  ▢ = −4"]),
+      dict(title="The bracket is the box", text=["In (x + 1)² = 16 the box is x + 1. So x + 1 = 4 or x + 1 = −4. Undo the + 1 in each: x = 3 or x = −5."])], "pr1", "prc1"),
+    strat("undo_and_check", "Undo one layer at a time, then check", [
+      dict(title="Undo in reverse order", text=["(x − 1)² = 25. To make this, 1 was subtracted from x and then the result was squared. Undo in reverse: first the square (±5), then the subtraction (add 1): x = 6 or x = −4."]),
+      dict(title="Check both", text=["(6 − 1)² = 25 ✓ and (−4 − 1)² = (−5)² = 25 ✓. If a check fails, a sign was lost on the way."])], "pr2", "prc2")]),
+  dict(id="balance", kind="prerequisite", competency=LIN, name="Keeping an equation balanced",
+       why="Completing the square adds the same number to both sides, and divides every term when a ≠ 1. Two of your answers suggest that is not secure yet.",
+       observe=["d3", "ds3", "w2", "w4", "w5"], strategies=[
+    strat("balance_model", "An equation is a balance", [
+      dict(title="Both sides, every term", text=["x² + 6x = −5 is true for x = −1. Try adding 9 to one side only, then to both sides."], widget=dict(type="balance")),
+      dict(title="Dividing works the same way", text=["Dividing 3x² + 6x = 9 by 3 means dividing each of the three terms: x² + 2x = 3. Miss one term and the balance tips."])], "pb1", "pbc1"),
+    strat("test_with_a_number", "Test each step with a known solution", [
+      dict(title="A built-in check", text=["x = 1 solves x² + 2x = 3. After any step, put x = 1 into the new line. If it is still true, the step kept the balance."],
+           math=["add 1 to both: 1 + 2 + 1 = 3 + 1 ✓", "add 1 to the left only: 1 + 2 + 1 = 4, not 3 ✗"])], "pb2", "pbc2")]),
+]
+
+# procedure families: what is practised in the unit, and what to teach when it goes wrong twice
+rq("ftg1", "fraction", "x² + 7x + ▢ = (x + a)². Find ▢. (Match 2a = 7 first.)", "49/4", "2a = 7, so a = 7/2 and ▢ = a² = 49/4.", "complete-term-fraction",
+   hint="2a = 7 gives a = 7/2. The missing number is a².", mis=[("49/2", "a² = (7/2)² = 49/4: square the 2 as well."), ("7/2", "That is a; the missing number is a² = 49/4."), ("49", "Find a first: 2a = 7, a = 7/2.")])
+rq("ftc1", "integer", "x² − 12x + ▢ = (x − 6)². Find ▢.", "36", "(x − 6)² = x² − 12x + 36.", "complete-term-negative", mis=[("-36", "(−6)² = +36."), ("12", "12 is 2a; the missing number is a² = 36."), ("144", "That is 12²; the number is 6² = 36.")])
+rq("ftg2", "integer", "(x + 6)² = x² + 12x + ?", "36", "The corner is 6 by 6: 36.", "expand-square", ID, hint="The last term of (x + a)² is a².", mis=[("6", "The last term is 6², not 6."), ("12", "12 is the middle coefficient.")])
+rq("ftc2", "fraction", "What do you add to x² + 9x to complete the square?", "81/4", "Half of 9 is 9/2, and (9/2)² = 81/4.", "complete-term-fraction", mis=[("81/2", "(9/2)² = 81/4."), ("9/2", "Square the half: 81/4."), ("81", "Halve 9 first: (9/2)² = 81/4.")])
+rq("ffg1", "values", "Write x² + 6x − 2 in the form (x + p)² + q, then expand your answer to check it.", "3,-11", "(x + 3)² = x² + 6x + 9, which is 11 more than x² + 6x − 2. So (x + 3)² − 11. Check: x² + 6x + 9 − 11 = x² + 6x − 2 ✓.", "vertex-form",
+   fields=["p", "q"], hint="Expand (x + 3)² and compare its constant with −2.", mis=[("3,-2", "(x + 3)² brings +9, so take 9 away: −2 − 9 = −11."), ("3,7", "You added 9 instead of taking it away."), ("6,-38", "p is half of 6.")])
+rq("ffc1", "values", "Write x² − 2x + 9 in the form (x + p)² + q.", "-1,8", "(x − 1)² = x² − 2x + 1, so x² − 2x + 9 = (x − 1)² + 8.", "vertex-form", fields=["p", "q"],
+   mis=[("1,8", "x² − 2x gives (x − 1)², so p = −1."), ("-1,10", "Take away the 1 you added: 9 − 1 = 8."), ("-1,9", "(x − 1)² already contains + 1: 9 − 1 = 8.")])
+rq("ffg2", "integer", "(x − 4)² = x² − 8x + ?", "16", "(−4) × (−4) = 16.", "expand-square", ID, hint="The last term is (−4)².", mis=[("-16", "(−4)² = +16."), ("8", "8 is the middle coefficient.")])
+rq("ffc2", "values", "Write x² + 12x + 30 in the form (x + p)² + q.", "6,-6", "(x + 6)² = x² + 12x + 36, so x² + 12x + 30 = (x + 6)² − 6.", "vertex-form", fields=["p", "q"],
+   mis=[("6,30", "Take away the 36 you added: 30 − 36 = −6."), ("6,66", "You added 36 instead of taking it away."), ("12,-114", "p is half of 12.")])
+rq("fsg1", "values", "Solve x² − 10x + 16 = 0. Name each of the four moves as you go.", "2,8", "1: x² − 10x = −16. 2: add 25 to both sides. 3: (x − 5)² = 9. 4: x − 5 = ±3, so x = 8 or x = 2.", "solve-negative",
+   fields=ROOTS, unordered=True, hint="Move 2 is adding (−10/2)² = 25 to both sides.", mis=[("-8,-2", "(x − 5)² = 9 gives x = 5 ± 3: 8 and 2."), ("2,2", "Two roots: x − 5 = 3 and x − 5 = −3.")])
+rq("fsc1", "values", "Solve x² + 8x + 7 = 0 by completing the square.", "-7,-1", "x² + 8x = −7; add 16: (x + 4)² = 9; x = −4 ± 3: −1 or −7.", "solve-monic", fields=ROOTS, unordered=True,
+   mis=[("1,7", "x = −4 ± 3 gives −1 and −7: both negative."), ("-4,-1", "(x + 4)² = 9 gives x + 4 = ±3.")])
+rq("fsg2", "values", "Solve (x + 6)² = 1.", "-7,-5", "x + 6 = ±1, so x = −5 or x = −7.", "square-root", SQ, fields=ROOTS, unordered=True, hint="x + 6 is 1 or −1.",
+   mis=[("5,7", "x + 6 = ±1 gives x = −6 ± 1: −5 and −7."), ("-1,1", "It is x + 6 that is ±1.")])
+rq("fsc2", "values", "Solve x² − 2x − 8 = 0 by completing the square.", "-2,4", "x² − 2x = 8; add 1: (x − 1)² = 9; x = 1 ± 3: 4 or −2.", "solve-negative", fields=ROOTS, unordered=True,
+   mis=[("-4,2", "(x − 1)² = 9 gives x = 1 ± 3: 4 and −2.")])
+rq("fdg1", "values", "Solve −x² + 2x + 8 = 0. Make the x² coefficient 1 first.", "-2,4", "Divide every term by −1: x² − 2x − 8 = 0. Then (x − 1)² = 9, so x = 4 or x = −2.", "solve-negative-a", fields=ROOTS, unordered=True,
+   hint="Divide every term by −1: every sign flips.", mis=[("-4,2", "x² − 2x − 8 = 0 gives (x − 1)² = 9, so x = 1 ± 3: 4 and −2.")])
+rq("fdc1", "values", "Solve 2x² − 12x + 10 = 0 by completing the square.", "1,5", "Divide by 2: x² − 6x + 5 = 0. (x − 3)² = 4, so x = 1 or 5.", "solve-nonunit", fields=ROOTS, unordered=True,
+   mis=[("-5,-1", "x² − 6x gives (x − 3)², so x = 3 ± 2: 1 and 5."), ("-1,11", "After dividing by 2 the constant is 5, not 10.")])
+rq("fdg2", "choice", "Divide every term of 5x² + 10x − 15 = 0 by 5.", "A", "5x² ÷ 5 = x², 10x ÷ 5 = 2x, −15 ÷ 5 = −3.", "divide-through", LIN, options=["x² + 2x − 3 = 0", "x² + 10x − 15 = 0", "x² + 2x − 15 = 0", "5x² + 2x − 3 = 0"],
+   hint="Three terms, three divisions.", mis=[("B", "Only the x² term was divided."), ("C", "−15 ÷ 5 = −3."), ("D", "5x² ÷ 5 = x².")])
+rq("fdc2", "values", "Solve 3x² + 12x + 9 = 0 by completing the square.", "-3,-1", "Divide by 3: x² + 4x + 3 = 0. (x + 2)² = 1, so x = −1 or −3.", "solve-nonunit", fields=ROOTS, unordered=True,
+   mis=[("1,3", "x = −2 ± 1 gives −1 and −3."), ("-5,1", "After dividing by 3 the constant is 3, not 9.")])
+def example(problem, steps, tip=None):
+    d = dict(problem=problem, steps=[dict(text=t) for t in steps])
+    if tip: d['tip'] = tip
+    return d
+procedure_rules = [
+  dict(id="term", kind="procedure", competency=QUAD, name="Finding the number that completes the square", prerequisite="expand",
+       why="Finding the number to add has gone wrong twice, so here is a different way to see it.",
+       observe=["e1", "e2", "es1", "e3", "e4", "es2", "e5", "w1", "w3", "w6"],
+       example=example("What do you add to x² + 14x to complete the square?", ["Halve the coefficient of x: 14 ÷ 2 = 7.", "Square it: 7² = 49.", "Check: (x + 7)² = x² + 14x + 49 ✓. So add 49."], "Halve first, then square: not the other way round, and not just one of the two."),
+       strategies=[
+    strat("match_the_identity", "Match it to (x + a)² = x² + 2ax + a²", [
+      dict(title="Read a off the middle term", text=["The middle term of (x + a)² is 2a × x. So in x² + 18x, 2a = 18, which gives a = 9, and the missing last term is a² = 81:", "Halving is just solving 2a = b. Squaring is the a² at the end of the pattern."],
+           math=["x² + 18x + ▢ = (x + a)²", "2a = 18  ⇒  a = 9  ⇒  ▢ = 81"], mathAt=1)], "ftg1", "ftc1"),
+    strat("prerequisite_review", "Back to the pattern underneath", [
+      dict(title="Reading the pattern backwards", text=["(x + a)² = x² + 2ax + a². So x² + 2ax is a² short of being a square, and that missing a² is the number you add. First, make sure the forward direction is solid:"], widget=dict(type="tiles", b=6, mode="show"))], "ftg2", "ftc2", ref="expand")]),
+  dict(id="form", kind="procedure", competency=QUAD, name="Writing (x + p)² + q", prerequisite="expand",
+       why="Writing the completed-square form has gone wrong twice, so here is a different way to check it.",
+       observe=["e6", "es3", "g5", "gs5", "i5", "r2"],
+       example=example("Write x² + 10x + 7 in the form (x + p)² + q.", ["Half of 10 is 5, and (x + 5)² = x² + 10x + 25.", "x² + 10x + 7 has 7 where (x + 5)² has 25: it is 18 less.", "So x² + 10x + 7 = (x + 5)² − 18: p = 5 and q = −18."], "Add the missing number and take it away again: the value must not change."),
+       strategies=[
+    strat("check_by_expanding", "Expand your answer back to check it", [
+      dict(title="Your answer contains its own check", text=["Whatever you write, expand it back and compare. (x + 5)² − 18 = x² + 10x + 25 − 18 = x² + 10x + 7 ✓.", "If the constants do not match, change q by the difference. If the x terms do not match, p is wrong."])], "ffg1", "ffc1"),
+    strat("prerequisite_review", "Back to the pattern underneath", [
+      dict(title="Where q comes from", text=["(x + p)² always brings its own constant p². q is whatever is left over: q = c − p². To use that, (x + p)² must expand correctly first:"], widget=dict(type="tiles", b=8, mode="show"))], "ffg2", "ffc2", ref="expand")]),
+  dict(id="solve", kind="procedure", competency=QUAD, name="Solving by completing the square", prerequisite="roots",
+       why="Solving by completing the square has gone wrong twice, so here is the method as four fixed moves.",
+       observe=["g1", "g2", "g3", "g7", "g8", "gs1", "gs2", "gs3", "gs7", "gs8", "i1", "i2", "i3", "i6", "a3", "r1"],
+       example=example("Solve x² + 2x − 15 = 0.", ["Move −15 across: x² + 2x = 15.", "Add (2/2)² = 1 to both sides: x² + 2x + 1 = 16.", "Write the square: (x + 1)² = 16.", "Both roots: x + 1 = 4 or x + 1 = −4.", "x = 3 or x = −5. Check x = 3: 9 + 6 − 15 = 0 ✓."]),
+       strategies=[
+    strat("four_moves", "The same four moves every time", [
+      dict(title="Four moves", text=["Say which move you are on as you write each line. Most slips happen at move 2 (adding to one side only) or move 4 (keeping only one root)."],
+           math=["1  constant to the right", "2  add (half the x coefficient)² to both sides", "3  write the left side as a square", "4  square-root with ±, then solve each"], mathAt=0)], "fsg1", "fsc1"),
+    strat("prerequisite_review", "Back to the last move: both square roots", [
+      dict(title="Move 4 is the one to check", text=["After move 3 you always have (x + p)² = k. Then x + p is √k or −√k: two answers, each giving one root."], math=["(x + p)² = k  ⇒  x = −p ± √k"])], "fsg2", "fsc2", ref="roots")]),
+  dict(id="divide", kind="procedure", competency=QUAD, name="Dividing through when a ≠ 1", prerequisite="balance",
+       why="Equations that do not start with x² alone have gone wrong twice, so here is why dividing comes first.",
+       observe=["g4", "g6", "gs4", "gs6", "i4"],
+       example=example("Solve 2x² + 4x − 6 = 0.", ["Divide every term by 2: x² + 2x − 3 = 0.", "x² + 2x = 3; add 1 to both sides: (x + 1)² = 4.", "x + 1 = ±2, so x = 1 or x = −3."]),
+       strategies=[
+    strat("why_divide", "Why the x² coefficient must be 1", [
+      dict(title="(x + a)² starts with x²", text=["(x + a)² always starts with x², never 2x² or −x². So 2x² + 12x cannot match (x + a)² until you divide by 2 (or take the 2 out as a factor):"], math=["2x² + 12x = 2(x² + 6x) = 2[(x + 3)² − 9]"])], "fdg1", "fdc1"),
+    strat("prerequisite_review", "Back to keeping the balance", [
+      dict(title="Divide every term, on both sides", text=["Dividing an equation divides every term, and 0 stays 0. Try the balance again:"], widget=dict(type="balance"))], "fdg2", "fdc2", ref="balance")]),
+]
+
+# transfer: what else, besides the procedure, an unfamiliar problem needs
+rq("tig1", "integer", "Find the smallest value of (x + 2)² − 5.", "-5", "(x + 2)² is never negative and is 0 when x = −2, so the smallest value is −5.", "transfer-minimum",
+   hint="When is (x + 2)² smallest? What is left then?", mis=[("-2", "−2 is the x where it happens; the smallest value is −5."), ("5", "The square is 0 at its smallest, leaving −5."), ("2", "When the square is 0, what is left is −5.")])
+rq("tic1", "integer", "Find the smallest value of x² + 10x + 30.", "5", "x² + 10x + 30 = (x + 5)² + 5, smallest (5) when x = −5.", "transfer-minimum",
+   mis=[("30", "30 is the value at x = 0. Complete the square first: (x + 5)² + 5."), ("-5", "−5 is where it happens; the smallest value is 5."), ("25", "(x + 5)² brings 25; what is left is 30 − 25 = 5.")])
+rq("tig2", "integer", "x² − 6x + 11 = (x − 3)² + 2. Try x = 1, 2, 3, 4, 5. For which x is it smallest?", "3", "Values: 6, 3, 2, 3, 6. Smallest at x = 3, where (x − 3)² = 0.", "transfer-minimum",
+   hint="Work out the five values; or ask when (x − 3)² is 0.", mis=[("2", "2 is the smallest value; it happens at x = 3."), ("-3", "(x − 3)² is 0 when x = 3, not −3.")])
+rq("tic2", "integer", "For which x is −x² + 6x + 1 largest?", "3", "−x² + 6x + 1 = 10 − (x − 3)², largest (10) when x = 3.", "transfer-minimum",
+   mis=[("10", "10 is the largest value; it happens at x = 3."), ("-3", "x² − 6x completes to (x − 3)², which is 0 at x = 3.")])
+rq("txg1", "integer", "A square garden has side s metres, and s² + 2s = 48. Find s.", "6", "(s + 1)² = 49, so s = 6 or s = −8. A side cannot be negative: s = 6.", "transfer-context",
+   hint="Solve first, then ask which solution can be a length.", mis=[("-8", "−8 solves the equation, but a length cannot be negative."), ("7", "7 is s + 1. Subtract 1: s = 6.")])
+rq("txc1", "integer", "A rectangle is 2 cm longer than it is wide, and its area is 35 cm². Find its width in cm.", "5", "w(w + 2) = 35, so (w + 1)² = 36 and w = 5 or −7. The width is 5 cm.", "transfer-context",
+   mis=[("-7", "−7 solves the equation, but a width cannot be negative."), ("7", "7 cm is the length; the width is 5 cm.")])
+rq("txg2", "integer", "The product of two consecutive positive whole numbers is 72. Find the smaller one.", "8", "n(n + 1) = 72: n = 8 or n = −9. Positive: 8 (and 9).", "transfer-context",
+   hint="Write n(n + 1) = 72, solve, then keep the answer the question allows.", mis=[("9", "9 is the larger number; the smaller is 8."), ("-9", "The numbers must be positive.")])
+rq("txc2", "integer", "A positive number n satisfies n² − 3n = 10. Find n.", "5", "(n − 3/2)² = 49/4, so n = 5 or n = −2. Positive: 5.", "transfer-context",
+   mis=[("-2", "−2 solves the equation, but n must be positive.")])
+rq("trg1", "values", "Solve (x + 2)² + 2(x + 2) − 3 = 0. (Let u = x + 2.)", "-5,-1", "u² + 2u − 3 = 0 gives (u + 1)² = 4, u = 1 or −3. Then x = u − 2: −1 or −5.", "transfer-substitution", fields=ROOTS, unordered=True,
+   hint="Solve for u first, then turn each u back into x.", mis=[("-3,1", "Those are the values of u = x + 2. Subtract 2 from each.")])
+rq("trc1", "values", "Solve (x − 2)² − 4(x − 2) − 5 = 0.", "1,7", "u = x − 2: u² − 4u − 5 = 0, so u = 5 or −1, and x = 7 or 1.", "transfer-substitution", fields=ROOTS, unordered=True,
+   mis=[("-1,5", "Those are the values of u = x − 2. Add 2 to each.")])
+rq("trg2", "integer", "x² − 6x + c = 0 has exactly one root. Find c.", "9", "Exactly one root means the left side is a perfect square: (x − 3)² = x² − 6x + 9, so c = 9.", "transfer-repeated",
+   hint="Which value of c makes x² − 6x + c a perfect square?", mis=[("36", "Halve −6 first: (−3)² = 9."), ("-9", "(x − 3)² = x² − 6x + 9: c = +9.")])
+rq("trc2", "integer", "Solve x² = 6x + 16 and give the larger root.", "8", "x² − 6x = 16. Add 9: (x − 3)² = 25, so x = 8 or −2.", "transfer-rearrange",
+   mis=[("-2", "−2 is the smaller root."), ("5", "(x − 3)² = 25 gives x − 3 = ±5: 8 or −2.")])
+rq("ttg1", "choice", "A rectangle's length is 5 m more than its width w, and its area is 84 m². Which equation fits?", "A", "Area is length × width: w(w + 5) = 84.", "transfer-translate",
+   options=["w(w + 5) = 84", "w + w + 5 = 84", "2w + 2(w + 5) = 84", "w² + 5 = 84"], hint="Area means multiply the two sides.",
+   mis=[("B", "That adds the sides; area multiplies them."), ("C", "That is the perimeter, not the area."), ("D", "The length is w + 5, so the area is w(w + 5) = w² + 5w.")])
+rq("ttc1", "integer", "A rectangle is 3 m longer than it is wide and has area 40 m². Find its width in metres.", "5", "w(w + 3) = 40: w² + 3w − 40 = 0 gives w = 5 or w = −8. The width is 5 m.", "transfer-translate",
+   mis=[("8", "8 m is the length; the width is 5 m."), ("-8", "A width cannot be negative.")])
+rq("ttg2", "choice", "The square of a number n, plus 6 times the number, is 16. Which equation fits?", "A", "“The square of n” is n², “plus 6 times the number” is + 6n, “is 16” is = 16.", "transfer-translate",
+   options=["n² + 6n = 16", "(n + 6)² = 16", "2n + 6n = 16", "n² + 6 = 16"], hint="Translate one phrase at a time.",
+   mis=[("B", "That squares n + 6. The square is only of n."), ("C", "The square of n is n², not 2n."), ("D", "“6 times the number” is 6n.")])
+rq("ttc2", "integer", "The square of a positive number, plus 6 times the number, is 16. Find the number.", "2", "n² + 6n = 16: (n + 3)² = 25, n = 2 or −8. Positive: 2.", "transfer-translate",
+   mis=[("-8", "−8 solves the equation, but the number must be positive."), ("5", "5 is n + 3. Subtract 3: n = 2.")])
+transfer_rules = [
+  dict(id="extreme", kind="transfer", category="interpret", competency=QUAD, name="Reading a smallest or largest value from (x + p)² + q",
+       why="Your working with the method was right, so the method is not the problem. What is new here is connecting the completed form to the smallest or largest value.",
+       observe=[], strategies=[
+    strat("minimum_explorer", "Why (x − 3)² + 4 is never below 4", [
+      dict(title="Move x and watch", text=["(x − 3)² is a square, so it is 0 or more. It is 0 only when x = 3. Move x and watch the value of (x − 3)² + 4:"], widget=dict(type="minimum", p=-3, q=4)),
+      dict(title="Smallest value, and where", text=["For (x + p)² + q the smallest value is q, and it happens when x = −p. For −(x + p)² + q the largest value is q, at x = −p."], tip="Two different questions: “what is the smallest value?” (q) and “for which x?” (−p).")], "tig1", "tic1"),
+    strat("table_of_values", "Try values and watch the square", [
+      dict(title="A table", text=["x² − 4x + 7 = (x − 2)² + 3. Try x = 0, 1, 2, 3, 4:", "The values go down and come back up, smallest at x = 2, where the square is 0."], math=["x:      0   1   2   3   4", "value:  7   4   3   4   7"], mathAt=1)], "tig2", "tic2")]),
+  dict(id="context", kind="transfer", category="interpret", competency=QUAD, name="Checking a solution against the question",
+       why="You solved the equation, but a solution of the equation is not always the answer to the question.",
+       observe=[], strategies=[
+    strat("check_against_the_story", "Ask what the answer means", [
+      dict(title="Every solution, checked against the question", text=["w(w + 4) = 60 has two solutions, 6 and −10. A width cannot be −10 m, so the answer is 6 m. And if the question asks for the width, 10 m (the length) is not the answer.", "After solving, reread the question: which quantity, which units, which values are possible?"])], "txg1", "txc1"),
+    strat("write_the_meaning", "Write what each solution means", [
+      dict(title="Say it in words", text=["Write one sentence for each solution, for example “w = −10: a width of −10 m”. Saying it in words makes an impossible answer easy to spot."])], "txg2", "txc2")]),
+  dict(id="recognise", kind="transfer", category="recognise", competency=QUAD, name="Spotting when completing the square applies",
+       why="You can complete the square on a standard equation. What is new here is seeing that this problem is one in disguise.",
+       observe=[], strategies=[
+    strat("spot_the_structure", "Three common disguises", [
+      dict(title="Look for these", text=["A repeated block: (x + 1)² + 6(x + 1) + 8 is u² + 6u + 8 with u = x + 1. Solve for u, then turn u back into x.", "Terms on both sides: x² = 4x + 21 must become x² − 4x = 21 first.", "“Exactly one root” means the quadratic is a perfect square: x² + 10x + c = (x + 5)² when c = 25."])], "trg1", "trc1"),
+    strat("one_tidying_move", "Make one tidying move, then look again", [
+      dict(title="Tidy first", text=["Before solving, make one move and look again: give a repeated block a name, bring every term to one side, or compare with (x + a)². The familiar shape usually appears after one move."])], "trg2", "trc2")]),
+  dict(id="translate", kind="transfer", category="translate", competency=QUAD, name="Turning words into an equation",
+       why="The equation in a word problem has to be built from the words first. That step went wrong, not the solving.",
+       observe=[], strategies=[
+    strat("draw_and_label", "Draw it and label it", [
+      dict(title="Sketch first", text=["Sketch the rectangle and label the sides: width w, length w + 4. Area means length × width, so w(w + 4) = 60. Only then complete the square."])], "ttg1", "ttc1"),
+    strat("phrase_by_phrase", "Translate phrase by phrase", [
+      dict(title="A small dictionary", text=["“4 more than w” → w + 4. “area” → multiply the sides. “the square of n” → n². “is” → =. Translate each phrase, then put them together."])], "ttg2", "ttc2")]),
+]
+
+# transfer diagnosis: quick questions on the parts, used only when the answer itself does not show what went wrong
+rq("tp1", "values", "Quick check: write x² − 6x + 13 in the form (x + p)² + q.", "-3,4", "x² − 6x + 13 = (x − 3)² − 9 + 13 = (x − 3)² + 4.", "vertex-form", fields=["p", "q"],
+   mis=[("3,4", "x² − 6x gives (x − 3)², so p = −3."), ("-3,13", "Take away the 9 you added: 13 − 9 = 4.")])
+rq("tp2", "values", "Quick check: write x² − 8x in the form (x + p)² + q.", "-4,-16", "x² − 8x = (x − 4)² − 16.", "vertex-form", fields=["p", "q"], mis=[("4,-16", "x² − 8x gives (x − 4)²: p = −4."), ("-4,16", "Take away the 16 you added.")])
+rq("tp3", "values", "Quick check: solve u² + 6u + 8 = 0.", "-4,-2", "(u + 3)² = 1, so u = −2 or u = −4.", "solve-monic", fields=["u =", "or u ="], unordered=True, mis=[("2,4", "u = −3 ± 1: −2 and −4.")])
+rq("tp4", "integer", "Quick check: what do you add to x² + 10x to complete the square?", "25", "(10/2)² = 25.", "complete-term", mis=[("10", "Halve and square: 25."), ("100", "Halve first: 5² = 25.")])
+rq("tp5", "values", "Quick check: solve x² − 4x − 21 = 0.", "-3,7", "(x − 2)² = 25, so x = 7 or −3.", "solve-negative", fields=ROOTS, unordered=True, mis=[("-7,3", "x = 2 ± 5: 7 and −3.")])
+rq("tq6", "choice", "Quick check: a rectangle is 4 m longer than it is wide (width w) and has area 60 m². Which equation fits?", "A", "Area is length × width: w(w + 4) = 60.", "transfer-translate",
+   options=["w(w + 4) = 60", "w + w + 4 = 60", "2w + 2(w + 4) = 60", "w² + 4 = 60"], mis=[("B", "That adds the sides; area multiplies them."), ("C", "That is the perimeter."), ("D", "w(w + 4) = w² + 4w, not w² + 4.")])
+rq("tp6", "values", "Quick check: solve w² + 4w − 60 = 0.", "-10,6", "(w + 2)² = 64, so w = 6 or w = −10.", "solve-monic", fields=["w =", "or w ="], unordered=True, mis=[("-6,10", "w = −2 ± 8: 6 and −10.")])
+transfer_diagnosis = [
+  dict(question="t1", demand="extreme", procedure="form", probes=[dict(question="tp1", tests="procedure")]),
+  dict(question="t2", demand="extreme", procedure="form", probes=[dict(question="tp2", tests="procedure")]),
+  dict(question="t3", demand="recognise", procedure="solve", probes=[dict(question="tp3", tests="procedure")]),
+  dict(question="t4", demand="recognise", procedure="term", probes=[dict(question="tp4", tests="procedure")]),
+  dict(question="t5", demand="recognise", procedure="solve", probes=[dict(question="tp5", tests="procedure")]),
+  dict(question="t6", demand="context", procedure="solve", probes=[dict(question="tq6", tests="translate"), dict(question="tp6", tests="procedure")]),
+]
+remediation = dict(
+  policy=dict(note="The shared planner's draft policy with this unit's block size: one guided question and one fresh independent check per strategy, no contrast items. Estimator, verification and retention settings are unchanged.",
+              guidedItems=1, reassessItems=1, reassessPassMin=1, reassessContrastItems=0),
+  rules=prerequisite_rules + procedure_rules + transfer_rules, transfer=transfer_diagnosis)
 
 stages = [prereq, picture, worked, formula, guided, independent, apply, transfer, retention]
 # teaching / worked stages: their questions are the predictions and checks, in order
@@ -343,7 +581,17 @@ for st in stages:
         st['support'] = sorted({Q[x]['support'] for x in st['questions'] if Q[x].get('support')})
     st['hints'] = st.get('hints', st['kind'] != 'questions' or st['phase'] == 'guided')
 used = {x for st in stages for x in st['questions'] + st['support']}
-assert used == set(Q), set(Q) ^ used
+remedial = {x for r in remediation['rules'] for st in r['strategies'] for x in (st['guided'], st['reassess'])} | {p['question'] for t in remediation['transfer'] for p in t['probes']}
+assert not used & remedial and used | remedial == set(Q), set(Q) ^ (used | remedial)
+assert all(Q[x].get('role') == 'remediation' for x in remedial) and not any(Q[x].get('role') for x in used)
+rules = {r['id']: r for r in remediation['rules']}
+for r in remediation['rules']:
+    assert all(x in used for x in r['observe']), r['id']
+    assert r.get('prerequisite') is None or rules[r['prerequisite']]['kind'] == 'prerequisite'
+    for st in r['strategies']: assert st.get('teachFrom') is None or st['teachFrom'] in rules
+for t in remediation['transfer']: assert t['demand'] in rules and t['procedure'] in rules and Q[t['question']]
+signals = {m['signal'] for x in Q.values() for m in x.get('misconceptions', []) if 'signal' in m}
+assert signals <= set(rules), signals
 for x in Q.values():
     if x.get('support'): assert x['support'] in Q, x['support']
     if 'revisit' in x:
@@ -351,13 +599,13 @@ for x in Q.values():
         ids = [s['id'] for s in st.get('sections', [])] + [e['id'] for e in st.get('examples', [])] + ([st['intro']['id']] if st.get('intro') else [])
         assert x['revisit']['section'] in ids, x
     if x['type'] == 'values': assert len(x['answer'].split(',')) == len(x['fields']), x['id']
-spec = dict(id="completing-the-square", version="1.0.0", compatibleVersions=[], title="Completing the square", unitOf="jee-quadratics", track="jee-main",
+spec = dict(id="completing-the-square", version="1.1.0", compatibleVersions=["1.0.0"], title="Completing the square", unitOf="jee-quadratics", track="jee-main",
   competencyId="MATH.algebra.quadratics", review="provisional",
   reviewNote="Original teaching and questions written for this reference unit; every answer is recomputed independently in frontend/src/mathematics/unit/unit.test.ts. Not reviewed by an educator; not previous-year questions. Provisional: it can never verify mastery.",
   source=["NTA Syllabus for JEE (Main) 2026, Unit 2: quadratic equations in real and complex number systems and their solutions"],
   levels="School foundations (stages 1 to 6) towards JEE Main (stages 7 and 8). No JEE Advanced material.",
-  retentionAfter="transfer", retentionDelayDays=7, stages=stages, questions=list(Q.values()))
+  retentionAfter="transfer", retentionDelayDays=7, stages=stages, remediation=remediation, questions=list(Q.values()))
 json.dump(spec, open(sys.argv[1], 'w'), ensure_ascii=False, indent=2); open(sys.argv[1], 'a').write("\n")
 main = [x for st in stages for x in st['questions']]
-print("stages", len(stages), "main questions", len(main), "support", len(Q) - len(main), "screens", sum(len(sc['screens']) for st in stages for sc in st.get('sections', [])) + sum(len(st['intro']['screens']) for st in stages if st.get('intro')),
+print("stages", len(stages), "main questions", len(main), "support", len(Q) - len(main) - len(remedial), "remediation", len(remedial), "rules", len(remediation["rules"]), "screens", sum(len(sc['screens']) for st in stages for sc in st.get('sections', [])) + sum(len(st['intro']['screens']) for st in stages if st.get('intro')),
       "worked steps", sum(len(e['steps']) for st in stages for e in st.get('examples', [])))

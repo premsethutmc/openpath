@@ -201,7 +201,7 @@ function App() {
       </Shell>
     );
 
-  if (screen.name === "unit") return <UnitView learnerId={learner} events={events} now={now} saving={saving} error={error} send={sendUnit} onBack={() => setScreen({ name: "chapters" })} />;
+  if (screen.name === "unit") return <UnitView learnerId={learner} events={events} now={now} saving={saving} error={error} send={sendUnit} onBack={() => setScreen({ name: "chapters" })} session={`math:${learner}:${visit.current}`} />;
   return <Chapter state={state} now={now} saving={saving} error={error} send={send} onBack={() => setScreen({ name: "chapters" })} />;
 }
 

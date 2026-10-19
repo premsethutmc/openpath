@@ -22,7 +22,7 @@ The aim: upgrading lesson content never erases a learner's history.
 | --- | --- | --- | --- |
 | `equivalent-fractions` | 2 | none | Unchanged. |
 | `jee-quadratics` (the chapter) | 1.1.0 | none | The first step changed from "recap" (1.0.0) to "class" (8 lessons). The 1.0.0 records are kept in the database, but they are not counted in 1.1.0 progress, so a learner who used 1.0.0 starts 1.1.0 from the beginning. Later steps keep their ids, so a future version could list 1.0.0 as compatible for those steps if wanted. |
-| `completing-the-square` (reference unit) | 1.0.0 | none yet | Uses the `compatibleVersions` mechanism from the start. |
+| `completing-the-square` (reference unit) | 1.1.0 | 1.0.0 | 1.1.0 adds help-branch questions and tags. No 1.0.0 question or step changed meaning, so 1.0.0 records replay. Item ids keep the 1.0.0 namespace (`math:completing-the-square:1.0.0:<question>`), so evidence from both versions refers to the same items. |
 
 ## Upgrading a program
 
