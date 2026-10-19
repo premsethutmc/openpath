@@ -12,7 +12,11 @@
     "../packages/mathematics/src/unit.ts",
     "src/mathematics/unit",
     "src/globals.d.ts",
-    "src/mathematics/foundation"
+    "src/mathematics/foundation",
+    "src/year",
+    "src/learning",
+    "../packages/learning/src",
+    "../packages/learning/scripts"
   ],
   "exclude": []
 }

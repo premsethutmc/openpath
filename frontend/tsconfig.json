@@ -30,6 +30,8 @@
     "src/mathematics/journey",
     "src/mathematics/chapter",
     "src/mathematics/unit",
-    "src/mathematics/foundation"
+    "src/mathematics/foundation",
+    "src/year",
+    "src/learning"
   ]
 }

@@ -1,0 +1,148 @@
+{
+ "id": "openpath-sample-mathematics-grade-8",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 8,
+ "title": "OpenPath Sample Mathematics, Grade 8",
+ "hash": "32c9d15d",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 8",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-squares-and-square-roots",
+     "number": 1,
+     "title": "Squares and square roots",
+     "pages": "1–14",
+     "outcomes": [
+      {
+       "id": "ch1-squares-and-square-roots.o1",
+       "text": "Find squares and square roots",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.square-roots",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.cubes",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "9"
+      }
+     ]
+    },
+    {
+     "id": "ch2-algebraic-identities",
+     "number": 2,
+     "title": "Algebraic identities",
+     "pages": "15–30",
+     "outcomes": [
+      {
+       "id": "ch2-algebraic-identities.o1",
+       "text": "Use algebraic identities to expand products",
+       "pages": "16",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.identities",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.identities-intro",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-algebraic-identities.o2",
+       "text": "Factor algebraic expressions",
+       "pages": "24",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.factorisation",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "21"
+      }
+     ]
+    },
+    {
+     "id": "ch3-graphs",
+     "number": 3,
+     "title": "Graphs",
+     "pages": "31–44",
+     "outcomes": [
+      {
+       "id": "ch3-graphs.o1",
+       "text": "Plot points in four quadrants on the Cartesian plane",
+       "pages": "32",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.cartesian",
+          "score": 0.667,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "38"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

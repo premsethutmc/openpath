@@ -1,0 +1,175 @@
+{
+ "id": "openpath-sample-mathematics-grade-7",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 7,
+ "title": "OpenPath Sample Mathematics, Grade 7",
+ "hash": "130b554b",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 7",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-rational-numbers",
+     "number": 1,
+     "title": "Rational numbers",
+     "pages": "1–14",
+     "outcomes": [
+      {
+       "id": "ch1-rational-numbers.o1",
+       "text": "Operate on rational numbers",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rational-numbers",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.polynomials",
+          "score": 0.34,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "8"
+      }
+     ]
+    },
+    {
+     "id": "ch2-simple-equations",
+     "number": 2,
+     "title": "Simple equations",
+     "pages": "15–30",
+     "outcomes": [
+      {
+       "id": "ch2-simple-equations.o1",
+       "text": "Evaluate variable expressions for given values",
+       "pages": "16",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.variables",
+          "score": 0.52,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-simple-equations.o2",
+       "text": "Solve linear equations in one variable",
+       "pages": "22",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.linear-equations",
+          "score": 0.6,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-intro",
+          "score": 0.52,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.linear-systems",
+          "score": 0.36,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "20"
+      }
+     ]
+    },
+    {
+     "id": "ch3-percentages-and-proportion",
+     "number": 3,
+     "title": "Percentages and proportion",
+     "pages": "31–44",
+     "outcomes": [
+      {
+       "id": "ch3-percentages-and-proportion.o1",
+       "text": "Calculate percentages",
+       "pages": "32",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percentage",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch3-percentages-and-proportion.o2",
+       "text": "Solve direct proportions",
+       "pages": "38",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.proportion",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.inverse-proportion",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "36"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

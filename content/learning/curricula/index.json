@@ -1,0 +1,52 @@
+{
+ "releases": [
+  {
+   "id": "openpath-sample-mathematics-grade-4",
+   "version": "1.0.0",
+   "grade": 4,
+   "title": "OpenPath Sample Mathematics, Grade 4",
+   "hash": "911be86f",
+   "file": "openpath-sample-mathematics-grade-4.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-5",
+   "version": "1.0.0",
+   "grade": 5,
+   "title": "OpenPath Sample Mathematics, Grade 5",
+   "hash": "3144d336",
+   "file": "openpath-sample-mathematics-grade-5.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-7",
+   "version": "1.0.0",
+   "grade": 7,
+   "title": "OpenPath Sample Mathematics, Grade 7",
+   "hash": "130b554b",
+   "file": "openpath-sample-mathematics-grade-7.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-8",
+   "version": "1.0.0",
+   "grade": 8,
+   "title": "OpenPath Sample Mathematics, Grade 8",
+   "hash": "32c9d15d",
+   "file": "openpath-sample-mathematics-grade-8.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-10",
+   "version": "1.0.0",
+   "grade": 10,
+   "title": "OpenPath Sample Mathematics, Grade 10",
+   "hash": "1b679e3d",
+   "file": "openpath-sample-mathematics-grade-10.v1.0.0.json"
+  },
+  {
+   "id": "openpath-sample-mathematics-grade-11",
+   "version": "1.0.0",
+   "grade": 11,
+   "title": "OpenPath Sample Mathematics, Grade 11",
+   "hash": "2e0188d1",
+   "file": "openpath-sample-mathematics-grade-11.v1.0.0.json"
+  }
+ ]
+}

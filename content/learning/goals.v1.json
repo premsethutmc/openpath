@@ -1,0 +1,203 @@
+{
+ "version": "1.0.0",
+ "status": "provisional",
+ "goals": [
+  {
+   "id": "jee-advanced",
+   "name": "JEE Advanced",
+   "examTrack": "jee-advanced",
+   "status": "provisional",
+   "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "reasoning",
+     "geometry"
+    ],
+    "note": "For younger learners: number sense, fractions, patterns, reasoning and proof-like thinking within their own grade."
+   },
+   "topics": [
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.quadratics",
+      "MATH.algebra.quadratic-complex",
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.algebra.binomial",
+      "MATH.algebra.permutations"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "calculus",
+     "competencies": [
+      "MATH.calculus.limits",
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.definite-integrals",
+      "MATH.calculus.area-integrals"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "coordinate",
+     "competencies": [
+      "MATH.coordinate.straight-lines",
+      "MATH.coordinate.conics"
+     ],
+     "weight": [
+      0.1,
+      0.25
+     ]
+    },
+    {
+     "id": "vectors-3d",
+     "competencies": [
+      "MATH.vectors.algebra",
+      "MATH.coordinate.space-lines"
+     ],
+     "weight": [
+      0.05,
+      0.2
+     ]
+    },
+    {
+     "id": "probability",
+     "competencies": [
+      "MATH.probability.conditional",
+      "MATH.probability.bayes"
+     ],
+     "weight": [
+      0.05,
+      0.15
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 4,
+    "wrong": -1,
+    "note": "Varies by paper and section; a configurable default, not a claim about any year's paper."
+   }
+  },
+  {
+   "id": "jee-main",
+   "name": "JEE Main",
+   "examTrack": "jee-main",
+   "status": "provisional",
+   "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "reasoning",
+     "geometry"
+    ],
+    "note": "As for JEE Advanced."
+   },
+   "topics": [
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.quadratics",
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.algebra.binomial"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "calculus",
+     "competencies": [
+      "MATH.calculus.limits",
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.definite-integrals"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "coordinate",
+     "competencies": [
+      "MATH.coordinate.straight-lines",
+      "MATH.coordinate.conics"
+     ],
+     "weight": [
+      0.1,
+      0.25
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 4,
+    "wrong": -1,
+    "note": "NTA Information Bulletin JEE (Main) 2026: +4 / −1 / 0."
+   }
+  },
+  {
+   "id": "gre-quant",
+   "name": "GRE Quantitative",
+   "examTrack": "gre-quant",
+   "status": "provisional",
+   "note": "An overlay; weights provisional.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "statistics",
+     "geometry"
+    ],
+    "note": "Arithmetic, algebra, data analysis."
+   },
+   "topics": [
+    {
+     "id": "arithmetic",
+     "competencies": [
+      "MATH.number.percentage",
+      "MATH.number.ratio"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.linear-equations",
+      "MATH.algebra.quadratics"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "data",
+     "competencies": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.dispersion"
+     ],
+     "weight": [
+      0.15,
+      0.3
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 1,
+    "wrong": 0,
+    "note": "No negative marking."
+   }
+  }
+ ]
+}
