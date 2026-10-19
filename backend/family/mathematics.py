@@ -32,6 +32,9 @@ def lesson():
 
 
 def checked_activity(event, pupil):
+    if event.get('kind') == 'math_foundation_activity':
+        from .math_foundation import checked_foundation
+        return checked_foundation(event, pupil)
     program_id = event.get('program', 'equivalent-fractions')
     if program_id not in PROGRAM_FILES:
         raise ValidationError({'event': 'Unknown mathematics program.'})
@@ -92,7 +95,8 @@ def checked_activity(event, pupil):
             raise ValidationError({'event': 'Use a fraction with a nonzero denominator.'})
     prior = list(PupilEvent.objects.filter(pupil=pupil, subject='mathematics').values_list('body', flat=True))
     # each program keeps its own fixed sequence; activity ids are unique across all of them
-    same = [e for e in prior if e.get('program', 'equivalent-fractions') == program_id]
+    # (records of other kinds, such as the Grade 1–6 foundation journeys, are never part of a fixed program)
+    same = [e for e in prior if e.get('kind') == 'math_activity' and e.get('program', 'equivalent-fractions') == program_id]
     rule = {k: spec[k] for k in ('retentionAfter',) if k in spec} or FRACTIONS_RETENTION
     retention_stage = spec['stages'][-1]['id'] if 'retentionAfter' in spec else FRACTIONS_RETENTION['retentionStage']
     if any((e.get('id') == event['id'] for e in prior)):

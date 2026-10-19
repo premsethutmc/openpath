@@ -29,6 +29,7 @@
     "src/mathematics/canonical.test.ts",
     "src/mathematics/journey",
     "src/mathematics/chapter",
-    "src/mathematics/unit"
+    "src/mathematics/unit",
+    "src/mathematics/foundation"
   ]
 }

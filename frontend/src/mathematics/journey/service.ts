@@ -16,7 +16,7 @@ export class MathematicsRepo {
       events: MathActivity[];
     }>("GET", `/pupils/${this.learnerId}/events/?subject=mathematics`);
     this.count = result.count;
-    return result.events;
+    return result.events.filter(e => e.kind === "math_activity");
   }
   append(event: MathActivity): Promise<MathActivity[]> {
     const work = this.queue.then(async () => {
