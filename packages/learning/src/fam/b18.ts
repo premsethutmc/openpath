@@ -77,7 +77,7 @@ function rat(n: number, d: number): string {
 function ratio(x: number): [number, number] {
   for (let d = 1; d <= 100000; d++) {
     const n = Math.round(x * d);
-    if (Math.abs(n / d - x) < 1e-9 * Math.max(1, Math.abs(x))) {
+    if (Math.abs(n / d - x) < 1e-13 * Math.max(1, Math.abs(x))) {
       const g = gcd(n, d) || 1;
       return [n / g, d / g];
     }
@@ -376,25 +376,35 @@ const stripC = (v: string) => v.replace(/\s*\+\s*[cCkK]\s*$/, "");
 const RED_D: [number, number][] = [[0, 8], [0, 8], [0, 1]];
 const redKeep = (p: number[]) => inDom(p, RED_D) && p[0] + p[1] >= 2 && (p[2] === 0 || p[1] % 2 === 0);
 /** ∫₀^{π/2} sinᵐx cosⁿx dx = R or R·π (returned as [R, hasPi]), by the reduction formula. */
-function wallis(m: number, n: number): [number, boolean] {
-  let v = 1;
+type W = [number, number, boolean];
+function wallis(m: number, n: number): W {
+  let [N, D] = [1, 1];
   while (m >= 2) {
-    v *= (m - 1) / (m + n);
+    [N, D] = [N * (m - 1), D * (m + n)];
     m -= 2;
   }
   while (n >= 2) {
-    v *= (n - 1) / (m + n);
+    [N, D] = [N * (n - 1), D * (m + n)];
     n -= 2;
   }
-  if (m === 0 && n === 0) return [v / 2, true];
-  if (m === 1 && n === 1) return [v / 2, false];
-  return [v, false];
+  const g = gcd(N, D);
+  [N, D] = [N / g, D / g];
+  if (m === 0 && n === 0) return [N, 2 * D, true];
+  if (m === 1 && n === 1) return [N, 2 * D, false];
+  return [N, D, false];
 }
-const redStr = ([R, pi]: [number, boolean]) => (pi ? piStr(R) : nf(R));
-const redVal = ([m, n, r]: number[]): [number, boolean] => {
-  const [R, pi] = wallis(m, n);
-  return [r ? 2 * R : R, pi];
+const scaleW = ([N, D, pi]: W, a: number, b: number): W => {
+  const [n, d] = [N * a, D * b];
+  const g = gcd(n, d);
+  return [n / g, d / g, pi];
 };
+const piQ = (N: number, D: number) => {
+  const g = gcd(N, D);
+  const [n, d] = [N / g, D / g];
+  return `${n === 1 ? "" : n}π${d === 1 ? "" : `/${d}`}`;
+};
+const redStr = ([N, D, pi]: W) => (pi ? piQ(N, D) : rat(N, D));
+const redVal = ([m, n, r]: number[]): W => scaleW(wallis(m, n), r ? 2 : 1, 1);
 const redIntegrand = ([m, n]: number[]) => {
   const s = m === 0 ? "" : m === 1 ? "sin x" : `sin${sup(m)}x`;
   const c = n === 0 ? "" : n === 1 ? "cos x" : `cos${sup(n)}x`;
@@ -1297,11 +1307,16 @@ export const B18: Def[] = [
     bugs: ([a, m, n, b, c, p, w]) => {
       const other = w ? "x" : "y";
       const [k1, e1] = w ? [b, pw("x", p)] : [c, pw("y", p)];
-      const right = w ? sum([[a * n, pw("x", m) + pw("y", n - 1)], [c * p, pw("y", p - 1)]]) : sum([[a * m, pw("x", m - 1) + pw("y", n)], [b * p, pw("x", p - 1)]]);
+      const right: [number, string][] = w ? [[a * n, pw("x", m) + pw("y", n - 1)], [c * p, pw("y", p - 1)]] : [[a * m, pw("x", m - 1) + pw("y", n)], [b * p, pw("x", p - 1)]];
+      const merged = (ts: [number, string][]) => {
+        const out = new Map<string, number>();
+        for (const [k, e] of ts) out.set(e, (out.get(e) ?? 0) + k);
+        return sum([...out].map(([e, k]) => [k, e] as [number, string]));
+      };
       return [
-        bug("other-differentiated", "conceptual", PD, `The term ${sum([[k1, e1]])} was differentiated too; for ∂f/∂${w ? "y" : "x"}, ${other} is held constant, so that term gives 0.`, `${right} ${k1 * p < 0 ? "−" : "+"} ${Math.abs(k1 * p)}${pw(other, p - 1)}`),
-        bug("constant-kept", "conceptual", PD, `The term ${sum([[k1, e1]])} was kept as it is; a constant term has derivative 0.`, `${right} ${k1 < 0 ? "−" : "+"} ${Math.abs(k1)}${e1}`),
-        bug("factor-dropped", "procedural", PD, `The factor ${w ? pw("x", m) : pw("y", n)} in the first term was dropped; a constant factor stays in the derivative.`, w ? sum([[a * n, pw("y", n - 1)], [c * p, pw("y", p - 1)]]) : sum([[a * m, pw("x", m - 1)], [b * p, pw("x", p - 1)]])),
+        bug("other-differentiated", "conceptual", PD, `The term ${sum([[k1, e1]])} was differentiated too; for ∂f/∂${w ? "y" : "x"}, ${other} is held constant, so that term gives 0.`, merged([...right, [k1 * p, pw(other, p - 1)]])),
+        bug("constant-kept", "conceptual", PD, `The term ${sum([[k1, e1]])} was kept as it is; a constant term has derivative 0.`, merged([...right, [k1, e1]])),
+        bug("factor-dropped", "procedural", PD, `The factor ${w ? pw("x", m) : pw("y", n)} in the first term was dropped; a constant factor stays in the derivative.`, merged(w ? [[a * n, pw("y", n - 1)], [c * p, pw("y", p - 1)]] : [[a * m, pw("x", m - 1)], [b * p, pw("x", p - 1)]])),
       ];
     },
     variants: () => [],
@@ -1463,17 +1478,17 @@ export const B18: Def[] = [
     },
     bugs: (p) => {
       const [m, n, r] = p;
-      const [R, pi] = redVal(p);
+      const [N, D, pi] = redVal(p);
       return [
         pi
-          ? bug("pi-forgotten", "recall", RED, "When both powers are even, the reduction ends at ∫ 1 dx over [0, π/2], which is π/2; that factor was left out.", nf(R))
-          : bug("pi-added", "recall", RED, "A factor π/2 was put in; it appears only when both powers are even, and here the reduction ends at ∫ sin x dx or ∫ cos x dx, which is 1.", piStr(R / 2)),
+          ? bug("pi-forgotten", "recall", RED, "When both powers are even, the reduction ends at ∫ 1 dx over [0, π/2], which is π/2; that factor was left out.", rat(2 * N, D))
+          : bug("pi-added", "recall", RED, "A factor π/2 was put in; it appears only when both powers are even, and here the reduction ends at ∫ sin x dx or ∫ cos x dx, which is 1.", piQ(N, 2 * D)),
         ...(r ? [bug("no-doubling", "procedural", DEF, "The value over [0, π/2] was given; over [0, π] the integral is twice that (the graph is symmetric about x = π/2).", redStr(wallis(m, n)))] : []),
       ];
     },
     distractors: (p) => {
-      const [R, pi] = redVal(p);
-      return [redStr([2 * R, pi]), redStr([R / 2, pi])];
+      const w = redVal(p);
+      return [redStr(scaleW(w, 2, 1)), redStr(scaleW(w, 1, 2))];
     },
     variants: () => [],
     explain: (s) => (s.id === "reduce" ? `Lower the powers two at a time, Iₘ,ₙ = (m − 1)/(m + n) Iₘ₋₂,ₙ (and the same for n): over [0, π/2] the value is ${s.value}` : `Over [0, π] it is twice that: ${s.value}`),

@@ -809,7 +809,7 @@ export const B12: Def[] = [
         B("added-to-eliminate", "procedural", SYS, "After making the x coefficients equal, the equations were added; with the same sign they must be subtracted to remove x.", yy !== null && yy !== y ? tup((c1 - b1 * yy) / a1, yy) : null),
       ].filter((b) => b.predict !== null);
     },
-    distractors: ([, , , , x, y]) => [tup(-x, y), tup(x, -y), tup(x + 1, y - 1)],
+    distractors: ([, , , , x, y]) => [tup(x + 1, y), tup(x, y + 1), tup(x - 1, y + 2), tup(-x, y)],
     variants: () => [],
     explain: (s) => (s.id === "scale" ? `Make the x coefficients equal: ${s.value}` : s.id === "eliminate" ? `Subtract: ${N(Number(s.inputs[0]))}y = ${N(Number(s.inputs[1]))}, so y = ${N(Number(s.value))}` : `Put y = ${N(Number(s.inputs[3]))} into the first equation: x = ${N(Number(s.value))}`),
     domain: [[1, 5], [-4, 4], [1, 5], [-4, 4], [-5, 5], [-5, 5]],
@@ -1517,7 +1517,6 @@ export const B12: Def[] = [
     domain: [[-2, 2], [-2, 2], [-4, 4], [-4, 4], [-4, 4], [-4, 4]],
     cap: 400,
     difficulty: (p) => (p[2] * p[3] === 0 && p[4] * p[5] === 0 ? 1 : triKind(p) === 3 ? 2 : 3),
-    word: ([ax, ay, u1, v1, u2, v2]) => `A surveyor marks three posts on a grid plan of a field at ${tup(ax, ay)}, ${tup(ax + u1, ay + v1)} and ${tup(ax + u2, ay + v2)}. A rope is tied around the three posts to make a triangle. What kind of triangle is it?`,
     teach: {
       idea: "Squared side lengths decide the shape: two equal sides make it isosceles, and if two squared sides add up to the third it has a right angle (converse of the Baudhayana–Pythagoras theorem).",
       method: "Find AB², BC² and CA² with the distance formula (no need for square roots). Compare them for equal pairs, and test whether the two smaller add up to the largest.",
