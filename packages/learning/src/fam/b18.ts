@@ -1926,7 +1926,7 @@ export const B18: Def[] = [
     distractors: (p) => {
       const x = constOf(carAns(p));
       const pi = p[0] === 2;
-      return pi ? [piStr((2 * x) / Math.PI), piStr(x / Math.PI / 2)] : [carAnsScaled(p, 2), carAnsScaled(p, 1 / 2)];
+      return pi ? [piStr((2 * x) / Math.PI), piStr(x / Math.PI / 2)] : [carAnsScaled(p, 2), carAnsScaled(p, 1 / 2), carAnsScaled(p, 3 / 4)];
     },
     variants: () => [],
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Integrate and substitute the limits: ${s.value}`),

@@ -256,8 +256,10 @@ export const B08: Def[] = [
     cap: 400,
     difficulty: ([, b, c, d]) => ([b, c, d].every((k) => k > 0) ? 1 : [b, c, d].filter((k) => k < 0).length === 1 ? 2 : 3),
     word: ([a, b, c, d]) => {
-      const act = (k: number, item: string) => (k > 0 ? `buys ${k} ${item}${k === 1 ? "" : "s"}` : `returns ${-k} ${item}${k === -1 ? "" : "s"}`);
-      return `A pen costs ₹x and a notebook costs ₹y. In one week ${name(a + b)} ${act(a, "pen")}, ${act(b, "notebook")}, ${act(c, "pen")} and ${act(d, "notebook")} (money for a returned item is given back). Write a simplified expression for the money ${name(a + b)} pays in all, in rupees.`;
+      // gains and losses of points: a negative coefficient (a wrong answer) and a negative total (points lost) both make sense
+      const act = (k: number, subj: string) => (k > 0 ? `gets ${k} ${subj} question${k === 1 ? "" : "s"} right` : `gets ${-k} ${subj} question${k === -1 ? "" : "s"} wrong`);
+      const who = name(a + b);
+      return `In a quiz, a science question answered right gains x points and one answered wrong loses x points; a maths question gains or loses y points in the same way. In the first round ${who} ${act(a, "science")} and ${act(b, "maths")}; in the second round ${who} ${act(c, "science")} and ${act(d, "maths")}. Write a simplified expression for the total points ${who} gains (a negative total means points lost).`;
     },
     teach: {
       idea: "Like terms have the same letter part: 3x and −5x are like terms, 3x and 2y are not. Like terms can be added because they count the same thing.",
@@ -301,7 +303,12 @@ export const B08: Def[] = [
     domain: [[2, 12], [-12, 12], [1, 12], [-12, 12]],
     cap: 400,
     difficulty: ([, b, , d]) => (b > 0 && d > 0 && b > d ? 1 : d > 0 ? 2 : 3),
-    word: ([a, b, c, d]) => `The perimeter of a triangle is (${poly([[a, "x"], [b, ""]])}) cm. Two of its sides together measure (${poly([[c, "x"], [d, ""]])}) cm. Write a simplified expression for the third side, in cm.`,
+    // the triangle story only when the third side, (a − c)x + (b − d), is positive for large x (a > c); otherwise a
+    // profit-and-loss story, where a negative difference makes sense
+    word: ([a, b, c, d]) =>
+      a > c
+        ? `The perimeter of a triangle is (${poly([[a, "x"], [b, ""]])}) cm. Two of its sides together measure (${poly([[c, "x"], [d, ""]])}) cm. Write a simplified expression for the third side, in cm.`
+        : `A stall's profit on Saturday was ₹(${poly([[a, "x"], [b, ""]])}) and on Sunday ₹(${poly([[c, "x"], [d, ""]])}) (a negative profit is a loss). Write a simplified expression for Saturday's profit minus Sunday's profit, in rupees.`,
     teach: {
       idea: "Taking away a bracket takes away every term inside it, so each sign in the bracket changes: −(3x − 4) = −3x + 4.",
       method: "Remove the brackets, changing every sign in the second one. Then collect the x terms and the number terms.",
@@ -464,7 +471,7 @@ export const B08: Def[] = [
     figure: ([d, c, ctx]) => ({ type: "table", head: ["Figure", "1", "2", "3", "4", "n"], rows: [[ctx ? "Tiles" : "Matchsticks", d + c, 2 * d + c, 3 * d + c, 4 * d + c, "?"]] }),
     domain: [[2, 9], [-1, 9], [0, 1]],
     difficulty: ([d, c]) => (c === 0 || c === 1 ? 1 : c > 0 ? 2 : 3),
-    word: ([d, c]) => `In a school hall, tables are joined in a row. With 1 table, ${d + c} chairs fit around it; with 2 tables, ${2 * d + c}; with 3 tables, ${3 * d + c}. The number keeps growing the same way. Write an expression for the number of chairs around n tables.`,
+    word: ([d, c]) => `In a school hall, tables are joined in a row. With 1 table, ${d + c} chair${d + c === 1 ? "" : "s"} ${d + c === 1 ? "fits" : "fit"} around it; with 2 tables, ${2 * d + c}; with 3 tables, ${3 * d + c}. The number keeps growing the same way. Write an expression for the number of chairs around n tables.`,
     teach: {
       idea: "If a pattern grows by the same amount d each time, Figure n is d × n plus a fixed part. The fixed part is what makes Figure 1 come out right.",
       method: "Find how many are added each time: that number multiplies n. Then compare d × 1 with Figure 1 to find what to add or take away. Check with Figure 2.",
@@ -740,7 +747,7 @@ export const B08: Def[] = [
     // [p, q]: p days alone, q days alone → pq/(p + q) together
     parse: none,
     reject: ([p, q]) => (p < 2 || q > 20 || p >= q ? "Two different times from 2 to 20 days, the first shorter." : null),
-    prompt: ([p, q]) => `${name(p)} can finish a job alone in ${p} days, and ${name(q + 3)} can finish it alone in ${q} days. Working together at the same rates, how many days will they take? (A fraction is fine.)`,
+    prompt: ([p, q]) => `${name(p)} can finish a job alone in ${p} days, and ${name(q + 3) === name(p) ? name(q + 4) : name(q + 3)} can finish it alone in ${q} days. Working together at the same rates, how many days will they take? (A fraction is fine.)`,
     solve: ([p, q]) => ({
       steps: [
         { id: "rates", op: "add", competency: FRADD, inputs: [`1/${p}`, `1/${q}`], value: fmt((p + q) / (p * q)) },

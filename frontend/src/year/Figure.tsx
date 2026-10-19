@@ -196,6 +196,30 @@ export function Figure({ v }: { v: V }) {
       );
     }
     case "shape": {
+      // named quadrilaterals and an L-shape are drawn as themselves (not as a regular polygon); labels go side by side
+      const KIND: Record<string, number[][]> = {
+        rectangle: [[30, 50], [190, 50], [190, 150], [30, 150]],
+        square: [[60, 40], [170, 40], [170, 150], [60, 150]],
+        parallelogram: [[60, 50], [200, 50], [160, 150], [20, 150]],
+        rhombus: [[110, 20], [190, 100], [110, 180], [30, 100]],
+        trapezium: [[70, 50], [150, 50], [200, 150], [20, 150]],
+        kite: [[110, 20], [170, 80], [110, 180], [50, 80]],
+        lshape: [[30, 30], [100, 30], [100, 110], [190, 110], [190, 170], [30, 170]],
+      };
+      const kp = KIND[str(v.kind)];
+      if (kp) {
+        const lengths = arr<string | number>(v.lengths);
+        return box(220, 200, [
+          <polygon key="p" points={kp.map((q) => q.join(",")).join(" ")} fill={SOFT} stroke={INK} strokeWidth={2} />,
+          ...(v.diagonals ? [<line key="d1" x1={kp[0][0]} y1={kp[0][1]} x2={kp[2][0]} y2={kp[2][1]} stroke={ACC} strokeDasharray="5 4" />, <line key="d2" x1={kp[1][0]} y1={kp[1][1]} x2={kp[3][0]} y2={kp[3][1]} stroke={ACC} strokeDasharray="5 4" />] : []),
+          ...(v.height !== undefined && kp.length === 4 ? [<line key="h" x1={kp[0][0]} y1={kp[0][1]} x2={kp[0][0]} y2={kp[3][1]} stroke={ACC} strokeDasharray="4 3" />, <text key="ht" x={kp[0][0] + 6} y={(kp[0][1] + kp[3][1]) / 2} fontSize={12} fill={ACC}>{str(v.height)}</text>] : []),
+          ...lengths.map((l, i) => {
+            const [a, b] = [kp[i % kp.length], kp[(i + 1) % kp.length]];
+            const [mx, my] = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+            return <text key={`l${i}`} x={mx + (mx - 110) * 0.15} y={my + (my - 100) * 0.15 + 4} fontSize={13} textAnchor="middle" fill={INK}>{String(l)}</text>;
+          }),
+        ]);
+      }
       const n = Math.max(3, num(v.sides, 4));
       const lengths = arr<string | number>(v.lengths);
       const pts = Array.from({ length: n }, (_, i) => [110 + 80 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 100 + 80 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]);
@@ -245,6 +269,8 @@ export function Figure({ v }: { v: V }) {
       return box(260, 190, [
         <polygon key="t" points={P.map((p) => p.join(",")).join(" ")} fill={SOFT} stroke={INK} strokeWidth={2} />,
         ...(v.right ? [<path key="sq" d="M 30 145 L 45 145 L 45 160" fill="none" stroke={INK} />] : []),
+        // a height (altitude) from the top vertex to the base (side 0)
+        ...(v.height !== undefined && !v.right ? [<line key="h" x1={P[2][0]} y1={P[2][1]} x2={P[2][0]} y2={160} stroke={ACC} strokeDasharray="4 3" />, <text key="ht" x={P[2][0] + 6} y={100} fontSize={12} fill={ACC}>{str(v.height)}</text>] : []),
         ...sides.map((s, i) => {
           const [x, y] = mid(P[i], P[(i + 1) % 3]);
           return <text key={`s${i}`} x={x + (i === 0 ? 0 : i === 1 ? 14 : -14)} y={y + (i === 0 ? 20 : 0)} fontSize={13} textAnchor="middle" fill={INK}>{s}</text>;

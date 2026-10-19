@@ -15,6 +15,7 @@ const LIN = "MATH.algebra.linear-equations";
 const DIFF = "MATH.calculus.derivative-rules";
 const none = () => null;
 const ITEMS = ["apples", "stars", "balls", "flowers", "birds", "leaves"];
+const ITEM1 = ["apple", "star", "ball", "flower", "bird", "leaf"];
 const NAMES = ["Anu", "Ravi", "Meena", "Arjun", "Kavya", "Sam", "Divya", "Imran"];
 const name = (k: number) => NAMES[((k % NAMES.length) + NAMES.length) % NAMES.length];
 const sqfree = (n: number): [number, number] => {
@@ -53,14 +54,15 @@ export const CORE: Def[] = [
     bugs: ([n]) => [
       { id: "skip-one", kind: "procedural", competency: COUNT, says: "One object was missed. Touch each one as you say its number.", predict: n - 1 },
       { id: "count-twice", kind: "procedural", competency: COUNT, says: "One object was counted twice. Move each one (or tick it) once you have counted it.", predict: n + 1 },
-      ...(n > 10 ? [{ id: "teen-reversal", kind: "conceptual", competency: PV, says: `The number was said the wrong way round: ${n} is 1 ten and ${n - 10} ones.`, predict: n - 10 === 1 || n === 11 ? null : (n % 10) * 10 + 1 } as Bug] : []),
+      // a teen number written in the order it is said ("four-teen" as 41); only 12–19 can be reversed into a different number
+      ...(n >= 12 && n <= 19 ? [{ id: "teen-reversal", kind: "conceptual", competency: PV, says: `The number was written the wrong way round, in the order it is said. ${n} is 1 ten and ${n - 10} ones, so the 1 comes first.`, predict: (n % 10) * 10 + 1 } as Bug] : []),
     ],
     variants: () => [],
-    explain: (s) => `Touch and count each one: 1, 2, 3 … ${s.value}. The last number said is how many.`,
+    explain: (s) => (Number(s.value) <= 3 ? `Touch and count each one: ${[...Array(Number(s.value))].map((_, i) => i + 1).join(", ")}. The last number said is how many.` : `Touch and count each one: 1, 2, 3 … ${s.value}. The last number said is how many.`),
     figure: ([n]) => ({ type: "dots", count: n, rows: n > 10 ? 2 : 1 }),
     domain: [[1, 20], [0, 5]],
     difficulty: ([n]) => (n <= 5 ? 1 : n <= 10 ? 2 : 3),
-    word: ([n, t]) => `${name(n + t)} put ${n} ${ITEMS[t]} in a row, as in the picture. How many ${ITEMS[t]} are there?`,
+    word: ([n, t]) => `${name(n + t)} put ${n} ${n === 1 ? ITEM1[t] : ITEMS[t]} in a row, as in the picture. How many ${ITEMS[t]} are there?`,
     teach: {
       idea: "Each object gets exactly one number. The last number you say tells how many there are.",
       method: "Touch each object once as you count, starting from 1. Stop when every object has a number.",
@@ -119,7 +121,7 @@ export const CORE: Def[] = [
     cap: 400,
     difficulty: ([a, b]) => ((a % 10) + (b % 10) === 10 ? 1 : a + b < 70 ? 2 : 3),
     figure: ([a, b]) => ({ type: "blocks", hundreds: 0, tens: Math.floor(a / 10) + Math.floor(b / 10), ones: (a % 10) + (b % 10), note: `${a} and ${b} together` }),
-    word: ([a, b]) => `${name(a)} has ${a} marbles. ${name(b + 1)} gives ${name(a)} ${b} more. How many marbles does ${name(a)} have now?`,
+    word: ([a, b]) => `${name(a)} has ${a} marbles. ${name(a + 1 + (b % (NAMES.length - 1)))} gives ${name(a)} ${b} more. How many marbles does ${name(a)} have now?`,
     teach: {
       idea: "Ten ones make one ten. When the ones add up to 10 or more, swap ten of them for a ten.",
       method: "Add the ones first. If there are 10 or more, carry 1 ten to the tens column. Then add the tens, including the carried ten.",

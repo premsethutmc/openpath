@@ -22,6 +22,7 @@ Read `../family-kit.ts` (the contract) and two existing families in `../families
 | `figure(p)` | a picture the question needs (Grades 1–5 especially: dots to count, a clock, coins, a bar chart). See "Pictures". |
 | `word(p)` | the same mathematics in an everyday situation (the transfer question). Strongly recommended. Same answer. |
 | `mc` | `true` if a multiple-choice form makes sense; options come from your explanations' predictions, topped up by `distractors(p)` |
+| `decimals` | `true` for money, measures and statistics: answers and options are shown as decimals (54.5, not 109/2) |
 | `cap` | at most this many problems released (use 300–600 for large domains). With a cap, a domain of more than 300 000 combinations (e.g. five-digit numbers) is SAMPLED deterministically instead of listed, so large numbers are fine |
 | `variants(p)` | other parameter choices of the same family (follow-ups); may return `[]` |
 | `parse(t)` | read a typed problem if easy, else `() => null` |
@@ -61,9 +62,9 @@ or use a `tuple` (hours, minutes) — say which in the prompt.
 `{ type: "blocks", hundreds, tens, ones }` base-ten blocks · `{ type: "numberline", from, to, step?, marks?: number[], jumps?: [a, b][], unknown?: number }` ·
 `{ type: "clock", h, m }` · `{ type: "coins", items: number[] }` (rupee values: 1, 2, 5, 10, 20, 50, 100, 200, 500) ·
 `{ type: "bars", title?, labels, values, scale? }` bar chart · `{ type: "pictograph", labels, counts, key }` (one picture = key items) ·
-`{ type: "table", head, rows }` · `{ type: "shape", sides, lengths?: (number|string)[], name? }` ·
+`{ type: "table", head, rows }` · `{ type: "shape", sides, lengths?: (number|string)[], name? }` (a regular polygon) or `{ type: "shape", kind: "rectangle" | "square" | "parallelogram" | "rhombus" | "trapezium" | "kite" | "lshape", lengths?: [...side by side, starting top-left, clockwise], diagonals?: true, height?: "4 cm" }` ·
 `{ type: "angle", deg }` · `{ type: "circle", radius?, diameter?, sector? }` (labels as strings; sector in degrees) · `{ type: "grid", rows, cols, shaded? }` (shaded: a count, filled row by row) ·
-`{ type: "triangle", sides?: [string, string, string], angles?: [string, string, string], right? }` ·
+`{ type: "triangle", sides?: [base, right side, left side], angles?: [bottom-left, bottom-right, top], right?, height?: "6 cm" }` (side 0 is the base, drawn at the bottom; with right: true, side 0 and side 2 are the legs and side 1 the hypotenuse) ·
 `{ type: "plane", points: [x, y, label?][], segments?: [[x, y], [x, y]][], range? }` · `{ type: "pie", labels, values }` ·
 `{ type: "strips", top, bottom, shaded }` fraction strips · `{ type: "array", rows, cols, split? }` ·
 `{ type: "solid", name: "cube" | "cuboid" | "cylinder" | "cone" | "sphere" | "pyramid", dims?: string[] }` ·

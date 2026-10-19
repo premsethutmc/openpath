@@ -610,7 +610,8 @@ export const B17: Def[] = [
     },
     distractors: ([a, b, c, d, e, f, g, h]) => {
       const BA = [0, 1].map((i) => [0, 1].map((j) => [[e, f], [g, h]][i][0] * [[a, b], [c, d]][0][j] + [[e, f], [g, h]][i][1] * [[a, b], [c, d]][1][j]));
-      return [mat(BA)];
+      const R = [0, 1].map((i) => [0, 1].map((j) => [[e, g], [f, h]][i][0] * [[a, c], [b, d]][0][j] + [[e, g], [f, h]][i][1] * [[a, c], [b, d]][1][j]));
+      return [mat(BA), mat(R.map((r) => r.map((x) => -x))), mat([[R[0][0], R[1][0]], [R[0][1], R[1][1]]]), mat(R.map((r) => r.map((x) => x + 1)))];
     },
     variants: () => [],
     explain: (s) => (s.id === "transposes" ? `A′ = ${s.inputs[0]}, B′ = ${s.inputs[1]}` : `(AB)′ = B′A′ = ${s.value}`),
@@ -1344,7 +1345,7 @@ export const B17: Def[] = [
       }
       return out;
     },
-    distractors: ([, al, be]) => [`(${N(al)}, ∞)`, `(−∞, ${N(be)})`, `(${N(be)}, ∞)`, `(−∞, ${N(al)})`],
+    distractors: ([, al, be]) => [`(${N(al)}, ∞)`, `(−∞, ${N(be)})`, `(${N(be)}, ∞)`, `(−∞, ${N(al)})`, `(${N(al - 1)}, ∞)`, `(−∞, ${N(be + 1)})`],
     variants: () => [],
     explain: (s) => (s.id === "second" ? `y″ = ${s.value}` : `${s.inputs[0]} on ${s.value}`),
     domain: [[0, 1], [-3, 4], [-3, 4], [0, 1], [-5, 5]],
@@ -1546,6 +1547,7 @@ export const B17: Def[] = [
       }
       return out;
     },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqsep")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "separate" ? `Separate the variables: ${s.value}` : s.id === "integrate" ? `Integrate both sides: ${s.value}` : `Use y = ${s.inputs[0]} at the starting point to find the constant: y = ${s.value}`),
     word: ([kind, p, q, y0]) => (kind === 0 ? `A quantity y changes so that its rate of change dy/dx equals (${pp([[p, 1], [q, 0]])}) times y, and y = ${y0} when x = 0. Find y as an expression in x.` : `For x > 0, a quantity y changes so that dy/dx = ${N(p)}y/x, and y = ${y0} when x = 1. Find y as an expression in x.`),
@@ -1622,6 +1624,7 @@ export const B17: Def[] = [
       out.push({ id: "q-not-multiplied", kind: "procedural", competency: DE, says: `The right side was integrated without multiplying it by the integrating factor x^${k}: y·(IF) = ∫ Q·(IF) dx.`, predict: pa([[m / (n + 1), n + 1 - k], [y1 - m / (n + 1), -k]]) });
       return out;
     },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqlinde")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "if" ? `Integrating factor: e^(∫${s.inputs[0]}/x dx) = ${s.value}` : s.id === "integrate" ? `Multiply through and integrate: ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[1, 3], [1, 6], [0, 3], [-3, 4]],
@@ -1663,6 +1666,7 @@ export const B17: Def[] = [
       } else out.push({ id: "two-lost", kind: "procedural", competency: INDEF, says: "∫ v dv = v²/2; the factor 2 was lost when solving for v².", predict: `x√(${k === 1 ? "" : k}ln(x) + ${c * c})` });
       return out;
     },
+    distractors: (p) => { const a = String(B17.find((d) => d.id === "aqhom")!.solve(p).answer); return [`−(${a})`, `2(${a})`, `${a} + 1`]; },
     variants: () => [],
     explain: (s) => (s.id === "substitute" ? `Put y = vx, dy/dx = v + x dv/dx: ${s.value}` : s.id === "separate" ? `Separate and integrate ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[0, 2], [1, 4], [1, 4], [-3, 6]],

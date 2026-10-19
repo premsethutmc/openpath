@@ -1079,7 +1079,7 @@ export const B16: Def[] = [
       const res = ivOp(p, op);
       return !res.length || res.some((iv) => req(iv.lo, iv.hi)) ? "The result is empty or a single point." : null;
     },
-    prompt: (p) => `A = ${ivS(ivA(p))} and B = ${ivS(ivB(p))}. Write ${["A ∩ B", "A ∪ B", "A − B"][p[6]]} in interval notation (use ∪ to join two pieces).`,
+    prompt: (p) => `A = ${ivS(ivA(p))} and B = ${ivS(ivB(p))}. Write ${["A ∩ B", "A ∪ B", "A − B"][p[6]]} in interval notation (if it has two pieces, join them with ∪).`,
     solve: (p) => {
       const res = ivsS(ivOp(p, p[6]));
       return { steps: [st("line", "draw", IVL, [ivS(ivA(p)), ivS(ivB(p))], ["A ∩ B", "A ∪ B", "A − B"][p[6]]), st("ends", "read", IVL, [res], res)], answer: res };
@@ -1306,9 +1306,9 @@ export const B16: Def[] = [
           ]
         : [
             B("reciprocal", "conceptual", INV, "f⁻¹ was taken as 1/f(x); the inverse UNDOES f (f(f⁻¹(x)) = x), it is not the reciprocal.", fracS(c, d, a, b, "x")),
-            B("sign-slip", "procedural", LIN, "A sign was lost when the x terms were collected on one side; check by putting your answer into f.", `(${polyS([d, -b])})/(${polyS([c, -a])})`),
+            B("sign-slip", "procedural", LIN, "A sign was lost when the x terms were collected on one side; check by putting your answer into f.", `${wrapTop(polyS([d, -b]))}/(${polyS([c, -a])})`),
           ],
-    distractors: ([a, b, c, d]) => (c === 0 ? [polyS([a, -b])] : [fracS(a, b, c, d), `(${polyS([d, b])})/(${polyS([c, a])})`]),
+    distractors: ([a, b, c, d]) => (c === 0 ? [polyS([a, -b])] : [fracS(a, b, c, d), `${wrapTop(polyS([d, b]))}/(${polyS([c, a])})`]),
     variants: () => [],
     explain: (s) => (s.id === "swap" ? `Write ${s.value}` : s.id === "collect" ? `Collect the x terms: ${s.value}` : `Solve and rename y as x: f⁻¹(x) = ${s.value}`),
     domain: [[-5, 5], [-6, 6], [0, 3], [-6, 6]],
@@ -2457,7 +2457,11 @@ function linInv(a: number, b: number) {
 }
 function invS(a: number, b: number, c: number, d: number) {
   if (c === 0) return linInv(a, b);
-  return `(${polyS([-d, b])})/(${polyS([c, -a])})`;
+  return `${wrapTop(polyS([-d, b]))}/(${polyS([c, -a])})`;
+}
+/** A numerator: in brackets only when it has two terms. */
+function wrapTop(t: string) {
+  return / [+−] /.test(t) ? `(${t})` : t;
 }
 function costP(p: number[]) {
   return p.slice(6).map((i) => [PRICES[i]]);

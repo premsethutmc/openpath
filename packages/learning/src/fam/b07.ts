@@ -65,6 +65,18 @@ const digitwise = (a: number, b: number, f: (x: number, y: number) => number) =>
   }
   return r;
 };
+/** Column addition without carrying, the leftmost column written in full (5.6 + 5.51 → 10.01, as a learner writes it). */
+const noCarry = (a: number, b: number) => {
+  let r = 0;
+  let p = 1;
+  while (a >= 10 || b >= 10) {
+    r += ((a % 10) + (b % 10)) % 10 * p;
+    a = Math.floor(a / 10);
+    b = Math.floor(b / 10);
+    p *= 10;
+  }
+  return r + (a + b) * p;
+};
 const isPrime = (n: number) => {
   if (n < 2) return false;
   for (let d = 2; d * d <= n; d++) if (n % d === 0) return false;
@@ -145,7 +157,8 @@ export const B07: Def[] = [
     domain: [[12, 90], [2, 6], [0, 1]],
     cap: 400,
     difficulty: ([s, t]) => (s % 10 === 0 && t <= 3 ? 1 : s * t <= 250 ? 2 : 3),
-    figure: ([s, t]) => ({ type: "numberline", from: 0, to: s * t, step: s, jumps: Array.from({ length: t }, (_, i) => [i * s, (i + 1) * s]), unknown: s }),
+    // only the start and the whole distance: ticks or jumps at each hour would show the answer
+    figure: ([s, t]) => ({ type: "numberline", from: 0, to: s * t, step: s * t }),
     word: ([s, t, u]) => (u === 0 ? `${name(s)}'s family drives ${s * t} km from Chennai to a temple town in ${t} hours, at a steady speed. How many km do they drive in each hour?` : `${name(s + t)} cycles ${s * t} metres around the school ground in ${t} minutes, at a steady speed. How many metres does ${name(s + t)} cycle each minute?`),
     teach: {
       idea: "Speed tells how far something goes in ONE hour (or one minute). If the speed is steady, every hour covers the same part of the journey.",
@@ -250,7 +263,7 @@ export const B07: Def[] = [
               { id: "bring-down", kind: "procedural", competency: DEC, says: `The empty hundredths place in ${dec(x, 1)} was skipped and the ${y % 10} was brought down. Write ${dec(x, 1)} as ${dec(X, 2, true)}: the empty place is a 0, and you take ${y % 10} away from it by exchanging.`, u: X - y + 2 * (y % 10) },
               { id: "smaller-from-larger", kind: "procedural", competency: DEC, says: "In each column the smaller digit was taken from the larger one. When the top digit is smaller, exchange 1 from the next place first.", u: digitwise(X, y, (a, b) => Math.abs(a - b)) },
             ]
-          : [{ id: "no-carry", kind: "procedural", competency: ADDR, says: "A column added up to 10 or more, but the 1 was not carried to the next place on the left.", u: digitwise(X, y, (a, b) => (a + b) % 10) }]),
+          : [{ id: "no-carry", kind: "procedural", competency: ADDR, says: "A column added up to 10 or more, but the 1 was not carried to the next place on the left.", u: noCarry(X, y) }]),
       ]);
     },
     distractors: ([x, y, op]) => {
@@ -521,7 +534,7 @@ export const B07: Def[] = [
       return [
         { id: "first-only", kind: "procedural", competency: FM, says: `Only the first meeting point was given. After ${L} they meet again every ${L}: keep going up to ${N}.`, predict: [L] },
         { id: "one-animal", kind: "conceptual", competency: FM, says: `These are all the frog's landing places. A common multiple must be a landing place for the rabbit too.`, predict: ma },
-        { id: "product", kind: "conceptual", competency: HL, says: `Only multiples of ${a} × ${b} were used. ${a} and ${b} share a factor, so they meet sooner, at ${L}.`, predict: gcd(a, b) > 1 ? prod : null },
+        ...(gcd(a, b) > 1 && prod.length ? [{ id: "product", kind: "conceptual", competency: HL, says: `Only multiples of ${a} × ${b} were used. ${a} and ${b} share a factor, so they meet sooner, at ${L}.`, predict: prod } as Bug] : []),
       ];
     },
     variants: () => [],
@@ -575,19 +588,24 @@ export const B07: Def[] = [
     },
     bugs: ([a, b]) => {
       const g = gcd(a, b);
+      // an explanation is offered only where its premise is true for these numbers
       return [
-        { id: "product", kind: "conceptual", competency: HL, says: `${a} × ${b} is a common multiple, but ${a} and ${b} share the factor ${g}, so a smaller one comes first.`, predict: g > 1 ? a * b : null },
+        ...(g > 1 ? [{ id: "product", kind: "conceptual", competency: HL, says: `${a} × ${b} is a common multiple, but ${a} and ${b} share the factor ${g}, so a smaller one comes first.`, predict: a * b } as Bug] : []),
         { id: "hcf-for-lcm", kind: "conceptual", competency: HL, says: "The highest common factor was found. The LCM is the smallest number that BOTH divide into: it is never smaller than the larger number.", predict: g },
-        { id: "larger-number", kind: "procedural", competency: HL, says: `${b} was given, but ${b} is not in the ${a} times table. Keep going along the ${b} times table.`, predict: b % a ? b : null },
-        { id: "common-not-lowest", kind: "procedural", competency: HL, says: "A common multiple was found, but not the lowest one. Check the smaller multiples first.", predict: g === 1 ? null : 2 * lcm(a, b) },
+        ...(b % a ? [{ id: "larger-number", kind: "procedural", competency: HL, says: `${b} was given, but ${b} is not in the ${a} times table. Keep going along the ${b} times table.`, predict: b } as Bug] : []),
+        { id: "common-not-lowest", kind: "procedural", competency: HL, says: "A common multiple was found, but not the lowest one. Check the smaller multiples first.", predict: 2 * lcm(a, b) },
       ];
     },
     variants: () => [],
-    explain: (st) => (st.id === "hcf" ? `${st.inputs[0]} and ${st.inputs[1]} share the factor ${st.value}` : `LCM = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} (check: both ${st.inputs[1]} and the other number divide it)`),
+    explain: (st) => (st.id === "hcf" ? (st.value === 1 ? `${st.inputs[0]} and ${st.inputs[1]} have no common factor other than 1` : `The highest common factor of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}`) : `LCM = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} (check: both ${st.inputs[1]} and the other number divide it)`),
     domain: [[2, 23], [3, 24]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b]) => (b <= 10 ? 1 : gcd(a, b) === 1 ? 2 : 3),
-    word: ([a, b]) => `Two buses leave the Madurai bus stand together at 8 o'clock. One bus leaves again every ${a} minutes and the other every ${b} minutes. After how many minutes will they next leave together?`,
+    // buses only for believable gaps (5 minutes or more); otherwise festival lights blinking every few seconds
+    word: ([a, b]) =>
+      a >= 5
+        ? `Two buses leave the Madurai bus stand together at 8 o'clock. One bus leaves again every ${a} minutes and the other every ${b} minutes. After how many minutes will they next leave together?`
+        : `Two strings of festival lights blink together. Then one blinks every ${a} seconds and the other every ${b} seconds. After how many seconds will they next blink together?`,
     teach: {
       idea: "A common multiple is in both times tables. The lowest one is the first time they meet.",
       method: "Go up the times table of the larger number and stop at the first one the smaller number divides exactly.",
@@ -661,7 +679,8 @@ export const B07: Def[] = [
     arity: 3,
     title: "Writing a mixed number as an improper fraction",
     competency: MIX,
-    type: "fraction",
+    // "mixed": the answer is read as written, so 17/5 is right and 3 2/5, 1.5 or 34/10 are not the improper fraction asked for
+    type: "mixed",
     mc: true,
     parse: (t) => {
       const m = t.trim().match(/^(?:write\s+)?(\d)\s+(\d{1,2})\/(\d{1,2})(?:\s+as\s+an\s+improper\s+fraction)?\.?$/i);
@@ -669,34 +688,35 @@ export const B07: Def[] = [
     },
     // [w, n, d]: w n/d
     reject: ([w, n, d]) => (w < 1 || w > 9 || d < 2 || d > 10 || n < 1 || n >= d || gcd(n, d) !== 1 ? "A mixed number w n/d with w from 1 to 9 and a proper fraction part in simplest form (denominator up to 10)." : null),
-    prompt: ([w, n, d]) => `Write the mixed number ${w} ${n}/${d} as an improper fraction.`,
+    prompt: ([w, n, d]) => `Write the mixed number ${w} ${n}/${d} as an improper fraction (for example 7/3).`,
     solve: ([w, n, d]) => ({
       steps: [
         { id: "wholes", op: "multiply", competency: MT, inputs: [w, d], value: w * d },
         { id: "add", op: "add", competency: MIX, inputs: [w * d, n], value: w * d + n },
       ],
-      answer: (w * d + n) / d,
+      answer: `${w * d + n}/${d}`,
     }),
-    // independent: take whole ones (d/d) away from the answer one at a time and see what is left
+    // independent: take whole ones (d pieces) away from the numerator one at a time and see what is left
     validate: ([w, n, d], v) => {
-      if (typeof v !== "number") return false;
-      let k = v;
+      const m = String(v).trim().match(/^(\d+)\/(\d+)$/);
+      if (!m || Number(m[2]) !== d) return false;
+      let k = Number(m[1]);
       let wholes = 0;
-      while (k >= 1 - 1e-12 && wholes < 50) {
-        k -= 1;
+      while (k >= d && wholes < 50) {
+        k -= d;
         wholes++;
       }
-      return wholes === w && Math.abs(k - n / d) < 1e-9;
+      return wholes === w && k === n;
     },
     bugs: ([w, n, d]) => [
-      { id: "add-whole-to-top", kind: "conceptual", competency: MIX, says: `${w} was added to the numerator. Each whole is ${d}/${d}, so ${w} wholes are ${w * d} ${d === 2 ? "halves" : `pieces of size 1/${d}`}.`, predict: (w + n) / d },
-      { id: "times-numerator", kind: "procedural", competency: MIX, says: `The whole number was multiplied by the numerator and the denominator was added. Multiply the whole number by the DENOMINATOR, then add the numerator.`, predict: (w * n + d) / d },
-      { id: "forget-numerator", kind: "procedural", competency: MIX, says: `Only the wholes were changed into ${d === 2 ? "halves" : "pieces"}; the ${n}/${d} was not added on.`, predict: w },
-      { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The multiplication ${w} × ${d} is not yet reliable.`, predict: [(w * d + d + n) / d, (w * d - d + n) / d].filter((x) => x > 1), ...(w >= 2 && d >= 2 ? { probe: `gen:mul:${w},${d}` } : {}) },
+      { id: "add-whole-to-top", kind: "conceptual", competency: MIX, says: `${w} was added to the numerator. Each whole is ${d}/${d}, so ${w} wholes are ${w * d} ${d === 2 ? "halves" : `pieces of size 1/${d}`}.`, predict: `${w + n}/${d}` },
+      { id: "times-numerator", kind: "procedural", competency: MIX, says: `The whole number was multiplied by the numerator and the denominator was added. Multiply the whole number by the DENOMINATOR, then add the numerator.`, predict: `${w * n + d}/${d}` },
+      { id: "forget-numerator", kind: "procedural", competency: MIX, says: `Only the wholes were changed into ${d === 2 ? "halves" : "pieces"}; the ${n}/${d} was not added on.`, predict: `${w * d}/${d}` },
+      { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The multiplication ${w} × ${d} is not yet reliable.`, predict: [`${w * d + d + n}/${d}`, ...(w > 1 ? [`${w * d - d + n}/${d}`] : [])], ...(w >= 2 && d >= 2 ? { probe: `gen:mul:${w},${d}` } : {}) },
     ],
     variants: () => [],
     explain: (st) => (st.id === "wholes" ? `${st.inputs[0]} wholes = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} pieces` : `${st.inputs[0]} + ${st.inputs[1]} = ${st.value} pieces in all`),
-    distractors: ([w, n, d]) => [(w * d + n) / (d + 1), (w * d - n) / d, (w * d + n + 1) / d].filter((x) => x > 0),
+    distractors: ([w, n, d]) => [`${w * d + n}/${d + 1}`, `${w * d - n}/${d}`, `${w * d + n + 1}/${d}`, `${w} ${n}/${d}`],
     domain: [[1, 9], [1, 9], [2, 10]],
     keep: ([, n, d]) => n < d && gcd(n, d) === 1,
     difficulty: ([w, , d]) => (w <= 3 && d <= 5 ? 1 : w * d <= 40 ? 2 : 3),
@@ -1014,10 +1034,10 @@ export const B07: Def[] = [
       const looks: number[] = [];
       for (let k = a; k <= a + w; k++) {
         if (isPrime(k)) ps.push(k);
-        else if (k > 1 && k % 2 === 1 && k % 5 !== 0) looks.push(k);
+        else if (k > 1 && k % 2 === 1) looks.push(k);
       }
       return [
-        { id: "odd-is-prime", kind: "conceptual", competency: PRI, says: `Some odd numbers that are not prime were included (${looks.slice(0, 3).join(", ")}). Being odd is not enough: test whether 3, 7 or another number divides it.`, predict: looks.length ? [...ps, ...looks].sort((x, y) => x - y) : null },
+        { id: "odd-is-prime", kind: "conceptual", competency: PRI, says: `Some odd numbers that are not prime were included (${looks.slice(0, 3).join(", ")}). Being odd is not enough: test whether 3, 5, 7 or another number divides it.`, predict: looks.length ? [...ps, ...looks].sort((x, y) => x - y) : null },
         { id: "one-is-prime", kind: "conceptual", competency: PRI, says: "1 was counted as prime. A prime has exactly two factors; 1 has only one factor.", predict: a === 1 ? [1, ...ps] : null },
         { id: "two-not-prime", kind: "conceptual", competency: PRI, says: "2 was left out because it is even. 2 has exactly two factors (1 and 2), so it is prime: the only even prime.", predict: a <= 2 ? ps.filter((k) => k !== 2) : null },
       ];

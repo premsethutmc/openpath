@@ -123,6 +123,9 @@ const litres = (c: number) => (c === 1000 ? " (1 litre)" : c === 2000 ? " (2 lit
 
 // ---------------------------------------------------------------- money, mass
 const NOTES = [10, 20, 50, 100];
+/** Something that really costs about ₹c (a toffee for a few rupees, a toy for more). */
+const priced = (c: number) => (c < 5 ? "a toffee" : c < 10 ? "a pencil" : c < 30 ? "a notebook" : c < 60 ? "a box of crayons" : "a toy");
+const cap1 = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 const coinsOf = ([t, f, w, o]: number[]) => [...Array(t).fill(10), ...Array(f).fill(5), ...Array(w).fill(2), ...Array(o).fill(1)] as number[];
 const WEIGHTS = [1000, 500, 200, 100, 50];
 const wname = (g: number) => (g === 1000 ? "1 kg" : `${g} g`);
@@ -421,9 +424,8 @@ export const B02: Def[] = [
       const t = seq(s, MSTEPS[k], d, 5);
       const dir = d ? -1 : 1;
       return [
-        { id: "by-ones", kind: "conceptual", competency: PAT, says: `The number one ${d ? "less" : "more"} than ${t[p - 1]} was written. The pattern jumps by ${MSTEPS[k]}.`, predict: t[p - 1] + dir },
+        { id: "by-ones", kind: "conceptual", competency: PAT, says: `The number one ${d ? "less" : "more"} than ${t[p - 1]} was written (the ones digit was changed). The pattern jumps by ${MSTEPS[k]}${k === 3 ? ": counting in tens changes the tens digit and keeps the ones digit" : ""}.`, predict: k === 0 ? null : t[p - 1] + dir },
         { id: "before-after", kind: "conceptual", competency: PAT, says: `The pattern was read the wrong way: the numbers ${d ? "go down" : "go up"}, so the missing one is ${d ? "less" : "more"} than ${t[p - 1]}.`, predict: pos(t[p - 1] - dir * MSTEPS[k]) },
-        ...(k === 3 ? [{ id: "ones-for-tens", kind: "conceptual", competency: PV, says: "The ones digit was changed. Counting in tens changes the tens digit and keeps the ones digit.", predict: pos(t[p - 1] + 2 * dir) } as Bug] : []),
       ];
     },
     variants: () => [],
@@ -545,7 +547,7 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "across" ? `Across: ${s.value} squares.` : s.id === "up" ? `Up or down: ${s.value} squares.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} squares.`),
+    explain: (s) => (s.id === "across" ? `Across: ${s.value} ${plural(Number(s.value), "square", "squares")}.` : s.id === "up" ? `Up or down: ${s.value} ${plural(Number(s.value), "square", "squares")}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} ${plural(Number(s.value), "square", "squares")}.`),
     figure: ([a, b, c, d]) => ({ type: "plane", points: [[a, b, "S"], [c, d, "E"]], range: 6 }),
     domain: [[0, 5], [0, 5], [0, 5], [0, 5]],
     cap: 300,
@@ -899,7 +901,7 @@ export const B02: Def[] = [
     bugs: (p) => {
       const [a, b] = [p[p[3]], p[p[4]]];
       if (p[3] === p[4]) return [
-        { id: "wrong-bar", kind: "procedural", competency: PIC, says: `A different bar was read. Find "${CONTAINERS[p[3]]}" under the chart first.`, predict: [p[p[3] - 1], p[p[3] + 1]].filter((x) => x !== undefined) as number[] },
+        { id: "wrong-bar", kind: "procedural", competency: PIC, says: `A different bar was read. Find "${CONTAINERS[p[3]]}" under the chart first.`, predict: [p[3] - 1, p[3] + 1].filter((i) => i >= 0 && i <= 2).map((i) => p[i]) },
         { id: "biggest", kind: "conceptual", competency: CAP, says: "The container that holds the most was read. Read the bar for the container asked about.", predict: Math.max(...p.slice(0, 3)) },
       ];
       return [
@@ -971,7 +973,7 @@ export const B02: Def[] = [
       return [
         { id: "gave-level", kind: "conceptual", competency: CAP, says: "The water already in the jug was given. The question asks how much MORE is needed to reach the top.", predict: v },
         { id: "stopped-at-hundred", kind: "procedural", competency: SUB, says: `Counting up stopped at the next hundred. Keep counting on from there all the way to ${cap} mL and add the jumps.`, predict: v % 100 && Math.ceil(v / 100) * 100 < cap ? Math.ceil(v / 100) * 100 - v : null },
-        { id: "top-as-litre", kind: "conceptual", competency: CAP, says: `The top was taken as 1000 mL. This jug holds ${cap} mL: read the number at the top of the scale.`, predict: cap === 2000 && v < 1000 ? 1000 - v : null },
+        ...(cap === 2000 && v < 1000 ? [{ id: "top-as-litre", kind: "conceptual", competency: CAP, says: `The top was taken as 1000 mL. This jug holds ${cap} mL: read the number at the top of the scale.`, predict: 1000 - v } as Bug] : []),
       ];
     },
     distractors: ([j, n, q]) => {
@@ -1060,7 +1062,7 @@ export const B02: Def[] = [
     mc: true,
     parse: none,
     reject: ([c, k]) => (k < 0 || k > 3 || c < 1 || c >= NOTES[k] || c < NOTES[k] / 10 ? "A price below the note or coin paid (₹10, ₹20, ₹50 or ₹100)." : null),
-    prompt: ([c, k]) => `A toy costs ₹${c}. You pay with the ₹${NOTES[k]} ${NOTES[k] <= 20 ? "coin" : "note"} in the picture. How much change do you get, in rupees?`,
+    prompt: ([c, k]) => `${cap1(priced(c))} costs ₹${c}. You pay with the ₹${NOTES[k]} ${NOTES[k] <= 20 ? "coin" : "note"} in the picture. How much change do you get, in rupees?`,
     solve: ([c, k]) => ({ steps: [{ id: "change", op: "subtract", competency: SUB, inputs: [NOTES[k], c], value: NOTES[k] - c }], answer: NOTES[k] - c }),
     // independent: count up from the price, one rupee at a time, to the amount paid
     validate: ([c, k], v) => {
@@ -1072,7 +1074,8 @@ export const B02: Def[] = [
       const p = NOTES[k];
       const up = Math.ceil(c / 10) * 10;
       return [
-        { id: "no-exchange", kind: "procedural", competency: SUB, says: `The smaller digit was taken from the bigger in each column. ${p} − ${c} needs a ten changed into ones; or count up from ₹${c} to ₹${p}.`, predict: smallerFromLarger(p, c) },
+        // (when "smaller from larger" gives the same as adding, e.g. 100 − 37 → 137, only the adding explanation is kept)
+        ...(smallerFromLarger(p, c) !== p + c ? [{ id: "no-exchange", kind: "procedural", competency: SUB, says: `The smaller digit was taken from the bigger in each column. ${p} − ${c} needs a ten changed into ones; or count up from ₹${c} to ₹${p}.`, predict: smallerFromLarger(p, c) } as Bug] : []),
         { id: "stopped-at-ten", kind: "procedural", competency: CHANGE, says: `Counting up stopped at the next ten (₹${up}). Keep counting on to ₹${p} and add both jumps.`, predict: c % 10 && up < p ? up - c : null },
         { id: "added", kind: "conceptual", competency: CHANGE, says: "The price and the money paid were added. Change is what is left after paying: take the price away.", predict: p + c },
       ];
@@ -1083,7 +1086,7 @@ export const B02: Def[] = [
     domain: [[1, 99], [0, 3]],
     cap: 300,
     difficulty: ([c, k]) => (k <= 1 ? 1 : (NOTES[k] - c) % 10 === 0 || c % 10 === 0 ? 2 : 3),
-    word: ([c, k]) => `${name(c)} buys a packet of crayons for ₹${c} at the school fair and gives the shopkeeper ₹${NOTES[k]}. How much money should ${name(c)} get back, in rupees?`,
+    word: ([c, k]) => `${name(c)} buys ${priced(c)} for ₹${c} at the school fair and gives the shopkeeper ₹${NOTES[k]}. How much money should ${name(c)} get back, in rupees?`,
     teach: {
       idea: "Change is the money you get back: what you paid take away the price.",
       method: "Count up from the price to the money paid: first to the next ten, then in tens. Add the jumps. Or take the price away from the money paid.",
@@ -1279,7 +1282,8 @@ export const B02: Def[] = [
     bugs: ([g, e]) => [
       { id: "added-numbers", kind: "conceptual", competency: GROUPS, says: `${g} and ${e} were added. There are ${g} groups of ${e}: add ${e} again and again, ${g} times.`, predict: g + e },
       { id: "one-group", kind: "conceptual", competency: GROUPS, says: "Only one group was counted. Count every group.", predict: e },
-      { id: "missed-group", kind: "procedural", competency: GROUPS, says: `One group was missed while skip counting. Touch each plate as you say the next number.`, predict: [(g - 1) * e, (g + 1) * e] },
+      { id: "missed-group", kind: "procedural", competency: GROUPS, says: `One group was missed while skip counting. Touch each plate as you say the next number.`, predict: (g - 1) * e },
+      { id: "extra-group", kind: "procedural", competency: GROUPS, says: `One group too many was counted: the count went on after the last plate. Say one number for each plate and stop at the last one.`, predict: (g + 1) * e },
     ],
     variants: () => [],
     explain: (s) => (s.id === "repeat" ? `${(s.inputs as number[]).join(" + ")} = ${s.value}` : `${s.inputs[0]} groups of ${s.inputs[1]} is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}.`),
@@ -1330,7 +1334,7 @@ export const B02: Def[] = [
       { id: "tens-ones-swapped", kind: "procedural", competency: PV, says: "The tens and the ones were written in each other's places. Tens come before ones.", predict: t !== o ? h * 100 + o * 10 + t : null },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "hundreds" ? `${s.inputs[0]} hundreds = ${s.value}` : s.id === "tens" ? `${s.inputs[0]} tens = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    explain: (s) => (s.id === "hundreds" ? `${s.inputs[0]} ${plural(Number(s.inputs[0]), "hundred", "hundreds")} = ${s.value}` : s.id === "tens" ? `${s.inputs[0]} ${plural(Number(s.inputs[0]), "ten", "tens")} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     figure: ([h, t, o]) => ({ type: "blocks", hundreds: h, tens: t, ones: o }),
     domain: [[1, 9], [0, 9], [0, 9]],
     cap: 400,
@@ -1378,11 +1382,11 @@ export const B02: Def[] = [
       return v === n;
     },
     bugs: ([h, t, o]) => [
-      { id: "wrote-side-by-side", kind: "conceptual", competency: HUND, says: `The numbers were written next to each other. ${t >= 10 ? `${t} tens is 1 hundred and ${t - 10} tens` : `${o} ones is 1 ten and ${o - 10} ones`}, so it must be exchanged.`, predict: Number(`${h}${t}${o}`) },
+      { id: "wrote-side-by-side", kind: "conceptual", competency: HUND, says: `The numbers were written next to each other. ${t >= 10 ? `${t} tens is 1 hundred and ${t - 10} ${plural(t - 10, "ten", "tens")}` : `${o} ones is 1 ten and ${o - 10} ${plural(o - 10, "one", "ones")}`}, so it must be exchanged.`, predict: Number(`${h}${t}${o}`) },
       { id: "dropped-extra", kind: "conceptual", competency: PV, says: `Only the last digit of ${t >= 10 ? t : o} was kept. The extra ${t >= 10 ? "ten tens make a hundred" : "ten ones make a ten"}: add it to the next place.`, predict: h * 100 + (t % 10) * 10 + (o % 10) },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "regroup" ? (s.inputs[1] === "tens" ? `${s.inputs[0]} tens = ${s.value}` : `${s.inputs[0]} ones = 1 ten and ${Number(s.inputs[0]) - 10} ones`) : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    explain: (s) => (s.id === "regroup" ? (s.inputs[1] === "tens" ? `${s.inputs[0]} tens = ${s.value}` : `${s.inputs[0]} ones = 1 ten and ${Number(s.inputs[0]) - 10} ${plural(Number(s.inputs[0]) - 10, "one", "ones")}`) : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     figure: ([h, t, o]) => ({ type: "blocks", hundreds: h, tens: t, ones: o }),
     domain: [[1, 8], [0, 19], [0, 19]],
     keep: ([h, t, o]) => (t >= 10) !== (o >= 10),

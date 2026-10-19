@@ -8,6 +8,9 @@ import type { Bug, Def, Step, Value } from "../family-kit";
 import { gcd, near, par, fmt } from "../family-kit";
 
 const none = () => null;
+/** "a" or "an" before a number as it is read ("an 8 m", "an 11 cm", "an 18%", "a 7 m"). */
+const aN = (x: number | string) => `${/^(8|11|18)(?!\d)|^8/.test(String(x)) ? "an" : "a"} ${x}`;
+const AN = (x: number | string) => `${/^(8|11|18)(?!\d)|^8/.test(String(x)) ? "An" : "A"} ${x}`;
 const NAMES = ["Anu", "Ravi", "Meena", "Arjun", "Kavya", "Imran", "Divya", "Karthik", "Lakshmi", "Selvi", "Farhan", "Priya"];
 const name = (k: number) => NAMES[((Math.round(k) % NAMES.length) + NAMES.length) % NAMES.length];
 
@@ -440,12 +443,11 @@ export const B09: Def[] = [
     },
     cap: 400,
     difficulty: ([a, b, c]) => ((a + b + c) % 2 === 0 && Math.max(a, b, c) < 20 ? 1 : Math.max(a, b, c) > 28 ? 3 : 2),
-    figure: () => ({ type: "shape", sides: 4, name: "PQRS" }),
+    // no picture: a drawn quadrilateral would not have these angles
     word: ([a, b, c]) => `A four-sided plot of land has corner angles of ${5 * a}°, ${5 * b}° and ${5 * c}°. ${name(a + b)} wants to know the fourth corner angle. What is it, in degrees?`,
     teach: {
       idea: "A diagonal cuts a quadrilateral into two triangles, so its four angles add to 2 × 180° = 360°.",
       method: "Add the three angles you know and take the total from 360°.",
-      visual: () => ({ type: "shape", sides: 4, name: "PQRS" }),
       alternatives: [{ id: "tear_corners", title: "Tear off the corners", kind: "conceptual", text: ["Cut out a four-sided shape and tear off its four corners.", "Put the corners together point to point: they make a full turn, 360°."] }],
     },
     limits: "Convex quadrilaterals with angles in steps of 5°; reflex angles are left out.",
@@ -485,12 +487,12 @@ export const B09: Def[] = [
     domain: [[7, 34], [0, 2], [0, 1]],
     keep: ([A]) => A !== 18,
     difficulty: ([A, k]) => (k === 1 ? 1 : A % 2 === 0 ? 2 : 3),
-    figure: ([, , s]) => ({ type: "shape", sides: 4, name: s ? "rhombus ABCD" : "parallelogram ABCD" }),
+    figure: ([, , s]) => ({ type: "shape", kind: s ? "rhombus" : "parallelogram", name: s ? "rhombus ABCD" : "parallelogram ABCD" }),
     word: ([A, k, s]) => `A ${s ? "rhombus-shaped tile" : "parallelogram-shaped window pane"} ABCD has an angle of ${5 * A}° at corner A. ${name(A)} needs the angle at corner ${"BCD"[k]}. What is it, in degrees?`,
     teach: {
       idea: "In a parallelogram (a rhombus is one), opposite sides are parallel, so neighbouring angles add to 180° and opposite angles are equal.",
       method: "Decide whether the angle you want is opposite ∠A (then it equals ∠A) or next to ∠A (then it is 180° − ∠A).",
-      visual: ([, , s]) => ({ type: "shape", sides: 4, name: s ? "rhombus" : "parallelogram" }),
+      visual: ([, , s]) => ({ type: "shape", kind: s ? "rhombus" : "parallelogram", name: s ? "rhombus" : "parallelogram" }),
       alternatives: [{ id: "parallel_lines", title: "See the parallel lines", kind: "conceptual", text: ["AD and BC are parallel, and AB crosses them.", "∠A and ∠B are co-interior angles between parallel lines, so they add to 180°. Going round, ∠C comes back to the same size as ∠A."] }],
     },
     limits: "One angle given, the others found from the parallelogram properties; angles found from algebraic expressions are left out.",
@@ -530,8 +532,8 @@ export const B09: Def[] = [
     keep: ([s, m, b]) => b !== m && (s === 0 ? b < 2 * m : b <= 20),
     cap: 300,
     difficulty: ([s, m]) => (s === 0 && m <= 10 ? 1 : s === 0 ? 2 : 3),
-    figure: ([s]) => ({ type: "shape", sides: 4, name: s ? "parallelogram ABCD" : "rectangle ABCD" }),
-    word: ([s, m, b]) => (s === 0 ? `A rectangular gate ABCD has two straight bars along its diagonals, crossing at O. Bar AC is ${2 * m} cm long and the gate is ${b} cm wide along AB. How long is OB, in cm?` : `A kite frame is a parallelogram ABCD with sticks along its diagonals, crossing at O. OA is ${m} cm and OB is ${b} cm. How long is the whole stick AC, in cm?`),
+    figure: ([s, , b]) => (s ? { type: "shape", kind: "parallelogram", diagonals: true, name: "parallelogram ABCD with its diagonals" } : { type: "shape", kind: "rectangle", diagonals: true, name: "rectangle ABCD with its diagonals", lengths: [`${b} cm`, "", "", ""] }),
+    word: ([s, m, b]) => (s === 0 ? `A rectangular gate ABCD has two straight bars along its diagonals, crossing at O. Bar AC is ${2 * m} cm long and the gate is ${b} cm wide along AB. How long is OB, in cm?` : `A garden gate frame is a parallelogram ABCD with two straight bars along its diagonals, crossing at O. OA is ${m} cm and OB is ${b} cm. How long is the whole bar AC, in cm?`),
     teach: {
       idea: "The diagonals of every parallelogram cut each other in half. In a rectangle they are also equal in length.",
       method: "Mark O as the midpoint of each diagonal. For a rectangle, BD = AC, so OB = AC ÷ 2. For a parallelogram, AC = 2 × OA.",
@@ -619,7 +621,7 @@ export const B09: Def[] = [
     explain: (s) => (s.id === "real-cm" ? `Every 1 cm stands for ${s.inputs[1]} cm: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm` : `${s.inputs[0]} cm ÷ ${s.inputs[1]} = ${s.value} ${Number(s.inputs[1]) === 100 ? "m" : "km"}`),
     domain: [[0, RATIOS.length - 1], [1, 20]],
     difficulty: ([i]) => (RATIOS[i] <= 200 ? 1 : RATIOS[i] <= 1000 ? 2 : 3),
-    word: ([i, d]) => (RATIOS[i] <= 1000 ? `${name(d + i)} is reading the plan of a new school building, drawn at 1 : ${RATIOS[i]}. A classroom wall measures ${d} cm on the plan. How long is the wall, in metres?` : `On a district map drawn at 1 : ${RATIOS[i]}, a canal measures ${d} cm. How long is the canal, in km?`),
+    word: ([i, d]) => (RATIOS[i] <= 1000 ? `${name(d + i)} is reading the plan of a new school building, drawn at 1 : ${RATIOS[i]}. ${wallOf((d * RATIOS[i]) / 100)} measures ${d} cm on the plan. How long is it, in metres?` : `On a district map drawn at 1 : ${RATIOS[i]}, a canal measures ${d} cm. How long is the canal, in km?`),
     teach: {
       idea: "A scale 1 : n means every length in the real world is n times the length on the drawing, in the same unit.",
       method: "Multiply the drawing length by n to get centimetres, then change units: ÷ 100 for metres, ÷ 100 000 for kilometres.",
@@ -774,12 +776,13 @@ export const B09: Def[] = [
     domain: [[2, 30], [2, 20], [0, 1]],
     cap: 400,
     difficulty: ([b, h]) => ((b * h) % 2 === 0 && b * h <= 100 ? 1 : (b * h) % 2 === 0 ? 2 : 3),
-    figure: ([b, h, r]) => (r ? { type: "triangle", right: true, sides: [`${b} cm`, `${h} cm`, ""] } : { type: "triangle", sides: ["", "", `${b} cm`], height: `${h} cm` }),
+    // side 0 is the base; in a right triangle sides 0 and 2 are the legs (side 1 the hypotenuse)
+    figure: ([b, h, r]) => (r ? { type: "triangle", right: true, sides: [`${b} cm`, "", `${h} cm`] } : { type: "triangle", sides: [`${b} cm`, "", ""], height: `${h} cm` }),
     word: ([b, h, r]) => (r ? `${name(b)} cuts a right-angled triangle of cloth for a flag. The two edges at the right angle are ${b} cm and ${h} cm. How much cloth is it, in cm²?` : `A triangular flower bed has a base of ${b} m and a height of ${h} m. What is its area, in m²?`),
     teach: {
       idea: "A triangle is exactly half of a rectangle (or parallelogram) with the same base and height.",
       method: "Area = ½ × base × height. Multiply the base by the height and halve the result.",
-      visual: ([b, h]) => ({ type: "triangle", right: true, sides: [`${b} cm`, `${h} cm`, ""] }),
+      visual: ([b, h]) => ({ type: "triangle", right: true, sides: [`${b} cm`, "", `${h} cm`] }),
       alternatives: [{ id: "half_rectangle", title: "Half a rectangle", kind: "conceptual", text: ["Draw the rectangle with the same base and height around the triangle.", "The diagonal cuts it into two equal triangles, so each is half the rectangle's area."], visual: ([b, h]) => (b <= 12 && h <= 12 ? { type: "grid", rows: h, cols: b } : null) }],
     },
     limits: "Whole-centimetre bases and heights; Heron's formula and areas from slanted sides alone are left out.",
@@ -820,7 +823,7 @@ export const B09: Def[] = [
     keep: ([b, h]) => b !== h,
     cap: 400,
     difficulty: ([b, h]) => ((b * h) % 2 === 0 && b * h <= 100 ? 1 : (b * h) % 2 === 0 ? 2 : 3),
-    figure: ([b, h, k]) => ({ type: "triangle", sides: ["", "", k === 0 ? `${b} cm` : "?"], height: k === 0 ? "?" : `${h} cm` }),
+    figure: ([b, h, k]) => ({ type: "triangle", sides: [k === 0 ? `${b} cm` : "?", "", ""], height: k === 0 ? "?" : `${h} cm` }),
     word: ([b, h, k]) => (k === 0 ? `A triangular sail has an area of ${D(b * h, 2)} m². Its bottom edge is ${b} m long. How tall is the sail, in m?` : `A triangular garden patch has an area of ${D(b * h, 2)} m² and a height of ${h} m. How long is its base, in m?`),
     teach: {
       idea: "Area = ½ × base × height, so twice the area is base × height: the area of the matching rectangle.",
@@ -863,7 +866,8 @@ export const B09: Def[] = [
     domain: [[1, 50], [0, 1], [0, 1]],
     keep: ([r, , pm]) => pm === 1 || r % 7 === 0,
     difficulty: ([r, g, pm]) => (pm === 0 ? 1 : r <= 10 ? 2 : g ? 2 : 3),
-    word: ([r, g, pm]) => `${name(r)} is putting a ribbon round the edge of a circular cake with a ${g ? `diameter of ${2 * r}` : `radius of ${r}`} cm. Taking π = ${piText(pm)}, how long must the ribbon be, in cm?`,
+    // the object fits the size: a button, a coaster, a cake or a table top
+    word: ([r, g, pm]) => `${name(r)} is putting ${r <= 2 ? "a thread round the edge of a round button" : r <= 6 ? "lace round the edge of a round coaster" : r <= 20 ? "a ribbon round the edge of a circular cake" : "a strip of beading round the edge of a round table top"} with a ${g ? `diameter of ${2 * r}` : `radius of ${r}`} cm. Taking π = ${piText(pm)}, how long must it be, in cm?`,
     teach: {
       idea: "In every circle, the distance around (the circumference) divided by the diameter is the same number, π (about 22/7 or 3.14).",
       method: "C = π × diameter = 2 × π × radius. Double the radius first if you are given the radius.",
@@ -906,7 +910,7 @@ export const B09: Def[] = [
     domain: [[1, 40], [0, 1], [0, 1]],
     keep: ([r, , pm]) => pm === 1 || r % 7 === 0,
     difficulty: ([r, g, pm]) => (pm === 0 && !g ? 1 : r <= 10 ? 2 : 3),
-    word: ([r, g, pm]) => `A circular rangoli has a ${g ? `diameter of ${2 * r}` : `radius of ${r}`} cm. Taking π = ${piText(pm)}, how much floor does it cover, in cm²?`,
+    word: ([r, g, pm]) => `${r <= 5 ? "A round sticker" : r <= 14 ? "A round chapati" : "A circular rangoli"} has a ${g ? `diameter of ${2 * r}` : `radius of ${r}`} cm. Taking π = ${piText(pm)}, how much ${r <= 5 ? "paper" : r <= 14 ? "of the pan" : "floor"} does it cover, in cm²?`,
     teach: {
       idea: "Cut a circle into many thin slices and lay them head to tail: they make a shape close to a rectangle, half the circumference (πr) long and r high. So the area is πr × r = πr².",
       method: "Find the radius (half the diameter), square it, and multiply by π.",
@@ -963,7 +967,11 @@ export const B09: Def[] = [
     domain: [[1, 6], [5, 60], [0, 1]],
     cap: 300,
     difficulty: ([k, n, m]) => (m === 0 && (n % 10 === 0 || n <= 10) ? 1 : m === 0 ? 2 : 3),
-    word: ([k, n, m]) => (m === 0 ? `The wheel of ${name(n)}'s cycle is ${14 * k} cm across. ${name(n)} pedals until it has turned ${n} times. How far has the cycle gone, in metres? (π = 22/7)` : `A road roller's drum is ${14 * k} cm across. It rolls ${D(44 * k * n, 100)} m along a new road. How many times does the drum turn? (π = 22/7)`),
+    // the wheel fits its size: a toy cart (14 cm), a tricycle (28–42 cm), a cycle (56–70 cm), a hand cart (84 cm)
+    word: ([k, n, m]) => {
+      const w = k === 1 ? "toy cart" : k <= 3 ? "tricycle" : k <= 5 ? "cycle" : "hand cart";
+      return m === 0 ? `The wheel of ${name(n)}'s ${w} is ${14 * k} cm across. ${name(n)} moves the ${w} until the wheel has turned ${n} times. How far has the ${w} gone, in metres? (π = 22/7)` : `The wheel of a ${w} is ${14 * k} cm across. The ${w} rolls ${D(44 * k * n, 100)} m. How many times does the wheel turn? (π = 22/7)`;
+    },
     teach: {
       idea: "In one full turn, a wheel rolls a distance equal to its circumference, π × diameter.",
       method: "Distance = circumference × number of turns; turns = distance ÷ circumference. Keep the units the same (change m to cm or cm to m).",
@@ -1060,7 +1068,7 @@ export const B09: Def[] = [
     explain: say({ outer: "Outer radius", squares: "R² − r²", area: "Path area" }),
     domain: [[2, 20], [1, 6]],
     difficulty: ([r, w]) => (r <= 10 && w <= 2 ? 1 : r <= 15 ? 2 : 3),
-    word: ([r, w]) => `${name(r)}'s village has a round pond of radius ${r} m with a ${w} m wide stone walkway all round it. Taking π = 3.14, how much ground does the walkway cover, in m²?`,
+    word: ([r, w]) => `${name(r)}'s village has a round pond of radius ${r} m with ${aN(w)} m wide stone walkway all round it. Taking π = 3.14, how much ground does the walkway cover, in m²?`,
     teach: {
       idea: "A ring is a big circle with a small circle taken out of the middle.",
       method: "Outer radius R = inner radius + width. Area of the path = πR² − πr² = π(R² − r²).",
@@ -1117,8 +1125,8 @@ export const B09: Def[] = [
     domain: [[3, 25], [2, 20], [0, 2]],
     cap: 400,
     difficulty: ([b, h, m]) => (m === 2 ? 1 : b * h <= 100 ? 2 : 3),
-    figure: ([b, h, m]) => ({ type: "shape", sides: 4, name: "parallelogram", lengths: m === 1 ? [`${b} cm`, "", "", ""] : [`${b} cm`, `${slant(b, h)} cm`, `${b} cm`, `${slant(b, h)} cm`], height: m === 1 ? "?" : `${h} cm` }),
-    word: ([b, h, m]) => (m === 0 ? `A parallelogram-shaped field has a ${b} m long side, slanting sides of ${slant(b, h)} m, and is ${h} m across between the long sides. What is its area, in m²?` : m === 1 ? `A parallelogram-shaped plot has an area of ${b * h} m² and a ${b} m long base. How far apart are its parallel sides, in m?` : `${name(b)} puts a fence round a parallelogram-shaped plot with sides of ${b} m and ${slant(b, h)} m (it is ${h} m across). How many metres of fence are needed?`),
+    figure: ([b, h, m]) => ({ type: "shape", kind: "parallelogram", name: "parallelogram", lengths: m === 1 ? [`${b} cm`, "", "", ""] : [`${b} cm`, `${slant(b, h)} cm`, `${b} cm`, `${slant(b, h)} cm`], height: m === 1 ? "?" : `${h} cm` }),
+    word: ([b, h, m]) => (m === 0 ? `A parallelogram-shaped field has ${aN(b)} m long side, slanting sides of ${slant(b, h)} m, and is ${h} m across between the ${b} m sides. What is its area, in m²?` : m === 1 ? `A parallelogram-shaped plot has an area of ${b * h} m² and ${aN(b)} m long base. How far apart are its parallel sides, in m?` : `${name(b)} puts a fence round a parallelogram-shaped plot with sides of ${b} m and ${slant(b, h)} m (the ${b} m sides are ${h} m apart). How many metres of fence are needed?`),
     teach: {
       idea: "Cut a triangle off one end of a parallelogram and slide it to the other end: it becomes a rectangle with the same base and height.",
       method: "Area = base × height (the height is at right angles to the base, not the slanting side). Perimeter = 2 × (base + slanting side).",
@@ -1158,7 +1166,7 @@ export const B09: Def[] = [
     keep: ([p, d, m]) => p !== d && (m === 1 || p > d),
     cap: 300,
     difficulty: ([p, d, m]) => (m === 0 && (p * d) % 2 === 0 && p * d <= 150 ? 1 : m === 0 ? 2 : 3),
-    figure: ([p, d, m]) => ({ type: "shape", sides: 4, name: "rhombus", diagonals: [`${p} cm`, m === 0 ? `${d} cm` : "?"] }),
+    figure: ([p, d, m]) => ({ type: "shape", kind: "rhombus", diagonals: true, name: `rhombus with diagonals ${p} cm and ${m === 0 ? `${d} cm` : "?"}` }),
     word: ([p, d, m]) => (m === 0 ? `A paper lantern panel is a rhombus whose diagonals are ${p} cm and ${d} cm. How much paper does the panel use, in cm²?` : `A rhombus-shaped tile has an area of ${D(p * d, 2)} cm². One of its diagonals is ${p} cm. How long is the other diagonal, in cm?`),
     teach: {
       idea: "The diagonals of a rhombus cross at right angles and cut it into four equal right triangles; together they fill half of the rectangle d₁ by d₂.",
@@ -1375,7 +1383,7 @@ export const B09: Def[] = [
     keep: ([a, b]) => b < a,
     cap: 400,
     difficulty: ([a, b, h]) => (((a + b) * h) % 2 === 0 && (a + b) * h <= 200 ? 1 : ((a + b) * h) % 2 === 0 ? 2 : 3),
-    figure: ([a, b, h]) => ({ type: "shape", sides: 4, name: "trapezium", lengths: [`${a} cm`, "", `${b} cm`, ""], height: `${h} cm` }),
+    figure: ([a, b, h]) => ({ type: "shape", kind: "trapezium", name: "trapezium", lengths: [`${b} cm`, "", `${a} cm`, ""], height: `${h} cm` }),
     word: ([a, b, h]) => `${name(a + b)}'s farm field is a trapezium. Its two parallel edges are ${a} m and ${b} m long, and they are ${h} m apart. What is the area of the field, in m²?`,
     teach: {
       idea: "Two copies of a trapezium, one turned upside down, fit together into a parallelogram with base (a + b) and the same height. The trapezium is half of it.",
@@ -1394,7 +1402,7 @@ export const B09: Def[] = [
     // [W, H, p, q, ask]: a W × H rectangle with a p × q rectangle cut from one corner; ask 0 area, 1 perimeter
     parse: none,
     reject: ([W, H, p, c, a]) => (W < 4 || W > 12 || H < 4 || H > 12 || p < 1 || p >= W || c < 1 || c >= H || a < 0 || a > 1 ? "Rectangles 4–12 cm with a smaller corner cut out." : null),
-    prompt: ([W, H, p, c, a]) => `The shape in the picture is a ${W} cm by ${H} cm rectangle with a ${p} cm by ${c} cm rectangle cut out of one corner. Going round, its sides are ${list(lsides(W, H, p, c).map((x) => `${x} cm`))}. Find its ${a ? "perimeter, in cm" : "area, in cm²"}.`,
+    prompt: ([W, H, p, c, a]) => `The shape in the picture is ${aN(W)} cm by ${H} cm rectangle with ${aN(p)} cm by ${c} cm rectangle cut out of one corner. Going round, its sides are ${list(lsides(W, H, p, c).map((x) => `${x} cm`))}. Find its ${a ? "perimeter, in cm" : "area, in cm²"}.`,
     solve: ([W, H, p, c, a]) =>
       a === 0
         ? { steps: [step("whole", "multiply", RAREA, [W, H], W * H), step("cut", "multiply", RAREA, [p, c], p * c), step("area", "subtract", TRAP, [W * H, p * c], W * H - p * c)], answer: W * H - p * c }
@@ -1422,8 +1430,8 @@ export const B09: Def[] = [
     keep: ([W, H, p, c]) => p < W && c < H,
     cap: 400,
     difficulty: ([W, H, , , a]) => (a === 0 && W * H <= 60 ? 1 : a === 0 ? 2 : 3),
-    figure: ([W, H, p, c]) => ({ type: "shape", sides: 6, name: "L-shape", lengths: lsides(W, H, p, c).map((x) => `${x} cm`) }),
-    word: ([W, H, p, c, a]) => (a === 0 ? `A room is ${W} m by ${H} m, but a ${p} m by ${c} m store cupboard is built into one corner. How much floor is left to tile, in m²?` : `A garden is ${W} m by ${H} m with a ${p} m by ${c} m corner taken by a shed. ${name(W + H)} puts a fence along the edge of the garden that is left. How many metres of fence are needed?`),
+    figure: ([W, H, p, c]) => ({ type: "shape", kind: "lshape", name: "L-shape", lengths: lsides(W, H, p, c).map((x) => `${x} cm`) }),
+    word: ([W, H, p, c, a]) => (a === 0 ? `A room is ${W} m by ${H} m, but ${aN(p)} m by ${c} m store cupboard is built into one corner. How much floor is left to tile, in m²?` : `A garden is ${W} m by ${H} m with ${aN(p)} m by ${c} m corner taken by a shed. ${name(W + H)} puts a fence along the edge of the garden that is left. How many metres of fence are needed?`),
     teach: {
       idea: "An L-shape is a big rectangle with a small rectangle taken away. Its area is less than the big rectangle's, but its perimeter is the same: the two new edges replace the two that were cut off.",
       method: "Area = big rectangle − cut-out. Perimeter: add all six sides (here it equals 2 × (width + height) of the big rectangle).",
@@ -1468,8 +1476,9 @@ export const B09: Def[] = [
     keep: ([L, W, x, s]) => L > W && (s === 0 || W - 2 * x >= 1),
     cap: 400,
     difficulty: ([L, W, x]) => (x === 1 && L <= 15 ? 1 : x <= 2 ? 2 : 3),
-    figure: ([L, W, x, s]) => (s === 0 ? { type: "shape", sides: 4, name: "garden with a path outside", lengths: [`${L + 2 * x} m`, `${W + 2 * x} m`, "", ""] } : { type: "shape", sides: 4, name: "garden with a path inside", lengths: [`${L} m`, `${W} m`, "", ""] }),
-    word: ([L, W, x, s]) => (s === 0 ? `A school lawn is ${L} m by ${W} m. The school lays a ${x} m wide brick border all round the outside of the lawn. How many m² of bricks are laid?` : `A ${L} m by ${W} m carpet has a ${x} m wide coloured border along all its edges, inside the carpet. What is the area of the border, in m²?`),
+    // only the garden and the path width are labelled (the outer or inner rectangle is the step being tested)
+    figure: ([L, W, x, s]) => ({ type: "shape", kind: "rectangle", name: `garden with ${aN(x)} m wide path ${s === 0 ? "all round the outside" : "just inside its edge"}`, lengths: [`${L} m`, `${W} m`, "", ""] }),
+    word: ([L, W, x, s]) => (s === 0 ? `A school lawn is ${L} m by ${W} m. The school lays ${aN(x)} m wide brick border all round the outside of the lawn. How many m² of bricks are laid?` : `${AN(L)} m by ${W} m carpet has ${aN(x)} m wide coloured border along all its edges, inside the carpet. What is the area of the border, in m²?`),
     teach: {
       idea: "A path around (or inside) a rectangle is the space between two rectangles: the bigger one minus the smaller one.",
       method: "Outside path: (L + 2x)(W + 2x) − LW. Inside path: LW − (L − 2x)(W − 2x). The width is added (or taken off) on both sides.",
@@ -1507,7 +1516,7 @@ export const B09: Def[] = [
     keep: ([m, a, n, b]) => a + b >= 1 && !(a > 0 && m % 10 === 0) && !(b > 0 && n % 10 === 0),
     cap: 400,
     difficulty: ([m, a, n, b]) => (b === 0 && n < 10 ? 1 : a + b <= 2 ? 2 : 3),
-    word: ([m, a, n, b]) => (a === 0 ? `One bottle holds ${D(n, 10 ** b)} litres of oil. How many litres do ${m} such bottles hold?` : b === 0 ? `One bottle holds ${D(m, 10 ** a)} litres of oil. How many litres do ${n} such bottles hold?` : `A rectangular card is ${D(m, 10 ** a)} cm long and ${D(n, 10 ** b)} cm wide. What is its area, in cm²?`),
+    word: ([m, a, n, b]) => (a === 0 ? `One bottle holds ${D(n, 10 ** b)} litres of oil. How many litres do ${m} such bottles hold?` : b === 0 ? `One bottle holds ${D(m, 10 ** a)} litres of oil. How many litres do ${n} such bottles hold?` : m >= 10 ** a && n >= 10 ** b ? `A rectangular card is ${D(m, 10 ** a)} cm long and ${D(n, 10 ** b)} cm wide. What is its area, in cm²?` : `A rectangular piece of cloth is ${D(m, 10 ** a)} m long and ${D(n, 10 ** b)} m wide. What is its area, in m²?`),
     teach: {
       idea: "Tenths times tenths make hundredths (0.1 × 0.1 = 0.01), so the answer has as many decimal places as the two numbers together.",
       method: "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate to check (e.g. 1.9 × 3.1 is about 2 × 3 = 6).",
@@ -1587,7 +1596,11 @@ export const B09: Def[] = [
     keep: ([m]) => m % 10 !== 0,
     cap: 400,
     difficulty: ([, a, k]) => (k === 1 ? 1 : a + k <= 4 ? 2 : 3),
-    word: ([m, a, k, o]) => (o ? `A box of ${10 ** k} identical nails weighs ${D(m, 10 ** a)} kg. How much does one nail weigh, in kg?` : `One packet of rice weighs ${D(m, 10 ** a)} kg. How much do ${10 ** k} such packets weigh, in kg?`),
+    // the thing weighed fits the weight of one of them (seeds, nails, biscuit packets, bags of rice, sacks of cement)
+    word: ([m, a, k, o]) => {
+      const it = itemOf(o ? m / 10 ** (a + k) : m / 10 ** a);
+      return o ? `${10 ** k} identical ${it[1]} weigh ${D(m, 10 ** a)} kg together. How much does one ${it[0]} weigh, in kg?` : `One ${it[0]} weighs ${D(m, 10 ** a)} kg. How much do ${10 ** k} such ${it[1]} weigh, in kg?`;
+    },
     teach: {
       idea: "Multiplying by 10 makes each digit worth ten times as much, so every digit moves one place to the left; dividing by 10 moves every digit one place to the right.",
       method: "Count the zeros in 10, 100 or 1000 and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros.",
@@ -1799,6 +1812,15 @@ function netText(kind: number, n: number) {
   const base = PIECE[n];
   return kind === 0 ? `2 ${base}s and ${n} rectangles` : `1 ${base} and ${n} triangles`;
 }
+/** A wall that fits a real length in metres (for the plan-scale story). */
+function wallOf(m: number) {
+  return m <= 12 ? "A classroom wall" : m <= 60 ? "The front wall of the building" : "The boundary wall of the school ground";
+}
+/** Something that weighs about w kg each: [one, many]. */
+function itemOf(w: number): [string, string] {
+  return w < 0.0005 ? ["seed", "seeds"] : w < 0.03 ? ["nail", "nails"] : w < 1 ? ["packet of biscuits", "packets of biscuits"] : w <= 30 ? ["bag of rice", "bags of rice"] : ["sack of cement", "sacks of cement"];
+}
+/** The six sides of the L, from the top-left corner clockwise (the order the picture labels them). */
 function lsides(W: number, H: number, p: number, c: number) {
-  return [W, H - c, p, c, W - p, H];
+  return [W - p, c, p, H - c, W, H];
 }

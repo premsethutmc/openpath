@@ -25,6 +25,9 @@ const PCT = "MATH.number.percentage";
 const PRIMES = "MATH.number.primes";
 
 const none = () => null;
+/** "a" or "an" before a number as it is read ("an 8 m", "an 11 cm", "an 18%", "a 7 m"). */
+const aN = (x: number | string) => `${/^(8|11|18)(?!\d)|^8/.test(String(x)) ? "an" : "a"} ${x}`;
+const AN = (x: number | string) => `${/^(8|11|18)(?!\d)|^8/.test(String(x)) ? "An" : "A"} ${x}`;
 const NAMES = ["Anu", "Ravi", "Meena", "Arjun", "Kavya", "Imran", "Divya", "Karthik", "Priya", "Selvi"];
 const nm = (k: number) => NAMES[((k % NAMES.length) + NAMES.length) % NAMES.length];
 /** A number as printed: − for minus. */
@@ -455,7 +458,10 @@ export const B10: Def[] = [
     keep: ([x, y]) => x !== y,
     cap: 400,
     difficulty: ([x, y, k]) => (k <= 5 && x <= 5 && y <= 5 ? 1 : k <= 9 ? 2 : 3),
-    word: ([x, y, k, s]) => (s ? `A school canteen mixes ${x} bags of sand with ${y} bags of cement for a floor. For a bigger floor it uses ${y * k} bags of cement. How many bags of sand keep the same ratio?` : `A school canteen mixes ${x} bags of sand with ${y} bags of cement for a floor. For a bigger floor it uses ${x * k} bags of sand. How many bags of cement keep the same ratio?`),
+    word: ([x, y, k, s]) => {
+      const bags = (n: number) => `${n} bag${n === 1 ? "" : "s"}`;
+      return s ? `A school canteen mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(y * k)} of cement. How many bags of sand keep the same ratio?` : `A school canteen mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(x * k)} of sand. How many bags of cement keep the same ratio?`;
+    },
     teach: {
       idea: "Equivalent ratios are made by multiplying (or dividing) both terms by the same number, just like equivalent fractions.",
       method: "Find what the known term was multiplied by, then multiply the other term by the same number.",
@@ -733,12 +739,15 @@ export const B10: Def[] = [
       { id: "negative-as-minus", kind: "conceptual", competency: EXP, says: `${a}${sup(-k)} was read as a negative number. A negative power means a fraction: ${a}${sup(-k)} = 1/${a}${sup(k)}.`, predict: -(a ** m) * a ** k },
       m > 0 && { id: "sign-ignored", kind: "procedural", competency: EXP, says: `The powers were added as ${m} + ${k}; the second power is −${k}, so it is ${m} − ${k}.`, predict: a ** (m + k) <= 1e7 ? a ** (m + k) : null },
       m === 0 && { id: "multiplied", kind: "conceptual", competency: EXP, says: `${a} was multiplied by −${k}. A power is repeated multiplication; a negative power is 1 over the positive power.`, predict: -a * k },
-      { id: "reciprocal-missed", kind: "procedural", competency: EXP, says: "The value of the positive power was given; a negative power turns it into 1 over that number.", predict: m - k < 0 ? a ** (k - m) : 1 / a ** (m - k) },
+      { id: "reciprocal-missed", kind: "procedural", competency: EXP, says: "The value of the positive power was given; a negative power turns it into 1 over that number.", predict: m - k < 0 ? a ** (k - m) : a ** (m - k) <= 1000 ? 1 / a ** (m - k) : null },
     ]),
-    distractors: ([a, m, k]) => [a ** (m - k - 1), a ** (m - k + 1)],
+    // only values that show as exact fractions (denominators up to 1000), never a long decimal
+    distractors: ([a, m, k]) => [a ** (m - k - 1), a ** (m - k + 1), a ** (k - m)].filter((x) => Number.isInteger(x) || Number.isInteger(Math.round(1 / x)) && Math.round(1 / x) <= 1000),
     variants: () => [],
     explain: (s) => (s.id === "combine" ? `${s.inputs[0]} + (${n_(Number(s.inputs[1]))}) = ${n_(Number(s.value))}` : `${s.inputs[0]} to the power ${n_(Number(s.inputs[1]))} = ${Number(s.value) < 1 ? `1/${Math.round(1 / Number(s.value))}` : s.value}`),
     domain: [[2, 10], [0, 5], [1, 8]],
+    // answers written as exact fractions: denominators up to 1000
+    keep: ([a, m, k]) => k <= m || a ** (k - m) <= 1000,
     cap: 400,
     difficulty: ([, m]) => (m === 0 ? 1 : 2),
     word: ([a, m, k]) => `A scientist writes a measurement as ${m === 0 ? `${a}${sup(-k)}` : `${a}${sup(m)} × ${a}${sup(-k)}`} grams. What is that as a number of grams? (A fraction is fine.)`,
@@ -840,9 +849,10 @@ export const B10: Def[] = [
     cap: 400,
     difficulty: ([a, b]) => (Math.abs(a) > 10 || Math.abs(b) > 10 ? 3 : a < 0 && b < 0 ? 2 : 1),
     word: ([a, b]) => {
-      if (a < 0 && b < 0) return `The temperature in a hill town is falling by ${-a} °C every hour. Compared with now, how many degrees warmer was it ${-b} hours ago? (Give the change from now to then as an integer: warmer is positive.)`;
-      const [rate, hours] = a < 0 ? [a, b] : [b, a];
-      return `The temperature in a hill town falls by ${-rate} °C every hour, a change of ${n_(rate)} °C per hour. What is the total change in temperature after ${hours} hours? (A fall is negative.)`;
+      // money taken out of savings: any size of change makes sense (a temperature falling 15 °C an hour does not)
+      if (a < 0 && b < 0) return `Every day ${nm(-a - b)} takes ₹${-a} out of a savings box, a change of −₹${-a} a day. Compared with now, how much more money was in the box ${-b} days ago? (Give the change from now to then as an integer: more money is positive.)`;
+      const [rate, days] = a < 0 ? [a, b] : [b, a];
+      return `Every day ${nm(days - rate)} takes ₹${-rate} out of a savings box, a change of −₹${-rate} a day. What is the total change in the money in the box after ${days} days, in rupees? (Money taken out is negative.)`;
     },
     teach: {
       idea: "Multiplying by a negative number reverses the direction: so a negative times a positive is negative, and a negative times a negative is positive.",
@@ -867,7 +877,7 @@ export const B10: Def[] = [
     prompt: ([c, p, s, m]) => {
       const cp = 20 * c;
       const sp = cp + (s ? -1 : 1) * ((cp * p) / 100);
-      return m ? `A shopkeeper sells a fan for ${rs(sp)} and makes a ${p}% ${s ? "loss" : "profit"} on it. What did the fan cost him (the cost price), in rupees?` : `A shopkeeper buys a fan for ${rs(cp)} and sells it at a ${p}% ${s ? "loss" : "profit"}. What is the selling price, in rupees?`;
+      return m ? `A shopkeeper sells a fan for ${rs(sp)} and makes ${aN(p)}% ${s ? "loss" : "profit"} on it. What did the fan cost him (the cost price), in rupees?` : `A shopkeeper buys a fan for ${rs(cp)} and sells it at ${aN(p)}% ${s ? "loss" : "profit"}. What is the selling price, in rupees?`;
     },
     solve: ([c, p, s, m]) => {
       const cp = 20 * c;
@@ -909,7 +919,9 @@ export const B10: Def[] = [
     word: ([c, p, s, m]) => {
       const cp = 20 * c;
       const sp = cp + (s ? -1 : 1) * ((cp * p) / 100);
-      return m ? `${nm(c)} sold an old cycle for ${rs(sp)} and found that this was a ${p}% ${s ? "loss" : "profit"} on what it had cost. How much had the cycle cost, in rupees?` : `${nm(c)} bought a cycle for ${rs(cp)} and later sold it at a ${p}% ${s ? "loss" : "profit"}. For how many rupees did ${nm(c)} sell it?`;
+      // an item whose price fits ₹100–₹1000
+      const it = cp <= 300 ? "school bag" : cp <= 600 ? "pair of shoes" : "wall clock";
+      return m ? `${nm(c)} sold a ${it} for ${rs(sp)} and found that this was ${aN(p)}% ${s ? "loss" : "profit"} on what it had cost. How much had the ${it} cost, in rupees?` : `${nm(c)} bought a ${it} for ${rs(cp)} and later sold it at ${aN(p)}% ${s ? "loss" : "profit"}. For how many rupees did ${nm(c)} sell it?`;
     },
     teach: {
       idea: "Profit or loss per cent compares the profit or loss with the cost price: 20% profit means the selling price is 120% of the cost price.",
@@ -1021,7 +1033,7 @@ export const B10: Def[] = [
     mc: true,
     parse: none,
     reject: ([k, d, m]) => (k < 2 || k > 60 || (m !== 0 && m !== 1) || d < 1 || d > (m ? 4 : 10) || (k * (m ? GST[d - 1] : 5 * d)) % 2 !== 0 ? "A price ₹100 to ₹3000 with a discount (5% steps) or GST (5, 12, 18, 28%), giving whole rupees." : null),
-    prompt: ([k, d, m]) => (m ? `A mixer costs ${rs(50 * k)} before GST. GST is ${GST[d - 1]}%. What is the price including GST, in rupees?` : `A shirt is marked ${rs(50 * k)}. The shop gives a ${5 * d}% discount. What is the selling price, in rupees?`),
+    prompt: ([k, d, m]) => (m ? `A mixer costs ${rs(50 * k)} before GST. GST is ${GST[d - 1]}%. What is the price including GST, in rupees?` : `A shirt is marked ${rs(50 * k)}. The shop gives ${aN(5 * d)}% discount. What is the selling price, in rupees?`),
     solve: ([k, d, m]) => {
       const P = 50 * k;
       const pc = m ? GST[d - 1] : 5 * d;

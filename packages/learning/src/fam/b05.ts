@@ -44,6 +44,8 @@ const readTuple = (v: Value): number[] | null => {
   const m = v.replace(/−/g, "-").replace(/\s/g, "").match(/^\((-?\d+(?:,-?\d+)*)\)$/);
   return m ? m[1].split(",").map(Number) : null;
 };
+/** A point as a tuple answer when it is on the first-quadrant grid (0 to 10), else null (no prediction). */
+const onGrid = (a: number, b: number) => (a >= 0 && a <= 10 && b >= 0 && b <= 10 ? tup(a, b) : null);
 const isInt = (v: Value): v is number => typeof v === "number" && Number.isInteger(v);
 const inRange = (p: number[], ranges: [number, number][]) => p.length === ranges.length && p.every((v, i) => Number.isInteger(v) && v >= ranges[i][0] && v <= ranges[i][1]);
 /** A small deterministic random sequence from a seed (for families whose parameter is a seed). */
@@ -234,7 +236,7 @@ export const B05: Def[] = [
       { id: "next-only", kind: "procedural", competency: GROW, says: "Only the next number after those shown was found; keep using the rule until you reach the place asked for.", predict: a + 4 * d },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "jumps" ? `From the 1st number to the ${ord(Number(s.inputs[0]))} there are ${s.value} jumps` : s.id === "total" ? `${s.inputs[0]} jumps of ${s.inputs[1]} make ${s.value}` : `Start at ${s.inputs[0]} and add ${s.inputs[1]}: ${s.value}`),
+    explain: (s) => (s.id === "jumps" ? `From the 1st number to the ${ord(Number(s.inputs[0]))} there ${Number(s.value) === 1 ? "is 1 jump" : `are ${s.value} jumps`}` : s.id === "total" ? `${s.inputs[0]} jumps of ${s.inputs[1]} make ${s.value}` : `Start at ${s.inputs[0]} and add ${s.inputs[1]}: ${s.value}`),
     domain: [[1, 30], [2, 9], [6, 12]],
     cap: 400,
     difficulty: ([, d, n]) => (n <= 7 && d <= 5 ? 1 : n <= 9 ? 2 : 3),
@@ -351,7 +353,7 @@ export const B05: Def[] = [
     figure: (p) => ({ type: "table", head: ["Angle", "P", "Q", "R", "S"], rows: [["Size", ...angleList(p).map((x) => `${x}°`)]] }),
     word: (p) => {
       const xs = angleList(p);
-      return `${name(p[1] + p[2])} opens a pair of scissors four times and measures the angle each time: ${xs[0]}°, ${xs[1]}°, ${xs[2]}° and ${xs[3]}°. Which of these is ${p[0] % 2 === 0 ? "an" : "a"} ${KINDS[p[0]]} angle? Write its size in degrees.`;
+      return `${name(p[1] + p[2])} measures four angles drawn in a geometry notebook: ${xs[0]}°, ${xs[1]}°, ${xs[2]}° and ${xs[3]}°. Which of these is ${p[0] % 2 === 0 ? "an" : "a"} ${KINDS[p[0]]} angle? Write its size in degrees.`;
     },
     teach: {
       idea: "A right angle (90°) is a square corner. Smaller than a right angle is acute, between a right angle and a straight line is obtuse, and a straight line is a straight angle (180°).",
@@ -452,7 +454,7 @@ export const B05: Def[] = [
     explain: (s) => (s.id === "double" ? `Diameter = 2 × radius = 2 × ${s.inputs[0]} = ${s.value} cm` : `Radius = diameter ÷ 2 = ${s.inputs[0]} ÷ 2 = ${s.value} cm`),
     domain: [[0, 1], [1, 120]],
     difficulty: ([dir, x]) => (x <= 10 ? 1 : dir === 0 || x <= 40 ? 2 : 3),
-    word: ([dir, x]) => (dir === 0 ? `${name(x)} draws a round rangoli. The string from the centre to the edge is ${x} cm long. How wide is the rangoli straight across through the centre, in cm?` : `A round chapati is ${x} cm across, measured straight through its centre. How far is it from the centre to the edge, in cm?`),
+    word: ([dir, x]) => (dir === 0 ? `${name(x)} draws a round rangoli. The string from the centre to the edge is ${x} cm long. How wide is the rangoli straight across through the centre, in cm?` : x <= 30 ? `A round chapati is ${x} cm across, measured straight through its centre. How far is it from the centre to the edge, in cm?` : `A round table top is ${x} cm across, measured straight through its centre. How far is it from the centre to the edge, in cm?`),
     teach: {
       idea: "The radius goes from the centre to the edge. The diameter goes right across the circle through the centre, so it is made of two radii.",
       method: "To find the diameter, double the radius. To find the radius, halve the diameter.",
@@ -529,10 +531,10 @@ export const B05: Def[] = [
     // [axis, m, x, y]: reflect P(x, y) in x = m (axis 0) or y = m (axis 1)
     parse: none,
     reject: (p) => {
-      if (!inRange(p, [[0, 1], [-3, 3], [-6, 6], [-6, 6]])) return "A point with coordinates −6 to 6 and a mirror line x = m or y = m, m from −3 to 3.";
+      if (!inRange(p, [[0, 1], [1, 9], [0, 10], [0, 10]])) return "A point with coordinates 0 to 10 and a mirror line x = m or y = m, m from 1 to 9 (Grade 5: no negative numbers).";
       const [axis, m, x, y] = p;
       const c = axis ? y : x;
-      return c === m || Math.abs(2 * m - c) > 6 ? "The point must be off the line, and its image on the grid." : null;
+      return c === m || 2 * m - c < 0 || 2 * m - c > 10 ? "The point must be off the line, and its image on the grid (0 to 10)." : null;
     },
     prompt: ([axis, m, x, y]) => `In the picture, the point P is at ${tup(x, y)} and the mirror line is ${axis ? "y" : "x"} = ${n_(m)}. Reflect P in the mirror line. What are the coordinates of its image? Write them as (x, y).`,
     solve: ([axis, m, x, y]) => {
@@ -554,30 +556,29 @@ export const B05: Def[] = [
       return axis ? a === x && (b + y) / 2 === m && b !== y : b === y && (a + x) / 2 === m && a !== x;
     },
     bugs: ([axis, m, x, y]) => [
-      { id: "axis-not-line", kind: "conceptual", competency: TRANS, says: `The point was reflected in the ${axis ? "x" : "y"}-axis (the sign was just changed) instead of in the line ${axis ? "y" : "x"} = ${n_(m)}.`, predict: m === 0 ? null : axis ? tup(x, -y) : tup(-x, y) },
-      { id: "wrong-coordinate", kind: "conceptual", competency: CART, says: `The wrong coordinate was changed: a mirror line ${axis ? "y = " + n_(m) + " goes across, so the point moves up or down and only y changes" : "x = " + n_(m) + " goes up and down, so the point moves left or right and only x changes"}.`, predict: axis ? (x !== 2 * m - x ? tup(2 * m - x, y) : null) : y !== 2 * m - y ? tup(x, 2 * m - y) : null },
+      { id: "wrong-coordinate", kind: "conceptual", competency: CART, says: `The wrong coordinate was changed: a mirror line ${axis ? "y = " + n_(m) + " goes across, so the point moves up or down and only y changes" : "x = " + n_(m) + " goes up and down, so the point moves left or right and only x changes"}.`, predict: axis ? (x !== 2 * m - x && 2 * m - x >= 0 && 2 * m - x <= 10 ? tup(2 * m - x, y) : null) : y !== 2 * m - y && 2 * m - y >= 0 && 2 * m - y <= 10 ? tup(x, 2 * m - y) : null },
       { id: "onto-line", kind: "procedural", competency: TRANS, says: "The point was moved only as far as the mirror line; the image is as far beyond the line as P is in front of it.", predict: axis ? tup(x, m) : tup(m, y) },
     ],
-    distractors: ([axis, m, x, y]) => [tup(x, y), axis ? tup(x, 2 * m - y + (y > m ? -1 : 1)) : tup(2 * m - x + (x > m ? -1 : 1), y), axis ? tup(-x, -y) : tup(-x, -y)],
+    distractors: ([axis, m, x, y]) => [tup(x, y), axis ? tup(x, 2 * m - y + (y > m ? -1 : 1)) : tup(2 * m - x + (x > m ? -1 : 1), y), axis ? tup(2 * m - y, x) : tup(y, 2 * m - x)],
     variants: () => [],
     explain: (s) => (s.id === "distance" ? `P is ${Math.abs(Number(s.value))} ${Math.abs(Number(s.value)) === 1 ? "unit" : "units"} from the mirror line` : `Go the same distance to the other side of the line: the image is ${s.value}`),
-    domain: [[0, 1], [-3, 3], [-6, 6], [-6, 6]],
+    domain: [[0, 1], [1, 9], [0, 10], [0, 10]],
     cap: 400,
     difficulty: ([axis, m, x, y]) => {
       const c = axis ? y : x;
-      return m === 0 ? 1 : Math.sign(c) !== Math.sign(2 * m - c) ? 3 : 2;
+      return Math.abs(c - m) <= 2 ? 1 : axis === 0 ? 2 : 3;
     },
-    figure: ([axis, m, x, y]) => ({ type: "plane", points: [[x, y, "P"]], segments: [axis ? [[-7, m], [7, m]] : [[m, -7], [m, 7]]], range: 7 }),
+    figure: ([axis, m, x, y]) => ({ type: "plane", points: [[x, y, "P"]], segments: [axis ? [[0, m], [10, m]] : [[m, 0], [m, 10]]], range: 10 }),
     word: ([axis, m, x, y]) => `On a squared map, a straight canal runs along the line ${axis ? "y" : "x"} = ${n_(m)}. A temple stands at ${tup(x, y)}. Its reflection in the still water appears exactly opposite, the same distance from the canal on the other side. At which point is the reflection? Write it as (x, y).`,
     teach: {
       idea: "A mirror image is as far behind the mirror line as the object is in front of it, straight across, at right angles to the line.",
       method: "Count how far P is from the mirror line, then count the same distance on the other side. Only the coordinate that crosses the line changes.",
-      visual: ([axis, m, x, y]) => ({ type: "plane", points: [[x, y, "P"], axis ? [x, 2 * m - y, "P′"] : [2 * m - x, y, "P′"]], segments: [axis ? [[-7, m], [7, m]] : [[m, -7], [m, 7]]], range: 7 }),
+      visual: ([axis, m, x, y]) => ({ type: "plane", points: [[x, y, "P"], axis ? [x, 2 * m - y, "P′"] : [2 * m - x, y, "P′"]], segments: [axis ? [[0, m], [10, m]] : [[m, 0], [m, 10]]], range: 10 }),
       alternatives: [
         { id: "fold_grid", title: "Fold the grid paper", kind: "conceptual", text: ["Draw the point on squared paper and fold the paper along the mirror line.", "Press hard on the point: the mark it makes on the other side is the image."] },
       ],
     },
-    limits: "Single points reflected in lines x = m or y = m on a grid; reflecting whole figures, slanted mirror lines and drawing are not here (drawing is marked by an educator).",
+    limits: "Single points in the first quadrant (coordinates 0 to 10, no negative numbers at Grade 5) reflected in lines x = m or y = m; reflecting whole figures, slanted mirror lines and drawing are not here (drawing is marked by an educator).",
   },
   {
     id: "aetrans",
@@ -589,9 +590,9 @@ export const B05: Def[] = [
     // [x, y, a, b]: move P(x, y) a units right (left if negative) and b units up (down if negative)
     parse: none,
     reject: (p) => {
-      if (!inRange(p, [[-5, 5], [-5, 5], [-4, 4], [-4, 4]])) return "A point with coordinates −5 to 5 moved up to 4 units each way.";
+      if (!inRange(p, [[0, 10], [0, 10], [-4, 4], [-4, 4]])) return "A point with coordinates 0 to 10 moved up to 4 units each way (Grade 5: no negative numbers).";
       const [x, y, a, b] = p;
-      return a === 0 || b === 0 || Math.abs(x + a) > 6 || Math.abs(y + b) > 6 ? "Moves both across and up or down, staying on the grid." : null;
+      return a === 0 || b === 0 || x + a < 0 || x + a > 10 || y + b < 0 || y + b > 10 ? "Moves both across and up or down, staying on the grid (0 to 10)." : null;
     },
     prompt: ([x, y, a, b]) => `The point P is at ${tup(x, y)}. Slide it ${Math.abs(a)} ${Math.abs(a) === 1 ? "unit" : "units"} to the ${a > 0 ? "right" : "left"} and ${Math.abs(b)} ${Math.abs(b) === 1 ? "unit" : "units"} ${b > 0 ? "up" : "down"}. Where is it now? Write (x, y).`,
     solve: ([x, y, a, b]) => ({
@@ -611,27 +612,27 @@ export const B05: Def[] = [
       return t[0] === px && t[1] === py;
     },
     bugs: ([x, y, a, b]) => [
-      { id: "swap-moves", kind: "conceptual", competency: CART, says: "The across move was added to y and the up-down move to x; the first coordinate tells how far across, the second how far up.", predict: tup(x + b, y + a) },
-      { id: "wrong-way-across", kind: "procedural", competency: CART, says: `The point was moved to the ${a > 0 ? "left" : "right"} instead of the ${a > 0 ? "right" : "left"}: moving right makes x bigger, moving left makes it smaller.`, predict: tup(x - a, y + b) },
-      { id: "wrong-way-updown", kind: "procedural", competency: CART, says: `The point was moved ${b > 0 ? "down" : "up"} instead of ${b > 0 ? "up" : "down"}: moving up makes y bigger, moving down makes it smaller.`, predict: tup(x + a, y - b) },
+      { id: "swap-moves", kind: "conceptual", competency: CART, says: "The across move was added to y and the up-down move to x; the first coordinate tells how far across, the second how far up.", predict: onGrid(x + b, y + a) },
+      { id: "wrong-way-across", kind: "procedural", competency: CART, says: `The point was moved to the ${a > 0 ? "left" : "right"} instead of the ${a > 0 ? "right" : "left"}: moving right makes x bigger, moving left makes it smaller.`, predict: onGrid(x - a, y + b) },
+      { id: "wrong-way-updown", kind: "procedural", competency: CART, says: `The point was moved ${b > 0 ? "down" : "up"} instead of ${b > 0 ? "up" : "down"}: moving up makes y bigger, moving down makes it smaller.`, predict: onGrid(x + a, y - b) },
     ],
-    distractors: ([x, y, a, b]) => [tup(x + a, y), tup(x, y + b), tup(x - a, y - b)],
+    distractors: ([x, y, a, b]) => [tup(x + a, y), tup(x, y + b), onGrid(x - a, y - b), tup(x + a, y + b + (y + b < 10 ? 1 : -1))].filter((t): t is string => t !== null),
     variants: () => [],
     explain: (s) => (s.id === "across" ? `Across: ${n_(Number(s.inputs[0]))} ${Number(s.inputs[1]) > 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : `Up or down: ${n_(Number(s.inputs[0]))} ${Number(s.inputs[1]) > 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
-    domain: [[-5, 5], [-5, 5], [-4, 4], [-4, 4]],
+    domain: [[0, 10], [0, 10], [-4, 4], [-4, 4]],
     cap: 400,
-    difficulty: ([x, y, a, b]) => (a > 0 && b > 0 && x >= 0 && y >= 0 ? 1 : x + a < 0 !== x < 0 || y + b < 0 !== y < 0 ? 3 : 2),
-    figure: ([x, y]) => ({ type: "plane", points: [[x, y, "P"]], range: 7 }),
+    difficulty: ([, , a, b]) => (a > 0 && b > 0 ? 1 : a < 0 && b < 0 ? 3 : 2),
+    figure: ([x, y]) => ({ type: "plane", points: [[x, y, "P"]], range: 10 }),
     word: ([x, y, a, b]) => `In a board game on a squared grid, ${name(x + y + 5)}'s counter is at ${tup(x, y)}. The card says: move ${Math.abs(a)} to the ${a > 0 ? "right" : "left"} and ${Math.abs(b)} ${b > 0 ? "up" : "down"}. Where does the counter end up? Write (x, y).`,
     teach: {
       idea: "A translation slides a shape without turning or flipping it: every point moves the same distance across and the same distance up or down.",
       method: "Add the move to the right to x (take away a move to the left), and add the move up to y (take away a move down).",
-      visual: ([x, y, a, b]) => ({ type: "plane", points: [[x, y, "P"], [x + a, y + b, "P′"]], segments: [[[x, y], [x + a, y]], [[x + a, y], [x + a, y + b]]], range: 7 }),
+      visual: ([x, y, a, b]) => ({ type: "plane", points: [[x, y, "P"], [x + a, y + b, "P′"]], segments: [[[x, y], [x + a, y]], [[x + a, y], [x + a, y + b]]], range: 10 }),
       alternatives: [
         { id: "walk", title: "Walk it on the grid", kind: "procedural", text: ["Put a finger on P. Count the squares across first, one at a time, then the squares up or down.", "Read the coordinates where your finger stops: across first, then up."] },
       ],
     },
-    limits: "One point translated on a grid; translating whole figures, rotations and drawing are not here.",
+    limits: "One point translated in the first quadrant (coordinates 0 to 10, no negative numbers at Grade 5); translating whole figures, rotations and drawing are not here.",
   },
   // ============================================================ 24-hour clock
   {
@@ -795,7 +796,13 @@ export const B05: Def[] = [
     domain: [[5, 20], [0, 11], [6, 23], [0, 11]],
     cap: 400,
     difficulty: ([h1, k1, h2, k2]) => (k2 >= k1 && h1 >= 12 ? 1 : k2 >= k1 ? 2 : 3),
-    word: ([h1, k1, h2, k2]) => `A train leaves Chennai Egmore at ${hh(h1, 5 * k1)} and reaches Tiruchirappalli at ${hh(h2, 5 * k2)} the same day. How long is the journey? Write it as (hours, minutes).`,
+    word: ([h1, k1, h2, k2]) => {
+      const d = h2 * 60 + 5 * k2 - (h1 * 60 + 5 * k1);
+      // the Chennai–Tiruchirappalli train takes about 5 to 7 hours; other lengths get an everyday trip instead
+      return d >= 300 && d <= 420
+        ? `A train leaves Chennai Egmore at ${hh(h1, 5 * k1)} and reaches Tiruchirappalli at ${hh(h2, 5 * k2)} the same day. How long is the journey? Write it as (hours, minutes).`
+        : `${name(h1 + k2)} leaves home at ${hh(h1, 5 * k1)} and gets back at ${hh(h2, 5 * k2)} the same day. How long was ${name(h1 + k2)} away? Write it as (hours, minutes).`;
+    },
     teach: {
       idea: "Time is counted in sixties: 60 minutes make 1 hour. So when you take away times you borrow 60 minutes, not 100.",
       method: "Count on from the start to the next full hour, then the full hours, then the minutes to the end time, and add them up.",
@@ -917,7 +924,7 @@ export const B05: Def[] = [
       const [kind, op, A, B] = p;
       const [b1, s1] = mixed(kind, A);
       const [b2, s2] = mixed(kind, B);
-      if (op === 0) return s1 + s2 < UNITS[kind].f || s1 + s2 === UNITS[kind].f || b1 + b2 > 9 ? "An addition that regroups the small units, with an answer under 10 large units." : null;
+      if (op === 0) return s1 + s2 < UNITS[kind].f || s1 + s2 === UNITS[kind].f || b1 + b2 + 1 > 9 ? "An addition that regroups the small units, with an answer under 10 large units." : null;
       return s1 >= s2 || b1 <= b2 ? "A subtraction that needs regrouping, with a positive answer." : null;
     },
     prompt: ([kind, op, A, B]) => {
@@ -982,7 +989,9 @@ export const B05: Def[] = [
       const [b1, s1] = mixed(kind, A);
       const [b2, s2] = mixed(kind, B);
       const tot = op ? b1 * f + s1 - (b2 * f + s2) : b1 * f + s1 + b2 * f + s2;
-      return [tup(Math.floor(tot / f) + 1, tot % f), tup(Math.max(0, Math.floor(tot / f) - 1), tot % f)];
+      const st = UNITS[kind].step;
+      const near = tot % f + st < f ? tot % f + st : tot % f - st;
+      return [tup(Math.floor(tot / f) + 1, tot % f), tup(Math.max(0, Math.floor(tot / f) - 1), tot % f), tup(Math.floor(tot / f), near)];
     },
     variants: () => [],
     explain: (s) =>
@@ -1144,7 +1153,13 @@ export const B05: Def[] = [
         { id: "added", kind: "conceptual", competency: CONV, says: "The two numbers were simply added; first change the large units into small units.", predict: b + sm },
       ];
     },
-    distractors: ([k, b, s]) => [b * CONVK[k].f * 10 + convSmall(k, s), b * CONVK[k].f + 10 * convSmall(k, s), (b + 1) * CONVK[k].f + convSmall(k, s)],
+    // near misses: one large unit more or less, or the small part off by a ten (cm) or a hundred (g, mL, m)
+    distractors: ([k, b, s]) => {
+      const f = CONVK[k].f;
+      const sm = convSmall(k, s);
+      const d = k === 0 ? 10 : 100;
+      return [(b + 1) * f + sm, (b - 1) * f + sm, b * f + sm + d, b * f + sm - d].filter((x) => x > 0 && x !== b * f + sm);
+    },
     variants: () => [],
     explain: (s) => (s.id === "big" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 3], [1, 9], [1, 199]],
@@ -1158,9 +1173,9 @@ export const B05: Def[] = [
       const sm = convSmall(k, s);
       return [
         `A saree border piece is ${b} m ${sm} cm long. How many centimetres long is it?`,
-        `A watermelon weighs ${b} kg ${sm} g. How many grams does it weigh?`,
-        `A water bottle holds ${b} L ${sm} mL. How many millilitres does it hold?`,
-        `${name(b + s)} walks ${b} km ${sm} m to school. How many metres is that?`,
+        b <= 5 ? `A watermelon weighs ${b} kg ${sm} g. How many grams does it weigh?` : `A bag of rice weighs ${b} kg ${sm} g. How many grams does it weigh?`,
+        b <= 2 ? `A water bottle holds ${b} L ${sm} mL. How many millilitres does it hold?` : `A bucket holds ${b} L ${sm} mL of water. How many millilitres is that?`,
+        b <= 2 ? `${name(b + s)} walks ${b} km ${sm} m to school. How many metres is that?` : `${name(b + s)} goes ${b} km ${sm} m by bus to the town library. How many metres is that?`,
       ][k];
     },
     teach: {
@@ -1389,7 +1404,7 @@ export const B05: Def[] = [
       if (L === 0 && T < 10) return "At least five digits.";
       return !(T < 10 || H === 0 || REST[r] < 10) ? "A number with a zero to be written somewhere." : null;
     },
-    prompt: (p) => `Write in figures: ${indWords(p)}.`,
+    prompt: (p) => `Write in figures: ${indWords(p)}. (Write the number without commas, for example 407052.)`,
     solve: ([L, T, H, r]) => ({
       steps: [
         { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000 },
@@ -1412,7 +1427,8 @@ export const B05: Def[] = [
       const heard = Number(`${L || ""}${T || ""}${H || ""}${REST[r] || ""}`);
       return [
         { id: "no-zeros", kind: "conceptual", competency: PV, says: "The numbers heard were written one after another, without zeros for the empty places; each period has a fixed number of places (lakhs, then 2 for thousands, then 3 for hundreds, tens and ones).", predict: heard !== ans ? heard : null },
-        { id: "lakh-as-ten-thousand", kind: "recall", competency: LARGE, says: "A lakh was written like ten thousand; 1 lakh = 100 thousand = 1,00,000 (six digits).", predict: L > 0 && T < 10 ? L * 10000 + T * 1000 + H * 100 + REST[r] : null },
+        // only where it gives a number: the lakhs digit lands in the ten-thousands place, which is empty when T < 10
+        ...(L > 0 && T < 10 ? [{ id: "lakh-as-ten-thousand", kind: "recall", competency: LARGE, says: `A lakh was written like ten thousand, so the ${L} went into the ten-thousands place; 1 lakh = 100 thousand = 1,00,000 (six digits).`, predict: L * 10000 + T * 1000 + H * 100 + REST[r] } as Bug] : []),
       ];
     },
     distractors: ([L, T, H, r]) => [L * 1000000 + T * 1000 + H * 100 + REST[r], L * 100000 + T * 10000 + H * 100 + REST[r], L * 100000 + T * 1000 + H * 10 + REST[r]],
@@ -1421,7 +1437,7 @@ export const B05: Def[] = [
     domain: [[0, 9], [0, 99], [0, 9], [0, 19]],
     cap: 400,
     difficulty: ([L, T, H, r]) => [L === 0, T < 10, H === 0, REST[r] < 10].filter(Boolean).length >= 2 ? 3 : L === 0 ? 1 : 2,
-    word: (p) => `The number of people who visited a book fair in Chennai was announced as "${indWords(p)}". ${name(p[1] + p[2])} writes it down in figures. What does ${name(p[1] + p[2])} write?`,
+    word: (p) => `The number of people who visited a book fair in Chennai was announced as "${indWords(p)}". ${name(p[1] + p[2])} writes it down in figures. What does ${name(p[1] + p[2])} write? (Write the number without commas.)`,
     teach: {
       idea: "In the Indian system the places are grouped as ones–tens–hundreds, then thousands–ten thousands, then lakhs–ten lakhs. Every place gets a digit, so empty places get 0.",
       method: "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas: 4,07,052.",

@@ -1164,9 +1164,11 @@ const SPEC_V1: Record<string, Partial<Def>> = {
 };
 for (const f of F) Object.assign(f, { ...SPEC_V1[f.id], ...f, ...(SPEC_V1[f.id]?.mc ? { mc: true } : {}) });
 // families@2: the families written in fam/<domain>.ts (one id space; a duplicate id is an error)
+const V2 = new Set<string>();
 for (const f of DOMAIN_FAMILIES) {
   if (F.some((x) => x.id === f.id)) throw new Error(`families@2: duplicate family id ${f.id}`);
   F.push(f);
+  V2.add(f.id);
 }
 // one registry of families however the module is loaded (test runners may load it twice): shared on globalThis
 const GF = globalThis as { __openpathFamilies?: Map<string, Def>; __openpathPools?: Map<string, { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> }> };
@@ -1195,10 +1197,27 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
   const add = (v: number | undefined) => {
     if (v !== undefined && Number.isFinite(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && ((answer as number) < 0 || v >= 0) && out.length < 3) out.push(v);
   };
-  for (const b of bugs) add(b.predict === null ? undefined : Array.isArray(b.predict) ? (b.predict[0] as number) : (b.predict as number));
+  // families@2: a predicted wrong answer is offered whatever its sign (the wrong-sign answer is the point of a sign-rule
+  // question); only the topped-up neighbours keep to the answer's sign. The first families keep their rule (the server
+  // computes their options too).
+  const addPredicted = (v: number | undefined) => {
+    if (!V2.has(def.id)) return add(v);
+    if (v !== undefined && Number.isFinite(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && out.length < 3) out.push(v);
+  };
+  for (const b of bugs) addPredicted(b.predict === null ? undefined : Array.isArray(b.predict) ? (b.predict[0] as number) : (b.predict as number));
   for (const v of (def.distractors?.(p) ?? []) as number[]) add(v);
   for (const v of [(answer as number) + 1, (answer as number) - 1, (answer as number) + 2, 2 * (answer as number), (answer as number) + 3, (answer as number) - 2]) add(v);
   return [...out, answer].sort((x, y) => (x as number) - (y as number));
+}
+/** A value as the learner sees it: a family that works in decimals (money, measures, statistics) shows a terminating
+ * value as a decimal ("54.5", not "109/2"); equal values are still equal answers. */
+function shown(def: Def, v: Value): string {
+  if (!def.decimals || typeof v !== "number") return show(v);
+  for (let dp = 0; dp <= 6; dp++) {
+    const t = Math.round(v * 10 ** dp);
+    if (Math.abs(t / 10 ** dp - v) < 1e-9) return (t / 10 ** dp).toFixed(dp).replace(/^-/, "-");
+  }
+  return show(v);
 }
 /** Whether a predicted value is the right answer (then the explanation cannot be seen on this problem). */
 function predictsAnswer(def: Def, v: Value, answer: Value): boolean {
@@ -1233,17 +1252,17 @@ function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem 
       const ix = [...new Set(vals.map((v) => idx(v as Value)))].filter((i) => i >= 0 && i !== right);
       return ix.length ? [{ ...b, predict: ix.length === 1 ? ix[0] : ix }] : [];
     });
-    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map(show) };
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map((o) => shown(def, o)) };
   }
   if (form === "word") {
     if (!def.word) throw new Error(`families@2: ${def.id} has no everyday-situation form`);
-    return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: def.type, answer: show(answer), bugs };
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: def.type, answer: shown(def, answer), bugs };
   }
   const choice = def.type === "choice";
   // a family's own options (families@2), or the first family's fixed pair
   const own = choice && def.choices ? def.choices(p) : null;
   if (own && (own.length < 2 || own.length > 4 || new Set(own).size !== own.length || typeof answer !== "number" || !own[answer])) throw new Error(`families@2: ${def.id}(${p}) needs 2–4 distinct options and the index of the right one`);
-  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : show(answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}) };
+  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : shown(def, answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}) };
 }
 
 export type Parsed = { supported: true; problem: Problem } | { supported: false; reason: string; family?: string };

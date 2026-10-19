@@ -806,7 +806,7 @@ export const B12: Def[] = [
       const yy = den !== 0 ? (a2 * c1 + a1 * c2) / den : null;
       return [
         B("swapped", "procedural", SYS, "The values were written in the wrong order; the pair is (x, y): x first.", x !== y ? tup(y, x) : null),
-        B("added-to-eliminate", "procedural", SYS, "After making the x coefficients equal, the equations were added; with the same sign they must be subtracted to remove x.", yy !== null && yy !== y ? tup((c1 - b1 * yy) / a1, yy) : null),
+        B("added-to-eliminate", "procedural", SYS, "After making the x coefficients equal, the equations were added; with the same sign they must be subtracted to remove x.", yy !== null && yy !== y && Number.isInteger(yy) && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
       ].filter((b) => b.predict !== null);
     },
     distractors: ([, , , , x, y]) => [tup(x + 1, y), tup(x, y + 1), tup(x - 1, y + 2), tup(-x, y)],
@@ -859,7 +859,7 @@ export const B12: Def[] = [
       const yy = (a2 * c1 + a1 * c2) / den;
       return [
         B("swapped", "procedural", SYS, "The prices were given in the wrong order; the question asks for (pen, notebook).", x !== y ? tup(y, x) : null),
-        B("added-to-eliminate", "procedural", SYS, "After making the pen numbers equal, the two equations were added; they must be subtracted to remove the pens.", yy !== y ? tup((c1 - b1 * yy) / a1, yy) : null),
+        B("added-to-eliminate", "procedural", SYS, "After making the pen numbers equal, the two equations were added; they must be subtracted to remove the pens.", yy !== y && Number.isInteger(yy) && yy > 0 && (c1 - b1 * yy) / a1 > 0 && Number.isInteger((c1 - b1 * yy) / a1) ? tup((c1 - b1 * yy) / a1, yy) : null),
       ].filter((b) => b.predict !== null);
     },
     distractors: ([, , , , x, j]) => [tup(x + 1, 5 * j - 1), tup(x, 5 * j + 5), tup(x - 1, 5 * j)],

@@ -36,6 +36,8 @@ const BOYS = ["Ravi", "Arjun", "Imran", "Karthik"];
 const girl = (k: number) => GIRLS[((k % GIRLS.length) + GIRLS.length) % GIRLS.length];
 const boy = (k: number) => BOYS[((k % BOYS.length) + BOYS.length) % BOYS.length];
 const ITEMS = ["mangoes", "marbles", "pencils", "sweets", "stickers", "flowers"];
+/** n with a noun, singular for 1 ("1 tile", "3 tiles"). */
+const nn = (n: unknown, one: string, many: string) => `${n} ${Number(n) === 1 ? one : many}`;
 const pad2 = (n: number) => (n < 10 ? `0${n}` : String(n));
 const digitsOf = (n: number, len: number) => Array.from({ length: len }, (_, i) => Math.floor(n / 10 ** i) % 10);
 const fromDigits = (d: number[]) => d.reduce((s, x, i) => s + x * 10 ** i, 0);
@@ -50,6 +52,13 @@ const borrowNoDecrease = (a: number, b: number) => {
   const da = digitsOf(a, 3);
   const db = digitsOf(b, 3);
   return fromDigits(da.map((x, i) => (x < db[i] ? x + 10 - db[i] : x - db[i])));
+};
+/** A rectangle split into a tens part and a ones part (an area model), as a table: the parts' products filled in when
+ * `done`, else written as the multiplications to do. */
+const areaModel = (a: number, b: number, done: boolean): Visual => {
+  const t = Math.floor(a / 10) * 10;
+  const o = a % 10;
+  return { type: "table", title: `${a} × ${b}: a rectangle split into ${t} and ${o}`, head: ["×", String(t), String(o)], rows: [[b, done ? t * b : `${t} × ${b}`, done ? o * b : `${o} × ${b}`]] };
 };
 const money = (paise: number) => `${Math.floor(paise / 100)}.${pad2(paise % 100)}`;
 const paiseOf = (v: number | number[] | string) => Math.round(Number(String(v).replace(/[₹\s]/g, "")) * 100);
@@ -183,12 +192,12 @@ export const B03: Def[] = [
     domain: [[11, 99], [2, 9]],
     cap: 300,
     difficulty: ([a, b]) => (a < 30 && b <= 5 ? 1 : a * b <= 250 ? 2 : 3),
-    figure: ([a, b]) => ({ type: "array", rows: b, cols: a, split: Math.floor(a / 10) * 10 }),
+    figure: ([a, b]) => areaModel(a, b, false),
     word: ([a, b]) => `A box holds ${a} crayons. ${name(a + b)} buys ${b} boxes. How many crayons is that?`,
     teach: {
       idea: `Splitting a number into tens and ones lets you multiply each part separately and add: 23 × 4 = 20 × 4 + 3 × 4.`,
       method: "Split the two-digit number into tens and ones. Multiply the tens, multiply the ones, then add the two answers.",
-      visual: ([a, b]) => ({ type: "array", rows: b, cols: a, split: Math.floor(a / 10) * 10 }),
+      visual: ([a, b]) => areaModel(a, b, true),
       alternatives: [
         { id: "double", title: "Double and double again", kind: "procedural", text: ["For × 2 double the number; for × 4 double it twice; for × 8 double it three times.", "For × 5, multiply by 10 and halve."] },
       ],
@@ -485,7 +494,7 @@ export const B03: Def[] = [
       { id: "fact-slip-sub", kind: "recall", competency: SUB, says: `A take-away fact (${(a % 10) + 10} − ${b % 10}) is not yet reliable.`, predict: [a - b - 1, a - b + 1] },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "regroup" ? `Break 1 ten into 10 ones: ${s.inputs[1]} ones become ${s.value} ones, ${s.inputs[0]} tens become ${Number(s.inputs[0]) - 1}` : s.id === "ones" ? `Ones: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Tens: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "regroup" ? `Break 1 ten into 10 ones: ${nn(s.inputs[1], "one becomes", "ones become")} ${s.value} ones, ${nn(s.inputs[0], "ten becomes", "tens become")} ${Number(s.inputs[0]) - 1}` : s.id === "ones" ? `Ones: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Tens: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[20, 99], [10, 98]],
     cap: 400,
     difficulty: ([a, b]) => (b % 10 - (a % 10) <= 2 && a - b >= 10 ? 1 : a - b < 10 ? 3 : 2),
@@ -793,7 +802,7 @@ export const B03: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pictures" ? `The row for ${s.inputs[0]} has ${s.value} pictures` : `${s.inputs[0]} pictures × ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "pictures" ? `The row for ${s.inputs[0]} has ${nn(s.value, "picture", "pictures")}` : `${s.inputs[0]} pictures × ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 3], [0, 29], [0, 3]],
     cap: 300,
     difficulty: ([ki]) => (ki === 0 ? 1 : ki <= 2 ? 2 : 3),
@@ -932,7 +941,7 @@ export const B03: Def[] = [
     figure: ([f, a, b, c]) => ({ type: "balance", left: f < 2 ? `${a} + ${b}` : `${a} − ${b}`, right: f === 0 ? `□ + ${c}` : f === 1 ? `${c} + □` : `□ − ${c}` }),
     word: ([f, a, b, c]) =>
       f < 2
-        ? `${name(a)} has ${a} red bangles and ${b} green bangles. ${name(b + 3)} has ${c} bangles and buys some more. Now they both have the same number of bangles. How many did ${name(b + 3)} buy?`
+        ? `${name(a)} has ${a} red bangles and ${b} green bangles. ${name(b + 3)} has ${c} ${c === 1 ? "bangle" : "bangles"} and buys some more. Now they both have the same number of bangles. How many did ${name(b + 3)} buy?`
         : `${name(a)} had ${a} stickers and gave away ${b}. ${name(c + 5)} had some stickers and gave away ${c}. Now they have the same number left. How many stickers did ${name(c + 5)} have at first?`,
     teach: {
       idea: "The = sign means \"has the same value as\", like a balance that is level: both sides must be worth the same.",
@@ -1181,7 +1190,7 @@ export const B03: Def[] = [
     // [R, C, ti]: an R × C grid covered with tiles TILES[ti] (h rows by w columns), all the same way round
     parse: none,
     reject: ([R, C, ti]) => (R < 2 || R > 8 || C < 2 || C > 10 || ti < 0 || ti > 4 || R % TILES[ti][0] !== 0 || C % TILES[ti][1] !== 0 ? "A grid up to 8 by 10 that the tile covers exactly." : null),
-    prompt: ([R, C, ti]) => `The floor in the picture is a grid of ${R} rows and ${C} columns of squares. Each tile covers ${TILES[ti][2]}. The tiles cover the floor with no gaps and no overlaps. How many tiles are needed?`,
+    prompt: ([R, C, ti]) => `${TILES[ti][0] === 1 ? `The floor in the picture is a grid of ${R} rows and ${C} columns of squares. Each tile covers ${TILES[ti][2]} (the first tile is shaded).` : `A floor is a grid of ${R} rows and ${C} columns of squares. The picture shows one tile: it covers ${TILES[ti][2]}.`} The tiles cover the floor with no gaps and no overlaps. How many tiles are needed?`,
     solve: ([R, C, ti]) => {
       const [h, w] = TILES[ti];
       return {
@@ -1218,17 +1227,17 @@ export const B03: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "row" ? `${s.inputs[0]} columns ÷ ${s.inputs[1]}: ${s.value} tiles across` : s.id === "rows" ? `${s.inputs[0]} rows ÷ ${s.inputs[1]}: ${s.value} rows of tiles` : `${s.inputs[0]} rows of ${s.inputs[1]} tiles: ${s.value} tiles`),
+    explain: (s) => (s.id === "row" ? `${s.inputs[0]} columns ÷ ${s.inputs[1]}: ${nn(s.value, "tile", "tiles")} across` : s.id === "rows" ? `${s.inputs[0]} rows ÷ ${s.inputs[1]}: ${nn(s.value, "row", "rows")} of tiles` : `${nn(s.inputs[0], "row", "rows")} of ${nn(s.inputs[1], "tile", "tiles")}: ${s.value} tiles`),
     domain: [[2, 8], [2, 10], [0, 4]],
     difficulty: ([R, C, ti]) => (ti <= 1 && R * C <= 24 ? 1 : ti >= 2 && R * C > 40 ? 3 : 2),
-    figure: ([R, C, ti]) => ({ type: "grid", rows: R, cols: C, shaded: TILES[ti][0] === 1 ? TILES[ti][1] : 0 }),
+    figure: ([R, C, ti]) => tileFigure(R, C, ti),
     word: ([R, C, ti]) => `${name(R + C)}'s verandah floor is ${R} squares long one way and ${C} squares the other way. The tiles each cover ${TILES[ti][2]}. How many tiles are needed to cover the whole verandah with no gaps?`,
     teach: {
       idea: "Tiles that fit with no gaps and no overlaps cover the floor exactly, so the floor splits into equal tile-sized pieces.",
       method: "Find how many tiles fit across one row of tiles and how many rows of tiles there are, then multiply (or add the rows).",
       visual: ([R, C, ti]) => ({ type: "grid", rows: R, cols: C, shaded: TILES[ti][0] === 1 ? TILES[ti][1] : 0 }),
       alternatives: [
-        { id: "squares_per_tile", title: "Share the squares among the tiles", kind: "conceptual", text: ["Count all the squares on the floor.", "Each tile covers the same number of squares, so share the squares into groups of that size."] },
+        { id: "squares_per_tile", title: "Share the squares among the tiles", kind: "conceptual", text: ["Count all the squares on the floor.", "Each tile covers the same number of squares (count them on one tile), so share the squares into groups of that size."], visual: ([, , ti]) => ({ type: "grid", rows: TILES[ti][0], cols: TILES[ti][1], shaded: TILES[ti][0] * TILES[ti][1] }) },
       ],
     },
     limits: "Rectangular floors covered by one kind of rectangular tile, all laid the same way; tessellations of other shapes need drawing and are marked by an educator.",
@@ -1592,6 +1601,9 @@ const TILES: [number, number, string][] = [
   [1, 3, "3 squares side by side"],
   [2, 3, "a block of 2 rows of 3 squares"],
 ];
+/** The floor with its first tile shaded when the tile is one row tall; a taller tile cannot be shaded on the floor (the
+ * grid shades row by row), so the picture shows one tile instead and the prompt gives the floor's size. */
+const tileFigure = (R: number, C: number, ti: number): Visual => (TILES[ti][0] === 1 ? { type: "grid", rows: R, cols: C, shaded: TILES[ti][1] } : { type: "grid", rows: TILES[ti][0], cols: TILES[ti][1], shaded: TILES[ti][0] * TILES[ti][1] });
 const nextH = (h: number) => (h === 12 ? 1 : h + 1);
 /** The end time on a 12-hour clock after d minutes from h:m. */
 function endOf(h: number, m: number, d: number): [number, number] {

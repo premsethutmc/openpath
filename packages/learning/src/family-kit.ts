@@ -101,6 +101,8 @@ export type Def = {
   choices?: (p: number[]) => string[];
   /** Extra wrong options for the multiple-choice form when the explanations predict too few (answers@2 types). */
   distractors?: (p: number[]) => Value[];
+  /** Show terminating answers and options as decimals (money, measures, statistics), not as fractions. */
+  decimals?: boolean;
   /** At most this many problems in the release pool (a fixed, hash-chosen subset of the candidates). */
   cap?: number;
   /** Where the family's domain is a deliberate limit, why (shown to reviewers). */

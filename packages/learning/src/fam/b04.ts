@@ -82,7 +82,7 @@ const WHOLES = [
   { of: "₹100", tot: 100, unit: "rupees", ask: (f: string) => `What is ${f} of ₹100? Give the answer in rupees.`, word: (f: string, k: number) => `${nm(k)} had ₹100 and spent ${f} of it on a book. How many rupees did the book cost?` },
   { of: "a metre", tot: 100, unit: "centimetres", ask: (f: string) => `How many centimetres are there in ${f} of a metre?`, word: (f: string, k: number) => `${nm(k)} cuts ${f} of a metre of ribbon for a gift. How many centimetres of ribbon is that?` },
   { of: "a kilogram", tot: 1000, unit: "grams", ask: (f: string) => `How many grams are there in ${f} of a kilogram?`, word: (f: string, k: number) => `Amma buys ${f} kg of dal. How many grams of dal is that?` },
-  { of: "a day", tot: 24, unit: "hours", ask: (f: string) => `How many hours are there in ${f} of a day?`, word: (f: string, k: number) => `A baby sleeps for ${f} of a day. How many hours does the baby sleep?` },
+  { of: "a day", tot: 24, unit: "hours", ask: (f: string) => `How many hours are there in ${f} of a day?`, word: (f: string, k: number) => `A water pump at ${nm(k)}'s farm runs for ${f} of a day. How many hours does the pump run?` },
 ];
 
 // ---------------------------------------------------------------- column arithmetic
@@ -122,11 +122,11 @@ const TALLYCTX = [
   { head: "Game", items: ["Kabaddi", "Kho-kho", "Cricket"], who: "children chose", what: "game" },
   { head: "Flower", items: ["Jasmine", "Rose", "Marigold"], who: "children chose", what: "flower" },
 ];
-const BUNDLE = "卌";
+const BUNDLE = "||||/";
 const tallyCounts = (c: number, s: number) => [0, 1, 2].map((i) => 3 + ((s * (i + 2) + 5 * i + 3 * c) % 15));
 const tally = (n: number) => [...Array(Math.floor(n / 5)).fill(BUNDLE), ...(n % 5 ? ["|".repeat(n % 5)] : [])].join(" ");
 /** Count the marks drawn: a bundle is five, a stroke is one (independent of the numbers that made them). */
-const readTally = (t: string) => [...t].reduce((s, ch) => s + (ch === BUNDLE ? 5 : ch === "|" ? 1 : 0), 0);
+const readTally = (t: string) => [...t].reduce((s, ch) => s + (ch === "|" || ch === "/" ? 1 : 0), 0);
 
 const TWOCTX = [
   { topic: "which game the boys and girls of a class chose", rows: ["Boys", "Girls"], cols: ["Kabaddi", "Kho-kho"], one: ["boy", "girl"], many: ["boys", "girls"], did1: ["chose kabaddi", "chose kho-kho"], didN: ["chose kabaddi", "chose kho-kho"] },
@@ -299,10 +299,10 @@ export const B04: Def[] = [
       { id: "not-converted", kind: "conceptual", competency: TIME, says: "The hours and minutes were added as they are. Hours must first be changed to minutes: 1 hour = 60 minutes.", predict: h + 5 * f },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "hours" ? `${s.inputs[0]} hours = ${s.inputs[0]} × 60 = ${s.value} minutes` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} minutes`),
+    explain: (s) => (s.id === "hours" ? `${pl(Number(s.inputs[0]), "hour")} = ${s.inputs[0]} × 60 = ${s.value} minutes` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} minutes`),
     domain: [[1, 8], [0, 11]],
     difficulty: ([h, f]) => (h <= 2 && f % 3 === 0 ? 1 : h <= 4 ? 2 : 3),
-    word: ([h, f]) => `A bus from Madurai to Chennai takes ${pl(h, "hour")}${f ? ` and ${f * 5} minutes` : ""}. How many minutes is the journey?`,
+    word: ([h, f]) => `A bus journey takes ${pl(h, "hour")}${f ? ` and ${f * 5} minutes` : ""}. How many minutes is the journey?`,
     teach: {
       idea: "1 hour is 60 minutes: the minute hand goes once all the way round the clock.",
       method: "Change the hours to minutes (60 for each hour), then add the extra minutes.",
@@ -339,16 +339,16 @@ export const B04: Def[] = [
       const T = 60 * h + 5 * f;
       return [
         ...(T >= 100 ? [{ id: "hour-as-100", kind: "conceptual", competency: TIME, says: "The minutes were split into hundreds, as if an hour were 100 minutes. An hour has 60 minutes.", predict: `(${Math.floor(T / 100)}, ${T % 100})` } as Bug] : []),
-        ...(h >= 2 ? [{ id: "hour-left-in", kind: "procedural", competency: TIME, says: `Not every hour was taken out: ${5 * f + 60} minutes is still more than an hour.`, predict: `(${h - 1}, ${5 * f + 60})` } as Bug] : []),
+        ...(h >= 2 ? [{ id: "hour-left-in", kind: "procedural", competency: TIME, says: `Not every hour was taken out: ${5 * f + 60} minutes is still ${f ? "more than" : "exactly"} an hour, so it makes one more hour.`, predict: `(${h - 1}, ${5 * f + 60})` } as Bug] : []),
         { id: "minutes-as-hours", kind: "conceptual", competency: TIME, says: "The number of minutes was written as hours. Change minutes to hours by making groups of 60.", predict: `(${T}, 0)` },
       ];
     },
     distractors: ([h, f]) => [`(${h + 1}, ${5 * f})`, `(${h}, ${(5 * f + 10) % 60})`, `(${h - 1}, ${5 * f})`],
     variants: () => [],
-    explain: (s) => (s.id === "hours" ? `${s.inputs[0]} minutes holds ${s.value} groups of 60 minutes: ${s.value} hours` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} minutes left over`),
+    explain: (s) => (s.id === "hours" ? `${s.inputs[0]} minutes holds ${pl(Number(s.value), "group")} of 60 minutes: ${pl(Number(s.value), "hour")}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} minutes left over`),
     domain: [[1, 8], [0, 11]],
     difficulty: ([h, f]) => (h === 1 ? 1 : h <= 3 || f === 0 ? 2 : 3),
-    word: ([h, f]) => `A Tamil film lasts ${60 * h + 5 * f} minutes. How long is it in hours and minutes? Write (hours, minutes).`,
+    word: ([h, f]) => `${h <= 3 ? "A Tamil film lasts" : "A train journey from Chennai to Madurai takes"} ${60 * h + 5 * f} minutes. How long is it in hours and minutes? Write (hours, minutes).`,
     teach: {
       idea: "Every 60 minutes make 1 hour. The minutes left over, fewer than 60, stay as minutes.",
       method: "Take away 60 minutes as many times as you can. Count the 60s: that is the hours. What is left is the minutes.",
@@ -399,7 +399,7 @@ export const B04: Def[] = [
       { id: "not-converted", kind: "conceptual", competency: TIME, says: "The minutes and seconds were added as they are. Change the minutes to seconds first: 1 minute = 60 seconds.", predict: m + 5 * f },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "minutes" ? `${s.inputs[0]} minutes = ${s.inputs[0]} × 60 = ${s.value} seconds` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} seconds`),
+    explain: (s) => (s.id === "minutes" ? `${pl(Number(s.inputs[0]), "minute")} = ${s.inputs[0]} × 60 = ${s.value} seconds` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} seconds`),
     domain: [[1, 9], [0, 11]],
     difficulty: ([m, f]) => (m <= 2 && f % 6 === 0 ? 1 : m <= 4 ? 2 : 3),
     word: ([m, f]) => `${nm(m + f)} ran once around the school ground in ${pl(m, "minute")}${f ? ` and ${f * 5} seconds` : ""}. How many seconds did ${nm(m + f)} take?`,
@@ -757,7 +757,7 @@ export const B04: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "whole" ? `${s.inputs[0]} is ${s.value}` : s.id === "share" ? `One part: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} parts: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "whole" ? `${s.inputs[0]} is ${s.value}` : s.id === "share" ? `One part: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `${pl(Number(s.inputs[0]), "part")}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 4], [1, 11], [2, 12]],
     difficulty: ([u, a, b]) => (a === 1 && b <= 4 ? 1 : u === 3 || b > 6 ? 3 : 2),
     word: ([u, a, b]) => WHOLES[u].word(fr(a, b), a + b),
@@ -1031,8 +1031,9 @@ export const B04: Def[] = [
       { id: "both-ends", kind: "procedural", competency: TH, says: "Both end numbers were counted. 'Between' leaves them out.", predict: d + 1 },
     ],
     variants: () => [],
-    explain: (s) => (s.id === "gap" ? `${inr(Number(s.inputs[0]))} − ${inr(Number(s.inputs[1]))} = ${s.value} steps` : `The steps land on the last number too, so between them there are ${s.inputs[0]} − 1 = ${s.value} numbers`),
-    figure: ([a, d]) => ({ type: "numberline", from: a, to: a + d, step: 1 }),
+    explain: (s) => (s.id === "gap" ? `${inr(Number(s.inputs[0]))} − ${inr(Number(s.inputs[1]))} = ${s.value} steps` : `The steps land on the last number too, so between them there ${Number(s.value) === 1 ? "is" : "are"} ${s.inputs[0]} − 1 = ${pl(Number(s.value), "number")}`),
+    // only the two ends are labelled (four-digit labels at every whole number would crowd the line)
+    figure: ([a, d]) => ({ type: "numberline", from: a, to: a + d, step: d, marks: [a, a + d] }),
     domain: [[1000, 9979], [2, 20]],
     cap: 300,
     difficulty: ([, d]) => (d <= 5 ? 1 : d <= 12 ? 2 : 3),
@@ -1040,7 +1041,7 @@ export const B04: Def[] = [
     teach: {
       idea: "Subtracting counts the steps from one number to the other; the last step lands on the end number, so the numbers in between are one fewer than the steps.",
       method: "Subtract the smaller number from the larger, then take away 1.",
-      visual: ([a, d]) => ({ type: "numberline", from: a, to: a + d, step: 1, marks: [a, a + d] }),
+      visual: ([a, d]) => ({ type: "numberline", from: a, to: a + d, step: d, marks: [a, a + d], jumps: Array.from({ length: d }, (_, i) => [a + i, a + i + 1] as [number, number]) }),
       alternatives: [
         { id: "small_case", title: "Try a small case", kind: "conceptual", text: ["Between 3 and 7 are 4, 5 and 6: three numbers, and 7 − 3 = 4.", "So the count between is always the difference minus one."] },
       ],

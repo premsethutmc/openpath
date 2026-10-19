@@ -194,7 +194,12 @@ const LCTX = [
   { thing: "tower of blocks", most: "tallest", least: "shortest" },
 ];
 const plural = (t: string) => (t === "tower of blocks" ? "towers of blocks" : `${t}s`);
-const DAYLIFE = ["wakes up", "eats breakfast", "goes to school", "eats lunch at school", "comes back home", "plays outside", "eats dinner", "goes to bed"];
+/** A plural noun made singular (for a count of 1: "1 book", "1 mango", "1 box"). */
+const SINGULAR: Record<string, string> = { boxes: "box", mangoes: "mango", leaves: "leaf", glasses: "glass", peaches: "peach" };
+const sing = (t: string) => SINGULAR[t] ?? t.replace(/s$/, "");
+/** n things, with the noun singular when n is 1. */
+const nOf = (n: number, things: string) => `${n} ${n === 1 ? sing(things) : things}`;
+const DAYLIFE = ["wakes up", "eats breakfast", "goes to school", "eats lunch at school", "comes back home", "plays outside after coming home, before dinner", "eats dinner", "goes to bed"];
 const ACTS: [string, number][] = [["tie your shoelaces", 1], ["brush your teeth", 3], ["eat lunch", 20], ["watch a film", 150], ["sleep at night", 600], ["a school week, Monday to Friday", 7200], ["the summer holidays", 60000]];
 
 // ---------------------------------------------------------------- money
@@ -456,12 +461,12 @@ export const B01: Def[] = [
     },
     distractors: ([S, , , seed]) => shelfOf(S, seed).counts,
     variants: () => [],
-    explain: (s) => (s.id === "shelf" ? `The shelf just ${s.inputs[1] === 0 ? "above" : "below"} is the ${String(s.value).toLowerCase()} shelf.` : `It has ${s.value} things on it.`),
+    explain: (s) => (s.id === "shelf" ? `The shelf just ${s.inputs[1] === 0 ? "above" : "below"} is the ${String(s.value).toLowerCase()} shelf.` : `It has ${s.value} ${s.value === 1 ? "thing" : "things"} on it.`),
     domain: [[3, 4], [0, 3], [0, 1], [0, 11]],
     difficulty: ([S, , dir]) => (S === 3 && dir === 0 ? 1 : S === 3 ? 2 : 3),
     figure: ([S, , , seed]) => {
       const { items, counts, names } = shelfOf(S, seed);
-      return table(["Shelf", "What is on it"], names.map((n, i) => [n, `${counts[i]} ${items[i]}`]));
+      return table(["Shelf", "What is on it"], names.map((n, i) => [n, nOf(counts[i], items[i])]));
     },
     word: ([S, t, dir, seed]) => `${nm(seed + t)} is tidying the classroom cupboard, as in the picture. The teacher asks for everything on the shelf just ${dir === 0 ? "above" : "below"} the ${shelfOf(S, seed).items[t]}. How many things does ${nm(seed + t)} take out?`,
     teach: {
@@ -469,7 +474,7 @@ export const B01: Def[] = [
       method: "Put your finger on the shelf named. Move it one shelf up for 'above' or one shelf down for 'below', and read what is there.",
       visual: ([S, , , seed]) => {
         const { items, counts, names } = shelfOf(S, seed);
-        return table(["Shelf", "What is on it"], names.map((n, i) => [n, `${counts[i]} ${items[i]}`]));
+        return table(["Shelf", "What is on it"], names.map((n, i) => [n, nOf(counts[i], items[i])]));
       },
       alternatives: [
         { id: "body", title: "Use your body", kind: "conceptual", text: ["Your head is above your shoulders; your feet are below your knees.", "Point up for above and down for below, then move one shelf that way."], visual: () => ({ type: "numberline", from: 0, to: 4 }) },
@@ -592,7 +597,7 @@ export const B01: Def[] = [
       return [c + 1, c + 2, len];
     },
     variants: () => [],
-    explain: (s) => (s.id === "find" ? `Look for every ${s.value}, whichever way it is turned.` : `There are ${s.value}.`),
+    explain: (s) => (s.id === "find" ? `Look for every ${s.value}, whichever way it is turned.` : `There ${s.value === 1 ? "is" : "are"} ${s.value}.`),
     domain: [[0, 2], [6, 9], [0, 29]],
     cap: 300,
     difficulty: ([tg, len]) => (tg === 2 && len <= 7 ? 1 : len <= 7 ? 2 : 3),
@@ -781,7 +786,7 @@ export const B01: Def[] = [
       bug("count-both", "procedural", CAL, "Today was counted as well as the birthday. Start counting with tomorrow.", o + d2 + 1),
     ],
     variants: () => [],
-    explain: (s) => (s.id === "rest" ? `From the ${s.inputs[1]} to the end of the month (${s.inputs[0]}) is ${s.value} days.` : `Then ${s.inputs[1]} more days into the next month: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}.`),
+    explain: (s) => (s.id === "rest" ? `From the ${s.inputs[1]} to the end of the month (${s.inputs[0]}) is ${nOf(Number(s.value), "days")}.` : `Then ${nOf(Number(s.inputs[1]), "more days")} into the next month: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}.`),
     domain: [[0, 1], [0, 11], [0, 9], [1, 10]],
     cap: 300,
     difficulty: ([, m, o, d2]) => (o + d2 <= 7 ? 1 : MLEN[m] === 31 ? 2 : 3),
@@ -1036,7 +1041,7 @@ export const B01: Def[] = [
     distractors: ([kind, seed, big]) => {
       const it = coinsOf(seed, big);
       const c = it.filter((x) => x === it[0]).length;
-      return kind === 2 ? [c + 1, c + 2, c + 3] : [...new Set(it)];
+      return kind === 2 ? [c - 1, c + 1, c + 2, c + 3].filter((x) => x >= 1 && x <= it.length + 1) : [...new Set(it)];
     },
     variants: () => [],
     explain: (s) => (s.id === "read" ? `The money is ${s.value}.` : `So the answer is ${s.value}.`),
@@ -1139,7 +1144,7 @@ export const B01: Def[] = [
     prompt: ([N, bi, ci]) => {
       const B = NOTE_B[bi];
       const c = COIN_C[ci];
-      return B ? `${nm(N)} has to pay ₹${N}. ${nm(N)} gives ₹${B} and some ₹${c} coins, as in the picture. How many ₹${c} coins does ${nm(N)} give?` : `How many ₹${c} coins (as in the picture) make ₹${N}?`;
+      return B ? `${nm(N)} has to pay ₹${N}. ${nm(N)} gives one ₹${B} ${kindOfMoney(B)} and then some ₹${c} coins (the table shows what each is worth). How many ₹${c} coins does ${nm(N)} give?` : `How many ₹${c} coins make ₹${N}? (The table shows what one coin is worth.)`;
     },
     solve: ([N, bi, ci]) => {
       const B = NOTE_B[bi];
@@ -1168,11 +1173,11 @@ export const B01: Def[] = [
     explain: (s) => (s.id === "rest" ? `₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value} still to pay.` : `₹${s.inputs[0]} in ₹${s.inputs[1]} coins is ${s.value} coins.`),
     domain: [[2, 100], [0, 3], [0, 3]],
     difficulty: ([N, bi, ci]) => (N <= 20 && COIN_C[ci] <= 2 ? 1 : N <= 50 || NOTE_B[bi] === 0 ? 2 : 3),
-    figure: ([, bi, ci]) => ({ type: "coins", items: NOTE_B[bi] ? [NOTE_B[bi], COIN_C[ci]] : [COIN_C[ci]] }),
+    figure: ([N, bi, ci]) => table(["Money", "Worth"], [...(NOTE_B[bi] ? [[`One ₹${NOTE_B[bi]} ${kindOfMoney(NOTE_B[bi])} (given first)`, `₹${NOTE_B[bi]}`]] : []), [`Each small coin`, `₹${COIN_C[ci]}`], ["Amount to pay", `₹${N}`]]),
     word: ([N, bi, ci]) => {
       const B = NOTE_B[bi];
       const c = COIN_C[ci];
-      return B ? `A bus ticket costs ₹${N}. ${nm(N + 3)} puts ₹${B} on the counter and then adds ₹${c} coins until it is enough. How many ₹${c} coins are added?` : `A bunch of bananas costs ₹${N}. ${nm(N + 3)} pays with only ₹${c} coins. How many coins are needed?`;
+      return B ? `A bus ticket costs ₹${N}. ${nm(N + 3)} puts ₹${B} on the counter and then adds ₹${c} coins until it is enough. How many ₹${c} coins are added?` : `${nm(N + 3)} buys some sweets for ₹${N} and pays with only ₹${c} coins. How many coins are needed?`;
     },
     teach: {
       idea: "To make an amount, the coins together must add up to exactly that many rupees.",
@@ -1234,7 +1239,7 @@ export const B01: Def[] = [
     // [q, t, kind, ctx]: four containers holding 3 + 2 × (order q) cups; container t is the tallest (kind 0) or shortest (kind 1)
     parse: none,
     reject: guard([[0, 23], [1, 4], [0, 1], [0, 1]], ([q, t, kind]) => extreme(perm(4, q), kind === 0) !== t, "Four containers; the tallest does not hold the most (or the shortest the least)."),
-    prompt: ([q, t, kind, ctx]) => `Each ${CUPCTX[ctx][0]} was filled using a small ${CUPCTX[ctx][1]}. The picture shows how many ${CUPCTX[ctx][2]} each one holds. ${cap(CUPCTX[ctx][0])} ${t} is the ${kind === 0 ? "tallest" : "shortest"}. Which ${CUPCTX[ctx][0]} holds the ${kind === 0 ? "most" : "least"}? Write its number.`,
+    prompt: ([q, t, kind, ctx]) => `Each ${CUPCTX[ctx][0]} was filled using a small ${CUPCTX[ctx][1]}. The table in the picture shows how many ${CUPCTX[ctx][2]} each one holds. ${cap(CUPCTX[ctx][0])} ${t} is the ${kind === 0 ? "tallest" : "shortest"}. Which ${CUPCTX[ctx][0]} holds the ${kind === 0 ? "most" : "least"}? Write its number.`,
     solve: ([q, , kind]) => {
       const C = perm(4, q).map((r) => 3 + 2 * r);
       const a = extreme(C, kind === 0);
@@ -1250,14 +1255,14 @@ export const B01: Def[] = [
     explain: (s) => `Number ${s.value} took the number of cups asked for.`,
     domain: [[0, 23], [1, 4], [0, 1], [0, 1]],
     difficulty: ([, , kind]) => (kind === 0 ? 2 : 3),
-    figure: ([q, , , ctx]) => ({ type: "bars", title: `${CUPCTX[ctx][2]} each holds`, labels: [1, 2, 3, 4].map((i) => `${cap(CUPCTX[ctx][0])} ${i}`), values: perm(4, q).map((r) => 3 + 2 * r) }),
+    figure: ([q, , , ctx]) => table([cap(CUPCTX[ctx][0]), `${cap(CUPCTX[ctx][2])} it holds`], perm(4, q).map((r, i) => [i + 1, 3 + 2 * r])),
     word: ([q, t, kind, ctx]) => `${nm(q + t)} helps fill four ${CUPCTX[ctx][0]}s for a wedding feast, as in the picture. Number ${t} looks the ${kind === 0 ? "tallest" : "shortest"}. Which one really holds the ${kind === 0 ? "most" : "least"}? Write its number.`,
     teach: {
       idea: "How much a container holds is how many cups of water fill it. Height alone does not tell: width matters too.",
       method: "Look at how many cups each one took. The most cups means it holds the most.",
-      visual: ([q, , , ctx]) => ({ type: "bars", labels: [1, 2, 3, 4].map(String), values: perm(4, q).map((r) => 3 + 2 * r), title: CUPCTX[ctx][2] }),
+      visual: ([q, , , ctx]) => table([cap(CUPCTX[ctx][0]), `${cap(CUPCTX[ctx][2])} it holds`], perm(4, q).map((r, i) => [i + 1, 3 + 2 * r])),
       alternatives: [
-        { id: "pour", title: "Pour from one into another", kind: "conceptual", text: ["Fill one container and pour it into another.", "If it overflows, the first holds more; if it does not fill up, the second holds more."], visual: () => ({ type: "bars", labels: ["tall, thin", "short, wide"], values: [5, 8] }) },
+        { id: "pour", title: "Pour from one into another", kind: "conceptual", text: ["Fill one container and pour it into another.", "If it overflows, the first holds more; if it does not fill up, the second holds more."], visual: () => table(["Container", "Cups it holds"], [["tall, thin bottle", 5], ["short, wide pot", 8]]) },
       ],
     },
     limits: "Four containers measured with one cup; litres come later.",
@@ -1385,7 +1390,7 @@ export const B01: Def[] = [
     domain: [[1, 19], [1, 19]],
     difficulty: ([a, b]) => (a + b <= 9 ? 1 : a + b <= 10 || (a % 10) + (b % 10) < 10 ? 2 : 3),
     figure: ([a]) => ({ type: "numberline", from: 0, to: 20, marks: [a] }),
-    word: ([a, b]) => `${nm(a)} picks ${a} ${FRUIT[(a + b) % FRUIT.length]} from the tree. ${nm(a + 4)} picks ${b} more. How many ${FRUIT[(a + b) % FRUIT.length]} do they have altogether?`,
+    word: ([a, b]) => `${nm(a)} picks ${nOf(a, FRUIT[(a + b) % FRUIT.length])} from the tree. ${nm(a + 4)} picks ${b} more. How many ${FRUIT[(a + b) % FRUIT.length]} do they have altogether?`,
     teach: {
       idea: "Adding puts two groups together; the total is how many there are in all.",
       method: "Start at the bigger number and count on the other number, one step at a time. Where you stop is the total.",
@@ -1624,7 +1629,7 @@ export const B01: Def[] = [
       bug("join-digits", "conceptual", PV, `${o} ones were written next to the tens. ${o} ones are 1 ten and ${o - 10} ${o - 10 === 1 ? "one" : "ones"}, so there are ${t + 1} tens.`, o >= 10 ? Number(`${t}${o}`) : null),
     ],
     variants: () => [],
-    explain: (s) => (s.id === "tens" ? `${s.inputs[0]} tens are ${s.value}.` : s.id === "ones" ? `${s.value} ones.` : `${s.inputs[0]} and ${s.inputs[1]} make ${s.value}.`),
+    explain: (s) => (s.id === "tens" ? `${s.inputs[0]} ${s.inputs[0] === 1 ? "ten is" : "tens are"} ${s.value}.` : s.id === "ones" ? `${s.value} ${s.value === 1 ? "one" : "ones"}.` : `${s.inputs[0]} and ${s.inputs[1]} make ${s.value}.`),
     domain: [[1, 9], [0, 14]],
     difficulty: ([, o]) => (o === 0 ? 1 : o <= 9 ? 2 : 3),
     figure: ([t, o]) => ({ type: "blocks", hundreds: 0, tens: t, ones: o }),
@@ -1681,7 +1686,7 @@ export const B01: Def[] = [
     explain: (s) => (s.id === "place" ? `In ${s.inputs[0]}, the first digit is in the tens place.` : `So the answer is ${s.value}.`),
     domain: [[10, 99], [0, 1]],
     difficulty: ([n, kind]) => (kind === 1 && n < 50 ? 1 : kind === 1 ? 2 : 3),
-    figure: ([n]) => ({ type: "blocks", hundreds: 0, tens: Math.floor(n / 10), ones: n % 10 }),
+    figure: ([n, kind]) => (kind === 1 ? null : { type: "blocks", hundreds: 0, tens: Math.floor(n / 10), ones: n % 10 }),
     word: ([n, kind]) => (kind === 0 ? `A shop has ${n} pencils, packed in boxes of ten with some loose ones. How many pencils are in the full boxes?` : `${nm(n)} packs ${n} laddus into boxes of ten. How many boxes can be filled?`),
     teach: {
       idea: "Where a digit stands tells what it is worth: in 47 the 4 is in the tens place, so it means 4 tens, which is 40.",
@@ -1781,7 +1786,7 @@ export const B01: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "tens" ? `${s.value} tens` : `and ${s.value} ones.`),
+    explain: (s) => (s.id === "tens" ? `${s.value} ${s.value === 1 ? "ten" : "tens"}` : `and ${s.value} ${s.value === 1 ? "one" : "ones"}.`),
     domain: [[11, 99]],
     difficulty: ([n]) => (n % 10 === 0 ? 1 : n < 20 ? 2 : 3),
     word: ([n]) => `${nm(n)} hears the teacher say a bus number: "${words(n)}". How is it written in digits?`,
@@ -1821,7 +1826,7 @@ export const B01: Def[] = [
       bug("one-extra", "procedural", SUB, "One too many was taken away. Take away exactly as many as the number says.", a - b - 1),
     ],
     variants: () => [],
-    explain: (s) => (s.id === "start" ? `Start with ${s.value}.` : `Take away ${s.inputs[1]}: ${s.value} are left.`),
+    explain: (s) => (s.id === "start" ? `Start with ${s.value}.` : `Take away ${s.inputs[1]}: ${s.value} ${s.value === 1 ? "is" : "are"} left.`),
     domain: [[2, 20], [1, 19]],
     difficulty: ([a, b]) => (a <= 9 ? 1 : a - b >= 10 || a <= 10 ? 2 : 3),
     figure: ([a]) => ({ type: "tenframe", filled: a, frames: a > 10 ? 2 : 1 }),
@@ -1886,62 +1891,54 @@ export const B01: Def[] = [
   {
     id: "aazero",
     arity: 2,
-    title: "Adding, taking away and multiplying with 0 (and times 1)",
+    title: "Adding and taking away 0 (and taking away all)",
     competency: ZERO,
     type: "integer",
     mc: true,
-    // [kind, a]: 0 a + 0, 1 0 + a, 2 a − 0, 3 a − a, 4 a × 0, 5 a × 1
+    // [kind, a]: 0 a + 0, 1 0 + a, 2 a − 0, 3 a − a (× 0 and × 1 belong to multiplication, a later grade)
     parse: none,
-    reject: guard([[0, 5], [1, 20]], () => true, "A number up to 20 with 0 (or times 1)."),
+    reject: guard([[0, 3], [1, 20]], () => true, "A number up to 20 with 0 added or taken away, or all of it taken away."),
     prompt: ([kind, a]) => `${zeroExpr(kind, a)} = ?`,
     solve: ([kind, a]) => {
-      const v = [a, a, a, 0, 0, a][kind];
-      return { steps: [st("rule", kind >= 4 ? "multiply" : kind === 3 ? "subtract" : "add or take away zero", ZERO, [zeroExpr(kind, a)], v)], answer: v };
+      const v = [a, a, a, 0][kind];
+      return { steps: [st("rule", kind === 3 ? "subtract" : "add or take away zero", ZERO, [zeroExpr(kind, a)], v)], answer: v };
     },
-    // independent: count on, count back, or add a number of equal groups, one at a time
+    // independent: count on or count back, one at a time
     validate: ([kind, a], v) => {
       let s = 0;
       if (kind === 0 || kind === 1) for (let i = 0; i < a; i++) s++;
-      else if (kind === 2 || kind === 3) {
+      else {
         s = a;
         for (let i = 0; i < (kind === 2 ? 0 : a); i++) s--;
-      } else for (let g = 0; g < a; g++) s += kind === 4 ? 0 : 1;
+      }
       return v === s;
     },
     bugs: ([kind, a]) =>
       kind <= 2
         ? [bug("zero-makes-zero", "conceptual", ZERO, `It was thought that anything with 0 gives 0. ${kind === 2 ? "Taking away" : "Adding"} nothing leaves the number the same: ${a}.`, 0)]
-        : kind === 3
-          ? [bug("nothing-taken", "conceptual", ZERO, `Taking away all ${a} leaves nothing: an empty group is 0.`, a)]
-          : kind === 4
-            ? [bug("times-zero-same", "conceptual", ZERO, `× 0 was treated like + 0. ${a} ${a === 1 ? "group" : "groups"} of 0 is nothing: 0.`, a)]
-            : [
-              bug("times-one-plus", "conceptual", ZERO, `× 1 was treated like + 1. ${a} ${a === 1 ? "group" : "groups"} of 1 is ${a}.`, a + 1),
-              bug("times-one-one", "conceptual", ZERO, `It was thought that × 1 gives 1. ${a} groups of 1 thing are ${a} things.`, a === 1 ? null : 1),
-            ],
+        : [bug("nothing-taken", "conceptual", ZERO, `Taking away all ${a} leaves nothing: an empty group is 0.`, a)],
     variants: () => [],
     explain: (s) => `${s.inputs[0]} = ${s.value}.`,
-    domain: [[0, 5], [1, 20]],
-    difficulty: ([kind]) => (kind <= 2 ? 1 : kind === 3 ? 2 : 3),
-    figure: ([kind, a]) => (kind <= 3 ? { type: "tenframe", filled: a, frames: a > 10 ? 2 : 1 } : kind === 5 ? { type: "array", rows: a, cols: 1 } : null),
+    domain: [[0, 3], [1, 20]],
+    difficulty: ([kind]) => (kind <= 2 ? 1 : 2),
+    distractors: ([, a]) => [a + 1, a - 1, 1].filter((x) => x >= 0),
+    figure: ([, a]) => ({ type: "tenframe", filled: a, frames: a > 10 ? 2 : 1 }),
     word: ([kind, a]) =>
       [
-        `${nm(a)} has ${a} pencils and gets 0 more. How many pencils does ${nm(a)} have now?`,
-        `A basket has 0 mangoes. ${nm(a)} puts in ${a} mangoes. How many mangoes are in the basket now?`,
-        `${nm(a)} has ${a} stickers and gives away 0. How many stickers are left?`,
-        `${nm(a)} had ${a} sweets and ate all ${a} of them. How many sweets are left?`,
-        `There ${a === 1 ? "is 1 plate" : `are ${a} plates`} with 0 laddus on ${a === 1 ? "it" : "each plate"}. How many laddus are there?`,
-        `There ${a === 1 ? "is 1 plate" : `are ${a} plates`} with 1 laddu on ${a === 1 ? "it" : "each plate"}. How many laddus are there?`,
+        `${nm(a)} has ${nOf(a, "pencils")} and gets 0 more. How many pencils does ${nm(a)} have now?`,
+        `A basket has 0 mangoes. ${nm(a)} puts in ${nOf(a, "mangoes")}. How many mangoes are in the basket now?`,
+        `${nm(a)} has ${nOf(a, "stickers")} and gives away 0. How many stickers are left?`,
+        a === 1 ? `${nm(a)} had 1 sweet and ate it. How many sweets are left?` : `${nm(a)} had ${a} sweets and ate all ${a} of them. How many sweets are left?`,
       ][kind],
     teach: {
-      idea: "Zero means nothing: adding or taking away 0 leaves a number the same, and taking all away leaves 0. Groups of 0 make 0; groups of 1 make the number itself.",
-      method: "Think of real things: 5 apples and no more apples is still 5. 4 empty plates hold 0 laddus.",
-      visual: ([kind, a]) => (kind <= 3 ? { type: "tenframe", filled: kind === 3 ? 0 : a, frames: a > 10 ? 2 : 1 } : kind === 5 ? { type: "array", rows: a, cols: 1 } : { type: "tenframe", filled: 0, frames: 1 }),
+      idea: "Zero means nothing: adding or taking away 0 leaves a number the same, and taking all away leaves 0.",
+      method: "Think of real things: 5 apples and no more apples is still 5. Eat all 4 laddus on a plate and 0 are left.",
+      visual: ([kind, a]) => ({ type: "tenframe", filled: kind === 3 ? 0 : a, frames: a > 10 ? 2 : 1 }),
       alternatives: [
         { id: "empty", title: "An empty box is zero", kind: "conceptual", text: ["Show an empty ten frame: there are 0 counters.", "Adding an empty box to a full one does not change how many there are."], visual: () => ({ type: "tenframe", filled: 0, frames: 1 }) },
       ],
     },
-    limits: "Whole numbers up to 20 with 0, and × 1; dividing by 0 is not asked.",
+    limits: "Whole numbers up to 20 with 0 added or taken away; × 0, × 1 and dividing by 0 belong to multiplication and division families.",
   },
 ];
 
@@ -1998,5 +1995,5 @@ const MORE: [string, string, string, string][] = [
   ["red flowers", "yellow flowers", "the flowers in the school garden", "How many more red flowers than yellow flowers are in the garden?"],
 ];
 function zeroExpr(kind: number, a: number) {
-  return [`${a} + 0`, `0 + ${a}`, `${a} − 0`, `${a} − ${a}`, `${a} × 0`, `${a} × 1`][kind];
+  return [`${a} + 0`, `0 + ${a}`, `${a} − 0`, `${a} − ${a}`][kind];
 }

@@ -404,6 +404,13 @@ export const B06: Def[] = [
       const row = (x: number, hid: boolean) => digits3(x).map((d, i) => (hid && i === pos ? "□" : String(d)));
       return { type: "table", head: ["", "H", "T", "O"], rows: [["", ...row(a, where === 0)], [op === 0 ? "+" : "−", ...row(b, false)], ["=", ...row(res, where === 1)]] };
     },
+    // other digits near the answer (always 0–9), so no option is impossible as a digit
+    distractors: (p) => {
+      const [s, pos, where, op] = p;
+      const { a, res } = missSum(s, op);
+      const d = digits3(where === 0 ? a : res)[pos];
+      return [d + 1, d - 1, d + 2, d - 2, d + 3, d - 3].filter((x) => x >= 0 && x <= 9);
+    },
     word: (p) => `${name(p[0])} wrote a ${p[3] === 0 ? "sum" : "subtraction"} in a notebook, but a drop of ink covered one digit: ${missText(p)}. Which digit is under the ink drop?`,
     teach: {
       idea: "A sum or difference is a true sentence, so each column must work out, including any ten carried or borrowed from the column on its right.",
@@ -459,6 +466,11 @@ export const B06: Def[] = [
     keep: ([n, k, rule]) => n >= k + 2 && (rule === 0 ? n % (k + 1) : (n - 1) % (k + 1)) !== 0,
     difficulty: ([n, , rule]) => (rule === 1 ? 3 : n <= 12 ? 1 : 2),
     figure: ([n]) => ({ type: "dots", count: n, rows: Math.ceil(n / 10) }),
+    // the other legal moves first, then k + 1 and k + 2 (the "steps of k + 1" slip): never 0, which is not a move
+    distractors: ([n, k, rule]) => {
+      const t = rule === 0 ? n % (k + 1) : (n - 1) % (k + 1);
+      return [...Array.from({ length: k }, (_, i) => i + 1).filter((x) => x !== t), k + 1, k + 2];
+    },
     word: ([n, k, rule]) => `${name(n)} and ${name(n + 3)} play a game with ${n} sticks. They take turns to pick up ${upTo(k)} sticks. ${rule === 0 ? "Whoever picks up the last stick wins." : "Whoever has to pick up the last stick loses."} ${name(n)} goes first. How many sticks should ${name(n)} pick up first to be sure of winning?`,
     teach: {
       idea: `Work backwards from the end. Some numbers of counters are "safe" to leave for the other player: from them, whatever they take, you can get back to the next safe number.`,
@@ -628,7 +640,8 @@ export const B06: Def[] = [
     difficulty: ([pie, cat, , hide]) => (hide ? 3 : gcd2(PIES[pie][cat], 24) === PIES[pie][cat] ? 1 : 2),
     figure: ([pie, cat, , hide]) => {
       const ctx = PIECTX[pie % 3];
-      return { type: "pie", labels: PIES[pie].map((x, i) => `${ctx.labels[i]} (${hide && i === cat ? "?" : fmt(x / 24)})`), values: PIES[pie] };
+      // values are the sector angles in degrees (not counts), so the screen-reader text neither gives nor contradicts the answer
+      return { type: "pie", labels: PIES[pie].map((x, i) => `${ctx.labels[i]} (${hide && i === cat ? "?" : fmt(x / 24)})`), values: PIES[pie].map((x) => 15 * x) };
     },
     word: ([pie, cat, ti, hide]) => {
       const ctx = PIECTX[pie % 3];
@@ -696,7 +709,8 @@ export const B06: Def[] = [
     keep: ([ti, x]) => x < PIEANG[ti] && (360 * x) % PIEANG[ti] === 0 && 2 * x !== PIEANG[ti],
     cap: 300,
     difficulty: ([ti]) => (PIEANG[ti] <= 36 ? 1 : PIEANG[ti] <= 90 ? 2 : 3),
-    figure: ([ti, x, ask]) => ({ type: "pie", labels: [ask === 0 ? "Cricket" : `Cricket (${(360 * x) / PIEANG[ti]}°)`, "Other games"], values: [x, PIEANG[ti] - x] }),
+    // only when the angle is given (the angle is the answer otherwise); values are angles, so the text matches the labels
+    figure: ([ti, x, ask]) => (ask === 0 ? null : { type: "pie", labels: [`Cricket (${(360 * x) / PIEANG[ti]}°)`, "Other games"], values: [(360 * x) / PIEANG[ti], 360 - (360 * x) / PIEANG[ti]] }),
     word: ([ti, x, ask]) => {
       const T = PIEANG[ti];
       return ask === 0
@@ -863,7 +877,7 @@ export const B06: Def[] = [
           ? `A ribbon is ${L} cm long. ${name(a)} cuts ${a} cm off it. Write the length of ribbon left, in cm, using ${L}.`
           : kind === 2
             ? `A box holds ${a} pencils. Write the number of pencils in ${L} full boxes.`
-            : `${name(a + b)} has ${L} packets with ${a} biscuits in each, and ${b} loose biscuits. Write how many biscuits ${name(a + b)} has, using ${L}.`;
+            : `${name(a + b)} has ${L} packets with ${a} biscuits in each, and ${b} loose biscuit${b === 1 ? "" : "s"}. Write how many biscuits ${name(a + b)} has, using ${L}.`;
     },
     teach: {
       idea: "A letter stands for any number. A rule written with the letter works for every number at once.",
@@ -977,7 +991,7 @@ export const B06: Def[] = [
     reject: ([kind, n]) => (kind < 0 || kind > 3 || n < 2 || n > 30 || !relOk(kind, n) ? "Relations between square, odd and triangular numbers for small n." : null),
     prompt: ([kind, n]) =>
       kind === 0
-        ? `Add the first ${n} odd numbers: 1 + 3 + 5 + … + ${2 * n - 1}. What do you get?`
+        ? `Add the first ${n} odd numbers: ${n <= 4 ? Array.from({ length: n }, (_, i) => 2 * i + 1).join(" + ") : `1 + 3 + 5 + … + ${2 * n - 1}`}. What do you get?`
         : kind === 1
           ? `How much bigger is the ${ord(n + 1)} square number (${n + 1} × ${n + 1}) than the ${ord(n)} square number (${n} × ${n})?`
           : kind === 2
@@ -1030,11 +1044,11 @@ export const B06: Def[] = [
     variants: () => [],
     explain: (s) =>
       s.id === "square"
-        ? `The first ${s.inputs[0]} odd numbers make a ${s.inputs[0]} × ${s.inputs[0]} square of dots: ${s.value}`
+        ? `The first ${s.inputs[0]} odd numbers make ${aNum(s.inputs[0])} × ${s.inputs[0]} square of dots: ${s.value}`
         : s.id === "gap"
           ? `From ${s.inputs[0]} × ${s.inputs[0]} to the next square add a row, a column and a corner: ${s.inputs[0]} + ${s.inputs[0]} + 1 = ${s.value}`
           : s.id === "tri"
-            ? `Two neighbouring triangles fit together into a ${s.inputs[0]} × ${s.inputs[0]} square: ${s.value}`
+            ? `Two neighbouring triangles fit together into ${aNum(s.inputs[0])} × ${s.inputs[0]} square: ${s.value}`
             : `The gap between the squares is 2 × ${s.inputs[0]} + 1; leaving out one end leaves ${s.value} numbers in between`,
     domain: [[0, 3], [2, 30]],
     keep: ([kind, n]) => relOk(kind, n),
@@ -1274,7 +1288,7 @@ export const B06: Def[] = [
     bugs: ([, k]) => [
       { id: "six-per-number", kind: "procedural", competency: AT, says: "Each number was counted as 6°. 6° is one minute mark; from one number to the next is 5 minutes, which is 30°.", predict: 6 * k },
       { id: "minutes-not-degrees", kind: "conceptual", competency: AT, says: "The minutes that passed were given, not the angle. A full turn of 60 minutes is 360°.", predict: 5 * k },
-      { id: "other-way", kind: "procedural", competency: AT, says: "The angle the other way round the clock was found. The hand turned clockwise, the short way described.", predict: 360 - 30 * k },
+      { id: "other-way", kind: "procedural", competency: AT, says: "The angle the other way round the clock was found. The hand turned clockwise, so count the numbers it passes going clockwise.", predict: 360 - 30 * k },
     ],
     variants: () => [],
     explain: (s) => (s.id === "each" ? `12 numbers share a full turn: 360° ÷ 12 = 30° from one number to the next` : `${s.inputs[0]} numbers × 30° = ${s.value}°`),
@@ -1357,7 +1371,7 @@ export const B06: Def[] = [
     reject: ([solid, n, ask, mode]) => (solid < 0 || solid > 1 || n < 3 || n > 10 || ask < 0 || ask > 2 || mode < 0 || mode > 1 ? "Prisms and pyramids on bases of 3 to 10 sides." : null),
     prompt: ([solid, n, ask, mode]) => {
       const [F, E, V] = fevOf(solid, n);
-      if (mode === 0) return `How many ${FEV[ask]} does a ${BASES[n]} ${solid ? "pyramid" : "prism"} have?${n === 4 ? " (Look at the picture.)" : ""}`;
+      if (mode === 0) return `How many ${FEV[ask]} does ${an(BASES[n])} ${solid ? "pyramid" : "prism"} have?${n === 4 ? " (Look at the picture.)" : ""}`;
       const given = ask === 0 ? `${V} vertices and ${E} edges` : ask === 1 ? `${F} faces and ${V} vertices` : `${F} faces and ${E} edges`;
       return `A solid with flat faces has ${given}. Using Euler's rule (faces + vertices − edges = 2), how many ${FEV[ask].split(" ")[0]} does it have?`;
     },
@@ -1399,7 +1413,7 @@ export const B06: Def[] = [
         const given = ask === 0 ? `${V} corners and ${E} edges` : ask === 1 ? `${F} flat faces and ${V} corners` : `${F} flat faces and ${E} edges`;
         return `${name(n)} counts a crystal with ${given}. Faces + corners − edges = 2 for every such solid. How many ${["faces", "edges", "corners"][ask]} does the crystal have?`;
       }
-      return solid === 0 ? `A chocolate box is shaped like a ${BASES[n]} prism. How many ${FEV[ask]} does the box have?` : `A tent is shaped like a ${BASES[n]} pyramid (with a floor). How many ${FEV[ask]} does the tent have?`;
+      return solid === 0 ? `A chocolate box is shaped like ${an(BASES[n])} prism. How many ${FEV[ask]} does the box have?` : `A tent is shaped like ${an(BASES[n])} pyramid (with a floor). How many ${FEV[ask]} does the tent have?`;
     },
     teach: {
       idea: "A prism has two equal ends joined by rectangles; a pyramid has one base joined to a top point by triangles. Counting part by part makes the counts easy.",
@@ -1450,7 +1464,7 @@ export const B06: Def[] = [
     keep: ([a, b, c, ask]) => a <= b && b <= c && paintCount(a, b, c, ask) > 0,
     difficulty: ([a, b, c, ask]) => (a === b && b === c ? (ask === 3 ? 1 : 2) : ask === 2 ? 3 : 2),
     figure: ([a, b, c]) => (a === b && b === c ? { type: "solid", name: "cube", dims: [`${a} cubes on each edge`] } : { type: "solid", name: "cuboid", dims: [`${c} cubes long`, `${b} cubes wide`, `${a} cubes high`] }),
-    word: ([a, b, c, ask]) => `${name(a + b + c)} glues small wooden cubes into a ${a} by ${b} by ${c} block and dips the whole block in paint. When the paint dries, the block is taken apart. How many small cubes have ${ask === 1 ? "exactly two painted faces" : ask === 2 ? "exactly one painted face" : "no paint on them"}?`,
+    word: ([a, b, c, ask]) => `${name(a + b + c)} glues small wooden cubes into ${aNum(a)} by ${b} by ${c} block and dips the whole block in paint. When the paint dries, the block is taken apart. How many small cubes have ${ask === 1 ? "exactly two painted faces" : ask === 2 ? "exactly one painted face" : "no paint on them"}?`,
     teach: {
       idea: "Where a small cube sits decides its paint: corners get three faces, the rest of each edge two, the middle of each face one, and the hidden inside none.",
       method: "Take 2 off each length (the two outer layers). Edges: 4 × (sum of the shortened lengths). Faces: 2 × (sum of the products of pairs). Inside: the product of all three.",
@@ -1804,7 +1818,7 @@ export const B06: Def[] = [
     word: ([kind, l, w, c]) =>
       kind === 0
         ? `Grandmother's quilt is a rectangle of ${l * w} square patches, ${l} patches long and ${w} wide. She sews another quilt from the same number of patches, but ${c} patch${c > 1 ? "es" : ""} long. How many patch edges go round the outside of the new quilt?`
-        : `${name(l + w)} has a fence that goes round a ${l} m by ${w} m garden bed. The fence is moved to make a new rectangular bed with one side ${c} m, using all the fence. What is the area of the new bed, in square metres?`,
+        : `${name(l + w)} has a fence that goes round ${aNum(l)} m by ${w} m garden bed. The fence is moved to make a new rectangular bed with one side ${c} m, using all the fence. What is the area of the new bed, in square metres?`,
     teach: {
       idea: "Area counts the squares inside; perimeter is the distance round the edge. Rearranging the same squares can change the perimeter, and the same length of fence can enclose different areas.",
       method: "Same area: find the other side by dividing the area by the side you know, then add all four sides. Same perimeter: half the perimeter is one long side plus one short side, so take away the side you know, then multiply.",
@@ -1819,6 +1833,15 @@ export const B06: Def[] = [
 
 // ---------------------------------------------------------------- helpers used above (after the table, hoisted)
 
+/** "a" or "an" before a number as it is read ("an 8", "an 11", "a 7"). */
+function aNum(n: number | string) {
+  const t = String(n);
+  return `${/^8/.test(t) || t === "11" || t === "18" ? "an" : "a"} ${t}`;
+}
+/** "a" or "an" before a word. */
+function an(w: string) {
+  return `${/^[aeiou]/i.test(w) ? "an" : "a"} ${w}`;
+}
 function upTo(k: number) {
   return k === 2 ? "1 or 2" : `${Array.from({ length: k - 1 }, (_, i) => i + 1).join(", ")} or ${k}`;
 }

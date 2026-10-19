@@ -136,6 +136,7 @@ const czs = (rc: number, rr: number, ic: number, ir: number) => {
   return ic === 0 ? re : `${re} ${ic < 0 ? "−" : "+"} ${imBody}`;
 };
 const piStr = (k: R) => (k[0] === 0 ? "0" : `${k[0] < 0 ? "−" : ""}${Math.abs(k[0]) === 1 ? "" : Math.abs(k[0])}π${k[1] === 1 ? "" : `/${k[1]}`}`);
+const pa = (k: R) => (k[0] < 0 ? `(${piStr(k)})` : piStr(k));
 const pct = (tenths: number) => `${tenths * 10}%`;
 
 // ---------------------------------------------------------------- reading an answer back for an independent check
@@ -907,7 +908,7 @@ function lineC(m: number) {
   return m === 0 ? "y = c" : `y = ${m === 1 ? "" : m === -1 ? "−" : mi(m)}x + c`;
 }
 function conicTxt([kind, , p, q]: number[]) {
-  return kind === 0 ? `parabola y² = ${4 * p}x` : kind === 1 ? `circle x² + y² = ${p * p}` : kind === 2 ? `ellipse x²/${p * p} + y²/${q * q} = 1` : `hyperbola x²/${p * p} − y²/${q * q} = 1`;
+  return kind === 0 ? `parabola y² = ${4 * p}x` : kind === 1 ? `circle x² + y² = ${p * p}` : kind === 2 ? `ellipse ${p === 1 ? "x²" : `x²/${p * p}`} + ${q === 1 ? "y²" : `y²/${q * q}`} = 1` : `hyperbola ${p === 1 ? "x²" : `x²/${p * p}`} − ${q === 1 ? "y²" : `y²/${q * q}`} = 1`;
 }
 function tcN([kind, m, p, q]: number[]) {
   return kind === 1 ? p * p * (1 + m * m) : kind === 2 ? p * p * m * m + q * q : p * p * m * m - q * q;
@@ -2029,7 +2030,7 @@ const prin6 = (s: number) => {
   return t;
 };
 const polarTxt = (r: number, a: number) => {
-  const ang = piStr(R_(a, 6));
+  const ang = a < 0 ? `(${piStr(R_(a, 6))})` : piStr(R_(a, 6));
   return `${r === 1 ? "" : r}(cos ${ang} + i sin ${ang})`;
 };
 const aspolm: Def = {
@@ -2099,7 +2100,10 @@ const aspolm: Def = {
 };
 
 // ---- circles in the Argand plane
-const zminus = (a: number, b: number) => (a === 0 && b === 0 ? "|z|" : `|z − (${cz(a, b)})|`);
+const zminus = (a: number, b: number) => {
+  const w = cz(a, b);
+  return a === 0 && b === 0 ? "|z|" : w.startsWith("−") || w.includes(" ") ? `|z − (${w})|` : `|z − ${w}|`;
+};
 const ascloc: Def = {
   id: "ascloc",
   arity: 6,
@@ -2170,7 +2174,7 @@ const ascloc: Def = {
   limits: "Circles from |kz − w| = r and from a ratio 2 or 3 of distances; straight-line loci (perpendicular bisectors) and regions are not included.",
 };
 function clocCond([t, a, b, c, d, k]: number[]) {
-  if (t === 1) return `|${k}z${a === 0 && b === 0 ? "" : ` − (${cz(a, b)})`}| = ${c}`;
+  if (t === 1) return `|${k}z${a === 0 && b === 0 ? "" : cz(a, b).startsWith("−") || cz(a, b).includes(" ") ? ` − (${cz(a, b)})` : ` − ${cz(a, b)}`}| = ${c}`;
   return `${zminus(a, b)} = ${k}${zminus(c, d)}`;
 }
 function aslocAns(p: number[]) {
@@ -2212,7 +2216,7 @@ const asdemo: Def = {
     const nk = rmul(b.k, R_(n));
     const [c, s] = trigE(nk);
     const ans = tup([es(emul(R, c)), es(emul(R, s))]);
-    return { steps: [S("polar", "convert", POLAR, [es(b.mod), rs(b.k)], `${es(b.mod)}(cos ${piStr(b.k)} + i sin ${piStr(b.k)})`), S("power", "power", DM, [n, es(R)], `${es(R)}(cos ${piStr(nk)} + i sin ${piStr(nk)})`), S("evaluate", "evaluate", TRIG, [piStr(nk)], ans)], answer: ans };
+    return { steps: [S("polar", "convert", POLAR, [es(b.mod), rs(b.k)], `${es(b.mod)}(cos ${pa(b.k)} + i sin ${pa(b.k)})`), S("power", "power", DM, [n, es(R)], `${es(R)}(cos ${pa(nk)} + i sin ${pa(nk)})`), S("evaluate", "evaluate", TRIG, [piStr(nk)], ans)], answer: ans };
   },
   // independent: multiply the base by itself n times in the form x + iy (floating point)
   validate: ([j, n], v) => {
@@ -2323,7 +2327,8 @@ function rootW(n: number, f: number, rho: number) {
   const M = rho ** n;
   if (f % 2 === 0) return [cz(M, 0), cz(0, M), cz(-M, 0), cz(0, -M)][f / 2];
   const k = R_(f > 4 ? f - 8 : f, 4);
-  return `${M === 1 ? "" : M}(cos ${piStr(k)} + i sin ${piStr(k)})`;
+  const ang = k[0] < 0 ? `(${piStr(k)})` : piStr(k);
+  return `${M === 1 ? "" : M}(cos ${ang} + i sin ${ang})`;
 }
 
 // ================================================================ probability
@@ -2735,7 +2740,7 @@ const asbinmv: Def = {
       B("variance-np-squared", "recall", BIN, "The variance is npq, not np².", tup([rs(mean), rs(R_(n * a * a, d * d))])),
     ];
   },
-  distractors: ([n, a, d, mode]) => (mode ? [tup([String(n + 1), pf(a, d)]), tup([String(2 * n), pf(a, 2 * d)])] : [tup([rs(R_(n * a, d)), rs(R_(n * a * (d - a), d))]), tup([rs(R_(n * (d - a), d)), rs(R_(n * a * (d - a), d * d))])]),
+  distractors: ([n, a, d, mode]) => (mode ? [tup([String(n + 1), pf(a, d)]), tup([String(2 * n), pf(a, 2 * d)])] : [tup([rs(R_(n * a, d)), rs(R_(n * a * (d - a), d))]), tup([rs(R_(n * (d - a), d)), rs(R_(n * a * (d - a), d * d))]), tup([rs(R_(n * a, d)), rs(R_(2 * n * a * (d - a), d * d))]), tup([rs(R_(n * a + d, d)), rs(R_(n * a * (d - a), d * d))])]),
   variants: () => [],
   explain: (s) => (s.id === "mean" ? `Mean = np = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "variance" ? `Variance = npq = ${s.inputs[0]} × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}` : s.id === "q" ? `q = npq ÷ np = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "p" ? `p = 1 − q = ${s.value}` : `n = mean ÷ p = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
   domain: [[2, 40], [1, 9], [2, 10], [0, 1]],

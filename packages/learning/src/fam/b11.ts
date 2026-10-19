@@ -355,7 +355,7 @@ export const B11: Def[] = [
           keep,
         ];
       return [
-        bug("positive-power", "conceptual", EXP, `The power was written as positive. A number less than 1 has a negative power of 10: ${a} is divided by 10 again and again, not multiplied.`, T2(a, -e), e >= -5 ? `gen:akscid:${m},${e}` : undefined),
+        bug("positive-power", "conceptual", EXP, `The power was written as positive. A number less than 1 has a negative power of 10: ${a} is divided by 10 again and again, not multiplied.`, T2(a, -e), e >= -3 ? `gen:akscid:${m},${e}` : undefined),
         bug("counted-zeros-after-point", "procedural", SCI, "Only the zeros after the decimal point were counted. The point must move past the first non-zero digit too, so it moves one place more.", T2(a, e + 1)),
         keep,
       ];
@@ -387,9 +387,10 @@ export const B11: Def[] = [
     title: "Writing a number in scientific notation as an ordinary number",
     competency: SCI,
     type: "fraction",
+    decimals: true,
     mc: true,
     parse: none,
-    reject: ([m, e]) => (m < 101 || m > 999 || m % 10 === 0 || e < -5 || e > 8 || (e >= 0 && e <= 1) ? "a with three significant digits; powers 10² to 10⁸ or 10⁻¹ to 10⁻⁵." : null),
+    reject: ([m, e]) => (m < 101 || m > 999 || m % 10 === 0 || e < -3 || e > 8 || (e >= 0 && e <= 1) ? "a with three significant digits; powers 10² to 10⁸ or 10⁻¹ to 10⁻³." : null),
     prompt: ([m, e]) => `Write ${sciA(m)} × 10${sup(e)} as an ordinary number.`,
     solve: ([m, e]) => ({
       steps: [{ id: "shift", op: "multiply", competency: SCI, inputs: [sciA(m), e], value: sciValue(m, e) }],
@@ -425,7 +426,8 @@ export const B11: Def[] = [
     },
     variants: () => [],
     explain: (s) => (Number(s.inputs[1]) > 0 ? `Multiply ${s.inputs[0]} by 10 ${s.inputs[1]} times: move the point ${s.inputs[1]} places to the right to get ${s.value}` : `Divide ${s.inputs[0]} by 10 ${-Number(s.inputs[1])} ${Number(s.inputs[1]) === -1 ? "time" : "times"}: move the point ${-Number(s.inputs[1])} places to the left to get ${s.value}`),
-    domain: [[101, 999], [-5, 8]],
+    // powers down to 10⁻³ only, so the answer and every option are written in ordinary place-value notation
+    domain: [[101, 999], [-3, 8]],
     keep: ([m, e]) => m % 10 !== 0 && (e < 0 || e >= 2),
     cap: 400,
     difficulty: ([, e]) => (e >= 2 && e <= 4 ? 1 : e > 0 || e === -1 ? 2 : 3),
@@ -437,7 +439,7 @@ export const B11: Def[] = [
         { id: "repeat", title: "Multiply by 10 one step at a time", kind: "procedural", text: ["Write 10ⁿ as 10 × 10 × … and multiply by 10 once for each factor: 3.07 → 30.7 → 307 → 3070.", "For a negative power, divide by 10 once for each step instead: 3.07 → 0.307 → 0.0307."] },
       ],
     },
-    limits: "a with three significant digits and powers from 10⁻⁵ to 10⁸ (except 10⁰ and 10¹).",
+    limits: "a with three significant digits and powers from 10⁻³ to 10⁸ (except 10⁰ and 10¹), so every option is a plain decimal.",
   },
   // ============================================================ square roots by prime factorisation
   {
@@ -446,6 +448,7 @@ export const B11: Def[] = [
     title: "Square root of a larger perfect square or decimal",
     competency: SQ,
     type: "fraction",
+    decimals: true,
     mc: true,
     parse: none,
     reject: ([d, n]) => (d < 0 || d > 1 ? "Whole number (0) or decimal (1)." : d === 0 ? (n < 26 || n > 120 ? "√ of whole squares from 26² to 120²." : null) : n < 11 || n > 99 || n % 10 === 0 ? "√ of decimals with two decimal places (1.21 to 98.01)." : null),
@@ -1390,6 +1393,7 @@ export const B11: Def[] = [
     title: "Scaling in proportion, not by adding",
     competency: PROP,
     type: "fraction",
+    decimals: true,
     mc: true,
     parse: none,
     reject: ([c, a, b, W]) => (c < 0 || c > 1 || a < 2 || a > 12 || b < 2 || b > 20 || W < 3 || W > 30 || W === a || b === a || (2 * b * W) % a !== 0 ? "A photo or a recipe scaled to a new size, with an answer in halves." : null),
@@ -1697,6 +1701,7 @@ export const B11: Def[] = [
     title: "Finding the median",
     competency: MED,
     type: "fraction",
+    decimals: true,
     mc: true,
     parse: none,
     reject: ([s, n]) => (s < 0 || s > 79 || n < 5 || n > 10 ? "Five to ten different values." : null),
@@ -1805,6 +1810,7 @@ export const B11: Def[] = [
     title: "The mean of data in a frequency table",
     competency: MED,
     type: "fraction",
+    decimals: true,
     mc: true,
     parse: none,
     reject: ([s]) => {
