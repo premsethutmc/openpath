@@ -3605,12 +3605,6 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
-   "target": "MATH.geometry.transformations",
-   "from": "MATH.geometry.rotational-symmetry",
-   "type": "support",
-   "reason": "helpful background named by the curriculum inventory; never a gate"
-  },
-  {
    "target": "MATH.geometry.triangle-concurrency",
    "from": "MATH.geometry.triangle-properties",
    "type": "plausible",
@@ -4809,12 +4803,6 @@
    "from": "MATH.number.multiplication-tables",
    "type": "support",
    "reason": "a fraction of a whole number multiplies and divides whole numbers"
-  },
-  {
-   "target": "MATH.algebra.quadratics",
-   "from": "MATH.algebra.polynomial-zeros",
-   "type": "support",
-   "reason": "roots of a quadratic are the zeros of the polynomial"
   }
  ],
  "disputed": [
@@ -4847,6 +4835,18 @@
    "target": "MATH.statistics.pie-charts",
    "from": "MATH.number.percentage",
    "reason": "the prerequisite starts in Grade 7, after the competency (Grade 4): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.geometry.transformations",
+   "from": "MATH.geometry.rotational-symmetry",
+   "type": "support",
+   "reason": "would make a cycle of prerequisites"
+  },
+  {
+   "target": "MATH.algebra.quadratics",
+   "from": "MATH.algebra.polynomial-zeros",
+   "type": "support",
+   "reason": "would make a cycle of prerequisites"
   }
  ],
  "droppedReferences": []

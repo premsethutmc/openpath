@@ -116,7 +116,8 @@ def main():
             relations.append({'target': t, 'from': f, 'type': ty, 'reason': why})
         else:
             dropped.append({'target': t, 'from': f, 'reason': 'unknown competency'})
-    # cycles among plausible relations are refused (the later edge is listed as disputed)
+    # cycles among followed relations (plausible and support: both are walked for recovery) are refused; the later edge
+    # is listed as disputed for review
     graph = defaultdict(set)
     kept = []
     def reaches(a, b, seen=None):
@@ -126,10 +127,10 @@ def main():
         seen.add(a)
         return any(reaches(n, b, seen) for n in graph[a] if n not in seen)
     for r in relations:
-        if r['type'] == 'plausible' and reaches(r['from'], r['target']):
-            disputed.append({**r, 'reason': 'would make a cycle'})
+        if r['type'] in ('plausible', 'support') and reaches(r['from'], r['target']):
+            disputed.append({**r, 'reason': 'would make a cycle of prerequisites'})
             continue
-        if r['type'] == 'plausible':
+        if r['type'] in ('plausible', 'support'):
             graph[r['target']].add(r['from'])
         kept.append(r)
     out = {
