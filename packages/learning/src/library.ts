@@ -50,6 +50,7 @@ export interface SynthesisedModule extends Module {
 }
 
 const predicted = (p: Problem) => new Set(p.bugs.filter((b) => b.predict !== null).map((b) => b.id));
+const minus = (t: string) => t.replace(/^-/, "−");
 const typedOf = (id: string) => problemOf(id.replace(/:mc$/, ""))!;
 
 /**
@@ -154,7 +155,7 @@ export function fromTemplate(family: string, competency: string, version: string
   ];
   if (mistakeEx) {
     const b = conceptual(mistakeEx)!;
-    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`For ${mistakeEx.prompt.replace(/ \(.*\)$/, "")} a common answer is ${show(b.predict as number)}.`, b.says, def.teach.idea], math: [`Not ${show(b.predict as number)}, but ${mistakeEx.answer}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
+    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says, def.teach.idea], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
     strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });

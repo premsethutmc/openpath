@@ -22,7 +22,7 @@
  */
 import { canonical, isCorrect, question } from "./content";
 import { hashOf } from "./curriculum";
-import { candidates, difficultyOf, FAMILIES, inPool, pool, problemOf, show, type Problem } from "./families";
+import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, show, type Problem } from "./families";
 
 export const SPEC_POLICY = "spec@1";
 /** Versions of each family specification; bump when the generator is changed on purpose (the fingerprint changes
@@ -48,7 +48,19 @@ export interface FamilySpec {
   fingerprint: string;
 }
 
-const itemSignature = (p: Problem) => [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${JSON.stringify(b.predict)}`).join(";"), difficultyOf(p)].join("¦");
+/**
+ * Everything about one question that a reviewer approves: wording, answer, options, every explanation (its id, kind,
+ * the skill it points to, its wording, its prediction and its probe question), the worked steps as written, the
+ * difficulty class, and how the answer checker behaves (the right answer and nearby wrong values), so a change to
+ * the validator is a change of specification too.
+ */
+const itemSignature = (p: Problem) => {
+  const def = FAMILIES.get(p.family)!;
+  const typed = problemOf(p.id.replace(/:mc$/, ""))!;
+  const v = def.solve(typed.params).answer;
+  const probes = typeof v === "number" ? [v, v + 1, v - 1, 2 * v + 1, v + 0.5].map((x) => (def.validate(typed.params, x) ? "1" : "0")).join("") : def.validate(typed.params, v) ? "1" : "0";
+  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes].join("¦");
+};
 
 export function familySpec(fam: string): FamilySpec | null {
   const def = FAMILIES.get(fam);

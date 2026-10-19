@@ -906,12 +906,12 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For On the line y = 6x − 9, what is y when x = 1? a common answer is 52.",
+        "A question: “On the line y = 6x − 9, what is y when x = 1?” A common wrong answer is 52.",
         "6x with x = 1 was read as the digits 61; 6x means 6 × x.",
         "y = mx + c gives y for any x: m × x, then add c."
        ],
        "math": [
-        "Not 52, but -3"
+        "Not 52, but −3"
        ]
       }
      ],
@@ -1026,7 +1026,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For A rectangle is 5 cm long and 4 cm wide. What is its perimeter in centimetres? a common answer is 20.",
+        "A question: “A rectangle is 5 cm long and 4 cm wide. What is its perimeter in centimetres?” A common wrong answer is 20.",
         "The space inside (area) was found; the perimeter is the distance around the edge.",
         "The perimeter is the distance all the way around a shape: add the lengths of every side."
        ],
@@ -1149,7 +1149,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 48 × 2 = ? a common answer is 24.",
+        "A question: “48 × 2 = ?” A common wrong answer is 24.",
         "The tens digit was multiplied as if it were 4, not 40: each digit's place value counts.",
         "Split the two-digit number into tens and ones, multiply each part, then add."
        ],
@@ -1235,9 +1235,9 @@
     }
    ],
    "diagnostics": [
-    "gen:divr:75,4",
     "gen:divr:25,9",
-    "gen:divr:31,2"
+    "gen:divr:25,7",
+    "gen:divr:54,5"
    ],
    "strategies": [
     {
@@ -1272,7 +1272,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 50 ÷ 8 = 6 remainder □. What is the remainder? a common answer is 6.",
+        "A question: “50 ÷ 8 = 6 remainder □. What is the remainder?” A common wrong answer is 6.",
         "The number of groups was given; the remainder is what is left over after the groups.",
         "Dividing makes equal groups; the remainder is what is left when no more full groups fit."
        ],
@@ -1352,9 +1352,7 @@
      "math": [
       "120 ÷ 3 = ?",
       "40 × 3 = 120",
-      "120 − 120 = 0",
-      "0 ÷ 3 = 0",
-      "40 + 0 = 40"
+      "So 120 ÷ 3 = 40"
      ],
      "tip": "A zero in the answer was left out: when the divisor does not go into a step, write 0 there."
     }
@@ -1397,7 +1395,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 632 ÷ 8 = ? a common answer is 97.",
+        "A question: “632 ÷ 8 = ?” A common wrong answer is 97.",
         "The digits of the answer were written in the wrong order: the first step gives the tens.",
         "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84."
        ],
@@ -1475,7 +1473,7 @@
      "math": [
       "3 × 4/8 = ?",
       "3 lots of 4 pieces: 3 × 4 = 12 pieces",
-      "The pieces are still 8ths: the bottom stays 8"
+      "The pieces are still the same size (each is 1/8): the bottom stays 8"
      ],
      "tip": "Top and bottom were both multiplied by 3: that gives an equal fraction, not 3 lots of it."
     }
@@ -1499,8 +1497,8 @@
        ],
        "math": [
         "8 × 1/3 = ?",
-        "8 lots of 1 pieces: 8 × 1 = 8 pieces",
-        "The pieces are still 3ths: the bottom stays 3"
+        "8 lots of 1 piece: 8 × 1 = 8 pieces",
+        "The pieces are still the same size (each is 1/3): the bottom stays 3"
        ]
       }
      ],
@@ -1516,7 +1514,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 5 × 7/10 = ? a common answer is 7/10.",
+        "A question: “5 × 7/10 = ?” A common wrong answer is 7/10.",
         "Top and bottom were both multiplied by 5: that gives an equal fraction, not 5 lots of it.",
         "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them."
        ],
@@ -1638,7 +1636,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 2/3 + 3/5 = ? a common answer is 5/8.",
+        "A question: “2/3 + 3/5 = ?” A common wrong answer is 5/8.",
         "Tops and bottoms were added separately; fractions with different pieces must first be written with the same pieces.",
         "Fractions can be added only when they count the same size of piece."
        ],
@@ -1717,8 +1715,8 @@
      ],
      "math": [
       "What is 60% of 100?",
-      "1% of 100 is 100 ÷ 100 = 1",
-      "60% is 60 × 1 = 60"
+      "10% of 100 is 100 ÷ 10 = 10",
+      "60% is 6 lots of that: 6 × 10 = 60"
      ],
      "tip": "Per cent means out of 100: the amount must be divided by 100 as well as multiplied."
     }
@@ -1742,8 +1740,8 @@
        ],
        "math": [
         "What is 45% of 180?",
-        "1% of 180 is 180 ÷ 100 = 9/5",
-        "45% is 45 × 9/5 = 81"
+        "5% of 180 is 180 ÷ 20 = 9",
+        "45% is 9 lots of that: 9 × 9 = 81"
        ]
       }
      ],
@@ -1759,7 +1757,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For What is 35% of 180? a common answer is 6300.",
+        "A question: “What is 35% of 180?” A common wrong answer is 6300.",
         "Per cent means out of 100: the amount must be divided by 100 as well as multiplied.",
         "Per cent means out of 100: 30% of an amount is 30 parts of every 100."
        ],
@@ -1861,7 +1859,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For What is the mean of 2, 3, 7 and 12? a common answer is 5.",
+        "A question: “What is the mean of 2, 3, 7 and 12?” A common wrong answer is 5.",
         "A middle value was chosen; the mean shares the total equally.",
         "The mean shares the total out equally: it is the value every number would have if they were levelled out."
        ],
@@ -1979,7 +1977,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For √576 = ? a common answer is 288.",
+        "A question: “√576 = ?” A common wrong answer is 288.",
         "The number was halved; the square root is the number that multiplied by itself gives it.",
         "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49."
        ],
@@ -2080,7 +2078,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For A box is built from 1 cm cubes: 8 long, 8 wide and 7 high. How many cubes is that? a common answer is 64.",
+        "A question: “A box is built from 1 cm cubes: 8 long, 8 wide and 7 high. How many cubes is that?” A common wrong answer is 64.",
         "Only the bottom layer was counted; there are as many layers as the height.",
         "Volume counts the cubes that fill a shape: layers of cubes stacked up."
        ],
@@ -2200,7 +2198,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For Solve 7x + 5 = 75. What is x? a common answer is 70.",
+        "A question: “Solve 7x + 5 = 75. What is x?” A common wrong answer is 70.",
         "5 was taken away but the 7 was not divided out: 7x = 70 means x = 70 ÷ 7.",
         "An equation is a balance: do the same to both sides and it stays true."
        ],
@@ -2320,7 +2318,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For 8 pencils cost ₹104. At the same price each, how much do 11 pencils cost, in rupees? a common answer is 107.",
+        "A question: “8 pencils cost ₹104. At the same price each, how much do 11 pencils cost, in rupees?” A common wrong answer is 107.",
         "The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.",
         "In a direct proportion, twice as many costs twice as much: the price of one stays the same."
        ],
@@ -2440,7 +2438,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For Factorise: x² + 4x − 45 = (x − 5)(x + □). What number goes in the box (it may be negative)? a common answer is 4.",
+        "A question: “Factorise: x² + 4x − 45 = (x − 5)(x + □). What number goes in the box (it may be negative)?” A common wrong answer is 4.",
         "The x coefficient was copied into the bracket; the two numbers in the brackets add up to it.",
         "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient."
        ],
@@ -2561,7 +2559,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For An arithmetic progression starts 12, 16, 20, … What is term number 18? a common answer is 216.",
+        "A question: “An arithmetic progression starts 12, 16, 20, … What is term number 18?” A common wrong answer is 216.",
         "The first term was multiplied; an arithmetic progression adds the same difference each time.",
         "Each term of an arithmetic progression is the one before plus the common difference d."
        ],
@@ -2639,8 +2637,8 @@
      ],
      "math": [
       "What is the distance between (−5, −2) and (−1, 1)?",
-      "Across: −1 − (−5) gives 4",
-      "Up: 1 − (−2) gives 3",
+      "Across: from −5 to −1 is 4",
+      "Up or down: from −2 to 1 is 3",
       "16 + 9 = 25",
       "√25 = 5"
      ],
@@ -2666,8 +2664,8 @@
        ],
        "math": [
         "What is the distance between (−6, 3) and (6, −6)?",
-        "Across: 6 − (−6) gives 12",
-        "Up: −6 − 3 gives 9",
+        "Across: from −6 to 6 is 12",
+        "Up or down: from 3 to −6 is 9",
         "144 + 81 = 225",
         "√225 = 15"
        ]
@@ -2685,7 +2683,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For What is the distance between (−6, 1) and (6, 6)? a common answer is 17.",
+        "A question: “What is the distance between (−6, 1) and (6, 6)?” A common wrong answer is 17.",
         "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²).",
         "The distance between two points is the hypotenuse of a right triangle whose sides are the across and up distances."
        ],
@@ -2765,7 +2763,7 @@
      "math": [
       "What is the highest common factor (HCF) of 30 and 33?",
       "33 = 1 × 30 + 3",
-      "30 = 10 × 3 + 0"
+      "30 = 10 × 3 + 0: the remainder is 0, so the HCF is 3"
      ],
      "tip": "The lowest common multiple was found; the HCF is the largest number that divides both."
     }
@@ -2792,7 +2790,7 @@
         "96 = 1 × 54 + 42",
         "54 = 1 × 42 + 12",
         "42 = 3 × 12 + 6",
-        "12 = 2 × 6 + 0"
+        "12 = 2 × 6 + 0: the remainder is 0, so the HCF is 6"
        ]
       }
      ],
@@ -2808,7 +2806,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For What is the highest common factor (HCF) of 22 and 72? a common answer is 792.",
+        "A question: “What is the highest common factor (HCF) of 22 and 72?” A common wrong answer is 792.",
         "The lowest common multiple was found; the HCF is the largest number that divides both.",
         "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder."
        ],
@@ -2912,12 +2910,12 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For Find the determinant of the matrix [[3, 1], [1, −2]] (first row 3, 1; second row 1, −2). a common answer is -5.",
+        "A question: “Find the determinant of the matrix [[3, 1], [1, −2]] (first row 3, 1; second row 1, −2).” A common wrong answer is −5.",
         "The two diagonal products were added; the determinant subtracts them: ad − bc.",
         "The determinant of [[a, b], [c, d]] is ad − bc: the product down one diagonal minus the product down the other."
        ],
        "math": [
-        "Not -5, but -7"
+        "Not −5, but −7"
        ]
       }
      ],
@@ -3033,7 +3031,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For Find lim (x → 6) of (x² − 36) ⁄ (x − 6). a common answer is 0.",
+        "A question: “Find lim (x → 6) of (x² − 36) ⁄ (x − 6).” A common wrong answer is 0.",
         "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).",
         "When substituting gives 0 ⁄ 0, the limit still exists: simplify first, then substitute."
        ],
@@ -3152,7 +3150,7 @@
       {
        "title": "A common wrong answer",
        "text": [
-        "For In a class, 3 girls and 2 boys are in the chess club; 3 girls and 2 boys are not. A girl is chosen at random. What is the probability she is in the chess club? a common answer is 3/10.",
+        "A question: “In a class, 3 girls and 2 boys are in the chess club; 3 girls and 2 boys are not. A girl is chosen at random. What is the probability she is in the chess club?” A common wrong answer is 3/10.",
         "The whole class was counted; given that a girl is chosen, only the girls count.",
         "P(A given B) counts only the cases where B happened: B becomes the whole."
        ],

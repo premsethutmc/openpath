@@ -741,16 +741,17 @@ async function reviewerPage(name, roles, size = "tablet") {
   await page.reload();
   return { page, context, email };
 }
-let reviewerBoth = null;
-/** One synthetic account with both roles, for releases made by the API (registration is rate-limited). */
-async function sharedReviewer() {
-  reviewerBoth ??= await reviewerPage("both", ["educator", "release-manager"]);
-  return reviewerBoth;
+let reviewers = null;
+/** Two synthetic reviewers for releases made by the API (an educator approves; another person releases). */
+async function sharedReviewers() {
+  reviewers ??= { educator: (await reviewerPage("educator2", ["educator"])).page, manager: (await reviewerPage("release2", ["release-manager"])).page };
+  return reviewers;
 }
-/** Take items through the whole workflow by the API (each decision by the role it needs); idempotent. */
-async function releaseAll(page, items) {
+/** Take items through the whole workflow by the API (each decision by the role it needs; four eyes); idempotent. */
+async function releaseAll({ educator, manager }, items) {
   for (const item of items) {
     for (const decision of ["submit", "approve", "release"]) {
+      const page = decision === "release" ? manager : educator;
       const reg = (await call(page, "/content-review/")).data.registry;
       const e = reg.entries.find((x) => x.item === item);
       assert.ok(e, item);
@@ -859,8 +860,7 @@ test("content system: an educator reviews a question family and its module in th
   await rm.page.getByRole("button", { name: "Release to learners" }).click();
   await rm.page.getByTestId("state").getByText("Released").waitFor();
   // the other family the module uses (7 × 8 probes), by the API, then the module
-  const both = await sharedReviewer();
-  await releaseAll(both.page, ["family:mul"]);
+  await releaseAll({ educator: ed.page, manager: rm.page }, ["family:mul"]);
   await rm.page.getByRole("button", { name: "Modules" }).click();
   await rm.page.getByRole("button", { name: "Multiplying a two-digit number by a one-digit number" }).click();
   await rm.page.getByRole("button", { name: "Release to learners" }).click();
@@ -876,8 +876,7 @@ test("content system: an educator reviews a question family and its module in th
 
 test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, recovery, a week away, verified on released content", async () => {
   if (mode !== "django") return;
-  const both = await sharedReviewer();
-  await releaseAll(both.page, ["family:factor", "family:subst", "family:pow", "family:dist", "family:mul", "module:MATH.algebra.factorisation", "module:MATH.calculus.integration-methods", "module:MATH.algebra.identities-intro"]);
+  await releaseAll(await sharedReviewers(), ["family:factor", "family:subst", "family:pow", "family:dist", "family:mul", "module:MATH.algebra.factorisation", "module:MATH.calculus.integration-methods", "module:MATH.algebra.identities-intro"]);
   // Grade 10 (Board B): factorising, with two early mistakes
   {
     const { page, context, learner } = await learnerPage("Synthetic G10 released learner");

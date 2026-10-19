@@ -43,7 +43,7 @@
     "idea": "a × b counts a groups of b: the same as b groups of a.",
     "method": "Rebuild a fact from one you know: double, add or take away one group, or split a factor."
    },
-   "fingerprint": "252bbdbc",
+   "fingerprint": "3be0e6ee",
    "validation": {
     "family": "mul",
     "deterministic": {
@@ -104,7 +104,7 @@
     "idea": "Area counts the unit squares that cover a shape.",
     "method": "A rectangle has rows of equal squares: rows × squares in a row."
    },
-   "fingerprint": "f81d431c",
+   "fingerprint": "491f99bc",
    "validation": {
     "family": "rect",
     "deterministic": {
@@ -169,7 +169,7 @@
     "idea": "Equal fractions cover the same amount: cutting every piece into k smaller pieces multiplies top and bottom by k.",
     "method": "Find what the bottom was multiplied by, and multiply the top by the same number."
    },
-   "fingerprint": "e318a02c",
+   "fingerprint": "7260c840",
    "validation": {
     "family": "eqfrac",
     "deterministic": {
@@ -238,7 +238,7 @@
     "idea": "Like fractions count the same size of piece: add or take away the pieces.",
     "method": "Add or subtract the tops; the bottom (the size of the pieces) stays."
    },
-   "fingerprint": "aa39df1c",
+   "fingerprint": "4666c963",
    "validation": {
     "family": "fadd",
     "deterministic": {
@@ -305,7 +305,7 @@
     "idea": "The integral of a constant c from a to b is the area of a rectangle: width b − a, height c.",
     "method": "Width (upper minus lower) times height."
    },
-   "fingerprint": "fcdc38aa",
+   "fingerprint": "12064e16",
    "validation": {
     "family": "cint",
     "deterministic": {
@@ -364,7 +364,7 @@
     "idea": "If a product is zero, one of its factors is zero.",
     "method": "Factorise x² + px + q = (x − r)(x − s), then each bracket gives a solution."
    },
-   "fingerprint": "15f7318d",
+   "fingerprint": "1ed69e34",
    "validation": {
     "family": "quad",
     "deterministic": {
@@ -428,7 +428,7 @@
     "idea": "y = mx + c gives y for any x: m × x, then add c.",
     "method": "Multiply m by the value of x first, then add (or subtract) c."
    },
-   "fingerprint": "54f3cfab",
+   "fingerprint": "9cf7208c",
    "validation": {
     "family": "linev",
     "deterministic": {
@@ -483,7 +483,7 @@
     "idea": "Where two graphs meet, their y values are equal.",
     "method": "Try each whole number and compare x × x with the line's value."
    },
-   "fingerprint": "45abf4a2",
+   "fingerprint": "57803318",
    "validation": {
     "family": "meet",
     "deterministic": {
@@ -540,7 +540,7 @@
     "idea": "A graph is higher at x when its y value there is larger.",
     "method": "Work out both y values at that x and compare."
    },
-   "fingerprint": "fcd422ea",
+   "fingerprint": "693205a7",
    "validation": {
     "family": "above",
     "deterministic": {
@@ -596,7 +596,7 @@
     "idea": "The area between two curves is the integral of (top − bottom) between where they meet.",
     "method": "Find where they meet, check which is on top, integrate the difference."
    },
-   "fingerprint": "3f328107",
+   "fingerprint": "6cd0f1f4",
    "validation": {
     "family": "alp",
     "deterministic": {
@@ -657,7 +657,7 @@
     "idea": "aⁿ multiplies a by itself n times.",
     "method": "Multiply step by step: 3, 9, 27, 81 for 3⁴."
    },
-   "fingerprint": "11bee98b",
+   "fingerprint": "9ef3b50f",
    "validation": {
     "family": "pow",
     "deterministic": {
@@ -718,7 +718,7 @@
     "idea": "The number outside a bracket multiplies every term inside.",
     "method": "Multiply along an arrow to each term."
    },
-   "fingerprint": "73e2b81a",
+   "fingerprint": "24831898",
    "validation": {
     "family": "dist",
     "deterministic": {
@@ -779,7 +779,7 @@
     "idea": "(x + a)(x + b) has four products; two of them are x terms.",
     "method": "The x coefficient is a + b and the constant is ab."
    },
-   "fingerprint": "e95fce17",
+   "fingerprint": "b3fbb3a3",
    "validation": {
     "family": "expand",
     "deterministic": {
@@ -845,7 +845,7 @@
     "idea": "The derivative of k xⁿ is k n xⁿ⁻¹.",
     "method": "Multiply by the power, lower it by one, then substitute."
    },
-   "fingerprint": "c1870859",
+   "fingerprint": "6efa000d",
    "validation": {
     "family": "dpow",
     "deterministic": {
@@ -916,7 +916,7 @@
     "idea": "An antiderivative of xⁿ is xⁿ⁺¹ ⁄ (n + 1).",
     "method": "Raise the power, divide by the new power, then F(upper) − F(lower)."
    },
-   "fingerprint": "f89244d7",
+   "fingerprint": "552b485b",
    "validation": {
     "family": "pint",
     "deterministic": {
@@ -986,7 +986,7 @@
     "idea": "With u = x² + c, 2x dx becomes du.",
     "method": "Change the limits to u, integrate uⁿ, and evaluate between the u limits."
    },
-   "fingerprint": "fbc8a807",
+   "fingerprint": "ff41c625",
    "validation": {
     "family": "subst",
     "deterministic": {
@@ -1045,7 +1045,7 @@
     "idea": "b² − 4ac decides how many real solutions there are.",
     "method": "Positive: two; zero: one; negative: none."
    },
-   "fingerprint": "08bf7691",
+   "fingerprint": "024a748d",
    "validation": {
     "family": "disc",
     "deterministic": {
@@ -1106,7 +1106,7 @@
     "idea": "The perimeter is the distance all the way around a shape: add the lengths of every side.",
     "method": "A rectangle has two lengths and two widths: add one length and one width, then double."
    },
-   "fingerprint": "00ea54e2",
+   "fingerprint": "d9863e32",
    "validation": {
     "family": "rperim",
     "deterministic": {
@@ -1167,7 +1167,7 @@
     "idea": "Split the two-digit number into tens and ones, multiply each part, then add.",
     "method": "47 × 6 = 40 × 6 + 7 × 6 = 240 + 42 = 282. The 4 tens of 42 join the tens."
    },
-   "fingerprint": "a65a8613",
+   "fingerprint": "614faf13",
    "validation": {
     "family": "mmul",
     "deterministic": {
@@ -1228,7 +1228,7 @@
     "idea": "Dividing makes equal groups; the remainder is what is left when no more full groups fit.",
     "method": "Find the biggest multiple of the divisor that fits, then subtract it from the number."
    },
-   "fingerprint": "9d3b7f6f",
+   "fingerprint": "3eca44a6",
    "validation": {
     "family": "divr",
     "deterministic": {
@@ -1289,7 +1289,7 @@
     "idea": "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.",
     "method": "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21."
    },
-   "fingerprint": "660fb0ce",
+   "fingerprint": "88e2905c",
    "validation": {
     "family": "ldiv",
     "deterministic": {
@@ -1354,7 +1354,7 @@
     "idea": "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.",
     "method": "Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7."
    },
-   "fingerprint": "33924b9b",
+   "fingerprint": "d1bc32fb",
    "validation": {
     "family": "fmulw",
     "deterministic": {
@@ -1422,7 +1422,7 @@
     "idea": "Fractions can be added only when they count the same size of piece.",
     "method": "Write both with a common denominator (an equivalent fraction for each), then add the tops."
    },
-   "fingerprint": "809d46fd",
+   "fingerprint": "40d2c521",
    "validation": {
     "family": "faddu",
     "deterministic": {
@@ -1483,7 +1483,7 @@
     "idea": "Per cent means out of 100: 30% of an amount is 30 parts of every 100.",
     "method": "Find 1% (divide by 100) or 10% (divide by 10), then build up: 30% of 200 = 3 × 20 = 60."
    },
-   "fingerprint": "02b53481",
+   "fingerprint": "5f9ec2ff",
    "validation": {
     "family": "pct",
     "deterministic": {
@@ -1552,7 +1552,7 @@
     "idea": "The mean shares the total out equally: it is the value every number would have if they were levelled out.",
     "method": "Add all the numbers, then divide by how many numbers there are."
    },
-   "fingerprint": "52be6e2d",
+   "fingerprint": "77dfc843",
    "validation": {
     "family": "mean4",
     "deterministic": {
@@ -1609,7 +1609,7 @@
     "idea": "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.",
     "method": "Think of the square facts: 7 × 7 = 49, so √49 = 7."
    },
-   "fingerprint": "73d83356",
+   "fingerprint": "452a8b26",
    "validation": {
     "family": "root",
     "deterministic": {
@@ -1674,7 +1674,7 @@
     "idea": "Volume counts the cubes that fill a shape: layers of cubes stacked up.",
     "method": "Count one layer (length × width), then multiply by the number of layers (the height)."
    },
-   "fingerprint": "43a88732",
+   "fingerprint": "9ffc067e",
    "validation": {
     "family": "vol",
     "deterministic": {
@@ -1739,7 +1739,7 @@
     "idea": "An equation is a balance: do the same to both sides and it stays true.",
     "method": "Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x."
    },
-   "fingerprint": "38e54ca1",
+   "fingerprint": "4bf4c8ea",
    "validation": {
     "family": "lin",
     "deterministic": {
@@ -1803,7 +1803,7 @@
     "idea": "In a direct proportion, twice as many costs twice as much: the price of one stays the same.",
     "method": "Find the cost of one (divide), then multiply by how many you want."
    },
-   "fingerprint": "135e8a74",
+   "fingerprint": "e765795e",
    "validation": {
     "family": "prop",
     "deterministic": {
@@ -1864,7 +1864,7 @@
     "idea": "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient.",
     "method": "List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
    },
-   "fingerprint": "6632fbec",
+   "fingerprint": "4d2b22ea",
    "validation": {
     "family": "factor",
     "deterministic": {
@@ -1929,7 +1929,7 @@
     "idea": "Each term of an arithmetic progression is the one before plus the common difference d.",
     "method": "Term n = first term + (n − 1) × d: count the jumps, not the terms."
    },
-   "fingerprint": "d056ad2c",
+   "fingerprint": "a8dad5c4",
    "validation": {
     "family": "apn",
     "deterministic": {
@@ -1998,7 +1998,7 @@
     "idea": "The distance between two points is the hypotenuse of a right triangle whose sides are the across and up distances.",
     "method": "Find across and up (differences of coordinates), square them, add, and take the square root."
    },
-   "fingerprint": "29891d5c",
+   "fingerprint": "a08920e8",
    "validation": {
     "family": "cdist",
     "deterministic": {
@@ -2059,7 +2059,7 @@
     "idea": "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.",
     "method": "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0."
    },
-   "fingerprint": "3e16c2da",
+   "fingerprint": "db3c75dc",
    "validation": {
     "family": "hcf",
     "deterministic": {
@@ -2126,7 +2126,7 @@
     "idea": "The determinant of [[a, b], [c, d]] is ad − bc: the product down one diagonal minus the product down the other.",
     "method": "Multiply top-left by bottom-right, multiply top-right by bottom-left, and subtract the second from the first. Keep the signs."
    },
-   "fingerprint": "2a7bed66",
+   "fingerprint": "e06062d9",
    "validation": {
     "family": "det2",
     "deterministic": {
@@ -2180,14 +2180,14 @@
    ],
    "explanations": [
     "zero-for-undefined (conceptual): 0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).",
-    "forgot-plus-a (procedural): x² − a² was factorised as (x − a) alone; it is (x − a)(x + a), which gives 2a at x = a.",
-    "squared (procedural): x² − a² was replaced by x²; after cancelling, (x + a) gives 2a."
+    "half-factor (procedural): Only one a was kept after cancelling (as if x² − a² were (x − a) × x, then x = a); it is (x − a)(x + a), which gives a + a = 2a.",
+    "top-only (conceptual): Only the top was worked out at x = a, as k × a²; the bottom is 0 there, so simplify first: cancel (x − a)."
    ],
    "teach": {
     "idea": "When substituting gives 0 ⁄ 0, the limit still exists: simplify first, then substitute.",
     "method": "Factorise x² − a² = (x − a)(x + a), cancel (x − a), then put x = a."
    },
-   "fingerprint": "6913571a",
+   "fingerprint": "b78c12de",
    "validation": {
     "family": "lim",
     "deterministic": {
@@ -2216,19 +2216,19 @@
    "multipleChoice": true,
    "domain": [
     [
-     1,
+     2,
      15
     ],
     [
-     1,
+     2,
      15
     ],
     [
-     1,
+     2,
      15
     ],
     [
-     1,
+     2,
      15
     ]
    ],
@@ -2254,7 +2254,7 @@
     "idea": "P(A given B) counts only the cases where B happened: B becomes the whole.",
     "method": "Find the group you are told about (the girls), then the fraction of that group with the property (in the chess club)."
    },
-   "fingerprint": "eda1ebaa",
+   "fingerprint": "ec04e80a",
    "validation": {
     "family": "condp",
     "deterministic": {

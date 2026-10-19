@@ -83,42 +83,42 @@ Unsupported question type (21): Recognise folding symmetry; Interpret pictograph
 
 | Family | Competency | Pool | Excluded | Difficulty 1/2/3 | Fingerprint |
 |---|---|---|---|---|---|
-| mul: A multiplication fact | `MATH.number.multiplication-tables` | 121 | 0 | 16/48/57 | `252bbdbc` |
-| rect: Area of a rectangle | `MATH.measurement.rectangle-area` | 121 | 0 | 46/45/30 | `f81d431c` |
-| eqfrac: A missing part of an equivalent fraction | `MATH.number.equivalent-fractions` | 405 | 0 | 90/135/180 | `e318a02c` |
-| fadd: Adding or subtracting like fractions | `MATH.number.fraction-add-like` | 825 | 0 | 295/229/301 | `aa39df1c` |
-| cint: The definite integral of a constant | `MATH.calculus.definite-integrals` | 792 | 0 | 62/643/87 | `fcdc38aa` |
-| quad: A quadratic equation with whole-number roots | `MATH.algebra.quadratics` | 127 | 0 | 20/20/87 | `15f7318d` |
-| linev: A value on a straight line | `MATH.algebra.variables` | 1512 | 0 | 506/286/720 | `54f3cfab` |
-| meet: Where a line meets y = x², by trying whole numbers | `MATH.algebra.linear-equations` | 13 | 0 | 0/13/0 | `45abf4a2` |
-| above: Which graph is higher at a point | `MATH.algebra.functions` | 215 | 0 | 215/0/0 | `fcd422ea` |
-| alp: The area between a parabola and a line | `MATH.calculus.area-integrals` | 17 | 0 | 0/0/17 | `3f328107` |
-| pow: A power of a whole number | `MATH.number.exponents` | 42 | 0 | 15/11/16 | `11bee98b` |
-| dist: Expanding a(x + b) | `MATH.algebra.identities-intro` | 132 | 0 | 57/45/30 | `73e2b81a` |
-| expand: Expanding (x + a)(x + b) | `MATH.algebra.identities` | 144 | 0 | 36/36/72 | `e95fce17` |
-| dpow: The derivative of k xⁿ at a point | `MATH.calculus.derivative-rules` | 138 | 0 | 36/56/46 | `c1870859` |
-| pint: The definite integral of k xⁿ | `MATH.calculus.indefinite-integrals` | 360 | 0 | 48/192/120 | `f89244d7` |
-| subst: An integral by substitution | `MATH.calculus.integration-methods` | 72 | 0 | 24/24/24 | `fbc8a807` |
-| disc: How many real solutions a quadratic has | `MATH.algebra.quadratic-discriminant` | 960 | 0 | 240/720/0 | `08bf7691` |
-| rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `00ea54e2` |
-| mmul: Multiplying a two-digit number by a one-digit number | `MATH.number.multi-multiplication` | 640 | 0 | 118/232/290 | `a65a8613` |
-| divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `9d3b7f6f` |
-| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `660fb0ce` |
-| fmulw: A fraction times a whole number | `MATH.number.fraction-multiply` | 528 | 0 | 87/155/286 | `33924b9b` |
-| faddu: Adding fractions with different denominators | `MATH.number.fraction-add` | 870 | 0 | 107/225/538 | `809d46fd` |
-| pct: A percentage of an amount | `MATH.number.percentage` | 380 | 0 | 60/140/180 | `02b53481` |
-| mean4: The mean of four numbers | `MATH.statistics.averages-intro` | 126 | 0 | 18/36/72 | `52be6e2d` |
-| root: The square root of a perfect square | `MATH.number.square-roots` | 24 | 0 | 9/5/10 | `73d83356` |
-| vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `43a88732` |
-| lin: Solving ax + b = c | `MATH.algebra.linear-equations` | 1920 | 0 | 645/914/361 | `38e54ca1` |
-| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `135e8a74` |
-| factor: Factorising x² + px + q | `MATH.algebra.factorisation` | 288 | 0 | 72/72/144 | `6632fbec` |
-| apn: The nth term of an arithmetic progression | `MATH.algebra.arithmetic-sequences` | 2560 | 0 | 480/1280/800 | `d056ad2c` |
-| cdist: The distance between two points | `MATH.coordinate.distance` | 548 | 0 | 48/312/188 | `29891d5c` |
-| hcf: The highest common factor | `MATH.number.euclid-algorithm` | 1402 | 0 | 197/398/807 | `3e16c2da` |
-| det2: A 2 × 2 determinant | `MATH.algebra.determinants` | 2076 | 0 | 576/1500/0 | `2a7bed66` |
-| lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `6913571a` |
-| condp: A conditional probability from a table | `MATH.probability.conditional` | 625 | 0 | 250/375/0 | `eda1ebaa` |
+| mul: A multiplication fact | `MATH.number.multiplication-tables` | 121 | 0 | 16/48/57 | `3be0e6ee` |
+| rect: Area of a rectangle | `MATH.measurement.rectangle-area` | 121 | 0 | 46/45/30 | `491f99bc` |
+| eqfrac: A missing part of an equivalent fraction | `MATH.number.equivalent-fractions` | 405 | 0 | 90/135/180 | `7260c840` |
+| fadd: Adding or subtracting like fractions | `MATH.number.fraction-add-like` | 825 | 0 | 295/229/301 | `4666c963` |
+| cint: The definite integral of a constant | `MATH.calculus.definite-integrals` | 792 | 0 | 62/643/87 | `12064e16` |
+| quad: A quadratic equation with whole-number roots | `MATH.algebra.quadratics` | 127 | 0 | 20/20/87 | `1ed69e34` |
+| linev: A value on a straight line | `MATH.algebra.variables` | 1512 | 0 | 506/286/720 | `9cf7208c` |
+| meet: Where a line meets y = x², by trying whole numbers | `MATH.algebra.linear-equations` | 13 | 0 | 0/13/0 | `57803318` |
+| above: Which graph is higher at a point | `MATH.algebra.functions` | 215 | 0 | 215/0/0 | `693205a7` |
+| alp: The area between a parabola and a line | `MATH.calculus.area-integrals` | 17 | 0 | 0/0/17 | `6cd0f1f4` |
+| pow: A power of a whole number | `MATH.number.exponents` | 42 | 0 | 15/11/16 | `9ef3b50f` |
+| dist: Expanding a(x + b) | `MATH.algebra.identities-intro` | 132 | 0 | 57/45/30 | `24831898` |
+| expand: Expanding (x + a)(x + b) | `MATH.algebra.identities` | 144 | 0 | 36/36/72 | `b3fbb3a3` |
+| dpow: The derivative of k xⁿ at a point | `MATH.calculus.derivative-rules` | 138 | 0 | 36/56/46 | `6efa000d` |
+| pint: The definite integral of k xⁿ | `MATH.calculus.indefinite-integrals` | 360 | 0 | 48/192/120 | `552b485b` |
+| subst: An integral by substitution | `MATH.calculus.integration-methods` | 72 | 0 | 24/24/24 | `ff41c625` |
+| disc: How many real solutions a quadratic has | `MATH.algebra.quadratic-discriminant` | 960 | 0 | 240/720/0 | `024a748d` |
+| rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `d9863e32` |
+| mmul: Multiplying a two-digit number by a one-digit number | `MATH.number.multi-multiplication` | 640 | 0 | 118/232/290 | `614faf13` |
+| divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `3eca44a6` |
+| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `88e2905c` |
+| fmulw: A fraction times a whole number | `MATH.number.fraction-multiply` | 528 | 0 | 87/155/286 | `d1bc32fb` |
+| faddu: Adding fractions with different denominators | `MATH.number.fraction-add` | 870 | 0 | 107/225/538 | `40d2c521` |
+| pct: A percentage of an amount | `MATH.number.percentage` | 380 | 0 | 60/140/180 | `5f9ec2ff` |
+| mean4: The mean of four numbers | `MATH.statistics.averages-intro` | 126 | 0 | 18/36/72 | `77dfc843` |
+| root: The square root of a perfect square | `MATH.number.square-roots` | 24 | 0 | 9/5/10 | `452a8b26` |
+| vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `9ffc067e` |
+| lin: Solving ax + b = c | `MATH.algebra.linear-equations` | 1920 | 0 | 645/914/361 | `4bf4c8ea` |
+| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `e765795e` |
+| factor: Factorising x² + px + q | `MATH.algebra.factorisation` | 288 | 0 | 72/72/144 | `4d2b22ea` |
+| apn: The nth term of an arithmetic progression | `MATH.algebra.arithmetic-sequences` | 2560 | 0 | 480/1280/800 | `a8dad5c4` |
+| cdist: The distance between two points | `MATH.coordinate.distance` | 548 | 0 | 48/312/188 | `a08920e8` |
+| hcf: The highest common factor | `MATH.number.euclid-algorithm` | 1402 | 0 | 197/398/807 | `db3c75dc` |
+| det2: A 2 × 2 determinant | `MATH.algebra.determinants` | 2076 | 0 | 576/1500/0 | `e06062d9` |
+| lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `b78c12de` |
+| condp: A conditional probability from a table | `MATH.probability.conditional` | 625 | 0 | 250/375/0 | `ec04e80a` |
 
 ## Whole competency graph
 

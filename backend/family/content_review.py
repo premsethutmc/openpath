@@ -72,8 +72,10 @@ def replay(item, current_hash, decisions):
     return state, released_at
 
 
-def registry():
-    """The registry in the app's shape (review.ts Registry): one entry per current item, with its full history."""
+def registry(show_reviewers=True):
+    """The registry in the app's shape (review.ts Registry): one entry per current item, with its full history.
+    A module stays released only while every family it uses is released (a changed family suspends it). Reviewer
+    names are shown to reviewers only; anyone else sees the role."""
     by_item = {}
     for d in ContentDecision.objects.select_related(None).all():
         by_item.setdefault(d.item, []).append(d)
@@ -85,8 +87,14 @@ def registry():
             'item': item, 'kind': meta['kind'], 'competency': meta['competency'], **({'family': item[7:]} if meta['kind'] == 'family' else {}),
             'version': meta['version'], 'origin': meta['kind'] if meta['kind'] != 'module' else 'synthesised', 'author': meta['author'],
             'contentHash': meta['hash'], 'state': state, **({'releasedAt': released_at.isoformat().replace('+00:00', 'Z')} if released_at else {}),
-            'history': [{'state': STATE_AFTER[d.decision], 'by': d.reviewer_label, 'role': {'release_manager': 'release-manager'}.get(d.role, d.role), 'at': d.at.isoformat().replace('+00:00', 'Z'), 'contentHash': d.content_hash, 'note': d.note, 'current': d.content_hash == meta['hash']} for d in ds],
+            'history': [{'state': STATE_AFTER[d.decision], 'by': d.reviewer_label if show_reviewers else {'release_manager': 'a release manager'}.get(d.role, f'an {d.role}'), 'role': {'release_manager': 'release-manager'}.get(d.role, d.role), 'at': d.at.isoformat().replace('+00:00', 'Z'), 'contentHash': d.content_hash, 'note': d.note, 'current': d.content_hash == meta['hash']} for d in ds],
         })
+    fam_state = {e['family']: e['state'] for e in entries if e['kind'] == 'family'}
+    for e in entries:
+        meta = items()[e['item']]
+        if e['kind'] == 'module' and e['state'] == 'released' and any(fam_state.get(f) != 'released' for f in meta['families']):
+            e['state'], e['suspended'] = 'approved', 'A question family it uses is no longer released (it changed or was withdrawn): release it again after review.'
+            e.pop('releasedAt', None)
     return {'schema': 'content-review@2', 'note': 'The server registry (backend/family/content_review.py).', 'entries': entries}
 
 
@@ -98,7 +106,8 @@ class ContentReviewView(AccountBase):
     """GET: the registry (any signed-in account: learners' apps need to know what is released) and your roles."""
 
     def get(self, request):
-        return Response({'roles': roles_of(request.user), 'registry': registry()})
+        roles = roles_of(request.user)
+        return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles))})
 
 
 class ContentDecisionView(AccountBase):
@@ -128,6 +137,11 @@ class ContentDecisionView(AccountBase):
             state, _ = replay(item, meta['hash'], ds)
             if decision not in NEXT[state]:
                 return Response({'detail': f'The item is {state.replace("_", " ")}: it cannot be {STATE_AFTER[decision].replace("_", " ")} now.'}, status=status.HTTP_409_CONFLICT)
+            # four eyes: the person who releases is not the person who approved this version
+            if decision == 'release':
+                approver = next((x.reviewer_id for x in reversed(ds) if x.content_hash == h and x.decision == 'approve'), None)
+                if approver == request.user.id:
+                    return Response({'detail': 'You approved this version: another release manager must release it.'}, status=status.HTTP_409_CONFLICT)
             if decision == 'release' and meta['kind'] == 'module':
                 reg = {e['item']: e for e in registry()['entries']}
                 missing = [f for f in meta['families'] if reg.get(f'family:{f}', {}).get('state') != 'released']

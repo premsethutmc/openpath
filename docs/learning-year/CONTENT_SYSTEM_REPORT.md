@@ -31,7 +31,7 @@
 - the wording and teaching hints;
 - representative examples.
 
-**Version lock.** The fingerprint is a hash of the family's behaviour on every question in its pool. Any material change to the generator changes it, so the old approval no longer applies and the family must be approved again. This is tested by changing one family's wording.
+**Version lock.** The fingerprint is a hash of the family's behaviour on every question in its pool: wording, answer, options, every mistake explanation (its wording, the skill it points to, its prediction, its probe), the worked steps as written, the difficulty class, and how the answer checker treats the right answer and nearby wrong values. A change to any of these changes the fingerprint, so the old approval no longer applies and the family must be approved again. This is tested by changing one family's wording. A pure refactor that changes no behaviour keeps the fingerprint. The fingerprint is a 32-bit FNV hash: it detects change, but it is not tamper-proof. Content reaches the server only through reviewed pull requests.
 
 **Validation:**
 - Deterministic: every pool question is built, passes its independent check, rebuilds identically from its id, has a readable prompt and its own answer format, has explanations that predict only wrong answers, and has distinct options.
@@ -51,14 +51,14 @@ Status: implemented, tested.
 **library@2:**
 - Modules come from blueprints: teaching text a person wrote, plus a family.
 - Or from **template@1**: a family's teaching hints alone, giving worked steps, spot the mistake, and what the skill builds on.
-- Hand-written modules are given their family's pool.
+- Hand-written modules are given their family's pool where one exists. Four have none: fraction models, fraction comparison, factors and multiples, coordinates. Those four are partial.
 
 **19 new families**, chosen from the skills the sample curricula need: rectangle perimeter; two-digit × one-digit multiplication; remainders; exact division; fraction × whole number; unlike fractions; percentages; the mean; square roots; volume; linear equations; proportion; factorising; nth term of an arithmetic progression; distance between points; highest common factor; 2 × 2 determinants; limits; conditional probability.
 
 | Coverage figure | Count |
 |---|---|
 | Families | 36 |
-| Questions in released pools | 40 931 |
+| Problems in released pools | 20 643 (40 931 question ids, counting the multiple-choice form of each problem) |
 | Modules | 37 (10 hand-written, 7 from blueprints, 20 from templates) |
 
 **coverage@2 matrix:** complete and approved / complete, awaiting review / partial / unsupported question type / no content.
@@ -80,7 +80,11 @@ The interface is at `/review/` (`frontend/src/review/Main.tsx`). There a reviewe
 On the server (`backend/family/content_review.py`):
 - **Roles:** an educator approves, rejects or requests corrections; a release manager releases. Roles are granted only by `manage.py content_reviewer`.
 - **History:** decisions are append-only and record who decided, on which content hash, when, and with what note.
-- **Versions:** a decision on an old hash no longer applies, and a stale version cannot be decided (409).
+- **Versions:** a decision on an old hash no longer applies, and a stale version cannot be decided (409). Returning to an earlier version restores that version's decisions, because the content is the same.
+- **Four eyes:** whoever approved a version cannot also release it.
+- **Suspension:** a released module stops being released if a family it uses changes or is withdrawn.
+- **Privacy:** reviewer names are shown only to reviewers; anyone else sees the role.
+- **Append-only:** decisions cannot be saved over, updated or deleted, singly or in bulk.
 - **Shared registry:** the learner's app loads this registry, so only server-released content counts.
 
 Status: implemented, tested (Django), browser.
@@ -95,8 +99,11 @@ Status: implemented, tested (Django), browser.
 **Repeated exposure:** the other answer format of a problem already seen counts as help, not as fresh evidence (records.ts, the server's `independent_at`).
 
 **Stated limits:**
-- `root` and `pow` have pools too small for every phase, so their modules are partial.
-- `alp` is too small for a module at all. This is recorded in `library.v1.json` `notBuilt`.
+**The 8 partial competencies:**
+- `root` (square roots) has a pool too small in all four phases; `pow` (powers) is short only for diagnosis.
+- `alp` (area between curves) is too small for a module at all. This is recorded in `library.v1.json` `notBuilt`.
+- `above` is a family used only inside other problems.
+- Four hand-written modules have no family: fraction models, fraction comparison, factors and multiples, coordinates.
 
 Status: implemented, tested, browser.
 
@@ -115,9 +122,25 @@ Status: browser.
 ## 2. Tests (local; CI runs the same)
 
 - Frontend unit tests: **398/398**, including `content-system.test.ts`. Each family's specification passes; approval goes stale after a generator change; failing items are excluded; depth after two mistakes reaches verified; a repeat is help; limits are reported.
-- Django: **192/192**. The server's content hashes equal the app's for all 73 items. The workflow is tested: roles, notes, stale versions, a module released only after its families, append-only history. Every one of the 40 931 pool questions is known to the server in its answer format.
+- Django: **194/194**. The server's content hashes equal the app's for all 73 items. The workflow is tested: roles, notes, stale versions, a module released only after its families, append-only history. Every one of the 40 931 pool question ids is known to the server in its answer format.
 - Browser: **14/14 journeys** against Django `runserver`: the earlier 12, plus educator review and three released-content learners.
 - CI also checks that generated files are current: specifications, the question table, the library, parity and coverage.
+
+**Independent check:** a separate agent that had not written the code checked this report against it. It recomputed all 14 647 problems of the 19 new families in closed form and found 0 wrong, and confirmed the coverage figures and the exposure rules.
+
+What it found, and what was done:
+- **The fingerprint did not cover explanation wording, worked-step text or the validator.** It now does.
+- **Two `lim` explanations did not match their predictions.** Reworded.
+- **`divr` predicted impossible remainders.** Now limited to possible ones.
+- **Wording slips:** `fmulw` "3ths", the `cdist` "−6 − 3 gives 9" step, the template "For On the line…" sentence, hyphens for minus signs, `pct` worked through 1% (now 10% or 5%), `hcf` not stating its answer, and `ldiv` "0 ÷ 3". All fixed.
+- **Six validators repeated their solver's formula:** `pct`, `prop`, `mean4`, `faddu`, `cdist`, `lin`. They are now independent: counting, sharing, levelling, piece-counting, a search for the square root, and substitution.
+- **Server gaps:** four eyes, bulk append-only, suspension of a module when its family changes, and reviewer names visible to everyone. All four are fixed.
+- **The 40 931 figure was mislabelled.** It is now stated as question ids.
+
+Still noted, not changed:
+- 835 multiple-choice options are each predicted by more than one explanation.
+- 24 `hcf` items have no explanation.
+- The server's independence count matches on the question's competency, not on micro-skills. Here that makes the server the stricter of the two.
 
 ## 3. Findings and blockers
 

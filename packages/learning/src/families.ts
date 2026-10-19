@@ -759,7 +759,8 @@ const F: Def[] = [
       return [
         { id: "quotient-as-remainder", kind: "conceptual", competency: "MATH.number.division-remainders", says: "The number of groups was given; the remainder is what is left over after the groups.", predict: q },
         { id: "remainder-too-big", kind: "procedural", competency: "MATH.number.division-remainders", says: `One group too few was taken: a remainder is always less than ${d}.`, predict: n - (q - 1) * d },
-        factSlip(q, d, -1, n),
+        // a slip in the times-table fact q × d, which gives a remainder that is still possible (0 to d − 1)
+        ...(q <= 12 ? [{ ...factSlip(q, d, -1, n), predict: neighbours(q, d).map((v) => n - v).filter((r) => r >= 0 && r < d && r !== n - q * d) }].filter((b) => (b.predict as number[]).length > 0) : []),
       ];
     },
     variants: (p) => pairs(p, [[20, 60], [3, 9]], ([n, d]) => n % d !== 0).slice(0, 80),
@@ -781,6 +782,8 @@ const F: Def[] = [
     prompt: ([q, d]) => `${q * d} ÷ ${d} = ?`,
     solve: ([q, d]) => {
       const t = Math.floor(q / 10) * 10;
+      // a multiple of ten: the first chunk is the whole answer
+      if (q === t) return { steps: [mul(t, d, MT, "tens"), { id: "whole", op: "evaluate", competency: "MATH.number.long-division", inputs: [q * d, d], value: q }], answer: q };
       return { steps: [mul(t, d, MT, "tens"), { id: "rest", op: "subtract", competency: "MATH.number.long-division", inputs: [q * d, t * d], value: q * d - t * d }, { id: "ones", op: "divide", competency: MT, inputs: [q * d - t * d, d], value: q - t }, { id: "sum", op: "add", competency: "MATH.number.long-division", inputs: [t, q - t], value: q }], answer: q };
     },
     validate: ([q, d], v) => {
@@ -795,7 +798,7 @@ const F: Def[] = [
       { id: "one-group-off", kind: "recall", competency: MT, says: `A multiplication fact with ${d} slipped by one group.`, predict: [q + 1, q - 1] },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[12, 40], [2, 9]], () => true).slice(0, 80),
-    explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
+    explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "whole" ? `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([q, d]) => (d <= 5 && q < 30 ? 1 : q < 60 ? 2 : 3),
     teach: { idea: "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.", method: "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21." },
@@ -820,7 +823,7 @@ const F: Def[] = [
       { id: "add-whole", kind: "conceptual", competency: "MATH.number.fraction-multiply", says: `${k} was added to the top; multiplying means ${k} lots.`, predict: (a + k) / b },
     ],
     variants: (p) => pairs(p, [[1, 5], [2, 8], [2, 6]], ([a, b]) => a < b).slice(0, 80),
-    explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} pieces: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still ${s.inputs[0]}ths: the bottom stays ${s.inputs[0]}`),
+    explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
     domain: [[1, 11], [2, 12], [2, 9]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b, k]) => (k * a < b ? 1 : k * a <= 2 * b ? 2 : 3),
@@ -840,8 +843,15 @@ const F: Def[] = [
       const l = (b * d) / gcd(b, d);
       return { steps: [{ id: "common", op: "multiply", competency: "MATH.number.equivalent-fractions", inputs: [b, d], value: l }, { id: "rename", op: "multiply", competency: "MATH.number.equivalent-fractions", inputs: [a * (l / b), c * (l / d)], value: [a * (l / b), c * (l / d)] }, { id: "add", op: "add", competency: "MATH.number.fraction-add", inputs: [a * (l / b), c * (l / d), l], value: a / b + c / d }], answer: a / b + c / d };
     },
-    // cross-multiplication: a/b + c/d = (ad + cb)/(bd), compared by value
-    validate: ([a, b, c, d], v) => typeof v === "number" && near((a * d + c * b) / (b * d), v),
+    // counting pieces: find a piece size both denominators share by trying multiples, then count pieces
+    validate: ([a, b, c, d], v) => {
+      let D = b;
+      while (D % d !== 0) D += b;
+      let pieces = 0;
+      for (let i = 0; i < a; i++) pieces += D / b;
+      for (let i = 0; i < c; i++) pieces += D / d;
+      return typeof v === "number" && near(pieces / D, v);
+    },
     bugs: ([a, b, c, d]) => {
       const l = (b * d) / gcd(b, d);
       return [
@@ -867,16 +877,28 @@ const F: Def[] = [
     // [p, n]: p% of n, with a whole-number answer
     reject: ([p, n]) => (p < 5 || p > 95 || p % 5 !== 0 || n < 20 || n > 400 || n % 20 !== 0 || (p * n) % 100 !== 0 ? "Only multiples of 5% of multiples of 20 (up to 400) with a whole-number answer are supported." : null),
     prompt: ([p, n]) => `What is ${p}% of ${n}?`,
-    solve: ([p, n]) => ({ steps: [{ id: "one", op: "divide", competency: "MATH.number.percentage", inputs: [n, 100], value: n / 100 }, { id: "scale", op: "multiply", competency: "MATH.number.percentage", inputs: [p, n / 100], value: (p * n) / 100 }], answer: (p * n) / 100 }),
-    // count: p hundredths of n, adding n/100 p times as a fraction of n
-    validate: ([p, n], v) => typeof v === "number" && v * 100 === p * n,
+    solve: ([p, n]) => {
+      // through 10% (or 5%), which is a whole number here
+      const [part, per] = p % 10 === 0 ? [10, n / 10] : [5, n / 20];
+      return { steps: [{ id: "one", op: "divide", competency: "MATH.number.percentage", inputs: [n, part], value: per }, { id: "scale", op: "multiply", competency: "MATH.number.percentage", inputs: [p / part, per, p], value: (p * n) / 100 }], answer: (p * n) / 100 };
+    },
+    // counting: share n into 100 equal parts by repeated subtraction of whole hundredths… done on 100·n so it stays
+    // whole: p of the 100 parts of n is the number that, added up 100 times, gives p × n
+    validate: ([p, n], v) => {
+      if (typeof v !== "number") return false;
+      let total = 0;
+      for (let i = 0; i < 100; i++) total += v; // 100 lots of the answer
+      let target = 0;
+      for (let i = 0; i < p; i++) target += n; // p lots of the amount
+      return total === target;
+    },
     bugs: ([p, n]) => [
       { id: "no-hundred", kind: "conceptual", competency: "MATH.number.percentage", says: "Per cent means out of 100: the amount must be divided by 100 as well as multiplied.", predict: p * n },
       { id: "percent-as-divisor", kind: "conceptual", competency: "MATH.number.percentage", says: `It was divided by ${p}; ${p}% means ${p} out of every 100.`, predict: n % p === 0 ? n / p : null },
       { id: "subtracted", kind: "procedural", competency: "MATH.number.percentage", says: `${p}% of ${n} is a part of ${n}, not ${n} minus ${p}.`, predict: n - p > 0 ? n - p : null },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 19], [1, 20]], () => true).map(([a, b]) => [5 * a, 20 * b]).filter(([a, b]) => (a * b) % 100 === 0).slice(0, 80),
-    explain: (s) => (s.id === "one" ? `1% of ${s.inputs[0]} is ${s.inputs[0]} ÷ 100 = ${show(s.value)}` : `${s.inputs[0]}% is ${s.inputs[0]} × ${show(s.inputs[1] as number)} = ${show(s.value)}`),
+    explain: (s) => (s.id === "one" ? `${s.inputs[1]}% of ${s.inputs[0]} is ${s.inputs[0]} ÷ ${100 / (s.inputs[1] as number)} = ${show(s.value)}` : `${s.inputs[2]}% is ${s.inputs[0]} lots of that: ${s.inputs[0]} × ${show(s.inputs[1] as number)} = ${show(s.value)}`),
     domain: [[5, 95], [20, 400]],
     keep: ([p, n]) => p % 5 === 0 && n % 20 === 0,
     difficulty: ([p]) => ([10, 25, 50].includes(p) ? 1 : p % 10 === 0 ? 2 : 3),
@@ -896,8 +918,18 @@ const F: Def[] = [
       const s = v.reduce((a, b) => a + b, 0);
       return { steps: [{ id: "total", op: "add", competency: "MATH.number.addition", inputs: v, value: s }, { id: "share", op: "divide", competency: "MATH.statistics.averages-intro", inputs: [s, 4], value: s / 4 }], answer: s / 4 };
     },
-    // the mean is the value that levels the numbers out: the deviations from it sum to zero
-    validate: (v, m) => typeof m === "number" && v.reduce((s, x) => s + (x - m), 0) === 0,
+    // level the numbers out: move one unit at a time from the largest to the smallest until all are equal
+    validate: (v, m) => {
+      const xs = [...v];
+      for (let guard = 0; guard < 200; guard++) {
+        const hi = xs.indexOf(Math.max(...xs));
+        const lo = xs.indexOf(Math.min(...xs));
+        if (xs[hi] === xs[lo]) break;
+        xs[hi]--;
+        xs[lo]++;
+      }
+      return typeof m === "number" && xs.every((x) => x === m);
+    },
     bugs: (v) => {
       const s = v.reduce((a, b) => a + b, 0);
       const sorted = [...v].sort((a, b) => a - b);
@@ -977,11 +1009,8 @@ const F: Def[] = [
     reject: ([a, b, x]) => (a < 2 || a > 9 || b < 1 || b > 30 || x < 1 || x > 12 ? "Only ax + b = c with 2 ≤ a ≤ 9, 1 ≤ b ≤ 30 and a whole-number solution from 1 to 12 is supported." : null),
     prompt: ([a, b, x]) => `Solve ${a}x + ${b} = ${a * x + b}. What is x?`,
     solve: ([a, b, x]) => ({ steps: [{ id: "undo-add", op: "subtract", competency: "MATH.algebra.linear-equations", inputs: [a * x + b, b], value: a * x }, { id: "undo-multiply", op: "divide", competency: MT, inputs: [a * x, a], value: x }], answer: x }),
-    validate: ([a, b, x], v) => {
-      // trying x = 1, 2, … until the two sides balance
-      for (let t = 1; t <= 12; t++) if (a * t + b === a * x + b) return v === t;
-      return false;
-    },
+    // substitution: the answer makes the two sides of the equation equal (computed by repeated addition)
+    validate: ([a, b, x], v) => typeof v === "number" && Number.isInteger(v) && v >= 1 && v <= 100 && [...Array(v)].reduce((s) => s + a, 0) + b === a * x + b && v >= 1,
     bugs: ([a, b, x]) => {
       const c = a * x + b;
       return [
@@ -1009,8 +1038,14 @@ const F: Def[] = [
     reject: ([a, u, c]) => (a < 2 || a > 8 || u < 2 || u > 15 || c < 2 || c > 12 || c === a ? "Only a items for a·u, then c items (2 to 12, not a), is supported." : null),
     prompt: ([a, u, c]) => `${a} pencils cost ₹${a * u}. At the same price each, how much do ${c} pencils cost, in rupees?`,
     solve: ([a, u, c]) => ({ steps: [{ id: "unit", op: "divide", competency: "MATH.number.proportion", inputs: [a * u, a], value: u }, mul(u, c, MT, "scale")], answer: u * c }),
-    // proportion: the cost per pencil is the same both times (cross-multiplication)
-    validate: ([a, u, c], v) => typeof v === "number" && v * a === a * u * c,
+    // build the price up pencil by pencil: find the price of one by sharing the total out, then add it c times
+    validate: ([a, u, c], v) => {
+      let one = 0;
+      while (one * a < a * u) one++; // the price of one pencil, by trying
+      let total = 0;
+      for (let i = 0; i < c; i++) total += one;
+      return v === total;
+    },
     bugs: ([a, u, c]) => [
       { id: "additive", kind: "conceptual", competency: "MATH.number.proportion", says: `The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.`, predict: a * u + (c - a) > 0 ? a * u + (c - a) : null },
       { id: "no-unit", kind: "procedural", competency: "MATH.number.proportion", says: `The total for ${a} was multiplied by ${c}; first find the price of one pencil.`, predict: a * u * c },
@@ -1092,12 +1127,13 @@ const F: Def[] = [
       const [dx, dy] = [Math.abs(x2 - x1), Math.abs(y2 - y1)];
       return { steps: [{ id: "across", op: "subtract", competency: "MATH.number.integer-add", inputs: [x2, x1], value: dx }, { id: "up", op: "subtract", competency: "MATH.number.integer-add", inputs: [y2, y1], value: dy }, { id: "squares", op: "add", competency: EXP, inputs: [dx * dx, dy * dy], value: dx * dx + dy * dy }, { id: "root", op: "evaluate", competency: "MATH.number.square-roots", inputs: [dx * dx + dy * dy], value: Math.sqrt(dx * dx + dy * dy) }], answer: Math.sqrt(dx * dx + dy * dy) };
     },
-    // walk along the segment in small steps and add up the lengths
+    // a whole number k with k × k equal to across² + up², found by counting up (squares by repeated addition)
     validate: ([x1, y1, x2, y2], v) => {
-      const n = 1000;
-      let s = 0;
-      for (let i = 0; i < n; i++) s += Math.hypot((x2 - x1) / n, (y2 - y1) / n);
-      return typeof v === "number" && Math.abs(s - v) < 1e-6;
+      const sq = (n: number) => [...Array(Math.abs(n))].reduce((s) => s + Math.abs(n), 0);
+      const target = sq(x2 - x1) + sq(y2 - y1);
+      let k = 0;
+      while (sq(k) < target) k++;
+      return typeof v === "number" && sq(k) === target && v === k;
     },
     bugs: ([x1, y1, x2, y2]) => {
       const [dx, dy] = [Math.abs(x2 - x1), Math.abs(y2 - y1)];
@@ -1108,7 +1144,7 @@ const F: Def[] = [
       ].filter((b) => b.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[-3, 3], [-3, 3], [-3, 6], [-3, 6]], (q) => q[0] !== q[2] && q[1] !== q[3] && Number.isInteger(Math.hypot(q[2] - q[0], q[3] - q[1]))).slice(0, 80),
-    explain: (s) => (s.id === "across" ? `Across: ${neg(s.inputs[0])} − ${par(s.inputs[1])} gives ${show(s.value)}` : s.id === "up" ? `Up: ${neg(s.inputs[0])} − ${par(s.inputs[1])} gives ${show(s.value)}` : s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `√${s.inputs[0]} = ${show(s.value)}`),
+    explain: (s) => (s.id === "across" ? `Across: from ${neg(s.inputs[1])} to ${neg(s.inputs[0])} is ${show(s.value)}` : s.id === "up" ? `Up or down: from ${neg(s.inputs[1])} to ${neg(s.inputs[0])} is ${show(s.value)}` : s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `√${s.inputs[0]} = ${show(s.value)}`),
     domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6]],
     keep: ([x1, y1, x2, y2]) => x1 < x2 || (x1 === x2 && y1 < y2),
     difficulty: ([x1, y1, x2, y2]) => ([x1, y1, x2, y2].every((v) => v >= 0) ? 1 : Math.hypot(x2 - x1, y2 - y1) <= 5 ? 2 : 3),
@@ -1149,7 +1185,7 @@ const F: Def[] = [
       ].filter((x) => x.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[12, 40], [14, 60]], ([a, b]) => a < b && gcd(a, b) >= 2 && gcd(a, b) !== a).slice(0, 80),
-    explain: (s) => `${s.inputs[0]} = ${Math.floor((s.inputs[0] as number) / (s.inputs[1] as number))} × ${s.inputs[1]} + ${show(s.value)}`,
+    explain: (s) => `${s.inputs[0]} = ${Math.floor((s.inputs[0] as number) / (s.inputs[1] as number))} × ${s.inputs[1]} + ${show(s.value)}${s.value === 0 ? `: the remainder is 0, so the HCF is ${s.inputs[1]}` : ""}`,
     domain: [[12, 98], [13, 99]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b]) => (gcd(a, b) <= 5 && b < 50 ? 1 : b < 70 ? 2 : 3),
@@ -1205,8 +1241,8 @@ const F: Def[] = [
     },
     bugs: ([a, k]) => [
       { id: "zero-for-undefined", kind: "conceptual", competency: "MATH.calculus.limits", says: "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).", predict: 0 },
-      { id: "forgot-plus-a", kind: "procedural", competency: "MATH.algebra.identities", says: "x² − a² was factorised as (x − a) alone; it is (x − a)(x + a), which gives 2a at x = a.", predict: a * k },
-      { id: "squared", kind: "procedural", competency: "MATH.calculus.limits", says: "x² − a² was replaced by x²; after cancelling, (x + a) gives 2a.", predict: k * a * a },
+      { id: "half-factor", kind: "procedural", competency: "MATH.algebra.identities", says: "Only one a was kept after cancelling (as if x² − a² were (x − a) × x, then x = a); it is (x − a)(x + a), which gives a + a = 2a.", predict: a * k },
+      { id: "top-only", kind: "conceptual", competency: "MATH.calculus.limits", says: "Only the top was worked out at x = a, as k × a²; the bottom is 0 there, so simplify first: cancel (x − a).", predict: k * a * a },
     ],
     variants: (p) => pairs(p, [[1, 9], [1, 4]], () => true),
     explain: (s) => (s.id === "factor" ? `x² − ${(s.inputs[0] as number) ** 2} = (x − ${s.inputs[0]})(x + ${s.inputs[0]}); cancel (x − ${s.inputs[0]})` : `Then put x = ${s.inputs[0]}: ${s.inputs[1]} × (${s.inputs[0]} + ${s.inputs[0]}) = ${show(s.value)}`),
@@ -1223,7 +1259,7 @@ const F: Def[] = [
     mc: true,
     parse: () => null,
     // [p, q, r, s]: counts: chess club & girls p, chess & boys q, not chess & girls r, not chess & boys s. P(chess | girl)
-    reject: (v) => (v.some((x) => x < 1 || x > 15) ? "Only counts from 1 to 15 are supported." : null),
+    reject: (v) => (v.some((x) => x < 2 || x > 15) ? "Only counts from 2 to 15 are supported." : null),
     prompt: ([p, q, r, s]) => `In a class, ${p} girls and ${q} boys are in the chess club; ${r} girls and ${s} boys are not. A girl is chosen at random. What is the probability she is in the chess club? (A fraction is fine.)`,
     solve: ([p, , r]) => ({ steps: [{ id: "given", op: "add", competency: "MATH.number.addition", inputs: [p, r], value: p + r }, { id: "favourable", op: "divide", competency: "MATH.probability.conditional", inputs: [p, p + r], value: p / (p + r) }], answer: p / (p + r) }),
     // count girls one by one and the chess players among them
@@ -1239,8 +1275,8 @@ const F: Def[] = [
     ],
     variants: (p) => pairs(p, [[1, 6], [1, 4], [1, 6], [1, 4]], () => true).slice(0, 80),
     explain: (s) => (s.id === "given" ? `Girls: ${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `Chess girls out of all girls: ${s.inputs[0]} ⁄ ${s.inputs[1]} = ${show(s.value)}`),
-    domain: [[1, 15], [1, 15], [1, 15], [1, 15]],
-    keep: (v) => v.every((x) => x >= 2 && x <= 6),
+    domain: [[2, 15], [2, 15], [2, 15], [2, 15]],
+    keep: (v) => v.every((x) => x <= 6),
     difficulty: ([p, , r]) => (gcd(p, p + r) === 1 && p + r <= 10 ? 1 : p + r <= 14 ? 2 : 3),
     teach: { idea: "P(A given B) counts only the cases where B happened: B becomes the whole.", method: "Find the group you are told about (the girls), then the fraction of that group with the property (in the chess club)." },
   },

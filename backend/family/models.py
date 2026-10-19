@@ -155,6 +155,14 @@ class ContentReviewer(models.Model):
         return self.revoked_at is None
 
 
+class AppendOnlyQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("content review decisions are append-only")
+
+    def delete(self):
+        raise ValueError("content review decisions are append-only")
+
+
 class ContentDecision(models.Model):
     """One review decision on one version of one item (family:<id> or module:<competency>). Append-only: the history
     is the record of who decided what, on which content hash, when."""
@@ -170,6 +178,8 @@ class ContentDecision(models.Model):
     note = models.TextField(max_length=2000, blank=True)
     at = models.DateTimeField(auto_now_add=True)
 
+    objects = AppendOnlyQuerySet.as_manager()
+
     class Meta:
         ordering = ["at", "id"]
 
@@ -177,3 +187,6 @@ class ContentDecision(models.Model):
         if not self._state.adding:
             raise ValueError("content review decisions are append-only")
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("content review decisions are append-only")
