@@ -49,7 +49,7 @@ export interface Problem {
 /** A picture for a teaching screen (rendered by the app; ten frames, base-ten blocks, number lines, fraction strips,
  * arrays, a grid of squares, a right triangle, a balance). */
 export interface Visual {
-  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "pictograph" | "table" | "shape" | "angle" | "grid" | "triangle" | "plane" | "pie" | "balance" | "solid";
+  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "balance" | "solid";
   [k: string]: unknown;
 }
 export interface TeachAlternative {
@@ -96,6 +96,9 @@ export type Def = {
   figure?: (p: number[]) => Visual | null;
   /** The same problem in an everyday situation (the transfer form, "gen:<family>:<params>:w"). */
   word?: (p: number[]) => string;
+  /** For type "choice": the family's own options for these parameters (words or expressions: "North", "a square",
+   * "y = 2x + 1"); `solve` returns the index of the right one (0 = A), explanations predict indices. */
+  choices?: (p: number[]) => string[];
   /** Extra wrong options for the multiple-choice form when the explanations predict too few (answers@2 types). */
   distractors?: (p: number[]) => Value[];
   /** At most this many problems in the release pool (a fixed, hash-chosen subset of the candidates). */

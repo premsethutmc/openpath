@@ -71,6 +71,7 @@ const ANSWER_LABEL: Record<string, string> = {
   matrix: "Your answer, row by row, e.g. [[1, 2], [3, 4]]",
   interval: "Your answer, e.g. x > 3, or −1 < x ≤ 4, or (−∞, 2]",
   ratio: "Your answer, e.g. 3:4",
+  mixed: "Your answer as a mixed number, e.g. 3 2/5",
   expression: "Your answer (an expression: sin, cos, ln, e^x, ^ for powers)",
   antiderivative: "Your answer (+ C may be written or not)",
 };

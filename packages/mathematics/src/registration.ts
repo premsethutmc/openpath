@@ -8,11 +8,23 @@ import {
   activeGraphVersion,
   type GraphVersion,
 } from "./prerequisites";
-/** Reuse host policy verbatim; no math calibration/eligibility changes. All content remains provisional. */
+/** A capability beyond the frozen inventory (e.g. the curriculum expansion): no inference prerequisites. */
+export interface ExtraCapability {
+  id: string;
+  name: string;
+  strand: string;
+  description?: string;
+}
+/** Reuse host policy verbatim; no math calibration/eligibility changes. All content remains provisional. Extra
+ * capabilities (the learning layer's curriculum expansion) are added without prerequisites, so the inventory's
+ * estimates and everything already recorded are unchanged. */
 export function mathematicsContext(
   graphVersion: GraphVersion = activeGraphVersion,
+  extra: readonly ExtraCapability[] = [],
 ): Context {
-  const competencies = competencyGraph(graphVersion);
+  const inventory = competencyGraph(graphVersion);
+  const known = new Set(inventory.map((c) => c.id));
+  const competencies = [...inventory, ...extra.filter((c) => !known.has(c.id)).map((c) => ({ ...c, prerequisites: [] as string[] }))];
   const strands = [...new Set(competencies.map((c) => c.strand))].map(
     (strand) => ({
       id: `MATH.${strand}`,
@@ -70,6 +82,7 @@ export function mathematicsContext(
 export function mathematicsLedger(
   learnerId: string,
   graphVersion: GraphVersion = activeGraphVersion,
+  extra: readonly ExtraCapability[] = [],
 ) {
-  return new Ledger(mathematicsContext(graphVersion), learnerId);
+  return new Ledger(mathematicsContext(graphVersion, extra), learnerId);
 }

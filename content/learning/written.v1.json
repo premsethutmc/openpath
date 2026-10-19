@@ -1,5 +1,1720 @@
 {
-  "schema": "written-tasks@1",
-  "note": "Written tasks (proofs, constructions, explanations): never marked automatically. An educator marks each answer against the rubric (written@1). Original, written for OpenPath; CC0; provisional until educator-reviewed.",
-  "tasks": []
+ "schema": "written-tasks@1",
+ "note": "Written tasks (proofs, constructions, explanations): never marked automatically. An educator marks each answer against the rubric (written@1). Original, written for OpenPath; CC0; provisional until educator-reviewed.",
+ "tasks": [
+  {
+   "id": "wr:irr:sqrt2",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Prove that √2 is irrational. Write each step of your argument and say why it follows.",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "Assumes the opposite: √2 = a/b with a, b whole numbers with no common factor (b ≠ 0)",
+     "points": 1
+    },
+    {
+     "id": "square",
+     "criterion": "Squares to get a² = 2b² and concludes a² is even, so a is even",
+     "points": 1
+    },
+    {
+     "id": "substitute",
+     "criterion": "Writes a = 2c, gets b² = 2c², so b is even",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "States the contradiction (a and b share the factor 2) and concludes √2 is irrational",
+     "points": 1
+    }
+   ],
+   "guidance": "A complete proof by contradiction has all four steps. Accept any correct equivalent argument (e.g. via prime factorisation and the parity of exponents). Award a step only if its reason is given, not just the equation.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:irr:sqrt3",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Prove that √3 is irrational. Give the reason for each step.",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "Assumes √3 = a/b in lowest terms",
+     "points": 1
+    },
+    {
+     "id": "divides",
+     "criterion": "Shows 3 divides a² and so 3 divides a (because 3 is prime)",
+     "points": 1
+    },
+    {
+     "id": "substitute",
+     "criterion": "Writes a = 3c and shows 3 divides b",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "Concludes from the contradiction",
+     "points": 1
+    }
+   ],
+   "guidance": "The key reason is that if a prime p divides a², then p divides a. Accept equivalent arguments.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:irr:sum",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Given that √5 is irrational, prove that 3 + 2√5 is irrational. Give the reason for each step.",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "Assumes 3 + 2√5 = r is rational",
+     "points": 1
+    },
+    {
+     "id": "rearrange",
+     "criterion": "Rearranges to √5 = (r − 3)/2",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "Explains that (r − 3)/2 is rational, contradicting that √5 is irrational",
+     "points": 1
+    }
+   ],
+   "guidance": "The rearranged expression must be argued rational (rationals are closed under subtraction and division by a non-zero rational).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:con:perpbis",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Using only a ruler and compasses, construct the perpendicular bisector of a line segment AB that is 7 cm long. Say why the line you draw is perpendicular to AB and passes through its midpoint. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "arcs",
+     "criterion": "Draws arcs from A and from B with the same radius, more than half of AB",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins the two points where the arcs meet",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains why: each intersection point is the same distance from A and B (equal radii), and the set of such points is the perpendicular bisector",
+     "points": 2
+    }
+   ],
+   "guidance": "If the learner uploads or describes a drawing, check that the radius is more than half of AB. A full reason refers to equal distances (or to congruent triangles).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:con:angbis",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Using only a ruler and compasses, bisect an angle of 70°. Explain why the two angles you make are equal. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "arc",
+     "criterion": "Draws an arc from the vertex cutting both arms",
+     "points": 1
+    },
+    {
+     "id": "arcs2",
+     "criterion": "From the two cut points draws equal arcs that meet inside the angle",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins the vertex to the meeting point",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains the equal angles by congruent triangles (SSS)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept any correct ruler-and-compass method. The reason must name congruent triangles or equal distances.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:con:basic60",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "With a ruler and compasses only (no protractor), construct an angle of 60°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "ray",
+     "criterion": "Draws a ray and an arc from its starting point",
+     "points": 1
+    },
+    {
+     "id": "equal",
+     "criterion": "Uses the same radius from where the arc cuts the ray, to cut the first arc",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins the start to the new point to make the 60° angle",
+     "points": 1
+    }
+   ],
+   "guidance": "The construction makes an equilateral triangle; an explanation is not required at Grade 6 but may be credited in feedback.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:con:scaled",
+   "competency": "MATH.geometry.scaled-construction",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Divide a line segment AB of length 8 cm in the ratio 3 : 2 using a ruler and compasses, and explain why the point you find divides AB in that ratio. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "ray",
+     "criterion": "Draws a ray at an acute angle from one end and marks 5 equal steps",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins the 5th mark to the other end of the segment",
+     "points": 1
+    },
+    {
+     "id": "parallel",
+     "criterion": "Draws a parallel through the 3rd mark to meet the segment",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains by the Basic Proportionality Theorem (or similar triangles)",
+     "points": 1
+    }
+   ],
+   "guidance": "Equal steps must be marked with the compasses at a fixed radius.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:con:quad",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "Construct a quadrilateral PQRS with PQ = 5 cm, QR = 4 cm, RS = 6 cm, PS = 5.5 cm and diagonal PR = 7 cm. Say why these five measurements are enough. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "tri1",
+     "criterion": "Constructs triangle PQR from PQ, QR and PR",
+     "points": 1
+    },
+    {
+     "id": "tri2",
+     "criterion": "Constructs triangle PRS on the other side of PR from RS and PS",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that the diagonal splits the quadrilateral into two triangles, each fixed by three sides",
+     "points": 1
+    }
+   ],
+   "guidance": "Two triangles sharing the diagonal; check the second triangle is on the opposite side of PR.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:root:sqrt5",
+   "competency": "MATH.number.root-length-construction",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Locate √5 on the number line using a ruler and compasses, and explain why the point you mark is √5 units from 0. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "triangle",
+     "criterion": "Builds a right triangle with legs 2 and 1 at the origin (or equivalent)",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "Uses Pythagoras: the hypotenuse is √(2² + 1²) = √5",
+     "points": 1
+    },
+    {
+     "id": "arc",
+     "criterion": "Draws an arc centred at 0 with the hypotenuse as radius to meet the number line",
+     "points": 1
+    }
+   ],
+   "guidance": "Any right triangle with legs whose squares sum to 5 is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:ind:sum",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "Prove by mathematical induction that 1 + 2 + 3 + … + n = n(n + 1)/2 for every positive whole number n.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Checks the base case n = 1",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "States the induction hypothesis for n = k",
+     "points": 1
+    },
+    {
+     "id": "step",
+     "criterion": "Shows the statement for n = k + 1 using the hypothesis, with correct algebra",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes by the principle of induction",
+     "points": 1
+    }
+   ],
+   "guidance": "The step must use the hypothesis explicitly: add (k + 1) to k(k + 1)/2 and simplify to (k + 1)(k + 2)/2.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:ind:div",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "Prove by mathematical induction that 3ⁿ − 1 is divisible by 2 for every positive whole number n.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Base case: 3 − 1 = 2",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "Assumes 3ᵏ − 1 = 2m",
+     "points": 1
+    },
+    {
+     "id": "step",
+     "criterion": "Writes 3ᵏ⁺¹ − 1 = 3(3ᵏ − 1) + 2 = 2(3m + 1)",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes by induction",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept any correct rearrangement in the step.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:game:21",
+   "competency": "MATH.reasoning.winning-strategies",
+   "kind": "explanation",
+   "grade": 6,
+   "prompt": "Two players take turns to say 1, 2 or 3 numbers counting up from 1 (the first player may say \"1\", or \"1, 2\", or \"1, 2, 3\"). Whoever says 21 wins. Would you rather go first or second? Explain a strategy that always wins.",
+   "rubric": [
+    {
+     "id": "target",
+     "criterion": "Finds the safe numbers 1, 5, 9, 13, 17, 21 (one more than multiples of 4)",
+     "points": 1
+    },
+    {
+     "id": "strategy",
+     "criterion": "Explains always making the total said in a round 4 (answer the opponent’s 1, 2 or 3 with 3, 2 or 1)",
+     "points": 1
+    },
+    {
+     "id": "choice",
+     "criterion": "Chooses to go first (say \"1\") and explains why",
+     "points": 1
+    }
+   ],
+   "guidance": "The winning positions are 1 more than multiples of 4; the first player says 1 and then keeps each round to 4 numbers.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:bas:parallel",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "Draw a line l and mark a point P that is 4 cm away from it. Using a ruler and compasses, construct the line through P that is parallel to l, and say how you know the two lines are parallel. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "perp",
+     "criterion": "Constructs a perpendicular from P to l (arc from P cutting l twice, then equal arcs from those two points), meeting l at M",
+     "points": 1
+    },
+    {
+     "id": "perp2",
+     "criterion": "Constructs a second perpendicular, to PM at the point P",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that both lines are perpendicular to PM, so they never meet: they are parallel",
+     "points": 1
+    }
+   ],
+   "guidance": "Any correct ruler-and-compass method is fine (e.g. copying an angle to make equal corresponding angles). The reason must connect the steps to parallel lines (two lines perpendicular to the same line, or equal corresponding/alternate angles).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:bas:altitude",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Draw a triangle ABC in which the angle at B is acute and BC is the longest side. Construct the altitude from A to BC (the line from A that meets BC at a right angle). Say why your line meets BC at a right angle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "arc",
+     "criterion": "Draws an arc centred at A that cuts BC (extended if needed) at two points X and Y",
+     "points": 1
+    },
+    {
+     "id": "arcs",
+     "criterion": "From X and Y, with the same radius, draws arcs that cross on the side of BC away from A",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins A to the crossing point; the altitude is the part from A to BC",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that A and the crossing point are each the same distance from X and Y, so the line is perpendicular to XY (that is, to BC)",
+     "points": 1
+    }
+   ],
+   "guidance": "This is the perpendicular from a point to a line, used in a triangle. Credit 'extend BC if needed'. The reason may be given as equal distances from X and Y.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:bas:rectangle",
+   "competency": "MATH.geometry.basic-constructions",
+   "kind": "construction",
+   "grade": 6,
+   "prompt": "Construct a rectangle ABCD with AB = 7 cm and BC = 3.5 cm, using a ruler and compasses (no protractor or set square). Say how you know each corner is a right angle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws AB = 7 cm, measuring it with the compasses from the ruler",
+     "points": 1
+    },
+    {
+     "id": "perp",
+     "criterion": "Constructs a perpendicular to AB at B (and/or at A) with ruler and compasses",
+     "points": 1
+    },
+    {
+     "id": "mark",
+     "criterion": "Marks BC = 3.5 cm on the perpendicular and finds D (arcs of 3.5 cm from A and 7 cm from C, or a second perpendicular at A)",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains the right angles: constructed at B (and A), and opposite sides are equal, so the shape is a rectangle",
+     "points": 1
+    }
+   ],
+   "guidance": "At Grade 6, 'I constructed the right angles at A and B and made AD = BC = 3.5 cm' is a full reason. A shape with the right side lengths but no constructed right angle is not yet a rectangle.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tri:sss",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Construct triangle LMN with LM = 7 cm, MN = 6 cm and LN = 5 cm. First check that a triangle with these sides exists, then construct it, and explain why the point N you find is the right one. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "ineq",
+     "criterion": "Checks the triangle inequality (for example 5 + 6 > 7)",
+     "points": 1
+    },
+    {
+     "id": "base",
+     "criterion": "Draws one side, e.g. LM = 7 cm",
+     "points": 1
+    },
+    {
+     "id": "arcs",
+     "criterion": "Draws an arc of radius 5 cm centred at L and an arc of radius 6 cm centred at M, meeting at N",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that N is on both arcs, so LN = 5 cm and MN = 6 cm",
+     "points": 1
+    }
+   ],
+   "guidance": "Any side may be the base, as long as the arcs use the matching radii from the matching ends. The check may be written as 'the two shorter sides add to more than the longest'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tri:sas",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Construct triangle ABC with AB = 6 cm, angle A = 60° and AC = 4.5 cm. (You may make the 60° angle with compasses, or with a protractor if you have one.) Say why these three measurements fix exactly one triangle. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws AB = 6 cm",
+     "points": 1
+    },
+    {
+     "id": "angle",
+     "criterion": "Makes the 60° angle at A (compass method or protractor)",
+     "points": 1
+    },
+    {
+     "id": "mark",
+     "criterion": "Marks AC = 4.5 cm along the arm of the angle and joins C to B",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that the angle is between the two given sides (SAS), so C has only one possible place",
+     "points": 1
+    }
+   ],
+   "guidance": "The angle must be at A, between AB and AC. Credit either way of making 60°. 'Only one place for C' or 'SAS fixes the triangle' are both full reasons.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tri:asa",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Construct triangle PQR with PQ = 6.5 cm, angle P = 40° and angle Q = 110° (a protractor may be used for the angles). Then explain why there is NO triangle with PQ = 6.5 cm, angle P = 80° and angle Q = 110°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws PQ = 6.5 cm",
+     "points": 1
+    },
+    {
+     "id": "angles",
+     "criterion": "Makes 40° at P and 110° at Q on the same side of PQ",
+     "points": 1
+    },
+    {
+     "id": "meet",
+     "criterion": "Takes R where the two arms meet",
+     "points": 1
+    },
+    {
+     "id": "none",
+     "criterion": "Explains that 80° + 110° = 190° is more than 180°, so the arms do not meet on that side (the angles of a triangle add to 180°)",
+     "points": 1
+    }
+   ],
+   "guidance": "The two angles must be drawn on the same side of PQ. For the second part, 'the arms would only meet if the two angles added to less than 180°' is a full reason.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tri:rhs",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 7,
+   "prompt": "Construct a right-angled triangle XYZ with the right angle at Y, XY = 6 cm and hypotenuse XZ = 10 cm, using a ruler and compasses. Explain each step. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws XY = 6 cm",
+     "points": 1
+    },
+    {
+     "id": "perp",
+     "criterion": "Constructs the perpendicular to XY at Y",
+     "points": 1
+    },
+    {
+     "id": "arc",
+     "criterion": "Draws an arc of radius 10 cm centred at X to cut the perpendicular at Z",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains why: the right angle is at Y and Z is 10 cm from X, so XZ is the hypotenuse (RHS)",
+     "points": 1
+    }
+   ],
+   "guidance": "The arc must be centred at X (the other end of the hypotenuse), not at Y. The learner may note YZ = 8 cm by Pythagoras; credit it in feedback.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:prf:odd-product",
+   "competency": "MATH.reasoning.proof-intro",
+   "kind": "proof",
+   "grade": 8,
+   "prompt": "Prove that when you multiply any two odd numbers, the answer is odd. Checking examples is not enough: your argument must work for every pair of odd numbers.",
+   "rubric": [
+    {
+     "id": "letters",
+     "criterion": "Writes the two odd numbers as 2m + 1 and 2n + 1 with different letters for whole numbers m and n",
+     "points": 1
+    },
+    {
+     "id": "expand",
+     "criterion": "Multiplies correctly: (2m + 1)(2n + 1) = 4mn + 2m + 2n + 1",
+     "points": 1
+    },
+    {
+     "id": "form",
+     "criterion": "Rewrites it as 2(2mn + m + n) + 1",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes that this is one more than a multiple of 2, so it is odd, for every m and n",
+     "points": 1
+    }
+   ],
+   "guidance": "Using the same letter for both numbers (2n + 1 squared) proves only that the square of an odd number is odd: award at most the last two criteria. Examples alone earn nothing, but may be praised in feedback as a good first check.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:prf:trick",
+   "competency": "MATH.reasoning.proof-intro",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "A number trick: think of a number, add 3, multiply by 4, subtract 8, divide by 4, then subtract the number you first thought of. Everyone ends with 1. Use algebra to explain why this always happens.",
+   "rubric": [
+    {
+     "id": "letter",
+     "criterion": "Lets the starting number be a letter, e.g. n",
+     "points": 1
+    },
+    {
+     "id": "steps",
+     "criterion": "Writes each step correctly: n + 3, 4n + 12, 4n + 4, n + 1",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Shows that subtracting n leaves 1 whatever n is, and says that this is why it always works",
+     "points": 1
+    }
+   ],
+   "guidance": "Brackets may be expanded at any stage, e.g. 4(n + 3) − 8 = 4n + 4. An explanation using a 'bag of counters' picture is fine if it matches the algebra.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:prf:reverse",
+   "competency": "MATH.reasoning.proof-intro",
+   "kind": "proof",
+   "grade": 8,
+   "prompt": "Take any two-digit number, reverse its digits, and add the two numbers (for example 47 + 74 = 121). Prove that the answer is always a multiple of 11.",
+   "rubric": [
+    {
+     "id": "place",
+     "criterion": "Writes the number as 10a + b, with digits a and b, and its reversal as 10b + a",
+     "points": 1
+    },
+    {
+     "id": "add",
+     "criterion": "Adds to get 11a + 11b",
+     "points": 1
+    },
+    {
+     "id": "factor",
+     "criterion": "Writes 11a + 11b = 11(a + b)",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes it is a multiple of 11 for every choice of digits",
+     "points": 1
+    }
+   ],
+   "guidance": "Writing 'ab' for the number is a common slip (it means a × b); credit only if the learner makes clear it means 10a + b.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:prf:parallelogram",
+   "competency": "MATH.reasoning.proof-intro",
+   "kind": "proof",
+   "grade": 8,
+   "prompt": "ABCD is a parallelogram (AB ∥ DC and AD ∥ BC). The diagonal AC is drawn. Prove that triangles ABC and CDA are congruent, and so AB = CD. Give a reason for every statement.",
+   "rubric": [
+    {
+     "id": "alt1",
+     "criterion": "∠BAC = ∠DCA, because they are alternate angles (AB ∥ DC)",
+     "points": 1
+    },
+    {
+     "id": "alt2",
+     "criterion": "∠BCA = ∠DAC, because they are alternate angles (AD ∥ BC)",
+     "points": 1
+    },
+    {
+     "id": "common",
+     "criterion": "AC = CA (common side)",
+     "points": 1
+    },
+    {
+     "id": "cong",
+     "criterion": "Concludes △ABC ≅ △CDA by ASA, and AB = CD as corresponding parts",
+     "points": 1
+    }
+   ],
+   "guidance": "Check that the angles are paired with the correct parallel lines and that the vertices of the triangles are matched in order (A↔C, B↔D, C↔A).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tpf:isosceles-converse",
+   "competency": "MATH.geometry.triangle-proof",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "In △ABC, ∠B = ∠C. Prove that AB = AC. Write the proof with a reason for every statement (you may draw the bisector of ∠A).",
+   "rubric": [
+    {
+     "id": "construct",
+     "criterion": "Draws AD bisecting ∠A, meeting BC at D",
+     "points": 1
+    },
+    {
+     "id": "parts",
+     "criterion": "In △ABD and △ACD: ∠B = ∠C (given), ∠BAD = ∠CAD (construction), AD = AD (common)",
+     "points": 1
+    },
+    {
+     "id": "criterion",
+     "criterion": "Concludes △ABD ≅ △ACD by AAS",
+     "points": 1
+    },
+    {
+     "id": "cpct",
+     "criterion": "Concludes AB = AC by CPCT",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept other correct constructions, e.g. the perpendicular from A to BC (then AAS again). A proof that uses 'sides opposite equal angles are equal' is circular: it assumes the result.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tpf:perp-mid",
+   "competency": "MATH.geometry.triangle-proof",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "In △PQR, S is the midpoint of QR and PS ⊥ QR. Prove that PQ = PR.",
+   "rubric": [
+    {
+     "id": "pair",
+     "criterion": "Chooses △PSQ and △PSR",
+     "points": 1
+    },
+    {
+     "id": "parts",
+     "criterion": "QS = RS (S is the midpoint), ∠PSQ = ∠PSR = 90° (PS ⊥ QR), PS = PS (common)",
+     "points": 1
+    },
+    {
+     "id": "criterion",
+     "criterion": "Concludes △PSQ ≅ △PSR by SAS (the right angle is between the two sides)",
+     "points": 1
+    },
+    {
+     "id": "cpct",
+     "criterion": "Concludes PQ = PR by CPCT",
+     "points": 1
+    }
+   ],
+   "guidance": "Some learners will cite RHS; that needs the hypotenuses equal, which is what is being proved. SAS is the correct criterion here.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tpf:diagonals",
+   "competency": "MATH.geometry.triangle-proof",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "ABCD is a parallelogram whose diagonals AC and BD meet at O. Prove that O is the midpoint of both diagonals. You may use the fact that opposite sides of a parallelogram are equal.",
+   "rubric": [
+    {
+     "id": "angles",
+     "criterion": "∠OAB = ∠OCD and ∠OBA = ∠ODC, because they are alternate angles (AB ∥ DC)",
+     "points": 1
+    },
+    {
+     "id": "side",
+     "criterion": "AB = CD (opposite sides of a parallelogram)",
+     "points": 1
+    },
+    {
+     "id": "criterion",
+     "criterion": "Concludes △OAB ≅ △OCD by ASA (or AAS, using vertically opposite angles)",
+     "points": 1
+    },
+    {
+     "id": "cpct",
+     "criterion": "Concludes OA = OC and OB = OD by CPCT, so O bisects both diagonals",
+     "points": 1
+    }
+   ],
+   "guidance": "Check the vertex correspondence (A↔C, B↔D, O↔O). Vertically opposite angles at O may replace one pair of alternate angles.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:tpf:pythag-converse",
+   "competency": "MATH.geometry.triangle-proof",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "In △ABC, AC² = AB² + BC². Prove that ∠B = 90°. (Hint: construct a right-angled triangle PQR with ∠Q = 90°, PQ = AB and QR = BC.)",
+   "rubric": [
+    {
+     "id": "construct",
+     "criterion": "Constructs △PQR with ∠Q = 90°, PQ = AB, QR = BC",
+     "points": 1
+    },
+    {
+     "id": "pythag",
+     "criterion": "Uses Pythagoras in △PQR: PR² = PQ² + QR² = AB² + BC² = AC², so PR = AC",
+     "points": 2
+    },
+    {
+     "id": "sss",
+     "criterion": "Concludes △ABC ≅ △PQR by SSS",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes ∠B = ∠Q = 90° by CPCT",
+     "points": 1
+    }
+   ],
+   "guidance": "The key step is PR = AC (positive square roots of equal squares). Using the converse itself as a reason is circular.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:bis:135",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Using only a ruler and compasses, construct an angle of 135° at a point O on a line. Explain why your angle is 135°. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "perp",
+     "criterion": "Constructs the perpendicular to the line at O, making two right angles",
+     "points": 1
+    },
+    {
+     "id": "bisect",
+     "criterion": "Bisects one of the right angles (arc from O, equal arcs from the two cut points, join)",
+     "points": 1
+    },
+    {
+     "id": "identify",
+     "criterion": "Identifies the 135° angle: between the bisector and the ray on the other side (90° + 45°, or 180° − 45°)",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains why the bisector makes 45° (it halves 90°, by congruent triangles or equal distances)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept other correct routes, e.g. 120° + half of the 30° between 120° and 150°, if correctly justified. Check the learner names which angle is 135°.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:bis:circumcircle",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Draw any triangle ABC whose angles are all less than 90°. Using a ruler and compasses, construct the circle that passes through A, B and C. Explain why it passes through all three corners. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "bis1",
+     "criterion": "Constructs the perpendicular bisector of one side, e.g. AB",
+     "points": 1
+    },
+    {
+     "id": "bis2",
+     "criterion": "Constructs the perpendicular bisector of a second side, e.g. BC, and marks the meeting point O",
+     "points": 1
+    },
+    {
+     "id": "circle",
+     "criterion": "Draws the circle with centre O and radius OA",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: O is on the bisector of AB so OA = OB, and on the bisector of BC so OB = OC; so OA = OB = OC and the circle through A also passes through B and C",
+     "points": 2
+    }
+   ],
+   "guidance": "Two perpendicular bisectors are enough; the third may be drawn as a check. Credit 'equidistant from the endpoints' as the reason for each bisector.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:scl:smaller",
+   "competency": "MATH.geometry.scaled-construction",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Construct a triangle ABC with BC = 6 cm, CA = 5 cm and AB = 4 cm. Then construct a triangle similar to it whose sides are 2/3 of the corresponding sides of ABC, and explain why the new triangle is similar with scale factor 2/3. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "tri",
+     "criterion": "Constructs △ABC by SSS",
+     "points": 1
+    },
+    {
+     "id": "ray",
+     "criterion": "Draws a ray BX at an acute angle to BC (on the side away from A) and marks 3 equal steps B₁, B₂, B₃ with fixed compass opening",
+     "points": 1
+    },
+    {
+     "id": "parallel1",
+     "criterion": "Joins B₃C and draws through B₂ a line parallel to B₃C, meeting BC at C′",
+     "points": 1
+    },
+    {
+     "id": "parallel2",
+     "criterion": "Draws through C′ a line parallel to CA, meeting BA at A′",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: BC′/BC = BB₂/BB₃ = 2/3 (Basic Proportionality Theorem), and △A′BC′ ~ △ABC (AA, corresponding angles), so every side is 2/3",
+     "points": 1
+    }
+   ],
+   "guidance": "The parallels may be drawn by copying an angle with the compasses. The number of steps must be 3 (the larger of 2 and 3) and the join must be from B₃.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:scl:larger",
+   "competency": "MATH.geometry.scaled-construction",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Construct any triangle PQR with QR = 5 cm. Then construct a triangle similar to PQR with scale factor 4/3 (each side 4/3 of the corresponding side of PQR). Explain why it has that scale factor. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "ray",
+     "criterion": "Draws a ray QX at an acute angle to QR and marks 4 equal steps Q₁ … Q₄",
+     "points": 1
+    },
+    {
+     "id": "join",
+     "criterion": "Joins Q₃R (the 3rd mark, the denominator)",
+     "points": 1
+    },
+    {
+     "id": "parallel1",
+     "criterion": "Through Q₄ draws a line parallel to Q₃R, meeting QR extended at R′",
+     "points": 1
+    },
+    {
+     "id": "parallel2",
+     "criterion": "Through R′ draws a line parallel to RP, meeting QP extended at P′",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: QR′/QR = QQ₄/QQ₃ = 4/3, and △P′QR′ ~ △PQR (AA), so the scale factor is 4/3",
+     "points": 1
+    }
+   ],
+   "guidance": "The most common error is joining Q₄R and drawing the parallel through Q₃, which gives 3/4. QR and QP must be extended beyond R and P.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:scl:why-bpt",
+   "competency": "MATH.geometry.scaled-construction",
+   "kind": "explanation",
+   "grade": 10,
+   "prompt": "To divide a segment AB in the ratio 2 : 3, Ravi draws a ray AX, marks 5 equal steps A₁ … A₅ on it, joins A₅B, and draws through A₂ a line parallel to A₅B, meeting AB at C. Explain why AC : CB = 2 : 3, and why the steps on AX must be equal.",
+   "rubric": [
+    {
+     "id": "bpt",
+     "criterion": "States that A₂C ∥ A₅B in △AA₅B",
+     "points": 1
+    },
+    {
+     "id": "ratio",
+     "criterion": "Applies the Basic Proportionality Theorem: AC/CB = AA₂/A₂A₅",
+     "points": 1
+    },
+    {
+     "id": "count",
+     "criterion": "Uses equal steps: AA₂ = 2 steps and A₂A₅ = 3 steps, so AC : CB = 2 : 3",
+     "points": 1
+    },
+    {
+     "id": "equal",
+     "criterion": "Explains that unequal steps would change the ratio AA₂ : A₂A₅, so the construction would fail",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a similar-triangles argument (△AA₂C ~ △AA₅B) in place of BPT.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:quad:trapezium",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "Construct a trapezium ABCD with AB ∥ DC, AB = 7 cm, BC = 5 cm, ∠B = 60° and DC = 4 cm. Explain how you make DC parallel to AB. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws AB = 7 cm and makes ∠ABC = 60° with BC = 5 cm",
+     "points": 1
+    },
+    {
+     "id": "parallel",
+     "criterion": "Through C makes the line parallel to AB, e.g. by constructing ∠BCY = 120° on the same side as A",
+     "points": 1
+    },
+    {
+     "id": "mark",
+     "criterion": "Marks CD = 4 cm along that line towards the side of A, and joins AD",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains the parallel: the co-interior angles ∠B and ∠C add to 180° (or the corresponding/alternate angles are equal)",
+     "points": 1
+    }
+   ],
+   "guidance": "The point D must be marked in the direction of A. Any correct way of drawing the parallel through C is acceptable if it is explained.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:quad:angles",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "Construct a quadrilateral ABCD with AB = 5.5 cm, BC = 4 cm, ∠A = 75°, ∠B = 100° and ∠C = 120° (a protractor may be used for the angles). Describe your steps, and say what ∠D will measure and why. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Draws AB = 5.5 cm and makes ∠A = 75° and ∠B = 100° on the same side",
+     "points": 1
+    },
+    {
+     "id": "mark",
+     "criterion": "Marks BC = 4 cm on the arm from B",
+     "points": 1
+    },
+    {
+     "id": "angle",
+     "criterion": "Makes ∠BCD = 120° at C; D is where this arm meets the arm from A",
+     "points": 1
+    },
+    {
+     "id": "d",
+     "criterion": "States ∠D = 360° − 75° − 100° − 120° = 65°, because the angles of a quadrilateral add to 360°",
+     "points": 1
+    }
+   ],
+   "guidance": "Check that the angle at C is measured inside the quadrilateral (from CB). The value of ∠D can be checked by measurement but must be justified by the angle sum.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:quad:rhombus",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "Construct a rhombus whose diagonals are 8 cm and 6 cm. Explain why your construction gives a rhombus, and find the length of its side. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "diag",
+     "criterion": "Draws one diagonal AC = 8 cm",
+     "points": 1
+    },
+    {
+     "id": "bisect",
+     "criterion": "Constructs the perpendicular bisector of AC and marks B and D on it, 3 cm on each side of the midpoint O",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: the diagonals bisect each other at right angles, so all four sides are equal (each point on the perpendicular bisector is equally far from A and C)",
+     "points": 1
+    },
+    {
+     "id": "side",
+     "criterion": "Finds the side by Pythagoras: √(4² + 3²) = 5 cm",
+     "points": 1
+    }
+   ],
+   "guidance": "Learners may use the property 'diagonals of a rhombus bisect each other at right angles' or the equal-distance property; both are full reasons.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:irr:sqrt5",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Prove that √5 is irrational. Give the reason for each step.",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "Assumes √5 = a/b with a, b integers, b ≠ 0, with no common factor other than 1",
+     "points": 1
+    },
+    {
+     "id": "divides",
+     "criterion": "Squares to get a² = 5b², so 5 divides a², and so 5 divides a (5 is prime)",
+     "points": 1
+    },
+    {
+     "id": "substitute",
+     "criterion": "Writes a = 5c, gets 25c² = 5b², so b² = 5c² and 5 divides b",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "States the contradiction (5 divides both a and b) and concludes √5 is irrational",
+     "points": 1
+    }
+   ],
+   "guidance": "The reason for '5 divides a² ⇒ 5 divides a' must refer to 5 being prime (or to prime factorisation). An argument by parity (even/odd) does not work for 5.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:irr:reciprocal",
+   "competency": "MATH.number.irrationality-proofs",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Given that √2 is irrational, prove that 1/√2 is irrational. Give the reason for each step.",
+   "rubric": [
+    {
+     "id": "assume",
+     "criterion": "Assumes 1/√2 = r, a rational number",
+     "points": 1
+    },
+    {
+     "id": "nonzero",
+     "criterion": "Notes r ≠ 0 (since 1/√2 is not 0)",
+     "points": 1
+    },
+    {
+     "id": "rearrange",
+     "criterion": "Rearranges to √2 = 1/r and explains that 1/r is rational (the reciprocal of a non-zero rational is rational)",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "States the contradiction with √2 being irrational, and concludes",
+     "points": 1
+    }
+   ],
+   "guidance": "An equivalent route: 1/√2 = √2/2; if it were rational r then √2 = 2r would be rational. Either needs the closure reason stated.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:root:spiral",
+   "competency": "MATH.number.root-length-construction",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Describe how to draw the first three triangles of the square-root spiral, starting from a segment OA₁ of 1 unit, and explain why OA₂ = √2, OA₃ = √3 and OA₄ = √4 = 2. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "start",
+     "criterion": "Draws OA₁ = 1 unit, then A₁A₂ = 1 unit perpendicular to OA₁, and joins OA₂",
+     "points": 1
+    },
+    {
+     "id": "repeat",
+     "criterion": "At A₂ draws A₂A₃ = 1 unit perpendicular to OA₂ and joins OA₃; repeats at A₃ to get A₄",
+     "points": 1
+    },
+    {
+     "id": "pythag",
+     "criterion": "Uses Pythagoras each time: OA₂² = 1 + 1 = 2, OA₃² = 2 + 1 = 3, OA₄² = 3 + 1 = 4",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "States the general step: each new hypotenuse squared is one more than the last, so OAₙ = √n",
+     "points": 1
+    }
+   ],
+   "guidance": "Each unit segment must be perpendicular to the previous hypotenuse (not to OA₁). The perpendiculars may be constructed or drawn with a set square.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:root:semicircle",
+   "competency": "MATH.number.root-length-construction",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Describe how to construct a segment of length √3.5 using a ruler and compasses, by drawing AB = 3.5 units and BC = 1 unit on a straight line, a semicircle on AC, and a perpendicular at B. Explain why the perpendicular from B to the semicircle has length √3.5. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "line",
+     "criterion": "Draws AB = 3.5 and BC = 1 on one line, and finds the midpoint O of AC (by bisecting AC)",
+     "points": 1
+    },
+    {
+     "id": "semi",
+     "criterion": "Draws the semicircle with centre O and radius OA = 2.25",
+     "points": 1
+    },
+    {
+     "id": "perp",
+     "criterion": "Draws the perpendicular to AC at B, meeting the semicircle at D",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: OD = 2.25 (radius) and OB = 2.25 − 1 = 1.25, so BD² = OD² − OB² = 5.0625 − 1.5625 = 3.5",
+     "points": 2
+    }
+   ],
+   "guidance": "Accept the general argument: OD = (x + 1)/2, OB = (x − 1)/2, so BD² = x. The last step may be done with x = 3.5 or in general.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:root:sqrt13",
+   "competency": "MATH.number.root-length-construction",
+   "kind": "construction",
+   "grade": 9,
+   "prompt": "Locate √13 on the number line using a ruler and compasses, and explain why the point you mark is √13 from 0. There is no drawing tool: describe your construction in words, step by step. Your answer is marked on the steps you describe and on your reason why they work.",
+   "rubric": [
+    {
+     "id": "legs",
+     "criterion": "Chooses legs whose squares add to 13 (3 and 2): marks 3 on the number line and constructs a perpendicular of 2 units there",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "Joins 0 to the top of the perpendicular and uses Pythagoras: √(3² + 2²) = √13",
+     "points": 1
+    },
+    {
+     "id": "arc",
+     "criterion": "Draws an arc centred at 0 through that point to meet the number line",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that the arc keeps the length: every point on it is √13 from 0",
+     "points": 1
+    }
+   ],
+   "guidance": "Any correct route is fine, e.g. legs √12 and 1 from an earlier construction. The arc must be centred at 0.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:ind:odd",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "Prove by mathematical induction that 1 + 3 + 5 + … + (2n − 1) = n² for every positive integer n.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Checks n = 1: 1 = 1²",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "Assumes P(k): 1 + 3 + … + (2k − 1) = k²",
+     "points": 1
+    },
+    {
+     "id": "step",
+     "criterion": "Adds the next term 2k + 1 and shows k² + 2k + 1 = (k + 1)², using the hypothesis",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes by the principle of mathematical induction",
+     "points": 1
+    }
+   ],
+   "guidance": "The (k + 1)-th odd number is 2(k + 1) − 1 = 2k + 1; check the learner adds this term and not 2k − 1 again.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:ind:ineq",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "Prove by mathematical induction that 2ⁿ > n for every positive integer n.",
+   "rubric": [
+    {
+     "id": "base",
+     "criterion": "Checks n = 1: 2 > 1",
+     "points": 1
+    },
+    {
+     "id": "hyp",
+     "criterion": "Assumes 2ᵏ > k for some positive integer k",
+     "points": 1
+    },
+    {
+     "id": "step",
+     "criterion": "Shows 2ᵏ⁺¹ = 2 · 2ᵏ > 2k ≥ k + 1 (since k ≥ 1), so 2ᵏ⁺¹ > k + 1",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes by induction",
+     "points": 1
+    }
+   ],
+   "guidance": "The step needs the reason 2k ≥ k + 1 because k ≥ 1; without it the chain of inequalities is incomplete.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:game:pile",
+   "competency": "MATH.reasoning.winning-strategies",
+   "kind": "explanation",
+   "grade": 6,
+   "prompt": "A pile has 17 counters. Two players take turns to take 1, 2, 3 or 4 counters. Whoever takes the last counter wins. Would you rather go first or second? Explain a strategy that always wins, whatever the other player does.",
+   "rubric": [
+    {
+     "id": "target",
+     "criterion": "Finds the safe numbers to leave: multiples of 5 (15, 10, 5, 0)",
+     "points": 1
+    },
+    {
+     "id": "first",
+     "criterion": "Chooses to go first and take 2, leaving 15",
+     "points": 1
+    },
+    {
+     "id": "strategy",
+     "criterion": "Explains answering every move: if the other player takes t, you take 5 − t, so each round removes 5",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains why this always works: you always leave a multiple of 5, so you take the last counter",
+     "points": 1
+    }
+   ],
+   "guidance": "A learner who finds the 'make each round 5' rule but takes the wrong first move gets the strategy marks; feedback should show 17 = 3 × 5 + 2.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:game:misere",
+   "competency": "MATH.reasoning.winning-strategies",
+   "kind": "explanation",
+   "grade": 6,
+   "prompt": "There are 14 matches. Two players take turns to take 1, 2 or 3 matches. This time, whoever takes the LAST match LOSES. Would you go first or second? Explain a strategy that always wins.",
+   "rubric": [
+    {
+     "id": "target",
+     "criterion": "Sees that you want to leave the other player 1 match, so the safe numbers to leave are 1, 5, 9, 13",
+     "points": 1
+    },
+    {
+     "id": "first",
+     "criterion": "Chooses to go first and take 1, leaving 13",
+     "points": 1
+    },
+    {
+     "id": "strategy",
+     "criterion": "Explains answering each move t with 4 − t, so each round removes 4",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that the other player is finally left with 1 match and must take it",
+     "points": 1
+    }
+   ],
+   "guidance": "This changes the target from 0 to 1; reward learners who adapt the 'leave a multiple of 4' idea to 'leave one more than a multiple of 4'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:game:target",
+   "competency": "MATH.reasoning.winning-strategies",
+   "kind": "explanation",
+   "grade": 6,
+   "prompt": "A running total starts at 0. Two players take turns to add 1, 2, 3 or 4 to it. Whoever makes the total exactly 25 wins. Would you rather go first or second? Explain a strategy that always wins.",
+   "rubric": [
+    {
+     "id": "target",
+     "criterion": "Finds the safe totals: 25, 20, 15, 10, 5 (multiples of 5)",
+     "points": 1
+    },
+    {
+     "id": "second",
+     "criterion": "Sees that the first player cannot reach 5 in one go (the most they can add is 4), so chooses to go second",
+     "points": 1
+    },
+    {
+     "id": "strategy",
+     "criterion": "Explains answering every addition t with 5 − t, so the total after each of your turns is a multiple of 5",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains why this reaches 25 on your turn whatever the other player does",
+     "points": 1
+    }
+   ],
+   "guidance": "The twist is that going second wins here. Credit any clear explanation, in words, a table, or a worked game with the general rule stated.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:disp:critique",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "A school newsletter shows a bar graph titled 'Our results are soaring!'. The bars show pass percentages: 2023: 91%, 2024: 93%, 2025: 95%. The vertical axis starts at 90%, so the 2025 bar looks five times as tall as the 2023 bar. There are no axis labels. Explain at least two ways the graph could mislead a reader, and describe how you would redraw it.",
+   "rubric": [
+    {
+     "id": "axis",
+     "criterion": "Explains that starting the axis at 90% makes the bars' heights out of proportion (2023 bar 1 unit, 2025 bar 5 units, though 95 is not 5 times 91)",
+     "points": 1
+    },
+    {
+     "id": "labels",
+     "criterion": "Points out a second problem: no axis labels, or a title that overstates the change",
+     "points": 1
+    },
+    {
+     "id": "redraw",
+     "criterion": "Describes a fair redesign: axis from 0 (or a clearly marked break), labelled axes with units, a neutral title",
+     "points": 1
+    },
+    {
+     "id": "honest",
+     "criterion": "States what the data really shows: a small, steady rise of 2 percentage points a year",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept other valid criticisms. A redesign that keeps the axis break is fine if the break is clearly marked and the learner says why.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:disp:choose",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "For each data set, name a suitable display and give one reason: (a) how the 36 students in a class travel to school (walk, cycle, bus, car); (b) the temperature in your town at noon each day for two weeks; (c) the number of books read by boys and by girls in each of Classes 6, 7 and 8.",
+   "rubric": [
+    {
+     "id": "a",
+     "criterion": "(a) Pie chart or bar graph, with a reason (parts of one whole / comparing categories)",
+     "points": 1
+    },
+    {
+     "id": "b",
+     "criterion": "(b) Line graph, because it shows change over time",
+     "points": 1
+    },
+    {
+     "id": "c",
+     "criterion": "(c) Double bar graph, because it compares two groups across the same categories",
+     "points": 1
+    },
+    {
+     "id": "reasons",
+     "criterion": "Reasons are about the kind of data and the question, not just 'it looks nice'",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a bar graph for (a) and (b) if well justified (e.g. bars for daily values). A pie chart for (b) or (c) is not suitable: the values are not parts of one whole.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:disp:design",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "A family recorded the water they used in one week: drinking and cooking 70 L, bathing 280 L, washing clothes 210 L, cleaning 140 L. Describe in words a clear display of this data that you would make: the kind of display, the title, what goes on each axis or in each sector, the scale or the angles, and any key. Explain your choices.",
+   "rubric": [
+    {
+     "id": "type",
+     "criterion": "Chooses a suitable display (bar graph or pie chart) and says why",
+     "points": 1
+    },
+    {
+     "id": "parts",
+     "criterion": "Gives a clear title and labels (axes with units, or labelled sectors)",
+     "points": 1
+    },
+    {
+     "id": "numbers",
+     "criterion": "Gives a correct scale (e.g. 1 cm = 50 L) or correct angles (total 700 L: 36°, 144°, 108°, 72°)",
+     "points": 2
+    },
+    {
+     "id": "honest",
+     "criterion": "Mentions a fair choice such as an axis from 0 or equal bar widths",
+     "points": 1
+    }
+   ],
+   "guidance": "There is no drawing tool, so mark the description. For a pie chart the angles are 70/700 × 360 = 36°, 144°, 108°, 72°.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:disp:infographic",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "An advert shows a 3-D pie chart titled 'What people choose'. The sectors are labelled Brand A 50%, Brand B 35% and Others 25%. The Brand A slice is pulled out and drawn in front, and there is no information about who was asked or how many. Explain what is wrong or unclear with this display and how it should be improved.",
+   "rubric": [
+    {
+     "id": "total",
+     "criterion": "Notices the percentages add to 110%, which is impossible for parts of one whole",
+     "points": 1
+    },
+    {
+     "id": "3d",
+     "criterion": "Explains that the 3-D, pulled-out slice makes Brand A look bigger than its share",
+     "points": 1
+    },
+    {
+     "id": "source",
+     "criterion": "Points out that the sample (who and how many were asked) is missing, so the claim cannot be judged",
+     "points": 1
+    },
+    {
+     "id": "improve",
+     "criterion": "Suggests improvements: a flat chart or bar graph with correct percentages, a source and sample size, a clear title",
+     "points": 1
+    }
+   ],
+   "guidance": "Any three well-explained problems with sensible improvements deserve full marks.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:stq:pose",
+   "competency": "MATH.statistics.statistical-questions",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "These questions are not statistical: (a) How tall am I? (b) What time does our school start? (c) How many pages does my maths book have? Rewrite each one as a statistical question, and explain what makes your new questions statistical.",
+   "rubric": [
+    {
+     "id": "a",
+     "criterion": "Rewrites (a) as a question about many people, e.g. 'How tall are the students in Class 7?'",
+     "points": 1
+    },
+    {
+     "id": "bc",
+     "criterion": "Rewrites (b) and (c) as questions whose answers come from data that varies (e.g. 'What time do students in our class wake up?', 'How many pages do the books in our class library have?')",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains that a statistical question is answered by collecting data that varies, not by one fixed fact",
+     "points": 2
+    }
+   ],
+   "guidance": "Any sensible rewrites are fine as long as the answer needs data with variability.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:stq:plan",
+   "competency": "MATH.statistics.statistical-questions",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "You want to find out: 'How much time do students in our school spend on screens on a school day?' Plan the investigation: who you will ask and how many, exactly what you will ask or measure, how you will record and display the data, and one thing that could make your conclusion unreliable.",
+   "rubric": [
+    {
+     "id": "sample",
+     "criterion": "Chooses a sensible sample (e.g. students from every class, not only friends) and a number",
+     "points": 1
+    },
+    {
+     "id": "measure",
+     "criterion": "States exactly what is measured, with units (e.g. minutes yesterday, a school day)",
+     "points": 1
+    },
+    {
+     "id": "display",
+     "criterion": "Describes how the data will be recorded and displayed (tally/frequency table, bar graph of grouped times)",
+     "points": 1
+    },
+    {
+     "id": "limit",
+     "criterion": "Names a real limitation (self-reported estimates, a small or unrepresentative sample, an unusual day)",
+     "points": 1
+    }
+   ],
+   "guidance": "Reward precise questions ('How many minutes did you spend on a phone, TV or computer yesterday after school?') over vague ones ('Do you use screens a lot?').",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:stq:conclude",
+   "competency": "MATH.statistics.statistical-questions",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "Minutes spent reading on one day by 10 students in each class: Class 7A: 20, 25, 30, 30, 35, 40, 40, 45, 50, 65. Class 7B: 10, 15, 20, 30, 30, 35, 35, 40, 60, 75. Which class read more that day? Support your answer with at least two measures (such as mean, median or range), and give one reason to be careful with your conclusion.",
+   "rubric": [
+    {
+     "id": "mean",
+     "criterion": "Finds the means correctly: 7A 38 minutes, 7B 35 minutes",
+     "points": 1
+    },
+    {
+     "id": "median",
+     "criterion": "Finds the medians (7A 37.5, 7B 32.5) or the ranges (7A 45, 7B 65) correctly",
+     "points": 1
+    },
+    {
+     "id": "conclusion",
+     "criterion": "Concludes that 7A read a little more on average that day, and that 7B's times were more spread out",
+     "points": 1
+    },
+    {
+     "id": "caution",
+     "criterion": "Gives a sensible caution: only one day, only 10 students, small differences, or self-reported times",
+     "points": 1
+    }
+   ],
+   "guidance": "A conclusion that only says '7A' without evidence earns at most one mark. Accept 'about the same' if it is argued from the small difference and the spread.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "wr:stq:claim",
+   "competency": "MATH.statistics.statistical-questions",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "A tea shop puts up a sign: 'Most people in our town prefer our tea!' They asked 12 customers inside the shop, and 9 said they preferred its tea. Is the claim supported by this data? Explain, and say what data would be needed to test the claim properly.",
+   "rubric": [
+    {
+     "id": "sample",
+     "criterion": "Explains that the people asked were already the shop's customers, so they are not representative of the town",
+     "points": 1
+    },
+    {
+     "id": "size",
+     "criterion": "Explains that 12 people is too few to speak for a whole town",
+     "points": 1
+    },
+    {
+     "id": "supported",
+     "criterion": "States what the data does support (9 of the 12 customers asked preferred the tea)",
+     "points": 1
+    },
+    {
+     "id": "better",
+     "criterion": "Describes better data: a larger random sample of people across the town, asked a fair question",
+     "points": 1
+    }
+   ],
+   "guidance": "Look for the idea that a conclusion can only be as wide as the group the data came from.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  }
+ ]
 }

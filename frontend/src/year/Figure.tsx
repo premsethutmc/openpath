@@ -33,6 +33,8 @@ export function describe(v: V): string {
       return `A ${str(v.name) || `${num(v.sides)}-sided shape`}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}`;
     case "angle":
       return "An angle (estimate or measure it)";
+    case "circle":
+      return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? `, a sector of ${num(v.sector)}°` : ""}`;
     case "grid":
       return `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
     case "triangle":
@@ -214,6 +216,18 @@ export function Figure({ v }: { v: V }) {
         <line key="a" x1={40} y1={150} x2={220} y2={150} stroke={INK} strokeWidth={3} />,
         <line key="b" x1={40} y1={150} x2={x} y2={y} stroke={INK} strokeWidth={3} />,
         <path key="arc" d={`M 70 150 A 30 30 0 ${d > 180 ? 1 : 0} 0 ${ax} ${ay}`} fill="none" stroke={ACC} strokeWidth={2} />,
+      ]);
+    }
+    case "circle": {
+      const sector = num(v.sector, 0);
+      const end = (deg: number) => [110 + 80 * Math.cos((-deg * Math.PI) / 180), 100 + 80 * Math.sin((-deg * Math.PI) / 180)];
+      const [ex, ey] = end(sector);
+      return box(220, 200, [
+        <circle key="c" cx={110} cy={100} r={80} fill={SOFT} stroke={INK} strokeWidth={2} />,
+        <circle key="o" cx={110} cy={100} r={3} fill={INK} />,
+        ...(v.diameter !== undefined ? [<line key="d" x1={30} y1={100} x2={190} y2={100} stroke={ACC} strokeWidth={2} />, <text key="dt" x={110} y={92} fontSize={13} textAnchor="middle" fill={INK}>{str(v.diameter)}</text>] : []),
+        ...(v.radius !== undefined && v.diameter === undefined ? [<line key="r" x1={110} y1={100} x2={190} y2={100} stroke={ACC} strokeWidth={2} />, <text key="rt" x={150} y={92} fontSize={13} textAnchor="middle" fill={INK}>{str(v.radius)}</text>] : []),
+        ...(sector ? [<path key="s" d={`M 110 100 L 190 100 A 80 80 0 ${sector > 180 ? 1 : 0} 0 ${ex} ${ey} Z`} fill={ACC} opacity={0.35} />] : []),
       ]);
     }
     case "grid": {

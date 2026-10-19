@@ -93,7 +93,7 @@ export function checkCompetency(id: string): CompetencyCheck {
     strategy: !!m && m.strategies.length > 0,
     worked: !!m && [...m.chapter, ...m.strategies.flatMap((s) => s.screens)].some((s) => (s.math ?? []).length > 0),
     guided: !!m && m.strategies.every((s) => !!s.guided),
-    independent: educator ? !!m && m.transfer.some((x) => question(x).type === "written") && written.length >= 2 : !!m && m.transfer.length > 0 && new Set(alone.map((x) => question(x).type)).size >= 2,
+    independent: educator ? !!m && m.transfer.some((x) => question(x).type === "written") && written.length >= 2 : !!m && m.transfer.length > 0 && new Set(alone.map((x) => `${question(x).type}${x.endsWith(":w") ? "-situation" : ""}`)).size >= 2,
     retention: educator ? !!m && m.retention.length >= RETENTION_CHECK && written.length >= 3 : !!m && m.retention.length >= RETENTION_CHECK && (!pool || phasePool(pool, "retention").length >= DEPTH_POLICY.minimum.retention),
     variants: educator ? written.length >= 3 && listed.filter((x) => question(x).type === "written").length >= 2 : !!depth?.sufficient,
     validation: !!m && validateModule(m).length === 0 && fams.every(familyOk),

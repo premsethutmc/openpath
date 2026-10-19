@@ -106,7 +106,8 @@ export const CORE: Def[] = [
       const ones = (a % 10) + (b % 10);
       const tensNoCarry = Math.floor(a / 10) + Math.floor(b / 10);
       return [
-        { id: "no-regroup", kind: "conceptual", competency: PV, says: `The ten made by the ones (${a % 10} + ${b % 10} = ${ones}) was not carried to the tens.`, predict: tensNoCarry * 10 + (ones - 10) },
+        // a gap in tens and ones (place value) shows as a lost ten: the probe asks the place-value question directly
+        { id: "no-regroup", kind: "prerequisite", competency: PV, says: `The ten made by the ones (${a % 10} + ${b % 10} = ${ones}) was not carried to the tens: ${ones} ones are 1 ten and ${ones - 10} ${ones - 10 === 1 ? "one" : "ones"}.`, predict: tensNoCarry * 10 + (ones - 10), ...(ones <= 14 ? { probe: `gen:aatens:${tensNoCarry},${ones}` } : {}) },
         { id: "write-both-digits", kind: "conceptual", competency: PV, says: `All of ${ones} was written in the ones place; ${ones} is 1 ten and ${ones - 10} ${ones - 10 === 1 ? "one" : "ones"}.`, predict: Number(`${tensNoCarry}${ones}`) },
         { id: "fact-slip-add", kind: "recall", competency: "MATH.number.addition", says: `An addition fact (${a % 10} + ${b % 10}) is not yet reliable.`, predict: [tensNoCarry * 10 + 10 + (ones - 11), tensNoCarry * 10 + 10 + (ones - 9)].filter((x) => x !== a + b) },
       ];
@@ -251,6 +252,61 @@ export const CORE: Def[] = [
       ],
     },
     limits: "ax + b < c with a whole-number boundary; ≤, ≥ and double inequalities are other families.",
+  },
+  {
+    id: "lneg",
+    arity: 3,
+    title: "Solving a linear equation with negative numbers",
+    competency: "MATH.algebra.linear-rational",
+    type: "integer",
+    mc: true,
+    // [a, b, x]: a x + b = c with c = a x + b; a, b and x may be negative
+    parse: none,
+    reject: ([a, b, x]) => (a === 0 || a === 1 || Math.abs(a) > 9 || b === 0 || Math.abs(b) > 20 || Math.abs(x) > 12 || (a > 0 && b > 0 && x > 0) ? "ax + b = c with whole numbers, some negative." : null),
+    prompt: ([a, b, x]) => `Solve ${lead(a)} ${sgn(b)} = ${n_(a * x + b)}.`,
+    solve: ([a, b, x]) => {
+      const c = a * x + b;
+      return {
+        steps: [
+          { id: "move", op: "subtract", competency: "MATH.number.integer-add", inputs: [c, b], value: c - b },
+          { id: "divide", op: "divide", competency: "MATH.number.integer-multiply", inputs: [c - b, a], value: x },
+        ],
+        answer: x,
+      };
+    },
+    // independent: substitute every whole number from −20 to 20 and keep the one that makes both sides equal
+    validate: ([a, b, x], v) => {
+      const c = a * x + b;
+      const hits: number[] = [];
+      for (let t = -20; t <= 20; t++) if (a * t + b === c) hits.push(t);
+      return hits.length === 1 && hits[0] === v;
+    },
+    bugs: ([a, b, x]) => {
+      const c = a * x + b;
+      const out: Bug[] = [];
+      // moving b across without changing its sign: a x = c + b
+      if ((c + b) % a === 0) out.push({ id: "move-keep-sign", kind: "prerequisite", competency: "MATH.number.integer-add", says: `${n_(b)} was moved to the other side without changing its sign: subtracting ${n_(b)} from ${n_(c)} gives ${n_(c - b)}.`, predict: (c + b) / a, ...(c !== 0 && Math.abs(c) <= 40 && Math.abs(b) <= 40 && (c < 0 || b < 0) ? { probe: `gen:aiint:${c},${b},1` } : {}) });
+      // dividing by a negative coefficient, keeping the sign of the quotient wrong
+      if (a < 0 || c - b < 0) out.push({ id: "divide-sign", kind: "prerequisite", competency: "MATH.number.integer-multiply", says: `${n_(c - b)} ÷ ${n_(a)} has the wrong sign: a negative divided by a positive (or the other way round) is negative; two negatives give a positive.`, predict: -x, ...(Math.abs(a) >= 2 && Math.abs(x) >= 2 && Math.abs(a) <= 15 && Math.abs(x) <= 15 && (a < 0 || x < 0) ? { probe: `gen:ajimul:${a},${x}` } : {}) });
+      out.push({ id: "forgot-divide", kind: "procedural", competency: "MATH.algebra.linear-rational", says: `${n_(a)}x = ${n_(c - b)} still has to be divided by ${n_(a)}.`, predict: c - b });
+      return out;
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "move" ? `Subtract ${n_(Number(st.inputs[1]))} from both sides: ${n_(Number(st.inputs[0]))} − (${n_(Number(st.inputs[1]))}) = ${n_(Number(st.value))}` : `Divide both sides by ${n_(Number(st.inputs[1]))}: ${n_(Number(st.inputs[0]))} ÷ ${n_(Number(st.inputs[1]))} = ${n_(Number(st.value))}`),
+    domain: [[-9, 9], [-20, 20], [-12, 12]],
+    keep: ([a, b, x]) => a !== 0 && a !== 1 && b !== 0 && x !== 0 && (a < 0 || b < 0 || x < 0) && Math.abs(a * x + b) <= 60,
+    cap: 500,
+    difficulty: ([a, b, x]) => (a > 0 && x > 0 ? 1 : a > 0 ? 2 : 3),
+    word: ([a, b, x]) => `${name(a + x)} thinks of a number, multiplies it by ${n_(a)} and then ${b < 0 ? `subtracts ${-b}` : `adds ${b}`}. The result is ${n_(a * x + b)}. What was the number?`,
+    teach: {
+      idea: "An equation is a balance: doing the same to both sides keeps it true. With negative numbers, the inverse of adding −5 is subtracting −5, which is adding 5.",
+      method: "Undo the constant term (subtract it from both sides, with its sign), then divide both sides by the coefficient (watch the sign rules). Check by substituting.",
+      visual: ([a, b, x]) => ({ type: "balance", left: `${lead(a)} ${sgn(b)}`, right: n_(a * x + b) }),
+      alternatives: [
+        { id: "number_line_check", title: "Check signs on a number line", kind: "prerequisite", text: ["Before moving a term, say what it does: “+ (−7)” moves 7 to the left.", "Undoing it moves 7 to the right: add 7 to both sides."], visual: ([a, b, x]) => ({ type: "numberline", from: Math.min(0, a * x + b, a * x) - 2, to: Math.max(0, a * x + b, a * x) + 2, step: Math.max(1, Math.ceil(Math.abs(b) / 10)), jumps: [[a * x + b, a * x]] }) },
+      ],
+    },
+    limits: "ax + b = c with whole-number a, b, c and a whole-number answer from −12 to 12; fractions as coefficients are other families.",
   },
   {
     id: "dprod",

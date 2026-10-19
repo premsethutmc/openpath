@@ -4,5 +4,19 @@
  */
 import type { Def } from "../family-kit";
 import { CORE } from "./core";
+import { B01 } from "./b01";
+import { B02 } from "./b02";
+import { B03 } from "./b03";
+import { B04 } from "./b04";
+import { B05 } from "./b05";
+import { B06 } from "./b06";
+import { B07 } from "./b07";
+import { B08 } from "./b08";
+import { B09 } from "./b09";
+import { B10 } from "./b10";
+import { B11 } from "./b11";
+import { B13 } from "./b13";
+import { B14 } from "./b14";
+import { B15 } from "./b15";
 
-export const DOMAIN_FAMILIES: Def[] = [...CORE];
+export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B13, ...B14, ...B15];

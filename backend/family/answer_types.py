@@ -11,7 +11,7 @@ from fractions import Fraction
 
 SAMPLED = {'expression', 'antiderivative'}
 HUMAN = {'written'}
-NEW_TYPES = {'exact', 'roots', 'tuple', 'matrix', 'interval', 'ratio', 'expression', 'antiderivative', 'written'}
+NEW_TYPES = {'exact', 'roots', 'tuple', 'matrix', 'interval', 'ratio', 'mixed', 'expression', 'antiderivative', 'written'}
 FUNCS = {'sin', 'cos', 'tan', 'sec', 'cosec', 'csc', 'cot', 'ln', 'log', 'exp', 'sqrt', 'abs'}
 NAMES = ['cosec', 'sqrt', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot', 'exp', 'abs', 'log', 'ln', 'pi']
 SUPER = {'⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-'}
@@ -611,6 +611,20 @@ def _ratio_canonical(raw):
     return ':'.join(str(int(x)) for x in parts)
 
 
+def _mixed_canonical(raw):
+    t = normalise(raw).strip()
+    m = re.fullmatch(r'(-)?\s*(\d{1,6})(?:\s+(\d{1,6})\s*/\s*(\d{1,6}))?', t) or re.fullmatch(r'(-)?\s*()(\d{1,6})\s*/\s*(\d{1,6})', t)
+    if not m:
+        raise Unreadable('a mixed number such as 3 2/5')
+    w = int(m.group(2)) if m.group(2) else 0
+    if m.group(3) is None:
+        return f"{'-' if m.group(1) and w else ''}{w}"
+    n, d = int(m.group(3)), int(m.group(4))
+    if d < 1:
+        raise Unreadable('a denominator of at least 1')
+    return f"{'-' if m.group(1) else ''}{f'{w} ' if w else ''}{n}/{d}"
+
+
 def canonical_of(kind, raw):
     t = str(raw).strip().replace('−', '-')
     if not t or len(t) > 300:
@@ -629,6 +643,8 @@ def canonical_of(kind, raw):
             return _interval_canonical(t)
         if kind == 'ratio':
             return _ratio_canonical(t)
+        if kind == 'mixed':
+            return _mixed_canonical(t)
     except (Unreadable, ValueError, ZeroDivisionError, RecursionError, IndexError, KeyError):
         return None
     return None

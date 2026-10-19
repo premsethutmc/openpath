@@ -814,7 +814,7 @@ const F: Def[] = [
     type: "integer",
     mc: true,
     parse: () => null,
-    reject: ([n]) => (n < 2 || n > 25 ? "Only square roots of perfect squares from 4 to 625 are supported." : null),
+    reject: ([n]) => (n < 2 || n > 100 ? "Only square roots of perfect squares from 4 to 10 000 are supported." : null),
     prompt: ([n]) => `√${n * n} = ?`,
     solve: ([n]) => ({ steps: [{ id: "root", op: "evaluate", competency: "MATH.number.square-roots", inputs: [n * n], value: n }], answer: n }),
     validate: ([n], v) => typeof v === "number" && v > 0 && v * v === n * n,
@@ -825,7 +825,7 @@ const F: Def[] = [
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => [...Array(18).keys()].map((k) => [k + 2]).filter(([n]) => n !== p[0]),
     explain: (s) => `${show(s.value)} × ${show(s.value)} = ${s.inputs[0]}`,
-    domain: [[2, 25]],
+    domain: [[2, 100]],
     difficulty: ([n]) => (n <= 10 ? 1 : n <= 15 ? 2 : 3),
     teach: { idea: "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.", method: "Think of the square facts: 7 × 7 = 49, so √49 = 7." },
   },
@@ -1240,7 +1240,10 @@ function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem 
     return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: def.type, answer: show(answer), bugs };
   }
   const choice = def.type === "choice";
-  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "AB"[answer as number] : show(answer), bugs, ...(choice ? { options: ["The line", "The parabola y = x²"] } : {}) };
+  // a family's own options (families@2), or the first family's fixed pair
+  const own = choice && def.choices ? def.choices(p) : null;
+  if (own && (own.length < 2 || own.length > 4 || new Set(own).size !== own.length || typeof answer !== "number" || !own[answer])) throw new Error(`families@2: ${def.id}(${p}) needs 2–4 distinct options and the index of the right one`);
+  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : show(answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}) };
 }
 
 export type Parsed = { supported: true; problem: Problem } | { supported: false; reason: string; family?: string };
@@ -1315,9 +1318,30 @@ const fnv = (str: string) => {
   return x;
 };
 /** Every parameter choice in the domain ranges that `keep` and `reject` allow (before validation). */
+const candCache = new Map<string, number[][]>();
 export function candidates(fam: string): number[][] {
   const def = FAMILIES.get(fam);
   if (!def?.domain) return [];
+  const hit = candCache.get(fam);
+  if (hit && FAMILIES.get(fam) === def) return hit;
+  const size = def.domain.reduce((n, [lo, hi]) => n * (hi - lo + 1), 1);
+  // a very large domain with a cap (five-digit numbers …): a fixed, hash-chosen sample instead of every combination
+  if (def.cap && size > 300_000) {
+    const seen = new Set<string>();
+    const out: number[][] = [];
+    let state = fnv(`sample:${fam}`) || 1;
+    const rnd = () => ((state = Math.imul(state ^ (state >>> 15), 0x2c1b3c6d) >>> 0), (state = (state ^ (state >>> 12)) >>> 0), state / 4294967296);
+    for (let k = 0; k < def.cap * 40 && out.length < def.cap; k++) {
+      const p = def.domain.map(([lo, hi]) => lo + Math.floor(rnd() * (hi - lo + 1)));
+      const key = p.join(",");
+      if (seen.has(key)) continue;
+      seen.add(key);
+      if ((!def.keep || def.keep(p)) && !def.reject(p)) out.push(p);
+    }
+    out.sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
+    candCache.set(fam, out);
+    return out;
+  }
   const out: number[][] = [];
   const rec = (i: number, acc: number[]) => {
     if (i === def.domain!.length) {
@@ -1353,7 +1377,10 @@ export function pool(fam: string) {
   return r;
 }
 /** TEST ONLY: forget the computed pools (after a test changes a generator, to see what the change does). */
-export const resetPools = () => poolCache.clear();
+export const resetPools = () => {
+  poolCache.clear();
+  candCache.clear();
+};
 /** The base (typed) id of a generated question: "gen:f:p" for both "gen:f:p" and "gen:f:p:mc" (one exposure). */
 export const exposureKey = (qid: string) => (qid.startsWith("gen:") ? qid.replace(/:(mc|w)$/, "") : qid);
 /** Whether a generated question is in its family's release pool. */

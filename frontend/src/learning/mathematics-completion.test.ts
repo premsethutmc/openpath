@@ -14,6 +14,7 @@ import { canonical, isCorrect, question } from "../../../packages/learning/src/c
 import { assigned, validateRelease } from "../../../packages/learning/src/curriculum";
 import { boardFor } from "../../../packages/learning/src/curricula";
 import { graph } from "../../../packages/learning/src/graph";
+import { pool } from "../../../packages/learning/src/families";
 import { moduleState } from "../../../packages/learning/src/intervention";
 import { readRecords } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
@@ -97,4 +98,19 @@ test("compiler@1: twelve criteria from the content itself; nothing is called val
   // a competency with no content is never "awaiting"
   const empty = rows.find((r) => r.competencies.length && r.competencies.every((c) => !checkCompetency(c).met.strategy));
   if (empty) assert.notEqual(empty.class, "awaiting");
+});
+
+test("expansion@1 competencies are capabilities of the shared engine: answering their questions builds evidence", () => {
+  const c = { learnerId: "L", sessionId: "learn:L:1", at: "2026-10-19T10:00:00Z" };
+  const exp = graph.competencies.filter((x) => x.origin === "expansion");
+  assert.ok(exp.length > 100);
+  // a generated question of an expansion competency, and a component question of an educator-marked module
+  const gen = [...new Set(boardReleases.flatMap((r) => assigned(r).map((a) => a.competency)))].map((id) => ({ id, m: checkCompetency(id) })).find((x) => graph.get(x.id).origin === "expansion" && x.m.families.length)!;
+  assert.ok(gen, "an expansion competency with a family");
+  const st = learnerState("L", [make.enrol(c, 6, "2026-27", boardFor("cbse", 6)!)], Date.parse("2026-10-19T11:00:00Z"));
+  assert.ok(st.evidence(gen.id));
+  const p = pool(gen.m.families[0]).items[0];
+  const recs = [make.enrol(c, 6, "2026-27", boardFor("cbse", 6)!), make.attempt(c, p.id, p.answer, "diagnostic")];
+  const after = learnerState("L", recs, Date.parse("2026-10-19T11:00:00Z"));
+  assert.equal(after.evidence(gen.id).attempts.length, 1, "the engine records it (it did not reject the capability)");
 });

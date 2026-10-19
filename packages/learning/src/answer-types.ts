@@ -13,6 +13,8 @@
  *                  interval notation ("(−∞, 3]", "[2, 5) ∪ (7, ∞)"), with rational end points.
  *   ratio          a ratio as written in whole numbers ("3:4"); equivalent but unsimplified ratios are different
  *                  answers (the question asks for the simplest form).
+ *   mixed          a mixed number as written ("3 2/5", "−1 1/2", or a whole number "4"), not reduced: 17/5 or 3 4/10
+ *                  are readable but different answers (the question asks for the simplest mixed form).
  *   expression     an expression with functions (sin, cos, tan, sec, cosec, cot, ln, log, exp, √, |x|, π, e): equal when
  *                  it agrees with the answer at fixed sample points to a relative 1e-9 (numerical identity testing;
  *                  stated as such, never claimed as symbolic proof).
@@ -22,7 +24,7 @@
  */
 import { polynomial } from "../../mathematics/src/answers";
 
-export type AnswerType = "integer" | "fraction" | "set" | "choice" | "polynomial" | "exact" | "roots" | "tuple" | "matrix" | "interval" | "ratio" | "expression" | "antiderivative" | "written";
+export type AnswerType = "integer" | "fraction" | "set" | "choice" | "polynomial" | "exact" | "roots" | "tuple" | "matrix" | "interval" | "ratio" | "mixed" | "expression" | "antiderivative" | "written";
 export const ANSWERS_POLICY = "answers@2";
 /** Types compared by numerical identity testing rather than a canonical form. */
 export const SAMPLED: ReadonlySet<AnswerType> = new Set(["expression", "antiderivative"]);
@@ -523,6 +525,20 @@ function matrixCanonical(raw: string): string {
   if (!rows.length || rows.some((r) => r.length !== rows[0].length || !r.length)) throw new Error("rows of the same length");
   return `[${rows.map((r) => r.map(exactNumber).join(";")).join("|")}]`;
 }
+function mixedCanonical(raw: string): string {
+  const t = normalise(raw).trim();
+  const m = t.match(/^(-)?\s*(\d{1,6})(?:\s+(\d{1,6})\s*\/\s*(\d{1,6}))?$/) ?? t.match(/^(-)?\s*()(\d{1,6})\s*\/\s*(\d{1,6})$/);
+  if (!m) throw new Error("a mixed number such as 3 2/5");
+  const w = m[2] ? Number(m[2]) : 0;
+  if (m[3] === undefined) return `${m[1] && w ? "-" : ""}${w}`;
+  const n = Number(m[3]);
+  const d = Number(m[4]);
+  const g = (a: number, b: number): number => (b ? g(b, a % b) : a);
+  // read as written (not reduced): 3 4/10 and 17/5 are readable answers, and different from 3 2/5
+  if (d < 1) throw new Error("a denominator of at least 1");
+  void g;
+  return `${m[1] ? "-" : ""}${w ? `${w} ` : ""}${n}/${d}`;
+}
 function ratioCanonical(raw: string): string {
   const parts = normalise(raw).split(":").map((x) => x.trim());
   if (parts.length < 2 || parts.some((x) => !/^\d{1,9}$/.test(x))) throw new Error("whole numbers separated by :");
@@ -554,6 +570,8 @@ export function canonicalOf(type: AnswerType, raw: string): string | null {
         return intervalCanonical(t);
       case "ratio":
         return ratioCanonical(t);
+      case "mixed":
+        return mixedCanonical(t);
       case "expression":
       case "antiderivative": {
         parse(type === "antiderivative" ? stripC(t) : t);
@@ -592,4 +610,4 @@ export function sameAnswer(type: AnswerType, a: string, b: string): boolean {
   const x = canonicalOf(type, a);
   return x !== null && x === canonicalOf(type, b);
 }
-export const NEW_TYPES: ReadonlySet<AnswerType> = new Set(["exact", "roots", "tuple", "matrix", "interval", "ratio", "expression", "antiderivative", "written"]);
+export const NEW_TYPES: ReadonlySet<AnswerType> = new Set(["exact", "roots", "tuple", "matrix", "interval", "ratio", "mixed", "expression", "antiderivative", "written"]);

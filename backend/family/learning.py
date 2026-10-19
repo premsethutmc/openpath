@@ -184,7 +184,7 @@ def _answer_ok(kind, raw):
         return re.fullmatch(RATIONAL, t.replace(' ', ''), flags=re.ASCII) is not None and not re.search(r'/[+-]?0+$', t)
     if kind == 'set':
         parts = [p.strip() for p in t.split(',')]
-        return 0 < len(parts) <= 6 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
+        return 0 < len(parts) <= 30 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
     if kind == 'polynomial':
         return re.fullmatch(r'[0-9x+\-*^() /.²³]{1,60}', t) is not None
     return False
@@ -282,7 +282,7 @@ def checked_learning(event, pupil):
             _reject('Unknown activity.')
         if type(event.get('hints')) is not int or not 0 <= event['hints'] <= 5 or type(event.get('solution')) is not bool:
             _reject('Hints and solutions are recorded as given.')
-        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES else 80) or not _answer_ok(q['type'], event['response']):
+        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not _answer_ok(q['type'], event['response']):
             _reject('That answer is not in the form this question asks for.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')

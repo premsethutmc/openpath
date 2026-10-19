@@ -21,6 +21,7 @@ import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
 
+const EXPANSION_CAPABILITIES = graph.competencies.filter((c) => c.origin === "expansion").map((c) => ({ id: c.id, name: c.name, strand: c.id.split(".")[1] }));
 export const DAY = 86_400_000;
 /** The delayed check comes at least this long after independent success (the existing seven-day requirement). */
 export const RETENTION_DAYS = 7;
@@ -64,8 +65,9 @@ export function nativeItem(q: Question): Item & { kind: "code" } {
     version: 1,
     family: `learn:${q.skill}@1`,
     target: graph.evidenceTarget(q.competency),
-    // the question format is the evidence context (two different formats are needed to demonstrate, as everywhere)
-    format: `typed:learning-${q.type}@1`,
+    // the evidence context (two different contexts are needed to demonstrate, as everywhere): the answer format, and
+    // for the everyday-situation form of a generated problem (":w", context@2) the situation as well
+    format: `typed:learning-${q.type}${q.id.endsWith(":w") ? "-situation" : ""}@1`,
     prompt: q.prompt,
     answers: [`${q.type}:${canonical(q, q.answer)}`],
     a: 1,
@@ -84,7 +86,8 @@ export const independentAttempt = (a: Attempt) => !assistedAttempt(a) && INDEPEN
 
 /** The shared ledger, replayed from the learner's records. */
 export function ledgerFor(learnerId: string, records: LearnerRecords, graphVersion: GraphVersion = "1.1.0") {
-  const ledger = mathematicsLedger(learnerId, graphVersion);
+  // the curriculum expansion's competencies are capabilities of the shared engine too (expansion@1)
+  const ledger = mathematicsLedger(learnerId, graphVersion, EXPANSION_CAPABILITIES);
   const generated = [...new Set(records.attempts.map((a) => a.questionId).filter((id) => id.startsWith("gen:")))];
   ledger.ctx.content = indexContent({ items: [...allQuestionIds(), ...generated].map((id) => nativeItem(question(id))), passages: [], goals: [], misspellings: {} }, ledger.ctx.index);
   const items = (id: string) => {

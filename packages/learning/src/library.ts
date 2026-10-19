@@ -214,7 +214,15 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
   const taken = new Set([...authored.map((m) => m.competency), ...fromBlueprints.map((m) => m.competency)]);
   // a family too small to fill every phase gives no module: the limitation is recorded, never papered over
   const notBuilt: { family: string; competency: string; reason: string }[] = [];
-  const fromTemplates = [...FAMILIES.values()].filter((f) => f.teach && f.domain && !NOT_A_MODULE.has(f.id) && !taken.has(f.competency)).flatMap((f) => {
+  // a competency's module pool: the first family listed for it whose pool is deep enough for every phase (depth@1),
+  // otherwise the first one (its module then states the limitation)
+  const deepEnough = (f: string) => {
+    const n = (ph: Phase) => new Set(phasePool(f, ph).map(exposureKey)).size;
+    return (Object.keys(DEPTH_POLICY.minimum) as Phase[]).every((ph) => n(ph) >= DEPTH_POLICY.minimum[ph]);
+  };
+  const candidatesFor = (c: string) => [...FAMILIES.values()].filter((f) => f.competency === c && f.teach && f.domain && !NOT_A_MODULE.has(f.id));
+  const mainFamily = (c: string) => candidatesFor(c).find((f) => deepEnough(f.id)) ?? candidatesFor(c)[0];
+  const fromTemplates = [...new Set([...FAMILIES.values()].filter((f) => f.teach && f.domain && !NOT_A_MODULE.has(f.id) && !taken.has(f.competency)).map((f) => f.competency))].map((c) => mainFamily(c)!).flatMap((f) => {
     try {
       const m = fromTemplate(f.id, f.competency, bps.version);
       taken.add(f.competency);
@@ -225,7 +233,7 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
     }
   });
   const authoredPools = Object.fromEntries(authored.flatMap((m) => {
-    const f = [...FAMILIES.values()].find((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id));
+    const f = [...FAMILIES.values()].filter((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id)).find((x) => deepEnough(x.id)) ?? [...FAMILIES.values()].find((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id));
     return f ? [[m.competency, { family: f.id, version: FAMILY_VERSION[f.id] }]] : [];
   }));
   return { modules: [...fromBlueprints, ...fromTemplates], fromBlueprints, fromTemplates, authoredPools, notBuilt };
