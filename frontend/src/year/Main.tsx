@@ -105,7 +105,9 @@ function App() {
     const t = setInterval(() => setNow(Date.now()), 30_000);
     return () => clearInterval(t);
   }, []);
-  useEffect(() => window.scrollTo({ top: 0 }), [view]);
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [view]);
 
   const st = useMemo(() => (learner && events ? learnerState(learner, events, now) : null), [learner, events, now]);
   const session = `learn:${learner}:${visit.current}`;
