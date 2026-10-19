@@ -1,0 +1,64 @@
+{
+  "format": "openpath-kids/episode@1",
+  "id": "sample-primitives",
+  "title": "Format sample: every learning interaction",
+  "ages": [3, 7],
+  "objectives": [
+    { "id": "colour", "theme": "colours", "description": "Choose the blue ball." },
+    { "id": "shape", "theme": "shapes", "description": "Find the circle." },
+    { "id": "animal", "theme": "animals", "description": "Which one says moo?" },
+    { "id": "more", "theme": "comparison", "description": "Which plate has more?" },
+    { "id": "drag", "theme": "position", "description": "Put the ball in the box." },
+    { "id": "rain", "theme": "cause and effect", "description": "Clouds bring rain." }
+  ],
+  "characters": {
+    "chintoo": { "rig": "chintoo", "at": { "x": 300, "y": 815 } },
+    "narrator": { "rig": "voice", "at": { "x": 800, "y": 900 } }
+  },
+  "backgrounds": { "garden": { "scene": "garden" } },
+  "points": { "box": { "x": 1200, "y": 815 } },
+  "props": {
+    "ball-red": { "asset": "ball", "variant": "red", "at": { "x": 600, "y": 815 }, "tags": { "colour": "red" } },
+    "ball-blue": { "asset": "ball", "variant": "blue", "at": { "x": 800, "y": 815 }, "tags": { "colour": "blue" } },
+    "circle": { "asset": "shape", "variant": "circle", "at": { "x": 600, "y": 600 }, "tags": { "shape": "circle" } },
+    "square": { "asset": "shape", "variant": "square", "at": { "x": 800, "y": 600 }, "tags": { "shape": "square" } },
+    "cow": { "asset": "animal", "variant": "cow", "at": { "x": 600, "y": 700 }, "tags": { "animal": "cow" } },
+    "duck": { "asset": "animal", "variant": "duck", "at": { "x": 800, "y": 700 }, "tags": { "animal": "duck" } },
+    "plate-2": { "asset": "plate", "at": { "x": 600, "y": 500 }, "tags": { "quantity": 2 } },
+    "plate-4": { "asset": "plate", "at": { "x": 800, "y": 500 }, "tags": { "quantity": 4 } },
+    "cloud": { "asset": "cloud", "at": { "x": 800, "y": 200 } }
+  },
+  "start": "colour",
+  "tracks": {
+    "colour": [
+      { "do": "scene", "background": "garden", "transition": "cut" },
+      { "do": "say", "who": "chintoo", "line": "Can you find the blue ball?" },
+      { "do": "interact", "id": "blue-ball", "primitive": "choose-colour", "objective": "colour", "targets": ["ball-red", "ball-blue"], "params": { "colour": "blue" }, "window": 12000,
+        "bind": "ball", "outcomes": { "match": "colour-yes", "other": "colour-other", "timeout": "colour-show" } }
+    ],
+    "colour-yes": [{ "do": "say", "who": "chintoo", "line": "Yes! A {ball.colour} ball!" }, { "do": "goto", "track": "shape" }],
+    "colour-other": [{ "do": "say", "who": "chintoo", "line": "Ooh, a {ball.colour} ball! Here is the blue one." }, { "do": "prop", "id": "ball-blue", "action": "glow" }, { "do": "goto", "track": "shape" }],
+    "colour-show": [{ "do": "prop", "id": "ball-blue", "action": "glow" }, { "do": "say", "who": "chintoo", "line": "Here is the blue ball!" }, { "do": "goto", "track": "shape" }],
+    "shape": [
+      { "do": "interact", "id": "find-circle", "primitive": "match-shape", "objective": "shape", "targets": ["circle", "square"], "params": { "shape": "circle" }, "window": 10000,
+        "outcomes": { "match": "animal", "other": "animal", "timeout": "animal" } }
+    ],
+    "animal": [
+      { "do": "interact", "id": "says-moo", "primitive": "identify-animal", "objective": "animal", "targets": ["cow", "duck"], "params": { "animal": "cow" }, "window": 10000,
+        "outcomes": { "match": "compare", "other": "compare", "timeout": "compare" } }
+    ],
+    "compare": [
+      { "do": "interact", "id": "more-food", "primitive": "compare", "objective": "more", "targets": ["plate-2", "plate-4"], "params": { "want": "more", "by": "quantity" }, "window": 10000,
+        "outcomes": { "match": "drag", "other": "drag", "timeout": "drag" } }
+    ],
+    "drag": [
+      { "do": "interact", "id": "ball-in-box", "primitive": "drag", "objective": "drag", "targets": ["ball-red"], "params": { "zone": "box" }, "window": 15000,
+        "outcomes": { "placed": "rain", "timeout": "rain" } }
+    ],
+    "rain": [
+      { "do": "interact", "id": "make-rain", "primitive": "observe", "objective": "rain", "targets": ["cloud"], "window": 8000,
+        "outcomes": { "triggered": "rain-falls", "timeout": "rain-falls" } }
+    ],
+    "rain-falls": [{ "do": "prop", "id": "cloud", "action": "wobble" }, { "do": "say", "who": "narrator", "line": "Pitter patter, here comes the rain!" }, { "do": "end" }]
+  }
+}

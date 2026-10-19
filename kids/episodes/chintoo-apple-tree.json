@@ -1,0 +1,356 @@
+{
+  "format": "openpath-kids/episode@1",
+  "id": "chintoo-apple-tree",
+  "title": "Chintoo and the Apple Tree",
+  "ages": [3, 7],
+  "objectives": [
+    { "id": "colours-fruit", "theme": "colours", "description": "Hear and see red, green and yellow apples named by colour." },
+    { "id": "cause-effect-fall", "theme": "cause and effect", "description": "See what happens to an apple that falls in the mud, and how washing makes it clean." },
+    { "id": "count-to-3", "theme": "counting", "description": "Count three objects one by one, touching each once." },
+    { "id": "count-to-5-add", "theme": "addition", "description": "Three apples and two more make five; count all five." },
+    { "id": "vocabulary-garden", "theme": "vocabulary", "description": "Hear everyday words: morning, hungry, tree, bird, apple, muddy, wash, clean." }
+  ],
+  "characters": {
+    "chintoo": { "rig": "chintoo", "at": "bed", "facing": "right", "scale": 0.9, "voice": { "pitch": 1.45, "rate": 0.95, "lang": "en-IN" } },
+    "mina": { "rig": "bird", "at": { "x": 1800, "y": 160 }, "facing": "left", "scale": 1, "voice": { "pitch": 1.8, "rate": 1, "lang": "en-IN" } },
+    "narrator": { "rig": "voice", "at": { "x": 800, "y": 900 }, "voice": { "pitch": 1.05, "rate": 0.9, "lang": "en-IN" } }
+  },
+  "backgrounds": {
+    "bedroom": { "scene": "bedroom" },
+    "garden": { "scene": "garden" }
+  },
+  "points": {
+    "bed": { "x": 520, "y": 790 },
+    "bedroom-door": { "x": 1330, "y": 775 },
+    "offstage-left": { "x": -200, "y": 815 },
+    "garden-door": { "x": 140, "y": 790 },
+    "chat-spot": { "x": 600, "y": 815 },
+    "perch": { "x": 1250, "y": 444 },
+    "sky-right": { "x": 1800, "y": 160 },
+    "paw": { "x": 730, "y": 732 },
+    "by-puddle": { "x": 1050, "y": 815 },
+    "by-bath": { "x": 1240, "y": 812 },
+    "by-mat": { "x": 300, "y": 815 },
+    "slot-1": { "x": 585, "y": 830 },
+    "slot-2": { "x": 700, "y": 830 },
+    "slot-3": { "x": 815, "y": 830 },
+    "slot-4": { "x": 470, "y": 830 },
+    "slot-5": { "x": 930, "y": 830 },
+    "hover-1": { "x": 585, "y": 600 },
+    "hover-2": { "x": 700, "y": 600 },
+    "hover-3": { "x": 815, "y": 600 },
+    "hover-4": { "x": 470, "y": 600 },
+    "hover-5": { "x": 930, "y": 600 },
+    "mina-ground": { "x": 1080, "y": 815 },
+    "centre": { "x": 760, "y": 815 },
+    "tree-top": { "x": 1000, "y": 120 }
+  },
+  "props": {
+    "mat": { "asset": "mat", "background": "garden", "at": { "x": 700, "y": 860 }, "hidden": true },
+    "puddle": { "asset": "puddle", "background": "garden", "at": { "x": 1190, "y": 838 } },
+    "apple-red": { "asset": "apple", "variant": "red", "background": "garden", "at": { "x": 870, "y": 470 }, "tags": { "colour": "red" } },
+    "apple-green": { "asset": "apple", "variant": "green", "background": "garden", "at": { "x": 1000, "y": 486 }, "tags": { "colour": "green" } },
+    "apple-yellow": { "asset": "apple", "variant": "yellow", "background": "garden", "at": { "x": 1130, "y": 470 }, "tags": { "colour": "yellow" } },
+    "b1": { "asset": "apple", "variant": "red", "background": "garden", "at": { "x": 820, "y": 300 }, "scale": 0.85, "tags": { "colour": "red" } },
+    "b2": { "asset": "apple", "variant": "red", "background": "garden", "at": { "x": 930, "y": 220 }, "scale": 0.85, "tags": { "colour": "red" } },
+    "b3": { "asset": "apple", "variant": "green", "background": "garden", "at": { "x": 1060, "y": 170 }, "scale": 0.85, "tags": { "colour": "green" } },
+    "b4": { "asset": "apple", "variant": "red", "background": "garden", "at": { "x": 1170, "y": 260 }, "scale": 0.85, "tags": { "colour": "red" } },
+    "b5": { "asset": "apple", "variant": "yellow", "background": "garden", "at": { "x": 1240, "y": 345 }, "scale": 0.85, "tags": { "colour": "yellow" } }
+  },
+  "start": "morning",
+  "tracks": {
+    "morning": [
+      { "do": "scene", "background": "bedroom", "transition": "cut" },
+      { "do": "act", "who": "chintoo", "action": "place", "to": "bed" },
+      { "do": "act", "who": "chintoo", "action": "sleep" },
+      { "do": "wait", "ms": 2500 },
+      { "do": "say", "who": "narrator", "line": "It is morning in Chintoo's little house." },
+      { "do": "sound", "sound": "chirp" },
+      { "do": "wait", "ms": 1200 },
+      { "do": "say", "who": "narrator", "line": "Chintoo is still fast asleep." },
+      { "do": "sound", "sound": "chirp" },
+      { "do": "act", "who": "chintoo", "action": "wake", "ms": 3000 },
+      { "do": "act", "who": "chintoo", "action": "yawn", "ms": 1800 },
+      { "do": "act", "who": "chintoo", "action": "blink" },
+      { "do": "say", "who": "chintoo", "line": "Good morning!", "mood": "happy" },
+      { "do": "wait", "ms": 600 },
+      { "do": "together", "steps": [
+        { "do": "sound", "sound": "rumble" },
+        { "do": "act", "who": "chintoo", "action": "rub-tummy", "ms": 2200, "mood": "hungry" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "surprised", "ms": 900 },
+      { "do": "say", "who": "chintoo", "line": "Rumble, rumble! That's my tummy!", "mood": "hungry" },
+      { "do": "say", "who": "chintoo", "line": "I'm so hungry.", "mood": "hungry" },
+      { "do": "say", "who": "narrator", "line": "What can Chintoo eat?" },
+      { "do": "act", "who": "chintoo", "action": "look", "to": "bedroom-door" },
+      { "do": "act", "who": "chintoo", "action": "sniff", "ms": 1400 },
+      { "do": "say", "who": "chintoo", "line": "Let's look in the garden!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "bedroom-door", "ms": 4200 },
+      { "do": "goto", "track": "garden" }
+    ],
+
+    "garden": [
+      { "do": "scene", "background": "garden", "ms": 1600 },
+      { "do": "act", "who": "chintoo", "action": "place", "to": "garden-door", "face": "right" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "chat-spot", "ms": 3800 },
+      { "do": "act", "who": "chintoo", "action": "look", "to": "tree-top" },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "surprised", "ms": 1000 },
+      { "do": "say", "who": "chintoo", "line": "Wow! An apple tree!", "mood": "surprised" },
+      { "do": "say", "who": "narrator", "line": "Red apples, green apples and a yellow apple!" },
+      { "do": "together", "steps": [
+        { "do": "prop", "id": "apple-red", "action": "glow", "ms": 1200 },
+        { "do": "prop", "id": "apple-green", "action": "glow", "ms": 1200 },
+        { "do": "prop", "id": "apple-yellow", "action": "glow", "ms": 1200 }
+      ] },
+      { "do": "say", "who": "chintoo", "line": "Yum! I will get one.", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "jump", "ms": 1000 },
+      { "do": "act", "who": "chintoo", "action": "jump", "ms": 1000 },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "sad", "ms": 1200 },
+      { "do": "say", "who": "chintoo", "line": "Oh no. The apples are too high up.", "mood": "sad" },
+      { "do": "wait", "ms": 800 },
+      { "do": "together", "steps": [
+        { "do": "sound", "sound": "chirp" },
+        { "do": "act", "who": "mina", "action": "fly", "to": "perch", "ms": 3200 }
+      ] },
+      { "do": "act", "who": "mina", "action": "flap", "ms": 800 },
+      { "do": "act", "who": "chintoo", "action": "look", "to": "perch" },
+      { "do": "say", "who": "mina", "line": "Hello! I'm Mina.", "mood": "happy" },
+      { "do": "say", "who": "chintoo", "line": "Hello, Mina! I'm Chintoo.", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "wave", "ms": 1400 },
+      { "do": "say", "who": "chintoo", "line": "I'm hungry. Can you get me an apple?", "mood": "hungry" },
+      { "do": "act", "who": "mina", "action": "hop", "ms": 600 },
+      { "do": "say", "who": "mina", "line": "Yes, I can fly up high!", "mood": "happy" },
+      { "do": "act", "who": "mina", "action": "flap", "ms": 900 },
+      { "do": "act", "who": "mina", "action": "look", "to": "apple-green" },
+      { "do": "say", "who": "mina", "line": "Which apple shall I pick?" },
+      { "do": "interact", "id": "pick-apple", "primitive": "tap", "objective": "colours-fruit",
+        "targets": ["apple-red", "apple-green", "apple-yellow"],
+        "window": 18000, "hintAfter": 7000,
+        "hint": [
+          { "do": "act", "who": "mina", "action": "look", "to": "apple-red" },
+          { "do": "prop", "id": "apple-red", "action": "wobble" },
+          { "do": "act", "who": "mina", "action": "look", "to": "apple-yellow" },
+          { "do": "prop", "id": "apple-yellow", "action": "wobble" },
+          { "do": "say", "who": "mina", "line": "Red, green or yellow?" }
+        ],
+        "bind": "choice",
+        "outcomes": { "tapped": "mina-picks", "timeout": "apple-falls" } }
+    ],
+
+    "mina-picks": [
+      { "do": "say", "who": "mina", "line": "That one? Okay!", "mood": "happy" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "$choice", "reach": true, "ms": 1400 },
+      { "do": "act", "who": "mina", "action": "peck", "ms": 900 },
+      { "do": "prop", "id": "$choice", "action": "attach", "who": "mina" },
+      { "do": "say", "who": "mina", "line": "A {choice.colour} apple!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "look", "to": "mina" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "paw", "reach": true, "ms": 2600 },
+      { "do": "act", "who": "chintoo", "action": "turn", "face": "right" },
+      { "do": "prop", "id": "$choice", "action": "attach", "who": "chintoo" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "perch", "ms": 2200, "wait": false },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "happy", "ms": 1000 },
+      { "do": "say", "who": "chintoo", "line": "Thank you, Mina!", "mood": "happy" },
+      { "do": "say", "who": "chintoo", "line": "A {choice.colour} apple for me!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "eat", "prop": "$choice", "ms": 2800 },
+      { "do": "say", "who": "chintoo", "line": "Crunch, crunch! Yummy!", "mood": "happy" },
+      { "do": "goto", "track": "more-apples" }
+    ],
+
+    "apple-falls": [
+      { "do": "act", "who": "mina", "action": "look", "to": "apple-red" },
+      { "do": "say", "who": "mina", "line": "Hmm, let me think..." },
+      { "do": "act", "who": "mina", "action": "fly", "to": { "x": 1150, "y": 300 }, "ms": 1600 },
+      { "do": "together", "steps": [
+        { "do": "prop", "id": "apple-red", "action": "wobble", "ms": 900 },
+        { "do": "act", "who": "chintoo", "action": "look", "to": "apple-red" }
+      ] },
+      { "do": "prop", "id": "apple-red", "action": "wobble", "ms": 900 },
+      { "do": "prop", "id": "apple-red", "action": "fall", "to": "puddle", "ms": 1400 },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "surprised", "ms": 900 },
+      { "do": "say", "who": "chintoo", "line": "An apple fell down!", "mood": "surprised" },
+      { "do": "prop", "id": "apple-red", "action": "variant", "variant": "muddy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "by-puddle", "ms": 2800 },
+      { "do": "act", "who": "chintoo", "action": "pickup", "prop": "apple-red", "ms": 900 },
+      { "do": "prop", "id": "apple-red", "action": "attach", "who": "chintoo" },
+      { "do": "act", "who": "chintoo", "action": "look", "to": "apple-red" },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "yuck", "ms": 1600 },
+      { "do": "say", "who": "chintoo", "line": "Oh no! It fell in the mud.", "mood": "yuck" },
+      { "do": "say", "who": "chintoo", "line": "Yucky! I can't eat a muddy apple.", "mood": "yuck" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "mina-ground", "ms": 1800 },
+      { "do": "say", "who": "mina", "line": "Wash it in the water, Chintoo!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "by-bath", "ms": 2200 },
+      { "do": "act", "who": "chintoo", "action": "wash", "ms": 2800 },
+      { "do": "prop", "id": "apple-red", "action": "variant", "variant": "red" },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "happy", "ms": 1000 },
+      { "do": "say", "who": "chintoo", "line": "Splash, splash! Now it's clean!", "mood": "happy" },
+      { "do": "say", "who": "mina", "line": "A clean red apple!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "eat", "prop": "apple-red", "ms": 2800 },
+      { "do": "say", "who": "chintoo", "line": "Crunch, crunch! Yummy!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "chat-spot", "ms": 2600 },
+      { "do": "act", "who": "mina", "action": "fly", "to": "perch", "ms": 2000 },
+      { "do": "goto", "track": "more-apples" }
+    ],
+
+    "more-apples": [
+      { "do": "act", "who": "chintoo", "action": "rub-tummy", "mood": "happy", "ms": 1600 },
+      { "do": "say", "who": "chintoo", "line": "My tummy wants more!", "mood": "happy" },
+      { "do": "say", "who": "mina", "line": "Let's have an apple picnic!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": "by-mat", "ms": 2600 },
+      { "do": "act", "who": "chintoo", "action": "turn", "face": "right" },
+      { "do": "prop", "id": "mat", "action": "show", "ms": 700 },
+      { "do": "say", "who": "narrator", "line": "Mina brings the apples, one by one." },
+
+      { "do": "act", "who": "mina", "action": "fly", "to": "b1", "reach": true, "ms": 1500 },
+      { "do": "prop", "id": "b1", "action": "attach", "who": "mina" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "hover-1", "reach": true, "ms": 1500 },
+      { "do": "together", "steps": [
+        { "do": "prop", "id": "b1", "action": "fall", "to": "slot-1", "ms": 900 },
+        { "do": "sound", "sound": "plop" }
+      ] },
+      { "do": "act", "who": "mina", "action": "fly", "to": "b2", "reach": true, "ms": 1500 },
+      { "do": "prop", "id": "b2", "action": "attach", "who": "mina" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "hover-2", "reach": true, "ms": 1500 },
+      { "do": "prop", "id": "b2", "action": "fall", "to": "slot-2", "ms": 900 },
+      { "do": "act", "who": "mina", "action": "fly", "to": "b3", "reach": true, "ms": 1500 },
+      { "do": "prop", "id": "b3", "action": "attach", "who": "mina" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "hover-3", "reach": true, "ms": 1500 },
+      { "do": "prop", "id": "b3", "action": "fall", "to": "slot-3", "ms": 900 },
+
+      { "do": "say", "who": "mina", "line": "There are three apples.", "level": ["older"] },
+      { "do": "say", "who": "mina", "line": "And two more!", "level": ["older"], "mood": "happy" },
+      { "do": "act", "who": "mina", "action": "fly", "to": "b4", "reach": true, "ms": 1500, "level": ["older"] },
+      { "do": "prop", "id": "b4", "action": "attach", "who": "mina", "level": ["older"] },
+      { "do": "act", "who": "mina", "action": "fly", "to": "hover-4", "reach": true, "ms": 1700, "level": ["older"] },
+      { "do": "prop", "id": "b4", "action": "fall", "to": "slot-4", "ms": 900, "level": ["older"] },
+      { "do": "act", "who": "mina", "action": "fly", "to": "b5", "reach": true, "ms": 1700, "level": ["older"] },
+      { "do": "prop", "id": "b5", "action": "attach", "who": "mina", "level": ["older"] },
+      { "do": "act", "who": "mina", "action": "fly", "to": "hover-5", "reach": true, "ms": 1500, "level": ["older"] },
+      { "do": "prop", "id": "b5", "action": "fall", "to": "slot-5", "ms": 900, "level": ["older"] },
+
+      { "do": "act", "who": "mina", "action": "fly", "to": "mina-ground", "ms": 1600 },
+      { "do": "act", "who": "mina", "action": "turn", "face": "left" },
+      { "do": "say", "who": "chintoo", "line": "So many apples! How many?", "mood": "surprised" },
+      { "do": "say", "who": "mina", "line": "Let's count them together!", "mood": "happy" },
+      { "do": "goto", "track": "count-younger" }
+    ],
+
+    "count-younger": [
+      { "do": "interact", "id": "count-apples-3", "primitive": "count", "objective": "count-to-3", "level": ["younger"],
+        "targets": ["b1", "b2", "b3"], "params": { "voice": "chintoo" },
+        "window": 24000, "hintAfter": 8000,
+        "hint": [
+          { "do": "act", "who": "chintoo", "action": "point", "to": "b1", "ms": 1200 },
+          { "do": "say", "who": "chintoo", "line": "Touch an apple to count it!" },
+          { "do": "wait", "ms": 5000 },
+          { "do": "prop", "id": "b1", "action": "wobble" }
+        ],
+        "outcomes": { "counted": "counted-together", "timeout": "chintoo-counts" } },
+      { "do": "goto", "track": "count-older", "level": ["older"] }
+    ],
+
+    "count-older": [
+      { "do": "interact", "id": "count-apples-5", "primitive": "count", "objective": "count-to-5-add",
+        "targets": ["b4", "b1", "b2", "b3", "b5"], "params": { "voice": "chintoo" },
+        "window": 28000, "hintAfter": 9000,
+        "hint": [
+          { "do": "act", "who": "chintoo", "action": "point", "to": "b4", "ms": 1200 },
+          { "do": "say", "who": "chintoo", "line": "Touch each apple to count it!" },
+          { "do": "wait", "ms": 6000 },
+          { "do": "prop", "id": "b4", "action": "wobble" }
+        ],
+        "outcomes": { "counted": "counted-together", "timeout": "chintoo-counts" } }
+    ],
+
+    "counted-together": [
+      { "do": "wait", "ms": 900 },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "proud", "ms": 1200 },
+      { "do": "say", "who": "chintoo", "line": "Three apples! We counted them all!", "mood": "proud", "level": ["younger"] },
+      { "do": "say", "who": "chintoo", "line": "Five apples! We counted them all!", "mood": "proud", "level": ["older"] },
+      { "do": "say", "who": "mina", "line": "Three apples and two more make five!", "level": ["older"], "mood": "happy" },
+      { "do": "act", "who": "mina", "action": "flap", "ms": 1000 },
+      { "do": "goto", "track": "picnic" }
+    ],
+
+    "chintoo-counts": [
+      { "do": "say", "who": "chintoo", "line": "I'll count. Watch me!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "point", "to": "b4", "ms": 1000, "level": ["older"] },
+      { "do": "together", "level": ["older"], "steps": [
+        { "do": "prop", "id": "b4", "action": "badge", "text": "1" },
+        { "do": "say", "who": "chintoo", "line": "One!" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "point", "to": "b1", "ms": 1000 },
+      { "do": "together", "level": ["younger"], "steps": [
+        { "do": "prop", "id": "b1", "action": "badge", "text": "1" },
+        { "do": "say", "who": "chintoo", "line": "One!" }
+      ] },
+      { "do": "together", "level": ["older"], "steps": [
+        { "do": "prop", "id": "b1", "action": "badge", "text": "2" },
+        { "do": "say", "who": "chintoo", "line": "Two!" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "point", "to": "b2", "ms": 1000 },
+      { "do": "together", "level": ["younger"], "steps": [
+        { "do": "prop", "id": "b2", "action": "badge", "text": "2" },
+        { "do": "say", "who": "chintoo", "line": "Two!" }
+      ] },
+      { "do": "together", "level": ["older"], "steps": [
+        { "do": "prop", "id": "b2", "action": "badge", "text": "3" },
+        { "do": "say", "who": "chintoo", "line": "Three!" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "point", "to": "b3", "ms": 1000 },
+      { "do": "together", "level": ["younger"], "steps": [
+        { "do": "prop", "id": "b3", "action": "badge", "text": "3" },
+        { "do": "say", "who": "chintoo", "line": "Three!" }
+      ] },
+      { "do": "together", "level": ["older"], "steps": [
+        { "do": "prop", "id": "b3", "action": "badge", "text": "4" },
+        { "do": "say", "who": "chintoo", "line": "Four!" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "point", "to": "b5", "ms": 1000, "level": ["older"] },
+      { "do": "together", "level": ["older"], "steps": [
+        { "do": "prop", "id": "b5", "action": "badge", "text": "5" },
+        { "do": "say", "who": "chintoo", "line": "Five!" }
+      ] },
+      { "do": "act", "who": "chintoo", "action": "react", "mood": "proud", "ms": 1200 },
+      { "do": "say", "who": "chintoo", "line": "Three apples!", "mood": "proud", "level": ["younger"] },
+      { "do": "say", "who": "chintoo", "line": "Five apples!", "mood": "proud", "level": ["older"] },
+      { "do": "say", "who": "mina", "line": "Three apples and two more make five!", "level": ["older"], "mood": "happy" },
+      { "do": "goto", "track": "picnic" }
+    ],
+
+    "picnic": [
+      { "do": "together", "steps": [
+        { "do": "prop", "id": "b1", "action": "badge", "text": "" },
+        { "do": "prop", "id": "b2", "action": "badge", "text": "" },
+        { "do": "prop", "id": "b3", "action": "badge", "text": "" },
+        { "do": "prop", "id": "b4", "action": "badge", "text": "" },
+        { "do": "prop", "id": "b5", "action": "badge", "text": "" }
+      ] },
+      { "do": "say", "who": "chintoo", "line": "One apple for you, Mina!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": { "x": 470, "y": 815 }, "ms": 1400 },
+      { "do": "act", "who": "chintoo", "action": "pickup", "prop": "b1", "ms": 900 },
+      { "do": "prop", "id": "b1", "action": "attach", "who": "chintoo" },
+      { "do": "act", "who": "chintoo", "action": "walk", "to": { "x": 860, "y": 815 }, "ms": 2600 },
+      { "do": "act", "who": "chintoo", "action": "give", "ms": 1200 },
+      { "do": "prop", "id": "b1", "action": "move", "to": { "x": 990, "y": 822 }, "ms": 700 },
+      { "do": "act", "who": "mina", "action": "peck", "ms": 900 },
+      { "do": "say", "who": "mina", "line": "Thank you, Chintoo! Yummy!", "mood": "happy" },
+      { "do": "act", "who": "chintoo", "action": "rub-tummy", "mood": "happy", "ms": 1600 },
+      { "do": "say", "who": "chintoo", "line": "Now my tummy is happy!", "mood": "happy" },
+      { "do": "together", "steps": [
+        { "do": "act", "who": "chintoo", "action": "dance", "ms": 2800 },
+        { "do": "act", "who": "mina", "action": "dance", "ms": 2800 },
+        { "do": "sound", "sound": "chime" }
+      ] },
+      { "do": "say", "who": "narrator", "line": "Chintoo and Mina had a happy apple picnic." },
+      { "do": "say", "who": "narrator", "line": "Sharing makes friends happy." },
+      { "do": "act", "who": "chintoo", "action": "turn", "face": "left" },
+      { "do": "together", "steps": [
+        { "do": "act", "who": "chintoo", "action": "wave", "ms": 2200 },
+        { "do": "act", "who": "mina", "action": "wave", "ms": 2200 },
+        { "do": "say", "who": "chintoo", "line": "Bye-bye! See you soon!", "mood": "happy" }
+      ] },
+      { "do": "wait", "ms": 1500 },
+      { "do": "end" }
+    ]
+  }
+}

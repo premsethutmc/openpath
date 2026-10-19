@@ -392,3 +392,57 @@ jobs:
             tools/english/out/simulation-*
             tools/english/out/bank-coverage.*
           if-no-files-found: ignore
+
+  kids:
+    name: OpenPath Kids (episode checks, branching tests, build, phone and tablet walkthrough)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        # a job's defaults.run replaces the workflow's: name the shell again, or `tests | tee log` hides failures
+        shell: bash
+        working-directory: kids
+    steps:
+      - uses: actions/checkout@v7
+      - name: CI self-check (a failing test must fail this job)
+        run: |
+          if (false | true); then echo "::error title=CI self-check::pipefail is off in this job"; exit 1; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/test-require-tests.sh"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: kids/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Episodes are valid and last 3–5 minutes
+        run: npm run validate | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Story branching and automatic continuation tests
+        run: |
+          npm test 2>&1 | tee test.log
+          ../.github/scripts/require-tests.sh test.log "OpenPath Kids story tests"
+      - name: Build (one self-contained page)
+        run: |
+          npm run build
+          test -s dist/index.html
+          if grep -Eo 'https?://[^"'"'"' )<]+' dist/index.html | grep -v 'www.w3.org'; then echo "::error::the player must not link or load anything from the network"; exit 1; fi
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Serve the build
+        run: |
+          nohup node scripts/serve.mjs > kids-web.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4180/healthz && break; sleep 1; done
+      - name: Walkthrough at Android phone and tablet sizes
+        env:
+          E2E_SHOTS: e2e/shots
+        run: |
+          npm run e2e 2>&1 | tee e2e.log
+          ../.github/scripts/require-tests.sh e2e.log "OpenPath Kids walkthrough"
+      - name: Keep the screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: kids-walkthrough-screenshots
+          path: kids/e2e/shots
+          if-no-files-found: ignore
