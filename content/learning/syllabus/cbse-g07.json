@@ -247,11 +247,25 @@
       {
        "id": "MATH.number.multi-multiplication",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.multiply-divide-powers-of-ten",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Patterns in products with powers of ten (47 × 300, × 10/100/1000) are already asked by aemult and aep10."
+      },
+      {
+       "id": "MATH.number.rounding",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Estimating large products (and the size of large quantities) by rounding to the greatest place is the new family avpest in the rounding competency (Grades 4–7)."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.multi-multiplication"
+      "MATH.number.multi-multiplication",
+      "MATH.number.multiply-divide-powers-of-ten",
+      "MATH.number.rounding"
      ]
     }
    ]

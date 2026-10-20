@@ -520,7 +520,14 @@
      ],
      "difficulty": "intro",
      "assessment": "auto",
-     "competencies": [],
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Telling straight from curved edges in drawn shapes (pictures) is abcurve in shape-properties; objects are covered by the new abobj in line-types, which is already mapped."
+      }
+     ],
      "proposed": [
       {
        "id": "MATH.geometry.line-types",
@@ -538,7 +545,8 @@
       }
      ],
      "mapped": [
-      "MATH.geometry.line-types"
+      "MATH.geometry.line-types",
+      "MATH.geometry.shape-properties"
      ]
     },
     {

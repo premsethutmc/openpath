@@ -201,10 +201,17 @@
       {
        "id": "MATH.geometry.shapes",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Sorting everyday objects into those that roll (round) and those that slide (flat faces) is exactly what abroll asks; it belongs to shape-properties, which this outcome is not mapped to. Naming the solids stays with aasolid (MATH.geometry.shapes)."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.shape-properties",
       "MATH.geometry.shapes"
      ]
     },

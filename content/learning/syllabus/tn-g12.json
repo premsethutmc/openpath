@@ -138,12 +138,19 @@
       {
        "id": "MATH.algebra.matrices",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The 2 × 2 inverse and the 3 × 3 adjoint are computed there; the 3 × 3 inverse is the new family auinv."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.determinants",
-      "MATH.algebra.matrices"
+      "MATH.algebra.matrices",
+      "MATH.matrices.adjoint-inverse"
      ]
     },
     {
@@ -466,11 +473,18 @@
       {
        "id": "MATH.number.complex",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.complex-polar-form",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "asarg (principal argument, the step to polar/Euler form) and aspolm (multiplying and dividing in polar form) assess exactly the missing part; the outcome is mapped only to MATH.number.complex."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.complex"
+      "MATH.number.complex",
+      "MATH.number.complex-polar-form"
      ]
     },
     {
@@ -1284,10 +1298,17 @@
       {
        "id": "MATH.coordinate.space-lines",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.skew-line-distance",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The shortest distance between skew lines and between parallel lines is asked by asskew and asparl3, in a competency the outcome is not mapped to; the equations of lines and their point of intersection are new families asleq and asint3 in MATH.coordinate.space-lines."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.coordinate.skew-line-distance",
       "MATH.coordinate.space-lines"
      ]
     },
@@ -2181,11 +2202,18 @@
       {
        "id": "MATH.calculus.differential-equations",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "aqd2rel already asks for the differential equation y″ + py′ + qy = 0 obtained by eliminating the arbitrary constants A and B from a two-constant family; the outcome is only mapped to MATH.calculus.differential-equations."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.calculus.differential-equations"
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.higher-derivatives"
      ]
     },
     {
@@ -2227,11 +2255,18 @@
       {
        "id": "MATH.calculus.differential-equations",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.homogeneous-de",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "aqhom solves homogeneous first-order equations with y = vx; the outcome is not mapped to that competency."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.calculus.differential-equations"
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.homogeneous-de"
      ]
     },
     {

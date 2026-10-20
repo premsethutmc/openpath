@@ -1170,10 +1170,17 @@
       {
        "id": "MATH.measurement.sectors",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The perimeter of a sector (and arc length) is asked by aisector (b09, ask 2), in circle-area, which the outcome is not mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.measurement.circle-area",
       "MATH.measurement.sectors"
      ]
     },
@@ -1199,10 +1206,17 @@
       {
        "id": "MATH.measurement.rectangle-area",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "aipara asks the area (and perimeter) of a parallelogram from base and height, the missing part of this outcome."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.measurement.parallelogram-rhombus-area",
       "MATH.measurement.rectangle-area",
       "MATH.measurement.triangle-area"
      ]
@@ -1591,12 +1605,26 @@
       {
        "id": "MATH.algebra.pattern-rules",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.sequences.explicit-recursive-rules",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Grade 9 sequence patterns (multiplicative and mixed rules t(n+1) = r t(n) + d, two-term recursions) are asked by ahrec and ahfib, which belong to another competency."
+      },
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Non-linear patterns (squares, triangular, cube and doubling numbers) with further terms predicted are affig."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.algebra.figurate-numbers",
       "MATH.algebra.growing-patterns",
-      "MATH.algebra.pattern-rules"
+      "MATH.algebra.pattern-rules",
+      "MATH.sequences.explicit-recursive-rules"
      ]
     },
     {
@@ -2231,6 +2259,12 @@
       {
        "id": "MATH.number.factors-multiples",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Step-by-step prime factorisation is assessed by ajpf (prime-factorisation competency), which the outcome is not mapped to."
       }
      ],
      "proposed": [
@@ -2254,6 +2288,7 @@
      ],
      "mapped": [
       "MATH.number.factors-multiples",
+      "MATH.number.prime-factorisation",
       "MATH.number.primes",
       "MATH.reasoning.algorithms-flowcharts"
      ]
@@ -2275,11 +2310,18 @@
       {
        "id": "MATH.number.euclid-algorithm",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.algorithms-flowcharts",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Euclid's subtraction algorithm is akeuclid (where the repeated-subtraction game ends = the HCF); the outcome is mapped only to euclid-algorithm."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.euclid-algorithm"
+      "MATH.number.euclid-algorithm",
+      "MATH.reasoning.algorithms-flowcharts"
      ]
     },
     {
@@ -2398,7 +2440,14 @@
      ],
      "difficulty": "core",
      "assessment": "human",
-     "competencies": [],
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The proof that the diagonals of a parallelogram bisect each other is the existing written task wr:tpf:diagonals in triangle-proof; no new content is needed."
+      }
+     ],
      "proposed": [
       {
        "id": "MATH.geometry.parallelogram-proofs",
@@ -2420,7 +2469,8 @@
       }
      ],
      "mapped": [
-      "MATH.geometry.parallelogram-proofs"
+      "MATH.geometry.parallelogram-proofs",
+      "MATH.geometry.triangle-proof"
      ]
     },
     {

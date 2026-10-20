@@ -204,10 +204,17 @@
       {
        "id": "MATH.number.rational-numbers",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.integer-multiply",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Multiplying integers by the sign rules is ajimul and dividing integers is the new ajidiv, both in integer-multiply; the outcome is mapped only to rational-numbers."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.integer-multiply",
       "MATH.number.rational-numbers"
      ]
     },
@@ -826,10 +833,17 @@
       {
        "id": "MATH.reasoning.multi-step",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.maps-directions",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The new route families (paths described with directions and a scale; the shortest route through a road table) and the written route task wr:map-route-choose are in maps-directions, which this outcome (mapped to positions and multi-step) does not list."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.maps-directions",
       "MATH.geometry.positions",
       "MATH.reasoning.multi-step"
      ]
@@ -1137,11 +1151,18 @@
       {
        "id": "MATH.number.exponents",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Expressing a number as a product of primes is asked by ajpf; the prime-power (index) form is the new avppf in the mapped exponents competency."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.exponents",
+      "MATH.number.prime-factorisation",
       "MLY.pow.whole"
      ]
     },

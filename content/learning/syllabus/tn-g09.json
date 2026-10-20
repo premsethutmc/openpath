@@ -893,10 +893,17 @@
       {
        "id": "MATH.geometry.triangle-proof",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Classifying quadrilaterals is assessed by afquad and afkind (quadrilateral-classification); the outcome is mapped to quadrilaterals (angle families) and triangle-proof only."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.quadrilateral-classification",
       "MATH.geometry.quadrilaterals",
       "MATH.geometry.triangle-proof"
      ]

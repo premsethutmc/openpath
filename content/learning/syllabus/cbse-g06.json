@@ -1378,11 +1378,18 @@
       {
        "id": "MATH.number.fraction-add",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-add-like",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Adding (and subtracting) fractions with like denominators is already asked by fadd, whose competency the outcome is not mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.fraction-add"
+      "MATH.number.fraction-add",
+      "MATH.number.fraction-add-like"
      ]
     }
    ]

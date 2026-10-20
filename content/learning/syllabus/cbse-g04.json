@@ -293,10 +293,17 @@
       {
        "id": "MATH.geometry.solid-views",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Views of block buildings (afview: squares seen from the top, front and side of a building of stacked cubes) and top/front views of solids (afnet) live in the nets competency; the outcome is mapped only to solid-views (Grade 8), whose family counts faces of prisms."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.nets",
       "MATH.geometry.solid-views"
      ]
     },
@@ -643,10 +650,17 @@
       {
        "id": "MATH.number.thousands",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.hundreds",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Regrouping such as 14 tens as 1 hundred 4 tens (numbers built from 10 to 19 tens or ones) is abreg; making 1000 is already ad1000."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.hundreds",
       "MATH.number.thousands"
      ]
     },

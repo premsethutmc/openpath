@@ -231,11 +231,18 @@
       {
        "id": "MATH.algebra.inequalities",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Writing sets of real numbers in interval notation is apintch (and interval operations apintop); neighbourhoods of a point are the new family aenbhd."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.inequalities"
+      "MATH.algebra.inequalities",
+      "MATH.sets-relations.real-intervals"
      ]
     },
     {
@@ -284,10 +291,17 @@
       {
        "id": "MATH.algebra.inverse-functions",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.function-operations",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Composition of functions (evaluating f∘g and finding the composite of two functions) is assessed by these families of the function-operations competency, which the outcome is not mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.algebra.function-operations",
       "MATH.algebra.inverse-functions"
      ]
     },
@@ -479,12 +493,19 @@
       {
        "id": "MATH.algebra.quadratic-discriminant",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.vieta-relations",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Forming the quadratic whose roots are α + k, kα or α² from a given quadratic is the family apvform (Vieta relations); the outcome is mapped only to the discriminant and quadratic-solving competencies."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.quadratic-discriminant",
-      "MATH.algebra.quadratics"
+      "MATH.algebra.quadratics",
+      "MATH.algebra.vieta-relations"
      ]
     },
     {
@@ -779,10 +800,17 @@
       {
        "id": "MATH.trigonometry.identities",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.trigonometry.compound-angle-identities",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Applying compound, multiple and sub-multiple angle formulas is assessed in the compound-angle-identities competency (exact values of A ± B, double angles, product-to-sum, half angles, simplifying with the sum formulas); the outcome is mapped only to trigonometric functions and identities, which have"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.trigonometry.compound-angle-identities",
       "MATH.trigonometry.functions",
       "MATH.trigonometry.identities"
      ]
@@ -1524,11 +1552,18 @@
       {
        "id": "MATH.algebra.matrices",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.matrices.transpose-symmetry",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "As for tn-g10-c03-o08: the transpose is assessed in the transpose-symmetry competency, which this outcome is not mapped to; classifying matrices by type is now apmtype."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.matrices"
+      "MATH.algebra.matrices",
+      "MATH.matrices.transpose-symmetry"
      ]
     },
     {
@@ -1599,11 +1634,18 @@
       {
        "id": "MATH.algebra.determinants",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.polygon-area",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Area of a triangle and collinearity from vertices (determinant formula) already exist there; products of determinants are in audt3."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.determinants"
+      "MATH.algebra.determinants",
+      "MATH.coordinate.polygon-area"
      ]
     }
    ]
@@ -1721,12 +1763,19 @@
       {
        "id": "MATH.coordinate.space-coordinates",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.vectors.direction-cosines",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "atdc asks for the direction cosines of the vector joining two points (the unit vector's components, from direction ratios); the outcome is mapped only to space-coordinates and vectors.algebra."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.coordinate.space-coordinates",
-      "MATH.vectors.algebra"
+      "MATH.vectors.algebra",
+      "MATH.vectors.direction-cosines"
      ]
     },
     {
@@ -1993,11 +2042,18 @@
       {
        "id": "MATH.calculus.derivative-rules",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.implicit-parametric-differentiation",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Implicit, parametric and logarithmic differentiation already exist in that competency; inverse trigonometric derivatives and 'with respect to another function' are the new family audinv."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.calculus.derivative-rules"
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.implicit-parametric-differentiation"
      ]
     },
     {
@@ -2352,11 +2408,18 @@
       {
        "id": "MATH.probability.conditional",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.independent-events",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Testing independence (P(A ∩ B) = P(A) × P(B)) is already asked by atindt and used by atindu, in a competency the outcome is not mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.probability.conditional"
+      "MATH.probability.conditional",
+      "MATH.probability.independent-events"
      ]
     },
     {

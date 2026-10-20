@@ -511,11 +511,18 @@
       {
        "id": "MATH.geometry.angle-measure",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.angles-as-turns",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Measuring a turn in eighths of a full turn is exactly what afturn asks (turns between the eight compass directions as k/8); the outcome is mapped only to angle-measure, whose family reads a degree protractor."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.geometry.angle-measure"
+      "MATH.geometry.angle-measure",
+      "MATH.geometry.angles-as-turns"
      ]
     },
     {
@@ -744,6 +751,12 @@
       {
        "id": "MATH.algebra.pattern-rules",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.parity",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The parity of even + even and even + odd sums is exactly what akpar asks (deciding whether sums and products are even or odd); the sums of consecutive numbers are the new family aecons."
       }
      ],
      "proposed": [
@@ -766,7 +779,8 @@
      ],
      "mapped": [
       "MATH.algebra.pattern-rules",
-      "MATH.number.even-odd"
+      "MATH.number.even-odd",
+      "MATH.reasoning.parity"
      ]
     },
     {
@@ -1007,10 +1021,17 @@
       {
        "id": "MLY.mult.derive",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The product strategies (doubling and halving, nearest multiples) are Grade 5 work on multi-digit products, written in the Grade 4 multi-multiplication competency rather than the Grade 3 multiplication-tables competency the outcome is mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.multi-multiplication",
       "MLY.mult.derive"
      ]
     },

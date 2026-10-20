@@ -13084,6 +13084,2572 @@
    "serves": [
     "tn-g10-c04-o04"
    ]
+  },
+  {
+   "id": "wr:pv-number-words",
+   "competency": "MATH.number.place-value-tens",
+   "kind": "explanation",
+   "grade": 3,
+   "prompt": "Write each number in words, as you would on a receipt or a cheque: (a) 47, (b) 90, (c) 16, (d) 63, (e) 85. Then write the number that the words 'seventy-two' stand for, and say which digit shows the tens.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "tens-words",
+     "criterion": "Writes (a) forty-seven, (d) sixty-three and (e) eighty-five correctly, with the tens word first",
+     "points": 2
+    },
+    {
+     "id": "special",
+     "criterion": "Writes (b) ninety and (c) sixteen correctly (no 'ninety-zero', no 'sixty' for 16)",
+     "points": 1
+    },
+    {
+     "id": "back",
+     "criterion": "Writes 72 for 'seventy-two' and says the 7 shows the tens",
+     "points": 1
+    }
+   ],
+   "guidance": "Spelling mistakes that keep the number clear (for example 'fourty-seven') lose no marks at Grade 3, but point out the usual spelling. A hyphen is not required. Writing digits one by one ('four seven') or swapping the digits ('seventy-four' for 47) does not earn the mark for that number.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g03-c01-o02"
+   ]
+  },
+  {
+   "id": "wr:shp-fold-cut",
+   "competency": "MATH.geometry.shapes",
+   "kind": "explanation",
+   "grade": 3,
+   "prompt": "Take a square sheet of paper (an old notebook page cut square is fine). (1) Fold it once from one corner to the opposite corner. What shape is the folded paper? (2) Unfold it and fold it once so that one edge lies on the opposite edge. What shape is it now? (3) Cut along the second fold. What two shapes do you get, and how do you know? Write what you did and what you found at each step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "triangle",
+     "criterion": "Says the corner-to-corner fold makes a triangle (3 sides, 3 corners)",
+     "points": 1
+    },
+    {
+     "id": "rectangle",
+     "criterion": "Says the edge-to-edge fold makes a rectangle (4 sides, opposite sides equal, square corners)",
+     "points": 1
+    },
+    {
+     "id": "cut",
+     "criterion": "Says the cut gives two equal rectangles and gives a reason (they lie exactly on top of each other, or they have the same sides)",
+     "points": 1
+    },
+    {
+     "id": "describe",
+     "criterion": "Describes each fold or cut clearly enough that someone else could repeat it",
+     "points": 1
+    }
+   ],
+   "guidance": "The task stands in for making shapes by folding and cutting in class: a teacher who watches the child fold may mark the same rubric from the paper itself. Accept 'long box shape' for rectangle if the child also describes 4 sides with opposite sides the same. A child who has no square paper may describe what would happen; mark the description.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g03-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:len-estimate-metres",
+   "competency": "MATH.measurement.standard-length",
+   "kind": "explanation",
+   "grade": 4,
+   "prompt": "Choose three things at home or at school: one about half a metre long, one about a metre long and one longer than 2 metres (for example a school bag, a door's width, a classroom wall). For each one: (1) write your estimate in metres, using ½ m or ¼ m where it helps; (2) measure it with a metre tape or a metre string and write the measurement; (3) say whether your estimate was too long, too short or close, and by how much.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "estimates",
+     "criterion": "Gives an estimate in metres for each of the three things before measuring, using halves or quarters of a metre where suitable",
+     "points": 1
+    },
+    {
+     "id": "measures",
+     "criterion": "Gives a sensible measurement for each, in metres (and centimetres if needed), and says how it was measured (from one end, tape held straight)",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "Compares each estimate with its measurement correctly (too long, too short or close) and gives the difference",
+     "points": 1
+    },
+    {
+     "id": "sizes",
+     "criterion": "The three things fit the sizes asked for (about ½ m, about 1 m, more than 2 m)",
+     "points": 1
+    }
+   ],
+   "guidance": "Real measuring is hands-on; the note records it. Accept 0.5 m and 50 cm for half a metre and 0.25 m or 25 cm for a quarter. An estimate within about a quarter of a metre of the measurement can be called close. If no tape is available, a 1 m string marked at the half and quarters is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g04-c06-o01"
+   ]
+  },
+  {
+   "id": "wr:mass-own-estimate",
+   "competency": "MATH.measurement.standard-mass",
+   "kind": "explanation",
+   "grade": 4,
+   "prompt": "Pick two things in your kitchen or classroom: one you think is lighter than 1 kg and one you think is heavier than 1 kg. (1) Hold each one and write your own estimate of its weight (in g or kg). (2) Check each one on a balance or a kitchen scale, using a 1 kg packet (such as salt or sugar) if you have no weights, and write what you find. (3) Was each estimate too heavy, too light or close? What will you remember for your next estimate?",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "own",
+     "criterion": "Writes an estimate, with a unit, for each thing before checking",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "Describes checking sensibly: the thing on one pan and the 1 kg packet (or weights) on the other, or reads a kitchen scale; reports what was seen",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "Says correctly for each whether the estimate was too heavy, too light or close",
+     "points": 1
+    },
+    {
+     "id": "reflect",
+     "criterion": "Gives one sensible lesson for the next estimate (for example 'big things can be light', or uses a benchmark like an egg or the 1 kg packet)",
+     "points": 1
+    }
+   ],
+   "guidance": "The learner's own estimate is the point; a wrong estimate checked honestly earns full marks. With only a balance and a 1 kg packet, 'heavier than 1 kg' or 'lighter than 1 kg' is an acceptable check. Units must be given (500 g, 2 kg), not bare numbers.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g04-c08-o01",
+    "tn-g04-t2-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:len-mm-segments",
+   "competency": "MATH.measurement.standard-length",
+   "kind": "drawing",
+   "grade": 5,
+   "prompt": "With a ruler and a sharp pencil, draw three line segments on the plain sheet: AB = 6 cm 4 mm, CD = 87 mm and EF = 4.5 cm. Label the ends. Then measure your eraser and your pencil to the nearest millimetre. In the note, write the two measurements in mm and in cm and mm, and say how you made sure your segments have the right length.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "segments",
+     "criterion": "Draws AB, CD and EF with lengths within 1 mm of 64 mm, 87 mm and 45 mm, ends labelled",
+     "points": 2
+    },
+    {
+     "id": "measure",
+     "criterion": "Gives sensible eraser and pencil lengths to the nearest mm, written correctly both ways (for example 132 mm = 13 cm 2 mm)",
+     "points": 1
+    },
+    {
+     "id": "method",
+     "criterion": "Explains starting at the 0 mark (not the end of the ruler) and counting the small marks after the last whole centimetre",
+     "points": 1
+    }
+   ],
+   "guidance": "Allow ±1 mm on each drawn segment for the thickness of the line. A segment started from the edge of the ruler instead of 0 is a common slip; mention it in feedback. Accept 6.4 cm for 6 cm 4 mm.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g05-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:map-route-choose",
+   "competency": "MATH.geometry.maps-directions",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "The picture is a road map seen from above, with North at the top; each square side is 1 km. Nila cycles from Home to the Library along the roads. (1) Describe two different routes she can take, giving for each the direction of every part (North, South, East or West) and how many km it is. (2) Which route is shorter, and by how much? (3) The road past the Market is very busy. Which route would you suggest, and why?",
+   "answer": "text",
+   "figure": {
+    "type": "plane",
+    "quadrant": 1,
+    "range": 7,
+    "points": [
+     [
+      1,
+      1,
+      "Home"
+     ],
+     [
+      5,
+      1,
+      "Market"
+     ],
+     [
+      5,
+      5,
+      "Library"
+     ],
+     [
+      1,
+      3,
+      "Temple"
+     ],
+     [
+      3,
+      3,
+      "Park"
+     ],
+     [
+      3,
+      5,
+      "School"
+     ]
+    ],
+    "segments": [
+     [
+      [
+       1,
+       1
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     [
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       5
+      ]
+     ],
+     [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     [
+      [
+       1,
+       3
+      ],
+      [
+       3,
+       3
+      ]
+     ],
+     [
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     [
+      [
+       3,
+       5
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    ]
+   },
+   "rubric": [
+    {
+     "id": "route1",
+     "criterion": "Describes the Market route correctly: 4 km East to the Market, then 4 km North to the Library, 8 km in all",
+     "points": 1
+    },
+    {
+     "id": "route2",
+     "criterion": "Describes the other route correctly: 2 km North to the Temple, 2 km East to the Park, 2 km North to the School, 2 km East to the Library, 8 km in all",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "Says the two routes are the same length (8 km), so neither is shorter",
+     "points": 1
+    },
+    {
+     "id": "suitable",
+     "criterion": "Suggests the route through the Temple and Park (avoiding the busy road) and gives that reason",
+     "points": 1
+    }
+   ],
+   "guidance": "Both routes are 8 km, so 'choose the shortest' cannot decide and the busy road decides the most suitable route; credit a child who notices this. Accept 'right/left' turns only if the directions are also correct in compass terms. A route that leaves the roads (cuts across squares) does not earn the route mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g07-t1-c06-o02"
+   ]
+  },
+  {
+   "id": "wr:story9-own",
+   "competency": "MATH.reasoning.operation-choice",
+   "kind": "explanation",
+   "grade": 1,
+   "prompt": "Make up two small number stories of your own and tell them (or ask a grown-up to write them down). (1) A story where some more come, with numbers that make 9 or less. (2) A story where some go away, starting with 9 or less. For each story, say the answer and whether you added or took away.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "add-story",
+     "criterion": "Tells a story in which things are put together or more come, using numbers whose total is 9 or less",
+     "points": 1
+    },
+    {
+     "id": "take-story",
+     "criterion": "Tells a story in which some go away, starting from a number that is 9 or less",
+     "points": 1
+    },
+    {
+     "id": "answers",
+     "criterion": "Gives the right answer to each of their own stories",
+     "points": 1
+    },
+    {
+     "id": "operation",
+     "criterion": "Says 'add' (or 'more', 'altogether') for the first story and 'take away' (or 'left') for the second",
+     "points": 1
+    }
+   ],
+   "guidance": "Oral answers written down by an adult are fine. Any everyday setting counts (sweets, birds, children). If a story's numbers go past 9, the story point is not earned but the answer and operation points can be. Counting on fingers or drawing dots to get the answer is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g01-c05-o03"
+   ]
+  },
+  {
+   "id": "wr:tmd-stories",
+   "competency": "MATH.reasoning.operation-choice",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Write three word problems of your own and solve each one. (a) A problem about time and money (for example, a bus ticket and how long the bus takes). (b) A problem about distance and money (for example, an auto fare for so many kilometres). (c) One problem that uses time, money and distance together. Show your working for each answer.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "time-money",
+     "criterion": "(a) A sensible problem that needs both a time and an amount of money, with a correct answer and units",
+     "points": 1
+    },
+    {
+     "id": "distance-money",
+     "criterion": "(b) A sensible problem that needs both a distance and an amount of money, with a correct answer and units",
+     "points": 1
+    },
+    {
+     "id": "all-three",
+     "criterion": "(c) A problem in which time, money and distance are all needed to get the answer",
+     "points": 1
+    },
+    {
+     "id": "working",
+     "criterion": "Each answer is worked out correctly with the operations shown (adding, subtracting, multiplying or dividing as the story needs)",
+     "points": 1
+    }
+   ],
+   "guidance": "The problems should be the child's own and set in everyday life. A problem that only mentions a quantity without using it does not count as combining it. Small slips in the arithmetic lose only the working point for that problem. Rupees and paise, hours and minutes, km and m are all fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g05-t2-c05-o05"
+   ]
+  },
+  {
+   "id": "wr:more-sharers",
+   "competency": "MATH.number.fraction-comparison",
+   "kind": "explanation",
+   "grade": 4,
+   "prompt": "Two rotis of the same size are on the table. One roti is shared equally among 2 children, the other equally among 4 children. (1) What fraction of a roti does each child get in each group? (2) In which group does each child get more? (3) Explain why sharing among more children gives each child a smaller share. Draw a picture to help.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "fractions",
+     "criterion": "(1) Says 1/2 for the group of 2 and 1/4 for the group of 4",
+     "points": 1
+    },
+    {
+     "id": "more",
+     "criterion": "(2) Says each child in the group of 2 gets more",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(3) Explains that the same roti is cut into more equal pieces, so each piece is smaller (more sharers, smaller shares)",
+     "points": 1
+    },
+    {
+     "id": "picture",
+     "criterion": "Draws the two rotis cut into 2 and 4 equal parts",
+     "points": 1
+    }
+   ],
+   "guidance": "Look for the idea that the whole stays the same while the number of equal parts grows. 'Because 4 is bigger than 2, 1/4 is bigger' is the common mistake and earns no point for (2) or (3). Informal language is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g04-c05-o02"
+   ],
+   "canvas": {
+    "grid": false
+   }
+  },
+  {
+   "id": "wr:est-weight",
+   "competency": "MATH.reasoning.estimate-check",
+   "kind": "explanation",
+   "grade": 3,
+   "prompt": "Malar holds a 1 kg packet of salt in one hand and her school bag in the other. The bag feels about three times as heavy. (1) About how heavy is her bag? (2) Name one thing at home that you think weighs less than 1 kg and one that weighs more than 5 kg. (3) How can Malar check her guess about the bag?",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "guess",
+     "criterion": "(1) Gives about 3 kg, using the 1 kg packet",
+     "points": 1
+    },
+    {
+     "id": "examples",
+     "criterion": "(2) Names a sensible thing under 1 kg (a pencil box, a banana) and one over 5 kg (a sack of rice, a gas cylinder)",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "(3) Describes weighing the bag on a scale or a balance (for example, against 1 kg weights) and comparing with the guess",
+     "points": 1
+    }
+   ],
+   "guidance": "For (1) accept 3 kg or 'a little less/more than 3 kg' if linked to the packet. For (3) any real way of weighing counts; 'ask someone' does not. Informal language is fine.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g03-c11-o04"
+   ]
+  },
+  {
+   "id": "wr:sym:fold-cut",
+   "competency": "MATH.geometry.symmetry-lines",
+   "kind": "drawing",
+   "grade": 4,
+   "prompt": "Take a square sheet of paper. Fold it in half from left to right, then fold it in half again from top to bottom, so you have a small square four layers thick. (a) Before cutting, draw on the folded square where you will cut: a small triangle cut from the corner where the two folds meet, and a half-circle cut from the middle of one folded edge. (b) Draw what you think the whole sheet will look like when you open it out: show every hole and its shape. (c) Now cut and open the sheet. In the note, say whether your drawing was right, how many holes there are, and which fold lines are lines of symmetry of the design.",
+   "rubric": [
+    {
+     "id": "triangle",
+     "criterion": "Predicts that the corner cut opens into one shape in the centre of the sheet (a diamond/square shape made of four triangles)",
+     "points": 1
+    },
+    {
+     "id": "half-circle",
+     "criterion": "Predicts that the half-circle on a folded edge opens into two full circles (one on each side of the other fold), placed as mirror images",
+     "points": 1
+    },
+    {
+     "id": "symmetry",
+     "criterion": "Draws the opened design symmetrical about both fold lines",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "After cutting, compares the real design with the prediction and names both fold lines as lines of symmetry",
+     "points": 1
+    }
+   ],
+   "guidance": "Marking is on the drawings (a), (b) and the note (c). A cut at the corner where both folds meet opens into ONE hole at the centre; a cut on one folded edge (away from the corner) goes through two layers on each side and opens into TWO holes; a cut away from all folds would make FOUR holes. Accept rough drawings if the number, position and shape of the holes are right.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "answer": "drawing",
+   "serves": [
+    "cbse-g04-c11-o02"
+   ]
+  },
+  {
+   "id": "wr:sym:solids",
+   "competency": "MATH.geometry.symmetry-lines",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Look at (or hold) a cube such as a dice without its dots, a cylinder such as a new pencil-box tin, a cone such as a party cap, and a ball. A solid is symmetrical when a flat cut through it (or a mirror held against it) splits it into two halves that are mirror images. (a) For each solid, describe in words one way to cut it into two matching halves. (b) Which of these solids can be cut into matching halves in very many different ways? Explain why. (c) Name one everyday object in your home that has no such symmetry and say why.",
+   "rubric": [
+    {
+     "id": "cube",
+     "criterion": "Describes a symmetric cut of the cube (e.g. through the middle, parallel to a face, or through two opposite edges)",
+     "points": 1
+    },
+    {
+     "id": "cyl-cone",
+     "criterion": "Describes a symmetric cut of the cylinder and of the cone (e.g. straight down through the centre of the circular face)",
+     "points": 1
+    },
+    {
+     "id": "many",
+     "criterion": "Says the ball (and also the cylinder and cone, through their axis) can be cut in very many ways, because every cut through the centre (or axis) gives matching halves",
+     "points": 1
+    },
+    {
+     "id": "none",
+     "criterion": "Gives an object with no symmetry (e.g. a cup with one handle on a slant, a shoe, a teapot with spout and handle at different heights) and a sensible reason",
+     "points": 1
+    }
+   ],
+   "guidance": "This is an observation task for Grade 5; accept everyday language such as 'cut straight down the middle'. A cup with a handle is symmetric through the handle; accept it only if the learner explains a feature that breaks the symmetry.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "answer": "explanation",
+   "serves": [
+    "tn-g05-t1-c01-o03"
+   ]
+  },
+  {
+   "id": "wr:ineq:integer-line",
+   "competency": "MATH.algebra.inequalities",
+   "kind": "drawing",
+   "grade": 7,
+   "prompt": "(a) x is an integer. Solve 3x − 4 < 8 and −2 ≤ x, and list the solution set. (b) Draw a number line from −4 to 6 on the sheet and show the solution set by putting a dot on each integer in it. (c) In the note, explain why the dots stop where they do at each end, and how the picture would change if x could be any real number.",
+   "rubric": [
+    {
+     "id": "solve",
+     "criterion": "Solves 3x − 4 < 8 to get x < 4",
+     "points": 1
+    },
+    {
+     "id": "set",
+     "criterion": "Lists the solution set {−2, −1, 0, 1, 2, 3}",
+     "points": 1
+    },
+    {
+     "id": "line",
+     "criterion": "Marks exactly the integers −2 to 3 on a correctly numbered number line",
+     "points": 1
+    },
+    {
+     "id": "ends",
+     "criterion": "Explains that −2 is included (≤) and 4 is not (<), and that for real x the solution would be the whole segment from −2 (filled dot) to 4 (open dot)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept the set written in any order. For (c), the key idea is that integer solutions are separate dots while real solutions fill the segment between the end points.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "answer": "drawing",
+   "serves": [
+    "tn-g07-t3-c03-o04"
+   ]
+  },
+  {
+   "id": "wr:ang:protractor-draw-measure",
+   "competency": "MATH.geometry.angle-measure",
+   "kind": "drawing",
+   "grade": 6,
+   "prompt": "Use a ruler and a protractor on the drawing pad. (a) Draw ∠PQR = 65°, with arm QR drawn first along a ruler line. (b) Draw ∠XYZ = 140°. (c) Draw any triangle ABC with sides of about 6 cm, 7 cm and 8 cm. Measure each of its three angles with your protractor and write the measurements next to the angles. (d) Add your three measurements and say why the total should be close to 180°.",
+   "rubric": [
+    {
+     "id": "draw-acute",
+     "criterion": "∠PQR is drawn with the protractor's centre on Q and its base line on QR, and measures 65° (within 2°)",
+     "points": 1
+    },
+    {
+     "id": "draw-obtuse",
+     "criterion": "∠XYZ measures 140° (within 2°); the correct (outer or inner) scale was used, so it is obtuse, not 40°",
+     "points": 1
+    },
+    {
+     "id": "measure",
+     "criterion": "The three angles of the triangle are measured and labelled, each within 2° of the true angle of the drawn triangle",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "The measurements add to 178°–182° and the learner says the angles of a triangle make 180° (a straight angle), so a total far from 180° means a misreading",
+     "points": 1
+    }
+   ],
+   "guidance": "Check the drawn angles with your own protractor. The commonest slip is reading the wrong scale (drawing 40° for 140°, or 115° for 65°): give no mark for that part. Accept measurements within 2° of the drawing.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c02-o03",
+    "tn-g06-t1-c04-o02"
+   ]
+  },
+  {
+   "id": "wr:ang:eighths-tool",
+   "competency": "MATH.geometry.angle-measure",
+   "kind": "drawing",
+   "grade": 5,
+   "prompt": "Cut out a paper circle and fold it in half, then in half again, then in half once more, to make an angle tool with 8 equal parts. (a) On the drawing pad, draw any triangle and one four-sided shape with a corner that is not a right angle. (b) Lay your tool on each corner and write how many eighths of a full turn the corner is (to the nearest eighth). (c) Use your tool to draw an angle of 3 eighths of a turn, and say which compass turn it matches (for example, from North clockwise to South-East).",
+   "rubric": [
+    {
+     "id": "tool",
+     "criterion": "Says (or shows) that the folds make 8 equal angles, each one eighth of a full turn",
+     "points": 1
+    },
+    {
+     "id": "measure",
+     "criterion": "Each corner is given as a number of eighths that matches the drawing (to the nearest eighth); a right angle is 2 eighths",
+     "points": 1
+    },
+    {
+     "id": "draw",
+     "criterion": "The angle of 3 eighths is drawn correctly (between a right angle and a straight angle)",
+     "points": 1
+    },
+    {
+     "id": "compass",
+     "criterion": "Matches 3 eighths with a correct compass turn, e.g. North to South-East clockwise",
+     "points": 1
+    }
+   ],
+   "guidance": "Making the tool is hands-on; mark only what can be seen on the pad and in the written answers. Accept any correct compass example.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g05-c03-o03"
+   ]
+  },
+  {
+   "id": "wr:pyth:converse-proof",
+   "competency": "MATH.geometry.pythagoras",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "Prove the converse of the Pythagoras theorem: in △ABC, if AC² = AB² + BC², then ∠B = 90°. (Hint: draw a second triangle PQR with ∠Q = 90°, PQ = AB and QR = BC.) Give the reason for each step. Then use the converse to decide whether a triangle with sides 20 cm, 21 cm and 29 cm is right-angled.",
+   "rubric": [
+    {
+     "id": "construct",
+     "criterion": "Constructs △PQR with ∠Q = 90°, PQ = AB and QR = BC",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "Uses the Pythagoras theorem in △PQR: PR² = PQ² + QR² = AB² + BC² = AC², so PR = AC",
+     "points": 1
+    },
+    {
+     "id": "congruent",
+     "criterion": "Concludes △ABC ≅ △PQR by SSS, giving the three pairs of equal sides",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "Deduces ∠B = ∠Q = 90° (corresponding parts of congruent triangles)",
+     "points": 1
+    },
+    {
+     "id": "use",
+     "criterion": "Checks 20² + 21² = 400 + 441 = 841 = 29², so the triangle is right-angled, with the right angle opposite the 29 cm side",
+     "points": 1
+    }
+   ],
+   "guidance": "Award each step only with its reason. A proof that assumes the angle is 90° and then checks the squares (the theorem, not its converse) gets no marks for the proof part.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c04-o05"
+   ]
+  },
+  {
+   "id": "wr:circ:area-derivation",
+   "competency": "MATH.measurement.circle-area",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "Show why the area of a circle of radius r is πr². Imagine cutting the circle into many equal sectors (like slices of a pizza) and arranging them, pointing up and down alternately, in a row. (a) Describe the shape the row looks more and more like as the slices get thinner. (b) Say how long and how high that shape is, in terms of r and the circumference 2πr. (c) Use this to derive the formula A = πr². (d) Use the formula to find the area of a circle of radius 14 cm (π = 22/7).",
+   "rubric": [
+    {
+     "id": "shape",
+     "criterion": "Says the row looks more and more like a rectangle (or a parallelogram)",
+     "points": 1
+    },
+    {
+     "id": "length",
+     "criterion": "Its length is half the circumference, πr, because half the arcs are on top and half on the bottom",
+     "points": 1
+    },
+    {
+     "id": "height",
+     "criterion": "Its height is the radius r",
+     "points": 1
+    },
+    {
+     "id": "derive",
+     "criterion": "Concludes area = πr × r = πr²",
+     "points": 1
+    },
+    {
+     "id": "use",
+     "criterion": "Finds 22/7 × 14 × 14 = 616 cm²",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a clear sketch with labels instead of words for (a) and (b). Accept the 'rings' argument (unrolling thin rings into a triangle of base 2πr and height r) as an equivalent derivation.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c06-o07"
+   ]
+  },
+  {
+   "id": "wr:circ:pi-constant",
+   "competency": "MATH.measurement.circle-area",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "(a) Explain why circumference ÷ diameter is the same number for every circle. (Hint: every circle is an enlargement of every other circle.) (b) Name this constant and give its value to two decimal places. (c) Write two values of π used in the past, saying who used them, and which is closer to the true value. (d) A regular hexagon drawn inside a circle of radius r has perimeter 6r. Explain how this shows that π is more than 3.",
+   "rubric": [
+    {
+     "id": "scaling",
+     "criterion": "Explains that enlarging a circle by a scale factor multiplies both its circumference and its diameter by that factor, so their ratio does not change",
+     "points": 1
+    },
+    {
+     "id": "name",
+     "criterion": "Names π and gives 3.14",
+     "points": 1
+    },
+    {
+     "id": "history",
+     "criterion": "Gives two historical values with their sources (e.g. Aryabhata 62832/20000 = 3.1416; 22/7; Egypt 256/81; Zu Chongzhi 355/113) and correctly says which is closer",
+     "points": 1
+    },
+    {
+     "id": "hexagon",
+     "criterion": "Says the circle's circumference is longer than the hexagon's perimeter 6r = 3 × diameter, so C ÷ d > 3",
+     "points": 1
+    }
+   ],
+   "guidance": "For (a), an explanation by measuring several circles is acceptable only if it also says why the ratio must stay the same (enlargement); measuring alone gets half the mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c06-o01"
+   ]
+  },
+  {
+   "id": "wr:num:fta-statement",
+   "competency": "MATH.number.euclid-algorithm",
+   "kind": "explanation",
+   "grade": 10,
+   "prompt": "(a) State the Fundamental Theorem of Arithmetic. (b) Ravi writes 360 = 8 × 45 and Meena writes 360 = 2² × 90. Neither is a prime factorisation. Write the prime factorisation of 360 and explain what the theorem tells you about any other way of writing 360 as a product of primes. (c) Use the theorem to explain why 4ⁿ can never end in the digit 0 for any natural number n.",
+   "rubric": [
+    {
+     "id": "state",
+     "criterion": "States that every composite number can be written as a product of primes, and that this factorisation is unique apart from the order of the factors",
+     "points": 1
+    },
+    {
+     "id": "factorise",
+     "criterion": "Writes 360 = 2³ × 3² × 5",
+     "points": 1
+    },
+    {
+     "id": "unique",
+     "criterion": "Explains that any other product of primes for 360 has exactly the same primes the same number of times, only in another order",
+     "points": 1
+    },
+    {
+     "id": "zero",
+     "criterion": "Explains that a number ending in 0 has 5 as a prime factor, but 4ⁿ = 2²ⁿ has only the prime 2, so by uniqueness it cannot have the factor 5",
+     "points": 1
+    }
+   ],
+   "guidance": "The uniqueness part of the statement is essential for the first mark. In (c), the argument must use the uniqueness of the factorisation, not just examples.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c01-o01"
+   ]
+  },
+  {
+   "id": "wr:quad:special-proofs",
+   "competency": "MATH.geometry.quadrilaterals",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "Give a reason for every step. (a) Prove that the diagonals of a rectangle are equal. (b) Prove that the diagonals of a rhombus cut each other at right angles. (c) A quadrilateral has diagonals that bisect each other and are equal. Prove that it is a rectangle.",
+   "rubric": [
+    {
+     "id": "rect-diag",
+     "criterion": "(a) Shows △ABC ≅ △DCB (or similar) by SAS using AB = DC, ∠B = ∠C = 90° and the common side BC, so AC = DB",
+     "points": 1
+    },
+    {
+     "id": "rhombus-bisect",
+     "criterion": "(b) Uses that the diagonals of a parallelogram (so of a rhombus) bisect each other",
+     "points": 1
+    },
+    {
+     "id": "rhombus-right",
+     "criterion": "(b) Shows two triangles at the centre are congruent by SSS (equal sides of the rhombus), so the angles at the centre are equal and, being a linear pair, each is 90°",
+     "points": 1
+    },
+    {
+     "id": "converse",
+     "criterion": "(c) Shows it is a parallelogram (diagonals bisect each other), then uses congruent triangles (SSS, equal diagonals) to get two adjacent angles equal; as they add to 180°, each is 90°",
+     "points": 2
+    }
+   ],
+   "guidance": "Accept equivalent congruence arguments; each congruence must name the rule and the three pairs of equal parts.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g09-c04-o02"
+   ]
+  },
+  {
+   "id": "wr:idt:a-minus-b-area",
+   "competency": "MATH.algebra.identities",
+   "kind": "drawing",
+   "grade": 7,
+   "prompt": "On the squared sheet, draw a square of side a = 9 squares. (a) Mark a square of side a − b with b = 3 in one corner, and the two strips of width b along two sides. (b) Explain, using your picture, why the area of the small square is a² − 2ab + b²: say what is taken away and why b² has to be added back. (c) Use the identity (a − b)² = a² − 2ab + b² to work out 98².",
+   "rubric": [
+    {
+     "id": "draw",
+     "criterion": "Draws the 9 × 9 square with a 6 × 6 square in a corner and the two 9 × 3 strips (overlapping in a 3 × 3 square)",
+     "points": 1
+    },
+    {
+     "id": "take-away",
+     "criterion": "Explains that the two strips of area ab each are taken from a²",
+     "points": 1
+    },
+    {
+     "id": "add-back",
+     "criterion": "Explains that the b × b corner square was taken away twice (it lies in both strips), so b² is added back once",
+     "points": 1
+    },
+    {
+     "id": "use",
+     "criterion": "Works out 98² = (100 − 2)² = 10000 − 400 + 4 = 9604",
+     "points": 1
+    }
+   ],
+   "guidance": "Check the picture against the numbers: 6 × 6 = 36 = 81 − 54 + 9. Accept a labelled sketch with a and b in place of the numbers for (b).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g07-t3-c03-o02"
+   ]
+  },
+  {
+   "id": "wr:quad:define-4gon",
+   "competency": "MATH.geometry.quadrilaterals",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "(a) Write a precise definition of a quadrilateral (a 4-gon). (b) For each figure, say whether it is a quadrilateral and why: (i) four points A, B, C, D with A, B and C on one straight line, joined in order; (ii) four segments AB, BC, CD, DA where AB crosses CD; (iii) a figure ABCD with ∠B = 210°. (c) Explain the difference between a convex and a non-convex quadrilateral, and say which of the figures in (b) are convex.",
+   "rubric": [
+    {
+     "id": "define",
+     "criterion": "Defines a quadrilateral as a closed figure made of four line segments, meeting only at their end points, with no three of the four corners on one straight line",
+     "points": 2
+    },
+    {
+     "id": "examples",
+     "criterion": "(i) not a quadrilateral (three corners in a line: a triangle); (ii) not a quadrilateral (the sides cross); (iii) a quadrilateral",
+     "points": 1
+    },
+    {
+     "id": "convex",
+     "criterion": "Explains convex (every inside angle less than 180°, both diagonals inside) and says (iii) is non-convex",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept any equivalent wording of the definition, as long as it rules out crossing sides and three corners in a line.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c12-o01"
+   ]
+  },
+  {
+   "id": "wr:base:early-systems",
+   "competency": "MATH.number.number-bases",
+   "kind": "explanation",
+   "grade": 8,
+   "prompt": "Long before our place-value numerals, people recorded numbers in other ways. (a) Tally marks: show how 23 is recorded with tally marks grouped in fives. (b) Egyptian hieroglyphs used a separate picture for 1, 10, 100, 1000, …, repeating each picture as often as needed (a stroke for 1, a heel bone for 10, a coil of rope for 100, a lotus flower for 1000). Describe in words how 2,345 would be written, and how many pictures it needs. (c) The Babylonians grouped in sixties: one wedge sign stood for 1 and another for 10, and the same signs were reused for each group of 60. Explain how they could write 75, and why a number such as 3601 could be confused with 61 before they had a sign for an empty place. (d) Give two advantages of our base-ten place-value system over these systems, using your answers to (a)–(c).",
+   "rubric": [
+    {
+     "id": "tally",
+     "criterion": "Records 23 as four groups of five (each group four strokes with a crossing stroke) and three single strokes",
+     "points": 1
+    },
+    {
+     "id": "egypt",
+     "criterion": "Describes 2,345 as 2 lotus flowers, 3 coils, 4 heel bones and 5 strokes, and counts 14 pictures",
+     "points": 1
+    },
+    {
+     "id": "babylon",
+     "criterion": "Writes 75 as one group of sixty (a 1-wedge) followed by 15 (one 10-sign and five 1-wedges), and explains that 3601 (1 × 3600 + 0 × 60 + 1) and 61 (1 × 60 + 1) look alike when the empty place is not shown",
+     "points": 1
+    },
+    {
+     "id": "advantages",
+     "criterion": "Gives two advantages of base-ten place value with reasons, e.g. only ten symbols are needed; the position shows the value so large numbers stay short; zero marks an empty place so there is no ambiguity; written calculation is easy",
+     "points": 1
+    }
+   ],
+   "guidance": "The descriptions of the old systems are given in the question; marks are for applying them correctly and for the comparison. Accept drawings of the symbols in place of words. In (c) any clear explanation that the same marks can stand for different numbers without a placeholder earns the mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t1-c03-o01"
+   ]
+  },
+  {
+   "id": "wr:freq:tally-table",
+   "competency": "MATH.statistics.data-frequency",
+   "kind": "drawing",
+   "grade": 6,
+   "prompt": "Class 6 asked each of 30 students: 'Which fruit do you like best?' The answers, in the order they were given, were: mango, banana, guava, mango, apple, mango, banana, papaya, mango, guava, banana, mango, apple, mango, guava, banana, mango, papaya, mango, banana, apple, guava, mango, banana, mango, guava, papaya, mango, banana, apple. (a) On the sheet, organise the answers in a table with three columns: Fruit, Tally marks, Frequency. Make the tally marks in groups of five. (b) Check that your frequencies add up to 30. (c) Which fruit is liked best, and by how many more students than the next most popular fruit? (d) Write one question of your own that you could ask your class to collect data like this, and say how you would record the answers.",
+   "rubric": [
+    {
+     "id": "table",
+     "criterion": "Draws a table with a row for each of the five fruits and columns for the fruit, tally marks and frequency",
+     "points": 1
+    },
+    {
+     "id": "tallies",
+     "criterion": "Tally marks are correct and grouped in fives (mango 11, banana 7, guava 5, apple 4, papaya 3) and match the frequency column",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "Adds the frequencies to 30 and uses this as a check",
+     "points": 1
+    },
+    {
+     "id": "read",
+     "criterion": "States that mango is liked best, by 4 more students than banana",
+     "points": 1
+    },
+    {
+     "id": "own-question",
+     "criterion": "Writes a clear question that can be answered by each student (e.g. how they come to school) and describes recording it with tally marks",
+     "points": 1
+    }
+   ],
+   "guidance": "Award the tally mark only if the groups of five are shown. Collecting the data in (d) is planned, not carried out; the app cannot check real collection, so a sensible plan earns the mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g06-c04-o01",
+    "tn-g06-t1-c05-o01",
+    "tn-g07-t3-c05-o01"
+   ]
+  },
+  {
+   "id": "wr:disp:infographic-story",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "kind": "drawing",
+   "grade": 8,
+   "prompt": "A school recorded how its 600 students travel to school: walk 210, cycle 120, school bus 150, auto-rickshaw 75, car 45. (a) On the sheet, build an infographic for the school notice board: it must include one accurate chart of the data (a bar chart or a pie chart with correct angles), a title, and at least two short facts written as numbers or percentages. (b) Show the working for any percentages or angles you use. (c) Write a short 'data story' of three or four sentences: what the data shows, one comparison that surprised you, and one suggestion for the school based on the data. (d) Name one thing a spreadsheet would make easier if the school repeated this survey every year.",
+   "rubric": [
+    {
+     "id": "chart",
+     "criterion": "The chart is accurate: bars to a stated scale, or pie angles walk 126°, cycle 72°, bus 90°, auto 45°, car 27°",
+     "points": 1
+    },
+    {
+     "id": "design",
+     "criterion": "The infographic has a title, labels and at least two correct facts (e.g. 35% walk; walkers and cyclists together are 55%)",
+     "points": 1
+    },
+    {
+     "id": "working",
+     "criterion": "Shows the working for the percentages or angles (part ÷ 600 × 100, or × 360)",
+     "points": 1
+    },
+    {
+     "id": "story",
+     "criterion": "The story states what the data shows, makes a correct comparison and gives a suggestion that follows from the data",
+     "points": 1
+    },
+    {
+     "id": "spreadsheet",
+     "criterion": "Gives a sensible use of a spreadsheet (e.g. totals and percentages recalculated automatically, charts redrawn, years compared)",
+     "points": 1
+    }
+   ],
+   "guidance": "Building the display with a spreadsheet cannot be done in the app; part (d) asks only how one would help. Accept any accurate chart type that suits the data; a 3-D or misleading chart does not earn the chart mark.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g08-t2-c05-o04"
+   ]
+  },
+  {
+   "id": "wr:real:madhava-pi",
+   "competency": "MATH.number.real-numbers",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "Madhava of Sangamagrama (Kerala, about 1400) found that π/4 = 1 − 1/3 + 1/5 − 1/7 + 1/9 − …, going on for ever. (a) Work out 4 × (1 − 1/3), 4 × (1 − 1/3 + 1/5) and 4 × (1 − 1/3 + 1/5 − 1/7) as fractions and as decimals to three places. (b) Describe how these approximations move compared with π ≈ 3.1416: are they above or below, and do they get closer? (c) Each approximation is a fraction. Explain why no single fraction from the series can be exactly π, given that π is irrational, and what this tells you about the decimal expansion of π. (d) 22/7 and 3.14 are often used for π. Explain why neither of them equals π exactly.",
+   "rubric": [
+    {
+     "id": "sums",
+     "criterion": "Finds 8/3 ≈ 2.667, 52/15 ≈ 3.467 and 304/105 ≈ 2.895",
+     "points": 1
+    },
+    {
+     "id": "pattern",
+     "criterion": "States that the approximations are alternately below and above π and get closer to it",
+     "points": 1
+    },
+    {
+     "id": "irrational",
+     "criterion": "Explains that every partial sum is rational, but π is irrational, so it cannot equal any of them; π is only the limit of the sums",
+     "points": 1
+    },
+    {
+     "id": "decimal",
+     "criterion": "Concludes that the decimal expansion of π neither terminates nor recurs, and that 22/7 and 3.14 are rational approximations, not π itself",
+     "points": 1
+    }
+   ],
+   "guidance": "Pupils are not expected to prove that π is irrational (that is beyond Grade 9); they use the fact. Accept decimals rounded correctly to two or three places.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c03-o06"
+   ]
+  },
+  {
+   "id": "wr:para:converse-tests",
+   "competency": "MATH.geometry.parallelogram-proofs",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "Prove each test for a parallelogram. Give a reason for every statement. (a) In quadrilateral ABCD, AB = CD and BC = DA. Draw the diagonal AC and prove that ABCD is a parallelogram. (b) In quadrilateral PQRS, ∠P = ∠R and ∠Q = ∠S. Using the angle sum of a quadrilateral, prove that PQRS is a parallelogram. (c) In quadrilateral WXYZ, the diagonals WY and XZ meet at O, with OW = OY and OX = OZ. Prove that WXYZ is a parallelogram.",
+   "rubric": [
+    {
+     "id": "sss",
+     "criterion": "(a) Proves ΔABC ≅ ΔCDA by SSS (AC common)",
+     "points": 1
+    },
+    {
+     "id": "alt-a",
+     "criterion": "(a) Uses the equal angles ∠BAC = ∠DCA and ∠BCA = ∠DAC as alternate angles to conclude AB ∥ DC and BC ∥ AD",
+     "points": 1
+    },
+    {
+     "id": "angles",
+     "criterion": "(b) From ∠P + ∠Q + ∠R + ∠S = 360° and the given equalities, gets ∠P + ∠Q = 180° and ∠P + ∠S = 180°",
+     "points": 1
+    },
+    {
+     "id": "co-interior",
+     "criterion": "(b) Concludes the opposite sides are parallel because co-interior angles add to 180°",
+     "points": 1
+    },
+    {
+     "id": "diagonals",
+     "criterion": "(c) Proves ΔWOX ≅ ΔYOZ by SAS (vertically opposite angles at O) and deduces WX ∥ ZY from equal alternate angles; similarly for the other pair, or shows one pair equal and parallel",
+     "points": 1
+    }
+   ],
+   "guidance": "Any correct order of reasoning is accepted. A step without its reason (SSS, alternate angles, angle sum, vertically opposite angles) does not earn its point.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c12-o03"
+   ]
+  },
+  {
+   "id": "wr:mid:converse-proof",
+   "competency": "MATH.geometry.midpoint-theorem",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "(a) Prove the converse of the midpoint theorem: in ΔABC, D is the midpoint of AB and the line through D parallel to BC meets AC at E; prove that E is the midpoint of AC. (Hint: draw through C a line parallel to AB meeting DE extended at F.) Give a reason for every step. (b) In ΔPQR, M is the midpoint of PQ and the line through M parallel to QR meets PR at N. PR = 13 cm and QR = 9 cm. Using (a) and the midpoint theorem, find PN and MN.",
+   "rubric": [
+    {
+     "id": "construct",
+     "criterion": "Draws CF ∥ AB meeting DE extended at F and notes that DBCF is a parallelogram, so CF = DB = AD",
+     "points": 1
+    },
+    {
+     "id": "congruent",
+     "criterion": "Proves ΔADE ≅ ΔCFE by ASA or AAS (alternate angles, vertically opposite angles, AD = CF)",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes AE = EC, so E is the midpoint of AC",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(b) Finds PN = 6.5 cm (N is the midpoint of PR) and MN = 4.5 cm (half of QR)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept a proof by the basic proportionality theorem only if the pupil has proved it earlier in the course. Reasons are needed for each congruence step.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c12-o04"
+   ]
+  },
+  {
+   "id": "wr:sim:converses",
+   "competency": "MATH.geometry.similarity",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "(a) Prove the converse of the basic proportionality theorem: in ΔABC, D is on AB and E is on AC with AD/DB = AE/EC; prove that DE ∥ BC. (Hint: suppose DE is not parallel to BC, draw DE′ ∥ BC with E′ on AC, and use the theorem itself.) (b) Prove the converse of the angle bisector theorem: in ΔABC, D is on BC with BD/DC = AB/AC; prove that AD bisects ∠BAC. (Hint: let the bisector of ∠A meet BC at D′ and compare BD′/D′C with BD/DC.) (c) In ΔPQR, S is on QR with QS = 4 cm, SR = 6 cm, PQ = 8 cm and PR = 12 cm. Does PS bisect ∠QPR? Give your reason.",
+   "rubric": [
+    {
+     "id": "bpt-assume",
+     "criterion": "(a) Assumes DE is not parallel, draws DE′ ∥ BC and applies the BPT to get AD/DB = AE′/E′C",
+     "points": 1
+    },
+    {
+     "id": "bpt-conclude",
+     "criterion": "(a) Deduces AE/EC = AE′/E′C, so E and E′ divide AC in the same ratio and coincide; hence DE ∥ BC",
+     "points": 1
+    },
+    {
+     "id": "bis-assume",
+     "criterion": "(b) Takes the true bisector AD′ and uses the angle bisector theorem: BD′/D′C = AB/AC",
+     "points": 1
+    },
+    {
+     "id": "bis-conclude",
+     "criterion": "(b) Concludes BD′/D′C = BD/DC, so D′ = D and AD bisects ∠A",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(c) QS/SR = 4/6 = 2/3 and PQ/PR = 8/12 = 2/3, so PS bisects ∠QPR by (b)",
+     "points": 1
+    }
+   ],
+   "guidance": "The key step in (a) and (b) is that a point dividing a segment internally in a given ratio is unique; the pupil should say so. Accept a direct proof of (b) by drawing through C a line parallel to DA.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c06-o03",
+    "tn-g10-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:gap:same-segment",
+   "competency": "MATH.geometry.circle-theorems",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "A and B are points on a circle with centre O, and C and D are two points on the major arc AB (on the same side of the chord AB). (a) Using the theorem that the angle an arc subtends at the centre is twice the angle it subtends at any point on the remaining part of the circle, prove that ∠ACB = ∠ADB, that is, angles in the same segment are equal. (b) If ∠AOB = 110°, find ∠ADB and say which result you use. Give a reason for every step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "centre-c",
+     "criterion": "(a) States ∠AOB = 2∠ACB, naming the theorem (arc AB, C on the remaining part of the circle)",
+     "points": 1
+    },
+    {
+     "id": "centre-d",
+     "criterion": "(a) States ∠AOB = 2∠ADB for the same arc AB",
+     "points": 1
+    },
+    {
+     "id": "conclude",
+     "criterion": "(a) Concludes ∠ACB = ½∠AOB = ∠ADB, so angles in the same segment are equal",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(b) ∠ADB = 55°, with the reason (half the angle at the centre, or the same segment as C)",
+     "points": 1
+    }
+   ],
+   "guidance": "A learner may handle the case of the minor arc only; that is enough here because C and D are on the major arc. Award 'conclude' only when the two equations are combined explicitly. In (b) accept 55° with either the centre-angle or the same-segment reason.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c05-o05"
+   ]
+  },
+  {
+   "id": "wr:gap:equal-chords-angles",
+   "competency": "MATH.geometry.circle-theorems",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "O is the centre of a circle. (a) AB and CD are equal chords. Prove that ∠AOB = ∠COD (equal chords subtend equal angles at the centre). (b) Prove the converse: if ∠AOB = ∠COD, then AB = CD. (c) M is the midpoint of a chord AB that is not a diameter. Prove that OM is perpendicular to AB. Name the congruence rule you use each time and give a reason for every step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "sss",
+     "criterion": "(a) Triangles AOB and COD: OA = OC, OB = OD (radii) and AB = CD (given), so they are congruent by SSS",
+     "points": 1
+    },
+    {
+     "id": "cpct-a",
+     "criterion": "(a) Hence ∠AOB = ∠COD (corresponding parts of congruent triangles)",
+     "points": 1
+    },
+    {
+     "id": "sas",
+     "criterion": "(b) OA = OC, OB = OD (radii) and ∠AOB = ∠COD, so the triangles are congruent by SAS, giving AB = CD",
+     "points": 1
+    },
+    {
+     "id": "midpoint",
+     "criterion": "(c) Triangles OAM and OBM are congruent by SSS (OA = OB, AM = BM, OM common)",
+     "points": 1
+    },
+    {
+     "id": "right",
+     "criterion": "(c) ∠OMA = ∠OMB and they add up to 180°, so each is 90°: OM ⟂ AB",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept 'CPCT' for corresponding parts. In (c) the step that the two equal angles form a straight angle is needed for 'right'. A learner who only quotes the theorems without the congruent triangles earns no points for that part.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c05-o03",
+    "tn-g09-c04-o03"
+   ]
+  },
+  {
+   "id": "wr:gap:equidistant-converse",
+   "competency": "MATH.geometry.circle-theorems",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "O is the centre of a circle of radius r. (a) AB and CD are chords with OM ⟂ AB at M, ON ⟂ CD at N and OM = ON. Prove that AB = CD (chords equidistant from the centre are equal). (b) A chord is at distance d from O. Show that its length is 2√(r² − d²), and use this to explain why, of two chords of the same circle, the longer one is nearer to the centre. Give a reason for every step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "rhs",
+     "criterion": "(a) Triangles OMA and ONC are right-angled at M and N with OA = OC (radii) and OM = ON, so they are congruent by RHS",
+     "points": 1
+    },
+    {
+     "id": "halves",
+     "criterion": "(a) Hence AM = CN, and since the perpendicular from the centre bisects a chord, AB = 2AM = 2CN = CD",
+     "points": 1
+    },
+    {
+     "id": "length",
+     "criterion": "(b) By Pythagoras in the triangle formed by the radius, the distance and half the chord: half chord = √(r² − d²), so the chord is 2√(r² − d²)",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "(b) As d increases, r² − d² decreases, so the chord gets shorter: the longer chord has the smaller d, that is, it is nearer the centre",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b) a correct argument in words or with two distances d₁ < d₂ is acceptable. Award 'halves' only if the bisecting property (or a second pair of congruent triangles) is used.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c05-o04"
+   ]
+  },
+  {
+   "id": "wr:gap:cyclic-converse",
+   "competency": "MATH.geometry.circle-theorems",
+   "kind": "proof",
+   "grade": 9,
+   "prompt": "(a) Prove that if a pair of opposite angles of a quadrilateral ABCD add up to 180°, then A, B, C and D lie on one circle. (Hint: draw the circle through A, B and D. If C is not on it, let the line DC meet the circle again at C′, and compare ∠BCD with ∠BC′D.) (b) In the quadrilateral PQRS, ∠P = 72°, ∠Q = 95°, ∠R = 108°. Decide whether P, Q, R and S are concyclic, with a reason.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "circle",
+     "criterion": "(a) Draws the circle through A, B, D and supposes C is not on it; takes C′ where DC (produced) meets the circle",
+     "points": 1
+    },
+    {
+     "id": "cyclic",
+     "criterion": "(a) ABC′D is cyclic, so ∠A + ∠BC′D = 180°; with ∠A + ∠BCD = 180° this gives ∠BC′D = ∠BCD",
+     "points": 1
+    },
+    {
+     "id": "contradiction",
+     "criterion": "(a) But an exterior angle of triangle BCC′ equals the sum of the two opposite interior angles, so ∠BC′D ≠ ∠BCD unless C′ = C: contradiction, so C is on the circle",
+     "points": 1
+    },
+    {
+     "id": "decide",
+     "criterion": "(b) ∠P + ∠R = 180°, so PQRS is cyclic by the converse (and ∠S = 85°, ∠Q + ∠S = 180° as a check)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept the proof with C inside or outside the circle; one case argued fully is enough. Award 'decide' only with the reason (opposite angles supplementary).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c05-o06"
+   ]
+  },
+  {
+   "id": "wr:gap:named-methods",
+   "competency": "MATH.algebra.linear-systems",
+   "kind": "explanation",
+   "grade": 10,
+   "prompt": "Solve the pair of equations 3x + 2y = 11 and 2x − 3y = −10 in three ways, showing every step: (a) by substitution, (b) by elimination, (c) by cross-multiplication (first write both equations in the form a x + b y + c = 0). Check your answer in both equations, and in one sentence say which method you found quickest here and why.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "substitution",
+     "criterion": "(a) Makes one variable the subject (for example y = (11 − 3x)/2), substitutes into the other equation and solves: x = 1, then y = 4",
+     "points": 1
+    },
+    {
+     "id": "elimination",
+     "criterion": "(b) Multiplies to make one coefficient equal (e.g. ×3 and ×2: 9x + 6y = 33, 4x − 6y = −20), adds or subtracts, finds 13x = 13, x = 1, y = 4",
+     "points": 1
+    },
+    {
+     "id": "cross",
+     "criterion": "(c) Writes 3x + 2y − 11 = 0, 2x − 3y + 10 = 0 and x/(20 − 33) = y/(−22 − 30) = 1/(−9 − 4), giving x = 1, y = 4",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "Checks (1, 4) in both equations and comments on the quickest method with a reason",
+     "points": 1
+    }
+   ],
+   "guidance": "Each method must be shown as that method: a correct answer reached by a different method earns no point for that part. Accept any equivalent arrangement of cross-multiplication (all three denominators with consistent signs).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g09-c13-o05",
+    "cbse-g10-c03-o04",
+    "cbse-g10-c03-o05",
+    "tn-g09-c03-o07"
+   ]
+  },
+  {
+   "id": "wr:gap:poly-sqrt-long-division",
+   "competency": "MATH.algebra.polynomial-square-root",
+   "kind": "explanation",
+   "grade": 10,
+   "prompt": "Find the square root of p(x) = 4x⁴ − 12x³ + 25x² − 24x + 16 (a) by the long-division method, showing each divisor and each subtraction, and (b) by writing p(x) as the square of a trinomial and comparing coefficients (the factorisation method). Show that both methods give the same answer and check it by squaring.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "first",
+     "criterion": "(a) Takes 2x² as the first term of the root and subtracts 4x⁴",
+     "points": 1
+    },
+    {
+     "id": "second",
+     "criterion": "(a) Uses the divisor 4x² − 3x, gets −3x as the next term, subtracts −12x³ + 9x²",
+     "points": 1
+    },
+    {
+     "id": "third",
+     "criterion": "(a) Uses the divisor 4x² − 6x + 4, gets +4, and the remainder is 0: root 2x² − 3x + 4",
+     "points": 1
+    },
+    {
+     "id": "compare",
+     "criterion": "(b) Writes (ax² + bx + c)² and compares coefficients: a = 2, b = −3, c = 4",
+     "points": 1
+    },
+    {
+     "id": "check",
+     "criterion": "Squares 2x² − 3x + 4 to get p(x) back (either sign of the root accepted)",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept −(2x² − 3x + 4) as well. The long division must show the doubled divisors; a root found only by guessing earns only 'check'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c03-o04"
+   ]
+  },
+  {
+   "id": "wr:gap:construct-altitude",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Construct a triangle ABC in which BC = 5.5 cm, ∠BAC = 60° and the altitude from A to BC is 4 cm. (a) Draw BC and construct the arc of the circle on BC that contains all points P with ∠BPC = 60° (use the tangent at B making 60° with BC). (b) Draw the line parallel to BC at a distance of 4 cm on the same side as the arc; A is a point where it meets the arc. (c) In the note, explain why ∠BAC = 60° and why the altitude is 4 cm. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "arc",
+     "criterion": "(a) Ray at 60° to BC at B (below BC), its perpendicular at B, and the perpendicular bisector of BC meeting it at the centre O; the arc on the other side drawn",
+     "points": 1
+    },
+    {
+     "id": "parallel",
+     "criterion": "(b) A line parallel to BC at 4 cm (e.g. a perpendicular of 4 cm at a point of BC, then a parallel) on the side of the arc",
+     "points": 1
+    },
+    {
+     "id": "apex",
+     "criterion": "(b) A taken where the parallel meets the arc and the triangle drawn",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(c) Angle in the alternate segment equals the 60° angle (or ∠BOC = 120°), and the distance between parallel lines is 4 cm, the altitude",
+     "points": 1
+    }
+   ],
+   "guidance": "Either intersection of the parallel line with the arc gives a correct triangle. If the parallel line does not meet the arc the learner should say so (it does here). Mark the drawing together with the note: a step or feature counts when it is drawn or described and is in the right place; a freehand drawing is judged on intent and key features, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c04-o04"
+   ]
+  },
+  {
+   "id": "wr:gap:construct-bisector",
+   "competency": "MATH.geometry.construction-triangles",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "Construct a triangle PQR in which QR = 6 cm, ∠QPR = 50°, and the bisector of ∠QPR meets QR at D with QD = 4 cm. (a) Draw QR and construct the circle on which every point P with ∠QPR = 50° lies (the segment on QR above it). (b) Construct the point E where the perpendicular bisector of QR meets the arc BELOW QR, mark D on QR with QD = 4 cm, and join ED; produce it to meet the upper arc at P. (c) In the note, explain why PD bisects ∠QPR. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe and on your reason why they work.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "circle",
+     "criterion": "(a) The circle through Q and R on which QR subtends 50° drawn (centre on the perpendicular bisector of QR, found with a 50° tangent at Q)",
+     "points": 1
+    },
+    {
+     "id": "e",
+     "criterion": "(b) E found as the midpoint of the arc QR not containing P (on the perpendicular bisector of QR, below QR)",
+     "points": 1
+    },
+    {
+     "id": "p",
+     "criterion": "(b) D marked with QD = 4 cm and ED produced to meet the circle at P; the triangle PQR drawn",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "(c) Arcs QE and ER are equal, so they subtend equal angles at P: ∠QPE = ∠EPR, so PE (through D) bisects ∠QPR",
+     "points": 1
+    }
+   ],
+   "guidance": "A construction that guesses P by measuring angles earns only 'circle'. The reason in (c) may use equal chords QE = ER subtending equal angles at the circumference. Mark the drawing together with the note: a step or feature counts when it is drawn or described and is in the right place; a freehand drawing is judged on intent and key features, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c04-o04"
+   ]
+  },
+  {
+   "id": "wr:gap:trig-derive",
+   "competency": "MATH.trigonometry.ratios",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "(a) ABC is an equilateral triangle with side 2a, and AD is perpendicular to BC. Find AD, and use triangle ABD to derive sin 30°, cos 30°, tan 30°, sin 60°, cos 60° and tan 60°. (b) Use an isosceles right-angled triangle with equal sides a to derive sin 45°, cos 45° and tan 45°. (c) Explain, by imagining an angle A in a right triangle with a fixed hypotenuse becoming smaller and smaller, why sin 0° = 0 and cos 0° = 1, and say why tan 90° is not defined.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "altitude",
+     "criterion": "(a) BD = a (AD bisects BC) and AD = √(4a² − a²) = a√3 by Pythagoras",
+     "points": 1
+    },
+    {
+     "id": "thirty-sixty",
+     "criterion": "(a) ∠BAD = 30°, ∠ABD = 60°: sin 30° = 1/2, cos 30° = √3/2, tan 30° = 1/√3, sin 60° = √3/2, cos 60° = 1/2, tan 60° = √3",
+     "points": 1
+    },
+    {
+     "id": "forty-five",
+     "criterion": "(b) Hypotenuse a√2, so sin 45° = cos 45° = 1/√2 and tan 45° = 1",
+     "points": 1
+    },
+    {
+     "id": "limits",
+     "criterion": "(c) As A → 0° the opposite side → 0 and the adjacent side → the hypotenuse, so sin 0° = 0, cos 0° = 1; at 90° the adjacent side is 0, so tan 90° = opposite/0 is not defined",
+     "points": 1
+    }
+   ],
+   "guidance": "The values must be derived from the triangles, not just stated; award 'thirty-sixty' only if each value is read from the sides of triangle ABD. Rationalised forms (√3/3, √2/2) are equally acceptable.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c08-o03"
+   ]
+  },
+  {
+   "id": "wr:gap:tree-diagram",
+   "competency": "MATH.probability.sample-space",
+   "kind": "drawing",
+   "grade": 10,
+   "prompt": "A coin is tossed, and then a spinner with three equal parts coloured red, green and blue is spun. (a) Draw a tree diagram showing all the outcomes, with a probability on each branch. (b) List the sample space S. (c) Find the probability of getting a head and a colour that is not blue, and the probability of getting a tail or red. Show how you use the tree.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "tree",
+     "criterion": "(a) First stage H and T (½ each); from each, three branches R, G, B (⅓ each)",
+     "points": 1
+    },
+    {
+     "id": "space",
+     "criterion": "(b) S = {HR, HG, HB, TR, TG, TB}, six equally likely outcomes",
+     "points": 1
+    },
+    {
+     "id": "event1",
+     "criterion": "(c) P(head and not blue) = 2/6 = 1/3",
+     "points": 1
+    },
+    {
+     "id": "event2",
+     "criterion": "(c) P(tail or red) = 4/6 = 2/3 (TR, TG, TB, HR), counting TR only once",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept branch probabilities written as fractions or decimals. The tree may be drawn left-to-right or top-to-bottom. Mark the drawing together with the note: a step or feature counts when it is drawn or described and is in the right place; a freehand drawing is judged on intent and key features, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c08-o04"
+   ]
+  },
+  {
+   "id": "wr:gap:trig-graphs",
+   "competency": "MATH.trigonometry.functions",
+   "kind": "sketch",
+   "grade": 11,
+   "prompt": "x in radians (π ≈ 3.14, π/2 ≈ 1.57). On the axes, sketch y = tan x for −3π/2 < x < 3π/2 (not at the asymptotes) and, in a different colour or with a label, y = sec x for the same x. Draw the vertical asymptotes as dashed lines and label them. In the note: state the domain and the range of tan x and of sec x, and the period of each.",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -5,
+      5
+     ],
+     "y": [
+      -5,
+      5
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "tan",
+     "criterion": "tan x: increasing branches through (0, 0) and (±π, 0), each between two asymptotes",
+     "points": 1
+    },
+    {
+     "id": "asymptotes",
+     "criterion": "Asymptotes at x = ±π/2 and ±3π/2 for both graphs",
+     "points": 1
+    },
+    {
+     "id": "sec",
+     "criterion": "sec x: U-shaped branches with minimum 1 at x = 0, ±2π and maximum −1 at x = ±π, never between −1 and 1",
+     "points": 1
+    },
+    {
+     "id": "domain",
+     "criterion": "Note: the domain of each is ℝ except x = (2n + 1)π/2, n ∈ ℤ",
+     "points": 1
+    },
+    {
+     "id": "range",
+     "criterion": "Note: range of tan x is ℝ, of sec x is (−∞, −1] ∪ [1, ∞); periods π and 2π",
+     "points": 1
+    }
+   ],
+   "guidance": "Degrees are not acceptable for the x-values. A graph of tan x that crosses an asymptote earns no point for 'tan'. Mark the drawing together with the note: a step or feature counts when it is drawn or described and is in the right place; a freehand drawing is judged on intent and key features, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c03-o03"
+   ]
+  },
+  {
+   "id": "wr:gap:double-angle-proof",
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "kind": "proof",
+   "grade": 11,
+   "prompt": "(a) Using double-angle formulas, prove that sin 2x/(1 + cos 2x) = tan x for every x at which both sides are defined. (b) Using a product-to-sum formula, prove that 2 sin 3x cos x − sin 4x = sin 2x. (c) Using the compound-angle and double-angle formulas, prove that cos 3A = 4 cos³A − 3 cos A. Name the formula used at each step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "double",
+     "criterion": "(a) sin 2x = 2 sin x cos x and 1 + cos 2x = 2cos²x, so the fraction is sin x/cos x = tan x",
+     "points": 1
+    },
+    {
+     "id": "p2s",
+     "criterion": "(b) 2 sin 3x cos x = sin 4x + sin 2x, so the left side is sin 2x",
+     "points": 1
+    },
+    {
+     "id": "compound",
+     "criterion": "(c) cos 3A = cos(2A + A) = cos 2A cos A − sin 2A sin A",
+     "points": 1
+    },
+    {
+     "id": "reduce",
+     "criterion": "(c) Substitutes cos 2A = 2cos²A − 1, sin 2A = 2 sin A cos A and sin²A = 1 − cos²A to reach 4cos³A − 3cos A",
+     "points": 1
+    }
+   ],
+   "guidance": "Each step needs its formula named or clearly written. In (a) also accept the route through tan x = sin 2x/(1 + cos 2x) from half-angle formulas.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c03-o05",
+    "tn-g11-c03-o03"
+   ]
+  },
+  {
+   "id": "wr:gap:inverse-graphs",
+   "competency": "MATH.trigonometry.inverse",
+   "kind": "sketch",
+   "grade": 12,
+   "prompt": "x in radians (π/2 ≈ 1.57). On the same axes: (1) draw y = sin x for −π/2 ≤ x ≤ π/2 and the line y = x; (2) draw y = sin⁻¹ x by reflecting your first curve in y = x. On a second sketch (or in another colour) draw y = tan⁻¹ x, with its horizontal asymptotes. Mark the end points of y = sin⁻¹ x. In the note: state the domain and the range of sin⁻¹ x and of tan⁻¹ x, and explain why the graph of an inverse function is the reflection of the restricted graph in y = x.",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -3,
+      3
+     ],
+     "y": [
+      -3,
+      3
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "sin",
+     "criterion": "y = sin x on [−π/2, π/2] from (−π/2, −1) to (π/2, 1)",
+     "points": 1
+    },
+    {
+     "id": "arcsin",
+     "criterion": "y = sin⁻¹ x from (−1, −π/2) to (1, π/2), the reflection in y = x",
+     "points": 1
+    },
+    {
+     "id": "arctan",
+     "criterion": "y = tan⁻¹ x through the origin, increasing, approaching y = ±π/2 (dashed asymptotes)",
+     "points": 1
+    },
+    {
+     "id": "domain-range",
+     "criterion": "Note: sin⁻¹ has domain [−1, 1], range [−π/2, π/2]; tan⁻¹ has domain ℝ, range (−π/2, π/2)",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Note: (a, b) on y = f(x) means (b, a) on the inverse, and swapping coordinates is reflecting in y = x",
+     "points": 1
+    }
+   ],
+   "guidance": "Learners commonly draw sin⁻¹ x beyond |x| = 1 or give tan⁻¹ a closed range. End points must be marked for 'arcsin'. Mark the drawing together with the note: a step or feature counts when it is drawn or described and is in the right place; a freehand drawing is judged on intent and key features, not on pixel precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g12-c02-o03",
+    "tn-g12-c04-o02"
+   ]
+  },
+  {
+   "id": "wr:gap:vector-trig-proof",
+   "competency": "MATH.vectors.products",
+   "kind": "proof",
+   "grade": 12,
+   "prompt": "(a) Let â = cos A î + sin A ĵ and b̂ = cos B î + sin B ĵ be unit vectors making angles A and B with the x-axis (A > B). Using the dot product, prove that cos(A − B) = cos A cos B + sin A sin B. (b) Using the cross product of the same vectors, prove that sin(A − B) = sin A cos B − cos A sin B. (c) A force F = 3î − ĵ + 2k̂ N acts at the point P(1, 2, −1). Find its torque about the point A(2, 0, 1), and its magnitude. Give a reason for each step.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "angle",
+     "criterion": "(a) The angle between â and b̂ is A − B and |â| = |b̂| = 1",
+     "points": 1
+    },
+    {
+     "id": "dot",
+     "criterion": "(a) â · b̂ = |â||b̂| cos(A − B) = cos A cos B + sin A sin B",
+     "points": 1
+    },
+    {
+     "id": "cross",
+     "criterion": "(b) b̂ × â = sin(A − B) k̂ (from |b̂||â| sin(A − B) and the right-hand rule) and, in components, (cos B sin A − sin B cos A) k̂",
+     "points": 1
+    },
+    {
+     "id": "torque",
+     "criterion": "(c) r = P − A = −î + 2ĵ − 2k̂, τ = r × F = 2î − 4ĵ − 5k̂, |τ| = √45 = 3√5 N m",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b) the order of the cross product must give a positive sin(A − B) for A > B; accept â × b̂ = −sin(A − B) k̂ with the sign handled. For (c) check: (−1, 2, −2) × (3, −1, 2) = (2·2 − (−2)(−1), (−2)(3) − (−1)(2), (−1)(−1) − 2·3) = (2, −4, −5).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c06-o01"
+   ]
+  },
+  {
+   "id": "wr:gap:jacobi",
+   "competency": "MATH.vectors.triple-products",
+   "kind": "proof",
+   "grade": 12,
+   "prompt": "(a) Using the expansion u × (v × w) = (u · w)v − (u · v)w, prove Jacobi's identity a × (b × c) + b × (c × a) + c × (a × b) = 0 for any vectors a, b, c. (b) Explain why |[a b c]| is the volume of the parallelepiped with edges a, b, c, and find the volume when a = î + ĵ, b = ĵ + k̂, c = î + k̂.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "expand",
+     "criterion": "(a) Expands each term: (a · c)b − (a · b)c, (b · a)c − (b · c)a, (c · b)a − (c · a)b",
+     "points": 1
+    },
+    {
+     "id": "cancel",
+     "criterion": "(a) Uses a · b = b · a etc. to show the six terms cancel in pairs, giving 0",
+     "points": 1
+    },
+    {
+     "id": "volume",
+     "criterion": "(b) |b × c| is the area of the base parallelogram and |a · (b × c)|/|b × c| is the height (the projection of a on the normal), so |[a b c]| = base × height",
+     "points": 1
+    },
+    {
+     "id": "value",
+     "criterion": "(b) [a b c] = 2, so the volume is 2 cubic units",
+     "points": 1
+    }
+   ],
+   "guidance": "For (b), [a b c] = 1(1·1 − 1·0) − 1(0·1 − 1·1) + 0 = 2. Accept the height argument with the angle between a and b × c.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c06-o02"
+   ]
+  },
+  {
+   "id": "wr:gap:pmf-cdf-table",
+   "competency": "MATH.probability.random-variables",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "Three fair coins are tossed. (a) Write the sample space S (8 outcomes) and, next to each outcome, the value of the random variable X = number of heads. (b) Construct the probability mass function of X as a table. (c) Construct the cumulative distribution function F(x) = P(X ≤ x) for every real x (give it on the intervals x < 0, 0 ≤ x < 1, 1 ≤ x < 2, 2 ≤ x < 3, x ≥ 3). (d) Use F to find P(1 < X ≤ 3).",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "space",
+     "criterion": "(a) S = {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT} with X = 3, 2, 2, 2, 1, 1, 1, 0",
+     "points": 1
+    },
+    {
+     "id": "pmf",
+     "criterion": "(b) P(X = 0) = 1/8, P(X = 1) = 3/8, P(X = 2) = 3/8, P(X = 3) = 1/8",
+     "points": 1
+    },
+    {
+     "id": "cdf",
+     "criterion": "(c) F = 0, 1/8, 1/2, 7/8, 1 on the five intervals",
+     "points": 1
+    },
+    {
+     "id": "use",
+     "criterion": "(d) P(1 < X ≤ 3) = F(3) − F(1) = 1 − 1/2 = 1/2",
+     "points": 1
+    }
+   ],
+   "guidance": "The cdf must be given for every real x (a step function); a table only at x = 0, 1, 2, 3 earns half of 'cdf' at most (award 'cdf' only if the intervals are stated).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c11-o01"
+   ]
+  },
+  {
+   "id": "wr:gap:truth-table",
+   "competency": "MATH.reasoning.propositional-logic",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "(a) Say which of these sentences are statements, with a reason for each: (i) 'Every prime number is odd.' (ii) 'Shut the window.' (iii) 'x + 4 = 9.' (iv) '7 is a factor of 91.' (b) Construct the complete truth table of (p → q) ↔ (¬q → ¬p), with a column for ¬p, ¬q, p → q and ¬q → ¬p. (c) Is the statement a tautology, a contradiction or a contingency? Explain from your table.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "statements",
+     "criterion": "(a) (i) and (iv) are statements ((i) false, (iv) true); (ii) is a command and (iii) an open sentence, so they are not statements",
+     "points": 1
+    },
+    {
+     "id": "columns",
+     "criterion": "(b) Four rows of p, q; ¬p, ¬q correct; p → q = T, F, T, T",
+     "points": 1
+    },
+    {
+     "id": "contrapositive",
+     "criterion": "(b) ¬q → ¬p = T, F, T, T",
+     "points": 1
+    },
+    {
+     "id": "final",
+     "criterion": "(b) Final column T, T, T, T",
+     "points": 1
+    },
+    {
+     "id": "classify",
+     "criterion": "(c) A tautology, because it is true in every row",
+     "points": 1
+    }
+   ],
+   "guidance": "Rows may be in any order if all four are present. A false statement such as (i) is still a statement: a learner who rejects it loses 'statements'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c12-o03"
+   ]
+  },
+  {
+   "id": "wr:std:sketch-recip-sgn-step",
+   "competency": "MATH.algebra.standard-function-graphs",
+   "kind": "sketch",
+   "grade": 11,
+   "prompt": "On the axes, sketch for −3 ≤ x ≤ 3 the graphs of (a) y = 1/x, (b) the signum function y = sgn x and (c) the greatest integer function y = [x]. Label each graph. Use a filled dot for a point that belongs to a graph and an open dot for a point that does not. In the note, write the domain and the range of each function.",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -3,
+      3
+     ],
+     "y": [
+      -4,
+      4
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "recip",
+     "criterion": "y = 1/x drawn as two branches in the first and third quadrants, through (1, 1), (2, 1/2), (−1, −1), approaching both axes without touching them",
+     "points": 1
+    },
+    {
+     "id": "sgn",
+     "criterion": "y = sgn x drawn as y = −1 for x < 0, y = 1 for x > 0, with a filled dot at (0, 0) and open dots at (0, ±1)",
+     "points": 1
+    },
+    {
+     "id": "step",
+     "criterion": "y = [x] drawn as horizontal steps of length 1, each with a filled dot at its left end (n, n) and an open dot at its right end (n + 1, n)",
+     "points": 2
+    },
+    {
+     "id": "domains",
+     "criterion": "Note: 1/x has domain ℝ − {0} and range ℝ − {0}; sgn x has domain ℝ and range {−1, 0, 1}; [x] has domain ℝ and range ℤ",
+     "points": 1
+    }
+   ],
+   "guidance": "Judge the key features (branches and asymptotes, the jumps and the dots at them, the labels), not pixel accuracy; a point within about half a unit of where it belongs counts. Award 'step' fully only if the end-point dots are correct on at least most of the steps.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c02-o04",
+    "tn-g11-c01-o07"
+   ]
+  },
+  {
+   "id": "wr:std:sketch-exp-log",
+   "competency": "MATH.algebra.standard-function-graphs",
+   "kind": "sketch",
+   "grade": 11,
+   "prompt": "On the same axes, sketch y = 2ˣ for −3 ≤ x ≤ 2 and y = log₂ x for 1/8 ≤ x ≤ 4, and draw the line y = x as a dashed line. Mark the points (0, 1), (1, 2), (1, 0) and (2, 1). In the note, explain how the two graphs are related, and say what happens to each graph as x becomes very negative (for 2ˣ) or as x gets close to 0 (for log₂ x).",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -3,
+      4
+     ],
+     "y": [
+      -3,
+      4
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "exp",
+     "criterion": "y = 2ˣ drawn as an increasing curve always above the x-axis, through (0, 1) and (1, 2), getting close to the x-axis on the left",
+     "points": 1
+    },
+    {
+     "id": "log",
+     "criterion": "y = log₂ x drawn only for x > 0, increasing, through (1, 0), (2, 1) and (4, 2), falling steeply as x approaches 0",
+     "points": 1
+    },
+    {
+     "id": "mirror",
+     "criterion": "The two curves are drawn as mirror images in the line y = x",
+     "points": 1
+    },
+    {
+     "id": "note",
+     "criterion": "Note: the functions are inverses, so their graphs are reflections in y = x; 2ˣ → 0 as x → −∞ (the x-axis is an asymptote) and log₂ x → −∞ as x → 0⁺ (the y-axis is an asymptote)",
+     "points": 2
+    }
+   ],
+   "guidance": "Accept any correct wording of the relationship (for example 'swap x and y'). Judge shape, the marked points and the asymptotic behaviour, not exact curvature.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c02-o04"
+   ]
+  },
+  {
+   "id": "wr:fn:sketch-lin-quad-recip",
+   "competency": "MATH.algebra.functions",
+   "kind": "sketch",
+   "grade": 10,
+   "prompt": "On the axes, sketch for −3 ≤ x ≤ 3 the graphs of the linear function y = 2x − 1, the quadratic function y = x² − 2 and the reciprocal function y = 2/x (leave out x = 0). Label each graph. Mark the points where y = 2x − 1 and y = x² − 2 meet, and write their coordinates. In the note, say which of the three graphs is a straight line, which is a parabola, and which has two separate branches.",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -3,
+      3
+     ],
+     "y": [
+      -7,
+      7
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "line",
+     "criterion": "y = 2x − 1 drawn as a straight line through (0, −1) and (1, 1)",
+     "points": 1
+    },
+    {
+     "id": "parabola",
+     "criterion": "y = x² − 2 drawn as a parabola opening upwards with vertex (0, −2), through (±1, −1) and (±2, 2)",
+     "points": 1
+    },
+    {
+     "id": "recip",
+     "criterion": "y = 2/x drawn as two branches in the first and third quadrants through (1, 2), (2, 1), (−1, −2), (−2, −1), not crossing the axes",
+     "points": 1
+    },
+    {
+     "id": "meet",
+     "criterion": "Marks the meeting points (1 − √2, 1 − 2√2) ≈ (−0.4, −1.8) and (1 + √2, 1 + 2√2) ≈ (2.4, 3.8), from x² − 2 = 2x − 1",
+     "points": 1
+    },
+    {
+     "id": "note",
+     "criterion": "Note correctly names the line, the parabola and the two-branch (reciprocal) graph",
+     "points": 1
+    }
+   ],
+   "guidance": "Decimal approximations of the meeting points within about 0.2 are fine. Judge key features, not pixel accuracy.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g10-c01-o06"
+   ]
+  },
+  {
+   "id": "wr:inv:trig-restrict",
+   "competency": "MATH.algebra.inverse-functions",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "Explain why the function sin : ℝ → ℝ has no inverse function, and why, to define sin⁻¹, the domain of sin is restricted to [−π/2, π/2] and its codomain to [−1, 1]. Then say which interval is used for cos when cos⁻¹ is defined, and why that interval works.",
+   "rubric": [
+    {
+     "id": "not-one-one",
+     "criterion": "Shows sin is not one-one on ℝ with an example such as sin 0 = sin π = 0 (or the horizontal line test), so no inverse can exist",
+     "points": 1
+    },
+    {
+     "id": "not-onto",
+     "criterion": "Notes that sin x takes only values in [−1, 1], so the codomain must be [−1, 1] for the function to be onto",
+     "points": 1
+    },
+    {
+     "id": "interval",
+     "criterion": "Explains that on [−π/2, π/2] sin is increasing (so one-one) and takes every value in [−1, 1] exactly once, so it is a bijection and has an inverse sin⁻¹ : [−1, 1] → [−π/2, π/2]",
+     "points": 2
+    },
+    {
+     "id": "cos",
+     "criterion": "States that cos is restricted to [0, π], where it is decreasing and takes every value in [−1, 1] once",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept other correct intervals of one-one-ness if the learner explains that the principal interval is the one chosen by convention (it contains 0 and gives the whole range). Award 'interval' only if both one-one and onto are addressed.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c04-o01"
+   ]
+  },
+  {
+   "id": "wr:rank:echelon-steps",
+   "competency": "MATH.matrices.rank-row-reduction",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "Reduce the matrix A = [[1, 2, 3, −1], [2, 4, 7, 1], [3, 6, 10, 0]] to row-echelon form by elementary row operations. Write each operation you use (for example R₂ → R₂ − 2R₁) and the matrix after it. Then state the rank of A and explain how the echelon form shows it.",
+   "rubric": [
+    {
+     "id": "ops",
+     "criterion": "Uses correct elementary row operations, each written down, e.g. R₂ → R₂ − 2R₁ and R₃ → R₃ − 3R₁",
+     "points": 2
+    },
+    {
+     "id": "echelon",
+     "criterion": "Reaches an echelon form equivalent to [[1, 2, 3, −1], [0, 0, 1, 3], [0, 0, 0, 0]] (zeros below each leading entry, zero row at the bottom)",
+     "points": 2
+    },
+    {
+     "id": "rank",
+     "criterion": "States rank A = 2 because the echelon form has two non-zero rows",
+     "points": 1
+    }
+   ],
+   "guidance": "Echelon forms are not unique: accept any correct echelon form (for example with a scaled row) reached by correctly recorded operations. An arithmetic slip that is carried through correctly loses only one 'ops' point.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c01-o03"
+   ]
+  },
+  {
+   "id": "wr:sets:comm-assoc-verify",
+   "competency": "MATH.algebra.sets",
+   "kind": "explanation",
+   "grade": 9,
+   "prompt": "Let A = {1, 2, 3, 4}, B = {3, 4, 5, 6} and C = {4, 6, 7, 8}. (a) Verify the commutative property: find A ∪ B and B ∪ A, and A ∩ B and B ∩ A. (b) Verify the associative property: find (A ∪ B) ∪ C and A ∪ (B ∪ C), and (A ∩ B) ∩ C and A ∩ (B ∩ C). Show every set you work out and say in each case whether the two sides are equal.",
+   "rubric": [
+    {
+     "id": "comm",
+     "criterion": "A ∪ B = B ∪ A = {1, 2, 3, 4, 5, 6} and A ∩ B = B ∩ A = {3, 4}",
+     "points": 1
+    },
+    {
+     "id": "assoc-union",
+     "criterion": "A ∪ B = {1, …, 6}, B ∪ C = {3, 4, 5, 6, 7, 8}, and both groupings give {1, 2, 3, 4, 5, 6, 7, 8}",
+     "points": 2
+    },
+    {
+     "id": "assoc-int",
+     "criterion": "A ∩ B = {3, 4}, B ∩ C = {4, 6}, and both groupings give {4}",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "States that in each case the two sides are equal, which verifies the property for these sets",
+     "points": 1
+    }
+   ],
+   "guidance": "The working (the inner sets) must be shown; give 'assoc' points only when the intermediate sets are written. A Venn diagram is an acceptable way to show the working.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g09-c01-o04"
+   ]
+  },
+  {
+   "id": "wr:prob:describe-experiment",
+   "competency": "MATH.algebra.sets",
+   "kind": "explanation",
+   "grade": 11,
+   "prompt": "A coin is tossed. If it shows a head, a die is thrown; if it shows a tail, the coin is tossed again. (a) Describe the outcomes of this random experiment and write its sample space S in set notation. (b) Write in set notation the event A: 'the die shows a number greater than 4', and the event B: 'at least one tail'. (c) Are all the outcomes in S equally likely? Explain.",
+   "rubric": [
+    {
+     "id": "space",
+     "criterion": "S = {H1, H2, H3, H4, H5, H6, TH, TT} (8 outcomes), with the notation explained",
+     "points": 2
+    },
+    {
+     "id": "events",
+     "criterion": "A = {H5, H6} and B = {TH, TT}",
+     "points": 2
+    },
+    {
+     "id": "likely",
+     "criterion": "Explains that the outcomes are not equally likely: each Hk has probability 1/12 while TH and TT each have 1/4",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept any clear notation for the outcomes (for example (H, 1) for H1). For (c) the reasoning matters more than the exact probabilities, but the learner must see that the two branches are different.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c14-o01"
+   ]
+  },
+  {
+   "id": "wr:lp:infeasible",
+   "competency": "MATH.algebra.linear-programming",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "Maximise Z = 3x + 2y subject to x + y ≤ 4, 2x + 3y ≥ 18, x ≥ 0, y ≥ 0. Draw (or describe) the two constraint lines and the half-planes they allow, and explain what you find. What can you say about the maximum of Z?",
+   "rubric": [
+    {
+     "id": "lines",
+     "criterion": "Draws or describes x + y = 4 (intercepts 4, 4) and 2x + 3y = 18 (intercepts 9, 6) with the correct sides shaded",
+     "points": 2
+    },
+    {
+     "id": "empty",
+     "criterion": "Shows that no point satisfies all the constraints, e.g. for x, y ≥ 0 with x + y ≤ 4, 2x + 3y ≤ 3(x + y) ≤ 12 < 18",
+     "points": 2
+    },
+    {
+     "id": "conclude",
+     "criterion": "Concludes that the feasible region is empty (the problem is infeasible), so Z has no maximum value",
+     "points": 1
+    }
+   ],
+   "guidance": "Either a correct graph with the regions clearly marked or an algebraic argument earns 'empty'. Do not accept a numerical 'maximum' worked out at corner points.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g12-c12-o04"
+   ]
+  },
+  {
+   "id": "wr:inv:four-branches",
+   "competency": "MATH.trigonometry.inverse",
+   "kind": "explanation",
+   "grade": 12,
+   "prompt": "(a) Explain, using the graph of y = tan x, why tan has no inverse on its whole domain, and which piece of its graph is kept to define tan⁻¹. (b) For each of tan⁻¹, cot⁻¹, sec⁻¹ and cosec⁻¹, state its domain and the range of its principal value branch. (c) Explain why π/2 is left out of the range of sec⁻¹ and why 0 is left out of the range of cosec⁻¹.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "restrict",
+     "criterion": "(a) tan takes each value infinitely often (it repeats every π), so it is not one-one; on (−π/2, π/2) it is one-one and takes every real value, so that piece is inverted",
+     "points": 1
+    },
+    {
+     "id": "tan-cot",
+     "criterion": "(b) tan⁻¹: domain ℝ, range (−π/2, π/2); cot⁻¹: domain ℝ, range (0, π)",
+     "points": 1
+    },
+    {
+     "id": "sec-cosec",
+     "criterion": "(b) sec⁻¹ and cosec⁻¹: domain ℝ − (−1, 1) (x ≤ −1 or x ≥ 1); ranges [0, π] − {π/2} and [−π/2, π/2] − {0}",
+     "points": 1
+    },
+    {
+     "id": "holes",
+     "criterion": "(c) sec π/2 and cosec 0 are not defined (cos π/2 = 0 and sin 0 = 0), so those angles are never values of sec⁻¹ and cosec⁻¹",
+     "points": 1
+    }
+   ],
+   "guidance": "Accept the domains written as intervals, inequalities or words. Other textbooks may use different branches for sec⁻¹ and cosec⁻¹; accept a different consistent choice only if the learner names it as such and explains why it is one-one. Award 'restrict' only if both the failure of one-one and the choice of the piece are explained.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g12-c02-o01"
+   ]
+  },
+  {
+   "id": "wr:conic:sketch-three",
+   "competency": "MATH.coordinate.conics",
+   "kind": "sketch",
+   "grade": 11,
+   "prompt": "On the axes, sketch (a) the parabola y² = 8x, (b) the hyperbola x²/9 − y²/16 = 1 and (c) the circle x² + y² − 4x − 5 = 0, on the same axes or separately. For the parabola mark its focus and draw its directrix; for the hyperbola mark its vertices and foci and draw its two asymptotes; for the circle mark its centre and radius. In the note, write the coordinates you marked and the equations of the lines you drew.",
+   "answer": "drawing",
+   "canvas": {
+    "axes": {
+     "x": [
+      -8,
+      8
+     ],
+     "y": [
+      -8,
+      8
+     ],
+     "step": 1
+    }
+   },
+   "rubric": [
+    {
+     "id": "parabola",
+     "criterion": "Parabola opening to the right with vertex (0, 0), through (2, ±4); focus (2, 0) and directrix x = −2 shown",
+     "points": 1
+    },
+    {
+     "id": "hyperbola",
+     "criterion": "Two branches opening left and right with vertices (±3, 0); foci (±5, 0)",
+     "points": 1
+    },
+    {
+     "id": "asymptotes",
+     "criterion": "Asymptotes y = ±(4/3)x drawn, with the branches approaching them",
+     "points": 1
+    },
+    {
+     "id": "circle",
+     "criterion": "Circle with centre (2, 0) and radius 3, through (−1, 0) and (5, 0)",
+     "points": 1
+    },
+    {
+     "id": "note",
+     "criterion": "Note lists the coordinates and the equations of the directrix and asymptotes correctly",
+     "points": 1
+    }
+   ],
+   "guidance": "Mark the drawing together with the note: judge the key features (vertices, foci, the direction of opening, the asymptotes, the centre and radius), not pixel accuracy; a point within about half a unit of where it belongs counts. A hyperbola drawn as a single closed curve earns no mark for 'hyperbola'.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g11-c10-o06"
+   ]
+  },
+  {
+   "id": "wr:conic:derive-focus-directrix",
+   "competency": "MATH.coordinate.conics",
+   "kind": "proof",
+   "grade": 12,
+   "prompt": "(a) Starting from the definition — a parabola is the set of points equidistant from the focus S(a, 0) and the directrix x = −a (a > 0) — derive the equation y² = 4ax. (b) A hyperbola is the set of points P with PS = e·PM, where S(ae, 0) is a focus, PM is the distance from P to the directrix x = a/e, and e > 1. Show that its equation is x²/a² − y²/b² = 1 with b² = a²(e² − 1). Write each step and say why it follows.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "p-setup",
+     "criterion": "(a) Writes √((x − a)² + y²) = |x + a| for a point P(x, y)",
+     "points": 1
+    },
+    {
+     "id": "p-simplify",
+     "criterion": "(a) Squares both sides and simplifies to y² = 4ax",
+     "points": 1
+    },
+    {
+     "id": "h-setup",
+     "criterion": "(b) Writes (x − ae)² + y² = e²(x − a/e)²",
+     "points": 1
+    },
+    {
+     "id": "h-simplify",
+     "criterion": "(b) Expands and collects terms to x²(e² − 1) − y² = a²(e² − 1)",
+     "points": 1
+    },
+    {
+     "id": "h-final",
+     "criterion": "(b) Divides by a²(e² − 1), puts b² = a²(e² − 1) (positive because e > 1) and gets x²/a² − y²/b² = 1",
+     "points": 1
+    }
+   ],
+   "guidance": "Squaring is valid because both sides are distances (non-negative). Accept the derivation of the hyperbola with the other focus–directrix pair. A learner who quotes the standard equations without deriving them earns no marks for the 'simplify' steps.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g12-c05-o02"
+   ]
+  },
+  {
+   "id": "wr:prob:tree-and-table",
+   "competency": "MATH.probability.sample-space",
+   "kind": "drawing",
+   "grade": 11,
+   "prompt": "(a) A coin is tossed; if it shows heads, a die is rolled, and if it shows tails, the coin is tossed again. Draw a tree diagram for this random experiment and use it to write the sample space S. How many outcomes does S have? (b) Two dice, one red and one blue, are rolled. Draw a 6 × 6 table of outcomes (red down the side, blue across the top) and shade the outcomes of the event 'the sum is 8'. (c) In the note, say which event in (b) is impossible: 'the sum is 1' or 'the sum is 12', and why.",
+   "answer": "drawing",
+   "canvas": {
+    "grid": true
+   },
+   "rubric": [
+    {
+     "id": "tree",
+     "criterion": "(a) Tree with first branches H and T; six branches 1–6 after H and two branches H, T after T",
+     "points": 1
+    },
+    {
+     "id": "space",
+     "criterion": "(a) S = {H1, H2, H3, H4, H5, H6, TH, TT}: 8 outcomes",
+     "points": 1
+    },
+    {
+     "id": "table",
+     "criterion": "(b) A 6 × 6 table of ordered pairs (red, blue) with 36 cells",
+     "points": 1
+    },
+    {
+     "id": "event",
+     "criterion": "(b) Shades exactly (2, 6), (3, 5), (4, 4), (5, 3), (6, 2)",
+     "points": 1
+    },
+    {
+     "id": "impossible",
+     "criterion": "(c) 'The sum is 1' is impossible, because the smallest sum is 1 + 1 = 2; a sum of 12 happens for (6, 6)",
+     "points": 1
+    }
+   ],
+   "guidance": "The task stands in for describing experiments with trees and tables in class. Accept outcomes written as (H, 1) or H1, and a table that lists sums instead of pairs if the event is shaded correctly. Mark the drawing together with the note; neatness is not marked.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g11-c12-o01"
+   ]
+  },
+  {
+   "id": "wr:ap:derive-nth",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "kind": "proof",
+   "grade": 10,
+   "prompt": "An arithmetic progression has first term a and common difference d. (a) Explain why its nth term is aₙ = a + (n − 1)d. (b) Use this to show that for any two terms, aₘ − aₙ = (m − n)d. (c) The 4th term of an AP is 19 and its 11th term is 47: use (b) to find d and then the first term.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "steps",
+     "criterion": "(a) Explains that each term is d more than the one before, so reaching term n from term 1 takes n − 1 steps of d",
+     "points": 1
+    },
+    {
+     "id": "formula",
+     "criterion": "(a) Concludes aₙ = a + (n − 1)d (a table a₁ = a, a₂ = a + d, a₃ = a + 2d, … with the pattern stated in general counts)",
+     "points": 1
+    },
+    {
+     "id": "difference",
+     "criterion": "(b) Subtracts a + (n − 1)d from a + (m − 1)d to get (m − n)d",
+     "points": 1
+    },
+    {
+     "id": "apply",
+     "criterion": "(c) 47 − 19 = 7d gives d = 4, and a = 19 − 3 × 4 = 7",
+     "points": 1
+    }
+   ],
+   "guidance": "In (a) a list of the first few terms is not enough on its own: the learner must say why the coefficient of d is one less than the term number (n − 1 gaps between n terms). Induction is a full alternative for (a).",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g10-c05-o02"
+   ]
+  },
+  {
+   "id": "wr:con:parallelogram-area",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "Construct a parallelogram ABCD with AB = 6 cm, AD = 4 cm and ∠A = 60°. Say why your figure is a parallelogram. Then construct the perpendicular from D to AB, measure it, and use it to find the area of ABCD. Draw your construction with the straight edge and compass, and in the note list your steps in order. Your answer is marked on the steps you describe, on your reason, and on the area you work out.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "angle",
+     "criterion": "Draws AB = 6 cm, constructs ∠DAB = 60° and marks AD = 4 cm",
+     "points": 1
+    },
+    {
+     "id": "complete",
+     "criterion": "Completes C with arcs of 6 cm from D and 4 cm from B (or by parallels), and joins BC and DC",
+     "points": 1
+    },
+    {
+     "id": "why",
+     "criterion": "Explains: both pairs of opposite sides are equal (or parallel), so ABCD is a parallelogram",
+     "points": 1
+    },
+    {
+     "id": "height",
+     "criterion": "Constructs the perpendicular from D to AB and measures it as about 3.5 cm",
+     "points": 1
+    },
+    {
+     "id": "area",
+     "criterion": "Area = base × height ≈ 6 × 3.5 = 21 cm² (accept 20.5 to 21.3 cm²; the exact value is 12√3 ≈ 20.8 cm²)",
+     "points": 1
+    }
+   ],
+   "guidance": "The height is a measured value: accept 3.4 cm to 3.6 cm and an area consistent with the learner's own measurement. Multiplying the two sides (6 × 4 = 24 cm²) is the common slip: the area uses the perpendicular height, not the slant side. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g08-c05-o05"
+   ]
+  },
+  {
+   "id": "wr:con:square-rect-area",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "kind": "construction",
+   "grade": 8,
+   "prompt": "(a) Construct a square PQRS whose diagonal PR is 6 cm. Find its area from the diagonals. (b) Construct a rectangle WXYZ with WX = 4 cm and diagonal WY = 5 cm. Measure the side XY and find the area of the rectangle. Draw your constructions with the straight edge and compass, and in the note list your steps in order and why each figure is a square or a rectangle.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "square",
+     "criterion": "(a) Draws PR = 6 cm, constructs its perpendicular bisector and marks Q and S 3 cm from the midpoint on each side",
+     "points": 1
+    },
+    {
+     "id": "square-why",
+     "criterion": "(a) Explains: equal diagonals that bisect each other at right angles give a square",
+     "points": 1
+    },
+    {
+     "id": "square-area",
+     "criterion": "(a) Area = ½ × d₁ × d₂ = ½ × 6 × 6 = 18 cm²",
+     "points": 1
+    },
+    {
+     "id": "rect",
+     "criterion": "(b) Draws WX = 4 cm, a right angle at X, and an arc of 5 cm from W to fix Y; completes Z",
+     "points": 1
+    },
+    {
+     "id": "rect-area",
+     "criterion": "(b) Measures XY ≈ 3 cm and gets area ≈ 4 × 3 = 12 cm²",
+     "points": 1
+    }
+   ],
+   "guidance": "In (b) the side XY = 3 cm can also be found by Pythagoras; a measured value from 2.9 cm to 3.1 cm with the matching area is full credit. In (a), squaring the diagonal (36 cm²) is the common slip. Mark the drawing together with the steps in the note: a step counts when it is drawn or described and its arcs or lines are where they must be; a freehand drawing is judged on intent, not on precision.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "tn-g08-c05-o05"
+   ]
+  },
+  {
+   "id": "wr:fold-parallel",
+   "competency": "MATH.geometry.lines-segments",
+   "kind": "explanation",
+   "grade": 7,
+   "prompt": "Take a rectangular sheet of paper (or imagine one). (a) Describe how to fold it so that you get two creases that are parallel to each other. (b) Describe how to fold it to get two creases that are perpendicular to each other. (c) Explain how you can be sure the creases in (a) are parallel and the creases in (b) are perpendicular. Draw the sheet with the creases in the note.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "parallel-fold",
+     "criterion": "(a) Describes two folds that are both made by folding one edge onto the opposite edge (or both perpendicular to the same crease/edge), e.g. fold in half, then fold each half in half again the same way",
+     "points": 1
+    },
+    {
+     "id": "perp-fold",
+     "criterion": "(b) Describes folding a crease, then folding the paper again so the first crease lies exactly on itself",
+     "points": 1
+    },
+    {
+     "id": "why-parallel",
+     "criterion": "(c) Explains that both creases make right angles with the same edge (or the same crease), so they never meet: they are parallel",
+     "points": 1
+    },
+    {
+     "id": "why-perp",
+     "criterion": "(c) Explains that folding a crease onto itself makes the two angles on either side equal, so each is 90°: the creases are perpendicular",
+     "points": 1
+    },
+    {
+     "id": "drawing",
+     "criterion": "The drawing shows the creases in the right positions and labels which pair is parallel and which perpendicular",
+     "points": 1
+    }
+   ],
+   "guidance": "The folding itself is done in class; here the child describes it. Accept any correct method: e.g. for parallel creases, fold along a line, then fold a perpendicular crease, then a second crease perpendicular to that same crease. A drawing without the explanation earns only the drawing point.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g07-t1-c05-o02"
+   ],
+   "canvas": {
+    "grid": true
+   }
+  },
+  {
+   "id": "wr:halves-ways",
+   "competency": "MATH.number.fraction-models",
+   "kind": "drawing",
+   "grade": 4,
+   "prompt": "Draw three squares of the same size on the grid, each 4 squares by 4 squares. Divide each one into two halves in a DIFFERENT way, and shade one half of each. In the note, explain how you know the two parts of each square are equal.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "three-ways",
+     "criterion": "Draws three different ways of cutting the square into two parts (e.g. straight down, straight across, along a diagonal, or a stepped line)",
+     "points": 1
+    },
+    {
+     "id": "equal",
+     "criterion": "In every square both parts are the same size (8 small squares each, or matching triangles)",
+     "points": 1
+    },
+    {
+     "id": "shaded",
+     "criterion": "Shades exactly one of the two parts in each square",
+     "points": 1
+    },
+    {
+     "id": "explain",
+     "criterion": "Explains equality by counting the small squares in each part (8 and 8) or by saying one part fits exactly onto the other when folded or turned",
+     "points": 1
+    }
+   ],
+   "guidance": "Any division into two parts of 8 small squares counts as halves, even if the parts are not the same shape. Two drawings that differ only by turning the square (e.g. 'straight down' and 'straight across') may count as different ways. A part that is 7 and 9 small squares is not a half.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "cbse-g04-c05-o01"
+   ],
+   "canvas": {
+    "grid": true
+   }
   }
  ]
 }

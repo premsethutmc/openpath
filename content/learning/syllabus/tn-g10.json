@@ -185,12 +185,19 @@
       {
        "id": "MATH.algebra.sets",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.sets-relations.cartesian-product",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "n(A × B × C) is counted in apcartn (v = 1), and listing the ordered pairs or triples and equal ordered pairs are the new apcartl and apcarteq; all are in the cartesian-product competency, which the outcome is not mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.relations",
-      "MATH.algebra.sets"
+      "MATH.algebra.sets",
+      "MATH.sets-relations.cartesian-product"
      ]
     },
     {
@@ -269,12 +276,19 @@
       {
        "id": "MATH.algebra.inverse-functions",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.sets-relations.function-types",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Classifying functions as one-one, onto and bijective on ℕ, ℤ and ℝ is aqonto (function-types); many-one/into and constant/identity functions are now named in aofname (MATH.algebra.functions)."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.functions",
-      "MATH.algebra.inverse-functions"
+      "MATH.algebra.inverse-functions",
+      "MATH.sets-relations.function-types"
      ]
     },
     {
@@ -934,11 +948,18 @@
       {
        "id": "MATH.algebra.matrices",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.matrices.transpose-symmetry",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Transposes (of products, and symmetric/skew-symmetric parts) are assessed in the transpose-symmetry competency; the order and type of a matrix and constructing Aᵀ are now in apmtype and apmcon (MATH.algebra.matrices)."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.matrices"
+      "MATH.algebra.matrices",
+      "MATH.matrices.transpose-symmetry"
      ]
     }
    ]

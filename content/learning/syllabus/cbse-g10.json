@@ -121,11 +121,18 @@
       {
        "id": "MATH.number.primes",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Writing a natural number as a product of primes is ajpf; the outcome is mapped to euclid-algorithm and primes only."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.euclid-algorithm",
+      "MATH.number.prime-factorisation",
       "MATH.number.primes"
      ]
     },
@@ -151,12 +158,19 @@
       {
        "id": "MATH.number.factors-multiples",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "HCF × LCM = product to find an unknown (aghlp) and HCF/LCM word problems (aghlw) were added to hcf-lcm; the outcome is mapped to euclid-algorithm and factors-multiples."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.euclid-algorithm",
-      "MATH.number.factors-multiples"
+      "MATH.number.factors-multiples",
+      "MATH.number.hcf-lcm"
      ]
     },
     {
@@ -1141,11 +1155,25 @@
       {
        "id": "MATH.coordinate.distance",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "anpts decides from the three distances whether points are collinear, right-angled, isosceles or neither."
+      },
+      {
+       "id": "MATH.coordinate.distance-intro",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "altri classifies triangles (right-angled, isosceles) by the distance formula."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.coordinate.distance"
+      "MATH.coordinate.distance",
+      "MATH.coordinate.distance-intro",
+      "MATH.reasoning.mathematical-argument"
      ]
     },
     {
@@ -1189,11 +1217,18 @@
       {
        "id": "MATH.coordinate.distance",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.distance-intro",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "alpar finds the fourth vertex of a parallelogram (unknown vertices); the ratio of division is the new family aurat."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.coordinate.distance"
+      "MATH.coordinate.distance",
+      "MATH.coordinate.distance-intro"
      ]
     }
    ]

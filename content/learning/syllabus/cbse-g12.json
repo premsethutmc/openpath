@@ -732,12 +732,19 @@
       {
        "id": "MATH.coordinate.distance",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.polygon-area",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "altria gives the area of a triangle from its vertices (the determinant formula) and alcoll the unknown coordinate for collinearity; the unknown vertex from a given area is the new family audk."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.determinants",
-      "MATH.coordinate.distance"
+      "MATH.coordinate.distance",
+      "MATH.coordinate.polygon-area"
      ]
     },
     {
@@ -1537,11 +1544,18 @@
       {
        "id": "MATH.calculus.definite-integrals",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Definite integrals by substitution are in integration-methods (ausbd, subst); the polynomial definite integrals are the new family audfp."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.calculus.definite-integrals"
+      "MATH.calculus.definite-integrals",
+      "MATH.calculus.integration-methods"
      ]
     },
     {

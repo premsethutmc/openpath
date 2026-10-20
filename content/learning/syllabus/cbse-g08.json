@@ -834,12 +834,19 @@
       {
        "id": "MATH.number.division-remainders",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Grade 8 reasoning about remainders (of sums and products, numbers leaving a given remainder) is written in the divisibility-reasoning competency, above the Grade 3 and 5 competencies the outcome is mapped to."
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.division-remainders",
-      "MATH.number.factors-multiples"
+      "MATH.number.factors-multiples",
+      "MATH.reasoning.divisibility"
      ]
     },
     {

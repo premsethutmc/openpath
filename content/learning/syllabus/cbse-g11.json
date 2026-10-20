@@ -1069,11 +1069,18 @@
       {
        "id": "MATH.algebra.inequalities",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Compound (double) linear inequalities are solved by apineq; systems of two separate inequalities are the new family aeineqs."
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.inequalities"
+      "MATH.algebra.inequalities",
+      "MATH.sets-relations.real-intervals"
      ]
     },
     {
@@ -1480,7 +1487,14 @@
      ],
      "difficulty": "intro",
      "assessment": "auto",
-     "competencies": [],
+     "competencies": [
+      {
+       "id": "MATH.sequences.explicit-recursive-rules",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Describing a sequence by a recurrence relation is exactly what these families assess (terms from a recursive rule, and from a recursive rule to a formula); the outcome is mapped only to sequence-notation, so the recurrence part looks missing."
+      }
+     ],
      "proposed": [
       {
        "id": "MATH.sequences.sequence-notation",
@@ -1498,6 +1512,7 @@
       }
      ],
      "mapped": [
+      "MATH.sequences.explicit-recursive-rules",
       "MATH.sequences.sequence-notation"
      ]
     },
