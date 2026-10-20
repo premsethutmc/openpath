@@ -400,8 +400,13 @@ function cl16Lists(p: number[]): { list: string[][]; why: string }[] {
     ];
   }
   const right = X.flatMap((x) => Y.map((y) => [x, y]));
-  const out = [{ list: right, why: "right" }, { list: Y.flatMap((y) => X.map((x) => [y, x])), why: "order" }];
-  if (k === 1) out.push({ list: right.filter(([x, y]) => x !== y), why: "diagonal" });
+  const out = [{ list: right, why: "right" }];
+  if (k === 1) out.push({ list: right.filter(([x, y]) => Number(x.replace("−", "-")) <= Number(y.replace("−", "-"))), why: "half" }, { list: right.filter(([x, y]) => x !== y), why: "diagonal" });
+  else out.push({ list: Y.flatMap((y) => X.map((x) => [y, x])), why: "order" });
+  if (k === 1) {
+    out.push({ list: right.slice(0, -1), why: "missing" });
+    return out;
+  }
   else out.push({ list: X.slice(0, Math.min(X.length, Y.length)).map((x, i) => [x, Y[i]]), why: "zip" });
   out.push({ list: right.slice(0, -1), why: "missing" });
   return out;
@@ -3033,6 +3038,7 @@ export const NEW16: Def[] = [
         const i = ch.indexOf(setS(o.list.map(tupS)));
         if (o.why === "order") out.push(B("order-swapped", "conceptual", CART, `The entries were written the wrong way round; in ${["A × B", "A × A", "B × A", "A × B × C"][p[0]]} the first entry comes from the first set named.`, i));
         if (o.why === "zip") out.push(B("matched-only", "conceptual", CART, "Only the first element was paired with the first, the second with the second; a Cartesian product pairs EVERY element of the first set with EVERY element of the second.", i));
+        if (o.why === "half") out.push(B("pair-once", "conceptual", CART, "Each pair of different elements was written only once; (a, b) and (b, a) are different ordered pairs, and both belong to A × A.", i));
         if (o.why === "diagonal") out.push(B("same-left-out", "conceptual", CART, "Pairs like (a, a) were left out; A × A contains every ordered pair from A, including pairs with equal entries.", i));
         if (o.why === "missing") out.push(B("pair-missed", "procedural", CART, `One ${p[0] === 3 ? "triple" : "pair"} was missed; there must be ${o.list.length + 1} of them (the product of the numbers of elements).`, i));
         if (o.why === "pairs") out.push(B("third-set-ignored", "conceptual", CART, "Only A × B was written; A × B × C is made of ordered TRIPLES (a, b, c).", i));

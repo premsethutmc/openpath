@@ -2804,7 +2804,7 @@ export const B14: Def[] = [
       if (kind === 2) return [{ id: "exactly-one", kind: "conceptual", competency: COMP, says: "'Exactly one girl' was found; 'at least one' also includes two or more girls — easiest as 1 − P(no girl).", predict: pr((ncr(w, 1) * ncr(m, r - 1)) / all) }, { id: "complement-of-one", kind: "procedural", competency: COMP, says: "1 − P(exactly one girl) was found; the complement of 'at least one girl' is 'no girl'.", predict: pr(1 - (ncr(w, 1) * ncr(m, r - 1)) / all) }].filter((b) => b.predict !== null) as Bug[];
       return [
         { id: "rest-not-chosen", kind: "procedural", competency: PERMC, says: `Only the ways to choose the ${k} ${kind === 0 ? "girls" : "faulty bulbs"} were counted; the other ${r - k} must be chosen from the ${m} ${kind === 0 ? "boys" : "good bulbs"} too, and the two counts multiply.`, predict: pr(ncr(w, k) / all) },
-        { id: "with-replacement", kind: "conceptual", competency: PROB, says: "Each choice was treated as independent with the same chance, as if each one were put back; the selection is made together, so count selections with combinations.", predict: pr(ncr(r, k) * (w / n) ** k * (m / n) ** (r - k)) },
+        { id: "with-replacement", kind: "conceptual", competency: PROB, says: "Each choice was treated as independent with the same chance, as if each one were put back; the selection is made together, so count selections with combinations.", predict: n ** r <= 1000 ? pr(ncr(r, k) * (w / n) ** k * (m / n) ** (r - k)) : null },
       ].filter((b) => b.predict !== null) as Bug[];
     },
     distractors: ([kind, m, w, r, k]) => {

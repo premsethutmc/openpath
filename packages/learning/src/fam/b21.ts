@@ -2658,7 +2658,8 @@ const autrig = F({
 /** [k, a, h, p, q]: standard forms with logarithmic answers; (x + h) is the completed square. */
 const sfG = ([k, a, h, p, q]: number[]) => (x: number) => {
   const u = x + h;
-  return k === 0 ? 1 / (u * u - a * a) : k === 1 ? 1 / (a * a - x * x) : k === 2 ? 1 / Math.sqrt(u * u + a * a) : k === 3 ? Math.sqrt(x * x + a * a) : (p * x + q) / (u * u - a * a);
+  const w = a * a * x * x - p * p;
+  return k === 0 ? 1 / (u * u - a * a) : k === 1 ? 1 / (a * a - x * x) : k === 2 ? 1 / Math.sqrt(u * u + a * a) : k === 3 ? Math.sqrt(x * x + a * a) : k === 5 ? 1 / Math.sqrt(w) : k === 6 ? Math.sqrt(w) : (p * x + q) / (u * u - a * a);
 };
 const sfQuad = ([k, a, h]: number[]) => (k === 2 ? sum([[1, "x²"], [2 * h, "x"], [h * h + a * a, ""]]) : sum([[1, "x²"], [2 * h, "x"], [h * h - a * a, ""]]));
 const sfAns = (P: number[], slip = ""): string => {
@@ -2668,6 +2669,10 @@ const sfAns = (P: number[], slip = ""): string => {
   if (k === 0) return slip === "no-factor" ? `${L} + C` : slip === "swap" ? `(1/${2 * a})log|(${sum([[1, "x"], [h + a, ""]])})/(${sum([[1, "x"], [h - a, ""]])})| + C` : `(1/${2 * a})${L} + C`;
   if (k === 1) return slip === "no-factor" ? `log|(${a} + x)/(${a} − x)| + C` : slip === "swap" ? `(1/${2 * a})log|(${a} − x)/(${a} + x)| + C` : `(1/${2 * a})log|(${a} + x)/(${a} − x)| + C`;
   if (k === 2) return slip === "no-x" ? `log|√(${sfQuad(P)})| + C` : slip === "power" ? `2√(${sfQuad(P)}) + C` : `log|${u} + √(${sfQuad(P)})| + C`;
+  const W = `${a * a}x² − ${p * p}`;
+  const LW = `log|${a}x + √(${W})|`;
+  if (k === 5) return slip === "no-factor" ? `${LW} + C` : slip === "no-x" ? `(1/${a})log|√(${W})| + C` : `(1/${a})${LW} + C`;
+  if (k === 6) return slip === "no-log" ? `(x/2)√(${W}) + C` : slip === "log-sign" ? `(x/2)√(${W}) + (${rat(p * p, 2 * a)})${LW} + C` : `(x/2)√(${W}) − (${rat(p * p, 2 * a)})${LW} + C`;
   if (k === 3) return slip === "no-log" ? `(x/2)√(x² + ${a * a}) + C` : slip === "half-log" ? `(x/2)√(x² + ${a * a}) + ${a * a}log|x + √(x² + ${a * a})| + C` : `(x/2)√(x² + ${a * a}) + (${rat(a * a, 2)})log|x + √(x² + ${a * a})| + C`;
   const B = q - p * h;
   const first = `${p === 2 ? "" : p % 2 === 0 ? p / 2 : `(${rat(p, 2)})`}log|${sfQuad(P)}|`;
@@ -2677,28 +2682,30 @@ const sfAns = (P: number[], slip = ""): string => {
 const auform = F({
   id: "auform",
   arity: 5,
-  title: "Integrals of the standard forms 1/(x² − a²), 1/(a² − x²), 1/√(x² + a²), √(x² + a²) and (px + q)/(x² + bx + c)",
+  title: "Integrals of the standard forms 1/(x² − a²), 1/(a² − x²), 1/√(x² ± a²), √(x² ± a²) and (px + q)/(x² + bx + c)",
   competency: IM,
   type: "antiderivative",
   mc: true,
   prompt: (P) => {
     const [k, a, , p, q] = P;
-    const f = k === 0 ? `1/(${sfQuad(P)})` : k === 1 ? `1/(${a * a} − x²)` : k === 2 ? `1/√(${sfQuad(P)})` : k === 3 ? `√(x² + ${a * a})` : `(${sum([[p, "x"], [q, ""]])})/(${sfQuad(P)})`;
-    return `Find ∫ ${f} dx. (log is the natural logarithm.)`;
+    const f = k === 0 ? `1/(${sfQuad(P)})` : k === 1 ? `1/(${a * a} − x²)` : k === 2 ? `1/√(${sfQuad(P)})` : k === 3 ? `√(x² + ${a * a})` : k === 5 ? `1/√(${a * a}x² − ${p * p})` : k === 6 ? `√(${a * a}x² − ${p * p})` : `(${sum([[p, "x"], [q, ""]])})/(${sfQuad(P)})`;
+    return `Find ∫ ${f} dx${k >= 5 ? ` (for x > ${rat(p, a)})` : ""}. (log is the natural logarithm.)`;
   },
   solve: (P) => {
     const [k, a, h] = P;
     const sq = k === 2 ? `(x ${signed(h)})² + ${a}²` : `(x ${signed(h)})² − ${a}²`;
-    const form = ["∫ dx/(u² − a²) = (1/2a) log|(u − a)/(u + a)|", "∫ dx/(a² − x²) = (1/2a) log|(a + x)/(a − x)|", "∫ dx/√(u² + a²) = log|u + √(u² + a²)|", "∫ √(x² + a²) dx = (x/2)√(x² + a²) + (a²/2) log|x + √(x² + a²)|", "write px + q = (p/2)(2x + b) + B: a log part and a 1/(u² − a²) part"][k];
+    const form = ["∫ dx/(u² − a²) = (1/2a) log|(u − a)/(u + a)|", "∫ dx/(a² − x²) = (1/2a) log|(a + x)/(a − x)|", "∫ dx/√(u² + a²) = log|u + √(u² + a²)|", "∫ √(x² + a²) dx = (x/2)√(x² + a²) + (a²/2) log|x + √(x² + a²)|", "write px + q = (p/2)(2x + b) + B: a log part and a 1/(u² − a²) part", "with u = bx (du = b dx): ∫ du/√(u² − c²) = log|u + √(u² − c²)|, divided by b", "with u = bx (du = b dx): ∫ √(u² − c²) du = (u/2)√(u² − c²) − (c²/2) log|u + √(u² − c²)|, divided by b"][k];
     const ans = sfAns(P);
-    return { steps: [st("square", "complete the square", QUAD, k === 1 || k === 3 ? `The form is already standard, with a = ${a}` : `Complete the square: ${sfQuad(P)} = ${sq.replace("x + 0", "x").replace("(x + 0)", "x")}`, a), st("form", "recall", IM, form, form), st("answer", "integrate", IM, ans, ans)], answer: ans };
+    return { steps: [st("square", "complete the square", QUAD, k === 1 || k === 3 || k >= 5 ? `The form is already standard, with a = ${a}` : `Complete the square: ${sfQuad(P)} = ${sq.replace("x + 0", "x").replace("(x + 0)", "x")}`, a), st("form", "recall", IM, form, form), st("answer", "integrate", IM, ans, ans)], answer: ans };
   },
   // independent: central differences of the answer give back the integrand
-  validate: (P, v) => derivAgrees(v, sfG(P), [0.43, 0.71, 1.23, 1.91, 2.27, 2.83, 3.37].filter((x) => Math.abs(Math.abs(x + P[2]) - P[1]) > 0.2)),
+  validate: (P, v) => derivAgrees(v, sfG(P), P[0] >= 5 ? [0.83, 1.07, 1.23, 1.58, 1.91, 2.27, 2.83].filter((x) => P[1] * x - P[3] > 0.15) : [0.43, 0.71, 1.23, 1.91, 2.27, 2.83, 3.37].filter((x) => Math.abs(Math.abs(x + P[2]) - P[1]) > 0.2)),
   bugs: (P) => {
     const k = P[0];
     if (k <= 1) return [bug("no-factor", "recall", IM, `The factor 1/(2a) = 1/${2 * P[1]} in front of the logarithm was left out.`, sfAns(P, "no-factor")), bug("swap", "recall", IM, "The fraction inside the logarithm was turned upside down, which changes the sign of the answer.", sfAns(P, "swap"))];
     if (k === 2) return [bug("no-x", "recall", IM, "The u inside the logarithm was left out: the form is log|u + √(u² + a²)|.", sfAns(P, "no-x")), bug("power", "conceptual", IM, "The power rule was used as if the top were the derivative of the inside; it is not, so this is the standard logarithmic form.", sfAns(P, "power"))];
+    if (k === 5) return [bug("no-factor", "procedural", IM, `The factor 1/${P[1]} from du = ${P[1]} dx was left out.`, sfAns(P, "no-factor")), bug("no-x", "recall", IM, "The u inside the logarithm was left out: the form is log|u + √(u² − a²)|.", sfAns(P, "no-x"))];
+    if (k === 6) return [bug("no-log", "recall", IM, "Only the first part of the standard result was written; the logarithm part is needed too.", sfAns(P, "no-log")), bug("log-sign", "recall", IM, "The logarithm part was added; for √(x² − a²) it is subtracted: (x/2)√(x² − a²) − (a²/2) log|x + √(x² − a²)|.", sfAns(P, "log-sign"))];
     if (k === 3) return [bug("no-log", "recall", IM, "Only the first part of the standard result was written; the (a²/2) log|x + √(x² + a²)| part is needed too.", sfAns(P, "no-log")), bug("half-log", "recall", IM, "The coefficient of the logarithm is a²/2, not a².", sfAns(P, "half-log"))];
     return [bug("first-only", "procedural", IM, "Only the log|x² + bx + c| part was integrated; after writing px + q = (p/2)(2x + b) + B, the constant B gives a second, standard-form integral.", sfAns(P, "first-only"))];
   },
@@ -2706,9 +2713,9 @@ const auform = F({
     const ans = sfAns(P).replace(/ \+ C$/, "");
     return [`−(${ans}) + C`, `2(${ans}) + C`];
   },
-  domain: [[0, 4], [1, 6], [-4, 4], [1, 6], [-6, 6]],
-  keep: ([k, a, h, p, q]) => (k === 1 || k === 3 ? h === 0 && p === 1 && q === 0 : k === 4 ? h * h !== a * a && q - p * h !== 0 && h !== 0 : h * h !== a * a && p === 1 && q === 0) && (k === 1 ? a >= 3 : true),
-  why: "Standard forms with a from 1 to 6, reached by completing the square x² + 2hx + h² ∓ a²; tan⁻¹ and sin⁻¹ forms are in the definite family aupi.",
+  domain: [[0, 6], [1, 6], [-4, 4], [1, 6], [-6, 6]],
+  keep: ([k, a, h, p, q]) => k >= 5 ? h === 0 && q === 0 && a >= 2 && gcd(a, p) === 1 && p / a < 0.62 : (k === 1 || k === 3 ? h === 0 && p === 1 && q === 0 : k === 4 ? h * h !== a * a && q - p * h !== 0 && h !== 0 : h * h !== a * a && p === 1 && q === 0) && (k === 1 ? a >= 3 : true),
+  why: "Standard forms with a from 1 to 6 (and √(b²x² − c²) forms with c/b < 0.62 so that they are defined for x > c/b), reached by completing the square x² + 2hx + h² ∓ a²; tan⁻¹ and sin⁻¹ forms are in auinvf and aupi.",
   cap: 400,
   difficulty: ([k, , h]) => (k === 1 || (k === 0 && h === 0) ? 1 : k === 4 ? 3 : 2),
   teach: {
@@ -2719,7 +2726,7 @@ const auform = F({
       { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer.", "It must give back the integrand at every x where both are defined."] },
     ],
   },
-  limits: "Logarithmic standard forms; 1/(x² + a²) and 1/√(a² − x²), whose antiderivatives are inverse trigonometric, are assessed as definite integrals in aupi.",
+  limits: "Logarithmic standard forms; the inverse trigonometric forms 1/(x² + a²), 1/√(a² − x²), √(a² − x²) are in auinvf (indefinite) and aupi (definite).",
 });
 
 /** [k, a, c]: definite standard forms with values in π. */
@@ -2845,7 +2852,7 @@ const aupfr = F({
       { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer and add the fractions.", "You must get the original integrand."] },
     ],
   },
-  limits: "One repeated linear factor, or an improper fraction over two distinct linear factors; irreducible quadratic factors are in aopfq (partial fractions) and aupi (tan⁻¹ forms).",
+  limits: "One repeated linear factor, or an improper fraction over two distinct linear factors; irreducible quadratic factors are in auprq.",
 });
 
 /** [k, a, n, c]: by parts — c·x e^(ax), c·x sin ax, c·x cos ax, c·xⁿ log(ax), c·eˣ[f + f′], c·x² e^(ax), c·x² cos ax. */
@@ -3149,4 +3156,142 @@ const audbe = F({
   limits: "Powers up to 3 on the standard intervals; answers are exact expressions in e and π.",
 });
 
-export const B21: Def[] = [auleq, aulwp, auvexp, aubin, auapis, auapk, auaps, auapc, auaprec, auapln, auqstd, auqsplit, auqf, auqcs, auqwp, ausec, aurat, aucen, au3cl, au3ce, au3ex, aultab, aulpow, auspd, aulstd, auliinf, audsum, audquo, audch, audinv, audel, audt3, audk, audsg, auinv, austd, aulax, auinit, autrig, auform, aupi, aupfr, auparts, ausbd, audfp, aurie, audbe];
+// ================================================================ inverse trigonometric standard forms (inv@1)
+
+const xa = (a: number, h = 0) => (h === 0 ? (a === 1 ? "x" : `x/${a}`) : a === 1 ? sum([[1, "x"], [h, ""]]) : `(${sum([[1, "x"], [h, ""]])})/${a}`);
+const T1 = (a: number, h = 0) => `tan⁻¹(${xa(a, h)})`;
+const S1 = (a: number, h = 0) => `sin⁻¹(${xa(a, h)})`;
+const anti = (t: [number, string][]) => `${sum(t)} + C`;
+/** [k, a, h, c, q]: k = 0 c/(x² + a²), 1 c/√(a² − x²), 2 c/((x + h)² + a²) expanded, 3 c/√(a² − (x + h)²) expanded,
+ * 4 (cx + q)/(x² + a²), 5 √(a² − x²). */
+const ivG = ([k, a, h, c, q]: number[]) => (x: number) => {
+  const u = x + h;
+  return k === 0 ? c / (x * x + a * a) : k === 1 ? c / Math.sqrt(a * a - x * x) : k === 2 ? c / (u * u + a * a) : k === 3 ? c / Math.sqrt(a * a - u * u) : k === 4 ? (c * x + q) / (x * x + a * a) : Math.sqrt(a * a - x * x);
+};
+const ivAns = ([k, a, h, c, q]: number[], slip = ""): string => {
+  if (k === 0) return slip === "no-1/a" ? anti([[c, T1(a)]]) : slip === "inside" ? anti([[c / a, "tan⁻¹(x)"]]) : anti([[c / a, T1(a)]]);
+  if (k === 1) return slip === "extra-1/a" ? anti([[c / a, S1(a)]]) : slip === "tan" ? anti([[c / a, T1(a)]]) : anti([[c, S1(a)]]);
+  if (k === 2) return slip === "no-shift" ? anti([[c / a, T1(a)]]) : slip === "no-1/a" ? anti([[c, T1(a, h)]]) : anti([[c / a, T1(a, h)]]);
+  if (k === 3) return slip === "no-shift" ? anti([[c, S1(a)]]) : slip === "extra-1/a" ? anti([[c / a, S1(a, h)]]) : anti([[c, S1(a, h)]]);
+  if (k === 4) {
+    const L: [number, string] = [c / 2, `log(x² + ${a * a})`];
+    const T: [number, string] = [q / a, T1(a)];
+    return slip === "log-only" ? anti([L]) : slip === "log-coef" ? anti([[c, L[1]], T]) : slip === "no-1/a" ? anti([L, [q, T1(a)]]) : anti([L, T]);
+  }
+  return slip === "no-inverse" ? anti([[1 / 2, `x√(${a * a} − x²)`]]) : slip === "coef" ? anti([[1 / 2, `x√(${a * a} − x²)`], [a * a, S1(a)]]) : anti([[1 / 2, `x√(${a * a} − x²)`], [(a * a) / 2, S1(a)]]);
+};
+const ivQuad = (a: number, h: number, plus: boolean) => (plus ? sum([[1, "x²"], [2 * h, "x"], [h * h + a * a, ""]]) : sum([[-1, "x²"], [-2 * h, "x"], [a * a - h * h, ""]]));
+const auinvf = F({
+  id: "auinvf",
+  arity: 5,
+  title: "Integrals with inverse trigonometric answers: 1/(x² + a²), 1/√(a² − x²), √(a² − x²) and forms reducible to them",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (P) => {
+    const [k, a, h, c, q] = P;
+    const cc_ = c === 1 ? "1" : `${c}`;
+    const f = k === 0 ? `${cc_}/(x² + ${a * a})` : k === 1 ? `${cc_}/√(${a * a} − x²)` : k === 2 ? `${cc_}/(${ivQuad(a, h, true)})` : k === 3 ? `${cc_}/√(${ivQuad(a, h, false)})` : k === 4 ? `(${sum([[c, "x"], [q, ""]])})/(x² + ${a * a})` : `√(${a * a} − x²)`;
+    return `Find ∫ ${f} dx.${k === 4 ? " (log is the natural logarithm.)" : ""}`;
+  },
+  solve: (P) => {
+    const [k, a, h] = P;
+    const sq = k === 2 ? `Complete the square: ${ivQuad(a, h, true)} = (${sum([[1, "x"], [h, ""]])})² + ${a}²` : k === 3 ? `Complete the square: ${ivQuad(a, h, false)} = ${a}² − (${sum([[1, "x"], [h, ""]])})²` : k === 4 ? "Split the top: the x part gives a logarithm (its top is half the derivative of the bottom), the constant part a tan⁻¹" : `The integrand is a standard form with a = ${a}`;
+    const form = k === 0 || k === 2 || k === 4 ? "∫ dx/(u² + a²) = (1/a) tan⁻¹(u/a) + C" : k === 5 ? "∫ √(a² − x²) dx = (x/2)√(a² − x²) + (a²/2) sin⁻¹(x/a) + C" : "∫ dx/√(a² − u²) = sin⁻¹(u/a) + C";
+    const ans = ivAns(P);
+    return { steps: [st("shape", "rewrite", QUAD, sq, a), st("form", "recall", IM, form, form), st("answer", "integrate", IM, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (P, v) => derivAgrees(v, ivG(P), XSMALL),
+  bugs: (P) => {
+    const [k, a] = P;
+    if (k === 0) return [bug("no-1/a", "recall", IM, `The factor 1/a = 1/${a} in front of tan⁻¹ was left out: ∫ dx/(x² + a²) = (1/a) tan⁻¹(x/a).`, ivAns(P, "no-1/a")), bug("inside", "recall", IM, `tan⁻¹ x was used instead of tan⁻¹(x/${a}); the a² inside the bracket gives x/a.`, ivAns(P, "inside"))];
+    if (k === 1) return [bug("extra-1/a", "recall", IM, "A factor 1/a was put in front, as for tan⁻¹; ∫ dx/√(a² − x²) = sin⁻¹(x/a) has no 1/a.", ivAns(P, "extra-1/a")), bug("tan", "conceptual", IM, "The tan⁻¹ form was used; with a square root of a² − x² the form is sin⁻¹(x/a).", ivAns(P, "tan"))];
+    if (k === 2) return [bug("no-shift", "procedural", QUAD, "After completing the square, u = x + h was not put back: the answer must contain (x + h)/a.", ivAns(P, "no-shift")), bug("no-1/a", "recall", IM, `The factor 1/a = 1/${a} in front of tan⁻¹ was left out.`, ivAns(P, "no-1/a"))];
+    if (k === 3) return [bug("no-shift", "procedural", QUAD, "After completing the square, u = x + h was not put back: the answer must contain (x + h)/a.", ivAns(P, "no-shift")), bug("extra-1/a", "recall", IM, "A factor 1/a was put in front, as for tan⁻¹; the sin⁻¹ form has none.", ivAns(P, "extra-1/a"))];
+    if (k === 4) return [bug("log-only", "procedural", IM, "Only the x part was integrated; the constant on top gives a second, tan⁻¹ part.", ivAns(P, "log-only")), bug("log-coef", "procedural", IM, "The x part was integrated as c log(x² + a²); the derivative of x² + a² is 2x, so the coefficient is c/2.", ivAns(P, "log-coef")), bug("no-1/a", "recall", IM, `The factor 1/a = 1/${a} in front of tan⁻¹ was left out.`, ivAns(P, "no-1/a"))];
+    return [bug("no-inverse", "recall", IM, "Only the first part of the standard result was written; the (a²/2) sin⁻¹(x/a) part is needed too.", ivAns(P, "no-inverse")), bug("coef", "recall", IM, "The coefficient of sin⁻¹ is a²/2, not a².", ivAns(P, "coef"))];
+  },
+  distractors: (P) => {
+    const ans = ivAns(P).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[0, 5], [1, 7], [-3, 3], [1, 6], [-6, 6]],
+  keep: ([k, a, h, c, q]) =>
+    k === 0 ? h === 0 && q === 0 : k === 1 ? a >= 3 && h === 0 && q === 0 : k === 2 ? h !== 0 && q === 0 : k === 3 ? a >= 4 && Math.abs(h) === 1 && q === 0 : k === 4 ? h === 0 && q !== 0 && a <= 6 : a >= 3 && h === 0 && c === 1 && q === 0,
+  why: "c/(x² + a²), c/√(a² − x²) (a ≥ 3), the same after completing the square, (cx + q)/(x² + a²) and √(a² − x²), so that every answer is defined at the sample points.",
+  cap: 400,
+  difficulty: ([k]) => (k <= 1 ? 1 : k === 5 || k === 4 ? 3 : 2),
+  teach: {
+    idea: "d/dx tan⁻¹(x/a) = a/(x² + a²) and d/dx sin⁻¹(x/a) = 1/√(a² − x²), so these integrands have inverse trigonometric antiderivatives. Completing the square brings x² + bx + c to (x + h)² ± a², the same forms with u = x + h.",
+    method: "∫ dx/(x² + a²) = (1/a) tan⁻¹(x/a) + C; ∫ dx/√(a² − x²) = sin⁻¹(x/a) + C; ∫ √(a² − x²) dx = (x/2)√(a² − x²) + (a²/2) sin⁻¹(x/a) + C. For a linear top, split it into a multiple of the bottom's derivative (a logarithm) and a constant (a tan⁻¹).",
+    alternatives: [
+      { id: "trig_sub", title: "Substitute x = a tan θ or x = a sin θ", kind: "procedural", text: ["With x = a tan θ: dx = a sec²θ dθ and x² + a² = a² sec²θ, so the integrand becomes (1/a) dθ.", "θ = tan⁻¹(x/a) gives the answer."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer with the chain rule.", "The factor from the inside x/a must cancel the 1/a in front (or produce it)."] },
+    ],
+  },
+  limits: "Whole-number a and shifts; forms are chosen so that sin⁻¹ arguments stay between −1 and 1 for 0 < x < 2.4.",
+});
+
+/** [r, a, A, B, C]: ∫ [A/(x − r) + (Bx + C)/(x² + a²)] dx, written as one fraction over (x − r)(x² + a²). */
+const pqG = ([r, a, A, B, C]: number[]) => (x: number) => A / (x - r) + (B * x + C) / (x * x + a * a);
+const pqAns = ([r, a, A, B, C]: number[], slip = "") => {
+  const t: [number, string][] = [[A, `log|${xm(r)}|`]];
+  if (slip !== "log-coef") t.push([B / 2, `log(x² + ${a * a})`]);
+  else t.push([B, `log(x² + ${a * a})`]);
+  if (slip === "no-1/a") t.push([C, T1(a)]);
+  else if (slip !== "no-tan") t.push([C / a, T1(a)]);
+  return anti(t);
+};
+const auprq = F({
+  id: "auprq",
+  arity: 5,
+  title: "Integrating by partial fractions with an irreducible quadratic factor",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (P) => {
+    const [r, a, A, B, C] = P;
+    const num = sum([[A + B, "x²"], [C - B * r, "x"], [A * a * a - C * r, ""]]);
+    return `Find ∫ (${num})/((${xm(r)})(x² + ${a * a})) dx. (log is the natural logarithm.)`;
+  },
+  solve: (P) => {
+    const [r, a, A, B, C] = P;
+    const ans = pqAns(P);
+    return {
+      steps: [
+        st("split", "partial fractions", "MATH.algebra.partial-fractions", `Write the integrand as A/(x − ${pn(r)}) + (Bx + C)/(x² + ${a * a}): A = ${A}, B = ${B}, C = ${C}`, `${A}, ${B}, ${C}`),
+        st("parts", "integrate", IM, `A/(x − r) gives A log|x − r|; Bx/(x² + a²) gives (B/2) log(x² + a²); C/(x² + a²) gives (C/a) tan⁻¹(x/a)`, "log, log, tan⁻¹"),
+        st("answer", "combine", IM, ans, ans),
+      ],
+      answer: ans,
+    };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (P, v) => derivAgrees(v, pqG(P), [-2.63, -1.37, -0.41, 0.43, 1.58, 2.27, 3.62].filter((x) => Math.abs(x - P[0]) > 0.2)),
+  bugs: (P) => [
+    bug("no-tan", "conceptual", IM, "The whole (Bx + C)/(x² + a²) part was integrated as a logarithm; only the Bx part is (half) the derivative of the bottom, and the constant C gives (C/a) tan⁻¹(x/a).", pqAns(P, "no-tan")),
+    bug("log-coef", "procedural", IM, "Bx/(x² + a²) was integrated as B log(x² + a²); the derivative of x² + a² is 2x, so the coefficient is B/2.", pqAns(P, "log-coef")),
+    bug("no-1/a", "recall", IM, `The factor 1/a = 1/${P[1]} in front of tan⁻¹ was left out.`, pqAns(P, "no-1/a")),
+  ],
+  distractors: (P) => {
+    const ans = pqAns(P).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[-3, 3], [1, 4], [-4, 4], [-4, 4], [-6, 6]],
+  keep: ([r, a, A, B, C]) => A !== 0 && C !== 0 && B !== 0 && a !== 1 && A + B !== 0 && Math.abs(A * a * a - C * r) <= 60,
+  why: "A linear factor x − r and an irreducible factor x² + a² (a from 2 to 4) with whole-number partial-fraction constants.",
+  cap: 400,
+  difficulty: ([r, , A, B, C]) => (r === 0 && A > 0 && B > 0 && C > 0 ? 2 : 3),
+  teach: {
+    idea: "A factor x² + a² that does not factorise needs a linear top: (Bx + C)/(x² + a²). Its x part integrates to a logarithm and its constant part to a tan⁻¹.",
+    method: "Write the integrand as A/(x − r) + (Bx + C)/(x² + a²); find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + C.",
+    alternatives: [
+      { id: "compare", title: "Compare coefficients", kind: "procedural", text: ["Multiply out A(x² + a²) + (Bx + C)(x − r).", "Match the coefficients of x², x and the constant with the given top."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate each part of your answer.", "Adding the three fractions must give back the integrand."] },
+    ],
+  },
+  limits: "One linear and one irreducible quadratic factor x² + a²; quadratics needing a completed square are in auinvf.",
+});
+
+export const B21: Def[] = [auleq, aulwp, auvexp, aubin, auapis, auapk, auaps, auapc, auaprec, auapln, auqstd, auqsplit, auqf, auqcs, auqwp, ausec, aurat, aucen, au3cl, au3ce, au3ex, aultab, aulpow, auspd, aulstd, auliinf, audsum, audquo, audch, audinv, audel, audt3, audk, audsg, auinv, austd, aulax, auinit, autrig, auform, aupi, aupfr, auparts, ausbd, audfp, aurie, audbe, auinvf, auprq];

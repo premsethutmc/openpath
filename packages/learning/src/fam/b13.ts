@@ -41,6 +41,7 @@ const TRI = "MATH.measurement.triangle-area";
 const CVOL = "MATH.measurement.cube-volume";
 const TPROP = "MATH.geometry.triangle-properties";
 const EXP = "MATH.number.exponents";
+const TRAP = "MATH.measurement.trapezium-area";
 
 // ---------------------------------------------------------------- exact rationals (small integers)
 
@@ -2536,6 +2537,932 @@ export const B13: Def[] = [
     },
     limits: "Single points and one circle; common tangents to two circles are left out.",
   },
+  // ================================================================== gap@1 additions
+  // ------------------------------------------------------------------ real numbers: classifying, number line, cycles, decimals, operations
+  {
+    id: "amclass",
+    arity: 2,
+    title: "Natural, whole, integer, rational or irrational?",
+    competency: RN,
+    type: "choice",
+    // [k, s]: the kind asked (CLASS_ASK[k]); s seeds the four numbers
+    parse: none,
+    reject: ([k, s]) => (k >= 0 && k <= 4 && s >= 0 && s <= 59 && !classDup([k, s]) ? null : "Five kinds of number and seeds 0 to 59 (each set of numbers once)."),
+    choices: (p) => classSet(p).opts,
+    prompt: (p) => `Which of these numbers is ${CLASS_ASK[p[0]]}? ${classSet(p).opts.join(";  ")}`,
+    solve: (p) => ({ steps: [step("kind", "note", RN, [CLASS_WHY[p[0]]], "")], answer: classSet(p).right }),
+    // independent: work out what each shown number is (a square root, a fraction, a decimal, π …) and test it
+    validate: (p, v) => {
+      if (typeof v !== "number" || !Number.isInteger(v)) return false;
+      const opts = classSet(p).opts;
+      const fits = (t: string) => {
+        const c = classify(t);
+        return c !== null && [c === "natural", c === "zero", c === "negint", c === "fraction", c === "irrational"][p[0]];
+      };
+      return v >= 0 && v < opts.length && fits(opts[v]) && opts.filter(fits).length === 1;
+    },
+    bugs: (p) => {
+      const d = classSet(p);
+      return d.trap >= 0 ? [B(`trap-${p[0]}`, "conceptual", RN, CLASS_SLIP[p[0]], d.trap)] : [];
+    },
+    variants: () => [],
+    explain: say(),
+    domain: [[0, 4], [0, 59]],
+    keep: (p) => !classDup(p),
+    difficulty: ([k]) => ([1, 1, 2, 2, 3] as const)[k],
+    teach: {
+      idea: "Natural numbers 1, 2, 3, …; whole numbers add 0; integers add the negatives; rational numbers are all p/q (q ≠ 0), whose decimals end or repeat; irrational numbers (√2, π) have decimals that never end or repeat. Together they are the real numbers.",
+      method: "Simplify each number first (√16 = 4, −12/4 = −3, 0.333… = 1/3), then place it in the smallest set it belongs to.",
+      alternatives: [{ id: "nest", title: "Sets inside sets", kind: "conceptual", text: ["Draw circles inside each other: natural inside whole inside integer inside rational.", "Irrational numbers sit outside the rational circle, but inside the real numbers."] }],
+    },
+    limits: "Single numbers written as integers, fractions, decimals, square roots or π; sets of numbers given by a rule are not asked.",
+  },
+  {
+    id: "amnline",
+    arity: 5,
+    title: "Absolute values and distances of rational numbers on the number line",
+    competency: RN,
+    type: "exact",
+    mc: true,
+    // [m, a, b, c, d]: m 0 |a/b − c|; 1 the distance between a/b and c/d; 2 the point s = c parts of 1/b to the left (d = 0)
+    // or right (d = 1) of the integer a
+    parse: none,
+    reject: (p) => (nlineOk(p) ? null : "Fractions with denominators 2 to 9 and integers up to 6 in size."),
+    prompt: ([m, a, b, c, d]) =>
+      m === 0
+        ? `Find |${frc(a, b)} − ${c < 0 ? `(${vs(c)})` : c}|. (A fraction is fine.)`
+        : m === 1
+          ? `How far apart are ${frc(a, b)} and ${frc(c, d)} on the number line? (A fraction is fine.)`
+          : `On the number line, each unit is divided into ${b} equal parts. The point P is ${c} part${c > 1 ? "s" : ""} to the ${d ? "right" : "left"} of ${vs(a)}. Which rational number is P? (A fraction is fine.)`,
+    solve: ([m, a, b, c, d]) => {
+      if (m === 0) {
+        const x = qs(q(a, b), Q(c));
+        return { steps: [step("inside", "subtract", RN, [frc(a, b), c], dec(x)), step("abs", "note", RN, ["the absolute value is the distance from 0"], dec(q(Math.abs(x[0]), x[1])))], answer: dec(q(Math.abs(x[0]), x[1])) };
+      }
+      if (m === 1) {
+        const x = qs(q(a, b), q(c, d));
+        return { steps: [step("diff", "subtract", RN, [frc(a, b), frc(c, d)], dec(x)), step("abs", "note", RN, ["distance = |difference|"], dec(q(Math.abs(x[0]), x[1])))], answer: dec(q(Math.abs(x[0]), x[1])) };
+      }
+      const x = qa(Q(a), q(d ? c : -c, b));
+      return { steps: [step("move", d ? "add" : "subtract", RN, [a, `${c}/${b}`], dec(x))], answer: dec(x) };
+    },
+    // independent: decimals; m 1 counts small parts of 1/(bd) between the two points; m 2 steps along the line
+    validate: ([m, a, b, c, d], v) => {
+      const n = num(v);
+      if (n === null) return false;
+      if (m === 0) return near(n, Math.abs(a / b - c), 1e-9) && n >= 0;
+      if (m === 1) {
+        let lo = Math.min(a * d, c * b);
+        const hi = Math.max(a * d, c * b);
+        let k = 0;
+        while (lo < hi) {
+          lo++;
+          k++;
+        }
+        return near(n, k / (b * d), 1e-9);
+      }
+      let x = a;
+      for (let i = 0; i < c; i++) x += (d ? 1 : -1) / b;
+      return near(n, x, 1e-9);
+    },
+    bugs: ([m, a, b, c, d]) => {
+      if (m === 0) {
+        const x = qs(q(a, b), Q(c));
+        return x[0] < 0 ? [B("sign-kept", "conceptual", RN, "The minus sign was kept. An absolute value is a distance from 0, so it is never negative.", dec(x))] : [B("sign-dropped-inside", "procedural", RN, "The minus sign inside was read as a plus. Work out the inside first, then take its distance from 0.", dec(q(Math.abs(qa(q(a, b), Q(c))[0]), qa(q(a, b), Q(c))[1])))];
+      }
+      if (m === 1) {
+        const opp = a * c < 0;
+        const sizes = qs(q(Math.abs(a), b), q(Math.abs(c), d));
+        return [
+          ...(opp ? [B("sizes-subtracted", "conceptual", RN, "The sizes were subtracted, but the two numbers are on opposite sides of 0: the distance is the sum of their distances from 0.", dec(q(Math.abs(sizes[0]), sizes[1])))] : []),
+          B("added", "procedural", RN, "The two numbers were added; the distance between them is the difference (larger minus smaller).", dec(qa(q(a, b), q(c, d)))),
+        ].filter((x) => !is(x.predict as string, q(Math.abs(qs(q(a, b), q(c, d))[0]), qs(q(a, b), q(c, d))[1])));
+      }
+      const right = qa(Q(a), q(d ? c : -c, b));
+      return [B("wrong-way", "procedural", RN, `P was moved the wrong way. ${d ? "Right" : "Left"} means ${d ? "adding" : "subtracting"} ${c}/${b}.`, dec(qa(Q(a), q(d ? -c : c, b))))].filter((x) => !is(x.predict as string, right));
+    },
+    distractors: (p) => {
+      const r = nlineAns(p);
+      return [dec(qa(r, Q(1))), dec(qm(r, Q(2))), dec(qa(r, q(1, 2)))];
+    },
+    variants: () => [],
+    explain: say({ abs: "Absolute value", move: "Move along the line" }),
+    domain: [[0, 2], [-9, 9], [2, 9], [-9, 9], [0, 9]],
+    keep: nlineOk,
+    cap: 450,
+    difficulty: ([m]) => (m === 2 ? 1 : m === 0 ? 2 : 3),
+    word: ([m, a, b, c, d]) =>
+      m === 0
+        ? `A diver is at ${frc(a, b)} m and a marker buoy's anchor is at ${vs(c)} m (heights from the water surface; negative is below it). How far apart are the diver and the anchor, in m?`
+        : m === 1
+          ? `Two stations on a hill railway are at heights ${frc(a, b)} km and ${frc(c, d)} km compared with a lake (negative is below the lake's level). What is the difference in height between them, in km?`
+          : `On a ruler-like scale each unit is divided into ${b} equal parts. A bead sits ${c} part${c > 1 ? "s" : ""} to the ${d ? "right" : "left"} of the mark ${vs(a)}. At what number is the bead?`,
+    teach: {
+      idea: "Every rational number has a place on the number line. |x| is the distance of x from 0, and the distance between x and y is |x − y|.",
+      method: "Work out the expression inside the bars, then drop the sign. For a distance, subtract the smaller number from the larger. To place p/q, cut each unit into q parts and count.",
+      visual: ([m, a, b, c, d]) => (m === 2 ? { type: "numberline", from: Math.floor(a - c / b) - 1, to: Math.ceil(a + c / b) + 1, step: 1, marks: [a + ((d ? 1 : -1) * c) / b] } : null),
+      alternatives: [{ id: "steps", title: "Count small steps", kind: "procedural", text: ["Write both numbers with the same denominator, say 12ths.", "Count the twelfths from one to the other: that count over 12 is the distance."] }],
+    },
+    limits: "Fractions with denominators up to 9 and integers up to 6 in size; irrational points (√2 on the line) are a construction task.",
+  },
+  {
+    id: "amcyc",
+    arity: 3,
+    title: "Cyclic patterns in recurring decimals (sevenths and thirteenths)",
+    competency: RN,
+    type: "integer",
+    mc: true,
+    range: [0, 9],
+    // [t, k, n]: t 0 k/7, t 1 k/13; the n-th digit after the decimal point
+    parse: none,
+    reject: ([t, k, n]) => ((t === 0 || t === 1) && k >= 1 && k < (t ? 13 : 7) && n >= 7 && n <= 60 ? null : "k/7 or k/13 and the 7th to 60th digits."),
+    prompt: ([t, k, n]) => (t === 0 ? `1/7 = 0.142857142857…, and every fraction k/7 repeats the same six digits in the same cyclic order (2/7 = 0.285714…). Without dividing, what is the ${ordn(n)} digit after the decimal point of ${k}/7?` : `1/13 = 0.076923076923… and 2/13 = 0.153846153846…; every fraction k/13 repeats one of these two six-digit cycles, starting at a different place. What is the ${ordn(n)} digit after the decimal point of ${k}/13?`),
+    solve: ([t, k, n]) => {
+      const d = t ? 13 : 7;
+      const block = cycBlock(k, d);
+      const pos = ((n - 1) % 6) + 1;
+      return { steps: [step("block", "note", RN, [`${k}/${d} = 0.${block}${block}…`], block), step("place", "note", RN, [`the digits repeat every 6 places, so digit ${n} is digit ${pos} of the block`], Number(block[pos - 1]))], answer: Number(block[pos - 1]) };
+    },
+    // independent: long division of k by d, digit by digit, to the n-th place
+    validate: ([t, k, n], v) => {
+      const d = t ? 13 : 7;
+      let r = k;
+      let digit = -1;
+      for (let i = 0; i < n; i++) {
+        r *= 10;
+        digit = Math.floor(r / d);
+        r -= digit * d;
+      }
+      return v === digit;
+    },
+    bugs: ([t, k, n]) => {
+      const d = t ? 13 : 7;
+      const block = cycBlock(k, d);
+      const one = cycBlock(1, d);
+      const pos = ((n - 1) % 6) + 1;
+      const right = Number(block[pos - 1]);
+      return [
+        B("unit-fraction-digits", "conceptual", RN, `The digits of 1/${d} were used. ${k}/${d} uses the same cycle but starts at a different digit: ${k}/${d} = 0.${block}….`, Number(one[pos - 1])),
+        B("remainder-place", "procedural", RN, `The remainder ${n % 6} was used as the place without care: digit ${n} is digit ${pos} of the block (a remainder of 0 means the 6th digit).`, Number(block[n % 6 === 0 ? 0 : n % 6])),
+      ].filter((x) => x.predict !== right);
+    },
+    variants: () => [],
+    explain: say({ block: "The repeating block", place: "Position in the block" }),
+    domain: [[0, 1], [1, 12], [7, 60]],
+    keep: ([t, k]) => k < (t ? 13 : 7),
+    cap: 400,
+    difficulty: ([t, , n]) => (t ? 3 : n % 6 === 0 ? 3 : 2),
+    teach: {
+      idea: "Dividing by 7 can leave only the remainders 1 to 6, so the digits must repeat within 6 places. Every k/7 runs through the same remainders, so its digits are the cycle 142857 started at a different point.",
+      method: "Find where the cycle of k/d starts (k/7 = k × 0.142857…, or from the first remainders), then use the remainder of n on division by 6 to find the place in the block.",
+      alternatives: [{ id: "multiply", title: "Multiply the cycle", kind: "procedural", text: ["3/7 = 3 × 0.142857… = 0.428571…: the same digits, rotated.", "The block for 3/7 starts with 4, the next digit after 1 in the cycle 1, 4, 2, 8, 5, 7."] }],
+    },
+    limits: "Sevenths and thirteenths, digits from the 7th to the 60th; other periods (1/17 has 16 digits) are explored in class.",
+  },
+  {
+    id: "amdec",
+    arity: 2,
+    title: "A fraction as a terminating or recurring decimal",
+    competency: RN,
+    type: "choice",
+    // [n, d]: the fraction n/d in lowest terms
+    parse: none,
+    reject: ([n, d]) => (n >= 1 && n < d && gcd(n, d) === 1 && DEC_DEN.includes(d) ? null : "Proper fractions in lowest terms with denominators from the list."),
+    choices: (p) => decOpts(p).opts,
+    prompt: ([n, d]) => `Which of these is the decimal expansion of ${n}/${d}?`,
+    solve: ([n, d]) => ({ steps: [step("divide", "note", RN, [`Divide ${n} by ${d}: ${decExp(n, d)}`], "")], answer: decOpts([n, d]).right }),
+    // independent: turn the chosen expansion back into a fraction (a recurring block b of length k after m digits is
+    // (pre + b/(10^k − 1)) / 10^m) and compare it with n/d
+    validate: ([n, d], v) => {
+      if (typeof v !== "number" || !Number.isInteger(v)) return false;
+      const opt = decOpts([n, d]).opts[v];
+      if (!opt) return false;
+      const back = decValue(opt);
+      return back !== null && back[0] * d === n * back[1];
+    },
+    bugs: ([n, d]) => {
+      const o = decOpts([n, d]);
+      return [
+        B("digits-joined", "conceptual", RN, `The numerator and denominator were written after the point (0.${n}${d}). ${n}/${d} means ${n} ÷ ${d}: divide.`, o.joined),
+        B("upside-down", "procedural", RN, `${d} ÷ ${n} was worked out. ${n}/${d} means ${n} divided by ${d}.`, o.flip),
+        B("stopped", "procedural", RN, terminating(q(n, d)) ? "The division was stopped too early. Keep dividing until the remainder is 0." : "The division was stopped after a few digits. The remainders repeat, so the digits repeat for ever.", o.cut),
+      ].filter((x) => x.predict >= 0 && x.predict !== o.right);
+    },
+    variants: () => [],
+    explain: say(),
+    domain: [[1, 24], [3, 25]],
+    difficulty: ([n, d]) => (terminating(q(n, d)) ? (d <= 8 ? 1 : 2) : decExp(n, d).length > 14 ? 3 : 2),
+    teach: {
+      idea: "n/d means n ÷ d. If d has no prime factors other than 2 and 5, the division ends (a terminating decimal); otherwise a remainder comes back and the digits repeat for ever (a recurring decimal).",
+      method: "Do the long division, writing each remainder. Stop when the remainder is 0, or when a remainder you have seen before comes back: the digits from that point repeat.",
+      alternatives: [{ id: "scale", title: "Make the denominator a power of 10", kind: "procedural", text: ["7/16: 16 = 2⁴, so multiply top and bottom by 5⁴ = 625: 4375/10000 = 0.4375.", "This works only when the denominator has just 2s and 5s."] }],
+    },
+    limits: "Proper fractions with denominators up to 25 whose repeating block has at most 6 digits.",
+  },
+  {
+    id: "amrop",
+    arity: 5,
+    title: "Operations on real numbers: adding and multiplying surds",
+    competency: RN,
+    type: "exact",
+    mc: true,
+    // [t, a, b, m, k]: t 0 a√m + b√(k²m); 1 (a + √m)(a − √m); 2 (√m + √k)²; 3 (a + b√m)(k + √m)
+    parse: none,
+    reject: (p) => (ropOk(p) ? null : "Square-free m from 2 to 7 and small whole-number coefficients."),
+    prompt: (p) => `Simplify: ${ropText(p)}. (Write the answer like 5√3, 7 or 4 + 2√6.)`,
+    solve: (p) => {
+      const [t, a, b, m, k] = p;
+      const ans = ropAns(p);
+      if (t === 0) return { steps: [step("simplify", "note", SURD, [`√${k * k * m} = ${k}√${m}`], ""), step("collect", "add", RN, [`${a}√${m}`, `${b * k}√${m}`], ans)], answer: ans };
+      if (t === 1) return { steps: [step("identity", "note", RN, ["(x + y)(x − y) = x² − y²"], ""), step("value", "subtract", RN, [a * a, m], ans)], answer: ans };
+      if (t === 2) return { steps: [step("identity", "note", RN, ["(x + y)² = x² + 2xy + y²"], ""), step("value", "note", RN, [`${m} + ${k} + 2√${m * k}`], ans)], answer: ans };
+      return { steps: [step("expand", "note", RN, [`${a} × ${k} + ${a}√${m} + ${b * k}√${m} + ${b}(√${m})²`], ""), step("value", "note", RN, [`${a * k + b * m} + ${a + b * k}√${m}`], ans)], answer: ans };
+    },
+    // independent: compare the decimal value of the typed answer with the decimal value of the expression
+    validate: (p, v) => {
+      if (typeof v !== "string") return false;
+      const x = surdValue(v);
+      const [t, a, b, m, k] = p;
+      const want = t === 0 ? a * Math.sqrt(m) + b * Math.sqrt(k * k * m) : t === 1 ? (a + Math.sqrt(m)) * (a - Math.sqrt(m)) : t === 2 ? (Math.sqrt(m) + Math.sqrt(k)) ** 2 : (a + b * Math.sqrt(m)) * (k + Math.sqrt(m));
+      return x !== null && near(x, want, 1e-9);
+    },
+    bugs: (p) => {
+      const [t, a, b, m, k] = p;
+      const right = ropAns(p);
+      const out =
+        t === 0
+          ? [B("radicands-added", "conceptual", SURD, `The numbers under the roots were added. Only like surds can be combined: first write √${k * k * m} = ${k}√${m}.`, surdSum(0, a + b, m + k * k * m))]
+          : t === 1
+            ? [B("sign-of-square", "procedural", RN, `(√${m})² was added instead of subtracted: (a + √m)(a − √m) = a² − m.`, String(a * a + m))]
+            : t === 2
+              ? [B("square-of-sum", "conceptual", RN, "The square of a sum was taken as the sum of the squares; the middle term 2√(mk) is missing.", String(m + k))]
+              : [B("root-times-root", "procedural", RN, `√${m} × √${m} was taken as √${m}; it is ${m}.`, surdSum(a * k, a + b * k + b, m))];
+      return out.filter((x) => x.predict !== right);
+    },
+    distractors: (p) => {
+      const [t, a, b, m, k] = p;
+      return t === 0 ? [surdSum(0, a + b, m), surdSum(0, a * b * k, m)] : t === 1 ? [String(a * a), String(a * a - m * m)] : t === 2 ? [surdSum(m + k, 1, m * k), surdSum(0, 2, m * k)] : [surdSum(a * k, a + b * k, m), surdSum(a * k + b * m, a * k, m)];
+    },
+    variants: () => [],
+    explain: say({ simplify: "Simplify", collect: "Collect like surds", identity: "Identity", expand: "Expand" }),
+    domain: [[0, 3], [1, 9], [1, 6], [2, 7], [1, 7]],
+    keep: ropOk,
+    cap: 400,
+    difficulty: ([t]) => ([1, 2, 2, 3] as const)[t],
+    teach: {
+      idea: "Real numbers can be added and multiplied like algebra: √a × √a = a and √a × √b = √(ab). The sum or product of two irrational numbers can be rational (as in (2 + √3)(2 − √3) = 1) or irrational, so the irrationals are not closed.",
+      method: "Simplify each surd (√12 = 2√3), collect like surds, and expand brackets term by term, replacing (√m)² by m.",
+      alternatives: [{ id: "like-terms", title: "Like terms", kind: "conceptual", text: ["Treat √3 like a letter: 2√3 + 5√3 = 7√3, just as 2x + 5x = 7x.", "√2 and √3 are unlike, so √2 + √3 cannot be combined."] }],
+    },
+    limits: "One square-free surd at a time (or two in (√m + √k)²); rationalising denominators is the radicals competency.",
+  },
+
+  // ------------------------------------------------------------------ combined solids with a cube; modelling real objects
+  {
+    id: "amcube",
+    arity: 5,
+    title: "Surface area and volume of a cube combined with a hemisphere or cylinder",
+    competency: COMB,
+    type: "exact",
+    mc: true,
+    // [m, w, a, k, h]: cube of edge a cm; radius 7k/2 cm; m 0 hemisphere on top, 1 cylinder of height h on top, 2 hemispherical
+    // hollow scooped from the top; w 0 total surface area, 1 volume
+    parse: none,
+    reject: (p) => (cubeOk(p) ? null : "Cubes of edge 7 to 30 cm with a radius of 3.5k cm that fits on the top face."),
+    prompt: ([m, w, a, k, h]) => {
+      const r = D(7 * k, 2);
+      const shape = m === 0 ? `A solid is a cube of edge ${a} cm with a hemisphere of radius ${r} cm fixed on its top face.` : m === 1 ? `A solid is a cube of edge ${a} cm with a cylinder of radius ${r} cm and height ${h} cm standing on its top face.` : `A hemispherical hollow of radius ${r} cm is scooped out of the top face of a solid cube of edge ${a} cm.`;
+      return `${shape} Taking π = 22/7, find the ${w ? "volume of the solid, in cm³" : "total surface area of the solid (all its outside surface), in cm²"}. (A fraction or decimal is fine.)`;
+    },
+    solve: (p) => {
+      const [m, w, a, k, h] = p;
+      const r = q(7 * k, 2);
+      const pr2 = qm(PI7, qm(r, r));
+      if (w === 1) {
+        const add = m === 1 ? qm(pr2, Q(h)) : qm(qm(pr2, r), q(2, 3));
+        const ans = m === 2 ? qs(Q(a ** 3), add) : qa(Q(a ** 3), add);
+        return { steps: [step("cube", "note", CVOL, ["Cube a³"], a ** 3), step("part", "note", m === 1 ? CYL : CS, [m === 1 ? "Cylinder πr²h" : "Hemisphere 2/3 πr³"], dec(add)), step("total", m === 2 ? "subtract" : "add", COMB, [a ** 3, dec(add)], dec(ans))], answer: dec(ans) };
+      }
+      const extra = m === 1 ? qm(qm(Q(2), qm(PI7, r)), Q(h)) : pr2;
+      const ans = qa(Q(6 * a * a), extra);
+      return { steps: [step("cube", "note", COMB, ["Cube 6a²"], 6 * a * a), step("part", "note", COMB, [m === 1 ? "The circle covered on the cube is replaced by the cylinder's top, so add only its curved surface 2πrh" : "The circle πr² lost from the top face is replaced by the curved surface 2πr², a gain of πr²"], dec(extra)), step("total", "add", COMB, [6 * a * a, dec(extra)], dec(ans))], answer: dec(ans) };
+    },
+    // independent: list every outside piece separately (five full faces, the top face with its circle, the curved and
+    // flat parts) for the surface, and slice the solid (Simpson's rule) for the volume
+    validate: ([m, w, a, k, h], v) => {
+      const r = 3.5 * k;
+      const pi = 22 / 7;
+      if (w === 1) {
+        const dome = simpson((x) => pi * (r * r - x * x), 0, r, 200);
+        const cyl = simpson(() => pi * r * r, 0, h || 1, 10) * (h ? 1 : 0);
+        return close(v, m === 0 ? a ** 3 + dome : m === 1 ? a ** 3 + cyl : a ** 3 - dome);
+      }
+      const faces = 5 * a * a + (a * a - pi * r * r);
+      return close(v, m === 1 ? faces + pi * r * r + 2 * pi * r * h : faces + 2 * pi * r * r);
+    },
+    bugs: ([m, w, a, k, h]) => {
+      const r = q(7 * k, 2);
+      const pr2 = qm(PI7, qm(r, r));
+      const hem = qm(qm(pr2, r), q(2, 3));
+      if (w === 1) return m === 0 ? [B("sphere-for-hemisphere", "conceptual", CS, "4/3 πr³ (a whole sphere) was used; a hemisphere is half of it, 2/3 πr³.", dec(qa(Q(a ** 3), qm(hem, Q(2)))))] : m === 1 ? [B("cone-formula", "recall", CYL, "⅓πr²h was used; that is a cone. A cylinder's volume is πr²h.", dec(qa(Q(a ** 3), qm(pr2, q(h, 3)))))] : [B("hollow-added", "conceptual", COMB, "The hollow was added. A scooped-out part is taken away from the cube.", dec(qa(Q(a ** 3), hem)))];
+      return m === 1
+        ? [B("covered-not-removed", "procedural", COMB, "Both circles of the cylinder were added and nothing was taken off the cube. The cylinder's base covers part of the top face, so only its top circle and curved surface are outside.", dec(qa(Q(6 * a * a), qa(qm(qm(Q(2), qm(PI7, r)), Q(h)), qm(pr2, Q(2)))))), B("curved-only-no-change", "procedural", COMB, "The cylinder's top circle was left out; it is part of the outside surface.", dec(qa(Q(6 * a * a), qs(qm(qm(Q(2), qm(PI7, r)), Q(h)), pr2))))]
+        : [B("covered-not-removed", "procedural", COMB, m === 0 ? "The curved surface 2πr² was added, but the circle covered by the hemisphere was not taken off the top face." : "The inside of the hollow was added, but the circle cut away from the top face was not taken off.", dec(qa(Q(6 * a * a), qm(pr2, Q(2))))), B(m === 0 ? "flat-face-counted" : "hollow-subtracted", "conceptual", COMB, m === 0 ? "The flat face of the hemisphere was counted as outside, but it is glued to the cube." : "The circle was taken away, but the curved inside of the hollow, 2πr², is now part of the outside surface.", dec(m === 0 ? qa(Q(6 * a * a), qm(pr2, Q(3))) : qs(Q(6 * a * a), pr2)))];
+    },
+    variants: () => [],
+    explain: say({ cube: "Cube", part: "Change", total: "Total" }),
+    domain: [[0, 2], [0, 1], [7, 30], [1, 4], [0, 20]],
+    keep: cubeOk,
+    cap: 400,
+    difficulty: ([m, w]) => (w === 1 ? (m === 2 ? 2 : 1) : 3),
+    word: ([m, w, a, k, h]) => {
+      const r = D(7 * k, 2);
+      const obj = m === 0 ? `A paperweight is a wooden cube of edge ${a} cm with a dome (a hemisphere of radius ${r} cm) glued on top.` : m === 1 ? `A pedestal for a statue is a stone cube of edge ${a} cm with a round pillar of radius ${r} cm and height ${h} cm standing on it.` : `A soap tray is made from a wooden cube of edge ${a} cm by scooping a hemispherical hollow of radius ${r} cm out of its top.`;
+      return `${obj} Taking π = 22/7, ${w ? "how much wood or stone is in it, in cm³" : "what area must be varnished to cover all its outside surface, in cm²"}?`;
+    },
+    teach: {
+      idea: "For surface area, only the faces that stay outside count: where two solids meet, the hidden circle is lost from one solid and does not appear on the other. Volume simply adds (or, for a hollow, subtracts).",
+      method: "Surface: start with 6a², take away each circle that is covered or cut away, then add the curved surfaces (and any flat top) that are now outside. Volume: a³ plus or minus the volume of the other solid.",
+      alternatives: [{ id: "paint", title: "Think of painting it", kind: "conceptual", text: ["Imagine painting the finished object: the glued faces never get paint.", "A scooped hollow gets painted inside, so its curved surface counts."] }],
+    },
+    limits: "A cube with one hemisphere, cylinder or hollow of radius 3.5k cm (π = 22/7); cuboids and spheres combine in the same way.",
+  },
+  {
+    id: "ammodel",
+    arity: 4,
+    title: "Modelling real objects (tents, bowls, tanks, cones) as combinations of solids",
+    competency: COMB,
+    type: "exact",
+    mc: true,
+    // [m, k, H, L]: radius 7k/2; m 0 a tent with upright walls H and a pointed roof of slant L (canvas); 1 a bowl (capacity);
+    // 2 a tank with upright sides H and a rounded dome (capacity); 3 an ice-cream cone of depth L with a rounded scoop (volume)
+    parse: none,
+    reject: (p) => (modelOk(p) ? null : "Radii 3.5k (k 1 to 4) with whole-number heights."),
+    prompt: (p) => `${MODEL[p[0]].q(p)} Take π = 22/7. (A fraction or decimal is fine.)`,
+    solve: (p) => {
+      const parts = MODEL[p[0]].parts(p);
+      const total = parts.reduce((s, x) => qa(s, x[1]), Q(0));
+      return { steps: [step("model", "note", COMB, [MODEL[p[0]].model], ""), ...parts.map(([lab, v], i) => step(`p${i}`, "note", COMB, [lab], dec(v))), step("total", "add", COMB, parts.map((x) => dec(x[1])), dec(total))], answer: dec(total) };
+    },
+    // independent: Simpson's rule on the solid's cross-sections (volumes) or on the surface swept by its outline (canvas)
+    validate: (p, v) => {
+      const [m, k, H, L] = p;
+      const r = 3.5 * k;
+      const pi = 22 / 7;
+      if (m === 0) {
+        const h = Math.sqrt(L * L - r * r);
+        const roof = simpson((t) => 2 * pi * (r * (1 - t / h)) * Math.hypot(1, r / h), 0, h, 400);
+        return close(v, 2 * pi * r * H + roof);
+      }
+      const dome = simpson((x) => pi * (r * r - x * x), 0, r, 400);
+      if (m === 1) return close(v, dome);
+      if (m === 2) return close(v, pi * r * r * H + dome);
+      return close(v, simpson((x) => pi * ((r * x) / L) ** 2, 0, L, 400) + dome);
+    },
+    bugs: (p) => MODEL[p[0]].bugs(p),
+    variants: () => [],
+    explain: say({ model: "Model", total: "Total" }),
+    domain: [[0, 3], [1, 4], [0, 12], [0, 24]],
+    keep: modelOk,
+    difficulty: ([m]) => ([3, 1, 2, 2] as const)[m],
+    teach: {
+      idea: "Real objects are modelled by the basic solids they look like: upright walls round a circle are a cylinder, a roof rising to a point is a cone, a rounded bowl or dome is a hemisphere. Canvas or paint needs only the surfaces that are really there; capacity needs the volume inside.",
+      method: "Sketch the object, name each part as a solid, decide whether the question needs surface (which surfaces?) or volume, then add the parts.",
+      alternatives: [{ id: "which", title: "Which surfaces?", kind: "conceptual", text: ["A tent has no canvas floor and no canvas between its walls and roof: only the curved surfaces count.", "A bowl holds what fits inside it: its volume, not the area of its surface."] }],
+    },
+    limits: "Four kinds of object with one radius (multiples of 3.5) and π = 22/7; frustum-shaped buckets are amfrust.",
+  },
+
+  // ------------------------------------------------------------------ composite plane shapes (Grade 8)
+  {
+    id: "amcshape",
+    arity: 4,
+    title: "Area and perimeter of composite shapes with semicircles, quadrants, triangles and trapeziums",
+    competency: TRAP,
+    type: "exact",
+    mc: true,
+    // [m, x, y, k]: d = 7k (k 1–4); m 0 area of an x by d rectangle with a semicircle on a side d; 1 its perimeter;
+    // 2 area of an x by y rectangle with a quadrant of radius d cut from a corner; 3 area of an x by y rectangle with a
+    // triangle of height k on the side x; 4 area of a trapezium (parallel sides d and y, height x) with a semicircle on side d
+    parse: none,
+    reject: (p) => (cshapeOk(p) ? null : "Lengths up to 40 cm with a diameter or radius of 7, 14, 21 or 28 cm."),
+    prompt: (p) => `${cshapeText(p)}${p[0] === 3 ? "" : " Take π = 22/7."} (A fraction or decimal is fine.)`,
+    solve: (p) => {
+      const parts = cshapeParts(p);
+      const total = parts.reduce((s, x) => qa(s, x[1]), Q(0));
+      return { steps: [...parts.map(([lab, v], i) => step(`p${i}`, "note", p[0] === 1 ? CIRC : TRAP, [lab], dec(v))), step("total", "add", TRAP, parts.map((x) => dec(x[1])), dec(total))], answer: dec(total) };
+    },
+    // independent: curved pieces as fans of many thin triangles (½r² sin Δθ each), scaled from π to 22/7; straight
+    // pieces from their widths (Simpson's rule); the perimeter by walking round the arc in small straight steps
+    validate: (p, v) => {
+      const [m, x, y, k] = p;
+      const d = 7 * k;
+      const scale = 22 / 7 / Math.PI;
+      const fan = (r: number, angle: number) => {
+        const N = 200000;
+        let s = 0;
+        for (let i = 0; i < N; i++) s += 0.5 * r * r * Math.sin(angle / N);
+        return s * scale;
+      };
+      const n = num(v);
+      if (n === null) return false;
+      if (m === 1) {
+        let len = 0;
+        const N = 200000;
+        const r = d / 2;
+        for (let i = 0; i < N; i++) len += 2 * r * Math.sin(Math.PI / (2 * N));
+        return near(n, 2 * x + d + len * scale, 1e-8);
+      }
+      const area = m === 0 ? x * d + fan(d / 2, Math.PI) : m === 2 ? x * y - fan(d, Math.PI / 2) : m === 3 ? x * y + simpson((t) => x * (1 - t / (3 * k)), 0, 3 * k, 20) : simpson((t) => y + ((d - y) * t) / x, 0, x, 20) + fan(d / 2, Math.PI);
+      return near(n, area, 1e-8);
+    },
+    bugs: (p) => cshapeBugs(p),
+    variants: () => [],
+    explain: say({ total: "Total" }),
+    domain: [[0, 4], [2, 40], [0, 40], [1, 4]],
+    keep: cshapeOk,
+    cap: 450,
+    difficulty: ([m]) => ([2, 3, 2, 1, 3] as const)[m],
+    word: (p) => cshapeWord(p),
+    teach: {
+      idea: "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, semicircle πr²/2, quadrant πr²/4); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
+      method: "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is πd/2 and it replaces the side it stands on.",
+      alternatives: [{ id: "sketch", title: "Sketch and label", kind: "procedural", text: ["Draw the shape and shade each piece in a different colour.", "Write the formula and the numbers inside each piece before adding."] }],
+    },
+    limits: "Five kinds of composite figure with π = 22/7; shapes with several curved pieces are worked in class.",
+  },
+
+  // ------------------------------------------------------------------ pyramids with other polygonal bases
+  {
+    id: "ampyrp",
+    arity: 4,
+    title: "Surface area of pyramids with rectangular, triangular, hexagonal and other bases",
+    competency: PYR,
+    type: "exact",
+    mc: true,
+    // [m, a, s, i]: m 0 the i-th rectangular-based pyramid (RPYR); 1 lateral area of a regular POLY[i]-gon pyramid with
+    // edge a and slant height s; 2 total surface area, equilateral triangle base a, slant height s; 3 the same for a regular hexagon
+    parse: none,
+    reject: (p) => (pyrpOk(p) ? null : "Rectangular bases from the list, or regular bases with edges 2 to 20 and slant heights above the apothem."),
+    prompt: (p) => pyrpText(p),
+    solve: (p) => {
+      const [m, a, s, i] = p;
+      if (m === 0) {
+        const [l, b, , s1, s2] = RPYR[i];
+        return { steps: [step("base", "multiply", PYR, [l, b], l * b), step("faces1", "multiply", TRI, [2, "½", l, s1], l * s1), step("faces2", "multiply", TRI, [2, "½", b, s2], b * s2), step("total", "add", PYR, [l * b, l * s1, b * s2], l * b + l * s1 + b * s2)], answer: String(l * b + l * s1 + b * s2) };
+      }
+      const n = m === 1 ? POLY[i] : m === 2 ? 3 : 6;
+      const lat = q(n * a * s, 2);
+      if (m === 1) return { steps: [step("perimeter", "multiply", PYR, [n, a], n * a), step("lateral", "multiply", PYR, ["½", n * a, s], dec(lat))], answer: dec(lat) };
+      const baseCoef = m === 2 ? q(a * a, 4) : q(3 * a * a, 2);
+      return { steps: [step("lateral", "multiply", PYR, ["½", n * a, s], dec(lat)), step("base", "note", PYR, [m === 2 ? "Equilateral triangle base (√3/4)a²" : "Regular hexagon base (3√3/2)a²"], `${dec(baseCoef)}√3`), step("total", "add", PYR, [dec(lat), `${dec(baseCoef)}√3`], pyrpAns(p))], answer: pyrpAns(p) };
+    },
+    // independent: each face is a triangle with sides a, e, e where e (the slant edge) = √(s² + (a/2)²); its area by
+    // Heron's formula, and the regular base split into triangles from its centre
+    validate: (p, v) => {
+      const x = num(v) ?? surdNum(v);
+      if (x === null) return false;
+      const [m, a, s, i] = p;
+      const heron = (u: number, w: number, z: number) => {
+        const h = (u + w + z) / 2;
+        return Math.sqrt(h * (h - u) * (h - w) * (h - z));
+      };
+      if (m === 0) {
+        const [l, b, H] = RPYR[i];
+        const e = Math.sqrt(H * H + (l / 2) ** 2 + (b / 2) ** 2);
+        return near(x, l * b + 2 * heron(l, e, e) + 2 * heron(b, e, e), 1e-9);
+      }
+      const n = m === 1 ? POLY[i] : m === 2 ? 3 : 6;
+      const e = Math.sqrt(s * s + (a / 2) ** 2);
+      const lateral = n * heron(a, e, e);
+      if (m === 1) return near(x, lateral, 1e-9);
+      const R = a / (2 * Math.sin(Math.PI / n));
+      return near(x, lateral + n * heron(R, R, a), 1e-9);
+    },
+    bugs: (p) => {
+      const [m, a, s, i] = p;
+      if (m === 0) {
+        const [l, b, , s1, s2] = RPYR[i];
+        return [B("base-left-out", "procedural", PYR, "Only the four sloping faces were added; the total surface area includes the rectangular base.", String(l * s1 + b * s2)), B("one-slant-height", "conceptual", PYR, "The same slant height was used for all four faces. A rectangular base has two different slant heights, one for each pair of faces.", String(l * b + (l + b) * s1))].filter((x) => x.predict !== String(l * b + l * s1 + b * s2));
+      }
+      const n = m === 1 ? POLY[i] : m === 2 ? 3 : 6;
+      if (m === 1) return [B("no-half", "recall", TRI, "Each face is a triangle, so its area is ½ × base × slant height; the ½ was left out.", String(n * a * s))];
+      return [B("base-left-out", "procedural", PYR, "Only the sloping faces were added; the total surface area includes the base.", dec(q(n * a * s, 2))), B("square-base", "conceptual", PYR, "The base was taken as a square (a²). The base here is a regular polygon; its area involves √3.", dec(qa(q(n * a * s, 2), Q(a * a))))];
+    },
+    variants: () => [],
+    explain: say({ total: "Total surface area" }),
+    domain: [[0, 3], [2, 20], [3, 30], [0, 131]],
+    keep: pyrpOk,
+    cap: 400,
+    difficulty: ([m]) => ([2, 1, 3, 3] as const)[m],
+    word: (p) => `${pyrpText(p).replace(/^A pyramid/, "A decorative glass pyramid for a garden")}`,
+    teach: {
+      idea: "The surface of a pyramid is its base plus one triangle for each side of the base. Each triangle has area ½ × base edge × slant height, so for a regular base the lateral area is ½ × perimeter × slant height.",
+      method: "Lateral area = ½ × perimeter × slant height (for a rectangle, two pairs of faces with different slant heights). Total surface area = lateral area + area of the base (for an equilateral triangle (√3/4)a², a regular hexagon (3√3/2)a²).",
+      alternatives: [{ id: "net", title: "Unfold the net", kind: "conceptual", text: ["Cut along the slanting edges and lay the faces flat: the base with a triangle on each side.", "Add the area of the base and of every triangle."] }],
+    },
+    limits: "Right pyramids with rectangular or regular bases (triangle, pentagon, hexagon, octagon); volumes are ampyrv.",
+  },
+
+  // ------------------------------------------------------------------ similarity: criteria, angles, altitudes, converses
+  {
+    id: "amsimc",
+    arity: 3,
+    title: "Which similarity criterion applies: AA, SSS, SAS, or not similar?",
+    competency: SIM,
+    type: "choice",
+    // [c, t, s]: case c (0 AA, 1 SSS, 2 SAS, 3 sides not in proportion, 4 two sides in proportion but the angle not between
+    // them); base triangle SIM_TRIS[t]; s scale and order
+    parse: none,
+    reject: ([c, t, s]) => (c >= 0 && c <= 4 && t >= 0 && t < SIM_TRIS.length && s >= 0 && s <= 5 ? null : "Five cases, twelve triangles, six scales."),
+    choices: (p) => order4(p).map((i) => SIMC[i]),
+    prompt: (p) => `In ΔABC and ΔPQR (A matches P, B matches Q, C matches R): ${simcFacts(p).join("; ")}. Which statement is true?`,
+    solve: (p) => ({ steps: [step("rule", "note", SIM, [SIMC_WHY[p[0]]], "")], answer: order4(p).indexOf(p[0] >= 3 ? 3 : p[0]) }),
+    // independent: read the facts back: count equal angles, and compare the side ratios as decimals
+    validate: (p, v) => {
+      if (typeof v !== "number" || !Number.isInteger(v)) return false;
+      const f = simcData(p);
+      const ratios = f.sides.map(([x, y]) => y / x);
+      const allEq = ratios.length === 3 && ratios.every((r) => near(r, ratios[0], 1e-12));
+      const twoEq = ratios.length === 2 && near(ratios[0], ratios[1], 1e-12);
+      const k = f.angles.length >= 2 ? 0 : allEq ? 1 : twoEq && f.included ? 2 : 3;
+      return order4(p)[v] === k;
+    },
+    bugs: (p) => {
+      const o = order4(p);
+      const c = p[0];
+      const says = [
+        "It was thought that two angles are not enough. If two angles are equal, the third angles are equal too, so the triangles are similar (AA).",
+        "Because the triangles have different sizes, they were called not similar. Similar triangles can be different sizes: here every side is multiplied by the same number (SSS).",
+        "SSS was chosen, but only two pairs of sides are given, with the angle between them equal: that is SAS.",
+        "The triangles were called similar because the sides grow, but the three ratios are not all equal, so they are not similar.",
+        "SAS was chosen, but the equal angle is not between the two proportional sides; that is not enough to show similarity.",
+      ];
+      return [B(`crit-${c}`, "conceptual", SIM, says[c], o.indexOf([3, 3, 1, 1, 2][c]))];
+    },
+    variants: () => [],
+    explain: say(),
+    domain: [[0, 4], [0, 11], [0, 5]],
+    difficulty: ([c]) => ([1, 2, 2, 2, 3] as const)[c],
+    teach: {
+      idea: "Two triangles are similar when their angles are equal and their sides are in the same ratio. It is enough to show AA (two pairs of equal angles), SSS (all three side ratios equal) or SAS (two side ratios equal and the angles between those sides equal).",
+      method: "Divide each side of ΔPQR by the matching side of ΔABC. Three equal ratios: SSS. Two equal ratios with the angle between them equal: SAS. Two equal angles: AA. Otherwise the facts do not show similarity.",
+      alternatives: [{ id: "ratio-table", title: "A ratio table", kind: "procedural", text: ["Write the matching sides in two rows: AB, BC, CA above PQ, QR, RP.", "Divide the bottom by the top in each column and see whether the answers agree."] }],
+    },
+    limits: "Corresponding vertices are given; finding the correspondence from a figure is a written task.",
+  },
+  {
+    id: "amsimang",
+    arity: 3,
+    title: "Unknown angles from AA similarity",
+    competency: SIM,
+    type: "integer",
+    mc: true,
+    // [m, x, y]: m 0 ∠A = ∠P = x°, ∠B = ∠Q = y°: find ∠R; 1 ΔABC ~ ΔPQR with ∠A = x°, ∠Q = y°: find ∠C; 2 ∠A = x°, ∠B = y°,
+    // ∠P = x°, ∠R = (180 − x − y)°: find ∠Q (the triangles are similar by AA)
+    parse: none,
+    reject: ([m, x, y]) => (m >= 0 && m <= 2 && x >= 20 && y >= 20 && x + y <= 150 && x % 5 === 0 && y % 5 === 0 && x !== y && x + 2 * y !== 180 && 2 * x + y !== 180 ? null : "Angles 20° to 130° in steps of 5°, all three different."),
+    prompt: ([m, x, y]) =>
+      m === 0
+        ? `In ΔABC and ΔPQR, ∠A = ∠P = ${x}° and ∠B = ∠Q = ${y}°. The triangles are similar by AA. What is ∠R, in degrees?`
+        : m === 1
+          ? `ΔABC ~ ΔPQR (A matches P, B matches Q and C matches R). ∠A = ${x}° and ∠Q = ${y}°. What is ∠C, in degrees?`
+          : `In ΔABC, ∠A = ${x}° and ∠B = ${y}°. In ΔPQR, ∠P = ${x}° and ∠R = ${180 - x - y}°. The triangles are similar by AA. What is ∠Q, in degrees?`,
+    solve: ([m, x, y]) => ({
+      steps: [
+        step("match", "note", SIM, [m === 0 ? "Two pairs of equal angles: similar by AA, so ∠R = ∠C" : m === 1 ? "Corresponding angles are equal: ∠P = ∠A and ∠B = ∠Q" : "∠C = 180° − ∠A − ∠B = ∠R, so the angles match in pairs (AA) and ∠Q = ∠B"], ""),
+        step("angle", "subtract", TPROP, m === 2 ? [180, x, 180 - x - y] : [180, x, y], m === 2 ? y : 180 - x - y),
+      ],
+      answer: m === 2 ? y : 180 - x - y,
+    }),
+    // independent: the three angles of the triangle must add up to 180°, with matching angles equal
+    validate: ([m, x, y], v) => {
+      if (typeof v !== "number" || v <= 0) return false;
+      return m === 2 ? x + v + (180 - x - y) === 180 : x + y + v === 180;
+    },
+    bugs: ([m, x, y]) => {
+      const right = m === 2 ? y : 180 - x - y;
+      const out =
+        m === 2
+          ? [B("third-angle", "procedural", SIM, "∠R was given. ∠Q matches ∠B; find it from the angle sum of ΔPQR.", 180 - x - y), B("one-angle", "procedural", TPROP, "Only ∠P was taken from 180°; take away both ∠P and ∠R.", 180 - x)]
+          : [B("wrong-vertex", "procedural", SIM, m === 0 ? "The angle at a different vertex was given. ∠R matches ∠C, the third angle." : "∠Q was copied for ∠C. ∠Q matches ∠B, not ∠C.", y), B("one-angle", "procedural", TPROP, "Only one known angle was taken from 180°. The three angles add to 180°, so take away both.", 180 - x)];
+      return out.filter((b) => b.predict !== right);
+    },
+    variants: () => [],
+    explain: say({ angle: "Angle sum" }),
+    domain: [[0, 2], [20, 130], [20, 130]],
+    keep: ([, x, y]) => x % 5 === 0 && y % 5 === 0 && x + y <= 150 && x !== y && x + 2 * y !== 180 && 2 * x + y !== 180,
+    cap: 400,
+    difficulty: ([m]) => ([1, 2, 3] as const)[m],
+    word: ([m, x, y]) => (m === 0 ? `A surveyor finds that two triangular plots ABC and PQR have ∠A = ∠P = ${x}° and ∠B = ∠Q = ${y}°. What is ∠R, in degrees?` : m === 1 ? `A triangular roof frame ABC is an enlarged copy of a model PQR (A matches P, B matches Q, C matches R). ∠A = ${x}° and the model's ∠Q = ${y}°. What is ∠C, in degrees?` : `Two triangular flags: in ABC, ∠A = ${x}° and ∠B = ${y}°; in PQR, ∠P = ${x}° and ∠R = ${180 - x - y}°. What is ∠Q, in degrees?`),
+    teach: {
+      idea: "If two angles of one triangle equal two angles of another, the third angles are equal too (each triangle's angles add to 180°): the triangles are similar (AA), and matching vertices have equal angles.",
+      method: "Match the vertices (A with P, B with Q, C with R). The angle you want equals its partner in the other triangle; find a missing one as 180° minus the other two.",
+      alternatives: [{ id: "table", title: "An angle table", kind: "procedural", text: ["Write the vertices in two rows: A B C above P Q R.", "Fill in every angle you know; partners in the same column are equal, and each row adds to 180°."] }],
+    },
+    limits: "Corresponding vertices are named; sides from similarity are amsim.",
+  },
+  {
+    id: "amalt",
+    arity: 4,
+    title: "Altitudes and perimeters of similar triangles",
+    competency: SIM,
+    type: "exact",
+    mc: true,
+    // [w, m, n, x]: the triangles' sides are in the ratio m : n; w 0 altitude x of the first → the second's; 1 perimeter;
+    // 2 areas in the ratio m² : n² and altitude x → the second's altitude
+    parse: none,
+    reject: ([w, m, n, x]) => (w >= 0 && w <= 2 && m >= 1 && n >= 1 && m <= 9 && n <= 9 && m !== n && gcd(m, n) === 1 && x >= 2 && x <= 60 ? null : "Ratios m : n up to 9 in lowest terms and lengths 2 to 60."),
+    prompt: ([w, m, n, x]) => (w === 0 ? `Two similar triangles have corresponding sides in the ratio ${m} : ${n}. The altitude of the first triangle is ${x} cm. What is the corresponding altitude of the second, in cm? (A decimal or fraction is fine.)` : w === 1 ? `Two similar triangles have corresponding sides of ${m * 3} cm and ${n * 3} cm. The perimeter of the first is ${x} cm. What is the perimeter of the second, in cm? (A decimal or fraction is fine.)` : `The areas of two similar triangles are in the ratio ${m * m} : ${n * n}. An altitude of the first is ${x} cm. What is the corresponding altitude of the second, in cm? (A decimal or fraction is fine.)`),
+    solve: ([w, m, n, x]) => {
+      const ans = q(x * n, m);
+      return { steps: [...(w === 2 ? [step("root", "root", SIM, [`${m * m}/${n * n}`], `${m}/${n}`)] : []), step("scale", "note", SIM, [w === 1 ? "Perimeters are in the same ratio as the sides" : "Altitudes are in the same ratio as the sides"], `${m} : ${n}`), step("answer", "multiply", SIM, [x, `${n}/${m}`], dec(ans))], answer: dec(ans) };
+    },
+    // independent: build the first triangle (sides 3m, 4m, 5m), scale every length by n/m, and measure the altitude or perimeter of the copy
+    validate: ([w, m, n, x], v) => {
+      const val2 = num(v);
+      if (val2 === null) return false;
+      const s = n / m;
+      if (w === 1) return near(val2, x * ((3 * n + 4 * n + 5 * n) / (3 * m + 4 * m + 5 * m)), 1e-12);
+      const k1 = (m * m) / (n * n);
+      const sc = w === 2 ? 1 / Math.sqrt(k1) : s;
+      return near(val2, x * sc, 1e-12);
+    },
+    bugs: ([w, m, n, x]) => {
+      const right = q(x * n, m);
+      return [B("ratio-inverted", "procedural", SIM, `The ratio was used the wrong way round: the second triangle's lengths are ${n}/${m} of the first's.`, dec(q(x * m, n))), ...(w === 2 ? [B("area-ratio-used", "conceptual", SIM, `The area ratio was used for the altitude. Areas are in the ratio of the squares of the sides, so the altitudes are in the ratio ${m} : ${n}.`, dec(q(x * n * n, m * m)))] : [B("difference-added", "conceptual", SIM, "The difference between the sides was added. Similar figures scale by multiplying.", dec(Q(x + (w === 1 ? 3 * (n - m) : n - m))))])].filter((b) => !is(b.predict as string, right) && (num(b.predict as string) ?? 1) > 0);
+    },
+    variants: () => [],
+    explain: say({ root: "Ratio of sides = √(ratio of areas)", answer: "Corresponding length" }),
+    domain: [[0, 2], [1, 9], [1, 9], [2, 60]],
+    keep: ([, m, n]) => m !== n && gcd(m, n) === 1,
+    cap: 400,
+    difficulty: ([w]) => ([1, 1, 3] as const)[w],
+    word: ([w, m, n, x]) => (w === 0 ? `A triangular sail and its model are similar, with corresponding sides in the ratio ${m} : ${n}. The sail's height (an altitude) is ${x} m. What is the corresponding height of the model, in m?` : w === 1 ? `Two similar triangular gardens have corresponding sides of ${m * 3} m and ${n * 3} m. The fence round the first is ${x} m long. How long is the fence round the second, in m?` : `Two similar triangular tiles have areas in the ratio ${m * m} : ${n * n}. The height of the first tile is ${x} cm. What is the height of the second, in cm?`),
+    teach: {
+      idea: "In similar triangles every length (side, altitude, median, perimeter) is multiplied by the same scale factor k; areas are multiplied by k².",
+      method: "Find the scale factor from the sides (or as the square root of the area ratio) and multiply the given length by it.",
+      alternatives: [{ id: "grid", title: "Enlarge on a grid", kind: "conceptual", text: ["Draw a triangle on squared paper and double every side.", "The altitude doubles too, but the area becomes 4 times as big."] }],
+    },
+    limits: "Whole-number side ratios up to 9; proving the area theorem is a written task.",
+  },
+  {
+    id: "ambptc",
+    arity: 5,
+    title: "Using the converses of the BPT and the angle bisector theorem",
+    competency: SIM,
+    type: "choice",
+    // [m, p, q, w, e]: m 0 AD = p, DB = q, AE = λp, EC = λq (λ = LAMBDA[w]); 1 BD = p, DC = q, AB = λp, AC = λq; e 0 exact,
+    // 1 the third length one more, 2 the fourth length one more
+    parse: none,
+    reject: (p) => (bptcOk(p) ? null : "Lengths in whole or half centimetres that make a triangle."),
+    choices: (p) => order3b(p).map((i) => (p[0] === 0 ? BPTC0 : BPTC1)[i]),
+    prompt: (p) => {
+      const [m] = p;
+      const [l1, l2, l3, l4] = bptcLens(p).map((x) => dec(x));
+      return m === 0 ? `In ΔABC, D is on AB and E is on AC, with AD = ${l1} cm, DB = ${l2} cm, AE = ${l3} cm and EC = ${l4} cm. Which statement is true?` : `In ΔABC, D is on BC with BD = ${l1} cm and DC = ${l2} cm, and AB = ${l3} cm, AC = ${l4} cm. Which statement is true?`;
+    },
+    solve: (p) => {
+      const [a, b, c, d] = bptcLens(p);
+      const eq = qe(qd(a, b), qd(c, d));
+      return { steps: [step("ratios", "note", SIM, [`${dec(a)}/${dec(b)} = ${dec(qd(a, b))} and ${dec(c)}/${dec(d)} = ${dec(qd(c, d))}`], eq ? "equal" : "not equal")], answer: order3b(p).indexOf(eq ? 0 : 1) };
+    },
+    // independent: draw the triangle on coordinates and test the conclusion directly (DE parallel to BC by a cross
+    // product; AD bisecting ∠A by comparing the two angles)
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [a, b, c, d] = bptcLens(p).map(qn);
+      let truth: boolean;
+      if (p[0] === 0) {
+        const A: P2 = [0, 0];
+        const u: P2 = [Math.cos(0.9), Math.sin(0.9)];
+        const Bp = mul2([1, 0], a + b);
+        const C = mul2(u, c + d);
+        const Dp = mul2([1, 0], a);
+        const E = mul2(u, c);
+        truth = Math.abs(cross(sub(E, Dp), sub(C, Bp))) < 1e-9 * (a + b + c + d) ** 2;
+        void A;
+      } else {
+        const [A, Bp, C] = place(a + b, d, c);
+        const Dp = add2(Bp, mul2(sub(C, Bp), a / (a + b)));
+        truth = near(angleAt(A, Bp, Dp), angleAt(A, Dp, C), 1e-9);
+      }
+      return order3b(p)[v] === (truth ? 0 : 1);
+    },
+    bugs: (p) => {
+      const [a, b, c, d] = bptcLens(p);
+      const o = order3b(p);
+      const eq = qe(qd(a, b), qd(c, d));
+      const diff = qe(qs(b, a), qs(d, c));
+      const out: Bug[] = [];
+      if (diff !== eq) out.push(B("differences", "conceptual", SIM, "The differences of the lengths were compared. The converse needs equal RATIOS: compare the two fractions.", o.indexOf(diff ? 0 : 1)));
+      if (p[0] === 0) {
+        const whole = qe(qd(a, qa(a, b)), qd(c, d));
+        if (whole !== eq) out.push(B("mixed-ratio", "procedural", SIM, "AD/AB was compared with AE/EC. Compare like with like: AD/DB with AE/EC (or AD/AB with AE/AC).", o.indexOf(whole ? 0 : 1)));
+      } else {
+        const mid = qe(a, b);
+        if (mid !== eq) out.push(B("midpoint", "conceptual", SIM, "D being the midpoint of BC was taken to decide it. The bisector of ∠A divides BC in the ratio AB : AC, which is equal halves only when AB = AC.", o.indexOf(mid ? 0 : 1)));
+      }
+      return out;
+    },
+    variants: () => [],
+    explain: say(),
+    domain: [[0, 1], [1, 9], [1, 9], [0, 3], [0, 2]],
+    keep: bptcOk,
+    difficulty: ([, , , , e]) => (e === 0 ? 2 : 3),
+    teach: {
+      idea: "Converse of the BPT: if a line divides two sides of a triangle in the same ratio, it is parallel to the third side. Converse of the angle bisector theorem: if D on BC divides it so that BD/DC = AB/AC, then AD bisects ∠A.",
+      method: "Work out the two ratios as fractions (or decimals) and compare. Equal: the conclusion of the converse holds. Not equal: it fails.",
+      alternatives: [{ id: "cross", title: "Cross-multiply", kind: "procedural", text: ["AD/DB = AE/EC exactly when AD × EC = DB × AE.", "Multiplying avoids decimals: 3 × 7.5 = 22.5 and 5 × 4.5 = 22.5, so the ratios are equal."] }],
+    },
+    limits: "Two ratios per question with lengths in halves; the proofs of the converses are written tasks.",
+  },
+
+  // ------------------------------------------------------------------ tangents: lines and circles, common tangents
+  {
+    id: "amline",
+    arity: 3,
+    title: "Tangent, secant or not meeting the circle?",
+    competency: TAN,
+    type: "choice",
+    // [r, d, g]: a circle of radius r cm (g 1: given by its diameter) and a line d cm from the centre
+    parse: none,
+    reject: ([r, d, g]) => (r >= 2 && r <= 15 && d >= 0 && d <= 2 * r + 4 && (g === 0 || g === 1) ? null : "Radii 2 to 15 cm and lines up to 2r + 4 cm from the centre."),
+    choices: (p) => order3b(p).map((i) => LINEC[i]),
+    prompt: ([r, d, g]) => `A circle has ${g ? `diameter ${2 * r}` : `radius ${r}`} cm. A straight line is ${d} cm from the centre of the circle (measured along the perpendicular). Which statement is true?`,
+    solve: ([r, d, g]) => ({ steps: [step("compare", "note", TAN, [`distance ${d} cm ${d < r ? "<" : d === r ? "=" : ">"} radius ${r} cm`], "")], answer: order3b([r, d, g]).indexOf(d < r ? 1 : d === r ? 0 : 2) }),
+    // independent: solve for the points where the line y = d meets x² + y² = r² and count them
+    validate: ([r, d, g], v) => {
+      if (typeof v !== "number") return false;
+      const disc = r * r - d * d;
+      const pts = disc > 0 ? 2 : disc === 0 ? 1 : 0;
+      return order3b([r, d, g])[v] === (pts === 1 ? 0 : pts === 2 ? 1 : 2);
+    },
+    bugs: ([r, d, g]) => {
+      const o = order3b([r, d, g]);
+      const right = d < r ? 1 : d === r ? 0 : 2;
+      const viaDiam = d < 2 * r ? 1 : d === 2 * r ? 0 : 2;
+      const out: Bug[] = [];
+      if (g && viaDiam !== right) out.push(B("diameter-as-radius", "procedural", TAN, `The distance was compared with the diameter, ${2 * r} cm. Compare it with the radius, half the diameter.`, o.indexOf(viaDiam)));
+      if (right === 1 && d > 0 && d >= r - 2) out.push(B("near-is-touching", "conceptual", TAN, "A line close to the edge was taken to touch it. If the distance is less than the radius, the line cuts the circle at two points: it is a secant.", o.indexOf(0)));
+      if (right === 0) out.push(B("touch-is-cut", "conceptual", TAN, "A line at a distance equal to the radius was thought to cut the circle. It touches it at exactly one point: a tangent.", o.indexOf(1)));
+      return out;
+    },
+    variants: () => [],
+    explain: say(),
+    domain: [[2, 15], [0, 34], [0, 1]],
+    keep: ([r, d]) => d <= 2 * r + 4,
+    cap: 400,
+    difficulty: ([r, d, g]) => (d === r ? 2 : g ? 3 : 1),
+    word: ([r, d, g]) => `A circular pond has ${g ? `a diameter of ${2 * r}` : `a radius of ${r}`} m. A straight fence runs past it; the shortest distance from the pond's centre to the fence is ${d} m. Which statement about the fence and the edge of the pond is true?`,
+    teach: {
+      idea: "A line and a circle can meet in two points (a secant), one point (a tangent) or not at all. It depends only on the distance from the centre to the line compared with the radius.",
+      method: "Distance less than the radius: secant. Equal: tangent. Greater: the line does not meet the circle.",
+      alternatives: [{ id: "slide", title: "Slide a ruler", kind: "conceptual", text: ["Slide a ruler across a drawn circle, keeping it straight.", "It crosses at two points, then just touches at one, then misses the circle."] }],
+    },
+    limits: "One line and one circle; lines through the centre (d = 0) are secants.",
+  },
+  {
+    id: "amctan",
+    arity: 4,
+    title: "Common tangents to two circles: how many, and how long",
+    competency: TAN,
+    type: "integer",
+    mc: true,
+    // [m, r1, r2, d]: radii r1 ≥ r2 and centres d cm apart; m 0 how many common tangents; 1 the length of a direct common
+    // tangent √(d² − (r1 − r2)²); 2 of a transverse common tangent √(d² − (r1 + r2)²)
+    parse: none,
+    reject: (p) => (ctanOk(p) ? null : "Radii 1 to 20 with r1 ≥ r2, and whole-number tangent lengths for the length questions."),
+    prompt: ([m, r1, r2, d]) => (m === 0 ? `Two circles have radii ${r1} cm and ${r2} cm, and their centres are ${d} cm apart. How many common tangents do they have?` : `Two circles have radii ${r1} cm and ${r2} cm, and their centres are ${d} cm apart. Find the length of a ${m === 1 ? "direct" : "transverse"} common tangent (between its two points of contact), in cm.`),
+    solve: ([m, r1, r2, d]) => {
+      if (m === 0) {
+        const n = ctanCount(r1, r2, d);
+        return { steps: [step("compare", "note", TAN, [`d = ${d}, r1 + r2 = ${r1 + r2}, r1 − r2 = ${r1 - r2}`], n)], answer: n };
+      }
+      const t = m === 1 ? r1 - r2 : r1 + r2;
+      const L = Math.round(Math.sqrt(d * d - t * t));
+      return { steps: [step("right", "note", PYTH, [m === 1 ? "Join the centres and draw a line parallel to the tangent: a right triangle with hypotenuse d and one leg r1 − r2" : "Join the centres; a right triangle with hypotenuse d and one leg r1 + r2"], ""), step("pyth", "root", PYTH, [`${d}² − ${t}²`], L)], answer: L };
+    },
+    // independent: m 0 counts the lines that touch both circles by turning a line round and testing distances; m 1 and 2
+    // place the circles and the tangent's touching points with coordinates and measure the gap
+    validate: ([m, r1, r2, d], v) => {
+      if (typeof v !== "number") return false;
+      if (m === 0) {
+        // a line with unit normal at angle θ (0 ≤ θ < π) and offset ±r1 touches circle 1 (centre 0); it touches circle 2
+        // (centre (d, 0)) when d cos θ = s1·r1 + s2·r2: count the solutions θ for the four sign choices
+        if (d === 0) return v === 0;
+        let count = 0;
+        for (const s1 of [1, -1]) for (const s2 of [1, -1]) {
+          const t = s1 * r1 + s2 * r2;
+          if (Math.abs(t) < d || t === d) count++;
+        }
+        return v === count;
+      }
+      const t = m === 1 ? r1 - r2 : r1 + r2;
+      return v > 0 && near(v * v + t * t, d * d, 1e-12);
+    },
+    bugs: ([m, r1, r2, d]) => {
+      if (m === 0) {
+        const n = ctanCount(r1, r2, d);
+        const out: Bug[] = [];
+        if (n === 4 || n === 3) out.push(B("only-two", "conceptual", TAN, "Only the two outer (direct) tangents were counted. Circles that do not overlap also have tangents that cross between them.", 2));
+        if (n === 3) out.push(B("touching-as-apart", "conceptual", TAN, "Circles that touch on the outside were treated as separate. The two crossing tangents become one tangent at the point where they touch: 3 in all.", 4));
+        if (n === 1) out.push(B("inside-touch", "conceptual", TAN, "Circles touching on the inside were taken to have none. They share the one tangent at the touching point.", 0));
+        if (n === 0) out.push(B("inside-has-tangents", "conceptual", TAN, "A circle completely inside another has no common tangent: every line touching the inner circle cuts the outer one.", 2));
+        if (n === 2) out.push(B("overlap-four", "conceptual", TAN, "Overlapping circles were given four common tangents. Crossing tangents would have to pass between the circles, where they overlap, so only the two direct tangents exist.", 4));
+        return out;
+      }
+      const t = m === 1 ? r1 - r2 : r1 + r2;
+      const other = m === 1 ? r1 + r2 : r1 - r2;
+      const out: Bug[] = [];
+      const alt = d * d - other * other;
+      if (alt > 0 && Number.isInteger(Math.sqrt(alt))) out.push(B("wrong-kind", "procedural", TAN, m === 1 ? "r1 + r2 was used; for a direct common tangent the leg is r1 − r2." : "r1 − r2 was used; for a transverse (crossing) common tangent the leg is r1 + r2.", Math.sqrt(alt)));
+      const plus = d * d + t * t;
+      if (Number.isInteger(Math.sqrt(plus))) out.push(B("added-squares", "procedural", PYTH, "The squares were added. d is the hypotenuse, so subtract: L² = d² − (leg)².", Math.sqrt(plus)));
+      out.push(B("no-root", "procedural", PYTH, "The square root was not taken at the end.", d * d - t * t));
+      return out;
+    },
+    variants: () => [],
+    explain: say({ pyth: "Length" }),
+    domain: [[0, 2], [1, 20], [1, 20], [0, 45]],
+    keep: ctanOk,
+    cap: 400,
+    difficulty: ([m]) => ([2, 2, 3] as const)[m],
+    word: ([m, r1, r2, d]) => (m === 0 ? `Two round coasters of radii ${r1} cm and ${r2} cm lie on a table with their centres ${d} cm apart. How many straight lines touch both coasters?` : `A belt runs round two pulleys of radii ${r1} cm and ${r2} cm whose centres are ${d} cm apart, ${m === 1 ? "without crossing over" : "crossing over between them"}. How long is one straight part of the belt, between the points where it leaves the two pulleys, in cm?`),
+    teach: {
+      idea: "Two circles far apart have 4 common tangents; touching outside, 3; overlapping, 2; touching inside, 1; one inside the other, 0. A tangent length comes from a right triangle with the line of centres as hypotenuse.",
+      method: "Compare d with r1 + r2 and r1 − r2 to count. For a length, L² = d² − (r1 − r2)² (direct) or d² − (r1 + r2)² (transverse).",
+      alternatives: [{ id: "draw", title: "Draw it", kind: "conceptual", text: ["Draw two coins and lay a ruler against both: try along the outside and crossing between them.", "Move the coins closer and see the crossing tangents disappear."] }],
+    },
+    limits: "Two circles in a plane; equal circles at the same centre are left out.",
+  },
+
+  // ------------------------------------------------------------------ Ceva and Menelaus as tests
+  {
+    id: "ammen",
+    arity: 6,
+    title: "Testing concurrency with Ceva's theorem and collinearity with Menelaus' theorem",
+    competency: CEVA,
+    type: "choice",
+    // [m, a, b, c, d, y]: BD : DC = a : b, CE : EA = c : d, and AF : FB chosen so that the product is 1 (y = 1) or not
+    // (y = 0); m 0 D, E, F inside the sides (Ceva); m 1 D on BC extended beyond C (Menelaus)
+    parse: none,
+    reject: (p) => (menOk(p) ? null : "Ratios up to 6 in lowest terms; for Menelaus BD > DC."),
+    choices: (p) => order3b(p).map((i) => (p[0] === 0 ? MEN0 : MEN1)[i]),
+    prompt: (p) => {
+      const [m, a, b, c, d] = p;
+      const [e, f] = menAF(p);
+      return m === 0 ? `In ΔABC, D, E and F lie on BC, CA and AB with BD : DC = ${a} : ${b}, CE : EA = ${c} : ${d} and AF : FB = ${e} : ${f}. Which statement is true?` : `In ΔABC, D lies on BC extended beyond C, and E and F lie on CA and AB, with BD : DC = ${a} : ${b}, CE : EA = ${c} : ${d} and AF : FB = ${e} : ${f}. Which statement is true?`;
+    },
+    solve: (p) => {
+      const [m, a, b, c, d] = p;
+      const [e, f] = menAF(p);
+      const prod = q(a * c * e, b * d * f);
+      return { steps: [step("product", "multiply", CEVA, [`${a}/${b}`, `${c}/${d}`, `${e}/${f}`], dec(prod)), step("rule", "note", CEVA, [m === 0 ? "Ceva: the cevians meet at one point exactly when the product is 1" : "Menelaus: the three points are collinear exactly when the product is 1"], "")], answer: order3b(p).indexOf(qe(prod, Q(1)) ? 0 : 1) };
+    },
+    // independent: put the triangle on coordinates, construct D, E and F, and test directly (two cevians' meeting point
+    // on the third cevian; or D, E, F on one line)
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [m, a, b, c, d] = p;
+      const [e, f] = menAF(p);
+      const A: P2 = [0.3, 2.1];
+      const Bp: P2 = [0, 0];
+      const C: P2 = [3.7, 0.2];
+      const Dp = m === 0 ? add2(Bp, mul2(sub(C, Bp), a / (a + b))) : add2(Bp, mul2(sub(C, Bp), a / (a - b)));
+      const E = add2(C, mul2(sub(A, C), c / (c + d)));
+      const F = add2(A, mul2(sub(Bp, A), e / (e + f)));
+      let truth: boolean;
+      if (m === 0) {
+        const X = meet(A, sub(Dp, A), Bp, sub(E, Bp));
+        truth = Math.abs(cross(sub(X, C), sub(F, C))) < 1e-9;
+      } else truth = Math.abs(cross(sub(E, Dp), sub(F, Dp))) < 1e-9;
+      return order3b(p)[v] === (truth ? 0 : 1);
+    },
+    bugs: (p) => {
+      const [, a, b, c, d] = p;
+      const [e, f] = menAF(p);
+      const yes = a * c * e === b * d * f;
+      const flipped = a * c * f === b * d * e;
+      const sum = qe(qa(qa(q(a, b), q(c, d)), q(e, f)), Q(3));
+      const o = order3b(p);
+      const out: Bug[] = [];
+      if (flipped !== yes) out.push(B("ratio-flipped", "procedural", CEVA, "One ratio was turned upside down (FB : AF instead of AF : FB). Go round the triangle in one direction: BD/DC, then CE/EA, then AF/FB.", o.indexOf(flipped ? 0 : 1)));
+      if (sum !== yes) out.push(B("sum-of-ratios", "conceptual", CEVA, "The three ratios were added and compared with 3. The test multiplies them: the product must be exactly 1.", o.indexOf(sum ? 0 : 1)));
+      return out;
+    },
+    variants: () => [],
+    explain: say({ product: "Product of the three ratios" }),
+    domain: [[0, 1], [1, 6], [1, 6], [1, 6], [1, 6], [0, 1]],
+    keep: menOk,
+    difficulty: ([m, , , , , y]) => (m === 1 ? 3 : y ? 2 : 2),
+    teach: {
+      idea: "Ceva: lines AD, BE and CF from the vertices meet at one point exactly when (BD/DC)(CE/EA)(AF/FB) = 1. Menelaus: points D, E and F on the three side lines (one of them extended) lie on one straight line exactly when the same product is 1.",
+      method: "Go round the triangle in order (B to C, C to A, A to B), write the three ratios as fractions and multiply. A product of exactly 1 means concurrent (Ceva) or collinear (Menelaus).",
+      alternatives: [{ id: "medians", title: "Check with the medians", kind: "conceptual", text: ["The medians cut every side in the ratio 1 : 1, so the product is 1 × 1 × 1 = 1.", "So the three medians meet at one point: the centroid."] }],
+    },
+    limits: "Ratios with terms up to 6; signed ratios are not used (in the Menelaus case one point is on an extended side).",
+  },
 ];
 
 /** The outside surface of amcombs, as multiples of π: [id, label, coefficient] for each piece. */
@@ -2551,3 +3478,430 @@ function combsParts([s, t, k, o, H]: number[]): { pi: R; parts: [string, string,
   return { pi, parts: s === 0 ? [["cone", "Cone πrl", Q(r * l)], ["hem", "Hemisphere 2πr²", Q(2 * r * r)]] : [["base", "Base πr²", Q(r * r)], ["side", "Cylinder side 2πrH", Q(2 * r * H)], ["cone", "Cone πrl", Q(r * l)]] };
 }
 const sup = (n: number) => String(n).replace(/./g, (c) => ({ "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" })[c] ?? c);
+
+// ---------------------------------------------------------------- helpers for the gap@1 families
+
+const fnvh = (s: string) => {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+  return h;
+};
+/** A fixed shuffle of 0 … n − 1 that differs from problem to problem (so the right letter is not predictable). */
+const shuf = (p: number[], n: number, tag: string) => [...Array(n).keys()].sort((x, y) => fnvh(`${tag}:${p.join(",")}:${x}`) - fnvh(`${tag}:${p.join(",")}:${y}`) || x - y);
+const order4 = (p: number[]) => shuf(p, 4, "o4");
+const order3b = (p: number[]) => shuf(p, 3, "o3");
+/** A small seeded generator. */
+function seeded(...seed: number[]) {
+  let s = fnvh(seed.join(",")) || 1;
+  return () => {
+    s ^= s << 13;
+    s >>>= 0;
+    s ^= s >>> 17;
+    s ^= s << 5;
+    s >>>= 0;
+    return s / 4294967296;
+  };
+}
+const frc = (a: number, b: number) => `${a < 0 ? "−" : ""}${Math.abs(a)}/${b}`;
+const ordn = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? "th" : n % 10 === 1 ? "st" : n % 10 === 2 ? "nd" : n % 10 === 3 ? "rd" : "th"}`;
+/** a + b√n written simply (√n reduced first). */
+function surdSum(a: number, b: number, n: number): string {
+  const [k, m] = sqfree(n);
+  const c = b * k;
+  if (m === 1) return String(a + c);
+  const s = `${c === 1 ? "" : c}√${m}`;
+  return a === 0 ? s : `${a} + ${s}`;
+}
+/** The value of an answer like 7, 5√3, 4 + 2√6 or 15 + 4.5√3 (null otherwise). */
+function surdValue(v: Value): number | null {
+  if (typeof v === "number") return v;
+  if (typeof v !== "string") return null;
+  const s = v.replace(/−/g, "-").replace(/\s+/g, "");
+  const m = s.match(/^(-?\d+(?:\.\d+)?(?:\/\d+)?)?(?:([+-])?(\d+(?:\.\d+)?)?√(\d+))?$/);
+  if (!m || (!m[1] && !m[4])) return null;
+  const a = m[1] ? (m[1].includes("/") ? Number(m[1].split("/")[0]) / Number(m[1].split("/")[1]) : Number(m[1])) : 0;
+  const b = m[4] ? (m[2] === "-" ? -1 : 1) * (m[3] ? Number(m[3]) : 1) * Math.sqrt(Number(m[4])) : 0;
+  return a + b;
+}
+const surdNum = surdValue;
+
+// amclass
+const CLASS_ASK = ["a natural number", "a whole number that is not a natural number", "an integer that is not a whole number", "a rational number that is not an integer", "an irrational number"];
+const CLASS_WHY = [
+  "Natural numbers are 1, 2, 3, …: simplify each number and look for one of these",
+  "The only whole number that is not natural is 0",
+  "Integers that are not whole numbers are the negative integers −1, −2, −3, …",
+  "A rational number that is not an integer is a fraction p/q that does not simplify to a whole number (its decimal ends or repeats)",
+  "An irrational number cannot be written as p/q: its decimal never ends and never repeats (√2, π)",
+];
+const CLASS_SLIP = [
+  "0 was taken as a natural number. The natural numbers start at 1; 0 is a whole number.",
+  "A negative integer was taken as a whole number. Whole numbers are 0, 1, 2, 3, …; they have no negatives.",
+  "A negative fraction was taken as an integer. Integers are …, −2, −1, 0, 1, 2, …; a fraction such as −5/2 lies between two of them.",
+  "A fraction that simplifies to an integer was taken as not an integer. Work it out first: 18/6 = 3.",
+  "A fraction or a repeating decimal was taken as irrational. 22/7 is only close to π, and decimals that repeat (0.333…) are rational.",
+];
+const CL_POOL: Record<string, string[]> = {
+  natural: ["7", "12", "√16", "√49", "25", "√81", "9", "√64"],
+  zero: ["0", "0/7", "√0"],
+  negint: ["−4", "−9", "−12/4", "−√25", "−1", "−15/5"],
+  fraction: ["3/4", "−5/2", "0.75", "0.333…", "22/7", "−1.6", "√(9/4)", "7/3", "0.121212…", "−2/9"],
+  irrational: ["√2", "√3", "π", "√5", "2 + √3", "0.1010010001… (one more 0 each time)", "√7", "3√2"],
+};
+const CL_TRAP = [["0", "0/7"], ["−4", "−1", "−9"], ["−5/2", "−1.6", "−2/9"], ["18/6", "40/8", "−12/4", "−15/5"], ["22/7", "0.333…", "0.121212…", "√16"]];
+const CL_KEY = ["natural", "zero", "negint", "fraction", "irrational"];
+/** What a shown number is, worked out from how it is written (null when it cannot be read). */
+function classify(t: string): string | null {
+  const s = t.replace(/−/g, "-").replace(/\s+/g, "");
+  if (s.includes("π") || s.includes("(onemore0eachtime)")) return "irrational";
+  const kind = (n: number, d: number) => (d === 0 ? null : n % d !== 0 ? "fraction" : n / d > 0 ? "natural" : n === 0 ? "zero" : "negint");
+  let m = s.match(/^(-?)(\d+)\.(\d+)…$/);
+  if (m) return "fraction";
+  m = s.match(/^(-?)(\d*)√(\d+)$/);
+  if (m) {
+    const r = Math.round(Math.sqrt(Number(m[3])));
+    if (r * r !== Number(m[3])) return "irrational";
+    return kind((m[1] ? -1 : 1) * (m[2] ? Number(m[2]) : 1) * r, 1);
+  }
+  m = s.match(/^√\((\d+)\/(\d+)\)$/);
+  if (m) {
+    const a = Math.round(Math.sqrt(Number(m[1])));
+    const b = Math.round(Math.sqrt(Number(m[2])));
+    return a * a === Number(m[1]) && b * b === Number(m[2]) ? kind(a, b) : "irrational";
+  }
+  m = s.match(/^(\d+)\+√(\d+)$/);
+  if (m) {
+    const r = Math.round(Math.sqrt(Number(m[2])));
+    return r * r === Number(m[2]) ? kind(Number(m[1]) + r, 1) : "irrational";
+  }
+  m = s.match(/^(-?\d+)\/(\d+)$/);
+  if (m) return kind(Number(m[1]), Number(m[2]));
+  m = s.match(/^(-?)(\d+)\.(\d+)$/);
+  if (m) return "fraction";
+  m = s.match(/^-?\d+$/);
+  return m ? kind(Number(s), 1) : null;
+}
+function classSet([k, s]: number[]) {
+  const r = seeded(41, k, s);
+  const pick = <T,>(xs: T[]) => xs[Math.floor(r() * xs.length)];
+  const right = pick(CL_POOL[CL_KEY[k]]);
+  const trap = pick(CL_TRAP[k].filter((x) => x !== right));
+  const others = CL_KEY.filter((c, i) => i !== k && classify(trap) !== c);
+  const f1 = pick(CL_POOL[pick(others)].filter((x) => x !== trap));
+  let f2 = pick(CL_POOL[pick(others)]);
+  for (let i = 0; i < 20 && (f2 === f1 || f2 === trap); i++) f2 = pick(CL_POOL[pick(others)]);
+  const base = [right, trap, f1, f2];
+  const o = order4([k, s]);
+  return { opts: o.map((i) => base[i]), right: o.indexOf(0), trap: o.indexOf(1) };
+}
+function classDup([k, s]: number[]) {
+  const key = (x: number) => [...classSet([k, x]).opts].sort().join("|");
+  const me = key(s);
+  if (new Set(classSet([k, s]).opts).size < 4) return true;
+  for (let x = 0; x < s; x++) if (key(x) === me) return true;
+  return false;
+}
+
+// amnline
+function nlineOk([m, a, b, c, d]: number[]) {
+  if (m === 0) return a !== 0 && Math.abs(a) <= 9 && b >= 2 && b <= 9 && gcd(Math.abs(a), b) === 1 && c !== 0 && Math.abs(c) <= 6 && d === 0;
+  if (m === 1) return a !== 0 && c !== 0 && Math.abs(a) <= 9 && Math.abs(c) <= 9 && b >= 2 && d >= 2 && gcd(Math.abs(a), b) === 1 && gcd(Math.abs(c), d) === 1 && a * d !== c * b && (a < 0 || c < 0);
+  return m === 2 && Math.abs(a) <= 6 && b >= 2 && b <= 9 && c >= 1 && c <= 9 && c % b !== 0 && (d === 0 || d === 1) && (a < 0 || (d === 0 && c > a * b));
+}
+
+// amcyc: the repeating block of k/d from the cycle (k × 142857 or k × 076923)
+function cycBlock(k: number, d: number) {
+  return String(k * (d === 7 ? 142857 : 76923)).padStart(6, "0");
+}
+
+// amdec
+const DEC_DEN = [3, 4, 6, 7, 8, 9, 11, 12, 15, 16, 20, 24, 25];
+/** a/b by long division: the whole part, the digits before the repeat, and the repeating block. */
+function longDiv(a: number, b: number): { whole: number; pre: string; block: string } {
+  const whole = Math.floor(a / b);
+  let r = a % b;
+  const seen = new Map<number, number>();
+  let digits = "";
+  while (r !== 0 && !seen.has(r)) {
+    seen.set(r, digits.length);
+    r *= 10;
+    digits += String(Math.floor(r / b));
+    r %= b;
+  }
+  if (r === 0) return { whole, pre: digits, block: "" };
+  const at = seen.get(r)!;
+  return { whole, pre: digits.slice(0, at), block: digits.slice(at) };
+}
+function decAny(a: number, b: number) {
+  const { whole, pre, block } = longDiv(a, b);
+  if (!block) return pre ? `${whole}.${pre}` : String(whole);
+  return `${whole}.${pre}${block.repeat(block.length <= 2 ? 3 : 2)}… (the ${block} repeats)`;
+}
+const decExp = (n: number, d: number) => decAny(n, d);
+/** The fraction an expansion like 0.4375 or 0.41666… (the 6 repeats) stands for. */
+function decValue(t: string): R | null {
+  let m = t.match(/^(\d+)\.(\d+)$/);
+  if (m) return q(Number(m[1] + m[2]), 10 ** m[2].length);
+  m = t.match(/^(\d+)\.(\d*)… \(the (\d+) repeats\)$/);
+  if (!m) return null;
+  let digits = m[2];
+  const block = m[3];
+  while (digits.endsWith(block)) digits = digits.slice(0, -block.length);
+  const k = block.length;
+  const p = digits.length;
+  const num = (Number(digits || "0") * (10 ** k - 1) + Number(block));
+  return qa(Q(Number(m[1])), q(num, (10 ** k - 1) * 10 ** p));
+}
+function decOpts([n, d]: number[]) {
+  const right = decExp(n, d);
+  const { pre, block } = longDiv(n, d);
+  const joined = `0.${n}${d}`;
+  const flip = decAny(d, n);
+  const cut = block ? `0.${pre}${block}` : pre.length > 1 ? `0.${pre.slice(0, -1)}` : "";
+  const base: string[] = [];
+  for (const c of [right, joined, flip, cut, decAny(n, d + 1), decAny(n + 1, d), decAny(n, d + 2)]) if (c && base.length < 4 && !base.includes(c)) base.push(c);
+  const o = order4([n, d]);
+  const opts = o.map((i) => base[i]);
+  const at = (s: string) => (s && s !== right ? opts.indexOf(s) : -1);
+  return { opts, right: opts.indexOf(right), joined: at(joined), flip: at(flip), cut: at(cut) };
+}
+
+// amrop
+const SQF = [2, 3, 5, 6, 7];
+function ropOk([t, a, b, m, k]: number[]) {
+  if (!SQF.includes(m)) return false;
+  if (t === 0) return a >= 1 && a <= 9 && b >= 1 && b <= 6 && k >= 2 && k <= 5;
+  if (t === 1) return a >= 2 && a <= 9 && b === 1 && k === 1 && a * a !== m;
+  if (t === 2) return a === 1 && b === 1 && SQF.includes(k) && k > m && sqfree(m * k)[1] !== 1;
+  return t === 3 && a >= 1 && a <= 9 && b >= 1 && b <= 6 && k >= 1 && k <= 7;
+}
+function ropText([t, a, b, m, k]: number[]) {
+  if (t === 0) return `${a === 1 ? "" : a}√${m} + ${b === 1 ? "" : b}√${k * k * m}`;
+  if (t === 1) return `(${a} + √${m})(${a} − √${m})`;
+  if (t === 2) return `(√${m} + √${k})²`;
+  return `(${a} + ${b === 1 ? "" : b}√${m})(${k} + √${m})`;
+}
+function ropAns([t, a, b, m, k]: number[]) {
+  if (t === 0) return surdSum(0, a + b * k, m);
+  if (t === 1) return String(a * a - m);
+  if (t === 2) return surdSum(m + k, 2, m * k);
+  return surdSum(a * k + b * m, a + b * k, m);
+}
+
+// amcube
+function cubeOk([m, w, a, k, h]: number[]) {
+  return m >= 0 && m <= 2 && (w === 0 || w === 1) && a >= 7 && a <= 30 && k >= 1 && k <= 4 && 7 * k <= a && (m === 1 ? h >= 2 && h <= 20 : h === 0);
+}
+
+// ammodel
+type Model = { q: (p: number[]) => string; model: string; parts: (p: number[]) => [string, R][]; bugs: (p: number[]) => Bug[] };
+const rr = (k: number) => q(7 * k, 2);
+const MODEL: Model[] = [
+  {
+    q: ([, k, H, L]) => `A tent stands on a circular floor of diameter ${7 * k} m. Its walls rise straight up for ${H} m, and above them the roof slopes up to a point; the sloping distance from the top of the wall to the point is ${L} m. How much canvas is needed for the walls and the roof (there is no floor), in m²?`,
+    model: "The walls are the curved surface of a cylinder; the roof is the curved surface of a cone",
+    parts: ([, k, H, L]) => [["Walls: 2πrH", qm(qm(Q(2), qm(PI7, rr(k))), Q(H))], ["Roof: πrl", qm(qm(PI7, rr(k)), Q(L))]],
+    bugs: ([, k, H, L]) => {
+      const walls = qm(qm(Q(2), qm(PI7, rr(k))), Q(H));
+      const roof = qm(qm(PI7, rr(k)), Q(L));
+      return [B("floor-added", "procedural", COMB, "The floor πr² was added. The tent has no canvas floor, so only the walls and roof count.", dec(qa(qa(walls, roof), qm(PI7, qm(rr(k), rr(k)))))), B("diameter-as-radius", "procedural", CIRC, `The diameter ${7 * k} m was used as the radius; the radius is half of it.`, dec(qm(qa(walls, roof), Q(2))))];
+    },
+  },
+  {
+    q: ([, k]) => `A bowl is shaped like half of a hollow ball, with an inner radius of ${D(7 * k, 2)} cm. How much soup does it hold when full, in cm³?`,
+    model: "The inside of the bowl is a hemisphere: volume 2/3 πr³",
+    parts: ([, k]) => [["Hemisphere 2/3 πr³", qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3))]],
+    bugs: ([, k]) => {
+      const hem = qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3));
+      return [B("whole-ball", "conceptual", CS, "The volume of a whole ball (4/3 πr³) was used. The bowl is half a ball.", dec(qm(hem, Q(2)))), B("surface-for-volume", "conceptual", CS, "The curved surface area 2πr² was found. How much the bowl holds is its volume.", dec(qm(Q(2), qm(PI7, qm(rr(k), rr(k))))))];
+    },
+  },
+  {
+    q: ([, k, H]) => `A water tank has a circular base of radius ${D(7 * k, 2)} m and upright sides ${H} m high, and it is closed by a rounded dome shaped like half a ball of the same radius. How much water does it hold when full to the top of the dome, in m³?`,
+    model: "The tank is a cylinder with a hemisphere on top",
+    parts: ([, k, H]) => [["Cylinder πr²H", qm(qm(PI7, qm(rr(k), rr(k))), Q(H))], ["Hemisphere 2/3 πr³", qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3))]],
+    bugs: ([, k, H]) => {
+      const cyl = qm(qm(PI7, qm(rr(k), rr(k))), Q(H));
+      const hem = qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3));
+      return [B("dome-left-out", "procedural", COMB, "Only the upright part was counted; the dome holds water too.", dec(cyl)), B("whole-ball", "conceptual", CS, "A whole ball was used for the dome; it is half a ball, 2/3 πr³.", dec(qa(cyl, qm(hem, Q(2)))))];
+    },
+  },
+  {
+    q: ([, k, , L]) => `An ice-cream cone has a circular top of radius ${D(7 * k, 2)} cm and comes to a point ${L} cm below the top. It is filled with ice cream and topped with a rounded scoop shaped like half a ball of the same radius. How much ice cream is there, in cm³?`,
+    model: "The ice cream is a cone with a hemisphere on top",
+    parts: ([, k, , L]) => [["Cone ⅓πr²h", qm(qm(PI7, qm(rr(k), rr(k))), q(L, 3))], ["Hemisphere 2/3 πr³", qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3))]],
+    bugs: ([, k, , L]) => {
+      const cone = qm(qm(PI7, qm(rr(k), rr(k))), q(L, 3));
+      const hem = qm(qm(qm(PI7, qm(rr(k), rr(k))), rr(k)), q(2, 3));
+      return [B("cone-no-third", "recall", CS, "πr²h was used for the cone; a cone holds a third of that, ⅓πr²h.", dec(qa(qm(cone, Q(3)), hem))), B("whole-ball", "conceptual", CS, "A whole ball was used for the scoop; it is half a ball, 2/3 πr³.", dec(qa(cone, qm(hem, Q(2)))))];
+    },
+  },
+];
+function modelOk([m, k, H, L]: number[]) {
+  if (k < 1 || k > 4) return false;
+  if (m === 0) return H >= 2 && H <= 12 && L > 3.5 * k && L <= 24;
+  if (m === 1) return H === 0 && L === 0;
+  if (m === 2) return H >= 2 && H <= 12 && L === 0;
+  return m === 3 && H === 0 && L >= 3 && L <= 24;
+}
+
+// amcshape
+function cshapeOk([m, x, y, k]: number[]) {
+  const d = 7 * k;
+  if (k < 1 || k > 4) return false;
+  if (m === 0 || m === 1) return x >= 5 && x <= 40 && y === 0;
+  if (m === 2) return x >= d && y >= d && x <= 40 && y <= 40 && x <= y;
+  if (m === 3) return x >= 4 && x <= 30 && y >= 3 && y <= 30;
+  return m === 4 && x >= 2 && x <= 30 && y >= 2 && y < d;
+}
+function cshapeText([m, x, y, k]: number[]) {
+  const d = 7 * k;
+  return [
+    `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find its area, in m².`,
+    `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find the length of fencing needed round its edge (its perimeter), in m.`,
+    `A rectangular card ${x} cm by ${y} cm has a quadrant (a quarter of a circle) of radius ${d} cm cut away at one corner. Find the area of card that is left, in cm².`,
+    `The front of a hut is a rectangle ${x} m wide and ${y} m high with a triangle on top, of base ${x} m and height ${3 * k} m. Find the area of the front, in m².`,
+    `A plot is a trapezium with parallel sides of ${d} m and ${y} m, ${x} m apart, with a semicircular flower bed on the ${d} m side, outside the trapezium. Find the total area, in m².`,
+  ][m];
+}
+function cshapeParts([m, x, y, k]: number[]): [string, R][] {
+  const d = 7 * k;
+  const semi = qm(PI7, q(d * d, 8));
+  if (m === 0) return [["Rectangle", Q(x * d)], ["Semicircle πr²/2", semi]];
+  if (m === 1) return [["The two long sides", Q(2 * x)], ["The straight side opposite the semicircle", Q(d)], ["The curved edge πd/2", qm(PI7, q(d, 2))]];
+  if (m === 2) return [["Rectangle", Q(x * y)], ["minus the quadrant πr²/4", qm(Q(-1), qm(PI7, q(d * d, 4)))]];
+  if (m === 3) return [["Rectangle", Q(x * y)], ["Triangle ½ × base × height", q(x * 3 * k, 2)]];
+  return [["Trapezium ½(a + b)h", q((d + y) * x, 2)], ["Semicircle πr²/2", semi]];
+}
+function cshapeBugs(p: number[]): Bug[] {
+  const [m, x, y, k] = p;
+  const d = 7 * k;
+  const right = cshapeParts(p).reduce((s, z) => qa(s, z[1]), Q(0));
+  const out: Bug[] =
+    m === 0
+      ? [B("full-circle", "conceptual", CIRC, "A whole circle was added; only a semicircle (half) is attached.", dec(qa(Q(x * d), qm(PI7, q(d * d, 4))))), B("diameter-as-radius", "procedural", CIRC, `The diameter ${d} m was used as the radius; r = ${D(d, 2)} m.`, dec(qa(Q(x * d), qm(PI7, q(d * d, 2)))))]
+      : m === 1
+        ? [B("side-counted", "procedural", TRAP, "The straight side under the semicircle was counted too; it is inside the shape, not on its edge.", dec(qa(Q(2 * x + 2 * d), qm(PI7, q(d, 2))))), B("full-circle", "conceptual", CIRC, "The whole circumference πd was used; the curved edge is half of it.", dec(qa(Q(2 * x + d), qm(PI7, Q(d)))))]
+        : m === 2
+          ? [B("half-not-quarter", "conceptual", CIRC, "Half a circle was taken away; a quadrant is a quarter, πr²/4.", dec(qs(Q(x * y), qm(PI7, q(d * d, 2))))), B("added", "procedural", TRAP, "The quadrant was added. It is cut away, so subtract it.", dec(qa(Q(x * y), qm(PI7, q(d * d, 4)))))]
+          : m === 3
+            ? [B("no-half", "recall", TRI, "The triangle was taken as base × height; its area is half of that.", dec(Q(x * y + 3 * k * x)))]
+            : [B("trapezium-no-half", "recall", TRAP, "The trapezium was taken as (a + b) × h; its area is ½(a + b)h.", dec(qa(Q((d + y) * x), qm(PI7, q(d * d, 8))))), B("full-circle", "conceptual", CIRC, "A whole circle was added; the flower bed is a semicircle.", dec(qa(q((d + y) * x, 2), qm(PI7, q(d * d, 4)))))];
+  return out.filter((b) => !is(b.predict as string, right));
+}
+function cshapeWord([m, x, y, k]: number[]) {
+  const d = 7 * k;
+  const pi = m === 3 ? "" : " (Take π = 22/7.)";
+  return [
+    `A school stage is a rectangle ${x} m deep and ${d} m wide with a semicircular front of diameter ${d} m. What area of carpet covers the whole stage, in m²?${pi}`,
+    `A school stage is a rectangle ${x} m deep and ${d} m wide with a semicircular front of diameter ${d} m. How long is the decorative border round the edge of the stage, in m?${pi}`,
+    `A tile-maker cuts a quarter circle of radius ${d} cm from one corner of a rectangular tile ${x} cm by ${y} cm. What area of tile is left, in cm²?${pi}`,
+    `A painter is painting the front wall of a hut: a rectangle ${x} m wide and ${y} m high with a triangular gable of height ${3 * k} m above it. What area is painted, in m²?`,
+    `A farmer's field is a trapezium with parallel sides ${d} m and ${y} m, ${x} m apart, and a semicircular pond is dug against the ${d} m side, outside the field. What is the total area of the field and pond, in m²?${pi}`,
+  ][m];
+}
+
+// ampyrp
+const POLY = [3, 5, 6, 8];
+const POLY_NAME: Record<number, string> = { 3: "triangle", 5: "pentagon", 6: "hexagon", 8: "octagon" };
+/** Rectangular bases l × b (b < l) with whole-number slant heights s1 (faces on the l edges) and s2 (on the b edges). */
+const RPYR: [number, number, number, number, number][] = [];
+for (let l = 4; l <= 30; l++)
+  for (let b = 3; b < l; b++)
+    for (let s1 = Math.ceil(b / 2) + 1; s1 <= 40; s1++) {
+      const s2 = Math.sqrt(s1 * s1 - (b * b) / 4 + (l * l) / 4);
+      if (Number.isInteger(s2) && s1 * s1 - (b * b) / 4 > 0) RPYR.push([l, b, Math.sqrt(s1 * s1 - (b * b) / 4), s1, s2]);
+    }
+function pyrpOk([m, a, s, i]: number[]) {
+  if (m === 0) return i >= 0 && i < RPYR.length && a === 2 && s === 3;
+  if (m === 1) return i >= 0 && i <= 3 && a >= 2 && a <= 20 && s <= 30 && s > a / (2 * Math.tan(Math.PI / POLY[i]));
+  if (m === 2) return i === 0 && a % 2 === 0 && s > a / (2 * Math.sqrt(3)) && s <= 30;
+  return m === 3 && i === 0 && s > (a * Math.sqrt(3)) / 2 && s <= 30;
+}
+function pyrpText([m, a, s, i]: number[]) {
+  if (m === 0) {
+    const [l, b, , s1, s2] = RPYR[i];
+    return `A pyramid has a rectangular base ${l} cm by ${b} cm. The slant height of each triangular face on a ${l} cm edge is ${s1} cm, and of each face on a ${b} cm edge is ${s2} cm. Find its total surface area, in cm².`;
+  }
+  if (m === 1) return `A pyramid has a regular ${POLY_NAME[POLY[i]]} as its base, with edges of ${a} cm, and the slant height of each sloping face is ${s} cm. Find its lateral surface area (the sloping faces only), in cm². (A decimal is fine.)`;
+  return `A pyramid has a regular ${m === 2 ? "triangle (equilateral)" : "hexagon"} as its base, with edges of ${a} cm, and the slant height of each sloping face is ${s} cm. Find its total surface area, in cm², in exact form (for example 54 + 9√3).`;
+}
+function pyrpAns([m, a, s]: number[]) {
+  const n = m === 2 ? 3 : 6;
+  const lat = q(n * a * s, 2);
+  const base = m === 2 ? q(a * a, 4) : q(3 * a * a, 2);
+  return `${dec(lat)} + ${dec(base) === "1" ? "" : dec(base)}√3`;
+}
+
+// amsimc
+const SIMC = ["Similar by AA", "Similar by SSS", "Similar by SAS", "Not shown to be similar"];
+const SIMC_WHY = ["Two pairs of equal angles: AA", "All three pairs of sides are in the same ratio: SSS", "Two pairs of sides in the same ratio and the angles between them equal: SAS", "The three side ratios are not all equal, so the triangles are not similar", "Two sides are in proportion but the equal angle is not between them, so the facts do not show similarity"];
+const SCALES = [[2, 1], [3, 1], [3, 2], [5, 2], [4, 3], [5, 3]];
+function simcData([c, t, s]: number[]): { angles: number[]; sides: [number, number][]; included: boolean; text: string[] } {
+  const [x, y, z] = SIM_TRIS[t];
+  const [mm, nn] = SCALES[s];
+  const al = 40 + 5 * ((t + s) % 8);
+  const be = 55 + 5 * ((2 * t + s) % 6);
+  const S = (u: string, v: string, a: number, b: number) => `${u} = ${a} cm, ${v} = ${b} cm`;
+  if (c === 0) return { angles: [al, be], sides: [], included: false, text: [`∠A = ∠P = ${al}°`, `∠B = ∠Q = ${be}°`] };
+  if (c === 1 || c === 3) {
+    const sd: [number, number][] = [[nn * x, mm * x], [nn * y, mm * y], [nn * z, mm * z + (c === 3 ? 1 : 0)]];
+    return { angles: [], sides: sd, included: false, text: [S("AB", "PQ", sd[0][0], sd[0][1]), S("BC", "QR", sd[1][0], sd[1][1]), S("CA", "RP", sd[2][0], sd[2][1])] };
+  }
+  const sd: [number, number][] = [[nn * x, mm * x], [nn * z, mm * z]];
+  if (c === 2) return { angles: [al], sides: sd, included: true, text: [S("AB", "PQ", sd[0][0], sd[0][1]), S("AC", "PR", sd[1][0], sd[1][1]), `∠A = ∠P = ${al}°`] };
+  const sd4: [number, number][] = [[nn * x, mm * x], [nn * y, mm * y]];
+  return { angles: [al], sides: sd4, included: false, text: [S("AB", "PQ", sd4[0][0], sd4[0][1]), S("BC", "QR", sd4[1][0], sd4[1][1]), `∠A = ∠P = ${al}°`] };
+}
+const simcFacts = (p: number[]) => simcData(p).text;
+
+// ambptc
+const LAMBDA: R[] = [[3, 2], [2, 1], [5, 2], [3, 1]];
+function bptcLens([, p, qq, w, e]: number[]): R[] {
+  const L = LAMBDA[w];
+  return [Q(p), Q(qq), qa(qm(L, Q(p)), Q(e === 1 ? 1 : 0)), qa(qm(L, Q(qq)), Q(e === 2 ? 1 : 0))];
+}
+function bptcOk(pp: number[]) {
+  const [m, p, qq, w, e] = pp;
+  if ((m !== 0 && m !== 1) || p < 1 || qq < 1 || p > 9 || qq > 9 || w < 0 || w > 3 || e < 0 || e > 2 || gcd(p, qq) !== 1) return false;
+  if (m === 0) return true;
+  const [a, b, c, d] = bptcLens(pp).map(qn);
+  const BC = a + b;
+  return c + d > BC && c + BC > d && d + BC > c;
+}
+const BPTC0 = ["DE ∥ BC (by the converse of the basic proportionality theorem)", "DE is not parallel to BC", "It cannot be decided without measuring an angle"];
+const BPTC1 = ["AD bisects ∠BAC (by the converse of the angle bisector theorem)", "AD does not bisect ∠BAC", "It cannot be decided without measuring an angle"];
+
+// amline
+const LINEC = ["The line is a tangent: it touches the circle at exactly one point", "The line is a secant: it cuts the circle at two points", "The line does not meet the circle"];
+
+// amctan
+function ctanCount(r1: number, r2: number, d: number) {
+  return d > r1 + r2 ? 4 : d === r1 + r2 ? 3 : d > r1 - r2 ? 2 : d === r1 - r2 && r1 !== r2 ? 1 : 0;
+}
+function ctanOk([m, r1, r2, d]: number[]) {
+  if (r2 < 1 || r1 < r2 || r1 > 20 || d < 0 || d > 45) return false;
+  if (m === 0) return !(d === 0 && r1 === r2) && d <= r1 + r2 + 8;
+  if (m !== 1 && m !== 2) return false;
+  const t = m === 1 ? r1 - r2 : r1 + r2;
+  const L2 = d * d - t * t;
+  return d > r1 + r2 && L2 > 0 && Number.isInteger(Math.sqrt(L2)) && (m === 2 || r1 !== r2);
+}
+
+// ammen
+const MEN0 = ["AD, BE and CF meet at one point (they are concurrent)", "AD, BE and CF do not all pass through one point", "It cannot be decided from the ratios alone"];
+const MEN1 = ["D, E and F lie on one straight line", "D, E and F do not lie on one straight line", "It cannot be decided from the ratios alone"];
+function menAF([, a, b, c, d, y]: number[]): [number, number] {
+  const [e, f] = q(y ? b * d : b * d + 1, a * c);
+  return [e, f];
+}
+function menOk(p: number[]) {
+  const [m, a, b, c, d, y] = p;
+  if ((m !== 0 && m !== 1) || (y !== 0 && y !== 1) || gcd(a, b) !== 1 || gcd(c, d) !== 1 || (m === 1 && a <= b)) return false;
+  const [e, f] = menAF(p);
+  return e <= 30 && f <= 30;
+}
+function nlineAns([m, a, b, c, d]: number[]): R {
+  const x = m === 0 ? qs(q(a, b), Q(c)) : m === 1 ? qs(q(a, b), q(c, d)) : qa(Q(a), q(d ? c : -c, b));
+  return m === 2 ? x : q(Math.abs(x[0]), x[1]);
+}

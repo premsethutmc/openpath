@@ -1013,7 +1013,7 @@ export const B12: Def[] = [
       ],
     },
     word: ([k, x, y, z]) => `In a quiz, a team scores x points for each question in round 1, y for each in round 2 and z for each in round 3 (a negative score is a penalty). Three teams' results give these totals: ${M3[k].map((r) => eq3(r, r[0] * x + r[1] * y + r[2] * z)).join("; ")}. Find the points per question in each round, as (x, y, z).`,
-    limits: "Eight fixed coefficient patterns with unique whole-number solutions; systems with no or infinitely many solutions and matrix methods are not here.",
+    limits: "Eight fixed coefficient patterns with unique whole-number solutions; systems with no or infinitely many solutions are the next family, and matrix methods are not here.",
   },
   // ============================================================ square roots of polynomials
   {
@@ -3128,6 +3128,59 @@ export const B12: Def[] = [
     },
     limits: "Quadratics and cubics with whole-number zeros between −3 and 3 (or no zero), drawn on −5 ≤ x, y ≤ 5.",
   },
+  // ============================================================ gap@1: systems in three variables with no or many solutions
+  {
+    id: "al3cons",
+    arity: 6,
+    title: "How many solutions a system of three linear equations has",
+    competency: SYS3,
+    type: "choice",
+    // [k, x, y, z, kind, m]: rows 1, 2 of M3[k] with the solution (x, y, z); kind 0 the third row of M3[k] (one solution);
+    // kind 1, 2: the third equation is row 1 + λ·row 2 (λ = 1, −1, 2 for m = 0, 1, 2) with its constant changed by m + 1
+    // (kind 1, no solution) or not (kind 2, infinitely many)
+    parse: none,
+    reject: (p) => (!inR(p, [[0, 7], [-3, 3], [-3, 3], [-3, 3], [0, 2], [0, 2]]) || (p[4] === 0 && p[5] !== 0) ? "One of the fixed coefficient patterns, a solution from −3 to 3, and a third equation of one of three kinds." : null),
+    prompt: (p) => `How many solutions does this system of equations have? ${sys3Eqs(p).map(([r, c]) => eq3(r, c)).join("; ")}.`,
+    choices: () => ["Exactly one solution", "No solution", "Infinitely many solutions"],
+    solve: (p) => ({ steps: [st("eliminate", "subtract", SYS3, [p[4]], ["the elimination ends with one value for each variable", "the elimination ends with 0 = a non-zero number", "the elimination ends with 0 = 0"][p[4]]), st("decide", "decide", SYS3, [], p[4])], answer: p[4] }),
+    // independent: the determinant of the coefficients decides whether there is exactly one solution; if it is 0, a
+    // solution of the first two equations is found and tested in the third
+    validate: (p, v) => {
+      const E = sys3Eqs(p);
+      const D = det3(E.map(([r]) => r));
+      if (D !== 0) return v === 0;
+      const [[r1, c1], [r2, c2], [r3, c3]] = E;
+      // fix one variable at 0 and solve the first two equations for the other two (a non-zero 2 × 2 minor exists)
+      for (const fix of [2, 1, 0]) {
+        const [i, j] = [0, 1, 2].filter((t) => t !== fix);
+        const m = r1[i] * r2[j] - r1[j] * r2[i];
+        if (m === 0) continue;
+        const P = [0, 0, 0];
+        P[i] = (c1 * r2[j] - c2 * r1[j]) / m;
+        P[j] = (r1[i] * c2 - r2[i] * c1) / m;
+        return v === (close(r3[0] * P[0] + r3[1] * P[1] + r3[2] * P[2], c3) ? 2 : 1);
+      }
+      return false;
+    },
+    bugs: ([, , , , kind]) =>
+      kind === 2
+        ? [B("zero-equals-zero", "conceptual", SYS3, "Ending with 0 = 0 was read as 'no solution'; 0 = 0 is always true, so the third equation adds nothing and there are infinitely many solutions.", 1)]
+        : kind === 1
+          ? [B("contradiction-as-many", "conceptual", SYS3, "Ending with 0 = a non-zero number was read as 'infinitely many'; that equation can never be true, so there is no solution.", 2), B("always-one", "conceptual", SYS3, "Three equations in three unknowns were assumed always to have exactly one solution; check whether one equation follows from the others.", 0)]
+          : [],
+    variants: () => [],
+    explain: (s) => (s.id === "eliminate" ? `Eliminate one variable at a time: ${s.value}` : ["So there is exactly one solution", "So there is no solution", "So there are infinitely many solutions"][Number(s.value)]),
+    domain: [[0, 7], [-3, 3], [-3, 3], [-3, 3], [0, 2], [0, 2]],
+    keep: (p) => !(p[4] === 0 && p[5] !== 0) && (p[4] !== 0 || hsh(p.join(",")) % 3 === 0) && firstOnly("al3cons", [[0, 7], [-3, 3], [-3, 3], [-3, 3], [0, 2], [0, 2]], (q) => sys3Eqs(q).map(([r, c]) => eq3(r, c)).join(";"))(p),
+    cap: 300,
+    difficulty: ([, , , , kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
+    teach: {
+      idea: "Each equation is a plane. Three planes can meet in one point (one solution), have no point common to all three (no solution), or share a whole line (infinitely many). When one equation is a combination of the others, elimination ends with 0 = 0 (infinitely many) or 0 = a non-zero number (none).",
+      method: "Eliminate one variable from two pairs of equations, then eliminate a second. If you reach one value for each variable there is one solution; 0 = k (k ≠ 0) means no solution; 0 = 0 means infinitely many.",
+      alternatives: [{ id: "combination", title: "Look for a combination", kind: "conceptual", text: ["Check whether the left side of one equation is the sum (or a multiple-sum) of the other two left sides.", "If it is, compare the right sides in the same way: equal → infinitely many; different → none."] }],
+    },
+    limits: "Systems built from eight fixed coefficient patterns; writing out the full elimination is marked by an educator.",
+  },
 ];
 
 // ---------------------------------------------------------------- helpers used above
@@ -3635,4 +3688,13 @@ function zgrTurns(P: number[]): number {
     if (v !== 0) prev = v;
   }
   return n;
+}
+/** al3cons: the three equations as [coefficients, constant]. */
+function sys3Eqs([k, x, y, z, kind, m]: number[]): [number[], number][] {
+  const rows = M3[k];
+  const c = (r: number[]) => r[0] * x + r[1] * y + r[2] * z;
+  if (kind === 0) return rows.map((r) => [r, c(r)] as [number[], number]);
+  const lam = [1, -1, 2][m];
+  const r3 = rows[0].map((v, i) => v + lam * rows[1][i]);
+  return [[rows[0], c(rows[0])], [rows[1], c(rows[1])], [r3, c(r3) + (kind === 1 ? m + 1 : 0)]];
 }
