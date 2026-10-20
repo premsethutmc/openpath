@@ -29,6 +29,11 @@ async function family() {
     hasTouch: true,
     isMobile: true,
   });
+  // Optional owner-only preview gate; Django sign-in below is still exercised through the real UI.
+  if (process.env.PREVIEW_PASSWORD) {
+    const gate = await c.request.post(BASE + "/login", {form:{password:process.env.PREVIEW_PASSWORD},maxRedirects:0});
+    assert.equal(gate.status(),303,"the preview gate opens before the application account");
+  }
   await c.request.get(BASE + "/api/account/");
   const email = `year.writer.${Date.now()}.${Math.random().toString(36).slice(2)}@example.org`;
   await api(c, "POST", "/account/register/", {
