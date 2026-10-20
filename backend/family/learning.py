@@ -14,7 +14,7 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
-from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, parse as parse_expression, same_answer
+from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
 from .learning_families import exposure, generated
 from .models import PupilEvent
 
@@ -136,6 +136,9 @@ def canonical(kind, raw):
 def right(q, response):
     if q['type'] in HUMAN:
         return False  # an educator marks it
+    # form@1: an "expand" task's answer must be written expanded, whatever its value
+    if q.get('expanded') and not expanded_form(response):
+        return False
     if q['type'] in SAMPLED:
         return same_answer(q['type'], response, q['answer'])
     c = canonical(q['type'], response)

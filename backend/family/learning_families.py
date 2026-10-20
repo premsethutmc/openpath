@@ -236,7 +236,7 @@ def generated(qid):
     key = f"{m.group(2)}{m.group(3) or ''}" if m else ''
     if not fam or key not in fam['items']:
         return None
-    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) == ':mc' else fam['type'], 'answer': fam['items'][key], 'role': 'generated'}
+    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) == ':mc' else fam['type'], 'answer': fam['items'][key], 'role': 'generated', **({'expanded': True} if fam.get('expanded') and m.group(3) != ':mc' else {})}
 
 
 def _mirror(qid):

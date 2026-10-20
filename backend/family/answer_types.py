@@ -403,6 +403,11 @@ def _exact_number(raw):
 
 # ---------------------------------------------------------------- numerical evaluation
 
+def expanded_form(raw):
+    """form@1: written expanded — no brackets and no multiplication signs (answer-types.ts expandedForm)."""
+    return re.search(r'[()\[\]*×·]', str(raw)) is None
+
+
 def evaluate(n, env):
     k = n[0]
     if k == 'num':

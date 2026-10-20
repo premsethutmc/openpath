@@ -399,6 +399,8 @@ export function numericValue(s: string): number | null {
     return null;
   }
 }
+/** form@1: written expanded — no brackets and no multiplication signs (the answer to "expand" or "multiply out"). */
+export const expandedForm = (raw: string) => !/[()[\]*×·]/.test(raw);
 export function evaluate(n: Node, env: Record<string, number>): number {
   switch (n.k) {
     case "num":

@@ -35,6 +35,13 @@ test("mixed@1: a mixed number in a fraction answer is its value, in the app and 
   assert.equal(isCorrect({ ...(q as object), answer: "-7/2" } as never, "−3 1/2"), true);
 });
 
+test("form@1: an expand task's answer must be written expanded (the question typed back is refused), app and server alike", () => {
+  const q = { type: "exact" as const, answer: "x^2 - 15x + 56", expanded: true as const };
+  assert.equal(isCorrect(q, "x² − 15x + 56"), true);
+  assert.equal(isCorrect(q, "(x-8)(x-7)"), false);
+  assert.equal(isCorrect({ type: "exact", answer: "x^2 - 15x + 56" }, "(x-8)(x-7)"), true, "without the form, equal values are equal");
+});
+
 test("written@1: an unmarked written answer is pending and never evidence; only the educator's mark enters the engine", () => {
   const t = writtenTasks.find((x) => x.id === "wr:irr:sqrt2")!;
   const q = question(t.id);

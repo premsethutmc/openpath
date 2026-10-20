@@ -37,6 +37,8 @@ export interface Problem {
   /** "typed" (the learner writes the answer), "mc" (chooses among the answer and mal-rule answers), or "word" (the
    * same mathematics in an everyday situation: a transfer context, "gen:<family>:<params>:w"). */
   form: "typed" | "mc" | "word";
+  /** form@1: the answer must be written expanded (no brackets, no multiplication signs). */
+  expanded?: true;
   prompt: string;
   type: AnswerType;
   answer: string;
@@ -88,6 +90,13 @@ export type Def = {
   keep?: (p: number[]) => boolean;
   /** Difficulty classification of a parameter choice: 1 easier, 2 typical, 3 harder. */
   difficulty?: (p: number[]) => 1 | 2 | 3;
+  /** level@1: the grade this problem belongs to, when a family spans grades (comparing numbers within 20 in Grade 1,
+   * lakhs in Grade 4). A learner is never asked a problem from a grade after their own. Default: the competency's
+   * first grade. */
+  grade?: (p: number[]) => number;
+  /** form@1: the task is to expand or simplify, so the answer must be written without brackets or multiplication signs
+   * (x² − 15x + 56, not (x − 8)(x − 7)): an answer equal in value but not expanded is not accepted. */
+  expanded?: boolean;
   /** Teaching hints for template strategies: the idea, and the method; alternatives are further ways of explaining
    * (template@2); `visual` draws a worked example's parameters for younger learners. */
   teach?: { idea: string; method: string; alternatives?: TeachAlternative[]; visual?: (p: number[]) => Visual | null };

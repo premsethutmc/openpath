@@ -372,7 +372,7 @@ interface Exemplar {
   wordNorm: number;
   conceptNorm: number;
 }
-const rows = (exemplarIndex as { exemplars: ExemplarRow[] }).exemplars;
+const rows = (exemplarIndex as unknown as { exemplars: ExemplarRow[] }).exemplars;
 const wordDf = new Map<string, number>();
 for (const [, , w] of rows) for (const x of w.split(" ").filter(Boolean)) wordDf.set(x, (wordDf.get(x) ?? 0) + 1);
 const wordIdf = (w: string) => Math.log((rows.length + 1) / (1 + (wordDf.get(w) ?? 0)));

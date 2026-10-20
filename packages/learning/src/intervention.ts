@@ -19,7 +19,7 @@ import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleSt
 import { moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
-import { exposureKey, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
+import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { modulePhasePool } from "./library";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
@@ -30,6 +30,14 @@ export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedIte
 export const RECOVERY_DEPTH = 2;
 
 const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === m.competency;
+/** level@1: the learner's grade (their current enrolment), and whether a question is within it: a problem from a
+ * later grade is never asked (it is reached in that grade); one from an earlier grade may be (recovery, review). */
+const gradeOf = (records: LearnerRecords) => records.enrolments.at(-1)?.grade ?? null;
+const withinGrade = (records: LearnerRecords, qid: string) => {
+  const g = gradeOf(records);
+  const q = g === null ? null : gradeOfQuestion(qid);
+  return g === null || q === null || q <= g;
+};
 /** The learner's first attempt at this problem, in either answer format (one exposure). */
 const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? (records.pending?.some((p) => p.questionId === qid) ? ({ questionId: qid } as unknown as Attempt) : null);
 /**
@@ -40,7 +48,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
   if (!m.pool) return null;
   const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
   // pools@1: from every family of the competency in turn
-  return modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id))) ?? null;
+  return modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
 }
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
@@ -143,7 +151,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const asked = diagnose(m, records.attempts);
   const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence } : asked;
   const shown = ev.status === "independent" || ev.status === "transfer" || ev.status === "verified";
-  const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id)) ?? null;
+  const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
   if (ev.retention === "due") {
     // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
     const r = unanswered(m.retention) ?? fromPool(m, "retention", records);

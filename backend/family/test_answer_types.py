@@ -49,3 +49,12 @@ class AnswerTypeTests(SimpleTestCase):
         self.assertEqual(canonical('fraction', '1 1/2'), '3/2')
         self.assertEqual(canonical('fraction', '-3 1/2'), '-7/2')
         self.assertNotEqual(canonical('fraction', '1 1/4'), canonical('fraction', '11/4'))
+
+    def test_an_expand_task_needs_the_answer_written_expanded(self):
+        from .learning import right
+        q = {'type': 'exact', 'answer': 'x^2 - 15x + 56', 'expanded': True}
+        self.assertTrue(right(q, 'x^2 - 15x + 56'))
+        self.assertTrue(right(q, 'x² − 15x + 56'), 'a superscript is not a bracket')
+        self.assertFalse(right(q, '(x-8)(x-7)'), 'the question typed back is not an expansion')
+        self.assertFalse(right({**q, 'answer': '30x^5y'}, '6x^3*5x^2y'))
+        self.assertTrue(right({'type': 'exact', 'answer': 'x^2 - 15x + 56'}, '(x-8)(x-7)'), 'without the form, equal values are equal')

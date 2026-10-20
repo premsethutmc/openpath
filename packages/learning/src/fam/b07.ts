@@ -1474,6 +1474,46 @@ function treeTable(t: TNode): Visual {
   visit(t, names[0]);
   return { type: "table", head: ["Box", "Operation", "Left branch", "Right branch"], rows };
 }
+/** The everyday form of a tree: a shop bill worked out in stages, each box a stage, told in the tree's left-to-right order. */
+function treeWord(shape: number, seed: number): string {
+  const t = treeOf(shape, seed) as { op: string; l: TNode; r: TNode };
+  const r = (k: number) => hm(`agtreew:${shape}:${seed}:${k}`);
+  const pick = <T,>(xs: T[], k: number) => xs[r(k) % xs.length];
+  const box = (n: TNode) => n as { op: string; l: number; r: number };
+  /** A box whose branches are numbers, as an amount of money. */
+  const amt = (n: TNode, k: number) => {
+    const b = box(n);
+    if (b.op === "×") return `${b.l} ${pick(["pencils", "bananas", "samosas", "erasers", "toffee packets", "candles"], k)} at ₹${b.r} each`;
+    if (b.op === "+") {
+      const [x, y] = pick([["pen", "ruler"], ["cup of tea", "biscuit packet"], ["comb", "hair clip"], ["notebook", "sharpener"], ["bunch of coriander", "lemon"]], k);
+      return `a ${x} for ₹${b.l} and a ${y} for ₹${b.r}`;
+    }
+    return `a ${pick(["toy car", "lunch box", "water bottle", "torch", "kite"], k)} priced ₹${b.l} with ₹${b.r} off`;
+  };
+  /** A box whose branches are numbers, as a number of children. */
+  const cnt = (n: TNode) => {
+    const b = box(n);
+    return b.op === "×" ? `${b.l} rows of ${b.r} children` : b.op === "+" ? `${b.l} boys and ${b.r} girls` : `${b.l} children, but ${b.r} of them are absent`;
+  };
+  const N = name(seed + shape);
+  const N2 = name(seed + shape + 5);
+  const end = " (The table shows this working as a tree diagram.)";
+  if (shape === 0) {
+    const c = t.r as number;
+    if (t.op === "+") return `${N} buys ${amt(t.l, 1)}, and also pays ₹${c} for a cloth bag. How much does ${N} pay in all, in rupees?${end}`;
+    if (t.op === "−") return `${N} buys ${amt(t.l, 1)}, and a coupon then takes ₹${c} off the whole bill. How much does ${N} pay, in rupees?${end}`;
+    return `${N} buys ${amt(t.l, 1)} every day, for ${c} days. How much does ${N} spend over the ${c} days, in rupees?${end}`;
+  }
+  if (shape === 1) {
+    const n = t.l as number;
+    if (t.op === "+") return `${N} already owes a shopkeeper ₹${n}, and now buys ${amt(t.r, 2)} on credit as well. How much does ${N} owe now, in rupees?${end}`;
+    if (t.op === "−") return `${N} has ₹${n} and buys ${amt(t.r, 2)}. How much money is left, in rupees?${end}`;
+    return `For each of ${n} children, a teacher buys the same gift: ${amt(t.r, 2)}. How much is spent on the gifts in all, in rupees?${end}`;
+  }
+  if (t.op === "+") return `${N} buys ${amt(t.l, 1)}. ${N2} buys ${amt(t.r, 2)}. How much do they pay together, in rupees?${end}`;
+  if (t.op === "−") return `${N} buys ${amt(t.l, 1)}. ${N2} buys ${amt(t.r, 2)}. How many rupees more does ${N} pay than ${N2}?${end}`;
+  return `For a class outing, every child who goes pays for ${amt(t.l, 1)}. The class has ${cnt(t.r)}, and every child present goes. How many rupees are collected?${end}`;
+}
 const treeOk = ([shape, seed]: number[]) => {
   if (shape < 0 || shape > 2 || seed < 0 || seed > 79) return false;
   const t = treeOf(shape, seed);
@@ -2309,6 +2349,7 @@ B07.push(
     keep: (p) => treeOk(p) && firstSeeds(`agtree${p[0]}`, 80, (k) => (treeOk([p[0], k]) ? tbr(treeOf(p[0], k)) : `x${k}`)).has(p[1]),
     difficulty: ([shape]) => (shape === 0 ? 1 : shape === 1 ? 2 : 3),
     figure: ([shape, seed]) => treeTable(treeOf(shape, seed)),
+    word: ([shape, seed]) => treeWord(shape, seed),
     teach: {
       idea: "A tree diagram shows the order of work: the operation at the top is done last, and each branch that is a box must be worked out first. Written as an expression, every such branch goes in brackets.",
       method: "Start at the bottom: work out each box whose branches are both numbers. Put its value in place of the box, and move up until the top box is done.",

@@ -10,13 +10,15 @@ import libraryData from "../../../content/learning/library.v1.json";
 import markedData from "../../../content/learning/written-modules.v1.json";
 import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
 import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
-import { canonicalOf, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
+import { canonicalOf, expandedForm, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
 import { MARKED_NOT, MARKED_RIGHT, outOf, tasksFor, writtenTask } from "./written";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
 export interface Question {
   id: string;
+  /** form@1: the answer must be written expanded (no brackets, no multiplication signs). */
+  expanded?: true;
   competency: string;
   /** The micro-skill (or the competency itself) the question is about. */
   skill: string;
@@ -158,7 +160,7 @@ export const question = (id: string): Question => {
   // written@1: an educator marks it; its "answer" is the educator's mark of correct, never a text to match
   if (w) return { id, competency: w.competency, skill: w.competency, role: "practice", type: "written", prompt: w.prompt, answer: MARKED_RIGHT, solution: `An educator marks this against ${w.rubric.length} criteria (${outOf(w)} points): ${w.rubric.map((r) => r.criterion).join("; ")}.`, ...(w.figure ? { figure: w.figure } : {}), difficulty: 3, source: w.source, licence: w.licence, review: "provisional" };
   const g = problemOf(id);
-  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
+  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, ...(g.expanded ? { expanded: true as const } : {}), solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
   throw new Error(`Unknown question ${id}`);
 };
@@ -203,8 +205,10 @@ export function canonical(q: Pick<Question, "type"> & { answer?: string }, raw: 
     return null;
   }
 }
-export const isCorrect = (q: Pick<Question, "type" | "answer">, raw: string) => {
+export const isCorrect = (q: Pick<Question, "type" | "answer"> & { expanded?: true }, raw: string) => {
   if (HUMAN.has(q.type)) return raw === MARKED_RIGHT;
+  // form@1: an "expand" task's answer must be written expanded, whatever its value
+  if (q.expanded && !expandedForm(raw)) return false;
   const c = canonical(q, raw);
   return c !== null && c === canonical(q, q.answer);
 };

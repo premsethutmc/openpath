@@ -1176,7 +1176,7 @@ for (const f of DOMAIN_FAMILIES) {
   V2.add(f.id);
 }
 // one registry of families however the module is loaded (test runners may load it twice): shared on globalThis
-const GF = globalThis as { __openpathFamilies?: Map<string, Def>; __openpathPools?: Map<string, { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> }> };
+const GF = globalThis as { __openpathFamilies?: Map<string, Def>; __openpathPools?: Map<string, { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string>; same: Map<string, string> }> };
 export const FAMILIES: Map<string, Def> = (GF.__openpathFamilies ??= new Map(F.map((f) => [f.id, f])));
 
 /** The options of a multiple-choice form: the answer and up to three mal-rule answers (the first prediction of each
@@ -1278,7 +1278,7 @@ const signedNum = (x: number) => (x < 0 ? `−${-x}` : String(x));
 export const prose = (t: string) => t.replace(/(^|[\s(=,[|:;])-(?=[\d.a-zA-Zπ√(])/g, "$1−");
 function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const q = buildRaw(def, p, form);
-  return { ...q, prompt: prose(q.prompt), bugs: q.bugs.map((b) => ({ ...b, says: prose(b.says) })) };
+  return { ...q, prompt: prose(q.prompt), bugs: q.bugs.map((b) => ({ ...b, says: prose(b.says) })), ...(def.expanded && q.form !== "mc" ? { expanded: true as const } : {}) };
 }
 function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const { steps, answer } = def.solve(p);
@@ -1395,6 +1395,21 @@ const fnv = (str: string) => {
   for (let i = 0; i < str.length; i++) x = Math.imul(x ^ str.charCodeAt(i), 0x01000193) >>> 0;
   return x;
 };
+/** cap@2: a capped pool takes its problems in turn from each value of the first parameter (most families use it for
+ * the kind of question), hash-ordered within each, so every kind reaches learners in fair shares (a plain hash cut
+ * left whole kinds out). A first parameter with more than 12 values is not a kind: the plain hash order is kept. */
+function capped(fam: string, def: Def, list: number[][], cap: number): number[][] {
+  const order = (xs: number[][]) => xs.map((p) => ({ p, h: fnv(`gen:${fam}:${p.join(",")}`) })).sort((a, b) => a.h - b.h).map((x) => x.p);
+  const kinds = def.domain && def.domain[0][1] - def.domain[0][0] < 12 ? [...new Set(list.map((p) => p[0]))].sort((a, b) => a - b) : null;
+  let picked: number[][];
+  if (!kinds || kinds.length < 2) picked = order(list).slice(0, cap);
+  else {
+    const groups = kinds.map((k) => order(list.filter((p) => p[0] === k)));
+    picked = [];
+    for (let i = 0; picked.length < cap && groups.some((g) => i < g.length); i++) for (const g of groups) if (i < g.length && picked.length < cap) picked.push(g[i]);
+  }
+  return picked.sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
+}
 /** Every parameter choice in the domain ranges that `keep` and `reject` allow (before validation). */
 const candCache = new Map<string, number[][]>();
 export function candidates(fam: string): number[][] {
@@ -1409,16 +1424,16 @@ export function candidates(fam: string): number[][] {
     const out: number[][] = [];
     let state = fnv(`sample:${fam}`) || 1;
     const rnd = () => ((state = Math.imul(state ^ (state >>> 15), 0x2c1b3c6d) >>> 0), (state = (state ^ (state >>> 12)) >>> 0), state / 4294967296);
-    for (let k = 0; k < def.cap * 40 && out.length < def.cap; k++) {
+    for (let k = 0; k < def.cap * 120 && out.length < def.cap * 3; k++) {
       const p = def.domain.map(([lo, hi]) => lo + Math.floor(rnd() * (hi - lo + 1)));
       const key = p.join(",");
       if (seen.has(key)) continue;
       seen.add(key);
       if ((!def.keep || def.keep(p)) && !def.reject(p)) out.push(p);
     }
-    out.sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
-    candCache.set(fam, out);
-    return out;
+    const picked = capped(fam, def, out, def.cap);
+    candCache.set(fam, picked);
+    return picked;
   }
   const out: number[][] = [];
   const rec = (i: number, acc: number[]) => {
@@ -1430,7 +1445,7 @@ export function candidates(fam: string): number[][] {
   };
   rec(0, []);
   // a capped family releases a fixed, hash-chosen subset (spread across the domain, the same on every build)
-  if (def.cap && out.length > def.cap) return out.map((p) => ({ p, h: fnv(`gen:${fam}:${p.join(",")}`) })).sort((a, b) => a.h - b.h).slice(0, def.cap).map((x) => x.p).sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
+  if (def.cap && out.length > def.cap) return capped(fam, def, out, def.cap);
   return out;
 }
 type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string>; same: Map<string, string> };
@@ -1499,6 +1514,17 @@ export function phaseOf(qid: string): Phase {
   return k < 2 ? "retention" : k === 2 ? "diagnostic" : k < 5 ? "check" : "practice";
 }
 export const difficultyOf = (pr: Problem) => FAMILIES.get(pr.family)?.difficulty?.(pr.params) ?? 2;
+/** level@1: the grade a generated question belongs to (its family's grade(p); null for a family that does not say). */
+export function gradeOfQuestion(qid: string): number | null {
+  const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)/.exec(qid);
+  const def = m ? FAMILIES.get(m[1]) : undefined;
+  if (!def?.grade) return null;
+  try {
+    return def.grade(m![2].split(",").map(Number));
+  } catch {
+    return null;
+  }
+}
 /** The pool items of one phase, in a stable order, as question ids (both formats where the family has them). */
 export function phasePool(fam: string, phase: Phase): string[] {
   const def = FAMILIES.get(fam)!;

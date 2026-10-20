@@ -21,7 +21,7 @@
  *   boundary        every domain edge and one step outside it, holding the other parameters at a valid choice
  */
 import { canonical, isCorrect, question } from "./content";
-import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
+import { expandedForm, numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { hashOf } from "./curriculum";
 import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, rangeOf, show, type Problem } from "./families";
 
@@ -61,7 +61,7 @@ const itemSignature = (p: Problem) => {
   const v = def.solve(typed.params).answer;
   const probes = typeof v === "number" ? [v, v + 1, v - 1, 2 * v + 1, v + 0.5].map((x) => (def.validate(typed.params, x) ? "1" : "0")).join("") : def.validate(typed.params, v) ? "1" : "0";
 
-  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : [])].join("¦");
+  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : []), ...(def.grade ? [`grade=${def.grade(typed.params)}`] : [])].join("¦");
 };
 
 export function familySpec(fam: string): FamilySpec | null {
@@ -157,6 +157,10 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   // range@1: a family whose every answer is a probability declares it, so its options stay meaningful
   if (def.mc && !def.range && def.competency.startsWith("MATH.probability.") && items.length && items.every((p) => { const v = numeric(p.answer); return v !== null && v >= 0 && v <= 1; }))
     det.push(`${fam}: every answer is a probability; declare range: [0, 1] so no option above 1 or below 0 is offered`);
+  // form@1: a family asking for an expanded answer gives its own answers expanded
+  if (def.expanded) for (const p of items) if (!expandedForm(p.answer)) det.push(`${p.id}: the answer ${p.answer} is not written expanded`);
+  // level@1: a problem's grade is a school grade
+  if (def.grade) for (const p of items) { const g = def.grade(p.params); if (!Number.isInteger(g) || g < 1 || g > 12) det.push(`${p.id}: grade ${g} is not a school grade`); }
   for (const e of excluded) if (e.reason.startsWith("AMBIGUOUS")) det.push(`gen:${fam}:${e.params.join(",")}: ${e.reason}`);
   for (const p of items) {
     checkItem(p, det);
