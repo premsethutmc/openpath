@@ -1,0 +1,186 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #29233e;
+  background: #faf8ff;
+  font-size: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+}
+h2 {
+  font-size: 1.5rem;
+}
+p {
+  line-height: 1.5;
+}
+.eyebrow {
+  color: #5c41b4;
+  font-weight: 700;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  min-height: 44px;
+  border: 1px solid #a89acb;
+  border-radius: 10px;
+  background: #fff;
+  color: #382666;
+  padding: 10px 12px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+button:hover {
+  background: #ede6ff;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+button[aria-pressed="true"] {
+  background: #6745c2;
+  color: #fff;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #804e00;
+  outline-offset: 3px;
+}
+label {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 10px 0;
+}
+input:not([type="checkbox"]),
+select {
+  padding: 10px;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #ada4bd;
+  border-radius: 8px;
+}
+form input:not([type="checkbox"]) {
+  width: 100%;
+}
+details,
+.math-workspace {
+  border: 1px solid #d7cfe5;
+  border-radius: 14px;
+  padding: 12px;
+  margin: 12px 0;
+  background: white;
+}
+summary {
+  min-height: 44px;
+  padding: 10px;
+  cursor: pointer;
+}
+.writing-tools,
+.writing-settings,
+.draft-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.writing-settings label {
+  flex: 1 1 180px;
+}
+.writing-paper {
+  display: block;
+  width: 100%;
+  background: white;
+  border: 2px solid #a296c4;
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}
+.input-editor {
+  background: #e7f6ef;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 16px;
+}
+.math-keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.input-editor form > button {
+  margin: 5px;
+}
+.small {
+  font-size: 0.875rem;
+}
+.working-row {
+  border-bottom: 1px solid #e5dfed;
+  padding: 8px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.working-row strong {
+  width: 100%;
+}
+.uncertain {
+  background: #fff0cf;
+  border: 2px solid #9a5800;
+}
+.interpreted {
+  background: #f2eefe;
+}
+pre {
+  max-height: 400px;
+  overflow: auto;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+[role="alert"] {
+  background: #fff0de;
+  border-left: 4px solid #ac5600;
+  padding: 12px;
+}
+button + button {
+  margin-left: 4px;
+}
+@media (max-width: 480px) {
+  main {
+    padding: 8px;
+  }
+  .math-workspace {
+    padding: 8px;
+  }
+  .writing-tools button {
+    flex: 1 1 26%;
+  }
+  .draft-controls > * {
+    max-width: 100%;
+  }
+  details {
+    padding: 8px;
+  }
+  .writing-settings {
+    gap: 4px;
+  }
+}

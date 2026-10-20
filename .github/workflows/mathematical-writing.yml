@@ -1,0 +1,41 @@
+name: Mathematical writing workspace
+on:
+  pull_request:
+    paths: ['frontend/src/writing/**', 'frontend/e2e/writing*.test.mjs', 'frontend/scripts/build-writing.mjs', '.github/workflows/mathematical-writing.yml']
+  push:
+    branches: ['feat/mathematical-writing-workspace-v1']
+permissions:
+  contents: read
+jobs:
+  input-contract-and-browser:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22.18.0', '24']
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --import tsx --test src/writing/workspace.test.ts
+      - run: node scripts/build-writing.mjs
+      - run: npx playwright install --with-deps chromium
+      - name: Browser and mounted component tests
+        run: |
+          DIST=dist-writing PORT=4670 node scripts/preview-english.mjs > /tmp/writing-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4670/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4670/ > /dev/null
+          node --test e2e/writing.test.mjs e2e/writing-components.test.mjs
+      # Validation only: no upload, publication, paid recognition or deployment.
