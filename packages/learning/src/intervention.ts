@@ -167,10 +167,13 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // the shared engine never lets answers given straight after teaching (same visit) demonstrate a skill: more
     // questions now would add nothing, so they wait for the next visit
     const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
-    const listed = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]) ?? unanswered(m.written ?? []);
+    // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
+    // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
+    const listed = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+    const written = unanswered(m.written ?? []);
     if (!listed && needsEvidence && taughtThisVisit && m.pool)
       return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
-    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null);
+    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null) ?? written;
     // shown here, but the shared record (the engine) has not yet demonstrated it and nothing is left: say so
     const engineShort = !more && needsEvidence;
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: more && m.written?.includes(more) ? "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)." : ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };

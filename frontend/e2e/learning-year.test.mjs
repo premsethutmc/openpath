@@ -18,6 +18,8 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { question } from "../../packages/learning/src/content.ts";
 import { problemOf, show } from "../../packages/learning/src/families.ts";
+import { moduleFor } from "../../packages/learning/src/content.ts";
+import { familiesOf } from "../../packages/learning/src/review.ts";
 
 const base = process.env.YEAR_URL ?? "http://127.0.0.1:4190";
 const mode = process.env.YEAR_API ?? "fake";
@@ -94,7 +96,8 @@ async function setupYear(page, grade, { goal = null, textbook = null, choose = [
     await page.getByRole("heading", { name: "Check the skills for each outcome" }).waitFor();
     // the reviewer's decisions: an uncertain mapping is not ticked for you
     for (const [outcome, skill] of choose) {
-      const box = page.locator(".outcome", { hasText: outcome }).getByRole("checkbox", { name: new RegExp(skill) });
+      // the outcome by its own text (a suggested skill's name can appear under several outcomes)
+      const box = page.locator(".outcome").filter({ has: page.locator("p", { hasText: outcome }) }).getByRole("checkbox", { name: new RegExp(`^${skill} \\(`) });
       if (!(await box.isChecked())) await box.check();
     }
     return;
@@ -104,18 +107,34 @@ async function setupYear(page, grade, { goal = null, textbook = null, choose = [
   await page.getByRole("heading", { name: new RegExp(`^Grade ${grade} · `) }).waitFor();
 }
 
-/** Answer whatever question is on screen; `policy(qid)` gives the response (default: the right answer). */
+/** An educator marks it (written@1: a written or drawn answer); an acceptance journey does not auto-answer it. */
+const educatorMarked = (q) => q.type === "written";
+/**
+ * Answer whatever question is on screen; `policy(qid)` gives the response (default: the right answer). Every input the
+ * app shows: choice radios (a letter A–D), and one answer box for every typed answer (integer, fraction, set,
+ * polynomial, exact, tuple, interval, matrix, expression…). A written or drawn answer is educator-marked: it is answered
+ * only when the policy gives a text for it, and then it is sent to be marked (no Right./Not this time.).
+ */
 async function answer(page, policy = () => null, { hint = false } = {}) {
   const card = page.locator(".qcard");
   await card.waitFor();
   const qid = await card.getAttribute("data-qid");
   const q = Q.get(qid);
-  const response = policy(qid) ?? q.answer;
+  const response = policy(qid) ?? (educatorMarked(q) ? null : q.answer);
+  if (response == null) throw new Error(`${qid} is marked by an educator: give its text in the policy, or stop before it`);
   if (hint && (await page.getByRole("button", { name: "Show a hint" }).count())) await page.getByRole("button", { name: "Show a hint" }).click();
-  if (q.type === "choice") await card.getByRole("radio").nth("ABCD".indexOf(response)).click();
-  else await card.getByLabel("Your answer").fill(response);
+  try {
+    if (q.type === "choice") await card.getByRole("radio").nth("ABCD".indexOf(response)).click({ timeout: 20_000 });
+    else await card.getByLabel("Your answer", { exact: true }).fill(response, { timeout: 20_000 });
+  } catch (e) {
+    const now = await page.locator(".qcard").first().getAttribute("data-qid", { timeout: 1000 }).catch(() => "none");
+    throw new Error(`${qid} (${q.type}): could not give the answer ${JSON.stringify(response)}; the question on screen is now ${now}`, { cause: e });
+  }
   await card.getByRole("button", { name: "Check" }).click();
-  await page.getByRole("status").filter({ hasText: /Right\.|Not this time\./ }).waitFor();
+  const status = page.getByRole("status").filter({ hasText: educatorMarked(q) ? /Sent to be marked\./ : /Right\.|Not this time\./ });
+  await status.waitFor({ timeout: 15_000 }).catch(async (e) => {
+    throw new Error(`${qid} (${q.type}) answered ${JSON.stringify(response)}: no feedback. On screen: ${(await page.locator("main").innerText()).slice(0, 600)}`, { cause: e });
+  });
   return { qid, response };
 }
 async function next(page) {
@@ -133,6 +152,8 @@ async function lesson(page) {
   }
 }
 /** Work the module on screen until it stops asking; returns what happened, in order. */
+/** What a learner answered (a written or drawn part left for an educator is not an answer). */
+const answered = (log) => log.filter((l) => !l.startsWith("written:"));
 async function work(page, policy = () => null, max = 30) {
   const log = [];
   for (let i = 0; i < max; i++) {
@@ -143,6 +164,12 @@ async function work(page, policy = () => null, max = 30) {
       continue;
     }
     if (await page.locator(".qcard").count()) {
+      const qid = await page.locator(".qcard").getAttribute("data-qid");
+      // the part a computer cannot mark (written or drawn, after the skill is shown): an educator marks it; stop here
+      if (educatorMarked(Q.get(qid))) {
+        log.push(`written:${qid}`);
+        break;
+      }
       const guided = (await page.locator(".qcard .counted").innerText()).startsWith("Practice with help");
       const a = await answer(page, policy, { hint: guided });
       log.push(`${a.qid}=${a.response}`);
@@ -180,7 +207,7 @@ async function home(page) {
 test("journeys A, E, F: Grade 4 textbook → Fractions → diagnostic → strategy → practice → logout/login → Grade 5 → missed delayed check", async () => {
   const { page, context, email, learner } = await learnerPage("Synthetic Grade 4 learner");
   // A: the textbook becomes a reviewed curriculum
-  await setupYear(page, 4, { textbook: book4, choose: [["Generate equivalent fractions", "Generate equivalent fractions"]] });
+  await setupYear(page, 4, { textbook: book4, choose: [["Generate equivalent fractions by multiplying", "Generate equivalent fractions"]] });
   await shot(page, "a1-mapping-review-phone");
   assert.ok(await page.getByText("No matching skill: kept as a proposal.").count() >= 1, "unmapped outcomes are proposals");
   await page.getByRole("button", { name: "Use this curriculum for Grade 4" }).click();
@@ -520,7 +547,16 @@ test("journey L: a second board's textbook, worded differently, maps to the same
   const vague = page.locator(".outcome", { hasText: "solve word problems involving fractions" });
   await vague.getByText(/Please choose/).waitFor();
   assert.equal(await vague.getByRole("checkbox", { checked: true }).count(), 0, "an uncertain mapping is not ticked");
-  await page.locator(".outcome", { hasText: "round a number" }).getByText("No matching skill: kept as a proposal.").waitFor();
+  // rounding now maps (a clear match); the timetable outcome has no skill in the map: kept as a proposal
+  await page.locator(".outcome", { hasText: "round a number" }).getByRole("checkbox", { name: /^Round numbers to the nearest/, checked: true }).waitFor();
+  await page.locator(".outcome", { hasText: "use a bus timetable" }).getByText("No matching skill: kept as a proposal.").waitFor();
+  // worded so differently that the match is uncertain: the reviewer is asked, and chooses the skill
+  for (const [outcome, skill] of [["name a part of a shape", "Represent fractions of a whole"], ["decide which of two fractions", "Compare fractions with like denominators"]]) {
+    const o = page.locator(".outcome", { hasText: outcome });
+    await o.getByText(/Please choose/).waitFor();
+    assert.equal(await o.getByRole("checkbox", { checked: true }).count(), 0, `an uncertain mapping is not ticked: ${outcome}`);
+    await o.getByRole("checkbox", { name: new RegExp(`^${skill} \\(`) }).check();
+  }
   await shot(page, "l1-second-board-review-tablet");
   await page.getByRole("button", { name: "Use this curriculum for Grade 4" }).click();
   await page.getByRole("heading", { name: /^Grade 4 · / }).waitFor();
@@ -625,7 +661,7 @@ test("platform B: Grade 10 board textbook → Algebra → Quadratic equations �
   await tile(page, "Quadratic equations");
   await openSkill(page, "Solving by factorisation", "Solve quadratic equations");
   const w = await work(page);
-  assert.ok(w.length >= 2, w.join(" "));
+  assert.ok(answered(w).length >= 2, w.join(" "));
   await context.close();
 });
 
@@ -641,7 +677,12 @@ test("platform C: Grade 12 → Calculus → Integrals → Techniques of integrat
   await shot(page, "p-c1-capabilities-tablet");
   await home(page);
   await page.getByText("What OpenPath can teach from this textbook").click();
-  await page.getByText(/No learning content yet: /).waitFor();
+  // the coverage is said as it is: every skill of this book now has a module; any skill without content would be named
+  const summary = await page.locator("summary", { hasText: "What OpenPath can teach from this textbook" }).innerText();
+  const [, withModule, total] = summary.match(/(\d+) of (\d+) skills have a full learning module/) ?? [];
+  assert.ok(total, summary);
+  if (withModule === total) assert.equal(await page.getByText(/No learning content yet: /).count(), 0, `nothing listed as without content: ${summary}`);
+  else await page.getByText(/No learning content yet: /).waitFor();
   await shot(page, "p-c2-coverage-tablet");
   const log = await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
   await page.getByText("Solved after help", { exact: true }).waitFor();
@@ -678,7 +719,9 @@ test("platform E and F: an unseen textbook through the same screens; then the ne
   assert.ok(await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).isDisabled());
   await shot(page, "p-e0-unsupported-subject-phone");
   await page.reload();
-  await setupYear(page, 9, { textbook: UNSEEN });
+  // the powers outcome is an uncertain match: the reviewer is asked, and chooses the skill
+  await setupYear(page, 9, { textbook: UNSEEN, choose: [["work out powers", "Use integer exponent laws"]] });
+  await page.locator(".outcome", { hasText: "work out powers" }).getByText(/Please choose/).waitFor();
   await page.locator(".outcome", { hasText: "describe how a rainbow forms" }).getByText("No matching skill: kept as a proposal.").waitFor();
   await page.locator(".outcome", { hasText: "expand brackets" }).getByText(/Brackets and powers › Expanding brackets/).waitFor();
   await shot(page, "p-e1-unseen-review-phone");
@@ -693,7 +736,7 @@ test("platform E and F: an unseen textbook through the same screens; then the ne
   await shot(page, "p-e2-unseen-skill-phone");
   await page.getByRole("button", { name: /^(Start|Continue)$/ }).click();
   const w = await work(page);
-  assert.ok(w.length >= 3, w.join(" "));
+  assert.ok(answered(w).length >= 3, w.join(" "));
   await home(page);
   // the unit is still learning: one of its two constituent skills (expanding, powers) is shown
   const unit = page.locator(".tile", { hasText: "Algebra" }).first();
@@ -744,7 +787,10 @@ async function reviewerPage(name, roles, size = "tablet") {
 let reviewers = null;
 /** Two synthetic reviewers for releases made by the API (an educator approves; another person releases). */
 async function sharedReviewers() {
-  reviewers ??= { educator: (await reviewerPage("educator2", ["educator"])).page, manager: (await reviewerPage("release2", ["release-manager"])).page };
+  if (!reviewers) {
+    const [ed, rm] = [await reviewerPage("educator2", ["educator"]), await reviewerPage("release2", ["release-manager"])];
+    reviewers = { educator: ed.page, manager: rm.page, close: () => Promise.all([ed.context.close(), rm.context.close()]) };
+  }
   return reviewers;
 }
 /** Take items through the whole workflow by the API (each decision by the role it needs; four eyes); idempotent. */
@@ -762,6 +808,8 @@ async function releaseAll({ educator, manager }, items) {
     }
   }
 }
+/** pools@1: a module draws on every question family of its competency, and is released only after all of them. */
+const moduleWithFamilies = (competency) => [...familiesOf(moduleFor(competency)).map((f) => `family:${f}`), `module:${competency}`];
 /** Learn a skill with two early mistakes, come back the next day, and again after seven full days: verified. */
 async function learnToVerified(page, learner, path, shotPrefix) {
   const go = async () => {
@@ -786,16 +834,16 @@ async function learnToVerified(page, learner, path, shotPrefix) {
   await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
   await go();
   const second = await work(page, () => null, 40);
-  assert.ok(second.length >= 1, `fresh questions on the next day: ${second.join(" ")}`);
+  assert.ok(answered(second).length >= 1, `fresh questions on the next day: ${second.join(" ")}`);
   await timeTravel(page, learner, 7.05);
   await page.reload();
   await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
   await page.getByRole("button", { name: "Start the delayed check" }).click();
   const third = await work(page, () => null, 10);
-  assert.ok(third.length >= 2, `the delayed check: ${third.join(" ")}`);
+  assert.ok(answered(third).length >= 2, `the delayed check: ${third.join(" ")}`);
   await home(page);
   for (const t of path.slice(0, -1)) await tile(page, t);
-  assert.equal(await tileStatus(page, path.at(-1)), "verified", "green: verified on released content");
+  assert.equal(await tileStatus(page, path.at(-1)), "verified", `green: verified on released content (first visit: ${first.join(" ")}; next day: ${second.join(" ")}; delayed check: ${third.join(" ")})`);
   await shot(page, `${shotPrefix}-2-verified`);
   // in the module, no problem is asked twice (a retry of a problem the learner was stuck on is help, by design)
   const recs = (await records(page, learner)).filter((r) => r.record === "attempt" && !String(r.context ?? "").startsWith("recovery:"));
@@ -858,13 +906,13 @@ test("content system: an educator reviews a question family and its module in th
   await rm.page.getByRole("button", { name: "Question families" }).click();
   await rm.page.getByRole("button", { name: /^mmul:/ }).click();
   await rm.page.getByRole("button", { name: "Release to learners" }).click();
-  await rm.page.getByTestId("state").getByText("Released").waitFor();
-  // the other family the module uses (7 × 8 probes), by the API, then the module
-  await releaseAll({ educator: ed.page, manager: rm.page }, ["family:mul"]);
+  await rm.page.getByTestId("state").getByText("Released", { exact: true }).waitFor();
+  // the other families the module uses (the 7 × 8 probes, and every other family of its competency), by the API, then the module
+  await releaseAll({ educator: ed.page, manager: rm.page }, moduleWithFamilies("MATH.number.multi-multiplication").filter((x) => x.startsWith("family:") && x !== "family:mmul"));
   await rm.page.getByRole("button", { name: "Modules" }).click();
   await rm.page.getByRole("button", { name: "Multiplying a two-digit number by a one-digit number" }).click();
   await rm.page.getByRole("button", { name: "Release to learners" }).click();
-  await rm.page.getByTestId("state").getByText("Released").waitFor();
+  await rm.page.getByTestId("state").getByText("Released", { exact: true }).waitFor();
   await rm.page.locator(".history").getByText(/Changes requested by/).waitFor();
   await shot(rm.page, "r6-module-released-history-tablet");
   // a learner: two early mistakes, the next day, a week later: verified on released content (no test fixture)
@@ -876,7 +924,10 @@ test("content system: an educator reviews a question family and its module in th
 
 test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, recovery, a week away, verified on released content", async () => {
   if (mode !== "django") return;
-  await releaseAll(await sharedReviewers(), ["family:factor", "family:subst", "family:pow", "family:dist", "family:mul", "module:MATH.algebra.factorisation", "module:MATH.calculus.integration-methods", "module:MATH.algebra.identities-intro"]);
+  await releaseAll(await sharedReviewers(), [...new Set(["MATH.algebra.factorisation", "MATH.calculus.integration-methods", "MATH.algebra.identities-intro"].flatMap(moduleWithFamilies))]);
+  // the reviewers are done (their review pages would otherwise go on counting the library's coverage meanwhile)
+  await reviewers.close();
+  reviewers = null;
   // Grade 10 (Board B): factorising, with two early mistakes
   {
     const { page, context, learner } = await learnerPage("Synthetic G10 released learner");
