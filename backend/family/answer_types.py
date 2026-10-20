@@ -12,8 +12,10 @@ from fractions import Fraction
 SAMPLED = {'expression', 'antiderivative'}
 HUMAN = {'written'}
 NEW_TYPES = {'exact', 'roots', 'tuple', 'matrix', 'interval', 'ratio', 'mixed', 'expression', 'antiderivative', 'written'}
-FUNCS = {'sin', 'cos', 'tan', 'sec', 'cosec', 'csc', 'cot', 'ln', 'log', 'exp', 'sqrt', 'abs'}
-NAMES = ['cosec', 'sqrt', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot', 'exp', 'abs', 'log', 'ln', 'pi']
+FUNCS = {'sin', 'cos', 'tan', 'sec', 'cosec', 'csc', 'cot', 'ln', 'log', 'exp', 'sqrt', 'abs', 'arcsin', 'arccos', 'arctan'}
+# inv@1: sin⁻¹ x (sin^(-1) x) is the inverse function, not 1/sin x (answer-types.ts INVERSE)
+INVERSE = {'sin': 'arcsin', 'cos': 'arccos', 'tan': 'arctan'}
+NAMES = ['arcsin', 'arccos', 'arctan', 'cosec', 'sqrt', 'sin', 'cos', 'tan', 'sec', 'csc', 'cot', 'exp', 'abs', 'log', 'ln', 'pi']
 SUPER = {'⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-'}
 SAMPLES = [0.3711, 0.6457, 0.9283, 1.2049, 1.5337, 1.8862, 2.3171]
 
@@ -307,6 +309,8 @@ def parse(raw):
                     arg = power()
                 else:
                     arg = arg_chain()
+                if pw is not None and p[1] in INVERSE and pw[0] == 'neg' and pw[1][0] == 'num' and str(pw[1][1]) == '1':
+                    return ('fn', INVERSE[p[1]], arg)
                 f = ('fn', 'cosec' if p[1] == 'csc' else p[1], arg)
                 return ('bin', '^', f, pw) if pw is not None else f
             if p[1] == 'e':
@@ -435,6 +439,10 @@ def evaluate(n, env):
                 return math.sqrt(a) if a >= 0 else float('nan')
             if f == 'abs':
                 return abs(a)
+            if f in ('arcsin', 'arccos'):
+                return (math.asin(a) if f == 'arcsin' else math.acos(a)) if -1 <= a <= 1 else float('nan')
+            if f == 'arctan':
+                return math.atan(a)
         except (ZeroDivisionError, OverflowError):
             return float('nan')
     _, op, na, nb = n

@@ -139,7 +139,9 @@ function pshow(p: Poly): string {
 // ---------------------------------------------------------------- tokenising and parsing
 
 type Tok = { t: "num"; v: string } | { t: "id"; v: string } | { t: "op"; v: string };
-const FUNCS = new Set(["sin", "cos", "tan", "sec", "cosec", "csc", "cot", "ln", "log", "exp", "sqrt", "abs"]);
+const FUNCS = new Set(["sin", "cos", "tan", "sec", "cosec", "csc", "cot", "ln", "log", "exp", "sqrt", "abs", "arcsin", "arccos", "arctan"]);
+/** inv@1: sin⁻¹ x (written sin^(-1) x) is the inverse function, as in the NCERT and Tamil Nadu books, not 1/sin x. */
+const INVERSE: Record<string, string> = { sin: "arcsin", cos: "arccos", tan: "arctan" };
 const SUPER: Record<string, string> = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-" };
 /** Normalise what learners type: minus signs, superscripts, × ÷ ·, π, √, θ. */
 export function normalise(raw: string): string {
@@ -182,7 +184,7 @@ function tokens(s: string): Tok[] {
       let w = id[0].toLowerCase();
       i += w.length;
       while (w) {
-        const f = ["cosec", "sqrt", "sin", "cos", "tan", "sec", "csc", "cot", "exp", "abs", "log", "ln", "pi"].find((x) => w.startsWith(x));
+        const f = ["arcsin", "arccos", "arctan", "cosec", "sqrt", "sin", "cos", "tan", "sec", "csc", "cot", "exp", "abs", "log", "ln", "pi"].find((x) => w.startsWith(x));
         if (f) {
           out.push({ t: "id", v: f });
           w = w.slice(f.length);
@@ -302,6 +304,7 @@ export function parse(raw: string): Node {
         }
         // √3x is √3 · x; sin 2x is sin(2x)
         const arg = isOp("(") ? atom() : p.v === "sqrt" || p.v === "abs" ? power() : argChain();
+        if (pow && INVERSE[p.v] && pow.k === "neg" && pow.a.k === "num" && pow.a.v === "1") return { k: "fn", f: INVERSE[p.v], a: arg };
         const f: Node = { k: "fn", f: p.v === "csc" ? "cosec" : p.v, a: arg };
         return pow ? { k: "bin", op: "^", a: f, b: pow } : f;
       }
@@ -409,7 +412,7 @@ export function evaluate(n: Node, env: Record<string, number>): number {
       return -evaluate(n.a, env);
     case "fn": {
       const a = evaluate(n.a, env);
-      const f: Record<string, (x: number) => number> = { sin: Math.sin, cos: Math.cos, tan: Math.tan, sec: (x) => 1 / Math.cos(x), cosec: (x) => 1 / Math.sin(x), cot: (x) => Math.cos(x) / Math.sin(x), ln: Math.log, log: Math.log, exp: Math.exp, sqrt: Math.sqrt, abs: Math.abs };
+      const f: Record<string, (x: number) => number> = { sin: Math.sin, cos: Math.cos, tan: Math.tan, sec: (x) => 1 / Math.cos(x), cosec: (x) => 1 / Math.sin(x), cot: (x) => Math.cos(x) / Math.sin(x), ln: Math.log, log: Math.log, exp: Math.exp, sqrt: Math.sqrt, abs: Math.abs, arcsin: Math.asin, arccos: Math.acos, arctan: Math.atan };
       return f[n.f](a);
     }
     case "bin": {
