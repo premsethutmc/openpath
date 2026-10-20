@@ -1,5 +1,5 @@
 import { notebookOption } from "./notebook-helpers.mjs";
-/** Actual Django + local WASM inference. No mocked recognition, validation or learner API. */
+/** Actual Django keyboard journeys and mathematical validation; no mocked learner API. */
 import assert from "node:assert/strict";
 import { test, before, after } from "node:test";
 import { mkdirSync } from "node:fs";
@@ -143,7 +143,7 @@ async function open(p, topic = "division") {
   if (!started || topic !== "division")
     await p
       .getByRole("button", {
-        name: new RegExp("^" + names[topic] + " · write and check"),
+        name: new RegExp("^" + names[topic] + " · work and check"),
       })
       .click();
   if (!started || topic !== "division") {
@@ -299,8 +299,8 @@ test(`${process.env.DEMO_STUDENT === "1" ? "one-tap demo student" : "real studen
   await p.getByLabel("Diagnostic follow-up").waitFor();
   assert.equal(
     await p.locator("svg.writing-paper").count(),
-    1,
-    "original working stays visible beside support",
+    0,
+    "keyboard working stays available beside support without a drawing canvas",
   );
   await follow(p, ["2", "6", "2"], "division-teaching-mobile");
   await edit(p, "Edit Quotient: 136", "126");
@@ -320,7 +320,7 @@ test(`${process.env.DEMO_STUDENT === "1" ? "one-tap demo student" : "real studen
     .waitFor();
   await p
     .locator("[data-writing-tile]")
-    .filter({ hasText: "Writing practice: 1 complete" })
+    .filter({ hasText: "Mathematics practice: 1 complete" })
     .waitFor();
   assert.equal(await p.locator(".stat.verified b").innerText(), "0");
   const es = await evidence(c, child);
@@ -389,98 +389,21 @@ test("curriculum fractions and multiplication use the same embedded workspace an
   assert.deepEqual(errors, []);
   await c.close();
 });
-test("actual local model recognizes original ink; dot ambiguity is confirmed without restarting; backend validates the complete working", async () => {
-  const { c, p, child, errors, foreign } = await family();
-  await open(p);
-  await stroke(p, "quotient", [
-    [335, 48],
-    [335, 88],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p.waitForFunction(
-    () =>
-      document.querySelector('[aria-label="Interpreted working"] button') ||
-      document.querySelector('[role="alert"]'),
-  );
-  await p
-    .getByRole("button", { name: "Edit Quotient: 1", exact: true })
-    .waitFor();
-  assert.match(
-    await p
-      .getByRole("button", { name: "Edit Quotient: 1", exact: true })
-      .innerText(),
-    /Recognized/,
-  );
-  // Add a deliberately insufficient mark, not a synthetic recognition response.
-  await stroke(p, "quotient", [
-    [375, 65],
-    [375, 65.2],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p.locator(".uncertain").waitFor();
-  assert.equal(await p.locator(".uncertain").count(), 1);
-  await p.locator(".uncertain").click();
-  await p
-    .getByRole("textbox", { name: "Intended symbol or expression" })
-    .fill("2");
-  await p
-    .getByRole("button", { name: "Confirm this symbol", exact: true })
-    .click();
-  await type(p, "quotient", "6");
-  for (const [region, text] of rows.slice(1)) await type(p, region, text);
-  await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await p.screenshot({
-    path: `${SCREENS}/recognized-ink-mobile.png`,
-    fullPage: true,
-  });
-  await send(p);
-  await p.getByLabel("Practice completion").waitFor();
-  const events = (
-    await api(c, "GET", `/pupils/${child.id}/events/?subject=mathematics`)
-  ).events;
-  const attempt = events.find((e) => e.action === "validation");
-  assert.equal(attempt.payload.result.outcome, "complete");
-  assert.equal(attempt.payload.input.strokes.length, 2);
-  assert.ok(
-    attempt.payload.input.tokens.some(
-      (t) => t.recognizer === "onnx-mnist-digits@1",
-    ),
-  );
-  assert.ok(
-    attempt.payload.input.corrections.some(
-      (x) => x.reason === "clarification" && x.strokeIds.length,
-    ),
-  );
-  assert.deepEqual(errors, []);
-  assert.deepEqual(foreign, []);
-  await c.close();
-});
-test("integrated lesson remains solvable when the real recognition assets are unavailable", async () => {
+for (const width of [360,393]) test(`keyboard-only mathematics at ${width}px: no controls, no recognition requests, complete structured working`, async () => {
   const { c, p, child, errors } = await family();
-  await p.route("**/recognition/**", (r) => r.abort());
+  await p.setViewportSize({width,height:852});
+  const recognition=[];p.on("request",r=>{if(/\/recognition\/|onnx|ort-wasm/.test(r.url()))recognition.push(r.url());});
+  await p.route("**/recognition/**",r=>r.abort());
   await open(p);
-  await stroke(p, "quotient", [
-    [335, 48],
-    [335, 88],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p.getByRole("alert").waitFor();
-  assert.equal(
-    (await evidence(c, child)).filter((e) => e.action === "validation").length,
-    0,
-  );
-  for (const [r, v] of rows) await type(p, r, v);
-  await send(p);
-  await p.getByLabel("Practice completion").waitFor();
-  assert.ok(
-    await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-  );
-  assert.deepEqual(errors, []);
-  await c.close();
+  assert.equal(await p.locator("svg.writing-paper,canvas,.math-keypad,.writing-settings").count(),0);
+  assert.equal(await p.getByRole("button",{name:/^(Pen|Eraser|Pan|Write|.*Write instead|Interpret handwriting)$/i}).count(),0);
+  assert.doesNotMatch(await p.locator("body").innerText(),/recognition|handwritten|handwriting|pen settings/i);
+  for(const [region,value] of rows)await type(p,region,value);
+  await send(p);await p.getByLabel("Practice completion").waitFor();
+  const out="../docs/product/mathematics-keyboard-only";mkdirSync(out,{recursive:true});
+  await p.screenshot({path:`${out}/guided-complete-${width}.png`,fullPage:true});
+  const events=await evidence(c,child);assert.ok(events.some(e=>e.action==="validation"&&e.payload?.result?.outcome==="complete"));
+  assert.ok(events.filter(e=>e.kind==="math_writing").every(e=>e.admissible===false));
+  assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  assert.deepEqual(recognition,[]);assert.deepEqual(errors,[]);await c.close();
 });

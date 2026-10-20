@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import { useEffect, useRef, useState } from "react";
 import {
   CONTRACT,
@@ -156,19 +157,16 @@ export function WritingWorkspace({
       : externalFeedback;
   return (
     <section
-      className={compact ? "math-workspace answer-canvas" : "math-workspace"}
+      className={(compact ? "math-workspace answer-canvas" : "math-workspace") + (!HANDWRITING_ENABLED ? " keyboard-workspace" : "")}
       aria-label="Mathematical input workspace"
     >
       {!compact && (
         <header>
           <h2>{work.problem.statement}</h2>
-          <p>
-            Write naturally, or type each step. Recognition uncertainty is an
-            input issue, not a maths mistake.
-          </p>
+          <p>{HANDWRITING_ENABLED ? "Write or type each step." : "Type each step of your working."}</p>
         </header>
       )}
-      <div className="writing-tools" role="toolbar" aria-label="Writing tools">
+      {HANDWRITING_ENABLED && <><div className="writing-tools" role="toolbar" aria-label="Writing tools">
         {(["ink", "eraser", "pan"] as const).map((t) => (
           <button key={t} aria-pressed={tool === t} onClick={() => setTool(t)}>
             {t === "ink" ? "Pen" : t === "eraser" ? "Eraser" : "Pan"}
@@ -264,7 +262,8 @@ export function WritingWorkspace({
           ? "Candidate confidence is not mathematical correctness."
           : "Unavailable — the typed path below works for the entire exercise."}
       </p>
-      {!compact && (
+      </>}
+      {HANDWRITING_ENABLED && !compact && (
         <button
           type="button"
           onClick={() => {
@@ -275,7 +274,7 @@ export function WritingWorkspace({
           Type instead
         </button>
       )}
-      {(!compact || token) && (
+      {(!compact || token || !HANDWRITING_ENABLED) && (
         <section className="input-editor" aria-label="Typed mathematical input">
           <h3>{token ? "Clarify or edit this symbol" : "Type a step"}</h3>
           {!compact && (
@@ -318,7 +317,7 @@ export function WritingWorkspace({
                 ref={input}
                 value={text}
                 maxLength={500}
-                inputMode={keypad ? "decimal" : "text"}
+                inputMode={!HANDWRITING_ENABLED && ["quotient", "product", "difference", "bring-down", "remainder", "dividend", "divisor", "numerator", "denominator"].includes(work.layout.regions.find(r => r.id === region)?.role ?? "") ? "numeric" : "text"}
                 onChange={(e) => {
                   setKeypad(false);
                   setText(e.target.value);
@@ -328,7 +327,7 @@ export function WritingWorkspace({
                 spellCheck={false}
               />
             </label>
-            <details open={!studentMode}>
+            {HANDWRITING_ENABLED && <details open={!studentMode}>
               <summary>Number and maths keyboard</summary>
               <div
                 className="math-keypad"
@@ -377,7 +376,7 @@ export function WritingWorkspace({
                   </button>
                 ))}
               </div>
-            </details>
+            </details>}
             <button type="submit" disabled={!text.trim()}>
               {token ? "Confirm this symbol" : "Add typed step"}
             </button>
@@ -399,13 +398,10 @@ export function WritingWorkspace({
         <h3>
           {studentMode
             ? "Your steps · tap a number to change it"
-            : "Your interpreted steps"}
+            : "Your steps"}
         </h3>
-        <p>
-          Original ink stays on the page. You can edit any interpretation,
-          including confident ones.
-        </p>
-        {!work.tokens.length && <p>No interpreted or typed steps yet.</p>}
+        {HANDWRITING_ENABLED && <p>Original work is kept. You can edit any interpretation.</p>}
+        {!work.tokens.length && <p>No steps yet.</p>}
         {[...work.layout.regions]
           .sort((a, b) => a.order - b.order)
           .filter(
@@ -439,12 +435,12 @@ export function WritingWorkspace({
                     onClick={() => selectToken(t.id)}
                     aria-label={`Edit ${r.label}: ${t.text}${t.status === "uncertain" ? ", needs clarification" : ""}`}
                   >
-                    {t.text} ·{" "}
+                    {t.text}{!HANDWRITING_ENABLED ? (t.status === "uncertain" ? " · Confirm saved entry" : "") : <> ·{" "}
                     {t.status === "uncertain"
                       ? "Type what you meant"
                       : t.status === "confirmed"
                         ? "Confirmed by you"
-                        : `Recognized (${Math.round(t.confidence! * 100)}%)`}
+                        : `Recognized (${Math.round(t.confidence! * 100)}%)`}</>}
                   </button>
                 ))}
             </div>
@@ -477,15 +473,15 @@ export function WritingWorkspace({
             })
           }
         >
-          Add another writing region
+          Add another step
         </button>
       )}
       {outstanding.length > 0 && (
         <p role="status">
-          Input clarification needed.{" "}
+          {!HANDWRITING_ENABLED ? (work.strokes.some(s => s.regionId === null && !work.erased.includes(s.id)) ? "This saved working has parts without a supported step position. It remains saved and needs teacher review; it cannot be assessed as a final answer." : "Confirm saved entries or type the remaining steps before checking.") : <>Input clarification needed.{" "}
           {outstanding.some((x) => x.startsWith("Some handwriting"))
             ? "Type the unclear part, or choose Type instead."
-            : "Choose the highlighted symbol and type what you meant."}
+            : "Choose the highlighted symbol and type what you meant."}</>}
         </p>
       )}
       {!compact && (

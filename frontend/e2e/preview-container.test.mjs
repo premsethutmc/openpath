@@ -109,7 +109,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
       ["/maths/", "Mathematics"],
       ["/tamil/", "தமிழ்"],
       ["/mathematics.html", "Mathematics"],
-      ["/writing.html", "Mathematical"],
+      ["/writing.html", "Mathematics"],
     ]) {
       const r = await c.request.get(base + path);
       assert.equal(r.status(), 200, path);

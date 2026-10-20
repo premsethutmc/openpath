@@ -33,7 +33,7 @@ jobs:
       - run: python ../backend/manage.py makemigrations --check --dry-run
       - run: node scripts/build-mathematics-journey.mjs
       - run: npx playwright install --with-deps chromium
-      - name: Actual backend, real local model and workspace regressions
+      - name: Actual backend, keyboard-only policy and retained model compatibility
         run: |
           python ../backend/manage.py migrate --noinput
           python ../backend/manage.py runserver 127.0.0.1:8674 --noreload --nothreading > /tmp/writing-api.log 2>&1 &

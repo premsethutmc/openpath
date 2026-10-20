@@ -4,7 +4,7 @@ import {test, before, after} from 'node:test';
 import {mkdirSync} from 'node:fs';
 import {chromium} from 'playwright';
 const BASE=process.env.E2E_URL || 'http://127.0.0.1:4710';
-const DIR='../docs/product/mathematical-writing/approved-notebook';
+const DIR=process.env.NOTEBOOK_SCREEN_DIR || '../docs/product/mathematical-writing/approved-notebook';
 let browser;
 before(async()=>{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/usr/bin/chromium'});mkdirSync(DIR,{recursive:true});});
 after(()=>browser?.close());
@@ -15,6 +15,9 @@ for (const width of [360,393]) test(`approved notebook ${width}px: real working,
  try {
  await p.goto(BASE);await p.getByRole('button',{name:'Try OpenPath as a Demo Student',exact:true}).click();
  const input=p.locator('.paper-cursor');await input.waitFor();
+ assert.equal(await p.locator('svg.writing-paper,canvas,.math-keypad,.writing-settings').count(),0);
+ assert.equal(await p.getByRole('button',{name:/^(Write|Write instead|Pen|Eraser|Pan)$/}).count(),0);
+ assert.doesNotMatch(await p.locator('body').innerText(),/handwriting|recognition|handwritten/i);
  await p.evaluate(()=>document.fonts.ready);
  assert.ok(await p.evaluate(()=>document.fonts.check('40px "OpenPath Kalam"')));
  const metrics=await p.evaluate(()=>{
@@ -98,6 +101,9 @@ test('simulated keyboard-constrained viewport keeps native input focus and help 
  try{
  await p.goto(BASE);await p.getByRole('button',{name:'Try OpenPath as a Demo Student',exact:true}).click();
  const input=p.locator('.paper-cursor');await input.waitFor();
+ assert.equal(await p.locator('svg.writing-paper,canvas,.math-keypad,.writing-settings').count(),0);
+ assert.equal(await p.getByRole('button',{name:/^(Write|Write instead|Pen|Eraser|Pan)$/}).count(),0);
+ assert.doesNotMatch(await p.locator('body').innerText(),/handwriting|recognition|handwritten/i);
  await input.pressSequentially('130');await p.getByLabel('Quotient place 2',{exact:true}).waitFor();
  await p.setViewportSize({width:360,height:500});
  await p.waitForFunction(()=>parseFloat(document.querySelector('.notebook').style.getPropertyValue('--notebook-height'))===500);

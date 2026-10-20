@@ -197,3 +197,17 @@
 .workspace-recovery > div { display: flex; flex-wrap: wrap; gap: .5rem; }
 .workspace-recovery button { min-height: 44px; }
 .paper-entry.paper-error { background: #fff0df; border-radius: .25rem; outline: 1px solid #bd8b59; }
+/* Keyboard input shares the approved paper/ink notebook language. */
+body:has(.keyboard-workspace),body:has(.simple-maths){background:#fbfaf6}
+.keyboard-workspace,.keyboard-lesson,.simple-maths{background:#fbfaf6;color:#1d2130;border:0;box-shadow:none;border-radius:0}
+.keyboard-workspace input,.keyboard-workspace select{font:inherit;min-height:44px;border:1px solid #cbbfe0;border-radius:6px;background:#fffefa;max-width:100%;padding:10px}
+.keyboard-workspace input:focus{outline:2px solid #b29fe8;outline-offset:2px}
+.keyboard-workspace .input-editor{background:transparent;border:0;padding:0}
+.keyboard-workspace .working-row{border-color:#e6e2db;background:transparent}
+.keyboard-workspace .math-keypad{display:none}
+.keyboard-workspace button{min-height:44px;max-width:100%}
+.keyboard-workspace .interpreted,.keyboard-workspace .uncertain{font-family:'OpenPath Kalam',cursive;font-size:24px;background:#f4f0fc;border:1px solid #d9d0ec;color:#1d2130}
+.simple-maths h1,.keyboard-lesson h1{font-family:'OpenPath Kalam',cursive;font-weight:300}
+.simple-maths .primary{background:#6954c8;box-shadow:none;border-radius:8px;min-height:46px}
+@media(max-width:412px){.keyboard-workspace{padding:8px;min-width:0}.keyboard-workspace .input-editor form{min-width:0}.keyboard-workspace input,.keyboard-workspace select{width:100%}}
+.simple-maths .primary{color:#fff}

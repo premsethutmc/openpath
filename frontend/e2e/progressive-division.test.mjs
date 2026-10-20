@@ -162,19 +162,13 @@ test("tap and Backspace correct an earlier quotient without erasing later workin
   await complete(p);
   await c.close();
 });
-test("existing scribbler and guided worksheet remain available within the same lesson", async () => {
+test("keyboard-only paper preserves guided worksheet and corrections without a scribbler", async () => {
   const { c, p } = await start();
   await p.keyboard.type("13");
   await p.getByLabel("Subtract row 1", { exact: true }).waitFor();
   await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
-  await p
-    .getByRole("button", { name: "Write instead", exact: true })
-    .click();
-  await p.locator("svg.writing-paper").waitFor();
-  await p
-    .getByRole("button", { name: "Back to division paper", exact: true })
-    .click();
-  await p.getByLabel("Subtract row 1", { exact: true }).waitFor();
+  assert.equal(await p.getByRole("button",{name:"Write instead",exact:true}).count(),0);
+  assert.equal(await p.locator("svg.writing-paper").count(),0);
   await notebookOption(p, "Help me step by step");
   await p.getByLabel("Mathematical region", { exact: true }).waitFor();
   await p

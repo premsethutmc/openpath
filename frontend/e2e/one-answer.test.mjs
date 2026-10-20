@@ -4,7 +4,7 @@ import { before, after, test } from "node:test";
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 const BASE = process.env.E2E_URL ?? "http://127.0.0.1:4703";
-const DIR = "../docs/product/mathematical-writing/screens-one-answer";
+const DIR = process.env.ONE_ANSWER_SCREEN_DIR ?? "../docs/product/mathematical-writing/screens-one-answer";
 let browser;
 before(async () => {
   browser = await chromium.launch({
@@ -114,36 +114,11 @@ test("optional final-answer mode: equivalent remainder forms, incomplete, wrong,
   assert.deepEqual(errors, []);
   await resumed.close();
 });
-test("handwriting is optional, preserves ink and typing; guided worksheet remains available", async () => {
+test("keyboard-only answer keeps guided working available without handwriting controls", async () => {
   const { c, p } = await start(412);
   await p.getByLabel("Your answer", { exact: true }).fill("126 R 1");
-  await p
-    .getByRole("button", { name: "✏️ Write instead", exact: true })
-    .click();
-  const paper = p.locator("svg.writing-paper");
-  await paper.scrollIntoViewIfNeeded();
-  const box = await paper.boundingBox();
-  await p.mouse.move(box.x + box.width / 2, box.y + 40);
-  await p.mouse.down();
-  await p.mouse.move(box.x + box.width / 2, box.y + 100, { steps: 8 });
-  await p.mouse.up();
-  assert.equal(await paper.locator("[data-stroke]").count(), 1);
-  assert.equal(
-    await p.getByLabel("Mathematical region", { exact: true }).count(),
-    0,
-  );
-  await screenshot(p, "handwriting-android");
-  await p.getByRole("button", { name: "Type instead", exact: true }).click();
-  assert.equal(await paper.count(), 0);
-  assert.equal(
-    await p.getByLabel("Your answer", { exact: true }).inputValue(),
-    "126 R 1",
-  );
-  await p
-    .getByRole("button", { name: "✏️ Write instead", exact: true })
-    .click();
-  assert.equal(await p.locator("svg.writing-paper [data-stroke]").count(), 1);
-  await p.getByRole("button", { name: "Type instead", exact: true }).click();
+  assert.equal(await p.getByRole("button",{name:/Write instead/}).count(),0);
+  assert.equal(await p.locator("svg.writing-paper,.math-keypad").count(),0);
   await notebookOption(p, "Help me step by step");
   await p
     .getByRole("heading", { name: "Understand the idea", exact: true })
@@ -171,15 +146,19 @@ test("fractions and multiplication share the simple interaction; Next question i
   const { c, p } = await start();
   await subject(p);
   await p
-    .getByRole("button", { name: /^Equivalent fractions · write and check/ })
+    .getByRole("button", { name: /^Equivalent fractions · work and check/ })
     .click();
   await check(p, "3/6");
   await p
     .getByText("Correct! Your answer is equivalent.", { exact: true })
     .waitFor();
+  assert.equal(await p.locator("svg.writing-paper,.math-keypad,.writing-settings").count(),0);
+  assert.equal(await p.getByRole("button",{name:/Write instead/}).count(),0);
+  await p.getByRole("button",{name:"Next question",exact:true}).click({trial:true});
+  await screenshot(p,"fractions-keyboard-android");
   await subject(p);
   await p
-    .getByRole("button", { name: /^Equal groups · write and check/ })
+    .getByRole("button", { name: /^Equal groups · work and check/ })
     .click();
   await check(p, "24");
   await p
@@ -191,6 +170,9 @@ test("fractions and multiplication share the simple interaction; Next question i
       .getAttribute("inputmode"),
     "numeric",
   );
+  assert.equal(await p.locator("svg.writing-paper,.math-keypad,.writing-settings").count(),0);
+  await p.getByRole("button",{name:"Next question",exact:true}).click({trial:true});
+  await screenshot(p,"multiplication-keyboard-android");
   await p.getByRole("button", { name: "Next question", exact: true }).click();
   await p.getByRole("heading", { name: /4 × 7/ }).waitFor();
   await check(p, "28");

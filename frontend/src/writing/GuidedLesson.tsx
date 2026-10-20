@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import { useEffect, useRef, useState } from "react";
 import { Api } from "../english/logic/account";
 import { WritingWorkspace } from "./Workspace";
@@ -31,7 +32,7 @@ export function GuidedWritingLesson({
     [recognition, setRecognition] = useState(true);
   const repo = useRef<WritingLessonRepo | null>(null),
     latest = useRef(work),
-    recognizer = useRef(new LocalDigitRecognizer());
+    recognizer = useRef(HANDWRITING_ENABLED ? new LocalDigitRecognizer() : undefined);
   latest.current = work;
   useEffect(() => {
     let active = true;
@@ -110,7 +111,7 @@ export function GuidedWritingLesson({
   };
   return (
     <section
-      className="writing-host writing-lesson"
+      className={"writing-host writing-lesson" + (!HANDWRITING_ENABLED ? " keyboard-lesson" : "")}
       aria-label="Writing lesson"
     >
       {error && <p role="alert">{error}</p>}
@@ -118,7 +119,7 @@ export function GuidedWritingLesson({
         <p role="status">Opening your lesson…</p>
       ) : (
         <>
-          <p className="eyebrow">Learn → Write → Check → Understand</p>
+          <p className="eyebrow">Learn → Work → Check → Understand</p>
           <h1>{activity.lesson.problem.statement}</h1>
           <p className="small">
             Practice content awaiting educator review. Completion and verified
@@ -293,7 +294,7 @@ export function GuidedWritingLesson({
               activity.stage,
             ) && (
               <>
-                <label>
+                {HANDWRITING_ENABLED && <><label>
                   <input
                     type="checkbox"
                     checked={recognition}
@@ -306,7 +307,7 @@ export function GuidedWritingLesson({
                 <p>
                   Recognition handles separate digits. Fractions, operators and
                   expressions can be typed. The original ink is kept.
-                </p>
+                </p></>}
                 <fieldset
                   disabled={
                     activity.stage === "diagnostic" ||
@@ -367,7 +368,9 @@ export function GuidedWritingLesson({
                     {JSON.stringify(
                       {
                         learnerId: pupil,
-                        receipts: activity.receipts,
+                        receipts: HANDWRITING_ENABLED ? activity.receipts : activity.receipts.map(({payload, ...receipt}) => ({
+                          ...receipt, payload: {competency: payload.competency, result: payload.result, afterFeedback: payload.afterFeedback},
+                        })),
                         decisions: writingEvidence(pupil, activity.receipts)
                           .ledger.decisions,
                         eligibility: [

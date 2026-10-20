@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
@@ -65,10 +66,9 @@ function Journey() {
     <main className="writing-host">
       <header>
         <p className="eyebrow">OpenPath Mathematics</p>
-        <h1>Write, check and understand</h1>
+        <h1>Work, check and understand</h1>
         <p>
-          Unreviewed practice · recognition uncertainty is not a maths mistake ·
-          no mastery awarded for helped corrections.
+          Mathematics practice · helped corrections do not award mastery.
         </p>
         <a href="/mathematics.html">Mathematics journey</a>
       </header>
@@ -187,7 +187,7 @@ function Journey() {
   );
 }
 createRoot(document.getElementById("root")!).render(
-  new URLSearchParams(location.search).get("demo") === "1" ? (
+  HANDWRITING_ENABLED && new URLSearchParams(location.search).get("demo") === "1" ? (
     <div className="writing-host">
       <Demo />
     </div>

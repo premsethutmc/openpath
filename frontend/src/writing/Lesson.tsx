@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import { practiceRound, practiceParameters, storePracticeRound } from "./practice-round";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Api } from "../english/logic/account";
@@ -45,7 +46,7 @@ function OneAnswerLesson(props: Props) {
   const [a, setA] = useState<LessonActivity | null>(null),
     [answer, setAnswer] = useState(""),
     [ink, setInk] = useState<Work | null>(null),
-    [mode, setMode] = useState(props.initialMode ?? "type"),
+    [mode, setMode] = useState(HANDWRITING_ENABLED ? props.initialMode ?? "type" : "type"),
     [help, setHelp] = useState(""),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
@@ -57,7 +58,7 @@ function OneAnswerLesson(props: Props) {
     dirty = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
     draft = useRef({ answer: "", ink: null as Work | null });
-  const recognizer = useRef(new LocalDigitRecognizer());
+  const recognizer = useRef(HANDWRITING_ENABLED ? new LocalDigitRecognizer() : undefined);
   const parameters = practiceParameters(props.topic, props.parameters ?? {}, next);
   useEffect(() => {
     let active = true;
@@ -231,7 +232,7 @@ function OneAnswerLesson(props: Props) {
           </button>
         )}
       </form>
-      <button
+      {HANDWRITING_ENABLED && <button
         className="secondary"
         onClick={() => {
           setMode(mode === "ink" ? "type" : "ink");
@@ -239,7 +240,7 @@ function OneAnswerLesson(props: Props) {
         }}
       >
         {mode === "ink" ? "Type instead" : "✏️ Write instead"}
-      </button>
+      </button>}
       {error && <p role="alert">{error}</p>}
       {result && (
         <section role="status" className={"answer-feedback " + result.outcome}>
@@ -286,7 +287,7 @@ function OneAnswerLesson(props: Props) {
           )}
         </section>
       )}
-      {mode === "ink" && (
+      {HANDWRITING_ENABLED && mode === "ink" && (
         <section aria-label="Write your answer">
           <p>
             Write separated digits. Letters, fraction bars and unrestricted

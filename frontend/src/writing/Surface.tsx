@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import { useRef, useState, type PointerEvent as ReactPointer } from "react";
 import type { Work, Point, Stroke, Rect } from "./contract";
 import { activeStrokes, addStroke, eraseAt, regionAt, uid } from "./model";
@@ -27,7 +28,7 @@ function Ink({ stroke, ghost = false }: { stroke: Stroke; ghost?: boolean }) {
     </g>
   );
 }
-export function Surface({
+function InkSurface({
   work,
   onChange,
   tool,
@@ -330,4 +331,9 @@ export function Surface({
       ))}
     </svg>
   );
+}
+
+/** Defense in depth for future embeddings and old direct links. */
+export function Surface(props: Parameters<typeof InkSurface>[0]) {
+  return HANDWRITING_ENABLED ? <InkSurface {...props} /> : null;
 }

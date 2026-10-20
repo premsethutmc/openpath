@@ -1,4 +1,4 @@
-/** Actual Django + local WASM inference. No mocked recognition, validation or learner API. */
+/** Actual Django keyboard journeys and mathematical validation; no mocked learner API. */
 import assert from "node:assert/strict";
 import { test, before, after } from "node:test";
 import { mkdirSync } from "node:fs";
@@ -158,7 +158,7 @@ async function stroke(p, region, coords) {
 test("typed division: instruction → saved work → first invalid quotient digit → probes → teaching → correction → held evidence", async () => {
   const { c, p, child, errors, foreign } = await family();
   await open(p);
-  await p.getByLabel("Use local digit recognition").uncheck();
+  assert.equal(await p.getByLabel("Use local digit recognition").count(),0);
   for (const [region, text] of rows)
     await type(p, region, region === "quotient" ? "136" : text);
   await p
@@ -211,66 +211,6 @@ test("typed division: instruction → saved work → first invalid quotient digi
   });
   await c.close();
 });
-test("actual local model recognizes original ink; dot ambiguity is confirmed without restarting; backend validates the complete working", async () => {
-  const { c, p, child, errors, foreign } = await family();
-  await open(p);
-  await stroke(p, "quotient", [
-    [335, 48],
-    [335, 88],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p
-    .getByRole("button", { name: "Edit Quotient: 1", exact: true })
-    .waitFor();
-  assert.match(
-    await p
-      .getByRole("button", { name: "Edit Quotient: 1", exact: true })
-      .innerText(),
-    /Recognized/,
-  );
-  // Add a deliberately insufficient mark, not a synthetic recognition response.
-  await stroke(p, "quotient", [
-    [375, 65],
-    [375, 65.2],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p.locator(".uncertain").waitFor();
-  assert.equal(await p.locator(".uncertain").count(), 1);
-  await p.locator(".uncertain").click();
-  await p
-    .getByRole("textbox", { name: "Intended symbol or expression" })
-    .fill("2");
-  await p
-    .getByRole("button", { name: "Confirm this symbol", exact: true })
-    .click();
-  await type(p, "quotient", "6");
-  for (const [region, text] of rows.slice(1)) await type(p, region, text);
-  await send(p);
-  await p.getByLabel("Practice completion").waitFor();
-  const events = (
-    await api(c, "GET", `/pupils/${child.id}/events/?subject=mathematics`)
-  ).events;
-  const attempt = events.find((e) => e.action === "validation");
-  assert.equal(attempt.payload.result.outcome, "complete");
-  assert.equal(attempt.payload.input.strokes.length, 2);
-  assert.ok(
-    attempt.payload.input.tokens.some(
-      (t) => t.recognizer === "onnx-mnist-digits@1",
-    ),
-  );
-  assert.ok(
-    attempt.payload.input.corrections.some(
-      (x) => x.reason === "clarification" && x.strokeIds.length,
-    ),
-  );
-  assert.deepEqual(errors, []);
-  assert.deepEqual(foreign, []);
-  await c.close();
-});
 test("recognition assets unavailable → fully typed fraction reuse, targeted teaching and separate resumable progress", async () => {
   const { c, p, child, errors } = await family();
   await p.route("**/recognition/**", (r) => r.abort());
@@ -318,14 +258,8 @@ test("blocked recognition model fails safely and a complete typed division still
   const { c, p, errors } = await family();
   await p.route("**/recognition/**", (r) => r.abort());
   await open(p);
-  await stroke(p, "quotient", [
-    [335, 48],
-    [335, 88],
-  ]);
-  await p
-    .getByRole("button", { name: "Interpret handwriting", exact: true })
-    .click();
-  await p.getByRole("alert").waitFor();
+  assert.equal(await p.getByRole("button",{name:"Interpret handwriting"}).count(),0);
+  assert.equal(await p.locator("svg.writing-paper,.math-keypad").count(),0);
   assert.equal(await p.getByLabel("Diagnostic follow-up").count(), 0);
   for (const [region, text] of rows) await type(p, region, text);
   await send(p);

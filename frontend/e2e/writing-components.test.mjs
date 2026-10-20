@@ -49,35 +49,28 @@ async function mount() {
   );
   return { p, context };
 }
-test("controlled component rejects late recognition and retains manual work when recognizer fails", async () => {
-  const { p, context } = await mount();
-  await p.getByRole("button", { name: "Interpret handwriting" }).click();
-  await p.getByRole("textbox", { name: "Number or expression" }).fill("126");
-  await p.getByRole("button", { name: "Add typed step" }).click();
-  await p.evaluate(() => window.releaseRecognition());
-  await p
-    .getByRole("alert")
-    .filter({ hasText: /writing changed/ })
-    .waitFor();
-  assert.equal(await p.evaluate(() => window.hostWork.tokens.length), 1);
-  assert.equal(await p.evaluate(() => window.hostWork.tokens[0].text), "126");
-  await p.getByRole("button", { name: "Interpret handwriting" }).click();
-  await p.evaluate(() => {
-    window.rejectRecognition = true;
-    window.releaseRecognition();
-  });
-  await p
-    .getByRole("alert")
-    .filter({ hasText: /Host recognizer failed/ })
-    .waitFor();
-  assert.equal(await p.evaluate(() => window.hostWork.strokes.length), 1);
-  assert.equal(await p.evaluate(() => window.confirmed), undefined);
-  await context.close();
+test("disabled policy overrides host recognizer, preserves archived ink and accepts keyboard working", async()=>{
+ const {p,context}=await mount();
+ assert.equal(await p.getByRole("button",{name:"Interpret handwriting"}).count(),0);
+ assert.equal(await p.locator("svg.writing-paper,.writing-settings,.math-keypad").count(),0);
+ assert.doesNotMatch(await p.locator("body").innerText(),/recognition|handwriting|handwritten/i);
+ const original=await p.evaluate(()=>window.hostWork.strokes);
+ await p.getByRole("textbox",{name:"Number or expression"}).fill("126");
+ await p.getByRole("button",{name:"Add typed step"}).click();
+ assert.deepEqual(await p.evaluate(()=>window.hostWork.strokes),original);
+ assert.equal(await p.evaluate(()=>window.releaseRecognition),undefined);
+ await p.getByRole("button",{name:"Send confirmed steps to validator"}).click();
+ await p.waitForFunction(()=>window.releaseValidation);
+ await p.evaluate(()=>window.releaseValidation());
+ await p.getByRole("button",{name:"Clarify this input"}).waitFor();
+ assert.deepEqual(await p.evaluate(()=>window.confirmed.strokes),original);
+ assert.equal(await p.evaluate(()=>window.confirmed.contract),"openpath-math-input@1");
+ await context.close();
 });
 test("host validator clarification is editable and confirmed callback carries versioned input only", async () => {
   const { p, context } = await mount();
-  await p.getByRole("button", { name: "Interpret handwriting" }).click();
-  await p.evaluate(() => window.releaseRecognition());
+  await p.getByRole("textbox", {name:"Number or expression"}).fill("2");
+  await p.getByRole("button", {name:"Add typed step"}).click();
   await p
     .getByRole("button", { name: "Edit Quotient: 2", exact: true })
     .waitFor();
@@ -95,7 +88,7 @@ test("host validator clarification is editable and confirmed callback carries ve
   assert.equal(packet.workId, "host-work");
   assert.equal(packet.strokes[0].id, "ink");
   assert.ok(!("correct" in packet) && !("mastery" in packet));
-  assert.equal(await p.evaluate(() => window.hostWork.corrections[0].to), "3");
+  assert.equal(await p.evaluate(() => window.hostWork.corrections.at(-1).to), "3");
   await context.close();
 });
 test("late validator feedback is discarded after a student edits a step", async () => {

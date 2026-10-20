@@ -573,13 +573,13 @@ function App() {
       );
     if (!drafts.length) return null;
     const complete = drafts.filter((d) => d.stage === "complete").length;
-    return `Writing practice: ${complete} complete${drafts.length > complete ? `, ${drafts.length - complete} in progress` : ""}`;
+    return `Mathematics practice: ${complete} complete${drafts.length > complete ? `, ${drafts.length - complete} in progress` : ""}`;
   };
   const writingOptions = (ids: string[]) => (
-    <section aria-label="Writing practice" className="panel">
+    <section aria-label="Mathematics practice" className="panel">
       <h2>Learn and work it out</h2>
       <p className="small">
-        Use a pen, finger or keyboard. Your steps are saved in your account.
+        Type your working. Your steps are saved in your account.
       </p>
       {writingLessons
         .filter((l) => ids.includes(l.competency))

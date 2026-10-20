@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "./features";
 import "./notebook.css";
 import { WorkspaceRecovery } from "./WorkspaceRecovery";
 import {
@@ -663,7 +664,7 @@ export function ProgressiveDivision({
         </span>
       </div>
       <footer className="notebook-bottom">
-        <button
+        {HANDWRITING_ENABLED && <button
           className="notebook-quiet"
           onClick={() => void leave("ink")}
           aria-label="Write instead"
@@ -672,7 +673,7 @@ export function ProgressiveDivision({
             <path d="m4 16-1 5 5-1L21 7l-4-4L4 16Zm10-10 4 4M4 16l4 4" />
           </svg>
           Write
-        </button>
+        </button>}
         <button
           className="notebook-quiet"
           onPointerDown={(e) => e.preventDefault()}

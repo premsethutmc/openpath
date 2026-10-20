@@ -35,13 +35,13 @@ jobs:
         run: docker exec -e DATABASE_URL= -e DJANGO_SETTINGS_MODULE=config.settings -e DJANGO_DEBUG=1 -w /app/backend preview python manage.py test --noinput
       - run: npm ci && npx playwright install --with-deps chromium
         working-directory: frontend
-      - name: Password gate, packaged routes, real recognition and actual Django learning journeys
+      - name: Password gate, packaged routes, keyboard input and actual Django learning journeys
         working-directory: frontend
         env:
           E2E_URL: http://127.0.0.1:10000
           PREVIEW_PASSWORD: synthetic-preview-test-pass
         run: node --import tsx --test --test-concurrency=1 scripts/preview-server.test.mjs scripts/demo-server.test.mjs e2e/preview-container.test.mjs e2e/writing-year.test.mjs
-      - name: One-tap Android demo, isolation, real recognition and teaching without credentials
+      - name: One-tap Android demo, isolation, keyboard working and teaching without credentials
         working-directory: frontend
         env:
           E2E_URL: http://127.0.0.1:10000
