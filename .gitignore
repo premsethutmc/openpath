@@ -22,3 +22,6 @@ frontend/dist-english-pilot-approved/
 
 # Tamil pilot build
 frontend/dist-tamil/
+
+# Isolated mathematical writing demo
+frontend/dist-writing/
