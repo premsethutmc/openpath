@@ -157,7 +157,9 @@ test("B: diagnosis generalises across families and unseen parameter combinations
         const b = p.bugs.find((x) => x.id === bug.id);
         if (!b || b.predict === null || rand() < 0.15) return p.answer;
         const v = b.predict;
-        return asText(p, Array.isArray(v) && (b.id.startsWith("fact-slip") || p.type !== "set") ? v[Math.floor(rand() * v.length)] : (v as number | number[]));
+        const w = Array.isArray(v) && (b.id.startsWith("fact-slip") || p.type !== "set") ? v[Math.floor(rand() * v.length)] : (v as number | number[]);
+        // a family-defined choice question (families@2) is answered with the letter of the predicted option
+        return p.type === "choice" && typeof w === "number" ? "ABCD"[w] : asText(p, w);
       };
       const first = learner(start.id);
       if (isCorrect(question(start.id), first)) continue; // the misunderstanding gives the right answer here (e.g. 2/8 + 2/8 by multiplying tops)

@@ -14,7 +14,7 @@
  * The likelihoods are design values chosen to be cautious, NOT calibrated probabilities: the numbers are reported as
  * relative support, and an unexplained answer never produces a confident claim.
  */
-import { problemOf, show, variantsOf, type Bug, type Problem, type Value } from "./families";
+import { phasePool, problemOf, show, variantsOf, type Bug, type Problem, type Value } from "./families";
 
 export const REASONING_POLICY = {
   version: "diagnostic@2-draft",
@@ -119,6 +119,23 @@ function expectedEntropy(pr: Problem, exps: Explanation[], s: Record<string, num
   return h;
 }
 
+/** How many problems of a family's diagnostic part are considered as follow-ups when it writes no variants. */
+const POOL_FOLLOW_UPS = 8;
+/** Other problems of the same family to ask next: its written variants, or, for a family that writes none, a fixed
+ * selection from the diagnostic part of its release pool (typed form), so that a misunderstanding can be seen again
+ * on a different problem in every family. */
+function followUpsOf(root: Problem): Problem[] {
+  const own = variantsOf(root);
+  if (own.length) return own;
+  const out: Problem[] = [];
+  for (const id of phasePool(root.family, "diagnostic")) {
+    if (out.length >= POOL_FOLLOW_UPS) break;
+    const p = problemOf(id.replace(/:mc$/, ""));
+    if (p && p.id !== root.id && !out.some((x) => x.id === p.id)) out.push(p);
+  }
+  return out;
+}
+
 /**
  * Reason about the answers to `original` and any follow-ups (generated variants, of any supported family).
  * `observations` are the learner's first answers, in order (the original first).
@@ -129,7 +146,7 @@ export function reason(original: string, observations: Observation[]): Reasoning
   const asked = observations.map((o) => ({ o, pr: problemOf(o.questionId) })).filter((x): x is { o: Observation; pr: Problem } => x.pr !== null);
   // follow-ups: other problems of the same family, and the direct probe of each explanation (e.g. the fact itself)
   const probes = root.bugs.flatMap((b) => (b.probe ? [problemOf(b.probe)] : [])).filter((p): p is Problem => p !== null);
-  const pool = [root, ...probes, ...variantsOf(root)];
+  const pool = [root, ...probes, ...followUpsOf(root)];
   const exps = explanationsFor([root, ...asked.map((x) => x.pr)]);
   let s = prior(exps);
   const observed: Reasoning["observed"] = [];

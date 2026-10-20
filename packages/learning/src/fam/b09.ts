@@ -431,7 +431,7 @@ export const B09: Def[] = [
     bugs: ([a, b, c]) => {
       const g = 5 * (a + b + c);
       return [
-        B("angle-left-out", "procedural", QUAD, `Only two of the three given angles were taken from 360°; all three (${5 * a}°, ${5 * b}° and ${5 * c}°) must be taken away.`, 360 - 5 * (a + b), "gen:aipolyreg:4,0"),
+        B("angle-left-out", "procedural", QUAD, `Only two of the three given angles were taken from 360°; all three (${5 * a}°, ${5 * b}° and ${5 * c}°) must be taken away.`, 360 - 5 * (a + b)),
         B("total-given", "procedural", QUAD, "The three angles were added, but the total was not taken from 360°.", g),
       ];
     },

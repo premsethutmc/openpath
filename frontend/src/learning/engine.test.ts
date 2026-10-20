@@ -50,6 +50,20 @@ const KEY: Record<string, string> = {
   "ch-remainder": "13", "ch-triangle": "36", "ch-counter": "B",
   "qd-d1": "3,2", "qd-d2": "7", "qd-d3": "A", "qd-g1": "4,3", "qd-c1": "3,-2", "qd-p1": "-1,-4", "qd-p2": "B", "qd-t1": "3", "qd-s2g": "C", "qd-s2c": "A", "qd-r1": "5,3", "qd-r2": "1,-2",
   "area-parabola-line.full": "4.5", "area-parabola-line.g7": "5", "area-parabola-line.g8": "2,-1", "area-parabola-line.g10": "2,-1", "area-parabola-line.g11": "A",
+  // educator-marked modules (written-modules.v1.json): the auto-marked component questions, worked out separately
+  "wm-bas-d1": "C", "wm-bas-d2": "B", "wm-bas-g1": "D", "wm-bas-c1": "A", "wm-bas-g2": "C", "wm-bas-p1": "4", "wm-bas-p2": "B", "wm-bas-r1": "D",
+  "wm-tri-d1": "C", "wm-tri-d2": "A", "wm-tri-g1": String(5 + 9 - 1), "wm-tri-c1": "B", "wm-tri-g2": "D", "wm-tri-p1": "A", "wm-tri-p2": String(180 - 65 - 70), "wm-tri-r1": "C",
+  "wm-prf-d1": "B", "wm-prf-d2": "D", "wm-prf-g1": "C", "wm-prf-c1": "A", "wm-prf-g2": String((3 * 5 + 12) / 3 - 5), "wm-prf-p1": "B", "wm-prf-p2": "A", "wm-prf-r1": "D",
+  "wm-tpf-d1": "C", "wm-tpf-d2": "B", "wm-tpf-g1": "A", "wm-tpf-c1": "D", "wm-tpf-g2": "B", "wm-tpf-p1": String((180 - 40) / 2), "wm-tpf-p2": "C", "wm-tpf-r1": "A",
+  "wm-bis-d1": "D", "wm-bis-d2": String(8 / 2 + 1), "wm-bis-g1": "C", "wm-bis-c1": "B", "wm-bis-g2": "A", "wm-bis-p1": "C", "wm-bis-p2": String(120 / 4), "wm-bis-r1": "B",
+  "wm-scl-d1": String((8 * 3) / 4), "wm-scl-d2": "B", "wm-scl-g1": String((6 * 6) / 4), "wm-scl-c1": "D", "wm-scl-g2": "C", "wm-scl-p1": String(12 / 4), "wm-scl-p2": "A", "wm-scl-r1": "B",
+  "wm-quad-d1": "5", "wm-quad-d2": "A", "wm-quad-g1": "D", "wm-quad-c1": "C", "wm-quad-g2": "B", "wm-quad-p1": "C", "wm-quad-p2": String(180 - 65), "wm-quad-r1": "A",
+  "wm-irr-d1": "C", "wm-irr-d2": "B", "wm-irr-g1": "A", "wm-irr-c1": "D", "wm-irr-g2": "C", "wm-irr-p1": "A", "wm-irr-p2": "D", "wm-irr-r1": "B",
+  "wm-root-d1": String(1 + 9), "wm-root-d2": "D", "wm-root-g1": "3", "wm-root-c1": "B", "wm-root-g2": String(7 + 1), "wm-root-p1": "C", "wm-root-p2": "1", "wm-root-r1": "A",
+  "wm-ind-d1": "A", "wm-ind-d2": String([1, 2, 3, 4, 5].find((n) => 2 ** n > n + 4)), "wm-ind-g1": "C", "wm-ind-c1": "B", "wm-ind-g2": "D", "wm-ind-p1": String(7 - 1), "wm-ind-p2": "A", "wm-ind-r1": "C",
+  "wm-game-d1": "D", "wm-game-d2": String(10 % 4), "wm-game-g1": String(10 - 3), "wm-game-c1": "B", "wm-game-g2": String(5 - 3), "wm-game-p1": String(23 % 4), "wm-game-p2": "A", "wm-game-r1": String(26 % 6),
+  "wm-disp-d1": "B", "wm-disp-d2": String(3 * 4 + 2), "wm-disp-g1": String((70 - 50) / (55 - 50)), "wm-disp-c1": "C", "wm-disp-g2": "A", "wm-disp-p1": "D", "wm-disp-p2": String((15 / 60) * 360), "wm-disp-r1": "B",
+  "wm-stq-d1": "B", "wm-stq-d2": "2/5", "wm-stq-g1": "D", "wm-stq-c1": "A", "wm-stq-g2": "C", "wm-stq-p1": "B", "wm-stq-p2": String((7 + 8 + 9 + 9 + 12) / 5), "wm-stq-r1": "D",
 };
 const factors = (n: number) => [...Array(n).keys()].map((k) => k + 1).filter((k) => n % k === 0).length;
 

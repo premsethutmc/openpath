@@ -5,7 +5,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { authoredModules, modules, question, synthesisedModules } from "../../../packages/learning/src/content";
+import { authoredModules, moduleFor, modules, question, synthesisedModules } from "../../../packages/learning/src/content";
 import { CATEGORIES, graphCoverage, releaseCoverage } from "../../../packages/learning/src/coverage";
 import { sampleReleases } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned, review, synthesise, type CurriculumRelease } from "../../../packages/learning/src/curriculum";
@@ -17,7 +17,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { moduleState } from "../../../packages/learning/src/intervention";
 import { buildLibrary, type Blueprint } from "../../../packages/learning/src/library";
 import { years } from "../../../packages/learning/src/plan";
-import { contentHashOf, decide, effectiveState, itemOf, registry, release as releaseModule, ReviewError, submit, sync, type Registry } from "../../../packages/learning/src/review";
+import { contentHashOf, decide, effectiveState, familiesOf, itemOf, registry, release as releaseModule, ReviewError, submit, sync, type Registry } from "../../../packages/learning/src/review";
 import { releasedRegistry } from "./released";
 import { flatten, tileAt, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { validateModule } from "../../../packages/learning/src/validate";
@@ -66,7 +66,9 @@ test("pipeline: the library is exactly what blueprints and templates build; ever
   for (const m of synthesisedModules) {
     const ids = [...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.strategies.flatMap((s) => [s.guided, s.check])];
     for (const id of ids) assert.ok(problemOf(id) && inPool(id), id);
-    assert.ok(ids.some((id) => id.endsWith(":mc")) && ids.some((id) => !id.endsWith(":mc")));
+    // two evidence contexts (context@2): answer formats, and an everyday situation (:w) as a context of its own; a
+    // family whose questions are choices or sets has no separate multiple-choice form
+    assert.ok(new Set(ids.map((id) => `${question(id).type}${id.endsWith(":w") ? "-situation" : ""}`)).size >= 2, `${m.competency}: two evidence contexts`);
   }
   // the registry: every module and family is in it, none approved or released, each entry has the current content
   for (const m of modules) {
@@ -90,9 +92,13 @@ test("pipeline: review needs an educator who is not the author; a module is rele
   assert.throws(() => releaseModule(e, "rm", at), /only an approved item/);
   e = decide(e, { by: "A. Teacher (test identity)", role: "educator" }, "approve", at, "checked every question and screen");
   const empty: Registry = { ...registry, entries: [] };
-  assert.throws(() => releaseModule(e, "release manager (test)", at, empty), /families that are not released yet: subst, pow/);
+  // pools@1: the module uses every family of its competency (and pow, which its questions build on)
+  const fams = familiesOf(m);
+  assert.ok(fams.includes("subst") && fams.includes("pow"));
+  assert.throws(() => releaseModule(e, "release manager (test)", at, empty), (err: Error) => err instanceof ReviewError && err.message.endsWith(`families that are not released yet: ${fams.join(", ")}`));
+  assert.throws(() => releaseModule(e, "release manager (test)", at, releasedRegistry(fams.slice(0, -1), [])), /families that are not released yet/, "one family missing: still not released");
   assert.throws(() => releaseModule(e, "an educator", at, empty, "educator"), /Only a release manager/);
-  const withFamily = releasedRegistry(["subst", "pow"], []);
+  const withFamily = releasedRegistry(fams, []);
   e = releaseModule(e, "release manager (test)", at, withFamily);
   assert.equal(effectiveState(e, m), "released");
   // a change to the module after release: the review no longer applies
@@ -200,8 +206,11 @@ test("C: Grade 12 → Calculus → Integrals → Techniques of integration → c
   assert.equal(caps[0].content!.level, "module", "substitution: practised in the module");
   assert.equal(caps[1].content!.level, "none", "by parts: honestly no content yet");
   assert.equal(caps[1].label, "No learning content yet");
-  // matrices, continuity, probability: on the map, without content, never counted
-  assert.ok(flatten(tiles).filter((t) => t.kind === "skill" && !t.assessable).length >= 4);
+  // content expansion: every skill of this book now has a module; what still has no content (by parts) is on the map,
+  // never assessable and never counted
+  assert.equal(caps[1].assessable, false);
+  assert.ok(flatten(tiles).filter((t) => t.content?.level === "none").every((t) => !t.assessable && t.label === "No learning content yet"));
+  assert.equal(d.state().summary!.total, flatten(tiles).filter((t) => t.kind === "skill" && t.assessable).length, "only skills with content are counted");
   // an integral by substitution, worked out with powers as multiplication (2³ as 2 × 3)
   const original = "gen:subst:0,2,1,1";
   const phases = d.recover(original, withBug(d, "multiply-for-power", "MATH.number.exponents"));
@@ -281,14 +290,18 @@ test("E: an unseen textbook goes through the same pipeline with no new code; its
   assert.deepEqual(chain.map((t) => t.kind), ["subject", "unit", "chapter", "section", "skill"]);
   assert.equal(chain.at(-1)!.content!.level, "module");
   const bisector = flatten(tiles).find((t) => t.competency === "MATH.geometry.constructions-bisectors")!;
-  assert.equal(bisector.content!.level, "none", "a construction skill has no module: shown as such");
+  // content expansion: constructions now have an educator-marked module (written-modules.v1.json); the tile says what
+  // the content is and that no educator has reviewed it, never more
+  assert.equal(bisector.content!.level, "module", "a construction skill with an educator-marked module: shown as such");
+  assert.equal(moduleFor("MATH.geometry.constructions-bisectors")!.pool, undefined, "educator-marked: no generated pool");
+  assert.ok(!/approved|released/i.test(bisector.content!.review), `not shown as reviewed: ${bisector.content!.review}`);
   const cov = releaseCoverage(r);
   assert.equal(cov.extracted.sections, 2);
   assert.equal(cov.counts.approved, 0);
   // the module goes through review exactly as any other; once released (in a test registry) its questions validate,
   // so a learner can reach verified mastery on it; the repository registry is not changed
   const comp = "MATH.algebra.identities-intro";
-  const testRegistry = releasedRegistry(["dist", "mul"], [comp]);
+  const testRegistry = releasedRegistry([...new Set([...familiesOf(moduleFor(comp)!), "dist", "mul"])], [comp]); // pools@1: every family the module uses
   useRegistry(testRegistry);
   try {
     d.work(comp, right);
@@ -335,8 +348,11 @@ test("F: Grade 10 → Grade 12: every record kept, valid evidence carried over, 
 test("coverage: eight categories reported separately; complete platform ≠ complete content", () => {
   const g = graphCoverage();
   assert.equal(g.module, modules.filter((m) => validateModule(m).length === 0).length);
-  assert.ok(g.module < g.total / 4, "most competencies have no module yet: the report must say so");
+  // content expansion: most competencies now have a module, but a module is not approved content: while no educator has
+  // approved anything, no competency is reported approved, and a complete module is reported as awaiting review
   assert.equal(g.counts.approved, 0);
+  assert.ok(g.competencies.every((c) => c.status !== "approved"), "complete content is not claimed while nothing is approved");
+  assert.ok(g.competencies.filter((c) => c.status === "awaiting").every((c) => c.module === "module" && !c.has.approved));
   for (const r of sampleReleases) {
     const c = releaseCoverage(r as CurriculumRelease);
     assert.equal(c.counts.module + c.counts.partial + c.counts.none, c.counts.total);

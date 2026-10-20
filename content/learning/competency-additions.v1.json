@@ -354,6 +354,34 @@
     "MATH.algebra.identities"
    ],
    "note": "x² − a² = (x − a)(x + a)."
+  },
+  {
+   "competency": "MATH.algebra.linear-rational",
+   "supports": [
+    "MATH.number.integer-add"
+   ],
+   "note": "Undoing a term moves it with its sign: adding and subtracting negative numbers."
+  },
+  {
+   "competency": "MATH.measurement.time-speed-intro",
+   "supports": [
+    "MATH.number.long-division"
+   ],
+   "note": "Distance per unit time is a division: the distance divided by the time."
+  },
+  {
+   "competency": "MATH.number.mixed-fractions",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "A mixed number becomes an improper fraction by multiplying the whole number by the denominator."
+  },
+  {
+   "competency": "MATH.measurement.cube-volume",
+   "supports": [
+    "MATH.measurement.volume-cubes"
+   ],
+   "note": "Length × width × height counts the unit cubes, one layer of the base for each unit of height."
   }
  ],
  "alternatives": [
