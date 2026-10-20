@@ -363,6 +363,426 @@ const PRICES = [20, 25, 30, 40, 45, 50, 60, 80];
 const SURDS = [2, 3, 5, 6, 7];
 const SHAPE = (n: number) => ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].slice(0, n);
 
+// ================================================================================== gap@1 additions (b16)
+const shuf16 = (tag: string, p: number[], xs: string[]) => [...xs].sort((x, y) => fnv(`${tag}:${p.join(",")}:${x}`) - fnv(`${tag}:${p.join(",")}:${y}`) || (x < y ? -1 : 1));
+const rnd16 = (tag: string) => {
+  let s = (fnv(tag) % 2147483646) + 1;
+  return (lo: number, hi: number) => {
+    s = (s * 48271) % 2147483647;
+    return lo + (s % (hi - lo + 1));
+  };
+};
+const inD = (p: number[], d: [number, number][]) => p.length === d.length && p.every((v, i) => Number.isInteger(v) && v >= d[i][0] && v <= d[i][1]);
+
+// ---------------------------------------------------------------- listing Cartesian products
+const D_CL16: [number, number][] = [[0, 3], [2, 3], [1, 3], [-3, 6]];
+const clSets = ([k, m, n, s]: number[]) => {
+  const A = Array.from({ length: m }, (_, i) => n_(s + i));
+  const Bs = ["p", "q", "r"].slice(0, k === 3 ? 2 : n);
+  const C = k === 3 ? ["10", "20"].slice(0, n === 1 ? 1 : 2) : [];
+  return { A, B: Bs, C };
+};
+const tupS = (xs: string[]) => `(${xs.join(", ")})`;
+const setS = (xs: string[]) => `{${xs.join(", ")}}`;
+const cl16Ok = (p: number[]) => inD(p, D_CL16) && (p[0] === 1 || p[0] === 3 ? (p[0] === 3 ? p[1] === 2 && p[2] <= 2 : p[2] === 1) : p[1] * p[2] <= 9);
+function cl16Lists(p: number[]): { list: string[][]; why: string }[] {
+  const [k] = p;
+  const { A, B: Bs, C } = clSets(p);
+  const X = k === 1 ? A : k === 2 ? Bs : A;
+  const Y = k === 1 ? A : k === 2 ? A : Bs;
+  if (k === 3) {
+    const right = A.flatMap((a) => Bs.flatMap((b) => C.map((c) => [a, b, c])));
+    return [
+      { list: right, why: "right" },
+      { list: A.flatMap((a) => Bs.map((b) => [a, b])), why: "pairs" },
+      { list: Bs.flatMap((b) => A.flatMap((a) => C.map((c) => [b, a, c]))), why: "order" },
+      { list: right.slice(0, -1), why: "missing" },
+    ];
+  }
+  const right = X.flatMap((x) => Y.map((y) => [x, y]));
+  const out = [{ list: right, why: "right" }, { list: Y.flatMap((y) => X.map((x) => [y, x])), why: "order" }];
+  if (k === 1) out.push({ list: right.filter(([x, y]) => x !== y), why: "diagonal" });
+  else out.push({ list: X.slice(0, Math.min(X.length, Y.length)).map((x, i) => [x, Y[i]]), why: "zip" });
+  out.push({ list: right.slice(0, -1), why: "missing" });
+  return out;
+}
+const cl16Choices = (p: number[]) => shuf16("apcartl", p, cl16Lists(p).map((o) => setS(o.list.map(tupS))));
+
+// ---------------------------------------------------------------- equality of ordered pairs
+const D_CEQ: [number, number][] = [[0, 2], [-6, 6], [-6, 6], [0, 5]];
+const ceqK = (s: number) => 2 + (s % 2);
+const ceqU = (s: number) => 1 + (s % 3);
+const ceqW = (s: number) => (s % 2 ? -1 : 1) * (1 + ((s + 1) % 3));
+function ceqText([f, x, y, s]: number[]) {
+  if (f === 0) {
+    const k = ceqK(s);
+    const u = ceqU(s);
+    const w = ceqW(s);
+    return `If (x/${k} + ${u}, y ${w < 0 ? "−" : "+"} ${Math.abs(w)}/${k}) = (${rs(rr(x + u * k, k))}, ${rs(rr(y * k + w, k))}), find x and y. Write the answer as (x, y).`;
+  }
+  if (f === 1) return `If (x + y, x − y) = (${n_(x + y)}, ${n_(x - y)}), find x and y. Write the answer as (x, y).`;
+  return `If (2x + y, x − 3y) = (${n_(2 * x + y)}, ${n_(x - 3 * y)}), find x and y. Write the answer as (x, y).`;
+}
+const ceqOk = (p: number[]) => inD(p, D_CEQ) && (p[0] === 0 || p[3] === 0) && !(p[1] === 0 && p[2] === 0);
+
+// ---------------------------------------------------------------- constructing a matrix from a rule
+const MRULES: { text: string; f: (i: number, j: number) => R }[] = [
+  { text: "i + j", f: (i, j) => rr(i + j) },
+  { text: "i − j", f: (i, j) => rr(i - j) },
+  { text: "2i + j", f: (i, j) => rr(2 * i + j) },
+  { text: "ij", f: (i, j) => rr(i * j) },
+  { text: "(i + 2j)²/2", f: (i, j) => rr((i + 2 * j) ** 2, 2) },
+  { text: "|i − 3j|/2", f: (i, j) => rr(Math.abs(i - 3 * j), 2) },
+  { text: "i² − j", f: (i, j) => rr(i * i - j) },
+  { text: "(i − j)²", f: (i, j) => rr((i - j) ** 2) },
+  { text: "3i − 2j", f: (i, j) => rr(3 * i - 2 * j) },
+  { text: "i/j", f: (i, j) => rr(i, j) },
+];
+const MRULE_TYPED = ["i + j", "i - j", "2i + j", "i*j", "(i + 2j)^2/2", "abs(i - 3j)/2", "i^2 - j", "(i - j)^2", "3i - 2j", "i/j"];
+const D_MCON: [number, number][] = [[1, 3], [1, 3], [0, 9], [0, 1]];
+const mconOk = (p: number[]) => inD(p, D_MCON) && p[0] * p[1] >= 2;
+const mconA = ([m, n, t]: number[]): M => Array.from({ length: m }, (_, i) => Array.from({ length: n }, (_, j) => MRULES[t].f(i + 1, j + 1)));
+
+// ---------------------------------------------------------------- order and type of a matrix
+const MTYPE = ["a row matrix", "a column matrix", "a square matrix that is not a diagonal matrix", "a diagonal matrix that is not a scalar matrix", "a scalar matrix that is not the identity matrix", "an identity matrix", "a zero matrix", "a rectangular matrix that is neither a row nor a column matrix"];
+const MTCONF = [[1, 7, 6], [0, 7, 6], [3, 7, 4], [4, 2, 5], [5, 3, 6], [4, 3, 6], [5, 4, 0], [2, 0, 1]];
+const D_MTY: [number, number][] = [[0, 1], [0, 11], [0, 29]];
+const MORD: [number, number][] = [[1, 2], [1, 3], [1, 4], [2, 1], [3, 1], [4, 1], [2, 3], [3, 2], [2, 4], [4, 2], [3, 4], [4, 3]];
+function mtyMatrix([q, t, seed]: number[]): number[][] {
+  const r = rnd16(`apmtype:${q}:${t}:${seed}`);
+  const fill = (m: number, n: number, f: (i: number, j: number) => number) => Array.from({ length: m }, (_, i) => Array.from({ length: n }, (_, j) => f(i, j)));
+  const nz = () => [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7][r(0, 11)];
+  if (q === 0) {
+    const [m, n] = MORD[t];
+    return fill(m, n, () => r(-5, 9));
+  }
+  const n = r(2, 3);
+  if (t === 0) return [Array.from({ length: r(2, 4) }, nz)];
+  if (t === 1) return Array.from({ length: r(2, 4) }, () => [nz()]);
+  if (t === 2) return fill(n, n, (i, j) => (i === 0 && j === 1 ? nz() : r(-4, 6)));
+  if (t === 3) {
+    const d = Array.from({ length: n }, nz);
+    if (d.every((x) => x === d[0])) d[1] = d[0] + 1 === 0 ? 2 : d[0] + 1;
+    return fill(n, n, (i, j) => (i === j ? d[i] : 0));
+  }
+  if (t === 4) {
+    const k = [2, 3, 4, 5, -1, -2, -3, 7][r(0, 7)];
+    return fill(n, n, (i, j) => (i === j ? k : 0));
+  }
+  if (t === 5) return fill(n, n, (i, j) => (i === j ? 1 : 0));
+  if (t === 6) return fill(r(2, 3), r(2, 3), () => 0);
+  const m2_ = r(2, 3);
+  return fill(m2_, m2_ === 2 ? 3 : 2, (i, j) => (i === 0 && j === 0 ? nz() : r(-4, 6)));
+}
+const mtyKey = (p: number[]) => JSON.stringify(mtyMatrix(p));
+const mtyOk = (p: number[]) => inD(p, D_MTY) && (p[0] === 0 || p[1] <= 7) && (p[0] === 1 || p[2] <= 9) && !Array.from({ length: p[2] }, (_, s) => s).some((s) => mtyKey([p[0], p[1], s]) === mtyKey(p));
+const ordS = (m: number, n: number) => `order ${m} × ${n}`;
+function mtyOpts(p: number[]): string[] {
+  const [q, t] = p;
+  if (q === 0) {
+    const [m, n] = MORD[t];
+    return shuf16("apmtype", p, [ordS(m, n), ordS(n, m), `order ${m * n} × 1`, ordS(Math.max(m, n), Math.max(m, n))]);
+  }
+  return shuf16("apmtype", p, [t, ...MTCONF[t]].map((i) => MTYPE[i]));
+}
+/** The type read from the entries (the independent check). */
+function mtyRead(A: number[][]): number {
+  const m = A.length;
+  const n = A[0].length;
+  if (A.every((r) => r.every((x) => x === 0))) return 6;
+  if (m === 1) return 0;
+  if (n === 1) return 1;
+  if (m !== n) return 7;
+  const diag = A.every((r, i) => r.every((x, j) => i === j || x === 0));
+  if (!diag) return 2;
+  const same = A.every((r, i) => r[i] === A[0][0]);
+  if (!same) return 3;
+  return A[0][0] === 1 ? 5 : 4;
+}
+
+// ---------------------------------------------------------------- equality of matrices
+const D_MEQ: [number, number][] = [[0, 2], [-6, 6], [-6, 6], [-5, 5]];
+const meqOk = (p: number[]) => inD(p, D_MEQ) && (p[0] === 2 || p[3] === 0) && !(p[1] === p[2] && p[0] < 2);
+function meqText([f, x, y, z]: number[]) {
+  const M = (rows: string[][]) => `[${rows.map((r) => `[${r.join(", ")}]`).join(", ")}]`;
+  if (f === 0) return `If ${M([["x + y", "3"], ["−1", "x − y"]])} = ${M([[n_(x + y), "3"], ["−1", n_(x - y)]])}, find x and y. Write the answer as (x, y).`;
+  if (f === 1) return `If ${M([["2x − y", "5"], ["x + 2y", "0"]])} = ${M([[n_(2 * x - y), "5"], [n_(x + 2 * y), "0"]])}, find x and y. Write the answer as (x, y).`;
+  return `If ${M([["x + 3", "2y"], ["z − 4", "7"]])} = ${M([[n_(x + 3), n_(2 * y)], [n_(z - 4), "7"]])}, find x, y and z. Write the answer as (x, y, z).`;
+}
+
+// ---------------------------------------------------------------- modelling with a matrix product
+const MMR: number[][][] = [[[3, 2], [5, 4], [8, 6]], [[2, 3], [4, 5], [6, 4]], [[4, 1], [6, 3], [9, 5]], [[1, 2], [3, 3], [5, 4]]];
+const D_MMOD: [number, number][] = [[1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [1, 6], [0, 1], [0, 3]];
+const mmodOk = (p: number[]) => inD(p, D_MMOD) && (p[0] !== p[3] || p[1] !== p[4] || p[2] !== p[5]);
+const mmodQ = (p: number[]) => [p.slice(0, 3), p.slice(3, 6)];
+const mmodP = (p: number[]) => mmul(toM(mmodQ(p)), toM(MMR[p[7]]));
+function mmodText(p: number[], w = false) {
+  const [a, b, c, d, e, f, ctx, s] = p;
+  const R = MMR[s];
+  const C = (ctx + (w ? 1 : 0)) % 2;
+  if (C === 0) return `Two furniture workshops in Madurai make chairs, tables and cupboards. Each day workshop P makes ${a} chairs, ${b} tables and ${c} cupboards, and workshop Q makes ${d} chairs, ${e} tables and ${f} cupboards. A chair needs ${R[0][0]} units of wood and ${R[0][1]} hours of labour, a table ${R[1][0]} units and ${R[1][1]} hours, and a cupboard ${R[2][0]} units and ${R[2][1]} hours. Write the daily production as a 2 × 3 matrix and the needs per item as a 3 × 2 matrix, and multiply them to find, for each workshop, the total wood and the total labour each day. Write the product as [[a, b], [c, d]] (workshop P first; wood, then labour).`;
+  return `Two school canteens in Coimbatore make idlis, dosas and vadas. On a day canteen P makes ${a} dozen idlis, ${b} dozen dosas and ${c} dozen vadas, and canteen Q makes ${d}, ${e} and ${f} dozen. One dozen idlis needs ${R[0][0]} cups of batter and ${R[0][1]} spoons of oil, a dozen dosas ${R[1][0]} cups and ${R[1][1]} spoons, and a dozen vadas ${R[2][0]} cups and ${R[2][1]} spoons. Using a matrix product of the 2 × 3 production matrix and the 3 × 2 needs matrix, find for each canteen the total batter and the total oil. Write the product as [[a, b], [c, d]] (canteen P first; batter, then oil).`;
+}
+
+// ---------------------------------------------------------------- systems in words, three methods
+const SYSCTX = [
+  { who: ["Anu", "Ravi", "Meena"], verb: "buys", items: ["pens", "notebooks", "erasers"], one: ["pen", "notebook", "eraser"], unit: "₹", what: "the price of one pen, one notebook and one eraser, in rupees" },
+  { who: ["Monday", "Tuesday", "Wednesday"], verb: "sold", items: ["adult tickets", "child tickets", "senior-citizen tickets"], one: ["adult ticket", "child ticket", "senior-citizen ticket"], unit: "₹", what: "the price of an adult, a child and a senior-citizen ticket, in rupees" },
+  { who: ["Farm P", "Farm Q", "Farm R"], verb: "used", items: ["bags of fertiliser A", "bags of fertiliser B", "bags of fertiliser C"], one: ["bag of fertiliser A", "bag of fertiliser B", "bag of fertiliser C"], unit: "kg of nitrogen", what: "the kilograms of nitrogen in one bag of A, of B and of C" },
+];
+function sysA(s: number): number[][] {
+  const r = rnd16(`apsysw:${s}`);
+  for (let t = 0; t < 200; t++) {
+    const A = [0, 1, 2].map(() => [0, 1, 2].map(() => r(0, 4)));
+    if (A.some((row) => row.filter((x) => x > 0).length < 2) || [0, 1, 2].some((j) => A.every((row) => row[j] === 0))) continue;
+    const D = sarrus(A);
+    if (D !== 0 && Math.abs(D) <= 30) return A;
+  }
+  return [[1, 1, 1], [1, 2, 3], [2, 1, 1]];
+}
+const D_SYSW: [number, number][] = [[1, 12], [1, 12], [1, 12], [0, 2], [0, 2], [0, 19]];
+const METH = ["the matrix method (X = A⁻¹B)", "Cramer's rule", "Gaussian elimination (reduce the augmented matrix to echelon form and back-substitute)"];
+function syswText([x, y, z, t, m, s]: number[]): string {
+  const A = sysA(s);
+  const C = SYSCTX[t];
+  const sol = [x, y, z];
+  const lines = A.map((row, i) => {
+    const parts = row.map((c, j) => (c ? `${c} ${c === 1 ? C.one[j] : C.items[j]}` : "")).filter(Boolean);
+    const total = row.reduce((a, c, j) => a + c * sol[j], 0);
+    return t === 0 ? `${C.who[i]} buys ${parts.join(", ")} for ₹${total}` : t === 1 ? `on ${C.who[i]} the theatre sold ${parts.join(", ")} for ₹${total}` : `${C.who[i]} used ${parts.join(", ")}, giving ${total} kg of nitrogen`;
+  });
+  const lead = t === 0 ? "At a stationery shop in Erode," : t === 1 ? "For a Tamil drama in Thanjavur," : "In a farm survey near Namakkal,";
+  return `${lead} ${lines.join("; ")}. Form the equations and solve them by ${METH[m]} to find ${C.what}. Write the answer as (x, y, z).`;
+}
+const syswOk = (p: number[]) => inD(p, D_SYSW);
+
+// ---------------------------------------------------------------- feasible, infeasible, unbounded
+/** [k, a, b, m, d, P, Q]: c = a·b·m. k 0 infeasible (ax + by ≤ c and x ≥ c/a + d); 1 unbounded max (ax + by ≥ c); 2 bounded max (ax + by ≤ c); 3 min over ax + by ≥ c. */
+const D_LPF: [number, number][] = [[0, 3], [1, 5], [1, 5], [1, 3], [1, 4], [1, 9], [1, 9]];
+const lpfOk = (p: number[]) => inD(p, D_LPF) && p[1] !== p[2] && gcd(p[1], p[2]) === 1 && (p[0] === 0 || p[4] === 1) && p[5] * p[2] !== p[6] * p[1] && p[1] * p[2] * p[3] <= 40;
+function lpfCons([k, a, b, m, d]: number[]): [number, number, number, number][] {
+  const c = a * b * m;
+  if (k === 0) return [[a, b, c, -1], [1, 0, b * m + d, 1]];
+  return [[a, b, c, k === 2 ? -1 : 1]];
+}
+const consS = (cs: [number, number, number, number][]) => cs.map(([a, b, c, s]) => (a && b ? `${eqS([a, b], c, ["x", "y"])}` : eqS([a, b], c, ["x", "y"])).replace("=", s < 0 ? "≤" : "≥")).join(", ") + ", x ≥ 0, y ≥ 0";
+function lpfLabels(p: number[]) {
+  const [k, a, b, m, , P, Q] = p;
+  const c = a * b * m;
+  const vx = (P * c) / a;
+  const vy = (Q * c) / b;
+  const word = k === 3 ? "minimum" : "maximum";
+  const best = k === 3 ? Math.min(vx, vy) : Math.max(vx, vy);
+  const other = k === 3 ? Math.max(vx, vy) : Math.min(vx, vy);
+  return {
+    best: `The ${word} value of Z is ${best}`,
+    other: `The ${word} value of Z is ${other}`,
+    unb: `Z has no ${word}: the feasible region is unbounded`,
+    inf: "There is no feasible region: the constraints cannot all be satisfied, so there is no optimal value",
+  };
+}
+const lpfRight = (p: number[]) => (p[0] === 0 ? "inf" : p[0] === 1 ? "unb" : "best");
+const lpfChoices = (p: number[]) => {
+  const L = lpfLabels(p);
+  return shuf16("aplpfeas", p, [L.best, L.other, L.unb, L.inf]);
+};
+
+// ---------------------------------------------------------------- approximations with the series
+/** [q, ni, k, m]: q 0 binomial (1 + k/100)^n, n = SN[ni] (m = 1: √(100 + k) = 10(1 + k/100)^(1/2)); q 1 e^(k/100); q 2 log(1 + 3k/100) */
+const SN: [number, number][] = [[1, 2], [-1, 1], [-2, 1], [1, 3], [-1, 2]];
+const D_SAPP: [number, number][] = [[0, 2], [0, 4], [-9, 9], [0, 1]];
+const sappOk = (p: number[]) => {
+  if (!inD(p, D_SAPP)) return false;
+  const [q, ni, k, m] = p;
+  if (k === 0) return false;
+  if (q === 0) return (ni !== 3 || k % 3 === 0) && (m === 0 || ni === 0);
+  if (q === 1) return ni === 0 && m === 0;
+  return ni === 0 && m === 0 && Math.abs(k) <= 4;
+};
+function sappTerms([q, ni, k, m]: number[]): R[] {
+  if (q === 0) {
+    const n = rr(...SN[ni]);
+    const x = rr(k, 100);
+    const t = [rr(1), rmul(n, x), rmul(rdiv(rmul(n, rsub(n, rr(1))), rr(2)), rmul(x, x))];
+    return m ? t.map((v) => rmul(v, rr(10))) : t;
+  }
+  if (q === 1) {
+    const x = rr(k, 100);
+    return [rr(1), x, rdiv(rmul(x, x), rr(2))];
+  }
+  const x = rr(3 * k, 100);
+  return [x, rmul(rr(-1, 2), rmul(x, x)), rdiv(rmul(x, rmul(x, x)), rr(3))];
+}
+const sappAns = (p: number[]) => rv(sappTerms(p).reduce((a, b) => radd(a, b), [0, 1] as R));
+const decS = (v: number) => String(Math.round(v * 1e9) / 1e9);
+function sappExpr([q, ni, k, m]: number[]): string {
+  const base = decS(1 + k / 100);
+  if (q === 0) {
+    if (m) return `√${100 + k}`;
+    return [`√${base}`, `1/${base}`, `1/(${base})²`, `∛${base}`, `1/√${base}`][ni];
+  }
+  if (q === 1) return `e^(${decS(k / 100)})`;
+  return `log ${decS(1 + (3 * k) / 100)}`;
+}
+function sappText(p: number[], w = false) {
+  const [q, , , m] = p;
+  const e = sappExpr(p);
+  if (!w) return q === 0 ? `Use the first three terms of the binomial series to find an approximate value of ${e}${m ? ` (write it as 10(1 ${p[2] < 0 ? "−" : "+"} ${decS(Math.abs(p[2]) / 100)})^(1/2))` : ""}. Give the decimal.` : q === 1 ? `Use the first three terms of the exponential series to find an approximate value of ${e}. Give the decimal.` : `Use the first three terms of the logarithmic series to find an approximate value of ${e} (log is the natural logarithm). Give the decimal.`;
+  if (q === 1) return `Money in an account that grows continuously at ${Math.abs(p[2])}% a year is multiplied by e^(${decS(p[2] / 100)}) each year${p[2] < 0 ? " (here it shrinks, because of charges)" : ""}. Using the first three terms of the exponential series, find this multiplying factor approximately. Give the decimal.`;
+  if (q === 2) return `A town's population is multiplied by ${decS(1 + (3 * p[2]) / 100)} each year. The continuous growth rate that does the same is log ${decS(1 + (3 * p[2]) / 100)} (natural logarithm). Using the first three terms of the logarithmic series, find this rate approximately, as a decimal.`;
+  return `${nm16(p[2] + p[1])}'s calculator has no keys for roots or powers. Use the first three terms of the binomial series to work out ${e} approximately for a science project. Give the decimal.`;
+}
+const nm16 = (k: number) => name(k);
+
+// ---------------------------------------------------------------- transformations of the plane
+const TRM: { text: string; M: number[][] }[] = [
+  { text: "a rotation through 90° anticlockwise about the origin", M: [[0, -1], [1, 0]] },
+  { text: "a rotation through 180° about the origin", M: [[-1, 0], [0, -1]] },
+  { text: "a rotation through 270° anticlockwise about the origin", M: [[0, 1], [-1, 0]] },
+  { text: "a reflection in the x-axis", M: [[1, 0], [0, -1]] },
+  { text: "a reflection in the y-axis", M: [[-1, 0], [0, 1]] },
+  { text: "a reflection in the line y = x", M: [[0, 1], [1, 0]] },
+];
+const D_ROT: [number, number][] = [[0, 5], [-6, 6], [-6, 6]];
+const rotOk = (p: number[]) => inD(p, D_ROT) && p[1] !== 0 && p[2] !== 0 && Math.abs(p[1]) !== Math.abs(p[2]);
+const rotImg = ([t, x, y]: number[]) => {
+  const M = TRM[t].M;
+  return [M[0][0] * x + M[0][1] * y, M[1][0] * x + M[1][1] * y];
+};
+
+// ---------------------------------------------------------------- orthogonal matrices
+const TRIPLES: [number, number, number][] = [[3, 4, 5], [4, 3, 5], [5, 12, 13], [12, 5, 13], [8, 15, 17], [15, 8, 17], [7, 24, 25], [24, 7, 25]];
+const ORTH3: [number, number[][]][] = [[3, [[1, 2, 2], [2, 1, -2], [2, -2, 1]]], [7, [[2, 3, 6], [3, -6, 2], [6, 2, -3]]], [9, [[1, 4, 8], [4, 7, -4], [8, -4, 1]]]];
+const PERMS3 = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
+const D_ORTH: [number, number][] = [[0, 1], [0, 7], [0, 47]];
+const orthOk = (p: number[]) => inD(p, D_ORTH) && (p[0] === 0 ? p[2] <= 7 : p[1] <= 2);
+function orthA([d, i, s]: number[]): { k: number; M: number[][] } {
+  if (d === 0) {
+    const [a, b, k] = TRIPLES[i];
+    const sa = s & 1 ? -1 : 1;
+    const sb = s & 2 ? -1 : 1;
+    return { k, M: s & 4 ? [[sa * a, sb * b], [sb * b, -sa * a]] : [[sa * a, -sb * b], [sb * b, sa * a]] };
+  }
+  const [k, M0] = ORTH3[i];
+  const P = PERMS3[s % 6];
+  const sg = Math.floor(s / 6);
+  return { k, M: P.map((r) => M0[r].map((x, j) => ((sg >> j) & 1 ? -x : x))) };
+}
+const orthM = (p: number[]) => {
+  const { k, M } = orthA(p);
+  return mscale(toM(M), rr(1, k));
+};
+
+// ---------------------------------------------------------------- coding messages with a matrix
+const CODEA = [[[1, 2], [1, 3]], [[2, 1], [3, 2]], [[3, 5], [1, 2]], [[1, 1], [2, 3]], [[2, 3], [1, 2]], [[4, 3], [1, 1]], [[3, 2], [4, 3]], [[5, 3], [3, 2]]];
+const D_CODE: [number, number][] = [[0, 1], [0, 7], [1, 26], [1, 26]];
+const ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const codeC = ([, i, m1, m2]: number[]) => {
+  const A = CODEA[i];
+  return [A[0][0] * m1 + A[0][1] * m2, A[1][0] * m1 + A[1][1] * m2];
+};
+function codeText(p: number[], w = false) {
+  const [dir, i, m1, m2] = p;
+  const C = codeC(p);
+  const lead = w ? `${nm16(i + m1)} and ${nm16(i + m2 + 3)} pass secret notes in class.` : "In a matrix code,";
+  const rule = `each letter is replaced by its position in the alphabet (A = 1, B = 2, …, Z = 26), a pair of letters is written as a column M = [[m₁], [m₂]], and the coded column is C = AM with A = ${matN(CODEA[i])}.`;
+  return dir === 0
+    ? `${lead} ${w ? "They agree that " : ""}${rule} A coded column [[${C[0]}], [${C[1]}]] is received. Decode it using A⁻¹: find (m₁, m₂).`
+    : `${lead} ${w ? "They agree that " : ""}${rule} Encode the letters ${ABC[m1 - 1]}${ABC[m2 - 1]}: find the coded column C and write it as (c₁, c₂).`;
+}
+
+// ---------------------------------------------------------------- the Gauss–Jordan inverse
+const GJM = new Map<number, number[][]>();
+function gjA(seed: number): number[][] {
+  if (!GJM.has(seed)) GJM.set(seed, gjA0(seed));
+  return GJM.get(seed)!;
+}
+function gjA0(seed: number): number[][] {
+  const r = rnd16(`apgj3:${seed}`);
+  for (let t = 0; t < 400; t++) {
+    let A = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    for (let k = 0; k < 4; k++) {
+      const i = r(0, 2);
+      const j = (i + r(1, 2)) % 3;
+      const c = [-2, -1, 1, 2][r(0, 3)];
+      A = A.map((row, a) => (a === i ? row.map((x, b) => x + c * A[j][b]) : row));
+    }
+    if (r(0, 1)) A = [A[1], A[0], A[2]];
+    const inv = mT(cofactors(A)).map((row) => row.map((x) => x * sarrus(A)));
+    if (A.flat().every((x) => Math.abs(x) <= 6) && inv.flat().every((x) => Math.abs(x) <= 9) && A.flat().filter((x) => x === 0).length <= 4 && !meq(toM(A), ident(3)) && !meq(toM(inv), toM(A))) return A;
+  }
+  return [[1, 1, 0], [0, 1, 1], [1, 0, 2]];
+}
+const gjInv = (A: number[][]) => mT(cofactors(A)).map((row) => row.map((x) => x * sarrus(A)));
+const D_GJ: [number, number][] = [[0, 199]];
+const gjKey = (s: number) => JSON.stringify(gjA(s));
+const gjOk = (p: number[]) => inD(p, D_GJ) && !Array.from({ length: p[0] }, (_, s) => s).some((s) => gjKey(s) === gjKey(p[0]));
+
+// ---------------------------------------------------------------- reciprocal equations
+const RT: [number, number][] = [[2, 1], [3, 1], [4, 1], [5, 1], [-2, 1], [-3, 1], [-4, 1], [-5, 1], [3, 2], [-3, 2], [5, 2], [4, 3]];
+const D_REC: [number, number][] = [[0, 11], [0, 11], [0, 1]];
+const recOk = (p: number[]) => inD(p, D_REC) && p[0] < p[1];
+/** (pqx² − (p² + q²)x + pq) for each root p/q, times (x + 1) when odd. */
+function recPoly([i, j, odd]: number[]): number[] {
+  const f = ([a, b]: [number, number]) => [a * b, -(a * a + b * b), a * b];
+  const mulP = (u: number[], v: number[]) => {
+    const out = Array(u.length + v.length - 1).fill(0);
+    u.forEach((x, a) => v.forEach((y, b) => (out[a + b] += x * y)));
+    return out;
+  };
+  let P = mulP(f(RT[i]), f(RT[j]));
+  if (odd) P = mulP(P, [1, 1]);
+  const g = P.reduce((a, b) => gcd(a, b), 0);
+  return P.map((c) => c / g).map((c, _, arr) => (arr[0] < 0 ? -c : c));
+}
+const recRoots = ([i, j, odd]: number[]) => [...[RT[i], RT[j]].flatMap(([a, b]) => [a / b, b / a]), ...(odd ? [-1] : [])].sort((x, y) => x - y);
+
+// ---------------------------------------------------------------- equations reducible to quadratics
+const D_RED: [number, number][] = [[0, 3], [0, 9], [1, 9]];
+const redOk = (p: number[]) => {
+  if (!inD(p, D_RED)) return false;
+  const [q, a, b] = p;
+  if (q === 0) return a >= 1 && a < b;
+  if (q === 1) return a < b && b <= 5;
+  if (q === 2) return a < b && b <= 3;
+  return a >= 1 && a !== b;
+};
+function redText([q, a, b]: number[]) {
+  if (q === 0) return `Solve x − ${a + b}√x + ${a * b} = 0 for real x (put y = √x). Give every solution, separated by commas.`;
+  if (q === 1) return `Solve 4^x − ${2 ** a + 2 ** b} × 2^x + ${2 ** (a + b)} = 0 (put y = 2^x). Give every solution, separated by commas.`;
+  if (q === 2) return `Solve 9^x − ${3 ** a + 3 ** b} × 3^x + ${3 ** (a + b)} = 0 (put y = 3^x). Give every solution, separated by commas.`;
+  const c = b - a;
+  return `Solve x ${c < 0 ? "−" : "+"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}√x − ${a * b} = 0 for real x (put y = √x). Give every solution, separated by commas.`;
+}
+const redAns = ([q, a, b]: number[]) => (q === 0 ? [a * a, b * b] : q === 3 ? [a * a] : [a, b]);
+const redF = ([q, a, b]: number[]) => (x: number) => (q === 0 ? x - (a + b) * Math.sqrt(x) + a * b : q === 1 ? 4 ** x - (2 ** a + 2 ** b) * 2 ** x + 2 ** (a + b) : q === 2 ? 9 ** x - (3 ** a + 3 ** b) * 3 ** x + 3 ** (a + b) : x + (b - a) * Math.sqrt(x) - a * b);
+
+// ---------------------------------------------------------------- volume problems giving cubics
+const D_VOLG: [number, number][] = [[0, 1], [2, 20], [-3, 6]];
+const volgOk = (p: number[]) => inD(p, D_VOLG) && p[2] !== 0 && (p[0] === 0 ? p[1] + p[2] >= 1 : p[2] >= 1);
+const volgV = ([q, x, a]: number[]) => (q === 0 ? x * x * (x + a) : 2 * x * x * (x + a));
+function volgText(p: number[], w = false) {
+  const [q, x, a] = p;
+  const V = volgV(p);
+  if (q === 0) return w ? `A gift box has a square base of side x cm, and its height is ${Math.abs(a)} cm ${a > 0 ? "more" : "less"} than the side of the base. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find x, in cm.` : `A water tank in the shape of a cuboid has a square base of side x m and a height of (x ${a < 0 ? "−" : "+"} ${Math.abs(a)}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.`;
+  return w ? `A wooden chest has height x cm; its length is twice its height, and its width is ${a} cm more than its height. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find the height x, in cm.` : `A cuboid-shaped storage bin has height x m, length 2x m and width (x + ${a}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.`;
+}
+
+// ---------------------------------------------------------------- Vieta with a box
+const D_VBOX: [number, number][] = [[1, 9], [1, 9], [1, 9], [0, 3]];
+const vboxOk = (p: number[]) => inD(p, D_VBOX) && p[0] <= p[1] && p[1] <= p[2];
+const vboxS = ([a, b, c]: number[]) => ({ p: a + b + c, q: a * b + b * c + c * a, r: a * b * c });
+const VBQ = ["the total surface area of the box, in cm²", "the total length of all 12 edges of the box, in cm", "the volume of the box, in cm³", "the square of the length of a diagonal of the box (from one corner to the opposite corner), in cm²"];
+const vboxAns = (p: number[]) => {
+  const { p: s1, q, r } = vboxS(p);
+  return [2 * q, 4 * s1, r, s1 * s1 - 2 * q][p[3]];
+};
+function vboxText(p: number[], w = false) {
+  const { p: s1, q, r } = vboxS(p);
+  const eq = `x³ − ${s1}x² + ${q}x − ${r} = 0`;
+  return w ? `An engineer designing a water tank finds that its length, breadth and height, in metres, are the three roots of ${eq}. Without solving the equation, find ${VBQ[p[3]].replace(/cm/g, "m")}.` : `The length, breadth and height of a cuboid-shaped box, in cm, are the three roots of ${eq}. Without solving the equation, use the relations between roots and coefficients to find ${VBQ[p[3]]}.`;
+}
+
 export const B16: Def[] = [
   // ================================================================ AM, GM and AM ≥ GM
   {
@@ -755,6 +1175,7 @@ export const B16: Def[] = [
     keep: ([t, d, e]) => (t === 0 ? d !== 0 : Math.abs(d) <= 4 && Math.abs(e) <= 5),
     cap: 400,
     difficulty: ([t, d, e]) => (t ? 3 : d > 0 && e >= 0 ? 1 : 2),
+    word: (p) => `A savings club in Karaikudi writes down its balance, in hundreds of rupees, at the end of each month (a negative number means the club owes money). For months 1 to 5 the balances are ${genTerms(p, 5).map(n_).join(", ")}, and the pattern continues.${p[0] ? " (The month-to-month changes go up by the same amount each time.)" : ""} Write a formula for the balance aₙ at the end of month n.`,
     teach: {
       idea: "A general term is a rule that gives aₙ straight from n. If the differences are constant (d), aₙ = dn + (a₁ − d); if the second differences are a constant 2, aₙ = n² + bn + c.",
       method: "Write the differences. Constant: the coefficient of n is d, then fix the constant from a₁. Second differences 2: write n² + bn + c and find b and c from a₁ and a₂.",
@@ -933,6 +1354,7 @@ export const B16: Def[] = [
     keep: ([c3, c2, c1, c0]) => (c3 !== 0 || c2 !== 0) && [c3, c2, c1, c0].filter((x) => x !== 0).length >= 2,
     cap: 400,
     difficulty: ([c3, c2, c1, c0, n]) => (c3 === 0 && c0 === 0 && n <= 10 ? 1 : c3 && c0 ? 3 : 2),
+    word: ([c3, c2, c1, c0, n]) => `In a science-club experiment in Vellore, the change in the number of seedlings in tray k is ${polyS([c3, c2, c1, c0], "k")} (a negative number means seedlings were lost). The club has trays 1 to ${n}. What is the total change over all ${n} trays?`,
     teach: {
       idea: "Σ is linear: Σ(a·f(k) + b·g(k)) = aΣf(k) + bΣg(k), and the sum of a constant c over n terms is cn.",
       method: "Split into Σk³, Σk², Σk and Σ1, use [n(n + 1)/2]², n(n + 1)(2n + 1)/6, n(n + 1)/2 and n, then combine with the coefficients.",
@@ -1010,6 +1432,13 @@ export const B16: Def[] = [
     domain: [[0, 3], [2, 6], [2, 5], [0, 4]],
     keep: ([v, , n, o]) => (v === 2 ? o === 0 : v === 3 ? o >= 1 && o <= n - 1 : true),
     difficulty: ([v]) => (v === 1 ? 1 : v === 0 ? 2 : 3),
+    word: ([v, m, n, o]) => {
+      const Bs = SHAPE(n).join(", ");
+      if (v === 0) return `A lift in a Chennai office stops at the floors numbered x with ${n_(o - 2)} ≤ x < ${n_(o - 2 + m)} (negative numbers are basement floors). A courier has parcels marked ${Bs}. A delivery is a pair (floor, parcel). How many different deliveries are possible?`;
+      if (v === 1) return `A school uniform shop sells shirts in sizes 1 to ${m}, trousers in styles ${Bs} and caps in ${o + 2} colours. An outfit is an ordered triple (shirt size, trouser style, cap colour). How many different outfits are there?`;
+      if (v === 2) return `School P has kabaddi teams numbered 1 to ${m} and school Q has teams named ${Bs}. Every team of P plays every team of Q twice, once at home and once away. A match is written as (home team, away team). How many different matches are there?`;
+      return `A shoe shop sells sizes 1 to ${m} in the colours ${Bs}. A second shop sells sizes 1 to ${m} in the colours ${SHAPE(2 * n).slice(n - o, 2 * n - o).join(", ")}. How many different (size, colour) pairs can be bought at BOTH shops?`;
+    },
     teach: {
       idea: "A × B is the set of all ordered pairs (a, b) with a ∈ A and b ∈ B. Each of the n(A) first entries goes with each of the n(B) second entries, so n(A × B) = n(A)·n(B).",
       method: "Count each set first (list it if it is in set-builder form), then multiply. A × B and B × A have the same number of pairs, but different pairs: (a, b) ≠ (b, a) unless a = b.",
@@ -1127,6 +1556,7 @@ export const B16: Def[] = [
     domain: [[-5, 3], [2, 6], [-3, 5], [2, 6], [0, 3], [0, 3], [0, 2]],
     cap: 400,
     difficulty: ([, , , , , , op]) => (op === 0 ? 1 : op === 1 ? 2 : 3),
+    word: (p) => `Machine A in a Hosur factory works safely for temperatures (in °C) in the interval ${ivS(ivA(p))}, and machine B for temperatures in ${ivS(ivB(p))}. Find the set of temperatures at which ${["both machines work safely", "at least one of the machines works safely", "machine A works safely but machine B does not"][p[6]]}. Write it in interval notation (if it has two pieces, join them with ∪).`,
     teach: {
       idea: "An interval is a set of real numbers. A ∩ B keeps the numbers in both, A ∪ B the numbers in either, and A − B the numbers of A that are not in B. A square bracket includes its end; a round one leaves it out.",
       method: "Draw both intervals on one number line, shade what the operation keeps, then read off the ends, deciding for each end whether that number itself is in the result.",
@@ -1319,6 +1749,7 @@ export const B16: Def[] = [
     keep: ([a, b, c, d]) => (c === 0 ? d === 1 && a !== 0 : a * d - b * c !== 0),
     cap: 400,
     difficulty: ([a, , c]) => (c === 0 && a > 0 ? 1 : c === 0 ? 2 : 3),
+    word: ([a, b, c, d]) => `A shop's billing app hides each price x by turning it into a code number y = f(x) = ${c === 0 ? polyS([a, b]) : fracS(a, b, c, d)}. The manager needs the formula that turns a code number back into the price. Find f⁻¹(x).`,
     teach: {
       idea: "f⁻¹ undoes f: y = f(x) exactly when x = f⁻¹(y). It exists because f is one-one and onto its codomain.",
       method: "Write y = f(x), solve for x in terms of y (for a fraction, multiply up and collect the x terms), then rename y as x.",
@@ -2031,11 +2462,17 @@ export const B16: Def[] = [
     type: "integer",
     mc: true,
     parse: none,
-    // [s, mode]: a quintic whose sign pattern is coded by s (see descPoly); mode 0 positive roots, 1 negative roots
-    reject: ([s, mode]) => (s < 0 || s > 161 || (mode !== 0 && mode !== 1) ? "Quintics with a non-zero constant term." : null),
-    prompt: ([s, mode]) => `Use Descartes' rule of signs to find the greatest possible number of ${mode ? "negative" : "positive"} real roots of ${polyS(descPoly(s))} = 0.`,
+    // [s, mode]: a quintic whose sign pattern is coded by s (see descPoly); mode 0 positive roots, 1 negative roots, 2 the least number of non-real roots
+    reject: ([s, mode]) => (s < 0 || s > 161 || mode < 0 || mode > 2 || !Number.isInteger(mode) ? "Quintics with a non-zero constant term." : null),
+    prompt: ([s, mode]) => (mode === 2 ? `Use Descartes' rule of signs to find the least possible number of non-real (complex) roots of ${polyS(descPoly(s))} = 0.` : `Use Descartes' rule of signs to find the greatest possible number of ${mode ? "negative" : "positive"} real roots of ${polyS(descPoly(s))} = 0.`),
     solve: ([s, mode]) => {
       const cs = descPoly(s);
+      if (mode === 2) {
+        const neg = cs.map((c, i) => ((5 - i) % 2 ? -c : c));
+        const pc = changes(cs);
+        const nc = changes(neg);
+        return { steps: [st("signs", "count", PRA, [cs.filter((c) => c).map((c) => (c > 0 ? "+" : "−")).join(" ")], pc), st("substitute", "substitute", PRA, ["−x"], polyS(neg)), st("signs-neg", "count", PRA, [neg.filter((c) => c).map((c) => (c > 0 ? "+" : "−")).join(" ")], nc), st("nonreal", "subtract", PRA, [5, pc, nc], 5 - pc - nc)], answer: 5 - pc - nc };
+      }
       const use = mode ? cs.map((c, i) => ((5 - i) % 2 ? -c : c)) : cs;
       const ch = changes(use);
       return { steps: [...(mode ? [st("substitute", "substitute", PRA, ["−x"], polyS(use))] : []), st("signs", "count", PRA, [use.filter((c) => c).map((c) => (c > 0 ? "+" : "−")).join(" ")], ch)], answer: ch };
@@ -2043,6 +2480,11 @@ export const B16: Def[] = [
     // independent: a sign string, scanned with a pattern for each change
     validate: ([s, mode], v) => {
       const cs = descPoly(s);
+      if (mode === 2) {
+        const count = (m: number) => (cs.map((c, i) => (m && (5 - i) % 2 ? -c : c)).map((c) => (c > 0 ? "+" : c < 0 ? "-" : "")).join("").match(/(?=(\+-|-\+))/g) ?? []).length;
+        // 0 is not a root (constant term ≠ 0), so at most count(0) + count(1) of the 5 roots are real
+        return v === 5 - count(0) - count(1);
+      }
       const signs = cs
         .map((c, i) => (mode && (5 - i) % 2 ? -c : c))
         .map((c) => (c > 0 ? "+" : c < 0 ? "-" : ""))
@@ -2053,6 +2495,16 @@ export const B16: Def[] = [
       const cs = descPoly(s);
       const use = mode ? cs.map((c, i) => ((5 - i) % 2 ? -c : c)) : cs;
       const zeroCount = use.reduce((n, c, i) => n + (i > 0 && Math.sign(c) !== Math.sign(use[i - 1]) ? 1 : 0), 0);
+      if (mode === 2) {
+        const pc = changes(cs);
+        const nc = changes(cs.map((c, i) => ((5 - i) % 2 ? -c : c)));
+        const ans = 5 - pc - nc;
+        return [
+          B("real-count-given", "conceptual", PRA, `The greatest possible number of real roots (${pc} + ${nc} = ${pc + nc}) was given; the question asks how many roots at least are NOT real: 5 − ${pc + nc}.`, pc + nc),
+          B("positive-only", "procedural", PRA, "Only the positive roots were taken away from 5; the negative roots (sign changes of p(−x)) are real too.", 5 - pc),
+          B("zeros-as-changes", "procedural", PRA, "Missing terms were counted as sign changes; skip the zero coefficients.", Math.max(0, 5 - zeroCount - nc)),
+        ].filter((b) => b.predict !== ans);
+      }
       return [
         ...(mode ? [B("p-not-p-of-minus-x", "procedural", PRA, "The sign changes of p(x) were counted; negative roots need p(−x), where the odd powers change sign.", changes(cs))] : []),
         B("zeros-as-changes", "procedural", PRA, "Missing terms (zero coefficients) were counted as sign changes; skip the zero coefficients and compare the non-zero ones.", zeroCount),
@@ -2060,11 +2512,12 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "substitute" ? `p(−x) = ${s.value}` : `Signs: ${s.inputs[0]}, so ${s.value} change${s.value === 1 ? "" : "s"}`),
+    explain: (s) => (s.id === "substitute" ? `p(−x) = ${s.value}` : s.id === "nonreal" ? `At most ${s.inputs[1]} positive and ${s.inputs[2]} negative roots, and 0 is not a root, so at least 5 − ${s.inputs[1]} − ${s.inputs[2]} = ${s.value} roots are not real` : `Signs: ${s.inputs[0]}, so ${s.value} change${s.value === 1 ? "" : "s"}`),
     // a quintic has at most 5 sign changes
     range: [0, 5],
-    domain: [[0, 161], [0, 1]],
+    domain: [[0, 161], [0, 2]],
     difficulty: ([s, mode]) => (mode ? 3 : descPoly(s).includes(0) ? 2 : 1),
+    word: ([s, mode]) => `An engineer models the bending of a long beam by p(x) = ${polyS(descPoly(s))}, where x is the distance in metres from a support (positive to the east, negative to the west); the beam is level where p(x) = 0. Without solving, use Descartes' rule of signs to find ${mode === 2 ? "the least possible number of the five roots of p(x) = 0 that are not real numbers (and so give no level point)" : `the greatest possible number of level points to the ${mode ? "west (negative x)" : "east (positive x)"}`}.`,
     teach: {
       idea: "The number of positive roots of p(x) = 0 is at most the number of sign changes in its coefficients (and differs from it by an even number). For negative roots, count the changes in p(−x).",
       method: "Write the signs of the non-zero coefficients in order, skipping zeros, and count the changes. For p(−x), first change the sign of each odd-power coefficient.",
@@ -2244,6 +2697,7 @@ export const B16: Def[] = [
     keep: ([a, b, c, d]) => a * d - b * c !== 0 && [a, b, c, d].filter((x) => x === 0).length <= 1,
     cap: 400,
     difficulty: ([a, b, c, d]) => (Math.abs(a * d - b * c) === 1 ? 1 : Math.abs(a * d - b * c) <= 6 ? 2 : 3),
+    word: ([a, b, c, d]) => `Two friends send secret messages: each pair of letter numbers is written as a column and multiplied by A = ${matN([[a, b], [c, d]])}. To read the messages, the receiver must multiply by A⁻¹. Find A⁻¹. (Fractions are fine as entries.)`,
     teach: {
       idea: "A⁻¹ = (1/|A|) adj A, and it exists only when |A| ≠ 0. For [[a, b], [c, d]], adj A = [[d, −b], [−c, a]].",
       method: "Find |A| = ad − bc; swap a and d, change the signs of b and c; divide every entry by |A|.",
@@ -2533,3 +2987,934 @@ function cubicDisc(a: number, b: number, c: number, d: number) {
 function vform(p: number, q: number, t: number, k: number): [number, number] {
   return t === 0 ? [p - 2 * k, k * k - p * k + q] : t === 1 ? [k * p, k * k * q] : [-(p * p - 2 * q), q * q];
 }
+
+// gap@1 additions, registered with the batch
+export const NEW16: Def[] = [
+  // ================================================================ gap@1: listing products, ordered pairs, constructing and classifying matrices
+  {
+    id: "apcartl",
+    arity: 4,
+    title: "Writing out the ordered pairs (or triples) of a Cartesian product",
+    competency: CART,
+    type: "choice",
+    parse: none,
+    // [k, m, n, s]: A = {s, …, s + m − 1}, B = {p, q, r} (n letters); k 0 A × B, 1 A × A, 2 B × A, 3 A × B × C with C = {10, 20} (n = 2) or {10}
+    reject: (p) => (cl16Ok(p) ? null : "Small sets: A × B, A × A, B × A, or A × B × C."),
+    prompt: (p) => {
+      const { A, B: Bs, C } = clSets(p);
+      const what = ["A × B", "A × A", "B × A", "A × B × C"][p[0]];
+      return `A = ${setS(A)}${p[0] === 1 ? "" : ` and B = ${setS(Bs)}`}${p[0] === 3 ? `, C = ${setS(C)}` : ""}. Which set is ${what}?`;
+    },
+    choices: cl16Choices,
+    solve: (p) => {
+      const right = setS(cl16Lists(p)[0].list.map(tupS));
+      return { steps: [st("pairs", "list", CART, [["A × B", "A × A", "B × A", "A × B × C"][p[0]]], right), st("pick", "compare", CART, [right], cl16Choices(p).indexOf(right))], answer: cl16Choices(p).indexOf(right) };
+    },
+    // independent: read the option back and check it has exactly the tuples (x, y[, z]) with x, y, z from the right sets
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const opt = cl16Choices(p)[v];
+      if (!opt) return false;
+      const { A, B: Bs, C } = clSets(p);
+      const sets = [[A, Bs], [A, A], [Bs, A], [A, Bs, C]][p[0]];
+      const tuples = [...opt.matchAll(/\(([^()]*)\)/g)].map((m) => m[1].split(", "));
+      const keys = new Set(tuples.map((t) => t.join("|")));
+      const want = sets.reduce((n, S) => n * S.length, 1);
+      return keys.size === tuples.length && tuples.length === want && tuples.every((t) => t.length === sets.length && t.every((x, i) => sets[i].includes(x)));
+    },
+    bugs: (p) => {
+      const ch = cl16Choices(p);
+      const out: Bug[] = [];
+      for (const o of cl16Lists(p)) {
+        const i = ch.indexOf(setS(o.list.map(tupS)));
+        if (o.why === "order") out.push(B("order-swapped", "conceptual", CART, `The entries were written the wrong way round; in ${["A × B", "A × A", "B × A", "A × B × C"][p[0]]} the first entry comes from the first set named.`, i));
+        if (o.why === "zip") out.push(B("matched-only", "conceptual", CART, "Only the first element was paired with the first, the second with the second; a Cartesian product pairs EVERY element of the first set with EVERY element of the second.", i));
+        if (o.why === "diagonal") out.push(B("same-left-out", "conceptual", CART, "Pairs like (a, a) were left out; A × A contains every ordered pair from A, including pairs with equal entries.", i));
+        if (o.why === "missing") out.push(B("pair-missed", "procedural", CART, `One ${p[0] === 3 ? "triple" : "pair"} was missed; there must be ${o.list.length + 1} of them (the product of the numbers of elements).`, i));
+        if (o.why === "pairs") out.push(B("third-set-ignored", "conceptual", CART, "Only A × B was written; A × B × C is made of ordered TRIPLES (a, b, c).", i));
+      }
+      return out.filter((b) => b.predict !== -1);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "pairs" ? `Go through the first set and pair each element with every element of the next: ${s.value}` : `So the answer is ${s.inputs[0]}`),
+    domain: D_CL16,
+    keep: cl16Ok,
+    difficulty: ([k]) => (k === 0 ? 1 : k === 3 ? 3 : 2),
+    word: (p) => {
+      const { A, B: Bs, C } = clSets(p);
+      const what = ["(table number, waiter)", "(table number, table number)", "(waiter, table number)", "(table number, waiter, menu number)"][p[0]];
+      return `At a restaurant in Tirunelveli the tables are numbered A = ${setS(A)}${p[0] === 1 ? "" : `, the waiters are called B = ${setS(Bs)}`}${p[0] === 3 ? ` and the menus are numbered C = ${setS(C)}` : ""}. The manager lists every possible ${what}${p[0] === 1 ? " pair (for moving a group from one table to another, including staying put)" : ""}. Which set is this list, the Cartesian product ${["A × B", "A × A", "B × A", "A × B × C"][p[0]]}?`;
+    },
+    teach: {
+      idea: "A × B is the set of all ordered pairs (a, b) with a ∈ A and b ∈ B; A × B × C is the set of all ordered triples (a, b, c). Order matters: (1, p) is not (p, 1).",
+      method: "Take the first element of the first set and pair it with every element of the second set; then the next element; and so on. Check the count: n(A) × n(B) (× n(C)).",
+      alternatives: [
+        { id: "grid", title: "A table of pairs", kind: "procedural", text: ["Write the first set down the side and the second across the top.", "Each cell is one ordered pair; read them row by row."] },
+        { id: "tree", title: "A tree for triples", kind: "conceptual", text: ["Branch for each element of A, then for each element of B, then of C.", "Each path from the root gives one ordered triple."] },
+      ],
+    },
+    limits: "Sets of up to three elements; the number of pairs is counted in apcartn.",
+  },
+  {
+    id: "apcarteq",
+    arity: 4,
+    title: "Equal ordered pairs",
+    competency: CART,
+    type: "tuple",
+    mc: true,
+    parse: none,
+    // [f, x, y, s]: f 0 (x/k + u, y + w/k) = (…, …); 1 (x + y, x − y) = (…); 2 (2x + y, x − 3y) = (…)
+    reject: (p) => (ceqOk(p) ? null : "Pairs with whole-number solutions x, y from −6 to 6."),
+    prompt: ceqText,
+    solve: ([f, x, y, s]) => ({
+      steps: [st("equate", "compare", CART, ["first entries", "second entries"], f === 0 ? "two equations, one in each unknown" : "two simultaneous equations"), st("solve", "solve", f === 0 ? LIN : "MATH.algebra.linear-systems", [f, s], `(${n_(x)}, ${n_(y)})`)],
+      answer: `(${n_(x)}, ${n_(y)})`,
+    }),
+    // independent: substitute the answer into both entries
+    validate: ([f, x, y, s], v) => {
+      const l = typeof v === "string" ? readList(v) : null;
+      if (!l || l.length !== 2) return false;
+      const [X, Y] = l;
+      if (f === 0) return req(radd(rdiv(X, rr(ceqK(s))), rr(ceqU(s))), rr(x + ceqU(s) * ceqK(s), ceqK(s))) && req(radd(Y, rr(ceqW(s), ceqK(s))), rr(y * ceqK(s) + ceqW(s), ceqK(s)));
+      if (f === 1) return req(radd(X, Y), rr(x + y)) && req(rsub(X, Y), rr(x - y));
+      return req(radd(rmul(rr(2), X), Y), rr(2 * x + y)) && req(rsub(X, rmul(rr(3), Y)), rr(x - 3 * y));
+    },
+    bugs: ([f, x, y, s]) => {
+      const ans = `(${n_(x)}, ${n_(y)})`;
+      const out: Bug[] = [];
+      if (f === 0) {
+        const k = ceqK(s);
+        const u = ceqU(s);
+        out.push(B("not-multiplied", "procedural", LIN, `x/${k} = ${rs(rr(x, k))} was found, but not multiplied by ${k} to get x.`, tup([rr(x, k), rr(y)])));
+        out.push(B("entries-swapped", "conceptual", CART, "The first entry was matched with the second; equal ordered pairs have equal FIRST entries and equal SECOND entries.", null));
+        out.push(B("sign-of-u", "procedural", LIN, `${u} was moved across without changing its sign.`, tup([rr(x + 2 * u * k), rr(y)])));
+      } else {
+        if (x !== y) out.push(B("swapped", "procedural", CART, "x and y were written the wrong way round; the answer is (x, y).", `(${n_(y)}, ${n_(x)})`));
+        if (f === 1 && y !== 0) out.push(B("half-forgotten", "procedural", LIN, "Adding the equations gives 2x; it must be divided by 2.", `(${n_(2 * x)}, ${n_(y)})`));
+        if (f === 2) out.push(B("sign", "procedural", LIN, "A sign was lost when one equation was subtracted from the other; check by substituting.", `(${n_(x)}, ${n_(-y)})`));
+      }
+      return out.filter((b) => b.predict !== null && b.predict !== ans);
+    },
+    distractors: ([, x, y]) => [`(${n_(x + 1)}, ${n_(y)})`, `(${n_(x)}, ${n_(y - 1)})`],
+    variants: () => [],
+    explain: (s) => (s.id === "equate" ? `Equal ordered pairs: equate the ${s.inputs[0]} and the ${s.inputs[1]}: ${s.value}` : `Solving gives (x, y) = ${s.value}`),
+    domain: D_CEQ,
+    keep: ceqOk,
+    difficulty: ([f]) => (f === 0 ? 2 : f === 1 ? 1 : 3),
+    teach: {
+      idea: "(a, b) = (c, d) exactly when a = c AND b = d: the order of the entries matters, so each position is compared on its own.",
+      method: "Write first entry = first entry and second entry = second entry, then solve the two equations (together, if both contain x and y).",
+      alternatives: [{ id: "check", title: "Check by substituting", kind: "procedural", text: ["Put your x and y back into both entries of the left-hand pair.", "You must get exactly the right-hand pair, in the same order."] }],
+    },
+    limits: "Pairs with whole-number solutions; equality of triples is handled in the matrix-equality family.",
+  },
+  {
+    id: "apmcon",
+    arity: 4,
+    title: "Constructing a matrix from a rule aᵢⱼ (and its transpose)",
+    competency: MAT,
+    type: "matrix",
+    mc: true,
+    parse: none,
+    // [m, n, t, T]: an m × n matrix with aᵢⱼ = MRULES[t]; T = 1 asks for Aᵀ
+    reject: (p) => (mconOk(p) ? null : "Orders up to 3 × 3 with one of ten rules."),
+    prompt: ([m, n, t, T]) => `Construct the ${m} × ${n} matrix A = [aᵢⱼ] whose elements are given by aᵢⱼ = ${MRULES[t].text}${T ? ", and write its transpose Aᵀ" : ""}. Write ${T ? "Aᵀ" : "A"} as [[…], […]], row by row. (Fractions are fine as entries.)`,
+    solve: (p) => {
+      const A = mconA(p);
+      return { steps: [st("entries", "evaluate", MAT, [MRULES[p[2]].text], matS(A)), ...(p[3] ? [st("transpose", "transpose", "MATH.matrices.transpose-symmetry", ["Aᵀ"], matS(mT(A)))] : [])], answer: matS(p[3] ? mT(A) : A) };
+    },
+    // independent: read the rule as an expression and evaluate it for each (i, j) with the expression evaluator
+    validate: ([m, n, t, T], v) => {
+      const X = typeof v === "string" ? readMat(v) : null;
+      if (!X) return false;
+      const rows = T ? n : m;
+      const cols = T ? m : n;
+      if (X.length !== rows || X[0].length !== cols) return false;
+      const e = parse(MRULE_TYPED[t]);
+      return X.every((r, a) => r.every((x, b) => near(rv(x), evaluate(e, T ? { i: b + 1, j: a + 1 } : { i: a + 1, j: b + 1 }), 1e-12)));
+    },
+    bugs: (p) => {
+      const [m, n, t, T] = p;
+      const A = mconA(p);
+      const want = matS(T ? mT(A) : A);
+      const swapped = Array.from({ length: m }, (_, i) => Array.from({ length: n }, (_, j) => MRULES[t].f(j + 1, i + 1)));
+      const zero = t === 9 ? null : Array.from({ length: m }, (_, i) => Array.from({ length: n }, (_, j) => MRULES[t].f(i, j)));
+      const out: Bug[] = [
+        B("i-j-swapped", "conceptual", MAT, "i and j were swapped: i is the ROW number and j the COLUMN number, so a₁₂ is in row 1, column 2.", matS(T ? mT(swapped) : swapped)),
+        ...(zero ? [B("from-zero", "procedural", MAT, "The rows and columns were numbered from 0; they start from 1, so the top-left entry is a₁₁.", matS(T ? mT(zero) : zero))] : []),
+      ];
+      if (T) out.push(B("not-transposed", "procedural", "MATH.matrices.transpose-symmetry", "A was given; the transpose Aᵀ turns each row of A into a column.", matS(A)));
+      return out.filter((b) => b.predict !== want && (typeof b.predict !== "string" || readMat(b.predict)?.length === (T ? n : m)) || b.id === "not-transposed").filter((b) => b.predict !== want);
+    },
+    distractors: (p) => {
+      const A = mconA(p);
+      const X = p[3] ? mT(A) : A;
+      return [matS(X.map((r) => r.map((x) => radd(x, rr(1))))), matS(X.map((r) => r.map((x) => rmul(x, rr(-1)))))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "entries" ? `Put i = row number and j = column number into aᵢⱼ = ${s.inputs[0]}: A = ${s.value}` : `Rows become columns: Aᵀ = ${s.value}`),
+    domain: D_MCON,
+    keep: mconOk,
+    difficulty: ([m, n, t, T]) => (m * n <= 4 && t <= 3 && !T ? 1 : t >= 4 || T ? 3 : 2),
+    teach: {
+      idea: "A = [aᵢⱼ] of order m × n has m rows and n columns; aᵢⱼ is the entry in row i and column j. The transpose Aᵀ has the rows of A as its columns, so it has order n × m.",
+      method: "Draw an empty m × n grid. For each cell put in its row number i and column number j and work out the rule. For Aᵀ, write the first row of A as the first column, and so on.",
+      alternatives: [{ id: "label", title: "Label the cells", kind: "procedural", text: ["Write the label ij in each cell first (11, 12, 13 / 21, 22, 23).", "Then replace each label by the value of the rule."] }],
+    },
+    limits: "Orders up to 3 × 3 with simple rules; the transpose of a product is in the transpose family.",
+  },
+  {
+    id: "apmtype",
+    arity: 3,
+    title: "The order and the type of a matrix",
+    competency: MAT,
+    type: "choice",
+    parse: none,
+    // [q, t, seed]: q 0 the order (MORD[t]); q 1 the type MTYPE[t]
+    reject: (p) => (mtyOk(p) ? null : "Matrices up to 4 × 4 of each type."),
+    prompt: (p) => `A = ${matN(mtyMatrix(p))}. ${p[0] === 0 ? "What is the order of A?" : "Which description of A is the most precise true one?"}`,
+    choices: mtyOpts,
+    solve: (p) => {
+      const A = mtyMatrix(p);
+      const lab = p[0] === 0 ? ordS(A.length, A[0].length) : MTYPE[p[1]];
+      return { steps: [st("look", "count", MAT, [A.length, A[0].length], lab), st("pick", "compare", MAT, [lab], mtyOpts(p).indexOf(lab))], answer: mtyOpts(p).indexOf(lab) };
+    },
+    // independent: count rows and columns and inspect the entries
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const A = mtyMatrix(p);
+      return mtyOpts(p)[v] === (p[0] === 0 ? ordS(A.length, A[0].length) : MTYPE[mtyRead(A)]);
+    },
+    bugs: (p) => {
+      const ch = mtyOpts(p);
+      const A = mtyMatrix(p);
+      const out: Bug[] = [];
+      if (p[0] === 0) {
+        out.push(B("columns-first", "recall", MAT, "The number of columns was given first; the order is (number of rows) × (number of columns).", ch.indexOf(ordS(A[0].length, A.length))));
+        out.push(B("entries-counted", "conceptual", MAT, "The number of entries was used; the order gives the numbers of rows and of columns.", ch.indexOf(`order ${A.length * A[0].length} × 1`)));
+      } else {
+        const t = p[1];
+        const say: Record<string, string> = {
+          "0-1": "A single row was called a column matrix; a row matrix has one row, a column matrix one column.",
+          "1-0": "A single column was called a row matrix; a column matrix has one column.",
+          "2-3": "A square matrix with a non-zero entry off the diagonal was called diagonal; a diagonal matrix has zeros everywhere off the main diagonal.",
+          "3-4": "A diagonal matrix with different diagonal entries was called scalar; a scalar matrix has all its diagonal entries equal.",
+          "4-5": "A scalar matrix was called the identity; the identity has 1s on the diagonal.",
+          "5-4": "The identity was described only as a scalar matrix 'not the identity'; it IS the identity (scalar with k = 1).",
+          "6-5": "The zero matrix was called the identity; every entry of a zero matrix is 0.",
+          "7-2": "A rectangular matrix was called square; a square matrix has as many rows as columns.",
+        };
+        for (const d of MTCONF[t]) {
+          const tx = say[`${t}-${d}`];
+          if (tx) out.push(B(`confused-${t}-${d}`, "conceptual", MAT, tx, ch.indexOf(MTYPE[d])));
+        }
+      }
+      return out.filter((b) => b.predict !== -1);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "look" ? `A has ${s.inputs[0]} row${Number(s.inputs[0]) === 1 ? "" : "s"} and ${s.inputs[1]} column${Number(s.inputs[1]) === 1 ? "" : "s"}: ${s.value}` : `So the answer is ${s.inputs[0]}`),
+    domain: D_MTY,
+    keep: mtyOk,
+    difficulty: ([q, t]) => (q === 0 ? 1 : t <= 1 || t >= 5 ? 1 : t === 7 ? 2 : 3),
+    teach: {
+      idea: "The order of a matrix is rows × columns. A row matrix has one row, a column matrix one column, a square matrix as many rows as columns. A diagonal matrix is square with zeros off the main diagonal; a scalar matrix is diagonal with equal diagonal entries; the identity is scalar with 1s; a zero matrix has every entry 0.",
+      method: "Count the rows, then the columns. Then check, from the most general to the most special: square? zeros off the diagonal? equal diagonal entries? are they 1? (or are all entries 0?)",
+      alternatives: [{ id: "ladder", title: "A ladder of types", kind: "conceptual", text: ["square ⊃ diagonal ⊃ scalar ⊃ identity: each is a special case of the one before.", "The most precise description is the lowest rung the matrix reaches."] }],
+    },
+    limits: "Matrices up to 4 × 4; triangular, symmetric and skew-symmetric matrices are in the transpose family.",
+  },
+  {
+    id: "apmeq",
+    arity: 4,
+    title: "Equality of matrices",
+    competency: MAT,
+    type: "tuple",
+    mc: true,
+    parse: none,
+    // [f, x, y, z]: f 0 [[x + y, 3], [−1, x − y]]; f 1 [[2x − y, 5], [x + 2y, 0]]; f 2 [[x + 3, 2y], [z − 4, 7]]
+    reject: (p) => (meqOk(p) ? null : "Whole-number unknowns from −6 to 6."),
+    prompt: meqText,
+    solve: ([f, x, y, z]) => {
+      const ans = f === 2 ? `(${n_(x)}, ${n_(y)}, ${n_(z)})` : `(${n_(x)}, ${n_(y)})`;
+      return { steps: [st("equate", "compare", MAT, ["corresponding entries"], f === 2 ? "three equations" : "two simultaneous equations"), st("solve", "solve", f === 2 ? LIN : "MATH.algebra.linear-systems", [f], ans)], answer: ans };
+    },
+    // independent: substitute into every entry
+    validate: ([f, x, y, z], v) => {
+      const l = typeof v === "string" ? readList(v) : null;
+      if (!l) return false;
+      if (f === 2) return l.length === 3 && req(radd(l[0], rr(3)), rr(x + 3)) && req(rmul(rr(2), l[1]), rr(2 * y)) && req(rsub(l[2], rr(4)), rr(z - 4));
+      if (l.length !== 2) return false;
+      const [X, Y] = l;
+      return f === 0 ? req(radd(X, Y), rr(x + y)) && req(rsub(X, Y), rr(x - y)) : req(rsub(rmul(rr(2), X), Y), rr(2 * x - y)) && req(radd(X, rmul(rr(2), Y)), rr(x + 2 * y));
+    },
+    bugs: ([f, x, y, z]) => {
+      const out: Bug[] = [];
+      if (f === 2) {
+        if (y !== 0) out.push(B("halving", "procedural", LIN, `2y = ${n_(2 * y)} was solved by subtracting 2; divide by 2.`, `(${n_(x)}, ${n_(2 * y - 2)}, ${n_(z)})`));
+        out.push(B("sign", "procedural", LIN, "A number was moved across without changing its sign.", `(${n_(x + 6)}, ${n_(y)}, ${n_(z - 8)})`));
+      } else {
+        if (x !== y) out.push(B("swapped", "procedural", MAT, "x and y were written the wrong way round.", `(${n_(y)}, ${n_(x)})`));
+        if (f === 0 && y !== 0) out.push(B("half-forgotten", "procedural", LIN, "Adding the two equations gives 2x; divide by 2.", `(${n_(2 * x)}, ${n_(y)})`));
+      }
+      out.push(B("entries-mismatched", "conceptual", MAT, "Entries in different positions were set equal; equal matrices have equal entries in the SAME position.", null));
+      return out.filter((b) => b.predict !== null);
+    },
+    distractors: ([f, x, y, z]) => (f === 2 ? [`(${n_(x + 1)}, ${n_(y)}, ${n_(z)})`, `(${n_(x)}, ${n_(y)}, ${n_(z + 1)})`] : [`(${n_(x + 1)}, ${n_(y)})`, `(${n_(x)}, ${n_(y + 1)})`]),
+    variants: () => [],
+    explain: (s) => (s.id === "equate" ? `Equal matrices have equal ${s.inputs[0]}: ${s.value}` : `Solving: ${s.value}`),
+    domain: D_MEQ,
+    keep: meqOk,
+    difficulty: ([f]) => (f === 2 ? 1 : f === 0 ? 2 : 3),
+    teach: {
+      idea: "Two matrices are equal when they have the same order and every pair of corresponding entries is equal.",
+      method: "Set each entry on the left equal to the entry in the same position on the right, then solve the equations you get.",
+      alternatives: [{ id: "check", title: "Check every entry", kind: "procedural", text: ["Put your values back into the left-hand matrix.", "Every entry must match the right-hand matrix, position by position."] }],
+    },
+    limits: "2 × 2 matrices with whole-number unknowns.",
+  },
+  {
+    id: "apmmod",
+    arity: 8,
+    title: "Modelling a situation with a matrix product",
+    competency: MAT,
+    type: "matrix",
+    mc: true,
+    parse: none,
+    // [q11 … q23, ctx, s]: production (2 × 3) times needs per item MMR[s] (3 × 2); ctx 0 workshops, 1 canteens
+    reject: (p) => (mmodOk(p) ? null : "Daily quantities 1 to 6 for two producers and three items."),
+    prompt: (p) => mmodText(p),
+    solve: (p) => {
+      const P = mmodP(p);
+      return { steps: [st("model", "write", MAT, [matN(mmodQ(p)), matN(MMR[p[7]])], "(2 × 3)(3 × 2) gives a 2 × 2 matrix"), st("product", "multiply", MAT, ["rows × columns"], matS(P))], answer: matS(P) };
+    },
+    // independent: add up each total item by item (quantity × need), straight from the situation
+    validate: (p, v) => {
+      const X = typeof v === "string" ? readMat(v) : null;
+      if (!X || X.length !== 2 || X[0].length !== 2) return false;
+      const R = MMR[p[7]];
+      for (let f = 0; f < 2; f++) for (let k = 0; k < 2; k++) {
+        let tot = 0;
+        for (let item = 0; item < 3; item++) tot += p[3 * f + item] * R[item][k];
+        if (!req(X[f][k], rr(tot))) return false;
+      }
+      return true;
+    },
+    bugs: (p) => {
+      const P = mmodP(p);
+      const R = MMR[p[7]];
+      const Q = mmodQ(p);
+      const want = matS(P);
+      return [
+        B("columns-swapped", "procedural", MAT, "The two columns of the needs matrix were put the other way round, so the totals came out in the wrong order; follow the order the question asks for.", matS(P.map((r) => [r[1], r[0]]))),
+        B("rows-swapped", "procedural", MAT, "The producers were put in the other order; row 1 of the product comes from row 1 of the production matrix.", matS([P[1], P[0]])),
+        B("item-left-out", "procedural", MAT, "The third item was left out of each total; a row of 3 quantities times a column of 3 needs has 3 products to add.", matN(Q.map((r) => [0, 1].map((k) => r[0] * R[0][k] + r[1] * R[1][k])))),
+      ].filter((b) => b.predict !== want);
+    },
+    distractors: (p) => [matS(mmodP(p).map((r) => r.map((x) => radd(x, rr(2)))))],
+    variants: () => [],
+    explain: (s) => (s.id === "model" ? `Production ${s.inputs[0]} times needs ${s.inputs[1]}: ${s.value}` : `Multiply ${s.inputs[0]}: ${s.value}`),
+    domain: D_MMOD,
+    keep: mmodOk,
+    cap: 300,
+    difficulty: (p) => (p.slice(0, 6).every((x) => x <= 3) ? 2 : 3),
+    word: (p) => mmodText(p, true),
+    teach: {
+      idea: "When each of several producers makes several items, and each item needs fixed amounts of resources, the totals are a matrix product: (production matrix) × (needs per item matrix). The inner orders must match: (2 × 3)(3 × 2).",
+      method: "Write one row per producer and one column per item for the production; one row per item and one column per resource for the needs. Multiply: each entry is a row of quantities times a column of needs, added up.",
+      alternatives: [{ id: "bills", title: "Write each total as a sum", kind: "procedural", text: ["For producer P and resource 1: (number of item 1) × (need of item 1) + … for all three items.", "The four totals, arranged by producer and resource, are the product matrix."] }],
+    },
+    limits: "Two producers, three items and two resources with small numbers.",
+  },
+  // ================================================================ gap@1: systems in words, LP cases, approximations, transformations, codes, Gauss–Jordan
+  {
+    id: "apsysw",
+    arity: 6,
+    title: "Word problems with three unknowns, solved by the inverse, Cramer's rule or Gaussian elimination",
+    competency: MSYS,
+    type: "tuple",
+    mc: true,
+    parse: none,
+    // [x, y, z, t, m, s]: the solution, the situation SYSCTX[t], the method METH[m], the coefficient matrix sysA(s)
+    reject: (p) => (syswOk(p) ? null : "Three purchases, sales or mixtures with whole-number answers 1 to 12."),
+    prompt: (p) => syswText(p),
+    solve: (p) => {
+      const [x, y, z, , m, s] = p;
+      const A = sysA(s);
+      const D = sarrus(A);
+      const b = A.map((row) => row[0] * x + row[1] * y + row[2] * z);
+      const ans = `(${x}, ${y}, ${z})`;
+      const model = st("model", "write", MSYS, [matN(A), matN(b.map((v) => [v]))], `AX = B with A = ${matN(A)}, B = ${matN(b.map((v) => [v]))}`);
+      if (m === 0) return { steps: [model, st("det", "evaluate", DET, [matN(A)], D), st("inverse", "invert", ADJ, ["adj A / |A|"], matN(mT(cofactors(A)))), st("solve", "multiply", MSYS, ["A⁻¹B"], ans)], answer: ans };
+      if (m === 1) {
+        const Ds = [0, 1, 2].map((c) => sarrus(A.map((row, i) => row.map((v, j) => (j === c ? b[i] : v)))));
+        return { steps: [model, st("det", "evaluate", DET, [matN(A)], D), st("cramer", "evaluate", DET, Ds, Ds.join(", ")), st("solve", "divide", MSYS, ["Δᵢ/Δ"], ans)], answer: ans };
+      }
+      return { steps: [model, st("echelon", "row-reduce", RANK, ["[A | B]"], "upper triangular form"), st("solve", "back-substitute", MSYS, ["z, then y, then x"], ans)], answer: ans };
+    },
+    // independent: substitute the three values into the three situations
+    validate: (p, v) => {
+      const l = typeof v === "string" ? readList(v) : null;
+      if (!l || l.length !== 3) return false;
+      const A = sysA(p[5]);
+      return A.every((row) => req(row.reduce((acc, c, j) => radd(acc, rmul(rr(c), l[j])), [0, 1] as R), rr(row[0] * p[0] + row[1] * p[1] + row[2] * p[2])));
+    },
+    bugs: (p) => {
+      const [x, y, z, , m, s] = p;
+      const A = sysA(s);
+      const D = sarrus(A);
+      const b = A.map((row) => row[0] * x + row[1] * y + row[2] * z);
+      const ans = `(${x}, ${y}, ${z})`;
+      const out: Bug[] = [];
+      if (m === 0) {
+        const C = mmul(toM(cofactors(A)), toM(b.map((v) => [v]))).map((r) => rdiv(r[0], rr(D)));
+        out.push(B("cofactors-not-transposed", "procedural", ADJ, "The matrix of cofactors was used instead of its transpose; adj A is the TRANSPOSE of the cofactor matrix.", tup(C)));
+      }
+      if (m === 1) out.push(B("det-sign", "procedural", DET, "Δ was worked out with the wrong sign (check the + − + signs of the expansion); every value then changes sign.", `(${n_(-x)}, ${n_(-y)}, ${n_(-z)})`));
+      if (m === 2) out.push(B("back-order", "procedural", MSYS, "The values were written in the order they were found (z first); write the answer as (x, y, z).", `(${z}, ${y}, ${x})`));
+      out.push(B("rows-columns", "conceptual", MSYS, "The equations were written with the purchases as columns instead of rows; each situation gives one equation (one ROW of A).", null));
+      return out.filter((bb) => bb.predict !== null && bb.predict !== ans);
+    },
+    distractors: ([x, y, z]) => [`(${y}, ${x}, ${z})`, `(${x}, ${z}, ${y})`, `(${x + 1}, ${y}, ${z})`],
+    variants: () => [],
+    explain: (s) => (s.id === "model" ? `Write the equations as ${s.value}` : s.id === "det" ? `|A| = ${n_(Number(s.value))} ≠ 0, so there is exactly one solution` : s.id === "inverse" ? `adj A = ${s.value}` : s.id === "cramer" ? `Δ₁, Δ₂, Δ₃ = ${s.value}` : s.id === "echelon" ? `Row-reduce ${s.inputs[0]} to ${s.value}` : `So (x, y, z) = ${s.value}`),
+    domain: D_SYSW,
+    keep: syswOk,
+    cap: 400,
+    difficulty: ([, , , , m, s]) => (Math.abs(sarrus(sysA(s))) <= 3 ? 2 : m === 1 ? 2 : 3),
+    word: ([x, y, z, t, m, s]) => syswText([x, y, z, (t + 1) % 3, m, s]),
+    teach: {
+      idea: "Each fact in the story gives one linear equation in the three unknowns; together they form AX = B. With |A| ≠ 0 there is exactly one solution, found by X = A⁻¹B, by Cramer's rule (x = Δ₁/Δ, …) or by Gaussian elimination (row-reduce [A | B] and back-substitute).",
+      method: "Name the unknowns (x, y, z), write one equation per fact, write A and B, then use the method asked for. Check the answer in every fact of the story.",
+      alternatives: [
+        { id: "cramer", title: "Cramer's rule", kind: "procedural", text: ["Δ = |A|; Δ₁ is |A| with column 1 replaced by B, and so on.", "x = Δ₁/Δ, y = Δ₂/Δ, z = Δ₃/Δ."] },
+        { id: "gauss", title: "Gaussian elimination", kind: "procedural", text: ["Use row operations on [A | B] to make zeros below the diagonal.", "Find z from the last row, then y, then x."] },
+      ],
+    },
+    limits: "Three unknowns with small whole-number coefficients and answers 1 to 12.",
+  },
+  {
+    id: "aplpfeas",
+    arity: 7,
+    title: "Linear programming: bounded, unbounded or infeasible?",
+    competency: LP,
+    type: "choice",
+    parse: none,
+    // [k, a, b, m, d, P, Q]: see lpfCons
+    reject: (p) => (lpfOk(p) ? null : "One constraint ax + by ≤ or ≥ c (with x ≥ … for the infeasible case), objective with whole coefficients."),
+    prompt: (p) => `${p[0] === 3 ? "Minimise" : "Maximise"} Z = ${polyS([p[5], 0])} + ${polyS([p[6], 0], "y")} subject to ${consS(lpfCons(p))}. Which statement is true?`,
+    choices: lpfChoices,
+    solve: (p) => {
+      const L = lpfLabels(p);
+      const lab = L[lpfRight(p) as "best"];
+      return { steps: [st("region", "draw", LP, [consS(lpfCons(p))], p[0] === 0 ? "empty" : p[0] === 2 ? "bounded" : "unbounded"), st("decide", "evaluate", LP, [lab], lpfChoices(p).indexOf(lab))], answer: lpfChoices(p).indexOf(lab) };
+    },
+    // independent: search the whole-number points of a large square for feasible points and for the best Z; a region that is
+    // still improving at the edge of the square is unbounded
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const cs = lpfCons(p);
+      const [k, , , , , P, Q] = p;
+      const feas = (x: number, y: number) => cs.every(([a, b, c, s]) => (s < 0 ? a * x + b * y <= c : a * x + b * y >= c));
+      let any = false;
+      let best = k === 3 ? Infinity : -Infinity;
+      let edgeBest = false;
+      const N = 120;
+      for (let x = 0; x <= N; x++) for (let y = 0; y <= N; y++) {
+        if (!feas(x, y)) continue;
+        any = true;
+        const z = P * x + Q * y;
+        if (k === 3 ? z < best : z > best) best = z;
+        if ((x === N || y === N) && k !== 3) edgeBest = true;
+      }
+      const opt = lpfChoices(p)[v];
+      if (!opt) return false;
+      if (!any) return opt.startsWith("There is no feasible region");
+      if (edgeBest) return opt.includes("unbounded");
+      return opt === `The ${k === 3 ? "minimum" : "maximum"} value of Z is ${best}`;
+    },
+    bugs: (p) => {
+      const L = lpfLabels(p);
+      const ch = lpfChoices(p);
+      const k = p[0];
+      const out: Bug[] = [];
+      if (k === 0) out.push(B("corner-of-one-constraint", "conceptual", LP, "Z was worked out at a corner of one constraint alone; first check that some point satisfies ALL the constraints — here none does.", ch.indexOf(L.best)));
+      if (k === 1) out.push(B("intercept-as-max", "conceptual", LP, "Z was worked out at the corner points, but the region goes on for ever in the direction where Z grows, so Z has no maximum.", ch.indexOf(L.best)));
+      if (k === 3) out.push(B("unbounded-no-optimum", "conceptual", LP, "An unbounded region was taken to have no optimal value; with positive costs Z still has a least value, at a corner.", ch.indexOf(L.unb)));
+      if (k >= 2) out.push(B("wrong-corner", "procedural", LP, `The ${k === 3 ? "larger" : "smaller"} corner value was chosen; compare Z at both corners and take the ${k === 3 ? "smaller" : "larger"}.`, ch.indexOf(L.other)));
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "region" ? `Draw ${s.inputs[0]}: the feasible region is ${s.value}` : `So: ${s.inputs[0]}`),
+    domain: D_LPF,
+    keep: lpfOk,
+    difficulty: ([k]) => (k === 2 ? 1 : k === 0 ? 2 : 3),
+    teach: {
+      idea: "Before using corner points, look at the feasible region. If no point satisfies every constraint, the problem is infeasible. If the region is unbounded, Z may have no maximum (or no minimum) — check whether Z can be made as large (or small) as you like inside it.",
+      method: "Draw the constraints. Empty region: infeasible. Bounded region: evaluate Z at every corner. Unbounded region: evaluate Z at the corners, then test whether a better value is possible further out (for a maximum, the half-plane Z > M meets the region).",
+      alternatives: [{ id: "test-point", title: "Try a far-away point", kind: "procedural", text: ["Pick a feasible point far from the origin, such as (100, 100) if it is allowed.", "If Z there beats every corner value, Z has no maximum."] }],
+    },
+    limits: "One main constraint (two for the infeasible case) plus x, y ≥ 0; drawing the region is done on paper.",
+  },
+  {
+    id: "apsapp",
+    arity: 4,
+    title: "Approximate values from the binomial, exponential and logarithmic series",
+    competency: SER,
+    type: "fraction",
+    decimals: true,
+    mc: true,
+    parse: none,
+    // [q, ni, k, m]: q 0 (1 + k/100)^n with n = SN[ni] (m = 1: √(100 + k)); q 1 e^(k/100); q 2 log(1 + 3k/100)
+    reject: (p) => (sappOk(p) ? null : "Small x = k/100 in the binomial series (n = 1/2, −1, −2, 1/3, −1/2), eˣ, or log(1 + x)."),
+    prompt: (p) => sappText(p),
+    solve: (p) => {
+      const t = sappTerms(p);
+      return { steps: [st("terms", "evaluate", SER, t.map((v) => decS(rv(v))), decS(sappAns(p))), st("add", "add", FRAC, t.map((v) => decS(rv(v))), decS(sappAns(p)))], answer: sappAns(p) };
+    },
+    // independent: the Taylor coefficients of the function, computed numerically (Cauchy's formula), summed for the first three terms
+    validate: ([q, ni, k, m], v) => {
+      if (typeof v !== "number") return false;
+      if (q === 0) {
+        const n = SN[ni][0] / SN[ni][1];
+        const x = k / 100;
+        const c = [0, 1, 2].map((r) => taylor((z) => cpow([1 + z[0], z[1]], n), r, 0.5));
+        return near(v, (m ? 10 : 1) * (c[0] + c[1] * x + c[2] * x * x), 1e-9);
+      }
+      if (q === 1) {
+        const x = k / 100;
+        const c = [0, 1, 2].map((r) => taylor((z) => cexp(z), r, 1));
+        return near(v, c[0] + c[1] * x + c[2] * x * x, 1e-9);
+      }
+      const x = (3 * k) / 100;
+      const c = [1, 2, 3].map((r) => taylor((z) => clog([1 + z[0], z[1]]), r, 0.5));
+      return near(v, c[0] * x + c[1] * x * x + c[2] * x ** 3, 1e-9);
+    },
+    bugs: (p) => {
+      const [q, ni, k, m] = p;
+      const t = sappTerms(p);
+      const ans = sappAns(p);
+      const out: Bug[] = [];
+      const sum = (xs: R[]) => rv(xs.reduce((a, b) => radd(a, b), [0, 1] as R));
+      out.push(B("two-terms", "procedural", SER, "Only the first two terms were used; the question asks for three.", sum(t.slice(0, 2))));
+      if (q === 0) {
+        const n = rr(...SN[ni]);
+        const x = rr(k, 100);
+        const rise = rmul(rdiv(rmul(n, radd(n, rr(1))), rr(2)), rmul(x, x));
+        out.push(B("rising-factor", "conceptual", SER, "The x² coefficient was taken as n(n + 1)/2; it is n(n − 1)/2, also for a negative or fractional n.", sum([t[0], t[1], m ? rmul(rise, rr(10)) : rise])));
+        if (m) out.push(B("ten-forgotten", "procedural", SER, `√${100 + k} = 10√(1 ${k < 0 ? "−" : "+"} ${decS(Math.abs(k) / 100)}); the factor 10 was left out.`, ans / 10));
+      }
+      if (q === 1) out.push(B("no-factorial", "recall", SER, "The x² term was not divided by 2! = 2; eˣ = 1 + x + x²/2! + …", rv(radd(radd(t[0], t[1]), rmul(t[2], rr(2))))));
+      if (q === 2) out.push(B("signs", "recall", SER, "All the terms were added; the logarithmic series alternates: x − x²/2 + x³/3 − …", rv(radd(radd(t[0], rmul(t[1], rr(-1))), t[2]))));
+      return out.filter((b) => !near(Number(b.predict), ans, 1e-12));
+    },
+    distractors: (p) => [Math.round((sappAns(p) + 0.001) * 1e6) / 1e6],
+    variants: () => [],
+    explain: (s) => (s.id === "terms" ? `The first three terms are ${s.inputs.join(", ")}` : `Adding them: ${s.value}`),
+    domain: D_SAPP,
+    keep: sappOk,
+    difficulty: ([q, ni, , m]) => (q === 1 ? 1 : q === 2 || m ? 3 : ni === 0 || ni === 1 ? 2 : 3),
+    word: (p) => sappText(p, true),
+    teach: {
+      idea: "For small x the later terms of a series are tiny, so the first few give a good approximation: (1 + x)ⁿ ≈ 1 + nx + n(n − 1)x²/2, eˣ ≈ 1 + x + x²/2, log(1 + x) ≈ x − x²/2 + x³/3.",
+      method: "Write the number as (1 + x) with x small (√102 = 10(1 + 0.02)^(1/2)), work out each of the first terms as a decimal, and add them.",
+      alternatives: [{ id: "size", title: "How good is it?", kind: "conceptual", text: ["With x = 0.02 the x² term is about 0.0004 and the x³ term about 0.000008.", "So three terms are correct to about five decimal places."] }],
+    },
+    limits: "Values of x up to 0.12 so the approximations are good; error bounds are not asked.",
+  },
+  {
+    id: "aprot",
+    arity: 3,
+    title: "Rotating and reflecting points with a 2 × 2 matrix",
+    competency: MAT,
+    type: "tuple",
+    mc: true,
+    parse: none,
+    // [t, x, y]: TRM[t] applied to the point (x, y)
+    reject: (p) => (rotOk(p) ? null : "A point with non-zero coordinates of different sizes, and one of six transformations."),
+    prompt: ([t, x, y]) => `The matrix T = ${matN(TRM[t].M)} represents ${TRM[t].text}. Find the image of the point (${n_(x)}, ${n_(y)}) by working out T[[${n_(x)}], [${n_(y)}]]. Write it as (x, y).`,
+    solve: (p) => {
+      const [X, Y] = rotImg(p);
+      return { steps: [st("multiply", "multiply", MAT, [matN(TRM[p[0]].M), `[[${n_(p[1])}], [${n_(p[2])}]]`], `(${n_(X)}, ${n_(Y)})`)], answer: `(${n_(X)}, ${n_(Y)})` };
+    },
+    // independent: the geometric rule itself (turning by multiplying x + iy by i, i², i³; reflections by changing signs or swapping)
+    validate: ([t, x, y], v) => {
+      const l = typeof v === "string" ? readList(v) : null;
+      if (!l || l.length !== 2) return false;
+      let z: C = [x, y];
+      if (t <= 2) for (let k = 0; k <= t; k++) z = cml(z, [0, 1]);
+      const want = t <= 2 ? z : t === 3 ? [x, -y] : t === 4 ? [-x, y] : [y, x];
+      return req(l[0], rr(Math.round(want[0]))) && req(l[1], rr(Math.round(want[1])));
+    },
+    bugs: ([t, x, y]) => {
+      const M = TRM[t].M;
+      const [X, Y] = rotImg([t, x, y]);
+      const ans = `(${n_(X)}, ${n_(Y)})`;
+      const rowV = [x * M[0][0] + y * M[1][0], x * M[0][1] + y * M[1][1]];
+      return [
+        B("row-vector", "procedural", MAT, "The point was multiplied as a row, (x y)T, which uses the columns of T the wrong way; the image is T times the COLUMN [[x], [y]].", `(${n_(rowV[0])}, ${n_(rowV[1])})`),
+        B("swapped", "procedural", MAT, "The coordinates of the image were written the wrong way round.", `(${n_(Y)}, ${n_(X)})`),
+      ].filter((b) => b.predict !== ans);
+    },
+    distractors: ([t, x, y]) => {
+      const [X, Y] = rotImg([t, x, y]);
+      return [`(${n_(-X)}, ${n_(Y)})`, `(${n_(X)}, ${n_(-Y)})`, `(${n_(-X)}, ${n_(-Y)})`];
+    },
+    variants: () => [],
+    explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`,
+    domain: D_ROT,
+    keep: rotOk,
+    cap: 400,
+    difficulty: ([t]) => (t === 1 || t >= 3 ? 1 : 2),
+    teach: {
+      idea: "Multiplying a column [[x], [y]] by a 2 × 2 matrix moves the point (x, y); the matrix [[cos θ, −sin θ], [sin θ, cos θ]] turns the plane through θ anticlockwise about the origin. Rotation and reflection matrices are orthogonal: TTᵀ = I.",
+      method: "Work out T[[x], [y]]: first entry = (row 1 of T)·(x, y), second entry = (row 2 of T)·(x, y).",
+      alternatives: [{ id: "picture", title: "Check with a sketch", kind: "conceptual", text: ["Plot the point and imagine turning it (or folding the plane along the mirror line).", "The image should be in the quadrant your sketch shows."] }],
+    },
+    limits: "Rotations through multiples of 90° and reflections in the axes and y = x; other angles need surds.",
+  },
+  {
+    id: "aporth",
+    arity: 3,
+    title: "The inverse of an orthogonal matrix",
+    competency: MAT,
+    type: "matrix",
+    mc: true,
+    parse: none,
+    // [d, i, s]: d 0 a 2 × 2 rotation or reflection from a Pythagorean triple; d 1 a 3 × 3 orthogonal matrix (rows permuted, columns signed)
+    reject: (p) => (orthOk(p) ? null : "2 × 2 matrices (1/k)[[a, ∓b], [b, ±a]] from Pythagorean triples, or three 3 × 3 orthogonal patterns."),
+    prompt: (p) => `A = ${matS(orthM(p))} is an orthogonal matrix (AAᵀ = I). Find A⁻¹, written as a matrix (fractions are fine as entries).`,
+    solve: (p) => ({ steps: [st("rule", "recall", MAT, ["AAᵀ = I"], "A⁻¹ = Aᵀ"), st("transpose", "transpose", "MATH.matrices.transpose-symmetry", [matS(orthM(p))], matS(mT(orthM(p))))], answer: matS(mT(orthM(p))) }),
+    // independent: A times the answer must be the identity
+    validate: (p, v) => {
+      const X = typeof v === "string" ? readMat(v) : null;
+      const A = orthM(p);
+      return !!X && X.length === A.length && X[0].length === A.length && meq(mmul(A, X), ident(A.length));
+    },
+    bugs: (p) => {
+      const A = orthM(p);
+      const want = matS(mT(A));
+      return [
+        B("matrix-itself", "conceptual", MAT, "A itself was given; A⁻¹ = Aᵀ, so rows become columns (they agree only when A is symmetric).", matS(A)),
+        B("negated", "conceptual", MAT, "Every entry was negated; for an orthogonal matrix the inverse is the transpose, not −A or −Aᵀ.", matS(mT(A).map((r) => r.map((x) => rmul(x, rr(-1)))))),
+        B("k-not-divided", "procedural", MAT, `The factor 1/${orthA(p).k} was left off; Aᵀ keeps the same factor.`, matN(mT(orthA(p).M))),
+      ].filter((b) => b.predict !== want);
+    },
+    distractors: (p) => [matS(orthM(p).map((r) => r.map((x) => rmul(x, rr(2)))))],
+    variants: () => [],
+    explain: (s) => (s.id === "rule" ? `For an orthogonal matrix AAᵀ = I, so ${s.value}` : `Transpose A: ${s.value}`),
+    domain: D_ORTH,
+    keep: orthOk,
+    difficulty: ([d]) => (d === 0 ? 2 : 3),
+    teach: {
+      idea: "A square matrix is orthogonal when AAᵀ = AᵀA = I. Then A⁻¹ = Aᵀ — no determinant or adjoint is needed. Rotations and reflections of the plane have orthogonal matrices.",
+      method: "Check (or use, if given) AAᵀ = I, then write A⁻¹ = Aᵀ by turning the rows of A into columns.",
+      alternatives: [{ id: "check", title: "Check by multiplying", kind: "procedural", text: ["Multiply A by your answer.", "You must get I: 1s on the diagonal and 0s elsewhere."] }],
+    },
+    limits: "2 × 2 and 3 × 3 orthogonal matrices with rational entries.",
+  },
+  {
+    id: "apcode",
+    arity: 4,
+    title: "Encoding and decoding a message with a matrix",
+    competency: MAT,
+    type: "tuple",
+    mc: true,
+    parse: none,
+    // [dir, i, m1, m2]: dir 0 decode the column CODEA[i]·M; dir 1 encode M
+    reject: (p) => (inD(p, D_CODE) ? null : "Two letters (1 to 26) and one of eight encoding matrices with determinant ±1."),
+    prompt: (p) => codeText(p),
+    solve: (p) => {
+      const [dir, i, m1, m2] = p;
+      const C = codeC(p);
+      const A = CODEA[i];
+      const D = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+      return dir === 0
+        ? { steps: [st("inverse", "invert", ADJ, [matN(A)], matS(mscale(toM([[A[1][1], -A[0][1]], [-A[1][0], A[0][0]]]), rr(1, D)))), st("decode", "multiply", MAT, [`A⁻¹[[${C[0]}], [${C[1]}]]`], `(${m1}, ${m2})`)], answer: `(${m1}, ${m2})` }
+        : { steps: [st("letters", "convert", MAT, [`${ABC[m1 - 1]}${ABC[m2 - 1]}`], `(${m1}, ${m2})`), st("encode", "multiply", MAT, [matN(A)], `(${C[0]}, ${C[1]})`)], answer: `(${C[0]}, ${C[1]})` };
+    },
+    // independent: decoding is checked by encoding the answer again; encoding by decoding the answer with the adjugate
+    validate: (p, v) => {
+      const l = typeof v === "string" ? readList(v) : null;
+      if (!l || l.length !== 2 || l.some((x) => x[1] !== 1)) return false;
+      const [dir, i, m1, m2] = p;
+      const A = CODEA[i];
+      const [a, b] = l.map((x) => x[0]);
+      if (dir === 0) {
+        const C = codeC(p);
+        return A[0][0] * a + A[0][1] * b === C[0] && A[1][0] * a + A[1][1] * b === C[1] && a >= 1 && a <= 26 && b >= 1 && b <= 26;
+      }
+      const D = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+      return (A[1][1] * a - A[0][1] * b) / D === m1 && (-A[1][0] * a + A[0][0] * b) / D === m2;
+    },
+    bugs: (p) => {
+      const [dir, i, m1, m2] = p;
+      const A = CODEA[i];
+      const C = codeC(p);
+      if (dir === 0) {
+        const ans = `(${m1}, ${m2})`;
+        const D = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+        const noNeg = [(A[1][1] * C[0] + A[0][1] * C[1]) * D, (A[1][0] * C[0] + A[0][0] * C[1]) * D];
+        return [
+          B("used-A", "conceptual", MAT, "The coded column was multiplied by A again; to decode, multiply by A⁻¹.", `(${A[0][0] * C[0] + A[0][1] * C[1]}, ${A[1][0] * C[0] + A[1][1] * C[1]})`),
+          B("adjoint-signs", "procedural", ADJ, "In A⁻¹ the off-diagonal entries were not negated; for [[a, b], [c, d]], A⁻¹ = (1/(ad − bc))[[d, −b], [−c, a]].", `(${noNeg[0]}, ${noNeg[1]})`),
+        ].filter((b) => b.predict !== ans);
+      }
+      const ans = `(${C[0]}, ${C[1]})`;
+      return [B("row-vector", "procedural", MAT, "M was multiplied as a row, (m₁ m₂)A; the code is A times the COLUMN M.", `(${m1 * A[0][0] + m2 * A[1][0]}, ${m1 * A[0][1] + m2 * A[1][1]})`), B("letters-swapped", "procedural", MAT, "The two letters were put in the wrong order in M.", `(${A[0][0] * m2 + A[0][1] * m1}, ${A[1][0] * m2 + A[1][1] * m1})`)].filter((b) => b.predict !== ans);
+    },
+    distractors: (p) => {
+      const C = codeC(p);
+      return p[0] === 0 ? [`(${p[2] + 1}, ${p[3]})`, `(${p[3]}, ${p[2]})`] : [`(${C[0] + 1}, ${C[1]})`, `(${C[1]}, ${C[0]})`];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "inverse" ? `A⁻¹ = ${s.value}` : s.id === "decode" ? `${s.inputs[0]} = ${s.value}, the letters ${(() => { const m = String(s.value).match(/\d+/g)!; return m.map((x) => ABC[Number(x) - 1]).join(""); })()}` : s.id === "letters" ? `${s.inputs[0]} is ${s.value}` : `C = ${s.inputs[0]}M = ${s.value}`),
+    domain: D_CODE,
+    cap: 300,
+    difficulty: ([dir]) => (dir === 1 ? 1 : 2),
+    word: (p) => codeText(p, true),
+    teach: {
+      idea: "A message can be hidden by multiplying columns of letter numbers by an invertible matrix A: C = AM. The receiver, who knows A, recovers M = A⁻¹C. A matrix with determinant ±1 has an inverse with whole-number entries.",
+      method: "To encode, multiply A by the column of letter numbers. To decode, find A⁻¹ = (1/|A|) adj A and multiply it by the coded column; then turn the numbers back into letters.",
+      alternatives: [{ id: "check", title: "Check by re-encoding", kind: "procedural", text: ["After decoding, multiply A by your answer.", "You must get the coded column back."] }],
+    },
+    limits: "Pairs of letters with 2 × 2 matrices of determinant ±1; longer messages repeat the same step for each pair.",
+  },
+  {
+    id: "apgj3",
+    arity: 1,
+    title: "The inverse of a 3 × 3 matrix by the Gauss–Jordan method",
+    competency: RANK,
+    type: "matrix",
+    mc: true,
+    parse: none,
+    // [seed]: a 3 × 3 matrix with determinant ±1 built from row operations (gjA)
+    reject: (p) => (gjOk(p) ? null : "3 × 3 matrices with determinant ±1 and small entries."),
+    prompt: ([s]) => `A = ${matN(gjA(s))}. Find A⁻¹ by the Gauss–Jordan method: use elementary row operations to turn [A | I] into [I | A⁻¹].`,
+    solve: ([s]) => {
+      const A = gjA(s);
+      return { steps: [st("augment", "write", RANK, [matN(A)], "[A | I]"), st("reduce", "row-reduce", RANK, ["Rᵢ ↔ Rⱼ, Rᵢ → Rᵢ + kRⱼ"], "[I | A⁻¹]"), st("read", "read", ADJ, ["right half"], matN(gjInv(A)))], answer: matN(gjInv(A)) };
+    },
+    // independent: A times the answer is the identity
+    validate: ([s], v) => {
+      const X = typeof v === "string" ? readMat(v) : null;
+      return !!X && X.length === 3 && X[0].length === 3 && meq(mmul(toM(gjA(s)), X), ident(3));
+    },
+    bugs: ([s]) => {
+      const inv = gjInv(gjA(s));
+      const want = matN(inv);
+      return [
+        B("read-transposed", "procedural", ADJ, "The right-hand block was read off column by column; A⁻¹ is the right half of [I | A⁻¹] read row by row.", matN(mT(inv))),
+        B("left-half-only", "conceptual", RANK, "The row operations were done on A but not on I; the same operations must be applied to the whole row of [A | I].", matN([[1, 0, 0], [0, 1, 0], [0, 0, 1]])),
+        B("sign-slip", "procedural", RANK, "A sign slip in a row operation Rᵢ → Rᵢ − kRⱼ spread through the working; check by multiplying A by your answer.", matN(inv.map((r) => r.map((x) => -x)))),
+      ].filter((b) => b.predict !== want);
+    },
+    distractors: ([s]) => [matN(gjA(s))],
+    variants: () => [],
+    explain: (s) => (s.id === "augment" ? `Write ${s.value} with A = ${s.inputs[0]}` : s.id === "reduce" ? `Use ${s.inputs[0]} until the left half is I: ${s.value}` : `The ${s.inputs[0]} is A⁻¹ = ${s.value}`),
+    domain: D_GJ,
+    keep: gjOk,
+    difficulty: ([s]) => (gjA(s).flat().filter((x) => x === 0).length >= 3 ? 2 : 3),
+    word: ([s]) => `A school's quiz club sends coded answers: each group of three letter numbers is written as a column and multiplied by the coding matrix A = ${matN(gjA(s))}. To decode, the quizmaster needs A⁻¹. Find it by the Gauss–Jordan method (row-reduce [A | I] to [I | A⁻¹]).`,
+    teach: {
+      idea: "Each elementary row operation is multiplication on the left by an invertible matrix. If the operations turn A into I, their product is A⁻¹ — so doing the same operations to I produces A⁻¹.",
+      method: "Write [A | I]. Make the first column (1, 0, 0) using row swaps and Rᵢ → Rᵢ + kRⱼ (and Rᵢ → cRᵢ), then the second column, then the third, always on whole rows. Read A⁻¹ from the right half and check AA⁻¹ = I.",
+      alternatives: [{ id: "adjoint", title: "Compare with the adjoint method", kind: "conceptual", text: ["A⁻¹ = adj A / |A| gives the same matrix.", "Gauss–Jordan avoids nine 2 × 2 determinants and works for larger matrices too."] }],
+    },
+    limits: "3 × 3 matrices with determinant ±1, so every step keeps whole numbers; showing each row operation is assessed in a written task.",
+  },
+  // ================================================================ gap@1: reciprocal and reducible equations, volumes, Vieta with a box
+  {
+    id: "aprecip",
+    arity: 3,
+    title: "Solving a reciprocal equation",
+    competency: PES,
+    type: "set",
+    parse: none,
+    // [i, j, odd]: roots RT[i], 1/RT[i], RT[j], 1/RT[j] (and −1 when odd = 1)
+    reject: (p) => (recOk(p) ? null : "Two different root pairs t, 1/t from a list, with or without the root −1."),
+    prompt: (p) => `${polyS(recPoly(p))} = 0 is a reciprocal equation. Solve it${p[2] ? " (first divide by x + 1, as x = −1 is a root)" : ""} by dividing by x² and putting y = x + 1/x. Give every root, separated by commas.`,
+    solve: (p) => {
+      const [i, j] = p;
+      const ys = [RT[i], RT[j]].map(([a, b]) => rs(rr(a * a + b * b, a * b)));
+      return { steps: [...(p[2] ? [st("factor", "divide", FACT, [-1], "x + 1 is a factor")] : []), st("substitute", "substitute", PES, ["y = x + 1/x"], `y = ${ys.join(" or y = ")}`), st("roots", "solve", PES, ys, recRoots(p))], answer: recRoots(p) };
+    },
+    // independent: substitute each value into the polynomial (exactly zero) and check the count matches the degree
+    validate: (p, v) => {
+      if (!Array.isArray(v)) return false;
+      const P = recPoly(p);
+      if (v.length !== P.length - 1 || new Set(v.map((x) => Math.round(x * 1e9))).size !== v.length) return false;
+      return v.every((x) => Math.abs(horner(P, x)) < 1e-7 * Math.max(1, ...P.map(Math.abs)));
+    },
+    bugs: (p) => {
+      const [i, j, odd] = p;
+      const out: Bug[] = [B("reciprocals-missed", "conceptual", PES, "Only one root of each pair was given; in a reciprocal equation if t is a root then so is 1/t.", [...[RT[i], RT[j]].map(([a, b]) => a / b), ...(odd ? [-1] : [])])];
+      out.push(B("y-values", "procedural", PES, "The values of y = x + 1/x were given; each value of y must be turned back into two values of x by solving x + 1/x = y.", [RT[i], RT[j]].map(([a, b]) => (a * a + b * b) / (a * b))));
+      if (odd) out.push(B("minus-one-forgotten", "procedural", PES, "The root x = −1 (the factor x + 1 of an odd-degree reciprocal equation) was left out.", recRoots(p).filter((x) => x !== -1)));
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "factor" ? `x = −1 is a root, so ${s.value}` : s.id === "substitute" ? `Dividing by x² and putting ${s.inputs[0]} gives a quadratic in y: ${s.value}` : `Solving x + 1/x = y for each y: x = ${(s.value as number[]).map((x) => rs(rr(Math.round(x * 6), 6))).join(", ")}`),
+    domain: D_REC,
+    keep: recOk,
+    difficulty: ([i, j, odd]) => (i <= 3 && j <= 3 && !odd ? 2 : 3),
+    teach: {
+      idea: "A reciprocal equation is unchanged when x is replaced by 1/x: its coefficients read the same forwards and backwards (or with signs changed). So its roots come in pairs t, 1/t, and dividing by x² and putting y = x + 1/x halves the degree.",
+      method: "For an odd degree, first take out the factor x + 1 (or x − 1). Divide by x², group (x² + 1/x²) and (x + 1/x), use x² + 1/x² = y² − 2, solve the quadratic in y, then solve x + 1/x = y for each y.",
+      alternatives: [{ id: "pairs", title: "Use the pairs", kind: "conceptual", text: ["Try t = 2: if 2 is a root, so is 1/2, and (x − 2)(2x − 1) = 2x² − 5x + 2 is a factor.", "Dividing by it leaves a quadratic for the other pair."] }],
+    },
+    limits: "Reciprocal equations of degree 4 and 5 with rational roots.",
+  },
+  {
+    id: "apredu",
+    arity: 3,
+    title: "Equations reducible to quadratics: √x and exponential substitutions",
+    competency: PES,
+    type: "set",
+    parse: none,
+    // [q, a, b]: q 0 x − (a + b)√x + ab = 0; q 1 4^x − (2^a + 2^b)2^x + 2^(a+b) = 0; q 2 the same with 9 and 3; q 3 x + (b − a)√x − ab = 0 (one root rejected)
+    reject: (p) => (redOk(p) ? null : "Substitutions y = √x, 2^x or 3^x giving a quadratic with simple roots."),
+    prompt: redText,
+    solve: (p) => {
+      const [q, a, b] = p;
+      const ys = q === 0 ? [a, b] : q === 3 ? [a, -b] : q === 1 ? [2 ** a, 2 ** b] : [3 ** a, 3 ** b];
+      return { steps: [st("quadratic", "substitute", PES, [["y = √x", "y = 2^x", "y = 3^x", "y = √x"][q]], `y = ${ys.map(n_).join(" or y = ")}`), ...(q === 3 ? [st("reject", "check", PES, [-b], "√x cannot be negative")] : []), st("back", "solve", PES, ys, redAns(p))], answer: redAns(p) };
+    },
+    // independent: the solutions are whole numbers, so try every whole x from 0 to 100 in the original equation
+    validate: (p, v) => {
+      if (!Array.isArray(v)) return false;
+      const f = redF(p);
+      const roots: number[] = [];
+      for (let x = 0; x <= 100; x++) if (Math.abs(f(x)) < 1e-9 * Math.max(1, x ** 2)) roots.push(x);
+      return v.length === roots.length && [...v].sort((x, y) => x - y).every((x, i) => near(x, roots[i]));
+    },
+    bugs: (p) => {
+      const [q, a, b] = p;
+      if (q === 0) return [B("y-given", "procedural", PES, "The values of y = √x were given; x = y², so square them.", [a, b]), ...(a * a !== 2 * a ? [B("doubled", "prerequisite", "MATH.number.exponents", "√x = y was undone by doubling; x = y² (y × y).", [2 * a, 2 * b])] : [])];
+      if (q === 3) return [B("extraneous-kept", "conceptual", PES, `√x = −${b} was kept; √x is never negative, so x = ${b * b} does not satisfy the equation.`, [a * a, b * b]), B("y-given", "procedural", PES, "The value of y = √x was given; x = y².", [a])];
+      const base = q === 1 ? 2 : 3;
+      return [B("y-given", "procedural", PES, `The values of y = ${base}^x were given; x is the power: ${base}^x = y.`, [base ** a, base ** b])];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "quadratic" ? `With ${s.inputs[0]} the equation becomes a quadratic: ${s.value}` : s.id === "reject" ? `y = ${n_(Number(s.inputs[0]))} is rejected: ${s.value}` : `Back to x: ${(s.value as number[]).join(", ")}`),
+    domain: D_RED,
+    keep: redOk,
+    difficulty: ([q]) => (q === 0 ? 1 : q === 3 ? 3 : 2),
+    teach: {
+      idea: "Some equations that are not polynomials become quadratics after a substitution: x − 5√x + 6 = 0 is y² − 5y + 6 = 0 with y = √x, and 4^x − 6·2^x + 8 = 0 is y² − 6y + 8 = 0 with y = 2^x.",
+      method: "Spot the substitution, solve the quadratic in y, then go back to x — and reject any value of y the substitution cannot take (√x ≥ 0, 2^x > 0). Check each x in the original equation.",
+      alternatives: [{ id: "check", title: "Check in the original", kind: "procedural", text: ["Put each value of x back into the equation you were given.", "A value that fails (for example from √x = −3) is not a solution."] }],
+    },
+    limits: "Substitutions √x, 2^x and 3^x with whole-number answers.",
+  },
+  {
+    id: "apvolg",
+    arity: 3,
+    title: "A volume condition giving a cubic equation",
+    competency: PES,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, x, a]: q 0 square base x, height x + a; q 1 height x, length 2x, width x + a
+    reject: (p) => (volgOk(p) ? null : "Whole-number dimensions with a positive height."),
+    prompt: (p) => volgText(p),
+    solve: (p) => {
+      const [q, x, a] = p;
+      const V = volgV(p);
+      const cs = q === 0 ? [1, a, 0, -V] : [2, 2 * a, 0, -V];
+      return { steps: [st("cubic", "write", PES, [V], `${polyS(cs)} = 0`), st("signs", "count", PRA, [cs.join(",")], 1), st("root", "substitute", FACT, [x], x)], answer: x };
+    },
+    // independent: build the box for each whole x and compare its volume
+    validate: (p, v) => {
+      if (typeof v !== "number" || !Number.isInteger(v) || v <= 0) return false;
+      const [q, , a] = p;
+      const vol = (x: number) => (q === 0 ? x * x * (x + a) : x * 2 * x * (x + a));
+      return vol(v) === volgV(p) && v + a > 0;
+    },
+    bugs: (p) => {
+      const [, x] = p;
+      const V = volgV(p);
+      const c = Math.round(Math.cbrt(p[0] === 0 ? V : V / 2));
+      return [
+        ...(c !== x ? [B("cube-root", "conceptual", PES, `The box was treated as a cube (x³ = ${p[0] === 0 ? V : V / 2}); the other dimensions differ from x, so the x² term matters.`, c)] : []),
+        ...(p[0] === 1 ? [B("factor-two", "procedural", PES, "The length 2x was taken as x; the volume is x × 2x × (x + a).", (() => { for (let t = 1; t <= 60; t++) if (t * t * (t + p[2]) === V) return t; return null; })())] : []),
+      ].filter((b) => b.predict !== null && b.predict !== x);
+    },
+    distractors: ([, x]) => [x + 1, x - 1, x + 2].filter((t) => t > 0),
+    range: [1, Infinity],
+    variants: () => [],
+    explain: (s) => (s.id === "cubic" ? `Volume = ${s.inputs[0]} gives ${s.value}` : s.id === "signs" ? "The coefficients change sign once, so there is exactly one positive root (Descartes' rule)" : `x = ${s.inputs[0]} makes the cubic 0 (it divides the constant term)`),
+    domain: D_VOLG,
+    keep: volgOk,
+    difficulty: ([, x]) => (x <= 6 ? 1 : x <= 12 ? 2 : 3),
+    word: (p) => volgText(p, true),
+    teach: {
+      idea: "Writing the volume in terms of one unknown dimension gives a cubic equation. Only a positive root makes sense, and a whole-number root must divide the constant term.",
+      method: "Write V = (length)(breadth)(height) in x, expand to a cubic = 0, then test whole numbers near ∛V (factors of the constant term) until one fits; check every dimension is positive.",
+      alternatives: [{ id: "table", title: "A table of volumes", kind: "procedural", text: ["Work out the volume for x = 1, 2, 3, …", "The volume increases with x, so stop when you reach the given volume."] }],
+    },
+    limits: "Cuboids with whole-number dimensions; problems with two possible positive answers are left out.",
+  },
+  {
+    id: "apvbox",
+    arity: 4,
+    title: "Roots and coefficients: the measurements of a box",
+    competency: VIETA,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [a, b, c, w]: edges a ≤ b ≤ c; w 0 surface area 2Σαβ, 1 edge length 4Σα, 2 volume αβγ, 3 diagonal² (Σα)² − 2Σαβ
+    reject: (p) => (vboxOk(p) ? null : "Edges from 1 to 9 cm."),
+    prompt: (p) => vboxText(p),
+    solve: (p) => {
+      const { p: s1, q, r } = vboxS(p);
+      return { steps: [st("vieta", "recall", VIETA, [s1, q, r], `α + β + γ = ${s1}, αβ + βγ + γα = ${q}, αβγ = ${r}`), st("value", "evaluate", VIETA, [p[3]], vboxAns(p))], answer: vboxAns(p) };
+    },
+    // independent: find the three roots by trying whole numbers, then measure the box directly
+    validate: (p, v) => {
+      const { p: s1, q, r } = vboxS(p);
+      const roots: number[] = [];
+      let P = [1, -s1, q, -r];
+      for (let x = 1; x <= 30 && P.length > 1; x++) {
+        while (P.length > 1 && horner(P, x) === 0) {
+          roots.push(x);
+          // synthetic division by (x − root)
+          const Q: number[] = [];
+          P.slice(0, -1).forEach((c, i) => Q.push(c + (i ? Q[i - 1] * x : 0)));
+          P = Q;
+        }
+      }
+      if (roots.length !== 3) return false;
+      const [a, b, c] = roots;
+      return v === [2 * (a * b + b * c + c * a), 4 * (a + b + c), a * b * c, a * a + b * b + c * c][p[3]];
+    },
+    bugs: (p) => {
+      const { p: s1, q, r } = vboxS(p);
+      const w = p[3];
+      const ans = vboxAns(p);
+      const out: Bug[] = [];
+      if (w === 0) out.push(B("half-area", "procedural", VIETA, "αβ + βγ + γα was given; the box has two faces of each kind, so the surface area is 2(αβ + βγ + γα).", q));
+      if (w === 1) out.push(B("sum-only", "procedural", VIETA, "α + β + γ was given; a cuboid has 4 edges of each length, so the total is 4(α + β + γ).", s1));
+      if (w === 2) out.push(B("pair-sum", "recall", VIETA, "The coefficient of x was used; the product of the roots is the constant term with its sign changed: αβγ = −(−" + r + ") = " + r + ".", q));
+      if (w === 3) {
+        out.push(B("square-of-sum", "conceptual", "MATH.algebra.identities", "(α + β + γ)² was given; it includes 2(αβ + βγ + γα), which must be taken away to leave α² + β² + γ².", s1 * s1));
+        out.push(B("sign", "procedural", "MATH.algebra.identities", "2(αβ + βγ + γα) was added instead of subtracted.", s1 * s1 + 2 * q));
+      }
+      return out.filter((b) => b.predict !== ans);
+    },
+    distractors: (p) => [vboxAns(p) + 2, vboxAns(p) * 2],
+    range: [1, Infinity],
+    variants: () => [],
+    explain: (s) => (s.id === "vieta" ? `For x³ − px² + qx − r = 0: ${s.value}` : `So the value asked for is ${s.value}`),
+    domain: D_VBOX,
+    keep: vboxOk,
+    difficulty: ([, , , w]) => (w === 2 || w === 1 ? 1 : w === 0 ? 2 : 3),
+    word: (p) => vboxText(p, true),
+    teach: {
+      idea: "If α, β, γ are the roots of x³ − px² + qx − r = 0 then α + β + γ = p, αβ + βγ + γα = q and αβγ = r. For a box with edges α, β, γ these are a quarter of the edge length, half the surface area, and the volume.",
+      method: "Read p, q and r from the equation (watch the signs), then write the quantity asked for in terms of them: surface area 2q, edges 4p, volume r, diagonal² = p² − 2q.",
+      alternatives: [{ id: "solve", title: "Check by finding the edges", kind: "procedural", text: ["Try whole numbers in the cubic to find the three edges.", "Measure the box from them; you get the same answers without solving."] }],
+    },
+    limits: "Boxes with whole-number edges up to 9; the roots are not needed.",
+  },
+];
+B16.push(...NEW16);

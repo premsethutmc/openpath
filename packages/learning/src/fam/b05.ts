@@ -178,8 +178,10 @@ const CONVK = [
   { big: "kg", small: "g", f: 1000 },
   { big: "L", small: "mL", f: 1000 },
   { big: "km", small: "m", f: 1000 },
+  { big: "cm", small: "mm", f: 10 },
+  { big: "g", small: "mg", f: 1000 },
 ];
-const convSmall = (k: number, s: number) => (k === 0 ? s : 5 * s);
+const convSmall = (k: number, s: number) => (k === 0 || k === 4 ? s : 5 * s);
 
 // ---------------------------------------------------------------- shopping (aeshop)
 
@@ -1121,7 +1123,7 @@ export const B05: Def[] = [
     mc: true,
     // [k, b, s]: b big units and a small part (k 0: s cm; otherwise 5s g, mL or m)
     parse: none,
-    reject: (p) => (!inRange(p, [[0, 3], [1, 9], [1, 199]]) || (p[0] === 0 && p[2] > 99) ? "1 to 9 large units and a small part (up to 99 cm, or up to 995 g, mL or m)." : null),
+    reject: (p) => (!inRange(p, [[0, 5], [1, 9], [1, 199]]) || (p[0] === 0 && p[2] > 99) || (p[0] === 4 && p[2] > 9) ? "1 to 9 large units and a small part (up to 99 cm, 9 mm, or 995 g, mL, m or mg)." : null),
     prompt: ([k, b, s]) => `${b} ${CONVK[k].big} ${convSmall(k, s)} ${CONVK[k].small} = how many ${CONVK[k].small}?`,
     solve: ([k, b, s]) => {
       const f = CONVK[k].f;
@@ -1150,7 +1152,7 @@ export const B05: Def[] = [
       const sm = convSmall(k, s);
       return [
         { id: "write-side-by-side", kind: "conceptual", competency: PV, says: `The two numbers were written side by side; ${sm} ${CONVK[k].small} needs ${String(f).length - 1} places, so empty places are filled with zeros.`, predict: Number(`${b}${sm}`) },
-        { id: "wrong-factor", kind: "recall", competency: CONV, says: `1 ${CONVK[k].big} was taken as ${f === 100 ? 1000 : 100} ${CONVK[k].small}; 1 ${CONVK[k].big} = ${f} ${CONVK[k].small}.`, predict: b * (f === 100 ? 1000 : 100) + sm },
+        { id: "wrong-factor", kind: "recall", competency: CONV, says: `1 ${CONVK[k].big} was taken as ${f === 1000 ? 100 : f === 100 ? 1000 : 100} ${CONVK[k].small}; 1 ${CONVK[k].big} = ${f} ${CONVK[k].small}.`, predict: b * (f === 1000 ? 100 : f === 100 ? 1000 : 100) + sm },
         { id: "added", kind: "conceptual", competency: CONV, says: "The two numbers were simply added; first change the large units into small units.", predict: b + sm },
       ];
     },
@@ -1158,13 +1160,13 @@ export const B05: Def[] = [
     distractors: ([k, b, s]) => {
       const f = CONVK[k].f;
       const sm = convSmall(k, s);
-      const d = k === 0 ? 10 : 100;
+      const d = k === 0 ? 10 : k === 4 ? 1 : 100;
       return [(b + 1) * f + sm, (b - 1) * f + sm, b * f + sm + d, b * f + sm - d].filter((x) => x > 0 && x !== b * f + sm);
     },
     variants: () => [],
     explain: (s) => (s.id === "big" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
-    domain: [[0, 3], [1, 9], [1, 199]],
-    cap: 400,
+    domain: [[0, 5], [1, 9], [1, 199]],
+    cap: 450,
     difficulty: ([k, , s]) => {
       const sm = convSmall(k, s);
       const short = String(sm).length < String(CONVK[k].f).length - 1;
@@ -1177,17 +1179,19 @@ export const B05: Def[] = [
         b <= 5 ? `A watermelon weighs ${b} kg ${sm} g. How many grams does it weigh?` : `A bag of rice weighs ${b} kg ${sm} g. How many grams does it weigh?`,
         b <= 2 ? `A water bottle holds ${b} L ${sm} mL. How many millilitres does it hold?` : `A bucket holds ${b} L ${sm} mL of water. How many millilitres is that?`,
         b <= 2 ? `${name(b + s)} walks ${b} km ${sm} m to school. How many metres is that?` : `${name(b + s)} goes ${b} km ${sm} m by bus to the town library. How many metres is that?`,
+        `A crayon is ${b} cm ${sm} mm long. How many millimetres long is it?`,
+        `A tablet contains ${b} g ${sm} mg of medicine. How many milligrams is that?`,
       ][k];
     },
     teach: {
-      idea: "1 m = 100 cm, 1 kg = 1000 g, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
+      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
       method: "Multiply the large units by 100 or 1000, then add the small units. Check the small part fills its places: 3 kg 25 g = 3000 g + 25 g = 3025 g.",
       visual: ([k, b, s]) => ({ type: "table", head: ["Thousands", "Hundreds", "Tens", "Ones"], rows: [String(b * CONVK[k].f + convSmall(k, s)).padStart(4, " ").split("")] }),
       alternatives: [
         { id: "place_chart", title: "Use a place-value chart", kind: "procedural", text: ["Write the large units in the thousands place (for g, mL, m) or hundreds place (for cm).", "Write the small units ending in the ones place, and fill any empty places with 0."] },
       ],
     },
-    limits: "Large to small units for m–cm, kg–g, L–mL and km–m; changing to the larger unit with decimals and milligrams are not here.",
+    limits: "Large to small units for m–cm, kg–g, L–mL, km–m, cm–mm and g–mg; changing to the larger unit is the families aeconvu and aeconvd.",
   },
   {
     id: "aeparts",
@@ -4792,12 +4796,13 @@ const sysData = ([L, w, a1, a2, s]: number[]) => {
   const strict2 = s < 2;
   return { L, U, a1, a2, b1, b2, strict1, strict2, k1: a1 * L + b1, k2: b2 - a2 * U };
 };
+const KN = [[2, 1], [3, 1], [3, 2], [4, 1], [4, 3], [5, 1], [5, 2], [5, 3], [5, 4]];
 const linData = ([kind, x, m]: number[]) => {
   // returns the story numbers and the equation; x is the answer
   if (kind === 0) return { k: 2 + (m % 4), n: 2 + (m % 7), S: 0 }; // ages: mother k times Anu now; in n years the sum
   if (kind === 1) return { k: 2 + (m % 9), n: 0, S: 0 }; // three consecutive multiples of k, the smallest is x
   if (kind === 2) return { k: 1 + (m % 12), n: 0, S: 0 }; // length k more than width x
-  if (kind === 3) return { k: [2, 3, 4, 5][m % 4], n: 1 + (m % 3), S: 0 }; // n/k of x added to x
+  if (kind === 3) return { k: KN[m % 9][0], n: KN[m % 9][1], S: 0 }; // n/k of x added to x
   return { k: 5 * (1 + (m % 6)), n: 5 * (1 + (m % 6)) + 5 * (1 + Math.floor(m / 6) % 4), S: 0 }; // savings p and q per week
 };
 const surdS = (k: number, m: number) => (m === 1 ? String(k) : `${k === 1 ? "" : k}√${m}`);
@@ -5298,10 +5303,7 @@ const linStory = ([kind, x, m]: number[]) => {
   if (kind === 0) return { ...d, S: (d.k + 1) * x + 2 * d.n, ans: x };
   if (kind === 1) return { ...d, S: 3 * d.k * x + 3 * d.k, ans: d.k * x };
   if (kind === 2) return { ...d, S: 4 * x + 2 * d.k, ans: x };
-  if (kind === 3) {
-    const n = 1 + (m % (d.k - 1));
-    return { ...d, n, S: ((d.k + n) * d.k * x) / d.k, ans: d.k * x };
-  }
+  if (kind === 3) return { ...d, S: (d.k + d.n) * x, ans: d.k * x };
   const B = 100 + 10 * m;
   return { ...d, S: B, ans: x, A: B + (d.n - d.k) * x };
 };
@@ -5338,7 +5340,7 @@ const SURD_MORE: Def[] = [
       if (kind === 0) return x < 5 || x > 15 || m > 13 ? "A child aged 5 to 15." : null;
       if (kind === 1) return m > 8 || x > 12 ? "Multiples of 2 to 10." : null;
       if (kind === 2) return m > 11 || x < 3 ? "A width of at least 3." : null;
-      if (kind === 3) return m > 11 || x > 12 ? "A number up to 60." : null;
+      if (kind === 3) return m > 8 || x > 12 ? "A number up to 60." : null;
       return x > 15 ? "Up to 15 weeks." : null;
     },
     prompt: (p) => {
@@ -5437,6 +5439,9 @@ const SURD_MORE: Def[] = [
       if (kind <= 1 && (x === y || (kind === 1 && x < y) || x === 1 && y === 1)) return "Two different like surds (the larger first for a difference).";
       if (kind === 2 && (x === y || x < 2 || y < 2)) return "Two different surds to multiply.";
       if (kind === 3 && (x < 2 || y > 5)) return "A quotient that is not 1.";
+      const m = SQFREE[p[3]];
+      const ops = kind <= 1 ? [x * x * m, y * y * m] : kind === 2 ? [x * m, y * m] : [x * x * y * m, y * m];
+      if (ops.some((n) => Number.isInteger(Math.sqrt(n)))) return "Both numbers under the roots must be surds (not perfect squares).";
       const q = surOpQ(p);
       const vals = q.base.map((o) => numericValue(o));
       if (new Set(q.base).size !== 4 || vals.some((v) => v === null) || vals.filter((v) => Math.abs(v! - q.val) < 1e-9).length !== 1) return "Four options with exactly one right.";

@@ -2107,6 +2107,7 @@ export const B15: Def[] = [
     keep: cqOk,
     cap: 300,
     difficulty: ([a, b]) => (a === 1 && b % 2 === 0 ? 1 : a === 1 ? 2 : 3),
+    word: ([a, b, c]) => `Engineers test the shock absorber of a car on a bumpy road near Ooty. The bounce of the car is described by the equation ${poly([a, b, c]).replace(/x/g, "λ")} = 0, whose roots are λ = p + qi and p − qi (q > 0): p tells how fast the bounce dies away and q how fast the car rocks. Find the pair (p, q).`,
     teach: {
       idea: "The quadratic formula works over ℂ: when b² − 4ac < 0, √(b² − 4ac) = i√(4ac − b²), so the roots are −b/(2a) ± i√(4ac − b²)/(2a), a conjugate pair.",
       method: "Find D = b² − 4ac, write √D = i√(−D) and simplify the surd, then divide both −b and √(−D) by 2a.",

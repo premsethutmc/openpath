@@ -194,6 +194,7 @@ export const CORE: Def[] = [
         { id: "prime_pairs", title: "Pair the prime factors", kind: "procedural", text: ["Write the number as a product of primes, e.g. 72 = 2 × 2 × 2 × 3 × 3.", "Each pair of equal primes comes out as one prime: (2)(3)√2 = 6√2."] },
       ],
     },
+    word: ([n]) => `A square ${n <= 200 ? "garden" : "hall floor"} has an area of ${n} m². How long is each side, in metres? Give the exact length in simplest surd form.`,
     limits: "Square roots of whole numbers up to 600 that are not perfect squares and have a square factor.",
   },
   {

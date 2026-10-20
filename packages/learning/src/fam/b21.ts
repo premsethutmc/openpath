@@ -436,6 +436,7 @@ const auvexp = F({
 // ================================================================ products with an area model (Grade 7)
 
 const binAns = ([k, a, b, c, d]: number[]) => (k === 2 ? `${a * c}x${sup(b + d)}y` : sum([[a * c, "x²"], [a * d + b * c, "x"], [b * d, ""]]));
+const xq = (n: number) => (n === 1 ? "x" : `x${sup(n)}`);
 const linT = (a: number, b: number) => `${a === 1 ? "" : a}x ${b < 0 ? "−" : "+"} ${Math.abs(b)}`;
 const aubin = F({
   id: "aubin",
@@ -445,14 +446,14 @@ const aubin = F({
   type: "exact",
   mc: true,
   // [k, a, b, c, d]: k = 0 (x + b)(x + d), 1 (ax + b)(cx + d), 2 (a·x^b) × (c·x^d·y)
-  prompt: ([k, a, b, c, d]) => (k === 2 ? `Multiply ${a}x${sup(b)} by ${c}x${sup(d)}y. The area model in the picture may help.` : `Expand (${linT(a, b)})(${linT(c, d)}) and simplify. The area model in the picture may help.`),
+  prompt: ([k, a, b, c, d]) => (k === 2 ? `Multiply ${a}${xq(b)} by ${c}${xq(d)}y. The area model in the picture may help.` : `Expand (${linT(a, b)})(${linT(c, d)}) and simplify. The area model in the picture may help.`),
   figure: ([k, a, b, c, d]) =>
     k === 2
-      ? ({ type: "table", head: ["×", `${c}x${sup(d)}y`], rows: [[`${a}x${sup(b)}`, "?"]] } as Visual)
+      ? ({ type: "table", head: ["×", `${c}${xq(d)}y`], rows: [[`${a}${xq(b)}`, "?"]] } as Visual)
       : ({ type: "table", head: ["×", `${a === 1 ? "" : a}x`, nf(b)], rows: [[`${c === 1 ? "" : c}x`, "?", "?"], [nf(d), "?", "?"]] } as Visual),
   solve: (p) => {
     const [k, a, b, c, d] = p;
-    if (k === 2) return { steps: [st("coef", "multiply", "MATH.number.multiplication-tables", `Multiply the numbers: ${a} × ${c} = ${a * c}`, a * c), st("powers", "add powers", "MATH.number.exponents", `Multiply the powers of x by adding: x${sup(b)} × x${sup(d)} = x${sup(b + d)}; y stays: ${binAns(p)}`, binAns(p))], answer: binAns(p) };
+    if (k === 2) return { steps: [st("coef", "multiply", "MATH.number.multiplication-tables", `Multiply the numbers: ${a} × ${c} = ${a * c}`, a * c), st("powers", "add powers", "MATH.number.exponents", `Multiply the powers of x by adding: ${xq(b)} × ${xq(d)} = x${sup(b + d)}; y stays: ${binAns(p)}`, binAns(p))], answer: binAns(p) };
     return {
       steps: [
         st("cells", "multiply", IDI, `Fill the four cells: ${a * c}x², ${nf(a * d)}x, ${nf(b * c)}x and ${nf(b * d)}`, `${a * c}x², ${nf(a * d)}x, ${nf(b * c)}x, ${nf(b * d)}`),
@@ -474,7 +475,7 @@ const aubin = F({
   bugs: ([k, a, b, c, d]) => {
     if (k === 2)
       return [
-        bug("multiplied-powers", "conceptual", "MATH.number.exponents", `The powers of x were multiplied; x${sup(b)} × x${sup(d)} means ${b} x's times ${d} more x's, so the powers add.`, `${a * c}x${sup(b * d)}y`),
+        bug("multiplied-powers", "conceptual", "MATH.number.exponents", `The powers of x were multiplied; ${xq(b)} × ${xq(d)} means ${b} factor${b > 1 ? "s" : ""} of x and then ${d} more, so the powers add.`, `${a * c}${xq(b * d)}y`),
         bug("added-numbers", "procedural", IDI, `The numbers ${a} and ${c} were added; the area of a rectangle multiplies its sides, numbers too.`, `${a + c}x${sup(b + d)}y`),
       ];
     return [
@@ -494,7 +495,7 @@ const aubin = F({
   difficulty: ([k, , b, , d]) => (k === 2 ? 1 : k === 0 ? (b > 0 && d > 0 ? 1 : 2) : 3),
   word: ([k, a, b, c, d]) =>
     k === 2
-      ? `A rectangular floor tile is ${a}x${sup(b)} cm long and ${c}x${sup(d)}y cm wide. Write its area, in cm², as a single term.`
+      ? `A rectangular floor tile is ${a}${xq(b)} cm long and ${c}${xq(d)}y cm wide. Write its area, in cm², as a single term.`
       : `A rectangular garden is (${linT(a, b)}) m long and (${linT(c, d)}) m wide, where x is large enough for both lengths to be positive. Write its area, in m², as an expression in x.`,
   teach: {
     idea: "A product of two brackets is the area of a rectangle whose sides are the brackets: split each side into its terms and the rectangle splits into smaller rectangles.",
@@ -652,8 +653,8 @@ const auaps = F({
   },
   bugs: ([a, d, n]) => [
     bug("no-half", "recall", AP, "The sum was not halved: pairing the first and last terms gives n/2 pairs, not n pairs.", n * (2 * a + (n - 1) * d)),
-    bug("n-not-n-minus-1", "procedural", AP, `(n − 1)d was written as nd; the last of ${n} terms is only ${n - 1} steps after the first.`, (n * (2 * a + n * d)) / 2),
-    bug("single-a", "recall", AP, "The formula was used as n/2 × [a + (n − 1)d]; it is n/2 × [2a + (n − 1)d] (the first term and the last term together).", (n * (a + (n - 1) * d)) / 2),
+    bug("n-not-n-minus-1", "procedural", AP, `(n − 1)d was written as nd; the last of ${n} terms is only ${n - 1} steps after the first.`, (n * (2 * a + n * d)) % 2 === 0 ? (n * (2 * a + n * d)) / 2 : null),
+    bug("single-a", "recall", AP, "The formula was used as n/2 × [a + (n − 1)d]; it is n/2 × [2a + (n − 1)d] (the first term and the last term together).", (n * (a + (n - 1) * d)) % 2 === 0 ? (n * (a + (n - 1) * d)) / 2 : null),
     bug("last-times-n", "conceptual", AP, "Every term was taken to be as large as the last one; the terms grow (or shrink) evenly, so their average is (first + last)/2.", n * (a + (n - 1) * d)),
   ],
   domain: [[1, 60], [-6, 12], [5, 25]],
@@ -1049,7 +1050,7 @@ const auqf = F({
   },
   distractors: ([A, B, C]) => {
     const D = B * B - 4 * A * C;
-    return [qfRoots(A, B, D, A), qfRoots(A, -B, D, A)];
+    return [qfRoots(A, B, D, A), qfRoots(A, -B, D, A), qfRoots(A, B, D, 4 * A), qfRoots(A, -B, D, 4 * A)];
   },
   domain: [[1, 5], [-9, 9], [-9, 9]],
   keep: ([A, B, C]) => C !== 0 && B * B - 4 * A * C > 0 && !isSq(B * B - 4 * A * C) && gcd(gcd(A, Math.abs(B)), Math.abs(C)) === 1,
@@ -1962,12 +1963,14 @@ const dcParts = ([k, a, b, n]: number[]) => {
   const inner = k === 0 ? lin_(a, b) : sum([[a, "x²"], [b, ""]]);
   const ax2 = `${2 * a}x`;
   const ax = ax_(a);
-  if (k === 0) return { f: `(${inner})${sup(n)}`, ans: `${n * a}(${inner})^${n - 1}`, noInner: `${n}(${inner})^${n - 1}` };
+  const pw1 = (base: string, e: number) => (e === 1 ? base : `${base}^${e}`);
+  if (k === 0) return { f: `(${inner})${sup(n)}`, ans: `${n * a}${pw1(`(${inner})`, n - 1)}`, noInner: `${n}${pw1(`(${inner})`, n - 1)}` };
   if (k === 1) return { f: `sin(${inner})`, ans: `${ax2} cos(${inner})`, noInner: `cos(${inner})` };
   if (k === 2) return { f: `√(${inner})`, ans: `${ax}/√(${inner})`, noInner: `1/(2√(${inner}))` };
   if (k === 3) return { f: `e^(${inner})`, ans: `${ax2} e^(${inner})`, noInner: `e^(${inner})` };
   if (k === 4) return { f: `log(${inner})`, ans: `${ax2}/(${inner})`, noInner: `1/(${inner})` };
-  return { f: `cos${sup(n)}(${ax})`, ans: `−${n * a} cos^${n - 1}(${ax}) sin(${ax})`, noInner: `−${n} cos^${n - 1}(${ax}) sin(${ax})` };
+  const cs = n === 2 ? `cos(${ax})` : `cos^${n - 1}(${ax})`;
+  return { f: `cos${sup(n)}(${ax})`, ans: `−${n * a} ${cs} sin(${ax})`, noInner: `−${n} ${cs} sin(${ax})` };
 };
 const audch = F({
   id: "audch",
@@ -1989,7 +1992,7 @@ const audch = F({
     const ax = ax_(a);
     return [
       bug("inner-forgotten", "conceptual", DR, "The outer function was differentiated but the result was not multiplied by the derivative of the inside.", q.noInner),
-      ...(k === 5 ? [bug("cos-to-sin-sign", "recall", DR, "The derivative of cos was taken as + sin; d/dx cos u = − sin u × u′.", `${n * a} cos^${n - 1}(${ax}) sin(${ax})`)] : []),
+      ...(k === 5 ? [bug("cos-to-sin-sign", "recall", DR, "The derivative of cos was taken as + sin; d/dx cos u = − sin u × u′.", q.ans.replace(/^−/, ""))] : []),
       ...(k === 1 ? [bug("inside-changed", "procedural", DR, "The inside function was differentiated as well as kept inside cos; the inside stays unchanged and its derivative multiplies.", `${2 * a}x cos(${2 * a}x)`)] : []),
       ...(k === 0 ? [bug("power-not-lowered", "recall", DR, "The power was not lowered by 1.", `${n * a}(${lin_(a, p[2])})^${n}`)] : []),
     ];
@@ -2080,6 +2083,7 @@ const audinv = F({
   limits: "Inverse trigonometric functions of x/a or ax with a whole-number multiplier; sec⁻¹ and cot⁻¹ are not included.",
 });
 
+const audelAns = ([k, a, c, d]: number[]) => (k === 0 ? `${c * a}e^(${ax_(a)}) ${signed(d)}/x` : k === 1 ? `${c}(${a}^x) log ${a}` : k === 2 ? `${c * a}x^${a - 1} log x + ${c}x^${a - 1}` : `${a}e^(${ax_(a)}) log x + e^(${ax_(a)})/x`);
 /** [k, a, c, d]: k = 0 c·e^(ax) + d log x, 1 c·aˣ, 2 c·xᵃ log x, 3 e^(ax) log x. */
 const deF = ([k, a, c, d]: number[]) => (x: number) => (k === 0 ? c * Math.exp(a * x) + d * Math.log(x) : k === 1 ? c * a ** x : k === 2 ? c * x ** a * Math.log(x) : Math.exp(a * x) * Math.log(x));
 const audel = F({
@@ -2094,7 +2098,7 @@ const audel = F({
     return `Differentiate y = ${f.replace(/ ([+−]) 1 log/, " $1 log")} with respect to x (x > 0; log is the natural logarithm).`;
   },
   solve: ([k, a, c, d]) => {
-    const ans = k === 0 ? `${c * a}e^(${ax_(a)}) ${signed(d)}/x` : k === 1 ? `${c}(${a}^x) log ${a}` : k === 2 ? `${c * a}x^${a - 1} log x + ${c}x^${a - 1}` : `${a}e^(${ax_(a)}) log x + e^(${ax_(a)})/x`;
+    const ans = audelAns([k, a, c, d]);
     const rule = k === 0 ? "d/dx e^(ax) = a e^(ax) and d/dx log x = 1/x" : k === 1 ? "aˣ = e^(x log a), so d/dx aˣ = aˣ log a" : "product rule with d/dx log x = 1/x";
     return { steps: [st("rule", "recall", DR, rule, rule), st("apply", "differentiate", DR, `dy/dx = ${ans}`, ans)], answer: ans };
   },
@@ -2108,6 +2112,10 @@ const audel = F({
         : k === 2
           ? [bug("product-of-derivatives", "conceptual", DR, "The two derivatives were multiplied; the product rule is u′v + uv′.", `${c * a}x^${a - 2}`), bug("one-part", "procedural", DR, "Only one part of the product rule was written.", `${c * a}x^${a - 1} log x`)]
           : [bug("product-of-derivatives", "conceptual", DR, "The two derivatives were multiplied; the product rule is u′v + uv′.", `${a}e^(${ax_(a)})/x`), bug("one-part", "procedural", DR, "Only one part of the product rule was written.", `${a}e^(${ax_(a)}) log x`)],
+  distractors: (p) => {
+    const a = audelAns(p);
+    return [`−(${a})`, `2(${a})`, `(${a})/2`];
+  },
   domain: [[0, 3], [1, 9], [1, 6], [-6, 6]],
   keep: ([k, a, c, d]) => (k === 0 ? a <= 5 && d !== 0 : k === 1 ? a >= 2 && d === 1 && a !== 4 && a !== 8 && a !== 9 : k === 2 ? a >= 2 && a <= 5 && d === 1 : a <= 5 && c === 1 && d === 1),
   why: "c·e^(ax) + d log x, c·aˣ, c·xᵃ log x and e^(ax) log x with small whole numbers.",
@@ -2199,7 +2207,7 @@ const audk = F({
   title: "An unknown vertex of a triangle of given area, by determinants",
   competency: DET,
   type: "set",
-  prompt: (p) => `The area of the triangle with vertices ${P2(p[0], p[1])}, ${P2(p[2], p[3])} and (k, ${nf(p[4])}) is ${dkArea(p)} square units. Using determinants, find the possible values of k (fractions are fine).`,
+  prompt: (p) => `The area of the triangle with vertices ${P2(p[0], p[1])}, ${P2(p[2], p[3])} and (k, ${nf(p[4])}) is ${dkArea(p)} square unit${dkArea(p) === 1 ? "" : "s"}. Using determinants, find the possible values of k (fractions are fine).`,
   solve: (p) => {
     const al = p[1] - p[3];
     const be = dkD(p, 0);
@@ -2662,7 +2670,7 @@ const sfAns = (P: number[], slip = ""): string => {
   if (k === 2) return slip === "no-x" ? `log|√(${sfQuad(P)})| + C` : slip === "power" ? `2√(${sfQuad(P)}) + C` : `log|${u} + √(${sfQuad(P)})| + C`;
   if (k === 3) return slip === "no-log" ? `(x/2)√(x² + ${a * a}) + C` : slip === "half-log" ? `(x/2)√(x² + ${a * a}) + ${a * a}log|x + √(x² + ${a * a})| + C` : `(x/2)√(x² + ${a * a}) + (${rat(a * a, 2)})log|x + √(x² + ${a * a})| + C`;
   const B = q - p * h;
-  const first = `(${rat(p, 2)})log|${sfQuad(P)}|`;
+  const first = `${p === 2 ? "" : p % 2 === 0 ? p / 2 : `(${rat(p, 2)})`}log|${sfQuad(P)}|`;
   if (slip === "first-only") return `${first} + C`;
   return `${first} ${B < 0 ? "−" : "+"} (${rat(Math.abs(B), 2 * a)})${L} + C`;
 };
@@ -2747,7 +2755,9 @@ const aupi = F({
   validate: (P, v) => {
     const [lo, hi] = piLim(P);
     const x = constOf(v);
-    return Number.isFinite(x) && near(x, simpson(piG(P), lo, hi), 1e-8);
+    // √(a² − x²) has an infinite slope at x = a: integrate it after putting x = a sin θ (a smooth integrand)
+    const S = P[0] === 2 ? simpson((t) => P[1] * Math.cos(t) * P[1] * Math.cos(t), 0, Math.PI / 2) : simpson(piG(P), lo, hi);
+    return Number.isFinite(x) && near(x, S, 1e-8);
   },
   bugs: (P) => {
     const [k, a, c] = P;
@@ -2840,24 +2850,33 @@ const aupfr = F({
 
 /** [k, a, n, c]: by parts — c·x e^(ax), c·x sin ax, c·x cos ax, c·xⁿ log(ax), c·eˣ[f + f′], c·x² e^(ax), c·x² cos ax. */
 const EXF = [
-  { f: "sin x", fp: "cos x", both: "sin x + cos x", g: (x: number) => Math.sin(x), gp: (x: number) => Math.cos(x) },
-  { f: "log x", fp: "1/x", both: "log x + 1/x", g: (x: number) => Math.log(x), gp: (x: number) => 1 / x },
-  { f: "1/x", fp: "(−1/x²)", both: "1/x − 1/x²", g: (x: number) => 1 / x, gp: (x: number) => -1 / (x * x) },
-  { f: "x²", fp: "2x", both: "x² + 2x", g: (x: number) => x * x, gp: (x: number) => 2 * x },
-  { f: "tan x", fp: "sec²x", both: "tan x + sec²x", g: (x: number) => Math.tan(x), gp: (x: number) => 1 / Math.cos(x) ** 2 },
+  { f: "sin x", fp: "cos x", both: "sin x + cos x", ex: "e^x sin x", exfp: "e^x cos x", g: (x: number) => Math.sin(x), gp: (x: number) => Math.cos(x) },
+  { f: "log x", fp: "1/x", both: "log x + 1/x", ex: "e^x log x", exfp: "e^x/x", g: (x: number) => Math.log(x), gp: (x: number) => 1 / x },
+  { f: "1/x", fp: "(−1/x²)", both: "1/x − 1/x²", ex: "e^x/x", exfp: "(−e^x/x^2)", g: (x: number) => 1 / x, gp: (x: number) => -1 / (x * x) },
+  { f: "x²", fp: "2x", both: "x² + 2x", ex: "x^2 e^x", exfp: "x e^x", g: (x: number) => x * x, gp: (x: number) => 2 * x },
+  { f: "tan x", fp: "sec²x", both: "tan x + sec²x", ex: "e^x tan x", exfp: "e^x sec^2(x)", g: (x: number) => Math.tan(x), gp: (x: number) => 1 / Math.cos(x) ** 2 },
 ];
 const ptG = ([k, a, n, c]: number[]) => (x: number) =>
   c * (k === 0 ? x * Math.exp(a * x) : k === 1 ? x * Math.sin(a * x) : k === 2 ? x * Math.cos(a * x) : k === 3 ? x ** n * Math.log(a * x) : k === 4 ? Math.exp(x) * (EXF[a - 1].g(x) + EXF[a - 1].gp(x)) : k === 5 ? x * x * Math.exp(a * x) : x * x * Math.cos(a * x));
+const xe = (n: number) => (n === 1 ? "x" : `x^${n}`);
 const ptAns = ([k, a, n, c]: number[], slip = ""): string => {
   const ax = ax_(a);
-  const C = (s: string) => (c === 1 ? `${s} + C` : `${c}(${s}) + C`);
-  if (k === 0) return C(slip === "sign" ? `(x/${a} + 1/${a * a})e^(${ax})` : slip === "product" ? `(x²/2)(e^(${ax})/${a})` : `(x/${a} − 1/${a * a})e^(${ax})`);
-  if (k === 1) return C(slip === "sign" ? `x cos(${ax})/${a} + sin(${ax})/${a * a}` : slip === "product" ? `−(x²/2)cos(${ax})/${a}` : `−x cos(${ax})/${a} + sin(${ax})/${a * a}`);
-  if (k === 2) return C(slip === "sign" ? `x sin(${ax})/${a} − cos(${ax})/${a * a}` : slip === "product" ? `(x²/2)sin(${ax})/${a}` : `x sin(${ax})/${a} + cos(${ax})/${a * a}`);
-  if (k === 3) return C(slip === "first" ? `x^${n + 1} log(${ax})/${n + 1}` : slip === "sign" ? `x^${n + 1} log(${ax})/${n + 1} + x^${n + 1}/${(n + 1) ** 2}` : `x^${n + 1} log(${ax})/${n + 1} − x^${n + 1}/${(n + 1) ** 2}`);
-  if (k === 4) return C(slip === "fp" ? `e^x ${EXF[a - 1].fp}` : slip === "both" ? `e^x (${EXF[a - 1].both})` : `e^x ${EXF[a - 1].f}`);
-  if (k === 5) return C(slip === "first" ? `e^(${ax})(x²/${a} − 2x/${a * a})` : slip === "sign" ? `e^(${ax})(x²/${a} + 2x/${a * a} + 2/${a ** 3})` : `e^(${ax})(x²/${a} − 2x/${a * a} + 2/${a ** 3})`);
-  return C(slip === "first" ? `x² sin(${ax})/${a} + 2x cos(${ax})/${a * a}` : slip === "sign" ? `x² sin(${ax})/${a} − 2x cos(${ax})/${a * a} + 2 sin(${ax})/${a ** 3}` : `x² sin(${ax})/${a} + 2x cos(${ax})/${a * a} − 2 sin(${ax})/${a ** 3}`);
+  const S = (t: [number, string][]) => `${sum(t)} + C`;
+  const E = `e^(${ax})`;
+  if (k === 0) return slip === "sign" ? S([[c / a, `x ${E}`], [c / a ** 2, E]]) : slip === "product" ? S([[c / (2 * a), `x² ${E}`]]) : S([[c / a, `x ${E}`], [-c / a ** 2, E]]);
+  if (k === 1) return slip === "sign" ? S([[c / a, `x cos(${ax})`], [c / a ** 2, `sin(${ax})`]]) : slip === "product" ? S([[-c / (2 * a), `x² cos(${ax})`]]) : S([[-c / a, `x cos(${ax})`], [c / a ** 2, `sin(${ax})`]]);
+  if (k === 2) return slip === "sign" ? S([[c / a, `x sin(${ax})`], [-c / a ** 2, `cos(${ax})`]]) : slip === "product" ? S([[c / (2 * a), `x² sin(${ax})`]]) : S([[c / a, `x sin(${ax})`], [c / a ** 2, `cos(${ax})`]]);
+  if (k === 3) {
+    const L: [number, string] = [c / (n + 1), `${xe(n + 1)} log(${ax})`];
+    return slip === "first" ? S([L]) : slip === "sign" ? S([L, [c / (n + 1) ** 2, xe(n + 1)]]) : S([L, [-c / (n + 1) ** 2, xe(n + 1)]]);
+  }
+  if (k === 4) return S([[slip === "fp" && a === 4 ? 2 * c : c, slip === "fp" ? EXF[a - 1].exfp : slip === "both" ? `e^x (${EXF[a - 1].both})` : EXF[a - 1].ex]]);
+  if (k === 5) {
+    const t: [number, string][] = [[c / a, `x² ${E}`], [-2 * c / a ** 2, `x ${E}`], [2 * c / a ** 3, E]];
+    return slip === "first" ? S(t.slice(0, 2)) : slip === "sign" ? S(t.map(([x, m]) => [Math.abs(x), m])) : S(t);
+  }
+  const t: [number, string][] = [[c / a, `x² sin(${ax})`], [2 * c / a ** 2, `x cos(${ax})`], [-2 * c / a ** 3, `sin(${ax})`]];
+  return slip === "first" ? S(t.slice(0, 2)) : slip === "sign" ? S([t[0], [-t[1][0], t[1][1]], [-t[2][0], t[2][1]]]) : S(t);
 };
 const auparts = F({
   id: "auparts",
@@ -3059,25 +3078,26 @@ const aurie = F({
 });
 
 /** [k, n, c]: ∫₀¹ xⁿeˣ, ∫₀^(π/2) xⁿ cos x, ∫₀^π xⁿ sin x, ∫₁^e xⁿ log x (times c), by Bernoulli's formula. */
-const beData = (k: number, n: number) => {
-  // [exact value, slip: signs not alternating, slip: lower limit dropped], each as [coefficient of e/π-part, constant]
-  const tab: Record<string, [string, string | null, string | null]> = {
-    "0,1": ["1", "2e − 1", "0"],
-    "0,2": ["e − 2", "5e − 2", "e"],
-    "0,3": ["6 − 2e", "16e − 6", "−2e"],
-    "1,1": ["π/2 − 1", "π/2 + 1", null],
-    "1,2": ["π²/4 − 2", "π²/4 + 2", null],
-    "2,1": ["π", null, null],
-    "2,2": ["π² − 4", null, "π² − 2"],
-    "3,0": ["1", null, "0"],
-    "3,1": ["(e² + 1)/4", "(3e² − 1)/4", "e²/4"],
-    "3,2": ["(2e³ + 1)/9", "(4e³ − 1)/9", "2e³/9"],
+type Tm = [number, string][];
+/** [value, slip: signs not alternating, slip: lower limit dropped], as sums of c·(number, e, e², e³, π, π²). */
+const beData = (k: number, n: number): [Tm, Tm | null, Tm | null] => {
+  const tab: Record<string, [Tm, Tm | null, Tm | null]> = {
+    "0,1": [[[1, ""]], [[2, "e"], [-1, ""]], [[0, ""]]],
+    "0,2": [[[1, "e"], [-2, ""]], [[5, "e"], [-2, ""]], [[1, "e"]]],
+    "0,3": [[[6, ""], [-2, "e"]], [[16, "e"], [-6, ""]], [[-2, "e"]]],
+    "1,1": [[[1 / 2, "π"], [-1, ""]], [[1 / 2, "π"], [1, ""]], null],
+    "1,2": [[[1 / 4, "π²"], [-2, ""]], [[1 / 4, "π²"], [2, ""]], null],
+    "2,1": [[[1, "π"]], null, null],
+    "2,2": [[[1, "π²"], [-4, ""]], null, [[1, "π²"], [-2, ""]]],
+    "3,0": [[[1, ""]], null, [[0, ""]]],
+    "3,1": [[[1 / 4, "e²"], [1 / 4, ""]], [[3 / 4, "e²"], [-1 / 4, ""]], [[1 / 4, "e²"]]],
+    "3,2": [[[2 / 9, "e³"], [1 / 9, ""]], [[4 / 9, "e³"], [-1 / 9, ""]], [[2 / 9, "e³"]]],
   };
   return tab[`${k},${n}`];
 };
 const beG = ([k, n]: number[]) => (x: number) => (k === 0 ? x ** n * Math.exp(x) : k === 1 ? x ** n * Math.cos(x) : k === 2 ? x ** n * Math.sin(x) : x ** n * Math.log(x));
 const beLim = (k: number): [number, number] => (k === 0 ? [0, 1] : k === 1 ? [0, Math.PI / 2] : k === 2 ? [0, Math.PI] : [1, Math.E]);
-const times = (c: number, s: string) => (c === 1 ? s : /^[\d.]+$/.test(s) ? `${c * Number(s)}` : `${c}(${s})`);
+const times = (c: number, t: Tm) => sum(t.map(([x, m]) => [c * x, m] as [number, string]));
 const audbe = F({
   id: "audbe",
   arity: 3,
@@ -3129,4 +3149,4 @@ const audbe = F({
   limits: "Powers up to 3 on the standard intervals; answers are exact expressions in e and π.",
 });
 
-export const B21: Def[] = [audch, audinv, austd, aulax, auinit, autrig, auform, aupi, aupfr, auparts, ausbd, audfp, aurie, audbe];
+export const B21: Def[] = [auleq, aulwp, auvexp, aubin, auapis, auapk, auaps, auapc, auaprec, auapln, auqstd, auqsplit, auqf, auqcs, auqwp, ausec, aurat, aucen, au3cl, au3ce, au3ex, aultab, aulpow, auspd, aulstd, auliinf, audsum, audquo, audch, audinv, audel, audt3, audk, audsg, auinv, austd, aulax, auinit, autrig, auform, aupi, aupfr, auparts, ausbd, audfp, aurie, audbe];

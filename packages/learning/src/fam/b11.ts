@@ -2115,7 +2115,7 @@ export const B11: Def[] = [
     bugs: ([m, n]) => {
       const { steps, max } = colInfo(n);
       if (m === 0) return [bug("counted-terms", "procedural", CONJ, "The numbers in the sequence were counted, including the start. Count the steps (the arrows) between them.", steps + 1), bug("stopped-at-two", "procedural", CONJ, "The count stopped at 2; the sequence must reach 1.", steps - 1)];
-      return [...(max !== n ? [bug("start-taken", "conceptual", CONJ, "The starting number was taken as the largest. Odd numbers make the sequence climb (3 × n + 1) before it falls.", n)] : []), bug("forgot-plus-one", "recall", PAT, "For odd numbers only 3 times was used. The rule is 3 times plus 1.", colMax3(n))].filter((b) => b.predict !== max);
+      return [...(max !== n ? [bug("start-taken", "conceptual", CONJ, "The starting number was taken as the largest. Odd numbers make the sequence climb (3 × n + 1) before it falls.", n)] : [])].filter((b) => b.predict !== max);
     },
     variants: () => [],
     explain: (s) => `The sequence: ${s.inputs[0]}`,
@@ -2230,7 +2230,7 @@ export const B11: Def[] = [
     reject: ([m, a, b, e, f]) => ((m === 0 || m === 1) && a >= 11 && a <= 99 && b >= 11 && b <= 99 && a % 10 !== 0 && b % 10 !== 0 && e >= -8 && e <= 12 && f >= -8 && f <= 12 && e !== 0 && f !== 0 ? null : "Numbers 1.1 to 9.9 (one decimal place) times powers of 10 from 10⁻⁸ to 10¹²."),
     prompt: (p) => {
       const [x, y] = scalcOps(p);
-      return `Work out ${x} ${p[0] ? "÷" : "×"} ${y}. Give the answer in scientific notation as (a, n) for a × 10ⁿ with 1 ≤ a < 10: for example 3.5 × 10⁴ is (3.5, 4).`;
+      return `Work out (${x}) ${p[0] ? "÷" : "×"} (${y}). Give the answer in scientific notation as (a, n) for a × 10ⁿ with 1 ≤ a < 10: for example 3.5 × 10⁴ is (3.5, 4).`;
     },
     solve: (p) => {
       const [A, N, raw, rawN] = scalcAns(p);
@@ -2273,7 +2273,7 @@ export const B11: Def[] = [
     difficulty: (p) => (scalcAns(p)[2] >= 10 || scalcAns(p)[2] < 1 ? 3 : p[3] < 0 || p[4] < 0 ? 2 : 1),
     word: (p) => {
       const [x, y] = scalcOps(p);
-      return p[0] ? `A tank holds ${x} litres of water and is emptied into containers that hold ${y} litres each. How many containers are filled? Give (a, n) for a × 10ⁿ.` : `A factory makes ${x} bolts a day, each weighing ${y} kg. What is the total weight of a day's bolts, in kg? Give (a, n) for a × 10ⁿ.`;
+      return p[0] ? `A rectangular sheet of material has an area of ${x} square metres and a length of ${y} metres. What is its breadth, in metres? Give (a, n) for a × 10ⁿ.` : `A rectangular sheet of material is ${x} metres long and ${y} metres wide. What is its area, in square metres? Give (a, n) for a × 10ⁿ.`;
     },
     teach: {
       idea: "(a × 10ᵐ) × (b × 10ⁿ) = (a × b) × 10ᵐ⁺ⁿ and (a × 10ᵐ) ÷ (b × 10ⁿ) = (a ÷ b) × 10ᵐ⁻ⁿ. Then the front number may need adjusting to lie between 1 and 10.",
@@ -2291,6 +2291,7 @@ export const B11: Def[] = [
     competency: DIG,
     type: "integer",
     mc: true,
+    range: [0, 9],
     // [k, i, w]: k 0 the i-th addition AB + CD = … with one solution; k 1 the i-th multiplication AB × C = …; w the letter asked
     parse: none,
     reject: (p) => (cryptOk(p) ? null : "Puzzles with exactly one solution and a letter that appears in them."),
@@ -2430,7 +2431,7 @@ export const B11: Def[] = [
     // [t, n, s]: t 0 n friends in a row with one at the left end; 1 two friends side by side; 2 one friend not at either
     // end; 3 three-digit even numbers from n digits (no repeats); 4 three-digit numbers from n digits greater than 500
     parse: none,
-    reject: ([t, n, s]) => (t >= 0 && t <= 4 && n >= (t >= 3 ? 4 : 3) && n <= (t >= 3 ? 6 : 5) && s >= 0 && s <= 19 && arrCount([t, n, s]) > 0 ? null : "Three to five friends, or four to six digits, with one condition."),
+    reject: ([t, n, s]) => (t >= 0 && t <= 4 && n >= (t >= 3 ? 4 : 3) && n <= (t >= 3 ? 6 : 5) && s >= 0 && s <= 19 && arrCount([t, n, s]) > 0 && !arrDup([t, n, s]) ? null : "Three to five friends, or four to six digits, with one condition (each list of names or digits once)."),
     prompt: (p) => arrText(p),
     solve: (p) => ({ steps: [{ id: "count", op: "count", competency: SS, inputs: [arrWhy(p)], value: arrCount(p) }], answer: arrCount(p) }),
     // independent: list every arrangement and count those that meet the condition
@@ -2449,7 +2450,7 @@ export const B11: Def[] = [
     variants: () => [],
     explain: (s) => `${s.inputs[0]}: ${s.value}`,
     domain: [[0, 4], [3, 6], [0, 19]],
-    keep: ([t, n]) => n >= (t >= 3 ? 4 : 3) && n <= (t >= 3 ? 6 : 5),
+    keep: ([t, n, s]) => n >= (t >= 3 ? 4 : 3) && n <= (t >= 3 ? 6 : 5) && !arrDup([t, n, s]),
     difficulty: ([t, n]) => (t === 0 && n <= 4 ? 1 : t <= 2 ? 2 : 3),
     teach: {
       idea: "Listing in an organised way (fix the first place, then the next …) makes sure no arrangement is missed or counted twice. A condition fixes or removes some places first.",
@@ -2600,7 +2601,7 @@ export const B11: Def[] = [
     type: "choice",
     // [a, s]: a 0 pick the one primary source among secondary ones; 1 pick the one secondary source; s seeds the choice
     parse: none,
-    reject: ([a, s]) => ((a === 0 || a === 1) && s >= 0 && s <= 199 ? null : "Two questions and seeds 0 to 199."),
+    reject: ([a, s]) => ((a === 0 || a === 1) && s >= 0 && s <= 199 && !primDup([a, s]) ? null : "Two questions and seeds 0 to 199 (each set of four situations once)."),
     choices: (p) => primSet(p).opts,
     prompt: ([a]) => `Which of these is ${a ? "secondary" : "primary"} data?`,
     solve: (p) => ({ steps: [{ id: "who", op: "classify", competency: FREQ, inputs: [p[0] ? "Secondary data was collected by someone else for their own purpose" : "Primary data is collected first-hand by the person who will use it"], value: "" }], answer: primSet(p).right }),
@@ -2617,6 +2618,7 @@ export const B11: Def[] = [
     variants: () => [],
     explain: (s) => String(s.inputs[0]),
     domain: [[0, 1], [0, 199]],
+    keep: (p) => !primDup(p),
     difficulty: ([a]) => (a ? 2 : 1),
     teach: {
       idea: "Primary data is collected first-hand by the person who will use it (counting, measuring, asking). Secondary data was collected by someone else and is reused (a census, a newspaper, a website, a report).",
@@ -2827,17 +2829,6 @@ function colInfo(n: number) {
   const s = colSeq(n);
   return { steps: s.length - 1, max: Math.max(...s) };
 }
-/** The largest number when odd numbers are only tripled (the + 1 forgotten), over the same number of steps. */
-function colMax3(n: number) {
-  let x = n;
-  let m = n;
-  for (let i = 0; i < colInfo(n).steps; i++) {
-    x = x % 2 ? 3 * x : x / 2;
-    m = Math.max(m, x);
-  }
-  return m;
-}
-
 // akscmp
 function scmpSet(s: number) {
   const r = rng(31, s);
@@ -3206,7 +3197,7 @@ const MEXE: { t: (N: number) => string; f: (x: number, N: number) => boolean }[]
 const MEX_TEXT = ["A and B are mutually exclusive, but not exhaustive", "A and B are exhaustive, but not mutually exclusive", "A and B are mutually exclusive and exhaustive (complementary)", "A and B are neither mutually exclusive nor exhaustive"];
 const mexSet = (e: number, N: number) => Array.from({ length: N }, (_, i) => i + 1).filter((x) => MEXE[e].f(x, N));
 function mexOk([k, a, b]: number[]) {
-  if (k < 0 || k > 2 || a < 0 || b > 9 || a >= b) return false;
+  if (k < 0 || k > 2 || a < 0 || b > 9 || a >= b || (k === 0 && b >= 8)) return false;
   const N = MEXN[k];
   const A = mexSet(a, N);
   const B = mexSet(b, N);
@@ -3223,4 +3214,17 @@ function mexTruth([k, a, b]: number[]) {
 function mexWhy([k, a, b]: number[]) {
   const N = MEXN[k];
   return [`A = ${setText(mexSet(a, N))}`, `B = ${setText(mexSet(b, N))}`, MEX_TEXT[mexTruth([k, a, b])]];
+}
+
+/** A seed whose list of names or digits already came up with a smaller seed (the same question twice). */
+function arrDup([t, n, s]: number[]) {
+  const key = (x: number) => (t <= 2 ? arrPeople([n, x]).join() : arrDigits([n, x]).join());
+  for (let x = 0; x < s; x++) if (key(x) === key(s)) return true;
+  return false;
+}
+const primKey = (p: number[]) => [...primSet(p).opts].sort().join("|");
+function primDup([a, s]: number[]) {
+  const k = primKey([a, s]);
+  for (let x = 0; x < s; x++) if (primKey([a, x]) === k) return true;
+  return false;
 }

@@ -1325,7 +1325,7 @@ export const B20: Def[] = [
       method: "Find N = Σf, x̄ = Σfx/N and Σfx²/N, then σ² = Σfx²/N − x̄² (or Σf(x − x̄)²/N).",
       alternatives: [{ id: "step_deviation", title: "Step-deviation (shortcut) method", kind: "procedural", text: ["Choose an assumed mean A (the middle value) and the gap h between values; let u = (x − A)/h.", "Then σ² = h² [Σfu²/N − (Σfu/N)²]: the numbers stay small."] }],
     },
-    limits: "Five equally spaced values with frequencies up to 6; grouped classes use the same steps with mid-points and are left out.",
+    limits: "Five equally spaced values with frequencies up to 6; grouped classes and the step-deviation method are the grouped-variance family.",
   },
   {
     id: "atsd",
@@ -1469,7 +1469,7 @@ export const B20: Def[] = [
       method: "Find x̄, write each |x − x̄|, add them and divide by the number of values.",
       alternatives: [{ id: "balance", title: "Use the balance of the mean", kind: "conceptual", text: ["The deviations above the mean add up to the same amount as those below it.", "So M.D. = 2 × (sum of x − x̄ for the values above the mean) ÷ n."] }],
     },
-    limits: "Six whole numbers; discrete and continuous frequency tables use the same idea and are left out.",
+    limits: "Six whole numbers; discrete and continuous frequency tables are the frequency-distribution family.",
   },
   {
     id: "atmdmed",
@@ -1557,6 +1557,7 @@ export const B20: Def[] = [
       method: "Write down sin and cos (or tan) of each angle, substitute into the formula, multiply out the surds and simplify; rationalise a tan answer.",
       alternatives: [{ id: "unit_circle", title: "Check with the unit circle", kind: "conceptual", text: ["Locate A ± B on the unit circle: the quadrant tells you the sign of the answer.", "For example cos(120° − 45°) = cos 75° must be positive and small (about 0.26)."] }],
     },
+    word: ([ai, bi, o, f]) => `A rotating arm 1 m long starts along the positive x-axis, turns anticlockwise through ${CA[ai]}° and then ${o ? "back (clockwise)" : "on (anticlockwise)"} through ${CB[bi]}°. Find ${["the height (y-coordinate, in m) of the tip of the arm, sin", "the x-coordinate (in m) of the tip of the arm, cos", "the slope (gradient) of the arm, tan"][f]}(${CA[ai]}° ${o ? "−" : "+"} ${CB[bi]}°), exactly, with no square root in the denominator.`,
     limits: "A ± B giving odd multiples of 15°; three-angle formulas and identities to prove are left out.",
   },
   {
@@ -2227,7 +2228,8 @@ export const B20: Def[] = [
       method: "Find the standard angle whose ratio is the argument, then make sure it lies in the principal range: for a negative argument use −θ (sin⁻¹, tan⁻¹, cosec⁻¹) or π − θ (cos⁻¹, sec⁻¹, cot⁻¹).",
       alternatives: [{ id: "reciprocal", title: "Turn sec⁻¹, cosec⁻¹, cot⁻¹ into the basic three", kind: "procedural", text: ["sec⁻¹ x = cos⁻¹(1/x) and cosec⁻¹ x = sin⁻¹(1/x).", "cot⁻¹ x = tan⁻¹(1/x) for x > 0, and π + tan⁻¹(1/x) for x < 0."] }],
     },
-    limits: "Standard arguments only; equations in inverse functions and their sum formulas are left out.",
+    word: (p) => `A robot arm's controller sets the arm's angle (in radians, measured from the horizontal) to the principal value of ${invExpr(p)}. What angle does the controller set? Write the answer in terms of π (you may type pi).`,
+    limits: "Standard arguments only; equations in inverse tangents and their sum formulas are another family.",
   },
   {
     id: "atinvc",
@@ -2490,6 +2492,11 @@ export const B20: Def[] = [
       idea: "The direction cosines (l, m, n) of a vector are the cosines of the angles it makes with the x-, y- and z-axes; they are the components of the unit vector, so l² + m² + n² = 1.",
       method: "Find the direction ratios B − A, find the length √(a² + b² + c²), divide each ratio by it and rationalise.",
       alternatives: [{ id: "angles", title: "Think of the angles", kind: "conceptual", text: ["The angle α with the x-axis has cos α = (x-component)/(length), as in a right triangle.", "Do the same for the y- and z-axes."] }],
+    },
+    word: (x) => {
+      const A = x.slice(3);
+      const B = A.map((v, i) => v + x[i]);
+      return `A drone flies in a straight line from the point A${pt(A)} to the point B${pt(B)} (coordinates in metres). Find the direction cosines of its path AB, as (l, m, n); square roots may stay in the answer.`;
     },
     limits: "Vectors with whole-number components; finding a third direction cosine from two angles is left out.",
   },
@@ -2760,7 +2767,11 @@ export const B20: Def[] = [
       method: "Write the 3 × 3 determinant and expand along the first row with signs +, −, +.",
       alternatives: [{ id: "cross_then_dot", title: "Cross first, then dot", kind: "procedural", text: ["Work out b × c as a vector.", "Then dot it with a: multiply matching components and add."] }],
     },
-    limits: "Small whole-number components; Lagrange's and Jacobi's identities (proofs) are marked by an educator.",
+    word: (x) => {
+      const [a, b, c] = abc(x);
+      return `In a crystal model, the three edges of a cell from one corner are a = ${vt(a)}, b = ${vt(b)} and c = ${vt(c)} (in nanometres). The cell's signed volume, positive when a, b, c form a right-handed set, is [a b c] = a · (b × c). Find it.`;
+    },
+    limits: "Small whole-number components; the volume (its size) is the next family; Lagrange's and Jacobi's identities (proofs) are marked by an educator.",
   },
   {
     id: "atcopl",
@@ -2860,4 +2871,1506 @@ export const B20: Def[] = [
     },
     limits: "Small whole-number components; Jacobi's identity and proofs are marked by an educator.",
   },
+  // ======================================================== gap@1: the unit circle and the signs of sin, cos
+  {
+    id: "atunit",
+    arity: 2,
+    title: "The point on the unit circle for a real number t",
+    competency: TF,
+    type: "tuple",
+    mc: true,
+    // [mi, k]: t = kπ/M with M = UM[mi]
+    parse: none,
+    reject: gate([[0, 4], [-18, 18]], (p) => unitOk(p), "t = kπ/M with M = 1, 2, 3, 4 or 6 and k in lowest terms."),
+    prompt: ([mi, k]) => `For a real number t, P(t) is the point reached by going a distance t round the unit circle x² + y² = 1 from (1, 0) (anticlockwise when t > 0), so P(t) = (cos t, sin t). Find P(t) for t = ${piStr(k, UM[mi])}. Give exact coordinates (x, y).`,
+    solve: ([mi, k]) => {
+      const d = (180 * k) / UM[mi];
+      const ans = tupS([sFmt(cosE(d)), sFmt(sinE(d))]);
+      return { steps: [st("angle", "convert", RAD, [piStr(k, UM[mi])], `${neg(d)}°`), st("point", "evaluate", TF, [d], ans)], answer: ans };
+    },
+    // independent: Math.cos and Math.sin of the real number t itself
+    validate: ([mi, k], v) => {
+      const t = tup(v);
+      const x = (k * Math.PI) / UM[mi];
+      return !!t && t.length === 2 && near(t[0], Math.cos(x), 1e-9) && near(t[1], Math.sin(x), 1e-9);
+    },
+    bugs: ([mi, k]) => {
+      const d = (180 * k) / UM[mi];
+      const [c, s] = [cosE(d), sinE(d)];
+      const out: Bug[] = [];
+      if (sFmt(c) !== sFmt(s)) out.push(bg("swapped", "recall", TF, "The coordinates were swapped; the x-coordinate is cos t and the y-coordinate is sin t.", tupS([sFmt(s), sFmt(c)])));
+      const abs = (x: S) => (sVal(x) < 0 ? sNeg(x) : x);
+      if (sVal(c) < 0 || sVal(s) < 0) out.push(bg("quadrant-signs", "conceptual", TF, `The signs were taken from the first quadrant; t = ${piStr(k, UM[mi])} ends in a quadrant where ${sVal(c) < 0 ? "x" : "y"} is negative.`, tupS([sFmt(abs(c)), sFmt(abs(s))])));
+      return out;
+    },
+    distractors: ([mi, k]) => {
+      const d = (180 * k) / UM[mi];
+      return [tupS([sFmt(sNeg(cosE(d))), sFmt(sinE(d))]), tupS([sFmt(cosE(d)), sFmt(sNeg(sinE(d)))]), tupS([sFmt(sNeg(cosE(d))), sFmt(sNeg(sinE(d)))])];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "angle" ? `t = ${s.inputs[0]} is the same turn as ${s.value}` : `So P(t) = (cos t, sin t) = ${s.value}`),
+    domain: [[0, 4], [-18, 18]],
+    keep: (p) => unitOk(p),
+    difficulty: ([mi, k]) => (k > 0 && Math.abs(k) <= UM[mi] / 2 ? 1 : k > 0 ? 2 : 3),
+    teach: {
+      idea: "On the unit circle, the real number t is an arc length; the point it reaches is (cos t, sin t). This defines sin and cos for every real number, and the quadrant of the point gives their signs.",
+      method: "Change t to an angle (π = 180°), find the reference angle and its standard values, and give each coordinate the sign of its quadrant.",
+      alternatives: [{ id: "reflect", title: "Reflect a first-quadrant point", kind: "conceptual", text: ["Find the point for the reference angle in the first quadrant, for example (√3/2, 1/2) for π/6.", "Reflect it into the right quadrant: across the y-axis the x-coordinate changes sign, across the x-axis the y-coordinate does."] }],
+    },
+    limits: "t a multiple of π/6, π/4, π/3 or π/2 up to 3π either way; other real numbers are the sign family.",
+  },
+  {
+    id: "atsign",
+    arity: 3,
+    title: "The signs of sin t and cos t for a real number t",
+    competency: TF,
+    type: "choice",
+    // [kind, a, b]: kind 0 t = a/10 (radians); kind 1 t = aπ/b (b 3, 4 or 6)
+    parse: none,
+    reject: gate([[0, 1], [-120, 120], [0, 6]], (p) => signOk(p), "t = a/10 away from the axes, or t = aπ/b (b = 3, 4, 6) not on an axis."),
+    prompt: (p) => `Take the real number t = ${signText(p)} (in radians). Which is true for the point P(t) = (cos t, sin t) on the unit circle?`,
+    choices: () => QUADS,
+    solve: (p) => {
+      const t = signT(p);
+      const r = ((t % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      const q = Math.floor(r / (Math.PI / 2));
+      return { steps: [st("reduce", "reduce", TF, [signText(p)], F(r / Math.PI)), st("quadrant", "classify", TF, [], q)], answer: q };
+    },
+    // independent: the signs of Math.sin and Math.cos of t
+    validate: (p, v) => {
+      const t = signT(p);
+      const [s, c] = [Math.sin(t), Math.cos(t)];
+      return v === (s > 0 ? (c > 0 ? 0 : 1) : c < 0 ? 2 : 3);
+    },
+    bugs: (p) => {
+      const t = signT(p);
+      const q = signQ(t);
+      const out: Bug[] = [];
+      if (p[0] === 0 && Math.abs(t) <= 12) {
+        const qd = signQ((t * Math.PI) / 180);
+        if (qd !== q) out.push(bg("degrees", "conceptual", RAD, `t = ${signText(p)} was taken as ${signText(p)}°; here t is a real number (radians): π ≈ 3.14 is half a turn.`, qd));
+      }
+      if (q === 1 || q === 3) out.push(bg("coordinates-swapped", "recall", TF, "The coordinates were read the wrong way round; cos t is the x-coordinate and sin t the y-coordinate.", q === 1 ? 3 : 1));
+      if (t < 0 && signQ(-t) !== q) out.push(bg("minus-ignored", "procedural", TF, "The minus sign was ignored; a negative t goes clockwise from (1, 0).", signQ(-t)));
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "reduce" ? `Removing whole turns, t is ${s.value}π more than a multiple of 2π` : `That is quadrant ${Number(s.value) + 1}: ${QUADS[Number(s.value)]}`),
+    domain: [[0, 1], [-120, 120], [0, 6]],
+    keep: (p) => signOk(p) && (p[0] === 1 || hsh(p, 41) % 3 === 0),
+    cap: 300,
+    difficulty: (p) => (signT(p) > 0 && signT(p) < 2 * Math.PI ? 1 : signT(p) > 0 ? 2 : 3),
+    teach: {
+      idea: "P(t) = (cos t, sin t) lies in the quadrant reached after going t round the unit circle; cos t has the sign of the x-coordinate and sin t of the y-coordinate. One full turn is 2π ≈ 6.28, and the quadrants end at π/2 ≈ 1.57, π ≈ 3.14 and 3π/2 ≈ 4.71.",
+      method: "Add or take away 2π until 0 ≤ t < 2π, compare t with π/2, π and 3π/2 to find the quadrant, and read the signs (All, Sin, Tan, Cos).",
+      alternatives: [{ id: "picture", title: "Walk round the circle", kind: "conceptual", text: ["Start at (1, 0) and walk t units anticlockwise (clockwise if t < 0) on a circle of radius 1.", "Each quarter of the walk is about 1.57 units long."] }],
+    },
+    limits: "Real numbers t = a/10 up to 12 either way (not near the axes) and multiples of π/3, π/4, π/6.",
+  },
+  {
+    id: "atdom",
+    arity: 4,
+    title: "Domain and range of the six trigonometric functions",
+    competency: TF,
+    type: "choice",
+    // [f, ask, k, a]: y = a f(kx); ask 0 domain, 1 range
+    parse: none,
+    reject: gate([[0, 5], [0, 1], [1, 4], [1, 5]], () => true, "y = a f(kx) with k from 1 to 4 and a from 1 to 5."),
+    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range" : "domain"} of the function y = ${a === 1 ? "" : `${a} `}${FN[f]} ${k === 1 ? "x" : `${k}x`}?`,
+    choices: (p) => domOpts(p).map((o) => o.text),
+    solve: (p) => {
+      const o = domOpts(p);
+      const i = o.findIndex((x) => x.right);
+      return { steps: [st("basic", "recall", TF, [FN[p[0]], p[1]], o[i].text), st("choose", "choose", TF, [], i)], answer: i };
+    },
+    // independent: test the function numerically: where it is defined (domain), or which values it takes (range: every
+    // value lies in the set, and every point of the set is reached, found by solving a f(kx) = y with the inverse)
+    validate: (p, v) => {
+      const truth = domOpts(p).map((o) => domTrue(p, o));
+      return typeof v === "number" && truth[v] === true && truth.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = domOpts(p);
+      return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", TF, x.says!, o.indexOf(x)));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "basic" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
+    domain: [[0, 5], [0, 1], [1, 4], [1, 5]],
+    keep: ([f, ask, k, a]) => (ask === 0 ? a <= 2 && (f !== 0 && f !== 1 ? true : k <= 2) : k <= 2 || f >= 2),
+    difficulty: ([f, ask]) => (f <= 1 ? 1 : ask === 0 ? 3 : 2),
+    teach: {
+      idea: "sin and cos are defined for every x and take values from −1 to 1; tan and sec are undefined where cos x = 0 (x = (2n + 1)π/2), cot and cosec where sin x = 0 (x = nπ); tan and cot take every real value; sec and cosec never lie strictly between −1 and 1.",
+      method: "For a f(kx): the excluded x come from kx = (2n + 1)π/2 or kx = nπ, so divide by k; the range of sin, cos, sec, cosec is scaled by a, while tan and cot still take every real value.",
+      alternatives: [{ id: "graphs", title: "Read it from the graphs", kind: "conceptual", text: ["The graph of tan x has vertical asymptotes at x = ±π/2, ±3π/2, …: those x are not in the domain.", "The graph of sec x has U-shaped pieces above 1 and below −1, never in between."] }],
+    },
+    limits: "y = a f(kx) for the six functions; sketches of the graphs are marked by an educator.",
+  },
+  // ======================================================== gap@1: simplifying with the sum and difference formulas
+  {
+    id: "atcsimp",
+    arity: 3,
+    title: "Simplifying with the compound-angle formulas",
+    competency: COMP,
+    type: "choice",
+    // [form, k, m]: k > m ≥ 1; forms sin kx cos mx ± cos kx sin mx, cos kx cos mx ∓ sin kx sin mx, (tan kx ± tan mx)/(1 ∓ tan kx tan mx)
+    parse: none,
+    reject: gate([[0, 5], [2, 7], [1, 6]], ([, k, m]) => m < k, "Multiples kx and mx with 1 ≤ m < k ≤ 7."),
+    prompt: ([f, k, m]) => `Which of these is equal to ${csimpText(f, k, m)}?`,
+    choices: (p) => csimpOpts(p).map((o) => o.text),
+    solve: (p) => {
+      const o = csimpOpts(p);
+      const i = o.findIndex((x) => x.id === "right");
+      return { steps: [st("formula", "rewrite", COMP, [csimpText(p[0], p[1], p[2])], o[i].text), st("choose", "choose", COMP, [], i)], answer: i };
+    },
+    // independent: evaluate the expression and every option at several x; the chosen option must be the only equal one
+    validate: (p, v) => {
+      const [f, k, m] = p;
+      const g = csimpFn(f, k, m);
+      const xs = [0.13, 0.29, 0.41, 0.57, 0.66];
+      const eq = csimpOpts(p).map((o) => xs.every((x) => near(o.fn(x), g(x), 1e-9)));
+      return typeof v === "number" && eq[v] === true && eq.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = csimpOpts(p);
+      return o.filter((x) => x.id !== "right" && x.says).map((x) => bg(x.id, "recall", COMP, x.says!, o.indexOf(x)));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "formula" ? `${s.inputs[0]} = ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
+    domain: [[0, 5], [2, 7], [1, 6]],
+    keep: ([, k, m]) => m < k,
+    difficulty: ([f]) => (f === 0 || f === 2 ? 1 : f <= 3 ? 2 : 3),
+    teach: {
+      idea: "Read the formulas backwards: sin A cos B ± cos A sin B = sin(A ± B); cos A cos B ∓ sin A sin B = cos(A ± B) (the sign flips); (tan A ± tan B)/(1 ∓ tan A tan B) = tan(A ± B).",
+      method: "Match the pattern: which functions appear, in which order, and with which sign between the products. Then write the single function of kx ± mx.",
+      alternatives: [{ id: "check", title: "Check with x = 0 or a small x", kind: "procedural", text: ["Put a convenient value, like x = π/12, into the expression and into each option.", "Only the right option gives the same number."] }],
+    },
+    limits: "The six sum and difference patterns with whole-number multiples of x; longer identities to prove are marked by an educator.",
+  },
+  // ======================================================== gap@1: half-angles
+  {
+    id: "athalf",
+    arity: 4,
+    title: "Half-angle values from one ratio",
+    competency: COMP,
+    type: "exact",
+    mc: true,
+    // [t, g, q, h]: triple t, given sin A (g = 0) or cos A (g = 1), A in quadrant q (0 < A < 2π); find sin, cos or tan of A/2
+    parse: none,
+    reject: gate([[0, 4], [0, 1], [1, 4], [0, 2]], () => true, "A Pythagorean-triple ratio in a given quadrant; sin, cos or tan of A/2."),
+    prompt: (p) => {
+      const [, g, q, h] = p;
+      const [s, c] = dblSC(p);
+      return `Given ${g ? `cos A = ${F(c)}` : `sin A = ${F(s)}`} and ${QTEXT[q - 1]}, find ${["sin", "cos", "tan"][h]}(A/2). Give the exact value with no square root in the denominator.`;
+    },
+    solve: (p) => {
+      const [, g, , h] = p;
+      const [s, c] = dblSC(p);
+      const ans = halfVal(p);
+      return { steps: [st("other", "evaluate", "MATH.trigonometry.identities", [g ? "sin A" : "cos A"], g ? s : c), st("half", "evaluate", COMP, [["sin", "cos", "tan"][h]], ans)], answer: ans };
+    },
+    // independent: build A with Math.atan2 from the two ratios and evaluate the function of A/2 directly
+    validate: (p, v) => {
+      const [t, , q, h] = p;
+      const [a, b] = TRIPLES[t];
+      const [ss, sc] = QSIGN[q - 1];
+      let A = Math.atan2(ss * a, sc * b);
+      if (A < 0) A += 2 * Math.PI;
+      const x = num(v);
+      return x !== null && near(x, [Math.sin, Math.cos, Math.tan][h](A / 2), 1e-9);
+    },
+    bugs: (p) => halfBugs(p),
+    distractors: (p) => [halfNeg(p), "1/2", "√2/2"],
+    variants: () => [],
+    explain: (s) => (s.id === "other" ? `From sin²A + cos²A = 1 with the quadrant's sign: ${s.inputs[0]} = ${F(Number(s.value))}` : `${s.inputs[0]}(A/2) = ${["±√((1 − cos A)/2)", "±√((1 + cos A)/2)", "sin A/(1 + cos A)"][["sin", "cos", "tan"].indexOf(String(s.inputs[0]))]} with the sign for A/2: ${s.value}`),
+    domain: [[0, 4], [0, 1], [1, 4], [0, 2]],
+    difficulty: ([, , q, h]) => (q === 1 && h === 0 ? 1 : h === 2 || q >= 3 ? 3 : 2),
+    teach: {
+      idea: "From cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1: sin(A/2) = ±√((1 − cos A)/2), cos(A/2) = ±√((1 + cos A)/2), and tan(A/2) = sin A/(1 + cos A). The sign comes from the quadrant of A/2.",
+      method: "Find cos A (and sin A) with its quadrant's sign, substitute into the half-angle formula, choose the sign from where A/2 lies (0 < A/2 < π), and rationalise.",
+      alternatives: [{ id: "from-double", title: "Start from the double-angle formula", kind: "procedural", text: ["Write cos A = 1 − 2 sin²(A/2) and solve for sin(A/2).", "Then use 0 < A/2 < π: sine is positive there, cosine positive only when A < π."] }],
+    },
+    limits: "Ratios from five Pythagorean triples with 0 < A < 2π.",
+  },
+  // ======================================================== gap@1: mean deviation and variance of frequency data
+  {
+    id: "atmdf",
+    arity: 4,
+    title: "Mean deviation of a frequency distribution",
+    competency: MD,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, x0, st, seed]: kind 0 discrete, about the mean; 1 discrete, about the median; 2 classes of width 5·st from
+    // 5·x0, about the mean (mid-points)
+    parse: none,
+    reject: gate([[0, 2], [1, 20], [1, 4], [0, 59]], (p) => mdfOk(p), "Five values or classes with frequencies 1 to 8 and a mean deviation with at most two decimal places."),
+    prompt: ([kind]) => (kind === 2 ? "Find the mean deviation about the mean for the grouped frequency distribution in the table (use the mid-points of the classes)." : `Find the mean deviation about the ${kind === 0 ? "mean" : "median"} for the frequency distribution in the table (x is the value, f its frequency).`),
+    figure: (p) => mdfTable(p),
+    solve: (p) => {
+      const d = mdfData(p);
+      return { steps: [st("centre", p[0] === 1 ? "read" : "divide", p[0] === 1 ? MD : MEAN, [d.N], F(d.c)), st("deviations", "multiply", MD, [], F(d.S)), st("md", "divide", MD, [d.S, d.N], d.S / d.N)], answer: d.S / d.N };
+    },
+    // independent: write every observation out; the mean deviation about the centre found from the list (the median by
+    // sorting, the mean by adding)
+    validate: (p, v) => {
+      const d = mdfData(p);
+      const list: number[] = [];
+      d.xs.forEach((x, i) => {
+        for (let j = 0; j < d.fs[i]; j++) list.push(x);
+      });
+      list.sort((a, b) => a - b);
+      const L = list.length;
+      const c = p[0] === 1 ? (L % 2 ? list[(L - 1) / 2] : (list[L / 2 - 1] + list[L / 2]) / 2) : meanOf(list);
+      return typeof v === "number" && near(list.reduce((s, x) => s + Math.abs(x - c), 0) / L, v, 1e-9);
+    },
+    bugs: (p) => {
+      const d = mdfData(p);
+      const right = d.S / d.N;
+      const pr = (x: number) => (near(x, right, 1e-9) ? null : x);
+      const plain = d.xs.reduce((s, x) => s + Math.abs(x - meanOf(d.xs)), 0) / 5;
+      const other = mdfData(p, true);
+      return [
+        bg("signs-kept", "conceptual", MD, "The deviations were added with their signs; about the mean they always add up to 0. Mean deviation uses the distances |x − centre|.", p[0] === 1 ? null : 0),
+        bg("divide-by-values", "procedural", MD, `Σf|x − centre| was divided by 5, the number of ${p[0] === 2 ? "classes" : "values"}; divide by N = Σf = ${d.N}.`, pr(d.S / 5)),
+        bg("frequencies-ignored", "conceptual", MD, "The frequencies were ignored, as if each value appeared once.", pr(plain)),
+        bg(p[0] === 1 ? "about-mean" : "about-median", "procedural", MD, `The distances were measured from the ${p[0] === 1 ? "mean" : "median"}; this question asks about the ${p[0] === 1 ? "median" : "mean"}.`, pr(other.S / other.N)),
+      ].filter((b) => b.predict !== null);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "centre" ? `N = ${s.inputs[0]}; the centre is ${s.value}` : s.id === "deviations" ? `Σf|x − centre| = ${s.value}` : `M.D. = ${F(Number(s.inputs[0]))}/${s.inputs[1]} = ${F(Number(s.value))}`),
+    domain: [[0, 2], [1, 20], [1, 4], [0, 59]],
+    keep: (p) => mdfOk(p),
+    cap: 400,
+    difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
+    teach: {
+      idea: "The mean deviation is the average distance of the observations from a centre (the mean or the median); in a frequency table each distance counts as often as its frequency, and for classes the mid-point stands for the class.",
+      method: "Find N = Σf and the centre (mean = Σfx/N, or the median from the cumulative frequencies), then the distances |x − centre|, multiply by f, add, and divide by N.",
+      alternatives: [{ id: "balance", title: "Use the balance about the mean", kind: "procedural", text: ["About the mean, the weighted distances above it add up to the same as those below.", "So Σf|x − x̄| = 2 × (sum of f(x − x̄) over the values above the mean)."] }],
+    },
+    limits: "Five values or five equal classes with frequencies up to 8; answers with at most two decimal places.",
+  },
+  {
+    id: "atgvar",
+    arity: 4,
+    title: "Variance of grouped data by the step-deviation method",
+    competency: DISP,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, si, hi, seed]: five classes of width h = GH[hi] from 10·si; kind 0 the variance, 1 Σfu² with u = (x − A)/h,
+    // 2 Σfd² with d = x − A, where A is the middle mid-point
+    parse: none,
+    reject: gate([[0, 2], [0, 5], [0, 2], [0, 79]], (p) => gvarOk(p), "Five equal classes with frequencies 2 to 12; a variance with at most two decimal places."),
+    prompt: ([kind]) => {
+      const lead = "For the grouped frequency distribution in the table, take the assumed mean A as the mid-point of the middle class and use the mid-points x of the classes.";
+      return kind === 0 ? `${lead} Find the variance by the step-deviation method.` : kind === 1 ? `${lead} With u = (x − A)/h, where h is the class width, find Σfu².` : `${lead} With d = x − A, find Σfd².`;
+    },
+    figure: (p) => gvarTable(p),
+    solve: (p) => {
+      const d = gvarData(p);
+      const v = d.h * d.h * (d.Su2 / d.N - (d.Su / d.N) ** 2);
+      const ans = p[0] === 0 ? v : p[0] === 1 ? d.Su2 : d.h * d.h * d.Su2;
+      return { steps: [st("u", "subtract", DISP, [d.A, d.h], "−2, −1, 0, 1, 2"), st("sums", "multiply", DISP, [d.Su, d.Su2], `Σfu = ${d.Su}, Σfu² = ${d.Su2}`), ...(p[0] === 0 ? [st("variance", "evaluate", DISP, [d.h, d.N], v)] : [])], answer: ans };
+    },
+    // independent: the mid-points themselves: Σf(x − A)² directly, and the variance by the pairwise formula
+    validate: (p, v) => {
+      const d = gvarData(p);
+      if (typeof v !== "number") return false;
+      if (p[0] === 0) {
+        let s = 0;
+        for (let i = 0; i < 5; i++) for (let j = 0; j < 5; j++) s += d.fs[i] * d.fs[j] * (d.mids[i] - d.mids[j]) ** 2;
+        return near(s / (2 * d.N * d.N), v, 1e-9);
+      }
+      const s2 = d.mids.reduce((s, x, i) => s + d.fs[i] * (x - d.A) ** 2, 0);
+      return near(p[0] === 1 ? s2 / (d.h * d.h) : s2, v, 1e-9);
+    },
+    bugs: (p) => {
+      const d = gvarData(p);
+      const v = d.h * d.h * (d.Su2 / d.N - (d.Su / d.N) ** 2);
+      const right = p[0] === 0 ? v : p[0] === 1 ? d.Su2 : d.h * d.h * d.Su2;
+      const pr = (x: number) => (near(x, right, 1e-9) || x < 0 ? null : x);
+      if (p[0] === 0)
+        return [
+          bg("h-squared-left-out", "procedural", DISP, `The bracket was not multiplied by h² = ${d.h * d.h}; u measures in class widths, so σ² = h²[Σfu²/N − (Σfu/N)²].`, pr(d.Su2 / d.N - (d.Su / d.N) ** 2)),
+          bg("h-not-squared", "procedural", DISP, `The bracket was multiplied by h = ${d.h} instead of h².`, pr(d.h * (d.Su2 / d.N - (d.Su / d.N) ** 2))),
+          bg("mean-term-left-out", "procedural", DISP, "(Σfu/N)² was not taken away; the step-deviation formula subtracts the square of the mean of u.", pr((d.h * d.h * d.Su2) / d.N)),
+        ].filter((b) => b.predict !== null);
+      return [
+        bg("square-of-sum", "procedural", DISP, `(Σf${p[0] === 1 ? "u" : "d"})² was found; Σf${p[0] === 1 ? "u" : "d"}² squares each deviation first, then multiplies by f and adds.`, pr((p[0] === 1 ? d.Su : d.h * d.Su) ** 2)),
+        bg("f-squared", "procedural", DISP, `Each f${p[0] === 1 ? "u" : "d"} was squared (f²${p[0] === 1 ? "u" : "d"}²); only the deviation is squared.`, pr(d.fs.reduce((s, f, i) => s + (f * (i - 2) * (p[0] === 1 ? 1 : d.h)) ** 2, 0))),
+      ].filter((b) => b.predict !== null);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "u" ? `A = ${s.inputs[0]}, h = ${s.inputs[1]}: u = −2, −1, 0, 1, 2` : s.id === "sums" ? s.value as string : `σ² = ${s.inputs[0]}² × [Σfu²/${s.inputs[1]} − (Σfu/${s.inputs[1]})²] = ${F(Number(s.value))}`),
+    domain: [[0, 2], [0, 5], [0, 2], [0, 79]],
+    keep: (p) => gvarOk(p),
+    cap: 400,
+    difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
+    teach: {
+      idea: "Shifting all the data by A does not change the variance, and dividing by h divides it by h²: so σ² = h²[Σfu²/N − (Σfu/N)²] with u = (x − A)/h, using the mid-points of the classes.",
+      method: "Write the mid-points, choose A (a middle mid-point) and h, work out u, fu and fu², add the columns, and substitute.",
+      alternatives: [{ id: "assumed-mean", title: "Assumed-mean method", kind: "procedural", text: ["With d = x − A (not divided by h): σ² = Σfd²/N − (Σfd/N)².", "It gives the same variance with bigger numbers."] }],
+    },
+    limits: "Five equal classes; the standard deviation is the square root of this variance.",
+  },
+  // ======================================================== gap@1: area of a parallelogram by the cross product
+  {
+    id: "atpara",
+    arity: 7,
+    title: "Area of a parallelogram by the cross product",
+    competency: VP,
+    type: "exact",
+    mc: true,
+    // [kind, x1, x2, x3, y1, y2, y3]: kind 0 adjacent sides a = x, b = y; kind 1 diagonals d₁ = x, d₂ = y
+    parse: none,
+    reject: gate([[0, 1], V4, V4, V4, V4, V4, V4], (p) => paraOk(p), "Two non-parallel vectors with components from −4 to 4 (at least two non-zero each)."),
+    prompt: ([kind, ...x]) => `Find the area of the parallelogram whose ${kind ? "diagonals" : "adjacent sides"} are given by the vectors ${kind ? "d₁" : "a"} = ${vt(x.slice(0, 3))} and ${kind ? "d₂" : "b"} = ${vt(x.slice(3))}. Give the exact value.`,
+    solve: ([kind, ...x]) => {
+      const c = cross(x.slice(0, 3), x.slice(3));
+      const N = len2(c);
+      const [k, m] = sqf(N);
+      const ans = kind ? surdQ(k, 2, m) : rootS(N);
+      return { steps: [st("cross", "evaluate", VP, [], tupS(c)), st("area", "root", VP, [N, kind], ans)], answer: ans };
+    },
+    // independent: |a||b| sin θ from the dot product (Lagrange's identity), with the sides found from the diagonals
+    validate: ([kind, ...x], v) => {
+      const [u, w] = [x.slice(0, 3), x.slice(3)];
+      const [a, b] = kind ? [u.map((t, i) => (t + w[i]) / 2), u.map((t, i) => (t - w[i]) / 2)] : [u, w];
+      const n = num(v);
+      return n !== null && near(n, Math.sqrt(len2(a) * len2(b) - dot(a, b) ** 2), 1e-9);
+    },
+    bugs: ([kind, ...x]) => {
+      const N = len2(cross(x.slice(0, 3), x.slice(3)));
+      const [k, m] = sqf(N);
+      return kind
+        ? [bg("half-dropped", "recall", VP, "The ½ was left out; with diagonals d₁ and d₂ the area is ½|d₁ × d₂| (the vectors are diagonals, not sides).", rootS(N)), bg("root-missing", "procedural", VA, "The square root of |d₁ × d₂|² was not taken.", F(N / 2))]
+        : [bg("triangle-half", "recall", VP, "½|a × b| was used; that is the triangle on a and b. The parallelogram is twice the triangle: |a × b|.", surdQ(k, 2, m)), bg("root-missing", "procedural", VA, "The square root of |a × b|² was not taken.", String(N))];
+    },
+    distractors: ([, ...x]) => [rootS(len2(cross(x.slice(0, 3), x.slice(3))) * 4), String(Math.abs(dot(x.slice(0, 3), x.slice(3))) || 1)],
+    variants: () => [],
+    explain: (s) => (s.id === "cross" ? `The cross product is ${s.value}` : `Area = ${Number(s.inputs[1]) ? "½" : ""}√${s.inputs[0]} = ${s.value}`),
+    domain: [[0, 1], V4, V4, V4, V4, V4, V4],
+    keep: (p) => paraOk(p),
+    cap: 300,
+    range: [0, Infinity],
+    difficulty: ([kind, ...x]) => (kind === 0 ? (sqf(len2(cross(x.slice(0, 3), x.slice(3))))[1] === 1 ? 1 : 2) : 3),
+    teach: {
+      idea: "|a × b| = |a||b| sin θ is the base times the height of the parallelogram on a and b. If d₁ and d₂ are the diagonals, the sides are (d₁ ± d₂)/2, and the area is ½|d₁ × d₂|.",
+      method: "Find the cross product with the determinant, then its length; halve it when the vectors given are the diagonals.",
+      alternatives: [{ id: "lagrange", title: "Without the determinant", kind: "procedural", text: ["|a × b|² = |a|²|b|² − (a · b)².", "Work out the lengths and the dot product, then take the square root."] }],
+    },
+    limits: "Whole-number components up to 4; parallelograms given by vertices are left out.",
+  },
+  // ======================================================== gap@1: half-angle formulae for a triangle
+  {
+    id: "athalft",
+    arity: 4,
+    title: "Half-angle formulae in a triangle",
+    competency: TRL,
+    type: "exact",
+    mc: true,
+    // [h, a, b, c]: sides a, b, c with an even perimeter; h 0 sin(A/2), 1 cos(A/2), 2 tan(A/2)
+    parse: none,
+    reject: gate([[0, 2], [2, 15], [2, 15], [2, 15]], (p) => halftOk(p), "A triangle with whole-number sides from 2 to 15 and an even perimeter."),
+    prompt: ([h, a, b, c]) => `In triangle ABC, a = ${a} cm, b = ${b} cm and c = ${c} cm. Using a half-angle formula, find ${["sin", "cos", "tan"][h]}(A/2). Give the exact value with no square root in the denominator.`,
+    solve: ([h, a, b, c]) => {
+      const s = (a + b + c) / 2;
+      const [P, Q] = halftPQ(h, a, b, c);
+      return { steps: [st("s", "divide", TRL, [a + b + c, 2], s), st("formula", "substitute", TRL, [h, P, Q], fracRoot(P, Q))], answer: fracRoot(P, Q) };
+    },
+    // independent: the angle A itself from the cosine rule (Math.acos), then the function of A/2
+    validate: ([h, a, b, c], v) => {
+      const A = Math.acos((b * b + c * c - a * a) / (2 * b * c));
+      const x = num(v);
+      return x !== null && near(x, [Math.sin, Math.cos, Math.tan][h](A / 2), 1e-9);
+    },
+    bugs: ([h, a, b, c]) => {
+      const s = (a + b + c) / 2;
+      const right = num(fracRoot(...halftPQ(h, a, b, c)))!;
+      const out: Bug[] = [];
+      const sw = h === 0 ? fracRoot(s * (s - a), b * c) : h === 1 ? fracRoot((s - b) * (s - c), b * c) : fracRoot(s * (s - a), (s - b) * (s - c));
+      if (!near(num(sw)!, right, 1e-9)) out.push(bg("formula-swapped", "recall", TRL, h === 2 ? "The tangent formula was turned upside down: tan(A/2) = √((s − b)(s − c)/(s(s − a)))." : "The sine and cosine half-angle formulas were swapped: sin(A/2) = √((s − b)(s − c)/(bc)) and cos(A/2) = √(s(s − a)/(bc)).", sw));
+      const [P, Q] = halftPQ(h, a, b, c);
+      const g = gcd(P, Q);
+      if (!near(P / Q, right, 1e-9)) out.push(bg("root-missing", "procedural", TRL, "The square root was not taken; the formula gives the square of the half-angle ratio under the root.", F(P / g / (Q / g))));
+      return out;
+    },
+    distractors: ([h, a, b, c]) => {
+      const [P, Q] = halftPQ(h, a, b, c);
+      return [fracRoot(P + Q, 2 * Q), fracRoot(P, 2 * Q), fracRoot(Q, 4 * P)].filter((x) => num(x) !== null);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "s" ? `s = (a + b + c)/2 = ${s.value}` : `${["sin(A/2) = √((s − b)(s − c)/(bc))", "cos(A/2) = √(s(s − a)/(bc))", "tan(A/2) = √((s − b)(s − c)/(s(s − a)))"][Number(s.inputs[0])]} = √(${s.inputs[1]}/${s.inputs[2]}) = ${s.value}`),
+    domain: [[0, 2], [2, 15], [2, 15], [2, 15]],
+    keep: (p) => halftOk(p),
+    cap: 300,
+    difficulty: ([h]) => (h === 1 ? 1 : h === 0 ? 2 : 3),
+    teach: {
+      idea: "With s = (a + b + c)/2, the cosine rule and cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1 give sin(A/2) = √((s − b)(s − c)/(bc)), cos(A/2) = √(s(s − a)/(bc)) and tan(A/2) = √((s − b)(s − c)/(s(s − a))).",
+      method: "Find s, the three numbers s − a, s − b, s − c, substitute into the formula, simplify the fraction under the root and rationalise.",
+      alternatives: [{ id: "via-cos", title: "Go through cos A", kind: "procedural", text: ["Find cos A = (b² + c² − a²)/(2bc).", "Then sin(A/2) = √((1 − cos A)/2): the same value."] }],
+    },
+    limits: "Whole-number sides with an even perimeter (s a whole number); the area formulae are another family.",
+  },
+  // ======================================================== gap@1: applied problems with the sine and cosine rules
+  {
+    id: "atapp",
+    arity: 4,
+    title: "Distances and heights with the sine and cosine rules",
+    competency: TRL,
+    type: "exact",
+    mc: true,
+    // kind 0 [0, a, b, ci]: two ships sail a and b km on courses ci = 0: 60°, 1: 120° apart → their distance;
+    // kind 1 [1, pi, d, 0]: elevations α < β (APAIR[pi]) seen d m apart in line with a tower → the line of sight from the
+    // nearer point to the top
+    parse: none,
+    reject: gate([[0, 1], [0, 30], [2, 60], [0, 1]], (p) => appOk(p), "Two ships (2–30 km) or two observation points d m apart."),
+    prompt: ([kind, x, y, z]) =>
+      kind === 0
+        ? `Two ships leave a port at the same time. One sails ${x} km in a straight line and the other ${y} km in a straight line, on courses that make an angle of ${z ? 120 : 60}° with each other. How far apart are the ships then, in km? Give the exact value.`
+        : `From a point A on level ground, the angle of elevation of the top T of a tower is ${APAIR[x][0]}°. From a point B, ${y} m nearer the tower on the same line, it is ${APAIR[x][1]}°. Using the sine rule in triangle ABT, find the distance BT from B to the top of the tower, in metres. Give the exact value.`,
+    solve: (p) => {
+      const [kind, x, y, z] = p;
+      if (kind === 0) {
+        const N = x * x + y * y + (z ? 1 : -1) * x * y;
+        return { steps: [st("rule", "substitute", TRL, [x, y, z ? 120 : 60], N), st("root", "root", SURDS, [N], rootS(N))], answer: rootS(N) };
+      }
+      const ans = appBT(p);
+      return { steps: [st("angle", "subtract", TRL, [APAIR[x][1], APAIR[x][0]], APAIR[x][1] - APAIR[x][0]), st("rule", "rewrite", TRL, [y], `BT = ${y} sin ${APAIR[x][0]}° / sin ${APAIR[x][1] - APAIR[x][0]}°`), st("evaluate", "evaluate", RATIOS, [], ans)], answer: ans };
+    },
+    // independent: coordinates: place the port (or the tower's foot) at the origin and measure the distance
+    validate: ([kind, x, y, z], v) => {
+      const n = num(v);
+      if (n === null) return false;
+      if (kind === 0) {
+        const t = deg(z ? 120 : 60);
+        return near(n, Math.hypot(x - y * Math.cos(t), y * Math.sin(t)), 1e-9);
+      }
+      const [ta, tb] = APAIR[x].map((d) => Math.tan(deg(d)));
+      const h = (y * ta * tb) / (tb - ta);
+      return near(n, Math.hypot(h / tb, h), 1e-9);
+    },
+    bugs: (p) => {
+      const [kind, x, y, z] = p;
+      if (kind === 0) {
+        const other = x * x + y * y + (z ? -1 : 1) * x * y;
+        return [bg("cos-sign", "recall", TRL, `cos ${z ? 120 : 60}° was taken as ${z ? "+" : "−"}½; cos 60° = ½ and cos 120° = −½.`, rootS(other)), bg("pythagoras", "conceptual", TRL, "Pythagoras was used, as if the courses were at right angles; for any other angle use the cosine rule c² = a² + b² − 2ab cos C.", rootS(x * x + y * y))];
+      }
+      const [A, Bt] = APAIR[x];
+      return [
+        bg("wrong-angle", "procedural", TRL, `sin ${Bt}° was used for the angle at T; the angle of triangle ABT at T is ${Bt}° − ${A}° = ${Bt - A}°.`, sFmt(sScale(sDiv(sinE(A), sinE(Bt)), [y, 1]))),
+        bg("height-instead", "procedural", TRL, "The height of the tower was found; the question asks for the slant distance BT.", appH(p)),
+      ];
+    },
+    distractors: (p) => (p[0] === 0 ? [rootS(p[1] * p[1] + p[2] * p[2] + 1), String(p[1] + p[2])] : [String(2 * p[2]), sFmt(sScale(sOf(1, 1, 3), [p[2], 1]))]),
+    variants: () => [],
+    explain: (s) => (s.id === "rule" ? (s.inputs.length === 3 ? `By the cosine rule, d² = ${s.inputs[0]}² + ${s.inputs[1]}² − 2 × ${s.inputs[0]} × ${s.inputs[1]} × cos ${s.inputs[2]}° = ${s.value}` : `By the sine rule in triangle ABT: ${s.value}`) : s.id === "angle" ? `The angle at T is ${s.inputs[0]}° − ${s.inputs[1]}° = ${s.value}°` : s.id === "root" ? `d = √${s.inputs[0]} = ${s.value} km` : `BT = ${s.value} m`),
+    domain: [[0, 1], [0, 30], [2, 60], [0, 1]],
+    keep: (p) => appOk(p),
+    cap: 400,
+    difficulty: ([kind, x]) => (kind === 0 ? 2 : x === 0 ? 2 : 3),
+    teach: {
+      idea: "When the triangle in a problem is not right-angled, use the cosine rule (two sides and the angle between them give the third side) or the sine rule (a side and two angles give another side).",
+      method: "Draw the triangle, mark what is known, find any missing angle from the angle sum (an exterior angle equals the sum of the two opposite interior angles), and apply the matching rule.",
+      alternatives: [{ id: "right-triangles", title: "Split into right triangles", kind: "procedural", text: ["Drop a perpendicular to make two right triangles.", "Use sin, cos and Pythagoras in each: the result matches the sine or cosine rule."] }],
+    },
+    limits: "Courses at 60° or 120°, and elevation pairs from 30°, 45° and 60°; solving a triangle completely (all sides and angles) is left to written work.",
+  },
+  // ======================================================== gap@1: scalars, vectors and types of vectors
+  {
+    id: "atvtype",
+    arity: 3,
+    title: "Scalars, vectors and kinds of vectors",
+    competency: VA,
+    type: "choice",
+    // [kind, s, t]: 0 which is a vector, 1 which is a scalar (s, t choose the quantities); 2 how a and b are related;
+    // 3 zero, unit or neither; 4 which pair is co-initial
+    parse: none,
+    reject: gate([[0, 4], [0, 59], [0, 3]], (p) => vtypeOk(p), "One of five kinds of question."),
+    prompt: (p) => vtypeText(p),
+    choices: (p) => vtypeOpts(p).map((o) => o.text),
+    solve: (p) => {
+      const o = vtypeOpts(p);
+      const i = o.findIndex((x) => x.right);
+      return { steps: [st("decide", "classify", VA, [o[i].text], i)], answer: i };
+    },
+    // independent: kinds 0, 1 by whether the quantity needs a direction (its definition); 2 by the cross product and
+    // the ratio of components; 3 by the length; 4 by comparing the initial points
+    validate: (p, v) => {
+      const truth = vtypeTruth(p);
+      return typeof v === "number" && truth[v] === true && truth.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = vtypeOpts(p);
+      return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", VA, x.says!, o.indexOf(x)));
+    },
+    variants: () => [],
+    explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
+    domain: [[0, 4], [0, 59], [0, 3]],
+    keep: (p) => vtypeOk(p),
+    cap: 400,
+    difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 4 ? 2 : 3),
+    teach: {
+      idea: "A scalar has only a size (mass, time, speed, work); a vector has a size and a direction (displacement, velocity, force). Equal vectors have the same length and direction; −a has the same length and the opposite direction; collinear vectors lie along parallel lines (b = λa); a unit vector has length 1; the zero vector has length 0; co-initial vectors start at the same point.",
+      method: "Ask whether a direction is needed. For two vectors in components compare them: b = a (equal), b = −a (negative), b = λa (collinear), otherwise not collinear. For one vector find its length.",
+      alternatives: [{ id: "arrows", title: "Draw the arrows", kind: "conceptual", text: ["Draw each vector as an arrow from its initial point.", "Arrows on parallel lines are collinear; arrows from one point are co-initial; an arrow of length 1 is a unit vector."] }],
+    },
+    limits: "Naming and comparing; adding vectors geometrically (triangle law) is drawn by learners and marked by an educator.",
+  },
+  // ======================================================== gap@1: domains and ranges of the inverse functions
+  {
+    id: "atinvd",
+    arity: 4,
+    title: "Domain and range of the inverse trigonometric functions",
+    competency: INV,
+    type: "choice",
+    // [f, ask, k, a]: y = a f⁻¹(x/k) (k = 1: f⁻¹ x); ask 0 domain, 1 range
+    parse: none,
+    reject: gate([[0, 5], [0, 1], [1, 3], [1, 3]], ([, ask, k, a]) => (ask === 0 ? a === 1 : k === 1), "y = f⁻¹(x/k) for the domain, a f⁻¹(x) for the range."),
+    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range (the principal-value branch)" : "domain"} of y = ${a === 1 ? "" : `${a} `}${INVT[f].n}(${k === 1 ? "x" : `x/${k}`})?`,
+    choices: (p) => invdOpts(p).map((o) => o.text),
+    solve: (p) => {
+      const o = invdOpts(p);
+      const i = o.findIndex((x) => x.right);
+      return { steps: [st("branch", "recall", INV, [INVT[p[0]].n], o[i].text), st("choose", "choose", INV, [], i)], answer: i };
+    },
+    // independent: numerically: where Math.asin, Math.acos, Math.atan of x/k (or k/x) are defined, and which values a
+    // f⁻¹ takes (every value is inside the set, and every point of the set is reached: f of it, put back, returns it)
+    validate: (p, v) => {
+      const truth = invdOpts(p).map((o) => invdTrue(p, o));
+      return typeof v === "number" && truth[v] === true && truth.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = invdOpts(p);
+      return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", INV, x.says!, o.indexOf(x)));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
+    domain: [[0, 5], [0, 1], [1, 3], [1, 3]],
+    keep: ([, ask, k, a]) => (ask === 0 ? a === 1 : k === 1),
+    difficulty: ([f]) => (f <= 2 ? 1 : f === 3 ? 2 : 3),
+    teach: {
+      idea: "Each inverse function undoes its function on one branch: sin⁻¹ has domain [−1, 1] and range [−π/2, π/2]; cos⁻¹ [−1, 1] and [0, π]; tan⁻¹ ℝ and (−π/2, π/2); cot⁻¹ ℝ and (0, π); sec⁻¹ (−∞, −1] ∪ [1, ∞) and [0, π] without π/2; cosec⁻¹ (−∞, −1] ∪ [1, ∞) and [−π/2, π/2] without 0.",
+      method: "For f⁻¹(x/k), x/k must lie in the basic domain, so multiply its end points by k. For a·f⁻¹(x), multiply the range's end points by a.",
+      alternatives: [{ id: "reflect", title: "Reflect the restricted graph", kind: "conceptual", text: ["The graph of f⁻¹ is the reflection of the restricted graph of f in the line y = x.", "So the domain and the range swap: the restricted domain of f is the range of f⁻¹."] }],
+    },
+    limits: "The six inverse functions with an inner divisor k or an outer factor a; the sketches are marked by an educator.",
+  },
+  // ======================================================== gap@1: equations and sum formulae in inverse functions
+  {
+    id: "atinveq",
+    arity: 3,
+    title: "Equations and sum formulae with inverse tangents",
+    competency: INV,
+    type: "fraction",
+    mc: true,
+    // [kind, a, b]: 0 solve tan⁻¹(ax) + tan⁻¹(bx) = π/4 (x > 0); 1 tan⁻¹(1/a) + tan⁻¹(1/b) = tan⁻¹ x; 2 2 tan⁻¹(1/a) =
+    // tan⁻¹ x (b = 0); 3 tan⁻¹(1/a) − tan⁻¹(1/b) = tan⁻¹ x (a < b)
+    parse: none,
+    reject: gate([[0, 3], [1, 9], [0, 9]], (p) => inveqOk(p), "Small whole numbers for which the equation has a rational answer."),
+    prompt: ([kind, a, b]) =>
+      kind === 0
+        ? `Solve tan⁻¹(${a === 1 ? "" : a}x) + tan⁻¹(${b === 1 ? "" : b}x) = π/4 for x. (A fraction is fine.)`
+        : kind === 1
+          ? `Find x if tan⁻¹(1/${a}) + tan⁻¹(1/${b}) = tan⁻¹ x. (A fraction is fine.)`
+          : kind === 2
+            ? `Find x if 2 tan⁻¹(1/${a}) = tan⁻¹ x. (A fraction is fine.)`
+            : `Find x if tan⁻¹(1/${a}) − tan⁻¹(1/${b}) = tan⁻¹ x. (A fraction is fine.)`,
+    solve: (p) => {
+      const ans = inveqAns(p);
+      return { steps: [st("formula", "rewrite", INV, [p[0]], ["tan⁻¹ u + tan⁻¹ v = tan⁻¹((u + v)/(1 − uv)) when uv < 1, so (a + b)x/(1 − abx²) = 1", "tan⁻¹ u + tan⁻¹ v = tan⁻¹((u + v)/(1 − uv)) when uv < 1", "2 tan⁻¹ u = tan⁻¹(2u/(1 − u²)) when |u| < 1", "tan⁻¹ u − tan⁻¹ v = tan⁻¹((u − v)/(1 + uv))"][p[0]]), st("solve", "solve", LIN_, [], ans)], answer: ans };
+    },
+    // independent: Math.atan of the numbers: both sides must agree (and x > 0 for the equation)
+    validate: ([kind, a, b], v) => {
+      if (typeof v !== "number") return false;
+      if (kind === 0) return v > 0 && near(Math.atan(a * v) + Math.atan(b * v), Math.PI / 4, 1e-9);
+      const lhs = kind === 1 ? Math.atan(1 / a) + Math.atan(1 / b) : kind === 2 ? 2 * Math.atan(1 / a) : Math.atan(1 / a) - Math.atan(1 / b);
+      return near(Math.atan(v), lhs, 1e-9);
+    },
+    bugs: (p) => {
+      const [kind, a, b] = p;
+      const right = inveqAns(p);
+      const pr = (x: number) => (!Number.isFinite(x) || near(x, right, 1e-12) ? null : x);
+      if (kind === 0) return [bg("negative-root", "procedural", INV, "Both roots of the quadratic were kept, or the negative one taken; for a negative x the left side is negative, so it cannot equal π/4.", pr(-1 / (a * b * right)))].filter((x) => x.predict !== null);
+      if (kind === 1) return [bg("denominator-sign", "recall", INV, "The denominator was taken as 1 + uv; for a sum it is 1 − uv.", pr((a + b) / (a * b + 1)))].filter((x) => x.predict !== null);
+      if (kind === 2) return [bg("denominator-sign", "recall", INV, "The denominator was taken as 1 + u²; for 2 tan⁻¹ u it is 1 − u².", pr((2 * a) / (a * a + 1))), bg("two-outside", "conceptual", INV, "2 tan⁻¹(1/a) was taken as tan⁻¹(2/a); doubling the angle is not doubling the tangent.", pr(2 / a))].filter((x) => x.predict !== null);
+      return [bg("denominator-sign", "recall", INV, "The denominator was taken as 1 − uv; for a difference it is 1 + uv.", pr((b - a) / (a * b - 1)))].filter((x) => x.predict !== null);
+    },
+    distractors: (p) => {
+      const r = inveqAns(p);
+      return [-r, 1 / r, r + 1].filter((x) => Number.isFinite(x) && !near(x, r, 1e-12));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "formula" ? `Use ${s.value}` : `So x = ${F(Number(s.value))}`),
+    domain: [[0, 3], [1, 9], [0, 9]],
+    keep: (p) => inveqOk(p),
+    difficulty: ([kind]) => (kind === 1 ? 1 : kind === 0 ? 3 : 2),
+    teach: {
+      idea: "tan⁻¹ u ± tan⁻¹ v = tan⁻¹((u ± v)/(1 ∓ uv)) (for the sum, when uv < 1) comes from tan(A ± B). Taking tan of both sides turns an equation in inverse tangents into an ordinary equation.",
+      method: "Combine the inverse tangents with the formula, take tan of both sides (tan(π/4) = 1), solve, and check each answer in the original equation (reject values that make the left side negative or break the condition).",
+      alternatives: [{ id: "angles", title: "Think of angles", kind: "conceptual", text: ["Let A = tan⁻¹ u and B = tan⁻¹ v, so tan A = u and tan B = v.", "Then tan(A + B) = (u + v)/(1 − uv): this is the compound-angle formula."] }],
+    },
+    limits: "Inverse tangents with rational arguments; equations with sin⁻¹ and cos⁻¹ are left to written work.",
+  },
+  // ======================================================== gap@1: torque
+  {
+    id: "attorq",
+    arity: 9,
+    title: "The torque of a force about a point",
+    competency: VP,
+    type: "tuple",
+    mc: true,
+    // [P, A, F]: a force F acts at the point P; the torque about A is (P − A) × F
+    parse: none,
+    reject: gate([V3, V3, V3, V3, V3, V3, V3, V3, V3], (p) => torqOk(p), "Points and a force with components from −3 to 3, the arm not parallel to the force."),
+    prompt: (x) => `A force F = ${vt(x.slice(6))} (in newtons) acts at the point P${pt(x.slice(0, 3))}. Find the torque (moment) of F about the point A${pt(x.slice(3, 6))}, as components (x, y, z). Coordinates are in metres.`,
+    solve: (x) => {
+      const r = sub(x.slice(0, 3), x.slice(3, 6));
+      const t = cross(r, x.slice(6));
+      return { steps: [st("arm", "subtract", VA, [], tupS(r)), st("cross", "evaluate", VP, [], tupS(t))], answer: tupS(t) };
+    },
+    // independent: the torque must be perpendicular to the arm AP and to F, with |τ|² = |r|²|F|² − (r · F)², right-handed
+    validate: (x, v) => {
+      const t = tup(v);
+      if (!t || t.length !== 3) return false;
+      const r = sub(x.slice(0, 3), x.slice(3, 6));
+      const F_ = x.slice(6);
+      return Math.abs(dot(t, r)) < 1e-9 && Math.abs(dot(t, F_)) < 1e-9 && near(len2(t), len2(r) * len2(F_) - dot(r, F_) ** 2, 1e-9) && dot(cross(r, F_), t) > 0;
+    },
+    bugs: (x) => {
+      const r = sub(x.slice(0, 3), x.slice(3, 6));
+      const F_ = x.slice(6);
+      const t = cross(r, F_);
+      const out: Bug[] = [bg("order-reversed", "conceptual", VP, "F × r was found; the torque is r × F, and the order changes the sign.", tupS(t.map((c) => -c)))];
+      const o = cross(x.slice(0, 3), F_);
+      if (!isZero(sub(o, t)) && !isZero(o)) out.push(bg("about-origin", "procedural", VP, "The position vector of P (from the origin) was used; the torque about A uses the arm r = P − A.", tupS(o)));
+      return out;
+    },
+    distractors: (x) => {
+      const t = cross(sub(x.slice(0, 3), x.slice(3, 6)), x.slice(6));
+      return [tupS([t[0], -t[1], t[2]]), tupS([t[0] + 1, t[1], t[2]])];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "arm" ? `The arm is r = P − A = ${s.value}` : `τ = r × F = ${s.value}`),
+    domain: [V3, V3, V3, V3, V3, V3, V3, V3, V3],
+    keep: (p) => torqOk(p),
+    cap: 300,
+    difficulty: (x) => (isZero(x.slice(3, 6)) ? 1 : 2),
+    teach: {
+      idea: "The torque (moment) of a force F acting at P about a point A is τ = r × F with r = AP = P − A: a vector perpendicular to r and F whose length |r||F| sin θ measures the turning effect.",
+      method: "Find the arm r = P − A, then the cross product r × F with the determinant.",
+      alternatives: [{ id: "check", title: "Check perpendicularity", kind: "procedural", text: ["Your torque dotted with r, and with F, must be 0.", "If not, a component of the cross product has a slip."] }],
+    },
+    limits: "Small whole-number components; torque about a line is left out.",
+  },
+  // ======================================================== gap@1: volume from the scalar triple product
+  {
+    id: "atvol",
+    arity: 10,
+    title: "Volume of a parallelepiped or tetrahedron",
+    competency: TP,
+    type: "fraction",
+    mc: true,
+    // [kind, a, b, c]: kind 0 parallelepiped with edges a, b, c; kind 1 tetrahedron with edges a, b, c from one vertex
+    parse: none,
+    reject: gate([[0, 1], V3, V3, V3, V3, V3, V3, V3, V3, V3], (p) => K_STP(p.slice(1)), "Three non-coplanar edges with components from −3 to 3 (at least two non-zero each)."),
+    prompt: ([kind, ...x]) => {
+      const [a, b, c] = abc(x);
+      return `Find the volume of the ${kind ? "tetrahedron" : "parallelepiped"} whose three edges from one corner are a = ${vt(a)}, b = ${vt(b)} and c = ${vt(c)}, in cubic units. (A fraction is fine.)`;
+    },
+    solve: ([kind, ...x]) => {
+      const [a, b, c] = abc(x);
+      const s = det3(a, b, c);
+      return { steps: [st("triple", "evaluate", TP, [], s), st("volume", "divide", TP, [Math.abs(s), kind ? 6 : 1], Math.abs(s) / (kind ? 6 : 1))], answer: Math.abs(s) / (kind ? 6 : 1) };
+    },
+    // independent: base area |a × b| times the height |c · n̂| (n̂ the unit normal to the base), a sixth of it for the
+    // tetrahedron
+    validate: ([kind, ...x], v) => {
+      const [a, b, c] = abc(x);
+      const n = cross(a, b);
+      const base = Math.sqrt(len2(n));
+      const hgt = Math.abs(dot(c, n)) / base;
+      return typeof v === "number" && near(v, (base * hgt) / (kind ? 6 : 1), 1e-9);
+    },
+    bugs: ([kind, ...x]) => {
+      const [a, b, c] = abc(x);
+      const s = det3(a, b, c);
+      const out: Bug[] = [];
+      if (s < 0) out.push(bg("sign-kept", "conceptual", TP, "The triple product was negative and the sign was kept; a volume is the size |[a b c]|.", s / (kind ? 6 : 1)));
+      out.push(kind ? bg("third-not-sixth", "recall", TP, "A third of the triple product was taken (as for a pyramid on a parallelogram base); the tetrahedron is ⅙|[a b c]|.", Math.abs(s) / 3) : bg("tetra-sixth", "recall", TP, "⅙ was used; that is the tetrahedron. The parallelepiped is |[a b c]|.", Math.abs(s) / 6));
+      return out;
+    },
+    distractors: ([kind, ...x]) => {
+      const s = Math.abs(det3(...(abc(x) as [number[], number[], number[]])));
+      return [s / (kind ? 2 : 2), s + 1, kind ? s : 2 * s];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "triple" ? `[a b c] = ${neg(Number(s.value))}` : `Volume = ${Number(s.inputs[1]) === 6 ? "⅙ × " : ""}${s.inputs[0]} = ${F(Number(s.value))}`),
+    domain: [[0, 1], V3, V3, V3, V3, V3, V3, V3, V3, V3],
+    keep: (p) => K_STP(p.slice(1)),
+    cap: 300,
+    range: [0, Infinity],
+    difficulty: ([kind]) => (kind === 0 ? 2 : 3),
+    teach: {
+      idea: "|[a b c]| = |a · (b × c)| is the base area |b × c| times the height (the part of a along the normal): the volume of the parallelepiped on a, b, c. The tetrahedron on the same three edges is ⅙ of it.",
+      method: "Work out the determinant with rows a, b, c, take its absolute value, and divide by 6 for a tetrahedron.",
+      alternatives: [{ id: "base-height", title: "Base times height", kind: "conceptual", text: ["The base parallelogram on b and c has area |b × c|.", "The height is the projection of a on b × c; volume = base × height."] }],
+    },
+    limits: "Whole-number components up to 3; tetrahedra given by four points need the edges from one vertex first.",
+  },
+  // ======================================================== gap@1: random variables, pmf and cdf
+  {
+    id: "atpmf",
+    arity: 3,
+    title: "Probability mass function and distribution function from a sample space",
+    competency: RV,
+    type: "fraction",
+    mc: true,
+    // [kind, n, k]: 0 n coins, X = number of heads: P(X = k); 1 the same: F(k) = P(X ≤ k); 2 two dice, X = the larger
+    // number: P(X = k); 3 two dice, X = the sum: F(k); 4 two dice, X = the difference: P(X = k)
+    parse: none,
+    reject: gate([[0, 4], [0, 4], [0, 12]], (p) => pmfOk(p), "A random variable on coins or two dice with a value in its range."),
+    prompt: ([kind, n, k]) => `${pmfSay(kind, n)} Find ${kind === 1 || kind === 3 ? `F(${k}) = P(X ≤ ${k})` : `P(X = ${k})`}.`,
+    solve: (p) => {
+      const ans = pmfAns(p);
+      return { steps: [st("space", "count", "MATH.probability.sample-space", [p[0]], p[0] <= 1 ? 2 ** p[1] : 36), st("value", p[0] === 1 || p[0] === 3 ? "add" : "count", RV, [p[2]], ans)], answer: ans };
+    },
+    // independent: list the whole sample space, work out X for each outcome, and count
+    validate: ([kind, n, k], v) => {
+      const outs: number[] = [];
+      if (kind <= 1) for (let m = 0; m < 2 ** n; m++) outs.push(pop(m));
+      else for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) outs.push(kind === 2 ? Math.max(a, b) : kind === 3 ? a + b : Math.abs(a - b));
+      const hit = outs.filter((x) => (kind === 1 || kind === 3 ? x <= k : x === k)).length;
+      return typeof v === "number" && near(v, hit / outs.length, 1e-12);
+    },
+    bugs: (p) => {
+      const [kind, n, k] = p;
+      const right = pmfAns(p);
+      const pr = (x: number) => (near(x, right, 1e-12) ? null : x);
+      const vals = kind <= 1 ? n + 1 : kind === 2 ? 6 : kind === 3 ? 11 : 6;
+      if (kind === 1 || kind === 3)
+        return [bg("pmf-for-cdf", "conceptual", RV, `P(X = ${k}) was given; F(${k}) = P(X ≤ ${k}) adds the probabilities of all values up to ${k}.`, pr(pmfAns([kind === 1 ? 0 : 3, n, k], true))), bg("strict", "procedural", RV, `P(X < ${k}) was found; F(${k}) includes X = ${k}.`, pr(pmfAns([kind, n, k - 1])))].filter((b) => b.predict !== null);
+      return [bg("values-equally-likely", "conceptual", RV, `The ${vals} values of X were taken as equally likely; different values come from different numbers of outcomes, so count the outcomes.`, pr(1 / vals))].filter((b) => b.predict !== null);
+    },
+    distractors: (p) => {
+      const r = pmfAns(p);
+      return [r / 2, Math.min(1, r * 2), 1 - r].filter((x) => !near(x, r, 1e-12) && x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "space" ? `The sample space has ${s.value} equally likely outcomes` : `${F(Number(s.value))} of the probability belongs to the event`),
+    domain: [[0, 4], [0, 4], [0, 12]],
+    keep: (p) => pmfOk(p),
+    range: [0, 1],
+    difficulty: ([kind]) => (kind === 0 ? 1 : kind <= 2 ? 2 : 3),
+    teach: {
+      idea: "A random variable X gives a number to each outcome of the sample space. Its probability mass function p(x) = P(X = x) adds up the outcomes with each value; its distribution function F(x) = P(X ≤ x) adds p over all values up to x.",
+      method: "List the sample space, write X beside each outcome, count how many outcomes give each value (divide by the total), and for F(k) add the probabilities of the values up to and including k.",
+      alternatives: [{ id: "table", title: "Make the table", kind: "procedural", text: ["Write the values of X in a row and their probabilities underneath.", "A third row of running totals is F(x)."] }],
+    },
+    limits: "Coins (2 to 4) and two dice; written tables of the whole pmf and cdf are marked by an educator.",
+  },
+  // ======================================================== gap@1: distribution function from a density and back
+  {
+    id: "atcdf",
+    arity: 3,
+    title: "From a density to the distribution function, and back",
+    competency: CRV,
+    type: "expression",
+    mc: true,
+    // [kind, n, a]: kind 0: f(x) = (n + 1)xⁿ/aⁿ⁺¹ on [0, a]; find F(x). kind 1: F(x) = (x/a)ⁿ⁺¹ on [0, a]; find f(x)
+    parse: none,
+    reject: gate([[0, 1], [1, 3], [2, 6]], ([, n, a]) => a ** (n + 1) <= 1296, "Powers up to 3 on [0, a] with aⁿ⁺¹ at most 1296."),
+    prompt: ([kind, n, a]) => (kind === 0 ? `A continuous random variable X has density f(x) = ${pdfText(n, a)} for 0 ≤ x ≤ ${a} (and 0 otherwise). Find its distribution function F(x) = P(X ≤ x) for 0 ≤ x ≤ ${a}.` : `A continuous random variable X has distribution function F(x) = x${sup(n + 1)}/${a ** (n + 1)} for 0 ≤ x ≤ ${a} (F(x) = 0 for x < 0 and 1 for x > ${a}). Find its density f(x) for 0 < x < ${a}.`),
+    solve: ([kind, n, a]) => (kind === 0 ? { steps: [st("integrate", "integrate", INTG, [pdfText(n, a)], `x${sup(n + 1)}/${a ** (n + 1)}`)], answer: `x${sup(n + 1)}/${a ** (n + 1)}` } : { steps: [st("differentiate", "differentiate", "MATH.calculus.differentiation-rules", [`x${sup(n + 1)}/${a ** (n + 1)}`], pdfText(n, a))], answer: pdfText(n, a) }),
+    // independent: kind 0 integrates the density from 0 by Simpson's rule; kind 1 differentiates F numerically
+    validate: ([kind, n, a], v) => {
+      if (typeof v !== "string") return false;
+      const ev = (x: number) => {
+        try {
+          return evaluate(parse(v), { x });
+        } catch {
+          return NaN;
+        }
+      };
+      const [p, q] = pdfK(n, a);
+      const xs = [0.3, 0.71, 1.13, 1.6].map((t) => (t * a) / 2);
+      return kind === 0 ? xs.every((x) => near(ev(x), simpson((t) => (p / q) * t ** n, 0, x, 400), 1e-8)) : xs.every((x) => near(ev(x), ((x + 1e-5) ** (n + 1) - (x - 1e-5) ** (n + 1)) / (2e-5 * a ** (n + 1)), 1e-6));
+    },
+    bugs: ([kind, n, a]) =>
+      kind === 0
+        ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from 0 to x, found by integrating.", pdfText(n, a)), bg("power-not-divided", "procedural", INTG, `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, `${n + 1}x${sup(n + 1)}/${a ** (n + 1)}`)]
+        : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", `x${sup(n + 2)}/${(n + 2) * a ** (n + 1)}`), bg("power-not-brought-down", "procedural", "MATH.calculus.differentiation-rules", `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, `${xpow(n)}/${a ** (n + 1)}`)],
+    variants: () => [],
+    explain: (s) => (s.id === "integrate" ? `F(x) = ∫₀ˣ ${s.inputs[0]} dt = ${s.value}` : `f(x) = F′(x) = ${s.value}`),
+    domain: [[0, 1], [1, 3], [2, 6]],
+    keep: ([, n, a]) => a ** (n + 1) <= 1296,
+    difficulty: ([kind, n]) => (kind === 1 && n === 1 ? 1 : kind === 1 ? 2 : 3),
+    teach: {
+      idea: "For a continuous random variable, F(x) = P(X ≤ x) = ∫ f(t) dt from the left end up to x, and f(x) = F′(x) wherever F is differentiable: integrating and differentiating go back and forth.",
+      method: "From f to F: integrate f from the start of the interval to x (check that F at the right end is 1). From F to f: differentiate F.",
+      alternatives: [{ id: "check-ends", title: "Check the end points", kind: "procedural", text: ["F must be 0 at the left end and 1 at the right end of the interval.", "f must be at least 0 and its total area must be 1."] }],
+    },
+    limits: "Power densities on [0, a] (as the probability-from-density family); piecewise densities are left out.",
+  },
+  {
+    id: "atcexp",
+    arity: 4,
+    title: "Mean and variance of a continuous random variable; properties of expectation",
+    competency: CRV,
+    type: "fraction",
+    mc: true,
+    // kind 0 [0, n, a, 0]: E(X) for f(x) = (n + 1)xⁿ/aⁿ⁺¹ on [0, a]; kind 1 Var(X) for it; kind 2 [2, μ, c, d]: E(cX + d)
+    // when E(X) = μ; kind 3 [3, v, c, d]: Var(cX + d) when Var(X) = v
+    parse: none,
+    reject: gate([[0, 3], [1, 6], [-3, 6], [-5, 5]], (p) => cexpOk(p), "A power density, or E(X) / Var(X) given with cX + d."),
+    prompt: ([kind, u, c, d]) =>
+      kind <= 1
+        ? `A continuous random variable X has density f(x) = ${pdfText(u, c)} for 0 ≤ x ≤ ${c} (and 0 otherwise). Find ${kind === 0 ? "its mean E(X)" : "its variance Var(X)"}. (A fraction is fine.)`
+        : kind === 2
+          ? `A random variable X has mean E(X) = ${u}. Find E(${c === 1 ? "" : c === -1 ? "−" : neg(c)}X ${d < 0 ? "−" : "+"} ${Math.abs(d)}).`
+          : `A random variable X has variance Var(X) = ${u}. Find Var(${c === 1 ? "" : c === -1 ? "−" : neg(c)}X ${d < 0 ? "−" : "+"} ${Math.abs(d)}).`,
+    solve: (p) => {
+      const [kind, u, c, d] = p;
+      const ans = cexpAns(p);
+      if (kind === 0) return { steps: [st("integral", "integrate", INTG, [u, c], ans)], answer: ans };
+      if (kind === 1) return { steps: [st("ex2", "integrate", INTG, [u, c], ((u + 1) * c * c) / (u + 3)), st("var", "subtract", CRV, [], ans)], answer: ans };
+      return { steps: [st("property", "rewrite", RV, [kind], kind === 2 ? "E(cX + d) = cE(X) + d" : "Var(cX + d) = c²Var(X)"), st("evaluate", "evaluate", RV, [u, c, d], ans)], answer: ans };
+    },
+    // independent: kinds 0, 1 by Simpson's rule on x f(x) and x² f(x); kinds 2, 3 on a two-point random variable with
+    // that mean (or variance), transformed value by value
+    validate: (p, v) => {
+      const [kind, u, c, d] = p;
+      if (typeof v !== "number") return false;
+      if (kind <= 1) {
+        const [P, Q] = pdfK(u, c);
+        const f = (x: number) => (P / Q) * x ** u;
+        const m = simpson((x) => x * f(x), 0, c, 2000);
+        const m2 = simpson((x) => x * x * f(x), 0, c, 2000);
+        return near(v, kind === 0 ? m : m2 - m * m, 1e-9);
+      }
+      const s = kind === 2 ? 1 : Math.sqrt(u);
+      const mu = kind === 2 ? u : 0;
+      const ys = [mu - s, mu + s].map((x) => c * x + d);
+      const my = (ys[0] + ys[1]) / 2;
+      return near(v, kind === 2 ? my : ((ys[0] - my) ** 2 + (ys[1] - my) ** 2) / 2, 1e-9);
+    },
+    bugs: (p) => {
+      const [kind, u, c, d] = p;
+      const right = cexpAns(p);
+      const pr = (x: number) => (near(x, right, 1e-12) ? null : x);
+      if (kind === 0) return [bg("density-mean", "conceptual", CRV, "f was integrated without the factor x; E(X) = ∫ x f(x) dx (the plain integral of f is 1).", pr(1)), bg("midpoint", "conceptual", CRV, `The middle of the interval (${c}/2) was given; the mean is pulled towards where the density is larger.`, pr(c / 2))].filter((b) => b.predict !== null);
+      if (kind === 1) return [bg("ex2-as-variance", "procedural", CRV, "E(X²) was given; Var(X) = E(X²) − [E(X)]².", pr(((u + 1) * c * c) / (u + 3))), bg("mean-not-squared", "procedural", CRV, "E(X) was taken away instead of [E(X)]².", pr(((u + 1) * c * c) / (u + 3) - ((u + 1) * c) / (u + 2)))].filter((b) => b.predict !== null);
+      if (kind === 2) return [bg("d-left-out", "procedural", RV, `The constant ${neg(d)} was left out; E(cX + d) = cE(X) + d.`, pr(c * u))].filter((b) => b.predict !== null);
+      return [bg("c-not-squared", "procedural", RV, "c was not squared; Var(cX + d) = c²Var(X).", pr(c * u)), bg("d-added", "conceptual", RV, `${neg(d)} was added; adding a constant shifts every value equally and does not change the spread.`, pr(c * c * u + d))].filter((b) => b.predict !== null);
+    },
+    distractors: (p) => {
+      const r = cexpAns(p);
+      return [r + 1, r / 2, -r].filter((x) => !near(x, r, 1e-12));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "integral" ? `E(X) = ∫₀^${s.inputs[1]} x f(x) dx = ${F(Number(s.value))}` : s.id === "ex2" ? `E(X²) = ∫ x² f(x) dx = ${F(Number(s.value))}` : s.id === "var" ? `Var(X) = E(X²) − [E(X)]² = ${F(Number(s.value))}` : s.id === "property" ? `Use ${s.value}` : `= ${F(Number(s.value))}`),
+    domain: [[0, 3], [1, 6], [-3, 6], [-5, 5]],
+    keep: (p) => cexpOk(p),
+    cap: 400,
+    difficulty: ([kind]) => (kind === 2 ? 1 : kind === 3 ? 2 : 3),
+    teach: {
+      idea: "For a density f, E(X) = ∫ x f(x) dx and Var(X) = ∫ x² f(x) dx − [E(X)]². For any random variable, E(cX + d) = cE(X) + d and Var(cX + d) = c²Var(X): shifting moves the mean but not the spread, scaling by c scales the spread by c².",
+      method: "Integrate x f(x) (and x² f(x)) over the interval; for a linear change of X use the two properties.",
+      alternatives: [{ id: "two-point", title: "Test with a simple variable", kind: "conceptual", text: ["Let X be μ − 1 or μ + 1 with probability ½ each.", "Work out cX + d for both values: its mean is cμ + d, and its spread is c times as wide."] }],
+    },
+    limits: "Power densities on [0, a] and linear functions cX + d; other functions of X are left out.",
+  },
+  // ======================================================== gap@1: statements and truth tables
+  {
+    id: "atstmt",
+    arity: 3,
+    title: "Statements, and the column of a truth table",
+    competency: PROP,
+    type: "choice",
+    // [kind, s, t]: 0 which sentence is a statement; 1 which is not a statement; 2 the final column of a truth table
+    // (s, t choose the expression)
+    parse: none,
+    reject: gate([[0, 2], [0, 63], [0, 3]], (p) => stmtOk(p), "Sentences from the list, or a statement in p and q."),
+    prompt: (p) => (p[0] === 2 ? `Which column gives the truth values of ${stmtExpr(p).text} in the rows (p, q) = (T, T), (T, F), (F, T), (F, F), in that order?` : `Which of these sentences is ${p[0] === 0 ? "a statement" : "NOT a statement"}?`),
+    choices: (p) => stmtOpts(p).map((o) => o.text),
+    solve: (p) => {
+      const o = stmtOpts(p);
+      const i = o.findIndex((x) => x.right);
+      return { steps: [st("decide", "evaluate", PROP, [o[i].text], i)], answer: i };
+    },
+    // independent: kinds 0, 1 by the definition (a sentence that is either true or false, but not both); kind 2 by
+    // bit patterns of the four rows
+    validate: (p, v) => {
+      const truth = stmtTruth(p);
+      return typeof v === "number" && truth[v] === true && truth.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = stmtOpts(p);
+      return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", PROP, x.says!, o.indexOf(x)));
+    },
+    variants: () => [],
+    explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
+    domain: [[0, 2], [0, 63], [0, 3]],
+    keep: (p) => stmtOk(p),
+    cap: 400,
+    difficulty: ([kind]) => (kind === 2 ? 2 : 1),
+    teach: {
+      idea: "A statement is a sentence that is either true or false, but not both. Questions, commands, exclamations and open sentences (whose truth depends on an unknown, like x + 3 = 7) are not statements. A truth table lists the truth value of a compound statement for every combination of p and q.",
+      method: "For a sentence, ask: can it be called true or false as it stands? For a truth table, work out each bracket row by row (∧ needs both, ∨ needs at least one, → fails only for T → F, ↔ needs equal values), then the whole.",
+      alternatives: [{ id: "columns", title: "Build column by column", kind: "procedural", text: ["Write the p and q columns: T T F F and T F T F.", "Add a column for each negation and each bracket before the final column."] }],
+    },
+    limits: "Simple sentences and statements in two letters; writing out a whole truth table is marked by an educator.",
+  },
 ];
+
+// ---------------------------------------------------------------- gap@1 helpers
+const LIN_ = "MATH.algebra.linear-equations";
+const DERIV = "MATH.calculus.derivative-rules";
+const bg = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null): Bug => ({ id, kind, competency, says, predict });
+/** A small deterministic generator: the next whole number in [lo, hi]. */
+function lcg(seed: number) {
+  let s = (seed * 2654435761 + 12345) >>> 0;
+  return (lo: number, hi: number) => {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return lo + ((s >>> 16) % (hi - lo + 1));
+  };
+}
+/** A fixed order of the items for these parameters. */
+function ordered<T>(xs: T[], p: number[], salt: number): T[] {
+  return xs.map((x, i) => ({ x, k: hsh([...p, i], salt) >>> 0 })).sort((a, b) => a.k - b.k).map((o) => o.x);
+}
+const linspace = (a: number, b: number, n: number) => [...Array(n).keys()].map((i) => a + ((b - a) * i) / (n - 1));
+// atunit, atsign
+const UM = [1, 2, 3, 4, 6];
+function unitOk([mi, k]: number[]): boolean {
+  const M = UM[mi];
+  return M !== undefined && k !== 0 && Math.abs(k) <= 6 * M && gcd(Math.abs(k), M) === 1;
+}
+const QUADS = ["sin t > 0 and cos t > 0 (P(t) is in the first quadrant)", "sin t > 0 and cos t < 0 (P(t) is in the second quadrant)", "sin t < 0 and cos t < 0 (P(t) is in the third quadrant)", "sin t < 0 and cos t > 0 (P(t) is in the fourth quadrant)"];
+const signT = ([kind, a, b]: number[]) => (kind === 0 ? a / 10 : (a * Math.PI) / b);
+const signText = ([kind, a, b]: number[]) => (kind === 0 ? neg(String(a / 10)) : piStr(a, b));
+function signQ(t: number): number {
+  const [s, c] = [Math.sin(t), Math.cos(t)];
+  return s > 0 ? (c > 0 ? 0 : 1) : c < 0 ? 2 : 3;
+}
+function signOk([kind, a, b]: number[]): boolean {
+  if (a === 0) return false;
+  if (kind === 0) {
+    if (b !== 0) return false;
+    const t = a / 10;
+    const r = t / (Math.PI / 2);
+    return Math.abs(r - Math.round(r)) * (Math.PI / 2) > 0.1;
+  }
+  return [3, 4, 6].includes(b) && Math.abs(a) <= 4 * b && gcd(Math.abs(a), b) === 1;
+}
+// atdom: sets of real numbers with a membership test, sample points that must be reached, and points that must not
+type RSet = { text: string; has: (x: number) => boolean; samples: number[]; out: number[] };
+const iv = (c: number): RSet => ({ text: `[−${c}, ${c}]`, has: (v) => Math.abs(v) <= c + 1e-9, samples: linspace(-c, c, 21), out: [] });
+const ivOpen = (c: number): RSet => ({ text: `(−${c}, ${c})`, has: (v) => Math.abs(v) < c - 1e-12, samples: linspace(-0.98 * c, 0.98 * c, 21), out: [-c, c] });
+const ivPos = (c: number): RSet => ({ text: `[0, ${c}]`, has: (v) => v >= -1e-9 && v <= c + 1e-9, samples: linspace(0, c, 11), out: [] });
+const outside = (c: number): RSet => ({ text: `(−∞, −${c}] ∪ [${c}, ∞)`, has: (v) => Math.abs(v) >= c - 1e-9, samples: [...linspace(c, c + 20, 21), ...linspace(-c - 20, -c, 21)], out: [] });
+const allR: RSet = { text: "ℝ (all real numbers)", has: () => true, samples: linspace(-30, 30, 61), out: [] };
+const isMultOf = (x: number, h: number, odd: boolean) => {
+  const r = x / h;
+  const n = Math.round(r);
+  return Math.abs(r - n) < 1e-9 && (!odd || Math.abs(n) % 2 === 1);
+};
+const piOver = (k: number) => (k === 1 ? "" : `/${k}`);
+const dAll: RSet = { text: "all real numbers", has: () => true, samples: [], out: [] };
+const dOdd = (k: number): RSet => ({ text: `all real x except x = (2n + 1)π/${2 * k}, n ∈ ℤ`, has: (x) => !isMultOf(x, Math.PI / (2 * k), true), samples: [], out: [] });
+const dInt = (k: number): RSet => ({ text: `all real x except x = nπ${piOver(k)}, n ∈ ℤ`, has: (x) => !isMultOf(x, Math.PI / k, false), samples: [], out: [] });
+const dBox: RSet = { text: "all real x with −1 ≤ x ≤ 1", has: (x) => Math.abs(x) <= 1 + 1e-12, samples: [], out: [] };
+type Opt = RSet & { right: boolean; slip?: string; says?: string };
+function fourOpts(p: number[], right: RSet, others: [RSet, string?, string?][], salt: number): Opt[] {
+  const out: Opt[] = [{ ...right, right: true }];
+  for (const [o, slip, says] of others) if (out.length < 4 && !out.some((x) => x.text === o.text)) out.push({ ...o, right: false, slip, says });
+  return ordered(out, p, salt);
+}
+function domOpts(p: number[]): Opt[] {
+  const [f, ask, k, a] = p;
+  if (ask === 1) {
+    if (f <= 1) return fourOpts(p, iv(a), [[iv(1), a !== 1 ? "factor-ignored" : undefined, `The number ${a} in front was ignored; it stretches the graph, so the values run from −${a} to ${a}.`], [outside(a), "sec-range", `The range of sec and cosec was given; ${FN[f]} never goes beyond ${a} in size.`], [ivOpen(a)], [allR], [ivPos(a)]], 3);
+    if (f === 2 || f === 5) return fourOpts(p, allR, [[iv(a), "bounded-like-sine", `${FN[f]} was thought to stay between −${a} and ${a} like sine; near its asymptotes it takes every real value.`], [outside(a)], [iv(1)], [ivPos(a)]], 3);
+    return fourOpts(p, outside(a), [[iv(a), "cos-range-used", `The range of ${f === 4 ? "cos" : "sin"} was given; ${FN[f]} = 1/${f === 4 ? "cos" : "sin"}, so its size is never less than ${a}.`], ...(a !== 1 ? [[outside(1), "factor-ignored", `The number ${a} in front was ignored; it scales every value.`] as [RSet, string, string]] : []), [allR], [ivOpen(a)]], 3);
+  }
+  if (f <= 1) return fourOpts(p, dAll, [[dBox, "range-for-domain", `The range of ${FN[f]} was given; ${FN[f]} is defined for every real x.`], [dOdd(k)], [dInt(k)]], 5);
+  const poles = f === 2 || f === 4 ? dOdd(k) : dInt(k);
+  const zeros = f === 2 || f === 4 ? dInt(k) : dOdd(k);
+  return fourOpts(p, poles, [...(k !== 1 ? [[f === 2 || f === 4 ? dOdd(1) : dInt(1), "k-ignored", `The ${k} in ${k}x was ignored; ${FN[f]} ${k}x is undefined where ${k}x = ${f === 2 || f === 4 ? "(2n + 1)π/2" : "nπ"}, so divide by ${k}.`] as [RSet, string, string]] : []), [zeros, "zeros-for-poles", `The points where ${f === 2 || f === 4 ? "sin" : "cos"} ${k === 1 ? "x" : `${k}x`} = 0 were left out; ${FN[f]} is undefined where ${f === 2 || f === 4 ? "cos" : "sin"} ${k === 1 ? "x" : `${k}x`} = 0.`], [dAll], [dBox]], 5);
+}
+const fwd = (f: number, x: number) => fNum(f, x);
+/** The real x with a·f(kx) = s on the principal branch (NaN if there is none). */
+function solveTrig(f: number, s: number, a: number, k: number): number {
+  const u = s / a;
+  const y = f === 0 ? Math.asin(u) : f === 1 ? Math.acos(u) : f === 2 ? Math.atan(u) : f === 3 ? Math.asin(1 / u) : f === 4 ? Math.acos(1 / u) : u === 0 ? Math.PI / 2 : Math.atan(1 / u);
+  return y / k;
+}
+function domTrue([f, ask, k, a]: number[], o: RSet): boolean {
+  if (ask === 0) {
+    const xs = [...linspace(-4, 4, 801), ...[...Array(25).keys()].map((j) => ((j - 12) * Math.PI) / (2 * k)), -1, 1, 0];
+    return xs.every((x) => {
+      const defined = f <= 1 ? true : f === 2 || f === 4 ? Math.abs(Math.cos(k * x)) > 1e-9 : Math.abs(Math.sin(k * x)) > 1e-9;
+      return defined === o.has(x);
+    });
+  }
+  const vals = linspace(-3.1, 3.1, 2001).map((x) => a * fwd(f, k * x)).filter((y) => Number.isFinite(y) && Math.abs(y) < 1e6);
+  if (!vals.every((v) => o.has(v))) return false;
+  const reach = (s: number) => {
+    const x = solveTrig(f, s, a, k);
+    return Number.isFinite(x) && Math.abs(a * fwd(f, k * x) - s) < 1e-9;
+  };
+  return o.samples.every(reach) && !o.out.some(reach);
+}
+// atcsimp
+const csimpText = (f: number, k: number, m: number) => [`sin ${ax(k)} cos ${ax(m)} + cos ${ax(k)} sin ${ax(m)}`, `sin ${ax(k)} cos ${ax(m)} − cos ${ax(k)} sin ${ax(m)}`, `cos ${ax(k)} cos ${ax(m)} − sin ${ax(k)} sin ${ax(m)}`, `cos ${ax(k)} cos ${ax(m)} + sin ${ax(k)} sin ${ax(m)}`, `(tan ${ax(k)} + tan ${ax(m)})/(1 − tan ${ax(k)} tan ${ax(m)})`, `(tan ${ax(k)} − tan ${ax(m)})/(1 + tan ${ax(k)} tan ${ax(m)})`][f];
+const csimpFn = (f: number, k: number, m: number) => (x: number) => {
+  const [sk, ck, sm, cm, tk, tm] = [Math.sin(k * x), Math.cos(k * x), Math.sin(m * x), Math.cos(m * x), Math.tan(k * x), Math.tan(m * x)];
+  return [sk * cm + ck * sm, sk * cm - ck * sm, ck * cm - sk * sm, ck * cm + sk * sm, (tk + tm) / (1 - tk * tm), (tk - tm) / (1 + tk * tm)][f];
+};
+function csimpOpts(p: number[]): { text: string; id: string; says?: string; fn: (x: number) => number }[] {
+  const [f, k, m] = p;
+  const fn = ["sin", "sin", "cos", "cos", "tan", "tan"][f];
+  const co = fn === "sin" ? "cos" : fn === "cos" ? "sin" : "cot";
+  const [c, o] = f % 2 === 0 ? [k + m, k - m] : [k - m, k + m];
+  const val = (g: string, n: number) => (x: number) => (g === "sin" ? Math.sin(n * x) : g === "cos" ? Math.cos(n * x) : g === "tan" ? Math.tan(n * x) : 1 / Math.tan(n * x));
+  const signSays = fn === "cos" ? "The sign was matched the wrong way: for cosine it flips, so cos A cos B − sin A sin B = cos(A + B) and cos A cos B + sin A sin B = cos(A − B)." : fn === "sin" ? "The sign was matched the wrong way: for sine it stays, so sin A cos B + cos A sin B = sin(A + B) and with − it is sin(A − B)." : "The sign was matched the wrong way: the sign in the numerator gives tan(A + B) or tan(A − B).";
+  const items = [
+    { text: `${fn} ${ax(c)}`, id: "right", fn: val(fn, c) },
+    { text: `${fn} ${ax(o)}`, id: "sign-pattern", says: signSays, fn: val(fn, o) },
+    { text: `${co} ${ax(c)}`, id: "function-changed", says: fn === "tan" ? "cot was written; this pattern is the tangent formula, so it gives tan." : `The function was changed: ${fn === "sin" ? "sin A cos B ± cos A sin B is a SINE of A ± B" : "cos A cos B ∓ sin A sin B is a COSINE of A ± B"}.`, fn: val(co, c) },
+    { text: `${co} ${ax(o)}`, id: "other", fn: val(co, o) },
+  ];
+  return ordered(items, p, 7);
+}
+// athalf
+function halfParts(p: number[]) {
+  const [t, , q] = p;
+  const [a, b, C] = TRIPLES[t];
+  const [ss, sc] = QSIGN[q - 1];
+  return { sinN: ss * a, cosN: sc * b, C, q };
+}
+function halfVal(p: number[]): string {
+  const { sinN, cosN, C, q } = halfParts(p);
+  const h = p[3];
+  if (h === 0) return fracRoot(C - cosN, 2 * C);
+  if (h === 1) return `${q >= 3 ? "−" : ""}${fracRoot(C + cosN, 2 * C)}`;
+  return F(sinN / (C + cosN));
+}
+const halfAbs = (p: number[]) => halfVal(p).replace(/^−/, "");
+const halfNeg = (p: number[]) => (halfVal(p).startsWith("−") ? halfVal(p).slice(1) : `−${halfVal(p)}`);
+function halfBugs(p: number[]): Bug[] {
+  const { sinN, cosN, C, q } = halfParts(p);
+  const h = p[3];
+  const right = num(halfVal(p))!;
+  const out: Bug[] = [];
+  const half = h === 0 ? sinN / C / 2 : h === 1 ? cosN / C / 2 : sinN / cosN / 2;
+  if (!near(half, right, 1e-9)) out.push(bg("halve-the-ratio", "conceptual", COMP, `${["sin", "cos", "tan"][h]}(A/2) was taken as half of ${["sin", "cos", "tan"][h]} A; halving the angle does not halve the ratio.`, F(half)));
+  if (h <= 1) {
+    const sw = h === 0 ? fracRoot(C + cosN, 2 * C) : fracRoot(C - cosN, 2 * C);
+    const swv = h === 1 && q >= 3 ? `−${sw}` : sw;
+    if (!near(num(swv)!, right, 1e-9)) out.push(bg("formula-swapped", "recall", COMP, "The two half-angle formulas were swapped: sin²(A/2) = (1 − cos A)/2 and cos²(A/2) = (1 + cos A)/2.", swv));
+  }
+  if (h === 1 && q >= 3) out.push(bg("half-angle-sign", "conceptual", COMP, "cos(A/2) was taken as positive; with π < A < 2π, A/2 lies between π/2 and π, where cosine is negative.", halfAbs(p)));
+  if (h === 2) out.push(bg("tan-formula-upside-down", "recall", COMP, "tan(A/2) was taken as (1 + cos A)/sin A; it is sin A/(1 + cos A) = (1 − cos A)/sin A.", F((C + cosN) / sinN)));
+  return out.filter((b) => !near(num(b.predict as string) ?? NaN, right, 1e-9));
+}
+// atmdf, atgvar
+function mdfData(p: number[], other = false) {
+  const [kind, x0, st, seed] = p;
+  const R = lcg(hsh(p, 51));
+  const h = 5 * st;
+  const xs = kind === 2 ? [0, 1, 2, 3, 4].map((i) => 5 * x0 + i * h + h / 2) : [0, 1, 2, 3, 4].map((i) => x0 + i * st);
+  const fs = xs.map(() => R(1, 8));
+  const N = fs.reduce((a, b) => a + b, 0);
+  const list: number[] = [];
+  xs.forEach((x, i) => {
+    for (let j = 0; j < fs[i]; j++) list.push(x);
+  });
+  const mean = list.reduce((a, b) => a + b, 0) / N;
+  const median = N % 2 ? list[(N - 1) / 2] : (list[N / 2 - 1] + list[N / 2]) / 2;
+  const useMedian = (kind === 1) !== other;
+  const c = useMedian ? median : mean;
+  const S = xs.reduce((s, x, i) => s + fs[i] * Math.abs(x - c), 0);
+  return { xs, fs, N, c, S, h, lows: xs.map((x) => x - h / 2), seed };
+}
+function mdfOk(p: number[]): boolean {
+  if (!inBox(p, [[0, 2], [1, 20], [1, 4], [0, 59]])) return false;
+  const d = mdfData(p);
+  const v = (100 * d.S) / d.N;
+  return Math.abs(v - Math.round(v)) < 1e-9 && d.S > 0 && (p[0] === 2 ? p[1] <= 12 : true);
+}
+function mdfTable(p: number[]) {
+  const d = mdfData(p);
+  return p[0] === 2 ? { type: "table" as const, head: ["Class", "Frequency"], rows: d.lows.map((l, i) => [`${l}–${l + d.h}`, String(d.fs[i])]) } : { type: "table" as const, head: ["x", ...d.xs.map(String)], rows: [["f", ...d.fs.map(String)]] };
+}
+const GH = [5, 10, 20];
+function gvarData(p: number[]) {
+  const [, si, hi] = p;
+  const R = lcg(hsh(p.slice(1), 61));
+  const h = GH[hi];
+  const lows = [0, 1, 2, 3, 4].map((i) => 10 * si + i * h);
+  const mids = lows.map((l) => l + h / 2);
+  const fs = lows.map(() => R(2, 12));
+  const N = fs.reduce((a, b) => a + b, 0);
+  const Su = fs.reduce((s, f, i) => s + f * (i - 2), 0);
+  const Su2 = fs.reduce((s, f, i) => s + f * (i - 2) ** 2, 0);
+  return { h, lows, mids, fs, N, Su, Su2, A: mids[2] };
+}
+function gvarOk(p: number[]): boolean {
+  if (!inBox(p, [[0, 2], [0, 5], [0, 2], [0, 79]])) return false;
+  const d = gvarData(p);
+  if (p[0] !== 0) return d.Su !== 0;
+  const v = 100 * d.h * d.h * (d.Su2 / d.N - (d.Su / d.N) ** 2);
+  return Math.abs(v - Math.round(v)) < 1e-6;
+}
+function gvarTable(p: number[]) {
+  const d = gvarData(p);
+  return { type: "table" as const, head: ["Class", "Frequency"], rows: d.lows.map((l, i) => [`${l}–${l + d.h}`, String(d.fs[i])]) };
+}
+// atpara, athalft, atapp
+const paraOk = ([kind, ...x]: number[]) => (kind === 0 || kind === 1) && K_CROSS(x);
+function halftOk([h, a, b, c]: number[]): boolean {
+  return h >= 0 && h <= 2 && a < b + c && b < a + c && c < a + b && (a + b + c) % 2 === 0 && b <= c && !(a === b && b === c);
+}
+function halftPQ(h: number, a: number, b: number, c: number): [number, number] {
+  const s = (a + b + c) / 2;
+  return h === 0 ? [(s - b) * (s - c), b * c] : h === 1 ? [s * (s - a), b * c] : [(s - b) * (s - c), s * (s - a)];
+}
+const APAIR = [[30, 60], [30, 45], [45, 60]];
+function appOk([kind, x, y, z]: number[]): boolean {
+  return kind === 0 ? x >= 2 && x <= 30 && y >= x && y <= 30 && z <= 1 : x <= 2 && y >= 2 && z === 0;
+}
+const sinDiff = (A: number, Bv: number) => sSub(sMul(sinE(Bv), cosE(A)), sMul(cosE(Bv), sinE(A)));
+function appBTs([, x, y]: number[]): S {
+  const [A, Bv] = APAIR[x];
+  return sScale(sDiv(sinE(A), sinDiff(A, Bv)), [y, 1]);
+}
+const appBT = (p: number[]) => sFmt(appBTs(p));
+const appH = (p: number[]) => sFmt(sMul(appBTs(p), sinE(APAIR[p[1]][1])));
+// atvtype
+const QINFO: [string, boolean][] = [["displacement", true], ["velocity", true], ["force", true], ["acceleration", true], ["momentum", true], ["weight", true], ["electric field strength", true], ["mass", false], ["time", false], ["speed", false], ["distance", false], ["temperature", false], ["work done", false], ["volume", false], ["density", false], ["energy", false]];
+const VECQ = QINFO.filter((q) => q[1]).map((q) => q[0]);
+const SCAQ = QINFO.filter((q) => !q[1]).map((q) => q[0]);
+const UNITV: [number[], number][] = [[[1, 2, 2], 3], [[2, 3, 6], 7], [[1, 4, 8], 9], [[2, 6, 9], 11], [[3, 4, 0], 5], [[5, 12, 0], 13], [[0, 3, 4], 5], [[4, 4, 7], 9]];
+function vtypeOk([kind, s, t]: number[]): boolean {
+  if (kind === 2) return t <= 3;
+  if (kind === 3) return t <= 2;
+  return t === 0 && (kind !== 4 || s < 30);
+}
+function vtypeGen(p: number[]) {
+  const [kind, s, t] = p;
+  const R = lcg(hsh(p, 71));
+  if (kind <= 1) {
+    const one = (kind === 0 ? VECQ : SCAQ)[R(0, (kind === 0 ? VECQ : SCAQ).length - 1)];
+    const pool = [...(kind === 0 ? SCAQ : VECQ)];
+    const three: string[] = [];
+    while (three.length < 3) {
+      const q = pool[R(0, pool.length - 1)];
+      if (!three.includes(q)) three.push(q);
+    }
+    return { one, three };
+  }
+  if (kind === 2) {
+    let a = [R(-4, 4), R(-4, 4), R(-4, 4)];
+    if (a.filter((x) => x !== 0).length < 2) a = [a[0] || 1, a[1] || -2, a[2]];
+    const lam = [2, -2, 3, -3][R(0, 3)];
+    const b = t === 0 ? a : t === 1 ? a.map((x) => -x) : t === 2 ? a.map((x) => lam * x) : a.map((x, i) => (i === R(0, 2) ? x + 1 : x));
+    return { a, b: b.some((x, i) => x !== a[i]) || t === 0 ? b : a.map((x, i) => (i === 0 ? x + 2 : x)), lam };
+  }
+  if (kind === 3) {
+    const [v, den] = UNITV[R(0, UNITV.length - 1)];
+    const sg = v.map(() => (R(0, 1) ? 1 : -1));
+    const P = [R(-5, 5), R(-5, 5), R(-5, 5)];
+    return { v: v.map((x, i) => x * sg[i]), den: t === 2 ? den + R(1, 2) : den, P };
+  }
+  const letters = ordered(["A", "B", "C", "D", "P", "Q", "R", "S"], [s], 73).slice(0, 4);
+  return { letters };
+}
+function vecFracs(v: number[], den: number): string {
+  const u = ["î", "ĵ", "k̂"];
+  const ts = v.map((c, i) => [c, u[i]] as const).filter(([c]) => c !== 0);
+  return ts.map(([c, e], j) => `${c < 0 ? (j ? " − " : "−") : j ? " + " : ""}(${probFrac(Math.abs(c), den)})${e}`).join("");
+}
+const probFrac = (a: number, d: number) => {
+  const g = gcd(a, d);
+  return d / g === 1 ? String(a / g) : `${a / g}/${d / g}`;
+};
+function vtypeText(p: number[]): string {
+  const [kind, , t] = p;
+  if (kind === 0) return "Which of these is a vector quantity?";
+  if (kind === 1) return "Which of these is a scalar quantity?";
+  if (kind === 2) {
+    const { a, b } = vtypeGen(p) as { a: number[]; b: number[] };
+    return `How are the vectors a = ${vt(a)} and b = ${vt(b)} related?`;
+  }
+  if (kind === 3) {
+    const g = vtypeGen(p) as { v: number[]; den: number; P: number[] };
+    return t === 0 ? `P is the point ${pt(g.P)} and Q is the point ${pt(g.P)}. What kind of vector is PQ?` : `What kind of vector is v = ${vecFracs(g.v, g.den)}?`;
+  }
+  return "Which pair of vectors are co-initial vectors?";
+}
+function vtypeOpts(p: number[]): { text: string; right: boolean; slip?: string; says?: string; key: string }[] {
+  const [kind, , t] = p;
+  if (kind <= 1) {
+    const { one, three } = vtypeGen(p) as { one: string; three: string[] };
+    const conf: Record<string, [string, string]> = { speed: ["velocity", "Speed was taken as a vector; speed is only how fast (a size), while velocity also has a direction."], distance: ["displacement", "Distance was taken as a vector; distance is only how far, while displacement also has a direction."], weight: ["mass", "Weight was taken as a scalar like mass; weight is a force pulling downwards, so it is a vector."], "work done": ["force", "Work done was taken as a vector because it involves a force; work is a scalar (F · d), with no direction."] };
+    const opts = [{ text: one, right: true, key: one }, ...three.map((q) => ({ text: q, right: false, key: q, ...(conf[q] ? { slip: `${q.replace(/ /g, "-")}-confused`, says: conf[q][1] } : {}) }))];
+    return ordered(opts, p, 75);
+  }
+  if (kind === 2) {
+    const { lam } = vtypeGen(p) as { lam: number };
+    const items = ["a and b are equal vectors", "b is the negative of a (b = −a)", "a and b are collinear, but neither equal nor negatives of each other", "a and b are not collinear"];
+    return items.map((text, i) => ({ text, key: String(i), right: i === t, ...(t === 2 && i === (lam > 0 ? 0 : 1) ? { slip: lam > 0 ? "same-direction-equal" : "opposite-negative", says: lam > 0 ? "Vectors pointing the same way were taken as equal; equal vectors must also have the same length (here b is a multiple of a)." : "b was taken as the negative of a; −a has the same LENGTH as a, but here b is a larger multiple of −a." } : t === 1 && i === 3 ? { slip: "negative-not-collinear", says: "−a was taken as not collinear with a; a vector and its negative lie along the same line." } : {}) }));
+  }
+  if (kind === 3) {
+    const items = ["a zero vector", "a unit vector", "neither a zero vector nor a unit vector"];
+    return items.map((text, i) => ({ text, key: String(i), right: i === t, ...(t === 2 && i === 1 ? { slip: "small-components-unit", says: "Components that are fractions less than 1 were taken to make a unit vector; a unit vector has LENGTH 1: √(x² + y² + z²) = 1." } : {}) }));
+  }
+  const [A, Bv, C, D] = (vtypeGen(p) as { letters: string[] }).letters;
+  const items = [`${A}${Bv} and ${A}${C}`, `${A}${Bv} and ${C}${D}`, `${A}${Bv} and ${Bv}${C}`, `${Bv}${A} and ${C}${A}`];
+  return ordered(items.map((text, i) => ({ text, key: String(i), right: i === 0, ...(i === 3 ? { slip: "same-end-point", says: "Vectors with the same END point were chosen; co-initial vectors have the same INITIAL (starting) point." } : i === 2 ? { slip: "head-to-tail", says: "Vectors joined head to tail were chosen; co-initial vectors both start at the same point." } : {}) })), p, 77);
+}
+/** Independent truth of each option of atvtype, from definitions and computation. */
+function vtypeTruth(p: number[]): boolean[] {
+  const [kind] = p;
+  const opts = vtypeOpts(p);
+  if (kind <= 1) return opts.map((o) => (QINFO.find((q) => q[0] === o.key)?.[1] ?? null) === (kind === 0));
+  if (kind === 2) {
+    const { a, b } = vtypeGen(p) as { a: number[]; b: number[] };
+    const col = isZero(cross(a, b));
+    const rel = !col ? 3 : a.every((x, i) => x === b[i]) ? 0 : a.every((x, i) => x === -b[i]) ? 1 : 2;
+    return opts.map((o) => Number(o.key) === rel);
+  }
+  if (kind === 3) {
+    const g = vtypeGen(p) as { v: number[]; den: number };
+    const L2v = p[2] === 0 ? 0 : len2(g.v) / (g.den * g.den);
+    const cls = L2v === 0 ? 0 : near(L2v, 1, 1e-12) ? 1 : 2;
+    return opts.map((o) => Number(o.key) === cls);
+  }
+  return opts.map((o) => {
+    const [u, w] = o.text.split(" and ");
+    return u[0] === w[0];
+  });
+}
+// atinvd
+type ISet = { text: string; has: (x: number) => boolean; samples: number[]; out: number[] };
+const piT = (n: number, d: number) => piStr(n, d);
+function intv(lo: [number, number], hi: [number, number], loC: boolean, hiC: boolean, hole?: [number, number]): ISet {
+  const L = (lo[0] * Math.PI) / lo[1];
+  const H = (hi[0] * Math.PI) / hi[1];
+  const Hh = hole ? (hole[0] * Math.PI) / hole[1] : NaN;
+  const text = `${loC ? "[" : "("}${piT(lo[0], lo[1])}, ${piT(hi[0], hi[1])}${hiC ? "]" : ")"}${hole ? ` − {${piT(hole[0], hole[1])}}` : ""}`;
+  const samples = linspace(L, H, 25).filter((s, i) => (i > 0 || loC) && (i < 24 || hiC) && !(hole && Math.abs(s - Hh) < 1e-9));
+  const out = [...(loC ? [] : [L]), ...(hiC ? [] : [H]), ...(hole ? [Hh] : [])];
+  return { text, has: (v) => (loC ? v >= L - 1e-9 : v > L) && (hiC ? v <= H + 1e-9 : v < H) && !(hole && Math.abs(v - Hh) < 1e-12), samples, out };
+}
+const dI = (k: number): ISet => ({ text: `[−${k}, ${k}]`, has: (x) => Math.abs(x) <= k + 1e-12, samples: [], out: [] });
+const dR: ISet = { text: "ℝ (all real numbers)", has: () => true, samples: [], out: [] };
+const dOut = (k: number): ISet => ({ text: `(−∞, −${k}] ∪ [${k}, ∞)`, has: (x) => Math.abs(x) >= k - 1e-12, samples: [], out: [] });
+type IOpt = ISet & { right: boolean; slip?: string; says?: string };
+function fourI(p: number[], right: ISet, others: [ISet, string?, string?][], salt: number): IOpt[] {
+  const out: IOpt[] = [{ ...right, right: true }];
+  for (const [o, slip, says] of others) if (out.length < 4 && !out.some((x) => x.text === o.text)) out.push({ ...o, right: false, slip, says });
+  return ordered(out, p, salt);
+}
+function invdOpts(p: number[]): IOpt[] {
+  const [f, ask, k, a] = p;
+  const n = INVT[f].n;
+  if (ask === 0) {
+    if (f <= 1) return fourI(p, dI(k), [...(k !== 1 ? [[dI(1), "k-ignored", `x/${k} must lie in [−1, 1], so x lies in [−${k}, ${k}]; the ${k} was ignored.`] as [ISet, string, string]] : []), [f === 0 ? intv([-1, 2], [1, 2], true, true) : intv([0, 1], [1, 1], true, true), "range-for-domain", `The range of ${n} was given; its domain is the set of x for which ${n}(${k === 1 ? "x" : `x/${k}`}) is defined.`], [dR], [dOut(k)]], 81);
+    if (f <= 3) return fourI(p, dR, [[dI(k), "bounded-domain", `${n} was thought to need ${k === 1 ? "x" : `x/${k}`} between −1 and 1 like sin⁻¹; tan and cot take every real value, so ${n} is defined for every x.`], [dOut(k)], [dI(1)]], 81);
+    return fourI(p, dOut(k), [[dI(k), "sin-domain", `The domain of ${f === 4 ? "cos⁻¹" : "sin⁻¹"} was given; ${f === 4 ? "sec" : "cosec"} never has a value strictly between −1 and 1, so ${n} needs |x/${k}| ≥ 1.`.replace("x/1", "x")], ...(k !== 1 ? [[dOut(1), "k-ignored", `The ${k} was ignored; |x/${k}| ≥ 1 means |x| ≥ ${k}.`] as [ISet, string, string]] : []), [dR]], 81);
+  }
+  const R: Record<number, ISet> = { 0: intv([-a, 2], [a, 2], true, true), 1: intv([0, 1], [a, 1], true, true), 2: intv([-a, 2], [a, 2], false, false), 3: intv([0, 1], [a, 1], false, false), 4: intv([0, 1], [a, 1], true, true, [a, 2]), 5: intv([-a, 2], [a, 2], true, true, [0, 1]) };
+  const others: [ISet, string?, string?][] =
+    f === 0 ? [[R[1], "branches-swapped", "The range of cos⁻¹ was given; sin⁻¹ takes values from −π/2 to π/2."], [intv([-a, 2], [a, 2], false, false), "ends-left-out", "The end points were left out; sin⁻¹(1) = π/2 and sin⁻¹(−1) = −π/2 are values of sin⁻¹."], [intv([-a, 1], [a, 1], true, true)]]
+      : f === 1 ? [[R[0], "branches-swapped", "The range of sin⁻¹ was given; cos⁻¹ takes values from 0 to π."], [intv([0, 1], [a, 1], false, false)], [intv([-a, 1], [a, 1], true, true)]]
+        : f === 2 ? [[intv([-a, 2], [a, 2], true, true), "ends-included", "The end points were included; tan(±π/2) is not defined, so tan⁻¹ never reaches ±π/2."], [R[3], "branches-swapped", "The range of cot⁻¹ was given; tan⁻¹ takes values between −π/2 and π/2."], [intv([0, 1], [a, 1], true, true)]]
+          : f === 3 ? [[R[2], "branches-swapped", "The range of tan⁻¹ was given; cot⁻¹ takes values between 0 and π."], [intv([0, 1], [a, 1], true, true), "ends-included", "The end points were included; cot 0 and cot π are not defined."], [intv([-a, 2], [a, 2], true, true)]]
+            : f === 4 ? [[intv([0, 1], [a, 1], true, true), "hole-forgotten", `${piT(a, 2)} was not removed; it would need sec(${a === 1 ? "π/2" : "π/2"}), which is not defined.`], [R[5]], [intv([-a, 2], [a, 2], true, true)]]
+              : [[intv([-a, 2], [a, 2], true, true), "hole-forgotten", "0 was not removed; it would need cosec 0, which is not defined."], [R[4]], [intv([0, 1], [a, 1], true, true)]];
+  return fourI(p, R[f], others, 83);
+}
+const invFwd = (f: number, y: number) => [Math.sin(y), Math.cos(y), Math.tan(y), 1 / Math.tan(y), 1 / Math.cos(y), 1 / Math.sin(y)][f];
+function invdTrue([f, ask, k, a]: number[], o: ISet): boolean {
+  if (ask === 0) {
+    const xs = [...linspace(-6, 6, 1201), k, -k, 1, -1, 0];
+    return xs.every((x) => {
+      const y = invNum(f, x / k);
+      const defined = Number.isFinite(y) && !(f >= 4 && x === 0);
+      return defined === o.has(x);
+    });
+  }
+  const xs = [...linspace(-1, 1, 2001), ...[...Array(301).keys()].flatMap((i) => [10 ** ((i - 150) / 50), -(10 ** ((i - 150) / 50))])];
+  const vals = xs.map((x) => a * invNum(f, x)).filter(Number.isFinite);
+  if (!vals.every((v) => o.has(v))) return false;
+  const reach = (s: number) => {
+    const x = invFwd(f, s / a);
+    return Number.isFinite(x) && Math.abs(x) < 1e6 && Math.abs(a * invNum(f, x) - s) < 1e-9;
+  };
+  return o.samples.every(reach) && !o.out.some(reach);
+}
+// atinveq
+function inveqOk([kind, a, b]: number[]): boolean {
+  if (kind === 0) {
+    const D = (a + b) ** 2 + 4 * a * b;
+    return b >= a && b >= 1 && Number.isInteger(Math.sqrt(D));
+  }
+  if (kind === 1) return b >= a && a * b !== 1 && b >= 2;
+  if (kind === 2) return b === 0 && a >= 2;
+  return b >= 1 && a !== b;
+}
+function inveqAns([kind, a, b]: number[]): number {
+  if (kind === 0) return (-(a + b) + Math.sqrt((a + b) ** 2 + 4 * a * b)) / (2 * a * b);
+  return kind === 1 ? (a + b) / (a * b - 1) : kind === 2 ? (2 * a) / (a * a - 1) : (b - a) / (a * b + 1);
+}
+// attorq, atpmf, atcexp
+function torqOk(x: number[]): boolean {
+  const r = sub(x.slice(0, 3), x.slice(3, 6));
+  const F_ = x.slice(6);
+  return !isZero(r) && F_.filter((c) => c !== 0).length >= 2 && !isZero(cross(r, F_)) && !isZero(x.slice(3, 6));
+}
+function pmfOk([kind, n, k]: number[]): boolean {
+  if (kind === 0) return n >= 2 && n <= 6 && k >= 0 && k <= n;
+  if (kind === 1) return n >= 2 && n <= 6 && k >= 0 && k < n;
+  if (kind === 2) return n === 0 && k >= 1 && k <= 6;
+  if (kind === 3) return n === 0 && k >= 2 && k <= 11;
+  if (kind === 4) return n === 0 && k >= 0 && k <= 5;
+  if (kind === 5) return n === 0 && k >= 1 && k <= 5;
+  return n >= 2 && n <= 4 && k >= 0 && k <= 2;
+}
+function pmfSay(kind: number, n: number): string {
+  if (kind <= 1) return `${n} fair coins are tossed together, and the random variable X is the number of heads.`;
+  if (kind === 2 || kind === 5) return "Two fair dice are thrown, and the random variable X is the larger of the two numbers shown (the common number if they are equal).";
+  if (kind === 3) return "Two fair dice are thrown, and the random variable X is the sum of the two numbers shown.";
+  if (kind === 4) return "Two fair dice are thrown, and the random variable X is the difference between the two numbers shown (larger minus smaller).";
+  return `A bag has ${n} red and ${6 - n} blue balls. Two balls are drawn one after the other without replacement, and the random variable X is the number of red balls drawn.`;
+}
+/** P(X = k), or F(k) = P(X ≤ k) for the distribution-function kinds (1, 3, 5), from the counting formulas. */
+function pmfAns([kind, n, k]: number[], pointOnly = false): number {
+  const point = (j: number) => {
+    if (kind <= 1) return ncr6(n, j) / 2 ** n;
+    if (kind === 2 || kind === 5) return j >= 1 && j <= 6 ? (2 * j - 1) / 36 : 0;
+    if (kind === 3) return j >= 2 && j <= 12 ? (6 - Math.abs(j - 7)) / 36 : 0;
+    if (kind === 4) return j === 0 ? 6 / 36 : j >= 1 && j <= 5 ? (2 * (6 - j)) / 36 : 0;
+    const b = 6 - n;
+    return [(b * (b - 1)) / 30, (2 * n * b) / 30, (n * (n - 1)) / 30][j] ?? 0;
+  };
+  if (pointOnly || ![1, 3, 5].includes(kind)) return point(k);
+  let s = 0;
+  for (let j = 0; j <= k; j++) s += point(j);
+  return s;
+}
+function ncr6(n: number, k: number): number {
+  let r = 1;
+  for (let i = 1; i <= k; i++) r = (r * (n - k + i)) / i;
+  return Math.round(r);
+}
+function cexpOk([kind, u, c, d]: number[]): boolean {
+  if (kind <= 1) return u >= 1 && u <= 3 && c >= 2 && c <= 6 && c ** (u + 1) <= 1296 && d === 0;
+  return u >= 1 && u <= 6 && c !== 0 && d !== 0 && (kind === 2 || c !== 1 || true);
+}
+function cexpAns([kind, u, c, d]: number[]): number {
+  if (kind === 0) return ((u + 1) * c) / (u + 2);
+  if (kind === 1) return ((u + 1) * c * c) / (u + 3) - (((u + 1) * c) / (u + 2)) ** 2;
+  return kind === 2 ? c * u + d : c * c * u;
+}
+// atstmt
+const STMT: ((n: number, m: number) => { text: string; st: boolean; open?: boolean; truth?: boolean })[] = [
+  (n) => ({ text: `${n} is a prime number.`, st: true, truth: isPrime(n) }),
+  (n) => ({ text: `${n} is an even number.`, st: true, truth: n % 2 === 0 }),
+  () => ({ text: "The sum of the angles of a triangle is 180°.", st: true, truth: true }),
+  () => ({ text: "Every square is a rectangle.", st: true, truth: true }),
+  () => ({ text: "Chennai is the capital of Tamil Nadu.", st: true, truth: true }),
+  (n, m) => ({ text: `${n} + ${m} = ${n + m + 1}.`, st: true, truth: false }),
+  () => ({ text: "The square of every real number is positive.", st: true, truth: false }),
+  (n) => ({ text: `${n} is a multiple of 3.`, st: true, truth: n % 3 === 0 }),
+  () => ({ text: "Close the door.", st: false }),
+  () => ({ text: "How many sides does a hexagon have?", st: false }),
+  () => ({ text: "What a beautiful kolam!", st: false }),
+  (n, m) => ({ text: `x + ${n} = ${n + m}.`, st: false, open: true }),
+  () => ({ text: "Please solve this equation.", st: false }),
+  (n) => ({ text: `Is ${n} a multiple of 3?`, st: false }),
+  (n) => ({ text: `y is greater than ${n}.`, st: false, open: true }),
+];
+const STMT_YES = [0, 1, 2, 3, 4, 5, 6, 7];
+const STMT_NO = [8, 9, 10, 11, 12, 13, 14];
+function stmtOk([kind, , t]: number[]): boolean {
+  return kind === 2 ? t <= 3 : t === 0;
+}
+function stmtExpr([, s, t]: number[]) {
+  const [A, Bv, o1, o2] = [s & 1, (s >> 1) & 1, (s >> 2) & 3, (s >> 4) & 3];
+  return { text: `(${L2[A]} ${OPS[o1]} ${L2[2 + Bv]}) ${OPS[o2]} ${L2[t]}`, A, Bv, o1, o2, C: t };
+}
+/** The four truth values of the expression (rows TT, TF, FT, FF), with the connectives possibly misread. */
+function stmtCol(p: number[], misread: (o: number) => number = (o) => o, negs = true): string {
+  const e = stmtExpr(p);
+  const out: string[] = [];
+  for (const [pv, qv] of [[true, true], [true, false], [false, true], [false, false]]) {
+    const L = (i: number) => {
+      const v = i >> 1 ? qv : pv;
+      return i % 2 && negs ? !v : v;
+    };
+    out.push(opB(misread(e.o2), opB(misread(e.o1), L(e.A), L(2 + e.Bv)), L(e.C)) ? "T" : "F");
+  }
+  return out.join(", ");
+}
+function stmtOpts(p: number[]): { text: string; right: boolean; slip?: string; says?: string; st?: boolean }[] {
+  const [kind, s] = p;
+  if (kind <= 1) {
+    const R = lcg(hsh(p, 91));
+    const n = R(2, 40);
+    const m = R(2, 9);
+    const pick = (ids: number[], cnt: number, must?: (i: number) => boolean) => {
+      const out: number[] = [];
+      if (must) {
+        const c = ids.filter(must);
+        out.push(c[R(0, c.length - 1)]);
+      }
+      while (out.length < cnt) {
+        const i = ids[R(0, ids.length - 1)];
+        if (!out.includes(i)) out.push(i);
+      }
+      return out;
+    };
+    const ones = kind === 0 ? pick(STMT_YES, 1) : pick(STMT_NO, 1);
+    const threes = kind === 0 ? pick(STMT_NO, 3, (i) => !!STMT[i](n, m).open) : pick(STMT_YES, 3, (i) => STMT[i](n, m).truth === false);
+    const items = [...ones.map((i) => ({ ...STMT[i](n, m), right: true })), ...threes.map((i) => ({ ...STMT[i](n, m), right: false }))].map((x) => ({
+      text: x.text,
+      right: x.right,
+      st: x.st,
+      ...(kind === 0 && x.open ? { slip: "open-sentence", says: `"${x.text}" was taken as a statement; its truth depends on the unknown, so it is an open sentence, not a statement.` } : {}),
+      ...(kind === 1 && x.st && x.truth === false ? { slip: "false-not-statement", says: `"${x.text}" was taken as not a statement because it is false; a false sentence is still a statement — it has a definite truth value.` } : {}),
+    }));
+    const seen = new Set<string>();
+    const uniq = items.filter((x) => (seen.has(x.text) ? false : (seen.add(x.text), true)));
+    return ordered(uniq, p, 93);
+  }
+  const right = stmtCol(p);
+  const cands: [string, string?, string?][] = [
+    [stmtCol(p, (o) => (o === 2 ? 0 : o)), "conditional-as-and", "'If A then B' was taken as true only when both are true; it is false ONLY when A is true and B is false."],
+    [stmtCol(p, (o) => (o === 1 ? 4 : o)), "or-exclusive", "'Or' was read as 'one but not both'; A ∨ B is also true when both are true."],
+    [stmtCol(p, (o) => (o === 3 ? 0 : o)), "biconditional-as-and", "'A if and only if B' was taken as true only when both are true; it is also true when both are false."],
+    [stmtCol(p, (o) => o, false), "negation-ignored", "The ¬ (not) was ignored; ¬p is true exactly when p is false."],
+    [right.split(", ").map((x) => (x === "T" ? "F" : "T")).join(", ")],
+    ["T, T, T, T"],
+    ["F, F, F, F"],
+    ["T, F, F, F"],
+  ];
+  const out: { text: string; right: boolean; slip?: string; says?: string }[] = [{ text: right, right: true }];
+  for (const [text, slip, says] of cands) if (out.length < 4 && !out.some((o) => o.text === text)) out.push({ text, right: false, slip, says });
+  return ordered(out, p, 95);
+}
+/** Independent truth of atstmt's options: the definition flag for sentences; bit patterns for the truth table. */
+function stmtTruth(p: number[]): boolean[] {
+  const opts = stmtOpts(p);
+  if (p[0] <= 1) return opts.map((o) => (p[0] === 0 ? o.st === true : o.st === false));
+  const e = stmtExpr(p);
+  const lm = (i: number) => {
+    const m = i >> 1 ? 0b1010 : 0b1100;
+    return i % 2 ? ~m & 15 : m;
+  };
+  const mask = opM(e.o2, opM(e.o1, lm(e.A), lm(2 + e.Bv), 15), lm(e.C), 15);
+  const col = [8, 4, 2, 1].map((b) => (mask & b ? "T" : "F")).join(", ");
+  return opts.map((o) => o.text === col);
+}
