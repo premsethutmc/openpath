@@ -2183,6 +2183,7 @@ const ascloc: Def = {
     return null;
   },
   prompt: (p) => `In the Argand plane, the points z with ${clocCond(p)} form a circle. Find its centre x₀ + iy₀ and its radius r. Type them as (x₀, y₀, r).`,
+  word: (p) => `On a map of a district drawn as the Argand plane (units in km), a drone flies so that its position z always satisfies ${clocCond(p)}. Its path is a circle. Find the centre x₀ + iy₀ and the radius r of the path, typed as (x₀, y₀, r).`,
   solve: (p) => {
     const [t, a, b, c, d, k] = p;
     if (t === 1) {
@@ -2272,6 +2273,7 @@ const asdemo: Def = {
   parse: none,
   reject: (p) => (!allIn(p, [[0, 9], [2, 12]]) ? "One of ten bases such as 1 + i or √3 + i, to a power from 2 to 12." : null),
   prompt: ([j, n]) => `Use de Moivre's theorem to write (${dmBase(j)})${sup(n)} in the form x + iy. Type the answer as (x, y).`,
+  word: ([j, n]) => `In a computer-graphics program, each frame turns and stretches a point by multiplying its complex coordinate by w = ${dmBase(j)}. A point starts at 1. Use de Moivre's theorem to find where it is after ${n} frames, that is wⁿ, in the form x + iy. Type it as (x, y).`,
   solve: ([j, n]) => {
     const b = DMB[j];
     const R = epow(b.mod, n);
@@ -2839,6 +2841,1511 @@ const asbinmv: Def = {
   limits: "p a simple fraction; n up to 12 for finding the mean and variance, up to 40 for finding n and p.",
 };
 
+// ================================================================ gap@1 additions
+
+/** FNV-1a hash: a fixed, parameter-dependent order of options, and deterministic thinning of large domains. */
+const fnv = (t: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < t.length; i++) x = Math.imul(x ^ t.charCodeAt(i), 0x01000193) >>> 0;
+  return x;
+};
+const mixed = (xs: string[], key: string) => [...xs].sort((a, b) => fnv(`${key}:${a}`) - fnv(`${key}:${b}`) || (a < b ? -1 : 1));
+/** Keep about one parameter choice in m (a fixed, hash-chosen thinning of a large domain). */
+const thin = (p: number[], m: number) => fnv(`thin:${p}`) % m === 0;
+/** q√m as an exact-answer coefficient in front of a letter: "2x", "−x", "(√3/3)x". */
+const coefE = (e: E, v: string) => {
+  const s = es(e);
+  if (s === "0") return "";
+  if (s === "1") return v;
+  if (s === "−1") return `−${v}`;
+  return /[/√]/.test(s) ? `${s.startsWith("−") ? "−" : ""}(${s.replace(/^−/, "")})${v}` : `${s}${v}`;
+};
+/** mx + c (surd m and c allowed) as the right-hand side of y = mx + c. */
+const rhsE = (m: E, c: E) => {
+  const a = coefE(m, "x");
+  const b = es(c);
+  if (!a) return b;
+  if (b === "0") return a;
+  return `${a} ${b.startsWith("−") ? "−" : "+"} ${b.replace(/^−/, "")}`;
+};
+/** mx + c for rationals. */
+const rhsR = (m: R, c: R) => poly([[m, "x"], [c, ""]]);
+/** A straight-line answer y = f(x) read back: [slope, intercept] if it is a line, else null. */
+const lineOf = (v: Value): [number, number] | null => {
+  const f = fnOf(v);
+  if (!f) return null;
+  const y0 = f({ x: 0 });
+  const y1 = f({ x: 1 });
+  const y2 = f({ x: -2.5 });
+  if (![y0, y1, y2].every(Number.isFinite) || !close(y2 - y0, -2.5 * (y1 - y0), 1e-9)) return null;
+  return [y1 - y0, y0];
+};
+
+const fracTxt = (x: number) => {
+  for (let q = 1; q <= 400; q++) if (Math.abs(Math.round(x * q) - x * q) < 1e-9) return rs(R_(Math.round(x * q), q));
+  return String(x);
+};
+
+// ---- complex numbers: sums, differences, inverses, conjugates
+const ascinvOk = ([a, b, c, d, op]: number[]) => {
+  if (op === 2) return allIn([a, b], [[-6, 6], [-6, 6]]) && (a !== 0 || b !== 0) && b !== 0 && c === 0 && d === 0;
+  return (op === 0 || op === 1) && allIn([a, b, c, d], [[-5, 5], [-5, 5], [1, 4], [-3, 3]]) && b !== 0 && d !== 0 && (((a * 7 + b * 3 + c + d * 5) % 7) + 7) % 7 === 0;
+};
+const ascinv: Def = {
+  id: "ascinv",
+  arity: 5,
+  title: "Adding and subtracting complex numbers, and the multiplicative inverse",
+  competency: CX,
+  type: "tuple",
+  mc: true,
+  // [a, b, c, d, op]: (a + bi) + (c + di) (op 0), (a + bi) − (c + di) (op 1), 1/(a + bi) (op 2, c = d = 0)
+  parse: none,
+  reject: (p) => (ascinvOk(p) ? null : "Two complex numbers with small whole-number parts, or one non-zero complex number to invert."),
+  prompt: ([a, b, c, d, op]) => (op === 2 ? `Find the multiplicative inverse of z = ${cz(a, b)} in the form x + iy. Type it as the pair (x, y).` : `Write (${cz(a, b)}) ${op ? "−" : "+"} (${cz(c, d)}) in the form x + iy. Type the answer as the pair (x, y).`),
+  solve: ([a, b, c, d, op]) => {
+    if (op === 2) {
+      const N = a * a + b * b;
+      const ans = pairT(R_(a, N), R_(-b, N));
+      return { steps: [S("conjugate", "multiply", CX, [cz(a, -b)], `${cz(a, -b)}/${N}`), S("split", "divide", CX, [N], ans)], answer: ans };
+    }
+    const s = op ? -1 : 1;
+    const ans = pairT(R_(a + s * c), R_(b + s * d));
+    return { steps: [S("real", op ? "subtract" : "add", CX, [a, c], mi(a + s * c)), S("imag", op ? "subtract" : "add", CX, [b, d], mi(b + s * d))], answer: ans };
+  },
+  // independent: the inverse operation — subtract (or add) the second number back, or multiply the inverse by z to get 1
+  validate: ([a, b, c, d, op], v) => {
+    const z = nums(v);
+    if (!z || z.length !== 2) return false;
+    if (op === 2) {
+      const one = cmul(z, [a, b]);
+      return close(one[0], 1, 1e-9) && close(one[1], 0, 1e-9);
+    }
+    const back = op ? [z[0] + c, z[1] + d] : [z[0] - c, z[1] - d];
+    return close(back[0], a, 1e-9) && close(back[1], b, 1e-9);
+  },
+  bugs: ([a, b, c, d, op]) => {
+    if (op === 2) {
+      const N = a * a + b * b;
+      return [
+        B("parts-inverted", "conceptual", CX, "Each part was turned upside down, 1/a + (1/b)i; 1/(a + bi) is found by multiplying the top and the bottom by the conjugate a − bi.", a !== 0 ? pairT(R_(1, a), R_(1, b)) : null),
+        B("not-divided", "procedural", CX, `The conjugate ${cz(a, -b)} was given without dividing by a² + b² = ${N}.`, N === 1 ? null : pairT(R_(a), R_(-b))),
+        B("denominator-sign", "procedural", CX, `(a + bi)(a − bi) was worked out as a² − b²; it is a² + b² = ${N}.`, a * a === b * b ? null : pairT(R_(a, a * a - b * b), R_(-b, a * a - b * b))),
+      ];
+    }
+    return op
+      ? [B("sign-imag", "procedural", CX, `Only the real part of ${cz(c, d)} was subtracted; the minus sign applies to both parts: −(c + di) = −c − di.`, pairT(R_(a - c), R_(b + d))), B("parts-mixed", "procedural", CX, "A real part was combined with an imaginary part; add (or subtract) real parts with real parts and imaginary parts with imaginary parts.", pairT(R_(a - d), R_(b - c)))]
+      : [B("parts-mixed", "procedural", CX, "A real part was combined with an imaginary part; add real parts with real parts and imaginary parts with imaginary parts.", pairT(R_(a + d), R_(b + c))), B("subtracted", "procedural", CX, "The second number was subtracted instead of added.", pairT(R_(a - c), R_(b - d)))];
+  },
+  distractors: ([a, b, c, d, op]) => (op === 2 ? [pairT(R_(-a, a * a + b * b), R_(b, a * a + b * b)), pairT(R_(b, a * a + b * b), R_(a, a * a + b * b))] : [pairT(R_(a + c + 1), R_(b + (op ? -d : d))), pairT(R_(b + (op ? -d : d)), R_(a + (op ? -c : c)))]),
+  variants: () => [],
+  explain: (s) => (s.id === "real" ? `Real parts: ${mi(Number(s.inputs[0]))} and ${mi(Number(s.inputs[1]))} give ${s.value}` : s.id === "imag" ? `Imaginary parts: ${mi(Number(s.inputs[0]))} and ${mi(Number(s.inputs[1]))} give ${s.value}` : s.id === "conjugate" ? `Multiply the top and the bottom by the conjugate ${s.inputs[0]}: ${s.value}` : `Divide each part by ${s.inputs[0]}: ${s.value}`),
+  domain: [[-6, 6], [-6, 6], [0, 4], [-3, 3], [0, 2]],
+  keep: (p) => ascinvOk(p),
+  cap: 400,
+  difficulty: ([a, b, , , op]) => (op === 0 ? 1 : op === 1 ? 2 : a * b === 0 ? 2 : 3),
+  word: ([a, b, c, d, op]) => (op === 2 ? `In an AC circuit an impedance is written as the complex number Z = ${cz(a, b)} ohms. Its admittance is 1/Z. Find the admittance in the form x + iy, typed as (x, y).` : `Two AC voltages, written as complex numbers, are V₁ = ${cz(a, b)} volts and V₂ = ${cz(c, d)} volts. Find V₁ ${op ? "−" : "+"} V₂ in the form x + iy, typed as (x, y).`),
+  teach: {
+    idea: "Complex numbers add and subtract part by part: real with real, imaginary with imaginary. The inverse 1/z uses the conjugate: z z̄ = a² + b² is a real number.",
+    method: "For a sum or difference, combine the real parts and the imaginary parts separately. For 1/(a + bi), multiply the top and the bottom by a − bi to get (a − bi)/(a² + b²), then split into real and imaginary parts.",
+    alternatives: [{ id: "vectors", title: "Arrows in the Argand plane", kind: "conceptual", text: ["Draw z₁ and z₂ as arrows from the origin; z₁ + z₂ is the diagonal of the parallelogram they make.", "1/z points in the direction of z̄ and has length 1/|z|."] }],
+  },
+  limits: "Small whole-number parts; products and quotients are the family ascop.",
+};
+
+const asconjOk = ([a, b, c, d, k]: number[]) => {
+  if (k === 2) return allIn([a, b], [[-6, 6], [-6, 6]]) && a !== 0 && b !== 0 && c === 0 && d === 0;
+  return k >= 0 && k <= 3 && k !== 2 && allIn([a, b, c, d], [[-4, 4], [-4, 4], [-4, 4], [1, 4]]) && b !== 0 && c !== 0 && thin([a, b, c, d, k], k === 1 ? 2 : 3);
+};
+const conjTxt = (k: number, a: number, b: number, c: number, d: number) => [`the conjugate of (${cz(a, b)})(${cz(c, d)})`, `the conjugate of (${cz(a, b)}) ÷ (${cz(c, d)})`, `z z̄, where z = ${cz(a, b)}`, `z̄₁ z₂, where z₁ = ${cz(a, b)} and z₂ = ${cz(c, d)}`][k];
+const asconj: Def = {
+  id: "asconj",
+  arity: 5,
+  title: "Conjugates of complex numbers and their properties",
+  competency: CX,
+  skill: "conjugates",
+  type: "tuple",
+  mc: true,
+  // [a, b, c, d, k]: z₁ = a + bi, z₂ = c + di; k 0 conj(z₁z₂), 1 conj(z₁/z₂), 2 z z̄ (c = d = 0), 3 z̄₁z₂
+  parse: none,
+  reject: (p) => (asconjOk(p) ? null : "Complex numbers with small whole-number parts."),
+  prompt: ([a, b, c, d, k]) => `Find ${conjTxt(k, a, b, c, d)}, in the form x + iy. Type it as the pair (x, y).`,
+  solve: ([a, b, c, d, k]) => {
+    if (k === 2) return { steps: [S("property", "multiply", CX, [a, b], `z z̄ = |z|² = ${a * a + b * b}`)], answer: pairT(R_(a * a + b * b), R_(0)) };
+    if (k === 3) {
+      const ans = pairT(R_(a * c + b * d), R_(a * d - b * c));
+      return { steps: [S("conj", "conjugate", CX, [cz(a, b)], cz(a, -b)), S("product", "multiply", CX, [cz(a, -b), cz(c, d)], ans)], answer: ans };
+    }
+    if (k === 0) {
+      const ans = pairT(R_(a * c - b * d), R_(-(a * d + b * c)));
+      return { steps: [S("property", "conjugate", CX, [], "conj(z₁z₂) = z̄₁ z̄₂"), S("product", "multiply", CX, [cz(a, -b), cz(c, -d)], ans)], answer: ans };
+    }
+    const N = c * c + d * d;
+    const ans = pairT(R_(a * c + b * d, N), R_(-(b * c - a * d), N));
+    return { steps: [S("property", "conjugate", CX, [], "conj(z₁/z₂) = z̄₁/z̄₂"), S("product", "divide", CX, [cz(a, -b), cz(c, -d)], ans)], answer: ans };
+  },
+  // independent: the answer is reached through moduli and arguments (a conjugate has the same modulus and the opposite argument)
+  validate: ([a, b, c, d, k], v) => {
+    const z = nums(v);
+    if (!z || z.length !== 2) return false;
+    const r1 = Math.hypot(a, b);
+    const t1 = Math.atan2(b, a);
+    const r2 = Math.hypot(c, d);
+    const t2 = Math.atan2(d, c);
+    const [r, t] = k === 0 ? [r1 * r2, -(t1 + t2)] : k === 1 ? [r1 / r2, -(t1 - t2)] : k === 2 ? [r1 * r1, 0] : [r1 * r2, t2 - t1];
+    return close(z[0], r * Math.cos(t), 1e-9) && close(z[1], r * Math.sin(t), 1e-9);
+  },
+  bugs: ([a, b, c, d, k]) => {
+    if (k === 2) return [B("i-squared", "recall", CX, `(a + bi)(a − bi) was expanded with i² = +1, giving a² − b²; i² = −1, so z z̄ = a² + b².`, a * a === b * b ? null : pairT(R_(a * a - b * b), R_(0))), B("z-squared", "conceptual", CX, "z was multiplied by itself instead of by its conjugate.", pairT(R_(a * a - b * b), R_(2 * a * b)))];
+    if (k === 3) return [B("wrong-one", "procedural", CX, "The conjugate of z₂ was taken instead of z₁.", pairT(R_(a * c + b * d), R_(b * c - a * d))), B("no-conjugate", "procedural", CX, "The conjugate was not taken at all.", pairT(R_(a * c - b * d), R_(a * d + b * c)))];
+    if (k === 0) return [B("not-conjugated", "procedural", CX, "The product was found but its conjugate was not taken.", pairT(R_(a * c - b * d), R_(a * d + b * c))), B("one-factor", "conceptual", CX, "Only the first factor was conjugated; conj(z₁z₂) = z̄₁ z̄₂ needs both.", pairT(R_(a * c + b * d), R_(a * d - b * c)))];
+    const N = c * c + d * d;
+    return [B("not-conjugated", "procedural", CX, "The quotient was found but its conjugate was not taken.", pairT(R_(a * c + b * d, N), R_(b * c - a * d, N))), B("negated", "conceptual", CX, "Both parts were negated; the conjugate changes the sign of the imaginary part only.", pairT(R_(-(a * c + b * d), N), R_(b * c - a * d, N)))];
+  },
+  distractors: ([a, b]) => [pairT(R_(a), R_(-b)), pairT(R_(-a), R_(b))],
+  variants: () => [],
+  explain: (s) => (s.id === "property" ? `Use ${s.value}` : s.id === "conj" ? `The conjugate of ${s.inputs[0]} is ${s.value}` : `Work it out: ${s.value}`),
+  domain: [[-6, 6], [-6, 6], [-4, 4], [0, 4], [0, 3]],
+  keep: (p) => asconjOk(p),
+  cap: 300,
+  difficulty: ([, , , , k]) => (k === 2 ? 1 : k === 1 ? 3 : 2),
+  teach: {
+    idea: "The conjugate of z = a + bi is z̄ = a − bi: its reflection in the real axis. Conjugation respects arithmetic: conj(z₁ ± z₂) = z̄₁ ± z̄₂, conj(z₁z₂) = z̄₁z̄₂, conj(z₁/z₂) = z̄₁/z̄₂, and z z̄ = |z|² = a² + b².",
+    method: "Either work out the product or quotient first and then change the sign of its imaginary part, or conjugate each number first and then combine them; both give the same answer.",
+    alternatives: [{ id: "mirror", title: "A mirror in the real axis", kind: "conceptual", text: ["z̄ is z reflected in the real axis: same length, opposite angle.", "Multiplying adds angles, so conj(z₁z₂) has angle −(θ₁ + θ₂), which is the angle of z̄₁z̄₂."] }],
+  },
+  limits: "Small whole-number parts; conjugates in equations to be solved are left out.",
+};
+
+// ---- straight lines: slope and inclination, collinearity, forms, conversions, families, sides
+const INCL = [0, 30, 45, 60, 120, 135, 150];
+const tanE = (deg: number): E => ({ 0: E_(R_(0)), 30: E_(R_(1, 3), 3), 45: E_(R_(1)), 60: E_(R_(1), 3), 120: E_(R_(-1), 3), 135: E_(R_(-1)), 150: E_(R_(-1, 3), 3) } as Record<number, E>)[deg];
+const asslopeOk = ([kind, i, x1, y1]: number[]) => i >= 0 && i <= 6 && (kind === 1 ? Math.abs(x1) <= 3 && Math.abs(y1) <= 3 && (x1 !== 0 || y1 !== 0) : (kind === 0 || kind === 2) && x1 === 0 && y1 === 0);
+const asslope: Def = {
+  id: "asslope",
+  arity: 4,
+  title: "Slope from the inclination, and the inclination from the slope",
+  competency: LINE,
+  skill: "slope and inclination",
+  type: "exact",
+  mc: true,
+  // [kind, i, x1, y1]: inclination INCL[i]; 0 the slope, 1 the line through (x1, y1) as y = mx + c, 2 the inclination from the slope
+  parse: none,
+  reject: (p) => (asslopeOk(p) ? null : "An inclination of 0°, 30°, 45°, 60°, 120°, 135° or 150°."),
+  prompt: ([kind, i, x1, y1]) =>
+    kind === 0
+      ? `A straight line makes an angle of ${INCL[i]}° with the positive direction of the x-axis. Find its slope.`
+      : kind === 1
+        ? `A straight line passes through ${P2(x1, y1)} and has inclination ${INCL[i]}°. Write its equation as y = mx + c and type the right-hand side.`
+        : `A straight line has slope ${es(tanE(INCL[i]))}. Find its inclination θ in degrees (0° ≤ θ < 180°).`,
+  solve: ([kind, i, x1, y1]) => {
+    const m = tanE(INCL[i]);
+    if (kind === 2) return { steps: [S("tan", "solve", TRIG, [es(m)], INCL[i])], answer: String(INCL[i]) };
+    if (kind === 0) return { steps: [S("tan", "evaluate", TRIG, [INCL[i]], es(m))], answer: es(m) };
+    const ans = asslopeLine(m, x1, y1);
+    return { steps: [S("tan", "evaluate", TRIG, [INCL[i]], es(m)), S("line", "write", LINE, [x1, y1], ans)], answer: ans };
+  },
+  // independent: Math.tan / Math.atan of the angle, and the line checked through the point with that slope
+  validate: ([kind, i, x1, y1], v) => {
+    const th = (INCL[i] * Math.PI) / 180;
+    if (kind === 2) {
+      const t = num1(v);
+      return t !== null && close(t, INCL[i], 1e-12) && close(Math.tan((t * Math.PI) / 180), ev(tanE(INCL[i])), 1e-9);
+    }
+    if (kind === 0) {
+      const t = num1(v);
+      return t !== null && close(t, Math.tan(th), 1e-9);
+    }
+    const L = lineOf(v);
+    return !!L && close(L[0], Math.tan(th), 1e-9) && close(L[0] * x1 + L[1], y1, 1e-9);
+  },
+  bugs: ([kind, i, x1, y1]) => {
+    const deg = INCL[i];
+    if (kind === 2)
+      return [deg > 90 ? B("acute-only", "conceptual", LINE, `The acute angle ${180 - deg}° was given; a negative slope means the line slopes downwards, so its inclination is obtuse.`, String(180 - deg)) : B("complement", "recall", LINE, "The angle with the y-axis was given; the inclination is measured from the positive x-axis.", deg === 0 ? null : String(90 - deg))];
+    const cotE = deg === 30 ? E_(R_(1), 3) : deg === 45 ? E_(R_(1)) : deg === 60 ? E_(R_(1, 3), 3) : deg === 120 ? E_(R_(-1, 3), 3) : deg === 135 ? E_(R_(-1)) : deg === 150 ? E_(R_(-1), 3) : null;
+    const m = tanE(deg);
+    if (kind === 0) return [B("cot", "recall", TRIG, `The ratio was turned over (cot ${deg}° instead of tan ${deg}°); the slope is the rise over the run, tan θ.`, cotE && es(cotE) !== es(m) ? es(cotE) : null), B("sign", "conceptual", LINE, `The sign was lost: a line with inclination between 90° and 180° slopes downwards, so tan ${deg}° is negative.`, deg > 90 ? es({ q: rabs(m.q), m: m.m }) : null)];
+    return [
+      B("cot", "recall", TRIG, `cot ${deg}° was used as the slope instead of tan ${deg}°.`, cotE && es(cotE) !== es(m) ? asslopeLine(cotE, x1, y1) : null),
+      B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", x1 !== 0 && deg !== 0 ? asslopeLine(m, -x1, y1, true) : null),
+    ];
+  },
+  distractors: ([kind, i, x1, y1]) => {
+    const deg = INCL[i];
+    if (kind === 2) return [String((deg + 30) % 180), String((deg + 90) % 180)];
+    const sinE = { 0: E_(R_(0)), 30: E_(R_(1, 2)), 45: E_(R_(1, 2), 2), 60: E_(R_(1, 2), 3), 120: E_(R_(1, 2), 3), 135: E_(R_(1, 2), 2), 150: E_(R_(1, 2)) }[deg]!;
+    const neg = { q: rmul(tanE(deg).q, R_(-1)), m: tanE(deg).m };
+    return kind === 0 ? [es(sinE), es(neg), "1", "−1", "√3"] : [asslopeLine(sinE, x1, y1), asslopeLine(neg, x1, y1), asslopeLine(E_(R_(1)), x1, y1), asslopeLine(E_(R_(-1)), x1, y1), asslopeLine(E_(R_(2)), x1, y1)];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "tan" ? (typeof s.value === "number" ? `tan θ = ${s.inputs[0]} with 0° ≤ θ < 180° gives θ = ${s.value}°` : `m = tan ${s.inputs[0]}° = ${s.value}`) : `y − ${par(Number(s.inputs[1]))} = m(x − ${par(Number(s.inputs[0]))}), so y = ${s.value}`),
+  domain: [[0, 2], [0, 6], [-3, 3], [-3, 3]],
+  keep: (p) => asslopeOk(p),
+  difficulty: ([kind, i]) => (kind === 0 && i <= 3 ? 1 : kind === 1 ? 3 : 2),
+  teach: {
+    idea: "The inclination θ of a line is the angle it makes with the positive x-axis (0° ≤ θ < 180°); its slope is m = tan θ. Upward lines have acute θ and positive slope; downward lines have obtuse θ and negative slope.",
+    method: "Slope from the angle: m = tan θ (exact values for 30°, 45°, 60° and their supplements). Angle from the slope: find the acute angle with tan = |m|, and use 180° minus it when m is negative. Then y − y₁ = m(x − x₁).",
+    alternatives: [{ id: "triangle", title: "Rise over run", kind: "conceptual", text: ["Walk 1 unit to the right along the x-axis; the line rises tan θ units.", "For 120° the line falls: tan 120° = −tan 60° = −√3."] }],
+  },
+  limits: "The standard angles 0°, 30°, 45°, 60°, 120°, 135° and 150°; vertical lines (90°, no slope) are left out.",
+};
+function asslopeLine(m: E, x1: number, y1: number, plus = false): string {
+  // c = y1 − m x1 (plus: the slip y1 + m x1 with x1 already negated by the caller)
+  const mx = emul(m, E_(R_(x1)));
+  const c = plus ? { q: rmul(mx.q, R_(-1)), m: mx.m } : { q: rmul(mx.q, R_(-1)), m: mx.m };
+  const lin = coefE(m, "x");
+  const tail = [y1 !== 0 ? mi(y1) : "", es(c) !== "0" ? es(c) : ""].filter(Boolean);
+  let out = lin;
+  for (const t of tail) out = out ? `${out} ${t.startsWith("−") ? "−" : "+"} ${t.replace(/^−/, "")}` : t;
+  return out || "0";
+}
+
+const ascollOk = (p: number[]) => {
+  const [x1, y1, x2, y2, x3] = p;
+  return allIn(p, [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-6, 6]]) && x1 < x2 && x3 !== x1 && x3 !== x2 && y1 !== y2 && thin(p, 6);
+};
+const ascoll: Def = {
+  id: "ascoll",
+  arity: 5,
+  title: "Collinear points by equal slopes",
+  competency: LINE,
+  skill: "collinearity by slopes",
+  type: "exact",
+  mc: true,
+  // [x1, y1, x2, y2, x3]: A(x1, y1), B(x2, y2), C(x3, k); find k
+  parse: none,
+  reject: (p) => (ascollOk(p) ? null : "Two whole-number points and the x-coordinate of a third."),
+  prompt: ([x1, y1, x2, y2, x3]) => `The points A${P2(x1, y1)}, B${P2(x2, y2)} and C(${mi(x3)}, k) are collinear. Using slopes, find k.`,
+  solve: ([x1, y1, x2, y2, x3]) => {
+    const m = R_(y2 - y1, x2 - x1);
+    const k = radd(R_(y1), rmul(m, R_(x3 - x1)));
+    return { steps: [S("slope", "divide", LINE, [y2 - y1, x2 - x1], rs(m)), S("equal", "solve", LINE, ["slope AC = slope AB"], rs(k))], answer: rs(k) };
+  },
+  // independent: the area of triangle ABC (shoelace) is zero for the answer
+  validate: ([x1, y1, x2, y2, x3], v) => {
+    const k = num1(v);
+    return k !== null && close(x1 * (y2 - k) + x2 * (k - y1) + x3 * (y1 - y2), 0, 1e-9);
+  },
+  bugs: ([x1, y1, x2, y2, x3]) => {
+    const k = radd(R_(y1), rmul(R_(y2 - y1, x2 - x1), R_(x3 - x1)));
+    const inv = radd(R_(y1), rmul(R_(x2 - x1, y2 - y1), R_(x3 - x1)));
+    const mixedOrder = rsub(R_(y1), rmul(R_(y2 - y1, x2 - x1), R_(x3 - x1)));
+    return [
+      B("run-over-rise", "conceptual", LINE, "The slope was taken as (change in x)/(change in y); slope is (y₂ − y₁)/(x₂ − x₁).", rs(inv) !== rs(k) ? rs(inv) : null),
+      B("order-mixed", "procedural", LINE, "The subtraction order was mixed (y₂ − y₁ over x₁ − x₂), which changes the sign of the slope.", rs(mixedOrder) !== rs(k) ? rs(mixedOrder) : null),
+    ];
+  },
+  distractors: ([x1, y1, x2, y2, x3]) => [rs(radd(R_(y2), rmul(R_(y2 - y1, x2 - x1), R_(x3)))), rs(R_(y1 + y2 - x3))],
+  variants: () => [],
+  explain: (s) => (s.id === "slope" ? `Slope of AB = ${mi(Number(s.inputs[0]))}/${mi(Number(s.inputs[1]))} = ${s.value}` : `Collinear points give equal slopes: slope AC = slope AB, so k = ${s.value}`),
+  domain: [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-6, 6]],
+  keep: (p) => ascollOk(p),
+  cap: 300,
+  difficulty: ([x1, y1, x2, y2]) => ((y2 - y1) % (x2 - x1) === 0 ? 1 : 2),
+  teach: {
+    idea: "Three points lie on one straight line exactly when the slope from the first to the second equals the slope from the first to the third (or from the second to the third).",
+    method: "Work out the slope of AB, write the slope of AC with k in it, set them equal and solve for k.",
+    alternatives: [{ id: "area", title: "A triangle of zero area", kind: "procedural", text: ["Collinear points make a 'triangle' of area 0.", "Set ½|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)| = 0 and solve for k."] }],
+  },
+  limits: "Whole-number points with a non-vertical line through them.",
+};
+
+const aslineqOk = (p: number[]) => {
+  const [kind, a, b, c, d] = p;
+  switch (kind) {
+    case 0: return allIn([a, b], [[-2, 2], [-2, 2]]) && [[1, 1], [-1, 1], [2, 1], [-2, 1], [3, 1], [-3, 1], [1, 2], [-1, 2], [3, 2], [-3, 2]].some(([u, w]) => u === c && w === d);
+    case 1: return a !== 0 && b !== 0 && Math.abs(a) <= 5 && Math.abs(b) <= 5 && c === 0 && d === 0;
+    case 2: return a !== 0 && b !== 0 && a + b !== 0 && Math.abs(a) <= 5 && Math.abs(b) <= 5 && c === 0 && d === 0;
+    case 3: return a !== 0 && b !== 0 && Math.abs(a) <= 4 && Math.abs(b) <= 4 && c === 0 && d === 0;
+    case 4: return allIn([a, c], [[-4, 4], [-4, 4]]) && a !== c && (b === 1 || b === -2) && d === 0 && (a + c) % 2 === 0;
+    case 5: return (a === 1 || a === -2) && c === a + 3 && allIn([b, d], [[-4, 4], [-4, 4]]) && b !== d;
+    case 6: return a >= 1 && a <= 6 && b >= 0 && b <= 5 && c === 0 && d === 0;
+    default: return false;
+  }
+};
+const OMEGA = [30, 45, 60, 120, 135, 150];
+const sinW = (w: number): E => ({ 30: E_(R_(1, 2)), 45: E_(R_(1, 2), 2), 60: E_(R_(1, 2), 3), 120: E_(R_(1, 2), 3), 135: E_(R_(1, 2), 2), 150: E_(R_(1, 2)) } as Record<number, E>)[w];
+const cotW = (w: number): E => ({ 30: E_(R_(1), 3), 45: E_(R_(1)), 60: E_(R_(1, 3), 3), 120: E_(R_(-1, 3), 3), 135: E_(R_(-1)), 150: E_(R_(-1), 3) } as Record<number, E>)[w];
+/** The normal form x cos ω + y sin ω = p as y = −cot ω x + p/sin ω. */
+const normalRhs = (p: number, w: number) => rhsE({ q: rmul(cotW(w).q, R_(-1)), m: cotW(w).m }, E_(rdiv(R_(p), rmul(sinW(w).q, R_(sinW(w).m))), sinW(w).m));
+function aslineqAns(p: number[]): string {
+  const [kind, a, b, c, d] = p;
+  if (kind === 0) {
+    const m = R_(c, d);
+    return rhsR(m, rsub(R_(b), rmul(m, R_(a))));
+  }
+  if (kind === 1) return rhsR(R_(-b, a), R_(b));
+  if (kind === 2) return mi(a + b);
+  if (kind === 3) return rhsR(R_(-b, a), R_(2 * b));
+  if (kind === 4) return mi((a + c) / 2);
+  if (kind === 5) return rs(R_(2 * b + d, 3));
+  return normalRhs(a, OMEGA[b]);
+}
+const aslineq: Def = {
+  id: "aslineq",
+  arity: 5,
+  title: "Equations of lines in point–slope, intercept and normal form, and lines parallel to the axes",
+  competency: LINE,
+  skill: "forms of the equation of a line",
+  type: "exact",
+  mc: true,
+  // [kind, a, b, c, d]: 0 through (a, b) with slope c/d; 1 intercepts a and b; 2 through (a, b) with equal intercepts (the intercept);
+  // 3 the segment between the axes bisected at (a, b); 4 through the midpoint of (a, b) and (c, d) parallel to the y-axis (x = k);
+  // 5 through the point dividing (a, b)–(c, d) in the ratio 1 : 2 parallel to the x-axis (y = k); 6 normal form with p = a, ω = OMEGA[b]
+  parse: none,
+  reject: (p) => (aslineqOk(p) ? null : "A line from one of seven kinds of data with whole numbers."),
+  prompt: ([kind, a, b, c, d]) => {
+    const ask = "Write it as y = mx + c and type the right-hand side.";
+    if (kind === 0) return `A line passes through ${P2(a, b)} with slope ${rs(R_(c, d))}. Using the point–slope form, find its equation. ${ask}`;
+    if (kind === 1) return `A line cuts off an intercept of ${mi(a)} on the x-axis and ${mi(b)} on the y-axis. Using the intercept form, find its equation. ${ask}`;
+    if (kind === 2) return `A line passes through ${P2(a, b)} and cuts off equal intercepts k on the two axes (k ≠ 0). Find k.`;
+    if (kind === 3) return `The segment of a line between the coordinate axes is bisected at the point ${P2(a, b)}. Find the equation of the line. ${ask}`;
+    if (kind === 4) return `Find the equation of the line through the midpoint of A${P2(a, b)} and B${P2(c, d)} that is parallel to the y-axis. It is x = k; find k.`;
+    if (kind === 5) return `The point P divides the segment from A${P2(a, b)} to B${P2(c, d)} internally in the ratio 1 : 2. Find the equation of the line through P parallel to the x-axis. It is y = k; find k.`;
+    return `The perpendicular from the origin to a line has length ${a} and makes an angle of ${OMEGA[b]}° with the positive x-axis. Using the normal form x cos ω + y sin ω = p, find the equation of the line. ${ask}`;
+  },
+  solve: (p) => {
+    const ans = aslineqAns(p);
+    const form = ["y − y₁ = m(x − x₁)", "x/a + y/b = 1", "x/k + y/k = 1 through the point", "x/a + y/b = 1 with a, b twice the coordinates", "x = (x₁ + x₂)/2", "y = (2y₁ + y₂)/3", "x cos ω + y sin ω = p"][p[0]];
+    return { steps: [S("form", "write", LINE, [p[0]], form), S("answer", "rearrange", LINE, [], ans)], answer: ans };
+  },
+  // independent: the answer line checked against the data (points, slope, intercepts found from the line, the foot of the perpendicular from O)
+  validate: (p, v) => {
+    const [kind, a, b, c, d] = p;
+    if (kind === 2 || kind === 4 || kind === 5) {
+      const k = num1(v);
+      if (k === null) return false;
+      if (kind === 2) return k !== 0 && close(a / k + b / k, 1, 1e-9);
+      if (kind === 4) return close(Math.abs(k - a), Math.abs(k - c), 1e-9) && (k - a) * (k - c) < 0;
+      return close(Math.abs(k - b) * 2, Math.abs(d - k), 1e-9) && (k - b) * (d - k) > 0;
+    }
+    const L = lineOf(v);
+    if (!L) return false;
+    const [m, k] = L;
+    if (kind === 0) return close(m * a + k, b, 1e-9) && close(m, c / d, 1e-9);
+    if (kind === 1) return close(k, b, 1e-9) && close(m * a + k, 0, 1e-9);
+    if (kind === 3) return m !== 0 && close(-k / m / 2, a, 1e-9) && close(k / 2, b, 1e-9);
+    // the foot of the perpendicular from the origin: (−mk, k)/(1 + m²)
+    const fx = (-m * k) / (1 + m * m);
+    const fy = k / (1 + m * m);
+    return close(Math.hypot(fx, fy), a, 1e-9) && close(Math.atan2(fy, fx), (OMEGA[b] * Math.PI) / 180, 1e-9);
+  },
+  bugs: (p) => {
+    const [kind, a, b, c, d] = p;
+    const ans = aslineqAns(p);
+    const out: Bug[] = [];
+    if (kind === 0) {
+      const m = R_(c, d);
+      out.push(B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", a !== 0 ? rhsR(m, radd(R_(b), rmul(m, R_(a)))) : null));
+      out.push(B("point-swapped", "procedural", LINE, "The coordinates of the point were swapped in y − y₁ = m(x − x₁).", a !== b ? rhsR(m, rsub(R_(a), rmul(m, R_(b)))) : null));
+    }
+    if (kind === 1) {
+      out.push(B("intercepts-swapped", "procedural", LINE, "The intercepts were put the wrong way round in x/a + y/b = 1: a is the x-intercept.", a !== b ? rhsR(R_(-a, b), R_(a)) : null));
+      out.push(B("slope-sign", "procedural", LINE, "The slope came out as b/a; from x/a + y/b = 1, y = b − (b/a)x, so the slope is −b/a.", rhsR(R_(b, a), R_(b))));
+    }
+    if (kind === 2) out.push(B("opposite", "conceptual", LINE, "The intercepts were taken as equal in size but opposite in sign (x − y = k); equal intercepts give x + y = k.", a - b === 0 ? null : mi(a - b)));
+    if (kind === 3) out.push(B("not-doubled", "procedural", LINE, "The coordinates of the midpoint were used as the intercepts; the intercepts are twice them.", rhsR(R_(-b, a), R_(b))));
+    if (kind === 4) out.push(B("other-coordinate", "procedural", LINE, "The midpoint's y-coordinate was used; a line parallel to the y-axis is x = (the x-coordinate).", rs(R_(b + d, 2))));
+    if (kind === 5) out.push(B("ratio-reversed", "procedural", LINE, "The ratio was used the wrong way round: dividing AB in the ratio 1 : 2 gives (2y₁ + y₂)/3, nearer A.", rs(R_(b + 2 * d, 3))), B("midpoint", "procedural", LINE, "The midpoint was used instead of the point dividing in the ratio 1 : 2.", rs(R_(b + d, 2))));
+    if (kind === 6) out.push(B("tan-slope", "recall", LINE, "tan ω was used as the slope of the line; ω is the angle of the perpendicular, so the line's slope is −cot ω.", rhsE(tanE(OMEGA[b]), E_(rdiv(R_(a), rmul(sinW(OMEGA[b]).q, R_(sinW(OMEGA[b]).m))), sinW(OMEGA[b]).m))));
+    return out.filter((x) => x.predict !== null && x.predict !== ans);
+  },
+  distractors: (p) => {
+    const [kind, a, b] = p;
+    if (kind === 2 || kind === 4 || kind === 5) return [mi(a), mi(b), mi(a * b + 1)];
+    return [rhsR(R_(1), R_(a + b)), rhsR(R_(-1), R_(b))];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "form" ? `Use ${s.value}` : `So the answer is ${s.value}`),
+  domain: [[0, 6], [-5, 6], [-4, 5], [-4, 4], [-4, 4]],
+  keep: (p) => aslineqOk(p),
+  cap: 400,
+  difficulty: ([kind]) => (kind <= 1 || kind === 4 ? 1 : kind === 6 ? 3 : 2),
+  teach: {
+    idea: "A line is fixed by a point and a slope (y − y₁ = m(x − x₁)), by its intercepts (x/a + y/b = 1), or by the length p and direction ω of the perpendicular from the origin (x cos ω + y sin ω = p). Lines parallel to the axes are simply x = k or y = k.",
+    method: "Pick the form that matches the data, put the numbers in, and rearrange to y = mx + c (or read off k for a line parallel to an axis).",
+    alternatives: [{ id: "check", title: "Check with the data", kind: "procedural", text: ["Put the given point into your answer: it must fit.", "For intercepts, put y = 0 and x = 0 into your answer and see whether you get them back."] }],
+  },
+  limits: "Whole-number data; the two-point form is the family asline, parametric form the family aslinpar.",
+};
+
+const eadd = (a: E, b: E) => (a.m === b.m || es(a) === "0" || es(b) === "0" ? es(a.m === b.m ? { q: radd(a.q, b.q), m: a.m } : es(a) === "0" ? b : a) : `${es(a)} ${es(b).startsWith("−") ? "−" : "+"} ${es(b).replace(/^−/, "")}`);
+const LP_DIR: [E, E][] = [[E_(R_(3, 5)), E_(R_(4, 5))], [E_(R_(4, 5)), E_(R_(3, 5))], [E_(R_(-3, 5)), E_(R_(4, 5))], [E_(R_(5, 13)), E_(R_(12, 13))], [E_(R_(-12, 13)), E_(R_(5, 13))], [E_(R_(1, 2), 3), E_(R_(1, 2))], [E_(R_(1, 2)), E_(R_(1, 2), 3)], [E_(R_(1, 2), 2), E_(R_(1, 2), 2)]];
+const LP_R = [[5, 10, -5], [5, 10, -5], [5, 10, -5], [13, 26, -13], [13, 26, -13], [2, 4, -2], [2, 4, -2], [2, 4, -2]];
+const lpTxt = ([c, s]: [E, E]) => `cos θ = ${es(c)} and sin θ = ${es(s)}`;
+const aslinpar: Def = {
+  id: "aslinpar",
+  arity: 4,
+  title: "The parametric form of a line: the point at a given distance",
+  competency: LINE,
+  skill: "parametric form of a line",
+  type: "tuple",
+  mc: true,
+  // [x1, y1, j, ri]: through (x1, y1) with direction LP_DIR[j]; r = LP_R[j][ri]
+  parse: none,
+  reject: (p) => (allIn(p, [[-4, 4], [-4, 4], [0, 7], [0, 2]]) ? null : "A whole-number point, one of eight directions and one of three distances."),
+  prompt: ([x1, y1, j, ri]) => `A line passes through A${P2(x1, y1)} and makes an angle θ with the positive x-axis, where ${lpTxt(LP_DIR[j])}. Write its parametric equations x = x₁ + r cos θ, y = y₁ + r sin θ (r is the signed distance from A) and find the point with r = ${mi(LP_R[j][ri])}. Type it as (x, y).`,
+  solve: ([x1, y1, j, ri]) => {
+    const r = LP_R[j][ri];
+    const [c, s] = LP_DIR[j];
+    const ans = `(${eadd(E_(R_(x1)), emul(c, E_(R_(r))))}, ${eadd(E_(R_(y1)), emul(s, E_(R_(r))))})`;
+    return { steps: [S("param", "write", LINE, [x1, y1], `x = ${mi(x1)} + r(${es(c)}), y = ${mi(y1)} + r(${es(s)})`), S("point", "substitute", LINE, [r], ans)], answer: ans };
+  },
+  // independent: the point is at distance |r| from A, on the line through A with slope tan θ, on the side given by the sign of r
+  validate: ([x1, y1, j, ri], v) => {
+    const t = nums(v);
+    if (!t || t.length !== 2) return false;
+    const r = LP_R[j][ri];
+    const [c, s] = LP_DIR[j].map(ev);
+    const dx = t[0] - x1;
+    const dy = t[1] - y1;
+    return close(Math.hypot(dx, dy), Math.abs(r), 1e-9) && close(dx * s, dy * c, 1e-9) && (dx * c + dy * s) * r > 0;
+  },
+  bugs: ([x1, y1, j, ri]) => {
+    const r = LP_R[j][ri];
+    const [c, s] = LP_DIR[j];
+    const pt = (u: E, w: E, rr: number) => `(${eadd(E_(R_(x1)), emul(u, E_(R_(rr))))}, ${eadd(E_(R_(y1)), emul(w, E_(R_(rr))))})`;
+    return [B("cos-sin-swapped", "recall", LINE, "cos θ and sin θ were swapped: x changes by r cos θ and y by r sin θ.", es(c) === es(s) ? null : pt(s, c, r)), B("sign-of-r", "conceptual", LINE, "The sign of r was ignored; a negative r means the point lies on the other side of A, against the direction θ.", r < 0 ? pt(c, s, -r) : null)];
+  },
+  distractors: ([x1, y1, j, ri]) => {
+    const r = LP_R[j][ri];
+    return [`(${mi(x1 + r)}, ${mi(y1 + r)})`];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "param" ? `Parametric form: ${s.value}` : `Put r = ${mi(Number(s.inputs[0]))}: ${s.value}`),
+  domain: [[-4, 4], [-4, 4], [0, 7], [0, 2]],
+  cap: 300,
+  difficulty: ([, , j, ri]) => (j <= 2 && ri < 2 ? 1 : j >= 5 ? 3 : 2),
+  teach: {
+    idea: "Every point of the line through (x₁, y₁) with inclination θ can be written as x = x₁ + r cos θ, y = y₁ + r sin θ, where r is the signed distance from (x₁, y₁) along the line.",
+    method: "Write cos θ and sin θ, put them into the parametric equations, then substitute the given r (negative r goes the other way).",
+    alternatives: [{ id: "steps", title: "Walk along the line", kind: "conceptual", text: ["Each unit of distance along the line moves you cos θ across and sin θ up.", "So r units move you r cos θ across and r sin θ up."] }],
+  },
+  limits: "Directions with exact cosines and sines and distances that keep the answer simple.",
+};
+
+const asgenfOk = (p: number[]) => {
+  const [kind, A, Bc, Cc, j] = p;
+  if (kind === 6) return allIn([A, Bc], [[-1, 1], [-1, 1]]) && (A !== 0 || Bc !== 0) && Cc !== 0 && Math.abs(Cc) <= 6 && j === 0;
+  if (kind < 0 || kind > 5 || A < 1 || A > 4 || Bc === 0 || Math.abs(Bc) > 4 || Math.abs(Cc) > 6 || gcd3(A, Bc, Cc) !== 1) return false;
+  if (kind <= 3) return j === 0 && (kind !== 1 || Cc !== 0) && (kind !== 2 || Cc !== 0) && (kind !== 3 || Cc !== 0) && thin(p, 3);
+  return j >= 0 && j <= 3 && thin(p, 10);
+};
+const GF_PT = [[1, 2], [-2, 1], [3, -1], [0, 4]];
+const genLine = (A: number, Bc: number, Cc: number) => lin2(A, Bc, Cc);
+function asgenfAns(p: number[]): string {
+  const [kind, A, Bc, Cc, j] = p;
+  if (kind === 0) return rs(R_(-A, Bc));
+  if (kind === 1) return rs(R_(-Cc, Bc));
+  if (kind === 2) return rs(R_(-Cc, A));
+  if (kind === 3) return es(E_(R_(Math.abs(Cc), A * A + Bc * Bc), A * A + Bc * Bc));
+  const [x0, y0] = GF_PT[j];
+  if (kind === 4) return rhsR(R_(-A, Bc), radd(R_(y0), rmul(R_(A, Bc), R_(x0))));
+  if (kind === 5) return rhsR(R_(Bc, A), rsub(R_(y0), rmul(R_(Bc, A), R_(x0))));
+  // the normal form: divide by −sign(C)·√(A² + B²) so that p > 0
+  const sgC = Cc > 0 ? -1 : 1;
+  const deg = Math.round((Math.atan2(sgC * Bc, sgC * A) * 180) / Math.PI);
+  return String(((deg % 360) + 360) % 360);
+}
+const asgenf: Def = {
+  id: "asgenf",
+  arity: 5,
+  title: "From the general form Ax + By + C = 0: slope, intercepts, normal form, parallel and perpendicular lines",
+  competency: LINE,
+  skill: "converting the general form",
+  type: "exact",
+  mc: true,
+  // [kind, A, B, C, j]: 0 slope, 1 y-intercept, 2 x-intercept, 3 the length p of the normal form, 4 the parallel and 5 the perpendicular through GF_PT[j], 6 the angle ω of the normal form
+  parse: none,
+  reject: (p) => (asgenfOk(p) ? null : "A line Ax + By + C = 0 with small whole-number coefficients."),
+  prompt: (p) => {
+    const [kind, A, Bc, Cc, j] = p;
+    const L = genLine(A, Bc, Cc);
+    const ask = "Write it as y = mx + c and type the right-hand side.";
+    return [
+      `Write the line ${L} in slope–intercept form. What is its slope?`,
+      `Write the line ${L} in slope–intercept form. What is its y-intercept?`,
+      `Write the line ${L} in intercept form x/a + y/b = 1. What is its x-intercept a?`,
+      `Write the line ${L} in normal form x cos ω + y sin ω = p (p > 0). Find p, the length of the perpendicular from the origin.`,
+      `Find the equation of the line through ${P2(GF_PT[j][0], GF_PT[j][1])} parallel to ${L}. ${ask}`,
+      `Find the equation of the line through ${P2(GF_PT[j][0], GF_PT[j][1])} perpendicular to ${L}. ${ask}`,
+      `Write the line ${L} in normal form x cos ω + y sin ω = p with p > 0. Find ω in degrees (0° ≤ ω < 360°).`,
+    ][kind];
+  },
+  solve: (p) => {
+    const ans = asgenfAns(p);
+    const [kind, A, Bc, Cc] = p;
+    const how = kind === 3 || kind === 6 ? `divide by ${Cc > 0 ? "−" : ""}√(${A * A + Bc * Bc})` : kind <= 2 ? `y = ${rhsR(R_(-A, Bc), R_(-Cc, Bc))}` : `slope ${kind === 4 ? rs(R_(-A, Bc)) : rs(R_(Bc, A))}`;
+    return { steps: [S("convert", "rearrange", LINE, [kind], how), S("answer", "read", LINE, [], ans)], answer: ans };
+  },
+  // independent: points of the given line found by solving it at two values of x (or y), and the answer checked against them
+  validate: (p, v) => {
+    const [kind, A, Bc, Cc, j] = p;
+    const yAt = (x: number) => (Bc === 0 ? NaN : -(A * x + Cc) / Bc);
+    if (kind <= 3 || kind === 6) {
+      const t = num1(v);
+      if (t === null) return false;
+      if (kind === 0) return close(t, yAt(1) - yAt(0), 1e-9);
+      if (kind === 1) return close(t, yAt(0), 1e-9);
+      if (kind === 2) return close(A * t + Cc, 0, 1e-9);
+      // the foot of the perpendicular from O, by minimising the distance along the line
+      const P0 = Bc === 0 ? [-Cc / A, 0] : [0, yAt(0)];
+      const dir = [Bc, -A];
+      let [lo, hi] = [-100, 100];
+      const dist = (s: number) => Math.hypot(P0[0] + s * dir[0], P0[1] + s * dir[1]);
+      for (let i = 0; i < 300; i++) {
+        const m1 = lo + (hi - lo) / 3;
+        const m2 = hi - (hi - lo) / 3;
+        if (dist(m1) < dist(m2)) hi = m2;
+        else lo = m1;
+      }
+      const s = (lo + hi) / 2;
+      const F = [P0[0] + s * dir[0], P0[1] + s * dir[1]];
+      if (kind === 3) return close(t, Math.hypot(F[0], F[1]), 1e-7);
+      const deg = (((Math.atan2(F[1], F[0]) * 180) / Math.PI) % 360 + 360) % 360;
+      return t >= 0 && t < 360 && close(t, deg, 1e-6);
+    }
+    const L = lineOf(v);
+    if (!L) return false;
+    const [x0, y0] = GF_PT[j];
+    const m0 = yAt(1) - yAt(0);
+    return close(L[0] * x0 + L[1], y0, 1e-9) && (kind === 4 ? close(L[0], m0, 1e-9) : close(L[0] * m0, -1, 1e-9));
+  },
+  bugs: (p) => {
+    const [kind, A, Bc, Cc, j] = p;
+    const ans = asgenfAns(p);
+    const out: Bug[] = [];
+    if (kind === 0) out.push(B("ratio-inverted", "recall", LINE, "The slope was taken as −B/A; from Ax + By + C = 0, y = −(A/B)x − C/B, so the slope is −A/B.", rs(R_(-Bc, A))), B("sign-lost", "procedural", LINE, "The minus sign was lost when moving Ax to the other side.", rs(R_(A, Bc))));
+    if (kind === 1) out.push(B("sign-lost", "procedural", LINE, "The minus sign was lost when moving C to the other side.", rs(R_(Cc, Bc))));
+    if (kind === 2) out.push(B("sign-lost", "procedural", LINE, "The minus sign was lost: putting y = 0 gives Ax = −C.", rs(R_(Cc, A))), B("y-intercept", "procedural", LINE, "The y-intercept was given instead of the x-intercept.", rs(R_(-Cc, Bc))));
+    if (kind === 3) out.push(B("no-root", "recall", LINE, "C was divided by A² + B² instead of by √(A² + B²).", rs(R_(Math.abs(Cc), A * A + Bc * Bc))), B("plain-sum", "procedural", LINE, "C was divided by |A| + |B| instead of by √(A² + B²).", rs(R_(Math.abs(Cc), Math.abs(A) + Math.abs(Bc)))));
+    if (kind === 4 || kind === 5) {
+      const [x0, y0] = GF_PT[j];
+      const m = kind === 4 ? R_(-A, Bc) : R_(Bc, A);
+      out.push(B(kind === 4 ? "perpendicular-instead" : "parallel-instead", "conceptual", LINE, kind === 4 ? "A perpendicular line was found; parallel lines have the same slope." : "A parallel line was found; perpendicular slopes multiply to −1.", kind === 4 ? rhsR(R_(Bc, A), rsub(R_(y0), rmul(R_(Bc, A), R_(x0)))) : rhsR(R_(-A, Bc), radd(R_(y0), rmul(R_(A, Bc), R_(x0))))));
+      out.push(B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", x0 !== 0 ? rhsR(m, radd(R_(y0), rmul(m, R_(x0)))) : null));
+    }
+    if (kind === 6) {
+      const w = Number(ans);
+      out.push(B("p-negative", "conceptual", LINE, "The equation was divided by +√(A² + B²) whatever the sign of C, which can make p negative; p must be positive, which turns ω through 180°.", String((w + 180) % 360)));
+      out.push(B("from-y-axis", "procedural", LINE, "The angle was measured from the y-axis; ω is measured from the positive x-axis.", w % 90 === 0 && w % 180 !== 0 ? null : String((((90 - w) % 360) + 360) % 360)));
+    }
+    return out.filter((x) => x.predict !== null && x.predict !== ans);
+  },
+  distractors: (p) => {
+    const [kind, A, Bc, Cc] = p;
+    if (kind === 6) return [String((Number(asgenfAns(p)) + 90) % 360)];
+    if (kind <= 3) return [rs(R_(A + 1, Bc)), rs(R_(-Cc - 1, Bc === 0 ? 1 : Bc))];
+    return [rhsR(R_(-A, Bc), R_(Cc)), rhsR(R_(A, Bc), R_(0))];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "convert" ? `Rearrange: ${s.value}` : `So the answer is ${s.value}`),
+  domain: [[0, 6], [-1, 4], [-4, 4], [-6, 6], [0, 3]],
+  keep: (p) => asgenfOk(p),
+  cap: 500,
+  difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 3 || kind === 6 ? 3 : 2),
+  teach: {
+    idea: "Ax + By + C = 0 can be rewritten as y = −(A/B)x − C/B (slope and y-intercept), as x/(−C/A) + y/(−C/B) = 1 (intercepts), or, dividing by ∓√(A² + B²), as x cos ω + y sin ω = p with p > 0. Parallel lines share A : B; perpendicular slopes multiply to −1.",
+    method: "Make y the subject to read the slope and y-intercept; move C across and divide to get the intercept form; divide by √(A² + B²), with the sign chosen to make the right-hand side positive, for the normal form.",
+    alternatives: [{ id: "points", title: "Use two points of the line", kind: "procedural", text: ["Put x = 0 to find where the line meets the y-axis, and y = 0 for the x-axis.", "The slope is the rise between those points over the run."] }],
+  },
+  limits: "Small whole-number coefficients; for the angle ω only lines with A and B from −1 to 1, so that ω is a multiple of 45°.",
+};
+
+// ---- probability: events as sets, the addition theorem for three events, Bernoulli distributions
+const EVS: { name: (n: number) => string; has: (x: number, n: number) => boolean }[] = [
+  { name: () => "the number is even", has: (x) => x % 2 === 0 },
+  { name: () => "the number is odd", has: (x) => x % 2 === 1 },
+  { name: () => "the number is prime", has: (x) => x > 1 && Array.from({ length: x - 2 }, (_, i) => i + 2).every((d) => x % d !== 0) },
+  { name: () => "the number is a multiple of 3", has: (x) => x % 3 === 0 },
+  { name: (n) => `the number is greater than ${Math.floor(n / 2)}`, has: (x, n) => x > Math.floor(n / 2) },
+  { name: () => "the number is a multiple of 4", has: (x) => x % 4 === 0 },
+  { name: () => "the number is a perfect square", has: (x) => Number.isInteger(Math.sqrt(x)) },
+  { name: (n) => `the number is less than ${Math.ceil(n / 3) + 1}`, has: (x, n) => x < Math.ceil(n / 3) + 1 },
+];
+const EV_N = [6, 10, 12, 20];
+const EV_WHAT = ["A die is rolled", "A card is drawn from ten cards numbered 1 to 10", "A ball is drawn from a bag of twelve balls numbered 1 to 12", "A ticket is drawn from twenty tickets numbered 1 to 20"];
+const EV_OP = ["A ∪ B (A or B)", "A ∩ B (A and B)", "A′ (not A)", "A ∩ B′ (A but not B)", "A′ ∩ B′ (neither A nor B)"];
+const evSet = (s: number, e: number) => Array.from({ length: EV_N[s] }, (_, i) => i + 1).filter((x) => EVS[e].has(x, EV_N[s]));
+function evAns([s, a, b, op]: number[]): number[] {
+  const S0 = Array.from({ length: EV_N[s] }, (_, i) => i + 1);
+  const A = evSet(s, a);
+  const Bs = evSet(s, b);
+  return S0.filter((x) => [A.includes(x) || Bs.includes(x), A.includes(x) && Bs.includes(x), !A.includes(x), A.includes(x) && !Bs.includes(x), !A.includes(x) && !Bs.includes(x)][op]);
+}
+const asevsetOk = (p: number[]) => {
+  const [s, a, b, op] = p;
+  if (!allIn(p, [[0, 3], [0, 7], [0, 7], [0, 4]])) return false;
+  if (op === 2) return b === a && evAns(p).length > 0 && evAns(p).length < EV_N[s];
+  const A = evSet(s, a);
+  const Bs = evSet(s, b);
+  return a !== b && A.length > 0 && Bs.length > 0 && JSON.stringify(A) !== JSON.stringify(Bs) && evAns(p).length > 0 && evAns(p).length <= 12;
+};
+const asevset: Def = {
+  id: "asevset",
+  arity: 4,
+  title: "Events as sets of outcomes: not A, A and B, A or B",
+  competency: EV,
+  skill: "events as subsets of the sample space",
+  type: "set",
+  // [s, a, b, op]: sample space 1 … EV_N[s]; events EVS[a], EVS[b]; op EV_OP
+  parse: none,
+  reject: (p) => (asevsetOk(p) ? null : "Two different events on a small sample space, and an event made from them that is not empty."),
+  prompt: ([s, a, b, op]) => `${EV_WHAT[s]}, so the sample space is S = {1, 2, …, ${EV_N[s]}}. Let A be the event "${EVS[a].name(EV_N[s])}"${op === 2 ? "" : ` and B the event "${EVS[b].name(EV_N[s])}"`}. Write the event ${EV_OP[op]} as a set of outcomes (list the numbers, separated by commas).`,
+  solve: (p) => {
+    const [s, a, b, op] = p;
+    const ans = evAns(p);
+    return { steps: [S("A", "list", EV, [], `{${evSet(s, a).join(", ")}}`), ...(op === 2 ? [] : [S("B", "list", EV, [], `{${evSet(s, b).join(", ")}}`)]), S("combine", "combine", EV, [EV_OP[op]], `{${ans.join(", ")}}`)], answer: ans };
+  },
+  // independent: each outcome tested against the words of the events directly (division, trial factors, square roots)
+  validate: ([s, a, b, op], v) => {
+    if (!Array.isArray(v)) return false;
+    const n = EV_N[s];
+    const test = (e: number, x: number) => {
+      if (e === 0) return x / 2 === Math.floor(x / 2);
+      if (e === 1) return x / 2 !== Math.floor(x / 2);
+      if (e === 2) {
+        if (x < 2) return false;
+        for (let d = 2; d * d <= x; d++) if (x % d === 0) return false;
+        return true;
+      }
+      if (e === 3) return x / 3 === Math.floor(x / 3);
+      if (e === 4) return 2 * x > n + (n % 2);
+      if (e === 5) return x / 4 === Math.floor(x / 4);
+      if (e === 6) return Math.round(Math.sqrt(x)) ** 2 === x;
+      return x <= Math.ceil(n / 3);
+    };
+    const want: number[] = [];
+    for (let x = 1; x <= n; x++) {
+      const inA = test(a, x);
+      const inB = test(b, x);
+      if ([inA || inB, inA && inB, !inA, inA && !inB, !inA && !inB][op]) want.push(x);
+    }
+    return v.length === want.length && [...v].sort((x, y) => x - y).every((x, i) => x === want[i]);
+  },
+  bugs: (p) => {
+    const [s, a, b, op] = p;
+    const ans = evAns(p);
+    const A = evSet(s, a);
+    const Bs = evSet(s, b);
+    const out: Bug[] = [];
+    const add = (id: string, kind: Bug["kind"], says: string, pred: number[]) => {
+      if (pred.length && JSON.stringify(pred) !== JSON.stringify(ans)) out.push(B(id, kind, EV, says, pred));
+    };
+    if (op === 0) add("and-for-or", "conceptual", "Only the outcomes in both A and B were listed; 'A or B' (A ∪ B) contains the outcomes in at least one of them.", evAns([s, a, b, 1]));
+    if (op === 1) add("or-for-and", "conceptual", "Every outcome in A or in B was listed; 'A and B' (A ∩ B) contains only the outcomes in both.", evAns([s, a, b, 0]));
+    if (op === 2) add("a-itself", "conceptual", "The outcomes of A were listed; 'not A' (A′) is everything in S that is not in A.", A);
+    if (op === 3) add("and-for-but-not", "procedural", "The outcomes in both A and B were listed; 'A but not B' keeps the outcomes of A that are not in B.", evAns([s, a, b, 1]));
+    if (op === 3) add("b-but-not-a", "procedural", "The outcomes of B that are not in A were listed; the event is A but not B.", Bs.filter((x) => !A.includes(x)));
+    if (op === 4) add("not-both", "conceptual", "The outcomes not in both A and B together, (A ∩ B)′, were listed; 'neither A nor B' is (A ∪ B)′.", Array.from({ length: EV_N[s] }, (_, i) => i + 1).filter((x) => !(A.includes(x) && Bs.includes(x))));
+    return out;
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "A" ? `A = ${s.value}` : s.id === "B" ? `B = ${s.value}` : `${s.inputs[0]} = ${s.value}`),
+  domain: [[0, 3], [0, 7], [0, 7], [0, 4]],
+  keep: (p) => asevsetOk(p),
+  cap: 300,
+  difficulty: ([, , , op]) => (op <= 2 ? 1 : 2),
+  teach: {
+    idea: "An event is a subset of the sample space S. 'A or B' is the union A ∪ B, 'A and B' the intersection A ∩ B, and 'not A' the complement A′ = S − A.",
+    method: "List the outcomes of A and of B from S. Then: for A ∪ B take every outcome in either list; for A ∩ B only those in both; for A′ those of S not in A; for A ∩ B′ those of A not in B.",
+    alternatives: [{ id: "venn", title: "A Venn diagram", kind: "conceptual", text: ["Draw two overlapping circles A and B inside a rectangle S and write each outcome in its region.", "Read the event off the diagram: the overlap is A ∩ B, both circles together A ∪ B, outside A is A′."] }],
+  },
+  limits: "Sample spaces of whole numbers up to 20 and eight simple events; events of two-stage experiments are the families akss and akdice.",
+};
+
+const add3Regions = ([r1, r2, r3, r4, r5, r6]: number[]) => ({ r1, r2, r3, r4, r5, r6, r7: 1 + ((r1 + r2) % 3), r0: 2 + ((r3 + r4) % 5) });
+const add3Counts = (p: number[]) => {
+  const g = add3Regions(p);
+  const N = g.r0 + g.r1 + g.r2 + g.r3 + g.r4 + g.r5 + g.r6 + g.r7;
+  // r4 = A∩B only, r5 = A∩C only, r6 = B∩C only, r7 = all three
+  return { N, A: g.r1 + g.r4 + g.r5 + g.r7, B: g.r2 + g.r4 + g.r6 + g.r7, C: g.r3 + g.r5 + g.r6 + g.r7, AB: g.r4 + g.r7, AC: g.r5 + g.r7, BC: g.r6 + g.r7, ABC: g.r7, g };
+};
+const asadd3: Def = {
+  id: "asadd3",
+  arity: 7,
+  title: "The addition theorem for three events",
+  competency: EV,
+  skill: "addition theorem for three events",
+  type: "fraction",
+  mc: true,
+  // [r1, …, r6, ask]: Venn-region counts (the rest fixed by them); ask 0 P(A ∪ B ∪ C), 1 P(none of them)
+  parse: none,
+  reject: (p) => (allIn(p, [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 1]]) && thin(p, 8) ? null : "Small region counts in a three-set Venn diagram."),
+  prompt: (p) => {
+    const c = add3Counts(p);
+    const f = (x: number) => pf(x, c.N);
+    return `For events A, B and C, P(A) = ${f(c.A)}, P(B) = ${f(c.B)}, P(C) = ${f(c.C)}, P(A ∩ B) = ${f(c.AB)}, P(B ∩ C) = ${f(c.BC)}, P(A ∩ C) = ${f(c.AC)} and P(A ∩ B ∩ C) = ${f(c.ABC)}. Find ${p[6] ? "the probability that none of A, B, C happens" : "P(A ∪ B ∪ C)"}.`;
+  },
+  word: (p) => {
+    const c = add3Counts(p);
+    return `In a class of ${c.N} students in Tirunelveli, ${c.A} play cricket, ${c.B} play football and ${c.C} play kabaddi; ${c.AB} play both cricket and football, ${c.BC} both football and kabaddi, ${c.AC} both cricket and kabaddi, and ${c.ABC} play all three. A student is chosen at random. Find the probability that the student plays ${p[6] ? "none of the three games" : "at least one of the three games"}.`;
+  },
+  solve: (p) => {
+    const c = add3Counts(p);
+    const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    const ans = p[6] ? (c.N - U) / c.N : U / c.N;
+    return { steps: [S("singles", "add", EV, [c.A, c.B, c.C], pf(c.A + c.B + c.C, c.N)), S("pairs", "subtract", EV, [c.AB, c.BC, c.AC], pf(c.AB + c.BC + c.AC, c.N)), S("triple", "add", EV, [c.ABC], pf(U, c.N)), ...(p[6] ? [S("complement", "subtract", COMP, [U, c.N], pf(c.N - U, c.N))] : [])], answer: ans };
+  },
+  // independent: count the outcomes region by region in the Venn diagram
+  validate: (p, v) => {
+    if (typeof v !== "number") return false;
+    const { g, N } = add3Counts(p);
+    const inside = g.r1 + g.r2 + g.r3 + g.r4 + g.r5 + g.r6 + g.r7;
+    return close(v, p[6] ? g.r0 / N : inside / N, 1e-12);
+  },
+  bugs: (p) => {
+    const c = add3Counts(p);
+    const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    const fix = (x: number) => (p[6] ? (c.N - x) / c.N : x / c.N);
+    return [
+      B("triple-left-out", "procedural", EV, "P(A ∩ B ∩ C) was left out; subtracting the three pairs takes the triple overlap away three times after adding it three times, so it must be added back once.", fix(U - c.ABC)),
+      B("pairs-not-subtracted", "conceptual", EV, "The three probabilities were simply added; outcomes in two of the events are then counted twice, so the pairwise overlaps must be subtracted.", p[6] ? null : fix(c.A + c.B + c.C)),
+      B("triple-subtracted", "procedural", EV, "P(A ∩ B ∩ C) was subtracted instead of added.", fix(U - 2 * c.ABC)),
+    ].filter((b) => b.predict === null || (Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - fix(U)) > 1e-12));
+  },
+  distractors: (p) => {
+    const c = add3Counts(p);
+    const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    return [(p[6] ? U : c.N - U) / c.N, (U - 1) / c.N];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "singles" ? `P(A) + P(B) + P(C) = ${s.value}` : s.id === "pairs" ? `Subtract P(A ∩ B) + P(B ∩ C) + P(A ∩ C) = ${s.value}` : s.id === "triple" ? `Add back P(A ∩ B ∩ C): P(A ∪ B ∪ C) = ${s.value}` : `None of them: 1 − P(A ∪ B ∪ C) = ${s.value}`),
+  range: [0, 1],
+  domain: [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 1]],
+  keep: (p) => thin(p, 8),
+  cap: 300,
+  difficulty: ([, , , , , , ask]) => (ask ? 3 : 2),
+  teach: {
+    idea: "P(A ∪ B ∪ C) = P(A) + P(B) + P(C) − P(A ∩ B) − P(B ∩ C) − P(A ∩ C) + P(A ∩ B ∩ C): add the singles, take away the double counting of the pairs, and add back the triple overlap, which was taken away once too often.",
+    method: "Add the three probabilities, subtract the three pairwise ones, add the triple one. For 'none of them', take the result away from 1.",
+    alternatives: [{ id: "venn", title: "Fill in a Venn diagram", kind: "procedural", text: ["Start from the centre: write the triple overlap, then each pair minus the triple, then each single minus what is already inside it.", "Add all the regions inside the three circles."] }],
+  },
+  limits: "Probabilities with a common denominator from a Venn diagram of whole-number counts.",
+};
+
+const asbernOk = ([kind, a, d, u, v]: number[]) => {
+  if (!allIn([a, d], [[1, 9], [2, 10]]) || a >= d || gcd(a, d) !== 1) return false;
+  if (kind <= 1) return u === 0 && v === 0;
+  if (kind <= 3) return allIn([u, v], [[-5, 10], [-5, 10]]) && u !== v && !(u === 1 && v === 0) && thin([kind, a, d, u, v], 6);
+  if (kind === 4) return u >= 1 && u <= 9 && v === 0 && a === 1 && d === 2;
+  return false;
+};
+const asbern: Def = {
+  id: "asbern",
+  arity: 5,
+  title: "One-point, two-point and Bernoulli distributions",
+  competency: BIN,
+  skill: "Bernoulli and two-point distributions",
+  type: "fraction",
+  mc: true,
+  // [kind, a, d, u, v]: p = a/d; 0 Bernoulli mean, 1 Bernoulli variance, 2 two-point (u with prob p, v otherwise) mean, 3 its variance, 4 one-point at u: variance
+  parse: none,
+  reject: (p) => (asbernOk(p) ? null : "p = a/d in lowest terms, and two different values for a two-point distribution."),
+  prompt: ([kind, a, d, u, v]) =>
+    kind <= 1
+      ? `A seed germinates with probability ${pf(a, d)}. Let X = 1 if it germinates and X = 0 if it does not (a Bernoulli random variable). Find the ${kind ? "variance" : "mean"} of X.`
+      : kind <= 3
+        ? `A random variable X takes the value ${mi(u)} with probability ${pf(a, d)} and the value ${mi(v)} with probability ${pf(d - a, d)} (a two-point distribution). Find the ${kind === 3 ? "variance" : "mean"} of X.`
+        : `A random variable X takes the value ${u} with probability 1 (a one-point distribution). Find the variance of X.`,
+  solve: ([kind, a, d, u, v]) => {
+    const p = a / d;
+    const ans = kind === 0 ? p : kind === 1 ? p * (1 - p) : kind === 2 ? u * p + v * (1 - p) : kind === 3 ? (u - v) ** 2 * p * (1 - p) : 0;
+    const f = ["E(X) = p", "Var(X) = p(1 − p)", "E(X) = up + v(1 − p)", "Var(X) = (u − v)² p(1 − p)", "X never varies, so Var(X) = 0"][kind];
+    return { steps: [S("formula", "recall", BIN, [kind], f), S("value", "evaluate", BIN, [a, d], ans)], answer: ans };
+  },
+  // independent: E(X) and E(X²) summed over the distribution table
+  validate: ([kind, a, d, u, v], val) => {
+    if (typeof val !== "number") return false;
+    const table: [number, number][] = kind <= 1 ? [[1, a / d], [0, 1 - a / d]] : kind <= 3 ? [[u, a / d], [v, 1 - a / d]] : [[u, 1]];
+    const m = table.reduce((s, [x, q]) => s + x * q, 0);
+    const m2 = table.reduce((s, [x, q]) => s + x * x * q, 0);
+    return close(val, kind === 0 || kind === 2 ? m : m2 - m * m, 1e-12);
+  },
+  bugs: ([kind, a, d, u, v]) => {
+    const p = a / d;
+    if (kind === 0) return [B("q-for-p", "procedural", BIN, "The probability of failure was given; the mean of a Bernoulli variable is the probability of success p.", 1 - p)];
+    if (kind === 1) return [B("p-squared", "recall", BIN, "p² was given; Var(X) = E(X²) − (E X)² = p − p² = p(1 − p).", p * p), B("mean-for-variance", "conceptual", BIN, "The mean p was given instead of the variance.", p)];
+    if (kind === 2) return [B("average", "conceptual", BIN, "The two values were simply averaged; each value must be weighted by its probability.", (u + v) / 2), B("swapped", "procedural", BIN, "The probabilities were attached to the wrong values.", u * (1 - p) + v * p)].filter((b) => Math.abs((b.predict as number) - (u * p + v * (1 - p))) > 1e-12);
+    if (kind === 3) return [B("ex2", "procedural", BIN, "E(X²) was given; the variance is E(X²) − (E X)².", u * u * p + v * v * (1 - p)), B("not-squared", "procedural", BIN, "(u − v) was not squared: Var(X) = (u − v)² p(1 − p).", Math.abs(u - v) * p * (1 - p))].filter((b) => Math.abs((b.predict as number) - (u - v) ** 2 * p * (1 - p)) > 1e-12);
+    return [B("value-for-variance", "conceptual", BIN, "The value itself was given; a variable that always takes the same value does not vary, so its variance is 0.", u)];
+  },
+  distractors: ([kind, a, d, u, v]) => (kind === 4 ? [1, u * u] : kind <= 1 ? [a / (2 * d), (a + 1) / (d + 1)] : [u * (a / d), v * (a / d)]),
+  variants: () => [],
+  explain: (s) => (s.id === "formula" ? (s.value as string) : `So the answer is ${fracTxt(Number(s.value))}`),
+  range: ([kind]) => (kind <= 1 ? [0, 1] : null),
+  domain: [[0, 4], [1, 9], [2, 10], [-5, 10], [-5, 10]],
+  keep: (p) => asbernOk(p),
+  cap: 300,
+  difficulty: ([kind]) => (kind === 0 || kind === 4 ? 1 : kind === 3 ? 3 : 2),
+  teach: {
+    idea: "A one-point distribution always gives the same value (variance 0). A two-point distribution gives u with probability p and v with probability 1 − p; with u = 1 and v = 0 it is the Bernoulli distribution, with mean p and variance p(1 − p).",
+    method: "Make the table of values and probabilities. Mean: Σ x P(x). Variance: Σ x² P(x) minus the square of the mean (for two points this simplifies to (u − v)² p(1 − p)).",
+    alternatives: [{ id: "one_trial", title: "One trial of a binomial", kind: "conceptual", text: ["A Bernoulli variable is a binomial with n = 1.", "So its mean is np = p and its variance npq = p(1 − p)."] }],
+  },
+  limits: "Rational p with denominators up to 10 and whole-number values; general discrete distributions are the families atrvmean and atrvvar.",
+};
+
+// ---- lines in space: equations, intersection; planes; angles
+const lsPRU = (p: number[]) => [1 + (Math.abs(p[1] + p[4]) % 3), 1 + (Math.abs(p[2] + 2 * p[5]) % 2), 1 + (Math.abs(p[3] + p[6]) % 3)];
+/** The non-standard Cartesian form (Px − q)/l = (Ry + s)/m = (t − Uz)/n, written out. */
+function lsCart(q: number, s: number, t: number, l: number, m: number, n: number, [P, Rr, U]: number[]) {
+  const top1 = `${P === 1 ? "x" : `${P}x`}${q === 0 ? "" : q > 0 ? ` − ${q}` : ` + ${-q}`}`;
+  const top2 = `${Rr === 1 ? "y" : `${Rr}y`}${s === 0 ? "" : s > 0 ? ` + ${s}` : ` − ${-s}`}`;
+  const top3 = `${t === 0 ? `−${U === 1 ? "" : U}z` : `${mi(t)} − ${U === 1 ? "" : U}z`}`;
+  const wrap = (x: string) => (/ [+−] |^−/.test(x) ? `(${x})` : x);
+  return `${wrap(top1)}/${par(l)} = ${wrap(top2)}/${par(m)} = ${wrap(top3)}/${par(n)}`;
+}
+const par = (v: number) => (v < 0 ? `(${mi(v)})` : mi(v));
+const asleqOk = (p: number[]) => {
+  const [kind, a, b, c, l, m, n] = p;
+  if (!allIn(p, [[0, 2], [-2, 2], [-2, 2], [-2, 2], [-3, 3], [-3, 3], [-3, 3]])) return false;
+  if (kind === 1) return (l !== 0 || m !== 0 || n !== 0) && thin(p, 280);
+  return l !== 0 && m !== 0 && n !== 0 && thin(p, 180);
+};
+function asleqAns(p: number[]): string {
+  const [kind, a, b, c, l, m, n] = p;
+  if (kind === 1) return tup([a, b, c, l, m, n].map(mi));
+  const [P, Rr, U] = lsPRU(p);
+  const pt = kind === 0 ? [R_(a, P), R_(-b, Rr), R_(c, U)] : [R_(a), R_(b), R_(c)];
+  return tup([...pt.map(rs), rs(R_(l, P)), rs(R_(m, Rr)), rs(R_(-n, U))]);
+}
+const asleq: Def = {
+  id: "asleq",
+  arity: 7,
+  title: "Vector and Cartesian equations of a line in space",
+  competency: SL,
+  skill: "equations of a line in space",
+  type: "tuple",
+  mc: true,
+  // [kind, a, b, c, l, m, n]: 0 convert (Px − a)/l = (Ry + b)/m = (c − Uz)/n to r = a⃗ + λb⃗; 1 the line through A(a, b, c) and B = A + (l, m, n); 2 through A(a, b, c) parallel to the line (Px − 1)/l = (Ry + 1)/m = (2 − Uz)/n
+  parse: none,
+  reject: (p) => (asleqOk(p) ? null : "Whole-number points and direction numbers."),
+  prompt: (p) => {
+    const [kind, a, b, c, l, m, n] = p;
+    const tail = "Write it as r⃗ = a⃗ + λb⃗, where a⃗ = (a₁, a₂, a₃) and b⃗ = (b₁, b₂, b₃) are the numbers you get by writing the line as (x − a₁)/b₁ = (y − a₂)/b₂ = (z − a₃)/b₃. Type (a₁, a₂, a₃, b₁, b₂, b₃).";
+    if (kind === 0) return `The Cartesian equation of a line is ${lsCart(a, b, c, l, m, n, lsPRU(p))}. ${tail}`;
+    if (kind === 1) return `Find the vector equation of the line through A${P3([a, b, c])} and B${P3([a + l, b + m, c + n])} in the form r⃗ = a⃗ + λ(b⃗ − a⃗), with a⃗ the position vector of A and b⃗ that of B. Type the components of a⃗ and of b⃗ − a⃗ as (a₁, a₂, a₃, d₁, d₂, d₃).`;
+    return `Find the equation of the line through A${P3([a, b, c])} parallel to the line ${lsCart(1, 1, 2, l, m, n, lsPRU(p))}. Write it as r⃗ = a⃗ + λb⃗, where a⃗ is the position vector of A and b⃗ = (b₁, b₂, b₃) are the denominators of the given line once it is written as (x − x₀)/b₁ = (y − y₀)/b₂ = (z − z₀)/b₃. Type (a₁, a₂, a₃, b₁, b₂, b₃).`;
+  },
+  solve: (p) => {
+    const ans = asleqAns(p);
+    const how = ["divide each numerator by the coefficient of its variable (and make the z coefficient +1)", "direction b⃗ − a⃗ = AB", "the same direction as the given line, through A"][p[0]];
+    return { steps: [S("standard", "rewrite", SL, [p[0]], how), S("read", "read", SL, [], ans)], answer: ans };
+  },
+  // independent: points r = a + λb of the answer put back into the given equations (each fraction must equal λ), or the given points recovered at λ = 0 and 1
+  validate: (p, v) => {
+    const t = nums(v);
+    if (!t || t.length !== 6) return false;
+    const [kind, a, b, c, l, m, n] = p;
+    const pt = (lam: number) => [t[0] + lam * t[3], t[1] + lam * t[4], t[2] + lam * t[5]];
+    if (kind === 1) return samePts(pt(0), [a, b, c]) && samePts(pt(1), [a + l, b + m, c + n]);
+    const [P, Rr, U] = lsPRU(p);
+    const [q, s, tt] = kind === 0 ? [a, b, c] : [1, 1, 2];
+    const fr = (X: number[]) => [(P * X[0] - q) / l, (Rr * X[1] + s) / m, (tt - U * X[2]) / n];
+    if (kind === 2 && !samePts(pt(0), [a, b, c])) return false;
+    return [0, 1, -2.5].every((lam) => {
+      const f = fr(pt(lam));
+      const f0 = fr(pt(0));
+      // kind 0: the fractions agree with each other along the line and equal λ; kind 2: each fraction grows by exactly λ (same direction numbers)
+      return kind === 0 ? f.every((x) => close(x, lam, 1e-9)) : f.every((x, i) => close(x - f0[i], lam, 1e-9));
+    });
+  },
+  bugs: (p) => {
+    const [kind, a, b, c, l, m, n] = p;
+    const [P, Rr, U] = lsPRU(p);
+    const ans = asleqAns(p);
+    const out: Bug[] = [];
+    if (kind === 1) {
+      out.push(B("b-as-direction", "conceptual", SL, "The position vector of B was used as the direction; the direction is b⃗ − a⃗ (the vector from A to B).", tup([a, b, c, a + l, b + m, c + n].map(mi))));
+      out.push(B("ba", "procedural", SL, "The direction was taken from B to A; with the form a⃗ + λ(b⃗ − a⃗) it is from A to B.", tup([a, b, c, -l, -m, -n].map(mi))));
+    } else {
+      const pt = kind === 0 ? [R_(a, P), R_(-b, Rr), R_(c, U)] : [R_(a), R_(b), R_(c)];
+      out.push(B("denominators-as-written", "procedural", SL, "The denominators were read as they stand; first make the coefficients of x, y and z equal to 1 (divide top and bottom by them, and turn (c − z) into −(z − c)).", tup([...pt.map(rs), mi(l), mi(m), mi(n)])));
+      if (kind === 0) out.push(B("signs-as-written", "procedural", SL, "The point was read with the signs as written; (x − a)/l passes through x = a, so the + and − in the numerators change sign.", tup([rs(R_(-a, P)), rs(R_(b, Rr)), rs(R_(-c, U)), rs(R_(l, P)), rs(R_(m, Rr)), rs(R_(-n, U))])));
+      out.push(B("z-sign", "procedural", SL, "The minus sign in front of z was left in the numerator; (c − Uz)/n = (z − c/U)/(−n/U).", tup([...pt.map(rs), rs(R_(l, P)), rs(R_(m, Rr)), rs(R_(n, U))])));
+    }
+    return out.filter((x) => x.predict !== ans);
+  },
+  distractors: ([, a, b, c, l, m, n]) => [tup([l, m, n, a, b, c].map(mi))],
+  variants: () => [],
+  explain: (s) => (s.id === "standard" ? `Standard form: ${s.value}` : `So (a₁, a₂, a₃, b₁, b₂, b₃) = ${s.value}`),
+  domain: [[0, 2], [-2, 2], [-2, 2], [-2, 2], [-3, 3], [-3, 3], [-3, 3]],
+  keep: (p) => asleqOk(p),
+  cap: 300,
+  difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
+  teach: {
+    idea: "A line through the point A with direction b⃗ is r⃗ = a⃗ + λb⃗ (vector form), or (x − a₁)/b₁ = (y − a₂)/b₂ = (z − a₃)/b₃ (Cartesian form). The denominators are direction ratios and the numerators show the point.",
+    method: "To convert Cartesian to vector form, first make the coefficients of x, y and z equal to +1 in the numerators (divide top and bottom), then read the point from the numerators and the direction from the denominators. Through two points, use b⃗ − a⃗ as the direction.",
+    alternatives: [{ id: "lambda", title: "Set each fraction equal to λ", kind: "procedural", text: ["Write (2x − 1)/3 = λ, so x = 1/2 + (3/2)λ; do the same for y and z.", "The constant terms give the point and the coefficients of λ give the direction."] }],
+  },
+  limits: "Whole-number data; lines given as the intersection of two planes are left out.",
+};
+
+const asint3Ok = (p: number[]) => {
+  const [px, py, pz, iu, iv, l0, m0] = p;
+  return allIn(p, [[-2, 2], [-2, 2], [-2, 2], [0, 5], [6, 11], [-2, 2], [-2, 2]]) && !isZero(cross(DIRS[iu], DIRS[iv])) && l0 !== 0 && m0 !== 0 && thin(p, 200);
+};
+const asint3Lines = ([px, py, pz, iu, iv, l0, m0]: number[]) => {
+  const P = [px, py, pz];
+  return { a: sub(P, scl(l0, DIRS[iu])), u: DIRS[iu], b: sub(P, scl(m0, DIRS[iv])), w: DIRS[iv], P };
+};
+const asint3: Def = {
+  id: "asint3",
+  arity: 7,
+  title: "The point of intersection of two lines in space",
+  competency: SL,
+  skill: "point of intersection of two lines",
+  type: "tuple",
+  mc: true,
+  // [px, py, pz, iu, iv, l0, m0]: the lines meet at P = a + l0 u = b + m0 v
+  parse: none,
+  reject: (p) => (asint3Ok(p) ? null : "Two non-parallel lines through a whole-number point."),
+  prompt: (p) => {
+    const { a, u, b, w } = asint3Lines(p);
+    return `Show that the lines ${lineVec(a, u)} and ${lineVec(b, w, "μ")} intersect, and find their point of intersection. Type it as (x, y, z).`;
+  },
+  solve: (p) => {
+    const { P } = asint3Lines(p);
+    return { steps: [S("equate", "equate", SL, [], "a⃗ + λu⃗ = b⃗ + μv⃗ componentwise"), S("solve", "solve", SL, [p[5], p[6]], `λ = ${mi(p[5])}, μ = ${mi(p[6])} (the third equation checks)`), S("point", "substitute", SL, [], P3(P))], answer: P3(P) };
+  },
+  // independent: the answer lies on both lines (P − a parallel to u, P − b parallel to v)
+  validate: (p, v) => {
+    const t = nums(v);
+    if (!t || t.length !== 3) return false;
+    const { a, u, b, w } = asint3Lines(p);
+    return isZero(cross(sub(t, a), u).map((x) => (Math.abs(x) < 1e-9 ? 0 : x))) && isZero(cross(sub(t, b), w).map((x) => (Math.abs(x) < 1e-9 ? 0 : x)));
+  },
+  bugs: (p) => {
+    const { a, u, b, w, P } = asint3Lines(p);
+    const [, , , , , l0, m0] = p;
+    const out: Bug[] = [
+      B("lambda-in-second", "procedural", SL, `λ = ${mi(l0)} was put into the second line instead of μ = ${mi(m0)}.`, l0 === m0 ? null : P3(addv(b, scl(l0, w)))),
+      B("sign-of-lambda", "procedural", SL, `The sign of λ was slipped: λ = ${mi(-l0)} was used.`, P3(sub(a, scl(l0, u)))),
+    ];
+    return out.filter((x) => x.predict !== P3(P));
+  },
+  distractors: (p) => {
+    const { a, b } = asint3Lines(p);
+    return [P3(a), P3(b)];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "equate" ? `Set ${s.value}` : s.id === "solve" ? `Solve two of the equations: ${s.value}` : `Substitute: the point is ${s.value}`),
+  domain: [[-2, 2], [-2, 2], [-2, 2], [0, 5], [6, 11], [-2, 2], [-2, 2]],
+  keep: (p) => asint3Ok(p),
+  cap: 300,
+  difficulty: ([, , , , , l0, m0]) => (Math.abs(l0) === 1 && Math.abs(m0) === 1 ? 1 : 2),
+  teach: {
+    idea: "Two lines in space meet when some point is on both: a⃗ + λu⃗ = b⃗ + μv⃗ for one pair λ, μ. That is three equations in two unknowns; they intersect when the third equation agrees with the λ, μ found from two of them.",
+    method: "Write the x, y and z equations, solve two of them for λ and μ, check the third, and substitute λ into the first line (or μ into the second).",
+    alternatives: [{ id: "check", title: "Check on both lines", kind: "procedural", text: ["Put your point into the Cartesian form of each line: all three fractions must be equal.", "If they are equal for both lines, the point is on both."] }],
+  },
+  limits: "Lines that do meet, at a whole-number point; the shortest distance between skew lines is the family asskew.",
+};
+
+const UNITN: [number[], number][] = [[[2, -1, 2], 3], [[1, 2, 2], 3], [[2, 3, 6], 7], [[1, 4, 8], 9], [[2, -2, 1], 3], [[6, 2, -3], 7]];
+const normPlane = (n: number[], d: number): number[] => {
+  const g = gcd3(n[0], n[1], n[2], d) || 1;
+  let out = [...n, d].map((x) => x / g);
+  const lead = out.find((x, i) => i < 3 && x !== 0)!;
+  if (lead < 0) out = out.map((x) => -x);
+  return out.map((x) => x || 0);
+};
+const asplaneqOk = (p: number[]) => {
+  const [kind, i, x0, y0, z0] = p;
+  if (kind === 2) return x0 !== 0 && y0 !== 0 && z0 !== 0 && allIn([x0, y0, z0], [[-4, 4], [-4, 4], [-4, 4]]) && i === 0 && thin(p, 3);
+  if (kind === 4) return i >= 0 && i <= 5 && x0 >= 1 && x0 <= 4 && y0 === 0 && z0 === 0;
+  return kind >= 0 && kind <= 3 && i >= 0 && i <= 11 && allIn([x0, y0, z0], [[-2, 2], [-2, 2], [-2, 2]]) && thin(p, kind === 1 ? 8 : 6);
+};
+/** The plane's data: normal n, point P0, and two directions in the plane. */
+function plData([kind, i, x0, y0, z0]: number[]) {
+  if (kind === 2) {
+    const n = [y0 * z0, x0 * z0, x0 * y0];
+    return { n, d: x0 * y0 * z0, P0: [x0, 0, 0] };
+  }
+  if (kind === 4) {
+    const [n, len] = UNITN[i];
+    return { n, d: x0 * len, P0: [0, 0, 0] };
+  }
+  const n = NORMALS[i];
+  const P0 = [x0, y0, z0];
+  return { n, d: dot(n, P0), P0 };
+}
+const plDirs = (n: number[]) => {
+  const e = Math.abs(n[0]) <= Math.abs(n[1]) && Math.abs(n[0]) <= Math.abs(n[2]) ? [1, 0, 0] : Math.abs(n[1]) <= Math.abs(n[2]) ? [0, 1, 0] : [0, 0, 1];
+  const u = cross(n, e);
+  const g = gcd3(...u) || 1;
+  const u1 = u.map((x) => x / g);
+  const w = cross(n, u1);
+  const g2 = gcd3(...w) || 1;
+  return [u1, w.map((x) => x / g2)];
+};
+const asplaneq: Def = {
+  id: "asplaneq",
+  arity: 5,
+  title: "The equation of a plane from three points, a point and a normal, its intercepts, a line and a point, or its normal form",
+  competency: PL,
+  skill: "equation of a plane",
+  type: "tuple",
+  mc: true,
+  // [kind, i, x0, y0, z0]: 0 through three points, 1 through P0 with normal NORMALS[i], 2 intercepts x0, y0, z0, 3 containing a line through P0 and another point, 4 at distance x0 from O with normal along UNITN[i]
+  parse: none,
+  reject: (p) => (asplaneqOk(p) ? null : "A plane with a small whole-number normal through a whole-number point."),
+  prompt: (p) => {
+    const [kind, i, x0, y0, z0] = p;
+    const { n, P0 } = plData(p);
+    const [u, w] = plDirs(n);
+    const tail = "Write it as ax + by + cz = d with whole numbers having no common factor and the first non-zero one of a, b, c positive. Type (a, b, c, d).";
+    if (kind === 0) return `Find the equation of the plane through the points ${P3(P0)}, ${P3(addv(P0, u))} and ${P3(addv(P0, w))}. ${tail}`;
+    if (kind === 1) return `Find the equation of the plane through ${P3(P0)} perpendicular to the vector ${vec(scl(1 + (i % 2), n))}. ${tail}`;
+    if (kind === 2) return `Find the equation of the plane that cuts off intercepts ${mi(x0)}, ${mi(y0)} and ${mi(z0)} on the x-, y- and z-axes. ${tail}`;
+    if (kind === 3) return `Find the equation of the plane that contains the line ${lineVec(P0, u)} and the point ${P3(addv(P0, w))}. ${tail}`;
+    return `A plane is at a distance of ${x0} units from the origin, and the perpendicular from the origin to it is along the vector ${vec(UNITN[i][0])}. Using the normal form r⃗ · n̂ = p, find its equation. ${tail}`;
+  },
+  solve: (p) => {
+    const { n, d } = plData(p);
+    const ans = tup(normPlane(n, d).map(mi));
+    const how = ["n⃗ = (B − A) × (C − A)", "n⃗ · (r⃗ − a⃗) = 0", "x/a + y/b + z/c = 1, cleared of fractions", "n⃗ = u⃗ × (P − A) for the line direction u⃗", "r⃗ · n̂ = p with n̂ = n⃗/|n⃗|"][p[0]];
+    return { steps: [S("normal", "find", PL, [p[0]], how), S("equation", "write", PL, [], ans)], answer: ans };
+  },
+  // independent: the given points (or intercepts) satisfy the answer, the answer's normal is parallel to the given one, or its distance from O is p
+  validate: (p, v) => {
+    const t = nums(v);
+    if (!t || t.length !== 4 || !t.every(Number.isInteger) || gcd3(...t) !== 1) return false;
+    const lead = t.slice(0, 3).find((x) => x !== 0);
+    if (lead === undefined || lead < 0) return false;
+    const on = (X: number[]) => close(t[0] * X[0] + t[1] * X[1] + t[2] * X[2], t[3], 1e-9);
+    const [kind, i, x0, y0, z0] = p;
+    const { n, P0 } = plData(p);
+    const [u, w] = plDirs(n);
+    if (kind === 0 || kind === 3) return [P0, addv(P0, u), addv(P0, w), addv(addv(P0, u), w)].every(on);
+    if (kind === 1) return on(P0) && isZero(cross(t.slice(0, 3), n));
+    if (kind === 2) return on([x0, 0, 0]) && on([0, y0, 0]) && on([0, 0, z0]);
+    const nn = t.slice(0, 3);
+    return isZero(cross(nn, UNITN[i][0])) && dot(nn, UNITN[i][0]) > 0 && close(t[3] / norm(nn), x0, 1e-9);
+  },
+  bugs: (p) => {
+    const [kind, i, x0, y0, z0] = p;
+    const { n, d } = plData(p);
+    const ans = tup(normPlane(n, d).map(mi));
+    const out: Bug[] = [B("d-sign", "procedural", PL, "The constant came out with the wrong sign: n⃗ · (r⃗ − a⃗) = 0 gives n⃗ · r⃗ = n⃗ · a⃗.", d === 0 ? null : tup(normPlane(n, -d).map(mi)))];
+    if (kind === 2) out.push(B("intercepts-as-coefficients", "conceptual", PL, "The intercepts were used as the coefficients (x0·x + y0·y + z0·z = 1); the intercept form is x/a + y/b + z/c = 1.", tup(normPlane([x0, y0, z0], 1).map(mi))));
+    if (kind === 4) out.push(B("unit-forgotten", "procedural", PL, `The distance was not multiplied by |n⃗| = ${UNITN[i][1]}; in r⃗ · n̂ = p the normal must be a unit vector.`, tup([...UNITN[i][0], x0].map(mi))));
+    return out.filter((x) => x.predict !== ans);
+  },
+  distractors: (p) => {
+    const { n, d } = plData(p);
+    return [tup(normPlane(n, d + 1).map(mi)), tup(normPlane(n, d - 2).map(mi)), tup(normPlane([n[1], n[0], n[2]], d).map(mi)), tup(normPlane([n[0], n[1], -n[2]], d + 3).map(mi)), tup(normPlane([n[0] + 1, n[1], n[2]], d).map(mi))];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "normal" ? `Find the normal: ${s.value}` : `So (a, b, c, d) = ${s.value}`),
+  domain: [[0, 4], [0, 11], [-4, 4], [-4, 4], [-4, 4]],
+  keep: (p) => asplaneqOk(p),
+  cap: 400,
+  difficulty: ([kind]) => (kind === 1 || kind === 2 ? 1 : kind === 4 ? 2 : 3),
+  teach: {
+    idea: "A plane is fixed by a point A on it and a normal vector n⃗: n⃗ · (r⃗ − a⃗) = 0. Three points give the normal as (B − A) × (C − A); intercepts give x/a + y/b + z/c = 1; the normal form r⃗ · n̂ = p uses the unit normal and the distance p from the origin.",
+    method: "Find a normal vector and a point from the data, write n⃗ · r⃗ = n⃗ · a⃗, clear fractions and remove any common factor.",
+    alternatives: [{ id: "check", title: "Check with the data", kind: "procedural", text: ["Put each given point into your equation: it must fit.", "For intercepts, put two of x, y, z equal to 0 and see whether you get the intercept back."] }],
+  },
+  limits: "Small whole-number normals and points; planes through the intersection of two planes are left out.",
+};
+
+const asplangOk = ([kind, i, j]: number[]) => allIn([kind, i, j], [[0, 1], [0, 11], [0, 11]]) && (kind === 1 || i < j) && (kind === 0 ? !isZero(cross(NORMALS[i], NORMALS[j])) : dot(DIRS[i], NORMALS[j]) !== 0);
+const angleE = (u: number[], w: number[]) => {
+  const N = dot(u, u) * dot(w, w);
+  return E_(R_(Math.abs(dot(u, w)), N), N);
+};
+const asplang: Def = {
+  id: "asplang",
+  arity: 3,
+  title: "The angle between two planes, or between a line and a plane",
+  competency: PL,
+  skill: "angles involving planes",
+  type: "exact",
+  mc: true,
+  // [kind, i, j]: 0 cos θ between the planes with normals NORMALS[i], NORMALS[j]; 1 sin φ between the line with direction DIRS[i] and the plane with normal NORMALS[j]
+  parse: none,
+  reject: (p) => (asplangOk(p) ? null : "Two planes that meet, or a line that is not parallel to the plane."),
+  prompt: ([kind, i, j]) =>
+    kind === 0
+      ? `Find cos θ, where θ is the acute angle between the planes ${planeTxt(NORMALS[i], i - j)} and ${planeTxt(NORMALS[j], i + j)}.`
+      : `Find sin φ, where φ is the angle between the line ${lineVec([1, -1, 2], DIRS[i])} and the plane ${planeTxt(NORMALS[j], j + 1)}.`,
+  solve: ([kind, i, j]) => {
+    const [u, w] = kind === 0 ? [NORMALS[i], NORMALS[j]] : [DIRS[i], NORMALS[j]];
+    const ans = es(angleE(u, w));
+    return { steps: [S("vectors", "read", PL, [], kind === 0 ? `normals ${vec(u)} and ${vec(w)}` : `direction ${vec(u)}, normal ${vec(w)}`), S("dot", "multiply", VEC, [], Math.abs(dot(u, w))), S("value", "divide", PL, [dot(u, u), dot(w, w)], ans)], answer: ans };
+  },
+  // independent: planes — the angle between lines drawn in each plane perpendicular to their common line; line and plane — the angle between the line and its projection on the plane
+  validate: ([kind, i, j], v) => {
+    const x = num1(v);
+    if (x === null) return false;
+    if (kind === 0) {
+      const L = cross(NORMALS[i], NORMALS[j]);
+      const w1 = cross(NORMALS[i], L);
+      const w2 = cross(NORMALS[j], L);
+      return close(x, Math.abs(dot(w1, w2)) / (norm(w1) * norm(w2)), 1e-9);
+    }
+    const u = DIRS[i];
+    const n = NORMALS[j];
+    const proj = sub(u, scl(dot(u, n) / dot(n, n), n));
+    const cosPhi = norm(proj) === 0 ? 0 : Math.abs(dot(u, proj)) / (norm(u) * norm(proj));
+    return close(x, Math.sqrt(Math.max(0, 1 - cosPhi * cosPhi)), 1e-9);
+  },
+  bugs: ([kind, i, j]) => {
+    const [u, w] = kind === 0 ? [NORMALS[i], NORMALS[j]] : [DIRS[i], NORMALS[j]];
+    const N = dot(u, u) * dot(w, w);
+    const ans = es(angleE(u, w));
+    const out: Bug[] = [B("not-divided", "procedural", PL, "Only the dot product was found; it must be divided by the product of the two lengths.", mi(Math.abs(dot(u, w))))];
+    if (kind === 1 && N - dot(u, w) ** 2 > 0) out.push(B("cos-for-sin", "conceptual", PL, "cos φ was found (as if the formula with the normal gave the cosine of the angle with the plane); the line makes 90° minus its angle with the normal, so the formula gives sin φ directly.", es(E_(R_(1, N), N * (N - dot(u, w) ** 2)))));
+    out.push(B("one-length", "procedural", PL, "The dot product was divided by only one of the lengths.", es(E_(R_(Math.abs(dot(u, w)), dot(u, u)), dot(u, u)))));
+    return out.filter((x) => x.predict !== null && x.predict !== ans);
+  },
+  distractors: ([kind, i, j]) => {
+    const [u, w] = kind === 0 ? [NORMALS[i], NORMALS[j]] : [DIRS[i], NORMALS[j]];
+    return [es(E_(R_(Math.abs(dot(u, w)), dot(u, u) + dot(w, w)))), "1/2", "1/3", "√2/2", "√3/2", "2/3"];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "vectors" ? `Use the ${s.value}` : s.id === "dot" ? `|dot product| = ${s.value}` : `Divide by √${s.inputs[0]} × √${s.inputs[1]}: ${s.value}`),
+  range: [0, 1],
+  domain: [[0, 1], [0, 11], [0, 11]],
+  keep: (p) => asplangOk(p),
+  difficulty: ([kind]) => (kind === 0 ? 2 : 3),
+  teach: {
+    idea: "The angle between two planes is the angle between their normals: cos θ = |n⃗₁ · n⃗₂|/(|n⃗₁||n⃗₂|). A line with direction b⃗ makes an angle φ with a plane of normal n⃗ where sin φ = |b⃗ · n⃗|/(|b⃗||n⃗|), because the line makes 90° − φ with the normal.",
+    method: "Read the normal vectors (the coefficients of x, y, z) and the line's direction, work out the dot product and the two lengths, and divide; simplify the surd.",
+    alternatives: [{ id: "picture", title: "Look along the common line", kind: "conceptual", text: ["Two planes meeting look like two lines when seen along their line of intersection.", "The normals turn by the same angle as the planes, so the angle between the normals is the angle between the planes."] }],
+  },
+  limits: "Normals and directions with small whole-number components; angles between a line and a plane parallel to it are left out.",
+};
+
+// ---- tangents and normals to ellipses and hyperbolas, with parametric points
+const TE_CS: [number, number][] = [[3, 4], [4, 3], [-3, 4], [3, -4], [-4, -3], [4, -3], [-3, -4], [-4, 3]];
+const astanehOk = ([kind, A, Bb, t, w, g]: number[]) => allIn([kind, A, Bb, t, w, g], [[0, 1], [2, 6], [1, 6], [0, 7], [0, 1], [0, 1]]) && (kind === 1 || A !== Bb);
+/** The point: ellipse (A cos θ, B sin θ) with (cos, sin) = TE_CS[t]/5; hyperbola (A sec θ, B tan θ) with sec = 5/c, tan = s/c. */
+const tePoint = ([kind, A, Bb, t]: number[]): [R, R] => {
+  const [c, s] = TE_CS[t];
+  return kind === 0 ? [R_(A * c, 5), R_(Bb * s, 5)] : [R_(5 * A, c), R_(Bb * s, c)];
+};
+function teLine(p: number[], normal: number): [R, R] {
+  const [kind, A, Bb] = p;
+  const [x1, y1] = tePoint(p);
+  const sg = kind === 0 ? 1 : -1;
+  // tangent: x x1/A² + sg y y1/B² = 1, slope −(B² x1)/(sg A² y1)
+  const mt = rdiv(rmul(R_(-Bb * Bb), x1), rmul(R_(sg * A * A), y1));
+  const m = normal ? rdiv(R_(-1), mt) : mt;
+  return [m, rsub(y1, rmul(m, x1))];
+}
+const teCurve = ([kind, A, Bb]: number[]) => `${kind ? "hyperbola" : "ellipse"} x²/${A * A} ${kind ? "−" : "+"} y²/${Bb * Bb} = 1`;
+const astaneh: Def = {
+  id: "astaneh",
+  arity: 6,
+  title: "Tangents and normals to an ellipse or a hyperbola, with points in parametric form",
+  competency: TAN,
+  skill: "tangents and normals to ellipses and hyperbolas",
+  type: "exact",
+  mc: true,
+  // [kind, A, B, t, w, g]: ellipse (0) or hyperbola (1) with a = A, b = B; the point from TE_CS[t]; w 0 tangent, 1 normal; g 1: the point given by its parameter θ
+  parse: none,
+  reject: (p) => (astanehOk(p) ? null : "An ellipse or hyperbola with whole-number semi-axes and a point from a 3–4–5 parameter."),
+  prompt: (p) => {
+    const [kind, A, Bb, t, w, g] = p;
+    const [c, s] = TE_CS[t];
+    const [x1, y1] = tePoint(p);
+    const where = g ? `the point with parameter θ, where ${kind ? `sec θ = ${rs(R_(5, c))} and tan θ = ${rs(R_(s, c))} (x = ${A} sec θ, y = ${Bb} tan θ)` : `cos θ = ${rs(R_(c, 5))} and sin θ = ${rs(R_(s, 5))} (x = ${A} cos θ, y = ${Bb} sin θ)`}` : `the point (${rs(x1)}, ${rs(y1)})`;
+    return `Find the equation of the ${w ? "normal" : "tangent"} to the ${teCurve(p)} at ${where}. Write it as y = mx + c and type the right-hand side.`;
+  },
+  solve: (p) => {
+    const [x1, y1] = tePoint(p);
+    const [m, c] = teLine(p, p[4]);
+    const ans = rhsR(m, c);
+    return { steps: [S("point", "evaluate", TAN, [p[5]], `(${rs(x1)}, ${rs(y1)})`), S("slope", "differentiate", TAN, [p[4]], rs(m)), S("line", "write", LINE, [], ans)], answer: ans };
+  },
+  // independent: implicit differentiation done numerically (−F_x/F_y by central differences) at the point, and the line through it
+  validate: (p, v) => {
+    const [kind, A, Bb, , w] = p;
+    const L = lineOf(v);
+    if (!L) return false;
+    const [x1, y1] = tePoint(p).map(rv);
+    const F = (x: number, y: number) => (x * x) / (A * A) + (kind ? -1 : 1) * ((y * y) / (Bb * Bb)) - 1;
+    if (Math.abs(F(x1, y1)) > 1e-9) return false;
+    const h = 1e-5;
+    const Fx = (F(x1 + h, y1) - F(x1 - h, y1)) / (2 * h);
+    const Fy = (F(x1, y1 + h) - F(x1, y1 - h)) / (2 * h);
+    const slope = -Fx / Fy;
+    return close(L[0] * x1 + L[1], y1, 1e-9) && (w ? close(L[0] * slope, -1, 1e-6) : close(L[0], slope, 1e-6));
+  },
+  bugs: (p) => {
+    const [kind, , , , w] = p;
+    const [x1, y1] = tePoint(p);
+    const ans = rhsR(...teLine(p, w));
+    const out: Bug[] = [];
+    if (w) out.push(B("tangent-for-normal", "conceptual", TAN, "The tangent was given; the normal is perpendicular to it at the same point.", rhsR(...teLine(p, 0))));
+    if (kind === 1) {
+      const [, A, Bb] = p;
+      const mt = rdiv(rmul(R_(-Bb * Bb), x1), rmul(R_(A * A), y1));
+      const me = w ? rdiv(R_(-1), mt) : mt;
+      out.push(B("ellipse-rule", "recall", TAN, "The tangent rule for an ellipse (with +) was used; for a hyperbola it is xx₁/a² − yy₁/b² = 1.", rhsR(me, rsub(y1, rmul(me, x1)))));
+    }
+    const [m] = teLine(p, w);
+    out.push(B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", rhsR(m, radd(y1, rmul(m, x1)))));
+    return out.filter((x) => x.predict !== ans);
+  },
+  distractors: (p) => {
+    const [m, c] = teLine(p, p[4]);
+    return [rhsR(rmul(m, R_(-1)), c), rhsR(m, rmul(c, R_(-1)))];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "point" ? `The point is ${s.value}` : s.id === "slope" ? `Differentiating (or from xx₁/a² ± yy₁/b² = 1), the ${s.inputs[0] ? "normal's" : "tangent's"} slope is ${s.value}` : `y = ${s.value}`),
+  domain: [[0, 1], [2, 6], [1, 6], [0, 7], [0, 1], [0, 1]],
+  keep: (p) => astanehOk(p),
+  cap: 400,
+  difficulty: ([kind, , , , w, g]) => (kind === 0 && w === 0 && g === 0 ? 1 : g || kind ? 3 : 2),
+  teach: {
+    idea: "The tangent to x²/a² + y²/b² = 1 at (x₁, y₁) is xx₁/a² + yy₁/b² = 1; for the hyperbola x²/a² − y²/b² = 1 it is xx₁/a² − yy₁/b² = 1. The normal is the perpendicular line through the same point. In parametric form the points are (a cos θ, b sin θ) and (a sec θ, b tan θ).",
+    method: "Find the point (from θ if it is given in parametric form), write the tangent by the rule (or find dy/dx by implicit differentiation), and rearrange to y = mx + c; for the normal use slope −1/m through the point.",
+    alternatives: [{ id: "implicit", title: "Implicit differentiation", kind: "procedural", text: ["Differentiate x²/a² ± y²/b² = 1: 2x/a² ± 2y y′/b² = 0, so y′ = ∓ b²x/(a²y).", "Put in the point to get the tangent's slope."] }],
+  },
+  limits: "Centred ellipses and hyperbolas at points with 3–4–5 parameters; tangents from an external point are left out.",
+};
+
+// ---- the angle bisectors of a pair of lines through the origin
+const aspairbisOk = (pp: number[]) => pairOk(pp) && pairCoef(pp).H2 !== 0 && thin(pp, 2);
+const aspairbis: Def = {
+  id: "aspairbis",
+  arity: 4,
+  title: "The angle bisectors of a pair of lines through the origin",
+  competency: PAIR,
+  skill: "bisectors of a pair of lines",
+  type: "fraction",
+  mc: true,
+  // [p1, q1, p2, q2]: the lines q₁y = p₁x and q₂y = p₂x as one equation ax² + 2hxy + by² = 0 (h ≠ 0)
+  parse: none,
+  reject: (pp) => (aspairbisOk(pp) ? null : "Two different lines through the origin with an xy term."),
+  prompt: (pp) => `The equation ${pairEq(pp)} represents a pair of straight lines through the origin. Their angle bisectors together have an equation of the form x² + kxy − y² = 0. Find k.`,
+  solve: (pp) => {
+    const { A, H2, Bc } = pairCoef(pp);
+    const k = (2 * (Bc - A)) / H2;
+    return { steps: [S("formula", "recall", PAIR, [A, H2 / 2, Bc], `(x² − y²)/(a − b) = xy/h with a = ${A}, h = ${rs(R_(H2, 2))}, b = ${Bc}`), S("rearrange", "rearrange", PAIR, [], `x² ${k < 0 ? "−" : "+"} ${rs(rabs(R_(2 * (Bc - A), H2)))}xy − y² = 0`)], answer: k };
+  },
+  // independent: the two lines' slopes found by searching, their bisector directions from the angles, and the answer's equation checked on them
+  validate: (pp, v) => {
+    if (typeof v !== "number") return false;
+    const ms = pairSearch(pp);
+    if (ms.length !== 2) return false;
+    const [t1, t2] = ms.map((m) => Math.atan(m));
+    return [(t1 + t2) / 2, (t1 + t2) / 2 + Math.PI / 2].every((t) => close(Math.cos(t) ** 2 + v * Math.cos(t) * Math.sin(t) - Math.sin(t) ** 2, 0, 1e-9));
+  },
+  bugs: (pp) => {
+    const { A, H2, Bc } = pairCoef(pp);
+    const k = (2 * (Bc - A)) / H2;
+    return [
+      B("sign", "procedural", PAIR, "a − b was used where b − a belongs: h(x² − y²) = (a − b)xy rearranges to x² − ((a − b)/h)xy − y² = 0.", -k),
+      B("2h", "recall", PAIR, "The coefficient of xy (which is 2h) was used as h, so the answer came out halved.", k / 2),
+      B("upside-down", "procedural", PAIR, "The fraction was turned over: h/(b − a) was used instead of (b − a)/h.", Bc === A ? null : H2 / 2 / (Bc - A)),
+    ].filter((b) => b.predict !== null && Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - k) > 1e-12);
+  },
+  distractors: (pp) => {
+    const { A, H2, Bc } = pairCoef(pp);
+    const k = (2 * (Bc - A)) / H2;
+    return [k + 1, 2 * k, (Bc + A) / (H2 / 2)];
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "formula" ? `The bisectors of ax² + 2hxy + by² = 0 are ${s.value}` : `So the bisectors are ${s.value}`),
+  domain: PAIR_D,
+  keep: (pp) => aspairbisOk(pp),
+  cap: 300,
+  difficulty: ([p1, q1, p2, q2]) => (q1 === 1 && q2 === 1 ? 2 : 3),
+  teach: {
+    idea: "The two angle bisectors of the lines ax² + 2hxy + by² = 0 are the lines whose points are equally far from both; together they are (x² − y²)/(a − b) = xy/h, that is h(x² − y²) − (a − b)xy = 0.",
+    method: "Read a (the x² coefficient), 2h (the xy coefficient) and b (the y² coefficient), write h(x² − y²) = (a − b)xy and divide by h to get x² + kxy − y² = 0.",
+    alternatives: [{ id: "angles", title: "Halve the angles", kind: "conceptual", text: ["Find the two lines' inclinations θ₁ and θ₂.", "The bisectors have inclinations (θ₁ + θ₂)/2 and (θ₁ + θ₂)/2 + 90°: they are perpendicular to each other."] }],
+  },
+  limits: "Pairs of real lines through the origin with whole-number coefficients and an xy term; pairs not through the origin are left out.",
+};
+
+// ---- which side of a line
+const SIDE_NAMES = ["on the same side of the line", "on opposite sides of the line", "one of them lies on the line"];
+const SIDE_PTS = [[1, 2], [-2, 1], [3, -1], [0, 4], [-3, -2], [2, -3], [4, 1], [-1, -4], [0, 0], [2, 2], [-4, 3], [1, -1]];
+const sidePts = ([a, b, c, i, j]: number[]) => [a, b, c, ...SIDE_PTS[i], ...SIDE_PTS[j]];
+const assideOk = (q: number[]) => {
+  if (!allIn(q, [[-2, 2], [-2, 2], [-4, 4], [0, 11], [0, 11]]) || q[3] >= q[4] || !thin(q, 6)) return false;
+  const p = sidePts(q);
+  const [a, b, c, px, py, qx, qy] = p;
+  if (a === 0 && b === 0) return false;
+  const s1 = a * px + b * py + c;
+  const s2 = a * qx + b * qy + c;
+  return !(s1 === 0 && s2 === 0);
+};
+const sideCat = (q: number[]) => {
+  const [a, b, c, px, py, qx, qy] = sidePts(q);
+  const s1 = a * px + b * py + c;
+  const s2 = a * qx + b * qy + c;
+  return s1 === 0 || s2 === 0 ? 2 : s1 * s2 > 0 ? 0 : 1;
+};
+const sideChoices = (p: number[]) => mixed(SIDE_NAMES, `side:${p}`);
+const asside: Def = {
+  id: "asside",
+  arity: 5,
+  title: "Are two points on the same side of a line?",
+  competency: LINE,
+  skill: "position of points relative to a line",
+  type: "choice",
+  // [a, b, c, i, j]: the line ax + by + c = 0 and the points P = SIDE_PTS[i], Q = SIDE_PTS[j]
+  parse: none,
+  reject: (p) => (assideOk(p) ? null : "A line with small whole-number coefficients and two different whole-number points, not both on it."),
+  prompt: (q) => {
+    const [a, b, c, px, py, qx, qy] = sidePts(q);
+    return `Where do the points P${P2(px, py)} and Q${P2(qx, qy)} lie relative to the line ${lin2(a, b, c)}?`;
+  },
+  choices: (p) => sideChoices(p),
+  solve: (p) => {
+    const [a, b, c, px, py, qx, qy] = sidePts(p);
+    const s1 = a * px + b * py + c;
+    const s2 = a * qx + b * qy + c;
+    return { steps: [S("values", "substitute", LINE, [px, py, qx, qy], `${mi(s1)} and ${mi(s2)}`), S("signs", "compare", LINE, [s1, s2], sideChoices(p).indexOf(SIDE_NAMES[sideCat(p)]))], answer: sideChoices(p).indexOf(SIDE_NAMES[sideCat(p)]) };
+  },
+  // independent: whether the segment PQ meets the line, found by solving for the crossing point along PQ
+  validate: (p, v) => {
+    const [a, b, c, px, py, qx, qy] = sidePts(p);
+    const f = (t: number) => a * (px + t * (qx - px)) + b * (py + t * (qy - py)) + c;
+    const onEnd = Math.abs(f(0)) < 1e-12 || Math.abs(f(1)) < 1e-12;
+    const slope = f(1) - f(0);
+    const t = Math.abs(slope) < 1e-12 ? NaN : -f(0) / slope;
+    const cat = onEnd ? 2 : Number.isFinite(t) && t > 0 && t < 1 ? 1 : 0;
+    return sideChoices(p)[v as number] === SIDE_NAMES[cat];
+  },
+  bugs: (p) => {
+    const [a, b, c, px, py, qx, qy] = sidePts(p);
+    const cat = sideCat(p);
+    const cs = sideChoices(p);
+    const out: Bug[] = [];
+    if (cat !== 2) out.push(B("rule-reversed", "conceptual", LINE, "The rule was reversed: values of ax + by + c with the same sign mean the same side, opposite signs mean opposite sides.", cs.indexOf(SIDE_NAMES[1 - cat])));
+    const t1 = a * px + b * py;
+    const t2 = a * qx + b * qy;
+    const noC = t1 === 0 || t2 === 0 ? 2 : t1 * t2 > 0 ? 0 : 1;
+    if (c !== 0 && noC !== cat) out.push(B("c-left-out", "procedural", LINE, `The constant ${mi(c)} was left out when the points were put into ax + by + c.`, cs.indexOf(SIDE_NAMES[noC])));
+    return out;
+  },
+  variants: () => [],
+  explain: (s) => (s.id === "values" ? `Put P and Q into the left-hand side: ${s.value}` : `${Number(s.inputs[0]) * Number(s.inputs[1]) === 0 ? "A zero value means the point is on the line" : Number(s.inputs[0]) * Number(s.inputs[1]) > 0 ? "Same signs: the same side" : "Opposite signs: opposite sides"} (option ${"ABC"[Number(s.value)]})`),
+  domain: [[-2, 2], [-2, 2], [-4, 4], [0, 11], [0, 11]],
+  keep: (p) => assideOk(p),
+  cap: 300,
+  difficulty: ([, , c]) => (c === 0 ? 1 : 2),
+  teach: {
+    idea: "A line ax + by + c = 0 splits the plane into two half-planes: on one side ax + by + c is positive, on the other negative, and on the line it is zero.",
+    method: "Put each point into ax + by + c. Same signs: the same side. Opposite signs: opposite sides. Zero: the point is on the line.",
+    alternatives: [{ id: "segment", title: "Does PQ cross the line?", kind: "conceptual", text: ["Join P and Q with a straight segment.", "The points are on opposite sides exactly when the segment crosses the line."], visual: (q) => {
+      const [, , , px, py, qx, qy] = sidePts(q);
+      return { type: "plane", points: [[px, py, "P"], [qx, qy, "Q"]], range: 5 };
+    } }],
+  },
+  limits: "Small whole-number lines and points.",
+};
+
+// ---- families of lines through the intersection of two lines
+const LCO: [number, number][] = [[1, 1], [1, -1], [2, 1], [1, 2], [2, -1], [1, -2], [3, 1], [1, 3], [3, -2], [2, 3]];
+const asfamOk = (p: number[]) => {
+  const [ix, iy, i1, i2, kind, q] = p;
+  if (!allIn(p, [[-3, 3], [-3, 3], [0, 9], [0, 9], [0, 2], [0, 9]]) || i1 >= i2) return false;
+  const [a1, b1] = LCO[i1];
+  const [a2, b2] = LCO[i2];
+  if (a1 * b2 - a2 * b1 === 0) return false;
+  if (kind === 0) {
+    const P = GF_PT[q % 4];
+    return q < 4 && P[0] !== ix && !(P[1] === iy) && thin(p, 4);
+  }
+  const [a3, b3] = LCO[q];
+  return q !== i1 && q !== i2 && (kind === 1 ? b3 !== 0 : a3 !== 0) && thin(p, 12);
+};
+const famLines = ([ix, iy, i1, i2]: number[]) => {
+  const [a1, b1] = LCO[i1];
+  const [a2, b2] = LCO[i2];
+  return { L1: lin2(a1, b1, -(a1 * ix + b1 * iy)), L2: lin2(a2, b2, -(a2 * ix + b2 * iy)), c1: a1 * ix + b1 * iy, c2: a2 * ix + b2 * iy };
+};
+function famAns(p: number[]): string {
+  const [ix, iy, , , kind, q] = p;
+  let m: R;
+  if (kind === 0) {
+    const P = GF_PT[q];
+    m = R_(P[1] - iy, P[0] - ix);
+  } else {
+    const [a3, b3] = LCO[q];
+    m = kind === 1 ? R_(-a3, b3) : R_(b3, a3);
+  }
+  return rhsR(m, rsub(R_(iy), rmul(m, R_(ix))));
+}
+const asfam: Def = {
+  id: "asfam",
+  arity: 6,
+  title: "A line through the point of intersection of two given lines",
+  competency: LINE,
+  skill: "families of lines",
+  type: "exact",
+  mc: true,
+  // [ix, iy, i1, i2, kind, q]: L1, L2 from LCO meeting at (ix, iy); 0 through GF_PT[q]; 1 parallel, 2 perpendicular to the line with coefficients LCO[q]
+  parse: none,
+  reject: (p) => (asfamOk(p) ? null : "Two lines meeting at a whole-number point and a further condition."),
+  prompt: (p) => {
+    const [, , , , kind, q] = p;
+    const { L1, L2 } = famLines(p);
+    const cond = kind === 0 ? `passes through ${P2(GF_PT[q][0], GF_PT[q][1])}` : `is ${kind === 1 ? "parallel" : "perpendicular"} to the line ${lin2(LCO[q][0], LCO[q][1], 5)}`;
+    return `Find the equation of the line through the point of intersection of ${L1} and ${L2} that ${cond}. (You may use the family L₁ + λL₂ = 0.) Write it as y = mx + c and type the right-hand side.`;
+  },
+  solve: (p) => {
+    const [ix, iy] = p;
+    const ans = famAns(p);
+    return { steps: [S("family", "write", LINE, [], "L₁ + λL₂ = 0 passes through the intersection for every λ"), S("lambda", "solve", LINE, [p[4]], `the condition fixes λ; the line passes through (${mi(ix)}, ${mi(iy)})`), S("line", "write", LINE, [], ans)], answer: ans };
+  },
+  // independent: the intersection found by Cramer's rule from the two printed equations, and the condition checked on the answer line
+  validate: (p, v) => {
+    const [, , i1, i2, kind, q] = p;
+    const L = lineOf(v);
+    if (!L) return false;
+    const { c1, c2 } = famLines(p);
+    const [a1, b1] = LCO[i1];
+    const [a2, b2] = LCO[i2];
+    const D = a1 * b2 - a2 * b1;
+    const X = (c1 * b2 - c2 * b1) / D;
+    const Y = (a1 * c2 - a2 * c1) / D;
+    if (!close(L[0] * X + L[1], Y, 1e-9)) return false;
+    if (kind === 0) return close(L[0] * GF_PT[q][0] + L[1], GF_PT[q][1], 1e-9);
+    const m3 = -LCO[q][0] / LCO[q][1];
+    return kind === 1 ? close(L[0], m3, 1e-9) : close(L[0] * m3, -1, 1e-9) || (LCO[q][1] === 0 && close(L[0], 0, 1e-9));
+  },
+  bugs: (p) => {
+    const [ix, iy, , , kind, q] = p;
+    const ans = famAns(p);
+    const out: Bug[] = [];
+    if (kind === 0) {
+      const P = GF_PT[q];
+      const inv = R_(P[0] - ix, P[1] - iy);
+      out.push(B("run-over-rise", "conceptual", LINE, "The slope was taken as (change in x)/(change in y); slope is rise over run.", rhsR(inv, rsub(R_(iy), rmul(inv, R_(ix))))));
+    } else {
+      const [a3, b3] = LCO[q];
+      const other = kind === 1 ? R_(b3, a3) : R_(-a3, b3);
+      out.push(B(kind === 1 ? "perpendicular-instead" : "parallel-instead", "conceptual", LINE, kind === 1 ? "A perpendicular line was found; parallel lines have the same slope." : "A parallel line was found; perpendicular slopes multiply to −1.", rhsR(other, rsub(R_(iy), rmul(other, R_(ix))))));
+    }
+    const m = kind === 0 ? R_(GF_PT[q][1] - iy, GF_PT[q][0] - ix) : kind === 1 ? R_(-LCO[q][0], LCO[q][1]) : R_(LCO[q][1], LCO[q][0]);
+    out.push(B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", ix !== 0 && m[0] !== 0 ? rhsR(m, radd(R_(iy), rmul(m, R_(ix)))) : null));
+    return out.filter((x) => x.predict !== null && x.predict !== ans);
+  },
+  distractors: ([ix, iy]) => [rhsR(R_(1), R_(iy - ix)), rhsR(R_(-1), R_(iy + ix))],
+  variants: () => [],
+  explain: (s) => (s.id === "family" ? s.value as string : s.id === "lambda" ? `Use the condition: ${s.value}` : `y = ${s.value}`),
+  domain: [[-3, 3], [-3, 3], [0, 9], [0, 9], [0, 2], [0, 9]],
+  keep: (p) => asfamOk(p),
+  cap: 300,
+  difficulty: ([, , , , kind]) => (kind === 0 ? 2 : 3),
+  teach: {
+    idea: "For any λ, L₁ + λL₂ = 0 is a straight line through the point where L₁ = 0 and L₂ = 0 meet. One more condition (a point, or a slope) picks out the value of λ.",
+    method: "Either solve L₁ = 0 and L₂ = 0 for the point of intersection and use the condition, or write L₁ + λL₂ = 0, apply the condition to find λ, and simplify.",
+    alternatives: [{ id: "point_first", title: "Find the point first", kind: "procedural", text: ["Solve the two equations together to get the point of intersection.", "Then use y − y₁ = m(x − x₁) with the slope the condition gives."] }],
+  },
+  limits: "Whole-number points of intersection; concurrency of three lines is left out.",
+};
+
 export const B19: Def[] = [
   aslocus, aslocpar,
   aspair, aspairang,
@@ -2855,5 +4362,6 @@ export const B19: Def[] = [
   asaddp, asmex,
   asbayes, astotp,
   asbinom, asbinmv,
+  ascinv, asconj, asslope, ascoll, aslineq, aslinpar, asgenf, asevset, asadd3, asbern, asleq, asint3, asplaneq, asplang, astaneh, aspairbis, asside, asfam,
 ];
 void RV;

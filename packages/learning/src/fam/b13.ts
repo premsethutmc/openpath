@@ -2869,6 +2869,11 @@ export const B13: Def[] = [
         ? [B("covered-not-removed", "procedural", COMB, "Both circles of the cylinder were added and nothing was taken off the cube. The cylinder's base covers part of the top face, so only its top circle and curved surface are outside.", dec(qa(Q(6 * a * a), qa(qm(qm(Q(2), qm(PI7, r)), Q(h)), qm(pr2, Q(2)))))), B("curved-only-no-change", "procedural", COMB, "The cylinder's top circle was left out; it is part of the outside surface.", dec(qa(Q(6 * a * a), qs(qm(qm(Q(2), qm(PI7, r)), Q(h)), pr2))))]
         : [B("covered-not-removed", "procedural", COMB, m === 0 ? "The curved surface 2πr² was added, but the circle covered by the hemisphere was not taken off the top face." : "The inside of the hollow was added, but the circle cut away from the top face was not taken off.", dec(qa(Q(6 * a * a), qm(pr2, Q(2))))), B(m === 0 ? "flat-face-counted" : "hollow-subtracted", "conceptual", COMB, m === 0 ? "The flat face of the hemisphere was counted as outside, but it is glued to the cube." : "The circle was taken away, but the curved inside of the hollow, 2πr², is now part of the outside surface.", dec(m === 0 ? qa(Q(6 * a * a), qm(pr2, Q(3))) : qs(Q(6 * a * a), pr2)))];
     },
+    distractors: ([m, w, a, k, h]) => {
+      const r = q(7 * k, 2);
+      const pr2 = qm(PI7, qm(r, r));
+      return w === 1 ? [dec(Q(a ** 3)), dec(qa(Q(a ** 3), qm(pr2, Q(m === 1 ? 2 * h : 2))))] : [dec(Q(6 * a * a)), dec(qa(Q(5 * a * a), pr2))];
+    },
     variants: () => [],
     explain: say({ cube: "Cube", part: "Change", total: "Total" }),
     domain: [[0, 2], [0, 1], [7, 30], [1, 4], [0, 20]],
@@ -2920,6 +2925,11 @@ export const B13: Def[] = [
       return close(v, simpson((x) => pi * ((r * x) / L) ** 2, 0, L, 400) + dome);
     },
     bugs: (p) => MODEL[p[0]].bugs(p),
+    distractors: (p) => {
+      const parts = MODEL[p[0]].parts(p);
+      const t = parts.reduce((s, x) => qa(s, x[1]), Q(0));
+      return [dec(parts[0][1]), dec(qm(t, Q(2))), dec(qm(t, q(1, 2)))];
+    },
     variants: () => [],
     explain: say({ model: "Model", total: "Total" }),
     domain: [[0, 3], [1, 4], [0, 12], [0, 24]],
@@ -2977,6 +2987,11 @@ export const B13: Def[] = [
       return near(n, area, 1e-8);
     },
     bugs: (p) => cshapeBugs(p),
+    distractors: (p) => {
+      const parts = cshapeParts(p);
+      const t = parts.reduce((s, x) => qa(s, x[1]), Q(0));
+      return [dec(parts[0][1]), dec(qa(t, parts[parts.length - 1][1])), dec(qm(t, Q(2)))];
+    },
     variants: () => [],
     explain: say({ total: "Total" }),
     domain: [[0, 4], [2, 40], [0, 40], [1, 4]],
@@ -3048,6 +3063,17 @@ export const B13: Def[] = [
       const n = m === 1 ? POLY[i] : m === 2 ? 3 : 6;
       if (m === 1) return [B("no-half", "recall", TRI, "Each face is a triangle, so its area is ½ × base × slant height; the ½ was left out.", String(n * a * s))];
       return [B("base-left-out", "procedural", PYR, "Only the sloping faces were added; the total surface area includes the base.", dec(q(n * a * s, 2))), B("square-base", "conceptual", PYR, "The base was taken as a square (a²). The base here is a regular polygon; its area involves √3.", dec(qa(q(n * a * s, 2), Q(a * a))))];
+    },
+    distractors: ([m, a, s, i]) => {
+      if (m === 0) {
+        const [l, b, , s1, s2] = RPYR[i];
+        return [String(l * b + l * s1), String(l * b + 2 * (l * s1 + b * s2))];
+      }
+      const n = m === 1 ? POLY[i] : m === 2 ? 3 : 6;
+      const lat = q(n * a * s, 2);
+      if (m === 1) return [dec(q(n * a * s, 4)), dec(Q(n * a + s))];
+      const base = m === 2 ? q(a * a, 4) : q(3 * a * a, 2);
+      return [`${dec(lat)} + ${dec(qm(base, Q(2)))}√3`, `${dec(qm(lat, Q(2)))} + ${dec(base) === "1" ? "" : dec(base)}√3`];
     },
     variants: () => [],
     explain: say({ total: "Total surface area" }),
@@ -3192,6 +3218,7 @@ export const B13: Def[] = [
       const right = q(x * n, m);
       return [B("ratio-inverted", "procedural", SIM, `The ratio was used the wrong way round: the second triangle's lengths are ${n}/${m} of the first's.`, dec(q(x * m, n))), ...(w === 2 ? [B("area-ratio-used", "conceptual", SIM, `The area ratio was used for the altitude. Areas are in the ratio of the squares of the sides, so the altitudes are in the ratio ${m} : ${n}.`, dec(q(x * n * n, m * m)))] : [B("difference-added", "conceptual", SIM, "The difference between the sides was added. Similar figures scale by multiplying.", dec(Q(x + (w === 1 ? 3 * (n - m) : n - m))))])].filter((b) => !is(b.predict as string, right) && (num(b.predict as string) ?? 1) > 0);
     },
+    distractors: ([, m, n, x]) => [dec(Q(x)), dec(q(2 * x * n, m))],
     variants: () => [],
     explain: say({ root: "Ratio of sides = √(ratio of areas)", answer: "Corresponding length" }),
     domain: [[0, 2], [1, 9], [1, 9], [2, 60]],
@@ -3512,16 +3539,20 @@ function surdSum(a: number, b: number, n: number): string {
   const s = `${c === 1 ? "" : c}√${m}`;
   return a === 0 ? s : `${a} + ${s}`;
 }
-/** The value of an answer like 7, 5√3, 4 + 2√6 or 15 + 4.5√3 (null otherwise). */
+/** The value of an answer like 7, 5√3, 4 + 2√6 or 15 + 4.5√3 (null otherwise), read term by term. */
 function surdValue(v: Value): number | null {
   if (typeof v === "number") return v;
   if (typeof v !== "string") return null;
   const s = v.replace(/−/g, "-").replace(/\s+/g, "");
-  const m = s.match(/^(-?\d+(?:\.\d+)?(?:\/\d+)?)?(?:([+-])?(\d+(?:\.\d+)?)?√(\d+))?$/);
-  if (!m || (!m[1] && !m[4])) return null;
-  const a = m[1] ? (m[1].includes("/") ? Number(m[1].split("/")[0]) / Number(m[1].split("/")[1]) : Number(m[1])) : 0;
-  const b = m[4] ? (m[2] === "-" ? -1 : 1) * (m[3] ? Number(m[3]) : 1) * Math.sqrt(Number(m[4])) : 0;
-  return a + b;
+  if (!s) return null;
+  let total = 0;
+  for (const t of s.replace(/(?!^)-/g, "+-").split("+")) {
+    const m = t.match(/^(-?)(\d+(?:\.\d+)?(?:\/\d+)?)?(?:√(\d+))?$/);
+    if (!m || (!m[2] && !m[3])) return null;
+    const c = m[2] ? (m[2].includes("/") ? Number(m[2].split("/")[0]) / Number(m[2].split("/")[1]) : Number(m[2])) : 1;
+    total += (m[1] ? -1 : 1) * c * (m[3] ? Math.sqrt(Number(m[3])) : 1);
+  }
+  return total;
 }
 const surdNum = surdValue;
 

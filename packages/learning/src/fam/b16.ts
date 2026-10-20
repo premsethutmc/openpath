@@ -2998,7 +2998,7 @@ function vform(p: number, q: number, t: number, k: number): [number, number] {
 }
 
 // gap@1 additions, registered with the batch
-export const NEW16: Def[] = [
+const NEW16: Def[] = [
   // ================================================================ gap@1: listing products, ordered pairs, constructing and classifying matrices
   {
     id: "apcartl",

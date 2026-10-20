@@ -3087,7 +3087,7 @@ function pfiText([q, a, b, A, B]: number[]) {
   return `Find ∫ (${lin(1, A)})/${bx(a)} dx by first writing the integrand as 1 + c/${bx(a)}. (Write log for the natural logarithm; the constant C may be left out.)`;
 }
 
-export const NEW15: Def[] = [
+const NEW15: Def[] = [
   // ============================================================ roster, set-builder and descriptive forms
   {
     id: "aosetform",
