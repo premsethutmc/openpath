@@ -13,10 +13,10 @@ export class MathematicsRepo {
   async load() {
     const result = await this.api.request<{
       count: number;
-      events: MathActivity[];
+      events: (MathActivity | { kind: "math_writing" })[];
     }>("GET", `/pupils/${this.learnerId}/events/?subject=mathematics`);
     this.count = result.count;
-    return result.events.filter(e => e.kind === "math_activity");
+    return result.events.filter((e): e is MathActivity => e.kind === "math_activity");
   }
   append(event: MathActivity): Promise<MathActivity[]> {
     const work = this.queue.then(async () => {

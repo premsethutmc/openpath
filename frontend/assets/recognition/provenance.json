@@ -1,0 +1,10 @@
+{
+  "id": "onnxruntime-test-mnist@1",
+  "source": "https://github.com/microsoft/onnxruntime/blob/main/onnxruntime/test/testdata/mnist.onnx",
+  "sha256": "2f06e72de813a8635c9bc0397ac447a601bdbfa7df4bebc278723b958831c9bf",
+  "bytes": 26454,
+  "license": "MIT (repository LICENSE)",
+  "task": "isolated handwritten digits, MNIST, not expressions",
+  "training": "Existing pretrained CNTK model; no OpenPath model training",
+  "review": "Not calibrated on children or stylus hardware"
+}

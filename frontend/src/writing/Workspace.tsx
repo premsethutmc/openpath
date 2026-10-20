@@ -27,6 +27,7 @@ export interface WorkspaceProps {
   validator?: Validator;
   confidenceThreshold?: number;
   onConfirmedInput?: (packet: InputPacket) => void;
+  allowExtraRegions?: boolean;
 }
 /** Embeddable, controlled input component. Host owns identity, storage and evidence policy. */
 export function WritingWorkspace({
@@ -36,6 +37,7 @@ export function WritingWorkspace({
   validator = receiptValidator,
   confidenceThreshold = 0.9,
   onConfirmedInput,
+  allowExtraRegions = true,
 }: WorkspaceProps) {
   const [tool, setTool] = useState<Tool>("ink"),
     [zoom, setZoom] = useState(1),
@@ -396,34 +398,36 @@ export function WritingWorkspace({
             </div>
           ))}
       </section>
-      <button
-        onClick={() =>
-          act(() => {
-            const r = {
-              id: uid(),
-              label: `Extra step ${work.layout.regions.length + 1}`,
-              role: "working",
-              order: Math.max(...work.layout.regions.map((x) => x.order)) + 1,
-              x: 20,
-              y: work.layout.height + 20,
-              width: work.layout.width - 40,
-              height: 65,
-            };
-            return {
-              ...work,
-              layout: {
-                ...work.layout,
-                height: work.layout.height + 120,
-                regions: [...work.layout.regions, r],
-              },
-              revision: work.revision + 1,
-              updatedAt: new Date().toISOString(),
-            };
-          })
-        }
-      >
-        Add another writing region
-      </button>
+      {allowExtraRegions && (
+        <button
+          onClick={() =>
+            act(() => {
+              const r = {
+                id: uid(),
+                label: `Extra step ${work.layout.regions.length + 1}`,
+                role: "working",
+                order: Math.max(...work.layout.regions.map((x) => x.order)) + 1,
+                x: 20,
+                y: work.layout.height + 20,
+                width: work.layout.width - 40,
+                height: 65,
+              };
+              return {
+                ...work,
+                layout: {
+                  ...work.layout,
+                  height: work.layout.height + 120,
+                  regions: [...work.layout.regions, r],
+                },
+                revision: work.revision + 1,
+                updatedAt: new Date().toISOString(),
+              };
+            })
+          }
+        >
+          Add another writing region
+        </button>
+      )}
       {outstanding.length > 0 && (
         <p role="status">
           Input clarification needed.{" "}

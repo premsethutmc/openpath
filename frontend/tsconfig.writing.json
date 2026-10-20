@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.english.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "erasableSyntaxOnly": false
+  },
+  "include": [
+    "src/writing",
+    "src/globals.d.ts"
+  ],
+  "exclude": []
+}
