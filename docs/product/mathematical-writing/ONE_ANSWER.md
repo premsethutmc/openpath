@@ -1,5 +1,7 @@
 # Mathematics: one question, one answer
 
+Division’s default is now [progressive paper](PROGRESSIVE_DIVISION.md). This milestone remains available as the optional final-answer mode; fractions and multiplication retain this default.
+
 Branch `feat/mathematics-one-answer-v1`, based on `feat/preview-demo-student-v1` (`c2412a46851c7d6bedde15c4bb4e31cdde2cc32c`). Prepared for review only; no merge, Render change or deployment.
 
 ## Student experience

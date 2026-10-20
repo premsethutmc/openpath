@@ -6,7 +6,7 @@ This branch is prepared for review only. Nothing was merged or deployed, and the
 
 ## What the owner will see after an approved deployment
 
-Open https://openpath-pr55-preview.onrender.com/ on Android and tap **Try OpenPath as a Demo Student**. There is no email, password, account registration, learner creation or curriculum setup step. My Learning Year opens its Mathematics long-division lesson, starting immediately with one answer field for `379 ÷ 3`. Teaching, examples and guided working are optional. See the [one-answer follow-up](../product/mathematical-writing/ONE_ANSWER.md) for the current interface and validation results.
+Open https://openpath-pr55-preview.onrender.com/ on Android and tap **Try OpenPath as a Demo Student**. There is no email, password, account registration, learner creation or curriculum setup step. My Learning Year opens its Mathematics long-division lesson, starting immediately with [progressive division paper](../product/mathematical-writing/PROGRESSIVE_DIVISION.md) for `379 ÷ 3`. Teaching, examples, handwriting and the older guided worksheet are optional. See the [one-answer follow-up](../product/mathematical-writing/ONE_ANSWER.md) for the current interface and validation results.
 
 Use the existing writing area or type numbers. The existing local ONNX model interprets separated handwritten digits; unclear writing asks for confirmation of only that symbol. The actual Django backend checks intermediate steps, asks diagnostic questions after an invalid step, provides teaching, allows correction and saves the work. Return to Mathematics to open equivalent fractions or equal-group multiplication through the same interface. These are provisional practice lessons: completion does not grant verified mastery.
 

@@ -1,3 +1,4 @@
+import type { DivisionPaper, PaperState } from "./ProgressiveDivision";
 import { Api } from "../english/logic/account";
 import { createWork } from "./model";
 import type { Work, Layout, ValidationFeedback } from "./contract";
@@ -38,12 +39,14 @@ export interface LessonActivity {
     problem: Work["problem"];
     layout: Layout;
     answerLayout: Layout;
+    divisionPaper?: DivisionPaper;
     topic: string;
     competency: string;
     explanation: string;
     example: { statement: string; steps: string[]; answer: string };
   };
   support: {
+    divisionPaper?: PaperState;
     simple?: {
       answer?: string;
       ink?: Work;

@@ -46,6 +46,7 @@ jobs:
         env:
           E2E_URL: http://127.0.0.1:10000
         run: |
+          node --test e2e/progressive-division.test.mjs e2e/progressive-resume.test.mjs
           node --test e2e/one-answer.test.mjs
           node --test e2e/demo-student.test.mjs
           DEMO_STUDENT=1 node --test e2e/writing-year.test.mjs
@@ -58,7 +59,7 @@ jobs:
           done
           curl -fsS http://127.0.0.1:10000/healthz
           cd frontend
-          E2E_URL=http://127.0.0.1:10000 PREVIEW_PASSWORD=synthetic-preview-test-pass PREVIEW_PHASE=resume node --import tsx --test --test-concurrency=1 e2e/preview-container.test.mjs e2e/demo-student.test.mjs
+          E2E_URL=http://127.0.0.1:10000 PREVIEW_PASSWORD=synthetic-preview-test-pass PREVIEW_PHASE=resume node --import tsx --test --test-concurrency=1 e2e/preview-container.test.mjs e2e/demo-student.test.mjs e2e/progressive-resume.test.mjs
       - if: always()
         run: docker logs preview --tail 80
 # Build and tests only. No Render API, deployment, paid resources or real learner data.

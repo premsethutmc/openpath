@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Api } from "../english/logic/account";
+import { ProgressiveDivision } from "./ProgressiveDivision";
 import { GuidedWritingLesson } from "./GuidedLesson";
 import { WritingWorkspace } from "./Workspace";
 import { LocalDigitRecognizer } from "./digit-recognizer";
@@ -14,17 +15,34 @@ type Props = {
   parameters?: Record<string, number>;
   onExit: () => void | Promise<void>;
   studentMode?: boolean;
+  initialMode?: string;
 };
 /** Default curriculum interaction. Correctness remains server-owned; guided working is opt-in. */
 export function WritingLesson(props: Props) {
   // Retain the existing developer harness; curriculum/student entry uses one answer.
-  return props.studentMode === false ? <GuidedWritingLesson {...props}/> : <OneAnswerLesson {...props}/>;
+  if (props.studentMode === false) return <GuidedWritingLesson {...props} />;
+  if (props.topic === "division")
+    return (
+      <ProgressiveDivision
+        api={props.api}
+        pupil={props.pupil}
+        parameters={props.parameters}
+        onExit={props.onExit}
+        alternative={(mode) => (
+          <OneAnswerLesson
+            {...props}
+            initialMode={mode === "ink" ? "ink" : "type"}
+          />
+        )}
+      />
+    );
+  return <OneAnswerLesson {...props} />;
 }
 function OneAnswerLesson(props: Props) {
   const [a, setA] = useState<LessonActivity | null>(null),
     [answer, setAnswer] = useState(""),
     [ink, setInk] = useState<Work | null>(null),
-    [mode, setMode] = useState("type"),
+    [mode, setMode] = useState(props.initialMode ?? "type"),
     [help, setHelp] = useState(""),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),

@@ -47,7 +47,7 @@ async function family() {
         exact: true,
       })
       .click();
-    await p.getByLabel("Mathematics question", { exact: true }).waitFor();
+    await p.getByLabel("Progressive long division", { exact: true }).waitFor();
     assert.equal(await p.getByLabel("Email", { exact: true }).count(), 0);
     const rows = await api(c, "GET", "/pupils/");
     return { c, p, child: rows.pupils[0], errors, foreign };
@@ -109,7 +109,10 @@ async function family() {
   return { c, p, child, errors, foreign };
 }
 async function open(p, topic = "division") {
-  if (await p.getByLabel("Mathematics question", { exact: true }).count()) {
+  if (
+    (await p.getByLabel("Mathematics question", { exact: true }).count()) ||
+    (await p.getByLabel("Progressive long division", { exact: true }).count())
+  ) {
     await p
       .getByRole("button", { name: "Help me step by step", exact: true })
       .click();
@@ -145,7 +148,14 @@ async function open(p, topic = "division") {
       })
       .click();
   if (!started || topic !== "division") {
-    await p.getByLabel("Mathematics question", { exact: true }).waitFor();
+    await p
+      .getByLabel(
+        topic === "division"
+          ? "Progressive long division"
+          : "Mathematics question",
+        { exact: true },
+      )
+      .waitFor();
     await p
       .getByRole("button", { name: "Help me step by step", exact: true })
       .click();

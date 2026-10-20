@@ -28,6 +28,10 @@ async function start(width = 360) {
       exact: true,
     })
     .click();
+  await p.getByLabel("Progressive long division", { exact: true }).waitFor();
+  await p
+    .getByRole("button", { name: "Type a final answer instead", exact: true })
+    .click();
   await p.getByLabel("Mathematics question", { exact: true }).waitFor();
   return { c, p };
 }
@@ -44,7 +48,7 @@ async function subject(p) {
     .getByRole("button", { name: "Save and return to the lesson", exact: true })
     .click();
 }
-test("Android one question: immediate entry, equivalent remainder forms, incomplete, wrong, retry, optional hint and persistence", async () => {
+test("optional final-answer mode: equivalent remainder forms, incomplete, wrong, retry, optional hint and persistence", async () => {
   const { c, p } = await start();
   const errors = [];
   p.on("pageerror", (e) => errors.push(e.message));
@@ -84,6 +88,9 @@ test("Android one question: immediate entry, equivalent remainder forms, incompl
   await screenshot(p, "correct-android");
   await p.reload();
   await p
+    .getByRole("button", { name: "Type a final answer instead", exact: true })
+    .click();
+  await p
     .getByText("Correct! 379 ÷ 3 = 126 remainder 1.", { exact: true })
     .waitFor();
   await check(p, "126 remainder 1");
@@ -101,6 +108,9 @@ test("Android one question: immediate entry, equivalent remainder forms, incompl
   });
   const page = await resumed.newPage();
   await page.goto(url);
+  await page
+    .getByRole("button", { name: "Type a final answer instead", exact: true })
+    .click();
   await page.getByLabel("Your answer", { exact: true }).waitFor();
   assert.equal(
     await page.getByLabel("Your answer", { exact: true }).inputValue(),
@@ -195,15 +205,36 @@ test("fractions and multiplication share the simple interaction; Next question i
     .getByText("Correct! Your answer is equivalent.", { exact: true })
     .waitFor();
   await p.reload();
-  await p.getByRole("heading",{name:/4 × 7/}).waitFor();
-  assert.equal(await p.getByLabel("Your answer",{exact:true}).inputValue(),"28");
-  const identity=await (await c.request.get(BASE+"/api/preview-demo/status/")).json();
-  const stream=await (await c.request.get(BASE+`/api/pupils/${identity.learner}/events/?subject=mathematics`)).json();
-  assert.ok(stream.events.filter(e=>e.kind==='math_writing').every(e=>e.admissible===false));
-  await p.goto(BASE+"/logout");
-  await p.getByRole("button",{name:"Log out",exact:true}).click();
-  await p.getByRole("button",{name:"Try OpenPath as a Demo Student",exact:true}).click();
-  await p.getByRole("heading",{name:/4 × 7/}).waitFor();
-  assert.equal(await p.getByLabel("Your answer",{exact:true}).inputValue(),"28");
+  await p.getByRole("heading", { name: /4 × 7/ }).waitFor();
+  assert.equal(
+    await p.getByLabel("Your answer", { exact: true }).inputValue(),
+    "28",
+  );
+  const identity = await (
+    await c.request.get(BASE + "/api/preview-demo/status/")
+  ).json();
+  const stream = await (
+    await c.request.get(
+      BASE + `/api/pupils/${identity.learner}/events/?subject=mathematics`,
+    )
+  ).json();
+  assert.ok(
+    stream.events
+      .filter((e) => e.kind === "math_writing")
+      .every((e) => e.admissible === false),
+  );
+  await p.goto(BASE + "/logout");
+  await p.getByRole("button", { name: "Log out", exact: true }).click();
+  await p
+    .getByRole("button", {
+      name: "Try OpenPath as a Demo Student",
+      exact: true,
+    })
+    .click();
+  await p.getByRole("heading", { name: /4 × 7/ }).waitFor();
+  assert.equal(
+    await p.getByLabel("Your answer", { exact: true }).inputValue(),
+    "28",
+  );
   await c.close();
 });

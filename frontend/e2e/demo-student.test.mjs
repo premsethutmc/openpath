@@ -40,7 +40,7 @@ async function start(c) {
     fullPage: true,
   });
   await button.click();
-  await p.getByLabel("Mathematics question", { exact: true }).waitFor();
+  await p.getByLabel("Progressive long division", { exact: true }).waitFor();
   await p.getByLabel("Demo student session").waitFor();
   return p;
 }
@@ -146,7 +146,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
     await p
       .getByRole("button", { name: "Reset demo and restart", exact: true })
       .click();
-    await p.getByLabel("Mathematics question", { exact: true }).waitFor();
+    await p.getByLabel("Progressive long division", { exact: true }).waitFor();
     const fresh = await status(c);
     assert.notEqual(fresh.learner, a.learner);
     assert.equal((await status(other)).learner, b.learner);

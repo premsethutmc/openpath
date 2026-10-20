@@ -9,6 +9,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from .views import AccountBase
 from .models import Pupil, PupilEvent, WritingDraft
+from . import progressive_division
 from .writing_math import lesson, checked_work, check, probes, teaching, CONTRACT, final_answer, answer_layout
 
 
@@ -25,7 +26,7 @@ def receipt(draft, action, payload):
 
 
 def output(d):
-    return {'probe': next(({k:v for k,v in p.items() if k!='expected'} for p in probes(lesson(d.topic,d.parameters), d.support['error']) if p['id'] not in d.support.get('answers',{})),None) if d.stage=='diagnostic' else None, 'id': str(d.pk), 'version': d.version, 'stage': d.stage, 'work': d.work, 'lesson': {**lesson(d.topic, d.parameters), 'answerLayout':answer_layout()}, 'support': d.support,
+    return {'probe': next(({k:v for k,v in p.items() if k!='expected'} for p in probes(lesson(d.topic,d.parameters), d.support['error']) if p['id'] not in d.support.get('answers',{})),None) if d.stage=='diagnostic' else None, 'id': str(d.pk), 'version': d.version, 'stage': d.stage, 'work': d.work, 'lesson': {**lesson(d.topic, d.parameters), 'answerLayout':answer_layout(), **({'divisionPaper':progressive_division.plan(lesson(d.topic,d.parameters))} if d.topic=='division' else {})}, 'support': d.support,
             'receipts': [e for e in PupilEvent.objects.filter(pupil=d.pupil, subject='mathematics', kind='math_writing').order_by('seq').values_list('body', flat=True) if e.get('draftId') == str(d.pk)]}
 
 
@@ -75,7 +76,20 @@ class WritingActionView(AccountBase):
             d = locked(request, pupil_id, draft_id)
             action = request.data.get('action')
             spec = lesson(d.topic, d.parameters)
-            if action in ['answer-draft','check-answer','answer-help','guided']:
+            if action=='division-input':
+                if request.data.get('version')!=d.version:
+                    return Response({'detail':'This paper changed. Reload before editing.'},status=409)
+                previous=d.support.get('divisionPaper',{'entries':{},'active':'quotient:0','visible':0,'complete':False})
+                state,result=progressive_division.update(spec,d.pk,previous,request.data.get('entry'),request.data.get('operation'),request.data.get('digit'))
+                d.support['divisionPaper']=state
+                d.stage='complete' if state.get('complete') else 'workspace'
+                if result:
+                    original=progressive_division.work(spec,d.pk,state['entries'])
+                    original['revision']=d.version+1
+                    original['updatedAt']=timezone.now().isoformat()
+                    receipt(d,'progressive-validation',{'result':result,'input':original,'competency':spec['competency'],
+                            'automaticBringDown':'verbatim-dividend-digits','afterFeedback':PupilEvent.objects.filter(pupil=d.pupil,body__draftId=str(d.pk),body__action='progressive-validation').exists()})
+            elif action in ['answer-draft','check-answer','answer-help','guided']:
                 if request.data.get('version') != d.version:
                     return Response({'detail':'This lesson changed. Reload before editing.'},status=409)
                 simple = d.support.setdefault('simple',{})
