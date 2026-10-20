@@ -2231,7 +2231,7 @@ B09.push(
       return [
         B("fall-added", "conceptual", INTA, `The ${ctx === 0 ? "fall" : ctx === 1 ? "trip down" : "dive down"} of ${y} was added. Going down is a negative change: take ${y} away.`, k(s + x + y + z)),
         ...(s < 0 ? [B("start-sign", "conceptual", INTA, `The start was read as ${-s} instead of −${-s}. Below zero the numbers are negative.`, k(-s + x - y + z))] : []),
-        B("across-zero", "procedural", INTA, `A slip crossing zero: from ${s + x} going down ${y} gives ${s + x - y}. Count down to 0 first, then on into the negatives.`, k(Math.abs(s + x - y) + z === ans ? ans + 2 : Math.abs(s + x - y) + z)),
+        B("sign-dropped", "procedural", INTA, `After going below zero (${s + x - y}), the minus sign was dropped, so ${Math.abs(s + x - y)} + ${z} was worked out. Keep the sign: ${s + x - y} + ${z}.`, k(Math.abs(s + x - y) + z)),
       ];
     },
     variants: () => [],
@@ -2381,9 +2381,9 @@ B09.push(
     solve: ([mode, o, d]) => (mode === 0 ? { steps: [step("ratio", "divide", CIRC, [measuredC(d), d], r2(measuredC(d) / d)), step("same", "note", CIRC, ["every circle"], "about 3.14 = π")], answer: r2(measuredC(d) / d) } : { steps: [step("ratio", "divide", CIRC, [APPROX[o].n, APPROX[o].d], r4(APPROX[o].n / APPROX[o].d))], answer: r4(APPROX[o].n / APPROX[o].d) }),
     // independent: multiply back: the answer × the bottom number must be within half a unit of the last place of the top number
     validate: ([mode, o, d], v) => {
-      const x = val(v);
-      if (!x) return false;
-      const t = num(x);
+      const x = typeof v === "number" ? null : val(v);
+      if (typeof v !== "number" && !x) return false;
+      const t = typeof v === "number" ? v : num(x!);
       const [top, bot, places] = mode === 0 ? [measuredC(d), d, 2] : [APPROX[o].n, APPROX[o].d, 4];
       const scaled = t * 10 ** places;
       return Math.abs(scaled - Math.round(scaled)) < 1e-6 && Math.abs(t * bot - top) <= (0.5 / 10 ** places) * bot + 1e-9;

@@ -384,7 +384,7 @@ const clSets = ([k, m, n, s]: number[]) => {
 };
 const tupS = (xs: string[]) => `(${xs.join(", ")})`;
 const setS = (xs: string[]) => `{${xs.join(", ")}}`;
-const cl16Ok = (p: number[]) => inD(p, D_CL16) && (p[0] === 1 || p[0] === 3 ? (p[0] === 3 ? p[1] === 2 && p[2] <= 2 : p[2] === 1) : p[1] * p[2] <= 9);
+const cl16Ok = (p: number[]) => inD(p, D_CL16) && (p[0] === 1 || p[0] === 3 ? (p[0] === 3 ? p[1] === 2 && p[2] <= 2 : p[2] === 1) : p[2] >= 2 && p[1] * p[2] <= 9);
 function cl16Lists(p: number[]): { list: string[][]; why: string }[] {
   const [k] = p;
   const { A, B: Bs, C } = clSets(p);
@@ -481,7 +481,10 @@ function mtyOpts(p: number[]): string[] {
   const [q, t] = p;
   if (q === 0) {
     const [m, n] = MORD[t];
-    return shuf16("apmtype", p, [ordS(m, n), ordS(n, m), `order ${m * n} × 1`, ordS(Math.max(m, n), Math.max(m, n))]);
+    const cands = [ordS(n, m), `order ${m * n} × 1`, `order 1 × ${m * n}`, ordS(Math.max(m, n), Math.max(m, n)), ordS(m + 1, n)];
+    const opts = [ordS(m, n)];
+    for (const c of cands) if (!opts.includes(c) && opts.length < 4) opts.push(c);
+    return shuf16("apmtype", p, opts);
   }
   return shuf16("apmtype", p, [t, ...MTCONF[t]].map((i) => MTYPE[i]));
 }
@@ -549,7 +552,8 @@ function syswText([x, y, z, t, m, s]: number[]): string {
   const lines = A.map((row, i) => {
     const parts = row.map((c, j) => (c ? `${c} ${c === 1 ? C.one[j] : C.items[j]}` : "")).filter(Boolean);
     const total = row.reduce((a, c, j) => a + c * sol[j], 0);
-    return t === 0 ? `${C.who[i]} buys ${parts.join(", ")} for ₹${total}` : t === 1 ? `on ${C.who[i]} the theatre sold ${parts.join(", ")} for ₹${total}` : `${C.who[i]} used ${parts.join(", ")}, giving ${total} kg of nitrogen`;
+    const list = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts[parts.length - 1]}` : parts[0];
+    return t === 0 ? `${C.who[i]} buys ${list} for ₹${total}` : t === 1 ? `on ${C.who[i]} the theatre sold ${list} for ₹${total}` : `${C.who[i]} used ${list}, giving ${total} kg of nitrogen`;
   });
   const lead = t === 0 ? "At a stationery shop in Erode," : t === 1 ? "For a Tamil drama in Thanjavur," : "In a farm survey near Namakkal,";
   return `${lead} ${lines.join("; ")}. Form the equations and solve them by ${METH[m]} to find ${C.what}. Write the answer as (x, y, z).`;
@@ -3191,7 +3195,7 @@ export const NEW16: Def[] = [
       const out: Bug[] = [];
       if (p[0] === 0) {
         out.push(B("columns-first", "recall", MAT, "The number of columns was given first; the order is (number of rows) × (number of columns).", ch.indexOf(ordS(A[0].length, A.length))));
-        out.push(B("entries-counted", "conceptual", MAT, "The number of entries was used; the order gives the numbers of rows and of columns.", ch.indexOf(`order ${A.length * A[0].length} × 1`)));
+        if (A.length !== 1) out.push(B("entries-counted", "conceptual", MAT, "The number of entries was used; the order gives the numbers of rows and of columns.", ch.indexOf(`order ${A.length * A[0].length} × 1`)));
       } else {
         const t = p[1];
         const say: Record<string, string> = {
@@ -3447,6 +3451,7 @@ export const NEW16: Def[] = [
     explain: (s) => (s.id === "region" ? `Draw ${s.inputs[0]}: the feasible region is ${s.value}` : `So: ${s.inputs[0]}`),
     domain: D_LPF,
     keep: lpfOk,
+    cap: 400,
     difficulty: ([k]) => (k === 2 ? 1 : k === 0 ? 2 : 3),
     teach: {
       idea: "Before using corner points, look at the feasible region. If no point satisfies every constraint, the problem is infeasible. If the region is unbounded, Z may have no maximum (or no minimum) — check whether Z can be made as large (or small) as you like inside it.",
@@ -3505,7 +3510,7 @@ export const NEW16: Def[] = [
       }
       if (q === 1) out.push(B("no-factorial", "recall", SER, "The x² term was not divided by 2! = 2; eˣ = 1 + x + x²/2! + …", rv(radd(radd(t[0], t[1]), rmul(t[2], rr(2))))));
       if (q === 2) out.push(B("signs", "recall", SER, "All the terms were added; the logarithmic series alternates: x − x²/2 + x³/3 − …", rv(radd(radd(t[0], rmul(t[1], rr(-1))), t[2]))));
-      return out.filter((b) => !near(Number(b.predict), ans, 1e-12));
+      return out.filter((b, i) => !near(Number(b.predict), ans, 1e-12) && !out.slice(0, i).some((o) => near(Number(o.predict), Number(b.predict), 1e-12)));
     },
     distractors: (p) => [Math.round((sappAns(p) + 0.001) * 1e6) / 1e6],
     variants: () => [],
@@ -3657,7 +3662,7 @@ export const NEW16: Def[] = [
         return [
           B("used-A", "conceptual", MAT, "The coded column was multiplied by A again; to decode, multiply by A⁻¹.", `(${A[0][0] * C[0] + A[0][1] * C[1]}, ${A[1][0] * C[0] + A[1][1] * C[1]})`),
           B("adjoint-signs", "procedural", ADJ, "In A⁻¹ the off-diagonal entries were not negated; for [[a, b], [c, d]], A⁻¹ = (1/(ad − bc))[[d, −b], [−c, a]].", `(${noNeg[0]}, ${noNeg[1]})`),
-        ].filter((b) => b.predict !== ans);
+        ].filter((b, k, all) => b.predict !== ans && !all.slice(0, k).some((o) => o.predict === b.predict));
       }
       const ans = `(${C[0]}, ${C[1]})`;
       return [B("row-vector", "procedural", MAT, "M was multiplied as a row, (m₁ m₂)A; the code is A times the COLUMN M.", `(${m1 * A[0][0] + m2 * A[1][0]}, ${m1 * A[0][1] + m2 * A[1][1]})`), B("letters-swapped", "procedural", MAT, "The two letters were put in the wrong order in M.", `(${A[0][0] * m2 + A[0][1] * m1}, ${A[1][0] * m2 + A[1][1] * m1})`)].filter((b) => b.predict !== ans);

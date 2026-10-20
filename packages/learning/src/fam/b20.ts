@@ -2881,7 +2881,7 @@ export const B20: Def[] = [
     mc: true,
     // [mi, k]: t = kπ/M with M = UM[mi]
     parse: none,
-    reject: gate([[0, 4], [-18, 18]], (p) => unitOk(p), "t = kπ/M with M = 1, 2, 3, 4 or 6 and k in lowest terms."),
+    reject: gate([[0, 4], [-24, 24]], (p) => unitOk(p), "t = kπ/M with M = 1, 2, 3, 4 or 6 and k in lowest terms."),
     prompt: ([mi, k]) => `For a real number t, P(t) is the point reached by going a distance t round the unit circle x² + y² = 1 from (1, 0) (anticlockwise when t > 0), so P(t) = (cos t, sin t). Find P(t) for t = ${piStr(k, UM[mi])}. Give exact coordinates (x, y).`,
     solve: ([mi, k]) => {
       const d = (180 * k) / UM[mi];
@@ -2909,7 +2909,7 @@ export const B20: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "angle" ? `t = ${s.inputs[0]} is the same turn as ${s.value}` : `So P(t) = (cos t, sin t) = ${s.value}`),
-    domain: [[0, 4], [-18, 18]],
+    domain: [[0, 4], [-24, 24]],
     keep: (p) => unitOk(p),
     difficulty: ([mi, k]) => (k > 0 && Math.abs(k) <= UM[mi] / 2 ? 1 : k > 0 ? 2 : 3),
     teach: {
@@ -2917,7 +2917,7 @@ export const B20: Def[] = [
       method: "Change t to an angle (π = 180°), find the reference angle and its standard values, and give each coordinate the sign of its quadrant.",
       alternatives: [{ id: "reflect", title: "Reflect a first-quadrant point", kind: "conceptual", text: ["Find the point for the reference angle in the first quadrant, for example (√3/2, 1/2) for π/6.", "Reflect it into the right quadrant: across the y-axis the x-coordinate changes sign, across the x-axis the y-coordinate does."] }],
     },
-    limits: "t a multiple of π/6, π/4, π/3 or π/2 up to 3π either way; other real numbers are the sign family.",
+    limits: "t a multiple of π/6, π/4, π/3, π/2 or π, up to four turns either way; other real numbers are the sign family.",
   },
   {
     id: "atsign",
@@ -3139,7 +3139,7 @@ export const B20: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "centre" ? `N = ${s.inputs[0]}; the centre is ${s.value}` : s.id === "deviations" ? `Σf|x − centre| = ${s.value}` : `M.D. = ${F(Number(s.inputs[0]))}/${s.inputs[1]} = ${F(Number(s.value))}`),
     domain: [[0, 2], [1, 20], [1, 4], [0, 59]],
-    keep: (p) => mdfOk(p),
+    keep: (p) => firstOnly("atmdf", [[0, 2], [1, 20], [1, 4], [0, 59]], mdfOk, shown("atmdf"))(p),
     cap: 400,
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     teach: {
@@ -3407,7 +3407,7 @@ export const B20: Def[] = [
     variants: () => [],
     explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
     domain: [[0, 4], [0, 59], [0, 3]],
-    keep: (p) => vtypeOk(p),
+    keep: (p) => firstOnly("atvtype", [[0, 4], [0, 59], [0, 3]], vtypeOk, shown("atvtype"))(p),
     cap: 400,
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 4 ? 2 : 3),
     teach: {
@@ -3426,8 +3426,8 @@ export const B20: Def[] = [
     type: "choice",
     // [f, ask, k, a]: y = a f⁻¹(x/k) (k = 1: f⁻¹ x); ask 0 domain, 1 range
     parse: none,
-    reject: gate([[0, 5], [0, 1], [1, 3], [1, 3]], ([, ask, k, a]) => (ask === 0 ? a === 1 : k === 1), "y = f⁻¹(x/k) for the domain, a f⁻¹(x) for the range."),
-    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range (the principal-value branch)" : "domain"} of y = ${a === 1 ? "" : `${a} `}${INVT[f].n}(${k === 1 ? "x" : `x/${k}`})?`,
+    reject: gate([[0, 5], [0, 1], [1, 4], [1, 4]], () => true, "y = a f⁻¹(x/k) with a and k from 1 to 4."),
+    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range (the principal-value branch)" : "domain"} of y = ${a === 1 ? "" : `${a} `}${INVT[f].n}${k === 1 ? " x" : `(x/${k})`}?`,
     choices: (p) => invdOpts(p).map((o) => o.text),
     solve: (p) => {
       const o = invdOpts(p);
@@ -3446,8 +3446,7 @@ export const B20: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
-    domain: [[0, 5], [0, 1], [1, 3], [1, 3]],
-    keep: ([, ask, k, a]) => (ask === 0 ? a === 1 : k === 1),
+    domain: [[0, 5], [0, 1], [1, 4], [1, 4]],
     difficulty: ([f]) => (f <= 2 ? 1 : f === 3 ? 2 : 3),
     teach: {
       idea: "Each inverse function undoes its function on one branch: sin⁻¹ has domain [−1, 1] and range [−π/2, π/2]; cos⁻¹ [−1, 1] and [0, π]; tan⁻¹ ℝ and (−π/2, π/2); cot⁻¹ ℝ and (0, π); sec⁻¹ (−∞, −1] ∪ [1, ∞) and [0, π] without π/2; cosec⁻¹ (−∞, −1] ∪ [1, ∞) and [−π/2, π/2] without 0.",
@@ -3627,29 +3626,31 @@ export const B20: Def[] = [
     type: "fraction",
     mc: true,
     // [kind, n, k]: 0 n coins, X = number of heads: P(X = k); 1 the same: F(k) = P(X ≤ k); 2 two dice, X = the larger
-    // number: P(X = k); 3 two dice, X = the sum: F(k); 4 two dice, X = the difference: P(X = k)
+    // number: P(X = k); 3 two dice, X = the sum: F(k); 4 two dice, X = the difference: P(X = k); 5 the larger number:
+    // F(k); 6 two balls from n red and 6 − n blue without replacement, X = the number of red: P(X = k)
     parse: none,
-    reject: gate([[0, 4], [0, 4], [0, 12]], (p) => pmfOk(p), "A random variable on coins or two dice with a value in its range."),
-    prompt: ([kind, n, k]) => `${pmfSay(kind, n)} Find ${kind === 1 || kind === 3 ? `F(${k}) = P(X ≤ ${k})` : `P(X = ${k})`}.`,
+    reject: gate([[0, 6], [0, 6], [0, 12]], (p) => pmfOk(p), "A random variable on coins, two dice or a bag, with a value in its range."),
+    prompt: ([kind, n, k]) => `${pmfSay(kind, n)} Find ${[1, 3, 5].includes(kind) ? `F(${k}) = P(X ≤ ${k}), the value of its distribution function at ${k}` : `P(X = ${k})`}.`,
     solve: (p) => {
       const ans = pmfAns(p);
-      return { steps: [st("space", "count", "MATH.probability.sample-space", [p[0]], p[0] <= 1 ? 2 ** p[1] : 36), st("value", p[0] === 1 || p[0] === 3 ? "add" : "count", RV, [p[2]], ans)], answer: ans };
+      return { steps: [st("space", "count", "MATH.probability.sample-space", [p[0]], p[0] <= 1 ? 2 ** p[1] : p[0] === 6 ? 30 : 36), st("value", [1, 3, 5].includes(p[0]) ? "add" : "count", RV, [p[2]], ans)], answer: ans };
     },
     // independent: list the whole sample space, work out X for each outcome, and count
     validate: ([kind, n, k], v) => {
       const outs: number[] = [];
       if (kind <= 1) for (let m = 0; m < 2 ** n; m++) outs.push(pop(m));
-      else for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) outs.push(kind === 2 ? Math.max(a, b) : kind === 3 ? a + b : Math.abs(a - b));
-      const hit = outs.filter((x) => (kind === 1 || kind === 3 ? x <= k : x === k)).length;
+      else if (kind === 6) for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) i !== j && outs.push((i < n ? 1 : 0) + (j < n ? 1 : 0));
+      else for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) outs.push(kind === 2 || kind === 5 ? Math.max(a, b) : kind === 3 ? a + b : Math.abs(a - b));
+      const hit = outs.filter((x) => ([1, 3, 5].includes(kind) ? x <= k : x === k)).length;
       return typeof v === "number" && near(v, hit / outs.length, 1e-12);
     },
     bugs: (p) => {
       const [kind, n, k] = p;
       const right = pmfAns(p);
       const pr = (x: number) => (near(x, right, 1e-12) ? null : x);
-      const vals = kind <= 1 ? n + 1 : kind === 2 ? 6 : kind === 3 ? 11 : 6;
-      if (kind === 1 || kind === 3)
-        return [bg("pmf-for-cdf", "conceptual", RV, `P(X = ${k}) was given; F(${k}) = P(X ≤ ${k}) adds the probabilities of all values up to ${k}.`, pr(pmfAns([kind === 1 ? 0 : 3, n, k], true))), bg("strict", "procedural", RV, `P(X < ${k}) was found; F(${k}) includes X = ${k}.`, pr(pmfAns([kind, n, k - 1])))].filter((b) => b.predict !== null);
+      const vals = kind <= 1 ? n + 1 : kind === 3 ? 11 : kind === 6 ? 3 : 6;
+      if ([1, 3, 5].includes(kind))
+        return [bg("pmf-for-cdf", "conceptual", RV, `P(X = ${k}) was given; F(${k}) = P(X ≤ ${k}) adds the probabilities of all values up to ${k}.`, pr(pmfAns(p, true))), bg("strict", "procedural", RV, `P(X < ${k}) was found; F(${k}) includes X = ${k}.`, pr(pmfAns([kind, n, k - 1])))].filter((b) => b.predict !== null);
       return [bg("values-equally-likely", "conceptual", RV, `The ${vals} values of X were taken as equally likely; different values come from different numbers of outcomes, so count the outcomes.`, pr(1 / vals))].filter((b) => b.predict !== null);
     },
     distractors: (p) => {
@@ -3658,7 +3659,7 @@ export const B20: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "space" ? `The sample space has ${s.value} equally likely outcomes` : `${F(Number(s.value))} of the probability belongs to the event`),
-    domain: [[0, 4], [0, 4], [0, 12]],
+    domain: [[0, 6], [0, 6], [0, 12]],
     keep: (p) => pmfOk(p),
     range: [0, 1],
     difficulty: ([kind]) => (kind === 0 ? 1 : kind <= 2 ? 2 : 3),
@@ -3677,12 +3678,22 @@ export const B20: Def[] = [
     competency: CRV,
     type: "expression",
     mc: true,
-    // [kind, n, a]: kind 0: f(x) = (n + 1)xⁿ/aⁿ⁺¹ on [0, a]; find F(x). kind 1: F(x) = (x/a)ⁿ⁺¹ on [0, a]; find f(x)
+    // [kind, n, a]: kind 0: f(x) = (n + 1)xⁿ/aⁿ⁺¹ on [0, a]; find F(x). kind 1: F(x) = (x/a)ⁿ⁺¹ on [0, a]; find f(x).
+    // kind 2 [2, lo, w]: X uniform on [lo, lo + w]; find F(x)
     parse: none,
-    reject: gate([[0, 1], [1, 3], [2, 6]], ([, n, a]) => a ** (n + 1) <= 1296, "Powers up to 3 on [0, a] with aⁿ⁺¹ at most 1296."),
-    prompt: ([kind, n, a]) => (kind === 0 ? `A continuous random variable X has density f(x) = ${pdfText(n, a)} for 0 ≤ x ≤ ${a} (and 0 otherwise). Find its distribution function F(x) = P(X ≤ x) for 0 ≤ x ≤ ${a}.` : `A continuous random variable X has distribution function F(x) = x${sup(n + 1)}/${a ** (n + 1)} for 0 ≤ x ≤ ${a} (F(x) = 0 for x < 0 and 1 for x > ${a}). Find its density f(x) for 0 < x < ${a}.`),
-    solve: ([kind, n, a]) => (kind === 0 ? { steps: [st("integrate", "integrate", INTG, [pdfText(n, a)], `x${sup(n + 1)}/${a ** (n + 1)}`)], answer: `x${sup(n + 1)}/${a ** (n + 1)}` } : { steps: [st("differentiate", "differentiate", "MATH.calculus.differentiation-rules", [`x${sup(n + 1)}/${a ** (n + 1)}`], pdfText(n, a))], answer: pdfText(n, a) }),
-    // independent: kind 0 integrates the density from 0 by Simpson's rule; kind 1 differentiates F numerically
+    reject: gate([[0, 2], [0, 5], [1, 9]], (p) => cdfOk(p), "Powers up to 4 on [0, a] with aⁿ⁺¹ at most 1296, or a uniform density on [lo, lo + w]."),
+    prompt: ([kind, n, a]) =>
+      kind === 0
+        ? `A continuous random variable X has density f(x) = ${pdfText(n, a)} for 0 ≤ x ≤ ${a} (and 0 otherwise). Find its distribution function F(x) = P(X ≤ x) for 0 ≤ x ≤ ${a}.`
+        : kind === 1
+          ? `A continuous random variable X has distribution function F(x) = x${sup(n + 1)}/${a ** (n + 1)} for 0 ≤ x ≤ ${a} (F(x) = 0 for x < 0 and 1 for x > ${a}). Find its density f(x) for 0 < x < ${a}.`
+          : `A continuous random variable X has density f(x) = 1/${a} for ${n} ≤ x ≤ ${n + a} (and 0 otherwise). Find its distribution function F(x) = P(X ≤ x) for ${n} ≤ x ≤ ${n + a}.`,
+    solve: ([kind, n, a]) => {
+      if (kind === 2) return { steps: [st("integrate", "integrate", INTG, [`1/${a}`], cdfUni(n, a))], answer: cdfUni(n, a) };
+      return kind === 0 ? { steps: [st("integrate", "integrate", INTG, [pdfText(n, a)], `x${sup(n + 1)}/${a ** (n + 1)}`)], answer: `x${sup(n + 1)}/${a ** (n + 1)}` } : { steps: [st("differentiate", "differentiate", DERIV, [`x${sup(n + 1)}/${a ** (n + 1)}`], pdfText(n, a))], answer: pdfText(n, a) };
+    },
+    // independent: kinds 0, 2 integrate the density from the left end by Simpson's rule; kind 1 differentiates F
+    // numerically
     validate: ([kind, n, a], v) => {
       if (typeof v !== "string") return false;
       const ev = (x: number) => {
@@ -3692,25 +3703,29 @@ export const B20: Def[] = [
           return NaN;
         }
       };
+      if (kind === 2) return [0.13, 0.42, 0.77, 0.95].map((t) => n + t * a).every((x) => near(ev(x), simpson(() => 1 / a, n, x, 200), 1e-8));
       const [p, q] = pdfK(n, a);
       const xs = [0.3, 0.71, 1.13, 1.6].map((t) => (t * a) / 2);
       return kind === 0 ? xs.every((x) => near(ev(x), simpson((t) => (p / q) * t ** n, 0, x, 400), 1e-8)) : xs.every((x) => near(ev(x), ((x + 1e-5) ** (n + 1) - (x - 1e-5) ** (n + 1)) / (2e-5 * a ** (n + 1)), 1e-6));
     },
     bugs: ([kind, n, a]) =>
-      kind === 0
-        ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from 0 to x, found by integrating.", pdfText(n, a)), bg("power-not-divided", "procedural", INTG, `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, `${n + 1}x${sup(n + 1)}/${a ** (n + 1)}`)]
-        : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", `x${sup(n + 2)}/${(n + 2) * a ** (n + 1)}`), bg("power-not-brought-down", "procedural", "MATH.calculus.differentiation-rules", `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, `${xpow(n)}/${a ** (n + 1)}`)],
+      kind === 2
+        ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from the left end up to x.", `1/${a}`), ...(n > 0 ? [bg("from-zero", "procedural", INTG, `The area was measured from 0; the density is 0 below ${n}, so integrate from ${n}.`, `x/${a}`)] : [])]
+        : kind === 0
+          ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from 0 to x, found by integrating.", pdfText(n, a)), bg("power-not-divided", "procedural", INTG, `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, `${n + 1}x${sup(n + 1)}/${a ** (n + 1)}`)]
+          : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", `x${sup(n + 2)}/${(n + 2) * a ** (n + 1)}`), bg("power-not-brought-down", "procedural", DERIV, `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, `${xpow(n)}/${a ** (n + 1)}`)],
+    distractors: ([kind, n, a]) => (kind === 2 ? [`x/${a + 1}`, `(x + ${n + 1})/${a}`, `${a}x`] : kind === 0 ? [`x${sup(n + 1)}/${a ** n}`, `x${sup(n)}/${a ** (n + 1)}`] : [`${n + 1}${xpow(n)}/${a ** n}`, `${xpow(n + 1)}/${a ** (n + 1)}`]),
     variants: () => [],
-    explain: (s) => (s.id === "integrate" ? `F(x) = ∫₀ˣ ${s.inputs[0]} dt = ${s.value}` : `f(x) = F′(x) = ${s.value}`),
-    domain: [[0, 1], [1, 3], [2, 6]],
-    keep: ([, n, a]) => a ** (n + 1) <= 1296,
-    difficulty: ([kind, n]) => (kind === 1 && n === 1 ? 1 : kind === 1 ? 2 : 3),
+    explain: (s) => (s.id === "integrate" ? `F(x) = ∫ ${s.inputs[0]} dt from the left end to x = ${s.value}` : `f(x) = F′(x) = ${s.value}`),
+    domain: [[0, 2], [0, 5], [1, 9]],
+    keep: (p) => cdfOk(p),
+    difficulty: ([kind, n]) => (kind === 2 ? 1 : kind === 1 && n === 1 ? 1 : kind === 1 ? 2 : 3),
     teach: {
       idea: "For a continuous random variable, F(x) = P(X ≤ x) = ∫ f(t) dt from the left end up to x, and f(x) = F′(x) wherever F is differentiable: integrating and differentiating go back and forth.",
       method: "From f to F: integrate f from the start of the interval to x (check that F at the right end is 1). From F to f: differentiate F.",
       alternatives: [{ id: "check-ends", title: "Check the end points", kind: "procedural", text: ["F must be 0 at the left end and 1 at the right end of the interval.", "f must be at least 0 and its total area must be 1."] }],
     },
-    limits: "Power densities on [0, a] (as the probability-from-density family); piecewise densities are left out.",
+    limits: "Power densities on [0, a] and uniform densities; piecewise densities are left out.",
   },
   {
     id: "atcexp",
@@ -3824,6 +3839,34 @@ export const B20: Def[] = [
 ];
 
 // ---------------------------------------------------------------- gap@1 helpers
+const UNIQ = new Map<string, Set<string>>();
+/** keep: only the first parameter choice (in domain order) that shows a given question, so no two problems look the same. */
+function firstOnly(fam: string, dom: [number, number][], ok: (p: number[]) => boolean, key: (p: number[]) => string): (p: number[]) => boolean {
+  return (p) => {
+    let set = UNIQ.get(fam);
+    if (!set) {
+      set = new Set();
+      const seen = new Set<string>();
+      const rec = (i: number, acc: number[]) => {
+        if (i === dom.length) {
+          if (!ok(acc)) return;
+          const k = key(acc);
+          if (!seen.has(k)) {
+            seen.add(k);
+            set!.add(acc.join(","));
+          }
+          return;
+        }
+        for (let v = dom[i][0]; v <= dom[i][1]; v++) rec(i + 1, [...acc, v]);
+      };
+      rec(0, []);
+      UNIQ.set(fam, set);
+    }
+    return set.has(p.join(","));
+  };
+}
+const famOf = (id: string) => B20.find((d) => d.id === id)!;
+const shown = (id: string) => (p: number[]) => `${famOf(id).prompt(p)}|${JSON.stringify(famOf(id).figure?.(p) ?? null)}|${(famOf(id).choices?.(p) ?? []).join("|")}`;
 const LIN_ = "MATH.algebra.linear-equations";
 const DERIV = "MATH.calculus.derivative-rules";
 const bg = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null): Bug => ({ id, kind, competency, says, predict });
@@ -3844,7 +3887,7 @@ const linspace = (a: number, b: number, n: number) => [...Array(n).keys()].map((
 const UM = [1, 2, 3, 4, 6];
 function unitOk([mi, k]: number[]): boolean {
   const M = UM[mi];
-  return M !== undefined && k !== 0 && Math.abs(k) <= 6 * M && gcd(Math.abs(k), M) === 1;
+  return M !== undefined && k !== 0 && Math.abs(k) <= 8 * M && gcd(Math.abs(k), M) === 1;
 }
 const QUADS = ["sin t > 0 and cos t > 0 (P(t) is in the first quadrant)", "sin t > 0 and cos t < 0 (P(t) is in the second quadrant)", "sin t < 0 and cos t < 0 (P(t) is in the third quadrant)", "sin t < 0 and cos t > 0 (P(t) is in the fourth quadrant)"];
 const signT = ([kind, a, b]: number[]) => (kind === 0 ? a / 10 : (a * Math.PI) / b);
@@ -4204,6 +4247,7 @@ function invdTrue([f, ask, k, a]: number[], o: ISet): boolean {
   const xs = [...linspace(-1, 1, 2001), ...[...Array(301).keys()].flatMap((i) => [10 ** ((i - 150) / 50), -(10 ** ((i - 150) / 50))])];
   const vals = xs.map((x) => a * invNum(f, x)).filter(Number.isFinite);
   if (!vals.every((v) => o.has(v))) return false;
+  // the range of a f⁻¹(x/k) does not depend on k: sample a f⁻¹(u) over u
   const reach = (s: number) => {
     const x = invFwd(f, s / a);
     return Number.isFinite(x) && Math.abs(x) < 1e6 && Math.abs(a * invNum(f, x) - s) < 1e-9;
@@ -4374,3 +4418,8 @@ function stmtTruth(p: number[]): boolean[] {
   const col = [8, 4, 2, 1].map((b) => (mask & b ? "T" : "F")).join(", ");
   return opts.map((o) => o.text === col);
 }
+function cdfOk([kind, n, a]: number[]): boolean {
+  if (kind === 2) return n >= 0 && n <= 5 && a >= 2 && a <= 9;
+  return n >= 1 && n <= 4 && a >= 2 && a ** (n + 1) <= 1296;
+}
+const cdfUni = (lo: number, w: number) => (lo === 0 ? `x/${w}` : `(x − ${lo})/${w}`);
