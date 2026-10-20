@@ -3,6 +3,7 @@
  * always exactly the mathematics of its question. Every picture has a text description (aria-label) that says the
  * same thing in words, so a learner using a screen reader gets the same question.
  */
+import type { JSX } from "react";
 type V = { type: string; [k: string]: unknown };
 const num = (v: unknown, d = 0) => (typeof v === "number" && Number.isFinite(v) ? v : d);
 const arr = <T,>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);

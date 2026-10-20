@@ -8,7 +8,7 @@
  * Coordinates are integers in a 300 × 300 sheet; with axes, the sheet maps onto the task's ranges and the pointer's
  * position is shown in those units, so a learner can place an intercept or a vertex where it belongs.
  */
-import { useRef, useState, type PointerEvent as RPointerEvent } from "react";
+import { useRef, useState, type JSX, type PointerEvent as RPointerEvent } from "react";
 
 export const DRAW_PREFIX = "draw@1 ";
 export const DRAW_LIMIT = 16000;
