@@ -15,6 +15,14 @@ export const show = (r: Rational) =>
   r[1] === 1n ? `${r[0]}` : `${r[0]}/${r[1]}`;
 export function parseNumber(text: string): Rational {
   const s = text.trim().replaceAll("−", "-");
+  // mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("−3 1/2" is −(3 + 1/2)); never 31/2
+  const mixed = /^([+-]?)(\d+)\s+(\d+)\/(\d+)$/.exec(s);
+  if (mixed && s.length <= 80) {
+    const [, sign, w, n, d] = mixed;
+    if (BigInt(d) === 0n) throw new Error("Enter an integer, decimal or fraction");
+    const v = rational(BigInt(w) * BigInt(d) + BigInt(n), BigInt(d));
+    return sign === "-" ? rational(-BigInt(w) * BigInt(d) - BigInt(n), BigInt(d)) : v;
+  }
   if (s.length > 80 || !/^[+-]?\d+(?:\.\d+)?(?:\/[+-]?\d+)?$/.test(s))
     throw new Error("Enter an integer, decimal or fraction");
   const [a, b = "1"] = s.split("/"),

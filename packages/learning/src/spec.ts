@@ -135,6 +135,9 @@ function checkItem(p: Problem, out: string[]) {
   const rebuilt = problemOf(p.id);
   if (!rebuilt || itemSignature(rebuilt) !== itemSignature(p)) out.push(`${p.id}: does not rebuild identically from its id`);
   if (!p.prompt || /NaN|undefined|Infinity|\[object/.test(p.prompt)) out.push(`${p.id}: unreadable prompt`);
+  // a floating-point artefact shown to a learner (55.00000000000001%, 0.41000000000000003) is never a right option
+  const FLOAT = /\d\.\d*(?:0{7,}|9{7,})\d/;
+  for (const t of [p.prompt, p.answer, ...(p.options ?? []), ...p.bugs.map((b) => b.says)]) if (FLOAT.test(String(t))) out.push(`${p.id}: shows a floating-point artefact: ${String(t).slice(0, 60)}`);
   const q = question(p.id);
   if (canonical(q, q.answer) === null || !isCorrect(q, q.answer)) out.push(`${p.id}: its answer is not in its own format`);
   for (const b of p.bugs) {

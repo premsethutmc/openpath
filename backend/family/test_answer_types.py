@@ -43,3 +43,9 @@ class AnswerTypeTests(SimpleTestCase):
     def test_unreadable_answers_are_not_answers(self):
         for kind, raw in [('exact', 'sin x'), ('exact', '1/(x+1)'), ('interval', 'x >'), ('tuple', '3'), ('matrix', '[[1, 2], [3]]'), ('ratio', '3/4')]:
             self.assertIsNone(canonical_of(kind, raw), (kind, raw))
+
+    def test_a_mixed_number_is_its_value_never_digits_run_together(self):
+        from .learning import canonical
+        self.assertEqual(canonical('fraction', '1 1/2'), '3/2')
+        self.assertEqual(canonical('fraction', '-3 1/2'), '-7/2')
+        self.assertNotEqual(canonical('fraction', '1 1/4'), canonical('fraction', '11/4'))

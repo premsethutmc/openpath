@@ -27,6 +27,14 @@ test("answers@2: every shared case gives the agreed verdict (the server checks t
   assert.equal(canonicalOf("exact", "√18"), canonicalOf("exact", "3√2"));
 });
 
+test("mixed@1: a mixed number in a fraction answer is its value, in the app and on the server (never 11/2 for 1 1/2)", () => {
+  const q = { id: "t", type: "fraction" as const, answer: "3/2", prompt: "", competency: "MATH.number.fraction-models" } as never;
+  assert.equal(isCorrect(q, "1 1/2"), true);
+  assert.equal(isCorrect(q, "1.5"), true);
+  assert.equal(isCorrect({ ...(q as object), answer: "11/2" } as never, "1 1/2"), false, "1 1/2 is not 11/2");
+  assert.equal(isCorrect({ ...(q as object), answer: "-7/2" } as never, "−3 1/2"), true);
+});
+
 test("written@1: an unmarked written answer is pending and never evidence; only the educator's mark enters the engine", () => {
   const t = writtenTasks.find((x) => x.id === "wr:irr:sqrt2")!;
   const q = question(t.id);

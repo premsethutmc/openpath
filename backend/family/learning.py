@@ -38,6 +38,18 @@ INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
 NUMBER = r'[+-]?\d{1,9}'
 RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
+# mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
+MIXED = r'([+-]?)(\d{1,9})\s+(\d{1,9})/(\d{1,9})'
+
+
+def _rational(t):
+    m = re.fullmatch(MIXED, t, flags=re.ASCII)
+    if m:
+        v = int(m.group(2)) + Fraction(int(m.group(3)), int(m.group(4)))
+        return -v if m.group(1) == '-' else v
+    if ' ' in t:
+        raise ValueError('not a number')
+    return Fraction(t)
 
 
 def _load(name):
@@ -112,7 +124,7 @@ def canonical(kind, raw):
         if kind == 'integer':
             return str(int(t)) if re.fullmatch(NUMBER, t, flags=re.ASCII) else None
         if kind == 'fraction':
-            return str(Fraction(t.replace(' ', '')))
+            return str(_rational(t))
         if kind == 'set':
             parts = [Fraction(p.strip()) for p in t.split(',')]
             return ','.join(sorted(str(p) for p in parts)) if len(set(parts)) == len(parts) else None
@@ -181,7 +193,7 @@ def _answer_ok(kind, raw):
     if kind == 'integer':
         return re.fullmatch(NUMBER, t, flags=re.ASCII) is not None
     if kind == 'fraction':
-        return re.fullmatch(RATIONAL, t.replace(' ', ''), flags=re.ASCII) is not None and not re.search(r'/[+-]?0+$', t)
+        return (re.fullmatch(RATIONAL, t, flags=re.ASCII) is not None or re.fullmatch(MIXED, t, flags=re.ASCII) is not None) and not re.search(r'/[+-]?0+$', t)
     if kind == 'set':
         parts = [p.strip() for p in t.split(',')]
         return 0 < len(parts) <= 30 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
