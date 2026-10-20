@@ -2,7 +2,7 @@
 from pathlib import Path
 from html import escape
 ROOT=Path(__file__).resolve().parent
-C={'bg':'#FAF9F6','paper':'#FFFEFB','ink':'#292C30','muted':'#62656C','line':'#E6E3DD','violet':'#6853AD','focus':'#F2EDF9','amber':'#936039','error':'#FBF0E5','green':'#276B53','mint':'#ECF4EF'}
+C={'bg':'#F2F7F3','paper':'#FFFFFF','ink':'#193D39','muted':'#536B65','line':'#DCE9E2','accent':'#146B5D','focus':'#E8F5ED','amber':'#925532','error':'#FFF1E6','green':'#146B5D','mint':'#E3F3E9'}
 
 def svg_screen(width,state, initial=False):
     height=800 if width==360 else 852
@@ -20,22 +20,25 @@ def svg_screen(width,state, initial=False):
     count=9 if state=='completed' else 3 if state=='mistake' or (state=='working' and not initial) else 0
     text(width-76,27,f'{count} / 9',11,C['muted'],anchor='end')
     rect(width-110,34,34,3,C['line'],r=1.5)
-    if count:rect(width-110,34,34*count/9,3,C['violet'],r=1.5)
+    if count:rect(width-110,34,34*count/9,3,C['accent'],r=1.5)
     for dy in (-5,0,5):add(f'<circle cx="{width-28}" cy="{29+dy}" r="1.35" fill="{C["muted"]}"/>')
     line(16,56,width-16,56)
-    text(24,101,'379 ÷ 3',26,weight=600)
+    text(24,101,'379 ÷ 3',28,weight=600)
     text(24,125,'Find the quotient and remainder.',13,C['muted'])
     # Full-width paper: no card shadow or nested panels.
     rect(0,146,width,(kb if keyboard else height)-146,C['paper'])
     line(16,146,width-16,146)
+    # Faint notebook guides support the working rows; no filled arithmetic.
+    for guide_y in range(264, 529 if state=='completed' else 265 if initial else 353, 44):
+        line(24,guide_y,width-24,guide_y,'#F0F5F2',0.75)
     cx=width/2-26; step=44
     xs=[cx+i*step for i in range(3)]
     ys=[202+44*i for i in range(8)]
     def digit(col,row,d,color=None):text(xs[col],ys[row],str(d),30,color,anchor='middle',font='DejaVu Sans')
     def active(col,row,wrong=False):
         x=xs[col]-18; y=ys[row]-32
-        rect(x,y,36,44,C['error'] if wrong else C['focus'],C['amber'] if wrong else C['violet'],4)
-        if not wrong:line(xs[col],y+10,xs[col],y+33,C['violet'],1.5)
+        rect(x,y,36,44,C['error'] if wrong else C['focus'],C['amber'] if wrong else C['accent'],4)
+        if not wrong:line(xs[col],y+10,xs[col],y+33,C['accent'],1.5)
     # Bracket and printed dividend share the identical column grid.
     path(f'M{xs[0]-20} 263V226Q{xs[0]-20} 218 {xs[0]-12} 218H{xs[2]+21}',C['ink'],1.6)
     text(xs[0]-51,246,'3',30,anchor='middle',font='DejaVu Sans')
@@ -63,16 +66,16 @@ def svg_screen(width,state, initial=False):
         line(32,371,width-32,371)
         text(32,397,'Want a little help?',15,weight=600)
         rect(32,410,105,44,C['paper'],C['line'],6)
-        text(84.5,438,'Try again',14,C['ink'],600,anchor='middle')
-        text(157,438,'Need a hint?',14,C['violet'],600)
+        text(84.5,438,'Try again',14,C['accent'],600,anchor='middle')
+        text(157,438,'Need a hint?',14,C['accent'],600)
     if keyboard:
         # Persistent toolbar is inside the visual viewport, just above the OS keyboard.
         line(16,kb-57,width-16,kb-57)
         path(f'M33 {kb-36}a7 7 0 1 0 0 14a7 7 0 1 0 0-14',C['muted'],1.3)
         text(33,kb-25,'?',11,C['muted'],600,anchor='middle')
-        text(49,kb-25,'Help',14,C['muted'])
+        text(49,kb-25,'Help',14,C['accent'],600)
         path(f'M{width-91} {kb-23}l2-7 9-9 5 5-9 9-7 2M{width-80} {kb-37}l5 5',C['muted'],1.3)
-        text(width-63,kb-25,'Write',14,C['muted'])
+        text(width-63,kb-25,'Write',14,C['accent'],600)
         # EXPLICIT illustrative OS keyboard: never a proposed in-app custom keypad.
         rect(0,kb,width,248,'#E9EAED');line(0,kb,width,kb,'#D9DBDF')
         keygap=6; outer=8; keyw=(width-2*outer-2*keygap)/3; keyh=45
@@ -95,7 +98,7 @@ def svg_screen(width,state, initial=False):
         path('M32 576l3 3 5-6',C['green'],1.7)
         text(56,581,'Correct. Nicely done.',16,C['green'],600)
         text(24,612,'126 remainder 1',22,weight=600)
-        rect(24,642,width-48,48,C['violet'],r=7)
+        rect(24,642,width-48,48,C['accent'],r=7)
         text(width/2-9,672,'Next question',15,'#FFFFFF',600,anchor='middle')
         path(f'M{width/2+66} 661l5 5-5 5M{width/2+62} 666h9','#FFFFFF',1.5)
         text(width/2,720,'Your working is saved.',12,C['muted'],anchor='middle')
