@@ -2853,7 +2853,8 @@ const bappOk = (p: number[]) => {
   if (!inDom(p, D_BAPP)) return false;
   const [q, k, a, n] = p;
   if (a === 0) return false;
-  if (q === 0) return k >= 1 && Math.abs(a) <= 3 && n <= (k === 3 ? 4 : 5);
+  // the server reads whole-number answers of at most nine digits
+  if (q === 0) return k >= 1 && Math.abs(a) <= 3 && n <= (k === 3 ? 4 : 5) && Math.abs((10 ** k + a) ** n) < 1e9;
   return k === 0 && n >= 4;
 };
 const bappBase = ([, k, a]: number[]) => 10 ** k + a;

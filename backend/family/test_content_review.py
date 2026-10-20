@@ -78,7 +78,11 @@ class ContentReviewTests(ReviewBase):
         r = self.decide(self.manager, mod, 'release')
         self.assertEqual(r.status_code, 409)
         self.assertIn('mmul', r.json()['detail'])
-        for fam in ('family:mmul', 'family:mul'):
+        # every family the module uses (its pools@1 pools and listed questions), as the server lists them
+        from . import content_review
+        uses = content_review.items()[mod]['families']
+        self.assertIn('mmul', uses)
+        for fam in [f'family:{f}' for f in uses]:
             for who, d in ((self.educator, 'submit'), (self.educator, 'approve'), (self.manager, 'release')):
                 self.assertEqual(self.decide(who, fam, d).status_code, 201, (fam, d))
         self.assertEqual(self.decide(self.manager, mod, 'release').status_code, 201)
@@ -114,7 +118,7 @@ class ContentReviewTests(ReviewBase):
     def test_a_released_module_is_suspended_when_a_family_it_uses_is_no_longer_released(self):
         from . import content_review
         mod = 'module:MATH.number.multi-multiplication'
-        for item in ('family:mmul', 'family:mul', mod):
+        for item in [*(f'family:{f}' for f in content_review.items()[mod]['families']), mod]:
             for who, d in ((self.educator, 'submit'), (self.educator, 'approve'), (self.manager, 'release')):
                 self.assertEqual(self.decide(who, item, d).status_code, 201, (item, d))
         self.assertEqual(self.state(mod)['state'], 'released')
