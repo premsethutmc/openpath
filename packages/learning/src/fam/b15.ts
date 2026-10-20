@@ -1284,6 +1284,7 @@ export const B15: Def[] = [
     keep: pfOk,
     cap: 400,
     difficulty: ([a, b, A, B]) => (a >= 0 && A > 0 && B > 0 ? 1 : A > 0 || B > 0 ? 2 : 3),
+    word: ([a, b, A, B]) => `A water-works engineer in Salem tests a tank fed by pipes of two kinds. With the pump set at level x (x > ${Math.max(a, b) + 1}), one pipe of the first kind fills the tank in ${fac(a)} hours and one pipe of the second kind in ${fac(b)} hours; a pipe fitted the other way round empties the tank at the same rate. The measured combined rate is ${brk(lin(A + B, -(A * b + B * a)))}/(${poly([1, -(a + b), a * b])}) tanks per hour. Splitting it into partial fractions A/${bx(a)} + B/${bx(b)} gives the number of pipes of each kind (a negative number counts emptying pipes). Write the pair (A, B).`,
     teach: {
       idea: "(px + q)/((x − a)(x − b)) = A/(x − a) + B/(x − b) means px + q = A(x − b) + B(x − a) for every x, so choosing x = a and x = b each removes one unknown.",
       method: "Factorise the denominator, multiply through, then put x = a to find A and x = b to find B. Check at one more value of x.",
@@ -3086,6 +3087,24 @@ function pfiText([q, a, b, A, B]: number[]) {
   if (q === 0) return `Find ∫ ${brk(lin(A + B, -(A * b + B * a)))}/(${poly([1, -(a + b), a * b])}) dx by first resolving the integrand into partial fractions. (Write log for the natural logarithm; the constant C may be left out.)`;
   return `Find ∫ (${lin(1, A)})/${bx(a)} dx by first writing the integrand as 1 + c/${bx(a)}. (Write log for the natural logarithm; the constant C may be left out.)`;
 }
+
+// ---------------------------------------------------------------- reading an interval from a number line
+/** [k, a, w, s]: k 0 the stretch from a to a + w (ends closed by the bits of s); 1 x ≥ / > a; 2 x ≤ / < a; 3 outside a … a + w */
+const D_NLR: [number, number][] = [[0, 3], [-6, 5], [1, 6], [0, 3]];
+const nlrOk = (p: number[]) => inDom(p, D_NLR) && (p[0] === 0 ? true : p[0] === 3 ? p[3] === 0 || p[3] === 3 : p[2] === 1 && p[3] <= 1);
+function nlrPieces([k, a, w, s]: number[], flip = false): Piece[] {
+  const lc = flip ? !(s & 1) : !!(s & 1);
+  const hc = flip ? !(s & 2) : !!(s & 2);
+  if (k === 0) return [[a, lc, a + w, hc]];
+  if (k === 1) return [[a, lc, null, false]];
+  if (k === 2) return [[null, false, a, lc]];
+  return [[null, false, a, lc], [a + w, hc, null, false]];
+}
+const nlrAns = (p: number[]) => ivs(nlrPieces(p));
+const nlrFig = (p: number[]) => {
+  const [, a, w] = p;
+  return { type: "numberline", from: a - 3, to: a + (p[0] === 0 || p[0] === 3 ? w : 0) + 3, intervals: nlrPieces(p).map(([lo, loClosed, hi, hiClosed]) => ({ lo, hi, loClosed, hiClosed })) };
+};
 
 const NEW15: Def[] = [
   // ============================================================ roster, set-builder and descriptive forms
@@ -4914,6 +4933,60 @@ const NEW15: Def[] = [
       ],
     },
     limits: "Two distinct linear factors, or one linear factor after a division; repeated and quadratic factors are left out.",
+  },
+  // ============================================================ reading an interval off a number line
+  {
+    id: "aonlread",
+    arity: 4,
+    title: "Reading an interval from its number-line picture",
+    competency: SETS,
+    type: "interval",
+    mc: true,
+    parse: none,
+    // [k, a, w, s]: see nlrPieces; s bit 1 closes the left end, bit 2 the right end
+    reject: (p) => (nlrOk(p) ? null : "A bounded stretch, a ray, or the outside of a stretch, with whole-number ends."),
+    prompt: () => "The shaded part of the number line in the picture is a set of real numbers (a filled dot means the end belongs to the set, a hollow dot that it does not, an arrow that it goes on for ever). Write the set in interval notation (or as an inequality in x).",
+    figure: nlrFig,
+    solve: (p) => ({ steps: [{ id: "ends", op: "read", competency: SETS, inputs: [p[0]], value: nlrAns(p) }, { id: "write", op: "convert", competency: "MATH.sets-relations.real-intervals", inputs: [nlrAns(p)], value: nlrAns(p) }], answer: nlrAns(p) }),
+    // independent: test every x = k/120 against the picture's description (end values and dot types), in whole numbers
+    validate: ([k, a, w, s], v) =>
+      agrees(v, (j, N) => {
+        const L = j - a * N;
+        const R = (a + w) * N - j;
+        const inL = L > 0 || (L === 0 && (s & 1) === 1);
+        const inR = R > 0 || (R === 0 && (s & 2) === 2);
+        if (k === 0) return inL && inR;
+        if (k === 1) return inL;
+        if (k === 2) return -L > 0 || (L === 0 && (s & 1) === 1);
+        return -L > 0 || (L === 0 && (s & 1) === 1) || -R > 0 || (R === 0 && (s & 2) === 2);
+      }),
+    bugs: (p) => {
+      const [k, a] = p;
+      const ans = nlrAns(p);
+      const out: Bug[] = [
+        { id: "dots-swapped", kind: "conceptual", competency: SETS, says: "Filled and hollow dots were read the other way round: a filled dot means the end IS in the set (square bracket, ≤), a hollow dot that it is not (round bracket, <).", predict: ivs(nlrPieces(p, true)) },
+      ];
+      if (k === 1 || k === 2) out.push({ id: "direction", kind: "conceptual", competency: SETS, says: `The arrow was read the wrong way: the shading goes to the ${k === 1 ? "right, towards +∞" : "left, towards −∞"}.`, predict: ivs(k === 1 ? [[null, false, a, !!(p[3] & 1)]] : [[a, !!(p[3] & 1), null, false]]) });
+      if (k === 0 || k === 3) out.push({ id: "all-closed", kind: "procedural", competency: SETS, says: "Every end was written with a square bracket; look at each dot: only filled dots belong to the set.", predict: ivs(nlrPieces(p).map(([lo, , hi]) => [lo, lo !== null, hi, hi !== null] as Piece)) });
+      if (k === 3) out.push({ id: "inside", kind: "conceptual", competency: SETS, says: "The unshaded middle was written; the set is the shaded part, the two outer pieces.", predict: ivs([[a, !(p[3] & 1), a + p[2], !(p[3] & 2)]]) });
+      return out.filter((b) => b.predict !== ans);
+    },
+    distractors: (p) => [ivs(nlrPieces(p, true)), "(−∞, ∞)"],
+    variants: () => [],
+    explain: (s) => (s.id === "ends" ? `Read the ends and their dots: ${s.value}` : `In interval notation: ${s.value}`),
+    domain: D_NLR,
+    keep: nlrOk,
+    difficulty: ([k, , , s]) => (k >= 1 && k <= 2 ? 1 : k === 0 && (s === 0 || s === 3) ? 2 : 3),
+    word: () => "A storage label on a box of vaccines at a Madurai health centre shows, as the shaded part of the number line in the picture, the temperatures (in °C) at which the vaccines may be kept (a filled dot means that temperature is allowed, a hollow dot that it is not, an arrow that the shading goes on). Write the set of allowed temperatures in interval notation (or as an inequality in x).",
+    teach: {
+      idea: "On a number line, the shaded part is the set; a filled dot at an end means the end belongs to it ([ ] or ≤), a hollow dot that it does not (( ) or <), and an arrow that it goes on to ∞ or −∞ (always a round bracket).",
+      method: "Read the left end and its dot, then the right end and its dot (or the arrow), and write the smaller end first. Two shaded pieces are joined with ∪.",
+      alternatives: [
+        { id: "test", title: "Test a few numbers", kind: "procedural", text: ["Pick a number inside the shading, one outside, and each end.", "Your interval must contain exactly the numbers that are shaded (and the filled ends)."], visual: (p) => nlrFig(p) },
+        { id: "words", title: "Say it in words first", kind: "conceptual", text: ["'All numbers from −2, including −2, up to 3, not including 3' is [−2, 3).", "Then turn each part of the sentence into a bracket."] },
+      ],
+    },
+    limits: "Whole-number ends; one bounded stretch, a ray, or the two rays outside a stretch.",
   },
 ];
 B15.push(...NEW15);
