@@ -1747,7 +1747,7 @@ function convSides([t, kind, order]: number[]): number[] {
   const s = kind === 0 ? [a, b, c] : kind === 1 ? [a, b, c + 1] : [a + 1, b, c];
   return order === 0 ? s : order === 1 ? [s[2], s[0], s[1]] : [s[0], s[2], s[1]];
 }
-const convOk = ([t, kind, order, ctx]: number[]) => t >= 0 && t < TRIPLES.length && kind >= 0 && kind <= 2 && order >= 0 && order <= 2 && (ctx === 0 || ctx === 1) && !(kind === 2 && TRIPLES[t][0] + 1 === TRIPLES[t][1]);
+const convOk = ([t, kind, order, ctx]: number[]) => t >= 0 && t < TRIPLES.length && kind >= 0 && kind <= 2 && order >= 0 && order <= 2 && (ctx === 0 || (ctx === 1 && order === 0)) && !(kind === 2 && TRIPLES[t][0] + 1 === TRIPLES[t][1]);
 const CONV_CH = ["Yes, it is right-angled", "No, it is not right-angled"];
 const convOpts = (p: number[]) => shuffled(`ahconv:${p}`, CONV_CH);
 const genOk = ([mode, m, n]: number[]) => (mode <= 1 ? mode >= 0 && m >= 2 && m <= 20 && n === 0 : mode <= 4 ? m >= 2 && m <= 9 && n >= 1 && n < m : false);
@@ -1780,7 +1780,7 @@ function varyRows(kind: number, seed: number): number[][] {
 }
 const varyOk = ([kind, seed]: number[]) => kind >= 0 && kind <= 3 && seed >= 0 && seed <= 29 && varyRows(kind, seed).every(([x, y]) => x > 0 && y > 0) && new Set(varyRows(kind, seed).map((r) => r[0])).size === 4;
 const MAN = [
-  { thing: (w: number, d: number) => `${w} workers can build a wall in ${d} days`, ask: (w: number) => `How many days would ${w} workers take, working at the same rate?`, word: (w1: number, d1: number, w2: number) => `A farmer finds that ${w1} labourers harvest his paddy field in ${d1} days. This year only ${w2} labourers are free. If they all work at the same rate, how many days will the harvest take?` },
+  { thing: (w: number, d: number) => `${w} workers can build a wall in ${d} days`, ask: (w: number) => `How many days would ${w} workers take, working at the same rate?`, word: (w1: number, d1: number, w2: number) => `A farmer finds that ${w1} labourers harvest his paddy field in ${d1} days. This year ${w2} labourers come to work. If they all work at the same rate, how many days will the harvest take?` },
   { thing: (w: number, d: number) => `A car going at ${w} km per hour takes ${d} hours for a journey`, ask: (w: number) => `How many hours would the same journey take at ${w} km per hour?`, word: (w1: number, d1: number, w2: number) => `A bus from Madurai to Chennai takes ${d1} hours at an average speed of ${w1} km per hour. How many hours would it take at an average speed of ${w2} km per hour?` },
   { thing: (w: number, d: number) => `A stock of fodder lasts ${w} cows for ${d} days`, ask: (w: number) => `How many days would it last ${w} cows, each eating the same amount?`, word: (w1: number, d1: number, w2: number) => `A hostel's stock of rice lasts ${w1} students for ${d1} days. If ${w2} students stay instead, eating the same amount each, how many days will the rice last?` },
 ];
@@ -2386,7 +2386,7 @@ B08.push(
       const diff = d1 - (w2 - w1);
       return [
         Bq("used-direct", "conceptual", INV, `It was treated as direct proportion (more ${ctx === 1 ? "speed" : ctx === 0 ? "workers" : "cows"}, more ${ctx === 1 ? "hours" : "days"}). Here more ${ctx === 1 ? "speed means less time" : ctx === 0 ? "workers means fewer days" : "cows means fewer days"}: the product stays the same.`, Number.isInteger(direct) && direct !== ans ? direct : null),
-        Bq("take-away-difference", "conceptual", INV, `The difference ${w2 - w1} was ${w2 > w1 ? "taken from" : "added to"} the ${ctx === 1 ? "hours" : "days"}. Inverse proportion multiplies and divides: ${w1} × ${d1} = ${w2} × ?.`, diff > 0 && diff !== ans ? diff : null),
+        Bq("take-away-difference", "conceptual", INV, `The difference ${Math.abs(w2 - w1)} was ${w2 > w1 ? "taken from" : "added to"} the ${ctx === 1 ? "hours" : "days"}. Inverse proportion multiplies and divides: ${w1} × ${d1} = ${w2} × ?.`, diff > 0 && diff !== ans ? diff : null),
       ];
     },
     variants: () => [],
@@ -2521,7 +2521,7 @@ B08.push(
     word: (p) => {
       const [g, shape, dir, n] = p;
       const where = g === 0 ? "the school calendar" : "the class's 1 to 100 number chart";
-      return dir === 0 ? `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where}. The smallest number in the box is ${n}. ${name(n)} says the numbers add up to a value given by an expression in n. What is the sum?` : `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where} and tells you the numbers add up to ${calSum(p)}. What is the smallest number in the box?`;
+      return dir === 0 ? `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where}. The smallest number in the box is ${n}. Using an expression in n instead of adding them one by one, what do the numbers in the box add up to?` : `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where} and tells you the numbers add up to ${calSum(p)}. What is the smallest number in the box?`;
     },
     teach: {
       idea: `In a grid with w numbers in each row, the number to the right of n is n + 1 and the number below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.`,

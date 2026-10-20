@@ -5,6 +5,7 @@
  * and multi-step money and capacity problems. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Value, Visual } from "../family-kit";
+import { numericValue } from "../answer-types";
 
 const PATR = "MATH.algebra.pattern-rules";
 const GROW = "MATH.algebra.growing-patterns";
@@ -5292,3 +5293,336 @@ const CORE_MORE: Def[] = [
 ];
 const fmtQ = (x: number) => (Number.isInteger(x) ? n_(x) : (() => { for (let d = 2; d <= 12; d++) if (Math.abs(Math.round(x * d) - x * d) < 1e-9) return `${n_(Math.round(x * d))}/${d}`; return String(x); })());
 B05.push(...CORE_MORE);
+const linStory = ([kind, x, m]: number[]) => {
+  const d = linData([kind, x, m]);
+  if (kind === 0) return { ...d, S: (d.k + 1) * x + 2 * d.n, ans: x };
+  if (kind === 1) return { ...d, S: 3 * d.k * x + 3 * d.k, ans: d.k * x };
+  if (kind === 2) return { ...d, S: 4 * x + 2 * d.k, ans: x };
+  if (kind === 3) {
+    const n = 1 + (m % (d.k - 1));
+    return { ...d, n, S: ((d.k + n) * d.k * x) / d.k, ans: d.k * x };
+  }
+  const B = 100 + 10 * m;
+  return { ...d, S: B, ans: x, A: B + (d.n - d.k) * x };
+};
+const surcQ = ([kind, s]: number[]) => {
+  const r = rng(s * 19 + 4400);
+  if (kind === 0) {
+    const n = [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 18, 20][s % 13];
+    const k = 2 + Math.floor(r() * 8);
+    const [pq, qq] = [[1, 4], [4, 9], [9, 16], [1, 9], [4, 25], [9, 4], [16, 9], [25, 36]][Math.floor(s / 13) % 8];
+    const base = [`√${n}`, `√${k * k}`, `∛${[8, 27, 64, 125][k % 4]}`, `√(${pq}/${qq})`];
+    return { ...shuffled(`aesurc:${kind},${s}`, base), base };
+  }
+  const p = 2 + Math.floor(r() * 5);
+  const q = 2 + Math.floor(r() * 5);
+  const m = SQFREE[Math.floor(r() * SQFREE.length)];
+  const n = SQFREE[Math.floor(r() * SQFREE.length)];
+  const base = [p * p * m > q * q * n ? surdS(p, m) : surdS(q, n), p * p * m > q * q * n ? surdS(q, n) : surdS(p, m), "They are equal"];
+  return { ...shuffled(`aesurc:${kind},${s}`, base), base, p, q, m, n };
+};
+
+const SURD_MORE: Def[] = [
+  {
+    id: "aelinw",
+    arity: 3,
+    title: "Word problems that lead to a linear equation",
+    competency: LINR,
+    type: "integer",
+    mc: true,
+    // [kind, x, m]: 0 ages; 1 three consecutive multiples; 2 a rectangle's perimeter; 3 a fraction of a number added to it; 4 equal savings
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 4], [2, 20], [0, 23]])) return "One of five kinds of story, with a whole-number answer.";
+      const [kind, x, m] = p;
+      if (kind === 0) return x < 5 || x > 15 || m > 13 ? "A child aged 5 to 15." : null;
+      if (kind === 1) return m > 8 || x > 12 ? "Multiples of 2 to 10." : null;
+      if (kind === 2) return m > 11 || x < 3 ? "A width of at least 3." : null;
+      if (kind === 3) return m > 11 || x > 12 ? "A number up to 60." : null;
+      return x > 15 ? "Up to 15 weeks." : null;
+    },
+    prompt: (p) => {
+      const d = linStory(p);
+      const [kind] = p;
+      return [
+        `${name(p[1])}'s mother is ${d.k} times as old as ${name(p[1])}. In ${d.n} years, the sum of their ages will be ${d.S}. How old is ${name(p[1])} now?`,
+        `The sum of three consecutive multiples of ${d.k} is ${d.S}. What is the smallest of them?`,
+        `The length of a rectangle is ${d.k} cm more than its width, and its perimeter is ${d.S} cm. What is its width, in cm?`,
+        `When ${d.n}/${d.k} of a number is added to the number, the result is ${d.S}. What is the number?`,
+        `${name(p[1])} has ₹${(d as { A: number }).A} and saves ₹${d.k} every week. ${name(p[1] + 1)} has ₹${d.S} and saves ₹${d.n} every week. After how many weeks will they have the same amount?`,
+      ][kind];
+    },
+    solve: (p) => {
+      const d = linStory(p);
+      const eq = [`(${d.k} + 1)x + 2 × ${d.n} = ${d.S}`, `x + (x + ${d.k}) + (x + ${2 * d.k}) = ${d.S}`, `2(x + x + ${d.k}) = ${d.S}`, `x + ${d.n}x/${d.k} = ${d.S}`, `${(d as { A: number }).A} + ${d.k}x = ${d.S} + ${d.n}x`][p[0]];
+      return { steps: [{ id: "model", op: "model", competency: LINR, inputs: [eq], value: eq }, { id: "solve", op: "solve", competency: "MATH.algebra.linear-equations", inputs: [eq], value: d.ans }], answer: d.ans };
+    },
+    // independent: try every whole number and keep the one that fits the story
+    validate: (p, v) => {
+      const d = linStory(p);
+      const fits = (t: number) => [
+        t + d.n + (d.k * t + d.n) === d.S,
+        t % d.k === 0 && t + (t + d.k) + (t + 2 * d.k) === d.S,
+        2 * (t + (t + d.k)) === d.S,
+        t * d.k + t * d.n === d.S * d.k,
+        (d as { A: number }).A + d.k * t === d.S + d.n * t,
+      ][p[0]];
+      const hits: number[] = [];
+      for (let t = 1; t <= 400; t++) if (fits(t)) hits.push(t);
+      return hits.length === 1 && hits[0] === v;
+    },
+    bugs: (p) => {
+      const d = linStory(p);
+      const [kind] = p;
+      const int = (x: number) => (Number.isInteger(x) && x > 0 ? x : null);
+      return [
+        [
+          { id: "years-once", kind: "procedural", competency: LINR, says: `The ${d.n} years were added only once; both people get ${d.n} years older, so add 2 × ${d.n}.`, predict: int((d.S - d.n) / (d.k + 1)) },
+          { id: "future-ignored", kind: "procedural", competency: LINR, says: `The ages now were made to add up to ${d.S}; that is their sum in ${d.n} years.`, predict: int(d.S / (d.k + 1)) },
+        ],
+        [
+          { id: "middle", kind: "procedural", competency: LINR, says: `${d.S} ÷ 3 gives the middle multiple; the smallest is ${d.k} less.`, predict: d.ans + d.k },
+          { id: "consecutive-numbers", kind: "conceptual", competency: LINR, says: `The numbers were taken as x, x + 1, x + 2; consecutive multiples of ${d.k} go up by ${d.k}.`, predict: int((d.S - 3) / 3) },
+        ],
+        [
+          { id: "half-perimeter", kind: "conceptual", competency: "MATH.measurement.rectangle-perimeter", says: "Length + width was set equal to the perimeter; the perimeter goes round all four sides: 2 × (length + width).", predict: int((d.S - d.k) / 2) },
+          { id: "length-given", kind: "procedural", competency: LINR, says: "The length was given; the question asks for the width.", predict: d.ans + d.k },
+        ],
+        [{ id: "fraction-of-result", kind: "conceptual", competency: LINR, says: `${d.n}/${d.k} of the result was taken away; the fraction is of the unknown number, so the equation is x + ${d.n}x/${d.k} = ${d.S}.`, predict: int((d.S * (d.k - d.n)) / d.k) }],
+        [
+          { id: "savings-added", kind: "conceptual", competency: LINR, says: "The two weekly savings were added; the gap closes by the DIFFERENCE of what they save each week.", predict: int(((d as { A: number }).A - d.S) / (d.k + d.n)) },
+          { id: "gap-only", kind: "procedural", competency: LINR, says: "The difference in money now was given; divide it by how much the gap closes each week.", predict: (d as { A: number }).A - d.S },
+        ],
+      ][kind] as Bug[];
+    },
+    distractors: (p) => {
+      const a = linStory(p).ans;
+      return [a + 1, a + 2, a - 1].filter((x) => x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "model" ? `Let x be the unknown; the story gives ${s.value}` : `Solve the equation: x = ${s.value}${String(s.inputs[0]).startsWith("x + (") ? " (the smallest multiple)" : ""}`),
+    domain: [[0, 4], [2, 20], [0, 23]],
+    cap: 450,
+    difficulty: ([kind]) => (kind === 2 ? 1 : kind === 0 || kind === 1 ? 2 : 3),
+    word: (p) => {
+      const d = linStory(p);
+      return [
+        `At a family function, ${name(p[1])}'s grandmother says: "Your mother is ${d.k} times as old as you, and in ${d.n} years your two ages will add up to ${d.S}." How old is ${name(p[1])} now?`,
+        `${name(p[1])} buys three boxes of sweets; the numbers of sweets in them are three consecutive multiples of ${d.k}, ${d.S} sweets in all. How many sweets are in the smallest box?`,
+        `A farmer fences a rectangular plot whose length is ${d.k} m more than its width, using ${d.S} m of fencing for the whole boundary. How wide is the plot, in m?`,
+        `A shopkeeper adds ${d.n}/${d.k} of a number of coconuts to his stock of that many coconuts and now has ${d.S}. How many did he have at first?`,
+        `${name(p[1])} has ₹${(d as { A: number }).A} in a piggy bank and adds ₹${d.k} each week; ${name(p[1] + 1)} has ₹${d.S} and adds ₹${d.n} each week. After how many weeks will both piggy banks hold the same?`,
+      ][p[0]];
+    },
+    teach: {
+      idea: "A word problem becomes an equation when the unknown gets a letter and each sentence is written in symbols. Solving the equation and checking the answer in the story finishes the problem.",
+      method: "Let x be what is asked. Write the other quantities with x (mother's age kx, next multiple x + k, length x + k). Write the fact the story gives as an equation, solve it, and check in the words of the story.",
+      alternatives: [
+        { id: "bar_model", title: "Draw a bar model", kind: "conceptual", text: ["Draw a bar for the unknown and bars for the other quantities in terms of it.", "The total length of the bars is the given total: share out what is left after the known parts."] },
+      ],
+    },
+    limits: "Five everyday stories with whole-number answers; equations with x in a denominator are not here.",
+  },
+  {
+    id: "aesurop",
+    arity: 4,
+    title: "Adding, subtracting, multiplying and dividing surds",
+    competency: SURD,
+    type: "choice",
+    // [kind, x, y, mi]: 0 √(x²m) + √(y²m); 1 √(x²m) − √(y²m); 2 √(xm) × √(ym); 3 √(x²ym) ÷ √(ym), with m = SQFREE[mi]
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 3], [1, 6], [1, 6], [0, 6]])) return "Two surds to combine.";
+      const [kind, x, y] = p;
+      if (kind <= 1 && (x === y || (kind === 1 && x < y) || x === 1 && y === 1)) return "Two different like surds (the larger first for a difference).";
+      if (kind === 2 && (x === y || x < 2 || y < 2)) return "Two different surds to multiply.";
+      if (kind === 3 && (x < 2 || y > 5)) return "A quotient that is not 1.";
+      const q = surOpQ(p);
+      const vals = q.base.map((o) => numericValue(o));
+      if (new Set(q.base).size !== 4 || vals.some((v) => v === null) || vals.filter((v) => Math.abs(v! - q.val) < 1e-9).length !== 1) return "Four options with exactly one right.";
+      return null;
+    },
+    prompt: (p) => `Simplify ${surOpQ(p).text}. Which is right?`,
+    choices: (p) => shuffled(`aesurop:${p}`, surOpQ(p).base).choices,
+    solve: (p) => {
+      const q = shuffled(`aesurop:${p}`, surOpQ(p).base);
+      return { steps: [{ id: ["add", "subtract", "multiply", "divide"][p[0]], op: "simplify", competency: SURD, inputs: [surOpQ(p).text], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: evaluate each option numerically and compare with the value of the original expression
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const o = shuffled(`aesurop:${p}`, surOpQ(p).base).choices[v];
+      const [kind, x, y, mi] = p;
+      const m = SQFREE[mi];
+      const target = kind === 0 ? Math.sqrt(x * x * m) + Math.sqrt(y * y * m) : kind === 1 ? Math.sqrt(x * x * m) - Math.sqrt(y * y * m) : kind === 2 ? Math.sqrt(x * m) * Math.sqrt(y * m) : Math.sqrt(x * x * y * m) / Math.sqrt(y * m);
+      const val = o === undefined ? null : numericValue(o);
+      return val !== null && Math.abs(val - target) < 1e-9;
+    },
+    bugs: (p) => {
+      const q = shuffled(`aesurop:${p}`, surOpQ(p).base);
+      const [kind] = p;
+      return [
+        [{ id: "add-under-root", kind: "conceptual", competency: SURD, says: "The numbers under the roots were added; √a + √b is not √(a + b). Simplify each surd first, then add like surds (like terms).", predict: q.at(1) }, { id: "multiply-coefficients", kind: "procedural", competency: SURD, says: "The numbers in front were multiplied; like surds are added like like terms: 3√2 + 2√2 = 5√2.", predict: q.at(2) }],
+        [{ id: "subtract-under-root", kind: "conceptual", competency: SURD, says: "The numbers under the roots were subtracted; √a − √b is not √(a − b). Simplify each surd first, then subtract like surds.", predict: q.at(1) }, { id: "add-coefficients", kind: "procedural", competency: SURD, says: "The numbers in front were added instead of subtracted.", predict: q.at(2) }],
+        [{ id: "add-for-multiply", kind: "conceptual", competency: SURD, says: "The numbers under the roots were added; √a × √b = √(ab).", predict: q.at(1) }, { id: "square-not-rooted", kind: "procedural", competency: SURD, says: "A square factor came out of the root without being square-rooted; √(k² × m) = k√m.", predict: q.at(2) }],
+        [{ id: "square-not-rooted", kind: "procedural", competency: SURD, says: "The quotient under the root was not square-rooted; √a ÷ √b = √(a ÷ b).", predict: q.at(2) }, { id: "subtract-for-divide", kind: "conceptual", competency: SURD, says: "The numbers under the roots were subtracted; √a ÷ √b = √(a/b).", predict: q.at(3) }],
+      ][kind] as Bug[];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "add" || s.id === "subtract" ? `Simplify each surd in ${s.inputs[0]} and combine the like surds` : s.id === "multiply" ? `√a × √b = √(ab); then take out the largest square factor` : `√a ÷ √b = √(a ÷ b)`),
+    domain: [[0, 3], [1, 6], [1, 6], [0, 6]],
+    cap: 450,
+    difficulty: ([kind]) => (kind <= 1 ? 2 : 3),
+    word: (p) => {
+      const [kind, x, y, mi] = p;
+      const m = SQFREE[mi];
+      return [
+        `Two square tiles have areas ${x * x * m} cm² and ${y * y * m} cm², so their sides are ${surOpQ(p).text.replace(" + ", " cm and ")} cm. Placed side by side, how long is the row, in simplest surd form? (It is ${surOpQ(p).text}.)`,
+        `A square plot of area ${x * x * m} m² has a square bed of area ${y * y * m} m² in one corner. How much longer is the plot's side than the bed's? (It is ${surOpQ(p).text} m.)`,
+        `A rectangle's sides are √${x * m} m and √${y * m} m. Which is its area in simplest form? (It is ${surOpQ(p).text} m².)`,
+        `A rectangle of area √${x * x * y * m} m² has a width of √${y * m} m. Which is its length in simplest form? (It is ${surOpQ(p).text} m.)`,
+      ][kind];
+    },
+    teach: {
+      idea: "Surds behave like letters: 3√2 + 5√2 = 8√2 (like surds), but √2 + √3 cannot be combined. For multiplying and dividing, √a × √b = √(ab) and √a ÷ √b = √(a/b).",
+      method: "To add or subtract, first simplify each surd (take out square factors) and then combine like surds. To multiply or divide, combine under one root and simplify.",
+      alternatives: [
+        { id: "decimals", title: "Check with decimals", kind: "procedural", text: ["√2 ≈ 1.414, √3 ≈ 1.732. Work out both the question and your answer with these decimals.", "If the decimals agree, the surd answer is right."] },
+      ],
+    },
+    limits: "Two surds with small whole numbers; expressions with three or more surds and binomial products are other families.",
+  },
+  {
+    id: "aesurc",
+    arity: 2,
+    title: "Recognising surds and comparing their sizes",
+    competency: SURD,
+    type: "choice",
+    // [kind, s]: 0 which of four roots is a surd; 1 which of p√m and q√n is greater
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 103]])) return "Roots to recognise or compare.";
+      const q = surcQ(p);
+      if (new Set(q.base).size !== q.base.length) return "Different options.";
+      if (p[0] === 1 && q.p! * q.p! * q.m! === q.q! * q.q! * q.n!) return "Two surds of different size.";
+      if (p[0] === 1 && (q.m === q.n || q.p === q.q)) return "Neither the coefficients nor the numbers under the root alone decide.";
+      return repeatOf(`aesurc${p[0]}`, 104, (t) => [...surcQ([p[0], t]).base].sort().join("|"), p[1]) ? "An earlier choice already shows these (distinct@1)." : null;
+    },
+    prompt: ([kind]) => (kind === 0 ? "Which of these is a surd (a root that is an irrational number)?" : "Which is greater?"),
+    choices: (p) => surcQ(p).choices,
+    solve: (p) => {
+      const q = surcQ(p);
+      return { steps: [{ id: kind0(p) ? "irrational" : "square-both", op: "compare", competency: SURD, inputs: q.base.slice(0, 2), value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: kind 0 — evaluate each option and test whether it is a fraction with a small bottom number;
+    // kind 1 — compare the decimal values
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = surcQ(p);
+      const o = q.choices[v];
+      if (o === undefined) return false;
+      const valOf = (t: string) => (t.startsWith("∛") ? Math.cbrt(Number(t.slice(1))) : numericValue(t.replace(/√\((\d+)\/(\d+)\)/, "sqrt($1/$2)")));
+      if (p[0] === 0) {
+        const rational = (x: number) => {
+          for (let d = 1; d <= 60; d++) if (Math.abs(Math.round(x * d) - x * d) < 1e-9) return true;
+          return false;
+        };
+        const irr = q.choices.filter((t) => !rational(valOf(t)!));
+        return irr.length === 1 && irr[0] === o;
+      }
+      const [a, b] = [valOf(q.base[0])!, valOf(q.base[1])!];
+      return o === (Math.abs(a - b) < 1e-12 ? "They are equal" : a > b ? q.base[0] : q.base[1]);
+    },
+    bugs: (p) => {
+      const q = surcQ(p);
+      if (p[0] === 0) return [
+        { id: "any-root", kind: "conceptual", competency: SURD, says: `${q.base[1]} has a root sign, but it is a whole number (${Math.round(Math.sqrt(Number(q.base[1].slice(1))))}); a surd is a root that cannot be written exactly as a fraction.`, predict: q.at(1) },
+        { id: "fraction-root", kind: "conceptual", competency: SURD, says: `${q.base[3]} is a fraction under a root, but both its top and bottom are perfect squares, so it is a rational number.`, predict: q.at(3) },
+      ];
+      const big = q.base[0];
+      const coefBig = q.p! > q.q! ? surdS(q.p!, q.m!) : surdS(q.q!, q.n!);
+      const rootBig = q.m! > q.n! ? surdS(q.p!, q.m!) : surdS(q.q!, q.n!);
+      return [
+        { id: "coefficient-only", kind: "conceptual", competency: SURD, says: "Only the numbers in front were compared; the number under the root matters too. Square both: (p√m)² = p²m.", predict: coefBig !== big ? q.at(q.base.indexOf(coefBig)) : null },
+        { id: "root-only", kind: "conceptual", competency: SURD, says: "Only the numbers under the roots were compared; the numbers in front matter too. Square both and compare p²m with q²n.", predict: rootBig !== big ? q.at(q.base.indexOf(rootBig)) : null },
+      ].filter((b) => b.predict !== null) as Bug[];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "irrational" ? "A surd is a root that is irrational: the number under √ is not a perfect square (and the cube root is not of a perfect cube)" : "Square both: (p√m)² = p² × m; the bigger square belongs to the bigger surd"),
+    domain: [[0, 1], [0, 103]],
+    difficulty: ([kind]) => (kind === 0 ? 1 : 2),
+    word: ([kind, s]) => {
+      if (kind === 0) return `${name(s)} measures the sides of four squares whose areas are given, and writes each side as a root. Which side length is a surd (an irrational number)?`;
+      return `Two square gardens have sides ${surcQ([kind, s]).base[0]} m and ${surcQ([kind, s]).base[1]} m. Which garden has the longer side?`;
+    },
+    teach: {
+      idea: "A surd is a root of a rational number that is itself irrational, like √2 or √12. √9 = 3 and ∛8 = 2 are not surds. To compare p√m with q√n, compare their squares p²m and q²n.",
+      method: "For 'is it a surd?', check whether the number under the root is a perfect square (or cube). For 'which is greater?', put the outside number inside: 3√2 = √18 and 2√5 = √20, so 2√5 is greater.",
+      alternatives: [
+        { id: "inside", title: "Move everything under the root", kind: "procedural", text: ["p√m = √(p² × m): 4√3 = √48.", "Then the surd with the bigger number under the root is bigger."] },
+      ],
+    },
+    limits: "Square roots and cube roots of small whole numbers and fractions; ordering more than two surds is not here.",
+  },
+  {
+    id: "aerat",
+    arity: 5,
+    title: "Rationalising the denominator",
+    competency: SURD,
+    type: "choice",
+    // [kind, a, b, c, sg]: 0 a/√b; 1 a/(√b + c) (sg 0) or a/(√b − c) (sg 1)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [1, 12], [2, 15], [0, 4], [0, 1]])) return "a/√b or a/(√b ± c).";
+      const [kind, , b, c, sg] = p;
+      if (sqf(b)[0] !== 1) return "b without a square factor.";
+      if (kind === 0 ? c !== 0 || sg !== 0 : c < 1 || c * c === b) return "c only for a binomial denominator, and b ≠ c².";
+      const q = ratQ(p);
+      const vals = q.base.map((o) => numericValue(o));
+      return new Set(q.base).size !== 4 || vals.some((v) => v === null) || vals.filter((v) => Math.abs(v! - q.val) < 1e-9).length !== 1 ? "Four different options, exactly one equal to the expression." : null;
+    },
+    prompt: (p) => `Rationalise the denominator of ${ratQ(p).text} and simplify. Which is right?`,
+    choices: (p) => shuffled(`aerat:${p}`, ratQ(p).base).choices,
+    solve: (p) => {
+      const q = shuffled(`aerat:${p}`, ratQ(p).base);
+      return { steps: [{ id: p[0] ? "conjugate" : "root", op: "multiply", competency: SURD, inputs: [ratQ(p).text], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: evaluate the option and the original expression as decimals, and check the option's denominator has no root
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const o = shuffled(`aerat:${p}`, ratQ(p).base).choices[v];
+      if (o === undefined) return false;
+      const [kind, a, b, c, sg] = p;
+      const orig = kind === 0 ? a / Math.sqrt(b) : a / (Math.sqrt(b) + (sg ? -c : c));
+      const val = numericValue(o);
+      const den = o.includes(")/") ? o.split(")/")[1] : o.includes("/") ? o.split("/").pop()! : "1";
+      return val !== null && Math.abs(val - orig) < 1e-9 && !den.includes("√");
+    },
+    bugs: (p) => {
+      const q = shuffled(`aerat:${p}`, ratQ(p).base);
+      return p[0] === 0
+        ? [{ id: "top-only", kind: "procedural", competency: SURD, says: `Only the top was multiplied by √${p[2]}; multiply the top and the bottom by √${p[2]}, so the bottom becomes ${p[2]}.`, predict: q.at(1) }, { id: "root-dropped", kind: "conceptual", competency: SURD, says: "The root sign was simply removed from the bottom; that changes the value. Multiply top and bottom by the root instead.", predict: q.at(2) }]
+        : [
+            { id: "plus-c-squared", kind: "conceptual", competency: SURD, says: `(√${p[2]} + ${p[3]})(√${p[2]} − ${p[3]}) = ${p[2]} − ${p[3] * p[3]}; the product of a sum and a difference is a difference of squares, not ${p[2]} + ${p[3] * p[3]}.`, predict: q.at(1) },
+            { id: "c-not-squared", kind: "procedural", competency: SURD, says: `${p[3]} was not squared in the denominator: it should be ${p[2]} − ${p[3]}² = ${p[2] - p[3] * p[3]}.`, predict: q.at(2) },
+            { id: "sign-of-denominator", kind: "procedural", competency: SURD, says: `The denominator was worked out as ${p[3] * p[3]} − ${p[2]} instead of ${p[2]} − ${p[3] * p[3]}, which changes the sign of the answer.`, predict: q.at(3) },
+          ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "root" ? `Multiply top and bottom of ${s.inputs[0]} by the root in the bottom` : `Multiply top and bottom of ${s.inputs[0]} by the conjugate (change the sign between the terms); the bottom becomes a difference of squares`),
+    domain: [[0, 1], [1, 12], [2, 15], [0, 4], [0, 1]],
+    cap: 400,
+    difficulty: ([kind, a, b]) => (kind === 1 ? 3 : a % b === 0 ? 1 : 2),
+    word: (p) => `${name(p[1])} works out the time a pendulum takes and gets ${ratQ(p).text} seconds. The teacher asks for the answer with a rational denominator, in simplest form. Which is right?`,
+    teach: {
+      idea: "Multiplying the top and bottom of a fraction by the same number does not change its value. Choosing √b (or the conjugate √b ∓ c) makes the bottom a whole number, because √b × √b = b and (√b + c)(√b − c) = b − c².",
+      method: "For a/√b, multiply by √b/√b. For a/(√b ± c), multiply by (√b ∓ c)/(√b ∓ c). Then simplify, cancelling any common factor.",
+      alternatives: [
+        { id: "decimals", title: "Check with decimals", kind: "procedural", text: ["Work out the original fraction with a calculator-style estimate (√2 ≈ 1.414).", "Your answer must give the same decimal."] },
+      ],
+    },
+    limits: "Denominators √b or √b ± c with b from 2 to 15 (no square factor) and c from 1 to 4.",
+  },
+];
+const kind0 = (p: number[]) => p[0] === 0;
+B05.push(...SURD_MORE);
