@@ -33,6 +33,7 @@
     "src/mathematics/foundation",
     "src/year",
     "src/learning",
-    "src/review"
+    "src/review",
+    "src/curriculum"
   ]
 }
