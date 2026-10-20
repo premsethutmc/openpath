@@ -99,7 +99,8 @@ export function checkCompetency(id: string): CompetencyCheck {
   const q = m ? moduleQuestions(m) : null;
   const depth = m ? poolDepth(m) : null;
   const pool = m?.pool?.family;
-  const diag = pool ? phasePool(pool, "diagnostic") : m?.diagnostics ?? [];
+  // the diagnosis can draw on every family of the module (pools@1)
+  const diag = pool && m ? modulePhasePool(m, "diagnostic") : m?.diagnostics ?? [];
   const predicts = diag.filter((x) => (question(x).misconceptions ?? []).length > 0).length;
   const alone = q ? [...q.check, ...q.practice, ...q.transfer, ...q.retention] : [];
   // educator-marked (written@1): its assessment is written tasks an educator marks, with auto-marked component questions
