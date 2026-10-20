@@ -1,3 +1,4 @@
+import { WorkspaceRecovery } from "./WorkspaceRecovery";
 import {
   useEffect,
   useRef,
@@ -32,7 +33,7 @@ export type PaperState = {
   feedback?: { outcome: string; message: string } | null;
 };
 type Op = {
-  kind: "digit" | "replace" | "backspace" | "finish" | "select";
+  kind: "digit" | "replace" | "backspace" | "finish" | "select" | "retry" | "hint";
   digit?: string;
   field?: string;
 };
@@ -153,6 +154,19 @@ export function ProgressiveDivision({
           replace.current = true;
           setCursor(op.field!);
           input.current?.focus({ preventScroll: true });
+          continue;
+        }
+        if (op.kind === "retry" || op.kind === "hint") {
+          const a = await repo.current.action("workspace-recovery", {choice: op.kind});
+          if (!mounted.current) return;
+          setActivity(a);
+          const s = a.support.divisionPaper!;
+          paper.current = s;
+          active.current = s.active;
+          setState(s);
+          setCursor(s.active);
+          replace.current = true;
+          input.current?.focus({preventScroll: true});
           continue;
         }
         if (!active.current) continue;
@@ -310,7 +324,7 @@ export function ProgressiveDivision({
           return (
             <span
               key={f.id}
-              className={`paper-entry ${f.role} ${f.id === cursor ? "active" : ""} ${state.entries[f.id] ? "has-value" : ""}`}
+              className={`paper-entry ${f.role} ${f.id === cursor ? "active" : ""} ${state.entries[f.id] ? "has-value" : ""} ${activity.support.workspaceRecovery?.open && activity.support.workspaceRecovery.entry === f.id ? "paper-error" : ""}`}
               data-entry={f.id}
               style={row}
             >
@@ -433,6 +447,7 @@ export function ProgressiveDivision({
         {state.feedback?.message ??
           (state.complete ? "Finished!" : current?.label)}
       </p>
+      <WorkspaceRecovery state={activity.support.workspaceRecovery} onAction={choice => enqueue({kind: choice})} />
       {error && <p role="alert">{error}</p>}
       <small role="status">{saved}</small>
       <div className="paper-options">

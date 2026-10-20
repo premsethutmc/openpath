@@ -191,3 +191,9 @@
 
 /* Place every written digit on the same columns as the printed dividend, including while typing. */
 .division-paper{font-size:min(26px,calc(var(--cell)*.65))}.division-paper .paper-number{display:flex;justify-content:flex-end;align-items:center;padding:0!important}.paper-number [data-paper-digit]{flex:0 0 var(--cell);width:var(--cell);text-align:center}.paper-entry.active{outline:2px solid #7964db;border-radius:5px;background:#f4f0ff}.paper-entry.active::after{content:"";position:absolute;right:calc(var(--cell)/2);height:1em;border-right:2px solid #5d45cc;pointer-events:none}.paper-entry.active.has-value::after{right:calc((var(--cell) - 1ch)/2 - 3px)}.division-paper .paper-cursor{opacity:0;outline:none!important}
+
+.workspace-recovery { max-width: 32rem; padding: .6rem .8rem; border-left: 3px solid #b9a6dd; background: #f7f2fc; border-radius: .5rem; }
+.workspace-recovery p { margin: 0 0 .3rem; }
+.workspace-recovery > div { display: flex; flex-wrap: wrap; gap: .5rem; }
+.workspace-recovery button { min-height: 44px; }
+.paper-entry.paper-error { background: #fff0df; border-radius: .25rem; outline: 1px solid #bd8b59; }

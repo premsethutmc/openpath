@@ -46,7 +46,7 @@ jobs:
         env:
           E2E_URL: http://127.0.0.1:10000
         run: |
-          node --test e2e/progressive-division.test.mjs e2e/progressive-resume.test.mjs
+          node --test e2e/progressive-division.test.mjs e2e/progressive-resume.test.mjs e2e/workspace-recovery.test.mjs
           node --test e2e/one-answer.test.mjs
           node --test e2e/demo-student.test.mjs
           DEMO_STUDENT=1 node --test e2e/writing-year.test.mjs

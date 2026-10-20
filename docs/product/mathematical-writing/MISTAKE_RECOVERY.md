@@ -1,0 +1,17 @@
+# Contextual mathematics recovery
+
+The existing My Learning Year division paper now keeps completed incorrect entries, marks the affected cell, and offers **Try again** and **Give me a hint** below the calculation. There is no automatic answer replacement, diagnosis, screen transition or compulsory help. Typing and Backspace remain usable immediately. Short multi-digit entries are pending until completed or explicitly finished with Done/Enter.
+
+Repeated completed errors at the same cell unlock three optional levels: conceptual guidance, a different worked prerequisite example, and a short guided explanation. Help leaves the original entries and cursor intact. Retrying selects the original cell for replacement. Editing earlier entries preserves later working; existing deterministic validation checks dependencies and prevents completion while earlier arithmetic is invalid. Starting an edit removes the stale error highlight while the number is incomplete.
+
+## Reuse boundary
+
+`backend/family/workspace_recovery.py` owns subject-neutral error counts and opt-in escalation. A problem adapter supplies three hint strings. `frontend/src/writing/WorkspaceRecovery.tsx` renders the common recovery actions without scoring or mathematical logic. The current live consumer is the progressive division workspace. Fractions, algebra and calculus adapters can supply their own validated hints and stable cell IDs; this change does not invent validators or instructional content for those topics.
+
+The existing authenticated, version-checked writing action endpoint accepts `workspace-recovery` with `choice: retry | hint`. Error counts, help level and original working persist in the existing draft, not a second learner model. Each completed mathematical error retains a `progressive-validation` receipt; explicit help and retry append `workspace-help` and `workspace-retry` receipts. A hint sets the existing `helpSeen` safeguard before any later validation. Receipts remain provisional and inadmissible; no estimator or mastery policy changed. Errors are observations, not established misconceptions. Recognition uncertainty does not enter this flow.
+
+Help buttons prevent pointer focus theft and restore input focus without scrolling. The prompt stays in document flow, never overlaying the paper. Browser checks simulate Android-sized touch/pointer/input behavior; physical Android keyboard and stylus behavior remain untested. The existing online save limitation remains: wait for Saved before leaving. No LLM, paid provider or deployment is involved.
+
+## Validation
+
+Executed locally: 241 Django tests, 426 frontend unit tests, all four TypeScript configurations, the integrated frontend build, seven progressive/recovery browser checks and six demo/optional-answer regression checks passed. Browser tests used the actual Django application on a synthetic local preview at 360 CSS pixels. Added backend checks cover pending versus incorrect multi-digit input, preservation, escalating help, version conflicts, persistence and assisted completion remaining inadmissible. The new real-Django mobile browser journey covers error, retry, all three hint levels, reload/resume, correction of earlier work, retained downstream entries, focus retention and horizontal overflow. Existing progressive browser tests cover continuous entry, browser close/resume, alternate input methods and variable-width alignment.

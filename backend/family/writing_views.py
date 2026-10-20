@@ -1,4 +1,5 @@
 """Authenticated activity/draft integration on the existing pupil and mathematics ledger."""
+from . import workspace_recovery
 import uuid
 from django.db import transaction
 from django.db.models import Max
@@ -81,6 +82,12 @@ class WritingActionView(AccountBase):
                     return Response({'detail':'This paper changed. Reload before editing.'},status=409)
                 previous=d.support.get('divisionPaper',{'entries':{},'active':'quotient:0','visible':0,'complete':False})
                 state,result=progressive_division.update(spec,d.pk,previous,request.data.get('entry'),request.data.get('operation'),request.data.get('digit'))
+                recovery=d.support.get('workspaceRecovery',{})
+                if result and result['outcome']=='incorrect':
+                    recovery=workspace_recovery.record_error(recovery,result['entry'])
+                elif (result and recovery.get('entry')==result.get('entry')) or not result:
+                    recovery={**recovery,'open':False,'message':None}
+                d.support['workspaceRecovery']=recovery
                 d.support['divisionPaper']=state
                 d.stage='complete' if state.get('complete') else 'workspace'
                 if result:
@@ -89,6 +96,21 @@ class WritingActionView(AccountBase):
                     original['updatedAt']=timezone.now().isoformat()
                     receipt(d,'progressive-validation',{'result':result,'input':original,'competency':spec['competency'],
                             'automaticBringDown':'verbatim-dividend-digits','afterFeedback':PupilEvent.objects.filter(pupil=d.pupil,body__draftId=str(d.pk),body__action='progressive-validation').exists()})
+            elif action=='workspace-recovery':
+                if request.data.get('version')!=d.version:
+                    return Response({'detail':'This paper changed. Reload before editing.'},status=409)
+                recovery=d.support.get('workspaceRecovery',{})
+                state=d.support.get('divisionPaper',{})
+                entry=recovery.get('entry')
+                field=next((f for f in progressive_division.plan(spec)['fields'] if f['id']==entry),None) if d.topic=='division' else None
+                if not field or not recovery.get('open'):
+                    raise ValidationError({'recovery':'There is no active error to help with.'})
+                choice=request.data.get('choice')
+                recovery=workspace_recovery.respond(recovery,choice,workspace_recovery.division_hints(field['role']))
+                d.support['workspaceRecovery']=recovery
+                state['active']=entry
+                if choice=='hint':d.support['helpSeen']=True
+                receipt(d,'workspace-help' if choice=='hint' else 'workspace-retry',{'entry':entry,'level':recovery['level'],'message':recovery.get('message'),'recoveryVersion':'workspace-recovery@1','diagnosis':'unverified'})
             elif action in ['answer-draft','check-answer','answer-help','guided']:
                 if request.data.get('version') != d.version:
                     return Response({'detail':'This lesson changed. Reload before editing.'},status=409)

@@ -1,3 +1,4 @@
+import type { RecoveryState } from "./WorkspaceRecovery";
 import type { DivisionPaper, PaperState } from "./ProgressiveDivision";
 import { Api } from "../english/logic/account";
 import { createWork } from "./model";
@@ -47,6 +48,7 @@ export interface LessonActivity {
   };
   support: {
     divisionPaper?: PaperState;
+    workspaceRecovery?: RecoveryState;
     simple?: {
       answer?: string;
       ink?: Work;
