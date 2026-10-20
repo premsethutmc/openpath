@@ -3100,7 +3100,7 @@ export const B13: Def[] = [
     // [c, t, s]: case c (0 AA, 1 SSS, 2 SAS, 3 sides not in proportion, 4 two sides in proportion but the angle not between
     // them); base triangle SIM_TRIS[t]; s scale and order
     parse: none,
-    reject: ([c, t, s]) => (c >= 0 && c <= 4 && t >= 0 && t < SIM_TRIS.length && s >= 0 && s <= 5 ? null : "Five cases, twelve triangles, six scales."),
+    reject: ([c, t, s]) => (c >= 0 && c <= 4 && t >= 0 && t < SIM_TRIS.length && s >= 0 && s <= 5 && !simcDup([c, t, s]) ? null : "Five cases, twelve triangles, six scales (each set of facts once)."),
     choices: (p) => order4(p).map((i) => SIMC[i]),
     prompt: (p) => `In ΔABC and ΔPQR (A matches P, B matches Q, C matches R): ${simcFacts(p).join("; ")}. Which statement is true?`,
     solve: (p) => ({ steps: [step("rule", "note", SIM, [SIMC_WHY[p[0]]], "")], answer: order4(p).indexOf(p[0] >= 3 ? 3 : p[0]) }),
@@ -3129,6 +3129,7 @@ export const B13: Def[] = [
     variants: () => [],
     explain: say(),
     domain: [[0, 4], [0, 11], [0, 5]],
+    keep: (p) => !simcDup(p),
     difficulty: ([c]) => ([1, 2, 2, 2, 3] as const)[c],
     teach: {
       idea: "Two triangles are similar when their angles are equal and their sides are in the same ratio. It is enough to show AA (two pairs of equal angles), SSS (all three side ratios equal) or SAS (two side ratios equal and the angles between those sides equal).",
@@ -3935,4 +3936,10 @@ function menOk(p: number[]) {
 function nlineAns([m, a, b, c, d]: number[]): R {
   const x = m === 0 ? qs(q(a, b), Q(c)) : m === 1 ? qs(q(a, b), q(c, d)) : qa(Q(a), q(d ? c : -c, b));
   return m === 2 ? x : q(Math.abs(x[0]), x[1]);
+}
+/** The same facts already shown for a smaller triangle or scale index (the same question twice). */
+function simcDup([c, t, s]: number[]) {
+  const me = simcFacts([c, t, s]).join();
+  for (let t2 = 0; t2 <= t; t2++) for (let s2 = 0; s2 <= 5; s2++) if ((t2 < t || s2 < s) && simcFacts([c, t2, s2]).join() === me) return true;
+  return false;
 }
