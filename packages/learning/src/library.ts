@@ -15,8 +15,8 @@
  * The output is written to content/learning/library.v1.json by scripts/library.ts, so the app and the server read the
  * same modules; a test checks that the file is exactly what the blueprints synthesise.
  */
-import type { Module, Screen, Strategy } from "./content";
-import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, problemOf, show, type Phase, type Problem } from "./families";
+import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
+import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
 import { FAMILY_VERSION } from "./spec";
 
@@ -49,6 +49,19 @@ export interface SynthesisedModule extends Module {
   provenance: { origin: "synthesised"; policy: string; family: string; seed: number[]; blueprintVersion: string; author: string; aiAssisted: boolean; licence: string; examples: string[] };
 }
 
+/** pools@1: the families a competency's module draws from — the main one first, then every other family of the
+ * competency that can serve a module (a competency is broader than one family). */
+export function poolsFor(competency: string, main: string) {
+  const others = [...FAMILIES.values()].filter((f) => f.id !== main && f.competency === competency && f.domain && f.teach && !NOT_A_MODULE.has(f.id) && pool(f.id).items.length >= 10).map((f) => f.id);
+  return [main, ...others].map((f) => ({ family: f, version: FAMILY_VERSION[f] }));
+}
+/** The questions of a phase across a module's families, taken in turn (one from each family, then the next round). */
+export function modulePhasePool(m: Module, phase: Phase): string[] {
+  const lists = poolFamilies(m).map((f) => phasePool(f, phase));
+  const out: string[] = [];
+  for (let i = 0; lists.some((l) => i < l.length); i++) for (const l of lists) if (i < l.length) out.push(l[i]);
+  return out;
+}
 const predicted = (p: Problem) => new Set(p.bugs.filter((b) => b.predict !== null).map((b) => b.id));
 const minus = (t: string) => t.replace(/^-/, "−");
 const typedOf = (id: string) => problemOf(id.replace(/:mc$/, ""))!;
@@ -59,8 +72,8 @@ const typedOf = (id: string) => problemOf(id.replace(/:mc$/, ""))!;
  * check from the retention part; never the same problem twice (in either answer format).
  */
 function drawer(family: string, used: Set<string>) {
-  const take = (phase: Phase, form: "typed" | "mc" | "any" = "any"): string => {
-    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : x)).find((x) => !used.has(exposureKey(x)));
+  const take = (phase: Phase, form: "typed" | "mc" | "word" | "any" = "any"): string => {
+    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : form === "word" ? `${x.replace(/:mc$/, "")}:w` : x)).find((x) => !used.has(exposureKey(x)) && (form !== "word" || problemOf(x) !== null));
     if (!id) throw new Error(`${LIBRARY_POLICY}: family ${family} has too few ${phase} questions for a module`);
     used.add(exposureKey(id));
     return id;
@@ -80,6 +93,35 @@ function explore(family: string, used: Set<string>): string[] {
     for (const b of predicted(typedOf(best.x))) covered.add(b);
   }
   return out;
+}
+/** pools@1: the competency's other families are its other sub-skills. Each gets a chapter screen (its idea, its method
+ * and a worked example), a practice question and, when it has one, its everyday question; one of them shares the
+ * delayed check. */
+function subSkills(competency: string, family: string, used: Set<string>) {
+  const pools = poolsFor(competency, family);
+  const others = pools.slice(1).map((p) => p.family);
+  const tryTake = (f: string, phase: Phase, form: "typed" | "mc" | "word" | "any") => {
+    try {
+      return drawer(f, used)(phase, form);
+    } catch {
+      return null;
+    }
+  };
+  const chapter: Screen[] = [];
+  for (const f of others) {
+    const d = FAMILIES.get(f)!;
+    const list = phasePool(f, "practice").map((x) => x.replace(/:mc$/, "")).filter((x) => !used.has(x));
+    const id = list.find((x) => difficultyOf(typedOf(x)) <= 2) ?? list[0];
+    if (!id) continue;
+    used.add(id);
+    const e = typedOf(id);
+    const w = d.teach!.visual?.(e.params);
+    chapter.push({ title: d.title, text: [d.teach!.idea, d.teach!.method], math: worked(e), ...(w ? { widget: w as Screen["widget"] } : {}) });
+  }
+  const practice = others.flatMap((f) => [tryTake(f, "practice", "typed")].filter((x): x is string => !!x));
+  const transfer = others.filter((f) => FAMILIES.get(f)!.word).slice(0, 2).flatMap((f) => [tryTake(f, "practice", "word")].filter((x): x is string => !!x));
+  const retention = others.map((f) => tryTake(f, "retention", "mc")).find((x) => !!x) ?? null;
+  return { pools, chapter, practice, transfer, retention };
 }
 const worked = (ex: Problem) => [ex.prompt.replace(/ \(.*\)$/, "").replace(/ Choose one\.$/, ""), ...ex.steps.map((st) => explainStep(ex, st))];
 
@@ -104,6 +146,7 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
   // the facts the explanations rest on (7 × 8, 2⁴ …): probe questions a strategy can build on
   const probes = [...new Set(seed.bugs.flatMap((b) => (b.probe && b.probe !== seed.id && !b.probe.startsWith(`gen:${bp.family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
   const chapter = bp.chapter.map((s) => screen(s, seed));
+  const sub = subSkills(bp.competency, bp.family, used);
   const strategies: Strategy[] = bp.strategies.map((st, k) => {
     const ex = st.screens.some((s) => s.worked) ? example() : seed;
     return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex)), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
@@ -111,14 +154,15 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
   return {
     competency: bp.competency,
     title: bp.title,
-    chapter,
+    chapter: [...chapter, ...sub.chapter],
     diagnostics,
     strategies,
-    practice: [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")],
-    transfer: [take("practice", "mc")],
-    retention: [take("retention", "typed"), take("retention", "mc")],
+    practice: [take("practice", "typed"), take("practice", "mc"), take("practice", "typed"), ...sub.practice],
+    transfer: [take("practice", "mc"), ...sub.transfer],
+    retention: [take("retention", "typed"), sub.retention ?? take("retention", "mc")],
     probes,
     pool: { family: bp.family, version: FAMILY_VERSION[bp.family] },
+    ...(sub.pools.length > 1 ? { pools: sub.pools } : {}),
     provenance: { origin: "synthesised", policy: LIBRARY_POLICY, family: bp.family, seed: bp.seed, blueprintVersion, author: bp.author, aiAssisted: bp.aiAssisted, licence: bp.licence, examples },
   };
 }
@@ -150,27 +194,39 @@ export function fromTemplate(family: string, competency: string, version: string
   const diagnostics = explore(family, used);
   const probes = [...new Set(first.bugs.flatMap((b) => (b.probe && !b.probe.startsWith(`gen:${family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
   const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name);
+  const vis = (f: ((p: number[]) => unknown) | undefined, p: Problem) => {
+    const w = f?.(p.params);
+    return w ? { widget: w as Screen["widget"] } : {};
+  };
   const strategies: Strategy[] = [
-    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
+    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx), ...vis(def.teach.visual, stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
   ];
+  // template@2: the family's further ways of explaining, each with its own example (and picture)
+  for (const alt of def.teach.alternatives ?? []) {
+    const e = ex() ?? stepsEx;
+    strategies.push({ id: alt.id, title: alt.title, kind: alt.kind, needs: [], screens: [{ title: alt.title, text: alt.text, math: worked(e), ...vis(alt.visual, e) }], guided: take("practice", "typed"), check: take("check", strategies.length % 2 ? "mc" : "typed") });
+  }
   if (mistakeEx) {
     const b = conceptual(mistakeEx)!;
     strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says, def.teach.idea], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
     strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
+  const sub = subSkills(competency, family, used);
+  const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {
     competency,
     title: def.title,
-    chapter: [{ title: def.title, text: [def.teach.idea], math: worked(first), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}) }],
+    chapter: [{ title: def.title, text: [def.teach.idea], math: worked(first), ...vis(def.teach.visual, first), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}) }, ...sub.chapter],
     diagnostics,
     strategies,
-    practice: [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")],
-    transfer: [take("practice", "mc")],
-    retention: [take("retention", "typed"), take("retention", "mc")],
+    practice: [...own, ...sub.practice],
+    transfer: [def.word ? take("practice", "word") : take("practice", "mc"), ...sub.transfer],
+    retention: [take("retention", "typed"), sub.retention ?? take("retention", "mc")],
     probes,
     pool: { family, version: FAMILY_VERSION[family] },
-    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+template@1`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
+    ...(sub.pools.length > 1 ? { pools: sub.pools } : {}),
+    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+${def.teach.alternatives?.length || def.teach.visual ? "template@2" : "template@1"}`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
   };
 }
 
@@ -179,9 +235,9 @@ export function fromTemplate(family: string, competency: string, version: string
 export const DEPTH_POLICY = { version: "depth@1", minimum: { diagnostic: 3, check: 6, practice: 15, retention: 6 } } as const;
 export function poolDepth(m: Module) {
   if (!m.pool) return null;
-  const counts = Object.fromEntries((["diagnostic", "check", "practice", "retention"] as Phase[]).map((ph) => [ph, new Set(phasePool(m.pool!.family, ph).map(exposureKey)).size])) as Record<Phase, number>;
+  const counts = Object.fromEntries((["diagnostic", "check", "practice", "retention"] as Phase[]).map((ph) => [ph, new Set(modulePhasePool(m, ph).map(exposureKey)).size])) as Record<Phase, number>;
   const short = (Object.keys(DEPTH_POLICY.minimum) as Phase[]).filter((ph) => counts[ph] < DEPTH_POLICY.minimum[ph]);
-  return { family: m.pool.family, counts, short, sufficient: short.length === 0 };
+  return { family: m.pool.family, families: poolFamilies(m), counts, short, sufficient: short.length === 0 };
 }
 
 /** Every question a module uses, by phase (for validation, coverage and review). */
@@ -205,7 +261,15 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
   const taken = new Set([...authored.map((m) => m.competency), ...fromBlueprints.map((m) => m.competency)]);
   // a family too small to fill every phase gives no module: the limitation is recorded, never papered over
   const notBuilt: { family: string; competency: string; reason: string }[] = [];
-  const fromTemplates = [...FAMILIES.values()].filter((f) => f.teach && f.domain && !NOT_A_MODULE.has(f.id) && !taken.has(f.competency)).flatMap((f) => {
+  // a competency's module pool: the first family listed for it whose pool is deep enough for every phase (depth@1),
+  // otherwise the first one (its module then states the limitation)
+  const deepEnough = (f: string) => {
+    const n = (ph: Phase) => new Set(phasePool(f, ph).map(exposureKey)).size;
+    return (Object.keys(DEPTH_POLICY.minimum) as Phase[]).every((ph) => n(ph) >= DEPTH_POLICY.minimum[ph]);
+  };
+  const candidatesFor = (c: string) => [...FAMILIES.values()].filter((f) => f.competency === c && f.teach && f.domain && !NOT_A_MODULE.has(f.id));
+  const mainFamily = (c: string) => candidatesFor(c).find((f) => deepEnough(f.id)) ?? candidatesFor(c)[0];
+  const fromTemplates = [...new Set([...FAMILIES.values()].filter((f) => f.teach && f.domain && !NOT_A_MODULE.has(f.id) && !taken.has(f.competency)).map((f) => f.competency))].map((c) => mainFamily(c)!).flatMap((f) => {
     try {
       const m = fromTemplate(f.id, f.competency, bps.version);
       taken.add(f.competency);
@@ -216,8 +280,10 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
     }
   });
   const authoredPools = Object.fromEntries(authored.flatMap((m) => {
-    const f = [...FAMILIES.values()].find((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id));
-    return f ? [[m.competency, { family: f.id, version: FAMILY_VERSION[f.id] }]] : [];
+    const f = [...FAMILIES.values()].filter((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id)).find((x) => deepEnough(x.id)) ?? [...FAMILIES.values()].find((x) => x.competency === m.competency && x.domain && !NOT_A_MODULE.has(x.id));
+    if (!f) return [];
+    const pools = poolsFor(m.competency, f.id);
+    return [[m.competency, { family: f.id, version: FAMILY_VERSION[f.id], ...(pools.length > 1 ? { pools } : {}) }]];
   }));
   return { modules: [...fromBlueprints, ...fromTemplates], fromBlueprints, fromTemplates, authoredPools, notBuilt };
 }

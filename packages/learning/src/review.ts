@@ -20,7 +20,7 @@
  * own copy for development, in which nothing is approved.
  */
 import registryData from "../../../content/learning/review.v1.json";
-import { moduleOrigin, modules, type Module } from "./content";
+import { moduleOrigin, modules, poolFamilies, type Module } from "./content";
 import { hashOf } from "./curriculum";
 import { exposureKey, FAMILIES, inPool } from "./families";
 import { moduleQuestions } from "./library";
@@ -134,7 +134,7 @@ export function decide(e: ReviewEntry, reviewer: { by: string; role: ReviewerRol
 /** The families a module depends on: its pool and every generated question it lists. */
 export function familiesOf(m: Module): string[] {
   const listed = Object.values(moduleQuestions(m)).flat().filter((id) => id.startsWith("gen:")).map((id) => id.split(":")[1]);
-  return [...new Set([...(m.pool ? [m.pool.family] : []), ...listed])];
+  return [...new Set([...poolFamilies(m), ...listed])];
 }
 export function release(e: ReviewEntry, by: string, at: string, reg: Registry = activeRegistry(), role: ReviewerRole = "release-manager"): ReviewEntry {
   if (e.state !== "approved") throw new ReviewError(`${e.item} is ${e.state}; only an approved item can be released`);

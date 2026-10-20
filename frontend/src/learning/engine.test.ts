@@ -50,6 +50,20 @@ const KEY: Record<string, string> = {
   "ch-remainder": "13", "ch-triangle": "36", "ch-counter": "B",
   "qd-d1": "3,2", "qd-d2": "7", "qd-d3": "A", "qd-g1": "4,3", "qd-c1": "3,-2", "qd-p1": "-1,-4", "qd-p2": "B", "qd-t1": "3", "qd-s2g": "C", "qd-s2c": "A", "qd-r1": "5,3", "qd-r2": "1,-2",
   "area-parabola-line.full": "4.5", "area-parabola-line.g7": "5", "area-parabola-line.g8": "2,-1", "area-parabola-line.g10": "2,-1", "area-parabola-line.g11": "A",
+  // educator-marked modules (written-modules.v1.json): the auto-marked component questions, worked out separately
+  "wm-bas-d1": "C", "wm-bas-d2": "B", "wm-bas-g1": "D", "wm-bas-c1": "A", "wm-bas-g2": "C", "wm-bas-p1": "4", "wm-bas-p2": "B", "wm-bas-r1": "D",
+  "wm-tri-d1": "C", "wm-tri-d2": "A", "wm-tri-g1": String(5 + 9 - 1), "wm-tri-c1": "B", "wm-tri-g2": "D", "wm-tri-p1": "A", "wm-tri-p2": String(180 - 65 - 70), "wm-tri-r1": "C",
+  "wm-prf-d1": "B", "wm-prf-d2": "D", "wm-prf-g1": "C", "wm-prf-c1": "A", "wm-prf-g2": String((3 * 5 + 12) / 3 - 5), "wm-prf-p1": "B", "wm-prf-p2": "A", "wm-prf-r1": "D",
+  "wm-tpf-d1": "C", "wm-tpf-d2": "B", "wm-tpf-g1": "A", "wm-tpf-c1": "D", "wm-tpf-g2": "B", "wm-tpf-p1": String((180 - 40) / 2), "wm-tpf-p2": "C", "wm-tpf-r1": "A",
+  "wm-bis-d1": "D", "wm-bis-d2": String(8 / 2 + 1), "wm-bis-g1": "C", "wm-bis-c1": "B", "wm-bis-g2": "A", "wm-bis-p1": "C", "wm-bis-p2": String(120 / 4), "wm-bis-r1": "B",
+  "wm-scl-d1": String((8 * 3) / 4), "wm-scl-d2": "B", "wm-scl-g1": String((6 * 6) / 4), "wm-scl-c1": "D", "wm-scl-g2": "C", "wm-scl-p1": String(12 / 4), "wm-scl-p2": "A", "wm-scl-r1": "B",
+  "wm-quad-d1": "5", "wm-quad-d2": "A", "wm-quad-g1": "D", "wm-quad-c1": "C", "wm-quad-g2": "B", "wm-quad-p1": "C", "wm-quad-p2": String(180 - 65), "wm-quad-r1": "A",
+  "wm-irr-d1": "C", "wm-irr-d2": "B", "wm-irr-g1": "A", "wm-irr-c1": "D", "wm-irr-g2": "C", "wm-irr-p1": "A", "wm-irr-p2": "D", "wm-irr-r1": "B",
+  "wm-root-d1": String(1 + 9), "wm-root-d2": "D", "wm-root-g1": "3", "wm-root-c1": "B", "wm-root-g2": String(7 + 1), "wm-root-p1": "C", "wm-root-p2": "1", "wm-root-r1": "A",
+  "wm-ind-d1": "A", "wm-ind-d2": String([1, 2, 3, 4, 5].find((n) => 2 ** n > n + 4)), "wm-ind-g1": "C", "wm-ind-c1": "B", "wm-ind-g2": "D", "wm-ind-p1": String(7 - 1), "wm-ind-p2": "A", "wm-ind-r1": "C",
+  "wm-game-d1": "D", "wm-game-d2": String(10 % 4), "wm-game-g1": String(10 - 3), "wm-game-c1": "B", "wm-game-g2": String(5 - 3), "wm-game-p1": String(23 % 4), "wm-game-p2": "A", "wm-game-r1": String(26 % 6),
+  "wm-disp-d1": "B", "wm-disp-d2": String(3 * 4 + 2), "wm-disp-g1": String((70 - 50) / (55 - 50)), "wm-disp-c1": "C", "wm-disp-g2": "A", "wm-disp-p1": "D", "wm-disp-p2": String((15 / 60) * 360), "wm-disp-r1": "B",
+  "wm-stq-d1": "B", "wm-stq-d2": "2/5", "wm-stq-g1": "D", "wm-stq-c1": "A", "wm-stq-g2": "C", "wm-stq-p1": "B", "wm-stq-p2": String((7 + 8 + 9 + 9 + 12) / 5), "wm-stq-r1": "D",
 };
 const factors = (n: number) => [...Array(n).keys()].map((k) => k + 1).filter((k) => n % k === 0).length;
 
@@ -94,8 +108,10 @@ test("modules are complete: diagnostics, strategies with their own guided and ch
     for (const id of used.filter((x) => !m.probes.includes(x))) assert.equal(graph.evidenceTarget(question(id).competency), m.competency, `${id} belongs to ${m.competency}`);
     // a probe asks about what the skill builds on: its own skill, or one a relation names (7 × 8 inside 7 × 8 = ?; 3 × 4 inside 3(x + 4))
     for (const id of m.probes) assert.ok(question(id).competency === m.competency || graph.relationsOf(m.competency).some((r) => r.from === question(id).competency), `${id}: a probe about ${m.competency} or something it builds on`);
-    const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => question(id).type));
-    assert.ok(formats.size >= 2, `${m.competency}: two question formats (the shared engine needs two contexts to demonstrate)`);
+    // the evidence context as the shared engine records it (evidence.ts): the answer format, and an everyday
+    // situation (:w) is a context of its own (context@2)
+    const formats = new Set([...m.diagnostics, ...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)].map((id) => `${question(id).type}${id.endsWith(":w") ? "-situation" : ""}`));
+    assert.ok(formats.size >= 2, `${m.competency}: two evidence contexts (the shared engine needs two contexts to demonstrate)`);
     for (const s of m.strategies) for (const n of s.needs) assert.ok(m.probes.includes(n), `${s.id} needs a probe of this module`);
   }
 });
@@ -111,18 +127,25 @@ test("a textbook becomes a draft with mapped outcomes and source references, and
   assert.deepEqual(fractions.outcomes.map((o) => o.mapping.competencies[0]?.id), ["MATH.number.fraction-models", EQ, "MATH.number.fraction-comparison", "MATH.number.fraction-add-like"]);
   assert.ok(fractions.outcomes.every((o) => o.mapping.competencies.every((m) => m.status === "proposed")), "never silently accepted");
   const proposals = draft.subjects[0].chapters.flatMap((c) => c.outcomes).filter((o) => o.mapping.proposal);
-  assert.equal(proposals.length, 2, "outcomes with no match become provisional proposals, not new verified competencies");
+  // rounding was a gap before the curriculum expansion (expansion@1 added MATH.number.rounding); the timetable is still one
+  assert.equal(proposals.length, 1, "outcomes with no match become provisional proposals, not new verified competencies");
+  assert.match(proposals[0].text, /timetable/);
+  assert.equal(draft.subjects[0].chapters.flatMap((c) => c.outcomes).find((o) => /round/i.test(o.text))!.mapping.competencies[0].id, "MATH.number.rounding");
   assert.ok(proposals.every((o) => o.mapping.proposal!.status === "provisional-proposal" && o.mapping.proposal!.source.pages));
   assert.ok(proposals.every((o) => !graph.byId.has(o.mapping.proposal!.id)), "a proposal is not added to the graph");
   const rel = review(draft, "accept-proposals", "test reviewer", "2026-09-01T00:00:00Z");
   assert.equal(rel.status, "reviewed");
   assert.equal(rel.review!.educatorReviewed, false);
   assert.deepEqual(validateRelease(rel), []);
-  // "Generate equivalent fractions by multiplying numerator and denominator" is close to "multiply fractions":
+  // "Divide multi-digit numbers and interpret the remainder" is close to two skills (long division; remainders):
   // flagged uncertain, so it is NOT accepted without an explicit decision
-  assert.equal(fractions.outcomes[1].mapping.verdict, "uncertain");
-  assert.ok(!assigned(rel).some((a) => a.competency === EQ), "an uncertain mapping needs a reviewer's decision");
-  assert.ok(assigned(review(draft, [{ outcome: fractions.outcomes[1].id, accept: [EQ] }], "t", "t")).some((a) => a.competency === EQ));
+  const divide = draft.subjects[0].chapters.flatMap((c) => c.outcomes).find((o) => /interpret the remainder/.test(o.text))!;
+  assert.equal(divide.mapping.verdict, "uncertain");
+  const LD = divide.mapping.competencies[0].id;
+  assert.ok(!assigned(rel).some((a) => a.competency === LD && a.outcome.id === divide.id), "an uncertain mapping needs a reviewer's decision");
+  assert.ok(assigned(review(draft, [{ outcome: divide.id, accept: [LD] }], "t", "t")).some((a) => a.competency === LD));
+  // equivalent fractions maps to its own skill
+  assert.equal(fractions.outcomes[1].mapping.competencies[0].id, EQ);
   assert.throws(() => review(rel, "accept-proposals", "x", "y"), /Only a draft/);
   // explicit decisions: the reviewer rejects one mapping and adds another
   const custom = review(draft, [{ outcome: fractions.outcomes[1].id, accept: ["MATH.number.fraction-models"] }], "test", "2026-09-01T00:00:00Z");

@@ -193,7 +193,10 @@ export function tilesFor(release: CurriculumRelease, ev: (id: string) => SkillEv
       }
       for (const sec of node.sections ?? []) {
         const ref = { textbook: release.title, chapter: ch.title, pages: sec.pages };
-        kids.push(aggregate(`section:${release.id}:${sec.id}`, "section", `${sec.number} ${sec.title}`, outcomeTiles(ch, sec, ref), { subtitle: sec.pages ? `pp. ${sec.pages}` : undefined, curriculumRefs: [ref] }));
+        const inner = outcomeTiles(ch, sec, ref);
+        // a section with no skills anywhere below it (an introduction, a summary) is not a tile: nothing to learn there
+        if (!inner.length) continue;
+        kids.push(aggregate(`section:${release.id}:${sec.id}`, "section", sec.title.startsWith(sec.number) ? sec.title : `${sec.number} ${sec.title}`, inner, { subtitle: sec.pages ? `pp. ${sec.pages}` : undefined, curriculumRefs: [ref] }));
       }
       return kids;
     };

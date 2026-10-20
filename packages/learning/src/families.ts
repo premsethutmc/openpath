@@ -14,151 +14,11 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
+import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
+import { DOMAIN_FAMILIES } from "./fam";
 
-export type Value = number | number[];
-export interface Step {
-  id: string;
-  op: "multiply" | "subtract" | "add" | "divide" | "pair" | "evaluate" | "compare" | "integrate";
-  competency: string;
-  inputs: (number | string)[];
-  value: Value;
-}
-export interface Bug {
-  id: string;
-  kind: "conceptual" | "procedural" | "recall" | "prerequisite";
-  /** The competency whose teaching addresses this explanation. */
-  competency: string;
-  /** Learner-facing description of the explanation (no jargon). */
-  says: string;
-  /** What a learner with this misunderstanding answers here (one value or several possibilities); null: no prediction. */
-  predict: Value | null;
-  /** A question of another family that tests this explanation directly (e.g. the multiplication fact itself). */
-  probe?: string;
-}
-export interface Problem {
-  family: string;
-  id: string;
-  params: number[];
-  competency: string;
-  /** The micro-skill (or the competency itself). */
-  skill: string;
-  /** "typed" (the learner writes the answer) or "mc" (chooses among the answer and mal-rule answers). */
-  form: "typed" | "mc";
-  prompt: string;
-  type: "integer" | "fraction" | "set" | "choice";
-  answer: string;
-  steps: Step[];
-  bugs: Bug[];
-  options?: string[];
-}
-type Def = {
-  id: string;
-  /** How many parameters a stored id carries. */
-  arity: number;
-  title: string;
-  competency: string;
-  /** The micro-skill the family practises, when finer than its competency. */
-  skill?: string;
-  type: Problem["type"];
-  /** The family also has a multiple-choice form ("gen:<family>:<params>:mc"): mal-rule answers as the options. */
-  mc?: boolean;
-  /** Read the parameters from written text; null if the text is not this family. */
-  parse: (t: string) => number[] | null;
-  /** Reject parameters outside what the family supports (a reason), or accept (null). */
-  reject: (p: number[]) => string | null;
-  prompt: (p: number[]) => string;
-  solve: (p: number[]) => { steps: Step[]; answer: Value };
-  validate: (p: number[], answer: Value) => boolean;
-  bugs: (p: number[]) => Bug[];
-  variants: (p: number[]) => number[][];
-  explain: (s: Step) => string;
-  // ---- the family specification (spec@1, spec.ts): what an educator approves for release
-  /** The approved generation space: inclusive ranges per parameter (filtered by `keep`, then by `reject`). */
-  domain?: [number, number][];
-  /** A narrower choice within the domain ranges (the release pool); reject still applies. */
-  keep?: (p: number[]) => boolean;
-  /** Difficulty classification of a parameter choice: 1 easier, 2 typical, 3 harder. */
-  difficulty?: (p: number[]) => 1 | 2 | 3;
-  /** Teaching hints for template strategies: the idea, and the method. */
-  teach?: { idea: string; method: string };
-};
-
-// ---------------------------------------------------------------- shared helpers
-
-const MT = "MATH.number.multiplication-tables";
-const EXP = "MATH.number.exponents";
-const SUP: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "-": "⁻" };
-/** A number as written in a step: "−" for minus, and in brackets when negative (so (−1)² is not read as −1²). */
-const neg = (t: string | number) => String(t).replace(/^-/, "−");
-const par = (v: string | number) => (Number(v) < 0 ? `(${neg(v)})` : String(v));
-const sup = (n: number | string) => String(n).replace(/./g, (c) => SUP[c] ?? c);
-/** x to a power, as written: x, x², x³ … */
-const xp = (n: number) => (n === 1 ? "x" : `x${String(n).replace(/./g, (c) => SUP[c])}`);
-const coef = (k: number) => (k === 1 ? "" : String(k));
-const signed = (v: number) => `${v < 0 ? "−" : "+"} ${Math.abs(v)}`;
-const SUPREAD: Record<string, string> = { "²": "^2", "³": "^3", "⁴": "^4", "⁵": "^5", "⁶": "^6", "⁷": "^7", "⁸": "^8", "⁹": "^9" };
-/** Superscript powers → ^n, for reading written problems. */
-const unsup = (t: string) => t.replace(/[²³⁴⁵⁶⁷⁸⁹]/g, (c) => SUPREAD[c]);
-const powerOf = (a: number, n: number) => {
-  let v = 1;
-  for (let i = 0; i < n; i++) v *= a;
-  return v;
-};
-/** The definite integral of g over [a, b] by Simpson's rule (an independent numerical check). */
-const simpson = (g: (x: number) => number, a: number, b: number, n = 2000) => {
-  const h = (b - a) / n;
-  let s = g(a) + g(b);
-  for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * g(a + i * h);
-  return (s * h) / 3;
-};
-const near = (x: number, y: number, rel = 1e-7) => Math.abs(x - y) <= rel * Math.max(1, Math.abs(x), Math.abs(y));
-const powerSlip = (a: number, n: number, predict: Value | null, kind: Bug["kind"] = "prerequisite"): Bug => ({
-  id: "multiply-for-power",
-  kind,
-  competency: EXP,
-  says: `A power was worked out as a multiplication (${a}${String(n).replace(/./g, (c) => SUP[c])} as ${a} × ${n}); a power multiplies ${a} by itself ${n} times.`,
-  predict,
-  ...(a >= 2 && a <= 12 && n >= 2 && n <= 5 ? { probe: `gen:pow:${a},${n}` } : {}),
-});
-const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : Math.abs(a));
-export const show = (v: Value): string => (Array.isArray(v) ? [...v].sort((a, b) => a - b).map(fmt).join(",") : fmt(v));
-function fmt(x: number): string {
-  if (Number.isInteger(x)) return String(x);
-  for (let d = 2; d <= 1000; d++) {
-    const n = Math.round(x * d);
-    if (Math.abs(n / d - x) < 1e-9) {
-      const g = gcd(n, d);
-      return `${n / g}/${d / g}`;
-    }
-  }
-  return String(x);
-}
-/** Facts next to a × b that a learner who misremembers it often gives (neighbouring rows and columns). */
-export const neighbours = (a: number, b: number) =>
-  [...new Set([a * (b + 1), a * (b - 1), (a + 1) * b, (a - 1) * b, (a - 1) * (b + 1), (a + 1) * (b - 1)])].filter((v) => v > 0 && v !== a * b);
-const mul = (a: number, b: number, competency = MT, id = "product"): Step => ({ id, op: "multiply", competency, inputs: [a, b], value: a * b });
-/** A specific fact, the same id whichever problem uses it (7 × 8 and 8 × 7 are one fact). */
-export const factId = (a: number, b: number) => `fact-slip:${Math.min(a, b)}x${Math.max(a, b)}`;
-const factSlip = (a: number, b: number, scale = 1, extra = 0, target = MT): Bug => ({
-  id: factId(a, b),
-  kind: target === MT ? "prerequisite" : "recall",
-  competency: MT,
-  says: `A multiplication fact (${a} × ${b}) is not yet reliable.`,
-  predict: neighbours(a, b).map((v) => v * scale + extra),
-  ...(a >= 1 && b >= 1 && a <= 12 && b <= 12 ? { probe: `gen:mul:${a},${b}` } : {}),
-});
-const addForMul = (a: number, b: number, scale = 1, extra = 0): Bug => ({ id: "add-for-multiply", kind: "conceptual", competency: MT, says: `${a} × ${b} was added instead of multiplied.`, predict: (a + b) * scale + extra, probe: `gen:mul:${a},${b}` });
-const int = (s: string) => Number(s.replace(/−/g, "-").replace(/\s+/g, ""));
-const norm = (t: string) => t.replace(/−/g, "-").replace(/\s+/g, " ").replace(/[“”]/g, '"').trim();
-const pairs = (p: number[], ranges: [number, number][], keep: (q: number[]) => boolean) => {
-  const out: number[][] = [];
-  const rec = (i: number, acc: number[]) => {
-    if (i === ranges.length) return keep(acc) && JSON.stringify(acc) !== JSON.stringify(p) && out.push([...acc]);
-    for (let v = ranges[i][0]; v <= ranges[i][1]; v++) rec(i + 1, [...acc, v]);
-  };
-  rec(0, []);
-  return out;
-};
+import { EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
+export { show, neighbours, factId, type Bug, type Problem, type Step, type Value, type Def } from "./family-kit";
 
 // ---------------------------------------------------------------- the families
 
@@ -335,6 +195,8 @@ const F: Def[] = [
       return [
         { id: "root-signs", kind: "procedural", competency: "MATH.algebra.quadratics", says: "The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip.", predict: roots.map((x) => -x) },
         { id: "one-root", kind: "conceptual", competency: "MATH.algebra.quadratics", says: "Only one solution was found; a quadratic like this has two.", predict: null },
+        // the factor pair has the right product but not the right sum: a factorisation gap (algebra), not a quadratics one
+        ...wrongPair(p, q, roots),
       ].filter((x) => x.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[-4, 4], [-4, 4]], ([r, s]) => r !== s && r !== 0 && s !== 0).map(([r, s]) => [-(r + s), r * s]).filter(([pp, qq], i, a) => a.findIndex((x) => x[0] === pp && x[1] === qq) === i),
@@ -821,6 +683,8 @@ const F: Def[] = [
       { id: "multiply-both", kind: "conceptual", competency: "MATH.number.fraction-multiply", says: `Top and bottom were both multiplied by ${k}: that gives an equal fraction, not ${k} lots of it.`, predict: a / b },
       { id: "multiply-bottom", kind: "procedural", competency: "MATH.number.fraction-multiply", says: `The bottom was multiplied; ${k} lots of ${a}/${b} is ${k} × ${a} pieces of the same size.`, predict: a / (b * k) },
       { id: "add-whole", kind: "conceptual", competency: "MATH.number.fraction-multiply", says: `${k} was added to the top; multiplying means ${k} lots.`, predict: (a + k) / b },
+      // the method is right, the multiplication fact is not: one group of ${a} too many (a fluency gap, not a fraction one)
+      ...(a >= 2 && k * a + a <= 144 ? [{ id: "fact-slip-multiply", kind: "prerequisite" as const, competency: MT, says: `${k} × ${a} was taken as ${(k + 1) * a}, one group of ${a} too many: the method was right, the multiplication fact was not.`, predict: ((k + 1) * a) / b, ...(a <= 12 ? { probe: `gen:mul:${k},${a}` } : {}) }] : []),
     ],
     variants: (p) => pairs(p, [[1, 5], [2, 8], [2, 6]], ([a, b]) => a < b).slice(0, 80),
     explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
@@ -954,7 +818,7 @@ const F: Def[] = [
     type: "integer",
     mc: true,
     parse: () => null,
-    reject: ([n]) => (n < 2 || n > 25 ? "Only square roots of perfect squares from 4 to 625 are supported." : null),
+    reject: ([n]) => (n < 2 || n > 100 ? "Only square roots of perfect squares from 4 to 10 000 are supported." : null),
     prompt: ([n]) => `√${n * n} = ?`,
     solve: ([n]) => ({ steps: [{ id: "root", op: "evaluate", competency: "MATH.number.square-roots", inputs: [n * n], value: n }], answer: n }),
     validate: ([n], v) => typeof v === "number" && v > 0 && v * v === n * n,
@@ -965,7 +829,7 @@ const F: Def[] = [
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => [...Array(18).keys()].map((k) => [k + 2]).filter(([n]) => n !== p[0]),
     explain: (s) => `${show(s.value)} × ${show(s.value)} = ${s.inputs[0]}`,
-    domain: [[2, 25]],
+    domain: [[2, 100]],
     difficulty: ([n]) => (n <= 10 ? 1 : n <= 15 ? 2 : 3),
     teach: { idea: "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.", method: "Think of the square facts: 7 × 7 = 49, so √49 = 7." },
   },
@@ -1257,6 +1121,7 @@ const F: Def[] = [
     competency: "MATH.probability.conditional",
     type: "fraction",
     mc: true,
+    range: [0, 1],
     parse: () => null,
     // [p, q, r, s]: counts: chess club & girls p, chess & boys q, not chess & girls r, not chess & boys s. P(chess | girl)
     reject: (v) => (v.some((x) => x < 2 || x > 15) ? "Only counts from 2 to 15 are supported." : null),
@@ -1303,25 +1168,119 @@ const SPEC_V1: Record<string, Partial<Def>> = {
   disc: { domain: [[-12, 12], [-20, 20]], difficulty: ([p, q]) => (p > 0 && q > 0 ? 1 : 2), teach: { idea: "b² − 4ac decides how many real solutions there are.", method: "Positive: two; zero: one; negative: none." } },
 };
 for (const f of F) Object.assign(f, { ...SPEC_V1[f.id], ...f, ...(SPEC_V1[f.id]?.mc ? { mc: true } : {}) });
+// families@2: the families written in fam/<domain>.ts (one id space; a duplicate id is an error)
+const V2 = new Set<string>();
+for (const f of DOMAIN_FAMILIES) {
+  if (F.some((x) => x.id === f.id)) throw new Error(`families@2: duplicate family id ${f.id}`);
+  F.push(f);
+  V2.add(f.id);
+}
 // one registry of families however the module is loaded (test runners may load it twice): shared on globalThis
-const GF = globalThis as { __openpathFamilies?: Map<string, Def>; __openpathPools?: Map<string, { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> }> };
+const GF = globalThis as { __openpathFamilies?: Map<string, Def>; __openpathPools?: Map<string, { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string>; same: Map<string, string> }> };
 export const FAMILIES: Map<string, Def> = (GF.__openpathFamilies ??= new Map(F.map((f) => [f.id, f])));
 
 /** The options of a multiple-choice form: the answer and up to three mal-rule answers (the first prediction of each
- * written explanation, in order), topped up with nearby values; sorted by value, so the letters are reproducible. */
-function mcOptions(def: Def, p: number[], answer: number, bugs: Bug[]): number[] {
+ * written explanation, in order), topped up with nearby values; sorted by value, so the letters are reproducible.
+ * For an answer written in its type's form (answers@2), the options are the answer, the explanations' predictions and
+ * the family's distractors, distinct under the type's own equality, sorted as text. */
+/** range@1: the meaningful range of this problem's answer (a probability, a cosine, a length), or null. */
+export const rangeOf = (def: Def, p: number[]): [number, number] | null => (typeof def.range === "function" ? def.range(p) : def.range ?? null);
+const within = (rg: [number, number] | null, v: number | null) => !rg || v === null || (v >= rg[0] - 1e-12 && v <= rg[1] + 1e-12);
+function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
   if (def.id === "disc") return [0, 1, 2];
+  const rg = rangeOf(def, p);
+  if (typeof answer === "string") {
+    const out: string[] = [];
+    const add = (v: Value | undefined) => {
+      if (typeof v !== "string" || sameAnswer(def.type, v, answer) || out.some((o) => sameAnswer(def.type, o, v) || o === v) || out.length >= 3) return;
+      if (rg && !within(rg, numericValue(v))) return;
+      out.push(v);
+    };
+    for (const b of bugs) add(b.predict === null ? undefined : Array.isArray(b.predict) ? undefined : b.predict);
+    for (const v of def.distractors?.(p) ?? []) add(v);
+    // range@1: the answer with the opposite sign, where the range allows it (a cosine's sign slip)
+    if (rg && def.type === "exact") add(answer.startsWith("-") || answer.startsWith("−") ? answer.slice(1) : /^[\w√(]/.test(answer) && !/[+\-−]/.test(answer) ? `-${answer}` : undefined);
+    if (out.length < 2) throw new Error(`families@2: ${def.id}(${p}) has too few wrong options for a multiple-choice form`);
+    // a fixed order that differs from problem to problem (so the right letter is not always in the same place)
+    const salt = `gen:${def.id}:${p.join(",")}`;
+    return [...out, answer].sort((x, y) => fnv(salt + String(x)) - fnv(salt + String(y)) || (String(x) < String(y) ? -1 : 1));
+  }
   const out: number[] = [];
+  // range@1: an option outside the quantity's meaningful range (a probability above 1) is not offered
+  const inRange = (v: number) => within(rg, v);
   const add = (v: number | undefined) => {
-    if (v !== undefined && Number.isFinite(v) && !near(v, answer) && !out.some((o) => near(o, v)) && (answer < 0 || v >= 0) && out.length < 3) out.push(v);
+    if (v !== undefined && Number.isFinite(v) && inRange(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && ((answer as number) < 0 || v >= 0) && out.length < 3) out.push(v);
   };
-  for (const b of bugs) add(b.predict === null ? undefined : Array.isArray(b.predict) ? b.predict[0] : b.predict);
-  for (const v of [answer + 1, answer - 1, answer + 2, 2 * answer, answer + 3, answer - 2]) add(v);
-  return [...out, answer].sort((x, y) => x - y);
+  // families@2: a predicted wrong answer is offered whatever its sign (the wrong-sign answer is the point of a sign-rule
+  // question); only the topped-up neighbours keep to the answer's sign. The first families keep their rule (the server
+  // computes their options too).
+  const addPredicted = (v: number | undefined) => {
+    if (!V2.has(def.id)) return add(v);
+    if (v !== undefined && Number.isFinite(v) && inRange(v) && !near(v, answer as number) && !out.some((o) => near(o, v)) && out.length < 3) out.push(v);
+  };
+  for (const b of bugs) addPredicted(b.predict === null ? undefined : Array.isArray(b.predict) ? (b.predict[0] as number) : (b.predict as number));
+  for (const v of (def.distractors?.(p) ?? []) as number[]) add(v);
+  // inside a range the whole-number neighbours are mostly outside it: the complement and nearby values in the range
+  // the complement only for a bounded range (1 − p for a probability), never for a length (range to infinity)
+  if (rg) {
+    const a = answer as number;
+    for (const v of [...(Number.isFinite(rg[1]) ? [rg[1] + rg[0] - a, (a + rg[1]) / 2] : []), a / 2, 2 * a, a * a]) add(v);
+  }
+  for (const v of [(answer as number) + 1, (answer as number) - 1, (answer as number) + 2, 2 * (answer as number), (answer as number) + 3, (answer as number) - 2]) add(v);
+  // families@2: a fixed order that differs from problem to problem, so the right letter cannot be guessed from the
+  // order of the values; the first families keep value order (the server computes their options too)
+  if (V2.has(def.id)) {
+    const salt = `gen:${def.id}:${p.join(",")}`;
+    return [...out, answer].sort((x, y) => fnv(salt + show(x as number)) - fnv(salt + show(y as number)) || (x as number) - (y as number));
+  }
+  return [...out, answer].sort((x, y) => (x as number) - (y as number));
+}
+/** A value as the learner sees it: a family that works in decimals (money, measures, statistics) shows a terminating
+ * value as a decimal ("54.5", not "109/2"); equal values are still equal answers. */
+function shown(def: Def, v: Value): string {
+  if (!def.decimals || typeof v !== "number") return show(v);
+  for (let dp = 0; dp <= 6; dp++) {
+    const t = Math.round(v * 10 ** dp);
+    if (Math.abs(t / 10 ** dp - v) < 1e-9) return (t / 10 ** dp).toFixed(dp).replace(/^-/, "-");
+  }
+  return show(v);
+}
+/** Whether a predicted value is the right answer (then the explanation cannot be seen on this problem). */
+function predictsAnswer(def: Def, v: Value, answer: Value): boolean {
+  if (typeof answer === "string" || typeof v === "string") return NEW_TYPES.has(def.type) ? sameAnswer(def.type, show(v), show(answer)) || show(v) === show(answer) : show(v) === show(answer);
+  if (Array.isArray(v) || Array.isArray(answer)) return show(v) === show(answer);
+  return near(v, answer);
 }
 const mcPrompt = (text: string) => `${text.replace(/ ?\((?:A fraction is fine\.|0, 1 or 2)\)$/, "").replace(/ What number goes in the box(?: \(it may be negative\))?\?$/, " Which number goes in the box?")} Choose one.`;
 
+/** quad: a factor pair of q with the right product but the wrong sum (x² − 5x + 6 = (x − 1)(x − 6)?). */
+function wrongPair(p: number, q: number, roots: number[]): Bug[] {
+  const [m, n] = roots.map((r) => -r); // (x + m)(x + n)
+  const sign = Math.sign(m) || 1;
+  const cands: number[][] = [];
+  for (let u = 1; u * u <= Math.abs(q); u++) {
+    if (q % u) continue;
+    const v = Math.abs(q) / u;
+    if (q > 0) cands.push([sign * u, sign * v]);
+    else cands.push([-u, v], [u, -v]);
+  }
+  for (const pair of cands) {
+    if (pair[0] * pair[1] !== q || pair[0] + pair[1] === p || (pair[0] === m && pair[1] === n) || (pair[0] === n && pair[1] === m)) continue;
+    const probe = Math.abs(m) <= 9 && Math.abs(n) <= 9 && m !== n && m + n !== 0 ? { probe: `gen:factor:${m},${n}` } : {};
+    return [{ id: "pair-product-only", kind: "prerequisite", competency: "MATH.algebra.factorisation", says: `The numbers ${signedNum(pair[0])} and ${signedNum(pair[1])} multiply to ${q} but add to ${pair[0] + pair[1]}, not ${p}: the pair must give both the product and the sum.`, predict: pair.map((x) => -x).sort((x, y) => x - y), ...probe }];
+  }
+  return [];
+}
+const signedNum = (x: number) => (x < 0 ? `−${-x}` : String(x));
+/** wording@1: one convention for the minus sign in what a learner reads (−3, not -3): a hyphen before a number, a
+ * letter, a root or a bracket, at the start or after a space, bracket, = or comma, is shown as the minus sign. Only
+ * the wording changes (prompts, explanations and steps); answers and options are compared as written. */
+export const prose = (t: string) => t.replace(/(^|[\s(=,[|:;])-(?=[\d.a-zA-Zπ√(])/g, "$1−");
 function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
+  const q = buildRaw(def, p, form);
+  return { ...q, prompt: prose(q.prompt), bugs: q.bugs.map((b) => ({ ...b, says: prose(b.says) })), ...(def.expanded && q.form !== "mc" ? { expanded: true as const } : {}) };
+}
+function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Problem {
   const { steps, answer } = def.solve(p);
   if (!def.validate(p, answer)) throw new Error(`families@1: ${def.id}(${p}) failed its independent check`);
   const raw = def.bugs(p);
@@ -1329,26 +1288,40 @@ function build(def: Def, p: number[], form: Problem["form"] = "typed"): Problem 
   const bugs = raw.flatMap((b) => {
     if (b.predict === null) return [b];
     if (def.type === "set") return Array.isArray(b.predict) && show(b.predict) === show(answer) ? [] : [b];
-    if (typeof answer !== "number") return [b];
-    if (!Array.isArray(b.predict)) return near(b.predict, answer) ? [] : [b];
-    const keep = b.predict.filter((v) => !near(v, answer));
+    if (typeof answer !== "number" && typeof answer !== "string") return [b];
+    if (!Array.isArray(b.predict)) return predictsAnswer(def, b.predict, answer) ? [] : [b];
+    const keep = (b.predict as Value[]).filter((v) => !predictsAnswer(def, v as Value, answer)) as number[];
     return keep.length ? [{ ...b, predict: keep }] : [];
   });
-  const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps };
+  const fig = def.figure?.(p) ?? null;
+  const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps, ...(fig ? { figure: fig } : {}) };
   if (form === "mc") {
-    if (!def.mc || typeof answer !== "number") throw new Error(`families@1: ${def.id} has no multiple-choice form`);
+    if (!def.mc || (typeof answer !== "number" && typeof answer !== "string")) throw new Error(`families@1: ${def.id} has no multiple-choice form`);
     const opts = mcOptions(def, p, answer, raw);
-    const idx = (v: number) => opts.findIndex((o) => near(o, v));
+    const idx = (v: Value) => opts.findIndex((o) => (typeof o === "string" ? typeof v === "string" && (o === v || sameAnswer(def.type, v, o)) : typeof v === "number" && near(o as number, v)));
     const right = idx(answer);
     const mcBugs = bugs.flatMap((b) => {
       const vals = b.predict === null ? [] : Array.isArray(b.predict) ? b.predict : [b.predict];
-      const ix = [...new Set(vals.map(idx))].filter((i) => i >= 0 && i !== right);
+      const ix = [...new Set(vals.map((v) => idx(v as Value)))].filter((i) => i >= 0 && i !== right);
       return ix.length ? [{ ...b, predict: ix.length === 1 ? ix[0] : ix }] : [];
     });
-    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map(show) };
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map((o) => shown(def, o)) };
+  }
+  if (form === "word") {
+    if (!def.word) throw new Error(`families@2: ${def.id} has no everyday-situation form`);
+    // a choice family's everyday form keeps its own options and the letter of the right one
+    if (def.type === "choice") {
+      const own = def.choices?.(p);
+      if (!own || typeof answer !== "number" || !own[answer]) throw new Error(`families@2: ${def.id}(${p}) needs choices for its everyday form`);
+      return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: "choice", answer: "ABCD"[answer], bugs, options: own };
+    }
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:w`, form, prompt: def.word(p), type: def.type, answer: shown(def, answer), bugs };
   }
   const choice = def.type === "choice";
-  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "AB"[answer as number] : show(answer), bugs, ...(choice ? { options: ["The line", "The parabola y = x²"] } : {}) };
+  // a family's own options (families@2), or the first family's fixed pair
+  const own = choice && def.choices ? def.choices(p) : null;
+  if (own && (own.length < 2 || own.length > 4 || new Set(own).size !== own.length || typeof answer !== "number" || !own[answer])) throw new Error(`families@2: ${def.id}(${p}) needs 2–4 distinct options and the index of the right one`);
+  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : shown(def, answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}) };
 }
 
 export type Parsed = { supported: true; problem: Problem } | { supported: false; reason: string; family?: string };
@@ -1368,19 +1341,19 @@ export function parseProblem(text: string): Parsed {
 
 /** A stored generated question id "gen:<family>:<params>" → the problem (null if unknown or unsupported). */
 export function problemOf(id: string): Problem | null {
-  const m = id.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc))?$/);
+  const m = id.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/);
   const def = m && FAMILIES.get(m[1]);
   if (!def) return null;
   const p = m![2].split(",").map(Number);
-  if (p.length !== def.arity || def.reject(p) || (m![3] && !def.mc)) return null;
+  if (p.length !== def.arity || def.reject(p) || (m![3] === "mc" && !def.mc) || (m![3] === "w" && !def.word)) return null;
   try {
-    return build(def, p, m![3] ? "mc" : "typed");
+    return build(def, p, m![3] === "mc" ? "mc" : m![3] === "w" ? "word" : "typed");
   } catch {
     return null;
   }
 }
 export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)]));
-export const explainStep = (pr: Problem, s: Step) => FAMILIES.get(pr.family)!.explain(s);
+export const explainStep = (pr: Problem, s: Step) => prose(FAMILIES.get(pr.family)!.explain(s));
 
 // ---------------------------------------------------------------- decomposition (decomposition@2)
 
@@ -1422,10 +1395,46 @@ const fnv = (str: string) => {
   for (let i = 0; i < str.length; i++) x = Math.imul(x ^ str.charCodeAt(i), 0x01000193) >>> 0;
   return x;
 };
+/** cap@2: a capped pool takes its problems in turn from each value of the first parameter (most families use it for
+ * the kind of question), hash-ordered within each, so every kind reaches learners in fair shares (a plain hash cut
+ * left whole kinds out). A first parameter with more than 12 values is not a kind: the plain hash order is kept. */
+function capped(fam: string, def: Def, list: number[][], cap: number): number[][] {
+  const order = (xs: number[][]) => xs.map((p) => ({ p, h: fnv(`gen:${fam}:${p.join(",")}`) })).sort((a, b) => a.h - b.h).map((x) => x.p);
+  const kinds = def.domain && def.domain[0][1] - def.domain[0][0] < 12 ? [...new Set(list.map((p) => p[0]))].sort((a, b) => a - b) : null;
+  let picked: number[][];
+  if (!kinds || kinds.length < 2) picked = order(list).slice(0, cap);
+  else {
+    const groups = kinds.map((k) => order(list.filter((p) => p[0] === k)));
+    picked = [];
+    for (let i = 0; picked.length < cap && groups.some((g) => i < g.length); i++) for (const g of groups) if (i < g.length && picked.length < cap) picked.push(g[i]);
+  }
+  return picked.sort((a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; });
+}
 /** Every parameter choice in the domain ranges that `keep` and `reject` allow (before validation). */
+const candCache = new Map<string, number[][]>();
 export function candidates(fam: string): number[][] {
   const def = FAMILIES.get(fam);
   if (!def?.domain) return [];
+  const hit = candCache.get(fam);
+  if (hit && FAMILIES.get(fam) === def) return hit;
+  const size = def.domain.reduce((n, [lo, hi]) => n * (hi - lo + 1), 1);
+  // a very large domain with a cap (five-digit numbers …): a fixed, hash-chosen sample instead of every combination
+  if (def.cap && size > 300_000) {
+    const seen = new Set<string>();
+    const out: number[][] = [];
+    let state = fnv(`sample:${fam}`) || 1;
+    const rnd = () => ((state = Math.imul(state ^ (state >>> 15), 0x2c1b3c6d) >>> 0), (state = (state ^ (state >>> 12)) >>> 0), state / 4294967296);
+    for (let k = 0; k < def.cap * 120 && out.length < def.cap * 3; k++) {
+      const p = def.domain.map(([lo, hi]) => lo + Math.floor(rnd() * (hi - lo + 1)));
+      const key = p.join(",");
+      if (seen.has(key)) continue;
+      seen.add(key);
+      if ((!def.keep || def.keep(p)) && !def.reject(p)) out.push(p);
+    }
+    const picked = capped(fam, def, out, def.cap);
+    candCache.set(fam, picked);
+    return picked;
+  }
   const out: number[][] = [];
   const rec = (i: number, acc: number[]) => {
     if (i === def.domain!.length) {
@@ -1435,9 +1444,11 @@ export function candidates(fam: string): number[][] {
     for (let v = def.domain![i][0]; v <= def.domain![i][1]; v++) rec(i + 1, [...acc, v]);
   };
   rec(0, []);
+  // a capped family releases a fixed, hash-chosen subset (spread across the domain, the same on every build)
+  if (def.cap && out.length > def.cap) return capped(fam, def, out, def.cap);
   return out;
 }
-type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string> };
+type PoolEntry = { items: Problem[]; excluded: { params: number[]; reason: string }[]; ids: Set<string>; same: Map<string, string> };
 const poolCache: Map<string, PoolEntry> = (GF.__openpathPools ??= new Map<string, PoolEntry>());
 /** The family's release pool: every candidate that builds and passes its independent check. A candidate that fails
  * is EXCLUDED (never offered), with the reason, so one bad parameter choice cannot reach a learner. */
@@ -1447,28 +1458,52 @@ export function pool(fam: string) {
   const def = FAMILIES.get(fam)!;
   const items: Problem[] = [];
   const excluded: { params: number[]; reason: string }[] = [];
+  // distinct@1: a parameter choice that shows the learner exactly the question an earlier one shows (same wording,
+  // picture and options) is the same question: it is not released again, and answering either is one exposure
+  const shownAs = new Map<string, { id: string; answer: string }>();
+  const same = new Map<string, string>();
   for (const p of candidates(fam)) {
     try {
-      items.push(build(def, p));
+      const q = build(def, p);
+      const sig = `${q.prompt}\u0000${JSON.stringify(q.figure ?? null)}\u0000${JSON.stringify(q.options ?? null)}`;
+      const first = shownAs.get(sig);
+      if (first) {
+        // the same question with another answer is ambiguous: a defect of the family (the specification check fails it)
+        excluded.push({ params: p, reason: first.answer === q.answer ? `shows the same question as ${first.id} (distinct@1)` : `AMBIGUOUS: shows the same question as ${first.id} but answers ${q.answer}, not ${first.answer}` });
+        same.set(q.id, first.id);
+        continue;
+      }
+      shownAs.set(sig, { id: q.id, answer: q.answer });
+      items.push(q);
     } catch (e) {
       excluded.push({ params: p, reason: String((e as Error).message) });
     }
   }
-  const r = { items, excluded, ids: new Set(items.map((x) => x.id)) };
+  const r = { items, excluded, ids: new Set(items.map((x) => x.id)), same };
   poolCache.set(fam, r);
   return r;
 }
 /** TEST ONLY: forget the computed pools (after a test changes a generator, to see what the change does). */
-export const resetPools = () => poolCache.clear();
+export const resetPools = () => {
+  poolCache.clear();
+  candCache.clear();
+};
 /** The base (typed) id of a generated question: "gen:f:p" for both "gen:f:p" and "gen:f:p:mc" (one exposure). */
-export const exposureKey = (qid: string) => (qid.startsWith("gen:") ? qid.replace(/:mc$/, "") : qid);
+export const exposureKey = (qid: string) => {
+  if (!qid.startsWith("gen:")) return qid;
+  const base = qid.replace(/:(mc|w)$/, "");
+  // distinct@1: a parameter choice that shows the same question as a released one is the same exposure
+  const fam = base.split(":")[1];
+  return (FAMILIES.has(fam) && pool(fam).same.get(base)) || base;
+};
 /** Whether a generated question is in its family's release pool. */
 export function inPool(qid: string): boolean {
-  const m = qid.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::mc)?$/);
+  const m = qid.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/);
   if (!m || !FAMILIES.get(m[1])?.domain) return false;
   const def = FAMILIES.get(m[1])!;
   const p = m[2].split(",").map(Number);
   if (p.length !== def.arity || p.some((v, i) => v < def.domain![i][0] || v > def.domain![i][1]) || (def.keep && !def.keep(p))) return false;
+  if ((m[3] === "mc" && !def.mc) || (m[3] === "w" && !def.word)) return false;
   return pool(m[1]).ids.has(exposureKey(qid));
 }
 export type Phase = "retention" | "diagnostic" | "check" | "practice";
@@ -1479,6 +1514,17 @@ export function phaseOf(qid: string): Phase {
   return k < 2 ? "retention" : k === 2 ? "diagnostic" : k < 5 ? "check" : "practice";
 }
 export const difficultyOf = (pr: Problem) => FAMILIES.get(pr.family)?.difficulty?.(pr.params) ?? 2;
+/** level@1: the grade a generated question belongs to (its family's grade(p); null for a family that does not say). */
+export function gradeOfQuestion(qid: string): number | null {
+  const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)/.exec(qid);
+  const def = m ? FAMILIES.get(m[1]) : undefined;
+  if (!def?.grade) return null;
+  try {
+    return def.grade(m![2].split(",").map(Number));
+  } catch {
+    return null;
+  }
+}
 /** The pool items of one phase, in a stable order, as question ids (both formats where the family has them). */
 export function phasePool(fam: string, phase: Phase): string[] {
   const def = FAMILIES.get(fam)!;

@@ -150,3 +150,20 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 [data-content="partial"] b { color: var(--warn, #8a4b00); }
 .actions[role="radiogroup"] { flex-wrap: wrap; }
 .actions[role="radiogroup"] button { max-width: 100%; white-space: normal; }
+
+/* pictures for questions and lessons (Figure.tsx) */
+.figure { margin: 8px 0 14px; display: flex; justify-content: flex-start; overflow-x: auto; }
+.figure svg { height: auto; display: block; }
+.figure table.data { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.figure table.data th, .figure table.data td { border: 1px solid var(--line, #c9d3e0); padding: 4px 10px; text-align: center; }
+.figure table.data th { background: var(--soft, #eef3fb); font-weight: 600; }
+.field textarea { width: 100%; font: inherit; padding: 8px; border-radius: 8px; border: 1px solid var(--line, #c9d3e0); }
+
+/* draw@1: the drawing pad for graph sketches, constructions and diagrams (marked by an educator) */
+.sketchpad { display: flex; flex-direction: column; gap: 8px; }
+.sketchpad .tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.sketchpad .tools button { min-height: 40px; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: inherit; font: inherit; cursor: pointer; }
+.sketchpad .tools button.picked { border-color: var(--accent, #2f6fde); box-shadow: inset 0 0 0 1px var(--accent, #2f6fde); font-weight: 600; }
+.sketch-sheet { width: 100%; max-width: 420px; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: crosshair; }
+.sketch { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.sketch .sketch-sheet { cursor: default; max-width: 320px; }

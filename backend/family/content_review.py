@@ -48,13 +48,27 @@ def items():
     lib = _load('library.v1.json')
     pools = lib.get('authoredPools', {})
     mods = []
-    for m in _load('modules.v1.json')['modules']:
-        mods.append(({**m, 'pool': pools[m['competency']]} if m['competency'] in pools else m, 'authored'))
+    for m in [*_load('modules.v1.json')['modules'], *_load('written-modules.v1.json')['modules']]:
+        a = pools.get(m['competency'])
+        # as the app builds it (content.ts): the main family as pool, every family as pools (pools@1)
+        mods.append(({**m, 'pool': {'family': a['family'], 'version': a['version']}, **({'pools': a['pools']} if a.get('pools') else {})} if a else m, 'authored'))
+    authored = {m['competency'] for m, _ in mods}
     for m in lib['modules']:
+        if m['competency'] in authored:
+            continue  # an authored module stands in for the synthesised one (content.ts)
         mods.append(({k: v for k, v in m.items() if k != 'provenance'}, m.get('provenance', {}).get('author', 'OpenPath')))
+    # written@2: a module answered automatically also offers the competency's written tasks it does not ask itself
+    tasks = _load('written.v1.json')['tasks']
+    for i, (m, author) in enumerate(mods):
+        if not m.get('pool'):
+            continue
+        own = {*m['diagnostics'], *m['practice'], *m['transfer'], *m['retention']}
+        w = [t['id'] for t in tasks if t['competency'] == m['competency'] and t['id'] not in own]
+        if w:
+            mods[i] = ({**m, 'written': w}, author)
     for m, author in mods:
         listed = [q for q in [*m['diagnostics'], *m['practice'], *m['transfer'], *m['retention'], *m['probes'], *[x for s in m['strategies'] for x in (s['guided'], s['check'])]] if q.startswith('gen:')]
-        fams = sorted({*([m['pool']['family']] if m.get('pool') else []), *(q.split(':')[1] for q in listed)})
+        fams = sorted({*([m['pool']['family']] if m.get('pool') else []), *(p['family'] for p in m.get('pools', [])), *(q.split(':')[1] for q in listed)})
         out[f"module:{m['competency']}"] = {'hash': hash_of(m), 'version': '', 'kind': 'module', 'competency': m['competency'], 'families': fams, 'title': m['title'], 'author': author if author != 'authored' else 'OpenPath (written with AI assistance; not educator-reviewed)', 'valid': True}
     return out
 

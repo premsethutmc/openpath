@@ -9,6 +9,7 @@ import { evidenceFor } from "./evidence";
 import { graph } from "./graph";
 import { nextActivity, planChange, yearSummary } from "./plan";
 import { currentEnrolment, readRecords, type LearningActivity, type LearningRecord } from "./records";
+import type { WrittenMark } from "./written";
 
 let counter = 0;
 const rid = () => `lr-${Date.now().toString(36)}-${(counter++).toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
@@ -23,8 +24,8 @@ export const make = {
   teach: (c: Ctx, competency: string, strategy: string, rule: string): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule }),
 };
 
-export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string } = {}) {
-  const records = readRecords(learnerId, events);
+export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string; marks?: readonly WrittenMark[] } = {}) {
+  const records = readRecords(learnerId, events, o.marks ?? []);
   const ev = evidenceFor(learnerId, records, now);
   const enrol = currentEnrolment(records);
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;
@@ -37,7 +38,7 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
     const last = o.currentSession && sessions.includes(o.currentSession) ? o.currentSession : null;
     const before = events.filter((e) => e.kind !== "learning_record" || own(e) !== last);
     if (last && before.length < events.length) {
-      const r0 = readRecords(learnerId, before);
+      const r0 = readRecords(learnerId, before, o.marks ?? []);
       const e0 = evidenceFor(learnerId, r0, now);
       const enrol0 = currentEnrolment(r0);
       const rel0 = enrol0 ? releaseFor(enrol0.curriculum, r0.curricula) : null;

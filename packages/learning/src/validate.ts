@@ -44,7 +44,8 @@ export function validateModule(m: Module): string[] {
   if (m.transfer.length < 1) out.push("Verify needs a transfer question");
   if (m.retention.length < RETENTION_CHECK) out.push(`the delayed check needs ${RETENTION_CHECK} questions`);
   // the shared engine demonstrates a skill only in two different contexts (answer formats)
-  const formats = new Set([...phases.check, ...phases.practice, ...phases.transfer, ...phases.retention].filter(isQuestion).map((id) => question(id).type));
-  if (formats.size < 2) out.push("the questions answered alone need at least two answer formats");
+  // (context@2: an everyday-situation form ":w" is a context of its own, as in the evidence ledger)
+  const formats = new Set([...phases.check, ...phases.practice, ...phases.transfer, ...phases.retention].filter(isQuestion).map((id) => `${question(id).type}${id.endsWith(":w") ? "-situation" : ""}`));
+  if (formats.size < 2) out.push("the questions answered alone need at least two contexts (answer formats, or an everyday situation)");
   return out;
 }

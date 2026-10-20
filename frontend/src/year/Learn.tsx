@@ -4,6 +4,10 @@
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
 import { useState } from "react";
+import { Figure } from "./Figure";
+import { SketchPad } from "./SketchPad";
+import { writtenTask } from "../../../packages/learning/src/written";
+import { needsMarking } from "../../../packages/learning/src/content";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
@@ -58,8 +62,24 @@ interface Fb {
   working?: string[];
 }
 
+const ANSWER_LABEL: Record<string, string> = {
+  integer: "Your answer (a whole number)",
+  fraction: "Your answer (a fraction such as 3/4, or a decimal)",
+  set: "Your answers, separated by a comma",
+  polynomial: "Your answer (an expression in x)",
+  exact: "Your answer (exact: use √ or sqrt, fractions, letters)",
+  roots: "Your answers, separated by a comma (exact)",
+  tuple: "Your answer, in brackets, e.g. (3, −2)",
+  matrix: "Your answer, row by row, e.g. [[1, 2], [3, 4]]",
+  interval: "Your answer, e.g. x > 3, or −1 < x ≤ 4, or (−∞, 2]",
+  ratio: "Your answer, e.g. 3:4",
+  mixed: "Your answer as a mixed number, e.g. 3 2/5",
+  expression: "Your answer (an expression: sin, cos, ln, e^x, ^ for powers)",
+  antiderivative: "Your answer (+ C may be written or not)",
+};
+const ANSWER_EXAMPLE: Record<string, string> = { fraction: "e.g. 3/4", set: "e.g. 2, 5", exact: "e.g. 2√3", roots: "e.g. 2, −3", tuple: "e.g. (3, −2)", matrix: "e.g. [[1, 0], [0, 1]]", interval: "e.g. x > 3", ratio: "e.g. 3:4", expression: "e.g. 2x cos(x^2)", antiderivative: "e.g. x^3/3 + C", polynomial: "e.g. x^2 + 2x" };
 /** An answer box for any question type. */
-export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options">; value: string; setValue: (v: string) => void; disabled: boolean }) {
+export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
   if (q.type === "choice")
     return (
       <div className="options" role="radiogroup" aria-label="Choose one answer">
@@ -71,17 +91,43 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
         ))}
       </div>
     );
-  const label = q.type === "integer" ? "Your answer (a whole number)" : q.type === "fraction" ? "Your answer (a fraction such as 3/4)" : q.type === "set" ? "Your answers, separated by a comma" : "Your answer";
+  const task = q.type === "written" && q.id ? writtenTask(q.id) : null;
+  if (task?.answer === "drawing")
+    return (
+      <div className="field">
+        Your drawing (an educator will look at it and mark it)
+        <SketchPad value={value} onChange={setValue} canvas={task.canvas} disabled={disabled} />
+      </div>
+    );
+  if (q.type === "written")
+    return (
+      <label className="field">
+        Your written answer (an educator will read and mark it)
+        <textarea aria-label="Your answer" rows={6} maxLength={4000} value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} />
+      </label>
+    );
+  const label = ANSWER_LABEL[q.type] ?? "Your answer";
   return (
     <label className="field">
       {label}
-      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={q.type === "fraction" ? "e.g. 3/4" : q.type === "set" ? "e.g. 2, 5" : "e.g. 12"} />
+      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={ANSWER_EXAMPLE[q.type] ?? "e.g. 12"} />
     </label>
   );
 }
 
 function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => void; label?: string }) {
   const q = question(fb.qid);
+  if (needsMarking(q))
+    return (
+      <div className="stack enter">
+        <div className="feedback" role="status">
+          <strong>Sent to be marked.</strong>
+          <p>An educator will read your answer and mark it against the criteria. It counts only once it is marked correct; you will see the mark and the feedback under “Written work”.</p>
+          <p className="small muted">{q.solution}</p>
+        </div>
+        <div className="actions sticky"><button className="primary" onClick={onNext}>{label}</button></div>
+      </div>
+    );
   const says = fb.right ? null : misconceptionOf(q, fb.response)?.says;
   const fam = fb.working?.length ? familyOf(fb.qid) : null;
   const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
@@ -118,6 +164,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {heading && <p className="eyebrow">{heading}</p>}
       <span className="counted">{COUNTS[activity]}</span>
       <p className="prompt">{q.prompt}</p>
+      {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
       {workable && (
         <details className="working">
@@ -146,6 +193,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
 }
 
 function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
+  if (w.type !== "strips" && w.type !== "array") return <Figure v={w} />;
   if (w.type === "strips") {
     const row = (n: number, shaded: number) => (
       <div className="strip" style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}>
@@ -244,8 +292,8 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   return (
     <div className="stack">
       {head}
-      <div className={`feedback ${ms.phase === "pause" ? "bad" : "good"}`} role="status">
-        <strong>{ms.phase === "pause" ? "Let's pause this one" : STATUS_WORD[ev.status]}</strong>
+      <div className={`feedback ${ms.phase === "pause" ? "bad" : ms.phase === "waiting" ? "" : "good"}`} role="status">
+        <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : STATUS_WORD[ev.status]}</strong>
         <p>{ms.reason}</p>
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>

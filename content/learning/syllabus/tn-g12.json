@@ -1,0 +1,2706 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 12,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics (Higher Secondary Second Year), Volume I and Volume II",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "edition": "First Edition 2019; Revised Edition 2020 (Published under New Syllabus); 2026-27 reprint year not verified",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Mathematics Volume I, Higher Secondary Second Year (English medium), copy of official PDF",
+   "publisher": "Government of Tamil Nadu / SCERT (mirror hosted by BYJU'S)",
+   "edition": "First Edition - 2019; Revised Edition - 2020",
+   "academicYear": "2026-27 (assumed still prescribed)",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-12-Mathematics-Vol-1-Textbook.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "chapter 1-6 titles and section list, edition"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics Volume I, Higher Secondary Second Year (English medium), copy of official PDF",
+   "publisher": "Government of Tamil Nadu / SCERT (mirror hosted by BYJU'S)",
+   "edition": "First Edition - 2019",
+   "academicYear": "2019-20",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/10/TN-Board-Class-12-Maths-Textbook-Volume-1-English-Medium.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of Vol I contents, Chapter 1 sub-sections and learning objectives"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics Volume II, Higher Secondary Second Year (English medium), copy of official PDF",
+   "publisher": "Government of Tamil Nadu / SCERT (mirror hosted by BYJU'S)",
+   "edition": "First Edition - 2019; Revised Edition - 2020",
+   "academicYear": "2026-27 (assumed still prescribed)",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-12-Mathematics-Vol-2-Textbook.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "chapter 7-12 titles and section list, edition"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Tamil Nadu Board (HSC) Mathematics syllabus listing, 2026-27 (secondary aggregator)",
+   "publisher": "Shaalaa.com (secondary)",
+   "edition": "page marked 'Revised Syllabus' 2026-27",
+   "academicYear": "2026-27",
+   "url": "https://www.shaalaa.com/syllabus/tamil-nadu-board-of-secondary-education-class-12-mathematics_8973",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check that the 2026-27 chapter list matches the textbook; no reduced-syllabus mention"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu classes 4-12 curriculum preparation in third phase (news report)",
+   "publisher": "DT Next",
+   "edition": "updated 16 Aug 2026",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-classes-4-12-curriculum-preparation-in-third-phase",
+   "accessed": "2026-10-19",
+   "used_for": "evidence that new SEP-2025 textbooks target 2027-28, so current books continue in 2026-27"
+  },
+  {
+   "kind": "notification",
+   "title": "Tamil Nadu begins curriculum overhaul under new state education policy (news report)",
+   "publisher": "Madhyamam",
+   "edition": "6 Nov 2025",
+   "academicYear": "2027-28",
+   "url": "https://madhyamamonline.com/amp/india/tamil-nadu-begins-curriculum-overhaul-under-new-state-education-policy-1464598",
+   "accessed": "2026-10-19",
+   "used_for": "timeline of the curriculum revision"
+  }
+ ],
+ "notes": [
+  "Official sites textbooksonline.tn.nic.in and textbookcorp.tn.gov.in could not be read: WebFetch was refused by their robots.txt, and the shell has no internet access. dge.tn.gov.in and tnschools.gov.in were not reached either. The chapter and section titles were therefore taken from copies of the official SCERT/Government of Tamil Nadu textbook PDFs hosted on cdn1.byjus.com (and, for Grade 11 Vol I, on 11thstudymaterials.wordpress.com). These are mirrors of the government PDF (cover 'GOVERNMENT OF TAMIL NADU', '(c) SCERT', 'A publication under Free Textbook Programme') and were used only because the official host was unreachable.",
+  "Section titles are the top-level numbered sections from each volume's contents page, as reported by the fetch tool. Capitalisation follows the printed contents, which is inconsistent in the book itself. The fetched PDF text had OCR/ligature artefacts (e.g. 'Th eorem'), so small punctuation or capitalisation differences are possible. Sub-sections (e.g. 1.2.1) are omitted because they could not be seen for every chapter.",
+  "Edition for 2026-27: the books in use are still the 'Published under New Syllabus' set (first edition 2018 for Std XI, 2019 for Std XII, with later revised editions). News reports (DT Next, updated 16 Aug 2026; Madhyamam, 6 Nov 2025) say new textbooks under the Tamil Nadu State Education Policy 2025 are being prepared for 2027-28. I found no sign that new Std XI or XII mathematics books were issued for 2026-27. Annual reprints may carry a later reprint year that I could not see.",
+  "Reduced syllabus: TN cut the syllabus for the COVID-affected years (2020-21 onward). I found no reduced-syllabus or deleted-portions notice for 2026-27 from DGE or SCERT. Secondary syllabus listings (shaalaa.com, careers360) show the full 12-chapter syllabus for 2026-27. This could not be confirmed on dge.tn.gov.in.",
+  "Business Mathematics and Statistics (Std XI and XII, 2 volumes each) is a separate Higher Secondary subject taken in commerce streams. It shares some chapter names (e.g. 'Applications of Matrices and Determinants') but is not inventoried here. Only the Mathematics (core) textbook is covered.",
+  "Outcomes are written in my own words from the section structure. They are not official TN learning outcomes: I found no separate official learning-outcomes document for Higher Secondary mathematics.",
+  "The existing competencies were written to NCERT grade bands. Some TN placements differ, and mappings follow the skill, not the grade label.",
+  "Std XII Vol II contents list section 9.3 'Fundamental Theorems of Integral Calculus and their Applications' and section 9.4 'Bernoulli's Formula'. Some secondary syllabus pages omit these. The textbook contents page was followed.",
+  "Std XII Vol I: section lists match between First Edition 2019 and Revised Edition 2020. For Vol II only the revised (2020) contents were seen.",
+  "Chapter 11 has no section on Poisson or normal distributions in the contents seen. Only the one-point, two-point, Bernoulli and binomial distributions are listed. This was inferred from the section titles and a secondary syllabus listing, not checked against the body text.",
+  "The textbook prints recommended teaching months next to chapters (e.g. Chapter 7 'October'). These were not recorded.",
+  "Several Std XII TN topics are absent from the NCERT-based competency list: rank and consistency, de Moivre, theory of equations, triple products, MVT, L'Hopital, Taylor series, partial derivatives, improper and gamma integrals, volumes of revolution, continuous random variables, the binomial distribution, binary operations and propositional logic. New competencies are proposed only for these."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g12-c01",
+   "number": 1,
+   "term": null,
+   "title": "Applications of Matrices and Determinants",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c01-s01",
+     "title": "1.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c01-s02",
+     "title": "1.2 Inverse of a Non-Singular Square Matrix"
+    },
+    {
+     "id": "tn-g12-c01-s03",
+     "title": "1.3 Elementary Transformations of a Matrix"
+    },
+    {
+     "id": "tn-g12-c01-s04",
+     "title": "1.4 Applications of Matrices: Solving System of Linear Equations"
+    },
+    {
+     "id": "tn-g12-c01-s05",
+     "title": "1.5 Applications of Matrices: Consistency of system of linear equations by rank method"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c01-o01",
+     "statement": "Find the adjoint and inverse of a non-singular square matrix and use properties of inverses and adjoints.",
+     "concepts": [
+      "adjoint",
+      "inverse matrix",
+      "properties of inverse"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The 2 × 2 inverse and the 3 × 3 adjoint are computed there; the 3 × 3 inverse is the new family auinv."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.algebra.matrices",
+      "MATH.matrices.adjoint-inverse"
+     ]
+    },
+    {
+     "id": "tn-g12-c01-o02",
+     "statement": "Apply matrices to geometric transformations (e.g. rotations, orthogonal matrices) and to simple encoding and decoding of messages.",
+     "concepts": [
+      "orthogonal matrix",
+      "rotation matrix",
+      "cryptography"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ]
+    },
+    {
+     "id": "tn-g12-c01-o03",
+     "statement": "Use elementary row operations to reduce a matrix to row-echelon form, find its rank and find inverses by the Gauss-Jordan method.",
+     "concepts": [
+      "elementary operations",
+      "row-echelon form",
+      "rank",
+      "Gauss-Jordan"
+     ],
+     "questionTypes": [
+      "numeric",
+      "vector-matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.matrices.rank-row-reduction",
+       "name": "Reduce matrices to echelon form and find rank",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.matrices"
+       ],
+       "supports": [
+        "MATH.algebra.determinants"
+       ],
+       "why": "algebra.matrices covers operations; elementary row/column operations, row-echelon form, rank and Gauss-Jordan inversion are not covered by any competency."
+      }
+     ],
+     "mapped": [
+      "MATH.matrices.rank-row-reduction"
+     ]
+    },
+    {
+     "id": "tn-g12-c01-o04",
+     "statement": "Model a situation as a system of linear equations and solve it by matrix inversion, Cramer's rule or Gaussian elimination.",
+     "concepts": [
+      "matrix inversion method",
+      "Cramer's rule",
+      "Gaussian elimination"
+     ],
+     "questionTypes": [
+      "vector-matrix",
+      "word-problem",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrix-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrix-systems"
+     ]
+    },
+    {
+     "id": "tn-g12-c01-o05",
+     "statement": "Decide by comparing ranks whether a non-homogeneous system has a unique solution, infinitely many solutions or none, and find the solution set.",
+     "concepts": [
+      "consistency",
+      "rank method",
+      "Rouche-Capelli"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "vector-matrix",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.matrices.system-consistency",
+       "name": "Test consistency of linear systems by the rank method",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.matrices.rank-row-reduction",
+        "MATH.algebra.matrix-systems"
+       ],
+       "supports": [],
+       "why": "algebra.matrix-systems solves square non-singular systems; classifying systems (unique / infinitely many / no solution, non-trivial homogeneous solutions) via rank comparison is a separate skill."
+      }
+     ],
+     "mapped": [
+      "MATH.matrices.system-consistency"
+     ]
+    },
+    {
+     "id": "tn-g12-c01-o06",
+     "statement": "Determine when a homogeneous system has non-trivial solutions and find them, including parameter values that make a system consistent.",
+     "concepts": [
+      "homogeneous system",
+      "non-trivial solution",
+      "parameter"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.matrices.system-consistency",
+       "name": "Test consistency of linear systems by the rank method",
+       "strand": "matrices",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.matrices.rank-row-reduction",
+        "MATH.algebra.matrix-systems"
+       ],
+       "supports": [],
+       "why": "algebra.matrix-systems solves square non-singular systems; classifying systems (unique / infinitely many / no solution, non-trivial homogeneous solutions) via rank comparison is a separate skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.matrices.system-consistency"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c02",
+   "number": 2,
+   "term": null,
+   "title": "Complex Numbers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c02-s01",
+     "title": "2.1 Introduction to Complex Numbers"
+    },
+    {
+     "id": "tn-g12-c02-s02",
+     "title": "2.2 Complex Numbers"
+    },
+    {
+     "id": "tn-g12-c02-s03",
+     "title": "2.3 Basic Algebraic Properties of Complex Numbers"
+    },
+    {
+     "id": "tn-g12-c02-s04",
+     "title": "2.4 Conjugate of a Complex Number"
+    },
+    {
+     "id": "tn-g12-c02-s05",
+     "title": "2.5 Modulus of a Complex Number"
+    },
+    {
+     "id": "tn-g12-c02-s06",
+     "title": "2.6 Geometry and Locus of Complex Numbers"
+    },
+    {
+     "id": "tn-g12-c02-s07",
+     "title": "2.7 Polar and Euler form of a Complex Number"
+    },
+    {
+     "id": "tn-g12-c02-s08",
+     "title": "2.8 de Moivre's Theorem and its Applications"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c02-o01",
+     "statement": "Perform arithmetic with complex numbers, including powers of i, and represent them in the Argand plane.",
+     "concepts": [
+      "imaginary unit",
+      "rectangular form",
+      "Argand plane"
+     ],
+     "questionTypes": [
+      "expression",
+      "coordinate"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "tn-g12-c02-o02",
+     "statement": "Use properties of conjugate and modulus, including the triangle inequality, and find square roots of complex numbers.",
+     "concepts": [
+      "conjugate",
+      "modulus",
+      "triangle inequality",
+      "square root"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "tn-g12-c02-o03",
+     "statement": "Interpret equations and inequalities in z as loci or regions (circles, lines, perpendicular bisectors) in the complex plane.",
+     "concepts": [
+      "locus in complex plane",
+      "circle",
+      "perpendicular bisector"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.complex-locus",
+       "name": "Describe loci and regions in the complex plane",
+       "strand": "number",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.number.complex",
+        "MATH.coordinate.locus"
+       ],
+       "supports": [
+        "MATH.coordinate.conics"
+       ],
+       "why": "number.complex covers arithmetic and representation; interpreting conditions such as |z - z0| = r or |z - a| = |z - b| as curves in the Argand plane is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.number.complex-locus"
+     ]
+    },
+    {
+     "id": "tn-g12-c02-o04",
+     "statement": "Convert complex numbers between rectangular, polar and Euler forms and multiply or divide in polar form.",
+     "concepts": [
+      "polar form",
+      "argument",
+      "principal argument",
+      "Euler form"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.complex-polar-form",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "asarg (principal argument, the step to polar/Euler form) and aspolm (multiplying and dividing in polar form) assess exactly the missing part; the outcome is mapped only to MATH.number.complex."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex",
+      "MATH.number.complex-polar-form"
+     ]
+    },
+    {
+     "id": "tn-g12-c02-o05",
+     "statement": "Use de Moivre's theorem to compute powers, find nth roots of a complex number and solve equations involving roots of unity.",
+     "concepts": [
+      "de Moivre's theorem",
+      "nth roots",
+      "roots of unity"
+     ],
+     "questionTypes": [
+      "expression",
+      "set",
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.de-moivre-roots",
+       "name": "Apply de Moivre's theorem and find nth roots",
+       "strand": "number",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.number.complex",
+        "MATH.trigonometry.functions"
+       ],
+       "supports": [],
+       "why": "No existing competency covers powers of complex numbers in polar/Euler form, nth roots of a complex number or roots of unity."
+      }
+     ],
+     "mapped": [
+      "MATH.number.de-moivre-roots"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theory of Equations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c03-s01",
+     "title": "3.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c03-s02",
+     "title": "3.2 Basics of Polynomial Equations"
+    },
+    {
+     "id": "tn-g12-c03-s03",
+     "title": "3.3 Vieta's Formulae and Formation of Polynomial Equations"
+    },
+    {
+     "id": "tn-g12-c03-s04",
+     "title": "3.4 Nature of Roots and Nature of Coefficients of Polynomial Equations"
+    },
+    {
+     "id": "tn-g12-c03-s05",
+     "title": "3.5 Applications to Geometrical Problems"
+    },
+    {
+     "id": "tn-g12-c03-s06",
+     "title": "3.6 Roots of Higher Degree Polynomial Equations"
+    },
+    {
+     "id": "tn-g12-c03-s07",
+     "title": "3.7 Polynomials with Additional Information"
+    },
+    {
+     "id": "tn-g12-c03-s08",
+     "title": "3.8 Polynomial Equations with no additional information"
+    },
+    {
+     "id": "tn-g12-c03-s09",
+     "title": "3.9 Descartes Rule"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c03-o01",
+     "statement": "Relate the roots and coefficients of polynomial equations using Vieta's formulae, and form equations with given or transformed roots.",
+     "concepts": [
+      "Vieta's formulae",
+      "symmetric functions of roots",
+      "formation of equations"
+     ],
+     "questionTypes": [
+      "expression",
+      "equation-solution",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.vieta-relations",
+       "name": "Relate roots and coefficients of polynomial equations",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials"
+       ],
+       "supports": [
+        "MATH.algebra.quadratics",
+        "MATH.number.complex"
+       ],
+       "why": "Existing polynomial competencies stop at remainder/factor theorem and quadratic zeros; Vieta's formulae for degree n and forming equations from given roots are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomials",
+      "MATH.algebra.vieta-relations"
+     ]
+    },
+    {
+     "id": "tn-g12-c03-o02",
+     "statement": "Use the conjugate-pair theorems for imaginary and surd roots and the nature of coefficients to deduce remaining roots.",
+     "concepts": [
+      "complex conjugate root theorem",
+      "irrational conjugate roots",
+      "fundamental theorem of algebra"
+     ],
+     "questionTypes": [
+      "set",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratic-complex",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-root-analysis",
+       "name": "Determine the nature and number of roots of a polynomial",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials"
+       ],
+       "supports": [
+        "MATH.algebra.quadratic-discriminant",
+        "MATH.algebra.vieta-relations"
+       ],
+       "why": "quadratic-discriminant is degree 2 only; Descartes' rule of signs and reasoning about real/imaginary/rational/irrational roots of higher-degree polynomials are absent."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-root-analysis",
+      "MATH.algebra.quadratic-complex"
+     ]
+    },
+    {
+     "id": "tn-g12-c03-o03",
+     "statement": "Solve higher-degree polynomial equations using additional information such as roots in progression, partial factorisation or coefficient sums.",
+     "concepts": [
+      "roots in AP/GP",
+      "partly factored polynomial",
+      "even-power equations"
+     ],
+     "questionTypes": [
+      "set",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factor-theorem",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-equation-solving",
+       "name": "Solve higher-degree polynomial equations using structure",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.factor-theorem",
+        "MATH.algebra.vieta-relations"
+       ],
+       "supports": [
+        "MATH.algebra.quadratic-complex"
+       ],
+       "why": "No competency covers solving cubic/quartic equations using conjugate-root pairs, rational root theorem, roots in progression or reciprocal equations."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.factor-theorem",
+      "MATH.algebra.polynomial-equation-solving"
+     ]
+    },
+    {
+     "id": "tn-g12-c03-o04",
+     "statement": "Solve polynomial equations without extra information using the rational root theorem, reciprocal equations and reducible non-polynomial equations.",
+     "concepts": [
+      "rational root theorem",
+      "reciprocal equations"
+     ],
+     "questionTypes": [
+      "set",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-equation-solving",
+       "name": "Solve higher-degree polynomial equations using structure",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.factor-theorem",
+        "MATH.algebra.vieta-relations"
+       ],
+       "supports": [
+        "MATH.algebra.quadratic-complex"
+       ],
+       "why": "No competency covers solving cubic/quartic equations using conjugate-root pairs, rational root theorem, roots in progression or reciprocal equations."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-equation-solving"
+     ]
+    },
+    {
+     "id": "tn-g12-c03-o05",
+     "statement": "Use polynomial equations to solve geometric problems such as finding dimensions satisfying volume or area conditions.",
+     "concepts": [
+      "applications",
+      "modelling with polynomials"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-equation-solving",
+       "name": "Solve higher-degree polynomial equations using structure",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.factor-theorem",
+        "MATH.algebra.vieta-relations"
+       ],
+       "supports": [
+        "MATH.algebra.quadratic-complex"
+       ],
+       "why": "No competency covers solving cubic/quartic equations using conjugate-root pairs, rational root theorem, roots in progression or reciprocal equations."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-equation-solving",
+      "MATH.reasoning.model-selection"
+     ]
+    },
+    {
+     "id": "tn-g12-c03-o06",
+     "statement": "Apply Descartes' rule of signs to bound the numbers of positive, negative and non-real roots.",
+     "concepts": [
+      "Descartes' rule of signs",
+      "sign changes"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.polynomial-root-analysis",
+       "name": "Determine the nature and number of roots of a polynomial",
+       "strand": "algebra",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.polynomials"
+       ],
+       "supports": [
+        "MATH.algebra.quadratic-discriminant",
+        "MATH.algebra.vieta-relations"
+       ],
+       "why": "quadratic-discriminant is degree 2 only; Descartes' rule of signs and reasoning about real/imaginary/rational/irrational roots of higher-degree polynomials are absent."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.polynomial-root-analysis"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c04",
+   "number": 4,
+   "term": null,
+   "title": "Inverse Trigonometric Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c04-s01",
+     "title": "4.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c04-s02",
+     "title": "4.2 Some Fundamental Concepts"
+    },
+    {
+     "id": "tn-g12-c04-s03",
+     "title": "4.3 Sine Function and Inverse Sine Function"
+    },
+    {
+     "id": "tn-g12-c04-s04",
+     "title": "4.4 The Cosine Function and Inverse Cosine Function"
+    },
+    {
+     "id": "tn-g12-c04-s05",
+     "title": "4.5 The Tangent Function and the Inverse Tangent Function"
+    },
+    {
+     "id": "tn-g12-c04-s06",
+     "title": "4.6 The Cosecant Function and the Inverse Cosecant Function"
+    },
+    {
+     "id": "tn-g12-c04-s07",
+     "title": "4.7 The Secant Function and Inverse Secant Function"
+    },
+    {
+     "id": "tn-g12-c04-s08",
+     "title": "4.8 The Cotangent Function and the Inverse Cotangent Function"
+    },
+    {
+     "id": "tn-g12-c04-s09",
+     "title": "4.9 Principal Value of Inverse Trigonometric Functions"
+    },
+    {
+     "id": "tn-g12-c04-s10",
+     "title": "4.10 Properties of Inverse Trigonometric Functions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c04-o01",
+     "statement": "Use domain, range, period and amplitude to describe graphs of trigonometric functions and explain why restrictions are needed for inverses.",
+     "concepts": [
+      "period",
+      "amplitude",
+      "restricted domain",
+      "inverse function"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "interval",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inverse-functions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.trigonometry.functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-functions",
+      "MATH.trigonometry.functions"
+     ]
+    },
+    {
+     "id": "tn-g12-c04-o02",
+     "statement": "State domains and ranges of the six inverse trigonometric functions and sketch their graphs.",
+     "concepts": [
+      "inverse trig domains",
+      "inverse trig graphs"
+     ],
+     "questionTypes": [
+      "interval",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    },
+    {
+     "id": "tn-g12-c04-o03",
+     "statement": "Find principal values of inverse trigonometric expressions.",
+     "concepts": [
+      "principal value"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    },
+    {
+     "id": "tn-g12-c04-o04",
+     "statement": "Apply properties of inverse trigonometric functions, such as sum formulae and composition rules, to simplify expressions, prove results and solve equations.",
+     "concepts": [
+      "inverse trig identities",
+      "tan^-1 x + tan^-1 y",
+      "composition"
+     ],
+     "questionTypes": [
+      "expression",
+      "proof",
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c05",
+   "number": 5,
+   "term": null,
+   "title": "Two Dimensional Analytical Geometry-II",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c05-s01",
+     "title": "5.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c05-s02",
+     "title": "5.2 Circle"
+    },
+    {
+     "id": "tn-g12-c05-s03",
+     "title": "5.3 Conics"
+    },
+    {
+     "id": "tn-g12-c05-s04",
+     "title": "5.4 Conic Sections"
+    },
+    {
+     "id": "tn-g12-c05-s05",
+     "title": "5.5 Parametric form of Conics"
+    },
+    {
+     "id": "tn-g12-c05-s06",
+     "title": "5.6 Tangents and Normals to Conics"
+    },
+    {
+     "id": "tn-g12-c05-s07",
+     "title": "5.7 Real life Applications of Conics"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c05-o01",
+     "statement": "Find the equation of a circle from given conditions, its centre and radius from the general equation, and the position of a point relative to it.",
+     "concepts": [
+      "circle",
+      "general equation",
+      "centre and radius"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "tn-g12-c05-o02",
+     "statement": "Derive and use standard equations of parabola, ellipse and hyperbola from focus-directrix-eccentricity, finding vertices, foci, axes, latus rectum and directrices.",
+     "concepts": [
+      "eccentricity",
+      "focus",
+      "directrix",
+      "latus rectum"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "coordinate",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "tn-g12-c05-o03",
+     "statement": "Identify the type of conic represented by a general second-degree equation.",
+     "concepts": [
+      "classification of conics",
+      "second-degree equation"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "tn-g12-c05-o04",
+     "statement": "Write parametric equations of conics and find equations of tangents and normals to circles and conics, including the condition for y = mx + c to be a tangent.",
+     "concepts": [
+      "parametric form",
+      "tangent",
+      "normal",
+      "tangency condition"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.coordinate.conic-tangents-normals",
+       "name": "Find tangents and normals to circles and conics",
+       "strand": "coordinate",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.coordinate.conics"
+       ],
+       "supports": [
+        "MATH.calculus.applications"
+       ],
+       "why": "coordinate.conics covers standard forms and features; equations of tangents/normals to conics (incl. parametric points and the tangency condition y = mx + c) are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.coordinate.conic-tangents-normals",
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "tn-g12-c05-o05",
+     "statement": "Model real-life situations such as arches, reflectors, orbits and cables with conics and solve for required measurements.",
+     "concepts": [
+      "reflective property",
+      "applications of conics"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c06",
+   "number": 6,
+   "term": null,
+   "title": "Applications of Vector Algebra",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c06-s01",
+     "title": "6.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c06-s02",
+     "title": "6.2 Geometric Introduction to Vectors"
+    },
+    {
+     "id": "tn-g12-c06-s03",
+     "title": "6.3 Scalar Product and Vector Product"
+    },
+    {
+     "id": "tn-g12-c06-s04",
+     "title": "6.4 Scalar triple product"
+    },
+    {
+     "id": "tn-g12-c06-s05",
+     "title": "6.5 Vector triple product"
+    },
+    {
+     "id": "tn-g12-c06-s06",
+     "title": "6.6 Jacobi's Identity and Lagrange's Identity"
+    },
+    {
+     "id": "tn-g12-c06-s07",
+     "title": "6.7 Different forms of Equation of a Straight line"
+    },
+    {
+     "id": "tn-g12-c06-s08",
+     "title": "6.8 Different forms of Equation of a plane"
+    },
+    {
+     "id": "tn-g12-c06-s09",
+     "title": "6.9 Image of a point in a plane"
+    },
+    {
+     "id": "tn-g12-c06-s10",
+     "title": "6.10 Meeting point of a line and a plane"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c06-o01",
+     "statement": "Use dot and cross products to prove geometric and trigonometric results and to compute work done and torque.",
+     "concepts": [
+      "vector proofs",
+      "work",
+      "torque"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.vectors.products",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.products"
+     ]
+    },
+    {
+     "id": "tn-g12-c06-o02",
+     "statement": "Compute scalar and vector triple products, interpret them as volume and coplanarity tests, and apply Lagrange's and Jacobi's identities.",
+     "concepts": [
+      "scalar triple product",
+      "coplanarity",
+      "vector triple product",
+      "Lagrange identity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "vector-matrix",
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.vectors.triple-products",
+       "name": "Use scalar and vector triple products",
+       "strand": "vectors",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.vectors.products"
+       ],
+       "supports": [
+        "MATH.algebra.determinants"
+       ],
+       "why": "vectors.products covers dot and cross products; scalar triple product (volume, coplanarity), vector triple product and related identities are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.vectors.triple-products"
+     ]
+    },
+    {
+     "id": "tn-g12-c06-o03",
+     "statement": "Write vector and Cartesian equations of lines in space; find the angle between lines, their point of intersection and the shortest distance between skew or parallel lines.",
+     "concepts": [
+      "line in space",
+      "skew lines",
+      "shortest distance"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "numeric",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.skew-line-distance",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "The shortest distance between skew lines and between parallel lines is asked by asskew and asparl3, in a competency the outcome is not mapped to; the equations of lines and their point of intersection are new families asleq and asint3 in MATH.coordinate.space-lines."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.skew-line-distance",
+      "MATH.coordinate.space-lines"
+     ]
+    },
+    {
+     "id": "tn-g12-c06-o04",
+     "statement": "Write equations of planes in normal, intercept and point forms, through three points or containing given lines, and find angles and distances involving planes.",
+     "concepts": [
+      "equation of plane",
+      "angle between planes",
+      "distance from point to plane"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-planes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-planes"
+     ]
+    },
+    {
+     "id": "tn-g12-c06-o05",
+     "statement": "Find the image of a point in a plane and the point where a line meets a plane.",
+     "concepts": [
+      "image of a point",
+      "line-plane intersection"
+     ],
+     "questionTypes": [
+      "coordinate"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-planes",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-lines",
+      "MATH.coordinate.space-planes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c07",
+   "number": 7,
+   "term": null,
+   "title": "Applications of Differential Calculus",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c07-s01",
+     "title": "7.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c07-s02",
+     "title": "7.2 Meaning of Derivatives"
+    },
+    {
+     "id": "tn-g12-c07-s03",
+     "title": "7.3 Mean Value Theorem"
+    },
+    {
+     "id": "tn-g12-c07-s04",
+     "title": "7.4 Series Expansions"
+    },
+    {
+     "id": "tn-g12-c07-s05",
+     "title": "7.5 Indeterminate Forms"
+    },
+    {
+     "id": "tn-g12-c07-s06",
+     "title": "7.6 Applications of First Derivative"
+    },
+    {
+     "id": "tn-g12-c07-s07",
+     "title": "7.7 Applications of Second Derivative"
+    },
+    {
+     "id": "tn-g12-c07-s08",
+     "title": "7.8 Applications in Optimization"
+    },
+    {
+     "id": "tn-g12-c07-s09",
+     "title": "7.9 Symmetry and Asymptotes"
+    },
+    {
+     "id": "tn-g12-c07-s10",
+     "title": "7.10 Sketching of Curves"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c07-o01",
+     "statement": "Use derivatives as rates of change, solve related-rates problems, and find tangents, normals and angles between curves.",
+     "concepts": [
+      "rate of change",
+      "related rates",
+      "tangent and normal",
+      "angle between curves"
+     ],
+     "questionTypes": [
+      "numeric",
+      "equation-solution",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o02",
+     "statement": "Verify the hypotheses of Rolle's theorem and Lagrange's mean value theorem and apply them to find guaranteed points or prove inequalities.",
+     "concepts": [
+      "Rolle's theorem",
+      "Lagrange's mean value theorem"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.mean-value-theorems",
+       "name": "Apply Rolle's and Lagrange's mean value theorems",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.continuity",
+        "MATH.calculus.differentiability"
+       ],
+       "supports": [],
+       "why": "No existing competency covers the hypotheses and conclusions of Rolle's theorem and Lagrange's MVT or their use."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.mean-value-theorems"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o03",
+     "statement": "Obtain Taylor and Maclaurin series expansions of standard functions.",
+     "concepts": [
+      "Taylor series",
+      "Maclaurin series"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.taylor-series",
+       "name": "Expand functions as Taylor and Maclaurin series",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.sequences.infinite-series-expansions"
+       ],
+       "why": "No existing competency covers generating power-series expansions from derivatives."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.taylor-series"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o04",
+     "statement": "Evaluate indeterminate forms using l'Hopital's rule, including exponential forms.",
+     "concepts": [
+      "l'Hopital's rule",
+      "indeterminate forms"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.limits",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.lhopital",
+       "name": "Evaluate indeterminate forms using l'Hopital's rule",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.limits",
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.algebra.logarithms"
+       ],
+       "why": "calculus.limits is elementary limits; using derivatives for 0/0, infinity/infinity and exponential indeterminate forms is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.lhopital",
+      "MATH.calculus.limits"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o05",
+     "statement": "Find intervals of monotonicity and local and absolute extrema using the first and second derivative tests.",
+     "concepts": [
+      "monotonicity",
+      "first derivative test",
+      "second derivative test",
+      "absolute extrema"
+     ],
+     "questionTypes": [
+      "interval",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o06",
+     "statement": "Solve optimisation problems arising in geometry and real-life contexts.",
+     "concepts": [
+      "optimisation"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ]
+    },
+    {
+     "id": "tn-g12-c07-o07",
+     "statement": "Determine concavity, points of inflection, symmetry and asymptotes and use them to sketch curves.",
+     "concepts": [
+      "concavity",
+      "inflection point",
+      "asymptotes",
+      "curve sketching"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "interval",
+      "coordinate"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.curve-sketching",
+       "name": "Sketch curves using derivatives, symmetry and asymptotes",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.applications"
+       ],
+       "supports": [
+        "MATH.algebra.function-transformations"
+       ],
+       "why": "calculus.applications covers rates and extrema; concavity, inflection points, asymptotes and assembling a full sketch are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.applications",
+      "MATH.calculus.curve-sketching"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c08",
+   "number": 8,
+   "term": null,
+   "title": "Differentials and Partial Derivatives",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c08-s01",
+     "title": "8.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c08-s02",
+     "title": "8.2 Linear Approximation and Differentials"
+    },
+    {
+     "id": "tn-g12-c08-s03",
+     "title": "8.3 Functions of Several Variables"
+    },
+    {
+     "id": "tn-g12-c08-s04",
+     "title": "8.4 Limit and Continuity of Functions of Two Variables"
+    },
+    {
+     "id": "tn-g12-c08-s05",
+     "title": "8.5 Partial Derivatives"
+    },
+    {
+     "id": "tn-g12-c08-s06",
+     "title": "8.6 Linear Approximation and Differential of a Function of Several Variables"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c08-o01",
+     "statement": "Use linear approximation and differentials to estimate values and compute absolute, relative and percentage errors.",
+     "concepts": [
+      "linear approximation",
+      "differential",
+      "absolute error",
+      "percentage error"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.linear-approximation",
+       "name": "Use differentials for linear approximation and error estimates",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.partial-derivatives"
+       ],
+       "why": "No competency covers differentials, linear approximation, or absolute/relative/percentage error."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.linear-approximation"
+     ]
+    },
+    {
+     "id": "tn-g12-c08-o02",
+     "statement": "Evaluate limits of functions of two variables and test their continuity.",
+     "concepts": [
+      "functions of two variables",
+      "limit",
+      "continuity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.multivariable-limits",
+       "name": "Examine limits and continuity of functions of two variables",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.limits",
+        "MATH.calculus.continuity"
+       ],
+       "supports": [],
+       "why": "calculus.limits and continuity are single-variable; path-dependence and continuity for f(x, y) are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.multivariable-limits"
+     ]
+    },
+    {
+     "id": "tn-g12-c08-o03",
+     "statement": "Compute first and higher-order partial derivatives and verify equality of mixed partials.",
+     "concepts": [
+      "partial derivative",
+      "mixed partials"
+     ],
+     "questionTypes": [
+      "expression",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.partial-derivatives",
+       "name": "Compute partial derivatives and apply Euler's theorem",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.multivariable-limits"
+       ],
+       "why": "No existing competency covers partial derivatives, mixed partials, the chain rule for several variables, or Euler's theorem on homogeneous functions."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.partial-derivatives"
+     ]
+    },
+    {
+     "id": "tn-g12-c08-o04",
+     "statement": "Find the total differential and linear approximation of a function of several variables and apply the chain rule for composite functions.",
+     "concepts": [
+      "total differential",
+      "chain rule",
+      "function of function rule"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.partial-derivatives",
+       "name": "Compute partial derivatives and apply Euler's theorem",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.multivariable-limits"
+       ],
+       "why": "No existing competency covers partial derivatives, mixed partials, the chain rule for several variables, or Euler's theorem on homogeneous functions."
+      },
+      {
+       "id": "MATH.calculus.linear-approximation",
+       "name": "Use differentials for linear approximation and error estimates",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.partial-derivatives"
+       ],
+       "why": "No competency covers differentials, linear approximation, or absolute/relative/percentage error."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.linear-approximation",
+      "MATH.calculus.partial-derivatives"
+     ]
+    },
+    {
+     "id": "tn-g12-c08-o05",
+     "statement": "Identify homogeneous functions and verify or apply Euler's theorem.",
+     "concepts": [
+      "homogeneous function",
+      "Euler's theorem"
+     ],
+     "questionTypes": [
+      "proof",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.partial-derivatives",
+       "name": "Compute partial derivatives and apply Euler's theorem",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.derivative-rules"
+       ],
+       "supports": [
+        "MATH.calculus.multivariable-limits"
+       ],
+       "why": "No existing competency covers partial derivatives, mixed partials, the chain rule for several variables, or Euler's theorem on homogeneous functions."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.partial-derivatives"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c09",
+   "number": 9,
+   "term": null,
+   "title": "Applications of Integration",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c09-s01",
+     "title": "9.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c09-s02",
+     "title": "9.2 Definite Integral as the Limit of a Sum"
+    },
+    {
+     "id": "tn-g12-c09-s03",
+     "title": "9.3 Fundamental Theorems of Integral Calculus and their Applications"
+    },
+    {
+     "id": "tn-g12-c09-s04",
+     "title": "9.4 Bernoulli's Formula"
+    },
+    {
+     "id": "tn-g12-c09-s05",
+     "title": "9.5 Improper Integrals"
+    },
+    {
+     "id": "tn-g12-c09-s06",
+     "title": "9.6 Reduction Formulae"
+    },
+    {
+     "id": "tn-g12-c09-s07",
+     "title": "9.7 Gamma Integral"
+    },
+    {
+     "id": "tn-g12-c09-s08",
+     "title": "9.8 Evaluation of Bounded Plane Area by Integration"
+    },
+    {
+     "id": "tn-g12-c09-s09",
+     "title": "9.9 Volume of a Solid obtained by Revolving Area about an Axis"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c09-o01",
+     "statement": "Approximate and evaluate definite integrals as limits of Riemann sums.",
+     "concepts": [
+      "Riemann sum",
+      "limit of a sum"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.definite-integrals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.definite-integrals"
+     ]
+    },
+    {
+     "id": "tn-g12-c09-o02",
+     "statement": "Evaluate definite integrals using the fundamental theorems and properties of definite integrals, including Bernoulli's formula.",
+     "concepts": [
+      "fundamental theorem of calculus",
+      "properties of definite integrals",
+      "Bernoulli formula"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.definite-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.definite-integrals",
+      "MATH.calculus.integration-methods"
+     ]
+    },
+    {
+     "id": "tn-g12-c09-o03",
+     "statement": "Evaluate improper integrals and use the gamma integral.",
+     "concepts": [
+      "improper integral",
+      "gamma function"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.improper-gamma-integrals",
+       "name": "Evaluate improper integrals and gamma integrals",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.definite-integrals",
+        "MATH.calculus.limits"
+       ],
+       "supports": [
+        "MATH.calculus.integration-methods"
+       ],
+       "why": "calculus.definite-integrals covers finite intervals; integrals over unbounded intervals and the gamma function are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.improper-gamma-integrals"
+     ]
+    },
+    {
+     "id": "tn-g12-c09-o04",
+     "statement": "Apply reduction formulae to evaluate integrals of powers of trigonometric functions and related forms.",
+     "concepts": [
+      "reduction formula",
+      "Wallis-type integrals"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.reduction-formulae",
+       "name": "Use reduction formulae for definite integrals",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.integration-methods",
+        "MATH.calculus.definite-integrals"
+       ],
+       "supports": [],
+       "why": "No competency covers recurrence (reduction) formulae such as those for integrals of sin^n x and cos^n x over [0, pi/2]."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.reduction-formulae"
+     ]
+    },
+    {
+     "id": "tn-g12-c09-o05",
+     "statement": "Find areas bounded by curves and the axes or between two curves.",
+     "concepts": [
+      "area under curve",
+      "area between curves"
+     ],
+     "questionTypes": [
+      "numeric",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals"
+     ]
+    },
+    {
+     "id": "tn-g12-c09-o06",
+     "statement": "Find volumes of solids generated by revolving a region about a coordinate axis.",
+     "concepts": [
+      "solid of revolution",
+      "disc method"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.calculus.volumes-of-revolution",
+       "name": "Find volumes of solids of revolution by integration",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.definite-integrals"
+       ],
+       "supports": [
+        "MATH.calculus.area-integrals",
+        "MATH.measurement.cones-spheres"
+       ],
+       "why": "calculus.area-integrals covers plane areas only; the disc method for volumes is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.volumes-of-revolution"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c10",
+   "number": 10,
+   "term": null,
+   "title": "Ordinary Differential Equations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c10-s01",
+     "title": "10.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c10-s02",
+     "title": "10.2 Differential Equation, Order, and Degree"
+    },
+    {
+     "id": "tn-g12-c10-s03",
+     "title": "10.3 Classification of Differential Equations"
+    },
+    {
+     "id": "tn-g12-c10-s04",
+     "title": "10.4 Formation of Differential Equations"
+    },
+    {
+     "id": "tn-g12-c10-s05",
+     "title": "10.5 Solution of Ordinary Differential Equations"
+    },
+    {
+     "id": "tn-g12-c10-s06",
+     "title": "10.6 Solution of First Order and First Degree Differential Equations"
+    },
+    {
+     "id": "tn-g12-c10-s07",
+     "title": "10.7 First Order Linear Differential Equations"
+    },
+    {
+     "id": "tn-g12-c10-s08",
+     "title": "10.8 Applications of First Order Ordinary Differential Equations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c10-o01",
+     "statement": "Determine the order and degree of a differential equation and classify it (ordinary/partial, linear/non-linear).",
+     "concepts": [
+      "order",
+      "degree",
+      "linear differential equation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations"
+     ]
+    },
+    {
+     "id": "tn-g12-c10-o02",
+     "statement": "Form a differential equation by eliminating arbitrary constants from a family of curves.",
+     "concepts": [
+      "formation of differential equations",
+      "family of curves"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "aqd2rel already asks for the differential equation y″ + py′ + qy = 0 obtained by eliminating the arbitrary constants A and B from a two-constant family; the outcome is only mapped to MATH.calculus.differential-equations."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.higher-derivatives"
+     ]
+    },
+    {
+     "id": "tn-g12-c10-o03",
+     "statement": "Verify general and particular solutions and solve variables-separable equations and those reducible to it by substitution.",
+     "concepts": [
+      "general solution",
+      "particular solution",
+      "variables separable"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations"
+     ]
+    },
+    {
+     "id": "tn-g12-c10-o04",
+     "statement": "Solve homogeneous first-order differential equations.",
+     "concepts": [
+      "homogeneous differential equation"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.homogeneous-de",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "aqhom solves homogeneous first-order equations with y = vx; the outcome is not mapped to that competency."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.homogeneous-de"
+     ]
+    },
+    {
+     "id": "tn-g12-c10-o05",
+     "statement": "Solve first-order linear differential equations using an integrating factor.",
+     "concepts": [
+      "integrating factor",
+      "linear first-order equation"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations"
+     ]
+    },
+    {
+     "id": "tn-g12-c10-o06",
+     "statement": "Set up and solve first-order models for population growth, radioactive decay, Newton's law of cooling and mixture problems.",
+     "concepts": [
+      "exponential growth",
+      "decay",
+      "Newton's law of cooling",
+      "mixture problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.calculus.ode-modelling",
+       "name": "Model growth, decay and mixing with first-order differential equations",
+       "strand": "calculus",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.calculus.differential-equations"
+       ],
+       "supports": [
+        "MATH.reasoning.model-selection",
+        "MATH.algebra.logarithms"
+       ],
+       "why": "calculus.differential-equations covers solving given equations; setting up and interpreting ODE models (population growth, radioactive decay, Newton's law of cooling, mixtures) is a separate skill."
+      }
+     ],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.ode-modelling"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c11",
+   "number": 11,
+   "term": null,
+   "title": "Probability Distributions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c11-s01",
+     "title": "11.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c11-s02",
+     "title": "11.2 Random Variable"
+    },
+    {
+     "id": "tn-g12-c11-s03",
+     "title": "11.3 Types of Random Variable"
+    },
+    {
+     "id": "tn-g12-c11-s04",
+     "title": "11.4 Continuous Distributions"
+    },
+    {
+     "id": "tn-g12-c11-s05",
+     "title": "11.5 Mathematical Expectation"
+    },
+    {
+     "id": "tn-g12-c11-s06",
+     "title": "11.6 Theoretical Distributions: Some Special Discrete Distributions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c11-o01",
+     "statement": "Define random variables on a sample space and construct the probability mass function and cumulative distribution function of a discrete random variable.",
+     "concepts": [
+      "random variable",
+      "probability mass function",
+      "cumulative distribution function"
+     ],
+     "questionTypes": [
+      "data-table",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.random-variables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.random-variables"
+     ]
+    },
+    {
+     "id": "tn-g12-c11-o02",
+     "statement": "Work with probability density functions of continuous random variables, obtaining the distribution function from the density and vice versa and computing probabilities.",
+     "concepts": [
+      "probability density function",
+      "distribution function",
+      "continuous random variable"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.probability.continuous-random-variables",
+       "name": "Work with probability density and distribution functions",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.random-variables",
+        "MATH.calculus.definite-integrals"
+       ],
+       "supports": [],
+       "why": "probability.random-variables is discrete only; pdf, cdf and expectation of continuous random variables are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.continuous-random-variables"
+     ]
+    },
+    {
+     "id": "tn-g12-c11-o03",
+     "statement": "Compute the mean, variance and expectations of functions of discrete and continuous random variables and use properties of expectation.",
+     "concepts": [
+      "expectation",
+      "variance",
+      "properties of expectation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.random-variables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.probability.continuous-random-variables",
+       "name": "Work with probability density and distribution functions",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.random-variables",
+        "MATH.calculus.definite-integrals"
+       ],
+       "supports": [],
+       "why": "probability.random-variables is discrete only; pdf, cdf and expectation of continuous random variables are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.continuous-random-variables",
+      "MATH.probability.random-variables"
+     ]
+    },
+    {
+     "id": "tn-g12-c11-o04",
+     "statement": "Recognise one-point, two-point, Bernoulli and binomial distributions and compute their probabilities, mean and variance.",
+     "concepts": [
+      "Bernoulli distribution",
+      "binomial distribution",
+      "mean and variance"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.probability.binomial-distribution",
+       "name": "Apply Bernoulli and binomial distributions",
+       "strand": "probability",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.probability.random-variables",
+        "MATH.algebra.binomial"
+       ],
+       "supports": [
+        "MATH.algebra.permutations"
+       ],
+       "why": "No existing competency covers the binomial distribution, its probabilities, mean and variance."
+      }
+     ],
+     "mapped": [
+      "MATH.probability.binomial-distribution"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g12-c12",
+   "number": 12,
+   "term": null,
+   "title": "Discrete Mathematics",
+   "verified": true,
+   "sections": [
+    {
+     "id": "tn-g12-c12-s01",
+     "title": "12.1 Introduction"
+    },
+    {
+     "id": "tn-g12-c12-s02",
+     "title": "12.2 Binary Operations"
+    },
+    {
+     "id": "tn-g12-c12-s03",
+     "title": "12.3 Mathematical Logic"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g12-c12-o01",
+     "statement": "Decide whether an operation is a binary operation on a set and test closure, commutativity and associativity, including operations given by tables, on matrices and modulo n.",
+     "concepts": [
+      "binary operation",
+      "closure",
+      "commutative",
+      "associative",
+      "modular arithmetic"
+     ],
+     "questionTypes": [
+      "true-false",
+      "data-table",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.binary-operations",
+       "name": "Test properties of binary operations",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.matrices"
+       ],
+       "why": "No competency covers binary operations on sets: closure, commutativity, associativity, identity and inverse (incl. modular arithmetic and matrices)."
+      }
+     ],
+     "mapped": [
+      "MATH.sets-relations.binary-operations"
+     ]
+    },
+    {
+     "id": "tn-g12-c12-o02",
+     "statement": "Find identity and inverse elements for binary operations, where they exist.",
+     "concepts": [
+      "identity element",
+      "inverse element"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.binary-operations",
+       "name": "Test properties of binary operations",
+       "strand": "sets-relations",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.matrices"
+       ],
+       "why": "No competency covers binary operations on sets: closure, commutativity, associativity, identity and inverse (incl. modular arithmetic and matrices)."
+      }
+     ],
+     "mapped": [
+      "MATH.sets-relations.binary-operations"
+     ]
+    },
+    {
+     "id": "tn-g12-c12-o03",
+     "statement": "Identify statements, form compound statements with logical connectives and construct truth tables.",
+     "concepts": [
+      "statement",
+      "negation",
+      "conjunction",
+      "disjunction",
+      "conditional",
+      "biconditional",
+      "truth table"
+     ],
+     "questionTypes": [
+      "data-table",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.logic",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.propositional-logic",
+       "name": "Analyse compound statements with truth tables",
+       "strand": "reasoning",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.logic"
+       ],
+       "why": "reasoning.logic covers implications and counterexamples in argument; formal connectives, truth tables, tautology/contradiction/contingency, duality and logical equivalence are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.logic",
+      "MATH.reasoning.propositional-logic"
+     ]
+    },
+    {
+     "id": "tn-g12-c12-o04",
+     "statement": "Classify statement forms as tautology, contradiction or contingency, write duals, and establish logical equivalences.",
+     "concepts": [
+      "tautology",
+      "contradiction",
+      "contingency",
+      "duality",
+      "logical equivalence"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "proof",
+      "data-table"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.logic",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.propositional-logic",
+       "name": "Analyse compound statements with truth tables",
+       "strand": "reasoning",
+       "gradeRange": [
+        12,
+        12
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.logic"
+       ],
+       "why": "reasoning.logic covers implications and counterexamples in argument; formal connectives, truth tables, tautology/contradiction/contingency, duality and logical equivalence are not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.logic",
+      "MATH.reasoning.propositional-logic"
+     ]
+    }
+   ]
+  }
+ ]
+}

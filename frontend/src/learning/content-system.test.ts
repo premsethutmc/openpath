@@ -5,12 +5,12 @@
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { modules, question } from "../../../packages/learning/src/content";
+import { modules, poolFamilies, question } from "../../../packages/learning/src/content";
 import { FAMILIES, exposureKey, inPool, phaseOf, phasePool, pool, problemOf, resetPools } from "../../../packages/learning/src/families";
 import { useRegistry } from "../../../packages/learning/src/evidence";
 import { moduleState } from "../../../packages/learning/src/intervention";
 import { poolDepth } from "../../../packages/learning/src/library";
-import { releaseOf, resetFingerprints } from "../../../packages/learning/src/review";
+import { familiesOf, releaseOf, resetFingerprints } from "../../../packages/learning/src/review";
 import { familySpec, validateFamily } from "../../../packages/learning/src/spec";
 import { sampleReleases } from "../../../packages/learning/src/curricula";
 import { Driver, right, type Answerer } from "./driver";
@@ -18,6 +18,8 @@ import { releasedRegistry } from "./released";
 
 const T0 = Date.parse("2026-11-02T09:00:00Z");
 const fams = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
+/** pools@1: a module draws on every family of its competency, so releasing it needs all of them (and any listed extra). */
+const familiesFor = (comp: string, extra: string[] = []) => [...new Set([...familiesOf(modules.find((m) => m.competency === comp)!), ...extra])];
 
 test("every family specification validates: deterministic, property-based and boundary checks", () => {
   for (const f of fams) {
@@ -81,7 +83,7 @@ test("a material generator change makes the approval stale (reapproval needed); 
 
 test("depth: two early mistakes do not exhaust a released module; fresh checks continue until the shared record can verify", () => {
   const comp = "MATH.number.multi-multiplication";
-  useRegistry(releasedRegistry(["mmul", "mul"], [comp]));
+  useRegistry(releasedRegistry(familiesFor(comp, ["mmul", "mul"]), [comp]));
   try {
     const d = new Driver("synthetic-depth", T0);
     d.enrol(4, "2026-27", sampleReleases.find((r) => r.grade === 4)!);
@@ -130,9 +132,11 @@ test("repeated exposure is never independent evidence: the other format of a see
 });
 
 test("depth limits are reported, never papered over", () => {
-  const root = modules.find((m) => m.competency === "MATH.number.square-roots")!;
-  const d = poolDepth(root)!;
-  assert.equal(d.sufficient, false, "a family of 24 problems cannot supply every phase");
+  // pools@1: a module draws on every family of its competency; one small family on its own (17 problems) is too shallow
+  const area = modules.find((m) => m.competency === "MATH.calculus.area-integrals")!;
+  assert.ok(pool("alp").items.length < 24 && poolFamilies(area).includes("alp"));
+  const d = poolDepth({ ...area, pool: { ...area.pool!, family: "alp" }, pools: undefined })!;
+  assert.equal(d.sufficient, false, "a family of 17 problems cannot supply every phase");
   assert.ok(d.short.length > 0);
   const big = poolDepth(modules.find((m) => m.competency === "MATH.algebra.linear-equations")!)!;
   assert.equal(big.sufficient, true);
@@ -154,7 +158,7 @@ test("every module's questions come from the right part of its family's pool, an
 
 test("an exhausted pool: the module stops, never repeats a problem, and never reports mastery it has not seen", () => {
   const comp = "MATH.number.square-roots";
-  useRegistry(releasedRegistry(["root", "mul"], [comp]));
+  useRegistry(releasedRegistry(familiesFor(comp, ["root", "mul"]), [comp]));
   try {
     const d = new Driver("synthetic-exhausted", T0);
     d.enrol(8, "2026-27", sampleReleases.find((r) => r.grade === 8)!);
@@ -169,7 +173,8 @@ test("an exhausted pool: the module stops, never repeats a problem, and never re
     const ms = moduleState(comp, st.records, st.evidence(comp), d.now, d.session);
     assert.ok(["pause", "done"].includes(ms.phase) || !ms.question, `the module stops: ${ms.phase} ${ms.reason}`);
     assert.ok(!["independent", "transfer", "verified"].includes(st.evidence(comp).status), "wrong answers never become mastery");
-    assert.ok(keys.length <= pool("root").items.length + 6, "it cannot ask more problems than exist");
+    const available = familiesFor(comp).reduce((n, f) => n + pool(f).items.length, 0);
+    assert.ok(keys.length <= available + 6, "it cannot ask more problems than exist");
   } finally {
     useRegistry(null);
   }
@@ -177,7 +182,7 @@ test("an exhausted pool: the module stops, never repeats a problem, and never re
 
 test("repeated questions cannot create false mastery: the same problems answered again and again stay one exposure each", () => {
   const comp = "MATH.number.multi-multiplication";
-  useRegistry(releasedRegistry(["mmul", "mul"], [comp]));
+  useRegistry(releasedRegistry(familiesFor(comp, ["mmul", "mul"]), [comp]));
   try {
     const d = new Driver("synthetic-repeater", T0);
     d.enrol(4, "2026-27", sampleReleases.find((r) => r.grade === 4)!);

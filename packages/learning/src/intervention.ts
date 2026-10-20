@@ -19,8 +19,9 @@ import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleSt
 import { moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
-import { exposureKey, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
+import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
+import { modulePhasePool } from "./library";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
 
@@ -29,8 +30,16 @@ export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedIte
 export const RECOVERY_DEPTH = 2;
 
 const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === m.competency;
+/** level@1: the learner's grade (their current enrolment), and whether a question is within it: a problem from a
+ * later grade is never asked (it is reached in that grade); one from an earlier grade may be (recovery, review). */
+const gradeOf = (records: LearnerRecords) => records.enrolments.at(-1)?.grade ?? null;
+const withinGrade = (records: LearnerRecords, qid: string) => {
+  const g = gradeOf(records);
+  const q = g === null ? null : gradeOfQuestion(qid);
+  return g === null || q === null || q <= g;
+};
 /** The learner's first attempt at this problem, in either answer format (one exposure). */
-const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? null;
+const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? (records.pending?.some((p) => p.questionId === qid) ? ({ questionId: qid } as unknown as Attempt) : null);
 /**
  * depth@1: the next question of a phase from the module's family pool that this learner has never seen (in either
  * format). null when the pool has no unseen question left: the module then says so; nothing is repeated as evidence.
@@ -38,7 +47,8 @@ const answered = (records: LearnerRecords, qid: string) => records.attempts.find
 export function fromPool(m: Module, phase: Phase, records: LearnerRecords): string | null {
   if (!m.pool) return null;
   const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
-  return phasePool(m.pool.family, phase).find((id) => !seen.has(exposureKey(id))) ?? null;
+  // pools@1: from every family of the competency in turn
+  return modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
 }
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
@@ -101,7 +111,7 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
   };
 }
 
-export type ModulePhase = "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable";
+export type ModulePhase = "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable" | "waiting";
 export interface ModuleState {
   competency: string;
   phase: ModulePhase;
@@ -133,12 +143,15 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const m = moduleFor(competency);
   const base = { competency, question: null, strategy: null, diagnosis: null, decision: null } as const;
   if (!m) return { ...base, phase: "unavailable", reason: "No questions for this skill yet." };
+  // written@1: a written answer is with an educator; nothing here moves on until it is marked (other skills can)
+  // an educator-marked module waits for its mark; a module answered automatically carries on (written@2)
+  if (!m?.pool && records.pending?.some((p) => graph.evidenceTarget(p.competency) === competency)) return { ...base, phase: "waiting", reason: "Your written answer is with an educator. You will see the mark and their feedback under “Written work”; carry on with other skills meanwhile." };
   // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
   // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
   const asked = diagnose(m, records.attempts);
   const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence } : asked;
   const shown = ev.status === "independent" || ev.status === "transfer" || ev.status === "verified";
-  const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id)) ?? null;
+  const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
   if (ev.retention === "due") {
     // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
     const r = unanswered(m.retention) ?? fromPool(m, "retention", records);
@@ -154,13 +167,16 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // the shared engine never lets answers given straight after teaching (same visit) demonstrate a skill: more
     // questions now would add nothing, so they wait for the next visit
     const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
+    // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
+    // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
     const listed = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+    const written = unanswered(m.written ?? []);
     if (!listed && needsEvidence && taughtThisVisit && m.pool)
       return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
-    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null);
+    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null) ?? written;
     // shown here, but the shared record (the engine) has not yet demonstrated it and nothing is left: say so
     const engineShort = !more && needsEvidence;
-    return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };
+    return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: more && m.written?.includes(more) ? "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)." : ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? `Shown on your own. A delayed check is planned for ${new Date(ev.retentionDueAt).toDateString()}.` : "Shown on your own." };
   }
   if (d.result === "secure" || d.result === "insufficient_evidence") {
     // no clear gap: verify on fresh questions alone; a gap that shows there is then taught

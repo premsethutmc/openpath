@@ -70,7 +70,7 @@ q("fm-c1", FM, "check", "integer", "A cake has 10 equal slices. 7 are eaten. How
 q("fm-r1", FM, "retention", "integer", "A garden has 5 equal beds. 2 have flowers. How many fifths have no flowers?", "3", "5 − 2 = 3, so 3/5.")
 q("fm-p1", FM, "practice", "integer", "A pie has 3 equal pieces. 1 is left. How many thirds were eaten?", "2", "3 − 1 = 2, so 2/3 was eaten.")
 q("fm-r2", FM, "retention", "integer", "A bar has 6 equal pieces. 4 are shaded. How many sixths are not shaded?", "2", "6 − 4 = 2, so 2/6.")
-small("fm", FM, "Represent fractions of a whole", ["fm-d1", "fm-d2"], None, ["fm-r1", "fm-r2"], screen("Equal parts", "A fraction names equal parts of one whole. The bottom number says how many equal parts; the top says how many we mean.", widget=dict(type="strips", top=4, bottom=4, shaded=1)),
+small("fm", FM, "Represent fractions of a whole", ["fm-d1", "fm-d2"], None, ["fm-r1", "fm-r2"], screen("Equal parts", "A fraction names equal parts of one whole. The bottom number says how many equal parts; the top says how many we mean.", math=["A strip cut into 4 equal parts, 1 part shaded", "Equal parts: 4, so the bottom number is 4", "Shaded: 1, so the top number is 1", "The shaded part is 1/4 of the strip"], widget=dict(type="strips", top=4, bottom=4, shaded=1)),
       strategy("equal_parts", "Count equal parts", "conceptual", [screen("Check the parts are equal", "First check that every part is the same size. Then count the parts you need.")], "fm-g1", "fm-c1"))
 FC = "MATH.number.fraction-comparison"
 q("fc-d1", FC, "diagnostic", "choice", "Which is larger: 3/8 or 5/8?", "B", "Same-sized pieces (eighths): 5 of them is more than 3.", probe="concept", options=["3/8", "5/8", "They are equal", "You cannot tell"], mis=[("A", "conceptual", "Both are eighths, the same size of piece. 5 pieces are more than 3.")])
@@ -80,7 +80,7 @@ q("fc-c1", FC, "check", "choice", "Which is larger: 6/10 or 4/10?", "A", "Same p
 q("fc-r1", FC, "retention", "choice", "Which is larger: 2/5 or 4/5?", "B", "Fifths: 4 of them is more than 2.", options=["2/5", "4/5", "They are equal", "You cannot tell"])
 q("fc-p1", FC, "practice", "integer", "□/7 is larger than 4/7 and smaller than 6/7. What number goes in the box?", "5", "Sevenths: more than 4 and fewer than 6 is 5.", mis=[("4", "conceptual", "4/7 is equal to 4/7, not larger."), ("6", "conceptual", "6/7 is equal to 6/7, not smaller.")])
 q("fc-r2", FC, "retention", "choice", "Which is smaller: 5/9 or 7/9?", "A", "Ninths: 5 of them is fewer than 7.", options=["5/9", "7/9", "They are equal", "You cannot tell"])
-small("fc", FC, "Compare fractions with like denominators", ["fc-d1", "fc-d2"], None, ["fc-r1", "fc-r2"], screen("Same pieces", "When the bottom numbers are the same, the pieces are the same size. Then the fraction with more pieces is larger."),
+small("fc", FC, "Compare fractions with like denominators", ["fc-d1", "fc-d2"], None, ["fc-r1", "fc-r2"], screen("Same pieces", "When the bottom numbers are the same, the pieces are the same size. Then the fraction with more pieces is larger.", math=["Compare 3/7 and 5/7", "Both are sevenths: the pieces are the same size", "5 pieces is more than 3 pieces", "So 5/7 > 3/7"]),
       strategy("same_size_pieces", "Same-size pieces: count them", "conceptual", [screen("Count the pieces", "3/8 and 5/8 are both made of eighths. Compare 3 eighths with 5 eighths.", widget=dict(type="strips", top=8, bottom=8, shaded=3))], "fc-g1", "fc-c1"))
 FA = "MATH.number.fraction-add-like"
 q("fa-d1", FA, "diagnostic", "fraction", "3/8 + 2/8 = ?", "5/8", "Same pieces: 3 eighths + 2 eighths = 5 eighths.", probe="procedure", mis=[("5/16", "conceptual", "The pieces stay eighths. Add the tops only: 5/8.")])
@@ -90,7 +90,7 @@ q("fa-c1", FA, "check", "fraction", "4/9 + 3/9 = ?", "7/9", "4 ninths + 3 ninths
 q("fa-r1", FA, "retention", "fraction", "5/7 − 2/7 = ?", "3/7", "5 sevenths − 2 sevenths = 3 sevenths.")
 q("fa-p1", FA, "practice", "choice", "Which equals 2/5 + 1/5?", "A", "2 fifths + 1 fifth = 3 fifths. The bottom stays 5.", options=["3/5", "3/10", "2/10", "1/5"], mis=[("B", "procedural", "Add the tops only: the pieces are still fifths, so 3/5.")])
 q("fa-r2", FA, "retention", "fraction", "1/6 + 4/6 = ?", "5/6", "1 sixth + 4 sixths = 5 sixths.")
-small("fa", FA, "Add and subtract like fractions", ["fa-d1", "fa-d2"], None, ["fa-r1", "fa-r2"], screen("Add the pieces, keep their size", "3/8 + 2/8: three eighths and two eighths make five eighths. The bottom names the piece; it does not change."),
+small("fa", FA, "Add and subtract like fractions", ["fa-d1", "fa-d2"], None, ["fa-r1", "fa-r2"], screen("Add the pieces, keep their size", "3/8 + 2/8: three eighths and two eighths make five eighths. The bottom names the piece; it does not change.", math=["3/8 + 2/8", "= (3 + 2) eighths", "= 5/8 (the eighths stay eighths)"]),
       strategy("count_pieces", "Count pieces of the same size", "conceptual", [screen("Pieces are the unit", "Read 3/8 as '3 eighths'. 3 eighths + 2 eighths = 5 eighths, just like 3 apples + 2 apples.")], "fa-g1", "fa-c1"))
 
 # ======================================================== Multiplication facts and 7 × 8 (Journey C)
@@ -135,7 +135,7 @@ q("ra-c1", RA, "check", "integer", "A rectangle is 8 cm by 5 cm. Area in square 
 q("ra-r1", RA, "retention", "integer", "A rectangle is 7 m by 4 m. Area in square metres?", "28", "7 × 4 = 28.")
 q("ra-p1", RA, "practice", "choice", "Which rectangle has an area of 36 square centimetres?", "B", "6 × 6 = 36. The others: 4 × 8 = 32, 5 × 7 = 35, 3 × 10 = 30.", options=["4 cm by 8 cm", "6 cm by 6 cm", "5 cm by 7 cm", "3 cm by 10 cm"])
 q("ra-r2", RA, "retention", "integer", "A rectangle is 9 cm by 3 cm. Area in square centimetres?", "27", "9 × 3 = 27.")
-module(RA, "Calculate rectangle area", [screen("Rows of squares", "A 6 by 4 rectangle holds 4 rows of 6 unit squares: 6 × 4 = 24.", widget=dict(type="array", rows=4, cols=6))], ["ra-d1", "ra-d2"],
+module(RA, "Calculate rectangle area", [screen("Rows of squares", "A 6 by 4 rectangle holds 4 rows of 6 unit squares: 6 × 4 = 24.", math=["Length 6 cm, width 4 cm", "4 rows of 6 squares of 1 cm²", "Area = 6 × 4 = 24 cm²"], widget=dict(type="array", rows=4, cols=6))], ["ra-d1", "ra-d2"],
   [strategy("rows_of_squares", "Count rows of squares", "conceptual", [screen("Length × width", "One row has 'length' squares; there are 'width' rows.")], "ra-g1", "ra-c1")], ["ra-p1"], ["ra-r1", "ra-r2"])
 CA = "MATH.coordinate.cartesian"
 q("ca-d1", CA, "diagnostic", "choice", "Which point is 3 to the right of the origin and 2 down?", "C", "x = 3 (right), y = −2 (down): (3, −2).", probe="concept", options=["(2, 3)", "(−2, 3)", "(3, −2)", "(−3, 2)"], mis=[("A", "conceptual", "x comes first and goes across; y goes up or down.")])
@@ -145,7 +145,7 @@ q("ca-c1", CA, "check", "integer", "The point (−6, 2) is how far from the y-ax
 q("ca-r1", CA, "retention", "choice", "In which quadrant is (−2, −5)?", "C", "Both negative: the third quadrant.", options=["First", "Second", "Third", "Fourth"])
 q("ca-p1", CA, "practice", "choice", "In which quadrant is (−3, 4)?", "B", "x negative, y positive: the second quadrant.", options=["First", "Second", "Third", "Fourth"])
 q("ca-r2", CA, "retention", "choice", "In which quadrant is (4, −1)?", "D", "x positive, y negative: the fourth quadrant.", options=["First", "Second", "Third", "Fourth"])
-module(CA, "Plot points in four quadrants", [screen("Across, then up", "A point (x, y) is x across from the origin, then y up (negative: left or down).")], ["ca-d1", "ca-d2"],
+module(CA, "Plot points in four quadrants", [screen("Across, then up", "A point (x, y) is x across from the origin, then y up (negative: left or down).", math=["Plot (−3, 2)", "Start at the origin (0, 0)", "x = −3: move 3 to the left", "y = 2: then move 2 up", "The point is in the second quadrant"])], ["ca-d1", "ca-d2"],
   [strategy("across_then_up", "Across first, then up or down", "conceptual", [screen("Walk to the point", "Start at (0, 0). Walk x across, then y up.")], "ca-g1", "ca-c1")], ["ca-p1"], ["ca-r1", "ca-r2"])
 DI = "MATH.calculus.definite-integrals"
 q("di-d1", DI, "diagnostic", "integer", "The integral of 3 from x = 0 to x = 4 is the area of a rectangle. What is it?", "12", "Height 3, width 4: area 12.", probe="concept")
@@ -155,7 +155,7 @@ q("di-c1", DI, "check", "integer", "∫ from 2 to 7 of 4 dx = ?", "20", "Width 5
 q("di-r1", DI, "retention", "integer", "∫ from 0 to 3 of 9 dx = ?", "27", "Width 3, height 9: 27.")
 q("di-p1", DI, "practice", "choice", "Which equals ∫ from 1 to 5 of 6 dx?", "C", "Width 5 − 1 = 4, height 6: 4 × 6 = 24.", options=["30", "6", "24", "20"])
 q("di-r2", DI, "retention", "integer", "∫ from 2 to 6 of 5 dx = ?", "20", "Width 6 − 2 = 4, height 5: 20.")
-module(DI, "Evaluate definite integrals", [screen("Area under a graph", "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b. Under a constant it is a rectangle.")], ["di-d1", "di-d2"],
+module(DI, "Evaluate definite integrals", [screen("Area under a graph", "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b. Under a constant it is a rectangle.", math=["∫ from 1 to 4 of 3 dx", "The graph y = 3 is a horizontal line", "Width 4 − 1 = 3, height 3", "Area = 3 × 3 = 9"])], ["di-d1", "di-d2"],
   [strategy("rectangle_picture", "Picture the rectangle", "conceptual", [screen("Width × height", "Under y = c from x = a to x = b: width b − a, height c.")], "di-g1", "di-c1")], ["di-p1"], ["di-r1", "di-r2"])
 AI = "MATH.calculus.area-integrals"
 q("ai-original", AI, "original", "integer", "Find ∫ from 0 to 8 of 7 dx: the area under y = 7 from x = 0 to x = 8.", "56", "The region is a rectangle 8 wide and 7 high: 8 × 7 = 56.", probe="transfer", skill="MLY.calc.area-constant",
@@ -171,7 +171,7 @@ q("fx-c1", FMU, "check", "integer", "What is the smallest number, other than 0, 
 q("fx-r1", FMU, "retention", "integer", "How many factors does 20 have?", "6", "1, 2, 4, 5, 10, 20.")
 q("fx-p1", FMU, "practice", "choice", "Which is a factor of 18?", "D", "18 = 6 × 3, so 6 is a factor. 4, 5 and 7 do not divide 18.", options=["4", "5", "7", "6"])
 q("fx-r2", FMU, "retention", "integer", "How many factors does 15 have?", "4", "1, 3, 5, 15.")
-module(FMU, "Find factors and multiples", [screen("Factor pairs", "Factors come in pairs that multiply to the number: 12 = 1 × 12 = 2 × 6 = 3 × 4.", widget=dict(type="array", rows=3, cols=4))], ["fx-d1", "fx-d2"],
+module(FMU, "Find factors and multiples", [screen("Factor pairs", "Factors come in pairs that multiply to the number: 12 = 1 × 12 = 2 × 6 = 3 × 4.", math=["Factors of 12: try 1, 2, 3, … in turn", "1 × 12, 2 × 6, 3 × 4 (4 × 3 repeats a pair: stop)", "Factors: 1, 2, 3, 4, 6, 12"], widget=dict(type="array", rows=3, cols=4))], ["fx-d1", "fx-d2"],
   [strategy("factor_pairs", "Find the factor pairs", "procedural", [screen("Pairs", "Try 1, 2, 3, … and stop when the pairs meet.")], "fx-g1", "fx-c1")], ["fx-p1"], ["fx-r1", "fx-r2"])
 q("ch-remainder", FMU, "challenge", "integer", "Reasoning challenge: find the smallest number greater than 1 that leaves remainder 1 when divided by 2, by 3 and by 4.", "13", "A multiple of 12 (the smallest common multiple of 2, 3, 4) plus 1: 12 + 1 = 13.", goals=["jee-advanced", "jee-main"], readiness=[FMU])
 q("ch-triangle", "MATH.algebra.expressions-intro", "challenge", "integer", "Pattern challenge: 1, 3, 6, 10, 15, … What is the 8th number?", "36", "Add 2, 3, 4, …: 21, 28, 36. The 8th is 1 + 2 + … + 8 = 36.", goals=["jee-advanced", "jee-main"], readiness=[FMU])

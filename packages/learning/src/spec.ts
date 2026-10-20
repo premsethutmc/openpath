@@ -21,8 +21,9 @@
  *   boundary        every domain edge and one step outside it, holding the other parameters at a valid choice
  */
 import { canonical, isCorrect, question } from "./content";
+import { expandedForm, numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { hashOf } from "./curriculum";
-import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, show, type Problem } from "./families";
+import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, rangeOf, show, type Problem } from "./families";
 
 export const SPEC_POLICY = "spec@1";
 /** Versions of each family specification; bump when the generator is changed on purpose (the fingerprint changes
@@ -56,10 +57,11 @@ export interface FamilySpec {
  */
 const itemSignature = (p: Problem) => {
   const def = FAMILIES.get(p.family)!;
-  const typed = problemOf(p.id.replace(/:mc$/, ""))!;
+  const typed = problemOf(p.id.replace(/:(mc|w)$/, ""))!;
   const v = def.solve(typed.params).answer;
   const probes = typeof v === "number" ? [v, v + 1, v - 1, 2 * v + 1, v + 0.5].map((x) => (def.validate(typed.params, x) ? "1" : "0")).join("") : def.validate(typed.params, v) ? "1" : "0";
-  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes].join("¦");
+
+  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : []), ...(def.grade ? [`grade=${def.grade(typed.params)}`] : [])].join("¦");
 };
 
 export function familySpec(fam: string): FamilySpec | null {
@@ -67,6 +69,7 @@ export function familySpec(fam: string): FamilySpec | null {
   if (!def?.domain) return null;
   const { items, excluded } = pool(fam);
   const mc = items.map((p) => (def.mc && p.type !== "set" && p.type !== "choice" ? problemOf(`${p.id}:mc`) : null)).filter((x): x is Problem => !!x);
+  const word = items.map((p) => (def.word ? problemOf(`${p.id}:w`) : null)).filter((x): x is Problem => !!x);
   const byLevel = (l: number) => items.filter((p) => difficultyOf(p) === l);
   const examples = [1, 2, 3].flatMap((l) => {
     const xs = byLevel(l);
@@ -85,6 +88,9 @@ export function familySpec(fam: string): FamilySpec | null {
     teach: def.teach ?? null,
     items: items.map(itemSignature),
     mc: mc.map(itemSignature),
+    ...(word.length ? { word: word.map(itemSignature) } : {}),
+    ...(def.cap ? { cap: def.cap } : {}),
+    ...(def.teach?.alternatives ? { alternatives: def.teach.alternatives.map((a) => [a.id, a.title, a.kind, ...a.text]) } : {}),
   });
   return {
     id: fam,
@@ -119,15 +125,24 @@ const rng = (seed: number) => () => {
   return seed / 2 ** 32;
 };
 
+/** A shown rational number ("3/4", "-0.5", "2"), or null for anything else. */
+function numeric(s: string): number | null {
+  const m = /^(-?\d+(?:\.\d+)?)(?:\/(\d+))?$/.exec(String(s).trim());
+  return m ? Number(m[1]) / (m[2] ? Number(m[2]) : 1) : null;
+}
+
 function checkItem(p: Problem, out: string[]) {
   const rebuilt = problemOf(p.id);
   if (!rebuilt || itemSignature(rebuilt) !== itemSignature(p)) out.push(`${p.id}: does not rebuild identically from its id`);
   if (!p.prompt || /NaN|undefined|Infinity|\[object/.test(p.prompt)) out.push(`${p.id}: unreadable prompt`);
+  // a floating-point artefact shown to a learner (55.00000000000001%, 0.41000000000000003) is never a right option
+  const FLOAT = /\d\.\d*(?:0{7,}|9{7,})\d/;
+  for (const t of [p.prompt, p.answer, ...(p.options ?? []), ...p.bugs.map((b) => b.says)]) if (FLOAT.test(String(t))) out.push(`${p.id}: shows a floating-point artefact: ${String(t).slice(0, 60)}`);
   const q = question(p.id);
   if (canonical(q, q.answer) === null || !isCorrect(q, q.answer)) out.push(`${p.id}: its answer is not in its own format`);
   for (const b of p.bugs) {
     const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
-    if (p.type !== "choice") for (const v of vals) if (show(v as number) === p.answer) out.push(`${p.id}: explanation ${b.id} predicts the right answer`);
+    if (p.type !== "choice") for (const v of vals) if (show(v as number) === p.answer || (NEW_TYPES.has(p.type) && sameAnswer(p.type, show(v as number), p.answer))) out.push(`${p.id}: explanation ${b.id} predicts the right answer`);
   }
   if (p.type === "choice" && p.options) {
     if (new Set(p.options).size !== p.options.length) out.push(`${p.id}: repeated options`);
@@ -139,14 +154,43 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   const def = FAMILIES.get(fam)!;
   const det: string[] = [];
   const { items, excluded } = pool(fam);
+  // range@1: a family whose every answer is a probability declares it, so its options stay meaningful
+  if (def.mc && !def.range && def.competency.startsWith("MATH.probability.") && items.length && items.every((p) => { const v = numeric(p.answer); return v !== null && v >= 0 && v <= 1; }))
+    det.push(`${fam}: every answer is a probability; declare range: [0, 1] so no option above 1 or below 0 is offered`);
+  // form@1: a family asking for an expanded answer gives its own answers expanded
+  if (def.expanded) for (const p of items) if (!expandedForm(p.answer)) det.push(`${p.id}: the answer ${p.answer} is not written expanded`);
+  // level@1: a problem's grade is a school grade
+  if (def.grade) for (const p of items) { const g = def.grade(p.params); if (!Number.isInteger(g) || g < 1 || g > 12) det.push(`${p.id}: grade ${g} is not a school grade`); }
+  for (const e of excluded) if (e.reason.startsWith("AMBIGUOUS")) det.push(`gen:${fam}:${e.params.join(",")}: ${e.reason}`);
   for (const p of items) {
     checkItem(p, det);
+    // the independent check must refuse every wrong answer an explanation predicts (otherwise it is not a check)
+    for (const b of p.bugs) {
+      const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
+      for (const v of vals) if (p.type !== "choice" && def.validate(p.params, v as never)) det.push(`${p.id}: the independent check accepts ${show(v as never)}, which explanation ${b.id} predicts as wrong`);
+    }
+    // range@1: the answer lies in the declared range, and so does every option
+    const rg = rangeOf(def, p.params);
+    const inR = (s: string) => { const v = numeric(s) ?? numericValue(s); return v === null || !rg || (v >= rg[0] - 1e-12 && v <= rg[1] + 1e-12); };
+    if (rg && !inR(p.answer)) det.push(`${p.id}: the answer ${p.answer} is outside the family's range [${rg}]`);
     if (def.mc && p.type !== "set" && p.type !== "choice") {
       const m = problemOf(`${p.id}:mc`);
       if (!m) det.push(`${p.id}:mc does not build`);
       else {
         checkItem(m, det);
+        for (const o of m.options ?? []) if (!inR(o)) det.push(`${p.id}:mc: option ${o} is outside the family's range [${rg}]`);
+        if (m.options && m.options.length < 3) det.push(`${p.id}:mc: only ${m.options.length} options`);
         if (m.options![("ABCD").indexOf(m.answer)] !== p.answer) det.push(`${p.id}:mc: the right letter is not the typed answer`);
+        if (NEW_TYPES.has(p.type)) m.options!.forEach((o, i) => { if (i !== "ABCD".indexOf(m.answer) && sameAnswer(p.type, o, p.answer)) det.push(`${p.id}:mc: option ${"ABCD"[i]} is also right`); });
+      }
+    }
+    if (def.word) {
+      const w = problemOf(`${p.id}:w`);
+      if (!w) det.push(`${p.id}:w does not build`);
+      else {
+        checkItem(w, det);
+        if (w.answer !== p.answer) det.push(`${p.id}:w: the everyday form has a different answer`);
+        if (w.prompt === p.prompt) det.push(`${p.id}:w: the everyday form is worded the same as the typed form`);
       }
     }
   }

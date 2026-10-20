@@ -190,3 +190,57 @@ class ContentDecision(models.Model):
 
     def delete(self, *args, **kwargs):
         raise ValueError("content review decisions are append-only")
+
+
+# ---------------------------------------------------------------- written answers marked by an educator (written@1)
+
+
+class MarkingShare(models.Model):
+    """A parent's explicit choice to let one educator read and mark one pupil's written answers (proofs,
+    constructions, explanations). Nothing is shared by default; revoking stops access from then on."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="marking_shares")
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="marking_pupils")
+    granted_at = models.DateTimeField(auto_now_add=True)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["granted_at", "id"]
+
+
+class WrittenMarkQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("written marks are append-only")
+
+    def delete(self):
+        raise ValueError("written marks are append-only")
+
+
+class WrittenMark(models.Model):
+    """An educator's mark on one written answer (one learning_record attempt). Append-only and one per attempt:
+    a mark, once given, is part of the learner's history. Only a mark of "correct" is evidence of success."""
+
+    VERDICTS = [("correct", "Correct"), ("partial", "Partly correct"), ("incorrect", "Not yet correct")]
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="written_marks")
+    attempt_id = models.CharField(max_length=100)
+    question_id = models.CharField(max_length=120)
+    verdict = models.CharField(max_length=12, choices=VERDICTS)
+    score = models.PositiveSmallIntegerField()
+    out_of = models.PositiveSmallIntegerField()
+    feedback = models.TextField(max_length=2000)
+    marker = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    at = models.DateTimeField(auto_now_add=True)
+
+    objects = WrittenMarkQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["at", "id"]
+        constraints = [models.UniqueConstraint(fields=["pupil", "attempt_id"], name="one_mark_per_written_attempt")]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("written marks are append-only")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("written marks are append-only")

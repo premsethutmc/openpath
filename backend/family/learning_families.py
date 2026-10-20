@@ -212,6 +212,17 @@ def _table():
     return json.loads((Path(settings.BASE_DIR).parent / 'content/learning/generated.v1.json').read_text())['families']
 
 
+def exposure(qid):
+    """One exposure per problem (the app's families.ts exposureKey): either answer format, and a parameter choice that
+    shows the same question as a released one counts as that one (distinct@1)."""
+    if not (qid or '').startswith('gen:'):
+        return qid
+    base = re.sub(r':(mc|w)$', '', qid)
+    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)', base)
+    to = ((_table().get(m.group(1)) or {}).get('same') or {}).get(m.group(2)) if m else None
+    return f'gen:{m.group(1)}:{to}' if to else base
+
+
 def generated(qid):
     """A generated question as {competency, type, answer}, or None if the id is unknown or unsupported.
     "gen:<family>:<params>:mc" is the multiple-choice form of a family that has one: the answer is a letter.
@@ -220,12 +231,12 @@ def generated(qid):
     r = _mirror(qid)
     if r is not None:
         return r
-    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(:mc)?', qid or '')
+    m = re.fullmatch(r'gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(:mc|:w)?', qid or '')
     fam = _table().get(m.group(1)) if m else None
     key = f"{m.group(2)}{m.group(3) or ''}" if m else ''
     if not fam or key not in fam['items']:
         return None
-    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) else fam['type'], 'answer': fam['items'][key], 'role': 'generated'}
+    return {'id': qid, 'competency': fam['competency'], 'type': 'choice' if m.group(3) == ':mc' else fam['type'], 'answer': fam['items'][key], 'role': 'generated', **({'expanded': True} if fam.get('expanded') and m.group(3) != ':mc' else {})}
 
 
 def _mirror(qid):

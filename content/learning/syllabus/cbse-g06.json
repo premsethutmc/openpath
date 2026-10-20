@@ -1,0 +1,1829 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 6,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Ganita Prakash: Textbook of Mathematics for Grade 6",
+  "publisher": "NCERT",
+  "edition": "first edition 2024 (NCF-SE 2023); 2026-27 reprint not verified",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Ganit Prakash (Class 6, Hindi) audio book: chapter list",
+   "publisher": "CIET-NCERT",
+   "edition": "audio book of the 2024 textbook",
+   "academicYear": "current",
+   "url": "https://ciet.ncert.gov.in/audio-book/171",
+   "accessed": "2026-10-19",
+   "used_for": "official confirmation of the 10-chapter sequence (Hindi-medium titles corresponding one-to-one with the English titles)"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Annual Syllabus Mathematics Class VI (2026-27), English medium",
+   "publisher": "Directorate of Education, Govt. of NCT of Delhi",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://edustud.nic.in/edu/Syllabus_2026_27/6/6_MATH_ANNUAL_SYLLABUS_2026_27_EM.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirmation that this book/part is in use for 2026-27; chapter titles; subtopic (section) list"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-12/2025 (26.03.2025): availability of new NCERT textbooks and bridge programmes",
+   "publisher": "CBSE",
+   "edition": "26 March 2025",
+   "academicYear": "2025-26",
+   "url": "https://www.cbseacademic.nic.in/web_material/Circulars/2025/12_Circular_2025.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "new NCERT mathematics textbooks for Grades 7 and 8 introduced from 2025-26; Grade 6 book already in place"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-14/2026 (01.04.2026): release of curriculum 2026-27 (Classes IX-XII)",
+   "publisher": "CBSE",
+   "edition": "1 April 2026",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "checked for Grades 6-8: CBSE's 2026-27 curriculum release covers only Classes IX-XII; no separate CBSE syllabus for Grades 6-8 (NCERT textbooks apply)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Ganita Prakash Class 6 (NCERT contents, English medium)",
+   "publisher": "NCERT",
+   "edition": "2024",
+   "academicYear": "2026-27",
+   "url": "https://ncert.nic.in/textbook.php?fegp1=0-10",
+   "accessed": "2026-10-19",
+   "used_for": "NOT READ: blocked by robots.txt; listed so a human can verify"
+  }
+ ],
+ "notes": [
+  "ncert.nic.in (textbook.php and the textbook PDF/prelims files) refused automated fetching (robots.txt disallow) on 2026-10-19, so the NCERT contents pages, printed section headings and edition/reprint lines could not be read directly. Chapter titles were verified instead against other official government sources: NCERT's CIET audio-book pages (ciet.ncert.gov.in) and the Delhi Directorate of Education 2026-27 syllabus (edustud.nic.in), which prescribes NCERT books. 'verified': true means the title was seen in at least one of those sources.",
+  "CBSE does not publish its own mathematics syllabus for Grades 6-8. Its 2026-27 curriculum release (Circular Acad-14/2026) covers Classes IX-XII only, and CBSE circulars direct schools to the new NCERT textbooks. The 2026-27 prescription is therefore inferred from those circulars plus the Delhi DoE 2026-27 syllabus. No CBSE or NCERT notice found replaces or withdraws Ganita Prakash for 2026-27.",
+  "Section titles come from the subtopic lists in the Delhi DoE 2026-27 annual syllabus, not from the printed textbook. They appear to quote the textbook's section headings, but DoE may have shortened, merged or left some out (its list is 'for assessment purpose only'), and capitalisation follows DoE. Check them against the printed NCERT book before using them as exact headings.",
+  "Learning outcomes are written by the compiler from the chapter and section scope. They are not copied from NCERT's Learning Outcomes document, which was not consulted because ncert.nic.in was inaccessible.",
+  "Secondary sites (teachoo.com, edzy.ai, esaral.com, aglasem.com, collegedunia.com) were used only to locate official documents and to cross-check chapter order and titles. Nothing was taken from them as authoritative.",
+  "Grade 6: NCERT's Ganita Prakash (single volume, 10 chapters) has been the Grade 6 book since 2024-25. CBSE Circular Acad-12/2025 lists no further new Grade 6 book, and the Delhi DoE 2026-27 Grade 6 syllabus follows the same 10 chapters. Taken together, this shows the book is still prescribed in 2026-27.",
+  "Grade 6 English chapter titles come from the Delhi DoE 2026-27 syllabus (an official government source) and match NCERT's Hindi-medium CIET audio-book chapter list one-to-one. The printed English capitalisation was not checked against the NCERT PDF.",
+  "Grade 6 edition: given as 'first edition 2024' from general knowledge of the release year. The imprint or reprint line for the 2026-27 print was not seen.",
+  "Grade 6 Ch 1: DoE's subtopic list leaves out the opening section ('What is Mathematics?') that secondary sites show. It also merges 'Patterns in shapes' and 'Relation to number sequences' into one line, which is kept here as DoE wrote it.",
+  "Grade 6 Ch 3: DoE lists 'Playing with number patterns' and 'the Collatz conjecture' as separate items. Secondary sites show them as one textbook section, so they are kept as two DoE items.",
+  "Grade 6 Ch 5: the textbook's exact set of divisibility tests (which divisors) was not verified, so the outcome refers to divisibility tests in general.",
+  "Grade 6 Ch 6: DoE gives only three coarse subtopics ('Perimeter', 'Area', 'Area of a triangle'). The printed book has finer sections (e.g. perimeter of rectangle/square/triangle/regular polygons) that could not be verified officially.",
+  "Grade 6 Ch 9: DoE's subtopics ('Paper folding and cutting', 'Symmetries of a circle') differ from secondary-site topic lists (which mention 'Reflection Symmetry', 'Generating Symmetrical Shapes'). DoE's wording is kept.",
+  "In the DoE 2026-27 plan, chapters 1, 2, 3, 5 and 8 come before the mid-term and 4, 6, 7, 9 and 10 after it. This is Delhi-specific teaching order, not a CBSE term split, so 'term' is null."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g06-c01",
+   "number": 1,
+   "term": null,
+   "title": "Patterns in Mathematics",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c01-s01",
+     "title": "Patterns in numbers"
+    },
+    {
+     "id": "cbse-g06-c01-s02",
+     "title": "Visualising number sequences"
+    },
+    {
+     "id": "cbse-g06-c01-s03",
+     "title": "Relations among number sequences"
+    },
+    {
+     "id": "cbse-g06-c01-s04",
+     "title": "Patterns in shapes, relation to number sequences"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c01-o01",
+     "statement": "Extend common number sequences (counting, odd, even, triangular, square, cube and powers of 2) and state the rule that generates each.",
+     "concepts": [
+      "number sequences",
+      "triangular numbers",
+      "square numbers",
+      "cube numbers"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Existing pattern competencies cover extending patterns and stating rules; none covers square/triangular/cube number sequences, their pictorial representations and the relations between them (e.g. sums of odd numbers are squares)."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers",
+      "MATH.algebra.number-patterns",
+      "MATH.algebra.pattern-rules"
+     ]
+    },
+    {
+     "id": "cbse-g06-c01-o02",
+     "statement": "Draw dot or shape pictures of number sequences and explain why each picture gives the next number in the sequence.",
+     "concepts": [
+      "visualising sequences",
+      "figurate numbers"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Existing pattern competencies cover extending patterns and stating rules; none covers square/triangular/cube number sequences, their pictorial representations and the relations between them (e.g. sums of odd numbers are squares)."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers"
+     ]
+    },
+    {
+     "id": "cbse-g06-c01-o03",
+     "statement": "Find and justify relations between sequences, for example that adding consecutive odd numbers from 1 gives square numbers, or that two consecutive triangular numbers add to a square number.",
+     "concepts": [
+      "relations among sequences",
+      "sum of odd numbers"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.counterexamples-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Existing pattern competencies cover extending patterns and stating rules; none covers square/triangular/cube number sequences, their pictorial representations and the relations between them (e.g. sums of odd numbers are squares)."
+      },
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers",
+      "MATH.reasoning.conjecture-testing",
+      "MATH.reasoning.counterexamples-intro"
+     ]
+    },
+    {
+     "id": "cbse-g06-c01-o04",
+     "statement": "Count sides, corners or line segments in shape sequences (such as regular polygons or stacked squares) and link the counts to number sequences.",
+     "concepts": [
+      "shape sequences",
+      "regular polygons"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.growing-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Existing pattern competencies cover extending patterns and stating rules; none covers square/triangular/cube number sequences, their pictorial representations and the relations between them (e.g. sums of odd numbers are squares)."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers",
+      "MATH.algebra.growing-patterns"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c02",
+   "number": 2,
+   "term": null,
+   "title": "Lines and Angles",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c02-s01",
+     "title": "Point, Line Segment, Line, Ray, Angle"
+    },
+    {
+     "id": "cbse-g06-c02-s02",
+     "title": "Comparing Angles"
+    },
+    {
+     "id": "cbse-g06-c02-s03",
+     "title": "Making Rotating arms"
+    },
+    {
+     "id": "cbse-g06-c02-s04",
+     "title": "Special types of angles"
+    },
+    {
+     "id": "cbse-g06-c02-s05",
+     "title": "Measuring Angles"
+    },
+    {
+     "id": "cbse-g06-c02-s06",
+     "title": "Drawing Angles"
+    },
+    {
+     "id": "cbse-g06-c02-s07",
+     "title": "Type of angles & their measures"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c02-o01",
+     "statement": "Name and distinguish points, line segments, lines and rays using standard notation.",
+     "concepts": [
+      "point",
+      "line segment",
+      "line",
+      "ray"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.lines-segments",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.lines-segments"
+     ]
+    },
+    {
+     "id": "cbse-g06-c02-o02",
+     "statement": "Treat an angle as an amount of turn between two arms, name its vertex and arms, and compare angles by superposition or rotation.",
+     "concepts": [
+      "angle",
+      "vertex",
+      "arms",
+      "comparing angles"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ]
+    },
+    {
+     "id": "cbse-g06-c02-o03",
+     "statement": "Measure a given angle and draw an angle of a given size with a protractor.",
+     "concepts": [
+      "protractor",
+      "degree measure"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angle-measure",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angle-measure"
+     ]
+    },
+    {
+     "id": "cbse-g06-c02-o04",
+     "statement": "Classify angles as acute, right, obtuse, straight or reflex from their measures or drawings.",
+     "concepts": [
+      "acute",
+      "right",
+      "obtuse",
+      "straight",
+      "reflex"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c03",
+   "number": 3,
+   "term": null,
+   "title": "Number Play",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c03-s01",
+     "title": "Numbers can tell us things"
+    },
+    {
+     "id": "cbse-g06-c03-s02",
+     "title": "Supercells"
+    },
+    {
+     "id": "cbse-g06-c03-s03",
+     "title": "Patterns of numbers on the number line"
+    },
+    {
+     "id": "cbse-g06-c03-s04",
+     "title": "Playing with digits"
+    },
+    {
+     "id": "cbse-g06-c03-s05",
+     "title": "Pretty Palindromic patterns"
+    },
+    {
+     "id": "cbse-g06-c03-s06",
+     "title": "The magic number of Kaprekar"
+    },
+    {
+     "id": "cbse-g06-c03-s07",
+     "title": "Clock & calendar numbers"
+    },
+    {
+     "id": "cbse-g06-c03-s08",
+     "title": "Mental math"
+    },
+    {
+     "id": "cbse-g06-c03-s09",
+     "title": "Playing with number patterns"
+    },
+    {
+     "id": "cbse-g06-c03-s10",
+     "title": "the Collatz conjecture"
+    },
+    {
+     "id": "cbse-g06-c03-s11",
+     "title": "Simple Estimation"
+    },
+    {
+     "id": "cbse-g06-c03-s12",
+     "title": "Games and winning strategies"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c03-o01",
+     "statement": "Reason about how numbers are arranged in a grid or row, for example filling a grid so that chosen cells are larger than all their neighbours (supercells).",
+     "concepts": [
+      "supercells",
+      "comparison",
+      "grid reasoning"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.number-grid-puzzles",
+       "name": "Solve number grid puzzles such as supercells and magic squares",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.compare-numbers",
+        "MATH.algebra.missing-number"
+       ],
+       "why": "Grid-based number reasoning (supercells, magic squares, grid sums) is assessed in Number Play chapters and is not covered by any existing competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.reasoning.number-grid-puzzles"
+     ]
+    },
+    {
+     "id": "cbse-g06-c03-o02",
+     "statement": "Explore digit-based processes (digit sums, palindromes by reversing and adding, Kaprekar's routine) and form and test conjectures about them.",
+     "concepts": [
+      "palindromes",
+      "Kaprekar routine",
+      "digit sums"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.conjecture-testing"
+     ]
+    },
+    {
+     "id": "cbse-g06-c03-o03",
+     "statement": "Generate Collatz sequences from a starting number and describe their behaviour.",
+     "concepts": [
+      "Collatz conjecture",
+      "sequences"
+     ],
+     "questionTypes": [
+      "numeric",
+      "pattern"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.conjecture-testing"
+     ]
+    },
+    {
+     "id": "cbse-g06-c03-o04",
+     "statement": "Use mental-calculation strategies and rough estimation to judge the size of quantities and results.",
+     "concepts": [
+      "mental math",
+      "estimation"
+     ],
+     "questionTypes": [
+      "estimation",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.rounding",
+       "name": "Round numbers and distinguish exact from approximate values",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.thousands"
+       ],
+       "supports": [
+        "MATH.reasoning.estimate-check"
+       ],
+       "why": "MATH.reasoning.estimate-check is about estimating and checking an answer; rounding to a given place and judging when an approximate value is appropriate is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "cbse-g06-c03-o05",
+     "statement": "Find and use number patterns in clocks and calendars.",
+     "concepts": [
+      "clock numbers",
+      "calendar patterns"
+     ],
+     "questionTypes": [
+      "time",
+      "pattern"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.elapsed-time",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.elapsed-time"
+     ]
+    },
+    {
+     "id": "cbse-g06-c03-o06",
+     "statement": "Work out and explain a winning strategy for a simple two-player number game.",
+     "concepts": [
+      "game strategy"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.winning-strategies",
+       "name": "Find and justify winning strategies in simple number games",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        6
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.multi-step"
+       ],
+       "why": "Analysing two-player number games for a winning strategy is a distinct reasoning skill in Grade 6 Number Play; MATH.reasoning.multi-step is about explaining a computation."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.winning-strategies"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c04",
+   "number": 4,
+   "term": null,
+   "title": "Data Handling and Presentation",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c04-s01",
+     "title": "Collecting & organizing data"
+    },
+    {
+     "id": "cbse-g06-c04-s02",
+     "title": "Pictographs"
+    },
+    {
+     "id": "cbse-g06-c04-s03",
+     "title": "Bar Graphs"
+    },
+    {
+     "id": "cbse-g06-c04-s04",
+     "title": "Drawing a Bar Graph"
+    },
+    {
+     "id": "cbse-g06-c04-s05",
+     "title": "Artistic & Aesthetic considerations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c04-o01",
+     "statement": "Collect data for a question and organise it with tally marks and a frequency table.",
+     "concepts": [
+      "data collection",
+      "tally marks",
+      "frequency table"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency"
+     ]
+    },
+    {
+     "id": "cbse-g06-c04-o02",
+     "statement": "Read pictographs with a key, including partial symbols, and draw a pictograph from a table.",
+     "concepts": [
+      "pictograph",
+      "key"
+     ],
+     "questionTypes": [
+      "data-table",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs"
+     ]
+    },
+    {
+     "id": "cbse-g06-c04-o03",
+     "statement": "Read bar graphs with a scale and answer comparison questions from them.",
+     "concepts": [
+      "bar graph",
+      "scale"
+     ],
+     "questionTypes": [
+      "data-table",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.scaled-bars"
+     ]
+    },
+    {
+     "id": "cbse-g06-c04-o04",
+     "statement": "Draw a bar graph from data, choosing a suitable scale and labelling the axes.",
+     "concepts": [
+      "drawing bar graphs",
+      "choosing a scale"
+     ],
+     "questionTypes": [
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.scaled-bars"
+     ]
+    },
+    {
+     "id": "cbse-g06-c04-o05",
+     "statement": "Judge whether a data display is clear and honest and suggest better design choices.",
+     "concepts": [
+      "aesthetic considerations",
+      "infographics"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.evaluate-data-displays",
+       "name": "Choose, design and critique data displays and infographics",
+       "strand": "statistics",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.statistics.scaled-bars"
+       ],
+       "supports": [
+        "MATH.statistics.pictographs"
+       ],
+       "why": "Ganita Prakash assesses aesthetic/misleading-display considerations and infographics; existing competencies only cover reading and drawing specific charts."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.evaluate-data-displays"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c05",
+   "number": 5,
+   "term": null,
+   "title": "Prime Time",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c05-s01",
+     "title": "Common multiples and common factors"
+    },
+    {
+     "id": "cbse-g06-c05-s02",
+     "title": "Prime numbers"
+    },
+    {
+     "id": "cbse-g06-c05-s03",
+     "title": "Co-prime numbers for safekeeping treasure"
+    },
+    {
+     "id": "cbse-g06-c05-s04",
+     "title": "Prime factorization"
+    },
+    {
+     "id": "cbse-g06-c05-s05",
+     "title": "Divisibility tests"
+    },
+    {
+     "id": "cbse-g06-c05-s06",
+     "title": "Fun with numbers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c05-o01",
+     "statement": "List common multiples and common factors of two numbers and use them to solve game or timing problems.",
+     "concepts": [
+      "common multiples",
+      "common factors"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.factors-multiples",
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "cbse-g06-c05-o02",
+     "statement": "Tell prime numbers from composite numbers and list primes in a range using a sieve.",
+     "concepts": [
+      "prime numbers",
+      "composite numbers",
+      "sieve"
+     ],
+     "questionTypes": [
+      "set",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.primes"
+     ]
+    },
+    {
+     "id": "cbse-g06-c05-o03",
+     "statement": "Decide whether two numbers are co-prime.",
+     "concepts": [
+      "co-prime numbers"
+     ],
+     "questionTypes": [
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "MATH.number.factors-multiples covers factors/multiples of one number; MATH.number.euclid-algorithm is a Grade 10 algorithm. Middle-school HCF/LCM (including co-primes) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "cbse-g06-c05-o04",
+     "statement": "Write a number as a product of primes and use the factorisation to check divisibility and co-primeness.",
+     "concepts": [
+      "prime factorisation"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.prime-factorisation",
+       "name": "Express a number as a product of primes",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.primes"
+       ],
+       "supports": [
+        "MATH.number.factors-multiples"
+       ],
+       "why": "The only existing mention is inside MATH.number.euclid-algorithm (Grade 10, combined with the Euclidean algorithm); Grade 6 needs prime factorisation as a standalone skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.prime-factorisation"
+     ]
+    },
+    {
+     "id": "cbse-g06-c05-o05",
+     "statement": "Apply divisibility tests and explain from place value why they work.",
+     "concepts": [
+      "divisibility tests"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.divisibility"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c06",
+   "number": 6,
+   "term": null,
+   "title": "Perimeter and Area",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c06-s01",
+     "title": "Perimeter"
+    },
+    {
+     "id": "cbse-g06-c06-s02",
+     "title": "Area"
+    },
+    {
+     "id": "cbse-g06-c06-s03",
+     "title": "Area of a triangle"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c06-o01",
+     "statement": "Find the perimeters of rectangles, squares, triangles and regular polygons.",
+     "concepts": [
+      "perimeter",
+      "regular polygon"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-perimeter",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.perimeter-intro",
+      "MATH.measurement.rectangle-perimeter"
+     ]
+    },
+    {
+     "id": "cbse-g06-c06-o02",
+     "statement": "Find the area of rectangles and squares, and estimate the area of irregular shapes by counting squares on a grid.",
+     "concepts": [
+      "area",
+      "square units",
+      "estimating area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.area-squares",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.area-squares",
+      "MATH.measurement.rectangle-area"
+     ]
+    },
+    {
+     "id": "cbse-g06-c06-o03",
+     "statement": "Find the area of a triangle as half the area of a related rectangle.",
+     "concepts": [
+      "area of a triangle"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.triangle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.triangle-area"
+     ]
+    },
+    {
+     "id": "cbse-g06-c06-o04",
+     "statement": "Compare shapes with the same perimeter but different areas, and the reverse, and solve real-life perimeter and area problems.",
+     "concepts": [
+      "perimeter vs area"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-area",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.rectangle-area",
+      "MATH.reasoning.multi-step"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c07",
+   "number": 7,
+   "term": null,
+   "title": "Fractions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c07-s01",
+     "title": "Fractional units and equal shares"
+    },
+    {
+     "id": "cbse-g06-c07-s02",
+     "title": "Fractional units as parts of a whole"
+    },
+    {
+     "id": "cbse-g06-c07-s03",
+     "title": "Measuring using fractional units"
+    },
+    {
+     "id": "cbse-g06-c07-s04",
+     "title": "Marking fraction lengths on number line"
+    },
+    {
+     "id": "cbse-g06-c07-s05",
+     "title": "Mixed fractions"
+    },
+    {
+     "id": "cbse-g06-c07-s06",
+     "title": "Equivalent fractions"
+    },
+    {
+     "id": "cbse-g06-c07-s07",
+     "title": "Comparing fractions"
+    },
+    {
+     "id": "cbse-g06-c07-s08",
+     "title": "Addition & Subtraction of fractions"
+    },
+    {
+     "id": "cbse-g06-c07-s09",
+     "title": "A pinch of history"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c07-o01",
+     "statement": "Interpret fractions as equal shares and as parts of a whole, and use fractional units to measure lengths.",
+     "concepts": [
+      "fractional unit",
+      "equal shares"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-models"
+     ]
+    },
+    {
+     "id": "cbse-g06-c07-o02",
+     "statement": "Place fractions, including fractions greater than one, on a number line.",
+     "concepts": [
+      "number line",
+      "fraction lengths"
+     ],
+     "questionTypes": [
+      "fraction",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-models"
+     ]
+    },
+    {
+     "id": "cbse-g06-c07-o03",
+     "statement": "Convert between mixed fractions and improper fractions.",
+     "concepts": [
+      "mixed fractions",
+      "improper fractions"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.mixed-fractions",
+       "name": "Convert between mixed and improper fractions",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        6
+       ],
+       "prerequisites": [
+        "MATH.number.fraction-models",
+        "MATH.number.division-remainders"
+       ],
+       "supports": [],
+       "why": "No existing fraction competency covers mixed fractions."
+      }
+     ],
+     "mapped": [
+      "MATH.number.mixed-fractions"
+     ]
+    },
+    {
+     "id": "cbse-g06-c07-o04",
+     "statement": "Make equivalent fractions and reduce a fraction to its lowest terms.",
+     "concepts": [
+      "equivalent fractions",
+      "lowest terms"
+     ],
+     "questionTypes": [
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.frac.check-equal",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions",
+      "MLY.frac.check-equal"
+     ]
+    },
+    {
+     "id": "cbse-g06-c07-o05",
+     "statement": "Compare and order fractions, including fractions with unlike denominators.",
+     "concepts": [
+      "comparing fractions"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-comparison",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-comparison"
+     ]
+    },
+    {
+     "id": "cbse-g06-c07-o06",
+     "statement": "Add and subtract fractions with like and unlike denominators, including in word problems.",
+     "concepts": [
+      "adding fractions",
+      "subtracting fractions"
+     ],
+     "questionTypes": [
+      "fraction",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-add-like",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Adding (and subtracting) fractions with like denominators is already asked by fadd, whose competency the outcome is not mapped to."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add",
+      "MATH.number.fraction-add-like"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c08",
+   "number": 8,
+   "term": null,
+   "title": "Playing with Constructions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c08-s01",
+     "title": "Artwork"
+    },
+    {
+     "id": "cbse-g06-c08-s02",
+     "title": "Squares and rectangles"
+    },
+    {
+     "id": "cbse-g06-c08-s03",
+     "title": "Constructing Squares and rectangles"
+    },
+    {
+     "id": "cbse-g06-c08-s04",
+     "title": "An exploration in rectangles"
+    },
+    {
+     "id": "cbse-g06-c08-s05",
+     "title": "Exploring diagonals of rectangles and squares"
+    },
+    {
+     "id": "cbse-g06-c08-s06",
+     "title": "Points equidistant from two given points"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c08-o01",
+     "statement": "Use a compass and ruler to draw circles, arcs and figures made from them.",
+     "concepts": [
+      "compass",
+      "circle",
+      "arc"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "intro",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.circles"
+     ]
+    },
+    {
+     "id": "cbse-g06-c08-o02",
+     "statement": "Construct squares and rectangles of given side lengths with ruler and compass.",
+     "concepts": [
+      "constructing squares",
+      "constructing rectangles"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions"
+     ]
+    },
+    {
+     "id": "cbse-g06-c08-o03",
+     "statement": "Investigate the diagonals of rectangles and squares (equal length, bisecting each other, angles formed) and use them in constructions.",
+     "concepts": [
+      "diagonals",
+      "properties of rectangles"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.quadrilaterals"
+     ]
+    },
+    {
+     "id": "cbse-g06-c08-o04",
+     "statement": "Locate points that are the same distance from two given points.",
+     "concepts": [
+      "equidistant points"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.constructions-bisectors"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c09",
+   "number": 9,
+   "term": null,
+   "title": "Symmetry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c09-s01",
+     "title": "Line of Symmetry"
+    },
+    {
+     "id": "cbse-g06-c09-s02",
+     "title": "Paper folding and cutting"
+    },
+    {
+     "id": "cbse-g06-c09-s03",
+     "title": "Rotational Symmetry"
+    },
+    {
+     "id": "cbse-g06-c09-s04",
+     "title": "Symmetries of a circle"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c09-o01",
+     "statement": "Find all lines of symmetry of a figure, including by folding and cutting paper.",
+     "concepts": [
+      "line of symmetry",
+      "reflection"
+     ],
+     "questionTypes": [
+      "numeric",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.symmetry-fold",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-fold",
+      "MATH.geometry.symmetry-lines"
+     ]
+    },
+    {
+     "id": "cbse-g06-c09-o02",
+     "statement": "Complete or create a figure so that it has a given line of symmetry.",
+     "concepts": [
+      "completing symmetric figures"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ]
+    },
+    {
+     "id": "cbse-g06-c09-o03",
+     "statement": "Find the angles of rotational symmetry and the order of rotational symmetry of a figure.",
+     "concepts": [
+      "rotational symmetry",
+      "order of rotation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.rotational-symmetry",
+       "name": "Find the order and angles of rotational symmetry",
+       "strand": "geometry",
+       "gradeRange": [
+        6,
+        6
+       ],
+       "prerequisites": [
+        "MATH.geometry.angles-intro"
+       ],
+       "supports": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "why": "Existing symmetry competencies (symmetry-fold, symmetry-lines) cover reflection symmetry only."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.rotational-symmetry"
+     ]
+    },
+    {
+     "id": "cbse-g06-c09-o04",
+     "statement": "Describe the reflection and rotational symmetries of circles and regular polygons.",
+     "concepts": [
+      "symmetries of a circle",
+      "regular polygons"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.rotational-symmetry",
+       "name": "Find the order and angles of rotational symmetry",
+       "strand": "geometry",
+       "gradeRange": [
+        6,
+        6
+       ],
+       "prerequisites": [
+        "MATH.geometry.angles-intro"
+       ],
+       "supports": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "why": "Existing symmetry competencies (symmetry-fold, symmetry-lines) cover reflection symmetry only."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.rotational-symmetry",
+      "MATH.geometry.symmetry-lines"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g06-c10",
+   "number": 10,
+   "term": null,
+   "title": "The Other Side of Zero",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g06-c10-s01",
+     "title": "Bela's building of fun"
+    },
+    {
+     "id": "cbse-g06-c10-s02",
+     "title": "The token model"
+    },
+    {
+     "id": "cbse-g06-c10-s03",
+     "title": "Integers in other places"
+    },
+    {
+     "id": "cbse-g06-c10-s04",
+     "title": "Exploration with integers"
+    },
+    {
+     "id": "cbse-g06-c10-s05",
+     "title": "A pinch of history"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g06-c10-o01",
+     "statement": "Represent positive and negative integers on a number line (for example floors above and below ground) and order them.",
+     "concepts": [
+      "integers",
+      "number line",
+      "ordering"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integers"
+     ]
+    },
+    {
+     "id": "cbse-g06-c10-o02",
+     "statement": "Add and subtract integers using a token (positive/negative counter) model and the number line.",
+     "concepts": [
+      "token model",
+      "integer addition",
+      "integer subtraction"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add"
+     ]
+    },
+    {
+     "id": "cbse-g06-c10-o03",
+     "statement": "Solve problems involving integers in contexts such as bank balances, temperature and height above or below sea level.",
+     "concepts": [
+      "integers in context"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add"
+     ]
+    },
+    {
+     "id": "cbse-g06-c10-o04",
+     "statement": "Complete integer grid puzzles (e.g. grids with equal row and column sums) and explain the reasoning.",
+     "concepts": [
+      "integer grids"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.number-grid-puzzles",
+       "name": "Solve number grid puzzles such as supercells and magic squares",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        7
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.compare-numbers",
+        "MATH.algebra.missing-number"
+       ],
+       "why": "Grid-based number reasoning (supercells, magic squares, grid sums) is assessed in Number Play chapters and is not covered by any existing competency."
+      }
+     ],
+     "mapped": [
+      "MATH.number.integer-add",
+      "MATH.reasoning.number-grid-puzzles"
+     ]
+    }
+   ]
+  }
+ ]
+}

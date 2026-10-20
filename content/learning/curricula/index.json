@@ -1,6 +1,96 @@
 {
  "releases": [
   {
+   "id": "cbse-ncert-mathematics-grade-1",
+   "version": "1.0.0",
+   "grade": 1,
+   "title": "Joyful Mathematics (Textbook of Mathematics for Grade 1) — Grade 1 Mathematics (CBSE / NCERT)",
+   "hash": "f631216d",
+   "file": "cbse-ncert-mathematics-grade-1.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-1",
+   "version": "1.1.0",
+   "grade": 1,
+   "title": "Joyful Mathematics (Textbook of Mathematics for Grade 1) — Grade 1 Mathematics (CBSE / NCERT)",
+   "hash": "1744c692",
+   "file": "cbse-ncert-mathematics-grade-1.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-1",
+   "version": "1.0.0",
+   "grade": 1,
+   "title": "Mathematics, Standard I (new revised-curriculum term books; exact printed title not seen) — Grade 1 Mathematics (Tamil Nadu State Board)",
+   "hash": "2953f058",
+   "file": "tn-samacheer-mathematics-grade-1.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-2",
+   "version": "1.0.0",
+   "grade": 2,
+   "title": "Joyful Mathematics (Textbook of Mathematics for Grade 2) — Grade 2 Mathematics (CBSE / NCERT)",
+   "hash": "c9f59acd",
+   "file": "cbse-ncert-mathematics-grade-2.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-2",
+   "version": "1.1.0",
+   "grade": 2,
+   "title": "Joyful Mathematics (Textbook of Mathematics for Grade 2) — Grade 2 Mathematics (CBSE / NCERT)",
+   "hash": "645beec6",
+   "file": "cbse-ncert-mathematics-grade-2.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-2",
+   "version": "1.0.0",
+   "grade": 2,
+   "title": "Mathematics, Standard II (new revised-curriculum term books; exact printed title not seen) — Grade 2 Mathematics (Tamil Nadu State Board)",
+   "hash": "848ad84d",
+   "file": "tn-samacheer-mathematics-grade-2.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-3",
+   "version": "1.0.0",
+   "grade": 3,
+   "title": "Maths Mela (Textbook of Mathematics for Grade 3) — Grade 3 Mathematics (CBSE / NCERT)",
+   "hash": "283b9e0c",
+   "file": "cbse-ncert-mathematics-grade-3.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-3",
+   "version": "1.0.0",
+   "grade": 3,
+   "title": "Mathematics, Standard III (new revised-curriculum term books; exact printed title not seen) — Grade 3 Mathematics (Tamil Nadu State Board)",
+   "hash": "40aab6a6",
+   "file": "tn-samacheer-mathematics-grade-3.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-4",
+   "version": "1.0.0",
+   "grade": 4,
+   "title": "Maths Mela: Textbook of Mathematics for Grade 4 — Grade 4 Mathematics (CBSE / NCERT)",
+   "hash": "d49b78fe",
+   "file": "cbse-ncert-mathematics-grade-4.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-4",
+   "version": "1.1.0",
+   "grade": 4,
+   "title": "Maths Mela: Textbook of Mathematics for Grade 4 — Grade 4 Mathematics (CBSE / NCERT)",
+   "hash": "ee6d5b17",
+   "file": "cbse-ncert-mathematics-grade-4.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "discovering-mathematics-learner-s-book-4",
    "version": "1.1.0",
    "grade": 4,
@@ -27,6 +117,33 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "tn-samacheer-mathematics-grade-4",
+   "version": "1.0.0",
+   "grade": 4,
+   "title": "Mathematics, Standard IV (Term I, Term II, Term III) — Grade 4 Mathematics (Tamil Nadu State Board)",
+   "hash": "616ffa1f",
+   "file": "tn-samacheer-mathematics-grade-4.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-5",
+   "version": "1.0.0",
+   "grade": 5,
+   "title": "Maths Mela: Textbook of Mathematics for Grade 5 — Grade 5 Mathematics (CBSE / NCERT)",
+   "hash": "6c49ba84",
+   "file": "cbse-ncert-mathematics-grade-5.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-5",
+   "version": "1.1.0",
+   "grade": 5,
+   "title": "Maths Mela: Textbook of Mathematics for Grade 5 — Grade 5 Mathematics (CBSE / NCERT)",
+   "hash": "c8815ea4",
+   "file": "cbse-ncert-mathematics-grade-5.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-5",
    "version": "1.0.0",
    "grade": 5,
@@ -42,6 +159,69 @@
    "hash": "5e1e9660",
    "file": "openpath-sample-mathematics-grade-5.v1.1.0.json",
    "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-5",
+   "version": "1.0.0",
+   "grade": 5,
+   "title": "Mathematics, Standard V (Term I, Term II, Term III) — Grade 5 Mathematics (Tamil Nadu State Board)",
+   "hash": "9240cfb5",
+   "file": "tn-samacheer-mathematics-grade-5.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-6",
+   "version": "1.0.0",
+   "grade": 6,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 6 — Grade 6 Mathematics (CBSE / NCERT)",
+   "hash": "c2b29f9a",
+   "file": "cbse-ncert-mathematics-grade-6.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-6",
+   "version": "1.1.0",
+   "grade": 6,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 6 — Grade 6 Mathematics (CBSE / NCERT)",
+   "hash": "68003bb1",
+   "file": "cbse-ncert-mathematics-grade-6.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-6",
+   "version": "1.0.0",
+   "grade": 6,
+   "title": "Mathematics - Standard Six (Term I, Term II, Term III), English Medium — Grade 6 Mathematics (Tamil Nadu State Board)",
+   "hash": "8f5f6732",
+   "file": "tn-samacheer-mathematics-grade-6.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-6",
+   "version": "1.1.0",
+   "grade": 6,
+   "title": "Mathematics - Standard Six (Term I, Term II, Term III), English Medium — Grade 6 Mathematics (Tamil Nadu State Board)",
+   "hash": "63f3fb4b",
+   "file": "tn-samacheer-mathematics-grade-6.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-7",
+   "version": "1.0.0",
+   "grade": 7,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 7, Part I and Part II — Grade 7 Mathematics (CBSE / NCERT)",
+   "hash": "2f30f128",
+   "file": "cbse-ncert-mathematics-grade-7.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-7",
+   "version": "1.1.0",
+   "grade": 7,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 7, Part I and Part II — Grade 7 Mathematics (CBSE / NCERT)",
+   "hash": "84d6b440",
+   "file": "cbse-ncert-mathematics-grade-7.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
   },
   {
    "id": "openpath-sample-mathematics-grade-7",
@@ -61,6 +241,42 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "tn-samacheer-mathematics-grade-7",
+   "version": "1.0.0",
+   "grade": 7,
+   "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium — Grade 7 Mathematics (Tamil Nadu State Board)",
+   "hash": "aaa18da5",
+   "file": "tn-samacheer-mathematics-grade-7.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-7",
+   "version": "1.1.0",
+   "grade": 7,
+   "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium — Grade 7 Mathematics (Tamil Nadu State Board)",
+   "hash": "9705d234",
+   "file": "tn-samacheer-mathematics-grade-7.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-8",
+   "version": "1.0.0",
+   "grade": 8,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 8, Part I and Part II — Grade 8 Mathematics (CBSE / NCERT)",
+   "hash": "4b2edb3f",
+   "file": "cbse-ncert-mathematics-grade-8.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-8",
+   "version": "1.1.0",
+   "grade": 8,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 8, Part I and Part II — Grade 8 Mathematics (CBSE / NCERT)",
+   "hash": "f0d7add0",
+   "file": "cbse-ncert-mathematics-grade-8.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-8",
    "version": "1.0.0",
    "grade": 8,
@@ -78,6 +294,60 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "tn-samacheer-mathematics-grade-8",
+   "version": "1.0.0",
+   "grade": 8,
+   "title": "Mathematics - Standard Eight (single annual volume), English Medium — Grade 8 Mathematics (Tamil Nadu State Board)",
+   "hash": "1141605b",
+   "file": "tn-samacheer-mathematics-grade-8.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-8",
+   "version": "1.1.0",
+   "grade": 8,
+   "title": "Mathematics - Standard Eight (single annual volume), English Medium — Grade 8 Mathematics (Tamil Nadu State Board)",
+   "hash": "51f1bece",
+   "file": "tn-samacheer-mathematics-grade-8.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-9",
+   "version": "1.0.0",
+   "grade": 9,
+   "title": "Ganita Manjari: Textbook of Mathematics for Grade 9 (Part I and Part II) — Grade 9 Mathematics (CBSE / NCERT)",
+   "hash": "3b22a9f9",
+   "file": "cbse-ncert-mathematics-grade-9.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-9",
+   "version": "1.1.0",
+   "grade": 9,
+   "title": "Ganita Manjari: Textbook of Mathematics for Grade 9 (Part I and Part II) — Grade 9 Mathematics (CBSE / NCERT)",
+   "hash": "5349dfc2",
+   "file": "cbse-ncert-mathematics-grade-9.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-9",
+   "version": "1.0.0",
+   "grade": 9,
+   "title": "Mathematics, Standard Nine — Grade 9 Mathematics (Tamil Nadu State Board)",
+   "hash": "b43f95e2",
+   "file": "tn-samacheer-mathematics-grade-9.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-9",
+   "version": "1.1.0",
+   "grade": 9,
+   "title": "Mathematics, Standard Nine — Grade 9 Mathematics (Tamil Nadu State Board)",
+   "hash": "59751150",
+   "file": "tn-samacheer-mathematics-grade-9.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
    "id": "board-b-sample-mathematics-class-10",
    "version": "1.1.0",
    "grade": 10,
@@ -85,6 +355,24 @@
    "hash": "57f70817",
    "file": "board-b-sample-mathematics-class-10.v1.1.0.json",
    "board": "Sample Board B (synthetic, not a real board)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-10",
+   "version": "1.0.0",
+   "grade": 10,
+   "title": "Mathematics: Textbook for Class X — Grade 10 Mathematics (CBSE / NCERT)",
+   "hash": "06da38e2",
+   "file": "cbse-ncert-mathematics-grade-10.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-10",
+   "version": "1.1.0",
+   "grade": 10,
+   "title": "Mathematics: Textbook for Class X — Grade 10 Mathematics (CBSE / NCERT)",
+   "hash": "50b2cdb6",
+   "file": "cbse-ncert-mathematics-grade-10.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
   },
   {
    "id": "openpath-sample-mathematics-grade-10",
@@ -104,6 +392,42 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "tn-samacheer-mathematics-grade-10",
+   "version": "1.0.0",
+   "grade": 10,
+   "title": "Mathematics, Standard Ten — Grade 10 Mathematics (Tamil Nadu State Board)",
+   "hash": "25e419ba",
+   "file": "tn-samacheer-mathematics-grade-10.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-10",
+   "version": "1.1.0",
+   "grade": 10,
+   "title": "Mathematics, Standard Ten — Grade 10 Mathematics (Tamil Nadu State Board)",
+   "hash": "9fea1b7a",
+   "file": "tn-samacheer-mathematics-grade-10.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-11",
+   "version": "1.0.0",
+   "grade": 11,
+   "title": "Mathematics: Textbook for Class XI — Grade 11 Mathematics (CBSE / NCERT)",
+   "hash": "ebc8c8d9",
+   "file": "cbse-ncert-mathematics-grade-11.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-11",
+   "version": "1.1.0",
+   "grade": 11,
+   "title": "Mathematics: Textbook for Class XI — Grade 11 Mathematics (CBSE / NCERT)",
+   "hash": "8ab7e9c7",
+   "file": "cbse-ncert-mathematics-grade-11.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-11",
    "version": "1.0.0",
    "grade": 11,
@@ -121,6 +445,42 @@
    "board": "OpenPath sample (synthetic, not a real board)"
   },
   {
+   "id": "tn-samacheer-mathematics-grade-11",
+   "version": "1.0.0",
+   "grade": 11,
+   "title": "Mathematics (Higher Secondary First Year), Volume I and Volume II — Grade 11 Mathematics (Tamil Nadu State Board)",
+   "hash": "cc17e760",
+   "file": "tn-samacheer-mathematics-grade-11.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-11",
+   "version": "1.1.0",
+   "grade": 11,
+   "title": "Mathematics (Higher Secondary First Year), Volume I and Volume II — Grade 11 Mathematics (Tamil Nadu State Board)",
+   "hash": "07cbd294",
+   "file": "tn-samacheer-mathematics-grade-11.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-12",
+   "version": "1.0.0",
+   "grade": 12,
+   "title": "Mathematics: Textbook for Class XII, Part I (Chapters 1-6) and Part II (Chapters 7-13) — Grade 12 Mathematics (CBSE / NCERT)",
+   "hash": "d8d39520",
+   "file": "cbse-ncert-mathematics-grade-12.v1.0.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "cbse-ncert-mathematics-grade-12",
+   "version": "1.1.0",
+   "grade": 12,
+   "title": "Mathematics: Textbook for Class XII, Part I (Chapters 1-6) and Part II (Chapters 7-13) — Grade 12 Mathematics (CBSE / NCERT)",
+   "hash": "6dfb8196",
+   "file": "cbse-ncert-mathematics-grade-12.v1.1.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-12",
    "version": "1.1.0",
    "grade": 12,
@@ -128,6 +488,24 @@
    "hash": "76999a5b",
    "file": "openpath-sample-mathematics-grade-12.v1.1.0.json",
    "board": "OpenPath sample (synthetic, not a real board)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-12",
+   "version": "1.0.0",
+   "grade": 12,
+   "title": "Mathematics (Higher Secondary Second Year), Volume I and Volume II — Grade 12 Mathematics (Tamil Nadu State Board)",
+   "hash": "dd6b7f7f",
+   "file": "tn-samacheer-mathematics-grade-12.v1.0.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-12",
+   "version": "1.1.0",
+   "grade": 12,
+   "title": "Mathematics (Higher Secondary Second Year), Volume I and Volume II — Grade 12 Mathematics (Tamil Nadu State Board)",
+   "hash": "f6e61dc2",
+   "file": "tn-samacheer-mathematics-grade-12.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
   }
  ]
 }

@@ -47,7 +47,10 @@ jobs:
           node --import tsx ../packages/learning/scripts/library.ts
           node --import tsx ../packages/learning/scripts/families-parity.ts
           node --import tsx ../packages/learning/scripts/coverage.ts
-          git diff --exit-code ../content/learning/family-specs.v1.json ../content/learning/generated.v1.json ../content/learning/library.v1.json ../content/learning/families-parity.v1.json ../docs/learning-year/COVERAGE.md
+          python3 ../content/learning/src/expansion.py
+          node --import tsx ../packages/learning/scripts/board-releases.ts
+          node --import tsx ../packages/learning/scripts/compile-coverage.ts
+          git diff --exit-code ../content/learning/family-specs.v1.json ../content/learning/generated.v1.json ../content/learning/library.v1.json ../content/learning/families-parity.v1.json ../docs/learning-year/COVERAGE.md ../content/learning/competency-expansion.v1.json ../content/learning/syllabus ../content/learning/curricula ../packages/learning/src/board-releases.ts ../content/learning/coverage-matrix.v1.json ../docs/mathematics/COVERAGE_MATRIX.md ../content/learning/marking-parity.v1.json
       - run: node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test
         working-directory: frontend
       - run: npx playwright install --with-deps chromium

@@ -21,13 +21,14 @@
 import curriculum from "../../../content/mathematics/curriculum.v1.json";
 import additions from "../../../content/learning/competency-additions.v1.json";
 import audit from "../../../content/learning/graph-audit.v1.json";
+import expansion from "../../../content/learning/competency-expansion.v1.json";
 import { competencyGraph, type GraphVersion } from "../../mathematics/src/prerequisites";
 
 export type RelationType = "mandatory" | "plausible" | "support" | "disputed" | "trivial";
 export interface Relation {
   from: string;
   type: RelationType;
-  source: `prerequisites@${GraphVersion}` | "audit@1" | "additions@1";
+  source: `prerequisites@${GraphVersion}` | "audit@1" | "additions@1" | "expansion@1";
   reason?: string;
 }
 export interface Competency {
@@ -39,6 +40,10 @@ export interface Competency {
   objectives?: string[];
   /** A micro-skill refines this competency (its evidence also counts there). */
   partOf?: string;
+  /** Where it came from: the 200-competency inventory, or the curriculum expansion (expansion@1). */
+  origin?: "inventory" | "expansion";
+  /** The finer mathematical domain the expansion names (matrices, sequences, sets-relations …), when not the strand. */
+  domain?: string;
   status: "provisional";
 }
 export interface RelationOptions {
@@ -54,7 +59,12 @@ const extra: Competency[] = additions.competencies.map((c) => {
   if (!parent) throw new Error(`Addition ${c.id}: unknown parent ${c.partOf}`);
   return { id: c.id, name: c.name, strand: parent.strand, gradeRange: c.gradeRange as [number, number], objectives: c.objectives, partOf: c.partOf, status: "provisional" };
 });
-const all = [...base, ...extra];
+// expansion@1: competencies the Grades 1–12 CBSE and Tamil Nadu inventories need that the 200 did not have
+const expanded: Competency[] = expansion.competencies.map((c) => {
+  if (base.some((b) => b.id === c.id)) throw new Error(`Expansion ${c.id}: already a competency`);
+  return { id: c.id, name: c.name, strand: c.strand, gradeRange: c.gradeRange as [number, number], objectives: c.objectives, origin: "expansion", ...(c.domain !== c.strand ? { domain: c.domain } : {}), status: "provisional" };
+});
+const all = [...base.map((b) => ({ ...b, origin: "inventory" as const })), ...expanded, ...extra];
 const byId = new Map(all.map((c) => [c.id, c]));
 const children = new Map<string, string[]>();
 for (const c of extra) children.set(c.partOf!, [...(children.get(c.partOf!) ?? []), c.id]);
@@ -90,6 +100,13 @@ export function relations(opts: RelationOptions = {}): Map<string, Relation[]> {
       put(n.id, a ? { from: p, type: a.classification, source: "audit@1", reason: a.reason } : { from: p, type: "mandatory", source: `prerequisites@${version}` });
     }
   }
+  // expansion@1: proposed prerequisites (plausible: followed by recovery, pending educator confirmation) and
+  // supports (never gates); disputed ones are listed in the file and not followed
+  for (const r of expansion.relations) {
+    known(r.target, "expansion");
+    known(r.from, "expansion");
+    put(r.target, { from: r.from, type: r.type as RelationType, source: "expansion@1", reason: r.reason });
+  }
   for (const s of additions.supports) {
     known(s.competency, "supports");
     for (const id of s.supports) {
@@ -119,7 +136,7 @@ const alternativeLinks = sideLinks(add.alternatives, "alternatives");
 const enrichmentLinks = sideLinks(add.enrichment, "enrichment");
 
 export const graph = {
-  version: `${curriculum.version}+prerequisites@1.1.0+audit@${audit.version}+additions@${additions.version}`,
+  version: `${curriculum.version}+prerequisites@1.1.0+audit@${audit.version}+additions@${additions.version}+expansion@${expansion.version}`,
   competencies: all,
   byId,
   get: (id: string): Competency => {
