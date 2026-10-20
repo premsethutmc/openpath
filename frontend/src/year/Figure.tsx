@@ -18,7 +18,7 @@ export function describe(v: V): string {
     case "blocks":
       return `Base-ten blocks: ${num(v.hundreds)} hundreds, ${num(v.tens)} tens and ${num(v.ones)} ones`;
     case "numberline":
-      return `A number line from ${minus(num(v.from))} to ${minus(num(v.to))}${arr<number>(v.marks).length ? `, marked at ${arr<number>(v.marks).map(minus).join(", ")}` : ""}${arr<[number, number]>(v.jumps).length ? `, with jumps ${arr<[number, number]>(v.jumps).map(([a, b]) => `${minus(a)} to ${minus(b)}`).join(", ")}` : ""}`;
+      return `A number line from ${minus(num(v.from))} to ${minus(num(v.to))}${arr<number>(v.marks).length ? `, marked at ${arr<number>(v.marks).map(minus).join(", ")}` : ""}${arr<[number, number]>(v.jumps).length ? `, with jumps ${arr<[number, number]>(v.jumps).map(([a, b]) => `${minus(a)} to ${minus(b)}`).join(", ")}` : ""}${arr<Iv>(v.intervals).length ? `, with ${arr<Iv>(v.intervals).map(ivText).join(" and ")} shaded` : ""}`;
     case "clock":
       return "A clock face (read the time from the hands)";
     case "coins":
@@ -53,6 +53,13 @@ export function describe(v: V): string {
   }
 }
 
+/** A shaded interval on a number line: an end of null runs on (an arrow); a closed end is a filled dot, an open end a hollow one. */
+type Iv = { lo: number | null; hi: number | null; loClosed?: boolean; hiClosed?: boolean };
+const ivText = (i: Iv) =>
+  i.lo === null && i.hi === null ? "the whole line"
+  : i.lo === null ? `everything ${i.hiClosed ? "up to and including" : "below"} ${minus(i.hi!)}`
+  : i.hi === null ? `everything ${i.loClosed ? "from and including" : "above"} ${minus(i.lo)}`
+  : `from ${minus(i.lo)} (${i.loClosed ? "included" : "not included"}) to ${minus(i.hi)} (${i.hiClosed ? "included" : "not included"})`;
 const INK = "var(--ink, #1f2a37)";
 const ACC = "var(--accent, #2f6fde)";
 const SOFT = "var(--soft, #dbe6f7)";
@@ -111,6 +118,15 @@ export function Figure({ v }: { v: V }) {
       }
       for (const m of arr<number>(v.marks)) out.push(<circle key={`m${m}`} cx={X(m)} cy={60} r={6} fill={ACC} />);
       arr<[number, number]>(v.jumps).forEach(([a, b], i) => out.push(<path key={`j${i}`} d={`M ${X(a)} 54 Q ${(X(a) + X(b)) / 2} ${14} ${X(b)} 54`} fill="none" stroke={ACC} strokeWidth={2} markerEnd="" />));
+      arr<Iv>(v.intervals).forEach((iv, i) => {
+        const x0 = iv.lo === null ? 10 : X(iv.lo);
+        const x1 = iv.hi === null ? 390 : X(iv.hi);
+        out.push(<line key={`iv${i}`} x1={x0} y1={60} x2={x1} y2={60} stroke={ACC} strokeWidth={6} strokeLinecap="butt" />);
+        if (iv.lo === null) out.push(<path key={`al${i}`} d="M 4 60 L 16 52 L 16 68 Z" fill={ACC} />);
+        if (iv.hi === null) out.push(<path key={`ar${i}`} d="M 396 60 L 384 52 L 384 68 Z" fill={ACC} />);
+        if (iv.lo !== null) out.push(<circle key={`dl${i}`} cx={x0} cy={60} r={6} fill={iv.loClosed ? ACC : "#fff"} stroke={ACC} strokeWidth={2.5} />);
+        if (iv.hi !== null) out.push(<circle key={`dh${i}`} cx={x1} cy={60} r={6} fill={iv.hiClosed ? ACC : "#fff"} stroke={ACC} strokeWidth={2.5} />);
+      });
       return box(400, 96, out);
     }
     case "clock": {

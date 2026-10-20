@@ -59,7 +59,7 @@ or use a `tuple` (hours, minutes) — say which in the prompt.
 ## Pictures (`Visual` in family-kit.ts; the app draws them)
 
 `{ type: "dots", count, rows? }` objects to count · `{ type: "tenframe", filled, frames? }` ·
-`{ type: "blocks", hundreds, tens, ones }` base-ten blocks · `{ type: "numberline", from, to, step?, marks?: number[], jumps?: [a, b][], unknown?: number }` ·
+`{ type: "blocks", hundreds, tens, ones }` base-ten blocks · `{ type: "numberline", from, to, step?, marks?: number[], jumps?: [a, b][], unknown?: number, intervals?: { lo: number | null, hi: number | null, loClosed?, hiClosed? }[] }` (a shaded interval: null end = runs on with an arrow; closed end filled dot, open end hollow) ·
 `{ type: "clock", h, m }` · `{ type: "coins", items: number[] }` (rupee values: 1, 2, 5, 10, 20, 50, 100, 200, 500) ·
 `{ type: "bars", title?, labels, values, scale? }` bar chart · `{ type: "pictograph", labels, counts, key }` (one picture = key items) ·
 `{ type: "table", head, rows }` · `{ type: "shape", sides, lengths?: (number|string)[], name? }` (a regular polygon) or `{ type: "shape", kind: "rectangle" | "square" | "parallelogram" | "rhombus" | "trapezium" | "kite" | "lshape", lengths?: [...side by side, starting top-left, clockwise], diagonals?: true, height?: "4 cm" }` ·
