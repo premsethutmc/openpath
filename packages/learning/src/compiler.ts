@@ -30,7 +30,7 @@
  *   not-implemented  no content, no mapping, or the outcome is not yet in the inventory
  */
 import { allOutcomesOf, type CurriculumRelease } from "./curriculum";
-import { moduleFor, question, type Module } from "./content";
+import { moduleFor, poolFamilies, question, type Module } from "./content";
 import { RETENTION_CHECK } from "./evidence";
 import { FAMILIES, phasePool } from "./families";
 import { graph } from "./graph";
@@ -164,7 +164,11 @@ export function compileRelease(r: CurriculumRelease): RequirementRow[] {
     // as graph metadata to correct, not as missing content.
     const rangeOff = comps.length > 0 && !checks.some((c) => c.grades[0] - 1 <= r.grade && r.grade <= c.grades[1] + 1);
     const gradeOff = !oa && rangeOff;
-    const notAssessed = !oa ? "not yet judged against the content (outcome-assessment map)" : oa.verdict !== "full" ? `not every part is assessed: ${oa.missing || oa.verdict}` : oa.grade !== "fit" ? `assessed ${oa.grade} the outcome's level` : "";
+    // the map's credit must be what the learner is actually given: every family it names is served by a module of a
+    // mapped competency (pools@1), every written task belongs to a mapped competency
+    const served = new Set(comps.flatMap((c) => { const m = moduleFor(c); return m ? poolFamilies(m) : []; }));
+    const unserved = oa ? [...oa.families.filter((f) => !served.has(f)), ...oa.written.filter((t) => !writtenTasks.some((w) => w.id === t && comps.includes(graph.evidenceTarget(w.competency))))] : [];
+    const notAssessed = !oa ? "not yet judged against the content (outcome-assessment map)" : oa.verdict !== "full" ? `not every part is assessed: ${oa.missing || oa.verdict}` : oa.grade !== "fit" ? `assessed ${oa.grade} the outcome's level` : unserved.length ? `the map credits content no module of a mapped competency serves (${unserved.join(", ")})` : "";
     const done = (ok: boolean) => ok && !peopleMissing && !gradeOff && !notAssessed;
     const cls: RequirementClass = !comps.length || (oa?.verdict === "none" && !anything) ? "not-implemented" : oa?.verdict === "none" ? (byPeople ? "unsupported" : "not-implemented") : done(checks.every((c) => CRITERIA.every((k) => c.met[k]))) ? "validated" : done(checks.every((c) => c.complete)) ? "awaiting" : anything ? "partial" : byPeople ? "unsupported" : "not-implemented";
     const why =
