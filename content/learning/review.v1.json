@@ -9898,7 +9898,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "efc0bb20",
+   "contentHash": "8a6ed064",
    "state": "draft",
    "history": [
     {
@@ -9908,6 +9908,14 @@
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "efc0bb20",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-20T15:31:28.874Z",
+     "contentHash": "8a6ed064",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -16574,7 +16582,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "5c58972d",
+   "contentHash": "2c368dbc",
    "state": "draft",
    "history": [
     {
@@ -16591,6 +16599,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "5c58972d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-20T15:31:28.874Z",
+     "contentHash": "2c368dbc",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -33454,7 +33470,7 @@
    "competency": "MATH.geometry.quadrilaterals",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "49bc6247",
+   "contentHash": "de67a9c1",
    "state": "draft",
    "history": [
     {
@@ -33487,6 +33503,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "49bc6247",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-20T15:31:28.874Z",
+     "contentHash": "de67a9c1",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

@@ -44,7 +44,7 @@
   },
   "families": {
    "count": 1080,
-   "problems": 341518,
+   "problems": 341503,
    "answerTypes": {
     "integer": 411,
     "fraction": 151,
@@ -4667,8 +4667,7 @@
     "aiquad",
     "aipgram",
     "aidiag",
-    "aiconvex",
-    "aipolyreg"
+    "aiconvex"
    ],
    "writtenTasks": 3,
    "complete": true

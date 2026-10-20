@@ -31300,9 +31300,7 @@
      "id": "worked_steps",
      "title": "Step by step",
      "kind": "procedural",
-     "needs": [
-      "gen:aipolyreg:4,0"
-     ],
+     "needs": [],
      "screens": [
       {
        "title": "The method",
@@ -31397,9 +31395,7 @@
     "gen:aiquad:24,22,10",
     "gen:aipgram:20,2,1:mc"
    ],
-   "probes": [
-    "gen:aipolyreg:4,0"
-   ],
+   "probes": [],
    "pool": {
     "family": "aiquad",
     "version": "1.0.0"

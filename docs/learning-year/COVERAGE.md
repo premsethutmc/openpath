@@ -176,7 +176,7 @@ Every competency that has some content:
 | Use angles with parallel lines (`MATH.geometry.parallel-angles`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahpar draft, ahparx draft, ahname draft). |
 | Apply the Baudhayana-Pythagoras theorem and its converse (`MATH.geometry.pythagoras`) | 7–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahpyth draft, ahconv draft, ahgen draft). |
 | Decide which polygons tile the plane and create tilings (`MATH.geometry.tessellations`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahtile draft). |
-| Locate and construct triangle centres (`MATH.geometry.triangle-concurrency`) | 7–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families awctr missing, awcen missing, awinc missing). |
+| Locate and construct triangle centres (`MATH.geometry.triangle-concurrency`) | 7–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families awctr draft, awcen draft, awinc draft). |
 | Calculate circle area and circumference (`MATH.measurement.circle-area`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicircum draft, aicarea draft, aiwheel draft, aisector draft, airing draft, aipi draft, airad draft). |
 | Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas) (`MATH.measurement.parallelogram-rhombus-area`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipara draft, airhomb draft). |
 | Calculate cuboid surface area (`MATH.measurement.surface-area-intro`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitsa draft, ailsa draft). |
@@ -203,7 +203,7 @@ Every competency that has some content:
 | Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data (`MATH.geometry.construction-quadrilaterals`) | 8–8 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Calculate polygon angle sums (`MATH.geometry.polygon-angles`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipolymiss draft, aipolyreg draft). |
 | Count faces, vertices and edges of polyhedra and verify Euler's formula (`MATH.geometry.polyhedra-euler`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aieuler draft). |
-| Use quadrilateral angle properties (`MATH.geometry.quadrilaterals`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiquad draft, aipgram draft, aidiag draft, aiconvex draft, aipolyreg draft). |
+| Use quadrilateral angle properties (`MATH.geometry.quadrilaterals`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiquad draft, aipgram draft, aidiag draft, aiconvex draft). |
 | Use scales on maps and scale drawings (`MATH.geometry.scale-drawings`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiscale draft, airatio draft). |
 | Interpret views of solids (`MATH.geometry.solid-views`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aisolid draft). |
 | Calculate cylinder volume and surface area (`MATH.measurement.cylinder`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicylv draft, aicyls draft, aihollow draft). |
@@ -786,7 +786,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aipolyreg: Angle sums and regular polygons | `MATH.geometry.polygon-angles` | 96 | 0 | 6/62/28 | `28b175b3` |
 | aieuler: Euler's formula F + V − E = 2 | `MATH.geometry.polyhedra-euler` | 90 | 0 | 27/24/39 | `126d36ec` |
 | aisolid: Faces, edges and vertices of prisms and pyramids, from a name or a net | `MATH.geometry.solid-views` | 96 | 0 | 12/52/32 | `63f33d44` |
-| aiquad: The fourth angle of a quadrilateral | `MATH.geometry.quadrilaterals` | 400 | 0 | 18/263/119 | `efc0bb20` |
+| aiquad: The fourth angle of a quadrilateral | `MATH.geometry.quadrilaterals` | 400 | 0 | 18/263/119 | `8a6ed064` |
 | aipgram: Angles of a parallelogram or rhombus | `MATH.geometry.quadrilaterals` | 162 | 0 | 54/52/56 | `88e87c4c` |
 | aidiag: Diagonals of rectangles and parallelograms | `MATH.geometry.quadrilaterals` | 300 | 0 | 29/121/150 | `a3c15ef0` |
 | aiscale: Map scale: 1 cm stands for k km | `MATH.geometry.scale-drawings` | 168 | 0 | 48/62/58 | `bdc6f372` |
@@ -1116,7 +1116,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aomix: Deciding whether order matters, and combining selection with arrangement | `MATH.algebra.permutations` | 95 | 0 | 0/55/40 | `47496518` |
 | aoarr: Arrangements with repetition, restrictions, around a circle, and the rank of a word | `MATH.algebra.permutations` | 91 | 0 | 38/24/29 | `ab38322b` |
 | aopas: Building Pascal's triangle and reading binomial coefficients from it | `MATH.algebra.binomial` | 117 | 0 | 18/99/0 | `49944ce8` |
-| aobinapp: Exact values and approximations by the binomial theorem | `MATH.algebra.binomial` | 118 | 0 | 18/64/36 | `5c58972d` |
+| aobinapp: Exact values and approximations by the binomial theorem | `MATH.algebra.binomial` | 103 | 0 | 18/55/30 | `2c368dbc` |
 | aobinmid: The middle term or terms of (ax + b)ⁿ | `MATH.algebra.binomial` | 162 | 0 | 27/45/90 | `a35bd622` |
 | aogpid: Identifying a geometric progression | `MATH.algebra.geometric-sequences` | 144 | 0 | 36/36/72 | `6cd99a96` |
 | aogpgr: Growth, depreciation and compound interest with geometric progressions | `MATH.algebra.geometric-sequences` | 228 | 0 | 24/140/64 | `7fb261f4` |
@@ -1467,7 +1467,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **336/338 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 336 (hand-written 23, synthesised from blueprints 313)
 - Problem families (generated questions with independent checks): 1080
-- Review registry (repository copy): draft 1385, submitted 27, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1389, submitted 27, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|

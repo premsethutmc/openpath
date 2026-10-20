@@ -31233,7 +31233,7 @@
      }
     ]
    },
-   "fingerprint": "efc0bb20",
+   "fingerprint": "8a6ed064",
    "validation": {
     "family": "aiquad",
     "deterministic": {
@@ -57527,23 +57527,23 @@
      10
     ]
    ],
-   "poolSize": 118,
+   "poolSize": 103,
    "excluded": [],
    "difficulty": {
     "1": 18,
-    "2": 64,
-    "3": 36
+    "2": 55,
+    "3": 30
    },
    "examples": [
     "gen:aobinapp:0,1,-1,3",
     "gen:aobinapp:0,1,2,3:mc",
-    "gen:aobinapp:0,3,2,4",
-    "gen:aobinapp:1,0,2,10:mc",
-    "gen:aobinapp:1,0,-4,5",
-    "gen:aobinapp:1,0,-2,5:mc"
+    "gen:aobinapp:1,0,-2,4",
+    "gen:aobinapp:1,0,3,6:mc",
+    "gen:aobinapp:1,0,-4,9",
+    "gen:aobinapp:1,0,-2,7:mc"
    ],
    "explanations": [
-    "ends-only (conceptual): Only the first and last terms were kept: (1000 + 3)⁴ is not 1000⁴ + 81; the middle terms ⁿCᵣ 1000ⁿ⁻ʳ (3)ʳ count too.",
+    "ends-only (conceptual): Only the first and last terms were kept: (1000 − 1)³ is not 1000³ − 1; the middle terms ⁿCᵣ 1000ⁿ⁻ʳ (−1)ʳ count too.",
     "no-coefficients (procedural): The binomial coefficients were left out of the middle terms.",
     "signs-lost (procedural): All the terms were added; the odd powers of −1 are negative, so the signs alternate.",
     "two-terms (procedural): Only 1 + nx was used; the question asks for three terms, so ⁿC₂x² = 0.1125 is added too.",
@@ -57574,11 +57574,11 @@
      }
     ]
    },
-   "fingerprint": "5c58972d",
+   "fingerprint": "2c368dbc",
    "validation": {
     "family": "aobinapp",
     "deterministic": {
-     "checked": 118,
+     "checked": 103,
      "failures": []
     },
     "property": {
