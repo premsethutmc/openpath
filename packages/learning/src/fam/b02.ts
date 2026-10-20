@@ -1503,7 +1503,7 @@ const OBJ_LINES: [string, number][] = [
   ["a bangle", 1], ["a wheel", 1], ["a ball", 1], ["a plate", 1], ["a full moon", 1], ["a rainbow", 1], ["a ₹5 coin", 1], ["a ring", 1], ["a laddu", 1], ["a dosa", 1],
 ];
 const objRow = (seed: number) => shuffleBy(OBJ_LINES, `ol:${seed}`).slice(0, 6);
-const CONTS = ["bucket", "pot", "jug", "bottle"];
+const CONTS = ["kettle", "pot", "jug", "bottle"];
 const contsOf = ([k, q, hq]: number[]) => {
   const order = permK(k, q);
   const hord = permK(k, hq);
@@ -1550,12 +1550,12 @@ const lenThing = (i: number) => (LEN_UNITS[i][0].startsWith("the ") ? LEN_UNITS[
 const LEN_SIZE: Record<string, [number, number]> = { mm: [0, 10], cm: [1, 100], m: [100, 100000], km: [100000, 1e12] };
 /** Typical lengths in cm, for the check: the unit whose range holds it. */
 const LEN_CM = [0.2, 0.4, 0.05, 0.6, 0.1, 0.5, 0.05, 0.2, 0.15, 0.08, 17, 25, 18, 22, 20, 15, 18, 8, 15, 25, 900, 550, 2000, 1500, 2500, 3000, 1200, 250, 400, 10000, 46000000, 30000000, 4200000, 2000000, 80000000, 110000000, 1300000, 1500000, 500000, 8500000];
-const TOOLS = ["a 30 cm ruler", "a measuring tape (metre tape)", "the trip meter of a car"];
+const TOOLS = ["a 30 cm ruler", "a measuring tape (metre tape)", "the odometer (distance meter) of the vehicle"];
 const TOOL_THINGS: [string, number, number][] = [["a pencil", 0, 17], ["a notebook", 0, 25], ["an eraser", 0, 5], ["a mango leaf", 0, 20], ["a spoon", 0, 15], ["an envelope", 0, 22], ["a classroom", 1, 900], ["a door", 1, 200], ["a saree", 1, 550], ["a cricket pitch", 1, 2000], ["a bed", 1, 200], ["a playground", 1, 5000], ["a wall", 1, 400], ["the road from Chennai to Madurai", 2, 46000000], ["a bus trip to the next town", 2, 2500000], ["the drive from Salem to Erode", 2, 6500000]];
 const EST: [string, number, string][] = [
   ["the height of a classroom door", 2, "m"], ["the length of a bed", 2, "m"], ["the length of a classroom", 8, "m"], ["the length of a pencil", 15, "cm"], ["the length of a notebook", 25, "cm"], ["the height of a school bag", 0.5, "m"], ["the height of a table", 0.75, "m"], ["the height of a chair seat", 0.5, "m"], ["the length of a cricket bat", 1, "m"], ["the length of a ruler", 30, "cm"], ["a hand span", 15, "cm"], ["the length of a bus", 12, "m"],
   ["the length of a saree", 5, "m"], ["the walk from one end of a street to the other", 200, "m"], ["the distance from Chennai to Bengaluru", 350, "km"], ["the width of a thumb", 2, "cm"], ["the length of an ant", 4, "mm"], ["the thickness of a coin", 2, "mm"], ["the height of a coconut tree", 15, "m"], ["the width of a door", 1, "m"],
-  ["the length of a spoon", 0.25, "m"], ["the walk from home to a nearby shop", 0.25, "km"], ["the height of a water bottle", 0.25, "m"], ["the length of a school corridor", 50, "m"], ["the distance of a long bus ride", 50, "km"], ["the length of a mango leaf", 20, "cm"],
+  ["the length of a spoon", 0.25, "m"], ["the walk from home to a nearby shop", 0.25, "km"], ["the height of a water bottle", 0.25, "m"], ["the length of a school corridor", 50, "m"], ["the bus ride to the next town", 50, "km"], ["the length of a mango leaf", 20, "cm"],
 ];
 const UNIT_CM: Record<string, number> = { mm: 0.1, cm: 1, m: 100, km: 100000 };
 const fmtQ = (v: number) => (v === 0.5 ? "½" : v === 0.25 ? "¼" : v === 0.75 ? "¾" : String(v));
@@ -1798,7 +1798,7 @@ const GAP02: Def[] = [
         return [
           B("squares-not-scale", "conceptual", MAPS, `The squares were counted but the scale was not used. Each square stands for ${w.S} ${w.unit}.`, w.dx + w.dy),
           B("one-direction", "procedural", MAPS, "Only the first part of the walk was counted. Add both parts of the walk.", w.dx * w.S),
-          B("straight-line", "conceptual", MAPS, "The distance was measured straight across from S to E. The walk goes along the squares, first one way and then the other.", w.dx === w.dy ? null : Math.max(w.dx, w.dy) * w.S),
+          B("second-part-only", "procedural", MAPS, "Only the second part of the walk was counted. Add both parts of the walk.", w.dx === w.dy ? null : w.dy * w.S),
         ];
       }
       const r = routeOf(seed);
@@ -1826,7 +1826,9 @@ const GAP02: Def[] = [
     word: ([kind, seed]) => {
       if (kind === 0) {
         const w = pathOf(seed);
-        return `A delivery rider in Coimbatore follows the map: from the shop S, ${w.dx} block${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"}, then ${w.dy} block${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to the house E. Each block on the map is ${w.S} ${w.unit}. How far does the rider go, in ${w.unit === "km" ? "kilometres" : "metres"}?`;
+        return w.unit === "km"
+          ? `On a district map, a bus goes from the depot S ${w.dx} square${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"}, then ${w.dy} square${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to the town E. Each side of a square on the map stands for ${w.S} km. How far does the bus go, in kilometres?`
+          : `A delivery rider in Coimbatore follows the map: from the shop S, ${w.dx} block${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"}, then ${w.dy} block${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to the house E. Each block on the map is ${w.S} m. How far does the rider go, in metres?`;
       }
       return `A milk van goes every morning from ${ROAD_NAMES[0]} to ${ROAD_NAMES[3]}. Using the roads in the table, what is the shortest distance it can drive, in km?`;
     },
@@ -1959,6 +1961,12 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "each" || s.id === "each2" ? `A ${s.inputs[0]} has ${s.value} ${s.inputs[1]}.` : `That makes ${s.value}.`),
     domain: [[0, 1], [0, 39], [0, 3], [0, 23], [0, 3]],
+    // level@1: diagonals are later work: of squares and rectangles Grade 4, of pentagons and hexagons Grade 5
+    grade: ([kind, a, b, c, d]) => {
+      if (kind === 1) return b <= 1 ? 5 : 2;
+      if (c % 4 !== 2) return 2;
+      return a >= 3 || (d > 0 && Math.floor(c / 4) >= 3) ? 5 : 4;
+    },
     cap: 300,
     difficulty: ([kind, a, b, c, d]) => (kind === 1 ? 2 : c % 4 === 2 ? 3 : b === 1 && d === 0 && a <= 2 ? 1 : 2),
     figure: ([kind, a, b, c, d]) => {
@@ -1970,7 +1978,7 @@ const GAP02: Def[] = [
       if (kind === 1) return `${name(a)} sorts these paper shapes for a class chart: ${dList(a).map((i) => `a ${DSH[i][0]}`).join(", ")}. How many of them go in the group of shapes that ${DPROPS[b]}?`;
       const s2 = Math.floor(c / 4);
       const q = c % 4;
-      return `${name(a + b)} makes ${b} ${b === 1 ? DSH[a][0] : DSH[a][1]}${d ? ` and ${d} ${d === 1 ? DSH[s2][0] : DSH[s2][1]}` : ""} from straws${q === 2 ? ", and adds a thread for every diagonal" : ""}. How many ${q === 0 ? "straws are used for the sides" : q === 1 ? "corners do the shapes have" : "threads are needed"}?`;
+      return `${name(a + b)} makes ${b} ${b === 1 ? DSH[a][0] : DSH[a][1]}${d ? ` and ${d} ${d === 1 ? DSH[s2][0] : DSH[s2][1]}` : ""} from straws${q === 2 ? ", and adds a thread for every diagonal" : ""}. How many ${q === 0 ? "straws are used for the sides" : q === 1 ? (b + d === 1 ? "corners does the shape have" : "corners do the shapes have") : "threads are needed"}?`;
     },
     teach: {
       idea: "A shape with straight sides has as many corners as sides. A diagonal joins two corners that are not next to each other: a triangle has none, a square or rectangle 2, a pentagon 5, a hexagon 9.",
@@ -2037,8 +2045,8 @@ const GAP02: Def[] = [
     word: (p) => {
       const q = p[4];
       return q === 4
-        ? `${name(p[1] + p[3])} sorts blocks: ${csList(p)}. Blocks that can both roll and stand flat (they have a flat face and a curved surface) go in one box. How many go in that box?`
-        : `${name(p[1] + p[3])} is decorating clay models: ${csList(p)}. ${["Each flat face gets a sticker. How many stickers?", "Each curved surface is painted red. How many surfaces are painted?", "A gold line goes along every edge. How many edges get a gold line?", "A bead goes on every corner (vertex). How many beads?"][q]}`;
+        ? `${name(p[1] + p[3])} has these blocks to sort: ${csList(p)}. Blocks that can both roll and stand flat (they have a flat face and a curved surface) go in one box. How many go in that box?`
+        : `${name(p[1] + p[3])} is decorating clay models of ${csList(p)}. ${["Each flat face gets a sticker. How many stickers?", "Each curved surface is painted red. How many surfaces are painted?", "A gold line goes along every edge. How many edges get a gold line?", "A bead goes on every corner (vertex). How many beads?"][q]}`;
     },
     teach: {
       idea: "A cylinder has 2 flat faces, 1 curved surface, 2 curved edges and no corners; a cone has 1 flat face, 1 curved surface, 1 edge and 1 corner (its tip); a sphere has only a curved surface.",
@@ -2133,6 +2141,15 @@ const GAP02: Def[] = [
         B("label-order", "procedural", CAP, "The numbers were written in counting order. Order them by the cups each one holds.", listC(cs.map((_, i) => i + 1)) !== right ? listC(cs.map((_, i) => i + 1)) : null),
       ];
     },
+    distractors: (p) => {
+      const cs = contsOf(p);
+      const right = cs.map((_, i) => i + 1).sort((a, b) => (p[3] ? cs[a - 1].cups - cs[b - 1].cups : cs[b - 1].cups - cs[a - 1].cups));
+      return right.slice(1).map((_, i) => {
+        const o = [...right];
+        [o[i], o[i + 1]] = [o[i + 1], o[i]];
+        return listC(o);
+      });
+    },
     variants: () => [],
     explain: (s) => `By cups: ${s.value}.`,
     domain: [[3, 4], [0, 23], [0, 23], [0, 1]],
@@ -2200,13 +2217,18 @@ const GAP02: Def[] = [
     domain: [[0, 2], [2, 8], [2, 30], [1, 5]],
     cap: 300,
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
-    figure: ([kind, w, s]) => ({ type: "numberline", from: 0, to: 500, step: 50, marks: kind === 1 ? [50 * w] : [50 * w, 50 * w + 5 * s] }),
+    // a zoomed scale round the readings, so the two marks stand apart
+    figure: ([kind, w, s]) => {
+      const from = Math.floor((50 * w - 10) / 50) * 50;
+      const to = Math.ceil((50 * w + 5 * s + 10) / 50) * 50;
+      return { type: "numberline", from, to, step: to - from <= 100 ? 10 : 25, marks: kind === 1 ? [50 * w] : [50 * w, 50 * w + 5 * s] };
+    },
     word: ([kind, w, s, n]) => {
       const a = 50 * w;
       const b = a + 5 * s;
       return [
         `In the science lab, ${name(w + s)} pours water into a measuring jar up to ${a} ml and drops in a key, which sinks; the level goes up to ${b} ml. What is the volume of the key, in cm³?`,
-        `${name(w + s)}'s measuring jar has ${a} ml of water. A small steel tumbler of volume ${5 * s} cm³ (solid steel) is lowered in and sinks. What will the jar read, in ml?`,
+        `${name(w + s)}'s measuring jar has ${a} ml of water. A small iron weight from a shop balance, of volume ${5 * s} cm³, is lowered in and sinks. What will the jar read, in ml?`,
         `${name(w + s)} has water up to ${a} ml in a measuring jar and drops in ${n} equal goli marbles; the level goes up to ${b} ml. What is the volume of one marble, in cm³?`,
       ][kind];
     },
@@ -2303,7 +2325,7 @@ const GAP02: Def[] = [
     cap: 300,
     difficulty: ([, , d]) => (Math.abs(d - 4) >= 3 ? 1 : d === 4 ? 3 : 2),
     figure: ([a, b, d]) => tbl(["", "Rupees"], [["Money", a + b + d - 4], ["Ribbon", a], ["Hair clip", b]]),
-    word: ([a, b, d]) => `At the village shop, ${name(a + b)} has ₹${a + b + d - 4} for a packet of biscuits (₹${a}) and a packet of milk (₹${b}). Is the money enough?`,
+    word: ([a, b, d]) => `At the village shop, ${name(a + b)} has ₹${a + b + d - 4} for a small packet of biscuits (₹${a}) and a pencil (₹${b}). Is the money enough?`,
     teach: {
       idea: "To know whether money is enough for two things, add the prices and compare the total with the money.",
       method: "Add the two prices. If the money is more, it is more than enough; if it is the same, exactly enough; if it is less, not enough.",
@@ -2355,7 +2377,7 @@ const GAP02: Def[] = [
         ]
         : [
           B("plus-for-times", "conceptual", GROUPS, `The addition was written as ${p[1]} + ${p[2]}. Adding ${p[2]} again and again ${p[1]} times is ${p[1]} × ${p[2]}.`, c.list.indexOf(c.added)),
-          B("miscounted", "procedural", GROUPS, "The number of addends was counted wrongly. Count how many times the same number is added.", c.list.indexOf(c.more)),
+          B("miscounted", "procedural", GROUPS, "The number of addends was counted wrongly. Count how many times the same number is added.", c.more ? c.list.indexOf(c.more) : null),
         ];
     },
     variants: () => [],
@@ -2391,7 +2413,7 @@ const GAP02: Def[] = [
       kind === 0
         ? `A rope is laid along a measuring tape, as in the picture. It starts at the ${a} m mark and ends at the ${b} m mark. How long is the rope, in metres?`
         : kind === 1
-          ? `A rope is laid along a measuring tape marked in quarter metres, as in the picture. It starts at the dot at ${fq(a)} m and ends at the dot at ${fq(b)} m. How long is the rope, in metres? (A decimal or a fraction is fine.)`
+          ? `A rope is laid along a measuring tape, as in the picture (the numbers are whole metres). It starts at the dot at ${fq(a)} m and ends at the dot at ${fq(b)} m. How long is the rope, in metres? (A decimal or a fraction is fine.)`
           : `A pencil is laid along a ruler with its end at 0. The picture shows the part of the ruler near its tip, marked in millimetres; the dot is the tip. How long is the pencil, in millimetres?`,
     solve: ([kind, a, b]) => {
       const ans = kind === 0 ? b - a : kind === 1 ? (b - a) / 4 : 10 * a + b;
@@ -2416,29 +2438,31 @@ const GAP02: Def[] = [
         ]
         : [
           B("read-end", "conceptual", LEN, "The number at the end was read, but the rope does not start at 0. Take the start mark away from the end mark.", a > 0 ? (kind === 0 ? b : b / 4) : null),
-          ...(kind === 1 ? [B("steps-as-metres", "conceptual", LEN, "Each small step was counted as 1 m. On this tape each small step is a quarter of a metre.", b - a)] : [B("counted-marks", "procedural", LEN, "The marks were counted instead of the spaces between them. There is one more mark than spaces.", b - a + 1)]),
+          ...(kind === 1 ? [B("steps-as-metres", "conceptual", LEN, "Each quarter metre was counted as a whole metre. It takes 4 quarter metres to make 1 m.", b - a)] : [B("counted-marks", "procedural", LEN, "The marks were counted instead of the spaces between them. There is one more mark than spaces.", b - a + 1)]),
         ],
     variants: () => [],
     explain: (s) => (s.op === "read cm and mm" ? `${s.inputs[0]} cm and ${s.inputs[1]} mm is ${s.value} mm.` : `${fmt2(Number(s.inputs[0]))} − ${fmt2(Number(s.inputs[1]))} = ${s.value}`),
     domain: [[0, 2], [0, 14], [0, 20]],
+    // level@1: quarter metres are Grade 4 (fractions of a unit), millimetres Grade 3
+    grade: ([kind]) => (kind === 0 ? 2 : kind === 1 ? 4 : 3),
     cap: 300,
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     figure: ([kind, a, b]) =>
       kind === 0
         ? { type: "numberline", from: 0, to: 10, step: 1, marks: [a, b], jumps: [[a, b]] }
         : kind === 1
-          ? { type: "numberline", from: 0, to: 5, step: 0.25, marks: [a / 4, b / 4], jumps: [[a / 4, b / 4]] }
+          ? { type: "numberline", from: 0, to: 5, step: 1, marks: [a / 4, b / 4], jumps: [[a / 4, b / 4]] }
           : { type: "numberline", from: a, to: a + 1, step: 0.1, marks: [a + b / 10] },
     word: ([kind, a, b]) =>
       kind === 0
-        ? `For Sports Day, the PT teacher lays a skipping rope along a tape measure, as in the picture: from the ${a} m mark to the ${b} m mark. How long is the rope, in metres?`
+        ? `For the tug of war on Sports Day, the PT teacher lays the rope along a tape measure, as in the picture: from the ${a} m mark to the ${b} m mark. How long is the rope, in metres?`
         : kind === 1
-          ? `A tailor measures a piece of cloth on a tape marked in quarter metres, as in the picture: from ${fq(a)} m to ${fq(b)} m. How long is the cloth, in metres?`
+          ? `A tailor measures a piece of cloth on a tape, as in the picture (the numbers are whole metres): from ${fq(a)} m to ${fq(b)} m. How long is the cloth, in metres?`
           : `${name(a + b)} measures a new pencil with its end at the 0 of a ruler; the picture shows the ruler near the tip. How long is the pencil, in millimetres?`,
     teach: {
       idea: "A length is the distance from one end to the other: on a tape, the end mark minus the start mark. 1 m = 100 cm, and 1 cm = 10 mm.",
       method: "Read the mark at each end and subtract. For quarter metres, each small step is ¼ m; for millimetres, count the whole centimetres (each 10 mm) and add the small marks.",
-      visual: ([kind, a, b]) => (kind === 2 ? { type: "numberline", from: a, to: a + 1, step: 0.1, marks: [a + b / 10] } : { type: "numberline", from: 0, to: kind === 0 ? 10 : 5, step: kind === 0 ? 1 : 0.25, marks: kind === 0 ? [a, b] : [a / 4, b / 4] }),
+      visual: ([kind, a, b]) => (kind === 2 ? { type: "numberline", from: a, to: a + 1, step: 0.1, marks: [a + b / 10] } : { type: "numberline", from: 0, to: kind === 0 ? 10 : 5, step: 1, marks: kind === 0 ? [a, b] : [a / 4, b / 4] }),
       alternatives: [
         { id: "count_steps", title: "Count the steps", kind: "procedural", text: ["Put a finger on the start and count each space up to the end.", "Multiply by what one space is worth: 1 m, ¼ m or 1 mm."] },
       ],
@@ -2497,7 +2521,7 @@ const GAP02: Def[] = [
       }
       if (kind === 1) {
         const t = TOOL_THINGS[i][1];
-        return [B("tool-size", "conceptual", LEN, t === 0 ? "A tape was chosen for a short thing. A ruler is easier for things shorter than the ruler." : t === 1 ? "A ruler was chosen for a long thing. It would have to be moved many times; a tape reaches all the way." : "A tape was chosen for a long road. Distances of many kilometres are measured with a vehicle's trip meter.", cs.indexOf(TOOLS[t === 1 ? 0 : 1]))];
+        return [B("tool-size", "conceptual", LEN, t === 0 ? "A tape was chosen for a short thing. A ruler is easier for things shorter than the ruler." : t === 1 ? "A ruler was chosen for a long thing. It would have to be moved many times; a tape reaches all the way." : "A tape was chosen for a long road. Distances of many kilometres are measured with the odometer of the bus or car that travels them.", cs.indexOf(TOOLS[t === 1 ? 0 : 1]))];
       }
       const e = estChoices(i);
       return [
@@ -2587,6 +2611,8 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => `The answer is: ${s.value}.`,
     domain: [[0, 2], [0, 23], [0, 2]],
+    // level@1: milligrams (and the four-digit gram facts behind them) are Grade 4
+    grade: ([kind, i, s]) => (kind === 0 ? 4 : kind === 1 ? (wSens(i, s).rec.includes("mg") ? 4 : 2) : W_EST[i][2] === "g" ? 4 : 2),
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 2 ? 2 : 3),
     figure: () => tbl(["Benchmark", "Weight"], [["a ₹1 coin", "about 4 g"], ["an egg", "about 50 g"], ["a packet of salt", "1 kg"], ["a school bag", "about 3 kg"]]),
     word: ([kind, i, s]) =>
@@ -2640,6 +2666,8 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "kg" ? `${s.inputs[0]} g has ${s.value} full thousands, so ${s.value} kg.` : `and ${s.value} g left over.`),
     domain: [[1, 9], [1, 199]],
+    // level@1: four-digit gram amounts are Grade 4
+    grade: () => 4,
     cap: 300,
     difficulty: ([, f]) => (f % 20 === 0 ? 1 : 5 * f < 100 ? 3 : 2),
     word: ([kg, f]) => `A bag of onions on the market scale shows ${kg * 1000 + 5 * f} g. The shopkeeper writes the weight as kilograms and grams. What does she write? Answer as (kg, g).`,
@@ -2679,7 +2707,7 @@ const GAP02: Def[] = [
       if (kind === 0) return `The table is the seating plan of a classroom: row 1 is at the front and seat 1 is on the left. In which row and seat does ${g[r][c]} sit? Answer as (row, seat).`;
       const dr = 1 + (seed % 3);
       const dc = seed % 2 ? 1 : 2;
-      return `In the seating plan, row 1 is at the front and seat 1 is on the left. ${g[r][c]} sits in row ${r + 1}, seat ${c + 1}. A new pupil sits ${dr} row${dr > 1 ? "s" : ""} behind and ${dc} seat${dc > 1 ? "s" : ""} to the right of ${g[r][c]}. Where is that? Answer as (row, seat).`;
+      return `In the seating plan, row 1 is at the front and seat 1 is on the left. ${g[r][c]} sits in row ${r + 1}, seat ${c + 1}. ${g[r][c]}'s best friend sits ${dr} row${dr > 1 ? "s" : ""} behind and ${dc} seat${dc > 1 ? "s" : ""} to the right of ${g[r][c]}. In which row and seat does the friend sit? Answer as (row, seat).`;
     },
     solve: ([kind, seed, t]) => {
       const r = Math.floor(t / 5) + 1;
@@ -2711,7 +2739,7 @@ const GAP02: Def[] = [
       const c = (t % 5) + 1;
       if (kind === 0)
         return [
-          B("seat-row-swapped", "procedural", MAPS, "The seat was written first. Write the row first, then the seat.", r !== c ? tup(c, r) : null),
+          B("seat-row-swapped", "procedural", MAPS, "The seat was written first. Write the row first, then the seat.", r !== c && c <= 4 ? tup(c, r) : null),
           B("from-the-back", "conceptual", MAPS, "The rows were counted from the back. Row 1 is at the front.", 5 - r !== r ? tup(5 - r, c) : null),
           B("from-the-right", "conceptual", MAPS, "The seats were counted from the right. Seat 1 is on the left.", 6 - c !== c ? tup(r, 6 - c) : null),
         ];
@@ -2724,7 +2752,9 @@ const GAP02: Def[] = [
     },
     distractors: (p) => {
       const t = readTup(abseatAnswer(p))!;
-      return [tup(t[0] + 1, t[1]), tup(t[0], t[1] + 1), tup(t[0] - 1 || t[0] + 2, t[1]), tup(t[0], t[1] - 1 || t[1] + 2)];
+      // only seats that exist in the plan (rows 1–4, seats 1–5)
+      const ok = (x: number, y: number) => x >= 1 && x <= 4 && y >= 1 && y <= 5;
+      return [[t[0] + 1, t[1]], [t[0], t[1] + 1], [t[0] - 1, t[1]], [t[0], t[1] - 1], [t[0] + 2, t[1]], [t[0], t[1] + 2], [t[0] - 2, t[1]], [t[0], t[1] - 2]].filter(([x, y]) => ok(x, y)).map(([x, y]) => tup(x, y));
     },
     variants: () => [],
     explain: (s) => (s.id === "row" ? `Row ${s.value}.` : `Seat ${s.value}.`),
@@ -2737,7 +2767,7 @@ const GAP02: Def[] = [
       const who = g[Math.floor(t / 5)][t % 5];
       return kind === 0
         ? `At the school drama, the seating plan in the table shows where each child sits (row 1 is nearest the stage, seat 1 on the left). Where should ${who} sit? Answer as (row, seat).`
-        : `At the school drama, ${who} sits in row ${Math.floor(t / 5) + 1}, seat ${(t % 5) + 1} (row 1 is nearest the stage, seat 1 on the left). A cousin sits ${1 + (seed % 3)} row${seed % 3 ? "s" : ""} behind and ${seed % 2 ? 1 : 2} seat${seed % 2 ? "" : "s"} to the right. Where is that? Answer as (row, seat).`;
+        : `At the school drama, ${who} sits in row ${Math.floor(t / 5) + 1}, seat ${(t % 5) + 1} (row 1 is nearest the stage, seat 1 on the left). ${who}'s cousin sits ${1 + (seed % 3)} row${seed % 3 ? "s" : ""} behind and ${seed % 2 ? 1 : 2} seat${seed % 2 ? "" : "s"} to the right. In which row and seat does the cousin sit? Answer as (row, seat).`;
     },
     teach: {
       idea: "A seat in a hall is found by two numbers: the row (counted from the front) and the seat in that row (counted from the left).",
@@ -2851,9 +2881,14 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => `${s.value}`,
     domain: [[0, 1], [0, 23], [0, 11]],
+    // level@1: the 24-hour clock is Grade 4
+    grade: () => 4,
     cap: 300,
     difficulty: ([, h]) => (h >= 1 && h <= 11 ? 1 : h === 0 || h === 12 ? 3 : 2),
-    word: ([kind, h, k]) => (kind === 0 ? `${name(h + k)}'s school bus leaves at ${to12(h, 5 * k)}. The bus company writes times in the 24-hour clock. How is the time written?` : `A bus ticket from Madurai shows the departure time ${to24(h, 5 * k)}. What is that in the 12-hour clock?`),
+    word: ([kind, h, k]) =>
+      kind === 0
+        ? `${name(h + k)}'s ${h >= 7 && h <= 17 ? "bus to Madurai" : "overnight bus to Madurai"} leaves at ${to12(h, 5 * k)}, and the bus company writes times in the 24-hour clock. How is the time written?`
+        : `A bus ticket from Madurai shows the departure time ${to24(h, 5 * k)}. What is that in the 12-hour clock?`,
     teach: {
       idea: "The 24-hour clock counts the hours from midnight (00:00) to 23:59. Times after noon have 12 added: 3:40 p.m. is 15:40. 12 noon is 12:00 and 12 midnight is 00:00.",
       method: "12-hour to 24-hour: for p.m. times after 12 noon add 12 to the hour; for a.m. times keep the hour (12 a.m. becomes 00). 24-hour to 12-hour: if the hour is 13 or more take away 12 and write p.m.",
@@ -2908,6 +2943,8 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "digits" ? `The digits of ${s.inputs[0]} add up to ${s.value}.` : s.id === "each" ? `The check numbers are ${s.value}.` : s.id === "combine" ? `${s.inputs[0]} and ${s.inputs[1]} give ${s.value}.` : `Casting out nines leaves ${s.value}.`),
     domain: [[0, 2], [0, 99]],
+    // level@1: casting out nines is Grade 4 work (Grade 5 with four-digit numbers)
+    grade: ([kind, seed]) => (kind === 0 && nineNums(0, seed)[0] >= 1000 ? 5 : 4),
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     word: ([kind, seed]) => {
       const [a, b] = nineNums(kind, seed);
@@ -2992,6 +3029,8 @@ const GAP02: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "rule" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "double" ? `The row sums double: 2 multiplied by itself ${s.inputs[0]} times is ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [2, 17], [1, 9]],
+    // level@1: Pascal's triangle is Grade 6 (number patterns)
+    grade: () => 6,
     difficulty: ([kind, a]) => (kind === 0 && a % 2 === 0 ? 1 : kind === 2 ? 3 : 2),
     figure: ([kind, a]) => (kind === 0 ? pascalFig(Math.floor(a / 2)) : pascalFig(5)),
     word: ([kind, a, b]) => {

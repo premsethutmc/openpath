@@ -5,7 +5,7 @@
  * triangle inequality, congruent triangles, parallel lines, Baudhayana-Pythagoras, angles at a point in a tiling).
  * Written by OpenPath; CC0.
  */
-import type { Bug, Def, Value } from "../family-kit";
+import type { Bug, Def, Value, Visual } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 import { fmt, gcd, near, signed } from "../family-kit";
 
@@ -75,7 +75,7 @@ function nums(v: Value): number[] | null {
 }
 const tup = (xs: number[]) => `(${xs.map(n_).join(", ")})`;
 const isInt = (v: number) => Number.isInteger(v);
-const keepPred = <T>(b: (Bug & { predict: T | null })[]) => b.filter((x) => x.predict !== null) as Bug[];
+const keepPred = (b: Bug[]) => b.filter((x) => x.predict !== null);
 
 // one-step equations: [form, a, t]
 const oneStep = ([f, a, t]: number[]) => {
@@ -1610,7 +1610,7 @@ function nameOpts([mode, scheme, x, y]: number[]): { opts: string[]; right: stri
   for (let k = 0; set.length < 4; k++) if (k !== y && !set.includes(k)) set.push(k);
   return { opts: shuffled(`ahname:${mode},${scheme},${x},${y}`, set.slice(0, 4).map((k) => lab(scheme, k))), right: lab(scheme, right) };
 }
-const nameTable = (scheme: number) => ({ type: "table", head: ["", "left of t", "right of t"], rows: [["line l, above", lab(scheme, 0), lab(scheme, 1)], ["line l, below", lab(scheme, 2), lab(scheme, 3)], ["line m, above", lab(scheme, 4), lab(scheme, 5)], ["line m, below", lab(scheme, 6), lab(scheme, 7)]] });
+const nameTable = (scheme: number): Visual => ({ type: "table", head: ["", "left of t", "right of t"], rows: [["line l, above", lab(scheme, 0), lab(scheme, 1)], ["line l, below", lab(scheme, 2), lab(scheme, 3)], ["line m, above", lab(scheme, 4), lab(scheme, 5)], ["line m, below", lab(scheme, 6), lab(scheme, 7)]] });
 
 // ---------------------------------------------------------------- Virahanka rhythms (ahrhy)
 const rhythms = (n: number): number => {
@@ -1814,7 +1814,10 @@ const calOk = ([g, shape, dir, n]: number[]) => {
 
 // ---------------------------------------------------------------- floor plans on a grid (ahmap)
 // [mode, x, y, w, h]: a rectangular room with corners A(x, y), B(x + w, y), C(x + w, y + h), D(x, y + h)
-const mapOk = ([mode, x, y, w, h]: number[]) => mode >= 0 && mode <= 2 && x >= -7 && x <= 2 && y >= -6 && y <= 2 && w >= 2 && w <= 8 && h >= 2 && h <= 6 && x + w <= 8 && y + h <= 6 && w !== h && (mode === 0 || (mode === 1 ? w % 2 === 0 : w % 2 === 0 && h % 2 === 0));
+/** The point a hall question asks for (D, the door half-way along AB, or the centre). */
+const mapAns = ([mode, x, y, w, h]: number[]) => (mode === 0 ? [x, y + h] : mode === 1 ? [x + w / 2, y] : [x + w / 2, y + h / 2]);
+// no corner and no answer at the origin, where the gate is labelled
+const mapOk = ([mode, x, y, w, h]: number[]) => mapAns([mode, x, y, w, h]).some((c) => c !== 0) && [[x, y], [x + w, y], [x + w, y + h], [x, y + h]].every(([a, b]) => a !== 0 || b !== 0) && mode >= 0 && mode <= 2 && x >= -7 && x <= 2 && y >= -6 && y <= 2 && w >= 2 && w <= 8 && h >= 2 && h <= 6 && x + w <= 8 && y + h <= 6 && w !== h && (mode === 0 || (mode === 1 ? w % 2 === 0 : w % 2 === 0 && h % 2 === 0));
 
 // ---------------------------------------------------------------- explicit and recursive rules (ahexp)
 // [mode, a, b]: 0 tₙ = an + b, the first three terms; 1 tₙ = an + b, its recursive rule (t₁, d); 2 tₙ = b × aⁿ⁻¹, its recursive rule (t₁, r)
@@ -2193,6 +2196,8 @@ B08.push(
     domain: [[0, 3], [-6, 6], [-6, 9], [-6, 6], [1, 5]],
     keep: cubeOk,
     cap: 400,
+    // level@1: (x ± a)³, (x + a)(x + b)(x + c) and (a + b + c)² are Class 9 identities (NCERT 9, Polynomials)
+    grade: () => 9,
     difficulty: ([form]) => (form === 0 ? 1 : form === 2 ? 2 : 3),
     word: (p) => (p[0] <= 1 ? `A cube-shaped box has edges of (x ${p[0] === 0 ? "+" : "−"} ${p[1]}) cm. Its volume is ${cubeLeft(p)} = ${cubeRight(p)} cubic cm. What number goes in the box?` : p[0] === 2 ? `A cuboid tank measures (x ${signed(p[1])}) m by (x ${signed(p[2])}) m by (x ${signed(p[3])}) m. Its volume is ${cubeRight(p)} cubic metres. What number goes in the box?` : `A square mat has sides of ${cubeLeft(p).slice(0, -1)} metres (x, y in metres). Its area is ${cubeRight(p)} square metres. What number goes in the box?`),
     teach: {
@@ -2350,7 +2355,8 @@ B08.push(
     keep: varyOk,
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 2 ? 2 : 3),
     figure: ([kind, seed]) => ({ type: "table", head: ["x", ...varyRows(kind, seed).map((r) => String(r[0]))], rows: [["y", ...varyRows(kind, seed).map((r) => String(r[1]))]] }),
-    word: ([kind]) => `A shopkeeper records two quantities in the table (x and y): ${["the number of workers and the days a job takes", "the kilograms of rice sold and the money received", "a child's age and her elder brother's age", "the overs bowled and the overs still left in a match"][kind]}. Are x and y in direct proportion, in inverse proportion, or neither?`,
+    // the same neutral situations for every kind, so the story does not give the answer away
+    word: ([kind, seed]) => `${name(kind + seed)} reads two dials on ${["a machine in a factory", "a pump at a farm", "a model in the science lab", "a generator at a wedding hall"][(kind + seed) % 4]} several times and writes the readings in the table (dial x and dial y). Are the readings x and y in direct proportion, in inverse proportion, or neither?`,
     teach: {
       idea: "Two quantities are in inverse proportion when their product stays the same (double one, the other halves). They are in direct proportion when their ratio stays the same. One going up while the other goes down is not enough for inverse proportion.",
       method: "Multiply x × y in every row: all equal means inverse proportion. Divide y ÷ x in every row: all equal means direct proportion. Otherwise neither.",
@@ -2546,7 +2552,7 @@ B08.push(
     reject: (p) => (mapOk(p) ? null : "Rectangular rooms 2 to 8 m by 2 to 6 m on a grid from −7 to 8."),
     prompt: ([mode, x, y, w, h]) => {
       const pt = (a: number, b: number) => tup([a, b]);
-      const intro = "A floor plan of a house is drawn on a coordinate grid; each unit is 1 metre and the origin is the front door.";
+      const intro = "A floor plan of a house and its garden is drawn on a coordinate grid; each unit is 1 metre and the origin is the garden gate.";
       if (mode === 0) return `${intro} The rectangular hall ABCD has corners A${pt(x, y)}, B${pt(x + w, y)} and C${pt(x + w, y + h)}, as in the picture. What are the coordinates of corner D?`;
       if (mode === 1) return `${intro} The rectangular hall has corners A${pt(x, y)}, B${pt(x + w, y)}, C${pt(x + w, y + h)} and D${pt(x, y + h)}. A door is exactly half-way along the wall AB. What are the coordinates of the door?`;
       return `${intro} The rectangular hall has corners A${pt(x, y)}, B${pt(x + w, y)}, C${pt(x + w, y + h)} and D${pt(x, y + h)}. A ceiling fan hangs over the exact centre of the hall. What are its coordinates?`;
@@ -2582,7 +2588,7 @@ B08.push(
     keep: mapOk,
     cap: 400,
     difficulty: ([mode, x, y]) => (mode === 0 && x >= 0 && y >= 0 ? 1 : mode === 0 ? 2 : 3),
-    figure: ([mode, x, y, w, h]) => ({ type: "plane", points: [[x, y, "A"], [x + w, y, "B"], [x + w, y + h, "C"], ...(mode === 0 ? [] : [[x, y + h, "D"]]), [0, 0, "door"]], segments: mode === 0 ? [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]]] : [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]], [[x + w, y + h], [x, y + h]], [[x, y + h], [x, y]]], range: 9 }),
+    figure: ([mode, x, y, w, h]) => ({ type: "plane", points: [[x, y, "A"], [x + w, y, "B"], [x + w, y + h, "C"], ...(mode === 0 ? [] : [[x, y + h, "D"]]), [0, 0, "gate"]], segments: mode === 0 ? [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]]] : [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]], [[x + w, y + h], [x, y + h]], [[x, y + h], [x, y]]], range: 9 }),
     word: ([mode, x, y, w, h]) => `A village map is drawn on a grid with the bus stop at the origin and 1 unit = 100 m. A rectangular playground has corners A${tup([x, y])}, B${tup([x + w, y])}, C${tup([x + w, y + h])}${mode === 0 ? "" : ` and D${tup([x, y + h])}`}. ${mode === 0 ? "What are the coordinates of its fourth corner D?" : mode === 1 ? "A gate is exactly half-way along the side AB. What are the gate's coordinates?" : "A flagpole stands at the exact centre of the playground. What are its coordinates?"}`,
     teach: {
       idea: "A grid turns a plan into numbers: each place is (across, up) from the origin. Walls of a rectangular room run along grid lines, so corners share x- or y-coordinates.",
@@ -2639,7 +2645,14 @@ B08.push(
     domain: [[0, 2], [-5, 9], [-9, 9]],
     keep: expOk,
     difficulty: ([mode, a]) => (mode === 0 ? (a > 0 ? 1 : 2) : mode === 1 ? 2 : 3),
-    word: ([mode, a, b]) => (mode === 2 ? `The number of people who have heard a rumour after n hours is ${b === 1 ? "" : `${b} × `}${a}ⁿ⁻¹. Write this as a recursive rule: the number in hour 1, and how many times bigger each hour is than the hour before. Give (t₁, r).` : `A taxi's fare for an n km ride in a game is given by ${linText(a, b).replace("tₙ", "Fₙ")} coins. ${mode === 0 ? "Write the fares for 1, 2 and 3 km as (F₁, F₂, F₃)." : "Write this as a recursive rule: the fare for 1 km, and how much each extra km adds. Give (F₁, d)."}`),
+    // a fare only when it is positive and rises with the distance (a > 0, F₁ = a + b > 0); otherwise a temperature, which may
+    // fall and go below zero
+    word: ([mode, a, b]) =>
+      mode === 2
+        ? `The number of people who have heard a rumour after n hours is ${b === 1 ? "" : `${b} × `}${a}ⁿ⁻¹. Write this as a recursive rule: the number in hour 1, and how many times bigger each hour is than the hour before. Give (t₁, r).`
+        : a > 0 && a + b > 0
+          ? `An auto-rickshaw's fare for an n km ride is ₹Fₙ, where ${linText(a, b).replace("tₙ", "Fₙ")}. ${mode === 0 ? "Write the fares for 1, 2 and 3 km, in rupees, as (F₁, F₂, F₃)." : "Write this as a recursive rule: the fare for 1 km, and how much each extra km adds. Give (F₁, d)."}`
+          : `In a science activity, the temperature of a liquid n hours after it is put in a freezer is Tₙ °C, where ${linText(a, b).replace("tₙ", "Tₙ")} (a negative temperature is below zero). ${mode === 0 ? "Write the temperatures after 1, 2 and 3 hours as (T₁, T₂, T₃)." : "Write this as a recursive rule: the temperature after 1 hour, and how much it changes each hour (negative for a fall). Give (T₁, d)."}`,
     teach: {
       idea: "An explicit rule gives any term straight from its position n; a recursive rule gives the first term and how each term comes from the one before. For tₙ = an + b each term is a more than the last; for tₙ = b × aⁿ⁻¹ each term is a times the last.",
       method: "Put n = 1, 2, 3 into the explicit rule to get the terms. The first term is t₁; the step d = t₂ − t₁ (or the ratio r = t₂ ÷ t₁).",

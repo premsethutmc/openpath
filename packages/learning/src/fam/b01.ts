@@ -47,6 +47,17 @@ const hm = (s: string) => {
 };
 const inR = (p: number[], d: [number, number][]) => p.length === d.length && p.every((v, i) => Number.isInteger(v) && v >= d[i][0] && v <= d[i][1]);
 const guard = (d: [number, number][], ok: (p: number[]) => boolean, why: string) => (p: number[]) => (!inR(p, d) || !ok(p) ? why : null);
+/** level@1: the grade a whole number belongs to by its number of digits (Indian syllabus: up to 2 digits Grade 1,
+ * 3 digits Grade 3, 4 digits Grade 4, 5–6 digits (lakhs) Grade 5, 7 or more (crores) Grade 6). */
+const digitGrade = (x: number) => {
+  const n = String(Math.abs(Math.round(x))).length;
+  return n <= 2 ? 1 : n === 3 ? 3 : n === 4 ? 4 : n <= 6 ? 5 : 6;
+};
+/** level@1: an addition or subtraction story by its size: within 20 Grade 1, two-digit Grade 2, three-digit Grade 3. */
+const sizeGrade = (...xs: number[]) => {
+  const m = Math.max(...xs);
+  return m <= 20 ? 1 : m <= 99 ? 2 : 3;
+};
 const st = (id: string, op: string, competency: string, inputs: (number | string)[], value: Value): Step => ({ id, op, competency, inputs, value });
 const bug = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null): Bug => ({ id, kind, competency, says, predict });
 const fact = (n: number): number => (n <= 1 ? 1 : n * fact(n - 1));
@@ -190,7 +201,8 @@ const calendar = (yr: number, m: number): Visual => {
   const s = firstDay(yr, m);
   const cells: (number | string)[] = [...Array(s).fill(""), ...[...Array(MLEN[m])].map((_, i) => i + 1)];
   while (cells.length % 7) cells.push("");
-  return { type: "table", head: DAYS.map((d) => d.slice(0, 3)), rows: chunks(cells, 7), title: `${MONTHS[m]} ${2026 + yr}` };
+  // the month and year as the header row (a table title is not drawn), the day names as the first row
+  return { type: "table", head: [`${MONTHS[m]} ${2026 + yr}`, "", "", "", "", "", ""], rows: [DAYS.map((d) => d.slice(0, 3)), ...chunks(cells, 7)] };
 };
 const utcDay = (y: number, m: number, d: number) => new Date(Date.UTC(y, m, d)).getUTCDay();
 const EVENTS = ["the school fair", "Sports Day", "the class picnic", "Grandma's visit", "the drawing contest"];
@@ -2407,10 +2419,10 @@ const nameChoices = (n: number) => {
   const o = n % 10;
   const R = words(n);
   const rev = o !== 0 && o !== t ? words(10 * o + t) : null;
-  const teen = n >= 11 && n <= 19 ? words(10 * o) : o === 0 && t >= 2 ? words(10 + t) : null;
+  const teen = n >= 13 && n <= 19 ? words(10 * o) : o === 0 && t >= 2 ? words(10 + t) : null;
   const digit = `${ONES[t] || "zero"} ${ONES[o] || "zero"}`;
   const off = words(n + 10 <= 99 ? n + 10 : n - 10);
-  const cands = [R, ...[rev, teen, digit, off].filter((x): x is string => !!x && x !== R)];
+  const cands = [R, ...[rev, teen, digit, off, words(n + 1)].filter((x): x is string => !!x && x !== R)];
   const four = [...new Set(cands)].slice(0, 4);
   return { list: shuffleBy(four, `nm:${n}`), R, rev, teen, digit };
 };
@@ -2594,7 +2606,7 @@ const GAP01: Def[] = [
     difficulty: ([i, j]) => (j - i >= 5 ? 1 : j - i >= 3 ? 2 : 3),
     word: (p) => {
       const [x, y] = bigPair(p);
-      return `${nm(p[0] + p[1])} draws ${x} and ${y} in a picture book, each as big as it really is. Which drawing is ${p[2] ? "smaller" : "bigger"}?`;
+      return `${nm(p[0] + p[1])} thinks about ${x} and ${y}, and which of them would need the ${p[2] ? "smaller" : "bigger"} box to be packed in. Which one is ${p[2] ? "smaller" : "bigger"}?`;
     },
     teach: {
       idea: "Big and small compare how much room things take: an elephant is bigger than a cat, an ant is smaller than a lemon.",
@@ -2655,6 +2667,7 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "compare" ? "Compare the numbers: first count the digits, then compare place by place from the left." : `In order: ${s.value}.`),
     domain: [[0, 6], [0, 29], [0, 1]],
+    grade: ([lvl, seed]) => digitGrade(Math.max(...ordxNums(lvl, seed))),
     difficulty: ([lvl]) => (lvl <= 1 ? 1 : lvl <= 3 ? 2 : 3),
     figure: ([lvl, seed]) => (ordxCards(lvl) ? table(["Card 1", "Card 2", "Card 3", "Card 4"], [ordxNums(lvl, seed).map((x) => ordxShow(lvl, x))]) : table(["Numbers"], [[list(ordxNums(lvl, seed))]])),
     word: ([lvl, seed, dir]) =>
@@ -2707,6 +2720,7 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => `${indian(Number(s.inputs[0]))} ${s.value} ${indian(Number(s.inputs[1]))}`,
     domain: [[0, 4], [0, 39]],
+    grade: ([lvl, seed]) => digitGrade(Math.max(...signPair(lvl, seed))),
     difficulty: ([lvl]) => (lvl === 0 ? 1 : lvl <= 2 ? 2 : 3),
     figure: ([lvl, seed]) => table(["First number", "", "Second number"], [[indian(signPair(lvl, seed)[0]), "☐", indian(signPair(lvl, seed)[1])]]),
     word: ([lvl, seed]) => {
@@ -2766,6 +2780,7 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => `Arrange the digits: ${s.value}.`,
     domain: [[3, 7], [0, 19], [0, 1], [0, 1]],
+    grade: ([n]) => digitGrade(10 ** (n - 1)),
     cap: 300,
     difficulty: ([n, , ask, z]) => (n <= 4 && !z ? 1 : ask && z ? 3 : 2),
     word: (p) => `${nm(p[1] + p[0])} has number cards with the digits ${list(digmaxDigits(p))}. Using every card once, what is the ${p[2] ? "smallest" : "greatest"} ${p[0]}-digit number that can be made? Write it without commas.`,
@@ -2881,6 +2896,10 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "sentence" ? `The story joins two groups: ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [0, 99]],
+    grade: ([lvl, seed]) => {
+      const [a, b] = storyNums(0, lvl, seed);
+      return sizeGrade(a, b, a + b);
+    },
     difficulty: ([lvl]) => (lvl + 1) as 1 | 2 | 3,
     word: ([lvl, seed]) => {
       const [a, b] = storyNums(0, lvl, seed);
@@ -2900,7 +2919,7 @@ const GAP01: Def[] = [
         } },
       ],
     },
-    limits: "Two-digit sums without regrouping (Grade 1), with regrouping (Grade 2–3) and three-digit sums up to 999 (Grade 3); one-step stories only.",
+    limits: "Two-digit sums without regrouping and with regrouping (Grade 2) and three-digit sums up to 999 (Grade 3), each declared by grade(p); one-step stories only.",
   },
   {
     id: "aastsub",
@@ -2935,6 +2954,7 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "sentence" ? `Some are taken away: ${s.value}.` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [0, 99]],
+    grade: ([lvl, seed]) => sizeGrade(...storyNums(1, lvl, seed)),
     difficulty: ([lvl]) => (lvl + 1) as 1 | 2 | 3,
     word: ([lvl, seed]) => {
       const [a, b] = storyNums(1, lvl, seed);
@@ -2954,7 +2974,7 @@ const GAP01: Def[] = [
         } },
       ],
     },
-    limits: "Two-digit differences without regrouping (Grade 1), with regrouping (Grade 2–3) and three-digit differences (Grade 3); one-step stories only.",
+    limits: "Two-digit differences without and with regrouping (Grade 2) and three-digit differences (Grade 3), each declared by grade(p); one-step stories only.",
   },
   {
     id: "aasenadd",
@@ -3010,7 +3030,7 @@ const GAP01: Def[] = [
     type: "choice",
     // [a, b, c]: a things, b are taken away; story SEN_SUB[c]
     parse: none,
-    reject: guard([[3, 15], [2, 14], [0, 3]], ([a, b]) => b < a, "A group of up to 15 with some taken away."),
+    reject: guard([[3, 12], [2, 11], [0, 3]], ([a, b]) => b < a, "A group of up to 12 with some taken away (a row of the picture holds 12)."),
     prompt: ([a, b, c]) => `${SEN_SUB[c](a, b, nm(a + b))} (The picture shows the group and how many are taken away.)`,
     choices: (p) => senSubChoices(p).list,
     solve: (p) => {
@@ -3034,7 +3054,7 @@ const GAP01: Def[] = [
     },
     variants: () => [],
     explain: (s) => `Start with all of them and take away the part that went: ${s.value}.`,
-    domain: [[3, 15], [2, 14], [0, 3]],
+    domain: [[3, 12], [2, 11], [0, 3]],
     cap: 300,
     difficulty: ([a]) => (a <= 10 ? 1 : 2),
     figure: ([a, b]) => ({ type: "pictograph", labels: ["At first", "Taken away"], counts: [a, b], key: 1 }),
@@ -3047,7 +3067,7 @@ const GAP01: Def[] = [
         { id: "cross_out", title: "Cross out", kind: "conceptual", text: ["Draw all the things, then cross out the ones that go.", "Count the ones not crossed out: that is the number after the = sign."], visual: ([a]) => ({ type: "tenframe", filled: a, frames: a > 10 ? 2 : 1 }) },
       ],
     },
-    limits: "Take-away stories from groups of 3 to 15; comparing two groups ('how many more') is aamore.",
+    limits: "Take-away stories from groups of 3 to 12 (all drawn in one row of the picture); comparing two groups ('how many more') is aamore.",
   },
 
   // ================================================================ MATH.measurement.calendar: days and months in order, seasons, dates, ages
@@ -3162,7 +3182,9 @@ const GAP01: Def[] = [
       kind === 0
         ? `${nm(m)}'s birthday is in ${MONTHS[m]}. Use the table of seasons. In which season is the birthday?`
         : kind === 1
-          ? `A farmer sows seeds in ${MONTHS[m]}. The crop is ready ${k} month${k > 1 ? "s" : ""} later. Use the table of seasons: in which season is the crop ready?`
+          ? k >= 3
+            ? `A farmer sows paddy in ${MONTHS[m]}. The crop is ready ${k} months later. Use the table of seasons: in which season is the crop ready?`
+            : `${nm(m + 1)}'s family books a holiday in ${MONTHS[m]} for ${k} month${k > 1 ? "s" : ""} later. Use the table of seasons: in which season is the holiday?`
           : k
             ? `Use the table of seasons. Which season ends just as ${SEASONS[m][0]} begins?`
             : `Use the table of seasons. When ${SEASONS[m][0]} ends, which season begins?`,
@@ -3300,7 +3322,6 @@ const GAP01: Def[] = [
       const c = ddmmChoices(p);
       return [
         bug("month-first", "conceptual", CAL, "The month was put first. In DD/MM/YYYY the day comes first, then the month, then the year.", c.list.indexOf(c.SW)),
-        bug("month-number", "recall", CAL, "The month's number was wrong. Count the months from January = 01 to December = 12.", c.list.indexOf(c.MO)),
       ];
     },
     variants: () => [],
@@ -3451,18 +3472,25 @@ const GAP01: Def[] = [
     // independent: read the date in the drawn calendar grid, k cells away
     validate: ([yr, m, d, kind, k], v) => {
       const rows = (calendar(yr, m) as unknown as { rows: (number | string)[][] }).rows;
-      const { row, col } = cellOf(yr, m, d);
+      const row = rows.findIndex((r) => r.includes(d));
+      const col = row < 0 ? -1 : rows[row].indexOf(d);
       const [dr, dc] = CALMOVE[kind];
-      return rows[row + k * dr]?.[col + k * dc] === v;
+      return row > 0 && rows[row + k * dr]?.[col + k * dc] === v && row + k * dr > 0;
     },
-    bugs: ([, , d, kind, k]) => {
+    bugs: ([, m, d, kind, k]) => {
       const [dr, dc] = CALMOVE[kind];
       const right = d + k * (7 * dr + dc);
       return [
         bug("ten-per-row", "conceptual", NPAT, "Each row was taken to add 10, as on a hundred chart. A calendar row has 7 days, so one row down adds 7.", dr > 0 ? d + k * (10 * dr + dc) : null),
         bug("forgot-sideways", "procedural", NPAT, `Only the move down was made. Each diagonal move also goes one column ${dc > 0 ? "right (one more day)" : "left (one day fewer)"}.`, dc !== 0 ? d + 7 * k : null),
-        bug("wrong-way", "conceptual", NPAT, `The move went the wrong way. ${dr > 0 ? "Down" : "Up"} means ${dr > 0 ? "later dates" : "earlier dates"}${dc ? `, and ${dc > 0 ? "right is one day more" : "left is one day fewer"}` : ""}.`, dc !== 0 ? d + k * (7 - dc) : d - 7 * k * dr !== right && d - 7 * k * dr > 0 ? d - 7 * k * dr : null),
+        bug("wrong-way", "conceptual", NPAT, `The move went the wrong way. ${dr > 0 ? "Down" : "Up"} means ${dr > 0 ? "later dates" : "earlier dates"}.`, dc === 0 && d - 7 * k * dr !== right && d - 7 * k * dr >= 1 && d - 7 * k * dr <= MLEN[m] ? d - 7 * k * dr : null),
       ];
+    },
+    // only dates of the month shown are offered
+    range: ([, m]) => [1, MLEN[m]],
+    distractors: ([, m, d, kind, k]) => {
+      const right = d + k * (7 * CALMOVE[kind][0] + CALMOVE[kind][1]);
+      return [right + 1, right - 1, right + 7, right - 7, right + 2, right - 2].filter((x) => x >= 1 && x <= MLEN[m]);
     },
     variants: () => [],
     explain: (s) => (s.id === "rule" ? `One move changes the date by ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} moves: ${s.value}.`),
@@ -3772,7 +3800,7 @@ const GAP01: Def[] = [
     cap: 300,
     difficulty: ([o, u, , kind]) => (kind === 0 && o + u <= 3 ? 1 : kind === 0 ? 2 : 3),
     figure: ([o, u]) => table(weaveSeq(o, u, 2 * (o + u)).map((_, i) => String(i + 1)), [weaveSeq(o, u, 2 * (o + u))]),
-    word: ([o, u, n, kind]) => `A weaver in Kanchipuram weaves a border where the thread goes over ${o} and under ${u} threads, again and again, as in the picture. ${kind === 0 ? `In the first ${n} crossings, how many times does the thread go over?` : `At which crossing does the thread go under for the ${nth(n)} time?`}`,
+    word: ([o, u, n, kind]) => `A weaver in Kanchipuram weaves a border where the thread goes over ${nOf(o, "threads")} and under ${nOf(u, "threads")}, again and again, as in the picture. ${kind === 0 ? `In the first ${n} crossings, how many times does the thread go over?` : `At which crossing does the thread go under for the ${nth(n)} time?`}`,
     teach: {
       idea: "A weaving pattern is an ordered sequence that repeats: over 2, under 1 is the repeating part 'over, over, under'.",
       method: "Find the length of the repeating part. Count how many full repeats fit, then look at the crossings left in the last, unfinished repeat.",
@@ -3832,6 +3860,8 @@ const GAP01: Def[] = [
     variants: () => [],
     explain: (s) => `So the answer is ${s.value}.`,
     domain: [[0, 5], [2, 999]],
+    // level@1: multiplying by 1 and by 0 is Grade 3 work (multiplication), though the family sits under zero
+    grade: () => 3,
     cap: 300,
     difficulty: ([kind, n]) => (kind <= 1 && n < 100 ? 1 : kind <= 3 ? 2 : 3),
     word: ([kind, n]) =>
@@ -3839,7 +3869,7 @@ const GAP01: Def[] = [
         `There are ${n} plates at a wedding, with 1 sweet on each plate. How many sweets are there?`,
         `There is 1 box with ${n} pencils in it. How many pencils are there?`,
         `There are ${n} baskets, but every basket is empty (0 mangoes in each). How many mangoes are there?`,
-        `A shop has 0 bundles of ${n} sheets of paper. How many sheets of paper are there?`,
+        `In a game, each goal scores ${n} points. ${nm(n)} scores 0 goals. How many points does ${nm(n)} get from goals?`,
         `Some children each get 1 balloon, and ${n} balloons are given out. How many children are there?`,
         `${n} children each bring the same number of mangoes to school, and there are ${n} mangoes in all. How many mangoes does each child bring?`,
       ][kind],

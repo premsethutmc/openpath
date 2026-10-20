@@ -573,8 +573,12 @@ function ratioCanonical(raw: string): string {
 
 /** The canonical form of an answer of this type (null: not an answer of this type). Sampled types have no canonical
  * form (use `sameAnswer`); written answers are never compared. */
+/** rhs@1: "y = 5x + 1" typed where the right-hand side is asked for reads as "5x + 1" (exact, polynomial and
+ * expression answers never contain "=", so this only turns an unreadable answer into a readable one). */
+export const rhs = (t: string) => t.replace(/^\s*y\s*=\s*(?=[^=]+$)/, "");
 export function canonicalOf(type: AnswerType, raw: string): string | null {
-  const t = raw.trim().replace(/−/g, "-");
+  const t0 = raw.trim().replace(/−/g, "-");
+  const t = type === "exact" || type === "polynomial" || type === "expression" ? rhs(t0) : t0;
   if (!t || t.length > 300) return null;
   try {
     switch (type) {
@@ -626,7 +630,7 @@ export function sameAnswer(type: AnswerType, a: string, b: string): boolean {
   if (HUMAN.has(type)) return false;
   if (SAMPLED.has(type)) {
     try {
-      return sameSampled(a, b, type === "antiderivative");
+      return sameSampled(type === "expression" ? rhs(a) : a, type === "expression" ? rhs(b) : b, type === "antiderivative");
     } catch {
       return false;
     }

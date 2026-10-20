@@ -122,7 +122,9 @@ function quadRoot(p0: number, k: number, m: number, d: number): string {
   const body = `${nf(P)} ${K < 0 ? "−" : "+"} ${s}`;
   return D === 1 ? body : `(${body})/${D}`;
 }
-const fact = (n: number) => (n <= 1 ? 1 : n * fact(n - 1));
+/** 2√n when that is a whole number; otherwise no numeric prediction (an irrational value cannot be an option here). */
+const cpRootTwice = (n: number): number | null => (Number.isInteger(Math.sqrt(n)) ? 2 * Math.sqrt(n) : null);
+const fact = (n: number): number => (n <= 1 ? 1 : n * fact(n - 1));
 const st = (id: string, op: string, competency: string, inputs: (number | string)[], value: Value): Step => ({ id, op, competency, inputs, value });
 const bug = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null): Bug => ({ id, kind, competency, says, predict });
 const node = (v: Value): Node | null => {
@@ -2318,11 +2320,11 @@ export const B18: Def[] = [
       }
       const [A, B, C] = cpABC(p);
       if (ask === 0) out.push(bug("lr-b-over-a", "recall", CON, "The latus rectum was taken as b²/a; its length is 2b²/a.", (B * B) / A), bug("lr-axes-swapped", "procedural", CON, "a and b were swapped in 2b²/a; a is the semi-axis on which the foci lie.", (2 * A * A) / B));
-      if (ask === 1) out.push(bug("directrix-ae", "recall", CON, "The distance ae (to a focus) was given; the directrices are at a/e from the centre.", C), bug("directrix-e", "procedural", CON, "a/e was worked out as a × e.", (A * C) / A));
-      if (ask === 2) out.push(bug("one-focus", "procedural", CON, "The distance from the centre to one focus was given; the foci are 2c apart.", C), bug("rule-swapped", "recall", CON, kind === 1 ? "c² = a² + b² (the hyperbola rule) was used; for an ellipse c² = a² − b²." : "c² = a² − b² (the ellipse rule) was used; for a hyperbola c² = a² + b².", 2 * Math.sqrt(kind === 1 ? A * A + B * B : Math.abs(A * A - B * B))));
+      if (ask === 1) out.push(bug("directrix-ae", "recall", CON, "The distance ae (to a focus) was given; the directrices are at a/e from the centre.", C));
+      if (ask === 2) out.push(bug("one-focus", "procedural", CON, "The distance from the centre to one focus was given; the foci are 2c apart.", C), bug("rule-swapped", "recall", CON, kind === 1 ? "c² = a² + b² (the hyperbola rule) was used; for an ellipse c² = a² − b²." : "c² = a² − b² (the ellipse rule) was used; for a hyperbola c² = a² + b².", cpRootTwice(kind === 1 ? A * A + B * B : Math.abs(A * A - B * B))));
       if (ask === 3 || ask === 4) out.push(bug("semi-axis", "procedural", CON, "The semi-axis was given; the length of the axis is twice it.", ask === 3 ? A : B), bug("axis-swapped", "conceptual", CON, `The ${ask === 3 ? "minor (conjugate)" : "major (transverse)"} axis was used: the ${ask === 3 ? (kind === 1 ? "major" : "transverse") : kind === 1 ? "minor" : "conjugate"} axis goes with ${ask === 3 ? "the foci" : "the other denominator"}.`, ask === 3 ? 2 * B : 2 * A));
       if (ask === 5) out.push(bug("vertex-squared", "procedural", CON, `The denominator a² = ${A * A} was given; the vertex is at distance a = ${A} from the centre.`, A * A));
-      return out.filter((b) => Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - ans) > 1e-9);
+      return out.filter((b) => b.predict === null || (Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - ans) > 1e-9));
     },
     distractors: (p) => [cpAnswer(p) + 1, 2 * cpAnswer(p)],
     variants: () => [],
@@ -2375,8 +2377,9 @@ export const B18: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "a" ? `From the data, ${s.value}` : s.id === "b" ? `${s.value}` : `So (A, B) = ${s.value}`),
-    domain: [[1, 2], [0, 1], [0, 7], [0, 3], [1, 1]],
-    keep: (p) => cqOk(p),
+    domain: [[1, 2], [0, 1], [0, 7], [0, 3], [1, 4]],
+    // triples 4, 5 are twice triples 0, 1: with the multiplier m they would repeat questions, so they are left out
+    keep: (p) => cqOk(p) && p[2] !== 4 && p[2] !== 5,
     difficulty: ([, , , data]) => (data === 0 ? 1 : data === 3 ? 3 : 2),
     teach: {
       idea: "An ellipse with foci (±c, 0) and vertices (±a, 0) has b² = a² − c²; a hyperbola has b² = c² − a². With e = c/a, a point on the curve, or the latus rectum 2b²/a, the same three numbers a, b, c are linked.",
@@ -2458,9 +2461,9 @@ export const B18: Def[] = [
       if (kind === 3) out.push(bug("linear", "conceptual", MODEL, "The cable was taken to rise in a straight line from the lowest point; it hangs in a parabola, rising like the square of the distance.", w + ((v - w) * z) / u), bug("from-top", "procedural", CON, "The height was measured down from the tower top: H − (H − L)x²/a² was used instead of L + (H − L)x²/a².", v - ((v - w) * z * z) / (u * u)));
       if (kind === 4) out.push(bug("swapped", "recall", CON, w === 2 ? "The nearest distance a(1 − e) was given; the farthest is a(1 + e)." : "The farthest distance a(1 + e) was given; the nearest is a(1 − e).", u * (1 + (w === 2 ? -1 : 1) * (v / 10))), bug("focus-distance", "procedural", CON, "The distance from the centre to the focus, ae, was given; the distances from the focus to the ends of the major axis are a − ae and a + ae.", (u * v) / 10));
       for (const b of out) b.predict = Math.round((b.predict as number) * 1e9) / 1e9;
-      return out.filter((b) => Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - ans) > 1e-9 && caTerm(b.predict as number));
+      return out.filter((b) => Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - ans) > 1e-9 && ca2(b.predict as number));
     },
-    distractors: (p) => [caAppAnswer(p) + 1, caAppAnswer(p) / 2].filter(caTerm),
+    distractors: (p) => [caAppAnswer(p) + 1, caAppAnswer(p) / 2, caAppAnswer(p) + 0.5, 2 * caAppAnswer(p)].filter(ca2),
     variants: () => [],
     explain: (s) => (s.id === "model" ? `Model: ${s.value}` : `So the answer is ${nf(Number(s.value))}`),
     range: [0, Infinity],
@@ -2620,8 +2623,8 @@ export const B18: Def[] = [
     bugs: (p) => {
       const [f, , k] = p;
       const c = tyCoef(p);
-      const out: Bug[] = [bug("no-factorial", "recall", TAY, `The ${k}th derivative at x = ${tyCentre(p)} was given without dividing by ${k}! = ${fact(k)}; the coefficient of (x − a)ᵏ is f⁽ᵏ⁾(a)/k!.`, c * fact(k))];
-      if (f === 0 || f === 4) out.push(bug("maclaurin", "conceptual", TAY, `The coefficient of x${sup(k)} in f itself (the Maclaurin series about 0) was given; about x = ${tyCentre(p)} the powers are of (x − ${tyCentre(p)}).`, tyMac(p)));
+      const out: Bug[] = [bug("no-factorial", "recall", TAY, `The ${["", "first", "second", "third", "fourth"][k]} derivative at x = ${tyCentre(p)} was given without dividing by ${k}! = ${fact(k)}; the coefficient of (x − a)ᵏ is f⁽ᵏ⁾(a)/k!.`, c * fact(k))];
+      if (f === 0 || f === 4) out.push(bug("maclaurin", "conceptual", TAY, `The coefficient of ${k === 1 ? "x" : `x${sup(k)}`} in f itself (the Maclaurin series about 0) was given; about x = ${nf(tyCentre(p))} the powers are of ${tyPow([f, p[1], 1])}.`, tyMac(p)));
       else out.push(bug("sign-pattern", "recall", TAY, "The sign was lost: each differentiation of a negative power brings another minus sign, so the signs alternate.", -c));
       return out.filter((b) => Number.isFinite(b.predict as number) && b.predict !== c);
     },
@@ -2792,7 +2795,14 @@ export const B18: Def[] = [
       ];
       if (ask === 0) out.push(bug("no-base", "procedural", LA, `Only the change df was given; the estimate is f(${nf(x0)}, ${nf(y0)}) + df.`, fx * dx + fy * dy));
       else out.push(bug("plus-f", "procedural", LA, `f(${nf(x0)}, ${nf(y0)}) was added; the total differential is just the change f_x dx + f_y dy.`, f0 + fx * dx + fy * dy));
-      return out.filter((x) => Math.abs((x.predict as number) - ans) > 1e-9);
+      // one explanation per wrong value (two slips can give the same number here)
+      const seen = new Set<number>();
+      return out.filter((x) => {
+        const key = Math.round((x.predict as number) * 1e9);
+        if (Math.abs((x.predict as number) - ans) <= 1e-9 || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
     },
     distractors: (p) => [la2Answer(p) + 0.1, la2Answer(p) - 0.5],
     variants: () => [],
@@ -3148,7 +3158,7 @@ function cpNumeric(p: number[]): number {
 
 // the equation of an ellipse or hyperbola from data (arconeq)
 const cqABC = ([kind, , i, , m]: number[]) => (kind === 1 ? CP_E[i] : CP_H[i]).map((x) => x * m);
-const cqOk = ([kind, o, i, data, m]: number[]) => (kind === 1 || kind === 2) && (o === 0 || o === 1) && i >= 0 && i <= 7 && data >= 0 && data <= 3 && (m === 1 || m === 2) && Math.max(...cqABC([kind, o, i, data, m])) <= 20;
+const cqOk = ([kind, o, i, data, m]: number[]) => (kind === 1 || kind === 2) && (o === 0 || o === 1) && i >= 0 && i <= 7 && data >= 0 && data <= 3 && m >= 1 && m <= 4 && Math.max(...cqABC([kind, o, i, data, m])) <= 20;
 function cqAB(p: number[]): [number, number] {
   const [a, b] = cqABC(p);
   return p[0] === 1 && p[1] ? [b * b, a * a] : [a * a, b * b];
@@ -3248,7 +3258,10 @@ function caTerm(x: number): boolean {
   for (const q of [2, 5]) while (d % q === 0) d /= q;
   return d === 1;
 }
-const caAppOk = (p: number[]) => {
+/** At most two decimal places (answers and options of a measurement). */
+const ca2 = (x: number) => Number.isFinite(x) && Math.abs(Math.round(x * 100) - x * 100) < 1e-6;
+const caAppOk = (p: number[]) => caAppOk0(p) && ca2(caAppAnswer(p));
+const caAppOk0 = (p: number[]) => {
   const [kind, u, v, w, z] = p;
   if (kind === 0) return u >= 2 && u <= 20 && v >= 2 && v <= 12 && w >= 1 && w < u && z === 0 && caTerm(caAppAnswer(p));
   if (kind === 1) return u >= 10 && u <= 40 && u % 2 === 0 && v >= 2 && v <= 12 && w === 1 && z === 0 && caTerm(caAppAnswer(p));
@@ -3391,7 +3404,8 @@ const tyMac = ([f, , k]: number[]) => (f === 0 ? TY_POLY[k] : NaN);
 const tyOk = (p: number[]) => {
   const [f, a, k] = p;
   if (k < 1 || k > 4) return false;
-  const ok = f === 0 ? a >= -3 && a <= 3 : f === 1 ? a !== 0 && a >= -3 && a <= 5 : f === 2 ? a >= 1 && a <= 5 : f === 3 ? a >= 1 && a <= 4 : f === 4 ? a !== 0 && a >= -3 && a <= 5 : false;
+  // about x = 0 the polynomial's coefficient is just read off (trivial): a ≠ 0
+  const ok = f === 0 ? a !== 0 && a >= -3 && a <= 3 : f === 1 ? a !== 0 && a >= -3 && a <= 5 : f === 2 ? a >= 1 && a <= 5 : f === 3 ? a >= 1 && a <= 4 : f === 4 ? a !== 0 && a >= -3 && a <= 5 : false;
   return ok && tyCoef(p) !== 0 && !fmt(tyCoef(p)).includes(".");
 };
 const csqrt = ([x, y]: C): C => {
@@ -3430,7 +3444,7 @@ function lhiExpr(p: number[]): string {
   if (f === 2) return `lim (x → 0) of ${B}x cot ${ax(a)}`;
   if (f === 3) return `lim (x → ∞) of ${B}x(e^(${a}/x) − 1)`;
   if (f === 4) return `lim (x → 1) of ${B}${B ? "(" : ""}1/(x − 1) − ${a}/(x${sup(a)} − 1)${B ? ")" : ""}`;
-  return `lim (x → 0) of ${B}${B ? "(" : ""}1/x − ${a}/(e^(${ax(a)}) − 1)${B ? ")" : ""}`;
+  return `lim (x → 0) of ${B}${B ? "(" : ""}1/x − ${a}/(${a === 1 ? "eˣ" : `e^(${ax(a)})`} − 1)${B ? ")" : ""}`;
 }
 function lhiAnswer([f, a, b]: number[]): number {
   return [a / b, a * b, b / a, a * b, (b * (a - 1)) / 2, (a * b) / 2][f];

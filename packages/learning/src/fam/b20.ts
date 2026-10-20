@@ -1438,7 +1438,7 @@ export const B20: Def[] = [
     solve: (p) => {
       const S = p.reduce((a, b) => a + b, 0);
       const md = p.reduce((a, x) => a + Math.abs(6 * x - S), 0) / 36;
-      return { steps: [st("mean", "divide", MEAN, [S, 6], S / 6), st("deviations", "subtract", MD, p.map((x) => F(Math.abs(x - S / 6))).join(", "), md * 6), st("md", "divide", MD, [md * 6, 6], md)], answer: md };
+      return { steps: [st("mean", "divide", MEAN, [S, 6], S / 6), st("deviations", "subtract", MD, [p.map((x) => F(Math.abs(x - S / 6))).join(", ")], md * 6), st("md", "divide", MD, [md * 6, 6], md)], answer: md };
     },
     // independent: twice the sum of the deviations above the mean, divided by n (they balance those below)
     validate: (p, v) => {
@@ -2639,7 +2639,12 @@ export const B20: Def[] = [
         { id: "middle-sign", kind: "procedural", competency: DETM, says: "The ĵ component's minus sign was forgotten when expanding the determinant; the middle term is −(a₁b₃ − a₃b₁).", predict: c[1] === 0 ? null : tupS([c[0], -c[1], c[2]]) },
         { id: "order-reversed", kind: "conceptual", competency: VP, says: "b × a was found; the cross product changes sign when the order changes: a × b = −(b × a).", predict: tupS(c.map((t) => -t)) },
         { id: "componentwise", kind: "conceptual", competency: VP, says: "Matching components were multiplied; that is part of the dot product. The cross product uses the determinant.", predict: tupS(a.map((t, i) => t * b[i])) },
-      ];
+      ].filter((g) => g.predict !== tupS(c)) as Bug[];
+    },
+    // extra options when the slips coincide (a cyclic shift and a one-off slip in a component)
+    distractors: (x) => {
+      const c = cross(x.slice(0, 3), x.slice(3));
+      return [tupS([c[1], c[2], c[0]]), tupS([c[0] + 1, c[1], c[2]]), tupS([c[0], c[1], c[2] - 1])];
     },
     variants: (x) => [[...x.slice(3), ...x.slice(0, 3)]],
     explain: (s) => `${s.id === "i" ? "î" : s.id === "j" ? "ĵ" : "k̂"}: ${s.inputs[0]} = ${neg(Number(s.value))}`,
@@ -3126,7 +3131,8 @@ export const B20: Def[] = [
     bugs: (p) => {
       const d = mdfData(p);
       const right = d.S / d.N;
-      const pr = (x: number) => (near(x, right, 1e-9) ? null : x);
+      // options are shown as decimals: a slip whose value does not end within two decimal places is not offered
+      const pr = (x: number) => (near(x, right, 1e-9) || !dp2(x) ? null : x);
       const plain = d.xs.reduce((s, x) => s + Math.abs(x - meanOf(d.xs)), 0) / 5;
       const other = mdfData(p, true);
       return [
@@ -3137,7 +3143,7 @@ export const B20: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
-    explain: (s) => (s.id === "centre" ? `N = ${s.inputs[0]}; the centre is ${s.value}` : s.id === "deviations" ? `Σf|x − centre| = ${s.value}` : `M.D. = ${F(Number(s.inputs[0]))}/${s.inputs[1]} = ${F(Number(s.value))}`),
+    explain: (s) => (s.id === "centre" ? `N = ${s.inputs[0]}; the centre is ${s.value}` : s.id === "deviations" ? `Σf|x − centre| = ${s.value}` : `M.D. = ${F(Number(s.inputs[0]))}/${s.inputs[1]} = ${dp2(Number(s.value)) ? neg(String(Math.round(Number(s.value) * 100) / 100)) : F(Number(s.value))}`),
     domain: [[0, 2], [1, 20], [1, 4], [0, 59]],
     keep: (p) => firstOnly("atmdf", [[0, 2], [1, 20], [1, 4], [0, 59]], mdfOk, shown("atmdf"))(p),
     cap: 400,
@@ -3407,8 +3413,9 @@ export const B20: Def[] = [
     variants: () => [],
     explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
     domain: [[0, 4], [0, 59], [0, 3]],
-    keep: (p) => firstOnly("atvtype", [[0, 4], [0, 59], [0, 3]], vtypeOk, shown("atvtype"))(p),
-    cap: 400,
+    // kinds 0, 1 and 4 share one wording each (only the options change): fewer of them, so most released questions differ
+    keep: (p) => (p[0] === 2 || p[0] === 3 || p[1] < (p[0] === 4 ? 15 : 20)) && firstOnly("atvtype", [[0, 4], [0, 59], [0, 3]], vtypeOk, shown("atvtype"))(p),
+    cap: 300,
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 4 ? 2 : 3),
     teach: {
       idea: "A scalar has only a size (mass, time, speed, work); a vector has a size and a direction (displacement, velocity, force). Equal vectors have the same length and direction; −a has the same length and the opposite direction; collinear vectors lie along parallel lines (b = λa); a unit vector has length 1; the zero vector has length 0; co-initial vectors start at the same point.",
@@ -3427,7 +3434,7 @@ export const B20: Def[] = [
     // [f, ask, k, a]: y = a f⁻¹(x/k) (k = 1: f⁻¹ x); ask 0 domain, 1 range
     parse: none,
     reject: gate([[0, 5], [0, 1], [1, 4], [1, 4]], () => true, "y = a f⁻¹(x/k) with a and k from 1 to 4."),
-    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range (the principal-value branch)" : "domain"} of y = ${a === 1 ? "" : `${a} `}${INVT[f].n}${k === 1 ? " x" : `(x/${k})`}?`,
+    prompt: ([f, ask, k, a]) => `What is the ${ask ? "range" : "domain"} of y = ${a === 1 ? "" : `${a} `}${INVT[f].n}${k === 1 ? " x" : `(x/${k})`}${ask ? ` (with the principal value branch of ${INVT[f].n})` : ""}?`,
     choices: (p) => invdOpts(p).map((o) => o.text),
     solve: (p) => {
       const o = invdOpts(p);
@@ -3447,6 +3454,8 @@ export const B20: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [0, 1], [1, 4], [1, 4]],
+    // the plain branches (k = a = 1) are asked by aqinvbr (b17); this family keeps the scaled forms
+    keep: ([, , k, a]) => k !== 1 || a !== 1,
     difficulty: ([f]) => (f <= 2 ? 1 : f === 3 ? 2 : 3),
     teach: {
       idea: "Each inverse function undoes its function on one branch: sin⁻¹ has domain [−1, 1] and range [−π/2, π/2]; cos⁻¹ [−1, 1] and [0, π]; tan⁻¹ ℝ and (−π/2, π/2); cot⁻¹ ℝ and (0, π); sec⁻¹ (−∞, −1] ∪ [1, ∞) and [0, π] without π/2; cosec⁻¹ (−∞, −1] ∪ [1, ∞) and [−π/2, π/2] without 0.",
@@ -3471,10 +3480,10 @@ export const B20: Def[] = [
       kind === 0
         ? `Solve tan⁻¹(${a === 1 ? "" : a}x) + tan⁻¹(${b === 1 ? "" : b}x) = π/4 for x. (A fraction is fine.)`
         : kind === 1
-          ? `Find x if tan⁻¹(1/${a}) + tan⁻¹(1/${b}) = tan⁻¹ x. (A fraction is fine.)`
+          ? `Find x if ${at1(a)} + ${at1(b)} = tan⁻¹ x. (A fraction is fine.)`
           : kind === 2
-            ? `Find x if 2 tan⁻¹(1/${a}) = tan⁻¹ x. (A fraction is fine.)`
-            : `Find x if tan⁻¹(1/${a}) − tan⁻¹(1/${b}) = tan⁻¹ x. (A fraction is fine.)`,
+            ? `Find x if 2 ${at1(a)} = tan⁻¹ x. (A fraction is fine.)`
+            : `Find x if ${at1(a)} − ${at1(b)} = tan⁻¹ x. (A fraction is fine.)`,
     solve: (p) => {
       const ans = inveqAns(p);
       return { steps: [st("formula", "rewrite", INV, [p[0]], ["tan⁻¹ u + tan⁻¹ v = tan⁻¹((u + v)/(1 − uv)) when uv < 1, so (a + b)x/(1 − abx²) = 1", "tan⁻¹ u + tan⁻¹ v = tan⁻¹((u + v)/(1 − uv)) when uv < 1", "2 tan⁻¹ u = tan⁻¹(2u/(1 − u²)) when |u| < 1", "tan⁻¹ u − tan⁻¹ v = tan⁻¹((u − v)/(1 + uv))"][p[0]]), st("solve", "solve", LIN_, [], ans)], answer: ans };
@@ -3627,29 +3636,31 @@ export const B20: Def[] = [
     mc: true,
     // [kind, n, k]: 0 n coins, X = number of heads: P(X = k); 1 the same: F(k) = P(X ≤ k); 2 two dice, X = the larger
     // number: P(X = k); 3 two dice, X = the sum: F(k); 4 two dice, X = the difference: P(X = k); 5 the larger number:
-    // F(k); 6 two balls from n red and 6 − n blue without replacement, X = the number of red: P(X = k)
+    // F(k); 6 two balls from n red and 6 − n blue without replacement, X = the number of red: P(X = k); two dice: 7 the
+    // smaller number P(X = k), 8 its F(k), 9 the number of dice showing an even number P(X = k), 10 the sum P(X = k),
+    // 11 the difference F(k)
     parse: none,
-    reject: gate([[0, 6], [0, 6], [0, 12]], (p) => pmfOk(p), "A random variable on coins, two dice or a bag, with a value in its range."),
-    prompt: ([kind, n, k]) => `${pmfSay(kind, n)} Find ${[1, 3, 5].includes(kind) ? `F(${k}) = P(X ≤ ${k}), the value of its distribution function at ${k}` : `P(X = ${k})`}.`,
+    reject: gate([[0, 11], [0, 6], [0, 12]], (p) => pmfOk(p), "A random variable on coins, two dice or a bag, with a value in its range."),
+    prompt: ([kind, n, k]) => `${pmfSay(kind, n)} Find ${PMF_CDF.includes(kind) ? `F(${k}) = P(X ≤ ${k}), the value of its distribution function at ${k}` : `P(X = ${k})`}.`,
     solve: (p) => {
       const ans = pmfAns(p);
-      return { steps: [st("space", "count", "MATH.probability.sample-space", [p[0]], p[0] <= 1 ? 2 ** p[1] : p[0] === 6 ? 30 : 36), st("value", [1, 3, 5].includes(p[0]) ? "add" : "count", RV, [p[2]], ans)], answer: ans };
+      return { steps: [st("space", "count", "MATH.probability.sample-space", [p[0]], p[0] <= 1 ? 2 ** p[1] : p[0] === 6 ? 30 : 36), st("value", PMF_CDF.includes(p[0]) ? "add" : "count", RV, [p[2]], ans)], answer: ans };
     },
     // independent: list the whole sample space, work out X for each outcome, and count
     validate: ([kind, n, k], v) => {
       const outs: number[] = [];
       if (kind <= 1) for (let m = 0; m < 2 ** n; m++) outs.push(pop(m));
       else if (kind === 6) for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) i !== j && outs.push((i < n ? 1 : 0) + (j < n ? 1 : 0));
-      else for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) outs.push(kind === 2 || kind === 5 ? Math.max(a, b) : kind === 3 ? a + b : Math.abs(a - b));
-      const hit = outs.filter((x) => ([1, 3, 5].includes(kind) ? x <= k : x === k)).length;
+      else for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) outs.push(kind === 2 || kind === 5 ? Math.max(a, b) : kind === 7 || kind === 8 ? Math.min(a, b) : kind === 9 ? (a % 2 === 0 ? 1 : 0) + (b % 2 === 0 ? 1 : 0) : kind === 3 || kind === 10 ? a + b : Math.abs(a - b));
+      const hit = outs.filter((x) => (PMF_CDF.includes(kind) ? x <= k : x === k)).length;
       return typeof v === "number" && near(v, hit / outs.length, 1e-12);
     },
     bugs: (p) => {
       const [kind, n, k] = p;
       const right = pmfAns(p);
       const pr = (x: number) => (near(x, right, 1e-12) ? null : x);
-      const vals = kind <= 1 ? n + 1 : kind === 3 ? 11 : kind === 6 ? 3 : 6;
-      if ([1, 3, 5].includes(kind))
+      const vals = kind <= 1 ? n + 1 : kind === 3 || kind === 10 ? 11 : kind === 6 || kind === 9 ? 3 : 6;
+      if (PMF_CDF.includes(kind))
         return [bg("pmf-for-cdf", "conceptual", RV, `P(X = ${k}) was given; F(${k}) = P(X ≤ ${k}) adds the probabilities of all values up to ${k}.`, pr(pmfAns(p, true))), bg("strict", "procedural", RV, `P(X < ${k}) was found; F(${k}) includes X = ${k}.`, pr(pmfAns([kind, n, k - 1])))].filter((b) => b.predict !== null);
       return [bg("values-equally-likely", "conceptual", RV, `The ${vals} values of X were taken as equally likely; different values come from different numbers of outcomes, so count the outcomes.`, pr(1 / vals))].filter((b) => b.predict !== null);
     },
@@ -3659,16 +3670,16 @@ export const B20: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "space" ? `The sample space has ${s.value} equally likely outcomes` : `${F(Number(s.value))} of the probability belongs to the event`),
-    domain: [[0, 6], [0, 6], [0, 12]],
+    domain: [[0, 11], [0, 6], [0, 12]],
     keep: (p) => pmfOk(p),
     range: [0, 1],
-    difficulty: ([kind]) => (kind === 0 ? 1 : kind <= 2 ? 2 : 3),
+    difficulty: ([kind]) => (kind === 0 ? 1 : kind <= 2 || kind === 7 || kind === 9 || kind === 10 ? 2 : 3),
     teach: {
       idea: "A random variable X gives a number to each outcome of the sample space. Its probability mass function p(x) = P(X = x) adds up the outcomes with each value; its distribution function F(x) = P(X ≤ x) adds p over all values up to x.",
       method: "List the sample space, write X beside each outcome, count how many outcomes give each value (divide by the total), and for F(k) add the probabilities of the values up to and including k.",
       alternatives: [{ id: "table", title: "Make the table", kind: "procedural", text: ["Write the values of X in a row and their probabilities underneath.", "A third row of running totals is F(x)."] }],
     },
-    limits: "Coins (2 to 4) and two dice; written tables of the whole pmf and cdf are marked by an educator.",
+    limits: "Coins (2 to 6), two dice (the larger or smaller number, the sum, the difference, the number of even numbers) and a bag of six balls; written tables of the whole pmf and cdf are marked by an educator.",
   },
   // ======================================================== gap@1: distribution function from a density and back
   {
@@ -3712,9 +3723,9 @@ export const B20: Def[] = [
       kind === 2
         ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from the left end up to x.", `1/${a}`), ...(n > 0 ? [bg("from-zero", "procedural", INTG, `The area was measured from 0; the density is 0 below ${n}, so integrate from ${n}.`, `x/${a}`)] : [])]
         : kind === 0
-          ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from 0 to x, found by integrating.", pdfText(n, a)), bg("power-not-divided", "procedural", INTG, `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, `${n + 1}x${sup(n + 1)}/${a ** (n + 1)}`)]
-          : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", `x${sup(n + 2)}/${(n + 2) * a ** (n + 1)}`), bg("power-not-brought-down", "procedural", DERIV, `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, `${xpow(n)}/${a ** (n + 1)}`)],
-    distractors: ([kind, n, a]) => (kind === 2 ? [`x/${a + 1}`, `(x + ${n + 1})/${a}`, `${a}x`] : kind === 0 ? [`x${sup(n + 1)}/${a ** n}`, `x${sup(n)}/${a ** (n + 1)}`] : [`${n + 1}${xpow(n)}/${a ** n}`, `${xpow(n + 1)}/${a ** (n + 1)}`]),
+          ? [bg("density-given", "conceptual", CRV, "The density itself was given; F(x) is the area under f from 0 to x, found by integrating.", pdfText(n, a)), bg("power-not-divided", "procedural", INTG, `${xpow(n)} was integrated to ${xpow(n + 1)} without dividing by ${n + 1}.`, mono(n + 1, n + 1, a ** (n + 1)))]
+          : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", mono(1, n + 2, (n + 2) * a ** (n + 1))), bg("power-not-brought-down", "procedural", DERIV, `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, mono(1, n, a ** (n + 1)))],
+    distractors: ([kind, n, a]) => (kind === 2 ? [`x/${a + 1}`, `(x + ${n + 1})/${a}`, `${a}x`] : kind === 0 ? [mono(1, n + 1, a ** n), mono(1, n, a ** (n + 1))] : [mono(n + 1, n, a ** n), mono(1, n + 1, a ** (n + 1))]),
     variants: () => [],
     explain: (s) => (s.id === "integrate" ? `F(x) = ∫ ${s.inputs[0]} dt from the left end to x = ${s.value}` : `f(x) = F′(x) = ${s.value}`),
     domain: [[0, 2], [0, 5], [1, 9]],
@@ -3773,7 +3784,7 @@ export const B20: Def[] = [
       const [kind, u, c, d] = p;
       const right = cexpAns(p);
       const pr = (x: number) => (near(x, right, 1e-12) ? null : x);
-      if (kind === 0) return [bg("density-mean", "conceptual", CRV, "f was integrated without the factor x; E(X) = ∫ x f(x) dx (the plain integral of f is 1).", pr(1)), bg("midpoint", "conceptual", CRV, `The middle of the interval (${c}/2) was given; the mean is pulled towards where the density is larger.`, pr(c / 2))].filter((b) => b.predict !== null);
+      if (kind === 0) return [bg("density-mean", "conceptual", CRV, "f was integrated without the factor x; E(X) = ∫ x f(x) dx (the plain integral of f is 1).", pr(1)), bg("midpoint", "conceptual", CRV, `The middle of the interval (the midpoint ${F(c / 2)}) was given; the mean is pulled towards where the density is larger.`, pr(c / 2))].filter((b) => b.predict !== null);
       if (kind === 1) return [bg("ex2-as-variance", "procedural", CRV, "E(X²) was given; Var(X) = E(X²) − [E(X)]².", pr(((u + 1) * c * c) / (u + 3))), bg("mean-not-squared", "procedural", CRV, "E(X) was taken away instead of [E(X)]².", pr(((u + 1) * c * c) / (u + 3) - ((u + 1) * c) / (u + 2)))].filter((b) => b.predict !== null);
       if (kind === 2) return [bg("d-left-out", "procedural", RV, `The constant ${neg(d)} was left out; E(cX + d) = cE(X) + d.`, pr(c * u))].filter((b) => b.predict !== null);
       return [bg("c-not-squared", "procedural", RV, "c was not squared; Var(cX + d) = c²Var(X).", pr(c * u)), bg("d-added", "conceptual", RV, `${neg(d)} was added; adding a constant shifts every value equally and does not change the spread.`, pr(c * c * u + d))].filter((b) => b.predict !== null);
@@ -3784,6 +3795,8 @@ export const B20: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "integral" ? `E(X) = ∫₀^${s.inputs[1]} x f(x) dx = ${F(Number(s.value))}` : s.id === "ex2" ? `E(X²) = ∫ x² f(x) dx = ${F(Number(s.value))}` : s.id === "var" ? `Var(X) = E(X²) − [E(X)]² = ${F(Number(s.value))}` : s.id === "property" ? `Use ${s.value}` : `= ${F(Number(s.value))}`),
+    // a variance is never negative; a mean of X on [0, c] lies in [0, c]
+    range: ([kind, , c]) => (kind === 1 || kind === 3 ? [0, Infinity] : kind === 0 ? [0, c] : null),
     domain: [[0, 3], [1, 6], [-3, 6], [-5, 5]],
     keep: (p) => cexpOk(p),
     cap: 400,
@@ -4255,6 +4268,8 @@ function invdTrue([f, ask, k, a]: number[], o: ISet): boolean {
   return o.samples.every(reach) && !o.out.some(reach);
 }
 // atinveq
+/** tan⁻¹(1/a), written tan⁻¹ 1 when a = 1. */
+const at1 = (a: number) => (a === 1 ? "tan⁻¹ 1" : `tan⁻¹(1/${a})`);
 function inveqOk([kind, a, b]: number[]): boolean {
   if (kind === 0) {
     const D = (a + b) ** 2 + 4 * a * b;
@@ -4281,26 +4296,37 @@ function pmfOk([kind, n, k]: number[]): boolean {
   if (kind === 3) return n === 0 && k >= 2 && k <= 11;
   if (kind === 4) return n === 0 && k >= 0 && k <= 5;
   if (kind === 5) return n === 0 && k >= 1 && k <= 5;
-  return n >= 2 && n <= 4 && k >= 0 && k <= 2;
+  if (kind === 7) return n === 0 && k >= 1 && k <= 6;
+  if (kind === 8) return n === 0 && k >= 1 && k <= 5;
+  if (kind === 9) return n === 0 && k >= 0 && k <= 2;
+  if (kind === 10) return n === 0 && k >= 2 && k <= 12;
+  if (kind === 11) return n === 0 && k >= 0 && k <= 4;
+  return kind === 6 && n >= 2 && n <= 4 && k >= 0 && k <= 2;
 }
 function pmfSay(kind: number, n: number): string {
   if (kind <= 1) return `${n} fair coins are tossed together, and the random variable X is the number of heads.`;
   if (kind === 2 || kind === 5) return "Two fair dice are thrown, and the random variable X is the larger of the two numbers shown (the common number if they are equal).";
-  if (kind === 3) return "Two fair dice are thrown, and the random variable X is the sum of the two numbers shown.";
-  if (kind === 4) return "Two fair dice are thrown, and the random variable X is the difference between the two numbers shown (larger minus smaller).";
+  if (kind === 7 || kind === 8) return "Two fair dice are thrown, and the random variable X is the smaller of the two numbers shown (the common number if they are equal).";
+  if (kind === 9) return "Two fair dice are thrown, and the random variable X is the number of dice that show an even number.";
+  if (kind === 3 || kind === 10) return "Two fair dice are thrown, and the random variable X is the sum of the two numbers shown.";
+  if (kind === 4 || kind === 11) return "Two fair dice are thrown, and the random variable X is the difference between the two numbers shown (larger minus smaller).";
   return `A bag has ${n} red and ${6 - n} blue balls. Two balls are drawn one after the other without replacement, and the random variable X is the number of red balls drawn.`;
 }
-/** P(X = k), or F(k) = P(X ≤ k) for the distribution-function kinds (1, 3, 5), from the counting formulas. */
+/** The distribution-function kinds of atpmf (F(k) = P(X ≤ k)). */
+const PMF_CDF = [1, 3, 5, 8, 11];
+/** P(X = k), or F(k) = P(X ≤ k) for the distribution-function kinds (1, 3, 5, 8, 11), from the counting formulas. */
 function pmfAns([kind, n, k]: number[], pointOnly = false): number {
   const point = (j: number) => {
     if (kind <= 1) return ncr6(n, j) / 2 ** n;
     if (kind === 2 || kind === 5) return j >= 1 && j <= 6 ? (2 * j - 1) / 36 : 0;
-    if (kind === 3) return j >= 2 && j <= 12 ? (6 - Math.abs(j - 7)) / 36 : 0;
-    if (kind === 4) return j === 0 ? 6 / 36 : j >= 1 && j <= 5 ? (2 * (6 - j)) / 36 : 0;
+    if (kind === 7 || kind === 8) return j >= 1 && j <= 6 ? (13 - 2 * j) / 36 : 0;
+    if (kind === 9) return [9, 18, 9][j] / 36 || 0;
+    if (kind === 3 || kind === 10) return j >= 2 && j <= 12 ? (6 - Math.abs(j - 7)) / 36 : 0;
+    if (kind === 4 || kind === 11) return j === 0 ? 6 / 36 : j >= 1 && j <= 5 ? (2 * (6 - j)) / 36 : 0;
     const b = 6 - n;
     return [(b * (b - 1)) / 30, (2 * n * b) / 30, (n * (n - 1)) / 30][j] ?? 0;
   };
-  if (pointOnly || ![1, 3, 5].includes(kind)) return point(k);
+  if (pointOnly || !PMF_CDF.includes(kind)) return point(k);
   let s = 0;
   for (let j = 0; j <= k; j++) s += point(j);
   return s;
@@ -4422,4 +4448,12 @@ function cdfOk([kind, n, a]: number[]): boolean {
   if (kind === 2) return n >= 0 && n <= 5 && a >= 2 && a <= 9;
   return n >= 1 && n <= 4 && a >= 2 && a ** (n + 1) <= 1296;
 }
+/** (c/d)xᵏ in lowest terms, written cxᵏ/d (no "x¹", no unreduced 2x²/4). */
+const mono = (c: number, k: number, d: number) => {
+  const g = gcd(c, d);
+  const [p, q] = [c / g, d / g];
+  return `${p === 1 && k > 0 ? "" : p}${xpow(k)}${q === 1 ? "" : `/${q}`}`;
+};
+/** Ends within two decimal places (shown as a decimal). */
+const dp2 = (x: number) => Number.isFinite(x) && Math.abs(Math.round(x * 100) - x * 100) < 1e-6;
 const cdfUni = (lo: number, w: number) => (lo === 0 ? `x/${w}` : `(x − ${lo})/${w}`);

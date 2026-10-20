@@ -148,6 +148,21 @@ const expData = (c: number, s: number) => {
   return { n, f };
 };
 
+/** The seeds 0 … 59 of experiment c whose question (name and table) differs from every earlier seed's. */
+const expFirstMemo = new Map<number, Set<number>>();
+const expFirst = (c: number) => {
+  if (!expFirstMemo.has(c)) {
+    const seen = new Set<string>();
+    const ok = new Set<number>();
+    for (let s = 0; s <= 59; s++) {
+      const g = `${nm(c + s)}|${JSON.stringify(expData(c, s))}`;
+      if (!seen.has(g)) (seen.add(g), ok.add(s));
+    }
+    expFirstMemo.set(c, ok);
+  }
+  return expFirstMemo.get(c)!;
+};
+
 // ================================================================ two-stage experiments
 const dname = (m: number) => (m === 6 ? "an ordinary die" : `a spinner numbered 1 to ${m}`);
 const pairName = (m: number, n: number) => (m === 6 && n === 6 ? "two ordinary dice" : m === n ? `two spinners, each numbered 1 to ${m}` : `${dname(m)} and ${dname(n)}`);
@@ -542,7 +557,7 @@ export const B11: Def[] = [
       return [
         bug("halved", "conceptual", SQ, `${N} was halved. The square root is the number that multiplied by itself gives ${N}.`, T2(h, h + 1)),
         ...(N >= 100 ? [bug("divided-by-ten", "conceptual", SQ, `${N} was divided by 10. Square to check: ${tenth} × ${tenth} is far more than ${N}.`, T2(tenth, tenth + 1))] : []),
-        bug("next-squares", "procedural", SQ, `The wrong pair of squares was used. Check by squaring: the smaller number squared must be below ${N} and the larger one squared above it.`, [T2(a + 1, a + 2), T2(a - 1, a)]),
+        bug("next-squares", "procedural", SQ, `The wrong pair of squares was used. Check by squaring: the smaller number squared must be below ${N} and the larger one squared above it.`, [T2(a + 1, a + 2), T2(a - 1, a)] as unknown as Bug["predict"]),
       ];
     },
     distractors: ([N]) => {
@@ -719,7 +734,8 @@ export const B11: Def[] = [
     },
     figure: ([c, s]) => ({ type: "table", head: ["Outcome", "Number of times"], rows: EXPC[c].outs.map((o, i) => [o, expData(c, s).f[i]]) }),
     domain: [[0, 2], [0, 59], [0, 5]],
-    keep: ([c, , j]) => j < EXPC[c].outs.length,
+    // distinct@1: a seed whose name and table repeat an earlier seed's would show the same question again
+    keep: ([c, s, j]) => j < EXPC[c].outs.length && expFirst(c).has(s),
     cap: 400,
     difficulty: ([c, s]) => (c === 0 ? 1 : expData(c, s).n === 100 || c === 2 ? 2 : 3),
     word: ([c, s, j]) => {
@@ -1992,7 +2008,7 @@ export const B11: Def[] = [
     explain: (s) => String(s.inputs[0]),
     domain: [[0, 5], [0, 99]],
     difficulty: ([k]) => (k <= 2 ? 1 : k === 3 ? 2 : 3),
-    word: (p) => `Packets are packed ${DSORT_PACK[p[0]]}. Which of these numbers of sweets can be packed exactly that way, with none left over? ${dsortSet(p).opts.join(";  ")}`,
+    word: (p) => `A sweet shop packs its sweets ${DSORT_PACK[p[0]]}. Which of these numbers of sweets can be packed that way with none left over${p[0] === 3 ? ", but could not be packed in packets of 10 with none left over" : ""}? ${dsortSet(p).opts.join(";  ")}`,
     teach: {
       idea: "Because 10 is divisible by 2 and 5, only the ones digit decides divisibility by 2, 5 and 10. Because 100 is divisible by 4 and 1000 by 8, only the last two (for 4) or last three (for 8) digits matter.",
       method: "By 2: ones digit 0, 2, 4, 6 or 8. By 5: ones digit 0 or 5. By 10: ones digit 0. By 4: the number made by the last two digits is divisible by 4. By 8: the last three digits are divisible by 8.",
@@ -2163,7 +2179,7 @@ export const B11: Def[] = [
     domain: [[0, 399]],
     cap: 400,
     difficulty: ([s]) => (s % 2 ? 3 : 2),
-    word: ([s]) => `Four ${s % 2 ? "tiny particles were measured; their sizes in metres are" : "distances in kilometres were found in a science book"}: ${scmpSet(s).opts.map(([a, e]) => `${a} × 10${sup(e)}`).join(";  ")}. Which is the largest?`,
+    word: ([s]) => `${s % 2 ? "The sizes of four tiny particles, in metres, are" : "A science book gives four distances, in kilometres"}: ${scmpSet(s).opts.map(([a, e]) => `${a} × 10${sup(e)}`).join(";  ")}. Which is the largest?`,
     teach: {
       idea: "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always between 1 and 10).",
       method: "Compare the powers of 10 first (for negative powers, −3 is higher than −7). Only when the powers are equal compare the numbers in front.",
@@ -2271,16 +2287,12 @@ export const B11: Def[] = [
     keep: ([, a, b, e, f]) => a % 10 !== 0 && b % 10 !== 0 && e !== 0 && f !== 0,
     cap: 450,
     difficulty: (p) => (scalcAns(p)[2] >= 10 || scalcAns(p)[2] < 1 ? 3 : p[3] < 0 || p[4] < 0 ? 2 : 1),
-    word: (p) => {
-      const [x, y] = scalcOps(p);
-      return p[0] ? `A rectangular sheet of material has an area of ${x} square metres and a length of ${y} metres. What is its breadth, in metres? Give (a, n) for a × 10ⁿ.` : `A rectangular sheet of material is ${x} metres long and ${y} metres wide. What is its area, in square metres? Give (a, n) for a × 10ⁿ.`;
-    },
     teach: {
       idea: "(a × 10ᵐ) × (b × 10ⁿ) = (a × b) × 10ᵐ⁺ⁿ and (a × 10ᵐ) ÷ (b × 10ⁿ) = (a ÷ b) × 10ᵐ⁻ⁿ. Then the front number may need adjusting to lie between 1 and 10.",
       method: "Work out the front numbers, add (or subtract) the powers, then if the front number is 10 or more divide it by 10 and add 1 to the power (if it is less than 1, multiply by 10 and subtract 1).",
       alternatives: [{ id: "example", title: "An example", kind: "procedural", text: ["(4 × 10³) × (5 × 10⁶) = 20 × 10⁹.", "20 is not below 10, so write 2 × 10¹⁰."] }],
     },
-    limits: "Front numbers with one decimal place and powers from 10⁻⁸ to 10¹²; adding numbers in scientific notation is not asked.",
+    limits: "Front numbers with one decimal place and powers from 10⁻⁸ to 10¹²; adding numbers in scientific notation is not asked. No everyday form: no one situation keeps every pair of sizes from 10⁻⁸ to 10¹² physically sensible.",
   },
 
   // ------------------------------------------------------------------ cryptarithms with several letters and with multiplication
@@ -2316,7 +2328,11 @@ export const B11: Def[] = [
       const c = CRYPT[k][i];
       const right = cryptDigit(c, w);
       const slip = cryptNoCarry(c, w, k);
-      return slip !== null && slip !== right ? [bug("carry-forgotten", "procedural", k ? "MATH.number.multi-digit-multiply" : ADDR, "The carry from the column to the right was forgotten. Work column by column from the ones, and add any carried ten.", slip)] : [];
+      const same = cryptSameDigit(c, w, k).filter((d) => d !== right && d !== slip);
+      return [
+        ...(slip !== null && slip !== right ? [bug("carry-forgotten", "procedural", k ? "MATH.number.multi-digit-multiply" : ADDR, "The carry from the column to the right was forgotten. Work column by column from the ones, and add any carried ten.", slip)] : []),
+        ...(same.length ? [bug("letters-share-digit", "conceptual", DIG, "A solution was found in which two different letters stand for the same digit. Different letters must stand for different digits, so that solution does not count.", same.length === 1 ? same[0] : same.slice(0, 3))] : []),
+      ];
     },
     distractors: ([k, i, w]) => {
       const x = cryptDigit(CRYPT[k][i], w);
@@ -2497,7 +2513,7 @@ export const B11: Def[] = [
           ? [bug("one-decreases", "conceptual", PROP, "It was thought that y is in inverse proportion because y goes down as x goes up. In inverse proportion x × y stays the same; check it for each column.", o.indexOf(1))]
           : p[0] === 1
             ? [bug("not-equal-steps", "conceptual", PROP, "Because y does not go down by equal steps, it was called neither. Inverse proportion means x × y stays the same, and here it does.", o.indexOf(2))]
-            : [];
+            : [bug("products-only", "procedural", PROP, "Only x × y was checked; it changes from column to column, so 'neither' was chosen. Check y ÷ x as well: here it is the same in every column, so y is in direct proportion to x.", o.indexOf(2))];
     },
     variants: () => [],
     explain: (s) => String(s.inputs[0]),
@@ -2676,6 +2692,8 @@ export const B11: Def[] = [
     explain: (s) => s.inputs.join("; "),
     domain: [[0, 2], [0, 9], [0, 9]],
     keep: mexOk,
+    // level@1: mutually exclusive and exhaustive events are Class 11 (NCERT 11, Probability)
+    grade: () => 11,
     difficulty: (p) => ([2, 2, 1, 3] as const)[mexTruth(p)],
     teach: {
       idea: "Mutually exclusive events cannot happen together (no common outcome). Exhaustive events between them cover every outcome. Events that are both are complementary: B is 'not A', and P(A) + P(B) = 1.",
@@ -2773,7 +2791,7 @@ const DSORT_SLIP = [
   "Only the ones digit was checked (it is even). For 4, the number formed by the last two digits must be divisible by 4.",
   "Only the last two digits were checked. For 8, the number formed by the last three digits must be divisible by 8.",
 ];
-const DSORT_PACK = ["in pairs", "in fives", "in tens", "in fives, and a number that could also be packed exactly in tens is not wanted", "in fours", "in eights"];
+const DSORT_PACK = ["in pairs", "in packets of 5", "in packets of 10", "in packets of 5", "in packets of 4", "in packets of 8"];
 function dsortSet([k, s]: number[]) {
   const r = rng(97, k, s);
   const L = k === 5 ? 4 + (s % 2) : 3 + (s % 3);
@@ -2865,6 +2883,9 @@ const MAG: { q: (x: number) => string; v: (x: number) => number; miss: (x: numbe
 const magN = (c: number, x: number) => String(MAG[c].v(x)).length - 1;
 function magOk([c, x, m, d]: number[]) {
   if (c < 0 || c > 5 || x < MAG[c].lo || x > MAG[c].hi) return false;
+  // a value of 9.5 × 10ⁿ or more is nearer 10ⁿ⁺¹: its order of magnitude would be ambiguous, so it is left out
+  const v = String(MAG[c].v(x));
+  if (v.length >= 2 && Number(v.slice(0, 2)) >= 95) return false;
   return m === 0 ? d === 0 : m === 1 && d >= -3 && d <= 3 && magN(c, x) + d >= 1;
 }
 
@@ -2915,6 +2936,28 @@ function cryptOk([k, i, w]: number[]) {
 }
 const c_has = (c: Crypt, w: number) => c.p.includes("ABCDEFG"[w]);
 /** The digit a letter would get if the carry into its column were forgotten (null when the slip does not apply). */
+/** The digits letter w gets in solutions that keep each letter to one digit but let two different letters share a
+ * digit (the slip of forgetting that different letters are different digits); no number starts with 0. */
+function cryptSameDigit(c: Crypt, w: number, k: number): number[] {
+  const at = c.p.indexOf("ABCDEFG"[w]);
+  const out = new Set<number>();
+  if (at < 0) return [];
+  for (let a = 10; a <= 99; a++)
+    for (let b = k ? 2 : 10; b <= (k ? 9 : 99); b++) {
+      const t = `${a}${k ? "*" : "+"}${b}=${k ? a * b : a + b}`;
+      if (t.length !== c.p.length) continue;
+      const m = new Map<string, string>();
+      let ok = true;
+      for (let i = 0; i < t.length && ok; i++) {
+        const L = c.p[i];
+        if (!/[A-J]/.test(L)) ok = L === t[i];
+        else if (m.has(L)) ok = m.get(L) === t[i];
+        else m.set(L, t[i]);
+      }
+      if (ok) out.add(Number(t[at]));
+    }
+  return [...out].sort((x, y) => x - y);
+}
 function cryptNoCarry(c: Crypt, w: number, k: number): number | null {
   const at = c.p.indexOf("ABCDEFG"[w]);
   const eq = c.s.indexOf("=");

@@ -60,7 +60,7 @@ const name = (k: number) => NAMES[((k % NAMES.length) + NAMES.length) % NAMES.le
 const n_ = (v: number) => (v < 0 ? `−${-v}` : String(v));
 const B = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null, probe?: string): Bug => ({ id, kind, competency, says, predict, ...(probe ? { probe } : {}) });
 const st = (id: string, op: string, competency: string, inputs: (number | string)[], value: Value): Step => ({ id, op, competency, inputs, value });
-const fact = (n: number) => (n <= 1 ? 1 : n * fact(n - 1));
+const fact = (n: number): number => (n <= 1 ? 1 : n * fact(n - 1));
 
 // exact rationals (small numbers only)
 type R = [number, number];
@@ -428,7 +428,8 @@ function ceqText([f, x, y, s]: number[]) {
   if (f === 1) return `If (x + y, x − y) = (${n_(x + y)}, ${n_(x - y)}), find x and y. Write the answer as (x, y).`;
   return `If (2x + y, x − 3y) = (${n_(2 * x + y)}, ${n_(x - 3 * y)}), find x and y. Write the answer as (x, y).`;
 }
-const ceqOk = (p: number[]) => inD(p, D_CEQ) && (p[0] === 0 || p[3] === 0) && !(p[1] === 0 && p[2] === 0);
+// f 0: w/k is never a whole number, so the prompt never shows "y + 2/2"
+const ceqOk = (p: number[]) => inD(p, D_CEQ) && (p[0] === 0 || p[3] === 0) && !(p[1] === 0 && p[2] === 0) && (p[0] !== 0 || ceqW(p[3]) % ceqK(p[3]) !== 0);
 
 // ---------------------------------------------------------------- constructing a matrix from a rule
 const MRULES: { text: string; f: (i: number, j: number) => R }[] = [
@@ -528,14 +529,15 @@ function mmodText(p: number[], w = false) {
   const [a, b, c, d, e, f, ctx, s] = p;
   const R = MMR[s];
   const C = (ctx + (w ? 1 : 0)) % 2;
-  if (C === 0) return `Two furniture workshops in Madurai make chairs, tables and cupboards. Each day workshop P makes ${a} chairs, ${b} tables and ${c} cupboards, and workshop Q makes ${d} chairs, ${e} tables and ${f} cupboards. A chair needs ${R[0][0]} units of wood and ${R[0][1]} hours of labour, a table ${R[1][0]} units and ${R[1][1]} hours, and a cupboard ${R[2][0]} units and ${R[2][1]} hours. Write the daily production as a 2 × 3 matrix and the needs per item as a 3 × 2 matrix, and multiply them to find, for each workshop, the total wood and the total labour each day. Write the product as [[a, b], [c, d]] (workshop P first; wood, then labour).`;
-  return `Two school canteens in Coimbatore make idlis, dosas and vadas. On a day canteen P makes ${a} dozen idlis, ${b} dozen dosas and ${c} dozen vadas, and canteen Q makes ${d}, ${e} and ${f} dozen. One dozen idlis needs ${R[0][0]} cups of batter and ${R[0][1]} spoons of oil, a dozen dosas ${R[1][0]} cups and ${R[1][1]} spoons, and a dozen vadas ${R[2][0]} cups and ${R[2][1]} spoons. Using a matrix product of the 2 × 3 production matrix and the 3 × 2 needs matrix, find for each canteen the total batter and the total oil. Write the product as [[a, b], [c, d]] (canteen P first; batter, then oil).`;
+  const n = (k: number, one: string, many: string) => `${k} ${k === 1 ? one : many}`;
+  if (C === 0) return `Two furniture workshops in Madurai make chairs, tables and cupboards. Each day workshop P makes ${n(a, "chair", "chairs")}, ${n(b, "table", "tables")} and ${n(c, "cupboard", "cupboards")}, and workshop Q makes ${n(d, "chair", "chairs")}, ${n(e, "table", "tables")} and ${n(f, "cupboard", "cupboards")}. A chair needs ${n(R[0][0], "unit", "units")} of wood and ${n(R[0][1], "hour", "hours")} of labour, a table ${n(R[1][0], "unit", "units")} and ${n(R[1][1], "hour", "hours")}, and a cupboard ${n(R[2][0], "unit", "units")} and ${n(R[2][1], "hour", "hours")}. Write the daily production as a 2 × 3 matrix and the needs per item as a 3 × 2 matrix, and multiply them to find, for each workshop, the total wood and the total labour each day. Write the product as [[a, b], [c, d]] (workshop P first; wood, then labour).`;
+  return `Two school canteens in Coimbatore make idlis, dosas and vadas. On a day canteen P makes ${a} dozen idlis, ${b} dozen dosas and ${c} dozen vadas, and canteen Q makes ${d}, ${e} and ${f} dozen. One dozen idlis needs ${n(R[0][0], "cup", "cups")} of batter and ${n(R[0][1], "spoon", "spoons")} of oil, a dozen dosas ${n(R[1][0], "cup", "cups")} and ${n(R[1][1], "spoon", "spoons")}, and a dozen vadas ${n(R[2][0], "cup", "cups")} and ${n(R[2][1], "spoon", "spoons")}. Using a matrix product of the 2 × 3 production matrix and the 3 × 2 needs matrix, find for each canteen the total batter and the total oil. Write the product as [[a, b], [c, d]] (canteen P first; batter, then oil).`;
 }
 
 // ---------------------------------------------------------------- systems in words, three methods
 const SYSCTX = [
-  { who: ["Anu", "Ravi", "Meena"], verb: "buys", items: ["pens", "notebooks", "erasers"], one: ["pen", "notebook", "eraser"], unit: "₹", what: "the price of one pen, one notebook and one eraser, in rupees" },
-  { who: ["Monday", "Tuesday", "Wednesday"], verb: "sold", items: ["adult tickets", "child tickets", "senior-citizen tickets"], one: ["adult ticket", "child ticket", "senior-citizen ticket"], unit: "₹", what: "the price of an adult, a child and a senior-citizen ticket, in rupees" },
+  { who: ["Anu", "Ravi", "Meena"], verb: "buys", items: ["notebooks", "pens", "erasers"], one: ["notebook", "pen", "eraser"], unit: "₹", what: "the price of one notebook, one pen and one eraser, in rupees" },
+  { who: ["Monday", "Tuesday", "Wednesday"], verb: "sold", items: ["adult tickets", "senior-citizen tickets", "child tickets"], one: ["adult ticket", "senior-citizen ticket", "child ticket"], unit: "₹", what: "the price of an adult, a senior-citizen and a child ticket, in rupees" },
   { who: ["Farm P", "Farm Q", "Farm R"], verb: "used", items: ["bags of fertiliser A", "bags of fertiliser B", "bags of fertiliser C"], one: ["bag of fertiliser A", "bag of fertiliser B", "bag of fertiliser C"], unit: "kg of nitrogen", what: "the kilograms of nitrogen in one bag of A, of B and of C" },
 ];
 function sysA(s: number): number[][] {
@@ -563,7 +565,9 @@ function syswText([x, y, z, t, m, s]: number[]): string {
   const lead = t === 0 ? "At a stationery shop in Erode," : t === 1 ? "For a Tamil drama in Thanjavur," : "In a farm survey near Namakkal,";
   return `${lead} ${lines.join("; ")}. Form the equations and solve them by ${METH[m]} to find ${C.what}. Write the answer as (x, y, z).`;
 }
-const syswOk = (p: number[]) => inD(p, D_SYSW);
+// sensible prices in every situation (the everyday form uses the next one): x > y > z, a pen (y) at least ₹5, an eraser
+// (z) at least ₹2; senior-citizen tickets (y) cost less than adult ones and more than child ones
+const syswOk = (p: number[]) => inD(p, D_SYSW) && p[0] > p[1] && p[1] > p[2] && p[1] >= 5 && p[2] >= 2;
 
 // ---------------------------------------------------------------- feasible, infeasible, unbounded
 /** [k, a, b, m, d, P, Q]: c = a·b·m. k 0 infeasible (ax + by ≤ c and x ≥ c/a + d); 1 unbounded max (ax + by ≥ c); 2 bounded max (ax + by ≤ c); 3 min over ax + by ≥ c. */
@@ -634,6 +638,14 @@ function sappExpr([q, ni, k, m]: number[]): string {
   return `log ${decS(1 + (3 * k) / 100)}`;
 }
 function sappText(p: number[], w = false) {
+  return sappText0(p, w).replace(/Give the decimal\.|, as a decimal\./, (t) => `${t.startsWith(",") ? ". " : ""}${sappPlaces(p)}`);
+}
+/** The three-term sum is exact; say how many decimal places it has so no rounding is expected. */
+function sappPlaces(p: number[]) {
+  const d = (decS(sappAns(p)).split(".")[1] ?? "").length;
+  return `Give the sum of the three terms exactly, as a decimal (it has ${d} decimal place${d === 1 ? "" : "s"}; do not round).`;
+}
+function sappText0(p: number[], w = false) {
   const [q, , , m] = p;
   const e = sappExpr(p);
   if (!w) return q === 0 ? `Use the first three terms of the binomial series to find an approximate value of ${e}${m ? ` (write it as 10(1 ${p[2] < 0 ? "−" : "+"} ${decS(Math.abs(p[2]) / 100)})^(1/2))` : ""}. Give the decimal.` : q === 1 ? `Use the first three terms of the exponential series to find an approximate value of ${e}. Give the decimal.` : `Use the first three terms of the logarithmic series to find an approximate value of ${e} (log is the natural logarithm). Give the decimal.`;
@@ -767,14 +779,20 @@ const redAns = ([q, a, b]: number[]) => (q === 0 ? [a * a, b * b] : q === 3 ? [a
 const redF = ([q, a, b]: number[]) => (x: number) => (q === 0 ? x - (a + b) * Math.sqrt(x) + a * b : q === 1 ? 4 ** x - (2 ** a + 2 ** b) * 2 ** x + 2 ** (a + b) : q === 2 ? 9 ** x - (3 ** a + 3 ** b) * 3 ** x + 3 ** (a + b) : x + (b - a) * Math.sqrt(x) - a * b);
 
 // ---------------------------------------------------------------- volume problems giving cubics
+/** apgj3: the inverse with the sign of its last non-zero entry changed (one slip in the working). */
+function gjSlip(inv: number[][]): number[][] {
+  const out = inv.map((r) => [...r]);
+  for (let k = 8; k >= 0; k--) if (out[Math.floor(k / 3)][k % 3] !== 0) return (out[Math.floor(k / 3)][k % 3] *= -1), out;
+  return out;
+}
 const D_VOLG: [number, number][] = [[0, 1], [2, 20], [-3, 6]];
 const volgOk = (p: number[]) => inD(p, D_VOLG) && p[2] !== 0 && (p[0] === 0 ? p[1] + p[2] >= 1 : p[2] >= 1);
 const volgV = ([q, x, a]: number[]) => (q === 0 ? x * x * (x + a) : 2 * x * x * (x + a));
 function volgText(p: number[], w = false) {
   const [q, x, a] = p;
   const V = volgV(p);
-  if (q === 0) return w ? `A gift box has a square base of side x cm, and its height is ${Math.abs(a)} cm ${a > 0 ? "more" : "less"} than the side of the base. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find x, in cm.` : `A water tank in the shape of a cuboid has a square base of side x m and a height of (x ${a < 0 ? "−" : "+"} ${Math.abs(a)}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.`;
-  return w ? `A wooden chest has height x cm; its length is twice its height, and its width is ${a} cm more than its height. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find the height x, in cm.` : `A cuboid-shaped storage bin has height x m, length 2x m and width (x + ${a}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.`;
+  if (q === 0) return w ? `A gift box has a square base of side x cm, and its height is ${Math.abs(a)} cm ${a > 0 ? "more" : "less"} than the side of the base. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find x, in cm.` : x <= 4 ? `A water tank in the shape of a cuboid has a square base of side x m and a height of (x ${a < 0 ? "−" : "+"} ${Math.abs(a)}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.` : `A cardboard carton in the shape of a cuboid has a square base of side x cm and a height of (x ${a < 0 ? "−" : "+"} ${Math.abs(a)}) cm. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find x, in cm.`;
+  return w ? `A wooden chest has height x cm; its length is twice its height, and its width is ${a} cm more than its height. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find the height x, in cm.` : x <= 4 ? `A cuboid-shaped storage room has height x m, length 2x m and width (x + ${a}) m. Its volume is ${V} m³. Form a cubic equation in x and solve it to find x, in metres.` : `A cuboid-shaped drawer has height x cm, length 2x cm and width (x + ${a}) cm. Its volume is ${V} cm³. Form a cubic equation in x and solve it to find x, in cm.`;
 }
 
 // ---------------------------------------------------------------- Vieta with a box
@@ -2186,7 +2204,7 @@ export const B16: Def[] = [
         B("not-divided", "procedural", MSYS, "adj A · B was not divided by |A|; A⁻¹ = adj A / |A|.", Math.abs(D) === 1 ? null : tup(X.map((x) => rmul(x, rr(D))))),
       ];
     },
-    distractors: (p) => [tup([p[10], p[9], p[11]].map((x) => rr(x))), tup([p[9], p[11], p[10]].map((x) => rr(x)))],
+    distractors: (p) => [tup([p[10], p[9], p[11]].map((x) => rr(x))), tup([p[9], p[11], p[10]].map((x) => rr(x))), tup([p[9] + 1, p[10], p[11]].map((x) => rr(x))), tup([p[9], p[10] - 1, p[11]].map((x) => rr(x)))],
     variants: () => [],
     explain: (s) => (s.id === "det" ? `|A| = ${n_(Number(s.value))} (not 0, so A⁻¹ exists)` : s.id === "adj" ? `adj A = (matrix of cofactors)ᵀ = ${s.value}` : `X = (1/|A|) adj A · B: ${s.inputs[0]}, divided by ${n_(Number(s.inputs[1]))}, gives ${s.value}`),
     domain: [[-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-3, 4], [-3, 4], [-3, 4]],
@@ -3052,6 +3070,11 @@ const NEW16: Def[] = [
     difficulty: ([k]) => (k === 0 ? 1 : k === 3 ? 3 : 2),
     word: (p) => {
       const { A, B: Bs, C } = clSets(p);
+      if (Math.min(...A.map((a) => Number(a.replace("−", "-")))) < 1) {
+        // zero or negative numbers: the positions on a number track of a board game, not table numbers
+        const wh = ["(position, player)", "(position, position)", "(player, position)", "(position, player, bonus)"][p[0]];
+        return `In a board game, the squares of a number track are numbered A = ${setS(A)} (squares behind the start have zero or negative numbers)${p[0] === 1 ? "" : `, the players are called B = ${setS(Bs)}`}${p[0] === 3 ? ` and the bonus cards are numbered C = ${setS(C)}` : ""}. The game lists every possible ${wh}${p[0] === 1 ? " pair (for a move from one square to another, including staying put)" : ""}. Which set is this list, the Cartesian product ${["A × B", "A × A", "B × A", "A × B × C"][p[0]]}?`;
+      }
       const what = ["(table number, waiter)", "(table number, table number)", "(waiter, table number)", "(table number, waiter, menu number)"][p[0]];
       return `At a restaurant in Tirunelveli the tables are numbered A = ${setS(A)}${p[0] === 1 ? "" : `, the waiters are called B = ${setS(Bs)}`}${p[0] === 3 ? ` and the menus are numbered C = ${setS(C)}` : ""}. The manager lists every possible ${what}${p[0] === 1 ? " pair (for moving a group from one table to another, including staying put)" : ""}. Which set is this list, the Cartesian product ${["A × B", "A × A", "B × A", "A × B × C"][p[0]]}?`;
     },
@@ -3512,7 +3535,7 @@ const NEW16: Def[] = [
         const x = rr(k, 100);
         const rise = rmul(rdiv(rmul(n, radd(n, rr(1))), rr(2)), rmul(x, x));
         out.push(B("rising-factor", "conceptual", SER, "The x² coefficient was taken as n(n + 1)/2; it is n(n − 1)/2, also for a negative or fractional n.", sum([t[0], t[1], m ? rmul(rise, rr(10)) : rise])));
-        if (m) out.push(B("ten-forgotten", "procedural", SER, `√${100 + k} = 10√(1 ${k < 0 ? "−" : "+"} ${decS(Math.abs(k) / 100)}); the factor 10 was left out.`, ans / 10));
+        if (m) out.push(B("ten-forgotten", "procedural", SER, `√${100 + k} = 10√(1 ${k < 0 ? "−" : "+"} ${decS(Math.abs(k) / 100)}); the factor 10 was left out.`, Math.round((ans / 10) * 1e9) / 1e9));
       }
       if (q === 1) out.push(B("no-factorial", "recall", SER, "The x² term was not divided by 2! = 2; eˣ = 1 + x + x²/2! + …", rv(radd(radd(t[0], t[1]), rmul(t[2], rr(2))))));
       if (q === 2) out.push(B("signs", "recall", SER, "All the terms were added; the logarithmic series alternates: x − x²/2 + x³/3 − …", rv(radd(radd(t[0], rmul(t[1], rr(-1))), t[2]))));
@@ -3716,7 +3739,7 @@ const NEW16: Def[] = [
       return [
         B("read-transposed", "procedural", ADJ, "The right-hand block was read off column by column; A⁻¹ is the right half of [I | A⁻¹] read row by row.", matN(mT(inv))),
         B("left-half-only", "conceptual", RANK, "The row operations were done on A but not on I; the same operations must be applied to the whole row of [A | I].", matN([[1, 0, 0], [0, 1, 0], [0, 0, 1]])),
-        B("sign-slip", "procedural", RANK, "A sign slip in a row operation Rᵢ → Rᵢ − kRⱼ spread through the working; check by multiplying A by your answer.", matN(inv.map((r) => r.map((x) => -x)))),
+        B("sign-slip", "procedural", RANK, "A sign slip in a row operation Rᵢ → Rᵢ − kRⱼ left one entry with the wrong sign; check by multiplying A by your answer.", matN(gjSlip(inv))),
       ].filter((b) => b.predict !== want);
     },
     distractors: ([s]) => [matN(gjA(s))],

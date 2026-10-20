@@ -34,7 +34,7 @@ export function describe(v: V): string {
     case "angle":
       return "An angle (estimate or measure it)";
     case "circle":
-      return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? `, a sector of ${num(v.sector)}°` : ""}`;
+      return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? (v.estimate ? ", with a shaded angle (estimate it from the picture)" : `, a sector of ${num(v.sector)}°`) : ""}`;
     case "grid":
       return `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
     case "triangle":

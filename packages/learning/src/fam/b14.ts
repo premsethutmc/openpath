@@ -2032,7 +2032,7 @@ export const B14: Def[] = [
     bugs: ([t, m]) => {
       const opts = idsOptions([t, m]);
       return [
-        { id: "identity-slip", kind: "recall", competency: IDN, says: IDS[t][5], predict: opts.indexOf(scaleExpr(m, IDS[t][4])) },
+        { id: "identity-slip", kind: "recall", competency: IDN, says: IDS[t][5], predict: opts.indexOf(scaleExpr(m, IDS[t][4])) } as Bug,
         ...(m > 1 ? [{ id: "factor-dropped", kind: "procedural", competency: IDN, says: `The factor ${m} in front was lost while simplifying; it multiplies the whole result.`, predict: opts.indexOf(IDS[t][2]) } as Bug] : []),
       ].filter((b) => (b.predict as number) >= 0);
     },
@@ -2282,7 +2282,7 @@ export const B14: Def[] = [
       const { n1, m1, n2, m2 } = avgavOf(p);
       const t = (n1 * m1 + n2 * m2) / (n1 + n2);
       const ans = n1 === n2 ? 0 : t > (m1 + m2) / 2 ? 1 : 2;
-      return { steps: [step("true-mean", "divide", WM, [n1 * m1 + n2 * m2, n1 + n2], dv(t)), step("compare", "compare", WM, [dv((m1 + m2) / 2)], ans)], answer: ans };
+      return { steps: [step("true-mean", "divide", WM, [n1 * m1 + n2 * m2, n1 + n2], dv(t)), step("compare", "compare", WM, [dv((m1 + m2) / 2) as string | number], ans)], answer: ans };
     },
     // independent: list every student's mark (each section at its mean), average the list, and compare
     validate: (p, v) => {
@@ -2621,6 +2621,8 @@ export const B14: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "check" ? `${s.inputs[0]}: ${s.value}` : `So the valid one is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 299]],
+    // level@1: the axiomatic approach to probability is Grade 11 (NCERT Class 11, Ch. 14)
+    grade: () => 11,
     difficulty: (p) => (axiomOpts(p[0])[0].den <= 8 ? 2 : 3),
     teach: {
       idea: "An assignment of probabilities to the outcomes of a finite sample space is valid when every value is at least 0 and at most 1 and the values add up to exactly 1 (the axioms).",
@@ -2715,14 +2717,14 @@ export const B14: Def[] = [
     prompt: ([f, d, m6, k]) => {
       const A = `${d}°${6 * m6 + k}′`;
       return f === 3
-        ? `A ladder ${4 + (d % 5)} m long leans against a wall and makes an angle of ${A} with the ground. Using the table of natural sines in the picture (with its mean differences), find how high up the wall the ladder reaches, in metres.`
+        ? `A ladder ${4 + (d % 5)} m long leans against a wall and makes an angle of ${A} with the ground. Using the table of natural sines in the picture (with its mean differences), find how high up the wall the ladder reaches, in metres, to 2 decimal places.`
         : `Using the table of natural ${["sines", "cosines", "tangents"][f]} in the picture (with its mean differences), find ${["sin", "cos", "tan"][f]} ${A}.`;
     },
     figure: (p) => tableFig(p),
     solve: (p) => {
       const t = tableRead(p);
       const [f, d] = p;
-      return { steps: [step("column", "read", TR, [`${d}°${6 * p[2]}′`], t.base.toFixed(4)), step("mean-difference", f === 1 ? "subtract" : "add", TR, [p[3], t.md], t.value.toFixed(4)), ...(f === 3 ? [step("height", "multiply", HD, [4 + (d % 5), t.value.toFixed(4)], dv4(t.answer))] : [])], answer: dv4(t.answer) };
+      return { steps: [step("column", "read", TR, [`${d}°${6 * p[2]}′`], t.base.toFixed(4)), step("mean-difference", f === 1 ? "subtract" : "add", TR, [p[3], t.md], t.value.toFixed(4)), ...(f === 3 ? [step("height", "multiply", HD, [4 + (d % 5), t.value.toFixed(4)], dvAns(f, t.answer))] : [])], answer: dvAns(f, t.answer) };
     },
     // independent: the true value of the ratio from Math.sin / Math.cos / Math.tan, which a 4-figure table matches to
     // about one unit in the last place
@@ -2730,13 +2732,15 @@ export const B14: Def[] = [
       const [f, d, m6, k] = p;
       const ang = rad(d + (6 * m6 + k) / 60);
       const exact = [Math.sin, Math.cos, Math.tan, Math.sin][f](ang) * (f === 3 ? 4 + (d % 5) : 1);
-      return Math.abs(nv(v) - exact) <= 1.5e-4 * (f === 3 ? 4 + (d % 5) : 1);
+      // the ladder: the true height rounded to 2 decimal places
+      if (f === 3) return Math.abs(nv(v) * 100 - Math.round(exact * 100)) < 1e-6;
+      return Math.abs(nv(v) - exact) <= 1.5e-4;
     },
     bugs: (p) => tableBugs(p),
     distractors: (p) => {
       const t = tableRead(p);
       const L = p[0] === 3 ? 4 + (p[1] % 5) : 1;
-      return [t.base + (p[0] === 1 ? -1 : 1) * 0.001 * 3, t.next, t.base + 0.01].map((x) => dv4(x * L)).filter((x) => x !== dv4(t.answer));
+      return [t.base + (p[0] === 1 ? -1 : 1) * 0.001 * 3, t.next, t.base + 0.01].map((x) => dvAns(p[0], x * L)).filter((x) => x !== dvAns(p[0], t.answer));
     },
     variants: () => [],
     explain: (s) => (s.id === "column" ? `In the ${String(s.inputs[0]).split("°")[0]}° row, under ${String(s.inputs[0]).split("°")[1]}: ${s.value}` : s.id === "mean-difference" ? `${s.op === "subtract" ? "Subtract" : "Add"} the mean difference for ${s.inputs[0]}′ (${s.inputs[1]} in the last place): ${s.value}` : `Height = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} m`),
@@ -2803,7 +2807,7 @@ export const B14: Def[] = [
       const pr = (x: number) => (x > 1 || x < 0 || close(x, right) ? null : x);
       if (kind === 2) return [{ id: "exactly-one", kind: "conceptual", competency: COMP, says: "'Exactly one girl' was found; 'at least one' also includes two or more girls — easiest as 1 − P(no girl).", predict: pr((ncr(w, 1) * ncr(m, r - 1)) / all) }, { id: "complement-of-one", kind: "procedural", competency: COMP, says: "1 − P(exactly one girl) was found; the complement of 'at least one girl' is 'no girl'.", predict: pr(1 - (ncr(w, 1) * ncr(m, r - 1)) / all) }].filter((b) => b.predict !== null) as Bug[];
       return [
-        { id: "rest-not-chosen", kind: "procedural", competency: PERMC, says: `Only the ways to choose the ${k} ${kind === 0 ? "girls" : "faulty bulbs"} were counted; the other ${r - k} must be chosen from the ${m} ${kind === 0 ? "boys" : "good bulbs"} too, and the two counts multiply.`, predict: pr(ncr(w, k) / all) },
+        { id: "rest-not-chosen", kind: "procedural", competency: PERMC, says: `Only the ways to choose the ${k === 1 ? (kind === 0 ? "one girl" : "one faulty bulb") : `${k} ${kind === 0 ? "girls" : "faulty bulbs"}`} were counted; the other ${r - k === 1 ? "one" : r - k} must be chosen from the ${m} ${kind === 0 ? "boys" : "good bulbs"} too, and the two counts multiply.`, predict: pr(ncr(w, k) / all) },
         { id: "with-replacement", kind: "conceptual", competency: PROB, says: "Each choice was treated as independent with the same chance, as if each one were put back; the selection is made together, so count selections with combinations.", predict: n ** r <= 1000 ? pr(ncr(r, k) * (w / n) ** k * (m / n) ** (r - k)) : null },
       ].filter((b) => b.predict !== null) as Bug[];
     },
@@ -2818,6 +2822,8 @@ export const B14: Def[] = [
     keep: (p) => ncrOk(p),
     range: [0, 1],
     cap: 400,
+    // level@1: probability by counting selections with ⁿCᵣ is Grade 11 (NCERT Class 11, Ch. 14)
+    grade: () => 11,
     difficulty: ([kind, , , r]) => (kind === 2 ? 3 : r === 2 ? 1 : 2),
     teach: {
       idea: "When r things are chosen together at random, every selection is equally likely, so P = (number of favourable selections)/(number of all selections), each counted with ⁿCᵣ.",
@@ -2921,6 +2927,8 @@ const compsPhi = (t: number) => ((t * 7) % 60) + 15;
 // antable: four-figure tables generated from the functions themselves
 const r4 = (x: number) => Math.round(x * 1e4) / 1e4;
 const dv4 = (x: number): Value => String(r4(x));
+/** The answer as asked: the ladder's height to 2 decimal places, a table value to 4. */
+const dvAns = (f: number, x: number): string => (f === 3 ? String(Math.round(x * 100) / 100) : String(r4(x)));
 const tfun = (f: number, d: number, min: number) => [Math.sin, Math.cos, Math.tan][f === 3 ? 0 : f](rad(d + min / 60));
 /** The mean difference for k minutes in the row of d°, in units of the 4th decimal place (from the slope mid-row). */
 const mdOf = (f: number, d: number, k: number) => Math.round((Math.abs(tfun(f, d, 36) - tfun(f, d, 24)) / 12) * k * 1e4);
@@ -2948,11 +2956,12 @@ function tableBugsAll(p: number[]) {
   ];
 }
 function tableBugs(p: number[]): Bug[] {
-  const L = tableRead(p).L;
+  const t = tableRead(p);
+  const L = t.L;
   const ex = tableExact(p);
   return tableBugsAll(p)
-    .filter((b) => Math.abs(b.value - ex) > 2e-4 * L)
-    .map((b) => ({ id: b.id, kind: b.kind as Bug["kind"], competency: b.competency, says: b.says, predict: dv4(b.value) }));
+    .filter((b) => Math.abs(b.value - ex) > 2e-4 * L && (p[0] !== 3 || dvAns(3, b.value) !== dvAns(3, t.answer)))
+    .map((b) => ({ id: b.id, kind: b.kind as Bug["kind"], competency: b.competency, says: b.says, predict: dvAns(p[0], b.value) }));
 }
 function tableOk(p: number[]): boolean {
   const [f, d, m6, k] = p;
@@ -2960,7 +2969,10 @@ function tableOk(p: number[]): boolean {
   const [lo, hi] = f === 1 ? [30, 79] : f === 2 ? [10, 44] : [10, 59];
   if (d < lo || d > hi) return false;
   const t = tableRead(p);
-  return t.md >= 4 && Math.abs(t.answer - tableExact(p)) <= 1.2e-4 * t.L && tableBugs(p).length >= 1;
+  // the ladder: the table's height and the true height round to the same 2 decimal places, away from a rounding edge
+  const ex = tableExact(p);
+  const edge = f !== 3 || (Math.abs(((ex * 100) % 1) - 0.5) > 0.15 && dvAns(3, t.answer) === dvAns(3, ex));
+  return t.md >= 4 && Math.abs(t.answer - ex) <= 1.2e-4 * t.L && edge && tableBugs(p).length >= 1;
 }
 function tableFig([f, d]: number[]) {
   const row = (D: number) => [`${D}°`, ...[...Array(10).keys()].map((j) => r4(tfun(f, D, 6 * j)).toFixed(4)), ...[1, 2, 3, 4, 5].map((k) => String(mdOf(f, D, k)))];

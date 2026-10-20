@@ -6,7 +6,7 @@
  * geometric, arithmetico-geometric and harmonic progressions, logarithms, and quadratics over the complex numbers.
  * Written by OpenPath; CC0.
  */
-import type { Bug, Def, Step, Value } from "../family-kit";
+import type { Bug, Def, Step, Value, Visual } from "../family-kit";
 import { fmt, gcd, near, sup, xp } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -1361,7 +1361,7 @@ export const B15: Def[] = [
     }),
     // independent: n!/(n − r)! from factorials (exact, in big integers)
     validate: ([n, r], v) => {
-      const F = (k: number) => (k <= 1 ? 1n : BigInt(k) * F(k - 1));
+      const F = (k: number): bigint => (k <= 1 ? 1n : BigInt(k) * F(k - 1));
       return typeof v === "number" && Number.isInteger(v) && BigInt(v) === F(n) / F(n - r);
     },
     bugs: ([n, r]) => [
@@ -2836,11 +2836,13 @@ const pasOk = (p: number[]) => {
   if (q === 1) return n <= 10 && r >= 1 && r <= n - 1;
   return r === 0;
 };
+/** aⁿ⁻ʳbʳ as written: a power 1 is not shown (ab³, a³b). */
+const abPow = (n: number, r: number) => `a${n - r === 1 ? "" : sup(n - r)}b${r === 1 ? "" : sup(r)}`;
 const pasRow = (n: number) => Array.from({ length: n + 1 }, (_, i) => choose(n, i));
 function pasText([q, n, r]: number[]) {
   const row = pasRow(n).join(", ");
   if (q === 0) return `Row ${n} of Pascal's triangle is ${row}. Build the next row, row ${n + 1}, by adding neighbours. What is its entry in position ${r} (counting the first 1 as position 0)?`;
-  if (q === 1) return `Row ${n} of Pascal's triangle is ${row}. Use it to find the coefficient of a${sup(n - r)}b${r === 1 ? "" : sup(r)} in the expansion of (a + b)${sup(n)}.`;
+  if (q === 1) return `Row ${n} of Pascal's triangle is ${row}. Use it to find the coefficient of ${abPow(n, r)} in the expansion of (a + b)${sup(n)}.`;
   return `What is the sum of all the entries in row ${n} of Pascal's triangle (row 0 is the single 1 at the top)?`;
 }
 const pasAns = ([q, n, r]: number[]) => (q === 0 ? choose(n + 1, r) : q === 1 ? choose(n, r) : 2 ** n);
@@ -2861,6 +2863,7 @@ const dec4 = (v: number) => String(Math.round(v * 10000) / 10000);
 function bappText([q, k, a, n]: number[], w = false) {
   if (q === 0) {
     const B = bappBase([q, k, a]);
+    if (w && String(B ** n).length <= 8) return `In a mental-arithmetic quiz, ${nm(B + n)} must find ${B}${sup(n)} exactly without a calculator. Write ${B} = ${10 ** k} ${a < 0 ? "−" : "+"} ${Math.abs(a)} and use the binomial theorem to find ${B}${sup(n)} exactly.`;
     return w ? `${nm(B + n)}'s calculator shows only 8 digits, too few for the exact value of ${B}${sup(n)} that a puzzle asks for. Write ${B} = ${10 ** k} ${a < 0 ? "−" : "+"} ${Math.abs(a)} and use the binomial theorem to find ${B}${sup(n)} exactly.` : `Use the binomial theorem to evaluate ${B}${sup(n)} exactly, writing ${B} = ${10 ** k} ${a < 0 ? "−" : "+"} ${Math.abs(a)}.`;
   }
   const base = dec4(1 + a / 100);
@@ -2919,8 +2922,14 @@ const gpgrOk = (p: number[]) => {
   const v = gpgrVal(p);
   return q === 0 ? Number.isInteger(Math.round(v * 1e6) / 1e6) && Math.abs(v - Math.round(v)) < 1e-9 : Math.abs(v * 100 - Math.round(v * 100)) < 1e-6;
 };
+/** A whole number with Indian digit grouping: 1,00,000 and 50,000. */
+function ig(x: number): string {
+  const t = String(Math.abs(x));
+  const head = t.slice(0, -3).replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+  return (x < 0 ? "−" : "") + (t.length > 3 ? `${head},${t.slice(-3)}` : t);
+}
 function gpgrText([q, pi, ri, n]: number[], w = false) {
-  const P = GPP[q][pi];
+  const P = ig(GPP[q][pi]);
   const r = GPRATE[ri];
   const yrs = `${n} year${n === 1 ? "" : "s"}`;
   if (q === 0) return w ? `A forest in the Western Ghats has ${P} trees. Thanks to a planting drive the number of trees increases by ${r}% every year. The numbers of trees at the start of each year form a geometric progression. How many trees will there be after ${yrs}?` : `The population of a town is ${P}. It increases by ${r}% every year, so the populations at the start of each year form a geometric progression. What will the population be after ${yrs}?`;
@@ -3012,15 +3021,35 @@ function dkrAns([f, a, b]: number[], strict?: boolean, flip = false): string {
   const s = strict ?? !real;
   if (f % 2 === 0) {
     const e = (b * b) / (4 * a);
-    return real ? ivs([[null, false, e, !s]]) : ivs([[e, !s, null, false]]);
+    return real ? kIneq([[null, false, e, !s]]) : kIneq([[e, !s, null, false]]);
   }
   const m = 2 * Math.sqrt(a * b);
-  return real ? ivs([[null, false, -m, !s], [m, !s, null, false]]) : ivs([[-m, !s, m, !s]]);
+  return real ? kIneq([[null, false, -m, !s], [m, !s, null, false]]) : kIneq([[-m, !s, m, !s]]);
+}
+/** aodkr: a set of values of k written with inequalities, as Grade 10 boards write it ("k ≤ 81/4", "−28 < k < 28",
+ * "k ≤ −28 or k ≥ 28"). */
+const kIneq = (ps: Piece[]) =>
+  ps.map(([lo, lc, hi, hc]) => (lo === null && hi === null ? "all real numbers" : lo === null ? `k ${hc ? "≤" : "<"} ${fr(hi as number)}` : hi === null ? `k ${lc ? "≥" : ">"} ${fr(lo)}` : `${fr(lo)} ${lc ? "≤" : "<"} k ${hc ? "≤" : "<"} ${fr(hi)}`)).join(" or ");
+/** The interval notation of such an inequality answer (for the independent check); "" when it cannot be read. */
+function kToIv(v: Value): string {
+  if (typeof v !== "string") return "";
+  const out: string[] = [];
+  for (const part of v.split(" or ").map((t) => t.trim())) {
+    if (part === "all real numbers") out.push("(−∞, ∞)");
+    else {
+      const one = part.match(/^k ([≤<≥>]) (\S+)$/);
+      const two = part.match(/^(\S+) ([≤<]) k ([≤<]) (\S+)$/);
+      if (one) out.push(one[1] === "≤" || one[1] === "<" ? `(−∞, ${one[2]}${one[1] === "≤" ? "]" : ")"}` : `${one[1] === "≥" ? "[" : "("}${one[2]}, ∞)`);
+      else if (two) out.push(`${two[2] === "≤" ? "[" : "("}${two[1]}, ${two[4]}${two[3] === "≤" ? "]" : ")"}`);
+      else return "";
+    }
+  }
+  return out.join(" ∪ ");
 }
 function dkrText([f, a, b]: number[]) {
   const A = a === 1 ? "" : String(a);
   const eq = f % 2 === 0 ? `${A}x² ${b < 0 ? "−" : "+"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x + k = 0` : `${A}x² + kx + ${b} = 0`;
-  return `Find all the real values of k for which the equation ${eq} has ${f < 2 ? "real roots" : "no real roots"}. Write the answer in interval notation.`;
+  return `Find all the real values of k for which the equation ${eq} has ${f < 2 ? "real roots" : "no real roots"}. Write the answer using inequalities in k (such as k ≤ 5/2, or −3 < k < 3, or k < −3 or k > 3).`;
 }
 
 // ---------------------------------------------------------------- exponential equations and change of base
@@ -3101,7 +3130,7 @@ function nlrPieces([k, a, w, s]: number[], flip = false): Piece[] {
   return [[null, false, a, lc], [a + w, hc, null, false]];
 }
 const nlrAns = (p: number[]) => ivs(nlrPieces(p));
-const nlrFig = (p: number[]) => {
+const nlrFig = (p: number[]): Visual => {
   const [, a, w] = p;
   return { type: "numberline", from: a - 3, to: a + (p[0] === 0 || p[0] === 3 ? w : 0) + 3, intervals: nlrPieces(p).map(([lo, loClosed, hi, hiClosed]) => ({ lo, hi, loClosed, hiClosed })) };
 };
@@ -3149,10 +3178,10 @@ const NEW15: Def[] = [
       const at = (w: SR) => sfOptions(p).indexOf(p[3] === 0 ? srText(w) : braces(srList(w)));
       const out: Bug[] = [];
       if (s.t <= 2) {
-        out.push({ id: "strict-end", kind: "procedural", competency: SETS, says: p[3] === 0 ? `The condition "n < ${s.m}" was taken to include n = ${s.m}; it stops at n = ${s.m - 1}, so it misses the last element.` : `"n ≤ ${s.m}" was read as "n < ${s.m}"; the value n = ${s.m} is included, so the last element ${srList(s)[s.m - 1]} belongs to the set.`, predict: at(w1) });
-        out.push({ id: "count-off", kind: "procedural", competency: SETS, says: `The elements were counted wrongly: the rule gives exactly ${s.m} elements, one for each n from 1 to ${s.m}.`, predict: at(w3) });
+        out.push({ id: "strict-end", kind: "procedural", competency: SETS, says: p[3] === 0 ? `The condition "n < ${s.m}" was taken to include n = ${s.m}; it stops at n = ${s.m - 1}, so it misses the last element.` : p[3] === 1 ? `"n ≤ ${s.m}" was read as "n < ${s.m}"; the value n = ${s.m} is included, so the last element ${srList(s)[s.m - 1]} belongs to the set.` : `The last element ${srList(s)[s.m - 1]} was left out; the description includes it.`, predict: at(w1) });
+        out.push({ id: "count-off", kind: "procedural", competency: SETS, says: p[3] === 2 ? `The elements were counted wrongly: the description gives exactly ${s.m} elements.` : `The elements were counted wrongly: the rule gives exactly ${s.m} elements, one for each n from 1 to ${s.m}.`, predict: at(w3) });
         if (s.t === 1) out.push({ id: "square-as-double", kind: "prerequisite", competency: EXPN, says: "n² was worked out as 2 × n; n² means n × n.", predict: at(w2) });
-        else out.push({ id: "first-element", kind: "procedural", competency: SETS, says: `The first element was not checked: put n = 1 into the rule; it must give ${srList(s)[0]}.`, predict: at(w2) });
+        else out.push({ id: "first-element", kind: "procedural", competency: SETS, says: p[3] === 2 ? `The first element was not checked: the set starts with ${srList(s)[0]}.` : `The first element was not checked: put n = 1 into the rule; it must give ${srList(s)[0]}.`, predict: at(w2) });
       } else if (s.t === 3) {
         out.push({ id: "number-left-out", kind: "conceptual", competency: SETS, says: `${FN[s.k]} itself was left out; every number is a factor of itself.`, predict: at(w1) });
         out.push({ id: "one-left-out", kind: "conceptual", competency: SETS, says: "1 was left out; 1 is a factor of every natural number.", predict: at(w2) });
@@ -3170,8 +3199,8 @@ const NEW15: Def[] = [
     difficulty: ([t, , , d]) => (d === 2 ? 1 : t <= 2 ? 2 : 3),
     word: (p) => {
       const s = sfOf(p);
-      const ask = p[3] === 0 ? "Which set-builder form describes the tokens she gets?" : "Which list (roster form) shows the tokens she gets?";
-      const what = p[3] === 0 ? `she gets the tokens ${braces(srList(s))}` : p[3] === 1 ? `the tokens are the set ${srText(s)}` : `the tokens are ${srDesc(s)}`;
+      const ask = p[3] === 0 ? "Which set-builder form describes the tokens won?" : "Which list (roster form) shows the tokens won?";
+      const what = p[3] === 0 ? `the tokens won are ${braces(srList(s))}` : p[3] === 1 ? `the tokens are the set ${srText(s)}` : `the tokens are ${srDesc(s)}`;
       return `At a school fair, ${nm(s.k + s.m + s.t)} wins numbered tokens for a lucky draw: ${what}. ${ask}`;
     },
     teach: {
@@ -3337,7 +3366,7 @@ const NEW15: Def[] = [
         { id: "mixed-operations", kind: "conceptual", competency: SETS, says: `${q < 2 ? "∪ and ∩ were mixed up inside the bracket" : "∪ and ∩ were mixed up inside the bracket"}; every operation in ${LAWQ[q]} is ${q < 2 ? "a union" : "an intersection"}.`, predict: orNull(swapped) },
         { id: "union-intersection", kind: "conceptual", competency: SETS, says: q < 2 ? "∪ was read as the common elements; a union collects every element that is in any of the sets." : "∩ was read as all the elements together; an intersection keeps only elements in every set.", predict: orNull(q < 2 ? cap2(A, cap2(Bs, C)) : uni(A, uni(Bs, C))) },
       ];
-      return out.filter((b) => b.predict !== null && b.predict.join(",") !== ans.join(","));
+      return out.filter((b) => b.predict !== null && (b.predict as number[]).join(",") !== ans.join(","));
     },
     variants: ([s, q]) => [[s, q ^ 1], [s, q ^ 2]].filter(law3Ok),
     explain: (s) => (s.id === "inner" ? `${s.inputs[0]} = ${braces((s.value as number[]).filter((x) => x))}` : s.id === "outer" ? `${s.inputs[0]} = ${braces(s.value as number[])}` : `Check: ${s.inputs[0]} = ${braces(s.value as number[])} too, as the associative property says`),
@@ -3462,12 +3491,16 @@ const NEW15: Def[] = [
     bugs: (p) => {
       const ch = shuf("aosamp", p, sampOpts(p));
       const out: Bug[] = [];
+      const e = p[0];
+      const pair = e <= 2 ? "HT and TH" : e <= 4 ? "BG and GB" : e === 6 ? "RG and GR" : "12 and 21";
+      const seen = new Set<string>();
       for (const s of sampSets(p)) {
         const i = ch.indexOf(braces(s.set));
-        if (i < 0 || s.why === "right") continue;
-        if (s.why === "order") out.push({ id: "order-ignored", kind: "conceptual", competency: SETS, says: "Outcomes like HT and TH were taken as the same; the first and second stages are different, so they are different outcomes.", predict: i });
+        if (i < 0 || s.why === "right" || out.some((b) => b.predict === i)) continue;
+        if (s.why === "order") out.push({ id: "order-ignored", kind: "conceptual", competency: SETS, says: `Outcomes like ${pair} were taken as the same; the first and second ${e === 6 ? "draws" : e === 3 || e === 4 ? "children" : "stages"} are different, so they are different outcomes.`, predict: i });
         if (s.why === "complement") out.push({ id: "complement", kind: "conceptual", competency: SETS, says: "The outcomes where the event does NOT happen were listed; the event is the set of outcomes where it does happen.", predict: i });
-        if (s.why === "drop") out.push({ id: "outcome-missed", kind: "procedural", competency: SETS, says: "One outcome was missed; go through the outcomes systematically (a tree diagram helps).", predict: i });
+        if (s.why === "drop") out.push({ id: seen.has("outcome-missed") ? "another-outcome-missed" : "outcome-missed", kind: "procedural", competency: SETS, says: "One outcome was missed; go through the outcomes systematically (a tree diagram helps).", predict: i });
+        if (s.why === "drop") seen.add("outcome-missed");
         if (s.why === "extra") out.push({ id: "outcome-extra", kind: "procedural", competency: SETS, says: "An outcome was included that does not fit the description; check each outcome against the event.", predict: i });
         if (s.why === "replace") out.push({ id: "replacement", kind: "conceptual", competency: SETS, says: "The first ball was taken as put back; without replacement the same colour cannot be drawn twice.", predict: i });
       }
@@ -3543,8 +3576,13 @@ const NEW15: Def[] = [
     difficulty: ([f, c]) => (f === 0 && c === 1 ? 1 : f === 3 || c === 2 ? 3 : 2),
     word: (p) => {
       const { A, B: Bs } = fnRel(p);
-      const shown = p[0] === 0 ? `The list of (student, locker) pairs is ${pairsS(fnRel(p).R)}.` : p[0] === 3 ? `Student x is given locker y exactly when ${FNRULES[p[2]].text}.` : `The pairs (student, locker) are shown in the picture.`;
-      return `In a Chennai school, the students with roll numbers A = ${braces(A)} are to be given lockers numbered B = ${braces(Bs)}. ${shown} The rule 'each student gets exactly one locker' is the same as asking: is this relation a function from A to B?`;
+      if (Math.min(...A, ...Bs) >= 1) {
+        const shown = p[0] === 0 ? `The list of (student, locker) pairs is ${pairsS(fnRel(p).R)}.` : p[0] === 3 ? `Student x is given locker y exactly when ${FNRULES[p[2]].text}.` : `The pairs (student, locker) are shown in the picture.`;
+        return `In a Chennai school, the students with roll numbers A = ${braces(A)} are to be given lockers numbered B = ${braces(Bs)}. ${shown} The rule 'each student gets exactly one locker' is the same as asking: is this relation a function from A to B?`;
+      }
+      // zero or negative numbers: number cards and game scores, which can be negative
+      const shown = p[0] === 0 ? `The list of (card, score) pairs is ${pairsS(fnRel(p).R)}.` : p[0] === 3 ? `Card x is matched with score y exactly when ${FNRULES[p[2]].text}.` : `The pairs (card, score) are shown in the picture.`;
+      return `In a number game at a Chennai school, the cards A = ${braces(A)} are to be matched with the scores B = ${braces(Bs)} (a score can be zero or negative). ${shown} The rule 'each card gets exactly one score' is the same as asking: is this relation a function from A to B?`;
     },
     teach: {
       idea: "A relation R from A to B is a function when every element of A has exactly one image in B. Two elements may share an image (many-one), but one element may not have two images, and none may be left without an image.",
@@ -3596,7 +3634,7 @@ const NEW15: Def[] = [
       if (p[0] === 0) {
         if (c === 1 || c === 3) out.push({ id: "into-as-onto", kind: "conceptual", competency: FUN, says: "f was called onto because every element of A has an image; onto means every element of B is an image, and here some element of B is not reached (f is into).", predict: at(c - 1) });
         if (c === 2 || c === 3) out.push({ id: "many-one-missed", kind: "procedural", competency: FUN, says: "Two elements of A with the same image were missed; then f is many-one, not one-one.", predict: at(c - 2) });
-        if (c === 0) out.push({ id: "codomain-check", kind: "procedural", competency: FUN, says: "Every element of B is reached and no image is shared, so f is both one-one and onto; check each condition separately.", predict: at(1) });
+        if (c === 0) out.push({ id: "codomain-check", kind: "procedural", competency: FUN, says: "f was called into because the codomain B was taken to need elements left over, as if the range were always smaller than B. Onto means every element of B is an image, and here every element of B is reached.", predict: at(1) });
       } else {
         if (c === 2) out.push({ id: "one-one-as-identity", kind: "conceptual", competency: FUN, says: "A one-one function from A to A was taken as the identity; the identity sends EVERY element to itself.", predict: at(0) });
         if (c === 1) out.push({ id: "constant-not-function", kind: "conceptual", competency: FUN, says: "Sending everything to the same element was taken as not being a proper function; it is the constant function.", predict: at(3) });
@@ -4163,9 +4201,9 @@ const NEW15: Def[] = [
         if (r <= n) out.push({ id: "no-repetition", kind: "conceptual", competency: PERM, says: "Each letter was used at most once; repetition is allowed, so every place has all the letters to choose from.", predict: perm(n, r) });
         out.push({ id: "power-swapped", kind: "procedural", competency: EXPN, says: `${r}${sup(n)} was worked out; ${r} places with ${n} choices each give ${n}${sup(r)}.`, predict: r ** n });
       }
-      if (q === 1) out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: `The people inside the block were not arranged among themselves; they can stand in ${r + 2}! = ${fact(r + 2)} orders, so multiply by that.`, predict: fact(n - r - 1) });
+      if (q === 1) out.push({ id: "group-not-arranged", kind: "procedural", competency: PERM, says: `The people inside the block were not arranged among themselves; they can stand in ${r + 2}! = ${fact(r + 2)} orders, so multiply by that.`, predict: fact(n - r - 1) });
       if (q === 2) {
-        out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: `The 'together' arrangements were counted without the ${fact(r + 2)} orders inside the block; there are ${r + 2}! × ${n - r - 1}! of them.`, predict: fact(n) - fact(n - r - 1) });
+        out.push({ id: "group-not-arranged", kind: "procedural", competency: PERM, says: `The 'together' arrangements were counted without the ${fact(r + 2)} orders inside the block; there are ${r + 2}! × ${n - r - 1}! of them.`, predict: fact(n) - fact(n - r - 1) });
         out.push({ id: "together-given", kind: "conceptual", competency: PERM, says: "The number of arrangements with them TOGETHER was given; 'not together' is all arrangements minus those.", predict: fact(r + 2) * fact(n - r - 1) });
       }
       if (q === 3) out.push({ id: "row-count", kind: "conceptual", competency: PERM, says: `${n}! counts rows; around a table, turning everyone one seat gives the same seating, so fix one person: (${n} − 1)!.`, predict: fact(n) });
@@ -4243,8 +4281,7 @@ const NEW15: Def[] = [
         if (r >= 2) out.push({ id: "wrong-pair", kind: "procedural", competency: BIN, says: `The wrong pair of neighbours was added; position ${r} of the new row is the sum of positions ${r - 1} and ${r} of the row above.`, predict: choose(n, r - 1) + choose(n, r - 2) });
       }
       if (q === 1) {
-        out.push({ id: "position-off", kind: "procedural", competency: BIN, says: `The positions were counted from 1; the coefficient of a${sup(n - r)}b${r === 1 ? "" : sup(r)} is in position ${r}, counting the first 1 as position 0.`, predict: choose(n, r - 1) });
-        out.push({ id: "power-of-a", kind: "conceptual", competency: BIN, says: `The power of a (${n - r}) was used as the position; that also works only from the other end — check by counting the power of b.`, predict: choose(n, Math.min(n, n - r + 1)) });
+        out.push({ id: "position-off", kind: "procedural", competency: BIN, says: `The positions were counted from 1; the coefficient of ${abPow(n, r)} is in position ${r}, counting the first 1 as position 0.`, predict: choose(n, r - 1) });
       }
       if (q === 2) {
         out.push({ id: "count-entries", kind: "conceptual", competency: BIN, says: `The number of entries (${n + 1}) was given; the question asks for their sum.`, predict: n + 1 });
@@ -4738,7 +4775,7 @@ const NEW15: Def[] = [
     },
     // independent: test every k = j/120 in [−30, 30]: does the quadratic with that k have real roots? (sign of b² − 4ac in whole numbers)
     validate: ([f, a, b], v) =>
-      agrees(v, (j, N) => {
+      agrees(kToIv(v), (j, N) => {
         const D = f % 2 === 0 ? b * b * N - 4 * a * j : j * j - 4 * a * b * N * N;
         return f < 2 ? D >= 0 : D < 0;
       }, 240),
@@ -4748,11 +4785,14 @@ const NEW15: Def[] = [
         { id: "strictness", kind: "procedural", competency: DISC, says: f < 2 ? "The case of equal roots (discriminant 0) was left out; equal roots are real, so the end point is included." : "The case of equal roots was included; then the roots are real, so the end point is left out.", predict: dkrAns(p, f < 2) },
         { id: "direction", kind: "conceptual", competency: DISC, says: f < 2 ? "The values giving NO real roots were found; real roots need b² − 4ac ≥ 0." : "The values giving real roots were found; no real roots needs b² − 4ac < 0.", predict: dkrAns(p, f >= 2, true) },
       ];
-      if (f % 2 === 0) out.push({ id: "four-forgotten", kind: "recall", competency: DISC, says: "The discriminant was taken as b² − ac; it is b² − 4ac.", predict: f < 2 ? ivs([[null, false, (b * b) / a, true]]) : ivs([[(b * b) / a, false, null, false]]) });
-      else out.push({ id: "one-side", kind: "conceptual", competency: NLI, says: `k² ≥ ${4 * a * b} was solved as k ≥ ${2 * Math.sqrt(a * b)} only; k can also be ≤ −${2 * Math.sqrt(a * b)}.`, predict: f < 2 ? ivs([[2 * Math.sqrt(a * b), true, null, false]]) : ivs([[0, true, 2 * Math.sqrt(a * b), false]]) });
+      if (f % 2 === 0) out.push({ id: "four-forgotten", kind: "recall", competency: DISC, says: "The discriminant was taken as b² − ac; it is b² − 4ac.", predict: f < 2 ? kIneq([[null, false, (b * b) / a, true]]) : kIneq([[(b * b) / a, false, null, false]]) });
+      else {
+        const m = 2 * Math.sqrt(a * b);
+        out.push(f < 2 ? { id: "one-side", kind: "conceptual", competency: NLI, says: `k² ≥ ${4 * a * b} was solved as k ≥ ${m} only; k ≤ −${m} also gives k² ≥ ${4 * a * b}.`, predict: kIneq([[m, true, null, false]]) } : { id: "one-side", kind: "conceptual", competency: NLI, says: `k² < ${4 * a * b} was solved as k < ${m} only; a k below −${m} also has k² > ${4 * a * b}, so k must be greater than −${m} too.`, predict: kIneq([[null, false, m, false]]) });
+      }
       return out;
     },
-    distractors: (p) => ["(−∞, ∞)", dkrAns(p, undefined, true)],
+    distractors: (p) => ["all real numbers", dkrAns(p, undefined, true)],
     variants: ([f, a, b]) => [[(f + 2) % 4, a, b]].filter(dkrOk),
     explain: (s) => (s.id === "disc" ? `${s.inputs[0] === 0 || s.inputs[0] === 1 ? "Real roots" : "No real roots"} ⇔ ${s.value}` : `Solve for k: ${s.value}`),
     domain: D_DKR,
@@ -4854,8 +4894,8 @@ const NEW15: Def[] = [
     },
     bugs: ([q, , i, j]) =>
       q === 0
-        ? [{ id: "upside-down", kind: "procedural", competency: LOG, says: `log ${"c"}ʲ/log cⁱ = j/i was turned upside down; it is ${j}/${i}.`, predict: i / j }].filter((b) => b.predict !== j / i)
-        : [{ id: "not-reciprocal", kind: "procedural", competency: LOG, says: `log_X(AB) = 1/${j} was turned upside down; X = (AB)${sup(j)}, so log_X(AB) = 1/${j}.`, predict: j }, { id: "two-logs", kind: "conceptual", competency: LOG, says: "The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).", predict: 2 / j }].filter((b) => b.predict !== 1 / j),
+        ? ([{ id: "upside-down", kind: "procedural", competency: LOG, says: `log cʲ/log cⁱ = j/i was turned upside down (as i/j); it is ${j}/${i}.`, predict: i / j }] as Bug[]).filter((b) => b.predict !== j / i)
+        : ([{ id: "not-reciprocal", kind: "procedural", competency: LOG, says: `log_(AB) X was worked out instead of log_X(AB): since X = (AB)${sup(j)}, log_(AB) X = ${j}, but the sum 1/log_A X + 1/log_B X = log_X A + log_X B = log_X(AB), which is 1/${j}.`, predict: j }, { id: "two-logs", kind: "conceptual", competency: LOG, says: "The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).", predict: 2 / j }] as Bug[]).filter((b) => b.predict !== 1 / j),
     distractors: (p) => [chbAns(p) + 1, -chbAns(p)],
     variants: ([q, ci, i, j, bi]) => [[q, ci, i, j, (bi + 1) % 5]].filter(chbOk),
     explain: (s) => (s.id === "change" || s.id === "flip" ? `Change of base: ${s.value}` : `So the value is ${s.value}`),
@@ -4977,7 +5017,11 @@ const NEW15: Def[] = [
     domain: D_NLR,
     keep: nlrOk,
     difficulty: ([k, , , s]) => (k >= 1 && k <= 2 ? 1 : k === 0 && (s === 0 || s === 3) ? 2 : 3),
-    word: () => "A storage label on a box of vaccines at a Madurai health centre shows, as the shaded part of the number line in the picture, the temperatures (in °C) at which the vaccines may be kept (a filled dot means that temperature is allowed, a hollow dot that it is not, an arrow that the shading goes on). Write the set of allowed temperatures in interval notation (or as an inequality in x).",
+    // a bounded stretch: the temperatures a vaccine may be kept at; a ray or the outside of a stretch: when an alarm sounds
+    word: ([k]) =>
+      k === 0
+        ? "A storage label on a box of vaccines at a Madurai health centre shows, as the shaded part of the number line in the picture, the temperatures (in °C) at which the vaccines may be kept (a filled dot means that temperature is allowed, a hollow dot that it is not). Write the set of allowed temperatures in interval notation (or as an inequality in x)."
+        : `The shaded part of the number line in the picture shows the temperatures (in °C) at which ${k === 1 ? "the high-temperature alarm of a cold store in Madurai sounds" : k === 2 ? "the low-temperature alarm of a cold store in Madurai sounds" : "the alarm of a fish tank in a Madurai aquarium sounds (the water is too cold or too warm)"} (a filled dot means the alarm sounds at that temperature, a hollow dot that it does not, an arrow that the shading goes on). Write this set of temperatures in interval notation (or as an inequality in x).`,
     teach: {
       idea: "On a number line, the shaded part is the set; a filled dot at an end means the end belongs to it ([ ] or ≤), a hollow dot that it does not (( ) or <), and an arrow that it goes on to ∞ or −∞ (always a round bracket).",
       method: "Read the left end and its dot, then the right end and its dot (or the arrow), and write the smaller end first. Two shaded pieces are joined with ∪.",

@@ -169,7 +169,7 @@ const UNITS = [
 ];
 /** A mixed measure from its index: i = 20 × big + k, small = k × step. */
 const mixed = (kind: number, i: number) => [Math.floor(i / 20), (i % 20) * UNITS[kind].step] as const;
-const say = (kind: number, b: number, s: number) => `${b} ${UNITS[kind].big} ${s} ${UNITS[kind].small}`;
+const say = (kind: number, b: number, s: number) => (s ? `${b} ${UNITS[kind].big} ${s} ${UNITS[kind].small}` : `${b} ${UNITS[kind].big}`);
 
 // ---------------------------------------------------------------- conversions (aeconv)
 
@@ -1972,7 +1972,7 @@ const RIGHT_OBJ: Obj[] = [
   { text: "the hands of a clock at 3 o'clock", clock: 3 }, { text: "the hands of a clock at 9 o'clock", clock: 9 },
 ].map((o) => ({ deg: 90, ...o }));
 const OTHER_OBJ: Obj[] = [
-  { text: "the tip of a slice of pizza", deg: 45 }, { text: "the point of a sharpened pencil", deg: 25 }, { text: "a corner of a samosa", deg: 60 }, { text: "the tip of a star in a rangoli", deg: 36 },
+  { text: "the tip of a slice of a pizza cut into 8 equal slices", deg: 45 }, { text: "the point of a sharpened pencil", deg: 25 }, { text: "a corner of a samosa", deg: 60 }, { text: "the tip of a star in a rangoli", deg: 36 },
   { text: "a corner of a honeycomb cell", deg: 120 }, { text: "an open book lying flat on a table", deg: 180 },
   ...[1, 2, 4, 5, 7, 8, 10, 11].map((h) => ({ text: `the hands of a clock at ${h} o'clock`, clock: h })),
 ];
@@ -1987,7 +1987,7 @@ const rtObjs = (s: number) => {
   while (others.length < 3) others.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
   return { right: s % RIGHT_OBJ.length, others };
 };
-const rtQ = ([mode, v]: number[]) => {
+const rtQ = ([mode, v]: number[]): { choices: string[]; at: (j: number) => number; right: number; deg: number; items?: Obj[] } => {
   if (mode === 0) {
     const deg = RT_DEGS[v];
     return { ...shuffled(`aertang:${mode},${v}`, RT_CMP), right: deg < 90 ? 0 : deg === 90 ? 1 : 2, deg };
@@ -2019,7 +2019,7 @@ const armsName = (s: number) => {
   const t = TRIPLES[(s * 37) % TRIPLES.length];
   return [t, `${t[1]}${t[0]}${t[2]}`, `${t[0]}${t[2]}${t[1]}`][s % 3];
 };
-const armQ = ([kind, s]: number[]) => {
+const armQ = ([kind, s]: number[]): { choices: string[]; at: (j: number) => number; a: string; b: string; c: string; s1?: number; s2?: number } => {
   const [a, b, c] = armsName(s).split("");
   if (kind === 0) return { ...shuffled(`aearms:${kind},${s}`, [b, a, c]), a, b, c };
   if (kind === 1) return { ...shuffled(`aearms:${kind},${s}`, [`the rays ${b}${a} and ${b}${c}`, `the rays ${a}${b} and ${a}${c}`, `the rays ${c}${a} and ${c}${b}`, `the line segment ${a}${c}`]), a, b, c };
@@ -2041,7 +2041,7 @@ const CPAIRS = ["AB", "XY", "DE", "RS", "KL", "GH", "TU", "FN"];
 const cpQ = ([part, s]: number[]) => {
   const o = CCEN[s % 4];
   const [a, b] = CPAIRS[Math.floor(s / 4)].split("");
-  const others = part <= 2 ? [0, 1, 2, 3].filter((i) => i !== part) : { 3: [2, 4, 1], 4: [3, 5, 6], 5: [6, 4, 1], 6: [5, 3, 4] }[part as 3]!;
+  const others = part === 2 ? [0, 1, 4] : part <= 1 ? [0, 1, 2, 3].filter((i) => i !== part) : { 3: [2, 4, 1], 4: [3, 5, 6], 5: [6, 4, 1], 6: [5, 3, 4] }[part as 3]!;
   const base = [part, ...others].map((i) => CPARTS[i]);
   const desc = [
     `the point ${o}, which is the same distance from every point on the circle`,
@@ -2080,7 +2080,7 @@ const foldLines = (cells: number[][]) => {
     return cells[a][b] === x;
   })));
 };
-const designFig = (cells: number[][]) => ({ type: "table", head: cells[0].map(() => " "), rows: cells.map((row) => row.map((x) => (x ? "■" : "□"))) });
+const designFig = (cells: number[][]): Visual => ({ type: "table", rows: cells.map((row) => row.map((x) => (x ? "■" : "□"))) });
 type ShapeS = { name: string; lines: number; pts: number[][]; fig: Visual };
 const regular = (n: number) => Array.from({ length: n }, (_, i) => [110 + 80 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 100 + 80 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]);
 const SSHAPES: ShapeS[] = [
@@ -2145,9 +2145,11 @@ const foldsNum = (x: number, axis: number) => {
   return axis === 1 ? g.every((row, i) => row.join("") === g[4 - i].join("")) : g.every((row) => row.join("") === [...row].reverse().join(""));
 };
 const DIGITEMS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 18, 30, 33, 38, 80, 81, 83, 88, 101, 103, 108, 110, 131, 138, 181, 303, 383, 808, 818, 838, 888, 25, 52, 285, 47, 69, 12, 55, 77, 14, 60, 90, 525];
-const digList = (s: number) => {
+/** Five numbers for seed s; for the vertical fold (axis 0) numbers with a 1 are left out: on a digital clock 1 is drawn
+ * on the right, but printed it looks symmetric. */
+const digList = (s: number, axis: number) => {
   const r = rng(s + 61000);
-  const pool = [...DIGITEMS];
+  const pool = axis === 0 ? DIGITEMS.filter((x) => !String(x).includes("1")) : [...DIGITEMS];
   const out: number[] = [];
   while (out.length < 5) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
   return out;
@@ -2157,11 +2159,11 @@ const digList = (s: number) => {
 
 const allIn = (w: string, set: Set<string>) => [...w].every((c) => set.has(c));
 const pal = (w: string) => w === [...w].reverse().join("");
-const MW_SIDE = ["MOM", "WOW", "TOT", "TOOT", "OTTO", "AHA", "MUM", "YAY", "HAH", "OHO"].filter((w) => allIn(w, VSYM) && pal(w));
+const MW_SIDE = ["MOM", "WOW", "TOT", "TOOT", "OTTO", "AHA", "MUM", "YAY", "HAH", "OHO", "TUT", "HUH", "ATTA", "AMMA", "AVVA", "AYYA"].filter((w) => allIn(w, VSYM) && pal(w));
 const MW_VNOTPAL = ["MAT", "TOY", "WAY", "HAT", "HOT", "TAX", "OAT", "AUTO", "MAY", "YAM", "TOW", "MATH", "WITH"].filter((w) => allIn(w, VSYM) && !pal(w));
 const MW_PALNOT = ["NUN", "LEVEL", "NOON", "DAD", "PEEP", "POP", "EYE", "PUP", "SOS", "DID", "REFER", "RADAR", "GIG", "NAN"].filter((w) => !allIn(w, VSYM) && pal(w));
 const MW_NEITHER = ["CAT", "DOG", "PEN", "SUN", "RICE", "FISH", "LEAF", "DRUM", "GATE", "CLAY"].filter((w) => !allIn(w, VSYM) && !pal(w) && !allIn(w, HSYM));
-const MW_WATER = ["HIDE", "CODE", "DICE", "ICE", "ECHO", "DECIDE", "CHOICE", "EXCEED", "DEED", "HOOD", "OXIDE"].filter((w) => allIn(w, HSYM));
+const MW_WATER = ["HIDE", "CODE", "DICE", "ICE", "ECHO", "DECIDE", "CHOICE", "EXCEED", "DEED", "HOOD", "OXIDE", "COD", "DOE", "ODE", "CHIDE", "ICED", "HEED", "DECODE", "DIODE", "CODEX", "DICED", "ECHOED"].filter((w) => allIn(w, HSYM));
 const MW_ONEOFF = ["HIDES", "COLD", "RIDE", "TIDE", "SIDE", "NICE", "DIET", "HOME", "DOOR", "CHIEF", "MICE", "CHOP"].filter((w) => !allIn(w, HSYM) && [...w].filter((c) => !HSYM.has(c)).length === 1);
 /** Side-mirror words that do NOT look the same in water (for the water question's wrong option). */
 const MW_SIDE_W = MW_SIDE.filter((w) => !allIn(w, HSYM));
@@ -2198,7 +2200,7 @@ const GEO_MORE: Def[] = [
         return `${right}|${[...others].sort((x, y) => x - y)}`;
       }, p[1]) ? "An earlier choice already shows these four objects (distinct@1)." : null;
     },
-    prompt: ([mode, v]) => (mode === 0 ? "Hold the corner of a folded paper (a right angle) against the angle in the picture. Is the angle in the picture smaller than a right angle, exactly a right angle, or bigger than a right angle?" : `Which of these makes a right angle (a square corner)?`),
+    prompt: ([mode, v]) => (mode === 0 ? "Hold the corner of a folded paper (a right angle) against the shaded angle at the centre of the circle in the picture. Is the angle in the picture smaller than a right angle, exactly a right angle, or bigger than a right angle?" : `Which of these makes a right angle (a square corner)?`),
     choices: (p) => rtQ(p).choices,
     solve: (p) => {
       const q = rtQ(p);
@@ -2238,8 +2240,8 @@ const GEO_MORE: Def[] = [
     explain: (s) => (s.inputs[0] === 0 ? `Compare with a square corner (90°): the angle is ${RT_CMP[Number(s.inputs[1]) < 90 ? 0 : Number(s.inputs[1]) === 90 ? 1 : 2]}` : "Only the square corner fits a folded-paper right angle exactly"),
     domain: [[0, 1], [0, 299]],
     difficulty: ([mode, v]) => (mode === 1 ? 2 : Math.abs(RT_DEGS[v] - 90) <= 25 ? 3 : 1),
-    figure: ([mode, v]) => (mode === 0 ? { type: "angle", deg: RT_DEGS[v] } : null),
-    word: ([mode, v]) => (mode === 0 ? `${name(v)} opens a pair of scissors so that the blades make the angle in the picture. Is the angle between the blades smaller than a right angle, exactly a right angle, or bigger than a right angle?` : `${name(v)} walks round the school checking corners with a folded-paper right angle. Which of these will the paper corner fit exactly?`),
+    figure: ([mode, v]) => (mode === 0 ? { type: "circle", sector: RT_DEGS[v], estimate: true } : null),
+    word: ([mode, v]) => (mode === 0 ? `${name(v)} opens a pair of scissors so that the blades make the shaded angle in the picture. Is the angle between the blades smaller than a right angle, exactly a right angle, or bigger than a right angle?` : `${name(v)} walks round the school checking corners with a folded-paper right angle. Which of these will the paper corner fit exactly?`),
     teach: {
       idea: "A right angle is a square corner, like the corner of a page: a quarter of a full turn. Folding a paper twice makes a right-angle tester.",
       method: "Hold the folded corner in the angle with one edge along one arm. If the other arm lies along the other edge, it is a right angle; if the angle fits inside the corner it is smaller; if the corner fits inside the angle it is bigger.",
@@ -2259,7 +2261,7 @@ const GEO_MORE: Def[] = [
     // [mode, v]: the angle is 5v degrees (5° to 355°); mode 0 gives its measure, mode 1 draws it
     parse: none,
     reject: (p) => (!inRange(p, [[0, 1], [1, 71]]) ? "An angle from 5° to 355°, given by its measure or drawn." : null),
-    prompt: ([mode, v]) => (mode === 0 ? `An angle measures ${5 * v}°. What kind of angle is it?` : "What kind of angle is marked by the arc in the picture?"),
+    prompt: ([mode, v]) => (mode === 0 ? `An angle measures ${5 * v}°. What kind of angle is it?` : "What kind of angle is the shaded angle at the centre of the circle in the picture?"),
     choices: (p) => akQ(p).choices,
     solve: (p) => {
       const q = akQ(p);
@@ -2277,7 +2279,7 @@ const GEO_MORE: Def[] = [
       const q = akQ(p);
       const at = (nm: string) => q.choices.indexOf(nm);
       const out: Bug[] = [];
-      if (q.k === 4) out.push({ id: "inner-angle", kind: "conceptual", competency: ANG, says: `The smaller angle between the arms (360° − ${q.d}° = ${360 - q.d}°) was named; the arc goes the long way round, so the angle is more than 180°: a reflex angle.`, predict: at(AKINDS[akind(360 - q.d)]) });
+      if (q.k === 4) out.push({ id: "inner-angle", kind: "conceptual", competency: ANG, says: `The smaller angle between the arms (360° − ${q.d}° = ${360 - q.d}°) was named; the angle meant goes the long way round, so it is more than 180°: a reflex angle.`, predict: at(AKINDS[akind(360 - q.d)]) });
       if (q.k === 0) out.push({ id: "acute-obtuse-swap", kind: "recall", competency: ANG, says: "The names were mixed up: an angle smaller than a right angle is acute; obtuse is between 90° and 180°.", predict: at("obtuse") });
       if (q.k === 2) out.push({ id: "acute-obtuse-swap", kind: "recall", competency: ANG, says: "The names were mixed up: an angle between 90° and 180° is obtuse; acute is smaller than 90°.", predict: at("acute") }, { id: "big-is-reflex", kind: "conceptual", competency: ANG, says: "Every angle bigger than a right angle was called reflex; a reflex angle is bigger than a straight angle (more than 180°).", predict: at("reflex") });
       if (q.k === 3) out.push({ id: "biggest-bent", kind: "conceptual", competency: ANG, says: "A straight angle is not obtuse: its two arms make one straight line, exactly 180°.", predict: at("obtuse") });
@@ -2291,14 +2293,14 @@ const GEO_MORE: Def[] = [
     },
     domain: [[0, 1], [1, 71]],
     difficulty: ([mode, v]) => (5 * v > 180 ? 3 : mode === 1 ? 2 : 1),
-    figure: ([mode, v]) => (mode === 1 ? { type: "angle", deg: 5 * v } : null),
-    word: ([mode, v]) => (mode === 0 ? `The door of ${name(v)}'s cupboard swings round through ${5 * v}° from closed. What kind of angle has it turned through?` : `${name(v)} turns a key through the angle marked by the arc in the picture. What kind of angle is that turn?`),
+    figure: ([mode, v]) => (mode === 1 ? { type: "circle", sector: 5 * v, estimate: true } : null),
+    word: ([mode, v]) => (mode === 0 ? `${name(v)} turns the steering wheel of a toy car through ${5 * v}°. What kind of angle has it turned through?` : `${name(v)} turns a key through the shaded angle in the picture. What kind of angle is that turn?`),
     teach: {
       idea: "Angles are named by comparing them with a right angle (90°) and a straight angle (180°): acute < 90° < obtuse < 180° < reflex < 360°.",
       method: "Look at how far the arc turns. Less than a square corner: acute; a square corner: right; less than a straight line: obtuse; a straight line: straight; more than a straight line: reflex.",
-      visual: ([, v]) => ({ type: "angle", deg: 5 * v }),
+      visual: ([, v]) => ({ type: "circle", sector: 5 * v }),
       alternatives: [
-        { id: "two_sides", title: "Every pair of arms makes two angles", kind: "conceptual", text: ["Two arms from one point make two angles that add up to 360°: one the short way round and one the long way round.", "If the short one is 120°, the long one is 240° — a reflex angle. The arc shows which one is meant."] },
+        { id: "two_sides", title: "Every pair of arms makes two angles", kind: "conceptual", text: ["Two arms from one point make two angles that add up to 360°: one the short way round and one the long way round.", "If the short one is 120°, the long one is 240° — a reflex angle. The shading shows which one is meant."] },
       ],
     },
     limits: "Angles in steps of 5° from 5° to 355°; measuring with a protractor is a separate family.",
@@ -2387,7 +2389,7 @@ const GEO_MORE: Def[] = [
       const at = (i: number) => q.base.indexOf(CPARTS[i]) >= 0 ? q.at(q.base.indexOf(CPARTS[i])) : -1;
       const B: Bug[] = [
         ...(p[0] === 1 ? [{ id: "radius-diameter", kind: "conceptual", competency: CIRC, says: "A radius and a diameter were mixed up: a radius goes from the centre to the circle; a diameter goes right across through the centre.", predict: at(2) } as Bug] : []),
-        ...(p[0] === 2 ? [{ id: "radius-diameter", kind: "conceptual", competency: CIRC, says: "A radius and a diameter were mixed up: a segment across the whole circle through the centre is a diameter (two radii).", predict: at(1) } as Bug, { id: "any-chord", kind: "conceptual", competency: CIRC, says: "It is a chord, but a chord through the centre has its own name, the diameter (the longest chord).", predict: at(3) } as Bug] : []),
+        ...(p[0] === 2 ? [{ id: "radius-diameter", kind: "conceptual", competency: CIRC, says: "A radius and a diameter were mixed up: a segment across the whole circle through the centre is a diameter (two radii).", predict: at(1) } as Bug] : []),
         ...(p[0] === 3 ? [{ id: "chord-as-diameter", kind: "conceptual", competency: CIRC, says: "Every segment across the circle was called a diameter; a diameter must pass through the centre, and this one does not.", predict: at(2) } as Bug] : []),
         ...(p[0] === 4 ? [{ id: "arc-chord", kind: "conceptual", competency: CIRC, says: "The curved piece was called a chord; a chord is the straight segment joining the two points, the curved piece is an arc.", predict: at(3) } as Bug] : []),
         ...(p[0] === 5 ? [{ id: "sector-segment", kind: "conceptual", competency: CIRC, says: "Sector and segment were mixed up: a sector is cut off by two radii (like a slice of a round cake); a segment is cut off by a chord.", predict: at(6) } as Bug] : []),
@@ -2495,19 +2497,19 @@ const GEO_MORE: Def[] = [
     parse: none,
     reject: (p) => {
       if (!inRange(p, [[0, 1], [0, 199]])) return "Five digits or numbers and a vertical or horizontal line.";
-      const k = digList(p[1]).filter((x) => hasLineSeg(x, p[0])).length;
+      const k = digList(p[1], p[0]).filter((x) => hasLineSeg(x, p[0])).length;
       if (k === 0 || k === 5) return "Some, but not all, have the line.";
-      return repeatOf(`aedigsym${p[0]}`, 200, (t) => [...digList(t)].sort((a, b) => a - b).join(","), p[1]) ? "An earlier choice already shows these numbers (distinct@1)." : null;
+      return repeatOf(`aedigsym${p[0]}`, 200, (t) => [...digList(t, p[0])].sort((a, b) => a - b).join(","), p[1]) ? "An earlier choice already shows these numbers (distinct@1)." : null;
     },
-    prompt: ([axis, s]) => `These are written the way a digital clock shows them, with straight bars: ${digList(s).join(", ")}. How many of them have a ${axis ? "horizontal line of symmetry (a fold straight across the middle, top half onto bottom half)" : "vertical line of symmetry (a fold straight down the middle, left half onto right half)"}?`,
+    prompt: ([axis, s]) => `These are written the way a digital clock shows them, with straight bars: ${digList(s, axis).join(", ")}. How many of them have a ${axis ? "horizontal line of symmetry (a fold straight across the middle of the whole number, top half onto bottom half)" : "vertical line of symmetry (a fold straight down the middle of the whole number, as it is displayed, left half onto right half)"}?`,
     solve: ([axis, s]) => {
-      const xs = digList(s).filter((x) => hasLineSeg(x, axis));
+      const xs = digList(s, axis).filter((x) => hasLineSeg(x, axis));
       return { steps: [{ id: "check", op: "count", competency: SYM, inputs: [axis ? "horizontal" : "vertical", xs.join(", ")], value: xs.length }], answer: xs.length };
     },
     // independent: draw each number on a grid of bars and fold the drawing
-    validate: ([axis, s], v) => v === digList(s).filter((x) => foldsNum(x, axis)).length,
+    validate: ([axis, s], v) => v === digList(s, axis).filter((x) => foldsNum(x, axis)).length,
     bugs: ([axis, s]) => {
-      const xs = digList(s);
+      const xs = digList(s, axis);
       const right = xs.filter((x) => hasLineSeg(x, axis)).length;
       const other = xs.filter((x) => hasLineSeg(x, 1 - axis)).length;
       const each = xs.filter((x) => String(x).split("").every((d) => hasLineSeg(Number(d), axis))).length;
@@ -2516,15 +2518,15 @@ const GEO_MORE: Def[] = [
         ...(axis === 0 ? [{ id: "digit-by-digit", kind: "conceptual", competency: SYM, says: "Each digit was checked on its own, but folding a whole number down its middle also swaps the order of the digits: 80 folds onto 08, which is different.", predict: each !== right ? each : null } as Bug] : []),
       ];
     },
-    distractors: ([axis, s]) => [0, 1, 2, 3, 4, 5].filter((x) => x !== digList(s).filter((n) => hasLineSeg(n, axis)).length),
+    distractors: ([axis, s]) => [0, 1, 2, 3, 4, 5].filter((x) => x !== digList(s, axis).filter((n) => hasLineSeg(n, axis)).length),
     variants: () => [],
     explain: (s) => `${s.inputs[1]} ${Number(s.value) === 1 ? "has" : "have"} a ${s.inputs[0]} line of symmetry: ${s.value}`,
     domain: [[0, 1], [0, 199]],
-    difficulty: ([axis, s]) => (axis === 1 ? (digList(s).some((x) => x > 9) ? 2 : 1) : 3),
-    figure: ([, s]) => ({ type: "table", head: ["1st", "2nd", "3rd", "4th", "5th"], rows: [digList(s).map(String)] }),
-    word: ([axis, s]) => `${name(s)} makes number cards for a class game, drawing the numbers with straight bars like a digital clock: ${digList(s).join(", ")}. ${name(s)} folds each card ${axis ? "straight across the middle" : "straight down the middle"}. For how many cards do the two halves of the number match exactly?`,
+    difficulty: ([axis, s]) => (axis === 1 ? (digList(s, axis).some((x) => x > 9) ? 2 : 1) : 3),
+    figure: ([axis, s]) => ({ type: "table", head: ["1st", "2nd", "3rd", "4th", "5th"], rows: [digList(s, axis).map(String)] }),
+    word: ([axis, s]) => `${name(s)} makes number cards for a class game, drawing the numbers with straight bars like a digital clock: ${digList(s, axis).join(", ")}. ${name(s)} folds each card ${axis ? "straight across the middle of the number" : "straight down the middle of the whole number"}. For how many cards do the two halves of the number match exactly?`,
     teach: {
-      idea: "On a digital clock each digit is made of straight bars. Some digits, like 8 and 0, match when folded either way; 1 and 3 match only when folded across.",
+      idea: "On a digital clock each digit is made of straight bars. Some digits, like 8 and 0, match when folded either way; 3 matches only when folded across.",
       method: "For a fold across, check each digit's top and bottom halves. For a fold down the middle of a whole number, the left end must match the right end: read the mirrored digits in reverse order and see if you get the same number.",
       alternatives: [
         { id: "mirror", title: "Hold a mirror", kind: "conceptual", text: ["Stand a mirror along the middle of the number (across or up and down).", "If the half on paper and its reflection together show the same number, that line is a line of symmetry."] },
@@ -2806,7 +2808,7 @@ const CHK = ["Reasonable: it is close to the estimate", "Not reasonable: it is f
 type Sit = { text: string; exact: boolean };
 const SITS: Sit[] = [
   ...["the change a shopkeeper gives back", "the amount written on a cheque", "the number of tablets a doctor tells you to take", "the marks written on a report card", "the price printed on a train ticket", "the weight of gold bought at a jewellery shop", "the time a train leaves the station", "the number of chairs to put out for 32 invited guests"].map((text) => ({ text, exact: true })),
-  ...["the number of people at a temple festival, for a news report", "how long it takes to walk to a friend's house", "the number of mangoes on a big tree", "the distance from Chennai to Madurai, when planning a trip", "the number of grains in a bag of rice", "the rain that fell in a month, for a weather report", "the size of the crowd at a cricket match", "how many leaves are on a neem tree"].map((text) => ({ text, exact: false })),
+  ...["the number of people at a temple festival, for a news report", "how long it takes to walk to a friend's house", "the number of mangoes on a big tree", "the distance from Chennai to Madurai, when planning a trip", "the number of grains in a bag of rice", "the number of stars you can see on a clear night", "the number of ants in an anthill", "how many leaves are on a neem tree"].map((text) => ({ text, exact: false })),
 ];
 const sitPick = (s: number) => {
   const r = rng(s * 3 + 17000);
@@ -2824,7 +2826,7 @@ const sizeData = (s: number) => {
   const b = 12 + Math.floor(r() * 87);
   return { a, b, E: rLead(a) * rLead(b) };
 };
-const chkQ = ([kind, s]: number[]) => {
+const chkQ = ([kind, s]: number[]): { choices: string[]; at: (j: number) => number; right: string; q?: ChkQ; items?: ReturnType<typeof sitPick>; z?: ReturnType<typeof sizeData> } => {
   if (kind === 0) {
     const q = chkData(s);
     const right = q.claim === q.exact ? 0 : q.claim > q.exact ? 1 : 2;
@@ -2844,12 +2846,13 @@ const rndNum = (k: number, s: number) => {
   const r = rng(s * 11 + k * 1000 + 44000);
   return 2 * u + Math.floor(r() * 98 * u);
 };
-const RND_CTX = [
-  (n: number) => `A truck has travelled ${ind(n)} km in its working life.`,
-  (n: number) => `The number of people living in a district is ${ind(n)}.`,
-  (n: number) => `A company's sales last year were ₹${ind(n)}.`,
-  (n: number) => `${ind(n)} tickets were sold for a film in its first month.`,
-];
+/** Situations that fit the size of the number (k: the place rounded to, 10^k). */
+const RND_CTX = (k: number, i: number, n: number) =>
+  k <= 4
+    ? [`A truck has travelled ${ind(n)} km in its working life.`, `The number of people living in a town is ${ind(n)}.`, `A shop's sales last year were ₹${ind(n)}.`, `${ind(n)} tickets were sold for a film in its first month.`][i]
+    : k === 5
+      ? [`The number of votes cast in a district election is ${ind(n)}.`, `The number of people living in a district is ${ind(n)}.`, `A company's sales last year were ₹${ind(n)}.`, `${ind(n)} tickets were sold for a film in its first month.`][i]
+      : [`The number of votes cast in a state election is ${ind(n)}.`, `The number of people living in ${k === 7 ? "a large country" : "a state"} is ${ind(n)}.`, `A company's sales last year were ₹${ind(n)}.`, `A state government plans to spend ₹${ind(n)} on new roads.`][i];
 const decThou = (s: number) => {
   const r = rng(s * 7 + 64000);
   const w = Math.floor(r() * 60);
@@ -2857,6 +2860,8 @@ const decThou = (s: number) => {
   if (f % 10 === 0) f += 3;
   return 1000 * w + f;
 };
+/** An event whose time fits the stopwatch reading (thousandths of a second). */
+const rdecEvent = (th: number) => (th < 12000 ? "timed a ball rolling down a slope in a science experiment" : th < 26000 ? "ran 100 m" : "swam 50 m");
 const roundTh = (th: number, place: number) => {
   const u = [1000, 100, 10][place];
   return Math.floor((th + u / 2) / u) * u;
@@ -2872,7 +2877,7 @@ const NUM_MORE: Def[] = [
     // [pic, n]: n counters drawn as dots (pic 0) or in ten frames (pic 1)
     parse: none,
     reject: (p) => (!inRange(p, [[0, 1], [5, 50]]) ? "5 to 50 counters, drawn as dots or in ten frames." : null),
-    prompt: ([pic]) => (pic === 0 ? "Put the dots in the picture into pairs (join them two by two). Is the number of dots even or odd?" : "Each ten frame in the picture has two rows of 5 squares. Pair each counter with the one above or below it. Is the number of counters even or odd?"),
+    prompt: ([pic]) => (pic === 0 ? "Put the dots in the picture into pairs (join them two by two). Is the number of dots even or odd?" : "The ten frames in the picture are filled row by row. A full ten frame makes 5 pairs; put the counters in the last frame into pairs too (two side by side or one above the other). Is the number of counters even or odd?"),
     choices: (p) => shuffled(`aepair:${p}`, ["even", "odd"]).choices,
     solve: (p) => {
       const q = shuffled(`aepair:${p}`, ["even", "odd"]);
@@ -2891,7 +2896,7 @@ const NUM_MORE: Def[] = [
       const n = p[1];
       const pairs = Math.floor(n / 2);
       return [
-        { id: "pairs-count", kind: "conceptual", competency: EVEN, says: `The number of pairs (${pairs}) was checked for being even; what decides is whether one is left over without a partner (${n % 2 ? "one is left" : "none is left"}).`, predict: pairs % 2 === n % 2 ? q.at(pairs % 2) : null },
+        { id: "pairs-count", kind: "conceptual", competency: EVEN, says: `The number of pairs (${pairs}) was checked for being even; what decides is whether one is left over without a partner (${n % 2 ? "one is left" : "none is left"}).`, predict: pairs % 2 === n % 2 ? q.at(pairs % 2) : null } as Bug,
         ...(n >= 10 ? [{ id: "tens-digit", kind: "conceptual", competency: EVEN, says: `The tens digit (${Math.floor(n / 10)}) was looked at; tens always pair up, so only the ones (or the counter left over) decide.`, predict: Math.floor(n / 10) % 2 !== n % 2 ? q.at(Math.floor(n / 10) % 2) : null } as Bug] : []),
       ].filter((b) => b.predict !== null && b.predict !== q.at(n % 2));
     },
@@ -2903,7 +2908,7 @@ const NUM_MORE: Def[] = [
     word: ([pic, n]) => `For a dance at the school assembly, children stand in pairs. There is one child for each ${pic === 0 ? "dot" : "counter"} in the picture. Is the number of children even or odd?`,
     teach: {
       idea: "An even number of things can be put into pairs with none left over. An odd number always leaves exactly one without a partner.",
-      method: "Join the things two by two (or look down the columns of a ten frame). If every one has a partner, the number is even; if one is left over, it is odd.",
+      method: "Join the things two by two (a full ten frame is 5 pairs: each counter in the top row with the one below it). If every one has a partner, the number is even; if one is left over, it is odd.",
       visual: ([, n]) => ({ type: "tenframe", filled: n, frames: Math.ceil(n / 10) }),
       alternatives: [
         { id: "last_digit", title: "Check with the last digit", kind: "conceptual", text: ["Count them and look at the ones digit.", "0, 2, 4, 6 or 8 means even; 1, 3, 5, 7 or 9 means odd — the same answer as pairing."] },
@@ -3136,14 +3141,14 @@ const NUM_MORE: Def[] = [
     competency: ROUND,
     type: "integer",
     mc: true,
-    // [k, s]: round rndNum(k, s) to the nearest 10^k (thousand … crore); the situation is RND_CTX[s % 4]
+    // [k, s]: round rndNum(k, s) to the nearest 10^k (thousand … crore); the situation is RND_CTX(k, s % 4)
     parse: none,
     reject: (p) => {
       if (!inRange(p, [[3, 7], [0, 59]])) return "A large number rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore.";
       const [k, s] = p;
       return rndNum(k, s) % 10 ** k === 0 ? "Not already a multiple of the place." : null;
     },
-    prompt: ([k, s]) => `${RND_CTX[s % 4](rndNum(k, s))} Round this number to the nearest ${RND_PLACE[k]}.`,
+    prompt: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} Round this number to the nearest ${RND_PLACE[k]}.`,
     solve: ([k, s]) => {
       const n = rndNum(k, s);
       const u = 10 ** k;
@@ -3407,7 +3412,7 @@ const NUM_MORE: Def[] = [
     explain: (s) => (s.id === "look" ? `Look at the digit after the ${["ones", "tenths", "hundredths"][Number(s.inputs[1])]} place: it is ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
     domain: [[0, 2], [0, 199]],
     difficulty: ([place]) => (place === 0 ? 1 : place === 1 ? 2 : 3),
-    word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ran 100 m in a time the stopwatch showed as ${d3(decThou(s))} seconds. The school record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
+    word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ${rdecEvent(decThou(s))} in a time the stopwatch showed as ${d3(decThou(s))} seconds. The record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
     teach: {
       idea: "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
       method: "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it.",
@@ -3458,11 +3463,13 @@ const tabData = (s: number) => {
   const rows = pick.map((i) => ({ item: TAB_ITEMS[i], q: 2 + Math.floor(r() * 11), p: PRICES[Math.floor(r() * 12)] }));
   return rows;
 };
-const tabFig = (s: number) => {
+const tabFig = (s: number): Visual => {
   const rows = tabData(s);
   return { type: "table", head: ["Item", "How many", "Price of one (₹)", "Cost (₹)"], rows: rows.map((x, i) => [x.item[0], i === 2 ? "?" : x.q, i === 1 ? "?" : x.p, i === 0 ? "?" : x.q * x.p]) };
 };
 const SPEEDS = [30, 40, 45, 50, 60];
+/** Something whose size in inches is about x. */
+const inchThing = (x: number) => (x <= 6 ? "A screw" : x <= 13 ? "A tablet screen" : x <= 27 ? "A computer monitor" : "A TV screen");
 const bigData = (kind: number, s: number) => {
   const r = rng(s * 7 + kind * 300 + 5000);
   if (kind === 0) return { a: 100000 + Math.floor(r() * 900000), b: 1000 + Math.floor(r() * 19000), c: 1000 + Math.floor(r() * 14000) };
@@ -3908,8 +3915,8 @@ const MEAS_MORE: Def[] = [
     prompt: ([kind, x, r]) =>
       [
         `A car travels at ${18 * x} km/h. What is this speed in metres per second? (1 km = 1000 m, 1 hour = 3600 seconds.)`,
-        `A cheetah runs at ${5 * x} m/s. What is this speed in kilometres per hour? (1 km = 1000 m, 1 hour = 3600 seconds.)`,
-        `1 inch = 2.54 cm. A tablet screen is ${x} inches across. How many centimetres is that?`,
+        `${x <= 6 ? "A cheetah runs" : "A racing car goes"} at ${5 * x} m/s. What is this speed in kilometres per hour? (1 km = 1000 m, 1 hour = 3600 seconds.)`,
+        `1 inch = 2.54 cm. ${inchThing(x)} is ${x} ${x === 1 ? "inch" : "inches"} ${x <= 6 ? "long" : "across"}. How many centimetres is that?`,
         `1 mile is about 1.6 km. A road sign abroad shows ${5 * x} miles. About how many kilometres is that?`,
         `On one day, 1 US dollar is worth ₹${82 + r}. How many rupees is ${10 * x} dollars?`,
       ][kind],
@@ -3949,7 +3956,7 @@ const MEAS_MORE: Def[] = [
       [
         `A train's speed board shows ${18 * x} km/h. ${name(x)} wants to know how many metres it goes each second. What is the speed in m/s?`,
         `In a science book, a falcon dives at ${5 * x} m/s. ${name(x)} wants the speed in km/h to compare it with a car. What is it?`,
-        `${name(x)} buys a TV advertised as ${x} inches (1 inch = 2.54 cm). How many centimetres is that?`,
+        `${name(x)} buys ${inchThing(x).replace(/^A/, "a")} advertised as ${x} ${x === 1 ? "inch" : "inches"} (1 inch = 2.54 cm). How many centimetres is that?`,
         `On a trip abroad, ${name(x)} reads that the next town is ${5 * x} miles away (1 mile ≈ 1.6 km). About how many km is that?`,
         `${name(x)}'s uncle sends ${10 * x} US dollars home when 1 dollar is worth ₹${82 + r}. How many rupees is that?`,
       ][kind],
@@ -4171,7 +4178,7 @@ const MIX_MORE: Def[] = [
     domain: [[0, 1], [0, 4], [1, 5], [0, 10]],
     cap: 400,
     difficulty: ([kind, , b]) => (kind === 1 ? 3 : b <= 2 ? 1 : 2),
-    word: ([kind, a, b, c]) => (kind === 0 ? `For a charity walkathon, every kilometre walked raises ₹${10 + c}. ${name(a + b + c)}'s cycling team rides at ${SPEEDS[a]} km per hour for ${b} ${b === 1 ? "hour" : "hours"} instead. How much money does the team raise?` : `At Pichavaram, ${name(a + b)} hires a rowing boat at ₹${50 + 10 * c} an hour, rows ${b * (a + 2)} km to see the mangroves at ${a + 2} km per hour and rows back the same way. How much is the hire?`),
+    word: ([kind, a, b, c]) => (kind === 0 ? `A school hires a bus for a trip at ₹${10 + c} for every kilometre. The bus travels at ${SPEEDS[a]} km per hour for ${b} ${b === 1 ? "hour" : "hours"}. How much does the school pay, in rupees?` : `At Pichavaram, ${name(a + b)} hires a rowing boat at ₹${50 + 10 * c} an hour, rows ${b * (a + 2)} km to see the mangroves at ${a + 2} km per hour and rows back the same way. How much is the hire?`),
     teach: {
       idea: "Speed links distance and time: distance = speed × time, and time = distance ÷ speed. A charge per km or per hour then turns the distance or the time into money.",
       method: "Decide what the money depends on (km or hours). Find that quantity first from the speed, then multiply by the charge.",
@@ -4348,7 +4355,7 @@ const MIX_MORE: Def[] = [
     },
     prompt: ([kind]) =>
       kind === 0
-        ? "The picture shows a leaf traced on squared paper. ■ is a square fully covered, ◕ more than half covered, ◑ exactly half covered, ◔ less than half covered, □ not covered. Estimate the area of the leaf in square units: count a full square as 1, a square more than half covered as 1, a half-covered square as ½, and leave out squares less than half covered."
+        ? "The picture shows a leaf traced on squared paper. ■ is a square fully covered, ◕ more than half covered, ◑ exactly half covered, ◔ less than half covered, □ not covered. Estimate the area of the leaf in square units: count a full square as 1, a square more than half covered as 1, a half-covered square as ½, and leave out squares less than half covered. (A half can be written as .5, for example 12.5.)"
         : "The picture shows two shapes, A and B, drawn on squared paper (each letter fills one square). Which shape covers more squares, and how many more? Give the number of extra squares.",
     solve: ([kind, s]) => {
       if (kind === 0) {
@@ -4404,7 +4411,7 @@ const MIX_MORE: Def[] = [
     explain: (s) => (s.id === "full" ? `Full squares and squares more than half covered: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "halves" ? `${s.inputs[0]} half squares make ${String(s.value)}` : s.id === "total" ? `About ${s.inputs[0]} + ${String(s.inputs[1])} = ${String(s.value)} square units` : `A covers ${s.inputs[0]} squares and B covers ${s.inputs[1]}: the difference is ${s.value}`),
     domain: [[0, 1], [0, 199]],
     difficulty: ([kind, s]) => (kind === 1 ? 1 : irrData(s).half % 2 ? 3 : 2),
-    figure: ([kind, s]) => (kind === 0 ? { type: "table", head: Array(7).fill(" "), rows: irrData(s).grid.map((r) => r.map((k) => IRR_SYM[k as keyof typeof IRR_SYM])) } : { type: "table", head: Array(8).fill(" "), rows: twoShapes(s).grid }),
+    figure: ([kind, s]) => (kind === 0 ? { type: "table", rows: irrData(s).grid.map((r) => r.map((k) => IRR_SYM[k as keyof typeof IRR_SYM])) } : { type: "table", rows: twoShapes(s).grid }),
     word: ([kind, s]) => (kind === 0 ? `${name(s)} traces a banyan leaf on squared paper for a science project; the picture shows the squares (■ full, ◕ more than half, ◑ half, ◔ less than half, □ none). Counting full and more-than-half squares as 1, half squares as ½ and leaving out the rest, about how many square units is the leaf?` : `Two flower beds, A and B, are drawn on a squared plan of the school garden (each letter is one square). How many more squares does the bigger bed cover?`),
     teach: {
       idea: "Area is the number of unit squares a shape covers. For a curved shape the squares on the edge are only partly covered, so we estimate: more than half counts as a whole square, exactly half as ½, less than half as nothing.",
@@ -4535,7 +4542,11 @@ const DEC_MORE: Def[] = [
     explain: (s) => `Give every number three decimal places (${s.inputs.map((x) => { const [w, f = ""] = String(x).split("."); return `${w}.${f.padEnd(3, "0")}`; }).join(", ")}) and compare: ${s.value}`,
     domain: [[0, 299]],
     difficulty: ([s]) => (s % 10 === 0 ? 2 : 3),
-    word: ([s]) => `In a long-jump event, four jumps were measured as ${dordNums(s).map((x) => `${d3(x)} m`).join(", ")}. List the jumps from shortest to longest, as numbers in brackets.`,
+    word: ([s]) => {
+      const m = dordNums(s).map((x) => `${d3(x)} m`).join(", ");
+      const w = s % 10;
+      return w === 0 ? `In a science class, four seedlings were measured as ${m} tall. List the heights from shortest to tallest, as numbers in brackets.` : w === 9 ? `Four bamboo poles for a festival pandal were measured as ${m} long. List the lengths from shortest to longest, as numbers in brackets.` : `In a long-jump event, four jumps were measured as ${m}. List the jumps from shortest to longest, as numbers in brackets.`;
+    },
     teach: {
       idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
       method: "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550.",
@@ -4595,7 +4606,7 @@ const DEC_MORE: Def[] = [
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     word: (p) => {
       const q = dfrQ(p);
-      return p[0] === 0 ? `A shop label says a packet holds ${q.dec} kg of tea. ${name(p[1])} wants to write this as a fraction of a kilogram. Which fraction is it?` : p[0] === 1 ? `${name(p[1])} drank ${q.dec} of a bottle of water. What fraction of the bottle is that, in simplest form?` : `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} of a school's students come by bus. ${name(p[1])} must enter this in a spreadsheet as a decimal. What should be entered?`;
+      return p[0] === 0 ? `A shop label says a packet holds ${q.dec} kg of tea. ${name(p[1])} wants to write this as a fraction of a kilogram. Which fraction is it?` : p[0] === 1 ? (q.val > 1 ? `A ribbon is ${q.dec} m long. ${name(p[1])} writes its length in metres as a fraction in simplest form. Which fraction is it?` : `${name(p[1])} drank ${q.dec} of a bottle of water. What fraction of the bottle is that, in simplest form?`) : q.val > 1 ? `${name(p[1])} buys ${FRACS[p[1]][0]}/${FRACS[p[1]][1]} kg of rice. The shop's weighing scale shows kilograms as a decimal. What does the scale show?` : `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} of a school's students come by bus. ${name(p[1])} must enter this in a spreadsheet as a decimal. What should be entered?`;
     },
     teach: {
       idea: "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
@@ -4615,7 +4626,7 @@ const DEC_MORE: Def[] = [
     // [H, k]: the 24-hour time H:(5k)
     parse: none,
     reject: (p) => (!inRange(p, [[0, 23], [0, 11]]) ? "A 24-hour time in five-minute steps." : null),
-    prompt: ([H, k]) => `A railway clock shows ${hh(H, 5 * k)} (24-hour time). How is this time written on a 12-hour clock with a.m. or p.m.?`,
+    prompt: ([H, k]) => `A railway clock shows ${hh(H, 5 * k)} (24-hour time). How is this time written on a 12-hour clock with a.m. or p.m.?${H % 12 === 0 ? " (12 midnight is written 12:00 a.m. and 12 noon is written 12:00 p.m.)" : ""}`,
     choices: (p) => ampmQ(p).choices,
     solve: (p) => {
       const q = ampmQ(p);
@@ -4786,7 +4797,7 @@ const ineqSol = ([dom, a, b, c, op]: number[]) => {
   return out;
 };
 const DOMN = ["whole number", "natural number", "integer from −5 to 5"];
-const lhs = (a: number, b: number) => `${a === 1 ? "" : a === -1 ? "−" : n_(a)}x ${b < 0 ? "−" : "+"} ${Math.abs(b)}`;
+const lhs = (a: number, b: number) => `${a === 1 ? "" : a === -1 ? "−" : n_(a)}x${b === 0 ? "" : ` ${b < 0 ? "−" : "+"} ${Math.abs(b)}`}`;
 const ivStr = (lo: number, loC: boolean, hi: number, hiC: boolean) => `${loC ? "[" : "("}${n_(lo)}, ${n_(hi)}${hiC ? "]" : ")"}`;
 const sysData = ([L, w, a1, a2, s]: number[]) => {
   const U = L + w;
@@ -4863,6 +4874,13 @@ const ratQ = ([kind, a, b, c, sg]: number[]) => {
   return { text: `${a}/(√${b} ${sg ? "−" : "+"} ${c})`, base, val: a / (Math.sqrt(b) + (sg ? -c : c)) };
 };
 
+/** The two numbers to add in a place-value table, one row each (the total is not shown). */
+const pvAdd = (a: number, b: number): Visual => {
+  const L = a >= 100 || b >= 100 ? 3 : 2;
+  const cells = (n: number) => String(n).padStart(L, " ").split("").map((c) => c.trim());
+  return { type: "table", head: ["", ...(L === 3 ? ["Hundreds"] : []), "Tens", "Ones"], rows: [["First number", ...cells(a)], ["Second number", ...cells(b)]] };
+};
+
 const CORE_MORE: Def[] = [
   {
     id: "aeaddn",
@@ -4914,7 +4932,7 @@ const CORE_MORE: Def[] = [
     domain: [[0, 1], [10, 199], [10, 99]],
     cap: 450,
     difficulty: ([kind, a, b]) => (kind === 0 ? 1 : (a % 10) + (b % 10) >= 10 ? 3 : 2),
-    figure: ([, a, b]) => ({ type: "blocks", hundreds: Math.floor(a / 100), tens: Math.floor((a % 100) / 10) + Math.floor(b / 10), ones: (a % 10) + (b % 10), note: `${a} and ${b} together` }),
+    figure: ([, a, b]) => pvAdd(a, b),
     word: ([, a, b]) => `${name(a)} collects ${a} shells on the beach at Mamallapuram and ${name(b + 1)} collects ${b}. How many shells do they have together?`,
     teach: {
       idea: "Adding tens to tens and ones to ones works because each digit counts a different place. When the ones stay under 10, nothing needs to be regrouped.",
@@ -4955,16 +4973,15 @@ const CORE_MORE: Def[] = [
     validate: ([a, b], v) => isInt(v) && v - b === a,
     bugs: ([a, b]) => [
       ...(b < 100 ? [{ id: "misaligned", kind: "conceptual", competency: PV, says: `${b} was written under the hundreds and tens of ${a}; line up the ones digits first: ${b} has no hundreds.`, predict: a + 10 * b } as Bug] : []),
-      { id: "digits-joined", kind: "procedural", competency: PV, says: "The column sums were not kept in their own places.", predict: Number(`${Math.floor(a / 100) + Math.floor(b / 100)}${(Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10)}${(a % 10) + (b % 10)}0`) },
-      { id: "one-column", kind: "procedural", competency: ADDSUB, says: "One column was copied without adding; add every column.", predict: a + b - (b % 10) },
-    ],
+      { id: "one-column", kind: "procedural", competency: ADDSUB, says: "The ones column was copied from the first number without adding; add every column.", predict: a + b - (b % 10) } as Bug,
+    ].filter((x) => x.predict !== a + b),
     distractors: ([a, b]) => [a + b + 100, a + b - 10, a + b + 1],
     variants: () => [],
     explain: (s) => `${s.id[0].toUpperCase()}${s.id.slice(1)}: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`,
     domain: [[100, 899], [10, 899]],
     cap: 400,
     difficulty: ([a, b]) => (b < 100 ? 1 : a + b > 900 ? 3 : 2),
-    figure: ([a, b]) => ({ type: "blocks", hundreds: Math.floor(a / 100) + Math.floor(b / 100), tens: (Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10), ones: (a % 10) + (b % 10), note: `${a} and ${b} together` }),
+    figure: ([a, b]) => pvAdd(a, b),
     word: ([a, b]) => `A school library has ${a} story books and ${b} science books. How many books is that altogether?`,
     teach: {
       idea: "In column addition each column counts one place: ones, tens, hundreds. When no column adds up to 10 or more, each column's sum is simply written below it.",
@@ -5094,7 +5111,7 @@ const CORE_MORE: Def[] = [
     reject: (p) => (!inRange(p, [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]]) || (p[2] === 1 && p[3] === 1) ? "Two inequalities with whole-number boundaries." : null),
     prompt: (p) => {
       const d = sysData(p);
-      return `Solve the system of inequalities ${lhs(d.a1, d.b1)} ${d.strict1 ? ">" : "≥"} ${n_(d.k1)} and ${d.b2} − ${d.a2 === 1 ? "" : d.a2}x ${d.strict2 ? ">" : "≥"} ${n_(d.k2)}, for real x. Write the solution set in interval notation.`;
+      return `Solve the system of inequalities ${lhs(d.a1, d.b1)} ${d.strict1 ? ">" : "≥"} ${n_(d.k1)} and ${d.b2 === 0 ? "−" : `${d.b2} − `}${d.a2 === 1 ? "" : d.a2}x ${d.strict2 ? ">" : "≥"} ${n_(d.k2)}, for real x. Write the solution set in interval notation.`;
     },
     solve: (p) => {
       const d = sysData(p);
@@ -5132,7 +5149,7 @@ const CORE_MORE: Def[] = [
     difficulty: ([, , a1, a2, s]) => (s === 0 && a1 * a2 < 6 ? 1 : a2 > 2 ? 3 : 2),
     word: (p) => {
       const d = sysData(p);
-      return `A number x satisfies two conditions: ${d.a1} times x ${d.b1 < 0 ? `minus ${-d.b1}` : `plus ${d.b1}`} is ${d.strict1 ? "more than" : "at least"} ${n_(d.k1)}, and ${d.b2} minus ${d.a2} times x is ${d.strict2 ? "more than" : "at least"} ${n_(d.k2)}. Which real numbers x are possible? Write the set in interval notation.`;
+      return `A number x satisfies two conditions: ${d.a1} times x${d.b1 === 0 ? "" : d.b1 < 0 ? ` minus ${-d.b1}` : ` plus ${d.b1}`} is ${d.strict1 ? "more than" : "at least"} ${n_(d.k1)}, and ${d.b2 === 0 ? `−${d.a2} times x` : `${d.b2} minus ${d.a2} times x`} is ${d.strict2 ? "more than" : "at least"} ${n_(d.k2)}. Which real numbers x are possible? Write the set in interval notation.`;
     },
     teach: {
       idea: "A system of inequalities in one variable asks for the numbers that satisfy every inequality at the same time: the overlap (intersection) of their solution sets.",
@@ -5156,7 +5173,7 @@ const CORE_MORE: Def[] = [
     type: "interval",
     mc: true,
     // [kind, a, b, c]: 0 marks m1 = a, m2 = b, average of three at least 40 + 5c; 1 a trip: ₹(500 + 100c) for the bus and ₹a per student,
-    // at most ₹(500 + 100c + a b); 2 a temperature between 5a and 5b °C, in °F
+    // at most ₹(500 + 100c + a b), answer 0 <= x <= b; 2 a temperature between 5(a − 5) and 5(b − 5) °C, in °F
     parse: none,
     reject: (p) => {
       if (!inRange(p, [[0, 2], [5, 95], [5, 95], [0, 10]])) return "A marks, budget or temperature problem.";
@@ -5166,34 +5183,31 @@ const CORE_MORE: Def[] = [
         return a < 30 || b < 30 || k < 10 || k > 95 ? "Marks out of 100 with a reachable target." : null;
       }
       if (kind === 1) return a % 5 || a < 20 || a > 60 || b < 10 || b > 45 || c > 5 ? "₹20 to ₹60 a student, 10 to 45 students." : null;
-      return a >= b || b > 9 || c !== 0 ? "Two temperatures from 5 °C to 45 °C." : null;
+      return a >= b || b > 14 || c !== 0 ? "Two temperatures from 0 °C to 45 °C." : null;
     },
     prompt: ([kind, a, b, c]) =>
       [
         `${name(a + b)} scored ${a} and ${b} marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least ${40 + 5 * c}. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).`,
-        `A school trip costs ₹${500 + 100 * c} for the bus plus ₹${a} for each student's entry ticket. The school can spend at most ₹${500 + 100 * c + a * b}. Let x be the number of students. Write an inequality for x.`,
-        `A greenhouse must be kept between ${5 * a} °C and ${5 * b} °C (both included). A thermometer shows °F, where F = 9C/5 + 32. Write the allowed range of F as an inequality.`,
+        `A school trip costs ₹${500 + 100 * c} for the bus plus ₹${a} for each student's entry ticket. The school can spend at most ₹${500 + 100 * c + a * b}. Let x be the number of students. Write the possible values of x as an inequality (remember x cannot be negative).`,
+        `A greenhouse must be kept between ${5 * (a - 5)} °C and ${5 * (b - 5)} °C (both included). A thermometer shows °F, where F = 9C/5 + 32. Write the allowed range of F as an inequality.`,
       ][kind],
     solve: ([kind, a, b, c]) => {
       if (kind === 0) {
         const k = 3 * (40 + 5 * c) - a - b;
         return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`(${a} + ${b} + x)/3 ≥ ${40 + 5 * c}`], value: k }, { id: "solve", op: "solve", competency: INEQ, inputs: [k], value: `${k} <= x <= 100` }], answer: `${k} <= x <= 100` };
       }
-      if (kind === 1) return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${500 + 100 * c} + ${a}x ≤ ${500 + 100 * c + a * b}`], value: b }, { id: "solve", op: "solve", competency: INEQ, inputs: [b], value: `x <= ${b}` }], answer: `x <= ${b}` };
-      const [f1, f2] = [9 * a + 32, 9 * b + 32];
-      return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${5 * a} ≤ C ≤ ${5 * b}`], value: f1 }, { id: "solve", op: "solve", competency: INEQ, inputs: [f1], value: `${f1} <= F <= ${f2}` }], answer: `${f1} <= F <= ${f2}` };
+      if (kind === 1) return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${500 + 100 * c} + ${a}x ≤ ${500 + 100 * c + a * b}`], value: b }, { id: "solve", op: "solve", competency: INEQ, inputs: [b], value: `0 <= x <= ${b}` }], answer: `0 <= x <= ${b}` };
+      const [f1, f2] = [9 * (a - 5) + 32, 9 * (b - 5) + 32];
+      return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${5 * (a - 5)} ≤ C ≤ ${5 * (b - 5)}`], value: f1 }, { id: "solve", op: "solve", competency: INEQ, inputs: [f1], value: `${f1} <= F <= ${f2}` }], answer: `${f1} <= F <= ${f2}` };
     },
     // independent: check numbers on both sides of each end against the story itself
     validate: ([kind, a, b, c], v) => {
       if (typeof v !== "string") return false;
       const t = v.replace(/\s/g, "").replace(/≤/g, "<=").toLowerCase();
       const two = t.match(/^(-?\d+)<=([a-z])<=(-?\d+)$/);
-      const one = t.match(/^([a-z])<=(-?\d+)$/);
-      const ok = (x: number) => (kind === 0 ? (a + b + x) / 3 >= 40 + 5 * c && x <= 100 && x >= 0 : kind === 1 ? 500 + 100 * c + a * x <= 500 + 100 * c + a * b && x >= 0 : (5 * (x - 32)) / 9 >= 5 * a && (5 * (x - 32)) / 9 <= 5 * b);
-      const inside = (x: number) => (two ? x >= Number(two[1]) && x <= Number(two[3]) : one ? x <= Number(one[2]) && x >= 0 : false);
-      if (!two && !one) return false;
-      if (kind === 1 && !one) return false;
-      if (kind !== 1 && !two) return false;
+      const ok = (x: number) => (kind === 0 ? (a + b + x) / 3 >= 40 + 5 * c && x <= 100 && x >= 0 : kind === 1 ? 500 + 100 * c + a * x <= 500 + 100 * c + a * b && x >= 0 : (5 * (x - 32)) / 9 >= 5 * (a - 5) && (5 * (x - 32)) / 9 <= 5 * (b - 5));
+      const inside = (x: number) => (two ? x >= Number(two[1]) && x <= Number(two[3]) : false);
+      if (!two) return false;
       for (let x = kind === 2 ? 0 : 0; x <= (kind === 2 ? 140 : 100); x += 0.5) if (ok(x) !== inside(x)) return false;
       return true;
     },
@@ -5205,16 +5219,17 @@ const CORE_MORE: Def[] = [
           { id: "no-cap", kind: "procedural", competency: INEQ, says: "The upper limit was left out; a test is out of 100, so x ≤ 100 as well.", predict: `x >= ${k}` },
         ];
       }
-      if (kind === 1) return [{ id: "fixed-ignored", kind: "procedural", competency: INEQ, says: `The bus cost (₹${500 + 100 * c}) was left out of the total; it is paid whatever the number of students.`, predict: (500 + 100 * c + a * b) % a === 0 ? `x <= ${(500 + 100 * c + a * b) / a}` : null }, { id: "wrong-way", kind: "conceptual", competency: INEQ, says: "'At most' means the cost is less than or equal to the limit, so x ≤ the boundary, not x ≥.", predict: `x >= ${b}` }];
-      return [{ id: "no-32", kind: "procedural", competency: INEQ, says: "The + 32 in F = 9C/5 + 32 was left out.", predict: `${9 * a} <= F <= ${9 * b}` }, { id: "upside-down", kind: "conceptual", competency: INEQ, says: "The fraction was used upside down (5/9 instead of 9/5).", predict: (25 * a) % 9 === 0 && (25 * b) % 9 === 0 ? `${(25 * a) / 9 + 32} <= F <= ${(25 * b) / 9 + 32}` : null }];
+      if (kind === 1) return [{ id: "fixed-ignored", kind: "procedural", competency: INEQ, says: `The bus cost (₹${500 + 100 * c}) was left out of the total; it is paid whatever the number of students.`, predict: (500 + 100 * c + a * b) % a === 0 ? `0 <= x <= ${(500 + 100 * c + a * b) / a}` : null }, { id: "wrong-way", kind: "conceptual", competency: INEQ, says: "'At most' means the cost is less than or equal to the limit, so x ≤ the boundary, not x ≥.", predict: `x >= ${b}` }];
+      const [c1, c2] = [5 * (a - 5), 5 * (b - 5)];
+      return [{ id: "no-32", kind: "procedural", competency: INEQ, says: "The + 32 in F = 9C/5 + 32 was left out.", predict: `${(9 * c1) / 5} <= F <= ${(9 * c2) / 5}` }, { id: "upside-down", kind: "conceptual", competency: INEQ, says: "The fraction was used upside down (5/9 instead of 9/5).", predict: (5 * c1) % 9 === 0 && (5 * c2) % 9 === 0 ? `${(5 * c1) / 9 + 32} <= F <= ${(5 * c2) / 9 + 32}` : null }];
     },
     distractors: ([kind, a, b, c]) => {
       if (kind === 0) {
         const k = 3 * (40 + 5 * c) - a - b;
         return [`${k + 1} <= x <= 100`, `x <= ${k}`];
       }
-      if (kind === 1) return [`x <= ${b + 1}`, `x < ${b}`];
-      return [`${9 * a + 31} <= F <= ${9 * b + 33}`, `${9 * a + 32} < F < ${9 * b + 32}`];
+      if (kind === 1) return [`0 <= x <= ${b + 1}`, `0 <= x <= ${b - 1}`];
+      return [`${9 * (a - 5) + 31} <= F <= ${9 * (b - 5) + 33}`, `${9 * (a - 5) + 32} < F < ${9 * (b - 5) + 32}`];
     },
     variants: () => [],
     explain: (s) => (s.id === "model" ? `Write the condition as an inequality: ${s.inputs[0]}` : `Solve it: ${s.value}`),
@@ -5224,8 +5239,8 @@ const CORE_MORE: Def[] = [
     word: ([kind, a, b, c]) =>
       [
         `In the school's three unit tests (each out of 100), ${name(a)} got ${a} and ${b}. The scholarship needs an average of at least ${40 + 5 * c}. What marks x in the last test would be enough? Give the range as an inequality.`,
-        `For a visit to the Guindy National Park, the bus costs ₹${500 + 100 * c} and each student's ticket is ₹${a}. The class fund has ₹${500 + 100 * c + a * b}. How many students x can go? Write an inequality for x.`,
-        `Mushrooms grow best between ${5 * a} °C and ${5 * b} °C. A farmer's thermometer reads in °F (F = 9C/5 + 32). Write the best range of F as an inequality.`,
+        `For a visit to the Guindy National Park, the bus costs ₹${500 + 100 * c} and each student's ticket is ₹${a}. The class fund has ₹${500 + 100 * c + a * b}. How many students x can go? Write the possible values of x as an inequality (x cannot be negative).`,
+        `Mushrooms grow best between ${5 * (a - 5)} °C and ${5 * (b - 5)} °C (both included). A farmer's thermometer reads in °F (F = 9C/5 + 32). Write the best range of F as an inequality.`,
       ][kind],
     teach: {
       idea: "Words like 'at least', 'at most', 'no more than' and 'between' describe inequalities. Turning them into symbols and solving gives the whole range of answers that work.",
@@ -5284,7 +5299,7 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "ends" ? `The points at distance ${s.inputs[1]} from ${n_(Number(s.inputs[0]))} are ${s.value}` : `So the set is ${s.value}`),
     domain: [[0, 2], [-10, 10], [1, 9]],
     difficulty: ([kind, a]) => (kind === 2 ? 3 : a < 0 ? 2 : 1),
-    word: ([kind, a, d]) => (kind === 2 ? `A cold store sounds an alarm when its temperature x (in °C) is more than ${d} degrees away from ${n_(a)} °C. Write the set of temperatures that sound the alarm in interval notation.` : `A cold store keeps its temperature x (in °C) ${kind === 0 ? `less than ${d} degrees away from` : `at most ${d} degrees away from`} ${n_(a)} °C. Write the set of allowed temperatures in interval notation.`),
+    word: ([kind, a, d]) => (kind === 2 ? `A cold store sounds an alarm when its temperature x (in °C) is more than ${d} ${d === 1 ? "degree" : "degrees"} away from ${n_(a)} °C. Write the set of temperatures that sound the alarm in interval notation.` : `A cold store keeps its temperature x (in °C) ${kind === 0 ? `less than ${d} ${d === 1 ? "degree" : "degrees"} away from` : `at most ${d} ${d === 1 ? "degree" : "degrees"} away from`} ${n_(a)} °C. Write the set of allowed temperatures in interval notation.`),
     teach: {
       idea: "|x − a| is the distance from x to a on the number line. The δ-neighbourhood of a is every x less than δ away from a: the open interval (a − δ, a + δ).",
       method: "Mark a on the number line and go δ to the left and δ to the right. Less than δ: the open interval between; at most δ: include the ends; more than δ: the two outside pieces.",
@@ -5307,7 +5322,7 @@ const linStory = ([kind, x, m]: number[]) => {
   const B = 100 + 10 * m;
   return { ...d, S: B, ans: x, A: B + (d.n - d.k) * x };
 };
-const surcQ = ([kind, s]: number[]) => {
+const surcQ = ([kind, s]: number[]): { choices: string[]; at: (j: number) => number; base: string[]; p?: number; q?: number; m?: number; n?: number } => {
   const r = rng(s * 19 + 4400);
   if (kind === 0) {
     const n = [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 18, 20][s % 13];
@@ -5337,7 +5352,7 @@ const SURD_MORE: Def[] = [
     reject: (p) => {
       if (!inRange(p, [[0, 4], [2, 20], [0, 23]])) return "One of five kinds of story, with a whole-number answer.";
       const [kind, x, m] = p;
-      if (kind === 0) return x < 5 || x > 15 || m > 13 ? "A child aged 5 to 15." : null;
+      if (kind === 0) return x < 5 || x > 15 || m > 13 || (1 + (m % 4)) * x < 18 || (2 + (m % 4)) * x > 60 ? "A child aged 5 to 15, a mother at least 18 years older and at most 60." : null;
       if (kind === 1) return m > 8 || x > 12 ? "Multiples of 2 to 10." : null;
       if (kind === 2) return m > 11 || x < 3 ? "A width of at least 3." : null;
       if (kind === 3) return m > 8 || x > 12 ? "A number up to 60." : null;
@@ -5618,7 +5633,7 @@ const SURD_MORE: Def[] = [
     domain: [[0, 1], [1, 12], [2, 15], [0, 4], [0, 1]],
     cap: 400,
     difficulty: ([kind, a, b]) => (kind === 1 ? 3 : a % b === 0 ? 1 : 2),
-    word: (p) => `${name(p[1])} works out the time a pendulum takes and gets ${ratQ(p).text} seconds. The teacher asks for the answer with a rational denominator, in simplest form. Which is right?`,
+    word: (p) => (ratQ(p).val > 0 ? `${name(p[1])} works out the time a pendulum takes and gets ${ratQ(p).text} seconds. The teacher asks for the answer with a rational denominator, in simplest form. Which is right?` : `${name(p[1])} solves an equation in a practice book and gets x = ${ratQ(p).text}. The answer key writes it with a rational denominator, in simplest form. Which is the answer key's form?`),
     teach: {
       idea: "Multiplying the top and bottom of a fraction by the same number does not change its value. Choosing √b (or the conjugate √b ∓ c) makes the bottom a whole number, because √b × √b = b and (√b + c)(√b − c) = b − c².",
       method: "For a/√b, multiply by √b/√b. For a/(√b ± c), multiply by (√b ∓ c)/(√b ∓ c). Then simplify, cancelling any common factor.",

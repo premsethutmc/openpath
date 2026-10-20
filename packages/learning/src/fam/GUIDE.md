@@ -63,7 +63,7 @@ or use a `tuple` (hours, minutes) — say which in the prompt.
 `{ type: "clock", h, m }` · `{ type: "coins", items: number[] }` (rupee values: 1, 2, 5, 10, 20, 50, 100, 200, 500) ·
 `{ type: "bars", title?, labels, values, scale? }` bar chart · `{ type: "pictograph", labels, counts, key }` (one picture = key items) ·
 `{ type: "table", head, rows }` · `{ type: "shape", sides, lengths?: (number|string)[], name? }` (a regular polygon) or `{ type: "shape", kind: "rectangle" | "square" | "parallelogram" | "rhombus" | "trapezium" | "kite" | "lshape", lengths?: [...side by side, starting top-left, clockwise], diagonals?: true, height?: "4 cm" }` ·
-`{ type: "angle", deg }` · `{ type: "circle", radius?, diameter?, sector? }` (labels as strings; sector in degrees) · `{ type: "grid", rows, cols, shaded? }` (shaded: a count, filled row by row) ·
+`{ type: "angle", deg }` · `{ type: "circle", radius?, diameter?, sector?, estimate? }` (labels as strings; sector in degrees; `estimate: true` when the sector's size is what is asked, so the screen-reader text does not give it away) · `{ type: "grid", rows, cols, shaded? }` (shaded: a count, filled row by row) ·
 `{ type: "triangle", sides?: [base, right side, left side], angles?: [bottom-left, bottom-right, top], right?, height?: "6 cm" }` (side 0 is the base, drawn at the bottom; with right: true, side 0 and side 2 are the legs and side 1 the hypotenuse) ·
 `{ type: "plane", points: [x, y, label?][], segments?: [[x, y], [x, y]][], range?, quadrant?: 1 }` (quadrant 1: only x, y ≥ 0, numbered axes) · `{ type: "pie", labels, values }` ·
 `{ type: "strips", top, bottom, shaded }` fraction strips · `{ type: "array", rows, cols, split? }` ·

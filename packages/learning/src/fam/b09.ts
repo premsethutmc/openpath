@@ -1852,7 +1852,7 @@ const FW = [
   { op: "÷", text: (w: number, a: number, b: number) => `A tailor has ${w} m of cloth. Each school bag needs ${a}/${b} m. How many bags can be made from the cloth?`, whole: true },
   { op: "×", text: (w: number, a: number, b: number) => `A packet holds ${w} kg of rice. ${name(w + b)} uses ${a}/${b} of the packet. How many kg of rice is used? (A fraction or mixed number is fine.)`, whole: true },
   { op: "×", text: (c: number, a: number, b: number, d: number) => `${c}/${d} of a garden is used for vegetables, and ${a}/${b} of the vegetable part grows tomatoes. What fraction of the whole garden grows tomatoes?`, whole: false },
-  { op: "÷", text: (c: number, a: number, b: number, d: number) => `A jug holds ${c}/${d} litre of juice. It is shared equally into cups of ${a}/${b} litre each. How many cups can be filled? (A fraction or mixed number is fine.)`, whole: false },
+  { op: "÷", text: (c: number, a: number, b: number, d: number) => `A jug holds ${c}/${d} litre of juice. It is poured out in cupfuls of ${a}/${b} litre each. How many cupfuls is that? (A fraction or mixed number is fine: part of a cup counts as part of a cupful.)`, whole: false },
   { op: "×", text: (c: number, a: number, b: number, d: number) => `A car uses ${a}/${b} litre of petrol for each km. How many litres does it use for ${c}/${d} km? (A fraction is fine.)`, whole: false },
 ];
 // [ctx, a, b, c, d]: d = 1 for the whole-number contexts
@@ -1920,15 +1920,20 @@ const splitCorners = ([mode, a, b, c]: number[]): [number, number][] =>
 
 // ---------------------------------------------------------------- C ÷ d and historical values of π (aipi)
 const OBJ = ["a steel plate", "a bangle", "a bicycle wheel", "a coin", "the rim of a well", "a clock face", "a round tabletop", "a drum"];
+/** The diameters (mm) each object really has, so the sizes are sensible: a coin about 2 cm, a well rim a metre or more. */
+const OBJD: [number, number][] = [[180, 300], [55, 80], [500, 700], [20, 30], [900, 1500], [150, 350], [600, 1200], [250, 600]];
 // [mode, o, d]: mode 0, object o with diameter d mm (measured circumference = πd to the nearest mm); mode 1: approximation o
 const APPROX = [
   { who: "Aryabhata (about 499 CE)", n: 62832, d: 20000 },
   { who: "an ancient Egyptian scribe", n: 256, d: 81 },
   { who: "the fraction 22/7 used in schools", n: 22, d: 7 },
   { who: "the Chinese mathematician Zu Chongzhi", n: 355, d: 113 },
-  { who: "Bhaskara II, in one of his rules", n: 3927, d: 1250 },
+  { who: "Bhaskara II (in one of his rules)", n: 3927, d: 1250 },
 ];
-const piOk = ([mode, o, d]: number[]) => (mode === 0 ? o >= 0 && o <= 7 && d >= 40 && d <= 400 && d % 5 === 0 : mode === 1 ? o >= 0 && o < APPROX.length && d === 0 : false);
+// mode 0: object o, diameter d mm in its real range; mode 1: approximation o as a decimal; mode 2: approximation o used to find
+// the circumference of a circle of diameter d mm (40 to 400)
+const piOk = ([mode, o, d]: number[]) =>
+  mode === 0 ? o >= 0 && o <= 7 && d >= OBJD[o][0] && d <= OBJD[o][1] && d % 5 === 0 : mode === 1 ? o >= 0 && o < APPROX.length && d === 0 : mode === 2 ? o >= 0 && o < APPROX.length && d >= 40 && d <= 400 && d % 5 === 0 : false;
 const measuredC = (d: number) => Math.round(Math.PI * d);
 const r2 = (x: number) => Math.round(x * 100) / 100;
 const r4 = (x: number) => Math.round(x * 10000) / 10000;
@@ -1997,6 +2002,8 @@ const terminates = (r: R) => {
   while (d % 5 === 0) d /= 5;
   return d === 1;
 };
+/** A predicted wrong answer as a learner writes it: exact when it terminates, else to two decimal places. */
+const p2 = (r: R) => (terminates(r) ? num(r) : r2(num(r)));
 const wipOk = (p: number[]) => wipShape(p) && terminates(wipAns(p));
 const wipShape = ([mode, a, b, t]: number[]) => {
   if (mode === 0) return a >= 7 && b > a && b <= 56 && a % 7 === 0 && b % 7 === 0 && t >= 0 && t < WANG.length;
@@ -2013,7 +2020,8 @@ const wipAns = ([mode, a, b, t]: number[]): R => {
 
 // ---------------------------------------------------------------- hollow cylinders (aihollow)
 // [ask, R, r, h]: outer radius R, inner radius r (cm, multiples of 7 ÷ 2), height h; ask 0 curved surface (outside and inside), 1 total surface, 2 volume of material
-const holOk = ([ask, R, r, h]: number[]) => ask >= 0 && ask <= 2 && R >= 2 && R <= 12 && r >= 1 && r < R && h >= 5 && h <= 40;
+// a real pipe: the wall at most half the outer radius (2r ≥ R) and the pipe at least as long as it is wide (h ≥ 7R, the outer diameter)
+const holOk = ([ask, R, r, h]: number[]) => ask >= 0 && ask <= 2 && R >= 2 && R <= 12 && r >= 1 && r < R && 2 * r >= R && h >= 7 * R && h <= 140 && h % 5 === 0;
 const holAns = ([ask, R, r, h]: number[]): R => {
   const [Ro, ri] = [q(7 * R, 2), q(7 * r, 2)];
   const csa = qm(qm(PI7, q(2 * h, 1)), qa(Ro, ri));
@@ -2023,7 +2031,8 @@ const holAns = ([ask, R, r, h]: number[]): R => {
 
 // ---------------------------------------------------------------- the radius from the circumference (airad)
 // [mode, k, n]: 0 a circle with circumference 44k cm: find the radius; 1 the same, find the diameter; 2 a wheel that rolls 44kn cm in n turns: find its radius
-const radOk = ([mode, k, n]: number[]) => (mode <= 1 ? mode >= 0 && k >= 1 && k <= 30 && n === 0 : mode === 2 ? k >= 1 && k <= 10 && n >= 10 && n <= 100 && n % 10 === 0 : false);
+// a wheel of radius 28 to 70 cm (a bicycle or cart wheel)
+const radOk = ([mode, k, n]: number[]) => (mode <= 1 ? mode >= 0 && k >= 1 && k <= 30 && n === 0 : mode === 2 ? k >= 4 && k <= 10 && n >= 10 && n <= 100 && n % 10 === 0 : false);
 
 // ---------------------------------------------------------------- dividing decimals in context (aidword)
 // [ctx, u, v]: answer u ÷ 10^... see the texts; all divisions are exact
@@ -2190,8 +2199,12 @@ B09.push(
     difficulty: ([mode]) => (mode >= 2 ? 1 : mode === 0 ? 2 : 3),
     word: (p) => {
       const [mode, a, b, c, e] = p;
-      if (mode === 0) return `In a card game, ${name(a)} works out the round's score as ${ixText(p)} (a negative score is a loss). What is the score?`;
-      if (mode === 1) return `A shopkeeper's account for the day is worked out as ${ixText(p)} (in hundreds of rupees; a negative number is a loss). What is the result?`;
+      // the story gives the products and the quotient themselves: a count of cards (or weeks) times a signed value each
+      const pts = (v: number) => `${v < 0 ? "−" : "+"}${Math.abs(v)} point${Math.abs(v) === 1 ? "" : "s"}`;
+      if (mode === 0) return `In a card game, red cards and blue cards carry plus or minus points. In one round ${name(a + c)} picks up ${Math.abs(a)} red card${Math.abs(a) === 1 ? "" : "s"} worth ${pts(Math.sign(a * b) * Math.abs(b))} each and ${Math.abs(c)} blue card${Math.abs(c) === 1 ? "" : "s"} worth ${pts(Math.sign(c * e) * Math.abs(e))} each. What is the score for the round? (It may be negative.)`;
+      const week = a * b > 0 ? `go up by ₹${Math.abs(b)}00` : `go down by ₹${Math.abs(b)}00`;
+      const share = c / e > 0 ? `pays an equal share of a ₹${Math.abs(c)}00 bill split among ${Math.abs(e)} friends` : `receives an equal share of a ₹${Math.abs(c)}00 prize split among ${Math.abs(e)} friends`;
+      return `${name(a + c)}'s savings ${week} every week for ${Math.abs(a)} weeks. Then ${name(a + c)} ${share}. By how many hundreds of rupees have the savings changed altogether? (A negative answer means they went down.)`;
       if (mode === 2) return `In a school quiz, a team gets ${b} points for each right answer and loses ${e} for each wrong one. The team answers ${a} questions right and ${c} wrong. What is its score?`;
       return `In the night, the temperature on a hill in Ooty falls by ${b} °C every hour. At midnight it is ${a < 0 ? `−${-a}` : a} °C. What is it ${c} hours later, in °C?`;
     },
@@ -2231,7 +2244,7 @@ B09.push(
       return [
         B("fall-added", "conceptual", INTA, `The ${ctx === 0 ? "fall" : ctx === 1 ? "trip down" : "dive down"} of ${y} was added. Going down is a negative change: take ${y} away.`, k(s + x + y + z)),
         ...(s < 0 ? [B("start-sign", "conceptual", INTA, `The start was read as ${-s} instead of −${-s}. Below zero the numbers are negative.`, k(-s + x - y + z))] : []),
-        B("sign-dropped", "procedural", INTA, `After going below zero (${s + x - y}), the minus sign was dropped, so ${Math.abs(s + x - y)} + ${z} was worked out. Keep the sign: ${s + x - y} + ${z}.`, k(Math.abs(s + x - y) + z)),
+        B("sign-dropped", "procedural", INTA, `After a negative running total (${s + x - y}), the minus sign was dropped, so ${Math.abs(s + x - y)} + ${z} was worked out. Keep the sign: ${s + x - y} + ${z}.`, k(Math.abs(s + x - y) + z)),
       ];
     },
     variants: () => [],
@@ -2289,7 +2302,7 @@ B09.push(
     keep: estOk,
     cap: 300,
     difficulty: ([mode, x]) => (mode === 0 && x < 50 ? 1 : mode === 0 ? 2 : 3),
-    word: ([mode, x, y]) => (mode === 0 ? `${name(x)} buys ${D(x, 10)} kg of tomatoes at ₹${D(y, 10)} a kg. Estimate the cost in rupees by rounding both numbers to the nearest whole number.` : `A rope ${D(x, 10)} m long is cut into pieces ${D(y, 10)} m long. Estimate how many pieces there are by rounding both lengths to the nearest whole number.`),
+    word: ([mode, x, y]) => (mode === 0 ? `${name(x)} buys ${D(x, 10)} kg of tomatoes at ₹${D(y, 10)} a kg. Estimate the cost in rupees by rounding both numbers to the nearest whole number.` : `A car goes ${D(x, 10)} km using ${D(y, 10)} litres of petrol. Estimate how many km it goes on one litre, by rounding both numbers to the nearest whole number.`),
     teach: {
       idea: "An estimate tells roughly how big an answer should be, so a misplaced decimal point shows up at once. Rounding the numbers first makes the calculation easy to do in your head.",
       method: "Round each number to the nearest whole number (look at the tenths: 5 or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
@@ -2314,7 +2327,7 @@ B09.push(
     reject: (p) => (splitOk(p) ? null : "Fields with a diagonal and two offsets, house-shaped walls, trapezium fields and plots."),
     prompt: ([mode, a, b, c, d]) =>
       mode === 0
-        ? `A field ABCD is split by the diagonal AC into two triangles. AC = ${a} m, and the perpendicular distances from B and from D to AC are ${b} m and ${c} m. Find the area of the field, in m².`
+        ? `A field ABCD is split by the diagonal AC into two triangles. AC = ${a} m, and the perpendicular distances from B and from D to AC are ${b} m and ${c} m (so AC is the base of both triangles ABC and ACD, and these distances are their heights). Find the area of the field, in m².`
         : mode === 1
           ? `The end wall of a hut is a rectangle ${a} m wide and ${b} m high with a triangle on top, ${c} m high, standing on the whole width. Find the area of the wall, in m².`
           : mode === 2
@@ -2342,7 +2355,7 @@ B09.push(
       if (mode === 0) return [B("no-half", "procedural", TRI, "The triangles' areas were not halved. Each triangle is ½ × base × height.", a * (b + c)), B("one-triangle", "procedural", TRAP, "Only one of the two triangles was found; the field is both triangles together.", num(q(a * Math.max(b, c), 2)))];
       if (mode === 1) return [B("triangle-not-halved", "procedural", TRI, "The triangle was counted as a full rectangle. Its area is ½ × width × height.", a * b + a * c), B("rectangle-only", "procedural", TRAP, "Only the rectangle was found. The triangle on top is part of the wall too.", a * b)];
       if (mode === 2) return [B("area-only", "procedural", TRAP, "The area was found but not the cost. Multiply the area by the cost per m².", num(q((a + b) * c, 2))), B("no-half", "procedural", TRAP, "The trapezium's area was not halved: area = ½ × (sum of the parallel sides) × distance between them.", (a + b) * c * d)];
-      return [B("no-double", "procedural", TRAP, "The area was divided by the sum of the parallel sides without doubling it first. Area = ½ × (a + b) × h, so h = 2 × area ÷ (a + b).", num(q(c, 2))), B("one-side", "procedural", TRAP, "The area was divided by one parallel side only.", num(q((a + b) * c, 2 * a)))];
+      return [B("no-double", "procedural", TRAP, "The area was divided by the sum of the parallel sides without doubling it first. Area = ½ × (a + b) × h, so h = 2 × area ÷ (a + b).", num(q(c, 2))), B("one-side", "procedural", TRAP, "The area was divided by one parallel side only.", p2(q((a + b) * c, 2 * a)))];
     },
     variants: () => [],
     explain: say({ t1: "Triangle ABC", t2: "Triangle ACD", sum: "Total area", rect: "The rectangle", tri: "The triangle", area: "Area of the field", cost: "Cost", double: "Twice the area", height: "The distance" }),
@@ -2376,19 +2389,37 @@ B09.push(
     decimals: true,
     // [mode, o, d]: mode 0 object OBJ[o] of diameter d mm (its measured circumference πd, to the nearest mm); mode 1 APPROX[o] as a decimal
     parse: none,
-    reject: (p) => (piOk(p) ? null : "Circles of 40 to 400 mm across; five historical values of π."),
-    prompt: ([mode, o, d]) => (mode === 0 ? `${name(o + d)} measures ${OBJ[o]} with a tape: its circumference is ${measuredC(d)} mm and its diameter is ${d} mm. Work out circumference ÷ diameter, correct to two decimal places.` : `${APPROX[o].who} used ${APPROX[o].n}/${APPROX[o].d} for π. Write this value as a decimal, correct to four decimal places.`),
-    solve: ([mode, o, d]) => (mode === 0 ? { steps: [step("ratio", "divide", CIRC, [measuredC(d), d], r2(measuredC(d) / d)), step("same", "note", CIRC, ["every circle"], "about 3.14 = π")], answer: r2(measuredC(d) / d) } : { steps: [step("ratio", "divide", CIRC, [APPROX[o].n, APPROX[o].d], r4(APPROX[o].n / APPROX[o].d))], answer: r4(APPROX[o].n / APPROX[o].d) }),
+    reject: (p) => (piOk(p) ? null : "Real objects of their real sizes (a coin 20 to 30 mm across, a well 0.9 to 1.5 m); five historical values of π, also used for circles of 40 to 400 mm."),
+    prompt: ([mode, o, d]) =>
+      mode === 0
+        ? `${name(o + d)} measures ${OBJ[o]} with a tape: its circumference is ${measuredC(d)} mm and its diameter is ${d} mm. Work out circumference ÷ diameter, correct to two decimal places.`
+        : mode === 1
+          ? `${APPROX[o].who} used ${APPROX[o].n}/${APPROX[o].d} for π. Write this value as a decimal, correct to four decimal places.`
+          : `${APPROX[o].who} used ${APPROX[o].n}/${APPROX[o].d} for π. With this value, what is the circumference of a circle of diameter ${d} mm, in mm, correct to two decimal places?`,
+    solve: ([mode, o, d]) =>
+      mode === 0
+        ? { steps: [step("ratio", "divide", CIRC, [measuredC(d), d], r2(measuredC(d) / d)), step("same", "note", CIRC, ["every circle"], "about 3.14 = π")], answer: r2(measuredC(d) / d) }
+        : mode === 1
+          ? { steps: [step("ratio", "divide", CIRC, [APPROX[o].n, APPROX[o].d], r4(APPROX[o].n / APPROX[o].d))], answer: r4(APPROX[o].n / APPROX[o].d) }
+          : { steps: [step("circ", "multiply", CIRC, [`${APPROX[o].n}/${APPROX[o].d}`, d], r2((APPROX[o].n * d) / APPROX[o].d))], answer: r2((APPROX[o].n * d) / APPROX[o].d) },
     // independent: multiply back: the answer × the bottom number must be within half a unit of the last place of the top number
     validate: ([mode, o, d], v) => {
       const x = typeof v === "number" ? null : val(v);
       if (typeof v !== "number" && !x) return false;
       const t = typeof v === "number" ? v : num(x!);
-      const [top, bot, places] = mode === 0 ? [measuredC(d), d, 2] : [APPROX[o].n, APPROX[o].d, 4];
+      const [top, bot, places] = mode === 0 ? [measuredC(d), d, 2] : mode === 1 ? [APPROX[o].n, APPROX[o].d, 4] : [APPROX[o].n * d, APPROX[o].d, 2];
       const scaled = t * 10 ** places;
       return Math.abs(scaled - Math.round(scaled)) < 1e-6 && Math.abs(t * bot - top) <= (0.5 / 10 ** places) * bot + 1e-9;
     },
     bugs: ([mode, o, d]) => {
+      if (mode === 2) {
+        const C = r2((APPROX[o].n * d) / APPROX[o].d);
+        const k = (x: number) => (x === C ? null : x);
+        return [
+          B("diameter-as-radius", "conceptual", CIRC, `The diameter was used as the radius in C = 2πr, which doubles the circumference. With the diameter, C = π × d.`, k(r2((2 * APPROX[o].n * d) / APPROX[o].d))),
+          B("radius-times-pi", "procedural", CIRC, `Half the diameter (${d / 2} mm) was multiplied by π. C = π × d, or 2 × π × r with r = ${d / 2} mm.`, k(r2((APPROX[o].n * d) / (2 * APPROX[o].d)))),
+        ];
+      }
       const [top, bot] = mode === 0 ? [measuredC(d), d] : [APPROX[o].n, APPROX[o].d];
       const rr = mode === 0 ? r2 : r4;
       return [
@@ -2397,11 +2428,11 @@ B09.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${vs(s.value)}` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
-    domain: [[0, 1], [0, 7], [0, 400]],
+    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${vs(s.value)}` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
+    domain: [[0, 2], [0, 7], [0, 1500]],
     keep: piOk,
     cap: 300,
-    difficulty: ([mode]) => (mode === 0 ? 1 : 2),
+    difficulty: ([mode]) => (mode === 0 ? 1 : mode === 1 ? 2 : 3),
     teach: {
       idea: "For every circle, big or small, the circumference is a little more than 3 times the diameter: C ÷ d is always the same number, π ≈ 3.1416. Mathematicians in India and elsewhere found better and better fractions for it (Aryabhata: 62832/20000).",
       method: "Divide the circumference by the diameter (both in the same unit) and round to the places asked. For a fraction, divide the top by the bottom.",
@@ -2410,7 +2441,7 @@ B09.push(
         { id: "three_diameters", title: "Three diameters and a bit", kind: "procedural", text: ["Lay three diameters of string round the circle: a small gap is left.", "So C is a bit more than 3d, about 3.14 d."] },
       ],
     },
-    limits: "Measurements to the nearest millimetre and five historical fractions; explaining why the ratio is constant is an educator-marked task.",
+    limits: "Measurements to the nearest millimetre and five historical fractions (as decimals, and used to find a circumference); explaining why the ratio is constant is an educator-marked task.",
   },
   // ================================================================ convex and non-convex quadrilaterals
   {
@@ -2426,7 +2457,7 @@ B09.push(
     prompt: ([mode, kind, s]) => {
       if (mode === 0) {
         const [a, b, c, d] = cvxAngles(kind, s);
-        return `A closed figure ABCD with four corners has these angles inside it, going round: ∠A = ${a}°, ∠B = ${b}°, ∠C = ${c}°, ∠D = ${d}°. What is ABCD?`;
+        return `A closed path goes through four points A, B, C and D in order and back to A. The angles inside the path at the four points are ∠A = ${a}°, ∠B = ${b}°, ∠C = ${c}°, ∠D = ${d}°. What shape does the path make?`;
       }
       const P = cvxPoints(kind, s);
       return `The points ${P.map(([x, y], i) => `${"ABCD"[i]}(${x < 0 ? `−${-x}` : x}, ${y < 0 ? `−${-y}` : y})`).join(", ")} are joined in order A → B → C → D → A, as in the picture. What shape do they make?`;
@@ -2454,7 +2485,7 @@ B09.push(
       const [mode, kind, s] = p;
       const o = cvxOpts(p);
       if (kind === 1) return [B("all-convex", "conceptual", QUAD, mode === 0 ? `Every four-sided figure was taken to be convex. ∠B = ${cvxAngles(kind, s)[1]}° is more than 180°: that corner points inwards, so the figure is non-convex.` : "Every four-sided figure was taken to be convex. One corner here points inwards (the figure has a dent), so it is non-convex.", o.indexOf(CVX[0]))];
-      if (kind === 2) return [B("four-points-enough", "conceptual", QUAD, mode === 0 ? "Four corners were taken to make a quadrilateral. ∠B = 180° means A, B and C lie on one straight line, so the figure is really a triangle." : "Four points were taken to make a quadrilateral. A, B and C lie on one straight line, so the figure is a triangle, not a 4-gon.", o.indexOf(CVX[0]))];
+      if (kind === 2) return [B("four-points-enough", "conceptual", QUAD, mode === 0 ? "Four points were taken to make a quadrilateral. ∠B = 180° means A, B and C lie on one straight line, so the figure is really a triangle." : "Four points were taken to make a quadrilateral. A, B and C lie on one straight line, so the figure is a triangle, not a 4-gon.", o.indexOf(CVX[0]))];
       return mode === 0 && cvxAngles(kind, s).some((x) => x > 90) ? [B("obtuse-is-dent", "conceptual", QUAD, "An obtuse angle (more than 90°) was taken as a dent. A figure is non-convex only when an angle is more than 180°.", o.indexOf(CVX[1]))] : [];
     },
     variants: () => [],
@@ -2517,10 +2548,10 @@ B09.push(
     bugs: (p) => {
       const [mode, a, b, t] = p;
       const f = q(WANG[t], 360);
-      if (mode === 0) return [B("whole-sector", "conceptual", SECT, `The whole sector out to ${b} cm was found. The blade does not reach the part within ${a} cm of the pivot: take that smaller sector away.`, num(qm(qm(PI7, f), q(b * b, 1)))), B("difference-squared", "procedural", SECT, `The radii were subtracted before squaring (${b} − ${a})². Find each sector's area, then subtract: the area depends on b² − a².`, num(qm(qm(PI7, f), q((b - a) ** 2, 1))))];
-      if (mode === 1) return [B("one-quarter", "procedural", SECT, "Only one quarter circle was taken away. There is one at each of the four corners: together they make a whole circle.", num(qs(q(4 * a * a, 1), qm(PI7, q(a * a, 4))))), B("side-as-radius", "procedural", SECT, `The side of the tile (${2 * a} cm) was used as the radius.`, null)];
-      if (mode === 2) return [B("one-segment", "procedural", SECT, "Only one half of the leaf was found. The leaf is two equal segments, one from each quarter circle.", num(qm(qs(qm(PI7, q(1, 4)), q(1, 2)), q(a * a, 1)))), B("quarter-circle", "conceptual", SECT, "The area of a whole quarter circle was given. The leaf is the part where the two quarter circles overlap: quarter circle − triangle, twice.", num(qm(PI7, q(a * a, 4))))];
-      return [B("full-circle", "conceptual", SECT, `The area of the whole circle was found. The light covers only ${WANG[t]}/360 of it.`, num(qm(PI7, q(b * b, 1)))), B("arc-not-area", "procedural", SECT, "The arc length was found instead of the area. The area of a sector is (θ/360) × πr².", num(qm(qm(PI7, f), q(2 * b, 1))))];
+      if (mode === 0) return [B("whole-sector", "conceptual", SECT, `The whole sector out to ${b} cm was found. The blade does not reach the part within ${a} cm of the pivot: take that smaller sector away.`, p2(qm(qm(PI7, f), q(b * b, 1)))), B("difference-squared", "procedural", SECT, `The radii were subtracted before squaring (${b} − ${a})². Find each sector's area, then subtract: the area depends on b² − a².`, p2(qm(qm(PI7, f), q((b - a) ** 2, 1))))];
+      if (mode === 1) return [B("one-quarter", "procedural", SECT, "Only one quarter circle was taken away. There is one at each of the four corners: together they make a whole circle.", p2(qs(q(4 * a * a, 1), qm(PI7, q(a * a, 4))))), B("side-as-radius", "procedural", SECT, `The side of the tile (${2 * a} cm) was used as the radius.`, null)];
+      if (mode === 2) return [B("one-segment", "procedural", SECT, "Only one half of the leaf was found. The leaf is two equal segments, one from each quarter circle.", p2(qm(qs(qm(PI7, q(1, 4)), q(1, 2)), q(a * a, 1)))), B("quarter-circle", "conceptual", SECT, "The area of a whole quarter circle was given. The leaf is the part where the two quarter circles overlap: quarter circle − triangle, twice.", p2(qm(PI7, q(a * a, 4))))];
+      return [B("full-circle", "conceptual", SECT, `The area of the whole circle was found. The light covers only ${WANG[t]}/360 of it.`, p2(qm(PI7, q(b * b, 1)))), B("arc-not-area", "procedural", SECT, "The arc length was found instead of the area. The area of a sector is (θ/360) × πr².", p2(qm(qm(PI7, f), q(2 * b, 1))))];
     },
     variants: () => [],
     explain: say({ outer: "Sector out to the blade's tip", inner: "Sector the blade does not reach", clean: "Area cleaned", square: "The tile", quarters: "Four quarter circles = one circle", left: "Area left", quarter: "Quarter circle", segment: "One segment (quarter circle − triangle)", leaf: "The leaf (two segments)", sector: "The lit sector" }),
@@ -2528,7 +2559,9 @@ B09.push(
     keep: wipOk,
     cap: 300,
     difficulty: ([mode]) => (mode === 3 ? 1 : mode === 1 ? 2 : 3),
-    figure: ([mode, a, b, t]) => (mode === 0 || mode === 3 ? { type: "circle", radius: `${b} ${mode === 0 ? "cm" : "km"}`, sector: WANG[t] } : { type: "shape", kind: "square", lengths: [`${mode === 1 ? 2 * a : a} cm`] }),
+    // only the lighthouse's sector is drawn: a full sector would mislead for the wiper (its inner part is not cleaned), and a
+    // plain square would not show the quarter circles
+    figure: ([mode, , b, t]) => (mode === 3 ? { type: "circle", radius: `${b} km`, sector: WANG[t] } : null),
     teach: {
       idea: "A sector of angle θ is θ/360 of a circle, so its area is (θ/360) × πr². Shapes from wipers and designs are built from sectors, squares and triangles by adding and taking away.",
       method: "Split the shape: a wiper's path is a big sector minus a small one; corner quarter circles together make a whole circle; a leaf is two segments, each a quarter circle minus a right triangle. Work out each part, then combine.",
@@ -2550,7 +2583,7 @@ B09.push(
     decimals: true,
     // [ask, R, r, h]: outer radius 7R/2 cm, inner radius 7r/2 cm, length h cm; ask 0 curved surface (outside and inside), 1 total surface, 2 volume of material
     parse: none,
-    reject: (p) => (holOk(p) ? null : "Pipes with radii 3.5 to 42 cm (inner smaller) and lengths 5 to 40 cm."),
+    reject: (p) => (holOk(p) ? null : "Pipes with radii 3.5 to 42 cm (inner smaller, the wall at most half the outer radius) and lengths from the outer diameter up to 140 cm, in steps of 5 cm."),
     prompt: ([ask, R, r, h]) => `A hollow metal pipe is ${h} cm long. Its outer radius is ${D(7 * R, 2)} cm and its inner radius is ${D(7 * r, 2)} cm. Taking π = 22/7, find ${["its curved surface area, outside and inside together, in cm²", "its total surface area (outside, inside and the two ring-shaped ends), in cm²", "the volume of metal in it, in cm³"][ask]}.`,
     solve: (p) => {
       const [ask, R, r, h] = p;
@@ -2585,7 +2618,7 @@ B09.push(
     },
     variants: () => [],
     explain: say({ outside: "Outside curved surface", inside: "Inside curved surface", ends: "Two ring-shaped ends", total: "Total", ring: "Area of the ring", volume: "Volume of metal" }),
-    domain: [[0, 2], [2, 12], [1, 11], [5, 40]],
+    domain: [[0, 2], [2, 12], [1, 11], [15, 140]],
     keep: holOk,
     cap: 400,
     difficulty: ([ask]) => (ask === 0 ? 1 : ask === 2 ? 2 : 3),
@@ -2612,7 +2645,7 @@ B09.push(
     decimals: true,
     // [mode, k, n]: 0 circumference 44k cm, find the radius; 1 find the diameter; 2 a wheel rolls 44kn cm in n turns, find its radius
     parse: none,
-    reject: (p) => (radOk(p) ? null : "Circumferences that are multiples of 44 cm (π = 22/7)."),
+    reject: (p) => (radOk(p) ? null : "Circumferences that are multiples of 44 cm (π = 22/7); wheels of radius 28 to 70 cm."),
     prompt: ([mode, k, n]) => (mode <= 1 ? `The circumference of a circle is ${44 * k} cm. Taking π = 22/7, find its ${mode === 0 ? "radius" : "diameter"}, in cm.` : `A cart wheel rolls ${D(44 * k * n, 100)} m along a road in ${n} full turns. Taking π = 22/7, find the radius of the wheel, in cm.`),
     solve: ([mode, k, n]) => {
       const C = 44 * k;
@@ -2627,14 +2660,14 @@ B09.push(
     },
     bugs: ([mode, k, n]) => {
       if (mode === 1) return [B("gave-radius", "procedural", CIRC, "The radius was found. The diameter is twice the radius: C ÷ π.", 7 * k), B("halved-c", "conceptual", CIRC, "The circumference was halved. Dividing by π (about 3.14) gives the diameter.", 22 * k)];
-      return [B("gave-diameter", "procedural", CIRC, "C ÷ π gives the diameter. The radius is half of it.", 14 * k), ...(mode === 2 ? [B("whole-distance", "procedural", CIRC, `The whole distance was used. In one turn the wheel rolls its circumference: ${D(44 * k * n, 100)} m ÷ ${n} turns.`, 7 * k * n)] : [B("times-pi", "conceptual", CIRC, "The circumference was multiplied by π. To undo C = 2πr, divide by 2π.", num(qm(q(44 * k, 2), PI7)))])];
+      return [B("gave-diameter", "procedural", CIRC, "C ÷ π gives the diameter. The radius is half of it.", 14 * k), ...(mode === 2 ? [B("whole-distance", "procedural", CIRC, `The whole distance was used. In one turn the wheel rolls its circumference: ${D(44 * k * n, 100)} m ÷ ${n} turns.`, 7 * k * n)] : [B("times-pi", "conceptual", CIRC, "The circumference was multiplied by π. To undo C = 2πr, divide by 2π.", p2(qm(q(44 * k, 2), PI7)))])];
     },
     variants: () => [],
     explain: (s) => (s.id === "per-turn" ? `One turn rolls ${s.inputs[0]} cm ÷ ${s.inputs[1]} = ${s.value} cm, the circumference` : s.id === "diameter" ? `d = C ÷ π = ${s.inputs[0]} × 7/22 = ${s.value} cm` : `r = d ÷ 2 = ${s.value} cm`),
     domain: [[0, 2], [1, 30], [0, 100]],
     keep: radOk,
     difficulty: ([mode, k]) => (mode === 1 ? 1 : mode === 0 ? (k <= 10 ? 1 : 2) : 3),
-    word: ([mode, k, n]) => (mode <= 1 ? `${name(k)} wraps a measuring tape once round a round well; it measures ${44 * k} cm. Taking π = 22/7, what is the well's ${mode === 0 ? "radius" : "diameter"}, in cm?` : `The wheel of ${name(k)}'s bicycle turns ${n} times while the bicycle goes ${D(44 * k * n, 100)} m. Taking π = 22/7, what is the radius of the wheel, in cm?`),
+    word: ([mode, k, n]) => (mode <= 1 ? `${name(k)} wraps a measuring tape once round ${k <= 3 ? "a round steel plate" : k <= 10 ? "a round tabletop" : "the rim of a round well"}; it measures ${44 * k} cm. Taking π = 22/7, what is its ${mode === 0 ? "radius" : "diameter"}, in cm?` : `The wheel of ${name(k)}'s bicycle turns ${n} times while the bicycle goes ${D(44 * k * n, 100)} m. Taking π = 22/7, what is the radius of the wheel, in cm?`),
     teach: {
       idea: "C = πd = 2πr. Working backwards: d = C ÷ π and r = C ÷ 2π. A wheel rolls its circumference in one turn.",
       method: "Divide the circumference by 22/7 (multiply by 7/22) to get the diameter; halve it for the radius. For a wheel, first divide the distance by the number of turns (in the same unit).",

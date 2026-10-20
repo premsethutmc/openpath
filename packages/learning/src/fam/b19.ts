@@ -1655,7 +1655,8 @@ const asplaned: Def = {
     const s0 = a * x0 + b * y0 + c * z0;
     // real slips: the root of a² + b² + c² forgotten, the constant's sign changed (s₀ − d), the distance of the origin
     // |d|/|n| (the point ignored), and the sum of the coefficients' sizes used as |n|
-    return [String(n), sq(R_(Math.abs(s0 - d), N), N), ...(d !== 0 ? [sq(R_(Math.abs(d), N), N)] : []), rs(R_(n, Math.abs(a) + Math.abs(b) + Math.abs(c)))];
+    // and, when those coincide (a plane like x = 0), whole numbers larger than the distance |n|/√N (never equal to it)
+    return [String(n), sq(R_(Math.abs(s0 - d), N), N), ...(d !== 0 ? [sq(R_(Math.abs(d), N), N)] : []), rs(R_(n, Math.abs(a) + Math.abs(b) + Math.abs(c))), String(n + 1), String(n + 2)];
   },
   variants: () => [],
   explain: (s) => (s.id === "substitute" ? `Put the point into ax + by + cz + d: ${s.value}` : s.id === "normal" ? `|n| = √(a² + b² + c²) = ${s.value}` : `Distance = |ax₀ + by₀ + cz₀ + d|/√(a² + b² + c²) = ${s.value}`),
@@ -2222,7 +2223,7 @@ const ascloc: Def = {
   },
   distractors: (p) => {
     const s = nums(aslocAns(p))!;
-    return [tup([s[1], s[0], s[2]].map((x, i) => (i < 2 ? rs(R_(Math.round(x * 24), 24)) : aslocAns(p).split(", ")[2].replace(/\)$/, "")))), tup([rs(R_(Math.round(-s[0] * 24), 24)), rs(R_(Math.round(-s[1] * 24), 24)), aslocAns(p).split(", ")[2].replace(/\)$/, "")])];
+    return [tup([s[1], s[0], s[2]].map((x, i) => (i < 2 ? rs(R_(Math.round(x * 24), 24)) : aslocAns(p).split(", ")[2].replace(/\)$/, "")))), tup([rs(R_(Math.round(-s[0] * 24), 24)), rs(R_(Math.round(-s[1] * 24), 24)), aslocAns(p).split(", ")[2].replace(/\)$/, "")]), ...(p[0] === 1 ? [tup([rs(R_(p[1], p[5])), rs(R_(p[2], p[5])), String(p[3] * p[5])]), tup([rs(R_(p[1], p[5])), rs(R_(p[2], p[5])), String(p[3] + 1)])] : [])];
   },
   variants: () => [],
   explain: (s) => (s.id === "divide" ? `Divide by ${s.inputs[0]}: ${s.value}` : s.id === "read" ? `|z − w| = r is the circle with centre w and radius r: ${s.value}` : s.id === "square" ? `Write z = x + iy and square: ${s.value}` : s.id === "expand" ? `Expand and divide by ${s.inputs[0]}: ${s.value}` : `Complete the squares to read the centre and radius: ${s.value}`),
@@ -2596,7 +2597,7 @@ const asbayes: Def = {
     ];
   },
   variants: () => [],
-  explain: (s) => (s.id === "joint" ? `P(${"machine"} and defective) = ${s.inputs[0] * 10}% × ${s.inputs[1]}% = ${s.value}` : s.id === "total" ? `Total probability of a defective bolt = ${s.value}` : `Bayes: divide the machine's share of defectives by the total: ${s.inputs[0]}/${s.inputs[1]}`),
+  explain: (s) => (s.id === "joint" ? `P(${"machine"} and defective) = ${Number(s.inputs[0]) * 10}% × ${s.inputs[1]}% = ${s.value}` : s.id === "total" ? `Total probability of a defective bolt = ${s.value}` : `Bayes: divide the machine's share of defectives by the total: ${s.inputs[0]}/${s.inputs[1]}`),
   domain: [[1, 8], [1, 9], [1, 9], [1, 9], [1, 9], [0, 2]],
   cap: 400,
   difficulty: (p) => (shares(p).length === 2 ? 1 : p[0] + p[1] < 10 && p[2] === p[3] ? 2 : 3),
@@ -2739,7 +2740,7 @@ const asbinom: Def = {
     const out: Bug[] = [];
     if (mode === 0) {
       if (C(n, r) !== 1) out.push(B("no-combinations", "conceptual", BIN, `pʳqⁿ⁻ʳ is the probability of one particular order; there are ${n}C${r} = ${C(n, r)} orders, so multiply by ${C(n, r)}.`, (a ** r * (d - a) ** (n - r)) / d ** n));
-      if (2 * a !== d) out.push(B("p-q-swapped", "procedural", BIN, "p was raised to the number of failures and q to the number of successes; it is pʳ qⁿ⁻ʳ with r successes.", (C(n, r) * a ** (n - r) * (d - a) ** r) / d ** n));
+      if (2 * a !== d && 2 * r !== n) out.push(B("p-q-swapped", "procedural", BIN, "p was raised to the number of failures and q to the number of successes; it is pʳ qⁿ⁻ʳ with r successes.", (C(n, r) * a ** (n - r) * (d - a) ** r) / d ** n));
     } else {
       out.push(B("one-value-only", "conceptual", BIN, `'${mode === 1 ? "At least" : "At most"} ${r}' includes every value ${mode === 1 ? `from ${r} up to ${n}` : `from 0 up to ${r}`}, not only X = ${r}.`, binP(n, a, d, [r])));
       out.push(B("boundary-left-out", "procedural", BIN, `X = ${r} itself belongs to 'X ${BMODE[mode]} ${r}'; it was left out.`, binP(n, a, d, binSet(n, r, mode).filter((k) => k !== r))));
@@ -2748,6 +2749,12 @@ const asbinom: Def = {
   },
   variants: () => [],
   explain: (s) => (s.id === "formula" ? `For a binomial distribution: ${s.value}` : s.id === "terms" ? `Add P(X = k) for k = ${s.inputs.join(", ")}` : s.inputs[0] === "1 −" ? "Use the complement: subtract that sum from 1" : "That sum is the answer"),
+  // exact fractions (one integer division each), so no option shows a rounding residue
+  distractors: ([n, a, d, r]) => {
+    const D = d ** n;
+    const k = Math.round(C(n, r) * a ** r * (d - a) ** (n - r));
+    return [(D - k) / D, 2 * k <= D ? (2 * k) / D : k / (2 * D), (C(n, r) * a ** r) / D];
+  },
   domain: [[2, 9], [1, 9], [2, 10], [0, 9], [0, 2]],
   cap: 400,
   difficulty: ([n, , , , mode]) => (mode === 0 && n <= 4 ? 1 : mode === 0 || n <= 4 ? 2 : 3),
@@ -2943,7 +2950,7 @@ const ascinv: Def = {
   keep: (p) => ascinvOk(p),
   cap: 400,
   difficulty: ([a, b, , , op]) => (op === 0 ? 1 : op === 1 ? 2 : a * b === 0 ? 2 : 3),
-  word: ([a, b, c, d, op]) => (op === 2 ? `In an AC circuit an impedance is written as the complex number Z = ${cz(a, b)} ohms. Its admittance is 1/Z. Find the admittance in the form x + iy, typed as (x, y).` : `Two AC voltages, written as complex numbers, are V₁ = ${cz(a, b)} volts and V₂ = ${cz(c, d)} volts. Find V₁ ${op ? "−" : "+"} V₂ in the form x + iy, typed as (x, y).`),
+  word: ([a, b, c, d, op]) => (op === 2 && a <= 0 ? `In a drawing program, multiplying a point (written as a complex number) by z = ${cz(a, b)} turns and stretches the picture about the origin. Multiplying by 1/z undoes this. Find 1/z in the form x + iy, typed as (x, y).` : op === 2 ? `In an AC circuit an impedance is written as the complex number Z = ${cz(a, b)} ohms. Its admittance is 1/Z. Find the admittance in the form x + iy, typed as (x, y).` : `Two AC voltages, written as complex numbers, are V₁ = ${cz(a, b)} volts and V₂ = ${cz(c, d)} volts. Find V₁ ${op ? "−" : "+"} V₂ in the form x + iy, typed as (x, y).`),
   teach: {
     idea: "Complex numbers add and subtract part by part: real with real, imaginary with imaginary. The inverse 1/z uses the conjugate: z z̄ = a² + b² is a real number.",
     method: "For a sum or difference, combine the real parts and the imaginary parts separately. For 1/(a + bi), multiply the top and the bottom by a − bi to get (a − bi)/(a² + b²), then split into real and imaginary parts.",
@@ -3061,14 +3068,14 @@ const asslope: Def = {
   bugs: ([kind, i, x1, y1]) => {
     const deg = INCL[i];
     if (kind === 2)
-      return [deg > 90 ? B("acute-only", "conceptual", LINE, `The acute angle ${180 - deg}° was given; a negative slope means the line slopes downwards, so its inclination is obtuse.`, String(180 - deg)) : B("complement", "recall", LINE, "The angle with the y-axis was given; the inclination is measured from the positive x-axis.", deg === 0 ? null : String(90 - deg))];
+      return [deg > 90 ? B("acute-only", "conceptual", LINE, `The acute angle ${180 - deg}° was given; a negative slope means the line slopes downwards, so its inclination is obtuse.`, String(180 - deg)) : B("complement", "recall", LINE, "The angle with the y-axis was given; the inclination is measured from the positive x-axis.", deg === 0 ? null : String(90 - deg))].filter((b) => b.predict !== null);
     const cotE = deg === 30 ? E_(R_(1), 3) : deg === 45 ? E_(R_(1)) : deg === 60 ? E_(R_(1, 3), 3) : deg === 120 ? E_(R_(-1, 3), 3) : deg === 135 ? E_(R_(-1)) : deg === 150 ? E_(R_(-1), 3) : null;
     const m = tanE(deg);
-    if (kind === 0) return [B("cot", "recall", TRIG, `The ratio was turned over (cot ${deg}° instead of tan ${deg}°); the slope is the rise over the run, tan θ.`, cotE && es(cotE) !== es(m) ? es(cotE) : null), B("sign", "conceptual", LINE, `The sign was lost: a line with inclination between 90° and 180° slopes downwards, so tan ${deg}° is negative.`, deg > 90 ? es({ q: rabs(m.q), m: m.m }) : null)];
+    if (kind === 0) return [B("cot", "recall", TRIG, `The ratio was turned over (cot ${deg}° instead of tan ${deg}°); the slope is the rise over the run, tan θ.`, cotE && es(cotE) !== es(m) ? es(cotE) : null), ...(deg > 90 ? [B("sign", "conceptual", LINE, `The sign was lost: a line with inclination between 90° and 180° slopes downwards, so tan ${deg}° is negative.`, es({ q: rabs(m.q), m: m.m }))] : [])].filter((b) => b.predict !== null);
     return [
       B("cot", "recall", TRIG, `cot ${deg}° was used as the slope instead of tan ${deg}°.`, cotE && es(cotE) !== es(m) ? asslopeLine(cotE, x1, y1) : null),
       B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", x1 !== 0 && deg !== 0 ? asslopeLine(m, -x1, y1, true) : null),
-    ];
+    ].filter((b) => b.predict !== null);
   },
   distractors: ([kind, i, x1, y1]) => {
     const deg = INCL[i];
@@ -3092,9 +3099,11 @@ const asslope: Def = {
 function asslopeLine(m: E, x1: number, y1: number, plus = false): string {
   // c = y1 − m x1 (plus: the slip y1 + m x1 with x1 already negated by the caller)
   const mx = emul(m, E_(R_(x1)));
-  const c = plus ? { q: rmul(mx.q, R_(-1)), m: mx.m } : { q: rmul(mx.q, R_(-1)), m: mx.m };
+  void plus;
+  const c = { q: rmul(mx.q, R_(-1)), m: mx.m };
   const lin = coefE(m, "x");
-  const tail = [y1 !== 0 ? mi(y1) : "", es(c) !== "0" ? es(c) : ""].filter(Boolean);
+  // a rational −m·x₁ is combined with y₁ into one constant; a surd one stays a separate term
+  const tail = c.m === 1 ? [es({ q: radd(R_(y1), c.q), m: 1 })].filter((t) => t !== "0") : [y1 !== 0 ? mi(y1) : "", es(c) !== "0" ? es(c) : ""].filter(Boolean);
   let out = lin;
   for (const t of tail) out = out ? `${out} ${t.startsWith("−") ? "−" : "+"} ${t.replace(/^−/, "")}` : t;
   return out || "0";
@@ -3574,21 +3583,26 @@ const asadd3: Def = {
   skill: "addition theorem for three events",
   type: "fraction",
   mc: true,
-  // [r1, …, r6, ask]: Venn-region counts (the rest fixed by them); ask 0 P(A ∪ B ∪ C), 1 P(none of them)
+  // [r1, …, r6, ask]: Venn-region counts (the rest fixed by them); ask 0 P(A ∪ B ∪ C), 1 P(none of them), 2 P(exactly one)
   parse: none,
-  reject: (p) => (allIn(p, [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 1]]) && thin(p, 8) ? null : "Small region counts in a three-set Venn diagram."),
+  reject: (p) => (allIn(p, [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 2]]) && thin(p, 8) ? null : "Small region counts in a three-set Venn diagram."),
   prompt: (p) => {
     const c = add3Counts(p);
     const f = (x: number) => pf(x, c.N);
-    return `For events A, B and C, P(A) = ${f(c.A)}, P(B) = ${f(c.B)}, P(C) = ${f(c.C)}, P(A ∩ B) = ${f(c.AB)}, P(B ∩ C) = ${f(c.BC)}, P(A ∩ C) = ${f(c.AC)} and P(A ∩ B ∩ C) = ${f(c.ABC)}. Find ${p[6] ? "the probability that none of A, B, C happens" : "P(A ∪ B ∪ C)"}.`;
+    return `For events A, B and C, P(A) = ${f(c.A)}, P(B) = ${f(c.B)}, P(C) = ${f(c.C)}, P(A ∩ B) = ${f(c.AB)}, P(B ∩ C) = ${f(c.BC)}, P(A ∩ C) = ${f(c.AC)} and P(A ∩ B ∩ C) = ${f(c.ABC)}. Find ${["P(A ∪ B ∪ C)", "the probability that none of A, B, C happens", "the probability that exactly one of A, B, C happens"][p[6]]}.`;
   },
   word: (p) => {
     const c = add3Counts(p);
-    return `In a class of ${c.N} students in Tirunelveli, ${c.A} play cricket, ${c.B} play football and ${c.C} play kabaddi; ${c.AB} play both cricket and football, ${c.BC} both football and kabaddi, ${c.AC} both cricket and kabaddi, and ${c.ABC} play all three. A student is chosen at random. Find the probability that the student plays ${p[6] ? "none of the three games" : "at least one of the three games"}.`;
+    return `In a class of ${c.N} students in Tirunelveli, ${c.A} play cricket, ${c.B} play football and ${c.C} play kabaddi; ${c.AB} play both cricket and football, ${c.BC} both football and kabaddi, ${c.AC} both cricket and kabaddi, and ${c.ABC} play all three. A student is chosen at random. Find the probability that the student plays ${["at least one of the three games", "none of the three games", "exactly one of the three games"][p[6]]}.`;
   },
   solve: (p) => {
     const c = add3Counts(p);
     const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    if (p[6] === 2) {
+      // exactly one: the singles count the pair regions twice and the triple three times
+      const E1 = c.A + c.B + c.C - 2 * (c.AB + c.BC + c.AC) + 3 * c.ABC;
+      return { steps: [S("singles", "add", EV, [c.A, c.B, c.C], pf(c.A + c.B + c.C, c.N)), S("pairs2", "subtract", EV, [c.AB, c.BC, c.AC], pf(2 * (c.AB + c.BC + c.AC), c.N)), S("triple3", "add", EV, [c.ABC], pf(E1, c.N))], answer: E1 / c.N };
+    }
     const ans = p[6] ? (c.N - U) / c.N : U / c.N;
     return { steps: [S("singles", "add", EV, [c.A, c.B, c.C], pf(c.A + c.B + c.C, c.N)), S("pairs", "subtract", EV, [c.AB, c.BC, c.AC], pf(c.AB + c.BC + c.AC, c.N)), S("triple", "add", EV, [c.ABC], pf(U, c.N)), ...(p[6] ? [S("complement", "subtract", COMP, [U, c.N], pf(c.N - U, c.N))] : [])], answer: ans };
   },
@@ -3597,11 +3611,20 @@ const asadd3: Def = {
     if (typeof v !== "number") return false;
     const { g, N } = add3Counts(p);
     const inside = g.r1 + g.r2 + g.r3 + g.r4 + g.r5 + g.r6 + g.r7;
-    return close(v, p[6] ? g.r0 / N : inside / N, 1e-12);
+    return close(v, p[6] === 2 ? (g.r1 + g.r2 + g.r3) / N : p[6] ? g.r0 / N : inside / N, 1e-12);
   },
   bugs: (p) => {
     const c = add3Counts(p);
     const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    if (p[6] === 2) {
+      const P2 = c.AB + c.BC + c.AC;
+      const E1 = c.A + c.B + c.C - 2 * P2 + 3 * c.ABC;
+      return [
+        B("at-least-one", "conceptual", EV, "P(A ∪ B ∪ C), the probability of at least one, was found; exactly one leaves out the outcomes that are in two or in all three events.", U / c.N),
+        B("triple-once", "procedural", EV, "After subtracting twice the pairs, P(A ∩ B ∩ C) was added back only once; the triple region was counted three times in the singles and taken away six times with the pairs, so it must be added back three times.", (c.A + c.B + c.C - 2 * P2 + c.ABC) / c.N),
+        B("pairs-once-exact", "procedural", EV, "The pairs were subtracted only once; outcomes in exactly two events are counted twice in P(A) + P(B) + P(C), so for exactly one they must be taken away twice.", (c.A + c.B + c.C - P2 + 3 * c.ABC) / c.N),
+      ].filter((b) => Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - E1 / c.N) > 1e-12 && (b.predict as number) >= 0 && (b.predict as number) <= 1);
+    }
     const fix = (x: number) => (p[6] ? (c.N - x) / c.N : x / c.N);
     return [
       B("triple-left-out", "procedural", EV, "P(A ∩ B ∩ C) was left out; subtracting the three pairs takes the triple overlap away three times after adding it three times, so it must be added back once.", fix(U - c.ABC)),
@@ -3612,26 +3635,29 @@ const asadd3: Def = {
   distractors: (p) => {
     const c = add3Counts(p);
     const U = c.A + c.B + c.C - c.AB - c.BC - c.AC + c.ABC;
+    if (p[6] === 2) return [(c.N - U) / c.N, (c.A + c.B + c.C) / (3 * c.N), (c.AB + c.BC + c.AC) / c.N];
     return [(p[6] ? U : c.N - U) / c.N, (U - 1) / c.N];
   },
   variants: () => [],
-  explain: (s) => (s.id === "singles" ? `P(A) + P(B) + P(C) = ${s.value}` : s.id === "pairs" ? `Subtract P(A ∩ B) + P(B ∩ C) + P(A ∩ C) = ${s.value}` : s.id === "triple" ? `Add back P(A ∩ B ∩ C): P(A ∪ B ∪ C) = ${s.value}` : `None of them: 1 − P(A ∪ B ∪ C) = ${s.value}`),
+  explain: (s) => (s.id === "singles" ? `P(A) + P(B) + P(C) = ${s.value}` : s.id === "pairs" ? `Subtract P(A ∩ B) + P(B ∩ C) + P(A ∩ C) = ${s.value}` : s.id === "triple" ? `Add back P(A ∩ B ∩ C): P(A ∪ B ∪ C) = ${s.value}` : s.id === "pairs2" ? `Subtract twice P(A ∩ B) + P(B ∩ C) + P(A ∩ C): 2 × that = ${s.value}` : s.id === "triple3" ? `Add back three times P(A ∩ B ∩ C): P(exactly one) = ${s.value}` : `None of them: 1 − P(A ∪ B ∪ C) = ${s.value}`),
   range: [0, 1],
-  domain: [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 1]],
+  domain: [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 2]],
   keep: (p) => thin(p, 8),
   cap: 300,
   difficulty: ([, , , , , , ask]) => (ask ? 3 : 2),
   teach: {
     idea: "P(A ∪ B ∪ C) = P(A) + P(B) + P(C) − P(A ∩ B) − P(B ∩ C) − P(A ∩ C) + P(A ∩ B ∩ C): add the singles, take away the double counting of the pairs, and add back the triple overlap, which was taken away once too often.",
-    method: "Add the three probabilities, subtract the three pairwise ones, add the triple one. For 'none of them', take the result away from 1.",
+    method: "Add the three probabilities, subtract the three pairwise ones, add the triple one. For 'none of them', take the result away from 1. For 'exactly one', subtract the pairs twice and add the triple three times.",
     alternatives: [{ id: "venn", title: "Fill in a Venn diagram", kind: "procedural", text: ["Start from the centre: write the triple overlap, then each pair minus the triple, then each single minus what is already inside it.", "Add all the regions inside the three circles."] }],
   },
   limits: "Probabilities with a common denominator from a Venn diagram of whole-number counts.",
 };
 
 const asbernOk = ([kind, a, d, u, v]: number[]) => {
-  if (!allIn([a, d], [[1, 9], [2, 10]]) || a >= d || gcd(a, d) !== 1) return false;
+  if (!allIn([a, d], [[1, 11], [2, 12]]) || a >= d || gcd(a, d) !== 1) return false;
+  // Bernoulli questions take denominators up to 12 (more of them in the pool), two-point ones up to 10
   if (kind <= 1) return u === 0 && v === 0;
+  if (d > 10) return false;
   if (kind <= 3) return allIn([u, v], [[-5, 10], [-5, 10]]) && u !== v && !(u === 1 && v === 0) && thin([kind, a, d, u, v], 6);
   if (kind === 4) return u >= 1 && u <= 9 && v === 0 && a === 1 && d === 2;
   return false;
@@ -3654,8 +3680,8 @@ const asbern: Def = {
         ? `A random variable X takes the value ${mi(u)} with probability ${pf(a, d)} and the value ${mi(v)} with probability ${pf(d - a, d)} (a two-point distribution). Find the ${kind === 3 ? "variance" : "mean"} of X.`
         : `A random variable X takes the value ${u} with probability 1 (a one-point distribution). Find the variance of X.`,
   solve: ([kind, a, d, u, v]) => {
-    const p = a / d;
-    const ans = kind === 0 ? p : kind === 1 ? p * (1 - p) : kind === 2 ? u * p + v * (1 - p) : kind === 3 ? (u - v) ** 2 * p * (1 - p) : 0;
+    // one integer division each, so the value is exactly the nearest number to the fraction (no rounding residue like 1e-16 for 0)
+    const ans = kind === 0 ? a / d : kind === 1 ? (a * (d - a)) / (d * d) : kind === 2 ? (u * a + v * (d - a)) / d : kind === 3 ? ((u - v) ** 2 * a * (d - a)) / (d * d) : 0;
     const f = ["E(X) = p", "Var(X) = p(1 − p)", "E(X) = up + v(1 − p)", "Var(X) = (u − v)² p(1 − p)", "X never varies, so Var(X) = 0"][kind];
     return { steps: [S("formula", "recall", BIN, [kind], f), S("value", "evaluate", BIN, [a, d], ans)], answer: ans };
   },
@@ -3668,18 +3694,17 @@ const asbern: Def = {
     return close(val, kind === 0 || kind === 2 ? m : m2 - m * m, 1e-12);
   },
   bugs: ([kind, a, d, u, v]) => {
-    const p = a / d;
-    if (kind === 0) return [B("q-for-p", "procedural", BIN, "The probability of failure was given; the mean of a Bernoulli variable is the probability of success p.", 1 - p)];
-    if (kind === 1) return [B("p-squared", "recall", BIN, "p² was given; Var(X) = E(X²) − (E X)² = p − p² = p(1 − p).", p * p), B("mean-for-variance", "conceptual", BIN, "The mean p was given instead of the variance.", p)];
-    if (kind === 2) return [B("average", "conceptual", BIN, "The two values were simply averaged; each value must be weighted by its probability.", (u + v) / 2), B("swapped", "procedural", BIN, "The probabilities were attached to the wrong values.", u * (1 - p) + v * p)].filter((b) => Math.abs((b.predict as number) - (u * p + v * (1 - p))) > 1e-12);
-    if (kind === 3) return [B("ex2", "procedural", BIN, "E(X²) was given; the variance is E(X²) − (E X)².", u * u * p + v * v * (1 - p)), B("not-squared", "procedural", BIN, "(u − v) was not squared: Var(X) = (u − v)² p(1 − p).", Math.abs(u - v) * p * (1 - p))].filter((b) => Math.abs((b.predict as number) - (u - v) ** 2 * p * (1 - p)) > 1e-12);
+    if (kind === 0) return [B("q-for-p", "procedural", BIN, "The probability of failure was given; the mean of a Bernoulli variable is the probability of success p.", (d - a) / d)];
+    if (kind === 1) return [B("p-squared", "recall", BIN, "p² was given; Var(X) = E(X²) − (E X)² = p − p² = p(1 − p).", (a * a) / (d * d)), B("mean-for-variance", "conceptual", BIN, "The mean p was given instead of the variance.", a / d)];
+    if (kind === 2) return [B("average", "conceptual", BIN, "The two values were simply averaged; each value must be weighted by its probability.", (u + v) / 2), B("swapped", "procedural", BIN, "The probabilities were attached to the wrong values.", (u * (d - a) + v * a) / d)].filter((b) => Math.abs((b.predict as number) - (u * a + v * (d - a)) / d) > 1e-12);
+    if (kind === 3) return [B("ex2", "procedural", BIN, "E(X²) was given; the variance is E(X²) − (E X)².", (u * u * a + v * v * (d - a)) / d), B("not-squared", "procedural", BIN, "(u − v) was not squared: Var(X) = (u − v)² p(1 − p).", (Math.abs(u - v) * a * (d - a)) / (d * d))].filter((b) => Math.abs((b.predict as number) - ((u - v) ** 2 * a * (d - a)) / (d * d)) > 1e-12);
     return [B("value-for-variance", "conceptual", BIN, "The value itself was given; a variable that always takes the same value does not vary, so its variance is 0.", u)];
   },
   distractors: ([kind, a, d, u, v]) => (kind === 4 ? [1, u * u] : kind <= 1 ? [a / (2 * d), (a + 1) / (d + 1)] : [u * (a / d), v * (a / d)]),
   variants: () => [],
   explain: (s) => (s.id === "formula" ? (s.value as string) : `So the answer is ${fracTxt(Number(s.value))}`),
   range: ([kind]) => (kind <= 1 ? [0, 1] : null),
-  domain: [[0, 4], [1, 9], [2, 10], [-5, 10], [-5, 10]],
+  domain: [[0, 4], [1, 11], [2, 12], [-5, 10], [-5, 10]],
   keep: (p) => asbernOk(p),
   cap: 300,
   difficulty: ([kind]) => (kind === 0 || kind === 4 ? 1 : kind === 3 ? 3 : 2),
@@ -3688,7 +3713,7 @@ const asbern: Def = {
     method: "Make the table of values and probabilities. Mean: Σ x P(x). Variance: Σ x² P(x) minus the square of the mean (for two points this simplifies to (u − v)² p(1 − p)).",
     alternatives: [{ id: "one_trial", title: "One trial of a binomial", kind: "conceptual", text: ["A Bernoulli variable is a binomial with n = 1.", "So its mean is np = p and its variance npq = p(1 − p)."] }],
   },
-  limits: "Rational p with denominators up to 10 and whole-number values; general discrete distributions are the families atrvmean and atrvvar.",
+  limits: "Rational p with denominators up to 12 (up to 10 for two-point distributions) and whole-number values; general discrete distributions are the families atrvmean and atrvvar.",
 };
 
 // ---- lines in space: equations, intersection; planes; angles
@@ -3905,7 +3930,7 @@ const asplaneq: Def = {
     if (kind === 1) return `Find the equation of the plane through ${P3(P0)} perpendicular to the vector ${vec(scl(1 + (i % 2), n))}. ${tail}`;
     if (kind === 2) return `Find the equation of the plane that cuts off intercepts ${mi(x0)}, ${mi(y0)} and ${mi(z0)} on the x-, y- and z-axes. ${tail}`;
     if (kind === 3) return `Find the equation of the plane that contains the line ${lineVec(P0, u)} and the point ${P3(addv(P0, w))}. ${tail}`;
-    return `A plane is at a distance of ${x0} units from the origin, and the perpendicular from the origin to it is along the vector ${vec(UNITN[i][0])}. Using the normal form r⃗ · n̂ = p, find its equation. ${tail}`;
+    return `A plane is at a distance of ${x0} unit${x0 === 1 ? "" : "s"} from the origin, and the perpendicular from the origin to it is along the vector ${vec(UNITN[i][0])}. Using the normal form r⃗ · n̂ = p, find its equation. ${tail}`;
   },
   solve: (p) => {
     const { n, d } = plData(p);
@@ -3974,7 +3999,7 @@ const asplang: Def = {
   reject: (p) => (asplangOk(p) ? null : "Two planes that meet, or a line that is not parallel to the plane."),
   prompt: ([kind, i, j]) =>
     kind === 0
-      ? `Find cos θ, where θ is the acute angle between the planes ${planeTxt(NORMALS[i], i - j)} and ${planeTxt(NORMALS[j], i + j)}.`
+      ? `Find cos θ, where θ (0° ≤ θ ≤ 90°) is the angle between the planes ${planeTxt(NORMALS[i], i - j)} and ${planeTxt(NORMALS[j], i + j)}.`
       : `Find sin φ, where φ is the angle between the line ${lineVec([1, -1, 2], DIRS[i])} and the plane ${planeTxt(NORMALS[j], j + 1)}.`,
   solve: ([kind, i, j]) => {
     const [u, w] = kind === 0 ? [NORMALS[i], NORMALS[j]] : [DIRS[i], NORMALS[j]];
@@ -4041,7 +4066,8 @@ function teLine(p: number[], normal: number): [R, R] {
   const m = normal ? rdiv(R_(-1), mt) : mt;
   return [m, rsub(y1, rmul(m, x1))];
 }
-const teCurve = ([kind, A, Bb]: number[]) => `${kind ? "hyperbola" : "ellipse"} x²/${A * A} ${kind ? "−" : "+"} y²/${Bb * Bb} = 1`;
+const teCurve = ([kind, A, Bb]: number[]) => `${kind ? "hyperbola" : "ellipse"} ${A === 1 ? "x²" : `x²/${A * A}`} ${kind ? "−" : "+"} ${Bb === 1 ? "y²" : `y²/${Bb * Bb}`} = 1`;
+const teK = (k: number) => (k === 1 ? "" : `${k} `);
 const astaneh: Def = {
   id: "astaneh",
   arity: 6,
@@ -4057,7 +4083,7 @@ const astaneh: Def = {
     const [kind, A, Bb, t, w, g] = p;
     const [c, s] = TE_CS[t];
     const [x1, y1] = tePoint(p);
-    const where = g ? `the point with parameter θ, where ${kind ? `sec θ = ${rs(R_(5, c))} and tan θ = ${rs(R_(s, c))} (x = ${A} sec θ, y = ${Bb} tan θ)` : `cos θ = ${rs(R_(c, 5))} and sin θ = ${rs(R_(s, 5))} (x = ${A} cos θ, y = ${Bb} sin θ)`}` : `the point (${rs(x1)}, ${rs(y1)})`;
+    const where = g ? `the point with parameter θ, where ${kind ? `sec θ = ${rs(R_(5, c))} and tan θ = ${rs(R_(s, c))} (x = ${teK(A)}sec θ, y = ${teK(Bb)}tan θ)` : `cos θ = ${rs(R_(c, 5))} and sin θ = ${rs(R_(s, 5))} (x = ${teK(A)}cos θ, y = ${teK(Bb)}sin θ)`}` : `the point (${rs(x1)}, ${rs(y1)})`;
     return `Find the equation of the ${w ? "normal" : "tangent"} to the ${teCurve(p)} at ${where}. Write it as y = mx + c and type the right-hand side.`;
   },
   solve: (p) => {
@@ -4235,7 +4261,8 @@ const asside: Def = {
   variants: () => [],
   explain: (s) => (s.id === "values" ? `Put P and Q into the left-hand side: ${s.value}` : `${Number(s.inputs[0]) * Number(s.inputs[1]) === 0 ? "A zero value means the point is on the line" : Number(s.inputs[0]) * Number(s.inputs[1]) > 0 ? "Same signs: the same side" : "Opposite signs: opposite sides"} (option ${"ABC"[Number(s.value)]})`),
   domain: [[-2, 2], [-2, 2], [-4, 4], [0, 11], [0, 11]],
-  keep: (p) => assideOk(p),
+  // lines released in lowest terms with a positive leading coefficient (x − y + 2 = 0, not −2x + 2y − 4 = 0)
+  keep: (p) => assideOk(p) && gcd(gcd(Math.abs(p[0]), Math.abs(p[1])), Math.abs(p[2])) === 1 && (p[0] > 0 || (p[0] === 0 && p[1] > 0)),
   cap: 300,
   difficulty: ([, , c]) => (c === 0 ? 1 : 2),
   teach: {

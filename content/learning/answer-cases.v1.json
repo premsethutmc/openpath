@@ -613,6 +613,36 @@
       "x sin x",
       "x sin(x)",
       true
+    ],
+    [
+      "exact",
+      "y = −9x + 5",
+      "−9x + 5",
+      true
+    ],
+    [
+      "exact",
+      "y=5x+1",
+      "1 + 5x",
+      true
+    ],
+    [
+      "expression",
+      "y = 2 sin x",
+      "2 sin x",
+      true
+    ],
+    [
+      "exact",
+      "y = 3 = 4",
+      "3",
+      false
+    ],
+    [
+      "exact",
+      "x = 3",
+      "3",
+      false
     ]
   ]
 }

@@ -2191,6 +2191,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "remainder" ? `What is left is the remainder: ${typeof s.value === "number" ? N(s.value) : s.value}` : `Next quotient coefficient: ${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} = ${Q(Number(s.value))}`),
     domain: [[0, 1], [-5, 5], [-5, 5], [1, 3], [-5, 5], [-5, 5], [-9, 9]],
     cap: 400,
+    // level@1: dividing by a quadratic is Grade 10 (NCERT Class 10, Ch. 2); by Ax + B stays in Grade 9
+    grade: ([k]) => (k === 1 ? 10 : 9),
     difficulty: ([k, , Bv]) => (k === 0 ? (Bv > 0 ? 2 : 3) : Bv > 0 ? 2 : 3),
     teach: {
       idea: "For any polynomials p(x) and d(x) ≠ 0 there are a quotient q(x) and a remainder r(x) with p(x) = d(x)q(x) + r(x) and deg r < deg d (the division algorithm).",
@@ -2544,7 +2546,7 @@ export const B12: Def[] = [
     difficulty: (p) => (Math.abs(quadS(quadV(p))) % 2 === 0 ? 2 : 3),
     word: (p) => {
       const V = quadV(p);
-      return `A farmer's field has corners at ${V.map((P) => tup(...P)).join(", ")} (in that order round the field) on a map where 1 unit is 10 m. What is its area in square units of the map?`;
+      return `A farmer's field has corners at ${V.map((P) => tup(...P)).join(", ")} (in that order round the field) on a squared map. What is its area in square units of the map?`;
     },
     teach: {
       idea: "Area = ½ |(x₁y₂ − x₂y₁) + (x₂y₃ − x₃y₂) + (x₃y₄ − x₄y₃) + (x₄y₁ − x₁y₄)| when the vertices are taken in order round the quadrilateral; it is the sum of the two triangles ABC and ACD.",
@@ -2590,9 +2592,11 @@ export const B12: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "model" ? `The ${s.inputs[1] < 0 ? "decrease" : "increase"} is the same each step, so p(t) = ${s.value}` : `p(${s.inputs[0]}) = ${N(Number(s.value))}`),
+    explain: (s) => (s.id === "model" ? `The ${Number(s.inputs[1]) < 0 ? "decrease" : "increase"} is the same each step, so p(t) = ${s.value}` : `p(${s.inputs[0]}) = ${N(Number(s.value))}`),
     domain: [[0, 7], [20, 200], [2, 15], [2, 12]],
     cap: 400,
+    // money, heights, fares, books, water, candle length, debt and battery charge are never negative
+    range: [0, Infinity],
     difficulty: ([c, , , T]) => (c < 4 && T <= 6 ? 1 : c < 4 || T <= 6 ? 2 : 3),
     teach: {
       idea: "A quantity that changes by the same amount every step is modelled by a linear polynomial p(t) = (start) + (change per step) × t; the change is negative for a steady decrease (linear decay).",
@@ -2659,7 +2663,7 @@ export const B12: Def[] = [
     parse: none,
     reject: (p) => {
       if (!inR(p, [[0, 2], [1, 5], [-4, 4], [1, 5], [-4, 4], [-5, 5], [-5, 5]])) return "Two equations with small whole coefficients and a whole-number solution.";
-      return methOk(p) ? null : "Both equations contain y, the lines cross, and the four options are different with only one giving the solution.";
+      return methOk(p) ? null : "Both equations contain y (with positive y coefficients for elimination, so both multipliers are positive), the lines cross, and the four options are different with only one giving the solution.";
     },
     prompt: (p) => {
       const [m, a1, b1, a2, b2, x, y] = p;
@@ -2893,7 +2897,7 @@ export const B12: Def[] = [
     solve: ([f, n, a, b]) => {
       const [S1, S2, S3] = powSums(n);
       const v = f === 0 ? S2 + a * S1 : f === 1 ? a * a * S2 + 2 * a * b * S1 + b * b * n : S3 + a * S2;
-      return { steps: [st("general", "write", PS, [f, a, b], f === 0 ? `k² + ${a}k` : f === 1 ? pl([a * a, 2 * a * b, b * b], "k") : `k³ + ${a}k²`), st("formulas", "evaluate", PS, [n], `${S1}, ${S2}, ${S3}`), st("combine", "add", PS, [], v)], answer: v };
+      return { steps: [st("general", "write", PS, [f, a, b], f === 0 ? `k² + ${a === 1 ? "" : a}k` : f === 1 ? pl([a * a, 2 * a * b, b * b], "k") : `k³ + ${a === 1 ? "" : a}k²`), st("formulas", "evaluate", PS, [n], `${S1}, ${S2}, ${S3}`), st("combine", "add", PS, [], v)], answer: v };
     },
     // independent: add the n terms one by one
     validate: ([f, n, a, b], v) => {
@@ -2907,10 +2911,10 @@ export const B12: Def[] = [
       const w = (x: number) => (x === right ? null : x);
       return keepBugs(
         f === 0
-          ? [B("product-of-sums", "conceptual", PS, "Σ k(k + a) was worked out as (Σ k) × (Σ (k + a)); the sum of products is not the product of sums. Expand the general term first.", w(S1 * (S1 + a * n))), B("constant-once", "procedural", PS, `Σ ${a}k was taken as ${a}; it is ${a} × Σ k = ${a} × n(n + 1)/2.`, w(S2 + a))]
+          ? [B("product-of-sums", "conceptual", PS, "Σ k(k + a) was worked out as (Σ k) × (Σ (k + a)); the sum of products is not the product of sums. Expand the general term first.", w(S1 * (S1 + a * n))), B("constant-once", "procedural", PS, a === 1 ? "Σ k was taken as 1; it is 1 + 2 + … + n = n(n + 1)/2." : `Σ ${a}k was taken as ${a}; it is ${a} × Σ k = ${a} × n(n + 1)/2.`, w(S2 + a))]
           : f === 1
             ? [B("cross-term-dropped", "procedural", PS, "(ak + b)² was expanded as a²k² + b²; the middle term 2abk is missing.", b !== 0 ? w(a * a * S2 + b * b * n) : null), B("constant-once", "procedural", PS, `Σ ${b * b} was taken as ${b * b}; adding a constant n times gives ${b * b}n.`, b !== 0 ? w(a * a * S2 + 2 * a * b * S1 + b * b) : null), B("square-of-sum", "conceptual", PS, "The terms were added first and the total squared; each term is squared before adding.", w((a * S1 + b * n) ** 2))]
-            : [B("product-of-sums", "conceptual", PS, "Σ k²(k + a) was worked out as (Σ k²) × (Σ (k + a)); expand the general term to k³ + ak² first.", w(S2 * (S1 + a * n))), B("wrong-power", "procedural", PS, `Σ ${a}k² was taken as ${a} × Σ k; the second part of the general term is ${a}k².`, w(S3 + a * S1))],
+            : [B("product-of-sums", "conceptual", PS, "Σ k²(k + a) was worked out as (Σ k²) × (Σ (k + a)); expand the general term to k³ + ak² first.", w(S2 * (S1 + a * n))), B("wrong-power", "procedural", PS, a === 1 ? "Σ k² was taken as Σ k; the second part of the general term is k²." : `Σ ${a}k² was taken as ${a} × Σ k; the second part of the general term is ${a}k².`, w(S3 + a * S1))],
       );
     },
     distractors: ([f, n, a, b]) => {
@@ -3496,7 +3500,7 @@ function methOpts(p: number[]): { text: string; id: string; says: string; sol: (
 }
 function methOk(p: number[]): boolean {
   const [m, a1, b1, a2, b2, x, y] = p;
-  if (b1 === 0 || b2 === 0 || a1 * b2 - a2 * b1 === 0 || (m === 0 && b1 !== 1) || (m === 2 && (x === 0 || y === 0))) return false;
+  if (b1 === 0 || b2 === 0 || a1 * b2 - a2 * b1 === 0 || (m === 0 && b1 !== 1) || (m === 2 && (x === 0 || y === 0)) || (m === 1 && (b1 < 0 || b2 < 0))) return false;
   const opts = methOpts(p);
   if (m === 2 ? a1 * b2 + a2 * b1 === 0 : opts.some((o) => /^0 = /.test(o.text) || o.text.startsWith("0x"))) return false;
   if (new Set(opts.map((o) => o.text)).size !== 4) return false;
@@ -3649,12 +3653,25 @@ function cycKeep(q: number[]): boolean {
 /** alzgr: the polynomial (x³ first), the segments of its graph inside the window, and its zeros counted on a grid. */
 function zgrOk([t, a, b, c, s]: number[]): boolean {
   if (s > 1) return false;
-  if (t === 0) return a < b && c === 0;
+  if (t === 0) return a < b && c === 0 && zgrBulge([t, a, b, c, s]);
   if (t === 1) return b === 0 && c === 0;
   if (t === 2) return b === 0 && c >= 1 && c <= 3;
-  if (t === 3) return a < b && b < c;
+  if (t === 3) return a < b && b < c && zgrBulge([t, a, b, c, s]);
   if (t === 4) return c === 0;
-  return a !== b && c === 0;
+  return a !== b && c === 0 && zgrBulge([t, a, b, c, s]);
+}
+/** Between every two neighbouring zeros the curve moves at least 1 unit away from the x-axis (so the zeros are easy
+ * to tell apart on a ±5 axis). */
+function zgrBulge(p: number[]): boolean {
+  const [t, a, b, c] = p;
+  const zs = (t === 3 ? [a, b, c] : [a, b]).sort((u, v) => u - v);
+  const P = zgrPoly(p);
+  for (let i = 0; i + 1 < zs.length; i++) {
+    let m = 0;
+    for (let k = 1; k < 100; k++) m = Math.max(m, Math.abs(horner(P, zs[i] + ((zs[i + 1] - zs[i]) * k) / 100)));
+    if (m < 1) return false;
+  }
+  return true;
 }
 function zgrPoly([t, a, b, c, s]: number[]): number[] {
   const sg = s ? -1 : 1;

@@ -651,8 +651,15 @@ def _mixed_canonical(raw):
     return f"{'-' if m.group(1) else ''}{f'{w} ' if w else ''}{n}/{d}"
 
 
+def rhs(t):
+    """rhs@1: "y = 5x + 1" typed where the right-hand side is asked for reads as "5x + 1" (as the app does)."""
+    return re.sub(r'^\s*y\s*=\s*(?=[^=]+$)', '', t)
+
+
 def canonical_of(kind, raw):
     t = str(raw).strip().replace('−', '-')
+    if kind in ('exact', 'polynomial', 'expression'):
+        t = rhs(t)
     if not t or len(t) > 300:
         return None
     try:
@@ -681,7 +688,8 @@ def same_answer(kind, a, b):
         return False
     if kind in SAMPLED:
         try:
-            return _same_sampled(str(a).replace('−', '-'), str(b).replace('−', '-'), kind == 'antiderivative')
+            fix = rhs if kind == 'expression' else (lambda x: x)
+            return _same_sampled(fix(str(a).replace('−', '-')), fix(str(b).replace('−', '-')), kind == 'antiderivative')
         except (Unreadable, ValueError, ZeroDivisionError, RecursionError, IndexError, KeyError, OverflowError, TypeError):
             return False
     x = canonical_of(kind, a)

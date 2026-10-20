@@ -1962,33 +1962,42 @@ function faceOpts([s, k, cw]: number[]) {
 
 // ---------------------------------------------------------------- naming a quadrilateral (afkind)
 const QNAMES = ["square", "rectangle", "rhombus", "parallelogram", "kite", "trapezium"];
-type QDesc = { sides: number[]; par: number; right: boolean; angles: string; equalOpp: boolean };
-/** Quadrilateral ABCD of a kind (0 square … 5 trapezium), sides AB, BC, CD, DA; par: pairs of parallel sides. */
+type QDesc = { sides: number[]; par: number; right: boolean; angles: string; equalOpp: boolean; ptext?: string };
+/** Quadrilateral ABCD of a kind (0 square … 5 trapezium), sides AB, BC, CD, DA; par: pairs of parallel sides. The
+ * labelling starts at a different corner for odd variants, and the angles are told in one of three ways (all four
+ * angles, one angle only, or "all four angles equal"), so the same kind is described by different properties. */
 function qdesc(kind: number, seed: number): QDesc {
   const th = [60, 70, 80, 100, 110, 120][seed % 6];
+  const rot = hh(`afkind:rot:${kind},${seed}`) % 2;
+  const style = hh(`afkind:style:${kind},${seed}`) % 3;
+  const turn = (xs: number[]) => (rot ? [xs[3], xs[0], xs[1], xs[2]] : xs);
+  const rightText = ["All four angles are 90°.", "∠A = 90°.", "∠A = ∠B = ∠C = ∠D."][style];
+  const slantText = [`∠A = ∠C = ${th}°, ∠B = ∠D = ${180 - th}°.`, `∠A = ${th}°.`, `∠A = ${th}°, ∠B = ${180 - th}°.`][style];
   if (kind === 0) {
     const s = 3 + seed;
-    return { sides: [s, s, s, s], par: 2, right: true, angles: "All four angles are 90°.", equalOpp: true };
+    return { sides: [s, s, s, s], par: 2, right: true, angles: rightText, equalOpp: true };
   }
   if (kind === 1 || kind === 3) {
     const w = 2 + (seed % 5);
     const l = w + 1 + Math.floor(seed / 5);
-    return kind === 1 ? { sides: [l, w, l, w], par: 2, right: true, angles: "All four angles are 90°.", equalOpp: true } : { sides: [l, w, l, w], par: 2, right: false, angles: `∠A = ∠C = ${th}°, ∠B = ∠D = ${180 - th}°.`, equalOpp: true };
+    const sides = turn([l, w, l, w]);
+    return kind === 1 ? { sides, par: 2, right: true, angles: rightText, equalOpp: true } : { sides, par: 2, right: false, angles: slantText, equalOpp: true };
   }
   if (kind === 2) {
     const s = 3 + seed;
-    return { sides: [s, s, s, s], par: 2, right: false, angles: `∠A = ∠C = ${th}°, ∠B = ∠D = ${180 - th}°.`, equalOpp: true };
+    return { sides: [s, s, s, s], par: 2, right: false, angles: slantText, equalOpp: true };
   }
   if (kind === 4) {
     const a = 3 + (seed % 5);
     const b = a + 2 + Math.floor(seed / 5);
-    return { sides: [a, b, b, a], par: 0, right: false, angles: "∠B = ∠D; ∠A and ∠C are different.", equalOpp: false };
+    // [a, b, b, a]: AB = DA, BC = CD, the line AC is the line of symmetry, so ∠B = ∠D; turned: ∠A = ∠C
+    return { sides: turn([a, b, b, a]), par: 0, right: false, angles: rot ? "∠A = ∠C; ∠B and ∠D are different." : "∠B = ∠D; ∠A and ∠C are different.", equalOpp: false };
   }
   const b2 = 3 + (seed % 5);
   const d = 3 + Math.floor(seed / 5);
-  return { sides: [b2 + d, d + 1, b2, d], par: 1, right: false, angles: "No two angles are equal.", equalOpp: false };
+  return { sides: turn([b2 + d, d + 1, b2, d]), par: 1, right: false, angles: "No two angles are equal.", equalOpp: false, ptext: rot ? "AD ∥ BC only (AB and DC are not parallel)" : undefined };
 }
-const parText = (q: QDesc) => (q.par === 2 ? "AB ∥ DC and AD ∥ BC" : q.par === 1 ? "AB ∥ DC only (AD and BC are not parallel)" : "No two sides are parallel");
+const parText = (q: QDesc) => q.ptext ?? (q.par === 2 ? "AB ∥ DC and AD ∥ BC" : q.par === 1 ? "AB ∥ DC only (AD and BC are not parallel)" : "No two sides are parallel");
 /** Name a described quadrilateral from its listed properties alone (independent of the kind it was made from). */
 function nameFrom(q: QDesc): number {
   const [ab, bc, cd, da] = q.sides;
@@ -2190,21 +2199,24 @@ function netOpts([i, f]: number[]): string[] {
       // a views question must not offer another solid with exactly the same two views
       if (f === 2 && SOLIDS[j].top === s.top && SOLIDS[j].front === s.front) continue;
       // a cube is also a cuboid, and a square is also a rectangle: never offer both
+      // a top view offers at most one circle (a circle and a circle with a dot side by side would be two circle options)
+      if (f === 3 && want.includes("circle") && v.includes("circle")) continue;
       if ((i <= 1 && j <= 1) || (["a square", "a rectangle"].includes(want) && ["a square", "a rectangle"].includes(v))) continue;
       set.push(v);
     }
   }
   return mixOrder(`afnet:${i},${f}`, set);
 }
+const cap1 = (t: string) => t[0].toUpperCase() + t.slice(1);
 const netPrompt = ([i, f]: number[]) => {
   const s = SOLIDS[i];
   if (f === 0) return `A net is made of ${s.net}. Which solid does it fold into?`;
-  if (f === 1) return `Which of these nets folds into a ${s.name}?`;
+  if (f === 1) return `Which of these nets folds into ${an(s.name)}?`;
   if (f === 2) return `A solid stands on a table. Seen from straight above it looks like ${s.top}; seen from the front it looks like ${s.front}. Which solid is it?`;
   const on = i === 4 || i === 5 ? "" : " on its base";
-  if (f === 3) return `A ${s.name} stands on a table${on}. What do you see when you look at it from straight above?`;
-  if (f === 4) return `A ${s.name} stands on a table${on}. What do you see when you look at it from the front, at eye level?`;
-  return `A ${s.name} lies on its side on a table, with one end facing you. What do you see when you look at it from the front, at eye level?`;
+  if (f === 3) return `${cap1(an(s.name))} stands on a table${on}. What do you see when you look at it from straight above?`;
+  if (f === 4) return `${cap1(an(s.name))} stands on a table${on}. What do you see when you look at it from the front, at eye level?`;
+  return `${cap1(an(s.name))} lies on its side on a table, with one end facing you. What do you see when you look at it from the front, at eye level?`;
 };
 
 // ---------------------------------------------------------------- views of a block building (afview)
@@ -2236,13 +2248,13 @@ const consecutive = (t: number[], f: (k: number) => number) => {
   return false;
 };
 const RULES: Record<string, Rule> = {
-  squares: { text: "They are square numbers in order: 1 × 1, 2 × 2, 3 × 3, …", fits: (t) => consecutive(t, (k) => k * k) },
-  triangular: { text: "They are triangular numbers in order: 1, 1 + 2, 1 + 2 + 3, …", fits: (t) => consecutive(t, (k) => (k * (k + 1)) / 2) },
-  cubes: { text: "They are cube numbers in order: 1 × 1 × 1, 2 × 2 × 2, …", fits: (t) => consecutive(t, (k) => k * k * k) },
+  squares: { text: "They are consecutive square numbers (a whole number times itself, then the next whole number times itself, …)", fits: (t) => consecutive(t, (k) => k * k) },
+  triangular: { text: "They are consecutive triangular numbers (from the list 1, 1 + 2, 1 + 2 + 3, …, one after another)", fits: (t) => consecutive(t, (k) => (k * (k + 1)) / 2) },
+  cubes: { text: "They are consecutive cube numbers (a whole number times itself three times, then the next, …)", fits: (t) => consecutive(t, (k) => k * k * k) },
   powers: { text: "Each number is double the one before (powers of 2)", fits: (t) => t.every((x, i) => i === 0 || x === 2 * t[i - 1]) },
   triple: { text: "Each number is three times the one before", fits: (t) => t.every((x, i) => i === 0 || x === 3 * t[i - 1]) },
-  odd: { text: "They are the odd numbers in order", fits: (t) => t.every((x, i) => x % 2 === 1 && (i === 0 || x === t[i - 1] + 2)) },
-  even: { text: "They are the even numbers in order", fits: (t) => t.every((x, i) => x % 2 === 0 && (i === 0 || x === t[i - 1] + 2)) },
+  odd: { text: "They are consecutive odd numbers", fits: (t) => t.every((x, i) => x % 2 === 1 && (i === 0 || x === t[i - 1] + 2)) },
+  even: { text: "They are consecutive even numbers", fits: (t) => t.every((x, i) => x % 2 === 0 && (i === 0 || x === t[i - 1] + 2)) },
 };
 const addRule = (d: number): Rule => ({ text: `Add ${d} each time`, fits: (t) => t.every((x, i) => i === 0 || x === t[i - 1] + d) });
 const growRule = (d: number): Rule => ({ text: `Add ${d}, then ${d + 1}, then ${d + 2}, and so on (one more each time)`, fits: (t) => t.every((x, i) => i === 0 || x === t[i - 1] + d + i - 1) });
@@ -2531,8 +2543,8 @@ B06.push(
         : mode === 1
           ? `The picture shows a grid of ${a} rows and ${b} columns of small squares. How many squares of any size are there in it altogether?`
           : mode === 2
-            ? `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, cutting it into ${a + 1} thin triangles side by side. How many triangles of any size are there in the figure altogether?`
-            : `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, and ${b} straight line${b > 1 ? "s" : ""} drawn across it parallel to the base, from one side to the other. How many triangles of any size are there in the figure altogether?`,
+            ? `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, cutting it into ${a + 1} thin triangles side by side. How many triangles of any size are there altogether, counting the whole triangle too? (Picture or sketch it.)`
+            : `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, and ${b} straight line${b > 1 ? "s" : ""} drawn across it parallel to the base, from one side to the other. How many triangles of any size are there altogether, counting the whole triangle too? (Picture or sketch it.)`,
     solve: (p) => {
       const [mode, a, b] = p;
       if (mode === 0) return { steps: [st("across", "choose", EN, [b + 1, 2], choose2(b + 1)), st("down", "choose", EN, [a + 1, 2], choose2(a + 1)), st("all", "multiply", EN, [choose2(b + 1), choose2(a + 1)], hiddenAns(p))], answer: hiddenAns(p) };
@@ -2563,7 +2575,7 @@ B06.push(
       if (mode === 0) return [B("small-only", "conceptual", EN, "Only the smallest squares were counted. Rectangles can be made of several squares together, up to the whole figure.", keep(a * b)), B("rows-only", "procedural", EN, "Only rectangles one row high were counted. Count rectangles of every height as well as every width.", keep(a * choose2(b + 1)))];
       if (mode === 1) return [B("small-only", "conceptual", EN, "Only the smallest squares were counted. Bigger squares are made of 2 × 2, 3 × 3, … small squares.", keep(a * b)), B("small-and-whole", "procedural", EN, "Only the small squares and the biggest ones were counted; the middle sizes were missed.", keep(a * b + (b - a + 1)))];
       const per = choose2(a + 2);
-      return [B("thin-only", "conceptual", EN, mode === 2 ? "Only the thin triangles side by side were counted. Two or more next to each other also make a triangle, and so does the whole figure." : "Only the smallest triangles, at the top above the first line across, were counted. Two or more of them together make a triangle too, and every line across is the base of more triangles.", keep(a + 1)), ...(mode === 3 ? [B("one-layer", "procedural", EN, `Only the triangles standing on the base were counted (${per}). Each line across makes another set of triangles with the top corner.`, keep(per))] : [B("thin-and-whole", "procedural", EN, "Only the thin triangles and the whole triangle were counted; triangles made of two, three, … thin ones were missed.", keep(a + 2))])];
+      return [B("thin-only", "conceptual", EN, mode === 2 ? "Only the thin triangles side by side were counted. Two or more next to each other also make a triangle, and so does the whole triangle." : "Only the smallest triangles, at the top above the first line across, were counted. Two or more of them together make a triangle too, and every line across is the base of more triangles.", keep(a + 1)), ...(mode === 3 ? [B("one-layer", "procedural", EN, `Only the triangles standing on the base were counted (${per}). Each line across makes another set of triangles with the top corner.`, keep(per))] : [B("thin-and-whole", "procedural", EN, "Only the thin triangles and the whole triangle were counted; triangles made of two, three, … thin ones were missed.", keep(a + 2))])];
     },
     distractors: (p) => [hiddenAns(p) + 1, hiddenAns(p) - 1, hiddenAns(p) + 5].filter((x) => x > 0),
     variants: () => [],
@@ -2717,7 +2729,7 @@ B06.push(
         if (k >= 0 && field(j) !== field(i)) out.push(B(id, "conceptual", NETS, says, k));
       };
       if (f <= 2) {
-        add("similar-solid", c1, f === 2 ? `The views of a ${SOLIDS[c1].name} were mixed up with these. Check both views: the view from above shows the base, the front view shows whether the sides go up straight (a rectangle) or meet at a point (a triangle).` : `The ${SOLIDS[c1].name} was mixed up with the ${s.name}. Count the pieces and look at their shapes: the ends or base tell which solid it is.`);
+        add("similar-solid", c1, f === 2 ? `The views of ${an(SOLIDS[c1].name)} were mixed up with these. Check both views: the view from above shows the base, the front view shows whether the sides go up straight (a rectangle) or meet at a point (a triangle).` : `The ${SOLIDS[c1].name} was mixed up with the ${s.name}. Count the pieces and look at their shapes: the ends or base tell which solid it is.`);
         add("count-slip", c2, f === 2 ? `These views were not checked carefully against the ${SOLIDS[c2].name}: count the sides of the shape seen from above, and look whether the front view is a rectangle or a triangle.` : `The pieces do not match: count the faces of the solid and check the shape of each piece (the base or ends decide the solid).`);
       } else {
         add("other-view", c1, f === 3 ? "This is what another solid looks like from above. From straight above you see the outline of the base (and, for a pyramid or cone, the point at the top in the middle)." : f === 4 ? "This view belongs to another solid. From the front, a prism or cylinder shows straight upright sides (a rectangle); a pyramid or cone shows sides meeting at a point (a triangle)." : "This view belongs to another solid. Lying on its side with an end facing you, a prism shows its end face (the shape of its base).");
@@ -2725,7 +2737,7 @@ B06.push(
       return out;
     },
     variants: () => [],
-    explain: (s) => `The ${s.inputs[1]} of a ${s.inputs[0]}: ${s.value}`,
+    explain: (s) => `The ${s.inputs[1]} of ${an(String(s.inputs[0]))}: ${s.value}`,
     domain: [[0, 16], [0, 5]],
     keep: netOk,
     difficulty: ([i, f]) => (i <= 4 && f !== 5 ? 1 : f <= 1 ? 2 : 3),

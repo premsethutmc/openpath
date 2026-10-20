@@ -1913,7 +1913,9 @@ export const B17: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is option ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [0, 3], [0, 7]],
-    keep: (p) => ibrOk(p),
+    // the range and domain questions (ask 0, 1) are one question per function: s only reorders their options, so only
+    // s = 0 is released; the angle and number questions differ in their candidates (a different right answer for each s)
+    keep: (p) => ibrOk(p) && (p[1] >= 2 || p[2] === 0),
     difficulty: ([f, ask]) => (f <= 1 && ask <= 1 ? 1 : f >= 4 || ask >= 2 ? 3 : 2),
     teach: {
       idea: "No trigonometric function is one-one on its whole domain, so to invert it we keep one piece on which it is one-one and takes every value once: the principal value branch. sin⁻¹ and cosec⁻¹ give angles in [−π/2, π/2], cos⁻¹ and sec⁻¹ in [0, π], tan⁻¹ in (−π/2, π/2), cot⁻¹ in (0, π); sec⁻¹ leaves out π/2 and cosec⁻¹ leaves out 0.",
@@ -1933,7 +1935,7 @@ export const B17: Def[] = [
     parse: none,
     reject: (p) => (cdOk(p) ? null : "Three pieces joined at whole numbers a < b, asked on ℝ or on an interval containing one break point."),
     prompt: (p) => `f(x) = ${cdText(p)}. ${p[7] === 0 ? "Which statement about the continuity of f on ℝ is true?" : `Which statement about the continuity of f on the closed interval [${cdIv(p).map(dec).join(", ")}] is true?`}`,
-    word: (p) => `A designer describes the height of a toy roller-coaster track (in cm above the table) at a horizontal distance x (in dm, measured from a mark on the table, negative to the left) by f(x) = ${cdText(p)}. A break in the track means f is not continuous there. ${p[7] === 0 ? "Which statement about the track (f on ℝ) is true?" : `Which statement about the part of the track over [${cdIv(p).map(dec).join(", ")}] is true?`}`,
+    word: (p) => `A designer describes the level of a toy roller-coaster track (in cm above the rim of a tray, negative where the track dips below the rim) at a horizontal distance x (in dm, measured from a mark on the table, negative to the left) by f(x) = ${cdText(p)}. A break in the track means f is not continuous there. ${p[7] === 0 ? "Which statement about the track (f on ℝ) is true?" : `Which statement about the part of the track over [${cdIv(p).map(dec).join(", ")}] is true?`}`,
     choices: (p) => cdChoices(p).map((c) => c.text),
     solve: (p) => {
       const [a, d, , , , j1, j2, ask] = p;
@@ -2067,7 +2069,7 @@ export const B17: Def[] = [
     bugs: (p) => {
       const [kind, u, v, w, z] = p;
       const ans = laAnswer(p);
-      if (kind === 0) return [{ id: "no-half", kind: "procedural", competency: DEFI, says: `∫₀^${u} ${v}(1 − x/${u}) dx = ${v}[x − x²/(${2 * u})]; the x² term was taken as x²/${u}, without the 2, which gives the rectangle ${u} × ${v}.`, predict: u * v } as Bug];
+      if (kind === 0) return [{ id: "no-half", kind: "procedural", competency: DEFI, says: `The two intercepts were multiplied (${u} × ${v}), as if the region were the rectangle with these sides; the line cuts that rectangle in half, and ∫₀^${u} ${v}(1 − x/${u}) dx = ${v}[x − x²/(${2 * u})] from 0 to ${u} gives half of it.`, predict: u * v } as Bug];
       if (kind === 1) {
         const out: Bug[] = [];
         const signed = Math.abs((u * (z * z - w * w)) / 2 + v * (z - w));
@@ -2254,7 +2256,7 @@ export const B17: Def[] = [
     },
     distractors: ([, , , , x0, y0]) => [`(${N(x0)}, 0, ${N(y0)}, 0)`, `(${N(y0)}, 1, ${N(x0)}, 1)`],
     variants: () => [],
-    explain: (s) => (s.id === "rank" ? `By row reduction, ${s.value}: infinitely many solutions` : s.id === "reduce" ? `${s.value[0].toUpperCase()}${String(s.value).slice(1)}` : `Solve for x and y in terms of t: ${s.value}`),
+    explain: (s) => (s.id === "rank" ? `By row reduction, ${s.value}: infinitely many solutions` : s.id === "reduce" ? `${String(s.value)[0].toUpperCase()}${String(s.value).slice(1)}` : `Solve for x and y in terms of t: ${s.value}`),
     domain: [[-2, 2], [-2, 2], [1, 2], [-2, 2], [-2, 3], [-2, 3], [1, 2], [-1, 1]],
     keep: (p) => ssOk(p),
     cap: 300,
@@ -2342,7 +2344,7 @@ export const B17: Def[] = [
       } else {
         out.push({ id: "tangent-for-normal", kind: "conceptual", competency: APP, says: "The tangent was given; the normal is perpendicular to it, so its slope is −1/m.", predict: tnLine(0, m, x0, y0) });
         if (Math.abs(m) !== 1) out.push({ id: "negative-only", kind: "procedural", competency: APP, says: `The normal's slope was taken as −m = ${N(-m)}; perpendicular slopes multiply to −1, so it is −1/m = ${F(-1 / m)}.`, predict: pa([[-m, 1], [y0 + m * x0, 0]]) });
-        out.push({ id: "reciprocal-only", kind: "procedural", competency: APP, says: `The normal's slope was taken as 1/m = ${F(1 / m)}; the minus sign was lost (perpendicular slopes multiply to −1).`, predict: pa([[1 / m, 1], [y0 - x0 / m, 0]]) });
+        if (Math.abs(m) !== 1) out.push({ id: "reciprocal-only", kind: "procedural", competency: APP, says: `The normal's slope was taken as 1/m = ${F(1 / m)}; the minus sign was lost (perpendicular slopes multiply to −1).`, predict: pa([[1 / m, 1], [y0 - x0 / m, 0]]) });
       }
       return out.filter((x) => x.predict !== right);
     },
@@ -2379,34 +2381,41 @@ export const B17: Def[] = [
     // [t, a]: template t of DECL with the whole number a in it
     parse: none,
     reject: ([t, a]) => (t >= 0 && t < DECL.length && a >= 1 && a <= 5 ? null : "One of the equation templates with a from 1 to 5."),
-    prompt: ([t, a]) => `Classify the differential equation ${DECL[t].text(a)}${DECL[t].partial ? ", where u is a function of x and y (or of x and t)" : ""}.`,
+    // partial equations are only classified as ordinary or partial (their linearity is beyond Class 12)
+    prompt: ([t, a]) => (DECL[t].partial ? `Is the differential equation ${DECL[t].text(a)} (u is the unknown function) ordinary or partial?` : `Classify the differential equation ${DECL[t].text(a)} (y is the unknown function of x).`),
     choices: (p) => declChoices(p),
     solve: (p) => {
       const d = DECL[p[0]];
-      const label = (d.partial ? 2 : 0) + (d.nonlinear ? 1 : 0);
-      return { steps: [step("kind", "classify", DE, [], d.partial ? "partial derivatives: partial" : "only d/dx: ordinary"), step("linear", "classify", DE, [], d.nonlinear ? `non-linear (${d.why})` : "linear: the unknown and its derivatives appear only to the first power, never multiplied together or inside a function"), step("pick", "classify", DE, [], declChoices(p).indexOf(DECL_LABELS[label]))], answer: declChoices(p).indexOf(DECL_LABELS[label]) };
+      const right = declChoices(p).indexOf(d.partial ? "partial" : DECL_LABELS[d.nonlinear ? 1 : 0]);
+      const steps = [step("kind", "classify", DE, [], d.partial ? "partial derivatives ∂: partial" : "only d/dx: ordinary")];
+      if (!d.partial) steps.push(step("linear", "classify", DE, [], d.nonlinear ? `non-linear (${d.why})` : "linear: the unknown and its derivatives appear only to the first power, never multiplied together or inside a function"));
+      return { steps: [...steps, step("pick", "classify", DE, [], right)], answer: right };
     },
     // independent: read the equation's term list (each term's derivative type, its power and what multiplies it) and classify it from that
     validate: (p, v) => {
       const terms = DECL[p[0]].terms;
       const partial = terms.some((t) => t.d === "p");
       const nonlinear = terms.some((t) => t.pow > 1 || t.times > 0 || t.fn);
-      return declChoices(p)[v as number] === DECL_LABELS[(partial ? 2 : 0) + (nonlinear ? 1 : 0)];
+      return declChoices(p)[v as number] === (partial ? "partial" : DECL_LABELS[nonlinear ? 1 : 0]);
     },
     bugs: (p) => {
       const d = DECL[p[0]];
       const cs = declChoices(p);
-      const ix = (partial: boolean, nonlinear: boolean) => cs.indexOf(DECL_LABELS[(partial ? 2 : 0) + (nonlinear ? 1 : 0)]);
       const out: Bug[] = [];
-      if (!d.nonlinear && d.varCoef) out.push({ id: "coefficient-nonlinear", kind: "conceptual", competency: DE, says: `The coefficient (${d.varCoef}) was taken to make the equation non-linear; coefficients may depend on the independent variable. Linearity is about the unknown function and its derivatives only.`, predict: ix(d.partial, true) });
-      if (d.nonlinear) out.push({ id: "missed-nonlinear", kind: "conceptual", competency: DE, says: `The term that makes it non-linear (${d.why}) was missed; the unknown function and its derivatives must appear only to the first power and not multiplied together.`, predict: ix(d.partial, false) });
-      if (d.partial) out.push({ id: "curly-d", kind: "recall", competency: DE, says: "∂ was read as an ordinary d; ∂ means a partial derivative, so the unknown depends on more than one variable and the equation is partial.", predict: ix(false, d.nonlinear) });
+      if (d.partial) {
+        out.push({ id: "curly-d", kind: "recall", competency: DE, says: "∂ was read as an ordinary d; ∂ means a partial derivative, so the unknown depends on more than one variable and the equation is partial.", predict: cs.indexOf("ordinary") });
+        return out;
+      }
+      const ix = (nonlinear: boolean) => cs.indexOf(DECL_LABELS[nonlinear ? 1 : 0]);
+      if (!d.nonlinear && d.varCoef) out.push({ id: "coefficient-nonlinear", kind: "conceptual", competency: DE, says: `The coefficient (${d.varCoef}) was taken to make the equation non-linear; coefficients may depend on the independent variable. Linearity is about the unknown function and its derivatives only.`, predict: ix(true) });
+      else if (!d.nonlinear && d.rhs) out.push({ id: "rhs-nonlinear", kind: "conceptual", competency: DE, says: `The term ${d.rhs} was taken to make the equation non-linear; a term in x alone does not contain the unknown y, so it does not affect linearity.`, predict: ix(true) });
+      if (d.nonlinear) out.push({ id: "missed-nonlinear", kind: "conceptual", competency: DE, says: `The term that makes it non-linear (${d.why}) was missed; the unknown function and its derivatives must appear only to the first power and not multiplied together.`, predict: ix(false) });
       return out;
     },
     variants: () => [],
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}` : String(s.value)),
     domain: [[0, 23], [1, 5]],
-    difficulty: ([t]) => (DECL[t].varCoef || (DECL[t].nonlinear && DECL[t].why.includes("multiplied")) ? 3 : DECL[t].partial ? 2 : 1),
+    difficulty: ([t]) => (DECL[t].partial ? 1 : DECL[t].varCoef || (DECL[t].nonlinear && DECL[t].why.includes("multiplied")) ? 3 : 2),
     teach: {
       idea: "An ordinary differential equation has one independent variable (derivatives d/dx); a partial one has several (∂/∂x, ∂/∂y). It is linear when the unknown and its derivatives appear only to the first power, are not multiplied together and are not inside functions such as sin or e^( ).",
       method: "First look at the derivative signs: d means ordinary, ∂ means partial. Then check every term containing the unknown: a square, a product of the unknown with a derivative, or a function of the unknown makes it non-linear; coefficients that depend only on x do not.",
@@ -2425,7 +2434,7 @@ export const B17: Def[] = [
     // [m, c, k, s]: dy/dx = (mx + y + c)² + k² − m, y(0) = sk − c; v = mx + y + c gives dv/dx = v² + k²
     parse: none,
     reject: ([m, c, k, s]) => (m < -3 || m > 3 || c < -3 || c > 3 || k < 1 || k > 3 || s < -1 || s > 1 || k * k - m === 0 ? "dy/dx = (mx + y + c)² + (k² − m) with y(0) = sk − c." : null),
-    prompt: (p) => `Solve dy/dx = ${ssubRhs(p)}, given that y = ${N(p[2] * p[3] - p[1])} when x = 0, by a substitution that makes the variables separable. Write y in terms of x.`,
+    prompt: (p) => `Solve dy/dx = ${ssubRhs(p)}, given that y = ${N(p[2] * p[3] - p[1])} when x = 0, ${p[0] === 0 ? (p[1] === 0 ? "by separating the variables" : `by separating the variables (the substitution v = ${ssubV(0, p[1])} helps)`) : "by a substitution that makes the variables separable"}. Write y in terms of x.`,
     solve: (p) => {
       const [m, c, k] = p;
       const ans = ssubAnswer(p);
@@ -2488,7 +2497,7 @@ export const B17: Def[] = [
         const closed = S.every((a) => S.every((b) => S.includes(op === 0 ? (a * b) % n : (a + b) % n)));
         return label === BM_CLOSE[closed ? 0 : 1];
       }
-      const { elems, op, eq } = bmBrute(p);
+      const { elems, op, eq } = bmBrute(p) as BM<any>;
       const comm = elems.every((a) => elems.every((b) => eq(op(a, b), op(b, a))));
       const assoc = elems.every((a) => elems.every((b) => elems.every((c) => eq(op(op(a, b), c), op(a, op(b, c))))));
       return label === BIN_CHOICES[comm && assoc ? 0 : comm ? 1 : assoc ? 2 : 3];
@@ -3068,7 +3077,8 @@ const ssOk = (p: number[]) => {
   if (a < -2 || a > 2 || b < -2 || b > 2 || c < 1 || c > 2 || e < -2 || e > 2 || x0 < -2 || x0 > 3 || y0 < -2 || y0 > 3 || m < 1 || m > 2 || k === 0 || Math.abs(k) > 1) return false;
   const { A, B } = ssSys(p);
   const D = ssDir(p);
-  return A.every((r) => r.every((x) => Math.abs(x) <= 9)) && B.every((x) => Math.abs(x) <= 20) && D.every((x) => Math.abs(x) <= 8) && A[2].some((x) => x !== 0);
+  // z must appear in the system (else z = t is not a genuine free choice of the given system)
+  return A.some((r) => r[2] !== 0) && A.every((r) => r.every((x) => Math.abs(x) <= 9)) && B.every((x) => Math.abs(x) <= 20) && D.every((x) => Math.abs(x) <= 8) && A[2].some((x) => x !== 0);
 };
 
 // tangents, normals, angles between curves (aqtann)
@@ -3087,38 +3097,40 @@ type DeTerm = { d: "o" | "p"; pow: number; times: number; fn: boolean };
 type DeclT = { text: (a: number) => string; partial: boolean; nonlinear: boolean; why: string; varCoef: string; rhs: string; terms: DeTerm[] };
 const O = (pow = 1, times = 0, fn = false): DeTerm => ({ d: "o", pow, times, fn });
 const Pd = (pow = 1, times = 0, fn = false): DeTerm => ({ d: "p", pow, times, fn });
+const Kn = (a: number) => (a === 1 ? "" : String(a));
+const Ks = (a: number) => (a === 1 ? "" : `${a} `);
 const DECL: DeclT[] = [
-  { text: (a) => `d²y/dx² + ${a}x dy/dx + y = sin x`, partial: false, nonlinear: false, why: "", varCoef: "x", rhs: "sin x", terms: [O(), O(), O()] },
-  { text: (a) => `x² d²y/dx² − ${a}x dy/dx + ${a + 1}y = 0`, partial: false, nonlinear: false, why: "", varCoef: "x²", rhs: "", terms: [O(), O(), O()] },
-  { text: (a) => `dy/dx + ${a}y = eˣ`, partial: false, nonlinear: false, why: "", varCoef: "", rhs: "eˣ", terms: [O(), O()] },
-  { text: (a) => `dy/dx + (sin x)y = ${a}x`, partial: false, nonlinear: false, why: "", varCoef: "sin x", rhs: "", terms: [O(), O()] },
-  { text: (a) => `d³y/dx³ − ${a} d²y/dx² + y = cos x`, partial: false, nonlinear: false, why: "", varCoef: "", rhs: "cos x", terms: [O(), O(), O()] },
-  { text: (a) => `eˣ dy/dx + ${a}y = x²`, partial: false, nonlinear: false, why: "", varCoef: "eˣ", rhs: "x²", terms: [O(), O()] },
-  { text: (a) => `dy/dx + ${a}y² = x`, partial: false, nonlinear: true, why: "the term in y²", varCoef: "", rhs: "", terms: [O(), O(2)] },
-  { text: (a) => `y d²y/dx² + ${a} dy/dx = 0`, partial: false, nonlinear: true, why: "y multiplied by d²y/dx²", varCoef: "", rhs: "", terms: [O(1, 1), O()] },
-  { text: (a) => `(dy/dx)² + ${a}y = x`, partial: false, nonlinear: true, why: "the square of dy/dx", varCoef: "", rhs: "", terms: [O(2), O()] },
-  { text: (a) => `dy/dx = ${a} sin y`, partial: false, nonlinear: true, why: "sin y", varCoef: "", rhs: "", terms: [O(), O(1, 0, true)] },
-  { text: (a) => `d²y/dx² + ${a}eʸ = 0`, partial: false, nonlinear: true, why: "eʸ", varCoef: "", rhs: "", terms: [O(), O(1, 0, true)] },
-  { text: (a) => `y dy/dx = ${a}x`, partial: false, nonlinear: true, why: "y multiplied by dy/dx", varCoef: "", rhs: "", terms: [O(1, 1)] },
-  { text: (a) => `∂u/∂x + ${a} ∂u/∂y = 0`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
-  { text: (a) => `∂²u/∂x² + ${a} ∂²u/∂y² = 0`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
-  { text: (a) => `∂u/∂t = ${a} ∂²u/∂x²`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
-  { text: (a) => `x ∂u/∂x + y ∂u/∂y = ${a}u`, partial: true, nonlinear: false, why: "", varCoef: "x and y", rhs: "", terms: [Pd(), Pd(), Pd()] },
-  { text: (a) => `∂²u/∂t² = ${a * a} ∂²u/∂x²`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
-  { text: (a) => `∂u/∂x − ${a} ∂u/∂y = x + y`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "x + y", terms: [Pd(), Pd()] },
-  { text: (a) => `u ∂u/∂x + ${a} ∂u/∂y = 0`, partial: true, nonlinear: true, why: "u multiplied by ∂u/∂x", varCoef: "", rhs: "", terms: [Pd(1, 1), Pd()] },
+  { text: (a) => `d²y/dx² + ${Kn(a)}x dy/dx + y = sin x`, partial: false, nonlinear: false, why: "", varCoef: "x", rhs: "sin x", terms: [O(), O(), O()] },
+  { text: (a) => `x² d²y/dx² − ${Kn(a)}x dy/dx + ${a + 1}y = 0`, partial: false, nonlinear: false, why: "", varCoef: "x²", rhs: "", terms: [O(), O(), O()] },
+  { text: (a) => `dy/dx + ${Kn(a)}y = eˣ`, partial: false, nonlinear: false, why: "", varCoef: "", rhs: "eˣ", terms: [O(), O()] },
+  { text: (a) => `dy/dx + (sin x)y = ${Kn(a)}x`, partial: false, nonlinear: false, why: "", varCoef: "sin x", rhs: "", terms: [O(), O()] },
+  { text: (a) => `d³y/dx³ − ${Ks(a)}d²y/dx² + y = cos x`, partial: false, nonlinear: false, why: "", varCoef: "", rhs: "cos x", terms: [O(), O(), O()] },
+  { text: (a) => `eˣ dy/dx + ${Kn(a)}y = x²`, partial: false, nonlinear: false, why: "", varCoef: "eˣ", rhs: "x²", terms: [O(), O()] },
+  { text: (a) => `dy/dx + ${Kn(a)}y² = x`, partial: false, nonlinear: true, why: "the term in y²", varCoef: "", rhs: "", terms: [O(), O(2)] },
+  { text: (a) => `y d²y/dx² + ${Ks(a)}dy/dx = 0`, partial: false, nonlinear: true, why: "y multiplied by d²y/dx²", varCoef: "", rhs: "", terms: [O(1, 1), O()] },
+  { text: (a) => `(dy/dx)² + ${Kn(a)}y = x`, partial: false, nonlinear: true, why: "the square of dy/dx", varCoef: "", rhs: "", terms: [O(2), O()] },
+  { text: (a) => `dy/dx = ${Ks(a)}sin y`, partial: false, nonlinear: true, why: "sin y", varCoef: "", rhs: "", terms: [O(), O(1, 0, true)] },
+  { text: (a) => `d²y/dx² + ${Kn(a)}eʸ = 0`, partial: false, nonlinear: true, why: "eʸ", varCoef: "", rhs: "", terms: [O(), O(1, 0, true)] },
+  { text: (a) => `y dy/dx = ${Kn(a)}x`, partial: false, nonlinear: true, why: "y multiplied by dy/dx", varCoef: "", rhs: "", terms: [O(1, 1)] },
+  { text: (a) => `∂u/∂x + ${Ks(a)}∂u/∂y = 0`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
+  { text: (a) => `∂²u/∂x² + ${Ks(a)}∂²u/∂y² = 0`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
+  { text: (a) => `∂u/∂t = ${Ks(a)}∂²u/∂x²`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
+  { text: (a) => `x ∂u/∂x + y ∂u/∂y = ${Kn(a)}u`, partial: true, nonlinear: false, why: "", varCoef: "x and y", rhs: "", terms: [Pd(), Pd(), Pd()] },
+  { text: (a) => `∂²u/∂t² = ${Ks(a * a)}∂²u/∂x²`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "", terms: [Pd(), Pd()] },
+  { text: (a) => `∂u/∂x − ${Ks(a)}∂u/∂y = x + y`, partial: true, nonlinear: false, why: "", varCoef: "", rhs: "x + y", terms: [Pd(), Pd()] },
+  { text: (a) => `u ∂u/∂x + ${Ks(a)}∂u/∂y = 0`, partial: true, nonlinear: true, why: "u multiplied by ∂u/∂x", varCoef: "", rhs: "", terms: [Pd(1, 1), Pd()] },
   { text: (a) => `(∂u/∂x)² + (∂u/∂y)² = ${a}`, partial: true, nonlinear: true, why: "the squares of the derivatives", varCoef: "", rhs: "", terms: [Pd(2), Pd(2)] },
-  { text: (a) => `∂u/∂t + u ∂u/∂x = ${a} ∂²u/∂x²`, partial: true, nonlinear: true, why: "u multiplied by ∂u/∂x", varCoef: "", rhs: "", terms: [Pd(), Pd(1, 1), Pd()] },
-  { text: (a) => `∂u/∂x + ${a} ∂u/∂y = u²`, partial: true, nonlinear: true, why: "the term u²", varCoef: "", rhs: "", terms: [Pd(), Pd(), Pd(2)] },
-  { text: (a) => `∂²u/∂x² + ∂²u/∂y² = ${a} sin u`, partial: true, nonlinear: true, why: "sin u", varCoef: "", rhs: "", terms: [Pd(), Pd(), Pd(1, 0, true)] },
+  { text: (a) => `∂u/∂t + u ∂u/∂x = ${Ks(a)}∂²u/∂x²`, partial: true, nonlinear: true, why: "u multiplied by ∂u/∂x", varCoef: "", rhs: "", terms: [Pd(), Pd(1, 1), Pd()] },
+  { text: (a) => `∂u/∂x + ${Ks(a)}∂u/∂y = u²`, partial: true, nonlinear: true, why: "the term u²", varCoef: "", rhs: "", terms: [Pd(), Pd(), Pd(2)] },
+  { text: (a) => `∂²u/∂x² + ∂²u/∂y² = ${Ks(a)}sin u`, partial: true, nonlinear: true, why: "sin u", varCoef: "", rhs: "", terms: [Pd(), Pd(), Pd(1, 0, true)] },
   { text: (a) => `(∂u/∂x)(∂u/∂y) = ${a}`, partial: true, nonlinear: true, why: "two derivatives multiplied together", varCoef: "", rhs: "", terms: [Pd(1, 1)] },
 ];
 const DECL_LABELS = ["ordinary and linear", "ordinary and non-linear", "partial and linear", "partial and non-linear"];
-const declChoices = (p: number[]) => shuffled(DECL_LABELS, `decl:${p}`);
+const declChoices = (p: number[]) => (DECL[p[0]].partial ? shuffled(["ordinary", "partial"], `decl:${p}`) : shuffled(DECL_LABELS, `decl:${p}`));
 
 // reducible to separable (aqsubsep)
 const ssubV = (m: number, c: number) => (m === 0 ? `y${sg(c)}` : `${kx(m)} + y${sg(c)}`);
-const ssubRhs = ([m, c, k]: number[]) => `(${ssubV(m, c)})²${sg(k * k - m)}`;
+const ssubRhs = ([m, c, k]: number[]) => `${m === 0 && c === 0 ? "y" : `(${ssubV(m, c)})`}²${sg(k * k - m)}`;
 const ssubPhase = (s: number) => (s === 0 ? "" : s > 0 ? " + π/4" : " − π/4");
 const ssubTan = (k: number, s: number) => `${k === 1 ? "" : k}tan(${kx(k)}${ssubPhase(s)})`;
 const ssubAnswer = ([m, c, k, s]: number[]) => `${ssubTan(k, s)}${m === 0 ? "" : ` ${m > 0 ? "−" : "+"} ${Math.abs(m) === 1 ? "" : Math.abs(m)}x`}${sg(-c)}`;
@@ -3159,10 +3171,11 @@ function bmTable([, , op, k]: number[]) {
   const rows = [0, 1, 2].map((i) => [0, 1, 2].map((j) => perm[BM_BASE[op](inv[i], inv[j])]));
   return { L, rows };
 }
+const bmList = (lo: number, hi: number) => (hi - lo <= 3 ? range(lo, hi).join(", ") : `${lo}, ${lo + 1}, …, ${hi}`);
 function bmPrompt(p: number[]): string {
   const [kind, n, op, k] = p;
-  if (kind === 0) return `On S = {0, 1, …, ${n - 1}}, a binary operation ∗ is defined by a ∗ b = (${BM_MOD(k)[op]}) mod ${n}, the remainder on dividing ${BM_MOD(k)[op]} by ${n}${op === 2 ? ` (taken in S; for example −1 mod ${n} = ${n - 1})` : ""}. Which is true?`;
-  if (kind === 1) return `Let S = {1, 2, …, ${n - 1}} and a ∗ b = (${op ? "a + b" : "ab"}) mod ${n}, the remainder on dividing ${op ? "a + b" : "ab"} by ${n}. Is ∗ a binary operation on S?`;
+  if (kind === 0) return `On S = {${bmList(0, n - 1)}}, a binary operation ∗ is defined by a ∗ b = (${BM_MOD(k)[op]}) mod ${n}, the remainder on dividing ${BM_MOD(k)[op]} by ${n}${op === 2 ? ` (taken in S; for example −1 mod ${n} = ${n - 1})` : ""}. Which is true?`;
+  if (kind === 1) return `Let S = {${bmList(1, n - 1)}} and a ∗ b = (${op ? "a + b" : "ab"}) mod ${n}, the remainder on dividing ${op ? "a + b" : "ab"} by ${n}. Is ∗ a binary operation on S?`;
   if (kind === 2) {
     const { L, rows } = bmTable(p);
     return `On S = {${L.join(", ")}}, the operation ∗ is given by the table in the picture (the entry in row x and column y is x ∗ y): ${rows.map((r, i) => `row ${L[i]}: ${r.map((x) => L[x]).join(", ")}`).join("; ")}. Which is true?`;
@@ -3186,20 +3199,21 @@ function bmZeroPair(n: number): string {
   const f = range(2, n - 1).find((d) => n % d === 0) ?? 1;
   return `${f} × ${n / f}`;
 }
-function bmBrute(p: number[]): { elems: number[]; op: (a: number, b: number) => number; eq: (a: number, b: number) => boolean } | { elems: number[][][]; op: (a: number[][], b: number[][]) => number[][]; eq: (a: number[][], b: number[][]) => boolean } {
+type BM<T> = { elems: T[]; op: (a: T, b: T) => T; eq: (a: T, b: T) => boolean };
+function bmBrute(p: number[]): BM<number> | BM<number[][]> {
   const [kind, n, op, k] = p;
   if (kind === 0) {
     const md = (x: number) => ((x % n) + n) % n;
     const f = [(a: number, b: number) => md(a + b + k), (a: number, b: number) => md(a * b), (a: number, b: number) => md(a - b), (a: number, b: number) => md(a + k * b), (a: number, b: number) => md(a * b + a + b), (a: number, b: number) => md(k * a * b)][op];
-    return { elems: range(0, n - 1), op: f, eq: (a, b) => a === b };
+    return { elems: range(0, n - 1), op: f, eq: (a: number, b: number) => a === b };
   }
   if (kind === 2) {
     const { rows } = bmTable(p);
-    return { elems: [0, 1, 2], op: (a, b) => rows[a][b], eq: (a, b) => a === b };
+    return { elems: [0, 1, 2], op: (a: number, b: number) => rows[a][b], eq: (a: number, b: number) => a === b };
   }
   const mm = (A: number[][], B: number[][]) => [0, 1].map((i) => [0, 1].map((j) => A[i][0] * B[0][j] + A[i][1] * B[1][j]));
   const add = (A: number[][], B: number[][], s = 1) => A.map((r, i) => r.map((x, j) => x + s * B[i][j]));
   const f = [(A: number[][], B: number[][]) => mm(A, B), (A: number[][], B: number[][]) => add(A, B), (A: number[][], B: number[][]) => add(mm(A, B), mm(B, A), -1), (A: number[][], B: number[][]) => add(mm(A, B), mm(B, A)), (A: number[][], B: number[][]) => add(A, B, -1), (A: number[][], B: number[][]) => add(add(A, B), mm(A, B))][op];
   const elems = [[[1, 2], [0, -1]], [[0.5, -1], [3, 2]], [[2, 0], [1, 1]], [[-1, 1], [1, 0.25]]];
-  return { elems, op: f, eq: (A, B) => A.every((r, i) => r.every((x, j) => Math.abs(x - B[i][j]) < 1e-9)) };
+  return { elems, op: f, eq: (A: number[][], B: number[][]) => A.every((r, i) => r.every((x, j) => Math.abs(x - B[i][j]) < 1e-9)) };
 }

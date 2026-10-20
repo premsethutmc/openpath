@@ -1638,7 +1638,6 @@ export const B10: Def[] = [
     keep: pfdOk,
     cap: 400,
     difficulty: (p) => ([2, 2, 1, 3] as const)[pfdTruth(p)],
-    word: (p) => `A sweet shop has A = ${pfText(p.slice(0, 4))} laddus and wants to pack them in boxes of B = ${pfText(p.slice(4))} laddus each. The owner looks only at the prime factorisations. Which statement about A and B is true?`,
     teach: {
       idea: "B divides A exactly when every prime of B appears in A at least as many times. Two numbers are co-prime when they share no prime factor, so their only common factor is 1.",
       method: "Compare the powers prime by prime: if each power in B is at most the power in A, A is divisible by B. If no prime appears in both, they are co-prime.",
@@ -1749,7 +1748,7 @@ export const B10: Def[] = [
     mc: true,
     // [m, x, y, z]: m 0 write "x crore y lakh z thousand" in figures; 1 x million in lakh; 2 x billion in crore
     parse: none,
-    reject: (p) => (croreOk(p) ? null : "x crore y lakh z thousand (x from 1 to 99), up to 999 million, or up to 99 billion."),
+    reject: (p) => (croreOk(p) ? null : "x crore y lakh z thousand (x from 1 to 99, z from 0 to 9), up to 99 million, or up to 99 billion."),
     prompt: ([m, x, y, z]) => (m === 0 ? `Write the number "${croreWords(x, y, z)}" in figures. Type the digits without commas.` : m === 1 ? `${x} million is how many lakh?` : `${x} billion is how many crore?`),
     solve: ([m, x, y, z]) => {
       if (m === 0)
@@ -1777,6 +1776,7 @@ export const B10: Def[] = [
         return keepBugs([
           glued !== right && { id: "no-place-holder", kind: "procedural", competency: IIN, says: "The numbers were written next to each other without zeros for the empty places. Lakhs take two places and thousands two places, so missing digits must be filled with 0.", predict: glued },
           y > 0 && y <= 9 && { id: "lakh-as-ten-lakh", kind: "recall", competency: IIN, says: "1 lakh was written as 10,00,000; 1 lakh is 1,00,000 (five zeros).", predict: x * 1e7 + y * 1e6 + z * 1e3 },
+          { id: "crore-six-zeros", kind: "recall", competency: IIN, says: `1 crore was written with six zeros (10,00,000), which is 10 lakh. 1 crore is 1,00,00,000: seven zeros, so ${x} crore = ${inr(x * 1e7)}.`, predict: x * 1e6 + y * 1e5 + z * 1e3 },
         ]);
       }
       if (m === 1)
@@ -1792,7 +1792,8 @@ export const B10: Def[] = [
     distractors: ([m, x, y, z]) => (m === 0 ? [(x * 1e7 + y * 1e5 + z * 1e3) * 10, (x * 1e7 + y * 1e5 + z * 1e3) / 10, x * 1e7 + z * 1e5 + y * 1e3] : []),
     variants: () => [],
     explain: (s) => (s.id === "crore" ? `${s.inputs[0]} crore = ${inr(Number(s.value))}` : s.id === "lakh" ? `${s.inputs[0]} lakh = ${inr(Number(s.value))}` : s.id === "thousand" ? `${s.inputs[0]} thousand = ${inr(Number(s.value))}` : s.id === "million" ? `${s.inputs[0]} million = ${s.inputs[0]} × 10 lakh = ${s.value} lakh` : `${s.inputs[0]} billion = ${s.inputs[0]} × 100 crore = ${s.value} crore`),
-    domain: [[0, 2], [1, 999], [0, 99], [0, 99]],
+    // a domain small enough to be listed in full (not sampled), so the million and billion questions reach the pool too
+    domain: [[0, 2], [1, 99], [0, 99], [0, 9]],
     keep: croreOk,
     cap: 450,
     difficulty: ([m, x, y, z]) => (m === 1 ? 1 : m === 2 ? 2 : y < 10 || z < 10 ? 3 : 2),
@@ -1805,7 +1806,7 @@ export const B10: Def[] = [
         { id: "zeros", title: "Count the zeros", kind: "procedural", text: ["1 lakh has 5 zeros, 1 million 6, 1 crore 7 and 1 billion 9.", "So a million is 10 lakh (one more zero) and a billion is 100 crore (two more zeros)."] },
       ],
     },
-    limits: "Up to 99 crore 99 lakh 99 thousand in figures, up to 999 million and 99 billion; reading a number aloud in words is not marked.",
+    limits: "Up to 99 crore 99 lakh 9 thousand in figures (single-digit thousands, which need a placeholder zero), up to 99 million and 99 billion; reading a number aloud in words is not marked.",
   },
   {
     id: "ajcrcmp",
@@ -1840,7 +1841,7 @@ export const B10: Def[] = [
     domain: [[0, 699]],
     cap: 400,
     difficulty: ([s]) => (s % 3 === 0 ? 1 : 2),
-    word: ([s]) => `Four districts reported their populations: ${cmpSet(s).opts.map(inr).join(";  ")}. Which population is the largest?`,
+    word: ([s]) => `Four countries reported their populations: ${cmpSet(s).opts.map(inr).join(";  ")}. Which population is the largest?`,
     teach: {
       idea: "A number with more digits is greater. With the same number of digits, compare place by place from the left: crores, then lakhs, then thousands.",
       method: "Count the digits of each number. Among those with the most digits, compare the crores, then the lakhs, and so on.",
@@ -2004,7 +2005,9 @@ export const B10: Def[] = [
       m === 0
         ? `A tank's water level changed by ${fr(a, b)} m (a fall is negative). What change, in m, would bring it back to where it started?`
         : m === 1
-          ? `A recipe is scaled by multiplying every amount by ${fr(a, b)} (a negative factor is a mistake that turns gains into losses). By what factor must the scaled amounts be multiplied to get back the original amounts exactly?`
+          ? a > 0
+            ? `A recipe is scaled by multiplying every amount by ${fr(a, b)}. By what number must the scaled amounts be multiplied to get back the original amounts exactly? (A fraction is fine.)`
+            : `A number machine multiplies every number put into it by ${fr(a, b)}. By what number must its output be multiplied to get back the number that was put in? (A fraction is fine.)`
           : `A tank's water level changes by ${fr(a, b)} m every hour (a fall is negative). The pump runs for ${c}/${d} of an hour in the morning and ${d - c}/${d} of an hour in the evening. What is the total change in the level, in m?`,
     teach: {
       idea: "The additive inverse of x is −x, because x + (−x) = 0. The multiplicative inverse of a/b is b/a, because a/b × b/a = 1. The distributive property x × y + x × z = x × (y + z) can make a calculation easy.",
@@ -2238,7 +2241,7 @@ export const B10: Def[] = [
       const g = 5 * d;
       const who = nm(c + d);
       return m === 0
-        ? `${who} bought a second-hand bicycle bell for ${rs(cp)} and later sold it to a friend for ${rs(cp + g)}. What was ${who}'s profit or loss? (A profit is positive, a loss negative.)`
+        ? `${who} bought ${plItem(cp).replace(/^a /, "a second-hand ")} for ${rs(cp)} and later sold it to a friend for ${rs(cp + g)}. What was ${who}'s profit or loss? (A profit is positive, a loss negative.)`
         : m === 1
           ? `At the school fair, ${who} spent ${rs(cp)} making paper lanterns and ended with a ${g > 0 ? "profit" : "loss"} of ${rs(Math.abs(g))}. How much money did the lanterns sell for, in rupees?`
           : `At the school fair, ${who} sold paper lanterns for ${rs(cp + g)} in all and made a ${g > 0 ? "profit" : "loss"} of ${rs(Math.abs(g))}. How much had making them cost, in rupees?`;
@@ -2399,7 +2402,11 @@ export const B10: Def[] = [
     keep: rcqOk,
     cap: 450,
     difficulty: ([a, b, c, d]) => (a * d === b * c ? 2 : a < 0 && c < 0 ? 3 : b === d ? 1 : 2),
-    word: ([a, b, c, d]) => `At dawn the temperature in Kodaikanal was ${fr(a, b)} °C and in Munnar it was ${fr(c, d)} °C. Comparing the two temperatures, which statement is true?`,
+    // a temperature only in halves and quarters of a degree; other denominators are points on a number line
+    word: ([a, b, c, d]) =>
+      [2, 4].includes(b) && [2, 4].includes(d)
+        ? `At dawn the temperature in Kodaikanal was ${fr(a, b)} °C and in Munnar it was ${fr(c, d)} °C. Comparing the two temperatures, which statement is true?`
+        : `In a number-line game on the school playground, ${nm(b + d)} stands at ${fr(a, b)} and ${nm(b + d + 1)} stands at ${fr(c, d)}. Comparing the two numbers, which statement is true?`,
     teach: {
       idea: "On the number line, the number to the right is greater. Every positive number is greater than every negative number; between two negatives, the one closer to 0 is greater.",
       method: "Write both with the same positive denominator and compare the numerators (−8/12 < −3/12 because −8 < −3).",
@@ -2472,8 +2479,12 @@ export const B10: Def[] = [
     difficulty: ([m, p, q, , t]) => (m === 1 ? (q === t ? 2 : 3) : p < 0 && t === 3 ? 3 : p < 0 ? 2 : 1),
     word: ([m, p, q, s, t]) =>
       m === 0
-        ? `On a thermometer scale, the gap between ${n_(p)} °C and ${n_(p + 1)} °C is divided into ${q} equal small parts. The liquid stops at the ${ordw(s)} small mark to the ${t === 2 ? `right of ${n_(p)}` : `left of ${n_(p + 1)}`} °C (the scale is drawn lying flat, numbers increasing to the right). What temperature does it show, in °C, as a fraction?`
-        : `Two marks on a post in a lake are at heights ${fr(p, q)} m and ${fr(s, t)} m from the water surface (negative means below it). A third mark is painted exactly halfway between them. At what height is it, in m?`,
+        ? ![2, 4, 5].includes(q)
+          ? `A number line is painted on the school playground. The gap between ${n_(p)} and ${n_(p + 1)} is divided into ${q} equal small parts. ${nm(p + q)} stands on the ${ordw(s)} small mark to the ${t === 2 ? `right of ${n_(p)}` : `left of ${n_(p + 1)}`}. Which number is ${nm(p + q)} standing on, as a fraction?`
+          : `On a thermometer scale, the gap between ${n_(p)} °C and ${n_(p + 1)} °C is divided into ${q} equal small parts. The liquid stops at the ${ordw(s)} small mark to the ${t === 2 ? `right of ${n_(p)}` : `left of ${n_(p + 1)}`} °C (the scale is drawn lying flat, numbers increasing to the right). What temperature does it show, in °C, as a fraction?`
+        : ![2, 4, 5].includes(q) || ![2, 4, 5].includes(t)
+          ? `Two friends stand on a number line painted on the school playground, at ${fr(p, q)} and ${fr(s, t)}. A third friend wants to stand exactly halfway between them. At which number should the third friend stand? (A fraction is fine.)`
+          : `Two marks on a post in a lake are at heights ${fr(p, q)} m and ${fr(s, t)} m from the water surface (negative means below it). A third mark is painted exactly halfway between them. At what height is it, in m?`,
     teach: {
       idea: "Between two integers the number line can be cut into q equal parts; each part is 1/q. A rational number halfway between x and y is their average.",
       method: "Start at the named end and move s parts of 1/q (right adds, left subtracts). For halfway, add the two numbers and divide by 2.",
@@ -2693,6 +2704,8 @@ export const B10: Def[] = [
     explain: (s) => (s.id === "match" ? `Match the identity: ${s.inputs[0]}` : `The middle term is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [1, 5], [1, 9], [0, 4]],
     keep: fcubOk,
+    // level@1: x³ ± a³ and x³ + y³ + z³ − 3xyz are Class 9 identities
+    grade: () => 9,
     difficulty: ([m, a]) => (m === 2 ? 3 : a === 1 ? 1 : 2),
     teach: {
       idea: "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
@@ -2795,6 +2808,8 @@ export const B10: Def[] = [
     domain: [[1, 6], [-9, 9], [1, 6], [-9, 9]],
     keep: fsplOk,
     cap: 450,
+    // level@1: splitting the middle term of ax² + bx + c with a ≠ 1 is Class 9 (here a = pr ≥ 2 always)
+    grade: ([p, , r]) => (p * r === 1 ? 8 : 9),
     difficulty: ([, q, , s]) => (q > 0 && s > 0 ? 1 : q < 0 && s < 0 ? 2 : 3),
     word: ([p, q, r, s]) => `A rectangular mat has an area of (${quad(p * r, p * s + q * r, q * s)}) square units. Its sides are (${p === 1 ? "" : p}x + □) and (${r}x + □) units long. What numbers go in the boxes, in order?`,
     teach: {
@@ -3061,8 +3076,8 @@ function intlOk([m, a, b]: number[]) {
 
 // ajcrore, ajcrcmp
 function croreOk([m, x, y, z]: number[]) {
-  if (m === 0) return x >= 1 && x <= 99 && y >= 0 && y <= 99 && z >= 0 && z <= 99 && (y > 0 || z > 0);
-  if (m === 1) return x >= 1 && x <= 999 && y === 0 && z === 0;
+  if (m === 0) return x >= 1 && x <= 99 && y >= 0 && y <= 99 && z >= 0 && z <= 9 && (y > 0 || z > 0);
+  if (m === 1) return x >= 1 && x <= 99 && y === 0 && z === 0;
   return m === 2 && x >= 1 && x <= 99 && y === 0 && z === 0;
 }
 const croreWords = (x: number, y: number, z: number) => [`${x} crore`, y ? `${y} lakh` : "", z ? `${z} thousand` : ""].filter(Boolean).join(" ");
@@ -3256,7 +3271,7 @@ function rcqChoices([a, b, c, d]: number[]) {
 function fareText(r: number, k: number, t: number) {
   return [
     `An auto-rickshaw charges ₹${r} per km. What is the fare for a ride of ${k} km, in rupees?`,
-    `A taxi charges ₹${r} for every kilometre. How much does a ${k} km trip cost, in rupees?`,
+    `A taxi charges ₹${r} for every kilometre. How much does ${/^(8|11|18)$/.test(String(k)) ? "an" : "a"} ${k} km trip cost, in rupees?`,
     `A courier service charges ₹${r} per km of distance. What does it charge to deliver a parcel ${k} km away, in rupees?`,
     `A shop sells ribbon at ₹${r} per metre. How much do ${k} metres of ribbon cost, in rupees?`,
   ][t];
@@ -3314,7 +3329,7 @@ function fcubRight(m: number, a: number, b: number, c: number) {
 }
 function fgrpOk([m, p, q, r, s]: number[]) {
   if (m === 0) return p >= 2 && p <= 9 && q >= 1 && q <= 9 && r >= 1 && r <= 9 && gcd(q, r) === 1 && (s === 0 || s === 1);
-  return m === 1 && p >= 1 && p <= 5 && q >= 1 && q <= 5 && r !== 0 && s !== 0 && gcd(p, Math.abs(s)) === 1 && gcd(q, Math.abs(r)) === 1 && !(p === q && r === s);
+  return m === 1 && p >= 1 && p <= 5 && q >= 1 && q <= 5 && r !== 0 && s !== 0 && gcd(p, Math.abs(s)) === 1 && gcd(q, Math.abs(r)) === 1 && !(p === q && r === s) && q * s + p * r !== 0;
 }
 function grpPoly(p: number, q: number, r: number, s: number) {
   const term = (v: number) => `${v < 0 ? "−" : "+"} ${Math.abs(v) === 1 ? "" : Math.abs(v)}x`;

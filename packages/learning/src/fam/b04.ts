@@ -4,7 +4,7 @@
  * addition and subtraction with regrouping; numbers to thousands (expanded form, making 1000, counting between);
  * estimating by rounding; reading bar charts; reading tally tables and two-way tables. Written by OpenPath; CC0.
  */
-import type { Bug, Def, Step, Value } from "../family-kit";
+import type { Bug, Def, Step, Value, Visual } from "../family-kit";
 import { MT, gcd, near } from "../family-kit";
 
 const PER = "MATH.measurement.perimeter-intro";
@@ -73,7 +73,7 @@ const cum = (L: number[]) => L.reduce<[number, number][]>((acc, l) => [...acc, [
 const pairOf = (mode: number, k: number, x: number): [number, number] => (mode === 0 ? [x, k] : [k, x]);
 const properFor = (mode: number, k: number, xs: number[]) =>
   mode === 0 ? k >= 2 && k <= 12 && xs.every((x) => x >= 1 && x < k) : k >= 1 && k <= 11 && xs.every((x) => x > k && x <= 12);
-const fracGrid = (a: number, b: number) => ({ type: "grid", rows: 1, cols: b, shaded: a });
+const fracGrid = (a: number, b: number): Visual => ({ type: "grid", rows: 1, cols: b, shaded: a });
 
 // ---------------------------------------------------------------- measures for a fraction of a whole
 
@@ -1399,10 +1399,10 @@ export const B04: Def[] = [
     explain: (s) => `With the same top number, the smaller bottom number gives the bigger part: ${s.inputs[0]} is greater than ${s.inputs[1]}, so the answer is ${s.value}`,
     domain: [[0, 6], [0, 6], [0, 2], [0, 1]],
     difficulty: ([i, j]) => (UF[i] === 2 && UF[j] === 4 ? 1 : j - i === 1 ? 3 : 2),
-    figure: ([i, j]) => ({ type: "numberline", from: 0, to: 1, step: 1, marks: [1 / UF[i], 1 / UF[j]] }),
+    figure: ([i, j]) => ({ type: "numberline", from: 0, to: 1, step: 1, marks: [Math.round(1000 / UF[i]) / 1000, Math.round(1000 / UF[j]) / 1000] }),
     word: (p) => {
       const [x, y] = fnlPair(p);
-      return `${nm(x + y)} and ${nm(x + y + 1)} start at the same gate and walk along a road 1 km long. One walks ${fr(1, x)} km and the other ${fr(1, y)} km. Which distance is ${p[2] === 0 ? "shorter" : "longer"}?`;
+      return `${nm(x + y)} and ${nm(x + y + 1)} start at the same gate and walk along a road 1 km long. One walks ${fr(1, x)} km and the other ${fr(1, y)} km. ${["Which distance is shorter?", "Which distance ends nearer to the far end of the road?", "Which distance is longer?"][p[2]]}`;
     },
     teach: {
       idea: "On a number line from 0 to 1, 1/2 is halfway and 1/4 is halfway to the half: cutting the line into more equal parts makes each part shorter, so 1/4 is nearer to 0 than 1/2.",
@@ -1421,7 +1421,8 @@ export const B04: Def[] = [
     competency: EST,
     type: "integer",
     mc: true,
-    // [mode, x]: 0 how far a weight estimate was from the weighing; 1 how many glasses a jug really fills; 2 a total weight in grams; 3 how many mugs fill a bucket
+    // [mode, x]: 0 how far a weight estimate was from the weighing; 1 how many glasses a jug really fills (checking a guess);
+    // 2 checking an estimated total weight: the real total in grams; 3 checking a guessed number of mugs that fill a bucket
     parse: none,
     reject: ([mode, x]) => {
       if (mode < 0 || mode > 3 || x < 0 || x > 39) return "Four kinds of weight and capacity problem.";
@@ -1461,8 +1462,8 @@ export const B04: Def[] = [
       const [a, b] = W.inputs as number[];
       if (p[0] === 0) return [Bg("added", "conceptual", EST, "The guess and the weighing were added. How far off the guess was is the difference: take the smaller from the larger.", a + b)];
       if (p[0] === 1) return [Bg("kept-guess", "procedural", EST, "The guess was given again. Check it: find how many glasses of that size the jug really holds.", W.guess ?? null), Bg("subtracted", "conceptual", EST, "The glass was taken away from the jug once. Filling glasses takes the glass away again and again: count how many times.", a - b)].filter((x) => x.predict !== W.ans);
-      if (p[0] === 2) return [Bg("kg-as-100", "recall", "MATH.measurement.standard-mass", "A kilogram was taken as 100 g; 1 kg = 1000 g.", 100 * a + b), Bg("added-numbers", "conceptual", "MATH.measurement.standard-mass", "The numbers were added without changing kilograms into grams first.", a + b)];
-      return [Bg("litre-as-100", "recall", "MATH.measurement.capacity", "A litre was taken as 100 mL; 1 L = 1000 mL.", (a / 10) % b === 0 ? a / 10 / b : null), Bg("litres-only", "conceptual", "MATH.measurement.capacity", "The number of litres was given; change the litres into millilitres and see how many mugs fit.", a / 1000)].filter((x) => x.predict !== W.ans);
+      if (p[0] === 2) return [Bg("kept-guess", "procedural", EST, "The estimate was given again in grams. Check it: work out the real total from the two weights.", 1000 * (W.guess ?? 0)), Bg("kg-as-100", "recall", "MATH.measurement.standard-mass", "A kilogram was taken as 100 g; 1 kg = 1000 g.", 100 * a + b), Bg("added-numbers", "conceptual", "MATH.measurement.standard-mass", "The numbers were added without changing kilograms into grams first.", a + b)].filter((x) => x.predict !== W.ans);
+      return [Bg("kept-guess", "procedural", EST, "The guess was given again. Check it: find how many mugs of that size the bucket really holds.", W.guess ?? null), Bg("litre-as-100", "recall", "MATH.measurement.capacity", "A litre was taken as 100 mL; 1 L = 1000 mL.", (a / 10) % b === 0 ? a / 10 / b : null), Bg("litres-only", "conceptual", "MATH.measurement.capacity", "The number of litres was given; change the litres into millilitres and see how many mugs fit.", a / 1000)].filter((x) => x.predict !== W.ans);
     },
     distractors: (p) => {
       const r = wcNums(p).ans;
@@ -1556,7 +1557,9 @@ export const B04: Def[] = [
     figure: ([mode, x]) => (mode === 2 ? { type: "table", head: ["Month", "Days"], rows: [[MONTHS[x - 1], "?"], [MONTHS[x % 12], "?"]] } : null),
     word: ([mode, x, e]) =>
       mode === 0
-        ? `A cricket test match went on for ${pl(x, "day")}${e ? ` and ${pl(e, "hour")}` : ""}, counting day and night. How many hours is that?`
+        ? x <= 5
+          ? `A cricket test match went on for ${pl(x, "day")}${e ? ` and ${pl(e, "hour")}` : ""}, counting day and night. How many hours is that?`
+          : `A temple festival went on for ${pl(x, "day")}${e ? ` and ${pl(e, "hour")}` : ""}, counting day and night. How many hours is that?`
         : mode === 1
           ? `${nm(x + e)}'s summer holiday lasts ${pl(x, "week")}${e ? ` and ${pl(e, "day")}` : ""}. How many days is the holiday?`
           : mode === 2
@@ -1623,13 +1626,13 @@ export const B04: Def[] = [
     difficulty: ([mode, x]) => (String(nameNum(x)).endsWith("0") ? 1 : mode === 2 ? 2 : 3),
     word: ([mode, x]) => {
       const n = nameNum(x);
-      return mode === 0 ? `A cheque for ₹${inr(n)} must have the amount written in words. Which words should be written?` : mode === 1 ? `The newspaper says "${words(n)} people came to the temple festival". Which numeral is that?` : `${nm(x)} has ₹${inr(n)} in ₹1000, ₹100, ₹10 and ₹1 notes and coins, as few as possible. Which shows the money in expanded form?`;
+      return mode === 0 ? `A cheque for ₹${inr(n)} must have the amount written in words. Which words should be written?` : mode === 1 ? `The newspaper says "${words(n)} people came to the temple festival". Which numeral is that?` : `A bank packs ₹${inr(n)} as bundles of ₹1000 (ten ₹100 notes each), single ₹100 notes, ₹10 notes and ₹1 coins, using as few as possible. Which shows the money in expanded form?`;
     },
     teach: {
       idea: "A four-digit number has thousands, hundreds, tens and ones. The name and the expanded form say each digit with its place; a 0 means that place is empty.",
       method: "Write the number in a Th H T O table. Read it as (thousands digit) thousand, (hundreds digit) hundred, then the tens and ones; skip a place with 0. The expanded form adds the value of each non-zero digit.",
       visual: ([, x]) => ({ type: "table", head: ["Th", "H", "T", "O"], rows: [digits(nameNum(x))] }),
-      alternatives: [{ id: "money", title: "Think of notes", kind: "conceptual", text: ["4,507 is 4 notes of ₹1000, 5 notes of ₹100, no ₹10 notes and 7 coins of ₹1.", "So it is 4000 + 500 + 7, four thousand five hundred seven."] }],
+      alternatives: [{ id: "money", title: "Think of notes", kind: "conceptual", text: ["₹4,507 is 4 bundles of ₹1000 (ten ₹100 notes each), 5 more notes of ₹100, no ₹10 notes and 7 coins of ₹1.", "So it is 4000 + 500 + 7, four thousand five hundred seven."] }],
     },
     limits: "Four-digit numbers with one zero; five-digit numbers and the international system are other families.",
   },
@@ -1682,7 +1685,9 @@ export const B04: Def[] = [
     difficulty: ([si]) => (si === 0 || si === 3 || si === 6 ? 1 : si === 1 || si === 4 ? 3 : 2),
     word: (p) => {
       const t = seqTerms(p);
-      return `The odometer of a lorry is read at the end of each trip: ${t.slice(0, 4).map(inr).join("; ")} km${t[1] < t[0] ? " (these are the kilometres still left on a long journey)" : ""}. If the pattern goes on, what is the next reading?`;
+      return t[1] > t[0]
+        ? `The odometer of a lorry is read at the end of each trip: ${t.slice(0, 4).map(inr).join("; ")} km. If the pattern goes on, what is the next reading?`
+        : `On a long lorry journey, the kilometres still to go are noted at the end of each trip: ${t.slice(0, 4).map(inr).join("; ")} km. If the pattern goes on, how many kilometres are still to go after the next trip?`;
     },
     teach: {
       idea: "In a number pattern that adds (or takes away) the same step each time, find the step and keep going; when a place goes past 9, the next place goes up by one.",
@@ -2050,7 +2055,7 @@ export const B04: Def[] = [
       },
       alternatives: [{ id: "compensate", title: "Too much, then fix it", kind: "conceptual", text: ["Taking away 99 is taking away 100, which is 1 too many.", "So give that 1 back: 562 − 99 = 462 + 1 = 463."] }],
     },
-    limits: "Complements of two-digit numbers to 100 and four-digit numbers to 10,000 (to 1000 is ad1000), and subtracting 9 or 99 or adding 99 to numbers up to five digits.",
+    limits: "Complements of two-digit numbers to 100 and four-digit numbers to 10,000 (to 1000 is ad1000), and subtracting 9 or 99 or adding 99 to three- and four-digit numbers.",
   },
   {
     id: "adrace",
@@ -2115,7 +2120,7 @@ export const B04: Def[] = [
         ? `At the school sports day, the times for one lap were: ${raceNames(x).map((n, i) => `${n} ${tShow(raceTimes(x)[i])}`).join(", ")}. Who ${q ? "came last" : "won"}?`
         : `${nm(x)} wants to time how long it takes to ${ACTS[x][0]}. Which unit should ${nm(x)} use?`,
     teach: {
-      idea: "1 minute = 60 seconds. In a race the fastest runner takes the least time. Short things (a blink, a 100 m run) are timed in seconds, longer ones in minutes, very long ones in hours.",
+      idea: "1 minute = 60 seconds. In a race the fastest runner takes the least time. Short things (a clap, a 100 m run) are timed in seconds, longer ones in minutes, very long ones in hours.",
       method: "Change every time into seconds (minutes × 60 + seconds), then compare. For choosing a unit, think how long the activity usually takes.",
       visual: ([mode, x]) => (mode === 0 ? { type: "bars", title: "Race times in seconds", labels: raceNames(x), values: raceTimes(x) } : { type: "clock", h: 12, m: 0 }),
       alternatives: [{ id: "count", title: "Count it out", kind: "conceptual", text: ["Say 'one thousand one, one thousand two …': each is about a second.", "If you would be counting for a long time, minutes (or hours) are the better unit."] }],
@@ -2429,7 +2434,7 @@ export const B04: Def[] = [
       const v = [F[i], F[j], F[k]].map(([a, b]) => a / b);
       return !(v[0] < v[1] && v[1] < v[2]) && (i + 2 * j + 3 * k) % 5 === 0;
     },
-    prompt: ([i, j, k]) => `Write these fractions in order from the smallest to the largest: ${[i, j, k].map((x) => fr(...fracList()[x])).join(", ")}. Write them in brackets, separated by commas.`,
+    prompt: ([i, j, k]) => `Write these fractions in order from the smallest to the largest: ${[i, j, k].map((x) => fr(fracList()[x][0], fracList()[x][1])).join(", ")}. Write them in brackets, separated by commas.`,
     solve: ([i, j, k]) => {
       const T = [i, j, k].map((x) => fracList()[x]);
       const L = T.reduce((m, [, b]) => (m * b) / gcd(m, b), 1);
@@ -2477,7 +2482,7 @@ export const B04: Def[] = [
       const L = T.reduce((m, [, b]) => (m * b) / gcd(m, b), 1);
       return L <= 12 ? 1 : L <= 40 ? 2 : 3;
     },
-    word: ([i, j, k]) => `Three friends ran parts of the same 1 km road: ${[i, j, k].map((x, n) => `${nm(i + n)} ran ${fr(...fracList()[x])} km`).join(", ")}. Write the three distances from the shortest to the longest, in brackets.`,
+    word: ([i, j, k]) => `Three friends ran parts of the same 1 km road: ${[i, j, k].map((x, n) => `${nm(i + n)} ran ${fr(fracList()[x][0], fracList()[x][1])} km`).join(", ")}. Write the three distances from the shortest to the longest, in brackets.`,
     teach: {
       idea: "To order fractions with different bottom numbers, write them all with one common bottom number; then their tops are in the same order as the fractions.",
       method: "Find a common multiple of all three bottom numbers. Change each fraction to it, order the tops, and write the original fractions in that order.",
@@ -2588,7 +2593,7 @@ export const B04: Def[] = [
     domain: [[0, 39], [0, 5]],
     difficulty: ([, q]) => (q < 4 ? 2 : 3),
     figure: ([s]) => ({ type: "table", head: ["Child", "Boy or girl", "Breakfast"], rows: recRows(s) }),
-    word: ([s, q]) => `${nm(s)} asked every child in the class whether they are a boy or a girl and what they chose for breakfast, and wrote the list in the picture. ${recAsk(q)}`,
+    word: ([s, q]) => `The school canteen is getting tomorrow's breakfast ready from the list in the picture, which shows each child of the class and what they chose. ${["How many plates of idli must be kept for the boys?", "How many plates of dosa must be kept for the boys?", "How many plates of idli must be kept for the girls?", "How many plates of dosa must be kept for the girls?", "The boys sit at one long table. How many places are needed at it?", "How many plates of idli are needed in all?"][q]}`,
     teach: {
       idea: "A two-way table sorts each child two ways at once (boy or girl, and idli or dosa), so every child goes in exactly one cell.",
       method: "Draw the table. Go down the list one child at a time, put a tally mark in the cell for both answers, and tick the child off. Count the tallies in each cell; add along a row or down a column for totals.",
@@ -2673,11 +2678,12 @@ function wcNums([mode, x]: number[]): { op: string; inputs: number[]; ans: numbe
   if (mode === 2) {
     const kg = 1 + (x % 9);
     const g = 50 * (1 + (h("g") % 19));
-    return { op: "add", inputs: [kg, g], ans: 1000 * kg + g };
+    return { op: "add", inputs: [kg, g], ans: 1000 * kg + g, guess: kg + (h("e") % 2) };
   }
   const L = 2 + (x % 9);
   const mug = [250, 500, 200, 100][Math.floor(x / 9) % 4];
-  return { op: "divide", inputs: [1000 * L, mug], ans: (1000 * L) / mug };
+  const n = (1000 * L) / mug;
+  return { op: "divide", inputs: [1000 * L, mug], ans: n, guess: n + (h("g") % 2 ? 2 : -2) };
 }
 function wcText(p: number[], word: boolean): string {
   const [mode, x] = p;
@@ -2687,11 +2693,11 @@ function wcText(p: number[], word: boolean): string {
     const obj = WOBJ[x % WOBJ.length][0];
     return word ? `At the market, ${nm(x)} guessed that a ${obj} would weigh about ${a} kg. The shopkeeper weighed it: ${b} kg. By how many kilograms was the guess off?` : `${nm(x)} estimated that a ${obj} weighs about ${a} kg. On the weighing scale it showed ${b} kg. By how many kilograms was the estimate wrong?`;
   }
-  if (mode === 1) return word ? `${nm(x)} thinks a jug of buttermilk will fill about ${W.guess} glasses. The jug holds ${a} mL and each glass holds ${b} mL. How many glasses does the jug really fill?` : `A jug holds ${a} mL. ${nm(x)} guesses that it will fill about ${W.guess} glasses of ${b} mL. Check the guess: how many glasses does the jug really fill?`;
-  if (mode === 2) return word ? `Amma buys ${a} kg of rice and ${b} g of dal and carries them in one bag. How many grams does she carry?` : `A bag has ${a} kg of potatoes and ${b} g of tomatoes. What is the total weight in grams?`;
-  return word ? `${nm(x)} fills a ${a / 1000} litre bucket using a mug that holds ${b} mL. How many mugfuls are needed?` : `A bucket holds ${a / 1000} L of water. A mug holds ${b} mL. How many mugs of water fill the bucket?`;
+  if (mode === 1) return word ? `${nm(x)} thinks a jug of buttermilk will fill about ${pl(W.guess ?? 0, "glass", "glasses")}. The jug holds ${a} mL and each glass holds ${b} mL. How many glasses does the jug really fill?` : `A jug holds ${a} mL. ${nm(x)} guesses that it will fill about ${pl(W.guess ?? 0, "glass", "glasses")} of ${b} mL. Check the guess: how many glasses does the jug really fill?`;
+  if (mode === 2) return word ? `Amma buys ${a} kg of rice and ${b} g of dal and carries them in one bag. She estimates the bag weighs about ${W.guess} kg. Check her estimate: how many grams does she really carry?` : `A bag has ${a} kg of potatoes and ${b} g of tomatoes. ${nm(x)} estimates that the bag weighs about ${W.guess} kg. Check the estimate: what is the real total weight in grams?`;
+  return word ? `${nm(x)} fills a ${a / 1000} litre bucket using a mug that holds ${b} mL, and guesses it will take about ${pl(W.guess ?? 0, "mugful")}. Check the guess: how many mugfuls are really needed?` : `A bucket holds ${a / 1000} L of water. A mug holds ${b} mL. ${nm(x)} guesses that about ${pl(W.guess ?? 0, "mug")} of water will fill the bucket. Check the guess: how many mugs are really needed?`;
 }
-function wcFigure([mode, x]: number[]) {
+function wcFigure([mode, x]: number[]): Visual | null {
   const W = wcNums([mode, x]);
   if (mode === 0) return { type: "balance", left: WOBJ[x % WOBJ.length][0], right: `${W.inputs[1]} kg` };
   if (mode === 2) return { type: "balance", left: `${W.inputs[0]} kg + ${W.inputs[1]} g`, right: "? g" };
@@ -2804,7 +2810,7 @@ const tShow = (t: number) => (t >= 60 ? `${Math.floor(t / 60)} min ${t % 60} s` 
 const UNITS3 = ["seconds", "minutes", "hours"];
 /** [activity, unit, a typical time in seconds]. */
 const ACTS: [string, string, number][] = [
-  ["blink your eyes", "seconds", 1], ["brush your teeth", "minutes", 150], ["sleep at night", "hours", 30000], ["run 100 metres", "seconds", 20],
+  ["clap your hands once", "seconds", 1], ["brush your teeth", "minutes", 150], ["sleep at night", "hours", 30000], ["run 100 metres", "seconds", 20],
   ["cook a pot of rice", "minutes", 1200], ["finish a whole school day", "hours", 25000], ["tie your shoelaces", "seconds", 15], ["watch a full film", "hours", 9000],
   ["boil an egg", "minutes", 600], ["clap your hands ten times", "seconds", 6], ["walk one kilometre", "minutes", 720], ["travel from Chennai to Madurai by train", "hours", 28000],
   ["drink a glass of water", "seconds", 10], ["have a bath", "minutes", 900], ["play one day of a test match", "hours", 25000], ["write your name", "seconds", 8],
@@ -2830,11 +2836,16 @@ function tfParts([c, s, k, t]: number[]): { x: number; y: number; n: number } {
   return { x, y, n: t ? v[x] + v[y] : v[x] - v[y] };
 }
 function tfStatement(p: number[]): string {
-  const C = BARCTX[p[0]];
+  const c = p[0];
+  const L = BARCTX[c].labels;
   const { x, y, n } = tfParts(p);
-  if (p[2] === 0) return `More ${C.unit} are shown for ${C.labels[x]} than for ${C.labels[y]}.`;
-  if (p[2] === 1) return `The chart shows ${n} ${C.unit} in all.`;
-  return `${n} more ${C.unit} are shown for ${C.labels[x]} than for ${C.labels[y]}.`;
+  const one = (l: string) => l.toLowerCase();
+  const many = (l: string) => (l === "Bus" ? "buses" : `${l.toLowerCase()}s`);
+  const what = (k: number) => (n === 1 ? one(L[k]) : many(L[k]));
+  if (c === 0) return p[2] === 0 ? `More children like ${L[x]} best than ${L[y]}.` : p[2] === 1 ? `${n} children were asked in all.` : `${n} more ${n === 1 ? "child likes" : "children like"} ${L[x]} best than ${L[y]}.`;
+  if (c === 1) return p[2] === 0 ? `${L[x]} read more books than ${L[y]}.` : p[2] === 1 ? `The four friends read ${n} books in all.` : `${L[x]} read ${pl(n, "book")} more than ${L[y]}.`;
+  const verb = c === 2 ? "seen" : "passed";
+  return p[2] === 0 ? `More ${many(L[x])} than ${many(L[y])} were ${verb}.` : p[2] === 1 ? `${n} ${BARCTX[c].unit} were ${verb} in all.` : `${n} more ${what(x)} than ${many(L[y])} ${n === 1 ? "was" : "were"} ${verb}.`;
 }
 
 const an = (w: string) => `${/^[aeiou]/.test(w) ? "an" : "a"} ${w}`;

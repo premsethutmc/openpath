@@ -2563,7 +2563,7 @@ export const B13: Def[] = [
     },
     bugs: (p) => {
       const d = classSet(p);
-      return d.trap >= 0 ? [B(`trap-${p[0]}`, "conceptual", RN, CLASS_SLIP[p[0]], d.trap)] : [];
+      return d.trap >= 0 ? [B(`trap-${p[0]}`, "conceptual", RN, classSlip(p[0], d.opts[d.trap]), d.trap)] : [];
     },
     variants: () => [],
     explain: say(),
@@ -2653,9 +2653,9 @@ export const B13: Def[] = [
     difficulty: ([m]) => (m === 2 ? 1 : m === 0 ? 2 : 3),
     word: ([m, a, b, c, d]) =>
       m === 0
-        ? `A diver is at ${frc(a, b)} m and a marker buoy's anchor is at ${vs(c)} m (heights from the water surface; negative is below it). How far apart are the diver and the anchor, in m?`
+        ? `Positions on a straight east–west road are measured in km from a bus stop (east positive, west negative). Anu is at ${frc(a, b)} km and Ravi is at ${vs(c)} km. How far apart are they, in km?`
         : m === 1
-          ? `Two stations on a hill railway are at heights ${frc(a, b)} km and ${frc(c, d)} km compared with a lake (negative is below the lake's level). What is the difference in height between them, in km?`
+          ? `At dawn the temperature on a hill was ${frc(a, b)} °C; at noon it was ${frc(c, d)} °C. What is the difference between the two temperatures, in °C?`
           : `On a ruler-like scale each unit is divided into ${b} equal parts. A bead sits ${c} part${c > 1 ? "s" : ""} to the ${d ? "right" : "left"} of the mark ${vs(a)}. At what number is the bead?`,
     teach: {
       idea: "Every rational number has a place on the number line. |x| is the distance of x from 0, and the distance between x and y is |x − y|.",
@@ -2703,7 +2703,7 @@ export const B13: Def[] = [
       const right = Number(block[pos - 1]);
       return [
         B("unit-fraction-digits", "conceptual", RN, `The digits of 1/${d} were used. ${k}/${d} uses the same cycle but starts at a different digit: ${k}/${d} = 0.${block}….`, Number(one[pos - 1])),
-        B("remainder-place", "procedural", RN, `The remainder ${n % 6} was used as the place without care: digit ${n} is digit ${pos} of the block (a remainder of 0 means the 6th digit).`, Number(block[n % 6 === 0 ? 0 : n % 6])),
+        B("remainder-place", "procedural", RN, `${n} ÷ 6 leaves remainder ${n % 6}, but digit ${(n % 6) + 1} of the block was taken (one place too far). The remainder itself is the place in the block${n % 6 === 0 ? ", and a remainder of 0 means the 6th digit" : ""}: digit ${pos}.`, Number(block[n % 6])),
       ].filter((x) => x.predict !== right);
     },
     distractors: (p) => {
@@ -2751,7 +2751,7 @@ export const B13: Def[] = [
         B("digits-joined", "conceptual", RN, `The numerator and denominator were written after the point (0.${n}${d}). ${n}/${d} means ${n} ÷ ${d}: divide.`, o.joined),
         B("upside-down", "procedural", RN, `${d} ÷ ${n} was worked out. ${n}/${d} means ${n} divided by ${d}.`, o.flip),
         B("stopped", "procedural", RN, terminating(q(n, d)) ? "The division was stopped too early. Keep dividing until the remainder is 0." : "The division was stopped after a few digits. The remainders repeat, so the digits repeat for ever.", o.cut),
-      ].filter((x) => x.predict >= 0 && x.predict !== o.right);
+      ].filter((x) => typeof x.predict === "number" && x.predict >= 0 && x.predict !== o.right);
     },
     variants: () => [],
     explain: say(),
@@ -2774,11 +2774,14 @@ export const B13: Def[] = [
     // [t, a, b, m, k]: t 0 a√m + b√(k²m); 1 (a + √m)(a − √m); 2 (√m + √k)²; 3 (a + b√m)(k + √m)
     parse: none,
     reject: (p) => (ropOk(p) ? null : "Square-free m from 2 to 7 and small whole-number coefficients."),
-    prompt: (p) => `Simplify: ${ropText(p)}. (Write the answer like 5√3, 7 or 4 + 2√6.)`,
+    // form@1: the answer is written without brackets or multiplication signs; t 0 asks for the coefficient c in c√m, so
+    // the question cannot be typed back as its answer
+    expanded: true,
+    prompt: (p) => (p[0] === 0 ? `Simplify ${ropText(p)} to a single surd c√${p[3]}. What is c?` : `Simplify: ${ropText(p)}. (Write the answer without brackets, like 7, 5√3 or 4 + 2√6.)`),
     solve: (p) => {
       const [t, a, b, m, k] = p;
       const ans = ropAns(p);
-      if (t === 0) return { steps: [step("simplify", "note", SURD, [`√${k * k * m} = ${k}√${m}`], ""), step("collect", "add", RN, [`${a}√${m}`, `${b * k}√${m}`], ans)], answer: ans };
+      if (t === 0) return { steps: [step("simplify", "note", SURD, [`√${k * k * m} = ${k}√${m}`], ""), step("collect", "add", RN, [`${a}√${m}`, `${b * k}√${m}`], `${ans}√${m}`)], answer: ans };
       if (t === 1) return { steps: [step("identity", "note", RN, ["(x + y)(x − y) = x² − y²"], ""), step("value", "subtract", RN, [a * a, m], ans)], answer: ans };
       if (t === 2) return { steps: [step("identity", "note", RN, ["(x + y)² = x² + 2xy + y²"], ""), step("value", "note", RN, [`${m} + ${k} + 2√${m * k}`], ans)], answer: ans };
       return { steps: [step("expand", "note", RN, [`${a} × ${k} + ${a}√${m} + ${b * k}√${m} + ${b}(√${m})²`], ""), step("value", "note", RN, [`${a * k + b * m} + ${a + b * k}√${m}`], ans)], answer: ans };
@@ -2788,7 +2791,8 @@ export const B13: Def[] = [
       if (typeof v !== "string") return false;
       const x = surdValue(v);
       const [t, a, b, m, k] = p;
-      const want = t === 0 ? a * Math.sqrt(m) + b * Math.sqrt(k * k * m) : t === 1 ? (a + Math.sqrt(m)) * (a - Math.sqrt(m)) : t === 2 ? (Math.sqrt(m) + Math.sqrt(k)) ** 2 : (a + b * Math.sqrt(m)) * (k + Math.sqrt(m));
+      // t 0: c√m must have the value of the expression, so c = value / √m
+      const want = t === 0 ? (a * Math.sqrt(m) + b * Math.sqrt(k * k * m)) / Math.sqrt(m) : t === 1 ? (a + Math.sqrt(m)) * (a - Math.sqrt(m)) : t === 2 ? (Math.sqrt(m) + Math.sqrt(k)) ** 2 : (a + b * Math.sqrt(m)) * (k + Math.sqrt(m));
       return x !== null && near(x, want, 1e-9);
     },
     bugs: (p) => {
@@ -2796,7 +2800,7 @@ export const B13: Def[] = [
       const right = ropAns(p);
       const out =
         t === 0
-          ? [B("radicands-added", "conceptual", SURD, `The numbers under the roots were added. Only like surds can be combined: first write √${k * k * m} = ${k}√${m}.`, surdSum(0, a + b, m + k * k * m))]
+          ? [B("square-not-taken-out", "procedural", SURD, `√${k * k * m} was taken as √${m}, so the coefficients ${a} and ${b} were just added. First write √${k * k * m} = ${k}√${m}: it is ${k} times √${m}.`, String(a + b))]
           : t === 1
             ? [B("sign-of-square", "procedural", RN, `(√${m})² was added instead of subtracted: (a + √m)(a − √m) = a² − m.`, String(a * a + m))]
             : t === 2
@@ -2806,7 +2810,7 @@ export const B13: Def[] = [
     },
     distractors: (p) => {
       const [t, a, b, m, k] = p;
-      return t === 0 ? [surdSum(0, a + b, m), surdSum(0, a * b * k, m)] : t === 1 ? [String(a * a), String(a * a - m * m)] : t === 2 ? [surdSum(m + k, 1, m * k), surdSum(0, 2, m * k)] : [surdSum(a * k, a + b * k, m), surdSum(a * k + b * m, a * k, m)];
+      return t === 0 ? [String(a * b * k), String(a + b * k * k), String(a * k + b)] : t === 1 ? [String(a * a), String(a * a - m * m)] : t === 2 ? [surdSum(m + k, 1, m * k), surdSum(0, 2, m * k)] : [surdSum(a * k, a + b * k, m), surdSum(a * k + b * m, a * k, m)];
     },
     variants: () => [],
     explain: say({ simplify: "Simplify", collect: "Collect like surds", identity: "Identity", expand: "Expand" }),
@@ -2837,7 +2841,7 @@ export const B13: Def[] = [
     prompt: ([m, w, a, k, h]) => {
       const r = D(7 * k, 2);
       const shape = m === 0 ? `A solid is a cube of edge ${a} cm with a hemisphere of radius ${r} cm fixed on its top face.` : m === 1 ? `A solid is a cube of edge ${a} cm with a cylinder of radius ${r} cm and height ${h} cm standing on its top face.` : `A hemispherical hollow of radius ${r} cm is scooped out of the top face of a solid cube of edge ${a} cm.`;
-      return `${shape} Taking π = 22/7, find the ${w ? "volume of the solid, in cm³" : "total surface area of the solid (all its outside surface), in cm²"}. (A fraction or decimal is fine.)`;
+      return `${shape} Taking π = 22/7, find the ${w ? "volume of the solid, in cm³" : "total surface area of the solid (all its outside surface), in cm²"}. {NOTE}`;
     },
     solve: (p) => {
       const [m, w, a, k, h] = p;
@@ -2908,7 +2912,7 @@ export const B13: Def[] = [
     // 2 a tank with upright sides H and a rounded dome (capacity); 3 an ice-cream cone of depth L with a rounded scoop (volume)
     parse: none,
     reject: (p) => (modelOk(p) ? null : "Radii 3.5k (k 1 to 4) with whole-number heights."),
-    prompt: (p) => `${MODEL[p[0]].q(p)} Take π = 22/7. (A fraction or decimal is fine.)`,
+    prompt: (p) => `${MODEL[p[0]].q(p)} Take π = 22/7. {NOTE}`,
     solve: (p) => {
       const parts = MODEL[p[0]].parts(p);
       const total = parts.reduce((s, x) => qa(s, x[1]), Q(0));
@@ -2961,7 +2965,7 @@ export const B13: Def[] = [
     // triangle of height k on the side x; 4 area of a trapezium (parallel sides d and y, height x) with a semicircle on side d
     parse: none,
     reject: (p) => (cshapeOk(p) ? null : "Lengths up to 40 cm with a diameter or radius of 7, 14, 21 or 28 cm."),
-    prompt: (p) => `${cshapeText(p)}${p[0] === 3 ? "" : " Take π = 22/7."} (A fraction or decimal is fine.)`,
+    prompt: (p) => `${cshapeText(p)}${p[0] === 3 ? "" : " Take π = 22/7."} {NOTE}`,
     solve: (p) => {
       const parts = cshapeParts(p);
       const total = parts.reduce((s, x) => qa(s, x[1]), Q(0));
@@ -2988,7 +2992,7 @@ export const B13: Def[] = [
         for (let i = 0; i < N; i++) len += 2 * r * Math.sin(Math.PI / (2 * N));
         return near(n, 2 * x + d + len * scale, 1e-8);
       }
-      const area = m === 0 ? x * d + fan(d / 2, Math.PI) : m === 2 ? x * y - fan(d, Math.PI / 2) : m === 3 ? x * y + simpson((t) => x * (1 - t / (3 * k)), 0, 3 * k, 20) : simpson((t) => y + ((d - y) * t) / x, 0, x, 20) + fan(d / 2, Math.PI);
+      const area = m === 0 ? x * d + fan(d / 2, Math.PI) : m === 2 ? x * y - fan(d, Math.PI / 2) : m === 3 ? x * y + simpson((t) => x * (1 - t / k), 0, k, 20) : simpson((t) => y + ((d - y) * t) / x, 0, x, 20) + fan(d / 2, Math.PI);
       return near(n, area, 1e-8);
     },
     bugs: (p) => cshapeBugs(p),
@@ -3002,6 +3006,7 @@ export const B13: Def[] = [
     domain: [[0, 4], [2, 40], [0, 40], [1, 4]],
     keep: cshapeOk,
     cap: 450,
+    range: [0, Infinity],
     difficulty: ([m]) => ([2, 3, 2, 1, 3] as const)[m],
     word: (p) => cshapeWord(p),
     teach: {
@@ -3263,7 +3268,7 @@ export const B13: Def[] = [
     // 2 areas in the ratio m² : n² and altitude x → the second's altitude
     parse: none,
     reject: ([w, m, n, x]) => (w >= 0 && w <= 2 && m >= 1 && n >= 1 && m <= 9 && n <= 9 && m !== n && gcd(m, n) === 1 && x >= 2 && x <= 60 ? null : "Ratios m : n up to 9 in lowest terms and lengths 2 to 60."),
-    prompt: ([w, m, n, x]) => (w === 0 ? `Two similar triangles have corresponding sides in the ratio ${m} : ${n}. The altitude of the first triangle is ${x} cm. What is the corresponding altitude of the second, in cm? (A decimal or fraction is fine.)` : w === 1 ? `Two similar triangles have corresponding sides of ${m * 3} cm and ${n * 3} cm. The perimeter of the first is ${x} cm. What is the perimeter of the second, in cm? (A decimal or fraction is fine.)` : `The areas of two similar triangles are in the ratio ${m * m} : ${n * n}. An altitude of the first is ${x} cm. What is the corresponding altitude of the second, in cm? (A decimal or fraction is fine.)`),
+    prompt: ([w, m, n, x]) => (w === 0 ? `Two similar triangles have corresponding sides in the ratio ${m} : ${n}. The altitude of the first triangle is ${x} cm. What is the corresponding altitude of the second, in cm? {NOTE}` : w === 1 ? `Two similar triangles have corresponding sides of ${m * 3} cm and ${n * 3} cm. The perimeter of the first is ${x} cm. What is the perimeter of the second, in cm? {NOTE}` : `The areas of two similar triangles are in the ratio ${m * m} : ${n * n}. An altitude of the first is ${x} cm. What is the corresponding altitude of the second, in cm? {NOTE}`),
     solve: ([w, m, n, x]) => {
       const ans = q(x * n, m);
       return { steps: [...(w === 2 ? [step("root", "root", SIM, [`${m * m}/${n * n}`], `${m}/${n}`)] : []), step("scale", "note", SIM, [w === 1 ? "Perimeters are in the same ratio as the sides" : "Altitudes are in the same ratio as the sides"], `${m} : ${n}`), step("answer", "multiply", SIM, [x, `${n}/${m}`], dec(ans))], answer: dec(ans) };
@@ -3289,7 +3294,7 @@ export const B13: Def[] = [
     keep: ([, m, n]) => m !== n && gcd(m, n) === 1,
     cap: 400,
     difficulty: ([w]) => ([1, 1, 3] as const)[w],
-    word: ([w, m, n, x]) => (w === 0 ? `A triangular sail and its model are similar, with corresponding sides in the ratio ${m} : ${n}. The sail's height (an altitude) is ${x} m. What is the corresponding height of the model, in m?` : w === 1 ? `Two similar triangular gardens have corresponding sides of ${m * 3} m and ${n * 3} m. The fence round the first is ${x} m long. How long is the fence round the second, in m?` : `Two similar triangular tiles have areas in the ratio ${m * m} : ${n * n}. The height of the first tile is ${x} cm. What is the height of the second, in cm?`),
+    word: ([w, m, n, x]) => (w === 0 ? (n < m ? `A triangular sail and its model are similar, with corresponding sides (sail : model) in the ratio ${m} : ${n}. The sail's height (an altitude) is ${x} m. What is the corresponding height of the model, in m?` : `A model of a triangular sail is similar to the sail, with corresponding sides (model : sail) in the ratio ${m} : ${n}. The model's height (an altitude) is ${x} cm. What is the corresponding height of the sail, in cm?`) : w === 1 ? `Two similar triangular gardens have corresponding sides of ${m * 3} m and ${n * 3} m. The fence round the first is ${x} m long. How long is the fence round the second, in m?` : `Two similar triangular tiles have areas in the ratio ${m * m} : ${n * n}. The height of the first tile is ${x} cm. What is the height of the second, in cm?`),
     teach: {
       idea: "In similar triangles every length (side, altitude, median, perimeter) is multiplied by the same scale factor k; areas are multiplied by k².",
       method: "Find the scale factor from the sides (or as the square root of the area ratio) and multiply the given length by it.",
@@ -3479,7 +3484,7 @@ export const B13: Def[] = [
     keep: ctanOk,
     cap: 400,
     difficulty: ([m]) => ([2, 2, 3] as const)[m],
-    word: ([m, r1, r2, d]) => (m === 0 ? `Two round coasters of radii ${r1} cm and ${r2} cm lie on a table with their centres ${d} cm apart. How many straight lines touch both coasters?` : `A belt runs round two pulleys of radii ${r1} cm and ${r2} cm whose centres are ${d} cm apart, ${m === 1 ? "without crossing over" : "crossing over between them"}. How long is one straight part of the belt, between the points where it leaves the two pulleys, in cm?`),
+    word: ([m, r1, r2, d]) => (m === 0 ? (d > r1 + r2 ? `Two round coasters of radii ${r1} cm and ${r2} cm lie on a table with their centres ${d} cm apart. How many straight lines touch both coasters?` : `Two circles of radii ${r1} cm and ${r2} cm are drawn on a sheet of paper with their centres ${d} cm apart (drawn circles may touch, cross or lie one inside the other). How many straight lines touch both circles?`) : `A belt runs round two pulleys of radii ${r1} cm and ${r2} cm whose centres are ${d} cm apart, ${m === 1 ? "without crossing over" : "crossing over between them"}. How long is one straight part of the belt, between the points where it leaves the two pulleys, in cm?`),
     teach: {
       idea: "Two circles far apart have 4 common tangents; touching outside, 3; overlapping, 2; touching inside, 1; one inside the other, 0. A tangent length comes from a right triangle with the line of centres as hypotenuse.",
       method: "Compare d with r1 + r2 and r1 − r2 to count. For a length, L² = d² − (r1 − r2)² (direct) or d² − (r1 + r2)² (transverse).",
@@ -3553,6 +3558,13 @@ export const B13: Def[] = [
     limits: "Ratios with terms up to 6; signed ratios are not used (in the Menelaus case one point is on an extended side).",
   },
 ];
+/** amcube, ammodel, amcshape, amalt: "a fraction or decimal is fine" only when the answer terminates; otherwise the
+ * exact fraction is asked for (a rounded decimal is not the answer). */
+for (const d of B13) {
+  const ask = d.prompt;
+  if (["amcube", "ammodel", "amcshape", "amalt"].includes(d.id))
+    d.prompt = (p) => ask(p).replace("{NOTE}", String(d.solve(p).answer).includes("/") ? "(Give the exact answer as a fraction or mixed number; a rounded decimal is not exact.)" : "(A fraction or decimal is fine.)");
+}
 
 /** The outside surface of amcombs, as multiples of π: [id, label, coefficient] for each piece. */
 function combsParts([s, t, k, o, H]: number[]): { pi: R; parts: [string, string, R][] } {
@@ -3631,9 +3643,15 @@ const CLASS_SLIP = [
   "0 was taken as a natural number. The natural numbers start at 1; 0 is a whole number.",
   "A negative integer was taken as a whole number. Whole numbers are 0, 1, 2, 3, …; they have no negatives.",
   "A negative fraction was taken as an integer. Integers are …, −2, −1, 0, 1, 2, …; a fraction such as −5/2 lies between two of them.",
-  "A fraction that simplifies to an integer was taken as not an integer. Work it out first: 18/6 = 3.",
+  "A fraction that simplifies to an integer was taken as not an integer. Work it out first.",
   "A fraction or a repeating decimal was taken as irrational. 22/7 is only close to π, and decimals that repeat (0.333…) are rational.",
 ];
+/** The slip for kind k, with the trap option itself worked out where that helps (−15/5 = −3). */
+function classSlip(k: number, trap: string): string {
+  if (k !== 3) return CLASS_SLIP[k];
+  const m = trap.replace(/−/g, "-").match(/^(-?\d+)\/(\d+)$/);
+  return m ? `${CLASS_SLIP[3]} ${trap} = ${String(Number(m[1]) / Number(m[2])).replace(/^-/, "−")}.` : CLASS_SLIP[3];
+}
 const CL_POOL: Record<string, string[]> = {
   natural: ["7", "12", "√16", "√49", "25", "√81", "9", "√64"],
   zero: ["0", "0/7", "√0"],
@@ -3775,7 +3793,7 @@ function ropText([t, a, b, m, k]: number[]) {
   return `(${a} + ${b === 1 ? "" : b}√${m})(${k} + √${m})`;
 }
 function ropAns([t, a, b, m, k]: number[]) {
-  if (t === 0) return surdSum(0, a + b * k, m);
+  if (t === 0) return String(a + b * k);
   if (t === 1) return String(a * a - m);
   if (t === 2) return surdSum(m + k, 2, m * k);
   return surdSum(a * k + b * m, a + b * k, m);
@@ -3844,7 +3862,7 @@ function cshapeOk([m, x, y, k]: number[]) {
   if (k < 1 || k > 4) return false;
   if (m === 0 || m === 1) return x >= 5 && x <= 40 && y === 0;
   if (m === 2) return x >= d && y >= d && x <= 40 && y <= 40 && x <= y;
-  if (m === 3) return x >= 4 && x <= 30 && y >= 3 && y <= 30;
+  if (m === 3) return x >= 4 && x <= 12 && y >= 2 && y <= 4;
   return m === 4 && x >= 2 && x <= 30 && y >= 2 && y < d;
 }
 function cshapeText([m, x, y, k]: number[]) {
@@ -3853,7 +3871,7 @@ function cshapeText([m, x, y, k]: number[]) {
     `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find its area, in m².`,
     `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find the length of fencing needed round its edge (its perimeter), in m.`,
     `A rectangular card ${x} cm by ${y} cm has a quadrant (a quarter of a circle) of radius ${d} cm cut away at one corner. Find the area of card that is left, in cm².`,
-    `The front of a hut is a rectangle ${x} m wide and ${y} m high with a triangle on top, of base ${x} m and height ${3 * k} m. Find the area of the front, in m².`,
+    `The front of a hut is a rectangle ${x} m wide and ${y} m high with a triangle on top, of base ${x} m and height ${k} m. Find the area of the front, in m².`,
     `A plot is a trapezium with parallel sides of ${d} m and ${y} m, ${x} m apart, with a semicircular flower bed on the ${d} m side, outside the trapezium. Find the total area, in m².`,
   ][m];
 }
@@ -3863,7 +3881,7 @@ function cshapeParts([m, x, y, k]: number[]): [string, R][] {
   if (m === 0) return [["Rectangle", Q(x * d)], ["Semicircle πr²/2", semi]];
   if (m === 1) return [["The two long sides", Q(2 * x)], ["The straight side opposite the semicircle", Q(d)], ["The curved edge πd/2", qm(PI7, q(d, 2))]];
   if (m === 2) return [["Rectangle", Q(x * y)], ["minus the quadrant πr²/4", qm(Q(-1), qm(PI7, q(d * d, 4)))]];
-  if (m === 3) return [["Rectangle", Q(x * y)], ["Triangle ½ × base × height", q(x * 3 * k, 2)]];
+  if (m === 3) return [["Rectangle", Q(x * y)], ["Triangle ½ × base × height", q(x * k, 2)]];
   return [["Trapezium ½(a + b)h", q((d + y) * x, 2)], ["Semicircle πr²/2", semi]];
 }
 function cshapeBugs(p: number[]): Bug[] {
@@ -3878,7 +3896,7 @@ function cshapeBugs(p: number[]): Bug[] {
         : m === 2
           ? [B("half-not-quarter", "conceptual", CIRC, "Half a circle was taken away; a quadrant is a quarter, πr²/4.", dec(qs(Q(x * y), qm(PI7, q(d * d, 2))))), B("added", "procedural", TRAP, "The quadrant was added. It is cut away, so subtract it.", dec(qa(Q(x * y), qm(PI7, q(d * d, 4)))))]
           : m === 3
-            ? [B("no-half", "recall", TRI, "The triangle was taken as base × height; its area is half of that.", dec(Q(x * y + 3 * k * x)))]
+            ? [B("no-half", "recall", TRI, "The triangle was taken as base × height; its area is half of that.", dec(Q(x * y + k * x)))]
             : [B("trapezium-no-half", "recall", TRAP, "The trapezium was taken as (a + b) × h; its area is ½(a + b)h.", dec(qa(Q((d + y) * x), qm(PI7, q(d * d, 8))))), B("full-circle", "conceptual", CIRC, "A whole circle was added; the flower bed is a semicircle.", dec(qa(q((d + y) * x, 2), qm(PI7, q(d * d, 4)))))];
   return out.filter((b) => !is(b.predict as string, right));
 }
@@ -3889,7 +3907,7 @@ function cshapeWord([m, x, y, k]: number[]) {
     `A school stage is a rectangle ${x} m deep and ${d} m wide with a semicircular front of diameter ${d} m. What area of carpet covers the whole stage, in m²?${pi}`,
     `A school stage is a rectangle ${x} m deep and ${d} m wide with a semicircular front of diameter ${d} m. How long is the decorative border round the edge of the stage, in m?${pi}`,
     `A tile-maker cuts a quarter circle of radius ${d} cm from one corner of a rectangular tile ${x} cm by ${y} cm. What area of tile is left, in cm²?${pi}`,
-    `A painter is painting the front wall of a hut: a rectangle ${x} m wide and ${y} m high with a triangular gable of height ${3 * k} m above it. What area is painted, in m²?`,
+    `A painter is painting the front wall of a hut: a rectangle ${x} m wide and ${y} m high with a triangular gable of height ${k} m above it. What area is painted, in m²?`,
     `A farmer's field is a trapezium with parallel sides ${d} m and ${y} m, ${x} m apart, and a semicircular pond is dug against the ${d} m side, outside the field. What is the total area of the field and pond, in m²?${pi}`,
   ][m];
 }

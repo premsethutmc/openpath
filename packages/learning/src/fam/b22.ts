@@ -75,6 +75,8 @@ const ind = (n: number) => {
   return (n < 0 ? "−" : "") + rest + "," + last;
 };
 const tm = (n: number) => (n === 1 ? "once" : `${n} times`);
+/** "1 book", "3 books". */
+const pl = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 const digits = (n: number) => String(n).split("").map(Number);
 
 // ---------------------------------------------------------------- division by repeated subtraction (Grade 3)
@@ -417,7 +419,7 @@ const P1: Def[] = [
             { id: "multiplied-place-by-place", kind: "conceptual", competency: MM, says: "Digits were multiplied only with the digit in the same place (tens with tens, ones with ones); every part of one number multiplies every part of the other.", predict: a < 100 ? Math.floor(a / 10) * t * 100 + (a % 10) * o : null },
           ].filter((x) => x.predict !== null) as Bug[]
         : [
-            { id: "dropped-zero", kind: "conceptual", competency: MM, says: `${a} was multiplied by ${t} instead of ${t * 10}: multiplying by ${t} tens makes ${t} tens of ${a}, so the answer ends in 0.`, predict: a * t },
+            { id: "dropped-zero", kind: "conceptual", competency: MM, says: `${a} was multiplied by ${t} instead of ${t * 10}: multiplying by ${pl(t, "ten")} makes ${pl(t, "ten")} of ${a}, so the answer ends in 0.`, predict: a * t },
             { id: "used-ones", kind: "procedural", competency: MM, says: `${a} × ${o} was given; that is the other partial product.`, predict: a * o },
           ];
     },
@@ -453,8 +455,8 @@ const P1: Def[] = [
     reject: gate(D_LAT, K_LAT, "A two-digit number times a two-digit number (neither a multiple of 10)."),
     prompt: ([a, b, k]) =>
       k === 0
-        ? `The picture shows the lattice for ${a} × ${b}: ${a} along the top, ${b} down the right side, and each box holds the product of its digits as tens/ones. Add along the diagonals from the right, carrying when a diagonal adds up to 10 or more. What is ${a} × ${b}?`
-        : `The picture shows the lattice for ${a} × ${b}: ${a} along the top, ${b} down the right side, and each box holds the product of its digits as tens/ones. What is the total of the second diagonal from the right (the tens place), before any carrying?`,
+        ? `The grid in the picture is the lattice for ${a} × ${b}: ${a} along the top, ${b} down the right side, and each box holds the product of its digits written tens/ones. (The diagonals are not drawn: each runs from the top right to the bottom left, through the ones half of one box and the tens half of the next box below or to the left.) Add along the diagonals from the bottom right, carrying when a diagonal adds up to 10 or more. What is ${a} × ${b}?`
+        : `The grid in the picture is the lattice for ${a} × ${b}: ${a} along the top, ${b} down the right side, and each box holds the product of its digits written tens/ones. (The diagonals are not drawn: each runs from the top right to the bottom left, through the ones half of one box and the tens half of the next box below or to the left.) What is the total of the second diagonal from the bottom right (the tens place), before any carrying?`,
     figure: ([a, b]) => latticeFigure(a, b),
     solve: ([a, b, k]) => {
       const dg = latticeDiagonals(a, b);
@@ -464,7 +466,7 @@ const P1: Def[] = [
     // independent: k 0 by repeated addition; k 1 by reading the boxes of the picture by their row and column
     validate: ([a, b, k], v) => {
       if (k === 0) return v === times(a, b);
-      const fig = latticeFigure(a, b) as { rows: string[][] };
+      const fig = latticeFigure(a, b) as unknown as { rows: string[][] };
       const nr = fig.rows.length;
       let tot = 0;
       fig.rows.forEach((row, r) =>
@@ -505,8 +507,8 @@ const P1: Def[] = [
     difficulty: ([a, b, k]) => (k === 1 ? 2 : latticeDiagonals(a, b).some((x) => x >= 10) ? 3 : 1),
     word: ([a, b, k]) =>
       k === 0
-        ? `A shopkeeper stacks ${b} crates with ${a} bottles in each. Using the lattice in the picture, how many bottles are there?`
-        : `A shopkeeper stacks ${b} crates with ${a} bottles in each and works out the total with the lattice in the picture. What is the total of the tens diagonal, before carrying?`,
+        ? `A shopkeeper stacks ${b} crates with ${a} bottles in each. Using the lattice grid in the picture (each box holds tens/ones; add along the diagonals from the bottom right), how many bottles are there?`
+        : `A shopkeeper stacks ${b} crates with ${a} bottles in each and works out the total with the lattice grid in the picture (each box holds tens/ones). What is the total of the tens diagonal (the second from the bottom right), before carrying?`,
     teach: {
       idea: "The lattice keeps every digit product in its place: each diagonal collects the digits of one place value.",
       method: "Fill each box with the product of its digits (tens above the slash, ones below), add along the diagonals from the bottom right, and carry when a total is 10 or more.",
@@ -581,13 +583,15 @@ const P1: Def[] = [
     keep: K_DIV,
     cap: 500,
     difficulty: ([d, q, r]) => (d >= 10 ? 3 : d * q + r >= 1000 ? 2 : 1),
+    // level@1: dividing by a two-digit number is Grade 5 work
+    grade: ([d]) => (d >= 10 ? 5 : 4),
     word: ([d, q, r, ask]) => {
       const n = d * q + r;
       return ask === 0
         ? `A farmer plants ${n} saplings in rows of ${d}. How many full rows are there?`
         : ask === 1
           ? `A farmer plants ${n} saplings in rows of ${d}. How many saplings are left over after the full rows?`
-          : `A librarian ties books in bundles of ${d}. There are ${q} full bundles and ${r} books left over. How many books are there?`;
+          : `A librarian ties books in bundles of ${d}. There are ${q} full bundles and ${pl(r, "book")} left over. How many books are there?`;
     },
     teach: {
       idea: "Long division shares out one place at a time; the remainder is what is left when no more full groups fit, and it is always less than the divisor.",
@@ -734,10 +738,10 @@ const K_FAS = (p: number[]) => {
 };
 
 const D_FWQ: [number, number][] = [[1, 11], [2, 12], [2, 9], [0, 1]];
-const K_FWQ = ([a, b]: number[]) => a < b;
+const K_FWQ = ([a, b]: number[]) => a < b && gcd(a, b) === 1;
 
 const D_AREA: [number, number][] = [[1, 7], [2, 8], [1, 7], [2, 8], [0, 1]];
-const K_AREA = ([a, b, c, d]: number[]) => a < b && c < d;
+const K_AREA = ([a, b, c, d]: number[]) => a < b && c < d && gcd(a, b) === 1 && gcd(c, d) === 1;
 const areaCount = ([a, b, c, d]: number[]) => {
   let both = 0;
   let any = 0;
@@ -752,10 +756,10 @@ const areaCount = ([a, b, c, d]: number[]) => {
 const SQ_GROUPS = ["the students of Class 7", "the children in our apartment block", "the players in the school kabaddi team"];
 const SQ_TOPICS: { g: string; one: string; s: string }[] = [
   { g: "How many hours do {G} sleep on a school night?", one: "How many hours did {N} sleep last night?", s: "{N} slept for 8 hours last night." },
-  { g: "How long does it take {G} to reach school?", one: "How long did it take {N} to reach school today?", s: "{N} took 20 minutes to reach school today." },
-  { g: "What are the heights of {G}?", one: "How tall is {N}?", s: "{N} is 142 cm tall." },
+  { g: "How long does each of {G} take to reach school?", one: "How long did it take {N} to reach school today?", s: "{N} took 20 minutes to reach school today." },
+  { g: "How tall is each of {G}?", one: "How tall is {N}?", s: "{N} is 142 cm tall." },
   { g: "How much pocket money do {G} get in a week?", one: "How much pocket money did {N} get this week?", s: "{N} got ₹50 as pocket money this week." },
-  { g: "How many people live in the homes of {G}?", one: "How many people live in {N}'s home?", s: "Five people live in {N}'s home." },
+  { g: "How many people live in the home of each of {G}?", one: "How many people live in {N}'s home?", s: "Five people live in {N}'s home." },
   { g: "Which fruit do {G} like best?", one: "Which fruit does {N} like best?", s: "{N}'s favourite fruit is the mango." },
   { g: "How many books did {G} read during the summer holidays?", one: "How many books did {N} read during the summer holidays?", s: "{N} read 6 books during the summer holidays." },
   { g: "What shoe sizes do {G} wear?", one: "What is {N}'s shoe size?", s: "{N} wears size 5 shoes." },
@@ -798,7 +802,7 @@ const zeroExpr = ([a, m, k, f]: number[]) =>
 const zeroVal = ([a, m, k, f]: number[]) => (f === 0 ? 1 : f === 1 ? k : f === 2 ? 2 : f === 3 ? a ** m : 1);
 
 const D_FEXP: [number, number][] = [[2, 10], [1, 9], [2, 9], [0, 2]];
-const K_FEXP = ([r, p, q, f]: number[]) => (f === 1 ? r === 2 && gcd(p, q) === 1 && p !== q : q <= 5 && p <= 4 && gcd(p, q) === 1 && r ** q <= 100000 && r ** p <= 10000);
+const K_FEXP = ([r, p, q, f]: number[]) => (f === 1 ? r === 2 && gcd(p, q) === 1 && p !== q : q <= 5 && p <= 4 && gcd(p, q) === 1 && r ** q <= 100000 && r ** p <= (f === 2 ? 1000 : 10000));
 const rootSym = (q: number) => (q === 2 ? "√" : q === 3 ? "∛" : q === 4 ? "∜" : `${sup(q)}√`);
 
 const D_REM: [number, number][] = [[3, 12], [0, 11], [1, 20], [0, 3]];
@@ -826,7 +830,7 @@ const P2: Def[] = [
     parse: none,
     reject: gate(D_FOLD, K_FOLD, "A sheet folded into 2 to 8 strips, then each strip into 2 to 5 parts."),
     choices: (p) => foldPerm(p).map((i) => foldBase(p)[i]),
-    prompt: ([a, b, k]) => `A sheet of paper is folded into ${b} equal strips and ${a} of the strips ${a === 1 ? "is" : "are"} coloured, so ${a}/${b} of the sheet is coloured. It is then folded the other way so that every strip is cut into ${k} equal parts, as in the picture. Which fraction of the sheet is coloured now?`,
+    prompt: ([a, b, k]) => `A sheet of paper is folded into ${b} equal strips and ${a} of the strips ${a === 1 ? "is" : "are"} coloured, so ${a}/${b} of the sheet is coloured. It is then folded the other way so that every strip is cut into ${k} equal parts. The picture shows the sheet after both folds. Which fraction of the sheet is coloured now?`,
     figure: ([a, b, k]) => ({ type: "grid", rows: b, cols: k, shaded: a * k }),
     solve: (p) => {
       const [a, b, k] = p;
@@ -861,7 +865,7 @@ const P2: Def[] = [
     domain: D_FOLD,
     keep: K_FOLD,
     difficulty: ([, b, k]) => (b * k <= 12 ? 1 : b * k <= 24 ? 2 : 3),
-    word: ([a, b, k]) => `${nameOf(a + b + k)} cuts a cake into ${b} equal slices and keeps ${a} of them for the family, as in the picture. Then every slice is cut into ${k} equal pieces. Which fraction of the cake is kept?`,
+    word: ([a, b, k]) => `${nameOf(a + b + k)} cuts a cake into ${b} equal slices and keeps ${a} of them for the family. Then every slice is cut into ${k} equal pieces, as in the picture. Which fraction of the cake is kept?`,
     teach: {
       idea: "Folding again cuts every part into the same number of smaller parts: the coloured amount does not change, so a/b = (a × k)/(b × k).",
       method: "Count all the small parts (the new bottom number) and the coloured small parts (the new top number).",
@@ -904,6 +908,8 @@ const P2: Def[] = [
     domain: D_LOW,
     keep: K_LOW,
     difficulty: ([, b, k]) => (k <= 3 && b <= 6 ? 1 : [4, 6, 8, 9].includes(k) ? 3 : 2),
+    // level@1: denominators beyond 50 (63/108) belong to Grade 5
+    grade: ([, b, k]) => (b * k > 50 ? 5 : 4),
     word: ([a, b, k]) => `In a class of ${b * k} students, ${a * k} come to school by bus. What fraction of the class comes by bus? Give it in its lowest terms.`,
     teach: {
       idea: "Dividing the top and the bottom by the same number gives an equal fraction; in lowest terms they have no common factor except 1.",
@@ -1044,7 +1050,7 @@ const P2: Def[] = [
     mc: true,
     // [a, b, k, s]: s 0: k glasses of a/b litre each (k × a/b); s 1: a/b of b·k students
     parse: none,
-    reject: gate(D_FWQ, K_FWQ, "A proper fraction (denominator up to 12) times 2 to 9, or a fraction of a multiple of its denominator."),
+    reject: gate(D_FWQ, K_FWQ, "A proper fraction in lowest terms (denominator up to 12) times 2 to 9, or a fraction of a multiple of its denominator."),
     prompt: ([a, b, k, s]) =>
       s === 0
         ? `Each glass holds ${a}/${b} litre of buttermilk. How many litres do ${k} such glasses hold? (A fraction or mixed number is fine.)`
@@ -1099,10 +1105,12 @@ const P2: Def[] = [
     mc: true,
     // [a, b, c, d, ask]: a of b columns and c of d rows shaded; ask 0: rectangles shaded twice; ask 1: the fraction they make
     parse: none,
-    reject: gate(D_AREA, K_AREA, "Rectangles of 2 to 8 columns and 2 to 8 rows."),
+    reject: gate(D_AREA, K_AREA, "Rectangles of 2 to 8 columns and 2 to 8 rows, both fractions in lowest terms."),
     range: (p) => (p[4] === 1 ? [0, 1] : null),
+    // the rectangle cut into columns and rows, with the yellow rows shaded (the blue columns are described in words)
+    figure: ([, b, c, d]) => ({ type: "grid", rows: d, cols: b, shaded: c * b }),
     prompt: ([a, b, c, d, ask]) =>
-      `A rectangle is cut into ${b} equal columns and ${d} equal rows, making ${b * d} small rectangles. ${a} of the columns ${a === 1 ? "is" : "are"} shaded blue and ${c} of the rows ${c === 1 ? "is" : "are"} shaded yellow, so the part shaded in both colours shows ${a}/${b} × ${c}/${d}. ` +
+      `A rectangle is cut into ${b} equal columns and ${d} equal rows, making ${b * d} small rectangles, as in the picture. ${a} of the columns ${a === 1 ? "is" : "are"} shaded blue and ${c} of the rows ${c === 1 ? "is" : "are"} shaded yellow (the picture shows the yellow ${c === 1 ? "row" : "rows"}), so the part shaded in both colours shows ${a}/${b} × ${c}/${d}. ` +
       (ask === 0 ? `How many small rectangles are shaded in both colours?` : `What fraction of the whole rectangle is shaded in both colours? (A fraction is fine.)`),
     solve: ([a, b, c, d, ask]) => {
       const steps = [st("both", "multiply", MT, [a, c], a * c), st("all", "multiply", MT, [b, d], b * d)];
@@ -1119,7 +1127,7 @@ const P2: Def[] = [
       return ask === 0
         ? keepBugs([
             { id: "counted-all-shaded", kind: "conceptual", competency: FP, says: "Every shaded rectangle was counted; the product is only the part shaded in both colours (the overlap).", predict: any },
-            { id: "added-rows-columns", kind: "conceptual", competency: FP, says: `The shaded columns and rows were added (${a} + ${c}); the overlap has ${a} columns of ${c} rectangles.`, predict: a + c },
+            { id: "added-rows-columns", kind: "conceptual", competency: FP, says: `The shaded columns and rows were added (${a} + ${c}); the overlap has ${pl(a, "column")} of ${pl(c, "rectangle")}.`, predict: a + c },
             { id: "one-colour", kind: "procedural", competency: FP, says: "Only the blue rectangles were counted; the product is where blue and yellow overlap.", predict: a * d },
           ])
         : keepBugs([
@@ -1135,7 +1143,7 @@ const P2: Def[] = [
     cap: 360,
     difficulty: ([, b, , d]) => lv(b * d, 12, 30),
     word: ([a, b, c, d, ask]) =>
-      `A school garden is laid out in ${b} equal columns and ${d} equal rows of beds. Tomatoes grow in ${a} of the columns, and ${c} of the rows ${c === 1 ? "has" : "have"} drip pipes. ` +
+      `A school garden is laid out in ${b} equal columns and ${d} equal rows of beds. Tomatoes grow in ${a} of the columns, and ${c} of the rows ${c === 1 ? "has" : "have"} drip pipes (the picture shows the ${c === 1 ? "row" : "rows"} with drip pipes). ` +
       (ask === 0 ? `How many beds have both tomatoes and drip pipes?` : `What fraction of the garden has both tomatoes and drip pipes? (A fraction is fine.)`),
     teach: {
       idea: "a/b × c/d is the part of a whole that is both a/b one way and c/d the other way: an overlap of a × c small rectangles out of b × d.",
@@ -1172,7 +1180,7 @@ const P2: Def[] = [
       return kind === 0
         ? [{ id: "one-answer", kind: "conceptual", competency: SQ, says: "The question was taken to have one answer; it asks about many people whose answers vary, so answering it needs data: it is statistical.", predict: pr.indexOf(1) }]
         : kind === 1
-          ? [{ id: "any-number-question", kind: "conceptual", competency: SQ, says: "A question with a number answer was taken as statistical; it asks about one person and has one answer, so no data that vary are needed.", predict: pr.indexOf(0) }]
+          ? [{ id: "any-number-question", kind: "conceptual", competency: SQ, says: "A question with one answer was taken as statistical; it asks about one person, so no data that vary are needed.", predict: pr.indexOf(0) }]
           : [
               { id: "data-is-statistical", kind: "conceptual", competency: SQ, says: "A sentence that gives a piece of data was taken as a statistical question; it tells a fact and asks nothing.", predict: pr.indexOf(0) },
               { id: "statement-as-question", kind: "procedural", competency: SQ, says: "The sentence was read as a question; it ends with a full stop and tells something.", predict: pr.indexOf(1) },
@@ -1355,10 +1363,12 @@ const P2: Def[] = [
       if (f === 1)
         return keepBugs([
           { id: "upside-down", kind: "conceptual", competency: RAD, says: `The fraction was turned upside down; the power inside (${p}) is the numerator and the root (${q}) the denominator.`, predict: q / p },
-          { id: "multiplied", kind: "conceptual", competency: RAD, says: `The power and the root were multiplied; a ${q === 2 ? "square" : q === 3 ? "cube" : `${q}th`} root divides the power by ${q}.`, predict: p * q },
+          p > 1 && { id: "multiplied", kind: "conceptual", competency: RAD, says: `The power and the root were multiplied; a ${q === 2 ? "square" : q === 3 ? "cube" : `${q}th`} root divides the power by ${q}.`, predict: p * q },
+          { id: "root-as-subtraction", kind: "procedural", competency: RAD, says: `The root was taken away from the power (${p} − ${q}); a ${q === 2 ? "square" : q === 3 ? "cube" : `${q}th`} root divides the power by ${q}.`, predict: p - q },
         ]);
       const pos = keepBugs([
         { id: "times-the-fraction", kind: "conceptual", competency: RAD, says: `${base} was multiplied by ${p}/${q}; a fractional power means a root and a power, not a multiplication.`, predict: (base * p) / q },
+        { id: "root-as-division", kind: "conceptual", competency: RAD, says: `The ${q === 2 ? "square" : q === 3 ? "cube" : `${q}th`} root of ${base} was taken as ${base} ÷ ${q}; the root is the number that, multiplied by itself ${q} times, gives ${base}.`, predict: (base / q) ** p <= 1e6 ? (base / q) ** p : null },
         p > 1 && { id: "root-only", kind: "procedural", competency: RAD, says: `Only the ${q === 2 ? "square" : q === 3 ? "cube" : `${q}th`} root was taken; the numerator ${p} is a power still to be applied.`, predict: r },
         base ** p <= 1e7 && p > 1 && { id: "power-only", kind: "procedural", competency: RAD, says: `Only the power ${p} was applied; the denominator ${q} means a root too.`, predict: base ** p },
       ]);
@@ -1478,11 +1488,11 @@ const P2: Def[] = [
     difficulty: ([d, , , f]) => (f === 0 ? 1 : f === 2 ? 2 : d >= 8 ? 3 : 2),
     word: ([d, x, y, f]) =>
       f === 0
-        ? `When ${nameOf(d + x)}'s marbles are put into bags of ${d}, ${x} are left over; when ${nameOf(d + x + 1)}'s marbles are, ${y} are left over. They put all their marbles together into bags of ${d}. How many marbles are left over?`
+        ? `When ${nameOf(d + x)}'s marbles are put into bags of ${d}, ${x} ${x === 1 ? "is" : "are"} left over; when ${nameOf(d + x + 1)}'s marbles are, ${y} ${y === 1 ? "is" : "are"} left over. They put all their marbles together into bags of ${d}. How many marbles are left over?`
         : f === 1
-          ? `A shop has a number of boxes that leaves remainder ${x} when divided by ${d}, and each box holds a number of sweets that leaves remainder ${y} when divided by ${d}. All the sweets are repacked in bags of ${d}. How many sweets are left over?`
+          ? `A shop has ${d * 3 + x} boxes with ${d * 2 + y} sweets in each. All the sweets are repacked in bags of ${d}. How many sweets are left over?`
           : f === 2
-            ? `Chairs in a hall are set out in rows of ${d}, and ${x} chairs are left over. There are more than ${10 * y} chairs. What is the smallest number of chairs there can be?`
+            ? `Chairs in a hall are set out in rows of ${d}, and ${pl(x, "chair is", "chairs are")} left over. There are more than ${10 * y} chairs. What is the smallest number of chairs there can be?`
             : `Tokens numbered 1 to ${10 * y} are given out at a school fair. A token wins a prize if its number leaves remainder ${x} when divided by ${d}. How many tokens win a prize?`,
     teach: {
       idea: "Only the remainders matter: a number is a multiple of d plus its remainder, so the remainder of a sum (or product) is the remainder of the sum (or product) of the remainders.",
@@ -1571,9 +1581,16 @@ const fmedAns = (p: number[]) => {
 };
 const FMED_CTX = [
   { what: "the number of children in each family on a street", x: "Children", f: "Families" },
-  { what: "the number of books each student in a class read last month", x: "Books", f: "Students" },
+  { what: "the number of books each student in a class read during the summer holidays", x: "Books", f: "Students" },
   { what: "the number of goals a school team scored in each of its matches", x: "Goals", f: "Matches" },
+  { what: "the number of people living in each house on a street", x: "People", f: "Houses" },
+  { what: "the ages, in years, of the children in a dance class", x: "Age (years)", f: "Children" },
 ];
+/** A context in which the values x0 … x0 + 4 are realistic (no family has 9 to 13 children). */
+const fmedCtx = (p: number[]) => {
+  const ok = p[0] <= 1 ? [0, 1, 2] : p[0] === 2 ? [1, 2] : p[0] <= 4 ? [1, 3] : [1, 4];
+  return FMED_CTX[ok[(p[1] + p[2]) % ok.length]];
+};
 
 const D_COND: [number, number][] = [[1, 18], [2, 19], [0, 2]];
 const K_COND = ([u, v]: number[]) => u < v;
@@ -1819,7 +1836,7 @@ const P3: Def[] = [
     prompt: ([q1, x1, q2, x2, kind]) =>
       kind === 0
         ? `A grocer mixes ${q1} kg of rice costing ₹${mixX(x1, 0)} per kg with ${q2} kg of rice costing ₹${mixX(x2, 0)} per kg. What is the cost of the mixture per kg, in rupees?`
-        : `${q1} litres of syrup that is ${mixX(x1, 1)}% sugar are mixed with ${q2} litres of syrup that is ${mixX(x2, 1)}% sugar. What percentage of the mixture is sugar?`,
+        : `${pl(q1, "litre")} of syrup that is ${mixX(x1, 1)}% sugar ${q1 === 1 ? "is" : "are"} mixed with ${pl(q2, "litre")} of syrup that is ${mixX(x2, 1)}% sugar. What percentage of the mixture is sugar?`,
     solve: ([q1, x1, q2, x2, kind]) => {
       const [a, b] = [mixX(x1, kind), mixX(x2, kind)];
       const tot = q1 * a + q2 * b;
@@ -1850,7 +1867,7 @@ const P3: Def[] = [
     word: ([q1, x1, q2, x2, kind]) =>
       kind === 0
         ? `A tea shop blends ${q1} kg of tea leaves costing ₹${mixX(x1, 0)} per kg with ${q2} kg costing ₹${mixX(x2, 0)} per kg. What does the blend cost per kg, in rupees?`
-        : `${nameOf(q1 + q2 + x1)} mixes ${q1} litres of a fruit drink that is ${mixX(x1, 1)}% mango pulp with ${q2} litres of one that is ${mixX(x2, 1)}% mango pulp. What percentage of the mixture is mango pulp?`,
+        : `${nameOf(q1 + q2 + x1)} mixes ${pl(q1, "litre")} of a fruit drink that is ${mixX(x1, 1)}% mango pulp with ${pl(q2, "litre")} of one that is ${mixX(x2, 1)}% mango pulp. What percentage of the mixture is mango pulp?`,
     teach: {
       idea: "The price (or strength) of a mixture is a weighted mean: each part counts as much as its quantity.",
       method: "Find the total cost (or total sugar) of all the parts, then divide by the total quantity.",
@@ -2013,7 +2030,7 @@ const P3: Def[] = [
     domain: D_DIRV,
     cap: 300,
     difficulty: ([, , , m]) => (m === 1 ? 1 : m === 0 ? 2 : 3),
-    word: (p) => `A water tanker delivers water to a village. The table in the picture shows the hours it has been pumping (x) and the hundreds of litres delivered (y). Do x and y vary directly?`,
+    word: () => `At a photocopy shop, the table in the picture shows the number of copies ordered (x) and the bill in rupees (y) for four orders. Do x and y vary directly?`,
     teach: {
       idea: "Two quantities vary directly when y = kx: y ÷ x is the same for every pair, so doubling x doubles y.",
       method: "Work out y ÷ x for each column of the table. All equal: direct variation. Any different: not direct variation.",
@@ -2082,6 +2099,8 @@ const P3: Def[] = [
     keep: K_MISS,
     cap: 420,
     difficulty: ([m, , , , , mode]) => (mode === 1 ? 3 : m <= 12 ? 1 : 2),
+    // level@1: deviations from the mean need negative integers, which come in a later grade
+    grade: (p) => (p[5] === 1 ? 7 : 5),
     word: ([m, d1, d2, d3, d4, mode]) => {
       const xs = [d1, d2, d3, d4].map((d) => m + d).join(", ");
       return mode === 0
@@ -2109,10 +2128,10 @@ const P3: Def[] = [
     parse: none,
     reject: gate(D_FMED, K_FMED, "Five consecutive values with frequencies 1 to 9 and a single middle value."),
     figure: (p) => {
-      const c = FMED_CTX[p[0] % 3];
+      const c = fmedCtx(p);
       return { type: "table", head: [c.x, c.f], rows: p.slice(1).map((f, i) => [String(p[0] + i), String(f)]) };
     },
-    prompt: (p) => `The table in the picture shows ${FMED_CTX[p[0] % 3].what}. What is the median?`,
+    prompt: (p) => `The table in the picture shows ${fmedCtx(p).what}. What is the median?`,
     solve: (p) => {
       const f = p.slice(1);
       const N = f.reduce((s, x) => s + x, 0);
@@ -2142,7 +2161,7 @@ const P3: Def[] = [
     keep: K_FMED,
     cap: 420,
     difficulty: (p) => lv(p.slice(1).reduce((s, x) => s + x, 0), 15, 30),
-    word: (p) => `For a school project, ${nameOf(p[0] + p[1])} collected data on ${FMED_CTX[p[0] % 3].what}; the results are in the table in the picture. Half the data are at or below which value, and half at or above it? (Give the median.)`,
+    word: (p) => `For a school project, ${nameOf(p[0] + p[1])} collected data on ${fmedCtx(p).what}; the results are in the table in the picture. Half the data are at or below which value, and half at or above it? (Give the median.)`,
     teach: {
       idea: "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
       method: "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median.",
@@ -2271,7 +2290,7 @@ const P3: Def[] = [
         { id: "with-replacement", kind: "conceptual", competency: COND, says: "The bag was treated as unchanged for the second draw; without replacement there is one ball fewer, so the second probability is out of " + (n - 1) + ".", predict: mode === 0 ? (r * r) / (n * n) : mode === 1 ? (r * b) / (n * n) : (r * r + b * b) / (n * n) },
         mode === 1 && { id: "either-order", kind: "procedural", competency: COND, says: "Both orders (red then blue, blue then red) were counted; the question fixes the order: red first.", predict: (2 * r * b) / (n * (n - 1)) },
         mode === 2 && { id: "one-colour-only", kind: "procedural", competency: COND, says: "Only both red was counted; both blue is the same colour too, so add its probability.", predict: (r * (r - 1)) / (n * (n - 1)) },
-        mode === 0 && { id: "second-unchanged-red", kind: "procedural", competency: COND, says: `The number of red balls was not reduced for the second draw: after one red is taken, ${r - 1} red are left among ${n - 1}.`, predict: (r * r) / (n * (n - 1)) },
+        mode === 0 && { id: "second-unchanged-red", kind: "procedural", competency: COND, says: `The number of red balls was not reduced for the second draw: after one red is taken, ${r - 1} red ${r - 1 === 1 ? "is" : "are"} left among ${n - 1}.`, predict: (r * r) / (n * (n - 1)) },
       ]);
     },
     variants: () => [],
@@ -2301,7 +2320,9 @@ const P3: Def[] = [
     parse: none,
     reject: gate(D_VC, K_VC, "Two cuboids with edges from 2 to 6 cubes."),
     choices: (p) => vcPerm(p).map((i) => VC_CHOICES[i]),
-    prompt: ([l1, w1, h1, l2, w2, h2]) => `Box A is built from 1 cm cubes: ${l1} long, ${w1} wide and ${h1} high. Box B is built from 1 cm cubes: ${l2} long, ${w2} wide and ${h2} high. Which is true?`,
+    // the two boxes side by side, edge lengths in cubes (one drawing of two solids would need a new picture type)
+    figure: ([l1, w1, h1, l2, w2, h2]) => ({ type: "table", head: ["", "Long", "Wide", "High"], rows: [["Box A", `${l1} cubes`, `${w1} cubes`, `${h1} cubes`], ["Box B", `${l2} cubes`, `${w2} cubes`, `${h2} cubes`]] }),
+    prompt: ([l1, w1, h1, l2, w2, h2]) => `Box A is built from 1 cm cubes: ${l1} long, ${w1} wide and ${h1} high. Box B is built from 1 cm cubes: ${l2} long, ${w2} wide and ${h2} high (the table in the picture shows both). Which is true?`,
     solve: (p) => {
       const [l1, w1, h1, l2, w2, h2] = p;
       return { steps: [st("a", "multiply", VOL, [l1, w1, h1], l1 * w1 * h1), st("b", "multiply", VOL, [l2, w2, h2], l2 * w2 * h2), st("compare", "compare", VOL, [l1 * w1 * h1, l2 * w2 * h2], VC_CHOICES[vcRight(p)])], answer: vcPerm(p).indexOf(vcRight(p)) };
@@ -2338,6 +2359,7 @@ const P3: Def[] = [
     teach: {
       idea: "The volume of a box made of unit cubes is how many cubes it holds: length × width × height, not how big its edges look.",
       method: "Work out the number of cubes in each box (one layer × the number of layers) and compare the two numbers.",
+      visual: ([l1, w1, h1]) => ({ type: "solid", name: "cuboid", dims: [`${l1} cubes long`, `${w1} cubes wide`, `${h1} cubes high`] }),
       alternatives: [
         { id: "layers", title: "Compare layer by layer", kind: "conceptual", text: ["Count the cubes in one layer of each box (length × width).", "Multiply by the number of layers, then compare."] },
       ],
@@ -2374,7 +2396,10 @@ const P3: Def[] = [
     keep: K_FENCE,
     cap: 400,
     difficulty: ([l, w, k]) => (l + w <= 30 && k % 2 === 0 ? 1 : l + w <= 50 ? 2 : 3),
-    word: ([l, w, k]) => `A school sports field is a rectangle ${l} m long and ${w} m wide. A white line is painted all the way round its edge, and painting costs ₹${5 * k} for each metre. What does the painting cost, in rupees?`,
+    word: ([l, w, k]) =>
+      l >= 20
+        ? `A school playground is a rectangle ${l} m long and ${w} m wide. A white line is painted all the way round its edge, and painting costs ₹${5 * k} for each metre. What does the painting cost, in rupees?`
+        : `A flower bed in a park is a rectangle ${l} m long and ${w} m wide. A border of bricks is laid all the way round its edge, and the border costs ₹${5 * k} for each metre. What does the border cost, in rupees?`,
     teach: {
       idea: "A fence (or a border) runs along the edge, so its length is the perimeter; the cost is that length times the price of one metre.",
       method: "Perimeter = 2 × (length + width); then multiply by the cost per metre.",
@@ -2386,4 +2411,26 @@ const P3: Def[] = [
   },
 ];
 
-export const B22: Def[] = [...P1, ...P2, ...P3];
+/** Two explanations never predict the same answer, and none predicts an answer the family's own check accepts: a
+ * value already predicted by an earlier explanation is dropped from a later one (and an explanation left with no
+ * prediction is dropped). */
+const key = (v: Value) => JSON.stringify(typeof v === "number" ? Math.round(v * 1e9) / 1e9 : v);
+const distinctBugs = (d: Def): Def => ({
+  ...d,
+  bugs: (p) => {
+    const seen = new Set<string>();
+    const out: Bug[] = [];
+    for (const b of d.bugs(p)) {
+      if (b.predict === null) continue;
+      const many = d.type !== "set" && Array.isArray(b.predict);
+      const vals: Value[] = many ? (b.predict as number[]) : [b.predict];
+      const kept = vals.filter((v) => !(typeof v === "number" && !Number.isFinite(v)) && !d.validate(p, v) && !seen.has(key(v)));
+      kept.forEach((v) => seen.add(key(v)));
+      if (!kept.length) continue;
+      out.push({ ...b, predict: many ? (kept.length === 1 ? kept[0] : (kept as number[])) : kept[0] });
+    }
+    return out;
+  },
+});
+
+export const B22: Def[] = [...P1, ...P2, ...P3].map(distinctBugs);

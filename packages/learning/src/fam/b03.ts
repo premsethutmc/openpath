@@ -229,6 +229,7 @@ export const B03: Def[] = [
     },
     // independent: walk along the ticks from the left end, checking the value lands on the ?-tick
     validate: ([si, fk, i], v) => {
+      if (typeof v !== "number") return false;
       const S = [2, 5, 10, 50, 100][si];
       const F = fk * 10 * S;
       let x = F;
@@ -1624,7 +1625,7 @@ export const B03: Def[] = [
         { id: "jump_back", title: "Jump back in tens, then ones", kind: "procedural", text: ["Start at the first number. Jump back one ten at a time for the tens of the second number.", "Then jump back the ones."], visual: ([a, b]) => ({ type: "numberline", from: a - b, to: a, step: 1, jumps: [[a, a - 10 * Math.floor(b / 10)], [a - 10 * Math.floor(b / 10), a - b]] }) },
       ],
     },
-    limits: "Two-digit subtraction with no regrouping; regrouping is acsub2, three-digit and larger numbers are adcolx.",
+    limits: "Two-digit subtraction with no regrouping; regrouping is acsub2, three-digit and larger numbers are adcolx. It sits under the regrouping competency as its no-regroup starting case (curriculum outcomes rely on that placement).",
   },
   {
     id: "acequal",
@@ -1649,7 +1650,7 @@ export const B03: Def[] = [
     // independent: read the piece lengths off the picture (the gaps between the cuts) and see whether they are all the same
     validate: (p, v) => {
       const [k, n, d, c] = p;
-      const fig = eqFigure(k, n, d) as { to: number; marks: number[] };
+      const fig = eqFigure(k, n, d) as unknown as { to: number; marks: number[] };
       const cuts = [0, ...fig.marks, fig.to];
       const sizes = cuts.slice(1).map((x, i) => x - cuts[i]);
       const same = sizes.length === k && sizes.every((x) => x === sizes[0]);
@@ -1696,7 +1697,7 @@ export const B03: Def[] = [
       return null;
     },
     choices: ([sc, b, s]) => nlNums(sc, b, s).map(ind),
-    prompt: ([sc, b, s, q]) => `The numbers ${listOf(nlNums(sc, b, s).map(ind))} are marked with dots on the number line in the picture. Which number is at the dot farthest to the ${q ? "left" : "right"}?`,
+    prompt: ([sc, b, s, q]) => `The numbers ${listOf(nlNums(sc, b, s).map(ind))} are to be marked on a number line from ${sc === 0 ? ind(b * 1000) : 0} to ${sc === 0 ? ind(b * 1000 + 1000) : ind(10000)}. Which number will be farthest to the ${q ? "left" : "right"}?`,
     solve: ([sc, b, s, q]) => {
       const N = nlNums(sc, b, s);
       const t = q ? Math.min(...N) : Math.max(...N);
@@ -1724,7 +1725,6 @@ export const B03: Def[] = [
     domain: [[0, 1], [1, 9], [0, 19], [0, 1]],
     cap: 400,
     difficulty: ([sc, , , q]) => (sc === 1 ? 1 : q ? 3 : 2),
-    figure: ([sc, b, s]) => (sc === 0 ? { type: "numberline", from: b * 1000, to: b * 1000 + 1000, step: 100, marks: nlNums(sc, b, s) } : { type: "numberline", from: 0, to: 10000, step: 1000, marks: nlNums(sc, b, s) }),
     word: ([sc, b, s, q]) => `Four villages are on one straight road, at milestones ${listOf(nlNums(sc, b, s).map(ind))} metres from the start. The numbers go up as you walk along the road away from the start. Which milestone is ${q ? "nearest to" : "farthest from"} the start?`,
     teach: {
       idea: "On a number line, a number further to the right is bigger. Four-digit numbers are compared place by place from the thousands.",
@@ -1851,7 +1851,7 @@ export const B03: Def[] = [
         { id: "try_some", title: "Try and improve", kind: "procedural", text: ["Make any two numbers and work out the answer.", "Swap two cards and see whether the answer gets better; keep the swap if it does."] },
       ],
     },
-    limits: "Two two-digit numbers from four different digit cards 1 to 9; grids with more boxes and magic figures are other families.",
+    limits: "Two two-digit numbers from four different digit cards 1 to 9; grids with more boxes and magic figures are other families. Digit-card placement is reasoning about unknown digits, kept under missing numbers, where the curriculum outcomes place it.",
   },
   {
     id: "acelhm",
@@ -1937,7 +1937,7 @@ export const B03: Def[] = [
       const E = S + 60 * dh + 5 * dm5;
       return mode === 0
         ? `${name(sh + dm5)} left home for the temple festival at ${pm(S)} and came back at ${pm(E)} How long was ${name(sh + dm5)} away? Write (hours, minutes).`
-        : `A bus leaves Salem at ${pm(S)}. The journey takes ${pl3(dh, "hour")} ${pl3(5 * dm5, "minute")}. At what time does the bus arrive? Write (hours, minutes), like (5, 25) for 5:25 p.m.`;
+        : `A bus leaves Salem at ${pm(S)}, and the journey takes ${pl3(dh, "hour")} ${pl3(5 * dm5, "minute")}. At what time does the bus arrive? Write (hours, minutes), like (5, 25) for 5:25 p.m.`;
     },
     teach: {
       idea: "Time is counted in hours of 60 minutes, so we count on to the next o'clock, then whole hours, then the minutes left.",
@@ -2022,8 +2022,8 @@ export const B03: Def[] = [
       const K = PKEY[ki];
       const T = THEMES[s % 3];
       const p = pics(s);
-      if (q === 0) return `${name(s)} is drawing a pictograph for the class notice board. ${p[j] * K} children chose ${T.labels[j]}, and one ● will stand for ${K} children. How many ● should ${name(s)} draw?`;
-      return `${name(s)}'s class drew this pictograph of ${T.title}, one ● for ${K} children. The teacher asks: ${q === 1 ? "how many children were asked altogether?" : "how many children chose the most popular one?"}`;
+      if (q === 0) return `${name(s)} is drawing a pictograph for the school notice board. ${p[j] * K} children chose ${T.labels[j]}, and one ● will stand for ${K} children. How many ● should ${name(s)} draw?`;
+      return `${name(s)}'s school put up this pictograph of ${T.title}, one ● for ${K} children. The teacher asks: ${q === 1 ? "how many children were asked altogether?" : "how many children chose the most popular one?"}`;
     },
     teach: {
       idea: "Every picture stands for the key's number of children, so the number of pictures is the number of children shared into groups of the key, and the children are the pictures times the key.",
@@ -2077,6 +2077,12 @@ export const B03: Def[] = [
     variants: () => [],
     explain: (s) => `Adding and taking away (or multiplying and dividing) undo each other, so the related fact is ${s.value}`,
     domain: [[0, 3], [0, 39], [0, 1]],
+    // level@1: four-digit sums Grade 4, five-digit Grade 5; multiplication facts beyond 10 × 10 (÷ 11, ÷ 12) Grade 4
+    grade: ([mode, x]) => {
+      const [a, b, c] = factNums(mode, x);
+      if (mode <= 1) return String(c).length >= 5 ? 5 : 4;
+      return a <= 10 && b <= 10 ? 3 : 4;
+    },
     cap: 320,
     difficulty: ([m]) => (m === 0 ? 1 : m === 3 ? 3 : 2),
     word: ([mode, x, y]) => {
@@ -2163,7 +2169,7 @@ export const B03: Def[] = [
     domain: [[0, 4], [1, 30], [0, 99]],
     cap: 400,
     difficulty: ([mode]) => (mode === 0 || mode === 4 ? 1 : mode === 2 ? 3 : 2),
-    word: ([mode, a, b]) => [`A pencil is ${a} cm ${b} mm long. How long is it in millimetres?`, `A beetle is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} walks ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
+    word: ([mode, a, b]) => [`${a < 20 ? "A pencil" : "A ribbon"} is ${a} cm ${b} mm long. How long is it in millimetres?`, `${a < 6 ? "A beetle" : a < 20 ? "A pencil" : "A ribbon"} is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} walks ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
     teach: {
       idea: "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number; going to a bigger unit makes groups.",
       method: "To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000; what is left stays in the smaller unit.",
@@ -2251,7 +2257,7 @@ export const B03: Def[] = [
         { id: "pairs", title: "Pair up the dates", kind: "conceptual", text: ["In a block, the top-left and bottom-right dates add up to twice the middle date, and so do the other opposite pairs.", "So nine dates are four pairs and the middle: 9 times the middle date."] },
       ],
     },
-    limits: "3 × 3 blocks inside one month and the hour hand up to 40 hours later; days of the week after many days are anweek.",
+    limits: "3 × 3 blocks inside one month and the hour hand up to 40 hours later; days of the week after many days are anweek. Calendar-block sums are pattern work kept under elapsed time, where the curriculum outcomes place them.",
   },
   {
     id: "acpicthalf",
@@ -2372,9 +2378,11 @@ export const B03: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "unit" ? `The bigger unit is ${s.value} of the smaller unit` : `${s.inputs[0]} ${s.op === "multiply" ? "×" : "÷"} ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 3], [5, 9990]],
+    // level@1: tenths of a centimetre Grade 4; hundredths of a metre and thousandths of a kilometre Grade 5
+    grade: ([mode]) => (mode === 1 ? 4 : 5),
     cap: 400,
     difficulty: ([mode, n]) => (mode === 0 && n >= 100 ? 1 : mode === 2 && (n < 1000 || n % 100 !== 0) ? 3 : 2),
-    word: ([mode, n]) => [`A plant has grown ${n} cm tall. How tall is it in metres? Write a decimal.`, `A screw is ${n} mm long. How long is it in centimetres? Write a decimal.`, `${name(n)} jogs ${ind(n)} m in the morning. How many kilometres is that? Write a decimal.`, `A saree border is ${dec2(n)} m long. How many centimetres is that?`][mode],
+    word: ([mode, n]) => [`${n < 300 ? "A plant" : "A young coconut tree"} has grown ${n} cm tall. How tall is it in metres? Write a decimal.`, `${n < 100 ? "A screw" : "A strip of ribbon"} is ${n} mm long. How long is it in centimetres? Write a decimal.`, `${name(n)} jogs ${ind(n)} m in the morning. How many kilometres is that? Write a decimal.`, `A saree border is ${dec2(n)} m long. How many centimetres is that?`][mode],
     teach: {
       idea: "1 m = 100 cm, so 1 cm is one hundredth of a metre; 1 cm = 10 mm, so 1 mm is a tenth of a centimetre; 1 km = 1000 m, so 1 m is a thousandth of a kilometre.",
       method: "To write a length in the bigger unit, divide by 100, 10 or 1000: move the digits that many places to the right of the decimal point. To go back, multiply.",
@@ -2463,7 +2471,7 @@ export const B03: Def[] = [
       const Bd = digitsOf(b, 4);
       const slip = op ? fromDigits(A.map((d, i) => Math.abs(d - Bd[i]))) : fromDigits(A.map((d, i) => (d + Bd[i]) % 10));
       return [
-        B(op ? "added" : "took-away", "conceptual", OPC, op ? "The numbers were added, but in the story some are taken away (or one part is asked for), so we subtract." : "The smaller number was taken from the bigger one, but the story puts the two amounts together, so we add.", op ? a + b : a - b),
+        B(op ? "added" : "took-away", "conceptual", OPC, op ? "The numbers were added, but in the story some are taken away (or one part is asked for), so we subtract." : "The smaller number was taken from the bigger one, but the story puts the two amounts together, so we add.", op ? a + b : Math.abs(a - b)),
         ...(slip !== r ? [B(op ? "smaller-from-larger" : "no-carry", "procedural", op ? SUBR : "MATH.number.addition-regroup", op ? "In a column where the top digit was smaller, the top was taken from the bottom. Regroup from the next column first." : "A ten, hundred or thousand made in one column was not carried to the next.", slip)] : []),
       ];
     },
@@ -2475,13 +2483,16 @@ export const B03: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "choose" ? (s.value ? "Some are taken away, or one part is asked for: subtract" : "Two amounts are put together: add") : `${ind(Number(s.inputs[0]))} ${s.inputs[2]} ${ind(Number(s.inputs[1]))} = ${ind(Number(s.value))}`),
     domain: [[0, 1], [0, 39], [0, 3]],
+    // level@1: four-digit numbers are Grade 4
+    grade: () => 4,
     difficulty: ([op, x]) => {
       const [a, b] = s4nums(op, x);
       return op && a % 1000 < b % 1000 ? 3 : op ? 2 : 2;
     },
     figure: ([op, x]) => {
       const [a, b] = s4nums(op, x);
-      return { type: "table", head: ["", "Th", "H", "T", "O"], rows: [["", ...String(a).split("")], [op ? "−" : "+", ...String(b).padStart(4, " ").split("")]] };
+      // the two numbers in columns, without the operation sign (choosing the operation is the question)
+      return { type: "table", head: ["Th", "H", "T", "O"], rows: [String(a).split(""), String(b).padStart(4, " ").split("")] };
     },
     word: ([op, x, c]) => story4(op, x, (c + 1) % 4),
     teach: {
@@ -2521,7 +2532,8 @@ export const B03: Def[] = [
     },
     bugs: ([r, p5]) => {
       const N = 100 * r + 5 * p5;
-      return [B("divided-by-10", "recall", MONEY, "The paise were divided by 10, as if ₹1 were 10 paise; ₹1 = 100 paise.", N / 10), B("divided-by-1000", "recall", MONEY, "The paise were divided by 1000; ₹1 = 100 paise, so divide by 100.", N / 1000)];
+      // predictions written as rupees, like the answer (N/1000 rupees has a third decimal place when N is not a multiple of 10)
+      return [B("divided-by-10", "recall", MONEY, "The paise were divided by 10, as if ₹1 were 10 paise; ₹1 = 100 paise.", money(10 * N)), B("divided-by-1000", "recall", MONEY, "The paise were divided by 1000; ₹1 = 100 paise, so divide by 100.", N % 10 === 0 ? money(N / 10) : String(N / 1000))];
     },
     distractors: ([r, p5]) => [money(100 * r + 5 * p5 + 100), money(100 * (r + 1) + 5 * p5 - 50)],
     variants: () => [],
@@ -2529,7 +2541,7 @@ export const B03: Def[] = [
     domain: [[1, 50], [0, 19]],
     cap: 300,
     difficulty: ([r, p5]) => (r < 10 && p5 % 2 === 0 ? 1 : p5 * 5 < 10 ? 3 : 2),
-    figure: ([r, p5]) => ({ type: "table", head: ["Paise", "Rupees (₹)", "Paise left"], rows: [[100 * r + 5 * p5, "?", "?"]] }),
+    figure: ([r, p5]) => ({ type: "table", head: ["Paise", "Rupees (₹)"], rows: [[ind(100 * r + 5 * p5), "?"]] }),
     word: ([r, p5]) => `${girl(r + p5)}'s piggy bank has coins worth ${ind(100 * r + 5 * p5)} paise in all. How much is that in rupees? Write it like 4.50.`,
     teach: {
       idea: "100 paise make ₹1, so every hundred paise is a rupee and the paise under 100 are written after the point.",
@@ -2657,6 +2669,8 @@ export const B03: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "paise" ? `₹${s.inputs[0]} = ${s.value} paise` : s.id === "rupees" ? `${s.inputs[0]} paise = ₹${s.value}` : `${s.inputs[0]} ${s.op === "multiply" ? "×" : "÷"} ${s.inputs[1]} = ${s.value} paise`),
     domain: [[0, 1], [1, 50], [1, 19], [2, 9]],
+    // level@1: multiplying money with paise Grade 4, dividing it Grade 5
+    grade: ([mode]) => (mode === 0 ? 4 : 5),
     cap: 400,
     difficulty: ([mode, r, p5, n]) => (r < 10 && n <= 3 ? 1 : mode === 1 || n * 5 * p5 >= 100 ? 3 : 2),
     word: ([mode, r, p5, n]) => {
@@ -2819,7 +2833,7 @@ export const B03: Def[] = [
       const E = S + 60 * Dh + 5 * Dm5;
       const days = Math.floor(E / 1440);
       return mode === 0
-        ? `${name(dh + Dh)}'s family takes an overnight bus that leaves at ${hhmm(S)} and arrives at ${hhmm(E % 1440)} ${days === 1 ? "the next day" : "two days later"}. How long is the journey? Write (hours, minutes).`
+        ? `${name(dh + Dh)}'s family takes ${dh >= 18 && 60 * Dh + 5 * Dm5 < 1440 ? "an overnight bus" : "a long-distance bus"} that leaves at ${hhmm(S)} and arrives at ${hhmm(E % 1440)} ${days === 1 ? "the next day" : "two days later"}. How long is the journey? Write (hours, minutes).`
         : `A goods lorry leaves the factory at ${hhmm(S)} and drives for ${pl3(Dh, "hour")} ${pl3(5 * Dm5, "minute")}. At what time does it arrive? Write the 24-hour time as (hours, minutes).`;
     },
     teach: {
@@ -2874,7 +2888,7 @@ export const B03: Def[] = [
       const amt = R.map(([, q, r]) => q * r);
       const tot = amt.reduce((a, b) => a + b, 0);
       if (mode === 1) return [B("rate-only", "conceptual", MONEY, `The rate was copied as the amount, but ${R[j][1]} ${R[j][3]} were bought: the amount is quantity × rate.`, money(R[j][2])), B("added-quantity", "conceptual", MONEY, "The quantity was added to the rate; the amount is the rate taken as many times as the quantity.", money(R[j][2] + 100 * R[j][1]))].filter((b) => b.predict !== money(amt[j]));
-      return [B("rates-added", "conceptual", MONEY, "The rates were added without multiplying by the quantities. Each amount is quantity × rate.", money(R.reduce((a, r) => a + r[2], 0))), B("missed-row", "procedural", MONEY, "One row was left out of the total; add every amount.", [...new Set(amt.map((x) => money(tot - x)))])].filter((b) => b.predict !== money(tot));
+      return [B("rates-added", "conceptual", MONEY, "The rates were added without multiplying by the quantities. Each amount is quantity × rate.", money(R.reduce((a, r) => a + r[2], 0))), B("missed-row", "procedural", MONEY, "One row was left out of the total; add every amount.", [...new Set(amt.map((x) => money(tot - x)))] as unknown as Value)].filter((b) => b.predict !== money(tot));
     },
     distractors: ([s, mode, j]) => {
       const R = billOf(s);
@@ -2885,6 +2899,8 @@ export const B03: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "total" ? `Total: ${s.inputs.map((x) => `₹${x}`).join(" + ")} = ₹${s.value}` : `${s.inputs[0]} × ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[0, 59], [0, 1], [0, 2]],
+    // level@1: one line of a bill (money with paise × quantity) Grade 4, a whole bill Grade 5
+    grade: ([, mode]) => (mode === 1 ? 4 : 5),
     cap: 300,
     difficulty: ([, mode]) => (mode === 1 ? 2 : 3),
     figure: ([s, mode, j]) => {
@@ -2910,9 +2926,9 @@ export const B03: Def[] = [
 
 const KEYS = [1, 2, 5, 10];
 const THEMES = [
-  { title: "the favourite fruits of a class", labels: ["Mango", "Banana", "Guava", "Apple"] },
-  { title: "how the children of a class come to school", labels: ["Walk", "Bus", "Cycle", "Auto"] },
-  { title: "the favourite games of a class", labels: ["Kabaddi", "Cricket", "Kho-kho", "Football"] },
+  { title: "the favourite fruits of the children of a school", labels: ["Mango", "Banana", "Guava", "Apple"] },
+  { title: "how the children of a school come to school", labels: ["Walk", "Bus", "Cycle", "Auto"] },
+  { title: "the favourite games of the children of a school", labels: ["Kabaddi", "Cricket", "Kho-kho", "Football"] },
 ];
 /** Pictures in each of the four rows for data seed s (1 to 8 each). */
 function pics(s: number): number[] {
@@ -3096,7 +3112,8 @@ function eqFigure(k: number, n: number, d: number): Visual {
 function eqBase(k: number, c: number): string[] {
   const f = k === 2 ? "one half" : "one quarter";
   const fs = k === 2 ? "halves" : "quarters";
-  return [`Yes: all ${k} pieces are the same size, so each is ${f} of ${EQOBJ[c].it}`, `No: the pieces are not all the same size, so they are not ${fs}`];
+  void c;
+  return [`Yes: all ${k} pieces are the same size, so each is ${f} of the whole`, `No: the pieces are not all the same size, so they are not ${fs}`];
 }
 function eqChoices(p: number[]): string[] {
   return shuf(p, "o", eqBase(p[0], p[3]));
@@ -3252,19 +3269,20 @@ function collFigurePts(p: number[]): Record<string, [number, number]> {
   return out;
 }
 
+/** Invented trains and buses (story timetables, not real ones). */
 const ROUTES: [string, string, string][] = [
-  ["Pandian Express", "Chennai Egmore", "Madurai"],
-  ["night bus", "Coimbatore", "Bengaluru"],
-  ["Nellai Express", "Tirunelveli", "Chennai Egmore"],
-  ["Rameswaram Express", "Rameswaram", "Chennai Egmore"],
-  ["night bus", "Salem", "Puducherry"],
-  ["Kanniyakumari Express", "Kanniyakumari", "Mumbai"],
-  ["Grand Trunk Express", "Chennai Central", "New Delhi"],
+  ["Palm Grove Express", "Chennai", "Madurai"],
+  ["long-distance bus", "Coimbatore", "Bengaluru"],
+  ["Coral Coast Express", "Tirunelveli", "Chennai"],
+  ["Silver Sands Express", "Rameswaram", "Chennai"],
+  ["long-distance bus", "Salem", "Puducherry"],
+  ["Sunrise Valley Express", "Kanniyakumari", "Mumbai"],
+  ["Lotus Lake Express", "Chennai", "New Delhi"],
 ];
 
 const BILLITEMS: [string, number, string, string][] = [
   ["Rice", 5250, "kg", "kg"], ["Toor dal", 13850, "kg", "kg"], ["Sugar", 4475, "kg", "kg"], ["Onions", 3820, "kg", "kg"], ["Tomatoes", 2650, "kg", "kg"],
-  ["Milk", 2850, "packet", "packets"], ["Bananas", 625, "dozen", "dozen"], ["Coconuts", 3575, "piece", "pieces"], ["Soap", 4250, "bar", "bars"], ["Notebooks", 3850, "piece", "pieces"],
+  ["Milk", 2850, "packet", "packets"], ["Bananas", 6250, "dozen", "dozen"], ["Coconuts", 3575, "piece", "pieces"], ["Soap", 4250, "bar", "bars"], ["Notebooks", 3850, "piece", "pieces"],
 ];
 /** Three rows [item, quantity, rate in paise, quantity's unit, unit of the rate] for bill seed s. */
 function billOf(s: number): [string, number, number, string, string][] {

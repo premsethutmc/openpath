@@ -27,13 +27,13 @@
   "requirements": 1197,
   "classes": {
    "validated": 0,
-   "awaiting": 1093,
-   "partial": 104,
+   "awaiting": 1102,
+   "partial": 95,
    "unsupported": 0,
    "not-implemented": 0
   },
   "competenciesRequired": 336,
-  "competenciesComplete": 327,
+  "competenciesComplete": 329,
   "competenciesApproved": 0,
   "graph": {
    "competencies": 338,
@@ -43,13 +43,13 @@
    "disputed": 8
   },
   "families": {
-   "count": 1077,
-   "problems": 340688,
+   "count": 1080,
+   "problems": 341518,
    "answerTypes": {
-    "integer": 410,
-    "fraction": 150,
+    "integer": 411,
+    "fraction": 151,
     "set": 27,
-    "choice": 168,
+    "choice": 169,
     "exact": 128,
     "interval": 16,
     "expression": 31,
@@ -60,11 +60,11 @@
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 303,
-   "withEverydayForm": 758,
-   "withAlternatives": 1041
+   "withPictures": 304,
+   "withEverydayForm": 759,
+   "withAlternatives": 1044
   },
-  "modules": 335,
+  "modules": 336,
   "writtenTasks": 376,
   "writtenByKind": {
    "proof": 83,
@@ -80,8 +80,8 @@
    "ambiguous": 0
   },
   "poolSufficiency": {
-   "modulesWithPools": 326,
-   "sufficient": 326,
+   "modulesWithPools": 327,
+   "sufficient": 327,
    "insufficient": 0
   },
   "educatorPart": {
@@ -265,8 +265,8 @@
    "requirements": 57,
    "classes": {
     "validated": 0,
-    "awaiting": 51,
-    "partial": 6,
+    "awaiting": 53,
+    "partial": 4,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -295,8 +295,8 @@
    "requirements": 54,
    "classes": {
     "validated": 0,
-    "awaiting": 49,
-    "partial": 5,
+    "awaiting": 52,
+    "partial": 2,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -310,8 +310,8 @@
    "requirements": 57,
    "classes": {
     "validated": 0,
-    "awaiting": 49,
-    "partial": 8,
+    "awaiting": 51,
+    "partial": 6,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -325,8 +325,8 @@
    "requirements": 33,
    "classes": {
     "validated": 0,
-    "awaiting": 25,
-    "partial": 8,
+    "awaiting": 26,
+    "partial": 7,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -415,8 +415,8 @@
    "requirements": 64,
    "classes": {
     "validated": 0,
-    "awaiting": 54,
-    "partial": 10,
+    "awaiting": 55,
+    "partial": 9,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -675,21 +675,20 @@
     "strategy": true,
     "worked": true,
     "guided": true,
-    "independent": false,
+    "independent": true,
     "retention": true,
     "variants": true,
     "validation": true,
     "review": false
    },
    "missing": [
-    "independent",
     "review"
    ],
    "families": [
     "agtree"
    ],
    "writtenTasks": 1,
-   "complete": false
+   "complete": true
   },
   {
    "id": "MATH.algebra.expressions-intro",
@@ -5069,34 +5068,30 @@
     7,
     10
    ],
-   "mode": "educator-marked",
+   "mode": "automatic",
    "met": {
     "graph": true,
     "relations": false,
-    "diagnostic": false,
+    "diagnostic": true,
     "misconception": true,
-    "strategy": false,
-    "worked": false,
-    "guided": false,
-    "independent": false,
-    "retention": false,
-    "variants": false,
-    "validation": false,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
     "review": false
    },
    "missing": [
     "relations",
-    "diagnostic",
-    "strategy",
-    "worked",
-    "guided",
-    "independent",
-    "retention",
-    "variants",
-    "validation",
     "review"
    ],
-   "families": [],
+   "families": [
+    "awctr",
+    "awcen",
+    "awinc"
+   ],
    "writtenTasks": 2,
    "complete": false
   },
@@ -7303,7 +7298,7 @@
    "met": {
     "graph": true,
     "relations": true,
-    "diagnostic": false,
+    "diagnostic": true,
     "misconception": true,
     "strategy": true,
     "worked": true,
@@ -7315,7 +7310,6 @@
     "review": false
    },
    "missing": [
-    "diagnostic",
     "review"
    ],
    "families": [
@@ -7328,7 +7322,7 @@
     "avzero"
    ],
    "writtenTasks": 0,
-   "complete": false
+   "complete": true
   },
   {
    "id": "MATH.number.factors-multiples",
@@ -18658,8 +18652,8 @@
     "MATH.algebra.expression-trees",
     "MATH.number.order-of-operations"
    ],
-   "class": "partial",
-   "why": "Convert between numerical/algebraic expressions and tree diagrams: missing independent"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-6@1.1.0",
@@ -18673,8 +18667,8 @@
    "competencies": [
     "MATH.algebra.expression-trees"
    ],
-   "class": "partial",
-   "why": "Convert between numerical/algebraic expressions and tree diagrams: missing independent"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-6@1.1.0",
@@ -20187,8 +20181,8 @@
    "competencies": [
     "MATH.number.exponents"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-7@1.1.0",
@@ -20203,8 +20197,8 @@
     "MATH.number.exponents",
     "MATH.number.prime-factorisation"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-7@1.1.0",
@@ -20219,8 +20213,8 @@
     "MATH.algebra.pattern-rules",
     "MATH.number.exponents"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-7@1.1.0",
@@ -20918,8 +20912,8 @@
    "competencies": [
     "MATH.number.exponents"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-8@1.1.0",
@@ -20964,8 +20958,8 @@
    "competencies": [
     "MATH.number.exponents"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-8@1.1.0",
@@ -21746,8 +21740,8 @@
     "MATH.number.exponents",
     "MATH.number.scientific-notation"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-8@1.1.0",
@@ -22054,7 +22048,7 @@
     "MATH.geometry.triangle-concurrency"
    ],
    "class": "partial",
-   "why": "Locate and construct triangle centres: missing relations, diagnostic, strategy, worked, guided, independent, retention, variants, validation"
+   "why": "Locate and construct triangle centres: missing relations"
   },
   {
    "release": "tn-samacheer-mathematics-grade-8@1.1.0",
@@ -23596,7 +23590,7 @@
     "MATH.number.radicals"
    ],
    "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic; not every part is assessed: Converting from index form back to radical form is not asked: avfexp evaluates fractional powers and converts radicals to index form only."
+   "why": "not every part is assessed: Converting from index form back to radical form is not asked: avfexp evaluates fractional powers and converts radicals to index form only."
   },
   {
    "release": "tn-samacheer-mathematics-grade-9@1.1.0",
@@ -23875,7 +23869,7 @@
     "MATH.geometry.triangle-concurrency"
    ],
    "class": "partial",
-   "why": "Locate and construct triangle centres: missing relations, diagnostic, strategy, worked, guided, independent, retention, variants, validation"
+   "why": "Locate and construct triangle centres: missing relations"
   },
   {
    "release": "tn-samacheer-mathematics-grade-9@1.1.0",
@@ -27314,8 +27308,8 @@
     "MATH.number.exponents",
     "MATH.number.radicals"
    ],
-   "class": "partial",
-   "why": "Use integer exponent laws: missing diagnostic",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
@@ -30155,20 +30149,6 @@
  ],
  "priorities": [
   {
-   "id": "MATH.number.exponents",
-   "name": "Use integer exponent laws",
-   "grades": [
-    7,
-    7
-   ],
-   "depth": 0,
-   "demand": 8,
-   "missing": [
-    "diagnostic",
-    "review"
-   ]
-  },
-  {
    "id": "MATH.algebra.quadratics",
    "name": "Solve quadratic equations",
    "grades": [
@@ -30263,28 +30243,6 @@
    "demand": 2,
    "missing": [
     "relations",
-    "diagnostic",
-    "strategy",
-    "worked",
-    "guided",
-    "independent",
-    "retention",
-    "variants",
-    "validation",
-    "review"
-   ]
-  },
-  {
-   "id": "MATH.algebra.expression-trees",
-   "name": "Convert between numerical/algebraic expressions and tree diagrams",
-   "grades": [
-    6,
-    7
-   ],
-   "depth": 6,
-   "demand": 2,
-   "missing": [
-    "independent",
     "review"
    ]
   }

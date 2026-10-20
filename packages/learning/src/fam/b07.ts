@@ -266,13 +266,13 @@ export const B07: Def[] = [
       const X = 10 * x;
       const r = op ? X - y : X + y;
       return decBugs(r, 2, [
-        { id: "right-align", kind: "conceptual", competency: DTEN, says: `The digits were lined up from the right, as for whole numbers, so tenths were added to hundredths. Line up the decimal points: write ${dec(x, 1)} as ${dec(X, 2, true)}.`, u: op ? (x - y > 0 ? x - y : null) : x + y },
+        { id: "right-align", kind: "conceptual" as const, competency: DTEN, says: `The digits were lined up from the right, as for whole numbers, so tenths were added to hundredths. Line up the decimal points: write ${dec(x, 1)} as ${dec(X, 2, true)}.`, u: op ? (x - y > 0 ? x - y : null) : x + y },
         ...(op
           ? [
-              { id: "bring-down", kind: "procedural", competency: DEC, says: `The empty hundredths place in ${dec(x, 1)} was skipped and the ${y % 10} was brought down. Write ${dec(x, 1)} as ${dec(X, 2, true)}: the empty place is a 0, and you take ${y % 10} away from it by exchanging.`, u: X - y + 2 * (y % 10) },
-              { id: "smaller-from-larger", kind: "procedural", competency: DEC, says: "In each column the smaller digit was taken from the larger one. When the top digit is smaller, exchange 1 from the next place first.", u: digitwise(X, y, (a, b) => Math.abs(a - b)) },
+              { id: "bring-down", kind: "procedural" as const, competency: DEC, says: `The empty hundredths place in ${dec(x, 1)} was skipped and the ${y % 10} was brought down. Write ${dec(x, 1)} as ${dec(X, 2, true)}: the empty place is a 0, and you take ${y % 10} away from it by exchanging.`, u: X - y + 2 * (y % 10) },
+              { id: "smaller-from-larger", kind: "procedural" as const, competency: DEC, says: "In each column the smaller digit was taken from the larger one. When the top digit is smaller, exchange 1 from the next place first.", u: digitwise(X, y, (a, b) => Math.abs(a - b)) },
             ]
-          : [{ id: "no-carry", kind: "procedural", competency: ADDR, says: "A column added up to 10 or more, but the 1 was not carried to the next place on the left.", u: noCarry(X, y) }]),
+          : [{ id: "no-carry", kind: "procedural" as const, competency: ADDR, says: "A column added up to 10 or more, but the 1 was not carried to the next place on the left.", u: noCarry(X, y) }]),
       ]);
     },
     distractors: ([x, y, op]) => {
@@ -721,7 +721,7 @@ export const B07: Def[] = [
       { id: "add-whole-to-top", kind: "conceptual", competency: MIX, says: `${w} was added to the numerator. Each whole is ${d}/${d}, so ${w} wholes are ${w * d} ${d === 2 ? "halves" : `pieces of size 1/${d}`}.`, predict: `${w + n}/${d}` },
       { id: "times-numerator", kind: "procedural", competency: MIX, says: `The whole number was multiplied by the numerator and the denominator was added. Multiply the whole number by the DENOMINATOR, then add the numerator.`, predict: `${w * n + d}/${d}` },
       { id: "forget-numerator", kind: "procedural", competency: MIX, says: `Only the wholes were changed into ${d === 2 ? "halves" : "pieces"}; the ${n}/${d} was not added on.`, predict: `${w * d}/${d}` },
-      { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The multiplication ${w} × ${d} is not yet reliable.`, predict: [`${w * d + d + n}/${d}`, ...(w > 1 ? [`${w * d - d + n}/${d}`] : [])], ...(w >= 2 && d >= 2 ? { probe: `gen:mul:${w},${d}` } : {}) },
+      { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The multiplication ${w} × ${d} is not yet reliable.`, predict: [`${w * d + d + n}/${d}`, ...(w > 1 ? [`${w * d - d + n}/${d}`] : [])] as unknown as Bug["predict"], ...(w >= 2 && d >= 2 ? { probe: `gen:mul:${w},${d}` } : {}) },
     ],
     variants: () => [],
     explain: (st) => (st.id === "wholes" ? `${st.inputs[0]} wholes = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} pieces` : `${st.inputs[0]} + ${st.inputs[1]} = ${st.value} pieces in all`),
@@ -1362,11 +1362,12 @@ function longDiv(n: number, d: number): string {
 }
 function fdOpts([mode, n, d]: number[]) {
   const dec = longDiv(n, d);
-  const right = mode === 0 ? dec : `${String(Number(dec) * 100).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "")}%`;
+  // a percentage is 100n ÷ d, divided out exactly with whole numbers (no floating-point × 100)
+  const right = mode === 0 ? dec : `${longDiv(100 * n, d)}%`;
   const asDigits = mode === 0 ? `${n}.${d}` : `${n}${d}%`;
   const flip = mode === 0 ? longDiv(d, n).slice(0, 5) : `${d}.${n}%`;
-  const tenth = mode === 0 ? String(n / 10) : `${n}%`;
-  const near = mode === 0 ? String(Math.round((n / d) * 100) / 100 + 0.01) : `${Math.round((100 * n) / d) + 1}%`;
+  const tenth = mode === 0 ? longDiv(n, 10) : `${n}%`;
+  const near = mode === 0 ? longDiv(Math.round((100 * n) / d) + 1, 100) : `${Math.round((100 * n) / d) + 1}%`;
   const set: string[] = [];
   for (const o of [right, asDigits, flip, tenth, near]) if (!set.includes(o) && set.length < 4) set.push(o);
   return { opts: ordered(`agfdec:${mode},${n},${d}`, set), right, asDigits, flip };
@@ -1382,7 +1383,7 @@ const spf = (n: number) => {
   for (let p = 2; p * p <= n; p++) if (n % p === 0) return p;
   return n;
 };
-const ptOk = ([mode, n]: number[]) => (mode === 0 ? n >= 50 && n <= 999 && n % 2 === 1 && n % 5 !== 0 : mode === 1 ? n >= 101 && n <= 999 && n % 2 === 1 && n % 3 !== 0 && n % 5 !== 0 && (spf(n) >= 7 || isPr(n)) : false);
+const ptOk = ([mode, n]: number[]) => (mode === 0 ? n >= 50 && n <= 999 && n % 2 === 1 && n % 5 !== 0 && isPr(n) : mode === 1 ? n >= 101 && n <= 999 && n % 2 === 1 && n % 3 !== 0 && n % 5 !== 0 && (spf(n) >= 7 || isPr(n)) : false);
 const lastPrimeTest = (n: number) => {
   let best = 2;
   for (let p = 2; p * p <= n; p++) if (spf(p) === p) best = p;
@@ -1672,7 +1673,7 @@ B07.push(
     keep: writeOk,
     cap: 360,
     difficulty: ([f]) => (f === 0 || f === 3 ? 1 : f === 2 || f === 5 ? 3 : 2),
-    word: (p) => `${(B07.find((d) => d.id === "agbod")!.word as (q: number[]) => string)(p)} ${name(p[1] + 2)} wants to work it out on a calculator in one go. Which expression should ${name(p[1] + 2)} type in?`,
+    word: (p) => `${(B07.find((d) => d.id === "agbod")!.word as (q: number[]) => string)(p)} ${name(p[1] + 2)} wants to write the whole working as one expression in a notebook, worked out by the usual order of operations. Which expression should ${name(p[1] + 2)} write?`,
     teach: {
       idea: "An expression is the story written in numbers and signs. Brackets show what must be worked out first; without brackets, × and ÷ are done before + and −.",
       method: "Say the story in steps: what is there at the start, what is added or taken away, what is repeated. Write each step, and put brackets round anything that must happen before a multiplication.",
@@ -1951,7 +1952,7 @@ B07.push(
     difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
     word: ([mode, g, x, y]) => {
       const [A, Bn, L] = [g * x, g * y, g * x * y];
-      return mode === 0 ? `Two packets hold ${A} and ${Bn} sweets. ${name(g)} knows the biggest equal share that divides both is ${g}. Using HCF × LCM = product, what is the smallest number of sweets that can be packed in full packets of either size?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The longest piece that measures both exactly is ${g} m, and the shortest length both measure exactly is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two buses leave a depot every ${A} and every ${Bn} minutes; they leave together every ${L} minutes. Using HCF × LCM = product, what is the HCF of ${A} and ${Bn}?`;
+      return mode === 0 ? `Two temple bells ring every ${A} and every ${Bn} seconds, and have just rung together. ${name(g)} knows that the HCF of ${A} and ${Bn} is ${g}. Using HCF × LCM = product of the two numbers, after how many seconds will the bells next ring together?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The longest piece that measures both exactly is ${g} m, and the shortest length both measure exactly is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two ribbons, ${A} cm and ${Bn} cm long, are to be cut into pieces all of the same length, as long as possible, with nothing left over. ${name(g)} knows that ${L} cm is the smallest length that both ${A} and ${Bn} divide exactly. Using HCF × LCM = product of the two lengths, how long is each piece, in cm?`;
     },
     teach: {
       idea: "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
@@ -2066,7 +2067,9 @@ B07.push(
     difficulty: ([mode, n, d]) => (d <= 5 && n < d ? 1 : mode === 0 ? 2 : 3),
     word: ([mode, n, d]) =>
       mode === 0
-        ? `A recipe needs ${n}/${d} kg of sugar. ${name(n + d)}'s kitchen scale shows decimals only. Which reading on the scale is ${n}/${d} kg?`
+        ? n < d
+          ? `A recipe needs ${n}/${d} kg of sugar. ${name(n + d)}'s kitchen scale shows decimals only. Which reading on the scale is ${n}/${d} kg?`
+          : `${name(n + d)} needs a piece of cloth ${n}/${d} m long. The measuring tape in the shop is marked in decimals of a metre. Which reading on the tape is ${n}/${d} m?`
         : n < d
           ? `${n} out of every ${d} children in a school come by bus. ${name(n + d)} wants to write this as a percentage for the school magazine. Which percentage is it?`
           : `This year a village had ${n}/${d} times last year's rainfall. ${name(n + d)} wants to write this year's rainfall as a percentage of last year's. Which percentage is it?`,
@@ -2090,7 +2093,7 @@ B07.push(
     mc: true,
     // [mode, n]: mode 0: the largest prime that must be tried before n can be called prime; mode 1: the smallest prime factor of n (n itself if prime)
     parse: none,
-    reject: (p) => (ptOk(p) ? null : "Odd numbers from 50 to 999 not ending in 5 (mode 0); odd numbers from 101 to 999 with no factor 3 or 5 (mode 1)."),
+    reject: (p) => (ptOk(p) ? null : "Primes from 50 to 999 (mode 0, so the test really ends with \"prime\"); odd numbers from 101 to 999 with no factor 3 or 5 (mode 1)."),
     prompt: ([mode, n]) => (mode === 0 ? `To decide whether ${n} is prime, ${name(n)} divides it by the primes 2, 3, 5, 7, … in order. If none of them divides ${n} exactly, what is the largest prime ${name(n)} needs to have tried before saying ${n} is prime?` : `What is the smallest prime factor of ${n}? (If ${n} is prime, write ${n}.)`),
     solve: ([mode, n]) => {
       const r = Math.floor(Math.sqrt(n));
@@ -2132,7 +2135,7 @@ B07.push(
     keep: ptOk,
     cap: 400,
     difficulty: ([mode, n]) => (mode === 0 ? (n < 400 ? 1 : 2) : isPr(n) ? 3 : 2),
-    word: ([mode, n]) => (mode === 0 ? `A computer checks whether the ticket number ${n} is prime by dividing it by 2, 3, 5, 7, 11, … in order. If no division is exact, what is the last prime it needs to try before printing "prime"?` : `${n} marbles are to be packed into bags of equal size (more than one marble in each, and more than one bag). What is the smallest possible number of marbles in each bag? (If it cannot be done, write ${n}.)`),
+    word: ([mode, n]) => (mode === 0 ? `A computer checks whether the ticket number ${n} is prime by dividing it by 2, 3, 5, 7, 11, … in order. If no division is exact, what is the last prime it needs to try before printing "prime"?` : `${n} marbles are to be packed into bags with the same number of marbles in each bag and more than one marble in each. What is the smallest number of marbles that can go in each bag? (If the only way is a single bag holding all ${n}, write ${n}.)`),
     teach: {
       idea: "Factors come in pairs: if n = a × b, one of a and b is at most √n. So if no prime up to √n divides n, n has no factor other than 1 and itself: it is prime.",
       method: "Find the whole number just below √n (the largest k with k² ≤ n). Divide n by each prime up to k. The first one that divides exactly is the smallest prime factor; if none does, n is prime.",
@@ -2141,7 +2144,7 @@ B07.push(
         { id: "factor_pairs", title: "Factor pairs meet at the square root", kind: "conceptual", text: ["For 91: 1 × 91, 7 × 13. The pairs close in on √91 ≈ 9.5 from both sides.", "Once you pass the square root, every factor you would find is the partner of one already found."] },
       ],
     },
-    limits: "Odd numbers up to 999; numbers with the factors 2, 3 or 5 are left out of the smallest-factor questions so that a real test is needed. Writing out the whole factorisation is the ajpf family.",
+    limits: "Odd numbers up to 999 (primes only when asking where the test can stop, since only a prime survives every division); numbers with the factors 2, 3 or 5 are left out of the smallest-factor questions so that a real test is needed. Writing out the whole factorisation is the ajpf family.",
   },
   // ================================================================ Euclid's division algorithm, step by step
   {
@@ -2295,7 +2298,6 @@ B07.push(
     domain: [[0, 2], [1, 36], [2, 12]],
     keep: classOk,
     difficulty: ([form, n, d]) => (form === 0 ? 1 : form === 1 && n === d ? 3 : 2),
-    word: (p) => `A shopkeeper writes "${classText(p)} m of ribbon" on a bill. ${name(p[1] + p[2])}'s teacher asks what kind of number ${classText(p)} is. What should ${name(p[1] + p[2])} answer?`,
     teach: {
       idea: "A proper fraction is less than 1 (top smaller than bottom). An improper fraction has the top equal to or bigger than the bottom, so it is 1 or more. A mixed number writes a value over 1 as a whole number and a proper fraction.",
       method: "Is there a whole number in front? Then it is a mixed number. If not, compare the top and the bottom: top smaller → proper; top equal or bigger → improper.",
