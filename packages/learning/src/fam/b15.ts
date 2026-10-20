@@ -808,6 +808,7 @@ export const B15: Def[] = [
     keep: domOk,
     cap: 450,
     difficulty: ([t, a]) => (t === 0 && a > 0 ? 1 : t <= 1 ? 2 : 3),
+    word: (p) => `${nm(p[1] + p[2])} types the formula f(x) = ${domText(p)} into a graphing app on a school tablet. The app shows a value only where the formula gives a real number, and "Error" everywhere else. For which real x does the app show a value? Write the set in interval notation.`,
     teach: {
       idea: "The domain of a real function is every real x for which the formula gives a real number: what is under a square root must be ≥ 0, and a denominator must not be 0.",
       method: "Write the condition (≥ 0, > 0 or ≠ 0), factorise any quadratic, decide the sign of each region between the roots, and write the answer in interval notation.",
@@ -973,6 +974,7 @@ export const B15: Def[] = [
     keep: trOk,
     cap: 300,
     difficulty: ([, , , v, a, s]) => (a === 1 && s === 1 ? 1 : s === 1 || (a === 1 && v === 0) ? 2 : 3),
+    word: (p) => `An engineer records the water level at Chennai port: y = f(t) is the level in metres above a mark (negative means below it) at t hours after noon (negative t means before noon). At t = ${n_(p[0])} the level was ${n_(p[1])} m. The level at Tuticorin port is modelled by ${trText(p).replace(/x/g, "t")}. Because of this reading, which point (t, y) must lie on the graph of the Tuticorin model? Write it as (t, y).`,
     teach: {
       idea: "In y = a·f(x − h) + v, the graph moves h to the right, is stretched by a (reflected if a < 0) and moves v up. A point (p, q) goes to (p + h, aq + v); f(h − x) also reflects it in the line x = h.",
       method: "Find the x that makes the input of f equal to p, then work out the output: multiply q by a, then add v.",
@@ -1026,6 +1028,7 @@ export const B15: Def[] = [
     keep: stdOk,
     cap: 300,
     difficulty: ([u, w]) => (u < 0 && w < 0 ? 3 : 2),
+    word: ([u, w, op]) => `A shop's accounts app rounds every entry DOWN to the whole rupee at or below it (so −₹2.30 is shown as −₹3). Two entries are ${u < 0 ? "−" : ""}₹${dec(Math.abs(u))}0 and ${w < 0 ? "−" : ""}₹${dec(Math.abs(w))}0 (a minus sign is money paid out). ${op ? "By how many rupees is the first shown entry more than the second shown entry? (A negative answer means it is less.)" : "What total does the app show if it adds the two shown entries, in rupees?"}`,
     teach: {
       idea: "[x] is the greatest integer that is not more than x: on the number line it is the integer at x or the first one to its left. So [2.7] = 2 but [−2.7] = −3.",
       method: "Place each number on the number line and step left to the nearest integer (stay if it is already an integer), then add or subtract.",
@@ -1071,6 +1074,7 @@ export const B15: Def[] = [
     keep: corOk,
     cap: 300,
     difficulty: ([, , a, b, d, e]) => (a === 1 || b === 1 || d === 1 || e === 1 ? 2 : 3),
+    word: ([x, y, a, b, d, e]) => `A bakery in Salem makes x cakes and y loaves of bread a day. A cake needs ${a} kg of flour and a loaf ${b} kg, and ${a * x + b * y} kg of flour is available; a cake takes ${d} hours of oven time and a loaf ${e} hours, and ${d * x + e * y} oven hours are available. The possible (x, y) form a feasible region with x ≥ 0, y ≥ 0. Find the corner point of this region that lies on neither axis, as (x, y).`,
     teach: {
       idea: "Each constraint ≤ is a half-plane bounded by a line; the corner points of the feasible region are where two boundary lines meet inside the region.",
       method: "Replace ≤ by = in the two constraints and solve the pair of equations (by elimination); check the point satisfies x ≥ 0 and y ≥ 0.",
@@ -1195,6 +1199,7 @@ export const B15: Def[] = [
     keep: qinOk,
     cap: 400,
     difficulty: ([, , r, m]) => (m === 1 && r < 2 ? 1 : m > 0 ? 2 : 3),
+    word: ([a, b, r, m]) => `A factory tests a cooling machine at different temperatures x °C (negative values are below freezing). The error in its reading is modelled by E(x) = ${poly([m, -m * (a + b), m * a * b])} units. For which temperatures x is E(x) ${["negative", "zero or negative", "positive", "zero or positive"][r]}? Write the answer in interval notation.`,
     teach: {
       idea: "A quadratic with roots a < b keeps one sign between the roots and the other sign outside them; the sign outside is the sign of the x² coefficient.",
       method: "Factorise, mark the roots on a number line, find the sign in each region, keep the regions the inequality asks for, and include the roots only for ≤ or ≥.",
@@ -2716,9 +2721,9 @@ const D_FACT: [number, number][] = [[0, 3], [2, 15], [1, 13]];
 const factOk = (p: number[]) => {
   if (!inDom(p, D_FACT)) return false;
   const [q, n, m] = p;
-  if (q === 0) return n >= 5 && n <= 12 && m >= n - 4 && m <= n - 1 && m >= 1;
+  if (q === 0) return n >= 5 && n <= 13 && m >= n - 4 && m <= n - 1 && m >= 1;
   if (q === 1) return n >= 3 && n <= 9 && m === 1;
-  if (q === 2) return n >= 5 && n <= 10 && m >= 2 && m <= n - 2;
+  if (q === 2) return n >= 5 && n <= 12 && m >= 2 && m <= n - 2;
   return n >= 3 && n <= 15 && m === 1;
 };
 const bigF = (k: number): bigint => (k <= 1 ? 1n : BigInt(k) * bigF(k - 1));
@@ -2768,14 +2773,15 @@ function geocPoints(n: number, m: number): [number, number][] {
   return [...Array.from({ length: m }, (_, j) => [100 + j, 0] as [number, number]), ...Array.from({ length: n - m }, (_, i) => [i + 1, (i + 1) ** 2 + 1] as [number, number])];
 }
 
-const D_MIX: [number, number][] = [[0, 3], [3, 12], [1, 7], [1, 3]];
+const D_MIX: [number, number][] = [[0, 3], [3, 15], [1, 7], [1, 3]];
 const mixOk = (p: number[]) => {
   if (!inDom(p, D_MIX)) return false;
   const [q, n, r, b] = p;
   if (q === 0) return n >= 5 && r >= 2 && r <= 4 && r < n && b === 1;
   if (q === 1) return n >= 5 && r >= 2 && r <= 3 && b === 1;
+  if (n > 12) return false;
   if (q === 2) return n >= 3 && n <= 5 && r >= 4 && r <= 7 && b <= 2;
-  return n >= 5 && n <= 10 && r >= 3 && r <= 4 && r < n && b === 1;
+  return n >= 5 && n <= 12 && r >= 3 && r <= 4 && r < n && b === 1;
 };
 const ROLES = ["captain", "vice-captain", "treasurer"];
 function mixText([q, n, r, b]: number[], w = false) {
@@ -2786,20 +2792,20 @@ function mixText([q, n, r, b]: number[], w = false) {
 }
 const mixAns = ([q, n, r, b]: number[]) => (q === 0 ? choose(n, r) : q === 1 ? perm(n, r) : q === 2 ? choose(n, b) * choose(r, 2) * fact(b + 2) : choose(n, r) * r);
 
-const WORDS = ["CHAIR", "TIGER", "MANGO", "DELHI", "TAMIL", "SALEM", "KOVAI", "PUNE", "RAGI", "DOSA", "IDLY", "MILK", "BREAD", "SUGAR", "CAMEL", "HORSE", "KANPUR", "NAGPUR", "MYSORE", "PLANET", "THENI", "VELUR", "GUNTUR", "BIHAR"];
-const D_ARR: [number, number][] = [[0, 5], [2, 23], [0, 4]];
+const WORDS = ["CHAIR", "TIGER", "MANGO", "DELHI", "TAMIL", "SALEM", "KOVAI", "PUNE", "RAGI", "DOSA", "IDLY", "MILK", "BREAD", "SUGAR", "CAMEL", "HORSE", "KANPUR", "NAGPUR", "MYSORE", "PLANET", "THENI", "VELUR", "GUNTUR", "BIHAR", "BHOPAL", "SURAT", "RANCHI", "JAIPUR", "INDORE", "NOIDA", "KOCHI", "TRICHY"];
+const D_ARR: [number, number][] = [[0, 5], [2, 31], [0, 5]];
 const arrOk = (p: number[]) => {
   if (!inDom(p, D_ARR)) return false;
   const [q, n, r] = p;
-  if (q === 0) return n >= 3 && n <= 8 && r >= 2 && r <= 4;
-  if (q === 1 || q === 2) return n >= 4 && n <= 8 && r === 0;
-  if (q === 3 || q === 4) return n >= 3 && n <= 9 && r === 0;
+  if (q === 0) return n >= 3 && n <= 10 && r >= 2 && r <= 5 && n ** r <= 100000;
+  if (q === 1 || q === 2) return n >= 4 + r && n <= 8 && r <= 1;
+  if (q === 3 || q === 4) return n >= 3 && n <= 8 && r === 0;
   return r === 0 && new Set(WORDS[n]).size === WORDS[n].length;
 };
 function arrText([q, n, r]: number[], w = false) {
-  if (q === 0) return w ? `A shop's gift vouchers carry a code of ${r} letters, each one of the ${n} letters A to ${"ABCDEFGH"[n - 1]}; letters may be repeated. How many different codes are possible?` : `How many ${r}-letter codes can be made from ${n} different letters if a letter may be used more than once?`;
-  if (q === 1) return w ? `${n} cousins stand in a row for a wedding photograph, and the bride and groom (two of the ${n}) must stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must stand together?`;
-  if (q === 2) return w ? `${n} cousins stand in a row for a photograph, but two of them who have quarrelled must not stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must not stand next to each other?`;
+  if (q === 0) return w ? `A shop's gift vouchers carry a code of ${r} letters, each one of the ${n} letters A to ${"ABCDEFGHIJ"[n - 1]}; letters may be repeated. How many different codes are possible?` : `How many ${r}-letter codes can be made from ${n} different letters if a letter may be used more than once?`;
+  if (q === 1) return r ? (w ? `${n} cousins stand in a row for a family photograph, and three sisters among them want to stand next to one another. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if three particular people must stand together (side by side, in any order)?`) : w ? `${n} cousins stand in a row for a wedding photograph, and the bride and groom (two of the ${n}) must stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must stand together?`;
+  if (q === 2) return r ? (w ? `${n} cousins stand in a row for a photograph, and three sisters among them must NOT all be side by side together (two of them may be). In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if three particular people must not all stand together in a block?`) : w ? `${n} cousins stand in a row for a photograph, but two of them who have quarrelled must not stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must not stand next to each other?`;
   if (q === 3) return w ? `${n} friends sit around a round table at a restaurant in Madurai. In how many different ways can they sit? (Seatings that differ only by everyone moving round the table are the same.)` : `In how many ways can ${n} people be seated around a round table?`;
   if (q === 4) return w ? `${nm(n)} strings ${n} different flowers into a circular garland. How many different garlands are possible? (Turning the garland over gives the same garland.)` : `In how many ways can ${n} different beads be arranged to form a necklace?`;
   return w ? `In a word game, all the arrangements of the letters of the word ${WORDS[n]} are written in a list in dictionary (alphabetical) order. At which position in the list does ${WORDS[n]} itself appear?` : `The letters of the word ${WORDS[n]} are arranged in all possible ways and the arrangements are listed in dictionary order. Find the rank of the word ${WORDS[n]} in the list.`;
@@ -2813,7 +2819,7 @@ function rankOf(w: string) {
   });
   return rank;
 }
-const arrAns = ([q, n, r]: number[]) => (q === 0 ? n ** r : q === 1 ? 2 * fact(n - 1) : q === 2 ? fact(n) - 2 * fact(n - 1) : q === 3 ? fact(n - 1) : q === 4 ? fact(n - 1) / 2 : rankOf(WORDS[n]));
+const arrAns = ([q, n, r]: number[]) => (q === 0 ? n ** r : q === 1 ? fact(r + 2) * fact(n - r - 1) : q === 2 ? fact(n) - fact(r + 2) * fact(n - r - 1) : q === 3 ? fact(n - 1) : q === 4 ? fact(n - 1) / 2 : rankOf(WORDS[n]));
 /** All arrangements of a list (for the independent counts). */
 function perms<T>(xs: T[]): T[][] {
   if (xs.length <= 1) return [xs];
@@ -2836,6 +2842,249 @@ function pasText([q, n, r]: number[]) {
   return `What is the sum of all the entries in row ${n} of Pascal's triangle (row 0 is the single 1 at the top)?`;
 }
 const pasAns = ([q, n, r]: number[]) => (q === 0 ? choose(n + 1, r) : q === 1 ? choose(n, r) : 2 ** n);
+
+// ---------------------------------------------------------------- binomial approximations and middle terms
+const D_BAPP: [number, number][] = [[0, 1], [0, 3], [-5, 5], [3, 10]];
+const bappOk = (p: number[]) => {
+  if (!inDom(p, D_BAPP)) return false;
+  const [q, k, a, n] = p;
+  if (a === 0) return false;
+  if (q === 0) return k >= 1 && Math.abs(a) <= 3 && n <= (k === 3 ? 4 : 5);
+  return k === 0 && n >= 4;
+};
+const bappBase = ([, k, a]: number[]) => 10 ** k + a;
+/** The three-term value 1 + nx + ⁿC₂x² for x = a/100, exactly (as a fraction over 10000). */
+const bapp3 = (a: number, n: number) => (10000 + 100 * n * a + choose(n, 2) * a * a) / 10000;
+const dec4 = (v: number) => String(Math.round(v * 10000) / 10000);
+function bappText([q, k, a, n]: number[], w = false) {
+  if (q === 0) {
+    const B = bappBase([q, k, a]);
+    return w ? `${nm(B + n)}'s calculator shows only 8 digits, too few for the exact value of ${B}${sup(n)} that a puzzle asks for. Write ${B} = ${10 ** k} ${a < 0 ? "−" : "+"} ${Math.abs(a)} and use the binomial theorem to find ${B}${sup(n)} exactly.` : `Use the binomial theorem to evaluate ${B}${sup(n)} exactly, writing ${B} = ${10 ** k} ${a < 0 ? "−" : "+"} ${Math.abs(a)}.`;
+  }
+  const base = dec4(1 + a / 100);
+  return w
+    ? a > 0
+      ? `A savings scheme makes every ₹1 grow by ${a}% each month, so after ${n} months ₹1 has become ₹(${base})${sup(n)}. Using the first three terms of the binomial expansion, find this amount approximately, in rupees (as a decimal).`
+      : `A second-hand mobile phone loses ${-a}% of its value every month, so after ${n} months each ₹1 of its value has become ₹(${base})${sup(n)}. Using the first three terms of the binomial expansion, find this amount approximately, in rupees (as a decimal).`
+    : `Using the first three terms of the binomial expansion of (1 ${a < 0 ? "−" : "+"} ${dec4(Math.abs(a) / 100)})${sup(n)}, find an approximate value of (${base})${sup(n)}. Give the decimal.`;
+}
+const bappAns = (p: number[]) => (p[0] === 0 ? bappBase(p) ** p[3] : bapp3(p[2], p[3]));
+
+const D_BMID: [number, number][] = [[1, 3], [-3, 3], [4, 9], [0, 1]];
+const bmidOk = (p: number[]) => inDom(p, D_BMID) && p[1] !== 0 && (p[2] % 2 === 1 || p[3] === 0);
+/** r: the power of b in the middle term asked for (term T_{r+1}). */
+const bmidR = ([, , n, s]: number[]) => (n % 2 === 0 ? n / 2 : (n - 1) / 2 + s);
+const mono = (c: number, e: number) => `${c < 0 ? "−" : ""}${Math.abs(c) === 1 && e > 0 ? "" : Math.abs(c)}${e === 0 ? "" : xp(e)}`;
+const bmidTerm = (a: number, b: number, n: number, r: number) => mono(choose(n, r) * a ** (n - r) * b ** r, n - r);
+
+// ---------------------------------------------------------------- geometric progressions: identify, grow, use, converge
+const GPR = [2, 3, -2, -3];
+const D_GPID: [number, number][] = [[1, 9], [0, 3], [0, 1], [0, 1]];
+function gpidSeqs([a, ri, flip, s]: number[]): number[][] {
+  const r = GPR[ri];
+  const gp = Array.from({ length: 5 }, (_, i) => a * r ** i);
+  const G = flip ? [...gp].reverse() : gp;
+  const [u0, u1] = G;
+  const d = u1 - u0;
+  const ap = Array.from({ length: 5 }, (_, i) => u0 + i * d);
+  const brk = [G[0], G[1], G[2], G[2] + (G[2] - G[1]), G[2] + 2 * (G[2] - G[1])];
+  const third = s === 0 ? (() => {
+    const f = [u0, u1];
+    for (let i = 2; i < 5; i++) f.push(f[i - 1] + f[i - 2]);
+    return f;
+  })() : Array.from({ length: 5 }, (_, i) => u0 + (d * i * (i + 1)) / 2);
+  return [G, ap, brk, third];
+}
+const seqS = (xs: number[]) => `${xs.map(n_).join(", ")}, …`;
+const gpidOk = (p: number[]) => inDom(p, D_GPID) && new Set(gpidSeqs(p).map((x) => x.join(","))).size === 4;
+const gpidChoices = (p: number[]) => shuf("aogpid", p, gpidSeqs(p).map(seqS));
+
+const GPP = [[1000, 2000, 5000, 10000, 20000, 50000], [50000, 80000, 100000, 200000, 400000, 600000], [10000, 20000, 25000, 40000, 50000, 80000], [50, 100, 200, 500, 1000, 300]];
+const GPRATE = [5, 8, 10, 20];
+const D_GPGR: [number, number][] = [[0, 3], [0, 5], [0, 3], [2, 8]];
+function gpgrVal([q, pi, ri, n]: number[]): number {
+  const P = GPP[q][pi];
+  if (q === 3) return P * (ri + 2) ** n;
+  const r = GPRATE[ri];
+  return (P * (100 + (q === 1 ? -r : r)) ** n) / 100 ** n;
+}
+const gpgrOk = (p: number[]) => {
+  if (!inDom(p, D_GPGR)) return false;
+  const [q, , ri, n] = p;
+  if (q === 3) return ri <= 1 && n >= 3 && gpgrVal(p) <= 1e7;
+  if (n > 4) return false;
+  if (q === 0 && GPRATE[ri] < 10) return false;
+  const v = gpgrVal(p);
+  return q === 0 ? Number.isInteger(Math.round(v * 1e6) / 1e6) && Math.abs(v - Math.round(v)) < 1e-9 : Math.abs(v * 100 - Math.round(v * 100)) < 1e-6;
+};
+function gpgrText([q, pi, ri, n]: number[], w = false) {
+  const P = GPP[q][pi];
+  const r = GPRATE[ri];
+  const yrs = `${n} year${n === 1 ? "" : "s"}`;
+  if (q === 0) return w ? `A forest in the Western Ghats has ${P} trees. Thanks to a planting drive the number of trees increases by ${r}% every year. The numbers of trees at the start of each year form a geometric progression. How many trees will there be after ${yrs}?` : `The population of a town is ${P}. It increases by ${r}% every year, so the populations at the start of each year form a geometric progression. What will the population be after ${yrs}?`;
+  if (q === 1) return w ? `A tractor bought for ₹${P} loses ${r}% of its value every year, so its values at the end of each year form a geometric progression. What will its value be after ${yrs}, in rupees?` : `A machine is bought for ₹${P}. Its value goes down by ${r}% every year (depreciation), so its values form a geometric progression. Find its value after ${yrs}, in rupees.`;
+  if (q === 2) return w ? `${nm(pi + ri + n)} keeps ₹${P} in a fixed deposit at a post office that pays ${r}% interest per year, compounded every year. The amounts at the end of each year form a geometric progression. How much will be in the deposit after ${yrs}, in rupees?` : `₹${P} is invested at ${r}% per year compound interest (compounded yearly). The amounts at the end of each year form a geometric progression. Find the amount after ${yrs}, in rupees.`;
+  const k = ri + 2;
+  return w ? `A message is forwarded on a phone group: ${P} people get it in the first hour, and every hour the number of new people who get it is ${k === 2 ? "double" : "three times"} the number in the hour before. How many new people get it in hour ${n + 1}?` : `A culture has ${P} bacteria. The number of bacteria ${k === 2 ? "doubles" : "triples"} every hour. How many bacteria will there be after ${n} hours?`;
+}
+
+const D_GPUSE: [number, number][] = [[0, 3], [1, 30], [0, 98], [0, 3]];
+const BOUNCE: [number, number][] = [[1, 2], [2, 3], [3, 4], [3, 5], [4, 5], [1, 3]];
+const gpuseOk = (p: number[]) => {
+  if (!inDom(p, D_GPUSE)) return false;
+  const [q, a, b, c] = p;
+  if (q === 0) return (a === 1 && b >= 1 && b <= 8) || (a === 2 && b >= 10 && b % 11 !== 0) ? true : false;
+  if (q === 1) return a >= 2 && a <= 30 && b <= 5 && c === 0;
+  if (q === 2) return a >= 2 && a <= 20 && b === 0 && c === 0;
+  return a >= 1 && a <= 20 && b === 0 && c === 0;
+};
+function gpuseAns([q, a, b, c]: number[]): number {
+  if (q === 0) return c + b / (10 ** a - 1);
+  if (q === 1) {
+    const [s, t] = BOUNCE[b];
+    return (a * (t + s)) / (t - s);
+  }
+  if (q === 2) return 2 * a * a;
+  return 4 * a;
+}
+const recurS = (a: number, b: number, c: number) => {
+  const block = String(b).padStart(a, "0");
+  return `${c}.${block.repeat(a === 1 ? 6 : 3)}…`;
+};
+function gpuseText([q, a, b, c]: number[], w = false) {
+  if (q === 0) {
+    const block = String(b).padStart(a, "0");
+    return w ? `A calculator shows ${recurS(a, b, c)} for a division, the block ${block} repeating for ever. Write this number as a fraction in lowest terms, using the sum of an infinite geometric series. (A fraction is fine.)` : `Write the recurring decimal ${recurS(a, b, c)} (the block ${block} repeats for ever) as a fraction in lowest terms, by writing its recurring part as an infinite geometric series. (A fraction is fine.)`;
+  }
+  if (q === 1) {
+    const [s, t] = BOUNCE[b];
+    return w ? `${nm(a + b)} drops a rubber ball from the top of a ${a} m high wall onto the floor. Each time it bounces, it rises to ${s}/${t} of the height it fell from. Assuming it keeps bouncing for ever, what total distance does it travel, up and down, in metres? (A fraction is fine.)` : `A ball is dropped from a height of ${a} m. After each bounce it rises to ${s}/${t} of the height from which it fell. Find the total distance it travels before coming to rest, in metres, using the sum to infinity. (A fraction is fine.)`;
+  }
+  if (q === 2) return w ? `A kolam is drawn as a square of side ${a} cm; the midpoints of its sides are joined to make a smaller square inside it, and the same is done again and again for ever. Find the total of the areas of all the squares, in cm².` : `A square has side ${a} cm. The midpoints of its sides are joined to form a second square, the midpoints of its sides form a third square, and so on for ever. Find the sum of the areas of all the squares, in cm².`;
+  return w ? `A rangoli starts with an equilateral triangle of area ${3 * a} cm². Joining the midpoints of its sides makes a smaller triangle in the middle, and this is repeated for ever. Find the total of the areas of all the triangles (the first one and every middle triangle), in cm².` : `An equilateral triangle has area ${3 * a} cm². The midpoints of its sides are joined to form a smaller equilateral triangle, and the process is repeated for ever. Find the sum of the areas of all the triangles, in cm².`;
+}
+
+const D_GPCV: [number, number][] = [[-9, 9], [-6, 6], [1, 5]];
+const gpcvOk = (p: number[]) => inDom(p, D_GPCV) && p[0] !== 0 && p[1] !== 0 && gcd(Math.abs(p[1]), p[2]) === 1 && p[1] !== p[2] && Math.abs(p[1] / p[2]) <= 3 && !(p[1] === -p[2] && p[2] !== 1);
+function gpcvLabels([a, p, q]: number[]) {
+  const r = p / q;
+  const f = (v: number) => fr(clean(v));
+  return [
+    `The series converges, and its sum to infinity is ${f(a / (1 - r))}`,
+    r === -1 ? "The series converges, and its sum to infinity is 0" : `The series converges, and its sum to infinity is ${f(a / (1 + r))}`,
+    "The series diverges: it has no sum to infinity",
+    `The series converges, and its sum to infinity is ${f((a * r) / (1 - r))}`,
+  ];
+}
+const gpcvRight = ([, p, q]: number[]) => (Math.abs(p) < q ? 0 : 2);
+const gpcvChoices = (p: number[]) => shuf("aogpcv", p, gpcvLabels(p));
+
+// ---------------------------------------------------------------- the discriminant: parameters for equal or real roots
+const D_DK: [number, number][] = [[0, 2], [1, 10], [1, 60]];
+const isSq = (n: number) => n >= 0 && Number.isInteger(Math.sqrt(n)) && Math.round(Math.sqrt(n)) ** 2 === n;
+const dkOk = (p: number[]) => {
+  if (!inDom(p, D_DK)) return false;
+  const [f, a, b] = p;
+  if (f === 0) return a <= 6 && isSq(a * b) && Math.sqrt(4 * a * b) <= 40;
+  if (f === 1) return a <= 6 && b <= 20 && gcd(a, b) < Math.max(a, 2);
+  return b <= 20 && a <= 10;
+};
+const dkAns = ([f, a, b]: number[]) => (f === 0 ? Math.sqrt(4 * a * b) : f === 1 ? (b * b) / (4 * a) : (b * b) / (4 * a));
+function dkText([f, a, b]: number[], w = false) {
+  const A = a === 1 ? "" : String(a);
+  if (f === 0) return w ? `A ball is thrown straight up at k m/s. In a simple model its height after t seconds is h = kt − ${A}t² metres. The ball just reaches a height of ${b} m (it is at that height at only one instant). Find k.` : `Find the positive value of k for which the quadratic equation ${A}x² − kx + ${b} = 0 has two equal real roots.`;
+  if (f === 1) return w ? `A stone is thrown straight up; its height after t seconds is h = ${b}t − ${A}t² metres in a simple model. Find the greatest height k it reaches, in metres (the height k is reached at only one instant, so ${A}t² − ${b}t + k = 0 has equal roots). (A fraction is fine.)` : `Find the value of k for which the quadratic equation ${A}x² − ${b}x + k = 0 has two equal real roots. (A fraction is fine.)`;
+  return w ? `On a small moon, a stone thrown straight up has height h = ${b}t − kt² metres after t seconds, and the greatest height it reaches is exactly ${a} m. Find k. (A fraction is fine.)` : `Find the value of k (k ≠ 0) for which the quadratic equation kx² − ${b}x + ${a} = 0 has two equal real roots. (A fraction is fine.)`;
+}
+
+/** [f, a, b]: f 0 ax² + bx + k real roots, 1 ax² + kx + b real roots (ab a square), 2 and 3 the same with no real roots. */
+const D_DKR: [number, number][] = [[0, 3], [1, 4], [-9, 60]];
+const dkrOk = (p: number[]) => {
+  if (!inDom(p, D_DKR)) return false;
+  const [f, a, b] = p;
+  if (f % 2 === 0) return b !== 0 && Math.abs(b) <= 9;
+  return b >= 1 && isSq(a * b) && 2 * Math.sqrt(a * b) <= 28;
+};
+function dkrAns([f, a, b]: number[], strict?: boolean, flip = false): string {
+  const real = (f < 2) !== flip;
+  const s = strict ?? !real;
+  if (f % 2 === 0) {
+    const e = (b * b) / (4 * a);
+    return real ? ivs([[null, false, e, !s]]) : ivs([[e, !s, null, false]]);
+  }
+  const m = 2 * Math.sqrt(a * b);
+  return real ? ivs([[null, false, -m, !s], [m, !s, null, false]]) : ivs([[-m, !s, m, !s]]);
+}
+function dkrText([f, a, b]: number[]) {
+  const A = a === 1 ? "" : String(a);
+  const eq = f % 2 === 0 ? `${A}x² ${b < 0 ? "−" : "+"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x + k = 0` : `${A}x² + kx + ${b} = 0`;
+  return `Find all the real values of k for which the equation ${eq} has ${f < 2 ? "real roots" : "no real roots"}. Write the answer in interval notation.`;
+}
+
+// ---------------------------------------------------------------- exponential equations and change of base
+const EXB = [2, 3, 5];
+const D_EXQ: [number, number][] = [[0, 1], [0, 2], [1, 4], [0, 4], [-3, 8], [-3, 3]];
+const exqOk = (p: number[]) => {
+  if (!inDom(p, D_EXQ)) return false;
+  const [f, ci, i, j, u, w] = p;
+  const c = EXB[ci];
+  if (c ** i > 625) return false;
+  if (f === 1) return j === 0 && w === 0 && u >= 1 && c ** u <= 3125 && u !== i;
+  if (j < 1 || i === j || c ** j > 625 || Math.abs(u) > 3) return false;
+  const x = (j * w - i * u) / (i - j);
+  return Number.isInteger(x * 6) && x !== 0;
+};
+const exqAns = ([f, , i, j, u, w]: number[]) => (f === 1 ? u / i : (j * w - i * u) / (i - j));
+const expo = (u: number) => (u === 0 ? "x" : `(x ${u < 0 ? "−" : "+"} ${Math.abs(u)})`);
+function exqText([f, ci, i, j, u, w]: number[], word = false) {
+  const c = EXB[ci];
+  if (f === 1) return word ? `A colony of cells is multiplied by ${c ** i} every hour, starting from 1 thousand cells, so after x hours there are ${c ** i}^x thousand cells. After how many hours are there ${c ** u} thousand cells? (A fraction of an hour is fine.)` : `Solve ${c ** i}^x = ${c ** u}. (A fraction is fine.)`;
+  return word ? `In a science project two quantities change with time: after x hours the first is ${c ** i}^${expo(u)} units and the second is ${c ** j}^${expo(w)} units. At what time x are they equal? (A fraction is fine; a negative x means hours before the start.)` : `Solve ${c ** i}^${expo(u)} = ${c ** j}^${expo(w)}. (A fraction is fine.)`;
+}
+
+const D_CHB: [number, number][] = [[0, 1], [0, 2], [1, 5], [1, 5], [0, 4]];
+const CHBB = [3, 5, 7, 6, 10];
+const chbOk = (p: number[]) => {
+  if (!inDom(p, D_CHB)) return false;
+  const [q, ci, i, j, bi] = p;
+  const c = EXB[ci];
+  if (q === 0) return i !== j && c ** i <= 243 && c ** j <= 3125 && CHBB[bi] !== c && !(c === 2 && CHBB[bi] === 6 && false) && CHBB[bi] % c !== 0;
+  // q 1: A = 2 + ci, B = 2 + ci + i (different), X = (AB)^j
+  const A = 2 + ci;
+  const Bb = A + i;
+  return bi === 0 && j <= 3 && Bb <= 7 && (A * Bb) ** j <= 100000;
+};
+function chbText([q, ci, i, j, bi]: number[]) {
+  const c = EXB[ci];
+  if (q === 0) return `Using the change of base rule, evaluate log${sub(c ** i)} ${CHBB[bi]} × log${sub(CHBB[bi])} ${c ** j}. (A fraction is fine.)`;
+  const A = 2 + ci;
+  const Bb = A + i;
+  const X = (A * Bb) ** j;
+  return `Evaluate 1/log${sub(A)} ${X} + 1/log${sub(Bb)} ${X}. (A fraction is fine.)`;
+}
+const chbAns = ([q, , i, j]: number[]) => (q === 0 ? j / i : 1 / j);
+
+// ---------------------------------------------------------------- integration by partial fractions and by decomposition
+const D_PFI: [number, number][] = [[0, 1], [-5, 5], [-5, 5], [-4, 4], [-4, 4]];
+const pfiOk = (p: number[]) => {
+  if (!inDom(p, D_PFI)) return false;
+  const [q, a, b, A, B] = p;
+  if (q === 0) return a < b && A !== 0 && B !== 0;
+  return b === 0 && B === 0 && A + a !== 0 && A !== -a + 0 && A !== 0;
+};
+const logT = (c: number, a: number, first: boolean) => {
+  const m = Math.abs(c);
+  const body = `${m === 1 ? "" : `${m} `}log|${fac(a)}|`;
+  return first ? `${c < 0 ? "−" : ""}${body}` : ` ${c < 0 ? "−" : "+"} ${body}`;
+};
+function pfiAnswer([q, a, b, A, B]: number[]) {
+  if (q === 0) return `${logT(A, a, true)}${logT(B, b, false)}`;
+  return `x${logT(a + A, a, false)}`;
+}
+function pfiText([q, a, b, A, B]: number[]) {
+  if (q === 0) return `Find ∫ ${brk(lin(A + B, -(A * b + B * a)))}/(${poly([1, -(a + b), a * b])}) dx by first resolving the integrand into partial fractions. (Write log for the natural logarithm; the constant C may be left out.)`;
+  return `Find ∫ (${lin(1, A)})/${bx(a)} dx by first writing the integrand as 1 + c/${bx(a)}. (Write log for the natural logarithm; the constant C may be left out.)`;
+}
 
 export const NEW15: Def[] = [
   // ============================================================ roster, set-builder and descriptive forms
@@ -3847,9 +4096,9 @@ export const NEW15: Def[] = [
         q === 0
           ? [{ id: "power", op: "multiply", competency: PERM, inputs: [n, r], value: n ** r }]
           : q === 1
-            ? [{ id: "block", op: "arrange", competency: PERM, inputs: [n - 1], value: fact(n - 1) }, { id: "inside", op: "multiply", competency: PERM, inputs: [fact(n - 1), 2], value: 2 * fact(n - 1) }]
+            ? [{ id: "block", op: "arrange", competency: PERM, inputs: [n - r - 1], value: fact(n - r - 1) }, { id: "inside", op: "multiply", competency: PERM, inputs: [fact(n - r - 1), fact(r + 2)], value: arrAns(p) }]
             : q === 2
-              ? [{ id: "all", op: "arrange", competency: PERM, inputs: [n], value: fact(n) }, { id: "together", op: "multiply", competency: PERM, inputs: [fact(n - 1), 2], value: 2 * fact(n - 1) }, { id: "apart", op: "subtract", competency: PERM, inputs: [fact(n), 2 * fact(n - 1)], value: arrAns(p) }]
+              ? [{ id: "all", op: "arrange", competency: PERM, inputs: [n], value: fact(n) }, { id: "together", op: "multiply", competency: PERM, inputs: [fact(n - r - 1), fact(r + 2)], value: fact(r + 2) * fact(n - r - 1) }, { id: "apart", op: "subtract", competency: PERM, inputs: [fact(n), fact(r + 2) * fact(n - r - 1)], value: arrAns(p) }]
               : [{ id: "circle", op: "arrange", competency: PERM, inputs: [n - 1], value: fact(n - 1) }, ...(q === 4 ? [{ id: "flip", op: "divide", competency: PERM, inputs: [fact(n - 1), 2], value: arrAns(p) } as Step] : [])];
       return { steps, answer: arrAns(p) };
     },
@@ -3870,17 +4119,20 @@ export const NEW15: Def[] = [
       }
       const ps = perms(Array.from({ length: n }, (_, i) => i));
       if (q === 1 || q === 2) {
-        const adj = (x: number[]) => Math.abs(x.indexOf(0) - x.indexOf(1)) === 1;
+        const adj = (x: number[]) => {
+          const pos = Array.from({ length: r + 2 }, (_, i) => x.indexOf(i));
+          return Math.max(...pos) - Math.min(...pos) === r + 1;
+        };
         return v === ps.filter((x) => (q === 1 ? adj(x) : !adj(x))).length;
       }
+      // rotate so that 0 comes first; for a necklace also read it the other way round
       const canon = (x: number[]) => {
-        const forms: string[] = [];
-        for (let s = 0; s < n; s++) {
-          const rot = [...x.slice(s), ...x.slice(0, s)];
-          forms.push(rot.join(","));
-          if (q === 4) forms.push([...rot].reverse().join(","));
-        }
-        return forms.sort()[0];
+        const k = x.indexOf(0);
+        const rot = [...x.slice(k), ...x.slice(0, k)];
+        const a = rot.join(",");
+        if (q !== 4) return a;
+        const b = [0, ...rot.slice(1).reverse()].join(",");
+        return a < b ? a : b;
       };
       return v === new Set(ps.map(canon)).size;
     },
@@ -3891,10 +4143,10 @@ export const NEW15: Def[] = [
         if (r <= n) out.push({ id: "no-repetition", kind: "conceptual", competency: PERM, says: "Each letter was used at most once; repetition is allowed, so every place has all the letters to choose from.", predict: perm(n, r) });
         out.push({ id: "power-swapped", kind: "procedural", competency: EXPN, says: `${r}${sup(n)} was worked out; ${r} places with ${n} choices each give ${n}${sup(r)}.`, predict: r ** n });
       }
-      if (q === 1) out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: "The two people inside the block were not arranged; they can stand in 2 orders, so multiply by 2.", predict: fact(n - 1) });
+      if (q === 1) out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: `The people inside the block were not arranged among themselves; they can stand in ${r + 2}! = ${fact(r + 2)} orders, so multiply by that.`, predict: fact(n - r - 1) });
       if (q === 2) {
-        out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: "The 'together' arrangements were counted without the 2 orders of the pair; there are 2 × (n − 1)! of them.", predict: fact(n) - fact(n - 1) });
-        out.push({ id: "together-given", kind: "conceptual", competency: PERM, says: "The number of arrangements with the two TOGETHER was given; 'not together' is all arrangements minus those.", predict: 2 * fact(n - 1) });
+        out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: `The 'together' arrangements were counted without the ${fact(r + 2)} orders inside the block; there are ${r + 2}! × ${n - r - 1}! of them.`, predict: fact(n) - fact(n - r - 1) });
+        out.push({ id: "together-given", kind: "conceptual", competency: PERM, says: "The number of arrangements with them TOGETHER was given; 'not together' is all arrangements minus those.", predict: fact(r + 2) * fact(n - r - 1) });
       }
       if (q === 3) out.push({ id: "row-count", kind: "conceptual", competency: PERM, says: `${n}! counts rows; around a table, turning everyone one seat gives the same seating, so fix one person: (${n} − 1)!.`, predict: fact(n) });
       if (q === 4) {
@@ -3910,7 +4162,7 @@ export const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans && (x.predict as number) > 0);
     },
     variants: ([q, n, r]) => [[q, n + 1, r]].filter(arrOk),
-    explain: (s) => (s.id === "power" ? `${s.inputs[1]} places with ${s.inputs[0]} choices each: ${s.inputs[0]}${sup(Number(s.inputs[1]))} = ${s.value}` : s.id === "block" ? `Treat the two as one block: ${s.inputs[0]} things in a row, ${s.inputs[0]}! = ${s.value}` : s.id === "inside" ? `The pair can swap: × 2 = ${s.value}` : s.id === "all" ? `All arrangements: ${s.inputs[0]}! = ${s.value}` : s.id === "together" ? `Arrangements with the two together: 2 × ${s.inputs[0]} = ${s.value}` : s.id === "apart" ? `Not together: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "circle" ? `Fix one and arrange the rest: (${Number(s.inputs[0]) + 1} − 1)! = ${s.value}` : s.id === "flip" ? `Turning over gives the same: ${s.inputs[0]} ÷ 2 = ${s.value}` : s.id === "before" ? `Words before it, letter by letter: ${(s.inputs as number[]).join(" + ")} = ${s.value}` : `Its rank is ${s.value}`),
+    explain: (s) => (s.id === "power" ? `${s.inputs[1]} places with ${s.inputs[0]} choices each: ${s.inputs[0]}${sup(Number(s.inputs[1]))} = ${s.value}` : s.id === "block" ? `Treat the group as one block: ${s.inputs[0]} things in a row, ${s.inputs[0]}! = ${s.value}` : s.id === "inside" ? `The group can be arranged inside the block: × ${s.inputs[1]} = ${s.value}` : s.id === "all" ? `All arrangements: ${s.inputs[0]}! = ${s.value}` : s.id === "together" ? `Arrangements with them together: ${s.inputs[1]} × ${s.inputs[0]} = ${s.value}` : s.id === "apart" ? `Not together: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "circle" ? `Fix one and arrange the rest: (${Number(s.inputs[0]) + 1} − 1)! = ${s.value}` : s.id === "flip" ? `Turning over gives the same: ${s.inputs[0]} ÷ 2 = ${s.value}` : s.id === "before" ? `Words before it, letter by letter: ${(s.inputs as number[]).join(" + ")} = ${s.value}` : `Its rank is ${s.value}`),
     domain: D_ARR,
     keep: arrOk,
     difficulty: ([q]) => (q === 0 || q === 3 ? 1 : q === 5 ? 3 : 2),
@@ -3994,6 +4246,673 @@ export const NEW15: Def[] = [
       ],
     },
     limits: "Rows 3 to 12; the binomial coefficient families cover larger rows by formula.",
+  },
+  // ============================================================ binomial approximation
+  {
+    id: "aobinapp",
+    arity: 4,
+    title: "Exact values and approximations by the binomial theorem",
+    competency: BIN,
+    type: "fraction",
+    decimals: true,
+    mc: true,
+    parse: none,
+    // [q, k, a, n]: q 0 (10ᵏ + a)ⁿ exactly; q 1 (1 + a/100)ⁿ from the first three terms
+    reject: (p) => (bappOk(p) ? null : "(10ᵏ ± a)ⁿ with small a and n, or (1 ± a/100)ⁿ to three terms."),
+    prompt: (p) => bappText(p),
+    solve: (p) => {
+      const [q, k, a, n] = p;
+      if (q === 0) {
+        const T = 10 ** k;
+        const terms = Array.from({ length: n + 1 }, (_, i) => choose(n, i) * T ** (n - i) * a ** i);
+        return { steps: [{ id: "terms", op: "expand", competency: BIN, inputs: terms, value: terms.reduce((x, y) => x + y, 0) }], answer: bappAns(p) };
+      }
+      const x = a / 100;
+      return { steps: [{ id: "three", op: "expand", competency: BIN, inputs: [1, dec4(n * x), dec4(choose(n, 2) * x * x)], value: bapp3(a, n) }], answer: bapp3(a, n) };
+    },
+    // independent: exact big-integer power; for the approximation, multiply (1 + x) by itself n times keeping only 1, x and x²
+    validate: ([q, k, a, n], v) => {
+      if (typeof v !== "number") return false;
+      if (q === 0) return Number.isInteger(v) && BigInt(v) === BigInt(10 ** k + a) ** BigInt(n);
+      let c = [1, 0, 0];
+      for (let i = 0; i < n; i++) c = [c[0], c[1] + c[0], c[2] + c[1]];
+      return near(v, (c[0] * 10000 + c[1] * a * 100 + c[2] * a * a) / 10000, 1e-12);
+    },
+    bugs: (p) => {
+      const [q, k, a, n] = p;
+      const ans = bappAns(p);
+      const out: Bug[] = [];
+      if (q === 0) {
+        const T = 10 ** k;
+        out.push({ id: "ends-only", kind: "conceptual", competency: BIN, says: `Only the first and last terms were kept: (${T} ${a < 0 ? "−" : "+"} ${Math.abs(a)})${sup(n)} is not ${T}${sup(n)} ${a < 0 && n % 2 ? "−" : "+"} ${Math.abs(a) ** n}; the middle terms ⁿCᵣ ${T}ⁿ⁻ʳ (${n_(a)})ʳ count too.`, predict: T ** n + a ** n });
+        out.push({ id: "no-coefficients", kind: "procedural", competency: BIN, says: "The binomial coefficients were left out of the middle terms.", predict: Array.from({ length: n + 1 }, (_, i) => T ** (n - i) * a ** i).reduce((x, y) => x + y, 0) });
+        if (a < 0) out.push({ id: "signs-lost", kind: "procedural", competency: EXPN, says: `All the terms were added; the odd powers of ${n_(a)} are negative, so the signs alternate.`, predict: (T - a) ** n });
+      } else {
+        const x = a / 100;
+        out.push({ id: "two-terms", kind: "procedural", competency: BIN, says: `Only 1 + nx was used; the question asks for three terms, so ⁿC₂x² = ${dec4(choose(n, 2) * x * x)} is added too.`, predict: (10000 + 100 * n * a) / 10000 });
+        out.push({ id: "n-for-nc2", kind: "recall", competency: BIN, says: `The x² term was given the coefficient n = ${n}; it is ⁿC₂ = ${choose(n, 2)}.`, predict: (10000 + 100 * n * a + n * a * a) / 10000 });
+        out.push({ id: "x-not-squared", kind: "procedural", competency: EXPN, says: `In the third term x was not squared: (${dec4(x)})² = ${dec4(x * x)}.`, predict: Math.round((1 + n * x + choose(n, 2) * x) * 1e6) / 1e6 });
+      }
+      return out.filter((b) => b.predict !== ans);
+    },
+    distractors: (p) => (p[0] === 0 ? [bappAns(p) + 10 ** p[1], bappAns(p) - 1] : [Math.round((bappAns(p) + 0.01) * 1e4) / 1e4]),
+    variants: ([q, k, a, n]) => [[q, k, -a, n], [q, k, a, n + 1]].filter(bappOk),
+    explain: (s) => (s.id === "terms" ? `The terms ⁿCᵣ (10ᵏ)ⁿ⁻ʳ aʳ are ${(s.inputs as number[]).map(n_).join(", ")}; they add up to ${s.value}` : `1 + nx + ⁿC₂x² = 1 + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    domain: D_BAPP,
+    keep: bappOk,
+    difficulty: ([q, k, a, n]) => (q === 0 && k === 1 ? 1 : q === 1 && a > 0 ? 2 : n >= 5 ? 3 : 2),
+    word: (p) => bappText(p, true),
+    teach: {
+      idea: "Writing a number close to a power of 10 as 10ᵏ ± a makes the binomial expansion easy to work out exactly. For (1 + x)ⁿ with x small, the terms x², x³, … shrink fast, so 1 + nx + ⁿC₂x² is already a good approximation.",
+      method: "Exact: expand (10ᵏ + a)ⁿ term by term (keeping signs) and add. Approximation: write the base as 1 + x, work out nx and ⁿC₂x², and add them to 1.",
+      alternatives: [
+        { id: "size", title: "Watch the terms shrink", kind: "conceptual", text: ["For x = 0.02 and n = 8: nx = 0.16, ⁿC₂x² = 0.0112, ⁿC₃x³ ≈ 0.0004.", "Each term is much smaller than the one before, so three terms give a close value."] },
+        { id: "check", title: "Check with multiplication", kind: "procedural", text: ["For a small n, multiply the number by itself n times.", "Compare with your binomial working: the exact values agree, the approximation is close."] },
+      ],
+    },
+    limits: "Bases 10ᵏ ± a with |a| ≤ 3 and powers up to 5; three-term approximations of (1 ± a/100)ⁿ.",
+  },
+  // ============================================================ middle terms
+  {
+    id: "aobinmid",
+    arity: 4,
+    title: "The middle term or terms of (ax + b)ⁿ",
+    competency: BIN,
+    type: "exact",
+    mc: true,
+    parse: none,
+    // [a, b, n, s]: n even: the middle term; n odd: the first (s = 0) or second (s = 1) of the two middle terms
+    reject: (p) => (bmidOk(p) ? null : "(ax + b)ⁿ with a from 1 to 3, b from −3 to 3 (not 0), n from 4 to 9."),
+    prompt: ([a, b, n, s]) => (n % 2 === 0 ? `Find the middle term in the expansion of (${lin(a, b)})${sup(n)}.` : `The expansion of (${lin(a, b)})${sup(n)} has two middle terms. Find the ${s ? "second" : "first"} of them (the terms are written in descending powers of x).`),
+    solve: (p) => {
+      const [a, b, n] = p;
+      const r = bmidR(p);
+      return {
+        steps: [
+          { id: "which", op: "count", competency: BIN, inputs: [n, r + 1], value: r },
+          { id: "term", op: "write", competency: BIN, inputs: [n, r], value: `${sup(n)}C${sub(r)} (${lin(a, 0)})${sup(n - r)} (${n_(b)})${sup(r)}` },
+          { id: "value", op: "evaluate", competency: BIN, inputs: [choose(n, r), a ** (n - r), b ** r], value: bmidTerm(a, b, n, r) },
+        ],
+        answer: bmidTerm(a, b, n, r),
+      };
+    },
+    // independent: expand by multiplying (ax + b) by itself n times, take the term in the middle position(s), and compare at several x
+    validate: ([a, b, n, s], v) => {
+      if (typeof v !== "string") return false;
+      let c = [1];
+      for (let i = 0; i < n; i++) c = Array.from({ length: c.length + 1 }, (_, j) => (j < c.length ? c[j] * a : 0) + (j > 0 ? c[j - 1] * b : 0));
+      // c[j] is the coefficient of xⁿ⁻ʲ; the terms in order are j = 0 … n
+      const pos = n % 2 === 0 ? n / 2 : (n - 1) / 2 + s;
+      try {
+        const e = parse(v);
+        return [1.3, -0.7, 2.1].every((x) => near(evaluate(e, { x }), c[pos] * x ** (n - pos), 1e-9));
+      } catch {
+        return false;
+      }
+    },
+    bugs: (p) => {
+      const [a, b, n] = p;
+      const r = bmidR(p);
+      const ans = bmidTerm(a, b, n, r);
+      const out: Bug[] = [];
+      if (n % 2 === 0) out.push({ id: "term-number", kind: "procedural", competency: BIN, says: `The ${ORD(n / 2)} term was taken; with ${n + 1} terms the middle one is the ${ORD(n / 2 + 1)}, T${sub(n / 2 + 1)}, which uses r = ${n / 2}.`, predict: bmidTerm(a, b, n, r - 1) });
+      else out.push({ id: "other-middle", kind: "procedural", competency: BIN, says: `The other middle term was given; the ${p[3] ? "second" : "first"} middle term is T${sub(r + 1)}.`, predict: bmidTerm(a, b, n, p[3] ? r - 1 : r + 1) });
+      out.push({ id: "powers-left-out", kind: "procedural", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was used as the coefficient; ${a === 1 ? "" : `${a}${sup(n - r)} and `}(${n_(b)})${sup(r)} belong to it too.`, predict: mono(choose(n, r), n - r) });
+      if (b < 0 && r % 2 === 1) out.push({ id: "sign-lost", kind: "procedural", competency: EXPN, says: `(${n_(b)})${sup(r)} is negative, because ${r} is odd.`, predict: bmidTerm(a, -b, n, r) });
+      return out.filter((x) => x.predict !== ans);
+    },
+    distractors: ([a, b, n, s]) => {
+      const r = bmidR([a, b, n, s]);
+      const c = choose(n, r) * a ** (n - r) * b ** r;
+      return [mono(-c, n - r), mono(c, n - r + 1), mono(2 * c, n - r)];
+    },
+    variants: ([a, b, n, s]) => [[a, b, n + 1, 0], [a, -b, n, s]].filter(bmidOk),
+    explain: (s) => (s.id === "which" ? `There are ${Number(s.inputs[0]) + 1} terms; the one asked for is T${sub(Number(s.inputs[1]))}, so r = ${s.value}` : s.id === "term" ? `T${sub(Number(s.inputs[1]) + 1)} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} × ${par2(Number(s.inputs[2]))} gives ${s.value}`),
+    domain: D_BMID,
+    keep: bmidOk,
+    difficulty: ([a, b, n]) => (a === 1 && b > 0 ? 1 : n % 2 ? 3 : 2),
+    teach: {
+      idea: "(u + v)ⁿ has n + 1 terms, T₍ᵣ₊₁₎ = ⁿCᵣ uⁿ⁻ʳ vʳ. If n is even there is one middle term, T₍ₙ/₂₊₁₎; if n is odd there are two, T₍₍ₙ₊₁₎/₂₎ and T₍₍ₙ₊₃₎/₂₎.",
+      method: "Count the terms, find which one is in the middle and its r, then work out ⁿCᵣ (ax)ⁿ⁻ʳ bʳ with signs.",
+      alternatives: [
+        { id: "list-r", title: "List the values of r", kind: "procedural", text: ["Write r = 0, 1, …, n in a row; the middle of the row is the middle term.", "For an odd n the two numbers in the middle give the two middle terms."] },
+        { id: "symmetry", title: "Use the symmetry", kind: "conceptual", text: ["The coefficients ⁿCᵣ are symmetric, so the middle term has the largest binomial coefficient.", "For n odd the two middle terms have equal binomial coefficients ⁿCₖ = ⁿCₖ₊₁."] },
+      ],
+    },
+    limits: "(ax + b)ⁿ with n from 4 to 9; middle terms of expressions in x and 1/x are left out.",
+  },
+  // ============================================================ is it a GP?
+  {
+    id: "aogpid",
+    arity: 4,
+    title: "Identifying a geometric progression",
+    competency: GP,
+    type: "choice",
+    parse: none,
+    // [a, ri, flip, s]: a GP a·rⁱ (written backwards when flip = 1) and three sequences with the same first two terms
+    reject: (p) => (gpidOk(p) ? null : "A GP with ratio ±2 or ±3 (or its reverse) and three look-alike sequences."),
+    prompt: () => "All four sequences below start with the same two terms. Which one is a geometric progression?",
+    choices: gpidChoices,
+    solve: (p) => {
+      const G = gpidSeqs(p)[0];
+      return { steps: [{ id: "ratio", op: "divide", competency: GP, inputs: [G[1], G[0]], value: fr(G[1] / G[0]) }, { id: "check", op: "check", competency: GP, inputs: [seqS(G)], value: gpidChoices(p).indexOf(seqS(G)) }], answer: gpidChoices(p).indexOf(seqS(G)) };
+    },
+    // independent: read each option's numbers back and test every ratio of consecutive terms (cross-multiplying)
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const opts = gpidChoices(p).map((o) => o.replace(", …", "").split(", ").map((t) => Number(t.replace("−", "-"))));
+      const isGP = (xs: number[]) => xs.every((x) => x !== 0) && xs.slice(2).every((_, i) => xs[i + 1] * xs[i + 1] === xs[i] * xs[i + 2]);
+      const hits = opts.map(isGP);
+      return hits.filter(Boolean).length === 1 && hits[v];
+    },
+    bugs: (p) => {
+      const [G, ap, brk, third] = gpidSeqs(p);
+      const ch = gpidChoices(p);
+      return [
+        { id: "difference-as-ratio", kind: "conceptual", competency: GP, says: `A constant difference was taken as a constant ratio; ${seqS(ap)} adds ${n_(ap[1] - ap[0])} each time (an AP), while a GP multiplies by the same number each time.`, predict: ch.indexOf(seqS(ap)) },
+        { id: "few-terms-checked", kind: "procedural", competency: GP, says: `Only the first three terms were checked; in ${seqS(brk)} the ratio changes after the third term. Check every pair of neighbours.`, predict: ch.indexOf(seqS(brk)) },
+        { id: "pattern-not-ratio", kind: "procedural", competency: GP, says: `${seqS(third)} follows a pattern, but not 'multiply by the same number'; divide each term by the one before to test it.`, predict: ch.indexOf(seqS(third)) },
+      ];
+    },
+    variants: ([a, ri, f, s]) => [[a, ri, 1 - f, s], [a, ri, f, 1 - s]].filter(gpidOk),
+    explain: (s) => (s.id === "ratio" ? `Second term ÷ first term = ${s.value}` : `Only ${s.inputs[0]} keeps that same ratio between every pair of neighbouring terms`),
+    domain: D_GPID,
+    keep: gpidOk,
+    difficulty: ([, ri, f]) => (ri <= 1 && !f ? 1 : f ? 3 : 2),
+    teach: {
+      idea: "A sequence is a geometric progression when each term (after the first) is the previous term multiplied by the same non-zero number r, the common ratio: a, ar, ar², ar³, …",
+      method: "Divide every term by the term before it. If all the ratios are equal, it is a GP; if any ratio is different, it is not. Checking only the first two terms is never enough.",
+      alternatives: [
+        { id: "ratios", title: "A row of ratios", kind: "procedural", text: ["Under each pair of neighbouring terms write term ÷ previous term.", "A GP has the same number all along that row."] },
+        { id: "growth", title: "Repeated growth", kind: "conceptual", text: ["A GP grows (or shrinks) by the same factor every step, like money at compound interest.", "An AP grows by the same amount every step, like a fixed weekly saving."] },
+      ],
+    },
+    limits: "Whole-number GPs with ratio ±2, ±3 or their reciprocals; fractional terms are left out.",
+  },
+  // ============================================================ GP growth and decay in context
+  {
+    id: "aogpgr",
+    arity: 4,
+    title: "Growth, depreciation and compound interest with geometric progressions",
+    competency: GP,
+    type: "fraction",
+    decimals: true,
+    mc: true,
+    parse: none,
+    // [q, pi, ri, n]: q 0 population growth, 1 depreciation, 2 compound interest (rate GPRATE[ri]); 3 doubling or tripling (factor ri + 2)
+    reject: (p) => (gpgrOk(p) ? null : "Growth or decay by 5 %, 8 %, 10 % or 20 % for 2 to 4 years with an exact answer, or doubling/tripling for 3 to 8 hours."),
+    prompt: (p) => gpgrText(p),
+    solve: (p) => {
+      const [q, pi, ri, n] = p;
+      const P = GPP[q][pi];
+      const ratio = q === 3 ? ri + 2 : 1 + (q === 1 ? -GPRATE[ri] : GPRATE[ri]) / 100;
+      return {
+        steps: [
+          { id: "ratio", op: "write", competency: GP, inputs: [q, q === 3 ? ri + 2 : GPRATE[ri]], value: ratio },
+          { id: "term", op: "evaluate", competency: GP, inputs: [P, ratio, n], value: gpgrVal(p) },
+        ],
+        answer: gpgrVal(p),
+      };
+    },
+    // independent: work year by year (or hour by hour), adding or taking away the percentage each time
+    validate: ([q, pi, ri, n], v) => {
+      if (typeof v !== "number") return false;
+      let x = GPP[q][pi];
+      for (let t = 0; t < n; t++) x = q === 3 ? x * (ri + 2) : x + ((q === 1 ? -1 : 1) * x * GPRATE[ri]) / 100;
+      return near(v, x, 1e-10);
+    },
+    bugs: (p) => {
+      const [q, pi, ri, n] = p;
+      const P = GPP[q][pi];
+      const ans = gpgrVal(p);
+      const out: Bug[] = [];
+      if (q < 3) {
+        const r = GPRATE[ri] * (q === 1 ? -1 : 1);
+        out.push({ id: "simple-growth", kind: "conceptual", competency: GP, says: `The change was worked out on the starting amount every year (${P} × ${Math.abs(r)}% each year); each year's change is on the amount at the start of THAT year, so the amounts multiply by ${dec4(1 + r / 100)} each time.`, predict: (P * (100 + n * r)) / 100 });
+        out.push({ id: "n-minus-one", kind: "procedural", competency: GP, says: `The power ${n - 1} was used, as for the ${ORD(n)} term of a GP starting at ${P}; after ${n} years the ratio has been applied ${n} times (that is the ${ORD(n + 1)} term).`, predict: (P * (100 + r) ** (n - 1)) / 100 ** (n - 1) });
+        if (q === 1) out.push({ id: "decay-as-growth", kind: "conceptual", competency: GP, says: `The value was increased by ${-r}% each year; depreciation takes the percentage away, so the ratio is ${dec4(1 + r / 100)}.`, predict: (P * (100 - r) ** n) / 100 ** n });
+      } else {
+        const k = ri + 2;
+        out.push({ id: "linear", kind: "conceptual", competency: GP, says: `${P} × ${k} × ${n} was worked out; the number is multiplied by ${k} every hour, so it is ${P} × ${k}${sup(n)}.`, predict: P * k * n });
+        out.push({ id: "n-minus-one", kind: "procedural", competency: GP, says: `${k}${sup(n - 1)} was used; after ${n} hours there have been ${n} multiplications by ${k}.`, predict: P * k ** (n - 1) });
+      }
+      return out.filter((b) => !near(Number(b.predict), ans));
+    },
+    distractors: (p) => [Math.round(gpgrVal(p) * 1.1 * 100) / 100, Math.round(gpgrVal(p) * 0.95 * 100) / 100],
+    variants: ([q, pi, ri, n]) => [[q, pi, ri, n + 1], [q, (pi + 1) % 6, ri, n]].filter(gpgrOk),
+    explain: (s) => (s.id === "ratio" ? `Each ${Number(s.inputs[0]) === 3 ? "hour" : "year"} the amount is multiplied by the same number, r = ${dec4(Number(s.value))}: a geometric progression` : `After ${s.inputs[2]} steps: ${s.inputs[0]} × ${dec4(Number(s.inputs[1]))}${sup(Number(s.inputs[2]))} = ${dec4(Number(s.value))}`),
+    domain: D_GPGR,
+    keep: gpgrOk,
+    difficulty: ([q, , , n]) => (q === 3 && n <= 4 ? 1 : q === 1 ? 3 : 2),
+    word: (p) => gpgrText(p, true),
+    teach: {
+      idea: "Growing by r% a year multiplies the amount by 1 + r/100 every year; losing r% multiplies it by 1 − r/100. So the amounts at the start, after 1 year, after 2 years, … form a GP: P, PR, PR², …, and after n years the amount is PRⁿ.",
+      method: "Write the common ratio R (1.1 for 10% growth, 0.9 for 10% decrease), then work out P × Rⁿ. Note it is the (n + 1)th term, because the first term is the starting amount.",
+      alternatives: [
+        { id: "year-table", title: "A year-by-year table", kind: "procedural", text: ["Write the amount at the start, then add (or take away) the percentage of THAT amount for each year.", "The table's numbers are the terms of the GP."] },
+        { id: "simple-vs-compound", title: "Compare with simple growth", kind: "conceptual", text: ["Simple growth adds the same amount every year: an AP.", "Compound growth adds a percentage of the current amount: a GP, which pulls ahead over time."] },
+      ],
+    },
+    limits: "Rates 5 %, 8 %, 10 % and 20 % over 2 to 4 years with exact answers, and doubling or tripling; finding the number of years needs logarithms and is left out.",
+  },
+  // ============================================================ using the sum to infinity
+  {
+    id: "aogpuse",
+    arity: 4,
+    title: "Using the sum to infinity: recurring decimals, a bouncing ball, nested shapes",
+    competency: GP,
+    type: "fraction",
+    mc: true,
+    parse: none,
+    // [q, a, b, c]: q 0 the decimal c.(block b of length a) recurring; 1 a ball dropped from a m rising BOUNCE[b]; 2 squares from side a; 3 triangles from area 3a
+    reject: (p) => (gpuseOk(p) ? null : "A recurring decimal with a block of 1 or 2 digits, a bouncing ball, or shapes formed by joining midpoints."),
+    prompt: (p) => gpuseText(p),
+    solve: (p) => {
+      const [q, a, b, c] = p;
+      if (q === 0) {
+        const first = b / 10 ** a;
+        return { steps: [{ id: "series", op: "write", competency: GP, inputs: [fr(first), `1/${10 ** a}`], value: fr(first) }, { id: "sum", op: "divide", competency: GP, inputs: [fr(first), fr(1 - 1 / 10 ** a)], value: fr(b / (10 ** a - 1)) }, ...(c ? [{ id: "whole", op: "add", competency: GP, inputs: [c], value: fr(gpuseAns(p)) } as Step] : [])], answer: gpuseAns(p) };
+      }
+      if (q === 1) {
+        const [s, t] = BOUNCE[b];
+        return { steps: [{ id: "ups", op: "sum", competency: GP, inputs: [fr((a * s) / t), `${s}/${t}`], value: fr((a * s) / (t - s)) }, { id: "total", op: "add", competency: GP, inputs: [a, fr((2 * a * s) / (t - s))], value: fr(gpuseAns(p)) }], answer: gpuseAns(p) };
+      }
+      return { steps: [{ id: "ratio", op: "divide", competency: GP, inputs: [q === 2 ? "1/2" : "1/4"], value: q === 2 ? 0.5 : 0.25 }, { id: "sum", op: "divide", competency: GP, inputs: [q === 2 ? a * a : 3 * a, q === 2 ? "1/2" : "3/4"], value: gpuseAns(p) }], answer: gpuseAns(p) };
+    },
+    // independent: add up the first 3000 terms of the series directly
+    validate: ([q, a, b, c], v) => {
+      if (typeof v !== "number") return false;
+      let s = 0;
+      if (q === 0) {
+        s = c;
+        for (let i = 1; i <= 3000 / a && i < 200; i++) s += b / 10 ** (a * i);
+      } else if (q === 1) {
+        const [u, t] = BOUNCE[b];
+        let h = a;
+        s = a;
+        for (let i = 0; i < 3000; i++) {
+          h *= u / t;
+          s += 2 * h;
+        }
+      } else {
+        let A = q === 2 ? a * a : 3 * a;
+        for (let i = 0; i < 3000; i++) {
+          s += A;
+          A *= q === 2 ? 0.5 : 0.25;
+        }
+      }
+      return near(v, s, 1e-9);
+    },
+    bugs: (p) => {
+      const [q, a, b, c] = p;
+      const ans = gpuseAns(p);
+      const out: Bug[] = [];
+      if (q === 0) {
+        out.push({ id: "first-term-only", kind: "conceptual", competency: GP, says: `Only the first block was turned into a fraction (${b}/${10 ** a}); the block repeats for ever, so all the terms of the series must be added.`, predict: c + b / 10 ** a });
+        if (a === 2) out.push({ id: "nines", kind: "procedural", competency: GP, says: "The two-digit block was put over 9; a block of two digits repeating goes over 99.", predict: c + b / 9 });
+      }
+      if (q === 1) {
+        const [s, t] = BOUNCE[b];
+        out.push({ id: "falls-only", kind: "conceptual", competency: GP, says: "Only the distances going down were added; after each bounce the ball goes up AND comes down the same height.", predict: (a * t) / (t - s) });
+        out.push({ id: "first-drop-doubled", kind: "procedural", competency: GP, says: `The first drop of ${a} m was counted twice; the ball is dropped (only down), and each later height is travelled twice.`, predict: (2 * a * t) / (t - s) });
+      }
+      if (q === 2) {
+        out.push({ id: "first-left-out", kind: "procedural", competency: GP, says: `The first square was left out; its area ${a * a} cm² is the first term.`, predict: a * a });
+        out.push({ id: "side-ratio", kind: "conceptual", competency: GP, says: "The areas were taken to go down by 1/4; joining midpoints makes the side 1/√2 times as long, so each area is HALF the one before.", predict: (4 * a * a) / 3 });
+      }
+      if (q === 3) {
+        out.push({ id: "first-left-out", kind: "procedural", competency: GP, says: `The first triangle was left out; its area ${3 * a} cm² is the first term.`, predict: a });
+        out.push({ id: "half-ratio", kind: "conceptual", competency: GP, says: "Each triangle was taken as half the one before; joining midpoints halves the sides, so the area is a QUARTER.", predict: 6 * a });
+      }
+      return out.filter((x) => !near(Number(x.predict), ans));
+    },
+    distractors: (p) => [gpuseAns(p) + 1, gpuseAns(p) * 2],
+    variants: ([q, a, b, c]) => [[q, a + 1, b, c]].filter(gpuseOk),
+    explain: (s) => (s.id === "series" ? `The recurring part is ${s.inputs[0]} + ${s.inputs[0]} × ${s.inputs[1]} + …: a GP with r = ${s.inputs[1]}` : s.id === "sum" ? `S∞ = a/(1 − r): ${s.inputs[0]} ÷ ${s.inputs[1]} = ${typeof s.value === "number" ? fr(s.value) : s.value}` : s.id === "whole" ? `Add the whole-number part ${s.inputs[0]}: ${s.value}` : s.id === "ups" ? `The heights after the bounces form a GP: ${s.inputs[0]} + … = ${s.value}` : s.id === "total" ? `Total = first drop + 2 × (sum of the rebound heights) = ${s.value}` : `Each term is the one before × ${s.inputs[0]}`),
+    domain: D_GPUSE,
+    keep: gpuseOk,
+    difficulty: ([q, a, , c]) => (q === 2 ? 1 : q === 0 ? (a === 1 && c === 0 ? 1 : 2) : 3),
+    word: (p) => gpuseText(p, true),
+    teach: {
+      idea: "Many situations hide an infinite geometric series with |r| < 1: a recurring decimal 0.4545… = 45/100 + 45/10000 + …, the heights of a bouncing ball, the areas of shapes that shrink by the same factor each time. Its sum is a/(1 − r).",
+      method: "Write the first term a and the ratio r of the repeating part, check |r| < 1, use a/(1 − r), and then add any part that is not repeated (the whole number, or the first drop of the ball).",
+      alternatives: [
+        { id: "draw", title: "Write out the first few terms", kind: "procedural", text: ["Write the first three or four terms of the series in numbers.", "Divide the second by the first to find r; check the third against the second."] },
+        { id: "algebra", title: "Check by algebra", kind: "conceptual", text: ["For x = 0.4545…, 100x − x = 45, so x = 45/99.", "This gives the same fraction as the geometric series."] },
+      ],
+    },
+    limits: "Blocks of one or two digits, ratios of the form p/q for the ball, and midpoint squares and triangles.",
+  },
+  // ============================================================ convergence
+  {
+    id: "aogpcv",
+    arity: 3,
+    title: "Does a geometric series converge, and to what?",
+    competency: GP,
+    type: "choice",
+    parse: none,
+    // [a, p, q]: the series a + ar + ar² + … with r = p/q
+    reject: (p) => (gpcvOk(p) ? null : "Geometric series with first term from −9 to 9 and ratio p/q (|r| ≤ 3, r ≠ 1)."),
+    prompt: ([a, p, q]) => `Consider the geometric series ${series([a, (a * p) / q, (a * p * p) / (q * q)])} + ⋯. Which statement is true?`,
+    choices: gpcvChoices,
+    solve: (p) => {
+      const lab = gpcvLabels(p)[gpcvRight(p)];
+      return { steps: [{ id: "ratio", op: "divide", competency: GP, inputs: [fr(p[1] / p[2])], value: Math.abs(p[1]) < p[2] ? 1 : 0 }, { id: "pick", op: "compare", competency: GP, inputs: [lab], value: gpcvChoices(p).indexOf(lab) }], answer: gpcvChoices(p).indexOf(lab) };
+    },
+    // independent: add up terms; a convergent series settles (S₂₀₀₀ ≈ S₄₀₀₀), a divergent one does not; compare the settled sum with the option
+    validate: ([a, p, q], v) => {
+      if (typeof v !== "number") return false;
+      let s = 0;
+      let t = a;
+      const sums: number[] = [];
+      for (let i = 1; i <= 4000; i++) {
+        s += t;
+        t *= p / q;
+        if (i === 2000 || i === 2001 || i === 4000) sums.push(s);
+        if (!Number.isFinite(s) || Math.abs(s) > 1e12) break;
+      }
+      const opt = gpcvChoices([a, p, q])[v];
+      if (!opt) return false;
+      const conv = sums.length === 3 && Math.abs(sums[0] - sums[2]) < 1e-9 && Math.abs(sums[1] - sums[2]) < 1e-9;
+      if (!conv) return opt.includes("diverges");
+      const m = opt.match(/is (−?\d+(?:\/\d+)?)$/);
+      return !!m && near(Number(m[1].replace("−", "-").split("/")[0]) / Number(m[1].split("/")[1] ?? 1), sums[2], 1e-9);
+    },
+    bugs: (p) => {
+      const ch = gpcvChoices(p);
+      const L = gpcvLabels(p);
+      const right = gpcvRight(p);
+      const out: Bug[] = [];
+      if (right === 2) out.push({ id: "formula-without-check", kind: "conceptual", competency: GP, says: `a/(1 − r) was used without checking |r| < 1; here r = ${fr(p[1] / p[2])}, so the terms do not shrink and there is no sum to infinity.`, predict: ch.indexOf(L[0]) });
+      if (right === 0 && p[1] < 0) out.push({ id: "alternating-diverges", kind: "conceptual", competency: GP, says: "The changing signs were taken to mean the series has no sum; with |r| < 1 the terms shrink to 0 and the series still converges.", predict: ch.indexOf(L[2]) });
+      if (right === 0) out.push({ id: "one-plus-r", kind: "procedural", competency: GP, says: "1 + r was used in the formula; the sum to infinity is a/(1 − r).", predict: ch.indexOf(L[1]) });
+      if (right === 0) out.push({ id: "first-term-left-out", kind: "procedural", competency: GP, says: "The first term was taken as ar; the series starts with a, so S∞ = a/(1 − r).", predict: ch.indexOf(L[3]) });
+      return out.filter((b) => b.predict !== ch.indexOf(L[right]));
+    },
+    variants: ([a, p, q]) => [[a, -p, q], [a, p, q + 1]].filter(gpcvOk),
+    explain: (s) => (s.id === "ratio" ? `r = ${s.inputs[0]}: |r| ${s.value ? "<" : "≥"} 1, so the series ${s.value ? "converges" : "diverges"}` : `So: ${s.inputs[0]}`),
+    domain: D_GPCV,
+    keep: gpcvOk,
+    difficulty: ([, p, q]) => (Math.abs(p) < q ? (p > 0 ? 1 : 2) : 3),
+    teach: {
+      idea: "A geometric series a + ar + ar² + … converges (has a sum to infinity) exactly when |r| < 1; then the terms shrink to 0 and S∞ = a/(1 − r). If |r| ≥ 1 the terms do not shrink and the series diverges.",
+      method: "Find r = (second term) ÷ (first term). If |r| < 1 work out a/(1 − r); otherwise say it diverges — never use the formula without this check.",
+      alternatives: [
+        { id: "partial", title: "Watch the partial sums", kind: "conceptual", text: ["Add 1, 2, 3, … terms and write each total.", "If the totals settle down to one number the series converges; if they grow or keep jumping, it diverges."] },
+        { id: "r-line", title: "Place r on a number line", kind: "procedural", text: ["Mark −1 and 1.", "Strictly between them: converges. At or beyond them: diverges."] },
+      ],
+    },
+    limits: "Geometric series only; convergence tests for other series are beyond this level.",
+  },
+  // ============================================================ discriminant: parameter for equal roots
+  {
+    id: "aodk",
+    arity: 3,
+    title: "Finding a parameter for which a quadratic has equal roots",
+    competency: DISC,
+    type: "fraction",
+    mc: true,
+    parse: none,
+    // [f, a, b]: f 0 ax² − kx + b (k > 0), 1 ax² − bx + k, 2 kx² − bx + a
+    reject: (p) => (dkOk(p) ? null : "Equal roots with k the coefficient of x (with 4ab a square), the constant, or the coefficient of x²."),
+    prompt: (p) => dkText(p),
+    solve: (p) => {
+      const [f, a, b] = p;
+      const cond = f === 0 ? `k² − ${4 * a * b} = 0` : f === 1 ? `${b * b} − ${4 * a}k = 0` : `${b * b} − ${4 * a}k = 0`;
+      return { steps: [{ id: "disc", op: "write", competency: DISC, inputs: [f], value: cond }, { id: "solve", op: "solve", competency: f === 0 ? QUAD : LIN, inputs: [cond], value: dkAns(p) }], answer: dkAns(p) };
+    },
+    // independent: put k back: the quadratic must have a repeated root (it equals a constant times (x − root)², checked at three points)
+    validate: ([f, a, b], v) => {
+      if (typeof v !== "number" || v === 0) return false;
+      const [A, B, C] = f === 0 ? [a, -v, b] : f === 1 ? [a, -b, v] : [v, -b, a];
+      if (f === 0 && v < 0) return false;
+      const root = -B / (2 * A);
+      return [0.3, 1.7, -2.2].every((x) => near(A * x * x + B * x + C, A * (x - root) ** 2, 1e-9));
+    },
+    bugs: (p) => {
+      const [f, a, b] = p;
+      const ans = dkAns(p);
+      const out: Bug[] = [];
+      if (f === 0) {
+        if (isSq(a * b)) out.push({ id: "four-forgotten", kind: "recall", competency: DISC, says: `The discriminant was taken as k² − ac; it is b² − 4ac, so k² = ${4 * a * b}.`, predict: Math.sqrt(a * b) });
+        out.push({ id: "no-root", kind: "procedural", competency: QUAD, says: `k² = ${4 * a * b} was found but the square root was not taken.`, predict: 4 * a * b });
+      } else {
+        out.push({ id: "four-forgotten", kind: "recall", competency: DISC, says: `The discriminant was taken as b² − ac; it is b² − 4ac.`, predict: (b * b) / a });
+        out.push({ id: "b-not-squared", kind: "procedural", competency: DISC, says: `b was not squared: the discriminant uses b² = ${b * b}.`, predict: b / (4 * a) });
+      }
+      return out.filter((x) => !near(Number(x.predict), ans));
+    },
+    distractors: (p) => [dkAns(p) * 2, dkAns(p) / 2],
+    range: [0, Infinity],
+    variants: ([f, a, b]) => [[f, a, b + 1], [(f + 1) % 3, a, b]].filter(dkOk),
+    explain: (s) => (s.id === "disc" ? `Equal roots ⇔ the discriminant b² − 4ac is 0: ${s.value}` : `Solve: k = ${fr(Number(s.value))}`),
+    domain: D_DK,
+    keep: dkOk,
+    difficulty: ([f]) => (f === 0 ? 2 : f === 1 ? 1 : 2),
+    word: (p) => dkText(p, true),
+    teach: {
+      idea: "ax² + bx + c = 0 has two equal real roots exactly when its discriminant b² − 4ac is 0 (then the parabola just touches the x-axis). If a coefficient contains k, setting the discriminant to 0 gives an equation for k.",
+      method: "Write b² − 4ac with k in it, set it equal to 0 and solve for k. Keep only the values the question allows (positive k, or k ≠ 0).",
+      alternatives: [
+        { id: "touch", title: "The graph touches the axis", kind: "conceptual", text: ["Equal roots mean the graph of y = ax² + bx + c meets the x-axis at exactly one point, its vertex.", "So the least (or greatest) value of the quadratic is 0."] },
+        { id: "square", title: "A perfect square", kind: "procedural", text: ["Equal roots mean ax² + bx + c = a(x − α)².", "Compare coefficients: b = −2aα and c = aα², which gives b² = 4ac."] },
+      ],
+    },
+    limits: "One unknown coefficient at a time with small numbers; real-roots conditions (inequalities in k) are in aodkr.",
+  },
+  {
+    id: "aodkr",
+    arity: 3,
+    title: "Values of a parameter for real or no real roots",
+    competency: DISC,
+    type: "interval",
+    mc: true,
+    parse: none,
+    // [f, a, b]: f 0 ax² + bx + k real roots, 1 ax² + kx + b real roots, 2 and 3 no real roots
+    reject: (p) => (dkrOk(p) ? null : "ax² + bx + k with |b| ≤ 9, or ax² + kx + b with ab a perfect square."),
+    prompt: dkrText,
+    solve: (p) => {
+      const [f, a, b] = p;
+      const cond = f % 2 === 0 ? `${b * b} − ${4 * a}k ${f < 2 ? "≥" : "<"} 0` : `k² − ${4 * a * b} ${f < 2 ? "≥" : "<"} 0`;
+      return { steps: [{ id: "disc", op: "write", competency: DISC, inputs: [f], value: cond }, { id: "solve", op: "solve", competency: f % 2 === 0 ? INEQ : NLI, inputs: [cond], value: dkrAns(p) }], answer: dkrAns(p) };
+    },
+    // independent: test every k = j/120 in [−30, 30]: does the quadratic with that k have real roots? (sign of b² − 4ac in whole numbers)
+    validate: ([f, a, b], v) =>
+      agrees(v, (j, N) => {
+        const D = f % 2 === 0 ? b * b * N - 4 * a * j : j * j - 4 * a * b * N * N;
+        return f < 2 ? D >= 0 : D < 0;
+      }, 240),
+    bugs: (p) => {
+      const [f, a, b] = p;
+      const out: Bug[] = [
+        { id: "strictness", kind: "procedural", competency: DISC, says: f < 2 ? "The case of equal roots (discriminant 0) was left out; equal roots are real, so the end point is included." : "The case of equal roots was included; then the roots are real, so the end point is left out.", predict: dkrAns(p, f < 2) },
+        { id: "direction", kind: "conceptual", competency: DISC, says: f < 2 ? "The values giving NO real roots were found; real roots need b² − 4ac ≥ 0." : "The values giving real roots were found; no real roots needs b² − 4ac < 0.", predict: dkrAns(p, f >= 2, true) },
+      ];
+      if (f % 2 === 0) out.push({ id: "four-forgotten", kind: "recall", competency: DISC, says: "The discriminant was taken as b² − ac; it is b² − 4ac.", predict: f < 2 ? ivs([[null, false, (b * b) / a, true]]) : ivs([[(b * b) / a, false, null, false]]) });
+      else out.push({ id: "one-side", kind: "conceptual", competency: NLI, says: `k² ≥ ${4 * a * b} was solved as k ≥ ${2 * Math.sqrt(a * b)} only; k can also be ≤ −${2 * Math.sqrt(a * b)}.`, predict: f < 2 ? ivs([[2 * Math.sqrt(a * b), true, null, false]]) : ivs([[0, true, 2 * Math.sqrt(a * b), false]]) });
+      return out;
+    },
+    distractors: (p) => ["(−∞, ∞)", dkrAns(p, undefined, true)],
+    variants: ([f, a, b]) => [[(f + 2) % 4, a, b]].filter(dkrOk),
+    explain: (s) => (s.id === "disc" ? `${s.inputs[0] === 0 || s.inputs[0] === 1 ? "Real roots" : "No real roots"} ⇔ ${s.value}` : `Solve for k: ${s.value}`),
+    domain: D_DKR,
+    keep: dkrOk,
+    difficulty: ([f]) => (f === 0 ? 1 : f === 2 ? 2 : 3),
+    teach: {
+      idea: "ax² + bx + c = 0 has real roots when b² − 4ac ≥ 0 (two different roots when > 0, equal roots when = 0) and no real roots when b² − 4ac < 0.",
+      method: "Write the discriminant with k in it, write the inequality (≥ 0 for real roots, < 0 for none) and solve it for k; a k² inequality has two parts or one interval.",
+      alternatives: [
+        { id: "parabola", title: "Move the parabola", kind: "conceptual", text: ["Changing the constant term moves the parabola up or down.", "It meets the x-axis (real roots) only while its vertex is on or below the axis (for a > 0)."] },
+        { id: "test", title: "Test a value of k", kind: "procedural", text: ["Pick a k in your interval and one outside.", "Work out b² − 4ac for each; the signs must match the question."] },
+      ],
+    },
+    limits: "One unknown coefficient (the constant or the x coefficient) with small numbers.",
+  },
+  // ============================================================ exponential equations and change of base
+  {
+    id: "aoexpeq",
+    arity: 6,
+    title: "Solving simple exponential equations by writing powers of one base",
+    competency: LOG,
+    type: "fraction",
+    mc: true,
+    parse: none,
+    // [f, ci, i, j, u, w]: f 0 (cⁱ)^(x + u) = (cʲ)^(x + w); f 1 (cⁱ)^x = cᵘ; c = EXB[ci]
+    reject: (p) => (exqOk(p) ? null : "Powers of 2, 3 or 5 up to 625 on each side."),
+    prompt: (p) => exqText(p),
+    solve: (p) => {
+      const [f, ci, i, j, u, w] = p;
+      const c = EXB[ci];
+      const eq = f === 1 ? `${i}x = ${u}` : `${i}${expo(u)} = ${j}${expo(w)}`;
+      return { steps: [{ id: "base", op: "rewrite", competency: EXPN, inputs: [c, i, j], value: eq }, { id: "solve", op: "solve", competency: LIN, inputs: [eq], value: fr(exqAns(p)) }], answer: exqAns(p) };
+    },
+    // independent: substitute the answer and compare both sides with natural logarithms
+    validate: ([f, ci, i, j, u, w], v) => {
+      if (typeof v !== "number") return false;
+      const c = EXB[ci];
+      return f === 1 ? near(v * Math.log(c ** i), u * Math.log(c), 1e-12) : near((v + u) * Math.log(c ** i), (v + w) * Math.log(c ** j), 1e-12);
+    },
+    bugs: (p) => {
+      const [f, , i, j, u, w] = p;
+      const ans = exqAns(p);
+      const out: Bug[] = [];
+      if (f === 1) {
+        out.push({ id: "upside-down", kind: "procedural", competency: EXPN, says: `${i}x = ${u} was solved as x = ${i}/${u}; divide ${u} by ${i}.`, predict: i / u });
+        out.push({ id: "subtract", kind: "procedural", competency: EXPN, says: "The powers were subtracted; (cⁱ)ˣ = c^(ix), so ix = the other power.", predict: u - i });
+      } else {
+        out.push({ id: "bracket", kind: "procedural", competency: EXPN, says: `The power was not multiplied into the whole bracket: (c${sup(i)})^${expo(u)} = c^(${i}${expo(u)}) and (c${sup(j)})^${expo(w)} = c^(${j}${expo(w)}), so every term of the exponent is multiplied.`, predict: (w - u) / (i - j) });
+        out.push({ id: "sign", kind: "procedural", competency: LIN, says: "A sign was lost when the x terms were collected; check by putting your answer back in.", predict: -ans });
+      }
+      return out.filter((x) => x.predict !== ans && Number.isFinite(Number(x.predict)));
+    },
+    distractors: (p) => [exqAns(p) + 1, exqAns(p) - 1],
+    variants: ([f, ci, i, j, u, w]) => [[f, ci, i, j, u + 1, w]].filter(exqOk),
+    explain: (s) => (s.id === "base" ? `Write both sides as powers of ${s.inputs[0]} and equate the powers: ${s.value}` : `x = ${s.value}`),
+    domain: D_EXQ,
+    keep: exqOk,
+    cap: 400,
+    difficulty: ([f, , , , u, w]) => (f === 1 ? 1 : u === 0 || w === 0 ? 2 : 3),
+    word: (p) => exqText(p, true),
+    teach: {
+      idea: "If aᵐ = aⁿ with a > 0, a ≠ 1, then m = n. So an exponential equation whose two sides are powers of the same number becomes an ordinary equation in the powers.",
+      method: "Write each base as a power of one prime (9 = 3², 27 = 3³), use (cⁱ)ᵗ = c^(it) on the whole exponent, equate the exponents and solve.",
+      alternatives: [
+        { id: "logs", title: "Take logarithms", kind: "procedural", text: ["Take log of both sides: (x + u) log A = (x + w) log B.", "With A = cⁱ and B = cʲ, log A = i log c and log B = j log c, which gives the same equation."] },
+        { id: "check", title: "Check the answer", kind: "conceptual", text: ["Put x back into both sides.", "Both sides must come out as the same power of c."] },
+      ],
+    },
+    limits: "Bases that are powers of 2, 3 or 5; equations needing a calculator are left out.",
+  },
+  {
+    id: "aochb",
+    arity: 5,
+    title: "Change of base: products and sums of logarithms",
+    competency: LOG,
+    type: "fraction",
+    mc: true,
+    parse: none,
+    // [q, ci, i, j, bi]: q 0 log_(cⁱ) b × log_b cʲ; q 1 1/log_A X + 1/log_B X with X = (AB)ʲ
+    reject: (p) => (chbOk(p) ? null : "Products of logarithms whose bases and numbers are powers of one prime, or sums of reciprocals of logarithms."),
+    prompt: chbText,
+    solve: (p) => {
+      const [q, ci, i, j, bi] = p;
+      const c = EXB[ci];
+      return q === 0
+        ? { steps: [{ id: "change", op: "rewrite", competency: LOG, inputs: [c ** i, CHBB[bi], c ** j], value: `log ${CHBB[bi]}/log ${c ** i} × log ${c ** j}/log ${CHBB[bi]} = log ${c ** j}/log ${c ** i}` }, { id: "powers", op: "divide", competency: LOG, inputs: [j, i], value: fr(j / i) }], answer: chbAns(p) }
+        : { steps: [{ id: "flip", op: "rewrite", competency: LOG, inputs: [2 + ci, 2 + ci + i], value: `log_X ${2 + ci} + log_X ${2 + ci + i} = log_X ${(2 + ci) * (2 + ci + i)}` }, { id: "value", op: "evaluate", competency: LOG, inputs: [j], value: fr(1 / j) }], answer: chbAns(p) };
+    },
+    // independent: evaluate the logarithms numerically with Math.log
+    validate: ([q, ci, i, j, bi], v) => {
+      if (typeof v !== "number") return false;
+      const c = EXB[ci];
+      const L = (base: number, x: number) => Math.log(x) / Math.log(base);
+      if (q === 0) return near(v, L(c ** i, CHBB[bi]) * L(CHBB[bi], c ** j), 1e-12);
+      const A = 2 + ci;
+      const Bb = A + i;
+      const X = (A * Bb) ** j;
+      return near(v, 1 / L(A, X) + 1 / L(Bb, X), 1e-12);
+    },
+    bugs: ([q, , i, j]) =>
+      q === 0
+        ? [{ id: "upside-down", kind: "procedural", competency: LOG, says: `log ${"c"}ʲ/log cⁱ = j/i was turned upside down; it is ${j}/${i}.`, predict: i / j }].filter((b) => b.predict !== j / i)
+        : [{ id: "not-reciprocal", kind: "procedural", competency: LOG, says: `log_X(AB) = 1/${j} was turned upside down; X = (AB)${sup(j)}, so log_X(AB) = 1/${j}.`, predict: j }, { id: "two-logs", kind: "conceptual", competency: LOG, says: "The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).", predict: 2 / j }].filter((b) => b.predict !== 1 / j),
+    distractors: (p) => [chbAns(p) + 1, -chbAns(p)],
+    variants: ([q, ci, i, j, bi]) => [[q, ci, i, j, (bi + 1) % 5]].filter(chbOk),
+    explain: (s) => (s.id === "change" || s.id === "flip" ? `Change of base: ${s.value}` : `So the value is ${s.value}`),
+    domain: D_CHB,
+    keep: chbOk,
+    difficulty: ([q]) => (q === 0 ? 2 : 3),
+    teach: {
+      idea: "Change of base: log_a x = log x / log a (any base for both). So log_a b × log_b c = log_a c, and 1/log_a x = log_x a.",
+      method: "Rewrite each logarithm as a quotient of logarithms to one base, cancel what is common, then evaluate using powers of the same prime.",
+      alternatives: [
+        { id: "chain", title: "The chain rule for logs", kind: "conceptual", text: ["log_a b × log_b c = log_a c: the middle number cancels, like units in a conversion.", "Then write a and c as powers of one number."] },
+        { id: "numeric", title: "Check with a calculator", kind: "procedural", text: ["Work out each logarithm as log x ÷ log base.", "Multiply or add; the result should be a simple fraction."] },
+      ],
+    },
+    limits: "Bases and numbers built from small primes, so the answers are simple fractions.",
+  },
+  // ============================================================ integration by partial fractions
+  {
+    id: "aopfint",
+    arity: 5,
+    title: "Integrating by partial fractions or by decomposition",
+    competency: PF,
+    type: "antiderivative",
+    mc: true,
+    parse: none,
+    // [q, a, b, A, B]: q 0 ∫ (A/(x − a) + B/(x − b)) written as one fraction; q 1 ∫ (x + A)/(x − a)
+    reject: (p) => (pfiOk(p) ? null : "Two distinct linear factors with whole-number A, B, or (x + k)/(x − a)."),
+    prompt: pfiText,
+    solve: (p) => {
+      const [q, a, b, A, B] = p;
+      return q === 0
+        ? { steps: [{ id: "split", op: "partial-fractions", competency: PF, inputs: [A, a, B, b], value: `${A}/${bx(a)} + ${B}/${bx(b)}` }, { id: "integrate", op: "integrate", competency: "MATH.calculus.integration-methods", inputs: ["∫ 1/(x − a) dx = log|x − a|"], value: pfiAnswer(p) }], answer: pfiAnswer(p) }
+        : { steps: [{ id: "split", op: "divide", competency: PF, inputs: [a + A, a], value: `1 + ${a + A}/${bx(a)}` }, { id: "integrate", op: "integrate", competency: "MATH.calculus.integration-methods", inputs: ["∫ 1/(x − a) dx = log|x − a|"], value: pfiAnswer(p) }], answer: pfiAnswer(p) };
+    },
+    // independent: differentiate the answer numerically (central differences) and compare with the integrand at several x
+    validate: ([q, a, b, A, B], v) => {
+      if (typeof v !== "string") return false;
+      try {
+        const e = parse(v.replace(/\+\s*C\s*$/, ""));
+        const g = (x: number) => (q === 0 ? ((A + B) * x - (A * b + B * a)) / ((x - a) * (x - b)) : (x + A) / (x - a));
+        return [-7.3, -6.1, 6.4, 7.7, 9.2].every((x) => {
+          const h = 1e-5;
+          const d = (evaluate(e, { x: x + h }) - evaluate(e, { x: x - h })) / (2 * h);
+          return Math.abs(d - g(x)) < 1e-5 * Math.max(1, Math.abs(g(x)));
+        });
+      } catch {
+        return false;
+      }
+    },
+    bugs: (p) => {
+      const [q, a, b, A, B] = p;
+      if (q === 0)
+        return [
+          { id: "cover-up-sign", kind: "procedural", competency: PF, says: "In the cover-up step the other factor was worked out the wrong way round, so both partial-fraction numerators came out with the wrong sign.", predict: pfiAnswer([0, a, b, -A, -B]) },
+          ...(A !== B ? [{ id: "swapped", kind: "procedural", competency: PF, says: `A and B were swapped; A goes with ${fac(a)}, found by putting x = ${n_(a)}.`, predict: pfiAnswer([0, a, b, B, A]) } as Bug] : []),
+        ];
+      return [
+        { id: "x-term-left-out", kind: "procedural", competency: PF, says: "The 1 left after dividing was not integrated; ∫ 1 dx = x is part of the answer.", predict: `${logT(a + A, a, true)}` },
+        ...(A !== a + A && A - a !== 0 && A - a !== a + A ? [{ id: "remainder-sign", kind: "procedural", competency: PF, says: `The remainder was worked out as ${n_(A)} − (${n_(a)}); x + ${n_(A)} = (x − ${n_(a)}) + (${n_(A)} + ${n_(a)}).`, predict: `x${logT(A - a, a, false)}` } as Bug] : []),
+      ];
+    },
+    distractors: (p) => (p[0] === 0 ? [pfiAnswer([0, p[1], p[2], p[3], -p[4]]), pfiAnswer([0, p[1], p[2], -p[3], p[4]])] : [`x${logT(-(p[1] + p[3]), p[1], false)}`, `2x${logT(p[1] + p[3], p[1], false)}`]),
+    variants: ([q, a, b, A, B]) => [[q, a, b, A + 1, B]].filter(pfiOk),
+    explain: (s) => (s.id === "split" ? `Write the integrand as ${s.value}` : `Integrate term by term (${s.inputs[0]}): ${s.value} + C`),
+    domain: D_PFI,
+    keep: pfiOk,
+    cap: 400,
+    difficulty: ([q, a, b, A, B]) => (q === 1 ? 1 : A > 0 && B > 0 ? 2 : 3),
+    teach: {
+      idea: "A fraction whose denominator factorises splits into simple fractions A/(x − a), each of which integrates to A log|x − a|. If the top has the same degree as the bottom, divide first.",
+      method: "Factorise the denominator, find A and B (put x = a, then x = b), then integrate each part: ∫ A/(x − a) dx = A log|x − a|. For (x + k)/(x − a), write it as 1 + (a + k)/(x − a).",
+      alternatives: [
+        { id: "differentiate", title: "Check by differentiating", kind: "procedural", text: ["Differentiate your answer: d/dx log|x − a| = 1/(x − a).", "Add the results over a common denominator: you must get the integrand back."] },
+        { id: "compare", title: "Compare coefficients", kind: "conceptual", text: ["Write px + q = A(x − b) + B(x − a).", "Matching the x terms and the constants gives two equations for A and B."] },
+      ],
+    },
+    limits: "Two distinct linear factors, or one linear factor after a division; repeated and quadratic factors are left out.",
   },
 ];
 B15.push(...NEW15);

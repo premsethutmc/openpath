@@ -3128,7 +3128,7 @@ const ssubBack = ([m, c, k, s]: number[]) => `${ssubTan(k, s)}${m === 0 ? "" : `
 const BM_CLOSE = ["Yes: a ∗ b is in S for all a and b in S", "No: some a ∗ b is not in S"];
 const BM_MOD = (k: number) => ["a + b + K", "ab", "a − b", "a + Kb", "ab + a + b", "Kab"].map((t) => t.replace("K", String(k)));
 const BM_MAT = ["AB", "A + B", "AB − BA", "AB + BA", "A − B", "A + B + AB"];
-const BM_BASE: ((a: number, b: number) => number)[] = [(a, b) => (a + b) % 3, (a) => a, (a, b) => (2 * a + 2 * b) % 3, (a, b) => (((a - b) % 3) + 3) % 3, (a, b) => Math.max(a, b), (a, b) => (a * b) % 3, (_, b) => b, (a, b) => (a + 2 * b) % 3];
+const BM_BASE: ((a: number, b: number) => number)[] = [(a, b) => (a + b) % 3, (a) => a, (a, b) => (2 * a + 2 * b) % 3, (a, b) => (((a - b) % 3) + 3) % 3, (a, b) => Math.max(a, b), (a, b) => (a * b) % 3, (_, b) => b, (a, b) => (2 * a + b + 1) % 3];
 const BM_BASE_CAT = [0, 2, 1, 3, 0, 0, 2, 3];
 const PERMS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
 const isPrime = (n: number) => n >= 2 && range(2, Math.floor(Math.sqrt(n))).every((d) => n % d !== 0);
@@ -3139,7 +3139,8 @@ const bmOk = ([kind, n, op, k]: number[]) => {
     if (n !== 0 || op < 0 || op > 7 || k < 0 || k > 11) return false;
     // the same table from another relabelling (with the same letters) is the same question: keep the first
     const t = JSON.stringify(bmTable([2, 0, op, k]).rows);
-    return range(k >= 6 ? 6 : 0, k - 1).every((j) => JSON.stringify(bmTable([2, 0, op, j]).rows) !== t);
+    const half = k >= 6 ? 6 : 0;
+    return range(0, op).every((o) => range(half, half + 5).every((j) => (o === op && j >= k) || JSON.stringify(bmTable([2, 0, o, j]).rows) !== t));
   }
   if (kind === 3) return n === 0 && op >= 0 && op <= 5 && k === 0;
   return false;

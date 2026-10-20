@@ -1515,3 +1515,1299 @@ export const B08: Def[] = [
     limits: "Regular polygons with whole-degree angles meeting at one point; drawing or describing whole tilings is marked by an educator.",
   },
 ];
+
+// ================================================================ gap@1 additions (naming angle pairs, Virahanka rhythms,
+// congruent figures, square and cube identities, numbers by identities, the converse of Pythagoras, generating triples,
+// recognising and using inverse proportion, compound variation, calendar and grid patterns, floor plans on a grid,
+// explicit and recursive rules, coefficients from conditions on zeros, perfect squares, square roots to one decimal place)
+
+const IDN = "MATH.algebra.identities";
+const PZEROS = "MATH.algebra.polynomial-zeros";
+const Bq = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Bug["predict"]): Bug => ({ id, kind, competency, says, predict });
+/** A fixed, well-mixed hash (FNV-1a and a murmur finaliser): option orders and seeded choices that differ by problem. */
+const h8 = (s: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) x = Math.imul(x ^ s.charCodeAt(i), 0x01000193) >>> 0;
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0;
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0;
+  return (x ^ (x >>> 16)) >>> 0;
+};
+const shuffled = <T,>(salt: string, xs: T[]) => [...xs].sort((a, b) => h8(salt + String(a)) - h8(salt + String(b)) || (String(a) < String(b) ? -1 : 1));
+/** The seeds 0 … n − 1 whose problem differs from every earlier seed's (distinct@1), worked out once per key. */
+const uniqueSeeds = (() => {
+  const memo = new Map<string, Set<number>>();
+  return (key: string, n: number, sig: (s: number) => string) => {
+    if (!memo.has(key)) {
+      const seen = new Set<string>();
+      const ok = new Set<number>();
+      for (let s = 0; s < n; s++) {
+        const k = sig(s);
+        if (k && !seen.has(k)) {
+          seen.add(k);
+          ok.add(s);
+        }
+      }
+      memo.set(key, ok);
+    }
+    return memo.get(key)!;
+  };
+})();
+const ww = (x: number) => (x === 1 ? "x" : `${x}x`);
+
+// ---------------------------------------------------------------- naming angle pairs (ahname)
+// an angle's position: line (0 l, 1 m), above (0) or below (1) the line, left (0) or right (1) of the transversal t
+const posOf = (k: number) => ({ L: k >> 2, V: (k >> 1) & 1, S: k & 1 });
+const pos = (L: number, V: number, S: number) => (L << 2) | (V << 1) | S;
+const LABELS = [
+  (k: number) => String([1, 2, 4, 3][k & 3] + 4 * (k >> 2)),
+  (k: number) => "abcdefgh"[k],
+  (k: number) => String([2, 1, 3, 4][k & 3] + 4 * (k >> 2)),
+];
+// scheme 0: at each line top-left 1, top-right 2, bottom-right 3, bottom-left 4 (clockwise); scheme 1: a b / c d row by
+// row; scheme 2: top-right 1, top-left 2, bottom-left 3, bottom-right 4 (anticlockwise)
+const lab = (scheme: number, k: number) => LABELS[scheme](k);
+const RELN = ["corresponding", "alternate interior", "co-interior", "vertically opposite"];
+const interiorPos = (k: number) => {
+  const { L, V } = posOf(k);
+  return (L === 0 && V === 1) || (L === 1 && V === 0);
+};
+const partner = (rel: number, k: number): number | null => {
+  const { L, V, S } = posOf(k);
+  if (rel === 0) return pos(1 - L, V, S);
+  if (rel === 1) return interiorPos(k) ? pos(1 - L, 1 - V, 1 - S) : null;
+  if (rel === 2) return interiorPos(k) ? pos(1 - L, 1 - V, S) : null;
+  return pos(L, 1 - V, 1 - S);
+};
+const relOf = (a: number, b: number) => [0, 1, 2, 3].find((r) => partner(r, a) === b) ?? -1;
+/** The geometry check: the direction of each angle's bisector, with t crossing at 65° (l on y = 1, m on y = 0). */
+function bisector(k: number): [number, number, number] {
+  const { L, V, S } = posOf(k);
+  const t = [Math.cos((65 * Math.PI) / 180), Math.sin((65 * Math.PI) / 180)];
+  // the angle lies between the ray along the line (left or right) and the ray along t (up or down)
+  const along = S === 0 ? -1 : 1;
+  const tray = V === 0 ? 1 : -1;
+  return [along + tray * t[0], tray * t[1], L === 0 ? 1 : 0];
+}
+function classifyGeo(a: number, b: number): number {
+  const [ax, ay, al] = bisector(a);
+  const [bx, by, bl] = bisector(b);
+  const side = (x: number, y: number) => Math.sign(Math.cos((65 * Math.PI) / 180) * y - Math.sin((65 * Math.PI) / 180) * x);
+  const between = (y: number, line: number) => (line === 1 ? y < 0 : y > 0);
+  if (al === bl) return near(ax, -bx) && near(ay, -by) ? 3 : -1;
+  if (near(ax, bx) && near(ay, by)) return 0;
+  if (!between(ay, al) || !between(by, bl)) return -1;
+  return side(ax, ay) === side(bx, by) ? 2 : 1;
+}
+const nameOk = ([mode, scheme, x, y]: number[]) => scheme >= 0 && scheme <= 2 && (mode === 0 ? x >= 0 && x <= 3 && y >= 0 && y <= 7 && partner(x, y) !== null : mode === 1 ? x < y && x >= 0 && y <= 7 && relOf(x, y) >= 0 : false);
+function nameOpts([mode, scheme, x, y]: number[]): { opts: string[]; right: string } {
+  if (mode === 1) return { opts: shuffled(`ahname:${mode},${scheme},${x},${y}`, RELN.map((r) => `${r} angles`)), right: `${RELN[relOf(x, y)]} angles` };
+  const right = partner(x, y)!;
+  const set = [right];
+  for (const r of [0, 1, 2, 3]) {
+    const q = partner(r, y);
+    if (q !== null && !set.includes(q)) set.push(q);
+  }
+  for (let k = 0; set.length < 4; k++) if (k !== y && !set.includes(k)) set.push(k);
+  return { opts: shuffled(`ahname:${mode},${scheme},${x},${y}`, set.slice(0, 4).map((k) => lab(scheme, k))), right: lab(scheme, right) };
+}
+const nameTable = (scheme: number) => ({ type: "table", head: ["", "left of t", "right of t"], rows: [["line l, above", lab(scheme, 0), lab(scheme, 1)], ["line l, below", lab(scheme, 2), lab(scheme, 3)], ["line m, above", lab(scheme, 4), lab(scheme, 5)], ["line m, below", lab(scheme, 6), lab(scheme, 7)]] });
+
+// ---------------------------------------------------------------- Virahanka rhythms (ahrhy)
+const rhythms = (n: number): number => {
+  let [a, b] = [1, 1];
+  for (let i = 2; i <= n; i++) [a, b] = [b, a + b];
+  return n < 0 ? 0 : b;
+};
+const binom = (n: number, k: number) => {
+  let r = 1;
+  for (let i = 1; i <= k; i++) r = (r * (n - k + i)) / i;
+  return Math.round(r);
+};
+/** The same count another way: choose how many long beats (k) and where they go among the n − k syllables. */
+const rhythmsByChoosing = (n: number) => {
+  if (n < 0) return 0;
+  let t = 0;
+  for (let k = 0; 2 * k <= n; k++) t += binom(n - k, k);
+  return t;
+};
+const RHY = [
+  { all: (n: number) => `In Indian poetry a short syllable takes 1 beat and a long syllable takes 2 beats. How many different rhythms (orders of short and long syllables) last exactly ${n} beats?`, start: (n: number, l: boolean) => `In Indian poetry a short syllable takes 1 beat and a long syllable takes 2 beats. How many different rhythms of exactly ${n} beats begin with a ${l ? "long" : "short"} syllable?` },
+  { all: (n: number) => `A staircase has ${n} steps. ${"Ravi"} climbs it taking either 1 step or 2 steps at a time. In how many different ways can he climb to the top?`, start: (n: number, l: boolean) => `A staircase has ${n} steps. Ravi climbs it taking either 1 or 2 steps at a time. In how many different ways can he climb to the top if his first move is ${l ? "2 steps" : "1 step"}?` },
+  { all: (n: number) => `A path 2 units wide and ${n} units long is paved with tiles of 2 units by 1 unit (each tile lies across the path, or two tiles lie side by side along it). In how many different ways can the path be paved?`, start: (n: number, l: boolean) => `A path 2 units wide and ${n} units long is paved with tiles of 2 units by 1 unit (each tile lies across the path, or two lie side by side along it). In how many ways can it be paved if it starts with ${l ? "two tiles side by side along the path" : "one tile across the path"}?` },
+  { all: (n: number) => `Meena lays ₹1 and ₹2 coins in a row so that they add up to ₹${n}. How many different rows can she make (the order of the coins matters)?`, start: (n: number, l: boolean) => `Meena lays ₹1 and ₹2 coins in a row so that they add up to ₹${n}. How many different rows can she make that start with a ₹${l ? 2 : 1} coin?` },
+];
+const rhyAns = ([, mode, n]: number[]) => (mode === 0 ? rhythms(n) : mode === 1 ? rhythms(n - 2) : rhythms(n - 1));
+
+// ---------------------------------------------------------------- congruent figures (ahcfig)
+function cfig(kind: number, seed: number): { prompt: string; opts: string[]; right: string; scaled: string; same: string; dims: Map<string, number[]>; base: number[] } {
+  const r = (k: number) => h8(`ahcfig:${kind}:${seed}:${k}`);
+  const dims = new Map<string, number[]>();
+  const sort = (x: number[]) => [...x].sort((a, b) => a - b);
+  if (kind === 0) {
+    let s: number[] = [5, 6, 7];
+    for (let k = 0; k < 50; k++) {
+      const c = [3 + (r(k) % 9), 3 + (r(k + 99) % 9), 3 + (r(k + 199) % 9)].sort((a, b) => a - b);
+      if (c[0] !== c[1] && c[1] !== c[2] && c[0] + c[1] > c[2] + 1) {
+        s = c;
+        break;
+      }
+    }
+    const t = (x: number[]) => `a triangle with sides ${x.join(" cm, ")} cm`;
+    const right = [s[1], s[2], s[0]];
+    const scaled = s.map((x) => 2 * x);
+    const same = [s[0] - 1, s[1] + 1, s[2]];
+    const oneOff = [s[0], s[1], s[2] + 1];
+    for (const x of [right, scaled, same, oneOff]) dims.set(t(x), sort(x));
+    return { prompt: `Triangle PQR has sides PQ = ${s[0]} cm, QR = ${s[1]} cm and RP = ${s[2]} cm. Which of these triangles is congruent to triangle PQR?`, opts: shuffled(`ahcfig:${kind}:${seed}`, [t(right), t(scaled), t(same), t(oneOff)]), right: t(right), scaled: t(scaled), same: t(same), dims, base: sort(s) };
+  }
+  if (kind === 1) {
+    const w = 2 + (seed % 8);
+    const l = w + 1 + Math.floor(seed / 8);
+    const t = (a: number, b: number) => `a rectangle ${a} cm wide and ${b} cm long`;
+    const right = t(l, w);
+    const scaled = t(2 * w, 2 * l);
+    const same = t(w + 1, l - 1);
+    const area = l * w;
+    let alt = [1, area];
+    for (let a = 2; a * a <= area; a++) if (area % a === 0 && a !== w && a !== l) alt = [a, area / a];
+    const sameArea = t(alt[0], alt[1]);
+    dims.set(right, sort([l, w]));
+    dims.set(scaled, sort([2 * w, 2 * l]));
+    dims.set(same, sort([w + 1, l - 1]));
+    dims.set(sameArea, sort(alt));
+    return { prompt: `A rectangle is ${l} cm long and ${w} cm wide. Which of these rectangles is congruent to it?`, opts: shuffled(`ahcfig:${kind}:${seed}`, [right, scaled, same, sameArea]), right, scaled, same: sameArea, dims, base: sort([l, w]) };
+  }
+  const rad = 2 + seed;
+  const right = `a circle with diameter ${2 * rad} cm`;
+  const wrong1 = `a circle with diameter ${rad} cm`;
+  const wrong2 = `a circle with radius ${2 * rad} cm`;
+  const wrong3 = `a circle with radius ${rad + 1} cm`;
+  dims.set(right, [rad]);
+  dims.set(wrong1, [rad / 2]);
+  dims.set(wrong2, [2 * rad]);
+  dims.set(wrong3, [rad + 1]);
+  return { prompt: `A circle has radius ${rad} cm. Which of these circles is congruent to it?`, opts: shuffled(`ahcfig:${kind}:${seed}`, [right, wrong1, wrong2, wrong3]), right, scaled: wrong2, same: wrong1, dims, base: [rad] };
+}
+const cfigOk = ([kind, seed]: number[]) => kind >= 0 && kind <= 2 && seed >= 0 && seed <= (kind === 2 ? 23 : 59) && new Set(cfig(kind, seed).opts).size === 4 && uniqueSeeds(`ahcfig${kind}`, 60, (s) => (kind === 2 && s > 23 ? "" : cfig(kind, s).prompt)).has(seed);
+
+// ---------------------------------------------------------------- square identities (ahid), numbers by identities (ahidn)
+const idCoef = ([form, p, q]: number[]) => (form === 0 ? [p * p, 2 * p * q, q * q] : form === 1 ? [p * p, -2 * p * q, q * q] : [p * p, 0, -q * q]);
+const idLeft = ([form, p, q]: number[]) => (form === 0 ? `(${ww(p)} + ${q})²` : form === 1 ? `(${ww(p)} − ${q})²` : `(${ww(p)} + ${q})(${ww(p)} − ${q})`);
+const idRight = (c: number[], box: number) => {
+  const parts: string[] = [];
+  const term = (k: number, v: string, first: boolean) => (first ? `${k < 0 ? "−" : ""}${Math.abs(k) === 1 && v ? "" : Math.abs(k)}${v}` : ` ${k < 0 ? "−" : "+"} ${Math.abs(k) === 1 && v ? "" : Math.abs(k)}${v}`);
+  const vars = ["x²", "x", ""];
+  for (let i = 0; i < 3; i++) {
+    if (i === box) parts.push(i === 0 ? "□x²" : ` + □${vars[i]}`);
+    else if (c[i] !== 0) parts.push(term(c[i], vars[i], i === 0));
+  }
+  return parts.join("");
+};
+const idOk = ([form, p, q, box]: number[]) => form >= 0 && form <= 2 && p >= 1 && p <= 5 && q >= 1 && q <= 9 && box >= 0 && box <= 2 && !(form === 2 && box === 1) && !(p === 1 && box === 0);
+const IDENT = ["(a + b)² = a² + 2ab + b²", "(a − b)² = a² − 2ab + b²", "(a + b)(a − b) = a² − b²"];
+const numOk = ([form, B, b]: number[]) => form >= 0 && form <= 2 && B >= 1 && B <= 10 && b >= 1 && b <= 4 && 10 * B - b > 0;
+
+// ---------------------------------------------------------------- cube identities and products of three (ahcube)
+// [form, a, b, c, box]: 0 (x + a)³, 1 (x − a)³, 2 (x + a)(x + b)(x + c), 3 (x + ay + b)²; box picks the coefficient asked
+function cubeCoef([form, a, b, c]: number[]): { terms: string[]; coef: number[] } {
+  if (form === 0) return { terms: ["x³", "x²", "x", ""], coef: [1, 3 * a, 3 * a * a, a ** 3] };
+  if (form === 1) return { terms: ["x³", "x²", "x", ""], coef: [1, -3 * a, 3 * a * a, -(a ** 3)] };
+  if (form === 2) return { terms: ["x³", "x²", "x", ""], coef: [1, a + b + c, a * b + b * c + c * a, a * b * c] };
+  return { terms: ["x²", "y²", "", "xy", "y", "x"], coef: [1, a * a, b * b, 2 * a, 2 * a * b, 2 * b] };
+}
+const cubeLeft = ([form, a, b, c]: number[]) => (form === 0 ? `(x + ${a})³` : form === 1 ? `(x − ${a})³` : form === 2 ? `(x ${signed(a)})(x ${signed(b)})(x ${signed(c)})` : `(x + ${a === 1 ? "" : a}y + ${b})²`);
+const cubeOk = ([form, a, b, c, box]: number[]) => {
+  if (form === 0 || form === 1) return a >= 1 && a <= 6 && b === 0 && c === 0 && box >= 1 && box <= 3;
+  if (form === 2) return a >= -6 && a < b && b < c && c <= 6 && a !== 0 && b !== 0 && c !== 0 && box >= 1 && box <= 3 && cubeCoef([form, a, b, c]).coef[box] !== 0;
+  if (form === 3) return a >= 1 && a <= 5 && b >= 1 && b <= 9 && c === 0 && box >= 3 && box <= 5;
+  return false;
+};
+const cubeRight = (p: number[]) => {
+  const { terms, coef } = cubeCoef(p);
+  const box = p[4];
+  return terms
+    .map((t, i) => (i === box ? `□${t}` : `${Math.abs(coef[i]) === 1 && t ? "" : Math.abs(coef[i])}${t}`))
+    .map((s, i) => (i === 0 ? s : ` ${i === box ? "+" : coef[i] < 0 ? "−" : "+"} ${s}`))
+    .join("");
+};
+const cubeEval = (p: number[], x: number, y: number) => {
+  const [form, a, b, c] = p;
+  return form === 0 ? (x + a) ** 3 : form === 1 ? (x - a) ** 3 : form === 2 ? (x + a) * (x + b) * (x + c) : (x + a * y + b) ** 2;
+};
+const cubeMono = (t: string, x: number, y: number) => ({ "x³": x ** 3, "x²": x * x, x, "": 1, "y²": y * y, xy: x * y, y }[t] as number);
+
+// ---------------------------------------------------------------- the converse of Pythagoras (ahconv), generating triples (ahgen)
+const TRIPLES: number[][] = (() => {
+  const out: number[][] = [];
+  for (let c = 5; c <= 65; c++) for (let a = 3; a < c; a++) for (let b = a + 1; b < c; b++) if (a * a + b * b === c * c) out.push([a, b, c]);
+  return out;
+})();
+function convSides([t, kind, order]: number[]): number[] {
+  const [a, b, c] = TRIPLES[t];
+  const s = kind === 0 ? [a, b, c] : kind === 1 ? [a, b, c + 1] : [a + 1, b, c];
+  return order === 0 ? s : order === 1 ? [s[2], s[0], s[1]] : [s[0], s[2], s[1]];
+}
+const convOk = ([t, kind, order, ctx]: number[]) => t >= 0 && t < TRIPLES.length && kind >= 0 && kind <= 2 && order >= 0 && order <= 2 && (ctx === 0 || ctx === 1) && !(kind === 2 && TRIPLES[t][0] + 1 === TRIPLES[t][1]);
+const CONV_CH = ["Yes, it is right-angled", "No, it is not right-angled"];
+const convOpts = (p: number[]) => shuffled(`ahconv:${p}`, CONV_CH);
+const genOk = ([mode, m, n]: number[]) => (mode <= 1 ? mode >= 0 && m >= 2 && m <= 20 && n === 0 : mode <= 4 ? m >= 2 && m <= 9 && n >= 1 && n < m : false);
+const genAns = ([mode, m, n]: number[]) => [m * m + 1, m * m - 1, m * m - n * n, 2 * m * n, m * m + n * n][mode];
+
+// ---------------------------------------------------------------- recognising and using inverse proportion (ahvary, ahman, ahcomp)
+const VARY = ["inverse proportion", "direct proportion", "neither direct nor inverse proportion"];
+function varyRows(kind: number, seed: number): number[][] {
+  const r = (k: number) => h8(`ahvary:${kind}:${seed}:${k}`);
+  if (kind === 0) {
+    const K = [24, 36, 48, 60, 72, 90, 120, 144, 180, 240][seed % 10];
+    const ds: number[] = [];
+    for (let d = 1; d <= K; d++) if (K % d === 0) ds.push(d);
+    const pickd = [...ds].sort((x, y) => r(x) - r(y)).slice(0, 4).sort((x, y) => x - y);
+    return pickd.map((x) => [x, K / x]);
+  }
+  if (kind === 1) {
+    const k = 2 + (seed % 9);
+    const x0 = 1 + Math.floor(seed / 9);
+    const st = 1 + (r(1) % 3);
+    return [0, 1, 2, 3].map((i) => [x0 + i * st, k * (x0 + i * st)]);
+  }
+  if (kind === 2) {
+    const c = 3 + (seed % 12);
+    const x0 = 1 + Math.floor(seed / 12);
+    return [0, 1, 2, 3].map((i) => [x0 + 2 * i, x0 + 2 * i + c]);
+  }
+  const c = 20 + seed;
+  return [0, 1, 2, 3].map((i) => [2 + 3 * i, c - 2 - 3 * i]);
+}
+const varyOk = ([kind, seed]: number[]) => kind >= 0 && kind <= 3 && seed >= 0 && seed <= 29 && varyRows(kind, seed).every(([x, y]) => x > 0 && y > 0) && new Set(varyRows(kind, seed).map((r) => r[0])).size === 4;
+const MAN = [
+  { thing: (w: number, d: number) => `${w} workers can build a wall in ${d} days`, ask: (w: number) => `How many days would ${w} workers take, working at the same rate?`, word: (w1: number, d1: number, w2: number) => `A farmer finds that ${w1} labourers harvest his paddy field in ${d1} days. This year only ${w2} labourers are free. If they all work at the same rate, how many days will the harvest take?` },
+  { thing: (w: number, d: number) => `A car going at ${w} km per hour takes ${d} hours for a journey`, ask: (w: number) => `How many hours would the same journey take at ${w} km per hour?`, word: (w1: number, d1: number, w2: number) => `A bus from Madurai to Chennai takes ${d1} hours at an average speed of ${w1} km per hour. How many hours would it take at an average speed of ${w2} km per hour?` },
+  { thing: (w: number, d: number) => `A stock of fodder lasts ${w} cows for ${d} days`, ask: (w: number) => `How many days would it last ${w} cows, each eating the same amount?`, word: (w1: number, d1: number, w2: number) => `A hostel's stock of rice lasts ${w1} students for ${d1} days. If ${w2} students stay instead, eating the same amount each, how many days will the rice last?` },
+];
+const manOk = ([ctx, w1, d1, w2]: number[]) => ctx >= 0 && ctx <= 2 && w1 !== w2 && (ctx === 1 ? w1 % 10 === 0 && w2 % 10 === 0 && w1 >= 30 && w1 <= 80 && w2 >= 30 && w2 <= 80 && d1 >= 2 && d1 <= 9 : w1 >= 2 && w1 <= 24 && w2 >= 2 && w2 <= 24 && d1 >= 3 && d1 <= 30) && (w1 * d1) % w2 === 0;
+function compData(ctx: number, seed: number) {
+  const r = (k: number) => h8(`ahcomp:${ctx}:${seed}:${k}`);
+  for (let k = 0; k < 400; k++) {
+    const m1 = 4 + (r(k) % 13);
+    const m2 = 4 + (r(k + 1000) % 13);
+    const x1 = ctx === 0 ? 5 + (r(k + 2000) % 6) : 20 + 10 * (r(k + 2000) % 9);
+    const x2 = ctx === 0 ? 5 + (r(k + 3000) % 6) : 20 + 10 * (r(k + 3000) % 9);
+    const d1 = 6 + (r(k + 4000) % 25);
+    const num = ctx === 0 ? m1 * x1 * d1 : m1 * d1 * x2;
+    const den = ctx === 0 ? m2 * x2 : m2 * x1;
+    if (m1 !== m2 && x1 !== x2 && num % den === 0 && num / den >= 2 && num / den <= 60 && num / den !== d1) return { m1, m2, x1, x2, d1, d2: num / den };
+  }
+  return null;
+}
+const compOk = ([ctx, seed]: number[]) => (ctx === 0 || ctx === 1) && seed >= 0 && seed <= 199 && compData(ctx, seed) !== null && uniqueSeeds(`ahcomp${ctx}`, 200, (s) => JSON.stringify(compData(ctx, s))).has(seed);
+
+// ---------------------------------------------------------------- calendar and number-grid patterns (ahcal)
+// [grid, shape, dir, n]: grid 0 a calendar (7 a row), 1 a 1–100 grid (10 a row); shape 0 a 2 × 2 square, 1 a 3 × 3 square;
+// dir 0: the smallest number is n, find the sum; dir 1: the sum is given, find the smallest number n
+const calW = (g: number) => (g === 0 ? 7 : 10);
+const calSum = ([g, shape, , n]: number[]) => (shape === 0 ? 4 * n + 2 * calW(g) + 2 : 9 * (n + calW(g) + 1));
+const calOk = ([g, shape, dir, n]: number[]) => {
+  if (g < 0 || g > 1 || shape < 0 || shape > 1 || dir < 0 || dir > 1 || n < 1) return false;
+  if (g === 0) return shape === 0 ? n <= 23 : n <= 15;
+  return shape === 0 ? n <= 89 && n % 10 !== 0 : n <= 78 && n % 10 !== 0 && n % 10 !== 9;
+};
+
+// ---------------------------------------------------------------- floor plans on a grid (ahmap)
+// [mode, x, y, w, h]: a rectangular room with corners A(x, y), B(x + w, y), C(x + w, y + h), D(x, y + h)
+const mapOk = ([mode, x, y, w, h]: number[]) => mode >= 0 && mode <= 2 && x >= -7 && x <= 2 && y >= -6 && y <= 2 && w >= 2 && w <= 8 && h >= 2 && h <= 6 && x + w <= 8 && y + h <= 6 && w !== h && (mode === 0 || (mode === 1 ? w % 2 === 0 : w % 2 === 0 && h % 2 === 0));
+
+// ---------------------------------------------------------------- explicit and recursive rules (ahexp)
+// [mode, a, b]: 0 tₙ = an + b, the first three terms; 1 tₙ = an + b, its recursive rule (t₁, d); 2 tₙ = b × aⁿ⁻¹, its recursive rule (t₁, r)
+const expOk = ([mode, a, b]: number[]) => (mode <= 1 ? mode >= 0 && a >= -5 && a <= 9 && a !== 0 && a !== 1 && b >= -9 && b <= 9 && b !== 0 : mode === 2 ? a >= 2 && a <= 5 && b >= 1 && b <= 9 : false);
+const linText = (a: number, b: number) => `tₙ = ${a === 1 ? "" : a === -1 ? "−" : n_(a)}n ${b < 0 ? "−" : "+"} ${Math.abs(b)}`;
+
+// ---------------------------------------------------------------- a coefficient from a condition on the zeros (ahzk)
+// [mode, a, s, c]: 0 ax² + kx + c, the sum of the zeros is s; 1 ax² + cx + k, the product is s; 2 x² + kx + as, one zero is a
+// (the other is s); 3 x² + (k − a)x − c², the zeros are negatives of each other
+const zkOk = ([mode, a, s, c]: number[]) => {
+  if (mode === 0) return a >= 1 && a <= 5 && s >= -6 && s <= 6 && s !== 0 && c >= -9 && c <= 9 && c !== 0 && a * a * s * s - 4 * a * c >= 0;
+  if (mode === 1) return a >= 2 && a <= 5 && s >= -6 && s <= 6 && s !== 0 && c >= -9 && c <= 9 && c !== 0 && c * c - 4 * a * (a * s) >= 0;
+  if (mode === 2) return a >= -6 && a <= 6 && a !== 0 && s >= -6 && s <= 6 && s !== 0 && s !== a && s !== -a && c === 0;
+  if (mode === 3) return a >= -9 && a <= 9 && a !== 0 && s === 0 && c >= 1 && c <= 9;
+  return false;
+};
+const zkAns = ([mode, a, s]: number[]) => (mode === 0 ? -a * s : mode === 1 ? a * s : mode === 2 ? -(a + s) : a);
+const zkPoly = ([mode, a, s, c]: number[]) => {
+  const t = (k: number, v: string, first = false) => (k === 0 ? "" : `${first ? (k < 0 ? "−" : "") : k < 0 ? " − " : " + "}${Math.abs(k) === 1 && v ? "" : Math.abs(k)}${v}`);
+  if (mode === 0) return `${a === 1 ? "" : a}x² + kx${t(c, "")}`;
+  if (mode === 1) return `${a}x²${t(c, "x")} + k`;
+  if (mode === 2) return `x² + kx${t(a * s, "")}`;
+  return `x² + (k ${a < 0 ? "+" : "−"} ${Math.abs(a)})x − ${c * c}`;
+};
+
+// ---------------------------------------------------------------- perfect squares (ahpsq), square roots to one decimal place (ahsqd)
+function psqOpts([mode, m]: number[]): { opts: string[]; right: string; good: string; same: string } {
+  if (mode === 1) {
+    const d = (m * m) % 10;
+    const set = [d, (2 * (m % 10)) % 10, m % 10, (d + 5) % 10, (d + 1) % 10, (d + 3) % 10].filter((x, i, a) => a.indexOf(x) === i).slice(0, 4).map(String);
+    return { opts: shuffled(`ahpsq:${mode},${m}`, set), right: String(d), good: String((2 * (m % 10)) % 10), same: String(m % 10) }; // good: the last digit doubled; same: the last digit itself
+  }
+  const sq = m * m;
+  const bad = [2, 3, 7, 8].map((e) => sq - (sq % 10) + e).filter((x) => x !== sq);
+  // a non-square ending in a digit that squares can end in (so the last-digit test alone does not decide)
+  let good = sq + 10;
+  while (Number.isInteger(Math.sqrt(good))) good += 10;
+  const b1 = bad[h8(`ahpsq:b1:${m}`) % bad.length];
+  const b2 = bad.find((x) => x !== b1 && x % 10 !== b1 % 10)!;
+  return { opts: shuffled(`ahpsq:${mode},${m}`, [sq, good, b1, b2].map(String)), right: String(sq), good: String(good), same: String(b1) };
+}
+const psqOk = ([mode, m]: number[]) => (mode === 0 ? m >= 11 && m <= 60 : mode === 1 ? m >= 11 && m <= 99 && m % 10 !== 0 : false);
+/** √n by the long-division method, digit by digit, to two decimal places (as a whole number of hundredths). */
+function sqrtDigits(n: number): { digits: number[]; hundredths: number } {
+  // pair the digits of n × 10 000 and bring them down two at a time
+  let N = n * 10000;
+  const pairs: number[] = [];
+  while (N > 0) {
+    pairs.unshift(N % 100);
+    N = Math.floor(N / 100);
+  }
+  let root = 0;
+  let rem = 0;
+  const digits: number[] = [];
+  for (const pr of pairs) {
+    rem = rem * 100 + pr;
+    let d = 9;
+    while ((20 * root + d) * d > rem) d--;
+    rem -= (20 * root + d) * d;
+    root = 10 * root + d;
+    digits.push(d);
+  }
+  return { digits, hundredths: root };
+}
+const sqdOk = ([n]: number[]) => n >= 2 && n <= 200 && !Number.isInteger(Math.sqrt(n));
+const sqdAns = (n: number) => Math.round(sqrtDigits(n).hundredths / 10) / 10;
+
+B08.push(
+  // ============================================================ naming angle pairs at parallel lines
+  {
+    id: "ahname",
+    arity: 4,
+    title: "Naming corresponding, alternate, co-interior and vertically opposite angles",
+    competency: PAR,
+    type: "choice",
+    // [mode, scheme, x, y]: mode 0: which angle is the RELN[x] angle to angle y? mode 1: what kind of pair are angles x and y?
+    parse: none,
+    reject: (p) => (nameOk(p) ? null : "Eight angles at two parallel lines, labelled in one of three ways."),
+    choices: (p) => nameOpts(p).opts,
+    prompt: ([mode, scheme, x, y]) => `Line t crosses two parallel lines l and m, making eight angles. The table shows where each angle lies (above or below each line, and on which side of t). ${mode === 0 ? `Which angle is the ${RELN[x]} angle to angle ${lab(scheme, y)}?` : `What kind of pair are angles ${lab(scheme, x)} and ${lab(scheme, y)}?`}`,
+    solve: (p) => {
+      const { opts, right } = nameOpts(p);
+      const [mode, scheme, x, y] = p;
+      return { steps: [{ id: "locate", op: "read", competency: PAR, inputs: mode === 0 ? [lab(scheme, y)] : [lab(scheme, x), lab(scheme, y)], value: right }], answer: opts.indexOf(right) };
+    },
+    // independent: put the angles on an actual drawing (t at 65°) and classify the pair from the directions of their bisectors
+    validate: (p, v) => {
+      const [mode, scheme, x, y] = p;
+      const { opts } = nameOpts(p);
+      if (typeof v !== "number" || !opts[v]) return false;
+      if (mode === 1) return opts[v] === `${RELN[classifyGeo(x, y)]} angles`;
+      const k = [0, 1, 2, 3, 4, 5, 6, 7].find((q) => lab(scheme, q) === opts[v])!;
+      return k !== undefined && classifyGeo(Math.min(k, y), Math.max(k, y)) === x;
+    },
+    bugs: (p) => {
+      const [mode, scheme, x, y] = p;
+      const { opts } = nameOpts(p);
+      if (mode === 1) {
+        const r = relOf(x, y);
+        const slip = [[1, "Corresponding angles are in the same position at each line (both above, on the same side of t); these two are"], [2, "Alternate angles lie on opposite sides of t; these two are on the same side, between the lines: they are"], [1, "Co-interior angles are on the same side of t; these two lie on opposite sides of t, between the lines: they are"], [0, "Corresponding angles are at different lines; these two are at the same crossing point and face each other: they are"]][r] as [number, string];
+        return [Bq("mixed-names", "conceptual", PAR, `${slip[1]} ${RELN[r]} angles.`, opts.indexOf(`${RELN[slip[0]]} angles`))];
+      }
+      const out: Bug[] = [];
+      const say = ["Corresponding angles sit in the same corner at each line: same side of t, and both above (or both below) their line.", "Alternate interior angles are between the two lines, on OPPOSITE sides of t (they make a Z shape).", "Co-interior angles are between the two lines on the SAME side of t (they make a C or U shape).", "Vertically opposite angles are at the same crossing point, facing each other across it."][x];
+      for (const r of [0, 1, 2, 3]) {
+        const q = r === x ? null : partner(r, y);
+        if (q !== null && q !== partner(x, y) && opts.includes(lab(scheme, q)) && out.length < 2) out.push(Bq(`gave-${RELN[r].replace(/ /g, "-")}`, "conceptual", PAR, `The ${RELN[r]} angle was given. ${say}`, opts.indexOf(lab(scheme, q))));
+      }
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.inputs.length === 1 ? `Find angle ${s.inputs[0]} in the table and move to the matching place: ${s.value}` : `Angles ${s.inputs[0]} and ${s.inputs[1]} are ${s.value}`),
+    domain: [[0, 1], [0, 2], [0, 7], [0, 7]],
+    keep: nameOk,
+    difficulty: ([mode, , x]) => (mode === 0 && (x === 0 || x === 3) ? 1 : mode === 0 ? 2 : 3),
+    figure: ([, scheme]) => nameTable(scheme),
+    word: ([mode, scheme, x, y]) => `A straight railway line t crosses two parallel roads l and m. A surveyor labels the eight corners where they cross, as shown in the table. ${mode === 0 ? `Which corner makes the ${RELN[x]} angle with corner ${lab(scheme, y)}?` : `What kind of pair are corners ${lab(scheme, x)} and ${lab(scheme, y)}?`}`,
+    teach: {
+      idea: "Where a transversal crosses two lines it makes the same four angles at each line. Corresponding angles are in matching places; alternate interior angles are between the lines on opposite sides of t; co-interior angles are between the lines on the same side; vertically opposite angles face each other at one crossing.",
+      method: "Find the given angle: which line, above or below it, which side of t. Corresponding: same place at the other line. Alternate interior: other line, other side of t, still between the lines. Co-interior: other line, same side of t, between the lines. Vertically opposite: same line, both other side and other position.",
+      alternatives: [
+        { id: "letters", title: "Look for F, Z and C shapes", kind: "conceptual", text: ["Corresponding angles sit in an F shape, alternate angles in a Z shape, co-interior angles in a C (or U) shape.", "Trace the letter through the two angles to check."] },
+        { id: "slide", title: "Slide one crossing onto the other", kind: "procedural", text: ["Imagine sliding the crossing at l down t until it sits on the crossing at m.", "Each angle lands on its corresponding angle; then turn half way round the point to find the vertically opposite one."] },
+      ],
+    },
+    limits: "Two parallel lines and a transversal, with angle positions given in a table (no drawn figure yet); proving lines parallel is the ahparx family and educator-marked tasks.",
+  },
+  // ============================================================ Virahanka numbers in counting problems
+  {
+    id: "ahrhy",
+    arity: 3,
+    title: "Counting rhythms, climbs and tilings: Virahanka numbers",
+    competency: SEQ,
+    type: "integer",
+    mc: true,
+    // [ctx, mode, n]: mode 0 all arrangements of length n; 1 those starting with a long (2) part; 2 those starting with a short (1) part
+    parse: none,
+    reject: ([ctx, mode, n]) => (ctx < 0 || ctx > 3 || mode < 0 || mode > 2 || n < 3 || n > 18 ? "Rhythms, stairs, tilings and coin rows of length 3 to 18." : null),
+    prompt: ([ctx, mode, n]) => (mode === 0 ? RHY[ctx].all(n) : RHY[ctx].start(n, mode === 1)),
+    solve: (p) => {
+      const [, mode, n] = p;
+      const steps = [];
+      let [a, b] = [1, 1];
+      for (let i = 2; i <= n; i++) {
+        [a, b] = [b, a + b];
+        steps.push({ id: `len${i}`, op: "add", competency: SEQ, inputs: [i, a, b - a], value: b });
+      }
+      const ans = rhyAns(p);
+      return { steps: [...steps, ...(mode ? [{ id: "start", op: "rest", competency: SEQ, inputs: [mode === 1 ? n - 2 : n - 1], value: ans }] : [])], answer: ans };
+    },
+    // independent: count by choosing how many long parts there are and where they go (a sum of binomial coefficients)
+    validate: ([, mode, n], v) => v === (mode === 0 ? rhythmsByChoosing(n) : mode === 1 ? rhythmsByChoosing(n - 2) : rhythmsByChoosing(n - 1)),
+    bugs: (p) => {
+      const [, mode, n] = p;
+      const ans = rhyAns(p);
+      const k = (x: number) => (x === ans ? null : x);
+      return mode === 0
+        ? [Bq("one-term-back", "procedural", SEQ, `The count for ${n - 1} was given. Each number in the sequence 1, 2, 3, 5, 8, … is the sum of the two before it; count on to length ${n}.`, k(rhythms(n - 1))), Bq("count-up", "conceptual", SEQ, "The counts were taken to grow by 1 each time. They grow by adding the two previous counts: endings with a short part plus endings with a long part.", k(n))]
+        : [Bq("all-of-them", "procedural", SEQ, "All the arrangements were counted. Only those that start with the given part are asked: after it, the rest can be any arrangement of the remaining length.", k(rhythms(n))), Bq("wrong-rest", "procedural", SEQ, `The rest was taken to have length ${mode === 1 ? n - 1 : n - 2}. After a ${mode === 1 ? "long (2)" : "short (1)"} part, ${mode === 1 ? n - 2 : n - 1} remains.`, k(mode === 1 ? rhythms(n - 1) : rhythms(n - 2)))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "start" ? `After the first part, the rest has length ${s.inputs[0]}: ${s.value} ways` : `Length ${s.inputs[0]}: ${s.inputs[1]} (ending with a short part) + ${s.inputs[2]} (ending with a long part) = ${s.value}`),
+    domain: [[0, 3], [0, 2], [3, 18]],
+    difficulty: ([, mode, n]) => (n <= 6 && mode === 0 ? 1 : mode === 0 ? 2 : 3),
+    word: ([, mode, n]) => (mode === 0 ? `A drummer plays a pattern of ${n} beats using only short strokes (1 beat) and long strokes (2 beats). How many different patterns can he play?` : `A drummer plays a pattern of ${n} beats using only short strokes (1 beat) and long strokes (2 beats). How many different patterns begin with a ${mode === 1 ? "long" : "short"} stroke?`),
+    teach: {
+      idea: "Every arrangement of length n ends with a short part (after an arrangement of length n − 1) or a long part (after one of length n − 2). So the counts follow Virahanka's rule: each is the sum of the two before (1, 2, 3, 5, 8, 13, …).",
+      method: "Start with length 1: 1 way, length 2: 2 ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left.",
+      alternatives: [
+        { id: "list_small", title: "List the small cases", kind: "procedural", text: ["Length 3: S S S, S L, L S (3 ways). Length 4: S S S S, S S L, S L S, L S S, L L (5 ways).", "Notice 3 + 5 = 8 for length 5, and continue."], visual: () => ({ type: "table", head: ["Length", "1", "2", "3", "4", "5"], rows: [["Ways", "1", "2", "3", "5", "8"]] }) },
+        { id: "choose_longs", title: "Count by the number of long parts", kind: "conceptual", text: ["With k long parts there are n − 2k short ones: n − k parts in all.", "Choose which k of the n − k places are long, and add up over every possible k."] },
+      ],
+    },
+    limits: "Lengths 3 to 18; sums and other patterns in the Virahanka sequence are the ahfib family.",
+  },
+  // ============================================================ recognising congruent figures
+  {
+    id: "ahcfig",
+    arity: 2,
+    title: "Which figure is congruent to the given one?",
+    competency: CONG,
+    type: "choice",
+    // [kind, seed]: kind 0 triangles by their sides, 1 rectangles, 2 circles
+    parse: none,
+    reject: (p) => (cfigOk(p) ? null : "Triangles, rectangles and circles given by their measurements."),
+    choices: (p) => cfig(p[0], p[1]).opts,
+    prompt: (p) => cfig(p[0], p[1]).prompt,
+    solve: ([kind, seed]) => {
+      const f = cfig(kind, seed);
+      return { steps: [{ id: "compare", op: "compare", competency: CONG, inputs: [f.base.join(", ")], value: f.right }], answer: f.opts.indexOf(f.right) };
+    },
+    // independent: compare the measurements in any order (sorted); exactly one option must match the given figure
+    validate: ([kind, seed], v) => {
+      const f = cfig(kind, seed);
+      const same = (o: string) => JSON.stringify(f.dims.get(o)) === JSON.stringify(f.base);
+      return typeof v === "number" && f.opts.filter(same).length === 1 && same(f.opts[v]);
+    },
+    bugs: ([kind, seed]) => {
+      const f = cfig(kind, seed);
+      return [
+        Bq(kind === 2 ? "radius-diameter" : "same-shape", "conceptual", CONG, kind === 2 ? "The radius was taken for the diameter (or the other way round). A circle of radius r has diameter 2r; congruent circles have the same radius." : "This figure has the same shape but is twice as big. Congruent figures are the same shape AND the same size: one fits exactly on the other.", f.opts.indexOf(f.scaled)),
+        Bq(kind === 0 ? "same-perimeter" : kind === 1 ? "same-area" : "half-size", "conceptual", CONG, kind === 0 ? "This triangle has the same perimeter, but its sides are different. Congruent triangles have all three sides equal in pairs." : kind === 1 ? "This rectangle has the same area, but different sides, so it will not fit exactly on the first one." : "Half the diameter was used as the radius twice. The diameter here must be 2 × the radius.", f.opts.indexOf(f.same)),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => `Match the measurements in any order (${s.inputs[0]}): ${s.value} fits exactly`,
+    domain: [[0, 2], [0, 59]],
+    keep: cfigOk,
+    difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
+    word: (p) => `${name(p[1])} is cutting out paper shapes for a craft project and needs a piece that fits EXACTLY on top of this one: ${cfig(p[0], p[1]).prompt.replace(/ Which.*$/, "")} Which of these pieces should ${name(p[1])} choose?`,
+    teach: {
+      idea: "Two figures are congruent when one can be placed exactly on the other (perhaps after turning or flipping it): the same shape and the same size, so all matching sides and angles are equal.",
+      method: "Compare the measurements, not their order: list each figure's sides from smallest to largest (or its radius) and check they match exactly. The same shape at a different size, or the same area or perimeter, is not enough.",
+      alternatives: [
+        { id: "trace", title: "Trace and place", kind: "conceptual", text: ["Trace one figure on thin paper and lay it on the other; you may turn it or flip it over.", "If every edge lies exactly on an edge, they are congruent."] },
+        { id: "sort_sides", title: "Sort the measurements", kind: "procedural", text: ["Write each figure's sides in order of size: 4, 6, 7 and 7, 4, 6 both become 4, 6, 7.", "Equal lists mean congruent (for triangles this is the SSS rule)."] },
+      ],
+    },
+    limits: "Triangles by their three sides, rectangles and circles; congruence by angles (SAS, ASA, RHS) is the amcrit family.",
+  },
+  // ============================================================ (a ± b)² and (a + b)(a − b)
+  {
+    id: "ahid",
+    arity: 4,
+    title: "Expanding with (a + b)², (a − b)² and (a + b)(a − b)",
+    competency: IDN,
+    type: "integer",
+    mc: true,
+    // [form, p, q, box]: form 0 (px + q)², 1 (px − q)², 2 (px + q)(px − q); box: which coefficient is asked (0 x², 1 x, 2 the number)
+    parse: none,
+    reject: (p) => (idOk(p) ? null : "(px ± q)² and (px + q)(px − q) with p from 1 to 5 and q from 1 to 9."),
+    prompt: (p) => {
+      const [form] = p;
+      return `Use the identity ${IDENT[form]} to expand ${idLeft(p)}. ${idLeft(p)} = ${idRight(idCoef(p), p[3])}. What number goes in the box? (It may be negative.)`;
+    },
+    solve: (p) => {
+      const [form, pp, q, box] = p;
+      const c = idCoef(p);
+      const steps = [
+        { id: "a2", op: "square", competency: IDN, inputs: [ww(pp)], value: `${c[0]}x²` },
+        ...(form === 2 ? [] : [{ id: "2ab", op: "multiply", competency: IDN, inputs: [2, ww(pp), q], value: `${c[1]}x` }]),
+        { id: "b2", op: "square", competency: IDN, inputs: [q], value: c[2] },
+      ];
+      return { steps, answer: c[box] };
+    },
+    // independent: put the number in the box and compare both sides at two values of x
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [form, pp, q, box] = p;
+      const c = idCoef(p).map((k, i) => (i === box ? v : k));
+      return [2, 5].every((x) => {
+        const left = form === 0 ? (pp * x + q) ** 2 : form === 1 ? (pp * x - q) ** 2 : (pp * x + q) * (pp * x - q);
+        return left === c[0] * x * x + c[1] * x + c[2];
+      });
+    },
+    bugs: (p) => {
+      const [form, pp, q, box] = p;
+      const c = idCoef(p);
+      const k = (x: number) => (x === c[box] ? null : x);
+      if (box === 0) return [Bq("p-not-squared", "procedural", IDN, `${ww(pp)} was not squared fully: (${ww(pp)})² = ${pp}x × ${pp}x = ${pp * pp}x².`, k(pp)), Bq("doubled-not-squared", "procedural", IDN, `${pp} was doubled instead of squared: ${pp}² = ${pp * pp}.`, k(2 * pp))];
+      if (box === 1) return [Bq("middle-not-doubled", "conceptual", IDN, `The middle term was written as ab. The identity has 2ab: the two products ${ww(pp)} × ${q} and ${q} × ${ww(pp)} are both there.`, k(form === 0 ? pp * q : -pp * q)), Bq("middle-sign", "procedural", IDN, form === 1 ? "The middle term of (a − b)² is −2ab: it carries the minus sign." : "The middle term of (a + b)² is +2ab.", k(-c[1]))];
+      return form === 2
+        ? [Bq("sign-of-b2", "conceptual", IDN, "The last term of (a + b)(a − b) is −b²: the middle terms cancel and the product of +b and −b is negative.", k(q * q)), Bq("q-not-squared", "procedural", IDN, `${q} was not squared: b² = ${q} × ${q} = ${q * q}.`, k(-q))]
+        : [Bq("minus-squared", "conceptual", IDN, `(−${q})² was written as −${q * q}. The square of a negative number is positive: the last term of (a − b)² is +b².`, form === 1 ? k(-(q * q)) : null), Bq("q-doubled", "procedural", IDN, `${q} was doubled instead of squared: b² = ${q} × ${q}.`, k(2 * q))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "a2" ? `a² = (${s.inputs[0]})² = ${s.value}` : s.id === "2ab" ? `2ab = 2 × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}` : `b² = ${s.inputs[0]}² = ${s.value}`),
+    domain: [[0, 2], [1, 5], [1, 9], [0, 2]],
+    keep: idOk,
+    difficulty: ([form, p, , box]) => (p === 1 && box !== 0 ? 1 : form === 1 || box === 1 ? 2 : 3),
+    word: (p) => {
+      const [form, pp, q] = p;
+      return form === 2
+        ? `A square plot has sides of ${ww(pp)} metres. One pair of sides is made ${q} m longer and the other pair ${q} m shorter, making a rectangle (${ww(pp)} + ${q}) m by (${ww(pp)} − ${q}) m. Its area is ${idRight(idCoef(p), p[3])} square metres. What number goes in the box?`
+        : `A square courtyard has sides of (${ww(pp)} ${form === 0 ? "+" : "−"} ${q}) metres. Its area is ${idLeft(p)} = ${idRight(idCoef(p), p[3])} square metres. What number goes in the box?`;
+    },
+    teach: {
+      idea: "(a + b)² is the area of a square of side a + b: it splits into a square a², a square b² and two rectangles ab. So (a + b)² = a² + 2ab + b², (a − b)² = a² − 2ab + b², and (a + b)(a − b) = a² − b² because the two ab terms cancel.",
+      method: "Decide what a and b are (a = px, b = q). Work out a², then 2ab (with its sign), then b², and write them in order.",
+      alternatives: [
+        { id: "area", title: "Draw the square", kind: "conceptual", text: ["Draw a square of side a + b and cut it into a² , b² and two rectangles a × b.", "The two rectangles are why the middle term is 2ab, not ab."], visual: () => ({ type: "grid", rows: 2, cols: 2 }) },
+        { id: "multiply_out", title: "Multiply it out to check", kind: "procedural", text: ["Write (px + q)² as (px + q)(px + q) and multiply each term by each term.", "Collect the two middle products: they always come out equal."] },
+      ],
+    },
+    limits: "Binomials px ± q with p up to 5 and q up to 9, asked one coefficient at a time (so that the unexpanded form is not accepted as an expansion).",
+  },
+  {
+    id: "ahidn",
+    arity: 3,
+    title: "Quick calculation with identities",
+    competency: IDN,
+    type: "integer",
+    mc: true,
+    // [form, B, b]: with a = 10B: form 0 (a + b)², 1 (a − b)², 2 (a + b)(a − b)
+    parse: none,
+    reject: (p) => (numOk(p) ? null : "Numbers within 4 of a multiple of 10, up to 104."),
+    prompt: ([form, B, b]) => {
+      const a = 10 * B;
+      return form === 0 ? `Use (a + b)² = a² + 2ab + b² to work out ${a + b}².` : form === 1 ? `Use (a − b)² = a² − 2ab + b² to work out ${a - b}².` : `Use (a + b)(a − b) = a² − b² to work out ${a + b} × ${a - b}.`;
+    },
+    solve: ([form, B, b]) => {
+      const a = 10 * B;
+      const ans = form === 0 ? a * a + 2 * a * b + b * b : form === 1 ? a * a - 2 * a * b + b * b : a * a - b * b;
+      return { steps: [{ id: "split", op: "rewrite", competency: IDN, inputs: [a, b], value: form === 0 ? `(${a} + ${b})²` : form === 1 ? `(${a} − ${b})²` : `(${a} + ${b})(${a} − ${b})` }, { id: "use", op: "evaluate", competency: IDN, inputs: [a * a, 2 * a * b, b * b, form], value: ans }], answer: ans };
+    },
+    // independent: multiply the two numbers out in full, column by column
+    validate: ([form, B, b], v) => {
+      const a = 10 * B;
+      const [x, y] = form === 0 ? [a + b, a + b] : form === 1 ? [a - b, a - b] : [a + b, a - b];
+      let prod = 0;
+      let place = 1;
+      for (let t = y; t > 0; t = Math.floor(t / 10), place *= 10) prod += x * (t % 10) * place;
+      return v === prod;
+    },
+    bugs: ([form, B, b]) => {
+      const a = 10 * B;
+      return form === 0
+        ? [Bq("no-middle", "conceptual", IDN, `Only a² + b² was worked out. (${a} + ${b})² also has the middle term 2ab = 2 × ${a} × ${b} = ${2 * a * b}.`, a * a + b * b), Bq("middle-not-doubled", "procedural", IDN, `The middle term was taken as ab. It is 2ab = ${2 * a * b}.`, a * a + a * b + b * b)]
+        : form === 1
+          ? [Bq("as-difference", "conceptual", IDN, `(${a} − ${b})² was taken as ${a}² − ${b}². The square of a difference is a² − 2ab + b².`, a * a - b * b), Bq("minus-b2", "procedural", IDN, `The last term was subtracted. In (a − b)² the b² is added: (−b)² is positive.`, a * a - 2 * a * b - b * b)]
+          : [Bq("plus-b2", "conceptual", IDN, `b² was added. (a + b)(a − b) = a² − b²: subtract ${b * b}.`, a * a + b * b), Bq("b-not-squared", "procedural", IDN, `${b} was taken away instead of ${b}² = ${b * b}.`, b * b === b ? null : a * a - b)];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "split" ? `Write it as ${s.value}` : s.inputs[3] === 2 ? `${s.inputs[0]} − ${s.inputs[2]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[3] === 0 ? "+" : "−"} ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    domain: [[0, 2], [1, 10], [1, 4]],
+    keep: numOk,
+    difficulty: ([form, B]) => (form === 2 ? 1 : B <= 5 ? 2 : 3),
+    word: ([form, B, b]) => {
+      const a = 10 * B;
+      return form === 2 ? `A hall has ${a + b} rows of ${a - b} chairs. Using (a + b)(a − b) = a² − b², how many chairs are there?` : `A square garden has sides of ${form === 0 ? a + b : a - b} m. Using ${form === 0 ? "(a + b)²" : "(a − b)²"}, what is its area, in square metres?`;
+    },
+    teach: {
+      idea: "A number near a round number is easy to square with an identity: 103 = 100 + 3, so 103² = 100² + 2 × 100 × 3 + 3². Products like 103 × 97 are (100 + 3)(100 − 3) = 100² − 3².",
+      method: "Write the number as a ± b with a a multiple of 10. Work out a², 2ab and b² (all easy) and combine them with the right signs.",
+      alternatives: [
+        { id: "area", title: "See it as an area", kind: "conceptual", text: ["103² is a 100 by 100 square, two 100 by 3 strips and a 3 by 3 corner.", "Add the parts: 10000 + 600 + 9."] },
+        { id: "check_last_digit", title: "Check the last digit", kind: "procedural", text: ["The last digit of 103² must be the last digit of 3² = 9.", "If your answer ends in another digit, look for a slip."] },
+      ],
+    },
+    limits: "Numbers within 4 of a multiple of 10 up to 104.",
+  },
+  // ============================================================ cube identities, (a + b + c)² and products of three binomials
+  {
+    id: "ahcube",
+    arity: 5,
+    title: "Expanding (x ± a)³, (x + a)(x + b)(x + c) and (x + ay + b)²",
+    competency: IDN,
+    type: "integer",
+    mc: true,
+    // [form, a, b, c, box]: see cubeCoef; box is the position of the coefficient asked
+    parse: none,
+    reject: (p) => (cubeOk(p) ? null : "(x ± a)³ with a up to 6, three binomials with numbers −6 to 6, (x + ay + b)² with a up to 5 and b up to 9."),
+    prompt: (p) => `Expand ${cubeLeft(p)} using ${["(a + b)³ = a³ + 3a²b + 3ab² + b³", "(a − b)³ = a³ − 3a²b + 3ab² − b³", "(x + a)(x + b)(x + c) = x³ + (a + b + c)x² + (ab + bc + ca)x + abc", "(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ca"][p[0]]}. ${cubeLeft(p)} = ${cubeRight(p)}. What number goes in the box? (It may be negative.)`,
+    solve: (p) => {
+      const { coef } = cubeCoef(p);
+      return { steps: [{ id: "identity", op: "substitute", competency: IDN, inputs: [cubeLeft(p)], value: cubeRight(p).replace("□", String(coef[p[4]])) }], answer: coef[p[4]] };
+    },
+    // independent: put the number in the box and compare both sides at several points
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const { terms, coef } = cubeCoef(p);
+      const c = coef.map((k, i) => (i === p[4] ? v : k));
+      return [[2, 3], [-1, 5], [4, -2]].every(([x, y]) => near(terms.reduce((s, t, i) => s + c[i] * cubeMono(t, x, y), 0), cubeEval(p, x, y)));
+    },
+    bugs: (p) => {
+      const [form, a, b, c, box] = p;
+      const { coef } = cubeCoef(p);
+      const ans = coef[box];
+      const k = (x: number) => (x === ans ? null : x);
+      if (form <= 1) return box === 3 ? [Bq("cube-sign", "conceptual", IDN, form === 1 ? `(−${a})³ is negative: −${a ** 3}.` : `${a}³ = ${a} × ${a} × ${a} = ${a ** 3}.`, k(form === 1 ? a ** 3 : 3 * a)), Bq("cube-as-square", "procedural", IDN, `${a} was squared instead of cubed.`, k(form === 1 ? -(a * a) : a * a))] : [Bq("no-three", "conceptual", IDN, `The 3 in the identity was left out: the coefficient is 3 × ${box === 1 ? a : `${a}²`}${form === 1 && box === 1 ? " with a minus sign" : ""}.`, k(box === 1 ? (form === 1 ? -a : a) : a * a)), Bq("square-pattern", "procedural", IDN, "The pattern of (a + b)² (2ab) was used. In a cube the middle coefficients are 3a²b and 3ab².", k(box === 1 ? (form === 1 ? -2 * a : 2 * a) : 2 * a))];
+      if (form === 2) return box === 1 ? [Bq("product-for-sum", "procedural", IDN, `The x² coefficient is the SUM ${a} + ${b} + ${c}; the product is the number at the end.`, k(a * b * c))] : box === 2 ? [Bq("two-products", "procedural", IDN, "Only some of the pair products were added. The x coefficient is ab + bc + ca: all three pairs.", k(a * b + b * c)), Bq("sum-for-pairs", "procedural", IDN, "The sum a + b + c belongs to x²; the x coefficient is the sum of the products of pairs.", k(a + b + c))] : [Bq("sum-for-product", "procedural", IDN, "The number at the end is the product abc, not the sum.", k(a + b + c))];
+      return [Bq("no-doubling", "conceptual", IDN, "The cross term was not doubled. (a + b + c)² has 2ab + 2bc + 2ca.", k(ans / 2)), Bq("cross-forgotten", "procedural", IDN, "A cross term was missed out (counted as 0); every pair of the three terms gives a doubled product.", k(0))];
+    },
+    variants: () => [],
+    explain: (s) => `${s.inputs[0]} = ${s.value}`,
+    domain: [[0, 3], [-6, 6], [-6, 9], [-6, 6], [1, 5]],
+    keep: cubeOk,
+    cap: 400,
+    difficulty: ([form]) => (form === 0 ? 1 : form === 2 ? 2 : 3),
+    word: (p) => (p[0] <= 1 ? `A cube-shaped box has edges of (x ${p[0] === 0 ? "+" : "−"} ${p[1]}) cm. Its volume is ${cubeLeft(p)} = ${cubeRight(p)} cubic cm. What number goes in the box?` : p[0] === 2 ? `A cuboid tank measures (x ${signed(p[1])}) m by (x ${signed(p[2])}) m by (x ${signed(p[3])}) m. Its volume is ${cubeRight(p)} cubic metres. What number goes in the box?` : `A square mat has sides of ${cubeLeft(p).slice(0, -1)} metres (x, y in metres). Its area is ${cubeRight(p)} square metres. What number goes in the box?`),
+    teach: {
+      idea: "(a + b)³ = (a + b)(a + b)²: multiplying out gives a³ + 3a²b + 3ab² + b³. (x + a)(x + b)(x + c) collects the sum of the numbers, the sum of their pair products and their product. (a + b + c)² has each square and every pair product twice.",
+      method: "Name the parts (a, b, c), then fill the identity term by term, keeping track of signs: (x − a)³ has alternating signs.",
+      alternatives: [
+        { id: "step_by_step", title: "Multiply two at a time", kind: "procedural", text: ["First expand two brackets, then multiply that by the third.", "Collect like terms carefully: write the powers of x in columns."] },
+        { id: "check_number", title: "Check with a number", kind: "conceptual", text: ["Put x = 1 (and y = 1) into both sides.", "Both sides must give the same number; if not, a coefficient is wrong."] },
+      ],
+    },
+    limits: "One coefficient asked at a time (so the unexpanded form is not accepted as the expansion); factorising with these identities is another family.",
+  },
+  // ============================================================ the converse of Pythagoras
+  {
+    id: "ahconv",
+    arity: 4,
+    title: "Is the triangle right-angled? The converse of Pythagoras",
+    competency: PYTH,
+    type: "choice",
+    // [t, kind, order, ctx]: TRIPLES[t]; kind 0 the triple, 1 longest side + 1, 2 shortest side + 1; order: which place the longest side is listed; ctx 1 a real-life check
+    parse: none,
+    reject: (p) => (convOk(p) ? null : "Whole-number triangles with sides up to 66."),
+    choices: convOpts,
+    prompt: (p) => {
+      const s = convSides(p);
+      return p[3] === 0 ? `A triangle has sides ${s[0]} cm, ${s[1]} cm and ${s[2]} cm. Is it a right-angled triangle?` : `A mason checks the corner of a wall. He marks a point ${s[0]} cm from the corner along one wall and a point ${s[1]} cm from the corner along the other, and the two marks are ${s[2]} cm apart. Is the corner a right angle?`;
+    },
+    solve: (p) => {
+      const s = [...convSides(p)].sort((a, b) => a - b);
+      const right = s[0] ** 2 + s[1] ** 2 === s[2] ** 2;
+      return { steps: [{ id: "longest", op: "compare", competency: PYTH, inputs: convSides(p), value: s[2] }, { id: "squares", op: "add", competency: PYTH, inputs: [s[0] ** 2, s[1] ** 2], value: s[0] ** 2 + s[1] ** 2 }, { id: "test", op: "compare", competency: PYTH, inputs: [s[0] ** 2 + s[1] ** 2, s[2] ** 2], value: right ? "equal" : "not equal" }], answer: convOpts(p).indexOf(CONV_CH[right ? 0 : 1]) };
+    },
+    // independent: work out the largest angle with the cosine rule and see whether it is 90°
+    validate: (p, v) => {
+      const [x, y, z] = [...convSides(p)].sort((a, b) => a - b);
+      const ang = (Math.acos((x * x + y * y - z * z) / (2 * x * y)) * 180) / Math.PI;
+      return typeof v === "number" && convOpts(p)[v] === CONV_CH[Math.abs(ang - 90) < 1e-9 ? 0 : 1];
+    },
+    bugs: (p) => {
+      const [, kind, order] = p;
+      const s = convSides(p);
+      const o = convOpts(p);
+      const out: Bug[] = [];
+      if (kind === 0 && order !== 0) out.push(Bq("last-side-as-longest", "procedural", PYTH, `The last side listed (${s[2]}) was used as the longest. The test uses the LONGEST side: is the square of ${Math.max(...s)} equal to the sum of the squares of the other two?`, o.indexOf(CONV_CH[1])));
+      if (kind !== 0) out.push(Bq("nearly-equal", "conceptual", PYTH, "The two sides of the test came out close, so it was taken as right-angled. The converse needs them EXACTLY equal; if they differ at all, the angle is not 90°.", o.indexOf(CONV_CH[0])));
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "longest" ? `The longest side is ${s.value}` : s.id === "squares" ? `The squares of the other two add to ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} and ${s.inputs[1]} are ${s.value}, so ${s.value === "equal" ? "the angle opposite the longest side is 90°" : "the triangle is not right-angled"}`),
+    domain: [[0, TRIPLES.length - 1], [0, 2], [0, 2], [0, 1]],
+    keep: convOk,
+    cap: 360,
+    difficulty: ([, kind, order]) => (kind === 0 && order === 0 ? 1 : kind === 0 ? 3 : 2),
+    word: (p) => {
+      const s = convSides(p);
+      return `${name(s[0])} makes a triangular frame for a kite from three sticks ${s[0]} cm, ${s[1]} cm and ${s[2]} cm long. Will one corner of the frame be a right angle?`;
+    },
+    teach: {
+      idea: "The converse of Baudhayana–Pythagoras: if the square of the longest side equals the sum of the squares of the other two, the angle opposite the longest side is a right angle. If not, there is no right angle.",
+      method: "Find the longest side. Square it, and add the squares of the other two. Equal: right-angled. Not equal, even by a little: not right-angled.",
+      alternatives: [
+        { id: "rope", title: "The knotted rope", kind: "conceptual", text: ["Builders once made a right angle with a rope of 12 equal parts, pegged into a triangle 3, 4, 5.", "Because 3² + 4² = 5², the corner between the 3 and the 4 is a right angle."] },
+        { id: "triples", title: "Look for a known triple", kind: "procedural", text: ["Divide the sides by a common factor: 30, 40, 50 → 3, 4, 5.", "If you get a known triple (3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25), it is right-angled."] },
+      ],
+    },
+    limits: "Whole-number sides; proving the converse is an educator-marked task.",
+  },
+  // ============================================================ generating Pythagorean triples
+  {
+    id: "ahgen",
+    arity: 3,
+    title: "Generating Pythagorean triples by a rule",
+    competency: PYTH,
+    type: "integer",
+    mc: true,
+    // [mode, m, n]: 0/1: the triple 2m, m² − 1, m² + 1, asking the largest (0) or the middle (1) number; 2–4: m² − n², 2mn, m² + n² asking that member
+    parse: none,
+    reject: (p) => (genOk(p) ? null : "m from 2 to 20 for 2m, m² − 1, m² + 1; m > n with m up to 9 for m² − n², 2mn, m² + n²."),
+    prompt: ([mode, m, n]) =>
+      mode <= 1
+        ? `For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains ${2 * m} as its even member 2m. What is its ${mode === 0 ? "largest" : "other smaller"} number?`
+        : `The numbers m² − n², 2mn and m² + n² form a Pythagorean triple for whole numbers m > n. Take m = ${m} and n = ${n}. What is ${["m² − n²", "2mn", "m² + n²"][mode - 2]}?`,
+    solve: (p) => {
+      const [mode, m, n] = p;
+      return mode <= 1 ? { steps: [{ id: "m", op: "divide", competency: PYTH, inputs: [2 * m, 2], value: m }, { id: "member", op: "evaluate", competency: PYTH, inputs: [mode === 0 ? "m² + 1" : "m² − 1", m], value: genAns(p) }], answer: genAns(p) } : { steps: [{ id: "member", op: "evaluate", competency: PYTH, inputs: [["m² − n²", "2mn", "m² + n²"][mode - 2], `${m}, ${n}`], value: genAns(p) }], answer: genAns(p) };
+    },
+    // independent: the three numbers must satisfy a² + b² = c² (with the other two members worked out)
+    validate: ([mode, m, n], v) => {
+      if (typeof v !== "number") return false;
+      if (mode === 0) return (2 * m) ** 2 + (v - 2) ** 2 === v * v && v > 2 * m;
+      if (mode === 1) return (2 * m) ** 2 + v * v === (v + 2) ** 2;
+      const t = [m * m - n * n, 2 * m * n, m * m + n * n];
+      t[mode - 2] = v;
+      return t[0] ** 2 + t[1] ** 2 === t[2] ** 2;
+    },
+    bugs: ([mode, m, n]) => {
+      const ans = genAns([mode, m, n]);
+      const k = (x: number) => (x === ans || x <= 0 ? null : x);
+      if (mode <= 1) return [Bq("m-is-2m", "procedural", PYTH, `2m = ${2 * m}, so m = ${m}; ${2 * m} itself was used as m.`, k(mode === 0 ? 4 * m * m + 1 : 4 * m * m - 1)), Bq("m-squared-only", "procedural", PYTH, `Only m² = ${m * m} was worked out; the rule says m² ${mode === 0 ? "+" : "−"} 1.`, k(m * m))];
+      return [Bq("not-squared", "procedural", PYTH, "m and n were not squared (or 2mn was taken as 2m + n).", k(mode === 2 ? m - n : mode === 3 ? 2 * m + n : m + n)), Bq("other-member", "procedural", PYTH, `Another member of the triple was given; the question asks for ${["m² − n²", "2mn", "m² + n²"][mode - 2]}.`, k(genAns([mode === 4 ? 2 : mode + 1, m, n])))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "m" ? `2m = ${s.inputs[0]}, so m = ${s.value}` : `${s.inputs[0]} with ${s.inputs[1]}: ${s.value}`),
+    domain: [[0, 4], [2, 20], [0, 8]],
+    keep: genOk,
+    difficulty: ([mode, m]) => (mode >= 2 ? 1 : m <= 10 ? 2 : 3),
+    word: ([mode, m, n]) => (mode <= 1 ? `${name(m)} wants a right-angled garden bed with whole-number sides, one of them ${2 * m} m. Using the rule 2m, m² − 1, m² + 1, what is the ${mode === 0 ? "longest side" : "third side (not the longest)"} in metres?` : `A carpenter builds right-angled frames using the rule: sides m² − n², 2mn and m² + n². For m = ${m} and n = ${n}, how long is the side ${["m² − n²", "2mn", "m² + n²"][mode - 2]}, in cm?`),
+    teach: {
+      idea: "(m² + 1)² − (m² − 1)² = 4m² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+      method: "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions.",
+      alternatives: [
+        { id: "check", title: "Check the triple", kind: "procedural", text: ["Square the two smaller numbers and add them; square the largest.", "If they are equal, the triple is right."] },
+        { id: "odd_squares", title: "From odd squares", kind: "conceptual", text: ["Every odd square is a sum of consecutive odd numbers: 9 = 1 + 3 + 5.", "When an odd square is itself the next odd number in such a sum, as 9 after 16 = 1 + 3 + 5 + 7, it gives 9 + 16 = 25: the triple 3, 4, 5."] },
+      ],
+    },
+    limits: "The two classic rules; finding every triple with a given member is not asked.",
+  },
+  // ============================================================ recognising direct and inverse proportion
+  {
+    id: "ahvary",
+    arity: 2,
+    title: "Direct proportion, inverse proportion or neither?",
+    competency: INV,
+    type: "choice",
+    // [kind, seed]: kind 0 inverse (xy fixed), 1 direct (y/x fixed), 2 both grow by adding, 3 one grows as the other falls by subtracting
+    parse: none,
+    reject: (p) => (varyOk(p) ? null : "Tables of four pairs of whole numbers."),
+    choices: (p) => shuffled(`ahvary:${p}`, VARY),
+    prompt: () => "The table shows pairs of values of two quantities x and y. Are x and y in direct proportion, in inverse proportion, or neither?",
+    solve: ([kind, seed]) => {
+      const rows = varyRows(kind, seed);
+      const ans = VARY[kind === 0 ? 0 : kind === 1 ? 1 : 2];
+      return { steps: [{ id: "products", op: "multiply", competency: INV, inputs: rows.map((r) => r[0] * r[1]), value: rows.map((r) => r[0] * r[1]).join(", ") }, { id: "ratios", op: "divide", competency: PROP, inputs: rows.map((r) => r[1] / r[0]), value: rows.map((r) => fmt(r[1] / r[0])).join(", ") }, { id: "decide", op: "classify", competency: INV, inputs: [], value: ans }], answer: shuffled(`ahvary:${[kind, seed]}`, VARY).indexOf(ans) };
+    },
+    // independent: test the definitions on the table itself: all products equal (inverse), all ratios equal (direct)
+    validate: ([kind, seed], v) => {
+      const rows = varyRows(kind, seed);
+      const prodSame = rows.every((r) => r[0] * r[1] === rows[0][0] * rows[0][1]);
+      const ratioSame = rows.every((r) => r[1] * rows[0][0] === rows[0][1] * r[0]);
+      const ans = prodSame ? VARY[0] : ratioSame ? VARY[1] : VARY[2];
+      return typeof v === "number" && shuffled(`ahvary:${[kind, seed]}`, VARY)[v] === ans;
+    },
+    bugs: ([kind, seed]) => {
+      const o = shuffled(`ahvary:${[kind, seed]}`, VARY);
+      return [
+        [Bq("not-equal-steps", "conceptual", INV, "x and y do not change by equal steps, so it was taken as neither. Inverse proportion is about PRODUCTS: here x × y is the same in every row.", o.indexOf(VARY[2]))],
+        [Bq("equal-steps-needed", "conceptual", PROP, "The steps between the numbers were compared. Direct proportion is about RATIOS: y ÷ x is the same in every row.", o.indexOf(VARY[2]))],
+        [Bq("both-grow", "conceptual", PROP, "Both quantities grow, so they were taken as directly proportional. In direct proportion y ÷ x stays the same; here the same number is added instead, so the ratio changes.", o.indexOf(VARY[1]))],
+        [Bq("one-falls", "conceptual", INV, "One quantity rises while the other falls, so it was taken as inverse proportion. In inverse proportion x × y stays the same; here the products change.", o.indexOf(VARY[0]))],
+      ][kind];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "products" ? `x × y in each row: ${s.value}` : s.id === "ratios" ? `y ÷ x in each row: ${s.value}` : `So: ${s.value}`),
+    domain: [[0, 3], [0, 29]],
+    keep: varyOk,
+    difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 2 ? 2 : 3),
+    figure: ([kind, seed]) => ({ type: "table", head: ["x", ...varyRows(kind, seed).map((r) => String(r[0]))], rows: [["y", ...varyRows(kind, seed).map((r) => String(r[1]))]] }),
+    word: ([kind]) => `A shopkeeper records two quantities in the table (x and y): ${["the number of workers and the days a job takes", "the kilograms of rice sold and the money received", "a child's age and her elder brother's age", "the overs bowled and the overs still left in a match"][kind]}. Are x and y in direct proportion, in inverse proportion, or neither?`,
+    teach: {
+      idea: "Two quantities are in inverse proportion when their product stays the same (double one, the other halves). They are in direct proportion when their ratio stays the same. One going up while the other goes down is not enough for inverse proportion.",
+      method: "Multiply x × y in every row: all equal means inverse proportion. Divide y ÷ x in every row: all equal means direct proportion. Otherwise neither.",
+      alternatives: [
+        { id: "double", title: "Double and see", kind: "conceptual", text: ["Find two rows where x doubles (or triples).", "If y halves (or becomes a third), it is inverse; if y doubles too, it is direct."] },
+        { id: "graph", title: "Picture the graph", kind: "conceptual", text: ["Direct proportion is a straight line through 0; inverse proportion is a curve that never meets the axes.", "A straight line that does not pass through 0 is neither."] },
+      ],
+    },
+    limits: "Four pairs of whole numbers; quantities in proportion with a constant added are 'neither'.",
+  },
+  {
+    id: "ahman",
+    arity: 4,
+    title: "Inverse proportion: workers and time, speed and time",
+    competency: INV,
+    type: "integer",
+    mc: true,
+    // [ctx, w1, d1, w2]: w1 (workers, km per hour, cows) take d1 (days, hours); how long for w2?
+    parse: none,
+    reject: (p) => (manOk(p) ? null : "Workers, cows (2 to 24) or speeds (30 to 80 km per hour) with a whole-number answer."),
+    prompt: ([ctx, w1, d1, w2]) => `${MAN[ctx].thing(w1, d1)}. ${MAN[ctx].ask(w2)}`,
+    solve: ([, w1, d1, w2]) => ({ steps: [{ id: "total", op: "multiply", competency: INV, inputs: [w1, d1], value: w1 * d1 }, { id: "share", op: "divide", competency: INV, inputs: [w1 * d1, w2], value: (w1 * d1) / w2 }], answer: (w1 * d1) / w2 }),
+    // independent: the product stays the same: check v × w2 = w1 × d1 by repeated addition
+    validate: ([, w1, d1, w2], v) => {
+      if (typeof v !== "number" || !Number.isInteger(v) || v < 1) return false;
+      let t = 0;
+      for (let i = 0; i < w2; i++) t += v;
+      return t === w1 * d1;
+    },
+    bugs: ([ctx, w1, d1, w2]) => {
+      const ans = (w1 * d1) / w2;
+      const direct = (d1 * w2) / w1;
+      const diff = d1 - (w2 - w1);
+      return [
+        Bq("used-direct", "conceptual", INV, `It was treated as direct proportion (more ${ctx === 1 ? "speed" : ctx === 0 ? "workers" : "cows"}, more ${ctx === 1 ? "hours" : "days"}). Here more ${ctx === 1 ? "speed means less time" : ctx === 0 ? "workers means fewer days" : "cows means fewer days"}: the product stays the same.`, Number.isInteger(direct) && direct !== ans ? direct : null),
+        Bq("take-away-difference", "conceptual", INV, `The difference ${w2 - w1} was ${w2 > w1 ? "taken from" : "added to"} the ${ctx === 1 ? "hours" : "days"}. Inverse proportion multiplies and divides: ${w1} × ${d1} = ${w2} × ?.`, diff > 0 && diff !== ans ? diff : null),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "total" ? `The whole job is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} (it stays the same)` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[0, 2], [2, 80], [2, 30], [2, 80]],
+    keep: manOk,
+    cap: 400,
+    difficulty: ([, w1, , w2]) => (w2 % w1 === 0 || w1 % w2 === 0 ? 1 : 2),
+    word: ([ctx, w1, d1, w2]) => MAN[ctx].word(w1, d1, w2),
+    teach: {
+      idea: "When one quantity goes up and the job stays the same, the other goes down in the same ratio: workers × days (or speed × time) is constant.",
+      method: "Multiply the first pair to get the whole job (worker-days, or distance). Divide by the new number of workers (or the new speed).",
+      alternatives: [
+        { id: "unitary", title: "Go through one", kind: "procedural", text: ["If 6 workers take 10 days, 1 worker takes 6 × 10 = 60 days.", "Then 4 workers take 60 ÷ 4 = 15 days."] },
+        { id: "sense_check", title: "Ask: more or less?", kind: "conceptual", text: ["More workers should finish SOONER; a faster car should take LESS time.", "If your answer goes the other way, the proportion was used the wrong way round."] },
+      ],
+    },
+    limits: "One inverse proportion with a whole-number answer; two changes at once are the ahcomp family.",
+  },
+  {
+    id: "ahcomp",
+    arity: 2,
+    title: "Compound variation: workers, hours and days",
+    competency: INV,
+    type: "integer",
+    mc: true,
+    // [ctx, seed]: ctx 0 workers × hours a day × days stays the same; ctx 1 workers × days is in proportion to the items made
+    parse: none,
+    reject: (p) => (compOk(p) ? null : "Two changes at once with a whole-number answer."),
+    prompt: ([ctx, seed]) => {
+      const d = compData(ctx, seed)!;
+      return ctx === 0 ? `${d.m1} workers, working ${d.x1} hours a day, finish a job in ${d.d1} days. How many days will ${d.m2} workers take for the same job, working ${d.x2} hours a day?` : `${d.m1} weavers make ${d.x1} saris in ${d.d1} days. How many days will ${d.m2} weavers take to make ${d.x2} saris, working at the same rate?`;
+    },
+    solve: ([ctx, seed]) => {
+      const d = compData(ctx, seed)!;
+      return ctx === 0
+        ? { steps: [{ id: "total", op: "multiply", competency: INV, inputs: [d.m1, d.x1, d.d1], value: d.m1 * d.x1 * d.d1 }, { id: "share", op: "divide", competency: INV, inputs: [d.m1 * d.x1 * d.d1, d.m2 * d.x2], value: d.d2 }], answer: d.d2 }
+        : { steps: [{ id: "total", op: "multiply", competency: INV, inputs: [d.m1, d.d1, d.x2], value: d.m1 * d.d1 * d.x2 }, { id: "share", op: "divide", competency: INV, inputs: [d.m1 * d.d1 * d.x2, d.m2 * d.x1], value: d.d2 }], answer: d.d2 };
+    },
+    // independent: work per worker-hour (or per sari) must come out the same in both situations
+    validate: ([ctx, seed], v) => {
+      const d = compData(ctx, seed)!;
+      if (typeof v !== "number") return false;
+      return ctx === 0 ? d.m1 * d.x1 * d.d1 === d.m2 * d.x2 * v : d.m1 * d.d1 * d.x2 === d.m2 * v * d.x1;
+    },
+    bugs: ([ctx, seed]) => {
+      const d = compData(ctx, seed)!;
+      const ans = d.d2;
+      const k = (x: number) => (Number.isInteger(x) && x > 0 && x !== ans ? x : null);
+      return ctx === 0
+        ? [Bq("hours-ignored", "procedural", INV, `Only the change in workers was used. The hours a day changed too (${d.x1} to ${d.x2}): fewer hours a day means more days.`, k((d.m1 * d.d1) / d.m2)), Bq("all-direct", "conceptual", INV, "Both changes were treated as direct proportion. More workers, or more hours a day, mean FEWER days: divide, do not multiply.", k((d.d1 * d.m2 * d.x2) / (d.m1 * d.x1)))]
+        : [Bq("saris-ignored", "procedural", INV, `Only the change in weavers was used. The number of saris changed too (${d.x1} to ${d.x2}): more saris take more days.`, k((d.m1 * d.d1) / d.m2)), Bq("weavers-direct", "conceptual", INV, "More weavers were taken to need more days. More weavers finish SOONER: days go down in the same ratio as weavers go up.", k((d.d1 * d.m2 * d.x2) / (d.m1 * d.x1)))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "total" ? `The work stays in proportion: ${s.inputs.join(" × ")} = ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} days`),
+    domain: [[0, 1], [0, 199]],
+    keep: compOk,
+    difficulty: ([ctx]) => (ctx === 0 ? 2 : 3),
+    word: ([ctx, seed]) => {
+      const d = compData(ctx, seed)!;
+      return ctx === 0 ? `To paint a school, ${d.m1} painters working ${d.x1} hours a day need ${d.d1} days. The headmaster can get ${d.m2} painters for ${d.x2} hours a day. How many days will the painting take?` : `In a handloom unit, ${d.m1} weavers make ${d.x1} saris in ${d.d1} days. For a wedding order of ${d.x2} saris, ${d.m2} weavers are available. How many days will they take?`;
+    },
+    teach: {
+      idea: "With two changes, look at each separately: more workers or more hours a day mean fewer days (inverse); more work to do means more days (direct). The total work (worker-hours, or worker-days per item) stays the same.",
+      method: "Write the total work for the first situation (workers × hours a day × days). The second situation needs the same total, so divide it by workers × hours a day. For items, scale by the new number of items first.",
+      alternatives: [
+        { id: "one_at_a_time", title: "Change one thing at a time", kind: "procedural", text: ["First change only the workers (inverse): days × old workers ÷ new workers.", "Then change only the hours (or items) and adjust again."] },
+        { id: "table", title: "Use a table with arrows", kind: "conceptual", text: ["Make columns for workers, hours, days. Put arrows: up means up or down?", "Multiply the old days by each ratio in the direction the arrows say."] },
+      ],
+    },
+    limits: "Two quantities changing together with a whole-number answer.",
+  },
+  // ============================================================ calendar and number-grid patterns
+  {
+    id: "ahcal",
+    arity: 4,
+    title: "Patterns in calendar and number-grid squares",
+    competency: GEN,
+    type: "integer",
+    mc: true,
+    // [grid, shape, dir, n]: see calSum; dir 0 find the sum, dir 1 find the smallest number from the sum
+    parse: none,
+    reject: (p) => (calOk(p) ? null : "2 × 2 and 3 × 3 squares on a calendar (7 a row) or a 1–100 grid (10 a row)."),
+    prompt: (p) => {
+      const [g, shape, dir, n] = p;
+      const where = g === 0 ? "on a calendar page (7 dates in each row)" : "on a 1 to 100 number grid (10 numbers in each row)";
+      const sq = shape === 0 ? "2 × 2 square of four numbers" : "3 × 3 square of nine numbers";
+      return dir === 0 ? `A ${sq} is marked ${where}. Its smallest number is ${n}. Without adding them one by one, use an expression in n to find the sum of the numbers in the square.` : `A ${sq} is marked ${where}. Its numbers add up to ${calSum(p)}. What is the smallest number in the square?`;
+    },
+    solve: (p) => {
+      const [g, shape, dir, n] = p;
+      const w = calW(g);
+      const expr = shape === 0 ? `4n + ${2 * w + 2}` : `9n + ${9 * (w + 1)}`;
+      return dir === 0
+        ? { steps: [{ id: "expr", op: "generalise", competency: GEN, inputs: [shape, w], value: expr }, { id: "sub", op: "substitute", competency: GEN, inputs: [expr, n], value: calSum(p) }], answer: calSum(p) }
+        : { steps: [{ id: "expr", op: "generalise", competency: GEN, inputs: [shape, w], value: expr }, { id: "solve", op: "solve", competency: LIN, inputs: [`${expr} = ${calSum(p)}`], value: n }], answer: n };
+    },
+    // independent: build the square on the grid and add its numbers (or try each possible smallest number)
+    validate: (p, v) => {
+      const [g, shape, dir] = p;
+      const w = calW(g);
+      const k = shape === 0 ? 2 : 3;
+      const sumFrom = (n: number) => {
+        let t = 0;
+        for (let i = 0; i < k; i++) for (let j = 0; j < k; j++) t += n + i * w + j;
+        return t;
+      };
+      if (typeof v !== "number") return false;
+      if (dir === 0) return v === sumFrom(p[3]);
+      for (let n = 1; n <= 100; n++) if (sumFrom(n) === calSum(p)) return v === n;
+      return false;
+    },
+    bugs: (p) => {
+      const [g, shape, dir, n] = p;
+      const w = calW(g);
+      const ans = dir === 0 ? calSum(p) : n;
+      const k = (x: number) => (Number.isInteger(x) && x > 0 && x !== ans ? x : null);
+      if (dir === 0) return shape === 0 ? [Bq("next-is-plus-one", "conceptual", GEN, `Each number was taken to be 1 more than the last: n, n + 1, n + 2, n + 3. The number below n is n + ${w}, because a row has ${w} numbers.`, k(4 * n + 6)), Bq("four-n", "procedural", GEN, `Only 4n was used; the numbers are n, n + 1, n + ${w} and n + ${w + 1}, so add ${2 * w + 2} too.`, k(4 * n))] : [Bq("centre-times-nine", "procedural", GEN, `9 × (the smallest number) was used. 9 times the MIDDLE number (${n + w + 1}) gives the sum.`, k(9 * n)), Bq("row-plus-one", "conceptual", GEN, `The numbers below were taken to go up by 1. Each row down adds ${w}.`, k(9 * n + 36))];
+      return shape === 0 ? [Bq("divide-by-four", "procedural", GEN, `The sum was divided by 4, giving the average of the four numbers, not the smallest. Solve 4n + ${2 * w + 2} = ${calSum(p)}.`, k(calSum(p) / 4)), Bq("forgot-constant", "procedural", GEN, `The ${2 * w + 2} was added instead of taken away.`, k((calSum(p) + 2 * w + 2) / 4))] : [Bq("gave-centre", "procedural", GEN, `Sum ÷ 9 = ${calSum(p) / 9} is the MIDDLE number. The smallest is ${w + 1} less.`, k(calSum(p) / 9)), Bq("one-row-back", "procedural", GEN, `Only one row back was taken from the middle number; the smallest is one row up AND one column left.`, k(calSum(p) / 9 - w))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "expr" ? `With n the smallest, the square's numbers add up to ${s.value}` : s.id === "sub" ? `Put n = ${s.inputs[1]}: ${s.value}` : `Solve ${s.inputs[0]}: n = ${s.value}`),
+    domain: [[0, 1], [0, 1], [0, 1], [1, 89]],
+    keep: calOk,
+    cap: 400,
+    difficulty: ([, shape, dir]) => (shape === 0 && dir === 0 ? 1 : dir === 0 ? 2 : 3),
+    figure: ([g, shape]) => {
+      const w = calW(g);
+      const k = shape === 0 ? 2 : 3;
+      return { type: "table", head: Array.from({ length: k }, () => ""), rows: Array.from({ length: k }, (_, i) => Array.from({ length: k }, (_, j) => (i === 0 && j === 0 ? "n" : `n + ${i * w + j}`))) };
+    },
+    word: (p) => {
+      const [g, shape, dir, n] = p;
+      const where = g === 0 ? "the school calendar" : "the class's 1 to 100 number chart";
+      return dir === 0 ? `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where}. The smallest number in the box is ${n}. ${name(n)} says the numbers add up to a value given by an expression in n. What is the sum?` : `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where} and tells you the numbers add up to ${calSum(p)}. What is the smallest number in the box?`;
+    },
+    teach: {
+      idea: `In a grid with w numbers in each row, the number to the right of n is n + 1 and the number below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.`,
+      method: "Write the numbers of the square in terms of n (as in the picture) and add them: a 2 × 2 square gives 4n + 2w + 2, a 3 × 3 square gives 9n + 9(w + 1). Substitute n, or solve the equation for n.",
+      alternatives: [
+        { id: "middle", title: "Use the middle", kind: "conceptual", text: ["In a 3 × 3 square the numbers balance round the middle one: the sum is 9 × the middle number.", "In a 2 × 2 square, the sum is 4 × the average of the smallest and largest."] },
+        { id: "try_one", title: "Try one on a real calendar", kind: "procedural", text: ["Pick a square on a calendar, add its numbers, and compare with the expression.", "If they agree, the expression works for every square."] },
+      ],
+    },
+    limits: "Sums of 2 × 2 and 3 × 3 squares on grids of 7 or 10 columns; products of diagonals and other patterns are written tasks.",
+  },
+  // ============================================================ floor plans on a coordinate grid
+  {
+    id: "ahmap",
+    arity: 5,
+    title: "Using a coordinate grid for a floor plan",
+    competency: CART,
+    type: "tuple",
+    // [mode, x, y, w, h]: the hall ABCD with A(x, y), B(x + w, y), C(x + w, y + h), D(x, y + h); mode 0 the fourth corner D;
+    // mode 1 a door half-way along wall AB; mode 2 a fan at the centre of the hall
+    parse: none,
+    reject: (p) => (mapOk(p) ? null : "Rectangular rooms 2 to 8 m by 2 to 6 m on a grid from −7 to 8."),
+    prompt: ([mode, x, y, w, h]) => {
+      const pt = (a: number, b: number) => tup([a, b]);
+      const intro = "A floor plan of a house is drawn on a coordinate grid; each unit is 1 metre and the origin is the front door.";
+      if (mode === 0) return `${intro} The rectangular hall ABCD has corners A${pt(x, y)}, B${pt(x + w, y)} and C${pt(x + w, y + h)}, as in the picture. What are the coordinates of corner D?`;
+      if (mode === 1) return `${intro} The rectangular hall has corners A${pt(x, y)}, B${pt(x + w, y)}, C${pt(x + w, y + h)} and D${pt(x, y + h)}. A door is exactly half-way along the wall AB. What are the coordinates of the door?`;
+      return `${intro} The rectangular hall has corners A${pt(x, y)}, B${pt(x + w, y)}, C${pt(x + w, y + h)} and D${pt(x, y + h)}. A ceiling fan hangs over the exact centre of the hall. What are its coordinates?`;
+    },
+    solve: ([mode, x, y, w, h]) => {
+      if (mode === 0) return { steps: [{ id: "same-x", op: "read", competency: CART, inputs: ["A", x], value: x }, { id: "same-y", op: "read", competency: CART, inputs: ["C", y + h], value: y + h }], answer: tup([x, y + h]) };
+      if (mode === 1) return { steps: [{ id: "mid-x", op: "average", competency: CART, inputs: [x, x + w], value: x + w / 2 }], answer: tup([x + w / 2, y]) };
+      return { steps: [{ id: "mid-x", op: "average", competency: CART, inputs: [x, x + w], value: x + w / 2 }, { id: "mid-y", op: "average", competency: CART, inputs: [y, y + h], value: y + h / 2 }], answer: tup([x + w / 2, y + h / 2]) };
+    },
+    // independent: mode 0, the four points must make a rectangle (equal opposite sides, a right angle at A);
+    // modes 1 and 2, the point must be the same distance from the ends of the wall (or from all four corners), on that wall or inside
+    validate: ([mode, x, y, w, h], v) => {
+      const q = nums(v);
+      if (!q || q.length !== 2) return false;
+      const [px, py] = q;
+      const d2 = (a: number, b: number, c: number, d: number) => (a - c) ** 2 + (b - d) ** 2;
+      if (mode === 0) {
+        const [ax, ay, bx, by, cx, cy] = [x, y, x + w, y, x + w, y + h];
+        return (bx - ax) * (px - ax) + (by - ay) * (py - ay) === 0 && d2(px, py, cx, cy) === d2(ax, ay, bx, by) && d2(px, py, ax, ay) === d2(bx, by, cx, cy);
+      }
+      if (mode === 1) return py === y && d2(px, py, x, y) === d2(px, py, x + w, y);
+      const c = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]].map(([a, b]) => d2(px, py, a, b));
+      return c.every((t) => t === c[0]);
+    },
+    bugs: ([mode, x, y, w, h]) => {
+      if (mode === 0) return [Bq("wrong-corner", "procedural", CART, "B and C were added and A taken away, which finds a point across from A. D is next to A and C: it has A's x-coordinate and C's y-coordinate.", tup([x + 2 * w, y + h])), Bq("swapped", "conceptual", CART, "The coordinates were written in the wrong order. A point is (x, y): across first, then up.", x === y + h ? null : tup([y + h, x]))];
+      if (mode === 1) return [Bq("added-not-halved", "procedural", CART, "The x-coordinates of A and B were added but not halved. Half-way is the average: (first + second) ÷ 2.", tup([2 * x + w, y])), Bq("half-the-width", "procedural", CART, `Half the width (${w / 2}) was given as the x-coordinate. Start from A's x-coordinate and add half the width.`, x === 0 ? null : tup([w / 2, y]))];
+      return [Bq("half-sizes", "procedural", CART, `Half the length and half the width were given as the coordinates. Start at corner A ${tup([x, y])} and move half way across and half way up.`, x === 0 && y === 0 ? null : tup([w / 2, h / 2])), Bq("corner-c", "procedural", CART, "The far corner was given. The centre is half way between A and C.", tup([x + w, y + h]))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "same-x" ? `D is straight above A, so its x-coordinate is A's: ${s.value}` : s.id === "same-y" ? `D is level with C, so its y-coordinate is C's: ${s.value}` : `Half-way between ${s.inputs[0]} and ${s.inputs[1]} is ${s.value}`),
+    domain: [[0, 2], [-7, 2], [-6, 2], [2, 8], [2, 6]],
+    keep: mapOk,
+    cap: 400,
+    difficulty: ([mode, x, y]) => (mode === 0 && x >= 0 && y >= 0 ? 1 : mode === 0 ? 2 : 3),
+    figure: ([mode, x, y, w, h]) => ({ type: "plane", points: [[x, y, "A"], [x + w, y, "B"], [x + w, y + h, "C"], ...(mode === 0 ? [] : [[x, y + h, "D"]]), [0, 0, "door"]], segments: mode === 0 ? [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]]] : [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]], [[x + w, y + h], [x, y + h]], [[x, y + h], [x, y]]], range: 9 }),
+    word: ([mode, x, y, w, h]) => `A village map is drawn on a grid with the bus stop at the origin and 1 unit = 100 m. A rectangular playground has corners A${tup([x, y])}, B${tup([x + w, y])}, C${tup([x + w, y + h])}${mode === 0 ? "" : ` and D${tup([x, y + h])}`}. ${mode === 0 ? "What are the coordinates of its fourth corner D?" : mode === 1 ? "A gate is exactly half-way along the side AB. What are the gate's coordinates?" : "A flagpole stands at the exact centre of the playground. What are its coordinates?"}`,
+    teach: {
+      idea: "A grid turns a plan into numbers: each place is (across, up) from the origin. Walls of a rectangular room run along grid lines, so corners share x- or y-coordinates.",
+      method: "Fourth corner: it lines up with one corner across and with another up and down, so copy those coordinates. Half-way: average the two x-coordinates and the two y-coordinates.",
+      alternatives: [
+        { id: "walk", title: "Walk it on the grid", kind: "procedural", text: ["From A, walk along the wall to B: count the steps across.", "From A, walk up to D: the same number of steps as from B up to C."] },
+        { id: "sketch", title: "Sketch the room", kind: "conceptual", text: ["Mark the three corners you know on squared paper.", "Complete the rectangle; read the last corner's coordinates."] },
+      ],
+    },
+    limits: "Rectangular rooms with sides along the grid lines; rooms at a slant are not included.",
+  },
+  // ============================================================ explicit and recursive rules
+  {
+    id: "ahexp",
+    arity: 3,
+    title: "From an explicit rule to its terms and its recursive rule",
+    competency: SEQ,
+    type: "tuple",
+    // [mode, a, b]: 0 tₙ = an + b, give (t₁, t₂, t₃); 1 tₙ = an + b, give (t₁, d) for t₁ and tₙ = tₙ₋₁ + d; 2 tₙ = b × aⁿ⁻¹, give (t₁, r) for t₁ and tₙ = r × tₙ₋₁
+    parse: none,
+    reject: (p) => (expOk(p) ? null : "Linear rules an + b with a from −5 to 9 (not 0 or 1) and b from −9 to 9 (not 0); geometric rules b × aⁿ⁻¹."),
+    prompt: ([mode, a, b]) =>
+      mode === 0
+        ? `A sequence has the explicit rule ${linText(a, b)}. Write its first three terms (t₁, t₂, t₃).`
+        : mode === 1
+          ? `A sequence has the explicit rule ${linText(a, b)}. Write the same sequence with a recursive rule: t₁ = ?, and tₙ = tₙ₋₁ + d for n ≥ 2. Give the pair (t₁, d).`
+          : `A sequence has the explicit rule tₙ = ${b === 1 ? "" : `${b} × `}${a}ⁿ⁻¹. Write it with a recursive rule: t₁ = ?, and tₙ = r × tₙ₋₁ for n ≥ 2. Give the pair (t₁, r).`,
+    solve: ([mode, a, b]) => {
+      if (mode === 0) return { steps: [1, 2, 3].map((n) => ({ id: `t${n}`, op: "substitute", competency: SEQ, inputs: [n], value: a * n + b })), answer: tup([a + b, 2 * a + b, 3 * a + b]) };
+      if (mode === 1) return { steps: [{ id: "t1", op: "substitute", competency: SEQ, inputs: [1], value: a + b }, { id: "d", op: "subtract", competency: SEQ, inputs: [2 * a + b, a + b], value: a }], answer: tup([a + b, a]) };
+      return { steps: [{ id: "t1", op: "substitute", competency: SEQ, inputs: [1], value: b }, { id: "r", op: "divide", competency: SEQ, inputs: [a * b, b], value: a }], answer: tup([b, a]) };
+    },
+    // independent: generate six terms from the answer (directly, or by the recursive rule) and compare with the explicit rule
+    validate: ([mode, a, b], v) => {
+      const q = nums(v);
+      if (!q) return false;
+      const explicit = (n: number) => (mode === 2 ? b * a ** (n - 1) : a * n + b);
+      if (mode === 0) return q.length === 3 && q.every((t, i) => t === explicit(i + 1));
+      if (q.length !== 2) return false;
+      let t = q[0];
+      for (let n = 1; n <= 6; n++) {
+        if (t !== explicit(n)) return false;
+        t = mode === 1 ? t + q[1] : t * q[1];
+      }
+      return true;
+    },
+    bugs: ([mode, a, b]) => {
+      if (mode === 0) return [Bq("start-at-zero", "procedural", SEQ, "The terms were started at n = 0. The first term is t₁: put n = 1, 2, 3.", tup([b, a + b, 2 * a + b])), Bq("added-b-only", "procedural", SEQ, `a and n were added instead of multiplied: ${a}n means ${a} × n.`, a === 2 ? null : tup([a + 1 + b, a + 2 + b, a + 3 + b]))];
+      if (mode === 1) return [Bq("b-as-t1", "procedural", SEQ, `The constant ${b} was taken as the first term. t₁ = ${a} × 1 ${b < 0 ? "−" : "+"} ${Math.abs(b)} = ${a + b}.`, tup([b, a])), Bq("b-as-d", "conceptual", SEQ, `The constant was taken as the step. The step d is the number multiplying n (${a}): each term is ${a} more than the one before.`, a + b === a ? null : tup([a + b, b]))];
+      return [Bq("t1-times-r", "procedural", SEQ, `t₁ was taken as ${b} × ${a}. For n = 1 the power is ${a}⁰ = 1, so t₁ = ${b}.`, tup([a * b, a])), Bq("swapped", "procedural", SEQ, "The ratio and the first term were swapped.", a === b ? null : tup([a, b]))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id.startsWith("t") && s.id !== "t1" ? `t${s.inputs[0]} = ${s.value}` : s.id === "t1" ? `Put n = 1: t₁ = ${s.value}` : s.id === "d" ? `The step: t₂ − t₁ = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The ratio: t₂ ÷ t₁ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[0, 2], [-5, 9], [-9, 9]],
+    keep: expOk,
+    difficulty: ([mode, a]) => (mode === 0 ? (a > 0 ? 1 : 2) : mode === 1 ? 2 : 3),
+    word: ([mode, a, b]) => (mode === 2 ? `The number of people who have heard a rumour after n hours is ${b === 1 ? "" : `${b} × `}${a}ⁿ⁻¹. Write this as a recursive rule: the number in hour 1, and how many times bigger each hour is than the hour before. Give (t₁, r).` : `A taxi's fare for an n km ride in a game is given by ${linText(a, b).replace("tₙ", "Fₙ")} coins. ${mode === 0 ? "Write the fares for 1, 2 and 3 km as (F₁, F₂, F₃)." : "Write this as a recursive rule: the fare for 1 km, and how much each extra km adds. Give (F₁, d)."}`),
+    teach: {
+      idea: "An explicit rule gives any term straight from its position n; a recursive rule gives the first term and how each term comes from the one before. For tₙ = an + b each term is a more than the last; for tₙ = b × aⁿ⁻¹ each term is a times the last.",
+      method: "Put n = 1, 2, 3 into the explicit rule to get the terms. The first term is t₁; the step d = t₂ − t₁ (or the ratio r = t₂ ÷ t₁).",
+      alternatives: [
+        { id: "table", title: "Make a table", kind: "procedural", text: ["Write n = 1, 2, 3, 4 in one row and tₙ under each.", "Look at how each term gets from the one before: that is the recursive rule."] },
+        { id: "check_both", title: "Check that both rules agree", kind: "conceptual", text: ["Use your recursive rule to make the first five terms.", "Use the explicit rule for the same five; they must match exactly."] },
+      ],
+    },
+    limits: "Linear and geometric explicit rules; recursive rules to explicit ones are the ahnth family.",
+  },
+  // ============================================================ a coefficient from a condition on the zeros
+  {
+    id: "ahzk",
+    arity: 4,
+    title: "Finding an unknown coefficient from a condition on the zeros",
+    competency: PZEROS,
+    type: "integer",
+    mc: true,
+    // [mode, a, s, c]: see zkPoly; the answer is k
+    parse: none,
+    reject: (p) => (zkOk(p) ? null : "Quadratics with real zeros and whole-number coefficients."),
+    prompt: (p) => {
+      const [mode, a, s, c] = p;
+      const poly2 = `p(x) = ${zkPoly(p)}`;
+      return mode === 0 ? `The sum of the zeros of ${poly2} is ${n_(s)}. Find k.` : mode === 1 ? `The product of the zeros of ${poly2} is ${n_(s)}. Find k.` : mode === 2 ? `One zero of ${poly2} is ${n_(a)}. Find k.` : `The zeros of ${poly2} are equal in size and opposite in sign (α = −β). Find k. (The other numbers are ${c} and ${c * c}.)`.replace(` (The other numbers are ${c} and ${c * c}.)`, "");
+    },
+    solve: (p) => {
+      const [mode, a, s] = p;
+      const k = zkAns(p);
+      const step = mode === 0 ? { id: "sum", op: "relate", competency: PZEROS, inputs: ["−k/a", a, s], value: k } : mode === 1 ? { id: "product", op: "relate", competency: PZEROS, inputs: ["k/a", a, s], value: k } : mode === 2 ? { id: "substitute", op: "substitute", competency: PZEROS, inputs: [a, s], value: k } : { id: "sum0", op: "relate", competency: PZEROS, inputs: ["sum of zeros = 0", a], value: k };
+      return { steps: [step], answer: k };
+    },
+    // independent: put k back, find the zeros with the quadratic formula, and check the condition numerically
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [mode, a, s, c] = p;
+      const [A, Bc, C] = mode === 0 ? [a, v, c] : mode === 1 ? [a, c, v] : mode === 2 ? [1, v, a * s] : [1, v - a, -(c * c)];
+      const D = Bc * Bc - 4 * A * C;
+      if (D < 0) return false;
+      const r1 = (-Bc + Math.sqrt(D)) / (2 * A);
+      const r2 = (-Bc - Math.sqrt(D)) / (2 * A);
+      if (mode === 0) return near(r1 + r2, s);
+      if (mode === 1) return near(r1 * r2, s);
+      if (mode === 2) return near(r1, a) || near(r2, a);
+      return near(r1, -r2) && !near(r1, 0);
+    },
+    bugs: (p) => {
+      const [mode, a, s] = p;
+      const k = zkAns(p);
+      const q = (x: number) => (Number.isInteger(x) && x !== k ? x : null);
+      if (mode === 0) return [Bq("sign", "conceptual", PZEROS, "The sum of the zeros is −b/a: the minus sign was left out.", q(a * s)), Bq("forgot-a", "procedural", PZEROS, `The coefficient of x² (${a}) was left out: sum = −k/${a}.`, a === 1 ? null : q(-s))];
+      if (mode === 1) return [Bq("divided-by-a", "procedural", PZEROS, `The product of the zeros is c/a = k/${a}, so k = ${a} × ${n_(s)}; it was divided instead.`, Number.isInteger(s / a) ? q(s / a) : null), Bq("sign", "conceptual", PZEROS, "The product of the zeros is +c/a; a minus sign was added.", q(-a * s))];
+      if (mode === 2) return [Bq("sign", "conceptual", PZEROS, `The sum of the zeros is −k, so k = −(${n_(a)} + ${n_(s)}); the minus was left out.`, q(a + s)), Bq("one-zero-only", "procedural", PZEROS, `Only the zero ${n_(a)} was used for k. Substitute x = ${n_(a)} into p(x) = 0 and solve for k.`, q(-a))];
+      return [Bq("sign", "procedural", PZEROS, `The coefficient of x must be 0, so k − ${n_(a)} = 0 means k = ${n_(a)}; the sign was changed.`, q(-a))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "sum" ? `Sum of the zeros = −k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "product" ? `Product of the zeros = k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "substitute" ? `The zeros are ${n_(Number(s.inputs[0]))} and ${n_(Number(s.inputs[1]))} (their product is the constant term), so k = −(sum) = ${n_(Number(s.value))}` : `Opposite zeros add to 0, so the coefficient of x is 0: k = ${n_(Number(s.value))}`),
+    domain: [[0, 3], [-9, 9], [-6, 6], [-9, 9]],
+    keep: zkOk,
+    cap: 400,
+    difficulty: ([mode, a]) => (mode === 3 ? 1 : mode === 2 || a === 1 ? 2 : 3),
+    teach: {
+      idea: "For ax² + bx + c the zeros α, β satisfy α + β = −b/a and αβ = c/a. A condition on the zeros therefore becomes an equation for the unknown coefficient.",
+      method: "Write the condition with the relations: sum = −b/a, product = c/a, or substitute a known zero into p(x) = 0. Solve the equation for k.",
+      alternatives: [
+        { id: "substitute", title: "Substitute a zero", kind: "procedural", text: ["If r is a zero, then p(r) = 0.", "Put x = r into the polynomial and solve the resulting equation for k."] },
+        { id: "factor_form", title: "Use the factor form", kind: "conceptual", text: ["p(x) = a(x − α)(x − β) = a x² − a(α + β)x + aαβ.", "Compare coefficients with the given polynomial."] },
+      ],
+    },
+    limits: "Quadratics with whole-number coefficients and real zeros; cubics and conditions like α² + β² are other families.",
+  },
+  // ============================================================ perfect squares and their last digits
+  {
+    id: "ahpsq",
+    arity: 2,
+    title: "Is it a perfect square? Last digits of squares",
+    competency: SQRT,
+    type: "choice",
+    // [mode, m]: mode 0: which of four numbers is a perfect square (m² is); mode 1: the last digit of m²
+    parse: none,
+    reject: (p) => (psqOk(p) ? null : "Squares of 11 to 60 among near numbers; last digits of squares of 11 to 99."),
+    choices: (p) => psqOpts(p).opts,
+    prompt: ([mode, m]) => (mode === 0 ? "Exactly one of these numbers is a perfect square. Which one?" : `Without working out the whole square, which digit does ${m}² end in?`),
+    solve: (p) => {
+      const [mode, m] = p;
+      const { opts, right } = psqOpts(p);
+      return { steps: mode === 0 ? [{ id: "last-digits", op: "rule-out", competency: SQRT, inputs: opts, value: "a square never ends in 2, 3, 7 or 8" }, { id: "root", op: "square-root", competency: SQRT, inputs: [m * m], value: m }] : [{ id: "units", op: "square", competency: SQRT, inputs: [m % 10], value: (m % 10) ** 2 }], answer: opts.indexOf(right) };
+    },
+    // independent: test each option by searching for a whole number whose square it is (or square the number in full)
+    validate: ([mode, m], v) => {
+      const { opts } = psqOpts([mode, m]);
+      if (typeof v !== "number" || !opts[v]) return false;
+      if (mode === 1) return String(m * m).slice(-1) === opts[v];
+      const isSquare = (x: number) => {
+        for (let k = 1; k * k <= x; k++) if (k * k === x) return true;
+        return false;
+      };
+      return opts.filter((o) => isSquare(Number(o))).length === 1 && isSquare(Number(opts[v]));
+    },
+    bugs: (p) => {
+      const [mode, m] = p;
+      const { opts, right, good, same } = psqOpts(p);
+      if (mode === 0) return [Bq("last-digit-enough", "conceptual", SQRT, `${good} ends in a digit that squares can end in, but that only rules numbers OUT; it does not prove ${good} is a square. Check it: it lies between two neighbouring squares.`, opts.indexOf(good)), Bq("ends-badly", "recall", SQRT, `${same} ends in ${Number(same) % 10}. No perfect square ends in 2, 3, 7 or 8.`, opts.indexOf(same))];
+      return [...(good !== right ? [Bq("doubled", "procedural", SQRT, `The last digit was doubled instead of squared: ${m % 10} × ${m % 10} = ${(m % 10) ** 2}, which ends in ${right}.`, opts.indexOf(good))] : []), ...(same !== right ? [Bq("same-digit", "conceptual", SQRT, `The square was taken to end in the same digit as ${m}. Only the last digit of ${m % 10} × ${m % 10} matters: ${(m % 10) ** 2}.`, opts.indexOf(same))] : [])];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "last-digits" ? `Rule out by last digits: ${s.value}` : s.id === "root" ? `${s.inputs[0]} = ${s.value} × ${s.value}` : `The last digit of ${s.inputs[0]} × ${s.inputs[0]} = ${s.value}`),
+    domain: [[0, 1], [11, 99]],
+    keep: psqOk,
+    difficulty: ([mode, m]) => (mode === 1 ? 1 : m <= 31 ? 2 : 3),
+    teach: {
+      idea: "The last digit of a square depends only on the last digit of the number: 0, 1, 4, 5, 6 or 9. So a number ending in 2, 3, 7 or 8 is never a perfect square; a number ending in another digit may or may not be one.",
+      method: "Rule out the numbers ending in 2, 3, 7 or 8. For the others, find the two squares the number lies between (e.g. 30² = 900 and 31² = 961); a perfect square must be one of them exactly.",
+      alternatives: [
+        { id: "table", title: "Make a last-digit table", kind: "procedural", text: ["Square 0 to 9: 0, 1, 4, 9, 16, 25, 36, 49, 64, 81.", "The last digits 0, 1, 4, 5, 6, 9 are the only ones a square can have."], visual: () => ({ type: "table", head: ["Last digit of n", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], rows: [["Last digit of n²", "0", "1", "4", "9", "6", "5", "6", "9", "4", "1"]] }) },
+        { id: "between", title: "Squeeze between squares", kind: "conceptual", text: ["Every number lies between two neighbouring squares.", "If it is not equal to one of them, it is not a perfect square."] },
+      ],
+    },
+    limits: "Numbers up to about 3600; zeros at the end (an odd number of zeros means not a square) are not included.",
+  },
+  // ============================================================ square roots of non-perfect squares to one decimal place
+  {
+    id: "ahsqd",
+    arity: 1,
+    title: "The square root of a non-square, to one decimal place",
+    competency: SQRT,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    parse: none,
+    reject: (p) => (sqdOk(p) ? null : "Whole numbers from 2 to 200 that are not perfect squares."),
+    prompt: ([n]) => `Find √${n} correct to one decimal place (use the long-division method, or squaring to check).`,
+    solve: ([n]) => {
+      const { digits, hundredths } = sqrtDigits(n);
+      return { steps: [{ id: "digits", op: "long-division", competency: SQRT, inputs: [n], value: `${Math.floor(hundredths / 100)}.${String(hundredths % 100).padStart(2, "0")}…` }, { id: "round", op: "round", competency: "MATH.number.rounding", inputs: [digits.length], value: sqdAns(n) }], answer: sqdAns(n) };
+    },
+    // independent: the answer must be within half a tenth of √n: (10v − 0.5)² ≤ 100n < (10v + 0.5)², in whole numbers
+    validate: ([n], v) => {
+      if (typeof v !== "number") return false;
+      const t = Math.round(v * 10);
+      if (Math.abs(v * 10 - t) > 1e-9) return false;
+      return (2 * t - 1) ** 2 <= 400 * n && 400 * n < (2 * t + 1) ** 2;
+    },
+    bugs: ([n]) => {
+      const ans = sqdAns(n);
+      const trunc = Math.floor(sqrtDigits(n).hundredths / 10) / 10;
+      const whole = Math.round(Math.sqrt(n));
+      const half = Math.round(n / 2 * 10) / 10;
+      return [
+        Bq("truncated", "procedural", "MATH.number.rounding", "The digits were cut off after the first decimal place without rounding. Work out the second decimal place too, then round.", trunc === ans ? null : trunc),
+        Bq("nearest-whole", "procedural", SQRT, "Only the nearest whole number was given. The square root lies between two whole numbers; find the tenths too.", whole),
+        Bq("halved", "conceptual", SQRT, `${n} was halved. The square root is the number that, multiplied by ITSELF, gives ${n}.`, half === ans || n < 7 ? null : half),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "digits" ? `Long division gives √${s.inputs[0]} = ${s.value}` : `Rounded to one decimal place: ${s.value}`),
+    domain: [[2, 200]],
+    keep: sqdOk,
+    difficulty: ([n]) => (n < 50 ? 1 : n < 120 ? 2 : 3),
+    word: ([n]) => `A square plot of land has an area of ${n} square metres. How long is each side, in metres, correct to one decimal place?`,
+    teach: {
+      idea: "A non-square has a square root between two whole numbers that never ends as a decimal. The long-division method finds its digits one at a time; one more digit than needed lets you round.",
+      method: "Pair the digits from the decimal point and use the long-division method to two decimal places, then round to one. Check: the square of your answer should be close to the number.",
+      alternatives: [
+        { id: "squeeze", title: "Squeeze between squares", kind: "procedural", text: ["Find the whole numbers: 7² = 49 < 55 < 64 = 8², so √55 is between 7 and 8.", "Try 7.4² = 54.76 and 7.5² = 56.25; 55 is closer to 54.76, and 7.45² = 55.5 > 55, so √55 ≈ 7.4."] },
+        { id: "area", title: "Think of a square's side", kind: "conceptual", text: ["√n is the side of a square of area n.", "A bigger area needs a longer side, but the side grows more slowly than the area."] },
+      ],
+    },
+    limits: "Whole numbers up to 200, to one decimal place; square roots of decimals are the aksqf family.",
+  },
+);

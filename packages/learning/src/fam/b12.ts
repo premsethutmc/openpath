@@ -2151,7 +2151,7 @@ export const B12: Def[] = [
       const [k, A, Bv] = pp;
       const D = k === 0 ? [A, Bv] : [1, A, Bv];
       return k === 0
-        ? `Divide p(x) = ${pl(divDividend(pp))} by ${pl(D)}. Write p(x) = (${pl(D)}) × q(x) + r, where q(x) = ax² + bx + c and r is a number. Give (a, b, c, r). (Fractions are fine.)`
+        ? `Divide p(x) = ${pl(divDividend(pp))} by ${pl(D)}. Write p(x) = (${pl(D)}) × q(x) + r, where q(x) = ax² + bx + c and r is a number. Give (a, b, c, r).`
         : `Divide p(x) = ${pl(divDividend(pp))} by ${pl(D)}. Write p(x) = (${pl(D)}) × q(x) + r(x), where q(x) = ax + b and r(x) = cx + d. Give (a, b, c, d).`;
     },
     solve: (pp) => {
@@ -2281,7 +2281,7 @@ export const B12: Def[] = [
       if ([a, b, c, d].includes(0) || new Set([a, b, c, d]).size !== 4) return "Four different non-zero numbers.";
       return k === 0 && !(a < b && c < d) ? "Each pair once (a < b and c < d)." : null;
     },
-    prompt: (pp) => (pp[0] === 0 ? `Find the GCD of ${gcdPolys(pp).map(pl).join(" and ")}.` : `Find the GCD of ${gcdPolys(pp).map(pl).join(", ")}.`).replace(/, ([^,]*)\.$/, " and $1."),
+    prompt: (pp) => (pp[0] === 0 ? `Find the GCD of ${gcdPolys(pp).map((P) => pl(P)).join(" and ")}.` : `Find the GCD of ${gcdPolys(pp).map((P) => pl(P)).join(", ")}.`).replace(/, ([^,]*)\.$/, " and $1."),
     solve: ([k, a, b, c, d]) => {
       const ans = k === 0 ? `(${pl([1, a])})(${pl([1, b])})` : pl([1, a]);
       return { steps: [st("factorise", "factorise", FAC, [k], k === 0 ? `(${pl([1, a])})(${pl([1, b])})(${pl([1, c])}), (${pl([1, a])})(${pl([1, b])})(${pl([1, d])})` : `(${pl([1, a])})(${pl([1, b])}), (${pl([1, a])})(${pl([1, c])}), (${pl([1, a])})(${pl([1, b])})(${pl([1, d])})`), st("common", "compare", GL, [], ans)], answer: ans };
@@ -2418,10 +2418,10 @@ export const B12: Def[] = [
       k <= 1
         ? [B("zero-for-number", "procedural", FAC, `The zeros were written instead of the numbers in the brackets: x ${a < 0 ? "−" : "+"} ${Math.abs(a)} has p = ${N(a)}, not ${N(-a)}.`, tup(-a, -d)), ...(k === 1 ? [B("inverted-first", "procedural", RATX, "The first fraction was turned upside down instead of the second; dividing by a fraction multiplies by the second one inverted.", tup(d, a))] : [])]
         : keepBugs([
-            B("cross-swapped", "procedural", RATX, `Each numerator was multiplied by its own denominator's number; ${c}/(${pl([1, a])}) becomes ${c}(${pl([1, b])}) over the common denominator — it is multiplied by the OTHER bracket.`, tup(k === 2 ? c + d : c - d, k === 2 ? c * a + d * b : c * a - d * b)),
+            B("cross-swapped", "procedural", RATX, `Each numerator was multiplied by its own denominator's number; ${c}/(${pl([1, a])}) becomes ${c}(${pl([1, b])}) over the common denominator — it is multiplied by the OTHER bracket.`, c === d && k === 2 ? null : tup(k === 2 ? c + d : c - d, k === 2 ? c * a + d * b : c * a - d * b)),
             ...(k === 3 ? [B("minus-not-distributed", "procedural", INTADD, `The minus sign was applied to ${d}x only; −${d}(${pl([1, a])}) = −${d}x ${a > 0 ? "−" : "+"} ${Math.abs(d * a)}.`, tup(c - d, c * b + d * a))] : []),
           ]),
-    distractors: ([k, a, b, c, d]) => (k <= 1 ? [tup(d, a), tup(a, b), tup(a + d, d)] : [tup(c * d, c * b + d * a), tup(k === 2 ? c + d : c - d, c + d)]),
+    distractors: ([k, a, b, c, d]) => (k <= 1 ? [tup(d, a), tup(a, b), tup(a + d, d)] : [tup(c * d, c * b + d * a), tup(k === 2 ? c + d : c - d, c + d), tup(k === 2 ? c + d + 1 : c - d + 1, k === 2 ? c * b + d * a : c * b - d * a), tup(k === 2 ? c + d : c - d, (k === 2 ? c * b + d * a : c * b - d * a) + 1)]),
     variants: () => [],
     explain: (s) => (s.id === "factorise" ? `Factorise: ${s.value}` : s.id === "cancel" ? `Cancel the factors in both the top and the bottom: ${s.value}` : s.id === "invert" ? `Multiply by the second fraction turned upside down and cancel: ${s.value}` : s.id === "common" ? `Over the common denominator the numerator is ${s.value}` : `Collect terms: ${s.value}`),
     domain: [[0, 3], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
@@ -2539,6 +2539,7 @@ export const B12: Def[] = [
     },
     domain: [[1, 4], [1, 4], [1, 4], [1, 4], [1, 4], [1, 4], [1, 4], [1, 4]],
     cap: 300,
+    decimals: true,
     range: [0, Infinity],
     difficulty: (p) => (Math.abs(quadS(quadV(p))) % 2 === 0 ? 2 : 3),
     word: (p) => {
@@ -3031,10 +3032,11 @@ export const B12: Def[] = [
     reject: (p) => (!inR(p, [[0, 2], [6, 30], [6, 30], [0, 30]]) || !cycOk(p) ? "Angles (in steps of 5°) that make a quadrilateral, or two angles on a chord, in the family's ranges." : null),
     prompt: (q) => {
       const [k, x, y, z] = cyc5(q);
-      return
+      return (
       k === 0
         ? `In the quadrilateral ABCD, ∠A = ${x}°, ∠B = ${y}°, ∠C = ${z}° and ∠D = ${360 - x - y - z}°. Do A, B, C and D lie on one circle?`
-        : `A, B, C and D are four points, with C and D on ${k === 1 ? "the same side" : "opposite sides"} of the line AB. ∠ACB = ${x}° and ∠ADB = ${y}°. Do A, B, C and D lie on one circle?`;
+        : `A, B, C and D are four points, with C and D on ${k === 1 ? "the same side" : "opposite sides"} of the line AB. ∠ACB = ${x}° and ∠ADB = ${y}°. Do A, B, C and D lie on one circle?`
+      );
     },
     choices: () => ["Yes, they lie on one circle", "No, they do not lie on one circle", "It cannot be decided from the angles"],
     solve: (q) => {

@@ -4412,3 +4412,883 @@ const MIX_MORE: Def[] = [
   },
 ];
 B05.push(...MIX_MORE);
+/** Read "(0.35, 0.5, …)" into thousandths; null if it is not a list of decimals. */
+const readDecs = (v: Value) => {
+  if (typeof v !== "string") return null;
+  const m = v.replace(/\s/g, "").match(/^\((\d+(?:\.\d+)?(?:,\d+(?:\.\d+)?)*)\)$/);
+  if (!m) return null;
+  const xs = m[1].split(",").map((x) => thou(x));
+  return xs.every((x) => x !== null) ? (xs as number[]) : null;
+};
+const decTuple = (xs: number[]) => `(${xs.map(d3).join(", ")})`;
+
+const DEC_MORE: Def[] = [
+  {
+    id: "aedpv",
+    arity: 2,
+    title: "Place value, expanded form and place-value form of decimals with thousandths",
+    competency: DEC,
+    type: "choice",
+    // [kind, s]: 0 the place value of one digit; 1 the expanded form; 2 the number with given tens … thousandths
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [0, 149]])) return "A decimal with tens, ones, tenths, hundredths and thousandths.";
+      if (new Set(dpvQ(p).choices).size !== 4) return "Four different options.";
+      return repeatOf(`aedpv${p[0]}`, 150, (t) => `${dpvNum(p[0], t).join("")}${p[0] === 0 ? t % 4 : ""}`, p[1]) ? "An earlier choice already uses this number (distinct@1)." : null;
+    },
+    prompt: (p) => {
+      const q = dpvQ(p);
+      if (p[0] === 0) return `What is the place value of the digit ${q.ds[q.pos]} in ${d3(q.th)}?`;
+      if (p[0] === 1) return `Which is the expanded form of ${d3(q.th)}?`;
+      return `Which number has ${q.ds[0]} tens, ${q.ds[1]} ones, ${q.ds[2]} tenths, ${q.ds[3]} hundredths and ${q.ds[4]} thousandths?`;
+    },
+    choices: (p) => dpvQ(p).choices,
+    solve: (p) => {
+      const q = dpvQ(p);
+      return { steps: [{ id: ["place", "expand", "build"][p[0]], op: "place", competency: DEC, inputs: [d3(q.th), q.pos], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: read the number's digits from its written form (kind 0), or add up the chosen expanded form or number
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = dpvQ(p);
+      const o = q.choices[v];
+      if (o === undefined) return false;
+      if (p[0] === 0) {
+        const txt = d3(q.th).padEnd(6, "0");
+        const i = [0, 1, 3, 4, 5][q.pos];
+        const d = Number(txt[i]);
+        const val = d * [10, 1, 0.1, 0.01, 0.001][q.pos];
+        return thou(o) === Math.round(val * 1000);
+      }
+      if (p[0] === 1) return sumDec(o) === q.th && o.split("+").every((t) => /^0*\.?0*[1-9]0*$/.test(t.trim().replace(/^(\d)0*$/, "$1")) || /^\d0*$/.test(t.trim()) || /^0\.0*[1-9]$/.test(t.trim()));
+      return thou(o) === q.th;
+    },
+    bugs: (p) => {
+      const q = dpvQ(p);
+      if (p[0] === 0) return [{ id: "next-place", kind: "conceptual", competency: DEC, says: `The digit's place was counted one place off; after the point the places are tenths, hundredths, thousandths, so the ${q.ds[q.pos]} is in the ${PLACES3[q.pos]} place.`, predict: q.at(1) }];
+      return [
+        { id: "zero-dropped", kind: "conceptual", competency: DEC, says: `The 0 in the ${PLACES3[q.pos]} place was skipped, so the digits after it moved one place to the left; a 0 keeps its place.`, predict: q.at(1) },
+        { id: "tens-ones", kind: "recall", competency: PV, says: "The tens and ones digits were swapped; the digit just before the point is the ones.", predict: q.at(2) },
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "place" ? `In ${s.inputs[0]}, that digit is in the ${PLACES3[Number(s.inputs[1])]} place` : s.id === "expand" ? `Write each digit times its place value, leaving out the zeros: ${s.inputs[0]}` : `Put each digit in its place: ${s.inputs[0]}`),
+    domain: [[0, 2], [0, 149]],
+    difficulty: ([kind]) => (kind === 0 ? 2 : kind === 1 ? 2 : 3),
+    word: (p) => {
+      const q = dpvQ(p);
+      if (p[0] === 0) return `A jeweller's scale shows ${d3(q.th)} g for a small gold coin. What is the value of the digit ${q.ds[q.pos]} in this reading?`;
+      if (p[0] === 1) return `${name(p[1])} writes the long-jump distance ${d3(q.th)} m as a sum of place values. Which sum is right?`;
+      return `A science lab measures a liquid as ${q.ds[0]} tens, ${q.ds[1]} ones, ${q.ds[2]} tenths, ${q.ds[3]} hundredths and ${q.ds[4]} thousandths of a millilitre. Which number is the reading?`;
+    },
+    teach: {
+      idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths (1/10), hundredths (1/100), thousandths (1/1000). A digit's place value is the digit times its place.",
+      method: "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits.",
+      alternatives: [
+        { id: "money_mass", title: "Think of kilograms and grams", kind: "conceptual", text: ["1 g is one thousandth of a kilogram, so 2.305 kg is 2 kg, 3 tenths, 0 hundredths and 5 thousandths.", "That is 2 kg 305 g: 2 + 0.3 + 0.005."] },
+      ],
+    },
+    limits: "Numbers with two whole digits and three decimal places; ordering decimals is the family aedord.",
+  },
+  {
+    id: "aedord",
+    arity: 1,
+    title: "Ordering decimals",
+    competency: DEC,
+    type: "tuple",
+    mc: true,
+    // [s]: four decimals w.t, w.(t − 1)u, w.t0u and w.tu in a shuffled order
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 299]]) ? "Four decimals to order." : null),
+    prompt: ([s]) => `Write these decimals in ascending order (smallest first): ${dordNums(s).map(d3).join("; ")}. Write them in brackets, separated by commas, for example (0.1, 0.25, 0.3, 0.4).`,
+    solve: ([s]) => {
+      const xs = [...dordNums(s)].sort((a, b) => a - b);
+      return { steps: [{ id: "order", op: "compare", competency: DEC, inputs: dordNums(s).map(d3), value: decTuple(xs) }], answer: decTuple(xs) };
+    },
+    // independent: the answer uses each number once, and each is less than the next when both are written with three places
+    validate: ([s], v) => {
+      const t = readDecs(v);
+      const xs = dordNums(s);
+      if (!t || t.length !== 4 || !t.every((x) => xs.includes(x)) || new Set(t).size !== 4) return false;
+      const three = (x: number) => d3(x).split(".")[0] + (d3(x).split(".")[1] ?? "").padEnd(3, "0");
+      for (let i = 1; i < 4; i++) if (Number(three(t[i])) <= Number(three(t[i - 1]))) return false;
+      return true;
+    },
+    bugs: ([s]) => {
+      const xs = dordNums(s);
+      const after = (x: number) => Number(d3(x).split(".")[1] ?? "0");
+      return [
+        { id: "longer-is-larger", kind: "conceptual", competency: DEC, says: "The digits after the point were compared as whole numbers, so more digits looked bigger; compare tenths first, then hundredths, then thousandths (0.5 = 0.500 is more than 0.45).", predict: decTuple([...xs].sort((a, b) => after(a) - after(b))) },
+        { id: "descending", kind: "procedural", competency: DEC, says: "The decimals were written from greatest to smallest; ascending means smallest first.", predict: decTuple([...xs].sort((a, b) => b - a)) },
+      ];
+    },
+    distractors: ([s]) => {
+      const x = [...dordNums(s)].sort((a, b) => a - b);
+      return [decTuple([x[1], x[0], x[2], x[3]]), decTuple([x[0], x[1], x[3], x[2]])];
+    },
+    variants: () => [],
+    explain: (s) => `Give every number three decimal places (${s.inputs.map((x) => { const [w, f = ""] = String(x).split("."); return `${w}.${f.padEnd(3, "0")}`; }).join(", ")}) and compare: ${s.value}`,
+    domain: [[0, 299]],
+    difficulty: ([s]) => (s % 10 === 0 ? 2 : 3),
+    word: ([s]) => `In a long-jump event, four jumps were measured as ${dordNums(s).map((x) => `${d3(x)} m`).join(", ")}. List the jumps from shortest to longest, as numbers in brackets.`,
+    teach: {
+      idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
+      method: "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550.",
+      alternatives: [
+        { id: "number_line", title: "Place them on a number line", kind: "conceptual", text: ["Draw a line from the whole number to the next one, marked in tenths.", "Put each decimal in its tenth, then decide the order inside the tenth by the hundredths and thousandths."] },
+      ],
+    },
+    limits: "Four decimals with the same whole part and up to three places, built so that more digits does not mean bigger.",
+  },
+  {
+    id: "aedfr",
+    arity: 2,
+    title: "Decimals as fractions and fractions as decimals",
+    competency: DEC,
+    type: "choice",
+    // [kind, s]: 0 a tenths or hundredths decimal as a fraction; 1 a decimal as a fraction in simplest form; 2 a fraction as a decimal
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [0, 58]])) return "A decimal or a fraction to convert.";
+      if (p[0] > 0 && p[1] >= FRACS.length) return "One of the fractions.";
+      return new Set(dfrQ(p).choices).size !== dfrQ(p).choices.length || dfrQ(p).choices.length < 3 ? "Different options." : null;
+    },
+    prompt: (p) => {
+      const q = dfrQ(p);
+      return p[0] === 0 ? `Write ${q.dec} as a fraction.` : p[0] === 1 ? `Write ${q.dec} as a fraction in its simplest form.` : `Write ${FRACS[p[1]][0]}/${FRACS[p[1]][1]} as a decimal.`;
+    },
+    choices: (p) => dfrQ(p).choices,
+    solve: (p) => {
+      const q = dfrQ(p);
+      return { steps: [{ id: ["tenths", "simplest", "divide"][p[0]], op: "convert", competency: DEC, inputs: [q.dec], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: the value of the chosen option equals the number (and, for simplest form, the top and bottom share no factor)
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = dfrQ(p);
+      const o = q.choices[v];
+      if (o === undefined) return false;
+      const val = q.val;
+      const ok = (t: string) => {
+        if (p[0] === 2) return Math.abs(Number(t) - val) < 1e-9;
+        const x = fracVal(t);
+        if (Math.abs(x - val) > 1e-9) return false;
+        const [a, b] = t.split("/").map(Number);
+        return p[0] === 1 ? gcd2(a, b) === 1 : true;
+      };
+      return ok(o) && q.choices.filter(ok).length === 1;
+    },
+    bugs: (p) => {
+      const q = dfrQ(p);
+      if (p[0] === 0) return [{ id: "place-wrong", kind: "conceptual", competency: DEC, says: `The last digit of ${q.dec} is in the ${q.base[0].endsWith("/10") ? "tenths" : "hundredths"} place, so the bottom number is ${q.base[0].endsWith("/10") ? "10" : "100"}.`, predict: q.at(1) }];
+      if (p[0] === 1) return [{ id: "not-simplified", kind: "procedural", competency: "MATH.number.equivalent-fractions", says: `${q.base[1]} is equal to ${q.dec}, but it is not in simplest form: divide the top and bottom by their highest common factor.`, predict: q.at(1) }, { id: "upside-down", kind: "conceptual", competency: DEC, says: "The fraction was turned upside down; the decimal's digits go on top and the place value on the bottom.", predict: q.at(2) }];
+      return [{ id: "digits-as-decimal", kind: "conceptual", competency: DEC, says: `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} was written as ${q.base[1]} by putting a point between the top and bottom numbers; a fraction is a division: ${FRACS[p[1]][0]} ÷ ${FRACS[p[1]][1]}.`, predict: q.at(1) }];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "tenths" ? `Read the decimal with its last place: ${s.inputs[0]}` : s.id === "simplest" ? `Write ${s.inputs[0]} over 10, 100 or 1000 and cancel common factors` : `Divide the top by the bottom (or make the bottom 10, 100 or 1000): ${s.inputs[0]}`),
+    domain: [[0, 2], [0, 58]],
+    difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
+    word: (p) => {
+      const q = dfrQ(p);
+      return p[0] === 0 ? `A shop label says a packet holds ${q.dec} kg of tea. ${name(p[1])} wants to write this as a fraction of a kilogram. Which fraction is it?` : p[0] === 1 ? `${name(p[1])} drank ${q.dec} of a bottle of water. What fraction of the bottle is that, in simplest form?` : `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} of a school's students come by bus. ${name(p[1])} must enter this in a spreadsheet as a decimal. What should be entered?`;
+    },
+    teach: {
+      idea: "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
+      method: "Decimal to fraction: write the digits over 10, 100 or 1000 (by the last place) and simplify. Fraction to decimal: make the bottom 10, 100 or 1000 by multiplying, or divide the top by the bottom.",
+      alternatives: [
+        { id: "money", title: "Use rupees and paise", kind: "conceptual", text: ["₹0.25 is 25 paise, a quarter of a rupee: 0.25 = 1/4.", "Half a rupee is 50 paise: 1/2 = 0.50 = 0.5."] },
+      ],
+    },
+    limits: "Tenths and hundredths (Grade 5) and fractions with bottom numbers 2, 4, 5, 8, 20, 25 and 50 (Grade 7); recurring decimals are Grade 9 families.",
+  },
+  {
+    id: "aeampm",
+    arity: 2,
+    title: "Writing a 24-hour time with a.m. or p.m.",
+    competency: T24,
+    type: "choice",
+    // [H, k]: the 24-hour time H:(5k)
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 23], [0, 11]]) ? "A 24-hour time in five-minute steps." : null),
+    prompt: ([H, k]) => `A railway clock shows ${hh(H, 5 * k)} (24-hour time). How is this time written on a 12-hour clock with a.m. or p.m.?`,
+    choices: (p) => ampmQ(p).choices,
+    solve: (p) => {
+      const q = ampmQ(p);
+      return { steps: [{ id: "ampm", op: "convert", competency: T24, inputs: [p[0]], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: read the chosen time back into minutes after midnight and compare
+    validate: ([H, k], v) => {
+      if (!isIdx(v)) return false;
+      const o = ampmQ([H, k]).choices[v];
+      return o !== undefined && readAmPm(o) === H * 60 + 5 * k;
+    },
+    bugs: (p) => {
+      const q = ampmQ(p);
+      const [H] = p;
+      return [
+        { id: "am-pm-swap", kind: "conceptual", competency: T24, says: H === 0 ? "00 hours is midnight, the start of the day: it is 12 a.m., not 12 p.m. (12 p.m. is noon)." : H === 12 ? "12 hours is noon: it is 12 p.m.; 12 a.m. is midnight." : H < 12 ? "Times before 12 noon are a.m.; p.m. is for times after noon." : "Times after 12 noon are p.m.; a.m. is for times between midnight and noon.", predict: q.at(1) },
+        ...(H >= 13 ? [{ id: "kept-24", kind: "conceptual", competency: T24, says: `The 24-hour number was kept; a 12-hour clock only goes up to 12, so ${H} hours is ${H - 12} o'clock in the afternoon or evening.`, predict: q.at(2) } as Bug, { id: "minus-ten", kind: "procedural", competency: T24, says: "10 was taken away instead of 12.", predict: q.at(3) } as Bug] : []),
+        ...(H === 0 || H === 12 ? [{ id: "zero-hour", kind: "conceptual", competency: T24, says: "A 12-hour clock has no 0; the hour after midnight and the hour after noon are both shown as 12.", predict: q.at(2) } as Bug] : []),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (Number(s.inputs[0]) < 12 ? "Before noon: a.m." : "After noon: p.m.") + "; the hours after 12 start again at 1",
+    domain: [[0, 23], [0, 11]],
+    difficulty: ([H]) => (H === 0 || H === 12 ? 3 : H >= 13 ? 2 : 1),
+    figure: ([H, k]) => ({ type: "clock", h: H % 12, m: 5 * k }),
+    word: ([H, k]) => `${name(H + k)}'s bus ticket says the bus leaves at ${hh(H, 5 * k)}. ${name(H + k)} writes it in a diary using a.m. or p.m. What should ${name(H + k)} write?`,
+    teach: {
+      idea: "a.m. means before noon (from midnight to 12 noon); p.m. means after noon (from 12 noon to midnight). 12 a.m. is midnight and 12 p.m. is noon.",
+      method: "If the 24-hour hour is 0 to 11 it is a.m. (00 becomes 12). If it is 12 to 23 it is p.m.: take away 12 from 13 to 23 (12 stays 12).",
+      visual: ([H, k]) => ({ type: "clock", h: H % 12, m: 5 * k }),
+      alternatives: [
+        { id: "day", title: "Think of your day", kind: "conceptual", text: ["Waking up and the school assembly are in the morning: a.m.", "Lunch after 12, playtime in the evening and dinner are p.m."] },
+      ],
+    },
+    limits: "Times in five-minute steps; 24-hour times as (hours, minutes) are the families aet24 and aet12.",
+  },
+  {
+    id: "aeeuc",
+    arity: 3,
+    title: "The HCF by repeated division, step by step",
+    competency: "MATH.number.euclid-algorithm",
+    type: "integer",
+    mc: true,
+    // [kind, a, b]: Euclid's repeated division on a > b; kind 0 how many divisions; kind 1 the remainder of the second division
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [20, 240], [8, 239]])) return "Two numbers up to 240 for repeated division.";
+      const [, a, b] = p;
+      if (b >= a || a % b === 0) return "The larger number first, not a multiple of the smaller.";
+      return euclid(a, b).length < 3 || euclid(a, b).length > 9 ? "Three to nine divisions." : null;
+    },
+    keep: ([, a, b]) => (FIBS.includes(a) && FIBS.includes(b) && FIBS.indexOf(a) === FIBS.indexOf(b) + 1) || (a * 7 + b * 3) % 11 === 0,
+    prompt: ([kind, a, b]) => {
+      const fib = FIBS.includes(a) && FIBS.indexOf(a) === FIBS.indexOf(b) + 1;
+      return `Find the HCF of ${a} and ${b} by repeated division: divide ${a} by ${b}, then divide ${b} by the remainder, and keep dividing the last divisor by the last remainder until the remainder is 0.${fib ? ` (${b} and ${a} are next to each other in the Virahanka–Fibonacci sequence.)` : ""} ${kind === 0 ? "How many divisions do you do?" : "What is the remainder in the second division?"}`;
+    },
+    solve: ([kind, a, b]) => {
+      const rs = euclid(a, b);
+      return { steps: [{ id: "first", op: "divide", competency: "MATH.number.long-division", inputs: [a, b], value: rs[0] }, { id: "steps", op: "count", competency: "MATH.number.euclid-algorithm", inputs: [a, b], value: rs.length }], answer: kind === 0 ? rs.length : rs[1] };
+    },
+    // independent: subtract the smaller number from the larger again and again (each run of subtractions is one division)
+    validate: ([kind, a, b], v) => {
+      let [x, y] = [a, b];
+      const rems: number[] = [];
+      while (y > 0) {
+        while (x >= y) x -= y;
+        rems.push(x);
+        [x, y] = [y, x];
+      }
+      return v === (kind === 0 ? rems.length : rems[1]);
+    },
+    bugs: ([kind, a, b]) => {
+      const rs = euclid(a, b);
+      return kind === 0
+        ? [
+            { id: "last-not-counted", kind: "procedural", competency: "MATH.number.euclid-algorithm", says: "The last division, the one that leaves remainder 0, was not counted; it is still a division (and it shows the HCF divides exactly).", predict: rs.length - 1 },
+            { id: "hcf-given", kind: "procedural", competency: "MATH.number.euclid-algorithm", says: "The HCF was given; the question asks how many divisions were needed to reach it.", predict: [...rs].reverse().find((r) => r > 0) ?? null },
+          ]
+        : [
+            { id: "first-remainder", kind: "procedural", competency: "MATH.number.euclid-algorithm", says: `The remainder of the first division (${a} ÷ ${b}) was given; the second division is ${b} ÷ ${rs[0]}.`, predict: rs[0] },
+            { id: "quotient", kind: "procedural", competency: "MATH.number.long-division", says: `The quotient of ${b} ÷ ${rs[0]} was given instead of its remainder.`, predict: Math.floor(b / rs[0]) },
+          ];
+    },
+    distractors: ([kind, a, b]) => {
+      const rs = euclid(a, b);
+      return kind === 0 ? [rs.length + 1, rs.length + 2] : [rs[1] + 1, rs[2] ?? rs[1] + 2];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "first" ? `${s.inputs[0]} ÷ ${s.inputs[1]} leaves remainder ${s.value}` : `Repeated division of ${s.inputs[0]} and ${s.inputs[1]} takes ${s.value} divisions`),
+    domain: [[0, 1], [20, 240], [8, 239]],
+    cap: 300,
+    difficulty: ([kind, a, b]) => (euclid(a, b).length >= 6 ? 3 : kind === 1 ? 2 : 1),
+    word: ([kind, a, b]) => `A tailor has two ribbons, ${a} cm and ${b} cm long, and wants the longest pieces that cut both exactly. ${name(a)} finds this length by repeated division (${a} ÷ ${b}, then ${b} ÷ the remainder, and so on, until the remainder is 0). ${kind === 0 ? "How many divisions does it take?" : "What is the remainder in the second division?"}`,
+    teach: {
+      idea: "Any number that divides both a and b also divides the remainder of a ÷ b. So the HCF does not change when (a, b) is replaced by (b, remainder), and the numbers shrink until the remainder is 0: the last divisor is the HCF.",
+      method: "Divide the larger by the smaller; then divide the divisor by the remainder; repeat until the remainder is 0. The last non-zero remainder is the HCF.",
+      alternatives: [
+        { id: "fibonacci", title: "Why Fibonacci numbers take longest", kind: "conceptual", text: ["For two neighbouring Virahanka–Fibonacci numbers, every division has quotient 1 and the remainders are the earlier Fibonacci numbers: 89, 55, 34, 21, 13, 8, 5, 3, 2, 1.", "So neighbouring Fibonacci numbers need more divisions than any smaller pair, and their HCF is always 1."] },
+      ],
+    },
+    limits: "Pairs up to 240 needing three to nine divisions, including neighbouring Virahanka–Fibonacci numbers; the HCF value itself is the family hcf.",
+  },
+];
+const gcd2 = (a: number, b: number): number => (b ? gcd2(b, a % b) : Math.abs(a));
+B05.push(...DEC_MORE);
+
+// ---------------------------------------------------------------- gap@1: addition without regrouping and with large numbers;
+// inequations; word problems for linear equations; operations on surds
+
+const ADDR = "MATH.number.addition-regroup";
+const SUBR = "MATH.number.subtraction-regroup";
+const INEQ = "MATH.algebra.inequalities";
+const LINR = "MATH.algebra.linear-rational";
+const SURD = "MATH.number.radicals";
+const digitsOf = (n: number, len: number) => String(n).padStart(len, "0").split("").map(Number);
+/** Column sums without carrying (the slip that forgets to regroup): each column's sum mod 10. */
+const noCarry = (a: number, b: number) => {
+  const len = Math.max(String(a).length, String(b).length);
+  const x = digitsOf(a, len);
+  const y = digitsOf(b, len);
+  return Number(x.map((d, i) => (d + y[i]) % 10).join(""));
+};
+/** Each column: the smaller digit taken from the larger (the slip that never regroups in subtraction). */
+const smallFromLarge = (a: number, b: number) => {
+  const len = String(a).length;
+  const x = digitsOf(a, len);
+  const y = digitsOf(b, len);
+  return Number(x.map((d, i) => Math.abs(d - y[i])).join(""));
+};
+const carries = (a: number, b: number) => {
+  let c = 0;
+  let n = 0;
+  for (let x = a, y = b; x > 0 || y > 0; x = Math.floor(x / 10), y = Math.floor(y / 10)) {
+    if ((x % 10) + (y % 10) + c >= 10) {
+      n++;
+      c = 1;
+    } else c = 0;
+  }
+  return n;
+};
+const borrows = (a: number, b: number) => {
+  let n = 0;
+  let br = 0;
+  for (let x = a, y = b; x > 0; x = Math.floor(x / 10), y = Math.floor(y / 10)) {
+    if ((x % 10) - br < y % 10) {
+      n++;
+      br = 1;
+    } else br = 0;
+  }
+  return n;
+};
+/** The column (0 = ones) of the first regrouping in a − b. */
+const firstBorrow = (a: number, b: number) => {
+  for (let j = 0, x = a, y = b; x > 0; j++, x = Math.floor(x / 10), y = Math.floor(y / 10)) if (x % 10 < y % 10) return j;
+  return 0;
+};
+const setStr = (xs: number[]) => (xs.length ? xs.map(n_).join(", ") : "none");
+const ineqSol = ([dom, a, b, c, op]: number[]) => {
+  const lo = dom === 0 ? 0 : dom === 1 ? 1 : -5;
+  const hi = dom === 2 ? 5 : 60;
+  const out: number[] = [];
+  // solve a x + b < c (op 0) or ≤ (op 1): x < (c − b)/a, or x > when a < 0
+  const r = (c - b) / a;
+  for (let x = lo; x <= hi; x++) {
+    const ok = a > 0 ? (op ? x <= r + 1e-9 : x < r - 1e-9) : op ? x >= r - 1e-9 : x > r + 1e-9;
+    if (ok) out.push(x);
+  }
+  return out;
+};
+const DOMN = ["whole number", "natural number", "integer from −5 to 5"];
+const lhs = (a: number, b: number) => `${a === 1 ? "" : a === -1 ? "−" : n_(a)}x ${b < 0 ? "−" : "+"} ${Math.abs(b)}`;
+const ivStr = (lo: number, loC: boolean, hi: number, hiC: boolean) => `${loC ? "[" : "("}${n_(lo)}, ${n_(hi)}${hiC ? "]" : ")"}`;
+const sysData = ([L, w, a1, a2, s]: number[]) => {
+  const U = L + w;
+  const b1 = (((L * 3 + a1 * 5) % 9) + 9) % 9 - 4;
+  const b2 = (((U * 7 + a2 * 2) % 11) + 11) % 11 - 2;
+  const strict1 = s % 2 === 0;
+  const strict2 = s < 2;
+  return { L, U, a1, a2, b1, b2, strict1, strict2, k1: a1 * L + b1, k2: b2 - a2 * U };
+};
+const linData = ([kind, x, m]: number[]) => {
+  // returns the story numbers and the equation; x is the answer
+  if (kind === 0) return { k: 2 + (m % 4), n: 2 + (m % 7), S: 0 }; // ages: mother k times Anu now; in n years the sum
+  if (kind === 1) return { k: 2 + (m % 9), n: 0, S: 0 }; // three consecutive multiples of k, the smallest is x
+  if (kind === 2) return { k: 1 + (m % 12), n: 0, S: 0 }; // length k more than width x
+  if (kind === 3) return { k: [2, 3, 4, 5][m % 4], n: 1 + (m % 3), S: 0 }; // n/k of x added to x
+  return { k: 5 * (1 + (m % 6)), n: 5 * (1 + (m % 6)) + 5 * (1 + Math.floor(m / 6) % 4), S: 0 }; // savings p and q per week
+};
+const surdS = (k: number, m: number) => (m === 1 ? String(k) : `${k === 1 ? "" : k}√${m}`);
+const sqf = (n: number): [number, number] => {
+  let k = 1;
+  let m = n;
+  for (let p = 2; p * p <= m; p++) while (m % (p * p) === 0) {
+    m /= p * p;
+    k *= p;
+  }
+  return [k, m];
+};
+const SQFREE = [2, 3, 5, 6, 7, 10, 11];
+const surOpQ = ([kind, x, y, mi]: number[]) => {
+  const m = SQFREE[mi];
+  if (kind <= 1) {
+    const [A, B] = [x * x * m, y * y * m];
+    const k = kind === 0 ? x + y : x - y;
+    const [sk, sm] = sqf(kind === 0 ? A + B : A - B);
+    const base = [surdS(k, m), surdS(sk, sm), surdS(kind === 0 ? x * y : x + y, m), surdS(k, m * 2 === 4 ? 3 : m + 1)];
+    return { text: `√${A} ${kind === 0 ? "+" : "−"} √${B}`, base, val: k * Math.sqrt(m) };
+  }
+  if (kind === 2) {
+    const [A, B] = [x * m, y * m];
+    const [k, r] = sqf(A * B);
+    const base = [surdS(k, r), `√${A + B}`, surdS(k * k, r), surdS(x * y, m)];
+    return { text: `√${A} × √${B}`, base, val: Math.sqrt(A * B) };
+  }
+  const B = y * m;
+  const A = B * x * x;
+  const base = [String(x), surdS(x, m), String(x * x), `√${A - B}`];
+  return { text: `√${A} ÷ √${B}`, base, val: x };
+};
+const ratQ = ([kind, a, b, c, sg]: number[]) => {
+  if (kind === 0) {
+    // a/√b = a√b / b, simplified
+    const g = gcd2(a, b);
+    const [top, bot] = [a / g, b / g];
+    const right = bot === 1 ? surdS(top, b) : `${surdS(top, b)}/${bot}`;
+    const base = [right, surdS(a, b), `${a}/${b}`, bot === 1 ? `${surdS(top, b)}/${b}` : surdS(top * bot === top ? top + 1 : top, b)];
+    return { text: `${a}/√${b}`, base, val: a / Math.sqrt(b) };
+  }
+  // a/(√b + c) (sg 0) or a/(√b − c) (sg 1): multiply by the conjugate; the denominator becomes b − c²
+  const d = b - c * c;
+  const s = sg ? 1 : -1; // sign of c in the numerator
+  const num = (k: number, dd: number) => {
+    // a(√b ± c)/dd simplified, written with the sign carried to the numerator
+    let [p, q, den] = [k, s * k * c, dd];
+    if (den < 0) [p, q, den] = [-p, -q, -den];
+    const g = gcd2(gcd2(Math.abs(p), Math.abs(q)), den);
+    [p, q, den] = [p / g, q / g, den / g];
+    const rt = `${p < 0 ? "−" : ""}${Math.abs(p) === 1 ? "" : Math.abs(p)}√${b}`;
+    const t = `${rt} ${q < 0 ? "−" : "+"} ${Math.abs(q)}`;
+    return den === 1 ? t : `(${t})/${den}`;
+  };
+  const right = num(a, d);
+  const base = [right, num(a, b + c * c), num(a, b - c), num(a, -d)];
+  return { text: `${a}/(√${b} ${sg ? "−" : "+"} ${c})`, base, val: a / (Math.sqrt(b) + (sg ? -c : c)) };
+};
+
+const CORE_MORE: Def[] = [
+  {
+    id: "aeaddn",
+    arity: 3,
+    title: "Adding two-digit numbers without regrouping, and totals up to 200",
+    competency: ADDR,
+    type: "integer",
+    mc: true,
+    // [kind, a, b]: kind 0 two two-digit numbers with no regrouping; kind 1 a total from 100 to 200 (a two- or three-digit, b two-digit)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [10, 199], [10, 99]])) return "Two-digit additions, or totals from 100 to 200.";
+      const [kind, a, b] = p;
+      if (kind === 0) return a > 99 || (a % 10) + (b % 10) >= 10 || a + b > 99 ? "Two two-digit numbers whose ones and tens add without regrouping." : null;
+      return a + b < 100 || a + b > 200 ? "A total from 100 to 200." : null;
+    },
+    keep: ([kind, a, b]) => kind === 0 || (a * 7 + b * 3) % 4 === 0,
+    prompt: ([, a, b]) => `${a} + ${b} = ?`,
+    solve: ([, a, b]) => {
+      const t = Math.floor(a / 10) + Math.floor(b / 10);
+      const o = (a % 10) + (b % 10);
+      return {
+        steps: [
+          { id: "tens", op: "add", competency: PV, inputs: [Math.floor(a / 10) * 10, Math.floor(b / 10) * 10], value: t * 10 },
+          { id: "ones", op: "add", competency: "MATH.number.addition", inputs: [a % 10, b % 10], value: o },
+          { id: "total", op: "add", competency: ADDR, inputs: [t * 10, o], value: a + b },
+        ],
+        answer: a + b,
+      };
+    },
+    // independent: count on from a in tens, then in ones
+    validate: ([, a, b], v) => {
+      let s = a;
+      for (let i = 0; i < Math.floor(b / 10); i++) s += 10;
+      for (let i = 0; i < b % 10; i++) s++;
+      return v === s;
+    },
+    bugs: ([kind, a, b]) => {
+      const o = (a % 10) + (b % 10);
+      return [
+        { id: "tens-ones-mixed", kind: "conceptual", competency: PV, says: `The tens digit of one number was added to the ones digit of the other; line up tens under tens and ones under ones.`, predict: Math.floor(a / 10) + (b % 10) + 10 * ((a % 10) + Math.floor(b / 10)) },
+        ...(kind === 1 && o >= 10 ? [{ id: "no-regroup", kind: "prerequisite", competency: PV, says: `The ten made by the ones (${a % 10} + ${b % 10} = ${o}) was not carried to the tens.`, predict: a + b - 10 } as Bug] : []),
+        ...(kind === 1 && Math.floor((a % 100) / 10) + Math.floor(b / 10) + (o >= 10 ? 1 : 0) >= 10 ? [{ id: "hundred-lost", kind: "conceptual", competency: PV, says: "The tens added up to 10 or more, but the new hundred was not written; 10 tens make 1 hundred.", predict: a + b - 100 } as Bug] : []),
+      ];
+    },
+    distractors: ([, a, b]) => [a + b + 10, a + b - 10, a + b + 1],
+    variants: () => [],
+    explain: (s) => (s.id === "tens" ? `Tens: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "ones" ? `Ones: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
+    domain: [[0, 1], [10, 199], [10, 99]],
+    cap: 450,
+    difficulty: ([kind, a, b]) => (kind === 0 ? 1 : (a % 10) + (b % 10) >= 10 ? 3 : 2),
+    figure: ([, a, b]) => ({ type: "blocks", hundreds: Math.floor(a / 100), tens: Math.floor((a % 100) / 10) + Math.floor(b / 10), ones: (a % 10) + (b % 10), note: `${a} and ${b} together` }),
+    word: ([, a, b]) => `${name(a)} collects ${a} shells on the beach at Mamallapuram and ${name(b + 1)} collects ${b}. How many shells do they have together?`,
+    teach: {
+      idea: "Adding tens to tens and ones to ones works because each digit counts a different place. When the ones stay under 10, nothing needs to be regrouped.",
+      method: "Split both numbers into tens and ones, add the tens, add the ones, and put them together. On a number line, jump the tens first, then the ones.",
+      visual: ([, a, b]) => ({ type: "numberline", from: a, to: a + b, step: Math.max(1, Math.floor(b / 10)) === 0 ? 1 : 10, jumps: [[a, a + 10 * Math.floor(b / 10)], [a + 10 * Math.floor(b / 10), a + b]] }),
+      alternatives: [
+        { id: "blocks", title: "Use base-ten blocks", kind: "conceptual", text: ["Show each number with tens rods and ones cubes.", "Push the rods together and the cubes together, then count: rods first (by tens), then cubes."], visual: ([, a, b]) => ({ type: "blocks", hundreds: 0, tens: Math.floor((a % 100) / 10) + Math.floor(b / 10), ones: (a % 10) + (b % 10) }) },
+      ],
+    },
+    limits: "Two-digit additions without regrouping (Grade 2) and totals from 100 to 200 (Grade 3); two-digit additions with regrouping are the family addr.",
+  },
+  {
+    id: "aeadd3",
+    arity: 2,
+    title: "Adding three-digit numbers without regrouping",
+    competency: ADDSUB,
+    type: "integer",
+    mc: true,
+    // [a, b]: a three-digit, b two- or three-digit, no column reaching 10
+    parse: (t) => {
+      const m = t.replace(/\s/g, "").match(/^(\d{3})\+(\d{2,3})=?\??$/);
+      return m ? [Number(m[1]), Number(m[2])] : null;
+    },
+    reject: ([a, b]) => (a < 100 || a > 899 || b < 10 || b > 899 || carries(a, b) > 0 || a + b > 999 ? "A three-digit number plus a two- or three-digit number with no regrouping." : null),
+    prompt: ([a, b]) => `${a} + ${b} = ?`,
+    solve: ([a, b]) => {
+      const [x, y] = [digitsOf(a, 3), digitsOf(b, 3)];
+      return {
+        steps: [
+          { id: "ones", op: "add", competency: "MATH.number.addition", inputs: [x[2], y[2]], value: x[2] + y[2] },
+          { id: "tens", op: "add", competency: PV, inputs: [x[1], y[1]], value: x[1] + y[1] },
+          { id: "hundreds", op: "add", competency: ADDSUB, inputs: [x[0], y[0]], value: x[0] + y[0] },
+        ],
+        answer: a + b,
+      };
+    },
+    // independent: subtract b back from the answer (the inverse) and compare with a
+    validate: ([a, b], v) => isInt(v) && v - b === a,
+    bugs: ([a, b]) => [
+      ...(b < 100 ? [{ id: "misaligned", kind: "conceptual", competency: PV, says: `${b} was written under the hundreds and tens of ${a}; line up the ones digits first: ${b} has no hundreds.`, predict: a + 10 * b } as Bug] : []),
+      { id: "digits-joined", kind: "procedural", competency: PV, says: "The column sums were not kept in their own places.", predict: Number(`${Math.floor(a / 100) + Math.floor(b / 100)}${(Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10)}${(a % 10) + (b % 10)}0`) },
+      { id: "one-column", kind: "procedural", competency: ADDSUB, says: "One column was copied without adding; add every column.", predict: a + b - (b % 10) },
+    ],
+    distractors: ([a, b]) => [a + b + 100, a + b - 10, a + b + 1],
+    variants: () => [],
+    explain: (s) => `${s.id[0].toUpperCase()}${s.id.slice(1)}: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`,
+    domain: [[100, 899], [10, 899]],
+    cap: 400,
+    difficulty: ([a, b]) => (b < 100 ? 1 : a + b > 900 ? 3 : 2),
+    figure: ([a, b]) => ({ type: "blocks", hundreds: Math.floor(a / 100) + Math.floor(b / 100), tens: (Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10), ones: (a % 10) + (b % 10), note: `${a} and ${b} together` }),
+    word: ([a, b]) => `A school library has ${a} story books and ${b} science books. How many books is that altogether?`,
+    teach: {
+      idea: "In column addition each column counts one place: ones, tens, hundreds. When no column adds up to 10 or more, each column's sum is simply written below it.",
+      method: "Line up the ones digits. Add the ones, then the tens, then the hundreds, writing each sum under its column.",
+      alternatives: [
+        { id: "expand", title: "Split into places", kind: "procedural", text: ["Write each number as hundreds + tens + ones: 342 = 300 + 40 + 2.", "Add the hundreds, the tens and the ones separately and put them together."] },
+      ],
+    },
+    limits: "Three-digit plus two- or three-digit numbers with no regrouping and totals up to 999; with regrouping is the family adcol3.",
+  },
+  {
+    id: "aecol4",
+    arity: 3,
+    title: "Adding and subtracting four- and five-digit numbers with regrouping",
+    competency: ADDSUB,
+    type: "integer",
+    mc: true,
+    // [op, a, b]: a + b (op 0) or a − b (op 1), four- or five-digit numbers, with at least two regroupings
+    parse: (t) => {
+      const m = t.replace(/[\s,]/g, "").match(/^(\d{4,5})([+\-−])(\d{3,5})=?\??$/);
+      return m ? [m[2] === "+" ? 0 : 1, Number(m[1]), Number(m[3])] : null;
+    },
+    reject: ([op, a, b]) => {
+      if (![0, 1].includes(op) || a < 1000 || a > 99999 || b < 1000 || b > 99999) return "Four- and five-digit numbers.";
+      if (op === 0) return a + b > 99999 || carries(a, b) < 2 ? "A sum up to 99,999 that regroups at least twice." : null;
+      return b >= a || borrows(a, b) < 2 ? "A difference (larger first) that regroups at least twice." : null;
+    },
+    prompt: ([op, a, b]) => `${ind(a)} ${op ? "−" : "+"} ${ind(b)} = ?`,
+    solve: ([op, a, b]) => ({ steps: [{ id: op ? "subtract" : "add", op: op ? "subtract" : "add", competency: ADDSUB, inputs: [a, b, op ? borrows(a, b) : carries(a, b)], value: op ? a - b : a + b }], answer: op ? a - b : a + b }),
+    // independent: the inverse operation (add back for a difference, take away for a sum)
+    validate: ([op, a, b], v) => isInt(v) && (op ? v + b === a : v - b === a),
+    bugs: ([op, a, b]) =>
+      op === 0
+        ? [{ id: "no-carry", kind: "prerequisite", competency: PV, says: "The tens made in a column were not carried to the next column; 10 ones make a ten, 10 tens a hundred, and so on.", predict: noCarry(a, b) }]
+        : [
+            { id: "smaller-from-larger", kind: "conceptual", competency: SUBR, says: "In some columns the smaller digit was taken from the larger one; when the top digit is smaller, regroup 1 from the next column first.", predict: smallFromLarge(a, b) },
+            { id: "regroup-not-reduced", kind: "procedural", competency: SUBR, says: "A column was regrouped, but the digit it was taken from was not made 1 less.", predict: a - b + 10 ** (firstBorrow(a, b) + 1) },
+          ],
+    distractors: ([op, a, b]) => {
+      const r = op ? a - b : a + b;
+      return [r + 1000, r - 100, r + 10];
+    },
+    variants: () => [],
+    explain: (s) => `${ind(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${ind(Number(s.inputs[1]))}: column by column from the ones, ${s.op === "add" ? "carrying" : "regrouping"} ${s.inputs[2]} times: ${ind(Number(s.value))}`,
+    domain: [[0, 1], [1000, 99999], [1000, 99999]],
+    cap: 450,
+    difficulty: ([op, a]) => (a < 10000 ? (op ? 2 : 1) : op ? 3 : 2),
+    word: ([op, a, b]) => (op === 0 ? `In January ${ind(a)} people visited the Thanjavur Big Temple and in February ${ind(b)}. How many visitors came in the two months together?` : `A cooperative society had ₹${ind(a)} in its account and spent ₹${ind(b)} on seeds. How many rupees are left?`),
+    teach: {
+      idea: "Large numbers are added and subtracted column by column, exactly as with small ones. Ten in any place makes one of the next place (and one of a place can be broken into ten of the place to its right).",
+      method: "Write the numbers with the ones lined up. Start at the ones: carry (when adding) or regroup (when subtracting) as needed, then move one column left at a time.",
+      alternatives: [
+        { id: "check", title: "Check with the inverse", kind: "procedural", text: ["After adding, subtract one number from the answer: you should get the other.", "After subtracting, add the answer to the smaller number: you should get the larger."] },
+      ],
+      visual: ([, a, b]) => ({ type: "table", head: ["TTh", "Th", "H", "T", "O"], rows: [String(a).padStart(5, " ").split(""), String(b).padStart(5, " ").split("")] }),
+    },
+    limits: "Four- and five-digit numbers with at least two regroupings; sums up to 99,999.",
+  },
+  {
+    id: "aeineqz",
+    arity: 5,
+    title: "Solving an inequation over whole numbers, natural numbers or integers",
+    competency: INEQ,
+    type: "set",
+    // [dom, a, b, c, op]: a x + b < c (op 0) or ≤ c (op 1), x a whole number (dom 0), natural number (1) or integer from −5 to 5 (2)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [-4, 5], [-9, 9], [-15, 30], [0, 1]])) return "ax + b < c or ≤ c over a set of numbers.";
+      const [dom, a, b] = p;
+      if (a === 0 || b === 0 || (dom < 2 && a < 1)) return "A non-zero coefficient (positive for whole and natural numbers) and constant.";
+      const sol = ineqSol(p);
+      return sol.length < 1 || sol.length > 8 || (dom === 2 && sol.length === 11) ? "Between one and eight solutions." : null;
+    },
+    keep: ([dom, a, , c]) => (dom === 2 ? true : (a + c) % 2 === 0),
+    prompt: ([dom, a, b, c, op]) => `x is ${dom === 2 ? "an" : "a"} ${DOMN[dom]}. Solve ${lhs(a, b)} ${op ? "≤" : "<"} ${n_(c)} and list every x in the solution set, separated by commas.`,
+    solve: (p) => {
+      const [, a, b, c] = p;
+      const sol = ineqSol(p);
+      return { steps: [{ id: "bound", op: "divide", competency: INEQ, inputs: [c - b, a], value: (c - b) / a }, { id: "list", op: "list", competency: INEQ, inputs: [DOMN[p[0]]], value: sol }], answer: sol };
+    },
+    // independent: test every number of the set in the inequation itself
+    validate: (p, v) => {
+      if (!Array.isArray(v)) return false;
+      const [dom, a, b, c, op] = p;
+      const [lo, hi] = dom === 0 ? [0, 80] : dom === 1 ? [1, 80] : [-5, 5];
+      const ok: number[] = [];
+      for (let x = lo; x <= hi; x++) if (op ? a * x + b <= c : a * x + b < c) ok.push(x);
+      const got = [...v].sort((x, y) => x - y);
+      return got.length === ok.length && got.every((x, i) => x === ok[i]);
+    },
+    bugs: (p) => {
+      const [dom, a, b, c, op] = p;
+      const sol = ineqSol(p);
+      const r = (c - b) / a;
+      const out: Bug[] = [];
+      if (Number.isInteger(r)) out.push(op ? { id: "boundary-left-out", kind: "procedural", competency: INEQ, says: `≤ includes the boundary: x = ${n_(r)} makes both sides equal, so it is in the solution set.`, predict: sol.filter((x) => x !== r) } : { id: "boundary-included", kind: "procedural", competency: INEQ, says: `With < the boundary x = ${n_(r)} is not included: it makes both sides equal, not smaller.`, predict: [...sol, r].filter((x) => x >= (dom === 0 ? 0 : dom === 1 ? 1 : -5) && x <= 5 * 12).sort((x, y) => x - y) });
+      if (dom === 0 && sol.includes(0)) out.push({ id: "zero-left-out", kind: "recall", competency: INEQ, says: "0 was left out; the whole numbers start at 0 (the natural numbers start at 1).", predict: sol.filter((x) => x !== 0) });
+      if (dom === 1) out.push({ id: "zero-put-in", kind: "recall", competency: INEQ, says: "0 was put in; the natural numbers start at 1.", predict: [0, ...sol] });
+      if (a < 0) out.push({ id: "sign-kept", kind: "conceptual", competency: INEQ, says: `Both sides were divided by ${n_(a)}, a negative number, without reversing the sign.`, predict: ineqSol([dom, -a, -b, -c, op]).length ? (() => { const xs: number[] = []; for (let x = -5; x <= 5; x++) if (op ? x <= r : x < r) xs.push(x); return xs; })() : null });
+      return out.filter((b) => b.predict === null || (Array.isArray(b.predict) && b.predict.length > 0));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "bound" ? `Undo the + or − and divide by ${n_(Number(s.inputs[1]))}${Number(s.inputs[1]) < 0 ? " (reversing the sign)" : ""}: the boundary is ${fmtQ(Number(s.value))}` : `The ${s.inputs[0]}s that fit: ${setStr(s.value as number[])}`),
+    domain: [[0, 2], [-4, 5], [-9, 9], [-15, 30], [0, 1]],
+    cap: 450,
+    difficulty: ([dom, a]) => (dom === 2 ? (a < 0 ? 3 : 2) : 1),
+    word: ([dom, a, b, c, op]) => `${name(a + c)} thinks of a ${dom === 2 ? "whole number or negative number between −5 and 5" : dom === 0 ? "whole number (0 is allowed)" : "counting number (1, 2, 3, …)"}, multiplies it by ${n_(a)} and then ${b < 0 ? `takes away ${-b}` : `adds ${b}`}. The result is ${op ? "at most" : "less than"} ${n_(c)}. Which numbers could ${name(a + c)} be thinking of? List them all.`,
+    teach: {
+      idea: "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+      method: "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line.",
+      visual: ([dom, a, b, c, op]) => ({ type: "numberline", from: dom === 2 ? -5 : 0, to: dom === 2 ? 5 : Math.max(10, Math.ceil((c - b) / Math.abs(a)) + 2), marks: ineqSol([dom, a, b, c, op]) }),
+      alternatives: [
+        { id: "try_each", title: "Try each number", kind: "procedural", text: ["Put x = 0, 1, 2, … (or −5 to 5) into the inequation one by one.", "Keep each number that makes it true; stop when they stop working."] },
+      ],
+    },
+    limits: "ax + b < c or ≤ c over whole numbers, natural numbers, or integers from −5 to 5, with one to eight solutions.",
+  },
+  {
+    id: "aeineqs",
+    arity: 5,
+    title: "Solving a system of two linear inequalities",
+    competency: INEQ,
+    type: "interval",
+    mc: true,
+    // [L, w, a1, a2, s]: a1 x + b1 > (≥) a1 L + b1 and b2 − a2 x ≥ (>) b2 − a2 (L + w); s sets which are strict
+    parse: none,
+    reject: (p) => (!inRange(p, [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]]) || (p[2] === 1 && p[3] === 1) ? "Two inequalities with whole-number boundaries." : null),
+    prompt: (p) => {
+      const d = sysData(p);
+      return `Solve the system of inequalities ${lhs(d.a1, d.b1)} ${d.strict1 ? ">" : "≥"} ${n_(d.k1)} and ${d.b2} − ${d.a2 === 1 ? "" : d.a2}x ${d.strict2 ? ">" : "≥"} ${n_(d.k2)}, for real x. Write the solution set in interval notation.`;
+    },
+    solve: (p) => {
+      const d = sysData(p);
+      const ans = ivStr(d.L, !d.strict1, d.U, !d.strict2);
+      return { steps: [{ id: "first", op: "solve", competency: INEQ, inputs: [1, d.L], value: `x ${d.strict1 ? ">" : "≥"} ${n_(d.L)}` }, { id: "second", op: "solve", competency: INEQ, inputs: [2, d.U], value: `x ${d.strict2 ? "<" : "≤"} ${n_(d.U)}` }, { id: "both", op: "intersect", competency: INEQ, inputs: [d.L, d.U], value: ans }], answer: ans };
+    },
+    // independent: test points across the line in both inequalities, and the ends themselves
+    validate: (p, v) => {
+      if (typeof v !== "string") return false;
+      const d = sysData(p);
+      const m = v.replace(/−/g, "-").replace(/\s/g, "").match(/^([[(])(-?\d+),(-?\d+)([\])])$/);
+      if (!m) return false;
+      const [lo, hi] = [Number(m[2]), Number(m[3])];
+      const inside = (x: number) => (m[1] === "[" ? x >= lo : x > lo) && (m[4] === "]" ? x <= hi : x < hi);
+      const holds = (x: number) => (d.strict1 ? d.a1 * x + d.b1 > d.k1 : d.a1 * x + d.b1 >= d.k1) && (d.strict2 ? d.b2 - d.a2 * x > d.k2 : d.b2 - d.a2 * x >= d.k2);
+      for (let x = d.L - 4; x <= d.U + 4; x += 0.25) if (inside(x) !== holds(x)) return false;
+      return true;
+    },
+    bugs: (p) => {
+      const d = sysData(p);
+      return [
+        { id: "sign-kept", kind: "conceptual", competency: INEQ, says: `In the second inequality both sides were divided by −${d.a2} without reversing the sign, giving x ${d.strict2 ? ">" : "≥"} ${n_(d.U)} instead of x ${d.strict2 ? "<" : "≤"} ${n_(d.U)}.`, predict: `${d.strict2 ? "(" : "["}${n_(d.U)}, ∞)` },
+        { id: "union", kind: "conceptual", competency: INEQ, says: "The two solution sets were joined (or) instead of overlapped (and); a system needs x to satisfy both inequalities at once.", predict: "(−∞, ∞)" },
+        { id: "ends", kind: "procedural", competency: INEQ, says: "The ends were included or left out wrongly: > and < leave the end out (round bracket); ≥ and ≤ include it (square bracket).", predict: ivStr(d.L, d.strict1, d.U, d.strict2) },
+      ];
+    },
+    distractors: (p) => {
+      const d = sysData(p);
+      return [ivStr(d.L - 1, !d.strict1, d.U, !d.strict2), ivStr(d.L, !d.strict1, d.U + 1, !d.strict2)];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "both" ? `Both must hold: ${s.value}` : `Inequality ${s.inputs[0]} gives ${s.value}`),
+    domain: [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]],
+    cap: 450,
+    difficulty: ([, , a1, a2, s]) => (s === 0 && a1 * a2 < 6 ? 1 : a2 > 2 ? 3 : 2),
+    word: (p) => {
+      const d = sysData(p);
+      return `A number x satisfies two conditions: ${d.a1} times x ${d.b1 < 0 ? `minus ${-d.b1}` : `plus ${d.b1}`} is ${d.strict1 ? "more than" : "at least"} ${n_(d.k1)}, and ${d.b2} minus ${d.a2} times x is ${d.strict2 ? "more than" : "at least"} ${n_(d.k2)}. Which real numbers x are possible? Write the set in interval notation.`;
+    },
+    teach: {
+      idea: "A system of inequalities in one variable asks for the numbers that satisfy every inequality at the same time: the overlap (intersection) of their solution sets.",
+      method: "Solve each inequality on its own (reverse the sign when dividing by a negative number). Draw both on one number line and take the part covered by both; use [ ] for ≤ or ≥ and ( ) for < or >.",
+      visual: (p) => {
+        const d = sysData(p);
+        return { type: "numberline", from: d.L - 3, to: d.U + 3, marks: [d.L, d.U] };
+      },
+      alternatives: [
+        { id: "test_points", title: "Test a point in each part", kind: "procedural", text: ["The two boundaries cut the number line into three parts.", "Try one number from each part in both inequalities: the part where both are true is the answer."] },
+      ],
+    },
+    limits: "Two linear inequalities whose solution sets overlap in a bounded interval with whole-number ends; double inequalities are the family apineq.",
+  },
+  {
+    id: "aeineqw",
+    arity: 4,
+    title: "Modelling a word problem with a linear inequality",
+    competency: INEQ,
+    skill: "MATH.reasoning.model-selection",
+    type: "interval",
+    mc: true,
+    // [kind, a, b, c]: 0 marks m1 = a, m2 = b, average of three at least 40 + 5c; 1 a trip: ₹(500 + 100c) for the bus and ₹a per student,
+    // at most ₹(500 + 100c + a b); 2 a temperature between 5a and 5b °C, in °F
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [5, 95], [5, 95], [0, 10]])) return "A marks, budget or temperature problem.";
+      const [kind, a, b, c] = p;
+      if (kind === 0) {
+        const k = 3 * (40 + 5 * c) - a - b;
+        return a < 30 || b < 30 || k < 10 || k > 95 ? "Marks out of 100 with a reachable target." : null;
+      }
+      if (kind === 1) return a % 5 || a < 20 || a > 60 || b < 10 || b > 45 || c > 5 ? "₹20 to ₹60 a student, 10 to 45 students." : null;
+      return a >= b || b > 9 || c !== 0 ? "Two temperatures from 5 °C to 45 °C." : null;
+    },
+    prompt: ([kind, a, b, c]) =>
+      [
+        `${name(a + b)} scored ${a} and ${b} marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least ${40 + 5 * c}. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).`,
+        `A school trip costs ₹${500 + 100 * c} for the bus plus ₹${a} for each student's entry ticket. The school can spend at most ₹${500 + 100 * c + a * b}. Let x be the number of students. Write an inequality for x.`,
+        `A greenhouse must be kept between ${5 * a} °C and ${5 * b} °C (both included). A thermometer shows °F, where F = 9C/5 + 32. Write the allowed range of F as an inequality.`,
+      ][kind],
+    solve: ([kind, a, b, c]) => {
+      if (kind === 0) {
+        const k = 3 * (40 + 5 * c) - a - b;
+        return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`(${a} + ${b} + x)/3 ≥ ${40 + 5 * c}`], value: k }, { id: "solve", op: "solve", competency: INEQ, inputs: [k], value: `${k} <= x <= 100` }], answer: `${k} <= x <= 100` };
+      }
+      if (kind === 1) return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${500 + 100 * c} + ${a}x ≤ ${500 + 100 * c + a * b}`], value: b }, { id: "solve", op: "solve", competency: INEQ, inputs: [b], value: `x <= ${b}` }], answer: `x <= ${b}` };
+      const [f1, f2] = [9 * a + 32, 9 * b + 32];
+      return { steps: [{ id: "model", op: "model", competency: INEQ, inputs: [`${5 * a} ≤ C ≤ ${5 * b}`], value: f1 }, { id: "solve", op: "solve", competency: INEQ, inputs: [f1], value: `${f1} <= F <= ${f2}` }], answer: `${f1} <= F <= ${f2}` };
+    },
+    // independent: check numbers on both sides of each end against the story itself
+    validate: ([kind, a, b, c], v) => {
+      if (typeof v !== "string") return false;
+      const t = v.replace(/\s/g, "").replace(/≤/g, "<=").toLowerCase();
+      const two = t.match(/^(-?\d+)<=([a-z])<=(-?\d+)$/);
+      const one = t.match(/^([a-z])<=(-?\d+)$/);
+      const ok = (x: number) => (kind === 0 ? (a + b + x) / 3 >= 40 + 5 * c && x <= 100 && x >= 0 : kind === 1 ? 500 + 100 * c + a * x <= 500 + 100 * c + a * b && x >= 0 : (5 * (x - 32)) / 9 >= 5 * a && (5 * (x - 32)) / 9 <= 5 * b);
+      const inside = (x: number) => (two ? x >= Number(two[1]) && x <= Number(two[3]) : one ? x <= Number(one[2]) && x >= 0 : false);
+      if (!two && !one) return false;
+      if (kind === 1 && !one) return false;
+      if (kind !== 1 && !two) return false;
+      for (let x = kind === 2 ? 0 : 0; x <= (kind === 2 ? 140 : 100); x += 0.5) if (ok(x) !== inside(x)) return false;
+      return true;
+    },
+    bugs: ([kind, a, b, c]) => {
+      if (kind === 0) {
+        const k = 3 * (40 + 5 * c) - a - b;
+        return [
+          { id: "average-as-mark", kind: "conceptual", competency: INEQ, says: `The required average (${40 + 5 * c}) was used as the mark needed; the three marks together must be at least 3 × ${40 + 5 * c} = ${3 * (40 + 5 * c)}.`, predict: `${40 + 5 * c} <= x <= 100` },
+          { id: "no-cap", kind: "procedural", competency: INEQ, says: "The upper limit was left out; a test is out of 100, so x ≤ 100 as well.", predict: `x >= ${k}` },
+        ];
+      }
+      if (kind === 1) return [{ id: "fixed-ignored", kind: "procedural", competency: INEQ, says: `The bus cost (₹${500 + 100 * c}) was left out of the total; it is paid whatever the number of students.`, predict: (500 + 100 * c + a * b) % a === 0 ? `x <= ${(500 + 100 * c + a * b) / a}` : null }, { id: "wrong-way", kind: "conceptual", competency: INEQ, says: "'At most' means the cost is less than or equal to the limit, so x ≤ the boundary, not x ≥.", predict: `x >= ${b}` }];
+      return [{ id: "no-32", kind: "procedural", competency: INEQ, says: "The + 32 in F = 9C/5 + 32 was left out.", predict: `${9 * a} <= F <= ${9 * b}` }, { id: "upside-down", kind: "conceptual", competency: INEQ, says: "The fraction was used upside down (5/9 instead of 9/5).", predict: (25 * a) % 9 === 0 && (25 * b) % 9 === 0 ? `${(25 * a) / 9 + 32} <= F <= ${(25 * b) / 9 + 32}` : null }];
+    },
+    distractors: ([kind, a, b, c]) => {
+      if (kind === 0) {
+        const k = 3 * (40 + 5 * c) - a - b;
+        return [`${k + 1} <= x <= 100`, `x <= ${k}`];
+      }
+      if (kind === 1) return [`x <= ${b + 1}`, `x < ${b}`];
+      return [`${9 * a + 31} <= F <= ${9 * b + 33}`, `${9 * a + 32} < F < ${9 * b + 32}`];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "model" ? `Write the condition as an inequality: ${s.inputs[0]}` : `Solve it: ${s.value}`),
+    domain: [[0, 2], [5, 95], [5, 95], [0, 10]],
+    cap: 450,
+    difficulty: ([kind]) => (kind === 1 ? 1 : kind === 0 ? 2 : 3),
+    word: ([kind, a, b, c]) =>
+      [
+        `In the school's three unit tests (each out of 100), ${name(a)} got ${a} and ${b}. The scholarship needs an average of at least ${40 + 5 * c}. What marks x in the last test would be enough? Give the range as an inequality.`,
+        `For a visit to the Guindy National Park, the bus costs ₹${500 + 100 * c} and each student's ticket is ₹${a}. The class fund has ₹${500 + 100 * c + a * b}. How many students x can go? Write an inequality for x.`,
+        `Mushrooms grow best between ${5 * a} °C and ${5 * b} °C. A farmer's thermometer reads in °F (F = 9C/5 + 32). Write the best range of F as an inequality.`,
+      ][kind],
+    teach: {
+      idea: "Words like 'at least', 'at most', 'no more than' and 'between' describe inequalities. Turning them into symbols and solving gives the whole range of answers that work.",
+      method: "Name the unknown, write the condition with ≥, ≤, < or >, solve it like an equation (reversing the sign if you divide by a negative), then check that the answer makes sense in the story (marks up to 100, numbers of people not negative).",
+      alternatives: [
+        { id: "words", title: "A table of key words", kind: "conceptual", text: ["at least → ≥; at most, no more than → ≤; more than → >; less than → <.", "'between A and B, both included' → A ≤ x ≤ B."] },
+      ],
+    },
+    limits: "Marks, budgets and temperatures leading to one linear inequality; interpreting the solution as whole numbers is asked in words only.",
+  },
+  {
+    id: "aenbhd",
+    arity: 3,
+    title: "Neighbourhoods of a point in interval notation",
+    competency: INEQ,
+    skill: "MATH.sets-relations.real-intervals",
+    type: "interval",
+    mc: true,
+    // [kind, a, d]: 0 the d-neighbourhood {x : |x − a| < d}; 1 {x : |x − a| ≤ d}; 2 {x : |x − a| > d}
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 2], [-10, 10], [1, 9]]) ? "A point from −10 to 10 and a radius from 1 to 9." : null),
+    prompt: ([kind, a, d]) => {
+      const ax = a === 0 ? "|x|" : `|x ${a < 0 ? "+" : "−"} ${Math.abs(a)}|`;
+      return kind === 0 ? `Write the ${d}-neighbourhood of ${n_(a)}, that is the set {x ∈ ℝ : ${ax} < ${d}}, in interval notation.` : `Write the set {x ∈ ℝ : ${ax} ${kind === 1 ? "≤" : ">"} ${d}} in interval notation.`;
+    },
+    solve: ([kind, a, d]) => {
+      const ans = kind === 0 ? `(${n_(a - d)}, ${n_(a + d)})` : kind === 1 ? `[${n_(a - d)}, ${n_(a + d)}]` : `(−∞, ${n_(a - d)}) ∪ (${n_(a + d)}, ∞)`;
+      return { steps: [{ id: "ends", op: "evaluate", competency: INEQ, inputs: [a, d], value: `${n_(a - d)} and ${n_(a + d)}` }, { id: "interval", op: "write", competency: "MATH.sets-relations.real-intervals", inputs: [kind], value: ans }], answer: ans };
+    },
+    // independent: test points: x is in the set exactly when its distance from a is less than (at most, more than) d
+    validate: ([kind, a, d], v) => {
+      if (typeof v !== "string") return false;
+      const t = v.replace(/−/g, "-").replace(/\s/g, "").replace(/∞/g, "inf").toLowerCase();
+      const pieces = t.split(/u|∪/).map((s) => s.match(/^([[(])(-?inf|-?\d+),(-?inf|-?\d+)([\])])$/));
+      if (pieces.some((m) => !m)) return false;
+      const inSet = (x: number) => pieces.some((m) => {
+        const lo = m![2] === "-inf" ? -Infinity : Number(m![2]);
+        const hi = m![3] === "inf" ? Infinity : Number(m![3]);
+        return (m![1] === "[" ? x >= lo : x > lo) && (m![4] === "]" ? x <= hi : x < hi);
+      });
+      for (let x = a - d - 5; x <= a + d + 5; x += 0.25) {
+        const dist = Math.abs(x - a);
+        if (inSet(x) !== (kind === 0 ? dist < d : kind === 1 ? dist <= d : dist > d)) return false;
+      }
+      return true;
+    },
+    bugs: ([kind, a, d]) => [
+      ...(a !== 0 ? [{ id: "sign-of-centre", kind: "conceptual", competency: INEQ, says: `|x ${a < 0 ? "+" : "−"} ${Math.abs(a)}| is the distance from x to ${n_(a)}, not to ${n_(-a)}.`, predict: kind === 0 ? `(${n_(-a - d)}, ${n_(-a + d)})` : kind === 1 ? `[${n_(-a - d)}, ${n_(-a + d)}]` : `(−∞, ${n_(-a - d)}) ∪ (${n_(-a + d)}, ∞)` } as Bug] : []),
+      kind === 2
+        ? { id: "inside", kind: "conceptual", competency: INEQ, says: `|x − a| > ${d} means x is MORE than ${d} away from ${n_(a)}: outside the interval, on both sides.`, predict: `(${n_(a - d)}, ${n_(a + d)})` }
+        : { id: "brackets", kind: "procedural", competency: "MATH.sets-relations.real-intervals", says: kind === 0 ? "A neighbourhood uses < (strictly less), so the ends are left out: round brackets." : "≤ includes the ends: square brackets.", predict: kind === 0 ? `[${n_(a - d)}, ${n_(a + d)}]` : `(${n_(a - d)}, ${n_(a + d)})` },
+      ...(kind < 2 ? [{ id: "one-side", kind: "conceptual", competency: INEQ, says: `Only one side of ${n_(a)} was taken; the distance ${d} can be on either side, so the set runs from ${n_(a - d)} to ${n_(a + d)}.`, predict: kind === 0 ? `(${n_(a)}, ${n_(a + d)})` : `[${n_(a)}, ${n_(a + d)}]` } as Bug] : []),
+    ],
+    distractors: ([kind, a, d]) => [kind === 2 ? `(−∞, ${n_(a - d)}] ∪ [${n_(a + d)}, ∞)` : `(${n_(a - 2 * d)}, ${n_(a + 2 * d)})`, `(${n_(a - d)}, ∞)`],
+    variants: () => [],
+    explain: (s) => (s.id === "ends" ? `The points at distance ${s.inputs[1]} from ${n_(Number(s.inputs[0]))} are ${s.value}` : `So the set is ${s.value}`),
+    domain: [[0, 2], [-10, 10], [1, 9]],
+    difficulty: ([kind, a]) => (kind === 2 ? 3 : a < 0 ? 2 : 1),
+    word: ([kind, a, d]) => (kind === 2 ? `A cold store sounds an alarm when its temperature x (in °C) is more than ${d} degrees away from ${n_(a)} °C. Write the set of temperatures that sound the alarm in interval notation.` : `A cold store keeps its temperature x (in °C) ${kind === 0 ? `less than ${d} degrees away from` : `at most ${d} degrees away from`} ${n_(a)} °C. Write the set of allowed temperatures in interval notation.`),
+    teach: {
+      idea: "|x − a| is the distance from x to a on the number line. The δ-neighbourhood of a is every x less than δ away from a: the open interval (a − δ, a + δ).",
+      method: "Mark a on the number line and go δ to the left and δ to the right. Less than δ: the open interval between; at most δ: include the ends; more than δ: the two outside pieces.",
+      visual: ([, a, d]) => ({ type: "numberline", from: a - d - 2, to: a + d + 2, marks: [a - d, a, a + d] }),
+      alternatives: [
+        { id: "unfold", title: "Unfold the absolute value", kind: "procedural", text: ["|x − a| < δ means −δ < x − a < δ.", "Add a to all three parts: a − δ < x < a + δ."] },
+      ],
+    },
+    limits: "Whole-number centres and radii; the answer in the variable's own interval (a shifted centre in the word form) is the same mathematics.",
+  },
+];
+const fmtQ = (x: number) => (Number.isInteger(x) ? n_(x) : (() => { for (let d = 2; d <= 12; d++) if (Math.abs(Math.round(x * d) - x * d) < 1e-9) return `${n_(Math.round(x * d))}/${d}`; return String(x); })());
+B05.push(...CORE_MORE);

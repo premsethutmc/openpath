@@ -1370,13 +1370,13 @@ const aucen = F({
   distractors: (p) => {
     const { G, C } = cenPts(p);
     const T = p[0] === 0 ? G : C;
-    return [P2(T[0] + 1, T[1]), P2(T[1], T[0]), P2(-T[0], T[1])];
+    return [P2(T[0] + 1, T[1]), P2(T[1], T[0]), P2(-T[0], T[1]), P2(T[0], T[1] - 1), P2(T[0] - 1, T[1] + 1)];
   },
   domain: [[0, 1], [-4, 4], [-4, 4], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
   keep: (p) => {
     const { A, B, C } = cenPts(p);
     const area2 = (B[0] - A[0]) * (C[1] - A[1]) - (B[1] - A[1]) * (C[0] - A[0]);
-    return area2 !== 0 && Math.abs(C[0]) <= 9 && Math.abs(C[1]) <= 9;
+    return area2 !== 0 && Math.abs(C[0]) <= 9 && Math.abs(C[1]) <= 9 && (p[1] !== 0 || p[2] !== 0);
   },
   why: "Whole-number vertices up to 9 with a whole-number centroid; the triangle is not degenerate.",
   cap: 400,
@@ -1542,7 +1542,7 @@ const au3ce = F({
   },
   distractors: (p) => {
     const { G, A, B } = ce3Pts(p);
-    return [P3([0, 1, 2].map((i) => (A[i] + B[i]) / 2)), P3([G[1], G[0], G[2]])];
+    return [P3([0, 1, 2].map((i) => (A[i] + B[i]) / 2)), P3([G[1], G[0], G[2]]), P3([G[0] + 1, G[1], G[2]]), P3([G[0], G[1], G[2] - 1])];
   },
   domain: [[-3, 3], [-3, 3], [-3, 3], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5]],
   keep: (p) => {
@@ -1866,4 +1866,1267 @@ const auliinf = F({
   limits: "Finite limits only; infinite limits (such as 1/(x − a)² as x → a) are not included.",
 });
 
-export const B21: Def[] = [ausec, aurat, aucen, au3cl, au3ce, au3ex, aultab, aulpow, auspd, aulstd, auliinf];
+// ================================================================ differentiation rules
+
+const xpw = (n: number) => (n === 0 ? "" : n === 1 ? "x" : `x${sup(n)}`);
+/** [a, n, b, c, d]: f(x) = axⁿ + bx² + cx + d. */
+const dsF = ([a, n, b, c, d]: number[]) => (x: number) => a * x ** n + b * x * x + c * x + d;
+const dsStr = ([a, n, b, c, d]: number[]) => sum([[a, xpw(n)], [b, "x²"], [c, "x"], [d, ""]]);
+const audsum = F({
+  id: "audsum",
+  arity: 5,
+  title: "Differentiating a sum and difference of several terms",
+  competency: DR,
+  type: "exact",
+  mc: true,
+  prompt: (p) => `Differentiate f(x) = ${dsStr(p)} with respect to x.`,
+  solve: ([a, n, b, c]) => {
+    const ans = sum([[n * a, xpw(n - 1)], [2 * b, "x"], [c, ""]]);
+    return { steps: [st("terms", "differentiate", DR, `Differentiate term by term: d/dx(${a === 1 ? "" : a}${xpw(n)}) = ${n * a}${xpw(n - 1)}, d/dx(${b}x²) = ${2 * b}x, d/dx(${c}x) = ${c}, and a constant gives 0`, ans), st("sum", "add", DR, `f′(x) = ${ans}`, ans)], answer: ans };
+  },
+  // independent: central differences of f at several points
+  validate: (p, v) => agrees(v, (x) => d1(dsF(p), x, 1e-4), XS, 1e-6),
+  bugs: ([a, n, b, c, d]) => [
+    bug("constant-kept", "recall", DR, `The constant ${d} was kept; a constant does not change, so its derivative is 0.`, sum([[n * a, xpw(n - 1)], [2 * b, "x"], [c, ""], [d, ""]])),
+    bug("power-not-lowered", "recall", DR, "Each term was multiplied by its power but the power was not lowered by 1: d/dx xⁿ = nxⁿ⁻¹.", sum([[n * a, xpw(n)], [2 * b, "x²"], [c, "x"]])),
+    bug("power-not-multiplied", "recall", DR, "The powers were lowered but the coefficients were not multiplied by the old power.", sum([[a, xpw(n - 1)], [b, "x"], [c, ""]])),
+  ],
+  domain: [[1, 5], [3, 6], [-6, 6], [-9, 9], [1, 99]],
+  keep: ([, , b, c, d]) => b !== 0 && c !== 0 && d % 3 === 0,
+  why: "A polynomial axⁿ + bx² + cx + d with n from 3 to 6 and every term present.",
+  cap: 400,
+  difficulty: ([, n, b, c]) => (n === 3 && b > 0 && c > 0 ? 1 : n >= 5 ? 3 : 2),
+  word: (p) => `A workshop's cost of making x hundred chairs in a month is C(x) = ${dsStr(p)} thousand rupees. The marginal cost is the rate of change of cost, C′(x). Find C′(x) as an expression in x.`,
+  teach: {
+    idea: "The derivative of a sum is the sum of the derivatives, and a constant factor stays in front: d/dx [af + bg] = af′ + bg′. A constant term has derivative 0.",
+    method: "Differentiate each term with d/dx xⁿ = nxⁿ⁻¹ (multiply by the power, then lower the power by 1), keep the signs, and drop the constant.",
+    alternatives: [
+      { id: "slope", title: "Slopes add", kind: "conceptual", text: ["The graph of f + g rises by what f and g rise together.", "So the slope of a sum is the sum of the slopes."] },
+      { id: "check_point", title: "Check at a point", kind: "procedural", text: ["Find (f(2.001) − f(1.999))/0.002 with a calculator.", "It should be very close to f′(2) from your answer."] },
+    ],
+  },
+  limits: "Polynomials with four terms; sums with trigonometric, exponential and logarithmic terms are in other families.",
+});
+
+const lin_ = (a: number, b: number) => sum([[a, "x"], [b, ""]]);
+/** [k, a, b, c, d]: k = 0 (ax + b)/(cx + d), 1 x²/(x + a), 2 sin x/(x + a), 3 (ax + b)/(x² + c). */
+const dqF = ([k, a, b, c, d]: number[]) => (x: number) => (k === 0 ? (a * x + b) / (c * x + d) : k === 1 ? (x * x) / (x + a) : k === 2 ? Math.sin(x) / (x + a) : (a * x + b) / (x * x + c));
+const dqParts = ([k, a, b, c, d]: number[]) => {
+  if (k === 0) return { f: `(${lin_(a, b)})/(${lin_(c, d)})`, num: nf(a * d - b * c), den: lin_(c, d), top: `${a}`, bot: `${c}` };
+  if (k === 1) return { f: `x²/(x + ${a})`, num: sum([[1, "x²"], [2 * a, "x"]]), den: `x + ${a}`, top: "2x", bot: "1" };
+  if (k === 2) return { f: `sin x/(x + ${a})`, num: `(x + ${a})cos x − sin x`, den: `x + ${a}`, top: "cos x", bot: "1" };
+  return { f: `(${lin_(a, b)})/(x² + ${c})`, num: sum([[-a, "x²"], [-2 * b, "x"], [a * c, ""]]), den: `x² + ${c}`, top: `${a}`, bot: "2x" };
+};
+const audquo = F({
+  id: "audquo",
+  arity: 5,
+  title: "The quotient rule",
+  competency: DR,
+  type: "expression",
+  mc: true,
+  prompt: (p) => `Differentiate y = ${dqParts(p).f} with respect to x, and simplify.`,
+  solve: (p) => {
+    const q = dqParts(p);
+    const ans = `(${q.num})/(${q.den})²`;
+    return { steps: [st("rule", "recall", DR, "Quotient rule: d/dx (u/v) = (v u′ − u v′)/v²", "(vu′ − uv′)/v²"), st("apply", "differentiate", DR, `Here the top simplifies to ${q.num} and v² = (${q.den})²: dy/dx = ${ans}`, ans)], answer: ans };
+  },
+  // independent: central differences of the quotient itself
+  validate: (p, v) => agrees(v, (x) => d1(dqF(p), x, 1e-5), XS, 1e-6),
+  bugs: (p) => {
+    const q = dqParts(p);
+    return [
+      bug("order-reversed", "procedural", DR, "The top of the quotient rule was written as u v′ − v u′; the order is v u′ − u v′, so every sign came out reversed.", `−(${q.num})/(${q.den})²`),
+      bug("not-squared", "recall", DR, "The bottom was not squared; the quotient rule divides by v².", `(${q.num})/(${q.den})`),
+      bug("derivative-over-derivative", "conceptual", DR, "The derivative of the top was divided by the derivative of the bottom; a quotient is not differentiated part by part.", `(${q.top})/(${q.bot})`),
+    ];
+  },
+  domain: [[0, 3], [1, 5], [-6, 6], [1, 5], [-6, 6]],
+  keep: ([k, a, b, c, d]) => (k === 0 ? a * d - b * c !== 0 && b !== 0 && d !== 0 && gcd(gcd(a, Math.abs(b)), gcd(c, Math.abs(d))) === 1 : k === 3 ? b !== 0 && d === 0 : b === 0 && c === 1 && d === 0),
+  why: "Quotients of linear, quadratic and sine functions with small whole-number coefficients.",
+  cap: 400,
+  difficulty: ([k]) => (k === 0 ? 1 : k === 1 ? 2 : 3),
+  teach: {
+    idea: "For y = u/v, a small change in x changes the top and the bottom; working it out gives (v u′ − u v′)/v². The minus sign makes the order matter.",
+    method: "Name u (top) and v (bottom), find u′ and v′, put them into (v u′ − u v′)/v², and simplify the top.",
+    alternatives: [
+      { id: "product", title: "As a product", kind: "procedural", text: ["Write u/v = u × v⁻¹.", "Use the product rule and the chain rule on v⁻¹: u′v⁻¹ − u v′ v⁻²; the same answer."] },
+      { id: "memory", title: "Low d-high minus high d-low", kind: "recall", text: ["Bottom times derivative of top, minus top times derivative of bottom, all over the bottom squared."] },
+    ],
+  },
+  limits: "Four kinds of quotient; quotients of exponentials and logarithms are in the exponential family.",
+});
+
+/** [k, a, b, n]: k = 0 (ax + b)ⁿ, 1 sin(ax² + b), 2 √(ax² + b), 3 e^(ax² + b), 4 log(ax² + b), 5 cosⁿ(ax). */
+const dcF = ([k, a, b, n]: number[]) => (x: number) => (k === 0 ? (a * x + b) ** n : k === 1 ? Math.sin(a * x * x + b) : k === 2 ? Math.sqrt(a * x * x + b) : k === 3 ? Math.exp(a * x * x + b) : k === 4 ? Math.log(a * x * x + b) : Math.cos(a * x) ** n);
+const dcParts = ([k, a, b, n]: number[]) => {
+  const inner = k === 0 ? lin_(a, b) : sum([[a, "x²"], [b, ""]]);
+  const ax2 = `${2 * a}x`;
+  const ax = ax_(a);
+  if (k === 0) return { f: `(${inner})${sup(n)}`, ans: `${n * a}(${inner})^${n - 1}`, noInner: `${n}(${inner})^${n - 1}` };
+  if (k === 1) return { f: `sin(${inner})`, ans: `${ax2} cos(${inner})`, noInner: `cos(${inner})` };
+  if (k === 2) return { f: `√(${inner})`, ans: `${ax}/√(${inner})`, noInner: `1/(2√(${inner}))` };
+  if (k === 3) return { f: `e^(${inner})`, ans: `${ax2} e^(${inner})`, noInner: `e^(${inner})` };
+  if (k === 4) return { f: `log(${inner})`, ans: `${ax2}/(${inner})`, noInner: `1/(${inner})` };
+  return { f: `cos${sup(n)}(${ax})`, ans: `−${n * a} cos^${n - 1}(${ax}) sin(${ax})`, noInner: `−${n} cos^${n - 1}(${ax}) sin(${ax})` };
+};
+const audch = F({
+  id: "audch",
+  arity: 4,
+  title: "The chain rule for composite functions",
+  competency: DR,
+  type: "expression",
+  mc: true,
+  prompt: (p) => `Differentiate y = ${dcParts(p).f} with respect to x.${p[0] === 4 ? " (log is the natural logarithm.)" : ""}`,
+  solve: (p) => {
+    const q = dcParts(p);
+    return { steps: [st("rule", "recall", DR, "Chain rule: dy/dx = (derivative of the outer function at the inner one) × (derivative of the inner function)", "dy/du × du/dx"), st("apply", "differentiate", DR, `dy/dx = ${q.ans}`, q.ans)], answer: q.ans };
+  },
+  // independent: central differences of the composite function
+  validate: (p, v) => agrees(v, (x) => d1(dcF(p), x, 1e-5), XS, 1e-6),
+  bugs: (p) => {
+    const [k, a, , n] = p;
+    const q = dcParts(p);
+    const ax = ax_(a);
+    return [
+      bug("inner-forgotten", "conceptual", DR, "The outer function was differentiated but the result was not multiplied by the derivative of the inside.", q.noInner),
+      ...(k === 5 ? [bug("cos-to-sin-sign", "recall", DR, "The derivative of cos was taken as + sin; d/dx cos u = − sin u × u′.", `${n * a} cos^${n - 1}(${ax}) sin(${ax})`)] : []),
+      ...(k === 1 ? [bug("inside-changed", "procedural", DR, "The inside function was differentiated as well as kept inside cos; the inside stays unchanged and its derivative multiplies.", `${2 * a}x cos(${2 * a}x)`)] : []),
+      ...(k === 0 ? [bug("power-not-lowered", "recall", DR, "The power was not lowered by 1.", `${n * a}(${lin_(a, p[2])})^${n}`)] : []),
+    ];
+  },
+  distractors: (p) => {
+    const q = dcParts(p);
+    return [`−(${q.ans})`, `2(${q.ans})`, `(${q.ans})/2`];
+  },
+  domain: [[0, 5], [1, 5], [-5, 9], [2, 6]],
+  keep: ([k, a, b, n]) => (k === 0 ? b !== 0 && a >= 2 : k === 5 ? b === 1 && n <= 4 && a >= 2 : n === 2 && (k === 2 || k === 4 ? b >= 1 : k === 3 ? b >= -3 && b <= 3 : b !== 0)),
+  why: "Powers of a linear function, and sin, √, e^, log and powers of cos of a simple inner function.",
+  cap: 400,
+  difficulty: ([k]) => (k === 0 ? 1 : k === 5 || k === 2 ? 3 : 2),
+  teach: {
+    idea: "A composite y = f(g(x)) changes with x through g: if x changes a little, g changes g′(x) times as much, and y changes f′(g) times that. So dy/dx = f′(g(x)) × g′(x).",
+    method: "Name the inside u = g(x). Differentiate the outside as if u were the variable, keep u inside, then multiply by du/dx.",
+    alternatives: [
+      { id: "substitute_u", title: "Write it with u", kind: "procedural", text: ["Let u be the inside. Find dy/du and du/dx separately.", "Multiply them and put u back in terms of x."] },
+      { id: "layers", title: "Peel the layers", kind: "conceptual", text: ["Differentiate from the outside in, one layer at a time.", "Each layer you peel contributes one factor."] },
+    ],
+  },
+  limits: "One inner function inside one outer function; composites three deep are not included.",
+});
+
+/** [k, a, c]: k = 0 c·sin⁻¹(x/a), 1 c·cos⁻¹(x/a), 2 c·tan⁻¹(x/a), 3 c·tan⁻¹(ax), 4 xᵃ with respect to xᶜ, 5 sin(ax) with respect to cos(ax). */
+const diF = ([k, a, c]: number[]) => (x: number) => (k === 0 ? c * Math.asin(x / a) : k === 1 ? c * Math.acos(x / a) : k === 2 ? c * Math.atan(x / a) : c * Math.atan(a * x));
+const cc = (c: number) => (c === 1 ? "" : `${c}`);
+const audinvAns = ([k, a, c]: number[]) =>
+  k === 0 ? `${c}/√(${a * a} − x²)` : k === 1 ? `−${c}/√(${a * a} − x²)` : k === 2 ? `${c * a}/(${a * a} + x²)` : k === 3 ? `${c * a}/(1 + ${a * a}x²)` : k === 4 ? (a > c ? `(${rat(a, c)})x^${a - c}` : `(${rat(a, c)})/x^${c - a}`) : `−cot(${ax_(a)})`;
+const audinv = F({
+  id: "audinv",
+  arity: 3,
+  title: "Derivatives of inverse trigonometric functions, and one function with respect to another",
+  competency: DR,
+  type: "expression",
+  mc: true,
+  prompt: ([k, a, c]) =>
+    k === 0
+      ? `Differentiate y = ${cc(c)}sin⁻¹(x/${a}) with respect to x (for −${a} < x < ${a}).`
+      : k === 1
+        ? `Differentiate y = ${cc(c)}cos⁻¹(x/${a}) with respect to x (for −${a} < x < ${a}).`
+        : k === 2
+          ? `Differentiate y = ${cc(c)}tan⁻¹(x/${a}) with respect to x.`
+          : k === 3
+            ? `Differentiate y = ${cc(c)}tan⁻¹(${a}x) with respect to x.`
+            : k === 4
+              ? `Differentiate x${sup(a)} with respect to x${sup(c)} (for x > 0).`
+              : `Differentiate sin ${ax_(a)} with respect to cos ${ax_(a)}.`,
+  solve: ([k, a, c]) => {
+    const ans = audinvAns([k, a, c]);
+    const rule =
+      k <= 1 ? "d/dx sin⁻¹u = u′/√(1 − u²) and d/dx cos⁻¹u = −u′/√(1 − u²)" : k <= 3 ? "d/dx tan⁻¹u = u′/(1 + u²)" : k === 4 ? `With u = x${sup(c)}: dy/du = (dy/dx)/(du/dx) = ${a}x${sup(a - 1)}/(${c}x${sup(c - 1)})` : `dy/du = (dy/dx)/(du/dx) = ${a} cos ${ax_(a)}/(−${a} sin ${ax_(a)})`;
+    return { steps: [st("rule", "recall", DR, rule, rule), st("simplify", "simplify", DR, `Simplify: ${ans}`, ans)], answer: ans };
+  },
+  // independent: central differences (for k = 4, 5 the ratio of the two derivatives, each by central differences)
+  validate: (p, v) => {
+    const [k, a, c] = p;
+    if (k <= 3) return agrees(v, (x) => d1(diF(p), x, 1e-6), XS, 1e-6);
+    const f = k === 4 ? (x: number) => x ** a : (x: number) => Math.sin(a * x);
+    const g = k === 4 ? (x: number) => x ** c : (x: number) => Math.cos(a * x);
+    const xs = k === 4 ? XS : XSMALL.map((x) => x / a);
+    return agrees(v, (x) => d1(f, x, 1e-6) / d1(g, x, 1e-6), xs, 1e-6);
+  },
+  bugs: ([k, a, c]) => {
+    if (k === 0) return [bug("chain-dropped", "procedural", DR, `The derivative of the inside, x/${a}, was not used: it multiplies by 1/${a}.`, `${c}/√(1 − x²/${a * a})`)];
+    if (k === 1) return [bug("sign", "recall", DR, "The derivative of cos⁻¹ was taken with a + sign; d/dx cos⁻¹u = −u′/√(1 − u²).", `${c}/√(${a * a} − x²)`)];
+    if (k === 2) return [bug("chain-dropped", "procedural", DR, `The derivative of the inside, x/${a}, was not used: it multiplies by 1/${a}.`, `${c}/(1 + x²/${a * a})`)];
+    if (k === 3) return [bug("chain-dropped", "procedural", DR, `The derivative of the inside, ${a}x, was not used: it multiplies by ${a}.`, `${c}/(1 + ${a * a}x²)`), bug("square-dropped", "recall", DR, "The square inside was lost: d/dx tan⁻¹u = u′/(1 + u²).", `${c * a}/(1 + ${a}x)`)];
+    if (k === 4) return [bug("top-only", "conceptual", DR, `Only x${sup(a)} was differentiated; with respect to x${sup(c)} the result is divided by the derivative of x${sup(c)}.`, `${a}x^${a - 1}`), bug("upside-down", "procedural", DR, "The two derivatives were divided the wrong way round.", a > c ? `(${rat(c, a)})x^${a - c}` : `(${rat(c, a)})/x^${c - a}`)];
+    return [bug("upside-down", "procedural", DR, "The two derivatives were divided the wrong way round: d(sin)/d(cos) is (d sin/dx) ÷ (d cos/dx).", `−tan(${ax_(a)})`), bug("sign", "recall", DR, "The minus sign from d/dx cos = −sin was lost.", `cot(${ax_(a)})`)];
+  },
+  distractors: (p) => {
+    const a = audinvAns(p);
+    return [`−(${a})`, `2(${a})`, `(${a})/2`];
+  },
+  domain: [[0, 5], [1, 9], [1, 6]],
+  keep: ([k, a, c]) => (k <= 2 ? a >= 3 : k === 3 ? a >= 2 : k === 4 ? a >= 2 && a <= 7 && c <= 5 && a !== c && gcd(a, c) === 1 : c === 1),
+  why: "c·sin⁻¹(x/a), c·cos⁻¹(x/a), c·tan⁻¹(x/a), c·tan⁻¹(ax), xᵃ with respect to xᶜ, and sin ax with respect to cos ax.",
+  difficulty: ([k]) => (k === 3 || k === 2 ? 1 : k <= 1 ? 2 : 3),
+  teach: {
+    idea: "If y = sin⁻¹x then x = sin y, so dx/dy = cos y = √(1 − x²) and dy/dx = 1/√(1 − x²); similarly for cos⁻¹ (with a minus sign) and tan⁻¹ (1/(1 + x²)). To differentiate y with respect to u, divide dy/dx by du/dx.",
+    method: "Use d/dx sin⁻¹u = u′/√(1 − u²), d/dx cos⁻¹u = −u′/√(1 − u²), d/dx tan⁻¹u = u′/(1 + u²), then simplify. For 'with respect to', find both derivatives with respect to x and divide.",
+    alternatives: [
+      { id: "implicit", title: "Undo the inverse", kind: "conceptual", text: ["Write y = tan⁻¹(x/a) as tan y = x/a.", "Differentiate both sides: sec²y · dy/dx = 1/a, and sec²y = 1 + x²/a²."] },
+      { id: "parametric", title: "Like a parametric derivative", kind: "procedural", text: ["Treat x as a parameter: y and u are both functions of x.", "dy/du = (dy/dx)/(du/dx)."] },
+    ],
+  },
+  limits: "Inverse trigonometric functions of x/a or ax with a whole-number multiplier; sec⁻¹ and cot⁻¹ are not included.",
+});
+
+/** [k, a, c, d]: k = 0 c·e^(ax) + d log x, 1 c·aˣ, 2 c·xᵃ log x, 3 e^(ax) log x. */
+const deF = ([k, a, c, d]: number[]) => (x: number) => (k === 0 ? c * Math.exp(a * x) + d * Math.log(x) : k === 1 ? c * a ** x : k === 2 ? c * x ** a * Math.log(x) : Math.exp(a * x) * Math.log(x));
+const audel = F({
+  id: "audel",
+  arity: 4,
+  title: "Derivatives of exponential and logarithmic functions",
+  competency: DR,
+  type: "expression",
+  mc: true,
+  prompt: ([k, a, c, d]) => {
+    const f = k === 0 ? `${cc(c)}e^(${ax_(a)}) ${signed(d)} log x` : k === 1 ? `${cc(c)}${a}^x` : k === 2 ? `${cc(c)}x${sup(a)} log x` : `e^(${ax_(a)}) log x`;
+    return `Differentiate y = ${f.replace(/ ([+−]) 1 log/, " $1 log")} with respect to x (x > 0; log is the natural logarithm).`;
+  },
+  solve: ([k, a, c, d]) => {
+    const ans = k === 0 ? `${c * a}e^(${ax_(a)}) ${signed(d)}/x` : k === 1 ? `${c}(${a}^x) log ${a}` : k === 2 ? `${c * a}x^${a - 1} log x + ${c}x^${a - 1}` : `${a}e^(${ax_(a)}) log x + e^(${ax_(a)})/x`;
+    const rule = k === 0 ? "d/dx e^(ax) = a e^(ax) and d/dx log x = 1/x" : k === 1 ? "aˣ = e^(x log a), so d/dx aˣ = aˣ log a" : "product rule with d/dx log x = 1/x";
+    return { steps: [st("rule", "recall", DR, rule, rule), st("apply", "differentiate", DR, `dy/dx = ${ans}`, ans)], answer: ans };
+  },
+  // independent: central differences
+  validate: (p, v) => agrees(v, (x) => d1(deF(p), x, 1e-6), XS, 1e-6),
+  bugs: ([k, a, c, d]) =>
+    k === 0
+      ? [bug("exponent-factor", "recall", DR, `The factor ${a} from the exponent was left out: d/dx e^(${a}x) = ${a}e^(${a}x).`, `${c}e^(${ax_(a)}) ${signed(d)}/x`), bug("power-rule-on-e", "conceptual", DR, "The power rule was used on e^(ax); the variable is in the exponent, so the power rule does not apply.", `${c * a}x e^(${a - 1}x) ${signed(d)}/x`)]
+      : k === 1
+        ? [bug("power-rule", "conceptual", DR, "aˣ was differentiated like xⁿ; the variable is in the exponent: d/dx aˣ = aˣ log a.", `${c}x(${a}^(x − 1))`), bug("no-log", "recall", DR, `The factor log ${a} was left out; only eˣ is its own derivative.`, `${c}(${a}^x)`)]
+        : k === 2
+          ? [bug("product-of-derivatives", "conceptual", DR, "The two derivatives were multiplied; the product rule is u′v + uv′.", `${c * a}x^${a - 2}`), bug("one-part", "procedural", DR, "Only one part of the product rule was written.", `${c * a}x^${a - 1} log x`)]
+          : [bug("product-of-derivatives", "conceptual", DR, "The two derivatives were multiplied; the product rule is u′v + uv′.", `${a}e^(${ax_(a)})/x`), bug("one-part", "procedural", DR, "Only one part of the product rule was written.", `${a}e^(${ax_(a)}) log x`)],
+  domain: [[0, 3], [1, 9], [1, 6], [-6, 6]],
+  keep: ([k, a, c, d]) => (k === 0 ? a <= 5 && d !== 0 : k === 1 ? a >= 2 && d === 1 && a !== 4 && a !== 8 && a !== 9 : k === 2 ? a >= 2 && a <= 5 && d === 1 : a <= 5 && c === 1 && d === 1),
+  why: "c·e^(ax) + d log x, c·aˣ, c·xᵃ log x and e^(ax) log x with small whole numbers.",
+  difficulty: ([k]) => (k === 0 ? 1 : k === 1 ? 2 : 3),
+  teach: {
+    idea: "eˣ is its own derivative, and log x (the inverse of eˣ) has derivative 1/x. Any aˣ is e^(x log a), so its derivative is aˣ log a.",
+    method: "Use d/dx e^(ax) = a e^(ax), d/dx log x = 1/x, d/dx aˣ = aˣ log a, and the product rule for products.",
+    alternatives: [
+      { id: "rewrite", title: "Rewrite with e", kind: "procedural", text: ["Write 2ˣ = e^(x log 2).", "Use the chain rule: the inside x log 2 has derivative log 2."] },
+      { id: "growth", title: "Growth in proportion", kind: "conceptual", text: ["eˣ grows at a rate equal to its size.", "aˣ grows at a rate equal to its size times log a."] },
+    ],
+  },
+  limits: "Single exponential or logarithmic terms and products with them; logarithms to other bases are not included.",
+});
+
+// ================================================================ determinants
+
+/** [k, e1, …, e9]: k = 0 |A| for a 3 × 3 matrix; k = 1 |AB| for 2 × 2 matrices A = (e1 … e4), B = (e5 … e8). */
+const audt3 = F({
+  id: "audt3",
+  arity: 10,
+  title: "Determinants of order 3, and the determinant of a product",
+  competency: DET,
+  type: "integer",
+  mc: true,
+  prompt: ([k, ...e]) =>
+    k === 0 ? `Evaluate the determinant of A = ${mat(rows3(e))}.` : `A = ${mat([e.slice(0, 2), e.slice(2, 4)])} and B = ${mat([e.slice(4, 6), e.slice(6, 8)])}. Find |AB|.`,
+  solve: ([k, ...e]) => {
+    if (k === 0) {
+      const m = rows3(e);
+      const v = cof3(m);
+      return { steps: [st("expand", "expand", DET, `Expand along the first row: ${pn(m[0][0])} × (${det2(m[1][1], m[1][2], m[2][1], m[2][2])}) − ${pn(m[0][1])} × (${det2(m[1][0], m[1][2], m[2][0], m[2][2])}) + ${pn(m[0][2])} × (${det2(m[1][0], m[1][1], m[2][0], m[2][1])})`, v), st("value", "add", INT, `|A| = ${v}`, v)], answer: v };
+    }
+    const [a, b, c, d, p, q, r, s] = e;
+    const dA = det2(a, b, c, d);
+    const dB = det2(p, q, r, s);
+    return { steps: [st("each", "evaluate", DET, `|A| = ${dA} and |B| = ${dB}`, `${dA}, ${dB}`), st("product", "multiply", DET, `|AB| = |A| × |B| = ${dA * dB}`, dA * dB)], answer: dA * dB };
+  },
+  // independent: Leibniz's sum over permutations; for |AB|, multiply the matrices first and then take the determinant
+  validate: ([k, ...e], v) => {
+    if (typeof v !== "number") return false;
+    if (k === 0) return v === leibniz(rows3(e));
+    const [a, b, c, d, p, q, r, s] = e;
+    const P = [a * p + b * r, a * q + b * s, c * p + d * r, c * q + d * s];
+    return v === P[0] * P[3] - P[1] * P[2];
+  },
+  bugs: ([k, ...e]) => {
+    if (k === 0) {
+      const m = rows3(e);
+      return [
+        bug("middle-sign", "procedural", DET, "The middle term was added; in the expansion along a row the signs go + − +, so the second term is subtracted.", m[0][0] * det2(m[1][1], m[1][2], m[2][1], m[2][2]) + m[0][1] * det2(m[1][0], m[1][2], m[2][0], m[2][2]) + m[0][2] * det2(m[1][0], m[1][1], m[2][0], m[2][1])),
+        bug("forward-diagonals", "conceptual", DET, "Only the three forward diagonals were added; the three backward diagonals must be subtracted as well (Sarrus' rule).", m[0][0] * m[1][1] * m[2][2] + m[0][1] * m[1][2] * m[2][0] + m[0][2] * m[1][0] * m[2][1]),
+      ];
+    }
+    const [a, b, c, d, p, q, r, s] = e;
+    return [
+      bug("added", "conceptual", DET, "|A| and |B| were added; the determinant of a product is the product of the determinants.", det2(a, b, c, d) + det2(p, q, r, s)),
+      bug("entrywise", "conceptual", "MATH.algebra.matrices", "The matrices were multiplied entry by entry; matrix multiplication combines rows with columns (or use |AB| = |A||B|).", det2(a * p, b * q, c * r, d * s)),
+    ];
+  },
+  domain: [[0, 1], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4]],
+  keep: ([k, ...e]) => (k === 0 ? e.filter((x) => x === 0).length <= 2 && cof3(rows3(e)) !== 0 : e[8] === 0 && det2(e[0], e[1], e[2], e[3]) !== 0 && det2(e[4], e[5], e[6], e[7]) !== 0 && e.slice(0, 8).filter((x) => x === 0).length <= 1),
+  why: "3 × 3 matrices with entries from −3 to 4 (at most two zeros), or two 2 × 2 matrices for |AB|.",
+  cap: 400,
+  difficulty: ([k, ...e]) => (k === 1 ? 2 : e.some((x) => x < 0) ? 3 : 2),
+  teach: {
+    idea: "A 3 × 3 determinant is built from 2 × 2 ones: each entry of a row times its cofactor (its minor with the sign + − + …). The determinant of a product is the product of the determinants: |AB| = |A||B|.",
+    method: "Expand along the first row: a₁₁(a₂₂a₃₃ − a₂₃a₃₂) − a₁₂(a₂₁a₃₃ − a₂₃a₃₁) + a₁₃(a₂₁a₃₂ − a₂₂a₃₁). Choose a row or column with zeros to save work.",
+    alternatives: [
+      { id: "sarrus", title: "Sarrus' rule", kind: "procedural", text: ["Copy the first two columns to the right of the matrix.", "Add the three products down to the right, subtract the three products down to the left."] },
+      { id: "row_ops", title: "Make zeros first", kind: "procedural", text: ["Subtracting a multiple of one row from another does not change the determinant.", "Make two zeros in a column, then expand along it."] },
+    ],
+  },
+  limits: "Entries from −3 to 4; determinants with letters are in the singular-matrix family.",
+});
+
+/** [x1, y1, x2, y2, y3, k0]: vertices (x1, y1), (x2, y2), (k, y3); the area is that of k = k0. */
+const dkD = ([x1, y1, x2, y2, y3]: number[], k: number) => x1 * (y2 - y3) + x2 * (y3 - y1) + k * (y1 - y2);
+const dkArea = (p: number[]) => Math.abs(dkD(p, p[5])) / 2;
+const dkRoots = (p: number[]) => {
+  const al = p[1] - p[3];
+  const be = dkD(p, 0);
+  const A2 = 2 * dkArea(p);
+  return [(A2 - be) / al, (-A2 - be) / al];
+};
+const audk = F({
+  id: "audk",
+  arity: 6,
+  title: "An unknown vertex of a triangle of given area, by determinants",
+  competency: DET,
+  type: "set",
+  prompt: (p) => `The area of the triangle with vertices ${P2(p[0], p[1])}, ${P2(p[2], p[3])} and (k, ${nf(p[4])}) is ${dkArea(p)} square units. Using determinants, find the possible values of k (fractions are fine).`,
+  solve: (p) => {
+    const al = p[1] - p[3];
+    const be = dkD(p, 0);
+    const A = dkArea(p);
+    const r = dkRoots(p);
+    return {
+      steps: [
+        st("det", "expand", DET, `½ × |det[[${nf(p[0])}, ${nf(p[1])}, 1], [${nf(p[2])}, ${nf(p[3])}, 1], [k, ${nf(p[4])}, 1]]| = ½ |${sum([[al, "k"], [be, ""]])}|`, sum([[al, "k"], [be, ""]])),
+        st("equation", "model", DET, `${sum([[al, "k"], [be, ""]])} = ±${2 * A}`, `±${2 * A}`),
+        st("solve", "solve", LIN, `k = ${nf(r[0])} or k = ${nf(r[1])}`, `${nf(r[0])}, ${nf(r[1])}`),
+      ],
+      answer: r,
+    };
+  },
+  // independent: Heron's formula with each value of k gives the stated area, and there are two different values
+  validate: (p, v) => {
+    if (!Array.isArray(v) || v.length !== 2 || near(v[0], v[1], 1e-12)) return false;
+    return v.every((k) => near(heron([[p[0], p[1]], [p[2], p[3]], [k, p[4]]]), dkArea(p), 1e-7));
+  },
+  bugs: (p) => {
+    const al = p[1] - p[3];
+    const be = dkD(p, 0);
+    const A = dkArea(p);
+    const r = dkRoots(p);
+    return [
+      bug("no-half", "recall", DET, "The determinant was set equal to the area; the area is half the absolute value of the determinant, so the determinant is ± twice the area.", [(A - be) / al, (-A - be) / al]),
+      bug("one-sign", "conceptual", DET, "Only the positive value of the determinant was used; the absolute value means the determinant can be + or − twice the area, which gives two positions for the vertex.", [r[0]]),
+    ];
+  },
+  domain: [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5]],
+  keep: (p) => {
+    const al = p[1] - p[3];
+    const D = dkD(p, p[5]);
+    const r = dkRoots(p);
+    return al !== 0 && D !== 0 && D % 2 === 0 && r.every((x) => Math.abs(x) <= 15) && (p[4] !== p[1] && p[4] !== p[3]);
+  },
+  why: "Whole-number vertices from −5 to 5 with a whole-number area; the third vertex moves along a horizontal line.",
+  cap: 400,
+  difficulty: (p) => (dkRoots(p).every(isInt) ? 2 : 3),
+  word: (p) => `On a survey map (1 unit = 1 m), two corners of a triangular plot are at ${P2(p[0], p[1])} and ${P2(p[2], p[3])}. The third corner is on the boundary line y = ${nf(p[4])}, at (k, ${nf(p[4])}), and the plot's area is ${dkArea(p)} m². What are the possible values of k?`,
+  teach: {
+    idea: "The area of the triangle with vertices (x₁, y₁), (x₂, y₂), (x₃, y₃) is ½ |det[[x₁, y₁, 1], [x₂, y₂, 1], [x₃, y₃, 1]]|. With an unknown vertex the determinant is linear in k, and the absolute value gives two equations.",
+    method: "Expand the determinant to get αk + β. Set αk + β = 2 × area and αk + β = −2 × area, and solve each.",
+    alternatives: [
+      { id: "picture", title: "Two positions", kind: "conceptual", text: ["The points that make a triangle of this area with the two known corners lie on two lines parallel to the side joining them, one on each side.", "The line y = c meets each of these lines once: that is why there are two values of k."] },
+      { id: "check_area", title: "Check with the shoelace sum", kind: "procedural", text: ["Put each k back and work out ½|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|.", "Both must give the stated area."] },
+    ],
+  },
+  limits: "The unknown is one coordinate of one vertex; areas and collinearity themselves are in the polygon-area families (altria, alcoll).",
+});
+
+/** [t, pos, e1 … e8]: a 3 × 3 matrix with k at position pos; t = 0 a matrix, 1 a homogeneous system. */
+const sgM = ([, pos, ...e]: number[], k: number) => {
+  const all = [...e.slice(0, pos), k, ...e.slice(pos)];
+  return rows3(all);
+};
+const sgAB = (p: number[]) => {
+  const b = leibniz(sgM(p, 0));
+  const a = leibniz(sgM(p, 1)) - b;
+  return [a, b];
+};
+const sgK = (p: number[]) => {
+  const [a, b] = sgAB(p);
+  return -b / a;
+};
+const sysText = (p: number[]) => {
+  const L = ["x", "y", "z"];
+  return [0, 1, 2]
+    .map((i) => {
+      const terms = [0, 1, 2].map((j) => (i * 3 + j === p[1] ? `λ${L[j]}` : null));
+      const row = sgM(p, 0)[i];
+      const parts: string[] = [];
+      row.forEach((c, j) => {
+        if (terms[j]) parts.push(parts.length ? `+ ${terms[j]}` : terms[j]!);
+        else if (c !== 0) parts.push(parts.length ? `${c < 0 ? "−" : "+"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}${L[j]}` : `${c < 0 ? "−" : ""}${Math.abs(c) === 1 ? "" : Math.abs(c)}${L[j]}`);
+      });
+      return `${parts.join(" ")} = 0`;
+    })
+    .join(", ");
+};
+const audsg = F({
+  id: "audsg",
+  arity: 10,
+  title: "The value that makes a 3 × 3 matrix singular, or a homogeneous system have a non-trivial solution",
+  competency: DET,
+  type: "integer",
+  mc: true,
+  prompt: (p) => {
+    if (p[0] === 0) {
+      const m = sgM(p, 0).map((r) => r.map(nf));
+      m[Math.floor(p[1] / 3)][p[1] % 3] = "k";
+      return `For which value of k is the matrix [[${m.map((r) => r.join(", ")).join("], [")}]] singular?`;
+    }
+    return `For which value of λ does the system ${sysText(p)} have a solution other than x = y = z = 0?`;
+  },
+  solve: (p) => {
+    const [a, b] = sgAB(p);
+    const v = sgK(p);
+    const L = p[0] === 0 ? "k" : "λ";
+    return {
+      steps: [
+        st("condition", "recall", DET, p[0] === 0 ? "A matrix is singular exactly when its determinant is 0" : "A homogeneous system has a non-trivial solution exactly when the determinant of its coefficients is 0", "det = 0"),
+        st("expand", "expand", DET, `Expanding, the determinant is ${sum([[a, L], [b, ""]])}`, sum([[a, L], [b, ""]])),
+        st("solve", "solve", LIN, `${sum([[a, L], [b, ""]])} = 0 gives ${L} = ${v}`, v),
+      ],
+      answer: v,
+    };
+  },
+  // independent: substitute the value and evaluate the determinant by Leibniz's permutation sum
+  validate: (p, v) => typeof v === "number" && leibniz(sgM(p, v)) === 0,
+  bugs: (p) => {
+    const [a, b] = sgAB(p);
+    const odd = p[1] % 2 === 1;
+    return [
+      ...(odd ? [bug("cofactor-sign", "procedural", DET, "The sign of the cofactor at the unknown's place was missed (the signs alternate + − + in a checkerboard).", b / a)] : []),
+      bug("det-one", "conceptual", DET, p[0] === 0 ? "The determinant was set equal to 1; a singular matrix has determinant 0." : "The determinant was set non-zero (equal to 1); a non-zero determinant gives only the zero solution.", (1 - b) % a === 0 ? (1 - b) / a : null),
+    ];
+  },
+  distractors: (p) => [sgK(p) + 1, sgK(p) - 1, -sgK(p)],
+  domain: [[0, 1], [0, 8], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4]],
+  keep: (p) => {
+    const [a, b] = sgAB(p);
+    return a !== 0 && b % a === 0 && Math.abs(b / a) <= 12 && b !== 0 && p.slice(2).filter((x) => x === 0).length <= 2;
+  },
+  why: "3 × 3 matrices or homogeneous systems with one unknown entry and whole-number entries from −3 to 4, with a whole-number answer.",
+  cap: 400,
+  difficulty: ([t, pos]) => (pos === 0 ? 2 : t === 1 ? 3 : 2),
+  teach: {
+    idea: "det A = 0 means the rows are dependent: the matrix has no inverse (singular), and the system AX = 0 has solutions besides X = 0. With one unknown entry the determinant is linear in it.",
+    method: "Expand the determinant (along the row or column of the unknown is quickest), set it equal to 0, and solve the linear equation.",
+    alternatives: [
+      { id: "cofactor", title: "Cofactor of the unknown", kind: "procedural", text: ["Expanding along the unknown's row: det = (its cofactor) × k + (the rest).", "So k = −(the rest) ÷ (its cofactor)."] },
+      { id: "dependent_rows", title: "Dependent rows", kind: "conceptual", text: ["When det = 0, one row is a combination of the others.", "Then the equations do not pin down a single point: the system has infinitely many solutions through the origin."] },
+    ],
+  },
+  limits: "One unknown entry in a 3 × 3 matrix with whole-number answers; parameters in several entries are in aqcpar.",
+});
+
+/** [e1 … e9]: a non-singular 3 × 3 matrix with a small determinant. */
+function adj3(m: number[][]): number[][] {
+  const c = (i: number, j: number) => {
+    const r = [0, 1, 2].filter((x) => x !== i);
+    const s = [0, 1, 2].filter((x) => x !== j);
+    return (((i + j) % 2 ? -1 : 1) * det2(m[r[0]][s[0]], m[r[0]][s[1]], m[r[1]][s[0]], m[r[1]][s[1]]));
+  };
+  const C = [0, 1, 2].map((i) => [0, 1, 2].map((j) => c(i, j)));
+  return [0, 1, 2].map((i) => [0, 1, 2].map((j) => C[j][i]));
+}
+const matR = (m: number[][], d: number) => `[[${m.map((r) => r.map((x) => rat(x, d)).join(", ")).join("], [")}]]`;
+const auinv = F({
+  id: "auinv",
+  arity: 9,
+  title: "The inverse of a 3 × 3 matrix",
+  competency: DET,
+  type: "matrix",
+  mc: true,
+  prompt: (e) => `A = ${mat(rows3(e))}. Find A⁻¹, written as [[a, b, c], [d, e, f], [g, h, i]] (fractions are fine as entries).`,
+  solve: (e) => {
+    const m = rows3(e);
+    const D = cof3(m);
+    const adj = adj3(m);
+    return { steps: [st("det", "evaluate", DET, `|A| = ${D} (not 0, so A has an inverse)`, D), st("adj", "cofactors", "MATH.matrices.adjoint-inverse", `adj A (the transpose of the cofactor matrix) = ${mat(adj)}`, mat(adj)), st("inverse", "divide", DET, `A⁻¹ = adj A ÷ |A| = ${matR(adj, D)}`, matR(adj, D))], answer: matR(adj, D) };
+  },
+  // independent: multiply A by the answer and check that the product is the identity
+  validate: (e, v) => {
+    const X = matrixNums(v);
+    if (!X || X.length !== 3 || X.some((r) => r.length !== 3)) return false;
+    const m = rows3(e);
+    return [0, 1, 2].every((i) => [0, 1, 2].every((j) => Math.abs(m[i][0] * X[0][j] + m[i][1] * X[1][j] + m[i][2] * X[2][j] - (i === j ? 1 : 0)) < 1e-9));
+  },
+  bugs: (e) => {
+    const m = rows3(e);
+    const D = cof3(m);
+    const adj = adj3(m);
+    const C = [0, 1, 2].map((i) => [0, 1, 2].map((j) => adj[j][i]));
+    return [
+      bug("not-divided", "procedural", DET, `The adjoint was given without dividing by |A| = ${D}.`, D !== 1 ? mat(adj) : null),
+      bug("not-transposed", "procedural", "MATH.matrices.adjoint-inverse", "The cofactor matrix was divided by |A| without transposing it; the adjoint is the transpose of the cofactor matrix.", matR(C, D)),
+      bug("minors", "recall", "MATH.matrices.adjoint-inverse", "Minors were used without their signs; each cofactor carries the sign (−1)^(i + j).", matR(adj.map((r, i) => r.map((x, j) => ((i + j) % 2 ? -x : x))), D)),
+    ];
+  },
+  distractors: (e) => {
+    const m = rows3(e);
+    const D = cof3(m);
+    return [matR(adj3(m), -D), mat(m.map((r) => r.map((x) => -x)))];
+  },
+  domain: [[-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3]],
+  keep: (e) => {
+    const m = rows3(e);
+    const D = cof3(m);
+    const adj = adj3(m);
+    return D !== 0 && Math.abs(D) <= 4 && adj.some((r, i) => r.some((x, j) => x !== adj[j][i])) && e.filter((x) => x === 0).length <= 3 && adj.some((r, i) => r.some((x, j) => (i + j) % 2 === 1 && x !== 0));
+  },
+  why: "3 × 3 matrices with entries from −2 to 3 and determinant ±1 to ±4, whose cofactor matrix is not symmetric.",
+  cap: 400,
+  difficulty: (e) => (Math.abs(cof3(rows3(e))) === 1 ? 2 : 3),
+  teach: {
+    idea: "A · adj A = |A| I for every square matrix, so when |A| ≠ 0 the inverse is A⁻¹ = adj A / |A|. When |A| = 0 the matrix is singular and has no inverse.",
+    method: "Find |A|. Find all nine cofactors (minors with signs + − + / − + − / + − +), transpose to get adj A, and divide every entry by |A|. Check that A·A⁻¹ = I.",
+    alternatives: [
+      { id: "row_reduce", title: "Row-reduce [A | I]", kind: "procedural", text: ["Write A next to the identity matrix.", "Use row operations to turn A into I; the right-hand block becomes A⁻¹."] },
+      { id: "check", title: "Check by multiplying", kind: "conceptual", text: ["Multiply A by your answer.", "Every diagonal entry must be 1 and every other entry 0."] },
+    ],
+  },
+  limits: "Small whole-number entries with |A| from −4 to 4; matrices with letters are not included.",
+});
+
+// ================================================================ antiderivatives
+
+/** The standard integrands: [as written, antiderivative, its derivative written by mistake, a sign slip]. */
+const STD: { f: (n: number) => string; F: (n: number) => [number, string]; g: (x: number, n: number) => number; diff: (n: number) => [number, string]; slip: ((n: number) => [number, string]) | null }[] = [
+  { f: (n) => `x${sup(n)}`, F: (n) => [1 / (n + 1), `x^${n + 1}`], g: (x, n) => x ** n, diff: (n) => [n, `x^${n - 1}`], slip: (n) => [1, `x^${n + 1}`] },
+  { f: () => "sin x", F: () => [-1, "cos x"], g: (x) => Math.sin(x), diff: () => [1, "cos x"], slip: () => [1, "cos x"] },
+  { f: () => "cos x", F: () => [1, "sin x"], g: (x) => Math.cos(x), diff: () => [-1, "sin x"], slip: () => [-1, "sin x"] },
+  { f: () => "sec²x", F: () => [1, "tan x"], g: (x) => 1 / Math.cos(x) ** 2, diff: () => [2, "sec^2(x) tan x"], slip: null },
+  { f: () => "eˣ", F: () => [1, "e^x"], g: (x) => Math.exp(x), diff: () => [1, "e^x"], slip: null },
+  { f: () => "(1/x)", F: () => [1, "log|x|"], g: (x) => 1 / x, diff: () => [-1, "1/x^2"], slip: null },
+  { f: () => "cosec²x", F: () => [-1, "cot x"], g: (x) => 1 / Math.sin(x) ** 2, diff: () => [-2, "cosec^2(x) cot x"], slip: () => [1, "cot x"] },
+  { f: () => "sec x tan x", F: () => [1, "sec x"], g: (x) => Math.tan(x) / Math.cos(x), diff: () => [1, "(sec x tan^2(x) + sec^3(x))"], slip: null },
+];
+const termStr = (c: number, m: string) => sum([[c, m]]);
+const antiSum = (parts: [number, string][]) => `${sum(parts)} + C`;
+/** [i, j, c1, c2, n]: ∫ (c1·fᵢ + c2·fⱼ) dx. */
+const austd = F({
+  id: "austd",
+  arity: 5,
+  title: "Antiderivatives of the standard functions",
+  competency: IND,
+  type: "antiderivative",
+  mc: true,
+  prompt: ([i, j, c1, c2, n]) => `Find ∫ (${sum([[c1, STD[i].f(n)], [c2, STD[j].f(n)]])}) dx.`,
+  solve: ([i, j, c1, c2, n]) => {
+    const [a1, m1] = STD[i].F(n);
+    const [a2, m2] = STD[j].F(n);
+    const ans = antiSum([[c1 * a1, m1], [c2 * a2, m2]]);
+    return { steps: [st("each", "integrate", IND, `Integrate term by term: ∫ ${STD[i].f(n)} dx = ${termStr(a1, m1)} and ∫ ${STD[j].f(n)} dx = ${termStr(a2, m2)}`, `${termStr(a1, m1)}, ${termStr(a2, m2)}`), st("sum", "combine", IND, `Multiply by the constants and add C: ${ans}`, ans)], answer: ans };
+  },
+  // independent: the derivative of the answer (central differences) is the integrand
+  validate: ([i, j, c1, c2, n], v) => derivAgrees(v, (x) => c1 * STD[i].g(x, n) + c2 * STD[j].g(x, n), XSMALL),
+  bugs: ([i, j, c1, c2, n]) => {
+    const [a1, m1] = STD[i].F(n);
+    const [a2, m2] = STD[j].F(n);
+    const [d1_, e1] = STD[i].diff(n);
+    const [d2_, e2] = STD[j].diff(n);
+    const out: Bug[] = [bug("differentiated", "conceptual", IND, "Each term was differentiated instead of integrated; an antiderivative is a function whose derivative is the integrand.", antiSum([[c1 * d1_, e1], [c2 * d2_, e2]]))];
+    const s1 = STD[i].slip?.(n);
+    const s2 = STD[j].slip?.(n);
+    if (i === 0) out.push(bug("power-not-divided", "recall", IND, `∫ x${sup(n)} dx was written as x${sup(n + 1)}; the new power also divides: x${sup(n + 1)}/${n + 1}.`, antiSum([[c1 * s1![0], s1![1]], [c2 * a2, m2]])));
+    const trig = [s1 && i !== 0 ? 1 : 0, s2 ? 1 : 0];
+    if (trig[0] || trig[1]) out.push(bug("trig-sign", "recall", IND, "A sign was lost: ∫ sin x dx = −cos x, ∫ cos x dx = sin x and ∫ cosec²x dx = −cot x.", antiSum([trig[0] ? [c1 * s1![0], s1![1]] : [c1 * a1, m1], trig[1] ? [c2 * s2![0], s2![1]] : [c2 * a2, m2]])));
+    return out;
+  },
+  distractors: ([i, j, c1, c2, n]) => {
+    const [a1, m1] = STD[i].F(n);
+    const [a2, m2] = STD[j].F(n);
+    return [antiSum([[-c1 * a1, m1], [c2 * a2, m2]]), antiSum([[c1 * a1, m1], [-c2 * a2, m2]])];
+  },
+  domain: [[0, 6], [1, 7], [-6, 6], [-6, 6], [2, 6]],
+  keep: ([i, j, c1, c2, n]) => i < j && c1 !== 0 && c2 !== 0 && (i === 0 ? true : n === 2) && !(i === 3 && j === 7) && !(i === 6 && j === 7),
+  why: "Two of xⁿ, sin x, cos x, sec²x, eˣ, 1/x, cosec²x and sec x tan x, with whole-number coefficients.",
+  cap: 400,
+  difficulty: ([i, j]) => (i <= 2 && j <= 2 ? 1 : j >= 6 ? 3 : 2),
+  teach: {
+    idea: "Integration undoes differentiation, so each standard derivative read backwards is a standard integral: (sin x)′ = cos x gives ∫ cos x dx = sin x + C, (tan x)′ = sec²x gives ∫ sec²x dx = tan x + C, (log|x|)′ = 1/x, and so on.",
+    method: "Integrate term by term (constants stay in front): ∫ xⁿ dx = xⁿ⁺¹/(n + 1), ∫ sin x = −cos x, ∫ cos x = sin x, ∫ sec²x = tan x, ∫ cosec²x = −cot x, ∫ sec x tan x = sec x, ∫ eˣ = eˣ, ∫ 1/x = log|x|; add one constant C.",
+    alternatives: [
+      { id: "check", title: "Differentiate to check", kind: "procedural", text: ["Differentiate your answer.", "If you get back the integrand, the answer is right."] },
+      { id: "table", title: "Read the derivative table backwards", kind: "conceptual", text: ["Write the table of standard derivatives.", "Each line, read from right to left, is an integral."] },
+    ],
+  },
+  limits: "Sums of two standard functions; the log answer is written log|x| (natural logarithm).",
+});
+
+/** [k, a, b, n]: ∫ f(ax + b) dx for (ax + b)ⁿ, cos, sin, e^, 1/(ax + b). */
+const lxIn = ([, a, b]: number[]) => lin_(a, b);
+const lxG = ([k, a, b, n]: number[]) => (x: number) => {
+  const u = a * x + b;
+  return k === 0 ? u ** n : k === 1 ? Math.cos(u) : k === 2 ? Math.sin(u) : k === 3 ? Math.exp(u) : 1 / u;
+};
+const lxF = (p: number[], div: number) => {
+  const [k, , , n] = p;
+  const u = lxIn(p);
+  const c = (x: number) => (near(x, 1, 1e-12) ? "" : near(x, -1, 1e-12) ? "−" : `(${nf(x)})`);
+  return k === 0 ? `${c(1 / (div * (n + 1)))}(${u})^${n + 1} + C` : k === 1 ? `${c(1 / div)}sin(${u}) + C` : k === 2 ? `${c(-1 / div)}cos(${u}) + C` : k === 3 ? `${c(1 / div)}e^(${u}) + C` : `${c(1 / div)}log|${u}| + C`;
+};
+const aulax = F({
+  id: "aulax",
+  arity: 4,
+  title: "Antiderivatives of f(ax + b)",
+  competency: IND,
+  type: "antiderivative",
+  mc: true,
+  prompt: (p) => {
+    const [k, , , n] = p;
+    const u = lxIn(p);
+    const f = k === 0 ? `(${u})${sup(n)}` : k === 1 ? `cos(${u})` : k === 2 ? `sin(${u})` : k === 3 ? `e^(${u})` : `1/(${u})`;
+    return `Find ∫ ${f} dx.`;
+  },
+  solve: (p) => {
+    const ans = lxF(p, p[1]);
+    return { steps: [st("rule", "recall", IND, `If ∫ f(x) dx = F(x) + C, then ∫ f(ax + b) dx = F(ax + b)/a + C, with a = ${p[1]}`, "F(ax + b)/a"), st("apply", "integrate", IND, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (p, v) => derivAgrees(v, lxG(p), XSMALL),
+  bugs: (p) => [
+    bug("not-divided", "procedural", IND, `The result was not divided by ${p[1]}; differentiating F(ax + b) brings out a factor a, so the integral must divide by it.`, lxF(p, 1)),
+    bug("multiplied", "procedural", IND, `The result was multiplied by ${p[1]} instead of divided; that is what differentiating does.`, lxF(p, 1 / p[1])),
+    ...(p[0] === 0 ? [bug("power-not-divided", "recall", IND, `The new power ${p[3] + 1} was not used to divide.`, `(${nf(1 / p[1])})(${lxIn(p)})^${p[3] + 1} + C`.replace(/^\(1\)/, ""))] : []),
+  ],
+  distractors: (p) => [lxF(p, -p[1]), lxF(p, 2 * p[1])],
+  domain: [[0, 4], [2, 6], [-5, 5], [2, 5]],
+  keep: ([k, , b, n]) => b !== 0 && (k === 0 ? true : n === 2),
+  why: "(ax + b)ⁿ, cos(ax + b), sin(ax + b), e^(ax + b) and 1/(ax + b) with a from 2 to 6.",
+  cap: 300,
+  difficulty: ([k]) => (k === 3 || k === 0 ? 1 : k === 4 ? 2 : 2),
+  teach: {
+    idea: "By the chain rule, d/dx F(ax + b) = a F′(ax + b). So to integrate f(ax + b), take the usual antiderivative F at ax + b and divide by a.",
+    method: "Integrate as if ax + b were x, then divide by a: ∫ cos(ax + b) dx = sin(ax + b)/a + C, ∫ (ax + b)ⁿ dx = (ax + b)ⁿ⁺¹/(a(n + 1)) + C, ∫ 1/(ax + b) dx = log|ax + b|/a + C.",
+    alternatives: [
+      { id: "substitute", title: "Substitute u = ax + b", kind: "procedural", text: ["Let u = ax + b, so du = a dx and dx = du/a.", "Integrate in u and put back u = ax + b."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer with the chain rule.", "The factor a must cancel the 1/a."] },
+    ],
+  },
+  limits: "Linear inside functions with a from 2 to 6; sec²(ax + b) is left out.",
+});
+
+/** [p, q, r, x0, v]: f′(x) = px² + qx + r, f(x0) = v. */
+const initF = ([p, q, r]: number[]) => (x: number) => (p * x ** 3) / 3 + (q * x * x) / 2 + r * x;
+const initC = (P: number[]) => P[4] - initF(P)(P[3]);
+const initStr = (P: number[], C: number) => sum([[P[0] / 3, "x³"], [P[1] / 2, "x²"], [P[2], "x"], [C, ""]]);
+const auinit = F({
+  id: "auinit",
+  arity: 5,
+  title: "Finding a function from its derivative and one value",
+  competency: IND,
+  type: "exact",
+  mc: true,
+  prompt: (P) => `f′(x) = ${sum([[P[0], "x²"], [P[1], "x"], [P[2], ""]])} and f(${P[3]}) = ${P[4]}. Find f(x).`,
+  solve: (P) => {
+    const C = initC(P);
+    return {
+      steps: [
+        st("integrate", "integrate", IND, `Integrate: f(x) = ${initStr(P, 0)} + C`, `${initStr(P, 0)} + C`),
+        st("constant", "substitute", IND, `Put x = ${P[3]}: ${nf(initF(P)(P[3]))} + C = ${P[4]}, so C = ${nf(C)}`, C),
+        st("answer", "write", IND, `f(x) = ${initStr(P, C)}`, initStr(P, C)),
+      ],
+      answer: initStr(P, C),
+    };
+  },
+  // independent: the derivative of the answer (central differences) is f′, and the answer has the given value
+  validate: (P, v) => derivAgrees(v, (x) => P[0] * x * x + P[1] * x + P[2], XS) && Math.abs(ev(node(v), { x: P[3] }) - P[4]) < 1e-9,
+  bugs: (P) => [
+    bug("no-constant", "conceptual", IND, "The constant of integration was left out; the given value of f is there to find it.", initStr(P, 0)),
+    bug("constant-is-value", "procedural", IND, `C was taken to be ${P[4]}; that is only true when the given value is at x = 0.`, initStr(P, P[4])),
+    bug("powers-not-divided", "recall", IND, "The powers were raised but not divided by the new power.", sum([[P[0], "x³"], [P[1], "x²"], [P[2], "x"], [P[4] - (P[0] + P[1] + P[2]) * P[3], ""]])),
+  ],
+  distractors: (P) => [initStr(P, initC(P) + 1), initStr(P, -initC(P))],
+  domain: [[0, 6], [-6, 6], [1, 20], [0, 1], [5, 60]],
+  keep: ([p, q, , , v]) => (p !== 0 || q !== 0) && v % 5 === 0,
+  why: "Quadratic derivatives with small whole-number coefficients and one value of f at x = 0 or x = 1.",
+  cap: 400,
+  difficulty: ([p, q, , x0]) => (x0 === 0 && p % 3 === 0 && q % 2 === 0 ? 1 : x0 === 1 ? 3 : 2),
+  word: (P) =>
+    P[3] === 0
+      ? `For a small printing business, the marginal cost of printing x thousand pages is C′(x) = ${sum([[P[0], "x²"], [P[1], "x"], [P[2], ""]])} hundred rupees per thousand pages, and the fixed cost (the cost when x = 0) is ${P[4]} hundred rupees. Find the total cost C(x), in hundreds of rupees.`
+      : `For a small printing business, the marginal cost of printing x thousand pages is C′(x) = ${sum([[P[0], "x²"], [P[1], "x"], [P[2], ""]])} hundred rupees per thousand pages, and printing 1 thousand pages costs ${P[4]} hundred rupees in all. Find the total cost C(x), in hundreds of rupees.`,
+  teach: {
+    idea: "All the antiderivatives of f′ differ by a constant: their graphs are the same curve shifted up or down. One known value picks out the one curve that passes through that point.",
+    method: "Integrate f′ term by term, add C, substitute the given x and f(x), and solve for C.",
+    alternatives: [
+      { id: "family", title: "A family of curves", kind: "conceptual", text: ["Sketch y = F(x) + C for several C: parallel copies of one curve.", "The given point lies on exactly one of them."] },
+      { id: "check", title: "Check both conditions", kind: "procedural", text: ["Differentiate your answer: it must give f′(x).", "Put in the given x: it must give the given value."] },
+    ],
+  },
+  limits: "Quadratic derivatives and one value at x = 0 or 1.",
+});
+
+// ================================================================ integration methods
+
+/** [k, a, b, c]: k = 0 sin²(ax), 1 cos²(ax), 2 sin(ax)cos(bx), 3 tan²(ax), 4 (2ax + b)/(ax² + bx + c), 5 x cos(ax² + b). */
+const trG = ([k, a, b, c]: number[]) => (x: number) => (k === 0 ? Math.sin(a * x) ** 2 : k === 1 ? Math.cos(a * x) ** 2 : k === 2 ? Math.sin(a * x) * Math.cos(b * x) : k === 3 ? Math.tan(a * x) ** 2 : k === 4 ? (2 * a * x + b) / (a * x * x + b * x + c) : x * Math.cos(a * x * x + b));
+const trAns = ([k, a, b, c]: number[]): string => {
+  const ax = ax_(a);
+  const q = (x: number) => (near(x, 1, 1e-12) ? "" : near(x, -1, 1e-12) ? "−" : `(${nf(x)})`);
+  if (k === 0) return `x/2 − sin(${ax_(2 * a)})/${4 * a} + C`;
+  if (k === 1) return `x/2 + sin(${ax_(2 * a)})/${4 * a} + C`;
+  if (k === 2) {
+    const s = a + b;
+    const d = a - b;
+    return `${q(-1 / (2 * s))}cos(${ax_(s)}) ${-1 / (2 * d) < 0 ? "−" : "+"} (${nf(Math.abs(1 / (2 * d)))})cos(${ax_(Math.abs(d))}) + C`;
+  }
+  if (k === 3) return `${q(1 / a)}tan(${ax}) − x + C`;
+  if (k === 4) return `log|${sum([[a, "x²"], [b, "x"], [c, ""]])}| + C`;
+  return `${q(1 / (2 * a))}sin(${sum([[a, "x²"], [b, ""]])}) + C`;
+};
+const trPts = (p: number[]) => XSMALL.filter((x) => (p[0] === 3 ? Math.abs(Math.cos(p[1] * x)) > 0.25 : true));
+const autrig = F({
+  id: "autrig",
+  arity: 4,
+  title: "Integration using trigonometric identities and substitution",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (p) => {
+    const [k, a, b, c] = p;
+    const ax = ax_(a);
+    const f = k === 0 ? `sin²(${ax})` : k === 1 ? `cos²(${ax})` : k === 2 ? `sin(${ax}) cos(${ax_(b)})` : k === 3 ? `tan²(${ax})` : k === 4 ? `(${sum([[2 * a, "x"], [b, ""]])})/(${sum([[a, "x²"], [b, "x"], [c, ""]])})` : `x cos(${sum([[a, "x²"], [b, ""]])})`;
+    return `Find ∫ ${f} dx.${k === 4 ? " (log is the natural logarithm.)" : ""}`;
+  },
+  solve: (p) => {
+    const k = p[0];
+    const how = ["Use sin²θ = (1 − cos 2θ)/2", "Use cos²θ = (1 + cos 2θ)/2", "Use 2 sin A cos B = sin(A + B) + sin(A − B)", "Use tan²θ = sec²θ − 1", "The top is the derivative of the bottom: substitute u = bottom, ∫ du/u = log|u|", "Substitute u = the inside of cos: du = 2a x dx"][k];
+    const ans = trAns(p);
+    return { steps: [st("identity", "rewrite", k >= 4 ? IM : "MATH.trigonometry.identities", how, how), st("integrate", "integrate", IM, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (p, v) => derivAgrees(v, trG(p), trPts(p)),
+  bugs: (p) => {
+    const [k, a, b, c] = p;
+    const ax = ax_(a);
+    if (k === 0) return [bug("power-rule-on-sin", "conceptual", IM, "sin²(ax) was integrated like a power of x; there is no power rule for sin, so rewrite it with the double-angle identity first.", `sin^3(${ax})/${3 * a} + C`), bug("identity-sign", "recall", "MATH.trigonometry.identities", "The identity was used with the wrong sign: sin²θ = (1 − cos 2θ)/2.", `x/2 + sin(${ax_(2 * a)})/${4 * a} + C`)];
+    if (k === 1) return [bug("identity-sign", "recall", "MATH.trigonometry.identities", "The identity was used with the wrong sign: cos²θ = (1 + cos 2θ)/2.", `x/2 − sin(${ax_(2 * a)})/${4 * a} + C`), bug("power-rule-on-cos", "conceptual", IM, "cos²(ax) was integrated like a power of x; rewrite it with the double-angle identity first.", `cos^3(${ax})/${3 * a} + C`)];
+    if (k === 2) return [bug("product-of-integrals", "conceptual", IM, "The two factors were integrated separately and multiplied; the integral of a product is not the product of the integrals.", `(${nf(-1 / (a * b))})cos(${ax}) sin(${ax_(b)}) + C`)];
+    if (k === 3) return [bug("minus-x", "recall", "MATH.trigonometry.identities", "tan²θ was integrated as if it were sec²θ; tan²θ = sec²θ − 1, so a − x appears.", `${a === 1 ? "" : `(1/${a})`}tan(${ax}) + C`), bug("power-rule-on-tan", "conceptual", IM, "tan² was integrated like a power of x.", `tan^3(${ax})/${3 * a} + C`)];
+    if (k === 4) return [bug("top-times-log", "procedural", IM, "The top was kept in front of the logarithm; after substituting u = bottom, the top together with dx is exactly du.", `(${sum([[2 * a, "x"], [b, ""]])})log|${sum([[a, "x²"], [b, "x"], [c, ""]])}| + C`)];
+    return [bug("factor-forgotten", "procedural", IM, `du = ${2 * a}x dx, so x dx = du/${2 * a}; the factor 1/${2 * a} was left out.`, `sin(${sum([[a, "x²"], [b, ""]])}) + C`)];
+  },
+  distractors: (p) => {
+    const ans = trAns(p).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[0, 5], [1, 6], [-6, 6], [-9, 9]],
+  keep: ([k, a, b, c]) => (k <= 1 || k === 3 ? b === 1 && c === 1 : k === 2 ? b >= 1 && b !== a && c === 1 : k === 4 ? b !== 0 && c !== 0 && b * b - 4 * a * c < 0 : b !== 0 && c === 1),
+  why: "sin², cos², tan² of ax, sin ax cos bx, f′/f with a quadratic, and x cos(ax² + b).",
+  cap: 400,
+  difficulty: ([k]) => (k === 4 ? 1 : k === 2 ? 3 : 2),
+  teach: {
+    idea: "Powers and products of sines and cosines are not standard integrals, but trigonometric identities turn them into sums of single sines and cosines, which are. A substitution u = g(x) works when g′(x) is also present.",
+    method: "Rewrite: sin²θ = (1 − cos 2θ)/2, cos²θ = (1 + cos 2θ)/2, tan²θ = sec²θ − 1, 2 sin A cos B = sin(A + B) + sin(A − B). Then integrate term by term. For f′(x)/f(x) the answer is log|f(x)| + C.",
+    alternatives: [
+      { id: "substitution", title: "Substitute and change dx", kind: "procedural", text: ["Choose u as the inside function; write du in terms of dx.", "Every x must disappear before integrating in u."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer.", "Use the identity again to see it equals the integrand."] },
+    ],
+  },
+  limits: "Single identities or one substitution; products of three factors and odd powers above 2 are not included.",
+});
+
+/** [k, a, h, p, q]: standard forms with logarithmic answers; (x + h) is the completed square. */
+const sfG = ([k, a, h, p, q]: number[]) => (x: number) => {
+  const u = x + h;
+  return k === 0 ? 1 / (u * u - a * a) : k === 1 ? 1 / (a * a - x * x) : k === 2 ? 1 / Math.sqrt(u * u + a * a) : k === 3 ? Math.sqrt(x * x + a * a) : (p * x + q) / (u * u - a * a);
+};
+const sfQuad = ([k, a, h]: number[]) => (k === 2 ? sum([[1, "x²"], [2 * h, "x"], [h * h + a * a, ""]]) : sum([[1, "x²"], [2 * h, "x"], [h * h - a * a, ""]]));
+const sfAns = (P: number[], slip = ""): string => {
+  const [k, a, h, p, q] = P;
+  const u = sum([[1, "x"], [h, ""]]);
+  const L = `log|(${sum([[1, "x"], [h - a, ""]])})/(${sum([[1, "x"], [h + a, ""]])})|`;
+  if (k === 0) return slip === "no-factor" ? `${L} + C` : slip === "swap" ? `(1/${2 * a})log|(${sum([[1, "x"], [h + a, ""]])})/(${sum([[1, "x"], [h - a, ""]])})| + C` : `(1/${2 * a})${L} + C`;
+  if (k === 1) return slip === "no-factor" ? `log|(${a} + x)/(${a} − x)| + C` : slip === "swap" ? `(1/${2 * a})log|(${a} − x)/(${a} + x)| + C` : `(1/${2 * a})log|(${a} + x)/(${a} − x)| + C`;
+  if (k === 2) return slip === "no-x" ? `log|√(${sfQuad(P)})| + C` : slip === "power" ? `2√(${sfQuad(P)}) + C` : `log|${u} + √(${sfQuad(P)})| + C`;
+  if (k === 3) return slip === "no-log" ? `(x/2)√(x² + ${a * a}) + C` : slip === "half-log" ? `(x/2)√(x² + ${a * a}) + ${a * a}log|x + √(x² + ${a * a})| + C` : `(x/2)√(x² + ${a * a}) + (${rat(a * a, 2)})log|x + √(x² + ${a * a})| + C`;
+  const B = q - p * h;
+  const first = `(${rat(p, 2)})log|${sfQuad(P)}|`;
+  if (slip === "first-only") return `${first} + C`;
+  return `${first} ${B < 0 ? "−" : "+"} (${rat(Math.abs(B), 2 * a)})${L} + C`;
+};
+const auform = F({
+  id: "auform",
+  arity: 5,
+  title: "Integrals of the standard forms 1/(x² − a²), 1/(a² − x²), 1/√(x² + a²), √(x² + a²) and (px + q)/(x² + bx + c)",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (P) => {
+    const [k, a, , p, q] = P;
+    const f = k === 0 ? `1/(${sfQuad(P)})` : k === 1 ? `1/(${a * a} − x²)` : k === 2 ? `1/√(${sfQuad(P)})` : k === 3 ? `√(x² + ${a * a})` : `(${sum([[p, "x"], [q, ""]])})/(${sfQuad(P)})`;
+    return `Find ∫ ${f} dx. (log is the natural logarithm.)`;
+  },
+  solve: (P) => {
+    const [k, a, h] = P;
+    const sq = k === 2 ? `(x ${signed(h)})² + ${a}²` : `(x ${signed(h)})² − ${a}²`;
+    const form = ["∫ dx/(u² − a²) = (1/2a) log|(u − a)/(u + a)|", "∫ dx/(a² − x²) = (1/2a) log|(a + x)/(a − x)|", "∫ dx/√(u² + a²) = log|u + √(u² + a²)|", "∫ √(x² + a²) dx = (x/2)√(x² + a²) + (a²/2) log|x + √(x² + a²)|", "write px + q = (p/2)(2x + b) + B: a log part and a 1/(u² − a²) part"][k];
+    const ans = sfAns(P);
+    return { steps: [st("square", "complete the square", QUAD, k === 1 || k === 3 ? `The form is already standard, with a = ${a}` : `Complete the square: ${sfQuad(P)} = ${sq.replace("x + 0", "x").replace("(x + 0)", "x")}`, a), st("form", "recall", IM, form, form), st("answer", "integrate", IM, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (P, v) => derivAgrees(v, sfG(P), [0.43, 0.71, 1.23, 1.91, 2.27, 2.83, 3.37].filter((x) => Math.abs(Math.abs(x + P[2]) - P[1]) > 0.2)),
+  bugs: (P) => {
+    const k = P[0];
+    if (k <= 1) return [bug("no-factor", "recall", IM, `The factor 1/(2a) = 1/${2 * P[1]} in front of the logarithm was left out.`, sfAns(P, "no-factor")), bug("swap", "recall", IM, "The fraction inside the logarithm was turned upside down, which changes the sign of the answer.", sfAns(P, "swap"))];
+    if (k === 2) return [bug("no-x", "recall", IM, "The u inside the logarithm was left out: the form is log|u + √(u² + a²)|.", sfAns(P, "no-x")), bug("power", "conceptual", IM, "The power rule was used as if the top were the derivative of the inside; it is not, so this is the standard logarithmic form.", sfAns(P, "power"))];
+    if (k === 3) return [bug("no-log", "recall", IM, "Only the first part of the standard result was written; the (a²/2) log|x + √(x² + a²)| part is needed too.", sfAns(P, "no-log")), bug("half-log", "recall", IM, "The coefficient of the logarithm is a²/2, not a².", sfAns(P, "half-log"))];
+    return [bug("first-only", "procedural", IM, "Only the log|x² + bx + c| part was integrated; after writing px + q = (p/2)(2x + b) + B, the constant B gives a second, standard-form integral.", sfAns(P, "first-only"))];
+  },
+  distractors: (P) => {
+    const ans = sfAns(P).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[0, 4], [1, 6], [-4, 4], [1, 6], [-6, 6]],
+  keep: ([k, a, h, p, q]) => (k === 1 || k === 3 ? h === 0 && p === 1 && q === 0 : k === 4 ? h * h !== a * a && q - p * h !== 0 && h !== 0 : h * h !== a * a && p === 1 && q === 0) && (k === 1 ? a >= 3 : true),
+  why: "Standard forms with a from 1 to 6, reached by completing the square x² + 2hx + h² ∓ a²; tan⁻¹ and sin⁻¹ forms are in the definite family aupi.",
+  cap: 400,
+  difficulty: ([k, , h]) => (k === 1 || (k === 0 && h === 0) ? 1 : k === 4 ? 3 : 2),
+  teach: {
+    idea: "Completing the square turns x² + bx + c into (x + h)² ± a², and each such shape has a standard antiderivative; a linear top px + q is split into a multiple of the bottom's derivative plus a constant.",
+    method: "Complete the square; match the form; write the standard result with u = x + h. For (px + q)/(x² + bx + c), write px + q = (p/2)(2x + b) + B: the first part gives (p/2) log|x² + bx + c|, the second a standard form.",
+    alternatives: [
+      { id: "partial_fractions", title: "Partial fractions", kind: "procedural", text: ["1/(x² − a²) = (1/2a)[1/(x − a) − 1/(x + a)].", "Integrating gives (1/2a)(log|x − a| − log|x + a|), the same result."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer.", "It must give back the integrand at every x where both are defined."] },
+    ],
+  },
+  limits: "Logarithmic standard forms; 1/(x² + a²) and 1/√(a² − x²), whose antiderivatives are inverse trigonometric, are assessed as definite integrals in aupi.",
+});
+
+/** [k, a, c]: definite standard forms with values in π. */
+const piVal = ([k, a, c]: number[]): [number, number] => (k === 0 ? [c, 4 * a] : k === 1 ? [c, 6] : k === 2 ? [a * a, 4] : k === 3 ? [c, 2 * a] : [c, 3 * a]);
+function piQ(n: number, d: number): string {
+  if (d < 0) [n, d] = [-n, -d];
+  const g = gcd(n, d) || 1;
+  const [N, D] = [n / g, d / g];
+  return `${N === 1 ? "" : N === -1 ? "−" : mn(String(N))}π${D === 1 ? "" : `/${D}`}`;
+}
+const piG = ([k, a, c]: number[]) => (x: number) => (k === 1 ? c / Math.sqrt(a * a - x * x) : k === 2 ? Math.sqrt(a * a - x * x) : c / (x * x + a * a));
+const piLim = ([k, a]: number[]): [number, number] => (k === 0 ? [0, a] : k === 1 ? [0, a / 2] : k === 2 ? [0, a] : k === 3 ? [-a, a] : [0, a * Math.sqrt(3)]);
+const aupi = F({
+  id: "aupi",
+  arity: 3,
+  title: "Definite integrals of 1/(x² + a²), 1/√(a² − x²) and √(a² − x²)",
+  competency: IM,
+  type: "exact",
+  mc: true,
+  prompt: (P) => {
+    const [k, a, c] = P;
+    const lims = k === 0 ? ["0", `${a}`] : k === 1 ? ["0", rat(a, 2)] : k === 2 ? ["0", `${a}`] : k === 3 ? [`−${a}`, `${a}`] : ["0", `${a === 1 ? "" : a}√3`];
+    const f = k === 1 ? `${c}/√(${a * a} − x²)` : k === 2 ? `√(${a * a} − x²)` : `${c}/(x² + ${a * a})`;
+    return `Evaluate ∫ from ${lims[0]} to ${lims[1]} of ${f} dx. Give the exact value in terms of π.`;
+  },
+  solve: (P) => {
+    const [k, a] = P;
+    const [n, d] = piVal(P);
+    const form = k === 1 ? `∫ dx/√(a² − x²) = sin⁻¹(x/a): sin⁻¹(1/2) − sin⁻¹(0) = π/6` : k === 2 ? `∫ √(a² − x²) dx = (x/2)√(a² − x²) + (a²/2) sin⁻¹(x/a): at x = ${a} this is (${a * a}/2)(π/2)` : `∫ dx/(x² + a²) = (1/a) tan⁻¹(x/a): (1/${a})[tan⁻¹ at the limits] = (1/${a}) × ${k === 0 ? "π/4" : k === 3 ? "π/2" : "π/3"}`;
+    return { steps: [st("form", "recall", IM, form, form), st("value", "evaluate", DEF, `= ${piQ(n, d)}`, piQ(n, d))], answer: piQ(n, d) };
+  },
+  // independent: Simpson's rule
+  validate: (P, v) => {
+    const [lo, hi] = piLim(P);
+    const x = constOf(v);
+    return Number.isFinite(x) && near(x, simpson(piG(P), lo, hi), 1e-8);
+  },
+  bugs: (P) => {
+    const [k, a, c] = P;
+    const [n, d] = piVal(P);
+    if (k === 1) return [bug("sixty-degrees", "recall", "MATH.trigonometry.inverse", "sin⁻¹(1/2) was taken as π/3; the angle whose sine is 1/2 is π/6.", piQ(c, 3)), bug("degrees", "recall", "MATH.trigonometry.inverse", "The angle was given in degrees; in calculus, angles are in radians.", `${30 * c}`)];
+    if (k === 2) return [bug("whole-circle", "conceptual", DEF, "The area of the whole circle was given; from 0 to a under the upper half is a quarter of the circle.", piQ(a * a, 1)), bug("half-circle", "conceptual", DEF, "Half the circle was given; this integral is a quarter of the circle (from 0 to a only).", piQ(a * a, 2))];
+    return [bug("no-one-over-a", "recall", IM, `The factor 1/a = 1/${a} in front of tan⁻¹ was left out.`, a !== 1 ? piQ(n * a, d) : null), bug("degrees", "recall", "MATH.trigonometry.inverse", "The angle was given in degrees; in calculus, angles are in radians.", rat(c * (k === 0 ? 45 : k === 3 ? 90 : 60), a))];
+  },
+  distractors: (P) => {
+    const [n, d] = piVal(P);
+    return [piQ(2 * n, d), piQ(n, 2 * d), rat(n, d)];
+  },
+  range: [0, Infinity],
+  domain: [[0, 4], [1, 9], [1, 6]],
+  keep: ([k, , c]) => (k === 2 ? c === 1 : true),
+  why: "Five definite standard forms with a from 1 to 9 and a whole-number factor up to 6.",
+  cap: 300,
+  difficulty: ([k]) => (k === 0 ? 1 : k === 4 || k === 2 ? 3 : 2),
+  teach: {
+    idea: "d/dx tan⁻¹(x/a) = a/(a² + x²) and d/dx sin⁻¹(x/a) = 1/√(a² − x²), so these integrands have inverse trigonometric antiderivatives; their values at the limits are standard angles. ∫₀ᵃ √(a² − x²) dx is a quarter of a circle of radius a.",
+    method: "∫ dx/(x² + a²) = (1/a) tan⁻¹(x/a) + C; ∫ dx/√(a² − x²) = sin⁻¹(x/a) + C; ∫ √(a² − x²) dx = (x/2)√(a² − x²) + (a²/2) sin⁻¹(x/a) + C. Evaluate at the limits in radians.",
+    alternatives: [
+      { id: "trig_sub", title: "Substitute x = a tan θ or x = a sin θ", kind: "procedural", text: ["With x = a tan θ, dx = a sec²θ dθ and x² + a² = a² sec²θ: the integrand becomes (1/a) dθ.", "Change the limits to angles and integrate."] },
+      { id: "circle", title: "A quarter circle", kind: "conceptual", text: ["y = √(a² − x²) is the upper half of the circle x² + y² = a².", "From 0 to a it covers a quarter of the area πa²."] },
+    ],
+  },
+  limits: "Limits that give standard angles (π/6, π/4, π/3, π/2); answers are exact multiples of π.",
+});
+
+/** [k, a, b, A, B]: k = 0 [A/(x − a) + B/(x − a)²]; k = 1 1 + A/(x − a) + B/(x − b) over (x − a)(x − b). */
+const pfG = ([k, a, b, A, B]: number[]) => (x: number) => (k === 0 ? A / (x - a) + B / (x - a) ** 2 : 1 + A / (x - a) + B / (x - b));
+const xm = (a: number) => sum([[1, "x"], [-a, ""]]);
+const pfAns = ([k, a, b, A, B]: number[], slip = "") => {
+  const L = (c: number, r: number) => (c === 0 ? null : `${sum([[c, `log|${xm(r)}|`]])}`);
+  if (k === 0) {
+    const t = (sg: number) => `${sg > 0 ? "+" : "−"} ${Math.abs(B)}/(${xm(a)})`;
+    if (slip === "sign") return `${L(A, a)} ${t(B)} + C`;
+    if (slip === "logs") return `${sum([[A + B, `log|${xm(a)}|`]])} + C`;
+    return `${L(A, a)} ${t(-B)} + C`;
+  }
+  const parts = [L(A, a), L(B, b)].filter(Boolean).join(" + ").replace(/\+ −/g, "− ");
+  if (slip === "no-x") return `${parts} + C`;
+  if (slip === "swap") return `x + ${[L(B, a), L(A, b)].filter(Boolean).join(" + ")} + C`.replace(/\+ −/g, "− ");
+  return `x + ${parts} + C`.replace(/\+ −/g, "− ");
+};
+const aupfr = F({
+  id: "aupfr",
+  arity: 5,
+  title: "Integrating by partial fractions: repeated factors and improper fractions",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (P) => {
+    const [k, a, b, A, B] = P;
+    if (k === 0) return `Find ∫ (${sum([[A, "x"], [B - A * a, ""]])})/(${xm(a)})² dx.`;
+    const num = sum([[1, "x²"], [-(a + b) + A + B, "x"], [a * b - A * b - B * a, ""]]);
+    return `Find ∫ (${num})/(${sum([[1, "x²"], [-(a + b), "x"], [a * b, ""]])}) dx. (log is the natural logarithm.)`;
+  },
+  solve: (P) => {
+    const [k, a, b, A, B] = P;
+    const ans = pfAns(P);
+    if (k === 0) return { steps: [st("split", "partial fractions", "MATH.algebra.partial-fractions", `Write the integrand as A/(x − a) + B/(x − a)²: ${A}/(${xm(a)}) + ${pn(B)}/(${xm(a)})²`, `${A}, ${B}`), st("integrate", "integrate", IM, `∫ dx/(x − a)² = −1/(x − a): ${ans}`, ans)], answer: ans };
+    return { steps: [st("divide", "divide", "MATH.algebra.polynomials", "The top and bottom have the same degree: divide first, giving 1 + (a proper fraction)", "1 + …"), st("split", "partial fractions", "MATH.algebra.partial-fractions", `The proper part is ${A}/(${xm(a)}) + ${pn(B)}/(${xm(b)})`, `${A}, ${B}`), st("integrate", "integrate", IM, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (P, v) => derivAgrees(v, pfG(P), [-2.63, -1.37, -0.41, 0.43, 1.58, 2.27, 3.62].filter((x) => Math.abs(x - P[1]) > 0.2 && Math.abs(x - P[2]) > 0.2)),
+  bugs: (P) =>
+    P[0] === 0
+      ? [bug("sign", "recall", IM, "∫ dx/(x − a)² was taken as +1/(x − a); differentiating 1/(x − a) gives −1/(x − a)², so the integral is −1/(x − a).", pfAns(P, "sign")), bug("all-logs", "conceptual", IM, "The repeated factor was integrated as a logarithm too; only 1/(x − a) gives a logarithm, 1/(x − a)² is a power.", pfAns(P, "logs"))]
+      : [bug("no-division", "procedural", "MATH.algebra.polynomials", "The fraction was split without dividing first; when the top's degree is not less than the bottom's, the polynomial part (here 1, giving x) comes first.", pfAns(P, "no-x")), bug("swap", "procedural", "MATH.algebra.partial-fractions", "The two partial-fraction constants were attached to the wrong factors.", P[3] !== P[4] ? pfAns(P, "swap") : null)],
+  distractors: (P) => {
+    const ans = pfAns(P).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[0, 1], [-3, 3], [-3, 3], [-5, 5], [-5, 5]],
+  keep: ([k, a, b, A, B]) => A !== 0 && B !== 0 && (k === 0 ? b === 0 : a < b),
+  why: "A repeated linear factor (x − a)², or an improper fraction over (x − a)(x − b), with whole-number constants.",
+  cap: 400,
+  difficulty: ([k, , , A, B]) => (k === 0 && A > 0 && B > 0 ? 1 : k === 1 ? 3 : 2),
+  teach: {
+    idea: "A repeated factor (x − a)² needs two partial fractions, A/(x − a) + B/(x − a)²: the first integrates to a logarithm, the second to a power, −B/(x − a). An improper fraction (top degree ≥ bottom degree) is first divided to give a polynomial plus a proper fraction.",
+    method: "If needed, divide. Split the proper part into partial fractions, find the constants (cover-up or comparing coefficients), integrate each term, add C.",
+    alternatives: [
+      { id: "substitute", title: "Substitute u = x − a", kind: "procedural", text: ["For a repeated factor, put u = x − a: the top becomes Au + B.", "∫ (Au + B)/u² du = A log|u| − B/u."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer and add the fractions.", "You must get the original integrand."] },
+    ],
+  },
+  limits: "One repeated linear factor, or an improper fraction over two distinct linear factors; irreducible quadratic factors are in aopfq (partial fractions) and aupi (tan⁻¹ forms).",
+});
+
+/** [k, a, n, c]: by parts — c·x e^(ax), c·x sin ax, c·x cos ax, c·xⁿ log(ax), c·eˣ[f + f′], c·x² e^(ax), c·x² cos ax. */
+const EXF = [
+  { f: "sin x", fp: "cos x", both: "sin x + cos x", g: (x: number) => Math.sin(x), gp: (x: number) => Math.cos(x) },
+  { f: "log x", fp: "1/x", both: "log x + 1/x", g: (x: number) => Math.log(x), gp: (x: number) => 1 / x },
+  { f: "1/x", fp: "(−1/x²)", both: "1/x − 1/x²", g: (x: number) => 1 / x, gp: (x: number) => -1 / (x * x) },
+  { f: "x²", fp: "2x", both: "x² + 2x", g: (x: number) => x * x, gp: (x: number) => 2 * x },
+  { f: "tan x", fp: "sec²x", both: "tan x + sec²x", g: (x: number) => Math.tan(x), gp: (x: number) => 1 / Math.cos(x) ** 2 },
+];
+const ptG = ([k, a, n, c]: number[]) => (x: number) =>
+  c * (k === 0 ? x * Math.exp(a * x) : k === 1 ? x * Math.sin(a * x) : k === 2 ? x * Math.cos(a * x) : k === 3 ? x ** n * Math.log(a * x) : k === 4 ? Math.exp(x) * (EXF[a - 1].g(x) + EXF[a - 1].gp(x)) : k === 5 ? x * x * Math.exp(a * x) : x * x * Math.cos(a * x));
+const ptAns = ([k, a, n, c]: number[], slip = ""): string => {
+  const ax = ax_(a);
+  const C = (s: string) => (c === 1 ? `${s} + C` : `${c}(${s}) + C`);
+  if (k === 0) return C(slip === "sign" ? `(x/${a} + 1/${a * a})e^(${ax})` : slip === "product" ? `(x²/2)(e^(${ax})/${a})` : `(x/${a} − 1/${a * a})e^(${ax})`);
+  if (k === 1) return C(slip === "sign" ? `x cos(${ax})/${a} + sin(${ax})/${a * a}` : slip === "product" ? `−(x²/2)cos(${ax})/${a}` : `−x cos(${ax})/${a} + sin(${ax})/${a * a}`);
+  if (k === 2) return C(slip === "sign" ? `x sin(${ax})/${a} − cos(${ax})/${a * a}` : slip === "product" ? `(x²/2)sin(${ax})/${a}` : `x sin(${ax})/${a} + cos(${ax})/${a * a}`);
+  if (k === 3) return C(slip === "first" ? `x^${n + 1} log(${ax})/${n + 1}` : slip === "sign" ? `x^${n + 1} log(${ax})/${n + 1} + x^${n + 1}/${(n + 1) ** 2}` : `x^${n + 1} log(${ax})/${n + 1} − x^${n + 1}/${(n + 1) ** 2}`);
+  if (k === 4) return C(slip === "fp" ? `e^x ${EXF[a - 1].fp}` : slip === "both" ? `e^x (${EXF[a - 1].both})` : `e^x ${EXF[a - 1].f}`);
+  if (k === 5) return C(slip === "first" ? `e^(${ax})(x²/${a} − 2x/${a * a})` : slip === "sign" ? `e^(${ax})(x²/${a} + 2x/${a * a} + 2/${a ** 3})` : `e^(${ax})(x²/${a} − 2x/${a * a} + 2/${a ** 3})`);
+  return C(slip === "first" ? `x² sin(${ax})/${a} + 2x cos(${ax})/${a * a}` : slip === "sign" ? `x² sin(${ax})/${a} − 2x cos(${ax})/${a * a} + 2 sin(${ax})/${a ** 3}` : `x² sin(${ax})/${a} + 2x cos(${ax})/${a * a} − 2 sin(${ax})/${a ** 3}`);
+};
+const auparts = F({
+  id: "auparts",
+  arity: 4,
+  title: "Integration by parts, Bernoulli's formula and ∫ eˣ[f(x) + f′(x)] dx",
+  competency: IM,
+  type: "antiderivative",
+  mc: true,
+  prompt: (P) => {
+    const [k, a, n, c] = P;
+    const ax = ax_(a);
+    const cc_ = c === 1 ? "" : `${c}`;
+    const f = k === 0 ? `${cc_}x e^(${ax})` : k === 1 ? `${cc_}x sin(${ax})` : k === 2 ? `${cc_}x cos(${ax})` : k === 3 ? `${cc_}${n === 0 ? "" : xpw(n) + " "}log(${ax})` : k === 4 ? `${cc_}eˣ(${EXF[a - 1].both})` : k === 5 ? `${cc_}x² e^(${ax})` : `${cc_}x² cos(${ax})`;
+    return `Find ∫ ${f} dx${k === 3 || (k === 4 && a <= 2) ? " (x > 0; log is the natural logarithm)" : ""}.`;
+  },
+  solve: (P) => {
+    const k = P[0];
+    const ans = ptAns(P);
+    const how = k === 4 ? "∫ eˣ[f(x) + f′(x)] dx = eˣ f(x) + C, because (eˣ f)′ = eˣ f + eˣ f′" : k === 3 ? "By parts with u = log(ax) and dv = xⁿ dx" : k >= 5 ? "Bernoulli's formula: ∫ u v dx = u v₁ − u′ v₂ + u″ v₃ − …, with u = x² (its derivatives end at 0) and v₁, v₂, v₃ the successive integrals of v" : "By parts with u = x (it becomes simpler when differentiated): ∫ u dv = uv − ∫ v du";
+    return { steps: [st("choose", "by parts", IM, how, how), st("answer", "integrate", IM, ans, ans)], answer: ans };
+  },
+  // independent: central differences of the answer give back the integrand
+  validate: (P, v) => derivAgrees(v, ptG(P), XSMALL),
+  bugs: (P) => {
+    const k = P[0];
+    if (k <= 2) return [bug("sign", "procedural", IM, "The sign of the second term was wrong: by parts subtracts ∫ v du, and integrating sin gives −cos.", ptAns(P, "sign")), bug("product", "conceptual", IM, "Each factor was integrated separately and the results multiplied; the integral of a product is not the product of the integrals.", ptAns(P, "product"))];
+    if (k === 3) return [bug("first-only", "procedural", IM, "Only uv was written; the remaining integral −∫ v du still has to be worked out.", ptAns(P, "first")), bug("sign", "procedural", IM, "The remaining integral was added; by parts subtracts it.", ptAns(P, "sign"))];
+    if (k === 4) return [bug("fp", "recall", IM, "eˣ f′(x) was given; the rule is ∫ eˣ[f + f′] dx = eˣ f(x) + C.", ptAns(P, "fp")), bug("kept-both", "conceptual", IM, "The bracket was kept as it is; the whole bracket combines into eˣ f(x).", ptAns(P, "both"))];
+    return [bug("stopped-early", "procedural", IM, "Bernoulli's formula was stopped too early; continue until the derivative of x² reaches 0 (three terms).", ptAns(P, "first")), bug("signs-not-alternating", "recall", IM, "The signs in Bernoulli's formula alternate + − + − …; here they were all taken as +.", ptAns(P, "sign"))];
+  },
+  distractors: (P) => {
+    const ans = ptAns(P).replace(/ \+ C$/, "");
+    return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  domain: [[0, 6], [1, 5], [0, 4], [1, 4]],
+  keep: ([k, , n]) => (k === 3 ? true : n === 0),
+  why: "x e^(ax), x sin ax, x cos ax, xⁿ log(ax), eˣ[f + f′], x² e^(ax) and x² cos ax with small whole numbers.",
+  cap: 300,
+  difficulty: ([k]) => (k === 4 || k === 0 ? 1 : k >= 5 ? 3 : 2),
+  teach: {
+    idea: "The product rule read backwards gives ∫ u dv = uv − ∫ v du. Choose u to be the factor that becomes simpler when differentiated (x, x², log x); repeated parts on x² gives Bernoulli's formula with alternating signs.",
+    method: "Pick u and dv (ILATE order: inverse trig, log, algebraic, trig, exponential for u). Find du and v, write uv − ∫ v du, and integrate the last part. For eˣ[f + f′], the answer is eˣ f + C at once.",
+    alternatives: [
+      { id: "tabular", title: "The table method", kind: "procedural", text: ["Column 1: u, u′, u″, … down to 0. Column 2: v, then its integrals v₁, v₂, v₃.", "Multiply along the diagonals with signs + − + and add."] },
+      { id: "check", title: "Differentiate back", kind: "conceptual", text: ["Differentiate your answer with the product rule.", "All terms but the integrand must cancel."] },
+    ],
+  },
+  limits: "One application of parts or Bernoulli's formula with x or x²; cyclic integrals such as ∫ eˣ sin x dx are not included.",
+});
+
+const SB3 = [[3, 4, 5], [4, 3, 5], [5, 12, 13], [12, 5, 13], [6, 8, 10], [8, 6, 10], [8, 15, 17], [15, 8, 17], [7, 24, 25], [24, 7, 25], [9, 12, 15], [12, 9, 15], [12, 16, 20], [16, 12, 20], [20, 21, 29], [21, 20, 29]];
+/** [j, c]: ∫ from 0 to b of c t/√(t² + d²) dt, with b² + d² = h². */
+const ausbd = F({
+  id: "ausbd",
+  arity: 2,
+  title: "A definite integral by substitution: ∫ c t/√(t² + d²) dt",
+  competency: IM,
+  type: "integer",
+  mc: true,
+  prompt: ([j, c]) => `Evaluate ∫ from 0 to ${SB3[j][0]} of ${c === 1 ? "" : c}t/√(t² + ${SB3[j][1] ** 2}) dt, using the substitution u = t² + ${SB3[j][1] ** 2}.`,
+  solve: ([j, c]) => {
+    const [b, d, h] = SB3[j];
+    return {
+      steps: [
+        st("sub", "substitute", IM, `u = t² + ${d * d}, du = 2t dt; the limits become u = ${d * d} and u = ${h * h}`, `${d * d} to ${h * h}`),
+        st("integrate", "integrate", IM, `${c === 1 ? "" : c}(1/2)∫ u^(−1/2) du = ${c === 1 ? "" : c}√u`, `${c}√u`),
+        st("value", "evaluate", DEF, `${c} × (√${h * h} − √${d * d}) = ${c} × (${h} − ${d}) = ${c * (h - d)}`, c * (h - d)),
+      ],
+      answer: c * (h - d),
+    };
+  },
+  // independent: Simpson's rule on the original integral
+  validate: ([j, c], v) => typeof v === "number" && near(v, simpson((t) => (c * t) / Math.sqrt(t * t + SB3[j][1] ** 2), 0, SB3[j][0]), 1e-8),
+  bugs: ([j, c]) => {
+    const [, d, h] = SB3[j];
+    return [
+      bug("lower-limit", "procedural", DEF, `The lower limit was taken to give 0; at t = 0, u = ${d * d} and √u = ${d}, which must be subtracted.`, c * h),
+      bug("missed-half", "procedural", IM, "du = 2t dt, so t dt = du/2; the factor 1/2 was left out.", 2 * c * (h - d)),
+    ];
+  },
+  domain: [[0, 15], [1, 6]],
+  why: "Upper limits and constants that make b² + d² a perfect square, with c from 1 to 6.",
+  difficulty: ([j]) => (j <= 1 ? 1 : j >= 12 ? 3 : 2),
+  word: ([j, c]) => `Water flows into a tank at a rate of ${c === 1 ? "" : c}t/√(t² + ${SB3[j][1] ** 2}) litres per minute, t minutes after the tap is opened. How many litres flow in during the first ${SB3[j][0]} minutes?`,
+  teach: {
+    idea: "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of d(t² + d²). The limits change with the variable.",
+    method: "Let u = t² + d², so t dt = du/2. Change the limits (t = 0 gives u = d², t = b gives u = b² + d²), integrate (1/2)u^(−1/2) to √u, and subtract.",
+    alternatives: [
+      { id: "back_substitute", title: "Back-substitute instead", kind: "procedural", text: ["Find the antiderivative √(t² + d²) first.", "Evaluate it at t = b and t = 0 and subtract."] },
+      { id: "check", title: "Check the derivative", kind: "conceptual", text: ["d/dt √(t² + d²) = t/√(t² + d²).", "So the integral is the change in √(t² + d²)."] },
+    ],
+  },
+  limits: "Pythagorean pairs only, so that the answer is a whole number.",
+});
+
+// ================================================================ definite integrals
+
+/** [p, q, r, a, b]: ∫ from a to b of (px² + qx + r) dx. */
+const dfF = ([p, q, r]: number[]) => (x: number) => (p * x ** 3) / 3 + (q * x * x) / 2 + r * x;
+const audfp = F({
+  id: "audfp",
+  arity: 5,
+  title: "Definite integrals of polynomials by the fundamental theorem",
+  competency: DEF,
+  type: "fraction",
+  mc: true,
+  prompt: ([p, q, r, a, b]) => `Evaluate ∫ from ${a} to ${b} of (${sum([[p, "x²"], [q, "x"], [r, ""]])}) dx.`,
+  solve: (P) => {
+    const [, , , a, b] = P;
+    const F_ = dfF(P);
+    return { steps: [st("anti", "integrate", IND, `An antiderivative is F(x) = ${sum([[P[0] / 3, "x³"], [P[1] / 2, "x²"], [P[2], "x"]])}`, sum([[P[0] / 3, "x³"], [P[1] / 2, "x²"], [P[2], "x"]])), st("ftc", "evaluate", DEF, `F(${b}) − F(${a}) = ${nf(F_(b))} − ${pn(F_(a))} = ${nf(F_(b) - F_(a))}`, F_(b) - F_(a))], answer: F_(b) - F_(a) };
+  },
+  // independent: Simpson's rule
+  validate: ([p, q, r, a, b], v) => typeof v === "number" && near(v, simpson((x) => p * x * x + q * x + r, a, b), 1e-9),
+  bugs: (P) => {
+    const [p, q, r, a, b] = P;
+    const F_ = dfF(P);
+    return [
+      bug("upper-only", "procedural", DEF, `Only F(${b}) was worked out; the fundamental theorem subtracts the value at the lower limit, F(${a}).`, F_(b)),
+      bug("reversed", "procedural", DEF, "F(lower) − F(upper) was worked out; it is F(upper) − F(lower).", F_(a) - F_(b)),
+      bug("powers-not-divided", "recall", IND, "The powers were raised without dividing by the new powers.", p * (b ** 3 - a ** 3) + q * (b * b - a * a) + r * (b - a)),
+      bug("integrand-difference", "conceptual", DEF, "The integrand itself was evaluated at the limits; the antiderivative must be used.", p * (b * b - a * a) + q * (b - a)),
+    ];
+  },
+  domain: [[0, 3], [-4, 6], [0, 9], [0, 3], [1, 6]],
+  keep: ([p, q, r, a, b]) => b > a && (p !== 0 || q !== 0) && [0, 0.25, 0.5, 0.75, 1].every((t) => p * (a + t * (b - a)) ** 2 + q * (a + t * (b - a)) + r > 0),
+  why: "Quadratic integrands that stay positive on [a, b], with 0 ≤ a < b ≤ 6.",
+  cap: 400,
+  difficulty: ([p, , , a]) => (p === 0 && a === 0 ? 1 : a > 0 && p > 0 ? 3 : 2),
+  word: ([p, q, r, a, b]) => `A car moves along a straight road with velocity v(t) = ${sum([[p, "t²"], [q, "t"], [r, ""]])} metres per second, where t is in seconds. How far does it travel between t = ${a} and t = ${b}, in metres? (A fraction is fine.)`,
+  teach: {
+    idea: "If F′ = f, then ∫ from a to b of f(x) dx = F(b) − F(a): the total accumulated by a rate f is the change in its antiderivative (distance is the change in position).",
+    method: "Find an antiderivative F (no constant is needed), work out F(b) and F(a), and subtract.",
+    alternatives: [
+      { id: "area", title: "Area under the graph", kind: "conceptual", text: ["Where f > 0, the integral is the area between the graph and the x-axis from a to b.", "A rough sketch tells you whether the answer is sensible."] },
+      { id: "table", title: "Set out F in a table", kind: "procedural", text: ["Write each term of F, its value at b and at a.", "Subtract column by column and add."] },
+    ],
+  },
+  limits: "Quadratic integrands positive on the interval; integrals of trigonometric and exponential functions are in other families.",
+});
+
+/** [k, p, q, m]: lim (n → ∞) of a sum that is a definite integral over [0, 1]. */
+const rsTerm = ([k, p, q, m]: number[]) => (r: number, n: number) => (k === 0 ? (p * r + q * n) / (n * n) : k === 1 ? (p * r * r + q * n * n) / n ** 3 : k === 2 ? (p * n) / (n * n + r * r) : (p * r ** m) / n ** (m + 1));
+const rsAns = ([k, p, q, m]: number[]) => (k === 0 ? rat(p + 2 * q, 2) : k === 1 ? rat(p + 3 * q, 3) : k === 2 ? piQ(p, 4) : rat(p, m + 1));
+const aurie = F({
+  id: "aurie",
+  arity: 4,
+  title: "A definite integral as the limit of a sum",
+  competency: DEF,
+  type: "exact",
+  mc: true,
+  prompt: (P) => {
+    const [k, p, q, m] = P;
+    const t = k === 0 ? `(${sum([[p, "r"], [q, "n"]])})/n²` : k === 1 ? `(${sum([[p, "r²"], [q, "n²"]])})/n³` : k === 2 ? `${p === 1 ? "" : p}n/(n² + r²)` : `${p === 1 ? "" : p}r${sup(m)}/n${sup(m + 1)}`;
+    return `Evaluate lim (n → ∞) of the sum Σ from r = 1 to n of ${t}, by writing it as a definite integral.${k === 2 ? " Give the exact value in terms of π." : ""}`;
+  },
+  solve: (P) => {
+    const [k, p, q, m] = P;
+    const f = k === 0 ? sum([[p, "x"], [q, ""]]) : k === 1 ? sum([[p, "x²"], [q, ""]]) : k === 2 ? `${p}/(1 + x²)` : `${p}x${sup(m)}`;
+    return { steps: [st("riemann", "rewrite", DEF, `Write the term as (1/n) f(r/n) with x = r/n: f(x) = ${f}, so the limit is ∫ from 0 to 1 of ${f} dx`, f), st("value", "evaluate", DEF, `= ${rsAns(P)}`, rsAns(P))], answer: rsAns(P) };
+  },
+  // independent: add up the sum for a large n and compare
+  validate: (P, v) => {
+    const x = constOf(v);
+    if (!Number.isFinite(x)) return false;
+    const n = 100000;
+    const t = rsTerm(P);
+    let s = 0;
+    for (let r = 1; r <= n; r++) s += t(r, n);
+    return Math.abs(s - x) < 2e-4 * Math.max(1, Math.abs(x));
+  },
+  bugs: (P) => {
+    const [k, p, q, m] = P;
+    return k === 0
+      ? [bug("sum-r", "recall", "MATH.sequences.series-summation", "Σr was taken as n² instead of about n²/2 (it is n(n + 1)/2); equivalently ∫₀¹ x dx is 1/2, not 1.", rat(p + q, 1))]
+      : k === 1
+        ? [bug("sum-r2", "recall", "MATH.sequences.series-summation", "Σr² was taken as about n³/2; it is n(n + 1)(2n + 1)/6, about n³/3 (∫₀¹ x² dx = 1/3).", rat(p + 2 * q, 2))]
+        : k === 2
+          ? [bug("each-term-one", "conceptual", DEF, "Each term was treated as if it were 1/n, giving the factor alone; the terms shrink as r grows, following 1/(1 + x²).", rat(p, 1)), bug("half-pi", "recall", "MATH.trigonometry.inverse", "tan⁻¹(1) was taken as π/2; it is π/4.", piQ(p, 2))]
+          : [bug("power-not-raised", "recall", IND, "∫₀¹ xᵐ dx was taken as 1/m; it is 1/(m + 1).", rat(p, m))];
+  },
+  distractors: (P) => {
+    const x = constOf(rsAns(P));
+    return P[0] === 2 ? [piQ(P[1], 8), piQ(P[1], 1)] : [fmt(2 * x).replace(/-/g, "−"), fmt(x + 1).replace(/-/g, "−"), fmt(x / 2).replace(/-/g, "−")];
+  },
+  domain: [[0, 3], [1, 9], [0, 6], [1, 5]],
+  keep: ([k, p, q, m]) => (k <= 1 ? m === 1 : k === 2 ? q === 0 && m === 1 : q === 0 && m >= 2 && p <= 6),
+  why: "Sums that become ∫₀¹ of px + q, px² + q, p/(1 + x²) or pxᵐ.",
+  difficulty: ([k]) => (k === 3 ? 1 : k === 2 ? 3 : 2),
+  teach: {
+    idea: "∫ from 0 to 1 of f(x) dx is the limit of the sums (1/n)[f(1/n) + f(2/n) + … + f(n/n)]: n thin rectangles of width 1/n under the graph. A sum of this shape can be evaluated by integrating.",
+    method: "Take out a factor 1/n and write the rest of each term in terms of r/n only; call r/n = x, so the limit is ∫ from 0 to 1 of f(x) dx. Integrate.",
+    alternatives: [
+      { id: "formulas", title: "Use the sum formulas", kind: "procedural", text: ["Σr = n(n + 1)/2 and Σr² = n(n + 1)(2n + 1)/6.", "Substitute, divide by the power of n, and let n → ∞."] },
+      { id: "rectangles", title: "Rectangles under a curve", kind: "conceptual", text: ["Each term is the area of a thin rectangle of width 1/n and height f(r/n).", "As n grows, the rectangles fill the area under the curve."] },
+    ],
+  },
+  limits: "Sums over [0, 1]; general intervals [a, b] are not included.",
+});
+
+/** [k, n, c]: ∫₀¹ xⁿeˣ, ∫₀^(π/2) xⁿ cos x, ∫₀^π xⁿ sin x, ∫₁^e xⁿ log x (times c), by Bernoulli's formula. */
+const beData = (k: number, n: number) => {
+  // [exact value, slip: signs not alternating, slip: lower limit dropped], each as [coefficient of e/π-part, constant]
+  const tab: Record<string, [string, string | null, string | null]> = {
+    "0,1": ["1", "2e − 1", "0"],
+    "0,2": ["e − 2", "5e − 2", "e"],
+    "0,3": ["6 − 2e", "16e − 6", "−2e"],
+    "1,1": ["π/2 − 1", "π/2 + 1", null],
+    "1,2": ["π²/4 − 2", "π²/4 + 2", null],
+    "2,1": ["π", null, null],
+    "2,2": ["π² − 4", null, "π² − 2"],
+    "3,0": ["1", null, "0"],
+    "3,1": ["(e² + 1)/4", "(3e² − 1)/4", "e²/4"],
+    "3,2": ["(2e³ + 1)/9", "(4e³ − 1)/9", "2e³/9"],
+  };
+  return tab[`${k},${n}`];
+};
+const beG = ([k, n]: number[]) => (x: number) => (k === 0 ? x ** n * Math.exp(x) : k === 1 ? x ** n * Math.cos(x) : k === 2 ? x ** n * Math.sin(x) : x ** n * Math.log(x));
+const beLim = (k: number): [number, number] => (k === 0 ? [0, 1] : k === 1 ? [0, Math.PI / 2] : k === 2 ? [0, Math.PI] : [1, Math.E]);
+const times = (c: number, s: string) => (c === 1 ? s : /^[\d.]+$/.test(s) ? `${c * Number(s)}` : `${c}(${s})`);
+const audbe = F({
+  id: "audbe",
+  arity: 3,
+  title: "Definite integrals by parts and Bernoulli's formula",
+  competency: DEF,
+  type: "expression",
+  mc: true,
+  prompt: ([k, n, c]) => {
+    const cc_ = c === 1 ? "" : `${c}`;
+    const xn = n === 0 ? "" : `${xpw(n)} `;
+    const f = k === 0 ? `${cc_}${xn}eˣ` : k === 1 ? `${cc_}${xn}cos x` : k === 2 ? `${cc_}${xn}sin x` : `${cc_}${xn}log x`;
+    const [lo, hi] = k === 0 ? ["0", "1"] : k === 1 ? ["0", "π/2"] : k === 2 ? ["0", "π"] : ["1", "e"];
+    return `Evaluate ∫ from ${lo} to ${hi} of ${f} dx. Give the exact value${k === 3 ? " (log is the natural logarithm)" : ""}.`;
+  },
+  solve: ([k, n, c]) => {
+    const ans = times(c, beData(k, n)[0]);
+    const how = k === 3 ? "By parts with u = log x, dv = xⁿ dx" : "Bernoulli's formula: ∫ u v dx = u v₁ − u′ v₂ + u″ v₃ − …, with u the power of x";
+    return { steps: [st("method", "by parts", IM, how, how), st("evaluate", "evaluate", DEF, `Evaluate between the limits: ${ans}`, ans)], answer: ans };
+  },
+  // independent: Simpson's rule
+  validate: ([k, n, c], v) => {
+    const x = constOf(v);
+    const [lo, hi] = beLim(k);
+    return Number.isFinite(x) && near(x, c * simpson(beG([k, n]), lo, hi), 1e-8);
+  },
+  bugs: ([k, n, c]) => {
+    const [, sg, low] = beData(k, n);
+    return [
+      bug("signs-not-alternating", "recall", IM, "The signs in Bernoulli's formula (or in u v − ∫ v du) were not alternated; they go + − + − ….", sg ? times(c, sg) : null),
+      bug("lower-limit-dropped", "procedural", DEF, "The value at the lower limit was taken as 0 without working it out; it must be subtracted.", low ? times(c, low) : null),
+    ];
+  },
+  distractors: ([k, n, c]) => {
+    const a = times(c, beData(k, n)[0]);
+    return [`2(${a})`, `−(${a})`, `(${a}) + 1`];
+  },
+  domain: [[0, 3], [0, 3], [1, 9]],
+  keep: ([k, n]) => !!beData(k, n),
+  why: "xⁿeˣ on [0, 1], xⁿ cos x on [0, π/2], xⁿ sin x on [0, π] and xⁿ log x on [1, e], with powers up to 3 and a factor up to 9.",
+  difficulty: ([k, n]) => (n <= 1 ? 1 : k === 3 || n === 3 ? 3 : 2),
+  teach: {
+    idea: "Repeated integration by parts on xⁿ times eˣ, sin x or cos x lowers the power of x each time until it disappears; Bernoulli's formula writes all the steps at once with alternating signs. Then the fundamental theorem gives the value.",
+    method: "Write the antiderivative with Bernoulli's formula (u = xⁿ and its derivatives, v and its repeated integrals, signs + − + …), then substitute the upper and the lower limit and subtract.",
+    alternatives: [
+      { id: "tabular", title: "The table method", kind: "procedural", text: ["List the derivatives of xⁿ down to 0, and the integrals of eˣ (or sin x, cos x) next to them.", "Multiply along the diagonals with alternating signs."] },
+      { id: "estimate", title: "Estimate the size", kind: "conceptual", text: ["e ≈ 2.718 and π ≈ 3.142: work out your exact answer as a decimal.", "It must be positive here and smaller than the largest value of the integrand times the length of the interval."] },
+    ],
+  },
+  limits: "Powers up to 3 on the standard intervals; answers are exact expressions in e and π.",
+});
+
+export const B21: Def[] = [audch, audinv, austd, aulax, auinit, autrig, auform, aupi, aupfr, auparts, ausbd, audfp, aurie, audbe];

@@ -2065,6 +2065,7 @@ const cmpDigits = (a: number, b: number) => {
 };
 const ORDW = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
 const nth = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] ?? "th"}`;
+const WDAYS = [365, 366, 30, 31, 28, 29, 60, 90, 100, 200, 50, 75];
 const isLeap = (y: number) => y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
 const mdays = (y: number, m: number) => (m === 1 && isLeap(y) ? 29 : MLEN[m]);
 const sentence = (s: string) => {
@@ -3183,9 +3184,10 @@ const GAP01: Def[] = [
     type: "integer",
     mc: true,
     // [kind, a, b]: kind 0 days in month a of year 2024 + b; 1 days in the year 2024 + b; 2 days in months a and a+1 of 2024 + b;
-    // 3 months in a years and b months; 4 days in a weeks and b days
+    // 3 months in a years and b months; 4 days in a weeks and b days; 5 full weeks in WDAYS[a] days
     parse: none,
-    reject: guard([[0, 4], [0, 11], [0, 8]], ([kind, a, b]) =>
+    reject: guard([[0, 5], [0, 11], [0, 8]], ([kind, a, b]) =>
+      kind === 5 ? b === 0 :
       kind === 0 ? a === 1 || b === 2
         : kind === 1 ? a === 0
           : kind === 2 ? a <= 10 && (a <= 1 || b === 2)
@@ -3199,11 +3201,12 @@ const GAP01: Def[] = [
         `How many days are there in ${MONTHS[a]} and ${MONTHS[a + 1]} ${Y} together?`,
         `How many months are there in ${a} year${a > 1 ? "s" : ""} and ${b} month${b > 1 ? "s" : ""}?`,
         `How many days are there in ${a} week${a > 1 ? "s" : ""} and ${b} day${b > 1 ? "s" : ""}?`,
+        `How many full weeks are there in ${WDAYS[a] >= 365 ? `a year of ${WDAYS[a]} days` : `${WDAYS[a]} days`}?`,
       ][kind];
     },
     solve: ([kind, a, b]) => {
       const Y = 2024 + b;
-      const ans = [mdays(Y, a), isLeap(Y) ? 366 : 365, kind === 2 ? mdays(Y, a) + mdays(Y, a + 1) : 0, 12 * a + b, 7 * a + b][kind];
+      const ans = [mdays(Y, a), isLeap(Y) ? 366 : 365, kind === 2 ? mdays(Y, a) + mdays(Y, a + 1) : 0, 12 * a + b, 7 * a + b, Math.floor(WDAYS[a] / 7)][kind];
       return { steps: [st("fact", "use the calendar facts", CAL, [kind, a, b], ans)], answer: ans };
     },
     // independent: the computer's calendar (the 0th day of the next month is the last day of this one), and counting
@@ -3213,6 +3216,15 @@ const GAP01: Def[] = [
       if (kind === 0) return v === last(a);
       if (kind === 1) return v === (Date.UTC(Y + 1, 0, 1) - Date.UTC(Y, 0, 1)) / 86400000;
       if (kind === 2) return v === (Date.UTC(Y, a + 2, 1) - Date.UTC(Y, a, 1)) / 86400000;
+      if (kind === 5) {
+        let left = WDAYS[a];
+        let w = 0;
+        while (left >= 7) {
+          left -= 7;
+          w++;
+        }
+        return v === w;
+      }
       let c = 0;
       for (let i = 0; i < a; i++) c += kind === 3 ? 12 : 7;
       return v === c + b;
@@ -3224,12 +3236,17 @@ const GAP01: Def[] = [
           ? [bug(isLeap(Y) ? "leap-missed" : "leap-every-year", "recall", CAL, isLeap(Y) ? `${Y} is a leap year (it divides by 4), so February has 29 days.` : `${Y} is not a leap year, so February has 28 days; only a leap year has 29 February.`, isLeap(Y) ? 28 : 29)]
           : [bug("knuckle-slip", "recall", CAL, `${MONTHS[a]} was given ${MLEN[a] === 31 ? 30 : 31} days. Use the knuckle rhyme: months on a knuckle have 31 days, months in a gap have 30.`, MLEN[a] === 31 ? 30 : 31)];
       if (kind === 1) return [bug("leap-slip", "recall", CAL, isLeap(Y) ? `${Y} is a leap year, so it has one extra day, 29 February.` : `${Y} is not a leap year (it does not divide by 4), so it has 365 days.`, isLeap(Y) ? 365 : 366)];
+      if (kind === 5)
+        return [
+          bug("days-left", "procedural", CAL, `The days left over were given. ${WDAYS[a]} days make ${Math.floor(WDAYS[a] / 7)} full weeks with ${WDAYS[a] % 7} day${WDAYS[a] % 7 === 1 ? "" : "s"} left over.`, WDAYS[a] % 7 !== Math.floor(WDAYS[a] / 7) ? WDAYS[a] % 7 : null),
+          bug("ten-per", "conceptual", CAL, "A week was taken as 10 days. A week has 7 days: share the days into sevens.", Math.floor(WDAYS[a] / 10)),
+        ];
       if (kind === 2) return [bug("thirty-each", "recall", CAL, "Each month was taken as 30 days. Look up how many days each of the two months really has.", 60 !== mdays(Y, a) + mdays(Y, a + 1) ? 60 : null)];
       return [bug("ten-per", "conceptual", CAL, kind === 3 ? "A year was taken as 10 months. A year has 12 months." : "A week was taken as 10 days. A week has 7 days.", 10 * a + b)];
     },
     variants: () => [],
     explain: (s) => `That is ${s.value}.`,
-    domain: [[0, 4], [0, 11], [0, 8]],
+    domain: [[0, 5], [0, 11], [0, 8]],
     difficulty: ([kind, a]) => (kind === 0 && a !== 1 ? 1 : kind <= 1 || kind >= 3 ? 2 : 3),
     word: ([kind, a, b]) => {
       const Y = 2024 + b;
@@ -3239,6 +3256,7 @@ const GAP01: Def[] = [
         `A summer camp in ${Y} runs on every day of ${MONTHS[a]} and ${MONTHS[a + 1]}. On how many days does it run?`,
         `${nm(a + b)}'s baby brother is ${a} year${a > 1 ? "s" : ""} and ${b} month${b > 1 ? "s" : ""} old. How old is he in months?`,
         `A bean plant took ${a} week${a > 1 ? "s" : ""} and ${b} day${b > 1 ? "s" : ""} to flower. How many days did it take?`,
+        `A school wall chart has one column for each full week. How many full weeks fit into ${WDAYS[a] >= 365 ? `a year of ${WDAYS[a]} days` : `${WDAYS[a]} days`}?`,
       ][kind];
     },
     teach: {
@@ -3249,7 +3267,7 @@ const GAP01: Def[] = [
         { id: "knuckles", title: "The knuckle way", kind: "recall", text: ["Make two fists and say the months along the knuckles and the gaps between them.", "Knuckle months have 31 days; gap months have 30, except February."] },
       ],
     },
-    limits: "Years 2024 to 2032 (2024, 2028 and 2032 are leap years); century leap-year rules are not needed.",
+    limits: "Years 2024 to 2032 (2024, 2028 and 2032 are leap years); century leap-year rules are not needed. Full weeks in a year (52, with 1 or 2 days over) and in other spans are included.",
   },
   {
     id: "aaddmm",

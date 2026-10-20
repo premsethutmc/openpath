@@ -2001,6 +2001,10 @@ export const B14: Def[] = [
         { id: "triangle", title: "Build the triangle", kind: "conceptual", text: ["Once sec θ = hypotenuse ÷ adjacent and tan θ = opposite ÷ adjacent are known, draw the right triangle with those sides.", "Every other ratio can be read off it; check with Pythagoras."] },
       ],
     },
+    word: ([p, q, f, ask]) =>
+      f === 0
+        ? `A wheelchair ramp makes an acute angle θ with the ground. For each metre of ground it covers, the ramp is sec θ metres long and rises tan θ metres. A builder measures that (length of ramp) + (rise) = ${probText(p, q)} m for each metre of ground. Find ${["(length of ramp) − (rise) for each metre of ground, that is sec θ − tan θ", "the length of ramp for each metre of ground, sec θ", "the rise for each metre of ground, tan θ", "the rise for each metre along the ramp, sin θ"][ask]}.`
+        : `A slide in a park makes an acute angle θ with the ground. For each metre it rises, the slide is cosec θ metres long and covers cot θ metres of ground. It is measured that (length of slide) + (ground covered) = ${probText(p, q)} m for each metre of rise. Find ${["(length of slide) − (ground covered) for each metre of rise, that is cosec θ − cot θ", "the length of slide for each metre of rise, cosec θ", "the ground covered for each metre of rise, cot θ", "the ground covered for each metre along the slide, cos θ"][ask]}.`,
     limits: "sec θ + tan θ or cosec θ + cot θ given as a fraction greater than 1 with numerator up to 9; the written proof of the identity itself is marked by an educator.",
   },
   {
@@ -2114,6 +2118,12 @@ export const B14: Def[] = [
         { id: "triangles", title: "Draw the two triangles", kind: "conceptual", text: ["Cut an equilateral triangle of side 2 in half: the half has sides 1, √3 and 2 and angles 30°, 60°, 90°.", "Cut a unit square along its diagonal: sides 1, 1, √2 and angles 45°, 45°, 90°. Read any ratio off these."] },
       ],
     },
+    word: ([f1, t1, f2, t2, op]) => {
+      const what = (f: number, t: number) => [`the height of the top of a 1 m rod leaning at ${ANG[t]}° to the ground (sin ${ANG[t]}°)`, `how far along the ground a 1 m rod leaning at ${ANG[t]}° reaches (cos ${ANG[t]}°)`, `the rise of a ramp at ${ANG[t]}° for each metre along the ground (tan ${ANG[t]}°)`][f];
+      const A = what(f1, t1);
+      const Bq = what(f2, t2);
+      return [`A carpenter needs the total of two lengths, in metres: ${A}, and ${Bq}. Find the total exactly.`, `A carpenter needs the difference of two lengths, in metres: ${A}, minus ${Bq}. Find it exactly.`, `A carpenter makes a rectangle whose sides, in metres, are ${A} and ${Bq}. Find its area in m², exactly.`, `A carpenter makes two squares with sides, in metres, ${A} and ${Bq}. Find their total area in m², exactly.`, `A carpenter makes two squares with sides, in metres, ${A} and ${Bq}. By how many m² is the first square's area more than the second's? Find it exactly.`][op];
+    },
     limits: "Two terms of sin, cos or tan at 0°, 30°, 45°, 60°, 90° (non-zero, defined) joined by +, −, × or as a sum or difference of squares.",
   },
   {
@@ -2185,7 +2195,7 @@ export const B14: Def[] = [
         { id: "identity", title: "Use the identities", kind: "procedural", text: ["From sin θ, cos θ = √(1 − sin²θ); from tan θ, sec θ = √(1 + tan²θ).", "Then tan = sin ÷ cos and the reciprocals give the rest."] },
       ],
     },
-    limits: "sin, cos or tan given as a fraction with sides up to 10; trigonometric tables (degrees and minutes) are not included.",
+    limits: "sin, cos or tan given as a fraction with sides up to 10; trigonometric tables (degrees and minutes) are the tables family.",
   },
   {
     id: "ancompa",
@@ -2246,6 +2256,724 @@ export const B14: Def[] = [
         { id: "rewrite", title: "Rewrite as one function", kind: "procedural", text: ["Replace cos(y) by sin(90° − y).", "Now sin(first) = sin(90° − y) with both acute, so first = 90° − y."] },
       ],
     },
-    limits: "sin(pA + c₁) = cos(qA + c₂) with small whole p ≠ q, even shifts up to 30° and acute angles; tan/cot and sec/cosec forms are not included.",
+    limits: "sin(pA + c₁) = cos(qA + c₂) with small whole p ≠ q, even shifts up to 30° and acute angles; simplifying expressions with tan/cot and sec/cosec of complementary angles is the next family.",
+  },
+  // ============================================================== gap@1: when an average of averages misleads
+  {
+    id: "anavgav",
+    arity: 4,
+    title: "When the average of two means is not the mean of everyone",
+    competency: WM,
+    type: "choice",
+    // [n1, i1, dn, i2]: Section A has n1 students with mean 40 + 2·i1, Section B n1 + 5·dn students with mean 40 + 2·i2
+    parse: none,
+    reject: (p) => {
+      const [n1, i1, dn, i2] = p;
+      if (n1 < 10 || n1 > 45 || i1 < 0 || i1 > 25 || i2 < 0 || i2 > 25 || dn < -3 || dn > 3) return "Two sections of 10 to 45 students with means from 40 to 90.";
+      const n2 = n1 + 5 * dn;
+      return n2 < 10 || n2 > 45 || i1 === i2 ? "Section B must have 10 to 45 students, and the two means must differ." : null;
+    },
+    prompt: (p) => {
+      const { n1, m1, n2, m2 } = avgavOf(p);
+      return `In a test, Section A has ${n1} students with a mean mark of ${m1}, and Section B has ${n2} students with a mean mark of ${m2}. ${nm(n1 + m2)} says: "The mean mark of all ${n1 + n2} students is ${dv((m1 + m2) / 2)}, the average of the two means." Is ${nm(n1 + m2)} right?`;
+    },
+    choices: () => AVGAV,
+    solve: (p) => {
+      const { n1, m1, n2, m2 } = avgavOf(p);
+      const t = (n1 * m1 + n2 * m2) / (n1 + n2);
+      const ans = n1 === n2 ? 0 : t > (m1 + m2) / 2 ? 1 : 2;
+      return { steps: [step("true-mean", "divide", WM, [n1 * m1 + n2 * m2, n1 + n2], dv(t)), step("compare", "compare", WM, [dv((m1 + m2) / 2)], ans)], answer: ans };
+    },
+    // independent: list every student's mark (each section at its mean), average the list, and compare
+    validate: (p, v) => {
+      const { n1, m1, n2, m2 } = avgavOf(p);
+      const marks = [...new Array(n1).fill(m1), ...new Array(n2).fill(m2)];
+      let s = 0;
+      for (const x of marks) s += x;
+      const t = s / marks.length;
+      return v === (close(t, (m1 + m2) / 2) ? 0 : t > (m1 + m2) / 2 ? 1 : 2);
+    },
+    bugs: (p) => {
+      const { n1, n2 } = avgavOf(p);
+      return n1 === n2
+        ? []
+        : [
+            { id: "always-right", kind: "conceptual", competency: WM, says: "The average of the two means was taken as the mean of everyone; that is only true when the groups are the same size. Here the bigger section must count more.", predict: 3 },
+            { id: "pull-reversed", kind: "conceptual", competency: WM, says: "The pull was taken the wrong way; the combined mean is pulled towards the mean of the LARGER section.", predict: avgavAnswer(p) === 1 ? 2 : 1 },
+          ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "true-mean" ? `The true mean is ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `Compare it with ${s.inputs[0]}: ${["they are equal, because the sections are the same size", "the true mean is higher, pulled towards the larger section", "the true mean is lower, pulled towards the larger section"][Number(s.value)]}`),
+    domain: [[10, 45], [0, 25], [-3, 3], [0, 25]],
+    keep: (p) => {
+      const [n1, i1, dn, i2] = p;
+      const n2 = n1 + 5 * dn;
+      return n2 >= 10 && n2 <= 45 && i1 !== i2;
+    },
+    cap: 300,
+    difficulty: (p) => (avgavOf(p).n1 === avgavOf(p).n2 ? 2 : Math.abs(p[2]) >= 2 ? 1 : 3),
+    teach: {
+      idea: "The mean of everyone is total ÷ count. The average of two group means gives each GROUP equal weight, so it is right only when the groups are the same size; otherwise the larger group pulls the true mean towards its own mean.",
+      method: "Find each total (size × mean), add, divide by the number of people, and compare with the average of the means.",
+      alternatives: [
+        { id: "extreme", title: "Try an extreme case", kind: "conceptual", text: ["Imagine 99 students with mean 90 and 1 student who scored 40.", "The average of the means is 65, but nearly everyone scored 90: the true mean is 89.5."] },
+      ],
+    },
+    limits: "Two groups; the comparison only (the combined mean itself is the combined-mean family).",
+  },
+  // ============================================================== gap@1: the assumed-mean and step-deviation methods
+  {
+    id: "angstep",
+    arity: 4,
+    title: "The assumed-mean and step-deviation methods for a grouped mean",
+    competency: GM,
+    type: "integer",
+    mc: true,
+    // [m, si, hi, seed]: m 0 Σfd with d = x − a (assumed mean); m 1 Σfu with u = (x − a)/h (step deviation); a is the
+    // class mark of the middle class
+    parse: none,
+    reject: (p) => {
+      const [m, si, hi, seed] = p;
+      if (m < 0 || m > 1 || si < 0 || si > 5 || hi < 0 || hi > 2 || seed < 0 || seed > 199) return "Five equal classes from one of the fixed starts and widths.";
+      return stepSum(p) === 0 ? "The sum must not be 0 (then the assumed mean is the mean itself)." : null;
+    },
+    prompt: (p) => {
+      const g = grouped(p.slice(1));
+      const a = g.lows[2] + g.h / 2;
+      return p[0] === 0
+        ? `To find the mean of the grouped data in the table by the assumed-mean method, take the assumed mean a = ${dv(a)} (the class mark of ${g.lows[2]}–${g.lows[2] + g.h}) and d = x − a for each class mark x. Find Σfd.`
+        : `To find the mean of the grouped data in the table by the step-deviation method, take the assumed mean a = ${dv(a)} (the class mark of ${g.lows[2]}–${g.lows[2] + g.h}), the class width h = ${g.h} and u = (x − a)/h for each class mark x. Find Σfu.`;
+    },
+    figure: (p) => gtable(grouped(p.slice(1))),
+    solve: (p) => {
+      const g = grouped(p.slice(1));
+      const us = [-2, -1, 0, 1, 2];
+      const vals = us.map((u) => (p[0] === 0 ? u * g.h : u));
+      return { steps: [step("deviations", "subtract", GM, [p[0] === 0 ? "d" : "u"], vals.join(", ")), step("sum", "multiply", GM, [], stepSum(p))], answer: stepSum(p) };
+    },
+    // independent: from the totals: Σf(x − a) = Σfx − a·Σf (divided by h for u), with the class marks added up directly
+    validate: (p, v) => {
+      const g = grouped(p.slice(1));
+      const a = g.lows[2] + g.h / 2;
+      let sfx = 0;
+      g.fs.forEach((f, i) => (sfx += f * (g.lows[i] + g.h / 2)));
+      const sfd = sfx - a * g.n;
+      return typeof v === "number" && close(v, p[0] === 0 ? sfd : sfd / g.h);
+    },
+    bugs: (p) => {
+      const g = grouped(p.slice(1));
+      const S = stepSum(p);
+      const out: Bug[] = [{ id: "a-minus-x", kind: "procedural", competency: GM, says: "The deviations were worked out as a − x; they are x − a, so classes above the assumed mean have positive deviations.", predict: -S }];
+      if (p[0] === 1) out.push({ id: "not-divided-by-h", kind: "procedural", competency: GM, says: `The deviations were not divided by the class width h = ${g.h}; u = (x − a)/h.`, predict: S * g.h });
+      out.push({ id: "frequencies-ignored", kind: "conceptual", competency: GD, says: "The deviations were added without multiplying by the frequencies; each deviation counts as many times as its frequency.", predict: 0 });
+      return out;
+    },
+    distractors: (p) => {
+      const S = stepSum(p);
+      return [S + 1, S - 1, S + 2].filter((x) => x !== S);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "deviations" ? `The values of ${s.inputs[0]} for the five classes are ${s.value}` : `Multiply each by its frequency and add: ${n_(Number(s.value))}`),
+    domain: [[0, 1], [0, 5], [0, 2], [0, 199]],
+    keep: (p) => stepSum(p) !== 0,
+    cap: 300,
+    difficulty: ([m, , hi]) => (m === 1 ? 2 : hi === 1 ? 1 : 3),
+    teach: {
+      idea: "Mean = a + Σfd/Σf (assumed mean) = a + h × Σfu/Σf (step deviation): shifting every value by a and scaling by h makes the numbers small, and the mean shifts and scales back the same way.",
+      method: "Choose a (a middle class mark) and h (the class width). Work out d = x − a (or u = d/h) for each class, multiply by f, add, then mean = a + Σfd/Σf (or a + h·Σfu/Σf).",
+      alternatives: [
+        { id: "direct", title: "Compare with the direct method", kind: "procedural", text: ["The direct method gives Σfx/Σf; the assumed-mean method gives a + Σf(x − a)/Σf.", "Both must give the same mean: a useful check."] },
+      ],
+    },
+    limits: "Σfd and Σfu with the middle class mark as a; the mean itself is the grouped-mean family.",
+  },
+  // ============================================================== gap@1: median and mode of an ungrouped frequency table; empirical relation
+  {
+    id: "anfmed",
+    arity: 3,
+    title: "The median of a frequency table",
+    competency: GM,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [x0, st, seed]: values x0, x0 + st, …, x0 + 4st with frequencies 1–9
+    parse: none,
+    reject: (p) => (p[0] < 1 || p[0] > 30 || p[1] < 1 || p[1] > 5 || p[2] < 0 || p[2] > 39 ? "Five equally spaced values starting at 1–30 with frequencies from 1 to 9." : null),
+    prompt: () => "The table shows the values x and their frequencies f. Find the median of the data. (Use a cumulative frequency column.)",
+    figure: (p) => {
+      const t = fmedOf(p);
+      return { type: "table", head: ["x", ...t.xs.map(String)], rows: [["f", ...t.fs.map(String)]] };
+    },
+    solve: (p) => {
+      const t = fmedOf(p);
+      return { steps: [step("n", "add", "MATH.number.addition", t.fs, t.N), step("cf", "add", GM, [t.N % 2 ? `${(t.N + 1) / 2}th` : `${t.N / 2}th and ${t.N / 2 + 1}th`], t.cf.join(", ")), step("median", "read", GM, [], dv(t.med))], answer: dv(t.med) };
+    },
+    // independent: write out every value as often as its frequency, sort, and take the middle
+    validate: (p, v) => {
+      const t = fmedOf(p);
+      const list: number[] = [];
+      t.xs.forEach((x, i) => {
+        for (let k = 0; k < t.fs[i]; k++) list.push(x);
+      });
+      list.sort((a, b) => a - b);
+      const L = list.length;
+      const m = L % 2 ? list[(L - 1) / 2] : (list[L / 2 - 1] + list[L / 2]) / 2;
+      return close(nv(v), m);
+    },
+    bugs: (p) => {
+      const t = fmedOf(p);
+      const pr = (x: number) => (close(x, t.med) ? null : dv(x));
+      const fsort = [...t.fs].sort((a, b) => a - b);
+      return [
+        { id: "middle-value", kind: "conceptual", competency: GM, says: "The middle value of the table was taken; the frequencies matter: the median is the middle of all the observations.", predict: pr(t.xs[2]) },
+        { id: "median-of-frequencies", kind: "conceptual", competency: GM, says: "The median of the frequencies was found; the median is a value x, found with the cumulative frequencies.", predict: pr(fsort[2]) },
+        { id: "position-n-over-2", kind: "procedural", competency: GM, says: t.N % 2 ? `The ${(t.N - 1) / 2}th observation was taken; with ${t.N} observations the middle one is the ${(t.N + 1) / 2}th.` : `Only the ${t.N / 2}th observation was taken; with an even number of observations the median is the mean of the ${t.N / 2}th and ${t.N / 2 + 1}th.`, predict: pr(t.N % 2 ? t.at((t.N - 1) / 2) : t.at(t.N / 2)) },
+      ];
+    },
+    distractors: (p) => {
+      const t = fmedOf(p);
+      return t.xs.filter((x) => !close(x, t.med)).map(dv);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "n" ? `N = Σf = ${s.value}` : s.id === "cf" ? `The cumulative frequencies are ${s.value}; the median is the ${s.inputs[0]} observation` : `So the median is ${s.value}`),
+    domain: [[1, 30], [1, 5], [0, 39]],
+    cap: 300,
+    difficulty: (p) => (fmedOf(p).N % 2 ? 1 : fmedOf(p).med % 1 ? 3 : 2),
+    teach: {
+      idea: "The median has half the observations at or below it. In a frequency table the cumulative frequency (cf) says how many observations are at or below each value.",
+      method: "Find N = Σf. If N is odd the median is the ((N + 1)/2)th observation; if even, the mean of the (N/2)th and (N/2 + 1)th. Find them by reading down the cf column to the first cf that reaches the position.",
+      alternatives: [
+        { id: "write-out", title: "Write the list out", kind: "procedural", text: ["Write each value as many times as its frequency, in order.", "Cross off from both ends; what is left in the middle is the median."] },
+      ],
+    },
+    limits: "Five equally spaced values with frequencies up to 9; grouped (class-interval) data is the grouped-median family.",
+  },
+  {
+    id: "anempir",
+    arity: 4,
+    title: "The mode of a frequency table and the empirical relation",
+    competency: GM,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, M, d, seed]: kind 0 the mode of a frequency table (seed); 1 mode from mean M and median M + d; 2 median from
+    // mean M and mode M + 3d; 3 mean from median M + d and mode M + 3d
+    parse: none,
+    reject: (p) => {
+      const [k, M, d, seed] = p;
+      if (k < 0 || k > 3 || M < 20 || M > 80 || d < -6 || d > 6 || seed < 0 || seed > 69) return "One of four kinds, with a mean from 20 to 80.";
+      return k === 0 ? (d !== 0 || !empTable(p).unique ? "A table with one most common value." : null) : d === 0 || seed !== 0 ? "The mean and the median must differ." : null;
+    },
+    prompt: (p) => {
+      const [k, M, d] = p;
+      if (k === 0) return "The table shows the values x and their frequencies f. Find the mode of the data.";
+      return k === 1 ? `For a moderately skewed distribution the mean is ${M} and the median is ${M + d}. Use the empirical relation between the mean, median and mode to estimate the mode.` : k === 2 ? `For a moderately skewed distribution the mean is ${M} and the mode is ${M + 3 * d}. Use the empirical relation to estimate the median.` : `For a moderately skewed distribution the median is ${M + d} and the mode is ${M + 3 * d}. Use the empirical relation to estimate the mean.`;
+    },
+    figure: (p) => {
+      if (p[0] !== 0) return null;
+      const t = empTable(p);
+      return { type: "table", head: ["x", ...t.xs.map(String)], rows: [["f", ...t.fs.map(String)]] };
+    },
+    solve: (p) => {
+      const [k, M, d] = p;
+      if (k === 0) {
+        const t = empTable(p);
+        return { steps: [step("largest", "compare", GM, [Math.max(...t.fs)], t.mode)], answer: t.mode };
+      }
+      const v = k === 1 ? 3 * (M + d) - 2 * M : k === 2 ? (M + 3 * d + 2 * M) / 3 : (3 * (M + d) - (M + 3 * d)) / 2;
+      return { steps: [step("relation", "rewrite", GM, [k], ["", "mode = 3 median − 2 mean", "median = (mode + 2 mean)/3", "mean = (3 median − mode)/2"][k]), step("evaluate", "evaluate", GM, [], dv(v))], answer: dv(v) };
+    },
+    // independent: kind 0 lists every observation and counts each value; kinds 1–3 check mode − mean = 3(median − mean)
+    validate: (p, v) => {
+      const [k, M, d] = p;
+      const x = nv(v);
+      if (k === 0) {
+        const t = empTable(p);
+        const list: number[] = [];
+        t.xs.forEach((y, i) => {
+          for (let j = 0; j < t.fs[i]; j++) list.push(y);
+        });
+        const count = (y: number) => list.filter((z) => z === y).length;
+        return list.includes(x) && list.every((y) => count(y) < count(x) || y === x);
+      }
+      const [mean, med, mode] = k === 1 ? [M, M + d, x] : k === 2 ? [M, x, M + 3 * d] : [x, M + d, M + 3 * d];
+      return close(mode - mean, 3 * (med - mean));
+    },
+    bugs: (p) => {
+      const [k, M, d] = p;
+      if (k === 0) {
+        const t = empTable(p);
+        return [
+          { id: "frequency-for-mode", kind: "conceptual", competency: GM, says: `The highest frequency (${Math.max(...t.fs)}) was given; the mode is the VALUE that occurs most often.`, predict: Math.max(...t.fs) === t.mode ? null : Math.max(...t.fs) },
+          { id: "middle-value", kind: "conceptual", competency: GM, says: "The middle value of the table was given; the mode is the value with the largest frequency.", predict: t.xs[2] === t.mode ? null : t.xs[2] },
+        ];
+      }
+      const med = M + d;
+      const mode = M + 3 * d;
+      const right = k === 1 ? mode : k === 2 ? med : M;
+      const pr = (x: number) => (close(x, right) ? null : dv(x));
+      return k === 1
+        ? [{ id: "mean-median-swapped", kind: "recall", competency: GM, says: "The mean and median were swapped: mode = 3 median − 2 mean.", predict: pr(3 * M - 2 * med) }, { id: "two-one", kind: "recall", competency: GM, says: "mode = 2 median − mean was used; the relation is mode = 3 median − 2 mean.", predict: pr(2 * med - M) }]
+        : k === 2
+          ? [{ id: "average", kind: "conceptual", competency: GM, says: "The median was taken halfway between the mean and the mode; it lies one third of the way from the mean to the mode.", predict: pr((M + mode) / 2) }, { id: "weights-swapped", kind: "recall", competency: GM, says: "median = (2 mode + mean)/3 was used; it is (mode + 2 mean)/3.", predict: pr((2 * mode + M) / 3) }]
+          : [{ id: "average", kind: "conceptual", competency: GM, says: "The mean was taken as the average of the median and the mode; from mode = 3 median − 2 mean, mean = (3 median − mode)/2.", predict: pr((med + mode) / 2) }, { id: "sign", kind: "procedural", competency: GM, says: "The relation was rearranged with a sign slip: mean = (3 median + mode)/2 was used.", predict: pr((3 * med + mode) / 2) }];
+    },
+    distractors: (p) => {
+      const [k, M, d] = p;
+      if (k === 0) return empTable(p).xs.filter((x) => x !== empTable(p).mode);
+      const right = k === 1 ? M + 3 * d : k === 2 ? M + d : M;
+      return [right + 1, right - 1, right + d].filter((x) => x !== right).map(dv);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "largest" ? `The largest frequency is ${s.inputs[0]}, for the value ${s.value}` : s.id === "relation" ? `Empirical relation: ${s.value}` : `So the answer is ${s.value}`),
+    domain: [[0, 3], [20, 80], [-6, 6], [0, 69]],
+    keep: (p) => (p[0] === 0 ? p[2] === 0 && p[1] % 5 === 0 && empTable(p).unique : p[2] !== 0 && p[3] === 0),
+    cap: 400,
+    difficulty: ([k]) => (k === 0 ? 1 : k === 1 ? 2 : 3),
+    teach: {
+      idea: "The mode is the value that occurs most often (the largest frequency). For moderately skewed data, mean − mode ≈ 3(mean − median), that is mode ≈ 3 median − 2 mean (Karl Pearson's empirical relation).",
+      method: "For a table, find the largest frequency and read its value. For the relation, write mode = 3 median − 2 mean, put in the two known numbers and solve for the third.",
+      alternatives: [
+        { id: "number-line", title: "Picture it on a line", kind: "conceptual", text: ["Mark the mean and the mode on a number line.", "The median lies between them, one third of the way from the mean to the mode."] },
+      ],
+    },
+    limits: "Ungrouped tables with one mode, and the empirical relation with whole-number data; the grouped mode is its own family.",
+  },
+  // ============================================================== gap@1: sure and impossible events
+  {
+    id: "ansure",
+    arity: 3,
+    title: "Sure, impossible or neither",
+    competency: COMP,
+    type: "choice",
+    // [e, k, j]: an event on an experiment (SURE); k its number, j (bags only) the second count
+    parse: none,
+    reject: (p) => (p[0] < 0 || p[0] > SURE.length - 1 || !SURE[p[0]].ok(p[1], p[2]) ? "An event from the list with numbers in its range." : null),
+    prompt: ([e, k, j]) => `${SURE[e].say(k, j)} Which describes this event?`,
+    choices: () => SURE_CH,
+    solve: ([e, k, j]) => {
+      const { fav, all } = sureCount(e, k, j);
+      const ans = fav === 0 ? 0 : fav === all ? 1 : 2;
+      return { steps: [step("count", "count", SS, [all], fav), step("classify", "classify", COMP, [fav, all], ans)], answer: ans };
+    },
+    // independent: list the outcomes one by one and test the event
+    validate: ([e, k, j], v) => {
+      const outs = SURE[e].outcomes(k, j);
+      const hit = outs.filter((o) => SURE[e].test(o, k, j)).length;
+      return v === (hit === 0 ? 0 : hit === outs.length ? 1 : 2);
+    },
+    bugs: ([e, k, j]) => {
+      const { fav, all } = sureCount(e, k, j);
+      if (fav === 0) return [{ id: "small-chance", kind: "conceptual", competency: COMP, says: "The event was thought to have some small chance; no outcome makes it happen, so it is impossible and P = 0.", predict: 2 } as Bug];
+      if (fav === all) return [{ id: "not-sure", kind: "conceptual", competency: COMP, says: "The event was thought not certain; EVERY outcome makes it happen, so it is a sure event and P = 1.", predict: 2 } as Bug];
+      return [
+        ...(6 * fav <= all ? [{ id: "unlikely-impossible", kind: "conceptual", competency: COMP, says: "An unlikely event was called impossible; some outcome makes it happen, so its probability is more than 0.", predict: 0 } as Bug] : []),
+        ...(6 * fav >= 5 * all ? [{ id: "likely-sure", kind: "conceptual", competency: COMP, says: "A very likely event was called sure; some outcome does not make it happen, so its probability is less than 1.", predict: 1 } as Bug] : []),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "count" ? `${s.value} of the ${s.inputs[0]} outcomes make the event happen` : ["None does: an impossible event, P = 0", "All do: a sure event, P = 1", "Some do and some do not: 0 < P < 1"][Number(s.value)]),
+    domain: [[0, 6], [0, 13], [0, 6]],
+    keep: ([e, k, j]) => SURE[e].ok(k, j),
+    difficulty: ([e, k, j]) => {
+      const { fav, all } = sureCount(e, k, j);
+      return fav === 0 || fav === all ? 2 : e >= 3 ? 3 : 1;
+    },
+    teach: {
+      idea: "An event that cannot happen is impossible, P = 0; an event that happens for every outcome is sure, P = 1; every other event has a probability strictly between 0 and 1.",
+      method: "List (or count) the outcomes of the experiment and check each one against the event: none, all, or some.",
+      alternatives: [
+        { id: "line", title: "The probability line", kind: "conceptual", text: ["Put impossible at 0 and sure at 1.", "Unlikely events sit near 0 and likely ones near 1, but only 'no outcome' is at 0 and only 'every outcome' is at 1."], visual: () => ({ type: "numberline", from: 0, to: 1, step: 0.25 }) },
+      ],
+    },
+    limits: "One die, two dice, numbered cards and bags of balls; events described in words.",
+  },
+  // ============================================================== gap@1: checking the axioms of probability
+  {
+    id: "anaxiom",
+    arity: 1,
+    title: "Which assignment of probabilities is valid",
+    competency: PROB,
+    type: "choice",
+    // [s]: four assignments to the outcomes ω₁ … ω₄, one valid (every value from 0 to 1, total 1)
+    parse: none,
+    reject: (p) => (p[0] < 0 || p[0] > 299 ? "A choice of assignments 0–299." : null),
+    prompt: () => "A random experiment has the sample space S = {ω₁, ω₂, ω₃, ω₄}. Which of these assignments of probabilities to the outcomes is valid?",
+    choices: (p) => axiomOpts(p[0]).map((o) => o.text),
+    solve: (p) => {
+      const o = axiomOpts(p[0]);
+      const i = o.findIndex((x) => x.kind === "valid");
+      return { steps: [step("check", "compare", PROB, [o[i].text], "every value is between 0 and 1 and the four add up to 1"), step("choose", "choose", PROB, [], i)], answer: i };
+    },
+    // independent: for each option add the four numerators and test each value, in whole numbers over the common denominator
+    validate: (p, v) => {
+      const o = axiomOpts(p[0]);
+      const ok = o.map((x) => x.nums.every((n) => n >= 0 && n <= x.den) && x.nums.reduce((a, b) => a + b, 0) === x.den);
+      return typeof v === "number" && ok[v] === true && ok.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const o = axiomOpts(p[0]);
+      return [
+        { id: "negative-accepted", kind: "conceptual", competency: PROB, says: "An assignment with a negative value was accepted because its values add up to 1; every probability must also be at least 0.", predict: o.findIndex((x) => x.kind === "negative") },
+        { id: "sum-not-checked", kind: "conceptual", competency: PROB, says: "Each value was checked to lie between 0 and 1, but the total was not; the probabilities of all the outcomes must add up to exactly 1.", predict: o.findIndex((x) => x.kind === "short") },
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "check" ? `${s.inputs[0]}: ${s.value}` : `So the valid one is ${"ABCD"[Number(s.value)]}`),
+    domain: [[0, 299]],
+    difficulty: (p) => (axiomOpts(p[0])[0].den <= 8 ? 2 : 3),
+    teach: {
+      idea: "An assignment of probabilities to the outcomes of a finite sample space is valid when every value is at least 0 and at most 1 and the values add up to exactly 1 (the axioms).",
+      method: "For each assignment, write the values with a common denominator, check that none is negative or above 1, and add the numerators: they must give the denominator.",
+      alternatives: [
+        { id: "tickets", title: "Think of tickets", kind: "conceptual", text: ["With denominator 12, imagine 12 tickets shared among the four outcomes.", "A negative number of tickets is impossible, and all 12 must be shared out — no more, no fewer."] },
+      ],
+    },
+    limits: "Four outcomes with fractional probabilities; events (sums of outcomes) are other families.",
+  },
+  // ============================================================== gap@1: complementary-angle relations to simplify
+  {
+    id: "ancomps",
+    arity: 4,
+    title: "Simplifying with complementary angles",
+    competency: TR,
+    type: "integer",
+    mc: true,
+    // [form, t, a, b]: θ = t°, φ = another acute angle; a, b small whole numbers
+    parse: none,
+    reject: ([f, t, a, b]) => (f < 0 || f > 4 || t < 10 || t > 80 || t === 45 || a < 1 || a > 6 || b < 1 || b > 6 || ((f === 2 || f === 3) && b !== 1) || (f === 1 && a === b) ? "θ from 10° to 80° (not 45°), a and b from 1 to 6." : null),
+    prompt: ([f, t, a, b]) => {
+      const u = 90 - t;
+      const ph = compsPhi(t);
+      const co = (n: number) => (n === 1 ? "" : `${n} `);
+      return `Without using tables, find the value of ${[
+        `${co(a)}sin ${t}° ÷ cos ${u}° + ${co(b)}tan ${ph}° ÷ cot ${90 - ph}°`,
+        `${co(a)}sec ${t}° ÷ cosec ${u}° − ${co(b)}cos ${ph}° ÷ sin ${90 - ph}°`,
+        `${co(a)}tan ${t}° × tan ${u}°`,
+        `${a}(cos²${t}° + cos²${u}°)`,
+        `${co(a)}sin ${t}° × sec ${u}° + ${b}`,
+      ][f]}.`;
+    },
+    solve: ([f, t, a, b]) => {
+      const v = [a + b, a - b, a, a, a + b][f];
+      return { steps: [step("complement", "rewrite", TR, [t, 90 - t], ["cos(90° − θ) = sin θ and cot(90° − θ) = tan θ", "cosec(90° − θ) = sec θ and sin(90° − θ) = cos θ", "tan(90° − θ) = cot θ = 1/tan θ", "cos(90° − θ) = sin θ, so cos²θ + sin²θ = 1", "sec(90° − θ) = cosec θ = 1/sin θ"][f]), step("evaluate", "evaluate", TR, [], v)], answer: v };
+    },
+    // independent: evaluate the expression numerically with Math.sin, Math.cos, Math.tan
+    validate: ([f, t, a, b], v) => {
+      const s = (d: number) => Math.sin(rad(d));
+      const c = (d: number) => Math.cos(rad(d));
+      const tn = (d: number) => Math.tan(rad(d));
+      const u = 90 - t;
+      const ph = compsPhi(t);
+      const want = [a * (s(t) / c(u)) + b * (tn(ph) / (1 / tn(90 - ph))), a * (1 / c(t) / (1 / s(u))) - b * (c(ph) / s(90 - ph)), a * tn(t) * tn(u), a * (c(t) ** 2 + c(u) ** 2), a * s(t) * (1 / c(u)) + b][f];
+      return typeof v === "number" && close(v, want, 1e-9);
+    },
+    bugs: ([f, , a, b]) => {
+      const right = [a + b, a - b, a, a, a + b][f];
+      const w = (x: number) => (x === right ? null : x);
+      return [
+        f === 0 || f === 4
+          ? { id: "numbers-dropped", kind: "procedural", competency: TR, says: "Each ratio of complementary functions is 1, but the numbers in front were dropped; they multiply those 1s.", predict: w(f === 0 ? 2 : 1 + b) }
+          : f === 1
+            ? { id: "minus-lost", kind: "procedural", competency: TR, says: "The minus sign between the two parts was lost; each part simplifies to its number, and then they are subtracted.", predict: w(a + b) }
+            : f === 2
+              ? { id: "tan-complement-negative", kind: "recall", competency: TR, says: "tan(90° − θ) was taken as −tan θ; for complementary angles tan(90° − θ) = cot θ, so the product is 1.", predict: w(-a) }
+              : { id: "angles-added", kind: "conceptual", competency: TR, says: "The two angles were added inside one cosine, as cos²90° = 0; cos(90° − θ) = sin θ, and cos²θ + sin²θ = 1.", predict: w(0) },
+      ].filter((x) => x.predict !== null) as Bug[];
+    },
+    distractors: ([f, , a, b]) => {
+      const right = [a + b, a - b, a, a, a + b][f];
+      return [right + 1, right - 1, 0, 2 * right].filter((x) => x !== right);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "complement" ? `Use ${s.value}` : `So the value is ${n_(Number(s.value))}`),
+    domain: [[0, 4], [10, 80], [1, 6], [1, 6]],
+    keep: ([f, t, a, b]) => t !== 45 && !((f === 2 || f === 3) && b !== 1) && !(f === 1 && a === b) && t % 2 === 0,
+    cap: 300,
+    difficulty: ([f]) => (f === 2 || f === 3 ? 1 : f === 0 ? 2 : 3),
+    teach: {
+      idea: "For complementary angles θ and 90° − θ: sin(90° − θ) = cos θ, cos(90° − θ) = sin θ, tan(90° − θ) = cot θ, cot(90° − θ) = tan θ, sec(90° − θ) = cosec θ, cosec(90° − θ) = sec θ.",
+      method: "Spot the pairs of angles that add up to 90°, rewrite one function of each pair as the co-function of the other angle, and simplify (a ratio of equal values is 1; tan θ × cot θ = 1; sin²θ + cos²θ = 1).",
+      alternatives: [
+        { id: "triangle", title: "One right triangle", kind: "conceptual", text: ["In a right triangle the two acute angles are θ and 90° − θ.", "The side opposite one is adjacent to the other, so each ratio of one angle is the co-ratio of the other."], visual: () => ({ type: "triangle", right: true, sides: ["", "", ""], angles: ["", "θ", "90° − θ"] }) },
+      ],
+    },
+    limits: "Expressions with one or two pairs of complementary angles (whole degrees); expressions needing the values of non-standard angles are the tables family.",
+  },
+  // ============================================================== gap@1: trigonometric tables
+  {
+    id: "antable",
+    arity: 4,
+    title: "Reading trigonometric tables (degrees, minutes, mean differences)",
+    competency: TR,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [f, d, m6, k]: f 0 sin, 1 cos, 2 tan, 3 a ladder (L = 4 + d % 5 metres) with the sine table; the angle d° (6·m6 + k)′
+    parse: none,
+    reject: (p) => (!tableOk(p) ? "An angle in the table's range (sine 10°–60°, cosine 30°–80°, tangent 10°–45°) with minutes not a multiple of 6." : null),
+    prompt: ([f, d, m6, k]) => {
+      const A = `${d}°${6 * m6 + k}′`;
+      return f === 3
+        ? `A ladder ${4 + (d % 5)} m long leans against a wall and makes an angle of ${A} with the ground. Using the table of natural sines in the picture (with its mean differences), find how high up the wall the ladder reaches, in metres.`
+        : `Using the table of natural ${["sines", "cosines", "tangents"][f]} in the picture (with its mean differences), find ${["sin", "cos", "tan"][f]} ${A}.`;
+    },
+    figure: (p) => tableFig(p),
+    solve: (p) => {
+      const t = tableRead(p);
+      const [f, d] = p;
+      return { steps: [step("column", "read", TR, [`${d}°${6 * p[2]}′`], t.base.toFixed(4)), step("mean-difference", f === 1 ? "subtract" : "add", TR, [p[3], t.md], t.value.toFixed(4)), ...(f === 3 ? [step("height", "multiply", HD, [4 + (d % 5), t.value.toFixed(4)], dv4(t.answer))] : [])], answer: dv4(t.answer) };
+    },
+    // independent: the true value of the ratio from Math.sin / Math.cos / Math.tan, which a 4-figure table matches to
+    // about one unit in the last place
+    validate: (p, v) => {
+      const [f, d, m6, k] = p;
+      const ang = rad(d + (6 * m6 + k) / 60);
+      const exact = [Math.sin, Math.cos, Math.tan, Math.sin][f](ang) * (f === 3 ? 4 + (d % 5) : 1);
+      return Math.abs(nv(v) - exact) <= 1.5e-4 * (f === 3 ? 4 + (d % 5) : 1);
+    },
+    bugs: (p) => tableBugs(p),
+    distractors: (p) => {
+      const t = tableRead(p);
+      const L = p[0] === 3 ? 4 + (p[1] % 5) : 1;
+      return [t.base + (p[0] === 1 ? -1 : 1) * 0.001 * 3, t.next, t.base + 0.01].map((x) => dv4(x * L)).filter((x) => x !== dv4(t.answer));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "column" ? `In the ${String(s.inputs[0]).split("°")[0]}° row, under ${String(s.inputs[0]).split("°")[1]}: ${s.value}` : s.id === "mean-difference" ? `${s.op === "subtract" ? "Subtract" : "Add"} the mean difference for ${s.inputs[0]}′ (${s.inputs[1]} in the last place): ${s.value}` : `Height = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} m`),
+    domain: [[0, 3], [10, 80], [0, 9], [1, 5]],
+    keep: (p) => tableOk(p),
+    cap: 400,
+    difficulty: ([f]) => (f === 0 ? 1 : f === 1 ? 3 : 2),
+    teach: {
+      idea: "A table gives each ratio to four decimal places for every 6′; for the minutes in between, the mean-difference columns give the small change to add (for sine and tangent, which increase) or to subtract (for cosine, which decreases).",
+      method: "Find the row of the degrees and the column of the largest multiple of 6′ not above the minutes; read the value. Then read the mean difference for the extra minutes in the same row and add it (subtract for cosines) in the last decimal place.",
+      alternatives: [
+        { id: "between", title: "It must lie between two entries", kind: "conceptual", text: ["Your answer must lie between the table entries for the 6′ just below and just above the angle.", "For a cosine the later entry is smaller: so the mean difference is taken away."] },
+      ],
+    },
+    limits: "Four-figure tables generated for sin, cos and tan of whole degrees in a range where the mean differences are reliable; logarithm tables are not used.",
+  },
+  // ============================================================== gap@1: probability with counting
+  {
+    id: "anncr",
+    arity: 5,
+    title: "Probability by counting selections",
+    competency: PROB,
+    type: "fraction",
+    mc: true,
+    // [kind, m, w, r, k]: kind 0 a committee of r from m boys and w girls with exactly k girls; kind 1 r bulbs from m good
+    // and w faulty with exactly k faulty; kind 2 a committee with at least one girl (k = 0)
+    parse: none,
+    reject: (p) => (!ncrOk(p) ? "m and w from 2 to 8 (at most 12 in all), choosing 2 to 4, with a possible event." : null),
+    prompt: ([kind, m, w, r, k]) =>
+      kind === 0
+        ? `A committee of ${r} is chosen at random from ${m} boys and ${w} girls. What is the probability that it has ${k === 0 ? "no girls" : `exactly ${k} ${k === 1 ? "girl" : "girls"}`}?`
+        : kind === 1
+          ? `A box has ${m} good bulbs and ${w} faulty bulbs. ${r} bulbs are taken out together at random. What is the probability that exactly ${k} of them ${k === 1 ? "is" : "are"} faulty?`
+          : `A committee of ${r} is chosen at random from ${m} boys and ${w} girls. What is the probability that it has at least one girl?`,
+    solve: ([kind, m, w, r, k]) => {
+      const all = ncr(m + w, r);
+      if (kind === 2) return { steps: [step("total", "count", PERMC, [m + w, r], all), step("none", "count", PERMC, [m, r], ncr(m, r)), step("complement", "subtract", COMP, [ncr(m, r), all], 1 - ncr(m, r) / all)], answer: 1 - ncr(m, r) / all };
+      const fav = ncr(w, k) * ncr(m, r - k);
+      return { steps: [step("total", "count", PERMC, [m + w, r], all), step("favourable", "multiply", PERMC, [ncr(w, k), ncr(m, r - k)], fav), step("probability", "divide", PROB, [fav, all], fav / all)], answer: fav / all };
+    },
+    // independent: list every selection of r people (bit patterns) and count those in the event
+    validate: ([kind, m, w, r, k], v) => {
+      const n = m + w;
+      let all = 0;
+      let hit = 0;
+      for (let mask = 0; mask < 1 << n; mask++) {
+        let c = 0;
+        let g = 0;
+        for (let i = 0; i < n; i++)
+          if (mask & (1 << i)) {
+            c++;
+            if (i < w) g++;
+          }
+        if (c !== r) continue;
+        all++;
+        if (kind === 2 ? g >= 1 : g === k) hit++;
+      }
+      return close(nv(v), hit / all);
+    },
+    bugs: ([kind, m, w, r, k]) => {
+      const n = m + w;
+      const all = ncr(n, r);
+      const right = kind === 2 ? 1 - ncr(m, r) / all : (ncr(w, k) * ncr(m, r - k)) / all;
+      const pr = (x: number) => (x > 1 || x < 0 || close(x, right) ? null : x);
+      if (kind === 2) return [{ id: "exactly-one", kind: "conceptual", competency: COMP, says: "'Exactly one girl' was found; 'at least one' also includes two or more girls — easiest as 1 − P(no girl).", predict: pr((ncr(w, 1) * ncr(m, r - 1)) / all) }, { id: "complement-of-one", kind: "procedural", competency: COMP, says: "1 − P(exactly one girl) was found; the complement of 'at least one girl' is 'no girl'.", predict: pr(1 - (ncr(w, 1) * ncr(m, r - 1)) / all) }].filter((b) => b.predict !== null) as Bug[];
+      return [
+        { id: "rest-not-chosen", kind: "procedural", competency: PERMC, says: `Only the ways to choose the ${k} ${kind === 0 ? "girls" : "faulty bulbs"} were counted; the other ${r - k} must be chosen from the ${m} ${kind === 0 ? "boys" : "good bulbs"} too, and the two counts multiply.`, predict: pr(ncr(w, k) / all) },
+        { id: "with-replacement", kind: "conceptual", competency: PROB, says: "Each choice was treated as independent with the same chance, as if each one were put back; the selection is made together, so count selections with combinations.", predict: pr(ncr(r, k) * (w / n) ** k * (m / n) ** (r - k)) },
+      ].filter((b) => b.predict !== null) as Bug[];
+    },
+    distractors: ([kind, m, w, r, k]) => {
+      const all = ncr(m + w, r);
+      const right = kind === 2 ? 1 - ncr(m, r) / all : (ncr(w, k) * ncr(m, r - k)) / all;
+      return [k / r, w / (m + w), 1 - right].filter((x) => x >= 0 && x <= 1 && !close(x, right));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "total" ? `All selections: ${s.inputs[0]}C${s.inputs[1]} = ${s.value}` : s.id === "favourable" ? `Favourable: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "none" ? `Selections with no girl: ${s.inputs[0]}C${s.inputs[1]} = ${s.value}` : `P = ${fmt(Number(s.value))}`),
+    domain: [[0, 2], [2, 8], [2, 8], [2, 4], [0, 4]],
+    keep: (p) => ncrOk(p),
+    range: [0, 1],
+    cap: 400,
+    difficulty: ([kind, , , r]) => (kind === 2 ? 3 : r === 2 ? 1 : 2),
+    teach: {
+      idea: "When r things are chosen together at random, every selection is equally likely, so P = (number of favourable selections)/(number of all selections), each counted with ⁿCᵣ.",
+      method: "All selections: ⁿCᵣ. Favourable: choose the k of one kind and the r − k of the other kind, and multiply the two counts. For 'at least one', use 1 − P(none).",
+      alternatives: [
+        { id: "small-list", title: "List a small case", kind: "procedural", text: ["With 3 boys and 2 girls choosing 2, list all 10 pairs.", "Count the pairs with one girl (6): the formula ²C₁ × ³C₁ = 6 matches."] },
+      ],
+    },
+    limits: "Selections of 2 to 4 from two kinds (at most 12 in all); arrangements (permutations) are not used.",
   },
 ];
+
+// ---------------------------------------------------------------- gap@1 helpers
+const PERMC = "MATH.algebra.permutations";
+const AVGAV = ["Yes, because the two sections have the same number of students", "No: the true mean is higher, because the section with the higher mean has more students", "No: the true mean is lower, because the section with the lower mean has more students", "Yes: the average of the two means is always the mean of everyone"];
+function avgavOf([n1, i1, dn, i2]: number[]) {
+  return { n1, m1: 40 + 2 * i1, n2: n1 + 5 * dn, m2: 40 + 2 * i2 };
+}
+function avgavAnswer(p: number[]): number {
+  const { n1, m1, n2, m2 } = avgavOf(p);
+  const t = (n1 * m1 + n2 * m2) / (n1 + n2);
+  return n1 === n2 ? 0 : t > (m1 + m2) / 2 ? 1 : 2;
+}
+/** angstep: Σfd (m = 0) or Σfu (m = 1) about the middle class mark. */
+function stepSum(p: number[]): number {
+  const g = grouped(p.slice(1));
+  return g.fs.reduce((s, f, i) => s + f * (i - 2), 0) * (p[0] === 0 ? g.h : 1);
+}
+/** anfmed: the table, cumulative frequencies and the median. */
+function fmedOf([x0, st, seed]: number[]) {
+  const R = gen(hash(x0, st, seed, 11));
+  const xs = [0, 1, 2, 3, 4].map((i) => x0 + i * st);
+  const fs = xs.map(() => R(1, 9));
+  const N = fs.reduce((a, b) => a + b, 0);
+  const cf: number[] = [];
+  fs.reduce((a, f) => (cf.push(a + f), a + f), 0);
+  const at = (pos: number) => xs[cf.findIndex((c) => c >= pos)];
+  const med = N % 2 ? at((N + 1) / 2) : (at(N / 2) + at(N / 2 + 1)) / 2;
+  return { xs, fs, N, cf, at, med };
+}
+/** anempir kind 0: a frequency table with a single mode. */
+function empTable([, M, , seed]: number[]) {
+  const R = gen(hash(M, seed, 13));
+  const st = 1 + (seed % 4);
+  const xs = [0, 1, 2, 3, 4, 5].map((i) => M + i * st);
+  const fs = xs.map(() => R(1, 12));
+  const top = Math.max(...fs);
+  return { xs, fs, mode: xs[fs.indexOf(top)], unique: fs.filter((f) => f === top).length === 1 };
+}
+const SURE_CH = ["an impossible event, with probability 0", "a sure event, with probability 1", "neither: its probability is between 0 and 1"];
+const DIE = [1, 2, 3, 4, 5, 6];
+const PAIRS2 = DIE.flatMap((a) => DIE.map((b) => [a, b]));
+const SURE: { say: (k: number, j: number) => string; ok: (k: number, j: number) => boolean; outcomes: (k: number, j: number) => number[][]; test: (o: number[], k: number, j: number) => boolean }[] = [
+  { say: (k) => `A fair die is thrown. Event: "the number shown is less than ${k}".`, ok: (k, j) => k >= 1 && k <= 8 && j === 0, outcomes: () => DIE.map((x) => [x]), test: ([x], k) => x < k },
+  { say: (k) => `A fair die is thrown. Event: "the number shown is greater than ${k}".`, ok: (k, j) => k >= 0 && k <= 7 && j === 0, outcomes: () => DIE.map((x) => [x]), test: ([x], k) => x > k },
+  { say: (k) => `A fair die is thrown. Event: "the number shown is a multiple of ${k}".`, ok: (k, j) => k >= 1 && k <= 8 && j === 0, outcomes: () => DIE.map((x) => [x]), test: ([x], k) => x % k === 0 },
+  { say: (k) => `Two fair dice are thrown together. Event: "the sum of the two numbers is ${k}".`, ok: (k, j) => k >= 1 && k <= 13 && j === 0, outcomes: () => PAIRS2, test: ([a, b], k) => a + b === k },
+  { say: (k) => `Two fair dice are thrown together. Event: "the sum of the two numbers is at most ${k}".`, ok: (k, j) => k >= 1 && k <= 12 && j === 0, outcomes: () => PAIRS2, test: ([a, b], k) => a + b <= k },
+  { say: (k, j) => `A bag has ${k} red and ${j} blue balls. One ball is taken out without looking. Event: "the ball is ${["green", "red", "red or blue"][(k + j) % 3]}".`, ok: (k, j) => k >= 1 && k <= 6 && j >= 1 && j <= 6, outcomes: (k, j) => [...Array(k + j).keys()].map((i) => [i < k ? 0 : 1]), test: ([c], k, j) => [false, c === 0, true][(k + j) % 3] },
+  { say: (k, j) => `Cards numbered 1 to ${10 + k} are shuffled and one is drawn. Event: "the number on the card is ${[`at most ${10 + k}`, `greater than ${10 + k}`, "an even number"][j]}".`, ok: (k, j) => k >= 0 && k <= 10 && j <= 2, outcomes: (k) => [...Array(10 + k).keys()].map((i) => [i + 1]), test: ([x], k, j) => [x <= 10 + k, x > 10 + k, x % 2 === 0][j] },
+];
+function sureCount(e: number, k: number, j: number) {
+  const outs = SURE[e].outcomes(k, j);
+  return { fav: outs.filter((o) => SURE[e].test(o, k, j)).length, all: outs.length };
+}
+/** anaxiom: four assignments (one valid, one short of 1, one over 1, one with a negative value), in a fixed order. */
+function axiomOpts(s: number): { text: string; kind: string; nums: number[]; den: number }[] {
+  const R = gen(hash(s, 5, 17));
+  const den = [6, 8, 10, 12, 15, 20][R(0, 5)];
+  const n1 = R(1, den - 3);
+  const n2 = R(1, den - n1 - 2);
+  const n3 = R(1, den - n1 - n2 - 1);
+  const valid = [n1, n2, n3, den - n1 - n2 - n3];
+  const mod = (f: (xs: number[]) => void) => {
+    const xs = [...valid];
+    f(xs);
+    return xs;
+  };
+  const i = R(0, 3);
+  const j = (i + 1 + R(0, 2)) % 4;
+  const short = mod((xs) => (xs[i] -= 1));
+  const over = mod((xs) => (xs[j] += 1));
+  const negative = mod((xs) => {
+    const a = R(0, 3);
+    const b = (a + 1 + R(0, 2)) % 4;
+    xs[a] += xs[b] + 1;
+    xs[b] = -1;
+  });
+  const fr = (n: number) => (n < 0 ? `−${probText(-n, den)}` : probText(n, den));
+  const text = (xs: number[]) => xs.map((n, k) => `P(ω${"₁₂₃₄"[k]}) = ${fr(n)}`).join(", ");
+  const all = [
+    { text: text(valid), kind: "valid", nums: valid, den },
+    { text: text(short), kind: "short", nums: short, den },
+    { text: text(over), kind: "over", nums: over, den },
+    { text: text(negative), kind: "negative", nums: negative, den },
+  ];
+  const ord = [0, 1, 2, 3].map((x) => ({ x, k: hash(s, x, 23) })).sort((a, b) => a.k - b.k).map((o) => o.x);
+  return ord.map((x) => all[x]);
+}
+const compsPhi = (t: number) => ((t * 7) % 60) + 15;
+// antable: four-figure tables generated from the functions themselves
+const r4 = (x: number) => Math.round(x * 1e4) / 1e4;
+const dv4 = (x: number): Value => String(r4(x));
+const tfun = (f: number, d: number, min: number) => [Math.sin, Math.cos, Math.tan][f === 3 ? 0 : f](rad(d + min / 60));
+/** The mean difference for k minutes in the row of d°, in units of the 4th decimal place (from the slope mid-row). */
+const mdOf = (f: number, d: number, k: number) => Math.round((Math.abs(tfun(f, d, 36) - tfun(f, d, 24)) / 12) * k * 1e4);
+function tableRead([f, d, m6, k]: number[]) {
+  const base = r4(tfun(f, d, 6 * m6));
+  const md = mdOf(f, d, k);
+  const value = r4(base + (f === 1 ? -md : md) / 1e4);
+  const L = f === 3 ? 4 + (d % 5) : 1;
+  return { base, md, value, answer: r4(value * L), next: r4(tfun(f, d, 6 * m6 + 6)), L };
+}
+function tableExact([f, d, m6, k]: number[]) {
+  return tfun(f, d, 6 * m6 + k) * (f === 3 ? 4 + (d % 5) : 1);
+}
+function tableBugsAll(p: number[]) {
+  const [f, d, m6, k] = p;
+  const t = tableRead(p);
+  const L = t.L;
+  const M = 6 * m6 + k;
+  return [
+    { id: "mean-difference-left-out", kind: "procedural", competency: TR, says: `Only the entry for ${d}°${6 * m6}′ was read; the extra ${k}′ need the mean difference from the same row.`, value: r4(t.base * L) },
+    f === 1
+      ? { id: "mean-difference-added", kind: "procedural", competency: TR, says: "The mean difference was added; cosines DEcrease as the angle grows, so for a cosine it is subtracted.", value: r4(r4(t.base + t.md / 1e4) * L) }
+      : { id: "next-column", kind: "procedural", competency: TR, says: `The entry for ${d}°${6 * m6 + 6}′ (the next column) was read; take the column just below the minutes and add the mean difference.`, value: r4(t.next * L) },
+    { id: "minutes-as-decimal", kind: "conceptual", competency: TR, says: `${d}°${M}′ was read as ${d}.${String(M).padStart(2, "0")}°; there are 60 minutes in a degree, not 100.`, value: r4(r4([Math.sin, Math.cos, Math.tan][f === 3 ? 0 : f](rad(d + M / 100))) * L) },
+  ];
+}
+function tableBugs(p: number[]): Bug[] {
+  const L = tableRead(p).L;
+  const ex = tableExact(p);
+  return tableBugsAll(p)
+    .filter((b) => Math.abs(b.value - ex) > 2e-4 * L)
+    .map((b) => ({ id: b.id, kind: b.kind as Bug["kind"], competency: b.competency, says: b.says, predict: dv4(b.value) }));
+}
+function tableOk(p: number[]): boolean {
+  const [f, d, m6, k] = p;
+  if (!(f >= 0 && f <= 3 && m6 >= 0 && m6 <= 9 && k >= 1 && k <= 5)) return false;
+  const [lo, hi] = f === 1 ? [30, 79] : f === 2 ? [10, 44] : [10, 59];
+  if (d < lo || d > hi) return false;
+  const t = tableRead(p);
+  return t.md >= 4 && Math.abs(t.answer - tableExact(p)) <= 1.2e-4 * t.L && tableBugs(p).length >= 1;
+}
+function tableFig([f, d]: number[]) {
+  const row = (D: number) => [`${D}°`, ...[...Array(10).keys()].map((j) => r4(tfun(f, D, 6 * j)).toFixed(4)), ...[1, 2, 3, 4, 5].map((k) => String(mdOf(f, D, k)))];
+  return { type: "table" as const, title: `Natural ${["sines", "cosines", "tangents", "sines"][f]}`, head: ["", ...[...Array(10).keys()].map((j) => `${6 * j}′`), "1′", "2′", "3′", "4′", "5′"], rows: [row(d), row(d + 1)] };
+}
+function ncr(n: number, k: number): number {
+  if (k < 0 || k > n) return 0;
+  let r = 1;
+  for (let i = 1; i <= k; i++) r = (r * (n - k + i)) / i;
+  return Math.round(r);
+}
+function ncrOk([kind, m, w, r, k]: number[]): boolean {
+  if (!(kind >= 0 && kind <= 2 && m >= 2 && m <= 8 && w >= 2 && w <= 8 && m + w <= 12 && r >= 2 && r <= 4)) return false;
+  if (kind === 2) return k === 0 && r <= m;
+  return k >= 0 && k <= r && k <= w && r - k <= m && !(kind === 1 && k === 0);
+}
