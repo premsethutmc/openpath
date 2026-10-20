@@ -789,7 +789,7 @@ const vboxAns = (p: number[]) => {
 function vboxText(p: number[], w = false) {
   const { p: s1, q, r } = vboxS(p);
   const eq = `x³ − ${s1}x² + ${q}x − ${r} = 0`;
-  return w ? `An engineer designing a water tank finds that its length, breadth and height, in metres, are the three roots of ${eq}. Without solving the equation, find ${VBQ[p[3]].replace(/cm/g, "m")}.` : `The length, breadth and height of a cuboid-shaped box, in cm, are the three roots of ${eq}. Without solving the equation, use the relations between roots and coefficients to find ${VBQ[p[3]]}.`;
+  return w ? `An engineer designing a water tank finds that its length, breadth and height, in metres, are the three roots of ${eq}. Without solving the equation, find ${VBQ[p[3]].replace(/cm/g, "m").replace(/box/g, "tank")}.` : `The length, breadth and height of a cuboid-shaped box, in cm, are the three roots of ${eq}. Without solving the equation, use the relations between roots and coefficients to find ${VBQ[p[3]]}.`;
 }
 
 export const B16: Def[] = [
