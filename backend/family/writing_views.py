@@ -35,6 +35,10 @@ def locked(request, pupil_id, draft_id):
 
 
 class WritingLessonsView(AccountBase):
+    def get(self, request, pupil_id):
+        pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
+        return Response({'drafts': list(WritingDraft.objects.filter(pupil=pupil).order_by('updated_at').values('id', 'problem_key', 'stage', 'version', 'updated_at'))})
+
     def post(self, request, pupil_id):
         spec = lesson(request.data.get('topic', 'division'), request.data.get('parameters', {}))
         with transaction.atomic():
@@ -62,7 +66,7 @@ class WritingDraftView(AccountBase):
                 d.stage = 'workspace'
             d.version += 1
             d.save()
-            return Response({'version': d.version, 'revision': work['revision']})
+            return Response({'version': d.version, 'revision': work['revision'], 'stage': d.stage})
 
 
 class WritingActionView(AccountBase):
@@ -136,6 +140,7 @@ class WritingValidationView(AccountBase):
                 d.stage = 'complete'
                 d.support['completedRevision'] = d.work['revision']
             d.support['lastResult'] = result
+            d.support['lastCheckedRevision'] = d.work['revision']
             d.version += 1
             d.save()
             activity = output(d)

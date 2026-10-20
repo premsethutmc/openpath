@@ -98,7 +98,10 @@ export function probabilities(logits: ArrayLike<number>) {
 export class LocalDigitRecognizer implements Recognizer {
   readonly id = "onnx-mnist-digits@1";
   private session: Promise<ort.InferenceSession> | null = null;
-  constructor(private base = "/recognition/") {}
+  private base: string;
+  constructor(base = "/recognition/") {
+    this.base = base;
+  }
   available() {
     return (
       typeof WebAssembly !== "undefined" && typeof document !== "undefined"

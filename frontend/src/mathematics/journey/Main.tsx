@@ -205,7 +205,7 @@ function App() {
         </form>
       ) : (
         <>
-          <p><a href={`/writing.html?learner=${pupil}`}>Write and check mathematical working</a></p>
+          <p><a href={`/year/?learner=${pupil}`}>My Learning Year · learn and write</a></p>
           <label>
             OpenPath learner
             <select

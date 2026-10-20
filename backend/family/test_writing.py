@@ -27,6 +27,20 @@ def work(draft_id, spec, answers=None):
 
 
 class DivisionWorkingTests(SimpleTestCase):
+    def test_equal_groups_reuses_existing_validator_for_all_supported_parameters(self):
+        from .learning_families import generated
+        for a in range(1,13):
+            for b in range(1,13):
+                spec=lesson('multiplication',{'groups':a,'size':b})
+                q=generated(f'gen:mul:{a},{b}')
+                self.assertEqual(spec['competency'],q['competency'])
+                w=work('test',spec,{'answer':q['answer']})
+                self.assertEqual(check(spec,w)['outcome'],'complete')
+                w['tokens'][0]['text']=str(a*b+1)
+                self.assertEqual(check(spec,w)['outcome'],'incorrect')
+                self.assertEqual(len(probes(spec,{})),2)
+                self.assertIn(str(a*b),teaching(spec,{}, {})['explanation'])
+
     def test_complete_379_over_3_and_arbitrary_operands(self):
         rng=random.Random(382)
         for a,b in [(379,3),(1005,5),(2,3),(0,3),(1000,10),(4008,4)]+[(rng.randrange(100000),rng.randrange(1,999)) for _ in range(200)]:
@@ -136,6 +150,18 @@ class WritingJourneyApiTests(FamilyTestCase):
     def test_corrupt_wrong_identity_and_invalid_layout_are_refused(self):
         w=work(self.activity['id'],self.activity['lesson'])
         for bad in [{**w,'id':'another'}, {**w,'contract':'future@2'}, {**w,'layout':{}}, {**w,'tokens':[{**w['tokens'][0],'bounds':None}]}]:self.assertEqual(self.save(bad).status_code,400)
+
+    def test_draft_summary_is_owned_and_reopened_work_is_not_reported_complete(self):
+        self.next();self.next()
+        w=work(self.activity['id'],self.activity['lesson']);self.save(w)
+        a=self.client.post(self.url+'validate/',{'revision':1},format='json').json()['activity']
+        self.assertEqual(self.client.get(self.base).json()['drafts'][0]['stage'],'complete')
+        w['revision']=2;w['tokens'][0]['text']='136'
+        self.assertEqual(self.client.put(self.url,{'version':a['version'],'work':w},format='json').status_code,200)
+        self.assertEqual(self.client.get(self.base).json()['drafts'][0]['stage'],'workspace')
+        self.assertEqual(PupilEvent.objects.filter(body__action='validation').count(),1)
+        stranger=self.parent("other.writer@example.org")
+        self.assertEqual(stranger.get(self.base).status_code,404)
 
     def test_fraction_topic_reuses_identity_and_persists_separately(self):
         r=self.client.post(self.base,{'topic':'fraction'},format='json');self.assertEqual(r.status_code,201)

@@ -56,7 +56,18 @@ def lesson(topic, params):
                 'layout': {'id': 'fraction-working@1', 'version': 1, 'width': 720, 'height': 500, 'regions': [{'id': 'answer', 'label': 'Equivalent fraction', 'role': 'expression', 'order': 0, 'x': 40, 'y': 80, 'width': 640, 'height': 350}]},
                 'explanation': 'Multiply or divide the numerator and denominator by the same nonzero number. The amount stays the same, though the pieces change size.',
                 'example': {'statement': '1/3 = 2/6', 'steps': ['Multiply top and bottom by 2.', 'Two sixth-sized pieces cover the same amount as one third-sized piece.'], 'answer': '2/6'}}
-    raise ValidationError({'topic': 'Choose division or fraction.'})
+    if topic == 'multiplication':
+        from .learning_families import generated
+        a, b = integer(params.get('groups', 4), 1, 12), integer(params.get('size', 6), 1, 12)
+        q = generated(f'gen:mul:{a},{b}')
+        return {'version':'writing-lessons@1', 'topic':topic, 'parameters':{'groups':a, 'size':b},
+                'problem':{'id':f'multiplication:{a}:{b}', 'statement':f'{a} groups of {b}: {a} × {b}'},
+                'competency':q['competency'], 'review':'provisional',
+                'layout':{'id':'equal-groups@1','version':1,'width':720,'height':450,'regions':[{'id':'answer','label':'Total objects','role':'number','order':0,'x':200,'y':100,'width':480,'height':180}]},
+                'explanation':f'Multiplication counts equal groups. Each of the {a} groups has {b} objects. Count one group at a time, adding the same number each time.',
+                'example':{'statement':'3 groups of 5', 'steps':['One group has 5 objects. Two groups have 5 + 5 = 10.', 'Three groups have 10 + 5 = 15. So 3 × 5 = 15.'], 'answer':'15 objects'}}
+    raise ValidationError({'topic': 'Choose division, fraction or multiplication.'})
+
 
 
 def checked_work(w, draft, spec):
@@ -148,6 +159,12 @@ def check(spec, w):
                 if bad: return bad
         if len(v.get('quotient', '')) != len(cs):
             return {'outcome': 'incorrect', 'region': 'quotient', 'operation': 'quotient placement', 'partial': cs[0]['partial'], 'message': 'Check the number of quotient places.', 'observations': obs}
+    elif spec['topic'] == 'multiplication':
+        from .learning_families import generated
+        a,b=spec['parameters']['groups'],spec['parameters']['size']
+        q=generated(f'gen:mul:{a},{b}')
+        bad=inspect('answer', int(q['answer']), 'equal groups', a*b)
+        if bad:return bad
     else:
         raw = v.get('answer', '')
         if not raw: return {'outcome': 'incomplete', 'region': 'answer', 'message': 'Enter an equivalent fraction.', 'observations': []}
@@ -162,6 +179,9 @@ def check(spec, w):
 
 
 def probes(spec, error):
+    if spec['topic'] == 'multiplication':
+        a,b=spec['parameters']['groups'],spec['parameters']['size']
+        return [{'id':'one-group','prompt':f'One group has {b} objects. How many objects in one group?', 'expected':b,'hypothesis':'group size'}, {'id':'two-groups','prompt':f'How many objects in two groups of {b}?','expected':2*b,'hypothesis':'equal grouping'}]
     if spec['topic'] == 'fraction':
         n,d=spec['parameters']['numerator'],spec['parameters']['denominator']
         return [{'id':'scale-top','prompt':f'If the numerator {n} doubles, what does it become?','expected':2*n,'hypothesis':'numerator scaling'},{'id':'scale-bottom','prompt':f'To keep {n}/{d} unchanged when the numerator doubles, what must denominator {d} become?','expected':2*d,'hypothesis':'same factor for both parts'}]
@@ -174,7 +194,11 @@ def probes(spec, error):
 def teaching(spec, error, answers):
     ps = probes(spec, error)
     possible = [p['hypothesis'] for p in ps if answers.get(p['id']) != str(p['expected'])]
-    if spec['topic'] == 'fraction':
+    if spec['topic'] == 'multiplication':
+        a,b=spec['parameters']['groups'],spec['parameters']['size']
+        explanation=f'Count {a} equal groups of {b}. Add {" + ".join([str(b)]*a)} = {a*b}. The number of groups and the number in each group are different roles.'
+        visual={'groups':a,'size':b,'total':a*b}
+    elif spec['topic'] == 'fraction':
         n,d=spec['parameters']['numerator'],spec['parameters']['denominator']
         explanation = f'Use the same factor on top and bottom. Doubling {n}/{d} makes {2*n}/{2*d}: twice as many pieces, each half the size. Compare the amounts, not just one number.'
         visual = {'groups': 2, 'size': 2, 'total': 4}

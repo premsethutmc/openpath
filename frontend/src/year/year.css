@@ -150,3 +150,24 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 [data-content="partial"] b { color: var(--warn, #8a4b00); }
 .actions[role="radiogroup"] { flex-wrap: wrap; }
 .actions[role="radiogroup"] button { max-width: 100%; white-space: normal; }
+
+/* Writing is an input method within the same lesson and visual language. */
+.writing-host { background:transparent; color:var(--ink); padding:0; max-width:100%; font:inherit; }
+.writing-host h1 {font-size:clamp(1.5rem,4vw,2rem)}
+.writing-host fieldset {border:0;padding:0;margin:0;min-width:0}
+.writing-host .math-workspace {border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.writing-host button {border-color:var(--line);color:var(--brand);font-weight:700}
+.writing-host button[aria-pressed=true] {background:var(--brand);color:white}
+.writing-host .step-feedback {background:var(--bad-soft);color:var(--ink);padding:8px;border-left:3px solid var(--bad)}
+.writing-option {margin:12px 0}
+.fraction-strip {display:flex;max-width:350px;margin:8px 0}
+.object-group {display:inline-block;border:2px solid var(--brand);border-radius:12px;padding:12px;margin:6px;color:var(--brand)}
+.writing-host .writing-paper {min-height:300px;max-height:650px}
+@media(min-width:700px){.writing-host .writing-paper{min-height:400px}}
+
+.writing-host .practice-checked {background:var(--good-soft);border-color:var(--good)}
+
+.writing-host .writing-paper {scroll-margin-top:80px}
+
+/* A moving page changes paper coordinates under a pen. Keep writing navigation immediate. */
+html:has(.writing-lesson) {scroll-behavior:auto}

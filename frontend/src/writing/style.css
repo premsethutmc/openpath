@@ -1,39 +1,39 @@
-:root {
+.writing-host {
   font-family: system-ui, sans-serif;
   color: #29233e;
   background: #faf8ff;
   font-size: 16px;
 }
-* {
+.writing-host * {
   box-sizing: border-box;
 }
-body {
+.writing-host {
   margin: 0;
 }
-main {
+.writing-host {
   max-width: 900px;
   margin: auto;
   padding: 16px;
 }
-h1 {
+.writing-host h1 {
   font-size: clamp(1.7rem, 5vw, 2.4rem);
 }
-h2 {
+.writing-host h2 {
   font-size: 1.5rem;
 }
-p {
+.writing-host p {
   line-height: 1.5;
 }
-.eyebrow {
+.writing-host .eyebrow {
   color: #5c41b4;
   font-weight: 700;
 }
-button,
-input,
-select {
+.writing-host button,
+.writing-host input,
+.writing-host select {
   font: inherit;
 }
-button {
+.writing-host button {
   min-height: 44px;
   border: 1px solid #a89acb;
   border-radius: 10px;
@@ -43,33 +43,33 @@ button {
   cursor: pointer;
   overflow-wrap: anywhere;
 }
-button:hover {
+.writing-host button:hover {
   background: #ede6ff;
 }
-button:disabled {
+.writing-host button:disabled {
   opacity: 0.55;
   cursor: default;
 }
-button[aria-pressed="true"] {
+.writing-host button[aria-pressed="true"] {
   background: #6745c2;
   color: #fff;
 }
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-summary:focus-visible {
+.writing-host button:focus-visible,
+.writing-host input:focus-visible,
+.writing-host select:focus-visible,
+.writing-host summary:focus-visible {
   outline: 3px solid #804e00;
   outline-offset: 3px;
 }
-label {
+.writing-host label {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   align-items: center;
   margin: 10px 0;
 }
-input:not([type="checkbox"]),
-select {
+.writing-host input:not([type="checkbox"]),
+.writing-host select {
   padding: 10px;
   max-width: 100%;
   min-width: 0;
@@ -77,35 +77,35 @@ select {
   border: 1px solid #ada4bd;
   border-radius: 8px;
 }
-form input:not([type="checkbox"]) {
+.writing-host form input:not([type="checkbox"]) {
   width: 100%;
 }
-details,
-.math-workspace {
+.writing-host details,
+.writing-host .math-workspace {
   border: 1px solid #d7cfe5;
   border-radius: 14px;
   padding: 12px;
   margin: 12px 0;
   background: white;
 }
-summary {
+.writing-host summary {
   min-height: 44px;
   padding: 10px;
   cursor: pointer;
 }
-.writing-tools,
-.writing-settings,
-.draft-controls {
+.writing-host .writing-tools,
+.writing-host .writing-settings,
+.writing-host .draft-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   margin-bottom: 12px;
 }
-.writing-settings label {
+.writing-host .writing-settings label {
   flex: 1 1 180px;
 }
-.writing-paper {
+.writing-host .writing-paper {
   display: block;
   width: 100%;
   background: white;
@@ -114,73 +114,73 @@ summary {
   user-select: none;
   overflow: hidden;
 }
-.input-editor {
+.writing-host .input-editor {
   background: #e7f6ef;
   border-radius: 12px;
   padding: 12px;
   margin-top: 16px;
 }
-.math-keypad {
+.writing-host .math-keypad {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
   margin-bottom: 12px;
 }
-.input-editor form > button {
+.writing-host .input-editor form > button {
   margin: 5px;
 }
-.small {
+.writing-host .small {
   font-size: 0.875rem;
 }
-.working-row {
+.writing-host .working-row {
   border-bottom: 1px solid #e5dfed;
   padding: 8px 0;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
-.working-row strong {
+.writing-host .working-row strong {
   width: 100%;
 }
-.uncertain {
+.writing-host .uncertain {
   background: #fff0cf;
   border: 2px solid #9a5800;
 }
-.interpreted {
+.writing-host .interpreted {
   background: #f2eefe;
 }
-pre {
+.writing-host pre {
   max-height: 400px;
   overflow: auto;
   font-size: 0.8rem;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-[role="alert"] {
+.writing-host [role="alert"] {
   background: #fff0de;
   border-left: 4px solid #ac5600;
   padding: 12px;
 }
-button + button {
+.writing-host button + button {
   margin-left: 4px;
 }
 @media (max-width: 480px) {
-  main {
+  .writing-host {
     padding: 8px;
   }
-  .math-workspace {
+  .writing-host .math-workspace {
     padding: 8px;
   }
-  .writing-tools button {
+  .writing-host .writing-tools button {
     flex: 1 1 26%;
   }
-  .draft-controls > * {
+  .writing-host .draft-controls > * {
     max-width: 100%;
   }
-  details {
+  .writing-host details {
     padding: 8px;
   }
-  .writing-settings {
+  .writing-host .writing-settings {
     gap: 4px;
   }
 }

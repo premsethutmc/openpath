@@ -457,7 +457,7 @@ export function App() {
         </p>
       </header>
       {tab === "home" && (
-        <Home
+        <>{mode === "account" && !learner.content.gate && <section className="page"><a className="secondary" href={`/year/?learner=${encodeURIComponent(learner.profileId)}`}>My Learning Year</a></section>}<Home
           learner={learner}
           onStart={start}
           onResume={() => {
@@ -475,7 +475,7 @@ export function App() {
           onBee={() => setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" })}
           onMyWords={() => setInMyWords(true)}
           onMyBooks={() => setInMyBooks(true)}
-        />
+        /></>
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}
       {tab === "progress" && <ProgressView learner={learner} />}

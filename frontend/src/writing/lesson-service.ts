@@ -63,6 +63,7 @@ export interface LessonActivity {
     };
     lastResult?: { outcome: string };
     helpSeen?: boolean;
+    lastCheckedRevision?: number;
   };
   probe?: { id: string; prompt: string } | null;
   receipts: WritingReceipt[];
@@ -71,11 +72,14 @@ export interface LessonActivity {
 export class WritingLessonRepo {
   private queue: Promise<unknown> = Promise.resolve();
   private version = 0;
-  constructor(
-    readonly api: Api,
-    readonly pupil: string,
-    readonly id: string,
-  ) {}
+  readonly api: Api;
+  readonly pupil: string;
+  readonly id: string;
+  constructor(api: Api, pupil: string, id: string) {
+    this.api = api;
+    this.pupil = pupil;
+    this.id = id;
+  }
   static async open(
     api: Api,
     pupil: string,
@@ -106,14 +110,18 @@ export class WritingLessonRepo {
     this.queue = p.catch(() => undefined);
     return p;
   }
+  flush() {
+    return this.queue;
+  }
   save(work: Work) {
     return this.order(async () => {
-      const result = await this.api.request<{ version: number }>(
+      const result = await this.api.request<{ version: number; stage: string }>(
         "PUT",
         `/pupils/${this.pupil}/writing/${this.id}/`,
         { version: this.version, work },
       );
       this.version = result.version;
+      return result;
     });
   }
   action(action: string, extra: Record<string, unknown> = {}) {

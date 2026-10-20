@@ -1,3 +1,5 @@
+> **Current student integration:** [My Learning Year lessons, run instructions and verification](LEARNING_YEAR.md). The details below describe the retained v2 workspace/backend foundation; `/writing.html` is its legacy host, not the normal curriculum route.
+
 # Connected mathematical input: integration and boundaries
 
 ## Reused and newly supplied capabilities

@@ -58,3 +58,5 @@ await cp(
   `${root}/dist-english/recognition`,
   { recursive: true },
 );
+
+execFileSync(process.execPath, [`${root}/scripts/build-year.mjs`], {cwd:root,stdio:"inherit"});

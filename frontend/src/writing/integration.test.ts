@@ -127,3 +127,35 @@ test("existing fractions repository retains total stream sequence but filters ne
     ["old"],
   );
 });
+
+// The year profile keeps its own evidence policy; writing practice cannot manufacture a verified tile.
+import { learnerState, make } from "../../../packages/learning/src/session";
+import { sampleFor } from "../../../packages/learning/src/curricula";
+import { writingLessons } from "./catalog";
+import { graph } from "../../../packages/learning/src/graph";
+test("normal year replay preserves historical records and ignores provisional writing for mastery", () => {
+  const ctx = {
+    learnerId: "existing-child",
+    sessionId: "previous",
+    at: "2026-10-20T00:00:00Z",
+  };
+  const release = sampleFor(4)!;
+  const old = [make.enrol(ctx, 4, "2026-27", release)];
+  const before = JSON.stringify(old);
+  const baseline = learnerState(ctx.learnerId, old, Date.parse(ctx.at));
+  const combined = learnerState(
+    ctx.learnerId,
+    [...old, receipt("unhelped"), receipt("helped", true)],
+    Date.parse(ctx.at),
+  );
+  assert.equal(JSON.stringify(old), before);
+  assert.deepEqual(combined.summary, baseline.summary);
+  assert.deepEqual(combined.records, baseline.records);
+  for (const lesson of writingLessons) {
+    assert.equal(graph.get(lesson.competency).id, lesson.competency);
+    assert.equal(
+      combined.evidence(lesson.competency).status,
+      baseline.evidence(lesson.competency).status,
+    );
+  }
+});

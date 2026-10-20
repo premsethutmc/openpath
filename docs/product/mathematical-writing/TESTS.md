@@ -1,3 +1,5 @@
+> **Current student integration:** [My Learning Year lessons, run instructions and verification](LEARNING_YEAR.md). The details below describe the retained v2 workspace/backend foundation; `/writing.html` is its legacy host, not the normal curriculum route.
+
 # Executed verification — connected v2, 2026-10-20
 
 All learner records were synthetic. The browser tests used a real Django service

@@ -137,10 +137,12 @@ export function restore(text: string): Work {
 }
 /** Host may replace with an authenticated draft repository. No new learner or evidence store is created here. */
 export class BrowserWorkStore implements WorkStore {
-  constructor(
-    private storage: Storage,
-    private prefix = "openpath:math-input@1:",
-  ) {}
+  private storage: Storage;
+  private prefix: string;
+  constructor(storage: Storage, prefix = "openpath:math-input@1:") {
+    this.storage = storage;
+    this.prefix = prefix;
+  }
   async load(id: string) {
     const s = this.storage.getItem(this.prefix + id);
     const w = s === null ? null : restore(s);

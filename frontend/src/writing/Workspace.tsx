@@ -28,6 +28,8 @@ export interface WorkspaceProps {
   confidenceThreshold?: number;
   onConfirmedInput?: (packet: InputPacket) => void;
   allowExtraRegions?: boolean;
+  studentMode?: boolean;
+  externalFeedback?: ValidationFeedback;
 }
 /** Embeddable, controlled input component. Host owns identity, storage and evidence policy. */
 export function WritingWorkspace({
@@ -38,6 +40,8 @@ export function WritingWorkspace({
   confidenceThreshold = 0.9,
   onConfirmedInput,
   allowExtraRegions = true,
+  studentMode = false,
+  externalFeedback,
 }: WorkspaceProps) {
   const [tool, setTool] = useState<Tool>("ink"),
     [zoom, setZoom] = useState(1),
@@ -147,7 +151,7 @@ export function WritingWorkspace({
   const currentFeedback =
     feedback?.revision === work.revision && feedback.workId === work.id
       ? feedback
-      : null;
+      : externalFeedback;
   return (
     <section
       className="math-workspace"
@@ -180,52 +184,55 @@ export function WritingWorkspace({
         </button>
         <button onClick={() => act(() => clear(work))}>Clear paper</button>
       </div>
-      <div className="writing-settings">
-        <label>
-          Paper
-          <select
-            aria-label="Paper"
-            value={work.paper}
-            onChange={(e) =>
-              onChange({
-                ...work,
-                paper: e.target.value as Work["paper"],
-                revision: work.revision + 1,
-                updatedAt: new Date().toISOString(),
-              })
-            }
+      <details open={!studentMode}>
+        <summary>Paper, zoom and pen settings</summary>
+        <div className="writing-settings">
+          <label>
+            Paper
+            <select
+              aria-label="Paper"
+              value={work.paper}
+              onChange={(e) =>
+                onChange({
+                  ...work,
+                  paper: e.target.value as Work["paper"],
+                  revision: work.revision + 1,
+                  updatedAt: new Date().toISOString(),
+                })
+              }
+            >
+              <option value="blank">Blank</option>
+              <option value="grid">Square grid</option>
+              <option value="ruled">Ruled</option>
+            </select>
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={penOnly}
+              onChange={(e) => setPenOnly(e.target.checked)}
+            />
+            Pen only: ignore finger/palm touches
+          </label>
+          <button
+            onClick={() => setZoom((z) => Math.max(1, z - 0.25))}
+            aria-label="Zoom out"
           >
-            <option value="blank">Blank</option>
-            <option value="grid">Square grid</option>
-            <option value="ruled">Ruled</option>
-          </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={penOnly}
-            onChange={(e) => setPenOnly(e.target.checked)}
-          />
-          Pen only: ignore finger/palm touches
-        </label>
-        <button
-          onClick={() => setZoom((z) => Math.max(1, z - 0.25))}
-          aria-label="Zoom out"
-        >
-          −
-        </button>
-        <output aria-label="Zoom">{Math.round(zoom * 100)}%</output>
-        <button
-          onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
-          aria-label="Zoom in"
-        >
-          +
-        </button>
-      </div>
-      <p className="small">
-        Use two fingers to zoom, or choose Pan after zooming. Palm rejection is
-        best-effort; Pen only is the reliable touch lock.
-      </p>
+            −
+          </button>
+          <output aria-label="Zoom">{Math.round(zoom * 100)}%</output>
+          <button
+            onClick={() => setZoom((z) => Math.min(4, z + 0.25))}
+            aria-label="Zoom in"
+          >
+            +
+          </button>
+        </div>
+        <p className="small">
+          Use two fingers to zoom, or choose Pan after zooming. Palm rejection
+          is best-effort; Pen only is the reliable touch lock.
+        </p>
+      </details>
       <Surface
         key={work.id}
         work={work}
@@ -248,11 +255,20 @@ export function WritingWorkspace({
         Interpret handwriting
       </button>
       <p className="small">
-        Recognizer: {recognizer.id}.{" "}
+        {!studentMode && <>Recognizer: {recognizer.id}. </>}
         {recognizer.available()
           ? "Candidate confidence is not mathematical correctness."
           : "Unavailable — the typed path below works for the entire exercise."}
       </p>
+      <button
+        type="button"
+        onClick={() => {
+          input.current?.scrollIntoView({ block: "center" });
+          input.current?.focus();
+        }}
+      >
+        Type instead
+      </button>
       <section className="input-editor" aria-label="Typed mathematical input">
         <h3>{token ? "Clarify or edit this symbol" : "Type a step"}</h3>
         <label>
@@ -303,51 +319,56 @@ export function WritingWorkspace({
               spellCheck={false}
             />
           </label>
-          <div
-            className="math-keypad"
-            role="group"
-            aria-label="Mathematical keyboard"
-          >
-            {[
-              "7",
-              "8",
-              "9",
-              "÷",
-              "4",
-              "5",
-              "6",
-              "×",
-              "1",
-              "2",
-              "3",
-              "−",
-              "0",
-              ".",
-              "/",
-              "+",
-              "(",
-              ")",
-              "=",
-              "x",
-              "²",
-              "√",
-              "π",
-              "⌫",
-            ].map((k) => (
-              <button
-                type="button"
-                key={k}
-                aria-label={k === "⌫" ? "Delete last character" : `Insert ${k}`}
-                onClick={() => {
-                  setKeypad(true);
-                  setText((s) => (k === "⌫" ? s.slice(0, -1) : s + k));
-                  input.current?.focus();
-                }}
-              >
-                {k}
-              </button>
-            ))}
-          </div>
+          <details open={!studentMode}>
+            <summary>Number and maths keyboard</summary>
+            <div
+              className="math-keypad"
+              role="group"
+              aria-label="Mathematical keyboard"
+            >
+              {[
+                "7",
+                "8",
+                "9",
+                "÷",
+                "4",
+                "5",
+                "6",
+                "×",
+                "1",
+                "2",
+                "3",
+                "−",
+                "0",
+                ".",
+                "/",
+                "+",
+                "(",
+                ")",
+                "=",
+                "x",
+                "²",
+                "√",
+                "π",
+                "⌫",
+              ].map((k) => (
+                <button
+                  type="button"
+                  key={k}
+                  aria-label={
+                    k === "⌫" ? "Delete last character" : `Insert ${k}`
+                  }
+                  onClick={() => {
+                    setKeypad(true);
+                    setText((s) => (k === "⌫" ? s.slice(0, -1) : s + k));
+                    input.current?.focus();
+                  }}
+                >
+                  {k}
+                </button>
+              ))}
+            </div>
+          </details>
           <button type="submit" disabled={!text.trim()}>
             {token ? "Confirm this symbol" : "Add typed step"}
           </button>
@@ -365,7 +386,11 @@ export function WritingWorkspace({
         </form>
       </section>
       <section aria-label="Interpreted working">
-        <h3>Your interpreted steps</h3>
+        <h3>
+          {studentMode
+            ? "Your steps · tap a number to change it"
+            : "Your interpreted steps"}
+        </h3>
         <p>
           Original ink stays on the page. You can edit any interpretation,
           including confident ones.
@@ -373,9 +398,26 @@ export function WritingWorkspace({
         {!work.tokens.length && <p>No interpreted or typed steps yet.</p>}
         {[...work.layout.regions]
           .sort((a, b) => a.order - b.order)
+          .filter(
+            (r) =>
+              !studentMode ||
+              work.tokens.some((t) => t.regionId === r.id) ||
+              currentFeedback?.messages.some((m) => m.regionId === r.id),
+          )
           .map((r) => (
             <div key={r.id} className="working-row">
               <strong>{r.label}</strong>
+              {currentFeedback?.messages
+                .filter((m) => m.regionId === r.id)
+                .map((m, i) => (
+                  <p
+                    className={`step-feedback ${m.text.includes("Practice complete") ? "practice-checked" : ""}`}
+                    role="status"
+                    key={i}
+                  >
+                    {m.text}
+                  </p>
+                ))}
               {work.tokens
                 .filter((t) => t.regionId === r.id)
                 .map((t) => (
@@ -440,9 +482,9 @@ export function WritingWorkspace({
         disabled={busy || !!outstanding.length || !work.tokens.length}
         onClick={send}
       >
-        Send confirmed steps to validator
+        {studentMode ? "Check my working" : "Send confirmed steps to validator"}
       </button>
-      {currentFeedback && (
+      {currentFeedback && !studentMode && (
         <section aria-label="Validator feedback">
           <h3>
             {currentFeedback.status === "received"
