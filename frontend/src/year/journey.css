@@ -1,0 +1,410 @@
+.learning-journey {
+  --paper: #fbfaf6;
+  --ink: #1d2130;
+  --accent: #6954c8;
+  box-sizing: border-box;
+  max-width: 700px;
+  min-height: 100dvh;
+  margin: auto;
+  padding: 12px 18px 32px;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    16px/1.55 system-ui,
+    sans-serif;
+}
+.learning-journey * {
+  box-sizing: border-box;
+}
+.journey-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e6e2db;
+  padding: 8px 0 16px;
+}
+.journey-header h1 {
+  font-size: 21px;
+  line-height: 1.25;
+  margin: 0;
+}
+.journey-header small {
+  font-size: 11px;
+  color: #676474;
+}
+.learning-journey button {
+  min-height: 44px;
+  cursor: pointer;
+  border: 1px solid #ded9e8;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 12px;
+  font: inherit;
+}
+.journey-header > button {
+  border: 0;
+  padding: 4px;
+  font-size: 24px;
+}
+.save-status {
+  font-size: 11px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.mode-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0;
+}
+.mode-tabs button {
+  flex: 1;
+  font-size: 14px;
+}
+.learning-journey button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: #f0ecff;
+  color: #5340aa;
+}
+.learning-journey .primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-size: 16px;
+  min-height: 46px;
+}
+.learning-journey h2 {
+  font-size: 20px;
+  margin: 20px 0 8px;
+}
+.learning-journey p {
+  margin: 8px 0 16px;
+}
+.coverage-note {
+  font-size: 12px;
+  color: #6d6878;
+  margin: 12px 0;
+}
+.coverage-note summary {
+  cursor: pointer;
+}
+.session-plan {
+  padding: 0 0 24px;
+  border-bottom: 1px solid #ded9d1;
+}
+.session-plan fieldset {
+  display: flex;
+  gap: 5px;
+  border: 0;
+  margin: 14px 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.session-plan legend {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.session-plan fieldset button {
+  font-size: 14px;
+  padding: 8px 10px;
+}
+.session-plan > button.primary {
+  width: 100%;
+}
+.session-plan ol {
+  padding-left: 24px;
+}
+.session-plan li {
+  margin: 12px 0;
+}
+.session-plan li small {
+  display: block;
+  color: #686372;
+}
+.topic-tile {
+  border-top: 1px solid #e6e2db;
+  padding: 14px 0;
+}
+.topic-tile > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+.topic-tile > summary:before {
+  content: "＋";
+  color: var(--accent);
+  margin-right: 8px;
+}
+.topic-tile[open] > summary:before {
+  content: "−";
+}
+.topic-tile summary small {
+  font-weight: 400;
+  display: block;
+  font-size: 12px;
+  color: #706b78;
+  margin-left: 24px;
+}
+.topic-tile .topic-tile {
+  margin-left: 10px;
+}
+.journey-skill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 14px 0 8px 12px;
+  border-top: 1px solid #e9e5df;
+}
+.journey-skill > div {
+  flex: 1;
+  min-width: 150px;
+}
+.journey-skill small {
+  display: block;
+  font-size: 12px;
+  color: #6c6677;
+}
+.journey-skill > .journey-skill {
+  width: 100%;
+}
+.learning-journey .qcard,
+.learning-journey .panel,
+.learning-journey .concept-sheet {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 12px 0;
+}
+.learning-journey .prompt,
+.learning-journey .formula {
+  font-family: "OpenPath Kalam", cursive;
+  font-size: 27px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: transparent;
+  overflow-wrap: anywhere;
+}
+.learning-journey .flow {
+  padding: 0;
+  gap: 2px;
+  font-size: 10px;
+}
+.learning-journey .flow li {
+  padding: 5px 3px;
+  min-width: 0;
+  flex: 1;
+}
+.learning-journey .year-meta,
+.learning-journey .why,
+.learning-journey .counted {
+  font-size: 12px;
+}
+.learning-journey input,
+.learning-journey textarea,
+.learning-journey select {
+  font: inherit;
+  border: 1px solid #bfb6d8;
+  background: #fffefa;
+  padding: 12px;
+  border-radius: 6px;
+  max-width: 100%;
+  width: 100%;
+}
+.learning-journey input:focus,
+.learning-journey textarea:focus {
+  outline: 2px solid #b29fe8;
+  outline-offset: 2px;
+}
+.learning-journey .feedback {
+  background: #f0f6ed;
+  border: 0;
+  padding: 14px;
+  border-radius: 8px;
+}
+.learning-journey .feedback.bad {
+  background: #fff0f0;
+}
+.learning-journey .sticky {
+  position: static;
+  background: transparent;
+  padding: 8px 0;
+}
+.learning-journey .quiet {
+  border: 0;
+  color: #6a5a9b;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.session-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 12px 0;
+  color: #706878;
+}
+.context-help {
+  font-size: 14px;
+  margin: 22px 0;
+}
+.context-help summary {
+  color: #6954c8;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.goal-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.exam-scopes {
+  border-bottom: 1px solid #e6e2db;
+  padding-bottom: 16px;
+}
+.learning-journey .actions {
+  flex-wrap: wrap;
+}
+.learning-journey .options {
+  display: grid;
+  gap: 8px;
+}
+.learning-journey .option {
+  text-align: left;
+}
+.learning-journey .option .letter {
+  margin-right: 10px;
+}
+.learning-journey .field {
+  display: grid;
+  gap: 8px;
+}
+.learning-journey .stack {
+  gap: 12px;
+}
+.learning-journey .working summary {
+  font-size: 14px;
+  min-height: 44px;
+  padding: 10px 0;
+}
+.learning-journey a {
+  color: #5742a9;
+}
+.learning-journey .small {
+  font-size: 12px;
+}
+.learning-journey h1,
+.learning-journey h2,
+.learning-journey h3 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 380px) {
+  .learning-journey {
+    padding: 10px 14px 24px;
+  }
+  .journey-header {
+    gap: 7px;
+  }
+  .journey-header h1 {
+    font-size: 19px;
+  }
+}
+body:has(.learning-journey) {
+  background: #fbfaf6;
+}
+.learning-journey .qcard input {
+  font-size: 22px;
+  font-weight: 400;
+  min-height: 50px;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.learning-journey .why {
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  color: #6d6878;
+}
+.learning-journey .flow li {
+  border-radius: 0;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid #e5e0d9;
+  box-shadow: none;
+  color: #827a88;
+}
+.learning-journey .flow li.here {
+  border-color: #6954c8;
+  background: none;
+  color: #5e47b6;
+}
+.learning-journey .counted {
+  font-weight: 400;
+}
+.learning-journey .working {
+  background: none;
+  padding: 0;
+  border: 0;
+}
+.learning-journey .field {
+  font-size: 13px;
+  font-weight: 400;
+}
+.learning-journey .chip {
+  font-size: 12px;
+  font-weight: 400;
+  border: 0;
+  background: #eee9f8;
+}
+.journey-skill details {
+  font-size: 12px;
+}
+.journey-skill details summary {
+  min-height: 36px;
+  padding-top: 6px;
+  cursor: pointer;
+  color: #6954c8;
+}
+.learning-journey .primary {
+  box-shadow: none;
+  background-image: none;
+}
+.learning-journey .prompt,
+.learning-journey .formula {
+  font-weight: 300;
+}
+.learning-journey .enter {
+  animation: none;
+}
+.learning-journey .qcard .prompt {
+  font-size: 27px;
+  font-weight: 300;
+}
+.learning-journey .flow li.past {
+  background: transparent;
+  color: #7c7188;
+}
+.journey-menu {
+  position: relative;
+}
+.journey-menu > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px;
+  min-width: 28px;
+  font-size: 22px;
+}
+.journey-menu > button {
+  position: absolute;
+  right: 0;
+  top: 44px;
+  width: 180px;
+  background: #fbfaf6;
+  z-index: 3;
+  font-size: 14px;
+}
+.journey-header > div {
+  min-width: 0;
+}

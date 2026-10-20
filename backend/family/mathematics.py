@@ -32,6 +32,9 @@ def lesson():
 
 
 def checked_activity(event, pupil):
+    if event.get('kind') == 'math_session':
+        from .learning_journey import checked_session
+        return checked_session(event, pupil)
     if event.get('kind') == 'learning_record':
         from .learning import checked_learning
         return checked_learning(event, pupil)

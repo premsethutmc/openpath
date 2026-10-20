@@ -3,7 +3,7 @@
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
@@ -16,6 +16,13 @@ import type { LearnerRecords, LearningActivity } from "../../../packages/learnin
 export const LETTERS = ["A", "B", "C", "D"];
 
 export interface Ctx {
+  /** Optional persistence/timing hooks supplied by the authenticated journey shell. */
+  workspace?: {
+    draft: (qid: string) => { value: string; working: string; hint: boolean } | undefined;
+    saveDraft: (qid: string, draft: { value: string; working: string; hint: boolean }) => void;
+    activity: (solving: boolean) => void;
+    help: () => void;
+  };
   records: LearnerRecords;
   evidence: (id: string) => SkillEvidence;
   now: number;
@@ -84,7 +91,7 @@ function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => vo
   const q = question(fb.qid);
   const says = fb.right ? null : misconceptionOf(q, fb.response)?.says;
   const fam = fb.working?.length ? familyOf(fb.qid) : null;
-  const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
+  const check = fam && canCheckWorking(problemOf(fam)!) ? checkWorking(problemOf(fam)!, fb.working!) : null;
   return (
     <div className="stack enter">
       <div className={`feedback ${fb.right ? "good" : "bad"}`} role="status">
@@ -108,11 +115,13 @@ function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => vo
 /** One question: answer, see feedback. */
 export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = false, heading }: { qid: string; activity: LearningActivity; ctx: Ctx; onAnswered?: (fb: Fb) => void; context?: string; hintAllowed?: boolean; heading?: string }) {
   const q = question(qid);
-  const [value, setValue] = useState("");
-  const [hint, setHint] = useState(false);
-  const [working, setWorking] = useState("");
+  const [value, setValue] = useState(() => ctx.workspace?.draft(qid)?.value ?? "");
+  const [hint, setHint] = useState(() => ctx.workspace?.draft(qid)?.hint ?? false);
+  const [working, setWorking] = useState(() => ctx.workspace?.draft(qid)?.working ?? "");
+  useEffect(() => { ctx.workspace?.activity(true); return () => ctx.workspace?.activity(false); }, [qid]);
+  useEffect(() => { ctx.workspace?.saveDraft(qid, { value, working, hint }); }, [qid, value, working, hint]);
   const fam = familyOf(qid);
-  const workable = !!fam && canCheckWorking(problemOf(fam)!);
+  const workable = !!ctx.workspace || (!!fam && canCheckWorking(problemOf(fam)!));
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
@@ -128,7 +137,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       )}
       {hint && q.hint && <p className="hint">{q.hint}</p>}
       <div className="actions">
-        {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
+        {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => { setHint(true); ctx.workspace?.help(); }}>Show a hint</button>}
         <button
           className="primary"
           disabled={!value.trim() || ctx.saving}
@@ -176,8 +185,9 @@ function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
   );
 }
 
-function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean }) {
-  const [i, setI] = useState(0);
+function Lesson({ s, onDone, saving, workspace, draftKey }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; workspace?: Ctx["workspace"]; draftKey?: string }) {
+  const [i, setI] = useState(() => Math.max(0, Math.min(s.screens.length - 1, Number(draftKey && workspace?.draft(draftKey)?.value) || 0)));
+  useEffect(() => { if (draftKey) workspace?.saveDraft(draftKey, { value: String(i), working: "", hint: false }); }, [i, draftKey]);
   const sc = s.screens[i];
   const last = i === s.screens.length - 1;
   return (
@@ -199,7 +209,7 @@ function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens:
 }
 
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null }) {
+export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, compact = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; compact?: boolean }) {
   const [own, setOwn] = useState<Fb | null>(null);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
@@ -217,7 +227,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const head = (
     <>
       {!embedded && <p className="eyebrow">Skill</p>}
-      {embedded ? <h2>{name}</h2> : <h1>{name}</h1>}
+      {!compact && (embedded ? <h2>{name}</h2> : <h1>{name}</h1>)}
       <div className="year-meta"><span className={`chip status-${statusClass(ev.status)}`}>{STATUS_WORD[ev.status]}</span></div>
       {stepper}
     </>
@@ -229,7 +239,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
-        <Lesson s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
+        <Lesson key={ms.strategy.id} s={ms.strategy} saving={ctx.saving} workspace={ctx.workspace} draftKey={`screen:${competency}:${ms.strategy.id}`} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
   if (ms.question)

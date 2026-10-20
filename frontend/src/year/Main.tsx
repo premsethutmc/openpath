@@ -69,7 +69,10 @@ import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
 import "../mathematics/chapter/chapter.css";
 import "../writing/style.css";
+import { GradeJourney } from "./Journey";
+import type { JourneyRecord } from "../../../packages/learning/src/journey";
 import "./year.css";
+import "./journey.css";
 import { WritingLesson } from "../writing/Lesson";
 import { writingLessons, writingLessonFor } from "../writing/catalog";
 import type { WritingReceipt } from "../writing/lesson-service";
@@ -107,7 +110,7 @@ class Repo {
     this.count = r.count;
     return r.events;
   }
-  append(event: LearningRecord) {
+  append(event: LearningRecord | JourneyRecord) {
     const work = this.queue.then(async () => {
       const r = await api.request<{ count: number }>(
         "POST",
@@ -317,9 +320,10 @@ function App() {
     at: new Date().toISOString(),
   });
 
-  async function save(...records: LearningRecord[]) {
+  async function save(...records: (LearningRecord | JourneyRecord)[]) {
     if (!repo) return false;
-    setSaving(true);
+    const operational = records.every((r) => r.kind === "math_session");
+    if (!operational) setSaving(true);
     setError("");
     try {
       let next = events ?? [];
@@ -333,7 +337,7 @@ function App() {
       );
       return false;
     } finally {
-      setSaving(false);
+      if (!operational) setSaving(false);
     }
   }
 
@@ -506,6 +510,16 @@ function App() {
         </button>
       </Shell>
     );
+
+  if (st.enrolment.grade === 7 && view.name === "year") return (
+    <>
+      {error && <p role="alert">{error}</p>}
+      <GradeJourney key={learner}
+        release={st.release} ctx={ctx} events={events ?? []} learner={learner}
+        save={(r) => save(r)} onSettings={() => setView({ name: "setup" })}
+      />
+    </>
+  );
 
   const release = st.release;
   const grade = st.enrolment.grade;
