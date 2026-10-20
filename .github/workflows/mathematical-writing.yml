@@ -1,13 +1,13 @@
-name: Mathematical writing workspace
+name: Mathematical writing integration
 on:
   pull_request:
-    paths: ['frontend/src/writing/**', 'frontend/e2e/writing*.test.mjs', 'frontend/scripts/build-writing.mjs', '.github/workflows/mathematical-writing.yml']
+    paths: ['frontend/src/writing/**', 'frontend/assets/recognition/**', 'frontend/e2e/writing*.test.mjs', 'frontend/package*.json', 'frontend/scripts/build-writing.mjs', 'backend/family/**', '.github/workflows/mathematical-writing.yml']
   push:
-    branches: ['feat/mathematical-writing-workspace-v1']
+    branches: ['feat/mathematical-writing-workspace-v1', 'feat/mathematical-writing-integration-v2']
 permissions:
   contents: read
 jobs:
-  input-contract-and-browser:
+  real-input-and-django:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,20 +22,29 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r ../backend/requirements.txt
       - run: npm ci
       - run: npm run typecheck
-      - run: node --import tsx --test src/writing/workspace.test.ts
-      - run: node scripts/build-writing.mjs
+      - run: node --import tsx --test src/writing/*.test.ts
+      - run: python ../backend/manage.py test family.test_writing
+      - run: python ../backend/manage.py makemigrations --check --dry-run
+      - run: node scripts/build-mathematics-journey.mjs
       - run: npx playwright install --with-deps chromium
-      - name: Browser and mounted component tests
+      - name: Actual backend, real local model and workspace regressions
         run: |
-          DIST=dist-writing PORT=4670 node scripts/preview-english.mjs > /tmp/writing-preview.log 2>&1 &
+          python ../backend/manage.py migrate --noinput
+          python ../backend/manage.py runserver 127.0.0.1:8674 --noreload --nothreading > /tmp/writing-api.log 2>&1 &
+          api_pid=$!
+          DIST=dist-english PORT=4674 API_TARGET=http://127.0.0.1:8674 node scripts/preview-english.mjs > /tmp/writing-preview.log 2>&1 &
           preview_pid=$!
-          trap 'kill "$preview_pid"' EXIT
+          trap 'kill "$api_pid" "$preview_pid"' EXIT
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4670/ > /dev/null; then break; fi
+            if curl --fail --silent http://127.0.0.1:4674/api/account/ > /dev/null; then break; fi
             sleep 1
           done
-          curl --fail --silent http://127.0.0.1:4670/ > /dev/null
-          node --test e2e/writing.test.mjs e2e/writing-components.test.mjs
-      # Validation only: no upload, publication, paid recognition or deployment.
+          curl --fail --silent http://127.0.0.1:4674/api/account/ > /dev/null
+          E2E_URL=http://127.0.0.1:4674 node --test e2e/writing-integration.test.mjs e2e/writing-recognition.test.mjs e2e/writing.test.mjs e2e/writing-components.test.mjs
+      # Tests only. No deployment, paid services or real learner database.

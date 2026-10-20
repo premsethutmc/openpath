@@ -9,3 +9,8 @@ export {
   blockers,
 } from "./model";
 export { BrowserWorkStore, unavailableRecognizer, restore } from "./adapters";
+
+export { LocalDigitRecognizer } from "./digit-recognizer";
+export { WritingLessonRepo } from "./lesson-service";
+export { writingEvidence } from "./evidence";
+export { regionExpression, evaluateWithExistingEngine } from "./engine-adapter";

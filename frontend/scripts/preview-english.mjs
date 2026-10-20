@@ -23,6 +23,8 @@ const api = process.env.API_TARGET ? new URL(process.env.API_TARGET) : null;
 const TYPES = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".mjs": "text/javascript; charset=utf-8",
+  ".wasm": "application/wasm",
   ".css": "text/css; charset=utf-8",
   ".map": "application/json",
   ".json": "application/json",

@@ -1,141 +1,123 @@
-# Integration contract — openpath-math-input@1
+# Connected mathematical input: integration and boundaries
 
-## Existing interfaces inspected
+## Reused and newly supplied capabilities
 
-- React 19, TypeScript, esbuild and Playwright are already installed and reused.
-- `frontend/src/mathematics/journey/service.ts` wraps the existing account/CSRF API,
-  canonical pupil identity and mathematics activity stream.
-- `packages/mathematics/src/canonical.ts` prepares provisional practice against the
-  existing English-core ledger, competency registration and verification policy.
-- `packages/mathematics/src/fractions-program.ts` defines current instructional
-  receipts. `backend/family/mathematics.py` restricts that endpoint to known
-  `math_activity` fields, stages, lesson version and owner.
-- Existing mathematics/English entry points and standalone build scripts establish
-  the additive build pattern. The writing demonstration reuses the preview server;
-  its new build has no imports from the learning engine or curriculum.
+Reused unchanged: the original SVG/Pointer Events workspace; `openpath-math-input@1`;
+OpenPath parent sessions/CSRF and canonical `Pupil`; the `PupilEvent` mathematics
+stream; mathematics competency registration; the native `Ledger`, provisional
+content gate and verification eligibility; the existing rational/polynomial
+question evaluator and Python `Fraction` already used by the mathematics service.
 
-**Do not POST a Work or InputPacket to the existing mathematics activity endpoint.**
-It is not a valid instructional receipt there. Do not broaden that endpoint or turn
-recognition scores into binary observations to accommodate this workspace.
+The baseline has no long-division step validator, handwriting draft API or reusable
+mathematics-specific diagnostic service. The essay diagnostic engine is coupled to
+English observations and policies; treating division as an essay diagnosis would
+be incorrect. New `family/writing_math.py` supplies the smallest topic adapter:
+integer division operations, exact fraction equivalence and deterministic targeted
+follow-ups. It keeps causes provisional and does not introduce another estimator,
+learner identity, permanent misconception profile or mastery definition.
 
-```mermaid
-flowchart LR
-    P[Pointer or keyboard] --> W[Writing workspace]
-    W <--> R[Optional recognition adapter]
-    W --> C[Resolved input packet]
-    C --> V[Host mathematical validator]
-    V --> F[Step feedback or input clarification]
-    F --> W
-    V --> D[Existing diagnostic and teaching engine]
-    D --> E[Existing evidence ledger and eligibility gate]
-```
+The activity state machine persists introduction → worked example → workspace →
+optional follow-ups/teaching → retry → completion. It is not a continuously
+regenerated lesson plan. The same stored writing is returned after teaching.
 
-The diagram shows responsibility boundaries, not an implemented backend integration.
-Only the first input and optional recognition layers are implemented here; the demo
-validator acknowledges receipt. The host owns all downstream decisions.
+## Actual Django API
 
-## Public frontend API
+All endpoints reuse `AccountBase`: existing HttpOnly session authentication, CSRF,
+parent ownership filtering, request limits and `Cache-Control: no-store`.
 
-Import from `frontend/src/writing/index.ts`. The controlled component accepts:
+| Endpoint below `/api/pupils/{existingPupilId}/` | Function |
+|---|---|
+| `POST writing/` | Open/resume by topic and bounded parameters. Returns server lesson/layout and its draft ID. |
+| `GET writing/{draftId}/` | Restore original work, stage, support context and practice receipts. |
+| `PUT writing/{draftId}/` | Save `{version, work}`; stale CAS versions return 409. Problem, layout, identity, ink and references are checked. |
+| `POST writing/{draftId}/action/` | Advance instruction, answer the current follow-up, return from teaching, or dispute a transcription. |
+| `POST writing/{draftId}/validate/` | Submit saved `revision`; the server reads authoritative persisted input, never trusts client `correct` flags or display serialization. |
 
-```tsx
-const [work, setWork] = useState(() =>
-  createWork(hostDraftId, hostProblem, hostLayout));
+`topic=division` parameters are `dividend` and positive `divisor`; `topic=fraction`
+uses `numerator` and `denominator`. The initial examples are 379 ÷ 3 and equivalence
+to 1/2. Limits bound operand size and input storage. Unsupported syntax and
+unresolved ink return **input clarification**, not a mathematical mistake.
+A repeated validation of the same immutable work revision returns the same receipt
+instead of appending another attempt. Progress survives page reload and reopening.
 
-<WritingWorkspace
-  work={work}
-  onChange={next => { setWork(next); hostSaveQueue.enqueue(next); }}
-  recognizer={hostRecognizer}       // optional; defaults to unavailable
-  validator={hostValidator}         // optional; defaults to local receipt-only mock
-  confidenceThreshold={0.90}
-  onConfirmedInput={packet => hostRecordInputSubmission(packet)}
-/>
-```
+Migration `family/0003_writing_draft.py` adds `WritingDraft`, a mutable activity/draft
+record belonging to the existing pupil. It is not a second learner model or evidence
+ledger. Parent export includes writing drafts; pupil/account deletion cascades to
+the drafts and their existing ledger events. No production migration was run.
 
-`hostDraftId` must be scoped to the **existing** learner, question/activity, school
-or exam journey and attempt. The component does not create identities or learn
-from answers. `onChange` supplies immutable work snapshots, including undo/redo;
-the host must serialize saves, show failures and authorize draft access. A host may
-restore `WorkStore.load` before mounting. Only `BrowserWorkStore` is delivered;
-no authenticated handwriting backend has been invented. Connect a secure existing
-draft facility or agree one with the mathematics/backend owner before server use.
+The browser `WritingLessonRepo` serializes writes before validation, uses CAS and
+surfaces failed saves. Work stays visible on failure. The server locks the same pupil
+row as the existing event endpoint when appending receipts, preserving one ordered
+subject stream. Production uses the repository's normal PostgreSQL configuration;
+local acceptance tests used a fresh synthetic SQLite database.
 
-`onConfirmedInput` means the input's recognition ambiguities have been resolved,
-**not** that mathematics is correct. It runs after a matching validator response,
-including a response requesting further clarification. It is not an evidence event.
-The host must check its validator result and existing provenance/eligibility policy
-before submitting anything to the ledger. Synthetic and provisional input does not
-become mastery evidence merely because it was typed, recognized or sent.
+## Validation and diagnostic teaching
 
-`packet(work)` independently enforces no uncertain tokens or unmapped active ink.
-The host must revalidate input and authorization server-side; browser confirmation
-is not an attestation of independent work, identity, content approval or correctness.
+The server derives division cycles from actual operands with integer arithmetic.
+At each active dividend place it checks the quotient digit, product, difference and
+next bring-down, then the final remainder. Quotient tokens are read horizontally,
+not sorted by slightly different ink heights. Numeric digit order establishes
+place value; this is not a handwriting-neatness test. Interior quotient zeroes,
+leading skipped places, zero dividends and dividends smaller than the divisor are
+tested. The first missing part is incomplete, not wrong. The first invalid entered
+operation is returned before inspecting later steps.
 
-## Record structure
+A wrong quotient digit for 7 ÷ 3 triggers separate equal-grouping, multiplication
+and quotient-selection probes. Teaching derives the group count, product, remainder
+and too-large next group from the operands. An incorrect fact can suggest support
+with multiplication; all probes right leaves a possible slip unresolved. These
+provisional checks do not establish a scientifically confirmed cause. Small equal
+groups can be drawn; larger groups use the numeric explanation instead of truncated
+or misleading dot pictures. Fraction teaching uses equal scaling of both parts.
 
-The complete TypeScript interfaces live in `contract.ts`.
+The transcription-dispute action returns directly to existing working without
+forcing those mathematical probes. Original validation receipts remain immutable;
+a linked `input-correction` receipt marks the transcription as disputed. The native
+projection excludes disputed interpretations. This changes no shared evidence rule.
 
-- `Work`: contract version, stable draft/problem IDs, revision and update time,
-  configurable paper/layout (regions, text guides and line rules), original strokes, erased IDs, interpreted tokens,
-  correction history, bounded undo and redo snapshots.
-- `Stroke`: stable ID, input method, original ordered points, start/time-origin,
-  pointer/contact metadata and initial region association. Each point has paper
-  `x,y`, event timestamp, pressure, tilt, twist and optional available pen angles.
-  Screen-coordinate scaling never changes saved paper units.
-- `Token`: stable provider/manual ID, intended text, bounding box, original stroke
-  references, region, recognition confidence or `null`, origin, status, revision
-  and original token creation order. `accepted` is an interpretation status.
-  `confirmed` means the student typed/confirmed the intended input.
-- `Correction`: before/after text, token ID, original stroke IDs, timestamp,
-  keyboard/keypad method and clarification versus student-edit reason. Changing a
-  confident token and confirming an uncertain token both preserve original ink.
-- `InputPacket`: problem, layout, all strokes (including archived erased strokes),
-  erased IDs, interpreted region steps in worksheet order, correction history,
-  and `entrySequence` in token creation order. Tokens retain spatial positions;
-  strokes and corrections retain their own chronology. `steps.text` is a display
-  serialization with spaces, **not** a canonical expression or mathematical AST.
-  E.g. three quotient digit tokens display `1 2 6`; the host uses their positions
-  and token text to interpret `126`. Formative/synthetic provenance is explicit.
+## Evidence: one pupil, one event stream, unchanged gates
 
-Undo/redo restore input snapshots and advance the current revision; they do not
-roll back learner records. Erasing invalidates interpretations linked to erased
-ink but keeps original stroke data and historical corrections. A newly drawn
-replacement is new input. Confirmed tokens are protected against re-recognition;
-stable incoming token IDs preserve creation order. No estimator is touched.
+Server-only `math_writing` receipts are appended to the existing mathematics
+`PupilEvent` stream, alongside existing `math_activity` records. They carry canonical
+pupil/draft IDs, server time, lesson version, provisional status, original input
+snapshots, operation observations, help/feedback lineage and `admissible:false`.
+Clients cannot post arbitrary writing evidence through the old mathematics event
+endpoint. Raw receipt history is never reset or rewritten after a correction.
 
-The JSON restore validator rejects unknown contract versions, invalid layouts,
-corrupt points/references and unsupported metadata rather than guessing a migration.
-Version 1 has no earlier released handwriting schema to migrate. Future versions
-must supply an explicit lossless migration or refuse to overwrite the old draft.
+The existing fractions repository now filters **only** the new writing receipt kind
+before its strict legacy activity replay; it retains the total sequence count for
+future appends. It does not discard or change school/exam program progress. Other
+unexpected kinds still reach the existing strict replay rather than being hidden.
 
-## Recognition adapter
+`writingEvidence` is an activity projection through the existing
+`mathematicsLedger`/`indexContent`/`verificationEligibility`. It creates provisional
+native code-item events for server-validated operations, and native
+`assisted_response` records after help/repeated feedback. Provisional responses are
+held and never change estimates; no new learner estimator is introduced. This
+activity-scoped view does not replace the universal learner profile. The canonical
+identity and raw history are shared; all new evidence is intentionally inadmissible.
 
-Implement `Recognizer.available()` and
-`recognize(RecognitionRequest, AbortSignal): Promise<RecognitionResult>`.
-Requests contain active strokes, regions, work ID, contract and revision. Results
-carry that revision, provider ID and candidates. Bounds must fit the named region;
-stroke references must belong to the active work. Return `confidence:null` when a
-provider does not offer a usable candidate confidence. Do not turn a whole-page
-confidence into invented per-digit certainty. If segmentation cannot localize an
-uncertain mark, return the smallest supported expression region for typed correction.
+## Reuse with other mathematical engines
 
-Stable token IDs and stroke references are required to preserve confirmed edits.
-Late revisions, malformed results and failed recognition are refused without
-changing ink or reporting mathematical errors. Abort is supported; hosts must not
-send ink to third parties unless that service's use is authorized.
+The controlled public React component still accepts `work`, `onChange`, a
+`Recognizer`, `Validator`, configurable confidence threshold and input callback.
+`allowExtraRegions=false` locks the fixed lesson's schema; free writing still uses
+configurable layouts, arbitrary regions and the original tools. No separate drawing
+engine was made for division or fractions.
 
-## Validator adapter
+The host validator adapter receives `InputPacket`, flushes pending saves and submits
+the matching saved revision to Django. Feedback matches contract, work ID and
+revision. Late feedback is refused. The server reconstructs numeric region text
+from spatial tokens; `steps.text` remains display-only. Original strokes, timestamps,
+pressure, positions, correction/entry history and intended symbols remain available.
 
-Implement `Validator.submit(InputPacket, AbortSignal)`. Return `ValidationFeedback`
-with matching contract, work ID and revision; status `received`, `clarification`
-or `feedback`; and region-linked messages. Messages distinguish `information`,
-`mathematical-feedback` and `input-clarification`. A clarification can optionally
-name a `tokenId`; its button opens that token for editing, otherwise it opens the
-region's typed input. Stale feedback is discarded. The host decides all correctness
-and diagnostic meanings; the widget merely renders the feedback.
+`engine-adapter.ts` exposes `regionExpression` and `evaluateWithExistingEngine`.
+Tests feed this same packet to the **existing** arithmetic, fraction, linear and
+polynomial validators without rewriting the workspace or engine. These are contract
+compatibility tests; only division and fraction equivalence have full Django/learner
+screens in this iteration. No unrestricted handwritten algebra/geometry/calculus
+validation is claimed.
 
-The mathematics owner still needs to agree canonical expression parsing, step/region
-roles for each real lesson, supported feedback mapping, authenticated storage and
-learner evidence provenance. No claim is made that an active peer branch already
-implements or has adopted this provisional transport contract. Mounted component
-tests demonstrate the host API with explicit test adapters.
+All content and recognition scores still need educator/real-device validation.
+Future lesson versions must use an explicit version/migration rather than silently
+changing stored layouts or reinterpreting historical learner evidence.

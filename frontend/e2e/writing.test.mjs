@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { before, after, test } from "node:test";
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
-const URL = process.env.E2E_URL ?? "http://127.0.0.1:4670";
+const URL = process.env.E2E_URL
+  ? process.env.E2E_URL + "/writing.html?demo=1"
+  : "http://127.0.0.1:4670/?demo=1";
 let browser;
 before(async () => {
   browser = await chromium.launch({

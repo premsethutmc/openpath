@@ -1,95 +1,106 @@
-# Executed tests — 2026-10-20
+# Executed verification — connected v2, 2026-10-20
 
-All data is synthetic. System Chromium is `/usr/bin/chromium`; tests emulate
-browser touch/pen events, not physical stylus hardware. CI configuration has been
-prepared but no remote CI outcome is asserted.
+All learner records were synthetic. The browser tests used a real Django service
+with a fresh SQLite database at `/tmp/openpath-writing2-synthetic.sqlite3`, not
+production records. No physical stylus validation or remote CI outcome is claimed.
 
 | Check | Actual result |
 |---|---|
-| `npm run typecheck` (three existing configurations, new writing source included) | Passed |
-| `npm test` under Node 24.19.0 | 330 tests passed, 0 failed, 0 skipped |
-| `node --import tsx --test src/writing/workspace.test.ts`, Node 24.19.0 | 19 passed, 0 failed |
-| Same writing model/contract suite, Node 22.18.0 | 19 passed, 0 failed |
-| `node scripts/build-writing.mjs` | Passed |
-| Existing English build with `--out=dist-english-writing-regression` | Passed |
-| `node --test e2e/writing.test.mjs e2e/writing-components.test.mjs`, Node 24.19.0 | 14 passed, 0 failed |
-| Same browser/component suites, Node 22.18.0 | 14 passed, 0 failed |
+| Full frontend suite, Node 24.19.0 | **334 passed**, 0 failed |
+| Full frontend suite, Node 22.18.0 | **334 passed**, 0 failed |
+| Writing model/contract/integration units (included above) | **23 passed** |
+| TypeScript, all four configurations | Passed |
+| Full Django suite, Python 3.12 / Django 5.2.18 | **176 passed**, 0 failed |
+| New writing backend tests (included above) | **15 passed** |
+| Django migration consistency | `makemigrations --check --dry-run`: no changes detected |
+| Integrated English + mathematics + writing build | Passed; model SHA-256 checked |
+| Combined browser suites, Node 24.19.0 | **19 passed**, 0 failed |
+| Same browser suites, Node 22.18.0 | **19 passed**, 0 failed |
 
-The 330-test frontend run includes existing English, Tamil, essay and mathematics
-tests plus the 19 writing tests. It does not represent a run of every repository
-suite. The backend and shared-core research suites were not rerun: no backend,
-estimator, mastery or evidence-gate code changed. Previously reported Node 24
-shared-core floating-point fingerprint failures are not claimed fixed.
+The combined browser count comprises four actual Django learning journeys, one
+real-model recognition test, and fourteen retained workspace/component regressions.
+The regressions include labelled synthetic recognition/host fixtures; they are
+**not** the evidence for actual v2 recognition or mathematical integration.
 
-## Model and contract coverage
+## Actual connected journeys
 
-- Stroke metadata, immutable capture, replay and JSON restore.
-- Sparse-sample segment erasing, original retention, undo/redo and clear.
-- Coordinate transforms at different screen sizes and zoom/pan.
-- Threshold equality, just below threshold, null confidence and configurable
-  high thresholds; invalid thresholds and invalid provider results are refused.
-- Localized clarification, confident edits, stable token order and confirmed
-  corrections surviving re-recognition.
-- Unavailable recognizer and complete typed long division.
-- New manual entry links only previously uninterpreted ink in its selected region.
-- Stale recognition, unknown stroke references and duplicate token IDs.
-- Erasing invalidates linked active interpretations but keeps correction history.
-- Synthetic adapter accepts only unchanged sample strokes; one uncertain digit.
-- Incorrect intermediate digit transported unchanged to a non-grading mock.
-- Draft history/resume, corrupt version/layout refusal and quota failures.
-- Arbitrary division layouts, free writing, worksheet order versus entry order,
-  explicit formative provenance and no correctness/mastery fields.
+1. **Typed division:** introduction and worked example, all working entered,
+   save/reload/resume, quotient `136` for 379 ÷ 3, first invalid digit identified at
+   the `7 ÷ 3` part, grouping/facts/selection follow-ups, multiplication support,
+   return to unchanged working, edit to `126`, complete with remainder `1`.
+   Actual server receipts, native held decisions and ineligible evidence are checked.
+2. **Real ink plus clarification:** captured original stroke for a handwritten `1`,
+   real local WASM recognition, insufficient mark highlighted as uncertain, targeted
+   typed confirmation, remaining input completed, real backend operation validation,
+   original strokes/corrections retained in the pupil's receipt.
+3. **Fractions:** equivalent-fraction input `2/3`, exact rejection, targeted scaling
+   follow-ups and teaching, correction to `2/4`, completion, reload/resume and
+   separately opened division progress. This uses the same workspace and backend
+   account, not a second drawing or learner engine.
+4. **Recognition failure:** all model assets blocked, original ink preserved,
+   recognition error surfaced without diagnosis, entire division completed through
+   manual input and the real Django validator.
 
-## Browser and mounted component coverage
+The real-model test classifies hand-authored original traces for `1`, `2`, `7`,
+repeats with changed IDs and checks that unsupported expression regions require
+clarification. Predictions execute the vendored pretrained model; there are no
+response mocks, answer lookups or replayed recognition outputs in these five tests.
 
-Eleven standalone flows cover mouse strokes, native browser touch dispatch,
-simulated pen pressure/tilt, palm lock, eraser/undo/redo/clear, reload, zoom/pan
-alignment, 320/360/412px and desktop widths, two-finger pinch, localized ambiguity,
-editing confident output, re-recognition after correction, incorrect and correct
-synthetic examples, full keyboard/keypad-only division, arbitrary problems,
-region-specific manual fallback, saved clarification after refresh, and storage
-quota failure with a usable download, and rapid multi-stroke eraser sweeps.
+## Other coverage
 
-Three mounted public-component tests provide host-controlled adapters and verify:
-late recognition rejection, recognizer failure with retained manual work,
-versioned packet callback, host-requested symbol clarification, and rejection of
-late validator feedback after the student edits. The harness is built in memory
-inside the test and routed only into that test browser; it adds no production test
-hooks or recognition implementation.
+The 15 backend tests include 206 reproducible division configurations (fixed edge
+cases plus seeded random operands), every operation's first error, quotient digit
+order despite different ink heights, negative subtraction, incomplete versus
+uncertain input, exact fraction equivalence, differentiated support hypotheses,
+authentication/ownership/CSRF, optimistic conflicts, retry idempotency, unsupported
+contracts/layouts, state resume, shared event-stream persistence, export/deletion,
+separate topic progress and transcription disputes without a gap claim.
 
-## Issues found and fixed while testing
+The 23 writing units exercise the prior 19 capture/contract tests plus native
+ledger/eligibility and helped-response behavior, disputed interpretation exclusion,
+existing arithmetic/fraction/linear/polynomial evaluator compatibility, local provider
+availability/segmentation/scoring helpers, and legacy fractions receipt filtering.
+The full 334-test run also retains English, Tamil, essay and mathematics regressions.
+No shared estimator or mastery policy was changed. The separate shared-core research
+suite was not rerun and its previously reported Node 24 fingerprint portability
+failures are not claimed fixed.
 
-The first pointer run exposed DOMPoint's non-enumerable coordinates: spreading a
-DOMPoint omitted x/y from stored samples. Capture now copies x/y explicitly and
-uses inverse SVG screen transforms so zoom, border, pan and resize stay aligned.
-The first typed-region test exposed missing explicit accessible selector labels.
-Both fixes are exercised by the final passing browser run.
+The 14 retained browser/component tests cover mouse/touch/simulated pen, pressure,
+palm lock, eraser sweeps, undo/redo/clear, pinch, zoom/pan/resize alignment,
+manual/keypad fallback, local draft backup/resume, quota failure, targeted correction,
+confirmed edits surviving another recognition pass, late response rejection and
+host-requested clarification. These are Chromium simulations, not actual Samsung
+or stylus hardware.
 
-The component harness initially compiled its JSX in classic mode without a React
-namespace; its build now explicitly selects automatic JSX. A multi-sample helper
-initially toggled an already-open panel closed; it now opens the panel only when
-needed. These were test-harness corrections, not disabled assertions.
+## Issues found during integration
 
-No physical Android, Samsung S Pen, Apple Pencil, Windows stylus, educator review,
-real-child trial, handwriting accuracy calibration or real mathematical-validator
-integration was performed. The local test results do not establish those outcomes.
+- The preview server lacked `.mjs`/`.wasm` MIME types required by actual inference;
+  those mappings were added and the real WASM tests now run.
+- Manual fragments initially had whole-region bounds, putting a newly typed digit
+  before existing ink. Their bounds now reference unrecognized ink or append after
+  existing symbols; complete typed rows still retain their existing behavior.
+- Following up too quickly could fill a response while the previous answer was
+  saving. The field now locks during the request, and browser tests await the next
+  prompt. No assertions were removed or unrelated research failures suppressed.
+- The legacy fixture tests initially navigated to the normal English root after
+  the integrated build. They now explicitly use `/writing.html?demo=1`; actual
+  acceptance tests use `/writing.html` and real authenticated services.
+- A backend CSRF test initially used a nonexistent forced test user; it now uses
+  the real parent session cookies with CSRF enforcement.
 
-## Reproduce browser checks
+## Reproduce
 
-From `frontend`, build, then run the existing preview server in another terminal:
+Follow the isolated database/startup instructions in [README.md](README.md), then
+from `frontend`:
 
 ```sh
-node scripts/build-writing.mjs
-DIST=dist-writing PORT=4670 node scripts/preview-english.mjs
+npm test
+npm run typecheck
+CHROMIUM_PATH=/usr/bin/chromium E2E_URL=http://127.0.0.1:4674 node --test e2e/writing-integration.test.mjs e2e/writing-recognition.test.mjs e2e/writing.test.mjs e2e/writing-components.test.mjs
 ```
 
-With Chromium installed:
-
-```sh
-CHROMIUM_PATH=/usr/bin/chromium node --test e2e/writing.test.mjs e2e/writing-components.test.mjs
-```
-
-Alternatively `npx playwright install chromium` and omit `CHROMIUM_PATH` to use
-Playwright's browser. The new validation-only GitHub Actions workflow uses Node
-22/24 and installs Chromium explicitly. No API credentials, live learner backend
-or Codespace is required for these tests.
+From `backend`: `.venv/bin/python manage.py test`.
+Use Node 22.18.0 or 24 to repeat the frontend/browser commands. The GitHub Actions
+matrix prepares Python, the model/runtime assets, an ephemeral Django database and
+both services. It does not deploy or use paid services. No accuracy benchmark,
+educator review or real-child effectiveness study was performed.

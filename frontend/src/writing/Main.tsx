@@ -1,287 +1,435 @@
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Api, type PupilSummary } from "../english/logic/account";
 import { WritingWorkspace } from "./Workspace";
-import {
-  BrowserWorkStore,
-  fixtureRecognizer,
-  fixtureWork,
-  restore,
-  unavailableRecognizer,
-} from "./adapters";
-import { createWork, divisionLayout, freeLayout } from "./model";
-import type { Work, InputPacket, WorkStore } from "./contract";
+import { LocalDigitRecognizer } from "./digit-recognizer";
+import { WritingLessonRepo, type LessonActivity } from "./lesson-service";
+import { writingEvidence } from "./evidence";
+import type { Work, Validator } from "./contract";
+import { Demo } from "./Demo";
 import "./style.css";
-function demoStore(): WorkStore {
-  try {
-    return new BrowserWorkStore(localStorage);
-  } catch {
-    return {
-      async load() {
-        return null;
-      },
-      async save() {
-        throw Error(
-          "Browser storage unavailable. Download your draft before closing this tab.",
-        );
-      },
-    };
-  }
-}
-function Demo() {
-  const [work, setWork] = useState<Work | null>(null),
-    [loading, setLoading] = useState(true),
+const api = new Api();
+function Journey() {
+  const [pupils, setPupils] = useState<PupilSummary[]>([]),
+    [pupil, setPupil] = useState(""),
+    [authenticated, setAuthenticated] = useState(false),
+    [activity, setActivity] = useState<LessonActivity | null>(null),
+    [work, setWork] = useState<Work | null>(null),
+    [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
     [error, setError] = useState(""),
-    [saved, setSaved] = useState("Opening draft…"),
-    [dividend, setDividend] = useState("379"),
-    [divisor, setDivisor] = useState("3"),
-    [layout, setLayout] = useState("division"),
-    [fixture, setFixture] = useState<
-      "correct" | "incorrect" | "ambiguous" | null
-    >(null),
-    [sent, setSent] = useState<InputPacket | null>(null);
-  const store = useRef(demoStore()),
-    queue = useRef(Promise.resolve()),
-    current = useRef(work);
-  current.current = work;
-  function save(w: Work) {
+    [busy, setBusy] = useState(false),
+    [saved, setSaved] = useState(""),
+    [answer, setAnswer] = useState(""),
+    [recognition, setRecognition] = useState(true),
+    [topic, setTopic] = useState("division"),
+    [a, setA] = useState("379"),
+    [b, setB] = useState("3");
+  const repo = useRef<WritingLessonRepo | null>(null),
+    latest = useRef(work),
+    recognizer = useRef(new LocalDigitRecognizer());
+  latest.current = work;
+  async function account() {
+    const s = await api.status();
+    if (!s.available)
+      throw Error(
+        "Start the OpenPath account API to use this lesson. No simulated account or validation is substituted.",
+      );
+    setAuthenticated(s.account.authenticated);
+    if (s.account.authenticated) {
+      const ps = await api.pupils();
+      setPupils(ps);
+      const selected = new URLSearchParams(location.search).get("learner");
+      setPupil(ps.find((p) => p.id === selected)?.id ?? ps[0]?.id ?? "");
+    }
+  }
+  useEffect(() => {
+    void account().catch((e) => setError(String(e)));
+  }, []);
+  async function run(fn: () => Promise<void>) {
+    setError("");
+    setBusy(true);
+    try {
+      await fn();
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function open() {
+    if (!pupil) throw Error("Choose an existing learner first.");
+    const r = await WritingLessonRepo.open(
+      api,
+      pupil,
+      topic,
+      topic === "division" ? { dividend: Number(a), divisor: Number(b) } : {},
+    );
+    repo.current = r.repo;
+    setActivity(r.activity);
+    setWork(r.work);
+    setSaved(r.activity.work ? "Resumed from your account" : "New activity");
+  }
+  function changed(w: Work) {
+    setWork(w);
     setSaved("Saving…");
-    const task = queue.current
-      .catch(() => undefined)
-      .then(() => store.current.save(w));
-    queue.current = task;
-    void task.then(
+    const r = repo.current!;
+    void r.save(w).then(
       () => {
         if (
-          current.current?.revision === w.revision &&
-          current.current.id === w.id
-        ) {
-          try {
-            localStorage.setItem("openpath:math-input:last@1", w.id);
-          } catch {
-            /* Draft itself was saved; last-open pointer is optional. */
-          }
-          setSaved("Saved on this browser");
-          setError("");
-        }
+          latest.current?.id === w.id &&
+          latest.current.revision === w.revision
+        )
+          setSaved("Saved in your account");
       },
       (e) => {
-        setSaved("Not saved — keep this tab open or download the draft");
+        setSaved("Not saved — keep this page open");
         setError(String(e));
       },
     );
   }
-  useEffect(() => {
-    void open(true);
-  }, []);
-  useEffect(() => {
-    if (work && !loading) save(work);
-  }, [work, loading]);
-  async function open(resumeLast = false) {
-    setLoading(true);
-    setError("");
-    try {
-      await queue.current.catch(() => undefined);
-      let id =
-        layout === "division"
-          ? `division:${dividend}:${divisor}`
-          : `layout:${layout}`;
-      if (resumeLast) {
-        try {
-          id = localStorage.getItem("openpath:math-input:last@1") ?? id;
-        } catch {
-          /* Device storage may be unavailable. */
-        }
-      }
-      const old = await store.current.load(id);
-      if (old?.problem.id.startsWith("division:")) {
-        const [, a, b] = old.problem.id.split(":");
-        setDividend(a);
-        setDivisor(b);
-        setLayout("division");
-      }
-      const synthetic = id.startsWith("synthetic:") ? id.split(":")[1] : null;
-      setFixture(
-        synthetic === "correct" ||
-          synthetic === "incorrect" ||
-          synthetic === "ambiguous"
-          ? synthetic
-          : null,
-      );
-      setSent(null);
-      setWork(
-        old ??
-          createWork(
-            id,
-            {
-              id,
-              statement:
-                layout === "division"
-                  ? `${dividend} ÷ ${divisor}`
-                  : "Free mathematical working",
-            },
-            layout === "division"
-              ? divisionLayout(dividend, divisor)
-              : freeLayout(layout),
-          ),
-      );
-    } catch (e) {
-      setError(String(e));
-      setSaved("Not opened — original stored draft preserved");
-      setWork(null);
-    } finally {
-      setLoading(false);
-    }
+  async function action(action: string, extra: Record<string, unknown> = {}) {
+    const r = await repo.current!.action(action, extra);
+    setActivity(r);
+    setAnswer("");
   }
-  function sample(kind: "correct" | "incorrect" | "ambiguous") {
-    setFixture(kind);
-    setSent(null);
-    setWork(fixtureWork(`synthetic:${kind}`, divisionLayout("379", "3"), kind));
-  }
-  function download() {
-    if (!work) return;
-    const u = URL.createObjectURL(
-      new Blob([JSON.stringify(work, null, 2)], { type: "application/json" }),
-    );
-    const a = document.createElement("a");
-    a.href = u;
-    a.download = "openpath-writing-draft.json";
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(u), 1000);
-  }
+  const validator: Validator = {
+    async submit(_p, signal) {
+      if (signal.aborted) throw new DOMException("Aborted", "AbortError");
+      const submitted = latest.current!;
+      if (submitted.id !== _p.workId || submitted.revision !== _p.revision)
+        throw Error(
+          "Writing changed before validation; check the saved work again.",
+        );
+      const r = await repo.current!.validate(submitted);
+      if (signal.aborted) throw new DOMException("Aborted", "AbortError");
+      if (
+        latest.current?.revision !== _p.revision ||
+        latest.current?.id !== _p.workId
+      )
+        throw Error(
+          "Writing changed while checking. Reload the saved lesson to inspect the result.",
+        );
+      setActivity(r.activity);
+      return r.feedback;
+    },
+  };
+  let evidence: ReturnType<typeof writingEvidence> | null = null;
+  if (activity && pupil) evidence = writingEvidence(pupil, activity.receipts);
   return (
     <main>
       <header>
-        <p className="eyebrow">OpenPath · reusable mathematical input</p>
-        <h1>Your mathematical notebook</h1>
+        <p className="eyebrow">OpenPath Mathematics</p>
+        <h1>Write, check and understand</h1>
         <p>
-          Private, local demonstration. No learner records, recognition services
-          or mathematical scoring are connected.
+          Unreviewed practice · recognition uncertainty is not a maths mistake ·
+          no mastery awarded for helped corrections.
         </p>
+        <a href="/mathematics.html">Mathematics journey</a>
       </header>
-      <details>
-        <summary>Problem and writing layout</summary>
+      {error && <p role="alert">{error}</p>}
+      {!authenticated ? (
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            void open();
+            void run(async () => {
+              await api.login(email, password);
+              await account();
+            });
           }}
         >
+          <h2>Parent sign in</h2>
           <label>
-            Layout
-            <select
-              aria-label="Layout"
-              value={layout}
-              onChange={(e) => setLayout(e.target.value)}
-            >
-              <option value="division">Long division</option>
-              {[
-                "free",
-                "column-addition",
-                "column-subtraction",
-                "multiplication",
-                "fractions",
-                "algebra",
-                "coordinates",
-              ].map((x) => (
-                <option key={x}>{x}</option>
-              ))}
-            </select>
+            Email
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
-          {layout === "division" && (
-            <>
-              <label>
-                Dividend
-                <input
-                  value={dividend}
-                  onChange={(e) => setDividend(e.target.value)}
-                  inputMode="numeric"
-                />
-              </label>
-              <label>
-                Divisor
-                <input
-                  value={divisor}
-                  onChange={(e) => setDivisor(e.target.value)}
-                  inputMode="numeric"
-                />
-              </label>
-            </>
-          )}
-          <button>Open or resume this problem</button>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <button disabled={busy}>Sign in</button>
+          <p>
+            Use the existing OpenPath parent account and learner. Create them
+            through <a href="/">OpenPath home</a>.
+          </p>
         </form>
-        <p>
-          Other layouts provide free writing regions, not automatic mathematical
-          understanding. Add regions for extra steps. A host can supply a
-          structured worksheet.
-        </p>
-      </details>
-      <details>
-        <summary>Synthetic recognition demonstrations</summary>
-        <p>
-          These are generated vector samples and labelled recognition fixtures,
-          not recognition of your handwriting. Mathematical correctness is not
-          judged here. “Incorrect” changes the second multiplication digit from
-          6 to 8 to test transport of an error.
-        </p>
-        {(["correct", "incorrect", "ambiguous"] as const).map((k) => (
-          <button key={k} onClick={() => sample(k)}>
-            Load {k} sample
-          </button>
-        ))}
-      </details>
-      <div className="draft-controls">
-        <p role="status" aria-live="polite">
-          {saved}
-        </p>
-        <button disabled={!work} onClick={() => work && save(work)}>
-          Save draft now
-        </button>
-        <button disabled={!work} onClick={download}>
-          Download draft
-        </button>
-        <label>
-          Restore draft
-          <input
-            type="file"
-            accept="application/json,.json"
-            onChange={async (e) => {
-              const file = e.target.files?.[0];
-              if (!file) return;
-              try {
-                if (file.size > 8_000_000) throw Error("Draft too large");
-                const w = restore(await file.text());
-                setFixture(null);
-                setWork({ ...w, id: `import:${crypto.randomUUID()}` });
-                setError("");
-              } catch (e) {
-                setError(String(e));
-              }
-            }}
-          />
-        </label>
-      </div>
-      {error && <p role="alert">{error}</p>}
-      {loading ? (
-        <p>Opening…</p>
       ) : (
-        work && (
-          <WritingWorkspace
-            work={work}
-            onChange={setWork}
-            recognizer={
-              fixture ? fixtureRecognizer(fixture) : unavailableRecognizer
-            }
-            onConfirmedInput={setSent}
-          />
-        )
-      )}
-      {sent && sent.revision === work?.revision && sent.workId === work.id && (
-        <details open>
-          <summary>Structured input sent to mock validator</summary>
-          <pre data-testid="input-packet">{JSON.stringify(sent, null, 2)}</pre>
-        </details>
+        <>
+          <section>
+            <label>
+              OpenPath learner
+              <select
+                aria-label="OpenPath learner"
+                disabled={busy}
+                value={pupil}
+                onChange={(e) => {
+                  setPupil(e.target.value);
+                  setActivity(null);
+                  setWork(null);
+                }}
+              >
+                {pupils.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.display_name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Practice topic
+              <select
+                aria-label="Practice topic"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+              >
+                <option value="division">Long division</option>
+                <option value="fraction">Equivalent fractions</option>
+              </select>
+            </label>
+            {topic === "division" && (
+              <>
+                <label>
+                  Dividend
+                  <input
+                    value={a}
+                    onChange={(e) => setA(e.target.value)}
+                    inputMode="numeric"
+                  />
+                </label>
+                <label>
+                  Divisor
+                  <input
+                    value={b}
+                    onChange={(e) => setB(e.target.value)}
+                    inputMode="numeric"
+                  />
+                </label>
+              </>
+            )}
+            <button disabled={busy || !pupil} onClick={() => void run(open)}>
+              Open or resume lesson
+            </button>
+          </section>
+          {activity && work && (
+            <section aria-label="Division learning journey">
+              <p role="status">{saved}</p>
+              {activity.stage === "intro" && (
+                <>
+                  <h2>Understand the idea</h2>
+                  <p>{activity.lesson.explanation}</p>
+                  <button
+                    disabled={busy}
+                    onClick={() => void run(() => action("next"))}
+                  >
+                    See a worked example
+                  </button>
+                </>
+              )}
+              {activity.stage === "worked" && (
+                <>
+                  <h2>{activity.lesson.example.statement}</h2>
+                  <ol>
+                    {activity.lesson.example.steps.map((s, i) => (
+                      <li key={i}>{s}</li>
+                    ))}
+                  </ol>
+                  <p>{activity.lesson.example.answer}</p>
+                  <button
+                    disabled={busy}
+                    onClick={() => void run(() => action("next"))}
+                  >
+                    Open my working
+                  </button>
+                </>
+              )}
+              {(activity.stage === "workspace" ||
+                activity.stage === "complete") && (
+                <>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={recognition}
+                      onChange={(e) => setRecognition(e.target.checked)}
+                    />
+                    Use local digit recognition
+                  </label>
+                  <p>
+                    Recognition handles separate digits. Fractions, operators
+                    and expressions can be typed. The original ink is kept.
+                  </p>
+                  <WritingWorkspace
+                    work={work}
+                    onChange={changed}
+                    recognizer={recognition ? recognizer.current : undefined}
+                    validator={validator}
+                    allowExtraRegions={false}
+                  />
+                </>
+              )}
+              {activity.stage === "diagnostic" && activity.probe && (
+                <section aria-label="Diagnostic follow-up">
+                  <h2>Let’s check the idea first</h2>
+                  <p>
+                    First check that the interpreted numbers match your writing.
+                    A transcription error is not a maths mistake.
+                  </p>
+                  <button
+                    disabled={busy}
+                    onClick={() => void run(() => action("input-correction"))}
+                  >
+                    OpenPath read my writing incorrectly
+                  </button>
+                  <p>
+                    {activity.support.error?.message}{" "}
+                    {activity.support.error?.operation &&
+                      `First step: ${activity.support.error.operation}.`}
+                  </p>
+                  <p>
+                    One wrong step does not tell us why. These questions
+                    separate possible explanations.
+                  </p>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void run(() =>
+                        action("probe", {
+                          probeId: activity.probe!.id,
+                          response: answer,
+                        }),
+                      );
+                    }}
+                  >
+                    <label>
+                      {activity.probe.prompt}
+                      <input
+                        disabled={busy}
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        inputMode="numeric"
+                      />
+                    </label>
+                    <button disabled={busy || !answer.trim()}>
+                      Check this follow-up
+                    </button>
+                  </form>
+                </section>
+              )}
+              {activity.stage === "teaching" && activity.support.teaching && (
+                <section aria-label="Targeted teaching">
+                  <h2>Try this way</h2>
+                  <p>{activity.support.teaching.explanation}</p>
+                  <div
+                    aria-label="Equal groups representation"
+                    hidden={
+                      activity.lesson.topic !== "division" ||
+                      activity.support.teaching.visual.groups > 9 ||
+                      activity.support.teaching.visual.size > 12
+                    }
+                  >
+                    {Array.from(
+                      {
+                        length: Math.min(
+                          activity.support.teaching.visual.groups,
+                          9,
+                        ),
+                      },
+                      (_, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            display: "inline-block",
+                            padding: 8,
+                            margin: 4,
+                            border: "2px solid #6551c8",
+                            borderRadius: 8,
+                          }}
+                        >
+                          {"●".repeat(
+                            Math.min(
+                              activity.support.teaching!.visual.size,
+                              12,
+                            ),
+                          )}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                  <p>{activity.support.teaching.note}</p>
+                  <p>
+                    {activity.support.teaching.possible.length
+                      ? "Possible support areas: " +
+                        activity.support.teaching.possible.join(", ")
+                      : "The follow-ups suggest checking for a slip or notation issue; the cause remains unresolved."}
+                  </p>
+                  <button
+                    disabled={busy}
+                    onClick={() => void run(() => action("resume"))}
+                  >
+                    Return to my original working
+                  </button>
+                </section>
+              )}
+              {activity.stage === "complete" && (
+                <section aria-label="Practice completion">
+                  <h2>Practice complete</h2>
+                  <p>
+                    All entered operations have been checked by OpenPath’s
+                    arithmetic validator. Your work is saved. This does not
+                    grant verified mastery.
+                  </p>
+                </section>
+              )}
+              {evidence && (
+                <section aria-label="Learner evidence">
+                  <h2>Your practice record</h2>
+                  <p>
+                    {
+                      activity.receipts.filter((r) => r.action === "validation")
+                        .length
+                    }{" "}
+                    checked attempts · {evidence.ledger.events.length} native
+                    ledger records · verified proficiency unchanged.
+                  </p>
+                  <p>
+                    Provisional content and helped/repeated attempts are held by
+                    the existing evidence policy.
+                  </p>
+                  <details>
+                    <summary>Inspect evidence receipts</summary>
+                    <pre data-testid="writing-evidence">
+                      {JSON.stringify(
+                        {
+                          learnerId: pupil,
+                          receipts: activity.receipts,
+                          decisions: evidence.ledger.decisions,
+                          eligibility: [...evidence.eligibility],
+                        },
+                        null,
+                        2,
+                      )}
+                    </pre>
+                  </details>
+                </section>
+              )}
+            </section>
+          )}
+        </>
       )}
     </main>
   );
 }
-createRoot(document.getElementById("root")!).render(<Demo />);
+createRoot(document.getElementById("root")!).render(
+  new URLSearchParams(location.search).get("demo") === "1" ? (
+    <Demo />
+  ) : (
+    <Journey />
+  ),
+);

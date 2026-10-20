@@ -187,6 +187,13 @@ test("manual entry links only unrecognized ink, leaving previously interpreted t
   assert.deepEqual(w.tokens[1].strokeIds, ["s2"]);
   assert.equal(w.tokens[0].text, "2");
   assert.equal(blockers(w).length, 0);
+  const outside = manual(
+    addStroke(fresh(), { ...stroke("outside"), points: [point(900)] }),
+    "quotient",
+    "126",
+  );
+  assert.ok(outside.tokens[0].bounds.width > 0);
+  assert.equal(outside.strokes[0].points[0].x, 900);
 });
 test("late, invalid, duplicate and unknown-stroke recognitions fail without changing work", () => {
   const w = addStroke(fresh(), stroke());

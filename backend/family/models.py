@@ -131,3 +131,20 @@ class ClientMetric(models.Model):
     ok = models.BooleanField(default=True)
     app_version = models.CharField(max_length=40, blank=True)
     detail = models.CharField(max_length=200, blank=True)
+
+
+class WritingDraft(models.Model):
+    """Resumable input/activity state, not a learner estimate or evidence ledger."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name='writing_drafts')
+    problem_key = models.CharField(max_length=160)
+    topic = models.CharField(max_length=24)
+    parameters = models.JSONField(default=dict)
+    work = models.JSONField(null=True)
+    version = models.PositiveIntegerField(default=0)
+    stage = models.CharField(max_length=24, default='intro')
+    support = models.JSONField(default=dict)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['pupil', 'problem_key'], name='unique_pupil_writing_problem')]

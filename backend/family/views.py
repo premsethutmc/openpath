@@ -457,6 +457,6 @@ class PupilExportView(AccountBase):
         subjects = {}
         for subject in sorted(ACTIVE_SUBJECTS):
             subjects[subject] = list(PupilEvent.objects.filter(pupil=pupil, subject=subject).order_by("seq").values_list("body", flat=True))
-        response = Response({"pupil": _pupil_json(pupil), "consent_policy": pupil.consent_policy, "subjects": subjects})
+        response = Response({"pupil": _pupil_json(pupil), "consent_policy": pupil.consent_policy, "subjects": subjects, "writingDrafts": list(pupil.writing_drafts.values("id", "topic", "parameters", "stage", "work", "version"))})
         response["Content-Disposition"] = f'attachment; filename="openpath-pupil-{pupil.pk}.json"'
         return response

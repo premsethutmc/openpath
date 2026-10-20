@@ -305,12 +305,50 @@ export function manual(
   const strokes = activeStrokes(w)
     .filter((s) => s.regionId === regionId && !linked.has(s.id))
     .map((s) => s.id);
+  let bounds = { x: r.x, y: r.y, width: r.width, height: r.height };
+  const unlinked = activeStrokes(w).filter((s) => strokes.includes(s.id));
+  if (unlinked.length) {
+    const ps = unlinked.flatMap((s) => s.points),
+      xs = ps.map((p) => p.x),
+      ys = ps.map((p) => p.y);
+    const x = Math.max(r.x, Math.min(...xs) - 3),
+      y = Math.max(r.y, Math.min(...ys) - 3);
+    bounds = {
+      x,
+      y,
+      width: Math.min(r.x + r.width - x, Math.max(...xs) - x + 3),
+      height: Math.min(
+        r.y + r.height - y,
+        Math.max(6, Math.max(...ys) - y + 3),
+      ),
+    };
+  } else {
+    const prior = w.tokens.filter((t) => t.regionId === regionId);
+    if (prior.length) {
+      const x = Math.max(...prior.map((t) => t.bounds.x + t.bounds.width)) + 5;
+      if (x >= r.x + r.width - 5)
+        throw Error("Edit the existing step to change this entry.");
+      bounds = {
+        x,
+        y: prior[0].bounds.y,
+        width: Math.min(r.x + r.width - x, text.length * 22 + 10),
+        height: Math.min(50, r.height),
+      };
+    }
+  }
+  if (
+    bounds.width <= 0 ||
+    bounds.height <= 0 ||
+    bounds.x >= r.x + r.width ||
+    bounds.y >= r.y + r.height
+  )
+    bounds = { x: r.x, y: r.y, width: r.width, height: r.height };
   return edit(w, (s) => {
     const id = uid();
     s.tokens.push({
       id,
       text,
-      bounds: { x: r.x, y: r.y, width: r.width, height: r.height },
+      bounds,
       strokeIds: strokes,
       regionId,
       confidence: null,

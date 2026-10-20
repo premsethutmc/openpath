@@ -22,3 +22,24 @@ await writeFile(
 console.log(
   "Built additive mathematics.html alongside unchanged English entry point.",
 );
+
+execFileSync(process.execPath, [`${root}/scripts/build-writing.mjs`], {
+  cwd: root,
+  stdio: "inherit",
+});
+const { cp, readFile } = await import("node:fs/promises");
+await cp(`${root}/dist-writing`, `${root}/dist-english/writing`, {
+  recursive: true,
+});
+const writingHtml = await readFile(`${root}/dist-writing/index.html`, "utf8");
+await writeFile(
+  `${root}/dist-english/writing.html`,
+  writingHtml
+    .replace("./app.css", "writing/app.css")
+    .replace("./app.js", "writing/app.js"),
+);
+await cp(
+  `${root}/dist-writing/recognition`,
+  `${root}/dist-english/recognition`,
+  { recursive: true },
+);
