@@ -2,7 +2,8 @@
 
 **Design artifacts only. Application implementation is intentionally paused.**
 
-Branch: `design/mathematics-notebook-v1`  
+Branch: `design/mathematics-notebook-v1`
+
 Based on the functioning mistake-recovery branch, commit `39d0006140e223805f2f802db4d3d3ca2625e0ca`.
 
 ## Review the three states
