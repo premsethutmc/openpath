@@ -1,3 +1,4 @@
+import { notebookOption } from "./notebook-helpers.mjs";
 import assert from "node:assert/strict";
 import { before, after, test } from "node:test";
 import { mkdirSync } from "node:fs";
@@ -29,9 +30,7 @@ async function start(width = 360) {
     })
     .click();
   await p.getByLabel("Progressive long division", { exact: true }).waitFor();
-  await p
-    .getByRole("button", { name: "Type a final answer instead", exact: true })
-    .click();
+  await notebookOption(p, "Type a final answer instead");
   await p.getByLabel("Mathematics question", { exact: true }).waitFor();
   return { c, p };
 }
@@ -87,9 +86,7 @@ test("optional final-answer mode: equivalent remainder forms, incomplete, wrong,
     .waitFor();
   await screenshot(p, "correct-android");
   await p.reload();
-  await p
-    .getByRole("button", { name: "Type a final answer instead", exact: true })
-    .click();
+  await notebookOption(p, "Type a final answer instead");
   await p
     .getByText("Correct! 379 ÷ 3 = 126 remainder 1.", { exact: true })
     .waitFor();
@@ -108,9 +105,7 @@ test("optional final-answer mode: equivalent remainder forms, incomplete, wrong,
   });
   const page = await resumed.newPage();
   await page.goto(url);
-  await page
-    .getByRole("button", { name: "Type a final answer instead", exact: true })
-    .click();
+  await notebookOption(page, "Type a final answer instead");
   await page.getByLabel("Your answer", { exact: true }).waitFor();
   assert.equal(
     await page.getByLabel("Your answer", { exact: true }).inputValue(),
@@ -149,9 +144,7 @@ test("handwriting is optional, preserves ink and typing; guided worksheet remain
     .click();
   assert.equal(await p.locator("svg.writing-paper [data-stroke]").count(), 1);
   await p.getByRole("button", { name: "Type instead", exact: true }).click();
-  await p
-    .getByRole("button", { name: "Help me step by step", exact: true })
-    .click();
+  await notebookOption(p, "Help me step by step");
   await p
     .getByRole("heading", { name: "Understand the idea", exact: true })
     .waitFor();

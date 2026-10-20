@@ -17,11 +17,13 @@ await mkdir(out, { recursive: true });
 await esbuild.build({
   entryPoints: [`${root}/src/writing/Main.tsx`],
   bundle: true,
+  loader: { ".woff2": "file" },
   outfile: `${out}/app.js`,
   format: "esm",
   target: "es2022",
   minify: true,
 });
+await cp(`${root}/src/writing/fonts/Kalam-OFL.txt`, `${out}/Kalam-OFL.txt`);
 await mkdir(`${out}/recognition`, { recursive: true });
 await cp(`${root}/assets/recognition`, `${out}/recognition`, {
   recursive: true,

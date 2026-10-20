@@ -50,6 +50,7 @@ export interface LessonActivity {
     divisionPaper?: PaperState;
     workspaceRecovery?: RecoveryState;
     simple?: {
+      round?: number;
       answer?: string;
       ink?: Work;
       result?: { outcome: string; message: string };

@@ -1,3 +1,4 @@
+import { notebookOption } from "./notebook-helpers.mjs";
 /** Actual Django + local WASM inference. No mocked recognition, validation or learner API. */
 import assert from "node:assert/strict";
 import { test, before, after } from "node:test";
@@ -113,9 +114,7 @@ async function open(p, topic = "division") {
     (await p.getByLabel("Mathematics question", { exact: true }).count()) ||
     (await p.getByLabel("Progressive long division", { exact: true }).count())
   ) {
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
     await p
       .getByRole("heading", { name: "Understand the idea", exact: true })
       .waitFor();
@@ -156,9 +155,7 @@ async function open(p, topic = "division") {
         { exact: true },
       )
       .waitFor();
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
   }
   await p
     .getByRole("heading", { name: "Understand the idea", exact: true })
@@ -293,9 +290,7 @@ test(`${process.env.DEMO_STUDENT === "1" ? "one-tap demo student" : "real studen
   const url = p.url();
   assert.match(url, /\/year\/.*#writing\//);
   await p.reload();
-  await p
-    .getByRole("button", { name: "Help me step by step", exact: true })
-    .click();
+  await notebookOption(p, "Help me step by step");
   await p
     .getByRole("button", { name: "Edit Quotient: 136", exact: true })
     .waitFor();

@@ -1,3 +1,4 @@
+import { notebookOption } from "./notebook-helpers.mjs";
 /** Real student route, native input events, Django validation and saved canonical evidence. */
 import assert from "node:assert/strict";
 import { before, after, test } from "node:test";
@@ -47,9 +48,9 @@ async function shot(p, name) {
 }
 async function complete(p) {
   await p
-    .getByText("Finished! 379 ÷ 3 = 126 remainder 1.", { exact: true })
+    .getByText("379 ÷ 3 = 126 remainder 1.", { exact: true })
     .waitFor();
-  await p.getByText("Saved", { exact: true }).waitFor();
+  await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
 }
 test("Android: 379 ÷ 3 entered continuously with automatic cursor/row expansion; recorded video", async () => {
   const { c, p } = await start(true);
@@ -101,7 +102,7 @@ test("zero is entered before automatic bring-down, then unfinished paper survive
   );
   await p.keyboard.type("0");
   await p.getByLabel("Quotient place 2", { exact: true }).waitFor();
-  await p.getByText("Saved", { exact: true }).waitFor();
+  await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
   await p.getByLabel("Brought down 7", { exact: true }).waitFor();
   assert.equal(
     await p
@@ -135,16 +136,16 @@ test("tap and Backspace correct an earlier quotient without erasing later workin
     .click();
   await p.keyboard.press("Backspace");
   await p.getByLabel("Quotient place 2", { exact: true }).waitFor();
-  await p.getByText("Saved", { exact: true }).waitFor();
+  await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
   assert.equal(
     await p
-      .getByText("Finished! 379 ÷ 3 = 126 remainder 1.", { exact: true })
+      .getByText("379 ÷ 3 = 126 remainder 1.", { exact: true })
       .count(),
     0,
   );
   await p.keyboard.type("3");
   await p
-    .getByText("Check this number. Tap it or use Backspace to change it.", {
+    .getByText("Not quite right.", {
       exact: true,
     })
     .waitFor();
@@ -156,7 +157,7 @@ test("tap and Backspace correct an earlier quotient without erasing later workin
   );
   await shot(p, "correcting-android");
   await p.keyboard.press("Backspace");
-  await p.getByText("Saved", { exact: true }).waitFor();
+  await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
   await p.keyboard.type("2");
   await complete(p);
   await c.close();
@@ -165,18 +166,16 @@ test("existing scribbler and guided worksheet remain available within the same l
   const { c, p } = await start();
   await p.keyboard.type("13");
   await p.getByLabel("Subtract row 1", { exact: true }).waitFor();
-  await p.getByText("Saved", { exact: true }).waitFor();
+  await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
   await p
-    .getByRole("button", { name: "✏️ Write instead", exact: true })
+    .getByRole("button", { name: "Write instead", exact: true })
     .click();
   await p.locator("svg.writing-paper").waitFor();
   await p
     .getByRole("button", { name: "Back to division paper", exact: true })
     .click();
   await p.getByLabel("Subtract row 1", { exact: true }).waitFor();
-  await p
-    .getByRole("button", { name: "Help me step by step", exact: true })
-    .click();
+  await notebookOption(p, "Help me step by step");
   await p.getByLabel("Mathematical region", { exact: true }).waitFor();
   await p
     .getByRole("button", { name: "Back to division paper", exact: true })
@@ -206,7 +205,7 @@ test("configured division component: all six required problems with actual Djang
     jsx: "automatic",
     format: "esm",
     outdir: "/tmp/progressive-component-assets",
-    loader: { ".wasm": "file" },
+    loader: { ".wasm": "file", ".woff2": "dataurl" },
     target: "es2022",
   });
   const js = built.outputFiles.find((x) => x.path.endsWith(".js")).text,
@@ -237,7 +236,7 @@ test("configured division component: all six required problems with actual Djang
     await p.getByLabel("Quotient place 1", { exact: true }).waitFor();
     if (a === 432) {
       await p.keyboard.type("33");
-      await p.getByText("Saved", { exact: true }).waitFor();
+      await p.locator(".notebook-save").filter({hasText:/^Saved$/}).waitFor({state:"attached"});
       assert.equal(
         await p.getByLabel("Multiply row 1", { exact: true }).inputValue(),
         "3",
@@ -245,7 +244,7 @@ test("configured division component: all six required problems with actual Djang
       await p.keyboard.type("676720");
     } else await p.keyboard.type(parts.join(""));
     await p
-      .getByText(`Finished! ${a} ÷ ${b} = ${q} remainder ${r}.`, {
+      .getByText(`${a} ÷ ${b} = ${q} remainder ${r}.`, {
         exact: true,
       })
       .waitFor();

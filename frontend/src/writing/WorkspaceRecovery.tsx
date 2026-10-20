@@ -7,23 +7,47 @@ export type RecoveryState = {
 };
 
 /** Shared presentation; the server supplies problem-specific help and progression. */
-export function WorkspaceRecovery({ state, onAction }: {
+export function WorkspaceRecovery({
+  state,
+  onAction,
+  context,
+}: {
   state?: RecoveryState;
+  context?: string;
   onAction: (choice: "retry" | "hint") => void;
 }) {
   if (!state?.open) return null;
-  const canOfferMore = state.level < Math.min(3, state.errors[state.entry] || 1);
+  const canOfferMore =
+    state.level < Math.min(3, state.errors[state.entry] || 1);
   return (
-    <aside className="workspace-recovery" aria-label="Help with this number">
-      <p role="status">{state.message || "Want a little help?"}</p>
+    <aside
+      id="workspace-recovery"
+      className="workspace-recovery"
+      aria-label="Help with this number"
+    >
+      <div className="recovery-copy" role="status">
+        <span className="recovery-mark" aria-hidden="true">
+          !
+        </span>
+        <div>
+          <strong>Not quite right.</strong>
+          <p>{state.message || context || "Want a little help?"}</p>
+        </div>
+      </div>
       <div>
-        <button className="secondary" onPointerDown={e => e.preventDefault()}
-          onClick={() => onAction("retry")}>
+        <button
+          className="secondary"
+          onPointerDown={(e) => e.preventDefault()}
+          onClick={() => onAction("retry")}
+        >
           Try again
         </button>
         {canOfferMore && (
-          <button className="link" onPointerDown={e => e.preventDefault()}
-            onClick={() => onAction("hint")}>
+          <button
+            className="link"
+            onPointerDown={(e) => e.preventDefault()}
+            onClick={() => onAction("hint")}
+          >
             {state.level ? "More help" : "Give me a hint"}
           </button>
         )}

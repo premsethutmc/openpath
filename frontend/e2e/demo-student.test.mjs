@@ -1,3 +1,4 @@
+import { notebookOption } from "./notebook-helpers.mjs";
 /** Actual packaged preview + Django. No registration, passwords, fixture scoring or mocked APIs. */
 import assert from "node:assert/strict";
 import { test, before, after } from "node:test";
@@ -41,7 +42,9 @@ async function start(c) {
   });
   await button.click();
   await p.getByLabel("Progressive long division", { exact: true }).waitFor();
+  await p.getByLabel("Lesson options", {exact:true}).click();
   await p.getByLabel("Demo student session").waitFor();
+  await p.getByLabel("Lesson options", {exact:true}).click();
   return p;
 }
 async function request(c, path, method = "GET", data) {
@@ -64,9 +67,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
     assert.equal((await status(c)).learner, saved.learner);
     const p = await c.newPage();
     await p.goto(saved.url);
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
     await p
       .getByRole("button", { name: "Edit Quotient: 12", exact: true })
       .waitFor();
@@ -90,9 +91,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
       path: "../docs/product/mathematical-writing/screens-demo/one-tap-lesson-android.png",
       fullPage: true,
     });
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
     await p
       .getByRole("button", { name: "See a worked example", exact: true })
       .click();
@@ -123,9 +122,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
         exact: true,
       })
       .click();
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
     await p
       .getByRole("button", { name: "Edit Quotient: 12", exact: true })
       .waitFor();
@@ -140,6 +137,8 @@ if (process.env.PREVIEW_PHASE === "resume") {
       ).status(),
       403,
     );
+    await p.getByRole("button", {name:"Back to division paper",exact:true}).click();
+    await p.getByLabel("Lesson options", {exact:true}).click();
     await p
       .getByText("Demo options · synthetic learner", { exact: true })
       .click();
@@ -217,9 +216,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
     const c = await browser.newContext(opts);
     const p = await start(c);
     const s = await status(c);
-    await p
-      .getByRole("button", { name: "Help me step by step", exact: true })
-      .click();
+    await notebookOption(p, "Help me step by step");
     await p
       .getByRole("button", { name: "See a worked example", exact: true })
       .click();

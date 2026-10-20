@@ -596,6 +596,15 @@ function App() {
       if (repo) setEvents(await repo.load());
       setView(view.back);
     };
+    if (lesson.topic === "division") return (
+      <main className="year-notebook">
+        {error && <p role="alert">{error}</p>}
+        {typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE && banner}
+        <WritingLesson key={lesson.topic + learner} api={api} pupil={learner}
+          topic={lesson.topic} parameters={{ ...lesson.parameters }} onExit={leave}
+          sessionControls={demo ? banner : null} />
+      </main>
+    );
     return (
       <Shell
         banner={banner}

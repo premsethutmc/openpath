@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { practiceRound, practiceParameters, storePracticeRound } from "./practice-round";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Api } from "../english/logic/account";
 import { ProgressiveDivision } from "./ProgressiveDivision";
 import { GuidedWritingLesson } from "./GuidedLesson";
@@ -16,28 +17,30 @@ type Props = {
   onExit: () => void | Promise<void>;
   studentMode?: boolean;
   initialMode?: string;
+  sessionControls?: ReactNode;
 };
 /** Default curriculum interaction. Correctness remains server-owned; guided working is opt-in. */
 export function WritingLesson(props: Props) {
   // Retain the existing developer harness; curriculum/student entry uses one answer.
   if (props.studentMode === false) return <GuidedWritingLesson {...props} />;
-  if (props.topic === "division")
-    return (
-      <ProgressiveDivision
-        api={props.api}
-        pupil={props.pupil}
-        parameters={props.parameters}
-        onExit={props.onExit}
-        alternative={(mode) => (
-          <OneAnswerLesson
-            {...props}
-            initialMode={mode === "ink" ? "ink" : "type"}
-          />
-        )}
-      />
-    );
+  if (props.topic === "division") return <DivisionLesson {...props} />;
   return <OneAnswerLesson {...props} />;
 }
+function DivisionLesson(props: Props) {
+  const [round, setRound] = useState(() => practiceRound("division"));
+  const parameters = practiceParameters("division", props.parameters ?? {}, round);
+  return <ProgressiveDivision
+    api={props.api} pupil={props.pupil} parameters={parameters}
+    onExit={props.onExit} sessionControls={props.sessionControls} round={round}
+    onNext={async () => {
+      if (round >= 99) { await props.onExit(); return; }
+      storePracticeRound("division", round + 1);
+      setRound(round + 1);
+    }}
+    alternative={mode => <OneAnswerLesson {...props} initialMode={mode === "ink" ? "ink" : "type"} />}
+  />;
+}
+
 function OneAnswerLesson(props: Props) {
   const [a, setA] = useState<LessonActivity | null>(null),
     [answer, setAnswer] = useState(""),
@@ -49,36 +52,13 @@ function OneAnswerLesson(props: Props) {
     [saved, setSaved] = useState(""),
     [guided, setGuided] = useState(false),
     [generation, reload] = useState(0),
-    [next, setNext] = useState(() => {
-      const search = new URLSearchParams(location.search);
-      const round =
-        search.get("answerTopic") === props.topic
-          ? Number(search.get("answerRound") ?? 0)
-          : 0;
-      return Number.isInteger(round) && round >= 0 && round <= 99 ? round : 0;
-    });
+    [next, setNext] = useState(() => practiceRound(props.topic));
   const repo = useRef<WritingLessonRepo | null>(null),
     dirty = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
     draft = useRef({ answer: "", ink: null as Work | null });
   const recognizer = useRef(new LocalDigitRecognizer());
-  const parameters = {
-    ...props.parameters,
-    ...(next
-      ? props.topic === "division"
-        ? {
-            dividend:
-              (props.parameters?.dividend ?? 379) +
-              next * (props.parameters?.divisor ?? 3),
-          }
-        : props.topic === "multiplication"
-          ? {
-              groups: props.parameters?.groups ?? 4,
-              size: 1 + (((props.parameters?.size ?? 6) - 1 + next) % 12),
-            }
-          : { numerator: next + 1, denominator: next + 2 }
-      : {}),
-  };
+  const parameters = practiceParameters(props.topic, props.parameters ?? {}, next);
   useEffect(() => {
     let active = true;
     setA(null);
@@ -277,10 +257,7 @@ function OneAnswerLesson(props: Props) {
                     await props.onExit();
                     return;
                   }
-                  const url = new URL(location.href);
-                  url.searchParams.set("answerRound", String(next + 1));
-                  url.searchParams.set("answerTopic", props.topic);
-                  history.replaceState(null, "", url);
+                  storePracticeRound(props.topic, next + 1);
                   setNext((n) => n + 1);
                 })
               }
