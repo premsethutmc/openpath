@@ -4,6 +4,7 @@ import { test, before, after } from "node:test";
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 const BASE = process.env.E2E_URL ?? "http://127.0.0.1:4674";
+const SCREENS = `../docs/product/mathematical-writing/${process.env.DEMO_STUDENT === "1" ? "screens-demo" : "screens-v3"}`;
 let browser;
 before(async () => {
   browser = await chromium.launch({
@@ -29,10 +30,41 @@ async function family() {
     hasTouch: true,
     isMobile: true,
   });
+  if (process.env.DEMO_STUDENT === "1") {
+    const p = await c.newPage();
+    p.setDefaultTimeout(20000);
+    const errors = [],
+      foreign = [];
+    p.on("pageerror", (e) => errors.push(e.message));
+    p.on("request", (r) => {
+      if (!r.url().startsWith(BASE) && !r.url().startsWith("blob:"))
+        foreign.push(r.url());
+    });
+    await p.goto(BASE);
+    await p
+      .getByRole("button", {
+        name: "Try OpenPath as a Demo Student",
+        exact: true,
+      })
+      .click();
+    await p
+      .getByRole("heading", { name: "Understand the idea", exact: true })
+      .waitFor();
+    assert.equal(await p.getByLabel("Email", { exact: true }).count(), 0);
+    const rows = await api(c, "GET", "/pupils/");
+    return { c, p, child: rows.pupils[0], errors, foreign };
+  }
   // Optional owner-only preview gate; Django sign-in below is still exercised through the real UI.
   if (process.env.PREVIEW_PASSWORD) {
-    const gate = await c.request.post(BASE + "/login", {form:{password:process.env.PREVIEW_PASSWORD},maxRedirects:0});
-    assert.equal(gate.status(),303,"the preview gate opens before the application account");
+    const gate = await c.request.post(BASE + "/login", {
+      form: { password: process.env.PREVIEW_PASSWORD },
+      maxRedirects: 0,
+    });
+    assert.equal(
+      gate.status(),
+      303,
+      "the preview gate opens before the application account",
+    );
   }
   await c.request.get(BASE + "/api/account/");
   const email = `year.writer.${Date.now()}.${Math.random().toString(36).slice(2)}@example.org`;
@@ -79,19 +111,33 @@ async function family() {
   return { c, p, child, errors, foreign };
 }
 async function open(p, topic = "division") {
-  await p
-    .getByRole("button", { name: "Open Mathematics", exact: true })
-    .click();
+  const started = await p
+    .getByRole("heading", { name: "Understand the idea", exact: true })
+    .count();
+  if (started && topic !== "division") {
+    await p
+      .getByRole("button", {
+        name: "Save and return to the lesson",
+        exact: true,
+      })
+      .click();
+    await p.getByRole("button", { name: "My year", exact: true }).click();
+  }
+  if (!started || topic !== "division")
+    await p
+      .getByRole("button", { name: "Open Mathematics", exact: true })
+      .click();
   const names = {
     division: "Long division",
     fraction: "Equivalent fractions",
     multiplication: "Equal groups",
   };
-  await p
-    .getByRole("button", {
-      name: new RegExp("^" + names[topic] + " · write and check"),
-    })
-    .click();
+  if (!started || topic !== "division")
+    await p
+      .getByRole("button", {
+        name: new RegExp("^" + names[topic] + " · write and check"),
+      })
+      .click();
   await p
     .getByRole("heading", { name: "Understand the idea", exact: true })
     .waitFor();
@@ -163,12 +209,12 @@ async function follow(p, responses, screen) {
   }
   await p.getByLabel("Targeted teaching").waitFor();
   if (screen) {
-    mkdirSync("../docs/product/mathematical-writing/screens-v3", {
+    mkdirSync(SCREENS, {
       recursive: true,
     });
     await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     await p.screenshot({
-      path: `../docs/product/mathematical-writing/screens-v3/${screen}.png`,
+      path: `${SCREENS}/${screen}.png`,
       fullPage: true,
     });
   }
@@ -217,7 +263,7 @@ async function backToYear(p) {
   await p.getByRole("heading", { name: /^Grade 4 ·/ }).waitFor();
 }
 
-test("real student: sign in → My Learning Year → Mathematics → teaching → division → diagnosis → resume → completion without mastery", async () => {
+test(`${process.env.DEMO_STUDENT === "1" ? "one-tap demo student" : "real student: sign in"} → My Learning Year → Mathematics → teaching → division → diagnosis → resume → completion without mastery`, async () => {
   const { c, p, child, errors, foreign } = await family();
   await open(p);
   await type(p, "quotient", "136");
@@ -244,7 +290,7 @@ test("real student: sign in → My Learning Year → Mathematics → teaching �
     .waitFor();
   await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await p.screenshot({
-    path: "../docs/product/mathematical-writing/screens-v3/division-completed-mobile.png",
+    path: `${SCREENS}/division-completed-mobile.png`,
     fullPage: true,
   });
   await backToYear(p);
@@ -252,7 +298,10 @@ test("real student: sign in → My Learning Year → Mathematics → teaching �
     .getByLabel("Saved mathematics practice")
     .getByText(/Practice complete/)
     .waitFor();
-  await p.locator("[data-writing-tile]").filter({hasText:"Writing practice: 1 complete"}).waitFor();
+  await p
+    .locator("[data-writing-tile]")
+    .filter({ hasText: "Writing practice: 1 complete" })
+    .waitFor();
   assert.equal(await p.locator(".stat.verified b").innerText(), "0");
   const es = await evidence(c, child);
   const writing = es.filter((e) => e.kind === "math_writing");
@@ -264,7 +313,7 @@ test("real student: sign in → My Learning Year → Mathematics → teaching �
   );
   await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await p.screenshot({
-    path: "../docs/product/mathematical-writing/screens-v3/year-progress-mobile.png",
+    path: `${SCREENS}/year-progress-mobile.png`,
     fullPage: true,
   });
   // Existing year append sequence remains current after writing receipts.
@@ -297,7 +346,7 @@ test("curriculum fractions and multiplication use the same embedded workspace an
     .waitFor();
   await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await p.screenshot({
-    path: "../docs/product/mathematical-writing/screens-v3/multiplication-desktop.png",
+    path: `${SCREENS}/multiplication-desktop.png`,
     fullPage: true,
   });
   await backToYear(p);
@@ -365,7 +414,7 @@ test("actual local model recognizes original ink; dot ambiguity is confirmed wit
   for (const [region, text] of rows.slice(1)) await type(p, region, text);
   await p.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await p.screenshot({
-    path: "../docs/product/mathematical-writing/screens-v3/recognized-ink-mobile.png",
+    path: `${SCREENS}/recognized-ink-mobile.png`,
     fullPage: true,
   });
   await send(p);

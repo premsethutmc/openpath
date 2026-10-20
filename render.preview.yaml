@@ -7,7 +7,7 @@ services:
     runtime: docker
     plan: free
     region: singapore
-    branch: fix/render-preview-writing-v3
+    branch: feat/preview-demo-student-v1
     autoDeployTrigger: "off"
     dockerfilePath: ./deploy/preview/Dockerfile
     dockerContext: .

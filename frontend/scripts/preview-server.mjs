@@ -13,8 +13,10 @@
  *
  *   DEMO_PASSWORD_HASH=… DEMO_SESSION_SECRET=… node scripts/demo-server.mjs
  *
- * Nothing of the app (HTML, JavaScript, CSS, icons, licences, source maps) is served before a valid session. Only
- * /login, /healthz, /robots.txt and a no-op /sw.js answer without one. Node's standard library only: no dependencies.
+ * Application assets require a signed owner or restricted student session. /login offers a one-tap synthetic
+ * student entry via same-origin, CSRF-protected /demo/start. Only the existing loopback preview Django service
+ * creates that learner; student sessions cannot access account-management or educator routes. /healthz,
+ * /robots.txt and a no-op /sw.js remain public. Node's standard library only: no dependencies.
  *
  * Configuration (environment):
  *   DEMO_PASSWORD_HASH   required. scrypt hash from `node scripts/demo-hash-password.mjs`; never the password itself
@@ -229,15 +231,22 @@ export function createDemoServer(
   let totalInFlight = 0;
   let checking = Promise.resolve(); // password checks run one after another
 
-  const sign = (payload) =>
-    createHmac("sha256", key).update(payload).digest("base64url");
-  const issue = () => {
+  const studentKey = createHmac("sha256", config.secret)
+    .update("openpath-preview-student-v1")
+    .digest();
+  const sign = (payload, kind = "owner") =>
+    createHmac("sha256", kind === "student" ? studentKey : key)
+      .update(payload)
+      .digest("base64url");
+  const issue = (kind = "owner", lifetimeMs) => {
     const sid = randomBytes(18).toString("base64url");
-    const exp = now() + config.sessionMs;
-    const payload = Buffer.from(JSON.stringify({ sid, exp })).toString(
+    const exp =
+      now() +
+      (lifetimeMs ?? (kind === "student" ? 2 * 60 * 60_000 : config.sessionMs));
+    const payload = Buffer.from(JSON.stringify({ sid, exp, kind })).toString(
       "base64url",
     );
-    return { token: `${payload}.${sign(payload)}`, exp };
+    return { token: `${payload}.${sign(payload, kind)}`, exp };
   };
   const session = (req) => {
     const raw = (req.headers.cookie ?? "")
@@ -248,15 +257,16 @@ export function createDemoServer(
     if (!raw || raw.length > 512) return null;
     const [payload, mac] = raw.split(".");
     if (!payload || !mac) return null;
-    const want = Buffer.from(sign(payload));
-    const got = Buffer.from(mac);
-    if (want.length !== got.length || !timingSafeEqual(want, got)) return null;
     let body;
     try {
       body = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
     } catch {
       return null;
     }
+    if (body?.kind && !["owner", "student"].includes(body.kind)) return null;
+    const want = Buffer.from(sign(payload, body?.kind));
+    const got = Buffer.from(mac);
+    if (want.length !== got.length || !timingSafeEqual(want, got)) return null;
     if (
       typeof body?.sid !== "string" ||
       typeof body?.exp !== "number" ||
@@ -359,20 +369,64 @@ export function createDemoServer(
       req.on("error", reject);
     });
 
-  function forward(req, res) {
+  function forward(req, res, demoAction = false) {
     const headers = {
       ...req.headers,
       "x-forwarded-proto": config.allowHttp ? "http" : "https",
+      "x-openpath-demo-student":
+        demoAction || session(req)?.kind === "student" ? "1" : "0",
     };
     const up = http.request(
       {
         hostname: config.api.hostname,
         port: config.api.port || 80,
         method: req.method,
-        path: req.url,
+        path: demoAction ? `/api/preview-demo/${demoAction}/` : req.url,
         headers,
       },
       (r) => {
+        if (demoAction) {
+          const chunks = [];
+          let size = 0;
+          r.on("data", (c) => {
+            size += c.length;
+            if (size > 16384) r.destroy();
+            else chunks.push(c);
+          });
+          r.on("end", () => {
+            if (r.statusCode !== 200)
+              return text(
+                res,
+                r.statusCode ?? 502,
+                "The demo could not start. Return to the preview entry and try again.",
+              );
+            let result;
+            try {
+              result = JSON.parse(Buffer.concat(chunks).toString());
+            } catch {
+              return text(res, 502, "Demo server unavailable.");
+            }
+            if (!result.demo || !result.url?.startsWith("/year/?"))
+              return text(res, 502, "Demo server unavailable.");
+            if (
+              !Number.isInteger(result.expiresIn) ||
+              result.expiresIn < 1 ||
+              result.expiresIn > 7200
+            )
+              return text(res, 502, "Demo server unavailable.");
+            const s = issue("student", result.expiresIn * 1000);
+            res.writeHead(303, {
+              ...base(),
+              Location: result.url,
+              "Set-Cookie": [
+                ...(r.headers["set-cookie"] ?? []),
+                cookie(s.token, result.expiresIn),
+              ],
+            });
+            res.end();
+          });
+          return;
+        }
         res.writeHead(r.statusCode ?? 502, {
           ...r.headers,
           "Cache-Control": "no-store",
@@ -390,6 +444,47 @@ export function createDemoServer(
           ),
     );
     req.pipe(up);
+  }
+  async function demoBootstrap(req, res) {
+    if (!config.api) return "";
+    return new Promise((resolve) => {
+      const up = http.request(
+        {
+          hostname: config.api.hostname,
+          port: config.api.port || 80,
+          path: "/api/preview-demo/bootstrap/",
+          method: "GET",
+          headers: {
+            host: req.headers.host,
+            cookie: req.headers.cookie ?? "",
+            "x-forwarded-proto": config.allowHttp ? "http" : "https",
+            "x-openpath-demo-student": "1",
+          },
+        },
+        (r) => {
+          const chunks = [];
+          let size = 0;
+          r.on("data", (c) => {
+            size += c.length;
+            if (size < 16384) chunks.push(c);
+          });
+          r.on("end", () => {
+            try {
+              const token = JSON.parse(Buffer.concat(chunks).toString()).csrf;
+              if (r.statusCode === 200 && /^[A-Za-z0-9]{64}$/.test(token)) {
+                if (r.headers["set-cookie"])
+                  res.setHeader("Set-Cookie", r.headers["set-cookie"]);
+                return resolve(token);
+              }
+            } catch {}
+            resolve("");
+          });
+        },
+      );
+      up.setTimeout(10000, () => up.destroy());
+      up.on("error", () => resolve(""));
+      up.end();
+    });
   }
   function sendFile(res, req, file) {
     if (!existsSync(file)) return text(res, 404, "Not found");
@@ -449,6 +544,17 @@ export function createDemoServer(
         "Content-Type": "text/javascript; charset=utf-8",
       });
 
+    if (path === "/demo/start" || path === "/demo/reset") {
+      if (req.method !== "POST")
+        return text(res, 405, "Use the demo entry button.");
+      // Unlike the legacy password form, demo entry requires an explicit browser Origin.
+      if (!req.headers.origin || !sameOrigin(req))
+        return text(res, 403, "Forbidden");
+      if (!config.api) return text(res, 503, "Demo server unavailable.");
+      if (path === "/demo/reset" && session(req)?.kind !== "student")
+        return text(res, 403, "Demo session required.");
+      return forward(req, res, path.endsWith("reset") ? "reset" : "start");
+    }
     if (path === "/login") {
       if (req.method === "GET" || req.method === "HEAD") {
         if (session(req)) {
@@ -458,7 +564,10 @@ export function createDemoServer(
         return page(
           res,
           200,
-          loginPage(url.searchParams.has("out") ? "You are logged out." : ""),
+          loginPage(
+            url.searchParams.has("out") ? "You are logged out." : "",
+            await demoBootstrap(req, res),
+          ),
         );
       }
       if (req.method !== "POST")
@@ -562,6 +671,21 @@ export function createDemoServer(
       return text(res, 401, "Log in first", {
         "WWW-Authenticate": 'FormBased realm="OpenPath demo"',
       });
+    }
+    if (s.kind === "student") {
+      if (path === "/") {
+        res.writeHead(303, { ...base(), Location: "/year/" });
+        return res.end();
+      }
+      if (
+        !(
+          path === "/year" ||
+          path.startsWith("/year/") ||
+          path.startsWith("/recognition/") ||
+          path.startsWith("/api/")
+        )
+      )
+        return text(res, 403, "The demo provides mathematics learning only.");
     }
     // the account API (Django in the same container): one origin, so its session cookie and CSRF checks stay first-party
     if (config.api && path.startsWith("/api/")) return forward(req, res);
@@ -667,12 +791,14 @@ const shell = (
 ) => `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>${title}</title>
 <style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#eef2f7;color:#1c2333;font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}main{width:100%;max-width:380px;background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(31,58,147,.08)}h1{font-size:1.3rem;margin:0 0 4px;color:#1f3a93}p{margin:8px 0}.small{font-size:.85rem;color:#5a6478}label{display:block;font-weight:600;margin:16px 0 6px}input{width:100%;font:inherit;padding:12px;border:2px solid #c9d3e6;border-radius:10px}input:focus{outline:none;border-color:#1f3a93}button{width:100%;min-height:48px;margin-top:16px;font:inherit;font-weight:600;border:0;border-radius:10px;background:#1f3a93;color:#fff}button.secondary{background:#fff;color:#1f3a93;border:2px solid #1f3a93}.msg{background:#fff4d6;border-radius:8px;padding:8px 12px}a{color:#1f3a93}</style></head><body><main>${body}</main></body></html>`;
 
-function loginPage(message) {
+function loginPage(message, csrf = "") {
   return shell(
     "OpenPath preview: log in",
-    `<h1>OpenPath private feature preview</h1><p class="small">Private preview for the owner: My Learning Year, mathematical writing, English and the Tamil pilot. Draft content, synthetic test learners only. Not for pupils.</p>
+    `<h1>Try learning with OpenPath</h1><p>Learn, write, check and try again.</p><p class="small">Private preview · synthetic demonstration learners only. Draft content; no real child details.</p>
+${csrf ? `<form method="post" action="/demo/start"><input type="hidden" name="csrfmiddlewaretoken" value="${esc(csrf)}"><button type="submit">Try OpenPath as a Demo Student</button></form><p class="small">No email or password. Start a sample mathematics lesson. Your work resumes in this browser for up to two hours.</p>` : `<p class="msg">The demo is starting. <a href="/login">Refresh to try again</a>.</p>`}
+<details><summary>Account access</summary>
 ${message ? `<p class="msg" role="status">${esc(message)}</p>` : ""}
-<form method="post" action="/login"><label for="password">Preview password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus maxlength="200"><button type="submit">Log in</button></form>`,
+<form method="post" action="/login"><label for="password">Preview password</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200"><button type="submit">Log in</button></form></details>`,
   );
 }
 

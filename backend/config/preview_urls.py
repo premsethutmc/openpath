@@ -16,3 +16,11 @@ def readiness(request):
     return HttpResponse('ok', content_type='text/plain')
 
 urlpatterns = [path('healthz/', readiness)] + application_urls
+
+from . import demo_student
+urlpatterns = [
+    path('api/preview-demo/bootstrap/', demo_student.bootstrap),
+    path('api/preview-demo/start/', demo_student.start),
+    path('api/preview-demo/reset/', demo_student.start),
+    path('api/preview-demo/status/', demo_student.status),
+] + urlpatterns

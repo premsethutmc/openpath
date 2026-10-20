@@ -19,3 +19,7 @@ OPENPATH_LLM_API_KEY = ''
 OPENPATH_TRUST_CLIENT_CLOCK = False
 # No real mail or console password-reset links in the preview.
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# Preview-only namespaces and least-privilege demo route guard.
+MIDDLEWARE = list(MIDDLEWARE)
+MIDDLEWARE.insert(MIDDLEWARE.index('django.contrib.sessions.middleware.SessionMiddleware'), 'config.demo_student.DemoCookieMiddleware')
+MIDDLEWARE.insert(MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1, 'config.demo_student.DemoAccessMiddleware')

@@ -176,6 +176,7 @@ const KIND_WORD: Record<Tile["kind"], string> = {
 };
 
 function App() {
+  const [demo, setDemo] = useState(false);
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
@@ -217,12 +218,18 @@ function App() {
       throw new Error(
         "The OpenPath account service is not reachable. Wait a minute (it may be waking up) and reload.",
       );
+    const preview = await api
+      .request<{ demo: boolean }>("GET", "/preview-demo/status/")
+      .catch(() => null);
+    setDemo(preview?.demo === true);
     setSignedIn(s.account.authenticated);
     if (s.account.authenticated) {
       // what is released (educator-reviewed): only released content can count toward verified mastery
-      const reviewed = await api
-        .request<{ registry: Registry }>("GET", "/content-review/")
-        .catch(() => null);
+      const reviewed = preview?.demo
+        ? null
+        : await api
+            .request<{ registry: Registry }>("GET", "/content-review/")
+            .catch(() => null);
       if (reviewed) {
         setActiveRegistry(reviewed.registry);
         setRegistryLoaded((n) => n + 1);
@@ -330,7 +337,33 @@ function App() {
     }
   }
 
-  const banner = reviewFixtureActive() ? (
+  const csrf = document.cookie.match(/(?:^|; )csrftoken=([^;]*)/)?.[1] ?? "";
+  const banner = demo ? (
+    <aside className="demo-student-banner" aria-label="Demo student session">
+      <strong>My Learning Year › Mathematics · Demo Student</strong>
+      <details>
+        <summary>Demo options · synthetic learner</summary>
+        <p>
+          Provisional lessons. Saved in this browser’s session for up to two
+          hours. Completing practice does not mean mastery. Reset deletes only
+          this demo’s work.
+        </p>
+        <div className="actions">
+          <form method="post" action="/demo/reset">
+            <input type="hidden" name="csrfmiddlewaretoken" value={csrf} />
+            <button className="secondary" type="submit">
+              Reset demo and restart
+            </button>
+          </form>
+          <form method="post" action="/logout">
+            <button className="link" type="submit">
+              Leave demo
+            </button>
+          </form>
+        </div>
+      </details>
+    </aside>
+  ) : reviewFixtureActive() ? (
     <div className="test-banner" role="note">
       TEST BUILD · questions are treated as educator-reviewed so that “verified”
       can be shown. Never use with real learners.
@@ -340,6 +373,17 @@ function App() {
     return (
       <Shell banner={banner}>
         <p className="muted center">Opening OpenPath…</p>
+      </Shell>
+    );
+  if (
+    !signedIn &&
+    new URLSearchParams(location.search).get("demo") === "student"
+  )
+    return (
+      <Shell error={error}>
+        <h1>Resume your preview</h1>
+        <p>Your demo session may have expired.</p>
+        <a href="/login">Return to the demo entry</a>
       </Shell>
     );
   if (!signedIn)
@@ -409,16 +453,22 @@ function App() {
       ← My year
     </button>
   );
-  const switcher =
-    pupils.length > 1 ? (
-      <button className="link" onClick={() => setLearner("")}>
-        Switch
-      </button>
-    ) : (
-      <a className="link" href="/maths/">
-        ← Maths
-      </a>
-    );
+  const switcher = demo ? (
+    <button
+      className="link"
+      onClick={() => setView({ name: "tile", path: ["subject:mathematics"] })}
+    >
+      ← Mathematics
+    </button>
+  ) : pupils.length > 1 ? (
+    <button className="link" onClick={() => setLearner("")}>
+      Switch
+    </button>
+  ) : (
+    <a className="link" href="/maths/">
+      ← Maths
+    </a>
+  );
 
   if (!st.enrolment || view.name === "setup")
     return (
@@ -499,11 +549,17 @@ function App() {
         : "Not started";
   };
   const writingProgress = (tile: Tile) => {
-    const ids=new Set(flatten([tile]).flatMap(t=>t.competency ? [t.competency] : []));
-    const drafts=writingLessons.filter(l=>ids.has(l.competency)).flatMap(l=>(writingDrafts ?? []).filter(d=>d.problem_key===l.problemId));
-    if(!drafts.length)return null;
-    const complete=drafts.filter(d=>d.stage==="complete").length;
-    return `Writing practice: ${complete} complete${drafts.length>complete ? `, ${drafts.length-complete} in progress` : ""}`;
+    const ids = new Set(
+      flatten([tile]).flatMap((t) => (t.competency ? [t.competency] : [])),
+    );
+    const drafts = writingLessons
+      .filter((l) => ids.has(l.competency))
+      .flatMap((l) =>
+        (writingDrafts ?? []).filter((d) => d.problem_key === l.problemId),
+      );
+    if (!drafts.length) return null;
+    const complete = drafts.filter((d) => d.stage === "complete").length;
+    return `Writing practice: ${complete} complete${drafts.length > complete ? `, ${drafts.length - complete} in progress` : ""}`;
   };
   const writingOptions = (ids: string[]) => (
     <section aria-label="Writing practice" className="panel">
@@ -917,7 +973,11 @@ function App() {
               {s.subtitle}
             </p>
           )}
-          <TileGrid writingProgress={writingProgress} tiles={s.children} onOpen={(t) => open(t, [s.id, t.id])} />
+          <TileGrid
+            writingProgress={writingProgress}
+            tiles={s.children}
+            onOpen={(t) => open(t, [s.id, t.id])}
+          />
         </section>
       ))}
       <CoverageCard release={release} />
@@ -1064,23 +1124,27 @@ function App() {
           </div>
         )}
       </section>
-      <div className="section-title">
-        <h2>Your years</h2>
-      </div>
-      <div className="actions">
-        <button
-          className="secondary"
-          onClick={() => setView({ name: "years" })}
-        >
-          Earlier years
-        </button>
-        <button
-          className="secondary"
-          onClick={() => setView({ name: "setup" })}
-        >
-          Start the next year
-        </button>
-      </div>
+      {!demo && (
+        <>
+          <div className="section-title">
+            <h2>Your years</h2>
+          </div>
+          <div className="actions">
+            <button
+              className="secondary"
+              onClick={() => setView({ name: "years" })}
+            >
+              Earlier years
+            </button>
+            <button
+              className="secondary"
+              onClick={() => setView({ name: "setup" })}
+            >
+              Start the next year
+            </button>
+          </div>
+        </>
+      )}
     </Shell>
   );
 }
@@ -1129,7 +1193,11 @@ function TileGrid({
               />
             </span>
           )}
-          {writingProgress?.(t) && <span className="tile-sub" data-writing-tile>{writingProgress(t)}</span>}
+          {writingProgress?.(t) && (
+            <span className="tile-sub" data-writing-tile>
+              {writingProgress(t)}
+            </span>
+          )}
           <span className="tile-status">
             <span className="tile-icon" aria-hidden="true">
               <Icon glyph={t.icon} />

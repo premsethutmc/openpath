@@ -31,9 +31,11 @@ async function gate(c) {
   const p = await c.newPage();
   await p.goto(base + "/year/");
   assert.match(p.url(), /\/login$/);
+  await p.getByText("Account access", {exact:true}).click();
   await p.getByLabel("Preview password").fill(password);
   await p.getByRole("button", { name: "Log in", exact: true }).click();
   await p.waitForURL(base + "/");
+  await p.waitForLoadState("networkidle"); // let initial CSRF cookie responses settle before API registration
   await call(c, "GET", "/account/");
   return p;
 }
