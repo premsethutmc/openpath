@@ -102,3 +102,48 @@ There is no preview service for `/year/` or `/curriculum/` yet: `render.yaml` de
 account server). A preview would need the three build steps above, a Django service with its database, and the
 `/api/` forward that `preview-english.mjs` does; setting one up is a deployment decision for the product owner.
 Nothing has been deployed.
+
+## What loads, per board and grade (counted from the releases at build time, not hard-coded)
+
+"Competencies" are unique graph ids mapped in that release (each counted once however often it appears); "smaller
+steps" are micro-skills under them; "sections" are the release's own subdivisions at any depth.
+
+| Grade | CBSE chapters | sections | competencies | smaller steps | outcomes | TN chapters | sections | competencies | smaller steps | outcomes |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | 13 | 0 | 26 | 0 | 43 | 3 | 0 | 3 | 0 | 3 |
+| 2 | 11 | 0 | 28 | 0 | 38 | 3 | 2 | 4 | 0 | 3 |
+| 3 | 14 | 0 | 37 | 0 | 48 | 3 | 2 | 6 | 0 | 3 |
+| 4 | 14 | 30 | 56 | 7 | 61 | 19 | 42 | 52 | 7 | 57 |
+| 5 | 15 | 31 | 53 | 3 | 65 | 19 | 44 | 58 | 3 | 61 |
+| 6 | 10 | 32 | 46 | 3 | 46 | 16 | 47 | 65 | 0 | 57 |
+| 7 | 15 | 32 | 46 | 0 | 56 | 17 | 41 | 52 | 6 | 54 |
+| 8 | 14 | 38 | 51 | 3 | 57 | 7 | 25 | 44 | 2 | 33 |
+| 9 | 14 | 35 | 69 | 1 | 82 | 9 | 32 | 40 | 2 | 49 |
+| 10 | 14 | 26 | 32 | 1 | 58 | 8 | 32 | 48 | 0 | 49 |
+| 11 | 14 | 35 | 41 | 1 | 76 | 12 | 42 | 62 | 5 | 64 |
+| 12 | 13 | 36 | 49 | 5 | 71 | 12 | 48 | 52 | 3 | 63 |
+| **All** | **161** | | | | **701** | **128** | | | | **496** |
+
+Totals read at build time: 1,080 families, 376 written tasks, 1,197 outcomes (`data/index.json` → `generated`). Tamil
+Nadu Grades 1–3 have only three chapters each: the inventory could not be checked against the 2026-27 books, and the
+dashboard says so on those screens.
+
+## Tests
+
+* `frontend/src/learning/dashboard.test.ts`: real counts; mapping integrity against every board release; coverage
+  equal to the compiler's per release; partial outcomes stay partial at every level; review state equal to
+  `effectiveState`; unique-id aggregation (I); display states and method@1; E–H through the shared engine; a Grade 5
+  goal adds only own-year skills (B); display order changes nothing (J); boards and grades separate (N); Grade 12
+  Integrals nested (D).
+* `frontend/e2e/curriculum.test.mjs` (CI: learning-year workflow, real Django, 360 × 800): journeys A–N, with no
+  horizontal overflow on any screen visited (L). Screenshots in `dashboard-screens/`.
+
+## Gaps (product-owner decisions)
+
+* **Classes and educator access to learners.** There are no classes, so an educator chooses among the learners of
+  their own account. Reading another family's learner would widen access to children's records: it needs a
+  decision, then an explicit share (as `MarkingShare` does for written work).
+* **Assigning modules** is not built: no assignment model exists.
+* **Display order** is kept per device, not shared across a school.
+* **Approval.** Nothing is educator-approved, so on the shipped build no learner can be shown verified. Only the
+  marked test build shows green.
