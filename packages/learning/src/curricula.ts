@@ -20,10 +20,10 @@ import r12 from "../../../content/learning/curricula/openpath-sample-mathematics
 import r13 from "../../../content/learning/curricula/openpath-sample-mathematics-grade-12.v1.1.0.json";
 import r14 from "../../../content/learning/curricula/board-b-sample-mathematics-class-10.v1.1.0.json";
 
-import { boardReleases } from "./board-releases";
+import { boardReleaseHistory } from "./board-releases";
 
 /** The synthetic sample releases (development and acceptance tests) and the real boards' releases (boards@1). */
-export const allReleases = [...([r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14] as unknown as CurriculumRelease[]), ...boardReleases];
+export const allReleases = [...([r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14] as unknown as CurriculumRelease[]), ...boardReleaseHistory];
 const newer = (a: string, b: string) => a.split(".").map(Number).reduce((d, x, i) => d || x - Number(b.split(".")[i] ?? 0), 0) > 0;
 /** The latest version of each release: the synthetic sample books and the boards' releases. */
 export const latestReleases = allReleases.filter((r) => !allReleases.some((x) => x.id === r.id && newer(x.version, r.version)));
