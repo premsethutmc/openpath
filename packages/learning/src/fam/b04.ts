@@ -1361,4 +1361,1517 @@ export const B04: Def[] = [
     },
     limits: "Two groups by two choices, counts 1 to 9 in each cell, one number missing; collecting the data is done in class.",
   },
+  // ============================================================ gap@1 additions (g0304)
+  {
+    id: "adfnl",
+    arity: 4,
+    title: "Unit fractions such as 1/2 and 1/4 on a number line",
+    competency: FCMP,
+    type: "choice",
+    // [i, j, q, o]: 1/UF[i] and 1/UF[j] (i < j, so 1/UF[i] is greater) marked on a line from 0 to 1; q 0 the dot nearer 0,
+    // 1 nearer 1, 2 farther right; o the order they are named in
+    parse: none,
+    reject: ([i, j, q, o]) => (i < 0 || j > 6 || i >= j || q < 0 || q > 2 || o < 0 || o > 1 ? "Two different unit fractions from 1/2 to 1/10." : null),
+    choices: (p) => shufO(p, "fnl", fnlPair(p).map((d) => fr(1, d))),
+    prompt: (p) => {
+      const [x, y] = fnlPair(p);
+      return `The two dots on the number line from 0 to 1 in the picture show ${frw(1, x)} and ${frw(1, y)}. Which fraction is at the dot ${["nearer to 0", "nearer to 1", "farther to the right"][p[2]]}?`;
+    },
+    solve: (p) => {
+      const [i, j, q] = p;
+      const pick = q === 0 ? UF[j] : UF[i];
+      return { steps: [sp("compare", "compare", FCMP, [fr(1, UF[i]), fr(1, UF[j])], fr(1, pick))], answer: posO(p, 2, fnlPair(p).indexOf(pick), "fnl") };
+    },
+    // independent: work out how far along the line each dot is (top ÷ bottom) and compare the distances
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const opts = shufO(p, "fnl", fnlPair(p).map((d) => fr(1, d)));
+      const val = opts.map(num);
+      if (!opts[v]) return false;
+      return p[2] === 0 ? val[v] < val[1 - v] : val[v] > val[1 - v];
+    },
+    bugs: (p) => {
+      const [i, j, q] = p;
+      const wrong = q === 0 ? UF[i] : UF[j];
+      return [Bg("bigger-bottom-bigger", "conceptual", UNIT, `A bigger bottom number was taken to mean a bigger fraction. 1/${UF[j]} cuts the whole into more parts than 1/${UF[i]}, so each part is smaller and its dot is nearer to 0.`, posO(p, 2, fnlPair(p).indexOf(wrong), "fnl"))];
+    },
+    variants: () => [],
+    explain: (s) => `With the same top number, the smaller bottom number gives the bigger part: ${s.inputs[0]} is greater than ${s.inputs[1]}, so the answer is ${s.value}`,
+    domain: [[0, 6], [0, 6], [0, 2], [0, 1]],
+    difficulty: ([i, j]) => (UF[i] === 2 && UF[j] === 4 ? 1 : j - i === 1 ? 3 : 2),
+    figure: ([i, j]) => ({ type: "numberline", from: 0, to: 1, step: 1, marks: [1 / UF[i], 1 / UF[j]] }),
+    word: (p) => {
+      const [x, y] = fnlPair(p);
+      return `${nm(x + y)} and ${nm(x + y + 1)} start at the same gate and walk along a road 1 km long. One walks ${fr(1, x)} km and the other ${fr(1, y)} km. Which distance is ${p[2] === 0 ? "shorter" : "longer"}?`;
+    },
+    teach: {
+      idea: "On a number line from 0 to 1, 1/2 is halfway and 1/4 is halfway to the half: cutting the line into more equal parts makes each part shorter, so 1/4 is nearer to 0 than 1/2.",
+      method: "Picture the line from 0 to 1 cut into as many equal parts as the bottom number; the first mark is the unit fraction. More parts means the first mark is closer to 0.",
+      visual: ([i, j]) => ({ type: "strips", top: UF[i], bottom: UF[j], shaded: 1 }),
+      alternatives: [
+        { id: "fold", title: "Fold a strip", kind: "conceptual", text: ["Fold a paper strip in half and mark the fold: that is 1/2.", "Fold it in half again: the first fold from the start is 1/4, closer to the start."], visual: () => ({ type: "numberline", from: 0, to: 1, step: 1, marks: [0.25, 0.5, 0.75] }) },
+      ],
+    },
+    limits: "Two unit fractions from 1/2 to 1/10 on one line from 0 to 1; non-unit fractions are adfcmpu.",
+  },
+  {
+    id: "adwtcap",
+    arity: 2,
+    title: "Estimating and checking weights and capacities",
+    competency: EST,
+    type: "integer",
+    mc: true,
+    // [mode, x]: 0 how far a weight estimate was from the weighing; 1 how many glasses a jug really fills; 2 a total weight in grams; 3 how many mugs fill a bucket
+    parse: none,
+    reject: ([mode, x]) => {
+      if (mode < 0 || mode > 3 || x < 0 || x > 39) return "Four kinds of weight and capacity problem.";
+      for (let x0 = 0; x0 < x; x0++) if (wcText([mode, x0], false) === wcText([mode, x], false)) return "An earlier seed gives the same problem (distinct@1).";
+      return null;
+    },
+    prompt: (p) => wcText(p, false),
+    solve: (p) => {
+      const W = wcNums(p);
+      return { steps: [sp("work", W.op, EST, W.inputs, W.ans)], answer: W.ans };
+    },
+    // independent: count it out (kilograms one by one, glasses poured one at a time)
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const W = wcNums(p);
+      const [a, b] = W.inputs as number[];
+      if (p[0] === 0) {
+        let n = 0;
+        for (let x = Math.min(a, b); x < Math.max(a, b); x++) n++;
+        return v === n;
+      }
+      if (p[0] === 2) {
+        let g = b;
+        for (let i = 0; i < a; i++) g += 1000;
+        return v === g;
+      }
+      let left = a;
+      let n = 0;
+      while (left >= b) {
+        left -= b;
+        n++;
+      }
+      return left === 0 && v === n;
+    },
+    bugs: (p) => {
+      const W = wcNums(p);
+      const [a, b] = W.inputs as number[];
+      if (p[0] === 0) return [Bg("added", "conceptual", EST, "The guess and the weighing were added. How far off the guess was is the difference: take the smaller from the larger.", a + b)];
+      if (p[0] === 1) return [Bg("kept-guess", "procedural", EST, "The guess was given again. Check it: find how many glasses of that size the jug really holds.", W.guess ?? null), Bg("subtracted", "conceptual", EST, "The glass was taken away from the jug once. Filling glasses takes the glass away again and again: count how many times.", a - b)].filter((x) => x.predict !== W.ans);
+      if (p[0] === 2) return [Bg("kg-as-100", "recall", "MATH.measurement.standard-mass", "A kilogram was taken as 100 g; 1 kg = 1000 g.", 100 * a + b), Bg("added-numbers", "conceptual", "MATH.measurement.standard-mass", "The numbers were added without changing kilograms into grams first.", a + b)];
+      return [Bg("litre-as-100", "recall", "MATH.measurement.capacity", "A litre was taken as 100 mL; 1 L = 1000 mL.", (a / 10) % b === 0 ? a / 10 / b : null), Bg("litres-only", "conceptual", "MATH.measurement.capacity", "The number of litres was given; change the litres into millilitres and see how many mugs fit.", a / 1000)].filter((x) => x.predict !== W.ans);
+    },
+    distractors: (p) => {
+      const r = wcNums(p).ans;
+      return [r + 1, r + 2, r > 1 ? r - 1 : r + 3];
+    },
+    variants: () => [],
+    explain: (s) => `${s.op === "difference" ? `${s.inputs[0]} and ${s.inputs[1]} differ by` : s.op === "add" ? `${s.inputs[0]} kg and ${s.inputs[1]} g together are` : `${s.inputs[0]} mL holds ${s.inputs[1]} mL this many times:`} ${s.value}`,
+    domain: [[0, 3], [0, 39]],
+    difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
+    figure: (p) => wcFigure(p),
+    word: (p) => wcText(p, true),
+    teach: {
+      idea: "An estimate is a sensible guess; checking it by weighing or pouring tells how close it was. Estimates get better when we compare with things we know (a 1 kg packet of salt, a 1 L bottle).",
+      method: "Make a guess using a known weight or container, then measure. The difference between the guess and the measurement shows how good the guess was.",
+      visual: () => ({ type: "balance", left: "school bag", right: "1 kg + 1 kg + 1 kg" }),
+      alternatives: [
+        { id: "benchmark", title: "Compare with things you know", kind: "conceptual", text: ["A packet of salt weighs 1 kg; a water bottle often holds 1 L.", "Ask: is it about as heavy as 2 packets? 5 packets? That gives a sensible guess."] },
+      ],
+    },
+    limits: "Whole kilograms and grams, and capacities in millilitres that share exactly; estimating by hand is done in class (a written task).",
+  },
+  {
+    id: "adday",
+    arity: 3,
+    title: "Hours in days, days in weeks and months, months in years",
+    competency: TIME,
+    type: "integer",
+    mc: true,
+    // [mode, x, e]: 0 x days e hours → hours; 1 x weeks e days → days; 2 days in month x (e = 1) or in months x and x + 1 (e = 0); 3 x years e months → months
+    parse: none,
+    reject: ([mode, x, e]) => {
+      if (mode === 0) return x < 1 || x > 10 || e < 0 || e > 11 ? "Up to 10 days and 11 hours." : null;
+      if (mode === 1) return x < 1 || x > 12 || e < 0 || e > 6 ? "Up to 12 weeks and 6 days." : null;
+      if (mode === 2) return x < 1 || x > 12 || e < 0 || e > 1 ? "One month or two months next to each other." : null;
+      if (mode === 3) return x < 1 || x > 9 || e < 0 || e > 11 ? "Up to 9 years and 11 months." : null;
+      return "Four kinds of time change.";
+    },
+    prompt: ([mode, x, e]) =>
+      mode === 0
+        ? `How many hours are there in ${pl(x, "day")}${e ? ` ${pl(e, "hour")}` : ""}?`
+        : mode === 1
+          ? `How many days are there in ${pl(x, "week")}${e ? ` ${pl(e, "day")}` : ""}?`
+          : mode === 2
+            ? e
+              ? `How many days are there in ${MONTHS[x - 1]} (in a year that is not a leap year)?`
+              : `How many days are there in ${MONTHS[x - 1]} and ${MONTHS[x % 12]} together (not in a leap year)?`
+            : `How many months are there in ${pl(x, "year")}${e ? ` ${pl(e, "month")}` : ""}?`,
+    solve: ([mode, x, e]) => {
+      if (mode === 2) {
+        const d1 = MDAYS[x - 1];
+        const d2 = MDAYS[x % 12];
+        return { steps: [sp("month", "recall", TIME, [MONTHS[x - 1]], d1), ...(e ? [] : [sp("next", "recall", TIME, [MONTHS[x % 12]], d2), sp("add", "add", ADD, [d1, d2], d1 + d2)])], answer: e ? d1 : d1 + d2 };
+      }
+      const k = [24, 7, 0, 12][mode];
+      return { steps: [sp("convert", "multiply", MT, [x, k], k * x), sp("add", "add", ADD, [k * x, e], k * x + e)], answer: k * x + e };
+    },
+    // independent: count through a calendar of 2027 (not a leap year), or count hours/days/months one big unit at a time
+    validate: ([mode, x, e], v) => {
+      if (typeof v !== "number") return false;
+      if (mode === 2) {
+        let n = 0;
+        const months = e ? [x - 1] : [x - 1, x % 12];
+        for (const m of months) for (let d = 1; d <= 31; d++) if (new Date(Date.UTC(2027, m, d)).getUTCMonth() === m) n++;
+        return v === n;
+      }
+      const k = [24, 7, 0, 12][mode];
+      let n = e;
+      for (let i = 0; i < x; i++) for (let j = 0; j < k; j++) n++;
+      return v === n;
+    },
+    bugs: ([mode, x, e]) => {
+      if (mode === 2) {
+        const r = e ? MDAYS[x - 1] : MDAYS[x - 1] + MDAYS[x % 12];
+        return [Bg("thirty-each", "recall", TIME, "Every month was taken to have 30 days. Months have 28, 30 or 31 days: use the knuckle rhyme or a calendar.", e ? 30 : 60), Bg("thirty-one-each", "recall", TIME, "Every month was taken to have 31 days. Some months have 30 days, and February has 28 (29 in a leap year).", e ? 31 : 62)].filter((b) => b.predict !== r);
+      }
+      const k = [24, 7, 0, 12][mode];
+      const out: Bug[] = [Bg("not-converted", "conceptual", TIME, `The numbers were added as they are; change the ${["days into hours", "weeks into days", "", "years into months"][mode]} first.`, x + e)];
+      if (mode === 0) out.push(Bg("day-as-12", "recall", TIME, "A day was taken as 12 hours. A whole day and night is 24 hours.", 12 * x + e));
+      if (mode === 3) out.push(Bg("year-as-10", "recall", TIME, "A year was taken as 10 months, as if time were counted in tens. A year has 12 months.", 10 * x + e));
+      if (mode === 1 && e) out.push(Bg("extra-days-left-out", "procedural", TIME, `The weeks were changed into days, but the extra ${pl(e, "day")} were not added.`, 7 * x));
+      return out.filter((b) => b.predict !== k * x + e);
+    },
+    distractors: ([mode, x, e]) => {
+      const r = mode === 2 ? (e ? MDAYS[x - 1] : MDAYS[x - 1] + MDAYS[x % 12]) : [24, 7, 0, 12][mode] * x + e;
+      return [r + 1, r - 1, r + 2];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "add" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} has ${s.value} days`),
+    domain: [[0, 3], [1, 12], [0, 11]],
+    difficulty: ([mode, x]) => (mode === 1 && x <= 4 ? 1 : mode === 2 ? 2 : x > 5 ? 3 : 2),
+    figure: ([mode, x]) => (mode === 2 ? { type: "table", head: ["Month", "Days"], rows: [[MONTHS[x - 1], "?"], [MONTHS[x % 12], "?"]] } : null),
+    word: ([mode, x, e]) =>
+      mode === 0
+        ? `A cricket test match went on for ${pl(x, "day")}${e ? ` and ${pl(e, "hour")}` : ""}, counting day and night. How many hours is that?`
+        : mode === 1
+          ? `${nm(x + e)}'s summer holiday lasts ${pl(x, "week")}${e ? ` and ${pl(e, "day")}` : ""}. How many days is the holiday?`
+          : mode === 2
+            ? e
+              ? `A school library lends a book for the whole month of ${MONTHS[x - 1]}. For how many days can the book be kept (not in a leap year)?`
+              : `A summer camp runs for the whole of ${MONTHS[x - 1]} and ${MONTHS[x % 12]} (not in a leap year). How many days long is the camp?`
+            : `${nm(x)}'s little brother is ${pl(x, "year")}${e ? ` and ${pl(e, "month")}` : ""} old. How many months old is he?`,
+    teach: {
+      idea: "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months; months have 28, 30 or 31 days.",
+      method: "Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar or the knuckle rhyme.",
+      visual: ([mode, x]) => (mode === 2 ? { type: "table", head: ["Month", "Days"], rows: MONTHS.map((m, i) => [m, MDAYS[i]]) } : { type: "numberline", from: 0, to: [24, 7, 0, 12][mode] * Math.min(x, 4), step: [24, 7, 1, 12][mode] }),
+      alternatives: [
+        { id: "knuckles", title: "The knuckle way", kind: "conceptual", text: ["Make two fists. Say the months along the knuckles and the gaps between them.", "Months on a knuckle have 31 days; months in a gap have 30, except February (28, or 29 in a leap year)."] },
+      ],
+    },
+    limits: "Days and hours, weeks and days, months, years and months; leap years are mentioned but not asked.",
+  },
+  {
+    id: "adname",
+    arity: 2,
+    title: "Number names and expanded form of four-digit numbers",
+    competency: TH,
+    type: "choice",
+    // [mode, x]: a four-digit number with a zero (seed x); mode 0 choose its number name, 1 choose the numeral for a number name, 2 choose its expanded form
+    parse: none,
+    reject: ([mode, x]) => {
+      if (mode < 0 || mode > 2 || x < 0 || x > 59) return "Three ways of writing a four-digit number.";
+      const n = nameNum(x);
+      for (let x0 = 0; x0 < x; x0++) if (nameNum(x0) === n) return "An earlier seed gives the same number (distinct@1).";
+      return null;
+    },
+    choices: (p) => shufO(p, "name", nameOptions(p)),
+    prompt: ([mode, x]) => {
+      const n = nameNum(x);
+      return mode === 0 ? `Which is the number name of ${inr(n)}?` : mode === 1 ? `Which numeral is "${words(n)}"?` : `Which is the expanded form of ${inr(n)}?`;
+    },
+    solve: (p) => {
+      const n = nameNum(p[1]);
+      const d = digits(n);
+      return { steps: [sp("place", "identify", TH, d, `${d[0]} thousands, ${d[1]} hundreds, ${d[2]} tens, ${d[3]} ones`), sp("write", "write", TH, [n], nameOptions(p)[0])], answer: posO(p, 4, 0, "name") };
+    },
+    // independent: read the chosen option back into a number (the name word by word, the expanded form term by term) and compare
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const o = shufO(p, "name", nameOptions(p))[v];
+      if (!o) return false;
+      const n = nameNum(p[1]);
+      if (p[0] === 0) return nameToNum(o) === n;
+      if (p[0] === 1) return Number(o.replace(/,/g, "")) === nameToNum(words(n));
+      const terms = o.split("+").map((t) => t.trim());
+      const pows = terms.map((t) => (/^[1-9]0*$/.test(t) ? t.length - 1 : -1));
+      return pows.every((k) => k >= 0) && new Set(pows).size === pows.length && terms.reduce((s, t) => s + Number(t), 0) === n;
+    },
+    bugs: (p) => {
+      const n = nameNum(p[1]);
+      const place = ["hundreds", "tens", "ones"][String(n).slice(1).indexOf("0")];
+      if (p[0] === 0) return [Bg("zero-place", "conceptual", TH, `The 0 in ${inr(n)} was read in the wrong place. A 0 keeps its place empty: here there are no ${place}.`, posO(p, 4, 1, "name"))];
+      if (p[0] === 1) return [Bg("thousand-as-zero", "procedural", TH, `A 0 was written for the word "thousand", giving five digits. The thousands digit is just the number before "thousand", and the number has four digits.`, posO(p, 4, 3, "name"))];
+      return [Bg("face-values", "conceptual", TH, "The digits were added as they are. In the expanded form each digit is written with its place value: thousands, hundreds, tens, ones.", posO(p, 4, 3, "name"))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "place" ? `In the place-value table: ${s.value}` : `So it is ${s.value}`),
+    domain: [[0, 2], [0, 59]],
+    difficulty: ([mode, x]) => (String(nameNum(x)).endsWith("0") ? 1 : mode === 2 ? 2 : 3),
+    word: ([mode, x]) => {
+      const n = nameNum(x);
+      return mode === 0 ? `A cheque for ₹${inr(n)} must have the amount written in words. Which words should be written?` : mode === 1 ? `The newspaper says "${words(n)} people came to the temple festival". Which numeral is that?` : `${nm(x)} has ₹${inr(n)} in ₹1000, ₹100, ₹10 and ₹1 notes and coins, as few as possible. Which shows the money in expanded form?`;
+    },
+    teach: {
+      idea: "A four-digit number has thousands, hundreds, tens and ones. The name and the expanded form say each digit with its place; a 0 means that place is empty.",
+      method: "Write the number in a Th H T O table. Read it as (thousands digit) thousand, (hundreds digit) hundred, then the tens and ones; skip a place with 0. The expanded form adds the value of each non-zero digit.",
+      visual: ([, x]) => ({ type: "table", head: ["Th", "H", "T", "O"], rows: [digits(nameNum(x))] }),
+      alternatives: [{ id: "money", title: "Think of notes", kind: "conceptual", text: ["4,507 is 4 notes of ₹1000, 5 notes of ₹100, no ₹10 notes and 7 coins of ₹1.", "So it is 4000 + 500 + 7, four thousand five hundred seven."] }],
+    },
+    limits: "Four-digit numbers with one zero; five-digit numbers and the international system are other families.",
+  },
+  {
+    id: "adseq",
+    arity: 3,
+    title: "Continuing number patterns up to 10,000",
+    competency: TH,
+    type: "integer",
+    mc: true,
+    // [si, x, dir]: steps of [10, 25, 50, 100, 250, 500, 1000][si], start from seed x, forwards (0) or backwards (1)
+    parse: none,
+    reject: ([si, x, dir]) => {
+      if (si < 0 || si > 6 || x < 0 || x > 39 || dir < 0 || dir > 1) return "A pattern with a step from 10 to 1000.";
+      for (let x0 = 0; x0 < x; x0++) if (seqTerms([si, x0, dir]).join() === seqTerms([si, x, dir]).join()) return "An earlier seed gives the same pattern (distinct@1).";
+      return null;
+    },
+    prompt: (p) => `Continue the number pattern: ${seqTerms(p).slice(0, 4).map(inr).join("; ")}; ? What is the next number?`,
+    solve: (p) => {
+      const t = seqTerms(p);
+      return { steps: [sp("step", "subtract", TH, [t[1], t[0]], t[1] - t[0]), sp("next", t[1] > t[0] ? "add" : "subtract", TH, [t[3], Math.abs(t[1] - t[0])], t[4])], answer: t[4] };
+    },
+    // independent: the gaps between shown terms are all the same, and the answer keeps that gap
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const t = seqTerms(p).slice(0, 4);
+      const all = [...t, v];
+      const g = all.slice(1).map((x, i) => x - all[i]);
+      return g.every((d) => d === g[0]) && g[0] !== 0;
+    },
+    bugs: (p) => {
+      const t = seqTerms(p);
+      const d = t[1] - t[0];
+      const S = Math.abs(d);
+      return [
+        ...(S !== 10 ? [Bg("step-ten", "procedural", TH, `The pattern was continued in tens, but each step is ${inr(S)}: look at the gap between two numbers next to each other.`, t[3] + Math.sign(d) * 10)] : []),
+        Bg("wrong-way", "conceptual", TH, `The numbers ${d > 0 ? "go up" : "go down"} each time; the step was taken the other way.`, t[3] - d),
+        ...(S >= 100 && Math.floor(t[4] / (10 * S)) !== Math.floor(t[3] / (10 * S)) && d > 0 ? [Bg("no-carry", "procedural", TH, "The digit went past 9 but the next place was not made one more.", t[4] - 10 * S)] : []),
+      ].filter((b) => (b.predict as number) >= 0 && b.predict !== t[4]);
+    },
+    distractors: (p) => {
+      const t = seqTerms(p);
+      const d = t[1] - t[0];
+      return [t[4] + d, t[4] + Math.sign(d) * 100, t[3]].filter((x) => x >= 0 && x !== t[4]);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "step" ? `${inr(Number(s.inputs[0]))} − ${inr(Number(s.inputs[1]))} = ${inr(Number(s.value))}: the step` : `${inr(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${inr(Number(s.inputs[1]))} = ${inr(Number(s.value))}`),
+    domain: [[0, 6], [0, 39], [0, 1]],
+    cap: 400,
+    difficulty: ([si]) => (si === 0 || si === 3 || si === 6 ? 1 : si === 1 || si === 4 ? 3 : 2),
+    word: (p) => {
+      const t = seqTerms(p);
+      return `The odometer of a lorry is read at the end of each trip: ${t.slice(0, 4).map(inr).join("; ")} km${t[1] < t[0] ? " (these are the kilometres still left on a long journey)" : ""}. If the pattern goes on, what is the next reading?`;
+    },
+    teach: {
+      idea: "In a number pattern that adds (or takes away) the same step each time, find the step and keep going; when a place goes past 9, the next place goes up by one.",
+      method: "Subtract two numbers next to each other to find the step. Add (or take away) the step from the last number, regrouping if a place passes 9 or 0.",
+      visual: (p) => {
+        const t = seqTerms(p);
+        return { type: "numberline", from: Math.min(t[0], t[4]), to: Math.max(t[0], t[4]), step: Math.abs(t[1] - t[0]), jumps: t.slice(0, 4).map((x, i) => [x, t[i + 1]] as [number, number]) };
+      },
+      alternatives: [{ id: "place", title: "Watch the place that changes", kind: "procedural", text: ["Steps of 100 change the hundreds digit; steps of 1000 change the thousands digit.", "When the hundreds go from 9 to 10, write 0 hundreds and add one thousand."] }],
+    },
+    limits: "Patterns with one constant step from 10 to 1000, within 0 to 10,000; growing steps are other families.",
+  },
+  {
+    id: "adestchk",
+    arity: 3,
+    title: "Checking an answer by estimating",
+    competency: EST,
+    type: "choice",
+    // [op, x, k]: a three-digit number + or − a two- or three-digit one (seed x); the answer shown is right (k 0) or a common slip (k 1, 2)
+    parse: none,
+    reject: (p) => {
+      const [op, x, k] = p;
+      if (op < 0 || op > 1 || x < 0 || x > 59 || k < 0 || k > 2) return "One worked sum or difference to check.";
+      const E = estNums(op, x);
+      if (!E) return "The numbers do not fit.";
+      if (k === 0) return null;
+      const c = E.slips[k - 1];
+      return c === null || c < 0 || c === E.exact || Math.abs(c - E.est) < 40 || (k === 2 && c === E.slips[0]) ? "The slip is far from the estimate (and differs from the other slip)." : null;
+    },
+    choices: (p) => shufO(p, "est", CHECK3),
+    prompt: (p) => {
+      const [op, x] = p;
+      const E = estNums(op, x)!;
+      return `${nm(x)} worked out ${E.a} ${op ? "−" : "+"} ${E.b} and got ${estClaim(p)}. Round each number to the nearest ten to estimate the answer. Is the answer sensible?`;
+    },
+    solve: (p) => {
+      const [op, x] = p;
+      const E = estNums(op, x)!;
+      const c = estClaim(p);
+      const w = Math.abs(c - E.est) <= 15 ? 0 : c < E.est ? 1 : 2;
+      return { steps: [sp("round", "round", ROUND, [E.a, E.b], `${r10(E.a)} and ${r10(E.b)}`), sp("estimate", op ? "subtract" : "add", EST, [r10(E.a), r10(E.b)], E.est), sp("judge", "compare", EST, [c, E.est], CHECK3[w])], answer: posO(p, 3, w, "est") };
+    },
+    // independent: work the exact answer out by counting on (or back) in hundreds, tens and ones, and see whether the shown answer is it, below it or above it
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [op, x] = p;
+      const E = estNums(op, x)!;
+      let t = E.a;
+      const s = op ? -1 : 1;
+      for (let i = 0; i < Math.floor(E.b / 100); i++) t += s * 100;
+      for (let i = 0; i < Math.floor(E.b / 10) % 10; i++) t += s * 10;
+      for (let i = 0; i < E.b % 10; i++) t += s;
+      const c = estClaim(p);
+      const w = c === t ? 0 : c < t ? 1 : 2;
+      return shufO(p, "est", CHECK3)[v] === CHECK3[w];
+    },
+    bugs: (p) => {
+      const [op, x, k] = p;
+      const E = estNums(op, x)!;
+      if (k > 0) return [Bg("trusted-working", "procedural", EST, `The working was trusted without checking. The estimate is about ${E.est}, which is far from ${estClaim(p)}, so something went wrong.`, posO(p, 3, 0, "est"))];
+      return E.exact !== E.est ? [Bg("estimate-must-match", "conceptual", EST, `The answer was rejected because it is not exactly ${E.est}. An estimate is only close: ${E.exact} is near ${E.est}, so it is sensible.`, posO(p, 3, E.exact < E.est ? 1 : 2, "est"))] : [];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "round" ? `Round: ${s.value}` : s.id === "estimate" ? `Estimate: ${s.inputs[0]} ${s.op === "subtract" ? "−" : "+"} ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} compared with about ${s.inputs[1]}: ${s.value}`),
+    domain: [[0, 1], [0, 59], [0, 2]],
+    difficulty: ([op, x, k]) => (k === 0 ? 2 : (estNums(op, x)?.b ?? 0) < 100 ? 1 : 3),
+    word: (p) => {
+      const [op, x] = p;
+      const E = estNums(op, x)!;
+      return op ? `A shop had ${E.a} kg of rice and sold ${E.b} kg. The shopkeeper's son says ${estClaim(p)} kg is left. Estimate by rounding to the nearest ten: is his answer sensible?` : `A school has ${E.a} children in the morning school and ${E.b} in the evening school. The clerk adds them and writes ${estClaim(p)}. Estimate by rounding to the nearest ten: is the clerk's answer sensible?`;
+    },
+    teach: {
+      idea: "An estimate made with rounded numbers is close to the exact answer, so an answer far from the estimate must be wrong.",
+      method: "Round each number to the nearest ten and work out the estimate in your head. If the answer is close (within about 15 here), it is sensible; if it is much smaller or bigger, check the working again.",
+      visual: (p) => {
+        const E = estNums(p[0], p[1])!;
+        return { type: "numberline", from: Math.max(0, Math.min(E.est, estClaim(p)) - 50), to: Math.max(E.est, estClaim(p)) + 50, step: 50, marks: [E.est, estClaim(p)] };
+      },
+      alternatives: [{ id: "front_end", title: "Use the hundreds first", kind: "procedural", text: ["Add (or subtract) the hundreds only: 468 + 57 is more than 400 + 50 = 450.", "An answer below that cannot be right."] }],
+    },
+    limits: "Three-digit numbers with a two- or three-digit number, slips that land at least 40 from the estimate; finer judgements are left to class discussion.",
+  },
+  {
+    id: "adcolx",
+    arity: 3,
+    title: "Column addition and subtraction from three to five digits, with and without regrouping",
+    competency: MDAS,
+    type: "integer",
+    mc: true,
+    // [kind, x, op]: kind 0 three digits ± two digits; 1 three digits without regrouping; 2 four digits (x even without, x odd with regrouping); 3 five digits; op 0 add, 1 subtract
+    parse: none,
+    reject: (p) => {
+      const [kind, x, op] = p;
+      if (kind < 0 || kind > 3 || x < 0 || x > 149 || op < 0 || op > 1) return "Two numbers of three to five digits.";
+      const [a, b] = colxNums(p);
+      if (op === 1 && b >= a) return "The first number is larger.";
+      const L = String(a).length;
+      const rg = needsRegroup(a, b, op, L);
+      if (kind === 1 && rg) return "No regrouping for this kind.";
+      if (kind === 2 && (x % 2 === 1) !== rg) return "Regrouping as the seed says.";
+      if (op === 0 && a + b > 99999) return "Up to five digits.";
+      return null;
+    },
+    prompt: (p) => {
+      const [a, b] = colxNums(p);
+      return `${inr(a)} ${p[2] ? "−" : "+"} ${inr(b)} = ?`;
+    },
+    solve: (p) => {
+      const [a, b] = colxNums(p);
+      const op = p[2];
+      const L = String(Math.max(a, b)).length;
+      const A = digitsL(a, L);
+      const Bd = digitsL(b, L);
+      const names = ["ones", "tens", "hundreds", "thousands", "ten thousands"];
+      const steps: Step[] = [];
+      let c = 0;
+      for (let i = L - 1; i >= 0; i--) {
+        let v = op ? A[i] - Bd[i] - c : A[i] + Bd[i] + c;
+        const nc = op ? (v < 0 ? 1 : 0) : v >= 10 ? 1 : 0;
+        if (op && v < 0) v += 10;
+        steps.push(sp(names[L - 1 - i], op ? "subtract" : "add", nc || c ? (op ? SUBR : ADDR) : op ? "MATH.number.subtraction" : ADD, [A[i], Bd[i], c], op ? v : v % 10));
+        c = nc;
+      }
+      return { steps, answer: op ? a - b : a + b };
+    },
+    // independent: the inverse operation (the answer and the second number give back the first)
+    validate: (p, v) => {
+      if (typeof v !== "number" || v < 0) return false;
+      const [a, b] = colxNums(p);
+      return p[2] ? v + b === a : v - b === a;
+    },
+    bugs: (p) => {
+      const [a, b] = colxNums(p);
+      const [kind, , op] = p;
+      const L = String(Math.max(a, b)).length;
+      const A = digitsL(a, L);
+      const Bd = digitsL(b, L);
+      const r = op ? a - b : a + b;
+      const out: Bug[] = [];
+      if (op === 0) out.push(Bg("no-carry", "conceptual", PV, "A ten (or hundred, or thousand) made in one column was not carried to the next column.", Number(A.map((d, i) => (d + Bd[i]) % 10).join(""))));
+      else {
+        out.push(Bg("smaller-from-larger", "conceptual", SUBR, "In each column the smaller digit was taken from the larger one. When the top digit is smaller, regroup: exchange 1 from the next column for 10.", Number(A.map((d, i) => Math.abs(d - Bd[i])).join(""))));
+        let c = 0;
+        let w = 0;
+        for (let i = L - 1, pv = 1; i >= 0; i--, pv *= 10) {
+          const top = A[i];
+          const d = top < Bd[i] ? top + 10 - Bd[i] : top - Bd[i];
+          c = top < Bd[i] ? 1 : 0;
+          w += d * pv;
+        }
+        void c;
+        out.push(Bg("not-reduced", "procedural", SUBR, "A column was regrouped, but the column it came from was not made one less.", w));
+      }
+      if (kind === 0) {
+        const m = op ? a - 10 * b : a + 10 * b;
+        if (m >= 0) out.push(Bg("misaligned", "procedural", PV, `${b} was written under the wrong places (its tens under the hundreds). Line up the ones under the ones.`, m));
+      }
+      return out.filter((x) => x.predict !== r);
+    },
+    distractors: (p) => {
+      const [a, b] = colxNums(p);
+      const r = p[2] ? a - b : a + b;
+      return [r + 10, r - 100, r + 1000];
+    },
+    variants: () => [],
+    explain: (s) => {
+      const [x, y, c] = s.inputs.map(Number);
+      const name = `${s.id[0].toUpperCase()}${s.id.slice(1)}`;
+      return s.op === "add" ? `${name}: ${x} + ${y}${c ? " + 1 carried" : ""}: write ${s.value}` : `${name}: ${c ? `${x} − 1 given away, ` : ""}${x - c < y ? "regroup, " : ""}${x - c < y ? x - c + 10 : x - c} − ${y} = ${s.value}`;
+    },
+    domain: [[0, 3], [0, 149], [0, 1]],
+    cap: 500,
+    difficulty: ([kind, x]) => (kind === 1 || (kind === 2 && x % 2 === 0) ? 1 : kind === 3 ? 3 : 2),
+    figure: (p) => {
+      const [a, b] = colxNums(p);
+      const L = String(Math.max(a, b)).length;
+      const head = ["", ...["TTh", "Th", "H", "T", "O"].slice(5 - L)];
+      return { type: "table", head, rows: [["", ...digitsL(a, L)], [p[2] ? "−" : "+", ...digitsL(b, L).map((d, i) => (i < L - String(b).length ? "" : d))]] };
+    },
+    word: (p) => {
+      const [a, b] = colxNums(p);
+      const [kind, x, op] = p;
+      if (op === 0) return kind >= 2 ? `In a census, a town counted ${inr(a)} men and ${inr(b)} women. How many people were counted in all?` : `A temple received ${inr(a)} visitors on Saturday and ${inr(b)} on Sunday. How many visitors came on the two days?`;
+      return x % 2 ? `A village had ${inr(a)} people in 2011. In 2021 it had ${inr(b)} people. By how many did the number of people decrease?` : `A school library had ${inr(b)} books last year and has ${inr(a)} books now. By how many books has it increased?`;
+    },
+    teach: {
+      idea: "Write the numbers with ones under ones, tens under tens and so on; each column is added or subtracted on its own, passing a 1 to the next column (or taking one from it) when needed.",
+      method: "Start with the ones and work left. Adding: if a column makes 10 or more, write the ones digit and carry 1. Subtracting: if the top digit is smaller, regroup 1 from the next column as 10.",
+      visual: (p) => {
+        const [a] = colxNums(p);
+        return { type: "table", head: ["TTh", "Th", "H", "T", "O"].slice(5 - String(a).length), rows: [digitsL(a, String(a).length)] };
+      },
+      alternatives: [{ id: "check_inverse", title: "Check with the inverse", kind: "procedural", text: ["After subtracting, add your answer to the number you took away: you should get the first number.", "After adding, take one number away from your answer: you should get the other."] }],
+    },
+    limits: "Three-digit with two-digit numbers, three- and four-digit numbers with and without regrouping, and five-digit numbers, up to 99,999.",
+  },
+  {
+    id: "advenn",
+    arity: 5,
+    title: "Only one, both or neither: reading a two-way table",
+    competency: TAB,
+    type: "integer",
+    mc: true,
+    // [a, b, c, d, q]: a play both games, b cricket only, c kho-kho only, d neither; q 0 exactly one game, 1 cricket, 2 at least one, 3 the whole class
+    parse: none,
+    reject: ([a, b, c, d, q]) => (a < 1 || a > 9 || b < 1 || b > 12 || c < 1 || c > 12 || d < 1 || d > 9 || q < 0 || q > 3 ? "Counts in a 2 × 2 table of two games." : b === c ? "The two only-one counts differ." : null),
+    keep: ([a, b, c, d, q]) => (a * 3 + b + 5 * c + d + q) % 9 === 0,
+    prompt: ([, , , , q]) => `The table shows which of two games, cricket and kho-kho, the children of a class play. ${["How many children play exactly one of the two games?", "How many children play cricket?", "How many children play at least one of the games?", "How many children are there in the class?"][q]}`,
+    solve: ([a, b, c, d, q]) => {
+      const cells = [[b, c], [a, b], [a, b, c], [a, b, c, d]][q];
+      return { steps: [sp("cells", "choose cells", TAB, [q], cells.join(", ")), sp("add", "add", ADD, cells, cells.reduce((x, y) => x + y, 0))], answer: cells.reduce((x, y) => x + y, 0) };
+    },
+    // independent: list the children one by one by the two answers (plays cricket? plays kho-kho?) and count those that fit
+    validate: ([a, b, c, d, q], v) => {
+      const kids: [boolean, boolean][] = [];
+      for (let i = 0; i < a; i++) kids.push([true, true]);
+      for (let i = 0; i < b; i++) kids.push([true, false]);
+      for (let i = 0; i < c; i++) kids.push([false, true]);
+      for (let i = 0; i < d; i++) kids.push([false, false]);
+      const fits = (k: [boolean, boolean]) => (q === 0 ? k[0] !== k[1] : q === 1 ? k[0] : q === 2 ? k[0] || k[1] : true);
+      return v === kids.filter(fits).length;
+    },
+    bugs: ([a, b, c, d, q]) => {
+      if (q === 0) return [Bg("counted-both", "conceptual", TAB, "The children who play both games were counted too. 'Exactly one' leaves out those who play both and those who play neither.", a + b + c), Bg("one-cell", "procedural", TAB, "Only one of the 'only one game' cells was taken; there are two such groups.", b)];
+      if (q === 1) return [Bg("only-cell", "conceptual", TAB, "Only the children who play cricket and not kho-kho were counted; those who play both also play cricket.", b)];
+      if (q === 2) return [Bg("added-neither", "conceptual", TAB, "The children who play neither game were counted too.", a + b + c + d), Bg("both-twice", "procedural", TAB, "The children who play both were counted once for each game, so twice.", 2 * a + b + c)];
+      return [Bg("missed-neither", "procedural", TAB, "The children who play neither game were left out; they are in the class too.", a + b + c)];
+    },
+    distractors: ([a, b, c, d, q]) => {
+      const r = [b + c, a + b, a + b + c, a + b + c + d][q];
+      return [r + 1, r - 1, r + a];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "cells" ? `Use the cells that fit: ${s.value}` : `${s.inputs.join(" + ")} = ${s.value}`),
+    domain: [[1, 9], [1, 12], [1, 12], [1, 9], [0, 3]],
+    cap: 400,
+    difficulty: ([, , , , q]) => (q === 1 || q === 3 ? 2 : 3),
+    figure: ([a, b, c, d]) => ({ type: "table", head: ["", "Plays kho-kho", "Does not play kho-kho"], rows: [["Plays cricket", a, b], ["Does not play cricket", c, d]] }),
+    word: ([a, b, c, d, q]) => `In ${nm(a + b)}'s class, ${pl(a, "child plays", "children play")} both cricket and kho-kho, ${b} ${b === 1 ? "plays" : "play"} only cricket, ${c} ${c === 1 ? "plays" : "play"} only kho-kho and ${d} ${d === 1 ? "plays" : "play"} neither. ${["How many play exactly one of the games?", "How many play cricket?", "How many play at least one game?", "How many children are in the class?"][q]}`,
+    teach: {
+      idea: "Each child is in exactly one cell: both games, cricket only, kho-kho only, or neither. 'Exactly one' is the two 'only' cells; 'cricket' includes those who play both; 'at least one' is everyone except 'neither'.",
+      method: "Decide which cells fit the question, then add only those cells.",
+      visual: ([a, b, c, d]) => ({ type: "table", head: ["", "Plays kho-kho", "Does not play kho-kho"], rows: [["Plays cricket", a, b], ["Does not play cricket", c, d]] }),
+      alternatives: [{ id: "circles", title: "Two overlapping circles", kind: "conceptual", text: ["Draw a circle for cricket and one for kho-kho that overlap. Both games go in the overlap; only one game in the rest of a circle; neither outside both circles.", "Read the question and shade the parts it asks for."] }],
+    },
+    limits: "Two yes/no questions about one class, counts up to 12 in a cell; three sets are other families.",
+  },
+  {
+    id: "adshade",
+    arity: 4,
+    title: "How many squares to shade to show a fraction",
+    competency: FMOD,
+    type: "integer",
+    mc: true,
+    // [r, c, a, b]: shade a/b of an r × c grid
+    parse: none,
+    reject: ([r, c, a, b]) => (r < 1 || r > 6 || c < 2 || c > 10 || r * c > 40 || b < 2 || b > 10 || a < 1 || a >= b || gcd(a, b) !== 1 || (r * c) % b !== 0 || (r * c) / b < 2 ? "A fraction in simplest form of a grid of up to 40 squares that shares exactly." : null),
+    prompt: ([r, c, a, b]) => `The grid in the picture has ${r * c} equal squares. How many squares must be shaded to show ${frw(a, b)} of the grid?`,
+    solve: ([r, c, a, b]) => ({ steps: [sp("part", "divide", SHARE, [r * c, b], (r * c) / b), sp("take", "multiply", MT, [a, (r * c) / b], (a * r * c) / b)], answer: (a * r * c) / b }),
+    // independent: shade squares one at a time until shaded ÷ all equals the fraction
+    validate: ([r, c, a, b], v) => {
+      if (typeof v !== "number") return false;
+      for (let s = 0; s <= r * c; s++) if (s * b === a * r * c) return v === s;
+      return false;
+    },
+    bugs: ([r, c, a, b]) => {
+      const T = r * c;
+      const ans = (a * T) / b;
+      return [
+        Bg("top-number", "conceptual", FMOD, `${a} squares were shaded, the top number. The top number counts parts of size 1/${b} of the WHOLE grid, and each such part here is ${T / b} squares.`, a),
+        ...(a > 1 ? [Bg("one-part", "procedural", UNIT, `Only 1/${b} of the grid was found (${T / b} squares); ${a}/${b} is ${a} of those parts.`, T / b)] : []),
+        Bg("unshaded", "procedural", FMOD, "The squares left unshaded were counted.", T - ans),
+      ].filter((x) => x.predict !== ans);
+    },
+    distractors: ([r, c, a, b]) => {
+      const ans = (a * r * c) / b;
+      return [ans + 1, ans - 1, b].filter((x) => x > 0 && x !== ans);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "part" ? `1/${s.inputs[1]} of ${s.inputs[0]} squares is ${s.value} squares` : `${s.inputs[0]} of those parts: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} squares`),
+    domain: [[1, 6], [2, 10], [1, 9], [2, 10]],
+    cap: 300,
+    difficulty: ([r, c, a, b]) => (a === 1 && r * c <= 12 ? 1 : (r * c) / b >= 4 && a > 1 ? 3 : 2),
+    figure: ([r, c]) => ({ type: "grid", rows: r, cols: c, shaded: 0 }),
+    word: ([r, c, a, b]) => `A rangoli is drawn on a floor of ${r * c} equal tiles. ${nm(r + c + a)} wants to colour ${fr(a, b)} of the tiles red. How many tiles should be coloured red?`,
+    teach: {
+      idea: "The same fraction can be shown on wholes of different sizes: 3/4 of 8 squares is 6 squares, 3/4 of 12 squares is 9 squares, but each time it is 3 of 4 equal parts of the whole.",
+      method: "Share the squares into as many equal groups as the bottom number, then shade as many groups as the top number.",
+      visual: ([r, c, a, b]) => ({ type: "grid", rows: r, cols: c, shaded: (a * r * c) / b }),
+      alternatives: [{ id: "two_wholes", title: "Same fraction, different wholes", kind: "conceptual", text: ["Shade 1/2 of a 2 × 2 grid and 1/2 of a 2 × 4 grid.", "Different numbers of squares are shaded (2 and 4), but each is half of its own grid."], visual: () => ({ type: "grid", rows: 2, cols: 4, shaded: 4 }) }],
+    },
+    limits: "Fractions in simplest form of grids up to 40 squares (shading row by row in the picture's answer); drawing shapes is done in class.",
+  },
+  {
+    id: "admental",
+    arity: 2,
+    title: "Mental shortcuts: making 100 and 10,000, and taking away or adding 9 or 99",
+    competency: MDAS,
+    type: "integer",
+    mc: true,
+    // [mode, x]: 0 n + ? = 100; 1 n + ? = 10,000; 2 n − 9; 3 n − 99; 4 n + 99
+    parse: none,
+    reject: ([mode, x]) => {
+      if (mode < 0 || mode > 4 || x < 0 || x > 79) return "Five kinds of mental shortcut.";
+      const n = mentN(mode, x);
+      return (mode <= 1 && n % 10 === 0) ? "Not already a multiple of ten." : null;
+    },
+    prompt: ([mode, x]) => {
+      const n = mentN(mode, x);
+      return [`Work it out in your head: ${n} + ? = 100. What is the missing number?`, `Work it out in your head: ${inr(n)} + ? = 10,000. What is the missing number?`, `Use a shortcut (take away 10, then add 1 back): ${inr(n)} − 9 = ?`, `Use a shortcut (take away 100, then add 1 back): ${inr(n)} − 99 = ?`, `Use a shortcut (add 100, then take 1 away): ${inr(n)} + 99 = ?`][mode];
+    },
+    solve: ([mode, x]) => {
+      const n = mentN(mode, x);
+      if (mode <= 1) {
+        const T = mode ? 10000 : 100;
+        return { steps: [sp("nines", "subtract", PV, [T - 1, n], T - 1 - n), sp("one", "add", ADD, [T - 1 - n, 1], T - n)], answer: T - n };
+      }
+      const [k, f] = mode === 2 ? [10, 1] : mode === 3 ? [100, 1] : [100, -1];
+      const s = mode === 4 ? 1 : -1;
+      return { steps: [sp("round", s > 0 ? "add" : "subtract", MDAS, [n, k], n + s * k), sp("adjust", f > 0 ? "add" : "subtract", MDAS, [n + s * k, 1], n + s * (k - 1))], answer: n + s * (k - 1) };
+    },
+    // independent: check with the inverse (add back the number taken, or the missing part)
+    validate: ([mode, x], v) => {
+      if (typeof v !== "number") return false;
+      const n = mentN(mode, x);
+      if (mode === 0) return v + n === 100;
+      if (mode === 1) return v + n === 10000;
+      if (mode === 2) return v + 9 === n;
+      if (mode === 3) return v + 99 === n;
+      return v - 99 === n;
+    },
+    bugs: ([mode, x]) => {
+      const n = mentN(mode, x);
+      if (mode <= 1) {
+        const T = mode ? 10000 : 100;
+        const d = String(n).split("").map(Number);
+        return [
+          ...(d.every((q) => q > 0) ? [Bg("each-to-ten", "conceptual", MDAS, "Each digit was made up to 10. Only the ones make 10; the other places each make 9, because the ten carried over fills the rest.", Number(d.map((q) => 10 - q).join("")))] : []),
+          Bg("made-nines", "procedural", MDAS, `The number was made up to ${inr(T - 1)}, one short of ${inr(T)}.`, T - 1 - n),
+        ].filter((b) => b.predict !== T - n);
+      }
+      if (mode === 2) return [Bg("no-adjust", "procedural", MDAS, "10 was taken away, but the extra 1 was not added back: 9 is one less than 10.", n - 10), Bg("adjust-wrong-way", "procedural", MDAS, "10 was taken away and then 1 more was taken away; since 10 is one too many, add 1 back.", n - 11)];
+      if (mode === 3) return [Bg("no-adjust", "procedural", MDAS, "100 was taken away, but the extra 1 was not added back: 99 is one less than 100.", n - 100), Bg("adjust-wrong-way", "procedural", MDAS, "100 was taken away and then 1 more was taken away; since 100 is one too many, add 1 back.", n - 101)];
+      return [Bg("no-adjust", "procedural", MDAS, "100 was added, but the extra 1 was not taken away: 99 is one less than 100.", n + 100), Bg("adjust-wrong-way", "procedural", MDAS, "100 was added and then 1 more was added; since 100 is one too many, take 1 away.", n + 101)];
+    },
+    distractors: ([mode, x]) => {
+      const n = mentN(mode, x);
+      const r = mode === 0 ? 100 - n : mode === 1 ? 10000 - n : mode === 2 ? n - 9 : mode === 3 ? n - 99 : n + 99;
+      return [r + 10, r - 1, r + 1];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "nines" ? `Up to ${inr(Number(s.inputs[0]))}: each digit makes 9 with the digit below it, ${inr(Number(s.value))}` : s.id === "one" ? `One more makes the round number: ${inr(Number(s.value))}` : `${inr(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${inr(Number(s.value))}`),
+    domain: [[0, 4], [0, 79]],
+    difficulty: ([mode]) => (mode === 0 || mode === 2 ? 1 : mode === 1 ? 3 : 2),
+    word: ([mode, x]) => {
+      const n = mentN(mode, x);
+      return [`A cricket team needs 100 runs and has ${n}. How many more runs are needed?`, `A school wants to plant 10,000 saplings and has planted ${inr(n)}. How many more must be planted?`, `${nm(x)} has ₹${inr(n)} and buys a pen for ₹9. How much money is left?`, `${nm(x)} has ₹${inr(n)} and buys a book for ₹99. How much money is left?`, `${nm(x)} has ₹${inr(n)} and gets ₹99 more as a gift. How much does ${nm(x)} have now?`][mode];
+    },
+    teach: {
+      idea: "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the ones, which pair to 10.",
+      method: "To take away 9, take away 10 and add 1 back; to add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9 and the ones digit 10.",
+      visual: ([mode, x]) => {
+        const n = mentN(mode, x);
+        return mode <= 1 ? { type: "numberline", from: n, to: mode ? 10000 : 100, jumps: [[n, (mode ? 10000 : 100) - 1], [(mode ? 10000 : 100) - 1, mode ? 10000 : 100]] } : { type: "numberline", from: Math.min(n, n + (mode === 4 ? 100 : -(mode === 2 ? 10 : 100))), to: Math.max(n, n + (mode === 4 ? 100 : -(mode === 2 ? 10 : 100))), jumps: [[n, n + (mode === 4 ? 100 : -(mode === 2 ? 10 : 100))]] };
+      },
+      alternatives: [{ id: "compensate", title: "Too much, then fix it", kind: "conceptual", text: ["Taking away 99 is taking away 100, which is 1 too many.", "So give that 1 back: 562 − 99 = 462 + 1 = 463."] }],
+    },
+    limits: "Complements of two-digit numbers to 100 and four-digit numbers to 10,000 (to 1000 is ad1000), and subtracting 9 or 99 or adding 99 to numbers up to five digits.",
+  },
+  {
+    id: "adrace",
+    arity: 3,
+    title: "Race times, and choosing seconds, minutes or hours",
+    competency: TIME,
+    type: "choice",
+    // [mode, x, q]: mode 0 three race times (seed x), q 0 the fastest, 1 the slowest; mode 1 the right unit for activity x (q = 0)
+    parse: none,
+    reject: ([mode, x, q]) => {
+      if (mode === 0) return x < 0 || x > 59 || q < 0 || q > 1 ? "Three race times." : null;
+      if (mode === 1) return x < 0 || x >= ACTS.length || q !== 0 ? "One activity." : null;
+      return "Two kinds of question.";
+    },
+    choices: (p) => (p[0] === 0 ? shufO(p, "race", raceNames(p[1])) : shufO(p, "unit", UNITS3)),
+    prompt: ([mode, x, q]) =>
+      mode === 0
+        ? `In a running race, ${raceNames(x).map((n, i) => `${n} took ${tShow(raceTimes(x)[i])}`).join(", ")}. Who was the ${q ? "slowest" : "fastest"}?`
+        : `Which unit is best for measuring how long it takes to ${ACTS[x][0]}?`,
+    solve: (p) => {
+      const [mode, x, q] = p;
+      if (mode === 1) return { steps: [sp("think", "estimate", TIME, [ACTS[x][0]], ACTS[x][1])], answer: posO(p, 3, UNITS3.indexOf(ACTS[x][1]), "unit") };
+      const T = raceTimes(x);
+      const k = T.indexOf(q ? Math.max(...T) : Math.min(...T));
+      return { steps: [sp("seconds", "convert", TIME, T.map(tShow), T.join(", ")), sp("compare", "compare", TIME, [q ? "most" : "least"], raceNames(x)[k])], answer: posO(p, 3, k, "race") };
+    },
+    // independent: read each shown time back into seconds and compare (races); for activities, the unit that fits a typical length of time
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [mode, x, q] = p;
+      if (mode === 1) {
+        const s = ACTS[x][2];
+        return shufO(p, "unit", UNITS3)[v] === (s < 90 ? "seconds" : s < 90 * 60 ? "minutes" : "hours");
+      }
+      const secs = raceTimes(x).map((t) => {
+        const m = tShow(t).match(/^(?:(\d+) min )?(\d+) s$/)!;
+        return 60 * Number(m[1] ?? 0) + Number(m[2]);
+      });
+      const who = shufO(p, "race", raceNames(x))[v];
+      const i = raceNames(x).indexOf(who);
+      return secs.every((s, j) => j === i || (q ? secs[i] > s : secs[i] < s));
+    },
+    bugs: (p) => {
+      const [mode, x, q] = p;
+      if (mode === 1) return [];
+      const T = raceTimes(x);
+      const right = T.indexOf(q ? Math.max(...T) : Math.min(...T));
+      const shown = T.map((t) => t % 60);
+      const k = shown.indexOf(q ? Math.max(...shown) : Math.min(...shown));
+      const opp = T.indexOf(q ? Math.min(...T) : Math.max(...T));
+      return [
+        ...(k !== right ? [Bg("seconds-only", "conceptual", TIME, "Only the numbers of seconds were compared and the minutes were left out. Change each time into seconds first: 1 min 5 s is 65 s.", posO(p, 3, k, "race"))] : []),
+        Bg("more-is-faster", "conceptual", TIME, `The ${q ? "smallest" : "biggest"} time was taken as the ${q ? "slowest" : "fastest"}. In a race, the fastest runner takes the LEAST time.`, posO(p, 3, opp, "race")),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "seconds" ? `In seconds the times are ${s.value}` : s.id === "think" ? `It usually takes a number of ${s.value}` : `The ${s.inputs[0]} time is ${s.value}'s`),
+    domain: [[0, 1], [0, 59], [0, 1]],
+    difficulty: ([mode, x]) => (mode === 1 ? 1 : raceTimes(x).some((t) => t >= 60) && raceTimes(x).some((t) => t < 60) ? 3 : 2),
+    word: ([mode, x, q]) =>
+      mode === 0
+        ? `At the school sports day, the times for one lap were: ${raceNames(x).map((n, i) => `${n} ${tShow(raceTimes(x)[i])}`).join(", ")}. Who ${q ? "came last" : "won"}?`
+        : `${nm(x)} wants to time how long it takes to ${ACTS[x][0]}. Which unit should ${nm(x)} use?`,
+    teach: {
+      idea: "1 minute = 60 seconds. In a race the fastest runner takes the least time. Short things (a blink, a 100 m run) are timed in seconds, longer ones in minutes, very long ones in hours.",
+      method: "Change every time into seconds (minutes × 60 + seconds), then compare. For choosing a unit, think how long the activity usually takes.",
+      visual: ([mode, x]) => (mode === 0 ? { type: "bars", title: "Race times in seconds", labels: raceNames(x), values: raceTimes(x) } : { type: "clock", h: 12, m: 0 }),
+      alternatives: [{ id: "count", title: "Count it out", kind: "conceptual", text: ["Say 'one thousand one, one thousand two …': each is about a second.", "If you would be counting for a long time, minutes (or hours) are the better unit."] }],
+    },
+    limits: "Three race times from 45 seconds to 2 min 10 s; the unit for everyday activities that clearly take seconds, minutes or hours.",
+  },
+  {
+    id: "addur",
+    arity: 2,
+    title: "Adding durations and changing seconds into minutes and seconds",
+    competency: TIME,
+    type: "tuple",
+    mc: true,
+    // [mode, x]: 0 add two durations in hours and minutes; 1 add two in minutes and seconds; 2 seconds into (minutes, seconds)
+    parse: none,
+    reject: ([mode, x]) => {
+      if (mode < 0 || mode > 2 || x < 0 || x > 99) return "Three kinds of duration question.";
+      if (mode < 2) for (let x0 = 0; x0 < x; x0++) if (durParts(mode, x0).join() === durParts(mode, x).join()) return "An earlier seed gives the same durations (distinct@1).";
+      return null;
+    },
+    prompt: ([mode, x]) => {
+      if (mode === 2) return `Write ${durSecs(x)} seconds in minutes and seconds. Write the answer as (minutes, seconds).`;
+      const [a, b, c, d] = durParts(mode, x);
+      return mode === 0 ? `A bus ride takes ${a} h ${b} min and a train ride after it takes ${c} h ${d} min. How long is the whole journey? Write the answer as (hours, minutes).` : `${nm(x)} runs two laps in ${a} min ${b} s and ${c} min ${d} s. What is the total time? Write the answer as (minutes, seconds).`;
+    },
+    solve: ([mode, x]) => {
+      if (mode === 2) {
+        const N = durSecs(x);
+        return { steps: [sp("minutes", "divide", TIME, [N, 60], Math.floor(N / 60)), sp("left", "subtract", TIME, [N, 60 * Math.floor(N / 60)], N % 60)], answer: `(${Math.floor(N / 60)}, ${N % 60})` };
+      }
+      const [a, b, c, d] = durParts(mode, x);
+      const small = b + d;
+      return { steps: [sp("small", "add", ADD, [b, d], small), sp("big", "add", ADD, [a, c, small >= 60 ? 1 : 0], a + c + (small >= 60 ? 1 : 0))], answer: `(${a + c + (small >= 60 ? 1 : 0)}, ${small % 60})` };
+    },
+    // independent: everything in the small unit, counted one at a time; the answer must give the same total with the small part under 60
+    validate: ([mode, x], v) => {
+      const t = tupleNums(v);
+      if (t.length !== 2 || !t.every(Number.isInteger) || t[0] < 0 || t[1] < 0 || t[1] >= 60) return false;
+      let total = 0;
+      if (mode === 2) total = durSecs(x);
+      else {
+        const [a, b, c, d] = durParts(mode, x);
+        for (let i = 0; i < a + c; i++) total += 60;
+        total += b + d;
+      }
+      return 60 * t[0] + t[1] === total;
+    },
+    bugs: ([mode, x]) => {
+      if (mode === 2) {
+        const N = durSecs(x);
+        return [Bg("minute-as-100", "conceptual", TIME, "The seconds were split into hundreds, as if a minute were 100 seconds. A minute has 60 seconds.", `(${Math.floor(N / 100)}, ${N % 100})`), ...(N >= 120 ? [Bg("one-minute-only", "procedural", TIME, "Only one minute was taken out; keep taking out 60 seconds while you can.", `(1, ${N - 60})`)] : [])].filter((b) => b.predict !== `(${Math.floor(N / 60)}, ${N % 60})`);
+      }
+      const [a, b, c, d] = durParts(mode, x);
+      if (b + d < 60) return [Bg("small-unit-left-out", "procedural", TIME, `Only the ${mode ? "minutes" : "hours"} were added.`, `(${a + c}, 0)`)];
+      return [Bg("no-carry", "conceptual", TIME, `The ${mode ? "seconds" : "minutes"} came to ${b + d}, but 60 of them make one ${mode ? "minute" : "hour"}.`, `(${a + c}, ${b + d})`), Bg("carry-kept", "procedural", TIME, `One ${mode ? "minute" : "hour"} was carried, but its 60 ${mode ? "seconds" : "minutes"} were not taken away.`, `(${a + c + 1}, ${b + d})`)];
+    },
+    distractors: ([mode, x]) => {
+      let h: number;
+      let m: number;
+      if (mode === 2) [h, m] = [Math.floor(durSecs(x) / 60), durSecs(x) % 60];
+      else {
+        const [a, b, c, d] = durParts(mode, x);
+        [h, m] = [a + c + (b + d >= 60 ? 1 : 0), (b + d) % 60];
+      }
+      return [`(${h + 1}, ${m})`, `(${h}, ${(m + 10) % 60})`, `(${Math.max(0, h - 1)}, ${m})`];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "small" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}${Number(s.value) >= 60 ? `, which is 1 and ${Number(s.value) - 60} more` : ""}` : s.id === "big" ? `${s.inputs[0]} + ${s.inputs[1]}${s.inputs[2] ? " + 1 carried" : ""} = ${s.value}` : s.id === "minutes" ? `${s.inputs[0]} seconds hold ${s.value} groups of 60` : `${s.value} seconds are left over`),
+    domain: [[0, 2], [0, 99]],
+    difficulty: ([mode, x]) => (mode === 2 ? 2 : durParts(mode, x)[1] + durParts(mode, x)[3] >= 60 ? 3 : 1),
+    word: ([mode, x]) => {
+      if (mode === 2) return `A song on the radio lasts ${durSecs(x)} seconds. How long is it in minutes and seconds? Write (minutes, seconds).`;
+      const [a, b, c, d] = durParts(mode, x);
+      return mode === 0 ? `${nm(x)} studies for ${a} h ${b} min on Saturday and ${c} h ${d} min on Sunday. How long is that in all? Write (hours, minutes).` : `A pressure cooker whistles after ${a} min ${b} s, and the rice then needs ${c} min ${d} s more. How long is that in all? Write (minutes, seconds).`;
+    },
+    teach: {
+      idea: "60 minutes make 1 hour and 60 seconds make 1 minute, so when the small units add up to 60 or more, 60 of them become one big unit.",
+      method: "Add the small units, then the big units. If the small units are 60 or more, take 60 away and add 1 to the big units. To change seconds into minutes and seconds, take out 60 seconds as many times as you can.",
+      visual: ([mode, x]) => ({ type: "numberline", from: 0, to: 120, step: 60, marks: [mode === 2 ? Math.min(120, durSecs(x) % 120) : 60] }),
+      alternatives: [{ id: "like_carrying", title: "Like carrying, but at 60", kind: "procedural", text: ["It works like carrying in addition, but you carry when you reach 60, not 10.", "45 min + 30 min = 75 min = 1 h 15 min."] }],
+    },
+    limits: "Two durations of up to 5 h 55 min (or 5 min 55 s), and up to 599 seconds; three or more durations are not included.",
+  },
+  {
+    id: "adbartf",
+    arity: 4,
+    title: "True or false? Checking statements about a bar chart",
+    competency: BAR,
+    type: "choice",
+    // [c, s, k, t]: bar chart c with seed s; statement kind k (0 more, 1 total, 2 how many more); t 0 a true statement, 1 a false one
+    parse: none,
+    reject: ([c, s, k, t]) => {
+      if (c < 0 || c > 3 || s < 0 || s > 29 || k < 0 || k > 2 || t < 0 || t > 1) return "A statement about a four-bar chart.";
+      if (!distinct(barValues(c, s, 0))) return "The bars have different heights.";
+      for (let s0 = s % 4; s0 < s; s0 += 4) if (barValues(c, s0, 0).join() === barValues(c, s, 0).join()) return "An earlier seed draws the same chart (distinct@1).";
+      return null;
+    },
+    choices: (p) => shufO(p, "tf", ["True", "False"]),
+    prompt: (p) => `The bar chart shows ${BARCTX[p[0]].title}. Is this statement true or false? "${tfStatement(p)}"`,
+    solve: (p) => ({ steps: [sp("read", "read", BAR, barValues(p[0], p[1], 0), tfStatement(p)), sp("judge", "compare", BAR, [p[3]], p[3] ? "False" : "True")], answer: posO(p, 2, p[3], "tf") }),
+    // independent: work the statement out from the bars (counting up the bars one unit at a time) and see whether it holds
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [c, s, k] = p;
+      const V = barValues(c, s, 0);
+      const { x, y, n } = tfParts(p);
+      let ok: boolean;
+      if (k === 0) ok = V[x] > V[y];
+      else if (k === 1) {
+        let tot = 0;
+        for (const b of V) for (let i = 0; i < b; i++) tot++;
+        ok = tot === n;
+      } else {
+        let gap = 0;
+        for (let h = V[y]; h < V[x]; h++) gap++;
+        ok = gap === n;
+      }
+      return shufO(p, "tf", ["True", "False"])[v] === (ok ? "True" : "False");
+    },
+    bugs: (p) => {
+      const [, , k, t] = p;
+      if (!t) return [];
+      if (k === 0) return [Bg("believed-order", "procedural", BAR, "The statement was accepted without looking at the two bars. Compare their heights: the taller bar is the larger number.", posO(p, 2, 0, "tf"))];
+      if (k === 1) return [Bg("missed-bar", "procedural", BAR, "One bar was left out when checking the total, so the wrong total looked right. Add every bar.", posO(p, 2, 0, "tf"))];
+      return [Bg("added", "conceptual", BAR, "The two bars were added, so the sum looked like the answer. 'How many more' is the difference.", posO(p, 2, 0, "tf"))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "read" ? `Read the bars: ${s.inputs.join(", ")}` : `So the statement is ${s.value}`),
+    domain: [[0, 3], [0, 29], [0, 2], [0, 1]],
+    cap: 400,
+    difficulty: ([, , k]) => (k === 0 ? 1 : k === 1 ? 3 : 2),
+    figure: ([c, s]) => ({ type: "bars", title: BARCTX[c].title, labels: BARCTX[c].labels, values: barValues(c, s, 0), scale: 1 }),
+    word: (p) => `${nm(p[1])} looked at the class bar chart of ${BARCTX[p[0]].title} and said: "${tfStatement(p)}" Is ${nm(p[1])} right? Choose True or False.`,
+    teach: {
+      idea: "A statement about a chart is true only if the numbers read from the bars make it so: check it, do not guess from how it sounds.",
+      method: "Read the bars the statement talks about. Work out what it claims (compare, add or subtract) and see whether you get the same.",
+      visual: ([c, s]) => ({ type: "bars", labels: BARCTX[c].labels, values: barValues(c, s, 0), scale: 1 }),
+      alternatives: [{ id: "table", title: "Write the numbers down first", kind: "procedural", text: ["Make a small table of each label and its number.", "Then test the statement on the table."] }],
+    },
+    limits: "Three kinds of statement about a four-bar chart with values 2 to 10; statements about pictures are acequal and the pictograph families.",
+  },
+  {
+    id: "adpreg",
+    arity: 3,
+    title: "Perimeter of a square or regular polygon from one side, and the side from the perimeter",
+    competency: PER,
+    type: "integer",
+    mc: true,
+    // [n, s, mode]: a regular n-gon (n 3 to 8) with side s cm; mode 0 the perimeter, mode 1 the side from the perimeter
+    parse: none,
+    reject: ([n, s, mode]) => (n < 3 || n > 8 || s < 2 || s > 25 || mode < 0 || mode > 1 ? "A regular shape with 3 to 8 sides of 2 to 25 cm." : null),
+    prompt: ([n, s, mode]) => (mode === 0 ? `All the sides of the ${REG[n]} in the picture are equal, and one side is ${s} cm. What is its perimeter, in cm?` : `The perimeter of ${an(REG[n])} is ${n * s} cm. All its sides are equal. How long is one side, in cm?`),
+    solve: ([n, s, mode]) => (mode === 0 ? { steps: [sp("count", "count", PER, [REG[n]], n), sp("multiply", "multiply", MT, [n, s], n * s)], answer: n * s } : { steps: [sp("count", "count", PER, [REG[n]], n), sp("divide", "divide", PER, [n * s, n], s)], answer: s }),
+    // independent: walk once round the shape, side by side
+    validate: ([n, s, mode], v) => {
+      if (typeof v !== "number" || v <= 0) return false;
+      let t = 0;
+      for (let i = 0; i < n; i++) t += mode === 0 ? s : v;
+      return mode === 0 ? v === t : t === n * s;
+    },
+    bugs: ([n, s, mode]) => {
+      const P = n * s;
+      if (mode === 0)
+        return [
+          Bg("one-side", "procedural", PER, "Only the marked side was given. The perimeter goes all the way round: every side counts.", s),
+          ...(n !== 4 ? [Bg("four-sides", "conceptual", PER, `The side was multiplied by 4, as for a square, but ${an(REG[n])} has ${n} sides.`, 4 * s)] : [Bg("area", "conceptual", "MATH.measurement.area-squares", "The side was multiplied by itself, which gives the area (the space inside). The perimeter is the distance round: 4 sides.", s * s)]),
+        ].filter((b) => b.predict !== P);
+      return [
+        ...(n !== 4 && P % 4 === 0 ? [Bg("divided-by-4", "conceptual", PER, `The perimeter was divided by 4, as for a square, but ${an(REG[n])} has ${n} equal sides.`, P / 4)] : []),
+        ...(P % 2 === 0 && n !== 2 ? [Bg("halved", "conceptual", PER, "The perimeter was halved, as when finding length + breadth of a rectangle. Here all the sides are equal, so share the perimeter among all of them.", P / 2)] : []),
+        Bg("multiplied", "conceptual", PER, `The perimeter was multiplied by ${n}; the side is the perimeter shared equally among the ${n} sides.`, P * n),
+      ].filter((b) => b.predict !== s);
+    },
+    distractors: ([n, s, mode]) => {
+      const r = mode === 0 ? n * s : s;
+      return [r + 1, r + n, r - 1].filter((x) => x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "count" ? `${an(String(s.inputs[0]))[0].toUpperCase()}${an(String(s.inputs[0])).slice(1)} has ${s.value} equal sides` : s.id === "multiply" ? `${s.inputs[0]} × ${s.inputs[1]} cm = ${s.value} cm` : `${s.inputs[0]} cm ÷ ${s.inputs[1]} = ${s.value} cm`),
+    domain: [[3, 8], [2, 25], [0, 1]],
+    difficulty: ([n, , mode]) => (n === 4 && mode === 0 ? 1 : n >= 7 || mode === 1 ? 3 : 2),
+    figure: ([n, s, mode]) => (n === 4 ? { type: "shape", kind: "square", lengths: [mode ? "?" : `${s} cm`] } : { type: "shape", sides: n, lengths: [mode ? "?" : `${s} cm`], name: REG[n] }),
+    word: ([n, s, mode]) => (mode === 0 ? `A garden bed shaped like ${an(REG[n])} has equal sides of ${s} m. How many metres of fencing go once round it?` : `${nm(n + s)} used ${n * s} cm of lace to go once round a card shaped like ${an(REG[n])} with equal sides. How long is each side, in cm?`),
+    teach: {
+      idea: "A regular polygon has all its sides equal, so its perimeter is the number of sides times one side: 4 × side for a square, 3 × side for an equilateral triangle, n × side in general.",
+      method: "Count the sides. Multiply the side by that number for the perimeter; divide the perimeter by it for the side.",
+      visual: ([n, s]) => (n === 4 ? { type: "shape", kind: "square", lengths: Array(4).fill(`${s} cm`) } : { type: "shape", sides: n, lengths: Array(n).fill(`${s} cm`) }),
+      alternatives: [{ id: "add_all", title: "Add the equal sides", kind: "conceptual", text: ["Write the side once for every side of the shape and add: 6 + 6 + 6 + 6 + 6 = 30 for a pentagon of side 6.", "Adding the same number again and again is multiplying."] }],
+    },
+    limits: "Regular polygons with 3 to 8 sides of 2 to 25 cm; shapes with different sides are adperim and admper, rectangles rperim.",
+  },
+  {
+    id: "adfunit",
+    arity: 3,
+    title: "Measuring lengths with fractional units",
+    competency: FMOD,
+    type: "fraction",
+    mc: true,
+    // [mode, b, k]: a strip 1/b of a metre long; mode 0 a length of k strips, in metres; mode 1 how many strips make k metres
+    parse: none,
+    reject: ([mode, b, k]) => {
+      if (mode < 0 || mode > 1 || b < 2 || b > 10) return "Strips from 1/2 to 1/10 of a metre.";
+      if (mode === 0) return k < 2 || k > 30 || k / b > 5 || k % b === 0 ? "2 to 30 strips, not a whole number of metres, up to 5 m." : null;
+      return k < 1 || k > 6 ? "1 to 6 metres." : null;
+    },
+    prompt: ([mode, b, k]) => (mode === 0 ? `A paper strip is ${fr(1, b)} of a metre long. A table is exactly ${k} strips long. How long is the table, in metres? (A fraction or mixed number is fine.)` : `A paper strip is ${fr(1, b)} of a metre long. How many strips, laid end to end, make ${pl(k, "metre")}?`),
+    solve: ([mode, b, k]) => (mode === 0 ? { steps: [sp("count", "count", UNIT, [k, fr(1, b)], fr(k, b))], answer: k / b } : { steps: [sp("per-metre", "count", UNIT, [fr(1, b)], b), sp("multiply", "multiply", MT, [b, k], b * k)], answer: b * k }),
+    // independent: lay the strips end to end, adding 1/b each time
+    validate: ([mode, b, k], v) => {
+      const x = typeof v === "number" ? v : num(String(v));
+      if (!Number.isFinite(x)) return false;
+      let len = 0;
+      if (mode === 0) {
+        for (let i = 0; i < k; i++) len += 1 / b;
+        return near(len, x);
+      }
+      if (!Number.isInteger(x) || x <= 0 || x > 200) return false;
+      for (let i = 0; i < x; i++) len += 1 / b;
+      return near(len, k);
+    },
+    bugs: ([mode, b, k]) =>
+      mode === 0
+        ? [Bg("counted-strips", "conceptual", FMOD, `The number of strips was given as metres. Each strip is only ${fr(1, b)} m, so ${k} strips are ${k} of those parts.`, k), Bg("multiplied", "conceptual", FMOD, `${k} was multiplied by ${b}. The strips are smaller than a metre, so ${k} strips are fewer metres than ${k}: ${k} × ${fr(1, b)}.`, k * b)]
+        : [Bg("divided", "conceptual", FMOD, `The metres were divided by ${b}. A short strip fits into a metre ${b} times, so you need MORE strips than metres.`, k / b), ...(k > 1 ? [Bg("one-metre", "procedural", FMOD, `Only the strips for one metre were counted; there are ${pl(k, "metre")}.`, b)] : [])],
+    distractors: ([mode, b, k]) => (mode === 0 ? [(k + 1) / b, k / (b + 1)] : [b * k + b, b + k]),
+    variants: () => [],
+    explain: (s) => (s.id === "count" ? `${s.inputs[0]} strips of ${s.inputs[1]} m make ${s.value} m` : s.id === "per-metre" ? `${s.value} strips of ${s.inputs[0]} m make 1 m` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value} strips`),
+    domain: [[0, 1], [2, 10], [1, 30]],
+    difficulty: ([mode, b, k]) => (mode === 1 && k <= 2 ? 1 : mode === 0 && k > b ? 3 : 2),
+    figure: ([mode, b, k]) => ({ type: "numberline", from: 0, to: mode === 0 ? Math.ceil(k / b) : k, step: 1, marks: mode === 0 ? Array.from({ length: k }, (_, i) => (i + 1) / b) : Array.from({ length: b }, (_, i) => (i + 1) / b) }),
+    word: ([mode, b, k]) => (mode === 0 ? `${nm(b + k)} measures a saree border with a stick that is ${fr(1, b)} of a metre long. The border is ${k} sticks long. How many metres is that? (A fraction or mixed number is fine.)` : `Tiles ${fr(1, b)} of a metre long are laid in a line along a path ${pl(k, "metre")} long. How many tiles are needed?`),
+    teach: {
+      idea: "A unit can be a fraction of a metre: if a strip is 1/b of a metre, b strips make 1 metre, and k strips make k/b of a metre.",
+      method: "For a length, write the number of strips over b (and change to a mixed number if you like). For how many strips, multiply the metres by b.",
+      visual: ([, b]) => ({ type: "strips", top: 1, bottom: b, shaded: 1 }),
+      alternatives: [{ id: "number_line", title: "Jump along a number line", kind: "procedural", text: ["Mark 0, 1, 2 … metres and cut each metre into b equal jumps.", "Count the jumps: k jumps land on k/b."] }],
+    },
+    limits: "Strips of 1/2 to 1/10 m, up to 5 m; non-unit fractional units (such as 3/4 m) are not included.",
+  },
+  {
+    id: "adfcmpu",
+    arity: 5,
+    title: "Comparing two fractions with different tops and bottoms",
+    competency: FCMP,
+    type: "fraction",
+    // [a, b, c, d, ask]: a/b and c/d in simplest form, a ≠ c and b ≠ d; ask 0 greater, 1 smaller
+    parse: none,
+    reject: ([a, b, c, d, ask]) => (b < 2 || b > 12 || d < 2 || d > 12 || a < 1 || a >= b || c < 1 || c >= d || a === c || b === d || gcd(a, b) !== 1 || gcd(c, d) !== 1 || a * d === b * c || ask < 0 || ask > 1 ? "Two different fractions less than 1, in simplest form, with different tops and different bottoms." : null),
+    keep: ([a, b, c, d, ask]) => (a * 7 + b * 3 + c * 5 + d + ask) % 11 === 0,
+    prompt: ([a, b, c, d, ask]) => `Which fraction is ${ask ? "smaller" : "greater"}: ${fr(a, b)} or ${fr(c, d)}? Write that fraction.`,
+    solve: ([a, b, c, d, ask]) => {
+      const L = (b * d) / gcd(b, d);
+      const [p, q] = [(a * L) / b, (c * L) / d];
+      const first = ask ? p < q : p > q;
+      return { steps: [sp("common", "lcm", "MATH.number.equivalent-fractions", [b, d], L), sp("rewrite", "convert", "MATH.number.equivalent-fractions", [fr(a, b), fr(c, d)], `${fr(p, L)} and ${fr(q, L)}`), sp("compare", "compare", FCMP, [p, q], first ? fr(a, b) : fr(c, d))], answer: first ? a / b : c / d };
+    },
+    // independent: the answer must be one of the two fractions, and its decimal value (by division) must be on the side asked
+    validate: ([a, b, c, d, ask], v) => {
+      if (typeof v !== "number") return false;
+      const [x, y] = [a / b, c / d];
+      const isX = near(v, x);
+      const isY = near(v, y);
+      if (isX === isY) return false;
+      const other = isX ? y : x;
+      return ask ? v < other : v > other;
+    },
+    bugs: ([a, b, c, d, ask]) => {
+      const ans = (ask ? a * d < c * b : a * d > c * b) ? a / b : c / d;
+      const out: Bug[] = [];
+      const bigBottom = b > d ? a / b : c / d;
+      const bigTop = a > c ? a / b : c / d;
+      const asked = (f: number) => (ask ? (f === a / b ? c / d : a / b) : f);
+      if (asked(bigBottom) !== ans) out.push(Bg("bigger-bottom-bigger", "conceptual", FCMP, `The fraction with the ${ask ? "smaller" : "bigger"} bottom number was chosen. The bottom number alone does not decide: change both to the same bottom number first.`, asked(bigBottom)));
+      if (asked(bigTop) !== ans) out.push(Bg("bigger-top-bigger", "conceptual", FCMP, `The fraction with the ${ask ? "smaller" : "bigger"} top number was chosen. The parts are different sizes, so compare with a common bottom number.`, asked(bigTop)));
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "common" ? `A common bottom number for ${s.inputs[0]} and ${s.inputs[1]} is ${s.value}` : s.id === "rewrite" ? `${s.inputs[0]} and ${s.inputs[1]} become ${s.value}` : `Compare the tops ${s.inputs[0]} and ${s.inputs[1]}: the answer is ${s.value}`),
+    domain: [[1, 11], [2, 12], [1, 11], [2, 12], [0, 1]],
+    cap: 400,
+    difficulty: ([, b, , d]) => (b % d === 0 || d % b === 0 ? 1 : gcd(b, d) > 1 ? 2 : 3),
+    word: ([a, b, c, d, ask]) => `${nm(a + b)} ate ${fr(a, b)} of a cake and ${nm(c + d)} ate ${fr(c, d)} of another cake of the same size. Write the fraction eaten by the one who ate ${ask ? "less" : "more"}.`,
+    teach: {
+      idea: "Fractions with different bottom numbers count parts of different sizes; writing them with a common bottom number makes the parts the same size, so the tops can be compared.",
+      method: "Find a common multiple of the bottom numbers (the smallest is easiest). Change both fractions to it, then the one with the bigger top is greater.",
+      visual: ([a, b, , d]) => ({ type: "strips", top: b, bottom: d, shaded: a }),
+      alternatives: [
+        { id: "benchmark", title: "Compare with 1/2", kind: "conceptual", text: ["If one fraction is more than half and the other less than half, the first is greater.", "3/5 is more than 1/2 (3 is more than half of 5); 3/8 is less than 1/2."] },
+        { id: "cross", title: "Cross-multiply", kind: "procedural", text: ["For a/b and c/d, compare a × d with c × b.", "The bigger product goes with the greater fraction."] },
+      ],
+    },
+    limits: "Two fractions less than 1 in simplest form with different tops and bottoms (up to twelfths); same tops or bottoms are adfcmp.",
+  },
+  {
+    id: "adfordu",
+    arity: 3,
+    title: "Ordering three unlike fractions",
+    competency: FCMP,
+    type: "tuple",
+    mc: true,
+    // [i, j, k]: three fractions from the list of fractions in simplest form with bottoms 2 to 10, all bottoms different
+    parse: none,
+    reject: ([i, j, k]) => {
+      const F = fracList();
+      if (i < 0 || k >= F.length || !(i < j && j < k)) return "Three fractions from the list, in list order.";
+      const T = [F[i], F[j], F[k]];
+      return new Set(T.map((f) => f[1])).size < 3 || new Set(T.map((f) => f[0])).size < 2 ? "Different bottom numbers and not all the same top." : null;
+    },
+    keep: ([i, j, k]) => {
+      const F = fracList();
+      const v = [F[i], F[j], F[k]].map(([a, b]) => a / b);
+      return !(v[0] < v[1] && v[1] < v[2]) && (i + 2 * j + 3 * k) % 5 === 0;
+    },
+    prompt: ([i, j, k]) => `Write these fractions in order from the smallest to the largest: ${[i, j, k].map((x) => fr(...fracList()[x])).join(", ")}. Write them in brackets, separated by commas.`,
+    solve: ([i, j, k]) => {
+      const T = [i, j, k].map((x) => fracList()[x]);
+      const L = T.reduce((m, [, b]) => (m * b) / gcd(m, b), 1);
+      const sorted = [...T].sort((p, q) => (p[0] * L) / p[1] - (q[0] * L) / q[1]);
+      const ans = `(${sorted.map(([a, b]) => fr(a, b)).join(", ")})`;
+      return { steps: [sp("common", "lcm", "MATH.number.equivalent-fractions", T.map((f) => f[1]), L), sp("rewrite", "convert", "MATH.number.equivalent-fractions", T.map(([a, b]) => fr(a, b)), T.map(([a, b]) => fr((a * L) / b, L)).join(", ")), sp("order", "order", FCMP, [L], ans)], answer: ans };
+    },
+    // independent: the list must hold exactly the three fractions, each smaller than the next by cross-multiplying
+    validate: ([i, j, k], v) => {
+      if (typeof v !== "string") return false;
+      const t = tupleNums(v);
+      if (t.length !== 3 || t.some((q) => !Number.isFinite(q))) return false;
+      const given = [i, j, k].map((x) => fracList()[x]);
+      const used = t.map((q) => given.findIndex(([a, b]) => near(q * b, a)));
+      if (used.some((u) => u < 0) || new Set(used).size !== 3) return false;
+      for (let n = 0; n < 2; n++) {
+        const [a, b] = given[used[n]];
+        const [c, d] = given[used[n + 1]];
+        if (!(a * d < c * b)) return false;
+      }
+      return true;
+    },
+    bugs: ([i, j, k]) => {
+      const T = [i, j, k].map((x) => fracList()[x]);
+      const list = (g: number[][]) => `(${g.map(([a, b]) => fr(a, b)).join(", ")})`;
+      const ans = list([...T].sort((p, q) => p[0] / p[1] - q[0] / q[1]));
+      const byBottom = list([...T].sort((p, q) => p[1] - q[1]));
+      const byTop = list([...T].sort((p, q) => p[0] - q[0] || p[1] - q[1]));
+      return [
+        Bg("by-bottom", "conceptual", FCMP, "The fractions were ordered by their bottom numbers. With different tops and bottoms, change them to a common bottom number first.", byBottom),
+        Bg("by-top", "conceptual", FCMP, "The fractions were ordered by their top numbers, but the parts are different sizes. Use a common bottom number.", byTop),
+      ].filter((b) => b.predict !== ans);
+    },
+    distractors: ([i, j, k]) => {
+      const T = [i, j, k].map((x) => fracList()[x]).sort((p, q) => p[0] / p[1] - q[0] / q[1]);
+      const list = (g: number[][]) => `(${g.map(([a, b]) => fr(a, b)).join(", ")})`;
+      return [list([T[1], T[0], T[2]]), list([T[0], T[2], T[1]]), list([T[2], T[1], T[0]])];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "common" ? `A common bottom number for ${s.inputs.join(", ")} is ${s.value}` : s.id === "rewrite" ? `They become ${s.value}` : `Order by the tops: ${s.value}`),
+    domain: [[0, 30], [0, 30], [0, 30]],
+    cap: 400,
+    difficulty: ([i, j, k]) => {
+      const T = [i, j, k].map((x) => fracList()[x]);
+      const L = T.reduce((m, [, b]) => (m * b) / gcd(m, b), 1);
+      return L <= 12 ? 1 : L <= 40 ? 2 : 3;
+    },
+    word: ([i, j, k]) => `Three friends ran parts of the same 1 km road: ${[i, j, k].map((x, n) => `${nm(i + n)} ran ${fr(...fracList()[x])} km`).join(", ")}. Write the three distances from the shortest to the longest, in brackets.`,
+    teach: {
+      idea: "To order fractions with different bottom numbers, write them all with one common bottom number; then their tops are in the same order as the fractions.",
+      method: "Find a common multiple of all three bottom numbers. Change each fraction to it, order the tops, and write the original fractions in that order.",
+      visual: ([i, j]) => ({ type: "strips", top: fracList()[i][1], bottom: fracList()[j][1], shaded: fracList()[i][0] }),
+      alternatives: [{ id: "benchmarks", title: "Sort by 0, 1/2 and 1", kind: "conceptual", text: ["First put each fraction into 'less than 1/2' or 'more than 1/2'.", "Then compare only the fractions in the same group."] }],
+    },
+    limits: "Three fractions less than 1 in simplest form with three different bottom numbers from 2 to 10.",
+  },
+  {
+    id: "adestcost",
+    arity: 2,
+    title: "Estimating the total cost of several items",
+    competency: EST,
+    type: "integer",
+    mc: true,
+    // [n, x]: n = 3 or 4 items with prices from seed x, each rounded to the nearest ten rupees
+    parse: none,
+    reject: ([n, x]) => {
+      if (n < 3 || n > 4 || x < 0 || x > 59) return "Three or four prices.";
+      for (let x0 = 0; x0 < x; x0++) if (costPrices(n, x0).join() === costPrices(n, x).join()) return "An earlier seed gives the same prices (distinct@1).";
+      return null;
+    },
+    prompt: ([n, x]) => `${nm(x)} buys the things in the picture: ${costItems(n, x).map(([it, pr]) => `${it} for ₹${pr}`).join(", ")}. Round each price to the nearest ten rupees and estimate the total cost. What is the estimate, in rupees?`,
+    solve: ([n, x]) => {
+      const P = costPrices(n, x);
+      const R = P.map(r10);
+      return { steps: [...P.map((pr, i) => sp(`round${i}`, "round", ROUND, [pr], R[i])), sp("total", "add", EST, R, R.reduce((a, b) => a + b, 0))], answer: R.reduce((a, b) => a + b, 0) };
+    },
+    // independent: for each price search the tens for the nearest one (a 5 rounds up), then add
+    validate: ([n, x], v) => {
+      if (typeof v !== "number") return false;
+      let s = 0;
+      for (const pr of costPrices(n, x)) {
+        let best = 0;
+        for (let t = 0; t <= 1000; t += 10) if (Math.abs(pr - t) <= Math.abs(pr - best)) best = t;
+        s += best;
+      }
+      return v === s;
+    },
+    bugs: ([n, x]) => {
+      const P = costPrices(n, x);
+      const est = P.map(r10).reduce((a, b) => a + b, 0);
+      return [
+        Bg("exact", "procedural", EST, "The exact total was worked out. An estimate uses the rounded prices, so it can be found quickly in your head.", P.reduce((a, b) => a + b, 0)),
+        Bg("always-down", "conceptual", ROUND, "Every price was rounded down. Round to the NEAREST ten: 5 or more in the ones goes up.", P.reduce((a, b) => a + Math.floor(b / 10) * 10, 0)),
+      ].filter((b) => b.predict !== est);
+    },
+    distractors: ([n, x]) => {
+      const est = costPrices(n, x).map(r10).reduce((a, b) => a + b, 0);
+      return [est + 10, est - 10, est + 20];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "total" ? `${s.inputs.join(" + ")} = ₹${s.value}` : `₹${s.inputs[0]} is about ₹${s.value}`),
+    domain: [[3, 4], [0, 59]],
+    difficulty: ([n]) => (n === 3 ? 2 : 3),
+    figure: ([n, x]) => ({ type: "table", head: ["Item", "Price (₹)"], rows: costItems(n, x).map(([it, pr]) => [it, pr]) }),
+    word: ([n, x]) => `Before going to the shop, ${nm(x + 1)} wants to know about how much money to take for ${costItems(n, x).map(([it, pr]) => `${it} (₹${pr})`).join(", ")}. Round each price to the nearest ten rupees: about how many rupees are needed?`,
+    teach: {
+      idea: "Rounding each price to the nearest ten gives friendly numbers that are easy to add in your head; the estimate tells you roughly how much money you need.",
+      method: "Look at the ones digit of each price: 0 to 4 round down, 5 to 9 round up. Add the rounded prices.",
+      visual: ([n, x]) => ({ type: "table", head: ["Item", "Price (₹)", "About (₹)"], rows: costItems(n, x).map(([it, pr]) => [it, pr, r10(pr)]) }),
+      alternatives: [{ id: "number_line", title: "Which ten is nearer?", kind: "conceptual", text: ["Put the price on a number line between two tens.", "It rounds to the ten it is closer to; exactly halfway goes up."] }],
+    },
+    limits: "Three or four prices from ₹12 to ₹199 rounded to the nearest ten; rounding to the nearest hundred and paise are other families.",
+  },
+  {
+    id: "adrec",
+    arity: 2,
+    title: "Recording a list in a two-way table",
+    competency: TAB,
+    type: "integer",
+    mc: true,
+    // [s, q]: a list of children (seed s), each a boy or girl choosing idli or dosa; q 0–3 a cell (boys idli, boys dosa, girls idli, girls dosa), 4 all boys, 5 all who chose idli
+    parse: none,
+    reject: ([s, q]) => {
+      if (s < 0 || s > 39 || q < 0 || q > 5) return "A list of 12 to 16 children and one cell or total.";
+      const C = recCounts(s);
+      return C.some((x) => x === 0) ? "Every cell has someone." : null;
+    },
+    prompt: ([, q]) => `The list in the picture shows each child of a class and what they chose for breakfast. Record it in a table with rows Boys and Girls and columns Idli and Dosa. ${recAsk(q)}`,
+    solve: ([s, q]) => {
+      const C = recCounts(s);
+      const ans = q < 4 ? C[q] : q === 4 ? C[0] + C[1] : C[0] + C[2];
+      return { steps: [sp("tally", "count", TAB, C, `Boys: ${C[0]} idli, ${C[1]} dosa; Girls: ${C[2]} idli, ${C[3]} dosa`), sp("read", "read", TAB, [q], ans)], answer: ans };
+    },
+    // independent: go down the list in the picture and count the rows that fit
+    validate: ([s, q], v) => {
+      const rows = recRows(s);
+      const fits = (g: string, c: string) => (q === 0 ? g === "Boy" && c === "Idli" : q === 1 ? g === "Boy" && c === "Dosa" : q === 2 ? g === "Girl" && c === "Idli" : q === 3 ? g === "Girl" && c === "Dosa" : q === 4 ? g === "Boy" : c === "Idli");
+      return v === rows.filter(([, g, c]) => fits(g, c)).length;
+    },
+    bugs: ([s, q]) => {
+      const C = recCounts(s);
+      if (q < 4) {
+        const row = q < 2 ? C[0] + C[1] : C[2] + C[3];
+        const col = q % 2 === 0 ? C[0] + C[2] : C[1] + C[3];
+        return [Bg("whole-row", "procedural", TAB, `All the ${q < 2 ? "boys" : "girls"} were counted, whatever they chose. The cell needs both: ${q < 2 ? "boys" : "girls"} AND ${q % 2 ? "dosa" : "idli"}.`, row), Bg("whole-column", "procedural", TAB, `Everyone who chose ${q % 2 ? "dosa" : "idli"} was counted, boys and girls. The cell is only for the ${q < 2 ? "boys" : "girls"}.`, col)].filter((b) => b.predict !== C[q]);
+      }
+      return [Bg("one-cell", "procedural", TAB, q === 4 ? "Only the boys who chose idli were counted; boys who chose dosa are boys too." : "Only the boys who chose idli were counted; girls who chose idli count too.", C[0])];
+    },
+    distractors: ([s, q]) => {
+      const C = recCounts(s);
+      const ans = q < 4 ? C[q] : q === 4 ? C[0] + C[1] : C[0] + C[2];
+      return [ans + 1, ans - 1, ans + 2].filter((x) => x >= 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "tally" ? `Make a tally for each cell: ${s.value}` : `The answer is ${s.value}`),
+    domain: [[0, 39], [0, 5]],
+    difficulty: ([, q]) => (q < 4 ? 2 : 3),
+    figure: ([s]) => ({ type: "table", head: ["Child", "Boy or girl", "Breakfast"], rows: recRows(s) }),
+    word: ([s, q]) => `${nm(s)} asked every child in the class whether they are a boy or a girl and what they chose for breakfast, and wrote the list in the picture. ${recAsk(q)}`,
+    teach: {
+      idea: "A two-way table sorts each child two ways at once (boy or girl, and idli or dosa), so every child goes in exactly one cell.",
+      method: "Draw the table. Go down the list one child at a time, put a tally mark in the cell for both answers, and tick the child off. Count the tallies in each cell; add along a row or down a column for totals.",
+      visual: ([s]) => {
+        const C = recCounts(s);
+        return { type: "table", head: ["", "Idli", "Dosa", "Total"], rows: [["Boys", C[0], C[1], C[0] + C[1]], ["Girls", C[2], C[3], C[2] + C[3]]] };
+      },
+      alternatives: [{ id: "sort", title: "Sort into four piles", kind: "conceptual", text: ["Write each child's name on a card.", "Sort the cards into four piles: boy-idli, boy-dosa, girl-idli, girl-dosa, and count each pile."] }],
+    },
+    limits: "Lists of 12 to 16 children with two yes-or-no categories; collecting the data is done in class.",
+  },
 ];
+
+// ---------------------------------------------------------------- helpers for the gap@1 families (g0304)
+
+function Bg(id: string, kind: Bug["kind"], competency: string, says: string, predict: Value | null): Bug {
+  return { id, kind, competency, says, predict };
+}
+function sp(id: string, op: string, competency: string, inputs: (number | string)[], value: Value): Step {
+  return { id, op, competency, inputs, value };
+}
+/** A fixed order of n options for parameters p (entry k is the original index shown in place k). */
+function permO(p: number[], n: number, tag: string): number[] {
+  return Array.from({ length: n }, (_, i) => i)
+    .map((i) => [hm(`${tag}:${p.join(",")}:${i}`), i])
+    .sort((a, b) => a[0] - b[0])
+    .map((x) => x[1]);
+}
+const shufO = (p: number[], tag: string, opts: string[]) => permO(p, opts.length, tag).map((i) => opts[i]);
+const posO = (p: number[], n: number, orig: number, tag: string) => permO(p, n, tag).indexOf(orig);
+const r10 = (x: number) => Math.round(x / 10 + 1e-9) * 10;
+
+const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+const below100 = (n: number) => (n < 20 ? ONES[n] : `${TENS[Math.floor(n / 10)]}${n % 10 ? `-${ONES[n % 10]}` : ""}`);
+/** The number name of 1 to 99 999: "four thousand five hundred seven". */
+function words(n: number): string {
+  const th = Math.floor(n / 1000);
+  const h = Math.floor(n / 100) % 10;
+  const r = n % 100;
+  return [th ? `${below100(th)} thousand` : "", h ? `${ONES[h]} hundred` : "", r ? below100(r) : ""].filter(Boolean).join(" ");
+}
+/** Read a number name back, word by word (independent of `words`). */
+function nameToNum(t: string): number | null {
+  const val: Record<string, number> = {};
+  ONES.forEach((w, i) => (val[w] = i));
+  TENS.forEach((w, i) => w && (val[w] = 10 * i));
+  let total = 0;
+  let cur = 0;
+  for (const w of t.toLowerCase().replace(/-/g, " ").split(/\s+/).filter(Boolean)) {
+    if (w === "and") continue;
+    if (w in val) cur += val[w];
+    else if (w === "hundred") cur *= 100;
+    else if (w === "thousand") {
+      total += cur * 1000;
+      cur = 0;
+    } else return null;
+  }
+  return total + cur;
+}
+
+const UF = [2, 3, 4, 5, 6, 8, 10];
+const fnlPair = ([i, j, , o]: number[]) => (o ? [UF[j], UF[i]] : [UF[i], UF[j]]);
+
+// ---- weights and capacities (adwtcap)
+const WOBJ: [string, number][] = [["school bag", 4], ["watermelon", 3], ["bag of rice", 10], ["pumpkin", 5], ["bucket of water", 8], ["jackfruit", 6], ["sack of onions", 25], ["gas cylinder", 30], ["small dog", 7], ["box of books", 12]];
+const GLASS = [100, 150, 200, 250];
+function wcNums([mode, x]: number[]): { op: string; inputs: number[]; ans: number; guess?: number } {
+  const h = (k: string) => hm(`wc${mode}:${x}:${k}`);
+  if (mode === 0) {
+    const A = WOBJ[x % WOBJ.length][1] + (Math.floor(x / WOBJ.length) % 3);
+    const d = 1 + (h("d") % 4);
+    const E = h("s") % 2 && A - d > 0 ? A - d : A + d;
+    return { op: "difference", inputs: [E, A], ans: Math.abs(E - A) };
+  }
+  if (mode === 1) {
+    const g = GLASS[x % 4];
+    const n = 3 + (h("n") % 8);
+    const guess = n + (h("g") % 2 ? 2 : -2);
+    return { op: "divide", inputs: [g * n, g], ans: n, guess };
+  }
+  if (mode === 2) {
+    const kg = 1 + (x % 9);
+    const g = 50 * (1 + (h("g") % 19));
+    return { op: "add", inputs: [kg, g], ans: 1000 * kg + g };
+  }
+  const L = 2 + (x % 9);
+  const mug = [250, 500, 200, 100][Math.floor(x / 9) % 4];
+  return { op: "divide", inputs: [1000 * L, mug], ans: (1000 * L) / mug };
+}
+function wcText(p: number[], word: boolean): string {
+  const [mode, x] = p;
+  const W = wcNums(p);
+  const [a, b] = W.inputs;
+  if (mode === 0) {
+    const obj = WOBJ[x % WOBJ.length][0];
+    return word ? `At the market, ${nm(x)} guessed that a ${obj} would weigh about ${a} kg. The shopkeeper weighed it: ${b} kg. By how many kilograms was the guess off?` : `${nm(x)} estimated that a ${obj} weighs about ${a} kg. On the weighing scale it showed ${b} kg. By how many kilograms was the estimate wrong?`;
+  }
+  if (mode === 1) return word ? `${nm(x)} thinks a jug of buttermilk will fill about ${W.guess} glasses. The jug holds ${a} mL and each glass holds ${b} mL. How many glasses does the jug really fill?` : `A jug holds ${a} mL. ${nm(x)} guesses that it will fill about ${W.guess} glasses of ${b} mL. Check the guess: how many glasses does the jug really fill?`;
+  if (mode === 2) return word ? `Amma buys ${a} kg of rice and ${b} g of dal and carries them in one bag. How many grams does she carry?` : `A bag has ${a} kg of potatoes and ${b} g of tomatoes. What is the total weight in grams?`;
+  return word ? `${nm(x)} fills a ${a / 1000} litre bucket using a mug that holds ${b} mL. How many mugfuls are needed?` : `A bucket holds ${a / 1000} L of water. A mug holds ${b} mL. How many mugs of water fill the bucket?`;
+}
+function wcFigure([mode, x]: number[]) {
+  const W = wcNums([mode, x]);
+  if (mode === 0) return { type: "balance", left: WOBJ[x % WOBJ.length][0], right: `${W.inputs[1]} kg` };
+  if (mode === 2) return { type: "balance", left: `${W.inputs[0]} kg + ${W.inputs[1]} g`, right: "? g" };
+  return null;
+}
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MDAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+/** A four-digit number with one zero among its last three digits (seed x). */
+function nameNum(x: number): number {
+  const th = 1 + (x % 9);
+  const z = Math.floor(x / 9) % 3;
+  const d = [1 + (hm(`nn${x}:a`) % 9), 1 + (hm(`nn${x}:b`) % 9)];
+  const low = [0, 1, 2].map((i) => (i === z ? 0 : d.shift()!));
+  return th * 1000 + low[0] * 100 + low[1] * 10 + low[2];
+}
+/** The four options for adname, the right one first: the number, the number with its zero in the other two places, and a typical slip. */
+function nameOptions([mode, x]: number[]): string[] {
+  const n = nameNum(x);
+  const th = Math.floor(n / 1000);
+  const low = String(n).slice(1).split("").map(Number);
+  const nz = low.filter((d) => d !== 0);
+  const moved = [0, 1, 2].filter((z) => low[z] !== 0).map((z) => {
+    const q = [...nz];
+    return th * 1000 + [0, 1, 2].reduce((s, i) => s * 10 + (i === z ? 0 : q.shift()!), 0);
+  });
+  const extra = th * 10000 + (n % 1000);
+  const expand = (m: number) => String(m).split("").map((c, i, a) => (c === "0" ? "" : c + "0".repeat(a.length - 1 - i))).filter(Boolean).join(" + ");
+  if (mode === 0) return [words(n), ...moved.map(words), words(extra)];
+  if (mode === 1) return [inr(n), ...moved.map(inr), inr(extra)];
+  return [expand(n), ...moved.map(expand), String(n).split("").filter((c) => c !== "0").join(" + ")];
+}
+
+const STEPS = [10, 25, 50, 100, 250, 500, 1000];
+function seqTerms([si, x, dir]: number[]): number[] {
+  const S = STEPS[si];
+  const base = dir ? 4 * S + 500 + (hm(`sq${si}:${x}`) % (9500 - 4 * S - 500)) : 100 + (hm(`sq${si}:${x}`) % (9900 - 4 * S - 100));
+  const a0 = Math.round(base / S) * S + (si === 0 ? 0 : S === 25 ? 0 : 0);
+  return [0, 1, 2, 3, 4].map((i) => a0 + (dir ? -1 : 1) * i * S);
+}
+
+const CHECK3 = ["The answer is sensible", "The answer is too small to be right", "The answer is too big to be right"];
+function estNums(op: number, x: number): { a: number; b: number; exact: number; est: number; slips: (number | null)[] } | null {
+  const a = 150 + (hm(`es${op}:${x}:a`) % 850);
+  const b = x % 2 ? 11 + (hm(`es${op}:${x}:b`) % 89) : 101 + (hm(`es${op}:${x}:b`) % 800);
+  if (op === 1 && b >= a) return null;
+  const exact = op ? a - b : a + b;
+  const est = op ? r10(a) - r10(b) : r10(a) + r10(b);
+  const A = String(a).padStart(3, "0").split("").map(Number);
+  const Bd = String(b).padStart(3, "0").split("").map(Number);
+  const s1 = op ? Number(A.map((d, i) => Math.abs(d - Bd[i])).join("")) : Number(A.map((d, i) => (d + Bd[i]) % 10).join(""));
+  const s2 = b < 100 ? (op ? (a - 10 * b >= 0 ? a - 10 * b : null) : a + 10 * b) : op ? a - b + 100 : a + b - 100;
+  return { a, b, exact, est, slips: [s1, s2] };
+}
+function estClaim([op, x, k]: number[]): number {
+  const E = estNums(op, x)!;
+  return k === 0 ? E.exact : (E.slips[k - 1] as number);
+}
+
+const digitsL = (n: number, L: number) => String(n).padStart(L, "0").split("").map(Number);
+function needsRegroup(a: number, b: number, op: number, L: number): boolean {
+  const A = digitsL(a, L);
+  const Bd = digitsL(b, L);
+  return A.some((d, i) => (op ? d < Bd[i] : d + Bd[i] >= 10));
+}
+/** adcolx numbers [a, b]. */
+function colxNums([kind, x, op]: number[]): [number, number] {
+  const h = (k: string) => hm(`cx${kind}:${x}:${op}:${k}`);
+  if (kind === 0) return [100 + (h("a") % 900), 10 + (h("b") % 90)];
+  if (kind === 3) {
+    const a = op ? 30000 + (h("a") % 69999) : 10000 + (h("a") % 60000);
+    const b = op ? 1000 + (h("b") % (a - 1000)) : 1000 + (h("b") % (99999 - a - 1000));
+    return [a, b];
+  }
+  const L = kind === 1 ? 3 : 4;
+  const noRg = kind === 1 || x % 2 === 0;
+  if (noRg) {
+    const A = Array.from({ length: L }, (_, i) => (i === 0 ? 1 + (h(`d${i}`) % (op ? 9 : 8)) : h(`d${i}`) % 10));
+    const Bd = A.map((d, i) => {
+      const room = op ? d : 9 - d;
+      return i === 0 ? 1 + (h(`e${i}`) % Math.max(1, room)) : h(`e${i}`) % (room + 1);
+    });
+    if (op === 0 && Bd[0] + A[0] > 9) Bd[0] = 9 - A[0];
+    return [Number(A.join("")), Number(Bd.join(""))];
+  }
+  const a = op ? 2000 + (h("a") % 8000) : 1000 + (h("a") % 7000);
+  const b = op ? 1000 + (h("b") % (a - 1000)) : 1000 + (h("b") % (9999 - a - 999));
+  return [a, b];
+}
+
+function mentN(mode: number, x: number): number {
+  if (mode === 0) return 11 + ((37 * x) % 89);
+  if (mode === 1) return 1003 + 113 * x;
+  return 105 + 123 * x + (mode === 3 ? 7 : mode === 4 ? 3 : 0);
+}
+
+const RACERS = ["Anu", "Ravi", "Meena", "Arjun", "Kavya", "Selvi", "Divya", "Imran", "Karthik", "Priya"];
+const raceNames = (x: number) => [RACERS[x % 10], RACERS[(x + 3) % 10], RACERS[(x + 7) % 10]];
+function raceTimes(x: number): number[] {
+  const out: number[] = [];
+  for (let i = 0; out.length < 3 && i < 50; i++) {
+    const t = 45 + (hm(`race${x}:${i}`) % 86);
+    if (!out.includes(t)) out.push(t);
+  }
+  if (!out.some((t) => t >= 60)) out[1] = 60 + (out[1] % 40) + (out.includes(60 + (out[1] % 40)) ? 1 : 0);
+  return out;
+}
+const tShow = (t: number) => (t >= 60 ? `${Math.floor(t / 60)} min ${t % 60} s` : `${t} s`);
+const UNITS3 = ["seconds", "minutes", "hours"];
+/** [activity, unit, a typical time in seconds]. */
+const ACTS: [string, string, number][] = [
+  ["blink your eyes", "seconds", 1], ["brush your teeth", "minutes", 150], ["sleep at night", "hours", 30000], ["run 100 metres", "seconds", 20],
+  ["cook a pot of rice", "minutes", 1200], ["finish a whole school day", "hours", 25000], ["tie your shoelaces", "seconds", 15], ["watch a full film", "hours", 9000],
+  ["boil an egg", "minutes", 600], ["clap your hands ten times", "seconds", 6], ["walk one kilometre", "minutes", 720], ["travel from Chennai to Madurai by train", "hours", 28000],
+  ["drink a glass of water", "seconds", 10], ["have a bath", "minutes", 900], ["play one day of a test match", "hours", 25000], ["write your name", "seconds", 8],
+  ["eat your lunch", "minutes", 1200], ["make one kabaddi raid", "seconds", 30], ["cycle to a school 2 km away", "minutes", 600], ["fly from Chennai to Delhi", "hours", 10000],
+  ["jump over a skipping rope once", "seconds", 1],
+];
+
+function durParts(mode: number, x: number): [number, number, number, number] {
+  const h = (k: string) => hm(`du${mode}:${x}:${k}`);
+  return [1 + (h("a") % 5), 5 * (h("b") % 12), 1 + (h("c") % 5), 5 * (h("d") % 12)];
+}
+const durSecs = (x: number) => 61 + ((53 * x) % 539);
+
+/** The bars and number used by statement p of adbartf. */
+function tfParts([c, s, k, t]: number[]): { x: number; y: number; n: number } {
+  const v = barValues(c, s, 0);
+  const j = s % 4;
+  const i2 = (j + 1) % 4;
+  const [x, y] = v[j] > v[i2] ? [j, i2] : [i2, j];
+  const tot = v.reduce((a, b) => a + b, 0);
+  if (k === 0) return t ? { x: y, y: x, n: 0 } : { x, y, n: 0 };
+  if (k === 1) return { x, y, n: t ? tot - v[(s + 2) % 4] : tot };
+  return { x, y, n: t ? v[x] + v[y] : v[x] - v[y] };
+}
+function tfStatement(p: number[]): string {
+  const C = BARCTX[p[0]];
+  const { x, y, n } = tfParts(p);
+  if (p[2] === 0) return `More ${C.unit} are shown for ${C.labels[x]} than for ${C.labels[y]}.`;
+  if (p[2] === 1) return `The chart shows ${n} ${C.unit} in all.`;
+  return `${n} more ${C.unit} are shown for ${C.labels[x]} than for ${C.labels[y]}.`;
+}
+
+const an = (w: string) => `${/^[aeiou]/.test(w) ? "an" : "a"} ${w}`;
+const REG: Record<number, string> = { 3: "equilateral triangle", 4: "square", 5: "regular pentagon", 6: "regular hexagon", 7: "regular heptagon", 8: "regular octagon" };
+
+let FRACS: number[][] | null = null;
+/** Fractions less than 1 in simplest form with bottoms 2 to 10 (31 of them), by bottom then top. */
+function fracList(): number[][] {
+  if (!FRACS) {
+    FRACS = [];
+    for (let b = 2; b <= 10; b++) for (let a = 1; a < b; a++) if (gcd(a, b) === 1) FRACS.push([a, b]);
+  }
+  return FRACS;
+}
+
+const SHOP: string[] = ["a school bag", "a water bottle", "a lunch box", "a geometry box", "a pair of slippers", "a torch", "an umbrella", "a storybook", "a cricket ball", "a pencil box", "a towel", "a steel tumbler"];
+function costPrices(n: number, x: number): number[] {
+  return Array.from({ length: n }, (_, i) => {
+    const v = 12 + (hm(`cost${n}:${x}:${i}`) % 188);
+    return v % 10 === 0 ? v + 5 : v;
+  });
+}
+const costItems = (n: number, x: number): [string, number][] => costPrices(n, x).map((pr, i) => [SHOP[(x + 5 * i) % SHOP.length], pr]);
+
+const KIDS = ["Anu", "Ravi", "Meena", "Arjun", "Kavya", "Selvi", "Divya", "Imran", "Karthik", "Priya", "Vijay", "Lakshmi", "Suresh", "Fathima", "Naveen", "Revathi"];
+const KIDG = ["Girl", "Boy", "Girl", "Boy", "Girl", "Girl", "Girl", "Boy", "Boy", "Girl", "Boy", "Girl", "Boy", "Girl", "Boy", "Girl"];
+function recRows(s: number): string[][] {
+  const m = 12 + (s % 5);
+  const start = s % 16;
+  return Array.from({ length: m }, (_, i) => {
+    const k = (start + i) % 16;
+    return [KIDS[k], KIDG[k], hm(`rec${s}:${i}`) % 2 ? "Dosa" : "Idli"];
+  });
+}
+function recCounts(s: number): number[] {
+  const R = recRows(s);
+  const n = (g: string, c: string) => R.filter((r) => r[1] === g && r[2] === c).length;
+  return [n("Boy", "Idli"), n("Boy", "Dosa"), n("Girl", "Idli"), n("Girl", "Dosa")];
+}
+const recAsk = (q: number) => ["How many boys chose idli?", "How many boys chose dosa?", "How many girls chose idli?", "How many girls chose dosa?", "How many boys are there in all?", "How many children chose idli in all?"][q];
