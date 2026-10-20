@@ -19131,7 +19131,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "8d2ea273",
+   "contentHash": "bdcf8b77",
    "state": "draft",
    "history": [
     {
@@ -19148,6 +19148,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "8d2ea273",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-20T17:52:45.049Z",
+     "contentHash": "bdcf8b77",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -39455,7 +39463,7 @@
    "competency": "MATH.sequences.infinite-series-expansions",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "f14b4193",
+   "contentHash": "3d6ac1e5",
    "state": "draft",
    "history": [
     {
@@ -39488,6 +39496,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "f14b4193",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-20T17:52:45.049Z",
+     "contentHash": "3d6ac1e5",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

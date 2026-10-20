@@ -608,6 +608,8 @@ const sappOk = (p: number[]) => {
   if (!inD(p, D_SAPP)) return false;
   const [q, ni, k, m] = p;
   if (k === 0) return false;
+  // the server reads decimal answers to at most six places: an exact three-term sum must fit
+  if ((String(sappAns(p)).split(".")[1] ?? "").length > 6) return false;
   if (q === 0) return (ni !== 3 || k % 3 === 0) && (m === 0 || ni === 0);
   if (q === 1) return ni === 0 && m === 0;
   return ni === 0 && m === 0 && Math.abs(k) <= 4;

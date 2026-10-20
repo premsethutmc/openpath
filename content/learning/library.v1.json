@@ -50979,11 +50979,11 @@
     "gen:apbin:-1,3,-1,2:mc",
     "gen:apbin:-1,3,-1,3",
     "gen:apexlog:0,3,1,4",
-    "gen:apsapp:0,0,-1,0"
+    "gen:apsapp:0,0,-1,1"
    ],
    "transfer": [
     "gen:apbin:-3,1,-3,2:mc",
-    "gen:apsapp:0,0,-1,1:w"
+    "gen:apsapp:0,2,-1,0:w"
    ],
    "retention": [
     "gen:apbin:-3,2,3,3",

@@ -62187,20 +62187,20 @@
      1
     ]
    ],
-   "poolSize": 122,
+   "poolSize": 102,
    "excluded": [],
    "difficulty": {
     "1": 18,
-    "2": 36,
-    "3": 68
+    "2": 26,
+    "3": 58
    },
    "examples": [
     "gen:apsapp:1,0,-3,0",
     "gen:apsapp:1,0,4,0:mc",
-    "gen:apsapp:0,0,4,0",
-    "gen:apsapp:0,1,-3,0:mc",
-    "gen:apsapp:0,2,-5,0",
-    "gen:apsapp:0,4,-6,0:mc"
+    "gen:apsapp:0,1,-9,0",
+    "gen:apsapp:0,1,1,0:mc",
+    "gen:apsapp:0,2,-8,0",
+    "gen:apsapp:0,3,-3,0:mc"
    ],
    "explanations": [
     "two-terms (procedural): Only the first two terms were used; the question asks for three.",
@@ -62224,11 +62224,11 @@
      }
     ]
    },
-   "fingerprint": "8d2ea273",
+   "fingerprint": "bdcf8b77",
    "validation": {
     "family": "apsapp",
     "deterministic": {
-     "checked": 122,
+     "checked": 102,
      "failures": []
     },
     "property": {

@@ -1170,7 +1170,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | apmmod: Modelling a situation with a matrix product | `MATH.algebra.matrices` | 300 | 0 | 0/5/295 | `68ad8103` |
 | apsysw: Word problems with three unknowns, solved by the inverse, Cramer's rule or Gaussian elimination | `MATH.algebra.matrix-systems` | 400 | 0 | 0/180/220 | `e619a02b` |
 | aplpfeas: Linear programming: bounded, unbounded or infeasible? | `MATH.algebra.linear-programming` | 400 | 0 | 100/100/200 | `89d636ed` |
-| apsapp: Approximate values from the binomial, exponential and logarithmic series | `MATH.sequences.infinite-series-expansions` | 122 | 0 | 18/36/68 | `8d2ea273` |
+| apsapp: Approximate values from the binomial, exponential and logarithmic series | `MATH.sequences.infinite-series-expansions` | 102 | 0 | 18/26/58 | `bdcf8b77` |
 | aprot: Rotating and reflecting points with a 2 × 2 matrix | `MATH.algebra.matrices` | 400 | 0 | 266/134/0 | `0f1d0a7c` |
 | aporth: The inverse of an orthogonal matrix | `MATH.algebra.matrices` | 208 | 0 | 0/64/144 | `e3d91669` |
 | apcode: Encoding and decoding a message with a matrix | `MATH.algebra.matrices` | 300 | 0 | 150/150/0 | `61b2f304` |
