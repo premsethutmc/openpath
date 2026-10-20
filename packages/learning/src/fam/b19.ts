@@ -3135,7 +3135,10 @@ const ascoll: Def = {
       B("order-mixed", "procedural", LINE, "The subtraction order was mixed (y₂ − y₁ over x₁ − x₂), which changes the sign of the slope.", rs(mixedOrder) !== rs(k) ? rs(mixedOrder) : null),
     ];
   },
-  distractors: ([x1, y1, x2, y2, x3]) => [rs(radd(R_(y2), rmul(R_(y2 - y1, x2 - x1), R_(x3)))), rs(R_(y1 + y2 - x3))],
+  distractors: ([x1, y1, x2, y2, x3]) => {
+    const k = radd(R_(y1), rmul(R_(y2 - y1, x2 - x1), R_(x3 - x1)));
+    return [rs(radd(R_(y2), rmul(R_(y2 - y1, x2 - x1), R_(x3)))), rs(R_(y1 + y2 - x3)), rs(radd(k, R_(1))), rs(rsub(k, R_(2))), rs(rmul(k, R_(-1)))];
+  },
   variants: () => [],
   explain: (s) => (s.id === "slope" ? `Slope of AB = ${mi(Number(s.inputs[0]))}/${mi(Number(s.inputs[1]))} = ${s.value}` : `Collinear points give equal slopes: slope AC = slope AB, so k = ${s.value}`),
   domain: [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-6, 6]],
@@ -3252,8 +3255,8 @@ const aslineq: Def = {
   },
   distractors: (p) => {
     const [kind, a, b] = p;
-    if (kind === 2 || kind === 4 || kind === 5) return [mi(a), mi(b), mi(a * b + 1)];
-    return [rhsR(R_(1), R_(a + b)), rhsR(R_(-1), R_(b))];
+    if (kind === 2 || kind === 4 || kind === 5) return [mi(a), mi(b), mi(a * b + 1), mi(a + b + 2), "0"];
+    return [rhsR(R_(1), R_(a + b)), rhsR(R_(-1), R_(b)), rhsR(R_(2), R_(a - 1)), rhsR(R_(-1, 2), R_(b + 1)), rhsR(R_(3), R_(-b))];
   },
   variants: () => [],
   explain: (s) => (s.id === "form" ? `Use ${s.value}` : `So the answer is ${s.value}`),
@@ -3309,7 +3312,7 @@ const aslinpar: Def = {
   },
   distractors: ([x1, y1, j, ri]) => {
     const r = LP_R[j][ri];
-    return [`(${mi(x1 + r)}, ${mi(y1 + r)})`];
+    return [`(${mi(x1 + r)}, ${mi(y1 + r)})`, `(${mi(x1 - r)}, ${mi(y1 - r)})`, `(${mi(x1)}, ${mi(y1 + r)})`];
   },
   variants: () => [],
   explain: (s) => (s.id === "param" ? `Parametric form: ${s.value}` : `Put r = ${mi(Number(s.inputs[0]))}: ${s.value}`),
@@ -3393,17 +3396,19 @@ const asgenf: Def = {
       const dir = [Bc, -A];
       let [lo, hi] = [-100, 100];
       const dist = (s: number) => Math.hypot(P0[0] + s * dir[0], P0[1] + s * dir[1]);
-      for (let i = 0; i < 300; i++) {
-        const m1 = lo + (hi - lo) / 3;
-        const m2 = hi - (hi - lo) / 3;
-        if (dist(m1) < dist(m2)) hi = m2;
-        else lo = m1;
+      // bisection on the sign of the change in the squared distance (the nearest point is where it stops falling)
+      const slope = (s: number) => dist(s + 1e-3) ** 2 - dist(s - 1e-3) ** 2;
+      for (let i = 0; i < 200; i++) {
+        const mid = (lo + hi) / 2;
+        if (slope(mid) > 0) hi = mid;
+        else lo = mid;
       }
       const s = (lo + hi) / 2;
       const F = [P0[0] + s * dir[0], P0[1] + s * dir[1]];
       if (kind === 3) return close(t, Math.hypot(F[0], F[1]), 1e-7);
-      const deg = (((Math.atan2(F[1], F[0]) * 180) / Math.PI) % 360 + 360) % 360;
-      return t >= 0 && t < 360 && close(t, deg, 1e-6);
+      const deg = (Math.atan2(F[1], F[0]) * 180) / Math.PI;
+      const diff = (((t - deg) % 360) + 540) % 360 - 180;
+      return t >= 0 && t < 360 && Math.abs(diff) < 1e-6;
     }
     const L = lineOf(v);
     if (!L) return false;
@@ -4331,7 +4336,7 @@ const asfam: Def = {
     out.push(B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted.", ix !== 0 && m[0] !== 0 ? rhsR(m, radd(R_(iy), rmul(m, R_(ix)))) : null));
     return out.filter((x) => x.predict !== null && x.predict !== ans);
   },
-  distractors: ([ix, iy]) => [rhsR(R_(1), R_(iy - ix)), rhsR(R_(-1), R_(iy + ix))],
+  distractors: ([ix, iy]) => [rhsR(R_(1), R_(iy - ix)), rhsR(R_(-1), R_(iy + ix)), rhsR(R_(2), R_(iy - 2 * ix)), rhsR(R_(-1, 2), R_(iy + 1)), rhsR(R_(3), R_(iy))],
   variants: () => [],
   explain: (s) => (s.id === "family" ? s.value as string : s.id === "lambda" ? `Use the condition: ${s.value}` : `y = ${s.value}`),
   domain: [[-3, 3], [-3, 3], [0, 9], [0, 9], [0, 2], [0, 9]],

@@ -2635,7 +2635,7 @@ export const B13: Def[] = [
         const sizes = qs(q(Math.abs(a), b), q(Math.abs(c), d));
         return [
           ...(opp ? [B("sizes-subtracted", "conceptual", RN, "The sizes were subtracted, but the two numbers are on opposite sides of 0: the distance is the sum of their distances from 0.", dec(q(Math.abs(sizes[0]), sizes[1])))] : []),
-          B("added", "procedural", RN, "The two numbers were added; the distance between them is the difference (larger minus smaller).", dec(qa(q(a, b), q(c, d)))),
+          ...(opp ? [] : [B("added", "procedural", RN, "The two numbers were added; the distance between them is the difference (larger minus smaller).", dec(qa(q(a, b), q(c, d))))]),
         ].filter((x) => !is(x.predict as string, q(Math.abs(qs(q(a, b), q(c, d))[0]), qs(q(a, b), q(c, d))[1])));
       }
       const right = qa(Q(a), q(d ? c : -c, b));
@@ -2705,6 +2705,11 @@ export const B13: Def[] = [
         B("unit-fraction-digits", "conceptual", RN, `The digits of 1/${d} were used. ${k}/${d} uses the same cycle but starts at a different digit: ${k}/${d} = 0.${block}….`, Number(one[pos - 1])),
         B("remainder-place", "procedural", RN, `The remainder ${n % 6} was used as the place without care: digit ${n} is digit ${pos} of the block (a remainder of 0 means the 6th digit).`, Number(block[n % 6 === 0 ? 0 : n % 6])),
       ].filter((x) => x.predict !== right);
+    },
+    distractors: (p) => {
+      const d = p[0] ? 13 : 7;
+      const block = cycBlock(p[1], d);
+      return [...new Set(block.split("").map(Number))];
     },
     variants: () => [],
     explain: say({ block: "The repeating block", place: "Position in the block" }),
@@ -3008,6 +3013,64 @@ export const B13: Def[] = [
   },
 
   // ------------------------------------------------------------------ pyramids with other polygonal bases
+  {
+    id: "ammidc",
+    arity: 3,
+    title: "Using the converse of the midpoint theorem",
+    competency: MID,
+    type: "exact",
+    mc: true,
+    // [m, x, y]: D is the midpoint of AB (AB = y cm) and the line through D parallel to BC meets AC at E; m 0 AC = x → AE;
+    // 1 BC = x → DE; 2 AE = x → AC
+    parse: none,
+    reject: ([m, x, y]) => (m >= 0 && m <= 2 && x >= 3 && x <= 40 && y >= 4 && y <= 40 && y % 2 === 0 && y !== x ? null : "Lengths 3 to 40 cm, with AB even."),
+    prompt: ([m, x, y]) => `In ΔABC, AB = ${y} cm and D is the midpoint of AB. The line through D parallel to BC meets AC at E. ${["AC = " + x + " cm. Find AE", "BC = " + x + " cm. Find DE", "AE = " + x + " cm. Find AC"][m]}, in cm. (A decimal is fine.)`,
+    solve: ([m, x]) => {
+      const ans = m === 2 ? Q(2 * x) : q(x, 2);
+      return { steps: [step("converse", "note", MID, ["A line through the midpoint of one side, parallel to a second side, bisects the third side (converse of the midpoint theorem): E is the midpoint of AC"], ""), ...(m === 1 ? [step("half", "half", MID, [x], dec(ans))] : m === 0 ? [step("half", "half", MID, [x], dec(ans))] : [step("double", "multiply", MID, [2, x], dec(ans))])], answer: dec(ans) };
+    },
+    // independent: place the triangle on coordinates (any shape), draw the line through D parallel to BC, find E by
+    // intersecting it with AC and measure
+    validate: ([m, x, y], v) => {
+      const n = num(v);
+      if (n === null) return false;
+      const A: P2 = [0, 0];
+      const Bp: P2 = [y, 0];
+      const C: P2 = [0.37 * y + 3.1, 0.81 * y + 2.3];
+      const Dp = mul2(Bp, 0.5);
+      const E = meet(Dp, sub(C, Bp), A, sub(C, A));
+      const AC = dist(A, C);
+      const BC = dist(Bp, C);
+      // scale: the given length fixes the size of the side asked about
+      if (m === 0) return near(n, (dist(A, E) / AC) * x, 1e-9);
+      if (m === 1) return near(n, (dist(Dp, E) / BC) * x, 1e-9);
+      return near(n, (AC / dist(A, E)) * x, 1e-9);
+    },
+    bugs: ([m, x, y]) => {
+      const right = m === 2 ? Q(2 * x) : q(x, 2);
+      const out =
+        m === 0
+          ? [B("half-of-ab", "procedural", MID, "Half of AB was given. E is the midpoint of AC, so AE is half of AC.", dec(q(y, 2))), B("whole-side", "conceptual", MID, "AE was taken as the whole of AC. The parallel line through the midpoint D cuts AC exactly in half.", dec(Q(x)))]
+          : m === 1
+            ? [B("de-equals-bc", "conceptual", MID, "DE was taken as equal to BC. DE joins the midpoints of AB and AC, so it is half of BC.", dec(Q(x))), B("half-of-ab", "procedural", MID, "Half of AB was given; DE is half of BC.", dec(q(y, 2)))]
+            : [B("halved-instead", "procedural", MID, "AE was halved. E is the midpoint of AC, so AC is twice AE.", dec(q(x, 2))), B("ab-added", "procedural", MID, "AB was added to AE; AC = 2 × AE because E is the midpoint of AC.", dec(Q(x + y)))];
+      return out.filter((b) => !is(b.predict as string, right));
+    },
+    distractors: ([m, x, y]) => [dec(Q(x + 1)), dec(q(x + y, 2))],
+    variants: () => [],
+    explain: say({ half: "Half", double: "Twice" }),
+    domain: [[0, 2], [3, 40], [4, 40]],
+    keep: ([, x, y]) => y % 2 === 0 && y !== x,
+    cap: 400,
+    difficulty: ([m]) => ([1, 2, 2] as const)[m],
+    word: ([m, x, y]) => `A triangular garden ABC has a straight path from D, the middle of the ${y} m side AB, running parallel to BC until it meets AC at E. ${["AC is " + x + " m long. How far is E from A", "BC is " + x + " m long. How long is the path DE", "AE is " + x + " m. How long is AC"][m]}, in m?`,
+    teach: {
+      idea: "Converse of the midpoint theorem: the line through the midpoint of one side of a triangle, parallel to another side, meets the third side at its midpoint. So E is the midpoint of AC, and then DE = ½ BC by the midpoint theorem.",
+      method: "Check the two conditions (D is a midpoint, the line is parallel to a side). Then halve the third side for AE or EC, and halve the parallel side for DE.",
+      alternatives: [{ id: "similar", title: "Why it works", kind: "conceptual", text: ["ΔADE and ΔABC have the same angles (corresponding angles on parallel lines), and AD is half of AB.", "So every side of ΔADE is half of the matching side of ΔABC."] }],
+    },
+    limits: "Whole-number lengths up to 40 cm; the proof of the converse is a written task.",
+  },
   {
     id: "ampyrp",
     arity: 4,
@@ -3472,11 +3535,9 @@ export const B13: Def[] = [
       const [e, f] = menAF(p);
       const yes = a * c * e === b * d * f;
       const flipped = a * c * f === b * d * e;
-      const sum = qe(qa(qa(q(a, b), q(c, d)), q(e, f)), Q(3));
       const o = order3b(p);
       const out: Bug[] = [];
       if (flipped !== yes) out.push(B("ratio-flipped", "procedural", CEVA, "One ratio was turned upside down (FB : AF instead of AF : FB). Go round the triangle in one direction: BD/DC, then CE/EA, then AF/FB.", o.indexOf(flipped ? 0 : 1)));
-      if (sum !== yes) out.push(B("sum-of-ratios", "conceptual", CEVA, "The three ratios were added and compared with 3. The test multiplies them: the product must be exactly 1.", o.indexOf(sum ? 0 : 1)));
       return out;
     },
     variants: () => [],

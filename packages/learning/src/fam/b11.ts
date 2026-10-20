@@ -2318,6 +2318,10 @@ export const B11: Def[] = [
       const slip = cryptNoCarry(c, w, k);
       return slip !== null && slip !== right ? [bug("carry-forgotten", "procedural", k ? "MATH.number.multi-digit-multiply" : ADDR, "The carry from the column to the right was forgotten. Work column by column from the ones, and add any carried ten.", slip)] : [];
     },
+    distractors: ([k, i, w]) => {
+      const x = cryptDigit(CRYPT[k][i], w);
+      return [(x + 1) % 10, (x + 9) % 10, (x + 2) % 10];
+    },
     variants: () => [],
     explain: (s) => `The puzzle is ${String(s.inputs[1]).replace("*", " × ").replace("+", " + ").replace("=", " = ")}, so the letter is ${s.value}`,
     domain: [[0, 1], [0, 75], [0, 6]],
